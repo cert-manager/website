@@ -1,0 +1,42 @@
+#about .photo {
+    padding: 2em;
+    width: 50%;
+}
+
+#about .photo img {
+    width: 100%;
+    height: auto;
+}
+
+#about .bio {
+    padding: 5em 2em 2em;
+    width: 50%;
+}
+
+#about .bio .bio-name {
+    margin: 0.25em 0;
+    font-size: 1.5em;
+}
+
+#about .bio .bio-title {
+    margin: 0;
+}
+
+@media (max-width: 992px) {
+    #about .bio {
+        padding-top: 2em;
+        width: 50%;
+    }
+}
+
+@media (max-width: 769px) {
+    #about .photo {
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    #about .bio {
+        width: 100%;
+        text-align: center;
+    }
+}

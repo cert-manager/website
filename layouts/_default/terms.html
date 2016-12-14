@@ -1,0 +1,14 @@
+{{ partial "default_head.html" . }}
+<div class="row">
+  <div class="col-sm-12">
+
+    <header class="title"><h1>{{ .Title }}</h1></header>
+
+    {{ range $key, $value := .Data.Terms }}
+    <a href="/{{ $.Data.Plural }}/{{ $key | urlize }}/" class="{{ $.Data.Singular }}">{{ $key }}</a>
+    {{ end }}
+
+  </div>
+
+</div>
+{{ partial "default_foot.html" . }}

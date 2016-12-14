@@ -1,0 +1,206 @@
+section#timeline {
+    padding: 3em 0;
+    font-weight: 100;
+}
+
+#timeline h2 {
+    font-size: 26px;
+    font-weight: 100;
+}
+
+#timeline .line {
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+    background: #E5E5E5;
+}
+
+#timeline .container {
+    position: relative;
+}
+
+#timeline .timeline-navigation {
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 95%;
+}
+
+#timeline .timeline-navigation a {
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    line-height: 0;
+}
+
+#timeline .timeline-navigation a.left {
+    float: left;
+}
+
+#timeline .timeline-navigation a.right {
+    float: right;
+}
+
+#timeline .timeline-navigation a img {
+    width: 100%;
+    height: 100%;
+    -webkit-transition: -webkit-transform 0.4s ease;
+    -moz-transition: -moz-transform 0.4s ease;
+    -o-transition: -o-transform 0.4s ease;
+    transition: transform 0.4s ease;
+}
+
+#timeline .timeline-navigation a img:hover {
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    transform: scale(1.5);
+}
+
+#timeline .timeline-container {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    height: 350px;
+}
+
+#timeline .timeline-container .timeline-slider {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+#timeline .event {
+    height: 275px;
+    width: 360px;
+    margin-right: 400px;
+    position: absolute;
+}
+
+#timeline .event.closed {
+    margin-right: 295px;
+}
+
+#timeline .event .event-container {
+    width: 100%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#timeline .event.open .event-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 215px;
+}
+
+#timeline .event.closed .event-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 98px;
+    margin-left: 150px;
+    width: 130px;
+}
+
+#timeline .event .event-container .year {
+    width: 130px;
+    text-align: center;
+}
+
+#timeline .event .event-container .image {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#timeline .event.closed .event-container .image {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #E5E5E5;
+    margin: 1em auto;
+    background: #FBFCFC;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#timeline .event.open .event-container .image {
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    border-radius: 65px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#timeline .event .event-container .image img {
+    height: 100%;
+    width: auto;
+    display: block;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#timeline .event.closed .event-container .image img {
+    width: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#timeline .event .event-container .text {
+    width: 100%;
+    height: 24px;
+}
+
+#timeline .event.closed .event-container .text p {
+    text-overflow: ellipsis;
+    width: 130px;
+    height: 24px;
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+@media (max-width: 769px) {
+    #timeline .event {
+        width: 75%;
+    }
+
+    #timeline .event .event-container .year {
+        margin: 0 auto;
+    }
+
+    #timeline .event .event-container .image {
+        margin: 0 auto;
+    }
+
+    #timeline .event .event-container .text {
+        margin-top: 1em;
+    }
+
+    #timeline .event .event-container .text p {
+        text-align: center;
+        font-size: 1em;
+    }
+}

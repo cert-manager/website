@@ -1,0 +1,10 @@
+{{ partial "default_head.html" . }}
+<section id="main">
+  <h1 id="title">{{ .Title }}</h1>
+  <div>
+        <article id="content">
+           {{ .Content }}
+        </article>
+  </div>
+</section>
+{{ partial "default_foot.html" . }}
