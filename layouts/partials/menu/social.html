@@ -1,5 +1,4 @@
-{{ $links := .Site.Data.social }}
-{{ range $links }}
+{{ range .links }}
   {{ $img := index . 0 }}
   {{ $src := index . 1 }}
   <a href="{{ $src }}">

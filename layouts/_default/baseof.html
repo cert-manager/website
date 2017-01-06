@@ -23,12 +23,12 @@
 </head>
 <body>
 {{ block "navbar" . }}
-    {{ partial "navbar.html" . }}
+    {{ partial "navbar/dark.html" . }}
 {{ end }}
 {{ block "body" . }}
 {{ end }}
 {{ block "footer" . }}
-    {{ partial "footer.html" . }}
+    {{ partial "footer/dark.html" . }}
 {{ end }}
 <script src="/js/menu.js"></script>
 {{ partial "typekit.html" . }}

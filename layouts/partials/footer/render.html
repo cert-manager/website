@@ -2,8 +2,8 @@
     <section class="grey pre-footer">
         <div class="container">
             <div class="block">
-                <h3>{{ .Site.Data.text.get_started }}</h3>
-                <p class="footer-form"><a href="/contact/" class="btn btn-primary">{{ .Site.Data.text.get_in_touch }}</a></p>
+                <h3>{{ .text.get_started }}</h3>
+                <p class="footer-form"><a href="/contact/" class="btn btn-primary">{{ .text.get_in_touch }}</a></p>
             </div>
         </div>
     </section>
@@ -15,14 +15,14 @@
                     <a href="/"><img src="/img/png/logo-white.png"/></a>
                 </div>
                 <div class="item social" style="color:white;">
-                    {{ partial "menu/social.html" . }}
+                    {{ partial "menu/social.html" (dict "links" .social) }}
                 </div>
             </div>
             <div class="row footer-menu" style="color:white;">
-                {{ partial "menu/div.html" . }}
+                {{ partial "menu/div.html" (dict "links" .menu "active" .url) }}
             </div>
             <div class="copyright">
-                <p>{{ .Site.Data.text.copyright }}</p>
+                <p>{{ .text.copyright }}</p>
             </div>
         </div>
     </section>
