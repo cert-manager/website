@@ -9,3 +9,12 @@ get_in_touch = "Get in touch"
 # top of the homepage
 headline = "Kubernetes Accelerated"
 strapline = "Extract maximum value from the market's leading container orchestrator."
+
+# terms and conditions
+terms = """
+Really, this is an example of a multi-line string.
+
+We could put legal stuff here but that means speaking to lawyers and that is obviously costly and bad, because laywers are evil only second to estate-agents (all owned by bankers).
+
+In the meantime - this text will suffice.  I understand if a lawyer replaces it - it's ok - I'm just tryping now.
+"""

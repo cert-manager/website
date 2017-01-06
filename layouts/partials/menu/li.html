@@ -1,9 +1,10 @@
+{{ $url := .URL }}
 {{ $links := .Site.Data.menu }}
 {{ range $links }}
   {{ $title := index . 0 }}
   {{ $link := index . 1 }}
   <li>
-    <a href="{{ $link }}"{{ if eq $link .URL }} class="current"{{ end }}>
+    <a href="{{ $link }}"{{ if eq $link $url }} class="current"{{ end }}>
       {{ $title }}
     </a>
   </li>

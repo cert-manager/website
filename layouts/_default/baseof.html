@@ -22,6 +22,9 @@
     <![endif]-->
 </head>
 <body>
+{{ block "navbar" . }}
+    {{ partial "navbar.html" . }}
+{{ end }}
 {{ block "body" . }}
 {{ end }}
 {{ block "footer" . }}
