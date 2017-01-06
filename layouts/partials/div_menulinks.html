@@ -1,5 +1,11 @@
-{{ range sort . "order" "asc" }}
+{{ $url := .URL }}
+{{ $links := .Site.Data.menu }}
+{{ range $links }}
+  {{ $title := index . 0 }}
+  {{ $link := index . 1 }}
   <div class="item">
-    <a href="{{ .link }}">{{ .title }}</a>
+    <a href="{{ $link }}"{{ if eq $link $url }} class="current"{{ end }}>
+      {{ $title }}
+    </a>
   </div>
 {{ end }}

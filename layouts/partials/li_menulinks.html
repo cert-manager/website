@@ -1,3 +1,10 @@
-{{ range sort . "order" "asc" }}
-   <li><a href="{{ .link }}"{{ if eq .link "blog" }}current{{ end }}>{{ .title }}</a></li>
+{{ $links := .Site.Data.menu }}
+{{ range $links }}
+  {{ $title := index . 0 }}
+  {{ $link := index . 1 }}
+  <li>
+    <a href="{{ $link }}"{{ if eq $link .URL }} class="current"{{ end }}>
+      {{ $title }}
+    </a>
+  </li>
 {{ end }}

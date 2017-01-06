@@ -14,12 +14,12 @@
                 <div class="item logo">
                     <a href="/"><img src="/img/png/logo-white.png"/></a>
                 </div>
-                <div class="item social">
-                    {{ partial "sociallinks.html" .Site.Data.menu.social }}
+                <div class="item social" style="color:white;">
+                    {{ partial "sociallinks.html" . }}
                 </div>
             </div>
-            <div class="row footer-menu">
-                {{ partial "div_menulinks.html" .Site.Data.menu.links }}
+            <div class="row footer-menu" style="color:white;">
+                {{ partial "div_menulinks.html" . }}
             </div>
             <div class="copyright">
                 <p>{{ .Site.Data.text.copyright }}</p>
