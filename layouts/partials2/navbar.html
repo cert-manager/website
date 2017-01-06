@@ -1,0 +1,16 @@
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar{{ $.Scratch.Get "navbarIdAppend" }}" aria-expanded="false" aria-controls="navbar{{ $.Scratch.Get "navbarIdAppend" }}">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="/img/png/logo-{{ $.Scratch.Get "logocolor" }}.png"></a>
+            </div>
+            <div id="navbar{{ $.Scratch.Get "navbarIdAppend" }}" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {{ partial "li_menulinks.html" .Site.Data.menu.links }}
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>

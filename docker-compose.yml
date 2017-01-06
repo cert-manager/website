@@ -1,0 +1,15 @@
+version: '2'
+services:
+  hugo:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: jetstack_website
+    ports:
+      - "1313:1313"
+    volumes:
+      - ./static:/usr/share/website/static
+      - ./content:/usr/share/website/content
+      - ./layouts:/usr/share/website/layouts
+      - ./data:/usr/share/website/data
+      - ./config.toml:/usr/share/website/config.toml

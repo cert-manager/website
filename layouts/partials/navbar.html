@@ -1,16 +1,26 @@
+<div class="container-fluid" id="header">
+    <nav class="navbar navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar{{ $.Scratch.Get "navbarIdAppend" }}" aria-expanded="false" aria-controls="navbar{{ $.Scratch.Get "navbarIdAppend" }}">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"><img src="/img/png/logo-{{ $.Scratch.Get "logocolor" }}.png"></a>
+                <a class="navbar-brand" href="/"><img src="/img/png/logo-white.png"/></a>
             </div>
-            <div id="navbar{{ $.Scratch.Get "navbarIdAppend" }}" class="navbar-collapse collapse">
+            <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     {{ partial "li_menulinks.html" .Site.Data.menu.links }}
+                    <!--<li><a href="kubernetes.html">Kubernetes</a></li>
+                    <li><a href="engineering.html">Engineering</a></li>
+                    <li><a href="services.html" class="current">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="insights.html">Insights</a></li>-->
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
+    </nav>
+</div>

@@ -1,4 +1,4 @@
-{{ partial "default_head.html" . }}
+{{ define "main" }}
 <section id="main">
   <h1 id="title">{{ .Title }}</h1>
   <div>
@@ -7,4 +7,4 @@
         </article>
   </div>
 </section>
-{{ partial "default_foot.html" . }}
+{{ end }}

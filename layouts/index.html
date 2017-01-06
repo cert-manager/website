@@ -1,25 +1,29 @@
-{{ $.Scratch.Add "logocolor" "white" }}
-{{ $.Scratch.Add "cssfile" "/css/home.css" }}
-{{ partial "video_head.html" . }}
-
+{{ define "appendtitle" }} | Kubernetes Accelerated{{ end }}
+{{ define "head" }}
+    <link href="/css/home.css" rel="stylesheet"/>
+{{ end }}
+{{ define "body" }}
 <div class="container-fluid" id="lead-image">
     <div class="video"></div>
     <div class="overlay"></div>
 
     <div class="container">
         <div class="masthead text-light">
-            <h1>{{.Site.Data.text.headline}}</h1>
-            <p class="text-light">{{.Site.Data.text.strapline}}</p>
+            <h1>{{ .Site.Data.text.headline }}</h1>
+            <p class="text-light">{{ .Site.Data.text.strapline }}</p>
         </div>
     </div>
-
 
     <div class="down-arrow">
         <img src="/img/png/arrow-down.png"/>
     </div>
 </div>
+{{ end }}
 
-
-<div class="container-fluid" id="home-content">
-
-{{ partial "video_foot.html" . }}
+{{ define "footer" }}
+<!-- 
+    ignore the default footer because for the homepage because it needs 
+    to live inside the container div for a reason I don't yet understand
+ -->
+<div></div>
+{{ end }}

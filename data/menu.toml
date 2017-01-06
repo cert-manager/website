@@ -1,23 +1,23 @@
 [links]
   [links.kubernetes]
     title="Kubernetes"
-    link="/kubernetes"
+    link="kubernetes"
     order="1"
   [links.engineering]
     title="Engineering"
-    link="/engineering"
+    link="engineering"
     order="2"
   [links.services]
     title="Services"
-    link="/services"
+    link="services"
     order="3"
   [links.about]
     title="About Us"
-    link="/about"
+    link="about"
     order="4"
   [links.insights]
     title="Insights"
-    link="/insights"
+    link="insights"
     order="5"
 
 [social]

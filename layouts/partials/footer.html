@@ -1,0 +1,29 @@
+<div id="footer">
+    <section class="grey pre-footer">
+        <div class="container">
+            <div class="block">
+                <h3>{{ .Site.Data.text.get_started }}</h3>
+                <p class="footer-form"><a href="contact" class="btn btn-primary">{{ .Site.Data.text.get_in_touch }}</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="blue tight main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="item logo">
+                    <a href="/"><img src="/img/png/logo-white.png"/></a>
+                </div>
+                <div class="item social">
+                    {{ partial "sociallinks.html" .Site.Data.menu.social }}
+                </div>
+            </div>
+            <div class="row footer-menu">
+                {{ partial "div_menulinks.html" .Site.Data.menu.links }}
+            </div>
+            <div class="copyright">
+                <p>{{ .Site.Data.text.copyright }}</p>
+            </div>
+        </div>
+    </section>
+</div>

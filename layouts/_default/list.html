@@ -1,5 +1,4 @@
-{{ $.Scratch.Add "logocolor" "black" }}
-{{ partial "default_head.html" . }}
+{{ define "main" }}
 <div class="container-fluid" id="page-content">
   <div class="col-sm-12">
 
@@ -18,4 +17,4 @@
   </div>
 
 </div>
-{{ partial "default_foot.html" . }}
+{{ end }}

@@ -2,7 +2,7 @@
 def utils = new io.jetstack.Utils()
 node('docker'){
     catchError {
-        def imageName = 'eu.gcr.io/jetstack-gke/jetstack-blog'
+        def imageName = 'eu.gcr.io/jetstack-gke/jetstack-website'
         def imageTag = "jenkins-${env.BUILD_NUMBER}"
 
         utils.jenkinsSlack('start')

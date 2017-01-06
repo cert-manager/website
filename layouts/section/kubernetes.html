@@ -1,7 +1,6 @@
-{{ $.Scratch.Add "logocolor" "black" }}
-{{ $.Scratch.Add "cssfile" "/css/kubernetes.css" }}
-{{ $.Scratch.Add "extracssfile" "/css/timeline.css" }}
-{{ partial "default_head.html" . }}
+{{ define "appendtitle" }} | Kubernetes{{ end }}
+{{ define "body" }}
+
 <div class="container-fluid" id="page-content">
   <div class="col-sm-12">
 
@@ -20,4 +19,5 @@
   </div>
 
 </div>
-{{ partial "default_foot.html" . }}
+
+{{ end }}
