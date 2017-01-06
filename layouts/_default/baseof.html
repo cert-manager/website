@@ -30,6 +30,11 @@
 {{ block "footer" . }}
     {{ partial "footer/dark.html" . }}
 {{ end }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+{{ block "scripts" . }}
+
+{{ end }}
 <script src="/js/menu.js"></script>
 {{ partial "typekit.html" . }}
 </body>
