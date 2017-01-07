@@ -6,12 +6,12 @@
 <div class="container" id="header">
     <!-- Above Lead Image -->
     <nav class="navbar transparent atop">
-        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.config.general.menu "url" .URL) }}
+        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.config.menu "url" .URL) }}
     </nav>
     <!-- Hidden Navbar -->
     <nav class="navbar navbar-fixed-top above" id="dynamic-nav">
 
-        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.config.general.menu "url" .URL) }}
+        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.config.menu "url" .URL) }}
     </nav>
 </div>
 {{ end }}
@@ -22,8 +22,8 @@
 
     <div class="container">
         <div class="masthead text-light">
-            <h1>{{ .Site.Data.config.home.headline }}</h1>
-            <p class="text-light">{{ .Site.Data.config.home.strapline }}</p>
+            <h1>{{ .Site.Data.home.headline }}</h1>
+            <p class="text-light">{{ .Site.Data.home.strapline }}</p>
         </div>
     </div>
 
@@ -36,16 +36,16 @@
 
     <section class="white">
         <div class="intro-text">
-            <h2>{{ .Site.Data.config.home.getStarted.headline }}</h2>
+            <h2>{{ .Site.Data.home.getStarted.headline }}</h2>
             <p class="text-light-alt">
-                {{ .Site.Data.config.home.getStarted.strapline | markdownify }}
+                {{ .Site.Data.home.getStarted.strapline | markdownify }}
             </p>
         </div>
     </section>
 
     {{ partial "banner/people.html" }}
 
-    {{ partial "banner/k8s.html" .Site.Data.config.banners.k8s }}
+    {{ partial "banner/k8s.html" .Site.Data.banners.k8s }}
 
     {{ partial "footer/dark.html" . }}
 

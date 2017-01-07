@@ -1,38 +1,17 @@
-[general]
-  title = "JetStack"
-  copyright = "© 2016 Jetstack Ltd. All rights reserved."
-  getStarted = "Get Started With Jetstack"
-  getInTouch = "Get in touch"
-  menu = [
-    [ "Kubernetes", "/kubernetes/" ],
-    [ "Engineering", "/engineering/" ],
-    [ "Services", "/services/" ],
-    [ "About Us", "/about/" ],
-    [ "Insights", "/insights/" ]
-  ]
-  social = [
-    [ "/img/png/social-github-white.png", "https://github.com/jetstack" ],
-    [ "/img/png/social-docker-white.png", "https://hub.docker.com/u/jetstack/" ],
-    [ "/img/png/social-linkedin-white.png", "https://www.linkedin.com/company/jetstack" ],
-    [ "/img/png/social-twitter-white.png", "https://twitter.com/jetstackhq" ]
-  ]
-
-[home]
-  headline = "Kubernetes Accelerated"
-  strapline = "Extract maximum value from the market's leading container orchestrator."
-
-  [home.getStarted]
-    headline = "Get Started."
-    strapline = """Jetstack is an independent services company that builds modern,   
-cloud-native infrastructure using Kubernetes."""
-
-[banners]
-  [banners.k8s]
-    hook = "Jetstack will help you get there faster with market-leading professional services and engineering"
-    features = [
-      "Free you developers to focus on ‘Features’",
-      "Gets code into production quicker",
-      "Reduces your operational overhead",
-      "Gives vendor neutrality",
-      "Offers cross-cloud portability"
-    ]
+title = "JetStack"
+copyright = "© 2016 Jetstack Ltd. All rights reserved."
+getStarted = "Get Started With Jetstack"
+getInTouch = "Get in touch"
+menu = [
+  [ "Kubernetes", "/kubernetes/" ],
+  [ "Engineering", "/engineering/" ],
+  [ "Services", "/services/" ],
+  [ "About Us", "/about/" ],
+  [ "Insights", "/insights/" ]
+]
+social = [
+  [ "/img/png/social-github-white.png", "https://github.com/jetstack" ],
+  [ "/img/png/social-docker-white.png", "https://hub.docker.com/u/jetstack/" ],
+  [ "/img/png/social-linkedin-white.png", "https://www.linkedin.com/company/jetstack" ],
+  [ "/img/png/social-twitter-white.png", "https://twitter.com/jetstackhq" ]
+]
