@@ -1,0 +1,41 @@
+{{ $data := .logos }}
+{{ $cols := default 3 .cols }}
+{{ $rows := add (div (len $data) $cols) (int (not (modBool (len $data) $cols))) }}
+{{ $index := 0 }}
+<div class="logo-grid {{ .classname }}">
+{{ range $row := (seq 1 $rows) }}
+    {{ $zrow := sub $row 1 }}
+    <div class="row">
+    {{ range $col := (seq 1 $cols) }}
+        {{ $zcol := sub $col 1 }}
+        {{ $index := add (mul $zrow $cols) $zcol }}
+        {{ if isset $data $index }}
+            {{ $item := index $data $index }}
+            {{ if isset $item 0 }}
+                {{ $name := index $item 0 }}
+                {{ $img := index $item 1 }}
+                {{ $href := index $item 2 }}
+                <div class="logo {{ $name }}">
+                        {{ if eq (substr $img 0 1) "/" }}
+                            <a href="{{ $href }}" target="_blank">
+                                <img src="{{ $img }}" />
+                            </a>
+                        {{ else }}
+                            <a href="{{ $href }}" class="btn btn-default">
+                                {{ $img }}
+                            </a>
+                        {{ end }}
+                    </a>
+                </div>
+            {{ else }}
+                <div class="logo">
+                </div>
+            {{ end }}
+        {{ else }}
+            <div class="logo">
+            </div>
+        {{ end }}
+    {{ end }}
+    </div>
+{{ end }}
+</div>

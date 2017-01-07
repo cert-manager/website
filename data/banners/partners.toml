@@ -1,0 +1,13 @@
+workedWith = [
+  [ "clusterhq", "/img/png/clusterhq-logo.png", "https://clusterhq.com/" ],
+  [ "googlecp", "/img/png/googlecp-logo.png", "https://cloud.google.com/" ],
+  [ "brightpearl", "/img/png/brightpearl.png", "https://www.brightpearl.com" ],
+  [ "pearson", "/img/png/pearson.png", "https://uk.pearson.com/" ],
+  [ "elevate", "/img/png/elevate.png", "http://thinkelevate.com/" ],
+  [ "contact", "Get in touch", "/contact/" ]
+]
+
+inTheNews = [
+  [],
+  [ "theNewStack", "/img/png/newstack-logo.png", "http://thenewstack.io/vendors-working-towards-k8s-docker-interoperability/" ]
+]
