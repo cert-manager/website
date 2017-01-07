@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- TITLE -->
-    <title>{{ .Site.Data.general.text.title }}{{ block "title" . }}{{ end }}</title>
+    <title>{{ .Site.Data.config.title }}{{ block "title" . }}{{ end }}</title>
 
     <!-- ASSETS -->
     <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
@@ -28,13 +28,13 @@
 {{ block "body" . }}
 {{ end }}
 {{ block "footer" . }}
-    {{ partial "footer/dark.html" . }}
+    {{ partial "footer/index.html" . }}
 {{ end }}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
 {{ block "scripts" . }}
 {{ end }}
 <script src="/js/menu.js"></script>
-{{ partial "widget/typekit.html" . }}
+{{ partial "widgets/typekit.html" . }}
 </body>
 </html>

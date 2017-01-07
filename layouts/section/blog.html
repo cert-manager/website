@@ -1,0 +1,26 @@
+{{ define "title" }} | Insights{{ end }}
+{{ define "head" }}
+    <link href="/css/insights.css" rel="stylesheet"/>
+{{ end }}
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+{{ define "body" }}
+
+
+<div class="container-fluid" id="page-content">
+
+    {{ partial "panels/headline.html" .Site.Data.config.headline.insights }}
+
+    <div id="listing">
+        <section class="white bordered tight" id="insights">
+            <div class="container">
+
+                {{ partial "menus/insights.html" . }}
+
+            </div>
+        </section>
+    </div>
+</div>
+
+{{ end }}

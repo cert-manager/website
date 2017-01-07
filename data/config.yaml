@@ -1,0 +1,167 @@
+# site wide text config
+title: JetStack
+copyright: © 2016 Jetstack Ltd. All rights reserved.
+
+# control the navbar, social links and insight menus
+menus:
+
+  navbar:
+    - name: Kubernetes
+      link: /kubernetes/
+    - name: Engineering
+      link: /engineering/
+    - name: Services
+      link: /services/
+    - name: About Us
+      link: /about/
+    - name: Insights
+      link: /insights/
+
+  social:
+    - name: github
+      img: /img/png/social-github-white.png
+      link: https://github.com/jetstack
+    - name: docker
+      img: /img/png/social-docker-white.png
+      link: https://hub.docker.com/u/jetstack/
+    - name: linkedin
+      img: /img/png/social-linkedin-white.png
+      link: https://www.linkedin.com/company/jetstack
+    - name: twitter
+      img: /img/png/social-twitter-white.png
+      link: https://twitter.com/jetstackhq
+
+  insights:
+    - name: All
+      link: /insights/
+    - name: Blog
+      link: /blog/
+    - name: Whitepapers
+      link: /whitepapers/
+    - name: Infographics
+      link: /infographics/
+    - name: Videos
+      link: /videos/
+
+# large text panels like partials/panels/{headline,calltoaction}
+headline:
+
+  homepage:
+    headline: Kubernetes Accelerated
+    strapline: Extract maximum value from the market's leading container orchestrator.
+
+  getStarted:
+    headline: Get Started.
+    strapline: >
+      Jetstack is an independent services company that builds modern,   
+      cloud-native infrastructure using Kubernetes.
+
+  insights:
+    headline: Resources, Blogs, Events, Tools, Meetups
+    strapline: We live and breathe the Kubernetes Project
+
+  blog:
+    headline: Read all about it
+    strapline: We tell good stories yo
+
+  whitepapers:
+    headline: Get clever
+    strapline: I have no idea what any of this means
+
+  infographics:
+    headline: ICanHaz crayons?
+    strapline: Drew some stuff
+
+  video:
+    headline: JetTube launches
+    strapline: Get yo popcorn yo
+
+  footer:
+    headline: Get Started With Jetstack
+    strapline: Get in touch
+    link: /contact/
+
+# various types of content panel that can appear on section pages
+# the idea is to not fix a panel to a section - mix and match!
+panels:
+
+  # the banner describing k8s features (homepage)
+  k8s:
+
+    hook: Jetstack will help you get there faster with market-leading professional services and engineering
+    features:
+      - Free your developers to focus on ‘Features’
+      - Gets code into production quicker
+      - Reduces your operational overhead
+      - Gives vendor neutrality
+      - Offers cross-cloud portability
+
+  # the partners we have worked and press stories about us (homepage)
+  partners:
+
+    workedWith:
+      - name: clusterhq
+        img: /img/png/clusterhq-logo.png
+        link: https://clusterhq.com/
+      - name: googlecp
+        img: /img/png/googlecp-logo.png
+        link: https://cloud.google.com/
+      - name: brightpearl
+        img: /img/png/brightpearl.png
+        link: https://www.brightpearl.com
+      - name: pearson
+        img: /img/png/pearson.png
+        link: https://uk.pearson.com/
+      - name: elevate
+        img: /img/png/elevate.png
+        link: http://thinkelevate.com/
+      - name: contact
+        button: Get in touch
+        link: /contact/
+
+    inTheNews:
+      - filler: true
+      - name: theNewStack
+        img: /img/png/newstack-logo.png
+        link: http://thenewstack.io/vendors-working-towards-k8s-docker-interoperability/
+
+  # nice things people said about us (homepage)
+  testimonials:
+
+    - name: Mick Delaney, CTO
+      link:
+        title: Elevate Direct
+        url: http://elevatedirect.com/
+      quote: >
+        Jetstack have been brilliant to work with. Really fast and knowledgeable
+    - name: Rob Haswell, Co-Founder
+      link:
+        title: ClusterHQ
+        url: http://clusterhq.com/
+      quote: >
+        We had a critical piece of engineering to deliver. We were lucky to find Jetstack. 
+        They were professional, easy to work with, and delivered high quality work 
+        within an incredibly tight deadline.
+    - name: Ed Massey, Head of TechOps
+      link:
+        title: Brightpearl
+        url: http://brightpearl.com/
+      quote: >
+        I am super grateful for the intellectual and conceptual leg up that Jetstack gave us.
+    - name: Asim Aslam, Founder
+      link:
+        title: Micro
+        url: https://github.com/micro/micro
+      quote: >
+        If you're looking at running kubernetes in production talk to Jetstack.
+        Quickly becoming the go to experts in this space
+    - name: User of
+      link: 
+        title: Kube-Lego
+        url: https://github.com/jetstack/kube-lego
+      quote: >
+        This is going to do wonders for my kubernetes clusters! Thanks Jetstack!
+    - name: Training Course Attendee
+      quote: >
+        Easy to follow content, well presented, lots of interesting resources,
+        you should seriously charge more!

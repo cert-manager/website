@@ -1,9 +1,9 @@
-{{ define "main" }}
+{{ define "body" }}
 <section id="main">
   <h1 id="title">{{ .Title }}</h1>
   <div>
         <article id="content">
-           {{ .Content }}
+           {{ jsonify .IsPage }}
         </article>
   </div>
 </section>

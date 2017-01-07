@@ -1,17 +1,17 @@
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{ default "navbar" .id }}"
-                        aria-expanded="false" aria-controls="{{ default "navbar" .id }}">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"><img src="/img/png/logo-{{ default "white" .logoColor }}.png"/></a>
-            </div>
-            <div id="{{ default "navbar" .id }}" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    {{ partial "menu/li.html" (dict "links" .menu "active" .url) }}
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
+<div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{ default "navbar" .id }}"
+                aria-expanded="false" aria-controls="{{ default "navbar" .id }}">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="/img/png/logo-{{ default "white" .logoColor }}.png"/></a>
+    </div>
+    <div id="{{ default "navbar" .id }}" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+            {{ partial "menus/li.html" (dict "links" .menu "active" .url) }}
+        </ul>
+    </div><!--/.nav-collapse -->
+</div>

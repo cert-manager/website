@@ -1,7 +1,7 @@
 {{ $active := .active }}
 {{ range .links }}
   <div class="item">
-    <a href="{{ .link }}"{{ if eq .link $active }} class="current"{{ end }}>
+    <a href="{{ .link }}"{{ if hasPrefix $active .link }} class="current"{{ end }}>
       {{ .name }}
     </a>
   </div>

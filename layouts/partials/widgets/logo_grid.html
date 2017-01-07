@@ -13,9 +13,9 @@
         {{ $zcol := sub $col 1 }}
         {{ $index := add (mul $zrow $cols) $zcol }}
         {{ if isset $data $index }}
-            {{ partial "widget/logo_item" (index $data $index) }}
+            {{ partial "widgets/logo_item" (index $data $index) }}
         {{ else }}
-            {{ partial "widget/logo_item" (dict "filler" true) }}
+            {{ partial "widgets/logo_item" (dict "filler" true) }}
         {{ end }}
     {{ end }}
     </div>

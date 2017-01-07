@@ -1,4 +1,11 @@
-{{ define "main" }}
+{{ define "title" }} | Insights{{ end }}
+{{ define "head" }}
+    <link href="/css/insights.css" rel="stylesheet"/>
+{{ end }}
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+{{ define "body" }}
 <div class="container-fluid" id="page-content">
   <div class="col-sm-12">
 

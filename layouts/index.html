@@ -6,12 +6,12 @@
 <div class="container" id="header">
     <!-- Above Lead Image -->
     <nav class="navbar transparent atop">
-        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.general.menu "url" .URL) }}
+        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.config.menus.navbar "url" .URL) }}
     </nav>
     <!-- Hidden Navbar -->
     <nav class="navbar navbar-fixed-top above" id="dynamic-nav">
 
-        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.general.menu "url" .URL) }}
+        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.config.menus.navbar "url" .URL) }}
     </nav>
 </div>
 {{ end }}
@@ -20,40 +20,30 @@
     <div class="video"></div>
     <div class="overlay"></div>
 
-    <div class="container">
-        <div class="masthead text-light">
-            <h1>{{ .Site.Data.home.headline }}</h1>
-            <p class="text-light">{{ .Site.Data.home.strapline }}</p>
-        </div>
-    </div>
+    {{ partial "panels/masthead.html" .Site.Data.config.headline.homepage }}
 
     <div class="down-arrow">
         <img src="/img/png/arrow-down.png"/>
     </div>
 </div>
 
+
 <div class="container-fluid" id="home-content">
 
-    <section class="white">
-        <div class="intro-text">
-            <h2>{{ .Site.Data.home.getStarted.headline }}</h2>
-            <p class="text-light-alt">
-                {{ .Site.Data.home.getStarted.strapline | markdownify }}
-            </p>
-        </div>
-    </section>
+    {{ partial "panels/intro.html" .Site.Data.config.headline.getStarted }}
 
-    {{ partial "banner/people.html" }}
+    {{ partial "panels/people.html" }}
 
-    {{ partial "banner/k8s.html" .Site.Data.banners.k8s }}
+    {{ partial "panels/k8s.html" .Site.Data.config.panels.k8s }}
 
-    {{ partial "banner/partners.html" .Site.Data.banners.partners }}
+    {{ partial "panels/partners.html" .Site.Data.config.panels.partners }}
 
-    {{ partial "banner/testimonials.html" .Site.Data.banners.testimonials }}
+    {{ partial "panels/testimonials.html" .Site.Data.config.panels.testimonials }}
 
-    {{ partial "footer/dark.html" . }}
+    {{ partial "footer/index.html" . }}
 
 </div>
+
 {{ end }}
 
 {{ define "footer" }}
