@@ -6,15 +6,12 @@
                 </div>
                 <div class="overview">
                     <ul>
-                        <li><p>Free you developers to focus on ‘Features’</p></li>
-                        <li><p>Gets code into production quicker</p></li>
-                        <li><p>Reduces your operational overhead</p></li>
-                        <li><p>Gives vendor neutrality</p></li>
-                        <li><p>Offers cross-cloud portability</p></li>
+                        {{ range .features }}
+                        <li><p>{{ . | markdownify}}</p></li>
+                        {{ end }}
                     </ul>
 
-                    <p>Jetstack will help you get there faster with market-leading professional services and
-                        engineering</p>
+                    <p>{{ .hook }}</p>
                 </div>
             </div>
         </div>

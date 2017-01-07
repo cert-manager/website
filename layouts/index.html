@@ -45,7 +45,7 @@
 
     {{ partial "banner/people.html" }}
 
-    {{ partial "banner/k8s.html" }}
+    {{ partial "banner/k8s.html" .Site.Data.config.banners.k8s }}
 
     {{ partial "footer/dark.html" . }}
 
