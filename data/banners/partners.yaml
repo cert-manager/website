@@ -1,0 +1,25 @@
+workedWith:
+  - name: clusterhq
+    img: /img/png/clusterhq-logo.png
+    link: https://clusterhq.com/
+  - name: googlecp
+    img: /img/png/googlecp-logo.png
+    link: https://cloud.google.com/
+  - name: brightpearl
+    img: /img/png/brightpearl.png
+    link: https://www.brightpearl.com
+  - name: pearson
+    img: /img/png/pearson.png
+    link: https://uk.pearson.com/
+  - name: elevate
+    img: /img/png/elevate.png
+    link: http://thinkelevate.com/
+  - name: contact
+    button: Get in touch
+    link: /contact/
+
+inTheNews:
+  - filler: true
+  - name: theNewStack
+    img: /img/png/newstack-logo.png
+    link: http://thenewstack.io/vendors-working-towards-k8s-docker-interoperability/

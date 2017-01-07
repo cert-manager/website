@@ -1,0 +1,13 @@
+                <div class="logo {{ .name }}">
+                    {{ if .button }}
+                        <a href="{{ .link }}" class="btn btn-default">
+                            {{ .button }}
+                        </a>
+                    {{ else if eq (substr .img 0 1) "/" }}
+                        <a href="{{ .link }}" target="_blank">
+                            <img src="{{ .img }}" />
+                        </a>
+                    {{ else }}
+                        <span></span>
+                    {{ end }}
+                </div>

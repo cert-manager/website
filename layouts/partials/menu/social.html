@@ -1,7 +1,5 @@
 {{ range .links }}
-  {{ $img := index . 0 }}
-  {{ $src := index . 1 }}
-  <a href="{{ $src }}">
-      <img src="{{ $img }}"/>
+  <a href="{{ .link }}">
+      <img src="{{ .img }}"/>
   </a>
 {{ end }}

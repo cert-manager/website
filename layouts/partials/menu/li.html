@@ -1,10 +1,8 @@
 {{ $active := .active }}
 {{ range .links }}
-  {{ $title := index . 0 }}
-  {{ $link := index . 1 }}
   <li>
-    <a href="{{ $link }}"{{ if eq $link $active }} class="current"{{ end }}>
-      {{ $title }}
+    <a href="{{ .link }}"{{ if eq .link $active }} class="current"{{ end }}>
+      {{ .name }}
     </a>
   </li>
 {{ end }}

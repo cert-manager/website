@@ -1,7 +1,0 @@
-headline = "Kubernetes Accelerated"
-strapline = "Extract maximum value from the market's leading container orchestrator."
-
-[getStarted]
-  headline = "Get Started."
-  strapline = """Jetstack is an independent services company that builds modern,   
-cloud-native infrastructure using Kubernetes."""

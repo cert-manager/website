@@ -6,12 +6,12 @@
 <div class="container" id="header">
     <!-- Above Lead Image -->
     <nav class="navbar transparent atop">
-        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.config.menu "url" .URL) }}
+        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.general.menu "url" .URL) }}
     </nav>
     <!-- Hidden Navbar -->
     <nav class="navbar navbar-fixed-top above" id="dynamic-nav">
 
-        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.config.menu "url" .URL) }}
+        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.general.menu "url" .URL) }}
     </nav>
 </div>
 {{ end }}
