@@ -22,7 +22,11 @@
                 {{ partial "menus/insights.html" . }}
 
                 <div class="posts">
-                    {{ partial "widgets/contentgrid.html" (dict "root" . "filter" $section) }}
+                    {{ if eq $section "insights" }}
+                        {{ partial "widgets/contentgrid.html" (dict "root" . "filter" "all") }}
+                    {{ else }}
+                        {{ partial "widgets/contentgrid.html" (dict "root" . "filter" $section) }}
+                    {{ end }}}
                 </div>
 
             </div>

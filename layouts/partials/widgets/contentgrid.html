@@ -4,6 +4,7 @@
 {{ $contentSections := .root.Site.Data.config.contentSections }}
 {{ $max := default (len $data) .max }}
 {{ $partial := default "widgets/content" .partial }}
+{{ $exclude := default "" .exclude }}
 {{ $cols := default 3 .cols }}
 {{ $filter := default "all" .filter }}
 {{ $classname := default "post" .classname }}
@@ -17,6 +18,9 @@
     
     {{/* ignore section pages */}}
     {{ else if $page.IsNode }}
+
+    {{/* ignore excluded page */}}
+    {{ else if eq $page.UniqueID $exclude }}
 
     {{/* ignore posts from the static sections */}}
     {{ else if not (in $contentSections $page.Section) }}
