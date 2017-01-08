@@ -1,0 +1,61 @@
+{{ define "title" }} | Insights{{ end }}
+{{ define "head" }}
+    <link href="/css/insights.css" rel="stylesheet"/>
+{{ end }}
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+{{ define "body" }}
+
+{{ $staticSections := .Site.Data.config.system.staticSections }}
+{{ partial "data/pagefilter.html" (dict "staticSections" $staticSections "pages" .Site.Pages) }}
+{{ $includePages := $.Scratch.Get "pagefilter" }}
+
+<div class="container-fluid" id="page-content">
+
+    {{ partial "panels/headline.html" .Site.Data.config.headline.insights }}
+
+    <div id="listing">
+        <section class="white bordered tight" id="insights">
+            <div class="container">
+
+                {{ partial "menus/insights.html" . }}
+
+                <div class="posts">
+                    {{ partial "widgets/contentgrid.html" (dict "root" . "filter" "") }}
+                </div>
+
+            </div>
+        </section>
+    </div>
+</div>
+
+{{ end }}
+
+
+<section class="white" id="latest-insights">
+    <h2>Latest Insights</h2>
+    <div class="row">
+        <div class="insight">
+            <div class="image-zoom-container">
+                <a href="insights-subpage.html"><img src="dist/img/jpg/blog-placeholder-4.jpg"/></a>
+            </div>
+            <h3>Duis aute irure dolor in reprehenderit cillum</h3>
+            <p><a href="#" class="text-light-alt">Read More</a></p>
+        </div>
+        <div class="insight">
+            <div class="image-zoom-container">
+                <a href="insights-subpage.html"><img src="dist/img/jpg/blog-placeholder-5.jpg"/></a>
+            </div>
+            <h3>Duis aute irure dolor in reprehenderit cillum</h3>
+            <p><a href="#" class="text-light-alt">Read More</a></p>
+        </div>
+        <div class="insight">
+            <div class="image-zoom-container">
+                <a href="insights-subpage.html"><img src="dist/img/jpg/blog-placeholder-6.jpg"/></a>
+            </div>
+            <h3>Duis aute irure dolor in reprehenderit cillum</h3>
+            <p><a href="#" class="text-light-alt">Read More</a></p>
+        </div>
+    </div>
+</section>

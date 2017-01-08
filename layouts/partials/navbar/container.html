@@ -1,17 +1,23 @@
+{{ $id := default "navbar" .id }}
+{{ $logoColor := default "white" .logoColor }}
+{{ $links := .root.Site.Data.config.menus.navbar }}
+{{ $currentUrl := .root.URL }}
 <div class="container">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{ default "navbar" .id }}"
-                aria-expanded="false" aria-controls="{{ default "navbar" .id }}">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{ $id }}"
+                aria-expanded="false" aria-controls="{{ $id }}">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/"><img src="/img/png/logo-{{ default "white" .logoColor }}.png"/></a>
+        <a class="navbar-brand" href="/"><img src="/img/png/logo-{{ $logoColor }}.png"/></a>
     </div>
-    <div id="{{ default "navbar" .id }}" class="navbar-collapse collapse">
+    <div id="{{ $id }}" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-            {{ partial "menus/li.html" (dict "links" .menu "active" .url) }}
+
+            {{ partial "menus/li.html" (dict "links" $links "active" $currentUrl) }}
+
         </ul>
     </div><!--/.nav-collapse -->
 </div>

@@ -31,17 +31,12 @@ menus:
       img: /img/png/social-twitter-white.png
       link: https://twitter.com/jetstackhq
 
-  insights:
-    - name: All
-      link: /insights/
-    - name: Blog
-      link: /blog/
-    - name: Whitepapers
-      link: /whitepapers/
-    - name: Infographics
-      link: /infographics/
-    - name: Videos
-      link: /videos/
+# sections that will appear in the "insights" pages
+contentSections:
+    - blog
+    - whitepapers
+    - infographics
+    - videos
 
 # large text panels like partials/panels/{headline,calltoaction}
 headline:
@@ -169,7 +164,7 @@ panels:
 # stuff you can probably ignore
 system:
   # sections we don't treat as real content as use to build up the static pages
-  staticSections:
+  contentSections:
     - kubernetes
     - engineering
     - services

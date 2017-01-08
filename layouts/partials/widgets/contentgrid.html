@@ -1,26 +1,32 @@
 {{/* different grid login because we filter using 'range where' */}}
 
 {{ $data := .root.Site.Pages }}
+{{ $contentSections := .root.Site.Data.config.contentSections }}
+{{ $max := default (len $data) .max }}
 {{ $partial := default "widgets/content" .partial }}
 {{ $cols := default 3 .cols }}
 {{ $filter := default "all" .filter }}
+{{ $classname := default "post" .classname }}
+{{ $linkClassname := default "" .linkClassname }}
 
 <div class="row">
-{{ $staticSections := .root.Site.Data.config.system.staticSections }}
 {{ range $index, $page := $data }}
 
+    {{/* ignore more than max */}}
+    {{ if ge $index $max }}
+    
     {{/* ignore section pages */}}
-    {{ if $page.IsNode }}
+    {{ else if $page.IsNode }}
 
     {{/* ignore posts from the static sections */}}
-    {{ else if in $staticSections $page.Section }}
+    {{ else if not (in $contentSections $page.Section) }}
 
     {{/* ignore posts if the filter is defined */}}
     {{ else if and (ne $filter "all") (ne $page.Section $filter) }}
 
     {{/* if the page made it this far - we render it */}}
     {{ else }}
-        {{ partial $partial $page }}
+        {{ partial $partial (dict "page" $page "classname" $classname "linkClassname" $linkClassname) }}
     {{ end }}
 
     {{ if (modBool (add $index 1) $cols) }}

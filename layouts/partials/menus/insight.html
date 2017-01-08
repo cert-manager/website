@@ -1,0 +1,5 @@
+<div class="category">
+    <a href="/{{ .name }}/"{{ if .active }} class="current"{{ end }}>
+      {{ default (.name | title) .title }}
+    </a>
+</div>

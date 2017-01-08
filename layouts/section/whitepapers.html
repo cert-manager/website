@@ -7,7 +7,6 @@
 {{ end }}
 {{ define "body" }}
 
-
 <div class="container-fluid" id="page-content">
 
     {{ partial "panels/headline.html" .Site.Data.config.headline.whitepapers }}
@@ -17,6 +16,10 @@
             <div class="container">
 
                 {{ partial "menus/insights.html" . }}
+
+                <div class="posts">
+                    {{ partial "widgets/contentgrid.html" (dict "root" . "filter" "whitepapers") }}
+                </div>
 
             </div>
         </section>

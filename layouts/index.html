@@ -6,12 +6,12 @@
 <div class="container" id="header">
     <!-- Above Lead Image -->
     <nav class="navbar transparent atop">
-        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.config.menus.navbar "url" .URL) }}
+        {{ partial "navbar/container.html" (dict "id" "navbar1" "logoColor" "white" "root" .) }}
     </nav>
     <!-- Hidden Navbar -->
     <nav class="navbar navbar-fixed-top above" id="dynamic-nav">
 
-        {{ partial "navbar/container.html" (dict "logoColor" "white" "menu" .Site.Data.config.menus.navbar "url" .URL) }}
+        {{ partial "navbar/container.html" (dict "id" "navbar2" "logoColor" "white" "root" .) }}
     </nav>
 </div>
 {{ end }}
@@ -39,6 +39,8 @@
     {{ partial "panels/partners.html" .Site.Data.config.panels.partners }}
 
     {{ partial "panels/testimonials.html" .Site.Data.config.panels.testimonials }}
+
+    {{ partial "panels/latestinsights.html" . }}
 
     {{ partial "footer/index.html" . }}
 

@@ -1,8 +1,11 @@
+{{ $page := .page }}
+{{ $classname := .classname }}
+{{ $linkClassname := .linkClassname }}
 {{ $img := "/img/jpg/blog-placeholder.jpg" }}
-<div class="post">
+<div class="{{ $classname }}">
     <div class="image-zoom-container">
-        <a href="{{ .URL }}"><img src="{{ $img }}" /></a>
+        <a href="{{ $page.URL }}"><img src="{{ $img }}" /></a>
     </div>
-    <h3>{{ .Title }}</h3>
-    <p><a href="{{ .URL }}">Read More</a></p>
+    <h3>{{ $page.Title }}</h3>
+    <p><a href="{{ $page.URL }}" class="{{ $linkClassname }}">Read More</a></p>
 </div>
