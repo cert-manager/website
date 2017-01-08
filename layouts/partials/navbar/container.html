@@ -2,6 +2,17 @@
 {{ $logoColor := default "white" .logoColor }}
 {{ $links := .root.Site.Data.config.menus.navbar }}
 {{ $currentUrl := .root.URL }}
+{{ $scratch := .root.Scratch }}
+{{ $scratch.Set "currentURL" .root.URL }}
+
+{{/* highlight the insights menu if it's a content section */}}
+{{ range .root.Site.Data.config.contentSections }}
+    {{ if hasPrefix $currentUrl (printf "/%s/" .) }}
+        {{ $scratch.Set "currentURL" "/insights/" }}
+    {{ end }}
+{{ end }}
+
+{{ $useUrl := $scratch.Get "currentURL" }}
 <div class="container">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{ $id }}"
@@ -16,7 +27,7 @@
     <div id="{{ $id }}" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
 
-            {{ partial "menus/li.html" (dict "links" $links "active" $currentUrl) }}
+            {{ partial "menus/li.html" (dict "links" $links "active" $useUrl) }}
 
         </ul>
     </div><!--/.nav-collapse -->
