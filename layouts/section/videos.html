@@ -1,4 +1,4 @@
-{{ define "title" }} | Insights{{ end }}
+{{ define "title" }} | Videos{{ end }}
 {{ define "head" }}
     <link href="/css/insights.css" rel="stylesheet"/>
 {{ end }}
@@ -10,13 +10,13 @@
 
 <div class="container-fluid" id="page-content">
 
-    {{ partial "panels/headline.html" .Site.Data.config.headline.videos }}
+    {{ partial "panels/headline.html" .Site.Data.config.headline.video }}
 
     <div id="listing">
         <section class="white bordered tight" id="insights">
             <div class="container">
 
-                {{ partial "panels/headline.html" .Site.Data.config.headline.infographics }}
+                {{ partial "menus/insights.html" . }}
 
             </div>
         </section>

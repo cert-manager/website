@@ -58,7 +58,7 @@ headline:
 
   insights:
     headline: Resources, Blogs, Events, Tools, Meetups
-    strapline: We live and breathe the Kubernetes Project
+    strapline: We live and breathe the Kubernetes Project yo
 
   blog:
     headline: Read all about it
@@ -66,19 +66,19 @@ headline:
 
   whitepapers:
     headline: Get clever
-    strapline: I have no idea what any of this means
+    strapline: I have no idea what any of this means yo
 
   infographics:
     headline: ICanHaz crayons?
-    strapline: Drew some stuff
+    strapline: yo Banksy move over
 
   video:
-    headline: JetTube launches
+    headline: JetTube
     strapline: Get yo popcorn yo
 
   footer:
     headline: Get Started With Jetstack
-    strapline: Get in touch
+    strapline: Get in touch yo
     link: /contact/
 
 # various types of content panel that can appear on section pages
@@ -165,3 +165,13 @@ panels:
       quote: >
         Easy to follow content, well presented, lots of interesting resources,
         you should seriously charge more!
+
+# stuff you can probably ignore
+system:
+  # sections we don't treat as real content as use to build up the static pages
+  staticSections:
+    - kubernetes
+    - engineering
+    - services
+    - about
+    - insights

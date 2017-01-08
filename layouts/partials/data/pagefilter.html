@@ -1,0 +1,11 @@
+<!--
+  writes a sub-set of pages to $.Scratch
+  this is to get-around golang template scopes
+ -->
+
+{{ $staticSections := .staticSections }}
+{{ range where .pages "IsNode" "!=" true }}
+    {{ if (not in $staticSections .Section) }}
+      {{ $.Scratch.Add "pagefilter" .UniqueID }}
+    {{ end }}
+{{ end }}

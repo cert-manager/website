@@ -7,6 +7,9 @@
 {{ end }}
 {{ define "body" }}
 
+{{ $staticSections := .Site.Data.config.system.staticSections }}
+{{ partial "data/pagefilter.html" (dict "staticSections" $staticSections "pages" .Site.Pages) }}
+{{ $includePages := $.Scratch.Get "pagefilter" }}
 
 <div class="container-fluid" id="page-content">
 
@@ -17,6 +20,10 @@
             <div class="container">
 
                 {{ partial "menus/insights.html" . }}
+
+                <div class="posts">
+                    {{ partial "widgets/contentgrid.html" (dict "root" . "filter" "") }}
+                </div>
 
             </div>
         </section>

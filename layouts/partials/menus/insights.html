@@ -1,7 +1,7 @@
 {{ $active := .URL }}
 <div class="categories">
     <div class="row">
-    {{ range .Site.Data.general.insights }}
+    {{ range .Site.Data.config.menus.insights }}
         <div class="category">
             <a href="{{ .link }}"{{ if hasPrefix $active .link }} class="current"{{ end }}>{{ .name }}</a>
         </div>

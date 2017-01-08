@@ -1,6 +1,6 @@
 ---
 layout: light
-title: second post
+title: first post
 description: >
   Woaaa this happened
 date: 2014-10-18

@@ -1,0 +1,31 @@
+{{/* different grid login because we filter using 'range where' */}}
+
+{{ $data := .root.Site.Pages }}
+{{ $partial := default "widgets/content" .partial }}
+{{ $cols := default 3 .cols }}
+{{ $filter := default "all" .filter }}
+
+<div class="row">
+{{ $staticSections := .root.Site.Data.config.system.staticSections }}
+{{ range $index, $page := $data }}
+
+    {{/* ignore section pages */}}
+    {{ if $page.IsNode }}
+
+    {{/* ignore posts from the static sections */}}
+    {{ else if in $staticSections $page.Section }}
+
+    {{/* ignore posts if the filter is defined */}}
+    {{ else if and (ne $filter "all") (ne $page.Section $filter) }}
+
+    {{/* if the page made it this far - we render it */}}
+    {{ else }}
+        {{ partial $partial $page }}
+    {{ end }}
+
+    {{ if (modBool (add $index 1) $cols) }}
+</div>
+<div class="row">
+    {{ end }}
+{{ end }}
+</div>
