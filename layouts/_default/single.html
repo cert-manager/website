@@ -63,7 +63,7 @@
 
 
                     <div class="posts">
-                        {{ partial "widgets/contentgrid.html" (dict "root" . "filter" .Section "exclude" .UniqueID) }}
+                        {{ partial "widgets/contentgrid.html" (dict "root" . "filter" .Section "exclude" .UniqueID "max" 3) }}
                     </div>
                 </div>
             </section>
