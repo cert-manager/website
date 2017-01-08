@@ -1,19 +1,13 @@
-{{/* different grid login because we filter using 'range where' */}}
+{{/* tells you how many items of content are in the given query */}}
 
 {{ $data := .root.Site.Pages }}
 {{ $scratch := .root.Scratch }}
 {{ $contentSections := .root.Site.Data.config.contentSections }}
 {{ $max := default (len $data) .max }}
-{{ $partial := default "widgets/content" .partial }}
 {{ $exclude := default "" .exclude }}
-{{ $cols := default 3 .cols }}
 {{ $filter := default "all" .filter }}
-{{ $classname := default "post" .classname }}
-{{ $linkClassname := default "" .linkClassname }}
-
 {{ $scratch.Set "activeContentCells" 0 }}
 
-<div class="row">
 {{ range $index, $page := $data }}
 
     {{/* ignore more than max */}}
@@ -34,12 +28,6 @@
     {{/* if the page made it this far - we render it */}}
     {{ else }}
         {{ $scratch.Set "activeContentCells" (add ($scratch.Get "activeContentCells") 1) }}
-        {{ partial $partial (dict "page" $page "classname" $classname "linkClassname" $linkClassname) }}
-        {{ if (modBool ($scratch.Get "activeContentCells") $cols) }}
-</div>
-<div class="row">
-        {{ end }}
     {{ end }}
 
 {{ end }}
-</div>

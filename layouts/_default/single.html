@@ -8,6 +8,7 @@
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">
+
     <section class="white center" id="blog">
         <div style="align-items: center; display: flex; justify-content: center;">
           <div style="max-width: 800px;">
@@ -52,18 +53,22 @@
         </div>
     </section>
 
-    <div id="listing">
-        <section class="white bordered tight" id="insights">
-            <div class="container">
-                <h2 class="text-center">More Content...</h2>
+    {{ partial "widgets/contentinfo.html" (dict "root" . "filter" .Section "exclude" .UniqueID) }}
+
+    {{ if gt (.Scratch.Get "activeContentCells") 0 }}
+        <div id="listing">
+            <section class="white bordered tight" id="insights">
+                <div class="container">
+                    <h2 class="text-center">More Content...</h2>
 
 
-                <div class="posts">
-                    {{ partial "widgets/contentgrid.html" (dict "root" . "filter" .Section "exclude" .UniqueID) }}
+                    <div class="posts">
+                        {{ partial "widgets/contentgrid.html" (dict "root" . "filter" .Section "exclude" .UniqueID) }}
+                    </div>
                 </div>
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
+    {{ end }}
 </div>
 
 {{ end }}

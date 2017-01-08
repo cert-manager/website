@@ -1,9 +1,7 @@
 ---
-type: post
-layout: light
-title: first post
-description: >
-  This is the first post I've made here
+title: Hello world
+author: Kai Davenport
+description: This is the first post I've made here
 date: 2012-04-06
 ---
 
