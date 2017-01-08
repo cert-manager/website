@@ -1,4 +1,4 @@
-{{ define "title" }} | Blog{{ end }}
+{{ define "title" }} | {{ .Title }}{{ end }}
 {{ define "head" }}
     <link href="/css/insights.css" rel="stylesheet"/>
 {{ end }}
@@ -7,9 +7,13 @@
 {{ end }}
 {{ define "body" }}
 
+{{ $section := replace .URL "/" "" }}
+{{ $headlines := .Site.Data.config.headline }}
+{{ $headline := index $headlines $section }}
+
 <div class="container-fluid" id="page-content">
 
-    {{ partial "panels/headline.html" .Site.Data.config.headline.blog }}
+    {{ partial "panels/headline.html" $headline }}
 
     <div id="listing">
         <section class="white bordered tight" id="insights">
@@ -18,7 +22,7 @@
                 {{ partial "menus/insights.html" . }}
 
                 <div class="posts">
-                    {{ partial "widgets/contentgrid.html" (dict "root" . "filter" "blog") }}
+                    {{ partial "widgets/contentgrid.html" (dict "root" . "filter" $section) }}
                 </div>
 
             </div>

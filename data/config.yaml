@@ -2,6 +2,20 @@
 title: JetStack
 copyright: © 2016 Jetstack Ltd. All rights reserved.
 
+# sections listed as content that appears on the 'insights' page
+contentSections:
+    - blog
+    - whitepapers
+    - infographics
+    - videos
+
+# page titles by url
+titles:
+  "/blog/": Blog
+  "/whitepapers/": Blog
+  "/blog/": Blog
+  "/blog/": Blog
+
 # control the navbar, social links and insight menus
 menus:
 
@@ -31,12 +45,7 @@ menus:
       img: /img/png/social-twitter-white.png
       link: https://twitter.com/jetstackhq
 
-# sections that will appear in the "insights" pages
-contentSections:
-    - blog
-    - whitepapers
-    - infographics
-    - videos
+
 
 # large text panels like partials/panels/{headline,calltoaction}
 headline:
@@ -67,7 +76,7 @@ headline:
     headline: ICanHaz crayons?
     strapline: yo Banksy move over
 
-  video:
+  videos:
     headline: JetTube
     strapline: Get yo popcorn yo
 
