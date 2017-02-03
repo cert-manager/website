@@ -2,7 +2,7 @@
 
 {{ $data := .root.Site.Pages }}
 {{ $scratch := .root.Scratch }}
-{{ $contentSections := .root.Site.Data.config.contentSections }}
+{{ $contentSections := .root.Site.Data.config.system.contentSections }}
 {{ $max := default (len $data) .max }}
 {{ $partial := default "widgets/content" .partial }}
 {{ $exclude := default "" .exclude }}
@@ -18,6 +18,8 @@
 
     {{ $activeContentCells := $scratch.Get "activeContentCells" }}
 
+    {{/* somebody please show me how to do a case statement in a golang template */}}
+    
     {{/* ignore more than max */}}
     {{ if ge $activeContentCells $max }}
     

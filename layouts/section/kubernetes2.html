@@ -1,0 +1,30 @@
+{{ define "title" }} | Kubernetes{{ end }}
+{{ define "head" }}
+    <link href="/css/kubernetes.css" rel="stylesheet"/>
+    <link href="/css/timeline.css" rel="stylesheet"/>
+{{ end }}
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+{{ define "body" }}
+
+<div class="container-fluid" id="page-content">
+  <div class="col-sm-12">
+
+    <header class="title"><h1>{{ .Title }} TEST</h1></header>
+
+    <div class="articles">
+      <div class="row">
+        {{ range (.Paginate .Data.Pages).Pages }}
+        <div class="col-sm-4">
+          {{ .Render "li" }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+{{ end }}
