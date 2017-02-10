@@ -66,6 +66,14 @@ headline:
       in Container Orchestration
     strapline: A culmination of Ten Years of Running Linux Containers At Google
 
+  engineering:
+    # leave a blank line to insert a line-break
+    headline: >
+      Supercharging Kubernetes  
+
+      with Jetstack Engineering
+    strapline: Enhancing your experience a tool at a time
+
   insights:
     headline: Resources, Blogs, Events, Tools, Meetups
     strapline: We live and breathe the Kubernetes Project yo
@@ -265,6 +273,12 @@ panels:
 
 
       Jetstack was founded to help you to take advantage of this technology and gain value from it through engineering and services. A regular contributor to the project, Jetstack is here to take you from zero to prod, and everything in between.
+
+  engineering_intro:
+    text: >
+      Jetstack develop tools to make your experience with   
+
+      Kubernetes easier and more productive
 
 # stuff you can probably ignore
 system:
