@@ -104,6 +104,9 @@ headline:
     headline: Resources, Blogs, Events, Tools, Meetups
     strapline: We live and breathe the Kubernetes Project
 
+  contact:
+    headline: Get in Touch
+    strapline: and get to market quicker
   blog:
     headline: Read all about it
     strapline: We tell good stories
