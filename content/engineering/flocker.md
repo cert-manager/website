@@ -2,6 +2,7 @@
 title: Flocker
 weight: 3
 thumb: /img/jpg/engineering-flocker.jpg
+background: /img/jpg/flocker-background.jpg
 buttontitle: Learn more
 pagetitle: Flocker Plugin
 description: >
