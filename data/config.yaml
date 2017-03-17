@@ -59,7 +59,6 @@ headline:
       cloud-native infrastructure using Kubernetes.
 
   kubernetes:
-    # leave a blank line to insert a line-break
     headline: >
       Kubernetes - The De Facto Standard      
 
@@ -67,12 +66,16 @@ headline:
     strapline: A culmination of Ten Years of Running Linux Containers At Google
 
   engineering:
-    # leave a blank line to insert a line-break
     headline: >
       Supercharging Kubernetes  
 
       with Jetstack Engineering
     strapline: Enhancing your experience a tool at a time
+
+  services:
+    headline: >
+      Accelerate Your Kubernetes Project
+    strapline: With Jetstack services
 
   insights:
     headline: Resources, Blogs, Events, Tools, Meetups
