@@ -37,13 +37,24 @@
                 </p>
             </div>
 
-            <div class="image">
-                <img src="/img/jpg/engineering-lego.jpg" />
-            </div>
+            {{ if isset .Params "image" }}
+                <div class="image">
+                    <img src="{{ .Params.image }}" />
+                </div>
+            {{ end }}
+
+            {{ if isset .Params "youtube" }}
+                <div class="image">
+                    <iframe style="border: 1px solid #999" width="100%" height="400" frameborder="0" src="https://www.youtube.com/embed/{{ .Params.youtube }}">
+                        </iframe>
+                </div>
+            {{ end }}
 
             {{ if isset .Params "strapline" }}
               <div class="content">
-                <h3>{{ .Params.strapline }}</h3>
+                <hr />
+                <h4>{{ .Params.strapline }}</h4>
+                <hr />
               </div>
             {{ end }}
 
@@ -53,22 +64,60 @@
         </div>
     </section>
 
-    {{ partial "widgets/contentinfo.html" (dict "root" . "filter" .Section "exclude" .UniqueID) }}
-
-    {{ if gt (.Scratch.Get "activeContentCells") 0 }}
+    {{ if and .NextInSection .PrevInSection }}
         <div id="listing">
             <section class="white bordered tight" id="insights">
                 <div class="container">
-                    <h2 class="text-center">More Content...</h2>
+                    <h2 class="text-center">Other Posts...</h2>
 
 
                     <div class="posts">
-                        {{ partial "widgets/contentgrid.html" (dict "root" . "filter" .Section "exclude" .UniqueID "max" 3) }}
+                        <div class="row">
+                            {{ partial "widgets/content_thumbnail.html" .PrevInSection }}
+                            <div class="post"></div>
+                            {{ partial "widgets/content_thumbnail.html" .NextInSection }}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    {{ else if .NextInSection }}
+        <div id="listing">
+            <section class="white bordered tight" id="insights">
+                <div class="container">
+                    <h2 class="text-center">Next Post...</h2>
+
+                    <div class="posts">
+                        <div class="row">
+                            <div class="post"></div>
+                            {{ partial "widgets/content_thumbnail.html" .NextInSection }}
+                            <div class="post"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    {{ else if .PrevInSection }}
+        <div id="listing">
+            <section class="white bordered tight" id="insights">
+                <div class="container">
+                    <h2 class="text-center">Previous Post...</h2>
+
+                    <div class="posts">
+                        <div class="row">
+                            <div class="post"></div>
+                            {{ partial "widgets/content_thumbnail.html" .PrevInSection }}
+                            <div class="post"></div>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
     {{ end }}
+
+    
+    
+
 </div>
 
 {{ end }}

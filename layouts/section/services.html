@@ -10,7 +10,11 @@
   
   <div id="services">
     {{ range $index, $page := .Data.Pages }}
+      {{ if modBool $index 2 }}
       <section class="white bordered">
+      {{ else }}
+      <section class="grey bordered">
+      {{ end }}
         <div class="container">
           <div class="row">
             <div class="icon">

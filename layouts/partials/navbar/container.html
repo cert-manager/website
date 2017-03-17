@@ -6,7 +6,7 @@
 {{ $scratch.Set "currentURL" .root.URL }}
 
 {{/* highlight the insights menu if it's a content section */}}
-{{ range .root.Site.Data.config.contentSections }}
+{{ range .root.Site.Data.config.insightSections }}
     {{ if hasPrefix $currentUrl (printf "/%s/" .) }}
         {{ $scratch.Set "currentURL" "/insights/" }}
     {{ end }}

@@ -6,6 +6,12 @@ copyright: © 2016 Jetstack Ltd. All rights reserved.
 apikeys:
   typekit: lck0ocu
 
+# what sections fall inside the 'insights' heading
+insightSections:
+  - blog
+  - whitepapers
+  - infographics
+  - videos
 
 # page titles by url
 titles:
@@ -43,7 +49,17 @@ menus:
       img: /img/png/social-twitter-white.png
       link: https://twitter.com/jetstackhq
 
-
+  insights:
+    - name: All
+      link: /insights/
+    - name: Blog
+      link: /blog/
+    - name: Whitepapers
+      link: /whitepapers/
+    - name: Infographics
+      link: /infographics/
+    - name: Videos
+      link: /videos/
 
 # large text panels like partials/panels/{headline,calltoaction}
 headline:
@@ -77,21 +93,28 @@ headline:
       Accelerate Your Kubernetes Project
     strapline: With Jetstack services
 
+  about:
+    headline: >
+      Powering the hottest startups  
+
+      and the largest enterprises
+    strapline: Our team reflects a unique blend of specialist skills
+
   insights:
     headline: Resources, Blogs, Events, Tools, Meetups
-    strapline: We live and breathe the Kubernetes Project yo
+    strapline: We live and breathe the Kubernetes Project
 
   blog:
     headline: Read all about it
-    strapline: We tell good stories yo
+    strapline: We tell good stories
 
   whitepapers:
     headline: Get clever
-    strapline: I have no idea what any of this means yo
+    strapline: I have no idea what any of this means
 
   infographics:
     headline: ICanHaz crayons?
-    strapline: yo Banksy move over
+    strapline: Banksy move over
 
   videos:
     headline: JetTube
@@ -289,14 +312,3 @@ panels:
       Jetstack develop tools to make your experience with   
 
       Kubernetes easier and more productive
-
-# stuff you can probably ignore
-system:
-  # sections we don't render as a list of posts but instead are static pages
-  # that combine various 'panels' (which live inside layouts/partials/panels)
-  contentSections:
-    - kubernetes
-    - engineering
-    - services
-    - about
-    - insights

@@ -1,11 +1,10 @@
 {{ $currentUrl := .URL }}
 <div class="categories">
     <div class="row">
-    {{ $allactive := eq $currentUrl "/insights/" }}
-    {{ partial "menus/insight" (dict "name" "insights" "title" "All" "active" $allactive)}}
-    {{ range .Site.Data.config.contentSections }}
-      {{ $active := eq $currentUrl (printf "/%s/" .) }}
-      {{ partial "menus/insight" (dict "name" . "active" $active)}}
+    {{ range $index, $page := .Site.Data.config.menus.insights }}
+      <div class="category">
+        <a href="{{ .link }}" class="{{ if eq $currentUrl .link }}current{{ end }}">{{ .name }}</a>
+      </div>
     {{ end }}
     </div>
 </div>
