@@ -264,8 +264,15 @@ panels:
         desc: Kubernetes is open source giving you the freedom to take advantage of on-premise, hybrid, or public cloud infrastructure, letting you effortlessly move workloads to where it matters to you.
 
   k8s_numbers:
+    manualContributors: 1100+
+    manualCommits: 45000+
+    manualStars: 21000+
     api: https://api.github.com/repos/kubernetes/kubernetes
+    repo: https://crossorigin.me/https://github.com/kubernetes/kubernetes
     initialCommit: 2c4b3a562ce34cddc3f8218a2c4d11c7310e6d56
+    # we scrape the contributors from the raw html (it's the only way trust)
+    # if github change their markup you cam change the jQuery selector to extract the contributors span here
+    contributorSelector: "a[href='/kubernetes/kubernetes/graphs/contributors'] span.num"
 
   k8s_close:
     text: >
