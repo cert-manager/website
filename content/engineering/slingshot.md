@@ -1,8 +1,9 @@
 ---
 title: Slingshot
+weight: 2
 thumb: /img/jpg/engineering-slingshot.jpg
-linkTitle: Learn more
-pageTitle: Slingshot
+buttontitle: Learn more
+pagetitle: Slingshot
 description: >
   Go from zero to a Kubernetes cluster in a matter of minutes.   
 

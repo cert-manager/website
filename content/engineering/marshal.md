@@ -1,8 +1,9 @@
 ---
 title: Marshal
+weight: 4
 thumb: /img/jpg/engineering-marshal.jpg
-linkTitle: Coming soon! Details to come.
-pageTitle: Readying for Launch
+buttontitle: Coming soon! Details to come.
+pagetitle: Readying for Launch
 description:
 image: /img/jpg/marshal-background.jpg
 ---

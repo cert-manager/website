@@ -1,8 +1,9 @@
 ---
 title: Flocker
+weight: 3
 thumb: /img/jpg/engineering-flocker.jpg
-linkTitle: Learn more
-pageTitle: Flocker Plugin
+buttontitle: Learn more
+pagetitle: Flocker Plugin
 description: >
   Use Flocker with Kubernetes
 image: /img/jpg/flocker-background.jpg

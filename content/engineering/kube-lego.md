@@ -1,8 +1,9 @@
 ---
 title: Kube-lego
+weight: 1
 thumb: /img/jpg/engineering-lego.jpg
-linkTitle: Learn more
-pageTitle: Kube-lego
+buttontitle: Learn more
+pagetitle: Kube-lego
 description: >
   Automate Let’s Encrypt in Kubernetes
 image: /img/jpg/lego-background.jpg
