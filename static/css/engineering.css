@@ -1,0 +1,153 @@
+section#intro {
+    padding: 5em;
+}
+
+#intro p {
+    font-size: 20px;
+}
+
+section#engineering {
+    padding-top: 0;
+}
+
+#engineering .engineering-block {
+    width: 615px;
+    margin: 0.5em;
+    position: relative;
+}
+
+#engineering .engineering-block img {
+    width: 100%;
+    height: auto;
+}
+
+#engineering .text {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: left;
+    padding: 3em 2.5em;
+    color: white;
+    pointer-events: none;
+}
+
+#engineering .text h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+#engineering .text p {
+    position: absolute;
+    bottom: 3em;
+    margin: 0;
+}
+
+#engineering .text p a {
+    color: white;
+}
+
+@media (max-width: 769px) {
+    #engineering .engineering-block {
+        width: 100%;
+        margin: 0.5em;
+        position: relative;
+    }
+
+    #engineering .text {
+        padding: 10%;
+    }
+
+    #engineering .text p {
+        bottom: 10%;
+        left: 10%;
+    }
+}
+
+@media (max-width: 480px) {
+    #engineering .text h3 {
+        font-size: 1.1em;
+    }
+
+    #engineering .text p {
+        font-size: 0.8em;
+    }
+}
+
+/**
+ * Subpage Styles
+ */
+#masthead .background {
+    width: 100%;
+}
+
+#masthead .background img {
+    width: 100%;
+    height: auto;
+}
+
+#masthead .logo {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+}
+
+#masthead .logo img {
+    max-width: 340px;
+    height: auto;
+    margin-bottom: 1em;
+}
+
+#masthead .logo p {
+    font-size: 1.5em;
+}
+
+.back {
+    position: relative;
+}
+
+.back a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1em;
+    background: #1768E2;
+    color: white;
+    z-index: 1;
+}
+
+#description .text {
+    width: 650px;
+    margin: 0 auto;
+    font-size: 1em;
+}
+
+@media (max-width: 769px) {
+    #description .text {
+        width: 90%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .back a {
+        width: 100%;
+    }
+
+    #masthead {
+        margin-top: 50px;
+    }
+
+    #masthead .logo img {
+        width: 90%;
+    }
+
+    #masthead .logo p {
+        font-size: 1.2em;
+    }
+
+}

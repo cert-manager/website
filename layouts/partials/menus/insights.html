@@ -1,0 +1,11 @@
+{{ $currentUrl := .URL }}
+<div class="categories">
+    <div class="row">
+    {{ $allactive := eq $currentUrl "/insights/" }}
+    {{ partial "menus/insight" (dict "name" "insights" "title" "All" "active" $allactive)}}
+    {{ range .Site.Data.config.contentSections }}
+      {{ $active := eq $currentUrl (printf "/%s/" .) }}
+      {{ partial "menus/insight" (dict "name" . "active" $active)}}
+    {{ end }}
+    </div>
+</div>

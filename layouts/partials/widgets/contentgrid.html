@@ -1,0 +1,49 @@
+{{/* different grid login because we filter using 'range where' */}}
+
+{{ $data := .root.Site.Pages }}
+{{ $scratch := .root.Scratch }}
+{{ $contentSections := .root.Site.Data.config.system.contentSections }}
+{{ $max := default (len $data) .max }}
+{{ $partial := default "widgets/content" .partial }}
+{{ $exclude := default "" .exclude }}
+{{ $cols := default 3 .cols }}
+{{ $filter := default "all" .filter }}
+{{ $classname := default "post" .classname }}
+{{ $linkClassname := default "" .linkClassname }}
+
+{{ $scratch.Set "activeContentCells" 0 }}
+
+<div class="row">
+{{ range $index, $page := $data }}
+
+    {{ $activeContentCells := $scratch.Get "activeContentCells" }}
+
+    {{/* somebody please show me how to do a case statement in a golang template */}}
+    
+    {{/* ignore more than max */}}
+    {{ if ge $activeContentCells $max }}
+    
+    {{/* ignore section pages */}}
+    {{ else if $page.IsNode }}
+
+    {{/* ignore excluded page */}}
+    {{ else if eq $page.UniqueID $exclude }}
+
+    {{/* ignore posts from the static sections */}}
+    {{ else if not (in $contentSections $page.Section) }}
+
+    {{/* ignore posts if the filter is defined */}}
+    {{ else if and (ne $filter "all") (ne $page.Section $filter) }}
+
+    {{/* if the page made it this far - we render it */}}
+    {{ else }}
+        {{ $scratch.Set "activeContentCells" (add $activeContentCells 1) }}
+        {{ partial $partial (dict "page" $page "classname" $classname "linkClassname" $linkClassname) }}
+        {{ if (modBool (add $activeContentCells 1) $cols) }}
+</div>
+<div class="row">
+        {{ end }}
+    {{ end }}
+
+{{ end }}
+</div>

@@ -1,0 +1,20 @@
+<section class="white center" id="what-does-it-do">
+    <div class="container">
+        <h2>{{ .title }}</h2>
+        <p class="text-light-blue">{{ .strapline }}</p>
+
+        <div class="row">
+            {{ range $index, $page := .highlights }}
+              <div class="item">
+                  <div class="image">
+                    <img src="{{ .img }}">
+                </div>
+                <div class="text">
+                    <h3>{{ .title }}</h3>
+                    <p>{{ .desc | markdownify }}</p>
+                </div>
+              </div>
+            {{ end }}
+        </div>
+    </div>
+</section>

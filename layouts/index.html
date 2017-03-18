@@ -1,0 +1,62 @@
+{{ define "appendtitle" }} | Kubernetes Accelerated{{ end }}
+{{ define "head" }}
+    <link href="/css/home.css" rel="stylesheet"/>
+{{ end }}
+{{ define "navbar" }}
+<div class="container" id="header">
+    <!-- Above Lead Image -->
+    <nav class="navbar transparent atop">
+        {{ partial "navbar/container.html" (dict "id" "navbar1" "logoColor" "white" "root" .) }}
+    </nav>
+    <!-- Hidden Navbar -->
+    <nav class="navbar navbar-fixed-top above" id="dynamic-nav">
+
+        {{ partial "navbar/container.html" (dict "id" "navbar2" "logoColor" "white" "root" .) }}
+    </nav>
+</div>
+{{ end }}
+{{ define "body" }}
+<div class="container-fluid" id="lead-image">
+    <div class="video"></div>
+    <div class="overlay"></div>
+
+    {{ partial "panels/masthead.html" .Site.Data.config.headline.homepage }}
+
+    <div class="down-arrow">
+        <img src="/img/png/arrow-down.png"/>
+    </div>
+</div>
+
+
+<div class="container-fluid" id="home-content">
+
+    {{ partial "panels/intro.html" .Site.Data.config.headline.getStarted }}
+
+    {{ partial "panels/people.html" }}
+
+    {{ partial "panels/k8s_summary.html" .Site.Data.config.panels.k8s_summary }}
+
+    {{ partial "panels/partners.html" .Site.Data.config.panels.partners }}
+
+    {{ partial "panels/testimonials.html" .Site.Data.config.panels.testimonials }}
+
+    {{ partial "panels/latestinsights.html" . }}
+
+    {{ partial "footer/index.html" . }}
+
+</div>
+
+{{ end }}
+
+{{ define "footer" }}
+<!-- 
+    ignore the default footer because for the homepage because it needs 
+    to live inside the container div for a reason I don't yet understand
+ -->
+<div></div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="/lib/vide/jquery.vide.min.js"></script>
+<script src="/js/home.js"></script>
+{{ end }}

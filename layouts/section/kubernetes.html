@@ -1,0 +1,73 @@
+{{ define "title" }} | Kubernetes{{ end }}
+{{ define "head" }}
+    <link href="/css/kubernetes.css" rel="stylesheet"/>
+    <link href="/css/timeline.css" rel="stylesheet"/>
+{{ end }}
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+{{ define "body" }}
+
+<div class="container-fluid" id="page-content">
+  {{ partial "panels/headline.html" .Site.Data.config.headline.kubernetes }}
+  {{ partial "panels/timeline.html" .Site.Data.config.panels.k8s_timeline }}
+  {{ partial "panels/image_summary.html" .Site.Data.config.panels.k8s_images }}
+  {{ partial "panels/k8s_numbers.html" .Site.Data.config.panels.k8s_images }}
+  {{ partial "panels/highlights.html" .Site.Data.config.panels.k8s_highlights }}
+  {{ partial "panels/paragraph.html" .Site.Data.config.panels.k8s_close }}
+
+</div>
+
+{{ end }}
+
+{{ define "scripts" }}
+<script src="/js/timeline.js"></script>
+<script>
+
+  var initialCommit = '{{ .Site.Data.config.panels.k8s_numbers.initialCommit }}'
+  var githubApi = '{{ .Site.Data.config.panels.k8s_numbers.api }}'
+
+  function latestCommit(done) {
+    $.getJSON(githubApi + '/git/refs/heads/master', function(data) {
+      done(data.object.sha)
+    })
+  }
+
+  function compareCommits(latest, done) {
+    $.getJSON(githubApi + '/compare/' + initialCommit + '...' + latest, done)
+  }
+
+  function getTotalCommits(done) {
+    latestCommit(function(latest) {
+      compareCommits(latest, function(stats) {
+        done(stats.ahead_by + 1)
+      })
+    })
+  }
+
+  function getTotalStars(done) {
+    $.getJSON(githubApi, function(data) {
+      done(data.stargazers_count)
+    })
+  }
+  function loadAllStats(done) {
+    getTotalCommits(function(total) {
+      $('#k8s-numbers-commits').html(total)
+    })
+
+    getTotalStars(function(total) {
+      $('#k8s-numbers-stars').html(total)
+    })
+  }
+
+  // open all timeline links in a new window
+  $(function() {
+    $('#timeline a').each(function() {
+      if($(this).hasClass('timelineNav')) return
+      $(this).attr('target', '_blank')
+    })
+
+    loadAllStats()
+  })
+</script>
+{{ end }}

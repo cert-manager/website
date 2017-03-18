@@ -1,0 +1,74 @@
+{{ define "title" }} | {{ .Title }}{{ end }}
+{{ define "head" }}
+    <link href="/css/insights.css" rel="stylesheet"/>
+{{ end }}
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+{{ define "body" }}
+
+<div class="container-fluid" id="page-content">
+
+    <section class="white center" id="blog">
+        <div style="align-items: center; display: flex; justify-content: center;">
+          <div style="max-width: 800px;">
+            <h1>{{ .Title }}</h1>
+
+
+          </div>
+        </div>
+
+        <div class="blog-entry">
+            <div class="meta">
+                <p>
+                    {{ .Params.author }} |
+                    <span class="text-light-alt">{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
+                    <span class="social">
+                        <a href="#">
+                            <img src="/img/png/social-facebook.png" />
+                        </a>
+                        <a href="#">
+                            <img src="/img/png/social-linkedin.png" />
+                        </a>
+                        <a href="#">
+                            <img src="/img/png/social-twitter.png" />
+                        </a>
+                    </span>
+                </p>
+            </div>
+
+            <div class="image">
+                <img src="/img/jpg/engineering-lego.jpg" />
+            </div>
+
+            {{ if isset .Params "strapline" }}
+              <div class="content">
+                <h3>{{ .Params.strapline }}</h3>
+              </div>
+            {{ end }}
+
+            <div class="content">
+              {{ .Content }}
+            </div>
+        </div>
+    </section>
+
+    {{ partial "widgets/contentinfo.html" (dict "root" . "filter" .Section "exclude" .UniqueID) }}
+
+    {{ if gt (.Scratch.Get "activeContentCells") 0 }}
+        <div id="listing">
+            <section class="white bordered tight" id="insights">
+                <div class="container">
+                    <h2 class="text-center">More Content...</h2>
+
+
+                    <div class="posts">
+                        {{ partial "widgets/contentgrid.html" (dict "root" . "filter" .Section "exclude" .UniqueID "max" 3) }}
+                    </div>
+                </div>
+            </section>
+        </div>
+    {{ end }}
+</div>
+
+{{ end }}

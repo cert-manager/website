@@ -1,0 +1,48 @@
+label {
+    font-weight: normal;
+    margin-bottom: 1em;
+    font-size: 1.1em;
+}
+
+label.long {
+    width: 100%;
+}
+
+input[type="text"], input[type="email"] {
+    padding: 1em;
+    background: white;
+    height: auto;
+    border-radius: 0;
+    border: 1px solid #DDDDDD;
+}
+
+.form-group {
+    margin-bottom: 3em;
+}
+
+textarea#mce-MMERGE5 {
+    padding: 1em;
+    font-size: 1.1em;
+    height: 320px;
+    border-radius: 0;
+}
+
+.checkbox-inline {
+    padding: 14px;
+    margin-left: 4px;
+    margin-right: 2em;
+}
+
+input[type=checkbox] {
+    -webkit-appearance: radio;
+    -moz-appearance: radio;
+    -ms-appearance: radio;
+}
+
+.btn-default {
+    padding: 1em 4em;
+    color: white;
+    background: #1768E2;
+    border-radius: 0;
+}
+

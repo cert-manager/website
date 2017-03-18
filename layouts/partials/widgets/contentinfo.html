@@ -1,0 +1,33 @@
+{{/* tells you how many items of content are in the given query */}}
+
+{{ $data := .root.Site.Pages }}
+{{ $scratch := .root.Scratch }}
+{{ $contentSections := .root.Site.Data.config.contentSections }}
+{{ $max := default (len $data) .max }}
+{{ $exclude := default "" .exclude }}
+{{ $filter := default "all" .filter }}
+{{ $scratch.Set "activeContentCells" 0 }}
+
+{{ range $index, $page := $data }}
+
+    {{/* ignore more than max */}}
+    {{ if ge $index $max }}
+    
+    {{/* ignore section pages */}}
+    {{ else if $page.IsNode }}
+
+    {{/* ignore excluded page */}}
+    {{ else if eq $page.UniqueID $exclude }}
+
+    {{/* ignore posts from the static sections */}}
+    {{ else if not (in $contentSections $page.Section) }}
+
+    {{/* ignore posts if the filter is defined */}}
+    {{ else if and (ne $filter "all") (ne $page.Section $filter) }}
+
+    {{/* if the page made it this far - we render it */}}
+    {{ else }}
+        {{ $scratch.Set "activeContentCells" (add ($scratch.Get "activeContentCells") 1) }}
+    {{ end }}
+
+{{ end }}

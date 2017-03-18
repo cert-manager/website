@@ -1,0 +1,8 @@
+{{ $active := .active }}
+{{ range .links }}
+  <li>
+    <a href="{{ .link }}"{{ if hasPrefix $active .link }} class="current"{{ end }}>
+      {{ .name }}
+    </a>
+  </li>
+{{ end }}

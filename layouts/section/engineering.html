@@ -1,0 +1,51 @@
+{{ define "title" }} | Engineering{{ end }}
+{{ define "head" }}
+    <link href="/css/engineering.css" rel="stylesheet"/>
+{{ end }}
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+{{ define "body" }}
+
+
+<div class="container-fluid" id="page-content">
+
+  {{ partial "panels/blueheadline.html" .Site.Data.config.headline.engineering }}
+  {{ partial "panels/thinintro.html" .Site.Data.config.panels.engineering_intro }}
+  
+  <section class="white center thin" id="engineering">
+      <div class="container">
+          <div class="row">
+
+          {{ range $index, $page := .Data.Pages }}
+
+              <div class="engineering-block">
+                  <div class="image-zoom-container">
+                      <a href="{{ $page.URL }}"><img src="{{ $page.Params.thumb }}"></a>
+                  </div>
+                  <div class="text">
+                      <h3>{{ $page.Params.title }}</h3>
+                      <p><a href="{{ $page.URL }}">{{ $page.Params.linkTitle }}</a></p>
+                  </div>
+              </div>
+
+              {{ if modBool $index 2 }}
+                </div>
+                <div class="row">
+              {{ end }}
+              
+              
+          {{ end }}
+
+          </div>
+          
+      </div>
+  </section>
+
+</div>
+
+{{ end }}
+
+{{ define "scripts" }}
+
+{{ end }}

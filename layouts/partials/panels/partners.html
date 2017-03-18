@@ -1,0 +1,18 @@
+  <section class="blue center" id="partners">
+      <div class="text-light">
+      
+          <h2>We work with</h2>
+
+          <div class="logo-grid">
+            {{ partial "widgets/grid.html" (dict "partial" "widgets/logo" "data" .workedWith) }}
+          </div>
+      
+          
+          <h2>In the news</h2>   
+
+          <div class="logo-grid last"> 
+            {{ partial "widgets/grid.html" (dict "partial" "widgets/logo" "data" .inTheNews) }}
+          </div>
+  
+      </div>
+  </section>

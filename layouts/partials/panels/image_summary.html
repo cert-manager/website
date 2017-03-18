@@ -1,0 +1,25 @@
+<section class="white tight" id="timeline-overview">
+    {{ range $index, $page := . }}
+        {{ if modBool $index 2 }}
+        <div class="row">
+        {{ else }}
+        <div class="row reverse">
+        {{ end }}
+            <div class="image">
+                <img src="{{ .img }}">
+            </div>
+            <div class="text">
+                <div class="centred-text">
+                    <div class="text-container">
+                        <h2>{{ .title }}</h2>
+                        <p>{{ .desc | markdownify }}</p>
+                        <p class="text-light-blue">Image credit:
+                            <a href="http://www.google.co.uk/about/datacenters/gallery/#/tech/2">
+                                Google Data Centres</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    {{ end }}
+</section>

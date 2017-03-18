@@ -1,0 +1,22 @@
+{{ $data := .data }}
+{{ $partial := .partial }}
+{{ $cols := default 3 .cols }}
+
+{{/*     floor(number of items / cols) + items % cols == 0 ? 0 : 1                            */}}
+{{ $rows := add (div (len $data) $cols) (int (not (modBool (len $data) $cols))) }}
+{{ $index := 0 }}
+
+{{ range $row := (seq 1 $rows) }}
+    {{ $zrow := sub $row 1 }}
+    <div class="row">
+    {{ range $col := (seq 1 $cols) }}
+        {{ $zcol := sub $col 1 }}
+        {{ $index := add (mul $zrow $cols) $zcol }}
+        {{ if isset $data $index }}
+            {{ partial $partial (index $data $index) }}
+        {{ else }}
+            {{ partial $partial (dict "filler" true) }}
+        {{ end }}
+    {{ end }}
+    </div>
+{{ end }}
