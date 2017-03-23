@@ -66,7 +66,14 @@ headline:
 
   homepage:
     headline: Kubernetes Accelerated
-    strapline: Accelerate your path to Enterprise Cloud Native
+    strapline: >
+      Accelerate your path to Enterprise Cloud Native
+
+  engine:
+    headline: Get Started.
+    strapline: >
+      Jetstack is an independent services company that builds modern,   
+      cloud-native infrastructure using Kubernetes.
 
   getStarted:
     headline: Get Started.

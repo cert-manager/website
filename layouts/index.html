@@ -30,6 +30,8 @@
 
 <div class="container-fluid" id="home-content">
 
+    {{ partial "panels/engine.html" .Site.Data.config.headline.engine }}
+
     {{ partial "panels/intro.html" .Site.Data.config.headline.getStarted }}
 
     {{ partial "panels/people.html" }}

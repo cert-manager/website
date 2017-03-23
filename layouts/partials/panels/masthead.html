@@ -1,6 +1,6 @@
 <div class="container">
     <div class="masthead text-light">
         <h1>{{ .headline }}</h1>
-        <p class="text-light">{{ .strapline }}</p>
+        <p class="text-light" style="width:600px;">{{ .strapline | markdownify }}</p>
     </div>
 </div>
