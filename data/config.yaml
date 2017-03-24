@@ -169,6 +169,9 @@ panels:
       - name: elevate
         img: /img/png/elevate.png
         link: http://thinkelevate.com/
+      - name: ovo
+        img: /img/png/ovo-logo.png
+        link: https://www.ovoenergy.com/
       - name: contact
         button: Get in touch
         link: /contact/
