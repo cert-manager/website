@@ -376,13 +376,10 @@ section.blue {
     background: #1B1C29;
 }
 
-<<<<<<< HEAD
 section.darkblue {
     background: #080d15;
 }
 
-=======
->>>>>>> master
 section.grey {
     background: #f2f2f2;
 }
@@ -411,19 +408,11 @@ section.bordered {
 }
 
 #header nav.opened .navbar-brand {
-<<<<<<< HEAD
     padding: 0px;
 }
 
 #header nav.opened .navbar-brand img {
     height: 40px;
-=======
-    padding: 15px 30px;
-}
-
-#header nav.opened .navbar-brand img {
-    height: 15px;
->>>>>>> master
 }
 
 #header nav.opened ul {

@@ -32,17 +32,15 @@
 
     {{ partial "panels/engine.html" .Site.Data.config.panels.engine }}
 
-    {{ partial "panels/intro.html" .Site.Data.config.headline.getStarted }}
+    
 
     {{ partial "panels/people.html" }}
-
-    {{ partial "panels/k8s_summary.html" .Site.Data.config.panels.k8s_summary }}
 
     {{ partial "panels/partners.html" .Site.Data.config.panels.partners }}
 
     {{ partial "panels/testimonials.html" .Site.Data.config.panels.testimonials }}
 
-    {{ partial "panels/latestinsights.html" . }}
+    {{ partial "panels/intro.html" .Site.Data.config.headline.getStarted }}
 
     {{ partial "footer/index.html" . }}
 
