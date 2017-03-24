@@ -2,7 +2,7 @@
 title: Marshal
 weight: 4
 thumb: /img/jpg/engineering-marshal.jpg
-background: /img/jpg/marshal-background.jpg
+image: /img/jpg/marshal-background.jpg
 buttontitle: Coming soon! Details to come.
 pagetitle: Readying for Launch
 description:
