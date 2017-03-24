@@ -7,11 +7,12 @@ apikeys:
   typekit: lck0ocu
 
 # what sections fall inside the 'insights' heading
+# NOTE - when some content is added to these sections activate them
 insightSections:
   - blog
-  - whitepapers
-  - infographics
-  - videos
+  #- whitepapers
+  #- infographics
+  #- videos
 
 # page titles by url
 titles:
@@ -54,12 +55,12 @@ menus:
       link: /insights/
     - name: Blog
       link: /blog/
-    - name: Whitepapers
-      link: /whitepapers/
-    - name: Infographics
-      link: /infographics/
-    - name: Videos
-      link: /videos/
+    #- name: Whitepapers
+    #  link: /whitepapers/
+    #- name: Infographics
+    #  link: /infographics/
+    #- name: Videos
+    #  link: /videos/
 
 # large text panels like partials/panels/{headline,calltoaction}
 headline:
