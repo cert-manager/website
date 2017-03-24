@@ -2,7 +2,7 @@
 title: Slingshot
 weight: 2
 thumb: /img/jpg/engineering-slingshot.jpg
-background: /img/jpg/slingshot-background.jpg
+image: /img/jpg/slingshot-background.jpg
 buttontitle: Learn more
 pagetitle: Slingshot
 description: >

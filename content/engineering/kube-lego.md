@@ -2,7 +2,7 @@
 title: Kube-lego
 weight: 1
 thumb: /img/jpg/engineering-lego.jpg
-background: /img/jpg/lego-background.jpg
+image: /img/jpg/lego-background.jpg
 buttontitle: Learn more
 pagetitle: Kube-lego
 description: >
