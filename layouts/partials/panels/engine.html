@@ -1,16 +1,20 @@
   <section class="darkblue center" id="partners">
 
-    <div style="display: inline-block; width: 30%;">
-      <div class="text-light" style="text-align: right;">
-        <p style="font-size: 1.5em;">Toolkits - </p>
-        <p style="font-size: 1.5em;">Engineering - </p>
-        <p style="font-size: 1.5em;">Consulting - </p>
-        <p style="font-size: 1.5em;">Workshops - </p>
-        <p style="font-size: 1.5em;">Training - </p>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td width="50%" align="right" valign="middle">
+
+      <div class="text-light" style="margin-right:100px;">
+        {{ range $index, $item := .items }}
+          <p style="font-size: 1.8em;padding-bottom: 20px;">{{ $item }} - </p>
+        {{ end }}
       </div>
-    </div>
-    <div style="display: inline-block; width: 60%;">
+
+    </td>
+    <td width="50%" align="left" valign="middle">
       <img src="/img/png/engine.png" width="600" />
-    </div>
-      
+    </td>
+    </tr>
+    </table>
+    
   </section>

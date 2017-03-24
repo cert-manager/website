@@ -139,6 +139,15 @@ headline:
 # the idea is to not fix a panel to a section - mix and match!
 panels:
 
+  # the homepage banner with the engine and a list of items
+  engine:
+    items:
+      - Toolkits
+      - Engineering
+      - Consulting
+      - Workshops
+      - Training
+
   # the banner describing k8s features (homepage)
   k8s_summary:
 
