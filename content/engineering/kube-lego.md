@@ -1,6 +1,6 @@
 ---
 title: Kube-Lego
-weight: 1
+weight: 3
 thumb: /img/jpg/engineering-lego.jpg
 image: /img/jpg/lego-background.jpg
 buttontitle: Automated Let's Encrypt certificates for Kubernetes

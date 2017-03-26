@@ -1,6 +1,6 @@
 ---
 title: Jetstack Toolkit
-weight: 2
+weight: 1
 thumb: /img/jpg/engineering-slingshot.jpg
 image: /img/jpg/slingshot-background.jpg
 buttontitle: Production-grade Kubernetes for enterprise
