@@ -32,15 +32,13 @@
 
     {{ partial "panels/engine.html" .Site.Data.config.panels.engine }}
 
-    
+    {{ partial "panels/intro.html" .Site.Data.config.headline.getStarted }}
 
     {{ partial "panels/people.html" }}
 
     {{ partial "panels/partners.html" .Site.Data.config.panels.partners }}
 
     {{ partial "panels/testimonials.html" .Site.Data.config.panels.testimonials }}
-
-    {{ partial "panels/intro.html" .Site.Data.config.headline.getStarted }}
 
     {{ partial "footer/index.html" . }}
 
@@ -49,8 +47,8 @@
 {{ end }}
 
 {{ define "footer" }}
-<!-- 
-    ignore the default footer because for the homepage because it needs 
+<!--
+    ignore the default footer because for the homepage because it needs
     to live inside the container div for a reason I don't yet understand
  -->
 <div></div>
