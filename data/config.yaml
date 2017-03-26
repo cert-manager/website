@@ -70,12 +70,6 @@ headline:
     strapline: >
       Accelerate your path to Enterprise Cloud Native
 
-  engine:
-    headline: Get Started.
-    strapline: >
-      Jetstack is a company that help enterpises in their path to modern
-      cloud-native infrastructure with Kubernetes.
-
   getStarted:
     headline: Who are we?
     strapline: >
