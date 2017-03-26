@@ -143,11 +143,11 @@ panels:
   # the homepage banner with the engine and a list of items
   engine:
     items:
-      - Toolkits
-      - Engineering
-      - Consulting
-      - Workshops
-      - Training
+      - HA cluster deployment and upgrade
+      - Secured clusters by default
+      - Integrated monitoring and logging
+      - Cloud-optimised container networking and policy enforcement
+      # TODO: add Get in touch button (not quite sure how!)
 
   # the banner describing k8s features (homepage)
   k8s_summary:
