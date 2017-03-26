@@ -73,25 +73,25 @@ headline:
   engine:
     headline: Get Started.
     strapline: >
-      Jetstack is an independent services company that builds modern,   
+      Jetstack is an independent services company that builds modern,
       cloud-native infrastructure using Kubernetes.
 
   getStarted:
     headline: Get Started.
     strapline: >
-      Jetstack is an independent services company that builds modern,   
+      Jetstack is an independent services company that builds modern,
       cloud-native infrastructure using Kubernetes.
 
   kubernetes:
     headline: >
-      Kubernetes - The De Facto Standard      
+      Kubernetes - The De Facto Standard
 
       in Container Orchestration
     strapline: A culmination of Ten Years of Running Linux Containers At Google
 
   engineering:
     headline: >
-      Supercharging Kubernetes  
+      Supercharging Kubernetes
 
       with Jetstack Engineering
     strapline: Enhancing your experience a tool at a time
@@ -103,7 +103,7 @@ headline:
 
   about:
     headline: >
-      Powering the hottest startups  
+      Powering the hottest startups
 
       and the largest enterprises
     strapline: Our team reflects a unique blend of specialist skills
@@ -164,9 +164,6 @@ panels:
   partners:
 
     workedWith:
-      - name: clusterhq
-        img: /img/png/clusterhq-logo.png
-        link: https://clusterhq.com/
       - name: googlecp
         img: /img/png/googlecp-logo.png
         link: https://cloud.google.com/
@@ -175,10 +172,10 @@ panels:
         link: https://www.brightpearl.com
       - name: pearson
         img: /img/png/pearson.png
-        link: https://uk.pearson.com/
+        link: https://www.pearson.com/
       - name: elevate
         img: /img/png/elevate.png
-        link: http://thinkelevate.com/
+        link: http://elevatedirect.com/
       - name: ovo
         img: /img/png/ovo-logo.png
         link: https://www.ovoenergy.com/
@@ -206,8 +203,8 @@ panels:
         title: ClusterHQ
         url: http://clusterhq.com/
       quote: >
-        We had a critical piece of engineering to deliver. We were lucky to find Jetstack. 
-        They were professional, easy to work with, and delivered high quality work 
+        We had a critical piece of engineering to deliver. We were lucky to find Jetstack.
+        They were professional, easy to work with, and delivered high quality work
         within an incredibly tight deadline.
     - name: Ed Massey, Head of TechOps
       link:
@@ -223,7 +220,7 @@ panels:
         If you're looking at running kubernetes in production talk to Jetstack.
         Quickly becoming the go to experts in this space
     - name: User of
-      link: 
+      link:
         title: Kube-Lego
         url: https://github.com/jetstack/kube-lego
       quote: >
@@ -301,7 +298,7 @@ panels:
   k8s_highlights:
     title: What does it do?
     strapline: Source Kubernetes.io
-    highlights: 
+    highlights:
       - title: Enables Scale
         img: /img/png/icon-scale.png
         desc: Designed on the same principles that allows Google to run billions of containers a week, Kubernetes can scale without increasing your ops team.
@@ -332,6 +329,6 @@ panels:
 
   engineering_intro:
     text: >
-      Jetstack develop tools to make your experience with   
+      Jetstack develop tools to make your experience with
 
       Kubernetes easier and more productive
