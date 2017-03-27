@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Production Readiness
 weight: 3
-icon: /img/png/icon-service-play.png
+icon: /img/png/icon-service-check.png
 bullets:
   - "Day 1 - On-site cluster review"
   - "Day 2 - On-site cluster review. Major concerns flagged and mitigations proposed immediately"
