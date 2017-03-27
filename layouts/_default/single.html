@@ -21,8 +21,13 @@
         <div class="blog-entry">
             <div class="meta">
                 <p>
-                    {{ .Params.author }} |
-                    <span class="text-light-alt">{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
+                    {{ .Params.author }} 
+                    {{ if isset . "Date" }}
+                        |
+                            <span class="text-light-alt">{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
+                    {{ else }}
+                        <span class="text-light-alt">&nbsp;</span>
+                    {{ end }}
                     <span class="social">
                         <a href="#">
                             <img src="/img/png/social-facebook.png" />
