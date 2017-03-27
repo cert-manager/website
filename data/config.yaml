@@ -1,5 +1,5 @@
 # site wide text config
-title: JetStack
+title: Jetstack
 copyright: © 2017 Jetstack Ltd. All rights reserved.
 
 # apikeys for external services
@@ -25,8 +25,6 @@ titles:
 menus:
 
   navbar:
-    - name: Kubernetes
-      link: /kubernetes/
     - name: Engineering
       link: /engineering/
     - name: Services
@@ -34,7 +32,7 @@ menus:
     - name: About Us
       link: /about/
     - name: Insights
-      link: /insights/
+      link: http://blog.jetstack.io/
 
   social:
     - name: github
