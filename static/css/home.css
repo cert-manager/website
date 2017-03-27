@@ -299,7 +299,7 @@
 }
 
 #testimonials {
-    padding: 10em 0;
+    padding: 0;
 }
 
 #testimonials blockquote {
@@ -322,9 +322,7 @@
 }
 
 #testimonials .pagination {
-    position: absolute;
-    bottom: 0;
-    margin: 59px 0
+    float: right;
 }
 
 #testimonials #carousel .carousel-control-container {
