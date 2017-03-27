@@ -2,7 +2,7 @@
 title: Flocker Volume Plugin
 weight: 4
 thumb: /img/jpg/engineering-flocker.jpg
-image: /img/jpg/flocker-background.jpg
+image: /img/jpg/engineering-flocker.jpg
 buttontitle: A volume plugin for Kubernetes
 pagetitle: Flocker Plugin
 description: >

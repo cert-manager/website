@@ -2,7 +2,7 @@
 title: Marshal
 weight: 2
 thumb: /img/jpg/engineering-marshal.jpg
-image: /img/jpg/marshal-background.jpg
+image: /img/jpg/engineering-marshal.jpg
 buttontitle: Kubernetes-native Database-as-a-Service
 pagetitle: Readying for Launch
 description:

@@ -1,8 +1,8 @@
 ---
 title: Jetstack Toolkit
 weight: 1
-thumb: /img/png/engine.png
-image: /img/png/engine.png
+thumb: /img/jpg/engineering-toolkit.jpg
+image: /img/jpg/engineering-toolkit-image.jpg
 buttontitle: Production-grade Kubernetes for enterprise
 pagetitle: Jetstack Toolkit
 description: >
