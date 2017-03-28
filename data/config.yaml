@@ -163,18 +163,23 @@ panels:
       - name: googlecp
         img: /img/png/googlecp-logo.png
         link: https://cloud.google.com/
-      - name: brightpearl
-        img: /img/png/brightpearl.png
-        link: https://www.brightpearl.com
+      - name: ovo
+        img: /img/png/ovo-logo.png
+        link: https://www.ovoenergy.com/
+      
       - name: pearson
         img: /img/png/pearson.png
         link: https://www.pearson.com/
       - name: elevate
         img: /img/png/elevate.png
         link: http://elevatedirect.com/
-      - name: ovo
-        img: /img/png/ovo-logo.png
-        link: https://www.ovoenergy.com/
+      - name: brightpearl
+        img: /img/png/brightpearl.png
+        link: https://www.brightpearl.com
+      - name: tigera
+        img: /img/png/tigera.png
+        link: https://www.tigera.io/
+      - filler: true
       - name: contact
         button: Get in touch
         link: /contact/

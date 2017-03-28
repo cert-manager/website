@@ -237,13 +237,9 @@
 #partners .row div {
     flex: 1;
     align-self: center;
-    margin: 0 6%;
+    margin: 2% 6%;
     max-height: 55px;
     position: relative;
-}
-
-#partners .row div.logo.googlecp, #partners .row div.logo.elevate {
-    flex: 1.5;
 }
 
 #partners .row div img {
