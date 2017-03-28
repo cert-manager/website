@@ -12,7 +12,7 @@
   {{ partial "panels/headline.html" .Site.Data.config.headline.kubernetes }}
   {{ partial "panels/timeline.html" .Site.Data.config.panels.k8s_timeline }}
   {{ partial "panels/image_summary.html" .Site.Data.config.panels.k8s_images }}
-  {{ partial "panels/k8s_numbers.html" .Site.Data.config.panels.k8s_images }}
+  {{ partial "panels/k8s_numbers.html" .Site.Data.config.panels.k8s_numbers }}
   {{ partial "panels/highlights.html" .Site.Data.config.panels.k8s_highlights }}
   {{ partial "panels/paragraph.html" .Site.Data.config.panels.k8s_close }}
 
@@ -26,6 +26,7 @@
 
   var initialCommit = '{{ .Site.Data.config.panels.k8s_numbers.initialCommit }}'
   var githubApi = '{{ .Site.Data.config.panels.k8s_numbers.api }}'
+  var githubRepo = '{{ .Site.Data.config.panels.k8s_numbers.repo }}'
 
   function latestCommit(done) {
     $.getJSON(githubApi + '/git/refs/heads/master', function(data) {
@@ -50,6 +51,18 @@
       done(data.stargazers_count)
     })
   }
+
+  function getTotalContributors(done) {
+     $.get({
+      url: githubRepo,
+      success: function(data) {
+        var githubPage = $(data)
+        done(githubPage.find("{{ .Site.Data.config.panels.k8s_numbers.contributorSelector }}").html())
+      }  
+    });
+    
+  }
+
   function loadAllStats(done) {
     getTotalCommits(function(total) {
       $('#k8s-numbers-commits').html(total)
@@ -57,6 +70,10 @@
 
     getTotalStars(function(total) {
       $('#k8s-numbers-stars').html(total)
+    })
+
+    getTotalContributors(function(total) {
+      $('#k8s-numbers-contributors').html(total)
     })
   }
 

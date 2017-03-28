@@ -1,11 +1,18 @@
 # site wide text config
-title: JetStack
-copyright: © 2016 Jetstack Ltd. All rights reserved.
+title: Jetstack
+copyright: © 2017 Jetstack Ltd. All rights reserved.
 
 # apikeys for external services
 apikeys:
   typekit: lck0ocu
 
+# what sections fall inside the 'insights' heading
+# NOTE - when some content is added to these sections activate them
+insightSections:
+  - blog
+  #- whitepapers
+  #- infographics
+  #- videos
 
 # page titles by url
 titles:
@@ -18,8 +25,6 @@ titles:
 menus:
 
   navbar:
-    - name: Kubernetes
-      link: /kubernetes/
     - name: Engineering
       link: /engineering/
     - name: Services
@@ -27,7 +32,7 @@ menus:
     - name: About Us
       link: /about/
     - name: Insights
-      link: /insights/
+      link: http://blog.jetstack.io/
 
   social:
     - name: github
@@ -43,52 +48,76 @@ menus:
       img: /img/png/social-twitter-white.png
       link: https://twitter.com/jetstackhq
 
-
+  insights:
+    - name: All
+      link: /insights/
+    - name: Blog
+      link: /blog/
+    #- name: Whitepapers
+    #  link: /whitepapers/
+    #- name: Infographics
+    #  link: /infographics/
+    #- name: Videos
+    #  link: /videos/
 
 # large text panels like partials/panels/{headline,calltoaction}
 headline:
 
   homepage:
     headline: Kubernetes Accelerated
-    strapline: Extract maximum value from the market's leading container orchestrator.
+    strapline: >
+      Your path to Enterprise Cloud Native
 
   getStarted:
-    headline: Get Started.
+    headline: Who are we?
     strapline: >
-      Jetstack is an independent services company that builds modern,   
-      cloud-native infrastructure using Kubernetes.
+      Jetstack is a UK-based company that help enterpises in their path to modern
+      cloud-native infrastructure. We live and breathe Kubernetes and open source.
 
   kubernetes:
-    # leave a blank line to insert a line-break
     headline: >
-      Kubernetes - The De Facto Standard      
+      Kubernetes - The De Facto Standard
 
       in Container Orchestration
     strapline: A culmination of Ten Years of Running Linux Containers At Google
 
   engineering:
-    # leave a blank line to insert a line-break
     headline: >
-      Supercharging Kubernetes  
+      Supercharging Kubernetes
 
       with Jetstack Engineering
     strapline: Enhancing your experience a tool at a time
 
+  services:
+    headline: >
+      Accelerate Your Kubernetes Project
+    strapline: With Jetstack services
+
+  about:
+    headline: >
+      Powering the hottest startups
+
+      and the largest enterprises
+    strapline: Our team reflects a unique blend of specialist skills
+
   insights:
     headline: Resources, Blogs, Events, Tools, Meetups
-    strapline: We live and breathe the Kubernetes Project yo
+    strapline: We live and breathe the Kubernetes Project
 
+  contact:
+    headline: Get in Touch
+    strapline: and get to market quicker
   blog:
     headline: Read all about it
-    strapline: We tell good stories yo
+    strapline: We tell good stories
 
   whitepapers:
     headline: Get clever
-    strapline: I have no idea what any of this means yo
+    strapline: I have no idea what any of this means
 
   infographics:
     headline: ICanHaz crayons?
-    strapline: yo Banksy move over
+    strapline: Banksy move over
 
   videos:
     headline: JetTube
@@ -96,12 +125,25 @@ headline:
 
   footer:
     headline: Get Started With Jetstack
-    strapline: Get in touch yo
+    strapline: Get in touch
     link: /contact/
 
 # various types of content panel that can appear on section pages
 # the idea is to not fix a panel to a section - mix and match!
 panels:
+
+  # the homepage banner with the engine and a list of items
+  engine:
+    headline: The Jetstack Toolkit
+    strapline: Production-Grade Kubernetes for Enterprise Cloud-Native
+    button: Find out more
+    link: /engineering/
+    items:
+      - HA cluster deployment and upgrade
+      - Secured clusters by default
+      - Integrated monitoring and logging
+      - Cloud-optimised container networking and policy enforcement
+      # TODO: add Get in touch button (not quite sure how!)
 
   # the banner describing k8s features (homepage)
   k8s_summary:
@@ -118,21 +160,26 @@ panels:
   partners:
 
     workedWith:
-      - name: clusterhq
-        img: /img/png/clusterhq-logo.png
-        link: https://clusterhq.com/
       - name: googlecp
         img: /img/png/googlecp-logo.png
         link: https://cloud.google.com/
+      - name: ovo
+        img: /img/png/ovo-logo.png
+        link: https://www.ovoenergy.com/
+      
+      - name: pearson
+        img: /img/png/pearson.png
+        link: https://www.pearson.com/
+      - name: elevate
+        img: /img/png/elevate.png
+        link: http://elevatedirect.com/
       - name: brightpearl
         img: /img/png/brightpearl.png
         link: https://www.brightpearl.com
-      - name: pearson
-        img: /img/png/pearson.png
-        link: https://uk.pearson.com/
-      - name: elevate
-        img: /img/png/elevate.png
-        link: http://thinkelevate.com/
+      - name: tigera
+        img: /img/png/tigera.png
+        link: https://www.tigera.io/
+      - filler: true
       - name: contact
         button: Get in touch
         link: /contact/
@@ -157,8 +204,8 @@ panels:
         title: ClusterHQ
         url: http://clusterhq.com/
       quote: >
-        We had a critical piece of engineering to deliver. We were lucky to find Jetstack. 
-        They were professional, easy to work with, and delivered high quality work 
+        We had a critical piece of engineering to deliver. We were lucky to find Jetstack.
+        They were professional, easy to work with, and delivered high quality work
         within an incredibly tight deadline.
     - name: Ed Massey, Head of TechOps
       link:
@@ -174,7 +221,7 @@ panels:
         If you're looking at running kubernetes in production talk to Jetstack.
         Quickly becoming the go to experts in this space
     - name: User of
-      link: 
+      link:
         title: Kube-Lego
         url: https://github.com/jetstack/kube-lego
       quote: >
@@ -252,7 +299,7 @@ panels:
   k8s_highlights:
     title: What does it do?
     strapline: Source Kubernetes.io
-    highlights: 
+    highlights:
       - title: Enables Scale
         img: /img/png/icon-scale.png
         desc: Designed on the same principles that allows Google to run billions of containers a week, Kubernetes can scale without increasing your ops team.
@@ -264,8 +311,15 @@ panels:
         desc: Kubernetes is open source giving you the freedom to take advantage of on-premise, hybrid, or public cloud infrastructure, letting you effortlessly move workloads to where it matters to you.
 
   k8s_numbers:
+    manualContributors: 1100+
+    manualCommits: 45000+
+    manualStars: 21000+
     api: https://api.github.com/repos/kubernetes/kubernetes
+    repo: https://crossorigin.me/https://github.com/kubernetes/kubernetes
     initialCommit: 2c4b3a562ce34cddc3f8218a2c4d11c7310e6d56
+    # we scrape the contributors from the raw html (it's the only way trust)
+    # if github change their markup you cam change the jQuery selector to extract the contributors span here
+    contributorSelector: "a[href='/kubernetes/kubernetes/graphs/contributors'] span.num"
 
   k8s_close:
     text: >
@@ -276,17 +330,6 @@ panels:
 
   engineering_intro:
     text: >
-      Jetstack develop tools to make your experience with   
+      Jetstack develop tools to make your experience with
 
       Kubernetes easier and more productive
-
-# stuff you can probably ignore
-system:
-  # sections we don't render as a list of posts but instead are static pages
-  # that combine various 'panels' (which live inside layouts/partials/panels)
-  contentSections:
-    - kubernetes
-    - engineering
-    - services
-    - about
-    - insights

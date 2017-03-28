@@ -96,7 +96,7 @@ function defineMap(location) {
     var map = new google.maps.Map(mapElement, createMapOptions(center));
 
     var markerIcon = {
-        url: "./dist/img/png/map-marker.png",
+        url: "/img/png/map-marker.png",
         size: new google.maps.Size(28, 28),
         origin: new google.maps.Point(0, 0),
         scaledSize: new google.maps.Size(14, 14)
@@ -109,7 +109,7 @@ function defineMap(location) {
         icon: markerIcon,
     });
 
-    var content = '<img src="./dist/img/png/logo-black.png" class="contact-map-logo">'
+    var content = '<img src="/img/png/logo-black.png" class="contact-map-logo">'
 
     var bristolInfoContent = content +
         '<address class="contact-map-address">' +

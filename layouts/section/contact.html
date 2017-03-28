@@ -1,0 +1,128 @@
+{{ define "title" }} | Services{{ end }}
+{{ define "head" }}
+    <link href="/css/contact.css" rel="stylesheet"/>
+    <link href="/css/form.css" rel="stylesheet"/>
+{{ end }}
+{{ define "body" }}
+
+<div class="container-fluid" id="page-content">
+
+  {{ partial "panels/blueheadline.html" .Site.Data.config.headline.contact }}
+  
+
+      <section class="grey" id="form">
+        <div class="container">
+            <div id="mc_embed_signup">
+                <form action="https://jetstack.us11.list-manage.com/subscribe/post?u=f7f959cbd3a1f0e1bc2671c92&amp;id=09fe7cd7c1"
+                      method="post"
+                      id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+                      novalidate>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="mce-FNAME">Name</label>
+                            <input type="text" class="form-control" name="FNAME" id="mce-FNAME" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="mce-MMERGE2">Title</label>
+                            <input type="text" class="form-control" name="MMERGE2" id="mce-MMERGE2" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="mce-MMERGE3">Company</label>
+                            <input type="text" class="form-control" name="MMERGE3" id="mce-MMERGE3"
+                                   placeholder="Company">
+                        </div>
+                        <div class="form-group">
+                            <label for="mce-EMAIL">Email <span class="asterisk">*</span></label>
+                            <input type="email" required="required" class="form-control" name="EMAIL" id="mce-EMAIL"
+                                   placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="mce-MMERGE4">Phone Number</label>
+                            <input type="text" class="form-control" name="MMERGE4" id="mce-MMERGE4"
+                                   placeholder="Phone Number">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="mce-MMERGE5">Tell us about your project</label>
+                            <textarea class="form-control" name="MMERGE5" id="mce-MMERGE5"
+                                      placeholder="Tell us about your project"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="long">Contact Preference</label>
+                            <label for="mce-group[13049]-13049-0" class="checkbox-inline">
+                                <input type="checkbox" id="mce-group[13049]-13049-0" name="group[13049][1]"
+                                       value="email"> Email
+                            </label>
+                            <label for="mce-group[13049]-13049-1" class="checkbox-inline">
+                                <input type="checkbox" id="mce-group[13049]-13049-1" name="group[13049][2]"
+                                       value="telephone"> Telephone
+                            </label>
+                        </div>
+                        <div id="mce-responses" class="clear">
+                            <div class="response" id="mce-error-response" style="display:none"></div>
+                            <div class="response" id="mce-success-response" style="display:none"></div>
+                        </div>
+                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                                                                                                  name="b_f7f959cbd3a1f0e1bc2671c92_09fe7cd7c1"
+                                                                                                  tabindex="-1"
+                                                                                                  value=""></div>
+                        <div class="form-group submit">
+                            <label for="submit" class="long">&nbsp;</label>
+                            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                    <script type='text/javascript'
+                            src='https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+                    <script type='text/javascript'>(function ($) {
+                        window.fnames = new Array();
+                        window.ftypes = new Array();
+                        fnames[1] = 'FNAME';
+                        ftypes[1] = 'text';
+                        fnames[2] = 'MMERGE2';
+                        ftypes[2] = 'text';
+                        fnames[3] = 'MMERGE3';
+                        ftypes[3] = 'text';
+                        fnames[0] = 'EMAIL';
+                        ftypes[0] = 'email';
+                        fnames[4] = 'MMERGE4';
+                        ftypes[4] = 'number';
+                        fnames[5] = 'MMERGE5';
+                        ftypes[5] = 'text';
+                    }(jQuery));
+                    var $mcj = jQuery.noConflict(true);</script>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="white center tight" id="locations">
+        <div class="container">
+            <h2>Our Offices</h2>
+            <p class="locations">
+                <a href="javascript:void(0)" onclick="defineMap('london')" class="text-light-alt" id="london">London</a>
+                <a href="javascript:void(0)" onclick="defineMap('bristol')" class="text-light-alt current" id="bristol">Bristol</a>
+            </p>
+        </div>
+    </section>
+    <section class="white tight" id="map">
+    </section>
+
+</div>
+
+{{ end }}
+
+{{ define "scripts" }}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA-AXoCphhOdRV_3IwXMuakFyZyiqmA7o"></script>
+<script type="text/javascript" src="/js/map.js"></script>
+<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/26/10/map.js"></script>
+{{ end }}
+
+
+{{ define "footer" }}
+    {{ partial "footer/minimal.html" . }}
+{{ end }}

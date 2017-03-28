@@ -95,8 +95,12 @@ a {
     z-index: 3;
 }
 
+.navbar-brand {
+    padding: 0px !important;
+}
 .navbar-brand img {
-    height: 20px;
+    margin-top: 5px;
+    height: 40px;
 }
 
 .navbar-nav > li > a {
@@ -373,6 +377,10 @@ section.blue {
     background: #1B1C29;
 }
 
+section.darkblue {
+    background: #080d15;
+}
+
 section.grey {
     background: #f2f2f2;
 }
@@ -401,11 +409,11 @@ section.bordered {
 }
 
 #header nav.opened .navbar-brand {
-    padding: 15px 30px;
+    padding: 0px;
 }
 
 #header nav.opened .navbar-brand img {
-    height: 15px;
+    height: 40px;
 }
 
 #header nav.opened ul {
@@ -459,4 +467,15 @@ section.bordered {
 #header nav.opened .nav > li > a {
     font-size: 18px;
     padding: 0.75em;
+}
+
+
+
+.calltoactionbutton {
+    margin-top: 2em;
+    width: 213px;
+    height: 58px;
+    font-size: 18px;
+    padding: 0;
+    line-height: 55px;
 }

@@ -237,13 +237,9 @@
 #partners .row div {
     flex: 1;
     align-self: center;
-    margin: 0 6%;
+    margin: 2% 6%;
     max-height: 55px;
     position: relative;
-}
-
-#partners .row div.logo.googlecp, #partners .row div.logo.elevate {
-    flex: 1.5;
 }
 
 #partners .row div img {
@@ -264,6 +260,8 @@
     height: 55px;
     font-size: 1.25em;
     line-height: 2em;
+    color: white;
+    background: #1768E2;
 }
 
 @media (max-width: 769px) {
@@ -299,7 +297,7 @@
 }
 
 #testimonials {
-    padding: 10em 0;
+    padding: 0;
 }
 
 #testimonials blockquote {
@@ -322,9 +320,7 @@
 }
 
 #testimonials .pagination {
-    position: absolute;
-    bottom: 0;
-    margin: 59px 0
+    float: right;
 }
 
 #testimonials #carousel .carousel-control-container {

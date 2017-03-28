@@ -6,7 +6,7 @@
 {{ $scratch.Set "currentURL" .root.URL }}
 
 {{/* highlight the insights menu if it's a content section */}}
-{{ range .root.Site.Data.config.contentSections }}
+{{ range .root.Site.Data.config.insightSections }}
     {{ if hasPrefix $currentUrl (printf "/%s/" .) }}
         {{ $scratch.Set "currentURL" "/insights/" }}
     {{ end }}
@@ -22,7 +22,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/"><img src="/img/png/logo-{{ $logoColor }}.png"/></a>
+        <a class="navbar-brand" href="/"><img src="/img/png/newlogo{{ default "white" .logoColor }}.png" /></a>
     </div>
     <div id="{{ $id }}" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">

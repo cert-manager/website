@@ -5,17 +5,17 @@
 
         <div class="row">
             <div class="item">
-                <div id="k8s-numbers-commits" class="large text-light">...</div>
+                <div id="k8s-numbers-commits" class="large text-light">{{ .manualCommits }}</div>
                 <div class="small text-light-alt">Commits</div>
             </div>
 
             <div class="item">
-                <div id="k8s-numbers-contributors" class="large text-light">1070</div>
+                <div id="k8s-numbers-contributors" class="large text-light">{{ .manualContributors }}</div>
                 <div class="small text-light-alt">Contributors</div>
             </div>
 
             <div class="item">
-                <div id="k8s-numbers-stars" class="large text-light">...</div>
+                <div id="k8s-numbers-stars" class="large text-light">{{ .manualStars }}</div>
                 <div class="small text-light-alt">Stars</div>
             </div>
         </div>

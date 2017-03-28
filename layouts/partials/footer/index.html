@@ -3,23 +3,5 @@
 
 <div id="footer">
     {{ partial "panels/calltoaction.html" $config.headline.footer }}
-
-    <section class="blue tight main-footer">
-        <div class="container">
-            <div class="row">
-                <div class="item logo">
-                    <a href="/"><img src="/img/png/logo-white.png"/></a>
-                </div>
-                <div class="item social" style="color:white;">
-                    {{ partial "menus/social.html" (dict "links" $config.menus.social) }}
-                </div>
-            </div>
-            <div class="row footer-menu" style="color:white;">
-                {{ partial "menus/div.html" (dict "links" $config.menus.navbar "active" $url) }}
-            </div>
-            <div class="copyright">
-                <p>{{ $config.copyright }}</p>
-            </div>
-        </div>
-    </section>
+    {{ partial "footer/section.html" . }}
 </div>

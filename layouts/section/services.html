@@ -1,4 +1,45 @@
 {{ define "title" }} | Services{{ end }}
+{{ define "head" }}
+    <link href="/css/services.css" rel="stylesheet"/>
+{{ end }}
 {{ define "body" }}
 
+<div class="container-fluid" id="page-content">
+
+  {{ partial "panels/blueheadline.html" .Site.Data.config.headline.services }}
+  
+  <div id="services">
+    {{ range $index, $page := .Data.Pages }}
+      {{ if modBool $index 2 }}
+      <section class="white bordered">
+      {{ else }}
+      <section class="grey bordered">
+      {{ end }}
+        <div class="container">
+          <div class="row">
+            <div class="icon">
+              <img src="{{ $page.Params.icon }}">
+            </div>
+            <div class="service">
+              <h2>{{ $page.Title }}</h2>
+              {{ range $index, $bullet := $page.Params.bullets }}
+                <p class="text-light-alt">{{ $bullet }}</p>
+              {{ end }}
+            </div>
+            <div class="detail">
+              {{ $page.Content }}
+              <p><a href="/contact/" class="btn btn-primary">Find Out More</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    {{ end }}
+  </div>
+</div>
+
+{{ end }}
+
+
+{{ define "footer" }}
+    {{ partial "footer/minimal.html" . }}
 {{ end }}
