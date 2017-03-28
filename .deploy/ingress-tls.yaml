@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: website
+  annotations:
+    kubernetes.io/ingress.class: 'nginx'
+    kubernetes.io/tls-acme: 'true'
+  labels:
+    app: website
+spec:
+  tls:
+  - hosts:
+    - www.jetstack.io
+    - jetstack.io
+    secretName: 'www-jetstack-io-tls'
+  rules:
+  - host: www.jetstack.io
+    http:
+      paths:
+      - backend:
+          serviceName: website
+          servicePort: 80
+  - host: jetstack.io
+    http:
+      paths:
+      - backend:
+          serviceName: website
+          servicePort: 80

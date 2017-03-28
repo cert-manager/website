@@ -1,0 +1,71 @@
+stages:
+- build
+- docker-build
+- deploy
+
+variables:
+  HUGO_VERSION: '0.18.1'
+
+Build site:
+  image: munnerz/docker-hugo:$HUGO_VERSION
+  stage: build
+  script:
+    - hugo -v -d ./_output --logFile=log && test "$(cat log | grep "^ERROR:\|^WARN:"| wc -l )" -eq "0"
+  artifacts:
+    paths:
+      - ./_output
+  tags:
+  - docker
+
+Build docker image:
+  image: docker:1.13.1
+  stage: docker-build
+  services:
+    - docker:1.13.1-dind
+  script:
+    # Authenticate docker daemon with Google Container Registry
+    - docker login -u _json_key -p "$(echo "$GCLOUD_SVC_ACCT" | base64 -d)" https://eu.gcr.io
+    - docker build -t "$IMAGE_NAME":"$CI_BUILD_REF" .
+    - docker push "$IMAGE_NAME":"$CI_BUILD_REF"
+  variables:
+    IMAGE_NAME: eu.gcr.io/jetstack-gke/website
+  tags:
+  - docker
+
+.deploy: &deploy
+  image: google/cloud-sdk
+  before_script:
+    # Write service account to file
+    - mkdir -p ~/.kube/config
+    - echo "$KUBECONFIG_DATA" > ~/.kube/config
+    - echo "$GCLOUD_SVC_ACCT" | base64 -d > gcloud-svc-acct.json
+    - gcloud auth activate-service-account --key-file gcloud-svc-acct.json
+    - gcloud container clusters get-credentials "$GKE_CLUSTER_NAME"
+    # Set this so kubectl can find our service account (see: https://github.com/kubernetes/kubernetes/issues/30617)
+    - export GOOGLE_APPLICATION_CREDENTIALS="$(pwd)/gcloud-svc-acct.json"
+    # Source template script file
+    - source .deploy/template.sh
+    - template ".deploy/deployment.yaml"
+
+Deploy to production:
+  <<: *deploy
+  stage: deploy
+  variables:
+    IMAGE_TAG: $CI_BUILD_REF
+    IMAGE_NAME: eu.gcr.io/jetstack-gke/website
+    GKE_CLUSTER_NAME: jetstack-infra
+    CLOUDSDK_CORE_PROJECT: jetstack-gke
+    CLOUDSDK_COMPUTE_ZONE: europe-west1-b
+  script:
+    # Tag latest image
+    - gcloud alpha container images add-tag -q "$IMAGE_NAME":"$CI_BUILD_REF" "$IMAGE_NAME":latest
+    - kubectl apply -f .deploy/deployment.yaml
+    - kubectl apply -f .deploy/ingress-tls.yaml
+    - kubectl apply -f .deploy/service.yaml
+  environment:
+    name: production
+    url: https://www.jetstack.io/
+  only:
+    - master
+  tags:
+  - docker
