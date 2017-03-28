@@ -264,6 +264,8 @@
     height: 55px;
     font-size: 1.25em;
     line-height: 2em;
+    color: white;
+    background: #1768E2;
 }
 
 @media (max-width: 769px) {
