@@ -68,23 +68,24 @@
             </div>
         </div>
     </section>
-
     {{ if and .NextInSection .PrevInSection }}
+
         <div id="listing">
             <section class="white bordered tight" id="insights">
                 <div class="container">
                     <div class="posts">
                         <div class="row">
-                            <div class="post"><h2 class="text-center">Previous Post...</h2></div>
+                            <div class="post"><h2 class="text-center">Previous...</h2></div>
                             <div class="post"></div>
-                            <div class="post"><h2 class="text-center">Next Post...</h2></div>
+                            <div class="post"><h2 class="text-center">Next...</h2></div>
                         </div>
                     </div>
                     <div class="posts">
                         <div class="row">
-                            {{ partial "widgets/content_thumbnail.html" .PrevInSection }}
-                            <div class="post"></div>
                             {{ partial "widgets/content_thumbnail.html" .NextInSection }}
+                            <div class="post"></div>
+                            {{ partial "widgets/content_thumbnail.html" .PrevInSection }}
+                            
                         </div>
                     </div>
                 </div>
@@ -97,7 +98,7 @@
                     <div class="posts">
                         <div class="row">
                             <div class="post"></div>
-                            <div class="post"><h2 class="text-center">Next Post...</h2></div>
+                            <div class="post"><h2 class="text-center">Previous...</h2></div>
                             <div class="post"></div>
                         </div>
                     </div>
@@ -118,7 +119,7 @@
                     <div class="posts">
                         <div class="row">
                             <div class="post"></div>
-                            <div class="post"><h2 class="text-center">Previous Post...</h2></div>
+                            <div class="post"><h2 class="text-center">Next...</h2></div>
                             <div class="post"></div>
                         </div>
                     </div>
