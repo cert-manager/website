@@ -99,7 +99,8 @@ a {
     padding: 0px !important;
 }
 .navbar-brand img {
-    height: 50px;
+    margin-top: 5px;
+    height: 40px;
 }
 
 .navbar-nav > li > a {
