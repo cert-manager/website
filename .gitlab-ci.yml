@@ -36,8 +36,8 @@ Build docker image:
   image: google/cloud-sdk
   before_script:
     # Write service account to file
-    - mkdir -p ~/.kube/config
-    - echo "$KUBECONFIG_DATA" > ~/.kube/config
+    - mkdir -p /.kube/
+    - echo "$KUBECONFIG_DATA" > /.kube/config
     - echo "$GCLOUD_SVC_ACCT" | base64 -d > gcloud-svc-acct.json
     - gcloud auth activate-service-account --key-file gcloud-svc-acct.json
     - gcloud container clusters get-credentials "$GKE_CLUSTER_NAME"
