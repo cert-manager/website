@@ -23,9 +23,9 @@
                   <div class="image-zoom-container">
                       <a href="{{ $page.URL }}"><img src="{{ $page.Params.thumb }}"></a>
                   </div>
-                  <div class="text">
+                  <div class="text" style="color: {{ default "white" $page.Params.textcolor }};">
                       <h3>{{ $page.Title }}</h3>
-                      <p><a href="{{ $page.URL }}">{{ $page.Params.buttontitle }}</a></p>
+                      <p><a href="{{ $page.URL }}" style="color: {{ default "white" $page.Params.textcolor }};">{{ $page.Params.buttontitle }}</a></p>
                   </div>
               </div>
 
