@@ -467,3 +467,14 @@ section.bordered {
     font-size: 18px;
     padding: 0.75em;
 }
+
+
+
+.calltoactionbutton {
+    margin-top: 2em;
+    width: 213px;
+    height: 58px;
+    font-size: 18px;
+    padding: 0;
+    line-height: 55px;
+}

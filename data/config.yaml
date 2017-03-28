@@ -134,6 +134,10 @@ panels:
 
   # the homepage banner with the engine and a list of items
   engine:
+    headline: The Jetstack Toolkit
+    strapline: Production-Grade Kubernetes for Enterprise Cloud-Native
+    button: Find out more
+    link: /engineering/
     items:
       - HA cluster deployment and upgrade
       - Secured clusters by default
