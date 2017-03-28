@@ -10,7 +10,7 @@ Build site:
   image: munnerz/docker-hugo:$HUGO_VERSION
   stage: build
   script:
-    - hugo -v -d ./_output --logFile=log && test "$(cat log | grep "^ERROR:\|^WARN:"| wc -l )" -eq "0"
+    - hugo -v -d ./_output --logFile=log && test "$(cat log | grep "^ERROR:"| wc -l )" -eq "0"
   artifacts:
     paths:
       - ./_output
