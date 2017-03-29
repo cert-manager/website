@@ -11,6 +11,7 @@ spec:
       labels:
         app: website
     spec:
+      minReadySeconds: 60
       containers:
         - name: site
           image: '{{IMAGE}}'
