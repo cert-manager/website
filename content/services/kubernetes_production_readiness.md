@@ -9,6 +9,8 @@ bullets:
 ---
 
 Have you already built a Kubernetes cluster, but want the confidence it won’t
-die when you move into prod? A Production Readiness engagement will ensure the
+die when you move into prod?
+
+A Production Readiness engagement will ensure the
 cluster has been built to best-practice and report on improvements with
 actionable and prioritised recommendations.
