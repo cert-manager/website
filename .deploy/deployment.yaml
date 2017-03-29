@@ -6,12 +6,12 @@ metadata:
     app: website
 spec:
   replicas: 3
+  minReadySeconds: 60
   template:
     metadata:
       labels:
         app: website
     spec:
-      minReadySeconds: 60
       containers:
         - name: site
           image: '{{IMAGE}}'
