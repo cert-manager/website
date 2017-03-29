@@ -1,6 +1,6 @@
 {{ define "title" }} | {{ .Title }}{{ end }}
 {{ define "head" }}
-    <link href="/css/insights.css" rel="stylesheet"/>
+    <link href="/css/insights.css?timestamp={{ .Now.Unix }}" rel="stylesheet"/>
 {{ end }}
 {{ define "navbar" }}
     {{ partial "navbar/light.html" . }}
