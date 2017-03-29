@@ -8,6 +8,7 @@ bullets:
   - "Within 15 days - a full and comprehensive production readiness report, delivered on-site"
 ---
 
-Want to get a Kubernetes cluster up and running within a week? Kubernetes Quickstart is designed for companies with a working knowledge of container technology who want help to build and run their applications on a Kubernetes cluster.
-
-The Jetstack team will get you from Zero to Kubernetes, without the pitfalls and without any wasted time. The cluster will be built to best-practice, and will provide an excellent foundation on which to work from. Your team will gain important skills, and get an introduction on how to run the cluster with an introductory workshop.
+Have you already built a Kubernetes cluster, but want the confidence it won’t
+die when you move into prod? A Production Readiness engagement will ensure the
+cluster has been built to best-practice and report on improvements with
+actionable and prioritised recommendations.
