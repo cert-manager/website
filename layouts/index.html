@@ -1,6 +1,6 @@
 {{ define "appendtitle" }} | Kubernetes Accelerated{{ end }}
 {{ define "head" }}
-    <link href="/css/home.css" rel="stylesheet"/>
+    <link href="/css/home.css?timestamp={{ .Now.Unix }}" rel="stylesheet"/>
 {{ end }}
 {{ define "navbar" }}
 <div class="container" id="header">

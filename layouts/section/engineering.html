@@ -1,6 +1,6 @@
 {{ define "title" }} | Engineering{{ end }}
 {{ define "head" }}
-    <link href="/css/engineering.css" rel="stylesheet"/>
+    <link href="/css/engineering.css?timestamp={{ .Now.Unix }}" rel="stylesheet"/>
 {{ end }}
 {{ define "navbar" }}
     {{ partial "navbar/light.html" . }}
