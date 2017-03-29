@@ -33,6 +33,8 @@ menus:
       link: /about/
     - name: Insights
       link: http://blog.jetstack.io/
+    - name: Contact
+      link: /contact/
 
   social:
     - name: github
