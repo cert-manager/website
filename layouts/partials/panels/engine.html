@@ -1,33 +1,25 @@
-  <section class="white center" id="engine" style="padding: 4em 0;">
-
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-    <tr>
-    <td width="50%" align="right" valign="middle">
-
-      <div style="margin-right:50px;">
-        <div style="font-size: 1.8em; font-weight: bold;">
-          {{ .headline }}
+<div id="engine">
+  <section class="white bordered">
+    <div class="container">
+      <div class="row">
+        <div class="features">
+          <h2>{{ .headline }}</h2>
+          <h4>{{ .strapline }}</h4>
+          <hr />
+          {{ range $index, $item := .items }}
+            <p style="font-size: 1.4em;padding-bottom: 20px;">{{ $item }}</p>
+          {{ end }}
         </div>
-        <div style="font-size: 1.2em; font-style: italic;padding-bottom: 40px;">
-          {{ .strapline }}
+        <div class="logo">
+          <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+          <td align="center" valign="middle">
+            <img src="/img/png/newiconblack.png" />
+          </td>
+          </tr>
+          </table>
         </div>
-        {{ range $index, $item := .items }}
-          <p style="font-size: 1.4em;padding-bottom: 20px;">{{ $item }} *</p>
-        {{ end }}
       </div>
-
-    </td>
-    <td width="50%" align="center" valign="middle">
-      <div style="">
-        <img src="/img/png/newiconblack.png" width="200" />
-      </div>
-    </td>
-    </tr>
-    <tr>
-    <td colspan="2" align="center">
-      <a href="{{ .link }}" class="calltoactionbutton btn btn-primary">{{ .button }}</a>
-    </td>
-    </tr>
-    </table>
-
+    </div>
   </section>
+</div>

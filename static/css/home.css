@@ -438,3 +438,39 @@
         padding: 0;
     }
 }
+
+#engine section {
+    padding: 0px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#engine .logo {
+    width: 50%;
+}
+
+#engine .features {
+    width: 50%;
+    text-align: right;
+}
+
+#engine .logo img {
+    width: 200px;
+    height: auto;
+}
+
+
+@media (max-width: 769px) {
+    #engine .logo {
+        margin-top: 50px;
+        width: 100%;
+    }
+
+    #engine .features {
+        text-align: center;
+        font-size: 0.8em;
+        width: 100%;
+    }
+
+}
+
