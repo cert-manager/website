@@ -103,6 +103,30 @@ a {
     height: 40px;
 }
 
+
+@media (max-width: 769px) {
+    .navbar-brand img {
+        margin-left: 20px;
+        margin-top: 15px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-brand img {
+        margin-left: 20px;
+        margin-top: 15px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 280px) {
+    .navbar-brand img {
+        display: none;
+    }
+}
+
+
 .navbar-nav > li > a {
     color: #888A90;
     padding: 15px 1.5em;
