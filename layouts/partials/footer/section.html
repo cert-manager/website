@@ -13,11 +13,6 @@
         </div>
         <div class="row footer-menu" style="color:white;">
             {{ partial "menus/div.html" (dict "links" $config.menus.navbar "active" $url) }}
-            <div class="item">
-            <a href="/contact">
-              Contact
-            </a>
-          </div>
         </div>
         <div class="copyright">
             <p>{{ $config.copyright }}</p>
