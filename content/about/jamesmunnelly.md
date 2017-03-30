@@ -1,8 +1,8 @@
 ---
 title: James Munnelly
 weight: 4
-image: /img/png/about-james.png
-position: Solution Engineer
+image: /img/jpg/about-james.jpg
+position: Solutions Engineer
 email: james.munnelly@jetstack.io
 ---
 

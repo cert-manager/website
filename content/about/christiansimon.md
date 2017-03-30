@@ -2,7 +2,7 @@
 title: Christian Simon
 weight: 3
 image: /img/jpg/about-christian.jpg
-position: Solution Engineer
+position: Solutions Engineer
 email: christian.simon@jetstack.io
 ---
 
