@@ -73,7 +73,7 @@ headline:
   getStarted:
     headline: Who are we?
     strapline: >
-      Jetstack is a UK-based company that help enterpises in their path to modern
+      Jetstack is a UK-based company that help enterprises in their path to modern
       cloud-native infrastructure. We live and breathe Kubernetes and open source.
 
   kubernetes:
@@ -168,7 +168,7 @@ panels:
       - name: ovo
         img: /img/png/ovo-logo.png
         link: https://www.ovoenergy.com/
-      
+
       - name: pearson
         img: /img/png/pearson.png
         link: https://www.pearson.com/
@@ -232,6 +232,13 @@ panels:
       quote: >
         Easy to follow content, well presented, lots of interesting resources,
         you should seriously charge more!
+    - name: Brendan Burns
+      link:
+        title: Kubernetes co-founder
+        url: https://twitter.com/brendandburns
+      quote: >
+        Shout out to JetstackHQ and kube-lego, I just setup https://kubernetes.submit-queue.k8s.io
+        in ~20 minutes...
 
   # the timeline on the k8s page
   k8s_timeline:
