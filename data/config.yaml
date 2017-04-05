@@ -232,6 +232,13 @@ panels:
       quote: >
         Easy to follow content, well presented, lots of interesting resources,
         you should seriously charge more!
+    - name: Brendan Burns
+      link:
+        title: Kubernetes co-founder
+        url: https://twitter.com/brendandburns
+      quote: >
+        Shout out to JetstackHQ and kube-lego, I just setup https://kubernetes.submit-queue.k8s.io
+        in ~20 minutes...
 
   # the timeline on the k8s page
   k8s_timeline:
