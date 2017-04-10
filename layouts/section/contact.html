@@ -106,9 +106,20 @@
     <section class="white center tight" id="locations">
         <div class="container">
             <h2>Our Offices</h2>
+            <div>
+            {{ range $index, $office := .Site.Data.config.offices }}
+            <div style="margin-bottom: 20px;">
+            <u> {{ $office.name }} </u><br />
+            {{ range $office.address }}{{ . }}<br />{{ end }}
+            </div>
+            {{ end }}
+            <div>
+            <hr />
+            <h2>Getting There</h2>
             <p class="locations">
-                <a href="javascript:void(0)" onclick="focusMap('London')" class="text-light-alt" id="London">London</a>
-                <a href="javascript:void(0)" onclick="focusMap('Bristol')" class="text-light-alt" id="Bristol">Bristol</a>
+                {{ range $index, $office := .Site.Data.config.offices }}
+                    <a href="javascript:void(0)" onclick="focusMap('{{ $office.name }}')" class="text-light-alt" id="{{ $office.name }}">{{ $office.name }}</a>
+                {{ end }}
             </p>
         </div>
     </section>
