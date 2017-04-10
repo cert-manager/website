@@ -135,7 +135,7 @@ headline:
 panels:
 
   # the homepage banner with the engine and a list of items
-  engine:
+  toolkit:
     headline: The Jetstack Toolkit
     strapline: Production-Grade Kubernetes for Enterprise Cloud-Native
     button: Find out more
