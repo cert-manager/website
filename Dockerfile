@@ -3,6 +3,8 @@ FROM alpine:3.5
 RUN apk update && apk add ca-certificates
 
 WORKDIR /www
+EXPOSE 8080
+
 ADD _build/backend-linux-amd64 /backend
 ADD _output/ /www
 
