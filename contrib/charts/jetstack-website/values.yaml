@@ -19,6 +19,13 @@ resources:
   limits:
     cpu: 500m
     memory: 100Mi
+config:
+  smtpPort: "2587"
+  smtpHost: email-smtp.eu-west-1.amazonaws.com
+  smtpUsername: xx
+  smtpPassword: yy
+  contactSenderAddress: website@jetstack.net
+  contactDestAddress: hello@jetstack.io
 ingressClass: nginx
 ingressHostnames: []
 ingressTLS: true
