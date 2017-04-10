@@ -1,7 +1,10 @@
-{{ define "title" }} | Services{{ end }}
+{{ define "title" }} | Contact{{ end }}
 {{ define "head" }}
     <link href="/css/contact.css?timestamp={{ .Now.Unix }}" rel="stylesheet"/>
     <link href="/css/form.css?timestamp={{ .Now.Unix }}" rel="stylesheet"/>
+
+    
+
 {{ end }}
 {{ define "body" }}
 
@@ -120,6 +123,12 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA-AXoCphhOdRV_3IwXMuakFyZyiqmA7o"></script>
 <script type="text/javascript" src="/js/map.js"></script>
 <script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/26/10/map.js"></script>
+<script type="text/javascript">
+
+    {{ range $index, $office := .Site.Data.config.offices }}
+        addOfficeLocation(JSON.parse({{ dict "name" $office.name "address" $office.address "default" $office.default | jsonify }}))
+    {{ end }}
+</script>
 {{ end }}
 
 

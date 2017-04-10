@@ -1,8 +1,21 @@
 // When the window has finished loading create our google map below
 google.maps.event.addDomListener(window, 'load', initMap);
 
+var allOffices = {}
+
+function addOfficeLocation(obj) {
+    allOffices[obj.name] = obj
+}
+
+function getDefaultMap() {
+    return Object.keys(allOffices).filter(function(id) {
+        return (allOffices[id] || {}).default
+    })[0]
+}
+
 function initMap() {
-    defineMap('bristol');
+    var defaultMapName = getDefaultMap()
+    
 }
 
 function createMapOptions(center, styles) {
