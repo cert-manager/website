@@ -8,6 +8,12 @@ label.long {
     width: 100%;
 }
 
+.response {
+    font-weight: bold;
+    margin-bottom: 1em;
+    font-size: 1.1em;
+}
+
 input[type="text"], input[type="email"] {
     padding: 1em;
     background: white;
@@ -20,14 +26,20 @@ input[type="text"], input[type="email"] {
     margin-bottom: 3em;
 }
 
-textarea#mce-MMERGE5 {
+textarea#project {
     padding: 1em;
     font-size: 1.1em;
-    height: 320px;
+    height: 200px;
     border-radius: 0;
 }
 
 .checkbox-inline {
+    padding: 14px;
+    margin-left: 4px;
+    margin-right: 2em;
+}
+
+.radio-inline {
     padding: 14px;
     margin-left: 4px;
     margin-right: 2em;
@@ -39,10 +51,15 @@ input[type=checkbox] {
     -ms-appearance: radio;
 }
 
+input[type=radio] {
+    -webkit-appearance: radio;
+    -moz-appearance: radio;
+    -ms-appearance: radio;
+}
+
 .btn-default {
     padding: 1em 4em;
     color: white;
     background: #1768E2;
     border-radius: 0;
 }
-

@@ -9,13 +9,15 @@ You will require a local version of Docker.
 To serve the site in a browser with live updates:
 
 ```bash
-$ make serve
+$ make hugo_serve
 $ open http://localhost:1313
 ```
 
 ## Deployment
 
-TBC
+Using Gitlab-CI
+
+* Helm chart in contrib
 
 ## Site Structure
 

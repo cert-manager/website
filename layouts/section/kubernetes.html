@@ -1,7 +1,7 @@
 {{ define "title" }} | Kubernetes{{ end }}
 {{ define "head" }}
-    <link href="/css/kubernetes.css?timestamp={{ .Now.Unix }}" rel="stylesheet"/>
-    <link href="/css/timeline.css?timestamp={{ .Now.Unix }}" rel="stylesheet"/>
+    <link href="/css/kubernetes.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
+    <link href="/css/timeline.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
 {{ end }}
 {{ define "navbar" }}
     {{ partial "navbar/light.html" . }}

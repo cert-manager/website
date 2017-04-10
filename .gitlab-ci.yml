@@ -1,65 +1,69 @@
 stages:
 - build
-- docker-build
+- docker
 - deploy
 
-variables:
-  HUGO_VERSION: '0.18.1'
+test:helm:
+  image: eu.gcr.io/jetstack-gke/infrastructure:latest
+  stage: build
+  tags:
+  - docker
+  script:
+  - make test_helm
 
-Build site:
-  image: munnerz/docker-hugo:$HUGO_VERSION
+build:hugo:
+  image: docker:1.13.1
   stage: build
   script:
-    - hugo -v -d ./_output --logFile=log && test "$(cat log | grep "^ERROR:"| wc -l )" -eq "0"
+  - apk add --no-cache make
+  - make hugo_build
+  services:
+  - docker:1.13.1-dind
   artifacts:
     paths:
-      - ./_output
+    - ./_output
   tags:
   - docker
 
-Build docker image:
+build:golang:
   image: docker:1.13.1
-  stage: docker-build
+  stage: build
+  script:
+  - apk add --no-cache make
+  - make golang_build
   services:
-    - docker:1.13.1-dind
-  script:
-    # Authenticate docker daemon with Google Container Registry
-    - docker login -u _json_key -p "$(echo "$GCLOUD_SVC_ACCT" | base64 -d)" https://eu.gcr.io
-    - docker build -t "$IMAGE_NAME":"$CI_BUILD_REF" .
-    - docker push "$IMAGE_NAME":"$CI_BUILD_REF"
-  variables:
-    IMAGE_NAME: eu.gcr.io/jetstack-gke/website
+  - docker:1.13.1-dind
+  artifacts:
+    paths:
+    - ./_build
   tags:
   - docker
 
-.deploy: &deploy
-  image: google/cloud-sdk
-  before_script:
-    # Write service account to file
-    - mkdir -p /.kube/
-    - echo "$KUBECONFIG_DATA" > /.kube/config
-    # Source template script file
-    - source .deploy/template.sh
-    - template ".deploy/deployment.yaml"
+docker:image:
+  image: docker:1.13.1
+  stage: docker
+  tags:
+  - docker
+  script:
+  - apk add --no-cache make
+  - mkdir -p ~/.docker && echo "${DOCKER_AUTH_CONFIG}" > ~/.docker/config.json && chmod 600 ~/.docker/config.json
+  - make docker_build docker_push IMAGE_TAGS="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
+  services:
+  - docker:1.13.1-dind
+  dependencies:
+  - build:hugo
+  - build:golang
 
-Deploy to production:
-  <<: *deploy
+deploy:staging:
+  image: eu.gcr.io/jetstack-gke/infrastructure:latest
   stage: deploy
-  variables:
-    IMAGE_TAG: $CI_BUILD_REF
-    IMAGE_NAME: eu.gcr.io/jetstack-gke/website
-    GKE_CLUSTER_NAME: jetstack-infra
-    CLOUDSDK_CORE_PROJECT: jetstack-gke
-    CLOUDSDK_COMPUTE_ZONE: europe-west1-b
-  script:
-    # Tag latest image
-    - kubectl apply -f .deploy/deployment.yaml
-    - kubectl apply -f .deploy/ingress-tls.yaml
-    - kubectl apply -f .deploy/service.yaml
-  environment:
-    name: production
-    url: https://www.jetstack.io/
-  only:
-    - master
   tags:
   - docker
+  script:
+  - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
+  - make deploy ENVIRONMENT="${CI_ENVIRONMENT_NAME}" IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
+  environment:
+    name: staging
+    url: https://website-staging.kube.jetstack.net
+  only:
+  - master
