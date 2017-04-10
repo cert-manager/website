@@ -107,8 +107,8 @@
         <div class="container">
             <h2>Our Offices</h2>
             <p class="locations">
-                <a href="javascript:void(0)" onclick="defineMap('london')" class="text-light-alt" id="london">London</a>
-                <a href="javascript:void(0)" onclick="defineMap('bristol')" class="text-light-alt current" id="bristol">Bristol</a>
+                <a href="javascript:void(0)" onclick="focusMap('London')" class="text-light-alt" id="London">London</a>
+                <a href="javascript:void(0)" onclick="focusMap('Bristol')" class="text-light-alt" id="Bristol">Bristol</a>
             </p>
         </div>
     </section>
@@ -125,8 +125,10 @@
 <script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/26/10/map.js"></script>
 <script type="text/javascript">
 
+    // loop over each office entry in config.yaml and feed it to the js script
+    // addOfficeLocation is defined in /js/map.js
     {{ range $index, $office := .Site.Data.config.offices }}
-        addOfficeLocation(JSON.parse({{ dict "name" $office.name "address" $office.address "default" $office.default | jsonify }}))
+        addOfficeLocation(JSON.parse({{ dict "name" $office.name "lat" $office.lat "lon" $office.lon "address" $office.address "default" $office.default | jsonify }}))
     {{ end }}
 </script>
 {{ end }}

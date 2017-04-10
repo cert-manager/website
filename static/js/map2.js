@@ -1,33 +1,28 @@
 // When the window has finished loading create our google map below
-google.maps.event.addDomListener(window, 'load', initMap);
+//google.maps.event.addDomListener(window, 'load', initMap);
+
 var allOffices = {}
-var allMapLocations = {}
 
 function addOfficeLocation(obj) {
     allOffices[obj.name] = obj
 }
 
-function getDefaultLocation() {
+function getDefaultMap() {
     return Object.keys(allOffices).filter(function(id) {
         return (allOffices[id] || {}).default
     })[0]
 }
 
-function getOfficeLocation(location) {
-    return allOffices[location]
-}
-
-function getMapCenter(info) {
-    return new google.maps.LatLng(parseFloat(info.lat), parseFloat(info.lon))
-}
-
 function initMap() {
-    createMap()
-    focusMap(getDefaultLocation())
+    var defaultMapName = getDefaultMap()
+    
 }
 
-function createMapOptions() {
-    var officeInfo = getOfficeLocation(getDefaultLocation())
+function createMapOptions(center, styles) {
+    if (typeof center == 'undefined') {
+        center = new google.maps.LatLng(51.5241062, -0.1132942);
+    }
+
     if (typeof styles == 'undefined') {
         styles = [{
             "featureType": "water",
@@ -84,17 +79,34 @@ function createMapOptions() {
 
     return {
         zoom: 16,
-        center: getMapCenter(officeInfo),
+        center: center,
         styles: styles,
         scrollwheel: false
     };
 }
 
-var theMap = null
+function defineMap(location) {
 
-function createMap() {
+    switch (location) {
+        case 'london':
+            $('#london').addClass('current');
+            $('#bristol').removeClass('current');
+            center = new google.maps.LatLng(51.5241062, -0.1132942);
+            break;
+        case 'bristol':
+            $('#london').removeClass('current');
+            $('#bristol').addClass('current');
+            center = new google.maps.LatLng(51.454722, -2.5849547);
+            break;
+        default:
+            $('#london').addClass('current');
+            $('#bristol').removeClass('current');
+            center = new google.maps.LatLng(51.5241062, -0.1132942);
+            break;
+    }
+
     var mapElement = document.getElementById('map');
-    theMap = new google.maps.Map(mapElement, createMapOptions());
+    var map = new google.maps.Map(mapElement, createMapOptions(center));
 
     var markerIcon = {
         url: "/img/png/map-marker.png",
@@ -103,59 +115,62 @@ function createMap() {
         scaledSize: new google.maps.Size(14, 14)
     };
 
-    Object.keys(allOffices || {}).forEach(function(key){
-        var officeInfo = allOffices[key]
+    var marker_bristol = new google.maps.Marker({
+        position: new google.maps.LatLng(51.454935, -2.582713),
+        map: map,
+        title: 'Bristol',
+        icon: markerIcon,
+    });
 
-        var marker = new google.maps.Marker({
-            position: getMapCenter(officeInfo),
-            map: theMap,
-            title: key,
-            icon: markerIcon,
-        });
+    var content = '<img src="/img/png/logo-black.png" class="contact-map-logo">'
 
-        var content = '' + 
-            '<img src="/img/png/logo-black.png" class="contact-map-logo">' +
-            '<address class="contact-map-address">' +
-            officeInfo.address.join('<br />') +
-            '</address>';
+    var bristolInfoContent = content +
+        '<address class="contact-map-address">' +
+        'Bristol' +
+        '<br />' +
+        '<br />' +
+        '1, Temple Way,' +
+        '<br />' +
+        'Bristol, BS2 0BY' +
+        '<br />' +
+        'UK' +
+        '<br />' +
+        '+44 (0) 7793 231 093' +
+        '<br />' +
+        '</address>';
 
-        var infoWindow = new google.maps.InfoWindow({
-            content: content
-        });
+    var bristolInfo = new google.maps.InfoWindow({
+        content: bristolInfoContent
+    });
 
-        allMapLocations[key] = {
-            marker: marker,
-            infoWindow: infoWindow
-        }
-    })
-}
+    marker_bristol.addListener('click', function () {
+        bristolInfo.open(map, marker_bristol);
+    });
 
-function focusMap(location) {
+    var marker_london = new google.maps.Marker({
+        position: new google.maps.LatLng(51.5241062, -0.1132942),
+        map: map,
+        title: 'London',
+        icon: markerIcon,
+    });
 
-    // highlight the button
-    var officeInfo = getOfficeLocation(location)
-    if(!officeInfo) {
-        console.error('no location found for: ' + location)
-        return
-    }
-    Object.keys(allOffices || {}).forEach(function(key){
-        if(key == officeInfo.name) {
-            $('#' + key).addClass('current')
-        }
-        else {
-            $('#' + key).removeClass('current')   
-        }
-    })
+    var londonInfoContent = content +
+        '<address class="contact-map-address">' +
+        'London' +
+        '<br />' +
+        '<br />' +
+        '14 Rosebery Ave,' +
+        '<br />' +
+        'London' +
+        '<br />' +
+        'EC1R 4TD' +
+        '</address>';
 
-    var mapItems = allMapLocations[location]
-    if(!officeInfo) {
-        console.error('no mapItems found for: ' + location)
-        return
-    }
-    var center = getMapCenter(officeInfo)
-    // center the map
-    theMap.setCenter(center)
+    var londonInfo = new google.maps.InfoWindow({
+        content: londonInfoContent
+    });
 
-    var infoWindow = mapItems.infoWindow
-    infoWindow.open(theMap, mapItems.marker)
+    marker_london.addListener('click', function () {
+        londonInfo.open(map, marker_london);
+    });
 }

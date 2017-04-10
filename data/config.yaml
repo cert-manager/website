@@ -25,23 +25,23 @@ offices:
   - name: London
     default: true
     lat: "51.5241062"
-    long: "-0.1132942"
-    address: >
-      London  
-        
-      14 Rosebery Ave
-      London
-      EC1R 4TD
+    lon: "-0.1132942"
+    address:
+      - London  
+      - 
+      - 14 Rosebery Ave
+      - London
+      - EC1R 4TD
   - name: Bristol
     lat: "51.454722"
-    long: "-2.5849547"
-    address: >
-      Bristol  
-      
-      1, Temple Way
-      Bristol, BS2 0BY
-      UK
-      +44 (0) 7793 231 093
+    lon: "-2.582713"
+    address:
+      - Bristol
+      -
+      - 1, Temple Way
+      - Bristol, BS2 0BY
+      - UK
+      - +44 (0) 7793 231 093
 
 # control the navbar, social links and insight menus
 menus:
