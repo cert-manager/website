@@ -3,18 +3,22 @@
     <div class="container">
       <div class="row">
         <div class="features">
-          <h2>{{ .headline }}</h2>
-          <h4>{{ .strapline }}</h4>
-          <hr />
-          {{ range $index, $item := .items }}
-            <p style="font-size: 1.4em;padding-bottom: 20px;">{{ $item }}</p>
-          {{ end }}
+          <h2 class="headline">{{ .headline }}</h2>
+          <div class="strapline">{{ .strapline }}</div>
+          <div class="bulletpoints">
+            {{ range $index, $item := .items }}
+              <div class="bulletpoint">
+                <img src="/img/png/bluedot.png" class="bulletpointimg" />
+                {{ $item }}
+              </div>
+            {{ end }}
+          </div>
         </div>
         <div class="logo">
           <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
           <td align="center" valign="middle">
-            <img src="/img/png/newiconblack.png" />
+            <img src="/img/png/newiconblue.png" />
           </td>
           </tr>
           </table>
