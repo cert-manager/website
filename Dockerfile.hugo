@@ -1,0 +1,22 @@
+FROM alpine:3.5
+
+ENV HUGO_VERSION=0.19
+ENV HUGO_CHECKSUM=f5edfa4275a5011ea92e1a79dc9023f5d801f8ad52fcf05afabd1ce644dcf954
+RUN \
+  apk update && apk add openssl ca-certificates && \
+  mkdir -p /tmp/hugo && \
+  cd /tmp/hugo && \
+  wget https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -O  hugo.tar.gz && \
+  echo "${HUGO_CHECKSUM}  hugo.tar.gz" | sha256sum -c && \
+  tar xvf hugo.tar.gz && cp ./hugo_${HUGO_VERSION}_linux_amd64/hugo_${HUGO_VERSION}_linux_amd64 /usr/bin/hugo && \
+  rm -rf /tmp/hugo
+
+
+VOLUME /var/lib/hugo
+WORKDIR /var/lib/hugo
+
+# Expose default hugo port
+EXPOSE 1313
+
+# By default, serve site
+CMD hugo server --buildDrafts --bind=0.0.0.0
