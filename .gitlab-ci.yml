@@ -1,7 +1,8 @@
 stages:
 - build
 - docker
-- deploy
+- deploy-staging
+- deploy-prod
 
 test:helm:
   image: eu.gcr.io/jetstack-gke/infrastructure:latest
@@ -56,7 +57,7 @@ docker:image:
 
 deploy:staging:
   image: eu.gcr.io/jetstack-gke/infrastructure:latest
-  stage: deploy
+  stage: deploy-staging
   tags:
   - docker
   script:
@@ -65,5 +66,20 @@ deploy:staging:
   environment:
     name: staging
     url: https://website-staging.kube.jetstack.net
+  only:
+  - master
+
+deploy:prod:
+  image: eu.gcr.io/jetstack-gke/infrastructure:latest
+  stage: deploy-prod
+  tags:
+  - docker
+  script:
+  - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
+  - make deploy ENVIRONMENT="${CI_ENVIRONMENT_NAME}" IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
+  environment:
+    name: prod
+    url: https://www.jetstack.io
+  when: manual
   only:
   - master
