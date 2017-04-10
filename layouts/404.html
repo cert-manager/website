@@ -1,0 +1,35 @@
+{{ define "appendtitle" }} | Kubernetes Accelerated{{ end }}
+{{ define "head" }}
+    <link href="/css/home.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
+{{ end }}
+{{ define "navbar" }}
+<div class="container" id="header">
+    <!-- Above Lead Image -->
+    <nav class="navbar transparent atop">
+        {{ partial "navbar/container.html" (dict "id" "navbar1" "logoColor" "white" "root" .) }}
+    </nav>
+    <!-- Hidden Navbar -->
+    <nav class="navbar navbar-fixed-top above" id="dynamic-nav">
+
+        {{ partial "navbar/container.html" (dict "id" "navbar2" "logoColor" "white" "root" .) }}
+    </nav>
+</div>
+{{ end }}
+{{ define "body" }}
+<div class="container-fluid" id="lead-image">
+    <h2>Not found</h2>
+</div>
+{{ end }}
+
+{{ define "footer" }}
+<!--
+    ignore the default footer because for the homepage because it needs
+    to live inside the container div for a reason I don't yet understand
+ -->
+<div></div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="/lib/vide/jquery.vide.min.js"></script>
+<script src="/js/home.js"></script>
+{{ end }}

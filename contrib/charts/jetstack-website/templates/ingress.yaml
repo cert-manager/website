@@ -1,0 +1,32 @@
+{{- $global := . }}
+{{- if gt (len .Values.ingressHostnames) 0 }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+  annotations:
+    kubernetes.io/ingress.class: '{{ .Values.ingressClass }}'
+{{- if .Values.ingressTLS }}
+    kubernetes.io/tls-acme: "true"
+{{- end }}
+spec:
+{{- if .Values.ingressTLS }}
+  tls:
+  - secretName: {{ template "fullname" $global }}
+    hosts:
+{{- range $hostname := .Values.ingressHostnames }}
+    - {{ $hostname }}
+{{- end }}
+{{- end }}
+  rules:
+{{- range $hostname := .Values.ingressHostnames }}
+  - host: {{ $hostname }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ template "fullname" $global }}
+          servicePort: {{ $global.Values.service.externalPort }}
+{{- end }}
+{{- end }}

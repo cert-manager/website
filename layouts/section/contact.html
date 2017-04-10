@@ -2,102 +2,98 @@
 {{ define "head" }}
     <link href="/css/contact.css?timestamp={{ .Now.Unix }}" rel="stylesheet"/>
     <link href="/css/form.css?timestamp={{ .Now.Unix }}" rel="stylesheet"/>
-
-    
-
 {{ end }}
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">
 
   {{ partial "panels/blueheadline.html" .Site.Data.config.headline.contact }}
-  
+
 
       <section class="grey" id="form">
         <div class="container">
             <div id="mc_embed_signup">
-                <form action="https://jetstack.us11.list-manage.com/subscribe/post?u=f7f959cbd3a1f0e1bc2671c92&amp;id=09fe7cd7c1"
-                      method="post"
-                      id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
-                      novalidate>
+                <form action="/api/v1/contact"
+                      method="POST"
+                      id="contact-form" name="contact-form">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="mce-FNAME">Name</label>
-                            <input type="text" class="form-control" name="FNAME" id="mce-FNAME" placeholder="Name">
+                            <label for="name">Name <span class="asterisk">*</span></label>
+                            <input type="text" class="form-control" required="required"  name="name" id="name" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <label for="mce-MMERGE2">Title</label>
-                            <input type="text" class="form-control" name="MMERGE2" id="mce-MMERGE2" placeholder="Title">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" name="title" id="title" placeholder="Title">
                         </div>
                         <div class="form-group">
-                            <label for="mce-MMERGE3">Company</label>
-                            <input type="text" class="form-control" name="MMERGE3" id="mce-MMERGE3"
+                            <label for="company">Company</label>
+                            <input type="text" class="form-control" name="company" id="company"
                                    placeholder="Company">
                         </div>
                         <div class="form-group">
-                            <label for="mce-EMAIL">Email <span class="asterisk">*</span></label>
-                            <input type="email" required="required" class="form-control" name="EMAIL" id="mce-EMAIL"
-                                   placeholder="Email">
+                            <label for="email">Email <span class="asterisk">*</span></label>
+                            <input type="email" required="required" class="form-control" name="email" id="email"
+                                   placeholder="Email" data-validation="email">
                         </div>
                         <div class="form-group">
-                            <label for="mce-MMERGE4">Phone Number</label>
-                            <input type="text" class="form-control" name="MMERGE4" id="mce-MMERGE4"
+                            <label for="phone">Phone number</label>
+                            <input type="text" class="form-control" name="phone" id="phone"
                                    placeholder="Phone Number">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="mce-MMERGE5">Tell us about your project</label>
-                            <textarea class="form-control" name="MMERGE5" id="mce-MMERGE5"
+                            <label for="project">Tell us about your project</label>
+                            <textarea class="form-control" name="message" id="project"
                                       placeholder="Tell us about your project"></textarea>
                         </div>
                         <div class="form-group">
-                            <label class="long">Contact Preference</label>
-                            <label for="mce-group[13049]-13049-0" class="checkbox-inline">
-                                <input type="checkbox" id="mce-group[13049]-13049-0" name="group[13049][1]"
-                                       value="email"> Email
+                            <label class="long">How should we contact you?</label>
+                            <label for="email-contact" class="checkbox-inline">
+                                <input type="checkbox" id="email-contact" name="contact"
+                                       value="Email" checked="checked"> Email
                             </label>
-                            <label for="mce-group[13049]-13049-1" class="checkbox-inline">
-                                <input type="checkbox" id="mce-group[13049]-13049-1" name="group[13049][2]"
-                                       value="telephone"> Telephone
+                            <label for="telephone-contact" class="checkbox-inline">
+                                <input type="checkbox" id="telephone-contact" name="contact"
+                                       value="Telephone"> Telephone
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="long">Keep up-to-date with Jetstack and join our mailing list?</label>
+                            <label for="newsletter-yes" class="radio-inline">
+                                <input type="radio" id="newsletter-yes" name="newsletter"
+                                       value="Yes" checked="checked"> Yes
+                            </label>
+                            <label for="newsletter-no" class="radio-inline">
+                                <input type="radio" id="newsletter-no" name="newsletter"
+                                       value="No"> No
                             </label>
                         </div>
                         <div id="mce-responses" class="clear">
-                            <div class="response" id="mce-error-response" style="display:none"></div>
-                            <div class="response" id="mce-success-response" style="display:none"></div>
+                            <div class="response" id="success" style="display:none">
+                              {{ with .Site.Params.contact.thanks }}
+                                {{ . | markdownify }}
+                              {{ else }}
+                                Thank you for contacting us - we'll be in touch.
+                              {{ end }}
+                            </div>
+                            <div class="response" id="error" style="display:none">
+                              {{ with .Site.Params.contact.error }}
+                                {{ . | markdownify }}
+                              {{ else }}
+                                Message could not be sent.<br/>
+                                Please contact us at <a href="{{ .Site.Data.config.contact.email }}">{{ .Site.Data.config.contact.email }}</a> instead.
+                              {{ end }}
+                            </div>
                         </div>
-                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
-                                                                                                  name="b_f7f959cbd3a1f0e1bc2671c92_09fe7cd7c1"
-                                                                                                  tabindex="-1"
-                                                                                                  value=""></div>
                         <div class="form-group submit">
-                            <label for="submit" class="long">&nbsp;</label>
-                            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">
+                            <label for="submit" class="long"></label>
+                            <button type="submit" name="submit" id="submit-contact" class="btn btn-default">
                                 Send
                             </button>
                         </div>
                     </div>
-                    <script type='text/javascript'
-                            src='https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
-                    <script type='text/javascript'>(function ($) {
-                        window.fnames = new Array();
-                        window.ftypes = new Array();
-                        fnames[1] = 'FNAME';
-                        ftypes[1] = 'text';
-                        fnames[2] = 'MMERGE2';
-                        ftypes[2] = 'text';
-                        fnames[3] = 'MMERGE3';
-                        ftypes[3] = 'text';
-                        fnames[0] = 'EMAIL';
-                        ftypes[0] = 'email';
-                        fnames[4] = 'MMERGE4';
-                        ftypes[4] = 'number';
-                        fnames[5] = 'MMERGE5';
-                        ftypes[5] = 'text';
-                    }(jQuery));
-                    var $mcj = jQuery.noConflict(true);</script>
                 </form>
             </div>
         </div>
@@ -142,6 +138,8 @@
         addOfficeLocation(JSON.parse({{ dict "name" $office.name "lat" $office.lat "lon" $office.lon "address" $office.address "default" $office.default | jsonify }}))
     {{ end }}
 </script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<script type="text/javascript" src="/js/contactform.js"></script>
 {{ end }}
 
 

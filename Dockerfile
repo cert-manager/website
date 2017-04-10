@@ -1,3 +1,14 @@
-FROM gcr.io/google_containers/nginx-slim:0.6
+FROM alpine:3.5
 
-ADD _output/ /usr/share/nginx/html/
+RUN apk update && apk add ca-certificates
+
+WORKDIR /www
+EXPOSE 8080
+
+ADD _build/backend-linux-amd64 /backend
+ADD _output/ /www
+
+USER 1000
+
+ENV GIN_MODE=release
+CMD ["/backend"]

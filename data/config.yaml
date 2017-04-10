@@ -2,6 +2,10 @@
 title: Jetstack
 copyright: © 2017 Jetstack Ltd. All rights reserved.
 
+# contact details
+contact:
+  email: hello@jetstack.io
+
 # apikeys for external services
 apikeys:
   typekit: lck0ocu
