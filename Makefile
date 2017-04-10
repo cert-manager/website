@@ -16,6 +16,7 @@ RELEASE_NAME := $(IMAGE_NAME)-$(ENVIRONMENT)
 CHART_PATH := contrib/charts/jetstack-website
 HELM_VALUES := .values.$(ENVIRONMENT).yaml
 
+INGRESS_HOSTNAMES := website-$(ENVIRONMENT).kube.jetstack.net
 
 .PHONY: build
 build: ; docker build -f Dockerfile.dev -t ${IMAGE} .
@@ -86,6 +87,6 @@ deploy:
 	touch $(HELM_VALUES)
 	helm upgrade $(RELEASE_NAME) $(CHART_PATH) --install --namespace $(NAMESPACE) \
 		--set 'image.tag=$(IMAGE_TAG)' \
-		--set 'ingressHostnames={website-$(ENVIRONMENT).kube.jetstack.net}' \
+		--set 'ingressHostnames={$(INGRESS_HOSTNAMES)}' \
 		--values $(HELM_VALUES) \
 		--wait

@@ -76,7 +76,7 @@ deploy:prod:
   - docker
   script:
   - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
-  - make deploy ENVIRONMENT="${CI_ENVIRONMENT_NAME}" IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
+  - make deploy ENVIRONMENT="${CI_ENVIRONMENT_NAME}" IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}" INGRESS_HOSTNAMES="www.jetstack.io,jetstack.io,website-prod.kube.jetstack.net"
   environment:
     name: prod
     url: https://www.jetstack.io
