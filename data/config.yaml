@@ -25,6 +25,24 @@ titles:
   "/blog/": Blog
   "/blog/": Blog
 
+offices:
+  - name: London
+    default: true
+    lat: "51.5241062"
+    lon: "-0.1132942"
+    address:
+      - 14 Rosebery Ave
+      - London
+      - EC1R 4TD
+  - name: Bristol
+    lat: "51.454722"
+    lon: "-2.582713"
+    address:
+      - 1, Temple Way
+      - Bristol, BS2 0BY
+      - UK
+      - +44 (0) 7793 231 093
+
 # control the navbar, social links and insight menus
 menus:
 
@@ -139,7 +157,7 @@ headline:
 panels:
 
   # the homepage banner with the engine and a list of items
-  engine:
+  toolkit:
     headline: The Jetstack Toolkit
     strapline: Production-Grade Kubernetes for Enterprise Cloud-Native
     button: Find out more
