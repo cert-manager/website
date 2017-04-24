@@ -95,6 +95,7 @@ deploy:review:
   environment:
     name: ${CI_BUILD_REF_SLUG}
     url: http://${CI_BUILD_REF_SLUG}.website.kube.jetstack.net
+    on_stop: deploy:review:stop
   only:
   - branches
   except:
