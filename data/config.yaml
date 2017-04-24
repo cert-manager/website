@@ -53,8 +53,8 @@ menus:
       link: /services/
     - name: About Us
       link: /about/
-    - name: Insights
-      link: http://blog.jetstack.io/
+    - name: Blog
+      link: https://blog.jetstack.io/
     - name: Contact
       link: /contact/
 
