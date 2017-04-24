@@ -62,11 +62,62 @@ deploy:staging:
   - docker
   script:
   - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
-  - make deploy ENVIRONMENT="${CI_ENVIRONMENT_NAME}" IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
+  - make deploy
+      ENVIRONMENT="${CI_ENVIRONMENT_NAME}"
+      IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
+      INGRESS_HOSTNAMES="website-staging.kube.jetstack.net"
+      HUGO_BASE_URL="https://website-staging.kube.jetstack.net"
+      TLS_ENABLED=true
+      HELM_VALUES='.values.staging.yaml'
+      REPLICA_COUNT=1
   environment:
     name: staging
     url: https://website-staging.kube.jetstack.net
   only:
+  - master
+
+deploy:review:
+  image: eu.gcr.io/jetstack-gke/infrastructure:latest
+  stage: deploy-staging
+  tags:
+  - docker
+  script:
+  - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
+  - make deploy
+      ENVIRONMENT="${CI_BUILD_REF_SLUG}"
+      IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
+      INGRESS_HOSTNAMES="${CI_BUILD_REF_SLUG}.website.kube.jetstack.net"
+      TLS_ENABLED=false
+      HUGO_BASE_URL="http://${CI_BUILD_REF_SLUG}.website.kube.jetstack.net"
+      NAMESPACE="website-review"
+      HELM_VALUES='.values.staging.yaml'
+      REPLICA_COUNT=1
+  environment:
+    name: ${CI_BUILD_REF_SLUG}
+    url: http://${CI_BUILD_REF_SLUG}.website.kube.jetstack.net
+  only:
+  - branches
+  except:
+  - master
+
+deploy:review:stop:
+  image: eu.gcr.io/jetstack-gke/infrastructure:latest
+  stage: deploy-staging
+  tags:
+  - docker
+  script:
+  - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
+  - make destroy
+      ENVIRONMENT="${CI_BUILD_REF_SLUG}"
+      NAMESPACE="website-review"
+      SURE=1
+  when: manual
+  environment:
+    name: ${CI_BUILD_REF_SLUG}
+    action: stop
+  only:
+  - branches
+  except:
   - master
 
 deploy:prod:
@@ -76,7 +127,13 @@ deploy:prod:
   - docker
   script:
   - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
-  - make deploy ENVIRONMENT="${CI_ENVIRONMENT_NAME}" IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}" INGRESS_HOSTNAMES="www.jetstack.io,jetstack.io,website-prod.kube.jetstack.net"
+  - make deploy
+      ENVIRONMENT="${CI_ENVIRONMENT_NAME}"
+      IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
+      INGRESS_HOSTNAMES="www.jetstack.io,jetstack.io,website-prod.kube.jetstack.net"
+      HUGO_BASE_URL="https://www.jetstack.io"
+      TLS_ENABLED=false
+      HELM_VALUES='.values.prod.yaml'
   environment:
     name: prod
     url: https://www.jetstack.io
