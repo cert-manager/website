@@ -1,9 +1,9 @@
 FROM alpine:3.5
 
-ENV HUGO_VERSION=0.19
-ENV HUGO_CHECKSUM=f5edfa4275a5011ea92e1a79dc9023f5d801f8ad52fcf05afabd1ce644dcf954
+ENV HUGO_VERSION=0.20.2
+ENV HUGO_CHECKSUM=7cbf607f981aa9366aa512a651400a7a06744beaf182345369a2cfbb6cf18420
 RUN \
-  apk update && apk add openssl ca-certificates && \
+  apk add --no-cache openssl ca-certificates && \
   mkdir -p /tmp/hugo && \
   cd /tmp/hugo && \
   wget https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -O  hugo.tar.gz && \

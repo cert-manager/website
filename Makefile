@@ -16,29 +16,46 @@ RELEASE_NAME := $(IMAGE_NAME)-$(ENVIRONMENT)
 CHART_PATH := contrib/charts/jetstack-website
 HELM_VALUES := .values.$(ENVIRONMENT).yaml
 
+HUGO_BASE_URL := "https://www.jetstack.io"
 INGRESS_HOSTNAMES := website-$(ENVIRONMENT).kube.jetstack.net
+TLS_ENABLED := true
+REPLICA_COUNT=3
 
-.PHONY: build
-build: ; docker build -f Dockerfile.dev -t ${IMAGE} .
+.PHONY: help
+help:
+	# Jetstack Website Makefile
+	#
+	# clean - Remove leftover build artifacts
+	# test - Run tests
+	# hugo_serve - Build Hugo image & run 'hugo serve'. Used for development environment.
+	# hugo_build_image - Build the Hugo docker image
+	# hugo_build - Build Hugo image & build the website within it. Outputs to ./_output
+	# golang_build - Builds the backend golang binary
+	# docker_build - Build the site as a Docker image (run hugo_build BEFORE this target!)
+	# docker_push - Build & push the website docker image. Pushes image with all tags listed in $${IMAGE_TAGS}
+	# test_helm - Runs helm test
+	# deploy - Deploys the website as a Helm chart. See contrib/charts/jetstack-website/values.yaml for options
+	# destroy - Destroys a helm release! Run 'make destroy SURE=1 ENVIRONMENT=env-name' to run.
 
-.PHONY: serve
-serve: ; @$(call run_container,$(IMAGE))
+clean:
+	rm -Rf _output/ _build/ .hugo-log
 
+.PHONY: test
 test: test_helm
 
-docker_build_hugo:
+hugo_build_image:
 	docker build -t $(REGISTRY)/$(IMAGE_NAME):hugo -f Dockerfile.hugo .
 
-hugo_serve: docker_build_hugo
+hugo_serve: hugo_build_image
 	docker rm -f jetstack_website_dev || true
 	docker run -it \
 		--rm \
-	--name jetstack_website_dev \
-	-p 1313:1313 \
-	-v $(CURDIR):/var/lib/hugo \
-	$(REGISTRY)/$(IMAGE_NAME):hugo
+		--name jetstack_website_dev \
+		-p 1313:1313 \
+		-v $(CURDIR):/var/lib/hugo \
+		$(REGISTRY)/$(IMAGE_NAME):hugo
 
-hugo_build: docker_build_hugo
+hugo_build: hugo_build_image
 	# clean up
 	rm -rf _output .hugo-log
 	# create a container
@@ -48,8 +65,8 @@ hugo_build: docker_build_hugo
 	docker cp . $(HUGO_CONTAINER_ID):/var/lib/hugo
 	docker start -a $(HUGO_CONTAINER_ID)
 	docker cp $(HUGO_CONTAINER_ID):/tmp/.hugo-log .
-	test "$$(cat .hugo-log | grep "^ERROR\|^WARN"| wc -l )" -eq "0"
 	cat .hugo-log > /dev/stderr
+	test "$$(cat .hugo-log | grep "^ERROR\|^WARN"| wc -l )" -eq "0"
 	docker cp $(HUGO_CONTAINER_ID):/var/lib/hugo/_output .
 	docker rm -f $(HUGO_CONTAINER_ID)
 
@@ -57,7 +74,6 @@ hugo_build: docker_build_hugo
 golang_build:
 	# create a container
 	$(eval GOLANG_CONTAINER_ID := $(shell docker create \
-		-e CGO_ENABLED=0 \
 		-e CGO_ENABLED=0 \
 		-e GOOS=$(GOOS) \
 		-e GOARCH=$(GOARCH) \
@@ -88,5 +104,11 @@ deploy:
 	helm upgrade $(RELEASE_NAME) $(CHART_PATH) --install --namespace $(NAMESPACE) \
 		--set 'image.tag=$(IMAGE_TAG)' \
 		--set 'ingressHostnames={$(INGRESS_HOSTNAMES)}' \
+		--set 'ingressTLS=$(TLS_ENABLED)' \
+		--set 'replicaCount=$(REPLICA_COUNT)' \
 		--values $(HELM_VALUES) \
 		--wait
+
+destroy:
+	@test "$${SURE}" -ne "0"
+	helm delete --purge $(RELEASE_NAME)
