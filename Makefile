@@ -18,6 +18,7 @@ HELM_VALUES := .values.$(ENVIRONMENT).yaml
 
 HUGO_BASE_URL := "https://www.jetstack.io"
 INGRESS_HOSTNAMES := website-$(ENVIRONMENT).kube.jetstack.net
+HTPASSWD := jetstack:$$apr1$$0NE963xA$$0X9bYAqzMT83qWUs8TZYx0
 TLS_ENABLED := true
 REPLICA_COUNT=3
 
@@ -105,6 +106,7 @@ deploy:
 		--set 'image.tag=$(IMAGE_TAG)' \
 		--set 'ingressHostnames={$(INGRESS_HOSTNAMES)}' \
 		--set 'ingressTLS=$(TLS_ENABLED)' \
+		--set 'ingressHtpasswd=$(HTPASSWD)' \
 		--set 'replicaCount=$(REPLICA_COUNT)' \
 		--values $(HELM_VALUES) \
 		--wait
