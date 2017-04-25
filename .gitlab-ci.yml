@@ -133,6 +133,7 @@ deploy:prod:
       IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
       INGRESS_HOSTNAMES="www.jetstack.io,jetstack.io,website-prod.kube.jetstack.net"
       HUGO_BASE_URL="https://www.jetstack.io"
+      HTPASSWD=
       TLS_ENABLED=false
       HELM_VALUES='.values.prod.yaml'
   environment:
