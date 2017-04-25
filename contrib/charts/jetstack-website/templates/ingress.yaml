@@ -25,7 +25,8 @@ spec:
   - host: {{ $hostname }}
     http:
       paths:
-      - backend:
+      - path: /
+        backend:
           serviceName: {{ template "fullname" $global }}
           servicePort: {{ $global.Values.service.externalPort }}
 {{- end }}
