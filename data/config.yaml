@@ -28,20 +28,19 @@ titles:
 offices:
   - name: London
     default: true
-    lat: "51.5241062"
-    lon: "-0.1132942"
+    lat: "51.507213"
+    lon: "-0.102198"
     address:
-      - 14 Rosebery Ave
+      - 65B Hopton Street
       - London
-      - EC1R 4TD
+      - SE1 9LR
   - name: Bristol
     lat: "51.454722"
     lon: "-2.582713"
     address:
-      - 1, Temple Way
-      - Bristol, BS2 0BY
-      - UK
-      - +44 (0) 7793 231 093
+      - 1 Temple Way
+      - Bristol
+      - BS2 0BY
 
 # control the navbar, social links and insight menus
 menus:

@@ -114,7 +114,7 @@ function createMap() {
         });
 
         var content = '' + 
-            '<img src="/img/png/logo-black.png" class="contact-map-logo">' +
+            '<img src="/img/png/newlogoblack.png" class="contact-map-logo">' +
             '<address class="contact-map-address">' +
             officeInfo.name + '<br /><br />' +
             officeInfo.address.join('<br />') +
