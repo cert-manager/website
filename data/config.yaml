@@ -189,19 +189,21 @@ panels:
       - name: ovo
         img: /img/png/ovo-logo.png
         link: https://www.ovoenergy.com/
-
       - name: pearson
         img: /img/png/pearson.png
         link: https://www.pearson.com/
-      - name: elevate
-        img: /img/png/elevate.png
-        link: http://elevatedirect.com/
       - name: brightpearl
         img: /img/png/brightpearl.png
         link: https://www.brightpearl.com
       - name: tigera
         img: /img/png/tigera.png
         link: https://www.tigera.io/
+      - name: elevate
+        img: /img/png/elevate.png
+        link: http://elevatedirect.com/
+      - name: monzo
+        img: /img/png/monzo-logo.png
+        link: https://www.monzo.com/
       - filler: true
       - name: contact
         button: Get in touch
