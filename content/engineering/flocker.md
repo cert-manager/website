@@ -9,6 +9,6 @@ description: >
   Use Flocker with Kubernetes
 ---
 
-[Flocker](https://flocker-docs.clusterhq.com/en/latest/kubernetes-integration/index.html) is an open source clustered container data volume manager. It provides management and orchestration of data volumes backed by a variety of storage backends.
+[Flocker](https://clusterhq.com/flocker/introduction/) is an open source clustered container data volume manager. It provides management and orchestration of data volumes backed by a variety of storage backends.
 
 Jetstack built the [Flocker volume plugin](https://kubernetes.io/docs/concepts/storage/volumes/#flocker) for Kubernetes.
