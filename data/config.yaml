@@ -396,3 +396,8 @@ panels:
     testimonial:
       copy: The workshop helped me understand what Kubernetes are made for, what the building blocks are and how we are supposed to use them.
       cite: Lorem ipsum name
+
+  training_subscription:
+    testimonial:
+      copy: I’m in a position where I know what I need to focus on, just need to get some hours under my belt playing with it.
+      cite: Lorem ipsum name

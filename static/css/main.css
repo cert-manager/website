@@ -20,8 +20,10 @@ h2 {
 }
 
 p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 28px;
+    font-weight: 400;
+    color: #7e8087;
 }
 
 a {
@@ -512,6 +514,10 @@ section.bordered {
     line-height: 55px;
 }
 
+.black {
+    color: black;
+}
+
 /* Diagonal media component used on the Training page */
 .diagonal__content {
     text-align: center;
@@ -687,6 +693,10 @@ section.bordered {
     display: block;
     height: auto;
     margin-bottom: 70px;
+}
+
+.image-with-tile.image-with-tile--horizontal .image-with-tile__img {
+    margin-bottom: 0;
 }
 
 @media screen and (min-width: 768px) {
