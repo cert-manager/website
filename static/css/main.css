@@ -516,7 +516,7 @@ section.bordered {
 .diagonal__content {
     text-align: center;
     background-color: #f2f7fc;
-    padding: 40px;
+    padding: 40px 20px;
     color: #5f5f5f;
 }
 
@@ -573,6 +573,7 @@ section.bordered {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding: 40px;
     }
 
     .diagonal__image-container {
