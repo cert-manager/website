@@ -238,12 +238,13 @@ div.image-zoom-container a img:hover {
 }
 
 #footer .pre-footer {
-    background: #f2f2f2;
+    background: #f2f7fc;
     text-align: center;
 }
 
 #footer .pre-footer h3 {
     font-size: 28px;
+    font-weight: 700;
 }
 
 #footer .pre-footer .footer-form {
@@ -560,7 +561,7 @@ section.bordered {
 
     .diagonal__content {
         order: 1;
-        width: 50%;
+        width: 45%;
         display: flex;
         flex-direction: column;
         justify-content: center;
