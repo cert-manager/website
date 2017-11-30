@@ -50,6 +50,8 @@ menus:
       link: /engineering/
     - name: Services
       link: /services/
+    - name: Training
+      link: /training/
     - name: About Us
       link: /about/
     - name: Blog
@@ -145,6 +147,11 @@ headline:
   videos:
     headline: JetTube
     strapline: Get yo popcorn yo
+
+  training:
+    headline: Lorem ipsum dolor sit amet consectetuer adipiscing
+    strapline: Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+    tag: Training
 
   footer:
     headline: Get Started With Jetstack

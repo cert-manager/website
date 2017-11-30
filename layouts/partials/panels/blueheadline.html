@@ -1,4 +1,7 @@
 <section class="blue" id="strapline">
+    {{ if .tag }}
+        <p class="text-light-alt">{{ .tag }}</p>
+    {{ end }}
     <h1 class="text-light">{{ .headline | markdownify }}</h1>
     <p class="text-light-alt">{{ .strapline }}</p>
 </section>
