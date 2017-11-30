@@ -606,3 +606,19 @@ section.bordered {
         fill: #1b1c29;
     }
 }
+
+/* New style testimonial  */
+.testimonial {
+    border-left: 0;
+}
+
+.testimonial__copy {
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.4;
+    color: #3f56ea;
+}
+
+.testimonial__cite {
+    font-weight: 500;
+}

@@ -11,6 +11,7 @@
     
   {{ partial "panels/blueheadline.html" .Site.Data.config.headline.training }}
   
+    <!-- Diagonal media component -->
     <div class="diagonal">
         <div class="diagonal__image-container" style="background-image: url(https://placehold.it/680x440);">
             <svg role="presentation" class="diagonal__svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -27,23 +28,40 @@
             <a href="#" class="diagonal__link">Learn More</a>
         </div>
     </div>
+    <!-- End: Diagonal media component -->
 
-    <div class="diagonal diagonal--opposite">
-            <div class="diagonal__image-container" style="background-image: url(https://placehold.it/680x440);">
-                <svg role="presentation" class="diagonal__svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                 viewBox="0 0 200 1000" xml:space="preserve" preserveAspectRatio="none">
-                <polygon points="200,1000 -1,1000 200,1 "/>
-                </svg>
-            </div>
-    
-            <div class="diagonal__content">
-                <h2 class="diagonal__heading">In-Person Training</h2>
-                <p class="diagonal__copy">
-                    These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience.
-                </p>
-                <a href="#" class="diagonal__link">Learn More</a>
+
+    <!-- Testimonial section -->
+    <section class="white">
+        <div class="container">
+            <div class="row">
+                <blockquote class="testimonial col-md-8">
+                    <p class="testimonial__copy">"The workshop helped me understand what Kubernetes are made for, what the building blocks are and how we are supposed to use them."</p>
+                    <cite class="testimonial__cite">Lorem ipsum</cite>
+                </blockquote>
             </div>
         </div>
+    </section>
+    <!-- End: Testimonial section -->
+
+    <!-- Diagonal media component (opposite) -->
+    <div class="diagonal diagonal--opposite">
+        <div class="diagonal__image-container" style="background-image: url(https://placehold.it/680x440);">
+            <svg role="presentation" class="diagonal__svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 200 1000" xml:space="preserve" preserveAspectRatio="none">
+            <polygon points="200,1000 -1,1000 200,1 "/>
+            </svg>
+        </div>
+
+        <div class="diagonal__content">
+            <h2 class="diagonal__heading">In-Person Training</h2>
+            <p class="diagonal__copy">
+                These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience.
+            </p>
+            <a href="#" class="diagonal__link">Learn More</a>
+        </div>
+    </div>
+    <!-- End:Diagonal media component -->
 
 </div>
 
