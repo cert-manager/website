@@ -253,10 +253,10 @@ panels:
       - name: monzo
         img: /img/png/monzo-logo.png
         link: https://www.monzo.com/
-      - filler: true
       - name: contact
         button: Get in touch
         link: /contact/
+      - filler: true
 
     inTheNews:
       - filler: true
