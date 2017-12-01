@@ -52,6 +52,11 @@ menus:
       link: /consulting/
     - name: Training
       link: /training/
+      sublinks:
+      - name: Training Subscription
+        link: /training-subscription/
+      - name: In-person Training
+        link: /in-person-training/
     # - name: About Us
     #   link: /about/
     # - name: Blog

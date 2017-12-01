@@ -460,6 +460,10 @@ section.bordered {
     max-height: 100%;
 }
 
+#header nav.opened .navbar-collapse {
+    padding-top: 20px;
+}
+
 #header nav.opened ul li.hidden {
     display: block !important;
 }
@@ -875,4 +879,93 @@ section.bordered {
 
 .offices__office {
     margin: 20px 40px;
+}
+
+
+/* Super specific selectors to override Bootstrap nonsense */
+.nav > li > .nav__link:focus, 
+.nav > li > .nav__link.current:hover,
+.nav > li > .nav__link.current:focus,
+.nav > li > .nav__link:hover {
+    background-color: #F1F5FF;
+    color: #3F56EA;
+}
+
+.navbar.white .navbar-nav > li > .nav__link.current {
+    color: #3F56EA;
+}
+
+.nav__link {
+    border-radius: 5px;
+    position: relative;
+}
+
+.nav__link.nav__link--sublinks {
+    padding-right: 50px;
+}
+
+
+
+.nav__sublinks {
+    background: white;
+    list-style: none;
+    border-radius: 5px;
+    position: relative;
+    padding: 0;
+}
+
+
+
+.nav__sublinks a {
+    color: #888A90;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+}
+
+.nav__sublinks a:hover,
+.nav__sublinks a:focus {
+    background-color: #F1F5FF;
+    color: #3F56EA;
+    text-decoration: none;
+}
+
+.nav__sublink.nav__sublink--active {
+    color: #3F56EA;
+}
+
+@media screen and (min-width: 768px) {
+    .nav__sublinks {
+        display: none;    
+        padding: 10px;    
+    }
+
+    .nav__sublinks li {
+        margin: 10px 0;
+    }
+
+    .navbar-nav>li:hover .nav__sublinks {
+        display: block;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 250px;
+    }
+
+    .nav__link.nav__link--sublinks:after {
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 6px 5px 0 5px;
+        border-color: #6E6F7C transparent transparent transparent;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-2px);
+    }
+    
+    .nav__link.nav__link--sublinks:hover:after {
+        border-color: #3F56EA transparent transparent transparent;
+    }
 }

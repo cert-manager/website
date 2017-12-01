@@ -1,8 +1,17 @@
 {{ $active := .active }}
 {{ range .links }}
   <li>
-    <a href="{{ .link }}"{{ if hasPrefix $active .link }} class="current"{{ end }}>
+    <a href="{{ .link }}" class="nav__link{{ if hasPrefix $active .link }} current{{ end }}{{ if .sublinks }} nav__link--sublinks{{ end }}">
       {{ .name }}
     </a>
+    {{ if .sublinks }}
+      <ul class="nav__sublinks">
+      {{ range $sublink := .sublinks }}
+        <li>
+          <a href="{{ $sublink.link }}" class="nav__sublink{{ if hasPrefix $active $sublink.link }} nav__sublink--active{{ end }}">{{ $sublink.name }}</a>
+        </li>
+      {{ end }}
+        </ul>
+    {{ end }}
   </li>
 {{ end }}
