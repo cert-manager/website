@@ -30,11 +30,7 @@ a {
     color: #1768E2;
 }
 
-@media (max-width: 769px) {
-    br {
-        display: none;
-    }
-}
+
 
 @media (max-width: 480px) {
     h1 {
@@ -422,6 +418,10 @@ section.grey {
 
 section.bordered {
     border: 1px solid #f2f2f2;
+}
+
+.lightblue {
+    background: #f2f7fc;
 }
 
 /**
@@ -865,4 +865,14 @@ section.bordered {
 .icon.icon--github {
     background-image: url(/img/svg/icon-github.svg);
     transform: translateY(-2px);
+}
+
+.offices {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.offices__office {
+    margin: 20px 40px;
 }
