@@ -162,6 +162,11 @@ headline:
     headline: Lorem ipsum dolor sit amet consectetuer adipiscing
     strapline: Lorem ipsum dolor sit amet, consectetuer adipiscing elit
     tag: Consulting
+  
+  open_source:
+    headline: Supercharging Kubernetes with Jetstack Open Source
+    strapline: Enhancing the experience a tool at a time
+    tag: Open Source
 
   footer:
     headline: Get Started With Jetstack
