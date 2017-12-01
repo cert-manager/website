@@ -58,6 +58,20 @@ menus:
     #   link: https://blog.jetstack.io/
     # - name: Contact
     #   link: /contact/
+  
+  navbar_footer:
+    - name: Open Source
+      link: /open-source/
+    - name: Consulting
+      link: /consulting/
+    - name: Training
+      link: /training/
+    - name: About Us
+      link: /about/
+    - name: Blog
+      link: https://blog.jetstack.io/
+    # - name: Contact
+    #   link: /contact/
 
   social:
     - name: github
@@ -394,14 +408,14 @@ panels:
       copy: Jetstack have built their training courses around the knowledge gained in delivering production-ready Kubernetes for their customers.
       link_text: Learn More
       link_url: /training-subscription
-      img: /img/jpg/kubernetes-2.jpg
+      img: /img/jpg/training-subscription.jpg
 
     training_inperson:
       title: In-Person Training
       copy: These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience.
       link_text: Learn More
       link_url: /in-person-training
-      img: /img/jpg/slingshot-background.jpg
+      img: /img/jpg/training-in-person.jpg
 
     testimonial:
       copy: The workshop helped me understand what Kubernetes are made for, what the building blocks are and how we are supposed to use them.
