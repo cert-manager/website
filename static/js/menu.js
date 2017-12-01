@@ -15,18 +15,17 @@ $(window).resize(function () {
     }
 });
 
+var isHomepage = $('#header nav').hasClass('homepage');
+var headerNav = $('#header nav');
+
 $(window).scroll(function () {
     if ($(window).scrollTop() > 100) {
-        $('#header nav').css({
-            "height": "90px",
-            "padding-top": "20px",
-            "padding-bottom": "20px"
-        });
+        if(isHomepage) {
+            headerNav.removeClass('homepage');
+        }
     } else {
-        $('#header nav').css({
-            "height": "100px",
-            "padding-top": "25px",
-            "padding-bottom": "25px"
-        });
+        if (isHomepage){
+            headerNav.addClass('homepage');
+        }
     }
 });

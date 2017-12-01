@@ -52,10 +52,10 @@ a {
     padding-bottom: 25px;
     background: #1B1C29;
     font-size: 18px;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
 }
 
 #header nav .navbar-toggle .icon-bar {
@@ -95,12 +95,33 @@ a {
 
 .navbar-brand {
     padding: 0px !important;
+    position: relative;
 }
 .navbar-brand img {
     margin-top: 5px;
     height: 40px;
 }
 
+.navbar-brand__fadeout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+
+    -webkit-transition: opacity 0.3s ease-in;
+    -moz-transition: opacity 0.3s ease-in;
+    -o-transition: opacity 0.3s ease-in;
+    transition: opacity 0.3s ease-in;
+}
+
+.navbar-brand__fadein {
+    -webkit-transition: opacity 0.3s ease-in;
+    -moz-transition: opacity 0.3s ease-in;
+    -o-transition: opacity 0.3s ease-in;
+    transition: opacity 0.3s ease-in;
+}
 
 @media (max-width: 769px) {
     .navbar-brand img {
@@ -891,6 +912,10 @@ section.bordered {
     color: #3F56EA;
 }
 
+
+
+
+
 .navbar.white .navbar-nav > li > .nav__link.current {
     color: #3F56EA;
 }
@@ -935,9 +960,19 @@ section.bordered {
 }
 
 @media screen and (min-width: 768px) {
+    #header nav.white.homepage {
+        background-color: transparent;
+        color: white;
+        border-bottom-color: transparent;
+    }
+    
+    #header nav.white.homepage .navbar-nav > li > a {
+        color: white;
+    }
+
     .nav__sublinks {
         display: none;    
-        padding: 10px;    
+        padding: 0 10px;    
     }
 
     .nav__sublinks li {
@@ -967,5 +1002,22 @@ section.bordered {
     
     .nav__link.nav__link--sublinks:hover:after {
         border-color: #3F56EA transparent transparent transparent;
+    }
+
+    .navbar.homepage .nav > li > .nav__link:focus, 
+    .navbar.homepage .nav > li > .nav__link.current:hover,
+    .navbar.homepage .nav > li > .nav__link.current:focus,
+    .navbar.homepage .nav > li > .nav__link:hover {
+        background-color: transparent;
+        color: #3F56EA;
+    }
+
+    /* Fade the logo in and out on homepage desktiop */
+    .navbar.homepage .navbar-brand__fadeout {
+        opacity: 1;
+    }
+    
+    .navbar.homepage .navbar-brand__fadein {
+        opacity: 0;
     }
 }

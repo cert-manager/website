@@ -22,7 +22,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand collapsed" href="/"><img src="/img/png/newlogo{{ default "white" .logoColor }}.png" /></a>
+        <a class="navbar-brand collapsed" href="/">
+            <img class="navbar-brand__fadein" src="/img/png/newlogo{{ default "white" .logoColor }}.png" />
+            <img class="navbar-brand__fadeout" src="/img/png/newlogowhite.png" />
+        </a>
     </div>
     <div id="{{ $id }}" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
