@@ -730,16 +730,13 @@ section.bordered {
     }
 }
 
-/* Highlight tile (used on Consulting template) */
-
-
-
-.highlight-tiles__content {
+/* Media tile (image / copy) (used on Consulting template) */
+.media-component__content {
     padding: 20px;
     position: relative;
 }
 
-.highlight-tiles__list {
+.media-component__popout-list {
     color: white;
     background-color: #3f56ea;
     padding: 20px;
@@ -747,16 +744,16 @@ section.bordered {
     margin: 20px 0;
 }
 
-.highlight-tiles__list-item {
+.media-component__popout-list-item {
     padding: 15px 0;
     border-bottom: 1px solid white;
 }
 
-.highlight-tiles__list-item:last-child {
+.media-component__popout-list-item:last-child {
     border: 0;
 }
 
-.highlight-tiles__image {
+.media-component__image {
     min-height: 300px;
     background-position: 50% 50%;
     background-repeat: no-repeat;
@@ -764,39 +761,39 @@ section.bordered {
 }
 
 @media screen and (min-width: 768px) {
-    .highlight-tiles__row {
+    .media-component__row {
         display: flex;
     }
     
-    .highlight-tiles__image,
-    .highlight-tiles__content {
+    .media-component__image,
+    .media-component__content {
         flex: 1 1 50%;
     }
 
-    .highlight-tiles__content {
+    .media-component__content {
         padding: 100px;
     }
 
-    .highlight-tiles__image {
+    .media-component__image {
         min-height: 400px;
     }
 
-    .highlight-tiles__list {
+    .media-component__popout-list {
         position: absolute;
         top: 100px;
         width: 300px;
         right: calc(100% - 40px);
     }
 
-    .highlight-tiles__row:nth-child(even) .highlight-tiles__content {
+    .media-component__row:nth-child(even) .media-component__content {
         order: 1;
     }
 
-    .highlight-tiles__row:nth-child(even) .highlight-tiles__image {
+    .media-component__row:nth-child(even) .media-component__image {
         order: 2;
     }
 
-    .highlight-tiles__row:nth-child(even) .highlight-tiles__list{
+    .media-component__row:nth-child(even) .media-component__popout-list{
         right: auto;
         left: calc(100% - 40px);
     }
