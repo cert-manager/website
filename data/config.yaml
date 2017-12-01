@@ -46,18 +46,18 @@ offices:
 menus:
 
   navbar:
-    - name: Engineering
-      link: /engineering/
-    - name: Services
-      link: /services/
+    - name: Open Source
+      link: /open-source/
+    - name: Consulting
+      link: /consulting/
     - name: Training
       link: /training/
-    - name: About Us
-      link: /about/
-    - name: Blog
-      link: https://blog.jetstack.io/
-    - name: Contact
-      link: /contact/
+    # - name: About Us
+    #   link: /about/
+    # - name: Blog
+    #   link: https://blog.jetstack.io/
+    # - name: Contact
+    #   link: /contact/
 
   social:
     - name: github
