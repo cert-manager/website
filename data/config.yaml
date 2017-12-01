@@ -150,13 +150,18 @@ headline:
 
   training:
     headline: Lorem ipsum dolor sit amet consectetuer adipiscing
-    strapline: Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+    strapline: Lorem ipsum dolor sit amet, consectetuer adipiscing elit
     tag: Training
   
   training_section:
     headline: Training Subscription
-    strapline: Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+    strapline: Lorem ipsum dolor sit amet, consectetuer adipiscing elit
     tag: Training
+  
+  consulting:
+    headline: Lorem ipsum dolor sit amet consectetuer adipiscing
+    strapline: Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+    tag: Consulting
 
   footer:
     headline: Get Started With Jetstack

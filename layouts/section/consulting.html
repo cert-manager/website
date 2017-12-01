@@ -1,0 +1,78 @@
+{{ define "title" }} | Training{{ end }}
+
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+
+{{ define "body" }}
+
+
+<div class="container-fluid" id="page-content">
+    
+  {{ partial "panels/blueheadline.html" .Site.Data.config.headline.consulting }}
+  
+  <section class="tight highlight-tiles">
+    <div class="highlight-tiles__row">
+      <div class="highlight-tiles__image" style="background-image: url(/img/jpg/kubernetes-1.jpg)"></div>
+      <div class="highlight-tiles__content">
+        <div class="highlight-tiles__copy">
+          <h2>Consulting</h2>
+          <p>Jetstack have deployed production-ready Kubernetes for thre hottest start-ups and the largest Enterprises.</p>
+          <p>They thrive on tackling the most difficult challenges around Kubernetes, everything from persistent storage to cluster federation.</p>
+          <p>They track the Kubernetes project daily, and contribute code regulary. Their wide variety of experience will enbable you to get the most out of Kubernetes and make sure you avoid unnecessary issues and pitfalls. in doing so, they will bootstrap your team and accelerate your project.</p>
+        </div>
+        <ul class="highlight-tiles__list">
+          <li class="highlight-tiles__list-item">
+            On-Site
+          </li>
+          <li class="highlight-tiles__list-item">
+            Remote
+          </li>
+          <li class="highlight-tiles__list-item">
+            T&amp;M / Project-Based
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-tiles__row">
+        <div class="highlight-tiles__image" style="background-image: url(/img/jpg/engineering-flocker3.jpg)"></div>
+        <div class="highlight-tiles__content">
+          <div class="highlight-tiles__copy">
+            <h2>Kubernetes Production Readiness</h2>
+            <p>A Jetstack Production Readiness Review will validate existing work on Kubernetes, and identify any areas of the cluster that could be improved.</p>
+            <p>You will receive a report with improvements laid out in a suggested remediation plan with recommendations prioritised based on critically. By the end of the review, you will have concretete steps on getting to a best-practise cluster.</p>
+            <p>In the process of delivering production readiness reports for customers, Jetstack has has uncovered a wide variety of issues that would otherwise have proved critical to the production usage of Kubernetes. They have also saved up to 45% of cloud bills by accurately sizing and architecting the cluster.</p>
+          </div>
+          <ul class="highlight-tiles__list">
+            <li class="highlight-tiles__list-item">
+              <strong>Day 1</strong> On-site cluster review
+            </li>
+            <li class="highlight-tiles__list-item">
+              <strong>Day 2</strong> On-site cluster review
+            </li>
+            <li class="highlight-tiles__list-item">
+              <strong>Within 15 days</strong> A full and comprehensive production readiness report, delivered on-site
+            </li>
+          </ul>
+        </div>
+      </div>
+  </section>
+
+  <section class="container">
+      <div class="row">
+          <div class="col-md-8">
+            <blockquote class="testimonial">
+                <p class="testimonial__copy">"I now know the basic concepts and building blocks and I have a sense of what's possible."</p>
+                <cite class="testimonial__cite">Lorem, ipsum name</cite>
+            </blockquote>
+          </div>
+      </div>
+  </section>
+
+</div>
+
+{{ end }}
+
+{{ define "scripts" }}
+
+{{ end }}
