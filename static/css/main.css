@@ -205,7 +205,8 @@ a {
 }
 
 .container-fluid {
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 @media (max-width: 992px) {
@@ -383,14 +384,20 @@ div.image-zoom-container a img:hover {
     margin-left: 0;
     margin-right: 0;
 }
+/* Had to add 👇 because 👆 breaks the Bootstrap columns and it's used throughout the site! 🤦‍ */
+.row.row--no-flex {
+    display: block;
+}
 
 .row.reverse {
     flex-direction: row-reverse;
 }
 
+
 .row .item {
     flex: 1;
 }
+
 
 @media (max-width: 769px) {
     .row {
@@ -1020,4 +1027,49 @@ section.bordered {
     .navbar.homepage .navbar-brand__fadein {
         opacity: 0;
     }
+}
+
+.icon-panel {
+    display: block;
+}
+
+.icon-panel:hover,
+.icon-panel:focus {
+    text-decoration: none;
+}
+
+.icon-panel__title {
+    color: #1B1C29;
+}
+
+.icon-panel:hover .icon-panel__title,
+.icon-panel:focus .icon-panel__title {
+    color: #3F56EA;
+}
+
+.icon-panel__icon {
+    height: 200px;
+    background-color: #F2F7FC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.icon-panel__icon svg {
+    fill: #3F56EA;
+}
+
+.icon-panel:hover .icon-panel__icon,
+.icon-panel:focus .icon-panel__icon {
+    background-color: #3F56EA;
+}
+
+.icon-panel:hover .icon-panel__icon svg,
+.icon-panel:focus .icon-panel__icon svg {
+    fill: white;
+}
+
+.icon-panel__copy {
+    margin-bottom: 40px;
 }

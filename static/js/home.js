@@ -47,7 +47,7 @@ $('#carousel').on('slide.bs.carousel', function (carousel) {
     }
 
     var paddedTotalSlides = pad(totalSlides, 2);
-    $('.pagination').html(activeSlide + "/" + paddedTotalSlides);
+    $('.pagination').html(activeSlide + " / " + totalSlides);
 });
 
 function popNav() {

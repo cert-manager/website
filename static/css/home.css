@@ -293,50 +293,37 @@
     }
 }
 
-#testimonials {
-    padding: 0;
-}
-
-#testimonials blockquote {
-    padding: 2em 0;
-    border: 0;
-    font-weight: 500;
-    font-size: 2em;
-    max-width: 720px;
-}
-
 #testimonials .carousel-inner {
-    height: 340px;
     position: relative;
-}
-
-#testimonials .item {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    overflow: visible;
+    min-height: 200px;
 }
 
 #testimonials .pagination {
-    float: right;
+    margin: 0 15px;
+    transform: translateX(3px);
 }
 
 #testimonials #carousel .carousel-control-container {
-    width: 75px;
+    /* width: 75px; */
     position: absolute;
-    right: 25%;
-    top: 0;
-    height: 100%;
+    left: 15px;
+    top: 100%;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    align-items: center;
 }
 
 #testimonials #carousel .carousel-control {
-    position: absolute;
+    position: relative;
     color: black;
     text-shadow: none;
     font-weight: 300;
 }
 
 #testimonials #carousel .carousel-control img {
-    position: absolute;
+    /* position: absolute; */
     top: 50%;
     z-index: 5;
     display: inline-block;
@@ -354,18 +341,6 @@
 
 .carousel-control .glyphicon-chevron-left {
     left: 0;
-}
-
-@media (max-width: 1192px) {
-    #testimonials #carousel .carousel-control-container {
-        right: 15%;
-    }
-}
-
-@media (max-width: 992px) {
-    #testimonials #carousel .carousel-control {
-        top: 69%;
-    }
 }
 
 @media (max-width: 769px) {
@@ -512,3 +487,21 @@
 
 }
 
+
+.csp-logo {
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 50px;
+    width: 180px;
+    height: auto;
+}
+
+@media screen and (min-width: 992px) {
+    .csp-logo {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: auto;
+        
+    }
+}
