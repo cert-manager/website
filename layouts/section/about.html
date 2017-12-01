@@ -5,7 +5,7 @@
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">
-  {{ partial "panels/headline.html" .Site.Data.config.headline.about }}
+  {{ partial "panels/blueheadline.html" .Site.Data.config.headline.about }}
 
   <div id="about">
     <section class="white bordered">
@@ -34,9 +34,4 @@
 
 </div>
 
-{{ end }}
-
-
-{{ define "footer" }}
-    {{ partial "footer/minimal.html" . }}
 {{ end }}
