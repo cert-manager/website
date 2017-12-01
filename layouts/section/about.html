@@ -2,6 +2,11 @@
 {{ define "head" }}
     <link href="/css/about.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
 {{ end }}
+
+{{ define "navbar" }}
+  {{ partial "navbar/light.html" . }}
+{{ end }}
+
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">
