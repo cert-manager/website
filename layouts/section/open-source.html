@@ -12,86 +12,53 @@
   {{ partial "panels/blueheadline.html" .Site.Data.config.headline.open_source }}
   
   <section class="tight media-component">
-    <div class="media-component__row">
-      <div class="media-component__image" style="background-image: url(/img/jpg/open-source-tarmak.jpg)">
-        <div class="media-component__image-content-container">
-          <img src="/img/svg/logo-tarmak.svg" alt="Tarmak Logo">
-        </div>
-      </div>
-      <div class="media-component__content">
-        <div class="media-component__copy">
-          <h2>Tarmak</h2>
-          <p>Tarmak and its underlying components are the product of Jetstack’s extensive experience working with customers to build and deploy Kubernetes in production at scale. Tarmak is an open-source toolkit for Kubernetes life-cycle management, built to be cloud provider-agnostic and gives consistent and reliable cluster deployment and management.</p>
-          <div class="media-component__links">
-            <a href="#">Get started</a>
-            <a href="#"><i class="icon icon--github"></i>Go to GitHub repo</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="media-component__row">
-        <div class="media-component__image" style="background-image: url(/img/jpg/open-source-navigator.jpg)">
+    {{ range $index, $page := .Data.Pages }}
+      {{ if modBool $index 2 }}
+      <div class="media-component__row">
+        <div class="media-component__image" style="background-image: url({{ $page.Params.image }})">
           <div class="media-component__image-content-container">
-            <!-- TODO: Replace with logo image file -->
-            <span>Navigator</span>
+            {{ if $page.Params.logo }}
+            <img src="/img/svg/logo-tarmak.svg" alt="Tarmak Logo">
+            {{ else }}
+            <span>{{ $page.Title }}</span>
+            {{ end }}
           </div>
         </div>
         <div class="media-component__content">
           <div class="media-component__copy">
-            <h2>Navigator</h2>
-            <p>Companies often have to run stateful services out-of-cluster, leading to awkward architecture decisions. Navigator is a Kubernetes-native Database-as-a-Service (DBaaS). It enables stateful services to be deployed as first-class citizens in Kubernetes, meaning a consistent deployment experience for stateless and stateful services alike.</p>
+            <h2>{{ $page.Title }}</h2>
+            <p>{{ $page.Content }}</p>
             <div class="media-component__links">
               <a href="#">Get started</a>
-              <a href="#"><i class="icon icon--github"></i>Go to GitHub repo</a>
+              <a href="{{ $page.Params.github }}"><i class="icon icon--github"></i>Go to GitHub repo</a>
             </div>
           </div>
         </div>
       </div>
-
+      {{ else }}
       <div class="media-component__row">
-          <div class="media-component__image" style="background-image: url(/img/jpg/open-source-kube.jpg)">
+          <div class="media-component__image" style="background-image: url({{ $page.Params.image }})">
             <div class="media-component__image-content-container">
-              <!-- TODO: Replace with logo image file -->
-              <span>Kube lego</span>
+              {{ if $page.Params.logo }}
+              <img src="/img/svg/logo-tarmak.svg" alt="Tarmak Logo">
+              {{ else }}
+              <span>{{ $page.Title }}</span>
+              {{ end }}
             </div>
           </div>
           <div class="media-component__content">
             <div class="media-component__copy">
-              <h2>Kube-Lego</h2>
-              <p>Kube-Lego is an open source project, started by Jetstack, for automating Let’s Encrypt TLS-enabled web services running in Kubernetes. Kube-Lego automates the process in Kubernetes by watching ingress resources and automatically requesting missing or expired TLS certificates from Let’s Encrypt:</p>
-              <ul>
-                <li>Negotiates with an ACME server to obtain certificates for Ingress</li>
-                <li>Performs domain validations via ACME HTTP-01</li>
-                <li>Automates renewal process.</li>
-              </ul>
+              <h2>{{ $page.Title }}</h2>
+              <p>{{ $page.Content }}</p>
               <div class="media-component__links">
-                <a href="#"><i class="icon icon--github"></i>Go to GitHub repo</a>
+                <a href="#">Get started</a>
+                <a href="{{ $page.Params.github }}"><i class="icon icon--github"></i>Go to GitHub repo</a>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="media-component__row">
-        <div class="media-component__image" style="background-image: url(/img/jpg/open-source-cert.jpg)">
-          <div class="media-component__image-content-container">
-            <!-- TODO: Replace with logo image file -->            
-            <span>Cert-Manager</span>
-          </div>
-        </div>
-        <div class="media-component__content">
-          <div class="media-component__copy">
-            <h2>Kubernetes Production Readiness</h2>
-            <p>Cert-Manager follows on from Kube-Lego, and surpasses the limits of ACME and compatibility with Ingress. Cert-Manager’s General purpose is as an Issuer interface, and boasts the following qualities:</p>
-            <ul>
-              <li>Extendable: uses custom resources to define certificates &amp; issuing sources</li>
-              <li>Robust: no longer bound to compatibility with a limited set of Ingress controllers</li>
-              <li>Based on Kubernetes best-practices</li>
-            </ul>
-            <div class="media-component__links">
-              <a href="#"><i class="icon icon--github"></i>Go to GitHub repo</a>
-            </div>
-          </div>
-        </div>
+        {{ end }}
+      {{ end }}
       </div>
   </section>
 
