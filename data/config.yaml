@@ -169,18 +169,23 @@ headline:
     strapline: Get yo popcorn yo
 
   training:
-    headline: Lorem ipsum dolor sit amet consectetuer adipiscing
-    strapline: Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+    headline: Learn with Us 
+    strapline: Learn and engage directly and on-demand with unique resources
     tag: Training
   
-  training_section:
+  training_in_person_section:
+    headline: In-Person Training
+    strapline: Learn and engage directly with our team
+    tag: Training
+  
+  training_subscription_section:
     headline: Training Subscription
-    strapline: Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+    strapline: On-demand training and resources to maximise operational confidence
     tag: Training
-  
+
   consulting:
-    headline: Lorem ipsum dolor sit amet consectetuer adipiscing
-    strapline: Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+    headline: Our Experts are Your Experts
+    strapline: Make the most of Kubernetes with us alongside your team
     tag: Consulting
   
   open_source:
@@ -239,7 +244,7 @@ panels:
       desc: Consulting and engineering to make the most of Kubernetes and move you quicker to production
     - name: Training Subscription
       img: svg/icon-play.svg
-      desc: On-demand training and resources, regularly updated to maximise operational confidence
+      desc: On-demand training and resources, regularly updated, to maximise operational confidence
       link: /training-subscription
     - name: In-Person Training
       img: svg/icon-presentation.svg
@@ -450,9 +455,9 @@ panels:
 
     testimonial:
       copy: The workshop helped me understand what Kubernetes are made for, what the building blocks are and how we are supposed to use them.
-      cite: Lorem ipsum name
+      cite: Workshop Attendee
 
   training_subscription:
     testimonial:
       copy: I’m in a position where I know what I need to focus on, just need to get some hours under my belt playing with it.
-      cite: Lorem ipsum name
+      cite: Workshop Attendee
