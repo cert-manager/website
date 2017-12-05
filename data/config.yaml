@@ -112,13 +112,6 @@ headline:
     strapline: >
       Your path to Enterprise Cloud Native
 
-  our_services:
-    headline: Our services
-    strapline: >
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam 
-      nonummy nibh euismod tincidunt ut laoreet dolore.
-    panelColour: white
-
   getStarted:
     headline: Who are we?
     strapline: >
@@ -227,6 +220,31 @@ panels:
       - Reduces your operational overhead
       - Gives vendor neutrality
       - Offers cross-cloud portability
+
+  our_services:
+    headline: Our services
+    strapline: >
+       Accelerate Your Adoption of Kubernetes and Cloud Native 
+       
+       With Our Unique Blend of Services
+    panelColour: white
+    service_features:
+    - name: Open Source
+      img: svg/icon-cog.svg
+      link: /open-source
+      desc: Enhancing the Kubernetes experience with open source tools
+    - name: Consulting
+      img: svg/icon-brain.svg
+      link: /consulting
+      desc: Consulting and engineering to make the most of Kubernetes and move you quicker to production
+    - name: Training Subscription
+      img: svg/icon-play.svg
+      desc: On-demand training and resources, regularly updated to maximise operational confidence
+      link: /training-subscription
+    - name: In-Person Training
+      img: svg/icon-presentation.svg
+      link: /in-person-training
+      desc: Learn and engage directly with our team with unique courses for all stages of your Kubernetes journey
 
   # the partners we have worked and press stories about us (homepage)
   partners:

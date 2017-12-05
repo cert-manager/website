@@ -23,7 +23,7 @@
 
 <div class="container-fluid" id="home-content">
 
-    {{ partial "panels/services.html" . }}
+    {{ partial "panels/services.html" .Site.Data.config.panels.our_services }}
 
     {{ partial "panels/intro.html" .Site.Data.config.headline.getStarted }}
 

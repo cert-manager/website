@@ -1,46 +1,21 @@
 
-{{ partial "panels/intro.html" .Site.Data.config.headline.our_services }}
+{{ partial "panels/intro.html" . }}
 
 <section class="container tight">
+
+  {{ range $index, $page := .service_features }}
   <div class="row row--no-flex">
-    <div class="col-sm-6 col-md-3">
-      <a href="/open-source" class="icon-panel">
-        <figure class="icon-panel__icon">
-          {{ partial "svg/icon-cog.svg" . }}
-        </figure>
-        <h4 class="icon-panel__title">Open Source</h4>
-        <p class="icon-panel__copy">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, ipsa.</p>
-      </a>
-    </div>
+      <div class="col-sm-6 col-md-3">
+        <a href="{{ .link }}" class="icon-panel">
+          <figure class="icon-panel__icon">
+            {{ partial .img . }}
+          </figure>
+          <h4 class="icon-panel__title">{{ .name }}</h4>
+          <p class="icon-panel__copy">{{ .desc}}</p>
+        </a>
+      </div>
+  
+  {{ end }}
 
-    <div class="col-sm-6 col-md-3">
-      <a href="/consulting" class="icon-panel">
-        <figure class="icon-panel__icon">
-          {{ partial "svg/icon-brain.svg" . }}
-        </figure>
-        <h4 class="icon-panel__title">Consulting</h4>
-        <p class="icon-panel__copy">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, ipsa.</p>
-      </a>
-    </div>
-
-    <div class="col-sm-6 col-md-3">
-      <a href="/training-subscription" class="icon-panel">
-        <figure class="icon-panel__icon">
-          {{ partial "svg/icon-play.svg" . }}
-        </figure>
-        <h4 class="icon-panel__title">Training Subscription</h4>
-        <p class="icon-panel__copy">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, ipsa.</p>
-      </a>
-    </div>
-
-    <div class="col-sm-6 col-md-3">
-      <a href="/in-person-training" class="icon-panel">
-        <figure class="icon-panel__icon">
-          {{ partial "svg/icon-presentation.svg" . }}
-        </figure>
-        <h4 class="icon-panel__title">In Person Training</h4>
-        <p class="icon-panel__copy">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, ipsa.</p>
-      </a>
-    </div>
   </div>
 </section>
