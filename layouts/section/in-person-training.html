@@ -1,0 +1,90 @@
+{{ define "title" }} | Training{{ end }}
+
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+
+{{ define "body" }}
+
+
+<div class="container-fluid" id="page-content">
+    
+  {{ partial "panels/blueheadline.html" .Site.Data.config.headline.training_in_person_section }}
+  
+  <section class="container">
+    <div class="row">
+      <div class="col-md-5">
+        
+        <div>
+          <h2>What is it?</h2>
+          <p class="black"><strong>Kubernetes Beginner - One Day</strong><br />
+          <strong>Kubernetes Intermediate - One Day</strong><br />
+          <strong>Kubernetes Advanced Operations - One Day</strong></p>
+
+          <p>These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience.</p>
+          <p>Jetstack’s training courses draw from their experience of deploying Kubernetes for clients, and are very interactive, giving you the chance to explore key areas of interest.</p>
+        </div>
+
+        <blockquote class="testimonial">
+            <p class="testimonial__copy">"I’m a newbie to Kubernetes, so there was enough information to get me started with it."</p>
+            <cite class="testimonial__cite">Workshop Attendee</cite>
+        </blockquote>
+
+      </div>
+     
+      <div class="col-md-offset-2 col-md-5">
+        <div class="image-with-tile">
+          <img class="image-with-tile__img" src="/img/jpg/training-trainer-480x480.jpg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Beginner:</h2>
+        <p>You will learn how to deploy a microservices application to Google Container Engine (GKE). We will explain the core concepts of Kubernetes and give hands-on, instructor-led labs that cover topics such as persistent volume types, application logs, and using Helm to package and deploy applications.</p>
+        <p>At the end of the day you will also see Continu- ous Integration and Deployment (CI/CD) on Kubernetes, as an application is deployed into multiple environments before being rolled out to production.</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Intermediate:</h2>
+        <p>We will demonstrate some of the more advanced features of Kubernetes and how you can use them to reduce the operational burden on your team. We will give hands-on, instructor-led labs that cover topics such as auto-scaling, the control plane, Ingress and StatefulSet.</p>
+        <p>You will also get to set up a CI/CD pipeline running on Kubernetes, deploying to multiple environments with Helm. We will introduce cluster federation and see a federated, multi-region cluster in action using an example microservices demo application compared to your peers.</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Advanced:</h2>
+        <p>You will learn about pushing the boundaries of Kubernetes by focusing on advanced features and doing a deep dive of the internals. You will get a flavour of what it's like to be responsible for a cluster at scale, hearing about SRE best-practice at Google..</p>
+        <p>Then, how would you fare whilst operating Kubernetes under pressure? Find out in our team 'Wargaming' exercise. As part of the challenge, we will break your Kubernetes cluster in a series of different ways, leaving you and your teammates to figure out how to fix it.</p>
+        <p>Note: Scenarios are based on real-world Kubernetes issues faced by Jetstack engineers.</p>
+      </div>
+    </div>
+    
+  </section>
+
+  <section class="container tight">
+      <div class="row">
+          <div class="col-md-8">
+            <blockquote class="testimonial">
+                <p class="testimonial__copy">"I now know the basic concepts and building blocks and I have a sense of what's possible."</p>
+                <cite class="testimonial__cite">Workshop Attendee</cite>
+            </blockquote>
+          </div>
+      </div>
+  </section>
+
+  <section class="container">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-8">
+            <div class="image-with-tile image-with-tile--horizontal">
+              <img class="image-with-tile__img" src="/img/jpg/training-in-person-1200x670.jpg" alt="">
+            </div>
+        </div>
+    </div>
+  </section>
+
+</div>
+
+{{ end }}
+
+{{ define "scripts" }}
+
+{{ end }}

@@ -51,7 +51,6 @@ function timelineRight() {
 
 function adjustSettings() {
     if ($(window).width() <= 768) {
-        console.log('changing values');
         startPosition = 12.5;
         incrementalPosition = 100;
     } else {

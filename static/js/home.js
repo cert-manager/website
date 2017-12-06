@@ -21,10 +21,8 @@ $(function () {
         e.preventDefault();
         var goTo = $(this).data('slide');
         if (goTo == "prev") {
-            console.log('back');
             $('#carousel').carousel('prev');
         } else {
-            console.log('forward');
             $('#carousel').carousel('next');
         }
     });
@@ -36,7 +34,6 @@ var activeSlide = 1;
 var totalSlides = $('#carousel .item').length;
 
 $('#carousel').on('slide.bs.carousel', function (carousel) {
-    console.log(carousel.direction);
     if (carousel.direction == "right") {
         activeSlide--;
         if (activeSlide < 1) {
@@ -50,7 +47,7 @@ $('#carousel').on('slide.bs.carousel', function (carousel) {
     }
 
     var paddedTotalSlides = pad(totalSlides, 2);
-    $('.pagination').html(activeSlide + "/" + paddedTotalSlides);
+    $('.pagination').html(activeSlide + " / " + totalSlides);
 });
 
 function popNav() {

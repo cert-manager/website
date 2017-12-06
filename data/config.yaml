@@ -46,16 +46,37 @@ offices:
 menus:
 
   navbar:
-    - name: Engineering
-      link: /engineering/
-    - name: Services
-      link: /services/
+    - name: Open Source
+      link: /open-source/
+    - name: Consulting
+      link: /consulting/
+    - name: Training
+      link: /training/
+      sublinks:
+      - name: Training Subscription
+        link: /training-subscription/
+      - name: In-person Training
+        link: /in-person-training/
+    # - name: About Us
+    #   link: /about/
+    - name: Blog
+      link: https://blog.jetstack.io/
+    # - name: Contact
+    #   link: /contact/
+  
+  navbar_footer:
+    - name: Open Source
+      link: /open-source/
+    - name: Consulting
+      link: /consulting/
+    - name: Training
+      link: /training/
     - name: About Us
       link: /about/
     - name: Blog
       link: https://blog.jetstack.io/
-    - name: Contact
-      link: /contact/
+    # - name: Contact
+    #   link: /contact/
 
   social:
     - name: github
@@ -122,6 +143,7 @@ headline:
 
       and the largest enterprises
     strapline: Our team reflects a unique blend of specialist skills
+    tag: About Us
 
   insights:
     headline: Resources, Blogs, Events, Tools, Meetups
@@ -145,6 +167,31 @@ headline:
   videos:
     headline: JetTube
     strapline: Get yo popcorn yo
+
+  training:
+    headline: Learn with Us 
+    strapline: Learn and engage directly and on-demand
+    tag: Training
+  
+  training_in_person_section:
+    headline: In-Person Training
+    strapline: Learn and engage directly with our team
+    tag: Training
+  
+  training_subscription_section:
+    headline: Training Subscription
+    strapline: On-demand training and resources to maximise operational confidence
+    tag: Training
+
+  consulting:
+    headline: Our Experts are Your Experts
+    strapline: Make the most of Kubernetes with us alongside you
+    tag: Consulting
+  
+  open_source:
+    headline: Supercharging Kubernetes with Jetstack Open Source
+    strapline: Enhancing the experience a tool at a time
+    tag: Open Source
 
   footer:
     headline: Get Started With Jetstack
@@ -179,6 +226,31 @@ panels:
       - Gives vendor neutrality
       - Offers cross-cloud portability
 
+  our_services:
+    headline: Our services
+    strapline: >
+       Accelerate Your Adoption of Kubernetes and Cloud Native 
+       
+       With Our Unique Blend of Services
+    panelColour: white
+    service_features:
+    - name: Open Source
+      img: svg/icon-cog.svg
+      link: /open-source
+      desc: Enhancing the Kubernetes experience with open source tools
+    - name: Consulting
+      img: svg/icon-brain.svg
+      link: /consulting
+      desc: Consulting and engineering to make the most of Kubernetes and move you to production quickly
+    - name: Training Subscription
+      img: svg/icon-play.svg
+      desc: On-demand training and resources, regularly updated, to maximise operational confidence
+      link: /training-subscription
+    - name: In-Person Training
+      img: svg/icon-presentation.svg
+      link: /in-person-training
+      desc: Learn and engage directly alongside our team, with courses for all stages of your Kubernetes journey
+
   # the partners we have worked and press stories about us (homepage)
   partners:
 
@@ -204,10 +276,10 @@ panels:
       - name: monzo
         img: /img/png/monzo-logo.png
         link: https://www.monzo.com/
-      - filler: true
       - name: contact
         button: Get in touch
         link: /contact/
+      - filler: true
 
     inTheNews:
       - filler: true
@@ -365,3 +437,27 @@ panels:
       Jetstack develop tools to make your experience with
 
       Kubernetes easier and more productive
+
+  training_landing:
+    training_subscription:
+      title: Training Subscription
+      copy: Jetstack have built their training courses around the knowledge gained in delivering production-ready Kubernetes for their customers.
+      link_text: Learn More
+      link_url: /training-subscription
+      img: /img/jpg/training-subscription.jpg
+
+    training_inperson:
+      title: In-Person Training
+      copy: These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience.
+      link_text: Learn More
+      link_url: /in-person-training
+      img: /img/jpg/training-in-person.jpg
+
+    testimonial:
+      copy: The workshop helped me understand what Kubernetes are made for, what the building blocks are and how we are supposed to use them.
+      cite: Workshop Attendee
+
+  training_subscription:
+    testimonial:
+      copy: I’m in a position where I know what I need to focus on, just need to get some hours under my belt playing with it.
+      cite: Workshop Attendee

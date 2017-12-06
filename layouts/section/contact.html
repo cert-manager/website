@@ -10,7 +10,7 @@
   {{ partial "panels/blueheadline.html" .Site.Data.config.headline.contact }}
 
 
-      <section class="grey" id="form">
+      <section class="lightblue" id="form">
         <div class="container">
             <div id="mc_embed_signup">
                 <form action="/api/v1/contact"
@@ -102,16 +102,20 @@
     <section class="white center tight" id="locations">
         <div class="container">
             <h2>Our Offices</h2>
-            <div>
+            
+            <div class="offices">
             {{ range $index, $office := .Site.Data.config.offices }}
-            <div style="margin-bottom: 20px;">
-            <u> {{ $office.name }} </u><br />
-            {{ range $office.address }}{{ . }}<br />{{ end }}
-            </div>
+                <address class="offices__office">
+                <u>{{ $office.name }}</u><br />
+                {{ range $office.address }}{{ . }}<br />{{ end }}
+                </address>
             {{ end }}
-            <div>
+            </div>
+            
             <hr />
+            
             <h2>Getting There</h2>
+            
             <p class="locations">
                 {{ range $index, $office := .Site.Data.config.offices }}
                     <a href="javascript:void(0)" onclick="focusMap('{{ $office.name }}')" class="text-light-alt" id="{{ $office.name }}">{{ $office.name }}</a>

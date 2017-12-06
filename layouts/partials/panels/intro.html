@@ -1,8 +1,12 @@
-<section class="grey">
-    <div class="intro-text">
-        <h2>{{ .headline }}</h2>
-        <p class="text-light-alt" style="width:30%;margin-left:35%;">
+{{ $panelColour := default "lightblue" .panelColour }}
+
+<section class="{{$panelColour}} container-fluid">
+    <div class="intro-text row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2>{{ .headline }}</h2>
+            <p class="text-light-alt">
             {{ .strapline | markdownify }}
-        </p>
+            </p>
+        </div>
     </div>
 </section>

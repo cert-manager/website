@@ -1,0 +1,72 @@
+{{ define "title" }} | Training{{ end }}
+
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+
+{{ define "body" }}
+
+
+<div class="container-fluid" id="page-content">
+    
+  {{ partial "panels/blueheadline.html" .Site.Data.config.headline.training }}
+  
+    <!-- Diagonal media component -->
+    <div class="diagonal">
+        <div class="diagonal__image-container" style="background-image: url({{ .Site.Data.config.panels.training_landing.training_subscription.img }});">
+            <svg role="presentation" class="diagonal__svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 200 1000" xml:space="preserve" preserveAspectRatio="none">
+                <polygon points="0,1000 0,0 200,0 "/>
+            </svg>
+        </div>
+
+        <div class="diagonal__content">
+            <h2 class="diagonal__heading">{{ .Site.Data.config.panels.training_landing.training_subscription.title }}</h2>
+            <p class="diagonal__copy">
+                {{ .Site.Data.config.panels.training_landing.training_subscription.copy }}
+            </p>
+            <a href="{{ .Site.Data.config.panels.training_landing.training_subscription.link_url }}" class="diagonal__link">{{ .Site.Data.config.panels.training_landing.training_subscription.link_text }}</a>
+        </div>
+    </div>
+    <!-- End: Diagonal media component -->
+
+
+    <!-- Testimonial section -->
+    <section class="white">
+        <div class="container">
+            <div class="row">
+                <blockquote class="testimonial col-md-8">
+                    <p class="testimonial__copy">"{{ .Site.Data.config.panels.training_landing.testimonial.copy }}"</p>
+                    <cite class="testimonial__cite">{{ .Site.Data.config.panels.training_landing.testimonial.cite }}</cite>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+    <!-- End: Testimonial section -->
+
+    <!-- Diagonal media component (opposite) -->
+    <div class="diagonal diagonal--opposite">
+        <div class="diagonal__image-container" style="background-image: url({{ .Site.Data.config.panels.training_landing.training_inperson.img }});">
+            <svg role="presentation" class="diagonal__svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 200 1000" xml:space="preserve" preserveAspectRatio="none">
+            <polygon points="200,1000 -1,1000 200,1 "/>
+            </svg>
+        </div>
+
+        <div class="diagonal__content">
+            <h2 class="diagonal__heading">{{ .Site.Data.config.panels.training_landing.training_inperson.title }}</h2>
+            <p class="diagonal__copy">
+                {{ .Site.Data.config.panels.training_landing.training_inperson.copy }}
+            </p>
+            <a href="{{ .Site.Data.config.panels.training_landing.training_inperson.link_url }}" class="diagonal__link">{{ .Site.Data.config.panels.training_landing.training_subscription.link_text }}</a>
+        </div>
+    </div>
+    <!-- End:Diagonal media component -->
+
+</div>
+
+{{ end }}
+
+{{ define "scripts" }}
+
+{{ end }}
