@@ -3,7 +3,7 @@ title: Tarmak
 image: /img/jpg/open-source-tarmak.jpg
 logo: /img/svg/logo-tarmak.svg
 weight: 1
-getting-started:
+getting_started: http://docs.tarmak.io/user-guide.html#user-guide
 github: https://github.com/jetstack/tarmak
 ---
 

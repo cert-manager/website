@@ -2,7 +2,7 @@
 title: Navigator
 image: /img/jpg/open-source-navigator.jpg
 weight: 2
-getting-started:
+getting_started: https://github.com/jetstack/navigator/tree/master/docs/quick-start
 github: https://github.com/jetstack/navigator
 ---
 

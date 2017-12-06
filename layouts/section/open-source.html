@@ -29,7 +29,7 @@
             <h2>{{ $page.Title }}</h2>
             <p>{{ $page.Content }}</p>
             <div class="media-component__links">
-              <a href="#">Get started</a>
+              <a href="{{ $page.Params.getting_started }}">Get started</a>
               <a href="{{ $page.Params.github }}"><i class="icon icon--github"></i>Go to GitHub repo</a>
             </div>
           </div>
@@ -51,7 +51,7 @@
               <h2>{{ $page.Title }}</h2>
               <p>{{ $page.Content }}</p>
               <div class="media-component__links">
-                <a href="#">Get started</a>
+                <a href="{{ $page.Params.getting_started }}">Get started</a>
                 <a href="{{ $page.Params.github }}"><i class="icon icon--github"></i>Go to GitHub repo</a>
               </div>
             </div>

@@ -2,7 +2,7 @@
 title: Cert-Manager
 image: /img/jpg/open-source-cert.jpg
 weight: 3
-getting-started:
+getting_started: https://github.com/jetstack/cert-manager#quickstart
 github: https://github.com/jetstack/cert-manager
 ---
 
