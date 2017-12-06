@@ -229,9 +229,9 @@ panels:
   our_services:
     headline: Our services
     strapline: >
-       Accelerate Your Adoption of Kubernetes and Cloud Native 
+       Accelerate your adoption of Kubernetes and Cloud Native 
        
-       With Our Unique Blend of Services
+       with our unique blend of services
     panelColour: white
     service_features:
     - name: Open Source
@@ -315,14 +315,14 @@ panels:
         title: Micro
         url: https://github.com/micro/micro
       quote: >
-        If you're looking at running kubernetes in production talk to Jetstack.
+        If you're looking at running Kubernetes in production talk to Jetstack.
         Quickly becoming the go to experts in this space
     - name: User of
       link:
         title: Kube-Lego
         url: https://github.com/jetstack/kube-lego
       quote: >
-        This is going to do wonders for my kubernetes clusters! Thanks Jetstack!
+        This is going to do wonders for my Kubernetes clusters! Thanks Jetstack!
     - name: Training Course Attendee
       quote: >
         Easy to follow content, well presented, lots of interesting resources,
