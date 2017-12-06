@@ -241,7 +241,7 @@ panels:
     - name: Consulting
       img: svg/icon-brain.svg
       link: /consulting
-      desc: Consulting and engineering to make the most of Kubernetes and move you quicker to production
+      desc: Consulting and engineering to make the most of Kubernetes and move you to production quickly
     - name: Training Subscription
       img: svg/icon-play.svg
       desc: On-demand training and resources, regularly updated, to maximise operational confidence
