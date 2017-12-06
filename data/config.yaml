@@ -170,7 +170,7 @@ headline:
 
   training:
     headline: Learn with Us 
-    strapline: Learn and engage directly and on-demand with unique resources
+    strapline: Learn and engage directly and on-demand
     tag: Training
   
   training_in_person_section:
@@ -185,7 +185,7 @@ headline:
 
   consulting:
     headline: Our Experts are Your Experts
-    strapline: Make the most of Kubernetes with us alongside your team
+    strapline: Make the most of Kubernetes with us alongside you
     tag: Consulting
   
   open_source:
@@ -249,7 +249,7 @@ panels:
     - name: In-Person Training
       img: svg/icon-presentation.svg
       link: /in-person-training
-      desc: Learn and engage directly with our team with unique courses for all stages of your Kubernetes journey
+      desc: Learn and engage directly alongside our team, with courses for all stages of your Kubernetes journey
 
   # the partners we have worked and press stories about us (homepage)
   partners:
