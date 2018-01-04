@@ -55,7 +55,7 @@ menus:
       sublinks:
       - name: Training Subscription
         link: /training-subscription/
-      - name: In-person Training
+      - name: In-Person Training
         link: /in-person-training/
     # - name: About Us
     #   link: /about/
@@ -459,5 +459,5 @@ panels:
 
   training_subscription:
     testimonial:
-      copy: I’m in a position where I know what I need to focus on, just need to get some hours under my belt playing with it.
+      copy: I now know the basic concepts and building blocks and I have a sense of what's possible.
       cite: Workshop Attendee
