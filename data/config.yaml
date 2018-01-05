@@ -57,8 +57,8 @@ menus:
         link: /training-subscription/
       - name: In-Person Training
         link: /in-person-training/
-    # - name: About Us
-    #   link: /about/
+    - name: About Us
+      link: /about/
     - name: Blog
       link: https://blog.jetstack.io/
     # - name: Contact
@@ -110,13 +110,13 @@ headline:
   homepage:
     headline: Kubernetes Accelerated
     strapline: >
-      Your path to Enterprise Cloud Native
+      Your Path to Enterprise Cloud Native
 
   getStarted:
     headline: Who are we?
     strapline: >
       Jetstack is a UK-based company that help enterprises in their path to modern
-      cloud-native infrastructure. We live and breathe Kubernetes and open source.
+      cloud native infrastructure. We live and breathe Kubernetes and open source.
 
   kubernetes:
     headline: >
@@ -205,7 +205,7 @@ panels:
   # the homepage banner with the engine and a list of items
   toolkit:
     headline: The Jetstack Toolkit
-    strapline: Production-Grade Kubernetes for Enterprise Cloud-Native
+    strapline: Production-Grade Kubernetes for Enterprise Cloud Native
     button: Find out more
     link: /engineering/
     items:
@@ -229,7 +229,7 @@ panels:
   our_services:
     headline: Our services
     strapline: >
-       Accelerate your adoption of Kubernetes and Cloud Native 
+       Accelerate your adoption of Kubernetes and cloud native 
        
        with our unique blend of services
     panelColour: white
