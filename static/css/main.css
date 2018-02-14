@@ -19,7 +19,18 @@ h2 {
     margin-bottom: 0.5em;
 }
 
+h4.black ul {
+    padding: 25px;
+}
+
 p {
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 400;
+    color: #7e8087;
+}
+
+ul {
     font-size: 16px;
     line-height: 28px;
     font-weight: 400;
