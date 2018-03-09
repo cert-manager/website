@@ -1,6 +1,6 @@
 ---
 title: Hannah Morris
-weight: 9
+weight: 10
 image: /img/jpg/about-hannah.jpg
 position: Project Manager
 email: hannah.morris@jetstack.io
