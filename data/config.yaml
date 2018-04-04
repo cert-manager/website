@@ -280,7 +280,7 @@ panels:
         button: Get in touch
         link: /contact/
       - name: babylon
-        img: /img/png/babylon-mono.png
+        img: /img/png/babylon-mono latest.png
         link: https://www.babylonhealth.com/
 
     inTheNews:
