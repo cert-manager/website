@@ -46,17 +46,17 @@ offices:
 menus:
 
   navbar:
+    - name: Subscription
+      link: /subscription/
     - name: Open Source
       link: /open-source/
-    - name: Consulting
-      link: /consulting/
-    - name: Training
-      link: /training/
+    - name: Services
+      link: '#'
       sublinks:
-      - name: Training Subscription
-        link: /training-subscription/
-      - name: In-Person Training
-        link: /in-person-training/
+      - name: Consulting
+        link: /consulting/
+      - name: Training
+        link: /training/
     - name: About Us
       link: /about/
     - name: Blog
@@ -65,6 +65,8 @@ menus:
     #   link: /contact/
   
   navbar_footer:
+    - name: Subscription
+      link: /subscription/
     - name: Open Source
       link: /open-source/
     - name: Consulting
@@ -109,9 +111,9 @@ headline:
 
   homepage:
     headline: Kubernetes Accelerated
-    strapline: >
-      Your Path to Enterprise Cloud Native
-
+    strapline: 
+      With Jetstack Subscription
+      
   getStarted:
     headline: Who are we?
     strapline: >
@@ -197,6 +199,10 @@ headline:
     headline: Get Started With Jetstack
     strapline: Get in touch
     link: /contact/
+  
+  subscription:
+    headline: Jetstack Subscription
+    strapline: Jetstack Subscription is an offering to help you at every stage of your Kubernetes journey. It gives you a tried and trusted suite of tools to support your team.
 
 # various types of content panel that can appear on section pages
 # the idea is to not fix a panel to a section - mix and match!
@@ -238,14 +244,14 @@ panels:
       img: svg/icon-cog.svg
       link: /open-source
       desc: Enhancing the Kubernetes experience with open source tools
+    - name: Subscription
+      img: svg/icon-play.svg
+      desc: Reference architecture, online training and SLA support for your production Kubernetes deployment
+      link: /subscription
     - name: Consulting
       img: svg/icon-brain.svg
       link: /consulting
       desc: Consulting and engineering to make the most of Kubernetes and move you to production quickly
-    - name: Training Subscription
-      img: svg/icon-play.svg
-      desc: On-demand training and resources, regularly updated, to maximise operational confidence
-      link: /training-subscription
     - name: In-Person Training
       img: svg/icon-presentation.svg
       link: /in-person-training
