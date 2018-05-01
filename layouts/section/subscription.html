@@ -1,0 +1,376 @@
+{{ define "title" }} | Subscription{{ end }}
+
+
+{{ define "navbar" }}
+  {{ partial "navbar/dark.html" . }}
+{{ end }}
+
+{{ define "body" }}
+
+<!-- Media Hero Section -->
+<section class="media-hero">
+  <div class="container">
+    
+    <div class="row">
+
+      <div class="col-sm-12">
+
+        <div class="media-hero__content">
+          <div class="media-hero__graphic">
+            <img src="/img/png/hero-layers.png" alt="" />
+          </div>
+        
+          <div class="media-hero__copy">
+            <h1>{{ .Site.Data.config.headline.subscription.headline }}</h1>
+            <p>{{ .Site.Data.config.headline.subscription.strapline }}</p>
+              <ul class="media-hero__ctas">
+                <li>
+                  <a href="#refarchitecture" class="media-hero__cta media-hero__cta--green">
+                    <span class="media-hero__icon">
+                      {{ partial "svg/icon-ref-arch.svg" }}
+                    </span>
+                    <span class="media-hero__cta-content">
+                      <span class="media-hero__cta-text">Reference Architecture</span>
+                      <span class="media-hero__icon">
+                        {{ partial "svg/icon-arrow-right.svg" }}
+                      </span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#training" class="media-hero__cta media-hero__cta--blue">
+                    <span class="media-hero__icon">
+                      {{ partial "svg/icon-online-training.svg" }}
+                    </span>
+                    <span class="media-hero__cta-content">
+                      <span class="media-hero__cta-text">Online Training</span>
+                      <span class="media-hero__icon">
+                        {{ partial "svg/icon-arrow-right.svg" }}
+                      </span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#support" class="media-hero__cta media-hero__cta--purple">
+                    <span class="media-hero__icon">
+                      {{ partial "svg/icon-support.svg" }}
+                    </span>
+                    <span class="media-hero__cta-content media-hero__cta-content--no-border">
+                      <span class="media-hero__cta-text">Support</span>
+                      <span class="media-hero__icon">
+                        {{ partial "svg/icon-arrow-right.svg" }}
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+          </div>
+          
+          <div class="media-hero__bottom">
+            <a href="#contactform" class="media-hero__main-cta">Register interest</a>
+            <div class="media-hero__logos-section">
+              <h2>Jetstack is trusted by</h2>
+              <div class="media-hero__logos">
+                {{ partial "svg/logo-monzo.svg" }}
+                {{ partial "svg/logo-google-cloud.svg" }}
+                {{ partial "svg/logo-babylon.svg" }}
+                {{ partial "svg/logo-pearson.svg" }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- Media Hero Section -->
+
+
+<!-- Image Testimonial Section -->
+<section class="img-testimonial" style="background-image: linear-gradient(to right, rgba(27, 28, 41, 0.95), rgba(27, 28, 41, 0.95)), url(/img/jpg/training-subscription.jpg);">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-7">
+          <blockquote class="img-testimonial__quote">
+            <p>
+              "We’ve been helping companies succeed with Kubernetes since the early days of the project. As the market matures, Subscription has evolved naturally to meet the needs of our customers operating Kubernetes in production."
+            </p>
+            <cite class="img-testimonial__cite">Matt Barker, Co-Founder</cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+</section>
+<!-- Image Testimonial Section -->
+
+
+<!-- Info Icon Section (Green, with horizontal rule) -->
+<section id="refarchitecture" class="info-icons info-icons--hr info-icons--green">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="info-icons__hero">
+          <div class="info-icons__hero-icon">
+            {{ partial "svg/icon-ref-arch-large.svg" }}
+          </div>
+          <h2>
+            Reference Architecture
+          </h2>
+          <p>
+            Gain the confidence of a best-practice Kubernetes cluster
+          </p>
+        </div>
+        <div class="info-icons__content">
+          <ul class="info-icons__features">
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-lock.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">No vendor lock-in with open source tooling</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-cloud.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Consistent across clouds, reduced ops overhead</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-kube.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Built on pure upstream Kubernetes</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-breeze.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Flexibility to integrate with your environment</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-thumbprint.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Security hardened</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-scale.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Tried-and-tested at scale</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Info Icon Section (Green, with horizontal rule) -->
+
+
+<!-- Info Icon Section (Blue, with horizontal rule) -->
+<section id="training" class="info-icons info-icons--hr info-icons--blue">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="info-icons__hero">
+          <div class="info-icons__hero-icon">
+            {{ partial "svg/icon-online-training-large.svg" }}
+          </div>
+          <h2>
+            Online Training
+          </h2>
+          <p>
+            Build in-house expertise with Jetstack on-demand training
+          </p>
+        </div>
+        <div class="info-icons__content">
+          <ul class="info-icons__features">
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-person-presenting.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Self-paced beginner, intermediate and advanced training for operators and developers</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-key.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Exclusive access to the Jetstack Customer Portal ‘Flight Deck’</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-rocket.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Test your operational proficiency with interactive wargaming scenarios</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-playbook.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">On-call operational playbooks, providing troubleshooting steps &amp; tips</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Info Icon Section (Blue, with horizontal rule) -->
+
+
+<!-- Info Icon Section (Purple, no horizontal rule) -->
+<section id="support" class="info-icons info-icons--purple">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="info-icons__hero">
+          <div class="info-icons__hero-icon">
+            {{ partial "svg/icon-support-large.svg" }}
+          </div>
+          <h2>
+            Support
+          </h2>
+          <p>
+            Use Jetstack as a virtual extension of your team
+          </p>
+        </div>
+        <div class="info-icons__content">
+          <ul class="info-icons__features">
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-24h.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">24x7 On demand support teams</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-sla.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Assigned an SLA-lead</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-assistance.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Ongoing architectural assistance</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-discount.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Discounted consulting</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Info Icon Section (Purple, no horizontal rule) -->
+
+
+<!-- Open Source Panel -->
+<section class="open-source" style="background-image: linear-gradient(to right, rgba(138, 99, 250, 0.93), rgba(138, 28, 250, 0.93)), url(/img/jpg/male-working-on-laptop.jpg);">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+
+        <div class="open-source__top">
+          <h2>Jetstack's commitment to Open Source</h2>
+          <ul class="open-source__commitments">
+            <li class="open-source__commitment">
+              <span class="open-source__commitment-hero">
+                20 <span class="open-source__sub">Million</span> +
+              </span>
+              <span class="open-source__detail">
+                Docker Image pulls
+              </span>
+            </li>
+            <li class="open-source__commitment">
+              <span class="open-source__commitment-hero">
+                2850 +
+              </span>
+              <span class="open-source__detail">
+                GitHub Stars
+              </span>
+            </li>
+            <li class="open-source__commitment">
+              <span class="open-source__commitment-hero">
+                90 +
+              </span>
+              <span class="open-source__detail">
+                Open Source Contributors
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="open-source__bottom">
+          <p>Founding members of</p>
+          <div class="open-source__kubernetes-icon">
+            {{ partial "svg/icon-cert-kube.svg" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Open Source Panel -->
+
+
+<!-- Subscriptions Form -->
+<section id="contactform" class="subscriptions-form">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Enquire about Subscription</h2>
+        <p>And one of our team will get back to you</p>
+        <form autocomplete="false" role="form" method="post" action="https://jetstack.mautic.net/form/submit?formId=1" id="mauticform_subscriptionlandingpageform" data-mautic-form="subscriptionlandingpageform" enctype="multipart/form-data" class="subscriptions-form__form">
+          <div class="subscriptions-form__field">
+            <input type="text" autocomplete="name" id="first-name" name="mauticform[first_name]" value="" class="subscription-form__input" required />
+            <label for="first-name" class="subscription-form__label">First name</label>
+          </div>
+          <div class="subscriptions-form__field">
+            <input type="text" autocomplete="name" id="last-name" name="mauticform[last_name]" value="" class="subscription-form__input" required />
+            <label for="last-name" class="subscription-form__label">Last name</label>
+          </div>
+          <div class="subscriptions-form__field">
+            <input type="email" autocomplete="email" id="email" name="mauticform[email]" value="" class="subscription-form__input" required />
+            <label for="email" class="subscription-form__label">Email</label>
+          </div>
+          <div class="subscriptions-form__field"> 
+            <input type="text" autocomplete="organization" id="company" name="mauticform[company]" value="" class="subscription-form__input" required />
+            <label for="company" class="subscription-form__label">Company</label>
+          </div>
+          <div class="subscriptions-form__field">
+            <textarea autocomplete="project" id="project" name="mauticform[tell_us_about_your_projec]" class="subscription-form__input" required></textarea>
+            <label for="project" class="subscription-form__label">Tell us about your project</label>
+          </div>
+          <div>
+            <button class="subscriptions-form__button" type="submit" name="mauticform[submit]" id="mauticform_input_subscriptionlandingpageform_submit" value="1">Submit details</button>
+          </div>
+          <div class="mauticform-error" id="mauticform_subscriptionlandingpageform_error"></div>
+          <div class="mauticform-message" id="mauticform_subscriptionlandingpageform_message"></div>
+          <input type="hidden" name="mauticform[formId]" id="mauticform_subscriptionlandingpageform_id" value="1"/>
+          <input type="hidden" name="mauticform[return]" id="mauticform_subscriptionlandingpageform_return" value=""/>
+          <input type="hidden" name="mauticform[formName]" id="mauticform_subscriptionlandingpageform_name" value="subscriptionlandingpageform"/>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Subscriptions Form -->
+
+{{ end }}
+
+{{ define "scripts" }}
+<script type="text/javascript" src="/js/mautic.js"></script>
+<script type="text/javascript" src="/js/new-contact.js"></script>
+{{ end }}
+
+{{ define "footer"}}
+  {{ partial "footer/minimal.html" . }}
+{{ end }}

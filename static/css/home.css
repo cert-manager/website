@@ -60,9 +60,37 @@
     width: 60%;
 }
 
+.masthead__button {
+    display: inline-flex;
+    padding: 10px 20px;
+    background-color:blue;
+    margin-top: 30px;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    height: 55px;
+}
+
+.masthead__button:link, .masthead__button:visited {
+    color:white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white; 
+}
+.masthead__button:hover, .masthead__button:active {
+    color: white;
+    background-color: transparent;
+    border-color: white;
+    text-decoration: none;
+}
+
 @media (max-width: 769px) {
     #lead-image .masthead {
         width: 90%;
+        text-align: center;
     }
 
     #lead-image .masthead h1 {
