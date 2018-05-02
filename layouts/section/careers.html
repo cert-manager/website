@@ -1,0 +1,38 @@
+{{ define "title" }} | Careers{{ end }}
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+{{ define "body" }}
+
+<div class="container-fluid" id="page-content">
+
+    {{ partial "panels/blueheadline.html" .Site.Data.config.headline.careers }}
+
+     <section class="tight media-component">
+
+      <div class="media-component__row">
+        <div class="media-component__image" style="background-image: url(/img/jpg/careers-group.jpg)">
+        </div>
+        <div class="media-component__content">
+          <div class="media-component__copy">
+              <h2>About us</h2>
+              <p>We are a fast-growing company that prides itself with helping startups and enterprises alike in their path to modern cloud-native infrastructure.</p>
+              <p>We live and breathe Kubernetes and passionately support open source. We work on upstream Kubernetes, providing real-world feedback, insight and engineering. We also develop our own tooling and integrations, tirelessly working to help improve developer and operations experience.</p>
+              <p>We're distributed across the UK, including our base in London, and offices in Bristol and Birmingham (<a href="/about/">meet the team</a>). We offer a culture of flexible working.</p>
+              <p>Join our team of talented Kubernetes experts. Apply below.</p>
+              <h2>Open positions</h2>
+            <ul>
+                {{ range $index, $page := .Data.Pages }}
+                  <li><a href="{{ $page.URL }}">{{ $page.Title }}</a> - {{ $page.Params.location }}</li>
+                {{ end }}
+                  <li>Engineering Manager - UK</li>
+                  <li>Software Engineers - UK/Europe</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+  </section>
+</div>
+
+{{ end }}

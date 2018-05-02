@@ -59,6 +59,11 @@ menus:
         link: /training/
     - name: About Us
       link: /about/
+      sublinks:
+      - name: Team
+        link: /about/
+      - name: Careers
+        link: /careers/
     - name: Blog
       link: https://blog.jetstack.io/
     # - name: Contact
@@ -154,6 +159,12 @@ headline:
   contact:
     headline: Get in Touch
     strapline: and get to market quicker
+
+  careers:
+    headline: Careers at Jetstack
+    strapline: Join our growing team and build the future with Kubernetes
+    tag: Careers
+
   blog:
     headline: Read all about it
     strapline: We tell good stories
