@@ -481,10 +481,10 @@ panels:
       img: /img/jpg/training-in-person.jpg
 
     testimonial:
-      copy: The workshop helped me understand what Kubernetes are made for, what the building blocks are and how we are supposed to use them.
+      copy: I really enjoyed the growing sense of confidence and speed that developed during the day.
       cite: Workshop Attendee
 
   training_subscription:
     testimonial:
-      copy: I now know the basic concepts and building blocks and I have a sense of what's possible.
-      cite: Workshop Attendee
+      copy: The Jetstack wargaming gave validation of our decisions so far, new ideas for improvements and a good test of our ability to support the infrastructure we've built
+      cite: Holiday Extras, Advanced Wargaming  

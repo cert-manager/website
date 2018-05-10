@@ -704,6 +704,7 @@ section.bordered {
 .featurelist__list {
     padding-left: 20px;
     margin: 0;
+    color: white;
 }
 
 .featurelist__list li {
