@@ -1,7 +1,7 @@
 ---
 title: Charlie Egan
 weight: 9
-image: /img/jpg/about-charlie.jpg
+image: /img/jpg/about-charlie (1).jpg
 position: Solutions Engineer
 email: charlie.egan@jetstack.io
 ---
