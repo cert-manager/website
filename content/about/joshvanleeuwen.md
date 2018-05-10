@@ -1,6 +1,6 @@
 ---
 title: Josh Van Leeuwen
-weight: 12
+weight: 14
 image: /img/jpg/about-josh.jpg
 position: Software Developer
 email: joshua.vanleeuwen@jetstack.io
