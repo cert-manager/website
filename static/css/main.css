@@ -365,6 +365,11 @@ div.image-zoom-container a img:hover {
     font-size: 14px;
 }
 
+#footer .main-footer .privacy-policy p {
+    color: #1768e2;
+    font-size: 14px;
+}
+
 @media (max-width: 769px) {
     #footer .main-footer .item.logo, #footer .main-footer .item.social {
         float: none;
