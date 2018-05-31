@@ -235,16 +235,24 @@ a {
 .btn-primary {
     color: white;
     background: #1768E2;
-    padding: 1em 0;
+    padding: 15px 32px;
+    width: 180px;
+    height: 55px;
+    font-size: 1.25em;
     text-align: center;
-    border-radius: 0;
+    line-height: 2em;
+    border-radius: 6px;
+    border: 2px solid white;
+    display: inline-block;
+    margin: 4px 2px;
 }
 
-.btn-primary:hover, .btn-primary:active {
+
+/**.btn-primary:hover, .btn-primary:active {
     background: white;
     border: 1px solid #1768E2;
     color: #1768E2;
-}
+}**/
 
 .block {
     padding: 0;
@@ -297,10 +305,12 @@ div.image-zoom-container a img:hover {
 #footer .pre-footer .footer-form .btn {
     font-size: 18px;
     height: 58px;
-    width: 230px;
-    line-height: 1em;
+    width: 180px;
+    line-height: 1.3em;
     margin-top: -5px;
     margin-left: 0.5em;
+    background: #1768E2;
+    border: 2px solid white;
 }
 
 #footer .main-footer {
@@ -1265,6 +1275,7 @@ Introduced on new Subscription Page
     .media-hero__logos-section {
         flex: 0 1 60%;
         margin: 20px 0 50px;
+    
     }
 
     .media-hero__logos {

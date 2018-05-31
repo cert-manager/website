@@ -118,7 +118,7 @@ headline:
   homepage:
     headline: Kubernetes Accelerated
     strapline: 
-      With Jetstack Subscription
+      Enterprise-ready upstream Kubernetes 
       
   getStarted:
     headline: Who are we?
@@ -362,6 +362,12 @@ panels:
       quote: >
         Shout out to JetstackHQ and kube-lego, I just setup https://kubernetes.submit-queue.k8s.io
         in ~20 minutes...
+    - name: Advanced Wargaming with
+      link:
+        title: Holiday Extras 
+        url: https://www.holidayextras.co.uk/
+      quote: >
+        Jetstack wargaming gave validation of our decisions so far, ideas for improvements and a good test of our ability to support the infrastructure we've built.
 
   # the timeline on the k8s page
   k8s_timeline:

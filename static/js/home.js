@@ -30,6 +30,7 @@ $(function () {
 
 });
 
+
 var activeSlide = 1;
 var totalSlides = $('#carousel .item').length;
 
