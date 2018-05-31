@@ -61,6 +61,19 @@
 }
 
 .masthead__button {
+    border: 2px solid white;
+    width: 180px;
+    height: 55px;
+    font-size: 1.2em;
+    font-family: sofia-pro; 
+    line-height: 4em;
+    text-align: center;
+    color: white;
+    background: transparent;
+    align-items: center;
+    border-radius: 4px;
+    padding: 10px 20px;
+    /**
     display: inline-flex;
     padding: 10px 20px;
     background-color:blue;
@@ -70,21 +83,50 @@
     justify-content: center;
     border: 1px solid transparent;
     border-radius: 4px;
-    height: 55px;
+    height: 55px;**/
 }
 
-.masthead__button:link, .masthead__button:visited {
+
+/**.masthead__button:link, .masthead__button:visited {
+    border: 1px solid white;
+    width: 180px;
+    height: 55px;
+    font-size: 1.25em;
+    line-height: 4em;
+    color: white;
+    background: #1768E2;
+    align-items: center;
+    border-radius: 4px;
+    padding: 10px 20px;
+    
     color:white;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     border-left: 1px solid white;
     border-right: 1px solid white; 
-}
+}**/
 .masthead__button:hover, .masthead__button:active {
+    color:black;
+    background-color: white;
+    border-bottom: 1px solid black; 
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    text-decoration: none;
+    /**border: 1px solid white;
+    width: 180px;
+    height: 55px;
+    font-size: 1.25em;
+    line-height: 4em;
     color: white;
+    background: #1768E2;
+    align-items: center;
+    border-radius: 4px;
+    padding: 10px 20px;**/
+    /**color: white;
     background-color: transparent;
     border-color: white;
-    text-decoration: none;
+    text-decoration: none;**/
 }
 
 @media (max-width: 769px) {
@@ -278,7 +320,6 @@
 }
 
 #partners .row div .btn-default {
-    background: none;
     border: 1px solid white;
     color: white;
     width: 180px;
