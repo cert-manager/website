@@ -1,4 +1,5 @@
 $(function () {
+  // Initialised the smooth scroll anchors. Makes use of w3c standard with polyfill fallback
   initSmoothScroll();
 });
 

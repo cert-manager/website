@@ -1613,6 +1613,10 @@ Introduced on new Subscription Page
     border-bottom-color: red;
 }
 
+.subscription-form__input.subscription-form__input--success {
+    border-bottom-color: #2ECC40;
+}
+
 .subscriptions-form__form .mauticform-message,
 .subscriptions-form__form .mauticform-error {
     margin-top: 20px;
