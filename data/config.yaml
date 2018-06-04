@@ -477,7 +477,7 @@ panels:
       title: Training Subscription
       copy: Jetstack have built their training courses around the knowledge gained in delivering production-ready Kubernetes for their customers.
       link_text: Learn More
-      link_url: /training-subscription
+      link_url: /subscription
       img: /img/jpg/training-subscription.jpg
 
     training_inperson:
