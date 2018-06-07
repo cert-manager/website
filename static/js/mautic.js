@@ -13,3 +13,20 @@ if (typeof MauticSDKLoaded == 'undefined') {
         'submittingMessage': "Please wait..."
     }
 }
+
+function initHandleMauticFormReset() {
+    var form = document.querySelector('#mauticform_subscriptionlandingpageform');
+    form.addEventListener('reset', function() {
+        var inputsThatHadValues = form.querySelectorAll('.subscription-form__input--has-value');
+        inputsThatHadValues.forEach(function(input) {
+            input.classList.remove('subscription-form__input--has-value');
+            input.classList.add('subscription-form__input--success');
+        });
+    });
+}
+
+$(function () {
+    // Add event listener to the form so we can handle when Mautic clears the values on success.
+    initHandleMauticFormReset();
+});
+  

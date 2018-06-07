@@ -1186,6 +1186,10 @@ Introduced on new Subscription Page
     border-bottom-color: transparent;
 }
 
+.media-hero__main-cta-wrapper {
+    text-align: center;
+}
+
 .media-hero__main-cta {
     display: inline-block;
     background-color: transparent;
@@ -1197,7 +1201,6 @@ Introduced on new Subscription Page
     border-radius: 27px;
     padding: 16px 24px 16px 24px;
     font-size: 18px;
-    margin-bottom: 300px;
     margin-top: 0px;
 }
 
@@ -1268,14 +1271,13 @@ Introduced on new Subscription Page
         flex: 1 1 100%;
         order: 3;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
     }
 
     .media-hero__logos-section {
         flex: 0 1 60%;
-        margin: 20px 0 50px;
-    
+        margin: 0 0 50px;
     }
 
     .media-hero__logos {
@@ -1288,6 +1290,10 @@ Introduced on new Subscription Page
 
     .media-hero__logos svg:last-child {
         margin-right: 0;
+    }
+
+    .media-hero__main-cta-wrapper {
+        text-align: left;
     }
 }
 
@@ -1612,6 +1618,10 @@ Introduced on new Subscription Page
 
 .subscription-form__input.subscription-form__input--has-value:invalid {
     border-bottom-color: red;
+}
+
+.subscription-form__input.subscription-form__input--success {
+    border-bottom-color: #2ECC40;
 }
 
 .subscriptions-form__form .mauticform-message,
