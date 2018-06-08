@@ -282,15 +282,15 @@ panels:
       - name: pearson
         img: /img/png/pearson3.png
         link: https://www.pearson.com/
-      - name: brightpearl
-        img: /img/png/brightpearl.png
-        link: https://www.brightpearl.com
+      - name: holidayextras
+        img: /img/png/HolidayExtrasGreyscale.png
+        link: https://www.holidayextras.co.uk/
       - name: tigera
         img: /img/png/tigera.png
         link: https://www.tigera.io/
-      - name: elevate
-        img: /img/png/elevate.png
-        link: http://elevatedirect.com/
+      - name: lastfm
+        img: /img/png/lastfmlogo.png
+        link: https://www.last.fm/
       - name: monzo
         img: /img/png/monzo-logo.png
         link: https://www.monzo.com/
