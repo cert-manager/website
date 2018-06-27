@@ -131,9 +131,8 @@
 {{ end }}
 
 {{ define "scripts" }}
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA-AXoCphhOdRV_3IwXMuakFyZyiqmA7o"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ .Site.Data.config.apikeys.maps }}"></script>
 <script type="text/javascript" src="/js/map.js"></script>
-<script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/26/10/map.js"></script>
 <script type="text/javascript">
 
     // loop over each office entry in config.yaml and feed it to the js script
