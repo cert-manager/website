@@ -1,8 +1,14 @@
 ---
 title: Josh Van Leeuwen
-weight: 14
+weight: 8
 image: /img/jpg/about-josh.jpg
-position: Software Developer
+position: Solutions Engineer
 email: joshua.vanleeuwen@jetstack.io
 ---
-Josh is an undergraduate studying Computer Science at the University of Bristol as well as working part time at Jetstack. He interned over the summer, working mostly on the project vault-helper - a tool to automate PKI tasks, now integrated into Tarmak. Although he is relatively new to the world of Kubernetes, he's in the best place to learn! When he's not busy with studies he's dabbling in Linux and making good food.
+Josh interned at Jetstack during the summer of 2017 before continuing to work
+part time during his final year of study at the University of Bristol.  During
+this year, Josh developed a Kubernetes custom controller that automates the
+delegation of RBAC permissions based on time and event triggers. This work was
+later awarded the best Software Development Tool Final Year Project. Josh now
+works full time at Jetstack where if he's not writing more Go, he's making good
+food.
