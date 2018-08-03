@@ -11,6 +11,7 @@
 #about .bio {
     padding: 2em 2em 2em;
     width: 50%;
+    text-align: justify;
 }
 
 #about .bio .bio-name {
