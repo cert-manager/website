@@ -4,7 +4,13 @@ stages:
 - deploy-staging
 - deploy-prod
 
+before_script:
+- echo "${GCLOUD_SVC_ACCT}" > gcloud-svc-acct.json && chmod 600 gcloud-svc-acct.json
+- export GOOGLE_APPLICATION_CREDENTIALS="$(pwd)/gcloud-svc-acct.json"
+- gcloud auth activate-service-account --key-file gcloud-svc-acct.json
+
 test:helm:
+  before_script: []
   image: eu.gcr.io/jetstack-gke/infrastructure:latest
   stage: build
   tags:
@@ -13,6 +19,7 @@ test:helm:
   - make test_helm
 
 build:hugo:
+  before_script: []
   image: docker:1.13.1
   stage: build
   script:
@@ -27,6 +34,7 @@ build:hugo:
   - docker
 
 build:golang:
+  before_script: []
   image: docker:1.13.1
   stage: build
   script:
@@ -41,6 +49,7 @@ build:golang:
   - docker
 
 docker:image:
+  before_script: []
   image: docker:1.13.1
   stage: docker
   tags:
@@ -61,7 +70,6 @@ deploy:staging:
   tags:
   - docker
   script:
-  - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
   - make deploy
       ENVIRONMENT="${CI_ENVIRONMENT_NAME}"
       IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
@@ -82,7 +90,6 @@ deploy:review:
   tags:
   - docker
   script:
-  - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
   - make deploy
       ENVIRONMENT="${CI_BUILD_REF_SLUG}"
       IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
@@ -107,7 +114,6 @@ deploy:review:stop:
   tags:
   - docker
   script:
-  - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
   - make destroy
       ENVIRONMENT="${CI_BUILD_REF_SLUG}"
       NAMESPACE="website-review"
@@ -127,7 +133,6 @@ deploy:prod:
   tags:
   - docker
   script:
-  - mkdir -p ~/.kube && echo "${KUBECONFIG_DATA}" > ~/.kube/config && chmod 600 ~/.kube/config
   - make deploy
       ENVIRONMENT="${CI_ENVIRONMENT_NAME}"
       IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
