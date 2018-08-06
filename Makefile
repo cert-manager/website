@@ -100,7 +100,10 @@ docker_push: docker_build
 test_helm:
 	helm lint $(CHART_PATH)
 
-deploy:
+prepare_gke:
+	gcloud container clusters get-credentials jetstack-gke --zone europe-west1-b --project jetstack-gke
+
+deploy: prepare_gke
 	touch $(HELM_VALUES)
 	helm upgrade $(RELEASE_NAME) $(CHART_PATH) --install --namespace $(NAMESPACE) \
 		--set 'image.tag=$(IMAGE_TAG)' \
@@ -111,6 +114,6 @@ deploy:
 		--values $(HELM_VALUES) \
 		--wait
 
-destroy:
+destroy: prepare_gke
 	@test "$${SURE}" -ne "0"
 	helm delete --purge $(RELEASE_NAME)
