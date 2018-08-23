@@ -11,19 +11,19 @@ This role will present an opportunity to remain hands on but the main focus will
 
 **Technology experience**
 
-*Software engineering
-*Linux operations
-*Cloud
-*Distributed systems
+* Software engineering
+* Linux operations
+* Cloud
+* Distributed systems
 
 **We look for**
 
-*Technical leadership and an interest in people management
-*Experience in recruiting and building successful teams
-*Ability to lead design and code review sessions
-*Experience in delivering complex customer projects/products.
-*Ability and desire to continually learn and remain up-to-date with ecosystem developments
-*Ability to communicate effectively within the team as well as cross-functionally
+* Technical leadership and an interest in people management
+* Experience in recruiting and building successful teams
+* Ability to lead design and code review sessions
+* Experience in delivering complex customer projects/products.
+* Ability and desire to continually learn and remain up-to-date with ecosystem developments
+* Ability to communicate effectively within the team as well as cross-functionally
 
 
 
