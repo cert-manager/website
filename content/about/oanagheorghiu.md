@@ -1,6 +1,6 @@
 ---
 title: Oana Gheorghiu
-weight: 13
+weight: 14
 image: /img/jpg/about-oana.jpg
 position: Head of Support
 email: oana.gheorghiu@jetstack.io
