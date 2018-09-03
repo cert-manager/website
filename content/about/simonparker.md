@@ -1,6 +1,6 @@
 ---
 title: Simon Parker
-weight: 12
+weight: 13
 image: /img/jpg/about-simon.jpg
 position: Head of Growth
 email: simon.parker@jetstack.io

@@ -1,6 +1,6 @@
 ---
 title: Opeyemi Bankole
-weight: 14
+weight: 16
 image: /img/jpg/about-opeyemi.jpg
 position: Summer Intern
 email: opeyemi.bankole@jetstack.io
