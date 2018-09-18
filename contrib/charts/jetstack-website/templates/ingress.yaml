@@ -15,6 +15,10 @@ metadata:
 {{- end }}
 {{- if .Values.ingressTLS }}
     kubernetes.io/tls-acme: "true"
+{{- if .Values.ingressTLSDNSProvider }}
+    certmanager.k8s.io/acme-challenge-type: dns01
+    certmanager.k8s.io/acme-dns01-provider: {{ .Values.ingressTLSDNSProvider }}
+{{- end }}
 {{- end }}
 spec:
 {{- if .Values.ingressTLS }}
