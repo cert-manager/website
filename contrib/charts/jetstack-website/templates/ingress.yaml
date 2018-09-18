@@ -9,9 +9,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: '{{ .Values.ingressClass }}'
 {{- if gt (len .Values.ingressHtpasswd) 0 }}
-    ingress.kubernetes.io/auth-type: basic
-    ingress.kubernetes.io/auth-secret: {{ template "fullname" $global }}-htpasswd
-    ingress.kubernetes.io/auth-realm: "Authentication Required - Jetstack"
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: {{ template "fullname" $global }}-htpasswd
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required - Jetstack"
 {{- end }}
 {{- if .Values.ingressTLS }}
     kubernetes.io/tls-acme: "true"
