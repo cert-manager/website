@@ -109,6 +109,7 @@ deploy: prepare_gke
 		--set 'image.tag=$(IMAGE_TAG)' \
 		--set 'ingressHostnames={$(INGRESS_HOSTNAMES)}' \
 		--set 'ingressTLS=$(TLS_ENABLED)' \
+		--set 'ingressTLSDNSProvider=$(TLS_DNS_PROVIDER)' \
 		--set 'ingressHtpasswd=$(HTPASSWD)' \
 		--set 'replicaCount=$(REPLICA_COUNT)' \
 		--values $(HELM_VALUES) \

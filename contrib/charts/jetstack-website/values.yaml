@@ -29,4 +29,5 @@ config:
 ingressClass: nginx
 ingressHostnames: []
 ingressTLS: true
+ingressTLSDNSProvider: ""
 ingressHtpasswd: ""
