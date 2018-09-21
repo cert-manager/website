@@ -1,7 +1,7 @@
 ---
 title: Software Engineer Intern
 image: /img/jpg/about-vacancies.jpg
-weight: 6
+weight: 7
 location: UK
 ---
 
