@@ -1,7 +1,8 @@
 {{ $navbarColor := default "" .navbarColor }}
 
+
 <div class="container-fluid {{ $navbarColor }}" id="header">
-    <nav class="navbar navbar-fixed-top {{ $navbarColor }} {{ if eq .root.URL "/" }}homepage{{ end }}">
+    <nav class="navbar navbar-fixed-top {{ $navbarColor }} {{ if .transparentToStart }}homepage{{ end }}">
 
         {{ partial "navbar/container.html" . }}
 

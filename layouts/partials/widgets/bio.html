@@ -1,0 +1,26 @@
+<div class="bio">
+  <figure class="bio__img" style="background-image: url({{ .Params.image }})" aria-hidden="true"></figure>
+  <div class="bio__content">
+    <h2 class="bio__name">{{ .Title }}</h2>
+    <p class="bio__title">{{ .Params.position }}</p>
+    <p class="bio__social">
+      {{ if .Params.twitter }}
+      <a href="https://twitter.com/{{.Params.twitter}}" class="bio__social-icon" target="_blank" rel="noopener noreferrer">
+        {{ partial "svg/icon-bio-twitter.svg" }}
+      </a>
+      {{ end }}
+
+      {{ if .Params.github }}
+      <a href="https://github.com/{{ .Params.github }}" class="bio__social-icon" target="_blank" rel="noopener noreferrer">
+        {{ partial "svg/icon-bio-github.svg" }}
+      </a>
+      {{ end }}
+
+      {{ if .Params.email }}
+      <a href="mailto:{{ .Params.email }}" class="bio__social-icon" target="_blank" rel="noopener noreferrer">
+        {{ partial "svg/icon-bio-email.svg" }}
+      </a>
+      {{ end }}
+    </p>
+  </div>
+</div>

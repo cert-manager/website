@@ -1,42 +1,48 @@
 {{ define "title" }} | About Us{{ end }}
-{{ define "head" }}
-    <link href="/css/about.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
-{{ end }}
 
 {{ define "navbar" }}
-  {{ partial "navbar/light.html" . }}
+{{ partial "navbar/light.html" . }}
 {{ end }}
 
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">
-  {{ partial "panels/blueheadline.html" .Site.Data.config.headline.about }}
+  {{ partial "panels/headline-simple.html" .Site.Data.config.headline.about }}
+
+  <section class="container center tight">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <img src="/img/jpg/team.jpg" alt="Team photograph" class="team-photo">
+      </div>
+    </div>
+  </section>
 
   <div id="about">
-    <section class="white bordered">
+    <section class="white">
       <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="bio-list">
 
-        {{ range $index, $page := .Data.Pages }}
-          {{ if modBool $index 2 }}
-          <div class="row">
-          {{ else }}
-          <div class="row reverse">
-          {{ end }}
-            <div class="photo">
-              <img src="{{ $page.Params.image }}">
-            </div>
-            <div class="bio">
-              <h2 class="bio-name">{{ $page.Title }}</h2>
-              <p class="bio-title text-light-alt">{{ $page.Params.position }}</p>
-              <p class="bio-email text-light-blue">{{ $page.Params.email }}</p>
-              {{ $page.Content }}
+              {{ range $index, $page := .Data.Pages }}
+              {{ partial "widgets/bio.html" $page }}
+              {{ end }}
+
             </div>
           </div>
-        {{ end }}
+        </div>
       </div>
     </section>
-</div>
+  </div>
 
 </div>
 
+{{ end }}
+
+{{ define "cta" }}
+{{ partial "ctas/email-only"}}
+{{ end }}
+
+{{ define "footer" }}
+{{ partial "footer/minimal-light.html" . }}
 {{ end }}

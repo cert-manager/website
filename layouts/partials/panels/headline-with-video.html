@@ -1,0 +1,15 @@
+<section class="header-with-img-bg">
+  <div class="header-with-img-bg__video">
+    <video autoplay loop muted preload="auto" poster="{{.img}}" playsinline role="presentation">
+      <!--<source src="/assets/demo_video.mp4" type="video/mp4">-->
+      <img src="{{.img}}" alt="">
+    </video>
+  </div>
+  <div class="header-with-img-bg__copy">
+    {{ if .tag }}
+    <p class="header-with-img-bg__section">{{ .tag }}</p>
+    {{ end }}
+    <h1 class="header-with-img-bg__title">{{ .headline | markdownify }}</h1>
+    <p class="header-with-img-bg__strapline">{{ .strapline }}</p>
+  </div>
+</section>

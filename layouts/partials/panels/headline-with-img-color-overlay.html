@@ -1,0 +1,7 @@
+<section class="header-with-img-bg" {{ if .img }} style="background-image: url({{.img}})" {{ end }}>
+  {{ if .tag }}
+  <p class="header-with-img-bg__section">{{ .tag }}</p>
+  {{ end }}
+  <h1 class="header-with-img-bg__title">{{ .headline | markdownify }}</h1>
+  <p class="header-with-img-bg__strapline">{{ .strapline }}</p>
+</section>

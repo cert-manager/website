@@ -4,6 +4,8 @@ weight: 4
 image: /img/jpg/about-james.jpg
 position: Solutions Engineer
 email: james.munnelly@jetstack.io
+twitter: '@JamesMunnelly'
+github: 'munnerz'
 ---
 
 James has worked as a software engineer for the best part of 10 years. Having

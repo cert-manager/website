@@ -1,0 +1,23 @@
+{{ $config := .Site.Data.config }}
+{{ $url := .URL }}
+
+<section class="cta">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="cta__main">
+          <div class="cta__copy">
+            <h5>
+              Contact us to hear about our training courses
+            </h5>
+            <p></p>
+          </div>
+          <form class="cta__form">
+            <input class="cta__email" type="email" placeholder="Enter email address..." required />
+            <button class="cta__submit" type="submit">Contact us</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
