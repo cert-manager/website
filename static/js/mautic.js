@@ -15,13 +15,10 @@ if (typeof MauticSDKLoaded == 'undefined') {
 }
 
 function initHandleMauticFormReset() {
-    var form = document.querySelector('#mauticform_subscriptionlandingpageform');
+    var form = document.querySelector('.mauticform_wrapper form');
+    var message = document.querySelector('.mauticform-message');
     form.addEventListener('reset', function() {
-        var inputsThatHadValues = form.querySelectorAll('.subscription-form__input--has-value');
-        inputsThatHadValues.forEach(function(input) {
-            input.classList.remove('subscription-form__input--has-value');
-            input.classList.add('subscription-form__input--success');
-        });
+        message.scrollIntoView({ behavior: 'smooth' });
     });
 }
 

@@ -2,25 +2,6 @@
 {{ define "head" }}
     <link href="/css/contact.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
     <link href="/css/form.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
-
-    <script type="text/javascript">
-        /** This section is only needed once per page if manually copying **/
-        if (typeof MauticSDKLoaded == 'undefined') {
-            var MauticSDKLoaded = true;
-            var head            = document.getElementsByTagName('head')[0];
-            var script          = document.createElement('script');
-            script.type         = 'text/javascript';
-            script.src          = 'https://jetstack.mautic.net/mautic/media/js/mautic-form.js';
-            script.onload       = function() {
-                MauticSDK.onLoad();
-            };
-            head.appendChild(script);
-            var MauticDomain = 'https://jetstack.mautic.net';
-            var MauticLang   = {
-                'submittingMessage': "Please wait..."
-            }
-        }
-     </script>
      
 {{ end }}
 {{ define "body" }}
@@ -32,90 +13,6 @@
 
       <section class="lightblue">
         <div class="container">
-            <!-- <div id="mc_embed_signup">
-                <form action="/api/v1/contact"
-                      method="POST"
-                      id="contact-form" name="contact-form">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="name">Name <span class="asterisk">*</span></label>
-                            <input type="text" class="form-control" required="required"  name="name" id="name" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control" name="title" id="title" placeholder="Title">
-                        </div>
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" class="form-control" name="company" id="company"
-                                   placeholder="Company">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email <span class="asterisk">*</span></label>
-                            <input type="email" required="required" class="form-control" name="email" id="email"
-                                   placeholder="Email" data-validation="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone number</label>
-                            <input type="text" class="form-control" name="phone" id="phone"
-                                   placeholder="Phone Number">
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="project">Tell us about your project</label>
-                            <textarea class="form-control" name="message" id="project"
-                                      placeholder="Tell us about your project"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="long">How should we contact you?</label>
-                            <label for="email-contact" class="checkbox-inline">
-                                <input type="checkbox" id="email-contact" name="contact"
-                                       value="Email" checked="checked"> Email
-                            </label>
-                            <label for="telephone-contact" class="checkbox-inline">
-                                <input type="checkbox" id="telephone-contact" name="contact"
-                                       value="Telephone"> Telephone
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label class="long">Keep up-to-date with Jetstack and join our mailing list?</label>
-                            <label for="newsletter-yes" class="radio-inline">
-                                <input type="radio" id="newsletter-yes" name="newsletter"
-                                       value="Yes"> Yes
-                            </label>
-                            <label for="newsletter-no" class="radio-inline">
-                                <input type="radio" id="newsletter-no" name="newsletter"
-                                       value="No" checked="checked"> No
-                            </label>
-                        </div>
-                        <div id="mce-responses" class="clear">
-                            <div class="response" id="success" style="display:none">
-                              {{ with .Site.Params.contact.thanks }}
-                                {{ . | markdownify }}
-                              {{ else }}
-                                Thank you for contacting us - we'll be in touch.
-                              {{ end }}
-                            </div>
-                            <div class="response" id="error" style="display:none">
-                              {{ with .Site.Params.contact.error }}
-                                {{ . | markdownify }}
-                              {{ else }}
-                                Message could not be sent.<br/>
-                                Please contact us at <a href="{{ .Site.Data.config.contact.email }}">{{ .Site.Data.config.contact.email }}</a> instead.
-                              {{ end }}
-                            </div>
-                        </div>
-                        <div class="form-group submit">
-                            <label for="submit" class="long"></label>
-                            <button type="submit" name="submit" id="submit-contact" class="btn btn-default">
-                                Send
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div> -->
             <div class="row">
                 <div class="col-md-12">
                     <div id="mauticform_wrapper_jetstackwebcontactusform" class="mauticform_wrapper">
@@ -243,6 +140,7 @@
         addOfficeLocation(JSON.parse({{ dict "name" $office.name "lat" $office.lat "lon" $office.lon "address" $office.address "default" $office.default | jsonify }}))
     {{ end }}
 </script>
+<script type="text/javascript" src="/js/mautic.js"></script>
 <script type="text/javascript" src="/js/contactform.js"></script>
 
 {{ end }}

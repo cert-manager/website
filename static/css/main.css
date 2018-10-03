@@ -1588,6 +1588,10 @@ Introduced on new Subscription Page
     padding-left: 10px;
 }
 
+.subscription-form__label.subscription-form__label--no-trans {
+    position: relative;
+}
+
 .subscription-form__label, 
 .subscription-form__input {
     display: block;
@@ -1644,7 +1648,7 @@ Introduced on new Subscription Page
 .mauticform-error { margin-bottom: 10px; color: red; }
 .mauticform-message { margin-bottom: 10px;color: green; }
 .mauticform-row { display: block; margin-bottom: 20px; }
-.mauticform-label { font-size: 1.1em; display: block; font-weight: bold; margin-bottom: 5px; }
+.mauticform-label { font-size: 1.1em; display: block; font-weight: bold; margin-bottom: 5px; text-align: left }
 .mauticform-row.mauticform-required .mauticform-label:after { color: #e32; content: " *"; display: inline; }
 .mauticform-helpmessage { display: block; font-size: 0.9em; margin-bottom: 3px; }
 .mauticform-errormsg { display: block; color: red; margin-top: 2px; }
@@ -1659,3 +1663,17 @@ Introduced on new Subscription Page
 .mauticform-button-wrapper .mauticform-button, .mauticform-pagebreak-wrapper .mauticform-pagebreak { display: inline-block;margin-bottom: 0;font-weight: 600;text-align: center;vertical-align: middle;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 13px;line-height: 1.3856;border-radius: 3px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
 .mauticform-button-wrapper .mauticform-button.btn-default[disabled], .mauticform-pagebreak-wrapper .mauticform-pagebreak.btn-default[disabled] { background-color: #ffffff; border-color: #dddddd; opacity: 0.75; cursor: not-allowed; }
 .mauticform-pagebreak-wrapper .mauticform-button-wrapper {  display: inline; }
+
+.subscriptions-form__form .mauticform-input, 
+.subscriptions-form__form .mauticform-textarea,
+.subscriptions-form__form .mauticform-selectbox {
+    color: #1B1C29;
+}
+
+.subscriptions-form__form .mauticform-errormsg {
+    text-align: left;
+} 
+.subscriptions-form__form .mauticform-message {
+    color: rgb(81, 216, 186);
+    font-weight: bold;
+}
