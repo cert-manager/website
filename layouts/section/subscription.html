@@ -2,7 +2,7 @@
 
 
 {{ define "navbar" }}
-  {{ partial "navbar/dark.html" . }}
+{{ partial "navbar/dark.html" . }}
 {{ end }}
 
 {{ define "body" }}
@@ -10,7 +10,7 @@
 <!-- Media Hero Section -->
 <section class="media-hero">
   <div class="container">
-    
+
     <div class="row">
 
       <div class="col-sm-12">
@@ -19,56 +19,56 @@
           <div class="media-hero__graphic">
             <img src="/img/png/hero-layers.png" alt="" />
           </div>
-        
+
           <div class="media-hero__copy">
             <h1>{{ .Site.Data.config.headline.subscription.headline }}</h1>
             <p>{{ .Site.Data.config.headline.subscription.strapline }}</p>
-              <ul class="media-hero__ctas">
-                <li>
-                  <a href="#refarchitecture" class="media-hero__cta media-hero__cta--green" data-smooth-scroll>
+            <ul class="media-hero__ctas">
+              <li>
+                <a href="#refarchitecture" class="media-hero__cta media-hero__cta--green" data-smooth-scroll>
+                  <span class="media-hero__icon">
+                    {{ partial "svg/icon-ref-arch.svg" }}
+                  </span>
+                  <span class="media-hero__cta-content">
+                    <span class="media-hero__cta-text">Reference Architecture</span>
                     <span class="media-hero__icon">
-                      {{ partial "svg/icon-ref-arch.svg" }}
+                      {{ partial "svg/icon-arrow-right.svg" }}
                     </span>
-                    <span class="media-hero__cta-content">
-                      <span class="media-hero__cta-text">Reference Architecture</span>
-                      <span class="media-hero__icon">
-                        {{ partial "svg/icon-arrow-right.svg" }}
-                      </span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#training" class="media-hero__cta media-hero__cta--blue" data-smooth-scroll>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#training" class="media-hero__cta media-hero__cta--blue" data-smooth-scroll>
+                  <span class="media-hero__icon">
+                    {{ partial "svg/icon-online-training.svg" }}
+                  </span>
+                  <span class="media-hero__cta-content">
+                    <span class="media-hero__cta-text">Online Training</span>
                     <span class="media-hero__icon">
-                      {{ partial "svg/icon-online-training.svg" }}
+                      {{ partial "svg/icon-arrow-right.svg" }}
                     </span>
-                    <span class="media-hero__cta-content">
-                      <span class="media-hero__cta-text">Online Training</span>
-                      <span class="media-hero__icon">
-                        {{ partial "svg/icon-arrow-right.svg" }}
-                      </span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#support" class="media-hero__cta media-hero__cta--purple" data-smooth-scroll>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#support" class="media-hero__cta media-hero__cta--purple" data-smooth-scroll>
+                  <span class="media-hero__icon">
+                    {{ partial "svg/icon-support.svg" }}
+                  </span>
+                  <span class="media-hero__cta-content media-hero__cta-content--no-border">
+                    <span class="media-hero__cta-text">Support</span>
                     <span class="media-hero__icon">
-                      {{ partial "svg/icon-support.svg" }}
+                      {{ partial "svg/icon-arrow-right.svg" }}
                     </span>
-                    <span class="media-hero__cta-content media-hero__cta-content--no-border">
-                      <span class="media-hero__cta-text">Support</span>
-                      <span class="media-hero__icon">
-                        {{ partial "svg/icon-arrow-right.svg" }}
-                      </span>
-                    </span>
-                  </a>
-                </li>
-              </ul>
-              <div class="media-hero__main-cta-wrapper">
-                <a href="#contactform" class="media-hero__main-cta" data-smooth-scroll>Get in touch</a>
-              </div>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <div class="media-hero__main-cta-wrapper">
+              <a href="#contactform" class="media-hero__main-cta" data-smooth-scroll>Get in touch</a>
+            </div>
           </div>
-          
+
           <div class="media-hero__bottom">
             <div class="media-hero__logos-section">
               <h2>Jetstack is trusted by</h2>
@@ -93,18 +93,20 @@
 
 <!-- Image Testimonial Section -->
 <section class="img-testimonial" style="background-image: linear-gradient(to right, rgba(27, 28, 41, 0.95), rgba(27, 28, 41, 0.95)), url(/img/jpg/training-subscription.jpg);">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-7">
-          <blockquote class="img-testimonial__quote">
-            <p>
-              "We’ve been helping companies succeed with Kubernetes since the early days of the project. As the market matures, Subscription has evolved naturally to meet the needs of our customers operating Kubernetes in production."
-            </p>
-            <cite class="img-testimonial__cite">Matt Barker, Co-Founder Jetstack</cite>
-          </blockquote>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-7">
+        <blockquote class="img-testimonial__quote">
+          <p>
+            "We’ve been helping companies succeed with Kubernetes since the early days of the project. As the market
+            matures, Subscription has evolved naturally to meet the needs of our customers operating Kubernetes in
+            production."
+          </p>
+          <cite class="img-testimonial__cite">Matt Barker, Co-Founder Jetstack</cite>
+        </blockquote>
       </div>
     </div>
+  </div>
 </section>
 <!-- Image Testimonial Section -->
 
@@ -194,7 +196,8 @@
               <div class="info-icons__feature-icon">
                 {{ partial "svg/icon-person-presenting.svg" }}
               </div>
-              <p class="info-icons__feature-copy">Self-paced beginner, intermediate and advanced training for operators and developers</p>
+              <p class="info-icons__feature-copy">Self-paced beginner, intermediate and advanced training for operators
+                and developers</p>
             </li>
             <li class="info-icons__feature">
               <div class="info-icons__feature-icon">
@@ -206,13 +209,15 @@
               <div class="info-icons__feature-icon">
                 {{ partial "svg/icon-rocket.svg" }}
               </div>
-              <p class="info-icons__feature-copy">Test your operational proficiency with interactive wargaming scenarios</p>
+              <p class="info-icons__feature-copy">Test your operational proficiency with interactive wargaming
+                scenarios</p>
             </li>
             <li class="info-icons__feature">
               <div class="info-icons__feature-icon">
                 {{ partial "svg/icon-playbook.svg" }}
               </div>
-              <p class="info-icons__feature-copy">On-call operational playbooks, providing troubleshooting steps &amp; tips</p>
+              <p class="info-icons__feature-copy">On-call operational playbooks, providing troubleshooting steps &amp;
+                tips</p>
             </li>
           </ul>
         </div>
@@ -330,36 +335,84 @@
       <div class="col-sm-12">
         <h2>Enquire about Subscription</h2>
         <p>And one of our team will get back to you</p>
-        <form autocomplete="false" role="form" method="post" action="https://jetstack.mautic.net/form/submit?formId=1" id="mauticform_subscriptionlandingpageform" data-mautic-form="subscriptionlandingpageform" enctype="multipart/form-data" class="subscriptions-form__form">
-          <div class="subscriptions-form__field">
-            <input type="text" autocomplete="name" id="first-name" name="mauticform[first_name]" value="" class="subscription-form__input" required />
-            <label for="first-name" class="subscription-form__label">First name</label>
-          </div>
-          <div class="subscriptions-form__field">
-            <input type="text" autocomplete="name" id="last-name" name="mauticform[last_name]" value="" class="subscription-form__input" required />
-            <label for="last-name" class="subscription-form__label">Last name</label>
-          </div>
-          <div class="subscriptions-form__field">
-            <input type="email" autocomplete="email" id="email" name="mauticform[email]" value="" class="subscription-form__input" required />
-            <label for="email" class="subscription-form__label">Email</label>
-          </div>
-          <div class="subscriptions-form__field"> 
-            <input type="text" autocomplete="organization" id="company" name="mauticform[company]" value="" class="subscription-form__input" required />
-            <label for="company" class="subscription-form__label">Company</label>
-          </div>
-          <div class="subscriptions-form__field">
-            <textarea autocomplete="project" id="project" name="mauticform[tell_us_about_your_projec]" class="subscription-form__input" required></textarea>
-            <label for="project" class="subscription-form__label">Tell us about your project</label>
-          </div>
-          <div>
-            <button class="subscriptions-form__button" type="submit" name="mauticform[submit]" id="mauticform_input_subscriptionlandingpageform_submit" value="1">Submit details</button>
-          </div>
-          <div class="mauticform-error" id="mauticform_subscriptionlandingpageform_error"></div>
-          <div class="mauticform-message" id="mauticform_subscriptionlandingpageform_message"></div>
-          <input type="hidden" name="mauticform[formId]" id="mauticform_subscriptionlandingpageform_id" value="1"/>
-          <input type="hidden" name="mauticform[return]" id="mauticform_subscriptionlandingpageform_return" value=""/>
-          <input type="hidden" name="mauticform[formName]" id="mauticform_subscriptionlandingpageform_name" value="subscriptionlandingpageform"/>
-        </form>
+
+        <div id="mauticform_wrapper_subscriptionlandingpageform" class="mauticform_wrapper">
+          <form class="subscriptions-form__form" autocomplete="false" role="form" method="post" action="https://jetstack.mautic.net/form/submit?formId=1"
+            id="mauticform_subscriptionlandingpageform" data-mautic-form="subscriptionlandingpageform" enctype="multipart/form-data">
+            <div class="mauticform-error" id="mauticform_subscriptionlandingpageform_error"></div>
+            <div class="mauticform-message" id="mauticform_subscriptionlandingpageform_message"></div>
+            <div class="mauticform-innerform">
+
+              <div class="mauticform-page-wrapper mauticform-page-1" data-mautic-form-page="1">
+                <div id="mauticform_subscriptionlandingpageform_first_name" data-validate="first_name"
+                  data-validation-type="text" class="mauticform-row mauticform-text mauticform-field-1 mauticform-required">
+                  <input id="mauticform_input_subscriptionlandingpageform_first_name" name="mauticform[first_name]"
+                    value="" class="mauticform-input" type="text" />
+                  <label id="mauticform_label_subscriptionlandingpageform_first_name" for="mauticform_input_subscriptionlandingpageform_first_name"
+                    class="mauticform-label">First name</label>
+                  <span class="mauticform-errormsg" style="display: none;">This is required.</span>
+                </div>
+                <div id="mauticform_subscriptionlandingpageform_last_name" data-validate="last_name"
+                  data-validation-type="text" class="mauticform-row mauticform-text mauticform-field-2 mauticform-required">
+                  <input id="mauticform_input_subscriptionlandingpageform_last_name" name="mauticform[last_name]" value=""
+                    class="mauticform-input" type="text" />
+                  <label id="mauticform_label_subscriptionlandingpageform_last_name" for="mauticform_input_subscriptionlandingpageform_last_name"
+                    class="mauticform-label">Last name</label>
+                  <span class="mauticform-errormsg" style="display: none;">This is required.</span>
+                </div>
+                <div id="mauticform_subscriptionlandingpageform_email" data-validate="email" data-validation-type="email"
+                  class="mauticform-row mauticform-email mauticform-field-3 mauticform-required">
+                  <input id="mauticform_input_subscriptionlandingpageform_email" name="mauticform[email]" value=""
+                    class="mauticform-input" type="email" />
+                  <label id="mauticform_label_subscriptionlandingpageform_email" for="mauticform_input_subscriptionlandingpageform_email"
+                    class="mauticform-label">Email</label>
+                  <span class="mauticform-errormsg" style="display: none;">This is required.</span>
+                </div>
+                <div id="mauticform_subscriptionlandingpageform_company" data-validate="company" data-validation-type="text"
+                  class="mauticform-row mauticform-text mauticform-field-4 mauticform-required">
+                  <input id="mauticform_input_subscriptionlandingpageform_company" name="mauticform[company]" value=""
+                    class="mauticform-input" type="text" />
+                  <label id="mauticform_label_subscriptionlandingpageform_company" for="mauticform_input_subscriptionlandingpageform_company"
+                    class="mauticform-label">Company</label>
+                  <span class="mauticform-errormsg" style="display: none;">This is required.</span>
+                </div>
+                <div id="mauticform_subscriptionlandingpageform_tell_us_about_your_projec" data-validate="tell_us_about_your_projec"
+                  data-validation-type="textarea" class="mauticform-row mauticform-text mauticform-field-5 mauticform-required">
+                  <textarea id="mauticform_input_subscriptionlandingpageform_tell_us_about_your_projec" name="mauticform[tell_us_about_your_projec]"
+                    class="mauticform-textarea"></textarea>
+                  <label id="mauticform_label_subscriptionlandingpageform_tell_us_about_your_projec" for="mauticform_input_subscriptionlandingpageform_tell_us_about_your_projec"
+                    class="mauticform-label">Tell us about your project</label>
+                  <span class="mauticform-errormsg" style="display: none;">This is required.</span>
+                </div>
+                <div id="mauticform_subscriptionlandingpageform_newsletter1" class="mauticform-row mauticform-select mauticform-field-6">
+                  <label id="mauticform_label_subscriptionlandingpageform_newsletter1" for="mauticform_input_subscriptionlandingpageform_newsletter1"
+                    class="mauticform-label">Keep up-to-date with Jetstack and join our mailing list?</label>
+                  <select id="mauticform_input_subscriptionlandingpageform_newsletter1" name="mauticform[newsletter1]"
+                    value="" class="mauticform-selectbox">
+                    <option value="Yes" selected>Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                  <span class="mauticform-errormsg" style="display: none;"></span>
+                </div>
+                <div id="mauticform_subscriptionlandingpageform_captcha" style="display: none;" class="mauticform-row mauticform-text mauticform-field-7">
+                  <input id="mauticform_input_subscriptionlandingpageform_captcha" name="mauticform[captcha]" value=""
+                    class="mauticform-input" type="text" />
+                  <label id="mauticform_label_subscriptionlandingpageform_captcha" for="mauticform_input_subscriptionlandingpageform_captcha"
+                    class="mauticform-label">Captcha</label>
+                  <span class="mauticform-errormsg" style="display: none;"></span>
+                </div>
+                <div id="mauticform_subscriptionlandingpageform_submit" class="mauticform-row mauticform-button-wrapper mauticform-field-8">
+                  <button type="submit" name="mauticform[submit]" id="mauticform_input_subscriptionlandingpageform_submit"
+                    name="mauticform[submit]" value="" class="subscriptions-form__button" value="1">Submit</button>
+                </div>
+              </div>
+            </div>
+            <input type="hidden" name="mauticform[formId]" id="mauticform_subscriptionlandingpageform_id" value="1" />
+            <input type="hidden" name="mauticform[return]" id="mauticform_subscriptionlandingpageform_return" value="" />
+            <input type="hidden" name="mauticform[formName]" id="mauticform_subscriptionlandingpageform_name" value="subscriptionlandingpageform" />
+          </form>
+        </div>
+
       </div>
     </div>
   </div>
@@ -376,5 +429,5 @@
 {{ end }}
 
 {{ define "footer"}}
-  {{ partial "footer/minimal.html" . }}
+{{ partial "footer/minimal.html" . }}
 {{ end }}
