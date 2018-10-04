@@ -1652,6 +1652,7 @@ Introduced on new Subscription Page
 .mauticform-row {
   display: block;
   margin-bottom: 20px;
+  position: relative;
 }
 .mauticform-label {
   font-size: 1.1em;
@@ -1744,6 +1745,45 @@ Introduced on new Subscription Page
 .subscriptions-form__form .mauticform-message {
   color: rgb(81, 216, 186);
   font-weight: bold;
+}
+.subscriptions-form__form .mauticform-input,
+.subscriptions-form__form .mauticform-textarea {
+  color: white;
+  border: 0;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.subscriptions-form__form .mauticform-label {
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.subscriptions-form__form .mauticform-input + .mauticform-label,
+.subscriptions-form__form .mauticform-textarea + .mauticform-label {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  transition: top 300ms ease-out, font-size 300ms ease-out;
+}
+
+.subscriptions-form__form .mauticform-input:focus + .mauticform-label,
+.subscriptions-form__form .mauticform-textarea:focus + .mauticform-label,
+.subscriptions-form__form
+  .mauticform-input.subscription-form__input--has-value
+  + .mauticform-label,
+.subscriptions-form__form
+  .mauticform-textarea.subscription-form__input--has-value
+  + .mauticform-label {
+  position: absolute;
+  top: -20px;
+  font-size: 13px;
+  color: #45cffd;
+}
+
+.subscriptions-form__form .mauticform-row {
+  margin-bottom: 45px;
 }
 
 .main-contact-form .mauticform-selectbox {
