@@ -1,7 +1,7 @@
 ---
 title: Software Engineer
 image: /img/jpg/about-vacancies.jpg
-weight: 4
+weight: 5
 location: UK/Europe
 ---
 
