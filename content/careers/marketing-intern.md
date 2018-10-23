@@ -1,7 +1,7 @@
 ---
 title: Marketing Intern
 image: /img/jpg/about-vacancies.jpg
-weight: 5
+weight: 3
 location: UK
 ---
 
