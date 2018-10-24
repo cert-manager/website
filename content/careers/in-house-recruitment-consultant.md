@@ -11,7 +11,7 @@ The company has grown organically to 18 people. Recently Kubernetes has become o
 
 You will be responsible for the whole range of roles across the company, from technical to commercial. As an engineering-lead company, we need someone who is interested in the technology space and comfortable working in a fast-paced market.
 
-**What we are looking for**
+**What we are looking for:**
 
 * 2+ years’ experience in recruitment, ideally with a background of hiring in the tech/digital industry
 * Knowledge of open source
