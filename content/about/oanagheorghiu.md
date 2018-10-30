@@ -1,9 +1,10 @@
 ---
 title: Oana Gheorghiu
-weight: 14
+weight: 12
 image: /img/jpg/about-oana.jpg
 position: Head of Support
 email: oana.gheorghiu@jetstack.io
+twitter: '@oana_garnett'
 ---
 
 Oana comes from Rackspace and has been working in the industry for the past 7

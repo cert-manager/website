@@ -67,12 +67,12 @@ menus:
       - name: Careers
         link: /careers/
       - name: Contact
-        link: /contact/  
+        link: /contact/
     - name: Blog
       link: https://blog.jetstack.io/
     # - name: Contact
     #   link: /contact/
-  
+
   navbar_footer:
     - name: Subscription
       link: /subscription/
@@ -91,38 +91,41 @@ menus:
 
   social:
     - name: github
-      img: /img/png/social-github-white.png
+      img: svg/icon-social-github.svg
       link: https://github.com/jetstack
     - name: docker
-      img: /img/png/social-docker-white.png
+      img: svg/icon-social-docker.svg
       link: https://hub.docker.com/u/jetstack/
     - name: linkedin
-      img: /img/png/social-linkedin-white.png
+      img: svg/icon-social-linkedin.svg
       link: https://www.linkedin.com/company/jetstack
     - name: twitter
-      img: /img/png/social-twitter-white.png
+      img: svg/icon-social-twitter.svg
       link: https://twitter.com/jetstackhq
 
-      insights:
-    - name: All
-      link: /insights/
-    - name: Blog
-      link: /blog/
-    #- name: Whitepapers
-    #  link: /whitepapers/
-    #- name: Infographics
-    #  link: /infographics/
-    #- name: Videos
-    #  link: /videos/
+  careers_social:
+    - name: instagram
+      img: svg/icon-careers-social-instagram.svg
+      link: https://www.instagram.com/jetstackhq/
+      color: pink
+    - name: twitter
+      img: svg/icon-careers-social-twitter.svg
+      link: https://twitter.com/jetstackhq
+      color: purple
+    - name: linkedin
+      img: svg/icon-social-linkedin.svg
+      link: https://www.linkedin.com/company/jetstack
+      color: blue
+
 
 # large text panels like partials/panels/{headline,calltoaction}
 headline:
 
   homepage:
     headline: Kubernetes Accelerated
-    strapline: 
-      With Jetstack Subscription  
-      
+    strapline:
+      With Jetstack Subscription
+
   getStarted:
     headline: Who are we?
     strapline: >
@@ -149,12 +152,8 @@ headline:
     strapline: With Jetstack services
 
   about:
-    headline: >
-      Powering the hottest startups
-
-      and the largest enterprises
-    strapline: Our team reflects a unique blend of specialist skills
-    tag: About Us
+    headline: Our team
+    strapline: Powering the hottest startups and the largest enterprises. Our team reflects a unique blend of specialist skills
 
   insights:
     headline: Resources, Blogs, Events, Tools, Meetups
@@ -165,9 +164,9 @@ headline:
     strapline: and get to market quicker
 
   careers:
-    headline: Careers at Jetstack
-    strapline: Join our growing team and build the future with Kubernetes
+    headline: We’re on a mission to help businesses launch faster
     tag: Careers
+    img: /img/jpg/header-careers.jpg
 
   blog:
     headline: Read all about it
@@ -186,15 +185,16 @@ headline:
     strapline: Get yo popcorn yo
 
   training:
-    headline: Learn with Us 
+    headline: Learn with Us
     strapline: Learn and engage directly and on-demand
     tag: Training
-  
+
   training_in_person_section:
     headline: In-Person Training
     strapline: Learn and engage directly with our team
     tag: Training
-  
+    img: '/img/png/in-person-header-bg.png'
+
   training_subscription_section:
     headline: Training Subscription
     strapline: On-demand training and resources to maximise operational confidence
@@ -204,7 +204,7 @@ headline:
     headline: Our Experts are Your Experts
     strapline: Make the most of Kubernetes with us alongside you
     tag: Consulting
-  
+
   open_source:
     headline: Supercharging Kubernetes with Jetstack Open Source
     strapline: Enhancing the experience a tool at a time
@@ -214,7 +214,7 @@ headline:
     headline: Get Started With Jetstack
     strapline: Get in touch
     link: /contact/
-  
+
   subscription:
     headline: Jetstack Subscription
     strapline: Jetstack Subscription is an offering to help you at every stage of your Kubernetes journey. It gives you a tried and trusted suite of tools to support your team.
@@ -250,8 +250,8 @@ panels:
   our_services:
     headline: Our services
     strapline: >
-       Accelerate your adoption of Kubernetes and cloud native 
-       
+       Accelerate your adoption of Kubernetes and cloud native
+
        with our unique blend of services
     panelColour: white
     service_features:
@@ -303,7 +303,7 @@ panels:
       - name: oddschecker
         img: /img/png/oddscheckergreyscale3.png
         link: https://www.oddschecker.com/
-      - filler: true 
+      - filler: true
       - name: contact
         button: Get in touch
         link: /contact/
@@ -316,7 +316,7 @@ panels:
       - name: infoQ
         img: /img/png/greyscaleinfoQ*.png
         link: https://www.infoq.com/news/2018/03/kubernetes-stateful-services/
-      
+
 
   # nice things people said about us (homepage)
   testimonials:
@@ -367,7 +367,7 @@ panels:
         in ~20 minutes...
     - name: Advanced Wargaming with
       link:
-        title: Holiday Extras 
+        title: Holiday Extras
         url: https://www.holidayextras.co.uk/
       quote: >
         Jetstack wargaming gave validation of our decisions so far, ideas for improvements and a good test of our ability to support the infrastructure we've built.
@@ -497,4 +497,4 @@ panels:
   training_subscription:
     testimonial:
       copy: The Jetstack wargaming gave validation of our decisions so far, new ideas for improvements and a good test of our ability to support the infrastructure we've built
-      cite: Holiday Extras, Advanced Wargaming  
+      cite: Holiday Extras, Advanced Wargaming

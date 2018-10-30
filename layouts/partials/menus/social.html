@@ -1,5 +1,5 @@
 {{ range .links }}
-  <a href="{{ .link }}">
-      <img src="{{ .img }}"/>
-  </a>
+<a href="{{ .link }}">
+  {{ partial .img }}
+</a>
 {{ end }}

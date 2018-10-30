@@ -1,9 +1,11 @@
 ---
 title: Charlie Egan
-weight: 9
+weight: 10
 image: /img/jpg/about-charlie.jpg
 position: Solutions Engineer
 email: charlie.egan@jetstack.io
+twitter: '@charlieegan3'
+github: 'charlieegan3'
 ---
 
 Charlie comes from an application development background, but he’s been tinkering with containers on the side for a few years. He’s interested in how container tech can improve the developer experience and reduce anxiety around deploying software, and is looking forward to working with the team at Jetstack.

@@ -1,0 +1,15 @@
+<section class="container tight">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <blockquote class="course-testimonial">
+          <p class="course-testimonial__quote">{{ .quote }}</p>
+          <cite class="course-testimonial__cite">
+            {{ if .profileImage }}
+            <img src="{{ .profileImage }}" alt="" class="course-testimonial__profile">
+            {{ end }}
+            <p class="course-testimonial__quoter">{{ .quoter }}</p>
+          </cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>

@@ -1,9 +1,11 @@
 ---
 title: Mattias Gees
-weight: 10
+weight: 13
 image: /img/jpg/about-mattias.jpg
 position: Solutions Engineer
 email: mattias.gees@jetstack.io
+twitter: '@MattiasGees'
+github: 'MattiasGees'
 ---
 
 Mattias is an experienced System engineer. Whilst working in the cloud hosting

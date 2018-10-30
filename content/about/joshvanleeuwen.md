@@ -1,9 +1,11 @@
 ---
 title: Josh Van Leeuwen
-weight: 8
+weight: 6
 image: /img/jpg/about-josh.jpg
 position: Solutions Engineer
 email: joshua.vanleeuwen@jetstack.io
+twitter: 
+github: 'JoshVanL'
 ---
 Josh interned at Jetstack during the summer of 2017 before continuing to work
 part time during his final year of study at the University of Bristol.  During
