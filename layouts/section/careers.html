@@ -131,21 +131,11 @@
           <div class="col-sm-12">
             <h2 class="section-title">Instagram feed</h2>
             <div class="instagrams">
-              <a class="instagrams__link" href="https://www.instagram.com/jetstackhq/" rel="noopener noreferrer" target="_blank">
-                <img src="https://scontent-lht6-1.cdninstagram.com/vp/8f2b3c1a496f0d83394ba17705b6edb0/5C5BC755/t51.2885-15/sh0.08/e35/s640x640/41447754_1207321069406831_1701757924459107461_n.jpg" alt="" class="instagrams__img">
-              </a>
-              <a class="instagrams__link" href="https://www.instagram.com/jetstackhq/" rel="noopener noreferrer" target="_blank">
-                <img src="https://scontent-lht6-1.cdninstagram.com/vp/f4b08b6701ad232fdd4e5554a9aac8d2/5C467A1A/t51.2885-15/sh0.08/e35/s640x640/41701428_1932125683763807_6668799303314896940_n.jpg" alt="" class="instagrams__img">
-              </a>
-              <a class="instagrams__link" href="https://www.instagram.com/jetstackhq/" rel="noopener noreferrer" target="_blank">
-                <img src="https://scontent-lht6-1.cdninstagram.com/vp/2e303893ac8a25de91b7318eaba1e866/5C52A536/t51.2885-15/sh0.08/e35/s640x640/42746724_1958403004242708_3001119655671176511_n.jpg" alt="" class="instagrams__img">
-              </a>
-              <a class="instagrams__link" href="https://www.instagram.com/jetstackhq/" rel="noopener noreferrer" target="_blank">
-                <img src="https://scontent-lht6-1.cdninstagram.com/vp/d6ffe29a8ba4cd01584e4b778f12f5fa/5C4352A1/t51.2885-15/sh0.08/e35/s640x640/41845829_273474936624826_254604484246984878_n.jpg" alt="" class="instagrams__img">
-              </a>
-              <a class="instagrams__link" href="https://www.instagram.com/jetstackhq/" rel="noopener noreferrer" target="_blank">
-                <img src="https://scontent-lht6-1.cdninstagram.com/vp/7b30665824792bfc22e37b6f0568b77c/5C3E284F/t51.2885-15/sh0.08/e35/s640x640/41741604_183282445901731_829064543208860421_n.jpg" alt="" class="instagrams__img">
-              </a>
+              {{ range $_, $photo := .Site.Data.config.featured_instagram_photos }}
+                <a class="instagrams__link" href="{{ $photo.link }}" rel="noopener noreferrer" target="_blank">
+                  <img src="/img/instagram/{{ $photo.image_source }}" alt="photo from the jetstack instagram account" class="instagrams__img">
+                </a>
+              {{ end }}
             </div>
           </div>
         </div>
