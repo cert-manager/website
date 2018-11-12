@@ -1,5 +1,5 @@
 ---
-title: Dev & Deploy
+title: Kubernetes for Application Developers 
 image: /img/png/header-training-deploy.png
 contentImage: /img/jpg/training-app-dev.jpg
 card_description: >
