@@ -140,7 +140,7 @@ deploy:prod:
       HUGO_BASE_URL="https://www.jetstack.io"
       HTPASSWD=
       TLS_ENABLED=true
-      TLS_DNS_PROVIDER=cloudflare
+      TLS_DNS_PROVIDER=jetstack-gke-clouddns
       HELM_VALUES='.values.prod.yaml'
   environment:
     name: prod
