@@ -32,3 +32,5 @@ Our [Kubernetes training programme](https://www.jetstack.io/training/) forms a c
 * You are enthusiastic about the content you are teaching, and keen to inspire other engineers with the possibilities they can unlock with Kubernetes, Istio and other cloud native technologies
 * You are prepared to travel in order to deliver training to customers (at least one day per week). 
 
+
+Contact <a href="mailto:hello@jetstack.io">hello@jetstack.io</a> to find out more and apply.
