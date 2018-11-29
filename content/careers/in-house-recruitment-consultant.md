@@ -1,7 +1,7 @@
 ---
 title: In-House Recruitment Consultant
 image: /img/jpg/about-vacancies.jpg
-weight: 3
+weight: 6
 location: UK/Europe
 ---
 

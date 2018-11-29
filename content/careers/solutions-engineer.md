@@ -1,7 +1,7 @@
 ---
 title: Solutions Engineer
 image: /img/jpg/about-vacancies.jpg
-weight: 6
+weight: 5
 location: UK/Europe
 ---
 
