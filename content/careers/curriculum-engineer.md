@@ -16,8 +16,8 @@ Our [Kubernetes training programme](https://www.jetstack.io/training/) forms a c
 * Work with our existing training team to review our current training offering and develop a suitable process by which the curriculum is continually maintained and revised 
 * Work with our commercial team to establish training packages for customers
 * Take part in the development of material to match changes in the ecosystem
-* Collaborate with the Flightdeck team to ensure that our in-person training and online training courses align 
-* Work with our customers to gather feedback and improvements for Flight Deck, our online training platform 
+* Work with our customers to gather feedback and improvements for [Flight Deck](https://www.jetstack.io/subscription/#training), our online training platform 
+* Collaborate with the Flight Deck team to ensure that our in-person training and online training courses align 
 
 
 **About you:** 
@@ -25,12 +25,12 @@ Our [Kubernetes training programme](https://www.jetstack.io/training/) forms a c
 * You have experience developing, and delivering technical education material 
 * You have previously held a technical role such as a software developer, or in a role that requires similar skills 
 * You have experience with some of the following technologies: Kubernetes, Docker, Go, public cloud, CI/CD
+* You are comfortable presenting and offering technical instruction and guidance to a wide range of audiences 
 * You can demonstrate experience of running projects and working independently 
 * Interest in working with a cutting edge technology in fast-growing open source communities
-* You have excellent communication skills, both verbal and written
-* You are comfortable presenting and offering technical instruction and guidance to a wide range of audiences 
+* You have excellent communication skills, both verbal and written 
 * You are enthusiastic about the content you are teaching, and keen to inspire other engineers with the possibilities they can unlock with Kubernetes, Istio and other cloud native technologies
-* You are prepared to travel in order to deliver training to customers (at least one day per week). 
+* You are prepared to travel in order to deliver training to customers (at least one day per week) 
 
 
 Contact <a href="mailto:hello@jetstack.io">hello@jetstack.io</a> to find out more and apply.
