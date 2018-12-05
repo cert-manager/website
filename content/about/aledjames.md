@@ -4,7 +4,7 @@ weight: 14
 image: /img/jpg/about-aled.jpg
 position: Solutions Engineer
 email: aled.james@jetstack.io
-twitter: '@a_ll_james'
+twitter: 'a_ll_james'
 github: 'alljames'
 ---
 

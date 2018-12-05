@@ -4,7 +4,7 @@ weight: 2
 image: /img/jpg/about-matt-2.jpg
 position: Co founder
 email: matt.bates@jetstack.io 
-twitter: '@mattbates25'
+twitter: 'mattbates25'
 github: 'mattbates'
 ---
 

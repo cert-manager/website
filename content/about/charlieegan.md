@@ -4,7 +4,7 @@ weight: 10
 image: /img/jpg/about-charlie.jpg
 position: Solutions Engineer
 email: charlie.egan@jetstack.io
-twitter: '@charlieegan3'
+twitter: 'charlieegan3'
 github: 'charlieegan3'
 ---
 

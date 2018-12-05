@@ -4,7 +4,7 @@ weight: 7
 image: /img/jpg/about-luke.jpg
 position: Solutions Engineer
 email: luke.addison@jetstack.io
-twitter: '@dippynark'
+twitter: 'dippynark'
 github: 'dippynark'
 ---
 
