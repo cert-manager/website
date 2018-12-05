@@ -4,7 +4,7 @@ weight: 4
 image: /img/jpg/about-james.jpg
 position: Solutions Engineer
 email: james.munnelly@jetstack.io
-twitter: '@JamesMunnelly'
+twitter: 'JamesMunnelly'
 github: 'munnerz'
 ---
 

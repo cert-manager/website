@@ -4,7 +4,7 @@ weight: 3
 image: /img/jpg/about-christian.jpg
 position: Solutions Engineer
 email: christian.simon@jetstack.io
-twitter: '@simonswine'
+twitter: 'simonswine'
 github: 'simonswine'
 ---
 

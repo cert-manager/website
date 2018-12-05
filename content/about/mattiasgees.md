@@ -4,7 +4,7 @@ weight: 13
 image: /img/jpg/about-mattias.jpg
 position: Solutions Engineer
 email: mattias.gees@jetstack.io
-twitter: '@MattiasGees'
+twitter: 'MattiasGees'
 github: 'MattiasGees'
 ---
 
