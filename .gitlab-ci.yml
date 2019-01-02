@@ -4,6 +4,9 @@ stages:
 - deploy-staging
 - deploy-prod
 
+variables:
+  DOCKER_HOST: tcp://localhost:2375
+
 before_script:
 - echo "${GCLOUD_SVC_ACCT}" > gcloud-svc-acct.json && chmod 600 gcloud-svc-acct.json
 - export GOOGLE_APPLICATION_CREDENTIALS="$(pwd)/gcloud-svc-acct.json"
