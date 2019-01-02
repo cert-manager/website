@@ -23,13 +23,13 @@ test:helm:
 
 build:hugo:
   before_script: []
-  image: docker:1.13.1
+  image: docker:18.09
   stage: build
   script:
   - apk add --no-cache make
   - make hugo_build
   services:
-  - docker:1.13.1-dind
+  - docker:18.09-dind
   artifacts:
     paths:
     - ./_output
@@ -38,13 +38,13 @@ build:hugo:
 
 build:golang:
   before_script: []
-  image: docker:1.13.1
+  image: docker:18.09
   stage: build
   script:
   - apk add --no-cache make
   - make golang_build
   services:
-  - docker:1.13.1-dind
+  - docker:18.09-dind
   artifacts:
     paths:
     - ./_build
@@ -53,7 +53,7 @@ build:golang:
 
 docker:image:
   before_script: []
-  image: docker:1.13.1
+  image: docker:18.09
   stage: docker
   tags:
   - docker
@@ -62,7 +62,7 @@ docker:image:
   - mkdir -p ~/.docker && echo "${DOCKER_AUTH_CONFIG}" > ~/.docker/config.json && chmod 600 ~/.docker/config.json
   - make docker_build docker_push IMAGE_TAGS="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
   services:
-  - docker:1.13.1-dind
+  - docker:18.09-dind
   dependencies:
   - build:hugo
   - build:golang
