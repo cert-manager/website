@@ -1,7 +1,7 @@
 ---
 title: Engineering Manager
 image: /img/jpg/about-vacancies.jpg
-weight: 2
+weight: 3
 location: UK
 ---
 We guide and support enterprises in their adoption and production use of Kubernetes. Our deep understanding and real-world experience in a variety of environments (cloud and on-premises), enable us to accelerate customer projects and provide them with confidence in their operations.
