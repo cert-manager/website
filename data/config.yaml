@@ -167,9 +167,11 @@ headline:
   about:
     headline: Our team
     strapline: >
+      We are a fast-growing Kubernetes professional services company that prides itself with helping 
+      startups and enterprises alike in their path to modern cloud-native infrastructure.
+    strapline2: >
       Since early 2015 we have been powering the hottest startups and the largest enterprises on their path to cloud native infrastructure. 
-    
-      Our team reflects a unique blend of specialist skills
+      Our team reflects a unique blend of specialist skills.
 
   insights:
     headline: Resources, Blogs, Events, Tools, Meetups
@@ -490,6 +492,7 @@ panels:
       Jetstack develop tools to make your experience with
 
       Kubernetes easier and more productive
+
 
   training_landing:
     training_subscription:
