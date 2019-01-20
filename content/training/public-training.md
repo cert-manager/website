@@ -1,0 +1,62 @@
+---
+type: public-training
+title: Public Kubernetes Workshops
+image: /img/png/header-training-deploy.png
+contentImage: /img/jpg/training-app-dev.jpg
+card_description: lorem ipsum dolor
+card_image: /img/png/card-img-deploy.png
+training_level: Application Development
+weight: 1
+testimonial:
+  quote: 'I thought it was excellent, I wouldn’t change anything 10/10'
+  profileImage:
+  quoter: 'Workshop Attendee'
+course_dates:
+  - date: '11 April 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Beginner'
+
+  - date: '12 April 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Intermediate'
+
+  - date: '30 April 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Beginner'
+
+  - date: '1st May 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Intermediate'
+
+  - date: '2nd May 2019'
+    title: 'Advanced Operations'
+    level: 'Operational Wargaming'
+
+  - date: '17th May 2019'
+    title: 'Kubernetes for App Development'
+    level: 'App dev & Deploy'
+
+  - date: '11 June 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Beginner'
+
+  - date: '12 June 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Intermediate'
+
+  - date: '13 June 2019'
+    title: 'Advanced Operations'
+    level: 'Operational Wargaming'
+---
+
+**Duration:** 1 day
+
+## Description
+
+Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managing Linux Containers at massive scale.
+
+Since then the Kubernetes project has exploded, gaining over 30,000 commits and 46, 600+ stars on Github. It is quickly becoming the default cluster manager, referred to as the new ‘Datacentre OS.’ Kubernetes is a must to learn if you are using or adopting containers.
+
+In these workshops, we demonstrate the deployment of microservice applications to Google Container Engine (GKE), with explanation of core concepts and hands-on, instructor-led labs. This is a FREE workshop hosted by Google, run by Jetstack. Lunch is provided.
+
+Here’s an [outline of the content](https://jetstack.io/) delivered in our workshops

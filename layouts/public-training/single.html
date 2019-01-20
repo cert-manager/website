@@ -24,31 +24,35 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="course-content__copy">{{ .Content }}</div>
-          <div class="course-content__cta">
-            <a href="/contact" class="button-link button-link--black"
-              >Find out more</a
-            >
-          </div>
         </div>
-        <div class="col-sm-5 col-sm-offset-1">
-          {{ if .Params.contentImage }}
-          <img
-            src="{{ .Params.contentImage }}"
-            alt=""
-            class="course-content__img"
-          />
-          {{ end }}
-        </div>
+        <div class="col-sm-5 col-sm-offset-1">FORM GOES HERE</div>
       </div>
     </article>
   </section>
 
-  {{ if .Params.testimonial }}
-  {{ partial "panels/course-testimonial" .Params.testimonial }} {{ end }}
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Course Dates</h2>
+          <div class="course-dates">
+            {{ range.Params.course_dates }}
+            <article class="course-date">
+              <time class="course-date__time">{{ .date }}</time>
+              <h3 class="course-date__title">
+                {{ .title }}: <strong>{{ .level }}</strong>
+              </h3>
+            </article>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 {{ end }}
 
-{{ define "cta" }} {{ partial "ctas/training-course"}} {{ end }}
+{{ define "cta" }} {{ partial "ctas/email-only"}} {{ end }}
 
 {{ define "footer" }} {{ partial "footer/minimal-light.html" . }} {{ end }}
