@@ -5,27 +5,34 @@
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">
-  <section
-    class="header-with-img-bg"
-    style="background-image: url({{ .Params.image }})"
-  >
-    <a href="../" class="header-with-img-bg__link">
-      <p
-        class="header-with-img-bg__section  header-with-img-bg__section--white"
-      >
-        Training
-      </p>
-    </a>
-    <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
+  <section class="header-with-img-bg" style="background-image: url({{ .Params.image }})">
+    <div class="header-with-img-bg__split-content">
+      <div class="header-with-img-bg__left">
+        <a href="../" class="header-with-img-bg__link">
+          <p class="header-with-img-bg__section  header-with-img-bg__section--white">
+            Training
+          </p>
+        </a>
+        <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
+      </div>
+      <div class="header-with-img-bg__right">
+        <blockquote class="header-with-img-bg__quote">
+          <p>“I thought it was excellent, I wouldn’t change anything”</p>
+          <cite>10/10</cite>
+        </blockquote>
+      </div>
+    </div>
   </section>
 
-  <section>
-    <article class="container course-content">
+  <section class="pink-stripes-section">
+    <article class="container">
       <div class="row">
         <div class="col-sm-6">
-          <div class="course-content__copy">{{ .Content }}</div>
+          <div class="">{{ .Content }}</div>
         </div>
-        <div class="col-sm-5 col-sm-offset-1">FORM GOES HERE</div>
+        <div class="col-sm-5 col-sm-offset-1">
+          {{ partial "eventbrite/embedded-form.html" . }}
+        </div>
       </div>
     </article>
   </section>

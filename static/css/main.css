@@ -1864,6 +1864,42 @@ Introduced on new Subscription Page
   overflow: hidden;
 }
 
+@media (min-width: 768px) {
+  .header-with-img-bg__split-content {
+    display: flex;
+    max-width: 1100px;
+    margin-left: auto; 
+    margin-right: auto; 
+  }
+
+  .header-with-img-bg__left {
+    text-align: left;
+    margin-right: 40px;
+    flex: 1 0 60%;
+  }
+}
+
+.header-with-img-bg__quote {
+  border: 0;
+  color: white;
+}
+
+.header-with-img-bg__quote p {
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .header-with-img-bg__quote {
+    text-align: left;
+  }
+
+  .header-with-img-bg__quote p {
+    line-height: 1.3;
+    margin: 10px 0;
+    font-size: 28px;
+  }
+}
+
 .header-with-img-bg__video {
   position: absolute;
   top: 0;
@@ -2796,4 +2832,43 @@ Introduced on new Subscription Page
     flex: 0 0 calc(33.3333% - 60px);
     margin: 20px 30px;
   }
+}
+
+@media (min-width: 768px) {
+  .pink-stripes-section {
+    background-image: url('/img/svg/jetstack_stripes.svg');
+    background-position: calc(100% - 50px) 200px;
+    background-repeat: no-repeat;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+}
+
+.eventbrite-form {
+  background-color: white;
+  box-shadow: 0 3px 66px rgba(0, 0, 0, 0.16);
+  padding: 10px;
+  margin: 50px 0;
+}
+
+@media (min-width: 768px) {
+  .eventbrite-form {
+    padding: 50px;
+    margin: 0;
+  }
+}
+
+.eventbrite-form__title {
+  text-align: center;
+  margin: 10px 0 30px;
+}
+
+.eventbrite-form__select {
+  display: block;
+  width: 100%;
+}
+
+.eventbrite-widget-container {
+  min-height: 200px;
+  background: url(/img/gif/jetstack-loading.gif) no-repeat 50% 50%;
 }

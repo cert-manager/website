@@ -1,7 +1,7 @@
 ---
 type: public-training
 title: Public Kubernetes Workshops
-image: /img/png/header-training-deploy.png
+image: /img/jpg/public-training-header-bg.jpg
 contentImage: /img/jpg/training-app-dev.jpg
 card_description: lorem ipsum dolor
 card_image: /img/png/card-img-deploy.png
@@ -15,41 +15,48 @@ course_dates:
   - date: '11 April 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
+    eventbriteId: 55135437578
 
   - date: '12 April 2019'
     title: 'Kubernetes in Practice'
     level: 'Intermediate'
+    eventbriteId: 0000000000
 
   - date: '30 April 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
+    eventbriteId: 0000000000
 
   - date: '1st May 2019'
     title: 'Kubernetes in Practice'
     level: 'Intermediate'
+    eventbriteId: 0000000000
 
   - date: '2nd May 2019'
     title: 'Advanced Operations'
     level: 'Operational Wargaming'
+    eventbriteId: 0000000000
 
   - date: '17th May 2019'
     title: 'Kubernetes for App Development'
     level: 'App dev & Deploy'
+    eventbriteId: 0000000000
 
   - date: '11 June 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
+    eventbriteId: 0000000000
 
   - date: '12 June 2019'
     title: 'Kubernetes in Practice'
     level: 'Intermediate'
+    eventbriteId: 0000000000
 
   - date: '13 June 2019'
     title: 'Advanced Operations'
     level: 'Operational Wargaming'
+    eventbriteId: 55135802670
 ---
-
-**Duration:** 1 day
 
 ## Description
 
