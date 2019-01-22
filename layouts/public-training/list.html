@@ -63,7 +63,7 @@
         <div class="col-md-12">
           <h2>Participant levels</h2>
           <div class="white-tiles">
-            {{ range .Pages }}
+            {{ range where .Pages "Params.type" "course" }}
             <article class="white-tile">
               <h3 class="white-tile__title">{{.Title}}</h3>
               <div class="white-tile__content">
@@ -72,6 +72,28 @@
               <a href="{{ .Params.link }}" class="white-tile__link">Learn more</a>
             </article>
             {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Speakers</h2>
+          <div class="speaker-bios">
+            {{ range where .Pages "Params.type" "bio" }}
+            <div class="speaker-bio">
+              <figure class="speaker-bio__img" style="background-image: url({{ .Params.bio_pic_url }})" aria-hidden="true"></figure>
+              <div class="speaker-bio__content">
+                <h2 class="speaker-bio__name">{{ .Title }}</h2>
+                <p class="speaker-bio__title">{{ .Params.job_title }}</p>
+              </div>
+            </div>
+            {{ end }}
+
           </div>
         </div>
       </div>

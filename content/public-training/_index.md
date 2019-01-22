@@ -12,10 +12,15 @@ testimonial:
   profileImage:
   quoter: 'Workshop Attendee'
 course_dates:
+  - date: '8 March 2019'
+    title: 'Kubernetes for Application Developers'
+    level: 'App Dev & Deploy'
+    eventbriteId: 55135437578
+
   - date: '11 April 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
-    eventbriteId: 55135437578
+    eventbriteId: 0000000000
 
   - date: '12 April 2019'
     title: 'Kubernetes in Practice'
@@ -39,7 +44,7 @@ course_dates:
 
   - date: '17th May 2019'
     title: 'Kubernetes for App Development'
-    level: 'App dev & Deploy'
+    level: 'App Dev & Deploy'
     eventbriteId: 0000000000
 
   - date: '11 June 2019'

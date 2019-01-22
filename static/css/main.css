@@ -2814,6 +2814,7 @@ Introduced on new Subscription Page
   font-size: 18px;
   color: #6e6f7c;
   font-weight: normal;
+  line-height: 1.3;
 }
 
 .course-date__title strong {
@@ -2931,4 +2932,70 @@ Introduced on new Subscription Page
   background-image: url(/img/svg/jetstack-stripes-and-bg.svg);
   background-repeat: no-repeat;
   background-position: -60px calc(100% + -20px);
+}
+
+
+.speaker-bio {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin: 40px;
+}
+
+.speaker-bio__img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-size: cover;
+  display: block;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.speaker-bio__content {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .speaker-bios {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .speaker-bio {
+    flex: 0 0 calc(50% - 40px);
+  }
+
+  .speaker-bio:nth-child(odd) {
+    margin-left: 0;
+  }
+
+  .speaker-bio:nth-child(even) {
+    margin-right: 0;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .speaker-bio {
+    flex-basis: calc(25% - 80px);
+  }
+
+  .speaker-bio:nth-child(odd) {
+    margin-left: 40px;
+  }
+
+  .speaker-bio:nth-child(even) {
+    margin-right: 40px;
+  }
+
+  .speaker-bio:first-child {
+    margin-left: 0;
+  }
+
+  .speaker-bio:last-child {
+    margin-right: 0;
+  }
 }
