@@ -2998,4 +2998,8 @@ Introduced on new Subscription Page
   .speaker-bio:last-child {
     margin-right: 0;
   }
+
+  .speaker-bio__name {
+    font-size: 26px;
+  }
 }
