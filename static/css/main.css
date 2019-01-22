@@ -2872,3 +2872,63 @@ Introduced on new Subscription Page
   min-height: 200px;
   background: url(/img/gif/jetstack-loading.gif) no-repeat 50% 50%;
 }
+
+.white-tiles {
+  margin: 0 -20px;
+}
+
+.white-tile {
+  background-color: white;
+  padding: 50px 40px;
+  margin: 20px;
+  box-shadow: 0 3px 33px 0px rgba(0, 0, 0, 0.16);
+  flex: 0 0 calc(50% - 40px);
+}
+
+.white-tile__title {
+  margin: 0 0 30px;
+}
+
+.white-tile__content {
+  margin-bottom: 30px;
+}
+
+.white-tile__link {
+  position: relative;
+  align-self: flex-start;
+}
+
+.white-tile__link:after {
+  content: '';
+  display: inline-block;
+  background: url(/img/svg/right-arrow.svg) no-repeat 50% 50%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(100% + 10px);
+  width: 22px;
+}
+
+@media (min-width: 768px) {
+  .white-tiles {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .white-tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .white-tile__content {
+    min-height: 160px;
+    flex: 1 1 100%;
+  }
+}
+
+.stripes-and-square-section {
+  background-image: url(/img/svg/jetstack-stripes-and-bg.svg);
+  background-repeat: no-repeat;
+  background-position: -60px calc(100% + -20px);
+}

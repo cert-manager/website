@@ -56,6 +56,27 @@
       </div>
     </div>
   </section>
+
+  <section class="stripes-and-square-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Participant levels</h2>
+          <div class="white-tiles">
+            {{ range .Pages }}
+            <article class="white-tile">
+              <h3 class="white-tile__title">{{.Title}}</h3>
+              <div class="white-tile__content">
+                {{ .Content }}
+              </div>
+              <a href="{{ .Params.link }}" class="white-tile__link">Learn more</a>
+            </article>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 {{ end }}
