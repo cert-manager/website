@@ -1868,8 +1868,8 @@ Introduced on new Subscription Page
   .header-with-img-bg__split-content {
     display: flex;
     max-width: 1100px;
-    margin-left: auto; 
-    margin-right: auto; 
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .header-with-img-bg__left {
@@ -1941,6 +1941,10 @@ Introduced on new Subscription Page
   margin-right: auto;
 }
 
+.header-with-img-bg__title.tight {
+  margin: 0;
+}
+
 .header-with-img-bg__link:link,
 .header-with-img-bg__link:visited {
   color: inherit;
@@ -1949,6 +1953,23 @@ Introduced on new Subscription Page
 .header-with-img-bg__link:hover,
 .header-with-img-bg__link:active {
   color: white;
+}
+
+.csp-logo {
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 50px;
+    width: 180px;
+    height: auto;
+}
+
+.csp-logo-small {
+    margin-bottom: 50px;
+    width: 100px;
+    height: auto;
+	margin-top: 25px;
+	margin-left: 25px;
+	margin-right: 25px;
 }
 
 @media (min-width: 480px) {
