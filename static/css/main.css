@@ -3003,3 +3003,69 @@ Introduced on new Subscription Page
     font-size: 26px;
   }
 }
+
+.stats__number {
+  font-size: 50px;
+  display: block;
+}
+
+.stats__number.stats__number--green {
+  color: #51D8BA;
+}
+
+.stats__number.stats__number--pink {
+  color: #FF6382;
+}
+
+.stats__copy {
+  font-size: 24px;
+  color: #6E6F7C;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.stats__left {
+  line-height: 1.2;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.stats__right {
+  border: 0;
+  padding: 0;
+  margin: 0 0 50px;
+  text-align: center;
+}
+
+.stats__quote {
+  font-size: 24px;
+  color: #6326DA;
+  line-height: 1.3;
+}
+
+.stats__cite {
+  font-style: normal;
+}
+
+@media (min-width: 768px) {
+  .stats {
+    display: flex;
+    margin-bottom: 6em;
+  }
+
+  .stats__left {
+    flex: 1 0 36%;
+    text-align: left;
+    border-right: 1px solid #D8D8D8;
+    padding-right: 60px;
+  }
+
+  .stats__right {
+    text-align: left;
+    padding-left: 100px;
+  }
+
+  .stats__quote {
+    font-size: 28px;
+  }
+}
