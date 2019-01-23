@@ -71,4 +71,4 @@ Since then the Kubernetes project has exploded, gaining over 30,000 commits and 
 
 In these workshops, we demonstrate the deployment of microservice applications to Google Container Engine (GKE), with explanation of core concepts and hands-on, instructor-led labs. This is a FREE workshop hosted by Google, run by Jetstack. Lunch is provided.
 
-Here’s an [outline of the content](https://jetstack.io/) delivered in our workshops
+Here’s an [outline of the content](https://www.jetstack.io/training/) delivered in our workshops
