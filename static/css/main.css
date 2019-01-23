@@ -1925,7 +1925,9 @@ Introduced on new Subscription Page
   color: #51d8ba;
   font-weight: inherit;
 }
-
+.header-with-img-bg__section--top-padding {
+  padding-top: 15px;
+}
 .header-with-img-bg__section--white {
   color: white;
 }
