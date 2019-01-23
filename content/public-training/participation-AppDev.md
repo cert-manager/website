@@ -1,7 +1,7 @@
 ---
-title: App Dev
+title: App Dev & Deploy
 weight: 4 
-link: /training/application-dev-and-deploy/
+link: /documents/App_Dev_Deploy_Agenda.pdf
 type: course
 ---
 

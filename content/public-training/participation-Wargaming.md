@@ -1,7 +1,7 @@
 ---
 title: Wargaming
-weight: 2
-link: /training/operational-wargaming/
+weight: 3
+link: /documents/Kubernetes_Wargaming_Agenda.pdf
 type: course
 ---
 

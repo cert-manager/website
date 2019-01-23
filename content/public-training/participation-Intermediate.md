@@ -1,7 +1,7 @@
 ---
 title: Intermediate
-weight: 3
-link: /training/intermediate/
+weight: 2
+link: /documents/Kubernetes_Intermediate_Agenda.pdf
 type: course
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Beginner
 weight: 1
-link: /training/beginner/
+link: /documents/Kubernetes_Beginner_Agenda.pdf
 type: course
 ---
 
