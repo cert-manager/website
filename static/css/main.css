@@ -2791,7 +2791,7 @@ Introduced on new Subscription Page
 .course-dates {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .course-date {
@@ -2818,7 +2818,7 @@ Introduced on new Subscription Page
 }
 
 .course-date__title strong {
-  color: #1b1c29;
+  color: #6326DA;
   font-weight: normal;
   white-space: nowrap;
 }

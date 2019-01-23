@@ -37,26 +37,6 @@
     </article>
   </section>
 
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Course Dates</h2>
-          <div class="course-dates">
-            {{ range.Params.course_dates }}
-            <article class="course-date">
-              <time class="course-date__time">{{ .date }}</time>
-              <h3 class="course-date__title">
-                {{ .title }}: <strong>{{ .level }}</strong>
-              </h3>
-            </article>
-            {{ end }}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="stripes-and-square-section">
     <div class="container">
       <div class="row">
@@ -124,6 +104,26 @@
     </div>
   </section>
 </div>
+
+<section class="tight">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Course Dates</h2>
+        <div class="course-dates">
+          {{ range.Params.course_dates }}
+          <article class="course-date">
+            <time class="course-date__time">{{ .date }}</time>
+            <h3 class="course-date__title">
+              {{ .title }}: <strong>{{ .level }}</strong>
+            </h3>
+          </article>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {{ end }}
 
