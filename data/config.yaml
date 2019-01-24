@@ -286,7 +286,7 @@ panels:
       desc: Consulting and engineering to make the most of Kubernetes and move you to production quickly
     - name: In-Person Training
       img: svg/icon-presentation.svg
-      link: /in-person-training
+      link: /training/
       desc: Learn and engage directly alongside our team, with courses for all stages of your Kubernetes journey
 
   # the partners we have worked and press stories about us (homepage)
