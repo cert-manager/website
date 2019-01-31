@@ -69,6 +69,15 @@ Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managi
 
 Since then the Kubernetes project has exploded, gaining over 30,000 commits and 46, 600+ stars on Github. It has quickly become the default cluster manager, referred to as the new ‘Datacentre OS.’ Kubernetes is a must to learn if you are using or adopting containers.
 
-In these workshops, we demonstrate the deployment of microservice applications to Google Container Engine (GKE), with explanation of core concepts and hands-on, instructor-led labs. This is a FREE workshop hosted by Google, run by Jetstack. Lunch is provided.
+In these workshops, we demonstrate the deployment of microservice applications to Google Container Engine (GKE), with explanation of core concepts and hands-on, instructor-led labs. Here’s an [outline of the content](https://www.jetstack.io/training/) delivered in our workshops. This is a FREE workshop hosted by Google, run by Jetstack. Lunch is provided. 
 
-Here’s an [outline of the content](https://www.jetstack.io/training/) delivered in our workshops.
+To attend you must:  
+
+* Register with company email address 
+* Either be working on or about to start working on an active Docker/Kubernetes project 
+* Demonstrate a skill level consistent with the course level specification (see below) 
+* Be able to travel and attend course in London 
+
+_Note: No more than two attendees from the same company in one workshop._
+
+Please register your interest and we will confirm your attendance based on availability. 
