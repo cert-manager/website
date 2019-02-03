@@ -80,4 +80,4 @@ To attend you must:
 
 _Note: No more than two attendees from the same company in one workshop._
 
-Please register your interest and we will confirm your attendance based on availability. 
+**Please register your interest and we will confirm your attendance based on availability.** 
