@@ -1,17 +1,20 @@
 {{ define "title" }} | {{ .Title }}{{ end }}
 
-{{ define "navbar" }}
-{{ partial "navbar/light-transparent.html" . }}
-{{ end }}
+{{ define "navbar" }} {{ partial "navbar/light-transparent.html" . }} {{ end }}
 
 {{ define "body" }}
 
-
 <div class="container-fluid" id="page-content">
-
-  <section class="header-with-img-bg" style="background-image: url({{ .Params.image }})">
+  <section
+    class="header-with-img-bg"
+    style="background-image: url({{ .Params.image }})"
+  >
     <a href="../" class="header-with-img-bg__link">
-      <p class="header-with-img-bg__section  header-with-img-bg__section--white">Training</p>
+      <p
+        class="header-with-img-bg__section  header-with-img-bg__section--white"
+      >
+        Training
+      </p>
     </a>
     <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
   </section>
@@ -20,16 +23,20 @@
     <article class="container course-content">
       <div class="row">
         <div class="col-sm-6">
-          <div class="course-content__copy">
-            {{ .Content }}
-          </div>
+          <div class="course-content__copy">{{ .Content }}</div>
           <div class="course-content__cta">
-            <a href="/contact" class="button-link button-link--black">Find out more</a>
+            <a href="/contact" class="button-link button-link--black"
+              >Find out more</a
+            >
           </div>
         </div>
         <div class="col-sm-5 col-sm-offset-1">
           {{ if .Params.contentImage }}
-          <img src="{{ .Params.contentImage }}" alt="" class="course-content__img">
+          <img
+            src="{{ .Params.contentImage }}"
+            alt=""
+            class="course-content__img"
+          />
           {{ end }}
         </div>
       </div>
@@ -37,19 +44,11 @@
   </section>
 
   {{ if .Params.testimonial }}
-  {{ partial "panels/course-testimonial" .Params.testimonial }}
-  {{ end }}
-
+  {{ partial "panels/course-testimonial" .Params.testimonial }} {{ end }}
 </div>
 
-
 {{ end }}
 
+{{ define "cta" }} {{ partial "ctas/training-course"}} {{ end }}
 
-{{ define "cta" }}
-{{ partial "ctas/training-course"}}
-{{ end }}
-
-{{ define "footer" }}
-{{ partial "footer/minimal-light.html" . }}
-{{ end }}
+{{ define "footer" }} {{ partial "footer/minimal-light.html" . }} {{ end }}

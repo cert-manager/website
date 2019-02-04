@@ -1,0 +1,41 @@
+<section class="eventbrite-form">
+  <h2 class="eventbrite-form__title">Register to attend</h2>
+  <h3 cless="eventbrite-form__subtitle">1. Select the course</h3>
+  <select class="eventbrite-form__select" name="eventbritecourse" id="eventbritecourse">
+    <option value="">Select a course...</option>
+    {{ range $.Params.course_dates }}
+    <option value="{{ .eventbriteId }}">{{ .date }} - {{ .title }}: {{ .level }}</option>
+    {{ end }}
+  </select>
+
+  <div id="eventbrite-container" style="display: none">
+    <h3 cless="eventbrite-form__subtitle">2. Order from Eventbrite</h3>
+    <div class="eventbrite-widget-container" id="eventbrite-widget-container"></div>
+  </div>
+</section>
+
+<script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
+
+<script type="text/javascript">
+  var eventbriteSelect = document.querySelector('#eventbritecourse');
+  var eventbriteFormContainer = document.querySelector('#eventbrite-container');
+  var eventbriteForm = document.querySelector('#eventbrite-widget-container');
+
+  eventbriteSelect.addEventListener('change', function () {
+    var eventId = this.value;
+    eventbriteForm.innerHTML = '';
+
+    if (!eventId) {
+      eventbriteFormContainer.style.display = 'none';
+    } else {
+      eventbriteFormContainer.style.display = 'block';
+
+      window.EBWidgets.createWidget({
+        widgetType: 'checkout',
+        eventId: eventId,
+        iframeContainerId: 'eventbrite-widget-container',
+        iframeContainerHeight: 425
+      });
+    }
+  });
+</script>

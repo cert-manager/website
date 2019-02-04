@@ -65,7 +65,7 @@
     width: 180px;
     height: 55px;
     font-size: 1.2em;
-    font-family: sofia-pro; 
+    font-family: sofia-pro;
     line-height: 4em;
     text-align: center;
     color: white;
@@ -98,17 +98,17 @@
     align-items: center;
     border-radius: 4px;
     padding: 10px 20px;
-    
+
     color:white;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     border-left: 1px solid white;
-    border-right: 1px solid white; 
+    border-right: 1px solid white;
 }**/
 .masthead__button:hover, .masthead__button:active {
     color:black;
     background-color: white;
-    border-bottom: 1px solid black; 
+    border-bottom: 1px solid black;
     border-top: 1px solid black;
     border-right: 1px solid black;
     border-left: 1px solid black;
@@ -556,21 +556,11 @@
 
 }
 
-
-.csp-logo {
-    margin: 0 auto;
-    display: block;
-    margin-bottom: 50px;
-    width: 180px;
-    height: auto;
-}
-
 @media screen and (min-width: 992px) {
     .csp-logo {
         position: absolute;
         top: 0;
         right: 0;
         width: auto;
-        
     }
 }

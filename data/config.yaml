@@ -71,6 +71,8 @@ menus:
         link: /consulting/
       - name: Training
         link: /training/
+      - name: Public Training
+        link: /public-training/
     - name: About Us
       link: /about/
       sublinks:

@@ -1,0 +1,130 @@
+{{ define "title" }} | {{ .Title }}{{ end }}
+
+{{ define "navbar" }} {{ partial "navbar/light-transparent.html" . }} {{ end }}
+
+{{ define "body" }}
+
+<div class="container-fluid" id="page-content">
+  <section class="header-with-img-bg" style="background-image: url({{ .Params.image }})">
+    <div class="header-with-img-bg__split-content">
+      <div class="header-with-img-bg__left">
+        <p class="header-with-img-bg__section  header-with-img-bg__section--white">
+          Training
+        </p>
+        <h1 class="header-with-img-bg__title tight">{{ .Title }}</h1>
+        <p class="header-with-img-bg__section  header-with-img-bg__section--white header-with-img-bg__section--top-padding">
+          in partnership with Google Cloud
+        </p>
+      </div>
+      <div class="header-with-img-bg__right">
+        <img class="csp-logo-small" src="/img/svg/logo-kubernetes-csp.svg" alt="Kubernetes Certifies Service Provider Logo">
+        <img class="csp-logo-small" src="/img/png/google-cloud.png" alt="Google Cloud logo">
+      </div>
+    </div>
+  </section>
+
+  <section class="pink-stripes-section">
+    <article class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="">{{ .Content }}</div>
+        </div>
+        <div class="col-sm-5 col-sm-offset-1">
+          {{ partial "eventbrite/embedded-form.html" . }}
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="stripes-and-square-section tight">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Participant levels</h2>
+          <div class="white-tiles">
+            {{ range where .Pages "Params.type" "course" }}
+            <article class="white-tile">
+              <h3 class="white-tile__title">{{.Title}}</h3>
+              <div class="white-tile__content">
+                {{ .Content }}
+              </div>
+              <a href="{{ .Params.link }}" class="white-tile__link">View Agenda</a>
+            </article>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Trainers</h2>
+          <div class="speaker-bios">
+            {{ range where .Pages "Params.type" "bio" }}
+            <div class="speaker-bio">
+              <figure class="speaker-bio__img" style="background-image: url({{ .Params.bio_pic_url }})" aria-hidden="true"></figure>
+              <div class="speaker-bio__content">
+                <h2 class="speaker-bio__name">{{ .Title }}</h2>
+                <p class="speaker-bio__title">{{ .Params.job_title }}</p>
+              </div>
+            </div>
+            {{ end }}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <aside class="stats">
+            <div class="stats__left">
+              <span class="stats__number stats__number--green">1500+</span>
+              <span class="stats__copy">DevOps engineers trained</span>
+              <span class="stats__number stats__number--pink">100+</span>
+              <span class="stats__copy">Companies trained</span>
+            </div>
+            <blockquote class="stats__right">
+              <p class="stats__quote">"Jetstack training gave validation of our decisions so far, 
+                ideas for improvements, 
+                and a good test of our ability to support the infrastructure we've built."</p>
+              <cite class="stats__cite">Advanced Workshop attendee, Holiday Extras</cite>
+            </blockquote>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="tight">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Course Dates</h2>
+        <div class="course-dates">
+          {{ range.Params.course_dates }}
+          <article class="course-date">
+            <time class="course-date__time">{{ .date }}</time>
+            <h3 class="course-date__title">
+              {{ .title }} <br> <strong>{{ .level }}</strong>
+            </h3>
+          </article>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}
+
+{{ define "cta" }} {{ partial "ctas/email-only"}} {{ end }}
+
+{{ define "footer" }} {{ partial "footer/minimal-light.html" . }} {{ end }}
