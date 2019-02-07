@@ -1,6 +1,6 @@
 ---
 title: Oluwole Fadeyi
-weight: 16
+weight: 18
 image: /img/jpg/about-oluwole.jpg
 position: Summer Intern
 email: oluwole.fadeyi@jetstack.io
