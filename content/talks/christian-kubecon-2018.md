@@ -2,7 +2,7 @@
 title: "Why running kubelet on your vacuum is (not) a good idea"
 person: Christian Simon
 event: Kubecon Europe 2018
-slides_link: https://drive.google.com/drive/folders/1V6oynSi611IwsMsNbvKroSqQAU0XGQ6t
+slides_link: https://drive.google.com/file/d/1XcyBcSFlVCjJ8R5j6vggnLfK51YXY07s/view?usp=sharing
 video_link: https://www.youtube.com/watch?v=ea0UzDpk6PE&feature=youtu.be
 date: 2018-05-04
 ---

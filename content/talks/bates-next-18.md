@@ -2,8 +2,8 @@
 title: "Microservices & Monoliths"
 person: Matt Bates
 event: Google NEXT London 2018
-slides_link: https://docs.google.com/presentation/d/14-roGaAS8C3sDv8WktbXMzwmJw8cez4CUvx-Eoh6nLY/edit#slide=id.g417ffbdb2b_0_87
-video_link: 
+slides_link: https://docs.google.com/presentation/d/14-roGaAS8C3sDv8WktbXMzwmJw8cez4CUvx-Eoh6nLY/edit?usp=sharing
+video_link:
 date: 2018-10-11
 ---
 

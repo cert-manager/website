@@ -2,7 +2,7 @@
 title: "cert-manager: native certificate management for Kubernetes"
 person: James Munnelly
 event: Kubecon Europe 2018
-slides_link: https://docs.google.com/presentation/d/1Zg1LnkBNAql373vSh8zZBUvgpD2Qsfp_oJ1X8zVV4tk/edit#slide=id.g221fc420d8_0_61
+slides_link: https://docs.google.com/presentation/d/1Zg1LnkBNAql373vSh8zZBUvgpD2Qsfp_oJ1X8zVV4tk/edit?usp=sharing
 video_link: https://www.youtube.com/watch?v=TuIycZeiNZM&feature=youtu.be
 date: 2018-05-04
 ---
