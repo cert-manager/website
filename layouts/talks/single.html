@@ -5,12 +5,12 @@
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">
-  <section class="header-with-img-bg" style="background-image: url(thumbnail.jpg)">
-    <p class="header-with-img-bg__section  header-with-img-bg__section--white">
+  <section class="header-with-img-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url(thumbnail.jpg)">
+    <p class="header-with-img-bg__section header-with-img-bg__section--white">
       {{ .Params.event }}
     </p>
     <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
-    <p class="header-with-img-bg__section  header-with-img-bg__section--white">
+    <p class="header-with-img-bg__section header-with-img-bg__section--white">
       {{ .Params.person }}
     </p>
   </section>
@@ -18,7 +18,7 @@
   <section>
     <article class="container course-content">
       <div class="row">
-        <div class="col-sm-8 offset-sm-2">
+        <div class="col-md-8 offset-md-2">
             <div class="course-content__copy">{{ .Content }}</div>
             <table class="table">
                 <tr>
