@@ -29,13 +29,13 @@
                     <th>Speaker</th>
                     <td>{{ .Params.person }}</td>
                 </tr>
-                {{ if isset .Params "video_link" }}
+                {{ if .Params.video_link }}
                     <tr>
                         <th>Video</th>
                         <td><a href="{{ .Params.video_link }}">Watch Video</a></td>
                     </tr>
                 {{ end }}
-                {{ if isset .Params "slides_link" }}
+                {{ if .Params.slides_link }}
                     <tr>
                         <th>Slides</th>
                         <td><a href="{{ .Params.slides_link }}">Open Slides</a></td>
