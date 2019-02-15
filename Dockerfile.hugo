@@ -1,14 +1,14 @@
 FROM alpine:3.7
 
-ENV HUGO_VERSION=0.20.2
-ENV HUGO_CHECKSUM=7cbf607f981aa9366aa512a651400a7a06744beaf182345369a2cfbb6cf18420
+ENV HUGO_VERSION=0.54.0
+ENV HUGO_CHECKSUM=76f90287c12a682c9137b85146c406be410b2b30b0df7367f02ee7c4142bb416
 RUN \
   apk add --no-cache openssl ca-certificates && \
   mkdir -p /tmp/hugo && \
   cd /tmp/hugo && \
-  wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -O  hugo.tar.gz && \
+  wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -O hugo.tar.gz && \
   echo "${HUGO_CHECKSUM}  hugo.tar.gz" | sha256sum -c && \
-  tar xvf hugo.tar.gz && cp ./hugo_${HUGO_VERSION}_linux_amd64/hugo_${HUGO_VERSION}_linux_amd64 /usr/bin/hugo && \
+  tar xvf hugo.tar.gz && ls && cp hugo /usr/bin/hugo && \
   rm -rf /tmp/hugo
 
 
