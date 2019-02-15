@@ -4,7 +4,6 @@ person: James Munnelly
 event: Kubecon North America 2017
 slides_link: https://docs.google.com/presentation/d/17W_-GG1I00k7zL43DvwuJKJTQuPS_pK058qGclf0Mbc/edit?usp=sharing
 video_link: https://www.youtube.com/watch?v=PYLFZVv68lM
-thumbnail: thumbnail.png
 date: 2017-12-15
 ---
 
