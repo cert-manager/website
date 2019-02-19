@@ -9,6 +9,8 @@ We guide and support enterprises in their adoption and production use of Kuberne
 
 Our Solution Engineers architect, design and implement Kubernetes-based integrations. They work directly with customers, onsite and remote, and are as comfortable in front of a whiteboard explaining concepts to a customer as at a Linux terminal implementing highly-automated and scripted solutions. They are expected to take part in delivering Kubernetes training to a wide variety of audiences, educating other engineers in the possibilities they can unlock with Kubernetes. They understand how to integrate and make the most of Kubernetes and related cloud-native technology. They have a passion for pushing boundaries, sometimes with novel and experimental ideas, are self-started and proactive.
 
+You can [read more](https://blog.jetstack.io/blog/day-in-the-life/) about the life of a Jetstack Solutions Engineer on our blog. 
+
 **Technology experience**
 
 * Python / Ruby / C/C++ and/or Go (ideal)

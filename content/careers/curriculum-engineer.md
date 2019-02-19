@@ -10,6 +10,8 @@ We guide and support enterprises in their adoption and production use of Kuberne
 
 Our [Kubernetes training programme](https://www.jetstack.io/training/) forms a considerable part of our services at Jetstack, and we are proud to have delivered training to over 2,000 engineers from over 70 different companies over the past two years. We are Google’s UK Kubernetes training partner, and have developed training courses for various levels and user groups. With an increasing number of small businesses and large enterprises alike looking to adopt Kubernetes and upskill their teams, we recognise the growing value of our training. We are now looking to hire a full-time Curriculum Engineer to lead our training offering and take on the challenge of both developing our curriculum and delivering our courses. 
 
+You can [read more](https://blog.jetstack.io/blog/workshop-roundup/) about Jetstack training courses on our blog. 
+
 **The Curriculum Engineer will:** 
 
 * Deliver training courses both onsite with customers and with our training partners
