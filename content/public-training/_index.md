@@ -47,6 +47,21 @@ course_dates:
     level: 'App Dev & Deploy'
     eventbriteId: 55160611875
 
+  - date: '29th May 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Beginner'
+    eventbriteId: 57023489793
+  
+  - date: '30th May 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Intermediate'
+    eventbriteId: 57024317268
+  
+  - date: '31st May 2019'
+    title: 'Advanced Operations'
+    level: 'Operational Wargaming'
+    eventbriteId: 57024805729
+
   - date: '11 June 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
