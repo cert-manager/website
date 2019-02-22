@@ -2,7 +2,7 @@
 title: "Tarmak: Why do we need another Kubernetes provisioner?"
 person: Mattias Gees
 event: Config Management Camp, Belgium
-slides_link: https://docs.google.com/presentation/d/1iXyqfMP-xi8xmG3jfLK_SH3cHIV0Holz9l2gZUwK0pY/edit?usp=sharing
+slides_link: https://speakerdeck.com/mattiasgees/tarmak-why-do-we-need-another-kubernetes-provisioner
 video_link: https://www.youtube.com/watch?v=xtc88sbUnkM
 date: 2019-02-05
 ---
