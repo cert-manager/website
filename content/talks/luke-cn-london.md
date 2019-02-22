@@ -7,10 +7,4 @@ video_link: https://drive.google.com/file/d/1Uzheb-Ks1eGsBC4tl0X-iw8dLArD9qWP/vi
 date: 2018-10-09
 ---
 
-At the heart of Kubernetes is its API. Whilst on the surface it may appear
-relatively simple to use, under the hood is a beast of complex conversions,
-codecs and generators. In this talk, I'll show you how the Kubernetes
-maintainers have created their own tooling to make this process easy when
-contributing to core, and how you can use this to build your own custom
-controllers, operators and API servers. I'll then demonstrate this technique
-with a pager extension to Kubernetes.
+eBPF (extended Berkeley Packet Filter) is a powerful Linux Kernel technology that allows user space code to be run on an in-kernel virtual machine. This talk will introduce eBPF at a high level, some of its more common uses and go into detail on a specific eBPF program designed to record all shell sessions on a Linux machine. The talk will end with a demonstration of how this program can be deployed on Google Kubernetes Engine to replay container shell sessions and gain new insights into activity across the cluster.
