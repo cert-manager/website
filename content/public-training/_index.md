@@ -17,50 +17,65 @@ course_dates:
     level: 'App Dev & Deploy'
     eventbriteId: 54707056278
 
-  # - date: '11 April 2019'
-  #   title: 'Kubernetes in Practice'
-  #   level: 'Beginner'
-  #   eventbriteId: 55160210675
+  - date: '11 April 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Beginner'
+    eventbriteId: 55160210675
 
-  # - date: '12 April 2019'
-  #   title: 'Kubernetes in Practice'
-  #   level: 'Intermediate'
-  #   eventbriteId: 55160265840
+  - date: '12 April 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Intermediate'
+    eventbriteId: 55160265840
 
-  # - date: '30 April 2019'
-  #   title: 'Kubernetes in Practice'
-  #   level: 'Beginner'
-  #   eventbriteId: 55160331035
+  - date: '30 April 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Beginner'
+    eventbriteId: 55160331035
 
-  # - date: '1st May 2019'
-  #   title: 'Kubernetes in Practice'
-  #   level: 'Intermediate'
-  #   eventbriteId: 55160514584
+  - date: '1st May 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Intermediate'
+    eventbriteId: 55160514584
 
-  # - date: '2nd May 2019'
-  #   title: 'Advanced Operations'
-  #   level: 'Operational Wargaming'
-  #   eventbriteId: 55160559719
+  - date: '2nd May 2019'
+    title: 'Advanced Operations'
+    level: 'Operational Wargaming'
+    eventbriteId: 55160559719
 
-  # - date: '17th May 2019'
-  #   title: 'Kubernetes for App Development'
-  #   level: 'App Dev & Deploy'
-  #   eventbriteId: 55160611875
+  - date: '17th May 2019'
+    title: 'Kubernetes for App Development'
+    level: 'App Dev & Deploy'
+    eventbriteId: 55160611875
 
-  # - date: '11 June 2019'
-  #   title: 'Kubernetes in Practice'
-  #   level: 'Beginner'
-  #   eventbriteId: 55160722205
+  - date: '29th May 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Beginner'
+    eventbriteId: 57023489793
+  
+  - date: '30th May 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Intermediate'
+    eventbriteId: 57024317268
+  
+  - date: '31st May 2019'
+    title: 'Advanced Operations'
+    level: 'Operational Wargaming'
+    eventbriteId: 57024805729
 
-  # - date: '12 June 2019'
-  #   title: 'Kubernetes in Practice'
-  #   level: 'Intermediate'
-  #   eventbriteId: 55160852595
+  - date: '11 June 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Beginner'
+    eventbriteId: 55160722205
 
-  # - date: '13 June 2019'
-  #   title: 'Advanced Operations'
-  #   level: 'Operational Wargaming'
-  #   eventbriteId: 55160971952
+  - date: '12 June 2019'
+    title: 'Kubernetes in Practice'
+    level: 'Intermediate'
+    eventbriteId: 55160852595
+
+  - date: '13 June 2019'
+    title: 'Advanced Operations'
+    level: 'Operational Wargaming'
+    eventbriteId: 55160971952
 ---
 
 ## Description
