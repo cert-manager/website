@@ -82,7 +82,7 @@ course_dates:
 
 Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managing Linux Containers at massive scale.
 
-Since then the Kubernetes project has exploded, gaining over 30,000 commits and 46,600+ stars on Github. It has quickly become the default cluster manager, referred to as the new ‘Datacentre OS.’ Kubernetes is a must to learn if you are using or adopting containers.
+Since then the Kubernetes project has exploded, gaining over 75,000 commits and 48,000+ stars on Github. It has quickly become the default cluster manager, referred to as the new ‘Datacentre OS.’ Kubernetes is a must to learn if you are using or adopting containers.
 
 These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience. This is a FREE workshop hosted by Google, run by Jetstack. Lunch is provided. 
 
