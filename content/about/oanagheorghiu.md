@@ -1,9 +1,9 @@
 ---
-title: Oana Gheorghiu
+title: Oana Garnett
 weight: 12
 image: /img/jpg/about-oana.jpg
 position: Head of Support
-email: oana.gheorghiu@jetstack.io
+email: oana.garnett@jetstack.io
 twitter: 'oana_garnett'
 ---
 
