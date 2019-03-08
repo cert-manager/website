@@ -2,3 +2,21 @@ config:
   smtpUsername: AKIAJYHII4ZIATIRLUJQ
   smtpPassword: Asz8vI0W5X1hF07QcoIMKsc6klLEYPQyBidAxewrE/E6
 ingressTLS: false
+ingressRedirectHostnames:
+  "/":
+    - www.istio.co.uk
+    - istio.co.uk
+    - www.jetstack.co
+    - jetstack.co
+    - www.jetstack.co.uk
+    - jetstack.co.uk
+    - www.jetstack.net
+    - jetstack.net
+  "/careers/":
+    - www.k8s.careers
+    - k8s.careers
+    - www.kubernetes.careers
+    - kubernetes.careers
+  "/open-source/":
+    - www.jetstack.dev
+    - jetstack.dev
