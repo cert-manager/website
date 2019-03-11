@@ -28,6 +28,7 @@ config:
   contactDestAddress: hello@jetstack.io
 ingressClass: nginx
 ingressHostnames: []
+ingressRedirectHostnames: {}
 ingressTLS: true
 ingressTLSDNSProvider: ""
 ingressHtpasswd: ""

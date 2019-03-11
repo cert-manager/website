@@ -1,0 +1,41 @@
+{{- $global := . }}
+{{- range $target, $hostnames := .Values.ingressRedirectHostnames }}
+{{- $redirectName := . }}
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "fullname" $global }}-{{ template "redirectname" $target }}
+  labels:
+    chart: "{{ $global.Chart.Name }}-{{ $global.Chart.Version | replace "+" "_" }}"
+  annotations:
+    kubernetes.io/ingress.class: '{{ $global.Values.ingressClass }}'
+{{- if $global.Values.ingressTLS }}
+    kubernetes.io/tls-acme: "true"
+{{- if $global.Values.ingressTLSDNSProvider }}
+    certmanager.k8s.io/acme-challenge-type: dns01
+    certmanager.k8s.io/acme-dns01-provider: {{ $global.Values.ingressTLSDNSProvider }}
+{{- end }}
+{{- end }}
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      rewrite / https://www.jetstack.io{{ $target }} redirect;
+spec:
+{{- if $global.Values.ingressTLS }}
+  tls:
+  - secretName: {{ template "fullname" $global }}-{{ template "redirectname" $target }}
+    hosts:
+{{- range $hostname := $hostnames }}
+    - {{ $hostname }}
+{{- end }}
+{{- end }}
+  rules:
+{{- range $hostname := $hostnames }}
+  - host: {{ $hostname }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ template "fullname" $global }}
+          servicePort: {{ $global.Values.service.externalPort }}
+{{- end }}
+{{- end }}
