@@ -1,0 +1,36 @@
+{{ define "title" }}
+  | {{ .Title }}
+{{- end }}
+
+{{ define "navbar" }} {{ partial "navbar/light-transparent.html" . }} {{ end }}
+
+{{ define "body" }}
+<div class="container-fluid" id="page-content">
+  <section class="header-with-img-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url({{ .Params.image }})">
+    <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
+  </section>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <!--Grouping by date here, all talks for the same event need the same date so they'll be shown together -->
+      {{ range .Pages.ByDate.GroupByDate "Monday, Jan 2, 2006" }}
+        <h2 class="section-title">{{ (index .Pages 0).Params.event }}</h2>
+        <div class="card-list">
+          {{ range .Pages }}
+            <article class="card">
+                <a href="{{ .RelPermalink }}" class="card__link">
+                <img class="card__img" src="{{ .RelPermalink}}thumbnail.jpg" />
+                <header>
+                  <h3 class="card__title">{{ .Title }}</h3>
+                  <h4 class="card__subtitle">{{ .Params.person }}</h4>
+                </header>
+              </a>
+              <p class="card__copy">{{ .Params.card_description }}</p>
+            </article>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}

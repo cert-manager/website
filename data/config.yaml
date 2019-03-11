@@ -80,6 +80,8 @@ menus:
         link: /about/
       - name: Careers
         link: /careers/
+      - name: Our Talks
+        link: /talks/
       - name: Contact
         link: /contact/
     - name: Blog
@@ -143,9 +145,9 @@ headline:
   getStarted:
     headline: Who are we?
     strapline: >
-      We are a fast-growing Kubernetes professional services company that prides itself with helping 
+      We are a fast-growing Kubernetes professional services company that prides itself with helping
       startups and enterprises alike in their path to modern cloud-native infrastructure.
-      We live and breathe Kubernetes and open source. 
+      We live and breathe Kubernetes and open source.
 
   kubernetes:
     headline: >
@@ -169,7 +171,7 @@ headline:
   about:
     headline: Jetstack
     strapline: >
-      We are a fast-growing Kubernetes professional services company that prides itself with helping 
+      We are a fast-growing Kubernetes professional services company that prides itself with helping
       startups and enterprises alike in their path to modern cloud-native infrastructure
     strapline2: >
       Our team reflects a unique blend of specialist skills

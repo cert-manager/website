@@ -1,0 +1,53 @@
+{{ define "title" }} | {{ .Title }}{{ end }}
+
+{{ define "navbar" }} {{ partial "navbar/light-transparent.html" . }} {{ end }}
+
+{{ define "body" }}
+
+<div class="container-fluid" id="page-content">
+  <section class="header-with-img-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url(thumbnail.jpg)">
+    <p class="header-with-img-bg__section header-with-img-bg__section--white">
+      {{ .Params.event }}
+    </p>
+    <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
+    <p class="header-with-img-bg__section header-with-img-bg__section--white">
+      {{ .Params.person }}
+    </p>
+  </section>
+
+  <section>
+    <article class="container course-content">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="course-content__copy">{{ .Content }}</div>
+            <table class="table">
+                <tr>
+                    <th>Event</th>
+                    <td>{{ .Params.event }}</td>
+                </tr>
+                <tr>
+                    <th>Speaker</th>
+                    <td>{{ .Params.person }}</td>
+                </tr>
+                {{ if .Params.video_link }}
+                    <tr>
+                        <th>Video</th>
+                        <td><a href="{{ .Params.video_link }}">Watch Video</a></td>
+                    </tr>
+                {{ end }}
+                {{ if .Params.slides_link }}
+                    <tr>
+                        <th>Slides</th>
+                        <td><a href="{{ .Params.slides_link }}">Open Slides</a></td>
+                    </tr>
+                {{ end }}
+            </table>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>
+
+{{ end }}
+
+{{ define "footer" }} {{ partial "footer/minimal-light.html" . }} {{ end }}
