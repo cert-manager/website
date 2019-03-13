@@ -1,6 +1,6 @@
 ---
 type: public-training
-title: Public Kubernetes Workshops
+title: Public Kubernetes Training
 image: /img/jpg/public-training-header-bg.jpg
 contentImage: /img/jpg/training-app-dev.jpg
 card_description: lorem ipsum dolor
@@ -84,7 +84,7 @@ Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managi
 
 Since then the Kubernetes project has exploded, gaining over 75,000 commits and 48,000+ stars on Github. It has quickly become the default cluster manager, referred to as the new ‘Datacentre OS.’ Kubernetes is a must to learn if you are using or adopting containers.
 
-These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience. This is a FREE workshop hosted by Google, run by Jetstack. Lunch is provided. 
+These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience. These are FREE courses hosted by Google, run by Jetstack. Lunch is provided. 
 
 To attend you must:  
 
@@ -93,6 +93,6 @@ To attend you must:
 * Demonstrate a skill level consistent with the course level specification (see below) 
 * Be able to travel and attend course in London 
 
-_Note: No more than two attendees from the same company in one workshop._
+_Note: No more than two attendees from the same company can register on the same course._
 
 **Please register your interest and we will confirm your attendance based on availability.** 
