@@ -1969,9 +1969,18 @@ Introduced on new Subscription Page
     margin-bottom: 50px;
     width: 100px;
     height: auto;
-	margin-top: 25px;
-	margin-left: 25px;
-	margin-right: 25px;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.csp-logo-medium {
+    margin-bottom: 50px;
+    width: 150px;
+    height: auto;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 @media (min-width: 480px) {
