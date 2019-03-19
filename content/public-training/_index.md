@@ -37,30 +37,15 @@ course_dates:
     level: 'Intermediate'
     eventbriteId: 55160514584
 
-  - date: '2nd May 2019'
-    title: 'Advanced Operations'
-    level: 'Operational Wargaming'
-    eventbriteId: 55160559719
-
-  - date: '17th May 2019'
-    title: 'Kubernetes for App Development'
-    level: 'App Dev & Deploy'
-    eventbriteId: 55160611875
-
   - date: '29th May 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
     eventbriteId: 57023489793
-  
+
   - date: '30th May 2019'
     title: 'Kubernetes in Practice'
     level: 'Intermediate'
     eventbriteId: 57024317268
-  
-  - date: '31st May 2019'
-    title: 'Advanced Operations'
-    level: 'Operational Wargaming'
-    eventbriteId: 57024805729
 
   - date: '11 June 2019'
     title: 'Kubernetes in Practice'
@@ -71,11 +56,6 @@ course_dates:
     title: 'Kubernetes in Practice'
     level: 'Intermediate'
     eventbriteId: 55160852595
-
-  - date: '13 June 2019'
-    title: 'Advanced Operations'
-    level: 'Operational Wargaming'
-    eventbriteId: 55160971952
 ---
 
 ## Description
@@ -84,15 +64,15 @@ Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managi
 
 Since then the Kubernetes project has exploded, gaining over 75,000 commits and 48,000+ stars on Github. It has quickly become the default cluster manager, referred to as the new ‘Datacentre OS.’ Kubernetes is a must to learn if you are using or adopting containers.
 
-These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience. These are FREE courses hosted by Google, run by Jetstack. Lunch is provided. 
+These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience. These are FREE courses hosted by Google, run by Jetstack. Lunch is provided.
 
-To attend you must:  
+To attend you must:
 
-* Register with company email address 
-* Either be working on or about to start working on an active Docker/Kubernetes project 
-* Demonstrate a skill level consistent with the course level specification (see below) 
-* Be able to travel and attend course in London 
+* Register with company email address
+* Either be working on or about to start working on an active Docker/Kubernetes project
+* Demonstrate a skill level consistent with the course level specification (see below)
+* Be able to travel and attend course in London
 
 _Note: No more than two attendees from the same company can register on the same course._
 
-**Please register your interest and we will confirm your attendance based on availability.** 
+**Please register your interest and we will confirm your attendance based on availability.**
