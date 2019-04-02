@@ -7,7 +7,7 @@ location: UK
 
 We guide and support enterprises in their adoption and production use of Kubernetes. Our deep understanding and real-world experience in a variety of environments (cloud and on-premises), enables us to accelerate customer projects and provide them with confidence in their operations.
 
-**The Role:** 
+**The Role** 
 
 Due to increased interest in Kubernetes adoption, we are looking for a Business Development Manager to help build our brand by selling Jetstack’s services and working closely with our major partners (namely Google Cloud and Venafi). As a Business Development Manager, you will identify, build and nurture lasting relationships with new and existing customers. You’ll work closely with our Co-Founders and Engineers to develop our sales pipeline and strategy.
 
@@ -15,7 +15,7 @@ Jetstack already has an established reputation within the Kubernetes community a
 
 Our subscription product has huge potential within the industry, so we would like you to focus on this pipeline in particular.
 
-**What will you be doing:** 
+**What will you be doing** 
 
 * Responsible for driving new business by identifying, prospecting, closing and onboarding customers
 * Build a strategy to grow our current accounts and acquire new ones. Our subscription product has huge potential    within the industry, so we would like you to develop this pipeline in particular.
@@ -23,7 +23,7 @@ Our subscription product has huge potential within the industry, so we would lik
 * Define Jetstack’s relationships within accounts, such as executing business reviews and maintaining customer       satisfaction
 * Assisting with our marketing and PR using social media and events
 
-**What are we looking for:** 
+**What are we looking for** 
 
 * Sales/account management experience, ideally within a startup 
 * Excellent networking and negotiating abilities
