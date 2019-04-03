@@ -13,14 +13,12 @@ Due to increased interest in Kubernetes adoption, we are looking for a Business 
 
 Jetstack already has an established reputation within the Kubernetes community and we receive a high number of warm leads; we’re not looking for someone to spend hours on the phone cold-calling! What we do need however, is someone with an interest in cloud-technologies and a desire to help deliver real value to our customers.
 
-Our subscription product has huge potential within the industry, so we would like you to focus on this pipeline in particular.
-
 **What will you be doing** 
 
 * Responsible for driving new business by identifying, prospecting, closing and onboarding customers
-* Build a strategy to grow our current accounts and acquire new ones. Our subscription product has huge potential    within the industry, so we would like you to develop this pipeline in particular.
+* Build a strategy to grow our current accounts and acquire new ones. Our subscription product has huge potential within the industry, so we would like you to develop this pipeline in particular.
 * Develop relationships with key stakeholders and our network of partners to increase our customers ROI
-* Define Jetstack’s relationships within accounts, such as executing business reviews and maintaining customer       satisfaction
+* Define Jetstack’s relationships within accounts, such as executing business reviews and maintaining customer satisfaction
 * Assisting with our marketing and PR using social media and events
 
 **What are we looking for** 
@@ -29,7 +27,7 @@ Our subscription product has huge potential within the industry, so we would lik
 * Excellent networking and negotiating abilities
 * A proven track-record of achieving and exceeding sales targets and KPI’s
 * An ability to effectively prioritise business-critical opportunities
-* We use Pipedrive to keep track of our funnel, so experience with this platform would be great.
+* We use Pipedrive to keep track of our funnel, so experience with this platform would be great
 * Understanding of open source and cloud technologies
 
 
