@@ -1,7 +1,7 @@
 ---
 title: Operations Manager
 image: /img/jpg/about-vacancies.jpg
-weight: 5
+weight: 7
 location: UK/Europe
 ---
 
