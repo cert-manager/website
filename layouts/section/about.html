@@ -28,9 +28,18 @@
           <div class="col-sm-12">
             <div class="bio-list">
 
-              {{ range $index, $page := .Data.Pages }}
+              {{ $matts := where .Data.Pages ".Params.matt" "true" }}
+              {{ $everyoneElse := where (where .Data.Pages ".Params.matt" "!=" "true") ".Params.next" "!=" "true" }}
+              {{ $next := index (where .Data.Pages ".Params.next" "true") 0 }}
+
+              {{ range $index, $page := shuffle $matts }}
               {{ partial "widgets/bio.html" $page }}
               {{ end }}
+
+              {{ range $index, $page := shuffle $everyoneElse }}
+              {{ partial "widgets/bio.html" $page }}
+              {{ end }}
+              {{ partial "widgets/bio.html" $next }}
 
             </div>
           </div>
