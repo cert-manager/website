@@ -3079,6 +3079,11 @@ Introduced on new Subscription Page
   font-style: normal;
 }
 
+.justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 @media (min-width: 768px) {
   .stats {
     display: flex;

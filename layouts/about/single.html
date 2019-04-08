@@ -1,0 +1,50 @@
+{{ define "title" }} | {{ .Title }}{{ end }}
+{{ define "head" }}
+    <link href="/css/insights.css" rel="stylesheet"/>
+{{ end }}
+{{ define "navbar" }}
+    {{ partial "navbar/light.html" . }}
+{{ end }}
+{{ define "body" }}
+
+<div class="container-fluid" id="page-content">
+
+    <section class="white center" id="blog">
+        <div style="align-items: center; display: flex; justify-content: center;">
+          <div style="max-width: 800px;">
+            <h2>{{ .Title }}</h2>
+          </div>
+        </div>
+
+        <div class="blog-entry" style="margin-top: 20px;">
+            {{ if isset .Params "image" }}
+                <figure class="bio__img" style="background-image: url({{ .Params.image }})" aria-hidden="true"></figure>
+            {{ end }}
+
+            <div class="content justify">
+              {{ .Content }}
+            </div>
+
+            <p class="text-center">
+              {{ if .Params.twitter }}
+              <a href="https://twitter.com/{{.Params.twitter}}" style="width: 24px; display: inline-block" target="_blank" rel="noopener noreferrer">
+                {{ partial "svg/icon-bio-twitter.svg" }}
+              </a>
+              {{ end }}
+
+              {{ if .Params.github }}
+              <a href="https://github.com/{{ .Params.github }}" style="width: 24px; display: inline-block" target="_blank" rel="noopener noreferrer">
+                {{ partial "svg/icon-bio-github.svg" }}
+              </a>
+              {{ end }}
+
+              {{ if .Params.email }}
+              <a href="mailto:{{ .Params.email }}" style="width: 24px; display: inline-block" target="_blank" rel="noopener noreferrer">
+                {{ partial "svg/icon-bio-email.svg" }}
+              </a>
+              {{ end }}
+            </p>
+        </div>
+    </section>
+</div>
+{{ end }}
