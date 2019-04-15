@@ -12,21 +12,6 @@ testimonial:
   profileImage:
   quoter: 'Workshop Attendee'
 course_dates:
-  - date: '8 March 2019'
-    title: 'Kubernetes for Application Developers'
-    level: 'App Dev & Deploy'
-    eventbriteId: 54707056278
-
-  - date: '11 April 2019'
-    title: 'Kubernetes in Practice'
-    level: 'Beginner'
-    eventbriteId: 55160210675
-
-  - date: '12 April 2019'
-    title: 'Kubernetes in Practice'
-    level: 'Intermediate'
-    eventbriteId: 55160265840
-
   - date: '30 April 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
