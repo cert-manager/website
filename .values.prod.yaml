@@ -12,6 +12,7 @@ ingressRedirectHostnames:
     - jetstack.co.uk
     - www.jetstack.net
     - jetstack.net
+    - jetstack.io
   "/careers/":
     - www.k8s.careers
     - k8s.careers
