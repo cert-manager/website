@@ -18,7 +18,7 @@ metadata:
 {{- end }}
 {{- end }}
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite / https://www.jetstack.io{{ $target }} redirect;
+      rewrite ^/(.*)$ https://www.jetstack.io{{ $target }}$1 redirect;
 spec:
 {{- if $global.Values.ingressTLS }}
   tls:
