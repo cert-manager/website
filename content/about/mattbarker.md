@@ -2,7 +2,7 @@
 title: Matt Barker
 weight: 1
 image: /img/jpg/about-matt-1.jpg
-position: Co founder
+position: CEO and Co-founder
 email: matt.barker@jetstack.io
 matt: "true"
 ---
