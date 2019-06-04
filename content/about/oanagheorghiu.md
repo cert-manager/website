@@ -2,7 +2,7 @@
 title: Oana Garnett
 weight: 12
 image: /img/jpg/about-oana.jpg
-position: Head of Support
+position: Head of Services
 email: oana.garnett@jetstack.io
 twitter: 'oana_garnett'
 ---
