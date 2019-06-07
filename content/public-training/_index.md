@@ -23,35 +23,35 @@ course_dates:
   - date: '11 July 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
-    eventbriteId: 62837990120
+    eventbriteId: 63113816123
   - date: '12 July 2019'
     title: 'Kubernetes in Practice'
     level: 'Intermediate'
-    eventbriteId: 62838043279
+    eventbriteId: 63115696748
   - date: '25 July 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
-    eventbriteId: 62838124522
+    eventbriteId: 63115934459
   - date: '26 July 2019'
     title: 'Kubernetes in Practice'
     level: 'Intermediate'
-    eventbriteId: 62838166648
+    eventbriteId: 63115980597
   - date: '8 August 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
-    eventbriteId: 62838184702
+    eventbriteId: 63116175179
   - date: '9 August 2019'
     title: 'Kubernetes in Practice'
     level: 'Intermediate'
-    eventbriteId: 62838219807
+    eventbriteId: 63116235359
   - date: '11 September 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
-    eventbriteId: 62838320107
+    eventbriteId: 63116284506
   - date: '12 September 2019'
     title: 'Kubernetes in Practice'
     level: 'Intermediate'
-    eventbriteId: 62838375272
+    eventbriteId: 63116348698
 ---
 
 ## Description
