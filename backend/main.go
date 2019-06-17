@@ -33,5 +33,8 @@ func main() {
 	apiRouterGroup := r.Group("/api/v1")
 	apiRouterGroup.POST("/contact", handleContact)
 
+	blogGroup := r.Group("/blog")
+	blogGroup.GET("/", handleRedirect(301, "https://blog.jetstack.io"))
+
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
