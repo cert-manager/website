@@ -25,7 +25,7 @@
             <p>
               We have a strong brand and well-regarded reputation in the community. We also have personal relationships
               with many of the major cloud vendors, and a growing customer base. We offer a culture of flexible
-              working, and enable you to work on either solutions-focused consultancy helping companies solve complex 
+              working, and enable you to work on either solutions-focused consultancy helping companies solve complex
               technical issues, or in product engineering where you would develop open source tools to help extend the Kubernetes platform
               and give back to the community. You would join a world-class team, play a leading part in our
               customers’ success and the adoption of our technology in the open source community.
@@ -121,23 +121,7 @@
       </div>
     </section>
 
-
-    <section class="tight" id="instagram-feed">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <h2 class="section-title">Instagram feed</h2>
-            <div class="instagrams">
-              {{ range $_, $photo := .Site.Data.config.featured_instagram_photos }}
-                <a class="instagrams__link" href="{{ $photo.link }}" rel="noopener noreferrer" target="_blank">
-                  <img src="/img/instagram/{{ $photo.image_source }}" alt="photo from the jetstack instagram account" class="instagrams__img">
-                </a>
-              {{ end }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    {{ partial "instagram_feed" $ }}
 
     <section>
       <div class="container">

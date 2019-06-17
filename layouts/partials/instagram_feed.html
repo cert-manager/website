@@ -1,0 +1,16 @@
+<section class="tight" id="instagram-feed">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="section-title">Instagram feed</h2>
+        <div class="instagrams">
+          {{ range $_, $photo := $.Site.Data.config.featured_instagram_photos }}
+            <a class="instagrams__link" href="{{ $photo.link }}" rel="noopener noreferrer" target="_blank">
+              <img src="/img/instagram/{{ $photo.image_source }}" alt="photo from the jetstack instagram account" class="instagrams__img">
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
