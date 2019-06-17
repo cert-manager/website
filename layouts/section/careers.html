@@ -25,7 +25,7 @@
             <p>
               We have a strong brand and well-regarded reputation in the community. We also have personal relationships
               with many of the major cloud vendors, and a growing customer base. We offer a culture of flexible
-              working, and enable you to work on either solutions-focused consultancy helping companies solve complex 
+              working, and enable you to work on either solutions-focused consultancy helping companies solve complex
               technical issues, or in product engineering where you would develop open source tools to help extend the Kubernetes platform
               and give back to the community. You would join a world-class team, play a leading part in our
               customers’ success and the adoption of our technology in the open source community.
@@ -71,7 +71,7 @@
                       <ul class="current-openings__list">
                         {{ range $index, $page := .Data.Pages }}
                         <li class="current-openings__list-item">
-                          <a class="current-openings__link" href="{{ $page.URL }}">
+                          <a class="current-openings__link" href="{{ $page.RelPermalink }}">
                             {{ $page.Title }}
                           </a>
                         </li>
@@ -161,7 +161,22 @@
 {{ end }}
 
 {{ define "cta" }}
-{{ partial "ctas/copy-only"}}
+<section class="cta">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="cta__main cta__main--centered">
+          <div class="cta__copy">
+            <h5>
+              Get started with Jetstack
+            </h5>
+            <p>If you can’t see the job for you in our current openings, please contact us at <a class="cta__link" href="mailto:jobs@jetstack.io">jobs@jetstack.io</a> as we are always looking for great talent</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {{ end }}
 
 {{ define "footer" }}

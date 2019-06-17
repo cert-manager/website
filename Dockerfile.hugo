@@ -1,7 +1,7 @@
 FROM alpine:3.7
 
-ENV HUGO_VERSION=0.54.0
-ENV HUGO_CHECKSUM=76f90287c12a682c9137b85146c406be410b2b30b0df7367f02ee7c4142bb416
+ENV HUGO_VERSION=0.55.6
+ENV HUGO_CHECKSUM=39d3119cdb9ba5d6f1f1b43693e707937ce851791a2ea8d28003f49927c428f4
 RUN \
   apk add --no-cache openssl ca-certificates && \
   mkdir -p /tmp/hugo && \

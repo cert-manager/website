@@ -21,8 +21,8 @@
         <div class="blog-entry">
             <div class="meta">
                 <p>
-                    {{ .Params.author }} 
-                    {{ if isset . "Date" }}
+                    {{ .Params.author }}
+                    {{ if not .Date.IsZero }}
                         |
                             <span class="text-light-alt">{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
                     {{ else }}
@@ -85,7 +85,7 @@
                             {{ partial "widgets/content_thumbnail.html" .NextInSection }}
                             <div class="post"></div>
                             {{ partial "widgets/content_thumbnail.html" .PrevInSection }}
-                            
+
                         </div>
                     </div>
                 </div>
