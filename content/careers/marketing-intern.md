@@ -9,7 +9,7 @@ We guide and support enterprises in their adoption and production use of Kuberne
 
 We are looking for a paid Marketing/PR intern to work with us over the summer in our London office. Reporting to our Head of Growth, you will work within our commercial team to help achieve some of our key marketing initiatives, and to increase brand awareness and share of voice in the market. This will be an opportunity for the successful candidate to show their marketing flair by being responsible for full campaigns to generate sales pipeline.
 
-You can [read more](https://blog.jetstack.io/blog/commercial-day-in-life/) about life in the commercial team on our blog. 
+You can [read more](https://blog.jetstack.io/blog/commercial-day-in-life/) about life in the commercial team on our blog.
 
 #### Main tasks and duties
 
@@ -39,6 +39,4 @@ The successful candidate will given a high level of autonomy and responsibility,
 2-3 month summer internship with possible extension depending on performance
 Based in Southwark, flexible remote working option
 
-
-
-Click <a href="https://workinstartups.com/job-board/job/69639/marketing-intern-with-cloud-computing-startup-at-jetstack/">here</a> to find out more and apply.
+Contact [hello@jetstack.io](mailto:hello@jetstack.io) to find out more and apply.
