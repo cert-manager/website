@@ -6,7 +6,7 @@ video_link: https://www.youtube.com/watch?v=4jEASYCaVDo
 date: 2019-05-21
 ---
 
-This time last year, two people from Wales, United Kingdom decried to bring the
+In 2018, two people from Wales, United Kingdom decided to bring the
 CNCF to their doorstep.
 
 Previously, they were attending international conferences and national meetups
