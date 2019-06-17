@@ -56,19 +56,28 @@ course_dates:
 
 ## Description
 
-Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managing Linux Containers at massive scale.
+Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managing
+Linux Containers at massive scale.
 
-Since then the Kubernetes project has exploded, gaining over 75,000 commits and 48,000+ stars on Github. It has quickly become the default cluster manager, referred to as the new ‘Datacentre OS.’ Kubernetes is a must to learn if you are using or adopting containers.
+Since then the Kubernetes project has exploded, gaining over 75,000 commits and
+48,000+ stars on Github. It has quickly become the default cluster manager,
+referred to as the new ‘Datacentre OS.’ Kubernetes is a must to learn if you are
+using or adopting containers.
 
-These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience. These are FREE courses hosted by Google, run by Jetstack. Lunch is provided.
+These are hands-on modular courses that will train you in deploying Kubernetes
+and operating it efficiently, whatever your level of experience. These are FREE
+courses hosted by Google, run by Jetstack. Lunch is provided.
 
 To attend you must:
 
 * Register with company email address
-* Either be working on or about to start working on an active Docker/Kubernetes project
-* Demonstrate a skill level consistent with the course level specification (see below)
+* Either be working on or about to start working on an active Docker/Kubernetes
+  project
+* Demonstrate a skill level consistent with the course level specification (see
+  below)
 * Be able to travel and attend course in London
 
-_Note: No more than two attendees from the same company can register on the same course._
+_Note: No more than two attendees from the same company can register on the same
+course._
 
-**Please register your interest and we will confirm your attendance based on availability.**
+**Please note that admission is subject to review based on attendance criteria**
