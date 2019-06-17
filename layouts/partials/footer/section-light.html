@@ -1,5 +1,4 @@
 {{ $config := .Site.Data.config }}
-{{ $url := .URL }}
 
 <section class="tight main-footer main-footer--light">
   <div class="container">
@@ -12,7 +11,7 @@
       </div>
     </div>
     <div class="row footer-menu" style="color:white;">
-      {{ partial "menus/div.html" (dict "links" $config.menus.navbar_footer "active" $url) }}
+      {{ partial "menus/div.html" (dict "links" $config.menus.navbar_footer "active" .RelPermalink) }}
     </div>
     <div class="copyright">
       <p>{{ $config.copyright }}</p>

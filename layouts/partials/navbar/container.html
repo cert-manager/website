@@ -1,9 +1,9 @@
 {{ $id := default "navbar" .id }}
 {{ $logoColor := default "white" .logoColor }}
 {{ $links := .root.Site.Data.config.menus.navbar }}
-{{ $currentUrl := .root.URL }}
+{{ $currentUrl := .root.RelPermalink }}
 {{ $scratch := .root.Scratch }}
-{{ $scratch.Set "currentURL" .root.URL }}
+{{ $scratch.Set "currentURL" .root.RelPermalink }}
 
 {{/* highlight the insights menu if it's a content section */}}
 {{ range .root.Site.Data.config.insightSections }}

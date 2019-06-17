@@ -71,7 +71,7 @@
                       <ul class="current-openings__list">
                         {{ range $index, $page := .Data.Pages }}
                         <li class="current-openings__list-item">
-                          <a class="current-openings__link" href="{{ $page.URL }}">
+                          <a class="current-openings__link" href="{{ $page.RelPermalink }}">
                             {{ $page.Title }}
                           </a>
                         </li>
@@ -161,9 +161,6 @@
 {{ end }}
 
 {{ define "cta" }}
-{{ $config := .Site.Data.config }}
-{{ $url := .URL }}
-
 <section class="cta">
   <div class="container">
     <div class="row">

@@ -1,9 +1,4 @@
-{{ $config := .Site.Data.config }}
-{{ $url := .URL }}
-
 <div id="footer">
-
-    {{ partial "panels/calltoaction.html" $config.headline.footer }}
-    {{ partial "footer/section.html" . }}
-
+  {{ partial "panels/calltoaction.html" .Site.Data.config.headline.footer }}
+  {{ partial "footer/section.html" . }}
 </div>
