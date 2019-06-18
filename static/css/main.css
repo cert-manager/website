@@ -2797,27 +2797,23 @@ Introduced on new Subscription Page
   display: block;
 }
 
-.instagrams__link {
-  display: block;
-  margin-bottom: 20px;
+.instagrams {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.instagrams a {
+  max-width: 200px;
+  margin: 0.4rem;
+  display: inline-block;
 }
 
 .instagrams__img {
   width: 100%;
   height: auto;
-}
-
-@media (min-width: 768px) {
-  .instagrams {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .instagrams__link {
-    flex: 0 0 calc(20% - 40px);
-    margin: 20px;
-  }
 }
 
 .course-dates {
