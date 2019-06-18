@@ -178,6 +178,12 @@ headline:
     strapline2: >
       Our team reflects a unique blend of specialist skills
 
+  not_found:
+    headline: 404, needle in haystack not found
+    strapline: >
+      It looks like the page you're after isn't here. Smile, be happy, and
+      maybe tell one of these lovely people about the issue...
+
   insights:
     headline: Resources, Blogs, Events, Tools, Meetups
     strapline: We live and breathe the Kubernetes Project
