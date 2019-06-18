@@ -1,5 +1,7 @@
 # site wide text config
 title: Jetstack
+description: >-
+  We are a fast-growing Kubernetes professional services company that prides itself with helping startups and enterprises alike in their path to modern cloud-native infrastructure
 copyright: © 2019 Jetstack Ltd. All rights reserved.
 privacy_policy_link: /documents/Jetstack-Website-Policies.pdf
 
