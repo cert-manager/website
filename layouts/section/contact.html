@@ -1,8 +1,4 @@
 {{ define "title" }} | Contact{{ end }}
-{{ define "head" }}
-    <link href="/css/contact.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
-    <link href="/css/form.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
-{{ end }}
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">
@@ -55,18 +51,22 @@
 
 {{ define "scripts" }}
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ .Site.Data.config.apikeys.maps }}"></script>
-<script type="text/javascript" src="/js/map.js"></script>
+{{ $jsFiles := slice }}
+{{ $jsFiles = $jsFiles | append (resources.Get "js/contactform.js") }}
+{{ $jsFiles = $jsFiles | append (resources.Get "js/map.js") }}
+{{ $js := $jsFiles | resources.Concat "js/contact.js" }}
+{{ if isset $.Site.Params "minify" }}
+  {{ $js = $js | resources.Minify }}
+{{ end }}
+{{ $js = $js | resources.Fingerprint }}
+<script type="text/javascript" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 <script type="text/javascript">
-
     // loop over each office entry in config.yaml and feed it to the js script
     // addOfficeLocation is defined in /js/map.js
     {{ range $index, $office := .Site.Data.config.offices }}
         addOfficeLocation(JSON.parse({{ dict "name" $office.name "lat" $office.lat "lon" $office.lon "address" $office.address "default" $office.default | jsonify }}))
     {{ end }}
 </script>
-<script type="text/javascript" src="/js/mautic.js"></script>
-<script type="text/javascript" src="/js/contactform.js"></script>
-
 {{ end }}
 
 

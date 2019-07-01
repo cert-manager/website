@@ -2,7 +2,7 @@
 title: Jetstack
 description: >-
   We are a fast-growing Kubernetes professional services company that prides itself with helping startups and enterprises alike in their path to modern cloud-native infrastructure
-copyright: © 2019 Jetstack Ltd. All rights reserved.
+copyright: "© 2019 Jetstack Ltd. All rights reserved."
 privacy_policy_link: /documents/Jetstack-Website-Policies.pdf
 
 # contact details
@@ -11,101 +11,84 @@ contact:
 
 # apikeys for external services
 apikeys:
-  typekit: lck0ocu
   maps: AIzaSyCGilALFo4ETKecJo6KMGyvnpSM8BshMiw
 
-# what sections fall inside the 'insights' heading
-# NOTE - when some content is added to these sections activate them
 insightSections:
-  - blog
-  #- whitepapers
-  #- infographics
-  #- videos
-
-# page titles by url
-titles:
-  "/blog/": Blog
-  "/whitepapers/": Blog
-  "/blog/": Blog
-  "/blog/": Blog
+- blog
 
 offices:
-  - name: London
-    default: true
-    lat: "51.507213"
-    lon: "-0.102198"
-    address:
-      - 65B Hopton Street
-      - London
-      - SE1 9LR
-  - name: Bristol
-    lat: "51.454722"
-    lon: "-2.582713"
-    address:
-      - 1 Temple Way
-      - Bristol
-      - BS2 0BY
+- name: London
+  default: true
+  lat: "51.507213"
+  lon: "-0.102198"
+  address:
+  - 65B Hopton Street
+  - London
+  - SE1 9LR
+- name: Bristol
+  lat: "51.454722"
+  lon: "-2.582713"
+  address:
+  - 1 Temple Way
+  - Bristol
+  - BS2 0BY
 
 featured_instagram_photos:
-  - link: https://www.instagram.com/p/Bow21p0g9mW
-    image_source: photo1.jpg
-  - link: https://www.instagram.com/p/BozWHUJAPTq
-    image_source: photo2.jpg
-  - link: https://www.instagram.com/p/Bl3SnyzgYdp
-    image_source: photo3.jpg
-  - link: https://www.instagram.com/p/BlLMfJbgqd0
-    image_source: photo4.jpg
-  - link: https://www.instagram.com/p/BlGbE19AArA
-    image_source: photo5.jpg
+- link: https://www.instagram.com/p/Bow21p0g9mW
+  image_source: photo1.jpg
+- link: https://www.instagram.com/p/BozWHUJAPTq
+  image_source: photo2.jpg
+- link: https://www.instagram.com/p/Bl3SnyzgYdp
+  image_source: photo3.jpg
+- link: https://www.instagram.com/p/BlLMfJbgqd0
+  image_source: photo4.jpg
+- link: https://www.instagram.com/p/BlGbE19AArA
+  image_source: photo5.jpg
 
-# control the navbar, social links and insight menus
 menus:
-
   navbar:
-    - name: Subscription
-      link: /subscription/
-    - name: Open Source
-      link: /open-source/
-    - name: Services
-      link: '#'
-      sublinks:
-      - name: Consulting
-        link: /consulting/
-      - name: Training
-        link: /training/
-      - name: Public Training
-        link: /public-training/
-    - name: About Us
-      link: /about/
-      sublinks:
-      - name: Team
-        link: /about/
-      - name: Careers
-        link: /careers/
-      - name: Our Talks
-        link: /talks/
-      - name: Contact
-        link: /contact/
-    - name: Blog
-      link: https://blog.jetstack.io/
-    # - name: Contact
-    #   link: /contact/
-
-  navbar_footer:
-    - name: Subscription
-      link: /subscription/
-    - name: Open Source
-      link: /open-source/
+  - name: Subscription
+    link: /subscription/
+  - name: Open Source
+    link: /open-source/
+  - name: Services
+    link: '#'
+    sublinks:
     - name: Consulting
       link: /consulting/
     - name: Training
       link: /training/
-    - name: About Us
+    - name: Public Training
+      link: /public-training/
+  - name: About Us
+    link: /about/
+    sublinks:
+    - name: Team
       link: /about/
-    - name: Blog
-      link: https://blog.jetstack.io/
+    - name: Careers
+      link: /careers/
+    - name: Our Talks
+      link: /talks/
     - name: Contact
       link: /contact/
+  - name: Blog
+    link: https://blog.jetstack.io/
+
+  navbar_footer:
+  - name: Subscription
+    link: /subscription/
+  - name: Open Source
+    link: /open-source/
+  - name: Consulting
+    link: /consulting/
+  - name: Training
+    link: /training/
+  - name: About Us
+    link: /about/
+  - name: Blog
+    link: https://blog.jetstack.io/
+  - name: Contact
+    link: /contact/
 
   social:
     - name: github
@@ -122,23 +105,22 @@ menus:
       link: https://twitter.com/jetstackhq
 
   careers_social:
-    - name: instagram
-      img: svg/icon-careers-social-instagram.svg
-      link: https://www.instagram.com/jetstackhq/
-      color: pink
-    - name: twitter
-      img: svg/icon-careers-social-twitter.svg
-      link: https://twitter.com/jetstackhq
-      color: purple
-    - name: linkedin
-      img: svg/icon-social-linkedin.svg
-      link: https://www.linkedin.com/company/jetstack
-      color: blue
+  - name: instagram
+    img: svg/icon-careers-social-instagram.svg
+    link: https://www.instagram.com/jetstackhq/
+    color: pink
+  - name: twitter
+    img: svg/icon-careers-social-twitter.svg
+    link: https://twitter.com/jetstackhq
+    color: purple
+  - name: linkedin
+    img: svg/icon-social-linkedin.svg
+    link: https://www.linkedin.com/company/jetstack
+    color: blue
 
 
 # large text panels like partials/panels/{headline,calltoaction}
 headline:
-
   homepage:
     headline: Kubernetes Accelerated
     strapline:
@@ -251,7 +233,6 @@ headline:
 # various types of content panel that can appear on section pages
 # the idea is to not fix a panel to a section - mix and match!
 panels:
-
   # the homepage banner with the engine and a list of items
   toolkit:
     headline: The Jetstack Toolkit
@@ -264,17 +245,6 @@ panels:
       - Integrated monitoring and logging
       - Cloud-optimised container networking and policy enforcement
       # TODO: add Get in touch button (not quite sure how!)
-
-  # the banner describing k8s features (homepage)
-  k8s_summary:
-
-    hook: Jetstack will help you get there faster with market-leading professional services and engineering
-    features:
-      - Free your developers to focus on ‘Features’
-      - Gets code into production quicker
-      - Reduces your operational overhead
-      - Gives vendor neutrality
-      - Offers cross-cloud portability
 
   our_services:
     headline: Our services
@@ -303,39 +273,38 @@ panels:
 
   # the partners we have worked and press stories about us (homepage)
   partners:
-
     workedWith:
-      - name: googlecp
-        img: /img/png/gcpgreyscale3.png
-        link: https://cloud.google.com/
-      - name: ovo
-        img: /img/png/ovo-logo.png
-        link: https://www.ovoenergy.com/
-      - name: pearson
-        img: /img/png/pearson3.png
-        link: https://www.pearson.com/
-      - name: holidayextras
-        img: /img/png/HolidayExtrasGreyscale.png
-        link: https://www.holidayextras.co.uk/
-      - name: tigera
-        img: /img/png/tigera.png
-        link: https://www.tigera.io/
-      - name: lastfm
-        img: /img/png/lastfmlogo.png
-        link: https://www.last.fm/
-      - name: monzo
-        img: /img/png/monzo-logo.png
-        link: https://www.monzo.com/
-      - name: babylon
-        img: /img/png/babylon-mono latest.png
-        link: https://www.babylonhealth.com/
-      - name: oddschecker
-        img: /img/png/oddscheckergreyscale3.png
-        link: https://www.oddschecker.com/
-      - filler: true
-      - name: contact
-        button: Get in touch
-        link: /contact/
+    - name: googlecp
+      img: /img/png/gcpgreyscale3.png
+      link: https://cloud.google.com/
+    - name: ovo
+      img: /img/png/ovo-logo.png
+      link: https://www.ovoenergy.com/
+    - name: pearson
+      img: /img/png/pearson3.png
+      link: https://www.pearson.com/
+    - name: holidayextras
+      img: /img/png/HolidayExtrasGreyscale.png
+      link: https://www.holidayextras.co.uk/
+    - name: tigera
+      img: /img/png/tigera.png
+      link: https://www.tigera.io/
+    - name: lastfm
+      img: /img/png/lastfmlogo.png
+      link: https://www.last.fm/
+    - name: monzo
+      img: /img/png/monzo-logo.png
+      link: https://www.monzo.com/
+    - name: babylon
+      img: /img/png/babylon-mono latest.png
+      link: https://www.babylonhealth.com/
+    - name: oddschecker
+      img: /img/png/oddscheckergreyscale3.png
+      link: https://www.oddschecker.com/
+    - filler: true
+    - name: contact
+      button: Get in touch
+      link: /contact/
 
     inTheNews:
       - name: theNewStack
@@ -346,183 +315,58 @@ panels:
         img: /img/png/greyscaleinfoQ*.png
         link: https://www.infoq.com/news/2018/03/kubernetes-stateful-services/
 
-
   # nice things people said about us (homepage)
   testimonials:
-
-    - name: Mick Delaney, CTO
-      link:
-        title: Elevate Direct
-        url: http://elevatedirect.com/
-      quote: >
-        Jetstack have been brilliant to work with. Really fast and knowledgeable
-    - name: Rob Haswell, Co-Founder
-      link:
-        title: ClusterHQ
-        url: https://www.crunchbase.com/organization/hybridcluster
-      quote: >
-        We had a critical piece of engineering to deliver. We were lucky to find Jetstack.
-        They were professional, easy to work with, and delivered high quality work
-        within an incredibly tight deadline.
-    - name: Ed Massey, Head of TechOps
-      link:
-        title: Brightpearl
-        url: http://brightpearl.com/
-      quote: >
-        I am super grateful for the intellectual and conceptual leg up that Jetstack gave us.
-    - name: Asim Aslam, Founder
-      link:
-        title: Micro
-        url: https://github.com/micro/micro
-      quote: >
-        If you're looking at running Kubernetes in production talk to Jetstack.
-        Quickly becoming the go to experts in this space
-    - name: User of
-      link:
-        title: Kube-Lego
-        url: https://github.com/jetstack/kube-lego
-      quote: >
-        This is going to do wonders for my Kubernetes clusters! Thanks Jetstack!
-    - name: Training Course Attendee
-      quote: >
-        Easy to follow content, well presented, lots of interesting resources,
-        you should seriously charge more!
-    - name: Brendan Burns
-      link:
-        title: Kubernetes co-founder
-        url: https://twitter.com/brendandburns
-      quote: >
-        Shout out to JetstackHQ and kube-lego, I just setup https://kubernetes.submit-queue.k8s.io
-        in ~20 minutes...
-    - name: Advanced Wargaming with
-      link:
-        title: Holiday Extras
-        url: https://www.holidayextras.co.uk/
-      quote: >
-        Jetstack wargaming gave validation of our decisions so far, ideas for improvements and a good test of our ability to support the infrastructure we've built.
-
-  # the timeline on the k8s page
-  k8s_timeline:
-
-    - year: 2006
-      img: /img/jpg/2006-the-Google-Logo.jpg
-      desc: >
-        Google introduced [containers (cgroups)](http://lwn.net/Articles/199643/) to the Linux kernel to enable resource isolation
-    - year: 2008
-      img: /img/jpg/2008-Tux-the-Penguin.jpg
-      desc: >
-        [LXC](https://lists.linuxfoundation.org/pipermail/containers/2008-September/013237.html) was released, an operating-system-level virtualization method for running multiple isolated Linux systems (containers) on a control host using a single Linux kernel.
-    - year: 2013
-      img: /img/jpg/2013-Docker-Logo.jpg
-      desc: >
-        [Docker](https://www.infoq.com/news/2013/03/Docker_) was released, which augmented LXC with a high level API to provide lightweight containers that run processes in isolation
-    - year: 2013
-      img: /img/jpg/2013-John-Wilkes.jpg
-      desc: >
-        John Wilkes, principal software engineer at Google publicly refers to Google’s infrastructure management tools Borg and Omega in a [Wired](https://www.wired.com/2013/03/google-borg-twitter-mesos/all/) article.
-    - year: 2013
-      img: /img/jpg/2013-Kubernetes-Logo.jpg
-      desc: >
-        [Kubernetes](https://cloudplatform.googleblog.com/2016/07/from-Google-to-the-world-the-Kubernetes-origin-story.html) development begins. Kubernetes builds and improves on work done by Google with Borg to launch and manage 2 billion container instances a week.
-    - year: 2014
-      img: /img/jpg/2014-Kubernetes-Logo.jpg
-      desc: >
-        Kubernetes [released](https://cloudplatform.googleblog.com/2014/06/an-update-on-container-support-on-google-cloud-platform.html) to the public as a Container orchestration system to manage containers on physical and cloud instances
-    - year: 2014
-      img: /img/jpg/2014-GKE-Logo.jpg
-      desc: >
-        [Google Container Engine](https://cloudplatform.googleblog.com/2014/11/google-cloud-platform-live-introducing-container-engine-cloud-networking-and-much-more.html) ‘GKE’ announced which enables Google Cloud users to run Docker containers in compute clusters, powered by Kubernetes
-    - year: 2015
-      img: /img/jpg/2015-Jetstack-Logo.jpg
-      desc: >
-        Jetstack founded to provide expert services around Containers and Kubernetes
-    - year: 2015
-      img: /img/jpg/2015-Image-from-Borg-Paper.jpg
-      desc: >
-        [Borg Paper](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43438.pdf) released, which lifts the lid on the Borg cluster manager, Google’s internal tool which was the pre-cursor to Kubernetesclusters, powered by Kubernetes
-    - year: 2016
-      img: /img/jpg/2016-Image-from-Kubernetes-Case-Studies-Page.jpg
-      desc: >
-        Kubernetes is adopted by hundreds of enterprises to manage their containerised infrastructure, including Pearson, Box, eBay and SAP
-
-  # the sequence of image panels on the k8s page
-  k8s_images:
-
-    - title: Kubernetes allows you to run your Infrastructure like Google.
-      img: /img/jpg/kubernetes-1.jpg
-      desc: >
-        Today’s applications are increasingly complex systems that need to be updated at a pace that matches our desire to iterate and innovate.
-
-
-        Building apps using Linux Containers like Docker helps immensely with the deployment of code, as they are easily portable. However, once you’ve got lots of Containers, it soon becomes hard work to co-ordinate the sprawl, and importantly, keep them production grade.
-
-    - title: Built on a foundation of Success and Scale
-      img: /img/jpg/kubernetes-2.jpg
-      desc: >
-        For more than 10 years, Google has run their company on Containers. In response to the growing popularity of Docker and related technologies, they lifted the lid on their internal Borg system in a research paper. This once-secret sauce runs Google’s entire infrastructure, managing vast server clusters across the globe – a tool that until not long ago was never mentioned, even as a code name.
-
-    - title: Enter Kubernetes
-      img: /img/jpg/kubernetes-3.jpg
-      desc: >
-        Impressively, Google went a step further and kicked off an open source implementation of their container management system. This became Kubernetes which was launched in 2014. Importantly, Kubernetes implements lessons learned in using these systems at massive scale in production, and the response has been breathtaking. A look at their Github profile tells you all you need to know about its interest and adoption.
-
-  k8s_highlights:
-    title: What does it do?
-    strapline: Source Kubernetes.io
-    highlights:
-      - title: Enables Scale
-        img: /img/png/icon-scale.png
-        desc: Designed on the same principles that allows Google to run billions of containers a week, Kubernetes can scale without increasing your ops team.
-      - title: Suitable for simple and complex workloads
-        img: /img/png/icon-workloads.png
-        desc: Whether testing locally or running a global enterprise, Kubernetes flexibility grows with you to deliver your applications consistently and easily no matter how complex your need is.
-      - title: Enables Scale
-        img: /img/png/icon-portable.png
-        desc: Kubernetes is open source giving you the freedom to take advantage of on-premise, hybrid, or public cloud infrastructure, letting you effortlessly move workloads to where it matters to you.
-
-  k8s_numbers:
-    manualContributors: 1100+
-    manualCommits: 45000+
-    manualStars: 21000+
-    api: https://api.github.com/repos/kubernetes/kubernetes
-    repo: https://crossorigin.me/https://github.com/kubernetes/kubernetes
-    initialCommit: 2c4b3a562ce34cddc3f8218a2c4d11c7310e6d56
-    # we scrape the contributors from the raw html (it's the only way trust)
-    # if github change their markup you cam change the jQuery selector to extract the contributors span here
-    contributorSelector: "a[href='/kubernetes/kubernetes/graphs/contributors'] span.num"
-
-  k8s_close:
-    text: >
-      Kubernetes builds on all of the lessons learnt using Borg – and incredibly it’s free and available to us all.
-
-
-      Jetstack was founded to help you to take advantage of this technology and gain value from it through engineering and services. A regular contributor to the project, Jetstack is here to take you from zero to prod, and everything in between.
-
-  engineering_intro:
-    text: >
-      Jetstack develop tools to make your experience with
-
-      Kubernetes easier and more productive
-
-
-  training_landing:
-    training_subscription:
-      title: Training Subscription
-      copy: Jetstack have built their training courses around the knowledge gained in delivering production-ready Kubernetes for their customers.
-      link_text: Learn More
-      link_url: /subscription
-      img: /img/jpg/training-subscription.jpg
-
-    training_inperson:
-      title: In-Person Training
-      copy: These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience.
-      link_text: Learn More
-      link_url: /in-person-training
-      img: /img/jpg/training-in-person.jpg
-
-    testimonial:
-      copy: I really enjoyed the growing sense of confidence and speed that developed during the day.
-      cite: Workshop Attendee
+  - name: Mick Delaney, CTO
+    link:
+      title: Elevate Direct
+      url: http://elevatedirect.com/
+    quote: >
+      Jetstack have been brilliant to work with. Really fast and knowledgeable
+  - name: Rob Haswell, Co-Founder
+    link:
+      title: ClusterHQ
+      url: https://www.crunchbase.com/organization/hybridcluster
+    quote: >
+      We had a critical piece of engineering to deliver. We were lucky to find Jetstack.
+      They were professional, easy to work with, and delivered high quality work
+      within an incredibly tight deadline.
+  - name: Ed Massey, Head of TechOps
+    link:
+      title: Brightpearl
+      url: http://brightpearl.com/
+    quote: >
+      I am super grateful for the intellectual and conceptual leg up that Jetstack gave us.
+  - name: Asim Aslam, Founder
+    link:
+      title: Micro
+      url: https://github.com/micro/micro
+    quote: >
+      If you're looking at running Kubernetes in production talk to Jetstack.
+      Quickly becoming the go to experts in this space
+  - name: User of
+    link:
+      title: Kube-Lego
+      url: https://github.com/jetstack/kube-lego
+    quote: >
+      This is going to do wonders for my Kubernetes clusters! Thanks Jetstack!
+  - name: Training Course Attendee
+    quote: >
+      Easy to follow content, well presented, lots of interesting resources,
+      you should seriously charge more!
+  - name: Brendan Burns
+    link:
+      title: Kubernetes co-founder
+      url: https://twitter.com/brendandburns
+    quote: >
+      Shout out to JetstackHQ and kube-lego, I just setup https://kubernetes.submit-queue.k8s.io
+      in ~20 minutes...
+  - name: Advanced Wargaming with
+    link:
+      title: Holiday Extras
+      url: https://www.holidayextras.co.uk/
+    quote: >
+      Jetstack wargaming gave validation of our decisions so far, ideas for improvements and a good test of our ability to support the infrastructure we've built.
 
   training_subscription:
     testimonial:
