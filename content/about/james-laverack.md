@@ -1,8 +1,8 @@
 ---
-title: James Laverick
-image: /img/jpg/about-james-laverick.jpg
+title: James Laverack
+image: /img/jpg/about-james-laverack.jpg
 position: Solutions Engineer
-email: james.laverick@jetstack.io
+email: james.laverack@jetstack.io
 # twitter: 'xxx'
 # github: 'xxx'
 ---
