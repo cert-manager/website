@@ -2814,3 +2814,73 @@ Introduced on new Subscription Page
     font-size: 28px;
   }
 }
+
+#blog h1 {
+    font-size: 49px;
+    margin-bottom: 1em;
+}
+
+#blog .blog-entry {
+    width: 635px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#blog .blog-entry .meta span.social {
+    display: inline-block;
+    float: right;
+}
+
+#blog .blog-entry .meta {
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+#blog .blog-entry .meta span.social a {
+    padding: 0 2px;
+}
+
+#blog .blog-entry .meta span.social img {
+    height: 28px;
+    width: 28px;
+}
+
+#blog .blog-entry .image {
+    margin-bottom: 1em;
+}
+
+#blog .blog-entry .image img {
+    width: 100%;
+    height: auto;
+}
+
+#blog .blog-entry .content p {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    line-height: 1.5em;
+}
+
+@media (max-width: 769px) {
+    #blog h1 {
+        font-size: 2em;
+    }
+
+    #blog .blog-entry {
+        width: 90%;
+    }
+
+    #blog .blog-entry .meta {
+        text-align: center;
+    }
+
+    #blog .blog-entry .meta span.social {
+        display: block;
+        float: none;
+        text-align: center;
+        margin-top: 1em;
+    }
+
+    #footer .pre-footer {
+        display: none;
+    }
+}
