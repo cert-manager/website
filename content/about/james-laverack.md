@@ -7,4 +7,4 @@ twitter: 'JamesLaverack'
 github: 'JamesLaverack'
 ---
 
-James... # short bio here
+James has worked as a Software Engineer in the Financial Technology space for a number of years. He has a passion for distributed systems, and has used Kubernetes to build complex financial applications. Outside of work he’s an avid board gamer.
