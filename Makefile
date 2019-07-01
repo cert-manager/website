@@ -62,7 +62,7 @@ hugo_build: hugo_build_image
 	# create a container
 	$(eval HUGO_CONTAINER_ID := $(shell docker create \
 		$(REGISTRY)/$(IMAGE_NAME):hugo \
-		hugo -v -d /var/lib/hugo/_output --logFile=/tmp/.hugo-log))
+		hugo --environment=production --minify -v -d /var/lib/hugo/_output --logFile=/tmp/.hugo-log))
 	docker cp . $(HUGO_CONTAINER_ID):/var/lib/hugo
 	docker start -a $(HUGO_CONTAINER_ID)
 	docker cp $(HUGO_CONTAINER_ID):/tmp/.hugo-log .

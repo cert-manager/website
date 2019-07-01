@@ -1,44 +1,40 @@
 {{ define "appendtitle" }} | Kubernetes Accelerated{{ end }}
-{{ define "head" }}
-    <link href="/css/home.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
-{{ end }}
 
 {{ define "navbar" }}
-    {{ partial "navbar/light-transparent.html" . }}
+  {{ partial "navbar/light-transparent.html" . }}
 {{ end }}
 
+{{ define "styles" }}
+#header { border: 0; height: 0; }
+{{ end }}
 
 {{ define "body" }}
 <div class="container-fluid" id="lead-image">
-    <div class="video"></div>
-    <div class="overlay"></div>
+  <div class="video"></div>
+  <div class="overlay"></div>
 
-    {{ partial "panels/masthead.html" .Site.Data.config.headline.homepage }}
+  {{ partial "panels/masthead.html" .Site.Data.config.headline.homepage }}
 
-    <div class="down-arrow">
-        <a href="#home-content" data-smooth-scroll>
-          <img src="/img/png/arrow-down.png" />
-        </a>
-    </div>
+  <div class="down-arrow">
+      <a href="#home-content" data-smooth-scroll>
+        <img src="/img/png/arrow-down.png" />
+      </a>
+  </div>
 </div>
-
 
 <div class="container-fluid" id="home-content">
+  {{ partial "panels/services.html" .Site.Data.config.panels.our_services }}
 
-    {{ partial "panels/services.html" .Site.Data.config.panels.our_services }}
+  {{ partial "panels/intro.html" .Site.Data.config.headline.getStarted }}
 
-    {{ partial "panels/intro.html" .Site.Data.config.headline.getStarted }}
+  {{ partial "instagram_feed" $ }}
 
-    {{ partial "instagram_feed" $ }}
+  {{ partial "panels/partners.html" .Site.Data.config.panels.partners }}
 
-    {{ partial "panels/partners.html" .Site.Data.config.panels.partners }}
+  {{ partial "panels/testimonials.html" .Site.Data.config.panels.testimonials }}
 
-    {{ partial "panels/testimonials.html" .Site.Data.config.panels.testimonials }}
-
-    {{ partial "footer/index.html" . }}
-
+  {{ partial "footer/index.html" . }}
 </div>
-
 {{ end }}
 
 {{ define "footer" }}
@@ -47,11 +43,4 @@
     to live inside the container div for a reason I don't yet understand
  -->
 <div></div>
-{{ end }}
-
-{{ define "scripts" }}
-<script src="/lib/vide/jquery.vide.min.js"></script>
-<script src="/js/smoothscroll@0.4.3.min.js"></script>
-<script src="/js/home.js"></script>
-<script src="/js/jetstack-smoothscroll.js"></script>
 {{ end }}

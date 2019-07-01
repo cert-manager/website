@@ -8,9 +8,9 @@
 
 
 <div class="container-fluid" id="page-content">
-    
+
   {{ partial "panels/blueheadline.html" .Site.Data.config.headline.open_source }}
-  
+
   <section class="tight media-component">
     {{ range $index, $page := .Data.Pages }}
       {{ if modBool $index 2 }}
@@ -63,9 +63,5 @@
   </section>
 
 </div>
-
-{{ end }}
-
-{{ define "scripts" }}
 
 {{ end }}

@@ -3,3 +3,5 @@
 .DS_Store
 /_output/
 .hugo-log
+# generated resource for hugo build (css, js etc)
+resources
