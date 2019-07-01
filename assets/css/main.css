@@ -2512,14 +2512,11 @@ Introduced on new Subscription Page
 .instagrams {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 4rem;
 }
 
 .instagrams a {
-  max-width: 200px;
-  margin: 0.4rem;
+  max-width: 400px;
   display: inline-block;
 }
 
