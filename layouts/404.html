@@ -1,35 +1,45 @@
-{{ define "appendtitle" }} | Kubernetes Accelerated{{ end }}
-{{ define "head" }}
-    <link href="/css/home.css?timestamp={{ now.Unix }}" rel="stylesheet"/>
-{{ end }}
-{{ define "navbar" }}
-<div class="container" id="header">
-    <!-- Above Lead Image -->
-    <nav class="navbar transparent atop">
-        {{ partial "navbar/container.html" (dict "id" "navbar1" "logoColor" "white" "root" .) }}
-    </nav>
-    <!-- Hidden Navbar -->
-    <nav class="navbar navbar-fixed-top above" id="dynamic-nav">
+{{ define "title" }} | Page not found{{ end }}
 
-        {{ partial "navbar/container.html" (dict "id" "navbar2" "logoColor" "white" "root" .) }}
-    </nav>
-</div>
+{{ define "navbar" }}
+{{ partial "navbar/light.html" . }}
 {{ end }}
+
 {{ define "body" }}
-<div class="container-fluid" id="lead-image">
-    <h2>Not found</h2>
+
+<div class="container-fluid" id="page-content">
+  {{ partial "panels/headline-simple.html" .Site.Data.config.headline.not_found }}
+
+  <section class="container center tight">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <img src="/img/jpg/team-404.jpg" alt="Team photograph" class="team-photo">
+      </div>
+    </div>
+  </section>
+
+  <section class="headline-simple"></section>
 </div>
+
+{{ end }}
+
+{{ define "cta" }}
+<section class="cta">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="cta__heading">Get started with Jetstack</h2>
+        <div class="cta__main cta__main--narrow">
+          <form class="cta__form">
+            <input class="cta__email" type="email" placeholder="Enter email address..." required />
+            <button class="cta__submit" type="submit">Contact us</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {{ end }}
 
 {{ define "footer" }}
-<!--
-    ignore the default footer because for the homepage because it needs
-    to live inside the container div for a reason I don't yet understand
- -->
-<div></div>
-{{ end }}
-
-{{ define "scripts" }}
-<script src="/lib/vide/jquery.vide.min.js"></script>
-<script src="/js/home.js"></script>
+{{ partial "footer/minimal-light.html" . }}
 {{ end }}
