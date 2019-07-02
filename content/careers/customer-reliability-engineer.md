@@ -12,6 +12,9 @@ Our Customer Reliability Engineers (CRE) provide pro-active support and maintena
 
 You can [read more](https://blog.jetstack.io/blog/day-in-the-life-of-a-cre/) about this exciting role on our blog. 
 
+The points below are not a checklist for the role, but more a guide to what we look for. 
+
+
 **Technology experience**
 
 * Python / Ruby / C/C++ and/or Go (ideal)
@@ -23,12 +26,12 @@ You can [read more](https://blog.jetstack.io/blog/day-in-the-life-of-a-cre/) abo
 
 **We look for**
 
-* Previous customer-facing experience
+* Passion for customer work and a desire to build strong relationships
+* A sense of ownership and customer responsibility and a keenness to always look for ways to improve our service
 * Strong ability to focus and work independently, as well as collaboratively in a team
 * Experience with troubleshooting and debugging complex technical issues
-* A sense of ownership and customer responsibility 
 * Ability to adapt to circumstance and respond with urgency and pragmatism 
-* Ability and desire to continually learn and remain up-to-date with ecosystem developments
+* Ability and desire to continually learn, be part of the open-source community and remain up-to-date with ecosystem developments
 
 
 Contact <a href="mailto:hello@jetstack.io">hello@jetstack.io</a> to find out more and apply.
