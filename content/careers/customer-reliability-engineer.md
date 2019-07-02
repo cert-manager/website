@@ -7,7 +7,8 @@ location: UK/Europe
 
 Join us as a Customer Reliability Engineer!
 
-Our Customer Reliability Engineers (CRE) provide pro-active support and maintenance to Jetstack customers. These customers now increasingly use Kubernetes as a platform for their highly-scalable, user-facing workloads, and uptime and performance is critical. With an in-depth understanding of Kubernetes cluster internals, we provide the safe pair of hands and confidence to ensure that that customers’ clusters are robust, efficient and scalable. CREs are a point of contact and seek pragmatic resolutions to complex systems issues, working closely with customers and internal teams. 
+Our Customer Reliability Engineers (CRE) provide pro-active support and maintenance to Jetstack customers. These customers now increasingly use Kubernetes as a platform for their highly-scalable, user-facing workloads, and uptime and performance is critical. With an in-depth understanding of Kubernetes cluster internals, we provide the safe pair of hands and confidence to ensure that that customers’ clusters are robust, efficient and scalable. CREs are a point of contact and seek pragmatic resolutions to complex systems issues, working closely with customers and internal teams. You will join our team of talented engineers who live and breath Kubernetes and will focus on platform reliability and building a close working relationship with our customers through training, consulting and support.
+
 
 You can [read more](https://blog.jetstack.io/blog/day-in-the-life-of-a-cre/) about this exciting role on our blog. 
 
