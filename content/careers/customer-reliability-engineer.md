@@ -35,3 +35,11 @@ The points below are not a checklist for the role, but more a guide to what we l
 
 
 Contact <a href="mailto:hello@jetstack.io">hello@jetstack.io</a> to find out more and apply.
+
+**What to expect next**
+
+* An introductory phone call is usually how we kick off the process
+* A face-to-face or video interview with members of the team
+* To wrap things up, a conversation with the hiring manager
+
+We are a group of open minded people who care about the service we provide to our customers and the impact we leave on the open source community. We have a diverse team who thrives on interesting projects, resolving real life complex issues and giving back to the community. Learning and developing is at the core of what we do, and if this is what you’re interested in then do reach out! 
