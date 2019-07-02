@@ -1,0 +1,37 @@
+# Default docs params
+# Latest cert-manager docs release/version - Default values (for Docsy Template)
+# Default GitHub branch
+latest_github_branch = "release-0.9"
+# Default website version
+version = "v0.9"
+
+# Doc versions params
+# Create a separate [[versions]] set for every version / doc set branch
+# Use the ghbranchname param for specifying the GitHub branchname ->
+# Example:
+#   [thisisalink](https://github.com/.../tree/{{< params "ghbranchname" >}}/...)
+#
+# [[versions]] - Defines a single "version" of the docs
+#   version - Intuitive version label (ie. visible in menus)
+#   ghbranchname - Name of branch of the doc version in GitHub
+#                  (https://github.com/cert-manager/docs/branches)
+#   url - Fully qualified website URL to the doc version
+#         (ie. https://cert-manager.io/[dirpath])
+#   dirpath - The content folder name of the doc version
+#           - Latest release is always set to "docs"
+#           - Past/archived releases change to "v#.#-docs",
+#             where # is the MAJOR and MINOR semantic version values
+
+# Latest version
+################
+# Set to "docs" path
+
+[[versions]]
+  version = "v0.9"
+  ghbranchname = "release-0.9"
+  url = "https://cert-manager.io/docs/"
+  dirpath = "docs"
+
+# Archived versions
+###################
+# Prefix all past versions with release # "v#.#-docs"
