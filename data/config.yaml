@@ -19,12 +19,13 @@ insightSections:
 offices:
 - name: London
   default: true
-  lat: "51.507213"
-  lon: "-0.102198"
+  lat: "51.5230777"
+  lon: "-0.1117221"
   address:
-  - 65B Hopton Street
+  - "14 Rosebery Avenue"
+  - Holborn
   - London
-  - SE1 9LR
+  - EC1R 4TD
 - name: Bristol
   lat: "51.454722"
   lon: "-2.582713"
