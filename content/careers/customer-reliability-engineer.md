@@ -36,7 +36,7 @@ The points below are not a checklist for the role, but more a guide to what we l
 * Ability and desire to continually learn, be part of the open-source community and remain up-to-date with ecosystem developments
 
 
-Contact <a href="mailto:hello@jetstack.io">hello@jetstack.io</a> to find out more and apply.
+Contact <a href="mailto:recruitment@jetstack.io">recruitment@jetstack.io</a> to find out more and apply.
 
 **What to expect next**
 

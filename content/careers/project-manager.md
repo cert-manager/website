@@ -62,7 +62,7 @@ What can Jetstack offer you?
 **How do I apply?**
 
 Please send a copy of your covering letter and CV to
-[jobs@jetstack.io](mailto:jobs@jetstack.io) - we look forward to hearing from
+[recruitment@jetstack.io](mailto:recruitment@jetstack.io) - we look forward to hearing from
 you!
 
 

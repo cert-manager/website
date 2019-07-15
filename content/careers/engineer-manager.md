@@ -28,4 +28,4 @@ This role will present an opportunity to remain hands-on, but the main focus wil
 
 
 
-Contact <a href="mailto:hello@jetstack.io">hello@jetstack.io</a> to find out more and apply.
+Contact <a href="mailto:recruitment@jetstack.io">recruitment@jetstack.io</a> to find out more and apply.

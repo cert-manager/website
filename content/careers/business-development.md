@@ -31,4 +31,4 @@ Jetstack already has an established reputation within the Kubernetes community a
 * Understanding of open source and cloud technologies
 
 
-Contact <a href="mailto:hello@jetstack.io">hello@jetstack.io</a> to find out more and apply.
+Contact <a href="mailto:recruitment@jetstack.io">recruitment@jetstack.io</a> to find out more and apply.
