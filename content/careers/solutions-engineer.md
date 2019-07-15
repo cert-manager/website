@@ -32,4 +32,4 @@ You can [read more](https://blog.jetstack.io/blog/day-in-the-life/) about the li
 * Willingness to travel (up to 50%) - primarily in the UK but also across Europe from time to time
 
 
-Contact <a href="mailto:hello@jetstack.io">hello@jetstack.io</a> to find out more and apply.
+Contact <a href="mailto:recruitment@jetstack.io">recruitment@jetstack.io</a> to find out more and apply.

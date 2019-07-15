@@ -34,4 +34,4 @@ We’re looking for a talented Front End Engineer, with experience of modern fro
 * Ability and desire to continually learn and remain up-to-date with ecosystem developments
 
 
-Contact <a href="mailto:hello@jetstack.io">hello@jetstack.io</a> to find out more and apply.
+Contact <a href="mailto:recruitment@jetstack.io">recruitment@jetstack.io</a> to find out more and apply.
