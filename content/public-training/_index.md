@@ -12,22 +12,6 @@ testimonial:
   profileImage:
   quoter: 'Workshop Attendee'
 course_dates:
-  - date: '11 June 2019'
-    title: 'Kubernetes in Practice'
-    level: 'Beginner'
-    eventbriteId: 55160722205
-  - date: '12 June 2019'
-    title: 'Kubernetes in Practice'
-    level: 'Intermediate'
-    eventbriteId: 55160852595
-  - date: '11 July 2019'
-    title: 'Kubernetes in Practice'
-    level: 'Beginner'
-    eventbriteId: 63113816123
-  - date: '12 July 2019'
-    title: 'Kubernetes in Practice'
-    level: 'Intermediate'
-    eventbriteId: 63115696748
   - date: '25 July 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
