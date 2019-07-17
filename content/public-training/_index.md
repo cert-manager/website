@@ -61,7 +61,10 @@ To attend you must:
   below)
 * Be able to travel and attend course in London
 
-_Note: No more than two attendees from the same company can register on the same
-course._
+Please note:
 
-**Please note that admission is subject to review based on attendance criteria**
+* Admission is subject to review based on attendance criteria
+* No more than two attendees from the same company can register on the same
+  course.
+* This training is run in conjunction with our partner Google and your details
+  will passed to them when you register
