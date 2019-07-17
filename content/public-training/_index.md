@@ -12,22 +12,6 @@ testimonial:
   profileImage:
   quoter: 'Workshop Attendee'
 course_dates:
-  - date: '11 June 2019'
-    title: 'Kubernetes in Practice'
-    level: 'Beginner'
-    eventbriteId: 55160722205
-  - date: '12 June 2019'
-    title: 'Kubernetes in Practice'
-    level: 'Intermediate'
-    eventbriteId: 55160852595
-  - date: '11 July 2019'
-    title: 'Kubernetes in Practice'
-    level: 'Beginner'
-    eventbriteId: 63113816123
-  - date: '12 July 2019'
-    title: 'Kubernetes in Practice'
-    level: 'Intermediate'
-    eventbriteId: 63115696748
   - date: '25 July 2019'
     title: 'Kubernetes in Practice'
     level: 'Beginner'
@@ -77,7 +61,10 @@ To attend you must:
   below)
 * Be able to travel and attend course in London
 
-_Note: No more than two attendees from the same company can register on the same
-course._
+Please note:
 
-**Please note that admission is subject to review based on attendance criteria**
+* Admission is subject to review based on attendance criteria
+* No more than two attendees from the same company can register on the same
+  course.
+* This training is run in conjunction with our partner Google and your details
+  will passed to them when you register
