@@ -1,7 +1,7 @@
 ---
 title: Cert-Manager
 image: /img/jpg/certm.jpg
-weight: 3
+weight: 1
 getting_started: http://docs.cert-manager.io
 github: https://github.com/jetstack/cert-manager
 ---
