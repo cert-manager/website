@@ -1,18 +1,18 @@
-  <section class="blue center" id="partners">
-      <div class="text-light">
+  <section class="Partners container">
       
-          <h2>We work with</h2>
+    <h2 class="OverlineHeader">
+        {{ .headline }}
+      </h2>
 
-          <div class="logo-grid">
-            {{ partial "widgets/grid.html" (dict "partial" "widgets/logo" "data" .workedWith) }}
-          </div>
-      
-          
-          <h2>In the news</h2>   
+      <div class="Partners__grid">
+        {{ range $index, $logo := .logos}}
+        <a href="{{ $logo.link }}" class="Partners__link" title="{{ $logo.name }}">
+          <img src="{{ $logo.img }}" alt="{{ $logo.name }} logo" class="Partners__logo" />
+        </a>
 
-          <div class="logo-grid last"> 
-            {{ partial "widgets/grid.html" (dict "partial" "widgets/logo" "data" .inTheNews) }}
-          </div>
-  
+        {{ end }}
+
+
       </div>
+
   </section>

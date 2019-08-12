@@ -13,25 +13,21 @@
 {{ end }}
 
 {{ $useUrl := $scratch.Get "currentURL" }}
-<div class="container">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{ $id }}"
-                aria-expanded="false" aria-controls="{{ $id }}">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand collapsed" href="/">
-            <img class="navbar-brand__fadein" src="/img/png/newlogo{{ default "white" .logoColor }}.png" />
-            <img class="navbar-brand__fadeout" src="/img/png/newlogowhite.png" />
-        </a>
-    </div>
-    <div id="{{ $id }}" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
+<div class="Navbar__container">
 
+    <a class="Navbar__link Navbar__link--logo" href="/">
+        {{ partial "svg/logo-jetstack.svg" }}
+    </a>
+        
+    <div id="{{ $id }}" class="Navbar__menu Navbar__menu--isClosed" aria-expanded="false" data-nav>
+        <ul class="Navbar__list">
             {{ partial "menus/li.html" (dict "links" $links "active" $useUrl) }}
-
         </ul>
-    </div><!--/.nav-collapse -->
+    </div>
+
+    <button class="Navbar__toggle" type="button" aria-expanded="false" aria-controls="{{ $id }}" data-nav-toggle>
+        <span class="sr-only">Toggle navigation</span>
+        {{ partial "svg/icon-burger.svg" }}
+    </button>
+
 </div>

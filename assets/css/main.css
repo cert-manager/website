@@ -51,124 +51,13 @@ a {
   }
 }
 
-#header {
-  height: 100px;
-}
-
-#header nav {
-  padding-top: 25px;
-  height: 100px;
-  padding-bottom: 25px;
-  background: #1b1c29;
-  font-size: 18px;
-  -webkit-transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
-}
-
-#header nav .navbar-toggle .icon-bar {
-  background: white;
-}
-
-#header nav .navbar-collapse {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-}
-
-#header nav.white {
-  background: #ffffff;
-  border-bottom: 1px solid lightgray;
-}
-
-#header nav.white .navbar-toggle .icon-bar {
-  background: black;
-}
-
-#header nav.transparent {
-  background: none;
-}
-
-#header nav.above {
-  top: -2500px;
-}
-
-#header nav.atop {
-  z-index: 3;
-}
-
-.navbar-brand {
-  padding: 0px !important;
-  position: relative;
-}
-.navbar-brand img {
-  margin-top: 5px;
-  height: 40px;
-}
-
-.navbar-brand__fadeout {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-
-  -webkit-transition: opacity 0.3s ease-in;
-  -moz-transition: opacity 0.3s ease-in;
-  -o-transition: opacity 0.3s ease-in;
-  transition: opacity 0.3s ease-in;
-}
-
-.navbar-brand__fadein {
-  -webkit-transition: opacity 0.3s ease-in;
-  -moz-transition: opacity 0.3s ease-in;
-  -o-transition: opacity 0.3s ease-in;
-  transition: opacity 0.3s ease-in;
-}
-
-@media (max-width: 769px) {
-  .navbar-brand img {
-    margin-left: 20px;
-    margin-top: 15px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar-brand img {
-    margin-left: 20px;
-    margin-top: 15px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 280px) {
-  .navbar-brand img {
-    display: none;
-  }
-}
-
-.navbar-nav > li > a {
-  color: #888a90;
-  padding: 15px 1.5em;
-}
-
-.navbar-nav > li > a.current {
-  color: white;
-}
-
-.navbar.white .navbar-nav > li > a.current {
-  color: black;
-}
-
 #strapline {
   text-align: center;
+}
+
+section#strapline {
+  padding-top: 12rem;
+  padding-bottom: 12rem;
 }
 
 #strapline p {
@@ -215,19 +104,6 @@ a {
 .container-fluid {
   padding-left: 0;
   padding-right: 0;
-}
-
-@media (max-width: 992px) {
-  .nav > li > a {
-    padding: 15px 1em;
-    font-size: 15px;
-  }
-}
-
-.nav > li > a:focus,
-.nav > li > a:hover {
-  background: none;
-  color: #dddddd;
 }
 
 .btn-primary {
@@ -500,90 +376,6 @@ section.bordered {
   background: #f2f7fc;
 }
 
-/**
- * Mobile Navigation
- */
-
-#header nav.opened {
-  height: 100% !important;
-  background: #1b1c29;
-}
-
-#header nav.transparent.atop.opened {
-  position: absolute;
-  width: 100%;
-  margin-left: -15px;
-}
-
-#header nav.opened.white {
-  background: white;
-}
-
-#header nav.opened .navbar-brand {
-  padding: 0px;
-}
-
-#header nav.opened .navbar-brand img {
-  height: 40px;
-}
-
-#header nav.opened ul {
-  text-align: center;
-}
-
-#header nav.opened .container,
-#header nav.opened .navbar-collapse {
-  height: 100%;
-  max-height: 100%;
-}
-
-#header nav.opened .navbar-collapse {
-  padding-top: 20px;
-}
-
-#header nav.opened ul li.hidden {
-  display: block !important;
-}
-
-#header nav.opened ul li.social {
-  position: absolute;
-  bottom: 50px;
-  width: 100%;
-}
-
-#header nav.opened ul li.social a {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  margin: 0.5em;
-}
-
-#header nav.opened ul li.social a:hover img {
-  opacity: 0.5;
-}
-
-#header nav.opened ul li.social a img {
-  width: 100%;
-  height: auto;
-}
-
-#header nav.opened ul li.copyright {
-  color: white;
-  font-size: 10px;
-  position: absolute;
-  bottom: 25px;
-  width: 100%;
-}
-
-#header nav.opened.white ul li.copyright {
-  color: #888a90;
-}
-
-#header nav.opened .nav > li > a {
-  font-size: 18px;
-  padding: 0.75em;
-}
 
 .calltoactionbutton {
   margin-top: 2em;
@@ -954,122 +746,6 @@ section.bordered {
   margin: 20px 40px;
 }
 
-/* Super specific selectors to override Bootstrap nonsense */
-.nav > li > .nav__link:focus,
-.nav > li > .nav__link.current:hover,
-.nav > li > .nav__link.current:focus,
-.nav > li > .nav__link:hover {
-  background-color: #f1f5ff;
-  color: #3f56ea;
-}
-
-.navbar.white .navbar-nav > li > .nav__link.current {
-  color: #3f56ea;
-}
-
-.nav__link {
-  border-radius: 5px;
-  position: relative;
-}
-
-.nav__link.nav__link--sublinks {
-  padding-right: 50px;
-}
-
-.nav__sublinks {
-  background: white;
-  list-style: none;
-  border-radius: 5px;
-  position: relative;
-  padding: 0;
-}
-
-.nav__sublinks a {
-  color: #888a90;
-  padding: 10px;
-  border-radius: 5px;
-  display: block;
-}
-
-.nav__sublinks a:hover,
-.nav__sublinks a:focus {
-  background-color: #f1f5ff;
-  color: #3f56ea;
-  text-decoration: none;
-}
-
-.nav__sublink.nav__sublink--active {
-  color: #3f56ea;
-}
-
-@media screen and (min-width: 768px) {
-  #header nav.white.homepage {
-    background-color: transparent;
-    color: white;
-    border-bottom-color: transparent;
-  }
-
-  #header nav.white.homepage .navbar-nav > li > a {
-    color: white;
-  }
-
-  .nav__sublinks {
-    display: none;
-    padding: 0 10px;
-  }
-
-  .nav__sublinks li {
-    margin: 10px 0;
-  }
-
-  .navbar-nav > li:hover .nav__sublinks {
-    display: block;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 250px;
-  }
-
-  .nav__link.nav__link--sublinks:after {
-    content: '';
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 6px 5px 0 5px;
-    border-color: #6e6f7c transparent transparent transparent;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-2px);
-  }
-
-  .white.homepage .nav__link.nav__link--sublinks:after,
-  .white.homepage .nav__link:hover.nav__link--sublinks:after {
-    border-color: white transparent transparent transparent;
-  }
-
-  .nav__link.nav__link--sublinks:hover:after {
-    border-color: #3f56ea transparent transparent transparent;
-  }
-
-  .navbar.homepage .nav > li > .nav__link:focus,
-  .navbar.homepage .nav > li > .nav__link.current:hover,
-  .navbar.homepage .nav > li > .nav__link.current:focus,
-  .navbar.homepage .nav > li > .nav__link:hover {
-    background-color: transparent;
-    color: #3f56ea;
-  }
-
-  /* Fade the logo in and out on homepage desktiop */
-  .navbar.homepage .navbar-brand__fadeout {
-    opacity: 1;
-  }
-
-  .navbar.homepage .navbar-brand__fadein {
-    opacity: 0;
-  }
-}
-
 .icon-panel {
   display: block;
 }
@@ -1123,7 +799,7 @@ Introduced on new Subscription Page
 .media-hero {
   background-color: #1b1c29;
   color: white;
-  padding: 0;
+  padding: 100px 0 0 0;
 }
 
 .media-hero__graphic svg,
@@ -1571,7 +1247,6 @@ Introduced on new Subscription Page
   padding: calc(100px + 6em) 20px 6em 20px;
   text-align: center;
   font-weight: 500;
-  margin-top: -100px;
   position: relative;
   overflow: hidden;
 }
@@ -2042,7 +1717,11 @@ Introduced on new Subscription Page
 
 .headline-simple {
   text-align: center;
-  padding: 2em;
+  padding: 2rem 2rem;
+}
+
+.headline-simple:first-child {
+  padding: 12rem 2rem;
 }
 
 .headline-simple__title {

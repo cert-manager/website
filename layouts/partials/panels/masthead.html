@@ -1,7 +1,21 @@
-<div class="container">
-    <div class="masthead text-light">
-        <h1>{{ .headline }}</h1>
-        <p class="text-light" style="width:100%;">{{ .strapline | markdownify }}</p>
-        <a href="/subscription" class="masthead__button">Find out more</a>
+<div class="Hero">
+    <div class="Hero__container">
+        {{ if .latest }}
+        <div class="Hero__latest">
+            <a href="{{ .latest.link }}" class="Hero__latestLink" target="_blank" rel="noopener noreferrer">
+                <span class="Hero__latestPill">Latest</span>
+                <span class="Hero__latestText">{{ .latest.text }}</span>
+                {{ partial "svg/icon-small-right-arrow.svg" }}
+            </a>
+        </div>
+        {{ end }}
+        <div class="Hero__content">
+            <h1 class="Hero__headline">{{ .headline }}</h1>
+            <p class="Hero__strapline">{{ .strapline | markdownify }}</p>
+            <a href="/contact" class="Button">Contact us</a>
+        </div>
     </div>
+    <a class="Hero__downButton" data-smooth-scroll href="#what-we-offer">
+        <!-- Button to click to next section -->
+    </a>
 </div>

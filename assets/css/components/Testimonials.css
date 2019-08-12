@@ -1,0 +1,86 @@
+.Testimonials {
+  background: url(/img/jpg/testimonials_bg_mobile.jpg) no-repeat 50% 100%;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0F5179;
+  color: white;
+  padding: 10rem 0;
+}
+
+.Testimonials__content {
+  max-width: 1170px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.Testimonials__block {
+  border: 0;
+  max-width: 1024px;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+  top: 50%;
+  transform: translateY(-50%);
+  word-break: break-word;
+}
+
+.Testimonials__block.Testimonials__block--active {
+  opacity: 1;
+}
+
+.Testimonials__block.Testimonials__block--hidden {
+  visibility: hidden;
+}
+
+.Testimonials__quote {
+  font-size: 2.5rem;
+  line-height: 3.5rem;
+  font-weight: 300;
+  color: inherit;
+  margin-bottom: 0.8em;
+}
+
+.Testimonials__cite {
+  font-size: 1.8rem;
+  line-height: 2.8rem;
+  font-weight: 300;
+  font-style: normal; 
+}
+
+a.Testimonials__link {
+  color: white;
+  text-decoration: underline;
+}
+
+a.Testimonials__link:link,
+a.Testimonials__link:visted {
+  color: white;
+  text-decoration: underline;
+}
+
+a.Testimonials__link:focus,
+a.Testimonials__link:hover,
+a.Testimonials__link:active {
+  color: white;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 768px) {
+  .Testimonials {
+    padding: 20rem 0;
+    background-image: url(/img/jpg/testimonials_bg_desktop.jpg)
+  }
+
+  .Testimonials__quote {
+    font-size: 4rem;
+    line-height: 5rem;
+  }
+
+  .Testimonials__cite {
+    font-size: 2.2rem;
+    line-height: 3.9rem;
+  }
+}

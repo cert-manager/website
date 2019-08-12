@@ -1,0 +1,19 @@
+.Partners__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 50px;
+  align-items: center;
+}
+
+.Partners__logo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .Partners__grid {
+    grid-gap: 50px 100px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

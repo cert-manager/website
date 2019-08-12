@@ -13,50 +13,9 @@
 
   <!-- ASSETS -->
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAACUWAAAlFgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkcGwApHBsJKRwbaSkcGz8pHBsAKRwbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApHBsAKRwbGCkcG9MpHBvbKRwbPikcGwApHBsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKRwbADMTDwApHBtTKRwb6CkcG9spHBs8KRwbACkcGwAAAAAAAAAAACkcGwApHBsBKRwbGykcGwwpHBsAKRwbACkcGxspHBs4KRwbBSkcG1QpHBvpKRwbkSkcGgApHBsAAAAAAAAAAAApHBsAKRwbGikcG8gpHBuaKRwbECkcGwApHBt4KRwb8SkcG2kpHBsFKRwbMSkcGyEpHBsAKRwbAAAAAAAAAAAAKRwbACkcGwspHBucKRwb+ykcG5opHBsOKRwbKikcG8spHBvyKRwbaCkcGwMpHBsAAAAAAAAAAAAAAAAAAAAAACkdHAApHBsAKRwbEikcG58pHBv7KRwbmSkcGw4pHBstKRwbyykcG/EpHBtnKRwbAykcGwAAAAAAAAAAAAAAAAAAAAAAJiEjACkcGwApHBsSKRwboCkcG/spHBuXKRwbDSkcGy4pHBvMKRwb8SkcG2UpHBsCKRwbAAAAAAAAAAAAKRwbACkcGxkpHBtxKRwbJikcGxEpHBuhKRwb+ykcG5YpHBsNKRwbLykcG80pHBvxKRwbYSkcGwApHBsHKRwbFCkcGwApHBs4KRwb7ikcG8QpHBsmKRwbEikcG6MpHBv7KRwblSkcGwwpHBswKRwbzCkcG6UpHBsEKRwbYCkcG84pHBtPKRwbBCkcG28pHBv0KRwbwikcGyUpHBsSKRwbpCkcG/spHBuUKRwbDSkcGxopHBsaKRwbACkcGz8pHBvdKRwb5ikcG00pHBsEKRwbcSkcG/UpHBvBKRwbJCkcGxMpHBulKRwb+ykcG5MpHBsNKRwbAAAAAAApHBsAKRwbQykcG98pHBvjKRwbLikcGwIpHBtyKRwb9SkcG8ApHBsjKRwbFCkcG6YpHBv7KRwbkSkcGw0pHBsAKRwbACkcGwApHBtDKRwbnykcGyUpHBsAKRwbBSkcG3MpHBv2KRwbvCkcGxIpHBsUKRwbpykcG/spHBuQKRwbDAAAAAApHBsAKRwbACkcGwMpHBsAKRwbACkcGwApHBsFKRwbcSkcG60pHBsYKRwbACkcGxYpHBunKRwb+SkcG1cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKRwbACkcGwQpHBsKKRwbACkcGwApHBsAKRwbGykcG3spHBss/48AAP+HAAD/wwAA4wMAAOEDAADgBwAA8AMAAPgBAADgAQAAIAAAAAABAAAAAwAAgAEAAMQAAADGEAAA/xgAAA==" rel="icon" type="image/x-icon" />
-  {{ $cssFiles := slice }}
-  {{ $cssFiles = $cssFiles | append (resources.Get "lib/bootstrap/css/bootstrap.css") }}
-  {{ $cssFiles = $cssFiles | append (resources.Get "css/main.css") }}
-  {{ $cssFiles = $cssFiles | append (resources.Get "css/blank.css") }}
-  {{ $cssFiles = $cssFiles | append (resources.Get "css/contact.css") }}
-  {{ $cssFiles = $cssFiles | append (resources.Get "css/engineering.css") }}
-  {{ $cssFiles = $cssFiles | append (resources.Get "css/home.css") }}
-  {{ $css := $cssFiles | resources.Concat "css/bundle.css" }}
-  {{ if isset $.Site.Params "minify" }}
-    {{ $css = $css | resources.Minify }}
-  {{ end }}
-  {{ $css = $css | resources.Fingerprint }}
-  <link rel="stylesheet" type="text/css" href="{{ $css.RelPermalink }}" />
-  <style>
-    {{ block "styles" . }}{{ end }}
-  </style>
-
-  {{ $jsFiles := slice }}
-  {{ $jsFiles = $jsFiles | append (resources.Get "lib/jquery/jquery.js") }}
-  {{ $jsFiles = $jsFiles | append (resources.Get "lib/vide/jquery.vide.js") }}
-  {{ $jsFiles = $jsFiles | append (resources.Get "lib/bootstrap/js/bootstrap.js") }}
-  {{ $jsFiles = $jsFiles | append (resources.Get "lib/smoothscroll/smoothscroll.js") }}
-  {{ $jsFiles = $jsFiles | append (resources.Get "js/typekit.js") }}
-  {{ $jsFiles = $jsFiles | append (resources.Get "js/cta.js") }}
-  {{ $jsFiles = $jsFiles | append (resources.Get "js/home.js") }}
-  {{ $jsFiles = $jsFiles | append (resources.Get "js/jetstack-smoothscroll.js") }}
-  {{ $jsFiles = $jsFiles | append (resources.Get "js/menu.js") }}
-  {{ if isset $.Site.Params "google_analytics" }}
-    {{ $jsFiles = $jsFiles | append (resources.Get "js/ga.js") }}
-  {{ end }}
-  {{ $js := $jsFiles | resources.Concat "js/bundle.js" }}
-  {{ if isset $.Site.Params "minify" }}
-    {{ $js = $js | resources.Minify }}
-  {{ end }}
-  {{ $js = $js | resources.Fingerprint }}
-  <script type="text/javascript" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
-  {{ block "scripts" . }}{{ end }}
+  {{ partial "styles/index.html" . }}
 
   {{ block "head" . }}{{ end }}
-
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 </head>
 
 <body>
@@ -68,10 +27,13 @@
   {{ end }}
 
   {{ block "cta" . }}
+    {{ partial "panels/cta.html"}}
   {{ end }}
 
   {{ block "footer" . }}
-  {{ partial "footer/index.html" . }}
+    {{ partial "footer/index.html" . }}
   {{ end }}
+
+  {{ partial "scripts/index.html" . }}
 </body>
 </html>

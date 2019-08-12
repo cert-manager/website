@@ -1,0 +1,26 @@
+.ArrowLink {
+  display: inline-block;
+  font-size: 1.6rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 5px solid #6326DA;
+  color: #1B1C29;
+  font-weight: 500;
+}
+
+.ArrowLink:link,
+.ArrowLink:visted {
+  text-decoration: none;
+  color: #1B1C29;
+}
+
+.ArrowLink:focus,
+.ArrowLink:hover,
+.ArrowLink:active {
+  color: #1B1C29;
+  text-decoration: none;
+  border-bottom-color: #51D8BA;
+}
+
+.ArrowLink__text {
+  margin-right: 5px;
+}

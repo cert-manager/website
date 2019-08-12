@@ -1,7 +1,7 @@
 {{ define "title" }} | Open Source{{ end }}
 
 {{ define "navbar" }}
-    {{ partial "navbar/light.html" . }}
+    {{ partial "navbar/dark.html" . }}
 {{ end }}
 
 {{ define "body" }}
@@ -14,7 +14,7 @@
   <section class="tight media-component">
     {{ range $index, $page := .Data.Pages }}
       {{ if modBool $index 2 }}
-      <div class="media-component__row">
+      <div class="media-component__row" id="{{ $page.Title | urlize }}">
         <div class="media-component__image" style="background-image: url({{ $page.Params.image }})">
           <div class="media-component__image-content-container">
             {{ if $page.Params.logo }}
@@ -36,7 +36,7 @@
         </div>
       </div>
       {{ else }}
-      <div class="media-component__row">
+      <div class="media-component__row" id="{{ $page.Title | urlize }}">
           <div class="media-component__image" style="background-image: url({{ $page.Params.image }})">
             <div class="media-component__image-content-container">
               {{ if $page.Params.logo }}

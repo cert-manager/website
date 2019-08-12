@@ -1,73 +1,33 @@
 $(function () {
-    popNav();
-    $(window).scroll(function () {
-        popNav();
-    });
+    var fader = $('[data-testimonial-fader]');
+    var container = fader.find('.Testimonials__content');
+    var delay = 15000;
 
-    $('#lead-image .video').vide({
-        mp4: '/assets/shuttle.mp4',
-        webm: '/assets/shuttle.webm',
-        ogv: '/assets/shuttle.ogv',
-        poster: '/assets/shuttle.png'
-    }, {
-        position: '50% 50%',
-        muted: true,
-        loop: true,
-        autoplay: true,
-        resizing: true
-    });
+    $(window).on('resize', () => applyHeight(container));
+    applyHeight(container);
 
-    $('.carousel-control').click(function (e) {
-        e.preventDefault();
-        var goTo = $(this).data('slide');
-        if (goTo == "prev") {
-            $('#carousel').carousel('prev');
-        } else {
-            $('#carousel').carousel('next');
-        }
-    });
+    window.setInterval(fade, delay, container);
 });
 
+function applyHeight($container) {
+    const largestHeight = Math.max(...$container.find('.Testimonials__block').map(function getHeight(i, block) {
+        return $(block).outerHeight();
+    }));
 
-
-$(document).ready(function(){
-  var activeSlide = 1;
-  var totalSlides = $('#carousel .item').length;
-
-  $('#carousel').on('slide.bs.carousel', function (carousel) {
-      if (carousel.direction == "right") {
-          activeSlide--;
-          if (activeSlide < 1) {
-              activeSlide = totalSlides
-          }
-      } else {
-          activeSlide++;
-          if (activeSlide > totalSlides) {
-              activeSlide = 1
-          }
-      }
-
-      var paddedTotalSlides = pad(totalSlides, 2);
-      $('.pagination').html(activeSlide + " / " + totalSlides);
-  });
-});
-
-function popNav() {
-    // If the scroll of the window is below one window height
-    if ($(window).scrollTop() > $(window).height()) {
-        // Pop the menu in
-        $('#dynamic-nav').stop().animate({
-            top: "0px"
-        }, 50, 'linear');
-    } else {
-        // Hide the menu
-        $('#dynamic-nav').stop().animate({
-            top: "-100px"
-        }, 50, 'linear');
-    }
+    $container.height(largestHeight);
 }
 
-function pad(num, size) {
-    var s = "000000000" + num;
-    return s.substr(s.length - size);
+function fade($container) {
+    var baseClass = 'Testimonials__block';
+    var activeClass = baseClass + '--active';
+    var hiddenClass = baseClass + '--hidden';
+    var fadeTime = 500; // make sure this matches the CSS transition
+    var activeSlide = $container.find('.' + activeClass);
+    var nextSlide = activeSlide.next('.' + baseClass).length ? activeSlide.next('.' + baseClass) : $container.find('.' + baseClass).first();
+    activeSlide.removeClass(activeClass);
+    window.setTimeout(function addClassToNextSlide() {
+        activeSlide.addClass(hiddenClass);
+        nextSlide.removeClass(hiddenClass);
+        nextSlide.addClass(activeClass);
+    }, fadeTime);
 }

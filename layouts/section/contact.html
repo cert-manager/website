@@ -49,6 +49,10 @@
 
 {{ end }}
 
+{{ define "cta"}}
+    <!-- No CTA needed on contact page -->
+{{ end }}
+
 {{ define "scripts" }}
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ .Site.Data.config.apikeys.maps }}"></script>
 {{ $jsFiles := slice }}
@@ -70,6 +74,3 @@
 {{ end }}
 
 
-{{ define "footer" }}
-    {{ partial "footer/minimal.html" . }}
-{{ end }}

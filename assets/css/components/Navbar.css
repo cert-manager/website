@@ -1,0 +1,235 @@
+.Navbar {
+  padding: 10px 20px;
+
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  transition-property: background-color border-color;
+  color: white;
+  border-bottom: 1px solid transparent;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  min-height: 50px;
+  margin-bottom: 20px;
+}
+
+.Navbar.white {
+  color: black;
+}
+
+.Navbar.white .Navbar__link svg {
+  fill: black;
+}
+
+.Navbar.Navbar--solid,
+.Navbar.Navbar--navOpen {
+  background-color: inherit;
+  color: black;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+.Navbar.Navbar--solid .Navbar__link svg,
+.Navbar.Navbar--navOpen .Navbar__link svg {
+  fill: black;
+}
+
+.Navbar__container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 20px;
+  max-width: 1170px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.Navbar__link {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+
+.Navbar__link svg {
+  display: block;
+  width: 178px;
+  height: auto;
+
+  transition: fill 300ms ease-in-out;
+  fill: currentColor;
+}
+
+.Navbar__link svg #text {
+  display: none;
+}
+
+.Navbar__toggle {
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+  justify-self: flex-end;
+}
+
+.Navbar__toggle svg {
+  display: block;
+  width: 34px;
+  height: auto;
+  stroke: currentColor;
+}
+
+.Navbar__menu {
+  display: block;
+  position: fixed;
+  top: 75px;
+  left: 0;
+  right: 0;
+  bottom: 0%;
+  overflow: auto;
+  transition: bottom 300ms ease-in-out;
+  background-color: white;
+}
+
+.Navbar__menu.Navbar__menu--isClosed {
+  bottom: 100%;
+  overflow: hidden;
+}
+
+.Navbar__list {
+  list-style: none;
+  padding: 10px 0 10px 20px;
+  margin: 0;
+}
+
+.Navbar__link {
+  display: block;
+  padding: 10px;
+}
+
+
+.Navbar__link:link,
+.Navbar__link:visited {
+  color: inherit;
+}
+
+.Navbar__link:focus,
+.Navbar__link:hover,
+.Navbar__link:active {
+  background-color: #6326DA;
+  color: white;
+  text-decoration: none;
+}
+
+.Navbar__link.Navbar__link--logo:link,
+.Navbar__link.Navbar__link--logo:visited {
+  color: inherit;
+}
+
+.Navbar__link.Navbar__link--logo:focus,
+.Navbar__link.Navbar__link--logo:hover,
+.Navbar__link.Navbar__link--logo:active {
+  background-color: transparent;
+  color: #6326DA;
+  text-decoration: none;
+}
+
+.Navbar__link.Navbar__link--logo:focus svg,
+.Navbar__link.Navbar__link--logo:hover svg,
+.Navbar__link.Navbar__link--logo:active svg {
+  fill: #6326DA;
+}
+
+@media screen and (min-width: 768px) {
+
+  .Navbar {
+    padding: 20px;
+  }
+
+  .Navbar__link {
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+  }
+  
+  .Navbar__link:link,
+  .Navbar__link:visted {
+    color: white;
+  }
+
+  .Navbar__link:focus svg,
+  .Navbar__link:hover svg {
+    color: #6326DA;
+  }
+
+  .Navbar__list > .Navbar__item > .Navbar__link:link,
+  .Navbar__list > .Navbar__item > .Navbar__link:visited {
+    color: white;
+  }
+  .Navbar--solid .Navbar__list > .Navbar__item > .Navbar__link:link,
+  .Navbar--solid .Navbar__list > .Navbar__item > .Navbar__link:visited {
+    color: inherit;
+  }
+  
+  .Navbar--solid .Navbar__list > .Navbar__item > .Navbar__link:hover,
+  .Navbar--solid .Navbar__list > .Navbar__item > .Navbar__link:active {
+    color: white;
+  }
+  
+  .Navbar.white .Navbar__list > .Navbar__item > .Navbar__link:link,
+  .Navbar.white .Navbar__list > .Navbar__item > .Navbar__link:visited {
+    color: inherit;
+  }
+
+  .Navbar.white .Navbar__list > .Navbar__item > .Navbar__link:hover,
+  .Navbar.white .Navbar__list > .Navbar__item > .Navbar__link:active {
+    color: white;
+  }
+
+
+  .Navbar__link svg #text {
+    display: block;
+  }
+
+  .Navbar__toggle {
+    display: none;
+  }
+
+  .Navbar__menu.Navbar__menu--isClosed,
+  .Navbar__menu {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    background-color: transparent;
+  }
+
+  .Navbar__list {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .Nav__sublinks {
+    display: none;
+    list-style: none;
+    padding: 0;
+    position: fixed;
+    background-color: white;
+    box-shadow: 0 10px 20px 10px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+  }
+
+  .Navbar__item:focus-within .Nav__sublinks,
+  .Navbar__link:focus + .Nav__sublinks,
+  .Navbar__item:hover .Nav__sublinks {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .Navbar__link {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
