@@ -1,0 +1,26 @@
+<div class="OfferSection" id="what-we-offer">
+  <section class="container ">
+    <h2 class="OverlineHeader">
+      {{ .headline }}
+    </h2>
+
+    {{ range $index, $page := .features }}
+    <article class="Offer">
+      <a href="{{ .link }}">
+        <img src="{{ .img }}" alt="" class="Offer__img">
+      </a>
+  
+      <div class="Offer__copy">
+        <span class="Offer__category">{{ .category }}</span>
+        <h3 class="Offer__title">{{ .name }}</h3>
+        <p class="Offer__subtitle">{{ .desc }}</p>
+        <a href="{{ .link }}" class="ArrowLink">
+          <span class="ArrowLink__text">Tell me more</span>
+          {{ partial "svg/right-arrow-link.svg" }}
+        </a>
+      </div>
+    </article>
+    {{ end }}
+  
+  </section>
+</div>

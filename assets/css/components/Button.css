@@ -1,0 +1,21 @@
+.Button {
+  font-size: 1.6rem;
+  color: white;
+  background-color: #6326DA;
+  border-radius: 70px;
+  display: inline-block;
+  padding: 15px 50px;
+}
+
+a.Button:link,
+a.Button:visited {
+  text-decoration: none;
+}
+
+.Button:hover,
+.Button:active,
+.Button:focus {
+  text-decoration: none;
+  color: white;
+  background-color: rgb(80, 26, 187)
+}

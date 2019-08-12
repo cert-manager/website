@@ -2,8 +2,9 @@
 title: Jetstack
 description: >-
   We are a fast-growing Kubernetes professional services company that prides itself with helping startups and enterprises alike in their path to modern cloud-native infrastructure
-copyright: "© 2019 Jetstack Ltd. All rights reserved."
+copyright: "Jetstack Ltd. All rights reserved."
 privacy_policy_link: /documents/Jetstack-Website-Policies.pdf
+terms_link: "#"
 
 # contact details
 contact:
@@ -77,19 +78,47 @@ menus:
 
   navbar_footer:
   - name: Subscription
-    link: /subscription/
+    link: /subscription
+    links:
+    - link: /subscription/#refarchitecture
+      text: Reference Architecture
+    - link: /subscription/#training
+      text: Online Training
+    - link: /subscription/#support
+      text: Support
+
   - name: Open Source
-    link: /open-source/
-  - name: Consulting
-    link: /consulting/
-  - name: Training
-    link: /training/
-  - name: About Us
-    link: /about/
-  - name: Blog
-    link: https://blog.jetstack.io/
-  - name: Contact
-    link: /contact/
+    link: /open-source
+    links:
+    - link: /open-source/#tarmak
+      text: Tarmak
+    - link: /open-source/#navigator
+      text: Navigator
+    - link: /open-source/#cert-manager
+      text: Cert-Manager
+    - link: /open-source/#kube-lego
+      text: Kube-Lego
+
+  - name: Services
+    links:
+    - link: /consulting
+      text: Consulting
+    - link: /training
+      text: Training
+    - link: /public-training
+      text: Public Training
+
+  - name: Company
+    links:
+    - link: /about
+      text: Team
+    - link: /careers
+      text: Careers
+    - link: https://blog.jetstack.io/
+      text: Blog
+    - link: /contact
+      text: Contact
+
 
   social:
     - name: github
@@ -125,7 +154,11 @@ headline:
   homepage:
     headline: Kubernetes Accelerated
     strapline:
-      With Jetstack Subscription
+      Jetstack helps businesses to build and operate modern cloud native infrastructure with Kubernetes.
+
+    latest: # Use this to configure the display of the latest pill in the hero section. Removing this will remove the pill.
+      text: Introducing the Cloud Native Accelerator
+      link: https://blog.jetstack.io/blog/introducing-cna/
 
   getStarted:
     headline: Who are we?
@@ -234,87 +267,71 @@ headline:
 # various types of content panel that can appear on section pages
 # the idea is to not fix a panel to a section - mix and match!
 panels:
-  # the homepage banner with the engine and a list of items
-  toolkit:
-    headline: The Jetstack Toolkit
-    strapline: Production-Grade Kubernetes for Enterprise Cloud Native
-    button: Find out more
-    link: /engineering/
-    items:
-      - HA cluster deployment and upgrade
-      - Secured clusters by default
-      - Integrated monitoring and logging
-      - Cloud-optimised container networking and policy enforcement
-      # TODO: add Get in touch button (not quite sure how!)
-
-  our_services:
-    headline: Our services
-    strapline: >
-       Accelerate your adoption of Kubernetes and cloud native
-
-       with our unique blend of services
-    panelColour: white
-    service_features:
-    - name: Open Source
-      img: svg/icon-cog.svg
+    
+  what_we_offer: 
+    headline: What we offer
+    features:
+    - img: /img/jpg/wwo-open-source.jpg
+      category: Open source
+      name: Building tools to enhance the operational and developer experience
+      desc: We’ve been contributing to the Kubernetes ecosystem since the beginning 
       link: /open-source
-      desc: Enhancing the Kubernetes experience with open source tools
-    - name: Subscription
-      img: svg/icon-play.svg
-      desc: Reference architecture, online training and SLA support for your production Kubernetes deployment
+
+    - img: /img/jpg/wwo-subscription.jpg
+      category: Subscription
+      name: Operations made easier with Jetstack tools and services
+      desc: Ongoing access to the best of what Jetstack has to offer
       link: /subscription
-    - name: Consulting
-      img: svg/icon-brain.svg
+
+    - img: /img/jpg/wwo-consulting.jpg
+      category: Consulting
+      name: Achieve your delivery goals quicker
+      desc: Complement your team and adopt best practices
       link: /consulting
-      desc: Consulting and engineering to make the most of Kubernetes and move you to production quickly
-    - name: In-Person Training
-      img: svg/icon-presentation.svg
-      link: /training/
-      desc: Learn and engage directly alongside our team, with courses for all stages of your Kubernetes journey
+
+    - img: /img/jpg/wwo-training.jpg
+      category: In-Person Training
+      name: Practical, real-world training
+      desc: Fast access to the skills you’ll need to deploy and operate cloud native infrastructure reliably and at scale
+      link: /training
 
   # the partners we have worked and press stories about us (homepage)
-  partners:
-    workedWith:
-    - name: googlecp
-      img: /img/png/gcpgreyscale3.png
+  partners: 
+    headline: We're trusted by
+    logos:
+    - name: Google Cloud
+      img: /img/svg/logo-google-cloud.svg
       link: https://cloud.google.com/
-    - name: ovo
-      img: /img/png/ovo-logo.png
-      link: https://www.ovoenergy.com/
-    - name: pearson
-      img: /img/png/pearson3.png
-      link: https://www.pearson.com/
-    - name: holidayextras
-      img: /img/png/HolidayExtrasGreyscale.png
-      link: https://www.holidayextras.co.uk/
-    - name: tigera
-      img: /img/png/tigera.png
-      link: https://www.tigera.io/
-    - name: lastfm
-      img: /img/png/lastfmlogo.png
-      link: https://www.last.fm/
-    - name: monzo
-      img: /img/png/monzo-logo.png
-      link: https://www.monzo.com/
-    - name: babylon
-      img: /img/png/babylon-mono latest.png
-      link: https://www.babylonhealth.com/
-    - name: oddschecker
-      img: /img/png/oddscheckergreyscale3.png
-      link: https://www.oddschecker.com/
-    - filler: true
-    - name: contact
-      button: Get in touch
-      link: /contact/
 
-    inTheNews:
-      - name: theNewStack
-        img: /img/png/newstack-logo.png
-        link: http://thenewstack.io/vendors-working-towards-k8s-docker-interoperability/
-      - filler: true
-      - name: infoQ
-        img: /img/png/greyscaleinfoQ*.png
-        link: https://www.infoq.com/news/2018/03/kubernetes-stateful-services/
+    - name: Ovo Energy
+      img: /img/svg/logo-ovo-energy.svg
+      link: https://www.ovoenergy.com/
+
+    - name: Pearson
+      img: /img/svg/logo-pearson.svg
+      link: https://www.pearson.com/
+
+    - name: Last.fm
+      img: /img/svg/logo-lastfm.svg
+      link: https://www.last.fm/
+      
+    - name: Monzo
+      img: /img/svg/logo-monzo.svg
+      link: https://www.monzo.com/
+
+    - name: Holiday Extras
+      img: /img/svg/logo-holidayextras.svg
+      link: https://www.holidayextras.co.uk/
+
+    - name: Babylon
+      img: /img/png/logo-babylon.png
+      link: https://www.babylonhealth.com/
+
+    - name: Oddschecker
+      img: /img/svg/logo-oddschecker.svg
+      link: https://www.oddschecker.com/
+
+
 
   # nice things people said about us (homepage)
   testimonials:

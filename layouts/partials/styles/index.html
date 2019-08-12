@@ -1,0 +1,27 @@
+{{ $cssFiles := slice }}
+{{ $cssFiles = $cssFiles | append (resources.Get "lib/bootstrap/css/bootstrap.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/main.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/contact.css") }}
+
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/ArrowLink.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/Button.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/CallToAction.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/Hero.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/Footer.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/Navbar.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/Offer.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/OverlineHeader.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/Partners.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/Testimonials.css") }}
+
+{{ $css := $cssFiles | resources.Concat "css/bundle.css" }}
+
+{{ if isset $.Site.Params "minify" }}
+  {{ $css = $css | resources.Minify }}
+{{ end }}
+
+{{ $css = $css | resources.Fingerprint }}
+<link rel="stylesheet" type="text/css" href="{{ $css.RelPermalink }}" />
+<style>
+  {{ block "styles" . }}{{ end }}
+</style>

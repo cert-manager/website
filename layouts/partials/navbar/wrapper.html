@@ -1,7 +1,5 @@
 {{ $navbarColor := default "" .navbarColor }}
 
-<div class="container-fluid {{ $navbarColor }}" id="header">
-  <nav class="navbar navbar-fixed-top {{ $navbarColor }} {{ if .transparentToStart }}homepage{{ end }}">
+  <nav class="Navbar {{ $navbarColor }}" data-fade-scroll data-top-nav>
     {{ partial "navbar/container.html" . }}
   </nav>
-</div>

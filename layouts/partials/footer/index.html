@@ -1,4 +1,56 @@
-<div id="footer">
-  {{ partial "panels/calltoaction.html" .Site.Data.config.headline.footer }}
-  {{ partial "footer/section.html" . }}
-</div>
+{{ $config := .Site.Data.config }}
+
+<footer class="Footer">
+
+    <div class="container">
+      <div class="Footer__topGrid">
+        <div class="Footer__logoSocial">
+            <a href="/" class="Footer__logo">
+              {{ partial "svg/logo-jetstack.svg" }}
+            </a>
+            <!-- Social -->
+            <div class="Footer__social">
+              {{ partial "menus/social.html" (dict "links" $config.menus.social) }}
+            </div>
+
+        </div>
+
+        <nav class="Footer__nav">
+          <!-- Nav -->
+          {{ range $i, $section := $config.menus.navbar_footer }}
+            <div class="Footer__navSection">
+              {{ if $section.link }}
+              <a href="{{ $section.link }}" class="Footer_navTitleLink">
+                <h5 class="Footer_navTitle">{{ $section.name }}</h5>
+              </a>
+              {{ else }}
+              <h5 class="Footer_navTitle">{{ $section.name }}</h5>
+              {{ end }}
+
+              <ul class="Footer__navSectionList">
+                {{ range $j, $item := $section.links }}
+                <li>
+                  <a class="Footer__navSectionLink" href="{{ $item.link }}">
+                    {{ $item.text}}
+                  </a>
+                </li>
+                {{ end}}
+              </ul>
+            </div>
+          {{ end }}
+        </nav>
+
+        <p class="Footer__copyright">
+          <!-- Copyright -->
+          &copy; {{ now.Year }} {{ $config.copyright}}
+        </p>
+
+        <div class="Footer__legals">
+          <!-- Policy -->
+          <a class="Footer__legalsLink" href="{{ $config.privacy_policy_link}}">Privacy Policy</a>
+          <a class="Footer__legalsLink" href="{{ $config.terms_link}}">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+    
+</footer>
