@@ -157,7 +157,7 @@ headline:
       Jetstack helps businesses to build and operate modern cloud native infrastructure with Kubernetes.
 
     latest: # Use this to configure the display of the latest pill in the hero section. Removing this will remove the pill.
-      text: Introducing the Cloud Native Accelerator
+      text: Cloud Native Accelerator
       link: https://blog.jetstack.io/blog/introducing-cna/
 
   getStarted:
