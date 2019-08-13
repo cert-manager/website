@@ -642,12 +642,12 @@ section.bordered {
 }
 
 .media-component__image-content-container {
-  width: 40%;
   text-align: center;
   font-weight: 700;
   color: white;
   font-size: 32px;
   text-transform: uppercase;
+  padding: 2rem;
 }
 
 .media-component__image-content-container img {
@@ -691,7 +691,6 @@ section.bordered {
   }
 
   .media-component__image-content-container {
-    max-width: 250px;
     margin: auto;
   }
 
