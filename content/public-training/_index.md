@@ -12,19 +12,11 @@ testimonial:
   profileImage:
   quoter: 'Workshop Attendee'
 course_dates:
-- date: '11 September 2019'
-  title: 'Kubernetes in Practice'
-  level: 'Beginner'
-  eventbriteId: 63116284506
-- date: '12 September 2019'
-  title: 'Kubernetes in Practice'
-  level: 'Intermediate'
-  eventbriteId: 63116348698
-- date: '2 October 2019'
+- date: '3 October 2019'
   title: 'Kubernetes in Practice'
   level: 'Beginner'
   eventbriteId: 70138649589
-- date: '3 October 2019'
+- date: '4 October 2019'
   title: 'Kubernetes in Practice'
   level: 'Intermediate'
   eventbriteId: 70141985567
