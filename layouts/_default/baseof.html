@@ -35,5 +35,7 @@
   {{ end }}
 
   {{ partial "scripts/index.html" . }}
+
+  {{ block "scripts" . }}{{ end }}
 </body>
 </html>
