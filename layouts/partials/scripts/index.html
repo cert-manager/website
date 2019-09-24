@@ -21,4 +21,3 @@
 {{ end }}
 {{ $js = $js | resources.Fingerprint }}
 <script type="text/javascript" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
-{{ block "scripts" . }}{{ end }}
