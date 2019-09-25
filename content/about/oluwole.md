@@ -2,8 +2,8 @@
 title: Oluwole Fadeyi
 weight: 20
 image: /img/jpg/about-oluwole.jpg
-position: Summer Intern
+position: Software Engineer
 email: oluwole.fadeyi@jetstack.io
 ---
 
-Oluwole just graduated in Computer Science from Queen Mary University of London and has joined Jetstack as a summer intern in July. Even though he's not really all that familiar with containerization and Kubernetes, he will use this period to learn more. He also likes to play around with Arduino when he has time.
+After spending a great summer as a Jetstack intern, Oluwole decided to continue his studies by pursuing a masters in Software engineering at the University of Southampton, while continuing to work part-time at Jetstack. Now finally done with his studies and without any more lectures to attend Oluwole as joined Jetstack fulltime, hoping to grow his Kubernetes knowledge and skills.
