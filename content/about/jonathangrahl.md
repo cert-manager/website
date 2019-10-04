@@ -1,10 +1,12 @@
 ---
 title: Jonathan Grahl
-image: http://example.com
-position: Summoner of Fika
+image: /img/jpg/about-jonathan-grahl.jpg
+position: Summoner of Fika,
+    Bringer of Cardemom
+    and Protector of the Helm
 email: jonathan.grahl@jetstack.io
 ---
 
-Jonathan is a software/business developer with a particular love for bootstrapped companies. Nifty with both technical and business skills, he will attempt to expand Jetstack into the Nordic market!
+Jonathan is a Swedish engineer with a particular love for bootstrapped companies, with a history of Site Reliability Engineering and fullstack consultancy. Nifty with both technical and business skills, he will work with expanding Jetstack into the Nordic market!
 
-On the side he's a Esports enthusiast, participating in all events that he can find!
+On the side he's a Esports enthusiast, participating in all events that he can find! Also fika.
