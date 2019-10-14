@@ -10,7 +10,7 @@ terms_link: "#"
 contact:
   email: hello@jetstack.io
 
-# apikeys for external services
+# arpikeys for external services
 apikeys:
   maps: AIzaSyCGilALFo4ETKecJo6KMGyvnpSM8BshMiw
 
@@ -263,6 +263,12 @@ headline:
   subscription:
     headline: Jetstack Subscription
     strapline: Jetstack Subscription is an offering to help you at every stage of your Kubernetes journey. It gives you a tried and trusted suite of tools to support your team.
+
+  sweden:
+    headline: Äntligen, Kubernetes for the Nordics!
+    strapline: Jetstack has opened up a permanent office in Stockholm with the goal of improving the Kubernetes skills in the area. With us at your side, we can support you on your way to a Cloud Native infrastructure.
+    preparecta: As Kubernetes is exploding in the area, you need to stay ahead of the curve to find the right talent and build a future-proof infrastructure. This is where we come in.
+
 
 # various types of content panel that can appear on section pages
 # the idea is to not fix a panel to a section - mix and match!
