@@ -15,83 +15,17 @@
 
       <div class="col-sm-12">
 
-        <div class="media-hero__content">
+        <div class="media-hero__content Hero__latest">
           <div class="media-hero__graphic">
-            <img src="/img/png/hero-layers.png" alt="" />
+            <img src="http://getwallpapers.com/wallpaper/full/2/1/9/1289542-swedish-flag-wallpaper-1920x1200-for-ipad-pro.jpg" alt="" />
           </div>
 
           <div class="media-hero__copy">
             <h1>{{ .Site.Data.config.headline.sweden.headline }}</h1>
             <p>{{ .Site.Data.config.headline.sweden.strapline }}</p>
             <p>{{ .Site.Data.config.headline.sweden.preparecta }}</p>
-            <ul class="media-hero__ctas">
-                <li>
-                    <a href="#training" class="media-hero__cta media-hero__cta--white" data-smooth-scroll>
-                      <span class="media-hero__icon">
-                        {{ partial "svg/icon-training.svg" }}
-                      </span>
-                      <span class="media-hero__cta-content">
-                        <span class="media-hero__cta-text">In-person Training</span>
-                        <span class="media-hero__icon">
-                          {{ partial "svg/icon-arrow-right.svg" }}
-                        </span>
-                      </span>
-                    </a>
-                  </li>
-              <li>
-                <a href="#refarchitecture" class="media-hero__cta media-hero__cta--green" data-smooth-scroll>
-                  <span class="media-hero__icon">
-                    {{ partial "svg/icon-ref-arch.svg" }}
-                  </span>
-                  <span class="media-hero__cta-content">
-                    <span class="media-hero__cta-text">Reference Architecture</span>
-                    <span class="media-hero__icon">
-                      {{ partial "svg/icon-arrow-right.svg" }}
-                    </span>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="#training" class="media-hero__cta media-hero__cta--blue" data-smooth-scroll>
-                  <span class="media-hero__icon">
-                    {{ partial "svg/icon-online-training.svg" }}
-                  </span>
-                  <span class="media-hero__cta-content">
-                    <span class="media-hero__cta-text">Online Training</span>
-                    <span class="media-hero__icon">
-                      {{ partial "svg/icon-arrow-right.svg" }}
-                    </span>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="#support" class="media-hero__cta media-hero__cta--purple" data-smooth-scroll>
-                  <span class="media-hero__icon">
-                    {{ partial "svg/icon-support.svg" }}
-                  </span>
-                  <span class="media-hero__cta-content media-hero__cta-content--no-border">
-                    <span class="media-hero__cta-text">Support</span>
-                    <span class="media-hero__icon">
-                      {{ partial "svg/icon-arrow-right.svg" }}
-                    </span>
-                  </span>
-                </a>
-              </li>
-            </ul>
             <div class="media-hero__main-cta-wrapper">
               <a href="#contactform" class="media-hero__main-cta" data-smooth-scroll>Get in touch</a>
-            </div>
-          </div>
-
-          <div class="media-hero__bottom">
-            <div class="media-hero__logos-section">
-              <h2>Jetstack is trusted by</h2>
-              <div class="media-hero__logos">
-                {{ partial "svg/logo-monzo.svg" }}
-                {{ partial "svg/logo-google-cloud.svg" }}
-                {{ partial "svg/logo-babylon.svg" }}
-                {{ partial "svg/logo-pearson.svg" }}
-              </div>
             </div>
           </div>
         </div>
@@ -113,7 +47,7 @@
         <blockquote class="img-testimonial__quote">
           <p>
             "Sweden and the Nordics has always been on the forefront of tech start-ups. With Kubernetes growing to be the de-facto platform for Cloud deployments, the market needs to adapt as well.<br>
-            This is where we come in."
+            That's where we come in."
           </p>
           <cite class="img-testimonial__cite">Jonathan Grahl, Nordic Solution Engineer</cite>
         </blockquote>
@@ -124,273 +58,7 @@
 <!-- Image Testimonial Section -->
 
 
-<!-- Infor Icon Section (Purple, no horizontal rule) -->
-<section id="training" class="info-icons info-icons--hr rinfo-icons--purple">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="info-icons__hero">
-          <div class="info-icons__hero-icon">
-            {{ partial "svg/icon-training-large.svg" }}
-          </div>
-          <h2>
-            In-person Training
-          </h2>
-          <p>
-            Learn and engage directly with our team
-          </p>
-        </div>
-        <div class="info-icons__content">
-          <ul class="info-icons__features">
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-24h.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Applied learning</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-sla.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Focused on individuals</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-assistance.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Wide range of content</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-discount.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Become an expert</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Info Icon Section (Purple, no horizontal rule) -->
-
-<!-- Info Icon Section (Green, with horizontal rule) -->
-<section id="refarchitecture" class="info-icons info-icons--hr info-icons--green">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="info-icons__hero">
-          <div class="info-icons__hero-icon">
-            {{ partial "svg/icon-ref-arch-large.svg" }}
-          </div>
-          <h2>
-            Reference Architecture
-          </h2>
-          <p>
-            Gain the confidence of a best-practice Kubernetes cluster
-          </p>
-        </div>
-        <div class="info-icons__content">
-          <ul class="info-icons__features">
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-lock.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">No vendor lock-in with open source tooling</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-cloud.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Consistent across clouds, reduced ops overhead</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-kube.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Built on pure upstream Kubernetes</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-breeze.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Flexibility to integrate with your environment</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-thumbprint.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Security hardened</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-scale.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Tried-and-tested at scale</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Info Icon Section (Green, with horizontal rule) -->
-
-
-<!-- Info Icon Section (Blue, with horizontal rule) -->
-<section id="training" class="info-icons info-icons--hr info-icons--blue">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="info-icons__hero">
-          <div class="info-icons__hero-icon">
-            {{ partial "svg/icon-online-training-large.svg" }}
-          </div>
-          <h2>
-            Online Training
-          </h2>
-          <p>
-            Build in-house expertise with Jetstack on-demand training
-          </p>
-        </div>
-        <div class="info-icons__content">
-          <ul class="info-icons__features">
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-person-presenting.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Self-paced beginner, intermediate and advanced training for operators
-                and developers</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-key.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Exclusive access to the Jetstack Customer Portal ‘Flight Deck’</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-rocket.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Test your operational proficiency with interactive wargaming
-                scenarios</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-playbook.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">On-call operational playbooks, providing troubleshooting steps &amp;
-                tips</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Info Icon Section (Blue, with horizontal rule) -->
-
-
-<!-- Infor Icon Section (Purple, no horizontal rule) -->
-<section id="support" class="info-icons info-icons--purple">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="info-icons__hero">
-          <div class="info-icons__hero-icon">
-            {{ partial "svg/icon-support-large.svg" }}
-          </div>
-          <h2>
-            Support
-          </h2>
-          <p>
-            Use Jetstack as a virtual extension of your team
-          </p>
-        </div>
-        <div class="info-icons__content">
-          <ul class="info-icons__features">
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-24h.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">24x7 On demand support teams</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-sla.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">SLA-lead</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-assistance.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Ongoing architectural assistance</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-discount.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Discounted consulting</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Info Icon Section (Purple, no horizontal rule) -->
-
-
-<!-- Open Source Panel -->
-<section class="open-source" style="background-image: linear-gradient(to right, rgba(138, 99, 250, 0.93), rgba(138, 28, 250, 0.93)), url(/img/jpg/male-working-on-laptop.jpg);">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-
-        <div class="open-source__top">
-          <h2>Jetstack's commitment to Open Source</h2>
-          <ul class="open-source__commitments">
-            <li class="open-source__commitment">
-              <span class="open-source__commitment-hero">
-                20 <span class="open-source__sub">Million</span> +
-              </span>
-              <span class="open-source__detail">
-                Docker Image pulls
-              </span>
-            </li>
-            <li class="open-source__commitment">
-              <span class="open-source__commitment-hero">
-                2850 +
-              </span>
-              <span class="open-source__detail">
-                GitHub Stars
-              </span>
-            </li>
-            <li class="open-source__commitment">
-              <span class="open-source__commitment-hero">
-                90 +
-              </span>
-              <span class="open-source__detail">
-                Open Source Contributors
-              </span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="open-source__bottom">
-          <p>Founding member of</p>
-          <div class="open-source__kubernetes-icon">
-            {{ partial "svg/icon-cert-kube.svg" }}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Open Source Panel -->
-
-
+{{ partial "panels/what-we-offer-v2.html" .Site.Data.config.panels.what_we_offer_v2 }}
 
 {{ end }}
 
@@ -400,7 +68,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2>Enquire about Subscription</h2>
+        <h2>Tell us more about you</h2>
         <div style="margin: 0 auto; max-width: 400px;">
           <div class="pipedriveWebForms" data-pd-webforms="https://pipedrivewebforms.com/form/9bb0a3d0e08f96d5ebe56692f6239b723004600"><script src="https://cdn.pipedriveassets.com/web-form-assets/webforms.min.js"></script></div>
         </div>
