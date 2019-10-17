@@ -896,6 +896,10 @@ Introduced on new Subscription Page
   margin-top: 0px;
 }
 
+.media-hero__main-cta--spaced {
+  margin-top: 35px;
+}
+
 .media-hero__main-cta:link,
 .media-hero__main-cta:visited {
   color: white;
