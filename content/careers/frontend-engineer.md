@@ -1,7 +1,7 @@
 ---
 title: Front End Engineer
 image: /img/jpg/about-vacancies.jpg
-weight: 5
+weight: 6
 location: UK/Europe
 ---
 
