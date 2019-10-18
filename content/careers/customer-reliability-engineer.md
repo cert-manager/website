@@ -1,7 +1,7 @@
 ---
 title: Customer Reliability Engineer
 image: /img/jpg/about-vacancies.jpg
-weight: 3
+weight: 4
 location: UK/Europe
 ---
 

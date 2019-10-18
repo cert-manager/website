@@ -1,7 +1,7 @@
 ---
 title: Business Development Manager
 image: /img/jpg/about-vacancies.jpg
-weight: 1
+weight: 2
 location: UK
 ---
 
