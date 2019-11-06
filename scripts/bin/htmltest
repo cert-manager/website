@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# Copyright 2019 The Jetstack cert-manager contributors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# This script constructs a 'content/' directory that contains content for all
+# configured versions of the documentation.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+REPO_ROOT=$(dirname "${BASH_SOURCE[0]}")/../..
+VERSION="0.10.3"
+
+source "${REPO_ROOT}/scripts/bin/lib.sh"
+
+htmltest="${REPO_ROOT}/bin/htmltest"
+mkdir -p "$(dirname "$htmltest")"
+
+if ! command -v curl &>/dev/null; then
+	echo "Ensure curl command is installed"
+fi
+
+if ! test -f "${htmltest}"; then
+    echo "+++ Fetching htmltest binary and saving to bin/htmltest"
+    detect_and_set_goos_goarch
+
+    tmpdir="$(mktemp -d)"
+    if [ "$GOOS" = "darwin" ]; then
+        curl -Lo "${tmpdir}/file" "https://github.com/wjdp/htmltest/releases/download/v${VERSION}/htmltest_${VERSION}_osx_amd64.tar.gz"
+        check_sha "${tmpdir}/file" "761cc0ab30edf9c327b897cf3f2b5c6c8bb78c11a45a75092f23ed3f35df7759"
+    elif [ "$GOOS" = "linux" ]; then
+        curl -Lo "${tmpdir}/file" "https://github.com/wjdp/htmltest/releases/download/v${VERSION}/htmltest_${VERSION}_linux_amd64.tar.gz"
+    	check_sha "${tmpdir}/file" "d44e987b2aade7b9c060111ed5cca1174829048b5d166e379a1d89119e9a787d"
+    else
+    	echo "Unsupported OS: $GOOS"
+    	exit 1
+    fi
+
+    tar -C "$tmpdir" -xf "${tmpdir}/file"
+    mv "${tmpdir}/htmltest" "${htmltest}"
+    chmod +x "${htmltest}"
+    rm -rf "${tmpdir}"
+fi
+
+"${htmltest}" "$@"

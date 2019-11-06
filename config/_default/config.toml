@@ -9,7 +9,7 @@ theme = ["docsy"]
 
 # Language settings
 languageCode = "en-us"
-contentDir = "content/en"
+contentDir = "content"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 # Useful when translating.

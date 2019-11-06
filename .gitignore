@@ -1,4 +1,5 @@
-node_modules/
-public/
-content/
-resources/
+/node_modules/
+/public/
+/resources/
+/bin/
+/tmp/
