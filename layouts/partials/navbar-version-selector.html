@@ -12,7 +12,7 @@
 {{ $curPage := .Page.Section }}
 
 {{/* generate menu from config/params.toml */}}
-<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-proofer-ignore>
 {{ range .Site.Params.versions }}
   {{ if eq $curPage .dirpath }}
 
