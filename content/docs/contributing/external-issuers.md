@@ -6,12 +6,12 @@ type: "docs"
 ---
 
 cert-manager offers a number of [core issuer
-types](../../configuration/index.html) that represent certificate authorities
+types](../../configuration/) that represent certificate authorities
 that can sign certificates when requested. As of v0.11, cert-manager also
 supports out-of-tree external issuers natively, and treats them the same as
 in-tree issuer types. For more information on how to install and configure
 external issuer types, read the documentation
-[here](../../configuration/external/index.html).
+[here](../../configuration/external/).
 
 ## Concepts
 
@@ -44,7 +44,7 @@ controllers, such as the `Certificate` controller, that the resource is ready to
 be consumed. Conversely, if the `CertificateRequest` fails, it is as important
 to mark the resource as such, as this will also be used to signal to higher
 order controllers. You can read the valid condition sates
-[here](../../concepts/certificaterequest/index.html).TODO: add '#Conditions'
+[here](../../concepts/certificaterequest/).TODO: add '#Conditions'
 
 ## Implementation
 

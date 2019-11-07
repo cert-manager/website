@@ -10,7 +10,7 @@ type: "docs"
 Due to the large number of requests to support DNS providers to resolve DNS
 challenges, it have become unpractical and unfeasible to maintain and test all
 coming in. For this reason, it has been decided to instead support out-of-tree
-DNS providers via way of an external [webhook](../../concepts/webhook/index.html).
+DNS providers via way of an external [webhook](../../concepts/webhook/).
 
 To implement an external DNS provider webhook, it is recommended to base your
 implementation on the [example

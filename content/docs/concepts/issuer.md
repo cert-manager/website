@@ -42,4 +42,4 @@ be used to issue Certificates across all namespaces.
 
 cert-manager support a number of 'in-tree' as well as 'out-of-tree' issuer
 types. An exhaustive list of these issuer types can be found in cert-manager
-[configuration documentation](../../configuration/index.html).
+[configuration documentation](../../configuration/).

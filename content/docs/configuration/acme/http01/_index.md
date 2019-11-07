@@ -11,7 +11,7 @@ This page contains details on the different options available on the `Issuer`
 resource's HTTP01 challenge solver configuration.
 
 For more information on configuring ACME issuers and their API format, read the
-[ACME Issuers](../index.html) documentation.
+[ACME Issuers](../) documentation.
 
 ## How HTTP01 validations work
 
@@ -23,7 +23,7 @@ page](https://letsencrypt.org/docs/challenge-types/#http-01-challenge).
 
 The HTTP01 Issuer supports a number of additional options.  For full details on
 the range of options available, read the [reference
-documentation](https://docs.cert-manager.io/en/latest/reference/api-docs/index.html#acmeissuerhttp01config-v1alpha2). TODO: fix link
+documentation](https://docs.cert-manager.io/en/latest/reference/api-docs/#acmeissuerhttp01config-v1alpha2). TODO: fix link
 
 ### ingressClass
 

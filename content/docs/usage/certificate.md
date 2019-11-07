@@ -5,13 +5,13 @@ weight: 40
 type: "docs"
 ---
 
-In cert-manager, the [`Certificate`](../../concepts/certificate/index.html) resource
+In cert-manager, the [`Certificate`](../../concepts/certificate/) resource
 represents a human readable definition of a certificate request that is to be
 honoured by an issuer which is to be kept up-to-date. This method of requesting
 certificates are expected to be the usual method.
 
 In order to issue any certificates, you'll need to configure an
-[`Issuer`](../../configuration/index.html) resource first.
+[`Issuer`](../../configuration/) resource first.
 
 
 ## Creating Certificate Resources
@@ -60,7 +60,7 @@ The Certificate will be issued using the issuer named `ca-issuer` in the
 
 > Note: If you want to create an Issuer that can be referenced by Certificate
 > resources in *all* namespaces, you should create a
-> [`ClusterIssuer`](../../configuration/index.html) resource and set the
+> [`ClusterIssuer`](../../configuration/) resource and set the
 > `certificate.spec.issuerRef.kind` field to `ClusterIssuer`.
 
 
@@ -69,7 +69,7 @@ The Certificate will be issued using the issuer named `ca-issuer` in the
 > `time.Duration`](https://golang.org/pkg/time/#ParseDuration) string format,
 > which does not allow the `d` (days) suffix. You must specify these values
 > using `s`, `m`, and `h` suffixes instead. Failing to do so without installing
-> the [`webhook component`](../../concepts/webhook/index.html) can prevent cert-manager
+> the [`webhook component`](../../concepts/webhook/) can prevent cert-manager
 > from functioning correctly
 > [`#1269`](https://github.com/jetstack/cert-manager/issues/1269).
 
@@ -84,11 +84,11 @@ The Certificate will be issued using the issuer named `ca-issuer` in the
 > days, 23 hours (the *full duration* remains 90 days).
 
 A full list of the fields supported on the Certificate resource can be found in
-the [API reference documentation](https://docs.cert-manager.io/en/release-0.11/reference/api-docs/index.html#certificatespec-v1alpha2).
+the [API reference documentation](https://docs.cert-manager.io/en/release-0.11/reference/api-docs/#certificatespec-v1alpha2).
 
 ## Temporary Certificates whilst Issuing
 
-When [requesting certificates using ingress-shim](../ingress/index.html), the component
+When [requesting certificates using ingress-shim](../ingress/), the component
 `ingres-gce`, if used, requires that a temporary certificate is present while
 waiting for issuance of a signed certificate when serving. To facilitate this,
 if the annotation `"cert-manager.io/issue-temporary-certificate": "true"` is

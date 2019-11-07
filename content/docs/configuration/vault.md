@@ -11,7 +11,7 @@ used to sign certificates for your Public Key Infrastructure (PKI). Vault is an
 external project to cert-manager and as such this guide will assume you have
 configured and deployed is correctly, ready for signing. You can read more on
 how to configure vault as a certificate authority
-[here](https://www.vaultproject.io/docs/secrets/pki/index.html).
+[here](https://www.vaultproject.io/docs/secrets/pki/).
 
 This issuer type is typically used when Vault is already being in use within
 your infrastructure or in order to make of it's feature set where the CA issuer

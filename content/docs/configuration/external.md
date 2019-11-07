@@ -26,4 +26,4 @@ authors are as follows:
   Authority ACME server](https://github.com/smallstep/certificates).
 
 To create your own external issuer type, please follow the guidance in the
-[development documentation](../../contributing/external-issuers/index.html).
+[development documentation](../../contributing/external-issuers/).

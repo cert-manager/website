@@ -34,7 +34,7 @@ cert-manager controller and CA injector components.
 
 In order for the API server to communicate with the webhook component, the
 webhook requires a TLS certificate that the apiserver is configured to trust.
-This is created by the [ca-injector](../ca-injector/index.html) and is implemented by the
+This is created by the [ca-injector](../ca-injector/) and is implemented by the
 following two Secrets:
 
 - `secret/cert-manager-webhook-ca`: A self-signed root CA certificate which is

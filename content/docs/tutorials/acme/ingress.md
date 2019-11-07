@@ -344,7 +344,7 @@ We need to install cert-manager to do the work with kubernetes to request a
 certificate and respond to the challenge to validate it. We can use helm or
 plain Kubernetes manifest to install cert-manager.
 
-Read the [getting started guide](../../../installation/index.html) to install
+Read the [getting started guide](../../../installation/) to install
 cert-manager using your preferred method.
 
 Cert-manager uses two different custom resources, also known as
@@ -420,7 +420,7 @@ issuer.cert-manager.io "letsencrypt-prod" created
 ```
 
 Both of these issuers are configured to use the
-[`HTTP01`](../../../configuration/acme/http01/index.html) challenge provider.
+[`HTTP01`](../../../configuration/acme/http01/) challenge provider.
 
 Check on the status of the issuer after you create it:
 
@@ -469,7 +469,7 @@ You should see the issuer listed with a registered account.
 
 With all the pre-requisite configuration in place, we can now do the pieces to
 request the TLS certificate. There are two primary ways to do this: using
-annotations on the ingress with [`ingress-shim`](../../../usage/ingress/index.html) or
+annotations on the ingress with [`ingress-shim`](../../../usage/ingress/) or
 directly creating a certificate resource.
 
 In this example, we will add annotations to the ingress, and take advantage
