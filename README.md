@@ -53,6 +53,7 @@ You also need to ensure you have the following tool(s) installed on your system
 as they are not managed by the `scripts/` directory:
 
 * npm/nodejs
+* Golang 1.12+
 
 ### Local development
 

@@ -22,38 +22,37 @@ set -o nounset
 set -o pipefail
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
-VERSION="0.10.3"
+VERSION="v0.1.5"
 
 source "${REPO_ROOT}/scripts/bin/lib.sh"
 
-htmltest="${REPO_ROOT}/bin/htmltest"
-mkdir -p "$(dirname "$htmltest")"
+gencrd="${REPO_ROOT}/bin/gen-crd-api-reference-docs"
+mkdir -p "$(dirname "$gencrd")"
 
 if ! command -v curl &>/dev/null; then
     echo "Ensure curl command is installed"
     exit 1
 fi
 
-if ! test -f "${htmltest}"; then
-    echo "+++ Fetching htmltest binary and saving to bin/htmltest"
+if ! test -f "${gencrd}"; then
+    echo "+++ Fetching gen-crd-api-reference-docs binary and saving to bin/gen-crd-api-reference-docs"
     detect_and_set_goos_goarch
 
     tmpdir="$(mktemp -d)"
+    curl -Lo "${tmpdir}/file" "https://github.com/ahmetb/gen-crd-api-reference-docs/releases/download/${VERSION}/gen-crd-api-reference-docs_${GOOS}_amd64.tar.gz"
     if [ "$GOOS" = "darwin" ]; then
-        curl -Lo "${tmpdir}/file" "https://github.com/wjdp/htmltest/releases/download/v${VERSION}/htmltest_${VERSION}_osx_amd64.tar.gz"
-        check_sha "${tmpdir}/file" "761cc0ab30edf9c327b897cf3f2b5c6c8bb78c11a45a75092f23ed3f35df7759"
+        check_sha "${tmpdir}/file" "44d9bf8f683858032e549ff2b0dbcb97508fd5df82411c6fbe95042f128b9745"
     elif [ "$GOOS" = "linux" ]; then
-        curl -Lo "${tmpdir}/file" "https://github.com/wjdp/htmltest/releases/download/v${VERSION}/htmltest_${VERSION}_linux_amd64.tar.gz"
-    	check_sha "${tmpdir}/file" "d44e987b2aade7b9c060111ed5cca1174829048b5d166e379a1d89119e9a787d"
+        check_sha "${tmpdir}/file" "9e14741dc9cd127082b681d4e78f3fcde95a5b70d94055142ebd16efb51998cf"
     else
     	echo "Unsupported OS: $GOOS"
     	exit 1
     fi
 
     tar -C "$tmpdir" -xf "${tmpdir}/file"
-    mv "${tmpdir}/htmltest" "${htmltest}"
-    chmod +x "${htmltest}"
+    mv "${tmpdir}/gen-crd-api-reference-docs" "${gencrd}"
+    chmod +x "${gencrd}"
     rm -rf "${tmpdir}"
 fi
 
-"${htmltest}" "$@"
+"${gencrd}" "$@"
