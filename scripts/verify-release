@@ -25,7 +25,7 @@ set -o pipefail
 # order to ensure the final version of the site to be published passes all
 # verification steps.
 
-REPO_ROOT=$(dirname "${BASH_SOURCE[0]}")/..
+REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
 # Run all commands relative to the repository root
 cd "${REPO_ROOT}"
