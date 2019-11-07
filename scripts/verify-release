@@ -31,7 +31,7 @@ REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 cd "${REPO_ROOT}"
 
 # Fetch all required content versions & assemble the content/ directory
-"${REPO_ROOT}/scripts/release"
+"${REPO_ROOT}/scripts/build-release"
 
 # 3. Run ./scripts/verify-all.sh
 "${REPO_ROOT}/scripts/verify"
