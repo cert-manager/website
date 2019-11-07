@@ -20,5 +20,28 @@ set -o pipefail
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
-"${REPO_ROOT}/scripts/verify-links"
-"${REPO_ROOT}/scripts/verify-lint"
+cd "${REPO_ROOT}"
+
+"${REPO_ROOT}/scripts/update-node_modules"
+
+echo "+++ Running 'alex' - ignoring any failures"
+"${REPO_ROOT}/node_modules/.bin/alex" \
+	content/ || true
+
+echo "+++ Running remark"
+"${REPO_ROOT}/node_modules/.bin/remark" \
+	--rc-path ".remarkrc" \
+	--frail \
+	content/
+
+echo "+++ Running spell check"
+"${REPO_ROOT}/node_modules/.bin/mdspell" \
+  --report \
+  --en-us \
+  --ignore-numbers \
+  --ignore-acronyms \
+  content/**/*.md \
+  content/**/*.html \
+  _layouts/*.html \
+  _includes/*.html \
+  *.html
