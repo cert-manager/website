@@ -26,9 +26,7 @@ set -o pipefail
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
 "${REPO_ROOT}/scripts/bin/multiversion" \
-	--repo-url https://github.com/cert-manager/docs.git \
-	--repo-content-dir docs/ \
-	--output-dir "${REPO_ROOT}/content/docs" \
-	# Uncomment the below lines when we cut the release-0.12 branch
-	# --latest-branch master \
-	# --branches v0.11-docs=master
+	--repo-url https://github.com/cert-manager/website.git \
+	--repo-content-dir content/en/docs \
+	--output-dir "${REPO_ROOT}/content/en" \
+	--branches v0.12-docs=release-0.12

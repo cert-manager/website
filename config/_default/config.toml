@@ -9,7 +9,7 @@ theme = ["docsy"]
 
 # Language settings
 languageCode = "en-us"
-contentDir = "content"
+contentDir = "content/en"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 # Useful when translating.
@@ -67,12 +67,12 @@ copyright = "cert-manager authors"
 version_menu = "Releases"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-github_repo = "https://github.com/jetstack/cert-manager"
+github_repo = "https://github.com/cert-manager/website"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
 github_project_repo = "https://github.com/jetstack/cert-manager"
 
 # Specify a value here if your content directory is not in your repo's root directory
-github_subdir = "docs"
+# github_subdir = "content"
 
 time_format_blog = "Monday, January 02, 2006"
 time_format_default = "January 2, 2006"
