@@ -20,6 +20,7 @@ It is loosely based upon the work of
 wisdom from other similar projects e.g.
 [kube-cert-manager](https://github.com/PalmStoneGames/kube-cert-manager).
 
+![High level overview diagram explaining cert-manager architecture](images/high-level-overview.png)
 
 This is the full technical documentation for the project, and should be
 used as a source of references when seeking help with the project.
