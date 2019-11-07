@@ -100,7 +100,7 @@ record that is set to your validation token. When the verifier queries ``_acme-c
 be directed to the correct location by this CNAME record. This proves that you control "example.com"
 
 4. Create a secret from the credentials json that was saved in step 2, this secret is referenced
-   in the ``accountSecretRef`` field of your dns01 issuer settings.
+   in the ``accountSecretRef`` field of your DNS01 issuer settings.
 
 ```bash
 $ kubectl create secret generic acme-dns --from-file acmedns.json

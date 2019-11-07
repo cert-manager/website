@@ -13,7 +13,7 @@ protocol.  The ACME protocol supports various challenge mechanisms which are
 used to prove ownership of a domain so that a valid certificate can be issued
 for that domain.
 
-One such challenge mechanism is the HTTP-01 challenge. With a HTTP-01 challenge,
+One such challenge mechanism is the HTTP01 challenge. With a HTTP01 challenge,
 you prove ownership of a domain by ensuring that a particular file is present at
 the domain. It is assumed that you control the domain if you are able to
 publish the given file under a given path.
@@ -104,10 +104,10 @@ For more information on ClusterIssuers, read the [ClusterIssuer
 docs](../../../concepts/issuer/).
 
 The `acme` stanza defines the configuration for our ACME challenges.  Here we
-have defined the configuration for our HTTP-01 challenges which will be used to
+have defined the configuration for our HTTP01 challenges which will be used to
 verify domain ownership. To verify ownership of each domain mentioned in an
 `http01` stanza, cert-manager will create a Pod, Service and Ingress that
-exposes an HTTP endpoint that satisfies the HTTP-01 challenge.
+exposes an HTTP endpoint that satisfies the HTTP01 challenge.
 
 The fields `ingress` and `ingressClass` in the `http01` stanza can be used to
 control how cert-manager interacts with Ingress resources:
@@ -131,7 +131,7 @@ control how cert-manager interacts with Ingress resources:
 Once domain ownership has been verified, any cert-manager affected resources will
 be cleaned up or deleted.
 
-> Note: It is your responsibilty to point each domain name at the correct IP
+> Note: It is your responsibility to point each domain name at the correct IP
 > address for your ingress controller.
 
 After creating the above Certificate, we can check whether it has been obtained

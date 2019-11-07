@@ -11,5 +11,5 @@ face:
 
 - [Troubleshooting issuing ACME certificates]./acme/ TODO: add doc
 - [How to change the Cluster Resource Namespace](./cluster-resource/)
-- [How to sync secrets acroos namespaces](./kubed/)
+- [How to sync secrets across namespaces](./kubed/)
 - [Failing to create resources due to Webhook](./webhook/)

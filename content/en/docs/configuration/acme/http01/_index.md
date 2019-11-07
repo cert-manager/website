@@ -44,7 +44,7 @@ If the 'ingressName' field is specified, cert-manager will edit the named
 ingress resource in order to solve HTTP01 challenges.
 
 This is useful for compatibility with ingress controllers such as ingress-gce,
-which utilise a unique IP address for each Ingress resource created.
+which utilize a unique IP address for each Ingress resource created.
 
 This mode should be avoided when using ingress controllers that expose a single
 IP for all ingress resources, as it can create compatibility problems with
@@ -53,9 +53,9 @@ certain ingress-controller specific annotations.
 ### servicePort
 
 In rare cases it might be not possible/desired to use NodePort as type for the
-http01 challenge response service, e.g. because of Kubernetes limit
+HTTP01 challenge response service, e.g. because of Kubernetes limit
 restrictions. To define which Kubernetes service type to use during challenge
-response specify the following http01 config:
+response specify the following HTTP01 config:
 
 ```yaml
     http01:
@@ -63,7 +63,7 @@ response specify the following http01 config:
       serviceType: ClusterIP
 ```
 
-By default type NodePort will be used when you don't set http01 or when you set
+By default type NodePort will be used when you don't set HTTP01 or when you set
 serviceType to an empty string. Normally there's no need to change this.
 
 

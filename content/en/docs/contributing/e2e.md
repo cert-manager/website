@@ -30,8 +30,8 @@ run the tests:
   not required. For non-Linux hosts (i.e. OSX), you will need to ensure you have
   a relatively new version of kubectl available on your PATH.
 
-- An internet connection: tests require access to DNS, and optionally Cloudflare
-  APIs (if a Cloudflare API token is provided).
+- An internet connection: tests require access to DNS, and optionally CloudFlare
+  APIs (if a CloudFlare API token is provided).
 
 Bazel, Docker and Kubectl should be installed through your preferred means.
 

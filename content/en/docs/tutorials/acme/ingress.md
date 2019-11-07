@@ -20,7 +20,7 @@ templating and deployment tool for Kubernetes resources.
 First, ensure the Helm client is installed following the [Helm installation
 instructions](https://github.com/helm/helm/blob/master/docs/install.md).
 
-For example, on macOS:
+For example, on MacOS:
 
 ```bash
 $ brew install kubernetes-helm
@@ -89,7 +89,7 @@ an HTTP proxy service supported by your cloud provider's load balancer.
 You can get more details about nginx-ingress and how it works from the
 [documentation for nginx-ingress](https://kubernetes.github.io/ingress-nginx/).
 
-Use `helm` to install an Nginx Ingress controller:
+Use `helm` to install an NGINX Ingress controller:
 
 ```bash
 $ helm install stable/nginx-ingress --name quickstart
@@ -272,7 +272,7 @@ TODO (joshvanl): include link contents
 example/ingress.yaml
 ```
 
-You can download the sample manifest from github, edit it, and submit the manifest to Kubernetes with the command:
+You can download the sample manifest from GitHub , edit it, and submit the manifest to Kubernetes with the command:
 
 ```yaml
 $ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress.yaml
@@ -333,14 +333,14 @@ for our site.
 
 > *Warning*: It is critical to make sure that your ingress is available and
 > responding correctly on the internet. This quickstart example uses Let's
-> Encypt to provide the certificates, which expects and validates both that the
+> Encrypt to provide the certificates, which expects and validates both that the
 > service is available and that during the process of issuing a certificate uses
-> that valdiation as proof that the request for the domain belongs to someone
+> that validation as proof that the request for the domain belongs to someone
 > with sufficient control over the domain.
 
 ## Step 5 - Deploy Cert Manager
 
-We need to install cert-manager to do the work with kubernetes to request a
+We need to install cert-manager to do the work with Kubernetes to request a
 certificate and respond to the challenge to validate it. We can use helm or
 plain Kubernetes manifest to install cert-manager.
 
@@ -359,7 +359,7 @@ operation. These two resources are:
 >
 > Note that if you're using this document as a guide to configure cert-manager
 > for your own Issuer, you must create the Issuers in the same namespace
-> as your Ingress resouces by adding '-n my-namespace' to your 'kubectl create'
+> as your Ingress resources by adding '-n my-namespace' to your 'kubectl create'
 > commands. Your other option is to replace your Issuers with ClusterIssuers.
 > ClusterIssuer resources apply across all Ingress resources in your cluster
 > and don't have this namespace-matching requirement.
@@ -370,7 +370,7 @@ operation. These two resources are:
 > TODO (@joshvanl): add link to Issuer vs Cluster Issuer
 
 > A certificate is the resource that cert-manager uses to expose the state
-> of a request as well as track upcoming expirations.
+> of a request as well as track upcoming expiration.
 
 ## Step 6 - Configure Let's Encrypt Issuer
 
@@ -385,7 +385,7 @@ that is working switch to a production issuer.
 
 Create this definition locally and update the email address to your own. This
 email required by Let's Encrypt and used to notify you of certificate
-expirations and updates.
+expiration and updates.
 
 TODO (@joshvanl): fix link
 - staging issuer:
@@ -467,7 +467,7 @@ You should see the issuer listed with a registered account.
 
 ## Step 7 - Deploy a TLS Ingress Resource
 
-With all the pre-requisite configuration in place, we can now do the pieces to
+With all the prerequisite configuration in place, we can now do the pieces to
 request the TLS certificate. There are two primary ways to do this: using
 annotations on the ingress with [`ingress-shim`](../../../usage/ingress/) or
 directly creating a certificate resource.
@@ -479,7 +479,7 @@ resource and use that to validate the domain. Once verified and issued,
 cert-manager will create or update the secret defined in the certificate.
 
 > Note: The secret that is used in the ingress should match the secret defined
-> in the certificate.  There isn't any explicit checking, so a typo will resut
+> in the certificate.  There isn't any explicit checking, so a typo will result
 > in the nginx-ingress-controller falling back to its self-signed certificate.
 > In our example, we are using annotations on the ingress (and ingress-shim)
 > which will create the correct secrets on your behalf.
@@ -488,7 +488,7 @@ Edit the ingress add the annotations that were commented out in our earlier
 example:
 
 TODO (@joshvanl): move this link to the new location
-- ingress tls: [`ingress-tls.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress-tls.yaml)
+- ingress TLS: [`ingress-tls.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress-tls.yaml)
 
 TODO (joshvanl): include link contents
 ```yaml
@@ -596,7 +596,7 @@ Now that we have confidence that everything is configured correctly, you
 can update the annotations in the ingress to specify the production issuer:
 
 TODO (@joshvanl): move this link to the new location
-- ingress tls final: [`ingress-tls-final.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress-tls-final.yaml)
+- ingress TLS final: [`ingress-tls-final.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress-tls-final.yaml)
 
 TODO (joshvanl): include link contents
 ```yaml
@@ -677,7 +677,7 @@ Events:
   Normal  Created     90s   cert-manager  Created Challenge resource "quickstart-example-tls-889745041-0" for domain "example.your-domain.com"
 ```
 
-Here, we can see that cert-manager has created 1 'Challenge' resource to fulfil
+Here, we can see that cert-manager has created 1 'Challenge' resource to fulfill
 the Order. You can dig into the state of the current ACME challenge by running
 `kubectl describe` on the automatically created Challenge resource:
 

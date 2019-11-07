@@ -30,7 +30,7 @@ new things like:
 * External issuer types, such as the [Smallstep Step Issuer]
 * Deeper integrations into Kubernetes, with an experimental [CSI driver] that
   can be used to automatically mount signed certificates into pods
-* Experimental integration with Istio, allowing you to utilise any of
+* Experimental integration with Istio, allowing you to utilize any of
   cert-manager's configured issuer types/CAs with the [node agent]
 * Retrieving certificates without giving cert-manager access to your private
   keys
@@ -148,7 +148,7 @@ coming releases.
 The activation of `CertificateRequest` controllers are no longer behind a
 feature and are now instead enabled by default. This means that when requesting
 certificates using the `Certificate` resource the `CertificateRequest` resource
-will be used as the default and only way to honour the request. The addition of
+will be used as the default and only way to honor the request. The addition of
 this resource introduces the ability for much greater extension points to
 cert-manager, notably out-of-tree issuers, istio integrations, and experimental
 tooling such as a CSI driver. You can read more about the motivation and design
@@ -198,7 +198,7 @@ In v0.11, we've rewritten the ACME Order handling code to:
 
 Previously, we have issued a temporary certificate when a `Certificate` resource
 targeting an ACME issuer has been created. This would later be overridden once
-the real signed certificate has been issued. The reason for this behaviour was
+the real signed certificate has been issued. The reason for this behavior was
 to facilitate compatibility with ingress-gce however, many users have had trouble
 with this in the past and has led to lots of confusion - namely where
 applications would need restarting to take on the signed certificate rather than
@@ -209,7 +209,7 @@ requested. This can be done using the annotation
 `"cert-manager.io/issue-temporary-certificate": "true` on `Certifcate`
 resources.
 
-We've additionally changed the behaviour of ingress-shim to now add this new
+We've additionally changed the behavior of ingress-shim to now add this new
 annotation to `Certificate` resources if
 `"acme.cert-manager.io/http01-edit-in-place"` is present on the Ingress
 resource.

@@ -96,14 +96,14 @@ to our API types (i.e. moving ACME configuration from Certificate resources
 onto the Issuer resource). This has involved deprecating some old API fields.
 
 In a future release, we'll be removing these deprecated fields altogether,
-requiring users to update their manifests to utilise the new way to specify
+requiring users to update their manifests to utilize the new way to specify
 configuration.
 
 A number of steps have been taken in our own codebase to support this change,
 and in a future release, you'll be required to update **all** your manifests for
 this new format. Future API revisions (e.g. v1beta1 and v1) will be
 automatically converted using a Kubernetes conversion webhook (available in
-beta from Kubernetes 1.15 onwards).
+beta from Kubernetes 1.15 onward).
 
 ## Action Required
 

@@ -42,10 +42,10 @@ spec:
 
 Each issuer can specify multiple different DNS01 challenge providers, and
 it is also possible to have multiple instances of the same DNS provider on a
-single Issuer (e.g. two clouddns accounts could be set, each with their own
+single Issuer (e.g. two CloudDNS accounts could be set, each with their own
 name).
 
-For more information on utilising multiple solver types on a single Issuer,
+For more information on utilizing multiple solver types on a single Issuer,
 read the multiple-solver-types section.
 
 ## Setting nameservers for DNS01 self check
@@ -54,7 +54,7 @@ cert-manager will check the correct DNS records exist before attempting a DNS01
 challenge.  By default, the DNS servers for this check will be taken from
 `/etc/resolv.conf`.  If this is not desired (for example with multiple
 authoritative nameservers or split-horizon DNS), the cert-manager controller
-exposes a flag that allows you alter this behaviour:
+exposes a flag that allows you alter this behavior:
 
 Example usage::
 ```bash
@@ -108,19 +108,19 @@ a listing of available providers, their `.yaml` configurations, along with addit
 and provider specific notes regarding their usage.
 
 - [acme-dns](./acme-dns/)
-- [akamai](./akamai/)
-- [azuredns](./azuredns/)
-- [cloudflare](./cloudflare/)
+- [Akamai](./akamai/)
+- [AzureDNS](./azuredns/)
+- [CloudFlare](./cloudflare/)
 - [google](./google/)
-- [route53](./route53/)
-- [digitalocean](./digitalocean/)
-- [rfc2136](./rfc2136/)
+- [Route53](./route53/)
+- [DigitalOcean](./digitalocean/)
+- [RFC2136](./rfc2136/)
 
 ## Webhook
 
 cert-manager also supports out of tree DNS providers using an external webhook.
 Links to these supported providers along with their documentation are below:
-- [alidns-webhook](https://github.com/pragkent/alidns-webhook)
+- [AliDNS-Webhook](https://github.com/pragkent/alidns-webhook)
 - [cert-manager-webhook-dnspod](https://github.com/qqshfox/cert-manager-webhook-dnspod)
 - [cert-manager-webhook-selectel](https://github.com/selectel/cert-manager-webhook-selectel)
 - [cert-manager-webhook-softlayer](https://github.com/cgroschupp/cert-manager-webhook-softlayer)

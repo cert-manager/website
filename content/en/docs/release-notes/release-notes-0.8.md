@@ -5,7 +5,7 @@ weight: 80
 type: "docs"
 ---
 
-Following on from the v0.7.x releases and a series of pre-release candidates,
+Following on from the v0.7.x releases and a series of prerelease candidates,
 cert-manager v0.8.0 is available at last!
 
 This release packs in a tonne of stability improvements, as well as a whole load
@@ -19,7 +19,7 @@ certificate resources.
 
 As well as the new release, we've also finally created a project logo!
 For those of you who are attending KubeCon EU, we'll be handing out stickers
-at the Jetstack booth from tomorrow onwards!
+at the Jetstack booth from tomorrow onward!
 
 ## Action required
 The deployment manifests have now moved from being a part of our GitHub
@@ -28,7 +28,7 @@ check the installation guide for more information on where the manifests
 can now be found. This change does not affect the Helm chart!
 
 ## New ACME configuration format
-As part of stabilising our API surface, we've made a change to the way
+As part of stabilizing our API surface, we've made a change to the way
 you configure your ACME based certificates.
 
 Instead of Certificate resources containing an extra certificate.spec.acme
@@ -41,7 +41,7 @@ In order to make it easier for users to run cert-manager on platforms other
 than Kubernetes, we've improved our OpenShift support, including an official
 installation guide for users of OpenShift.
 
-If you use OpenShift in your organisation, check out the getting started section
+If you use OpenShift in your organization, check out the getting started section
 for more information on how to get up and running!
 
 ## Webhook based ACME DNS01 solver
@@ -74,7 +74,7 @@ have any issues!
 ## Changelog
 - make email address an optional field in ACME issuers (#1483, @DanielMorsing)
 - Fix bug when handling resources that have lastTransitionTime set to null (#1628, @munnerz)
-- Allow Openshift to install cert-manager chart (#1395, @JGodin-C2C)
+- Allow OpenShift to install cert-manager chart (#1395, @JGodin-C2C)
 - Update documentation for new 'solvers' field (#1623, @munnerz)
 - Fix issue where ingress-shim would not clear old configuration when migrating to the new 'solvers' field (#1620, @munnerz)
 - Add new issuer.spec.acme.solvers field that replaces certificate.spec.acme'in order to make all certificate resources portable between issuer types. The previously syntax is still supported to allow easy migration to the new configuration format. (#1450, @munnerz)

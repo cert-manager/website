@@ -7,7 +7,7 @@ type: "docs"
 
 cert-manager supports running on OpenShift in a similar manner to [Running on
 Kubernetes](../kubernetes/).  It runs within your OpenShift cluster as a series
-of deployment resources. It utilises
+of deployment resources. It utilities
 [CustomResourceDefinitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources)
 to configure Certificate Authorities and request certificates.
 
@@ -20,7 +20,7 @@ More information on configuring different Issuer types can be found in the
 [respective setup guides](../../configuration/).
 
 > **Warning**: You should not install multiple instances of cert-manager on a
-> single cluster. This will lead to undefined behaviour and you may be banned
+> single cluster. This will lead to undefined behavior and you may be banned
 > from providers such as Let's Encrypt.
 
 ## Login to your OpenShift cluster

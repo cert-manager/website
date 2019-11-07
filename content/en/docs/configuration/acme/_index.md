@@ -45,7 +45,7 @@ present this TXT record for your given DNS provider.
 ### Creating a basic ACME Issuer
 
 All ACME issuers follow a similar configuration structure - a clients `email`, a
-`server` url, a `privateKeySecretRef`, and one or more `solvers`. Below is an
+`server` URL, a `privateKeySecretRef`, and one or more `solvers`. Below is an
 example of a simple ACME issuer:
 
 ```yaml
@@ -73,7 +73,7 @@ spec:
 Solvers come in the form of [`dns01`](./dns01/) and
 [`http01`](./http01/) stanzas. For more information of how to configure
 this solver types, visit their respective documentation -
-[dns01](./dns01/), [http01](./http01/).
+[DNS01](./dns01/), [HTTP01](./http01/).
 
 
 ### Adding Multiple Solver Types
@@ -87,7 +87,7 @@ The `solvers` stanza has an optional `selector` field, that can be used to
 specify which `Certificate`s, and further, what DNS names *on those certificates*
 should be used to solve challenges.
 
-For example, to configure HTTP01 using nginx ingress as the default solver,
+For example, to configure HTTP01 using NGINX ingress as the default solver,
 along with a DNS01 solver that can be used for wildcard certificates:
 
 ```yaml
@@ -113,7 +113,7 @@ spec:
           use-cloudflare-solver: "true"
 ```
 
-In order to utilise the configured cloudflare DNS01 solver, you must add the
+In order to utilize the configured CloudFlare DNS01 solver, you must add the
 ``use-cloudflare-solver: "true"`` label to your `Certificate` resources.
 
 ### Using multiple solvers for a single certificate

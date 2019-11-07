@@ -5,7 +5,7 @@ weight: 30
 type: "docs"
 ---
 
-Configuring the AzureDNS DNS-01 Challenge for a Kubernetes cluster requires
+Configuring the AzureDNS DNS01 Challenge for a Kubernetes cluster requires
 creating a service principal in Azure.
 
 For security purposes, it is appropriate to utilize RBAC to ensure that you

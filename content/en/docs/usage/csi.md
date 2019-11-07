@@ -20,7 +20,7 @@ fly.
 A [CSI
 driver](https://github.com/container-storage-interface/spec/blob/master/spec.md)
 is a storage plugin that is deployed into your Kubernetes cluster that can
-honour volume requests specified on pods, just like those enabled by default such the
+honor volume requests specified on pods, just like those enabled by default such the
 secret, configmap, or hostpath volume drivers. In the case of the cert-manager
 CSI driver, it makes use of the ephemeral volume type, made beta as of
 [`v1.16`](https://kubernetes.io/docs/concepts/storage/volumes/#csi-ephemeral-volumes)
@@ -35,7 +35,7 @@ line with the deployment spec.
 > *Warning*: Use of the CSI driver is mostly intended for supporting a PKI of
 > your cluster and facilitating mTLS, and as such, a private Certificate
 > Authority issuer should be used - CA, Vault, and perhaps Venafi, or other
-> external issuers. It is *not* recomended to use public Certificate
+> external issuers. It is *not* recommended to use public Certificate
 > Authorities, for example Let's Encrypt, which hold strict rate limits on the
 > number of certificates that can be issued for a single domain. Like pods,
 > these certificate key pairs are designed to be non-immutable and can be
@@ -71,7 +71,7 @@ return a signed certificate.
 The resulting signed certificate and generated key will be written to that
 node's file system to be mounted to the pods file system. Since the driver needs
 access to the nodes file system it must be made privileged. Once mounted, the
-pod will begin execution with the unique private key and certiciate available in
+pod will begin execution with the unique private key and certificate available in
 its file system, as defined by its mount path.
 
 By default, the driver will keep track of certificates created in order to

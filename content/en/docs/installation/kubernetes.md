@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 cert-manager runs within your Kubernetes cluster as a series of deployment
-resources. It utilises
+resources. It utilities
 [`CustomResourceDefinitions`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources)
 to configure Certificate Authorities and request certificates.
 
@@ -19,12 +19,12 @@ configuring different Issuer types can be found in the [respective configuration
 guides](../../configuration/).
 
 
-> Note: From cert-manager v0.11.0 onwards, the minimum supported version of
+> Note: From cert-manager v0.11.0 onward, the minimum supported version of
 > Kubernetes is v1.11.0. Users still running Kubernetes v1.10 or below should
 > upgrade to a supported version before installing cert-manager.
 
 > **Warning**: You should not install multiple instances of cert-manager on a single
-> cluster. This will lead to undefined behaviour and you may be banned from
+> cluster. This will lead to undefined behavior and you may be banned from
 > providers such as Let's Encrypt.
 
 ## Installing with regular manifests
@@ -92,9 +92,9 @@ kubectl create clusterrolebinding cluster-admin-binding \
 As an alternative to the YAML manifests referenced above, we also provide an
 official Helm chart for installing cert-manager.
 
-### Pre-requisites
+### Prerequisites
 
-- Helm_ and Tiller installed (or alternatively, use `Tillerless Helm v2`_)
+- Helm and Tiller installed (or alternatively, use `Tillerless Helm v2`z)
 - [cluster-admin Privileges bound to the Tiller
   pod](https://github.com/helm/helm/blob/240e539cec44e2b746b3541529d41f4ba01e77df/docs/rbac.md#Example-Service-account-with-cluster-admin-role)
 

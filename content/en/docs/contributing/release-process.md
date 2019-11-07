@@ -50,7 +50,7 @@ $ mkdir -p design/release-notes/release-*X.Y*
 $ export GITHUB_TOKEN=*your-token*
 $ $GOPATH/bin/release-notes -release-version v*X.Y* -github-repo cert-manager -github-org jetstack -requiredAuthor "" -start-sha=$(git rev-parse *X.Y-1.0*) -end-sha=$(git rev-parse HEAD) -output design/release-notes/release-*X.Y*/draft-release-notes.md
 ```
-Add additional blurb, notable items and characterise Changelog.
+Add additional blurb, notable items and characterize Changelog.
 
 
 Finally, create a new tag taken from the release branch, e.g.`v0.5.0`.
@@ -100,6 +100,6 @@ $ mkdir -p design/release-notes/release-*X.Y*
 $ export GITHUB_TOKEN=*your-token*
 $ $GOPATH/bin/release-notes -release-version v*X.Y* -github-repo cert-manager -github-org jetstack -requiredAuthor "" -start-sha=$(git rev-parse *X.Y.Z-1*) -end-sha=$(git rev-parse release-*X.Y*) -output design/release-notes/release-*X.Y*/draft-release-notes-*Z*.md
 ```
-Add additional blurb, notable items and characterise Changelog.
+Add additional blurb, notable items and characterize Changelog.
 
 Finally, create a new tag taken from the release branch, e.g. `v0.5.1`.

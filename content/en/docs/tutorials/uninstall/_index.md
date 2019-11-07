@@ -11,4 +11,4 @@ two platforms is similar, although there are a number of extra notes to be aware
 of per-platform.
 
 - [Kubernetes](./kubernetes/)
-- [Openshift](./openshift/)
+- [OpenShift](./openshift/)

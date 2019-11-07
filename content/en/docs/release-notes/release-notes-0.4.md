@@ -72,8 +72,8 @@ Read up on how to get started with this new issuer type in the documentation.
 # Changelog
 ## Action Required
 - Check the acme issuer has the 'HTTP01' challenge type configured if in use. (#629, @groner)
-ACME http01 validation is no longer attempted using an
-Issuer/ClusterIssuer with no ACME http01 config. Note that the minimal
+ACME HTTP01 validation is no longer attempted using an
+Issuer/ClusterIssuer with no ACME HTTP01 config. Note that the minimal
 http01: {} config IS sufficient.
 
 If you rely on ACME http01 validation, you should check your issuers to make

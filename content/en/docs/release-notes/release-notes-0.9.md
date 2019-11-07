@@ -96,7 +96,7 @@ We have now switched to use the new POST-as-GET feature that was introduced
 into the latest version of the ACME spec a few months ago.
 
 If you are running your own ACME server, please ensure it supports POST-as-GET
-as we no longer supported the old behaviour.
+as we no longer supported the old behavior.
 
 ### ACME Issuer Solver Pod Template
 

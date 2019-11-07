@@ -45,7 +45,7 @@ our documentation - it's a difficult thing to get right, but it's imperative our
 clear for new users adopting the project.
 
 ## New ACME DNS01 providers
-When cert-manager was first released, only CloudDNS and Cloudflare DNS01 providers were
+When cert-manager was first released, only CloudDNS and CloudFlare DNS01 providers were
 supported when solving ACME challenges.
 
 As new users, each using their own DNS providers, have adopted the project; there has been
@@ -56,7 +56,7 @@ With this release, we support the following DNS providers when solving ACME DNS0
 - Akamai FastDNS (#322, @twz123)
 - Amazon Route53
 - Azure DNS (#246, @mwieczorek)
-- Cloudflare
+- CloudFlare
 - Google CloudDNS
 There are pull requests in flight to add support for:
 - DNSPod (#486, @hemslo)
@@ -75,7 +75,7 @@ Please check the 'upgrading from 0.2 to 0.3' guide in the Administrative Tasks s
 - Use ConfigMaps for leader election (#327, @mikebryant):
 - *Action required*: Before upgrading, scale the cert-manager Deployment to 0, to avoid two controllers attempting to operate on the same resources
 
-- Remove support for ACMEv1 in favour of ACMEv2 (#309, @munnerz):
+- Remove support for ACMEv1 in favor of ACMEv2 (#309, @munnerz):
   *Action required*: As this release drops support for ACMEv1, all Issuer resources that use ACMEv1 endpoints (e.g. existing Let's Encrypt Issuers) will need updating to use equivalent ACMEv2 endpoints. (TODO: link to docs guide)
 
 - Remove ingress-shim and link it into cert-manager itself (#502, @munnerz)
@@ -86,12 +86,12 @@ Please check the 'upgrading from 0.2 to 0.3' guide in the Administrative Tasks s
 
 ## Other notable changes
 ### ACME Issuer
-- Add ACME DNS-01 provider for Akamai FastDNS (#322, @twz123)
+- Add ACME DNS01 provider for Akamai FastDNS (#322, @twz123)
 - Add a meaningful user agent to the ACME client to help diagnosing abusive traffic patterns (#422, @jsha)
 - Issuers using the AWS Route53 solver may attempt to find credentials using the environment, EC2 IAM Role, and other sources available to the cert-manager controller. This behavior is on by default for cluster issuers and off by default for issuers. This behavior may be enabled or disabled for all issuers or cluster issuers using the --issuer-ambient-credentials and --cluster-issuer-ambient-credentials flags on the cert-manager controller. (#363, @euank)
 - Add limits to http validation pod (#408, @kragniz)
-- The ACME dns01 solver now trims excess whitespace from AWS credentials (#391, @euank)
-- ACME DNS-01 challenge mechanism for Azure DNS (#246, @mwieczorek)
+- The ACME DNS01 solver now trims excess whitespace from AWS credentials (#391, @euank)
+- ACME DNS01 challenge mechanism for Azure DNS (#246, @mwieczorek)
 - Fix panic when ACME server returns an error other than HTTP Status Conflict during registration (#237, @munnerz)
 ### CA Issuer
 - Add the Key Encipherment purpose to CA Issuer generated certificates (#488, @bradleybluebean)

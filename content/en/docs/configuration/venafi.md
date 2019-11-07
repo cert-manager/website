@@ -82,7 +82,7 @@ You can then create the Issuer using `kubectl create -`:
 $ kubectl create -f venafi-cloud-issuer.yaml
 ```
 
-Verify the `Issuer` has been initialised correctly using `kubectl describe`:
+Verify the `Issuer` has been initialized correctly using `kubectl describe`:
 
 ```bash
 $ kubectl describe issuer cloud-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
@@ -158,7 +158,7 @@ You can then create the `Issuer` using `kubectl create -f`:
 $ kubectl create -f venafi-tpp-issuer.yaml
 ```
 
-Verify the `Issuer` has been initialised correctly using `kubectl describe`:
+Verify the `Issuer` has been initialized correctly using `kubectl describe`:
 
 ```bash
 $ kubectl describe issuer tpp-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'

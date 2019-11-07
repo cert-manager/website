@@ -94,7 +94,7 @@ You can get more details about nginx-ingress and how it works from the
 
 To deploy ingress-nginx using an ELB to expose the service, run the following:
 
-Deploy the AWS specific pre-requisite manifest
+Deploy the AWS specific prerequisite manifest
 ```bash
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/aws/service-nlb.yaml
 ```

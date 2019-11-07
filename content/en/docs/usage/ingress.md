@@ -57,7 +57,7 @@ trigger `Certificate` resources to be automatically created:
   your `Ingress resides`, as `ClusterIssuers` are non-namespaced resources.
 
 - `kubernetes.io/tls-acme: "true"`: this annotation requires additional
-  configuration of the ingress-shim (see below(TODO @joshval: add sub-title
+  configuration of the ingress-shim (see below(TODO @joshvanl: add sub-title
   link)). Namely, a default issuer must be specified as arguments to the
   ingress-shim container.
 
@@ -78,7 +78,7 @@ trigger `Certificate` resources to be automatically created:
   certificate](../certificate/) to be set on
   the resulting `Secret` until the final signed certificate has been returned.
   This is useful for keeping compatibility with the `ingress-gce` component.
-  TODO: fix link #Teporary_Certificates_whilst_Issuing
+  TODO: fix link #Temporary Certificates Whilst Issuing
 
 ## Optional Configuration
 

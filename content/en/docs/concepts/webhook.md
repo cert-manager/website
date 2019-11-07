@@ -5,11 +5,11 @@ weight: 10
 type: "docs"
 ---
 
-cert-manager makes use of extending the Kubernets API server using a Webhook
+cert-manager makes use of extending the Kubernetes API server using a Webhook
 server to provide [dynamic admission
 control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)
 over cert-manager resources. This means that cert-manager benefits from most of
-the same behaviour that core Kubernetes resource have. The webhook has three
+the same behavior that core Kubernetes resource have. The webhook has three
 main functions:
 
 - [ValidatingAdmissionWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook):

@@ -7,7 +7,7 @@ type: "docs"
 
 cert-manager has the concept of `Certificate`s that define a desired X.509
 certificate. A `Certificate` is a namespaced resource that references an
-`Issuer` or `ClusterIssuer` that determine what will be honouring the
+`Issuer` or `ClusterIssuer` that determine what will be honoring the
 certificate request.
 
 When a `Certificate` is created, a corresponding `CertificateRequest` resource is

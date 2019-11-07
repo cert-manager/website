@@ -58,7 +58,7 @@ An [AppRole](https://www.vaultproject.io/docs/auth/approle.html) is a method of
 authenticating to vault through use of it's internal role policy system. This
 authentication method requires that the issuer has possession of the `SecretID`
 secret key, the `RoleID` of the role to assume, and the app role path. Firstly,
-the secret ID key must be stored within a Kuberetes `Secret` that resides in the
+the secret ID key must be stored within a Kubernetes `Secret` that resides in the
 same namespace as the issuer, or otherwise inside the `Cluster Resource
 Namespace` in the case of a `ClusterIssuer`.
 

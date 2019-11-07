@@ -26,25 +26,25 @@ integration and expose more of the Venafi platform's advanced functionality.
 This release introduces support for injecting CA bundles into Kubernetes
 {Validating,Mutating}WebhookConfiguration & APIService resources.
 
-You can utilise the new controller by adding the certmanager.k8s.io/inject-ca-from
+You can utilize the new controller by adding the certmanager.k8s.io/inject-ca-from
 annotation to your webhook and APIService resources.
 
 This was needed in order to improve our own deployment of the 'webhook'
 component as part of this release.
 
 ### Improved webhook deployment
-The v0.6 release utilised an additional ca-sync CronJob resource that allowed
+The v0.6 release utilized an additional ca-sync CronJob resource that allowed
 us to secure the webhook component automatically using cert-manager itself.
 
 Thanks to the new cainjector controller described above, we have now removed
-this CronJob altogether in favour of using the far more reliable controller.
+this CronJob altogether in favor of using the far more reliable controller.
 
 ### Experimental ARM support
 Support for ARM was adding as part of this release (#1212). We do not currently
 have automated testing using ARM platforms, so this feature is still marked
 experimental.
 
-To utilise the new ARM support, you'll need to update your manifests and append
+To utilize the new ARM support, you'll need to update your manifests and append
 the architecture to the image name (i.e. quay.io/jetstack/cert-manager-controller-arm64:v0.7.0).
 
 ### Easier debugging of failing ACME challenges
@@ -72,9 +72,9 @@ kubectl describe.
 - Publish arm32 and arm64 images for all cert-manager components (#1212, @munnerz)
 - Extend ACME self check to check CAA records (#1325, @DanielMorsing)
 - Bump Kubernetes apimachinery dependencies to v1.10.12 (#1344, @munnerz)
-- Increase acmesolver default cpu resource limit to 100m (#1335, @munnerz)
+- Increase acmesolver default CPU resource limit to 100m (#1335, @munnerz)
 - Fix potential race when updating secret resource (#1318, @munnerz)
-- Fix bug causing certficates to be re-issued endlessly in certain edge cases (#1280, @munnerz)
+- Fix bug causing certificates to be re-issued endlessly in certain edge cases (#1280, @munnerz)
 - Fix bug when specify certificate keyAlgorithm without an explicit keySize (#1309, @munnerz)
 - Bump Go version to 1.11.5 (#1304, @munnerz)
 - Fix typo in SelfSigned Issuer in webhook deployment manifests (#1294, @munnerz)

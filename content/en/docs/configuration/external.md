@@ -9,7 +9,7 @@ cert-manager supports external issuer types. These external issuer types are
 issuers that are not support by cert-manager by default, or are 'out of tree',
 however are treated the exact same as any other internal issuer type. External
 issuer types are typically installed by deploying another pod into your cluster
-that will watch `CertificateRequest` resources and honour them based on
+that will watch `CertificateRequest` resources and honor them based on
 configured `Issuer` resources. These issuer type exist outside of the
 `cert-manager.io` group.
 

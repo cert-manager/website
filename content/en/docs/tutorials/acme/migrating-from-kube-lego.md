@@ -8,7 +8,7 @@ type: "docs"
 [kube-lego](https://github.com/jetstack/kube-lego) is an older Jetstack project
 for obtaining TLS certificates from Let's Encrypt (or another ACME server).
 
-Since cert-managers release, kube-lego has been gradually deprecated in favour
+Since cert-managers release, kube-lego has been gradually deprecated in favor
 of this project. There are a number of key differences between the two:
 
 | Feature                                   | kube-lego                        | cert-manager          |
@@ -19,7 +19,7 @@ of this project. There are a number of key differences between the two:
 | Debugging                                 | Look at logs                     | Kubernetes Events API |
 | Multi-tenancy                             | Not supported                    | Supported             |
 | Distinct issuance sources per Certificate | Not supported                    | Supported             |
-| Ingress controller support (ACME)         | GCE, nginx                       | All                   |
+| Ingress controller support (ACME)         | GCE, NGINX                       | All                   |
 
 This guide will walk through how you can safely migrate your kube-lego
 installation to cert-manager, without service interruption.

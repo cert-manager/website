@@ -7,7 +7,7 @@ type: "docs"
 
 ## Issuing an ACME certificate using DNS validation
 
-> Todo: This guide needs rewriting to be clearer, splitting into sections and
+> TODO: This guide needs rewriting to be clearer, splitting into sections and
 > potentially rewriting altogether.
 
 cert-manager can be used to obtain certificates from a CA using the
@@ -16,7 +16,7 @@ protocol.  The ACME protocol supports various challenge mechanisms which are
 used to prove ownership of a domain so that a valid certificate can be issued
 for that domain.
 
-One such challenge mechanism is DNS-01. With a DNS-01 challenge, you prove
+One such challenge mechanism is DNS01. With a DNS01 challenge, you prove
 ownership of a domain by proving you control its DNS records.
 This is done by creating a TXT record with specific content that proves you
 have control of the domains DNS records.
@@ -88,12 +88,12 @@ change this email address to a valid one that you own. It is commonly used to
 send expiry notices when your certificates are coming up for renewal. The
 generated private key is stored in a Secret named `letsencrypt-staging`.
 
-The `dns01` stanza contains a list of DNS-01 providers that can be used to
+The `dns01` stanza contains a list of DNS01 providers that can be used to
 solve DNS challenges. Our Issuer defines two providers. This gives us a choice
 of which one to use when obtaining certificates.
 
 More information about the DNS provider configuration, including a list of
-supported providers, can be found [in the dns01 reference docs
+supported providers, can be found [in the DNS01 reference docs
 supported-dns01-providers](../../../configuration/acme/dns01/).
 
 Once we have created the above Issuer we can use it to obtain a certificate.
