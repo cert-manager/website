@@ -40,8 +40,8 @@ echo "+++ Running spell check"
   --en-us \
   --ignore-numbers \
   --ignore-acronyms \
-  content/**/*.md \
-  content/**/*.html \
-  _layouts/*.html \
-  _includes/*.html \
-  *.html
+  "content/**/*.md" \
+  "content/**/*.html" \
+  "_layouts/*.html" \
+  "_includes/*.html" \
+  "*.html"
