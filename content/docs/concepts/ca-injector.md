@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 The cert-manager CA injector controller is responsible for injecting the two CA
-bundles above into the [webhook's](./webhook.md)
+bundles above into the [webhook's](../webhook/index.html)
 `ValidatingWebhookConfiguration` and `APIService` resource in order to allow the
 Kubernetes apiserver to 'trust' the webhook apiserver.
 

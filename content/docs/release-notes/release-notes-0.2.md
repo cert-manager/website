@@ -1,3 +1,10 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.2"
+weight: 80
+type: "docs"
+---
+
 ## Changelog since v0.1.0
 ### Action Required
 - Move to 'jetstack' organisation. Action required: this will require updating your existing deployments to point to the new image repository, as new tags will not be pushed to the old 'jetstackexperimental/cert-manager-controllerrepository. Ahelm upgrade` should take care of this. (#145, @munnerz)

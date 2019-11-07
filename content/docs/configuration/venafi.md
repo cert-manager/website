@@ -29,7 +29,7 @@ You can configure your `Issuer` resource to either issue certificates only
 within a single namespace, or cluster-wide (using a `ClusterIssuer` resource).
 For more information on the distinction between `Issuer` and `ClusterIssuer`
 resources, read the [issuer vs
-clusterissuer](../concepts/issuers/clusterissuer_vs_issuer.md) section.
+clusterissuer](../../concepts/issuer/index.html) section.
 
 ### Creating a Venafi Cloud Issuer
 
@@ -91,7 +91,7 @@ $ kubectl describe issuer cloud-venafi-issuer --namespace='NAMESPACE OF YOUR ISS
 You are now ready to issue certificates using the newly provisioned Venafi
 Issuer.
 
-Read the [Issuing Certificates](../usage/issuer_certificates.md) document for
+Read the [Issuing Certificates](../../usage/certificate/index.html) document for
 more information on how to create Certificate resources.
 
 
@@ -167,5 +167,5 @@ $ kubectl describe issuer tpp-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUE
 You are now ready to issue certificates using the newly provisioned Venafi
 Issuer.
 
-Read the [Issuing Certificates](<../usage/issuing_certificates.md) document for
+Read the [Issuing Certificates](../../usage/certificate/index.html) document for
 more information on how to create Certificate resources.

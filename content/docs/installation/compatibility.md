@@ -29,7 +29,7 @@ plane nodes in the [GKE
 docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules).
 
 Alternatively, you can read how to [disable the webhook
-component](./compatability#Diabling_Webhook) below.
+component]#Diabling_Webhook below. TODO: fix link
 
 ## Disabling Webhook
 
@@ -73,7 +73,7 @@ file located in the deploy directory.
 This is a destructive operation, as it will remove the CustomResourceDefinition
 resources, causing your configured Issuers, Certificates etc to be deleted.
 
-You should first [backup your configuration](../tutorials/backup.md) before
+You should first [backup your configuration](../../tutorials/backup/index.html) before
 running the following commands.
 
 To re-install cert-manager without the webhook, run:
@@ -84,4 +84,4 @@ $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0
 ```
 
 Once you have re-installed cert-manager, you should then [restore your
-configuration](../tutorials/backup.md)
+configuration](../../tutorials/backup/index.html).

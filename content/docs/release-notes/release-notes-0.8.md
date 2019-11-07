@@ -1,3 +1,10 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.8"
+weight: 80
+type: "docs"
+---
+
 Following on from the v0.7.x releases and a series of pre-release candidates,
 cert-manager v0.8.0 is available at last!
 

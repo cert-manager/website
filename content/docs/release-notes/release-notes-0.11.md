@@ -1,3 +1,10 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.11"
+weight: 80
+type: "docs"
+---
+
 The v0.11 release is a significant milestone for the cert-manager project, and
 is full of new features.
 We are making a number of changes to our CRDs in a backwards incompatible way,

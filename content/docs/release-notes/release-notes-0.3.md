@@ -1,3 +1,11 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.3"
+weight: 80
+type: "docs"
+---
+
+
 # Highlights
 This is a big feature filled release of cert-manager, and the first since moving to a
 more frequent release model.

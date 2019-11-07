@@ -16,7 +16,7 @@ Kubernetes.
 Once cert-manager has been deployed, you must configure Issuer or ClusterIssuer
 resources which represent certificate authorities.  More information on
 configuring different Issuer types can be found in the [respective configuration
-guides](../configuration/issuers.md).
+guides](../../configuration/index.html).
 
 
 > Note: From cert-manager v0.11.0 onwards, the minimum supported version of
@@ -55,7 +55,7 @@ resource is deployed to validate cert-manager resources we will create after
 installation. No mutating webhooks are currently implemented.
 
 You can read more about the webhook on the [webhook
-document](../concepts/webhook.md).
+document](../../concepts/webhook/index.html).
 
 We can now go ahead and install cert-manager. All resources
 (the CustomResourceDefinitions, cert-manager, and the webhook component)
@@ -172,7 +172,7 @@ You should see the `cert-manager`, `cert-manager-cainjector`, and
 It may take a minute or so for the TLS assets required for the webhook to
 function to be provisioned. This may cause the webhook to take a while longer
 to start for the first time than other pods. If you experience problems, please
-check the [FAQ guide](../faq/_index.).
+check the [FAQ guide](../../faq/index.html).
 
 The following steps will confirm that cert-manager is set up correctly and able
 to issue basic certificate types:
@@ -244,14 +244,14 @@ $ kubectl delete -f test-resources.yaml
 If all the above steps have completed without error, you are good to go!
 
 If you experience problems, please check the
-[FAQ](../faq/_index.md).
+[FAQ](../../faq/index.html).
 
 ## Configuring your first Issuer
 
 Before you can begin issuing certificates, you must configure at least one
 Issuer or ClusterIssuer resource in your cluster.
 
-You should read the [Setting up Issuers](../configuration/_index.md) guide to
+You should read the [Setting up Issuers](../../configuration/index.html) guide to
 learn how to configure cert-manager to issue certificates from one of the
 supported backends.
 
@@ -296,4 +296,4 @@ guide](https://github.com/bitnami/kube-prod-runtime/blob/master/docs/install.md)
 ### Debugging installation issues
 
 If you have any issues with your installation, please refer to the
-[FAQ](<../faq/_index.md).
+[FAQ](../../faq/index.html).

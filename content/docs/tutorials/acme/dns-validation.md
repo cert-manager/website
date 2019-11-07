@@ -23,7 +23,7 @@ have control of the domains DNS records.
 
 The following Issuer defines the necessary information to enable DNS validation.
 You can read more about the Issuer resource in the [Issuer
-docs](../../configuration/index.md).
+docs](../../../configuration/index.html).
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -94,7 +94,7 @@ of which one to use when obtaining certificates.
 
 More information about the DNS provider configuration, including a list of
 supported providers, can be found [in the dns01 reference docs
-supported-dns01-providers](../../configuration/acme/dns01/_index.md).
+supported-dns01-providers](../../../configuration/acme/dns01/index.html).
 
 Once we have created the above Issuer we can use it to obtain a certificate.
 
@@ -121,7 +121,7 @@ in your YAML resources, to avoid formatting issues.  If you specify both
 `example.com` and `*.example.com` on the same Certificate, it will take slightly
 longer to perform validation as each domain will have to be validated one after
 the other.  You can learn more about the Certificate resource in the
-[docs](../../usage/_index.md).  If the certificate is obtained successfully, the
+[docs](../../../usage/index.html).  If the certificate is obtained successfully, the
 resulting key pair will be stored in a secret called `example-com-tls` in the
 same namespace as the Certificate.
 
@@ -136,7 +136,7 @@ reference a `ClusterIssuer`, which is a cluster-scoped version of an Issuer, you
 must add `kind: ClusterIssuer` to the `issuerRef` stanza.
 
 For more information on `ClusterIssuers`, read the
-[issuer concepts](../../concepts/issuers.md).
+[issuer concepts](../../../concepts/issuer/index.html).
 
 The `acme` stanza defines the configuration for our ACME challenges. Here we
 have defined the configuration for our DNS challenges which will be used to

@@ -1,3 +1,10 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.9"
+weight: 80
+type: "docs"
+---
+
 The v0.9 release is one of our biggest yet, packed with new features and bug
 fixes!
 

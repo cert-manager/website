@@ -72,7 +72,8 @@ You should see output similar to the above, with all pods in a Running state.
 ## Installing cert-manager
 
 There are no special requirements to note when installing cert-manager on EKS,
-so the regular [`running on Kubernetes`](../installation/kubernetes.md) guide
+so the regular [`running on
+Kubernetes`](../../../installation/kubernetes/index.html) guide
 can be used to install cert-manager.
 
 Please walk through the installation guide and return to this step once you
@@ -388,7 +389,7 @@ correctly, we can begin requesting certificates which can be used by Kubernetes
 applications.
 
 Full information on how to specify and request Certificate resources can be
-found in the [Issuing certificates](../usage/certificates.md) guide.
+found in the [Issuing certificates](../../../usage/certificate/index.html) guide.
 
 For now, we will create a basic x509 Certificate that is valid for our domain,
 `example.com`:

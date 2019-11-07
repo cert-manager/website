@@ -6,13 +6,13 @@ type: "docs"
 ---
 
 All of cert-manager's development is done via
-[GitHub](github.com/jetstack/cert-manager) which contains code, issues and pull
+[GitHub](https://github.com/jetstack/cert-manager) which contains code, issues and pull
 requests.
 
 ## Bugs
 
 All bugs should be tracked as issues inside the
-[GitHub](github.com/jetstack/cert-manager/issues) repository. Issues should then be
+[GitHub](https://github.com/jetstack/cert-manager/issues) repository. Issues should then be
 attached with the `kind/bug` tag. This may then be assigned a priority and
 milestone to be addressed in a future release.
 
@@ -22,19 +22,19 @@ discovered, the faster it can be resolved.
 Critical bug fixes are typically backported to the current minor stable release.
 
 > Note: If you are simply looking for _troubleshooting_ then you should post
-> your question to the community `cert-manager` [slack channel](slack.k8s.io).
+> your question to the community `cert-manager` [slack channel](https://slack.k8s.io).
 > Please also check that the bug has not already been filed by searching for key
 > terms in the issue search bar.
 
 ## Features
 
 Feature requests should be created as
-[GitHub](github.com/jetstack/cert-manager/issues) issues. They should contain
+[GitHub](https://github.com/jetstack/cert-manager/issues) issues. They should contain
 clear motivation for the feature you wish to see as well as some possible
 solutions for how it can be implemented.
 
 > Note: It is often a good idea to bring your feature request up on the
-> community `cert-manger-dev` [slack channel](slack.k8s.io) to discuss whether
+> community `cert-manger-dev` [slack channel](https://slack.k8s.io) to discuss whether
 > the feature request has already been made or is aligned with the project's
 > priorities.
 

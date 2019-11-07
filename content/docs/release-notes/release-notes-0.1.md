@@ -1,3 +1,10 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.1"
+weight: 80
+type: "docs"
+---
+
 This is the first release of cert-manager. It is currently still not in a production ready state, and features are subject to change.
 
 Notable features:

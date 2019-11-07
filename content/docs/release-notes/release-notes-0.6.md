@@ -1,3 +1,10 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.6"
+weight: 80
+type: "docs"
+---
+
 The long-awaited v0.6 release is here! This release includes a huge number of improvements, bug fixes and new features.
 
 We've made a big focus on the ACME implementation, as well as improving the general user-experience when requesting certificates.

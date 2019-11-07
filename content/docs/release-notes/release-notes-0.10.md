@@ -1,3 +1,10 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.10"
+weight: 80
+type: "docs"
+---
+
 The v0.10 release comes quick on the heels of v0.9. It continues the work on
 the new CertificateRequest resource type, moving us towards a world where
 out-of-tree Issuer types are first class citizens.

@@ -1,3 +1,10 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.4"
+weight: 80
+type: "docs"
+---
+
 This is the next feature release of cert-manager, containing a number of additions
 that have been in the works for a while now.
 

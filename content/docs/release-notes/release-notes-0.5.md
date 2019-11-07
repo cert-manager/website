@@ -1,3 +1,10 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.5"
+weight: 80
+type: "docs"
+---
+
 # Highlights
 ## Resource validation webhook
 Following the v0.4.0 release, we have now added a 'validating webhook' for our API resources. This will help prevent invalid configurations being submitted to the API server.

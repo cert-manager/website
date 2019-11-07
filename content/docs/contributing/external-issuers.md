@@ -5,12 +5,13 @@ weight: 70
 type: "docs"
 ---
 
-cert-manager offers a number of [core issuer types](../configuration/_index.md)
-that represent certificate authorities that can sign certificates when
-requested. As of v0.11, cert-manager also supports out-of-tree external issuers
-natively, and treats them the same as in-tree issuer types. For more information
-on how to install and configure external issuer types, read the documentation
-[here](../configuration/external.md).
+cert-manager offers a number of [core issuer
+types](../../configuration/index.html) that represent certificate authorities
+that can sign certificates when requested. As of v0.11, cert-manager also
+supports out-of-tree external issuers natively, and treats them the same as
+in-tree issuer types. For more information on how to install and configure
+external issuer types, read the documentation
+[here](../../configuration/external/index.html).
 
 ## Concepts
 
@@ -43,7 +44,7 @@ controllers, such as the `Certificate` controller, that the resource is ready to
 be consumed. Conversely, if the `CertificateRequest` fails, it is as important
 to mark the resource as such, as this will also be used to signal to higher
 order controllers. You can read the valid condition sates
-[here](../concepts/certificaterequest.md#Conditions).
+[here](../../concepts/certificaterequest/index.html).TODO: add '#Conditions'
 
 ## Implementation
 
@@ -53,6 +54,6 @@ to implement your external issuer controller. This makes it very simple to
 generate `CustomResourceDefinitions` and gives you a lot of controller
 functionality out of the box. If you have further questions on how to implement
 an external issuer controller, it is best to reach out of the #cert-manager
-[slack](slack.k8s.io) channel, or to join the weekly community calls which you
+[slack](https://slack.k8s.io) channel, or to join the weekly community calls which you
 will be invited to once you join the [Google
 Group](https://groups.google.com/forum/#!forum/cert-manager-dev).

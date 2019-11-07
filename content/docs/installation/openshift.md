@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 cert-manager supports running on OpenShift in a similar manner to [Running on
-Kubernetes](./kubernetes.md).  It runs within your OpenShift cluster as a series
+Kubernetes](../kubernetes/index.html).  It runs within your OpenShift cluster as a series
 of deployment resources. It utilises
 [CustomResourceDefinitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources)
 to configure Certificate Authorities and request certificates.
@@ -17,7 +17,7 @@ OpenShift.
 Once cert-manager has been deployed, you must configure Issuer or ClusterIssuer
 resources which represent certificate authorities.
 More information on configuring different Issuer types can be found in the
-[respective setup guides](../configuration/issuers.md).
+[respective setup guides](../../configuration/index.html).
 
 > **Warning**: You should not install multiple instances of cert-manager on a
 > single cluster. This will lead to undefined behaviour and you may be banned
@@ -51,7 +51,7 @@ an
 This can cause issues when uninstalling cert-manager if the API service still
 exists but the webhook is no longer running as the API server is unable to reach
 the validating webhook. Ensure to follow the documentation when [uninstalling
-cert-manager](./_index.md).
+cert-manager](../index.html).
 
 The webhook enables cert-manager to implement validation and mutating webhooks
 on cert-manager resources. A
@@ -60,7 +60,7 @@ resource is deployed to validate cert-manager resources we will create after
 installation.  No mutating webhooks are currently implemented.
 
 You can read more about the webhook on the [webhook
-document](<../concepts/webhook.md).
+document](../../concepts/webhook/index.html).
 
 We can now go ahead and install cert-manager. All resources
 (the CustomResourceDefinitions, cert-manager, and the webhook component)
@@ -80,11 +80,11 @@ $ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases
 Before you can begin issuing certificates, you must configure at least one
 Issuer or ClusterIssuer resource in your cluster.
 
-You should read the [Setting up Issuers](../configuration/issuers.md) guide to
+You should read the [Setting up Issuers](../../configuration/index.html) guide to
 learn how to configure cert-manager to issue certificates from one of the
 supported backends.
 
 ## Debugging installation issues
 
 If you have any issues with your installation, please refer to the
-[FAQ](../faq/_index.md).
+[FAQ](../../faq/index.html).

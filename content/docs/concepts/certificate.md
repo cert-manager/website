@@ -51,4 +51,4 @@ A Certificate can alternatively reference a ClusterIssuer which is
 non-namespaced and so can be referenced from any namespace.
 
 You can read more on how to configure your certificate resources
-[here](../usage/certificates.md).
+[here](../../usage/certificate/index.html).

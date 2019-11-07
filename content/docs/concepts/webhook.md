@@ -34,7 +34,7 @@ cert-manager controller and CA injector components.
 
 In order for the API server to communicate with the webhook component, the
 webhook requires a TLS certificate that the apiserver is configured to trust.
-This is created by the [ca-injector](./ca-injector.md) and is implemented by the
+This is created by the [ca-injector](../ca-injector/index.html) and is implemented by the
 following two Secrets:
 
 - `secret/cert-manager-webhook-ca`: A self-signed root CA certificate which is
@@ -44,6 +44,8 @@ following two Secrets:
 
 If errors occur around the webhook but the webhook is running then the webhook
 is most likely not reachable from the API server. In this case, ensure that the
-API server can communicate with the webhook by following the [GKE private cluster
-explanation](../installating/compatability.md#GKE). You may also want to
-[disable the webhook completely](../installating/compatability.md#Disabling_Webhook).
+API server can communicate with the webhook by following the [GKE private
+cluster explanation](/docs/installation/compatibility/). TODO: add back in
+'#GKE'. You may also want to
+[disable the webhook
+completely](/docs/installation/compatibility/). TODO: add back in '/#disabling-webhook'.

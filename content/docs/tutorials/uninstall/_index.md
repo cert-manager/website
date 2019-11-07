@@ -10,5 +10,5 @@ cert-manager supports running on [Kubernetes](https://kubernetes.io) and
 two platforms is similar, although there are a number of extra notes to be aware
 of per-platform.
 
-- [Kubernetes](./kubernetes.md)
-- [Openshift](./openshift.md)
+- [Kubernetes](./kubernetes/index.html)
+- [Openshift](./openshift/index.html)

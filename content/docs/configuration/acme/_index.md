@@ -24,7 +24,7 @@ domains they do not own and as a result, fraudulently impersonate another's
 site. As detailed in the [RFC8555](https://tools.ietf.org/html/rfc8555),
 cert-manager offers two challenge validations - HTTP01 and DNS01 challenges.
 
-[HTTP01](./http01/index.md) challenges are completed by presenting a computed
+[HTTP01](./http01/index.html) challenges are completed by presenting a computed
 key, that should be present at a HTTP URL endpoint that is rotatable over the
 internet. This URL will use the domain name requested for the certificate. Once
 the ACME server is able to get this key from this URL over the internet, the
@@ -33,7 +33,7 @@ challenge is created, cert-manager will automatically configure your cluster
 ingress to route traffic for this URL to a small web server that presents this
 key.
 
-[DNS01](./dns01/index.md) challenges are completed by providing a computed key
+[DNS01](./dns01/index.html) challenges are completed by providing a computed key
 that is present at a DNS TXT record. Once this TXT record has been propagated
 across the internet, the ACME server can successfully retrieve this key via a
 DNS lookup and can validate that the client owns the domain for the requested
@@ -70,10 +70,10 @@ spec:
           class: nginx
 ```
 
-Solvers come in the form of [`dns01`](./dns01/index.md) and
-[`http01`](./http01/index.md) stanzas. For more information of how to configure
+Solvers come in the form of [`dns01`](./dns01/index.html) and
+[`http01`](./http01/index.html) stanzas. For more information of how to configure
 this solver types, visit their respective documentation -
-[dns01](./dns01/index.md), [http01](./http01/index.md).
+[dns01](./dns01/index.html), [http01](./http01/index.html).
 
 
 ### Adding Multiple Solver Types

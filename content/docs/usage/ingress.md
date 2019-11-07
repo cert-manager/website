@@ -75,9 +75,10 @@ trigger `Certificate` resources to be automatically created:
   This annotation will also add the annotation
   `"cert-manager.io/issue-temporary-certificate": "true"` onto created
   certificates which will cause a [temporary
-  certificate](./certificate.md#Teporary_Certificates_whilst_Issuing) to be set on
+  certificate](../certificate/index.html) to be set on
   the resulting `Secret` until the final signed certificate has been returned.
   This is useful for keeping compatibility with the `ingress-gce` component.
+  TODO: fix link #Teporary_Certificates_whilst_Issuing
 
 ## Optional Configuration
 
@@ -100,4 +101,4 @@ reference the `ClusterIssuer` `letsencrypt-prod` for all Ingresses that have a
 `kubernetes.io/tls-acme: "true"` annotation.
 
 For more information on deploying cert-manager, read the [installation
-guide](../installation/index.md).
+guide](../../installation/index.html).

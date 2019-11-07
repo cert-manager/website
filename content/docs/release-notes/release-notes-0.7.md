@@ -1,3 +1,10 @@
+---
+title: "Release Notes"
+linkTitle: "release-notes-0.7"
+weight: 80
+type: "docs"
+---
+
 ## Action Required
 The Helm chart rbac.create option has moved to be global.rbac.create.
 Users of the Helm chart will need to update their install overrides to use
