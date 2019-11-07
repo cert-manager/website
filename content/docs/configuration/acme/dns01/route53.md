@@ -1,6 +1,6 @@
 ---
 title: "Route53"
-linkTitle: "route53"
+linkTitle: "Route53"
 weight: 30
 type: "docs"
 ---

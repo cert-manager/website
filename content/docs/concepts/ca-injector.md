@@ -1,6 +1,6 @@
 ---
 title: "CA Injector"
-linkTitle: "ca-injector"
+linkTitle: "CA Injector"
 weight: 10
 type: "docs"
 ---

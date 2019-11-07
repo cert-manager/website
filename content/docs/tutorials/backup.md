@@ -1,6 +1,6 @@
 ---
 title: "Backup and Restore Resources"
-linkTitle: "backup-and-restore-resources"
+linkTitle: "Backup and Restore Resources"
 weight: 10
 type: "docs"
 ---

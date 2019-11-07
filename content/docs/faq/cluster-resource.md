@@ -1,6 +1,6 @@
 ---
 title: "Cluster Resource Namespace"
-linkTitle: "cluster-resource-namespace"
+linkTitle: "Cluster Resource Namespace"
 weight: 60
 type: "docs"
 ---

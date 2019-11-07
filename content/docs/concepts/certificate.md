@@ -1,6 +1,6 @@
 ---
 title: "Certificate"
-linkTitle: "certificate"
+linkTitle: "Certificate"
 weight: 10
 type: "docs"
 ---

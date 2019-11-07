@@ -1,6 +1,6 @@
 ---
 title: "Release Process"
-linkTitle: "release-process"
+linkTitle: "Release Process"
 weight: 70
 type: "docs"
 ---

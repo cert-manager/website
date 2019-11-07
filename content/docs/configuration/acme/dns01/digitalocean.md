@@ -1,6 +1,6 @@
 ---
 title: "DigitalOcean"
-linkTitle: "digitalocean"
+linkTitle: "DigitalOcean"
 weight: 30
 type: "docs"
 ---

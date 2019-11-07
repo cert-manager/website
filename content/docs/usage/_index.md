@@ -1,6 +1,6 @@
 ---
 title: "Usage"
-linkTitle: "usage"
+linkTitle: "Usage"
 weight: 40
 type: "docs"
 ---

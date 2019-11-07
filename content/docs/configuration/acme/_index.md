@@ -1,6 +1,6 @@
 ---
 title: "ACME"
-linkTitle: "acme"
+linkTitle: "ACME"
 weight: 30
 type: "docs"
 ---

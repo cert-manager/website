@@ -1,6 +1,6 @@
 ---
 title: "CA"
-linkTitle: "ca"
+linkTitle: "CA"
 weight: 30
 type: "docs"
 ---

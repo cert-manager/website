@@ -1,6 +1,6 @@
 ---
 title: "Project Maturity"
-linkTitle: "project-maturity"
+linkTitle: "Project Maturity"
 weight: 10
 type: "docs"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "External"
-linkTitle: "external"
+linkTitle: "External"
 weight: 30
 type: "docs"
 ---

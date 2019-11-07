@@ -1,6 +1,6 @@
 ---
 title: "Uninstalling on Kubernetes"
-linkTitle: "uninstalling-on-kubernetes"
+linkTitle: "Uninstalling on Kubernetes"
 weight: 50
 type: "docs"
 ---

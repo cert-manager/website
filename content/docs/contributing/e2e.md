@@ -1,6 +1,6 @@
 ---
 title: "Running End-to-End Tests"
-linkTitle: "running-e2e-tests"
+linkTitle: "Running End-to-End Tests"
 weight: 70
 type: "docs"
 ---

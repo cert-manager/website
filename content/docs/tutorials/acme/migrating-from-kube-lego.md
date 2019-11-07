@@ -1,6 +1,6 @@
 ---
 title: "Migrating from Kube-LEGO"
-linkTitle: "migrating-from-kube-lego"
+linkTitle: "Migrating from Kube-LEGO"
 weight: 10
 type: "docs"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "DCO Sign Off"
-linkTitle: "dco-sign-off"
+linkTitle: "DCO Sign Off"
 weight: 70
 type: "docs"
 ---

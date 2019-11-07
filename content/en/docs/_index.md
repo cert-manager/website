@@ -1,6 +1,6 @@
 ---
 title: "Welcome to cert-manager"
-linkTitle: "Documentation"
+linkTitle: "Welcome to cert-manager"
 weight: 10
 type: "docs"
 ---

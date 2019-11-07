@@ -1,6 +1,6 @@
 ---
 title: "DNS01"
-linkTitle: "dns01"
+linkTitle: "DNS01"
 weight: 30
 type: "docs"
 ---

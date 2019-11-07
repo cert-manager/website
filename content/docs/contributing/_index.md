@@ -1,6 +1,6 @@
 ---
 title: "Contributing"
-linkTitle: "contributing"
+linkTitle: "Contributing"
 weight: 70
 type: "docs"
 ---

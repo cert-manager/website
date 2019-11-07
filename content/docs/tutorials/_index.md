@@ -1,6 +1,6 @@
 ---
 title: "Tutorials"
-linkTitle: "tutorials"
+linkTitle: "Tutorials"
 weight: 50
 type: "docs"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "HTTP Validation"
-linkTitle: "http-validation"
+linkTitle: "HTTP Validation"
 weight: 50
 type: "docs"
 ---

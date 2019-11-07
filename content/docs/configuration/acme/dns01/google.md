@@ -1,6 +1,6 @@
 ---
 title: "Google CloudDNS"
-linkTitle: "google-clouddns"
+linkTitle: "Google CloudDNS"
 weight: 30
 type: "docs"
 ---

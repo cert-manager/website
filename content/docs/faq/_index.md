@@ -1,6 +1,6 @@
 ---
 title: "FAQ"
-linkTitle: "faq"
+linkTitle: "FAQ"
 weight: 60
 type: "docs"
 ---

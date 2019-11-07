@@ -1,6 +1,6 @@
 ---
 title: "Contributing Flow"
-linkTitle: "contributing-flow"
+linkTitle: "Contributing Flow"
 weight: 70
 type: "docs"
 ---

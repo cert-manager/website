@@ -1,6 +1,6 @@
 ---
 title: "ACME-DNS"
-linkTitle: "acme-dns"
+linkTitle: "ACME-DNS"
 weight: 30
 type: "docs"
 ---

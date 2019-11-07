@@ -1,6 +1,6 @@
 ---
 title: "NGINX-Ingress"
-linkTitle: "nginx-ingress"
+linkTitle: "NGINX-Ingress"
 weight: 50
 type: "docs"
 ---

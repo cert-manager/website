@@ -1,6 +1,6 @@
 ---
 title: "Vault"
-linkTitle: "vault"
+linkTitle: "Vault"
 weight: 30
 type: "docs"
 ---

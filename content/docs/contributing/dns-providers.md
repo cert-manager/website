@@ -1,6 +1,6 @@
 ---
 title: "DNS Providers"
-linkTitle: "dns-providers"
+linkTitle: "DNS Providers"
 weight: 70
 type: "docs"
 ---

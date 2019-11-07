@@ -1,6 +1,6 @@
 ---
 title: "CertificateRequest"
-linkTitle: "certificaterequest"
+linkTitle: "CertificateRequest"
 weight: 10
 type: "docs"
 ---

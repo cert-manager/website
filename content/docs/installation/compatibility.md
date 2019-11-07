@@ -1,6 +1,6 @@
 ---
 title: "Compatibility"
-linkTitle: "compatibility"
+linkTitle: "Compatibility"
 weight: 20
 type: "docs"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Uninstall"
-linkTitle: "uninstall"
+linkTitle: "Uninstall"
 weight: 50
 type: "docs"
 ---

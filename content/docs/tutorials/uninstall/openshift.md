@@ -1,6 +1,6 @@
 ---
 title: "Uninstalling on OpenShift"
-linkTitle: "uninstalling-on-openshift"
+linkTitle: "Uninstalling on OpenShift"
 weight: 50
 type: "docs"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Developing with Kind"
-linkTitle: "developing-with-kind"
+linkTitle: "Developing with Kind"
 weight: 70
 type: "docs"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Syncing Secrets Across Namespaces using Kubed"
-linkTitle: "syncing-secrets-across-namespaces-using-kubed"
+linkTitle: "Syncing Secrets Across Namespaces using Kubed"
 weight: 60
 type: "docs"
 ---

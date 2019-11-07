@@ -1,6 +1,6 @@
 ---
 title: "CloudFlare"
-linkTitle: "cloudflare"
+linkTitle: "CloudFlare"
 weight: 30
 type: "docs"
 ---

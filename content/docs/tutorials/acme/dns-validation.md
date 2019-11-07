@@ -1,6 +1,6 @@
 ---
 title: "DNS Validation"
-linkTitle: "dns-validation"
+linkTitle: "DNS Validation"
 weight: 50
 type: "docs"
 ---

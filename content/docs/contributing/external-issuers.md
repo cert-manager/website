@@ -1,6 +1,6 @@
 ---
 title: "Implementing External Issuers"
-linkTitle: "implementing-external-issuers"
+linkTitle: "Implementing External Issuers"
 weight: 70
 type: "docs"
 ---

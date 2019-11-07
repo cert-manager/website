@@ -1,6 +1,6 @@
 ---
 title: "Securing Istio Service Mesh"
-linkTitle: "securing-istio-service-mesh"
+linkTitle: "Securing Istio Service Mesh"
 weight: 40
 type: "docs"
 ---

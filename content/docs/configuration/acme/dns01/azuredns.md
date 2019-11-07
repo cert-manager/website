@@ -1,6 +1,6 @@
 ---
 title: "AzureDNS"
-linkTitle: "azure-dns"
+linkTitle: "AzureDNS"
 weight: 30
 type: "docs"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Webhook"
-linkTitle: "webhook"
+linkTitle: "Webhook"
 weight: 10
 type: "docs"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Configuration"
-linkTitle: "configuration"
+linkTitle: "Configuration"
 weight: 30
 type: "docs"
 ---

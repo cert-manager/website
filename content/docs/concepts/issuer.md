@@ -1,6 +1,6 @@
 ---
 title: "Issuer"
-linkTitle: "issuer"
+linkTitle: "Issuer"
 weight: 10
 type: "docs"
 ---

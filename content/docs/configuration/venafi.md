@@ -1,6 +1,6 @@
 ---
 title: "Venafi"
-linkTitle: "venafi"
+linkTitle: "Venafi"
 weight: 30
 type: "docs"
 ---

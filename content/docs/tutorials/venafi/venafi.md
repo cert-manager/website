@@ -1,6 +1,6 @@
 ---
 title: "EKS Venafi"
-linkTitle: "eks-venafi"
+linkTitle: "EKS Venafi"
 weight: 50
 type: "docs"
 ---

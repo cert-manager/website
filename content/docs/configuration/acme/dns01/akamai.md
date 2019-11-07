@@ -1,6 +1,6 @@
 ---
 title: "Akamai"
-linkTitle: "akamai"
+linkTitle: "Akamai"
 weight: 30
 type: "docs"
 ---
