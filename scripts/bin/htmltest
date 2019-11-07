@@ -30,7 +30,8 @@ htmltest="${REPO_ROOT}/bin/htmltest"
 mkdir -p "$(dirname "$htmltest")"
 
 if ! command -v curl &>/dev/null; then
-	echo "Ensure curl command is installed"
+    echo "Ensure curl command is installed"
+    exit 1
 fi
 
 if ! test -f "${htmltest}"; then

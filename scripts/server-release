@@ -25,5 +25,4 @@ REPO_ROOT=$(dirname "${BASH_SOURCE[0]}")/..
 
 cd "${REPO_ROOT}"
 
-"${REPO_ROOT}/scripts/update-content"
-"${REPO_ROOT}/scripts/build" "$@"
+"${REPO_ROOT}/scripts/release" server

@@ -30,7 +30,8 @@ hugo="${REPO_ROOT}/bin/hugo"
 mkdir -p "$(dirname "$hugo")"
 
 if ! command -v curl &>/dev/null; then
-	echo "Ensure curl command is installed"
+    echo "Ensure curl command is installed"
+    exit 1
 fi
 
 if ! test -f "${hugo}"; then

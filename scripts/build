@@ -25,5 +25,6 @@ REPO_ROOT=$(dirname "${BASH_SOURCE[0]}")/..
 
 cd "${REPO_ROOT}"
 
+"${REPO_ROOT}/scripts/update-node_modules"
 "${REPO_ROOT}/scripts/update-theme"
-"${REPO_ROOT}/scripts/bin/hugo"
+"${REPO_ROOT}/scripts/bin/hugo" "$@"

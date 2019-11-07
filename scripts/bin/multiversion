@@ -30,7 +30,8 @@ multiversion="${REPO_ROOT}/bin/multiversion"
 mkdir -p "$(dirname "$multiversion")"
 
 if ! command -v curl &>/dev/null; then
-	echo "Ensure curl command is installed"
+    echo "Ensure curl command is installed"
+    exit 1
 fi
 
 if ! test -f "${multiversion}"; then
