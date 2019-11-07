@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# Copyright 2019 The Jetstack cert-manager contributors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# This script constructs a 'content/' directory that contains content for all
+# configured versions of the documentation.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
+VERSION="v0.1.5"
+
+source "${REPO_ROOT}/scripts/bin/lib.sh"
+
+gencrd="${REPO_ROOT}/bin/gen-crd-api-reference-docs"
+mkdir -p "$(dirname "$gencrd")"
+
+if ! command -v curl &>/dev/null; then
+    echo "Ensure curl command is installed"
+    exit 1
+fi
+
+if ! test -f "${gencrd}"; then
+    echo "+++ Fetching gen-crd-api-reference-docs binary and saving to bin/gen-crd-api-reference-docs"
+    detect_and_set_goos_goarch
+
+    tmpdir="$(mktemp -d)"
+    curl -Lo "${tmpdir}/file" "https://github.com/ahmetb/gen-crd-api-reference-docs/releases/download/${VERSION}/gen-crd-api-reference-docs_${GOOS}_amd64.tar.gz"
+    if [ "$GOOS" = "darwin" ]; then
+        check_sha "${tmpdir}/file" "44d9bf8f683858032e549ff2b0dbcb97508fd5df82411c6fbe95042f128b9745"
+    elif [ "$GOOS" = "linux" ]; then
+        check_sha "${tmpdir}/file" "9e14741dc9cd127082b681d4e78f3fcde95a5b70d94055142ebd16efb51998cf"
+    else
+    	echo "Unsupported OS: $GOOS"
+    	exit 1
+    fi
+
+    tar -C "$tmpdir" -xf "${tmpdir}/file"
+    mv "${tmpdir}/gen-crd-api-reference-docs" "${gencrd}"
+    chmod +x "${gencrd}"
+    rm -rf "${tmpdir}"
+fi
+
+"${gencrd}" "$@"

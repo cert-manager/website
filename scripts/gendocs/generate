@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+# Copyright 2019 The Jetstack cert-manager contributors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# This script constructs a 'content/' directory that contains content for all
+# configured versions of the documentation.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
+
+if ! command -v go &>/dev/null; then
+    echo "Ensure go command is installed"
+    exit 1
+fi
+
+tmpdir="$(mktemp -d)"
+cleanup() {
+	export GO111MODULE="auto"
+	echo "+++ Cleaning up temporary GOPATH"
+	go clean -modcache
+	rm -rf "${tmpdir}"
+}
+trap cleanup EXIT
+
+# Create fake GOPATH
+echo "+++ Creating temporary GOPATH"
+export GOPATH="${tmpdir}/go"
+export GOPROXY="https://proxy.golang.org"
+export GO111MODULE="on"
+GOROOT="$(go env GOROOT)"
+export GOROOT
+mkdir -p "${GOPATH}/src/github.com/jetstack"
+gitdir="${GOPATH}/src/github.com/jetstack/cert-manager"
+echo "+++ Cloning cert-manager repository..."
+git clone "https://github.com/jetstack/cert-manager.git" "$gitdir"
+cd "$gitdir"
+
+genversion() {
+	branch="$1"
+	outputdir="$2"
+	pushd "$gitdir"
+	rm -rf vendor/
+	echo "+++ Checking out branch $branch"
+	git fetch origin "$branch"
+	git reset --hard "origin/$branch"
+	echo "+++ Running 'go mod vendor' (this may take a while)"
+	go mod vendor
+	echo "+++ Generating reference docs..."
+	"${REPO_ROOT}/scripts/bin/gen-crd-api-reference-docs" \
+		-config "${REPO_ROOT}/scripts/gendocs/config.json" \
+		-template-dir "${REPO_ROOT}/scripts/gendocs/templates" \
+		-api-dir "./pkg/apis" \
+		-out-file "${REPO_ROOT}/content/${outputdir}/reference/api-docs.md" \
+		"$@"
+	rm -rf vendor/
+	popd
+}
+
+genversion "master" "docs"
+## Use the following line as a template when adding new versions to the website
+# genversion "release-0.11" "v0.11-docs"
+
+echo "Generated reference documentation"
