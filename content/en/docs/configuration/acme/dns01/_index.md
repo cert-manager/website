@@ -107,11 +107,11 @@ A number of different DNS providers are supported for the ACME issuer. Below is
 a listing of available providers, their `.yaml` configurations, along with additional Kubernetes
 and provider specific notes regarding their usage.
 
-- [acme-dns](./acme-dns/)
+- [ACMEDNS](./acme-dns/)
 - [Akamai](./akamai/)
 - [AzureDNS](./azuredns/)
 - [CloudFlare](./cloudflare/)
-- [google](./google/)
+- [Google](./google/)
 - [Route53](./route53/)
 - [DigitalOcean](./digitalocean/)
 - [RFC2136](./rfc2136/)
@@ -120,10 +120,11 @@ and provider specific notes regarding their usage.
 
 cert-manager also supports out of tree DNS providers using an external webhook.
 Links to these supported providers along with their documentation are below:
-- [AliDNS-Webhook](https://github.com/pragkent/alidns-webhook)
-- [cert-manager-webhook-dnspod](https://github.com/qqshfox/cert-manager-webhook-dnspod)
-- [cert-manager-webhook-selectel](https://github.com/selectel/cert-manager-webhook-selectel)
-- [cert-manager-webhook-softlayer](https://github.com/cgroschupp/cert-manager-webhook-softlayer)
+
+- [`AliDNS-Webhook`](https://github.com/pragkent/alidns-webhook)
+- [`cert-manager-webhook-dnspod`](https://github.com/qqshfox/cert-manager-webhook-dnspod)
+- [`cert-manager-webhook-selectel`](https://github.com/selectel/cert-manager-webhook-selectel)
+- [`cert-manager-webhook-softlayer`](https://github.com/cgroschupp/cert-manager-webhook-softlayer)
 
 To create a new unsupported DNS provider, follow the development documentation
 [here](../../../contributing/dns-providers/).

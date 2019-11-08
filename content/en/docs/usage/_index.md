@@ -17,7 +17,7 @@ requesting certificates through cert-manager:
   requesting singed certificates.
 - [Securing Ingress Resources](./ingress/): A method to secure ingress edges
   for you cluster.
-- [Securing Knative]./knative/: Secure your Knative installation with
+- [Securing Knative]./Knative/: Secure your Knative installation with
   trusted HTTPS connection. TODO: add link when doc is created
 - [Enable mTLS on Pods with CSI](./csi/): Using the cert-manager CSI
   driver to provide unique keys and certificates that share the life cycle of

@@ -32,7 +32,7 @@ Uninstalling from an installation with regular manifests is a case of running
 the installation process, *in reverse*, using the delete command of `kubectl`.
 
 Delete the installation manifests using a link to your currently running version
-vX.Y.Z like so:
+`vX.Y.Z` like so:
 
 ```bash
 $ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
@@ -59,7 +59,7 @@ $ kubectl delete namespace cert-manager
 
 Finally, delete the cert-manger
 [`CustomResourceDefinitions`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-using the link to the version vX.Y you installed:
+using the link to the version `vX.Y` you installed:
 
 ```bash
 $ kubectl delete -f https://raw.githubusercontent.com/jetstack/cert-manager/release-X.Y/deploy/manifests/00-crds.yaml

@@ -39,7 +39,7 @@ Uninstalling from an installation with regular manifests is a case of running
 the installation process, *in reverse*, using the delete command of `oc`.
 
 Delete the installation manifests using a link to your currently running version
-vX.Y.Z like so:
+`vX.Y.Z` like so:
 
 ```bash
 $ oc delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager-openshift.yaml

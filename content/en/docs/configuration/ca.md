@@ -60,7 +60,7 @@ Once deployed, you can then check that the issuer has been successfully
 configured by checking the ready status of the certificate. Replace `issuers`
 here with `clusterissuers` if that is what has been deployed.
 
-TODO (@joshvanl): add output to this command once the ready status has been
+TODO (`@joshvanl`): add output to this command once the ready status has been
 configured for the CLI.
 ```bash
 $ kubectl get issuers ca-issuer -n sandbox -o wide

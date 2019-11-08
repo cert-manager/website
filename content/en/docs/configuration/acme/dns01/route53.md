@@ -43,7 +43,7 @@ permissions:
 ```
 
 > Note: The `route53:ListHostedZonesByName` statement can be removed if you
-> specify the (optional) ``hostedZoneID``. You can further tighten the policy by
+> specify the (optional) `hostedZoneID`. You can further tighten the policy by
 > limiting the hosted zone that cert-manager has access to (e.g.
 > `arn:aws:route53:::hostedzone/DIKER8JEXAMPLE`).
 
@@ -58,13 +58,13 @@ Cert-manager supports two ways of specifying credentials:
 - explicit by providing a `accessKeyID` and `secretAccessKey`
 - or implicit (using [metadata
   service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
-  or [env vars or credentials
+  or [environment variables or credentials
   file](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials).
 
 Cert-manager also supports specifying a `role` to enable cross-account access
 and/or to limit the access for the cert-manager. Integration with
-[kiam](https://github.com/uswitch/kiam) and
-[kube2iam](https://github.com/jtblin/kube2iam) should work out of the box.
+[`kiam`](https://github.com/uswitch/kiam) and
+[`kube2iam`](https://github.com/jtblin/kube2iam) should work out of the box.
 
 
 ## Cross account access
@@ -95,9 +95,9 @@ This allows the role `cert-manager` in account X to manage the Route53 DNS Zone
 in account A.  For more information visit the [official
 documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html>).
 
-## Creating a Issuer (or ClusterIssuer)
+## Creating a Issuer (or `ClusterIssuer`)
 
-Here is an example configuration for a ClusterIssuer:
+Here is an example configuration for a `ClusterIssuer`:
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2

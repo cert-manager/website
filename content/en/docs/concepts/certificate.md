@@ -5,13 +5,13 @@ weight: 200
 type: "docs"
 ---
 
-cert-manager has the concept of `Certificate`s that define a desired X.509
+cert-manager has the concept of `Certificate`s that define a desired x509
 certificate which will be renewed and kept up to date. A `Certificate` is a
 namespaced resource that references an `Issuer` or `ClusterIssuer` that
 determine what will be honoring the certificate request.
 
 When a `Certificate` is created, a corresponding `CertificateRequest` resource is
-created by cert-manager containing the encoded x.509 certificate request, issuer
+created by cert-manager containing the encoded x509 certificate request, issuer
 reference, and other options based upon the specification of the `Certificate`
 resource.
 
@@ -47,7 +47,7 @@ Names`](https://en.wikipedia.org/wiki/Subject_Alternative_Name) to be associated
 with the certificate.
 
 The referenced Issuer must exist in the same namespace as the Certificate.
-A Certificate can alternatively reference a ClusterIssuer which is
+A Certificate can alternatively reference a `ClusterIssuer` which is
 non-namespaced and so can be referenced from any namespace.
 
 You can read more on how to configure your certificate resources

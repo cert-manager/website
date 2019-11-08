@@ -97,10 +97,10 @@ Alternative Names
 
 In our Certificate we have referenced the `letsencrypt-staging` Issuer above.
 The Issuer must be in the same namespace as the Certificate.  If you want to
-reference a ClusterIssuer, which is a cluster-scoped version of an Issuer, you
+reference a `ClusterIssuer`, which is a cluster-scoped version of an Issuer, you
 must add `kind: ClusterIssuer` to the `issuerRef` stanza.
 
-For more information on ClusterIssuers, read the [ClusterIssuer
+For more information on `ClusterIssuers`, read the [`ClusterIssuer`
 docs](../../../concepts/issuer/).
 
 The `acme` stanza defines the configuration for our ACME challenges.  Here we

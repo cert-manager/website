@@ -1,7 +1,7 @@
 ---
-title: "Release Notes v0.1"
-linkTitle: "Release Notes v0.1"
-weight: 80
+title: "Release Notes"
+linkTitle: "v0.1"
+weight: 10
 type: "docs"
 ---
 
@@ -17,8 +17,8 @@ Notable features:
 - *ACME HTTP01 challenge mechanism*
   - Should be compatible with all ingress controllers following ingress spec (GCE & NGINX tested)
 - *Simple CA based issuance*
-  - Create an Issuer that references a Secret resource containing a signing keypair, and issue/renew certificates from that.
-- *Cluster-wide issuers (aka ClusterIssuer)*
+  - Create an Issuer that references a Secret resource containing a signing key pair, and issue/renew certificates from that.
+- *Cluster-wide issuers (aka `ClusterIssuer`)*
 - *Backed by CRDs*
   - Events logged to the Kubernetes API
   - Status block utilized to store additional state about resources

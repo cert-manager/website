@@ -1,11 +1,9 @@
 ---
-title: "EKS Venafi"
-linkTitle: "EKS Venafi"
+title: "Securing Ingresses with Venafi"
+linkTitle: "Securing Ingresses with Venafi"
 weight: 50
 type: "docs"
 ---
-
-## Securing Ingresses with Venafi
 
 This guide walks you through how to secure a Kubernetes
 [`Ingress`](https://kubernetes.io/docs/concepts/services-networking/ingress/)
@@ -13,7 +11,7 @@ resource using the Venafi Issuer type.
 
 Whilst stepping through, you will learn how to:
 
-- Create an EKS cluster using [eksctl](https://github.com/weaveworks/eksctl)
+- Create an EKS cluster using [`eksctl`](https://github.com/weaveworks/eksctl)
 - Install cert-manager into the EKS cluster
 - Deploy [`nginx-ingress`](https://github.com/kubernetes/ingress-nginx) to
   expose applications running in the cluster
@@ -27,7 +25,7 @@ Issuer types.
 ## Prerequisites
 
 - An AWS account
-- kubectl installed
+- `kubectl` installed
 - Access to a publicly registered DNS zone
 - A Venafi Cloud account and API credentials
 
@@ -36,11 +34,11 @@ Issuer types.
 If you already have a running EKS cluster you can skip this step and move onto
 deploying cert-manager.
 
-[eksctl](https://eksctl.io/introduction/installation/) is a tool that makes it
+[`eksctl`](https://eksctl.io/introduction/installation/) is a tool that makes it
 easier to deploy and manage an EKS cluster.
 
 Installation instructions for various platforms can be found in the
-[eksctl installation
+[`eksctl` installation
 instructions](https://eksctl.io/introduction/installation/).
 
 Once installed, you can create a basic cluster by running:
@@ -50,7 +48,7 @@ $ eksctl create cluster
 ```
 
 This process may take up to 20 minutes to complete.  Complete instructions on
-using eksctl can be found in the [eksctl usage
+using `eksctl` can be found in the [`eksctl` usage
 section](https://eksctl.io/usage/creating-and-managing-clusters/).
 
 Once your cluster has been created, you should verify that your cluster is
@@ -72,34 +70,34 @@ You should see output similar to the above, with all pods in a Running state.
 ## Installing cert-manager
 
 There are no special requirements to note when installing cert-manager on EKS,
-so the regular [`running on
-Kubernetes`](../../../installation/kubernetes/) guide
+so the regular [running on
+Kubernetes](../../../installation/kubernetes/) guide
 can be used to install cert-manager.
 
 Please walk through the installation guide and return to this step once you
 have validated cert-manager is deployed correctly.
 
-## Installing ingress-nginx
+## Installing `ingress-nginx`
 
 A [Kubernetes ingress
 controller](https://eksctl.io/usage/creating-and-managing-clusters/) is designed
 to be the access point for HTTP and HTTPS traffic to the software running within
-your cluster. The [ingress-nginx](https://github.com/kubernetes/ingress-nginx)
+your cluster. The [`ingress-nginx`](https://github.com/kubernetes/ingress-nginx)
 controller does this by providing an HTTP proxy service supported by your cloud
 provider's load balancer (in this case, a [Network Load Balancer
 (NLB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html).
 
-You can get more details about nginx-ingress and how it works from the
-[documentation for nginx-ingress](https://kubernetes.github.io/ingress-nginx/).
+You can get more details about `ingress-nginx` and how it works from the
+[documentation for `ingress-nginx`](https://kubernetes.github.io/ingress-nginx/).
 
-To deploy ingress-nginx using an ELB to expose the service, run the following:
+To deploy `ingress-nginx` using an ELB to expose the service, run the following:
 
 Deploy the AWS specific prerequisite manifest
 ```bash
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/aws/service-nlb.yaml
 ```
 
-Deploy the 'generic' ingress-nginx manifest
+Deploy the 'generic' `ingress-nginx` manifest
 ```bash
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
 ```
@@ -121,7 +119,7 @@ is still being created. Retry the command until an *EXTERNAL-IP* has been
 provisioned.
 
 Once the *EXTERNAL-IP* is available, you should run the following command to
-verify that traffic is being correctly routed to ingress-nginx:
+verify that traffic is being correctly routed to `ingress-nginx`:
 
 ```
 $ curl http://a8c2870a5a8a311e9a9a10a2e7af57d7-6c2ec8ede48726ab.elb.eu-west-1.amazonaws.com/
@@ -136,12 +134,12 @@ $ curl http://a8c2870a5a8a311e9a9a10a2e7af57d7-6c2ec8ede48726ab.elb.eu-west-1.am
 
 Whilst the above message would normally indicate an error (the page not being
 found), in this instance it indicates that traffic is being correctly routed to
-the ingress-nginx service.
+the `ingress-nginx` service.
 
 > Note: Although the AWS Application Load Balancer (ALB) is a modern load
 > balancer offered by AWS that can can be provisioned from within EKS, at the
 > time of writing, the
-> [alb-ingress-controller](https://github.com/kubernetes-sigs/aws-alb-ingress-controller>)
+> [`alb-ingress-controller`](https://github.com/kubernetes-sigs/aws-alb-ingress-controller>)
 > is only capable of serving sites using certificates stored in AWS Certificate
 > Manager (ACM). Version 1.15 of Kubernetes should address multiple bug fixes
 > for this controller and allow for TLS termination support.
@@ -224,11 +222,11 @@ Then run:
 kubectl apply -n demo -f demo-deployment.yaml
 ```
 
-Note that the Service resource we deploy is of type ClusterIP and not
-LoadBalancer, as we will expose and secure traffic for this service using
-ingress-nginx that we deployed earlier.
+Note that the Service resource we deploy is of type `ClusterIP` and not
+`LoadBalancer`, as we will expose and secure traffic for this service using
+`ingress-nginx` that we deployed earlier.
 
-You should be able to see two Pods and one Service in the ``demo`` namespace:
+You should be able to see two Pods and one Service in the `demo` namespace:
 
 ```bash
 kubectl get po,svc -n demo
@@ -581,7 +579,7 @@ $ kubectl apply -n demo -f application-ingress.yaml
 ```
 
 Once this has been created, you should be able to visit your application at the
-configured hostname, here `example.com`!
+configured URL, here `example.com`!
 
 Navigate to the address in your web browser and you should see the certificate
 obtained via Venafi being used to secure application traffic.

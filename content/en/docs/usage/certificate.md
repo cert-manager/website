@@ -23,7 +23,7 @@ certificate from by specifying the `certificate.spec.issuerRef` field.
 
 A basic Certificate resource, for the `example.com` and `www.example.com` DNS
 names, `spiffe://cluster.local/ns/sandbox/sa/example` URI Subject Alternative
-Name, that is valid for 90d and renews 15d before expiry is below:
+Name, that is valid for 90 days and renews 15 days before expiry is below:
 
 
 ```yaml
@@ -77,7 +77,7 @@ The Certificate will be issued using the issuer named `ca-issuer` in the
 > Note: Take care when setting the `renewBefore` field to be very close to the
 > `duration` as this can lead to a renewal loop, where the Certificate is always
 > in the renewal period. Some `Issuers` set the `notBefore` field on their
-> issued X.509 certificates before the issue time to fix clock-skew issues,
+> issued x509 certificates before the issue time to fix clock-skew issues,
 > leading to the working duration of a certificate to be less than the full
 > duration of the certificate. For example, Let's Encrypt sets it to be one hour
 > before issue time, so the actual *working duration* of the certificate is 89

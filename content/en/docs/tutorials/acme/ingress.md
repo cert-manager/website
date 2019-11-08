@@ -5,7 +5,7 @@ weight: 50
 type: "docs"
 ---
 
-## Securing Ingresses with NGINX-Ingress and cert-manager
+## Securing Ingresses with `NGINX-Ingress` and cert-manager
 
 This tutorial will detail how to install and secure ingress to your cluster
 using NGINX.
@@ -26,7 +26,7 @@ For example, on MacOS:
 $ brew install kubernetes-helm
 ```
 
-## Step 1 - Installer Tiller
+## Step 1 - Install Tiller
 
 > *Skip this section if you have Tiller set-up.*
 
@@ -39,7 +39,7 @@ cluster. View the documentation on [securing
 helm](https://docs.helm.sh/using_helm/#securing-your-helm-installation) for
 details on setting up appropriate permissions for your environment.
 
-Create the a ServiceAccount for tiller:
+Create a `ServiceAccount` for Tiller:
 
 ```bash
 $ kubectl create serviceaccount tiller --namespace=kube-system
@@ -83,11 +83,11 @@ Update Complete. ⎈ Happy Helming!⎈
 A [`kubernetes ingress
 controller`](https://kubernetes.io/docs/concepts/services-networking/ingress) is
 designed to be the access point for HTTP and HTTPS traffic to the software
-running within your cluster. The nginx-ingress controller does this by providing
+running within your cluster. The `nginx-ingress` controller does this by providing
 an HTTP proxy service supported by your cloud provider's load balancer.
 
-You can get more details about nginx-ingress and how it works from the
-[documentation for nginx-ingress](https://kubernetes.github.io/ingress-nginx/).
+You can get more details about `nginx-ingress` and how it works from the
+[documentation for `nginx-ingress`](https://kubernetes.github.io/ingress-nginx/).
 
 Use `helm` to install an NGINX Ingress controller:
 
@@ -196,7 +196,7 @@ quickstart-nginx-ingress-default-backend   ClusterIP      10.63.250.234   <none>
 This command shows you all the services in your cluster (in the `default`
 namespace), and any external IP addresses they have. When you first create the
 controller, your cloud provider won't have assigned and allocated an IP address
-through the LoadBalancer yet. Until it does, the external IP address for the
+through the `LoadBalancer` yet. Until it does, the external IP address for the
 service will be listed as `<pending>`.
 
 Your cloud provider may have options for reserving an IP address prior to
@@ -210,34 +210,34 @@ The external IP that is allocated to the ingress-controller is the IP to which
 all incoming traffic should be routed. To enable this, add it to a DNS zone you
 control, for example as `example.your-domain.com`.
 
-This quickstart assumes you know how to assign a DNS entry to an IP address and
+This quick-start assumes you know how to assign a DNS entry to an IP address and
 will do so.
 
 ## Step 4 - Deploy an Example Service
 
 Your service may have its own chart, or you may be deploying it directly with
-manifests. This quickstart uses manifests to create and expose a sample service.
+manifests. This quick-start uses manifests to create and expose a sample service.
 The example service uses
 [`kuard`](https://github.com/kubernetes-up-and-running/kuard), a demo
 application which makes an excellent back-end for examples.
 
-The quickstart example uses three manifests for the sample. The first two are a
+The quick-start example uses three manifests for the sample. The first two are a
 sample deployment and an associated service:
 
-TODO (@joshvanl): move this link to the new location
+TODO (`@joshvanl`): move this link to the new location
 - deployment manifest:
   [`deployment.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/deployment.yaml)
 
-TODO (joshvanl): include link contents
+TODO (`@joshvanl`): include link contents
 ```yaml
 example/deployment.yaml
 ```
 
-TODO (@joshvanl): move this link to the new location
+TODO (`@joshvanl`): move this link to the new location
 - service manifest:
   [`service.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/service.yaml)
 
-TODO (joshvanl): include link contents
+TODO (`@joshvanl`): include link contents
 ```yaml
 example/service.yaml
 ```
@@ -263,11 +263,11 @@ you own or  control to complete this example.
 
 A sample ingress you can start with is:
 
-TODO (@joshvanl): move this link to the new location
+TODO (`@joshvanl`): move this link to the new location
 - ingress manifest:
   [`ingress.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress.yaml)
 
-TODO (joshvanl): include link contents
+TODO (`@joshvanl`): include link contents
 ```yaml
 example/ingress.yaml
 ```
@@ -281,7 +281,7 @@ $ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manag
 ingress.extensions "kuard" created
 ```
 > Note: The ingress example we show above has a `host` definition within it. The
-> nginx-ingress-controller will route traffic when the hostname requested
+> `nginx-ingress-controller` will route traffic when the hostname requested
 > matches the definition in the ingress. You *can* deploy an ingress without a
 > `host` definition in the rule, but that pattern isn't usable with a TLS
 > certificate, which expects a fully qualified domain name.
@@ -304,11 +304,11 @@ kuard     *         35.199.170.62   80        9m
 ```
 
 > Note: The IP address on the ingress *may not* match the IP address that the
-> nginx-ingress-controller. This is fine, and is a quirk/implementation detail
+> `nginx-ingress-controller`. This is fine, and is a quirk/implementation detail
 > of the service provider hosting your Kubernetes cluster. Since we are using
-> the nginx-ingress-controller instead of any cloud-provider specific ingress
+> the `nginx-ingress-controller` instead of any cloud-provider specific ingress
 > backend, use the IP address that was defined and allocated for the
-> nginx-ingress-service LoadBalancer resource as the primary  access point for
+> `nginx-ingress-service` `LoadBalancer` resource as the primary  access point for
 > your service.
 
 Make sure the service is reachable at the domain name you added above, for
@@ -324,15 +324,15 @@ $ curl -kivL -H 'Host: example.your-domain.com' 'http://35.199.164.14'
 
 The options on this curl command will provide verbose output, following any
 redirects, show the TLS headers in the output,  and not error on insecure
-certificates. With nginx-ingress-controller, the service will be available
+certificates. With `nginx-ingress-controller`, the service will be available
 with a TLS certificate, but it will be using a self-signed certificate
-provided as a default from the nginx-ingress-controller. Browsers will show
+provided as a default from the `nginx-ingress-controller`. Browsers will show
 a warning that this is an invalid certificate. This is expected and normal,
 as we have not yet used cert-manager to get a fully trusted certificate
 for our site.
 
 > *Warning*: It is critical to make sure that your ingress is available and
-> responding correctly on the internet. This quickstart example uses Let's
+> responding correctly on the internet. This quick-start example uses Let's
 > Encrypt to provide the certificates, which expects and validates both that the
 > service is available and that during the process of issuing a certificate uses
 > that validation as proof that the request for the domain belongs to someone
@@ -354,20 +354,20 @@ operation. These two resources are:
 
 > An Issuer is the definition for where cert-manager will get request TLS
 > certificates. An Issuer is specific to a single namespace in Kubernetes,
-> and a ClusterIssuer is meant to be a cluster-wide definition for the same
+> and a `ClusterIssuer` is meant to be a cluster-wide definition for the same
 > purpose.
 >
 > Note that if you're using this document as a guide to configure cert-manager
 > for your own Issuer, you must create the Issuers in the same namespace
-> as your Ingress resources by adding '-n my-namespace' to your 'kubectl create'
-> commands. Your other option is to replace your Issuers with ClusterIssuers.
-> ClusterIssuer resources apply across all Ingress resources in your cluster
+> as your Ingress resources by adding `-n my-namespace` to your `kubectl create`
+> commands. Your other option is to replace your Issuers with `ClusterIssuers`.
+> `ClusterIssuer` resources apply across all Ingress resources in your cluster
 > and don't have this namespace-matching requirement.
 >
-> More information on the differences between Issuers and ClusterIssuers and
+> More information on the differences between Issuers and `ClusterIssuers` and
 > when you might choose to use each can be found at:
 >
-> TODO (@joshvanl): add link to Issuer vs Cluster Issuer
+> TODO (`@joshvanl`): add link to `Issuer` vs `ClusterIssuer`
 
 > A certificate is the resource that cert-manager uses to expose the state
 > of a request as well as track upcoming expiration.
@@ -387,11 +387,11 @@ Create this definition locally and update the email address to your own. This
 email required by Let's Encrypt and used to notify you of certificate
 expiration and updates.
 
-TODO (@joshvanl): fix link
+TODO (`@joshvanl`): fix link
 - staging issuer:
   [`staging-issuer.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/staging-issuer.yaml)
 
-TODO (@joshvanl): include file
+TODO (`@joshvanl`): include file
 ```yaml
 example/staging-issuer.yaml
 ```
@@ -409,7 +409,7 @@ will need to update this example and add in your own email address.
 - production issuer:
   [`production-issuer.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/production-issuer.yaml)
 
-TODO (@joshvanl): include file
+TODO (`@joshvanl`): include file
 ```yaml
 example/production-issuer.yaml
 ```
@@ -480,17 +480,17 @@ cert-manager will create or update the secret defined in the certificate.
 
 > Note: The secret that is used in the ingress should match the secret defined
 > in the certificate.  There isn't any explicit checking, so a typo will result
-> in the nginx-ingress-controller falling back to its self-signed certificate.
+> in the `nginx-ingress-controller` falling back to its self-signed certificate.
 > In our example, we are using annotations on the ingress (and ingress-shim)
 > which will create the correct secrets on your behalf.
 
 Edit the ingress add the annotations that were commented out in our earlier
 example:
 
-TODO (@joshvanl): move this link to the new location
+TODO (`@joshvanl`): move this link to the new location
 - ingress TLS: [`ingress-tls.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress-tls.yaml)
 
-TODO (joshvanl): include link contents
+TODO (`@joshvanl`): include link contents
 ```yaml
 example/ingress-tls.yaml
 ```
@@ -595,10 +595,10 @@ tls.key:  1675 bytes
 Now that we have confidence that everything is configured correctly, you
 can update the annotations in the ingress to specify the production issuer:
 
-TODO (@joshvanl): move this link to the new location
+TODO (`@joshvanl`): move this link to the new location
 - ingress TLS final: [`ingress-tls-final.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress-tls-final.yaml)
 
-TODO (joshvanl): include link contents
+TODO (`@joshvanl`): include link contents
 ```yaml
 example/ingress-tls-final.yaml
 ```
@@ -665,7 +665,7 @@ kubectl describe certificate quickstart-example-tls   ----    ------        ----
    Normal  OrderCreated  18s   cert-manager  Created Order resource "quickstart-example-tls-889745041"
 ```
 
-You can see the current state of the ACME Order by running ``kubectl describe``
+You can see the current state of the ACME Order by running `kubectl describe`
 on the Order resource that cert-manager has created for your Certificate:
 
 ```bash
@@ -723,7 +723,7 @@ Events:
 > Note: If your challenges are not becoming 'valid' and remain in the 'pending'
 > state (or enter into a 'failed' state), it is likely there is some kind of
 > configuration error.  Read the [`Challenge resource reference
-> docs`]../reference/challenges.md for more information on debugging failing
+> docs`]`../reference/challenges.md` for more information on debugging failing
 > challenges. TODO: add reference docs link
 
 Once the challenge(s) have been completed, their corresponding challenge

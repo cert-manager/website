@@ -31,7 +31,7 @@ as:
 
 - The token authentication Secret referenced by
   `issuer.spec.vault.auth.tokenSecretRef`
-- The approle configuration Secret referenced by
+- The AppRole configuration Secret referenced by
   `issuer.spec.vault.auth.appRole.secretRef`
 
 ### ACME Issuers
