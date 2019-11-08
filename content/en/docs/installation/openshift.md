@@ -7,7 +7,7 @@ type: "docs"
 
 cert-manager supports running on OpenShift in a similar manner to [Running on
 Kubernetes](../kubernetes/).  It runs within your OpenShift cluster as a series
-of deployment resources. It utilities
+of deployment resources. It utilizes
 [CustomResourceDefinitions](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources)
 to configure Certificate Authorities and request certificates.
 

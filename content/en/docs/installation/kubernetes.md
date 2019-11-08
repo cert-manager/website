@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 cert-manager runs within your Kubernetes cluster as a series of deployment
-resources. It utilities
+resources. It utilizes
 [`CustomResourceDefinitions`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources)
 to configure Certificate Authorities and request certificates.
 
@@ -94,7 +94,7 @@ official Helm chart for installing cert-manager.
 
 ### Prerequisites
 
-- Helm and Tiller installed (or alternatively, use `Tillerless Helm v2`z)
+- Helm and Tiller installed (or alternatively, use `Tillerless Helm v2`)
 - [cluster-admin Privileges bound to the Tiller
   pod](https://github.com/helm/helm/blob/240e539cec44e2b746b3541529d41f4ba01e77df/docs/rbac.md#Example-Service-account-with-cluster-admin-role)
 

@@ -8,7 +8,7 @@ type: "docs"
 cert-manager offers a number of [core issuer
 types](../../configuration/) that represent certificate authorities
 that can sign certificates when requested. As of v0.11, cert-manager also
-supports out-of-tree external issuers naively, and treats them the same as
+supports out-of-tree external issuers, and treats them the same as
 in-tree issuer types. For more information on how to install and configure
 external issuer types, read the documentation
 [here](../../configuration/external/).
