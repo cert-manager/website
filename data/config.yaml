@@ -267,14 +267,14 @@ headline:
 # various types of content panel that can appear on section pages
 # the idea is to not fix a panel to a section - mix and match!
 panels:
-    
-  what_we_offer: 
+
+  what_we_offer:
     headline: What we offer
     features:
     - img: /img/jpg/wwo-open-source.jpg
       category: Open source
       name: Building tools to enhance the operational and developer experience
-      desc: We’ve been contributing to the Kubernetes ecosystem since the beginning 
+      desc: We’ve been contributing to the Kubernetes ecosystem since the beginning
       link: /open-source
 
     - img: /img/jpg/wwo-subscription.jpg
@@ -296,7 +296,7 @@ panels:
       link: /training
 
   # the partners we have worked and press stories about us (homepage)
-  partners: 
+  partners:
     headline: We're trusted by
     logos:
     - name: Google Cloud
@@ -314,7 +314,7 @@ panels:
     - name: Last.fm
       img: /img/svg/logo-lastfm.svg
       link: https://www.last.fm/
-      
+
     - name: Monzo
       img: /img/svg/logo-monzo.svg
       link: https://www.monzo.com/
