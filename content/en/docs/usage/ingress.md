@@ -16,8 +16,8 @@ ingress-shim, is responsible for this.
 The sub-component ingress-shim watches `Ingress` resources across your cluster.
 If it observes an `Ingress` with annotations described in the `Supported
 Annotations` (TODO `@joshvanl`: add sub-title line) section, it will ensure a
-`Certificate` resource with the same name as the Ingress, and configured as
-described on the `Ingress` exists. For example:
+`Certificate` resource with the name provided in the `tls.secretName` field
+and configured as described on the `Ingress` exists. For example:
 
 ```yaml
 apiVersion: extensions/v1beta1
