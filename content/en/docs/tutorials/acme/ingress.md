@@ -1,11 +1,9 @@
 ---
-title: "NGINX-Ingress"
-linkTitle: "NGINX-Ingress"
+title: "Securing NGINX-ingress"
+linkTitle: "Securing NGINX-ingress"
 weight: 50
 type: "docs"
 ---
-
-## Securing Ingresses with `NGINX-Ingress` and cert-manager
 
 This tutorial will detail how to install and secure ingress to your cluster
 using NGINX.
