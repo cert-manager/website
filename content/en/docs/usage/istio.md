@@ -1,7 +1,7 @@
 ---
 title: "Securing Istio Service Mesh"
 linkTitle: "Securing Istio Service Mesh"
-weight: 40
+weight: 200
 type: "docs"
 ---
 

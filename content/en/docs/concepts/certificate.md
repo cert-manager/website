@@ -1,14 +1,14 @@
 ---
 title: "Certificate"
 linkTitle: "Certificate"
-weight: 10
+weight: 200
 type: "docs"
 ---
 
 cert-manager has the concept of `Certificate`s that define a desired X.509
-certificate. A `Certificate` is a namespaced resource that references an
-`Issuer` or `ClusterIssuer` that determine what will be honoring the
-certificate request.
+certificate which will be renewed and kept up to date. A `Certificate` is a
+namespaced resource that references an `Issuer` or `ClusterIssuer` that
+determine what will be honoring the certificate request.
 
 When a `Certificate` is created, a corresponding `CertificateRequest` resource is
 created by cert-manager containing the encoded x.509 certificate request, issuer

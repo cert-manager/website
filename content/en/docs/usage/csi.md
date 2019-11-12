@@ -1,7 +1,7 @@
 ---
 title: "CSI Driver"
 linkTitle: "CSI Driver"
-weight: 40
+weight: 300
 type: "docs"
 ---
 
