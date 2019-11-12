@@ -20,12 +20,11 @@ main functions:
   validating admission is always called and will respond with a success or
   failed response.
 - [MutatingAdmissionWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook):
-  Changes the contexts of resources during create and update operations, for
-  example to set default values. There is currently no mutating admission
-  webhook explicitly exposed as a webhook.
+  Changes the contents of resources during create and update operations, for
+  example to set default values.
 - [CustomResourceConversionWebhook](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definition-versioning/#webhook-conversion):
   The webhook will also be responsible for implementing a conversion over
-  versions in the cert-manager custom resources. Although none currently
+  versions in the cert-manager custom resources. Although none are currently
   implemented, the webhook will convert versions from `v1alpha2` to newer
   versions as they are released.
 
@@ -46,6 +45,4 @@ If errors occur around the webhook but the webhook is running then the webhook
 is most likely not reachable from the API server. In this case, ensure that the
 API server can communicate with the webhook by following the [GKE private
 cluster explanation](/docs/installation/compatibility/). TODO: add back in
-'#GKE'. You may also want to
-[disable the webhook
-completely](/docs/installation/compatibility/). TODO: add back in '/#disabling-webhook'.
+'#GKE'.
