@@ -7,8 +7,8 @@ type: "docs"
 
 In cert-manager, the [`Certificate`](../../concepts/certificate/) resource
 represents a human readable definition of a certificate request that is to be
-honored by an issuer which is to be kept up-to-date. This method of requesting
-certificates are expected to be the usual method.
+honored by an issuer which is to be kept up-to-date. This is the usual way that
+you will interact with cert-manager to request signed certificates.
 
 In order to issue any certificates, you'll need to configure an
 [`Issuer`](../../configuration/) resource first.
