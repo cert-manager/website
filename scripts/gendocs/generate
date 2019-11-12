@@ -65,7 +65,7 @@ genversion() {
 		-config "${REPO_ROOT}/scripts/gendocs/config.json" \
 		-template-dir "${REPO_ROOT}/scripts/gendocs/templates" \
 		-api-dir "./pkg/apis" \
-		-out-file "${REPO_ROOT}/content/${outputdir}/reference/api-docs.md" \
+		-out-file "${REPO_ROOT}/content/en/${outputdir}/reference/api-docs.md" \
 		"$@"
 	rm -rf vendor/
 	popd
