@@ -5,7 +5,7 @@ weight: 30
 type: "docs"
 ---
 
-The CA issuer represents a Certificate Authority whereby it's certificate and
+The CA issuer represents a Certificate Authority whereby its certificate and
 private key are stored inside the cluster as a Kubernetes `Secret`, and will be
 used to sign incoming certificate requests. This internal CA certificate can
 then be used to trust resulting signed certificates.
@@ -22,7 +22,7 @@ singing private key to the Kubernetes API server so that cert-manager is able to
 retrieve them and sign certificates. This secret should reside in the same
 namespace as the `Issuer`, or otherwise in the `Cluster Resource Namespace` in
 the case of a `ClusterIssuer`. The `Cluster Resource Namespace` is defaulted as
-being the `kube-system` namespace, however can be configured using the
+being the `cert-manager` namespace, however can be configured using the
 `--cluster-resource-namespace` flag on the cert-manager controller component.
 
 Below is an example of a secret resource that will be used for signing. Take
