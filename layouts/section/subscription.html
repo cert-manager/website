@@ -1,9 +1,13 @@
-{{ define "title" }} | Subscription{{ end }}
+{{ define "title" }} | {{ .Title }}{{ end }}
 {{ define "description" }}Jetstack Subscription is an offering to help you at every stage of your Kubernetes journey. It gives you a tried and trusted suite of tools to support your team.{{ end }}
 
 {{ define "navbar" }}
 {{ partial "navbar/dark.html" . }}
 {{ end }}
+
+{{ define "ogtitle" }}{{ .Title }}{{ end }}
+{{ define "ogdescription" }}{{ .Params.og.description }}{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.og.image }}{{ end }}
 
 {{ define "body" }}
 
