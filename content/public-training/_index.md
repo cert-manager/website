@@ -46,7 +46,7 @@ course_dates:
   eventbriteId: 70142729793
 og:
   description: Hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently
-  image: img/jpg/public-training-header-bg.jpg
+  image: /img/jpg/public-training-header-bg.jpg
 ---
 
 ## Description
