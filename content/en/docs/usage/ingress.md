@@ -1,7 +1,7 @@
 ---
 title: "Securing Ingress Resources"
 linkTitle: "Securing Ingress Resources"
-weight: 40
+weight: 100
 type: "docs"
 ---
 

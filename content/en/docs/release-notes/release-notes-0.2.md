@@ -1,6 +1,6 @@
 ---
-title: "Release Notes"
-linkTitle: "Release Notes"
+title: "Release Notes v0.2"
+linkTitle: "Release Notes v0.2"
 weight: 80
 type: "docs"
 ---
