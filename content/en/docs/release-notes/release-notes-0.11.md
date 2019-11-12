@@ -214,7 +214,7 @@ annotation to `Certificate` resources if
 `"acme.cert-manager.io/http01-edit-in-place"` is present on the Ingress
 resource.
 
-## Change log
+## Changelog
 
 ## Action Required
 

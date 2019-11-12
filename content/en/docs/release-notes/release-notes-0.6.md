@@ -67,7 +67,7 @@ This change reverts the default behavior to support this kind of setup without a
 
 This note only affects the ACME Issuer type.
 
-# Change log
+# Changelog
 ## General
 - Bump Go version to 1.11 (#1050, `@munnerz`)
 - Removed the Git commit hash from the version string in non canary builds (#997) (#1021, `@Nalum`)

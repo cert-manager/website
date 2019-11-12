@@ -46,7 +46,7 @@ for more information on how to get up and running!
 
 ## Webhook based ACME DNS01 solver
 Over the last year and a half, we've had more than 15 pull requests to add new
-ACME DNS01 providers to our code base. It's been brilliant to see such vibrant
+ACME DNS01 providers to our codebase. It's been brilliant to see such vibrant
 community involvement, however it's become infeasible for us to continue to
 accept, test and maintain such a rapidly growing matrix of providers.
 
@@ -71,7 +71,7 @@ emits.
 Your feedback here is really valuable, so please open issues and comment on Slack if you
 have any issues!
 
-## Change log
+## Changelog
 - make email address an optional field in ACME issuers (#1483, `@DanielMorsing`)
 - Fix bug when handling resources that have `lastTransitionTime` set to null (#1628, `@munnerz`)
 - Allow OpenShift to install cert-manager chart (#1395, `@JGodin-C2C`)

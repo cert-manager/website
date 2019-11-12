@@ -58,7 +58,7 @@ manage the logic and life cycle of `CertificateRequet`s.
 `CertificateRequest`s have a set of strongly defined conditions that should be
 used and relied upon by controllers or services to make decisions on what
 actions to take next on the resource. Each condition consists of the pair
-`Ready` - a true or false value, and `Reason` - a string. The set of values and
+`Ready` - a boolean value, and `Reason` - a string. The set of values and
 meanings are as follows:
 
 | Ready | Reason  | Condition Meaning                                                                                                                                                                                                                             |

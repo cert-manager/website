@@ -127,7 +127,7 @@ error in implementation. This has now been corrected to PEM encoding. Current
 orders that were created with a previous version of cert-manager will fail to
 validate and so will be recreated. This should resume the order normally.
 
-## Change log
+## Changelog
 
 ### General
 

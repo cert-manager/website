@@ -70,7 +70,7 @@ This can be useful when debugging, or once cert-manager also supports setting th
 
 Read up on how to get started with this new issuer type in the documentation.
 
-# Change log
+# Changelog
 ## Action Required
 - Check the acme issuer has the 'HTTP01' challenge type configured if in use. (#629, `@groner`)
 ACME HTTP01 validation is no longer attempted using an

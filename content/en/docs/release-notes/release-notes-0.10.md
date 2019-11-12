@@ -109,7 +109,7 @@ beta from Kubernetes 1.15 onward).
 
 No special actions are required as part of this release.
 
-## Change log
+## Changelog
 
 ### General
 

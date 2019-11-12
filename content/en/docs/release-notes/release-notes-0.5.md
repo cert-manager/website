@@ -30,7 +30,7 @@ This release includes two new DNS provides for the ACME Issuer:
 - RFC2136
 These additions should help more users begin using cert-manager with their chosen DNS provider, without having to delegate to an alternate provider that is supported
 
-# Change log
+# Changelog
 ## General
 - Add `renew-before-expiry-duration` option to configure how long before expiration a certificate should be attempted to be renewed (#801, `@munnerz`)
 - Add validation webhooks for API types (#478, `@munnerz`)

@@ -55,7 +55,7 @@ In the `v0.7.0 release`, if a self check or ACME validation is failing for some
 reason, this information will be displayed when running `kubectl get` and
 `kubectl describe`.
 
-### Change log since `v0.6.0`
+### Changelog since `v0.6.0`
 - Add Venafi Cloud & TPP issuer type (#1250, `@munnerz`)
 - `cainjector`: add support for injecting apiserver CA (#1420, `@munnerz`)
 - Generate temporary self signed certificate whilst waiting for issuer to issue certificate (#1392, `@munnerz`)

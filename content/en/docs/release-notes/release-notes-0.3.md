@@ -65,7 +65,7 @@ There are pull requests in flight to add support for:
 - INWX (#336, `@steigr`)
 - RFC2136 (#245, `@simonfuhrer`)
 
-# Change log
+# Changelog
 ## Action Required
 Please check the 'upgrading from 0.2 to 0.3' guide in the Administrative Tasks section of the docs here before upgrading.
 
