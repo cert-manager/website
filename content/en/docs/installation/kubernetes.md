@@ -20,7 +20,7 @@ guides](../../configuration/).
 
 
 > Note: From cert-manager v0.11.0 onward, the minimum supported version of
-> Kubernetes is v1.11.0. Users still running Kubernetes v1.10 or below should
+> Kubernetes is v1.12.0. Users still running Kubernetes v1.11 or below should
 > upgrade to a supported version before installing cert-manager.
 
 > **Warning**: You should not install multiple instances of cert-manager on a single
@@ -40,33 +40,16 @@ Create a namespace to run cert-manager in
 $ kubectl create namespace cert-manager
 ```
 
-As part of the installation, cert-manager also deploys a webhook deployment as
-an
-[`APIService`](https://kubernetes.io/docs/tasks/access-kubernetes-api/setup-extension-api-server).
-This can cause issues when uninstalling cert-manager if the API service still
-exists but the webhook is no longer running as the API server is unable to reach
-the validating webhook. Ensure to follow the documentation when
-[uninstalling cert-manager](TODO: Where should this live?).
-
-The webhook enables cert-manager to implement validation and mutating webhooks
-on cert-manager resources. A
-[`ValidatingWebhookConfiguration`](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers)
-resource is deployed to validate cert-manager resources we will create after
-installation. No mutating webhooks are currently implemented.
-
-You can read more about the webhook on the [webhook
-document](../../concepts/webhook/).
-
 We can now go ahead and install cert-manager. All resources
 (the CustomResourceDefinitions, cert-manager, and the webhook component)
 are included in a single YAML manifest file:
 
 Install the CustomResourceDefinitions and cert-manager itself
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.11.0/cert-manager.yaml
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.11.0/cert-manager.yaml
 ```
 
-> Note: If you are running Kubernetes v1.15 or below, you will need to add the
+> **Note**: If you are running Kubernetes v1.15 or below, you will need to add the
 > `--validate=false` flag to your `kubectl apply` command above else you will
 > receive a validation error relating to the
 > `x-kubernetes-preserve-unknown-fields` field in our
@@ -74,12 +57,12 @@ $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0
 > to the way ``kubectl`` performs resource validation.
 
 
-> Note: When running on GKE (Google Kubernetes Engine), you may encounter a
+> **Note**: When running on GKE (Google Kubernetes Engine), you may encounter a
 > 'permission denied' error when creating some of these resources. This is a
 > nuance of the way GKE handles RBAC and IAM permissions, and as such you should
 > 'elevate' your own privileges to that of a 'cluster-admin' **before** running
 > the above command. If you have already run the above command, you should run
-> them again after elevating your permissions::
+> them again after elevating your permissions:
 
 ```bash
 kubectl create clusterrolebinding cluster-admin-binding \
@@ -151,7 +134,7 @@ $ helm install \
 
 The default cert-manager configuration is good for the majority of users, but a
 full list of the available options can be found in the [Helm chart
-README](https://github.com/jetstack/cert-manager/blob/release-0.11/deploy/charts/cert-manager/README.md).
+README](https://hub.helm.sh/charts/jetstack/cert-manager).
 
 ### Verifying the installation
 
@@ -251,7 +234,7 @@ If you experience problems, please check the
 Before you can begin issuing certificates, you must configure at least one
 Issuer or ClusterIssuer resource in your cluster.
 
-You should read the [Setting up Issuers](../../configuration/) guide to
+You should read the [configuration](../../configuration/) guide to
 learn how to configure cert-manager to issue certificates from one of the
 supported backends.
 
