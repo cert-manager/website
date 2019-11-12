@@ -16,7 +16,7 @@ following installed:
 - [Bazel](https://docs.bazel.build/versions/master/install.html)
 - [Docker](https://store.docker.com/search?type=edition&offering=community) (and
   enable for non-root user)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ## Start Kind Cluster
 

@@ -70,7 +70,7 @@ file, you should instead use the
 [`cert-manager-no-webhook.yaml`](https://github.com/jetstack/cert-manager/releases/download/v0.11.0/cert-manager.yaml)
 file located in the deploy directory.
 
-This is a destructive operation, as it will remove the CustomResourceDefinition
+This is a destructive operation, as it will remove the `CustomResourceDefinition`
 resources, causing your configured Issuers, Certificates etc to be deleted.
 
 You should first [backup your configuration](../../tutorials/backup/) before

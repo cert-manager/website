@@ -25,10 +25,10 @@ The HTTP01 Issuer supports a number of additional options.  For full details on
 the range of options available, read the [reference
 documentation](https://docs.cert-manager.io/en/latest/reference/api-docs/#acmeissuerhttp01config-v1alpha2). TODO: fix link
 
-### ingressClass
+### `ingressClass`
 
 If the `ingressClass` field is specified, cert-manager will create new
-Ingress resources in order to route traffic to the 'acmesolver' pods, which
+Ingress resources in order to route traffic to the `acmesolver` pods, which
 are responsible for responding to ACME challenge validation requests.
 
 If this field is not specified, and `ingressName` is also not specified,
@@ -38,24 +38,24 @@ installed in your cluster will server traffic for the challenge solver,
 potentially occurring additional cost.
 
 
-### ingressName
+### `ingressName`
 
-If the 'ingressName' field is specified, cert-manager will edit the named
+If the `ingressName` field is specified, cert-manager will edit the named
 ingress resource in order to solve HTTP01 challenges.
 
-This is useful for compatibility with ingress controllers such as ingress-gce,
+This is useful for compatibility with ingress controllers such as `ingress-gce`,
 which utilize a unique IP address for each Ingress resource created.
 
 This mode should be avoided when using ingress controllers that expose a single
 IP for all ingress resources, as it can create compatibility problems with
 certain ingress-controller specific annotations.
 
-### servicePort
+### `servicePort`
 
-In rare cases it might be not possible/desired to use NodePort as type for the
+In rare cases it might be not possible/desired to use `NodePort` as type for the
 HTTP01 challenge response service, e.g. because of Kubernetes limit
 restrictions. To define which Kubernetes service type to use during challenge
-response specify the following HTTP01 config:
+response specify the following HTTP01 configuration:
 
 ```yaml
     http01:
@@ -63,11 +63,11 @@ response specify the following HTTP01 config:
       serviceType: ClusterIP
 ```
 
-By default type NodePort will be used when you don't set HTTP01 or when you set
-serviceType to an empty string. Normally there's no need to change this.
+By default type `NodePort` will be used when you don't set HTTP01 or when you set
+`serviceType` to an empty string. Normally there's no need to change this.
 
 
-### podTemplate
+### `podTemplate`
 
 You may wish to change or add to the labels and annotations of solver pods.
 These can be configured under the `metadata` field under `podTemplate`. 

@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 The `CertificateRequest` is a namespaced resource in cert-manager that is used
-to request x.509 certificates from an issuer. The resource contains a base64
+to request x509 certificates from an issuer. The resource contains a base64
 encoded string of a PEM encoded certificate request which is sent to the
 referenced issuer. A successful issuance will return a signed certificate, based
 on the certificate signing request. `CertificateRequet`s are typically consumed
@@ -63,6 +63,6 @@ meanings are as follows:
 
 | Ready | Reason  | Condition Meaning                                                                                                                                                                                                                             |
 |-------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| False | Pending | The CertificateRequest is currently pending, waiting for some other operation to take place. This could be that the Issuer does not exist yet or the Issuer is in the process of issuing a certificate.                                       |
-| False | Failed  | The certificate has failed to be issued - either the returned certificate failed to be decoded or an instance of the referenced issuer used for signing failed. No further action will be taken on the CertificateRequest by it's controller. |
+| False | Pending | The `CertificateRequest` is currently pending, waiting for some other operation to take place. This could be that the `Issuer` does not exist yet or the `Issuer` is in the process of issuing a certificate.                                       |
+| False | Failed  | The certificate has failed to be issued - either the returned certificate failed to be decoded or an instance of the referenced issuer used for signing failed. No further action will be taken on the `CertificateRequest` by it's controller. |
 | True  | Issued  | A signed certificate has been successfully issued by the referenced Issuer.                                                                                                                                                                   |

@@ -20,8 +20,8 @@ fly.
 A [CSI
 driver](https://github.com/container-storage-interface/spec/blob/master/spec.md)
 is a storage plugin that is deployed into your Kubernetes cluster that can
-honor volume requests specified on pods, just like those enabled by default such the
-secret, configmap, or hostpath volume drivers. In the case of the cert-manager
+honor volume requests specified on pods, just like those enabled by default such as
+the `Secret`, `ConfigMap`, or `hostPath` volume drivers. In the case of the cert-manager
 CSI driver, it makes use of the ephemeral volume type, made beta as of
 [`v1.16`](https://kubernetes.io/docs/concepts/storage/volumes/#csi-ephemeral-volumes)
 and as such will only work from the Kubernetes version `v1.16`. An ephemeral
@@ -55,7 +55,7 @@ The driver should be deployed as a
 which means a single instance of the driver may be run on each node. The driver
 will not work when running multiple instances on a single node. The set of nodes
 that the driver runs on can be restricted using the
-[nodeSelector](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)
+[`nodeSelector`](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)
 in its pod template.
 
 When a pod is scheduled to a node with a cert-manager CSI volume specified, the
@@ -88,10 +88,10 @@ terminated.
 
 ## Installation and Configuration
 
-TODO (@joshvanl): add the installation guide once we are closer to a full
+TODO (`@joshvanl`): add the installation guide once we are closer to a full
 release.
 
-TODO (@joshvanl): add commands to verify installation
+TODO (`@joshvanl`): add commands to verify installation
 ```bash
 $ kubectl get csinodes
 $ kubectl get csidrivers
@@ -157,16 +157,16 @@ certificate is available from the pods file system at `/tls/key.pem` and
 Below is a full list of the available volume attributes to configure resulting
 key certificate pairs.
 
-| Attribute                            | Description                                                                  | Default                 | Example                        |
-|--------------------------------------|------------------------------------------------------------------------------|-------------------------|--------------------------------|
-| csi.cert-manager.io/issuer-name      | The Issuer name to sign the certificate request.                             |                         | ca-issuer                      |
-| csi.cert-manager.io/issuer-kind      | The Issuer kind to sign the certificate request.                             | Issuer                  | ClusterIssuer                  |
-| csi.cert-manager.io/issuer-group     | The group name the Issuer belongs to.                                        | cert-manager.io         | out.of.tree.foo                |
-| csi.cert-manager.io/common-name      | Certificate common name. A common name or at least one DNS name must be set. |                         | my-cert.foo                    |
-| csi.cert-manager.io/dns-names        | Comma separated DNS names the certificate will be requested for. |           | a.b.foo.com,c.d.foo.com |                                |
-| csi.cert-manager.io/ip-sans          | Comma separated IP addresses the certificate will be requested for.          |                         | 192.0.0.1,192.0.0.2            |
-| csi.cert-manager.io/uri-sans         | Comma separated URI names the certificate will be requested for.             |                         | spiffe://foo.bar.cluster.local |
-| csi.cert-manager.io/duration         | Requested duration the signed certificate will be valid for.                 | 720h                    | 1880h                          |
-| csi.cert-manager.io/is-ca            | Mark the certificate as a certificate authority.                             | false                   | true                           |
-| csi.cert-manager.io/certificate-file | File name to store the certificate file at.                                  | crt.pem                 | bar/foo.crt                    |
-| csi.cert-manager.io/privatekey-file  | File name to store the key file at.                                          | key.pem                 | bar/foo.key                    |
+| Attribute                              | Description                                                                  | Default                   | Example                          |
+|----------------------------------------|------------------------------------------------------------------------------|---------------------------|----------------------------------|
+| `csi.cert-manager.io/issuer-name`      | The Issuer name to sign the certificate request.                             |                           | `ca-issuer`                      |
+| `csi.cert-manager.io/issuer-kind`      | The Issuer kind to sign the certificate request.                             | `Issuer`                  | `ClusterIssuer`                  |
+| `csi.cert-manager.io/issuer-group`     | The group name the Issuer belongs to.                                        | `cert-manager.io`         | `out.of.tree.foo`                |
+| `csi.cert-manager.io/common-name`      | Certificate common name. A common name or at least one DNS name must be set. |                           | `my-cert.foo`                    |
+| `csi.cert-manager.io/dns-names`        | Comma separated DNS names the certificate will be requested for. |           | `a.b.foo.com,c.d.foo.com` |                                  |
+| `csi.cert-manager.io/ip-sans`          | Comma separated IP addresses the certificate will be requested for.          |                           | `192.0.0.1,192.0.0.2`            |
+| `csi.cert-manager.io/uri-sans`         | Comma separated URI names the certificate will be requested for.             |                           | `spiffe://foo.bar.cluster.local` |
+| `csi.cert-manager.io/duration`         | Requested duration the signed certificate will be valid for.                 | `720h`                    | `1880h`                          |
+| `csi.cert-manager.io/is-ca`            | Mark the certificate as a certificate authority.                             | `false`                   | `true`                           |
+| `csi.cert-manager.io/certificate-file` | File name to store the certificate file at.                                  | `crt.pem`                 | `bar/foo.crt`                    |
+| `csi.cert-manager.io/privatekey-file`  | File name to store the key file at.                                          | `key.pem`                 | `bar/foo.key`                    |

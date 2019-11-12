@@ -93,8 +93,7 @@ solve DNS challenges. Our Issuer defines two providers. This gives us a choice
 of which one to use when obtaining certificates.
 
 More information about the DNS provider configuration, including a list of
-supported providers, can be found [in the DNS01 reference docs
-supported-dns01-providers](../../../configuration/acme/dns01/).
+supported providers, can be found [in the DNS01 reference docs](../../../configuration/acme/dns01/).
 
 Once we have created the above Issuer we can use it to obtain a certificate.
 

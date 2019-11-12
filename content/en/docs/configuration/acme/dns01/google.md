@@ -41,7 +41,7 @@ To access this service account cert-manager uses a key stored in a Kubernetes
 Secret. First, create a key for the service account and download it as JSON
 file, then create a Secret from this file.
 
-If you did not create the service "dns01-solver" account before, you need to
+If you did not create the service account `dns01-solver` before, you need to
 create it first:
 
 ```bash
@@ -89,7 +89,7 @@ spec:
             key: key.json
 ```
 
-For more information about Issuers and ClusterIssuers, see
+For more information about `Issuers` and `ClusterIssuers`, see
 [Configuration](../../../).
 
 Once an `Issuer` (or `ClusterIssuer`) has been created successfully a

@@ -28,8 +28,8 @@ obtain certificates from.
 You can configure your `Issuer` resource to either issue certificates only
 within a single namespace, or cluster-wide (using a `ClusterIssuer` resource).
 For more information on the distinction between `Issuer` and `ClusterIssuer`
-resources, read the [issuer vs
-clusterissuer](../../concepts/issuer/) section.
+resources, read the [`Issuer` vs
+`ClusterIssuer`](../../concepts/issuer/) section.
 
 ### Creating a Venafi Cloud Issuer
 

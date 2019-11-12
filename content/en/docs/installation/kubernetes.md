@@ -13,14 +13,14 @@ to configure Certificate Authorities and request certificates.
 It is deployed using regular YAML manifests, like any other applications on
 Kubernetes.
 
-Once cert-manager has been deployed, you must configure Issuer or ClusterIssuer
+Once cert-manager has been deployed, you must configure `Issuer` or `ClusterIssuer`
 resources which represent certificate authorities.  More information on
 configuring different Issuer types can be found in the [respective configuration
 guides](../../configuration/).
 
 
-> Note: From cert-manager v0.11.0 onward, the minimum supported version of
-> Kubernetes is v1.12.0. Users still running Kubernetes v1.11 or below should
+> Note: From cert-manager `v0.11.0` onward, the minimum supported version of
+> Kubernetes is `v1.12.0`. Users still running Kubernetes `v1.11` or below should
 > upgrade to a supported version before installing cert-manager.
 
 > **Warning**: You should not install multiple instances of cert-manager on a single
@@ -30,7 +30,7 @@ guides](../../configuration/).
 ## Installing with regular manifests
 
 In order to install cert-manager, we must first create a namespace to run it
-within. This guide will install cert-manager into the ``cert-manager``
+within. This guide will install cert-manager into the `cert-manager`
 namespace. It is possible to run cert-manager in a different namespace,
 although you will need to make modifications to the deployment manifests.
 
@@ -41,20 +41,20 @@ $ kubectl create namespace cert-manager
 ```
 
 We can now go ahead and install cert-manager. All resources
-(the CustomResourceDefinitions, cert-manager, and the webhook component)
+(the `CustomResourceDefinitions`, cert-manager, and the webhook component)
 are included in a single YAML manifest file:
 
-Install the CustomResourceDefinitions and cert-manager itself
+Install the `CustomResourceDefinitions` and cert-manager itself
 ```bash
 $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.11.0/cert-manager.yaml
 ```
 
-> **Note**: If you are running Kubernetes v1.15 or below, you will need to add the
+> **Note**: If you are running Kubernetes `v1.15` or below, you will need to add the
 > `--validate=false` flag to your `kubectl apply` command above else you will
 > receive a validation error relating to the
 > `x-kubernetes-preserve-unknown-fields` field in our
-> ``CustomResourceDefinition`` resources.  This is a benign error and occurs due
-> to the way ``kubectl`` performs resource validation.
+> `CustomResourceDefinition` resources.  This is a benign error and occurs due
+> to the way `kubectl` performs resource validation.
 
 
 > **Note**: When running on GKE (Google Kubernetes Engine), you may encounter a
@@ -94,7 +94,7 @@ Full documentation on installing Helm can be found in the [installing helm
 docs](https://github.com/kubernetes/helm/blob/master/docs/install.md).
 
 If your cluster has RBAC (Role Based Access Control) enabled (default in GKE
-v1.7+), you will need to take special care when deploying Tiller, to ensure
+`v1.7`+), you will need to take special care when deploying Tiller, to ensure
 Tiller has permission to create resources as a cluster administrator. More
 information on deploying Helm with RBAC can be found in the [Helm RBAC
 docs](https://github.com/helm/helm/blob/master/docs/rbac.md).
@@ -103,7 +103,7 @@ docs](https://github.com/helm/helm/blob/master/docs/rbac.md).
 
 In order to install the Helm chart, you must run:
 
-Install the CustomResourceDefinition resources separately
+Install the `CustomResourceDefinition` resources separately
 ```bash
 $ kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/deploy/manifests/00-crds.yaml
 ```
@@ -160,7 +160,7 @@ check the [FAQ guide](../../faq/).
 The following steps will confirm that cert-manager is set up correctly and able
 to issue basic certificate types:
 
-Create a ClusterIssuer to test the webhook works okay
+Create a `ClusterIssuer` to test the webhook works okay
 ```bash
 $ cat <<EOF > test-resources.yaml
 apiVersion: v1
@@ -232,7 +232,7 @@ If you experience problems, please check the
 ## Configuring your first Issuer
 
 Before you can begin issuing certificates, you must configure at least one
-Issuer or ClusterIssuer resource in your cluster.
+Issuer or `ClusterIssuer` resource in your cluster.
 
 You should read the [configuration](../../configuration/) guide to
 learn how to configure cert-manager to issue certificates from one of the

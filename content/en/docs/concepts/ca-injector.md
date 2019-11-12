@@ -19,7 +19,7 @@ It copies across the CA defined in the `cert-manager-webhook-ca` Secret
 generated to the `caBundle` field on the `APIService` resource. It also sets
 the webhook's `clientConfig.caBundle` field on the `cert-manager-webhook`
 `ValidatingWebhookConfiguration` resource to that of your Kubernetes API server
-in order to support Kubernetes versions earlier than v1.11.
+in order to support Kubernetes versions earlier than `v1.11`.
 
 The CA injector runs as a separate pod along side the main cert-manager
 controller and webhook components.

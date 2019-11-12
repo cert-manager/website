@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 This provider uses a Kubernetes `Secret` Resource to work. In the following
-example, the secret will have to be named `digitalocean-dns` and have a subkey
+example, the secret will have to be named `digitalocean-dns` and have a sub-key
 `access-token` with the token in it.
 
 To create a Personal Access Token, see [DigitalOcean documentation](https://www.digitalocean.com/docs/api/create-personal-access-token).

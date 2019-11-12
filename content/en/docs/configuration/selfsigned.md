@@ -5,7 +5,7 @@ weight: 30
 type: "docs"
 ---
 
-The `SelfSigned` issuer doesn't represent a certificate authority per se, but
+The `SelfSigned` issuer doesn't represent a certificate authority as such, but
 instead denotes that certificates will be signed through "self signing" using
 the given private key. This means that the provided private key of the resulting
 certificate will be used to sign its own certificate.
@@ -42,10 +42,10 @@ Once deployed, you should be able to see immediately that the issuer is ready
 for signing. Replace `issuers` here with `clusterissuers` if that is what has
 been deployed.
 
-TODO (@joshvanl): add output to this command once the ready status has been
+TODO (`@joshvanl`): add output to this command once the ready status has been
 ```bash
 $ kubectl get issuers selfsigned-issuer -n sandbox -o wide
 ```
 
-Certificates are now ready to be requested by using the SelfSigned issuer named
+Certificates are now ready to be requested by using the `SelfSigned` issuer named
 `selfsigned-issuer` within the `sandbox` namespace.

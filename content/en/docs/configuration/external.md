@@ -22,7 +22,7 @@ project. A list of known external issuer projects that are maintained by their
 authors are as follows:
 
 - [step-issuer](https://github.com/smallstep/step-issuer): Used to request
-  certificates from the [SmallStep](https://smallstep.com) [Certificate
+  certificates from the [Smallstep](https://smallstep.com) [Certificate
   Authority server](https://github.com/smallstep/certificates).
 
 To create your own external issuer type, please follow the guidance in the

@@ -15,7 +15,7 @@ ingress-shim, is responsible for this.
 
 The sub-component ingress-shim watches `Ingress` resources across your cluster.
 If it observes an `Ingress` with annotations described in the `Supported
-Annotations` (TODO @joshvanl: add sub-title line) section, it will ensure a
+Annotations` (TODO `@joshvanl`: add sub-title line) section, it will ensure a
 `Certificate` resource with the same name as the Ingress, and configured as
 described on the `Ingress` exists. For example:
 
@@ -57,20 +57,20 @@ trigger `Certificate` resources to be automatically created:
   your `Ingress resides`, as `ClusterIssuers` are non-namespaced resources.
 
 - `kubernetes.io/tls-acme: "true"`: this annotation requires additional
-  configuration of the ingress-shim (see below(TODO @joshvanl: add sub-title
+  configuration of the ingress-shim (see below(TODO `@joshvanl`: add sub-title
   link)). Namely, a default issuer must be specified as arguments to the
   ingress-shim container.
 
 - `acme.cert-manager.io/http01-ingress-class`: this annotation allows you to
   configure the ingress class that will be used to solve challenges for this
-  ingress. Customising this is useful when you are trying to secure internal
+  ingress. Customizing this is useful when you are trying to secure internal
   services, and need to solve challenges using a different ingress class to that
   of the ingress. If not specified and the `acme-http01-edit-in-place` annotation
   is not set, this defaults to the ingress class of the ingress resource.
 
 - `acme.cert-manager.io/http01-edit-in-place: "true"`: this controls whether the
   ingress is modified 'in-place', or a new one created specifically for the
-  http01 challenge. If present, and set to "true", the existing ingress will be
+  HTTP01 challenge. If present, and set to "true", the existing ingress will be
   modified. Any other value, or the absence of the annotation assumes "false".
   This annotation will also add the annotation
   `"cert-manager.io/issue-temporary-certificate": "true"` onto created

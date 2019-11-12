@@ -12,17 +12,17 @@ over cert-manager resources. This means that cert-manager benefits from most of
 the same behavior that core Kubernetes resource have. The webhook has three
 main functions:
 
-- [ValidatingAdmissionWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook):
+- [`ValidatingAdmissionWebhook`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook):
   Ensures that when cert-manager resources are created or updated, they conform
   to the rules of the API. This validation is more in depth than for example
   ensuring resources conform to the OpenAPI schema, but instead contains logic such as
   not allowing to specify more than one issuer type per issuer resource. The
   validating admission is always called and will respond with a success or
   failed response.
-- [MutatingAdmissionWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook):
+- [`MutatingAdmissionWebhook`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook):
   Changes the contents of resources during create and update operations, for
   example to set default values.
-- [CustomResourceConversionWebhook](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definition-versioning/#webhook-conversion):
+- [`CustomResourceConversionWebhook`](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definition-versioning/#webhook-conversion):
   The webhook will also be responsible for implementing a conversion over
   versions in the cert-manager custom resources. Although none are currently
   implemented, the webhook will convert versions from `v1alpha2` to newer
@@ -33,7 +33,7 @@ cert-manager controller and CA injector components.
 
 In order for the API server to communicate with the webhook component, the
 webhook requires a TLS certificate that the apiserver is configured to trust.
-This is created by the [ca-injector](../ca-injector/) and is implemented by the
+This is created by the [`cainjector`](../ca-injector/) and is implemented by the
 following two Secrets:
 
 - `secret/cert-manager-webhook-ca`: A self-signed root CA certificate which is

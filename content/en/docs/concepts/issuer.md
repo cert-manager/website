@@ -27,7 +27,7 @@ This is a simple Issuer that will sign certificates based on a private key. The
 corresponding CA certificate can then be used to trust newly signed certificates
 in a PKI system.
 
-## Namespacing
+## Namespaces
 
 An Issuer is a namespaced resource, and it is not possible to issue
 certificates from an Issuer in a different namespace. This means you will need

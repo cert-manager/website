@@ -19,7 +19,7 @@ milestone to be addressed in a future release.
 The more logs and information you can give about what and how the bug has been
 discovered, the faster it can be resolved.
 
-Critical bug fixes are typically backported to the current minor stable release.
+Critical bug fixes are typically also cherry picked to the current minor stable release.
 
 > Note: If you are simply looking for _troubleshooting_ then you should post
 > your question to the community `cert-manager` [slack channel](https://slack.k8s.io).
@@ -52,5 +52,5 @@ can have multiple cycles.
 
 Once code has been merged, your changes will appear in the next minor release of
 cert-manager. If the pull request is a critical bug fix then this will probably
-also be backported to the current stable version of cert-manager as a patch
+also be cherry picked to the current stable version of cert-manager as a patch
 release.

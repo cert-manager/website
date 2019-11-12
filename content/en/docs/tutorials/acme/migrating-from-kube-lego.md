@@ -11,15 +11,15 @@ for obtaining TLS certificates from Let's Encrypt (or another ACME server).
 Since cert-managers release, kube-lego has been gradually deprecated in favor
 of this project. There are a number of key differences between the two:
 
-| Feature                                   | kube-lego                        | cert-manager          |
-|-------------------------------------------|----------------------------------|-----------------------|
-| Configuration                             | Annotations on Ingress resources | CRDs                  |
-| CAs                                       | ACME                             | ACME, signing keypair |
-| Kubernetes                                | v1.2 - v1.8                      | v1.7+                 |
-| Debugging                                 | Look at logs                     | Kubernetes Events API |
-| Multi-tenancy                             | Not supported                    | Supported             |
-| Distinct issuance sources per Certificate | Not supported                    | Supported             |
-| Ingress controller support (ACME)         | GCE, NGINX                       | All                   |
+| Feature                                   | kube-lego                        | cert-manager           |
+|-------------------------------------------|----------------------------------|------------------------|
+| Configuration                             | Annotations on Ingress resources | CRDs                   |
+| CAs                                       | ACME                             | ACME, signing key pair |
+| Kubernetes                                | `v1.2` - `v1.8`                  | `v1.7+`                |
+| Debugging                                 | Look at logs                     | Kubernetes Events API  |
+| Multi-tenancy                             | Not supported                    | Supported              |
+| Distinct issuance sources per Certificate | Not supported                    | Supported              |
+| Ingress controller support (ACME)         | GCE, NGINX                       | All                    |
 
 This guide will walk through how you can safely migrate your kube-lego
 installation to cert-manager, without service interruption.
@@ -32,12 +32,12 @@ By the end of the guide, we should have:
 
 3. Migrated ACME private key to cert-manager
 
-4. Created an ACME ClusterIssuer using this private key, to issue certificates
+4. Created an ACME `ClusterIssuer` using this private key, to issue certificates
    throughout your cluster
 
-5. Configured cert-manager's [ingress-shim](../../../usage/ingress/) to
+5. Configured cert-manager's [`ingress-shim`](../../../usage/ingress/) to
    automatically provision Certificate resources for all Ingress resources with
-  the `kubernetes.io/tls-acme: "true"` annotation, using the ClusterIssuer we
+  the `kubernetes.io/tls-acme: "true"` annotation, using the `ClusterIssuer` we
   have created
 
 6. Verified that the cert-manager installation is working
@@ -99,7 +99,7 @@ more relevant to cert-manager. For the rest of this guide, we'll assume you
 chose `letsencrypt-private-key`.
 
 Once done, we need to create this new resource in the `kube-system` namespace.
-By default, cert-manager stores supporting resources for ClusterIssuers in the
+By default, cert-manager stores supporting resources for `ClusterIssuers` in the
 namespace that it is running in, and we used `kube-system` when deploying
 cert-manager above. You should change this if you have deployed cert-manager
 into a different namespace.
@@ -109,16 +109,16 @@ $ kubectl create -f kube-lego-account.yaml \
     --namespace kube-system
 ```
 
-## 4. Creating an ACME ClusterIssuer using your old ACME account
+## 4. Creating an ACME `ClusterIssuer` using your old ACME account
 
 We need to create a `ClusterIssuer` which will hold information about the ACME
 account previously registered via kube-lego. In order to do so, we need two more
 pieces of information from our old kube-lego deployment: the server URL of the
 ACME server, and the email address used to register the account.
 
-Both of these bits of information are stored within the kube-lego ConfigMap.
+Both of these bits of information are stored within the kube-lego `ConfigMap`.
 
-To retrieve them, you should be able to `get` the ConfigMap using `kubectl`:
+To retrieve them, you should be able to `get` the `ConfigMap` using `kubectl`:
 
 ```bash
 $ kubectl get configmap kube-lego -o yaml \
@@ -129,12 +129,12 @@ $ kubectl get configmap kube-lego -o yaml \
 Your email address should be shown under the `.data.lego.email` field, and the
 ACME server URL under `.data.lego.url`.
 
-For the purposes of this guide, we will assume the lego email is
+For the purposes of this guide, we will assume the email is
 `user@example.com` and the URL
 `https://acme-staging-v02.api.letsencrypt.org/directory`.
 
 Now that we have migrated our private key to the new Secret resource, as well as
-obtaining our ACME email address and URL, we can create a ClusterIssuer
+obtaining our ACME email address and URL, we can create a `ClusterIssuer`
 resource!
 
 Create a file named `cluster-issuer.yaml`:
@@ -183,10 +183,10 @@ Status:
     Type:                  Ready
 ```
 
-## 5. Configuring ingress-shim to use our new ClusterIssuer by default
+## 5. Configuring ingress-shim to use our new `ClusterIssuer` by default
 
 Now that our `ClusterIssuer` is ready to issue certificates, we have one last
-thing to do: we must reconfigure ingress-shim (deployed as part of cert-manager)
+thing to do: we must reconfigure `ingress-shim` (deployed as part of cert-manager)
 to automatically create Certificate resources for all Ingress resources it finds
 with appropriate annotations.
 
@@ -231,4 +231,4 @@ I1025 21:54:02.869269       1 sync.go:206] Certificate my-example-certificate sc
 ```
 
 Here we can see cert-manager has verified the existing TLS certificate and
-scheduled it to be renewed in 292h time.
+scheduled it to be renewed in 292 hours time.
