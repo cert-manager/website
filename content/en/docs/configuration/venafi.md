@@ -43,7 +43,7 @@ $ kubectl create secret generic \
        --from-literal=apikey='YOUR_CLOUD_API_KEY_HERE'
 ```
 
-> Note: If you are configuring your issuer as a `ClusterIssuer` resource in
+> **Note**: If you are configuring your issuer as a `ClusterIssuer` resource in
 > order to issue Certificates across your whole cluster, you must set the
 > `--namespace` parameter to `kube-system`, which is the default `Cluster
 > Resource Namespace`. The `Cluster Resource Namespace` can be configured
@@ -76,7 +76,7 @@ spec:
         key: apikey
 ```
 
-You can then create the Issuer using `kubectl create -`:
+You can then create the Issuer using `kubectl create`:
 
 ```bash
 $ kubectl create -f venafi-cloud-issuer.yaml
@@ -87,6 +87,8 @@ Verify the `Issuer` has been initialized correctly using `kubectl describe`:
 ```bash
 $ kubectl describe issuer cloud-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
 ```
+
+* TODO: add output
 
 You are now ready to issue certificates using the newly provisioned Venafi
 Issuer.
