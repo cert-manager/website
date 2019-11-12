@@ -21,6 +21,7 @@ alone cannot provide.
 
 All Vault issuers share common configuration for requesting certificates,
 namely the server, path, and CA bundle:
+
 - Server is the URL whereby Vault is reachable.
 - Path is the Vault path that will be used for signing. Note that the path
   *must* use the `sign` endpoint.
@@ -30,7 +31,7 @@ namely the server, path, and CA bundle:
 
 Below is an example of a configuration to connect a Vault server.
 
-> *Warning*: This configuration is incomplete as no authentication methods have
+> **Warning**: This configuration is incomplete as no authentication methods have
 > been added.
 
 ```yaml
@@ -48,6 +49,8 @@ spec:
       ...
 ```
 
+## Authenticating
+
 In order to request signing of certificates by Vault, the issuer must be able to
 properly authenticate against it. cert-manger provides multiple approaches to
 authenticating to Vault which are detailed below.
@@ -55,7 +58,7 @@ authenticating to Vault which are detailed below.
 ### Authenticating via an AppRole
 
 An [AppRole](https://www.vaultproject.io/docs/auth/approle.html) is a method of
-authenticating to vault through use of it's internal role policy system. This
+authenticating to Vault through use of it's internal role policy system. This
 authentication method requires that the issuer has possession of the `SecretID`
 secret key, the `RoleID` of the role to assume, and the app role path. Firstly,
 the secret ID key must be stored within a Kubernetes `Secret` that resides in the
@@ -97,14 +100,14 @@ spec:
           key: secretId
 ```
 
-## Authenticating with a Token
+### Authenticating with a Token
 
 This method of authentication uses a token string that has been generated from
 one of the many authentication backends that Vault supports. These tokens have
 an expiry and so need to be periodically refreshed. You can read more on Vault
 tokens [here](https://www.vaultproject.io/docs/concepts/tokens.html).
 
-> Note: cert-manager does refresh these token automatically and so another
+> **Note**: cert-manager does refresh these token automatically and so another
 > process must be put in place to do this.
 
 Firstly, the token is be stored inside a Kubernetes `Secret` inside the same
@@ -144,7 +147,7 @@ spec:
           key: token
 ```
 
-## Authenticating with Kubernetes Service Accounts
+### Authenticating with Kubernetes Service Accounts
 
 Vault can be configured so that applications can authenticate using Kubernetes
 [`Service Account
