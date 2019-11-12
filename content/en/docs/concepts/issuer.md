@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 `Issuers`, and `ClusterIssuers`, are Kubernetes resources to represent
-certificate CA issuers that are able to preset signed certificates by honoring
+certificate CA issuers that are able to generate signed certificates by honoring
 certificate signing requests. All cert-manager certificates require a referenced
 issuer that is in a ready condition to attempt to honor the request.
 
