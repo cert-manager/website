@@ -32,7 +32,7 @@ certificates and keys per pod, where the private key never leaves the hosts
 node, but that the desired certificate for that pod template can be defined in
 line with the deployment spec.
 
-> *Warning*: Use of the CSI driver is mostly intended for supporting a PKI of
+> **Warning**: Use of the CSI driver is mostly intended for supporting a PKI of
 > your cluster and facilitating mTLS, and as such, a private Certificate
 > Authority issuer should be used - CA, Vault, and perhaps Venafi, or other
 > external issuers. It is *not* recommended to use public Certificate
