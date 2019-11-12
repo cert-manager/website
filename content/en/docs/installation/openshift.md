@@ -80,7 +80,7 @@ $ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases
 Before you can begin issuing certificates, you must configure at least one
 Issuer or ClusterIssuer resource in your cluster.
 
-You should read the [Setting up Issuers](../../configuration/) guide to
+You should read the [configuration](../../configuration/) guide to
 learn how to configure cert-manager to issue certificates from one of the
 supported backends.
 
