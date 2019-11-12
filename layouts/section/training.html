@@ -1,8 +1,12 @@
-{{ define "title" }} | In-person Training{{ end }}
+{{ define "title" }} | {{ .Title }}{{ end }}
 
 {{ define "navbar" }}
 {{ partial "navbar/dark.html" . }}
 {{ end }}
+
+{{ define "ogtitle" }}{{ .Title }}{{ end }}
+{{ define "ogdescription" }}{{ .Params.og.description }}{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.og.image }}{{ end }}
 
 {{ define "body" }}
 

@@ -2,6 +2,10 @@
 
 {{ define "navbar" }} {{ partial "navbar/dark.html" . }} {{ end }}
 
+{{ define "ogtitle" }}{{ .Title }}{{ end }}
+{{ define "ogdescription" }}{{ .Params.og.description }}{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.og.image }}{{ end }}
+
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">

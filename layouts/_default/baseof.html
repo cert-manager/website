@@ -8,6 +8,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="description" content="{{ block "description" . }}{{ .Site.Data.config.description }}{{ end }}">
 
+  <meta property="og:title" content="{{ block "ogtitle" . }}{{ .Site.Data.config.title }}{{ end }}" />
+  <meta property="og:description" content="{{ block "ogdescription" . }}{{ .Site.Data.config.description }}{{ end }}" />
+  <meta property="og:image" content="{{ block "ogimage" . }}{{ end }}" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+
   <!-- TITLE -->
   <title>{{ .Site.Data.config.title }}{{ block "title" . }}{{ end }}</title>
 
