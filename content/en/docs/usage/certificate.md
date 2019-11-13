@@ -21,10 +21,11 @@ signing requests which are then fulfilled by the issuer type you have
 referenced. Certificates specify which issuer they want to obtain the
 certificate from by specifying the `certificate.spec.issuerRef` field.
 
-A basic Certificate resource, for the `example.com` and `www.example.com` DNS
-names, `spiffe://cluster.local/ns/sandbox/sa/example` URI Subject Alternative
-Name, that is valid for 90 days and renews 15 days before expiry is below:
-
+A Certificate resource, for the `example.com` and `www.example.com` DNS names,
+`spiffe://cluster.local/ns/sandbox/sa/example` URI Subject Alternative Name,
+that is valid for 90 days and renews 15 days before expiry is below. It contains
+an exhaustive list of all options a `Certificate` resource may have however only
+a subset of fields are required as labelled.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -33,14 +34,30 @@ metadata:
   name: example-com
   namespace: default
 spec:
+  # Secret names are always required.
   secretName: example-com-tls
   duration: 2160h # 90d
   renewBefore: 360h # 15d
+  organization: jetstack
+  # The use of the common name field has been deprecated since 2000 and is
+  # discouraged from being used.
+  commonName: example.com
+  isCA: false
+  keySize: 2048
+  keyAlgorithm: RSA
+  keyEncoding: pkcs1
+  usages:
+    - server auth
+    - client auth
+  # At least one of a DNS Name, USI SAN, or IP address is required.
   dnsNames:
   - example.com
   - www.example.com
   uriSANs:
   - spiffe://cluster.local/ns/sandbox/sa/example
+  ipAddresses:
+  - 192.168.0.5
+  # Issuer references are always required.
   issuerRef:
     name: ca-issuer
     # We can reference ClusterIssuers by changing the kind here.
@@ -85,6 +102,23 @@ The Certificate will be issued using the issuer named `ca-issuer` in the
 
 A full list of the fields supported on the Certificate resource can be found in
 the [API reference documentation](https://docs.cert-manager.io/en/release-0.11/reference/api-docs/#certificatespec-v1alpha2).
+
+## Key Usages
+
+cert-manager supports requesting certificates that have a number of custom key
+usages and extended key usages. Although cert-manager will attempt to honor this
+request, some issuers will remove, add defaults, or otherwise completely ignore
+the request and is determined on an issuer by issuer basis. The `CA` and
+`SelfSigned` issuer will always return certificates matching the usages you have
+requested.
+
+Unless any number of usages has been set, cert-manager will set the default
+requested usages of "digital signature", "key encipherment", and "server auth".
+cert-manager will not attempt to request a new certificate if the current
+certificate does not match the current key usages set.
+
+An exhaustive list of supported key usages can be found in the [API reference
+documentation]. TODO add link to API reference docs to the usages header.
 
 ## Temporary Certificates whilst Issuing
 
