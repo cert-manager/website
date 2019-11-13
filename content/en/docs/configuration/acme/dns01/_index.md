@@ -14,7 +14,7 @@ For more information on configuring ACME issuers and their API format, read the
 [ACME Issuers](../) documentation.
 
 DNS01 provider configuration must be specified on the Issuer resource, similar
-to the examples in the setting up documentation:
+to the examples in the setting up documentation.
 
 You can read about how the DNS01 challenge type works on the [Let's Encrypt
 challenge types
