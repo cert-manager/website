@@ -68,7 +68,7 @@ are included in a single YAML manifest file:
 
 Install the `CustomResourceDefinitions` and cert-manager itself
 ```bash
-$ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.11.0/cert-manager-openshift.yaml
+$ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0-beta.0/cert-manager-openshift.yaml
 ```
 
  > Node: The `--validate=false` flag is added to the `oc apply` command

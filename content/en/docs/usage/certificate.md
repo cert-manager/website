@@ -84,7 +84,7 @@ The Certificate will be issued using the issuer named `ca-issuer` in the
 > days, 23 hours (the *full duration* remains 90 days).
 
 A full list of the fields supported on the Certificate resource can be found in
-the [API reference documentation](https://docs.cert-manager.io/en/release-0.11/reference/api-docs/#certificatespec-v1alpha2).
+the [API reference documentation](https://docs.cert-manager.io/en/release-0.12/reference/api-docs/#certificatespec-v1alpha2).
 
 ## Temporary Certificates whilst Issuing
 
