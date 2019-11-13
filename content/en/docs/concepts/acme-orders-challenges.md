@@ -6,24 +6,26 @@ type: "docs"
 ---
 
 cert-manager supports requesting certificates from ACME servers, including from
-[Lets Encrypt](https://letsencrypt.org/), with use of the [ACME
+[Let's Encrypt](https://letsencrypt.org/), with use of the [ACME
 Issuer](../../configuration/acme/). These certificates are typically trusted on
 the public Internet by most computers. To do this, cert-manager must solve ACME
 Challenges which are completed in order to prove that the client owns the DNS
 addresses that are being requested.
 
 In order to complete these challenges, cert-manager introduces two
-`CustomResource` types; Orders and Challenges.
+`CustomResource` types; `Orders` and `Challenges`.
 
 ## Orders
 
-`Order` resources used by the ACME issuer to manage the lifecycle of an ACME
-'order' for a signed TLS certificate. An order represents a single certificate
-request which will be created automatically once a new
+`Order` resources are used by the ACME issuer to manage the lifecycle of an ACME
+'order' for a signed TLS certificate.  More details on ACME orders and domain
+validation can be found on the Let's Encrypt website
+[here](https://letsencrypt.org/how-it-works/). An order represents a single
+certificate request which will be created automatically once a new
 [`CertificateRequest`](../certificaterequest/) resource referencing an ACME
 issuer has been created. `CertificateRequest` resources are created
-automatically by cert-manager once a [`Certificate`](../certificate/) resource is
-created, has its specification changed, or needs renewal.
+automatically by cert-manager once a [`Certificate`](../certificate/) resource
+is created, has its specification changed, or needs renewal.
 
 As an end-user, you will never need to manually create an Order resource.
 Once created, an Order cannot be changed. Instead, a new Order resource must be
@@ -52,12 +54,12 @@ After a Challenge resource has been created, it will be initially queued for
 processing. Processing will not begin until the challenge has been 'scheduled'
 to start.  This scheduling process prevents too many challenges being attempted
 at once, or multiple challenges for the same DNS name being attempted at once.
-For more information on how challenges are scheduled, read the challenge
-scheduling. TODO: link to header below for scheduling.
+For more information on how challenges are scheduled, read the [challenge
+scheduling](./#challenge-scheduling).
 
 Once a challenge has been scheduled, it will first be 'synced' with the ACME
 server in order to determine its current state. If the challenge is already
-valid, its 'state' will be updated to 'valid', and also set
+valid, its 'state' will be updated to 'valid', and will also set
 `status.processing = false` to 'unschedule' itself.
 
 If the challenge is still 'pending', the challenge controller will 'present' the
@@ -69,9 +71,11 @@ ensure that the challenge has 'propagated' (i.e. the authoritative DNS servers
 have been updated to respond correctly, or the changes to the ingress resources
 have been observed and in-use by the ingress controller).
 
-If the self check fails, cert-manager will retry the self check with a fixed
-10 second retry interval. Challenges that do not ever complete the self check
-will continue retrying until the user intervenes.
+If the self check fails, cert-manager will retry the self check with a fixed 10
+second retry interval. Challenges that do not ever complete the self check will
+continue retrying until the user intervenes by either retrying the Order (by
+deleting the Order resource) or amending the associated Certificate resource to
+resolve any configuration errors.
 
 Once the self check is passing, the ACME 'authorization' associated with this
 challenge will be 'accepted'.
