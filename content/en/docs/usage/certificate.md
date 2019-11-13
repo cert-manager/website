@@ -38,7 +38,8 @@ spec:
   secretName: example-com-tls
   duration: 2160h # 90d
   renewBefore: 360h # 15d
-  organization: jetstack
+  organization:
+  - jetstack
   # The use of the common name field has been deprecated since 2000 and is
   # discouraged from being used.
   commonName: example.com
