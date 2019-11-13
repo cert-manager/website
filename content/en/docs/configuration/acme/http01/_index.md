@@ -5,8 +5,6 @@ weight: 30
 type: "docs"
 ---
 
-TODO: add lets encrypt URLs to request from
-
 ## Configuring HTTP01 Ingress Provider
 
 This page contains details on the different options available on the `Issuer`

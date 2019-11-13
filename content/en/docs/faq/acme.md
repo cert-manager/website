@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 When requesting ACME certificates, cert-manager will create `Order` and
-`Challenges` to complete the request. As such, there is more resources to
+`Challenges` to complete the request. As such, there are more resources to
 investigate and debug if there is a problem during the process.
 
 TODO: add link to orders and challenges concepts page
