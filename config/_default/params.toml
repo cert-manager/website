@@ -1,7 +1,7 @@
 # Default docs params
 # Latest cert-manager docs release/version - Default values (for Docsy Template)
 # Default GitHub branch
-latest_github_branch = "release-0.11"
+latest_github_branch = "release-0.12"
 # Default website version
 version = "v0.12"
 
@@ -38,6 +38,6 @@ version = "v0.12"
 
 [[versions]]
   version = "v0.11"
-  ghbranchname = "release-0.11"
-  url = "https://docs.cert-manager.io/en/release-0.11"
+  ghbranchname = "release-0.12"
+  url = "https://docs.cert-manager.io/en/release-0.12"
   dirpath = "external-link"

@@ -224,7 +224,7 @@ sample deployment and an associated service:
 
 TODO (`@joshvanl`): move this link to the new location
 - deployment manifest:
-  [`deployment.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/deployment.yaml)
+  [`deployment.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/deployment.yaml)
 
 TODO (`@joshvanl`): include link contents
 ```yaml
@@ -233,7 +233,7 @@ example/deployment.yaml
 
 TODO (`@joshvanl`): move this link to the new location
 - service manifest:
-  [`service.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/service.yaml)
+  [`service.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/service.yaml)
 
 TODO (`@joshvanl`): include link contents
 ```yaml
@@ -246,10 +246,10 @@ To install the example service from the tutorial files straight from GitHub,
 you may use the commands:
 
 ```yaml
-$ kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/deployment.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/deployment.yaml
 deployment.extensions "kuard" created
 
-$ kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/service.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/service.yaml
 service "kuard" created
 ```
 
@@ -263,7 +263,7 @@ A sample ingress you can start with is:
 
 TODO (`@joshvanl`): move this link to the new location
 - ingress manifest:
-  [`ingress.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress.yaml)
+  [`ingress.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress.yaml)
 
 TODO (`@joshvanl`): include link contents
 ```yaml
@@ -273,7 +273,7 @@ example/ingress.yaml
 You can download the sample manifest from GitHub , edit it, and submit the manifest to Kubernetes with the command:
 
 ```yaml
-$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress.yaml
+$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress.yaml
 
 # edit the file in your editor, and once it is saved:
 ingress.extensions "kuard" created
@@ -387,7 +387,7 @@ expiration and updates.
 
 TODO (`@joshvanl`): fix link
 - staging issuer:
-  [`staging-issuer.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/staging-issuer.yaml)
+  [`staging-issuer.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/staging-issuer.yaml)
 
 TODO (`@joshvanl`): include file
 ```yaml
@@ -397,7 +397,7 @@ example/staging-issuer.yaml
 Once edited, apply the custom resource:
 
 ```bash
-$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/staging-issuer.yaml
+$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/staging-issuer.yaml
 issuer.cert-manager.io "letsencrypt-staging" created
 ```
 
@@ -405,7 +405,7 @@ Also create a production issuer and deploy it. As with the staging issuer, you
 will need to update this example and add in your own email address.
 
 - production issuer:
-  [`production-issuer.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/production-issuer.yaml)
+  [`production-issuer.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/production-issuer.yaml)
 
 TODO (`@joshvanl`): include file
 ```yaml
@@ -413,7 +413,7 @@ example/production-issuer.yaml
 ```
 
 ```bash
-$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/production-issuer.yaml
+$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/production-issuer.yaml
 issuer.cert-manager.io "letsencrypt-prod" created
 ```
 
@@ -486,7 +486,7 @@ Edit the ingress add the annotations that were commented out in our earlier
 example:
 
 TODO (`@joshvanl`): move this link to the new location
-- ingress TLS: [`ingress-tls.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress-tls.yaml)
+- ingress TLS: [`ingress-tls.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress-tls.yaml)
 
 TODO (`@joshvanl`): include link contents
 ```yaml
@@ -496,7 +496,7 @@ example/ingress-tls.yaml
 and apply it:
 
 ```bash
-$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress-tls.yaml
+$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress-tls.yaml
 ingress.extensions "kuard" configured
 ```
 
@@ -594,7 +594,7 @@ Now that we have confidence that everything is configured correctly, you
 can update the annotations in the ingress to specify the production issuer:
 
 TODO (`@joshvanl`): move this link to the new location
-- ingress TLS final: [`ingress-tls-final.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress-tls-final.yaml)
+- ingress TLS final: [`ingress-tls-final.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress-tls-final.yaml)
 
 TODO (`@joshvanl`): include link contents
 ```yaml
@@ -602,7 +602,7 @@ example/ingress-tls-final.yaml
 ```
 
 ```bash
-$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/docs/tutorials/acme/quick-start/example/ingress-tls-final.yaml
+$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress-tls-final.yaml
 ingress.extensions "kuard" configured
 ```
 
