@@ -126,23 +126,8 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-selectel`](https://github.com/selectel/cert-manager-webhook-selectel)
 - [`cert-manager-webhook-softlayer`](https://github.com/cgroschupp/cert-manager-webhook-softlayer)
 
+You can find more information on how to configure webhook providers
+[here](./webhook/).
+
 To create a new unsupported DNS provider, follow the development documentation
 [here](../../../contributing/dns-providers/).
-
-```yaml
-apiVersion: cert-manager.io/v1alpha2
-kind: Issuer
-metadata:
-  name: example-issuer
-spec:
-  acme:
-   ...
-    solvers:
-    - dns01:
-        webhook:
-          groupName: <webhook-group-name>
-          solverName: <webhook-solver-name>
-          config:
-            ...
-            <webhook-specific-configuration>
-```

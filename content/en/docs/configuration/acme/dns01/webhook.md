@@ -9,14 +9,11 @@ The webhook issuer is a generic acme solver. The actual work is done by an
 external service. Look at the respective documentation of
 [`dns-providers`](../../../../contributing/dns-providers/).
 
-Existing webhook solvers:
-
-- [`alidns-webhook`](https://github.com/pragkent/alidns-webhook)
-- [`cert-manager-webhook-dnspod`](https://github.com/qqshfox/cert-manager-webhook-dnspod)
-- [`cert-manager-webhook-selectel`](https://github.com/selectel/cert-manager-webhook-selectel)
-- [`cert-manager-webhook-softlayer`](https://github.com/cgroschupp/cert-manager-webhook-softlayer)
-
 See more webhook solver on at `https://github.com/topics/cert-manager-webhook`.
+
+Here is an example of how webhook providers are to be configured. All `DNS01`
+providers will contain their own specific configuration however all require a
+`groupName` and `solverName` field.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
