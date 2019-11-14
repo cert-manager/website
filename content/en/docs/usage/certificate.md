@@ -99,7 +99,7 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 > days, 23 hours (the *full duration* remains 90 days).
 
 A full list of the fields supported on the Certificate resource can be found in
-the [API reference documentation](https://docs.cert-manager.io/en/release-0.12/reference/api-docs/#certificatespec-v1alpha2).
+the [API reference documentation](../../reference/api-docs/#cert-manager.io/v1alpha2.CertificateSpec)
 
 ## Key Usages
 
@@ -116,7 +116,7 @@ cert-manager will not attempt to request a new certificate if the current
 certificate does not match the current key usages set.
 
 An exhaustive list of supported key usages can be found in the [API reference
-documentation]. TODO add link to API reference docs to the usages header.
+documentation](../../reference/api-docs/#cert-manager.io/v1alpha2.KeyUsage).
 
 ## Temporary Certificates whilst Issuing
 

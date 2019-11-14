@@ -42,9 +42,10 @@ Once deployed, you should be able to see immediately that the issuer is ready
 for signing. Replace `issuers` here with `clusterissuers` if that is what has
 been deployed.
 
-TODO (`@joshvanl`): add output to this command once the ready status has been
 ```bash
 $ kubectl get issuers selfsigned-issuer -n sandbox -o wide
+NAME          READY   STATUS                AGE
+self-issuer   True                          2m
 ```
 
 Certificates are now ready to be requested by using the `SelfSigned` `Issuer`

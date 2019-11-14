@@ -27,14 +27,16 @@ The process for cutting a minor release is as follows:
 
 1. Ensure upgrading document exists.
 
-2. Ensure all strings of versions have been updated (TODO `@joshvanl`: update this
-   in new documentation tree).
+2. Ensure all strings of versions have been updated.
 
 - `deploy/charts/cert-manager/README.md`
-- `docs/getting-started/install/kubernetes.rst`
-- `docs/getting-started/install/openshift.rst`
-- `docs/getting-started/webhook.rst`
-- `docs/tutorials/acme/quick-start/index.rst`
+- `content/en/docs/installation/compatibility.md`
+- `content/en/docs/installation/compatibility.md`
+- `content/en/docs/installation/compatibility.md`
+- `content/en/docs/installation/compatibility.md`
+- `content/en/docs/installation/kubernetes.md`
+- `content/en/docs/installation/kubernetes.md`
+- `content/en/docs/installation/openshift.md`
 
 3. Create a new release branch (e.g. `release-0.5`)
 

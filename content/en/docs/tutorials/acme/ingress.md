@@ -184,7 +184,6 @@ IP address. When it is complete, you can see the external IP address using the
 
 ```bash
 $ kubectl get svc
-
 NAME                                       TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
 kubernetes                                 ClusterIP      10.63.240.1     <none>           443/TCP                      23m
 quickstart-nginx-ingress-controller        LoadBalancer   10.63.248.177   35.233.154.161   80:31345/TCP,443:31376/TCP   16m
@@ -222,30 +221,16 @@ application which makes an excellent back-end for examples.
 The quick-start example uses three manifests for the sample. The first two are a
 sample deployment and an associated service:
 
-TODO (`@joshvanl`): move this link to the new location
-- deployment manifest:
-  [`deployment.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/deployment.yaml)
+{{% include file="/content/en/docs/tutorials/acme/example/deployment.yaml" language="yaml" %}}
 
-TODO (`@joshvanl`): include link contents
-```yaml
-example/deployment.yaml
-```
-
-TODO (`@joshvanl`): move this link to the new location
-- service manifest:
-  [`service.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/service.yaml)
-
-TODO (`@joshvanl`): include link contents
-```yaml
-example/service.yaml
-```
+{{% include file="/content/en/docs/tutorials/acme/example/service.yaml" language="yaml" %}}
 
 You can create download and reference these files locally, or you can
 reference them from the GitHub source repository for this documentation.
 To install the example service from the tutorial files straight from GitHub,
 you may use the commands:
 
-```yaml
+```bash
 $ kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/deployment.yaml
 deployment.extensions "kuard" created
 
@@ -260,24 +245,17 @@ will need to download and modify the example manifest to reflect the domain that
 you own or  control to complete this example.
 
 A sample ingress you can start with is:
+{{% include file="/content/en/docs/tutorials/acme/example/ingress.yaml" language="yaml" %}}
 
-TODO (`@joshvanl`): move this link to the new location
-- ingress manifest:
-  [`ingress.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress.yaml)
+You can download the sample manifest from GitHub , edit it, and submit the
+manifest to Kubernetes with the command. Edit the file in your editor, and once
+it is saved:
 
-TODO (`@joshvanl`): include link contents
-```yaml
-example/ingress.yaml
-```
-
-You can download the sample manifest from GitHub , edit it, and submit the manifest to Kubernetes with the command:
-
-```yaml
+```bash
 $ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress.yaml
-
-# edit the file in your editor, and once it is saved:
 ingress.extensions "kuard" created
 ```
+
 > Note: The ingress example we show above has a `host` definition within it. The
 > `nginx-ingress-controller` will route traffic when the hostname requested
 > matches the definition in the ingress. You *can* deploy an ingress without a
@@ -362,10 +340,9 @@ operation. These two resources are:
 > `ClusterIssuer` resources apply across all Ingress resources in your cluster
 > and don't have this namespace-matching requirement.
 >
-> More information on the differences between Issuers and `ClusterIssuers` and
-> when you might choose to use each can be found at:
->
-> TODO (`@joshvanl`): add link to `Issuer` vs `ClusterIssuer`
+> More information on the differences between `Issuers` and `ClusterIssuers` and
+> when you might choose to use each can be found
+> [here](../../../concepts/issuer/#namespaces).
 
 > A certificate is the resource that cert-manager uses to expose the state
 > of a request as well as track upcoming expiration.
@@ -385,14 +362,7 @@ Create this definition locally and update the email address to your own. This
 email required by Let's Encrypt and used to notify you of certificate
 expiration and updates.
 
-TODO (`@joshvanl`): fix link
-- staging issuer:
-  [`staging-issuer.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/staging-issuer.yaml)
-
-TODO (`@joshvanl`): include file
-```yaml
-example/staging-issuer.yaml
-```
+{{% include file="/content/en/docs/tutorials/acme/example/staging-issuer.yaml" language="yaml" %}}
 
 Once edited, apply the custom resource:
 
@@ -404,13 +374,7 @@ issuer.cert-manager.io "letsencrypt-staging" created
 Also create a production issuer and deploy it. As with the staging issuer, you
 will need to update this example and add in your own email address.
 
-- production issuer:
-  [`production-issuer.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/production-issuer.yaml)
-
-TODO (`@joshvanl`): include file
-```yaml
-example/production-issuer.yaml
-```
+{{% include file="/content/en/docs/tutorials/acme/example/production-issuer.yaml" language="yaml" %}}
 
 ```bash
 $ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/production-issuer.yaml
@@ -424,7 +388,6 @@ Check on the status of the issuer after you create it:
 
 ```bash
 $ kubectl describe issuer letsencrypt-staging
-
 Name:         letsencrypt-staging
 Namespace:    default
 Labels:       <none>
@@ -485,13 +448,7 @@ cert-manager will create or update the secret defined in the certificate.
 Edit the ingress add the annotations that were commented out in our earlier
 example:
 
-TODO (`@joshvanl`): move this link to the new location
-- ingress TLS: [`ingress-tls.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress-tls.yaml)
-
-TODO (`@joshvanl`): include link contents
-```yaml
-example/ingress-tls.yaml
-```
+{{% include file="/content/en/docs/tutorials/acme/example/ingress-tls.yaml" language="yaml" %}}
 
 and apply it:
 
@@ -515,7 +472,6 @@ certificate object. You can view this information using the
 
 ```bash
 $ kubectl describe certificate quickstart-example-tls
-
 Name:         quickstart-example-tls
 Namespace:    default
 Labels:       <none>
@@ -573,7 +529,6 @@ use the describe command as well to see some details:
 
 ```bash
 $ kubectl describe secret quickstart-example-tls
-
 Name:         quickstart-example-tls
 Namespace:    default
 Labels:       cert-manager.io/certificate-name=quickstart-example-tls
@@ -593,13 +548,7 @@ tls.key:  1675 bytes
 Now that we have confidence that everything is configured correctly, you
 can update the annotations in the ingress to specify the production issuer:
 
-TODO (`@joshvanl`): move this link to the new location
-- ingress TLS final: [`ingress-tls-final.yaml`](https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress-tls-final.yaml)
-
-TODO (`@joshvanl`): include link contents
-```yaml
-example/ingress-tls-final.yaml
-```
+{{% include file="/content/en/docs/tutorials/acme/example/ingress-tls-final.yaml" language="yaml" %}}
 
 ```bash
 $ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress-tls-final.yaml
@@ -620,47 +569,46 @@ you should see the example KUARD running at your domain with a signed TLS
 certificate.
 
 ```bash
- $ kubectl describe certificate
-
- Name:         quickstart-example-tls
- Namespace:    default
- Labels:       <none>
- Annotations:  <none>
- API Version:  cert-manager.io/v1alpha2
- Kind:         Certificate
- Metadata:
-   Cluster Name:
-   Creation Timestamp:  2018-11-17T18:36:48Z
-   Generation:          0
-   Owner References:
-     API Version:           extensions/v1beta1
-     Block Owner Deletion:  true
-     Controller:            true
-     Kind:                  Ingress
-     Name:                  kuard
-     UID:                   a3e9f935-ea87-11e8-82f8-42010a8a00b5
-   Resource Version:        283686
-   Self Link:               /apis/cert-manager.io/v1alpha2/namespaces/default/certificates/quickstart-example-tls
-   UID:                     bdd93b32-ea97-11e8-82f8-42010a8a00b5
- Spec:
-   Dns Names:
-     example.your-domain.com
-   Issuer Ref:
-     Kind:       Issuer
-     Name:       letsencrypt-prod
-   Secret Name:  quickstart-example-tls
- Status:
-   Conditions:
-     Last Transition Time:  2019-01-09T13:52:05Z
-     Message:               Certificate does not exist
-     Reason:                NotFound
-     Status:                False
-     Type:                  Ready
- Events:
-   Type    Reason        Age   From          Message
-kubectl describe certificate quickstart-example-tls   ----    ------        ----  ----          -------
-   Normal  Generated     18s   cert-manager  Generated new private key
-   Normal  OrderCreated  18s   cert-manager  Created Order resource "quickstart-example-tls-889745041"
+$ kubectl describe certificate
+Name:         quickstart-example-tls
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+API Version:  cert-manager.io/v1alpha2
+Kind:         Certificate
+Metadata:
+  Cluster Name:
+  Creation Timestamp:  2018-11-17T18:36:48Z
+  Generation:          0
+  Owner References:
+    API Version:           extensions/v1beta1
+    Block Owner Deletion:  true
+    Controller:            true
+    Kind:                  Ingress
+    Name:                  kuard
+    UID:                   a3e9f935-ea87-11e8-82f8-42010a8a00b5
+  Resource Version:        283686
+  Self Link:               /apis/cert-manager.io/v1alpha2/namespaces/default/certificates/quickstart-example-tls
+  UID:                     bdd93b32-ea97-11e8-82f8-42010a8a00b5
+Spec:
+  Dns Names:
+    example.your-domain.com
+  Issuer Ref:
+    Kind:       Issuer
+    Name:       letsencrypt-prod
+  Secret Name:  quickstart-example-tls
+Status:
+  Conditions:
+    Last Transition Time:  2019-01-09T13:52:05Z
+    Message:               Certificate does not exist
+    Reason:                NotFound
+    Status:                False
+    Type:                  Ready
+Events:
+  Type    Reason        Age   From          Message
+ubectl describe certificate quickstart-example-tls   ----    ------        ----  ----          -------
+  Normal  Generated     18s   cert-manager  Generated new private key
+  Normal  OrderCreated  18s   cert-manager  Created Order resource "quickstart-example-tls-889745041"
 ```
 
 You can see the current state of the ACME Order by running `kubectl describe`
@@ -682,7 +630,6 @@ the Order. You can dig into the state of the current ACME challenge by running
 ```bash
 $ kubectl describe challenge quickstart-example-tls-889745041-0
 ...
-
 Status:
   Presented:   true
   Processing:  true
@@ -704,7 +651,6 @@ your ingress controller is at updating rules):
 ```bash
 $ kubectl describe challenge quickstart-example-tls-889745041-0
 ...
-
 Status:
   Presented:   false
   Processing:  false
@@ -720,9 +666,9 @@ Events:
 
 > Note: If your challenges are not becoming 'valid' and remain in the 'pending'
 > state (or enter into a 'failed' state), it is likely there is some kind of
-> configuration error.  Read the [`Challenge resource reference
-> docs`]`../reference/challenges.md` for more information on debugging failing
-> challenges. TODO: add reference docs link
+> configuration error. Read the [Challenge resource reference
+> docs](../../../reference/api-docs/#acme.cert-manager.io/v1alpha2.Challenge) for more
+> information on debugging failing challenges.
 
 Once the challenge(s) have been completed, their corresponding challenge
 resources will be *deleted*, and the 'Order' will be updated to reflect the
@@ -744,7 +690,6 @@ and see something like the below:
 
 ```bash
 $ kubectl describe certificate quickstart-example-tls
-
 Status:
   Conditions:
     Last Transition Time:  2019-01-09T13:57:52Z

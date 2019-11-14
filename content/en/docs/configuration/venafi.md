@@ -84,10 +84,10 @@ $ kubectl create -f venafi-cloud-issuer.yaml
 Verify the `Issuer` has been initialized correctly using `kubectl describe`.
 
 ```bash
-$ kubectl describe issuer cloud-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
+$ kubectl get issuer cloud-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE' -o wide
+NAME           READY   STATUS                 AGE
+venafi-issuer  True    Venafi issuer started  2m
 ```
-
-* TODO: add output
 
 You are now ready to issue certificates using the newly provisioned Venafi
 `Issuer`.

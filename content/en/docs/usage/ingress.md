@@ -14,10 +14,10 @@ ingress-shim, is responsible for this.
 ## How It Works
 
 The sub-component ingress-shim watches `Ingress` resources across your cluster.
-If it observes an `Ingress` with annotations described in the `Supported
-Annotations` (TODO `@joshvanl`: add sub-title line) section, it will ensure a
-`Certificate` resource with the name provided in the `tls.secretName` field
-and configured as described on the `Ingress` exists. For example:
+If it observes an `Ingress` with annotations described in the [Supported
+Annotations](./#supported-annotations) section, it will ensure a `Certificate`
+resource with the name provided in the `tls.secretName` field and configured as
+described on the `Ingress` exists. For example:
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -57,8 +57,8 @@ trigger `Certificate` resources to be automatically created:
   your `Ingress` resides, as `ClusterIssuers` are non-namespaced resources.
 
 - `kubernetes.io/tls-acme: "true"`: this annotation requires additional
-  configuration of the ingress-shim (see below(TODO `@joshvanl`: add sub-title
-  link)). Namely, a default `Issuer` must be specified as arguments to the
+  configuration of the ingress-shim [see below](./#optional-configuration).
+  Namely, a default `Issuer` must be specified as arguments to the
   ingress-shim container.
 
 - `acme.cert-manager.io/http01-ingress-class`: this annotation allows you to
@@ -70,14 +70,14 @@ trigger `Certificate` resources to be automatically created:
 
 - `acme.cert-manager.io/http01-edit-in-place: "true"`: this controls whether the
   ingress is modified 'in-place', or a new one is created specifically for the
-HTTP01 challenge. If present, and set to "true", the existing ingress will be
-modified. Any other value, or the absence of the annotation assumes "false".
-This annotation will also add the annotation
-`"cert-manager.io/issue-temporary-certificate": "true"` onto created
-certificates which will cause a [temporary certificate](../certificate/) to be
-set on the resulting `Secret` until the final signed certificate has been
-returned.  This is useful for keeping compatibility with the `ingress-gce`
-component.  TODO: fix link #Temporary Certificates Whilst Issuing
+  HTTP01 challenge. If present, and set to "true", the existing ingress will be
+  modified. Any other value, or the absence of the annotation assumes "false".
+  This annotation will also add the annotation
+  `"cert-manager.io/issue-temporary-certificate": "true"` onto created
+  certificates which will cause a [temporary certificate](../certificate/#temporary-certificates-whilst-issuing)
+  to be set on the resulting `Secret` until the final signed certificate has been
+  returned.  This is useful for keeping compatibility with the `ingress-gce`
+  component.
 
 ## Optional Configuration
 

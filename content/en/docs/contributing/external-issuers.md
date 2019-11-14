@@ -44,7 +44,7 @@ controllers, such as the `Certificate` controller, that the resource is ready to
 be consumed. Conversely, if the `CertificateRequest` fails, it is as important
 to mark the resource as such, as this will also be used to signal to higher
 order controllers. You can read the valid condition sates
-[here](../../concepts/certificaterequest/).TODO: add '#Conditions'
+[here](../../concepts/certificaterequest/#conditions).
 
 ## Implementation
 

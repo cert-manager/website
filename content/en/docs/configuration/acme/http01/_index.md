@@ -39,7 +39,7 @@ spec:
 
 The HTTP01 Issuer supports a number of additional options.  For full details on
 the range of options available, read the [reference
-documentation](https://docs.cert-manager.io/en/latest/reference/api-docs/#acmeissuerhttp01config-v1alpha2). TODO: fix link
+documentation](../../../reference/api-docs/#acme.cert-manager.io/v1alpha2.ACMEChallengeSolverHTTP01).
 
 ### `ingressClass`
 

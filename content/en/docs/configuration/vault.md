@@ -196,9 +196,10 @@ Once the Vault issuer has been deployed, it will be marked as ready if the
 configuration is valid. Replace `issuers` here with `clusterissuers` if that is what has
 been deployed.
 
-TODO (`@joshvanl`): add output to this command once the ready status has been
 ```bash
 $ kubectl get issuers vault-issuer -n sandbox -o wide
+NAME          READY   STATUS          AGE
+vault-issuer  True    Vault verified  2m
 ```
 
 Certificates are now ready to be requested by using the Vault issuer named
