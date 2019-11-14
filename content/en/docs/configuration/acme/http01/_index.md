@@ -1,7 +1,7 @@
 ---
 title: "HTTP01"
 linkTitle: "HTTP01"
-weight: 30
+weight: 10
 type: "docs"
 ---
 
