@@ -1,7 +1,7 @@
 ---
 title: "SelfSigned"
 linkTitle: "SelfSigned"
-weight: 30
+weight: 10
 type: "docs"
 ---
 
