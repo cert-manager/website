@@ -38,6 +38,6 @@ version = "v0.12"
 
 [[versions]]
   version = "v0.11"
-  ghbranchname = "release-0.12"
-  url = "https://docs.cert-manager.io/en/release-0.12"
+  ghbranchname = "release-0.11"
+  url = "https://docs.cert-manager.io/en/release-0.11"
   dirpath = "external-link"
