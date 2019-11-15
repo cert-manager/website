@@ -1,7 +1,7 @@
 # site wide text config
 title: Jetstack
 description: >-
-  We are a fast-growing Kubernetes professional services company that prides itself with helping startups and enterprises alike in their path to modern cloud-native infrastructure
+  We are a fast-growing Kubernetes professional services company that prides itself on helping startups and enterprises alike in their path to modern cloud-native infrastructure
 copyright: "Jetstack Ltd. All rights reserved."
 privacy_policy_link: /documents/Jetstack-Website-Policies.pdf
 terms_link: "#"
@@ -163,7 +163,7 @@ headline:
   getStarted:
     headline: Who are we?
     strapline: >
-      We are a fast-growing Kubernetes professional services company that prides itself with helping
+      We are a fast-growing Kubernetes professional services company that prides itself on helping
       startups and enterprises alike in their path to modern cloud-native infrastructure.
       We live and breathe Kubernetes and open source.
 
@@ -189,7 +189,7 @@ headline:
   about:
     headline: Jetstack
     strapline: >
-      We are a fast-growing Kubernetes professional services company that prides itself with helping
+      We are a fast-growing Kubernetes professional services company that prides itself on helping
       startups and enterprises alike in their path to modern cloud-native infrastructure
     strapline2: >
       Our team reflects a unique blend of specialist skills
