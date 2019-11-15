@@ -80,15 +80,25 @@ this solver types, visit their respective documentation -
 
 You may want to use different types of challenge solver configurations for
 different ingress controllers, for example if you want to issue wildcard
-certificates using DNS01 alongside other certificates that are validated using
-HTTP01.
+certificates using `DNS01` alongside other certificates that are validated using
+`HTTP01`.
 
 The `solvers` stanza has an optional `selector` field, that can be used to
-specify which `Certificate`s, and further, what DNS names *on those certificates*
-should be used to solve challenges.
+specify which `Certificates`, and further, what DNS names *on those
+`Certificates`* should be used to solve challenges.
 
-For example, to configure HTTP01 using NGINX ingress as the default solver,
-along with a DNS01 solver that can be used for wildcard certificates:
+There are three selector types that can be used to form the requirements that a
+`Certificate` must meet in order to be selected for a solver - `matchLabels`,
+`dnsNames` and `dnsZones`. You can have any number of these thee selectors on a
+single selector.
+
+
+#### Match Labels
+
+The `matchLabel` selector requires that all `Certificates` match at all of the
+labels that are defined in the string map list of that stanza. For example, the
+following issuer will only match on `Certificates` that have the labels
+`"user-cloudflare-solver": "true"`, *or* `"email": "user@example.com"`.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -99,9 +109,6 @@ spec:
   acme:
     ...
     solvers:
-    - http01:
-        ingress:
-          class: nginx
     - dns01:
         cloudflare:
           email: user@example.com
@@ -110,21 +117,94 @@ spec:
             key: apikey
       selector:
         matchLabels:
-          use-cloudflare-solver: "true"
+          "use-cloudflare-solver": "true"
+          "email": "user@example.com"
 ```
 
-In order to utilize the configured CloudFlare DNS01 solver, you must add the
-``use-cloudflare-solver: "true"`` label to your `Certificate` resources.
+#### DNS Names
 
-### Using multiple solvers for a single certificate
+The `dnsNames` selector is a list of exact DNS names that should be mapped to a
+solver.  This means that `Certificates` containing any of these DNS names will
+be selected.  If a match is found, a `dnsNames` selector will take precedence
+over a [`dnsZones`](#dns-zones) selector. If multiple solvers match with the
+same `dnsNames` value, the solver with the most matching labels in
+[`matchLabels`](#match-labels) will be selected. If neither has more matches,
+the solver defined earlier in the list will be selected.
 
-The solver's `selector` stanza has an additional field `dnsNames` that
-further refines the set of domains that the solver configuration applies to.
+The following example will solve challenges of `Certificates` with DNS names
+`exmaple.com` and `*.example.com` for these domains.
 
-If any `dnsNames` are specified, then that challenge solver will be used if
-the domain being validated is named in that list.
+> Note: `dnsNames` take an exact match and do not resolve wildcards, meaning the
+> following issuer *will not* solve for DNS names such as `foo.example.com`.
+> Use the [`dnsZones`](#dns-zones) selector type to match all subdomains within
+> a zone.
 
-For example:
+```yaml
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    ...
+    solvers:
+    - dns01:
+        cloudflare:
+          email: user@example.com
+          apiKeySecretRef:
+            name: cloudflare-apikey-secret
+            key: apikey
+      selector:
+        dnsNames:
+        - 'example.com'
+        - '*.example.com'
+```
+
+#### DNS Zones
+
+The `dnsZones` stanza defines a list of DNS zones that can be solved by this
+solver. If a DNS name is an exact match, or a subdomain of any of the specified
+`dnsZones`, this solver will be used, unless a more specific
+[`dnsNames`](#dns-names) match is configured. This means that `sys.example.com`
+will be selected over one specifying `example.com` for the domain
+`www.sys.example.com`. If multiple solvers match with the same `dnsZones` value,
+the solver with the most matching labels in [`matchLabels`](#match-labels) will
+be selected. If neither has more matches, the solver defined earlier in the list
+will be selected.
+
+In the following example, this solver will resolve challenges for the domain
+`example.com`, as well as all of its subdomains `*.example.com`.
+
+```yaml
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    ...
+    solvers:
+    - dns01:
+        cloudflare:
+          email: user@example.com
+          apiKeySecretRef:
+            name: cloudflare-apikey-secret
+            key: apikey
+      selector:
+        dnsZones:
+        - 'example.com'
+```
+
+#### All Together
+
+Each solver is able to have any number of the three selector types defined. In
+the following example, the `DNS01` solver will be used to solve challenges for
+domains for `Certificates` that contain the DNS names `a.example.com` and
+`b.example.com`, or for `test.example.com` and all of its subdomains
+(e.g. `foo.test.example.com`).
+
+For all other challenges, the `HTTP01` solver will be used *only* if the
+`Certificate` also contains the label `"use-http01-solver": "true"`.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -138,6 +218,9 @@ spec:
     - http01:
         ingress:
           class: nginx
+      selector:
+        matchLabels:
+        - "user-http01-solver": "true"
     - dns01:
         cloudflare:
           email: user@example.com
@@ -146,12 +229,8 @@ spec:
             key: apikey
       selector:
         dnsNames:
-        - '*.example.com'
+        - 'a.example.com'
+        - 'b.example.com'
+        dnsZones:
+        - 'test.example.com'
 ```
-
-In this instance, a Certificate that specified both `*.example.com` and
-`example.com` would use the HTTP01 challenge solver for `example.com` and
-the DNS01 challenge solver for `*.example.com`.
-
-It is possible to specify both `matchLabels` AND `dnsNames` on an ACME
-solver selector.
