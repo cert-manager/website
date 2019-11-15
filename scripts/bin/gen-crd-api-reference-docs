@@ -22,7 +22,7 @@ set -o nounset
 set -o pipefail
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
-VERSION="v0.1.5"
+VERSION="force-marker"
 
 source "${REPO_ROOT}/scripts/bin/lib.sh"
 
@@ -39,18 +39,17 @@ if ! test -f "${gencrd}"; then
     detect_and_set_goos_goarch
 
     tmpdir="$(mktemp -d)"
-    curl -Lo "${tmpdir}/file" "https://github.com/ahmetb/gen-crd-api-reference-docs/releases/download/${VERSION}/gen-crd-api-reference-docs_${GOOS}_amd64.tar.gz"
+    curl -Lo "${tmpdir}/file" "https://github.com/munnerz/gen-crd-api-reference-docs/releases/download/${VERSION}/gen-crd-api-reference-docs_${GOOS}_amd64"
     if [ "$GOOS" = "darwin" ]; then
-        check_sha "${tmpdir}/file" "44d9bf8f683858032e549ff2b0dbcb97508fd5df82411c6fbe95042f128b9745"
+        check_sha "${tmpdir}/file" "9c6994969dd405f0f7f28002cf0daaa4f21511c7cded2875d1dbf81b19c43883"
     elif [ "$GOOS" = "linux" ]; then
-        check_sha "${tmpdir}/file" "9e14741dc9cd127082b681d4e78f3fcde95a5b70d94055142ebd16efb51998cf"
+        check_sha "${tmpdir}/file" "942af90dae3f2bb387572877b3675f9fe561ccce42cb0675fb33efb4c9027e63"
     else
     	echo "Unsupported OS: $GOOS"
     	exit 1
     fi
 
-    tar -C "$tmpdir" -xf "${tmpdir}/file"
-    mv "${tmpdir}/gen-crd-api-reference-docs" "${gencrd}"
+    mv "${tmpdir}/file" "${gencrd}"
     chmod +x "${gencrd}"
     rm -rf "${tmpdir}"
 fi

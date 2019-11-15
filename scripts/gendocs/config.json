@@ -12,8 +12,8 @@
             "docsURLTemplate": "https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration"
         },
         {
-            "typeMatchPrefix": "^k8s\\.io/(api|apimachinery/pkg/apis)/",
-            "docsURLTemplate": "https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#{{lower .TypeIdentifier}}-{{arrIndex .PackageSegments -1}}-{{arrIndex .PackageSegments -2}}"
+            "typeMatchPrefix": "^k8s\\.io/(api|apimachinery|apiextensions-apiserver/pkg/apis)/",
+            "docsURLTemplate": "https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#{{lower .TypeIdentifier}}-{{arrIndex .PackageSegments -1}}-{{arrIndex .PackageSegments -2}}"
         },
         {
             "typeMatchPrefix": "^github\\.com/knative/pkg/apis/duck/",
