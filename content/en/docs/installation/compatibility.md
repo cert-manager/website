@@ -29,7 +29,7 @@ plane nodes in the [GKE
 docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules).
 
 Alternatively, you can read how to [disable the webhook
-component](./#disabling-webhook).
+component](#disabling-webhook).
 
 ## Disabling Webhook
 

@@ -29,14 +29,14 @@ The process for cutting a minor release is as follows:
 
 2. Ensure all strings of versions have been updated.
 
-- `deploy/charts/cert-manager/README.md`
-- `content/en/docs/installation/compatibility.md`
-- `content/en/docs/installation/compatibility.md`
-- `content/en/docs/installation/compatibility.md`
-- `content/en/docs/installation/compatibility.md`
-- `content/en/docs/installation/kubernetes.md`
-- `content/en/docs/installation/kubernetes.md`
-- `content/en/docs/installation/openshift.md`
+- in the [jetstack/cert-manager](https://github.com/jetstack/cert-manager)
+  repository
+ - `deploy/charts/cert-manager/README.md`
+- in the [cert-manager/webisite](https://github.com/cert-manager/website)
+  repository
+ - `content/en/docs/installation/compatibility.md`
+ - `content/en/docs/installation/kubernetes.md`
+ - `content/en/docs/installation/openshift.md`
 
 3. Create a new release branch (e.g. `release-0.5`)
 

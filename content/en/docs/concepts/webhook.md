@@ -44,4 +44,4 @@ following two Secrets:
 If errors occur around the webhook but the webhook is running then the webhook
 is most likely not reachable from the API server. In this case, ensure that the
 API server can communicate with the webhook by following the [GKE private
-cluster explanation](/docs/installation/compatibility/#gke).
+cluster explanation](../../installation/compatibility/#gke).
