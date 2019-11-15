@@ -39,7 +39,7 @@ if ! test -f "${gencrd}"; then
     detect_and_set_goos_goarch
 
     tmpdir="$(mktemp -d)"
-    curl -Lo "${tmpdir}/file" "https://github.com/munnerz/gen-crd-api-reference-docs/releases/download/${VERSION}/gen-crd-api-reference-docs_${GOOS}_amd64.tar.gz"
+    curl -Lo "${tmpdir}/file" "https://github.com/munnerz/gen-crd-api-reference-docs/releases/download/${VERSION}/gen-crd-api-reference-docs_${GOOS}_amd64"
     if [ "$GOOS" = "darwin" ]; then
         check_sha "${tmpdir}/file" "9c6994969dd405f0f7f28002cf0daaa4f21511c7cded2875d1dbf81b19c43883"
     elif [ "$GOOS" = "linux" ]; then
@@ -49,8 +49,7 @@ if ! test -f "${gencrd}"; then
     	exit 1
     fi
 
-    tar -C "$tmpdir" -xf "${tmpdir}/file"
-    mv "${tmpdir}/gen-crd-api-reference-docs" "${gencrd}"
+    mv "${tmpdir}/file" "${gencrd}"
     chmod +x "${gencrd}"
     rm -rf "${tmpdir}"
 fi
