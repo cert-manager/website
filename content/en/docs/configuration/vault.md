@@ -184,7 +184,7 @@ spec:
     auth:
       kubernetes:
         role: my-app-1
-        path: /kubernetes/cluster-1
+        mountPath: /v1/auth/kubernetes
         secretRef:
           name: my-service-account-token-hvwsb
           key: token
