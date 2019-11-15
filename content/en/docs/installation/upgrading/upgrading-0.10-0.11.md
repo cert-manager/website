@@ -1,7 +1,7 @@
 ---
 title: "Upgrading from v0.10 to v0.11"
 linkTitle: "Upgrading from v0.10 to v0.11"
-weight: 20
+weight: 100
 type: "docs"
 ---
 
@@ -49,7 +49,7 @@ you will need to update them to reflect the new API group.
 A full table of annotations, including the old and new equivalents:
 
 | Old Annotation                                 | New Annotation                              |
-|----------------------------------------------------------------------------------------------|
+|:-----------------------------------------------|:--------------------------------------------|
 | `certmanager.k8s.io/acme-http01-edit-in-place` | `acme.cert-manager.io/http01-edit-in-place` |
 | `certmanager.k8s.io/acme-http01-ingress-class` | `acme.cert-manager.io/http01-ingress-class` |
 | `certmanager.k8s.io/issuer`                    | `cert-manager.io/issuer`                    |
