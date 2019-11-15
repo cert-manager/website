@@ -95,9 +95,9 @@ single selector.
 
 #### Match Labels
 
-The `matchLabel` selector requires that all `Certificates` match at least one of
-the labels that are defined in the string map list of that stanza. For example,
-the following issuer will only match on `Certificates` that have the labels
+The `matchLabel` selector requires that all `Certificates` match at all of the
+labels that are defined in the string map list of that stanza. For example, the
+following issuer will only match on `Certificates` that have the labels
 `"user-cloudflare-solver": "true"`, *or* `"email": "user@example.com"`.
 
 ```yaml
@@ -117,25 +117,27 @@ spec:
             key: apikey
       selector:
         matchLabels:
-        - "use-cloudflare-solver": "true"
-        - "email": "user@example.com"
+          "use-cloudflare-solver": "true"
+          "email": "user@example.com"
 ```
 
 #### DNS Names
 
-The `dnsNames` selector is used to define the exact DNS challenges so solve.
-This means that `Certificates` containing any of these DNS names will be
-selected.  If a match is found, a `dnsNames` selector will take precedence over
-a [`dnsZones`](./#dns-zones) selector. If multiple solvers match with the same
-`dnsNames` value, the solver with the most matching labels in
-[`matchLabels`](./#match-labels) will be selected. If neither has more matches,
+The `dnsNames` selector is a list of exact DNS names that should be mapped to a
+solver.  This means that `Certificates` containing any of these DNS names will
+be selected.  If a match is found, a `dnsNames` selector will take precedence
+over a [`dnsZones`](#dns-zones) selector. If multiple solvers match with the
+same `dnsNames` value, the solver with the most matching labels in
+[`matchLabels`](#match-labels) will be selected. If neither has more matches,
 the solver defined earlier in the list will be selected.
 
 The following example will solve challenges of `Certificates` with DNS names
-`exmaple.com` and `*.exmaple.com` for these domains.
+`exmaple.com` and `*.example.com` for these domains.
 
 > Note: `dnsNames` take an exact match and do not resolve wildcards, meaning the
 > following issuer *will not* solve for DNS names such as `foo.example.com`.
+> Use the [`dnsZones`](#dns-zones) selector type to match all subdomains within
+> a zone.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -161,14 +163,14 @@ spec:
 #### DNS Zones
 
 The `dnsZones` stanza defines a list of DNS zones that can be solved by this
-solver. This means that DNS names defined here will solve for that domain,
-*and*, for all sub domains. The most specific DNS zone match specified will take
-precedence over other `dnsZone` matches, meaning a solver specifying
-`sys.example.com` will be selected over one specifying `example.com` for the
-domain `www.sys.example.com`. If multiple solvers match with the same `dnsZones`
-value, the solver with the most matching labels in
-[`matchLabels`](./#match-labels) will be selected. If neither has more matches,
-the solver defined earlier in the list will be selected.
+solver. If a DNS name is an exact match, or a subdomain of any of the specified
+`dnsZones`, this solver will be used, unless a more specific
+[`dnsNames`](#dns-names) match is configured. This means that `sys.example.com`
+will be selected over one specifying `example.com` for the domain
+`www.sys.example.com`. If multiple solvers match with the same `dnsZones` value,
+the solver with the most matching labels in [`matchLabels`](#match-labels) will
+be selected. If neither has more matches, the solver defined earlier in the list
+will be selected.
 
 In the following example, this solver will resolve challenges for the domain
 `example.com`, as well as all of its subdomains `*.example.com`.
