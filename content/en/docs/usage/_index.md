@@ -16,6 +16,8 @@ requesting certificates through cert-manager:
   requesting singed certificates.
 - [Securing Ingress Resources](./ingress/): A method to secure ingress resources
   in your cluster.
+- [Securing OpenFaaS functions](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/):
+  Secure your OpenFaaS services using cert-manager.
 - [Securing Knative](https://knative.dev/docs/serving/using-auto-tls/): Secure
   your Knative services with trusted HTTPS certificates.
 - [Enable mTLS on Pods with CSI](./csi/): Using the cert-manager CSI
