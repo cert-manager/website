@@ -1,7 +1,7 @@
 ---
 title: "Upgrading from v0.7 to v0.8"
-linkTitle: "Upgrading from v0.7 to v0.8"
-weight: 20
+linkTitle: "v0.7 to v0.8"
+weight: 80
 type: "docs"
 ---
 

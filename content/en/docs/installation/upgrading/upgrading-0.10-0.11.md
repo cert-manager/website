@@ -1,7 +1,7 @@
 ---
 title: "Upgrading from v0.10 to v0.11"
-linkTitle: "Upgrading from v0.10 to v0.11"
-weight: 100
+linkTitle: "v0.10 to v0.11"
+weight: 50
 type: "docs"
 ---
 
