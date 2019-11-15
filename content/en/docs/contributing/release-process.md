@@ -29,10 +29,10 @@ The process for cutting a minor release is as follows:
 
 2. Ensure all strings of versions have been updated.
 
-- in the [jetstack/cert-manager](https://github.com/jetstack/cert-manager)
+- in the [`jetstack/cert-manager`](https://github.com/jetstack/cert-manager)
   repository
  - `deploy/charts/cert-manager/README.md`
-- in the [cert-manager/webisite](https://github.com/cert-manager/website)
+- in the [`cert-manager/webisite`](https://github.com/cert-manager/website)
   repository
  - `content/en/docs/installation/compatibility.md`
  - `content/en/docs/installation/kubernetes.md`

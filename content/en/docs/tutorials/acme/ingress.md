@@ -221,9 +221,9 @@ application which makes an excellent back-end for examples.
 The quick-start example uses three manifests for the sample. The first two are a
 sample deployment and an associated service:
 
-{{% include file="/content/en/docs/tutorials/acme/example/deployment.yaml" language="yaml" %}}
+{{% include file="../example/deployment.yaml" language="yaml" %}}
 
-{{% include file="/content/en/docs/tutorials/acme/example/service.yaml" language="yaml" %}}
+{{% include file="../example/service.yaml" language="yaml" %}}
 
 You can create download and reference these files locally, or you can
 reference them from the GitHub source repository for this documentation.
@@ -231,10 +231,10 @@ To install the example service from the tutorial files straight from GitHub,
 you may use the commands:
 
 ```bash
-$ kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/deployment.yaml
+$ kubectl apply -f https://netlify.cert-manager.io/docs/tutorials/acme/example/deployment.yaml
 deployment.extensions "kuard" created
 
-$ kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/service.yaml
+$ kubectl apply -f https://netlify.cert-manager.io/docs/tutorials/acme/example/service.yaml
 service "kuard" created
 ```
 
@@ -245,14 +245,14 @@ will need to download and modify the example manifest to reflect the domain that
 you own or  control to complete this example.
 
 A sample ingress you can start with is:
-{{% include file="/content/en/docs/tutorials/acme/example/ingress.yaml" language="yaml" %}}
+{{% include file="../example/ingress.yaml" language="yaml" %}}
 
 You can download the sample manifest from GitHub , edit it, and submit the
 manifest to Kubernetes with the command. Edit the file in your editor, and once
 it is saved:
 
 ```bash
-$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress.yaml
+$ kubectl create --edit -f https://netlify.cert-manager.io/docs/tutorials/acme/example/ingress.yaml
 ingress.extensions "kuard" created
 ```
 
@@ -362,22 +362,22 @@ Create this definition locally and update the email address to your own. This
 email required by Let's Encrypt and used to notify you of certificate
 expiration and updates.
 
-{{% include file="/content/en/docs/tutorials/acme/example/staging-issuer.yaml" language="yaml" %}}
+{{% include file="../example/staging-issuer.yaml" language="yaml" %}}
 
 Once edited, apply the custom resource:
 
 ```bash
-$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/staging-issuer.yaml
+$ kubectl create --edit -f https://netlify.cert-manager.io/docs/tutorials/acme/example/staging-issuer.yaml
 issuer.cert-manager.io "letsencrypt-staging" created
 ```
 
 Also create a production issuer and deploy it. As with the staging issuer, you
 will need to update this example and add in your own email address.
 
-{{% include file="/content/en/docs/tutorials/acme/example/production-issuer.yaml" language="yaml" %}}
+{{% include file="../example/production-issuer.yaml" language="yaml" %}}
 
 ```bash
-$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/production-issuer.yaml
+$ kubectl create --edit -f https://netlify.cert-manager.io/docs/tutorials/acme/example/production-issuer.yaml
 issuer.cert-manager.io "letsencrypt-prod" created
 ```
 
@@ -448,12 +448,12 @@ cert-manager will create or update the secret defined in the certificate.
 Edit the ingress add the annotations that were commented out in our earlier
 example:
 
-{{% include file="/content/en/docs/tutorials/acme/example/ingress-tls.yaml" language="yaml" %}}
+{{% include file="../example/ingress-tls.yaml" language="yaml" %}}
 
 and apply it:
 
 ```bash
-$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress-tls.yaml
+$ kubectl create --edit -f https://netlify.cert-manager.io/docs/tutorials/acme/example/ingress-tls.yaml
 ingress.extensions "kuard" configured
 ```
 
@@ -548,10 +548,10 @@ tls.key:  1675 bytes
 Now that we have confidence that everything is configured correctly, you
 can update the annotations in the ingress to specify the production issuer:
 
-{{% include file="/content/en/docs/tutorials/acme/example/ingress-tls-final.yaml" language="yaml" %}}
+{{% include file="../example/ingress-tls-final.yaml" language="yaml" %}}
 
 ```bash
-$ kubectl create --edit -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/docs/tutorials/acme/quick-start/example/ingress-tls-final.yaml
+$ kubectl create --edit -f https://netlify.cert-manager.io/docs/tutorials/acme/example/ingress-tls-final.yaml
 ingress.extensions "kuard" configured
 ```
 
