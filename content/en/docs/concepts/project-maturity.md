@@ -5,9 +5,9 @@ weight: 0
 type: "docs"
 ---
 
-cert-manager has wide adoption with it being in use in both production and
-non-production clusters. The project is still in an alpha state where it has yet
-to reach `v1.0`.
+cert-manager has wide adoption in the Kubernetes community with it being in use
+in both production and non-production clusters. The project is still in an alpha
+state where it has yet to reach `v1.0`.
 
 ## API
 

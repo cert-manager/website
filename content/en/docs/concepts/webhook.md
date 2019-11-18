@@ -16,7 +16,7 @@ main functions:
   Ensures that when cert-manager resources are created or updated, they conform
   to the rules of the API. This validation is more in depth than for example
   ensuring resources conform to the OpenAPI schema, but instead contains logic such as
-  not allowing to specify more than one issuer type per issuer resource. The
+  not allowing to specify more than one `Issuer` type per `Issuer` resource. The
   validating admission is always called and will respond with a success or
   failed response.
 - [`MutatingAdmissionWebhook`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook):
@@ -24,11 +24,11 @@ main functions:
   example to set default values.
 - [`CustomResourceConversionWebhook`](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definition-versioning/#webhook-conversion):
   The webhook will also be responsible for implementing a conversion over
-  versions in the cert-manager custom resources. Although none are currently
-  implemented, the webhook will convert versions from `v1alpha2` to newer
-  versions as they are released.
+  versions in the cert-manager `CustomResources` (`cert-manager.io`). Although
+  none are currently implemented, the webhook will convert versions from
+  `v1alpha2` to newer versions as they are released.
 
-The webhook component is deployed as another pod that runs along side the main
+The webhook component is deployed as another pod that runs alongside the main
 cert-manager controller and CA injector components.
 
 In order for the API server to communicate with the webhook component, the
