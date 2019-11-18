@@ -16,12 +16,12 @@ In order to issue any certificates, you'll need to configure an
 
 ## Creating Certificate Resources
 
-A Certificate resource specifies fields that are used to generated certificate
+A `Certificate` resource specifies fields that are used to generated certificate
 signing requests which are then fulfilled by the issuer type you have
-referenced. Certificates specify which issuer they want to obtain the
+referenced. `Certificates` specify which issuer they want to obtain the
 certificate from by specifying the `certificate.spec.issuerRef` field.
 
-A Certificate resource, for the `example.com` and `www.example.com` DNS names,
+A `Certificate` resource, for the `example.com` and `www.example.com` DNS names,
 `spiffe://cluster.local/ns/sandbox/sa/example` URI Subject Alternative Name,
 that is valid for 90 days and renews 15 days before expiry is below. It contains
 an exhaustive list of all options a `Certificate` resource may have however only
@@ -32,7 +32,7 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: example-com
-  namespace: default
+  namespace: sandbox
 spec:
   # Secret names are always required.
   secretName: example-com-tls
@@ -64,8 +64,8 @@ spec:
     # We can reference ClusterIssuers by changing the kind here.
     # The default value is Issuer (i.e. a locally namespaced Issuer)
     kind: Issuer
-    # This is optional since cert-manager will default to this value however if you
-    # are using an external issuer, change this to that issuer group.
+    # This is optional since cert-manager will default to this value however
+    # if you are using an external issuer, change this to that issuer group.
     group: cert-manager.io
 ```
 
@@ -73,17 +73,15 @@ The signed certificate will be stored in a `Secret` resource named
 `example-com-tls` in the same namespace as the `Certificate` once the issuer has
 successfully issued the requested certificate.
 
-The Certificate will be issued using the issuer named `ca-issuer` in the
-`default` namespace (the same namespace as the Certificate resource).
+The `Certificate` will be issued using the issuer named `ca-issuer` in the
+`sandbox` namespace (the same namespace as the `Certificate` resource).
 
-> Note: If you want to create an Issuer that can be referenced by Certificate
-> resources in *all* namespaces, you should create a
-> [`ClusterIssuer`](../../configuration/) resource and set the
+> Note: If you want to create an `Issuer` that can be referenced by
+> `Certificate` resources in *all* namespaces, you should create a
+> [`ClusterIssuer`](../../concepts/issuer/#namespaces) resource and set the
 > `certificate.spec.issuerRef.kind` field to `ClusterIssuer`.
 
-
-
-> Note: The `renewBefore` and `duration` fields must be specified using [Go
+> Note: The `renewBefore` and `duration` fields must be specified using a [Go
 > `time.Duration`](https://golang.org/pkg/time/#ParseDuration) string format,
 > which does not allow the `d` (days) suffix. You must specify these values
 > using `s`, `m`, and `h` suffixes instead. Failing to do so without installing
@@ -91,9 +89,8 @@ The Certificate will be issued using the issuer named `ca-issuer` in the
 > from functioning correctly
 > [`#1269`](https://github.com/jetstack/cert-manager/issues/1269).
 
-
 > Note: Take care when setting the `renewBefore` field to be very close to the
-> `duration` as this can lead to a renewal loop, where the Certificate is always
+> `duration` as this can lead to a renewal loop, where the `Certificate` is always
 > in the renewal period. Some `Issuers` set the `notBefore` field on their
 > issued x509 certificates before the issue time to fix clock-skew issues,
 > leading to the working duration of a certificate to be less than the full
@@ -110,7 +107,7 @@ cert-manager supports requesting certificates that have a number of custom key
 usages and extended key usages. Although cert-manager will attempt to honor this
 request, some issuers will remove, add defaults, or otherwise completely ignore
 the request and is determined on an issuer by issuer basis. The `CA` and
-`SelfSigned` issuer will always return certificates matching the usages you have
+`SelfSigned` `Issuer` will always return certificates matching the usages you have
 requested.
 
 Unless any number of usages has been set, cert-manager will set the default

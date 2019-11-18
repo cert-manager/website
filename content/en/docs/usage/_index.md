@@ -7,12 +7,11 @@ type: "docs"
 
 ## Issuing Certificates with cert-manager
 
-Once [`Issuers`](../configuration/) have been configured, certificates
-are able to begin to be requested from cert-manager that can be signed by these
-issuers. Shown below is a list of use cases and methods for
-requesting certificates through cert-manager:
+Once [`Issuers`](../configuration/) have been configured, certificates are able
+to be requested and signed by those `Issuers`.  Shown below is a list of use
+cases and methods for requesting certificates through cert-manager:
 
-- [Certificates Resources](./certificate/): The simplest and most common method for
+- [Certificate Resources](./certificate/): The simplest and most common method for
   requesting singed certificates.
 - [Securing Ingress Resources](./ingress/): A method to secure ingress resources
   in your cluster.
