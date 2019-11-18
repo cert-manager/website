@@ -15,7 +15,7 @@ how cert-manager handles DNS01 challenges.
 
 ## Set up a IAM Role
 
-Cert-manager needs to be able to add records to Route53 in order to solve the
+cert-manager needs to be able to add records to Route53 in order to solve the
 DNS01 challenge. To enable this, create a IAM policy with the following
 permissions:
 
@@ -52,11 +52,11 @@ permissions:
 
 ## Credentials
 
-You have two options for the set up: Either create a user or a role and attach
+You have two options for the set up - either create a user or a role and attach
 that policy from above.  Using a role is considered best practice because you do
 not have to store permanent credentials in a secret.
 
-Cert-manager supports two ways of specifying credentials:
+cert-manager supports two ways of specifying credentials:
 
 - explicit by providing a `accessKeyID` and `secretAccessKey`
 - or implicit (using [metadata
@@ -64,13 +64,13 @@ Cert-manager supports two ways of specifying credentials:
   or [environment variables or credentials
   file](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials).
 
-Cert-manager also supports specifying a `role` to enable cross-account access
-and/or to limit the access for the cert-manager. Integration with
+cert-manager also supports specifying a `role` to enable cross-account access
+and/or limit the access of cert-manager. Integration with
 [`kiam`](https://github.com/uswitch/kiam) and
 [`kube2iam`](https://github.com/jtblin/kube2iam) should work out of the box.
 
 
-## Cross account access
+## Cross Account Access
 
 Example: Account A manages a Route53 DNS Zone. Now you want account X to be able
 to manage records in that zone.
@@ -98,7 +98,7 @@ This allows the role `cert-manager` in account X to manage the Route53 DNS Zone
 in account A.  For more information visit the [official
 documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html>).
 
-## Creating a Issuer (or `ClusterIssuer`)
+## Creating a Issuer (or ClusterIssuer)
 
 Here is an example configuration for a `ClusterIssuer`:
 

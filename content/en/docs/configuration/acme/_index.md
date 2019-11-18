@@ -5,10 +5,10 @@ weight: 60
 type: "docs"
 ---
 
-The ACME Issuer type represents a single Account registered with the Automated
+The ACME Issuer type represents a single account registered with the Automated
 Certificate Management Environment (ACME) Certificate Authority server. When you
-create a new ACME Issuer, cert-manager will generate a private key which is used
-to identify you with the ACME server.
+create a new ACME `Issuer`, cert-manager will generate a private key which is
+used to identify you with the ACME server.
 
 Certificates issued by public ACME servers are typically trusted by client's
 computers by default. This means that, for example, visiting a website that is
@@ -25,7 +25,7 @@ site. As detailed in the [RFC8555](https://tools.ietf.org/html/rfc8555),
 cert-manager offers two challenge validations - HTTP01 and DNS01 challenges.
 
 [HTTP01](./http01/) challenges are completed by presenting a computed
-key, that should be present at a HTTP URL endpoint that is rotatable over the
+key, that should be present at a HTTP URL endpoint and is routable over the
 internet. This URL will use the domain name requested for the certificate. Once
 the ACME server is able to get this key from this URL over the internet, the
 ACME server can validate you are the owner of this domain. When a HTTP01
@@ -42,10 +42,10 @@ present this TXT record for your given DNS provider.
 
 ## Configuration
 
-### Creating a basic ACME Issuer
+### Creating a Basic ACME Issuer
 
-All ACME issuers follow a similar configuration structure - a clients `email`, a
-`server` URL, a `privateKeySecretRef`, and one or more `solvers`. Below is an
+All ACME `Issuers` follow a similar configuration structure - a clients `email`,
+a `server` URL, a `privateKeySecretRef`, and one or more `solvers`. Below is an
 example of a simple ACME issuer:
 
 ```yaml
@@ -84,21 +84,21 @@ certificates using `DNS01` alongside other certificates that are validated using
 `HTTP01`.
 
 The `solvers` stanza has an optional `selector` field, that can be used to
-specify which `Certificates`, and further, what DNS names *on those
-`Certificates`* should be used to solve challenges.
+specify which `Certificates`, and further, what DNS names *on those*
+`Certificates` should be used to solve challenges.
 
 There are three selector types that can be used to form the requirements that a
 `Certificate` must meet in order to be selected for a solver - `matchLabels`,
 `dnsNames` and `dnsZones`. You can have any number of these thee selectors on a
-single selector.
+single solver.
 
 
 #### Match Labels
 
-The `matchLabel` selector requires that all `Certificates` match at all of the
-labels that are defined in the string map list of that stanza. For example, the
-following issuer will only match on `Certificates` that have the labels
-`"user-cloudflare-solver": "true"`, *or* `"email": "user@example.com"`.
+The `matchLabel` selector requires that all `Certificates` match at least one of
+the labels that are defined in the string map list of that stanza. For example,
+the following `Issuer` will only match on `Certificates` that have the labels
+`"user-cloudflare-solver": "true"`, or `"email": "user@example.com"`, or both.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -135,7 +135,7 @@ The following example will solve challenges of `Certificates` with DNS names
 `exmaple.com` and `*.example.com` for these domains.
 
 > Note: `dnsNames` take an exact match and do not resolve wildcards, meaning the
-> following issuer *will not* solve for DNS names such as `foo.example.com`.
+> following `Issuer` *will not* solve for DNS names such as `foo.example.com`.
 > Use the [`dnsZones`](#dns-zones) selector type to match all subdomains within
 > a zone.
 

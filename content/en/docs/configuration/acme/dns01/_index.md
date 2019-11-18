@@ -10,10 +10,10 @@ type: "docs"
 This page contains details on the different options available on the `Issuer`
 resource's DNS01 challenge solver configuration.
 
-For more information on configuring ACME issuers and their API format, read the
+For more information on configuring ACME `Issuers` and their API format, read the
 [ACME Issuers](../) documentation.
 
-DNS01 provider configuration must be specified on the Issuer resource, similar
+DNS01 provider configuration must be specified on the `Issuer` resource, similar
 to the examples in the setting up documentation.
 
 You can read about how the DNS01 challenge type works on the [Let's Encrypt
@@ -42,13 +42,13 @@ spec:
 
 Each issuer can specify multiple different DNS01 challenge providers, and
 it is also possible to have multiple instances of the same DNS provider on a
-single Issuer (e.g. two CloudDNS accounts could be set, each with their own
+single `Issuer` (e.g. two CloudDNS accounts could be set, each with their own
 name).
 
-For more information on utilizing multiple solver types on a single Issuer,
+For more information on utilizing multiple solver types on a single `Issuer`,
 read the multiple-solver-types section.
 
-## Setting nameservers for DNS01 self check
+## Setting Nameservers for DNS01 Self Check
 
 cert-manager will check the correct DNS records exist before attempting a DNS01
 challenge.  By default, the DNS servers for this check will be taken from
@@ -103,9 +103,9 @@ which DNS zone to update during DNS01 challenges.
 
 ## Supported DNS01 providers
 
-A number of different DNS providers are supported for the ACME issuer. Below is
-a listing of available providers, their `.yaml` configurations, along with additional Kubernetes
-and provider specific notes regarding their usage.
+A number of different DNS providers are supported for the ACME `Issuer`. Below
+is a listing of available providers, their `.yaml` configurations, along with
+additional Kubernetes and provider specific notes regarding their usage.
 
 - [ACMEDNS](./acme-dns/)
 - [Akamai](./akamai/)

@@ -43,14 +43,14 @@ documentation](https://docs.cert-manager.io/en/latest/reference/api-docs/#acmeis
 
 ### `ingressClass`
 
-If the `ingressClass` field is specified, cert-manager will create new
-Ingress resources in order to route traffic to the `acmesolver` pods, which
-are responsible for responding to ACME challenge validation requests.
+If the `ingressClass` field is specified, cert-manager will create new `Ingress`
+resources in order to route traffic to the `acmesolver` pods, which are
+responsible for responding to ACME challenge validation requests.
 
 If this field is not specified, and `ingressName` is also not specified,
-cert-manager will default to create *new* ingress resources but will **not** set
-the ingress class on these resources, meaning *all* ingress controllers
-installed in your cluster will server traffic for the challenge solver,
+cert-manager will default to create *new* `Ingress` resources but will **not**
+set the ingress class on these resources, meaning *all* ingress controllers
+installed in your cluster will serve traffic for the challenge solver,
 potentially occurring additional cost.
 
 
@@ -60,7 +60,7 @@ If the `ingressName` field is specified, cert-manager will edit the named
 ingress resource in order to solve HTTP01 challenges.
 
 This is useful for compatibility with ingress controllers such as `ingress-gce`,
-which utilize a unique IP address for each Ingress resource created.
+which utilize a unique IP address for each `Ingress` resource created.
 
 This mode should be avoided when using ingress controllers that expose a single
 IP for all ingress resources, as it can create compatibility problems with
@@ -79,7 +79,7 @@ response specify the following HTTP01 configuration:
       serviceType: ClusterIP
 ```
 
-By default type `NodePort` will be used when you don't set HTTP01 or when you set
+By default, type `NodePort` will be used when you don't set HTTP01 or when you set
 `serviceType` to an empty string. Normally there's no need to change this.
 
 
@@ -120,4 +120,4 @@ spec:
 The added labels and annotations will merge on top of the cert-manager defaults,
 overriding entries with the same key.
 
-No other fields can be edited.
+No other fields of the `podTemplate` exist.

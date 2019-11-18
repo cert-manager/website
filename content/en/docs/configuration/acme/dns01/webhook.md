@@ -5,11 +5,11 @@ weight: 30
 type: "docs"
 ---
 
-The webhook issuer is a generic acme solver. The actual work is done by an
+The webhook `Issuer` is a generic ACME solver. The actual work is done by an
 external service. Look at the respective documentation of
 [`dns-providers`](../../../../contributing/dns-providers/).
 
-See more webhook solver on at `https://github.com/topics/cert-manager-webhook`.
+View more webhook solvers at https://github.com/topics/cert-manager-webhook.
 
 Here is an example of how webhook providers are to be configured. All `DNS01`
 providers will contain their own specific configuration however all require a
@@ -26,8 +26,8 @@ spec:
     solvers:
     - dns01:
         webhook:
-          groupName: <webhook-group-name>
-          solverName: <webhook-solver-name>
+          groupName: $WEBHOOK_GROUP_NAME
+          solverName: $WEBHOOK_SOLVER_NAME
           config:
             ...
             <webhook-specific-configuration>
