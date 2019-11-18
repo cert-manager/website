@@ -5,7 +5,7 @@ weight: 80
 type: "docs"
 ---
 
-Here you will a link to all release notes for each version release of
+Here you will find a link to all release notes for each version release of
 cert-manager:
 
 - [`v0.1`](./release-notes-0.1/)
