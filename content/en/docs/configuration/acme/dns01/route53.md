@@ -98,7 +98,7 @@ This allows the role `cert-manager` in account X to manage the Route53 DNS Zone
 in account A.  For more information visit the [official
 documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html>).
 
-## Creating a Issuer (or ClusterIssuer)
+## Creating an Issuer (or `ClusterIssuer`)
 
 Here is an example configuration for a `ClusterIssuer`:
 
