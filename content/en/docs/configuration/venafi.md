@@ -6,10 +6,10 @@ type: "docs"
 ---
 
 The Venafi `Issuer` types allows you to obtain certificates from [Venafi
-Cloud](https://pki.venafi.com/venafi-cloud) and [Venafi Trust Protection
+Cloud](https://www.venafi.com/cloud) and [Venafi Trust Protection
 Platform](https://venafi.com) instances.
 
-Register your account at https://ui.venafi.cloud/enroll and get an API key from
+Create your Venafi Cloud account on this [page](https://www.venafi.com/cloud) and get an API key from
 your dashboard.
 
 You can have multiple different Venafi `Issuer` types installed within the same

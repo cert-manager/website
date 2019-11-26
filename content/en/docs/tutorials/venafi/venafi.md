@@ -316,8 +316,8 @@ $ kubectl describe issuer -n demo venafi-issuer
 
 ### Venafi Cloud
 
-You can sign up for a Venafi Cloud account by visiting the [enroll
-page](https://www.venafi.com/platform/cloud/devops).
+You can sign up for a Venafi Cloud account by visiting the [enrollment
+page](https://www.venafi.com/cloud).
 
 Once registered, you should fetch your API key by clicking your name in the top
 right of the control panel interface.
