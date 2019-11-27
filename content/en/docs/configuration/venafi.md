@@ -9,15 +9,15 @@ The Venafi `Issuer` types allows you to obtain certificates from [Venafi
 Cloud](https://www.venafi.com/cloud) and [Venafi Trust Protection
 Platform](https://venafi.com) instances.
 
-Create your Venafi Cloud account on this [page](https://www.venafi.com/cloud) and get an API key from
-your dashboard.
+Create your Venafi Cloud account on this [page](https://www.venafi.com/cloud)
+and get an API key from your dashboard.
 
 You can have multiple different Venafi `Issuer` types installed within the same
 cluster, including mixtures of Cloud and TPP issuer types. This allows you to be
 flexible with the types of Venafi account you use.
 
 Automated certificate renewal and management are provided for `Certificates`
-using the Venafi issuer.
+using the Venafi `Issuer`.
 
 ## Creating an Issuer resource
 
@@ -28,13 +28,12 @@ obtain certificates from.
 You can configure your `Issuer` resource to either issue certificates only
 within a single namespace, or cluster-wide (using a `ClusterIssuer` resource).
 For more information on the distinction between `Issuer` and `ClusterIssuer`
-resources, read the [`Issuer` vs
-`ClusterIssuer`](../../concepts/issuer/) section.
+resources, read the [Namespaces](../../concepts/issuer/#namespaces) section.
 
 ### Creating a Venafi Cloud Issuer
 
-In order to set up a Venafi Cloud Issuer, you must first create a Kubernetes
-Secret resource containing your Venafi Cloud API credentials:
+In order to set up a Venafi Cloud `Issuer`, you must first create a Kubernetes
+`Secret` resource containing your Venafi Cloud API credentials:
 
 ```bash
 $ kubectl create secret generic \
@@ -44,8 +43,8 @@ $ kubectl create secret generic \
 ```
 
 > **Note**: If you are configuring your issuer as a `ClusterIssuer` resource in
-> order to issue Certificates across your whole cluster, you must set the
-> `--namespace` parameter to `kube-system`, which is the default `Cluster
+> order to serve `Certificates` across your whole cluster, you must set the
+> `--namespace` parameter to `cert-manager`, which is the default `Cluster
 > Resource Namespace`. The `Cluster Resource Namespace` can be configured
 > through the `--cluster-resource-namespace` flag on the cert-manager controller
 > component.
@@ -53,13 +52,13 @@ $ kubectl create secret generic \
 This API key will be used by cert-manager to interact with the Venafi Cloud
 service on your behalf.
 
-Once the API key Secret has been created, you can create your `Issuer` or
+Once the API key `Secret` has been created, you can create your `Issuer` or
 `ClusterIssuer` resource. If you are creating a `ClusterIssuer` resource, you
 must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
 
 Save the below content after making your amendments to a file named
-`venafi-cloud-issuer.yaml`:
+`venafi-cloud-issuer.yaml`.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -76,13 +75,13 @@ spec:
         key: apikey
 ```
 
-You can then create the Issuer using `kubectl create`:
+You can then create the Issuer using `kubectl create`.
 
 ```bash
 $ kubectl create -f venafi-cloud-issuer.yaml
 ```
 
-Verify the `Issuer` has been initialized correctly using `kubectl describe`:
+Verify the `Issuer` has been initialized correctly using `kubectl describe`.
 
 ```bash
 $ kubectl describe issuer cloud-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
@@ -91,7 +90,7 @@ $ kubectl describe issuer cloud-venafi-issuer --namespace='NAMESPACE OF YOUR ISS
 * TODO: add output
 
 You are now ready to issue certificates using the newly provisioned Venafi
-Issuer.
+`Issuer`.
 
 Read the [Issuing Certificates](../../usage/certificate/) document for
 more information on how to create Certificate resources.
@@ -108,8 +107,9 @@ the connection parameters are slightly different.
 > Note: You *must* allow "User Provided CSRs" as part of your TPP policy, as
 > this is the only type supported by cert-manager at this time.
 
-In order to set up a Venafi Trust Protection Platform Issuer, you must first
-create a Kubernetes Secret resource containing your Venafi TPP API credentials:
+In order to set up a Venafi Trust Protection Platform `Issuer`, you must first
+create a Kubernetes `Secret` resource containing your Venafi TPP API
+credentials:
 
 ```bash
 $ kubectl create secret generic \
@@ -120,8 +120,8 @@ $ kubectl create secret generic \
 ```
 
 > Note: If you are configuring your issuer as a `ClusterIssuer` resource in
-> order to issue Certificates across your whole cluster, you must set the
-> `--namespace` parameter to `kube-system`, which is the default `Cluster
+> order to issue `Certificates` across your whole cluster, you must set the
+> `--namespace` parameter to `cert-manager`, which is the default `Cluster
 > Resource Namespace`. The `Cluster Resource Namespace` can be configured
 > through the `--cluster-resource-namespace` flag on the cert-manager controller
 > component.
@@ -136,7 +136,7 @@ resource, you must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
 
 Save the below content after making your amendments to a file named
-`venafi-tpp-issuer.yaml`:
+`venafi-tpp-issuer.yaml`.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -154,20 +154,18 @@ spec:
         name: tpp-secret
 ```
 
-You can then create the `Issuer` using `kubectl create -f`:
-
+You can then create the `Issuer` using `kubectl create -f`.
 ```bash
 $ kubectl create -f venafi-tpp-issuer.yaml
 ```
 
-Verify the `Issuer` has been initialized correctly using `kubectl describe`:
-
+Verify the `Issuer` has been initialized correctly using `kubectl describe`.
 ```bash
 $ kubectl describe issuer tpp-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
 ```
 
 You are now ready to issue certificates using the newly provisioned Venafi
-Issuer.
+`Issuer`.
 
 Read the [Issuing Certificates](../../usage/certificate/) document for
 more information on how to create Certificate resources.

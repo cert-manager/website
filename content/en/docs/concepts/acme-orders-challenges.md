@@ -8,9 +8,9 @@ type: "docs"
 cert-manager supports requesting certificates from ACME servers, including from
 [Let's Encrypt](https://letsencrypt.org/), with use of the [ACME
 Issuer](../../configuration/acme/). These certificates are typically trusted on
-the public Internet by most computers. To do this, cert-manager must solve ACME
-Challenges which are completed in order to prove that the client owns the DNS
-addresses that are being requested.
+the public Internet by most computers. To successfully request a certificate,
+cert-manager must solve ACME Challenges which are completed in order to prove
+that the client owns the DNS addresses that are being requested.
 
 In order to complete these challenges, cert-manager introduces two
 `CustomResource` types; `Orders` and `Challenges`.
@@ -27,30 +27,30 @@ issuer has been created. `CertificateRequest` resources are created
 automatically by cert-manager once a [`Certificate`](../certificate/) resource
 is created, has its specification changed, or needs renewal.
 
-As an end-user, you will never need to manually create an Order resource.
-Once created, an Order cannot be changed. Instead, a new Order resource must be
-created.
+As an end-user, you will never need to manually create an `Order` resource.
+Once created, an `Order` cannot be changed. Instead, a new `Order` resource must
+be created.
 
 The `Order` resource encapsulates multiple ACME 'challenges' for that 'order',
 and as such, will manage one or more `Challenge` resources.
 
 ## Challenges
 
-Challenge resources are used by the ACME issuer to manage the lifecycle of an
+`Challenge` resources are used by the ACME issuer to manage the lifecycle of an
 ACME 'challenge' that must be completed in order to complete an 'authorization'
 for a single DNS name/identifier.
 
 When an `Order` resource is created, the order controller will create
-Challenge resources for each DNS name that is being authorized with the ACME
+`Challenge` resources for each DNS name that is being authorized with the ACME
 server.
 
-As an end-user, you will never need to manually create a Challenge resource.
-Once created, a Challenge cannot be changed. Instead, a new Challenge resource
-must be created.
+As an end-user, you will never need to manually create a `Challenge` resource.
+Once created, a `Challenge` cannot be changed. Instead, a new `Challenge`
+resource must be created.
 
 ### Challenge Lifecycle
 
-After a Challenge resource has been created, it will be initially queued for
+After a `Challenge` resource has been created, it will be initially queued for
 processing. Processing will not begin until the challenge has been 'scheduled'
 to start.  This scheduling process prevents too many challenges being attempted
 at once, or multiple challenges for the same DNS name being attempted at once.
@@ -73,9 +73,9 @@ have been observed and in-use by the ingress controller).
 
 If the self check fails, cert-manager will retry the self check with a fixed 10
 second retry interval. Challenges that do not ever complete the self check will
-continue retrying until the user intervenes by either retrying the Order (by
-deleting the Order resource) or amending the associated Certificate resource to
-resolve any configuration errors.
+continue retrying until the user intervenes by either retrying the `Order` (by
+deleting the `Order` resource) or amending the associated `Certificate` resource
+to resolve any configuration errors.
 
 Once the self check is passing, the ACME 'authorization' associated with this
 challenge will be 'accepted'.

@@ -36,7 +36,7 @@ $ oc login -u system:admin
 ## Installing with regular manifests
 
 In order to install cert-manager, we must first create a namespace to run it
-within. This guide will install cert-manager into the `cert-manager`
+in. This guide will install cert-manager into the `cert-manager`
 namespace. It is possible to run cert-manager in a different namespace,
 although you will need to make modifications to the deployment manifests.
 
@@ -45,16 +45,9 @@ Create a namespace to run cert-manager in
 $ oc create namespace cert-manager
 ```
 
-As part of the installation, cert-manager also deploys a webhook deployment as
-an
-[APIService](https://kubernetes.io/docs/tasks/access-kubernetes-api/setup-extension-api-server).
-This can cause issues when uninstalling cert-manager if the API service still
-exists but the webhook is no longer running as the API server is unable to reach
-the validating webhook. Ensure to follow the documentation when [uninstalling
-cert-manager](../).
-
-The webhook enables cert-manager to implement validation and mutating webhooks
-on cert-manager resources. A
+As part of the installation, cert-manager also deploys a webhook server.  The
+webhook enables cert-manager to implement validation and mutating webhooks on
+cert-manager resources. A
 [`ValidatingWebhookConfiguration`](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers)
 resource is deployed to validate cert-manager resources we will create after
 installation.  No mutating webhooks are currently implemented.

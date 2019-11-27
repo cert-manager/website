@@ -5,17 +5,17 @@ weight: 30
 type: "docs"
 ---
 
-The `Vault` issuer represents the certificate authority
+The `Vault` `Issuer` represents the certificate authority
 [Vault](https://www.vaultproject.io/) - a multi-purpose secret store that can be
 used to sign certificates for your Public Key Infrastructure (PKI). Vault is an
-external project to cert-manager and as such this guide will assume you have
-configured and deployed is correctly, ready for signing. You can read more on
-how to configure vault as a certificate authority
+external project to cert-manager and as such, this guide will assume it has been
+configured and deployed correctly, ready for signing. You can read more on how
+to configure Vault as a certificate authority
 [here](https://www.vaultproject.io/docs/secrets/pki/).
 
-This issuer type is typically used when Vault is already being in use within
-your infrastructure or in order to make of it's feature set where the CA issuer
-alone cannot provide.
+This `Issuer` type is typically used when Vault is already being used within
+your infrastructure, or you would like to make use of it's feature set where the
+CA issuer alone cannot provide.
 
 ## Deployment
 
@@ -44,7 +44,7 @@ spec:
   vault:
     path: pki_int/sign/example-dot-com
     server: https://vault.local
-    caBundle: <base64 encoded caBundle PEM file>
+    caBundle: <base64 encoded CA Bundle PEM file>
     auth:
       ...
 ```
@@ -62,7 +62,7 @@ authenticating to Vault through use of it's internal role policy system. This
 authentication method requires that the issuer has possession of the `SecretID`
 secret key, the `RoleID` of the role to assume, and the app role path. Firstly,
 the secret ID key must be stored within a Kubernetes `Secret` that resides in the
-same namespace as the issuer, or otherwise inside the `Cluster Resource
+same namespace as the `Issuer`, or otherwise inside the `Cluster Resource
 Namespace` in the case of a `ClusterIssuer`.
 
 ```yaml
@@ -76,7 +76,7 @@ data:
   secretId: "MDI..."
 ```
 
-Once the `Secret` has been created, the issuer is ready to be deployed which
+Once the `Secret` has been created, the `Issuer` is ready to be deployed which
 references this `Secret`, as well as the data key of the field that stores the
 secret ID.
 

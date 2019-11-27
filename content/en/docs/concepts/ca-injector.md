@@ -5,21 +5,19 @@ weight: 600
 type: "docs"
 ---
 
-The cert-manager CA injector controller is responsible for injecting the two CA
-bundles above into the [webhook's](../webhook/)
-`ValidatingWebhookConfiguration` and `APIService` resource in order to allow the
-Kubernetes apiserver to 'trust' the webhook apiserver.
+The cert-manager CA injector controller is responsible for injecting the CA
+bundle into the [webhook's](../webhook/) `ValidatingWebhookConfiguration` and
+`MutatingWebhookConfiguration` resources in order to allow the Kubernetes
+API server to 'trust' the webhook API server.
 
 This component is configured using the `cert-manager.io/inject-apiserver-ca:
 "true"` and `cert-manager.io/inject-apiserver-ca: "true"` annotations on the
-`APIService`, `ValidatingWebhookConfiguration` and
-`MutatingWebhookConfiguration` resources.
+`ValidatingWebhookConfiguration` and `MutatingWebhookConfiguration` resources.
 
-It copies across the CA defined in the `cert-manager-webhook-ca` Secret
-generated to the `caBundle` field on the `APIService` resource. It also sets
-the webhook's `clientConfig.caBundle` field on the `cert-manager-webhook`
-`ValidatingWebhookConfiguration` resource to that of your Kubernetes API server
-in order to support Kubernetes versions earlier than `v1.11`.
+It copies across the CA defined in the `cert-manager-webhook-ca` `Secret` over
+to the `clientConfig.caBundle` field in both the
+`ValidatingWebhookConfiguration` and `MutatingWebhookConfiguration` resources in
+order for the API server to trust their respective endpoints.
 
 The CA injector runs as a separate pod along side the main cert-manager
 controller and webhook components.

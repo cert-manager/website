@@ -66,5 +66,5 @@ configured for the CLI.
 $ kubectl get issuers ca-issuer -n sandbox -o wide
 ```
 
-Certificates are now ready to be requested by using the CA issuer named
+Certificates are now ready to be requested by using the CA `Issuer` named
 `ca-issuer` within the `sandbox` namespace.

@@ -27,34 +27,34 @@ $ AZURE_CERT_MANAGER_SP_APP_ID=$(echo $DNS_SP | jq -r '.appId')
 $ AZURE_CERT_MANAGER_SP_PASSWORD=$(echo $DNS_SP | jq -r '.password')
 ```
 
-Lower the Permissions of the SP
+Lower the Permissions of the SP.
 ```bash
 $ az role assignment delete --assignee $AZURE_CERT_MANAGER_SP_APP_ID --role Contributor
 ```
 
-Give Access to DNS Zone
+Give Access to DNS Zone.
 ```bash
 $ DNS_ID=$(az network dns zone show --name $AZURE_CERT_MANAGER_DNS_NAME --resource-group $AZURE_CERT_MANAGER_DNS_RESOURCE_GROUP --query "id" --output tsv)
 $ az role assignment create --assignee $AZURE_CERT_MANAGER_SP_APP_ID --role "DNS Zone Contributor" --scope $DNS_ID
 ```
 
-Check Permissions
+Check Permissions.
 ```bash
 $ az role assignment list --assignee $AZURE_CERT_MANAGER_SP_APP_ID
 ```
 
-Create Secret
+Create Secret.
 ```bash
 $ kubectl create secret generic azuredns-config --from-literal=CLIENT_SECRET=$AZURE_CERT_MANAGER_SP_PASSWORD
 ```
 
-Get the Service Principal App ID for configuration
+Get the Service Principal App ID for configuration.
 ```bash
 $ echo "Principal: $AZURE_CERT_MANAGER_SP_APP_ID"
 $ echo "Password: $AZURE_CERT_MANAGER_SP_PASSWORD"
 ```
 
-You can configure the issuer like so:
+You can configure the issuer like so.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2

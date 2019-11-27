@@ -15,12 +15,12 @@ how cert-manager handles DNS01 challenges.
 
 ## Set up a Service Account
 
-Cert-manager needs to be able to add records to CloudDNS in order to solve the
+cert-manager needs to be able to add records to CloudDNS in order to solve the
 DNS01 challenge. To enable this, a GCP service account must be created with the
 `dns.admin` role.
 
 > Note: For this guide the `gcloud` command will be used to set up the service
-> account. Ensure that `gcloud` is in using the correct project and zone before
+> account. Ensure that `gcloud` is using the correct project and zone before
 > entering the commands. These steps could also be completed using the Cloud
 > Console.
 
@@ -28,7 +28,7 @@ DNS01 challenge. To enable this, a GCP service account must be created with the
 $ export PROJECT_ID=myproject-id
 $ gcloud iam service-accounts create dns01-solver --display-name "dns01-solver"
 ```
-Replace both uses of project-id with the id of your project
+Replace both instances of `$PROJECT_ID` with the ID of your project.
 ```bash
 $ gcloud projects add-iam-policy-binding $PROJECT_ID \
    --member serviceAccount:dns01-solver@$PROJECT_ID.iam.gserviceaccount.com \
@@ -37,18 +37,18 @@ $ gcloud projects add-iam-policy-binding $PROJECT_ID \
 
 ## Create a Service Account Secret
 
-To access this service account cert-manager uses a key stored in a Kubernetes
-Secret. First, create a key for the service account and download it as JSON
-file, then create a Secret from this file.
+To access this service account, cert-manager uses a key stored in a Kubernetes
+`Secret`. First, create a key for the service account and download it as a JSON
+file, then create a `Secret` from this file.
 
 If you did not create the service account `dns01-solver` before, you need to
-create it first:
+create it first.
 
 ```bash
 $ gcloud iam service-accounts create dns01-solver
 ```
 
-Replace use of project-id with the id of your project
+Replace instances of `$PROJECT_ID` with the ID of your project.
 ```bash
 $ gcloud iam service-accounts keys create key.json \
    --iam-account dns01-solver@$PROJECT_ID.iam.gserviceaccount.com
@@ -56,19 +56,21 @@ $ kubectl create secret generic clouddns-dns01-solver-svc-acct \
    --from-file=key.json
 ```
 
-> Note: Keep the key file safe and do not share it, as it could be used to gain access to your cloud resources. The key file can be deleted once it has been used to generate the Secret.
+> Note: Keep the key file safe and do not share it, as it could be used to gain
+> access to your cloud resources. The key file can be deleted once it has been
+> used to generate the `Secret`.
 
-> Note: If you have already added the secret but get an error: `...due to error
-> processing: error getting clouddns service account: secret "XXX" not found`,
-> the secret may be in the wrong namespace. If you're configuring a
-> `ClusterIssuer`, try moving the secret to the same namespace as cert-manager.
-> If you're configuring an `Issuer`, the secret should be stored in the same
-> namespace as the `Issuer` resource.
+> Note: If you have already added the `Secret` but get an error: `...due to
+> error processing: error getting clouddns service account: secret "XXX" not
+> found`, the `Secret` may be in the wrong namespace. If you're configuring a
+> `ClusterIssuer`, move the `Secret` to the `Cluster Resource Namespace` which
+> is `cert-manager` by default.  If you're configuring an `Issuer`, the `Secret`
+> should be stored in the same namespace as the `Issuer` resource.
 
 ## Create an Issuer That Uses CloudDNS
 
 Next, create an `Issuer` (or `ClusterIssuer`) with a `clouddns` provider. An
-example Issuer manifest can be seen below with annotations.
+example `Issuer` manifest can be seen below with annotations.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -92,8 +94,8 @@ spec:
 For more information about `Issuers` and `ClusterIssuers`, see
 [Configuration](../../../).
 
-Once an `Issuer` (or `ClusterIssuer`) has been created successfully a
-Certificate can then be added to verify that everything works.
+Once an `Issuer` (or `ClusterIssuer`) has been created successfully, a
+`Certificate` can then be added to verify that everything works.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -112,4 +114,4 @@ spec:
   - www.example.com
 ```
 
-For more details about Certificates, see [Usage](../../../../usage/).
+For more details about `Certificates`, see [Usage](../../../../usage/).

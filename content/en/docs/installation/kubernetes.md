@@ -10,12 +10,12 @@ resources. It utilizes
 [`CustomResourceDefinitions`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources)
 to configure Certificate Authorities and request certificates.
 
-It is deployed using regular YAML manifests, like any other applications on
+It is deployed using regular YAML manifests, like any other application on
 Kubernetes.
 
 Once cert-manager has been deployed, you must configure `Issuer` or `ClusterIssuer`
 resources which represent certificate authorities.  More information on
-configuring different Issuer types can be found in the [respective configuration
+configuring different `Issuer` types can be found in the [respective configuration
 guides](../../configuration/).
 
 
@@ -29,10 +29,10 @@ guides](../../configuration/).
 
 ## Installing with regular manifests
 
-In order to install cert-manager, we must first create a namespace to run it
-within. This guide will install cert-manager into the `cert-manager`
-namespace. It is possible to run cert-manager in a different namespace,
-although you will need to make modifications to the deployment manifests.
+In order to install cert-manager, we must first create a namespace to run it in.
+This guide will install cert-manager into the `cert-manager` namespace. It is
+possible to run cert-manager in a different namespace, although you will need to
+make modifications to the deployment manifests.
 
 
 Create a namespace to run cert-manager in
@@ -52,7 +52,7 @@ $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/rel
 > **Note**: If you are running Kubernetes `v1.15` or below, you will need to add the
 > `--validate=false` flag to your `kubectl apply` command above else you will
 > receive a validation error relating to the
-> `x-kubernetes-preserve-unknown-fields` field in our
+> `x-kubernetes-preserve-unknown-fields` field in cert-manager's
 > `CustomResourceDefinition` resources.  This is a benign error and occurs due
 > to the way `kubectl` performs resource validation.
 
@@ -69,6 +69,9 @@ kubectl create clusterrolebinding cluster-admin-binding \
   --clusterrole=cluster-admin \
   --user=$(gcloud config get-value core/account)
 ```
+
+Once you have deployed cert-manager, you can verify the installation
+[here](./#verifying-the-installation).
 
 ## Installing with Helm
 
@@ -101,29 +104,34 @@ docs](https://github.com/helm/helm/blob/master/docs/rbac.md).
 
 ### Steps
 
-In order to install the Helm chart, you must run:
+In order to install the Helm chart, you must follow these steps.
 
-Install the `CustomResourceDefinition` resources separately
+Install the `CustomResourceDefinition` resources separately.
 ```bash
 $ kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
 ```
 
-Create the namespace for cert-manager
+Create the namespace for cert-manager.
 ```bash
 $ kubectl create namespace cert-manager
 ```
 
-Add the Jetstack Helm repository
+Add the Jetstack Helm repository.
+
+> **Warning**: It is important that this repository is used to install
+> cert-manager. The version residing in the helm stable repository is
+> *deprecated* and should *not* be used.
+
 ```bash
 $ helm repo add jetstack https://charts.jetstack.io
 ```
 
-Update your local Helm chart repository cache
+Update your local Helm chart repository cache.
 ```bash
 $ helm repo update
 ```
 
-Install the cert-manager Helm chart
+Install the cert-manager Helm chart.
 ```bash
 $ helm install \
   --name cert-manager \
@@ -136,7 +144,7 @@ The default cert-manager configuration is good for the majority of users, but a
 full list of the available options can be found in the [Helm chart
 README](https://hub.helm.sh/charts/jetstack/cert-manager).
 
-### Verifying the installation
+## Verifying the installation
 
 Once you've installed cert-manager, you can verify it is deployed correctly by
 checking the `cert-manager` namespace for running pods:
@@ -151,16 +159,16 @@ cert-manager-webhook-787858fcdb-nlzsq      1/1     Running   0          2m
 ```
 
 You should see the `cert-manager`, `cert-manager-cainjector`, and
-`cert-manager-webhook` pod in a Running state.
+`cert-manager-webhook` pod in a `Running` state.
 It may take a minute or so for the TLS assets required for the webhook to
 function to be provisioned. This may cause the webhook to take a while longer
 to start for the first time than other pods. If you experience problems, please
 check the [FAQ guide](../../faq/).
 
 The following steps will confirm that cert-manager is set up correctly and able
-to issue basic certificate types:
+to issue basic certificate types.
 
-Create a `ClusterIssuer` to test the webhook works okay
+Create a `ClusterIssuer` to test the webhook works okay.
 ```bash
 $ cat <<EOF > test-resources.yaml
 apiVersion: v1
@@ -189,7 +197,7 @@ spec:
 EOF
 ```
 
-Create the test resources
+Create the test resources.
 ```bash
 $ kubectl apply -f test-resources.yaml
 ```
@@ -232,7 +240,7 @@ If you experience problems, please check the
 ## Configuring your first Issuer
 
 Before you can begin issuing certificates, you must configure at least one
-Issuer or `ClusterIssuer` resource in your cluster.
+`Issuer` or `ClusterIssuer` resource in your cluster.
 
 You should read the [configuration](../../configuration/) guide to
 learn how to configure cert-manager to issue certificates from one of the

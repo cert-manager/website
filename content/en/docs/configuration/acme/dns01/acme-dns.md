@@ -26,7 +26,7 @@ In general, clients to ACMEDNS perform registration on the users behalf and
 inform them of the CNAME entries they must create. This is not possible in
 cert-manager, it is a non-interactive system. Registration must be carried out
 beforehand and the resulting credentials JSON uploaded to the cluster as a
-secret. In this example, we use `curl` and the API endpoints directly.
+`Secret`. In this example, we use `curl` and the API endpoints directly.
 Information about setting up and configuring ACMEDNS is available on the
 [ACMEDNS project page](https://github.com/joohoi/acme-dns).
 
@@ -63,9 +63,10 @@ Make sure to update the `allowfrom` field to match your cluster configuration. T
 }
 ```
 
-2. Save this JSON to a file with the key as your domain. You can specify multiple domains with the same credentials
-   if you like. In our example, the returned credentials can be used to verify ownership of `example.com` and
-   and `example.org`.
+2. Save this JSON to a file with the key as your domain. You can specify
+   multiple domains with the same credentials if you like. In our example, the
+  returned credentials can be used to verify ownership of `example.com` and and
+  `example.org`.
 
 ```json
 {
@@ -86,14 +87,18 @@ Make sure to update the `allowfrom` field to match your cluster configuration. T
 }
 ```
 
-3. Next update your primary DNS server with CNAME record that will tell the verifier how to locate the challenge TXT
-   record. This is obtained from the `fulldomain` field in the registration:
+3. Next, update your primary DNS server with the CNAME record that will tell the
+   verifier how to locate the challenge TXT record. This is obtained from the
+  `fulldomain` field in the registration:
 
-`_acme-challenge.example.com CNAME d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com`
-`_acme-challenge.example.org CNAME d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com`
+```
+_acme-challenge.example.com CNAME d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com
+_acme-challenge.example.org CNAME d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com
+```
 
-Note that the "name" of the record is always the `\_acme-challenge` subdomain, and the "value" of the record matches
-exactly the `fulldomain` field from registration.
+> Note: that the "name" of the record always has the `_acme-challenge`
+> subdomain, and the "value" of the record matches exactly the `fulldomain`
+> field from registration.
 
 At verification time, the domain name `d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com` will be a TXT
 record that is set to your validation token. When the verifier queries `_acme-challenge.example.com`, it will
