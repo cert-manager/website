@@ -13,7 +13,7 @@ upgrading.
 After addressing the following points, you should then follow the standard
 upgrade process [here](../).
 
-## Chanegs to the Vault Kubernetes Auth Mount Path
+## Changes to the Vault Kubernetes Auth Mount Path
 If you are using Kubernetes authentication for Vault `Issuers` then there has
 been a change to the required mount path. This value now requires the entire
 mount path. For example, if the previous path had been set to `kubernetes`, the
