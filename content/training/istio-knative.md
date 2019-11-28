@@ -6,8 +6,7 @@ card_description: >
   This course introduces you to serverless deployment with Knative on GKE,
   including autoscaling, as well as service mesh capabilities such as traffic
   routing and management for application rollout. As part of the process it will
-  also up-skill participants on Kubernetes and GKE. Through the day the course
-covers:
+  also up-skill participants on Kubernetes and GKE.
 card_image: /img/png/card-img-beginner.png
 training_level: Application Development
 weight: 3
