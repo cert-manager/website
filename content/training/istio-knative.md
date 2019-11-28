@@ -1,5 +1,5 @@
 ---
-title: Knative & Istio
+title: Knative Quickstart
 image: /img/png/header-training-beginner.png
 contentImage: /img/jpg/training-beginner.jpg
 card_description: >
@@ -20,7 +20,7 @@ testimonial:
 
 ## Participant level
 Participants should have used Kubernetes and deployed some simple applications,
-rolling Dockerfiles manually or with some kind of service.To get the most out of
+rolling Dockerfiles manually or with some kind of service. To get the most out of
 the day participants must bring their own laptop, with a development environment
 ready to use.
 
