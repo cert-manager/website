@@ -30,6 +30,8 @@ REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 # Run all commands relative to the repository root
 cd "${REPO_ROOT}"
 
+export HUGO_ENV="production"
+
 # Fetch all required content versions & assemble the content/ directory
 "${REPO_ROOT}/scripts/build-release"
 

@@ -85,3 +85,9 @@ sidebar_menu_compact = false
 breadcrumb_disable = false
 #  Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
 navbar_logo = true
+
+[services]
+[services.googleAnalytics]
+id = "UA-78700849-2"
+
+googleAnalytics = "UA-78700849-2"
