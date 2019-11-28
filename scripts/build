@@ -28,3 +28,6 @@ cd "${REPO_ROOT}"
 "${REPO_ROOT}/scripts/update-node_modules"
 "${REPO_ROOT}/scripts/update-theme"
 "${REPO_ROOT}/scripts/bin/hugo" "$@"
+
+# Move _redirects file into public/ directory as per https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file
+\cp "${REPO_ROOT}/_redirects" "${REPO_ROOT}/public/"
