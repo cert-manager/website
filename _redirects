@@ -1,0 +1,7 @@
+# These rules will change if you change your site’s custom domains or HTTPS settings
+
+# Redirect domain aliases to primary domain
+https://netlify.cert-manager.io/* https://cert-manager.io/:splat 301!
+
+# Optional: Redirect default Netlify subdomain to primary domain
+https://cert-manager.netlify.com/* https://cert-manager.io/:splat 301!
