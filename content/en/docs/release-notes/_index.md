@@ -19,3 +19,4 @@ cert-manager:
 - [`v0.9`](./release-notes-0.9/)
 - [`v0.10`](./release-notes-0.10/)
 - [`v0.11`](./release-notes-0.11/)
+- [`v0.12`](./release-notes-0.12/)
