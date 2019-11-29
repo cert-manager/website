@@ -3,6 +3,7 @@ title: "Release Notes"
 linkTitle: "Release Notes"
 weight: 80
 type: "docs"
+no_list: true
 ---
 
 Here you will find a link to all release notes for each version release of
