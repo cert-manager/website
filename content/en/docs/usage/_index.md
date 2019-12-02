@@ -12,7 +12,7 @@ to be requested and signed by those `Issuers`.  Shown below is a list of use
 cases and methods for requesting certificates through cert-manager:
 
 - [Certificate Resources](./certificate/): The simplest and most common method for
-  requesting singed certificates.
+  requesting signed certificates.
 - [Securing Ingress Resources](./ingress/): A method to secure ingress resources
   in your cluster.
 - [Securing OpenFaaS functions](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/):
