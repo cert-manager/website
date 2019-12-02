@@ -132,7 +132,7 @@ same `dnsNames` value, the solver with the most matching labels in
 the solver defined earlier in the list will be selected.
 
 The following example will solve challenges of `Certificates` with DNS names
-`exmaple.com` and `*.example.com` for these domains.
+`example.com` and `*.example.com` for these domains.
 
 > Note: `dnsNames` take an exact match and do not resolve wildcards, meaning the
 > following `Issuer` *will not* solve for DNS names such as `foo.example.com`.
