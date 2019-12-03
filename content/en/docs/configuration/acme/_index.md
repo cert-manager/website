@@ -84,14 +84,16 @@ most cert-manager users unless you know it is explicitly needed.
 
 External Account Bindings require three fields on an ACME `Issuer` which
 represents your ACME account. These fields are; the `keyID` of which your
-external account binding is indexed by the external account manager, `key`
-containing a base 64 encoded URL string of your external account symmetric MAC
-key, and finally `keyAlgorithm`, the MAC algorithm used to sign the JSON web
-string containing your External Account Binding when connecting to the ACME
-server.
+external account binding is indexed by the external account manager,
+`keySecretRef` which references a secret containing a base 64 encoded URL
+string of your external account symmetric MAC key, and finally `keyAlgorithm`,
+the MAC algorithm used to sign the JSON web string containing your External
+Account Binding when registering the account with the ACME server.
 
 > Note: The command `base64` is useful for encoding your MAC key if it is not
-> already `$ echo 'my-secret-key' | base64`
+> already `$ echo 'my-secret-key' | base64`, you can then create the Secret
+> resource with: `kubectl create secret generic eab-secret --from-literal
+> secret={base64 encoded secret key}`
 
 An example of an ACME issuer with an External Account Binding is as follows.
 
@@ -106,7 +108,9 @@ spec:
     server: https://my-acme-server-with-eab.com/directory
     externalAccountBinding:
       keyID: my-kid-1
-      key: bXktc2VjcmV0LWtleQo=
+      keySecretRef:
+        name: eab-secret
+        key: secret
       keyAlgorithm: HS256
     privateKeySecretRef:
       name: example-issuer-account-key
