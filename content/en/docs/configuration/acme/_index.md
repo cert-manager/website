@@ -71,8 +71,8 @@ spec:
 ```
 
 Solvers come in the form of [`dns01`](./dns01/) and
-[`http01`](./http01/) stanzas. For more information of how to configure
-this solver types, visit their respective documentation -
+[`http01`](./http01/) stanzas. For more information on how to configure
+these solver types, visit their respective documentation -
 [DNS01](./dns01/), [HTTP01](./http01/).
 
 
@@ -89,7 +89,7 @@ specify which `Certificates`, and further, what DNS names *on those*
 
 There are three selector types that can be used to form the requirements that a
 `Certificate` must meet in order to be selected for a solver - `matchLabels`,
-`dnsNames` and `dnsZones`. You can have any number of these thee selectors on a
+`dnsNames` and `dnsZones`. You can have any number of these three selectors on a
 single solver.
 
 
