@@ -29,7 +29,7 @@ with a development environment ready to use.
 - The machinery of the Kubernetes API Server
 - Defining new Kinds using Custom Resource Definitions
 - What are controllers and operators
-- Best practise controller design patters
+- Best practise controller design patterns
 - Using Kubebuilder as a controller building framework
 - Making a controller and kind using Kubebuilder
 - Advanced controller techniques
