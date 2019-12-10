@@ -26,7 +26,7 @@ ready to use.
 
 ## Course content
 
-- Learned how to deploy Istio and Knative to a GKE Kubernetes cluster
+- Learn how to deploy Istio and Knative to a GKE Kubernetes cluster
 - Deploy applications using Knative services
 - Auto-scale services based on request demand
 - Understand how to access service logs and metrics and perform simple diagnostics and debugging
