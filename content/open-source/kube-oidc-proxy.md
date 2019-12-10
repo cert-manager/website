@@ -1,7 +1,7 @@
 ---
 title: Kube-OIDC-Proxy
 image: /img/jpg/kube-oidc-proxy.jpg
-weight: 1
+weight: 2
 github: https://github.com/jetstack/kube-oidc-proxy
 ---
 
