@@ -31,4 +31,4 @@ ready to use.
 - Auto-scaled the service based on request demand
 - Understood how to access service logs and metrics and perform simple diagnostics and debugging
 - Deploy a canary service and configure traffic routing
-- Understood some of the inner-workings of Knative and Istio
+- Understand some of the inner-workings of Knative and Istio
