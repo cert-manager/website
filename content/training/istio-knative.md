@@ -29,6 +29,6 @@ ready to use.
 - Learned how to deploy Istio and Knative to a GKE Kubernetes cluster
 - Deployed an application using Knative services
 - Auto-scaled the service based on request demand
-- Understood how to access service logs and metrics and perform simple diagnostics and debugging
+- Understand how to access service logs and metrics and perform simple diagnostics and debugging
 - Deploy a canary service and configure traffic routing
 - Understand some of the inner-workings of Knative and Istio
