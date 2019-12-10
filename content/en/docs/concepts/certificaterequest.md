@@ -9,7 +9,7 @@ The `CertificateRequest` is a namespaced resource in cert-manager that is used
 to request x509 certificates from an [`Issuer`](../issuer/). The resource
 contains a base64 encoded string of a PEM encoded certificate request which is
 sent to the referenced issuer. A successful issuance will return a signed
-certificate, based on the certificate signing request. `CertificateRequets` are
+certificate, based on the certificate signing request. `CertificateRequests` are
 typically consumed and managed by controllers or other systems and should not be
 used by humans - unless specifically needed.
 
@@ -51,7 +51,7 @@ certificate (if available), and setting the `Ready` condition to `True`.
 
 Whether issuance of the controller was successful or not, a retry of the
 issuance will _not_ happen. It is the responsibility of some other controller to
-manage the logic and life cycle of `CertificateRequets`.
+manage the logic and life cycle of `CertificateRequests`.
 
 ## Conditions
 
