@@ -107,7 +107,7 @@ one of the many authentication backends that Vault supports. These tokens have
 an expiry and so need to be periodically refreshed. You can read more on Vault
 tokens [here](https://www.vaultproject.io/docs/concepts/tokens.html).
 
-> **Note**: cert-manager does refresh these token automatically and so another
+> **Note**: cert-manager does NOT refresh these token automatically and so another
 > process must be put in place to do this.
 
 Firstly, the token is be stored inside a Kubernetes `Secret` inside the same
