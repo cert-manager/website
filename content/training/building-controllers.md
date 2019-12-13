@@ -1,5 +1,5 @@
 ---
-title: Building Controllers
+title: Extending Kubernetes with Operators
 image: /img/png/header-training-beginner.png
 contentImage: /img/jpg/training-beginner.jpg
 card_description: >
@@ -26,11 +26,4 @@ with a development environment ready to use.
 
 ## Course content
 
-- The machinery of the Kubernetes API Server
-- Defining new Kinds using Custom Resource Definitions
-- What are controllers and operators
-- Best practise controller design patterns
-- Using Kubebuilder as a controller building framework
-- Making a controller and kind using Kubebuilder
-- Advanced controller techniques
-- Group design discussion
+Gain an understanding of the inner workings of the Kubernetes API server, which serves as the front end for the Kubernetes control plane. Later, attendees learn best practices for extending the functionality of the API server through defining new kinds using Custom Resource Definitions. Using Kubebuilder as a controller building framework, workshops instruct attendees to declare their own kind and build a corresponding controller. At the day’s conclusion, advanced controller techniques are covered with workshops and a group design discussions.
