@@ -1,5 +1,5 @@
 ---
-title: Knative Quickstart
+title: Serverless on Kubernetes with Knative
 image: /img/png/header-training-beginner.png
 contentImage: /img/jpg/training-beginner.jpg
 card_description: >
@@ -26,9 +26,4 @@ ready to use.
 
 ## Course content
 
-- Learn how to deploy Istio and Knative to a GKE Kubernetes cluster
-- Deploy applications using Knative services
-- Auto-scale services based on request demand
-- Understand how to access service logs and metrics and perform simple diagnostics and debugging
-- Deploy a canary service and configure traffic routing
-- Understand some of the inner-workings of Knative and Istio
+Learn how to deploy Istio and Knative to a Google Kubernetes Engine cluster, then deploy an application to the cluster using Knative services. This application is iterated and improved upon throughout the day; first, the service is modified so that the application autoscales based on request demand, then service logs and metrics are accessed to allow attendees to learn how to perform simple diagnostics and debugging. Advanced deployment patterns using Knative and Istio traffic shaping are later covered.
