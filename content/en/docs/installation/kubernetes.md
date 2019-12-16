@@ -46,7 +46,7 @@ are included in a single YAML manifest file:
 
 Install the `CustomResourceDefinitions` and cert-manager itself
 ```bash
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.13.0-alpha.0/cert-manager.yaml
 ```
 
 > **Note**: If you are running Kubernetes `v1.15` or below, you will need to add the
@@ -136,7 +136,7 @@ Install the cert-manager Helm chart.
 $ helm install \
   --name cert-manager \
   --namespace cert-manager \
-  --version v0.12.0 \
+  --version v0.13.0-alpha.0 \
   jetstack/cert-manager
 ```
 
