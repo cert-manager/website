@@ -1,6 +1,7 @@
 {{ define "packages" }}
 +++
 title = "API reference docs"
+type = "docs"
 +++
 
 {{ with .packages}}

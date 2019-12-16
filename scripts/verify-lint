@@ -45,4 +45,5 @@ echo "+++ Running spell check"
   "_layouts/*.html" \
   "_includes/*.html" \
   "*.html" \
-  "!content/en/docs/reference/api-docs.md"
+  "!content/en/docs/reference/api-docs.md" \
+  "!content/en/v0.12-docs/reference/api-docs.md"
