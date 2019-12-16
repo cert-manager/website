@@ -367,7 +367,7 @@ expiration and updates.
 Once edited, apply the custom resource:
 
 ```bash
-$ kubectl create --edit -f https://netlify.cert-manager.io/docs/tutorials/acme/example/staging-issuer.yaml
+$ kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/staging-issuer.yaml
 issuer.cert-manager.io "letsencrypt-staging" created
 ```
 
@@ -377,7 +377,7 @@ will need to update this example and add in your own email address.
 {{% include file="../example/production-issuer.yaml" language="yaml" %}}
 
 ```bash
-$ kubectl create --edit -f https://netlify.cert-manager.io/docs/tutorials/acme/example/production-issuer.yaml
+$ kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/production-issuer.yaml
 issuer.cert-manager.io "letsencrypt-prod" created
 ```
 
@@ -453,7 +453,7 @@ example:
 and apply it:
 
 ```bash
-$ kubectl create --edit -f https://netlify.cert-manager.io/docs/tutorials/acme/example/ingress-tls.yaml
+$ kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/ingress-tls.yaml
 ingress.extensions "kuard" configured
 ```
 
@@ -551,7 +551,7 @@ can update the annotations in the ingress to specify the production issuer:
 {{% include file="../example/ingress-tls-final.yaml" language="yaml" %}}
 
 ```bash
-$ kubectl create --edit -f https://netlify.cert-manager.io/docs/tutorials/acme/example/ingress-tls-final.yaml
+$ kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/ingress-tls-final.yaml
 ingress.extensions "kuard" configured
 ```
 
