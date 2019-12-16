@@ -45,7 +45,7 @@ spec:
   commonName: example.com
   isCA: false
   keySize: 2048
-  keyAlgorithm: RSA
+  keyAlgorithm: rsa
   keyEncoding: pkcs1
   usages:
     - server auth
