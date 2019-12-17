@@ -2,9 +2,9 @@
 title: Josh Van Leeuwen
 weight: 6
 image: /img/jpg/about-josh.jpg
-position: Solutions Engineer
+position: Customer Reliability Engineer
 email: joshua.vanleeuwen@jetstack.io
-twitter: 
+twitter: JoshVanL
 github: 'JoshVanL'
 ---
 Josh interned at Jetstack during the summer of 2017 before continuing to work
