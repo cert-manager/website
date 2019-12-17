@@ -8,6 +8,7 @@ card_description: >
   routing and management for application rollout. As part of the process it will
   also up-skill participants on Kubernetes and GKE.
 card_image: /img/png/card-img-beginner.png
+card_subtitle: One day training
 training_level: Application Development
 weight: 3
 testimonial:

@@ -8,6 +8,7 @@ card_description: >
   It runs though the key design principles of a controller,
   and guides attendees through the process of building their own using Kubebuilder.
 card_image: /img/png/card-img-beginner.png
+card_subtitle: One day training
 training_level: Advanced Operations
 weight: 3
 testimonial:

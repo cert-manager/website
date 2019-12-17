@@ -1,10 +1,11 @@
 ---
-title: Beginner
+title: Kubernetes in Practice Day 1
 image: /img/png/header-training-beginner.png
 contentImage: /img/jpg/training-beginner.jpg
 card_description: >
   This course is for those who are just starting out with Kubernetes. Gain an introduction to Kubernetes core concepts, and work through hands-on labs that cover persistent volume types, application logs, and using Helm to package and deploy applications.
 card_image: /img/png/card-img-beginner.png
+card_subtitle: One day training
 training_level: Kubernetes in Practice
 weight: 1
 testimonial:
