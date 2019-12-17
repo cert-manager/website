@@ -90,12 +90,16 @@ menus:
   - name: Open Source
     link: /open-source
     links:
+    - link: /open-source/#cert-manager
+      text: Cert-Manager
+    - link: /open-source/#kube-oidc-proxy
+      text: Kube-OIDC-Proxy
+    - link: /open-source/#preflight
+      text: Preflight
     - link: /open-source/#tarmak
       text: Tarmak
     - link: /open-source/#navigator
       text: Navigator
-    - link: /open-source/#cert-manager
-      text: Cert-Manager
     - link: /open-source/#kube-lego
       text: Kube-Lego
 
