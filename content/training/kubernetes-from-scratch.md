@@ -5,6 +5,7 @@ contentImage: /img/jpg/training-k8s-scratch.jpg
 card_description: >
   Provision a Kubernetes cluster manually from the ground up: Learn how to configure cluster components such as apiserver, controller-manager, scheduler, etcd, kubelet, kube-proxy, and container runtime.
 card_image: /img/png/card-img-scratch.png
+card_subtitle: One day training
 training_level: Advanced Operations
 weight: 1
 testimonial:
