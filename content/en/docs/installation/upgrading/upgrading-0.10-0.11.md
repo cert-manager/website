@@ -54,8 +54,8 @@ A full table of annotations, including the old and new equivalents:
 | `certmanager.k8s.io/acme-http01-ingress-class` | `acme.cert-manager.io/http01-ingress-class` |
 | `certmanager.k8s.io/issuer`                    | `cert-manager.io/issuer`                    |
 | `certmanager.k8s.io/cluster-issuer`            | `cert-manager.io/cluster-issuer`            |
-| `certmanager.k8s.io/acme-challenge-type`       | `DEPRECIATED`                               |
-| `certmanager.k8s.io/acme-dns01-provider`       | `DEPRECIATED`                               |
+| `certmanager.k8s.io/acme-challenge-type`       | `DEPRECATED`                                |
+| `certmanager.k8s.io/acme-dns01-provider`       | `DEPRECATED`                                |
 | `certmanager.k8s.io/alt-names`                 | `cert-manager.io/alt-names`                 |
 | `certmanager.k8s.io/ip-sans`                   | `cert-manager.io/ip-sans`                   |
 | `certmanager.k8s.io/common-name`               | `cert-manager.io/common-name`               |
