@@ -70,7 +70,7 @@
             <div class="speaker-bio">
               <figure class="speaker-bio__img" style="background-image: url({{ .Params.bio_pic_url }})" aria-hidden="true"></figure>
               <div class="speaker-bio__content">
-                <h2 class="speaker-bio__name">{{ .Title }}</h2>
+                <h2 class="speaker-bio__name">{{ .Title | safeHTML }}</h2>
                 <p class="speaker-bio__title">{{ .Params.job_title }}</p>
               </div>
             </div>
@@ -143,4 +143,3 @@
   </div>
 </section>
 {{ end }}
-
