@@ -49,7 +49,7 @@ A successful issuance of the certificate signing request will cause an update to
 the resource, setting the status with the signed certificate, the CA of the
 certificate (if available), and setting the `Ready` condition to `True`.
 
-Whether issuance of the controller was successful or not, a retry of the
+Whether issuance of the certificate signing request was successful or not, a retry of the
 issuance will _not_ happen. It is the responsibility of some other controller to
 manage the logic and life cycle of `CertificateRequests`.
 
