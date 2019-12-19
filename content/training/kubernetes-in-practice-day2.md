@@ -1,5 +1,5 @@
 ---
-title: Kubernetes in Practice Day 2
+title: "Kubernetes in Practice: Day 2"
 image: /img/png/header-training-intermediate.png
 contentImage: /img/jpg/training-intermediate.jpg
 card_description: >
