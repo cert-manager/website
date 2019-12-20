@@ -1,5 +1,5 @@
 ---
-title: Kubernetes In Practice Day 2
+title: "Kubernetes In Practice: Day 2"
 weight: 2
 link: /documents/Kubernetes_In_Practice_Day2.pdf
 type: course
