@@ -133,8 +133,7 @@ $ helm repo update
 
 Install the cert-manager Helm chart.
 ```bash
-$ helm install \
-  --name cert-manager \
+$ helm install cert-manager \
   --namespace cert-manager \
   --version v0.13.0-alpha.0 \
   jetstack/cert-manager
