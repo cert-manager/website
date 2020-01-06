@@ -90,7 +90,7 @@ You can get more details about `nginx-ingress` and how it works from the
 Use `helm` to install an NGINX Ingress controller:
 
 ```bash
-$ helm install stable/nginx-ingress --name quickstart
+$ helm install quickstart stable/nginx-ingress
 
 NAME:   quickstart
 LAST DEPLOYED: Sat Nov 10 10:25:06 2018
