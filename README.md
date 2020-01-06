@@ -105,4 +105,4 @@ This will automatically run a number of checks against your changes.
 
 There is also a `./scripts/verify-release` command which will fetch all
 versions of the documentation content before running the regular `verify`
-script.
+script. 
