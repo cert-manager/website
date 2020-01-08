@@ -69,8 +69,10 @@ menus:
       link: /about/
     - name: Careers
       link: /careers/
-    - name: Our Talks
+    - name: Talks
       link: /talks/
+    - name: Events
+      link: /events/
     - name: Contact
       link: /contact/
   - name: Blog

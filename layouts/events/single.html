@@ -1,0 +1,37 @@
+{{ define "title" }} | {{ .Title }}{{ end }}
+
+{{ define "navbar" }} {{ partial "navbar/dark.html" . }} {{ end }}
+
+{{ define "body" }}
+
+<div class="container-fluid" id="page-content">
+  <section class="header-with-img-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url(thumbnail.jpg)">
+    <p class="header-with-img-bg__section header-with-img-bg__section--white">
+      {{ .Params.event }}
+    </p>
+    <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
+    <p class="header-with-img-bg__section header-with-img-bg__section--white">
+      {{ .Params.person }}
+    </p>
+  </section>
+
+  <section>
+    <article class="container course-content">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <table class="table">
+            <tr>
+              <th>Address</th>
+              <td>{{ .Params.address }}</td>
+            </tr>
+          </table>
+          <div class="course-content__copy">{{ .Content }}</div>
+		  <div class="course-content__copy"><blink>TODO eventbrite sign up</blink></div>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>
+
+{{ end }}
+

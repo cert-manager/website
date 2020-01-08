@@ -1,0 +1,45 @@
+{{ define "title" }}
+  | {{ .Title }}
+{{- end }}
+
+{{ define "navbar" }} {{ partial "navbar/dark.html" . }} {{ end }}
+
+{{ define "body" }}
+<div class="container-fluid" id="page-content">
+  <section class="header-with-img-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url({{ .Params.image }})">
+    <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
+  </section>
+
+  <section class="tight media-component">
+    {{ range $index, $page := .Data.Pages }}
+      {{ if modBool (add $index 1) 2 }}
+      <div class="media-component__row" id="{{ $page.Title | urlize }}">
+        <div class="media-component__image" style="background-image: url({{ $page.Params.image }})"></div>
+        <div class="media-component__content">
+          <div class="media-component__copy">
+            <h2><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h2>
+            <p>{{ $page.event_date }}</p>
+            <p><strong>Address:</strong> {{ $page.Params.address }}</p>
+            <div class="media-component__links">
+              <a href="{{ $page.Params.getting_started }}">Get started</a>
+              <a href="{{ $page.Params.github }}"><i class="icon icon--github"></i>Go to GitHub repo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ else }}
+      <div class="media-component__row" id="{{ $page.Title | urlize }}">
+        <div class="media-component__image" style="background-image: url({{ $page.Params.image }})"></div>
+        <div class="media-component__content">
+          <div class="media-component__copy">
+            <h2><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h2>
+            <p>{{ $page.Params.event_date }}</p>
+            <p><strong>Address:</strong> {{ $page.Params.address }}</p>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    {{ end }}
+  </section>
+</div>
+{{ end }}
