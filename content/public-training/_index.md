@@ -68,6 +68,8 @@ Please note:
 
 * Admission is subject to review based on attendance criteria
 * No more than two attendees from the same company can register on the same
-  course.
+  course
+* No more than six individuals from the same company may attend a course during
+  a calendar year
 * This training is run in conjunction with our partner Google and your details
   will passed to them when you register
