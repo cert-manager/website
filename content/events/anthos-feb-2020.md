@@ -1,9 +1,12 @@
 ---
-title: Migrating and modernising enterprise workloads with Anthos
+title: Migrating and modernising workloads with Anthos
 event_date: 2020-02-19
 image: /events/anthos-feb-2020/thumbnail.jpg
 address: "123 Buckingham Palace Road (subject to change)"
+date: "19.02.2020"
+time: "8:30am - 11:30am"
 ---
+## Migrating and modernising workloads with Anthos
 
 Using the experience accrued in delivering hybrid cloud solutions, we will
 discuss the migration paths and architectures used in practice to deliver
