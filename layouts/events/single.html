@@ -24,6 +24,18 @@
               <th>Address</th>
               <td>{{ .Params.address }}</td>
             </tr>
+            <tr>
+              <th>Date</th>
+              <td>{{ .Params.event_date }}</td>
+            </tr>
+            <tr>
+              <th>Start Time</th>
+              <td>{{ .Params.start_time }}</td>
+            </tr>
+            <tr>
+              <th>End Time</th>
+              <td>{{ .Params.end_time }}</td>
+            </tr>
           </table>
           <div class="course-content__copy">{{ .Content }}</div>
 		  <div class="course-content__copy"><blink>TODO eventbrite sign up</blink></div>

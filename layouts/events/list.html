@@ -18,12 +18,8 @@
         <div class="media-component__content">
           <div class="media-component__copy">
             <h2><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h2>
-            <p>{{ $page.event_date }}</p>
+            <p><strong>Date:</strong> {{ $page.Params.event_date }}</p>
             <p><strong>Address:</strong> {{ $page.Params.address }}</p>
-            <div class="media-component__links">
-              <a href="{{ $page.Params.getting_started }}">Get started</a>
-              <a href="{{ $page.Params.github }}"><i class="icon icon--github"></i>Go to GitHub repo</a>
-            </div>
           </div>
         </div>
       </div>
@@ -33,7 +29,7 @@
         <div class="media-component__content">
           <div class="media-component__copy">
             <h2><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h2>
-            <p>{{ $page.Params.event_date }}</p>
+            <p><strong>Date:</strong> {{ $page.Params.event_date }}</p>
             <p><strong>Address:</strong> {{ $page.Params.address }}</p>
           </div>
         </div>
