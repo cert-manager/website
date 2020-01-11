@@ -13,8 +13,11 @@ To use Cloudflare, you may use one of two types of tokens. **API Tokens** allow 
 
 Tokens can be created at **User Profile > API Tokens > API Tokens**. The following settings are recommended:
 
-- Permissions: `Zone - DNS - Edit`
-- Zone Resources: `Include - <The specific zones you want covered>`
+- Permissions:
+  - `Zone - DNS - Edit`
+  - `Zone - Zone - Read`
+- Zone Resources:
+  - `Include - All Zones`
 
 To create a new `Issuer`, first make a Kubernetes secret containing your new API token:
 
