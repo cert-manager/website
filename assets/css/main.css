@@ -701,15 +701,15 @@ section.bordered {
     right: calc(100% - 40px);
   }
 
-  .media-component__row:nth-child(even) .media-component__content {
+  .alternate.media-component__row:nth-child(even) .media-component__content {
     order: 1;
   }
 
-  .media-component__row:nth-child(even) .media-component__image {
+  .alternate.media-component__row:nth-child(even) .media-component__image {
     order: 2;
   }
 
-  .media-component__row:nth-child(even) .media-component__popout-list {
+  .alternate.media-component__row:nth-child(even) .media-component__popout-list {
     right: auto;
     left: calc(100% - 40px);
   }
