@@ -32,4 +32,4 @@ the interest of furthering the feature set of cert-manager and making use of
 newer features available in upstream Kubernetes.
 
 As of cert-manager version `v0.11`, the lowest Kubernetes version supported is
-`v0.12`.
+`v1.12`.
