@@ -16,7 +16,7 @@
   </section>
 
   <section>
-    <article class="container course-content">
+    <article class="container event-content">
       <div class="row">
         <div class="col-md-8 offset-md-2">
           <table class="table">
@@ -37,13 +37,30 @@
               <td>{{ .Params.end_time }}</td>
             </tr>
           </table>
-          <div class="course-content__copy">{{ .Content }}</div>
-		  <div class="course-content__copy"><blink>TODO eventbrite sign up</blink></div>
         </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="pink-stripes-section">
+    <article class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="">{{ .Content }}</div>
+        </div>
+        <div id="eventbrite-widget-trigger"></div>
+        <script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
+        <script type="text/javascript">
+          window.EBWidgets.createWidget({
+            widgetType: "checkout",
+            eventId: "89237633163",
+            iframeContainerId: "eventbrite-widget-trigger",
+            iframeContainerHeight: 425
+          });
+        </script>
       </div>
     </article>
   </section>
 </div>
 
 {{ end }}
-

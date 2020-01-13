@@ -11,31 +11,19 @@
   </section>
 
   <section class="tight media-component">
-    {{ range $index, $page := .Data.Pages }}
-      {{ if modBool (add $index 1) 2 }}
-      <div class="media-component__row" id="{{ $page.Title | urlize }}">
-        <div class="media-component__image" style="background-image: url({{ $page.Params.image }})"></div>
+    {{ range sort .Data.Pages "Params.timestamp" }}
+      <div class="media-component__row" id="{{ $.Params.title | urlize }}">
+        <div class="media-component__image" style="background-image: url({{ .Params.image }})"></div>
         <div class="media-component__content">
           <div class="media-component__copy">
-            <h2><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h2>
-            <p><strong>Date:</strong> {{ $page.Params.event_date }}</p>
-            <p><strong>Address:</strong> {{ $page.Params.address }}</p>
+            <h2><a href="{{ .Params.link }}">{{ .Params.Title }}</a></h2>
+            <p><strong>Date:</strong> {{ .Params.event_date }}</p>
+            <p><strong>Address:</strong> {{ .Params.address }}</p>
           </div>
         </div>
       </div>
-      {{ else }}
-      <div class="media-component__row" id="{{ $page.Title | urlize }}">
-        <div class="media-component__image" style="background-image: url({{ $page.Params.image }})"></div>
-        <div class="media-component__content">
-          <div class="media-component__copy">
-            <h2><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h2>
-            <p><strong>Date:</strong> {{ $page.Params.event_date }}</p>
-            <p><strong>Address:</strong> {{ $page.Params.address }}</p>
-          </div>
-        </div>
-      </div>
-      {{ end }}
     {{ end }}
   </section>
+
 </div>
 {{ end }}
