@@ -23,7 +23,7 @@ The points below are not a checklist for the role but rather a selection of skil
 * Building server side applications or services (REST/GraphQL, API design)
 * Experience of modern frontend frameworks like Elm / Vue.js / React
 * Good working knowledge of programming languages such as Go and Python
-* Use of container based deployment solutions (Kubernetes, Docker)
+* Use of container based deployment solutions (Kubernetes, Docker), nice to have
 * Automated testing and working with CI/CD
 * Good working knowledge of public cloud product offerings (especially GCP)
 
@@ -32,7 +32,7 @@ The points below are not a checklist for the role but rather a selection of skil
 * A ‘can-do’ attitude and the ability to thrive in a fast-paced environment where change is part of the day to day
 * Someone interested in helping Jetstack grow as a business and working collaboratively as part of a team
 * A sense of ownership and customer responsibility
-* Attention to detail and a determination to follow problems through 
+* Excellent attention to detail and a determination to follow problems through 
 * Desire to continually learn and remain up-to-date with the ecosystem developments
 
 **What to expect next**
