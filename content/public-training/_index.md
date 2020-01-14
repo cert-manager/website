@@ -28,6 +28,14 @@ course_dates:
   title: 'Kubernetes in Practice'
   level: 'Day 2'
   eventbriteId: 86787633147
+- date: '25 February 2020'
+  title: 'Kubernetes in Practice (Stockholm)'
+  level: 'Day 1'
+  eventbriteId: 89777670429
+- date: '26 February 2020'
+  title: 'Kubernetes in Practice (Stockholm)'
+  level: 'Day 2'
+  eventbriteId: 89778777741
 - date: '4 March 2020'
   title: 'Kubernetes in Practice'
   level: 'Day 1'
