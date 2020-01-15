@@ -30,5 +30,5 @@ Using our collective experience in delivering hybrid cloud solutions, we will di
 * 9:00am - 9:15am: Welcome / Introduction from Jetstack
 * 9:15am - 10:00am: 'Monolith to Microservices' by Matt Bates / Q&A
 * 10:00am - 10:45am: 'TBC' by Henry Bell / Q&A
-* 10:45am - 11:00am: Closing Remarks / Announcement
+* 10:45am - 11:00am: Closing Remarks from Jetstack
 * 11:00am - 11:30am: Networking
