@@ -801,9 +801,6 @@ Introduced on new Subscription Page
   padding: 100px 0 0 0;
 }
 
-.media-hero__graphic__spaced {
-    padding-top: 100px;
-}
 .media-hero__graphic svg,
 .media-hero__graphic img {
   width: 75%;
@@ -962,6 +959,14 @@ Introduced on new Subscription Page
     order: 2;
     padding-left: 100px;
     padding-top: 30px;
+  }
+
+  .media-hero__graphic--spaced {
+    flex: 1 1 55%;
+    order: 2;
+    padding-left: 100px;
+    padding-top: 30px;
+    padding-top: 100px;
   }
 
   .media-hero__graphic svg,
