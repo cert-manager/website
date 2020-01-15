@@ -319,7 +319,7 @@ panels:
     - img: /img/jpg/wwo-open-source.jpg
       category: Open source
       name: Building tools to enhance the operational and developer experience
-      desc: We’ve been contributing to the Kubernetes ecosystem since the beginning 
+      desc: We’ve been contributing to the Kubernetes ecosystem from the beginning 
       link: /open-source
 
     - img: /img/jpg/wwo-consulting.jpg
