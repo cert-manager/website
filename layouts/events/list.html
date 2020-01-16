@@ -17,8 +17,12 @@
         <div class="media-component__content">
           <div class="media-component__copy">
             <h2><a href="{{ .Params.link }}">{{ .Params.Title }}</a></h2>
-            <p><strong>Date:</strong> {{ .Params.event_date }}</p>
-            <p><strong>Address:</strong> {{ .Params.address }}</p>
+            {{ if .Params.tbc }}
+              <p>Details to be confirmed</p>
+            {{ else }}
+              <p><strong>Date:</strong> {{ .Params.event_date }}</p>
+              <p><strong>Address:</strong> {{ .Params.address }}</p>
+            {{ end }}
           </div>
         </div>
       </div>
