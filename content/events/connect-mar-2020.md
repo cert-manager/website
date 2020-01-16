@@ -7,6 +7,7 @@ link: /events/connect-mar-2020
 timestamp: "20200325"
 start_time: "1:00pm"
 end_time: "5:00pm"
+tbc: true
 ---
 
 ## Kubernetes in Hybrid and Multi-Cloud Environments

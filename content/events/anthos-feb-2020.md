@@ -8,7 +8,6 @@ timestamp: "20200219"
 start_time: "8:30am"
 end_time: "11:30am"
 eventbrite_id: 89237633163
-tbc: true
 ---
 
 ## 'Breakfast Briefing' with Jetstack and Google
