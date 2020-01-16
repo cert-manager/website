@@ -13,7 +13,7 @@
   <section class="tight media-component">
     {{ range sort .Data.Pages "Params.timestamp" }}
       <div class="media-component__row">
-        <div class="media-component__image" style="background-image: url({{ .Params.image }}); background-size: contain;"></div>
+        <div class="media-component__image" style="background-image: url({{ .Params.image }}); background-position: center bottom;"></div>
         <div class="media-component__content">
           <div class="media-component__copy">
             <h2><a href="{{ .Params.link }}">{{ .Params.Title }}</a></h2>
