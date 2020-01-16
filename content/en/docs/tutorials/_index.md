@@ -24,3 +24,7 @@ get to a final goal. Below is list of tutorials that you might find helpful:
 - [Securing an EKS Cluster with Venafi](./venafi/venafi/): Tutorial for
   creating an EKS cluster and securing an NGINX deployment with a Venafi issued
   certificate.
+
+
+User How-To Blog Posts and Examples:
+- A full cert-manager installation demo on GKE Cluster. See [How-To: Automatic SSL Certificate Management for your Kubernetes Application Deployment](https://medium.com/contino-engineering/how-to-automatic-ssl-certificate-management-for-your-kubernetes-application-deployment-94b64dfc9114)
