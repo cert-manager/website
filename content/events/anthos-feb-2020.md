@@ -29,3 +29,5 @@ With our collective experience in delivering hybrid cloud native Kubernetes, we 
 * 9:05am - 9:45am: 'Monolith to Microservices' by Matt Bates / Q&A
 * 9:45am - 10:30am: 'TBC' by Henry Bell / Q&A
 * 10:30am - 11:00am: Closing Remarks from Jetstack / Networking
+
+Please register now to go on the wait-list for this event!
