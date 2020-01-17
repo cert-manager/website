@@ -15,10 +15,10 @@
     </p>
   </section>
 
-  <section>
-    <article class="container event-content">
+  <section class="pink-stripes-section">
+    <article class="container">
       <div class="row">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-sm-6">
           <table class="table">
             {{ if .Params.tbc }}
               <th>Note</th>
@@ -42,20 +42,12 @@
               </tr>
             {{ end }}
           </table>
-        </div>
-      </div>
-    </article>
-  </section>
 
-  <section class="pink-stripes-section">
-    <article class="container">
-      <div class="row">
-        <div class="col-sm-6">
           {{ if not .Params.tbc }}
             <div>{{ .Content }}</div>
           {{ end }}
         </div>
-        <div id="eventbrite-widget-trigger"></div>
+        <div class="eventbrite-event-widget" id="eventbrite-widget-trigger"></div>
         <script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
         <script type="text/javascript">
           window.EBWidgets.createWidget({

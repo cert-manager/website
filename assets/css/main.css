@@ -2478,6 +2478,10 @@ Introduced on new Subscription Page
 }
 
 @media (min-width: 768px) {
+  .eventbrite-event-widget {
+    margin-left: 40px;
+  }
+
   .stats {
     display: flex;
     margin-bottom: 6em;
