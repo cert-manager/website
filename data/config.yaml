@@ -116,15 +116,18 @@ menus:
 
   - name: Company
     links:
-    - link: /about
-      text: Team
-    - link: /careers
-      text: Careers
     - link: https://blog.jetstack.io/
       text: Blog
-    - link: /contact
-      text: Contact
-
+    - text: Team
+      link: /about/
+    - text: Careers
+      link: /careers/
+    - text: Talks
+      link: /talks/
+    - text: Events
+      link: /events/
+    - text: Contact
+      link: /contact/
 
   social:
     - name: github

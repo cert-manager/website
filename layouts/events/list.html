@@ -1,6 +1,8 @@
 {{ define "title" }}
   | {{ .Title }}
 {{- end }}
+{{ define "ogtitle" }}Events{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.image }}{{ end }}
 
 {{ define "navbar" }} {{ partial "navbar/dark.html" . }} {{ end }}
 
