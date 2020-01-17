@@ -605,6 +605,12 @@ section.bordered {
   position: relative;
 }
 
+.media-component__contentImage {
+  width: 100%;
+  align: right;
+  border-radius: 6px;
+}
+
 .media-component__popout-list {
   color: white;
   background-color: #3f56ea;
@@ -701,15 +707,15 @@ section.bordered {
     right: calc(100% - 40px);
   }
 
-  .media-component__row:nth-child(even) .media-component__content {
+  .alternate.media-component__row:nth-child(even) .media-component__content {
     order: 1;
   }
 
-  .media-component__row:nth-child(even) .media-component__image {
+  .alternate.media-component__row:nth-child(even) .media-component__image {
     order: 2;
   }
 
-  .media-component__row:nth-child(even) .media-component__popout-list {
+  .alternate.media-component__row:nth-child(even) .media-component__popout-list {
     right: auto;
     left: calc(100% - 40px);
   }
@@ -2472,6 +2478,10 @@ Introduced on new Subscription Page
 }
 
 @media (min-width: 768px) {
+  .eventbrite-event-widget {
+    margin-left: 40px;
+  }
+
   .stats {
     display: flex;
     margin-bottom: 6em;
