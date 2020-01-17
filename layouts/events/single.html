@@ -1,4 +1,6 @@
 {{ define "title" }} | {{ .Title }}{{ end }}
+{{ define "ogtitle" }}{{ .Title }}{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.image }}{{ end }}
 
 {{ define "navbar" }} {{ partial "navbar/dark.html" . }} {{ end }}
 
@@ -47,16 +49,18 @@
             <div>{{ .Content }}</div>
           {{ end }}
         </div>
-        <div class="eventbrite-event-widget" id="eventbrite-widget-trigger"></div>
-        <script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
-        <script type="text/javascript">
-          window.EBWidgets.createWidget({
-            widgetType: "checkout",
-            eventId: "{{ .Params.eventbrite_id }}",
-            iframeContainerId: "eventbrite-widget-trigger",
-            iframeContainerHeight: 425
-          });
-        </script>
+        <div class="col-sm-6">
+          <div class="eventbrite-event-widget" id="eventbrite-widget-trigger"></div>
+          <script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
+          <script type="text/javascript">
+            window.EBWidgets.createWidget({
+              widgetType: "checkout",
+              eventId: "{{ .Params.eventbrite_id }}",
+              iframeContainerId: "eventbrite-widget-trigger",
+              iframeContainerHeight: 425
+            });
+          </script>
+        </div>
       </div>
     </article>
   </section>

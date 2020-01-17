@@ -12,15 +12,31 @@ eventbrite_id: 89237633163
 
 ## 'Breakfast Briefing' with Jetstack and Google
 
-The first 'Breakfast Briefing' hosted by Jetstack is here! For this event we're excited to have our speakers share some of their experiences in the delivery of hybrid cloud solutions, specifically in migrating and modernising enterprise [level] workloads with Anthos.
+The first 'Breakfast Briefing' hosted by Jetstack is here! For this event we're
+excited to have our speakers share some of their experiences in the delivery of
+hybrid cloud solutions, specifically in migrating and modernising enterprise
+[level] workloads with Anthos.
 
 ## Migrating and Modernising Workloads with Anthos
 
-[Anthos](https://cloud.google.com/anthos/) is an open hybrid and multi-cloud application platform that enables existing applications to be modernised, new applications to be built, and for these to be run anywhere in a secure manner. Built on open source technologies pioneered by Google—including Kubernetes, Istio, and Knative—Anthos enables consistency between on-premises and cloud environments and helps accelerate application development.
+[Anthos](https://cloud.google.com/anthos/) is an open hybrid and multi-cloud
+application platform that enables existing applications to be modernised, new
+applications to be built, and for these to be run anywhere in a secure manner.
+Built on open source technologies pioneered by Google—including Kubernetes,
+Istio, and Knative—Anthos enables consistency between on-premises and cloud
+environments and helps accelerate application development.
 
-With rapidly changing market demands and competition, enterprises are increasingly looking to use public cloud. The cloud enables teams to be empowered with the capability to self-serve and innovate at pace. This transformation is a journey, and solutions need to encompass the many existing applications and systems that often resides in on-premises environments that will be migrated and modernised over time. 
+With rapidly changing market demands and competition, enterprises are
+increasingly looking to use public cloud. The cloud enables teams to be
+empowered with the capability to self-serve and innovate at pace. This
+transformation is a journey, and solutions need to encompass the many existing
+applications and systems that often resides in on-premises environments that
+will be migrated and modernised over time.
 
-With our collective experience in delivering hybrid cloud native Kubernetes, we will discuss strategies and practices of migrating from monolith to microservices, and how Anthos can be used to help deliver successful modernisation of such enterprise workloads. 
+With our collective experience in delivering hybrid cloud native Kubernetes, we
+will discuss strategies and practices of migrating from monolith to
+microservices, and how Anthos can be used to help deliver successful
+modernisation of such enterprise workloads.
 
 **Agenda:**
 

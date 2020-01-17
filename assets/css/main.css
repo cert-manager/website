@@ -2477,11 +2477,11 @@ Introduced on new Subscription Page
   text-justify: inter-word;
 }
 
-@media (min-width: 768px) {
-  .eventbrite-event-widget {
-    margin-left: 40px;
-  }
+.eventbrite-event-widget {
+  width: 100%;
+}
 
+@media (min-width: 768px) {
   .stats {
     display: flex;
     margin-bottom: 6em;
