@@ -67,7 +67,7 @@ deployment files that do not include the webhook.
 Instead of installing with
 [`cert-manager.yaml`](https://github.com/jetstack/cert-manager/releases/download/v0.13.0-alpha.0/cert-manager.yaml)
 file, you should instead use the
-[`cert-manager-no-webhook.yaml`](https://github.com/jetstack/cert-manager/releases/download/v0.13.0-alpha.0/cert-manager.yaml)
+[`cert-manager-no-webhook.yaml`](https://github.com/jetstack/cert-manager/releases/download/v0.13.0-alpha.0/cert-manager-no-webhook.yaml)
 file located in the deploy directory.
 
 This is a destructive operation, as it will remove the
