@@ -605,6 +605,12 @@ section.bordered {
   position: relative;
 }
 
+.media-component__contentImage {
+  width: 100%;
+  align: right;
+  border-radius: 6px;
+}
+
 .media-component__popout-list {
   color: white;
   background-color: #3f56ea;
