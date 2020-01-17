@@ -16,15 +16,13 @@ The first 'Breakfast Briefing' hosted by Jetstack is here! For this event we're 
 
 ## Migrating and Modernising Workloads with Anthos
 
-[Anthos](https://cloud.google.com/anthos/) is an open hybrid and multi-cloud application platform facilitates the modernisation of existing applications, along with the means to and run them anywhere in a secure manner. Built on open source technologies pioneered by Google—including Kubernetes, Istio, and Knative—Anthos enables consistency between on-premises and cloud environments and helps accelerate application development.
+[Anthos](https://cloud.google.com/anthos/) is an open hybrid and multi-cloud application platform that enables existing applications to be modernised, new applications to be built, and for these to be run anywhere in a secure manner. Built on open source technologies pioneered by Google—including Kubernetes, Istio, and Knative—Anthos enables consistency between on-premises and cloud environments and helps accelerate application development.
 
-We understand there's rapidly changing market demands resulting in more requirements and expectations placed on corporations and enterprises today.
+With rapidly changing market demands and competition, enterprises are increasingly looking to use public cloud. The cloud enables teams to be empowered with the capability to self-serve and innovate at pace. This transformation is a journey, and solutions need to encompass the many existing applications and systems that often resides in on-premises environments that will be migrated and modernised over time. 
 
-Consequently, more enterprises are looking to leverage the capabilities of public clouds by migrating from an on-premises environments, yielding many strategic  regarding vendors and technologies, but also how to provision and manage resources, and deploy applications.
+With our collective experience in delivering hybrid cloud native Kubernetes, we will discuss strategies and practices of migrating from monolith to microservices, and how Anthos can be used to help deliver successful modernisation of such enterprise workloads. 
 
-Using our collective experience in delivering hybrid cloud solutions, we will discuss microservice migration paths and practices to deliver successful hybrid scenarios for enterprise workloads.
-
-**Schedule:**
+**Agenda:**
 
 * 8.30am - 9:00am: Arrive / Network
 * 9:00am - 9:05am: Welcome / Introduction from Jetstack
