@@ -51,7 +51,9 @@
     <article class="container">
       <div class="row">
         <div class="col-sm-6">
-          <div class="">{{ .Content }}</div>
+          {{ if not .Params.tbc }}
+            <div>{{ .Content }}</div>
+          {{ end }}
         </div>
         <div id="eventbrite-widget-trigger"></div>
         <script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
