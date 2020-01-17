@@ -6,7 +6,7 @@ event_date: "February 19th 2020"
 link: /events/anthos-feb-2020
 timestamp: "20200219"
 start_time: "8:30am"
-end_time: "11:30am"
+end_time: "11:00am"
 eventbrite_id: 89237633163
 ---
 
@@ -27,8 +27,7 @@ Using our collective experience in delivering hybrid cloud solutions, we will di
 **Schedule:**
 
 * 8.30am - 9:00am: Arrive / Network
-* 9:00am - 9:15am: Welcome / Introduction from Jetstack
-* 9:15am - 10:00am: 'Monolith to Microservices' by Matt Bates / Q&A
-* 10:00am - 10:45am: 'TBC' by Henry Bell / Q&A
-* 10:45am - 11:00am: Closing Remarks from Jetstack
-* 11:00am - 11:30am: Networking
+* 9:00am - 9:05am: Welcome / Introduction from Jetstack
+* 9:05am - 9:45am: 'Monolith to Microservices' by Matt Bates / Q&A
+* 9:45am - 10:30am: 'TBC' by Henry Bell / Q&A
+* 10:30am - 11:00am: Closing Remarks from Jetstack / Networking
