@@ -2,7 +2,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-  
+
 {{ $jsFiles := slice }}
 {{ $jsFiles = $jsFiles | append (resources.Get "lib/jquery/jquery.js") }}
 {{ $jsFiles = $jsFiles | append (resources.Get "lib/bootstrap/js/bootstrap.js") }}
@@ -14,6 +14,9 @@
 {{ $jsFiles = $jsFiles | append (resources.Get "js/menu.js") }}
 {{ if isset $.Site.Params "google_analytics" }}
   {{ $jsFiles = $jsFiles | append (resources.Get "js/ga.js") }}
+{{ end }}
+{{ if isset $.Site.Params "linkedin_analytics" }}
+  {{ $jsFiles = $jsFiles | append (resources.Get "js/linkedin.js") }}
 {{ end }}
 {{ $js := $jsFiles | resources.Concat "js/bundle.js" }}
 {{ if isset $.Site.Params "minify" }}
