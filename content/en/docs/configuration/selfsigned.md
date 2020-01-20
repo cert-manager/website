@@ -13,7 +13,7 @@ certificate will be used to sign its own certificate.
 This `Issuer` type is useful for bootstrapping the CA certificate key pair for
 some Private Key Infrastructure (PKI), or for otherwise creating simple
 certificates.  Clients consuming these certificates have _no way_ to trust this
-certificate since there is no CA singer apart from itself, and as such, would be
+certificate since there is no CA signer apart from itself, and as such, would be
 forced to trust the certificate as is.
 
 > Note: `CertificateRequests` that reference a self signed certificate _must_
