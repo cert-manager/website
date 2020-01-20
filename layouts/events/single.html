@@ -7,7 +7,7 @@
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">
-  <section class="header-with-img-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url(thumbnail.jpg)">
+  <section class="header-with-img-bg" style="background-color: rgb(27, 28, 41);">
     <p class="header-with-img-bg__section header-with-img-bg__section--white">
       {{ .Params.event }}
     </p>
@@ -17,7 +17,7 @@
     </p>
   </section>
 
-  <section class="pink-stripes-section">
+  <section>
     <article class="container">
       <div class="row">
         <div class="col-sm-6">
@@ -50,6 +50,9 @@
           {{ end }}
         </div>
         <div class="col-sm-6">
+          <div>
+            <img class="event-banner" src="thumbnail.jpg"/>
+          </div>
           <div class="eventbrite-event-widget" id="eventbrite-widget-trigger"></div>
           <script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
           <script type="text/javascript">
