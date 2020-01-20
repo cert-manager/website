@@ -34,7 +34,7 @@ version = "v0.13"
 
 # Archived versions
 ###################
-# Use format 'docs/v0.#' for past version's dirpath
+# Use format `v0.#-docs` for past version's dirpath
 
 [[versions]]
   version = "v0.12"
