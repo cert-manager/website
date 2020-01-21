@@ -15,7 +15,7 @@ eventbrite_id: 89237633163
 The first 'Breakfast Briefing' hosted by Jetstack is here! For this event we're
 excited to have our speakers share some of their experiences in the delivery of
 hybrid cloud solutions, specifically in migrating and modernising enterprise
-[level] workloads with Anthos.
+workloads with Anthos.
 
 ## Migrating and Modernising Workloads with Anthos
 
