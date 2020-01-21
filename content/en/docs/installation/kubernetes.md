@@ -108,7 +108,7 @@ In order to install the Helm chart, you must follow these steps.
 
 Install the `CustomResourceDefinition` resources separately.
 ```bash
-$ kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
+$ kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/v0.13.0/deploy/manifests/00-crds.yaml
 ```
 
 Create the namespace for cert-manager.
