@@ -17,7 +17,7 @@ testimonial:
 **Duration:** 1 day
 
 ## Participant level
-Participants should have completed our beginner course or have equivalent
+Participants should have completed our Kubernetes in Practice Day 1 course or have equivalent
 experience. Those familiar with basic Kubernetes concepts can start here.
 
 ## Course content
