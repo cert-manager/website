@@ -1,9 +1,9 @@
 ---
 title: Kubernetes in Hybrid and Multi-Cloud Environments
 image: /events/connect-mar-2020/thumbnail.jpg
-address: "The Hoxton (subject to change)"
-event_date: "March 25th 2020"
-link: /events/connect-mar-2020
+address: "The Hoxton"
+event_date: "April 15th 2020"
+link: /events/connect-apr-2020
 timestamp: "20200325"
 start_time: "1:00pm"
 end_time: "5:00pm"
