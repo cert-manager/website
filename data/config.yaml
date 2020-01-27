@@ -73,6 +73,8 @@ menus:
       link: /talks/
     - name: Contact
       link: /contact/
+    - name: Nordics
+      link: /nordics/
   - name: Blog
     link: https://blog.jetstack.io/
 
@@ -118,7 +120,8 @@ menus:
       text: Blog
     - link: /contact
       text: Contact
-
+    - text: Nordics
+      link: /nordics/
 
   social:
     - name: github
