@@ -10,7 +10,7 @@ terms_link: "#"
 contact:
   email: hello@jetstack.io
 
-# apikeys for external services
+# arpikeys for external services
 apikeys:
   maps: AIzaSyCGilALFo4ETKecJo6KMGyvnpSM8BshMiw
 
@@ -75,6 +75,8 @@ menus:
       link: /events/
     - name: Contact
       link: /contact/
+    - name: Nordics
+      link: /nordics/
   - name: Blog
     link: https://blog.jetstack.io/
 
@@ -118,6 +120,8 @@ menus:
     links:
     - link: https://blog.jetstack.io/
       text: Blog
+    - link: /contact
+      text: Contact
     - text: Team
       link: /about/
     - text: Careers
@@ -128,6 +132,8 @@ menus:
       link: /events/
     - text: Contact
       link: /contact/
+    - text: Nordics
+      link: /nordics/
 
   social:
     - name: github
@@ -273,6 +279,12 @@ headline:
     headline: Jetstack Subscription
     strapline: Jetstack Subscription is an offering to help you at every stage of your Kubernetes journey. It gives you a tried and trusted suite of tools to support your team.
 
+  sweden:
+    headline: Äntligen, Kubernetes for the Nordics!
+    strapline: Jetstack has opened an office in Sweden to help Nordic businesses build and operate modern cloud-native infrastructure with Kubernetes.
+    preparecta: We can support you on that journey!
+
+
 # various types of content panel that can appear on section pages
 # the idea is to not fix a panel to a section - mix and match!
 panels:
@@ -303,6 +315,33 @@ panels:
       name: Practical, real-world training
       desc: Fast access to the skills you’ll need to deploy and operate cloud native infrastructure reliably and at scale
       link: /training
+    
+  what_we_offer_v2: 
+    headline: What we offer
+    features:
+    - img: /img/jpg/wwo-subscription.jpg
+      category: Subscription
+      name: Let us help you to continously improve your day-to-day operations
+      desc: Ongoing access to the best of what Jetstack has to offer
+      link: /subscription
+
+    - img: /img/jpg/wwo-training.jpg
+      category: In-Person Training
+      name: Practical, real-world training
+      desc: Fast access to the skills you’ll need to deploy and operate cloud native infrastructure reliably and at scale
+      link: /training
+
+    - img: /img/jpg/wwo-open-source.jpg
+      category: Open source
+      name: Building tools to enhance the operational and developer experience
+      desc: We’ve been contributing to the Kubernetes ecosystem from the beginning 
+      link: /open-source
+
+    - img: /img/jpg/wwo-consulting.jpg
+      category: Consulting
+      name: Achieve your delivery goals quicker
+      desc: Complement your team and adopt best practices
+      link: /consulting
 
   # the partners we have worked and press stories about us (homepage)
   partners:

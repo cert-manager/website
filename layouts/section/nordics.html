@@ -1,0 +1,79 @@
+{{ define "title" }} | Nordics{{ end }}
+{{ define "description" }}Now in the Nordics: We are a fast-growing Kubernetes professional services company that prides itself with helping startups and enterprises alike in their path to modern cloud-native infrastructure.{{ end }}
+
+{{ define "navbar" }}
+{{ partial "navbar/dark.html" . }}
+{{ end }}
+
+{{ define "body" }}
+
+<!-- Media Hero Section -->
+<section class="media-hero">
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-sm-12">
+
+        <div class="media-hero__content Hero__latest">
+          <div class="media-hero__graphic media-hero__graphic--spaced">
+            <img src="/img/png/nordic-map.png" alt="" />
+          </div>
+
+          <div class="media-hero__copy">
+            <h1>{{ .Site.Data.config.headline.sweden.headline }}</h1>
+            <p>{{ .Site.Data.config.headline.sweden.strapline }}</p>
+            <p>{{ .Site.Data.config.headline.sweden.preparecta }}</p>
+            <div class="media-hero__main-cta-wrapper">
+              <a href="#contactform" class="media-hero__main-cta media-hero__main-cta--spaced" data-smooth-scroll>Get in touch</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- Media Hero Section -->
+
+
+<!-- Image Testimonial Section -->
+<section class="img-testimonial" style="background-image: linear-gradient(to right, rgba(27, 28, 41, 0.95), rgba(27, 28, 41, 0.95)), url(/img/jpg/training-subscription.jpg);">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-7">
+        <blockquote class="img-testimonial__quote">
+          <p>
+            "Sweden and the Nordics are known for their vibrant entrepreneurial ecosystem full of early adopters and hi-tech start-ups. We're excited to help this market discover the possibilities and business advantages of adopting Kubernetes."
+          </p>
+          <cite class="img-testimonial__cite">Jonathan Grahl, Nordic Solution Engineer</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Image Testimonial Section -->
+
+
+{{ partial "panels/what-we-offer-v2.html" .Site.Data.config.panels.what_we_offer_v2 }}
+
+{{ end }}
+
+{{ define "cta"}}
+<!-- Subscriptions Form -->
+<section id="contactform" class="sweden-form">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <h2>Tell us more about you</h2>
+        <div style="margin: 0 auto;">
+          <div class="pipedriveWebForms" data-pd-webforms="https://pipedrivewebforms.com/form/9bb0a3d0e08f96d5ebe56692f6239b723004600"><script src="https://cdn.pipedriveassets.com/web-form-assets/webforms.min.js"></script></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Subscriptions Form -->
+{{ end }}

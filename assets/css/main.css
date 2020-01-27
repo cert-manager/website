@@ -902,6 +902,10 @@ Introduced on new Subscription Page
   margin-top: 0px;
 }
 
+.media-hero__main-cta--spaced {
+  margin-top: 35px;
+}
+
 .media-hero__main-cta:link,
 .media-hero__main-cta:visited {
   color: white;
@@ -961,6 +965,13 @@ Introduced on new Subscription Page
     order: 2;
     padding-left: 100px;
     padding-top: 30px;
+  }
+
+  .media-hero__graphic--spaced {
+    flex: 1 1 55%;
+    order: 2;
+    padding-left: 50px;
+    padding-top: 100px;
   }
 
   .media-hero__graphic svg,
@@ -2577,4 +2588,9 @@ Introduced on new Subscription Page
     #footer .pre-footer {
         display: none;
     }
+}
+
+/* Contact forms */
+#contactform.sweden-form {
+  padding-top: 0;
 }
