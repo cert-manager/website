@@ -1,7 +1,7 @@
 ---
 title: Charlie Egan
 image: /img/jpg/about-charlie.jpg
-position: Solutions Engineer
+position: Software Engineer
 email: charlie.egan@jetstack.io
 twitter: 'charlieegan3'
 github: 'charlieegan3'

@@ -1,25 +1,25 @@
 ---
-title: Front End Engineer
+title: Frontend Engineer
 image: /img/jpg/about-vacancies.jpg
-weight: 5
+weight: 6
 location: UK/Europe
 ---
 
 We guide and support enterprises in their adoption and production use of Kubernetes. Our deep understanding and real-world experience in a variety of environments (cloud and on-premises), enables us to accelerate customer projects and provide them with confidence in their operations.
 
-**The Role** 
+**The Role**
 
-We’re looking for a talented Front End Engineer, with experience of modern front end frameworks such as Elm and Vue.js, to help us develop UI/UX for a number of Jetstack web-based properties and products. Principally, this will be our customer portal and online training platform, Flightdeck, that delivers rich content and interactive learning for Kubernetes and cloud native. You will work closely with engineers that focus on backend engineering, primarily in Go, as well as Product Owners and Jetstack’s co-founders to bring products to market.
+We’re looking for a talented Frontend Engineer, with experience of modern frontend frameworks such as Elm and Vue.js, to help us develop UI/UX for a number of Jetstack web-based properties and products. Principally, this will be our customer portal and online training platform, Flightdeck, that delivers rich content and interactive learning for Kubernetes and cloud native. You will work closely with engineers that focus on backend engineering, primarily in Go, as well as Product Owners and Jetstack’s co-founders to bring products to market.
 
-**Technical experience** 
+**Technical experience**
 
-* Experience of modern front end frameworks - e.g. Elm / Vue.js / React
+* Experience of modern frontend frameworks - e.g. Elm / Vue.js / React
 * Good working knowledge of HTML5, Javascript and CSS.
- 
+
 **Any experience of the following would be an added extra**
 
 * Docker and Kubernetes
-* REST API design 
+* REST API design
 * Git source control
 * CI/CD (e.g. GitLab)
 * Deployment of services to Google Cloud (GCP)

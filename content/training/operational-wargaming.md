@@ -5,6 +5,7 @@ contentImage: /img/jpg/training-wargaming.jpg
 card_description: >
   Test your ability to operate Kubernetes under pressure with our team ‘Wargaming’ exercise. We will break your Kubernetes cluster, and you must work together to overcome production issues and common cluster failures.
 card_image: /img/png/card-img-wargaming.png
+card_subtitle: One or two day training
 training_level: Advanced Operations
 weight: 2
 testimonial:
@@ -13,7 +14,7 @@ testimonial:
   quoter: 'Workshop Attendee, Holiday Extras'
 ---
 
-**Duration:** 1 day
+**Duration:** 1 or 2 days
 
 ## Participant level
 This course is for those who operate a Kubernetes cluster as part of their job.

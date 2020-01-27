@@ -1,7 +1,7 @@
 ---
 title: Kube-Lego
 image: /img/jpg/open-source-kube.jpg
-weight: 4
+weight: 6
 getting_started: https://github.com/jetstack/kube-lego#usage
 github: https://github.com/jetstack/kube-lego
 ---
