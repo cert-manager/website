@@ -42,8 +42,8 @@ modernisation of such enterprise workloads.
 
 * 8.30am - 9:00am: Arrive / Network
 * 9:00am - 9:05am: Welcome / Introduction from Jetstack
+* 9:45am - 10:30am: 'Software at Scale: At Google and Beyond' by Henry Bell / Q&A
 * 9:05am - 9:45am: 'Monolith to Microservices' by Matt Bates / Q&A
-* 9:45am - 10:30am: 'TBC' by Henry Bell / Q&A
 * 10:30am - 11:00am: Closing Remarks from Jetstack / Networking
 
-Please register now to go on the wait-list for this event!
+Please register now to join us at this event!
