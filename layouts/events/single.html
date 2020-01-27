@@ -1,0 +1,72 @@
+{{ define "title" }} | {{ .Title }}{{ end }}
+{{ define "ogtitle" }}{{ .Title }}{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.image }}{{ end }}
+
+{{ define "navbar" }} {{ partial "navbar/dark.html" . }} {{ end }}
+
+{{ define "body" }}
+
+<div class="container-fluid" id="page-content">
+  <section class="header-with-img-bg" style="background-color: rgb(27, 28, 41);">
+    <p class="header-with-img-bg__section header-with-img-bg__section--white">
+      {{ .Params.event }}
+    </p>
+    <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
+    <p class="header-with-img-bg__section header-with-img-bg__section--white">
+      {{ .Params.person }}
+    </p>
+  </section>
+
+  <section>
+    <article class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <table class="table">
+            {{ if .Params.tbc }}
+              <th>Note</th>
+              <td>Details coming soon</td>
+            {{ else }}
+              <tr>
+                <th>Address</th>
+                <td>{{ .Params.address }}</td>
+              </tr>
+              <tr>
+                <th>Date</th>
+                <td>{{ .Params.event_date }}</td>
+              </tr>
+              <tr>
+                <th>Start Time</th>
+                <td>{{ .Params.start_time }}</td>
+              </tr>
+              <tr>
+                <th>End Time</th>
+                <td>{{ .Params.end_time }}</td>
+              </tr>
+            {{ end }}
+          </table>
+
+          {{ if not .Params.tbc }}
+            <div>{{ .Content }}</div>
+          {{ end }}
+        </div>
+        <div class="col-sm-6">
+          <div>
+            <img class="event-banner" src="thumbnail.jpg"/>
+          </div>
+          <div class="eventbrite-event-widget" id="eventbrite-widget-trigger"></div>
+          <script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
+          <script type="text/javascript">
+            window.EBWidgets.createWidget({
+              widgetType: "checkout",
+              eventId: "{{ .Params.eventbrite_id }}",
+              iframeContainerId: "eventbrite-widget-trigger",
+              iframeContainerHeight: 425
+            });
+          </script>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>
+
+{{ end }}

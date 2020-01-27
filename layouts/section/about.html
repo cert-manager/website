@@ -1,8 +1,12 @@
-{{ define "title" }} | About Us{{ end }}
+{{ define "title" }} | {{ .Title }}{{ end }}
 
 {{ define "navbar" }}
 {{ partial "navbar/light.html" . }}
 {{ end }}
+
+{{ define "ogtitle" }}{{ .Title }}{{ end }}
+{{ define "ogdescription" }}{{ .Params.og.description }}{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.og.image }}{{ end }}
 
 {{ define "body" }}
 

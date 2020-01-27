@@ -5,6 +5,7 @@ contentImage: /img/jpg/training-app-dev.jpg
 card_description: >
   Explore Kubernetes from the app developer’s perspective. Learn how to prepare workloads for Kubernetes while paying attention to best practices. Hands-on labs covering Liveness Probes, Init Containers, Secrets and more.
 card_image: /img/png/card-img-deploy.png
+card_subtitle: One day training
 training_level: Application Development
 weight: 1
 testimonial:

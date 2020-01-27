@@ -1,9 +1,13 @@
-{{ define "title" }} | Subscription{{ end }}
+{{ define "title" }} | {{ .Title }}{{ end }}
 {{ define "description" }}Jetstack Subscription is an offering to help you at every stage of your Kubernetes journey. It gives you a tried and trusted suite of tools to support your team.{{ end }}
 
 {{ define "navbar" }}
 {{ partial "navbar/dark.html" . }}
 {{ end }}
+
+{{ define "ogtitle" }}{{ .Title }}{{ end }}
+{{ define "ogdescription" }}{{ .Params.og.description }}{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.og.image }}{{ end }}
 
 {{ define "body" }}
 
@@ -196,7 +200,7 @@
               <div class="info-icons__feature-icon">
                 {{ partial "svg/icon-person-presenting.svg" }}
               </div>
-              <p class="info-icons__feature-copy">Self-paced beginner, intermediate and advanced training for operators
+              <p class="info-icons__feature-copy">Self-paced Kubernetes in Practice and advanced training for operators
                 and developers</p>
             </li>
             <li class="info-icons__feature">
@@ -339,7 +343,7 @@
       <div class="col-sm-12">
         <h2>Enquire about Subscription</h2>
         <div style="margin: 0 auto; max-width: 400px;">
-          <div class="pipedriveWebForms" data-pd-webforms="https://pipedrivewebforms.com/form/9bb0a3d0e08f96d5ebe56692f6239b723004600"><script src="https://cdn.pipedriveassets.com/web-form-assets/webforms.min.js"></script></div>
+          <script src='https://jetstacksales.freshsales.io/web_forms/0653dacfd6392c6b8d0f62ae3b5c269f56ce1790b315f949ca82b38bc864c510/form.js' crossorigin='anonymous' id='fs_0653dacfd6392c6b8d0f62ae3b5c269f56ce1790b315f949ca82b38bc864c510'></script>
         </div>
       </div>
     </div>

@@ -2,6 +2,10 @@
 
 {{ define "navbar" }} {{ partial "navbar/dark.html" . }} {{ end }}
 
+{{ define "ogtitle" }}{{ .Title }}{{ end }}
+{{ define "ogdescription" }}{{ .Params.og.description }}{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.og.image }}{{ end }}
+
 {{ define "body" }}
 
 <div class="container-fluid" id="page-content">
@@ -39,7 +43,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Participant levels</h2>
+          <h2 class="participant-levels">Participant levels</h2>
           <div class="white-tiles">
             {{ range where .Pages "Params.type" "course" }}
             <article class="white-tile">
@@ -66,7 +70,7 @@
             <div class="speaker-bio">
               <figure class="speaker-bio__img" style="background-image: url({{ .Params.bio_pic_url }})" aria-hidden="true"></figure>
               <div class="speaker-bio__content">
-                <h2 class="speaker-bio__name">{{ .Title }}</h2>
+                <h2 class="speaker-bio__name">{{ .Title | safeHTML }}</h2>
                 <p class="speaker-bio__title">{{ .Params.job_title }}</p>
               </div>
             </div>
@@ -139,4 +143,3 @@
   </div>
 </section>
 {{ end }}
-

@@ -1,0 +1,39 @@
+{{ define "title" }}
+  | {{ .Title }}
+{{- end }}
+{{ define "ogtitle" }}Events{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.image }}{{ end }}
+
+{{ define "navbar" }} {{ partial "navbar/dark.html" . }} {{ end }}
+
+{{ define "body" }}
+<div class="container-fluid" id="page-content">
+  <section class="header-with-img-bg" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url({{ .Params.image }})">
+    <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
+  </section>
+
+  <section class="tight media-component">
+    {{ range sort .Data.Pages "Params.timestamp" }}
+      <div class="media-component__row">
+        <div class="media-component__content">
+          <a href="{{ .RelPermalink }}">
+            <img class="media-component__contentImage" src="{{ .Params.image }}" />
+          </a>
+        </div>
+        <div class="media-component__content">
+          <div class="media-component__copy">
+            <h2><a href="{{ .Params.link }}">{{ .Params.Title }}</a></h2>
+            {{ if .Params.tbc }}
+              <p>Details to be confirmed</p>
+            {{ else }}
+              <p><strong>Date:</strong> {{ .Params.event_date }}</p>
+              <p><strong>Address:</strong> {{ .Params.address }}</p>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    {{ end }}
+  </section>
+
+</div>
+{{ end }}

@@ -12,38 +12,41 @@ testimonial:
   profileImage:
   quoter: 'Workshop Attendee'
 course_dates:
-- date: '3 October 2019'
+- date: '28 January 2020'
   title: 'Kubernetes in Practice'
-  level: 'Beginner'
-  eventbriteId: 70138649589
-- date: '4 October 2019'
+  level: 'Day 1'
+  eventbriteId: 85623866289
+- date: '29 January 2020'
   title: 'Kubernetes in Practice'
-  level: 'Intermediate'
-  eventbriteId: 70141985567
-- date: '23 October 2019'
+  level: 'Day 2'
+  eventbriteId: 85623753953
+- date: '12 February 2020'
   title: 'Kubernetes in Practice'
-  level: 'Beginner'
-  eventbriteId: 70140661607
-- date: '24 October 2019'
+  level: 'Day 1'
+  eventbriteId: 86787017305
+- date: '13 February 2020'
   title: 'Kubernetes in Practice'
-  level: 'Intermediate'
-  eventbriteId: 70142244341
-- date: '14 November 2019'
+  level: 'Day 2'
+  eventbriteId: 86787633147
+- date: '25 February 2020'
+  title: 'Kubernetes in Practice (Stockholm)'
+  level: 'Day 1'
+  eventbriteId: 89777670429
+- date: '26 February 2020'
+  title: 'Kubernetes in Practice (Stockholm)'
+  level: 'Day 2'
+  eventbriteId: 89778777741
+- date: '4 March 2020'
   title: 'Kubernetes in Practice'
-  level: 'Beginner'
-  eventbriteId: 70140966519
-- date: '15 November 2019'
+  level: 'Day 1'
+  eventbriteId: 85634704707
+- date: '5 March 2020'
   title: 'Kubernetes in Practice'
-  level: 'Intermediate'
-  eventbriteId: 70142376737
-- date: '4 December 2019'
-  title: 'Kubernetes in Practice'
-  level: 'Beginner'
-  eventbriteId: 70141255383
-- date: '5 December 2019'
-  title: 'Kubernetes in Practice'
-  level: 'Intermediate'
-  eventbriteId: 70142729793
+  level: 'Day 2'
+  eventbriteId: 85634494077
+og:
+  description: Hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently
+  image: /img/jpg/public-training-header-bg.jpg
 ---
 
 ## Description
@@ -73,6 +76,8 @@ Please note:
 
 * Admission is subject to review based on attendance criteria
 * No more than two attendees from the same company can register on the same
-  course.
+  course
+* No more than six individuals from the same company may attend a course during
+  a calendar year
 * This training is run in conjunction with our partner Google and your details
   will passed to them when you register
