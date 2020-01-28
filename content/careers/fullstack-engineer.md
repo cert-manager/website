@@ -21,7 +21,7 @@ The points below are not a checklist for the role but rather a selection of skil
 **Technical experience** 
 
 * Building server side applications or services (REST/GraphQL, API design)
-* Experience of modern frontend frameworks like Elm / Vue.js / React
+* Experience of modern frontend tools such as React
 * Good working knowledge of programming languages such as Go and Python
 * Use of container based deployment solutions (Kubernetes, Docker), nice to have
 * Automated testing and working with CI/CD
