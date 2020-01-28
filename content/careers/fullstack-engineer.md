@@ -14,7 +14,7 @@ Our mission is to build the best team and process to guide and support enterpris
 
 **The Role** 
 
-We’re looking for a Full Stack Developer who wants to be part of a team and make a difference to our customers in their journey to adopting Kubernetes and cloud native technologies. With experience of both front and back end programming, you will help us design and scale a number of Jetstack properties and products. You will work in a cross functional team, along side our Product Owners and Jetstack’s co-founders to bring products to market. 
+We’re looking for someone who wants to be part of a team and make a difference to our customers in their journey to adopting Kubernetes and cloud native technologies. With experience of both front and back end programming, you will help us design and scale a number of Jetstack properties and products. You will work in a cross functional team, along side our Product Owners and Jetstack’s co-founders to bring products to market. 
 
 The points below are not a checklist for the role but rather a selection of skills we think would help you get up and running quickly.
 
