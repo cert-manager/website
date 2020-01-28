@@ -41,7 +41,7 @@ The points below are not a checklist for the role but rather a selection of skil
 * A face-to-face or video interview with members of the team
 * To wrap things up, a conversation with our CEO/CTO
 
-We are a group of open-minded people who care about the service we provide to our customers, the impact we have on the open source community and how we work better together. We have a diverse team who thrives on interesting projects, resolving real life complex issues and giving back to the community. If you're as interested in learning and developing as we are then please do <a href="mailto:recruitment@jetstack.io">contact us</a> and apply.
+We are a group of open-minded people who care about the service we provide to our customers, the impact we have on the open source community and how we work better together. We have a diverse team who thrives on interesting projects, resolving real life complex issues and giving back to the community. If you're as interested in learning and developing as we are then please do [contact us](mailto:recruitment@jetstack.io) and apply.
 
 We have a flexible work policy and this role is for both candidates interested in working in our UK offices or remote. As part of our culture we like to bring the whole team together a few times a year - because of this, our recruitment is currently limited to the UK & Europe.  
 
