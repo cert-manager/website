@@ -10,7 +10,7 @@ We are on the lookout for our next engineer! Come and join our team.
 
 **A bit about us**
 
-Our mission is to build the best team and process to guide and support enterprises and start-ups alike in their adoption Kubernetes. Our deep understanding and real-world experience in a variety of environments (cloud and on-premises), enables us to accelerate customer projects and provide them with confidence in their operations. 
+Our mission is to build the best team and process to guide and support enterprises and start-ups alike in their adoption of Kubernetes. Our deep understanding and real-world experience in a variety of environments (cloud and on-premises), enables us to accelerate customer projects and provide them with confidence in their operations. 
 
 **The Role** 
 
