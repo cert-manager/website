@@ -38,7 +38,7 @@ The points below are not a checklist for the role but rather a selection of skil
 **What to expect next**
 
 * An introductory phone call is usually how we kick off the process
-* A face-to-face or video interview with members of the team
+* A short take home exercise, followed by a face-to-face/ video technical interview with members of the team
 * To wrap things up, a conversation with our CEO/CTO
 
 We are a group of open-minded people who care about the service we provide to our customers, the impact we have on the open source community and how we work better together. We have a diverse team who thrives on interesting projects, resolving real life complex issues and giving back to the community. If you're as interested in learning and developing as we are then please do [contact us](mailto:recruitment@jetstack.io) and apply.
