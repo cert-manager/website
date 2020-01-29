@@ -27,7 +27,7 @@ spec:
   - signing
   - digital signature
   - server auth
-  duraton: 90d
+  duration: 90d
   issuerRef:
     name: ca-issuer
     # We can reference ClusterIssuers by changing the kind here.
