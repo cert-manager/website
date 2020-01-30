@@ -8,6 +8,7 @@ timestamp: "20200325"
 start_time: "1:00pm"
 end_time: "5:00pm"
 tbc: true
+aliases: [/events/connect-mar-2020]
 ---
 
 ## Kubernetes in Hybrid and Multi-Cloud Environments
