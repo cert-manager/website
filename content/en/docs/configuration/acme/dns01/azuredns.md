@@ -55,7 +55,7 @@ $ kubectl create secret generic azuredns-config --from-literal=client-secret=$AZ
 Get the variables for configuring the issuer.
 ```bash
 $ echo "AZURE_CERT_MANAGER_SP_APP_ID: $AZURE_CERT_MANAGER_SP_APP_ID"
-$ echo "AZURE_SUBSCRIPTION_ID: $AZURE_CERT_MANAGER_SP_PASSWORD"
+$ echo "AZURE_SUBSCRIPTION_ID: $AZURE_SUBSCRIPTION_ID"
 $ echo "AZURE_TENANT_ID: $AZURE_TENANT_ID"
 $ echo "AZURE_DNS_ZONE: $AZURE_DNS_ZONE"
 $ echo "AZURE_DNS_ZONE_RESOURCE_GROUP: $AZURE_DNS_ZONE_RESOURCE_GROUP"
