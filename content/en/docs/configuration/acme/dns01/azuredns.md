@@ -23,6 +23,7 @@ $ DNS_SP=$(az ad sp create-for-rbac --name $AZURE_CERT_MANAGER_NEW_SP_NAME)
 $ AZURE_CERT_MANAGER_SP_APP_ID=$(echo $DNS_SP | jq -r '.appId')
 $ AZURE_CERT_MANAGER_SP_PASSWORD=$(echo $DNS_SP | jq -r '.password')
 $ AZURE_TENANT_ID=$(echo $DNS_SP | jq -r '.tenant')
+$ AZURE_SUBSCRIPTION_ID=$(az account show | jq -r '.id')
 ```
 
 For security purposes, it is appropriate to utilize RBAC to ensure that you
@@ -55,13 +56,14 @@ $ kubectl create secret generic azuredns-config --from-literal=client-secret=$AZ
 Get the variables for configuring the issuer.
 ```bash
 $ echo "AZURE_CERT_MANAGER_SP_APP_ID: $AZURE_CERT_MANAGER_SP_APP_ID"
+$ echo "AZURE_CERT_MANAGER_SP_PASSWORD: $AZURE_CERT_MANAGER_SP_PASSWORD"
 $ echo "AZURE_SUBSCRIPTION_ID: $AZURE_SUBSCRIPTION_ID"
 $ echo "AZURE_TENANT_ID: $AZURE_TENANT_ID"
 $ echo "AZURE_DNS_ZONE: $AZURE_DNS_ZONE"
 $ echo "AZURE_DNS_ZONE_RESOURCE_GROUP: $AZURE_DNS_ZONE_RESOURCE_GROUP"
 ```
 
-To configure the issuer, substitute the capital cased variables with the values from the previous script. You can get the subscription id from the Azure's portal.
+To configure the issuer, substitute the capital cased variables with the values from the previous script.
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
