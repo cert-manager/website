@@ -32,7 +32,7 @@ configured, it is the simplest to configure. All that is required is for the
 apiVersion: cert-manager.io/v1alpha2
 kind: Issuer
 metadata:
-  name: selfsigning-issuer
+  name: selfsigned-issuer
   namespace: sandbox
 spec:
   selfSigned: {}
@@ -44,8 +44,8 @@ been deployed.
 
 ```bash
 $ kubectl get issuers selfsigned-issuer -n sandbox -o wide
-NAME          READY   STATUS                AGE
-self-issuer   True                          2m
+NAME                READY   STATUS                AGE
+selfsigned-issuer   True                          2m
 ```
 
 Certificates are now ready to be requested by using the `SelfSigned` `Issuer`
