@@ -16,7 +16,7 @@ The easiest way to install `cert-manager` is to use [`Helm`](https://helm.sh), a
 templating and deployment tool for Kubernetes resources.
 
 First, ensure the Helm client is installed following the [Helm installation
-instructions](https://github.com/helm/helm/blob/master/docs/install.md).
+instructions](https://helm.sh/docs/intro/install/).
 
 For example, on MacOS:
 
