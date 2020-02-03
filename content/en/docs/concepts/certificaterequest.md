@@ -37,7 +37,7 @@ spec:
 ```
 
 This `CertificateRequest` will make cert-manager attempt to request the `Issuer`
-`letsencrypt-prod` in the default issuer group `cert-manager.io`, return a
+`ca-issuer` in the default issuer group `cert-manager.io`, return a
 certificate based upon the certificate signing request. Other groups can be
 specified inside the `issuerRef` which will change the targeted issuer to other
 external, third party issuers you may have installed.
