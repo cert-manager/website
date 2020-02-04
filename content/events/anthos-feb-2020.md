@@ -42,8 +42,8 @@ modernisation of such enterprise workloads.
 
 * 8.30am - 9:00am: Arrive / Network
 * 9:00am - 9:05am: Welcome / Introduction from Jetstack
-* 9:45am - 10:30am: 'A journey to Anthos' by Henry Bell / Q&A
-* 9:05am - 9:45am: 'Monolith to Microservices' by Matt Bates / Q&A
+* 9:05am - 9:45am: 'A journey to Anthos' by Henry Bell / Q&A
+* 9:45am - 10:30am: 'Monolith to Microservices' by Matt Bates / Q&A
 * 10:30am - 11:00am: Closing Remarks from Jetstack / Networking
 
 Please register now to join us at this event!
