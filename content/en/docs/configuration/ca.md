@@ -18,7 +18,7 @@ certificates will _not_ be trusted by clients, such a web browser, by default.
 ## Deployment
 
 In order to create your CA issuer, you must first submit your CA certificate and
-singing private key to the Kubernetes API server so that cert-manager is able to
+signing private key to the Kubernetes API server so that cert-manager is able to
 retrieve them and sign certificates. This secret should reside in the same
 namespace as the `Issuer`, or otherwise in the `Cluster Resource Namespace` in
 the case of a `ClusterIssuer`. The `Cluster Resource Namespace` is defaulted as
