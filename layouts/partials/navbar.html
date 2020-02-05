@@ -39,5 +39,7 @@
       {{ end }}
     </ul>
   </div>
-  <div class="navbar-nav d-none d-xl-block">{{ partial "search-input.html" . }}</div>
+  <div class="navbar-nav d-none d-xl-block">
+    <input class="form-control" id="search-box" name="search" type="text" placeholder='Search' />
+  </div>
 </nav>
