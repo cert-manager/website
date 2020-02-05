@@ -1,4 +1,3 @@
-+++
 baseURL = "https://cert-manager.io/"
 title = "cert-manager documentation"
 configDir = "config"
