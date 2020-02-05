@@ -1,3 +1,4 @@
++++
 baseURL = "https://cert-manager.io/"
 title = "cert-manager documentation"
 configDir = "config"
@@ -91,3 +92,8 @@ navbar_logo = true
 id = "UA-78700849-2"
 
 googleAnalytics = "UA-78700849-2"
+
+
+[algolia]
+index = "cert-manager"
+appID = "18N9PEKHUC"

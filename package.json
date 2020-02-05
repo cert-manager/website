@@ -4,7 +4,8 @@
   "description": "Hugo theme for technical documentation.",
   "main": "none.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "index-and-send": "hugo-algolia --config ./config/_default/config.toml --config-toml --all -s"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,11 @@
   },
   "homepage": "https://github.com/bep/tech-doc-hugo#readme",
   "devDependencies": {
-    "autoprefixer": "^9.4.6",
-    "postcss-cli": "^5.0.1",
     "alex": "^8.0.0",
+    "autoprefixer": "^9.4.6",
+    "hugo-algolia": "git+https://git@github.com/meyskens/hugo-algolia.git#73cd04f5bb53d32b1d684e67b787a5896721b094",
     "markdown-spellcheck": "^1.3.1",
+    "postcss-cli": "^5.0.1",
     "remark-cli": "^7.0.0",
     "remark-lint": "^6.0.5"
   }
