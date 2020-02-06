@@ -108,7 +108,6 @@ spec:
   issuerRef:
     # The issuer created previously
     name: example-issuer
-  commonName: example.com
   dnsNames:
   - example.com
   - www.example.com

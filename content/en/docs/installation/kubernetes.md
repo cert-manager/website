@@ -190,7 +190,8 @@ metadata:
   name: selfsigned-cert
   namespace: cert-manager-test
 spec:
-  commonName: example.com
+  dnsNames: 
+    - example.com
   secretName: selfsigned-cert-tls
   issuerRef:
     name: test-selfsigned
