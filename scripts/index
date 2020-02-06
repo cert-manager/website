@@ -23,8 +23,16 @@ set -o pipefail
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
+if [ "$ALGOLIA_WRITE_KEY" == "" ]; then
+    echo "Misssing ALGOLIA_WRITE_KEY, skipping index"
+    exit
+fi
+
 cd "${REPO_ROOT}"
 
-
 "${REPO_ROOT}/scripts/update-node_modules"
-npm run index-and-send
+${REPO_ROOT}/node_modules/.bin/hugo-algolia -i 'content/en/docs/**' --config ./config/_default/config.toml --config-toml --all -s
+
+for i in content/en/*-docs/; do
+    ${REPO_ROOT}/node_modules/.bin/hugo-algolia -i "$i**" --config ./config/_default/config.toml --config-toml --all -s --override-index-name cert-manager-$(echo $i | grep -Po "v.*(?=-docs)")
+done

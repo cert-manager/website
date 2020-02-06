@@ -94,5 +94,5 @@ googleAnalytics = "UA-78700849-2"
 
 
 [algolia]
-index = "cert-manager"
+index = "cert-manager-latest"
 appID = "18N9PEKHUC"

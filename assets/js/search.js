@@ -1,5 +1,10 @@
 var client = algoliasearch('18N9PEKHUC', '29ab24453d2b70065a76b4e1a6a82abc');
-var index = client.initIndex('cert-manager');
+var indexName = "cert-manager-latest"
+let versionMatch = window.location.href.match(/v(.*)-docs\//) 
+if (versionMatch && versionMatch[1]) { // check if we matched a version
+  indexName = `cert-manager-v${versionMatch[1]}`
+}
+var index = client.initIndex(indexName);
 autocomplete('#search-box', { hint: false }, [
   {
     source: autocomplete.sources.hits(index, { hitsPerPage: 5 }),
