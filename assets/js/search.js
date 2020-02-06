@@ -18,10 +18,5 @@ autocomplete('#search-box', { hint: false }, [
     }
   }
 ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
-    // Do nothing on click, as the browser will already do it
-    if (context.selectionMethod === 'click') {
-      return;
-    }
-    // Change the page, for example, on other events
     window.location.assign(suggestion.uri.replace("en",""));
 });
