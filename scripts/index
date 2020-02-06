@@ -23,7 +23,7 @@ set -o pipefail
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
-if [ "$ALGOLIA_WRITE_KEY" == "" ]; then
+if [ -z ${ALGOLIA_WRITE_KEY+x} ]; then
     echo "Misssing ALGOLIA_WRITE_KEY, skipping index"
     exit
 fi
