@@ -27,3 +27,12 @@
   box-shadow: none;
   border-radius: 0px 4px 4px 0px !important;
 }
+
+.algolia-branding {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.algolia-branding img {
+  max-height: 15px;
+}

@@ -8,7 +8,8 @@ autocomplete('#search-box', { hint: false }, [
     templates: {
       suggestion: function(suggestion) {
         return `<a href="${suggestion.uri.replace("en","")}">${suggestion._highlightResult.title.value}</a>`;
-      }
+      },
+      footer: '<div class="algolia-branding"><img src="/images/search-by-algolia-light-background.svg" alt="Search powered by Algolia" /></div>',
     }
   }
 ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
