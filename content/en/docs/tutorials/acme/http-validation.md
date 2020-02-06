@@ -93,7 +93,8 @@ obtained successfully, the resulting key pair will be stored in a secret called
 The certificate will have a common name of `example.com` and the [Subject
 Alternative Names
 (SANs)](https://en.wikipedia.org/wiki/Subject_Alternative_Name) will be
-`example.com` and `www.example.com`.
+`example.com` and `www.example.com`. Note that only these SANs will be respected
+by TLS clients.
 
 In our Certificate we have referenced the `letsencrypt-staging` Issuer above.
 The Issuer must be in the same namespace as the Certificate.  If you want to

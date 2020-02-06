@@ -107,8 +107,8 @@ spec:
   secretName: example-com-tls
   issuerRef:
     name: letsencrypt-staging
-  commonName: '*.example.com'
   dnsNames:
+  - '*.example.com'
   - example.com
   - foo.com
 ```
