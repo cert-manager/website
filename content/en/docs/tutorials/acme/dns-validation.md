@@ -64,7 +64,7 @@ spec:
         cloudflare:
           email: my-cloudflare-acc@example.com
           # !! Remember to create a k8s secret before
-          # kubectl create secret generic cloudflare-api-key
+          # kubectl create secret generic cloudflare-api-key-secret
           apiKeySecretRef:
             name: cloudflare-api-key-secret
             key: api-key
