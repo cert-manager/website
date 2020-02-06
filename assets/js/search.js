@@ -11,6 +11,7 @@ autocomplete('#search-box', { hint: false }, [
     displayKey: 'title',
     clearOnSelected: true,
     templates: {
+      empty: "Nothing found",
       suggestion: function(suggestion) {
         return `<a href="${suggestion.uri.replace("en","")}">${suggestion._highlightResult.title.value}</a>`;
       },
