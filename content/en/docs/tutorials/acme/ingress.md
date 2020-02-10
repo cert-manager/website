@@ -132,7 +132,7 @@ quickstart-nginx-ingress  0s
 ==> v1/Service
 quickstart-nginx-ingress-controller       0s
 quickstart-nginx-ingress-default-backend  0s
-
+```
 
 NOTES:
 The nginx-ingress controller has been installed.
@@ -141,6 +141,7 @@ You can watch the status by running 'kubectl --namespace default get services -o
 
 An example Ingress that makes use of the controller:
 
+```yaml
   apiVersion: extensions/v1beta1
   kind: Ingress
   metadata:
@@ -391,7 +392,7 @@ $ kubectl describe issuer letsencrypt-staging
 Name:         letsencrypt-staging
 Namespace:    default
 Labels:       <none>
-Annotations:  kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"cert-manager.io/v1alpha2","kind":"Issuer","metadata":{"annotations":{},"name":"letsencrypt-staging","namespace":"default"},"spec":{"a...
+Annotations:  kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"cert-manager.io/v1alpha2","kind":"Issuer","metadata":{"annotations":{},"name":"letsencrypt-staging","namespace":"default"},(...)}
 API Version:  cert-manager.io/v1alpha2
 Kind:         Issuer
 Metadata:
