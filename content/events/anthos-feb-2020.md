@@ -10,7 +10,7 @@ end_time: "11:00am"
 eventbrite_id: 89237633163
 ---
 
-## 'Breakfast Briefing' with Jetstack and Google
+## 'Breakfast Briefing' with Jetstack and Google Cloud
 
 The first 'Breakfast Briefing' hosted by Jetstack is here! For this event we're
 excited to have our speakers share some of their experiences in the delivery of
