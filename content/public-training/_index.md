@@ -12,14 +12,6 @@ testimonial:
   profileImage:
   quoter: 'Workshop Attendee'
 course_dates:
-- date: '28 January 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Day 1'
-  eventbriteId: 85623866289
-- date: '29 January 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Day 2'
-  eventbriteId: 85623753953
 - date: '12 February 2020'
   title: 'Kubernetes in Practice'
   level: 'Day 1'
@@ -44,6 +36,14 @@ course_dates:
   title: 'Kubernetes in Practice'
   level: 'Day 2'
   eventbriteId: 85634494077
+- date: '18 March 2020'
+  title: 'Kubernetes in Practice'
+  level: 'Day 1'
+  eventbriteId: 94122778765
+- date: '19 March 2020'
+  title: 'Kubernetes in Practice'
+  level: 'Day 2'
+  eventbriteId: 94122971341
 og:
   description: Hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently
   image: /img/jpg/public-training-header-bg.jpg
