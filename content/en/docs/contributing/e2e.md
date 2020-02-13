@@ -44,7 +44,7 @@ You need to have a Kind cluster running, if you don't have one set up you can se
 $ ./devel/setup-e2e-tests.sh
 ```
 
-Once you have one set up you need to install all dependancies in the cluster using:
+Once you have one set up you need to install all dependencies in the cluster using:
 ```bash
 $ ./devel/create.sh
 ```
@@ -69,7 +69,7 @@ More info on how to use this can be found in the [Ginkgo documentation](https://
 
 ## End-to-End Test Structure
 
-The ent-to-end tests consist of 2 big parts: the isssuer specific tests and the conformance suite. These tests use the [Ginkgo library](https://onsi.github.io/ginkgo/#getting-ginkgo) to run tests.
+The end-to-end tests consist of 2 big parts: the issuer specific tests and the conformance suite. These tests use the [Ginkgo library](https://onsi.github.io/ginkgo/#getting-ginkgo) to run tests.
 
 ### Conformance suite
 ### RBAC
@@ -77,5 +77,5 @@ This suite tests all RBAC permissions granted to cert-manager on the cluster to 
 ### Certificates
 This suite tests certificate functionality against all issuers.
 #### Feature sets
-This exists to only test a certain feature (eg. Email SAN) against issuers that support this feature.
+This exists to only test a certain feature (e.g. Email SAN) against issuers that support this feature.
 Each test specifies a used feature using `s.checkFeatures(feature)`, this is then checked against the issuer's `UnsupportedFeatures` list to check if it can be ran against the issuer.
