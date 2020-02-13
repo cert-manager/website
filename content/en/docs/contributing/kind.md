@@ -55,6 +55,7 @@ re-generated with the following command:
 ./hack/update-crds.yaml
 ```
 
+Note that this script only apply patches to the existing CRDs not fully regenerates them.
 The updated CRDs are now available from `./deploy/manifests/00-crds.yaml`.
 
 ## Destroy the Cluster
