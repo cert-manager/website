@@ -52,7 +52,7 @@ After changes have been made to the API, the Custom Resource Definitions can be
 re-generated with the following command:
 
 ```bash
-./hack/update-crds.yaml
+./hack/update-crds.sh
 ```
 
 Note that this script only apply patches to the existing CRDs not fully regenerates them.
