@@ -61,7 +61,7 @@ $ ./devel/run-e2e.sh
 The full suite may take up to 30 minutes to run.
 You can monitor output of this command to track progress.
 
-Note: *If you did not use `create.sh` to create the cluster you will notice that ACME HTTP01 end-to-end tests will fail, as they require the 'service cidr' to be set to 10.0.0.0/16 as the ingress controller is deployed with the fixed IP 10.0.0.15 to allow [Pebble](https://github.com/letsencrypt/pebble) to access it on a predictable address for e2e tests as our test DNS name certmanager.kubernetes.network points to 10.0.0.15.*
+Note: *If you did not use `create.sh` to create the cluster you will notice that ACME HTTP01 end-to-end tests will fail, as they require the 'service CIDR' to be set to 10.0.0.0/16 as the ingress controller is deployed with the fixed IP 10.0.0.15 to allow [Pebble](https://github.com/letsencrypt/pebble) to access it on a predictable address for end-to-end tests as our test DNS name `certmanager.kubernetes.network` points to 10.0.0.15.*
 
 You can also run a specific part of the test using `--ginkgo.focus`
 ```bash
