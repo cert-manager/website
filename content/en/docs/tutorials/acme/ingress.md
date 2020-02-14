@@ -132,7 +132,6 @@ quickstart-nginx-ingress  0s
 ==> v1/Service
 quickstart-nginx-ingress-controller       0s
 quickstart-nginx-ingress-default-backend  0s
-```
 
 NOTES:
 The nginx-ingress controller has been installed.
@@ -141,7 +140,6 @@ You can watch the status by running 'kubectl --namespace default get services -o
 
 An example Ingress that makes use of the controller:
 
-```yaml
   apiVersion: extensions/v1beta1
   kind: Ingress
   metadata:
