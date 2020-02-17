@@ -20,3 +20,16 @@ This facilitates enterprises to deploy their software to the environment of thei
 Whether it's running on-premises or in a cloud environment, Kubernetes provides a consistent platform for running distributed workloads. Through either managed services, licensed vendor offerings or self hosting, the platform will be homogeneous such that workloads can be scheduled based on business decisions.
 
 Common abstractions atop of Kubernetes such as Istio are providing further capabilities to secure, observe and manage our environments and workloads. Coupled with hybrid solutions, multi-mesh architectures can enable communication between federated meshes and organisational boundaries, further bridging the gap between segregated clusters of compute.
+
+## Agenda
+
+1 :00pm        Arrive - tea/coffee, networking
+1:30pm         Introduction and Welcome from Jetstack (less time required here this time?)
+2:00pm         'Running Enterprise workloads in Hybrid Kubernetes & Multi Mesh topologies' by Paul Jones,  Jetstack / Q & A
+2:45pm         'TBC' by Nick TBC, William Hill / Q & A
+3:30pm         Short Break
+3:45pm         'Unconference' Breakout sessions 
+4:30pm         Presenting back 
+5pm            Drinks & networking in the bar
+
+Please register now to reserve your place!
