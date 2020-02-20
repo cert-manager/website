@@ -86,7 +86,7 @@ By default, type `NodePort` will be used when you don't set HTTP01 or when you s
 ### `podTemplate`
 
 You may wish to change or add to the labels and annotations of solver pods.
-These can be configured under the `metadata` field under `podTemplate`. 
+These can be configured under the `metadata` field under `podTemplate`.
 
 Similarly, you can set the `nodeSelector`, tolerations and affinity of solver
 pods by configuring under the `spec` field of the `podTemplate`. No other

@@ -143,7 +143,7 @@ $ helm install \
   --namespace cert-manager \
   --version v0.13.1 \
   jetstack/cert-manager
-  
+
 ```
 
 The default cert-manager configuration is good for the majority of users, but a
@@ -196,7 +196,7 @@ metadata:
   name: selfsigned-cert
   namespace: cert-manager-test
 spec:
-  dnsNames: 
+  dnsNames:
     - example.com
   secretName: selfsigned-cert-tls
   issuerRef:

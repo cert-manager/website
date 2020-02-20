@@ -70,7 +70,7 @@ the project easy.
 
 Whilst this is the first launch of the new website, there is still lots to do!
 If you have any feedback, ideas or expertise to improve the site, please open
-an issue or make a contribution over in the new 
+an issue or make a contribution over in the new
 [cert-manager/website](https://github.com/cert-manager/website) repository.
 
 ### Multi-architecture images
@@ -142,14 +142,14 @@ will be a required component in clusters running Kubernetes 1.15 or greater.
 
 ### Bug Fixes
 
-- Fixes issues with Pod Security Policies that prevented pods from running when Pod Security Policy is enabled in Kubernetes ([#2234](https://github.com/jetstack/cert-manager/pull/2234), 
+- Fixes issues with Pod Security Policies that prevented pods from running when Pod Security Policy is enabled in Kubernetes ([#2234](https://github.com/jetstack/cert-manager/pull/2234),
 [`@sam-cogan`](https://github.com/sam-cogan))
-- Fix issue causing certificates not to be issued when running with `OwnerReferencesPermissionEnforcement` admission controller enabled ([#2325](https://github.com/jetstack/cert-manager/pull/2325), 
+- Fix issue causing certificates not to be issued when running with `OwnerReferencesPermissionEnforcement` admission controller enabled ([#2325](https://github.com/jetstack/cert-manager/pull/2325),
 [`@CoaxVex`](https://github.com/CoaxVex))
-- Fix bug causing SIGTERM and SIGINT signals to not be respected whilst the controller is performing leader election ([#2236](https://github.com/jetstack/cert-manager/pull/2236), 
+- Fix bug causing SIGTERM and SIGINT signals to not be respected whilst the controller is performing leader election ([#2236](https://github.com/jetstack/cert-manager/pull/2236),
 [`@munnerz`](https://github.com/munnerz))
 - Fix setting `ownerReference` on Challenge resources created by Orders controller ([#2324](https://github.com/jetstack/cert-manager/pull/2324), [`@CoaxVex`](https://github.com/CoaxVex))
-- Allow `CloudDNS` resolvers to be validated correctly without `serviceAccountSecretRef` to allow ambient permissions to be used. ([#2250](https://github.com/jetstack/cert-manager/pull/2250), 
+- Allow `CloudDNS` resolvers to be validated correctly without `serviceAccountSecretRef` to allow ambient permissions to be used. ([#2250](https://github.com/jetstack/cert-manager/pull/2250),
 [`@baelish`](https://github.com/baelish))
 - Add missing `apiVersion` to `Chart.yaml` ([#2270](https://github.com/jetstack/cert-manager/pull/2270), [`@yurrriq`](https://github.com/yurrriq))
 - Perform API resource validation of the 'status' subresource on cert-manager resources ([#2283](https://github.com/jetstack/cert-manager/pull/2283), [`@munnerz`](https://github.com/munnerz))
@@ -159,7 +159,7 @@ will be a required component in clusters running Kubernetes 1.15 or greater.
 ### Other Notable Changes
 
 - Explicitly define `containerPort` protocol in helm chart ([#2405](https://github.com/jetstack/cert-manager/pull/2405), [`@bouk`](https://github.com/bouk))
-- Allow permissive acceptance for matching Certificates with Secrets that are using legacy annotations to reduce non-required certificate reissue. 
+- Allow permissive acceptance for matching Certificates with Secrets that are using legacy annotations to reduce non-required certificate reissue.
 ([#2400](https://github.com/jetstack/cert-manager/pull/2400), [`@JoshVanL`](https://github.com/JoshVanL))
 - Add API token authentication option to CloudFlare issuer ([#2170](https://github.com/jetstack/cert-manager/pull/2170), [`@matevzmihalic`](https://github.com/matevzmihalic))
 - Bump Kubernetes client library dependencies to 1.16.3 ([#2290](https://github.com/jetstack/cert-manager/pull/2290), [`@munnerz`](https://github.com/munnerz))
@@ -168,19 +168,19 @@ will be a required component in clusters running Kubernetes 1.15 or greater.
 - Add `serverAuth` extended key usage to Certificates by default ([#2351](https://github.com/jetstack/cert-manager/pull/2351), [`@JoshVanL`](https://github.com/JoshVanL))
 - Surface more information about ACME authorization failures on Challenge resources ([#2261](https://github.com/jetstack/cert-manager/pull/2261), [`@munnerz`](https://github.com/munnerz))
 - Add documentation for the webhook ([#2252](https://github.com/jetstack/cert-manager/pull/2252), [`@cgroschupp`](https://github.com/cgroschupp))
-- Add support for API resource conversion to the webhook. NOTE: this feature is **not** currently utilized by cert-manager ([#2001](https://github.com/jetstack/cert-manager/pull/2001), 
+- Add support for API resource conversion to the webhook. NOTE: this feature is **not** currently utilized by cert-manager ([#2001](https://github.com/jetstack/cert-manager/pull/2001),
 [`@munnerz`](https://github.com/munnerz))
 - Remove nested `cainjector` sub chart and include it in main chart ([#2285](https://github.com/jetstack/cert-manager/pull/2285), [`@munnerz`](https://github.com/munnerz))
-- Change the default webhook listen address to 10250 for better compatibility with GKE private clusters ([#2278](https://github.com/jetstack/cert-manager/pull/2278), 
+- Change the default webhook listen address to 10250 for better compatibility with GKE private clusters ([#2278](https://github.com/jetstack/cert-manager/pull/2278),
 [`@munnerz`](https://github.com/munnerz))
 - Bump Helm & Tiller version used during end-to-end tests to 2.15.1 ([#2275](https://github.com/jetstack/cert-manager/pull/2275), [`@munnerz`](https://github.com/munnerz))
-- Make `spec.csr`, `status.url`, `status.finalizeURL`, `status.certificate`, `status.authorizations`, `status.authorizations[].url`, `status.authorizations[].identifier`, 
-`status.authorizations[].wildcard`, `status.authorizations[].challenges`, `status.authorizations[].challenges[].url`, `status.authorizations[].challenges[].type`, 
+- Make `spec.csr`, `status.url`, `status.finalizeURL`, `status.certificate`, `status.authorizations`, `status.authorizations[].url`, `status.authorizations[].identifier`,
+`status.authorizations[].wildcard`, `status.authorizations[].challenges`, `status.authorizations[].challenges[].url`, `status.authorizations[].challenges[].type`,
 `status.authorizations[].challenges[].token` fields on Order resources immutable ([#2219](https://github.com/jetstack/cert-manager/pull/2219), [`@munnerz`](https://github.com/munnerz))
 - No longer use architecture specific `acmesolver` images ([#2242](https://github.com/jetstack/cert-manager/pull/2242), [`@munnerz`](https://github.com/munnerz))
 - enable cert-manager using `--kubeconfig` to connect API Server with `kubeconfig` file ([#2224](https://github.com/jetstack/cert-manager/pull/2224), [`@answer1991`](https://github.com/answer1991))
 - Publish multi-architecture docker manifest lists ([#2230](https://github.com/jetstack/cert-manager/pull/2230), [`@munnerz`](https://github.com/munnerz))
 - Make `order.status.authorizations[].wildcard` field a `*bool` ([#2225](https://github.com/jetstack/cert-manager/pull/2225), [`@munnerz`](https://github.com/munnerz))
-- [Kubernetes APIServer dry-run](https://kubernetes.io/docs/reference/using-api/api-concepts/&#35;dry-run) is supported. ([#2206](https://github.com/jetstack/cert-manager/pull/2206), 
+- [Kubernetes APIServer dry-run](https://kubernetes.io/docs/reference/using-api/api-concepts/&#35;dry-run) is supported. ([#2206](https://github.com/jetstack/cert-manager/pull/2206),
 [`@ismailbaskin`](https://github.com/ismailbaskin))
 
