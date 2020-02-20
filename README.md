@@ -9,7 +9,7 @@ We provide a number of scripts that can be used to build and develop the site.
 
 ### Branches
 
-The 'master' branch should be targetted for the majority of PRs.
+The 'master' branch should be targeted for the majority of PRs.
 
 This repo has 'release branches' (i.e. `release-0.12`, `release-0.13`, ...).
 These are kept in-line with the release branches in the
