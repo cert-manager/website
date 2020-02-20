@@ -161,11 +161,9 @@ An example Ingress that makes use of the controller:
         - hosts:
             - www.example.com
           secretName: example-tls
-```
 
 If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
 
-```yaml
 apiVersion: v1
 kind: Secret
 metadata:
