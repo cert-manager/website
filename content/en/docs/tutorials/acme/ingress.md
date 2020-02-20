@@ -133,7 +133,6 @@ quickstart-nginx-ingress  0s
 quickstart-nginx-ingress-controller       0s
 quickstart-nginx-ingress-default-backend  0s
 
-
 NOTES:
 The nginx-ingress controller has been installed.
 It may take a few minutes for the LoadBalancer IP to be available.
@@ -391,7 +390,7 @@ $ kubectl describe issuer letsencrypt-staging
 Name:         letsencrypt-staging
 Namespace:    default
 Labels:       <none>
-Annotations:  kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"cert-manager.io/v1alpha2","kind":"Issuer","metadata":{"annotations":{},"name":"letsencrypt-staging","namespace":"default"},"spec":{"a...
+Annotations:  kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"cert-manager.io/v1alpha2","kind":"Issuer","metadata":{"annotations":{},"name":"letsencrypt-staging","namespace":"default"},(...)}
 API Version:  cert-manager.io/v1alpha2
 Kind:         Issuer
 Metadata:
