@@ -74,7 +74,7 @@ $ kubectl apply \
        -f https://github.com/jetstack/cert-manager/releases/download/<version>/cert-manager.yaml
 ```
 
-> Note: If you are running Kubernetes `v1.15` or below, you will need to add the
+> Note: If you are running Kubernetes `v1.15.4` or below, you will need to add the
 > `--validate=false` flag to your `kubectl apply` command above else you will
 > receive a validation error relating to the
 > `x-kubernetes-preserve-unknown-fields` field in our `CustomResourceDefinition`
