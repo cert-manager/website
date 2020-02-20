@@ -26,7 +26,7 @@ autocomplete('#search-box', { hint: false }, [
           ${suggestion._snippetResult.content.value}
         </div>`;
       },
-      footer: '<div class="algolia-branding"><img src="/images/search-by-algolia-light-background.svg" alt="Search powered by Algolia" /></div>',
+      footer: '<div class="algolia-branding"><a href="https://algolia.com"><img src="/images/search-by-algolia-light-background.svg" alt="Search powered by Algolia" /></a></div>',
     }
   }
 ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
