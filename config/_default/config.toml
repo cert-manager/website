@@ -91,3 +91,8 @@ navbar_logo = true
 id = "UA-78700849-2"
 
 googleAnalytics = "UA-78700849-2"
+
+
+[algolia]
+index = "cert-manager-latest"
+appID = "18N9PEKHUC"
