@@ -41,13 +41,13 @@ Bazel, Docker and `kubectl` should be installed through your preferred means.
 
 You need to have a Kind cluster running, if you don't have one set up you can set one up using:
 ```bash
-$ ./devel/create.sh
+$ ./devel/cluster/create.sh
 ```
 
 Once you have one set up you need to install all dependencies in the cluster using:
 
 ```bash
-$ ./devel/setup-e2e-tests.sh
+$ ./devel/setup-e2e-deps.sh
 ```
 
 ## Run End-to-End Tests
