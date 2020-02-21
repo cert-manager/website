@@ -27,7 +27,7 @@ jobs against each version of Kubernetes.
 
 Versions lower than the current Kubernetes version down to `N-4` is *not
 guaranteed*. Although considerations will be made to ensure compatibility with as
-many versions as possible, it is sometimes required to loose compatibility in
+many versions as possible, it is sometimes required to lose compatibility in
 the interest of furthering the feature set of cert-manager and making use of
 newer features available in upstream Kubernetes.
 
