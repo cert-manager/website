@@ -30,18 +30,55 @@ run the tests:
   not required. For non-Linux hosts (i.e. OSX), you will need to ensure you have
   a relatively new version of `kubectl` available on your PATH.
 
+- `kind`: We use kind to provision a Kubernetes cluster.
+
 - An internet connection: tests require access to DNS, and optionally CloudFlare
   APIs (if a CloudFlare API token is provided).
 
 Bazel, Docker and `kubectl` should be installed through your preferred means.
+
+## Set up End-to-End Tests
+
+You need to have a Kind cluster running, if you don't have one set up you can set one up using:
+```bash
+$ ./devel/cluster/create.sh
+```
+
+Once you have one set up you need to install all dependencies in the cluster using:
+
+```bash
+$ ./devel/setup-e2e-deps.sh
+```
 
 ## Run End-to-End Tests
 
 You can run the end-to-end tests by executing the following:
 
 ```bash
-$ ./hack/ci/run-e2e-kind.sh
+$ ./devel/run-e2e.sh
 ```
 
-The full suite may take up to 10 minutes to run.
+The full suite may take up to 30 minutes to run.
 You can monitor output of this command to track progress.
+
+Note: *If you did not use `create.sh` to create the cluster you will notice that ACME HTTP01 end-to-end tests will fail, as they require the 'service CIDR' to be set to 10.0.0.0/16 as the ingress controller is deployed with the fixed IP 10.0.0.15 to allow [Pebble](https://github.com/letsencrypt/pebble) to access it on a predictable address for end-to-end tests as our test DNS name `certmanager.kubernetes.network` points to 10.0.0.15.*
+
+You can also run a specific part of the test using `--ginkgo.focus`
+```bash
+$ ./devel/run-e2e.sh --ginkgo.focus "<text regex>"
+```
+More info on how to use this can be found in the [Ginkgo documentation](https://onsi.github.io/ginkgo/#focused-specs)
+
+
+## End-to-End Test Structure
+
+The end-to-end tests consist of 2 big parts: the issuer specific tests and the conformance suite. These tests use the [Ginkgo library](https://onsi.github.io/ginkgo/#getting-ginkgo) to run tests.
+
+### Conformance suite
+### RBAC
+This suite tests all RBAC permissions granted to cert-manager on the cluster to check that it is able to operate correctly.
+### Certificates
+This suite tests certificate functionality against all issuers.
+#### Feature sets
+This exists to only test a certain feature (e.g. Email SAN) against issuers that support this feature.
+Each test specifies a used feature using `s.checkFeatures(feature)`, this is then checked against the issuer's `UnsupportedFeatures` list to check if it can be ran against the issuer.
