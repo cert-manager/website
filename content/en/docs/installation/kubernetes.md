@@ -53,8 +53,7 @@ $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/rel
 > them again after elevating your permissions:
 
 > **Note**: By default, cert-manager will be installed into the `cert-manager`
-> namespace. It is possible to run cert-manager in a different namespace, although you > will need to make modifications to the deployment manifests or add `-n $namespace`
-> for `kubectl apply`.
+> namespace. It is possible to run cert-manager in a different namespace, although you > will need to make modifications to the deployment manifests.
 
 ```bash
 kubectl create clusterrolebinding cluster-admin-binding \
