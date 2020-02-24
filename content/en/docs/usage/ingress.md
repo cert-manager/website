@@ -59,6 +59,9 @@ trigger `Certificate` resources to be automatically created:
 - `cert-manager.io/issuer-kind`: the name of an external `Issuer`
   controller's `CustomResourceDefinition` (only necessary for out-of-tree `Issuers`)
 
+- `cert-manager.io/issuer-group`: the name of the API group of external
+  `Issuer` controller (only necessary for out-of-tree `Issuers`)
+
 - `kubernetes.io/tls-acme: "true"`: this annotation requires additional
   configuration of the ingress-shim [see below](./#optional-configuration).
   Namely, a default `Issuer` must be specified as arguments to the
