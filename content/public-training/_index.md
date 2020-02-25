@@ -29,11 +29,11 @@ course_dates:
   level: 'Day 2'
   eventbriteId: 94122971341
 - date: '1 April 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Istio'
+  title: 'Istio'
+  level: 'Day 1'
   eventbriteId: 96658573395 
 - date: '2 April 2020'
-  title: 'Kubernetes in Practice'
+  title: 'Serverless on Kubernetes'
   level: 'Knative'
   eventbriteId: 96659620527
 - date: '7 April 2020'
@@ -69,11 +69,11 @@ course_dates:
   level: 'Day 2'
   eventbriteId: 96661008679
 - date: '24 June 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Istio'
+  title: 'Istio'
+  level: 'Day 1'
   eventbriteId: 96661209279
 - date: '25 June 2020'
-  title: 'Kubernetes in Practice'
+  title: 'Serverless on Kubernetes'
   level: 'Knative'
   eventbriteId: 96661516197
 
