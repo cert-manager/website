@@ -11,8 +11,9 @@ bundle into the [webhook's](../webhook/) `ValidatingWebhookConfiguration` and
 API server to 'trust' the webhook API server.
 
 This component is configured using the `cert-manager.io/inject-apiserver-ca:
-"true"` and `cert-manager.io/inject-apiserver-ca: "true"` annotations on the
-`ValidatingWebhookConfiguration` and `MutatingWebhookConfiguration` resources.
+"true"` and `cert-manager.io/inject-ca-from: <NAMESPACE>/<CERTIFICATE>`
+annotations on the `ValidatingWebhookConfiguration` and
+`MutatingWebhookConfiguration` resources.
 
 It copies across the CA defined in the `cert-manager-webhook-ca` `Secret` over
 to the `clientConfig.caBundle` field in both the
