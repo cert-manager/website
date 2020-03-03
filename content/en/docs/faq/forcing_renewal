@@ -1,0 +1,15 @@
+---
+title: "Forcing Certificate Renewal"
+linkTitle: "forcing_renewal"
+weight: 60
+type: "docs"
+---
+
+If you need to force the renewal of your certificates, then you can simply delete
+the certificate in your kubernetes cluster and cert-manager will get a new one
+(tested with cert-manager 0.9.1).
+
+The certificate will be in a kubernetes secret. **Take care not to remove the wrong secret**:
+there can be multiple secrets of the same name in different namespaces! Before deleting the
+secret you can have a look at it with `kubectl get secret name_of_your_secret -o yaml`. It
+should have an entry named `tls.crt` which is the certificate that was issued to you.
