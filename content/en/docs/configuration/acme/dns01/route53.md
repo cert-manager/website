@@ -121,7 +121,7 @@ spec:
       dns01:
         route53:
           region: us-east-1
-          hostedZoneID: DIKER8JEXAMPLE # optional, see bpolicy above
+          hostedZoneID: DIKER8JEXAMPLE # optional, see policy above
           role: arn:aws:iam::XXXXXXXXXXXX:role/dns-manager
 
     # this solver handles foobar.cloud challenges
