@@ -125,3 +125,8 @@ Events:
 
 Progress about the state of each challenge will be recorded either as Events
 or on the Challenge's `status` block (as shown above).
+
+## March 2020 Let's Encrypt CAA Rechecking Bug
+Following the [announcement on March 4](https://community.letsencrypt.org/t/revoking-certain-certificates-on-march-4/114864) Let's Encrypt will be revoking a number of certificates due to a bug in the way they validate CAA records, we have created a tool to analyse your existing cert-manager managed certificates and compare their serial numbers to the publicised list of revoked certificates.
+It's advised that all users of Let's Encrypt & cert-manager run a check using this tool to ensure they do not experience any invalid certificate errors in clusters.
+You can find a copy of the checker tool here: https://github.com/jetstack/letsencrypt-caa-bug-checker.
