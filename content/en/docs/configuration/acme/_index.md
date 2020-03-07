@@ -61,7 +61,7 @@ spec:
     email: user@example.com
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      # Secret resource used to store the account's private key.
+      # Secret resource that will be used to store the account's private key.
       name: example-issuer-account-key
     # Add a single challenge solver, HTTP01 using nginx
     solvers:
