@@ -32,6 +32,14 @@ version = "v0.13"
   url = "/docs/"
   dirpath = "docs"
 
+# 'Next' version
+################
+[[versions]]
+  version = "v0.14"
+  ghbranchname = "release-0.14"
+  url = "/next-docs/"
+  dirpath = "next-docs"
+
 # Archived versions
 ###################
 # Use format `v0.#-docs` for past version's dirpath
