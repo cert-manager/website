@@ -5,6 +5,113 @@ weight: 30
 type: "docs"
 ---
 
+To configure the AzureDNS DNS01 Challenge in a Kubernetes cluster there are 2 ways:
+- A Managed Identity
+- Service Principal
+
+## Managed Identity
+
+- First of all we need to create the identity in Azure Cloud (the below code is Terraform, but this action can be performed also with azure-cli)
+
+> The resource group must be already existing in order for this to work.
+> This role allows cert-manager to control azuredns zones only in the same resource group as the identity lives in
+
+```terraform
+variable "cluster_name" {
+  type = string
+}
+variable resource_group_name {}
+variable resource_group_id {}
+variable location {}
+
+output client_id {
+  value = azurerm_user_assigned_identity.main.client_id
+}
+
+resource "azurerm_user_assigned_identity" "main" {
+  name                = "${var.cluster_name}-cert-manager"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+}
+
+resource "azurerm_role_definition" "main" {
+  name        = "${var.cluster_name}-cert-manager"
+  scope       = var.resource_group_id
+  description = "This role is used by cert-manager"
+
+  permissions {
+    actions = [
+      "Microsoft.Network/dnsZones/*/read",
+      "Microsoft.Network/dnsZones/*/write",
+      "Microsoft.Network/dnsZones/*/delete",
+      "Microsoft.Network/dnsZones/read",
+    ]
+  }
+  assignable_scopes = [
+    var.resource_group_id
+  ]
+}
+
+resource "azurerm_role_assignment" "main" {
+  scope              = var.resource_group_id
+  role_definition_id = azurerm_role_definition.main.id
+  principal_id       = azurerm_user_assigned_identity.main.principal_id
+}
+```
+
+> and obtain the `client_id` from the identity just created
+
+- Install https://github.com/Azure/aad-pod-identity and make sure it's working properly
+
+- in the namespace where cert-manager will be installed please add these 2 kubernetes resources 
+
+> to obtain subcription_id please use `az account show` cli command
+
+```yaml
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentity
+metadata:
+  annotations:
+    aadpodidentity.k8s.io/Behavior: namespaced
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  ClientID: <client_id>
+  ResourceID: /subscriptions/<subscription_id>/resourcegroups/<resource_group_name>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<identity_name>
+  type: 0
+---
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentityBinding
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  AzureIdentity: cert-manager
+  Selector: cert-manager
+```
+
+- Add `aadpodidbinding: cert-manager` label to cert-manager controller pod
+`kubectl label deployment cert-manager -n cert-manager aadpodidbinding=cert-manager`
+
+- Create Issuer/ClusterIssuer without `clientID`, `clientSecretSecretRef` and `tenantID`
+
+```yaml
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: example-issuer
+spec:
+  acme:
+    ...
+    solvers:
+    - dns01:
+        azuredns:
+          subscriptionID: <subscription_id>
+          resourceGroupName: <resource_group_name>
+          hostedZoneName: AZURE_DNS_ZONE
+```
+
+## Service Principal
 Configuring the AzureDNS DNS01 Challenge for a Kubernetes cluster requires
 creating a service principal in Azure.
 
