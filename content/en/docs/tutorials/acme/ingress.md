@@ -26,7 +26,7 @@ $ brew install kubernetes-helm
 
 ## Step 1 - Install Tiller
 
-> *Skip this section if you have Tiller set-up. Ignore this part for Helm version3*
+> *Skip this section if you have Tiller set-up. Ignore this part for Helm version 3*
 
 Tiller is Helm's server-side component, which the `helm` client uses to
 deploy resources.
