@@ -11,10 +11,10 @@ To configure the AzureDNS DNS01 Challenge in a Kubernetes cluster there are 2 wa
 
 ## Managed Identity
 
-- First of all we need to create the identity in Azure Cloud (the below code is Terraform, but this action can be performed also with azure-cli)
+- First of all we need to create the identity in Azure Cloud (the below code is Terraform, but this action can be performed also with `azure-cli`)
 
 > The resource group must be already existing in order for this to work.
-> This role allows cert-manager to control azuredns zones only in the same resource group as the identity lives in
+> This role allows `cert-manager` to control azuredns zones only in the same resource  group as the identity lives in
 
 ```terraform
 variable "cluster_name" {
@@ -63,9 +63,9 @@ resource "azurerm_role_assignment" "main" {
 
 - Install https://github.com/Azure/aad-pod-identity and make sure it's working properly
 
-- in the namespace where cert-manager will be installed please add these 2 kubernetes resources 
+- in the namespace where `cert-manager` will be installed please add these two Kubernetes resources 
 
-> to obtain subcription_id please use `az account show` cli command
+> to obtain `subcription_id` please use `az account show` command line tool
 
 ```yaml
 apiVersion: aadpodidentity.k8s.io/v1
@@ -93,7 +93,7 @@ spec:
 - Add `aadpodidbinding: cert-manager` label to cert-manager controller pod
 `kubectl label deployment cert-manager -n cert-manager aadpodidbinding=cert-manager`
 
-- Create Issuer/ClusterIssuer without `clientID`, `clientSecretSecretRef` and `tenantID`
+- Create `Issuer/ClusterIssuer` without `clientID`, `clientSecretSecretRef` and `tenantID`
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
