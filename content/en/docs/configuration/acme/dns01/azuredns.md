@@ -14,7 +14,7 @@ To configure the AzureDNS DNS01 Challenge in a Kubernetes cluster there are 2 wa
 - First of all we need to create the identity in Azure Cloud (the below code is Terraform, but this action can be performed also with `azure-cli`)
 
 > The resource group must be already existing in order for this to work.
-> This role allows `cert-manager` to control azuredns zones only in the same resource  group as the identity lives in
+> This role allows `cert-manager` to control `AzureDNS` zones in the same resource group as the identity lives in
 
 ```terraform
 variable "cluster_name" {
