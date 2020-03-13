@@ -5,13 +5,20 @@ weight: 140
 type: "docs"
 ---
 
-In `v0.14` we've focused on a number of areas:
+The `v0.14` release has a few focus areas:
+
+* Improving the deployment/installation process
+* Improving the release process
+* `CustomResourceDefinition` conversion
+* Support for older Kubernetes and OpenShift versions
+* Experimental 'bundle' output format for Certificates
+
+As usual, please read the [upgrade notes](/docs/installation/upgrading/upgrading-0.13-0.14.md) before upgrading.
 
 ## Webhook changes
 
-The webhook component has now been made required, meaning any users that previously used the `no-webhook` variant will
-need to upgrade their installations to enable the webhook. This will be done automatically upon upgrading to the `v0.14`
-release, so no additional action is required.
+**The webhook component is now required.**
+The webhook will be automatically enabled by the `v0.14` manifests, so no additional action is required.
 
 If you have issues running the webhook in your environment, we'd like to hear from you! We are aware of issues relating
 to firewall rules from the Kubernetes API server to the webhook pod(s) - we would like to gather together a corpus of
@@ -48,6 +55,8 @@ With this we have enabled the 'conversion webhook', which enables API clients to
 Thanks to this conversion webhook, this upgrade and future upgrades after it should be seamless. The ability to make
 these kinds of changes to our API will enable the `v1beta1` API version to be released in a seamless manner in an
 upcoming release too.
+
+More information on the webhook can be found in the [concepts section](/docs/concepts/webhook).
 
 ## Support for Kubernetes 1.11 and OpenShift 3.11
 
