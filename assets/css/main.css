@@ -2368,6 +2368,7 @@ Introduced on new Subscription Page
   background-image: url(/img/svg/jetstack-stripes-and-bg.svg);
   background-repeat: no-repeat;
   background-position: -60px calc(100% + 170px);
+  background-size: cover;
 }
 
 
