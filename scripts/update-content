@@ -25,9 +25,11 @@ set -o pipefail
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
+# The branches named here exist in the 'cert-manager/website' repo.
 "${REPO_ROOT}/scripts/bin/multiversion" \
 	--repo-url https://github.com/cert-manager/website.git \
 	--repo-content-dir content/en/docs \
 	--output-dir "${REPO_ROOT}/content/en" \
+	--branches v0.13-docs=release-0.13 \
 	--branches v0.12-docs=release-0.12 \
-	--branches next-docs=release-0.14
+	--branches next-docs=release-next
