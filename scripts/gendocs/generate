@@ -71,8 +71,10 @@ genversion() {
 	popd
 }
 
+genversion "release-0.14" "next-docs"
 genversion "release-0.13" "docs"
 genversion "release-0.12" "v0.12-docs"
+
 ## Use the following line as a template when adding new versions to the website
 # genversion "release-0.11" "v0.11-docs"
 
