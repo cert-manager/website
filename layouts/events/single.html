@@ -34,14 +34,18 @@
                 <th>Date</th>
                 <td>{{ .Params.event_date }}</td>
               </tr>
-              <tr>
-                <th>Start Time</th>
-                <td>{{ .Params.start_time }}</td>
-              </tr>
-              <tr>
-                <th>End Time</th>
-                <td>{{ .Params.end_time }}</td>
-              </tr>
+              {{ if .Params.start_time }}
+                <tr>
+                  <th>Start Time</th>
+                  <td>{{ .Params.start_time }}</td>
+                </tr>
+              {{ end }}
+              {{ if .Params.end_time }}
+                <tr>
+                  <th>End Time</th>
+                  <td>{{ .Params.end_time }}</td>
+                </tr>
+              {{ end }}
             {{ end }}
           </table>
 
