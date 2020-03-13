@@ -31,7 +31,7 @@ course_dates:
 - date: '1 April 2020'
   title: 'Istio'
   level: 'Day 1'
-  eventbriteId: 96658573395 
+  eventbriteId: 96658573395
 - date: '2 April 2020'
   title: 'Serverless on Kubernetes'
   level: 'Knative'
@@ -39,7 +39,7 @@ course_dates:
 - date: '7 April 2020'
   title: 'Kubernetes in Practice (Stockholm)'
   level: 'Day 1'
-  eventbriteId: 95256768559 
+  eventbriteId: 95256768559
 - date: '8 April 2020'
   title: 'Kubernetes in Practice (Stockholm)'
   level: 'Day 2'
@@ -47,7 +47,7 @@ course_dates:
 - date: '29 April 2020'
   title: 'Kubernetes in Practice'
   level: 'Day 1'
-  eventbriteId: 96659706785 
+  eventbriteId: 96659706785
 - date: '30 April 2020'
   title: 'Kubernetes in Practice'
   level: 'Day 2'
@@ -55,7 +55,7 @@ course_dates:
 - date: '12 May 2020'
   title: 'Kubernetes in Practice (Stockholm)'
   level: 'Day 1'
-  eventbriteId: 96660220321  
+  eventbriteId: 96660220321
 - date: '13 May 2020'
   title: 'Kubernetes in Practice (Stockholm)'
   level: 'Day 2'
@@ -63,7 +63,7 @@ course_dates:
 - date: '27 May 2020'
   title: 'Kubernetes in Practice'
   level: 'Day 1'
-  eventbriteId: 96660751911 
+  eventbriteId: 96660751911
 - date: '28 May 2020'
   title: 'Kubernetes in Practice'
   level: 'Day 2'
@@ -84,6 +84,9 @@ og:
 ---
 
 ## Description
+
+> **Due to current concerns around COVID-19 these courses will be delivered
+> remotely**
 
 Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managing
 Linux Containers at massive scale.
