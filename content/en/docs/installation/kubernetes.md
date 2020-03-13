@@ -114,10 +114,10 @@ In order to install the Helm chart, you must follow these steps.
 Install the `CustomResourceDefinition` resources separately.
 ```bash
 # Kubernetes 1.15+
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/untagged-681c789ba37426bee486/cert-manager.crds.yaml
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.0/cert-manager.crds.yaml
 
 # Kubernetes <1.15
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/untagged-681c789ba37426bee486/cert-manager-legacy.crds.yaml
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.0/cert-manager-legacy.crds.yaml
 ```
 
 > **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the CRDs.
