@@ -1,7 +1,7 @@
 ---
 title: "Upgrading from v0.9 to v0.10"
 linkTitle: "v0.9 to v0.10"
-weight: 60
+weight: 900
 type: "docs"
 ---
 
