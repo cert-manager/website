@@ -13,7 +13,7 @@ The `v0.14` release has a few focus areas:
 * Support for older Kubernetes and OpenShift versions
 * Experimental 'bundle' output format for Certificates
 
-As usual, please read the [upgrade notes](/docs/installation/upgrading/upgrading-0.13-0.14.md) before upgrading.
+As usual, please read the [upgrade notes](/docs/installation/upgrading/upgrading-0.13-0.14/) before upgrading.
 
 ## Webhook changes
 
@@ -56,7 +56,7 @@ Thanks to this conversion webhook, this upgrade and future upgrades after it sho
 these kinds of changes to our API will enable the `v1beta1` API version to be released in a seamless manner in an
 upcoming release too.
 
-More information on the webhook can be found in the [concepts section](/docs/concepts/webhook).
+More information on the webhook can be found in the [concepts section](/docs/concepts/webhook/).
 
 ## Support for Kubernetes 1.11 and OpenShift 3.11
 
