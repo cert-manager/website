@@ -1,7 +1,7 @@
 ---
 title: "Release Notes"
 linkTitle: "v0.10"
-weight: 100
+weight: 900
 type: "docs"
 ---
 
