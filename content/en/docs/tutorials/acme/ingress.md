@@ -26,7 +26,7 @@ $ brew install kubernetes-helm
 
 ## Step 1 - Install Tiller
 
-> *Skip this section if you have Tiller set-up.*
+> *Skip this section if you have Tiller set-up. Ignore this part for Helm version 3*
 
 Tiller is Helm's server-side component, which the `helm` client uses to
 deploy resources.
@@ -314,7 +314,7 @@ for our site.
 ## Step 5 - Deploy Cert Manager
 
 We need to install cert-manager to do the work with Kubernetes to request a
-certificate and respond to the challenge to validate it. We can use helm or
+certificate and respond to the challenge to validate it. We can use Helm or
 plain Kubernetes manifest to install cert-manager.
 
 Read the [getting started guide](../../../installation/) to install
