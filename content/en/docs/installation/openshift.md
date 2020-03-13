@@ -61,12 +61,19 @@ are included in a single YAML manifest file:
 
 Install the `CustomResourceDefinitions` and cert-manager itself
 ```bash
-$ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.13.1/cert-manager-openshift.yaml
+# OpenShift 4+
+oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.0/cert-manager.yaml
+
+# OpenShift 3.11
+$ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.0/cert-manager-legacy.yaml
 ```
 
- > Node: The `--validate=false` flag is added to the `oc apply` command
- > above else you will receive a validation error relating to the `caBundle`
- > field of the `ValidatingWebhookConfiguration` resource.
+> **Note**: If you're using OpenShift 3 you will need to install the legacy version of the manifests.
+> This version does not have API version conversion and only supports `cert-manager.io/v1apha2` API resources. 
+
+> **Note**: The `--validate=false` flag is added to the `oc apply` command
+> above else you will receive a validation error relating to the `caBundle`
+> field of the `ValidatingWebhookConfiguration` resource.
 
 ## Configuring your first Issuer
 

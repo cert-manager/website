@@ -23,10 +23,11 @@ main functions:
   Changes the contents of resources during create and update operations, for
   example to set default values.
 - [`CustomResourceConversionWebhook`](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definition-versioning/#webhook-conversion):
-  The webhook will also be responsible for implementing a conversion over
-  versions in the cert-manager `CustomResources` (`cert-manager.io`). Although
-  none are currently implemented, the webhook will convert versions from
-  `v1alpha2` to newer versions as they are released.
+  The webhook is also responsible for implementing a conversion over versions
+  in the cert-manager `CustomResources` (`cert-manager.io`). This means that
+  multiple API versions can be supported, such as `v1alpha2`, `v1alpha3`
+  simultaneously, making it possible to rely on a particular version of our
+  configuration schema.
 
 The webhook component is deployed as another pod that runs alongside the main
 cert-manager controller and CA injector components.
