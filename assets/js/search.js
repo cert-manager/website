@@ -1,5 +1,5 @@
 var versionName = "docs"
-let versionMatch = window.location.href.match(/v(.*)-docs\//) 
+let versionMatch = window.location.pathname.match(/v(.*)-docs\//) 
 if (versionMatch && versionMatch[1]) { // check if we matched a version
   versionName = `v${versionMatch[1]}-docs`
 }
