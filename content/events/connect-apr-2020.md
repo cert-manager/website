@@ -1,12 +1,10 @@
 ---
 title: Kubernetes in Hybrid and Multi-Cloud Environments
 image: /events/connect-apr-2020/thumbnail.jpg
-address: "The Hoxton, Blackfriars Rd, South Bank, London SE1 8NY"
-event_date: "April 15th 2020"
+address: "Remote Event"
+event_date: "29th May 2020"
 link: /events/connect-apr-2020
 timestamp: "20200325"
-start_time: "1:00pm"
-end_time: "5:00pm"
 aliases: [/events/connect-mar-2020]
 eventbrite_id: 91594578851
 ---
@@ -25,15 +23,6 @@ Whether it's running on-premises or in a cloud environment, Kubernetes provides 
 
 Common abstractions atop of Kubernetes such as Istio are providing further capabilities to secure, observe and manage our environments and workloads. Coupled with hybrid solutions, multi-mesh architectures can enable communication between federated meshes and organisational boundaries, further bridging the gap between segregated clusters of compute.
 
-**Agenda:**
-
-* 1.00pm: Arrive - tea/coffee, networking
-* 1.30pm: Introduction and Welcome from Jetstack 
-* 2.00pm: 'Running Enterprise workloads in Hybrid Kubernetes & Multi Mesh topologies' by Paul Jones, Jetstack / Q & A
-* 2.45pm: 'TBC' by Nick Perry, William Hill / Q & A
-* 3.30pm: Short Break
-* 3.45pm: 'Unconference' Breakout sessions 
-* 4.30pm: Presenting back 
-* 5.00pm: Drinks & networking in the bar
+**Agenda:** TBC
 
 Please register now to reserve your place!
