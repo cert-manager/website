@@ -189,7 +189,7 @@ check the [FAQ guide](../../faq/).
 The following steps will confirm that cert-manager is set up correctly and able
 to issue basic certificate types.
 
-Create a `ClusterIssuer` to test the webhook works okay.
+Create an `Issuer` to test the webhook works okay.
 ```bash
 $ cat <<EOF > test-resources.yaml
 apiVersion: v1
