@@ -1,5 +1,5 @@
 {{ define "title" }} | {{ .Title }}{{ end }}
-{{ define "description" }}Jetstack Subscription is an offering to help you at every stage of your Kubernetes journey. It gives you a tried and trusted suite of tools to support your team.{{ end }}
+{{ define "description" }}Jetstack Subscription is designed to help you verify, support and continually optimise your Kubernetes production environment.{{ end }}
 
 {{ define "navbar" }}
 {{ partial "navbar/dark.html" . }}
@@ -21,7 +21,7 @@
 
         <div class="media-hero__content">
           <div class="media-hero__graphic">
-            <img src="/img/png/hero-layers.png" alt="" />
+            <img src="/img/svg/hero-layers.svg" alt="" />
           </div>
 
           <div class="media-hero__copy">
@@ -29,12 +29,38 @@
             <p>{{ .Site.Data.config.headline.subscription.strapline }}</p>
             <ul class="media-hero__ctas">
               <li>
-                <a href="#refarchitecture" class="media-hero__cta media-hero__cta--green" data-smooth-scroll>
+                <a href="#breakfixsupport" class="media-hero__cta media-hero__cta--green" data-smooth-scroll>
+                  <span class="media-hero__icon">
+                    {{ partial "svg/icon-support.svg" }}
+                  </span>
+                  <span class="media-hero__cta-content">
+                    <span class="media-hero__cta-text">Break Fix Support</span>
+                    <span class="media-hero__icon">
+                      {{ partial "svg/icon-arrow-right.svg" }}
+                    </span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#cre" class="media-hero__cta media-hero__cta--blue" data-smooth-scroll>
+                  <span class="media-hero__icon">
+                    {{ partial "svg/icon-cre.svg" }}
+                  </span>
+                  <span class="media-hero__cta-content">
+                    <span class="media-hero__cta-text">Customer Reliability Engineering</span>
+                    <span class="media-hero__icon">
+                      {{ partial "svg/icon-arrow-right.svg" }}
+                    </span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#refarchitecture" class="media-hero__cta media-hero__cta--purple" data-smooth-scroll>
                   <span class="media-hero__icon">
                     {{ partial "svg/icon-ref-arch.svg" }}
                   </span>
                   <span class="media-hero__cta-content">
-                    <span class="media-hero__cta-text">Reference Architecture</span>
+                    <span class="media-hero__cta-text">Kubernetes Reference Architecture</span>
                     <span class="media-hero__icon">
                       {{ partial "svg/icon-arrow-right.svg" }}
                     </span>
@@ -42,25 +68,25 @@
                 </a>
               </li>
               <li>
-                <a href="#training" class="media-hero__cta media-hero__cta--blue" data-smooth-scroll>
+                <a href="#preflight" class="media-hero__cta media-hero__cta--yellow" data-smooth-scroll>
+                  <span class="media-hero__icon">
+                    {{ partial "svg/icon-compliance.svg" }}
+                  </span>
+                  <span class="media-hero__cta-content">
+                    <span class="media-hero__cta-text">Automated Cluster Compliance Checking</span>
+                    <span class="media-hero__icon">
+                      {{ partial "svg/icon-arrow-right.svg" }}
+                    </span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#training" class="media-hero__cta media-hero__cta--maroon" data-smooth-scroll>
                   <span class="media-hero__icon">
                     {{ partial "svg/icon-online-training.svg" }}
                   </span>
-                  <span class="media-hero__cta-content">
-                    <span class="media-hero__cta-text">Online Training</span>
-                    <span class="media-hero__icon">
-                      {{ partial "svg/icon-arrow-right.svg" }}
-                    </span>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="#support" class="media-hero__cta media-hero__cta--purple" data-smooth-scroll>
-                  <span class="media-hero__icon">
-                    {{ partial "svg/icon-support.svg" }}
-                  </span>
                   <span class="media-hero__cta-content media-hero__cta-content--no-border">
-                    <span class="media-hero__cta-text">Support</span>
+                    <span class="media-hero__cta-text">Online Training and Wargaming</span>
                     <span class="media-hero__icon">
                       {{ partial "svg/icon-arrow-right.svg" }}
                     </span>
@@ -69,7 +95,7 @@
               </li>
             </ul>
             <div class="media-hero__main-cta-wrapper">
-              <a href="#contactform" class="media-hero__main-cta" data-smooth-scroll>Get in touch</a>
+              <a href="#contactform" class="Button" data-smooth-scroll>Register Interest</a>
             </div>
           </div>
 
@@ -99,15 +125,18 @@
 <section class="img-testimonial" style="background-image: linear-gradient(to right, rgba(27, 28, 41, 0.95), rgba(27, 28, 41, 0.95)), url(/img/jpg/training-subscription.jpg);">
   <div class="container">
     <div class="row">
-      <div class="col-sm-7">
+      <div class="col-sm-5">
         <blockquote class="img-testimonial__quote">
-          <p>
-            "We’ve been helping companies succeed with Kubernetes since the early days of the project. As the market
-            matures, Subscription has evolved naturally to meet the needs of our customers operating Kubernetes in
-            production."
+          <p class="large-subscription-customer">
+            "When we first started working with Jetstack immediately what we saw was things getting done and improvements being made
+            and a collection of things we knew we needed to change. That freed us up to think about the other things we knew we
+            needed to work on, and then what we saw was Jetstack stepping in and giving us that advice"
           </p>
-          <cite class="img-testimonial__cite">Matt Barker, Co-Founder Jetstack</cite>
+          <cite class="img-testimonial__cite__large_subscription_customer">Giles Alexander, XenZone CTO</cite>
         </blockquote>
+      </div>
+      <div class="col-sm-7">
+        <iframe class="img-testimonial__video-frame" src="https://drive.google.com/file/d/1FLHKYpqLba4fomoFiZlHl-X_FqgpPH3z/preview"></iframe>
       </div>
     </div>
   </div>
@@ -116,124 +145,7 @@
 
 
 <!-- Info Icon Section (Green, with horizontal rule) -->
-<section id="refarchitecture" class="info-icons info-icons--hr info-icons--green">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="info-icons__hero">
-          <div class="info-icons__hero-icon">
-            {{ partial "svg/icon-ref-arch-large.svg" }}
-          </div>
-          <h2>
-            Reference Architecture
-          </h2>
-          <p>
-            Gain the confidence of a best-practice Kubernetes cluster
-          </p>
-        </div>
-        <div class="info-icons__content">
-          <ul class="info-icons__features">
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-lock.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">No vendor lock-in with open source tooling</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-cloud.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Consistent across clouds, reduced ops overhead</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-kube.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Built on pure upstream Kubernetes</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-breeze.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Flexibility to integrate with your environment</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-thumbprint.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Security hardened</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-scale.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Tried-and-tested at scale</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Info Icon Section (Green, with horizontal rule) -->
-
-
-<!-- Info Icon Section (Blue, with horizontal rule) -->
-<section id="training" class="info-icons info-icons--hr info-icons--blue">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="info-icons__hero">
-          <div class="info-icons__hero-icon">
-            {{ partial "svg/icon-online-training-large.svg" }}
-          </div>
-          <h2>
-            Online Training
-          </h2>
-          <p>
-            Build in-house expertise with Jetstack on-demand training
-          </p>
-        </div>
-        <div class="info-icons__content">
-          <ul class="info-icons__features">
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-person-presenting.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Self-paced Kubernetes in Practice and advanced training for operators
-                and developers</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-key.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Exclusive access to the Jetstack Customer Portal ‘Flight Deck’</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-rocket.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">Test your operational proficiency with interactive wargaming
-                scenarios</p>
-            </li>
-            <li class="info-icons__feature">
-              <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-playbook.svg" }}
-              </div>
-              <p class="info-icons__feature-copy">On-call operational playbooks, providing troubleshooting steps &amp;
-                tips</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Info Icon Section (Blue, with horizontal rule) -->
-
-
-<!-- Info Icon Section (Purple, no horizontal rule) -->
-<section id="support" class="info-icons info-icons--purple">
+<section id="breakfixsupport" class="info-icons info-icons--hr info-icons--green">
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
@@ -241,12 +153,8 @@
           <div class="info-icons__hero-icon">
             {{ partial "svg/icon-support-large.svg" }}
           </div>
-          <h2>
-            Support
-          </h2>
-          <p>
-            Use Jetstack as a virtual extension of your team
-          </p>
+          <h2>Break Fix Support</h2>
+          <p>Use Jetstack as an extension of your team</p>
         </div>
         <div class="info-icons__content">
           <ul class="info-icons__features">
@@ -254,23 +162,23 @@
               <div class="info-icons__feature-icon">
                 {{ partial "svg/icon-24h.svg" }}
               </div>
-              <p class="info-icons__feature-copy">24x7 On demand support teams</p>
+              <p class="info-icons__feature-copy">24x7 on demand SLA-lead support</p>
             </li>
             <li class="info-icons__feature">
               <div class="info-icons__feature-icon">
                 {{ partial "svg/icon-sla.svg" }}
               </div>
-              <p class="info-icons__feature-copy">SLA-lead</p>
+              <p class="info-icons__feature-copy">Coaching and debugging via video conferencing</p>
             </li>
             <li class="info-icons__feature">
               <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-assistance.svg" }}
+                {{ partial "svg/icon-peace.svg" }}
               </div>
-              <p class="info-icons__feature-copy">Ongoing architectural assistance</p>
+              <p class="info-icons__feature-copy">Expert Kubernetes knowledge</p>
             </li>
             <li class="info-icons__feature">
               <div class="info-icons__feature-icon">
-                {{ partial "svg/icon-discount.svg" }}
+                {{ partial "svg/icon-percent.svg" }}
               </div>
               <p class="info-icons__feature-copy">Discounted consulting</p>
             </li>
@@ -280,7 +188,219 @@
     </div>
   </div>
 </section>
-<!-- Info Icon Section (Purple, no horizontal rule) -->
+<!-- Info Icon Section (Green, with horizontal rule) -->
+
+
+<!-- Info Icon Section (Purple, with horizontal rule) -->
+<section id="cre" class="info-icons info-icons--hr info-icons--blue">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="info-icons__hero">
+          <div class="info-icons__hero-icon">
+            {{ partial "svg/icon-cre-large.svg" }}
+          </div>
+          <h2>Customer Reliability Engineering</h2>
+          <p>Our CREs are your guide to platform reliability</p>
+        </div>
+        <div class="info-icons__content">
+          <ul class="info-icons__features">
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-24h.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Assigned CRE for your account</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-sla.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Monthly on-site visits</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-assist.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Ongoing architectural assistance and optimisation</p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-rocket.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">Proof of concepts</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Info Icon Section (Purple, with horizontal rule) -->
+
+
+<!-- Info Icon Section (Blue, with horizontal rule) -->
+<section id="refarchitecture" class="info-icons info-icons--hr info-icons--purple">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="info-icons__hero">
+          <div class="info-icons__hero-icon">
+            {{ partial "svg/icon-ref-arch-large.svg" }}
+          </div>
+          <h2>Kubernetes Reference Architecture</h2>
+          <p>Gain the confidence of a best-practice cluster</p>
+        </div>
+        <div class="info-icons__content">
+          <ul class="info-icons__features">
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-lock.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Access to best-practice reference architecture
+              </p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-cloud.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Ready-to go demonstrators
+              </p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-wall.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Blueprints for the latest cloud native landscape
+              </p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-flex.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                GKE, EKS, on-premises environments, and more
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Info Icon Section (Blue, with horizontal rule) -->
+
+
+<!-- Info Icon Section (Green, with horizontal rule) -->
+<section id="preflight" class="info-icons info-icons--hr info-icons--green">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="info-icons__hero">
+          <div class="info-icons__hero-icon">
+            {{ partial "svg/icon-clipboard.svg" }}
+          </div>
+          <h2>Automated Cluster Compliance Checking</h2>
+          <p>Preflight will help operators identify issues before they occur and ensure best-practices</p>
+        </div>
+        <div class="info-icons__content">
+          <ul class="info-icons__features">
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-verified.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Automated verification of cluster compliance and conformance
+              </p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-hammerfile.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Ready-made policy packs for common cloud native architecture
+              </p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-opensource.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Visual reporting for internal compliance requirements
+              </p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-file.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Support for custom data ingestion and outputs
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Info Icon Section (Green, with horizontal rule) -->
+
+
+<!-- Info Icon Section (Green, with horizontal rule) -->
+<section id="training" class="info-icons info-icons--hr info-icons--maroon">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="info-icons__hero">
+          <div class="info-icons__hero-icon">
+            {{ partial "svg/icon-online-training-large.svg" }}
+          </div>
+          <h2>Online Training and Wargaming</h2>
+          <p>Up-skill your team with Kubernetes training</p>
+        </div>
+        <div class="info-icons__content">
+          <ul class="info-icons__features">
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-teaching.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Self-paced Kubernetes In Practice Day 1 &amp; 2 for your operations team
+              </p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-key.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Exclusive access to the Jetstack Customer Portal 'Flightdeck'
+              </p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-racks.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Platform reliability and sustainability through constant learning and advice
+              </p>
+            </li>
+            <li class="info-icons__feature">
+              <div class="info-icons__feature-icon">
+                {{ partial "svg/icon-rocket.svg" }}
+              </div>
+              <p class="info-icons__feature-copy">
+                Discounted instructor led training, from our extensive <a href="/training">training</a> portfolio
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Info Icon Section (Green, with horizontal rule) -->
 
 
 <!-- Open Source Panel -->
@@ -294,15 +414,15 @@
           <ul class="open-source__commitments">
             <li class="open-source__commitment">
               <span class="open-source__commitment-hero">
-                20 <span class="open-source__sub">Million</span> +
+                30 <span class="open-source__sub">Million</span> +
               </span>
               <span class="open-source__detail">
-                Docker Image pulls
+                Image pulls a month
               </span>
             </li>
             <li class="open-source__commitment">
               <span class="open-source__commitment-hero">
-                2850 +
+                8000 +
               </span>
               <span class="open-source__detail">
                 GitHub Stars
@@ -310,7 +430,7 @@
             </li>
             <li class="open-source__commitment">
               <span class="open-source__commitment-hero">
-                90 +
+                250 +
               </span>
               <span class="open-source__detail">
                 Open Source Contributors

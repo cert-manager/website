@@ -277,7 +277,7 @@ headline:
 
   subscription:
     headline: Jetstack Subscription
-    strapline: Jetstack Subscription is an offering to help you at every stage of your Kubernetes journey. It gives you a tried and trusted suite of tools to support your team.
+    strapline: Jetstack Subscription is designed to help you verify, support and continually optimise your Kubernetes production environment.
 
   sweden:
     headline: Äntligen, Kubernetes for the Nordics!

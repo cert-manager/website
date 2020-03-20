@@ -843,6 +843,14 @@ Introduced on new Subscription Page
   color: #8a63fa;
 }
 
+.media-hero__cta.media-hero__cta--maroon {
+  color: #963384;
+}
+
+.media-hero__cta.media-hero__cta--yellow {
+  color: #c7b299;
+}
+
 .media-hero__cta-text {
   color: white;
 }
@@ -1042,12 +1050,40 @@ Introduced on new Subscription Page
   line-height: 1.4;
 }
 
+.img-testimonial__quote__subscription p {
+  font-size: 21px;
+}
+
 .img-testimonial__cite {
   color: white;
   font-size: 16px;
   margin-top: 30px;
   display: block;
   font-style: normal;
+}
+
+.img-testimonial__video-frame {
+    text-align: center;
+    border: none;
+    height: 300px;
+    width: 70%;
+    margin: 0 auto;
+    display: inherit;
+}
+
+.img-testimonial__cite__large_subscription_customer {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+@media (max-width: 991px) {
+  .img-testimonial__video-frame {
+    border: none;
+    height: 90%;
+    width: 80%;
+    margin: 0 auto;
+    display: inherit;
+  }
 }
 
 @media (min-width: 991px) {
@@ -1058,8 +1094,27 @@ Introduced on new Subscription Page
     font-size: 32px;
   }
 
+  .img-testimonial__quote p.large-subscription-customer {
+    font-size: 21px;
+    color: #f2f2f2;
+  }
+
   .img-testimonial__cite {
     font-size: 20px;
+  }
+
+  .img-testimonial__cite__large_subscription_customer {
+    font-size: 18px;
+    color: #c7c7c7;
+  }
+
+  .img-testimonial__video-frame {
+    text-align: center;
+    border: none;
+    height: 300px;
+    width: 70%;
+    margin: 0 auto;
+    display: inherit;
   }
 }
 
@@ -1082,6 +1137,9 @@ Introduced on new Subscription Page
 }
 .info-icons.info-icons--purple {
   color: #8a63fa;
+}
+.info-icons.info-icons--maroon {
+  color: #963384;
 }
 
 .info-icons.info-icons--hr::after {
@@ -1124,6 +1182,15 @@ Introduced on new Subscription Page
   max-width: 220px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.info-icons__feature-copy a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.info-icons__feature-copy a:hover {
+  color: #ffffff;
 }
 
 @media screen and (min-width: 768px) {
