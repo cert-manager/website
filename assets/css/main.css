@@ -1086,6 +1086,16 @@ Introduced on new Subscription Page
   }
 }
 
+.img-testimonial__quote p.large-subscription-customer {
+  font-size: 21px;
+  color: #f2f2f2;
+}
+
+.img-testimonial__cite__large_subscription_customer {
+  font-size: 18px;
+  color: #c7c7c7;
+}
+
 @media (min-width: 991px) {
   .img-testimonial {
     padding: 120px 0;
@@ -1094,18 +1104,8 @@ Introduced on new Subscription Page
     font-size: 32px;
   }
 
-  .img-testimonial__quote p.large-subscription-customer {
-    font-size: 21px;
-    color: #f2f2f2;
-  }
-
   .img-testimonial__cite {
     font-size: 20px;
-  }
-
-  .img-testimonial__cite__large_subscription_customer {
-    font-size: 18px;
-    color: #c7c7c7;
   }
 
   .img-testimonial__video-frame {
