@@ -29,19 +29,7 @@ guides](../../configuration/).
 
 ## Installing with regular manifests
 
-In order to install cert-manager, we must first create a namespace to run it in.
-This guide will install cert-manager into the `cert-manager` namespace. It is
-possible to run cert-manager in a different namespace, although you will need to
-make modifications to the deployment manifests.
-
-
-Create a namespace to run cert-manager in
-```bash
-$ kubectl create namespace cert-manager
-```
-
-We can now go ahead and install cert-manager. All resources
-(the `CustomResourceDefinitions`, cert-manager, and the webhook component)
+All resources (the `CustomResourceDefinitions`, cert-manager, namespace, and the webhook component)
 are included in a single YAML manifest file:
 
 Install the `CustomResourceDefinitions` and cert-manager itself
@@ -70,6 +58,10 @@ $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/rel
 > 'elevate' your own privileges to that of a 'cluster-admin' **before** running
 > the above command. If you have already run the above command, you should run
 > them again after elevating your permissions:
+
+> **Note**: By default, cert-manager will be installed into the `cert-manager`
+> namespace. It is possible to run cert-manager in a different namespace, although you
+> will need to make modifications to the deployment manifests.
 
 ```bash
 kubectl create clusterrolebinding cluster-admin-binding \
