@@ -177,7 +177,7 @@ Starting `v0.14` you can pass custom fields to Venafi (TPP version `v19.2` and h
 The value is a JSON encoded array of custom field objects having a `name` and `value` key.
 For example:
 ```yaml
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: example-com-certificate
