@@ -1020,6 +1020,17 @@ Introduced on new Subscription Page
 /*
     Image Testimonial
 */
+
+.img_testimonail__video_container {
+  width: 100%;
+  height: auto;
+}
+
+.img_testimonail__video_container video{
+  width: 100%;
+  height: auto;
+}
+
 .img-testimonial {
   position: relative;
   background-repeat: no-repeat;
