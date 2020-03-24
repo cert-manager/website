@@ -55,7 +55,15 @@ spec:
   ca:
     secretName: ca-key-pair
 ```
-
+Optionally, you can specify (CRL)[https://en.wikipedia.org/wiki/Certificate_revocation_list] Distribution Points. An array of strings each of which identifies the location of the CRL from which the revocation of this certificate can be checked:
+```
+...
+spec:
+  ca:
+    secretName: ca-key-pair
+    crlDistributionPoints:
+    - "http://example.com"
+```
 Once deployed, you can then check that the issuer has been successfully
 configured by checking the ready status of the certificate. Replace `issuers`
 here with `clusterissuers` if that is what has been deployed.
