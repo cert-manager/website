@@ -121,3 +121,36 @@ The added labels and annotations will merge on top of the cert-manager defaults,
 overriding entries with the same key.
 
 No other fields of the `podTemplate` exist.
+
+### `ingressTemplate`
+
+It is possible to add labels and annotations to the solver ingress resources.
+These can be configured under the `metadata` field under `ingressTemplate`:
+
+```yaml
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: ...
+spec:
+  acme:
+    server: ...
+    privateKeySecretRef:
+      name: ...
+    solvers:
+    - http01:
+        ingress:
+          ingressTemplate:
+            metadata:
+              labels:
+                foo: "bar"
+              annotations:
+                "nginx.ingress.kubernetes.io/whitelist-source-range": "0.0.0.0/0,::/0"
+                "nginx.org/mergeable-ingress-type": "minion"
+                "traefik.ingress.kubernetes.io/frontend-entry-points": "http"
+```
+
+The added labels and annotations will merge on top of the cert-manager defaults,
+overriding entries with the same key.
+
+No other fields of the ingress can be edited.
