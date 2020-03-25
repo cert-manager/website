@@ -50,7 +50,7 @@ spec:
   usages:
     - server auth
     - client auth
-  # At least one of a DNS Name, USI SAN, or IP address is required.
+  # At least one of a DNS Name, URI, or IP address is required.
   dnsNames:
   - example.com
   - www.example.com
