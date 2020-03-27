@@ -1023,7 +1023,10 @@ Introduced on new Subscription Page
 
 .img_testimonail__video_container {
   width: 100%;
-  height: auto;
+  height: 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .img_testimonail__video_container video{
