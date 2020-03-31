@@ -12,30 +12,6 @@ testimonial:
   profileImage:
   quoter: 'Workshop Attendee'
 course_dates:
-- date: '4 March 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Day 1'
-  eventbriteId: 85634704707
-- date: '5 March 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Day 2'
-  eventbriteId: 85634494077
-- date: '18 March 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Day 1'
-  eventbriteId: 94122778765
-- date: '19 March 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Day 2'
-  eventbriteId: 94122971341
-- date: '1 April 2020'
-  title: 'Istio'
-  level: 'Day 1'
-  eventbriteId: 96658573395
-- date: '2 April 2020'
-  title: 'Serverless on Kubernetes'
-  level: 'Knative'
-  eventbriteId: 96659620527
 - date: '7 April 2020'
   title: 'Kubernetes in Practice (Stockholm)'
   level: 'Day 1'
@@ -44,6 +20,10 @@ course_dates:
   title: 'Kubernetes in Practice (Stockholm)'
   level: 'Day 2'
   eventbriteId: 95256959129
+- date: '16 April 2020'
+  title: 'Serverless on Kubernetes'
+  level: 'Knative'
+  eventbriteId: 96659620527
 - date: '29 April 2020'
   title: 'Kubernetes in Practice'
   level: 'Day 1'
