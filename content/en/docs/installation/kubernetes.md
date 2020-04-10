@@ -42,7 +42,7 @@ $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/rel
 ```
 
 > **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the manifests.
-> This version does not have API version conversion and only supports `cert-manager.io/v1apha2` API resources. 
+> This version does not have API version conversion and only supports `cert-manager.io/v1alpha2` API resources. 
 
 > **Note**: If you are running Kubernetes `v1.15.4` or below, you will need to add the
 > `--validate=false` flag to your `kubectl apply` command above else you will
@@ -113,7 +113,7 @@ $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/rel
 ```
 
 > **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the CRDs.
-> This version does not have API version conversion and only supports `cert-manager.io/v1apha2` API resources. 
+> This version does not have API version conversion and only supports `cert-manager.io/v1alpha2` API resources. 
 
 
 Create the namespace for cert-manager.
