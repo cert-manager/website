@@ -7,7 +7,18 @@ type: "docs"
 
 This provider uses a Kubernetes `Secret` resource to work. In the following
 example, the `Secret` will have to be named `digitalocean-dns` and have a
-sub-key `access-token` with the token in it.
+sub-key `access-token` with the token in it. For example:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: digitalocean-dns
+  namespace: cert-manager
+data:
+  # insert your DO access token here
+  access-token: "base64 encoded access-token here"
+  ```
 
 To create a Personal Access Token, see [DigitalOcean documentation](https://www.digitalocean.com/docs/api/create-personal-access-token).
 
