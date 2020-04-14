@@ -142,7 +142,6 @@ spec:
     caBundle: <base64 encoded caBundle PEM file>
     auth:
       tokenSecretRef:
-        secretRef:
           name: cert-manager-vault-token
           key: token
 ```
