@@ -1,42 +1,38 @@
+{{- if .Values.ingress.enabled -}}
 {{- $global := . }}
-{{- if gt (len .Values.ingressHostnames) 0 }}
+{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1beta1
+{{- else -}}
 apiVersion: extensions/v1beta1
+{{- end }}
 kind: Ingress
 metadata:
-  name: {{ template "fullname" . }}
+  name: {{ include "jetstack-website.fullname" . }}
   labels:
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    {{- include "jetstack-website.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
   annotations:
-    kubernetes.io/ingress.class: '{{ .Values.ingressClass }}'
-{{- if gt (len .Values.ingressHtpasswd) 0 }}
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: {{ template "fullname" $global }}-htpasswd
-    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required - Jetstack"
-{{- end }}
-{{- if .Values.ingressTLS }}
-    kubernetes.io/tls-acme: "true"
-{{- if .Values.ingressTLSDNSProvider }}
-    certmanager.k8s.io/acme-challenge-type: dns01
-    certmanager.k8s.io/acme-dns01-provider: {{ .Values.ingressTLSDNSProvider }}
-{{- end }}
-{{- end }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
-{{- if .Values.ingressTLS }}
   tls:
-  - secretName: {{ template "fullname" $global }}
-    hosts:
-{{- range $hostname := .Values.ingressHostnames }}
-    - {{ $hostname }}
-{{- end }}
-{{- end }}
+  {{- range .Values.ingress.tls }}
+    - hosts:
+      {{- range .hosts }}
+        - {{ . | quote }}
+      {{- end }}
+      secretName: {{ .secretName }}
+  {{- end }}
   rules:
-{{- range $hostname := .Values.ingressHostnames }}
-  - host: {{ $hostname }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: {{ template "fullname" $global }}
-          servicePort: {{ $global.Values.service.externalPort }}
-{{- end }}
+  {{- range .Values.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+        {{- range .paths }}
+          - path: {{ . }}
+            backend:
+              serviceName: {{ include "jetstack-website.fullname" $global }}
+              servicePort: {{ $global.Values.service.externalPort }}
+        {{- end }}
+  {{- end }}
 {{- end }}

@@ -1,7 +1,19 @@
 config:
   smtpUsername: AKIAJYHII4ZIATIRLUJQ
   smtpPassword: Asz8vI0W5X1hF07QcoIMKsc6klLEYPQyBidAxewrE/E6
-ingressTLS: false
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: www.jetstack.io
+      paths: [/]
+  tls:
+    - secretName: website-prod-jetstack-website
+      hosts:
+        - www.jetstack.io
+
 ingressRedirectHostnames:
   "/":
     - www.istio.co.uk
