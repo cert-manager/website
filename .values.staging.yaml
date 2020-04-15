@@ -4,3 +4,16 @@ config:
   smtpPassword: Asz8vI0W5X1hF07QcoIMKsc6klLEYPQyBidAxewrE/E6
   contactSenderAddress: website-staging@jetstack.net
   contactDestAddress: tech+website-staging@jetstack.io
+
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "https://auth.jetstack.net/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://auth.jetstack.net"
+  hosts:
+    - host: testenv.website.kube.jetstack.net
+      paths: [/]
+  tls:
+    - secretName: wildcard-website-kube-jetstack-net
+      hosts:
+        - testenv.website.kube.jetstack.net
