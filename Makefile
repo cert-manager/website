@@ -115,4 +115,4 @@ deploy: prepare_gke
 
 destroy: prepare_gke
 	@test "$${SURE}" -ne "0"
-	$(HELM) delete --purge $(RELEASE_NAME)
+	$(HELM) delete $(RELEASE_NAME)
