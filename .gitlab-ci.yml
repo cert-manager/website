@@ -104,6 +104,7 @@ deploy:review:
     name: ${CI_BUILD_REF_SLUG}
     url: http://${CI_BUILD_REF_SLUG}.website.kube.jetstack.net
     on_stop: deploy:review:stop
+    auto_stop_in: 4 weeks
   only:
   - branches
   except:
