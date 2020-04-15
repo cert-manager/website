@@ -91,7 +91,7 @@ docker_build:
 
 docker_push: docker_build
 	set -e; \
-		for tag in $(IMAGE_TAGS); do \
+	for tag in $(IMAGE_TAGS); do \
 		docker tag $(REGISTRY)/$(IMAGE_NAME):$(BUILD_TAG) $(REGISTRY)/$(IMAGE_NAME):$${tag} ; \
 		docker push $(REGISTRY)/$(IMAGE_NAME):$${tag}; \
 	done
@@ -110,7 +110,7 @@ deploy: prepare_gke
 		--set 'ingress.tls[0].hosts[0]=$(INGRESS_HOSTNAME)' \
 		--set 'replicaCount=$(REPLICA_COUNT)' \
 		--values $(HELM_VALUES) \
-		--dry-run #wait
+		--wait
 
 destroy: prepare_gke
 	@test "$${SURE}" -ne "0"
