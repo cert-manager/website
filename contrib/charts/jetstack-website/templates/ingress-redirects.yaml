@@ -2,31 +2,28 @@
 {{- range $target, $hostnames := .Values.ingressRedirectHostnames }}
 {{- $redirectName := . }}
 ---
+{{- if semverCompare ">=1.14-0" $global.Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1beta1
+{{- else -}}
 apiVersion: extensions/v1beta1
+{{- end }}
 kind: Ingress
 metadata:
-  name: {{ template "fullname" $global }}-{{ template "redirectname" $target }}
+  name: {{ include "jetstack-website.fullname" $global }}-{{ template "redirectname" $target }}
   labels:
-    chart: "{{ $global.Chart.Name }}-{{ $global.Chart.Version | replace "+" "_" }}"
+    {{- include "jetstack-website.labels" $global | nindent 4 }}
+
+{{- $annotations := $global.Values.ingress.annotations  }}
+{{- $_ := set $annotations "nginx.ingress.kubernetes.io/configuration-snippet" (include "redirectconfig" $target) }}
   annotations:
-    kubernetes.io/ingress.class: '{{ $global.Values.ingressClass }}'
-{{- if $global.Values.ingressTLS }}
-    kubernetes.io/tls-acme: "true"
-{{- if $global.Values.ingressTLSDNSProvider }}
-    certmanager.k8s.io/acme-challenge-type: dns01
-    certmanager.k8s.io/acme-dns01-provider: {{ $global.Values.ingressTLSDNSProvider }}
-{{- end }}
-{{- end }}
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^/(.*)$ https://www.jetstack.io{{ $target }}$1 redirect;
+    {{- toYaml $annotations | nindent 4 }}
+
 spec:
-{{- if $global.Values.ingressTLS }}
   tls:
-  - secretName: {{ template "fullname" $global }}-{{ template "redirectname" $target }}
+  - secretName: {{ template "jetstack-website.fullname" $global }}-{{ template "redirectname" $target }}
     hosts:
 {{- range $hostname := $hostnames }}
     - {{ $hostname }}
-{{- end }}
 {{- end }}
   rules:
 {{- range $hostname := $hostnames }}
@@ -35,7 +32,7 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: {{ template "fullname" $global }}
+          serviceName: {{ template "jetstack-website.fullname" $global }}
           servicePort: {{ $global.Values.service.externalPort }}
 {{- end }}
 {{- end }}

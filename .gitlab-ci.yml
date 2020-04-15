@@ -76,9 +76,8 @@ deploy:staging:
   - make deploy
       ENVIRONMENT="${CI_ENVIRONMENT_NAME}"
       IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
-      INGRESS_HOSTNAMES="website-staging.kube.jetstack.net"
+      INGRESS_HOSTNAME="website-staging.kube.jetstack.net"
       HUGO_BASE_URL="https://website-staging.kube.jetstack.net"
-      TLS_ENABLED=true
       HELM_VALUES='.values.staging.yaml'
       REPLICA_COUNT=1
   environment:
@@ -96,8 +95,7 @@ deploy:review:
   - make deploy
       ENVIRONMENT="${CI_BUILD_REF_SLUG}"
       IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
-      INGRESS_HOSTNAMES="${CI_BUILD_REF_SLUG}.website.kube.jetstack.net"
-      TLS_ENABLED=false
+      INGRESS_HOSTNAME="${CI_BUILD_REF_SLUG}.website.kube.jetstack.net"
       HUGO_BASE_URL="http://${CI_BUILD_REF_SLUG}.website.kube.jetstack.net"
       NAMESPACE="website-review"
       HELM_VALUES='.values.staging.yaml'
@@ -139,11 +137,8 @@ deploy:prod:
   - make deploy
       ENVIRONMENT="${CI_ENVIRONMENT_NAME}"
       IMAGE_TAG="${CI_BUILD_REF_SLUG}-${CI_PIPELINE_ID}"
-      INGRESS_HOSTNAMES="www.jetstack.io"
+      INGRESS_HOSTNAME="www.jetstack.io"
       HUGO_BASE_URL="https://www.jetstack.io"
-      HTPASSWD=
-      TLS_ENABLED=true
-      TLS_DNS_PROVIDER=jetstack-gke-clouddns
       HELM_VALUES='.values.prod.yaml'
   environment:
     name: prod

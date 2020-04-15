@@ -4,6 +4,7 @@ BUILD_TAG := build
 IMAGE_TAGS := canary
 IMAGE_TAG := latest
 ENVIRONMENT := dev
+HELM := helm3
 
 PACKAGE_NAME := gitlab.jetstack.net/jetstack/website/backend
 GOOS := linux
@@ -17,9 +18,7 @@ CHART_PATH := contrib/charts/jetstack-website
 HELM_VALUES := .values.$(ENVIRONMENT).yaml
 
 HUGO_BASE_URL := "https://www.jetstack.io"
-INGRESS_HOSTNAMES := website-$(ENVIRONMENT).kube.jetstack.net
-HTPASSWD := jetstack:$$apr1$$0NE963xA$$0X9bYAqzMT83qWUs8TZYx0
-TLS_ENABLED := true
+INGRESS_HOSTNAME := website-$(ENVIRONMENT).kube.jetstack.net
 REPLICA_COUNT=3
 
 .PHONY: help
@@ -98,23 +97,22 @@ docker_push: docker_build
 	done
 
 test_helm:
-	helm lint $(CHART_PATH)
+	$(HELM) lint $(CHART_PATH)
 
 prepare_gke:
 	gcloud container clusters get-credentials jetstack-gke --zone europe-west1-b --project jetstack-gke
 
 deploy: prepare_gke
 	touch $(HELM_VALUES)
-	helm upgrade $(RELEASE_NAME) $(CHART_PATH) --install --namespace $(NAMESPACE) \
+	$(HELM) upgrade $(RELEASE_NAME) $(CHART_PATH) --install --namespace $(NAMESPACE) \
 		--set 'image.tag=$(IMAGE_TAG)' \
-		--set 'ingressHostnames={$(INGRESS_HOSTNAMES)}' \
-		--set 'ingressTLS=$(TLS_ENABLED)' \
-		--set 'ingressTLSDNSProvider=$(TLS_DNS_PROVIDER)' \
-		--set 'ingressHtpasswd=$(HTPASSWD)' \
+		--set 'ingressHostname={$(INGRESS_HOSTNAME)}' \
+		--set 'ingress.hosts[0].host=$(INGRESS_HOSTNAME)' \
+		--set 'ingress.tls[0].hosts[0]=$(INGRESS_HOSTNAME)' \
 		--set 'replicaCount=$(REPLICA_COUNT)' \
 		--values $(HELM_VALUES) \
-		--wait
+		--dry-run #wait
 
 destroy: prepare_gke
 	@test "$${SURE}" -ne "0"
-	helm delete --purge $(RELEASE_NAME)
+	$(HELM) delete --purge $(RELEASE_NAME)
