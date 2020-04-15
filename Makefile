@@ -106,7 +106,6 @@ deploy: prepare_gke
 	touch $(HELM_VALUES)
 	$(HELM) upgrade $(RELEASE_NAME) $(CHART_PATH) --install --namespace $(NAMESPACE) \
 		--set 'image.tag=$(IMAGE_TAG)' \
-		--set 'ingressHostname={$(INGRESS_HOSTNAME)}' \
 		--set 'ingress.hosts[0].host=$(INGRESS_HOSTNAME)' \
 		--set 'ingress.tls[0].hosts[0]=$(INGRESS_HOSTNAME)' \
 		--set 'replicaCount=$(REPLICA_COUNT)' \
@@ -115,4 +114,4 @@ deploy: prepare_gke
 
 destroy: prepare_gke
 	@test "$${SURE}" -ne "0"
-	$(HELM) delete $(RELEASE_NAME)
+	$(HELM) delete --namespace $(NAMESPACE) $(RELEASE_NAME)
