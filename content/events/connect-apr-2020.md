@@ -1,7 +1,7 @@
 ---
 title: Kubernetes in Hybrid and Multi-Cloud Environments
 image: /events/connect-apr-2020/thumbnail.jpg
-address: "Remote Event"
+address: "Virtual Event"
 event_date: "29th May 2020"
 link: /events/connect-apr-2020
 timestamp: "20200325"
