@@ -169,3 +169,23 @@ You are now ready to issue certificates using the newly provisioned Venafi
 
 Read the [Issuing Certificates](../../usage/certificate/) document for
 more information on how to create Certificate resources.
+
+# Issuer specific annotations
+
+## Custom Fields
+Starting `v0.14` you can pass custom fields to Venafi (TPP version `v19.2` and higher) using the `venafi.cert-manager.io/custom-fields` annotation on Certificate resources.
+The value is a JSON encoded array of custom field objects having a `name` and `value` key.
+For example:
+```yaml
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: example-com-certificate
+  annotations:
+    venafi.cert-manager.io/custom-fields: |-
+      [
+        {"name": "field-name", "value": "vield value"},
+        {"name": "field-name-2", "value": "vield value 2"}
+      ]
+...
+```

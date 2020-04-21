@@ -29,6 +29,8 @@ if [ -z ${ALGOLIA_WRITE_KEY+x} ]; then
 fi
 
 cd "${REPO_ROOT}"
+# Ensure the 'public/' directory exists
+mkdir -p "public/"
 
 "${REPO_ROOT}/scripts/update-node_modules"
 ${REPO_ROOT}/node_modules/.bin/hugo-algolia -i 'content/en/docs/**' --config ./config/_default/config.toml --config-toml --all -s

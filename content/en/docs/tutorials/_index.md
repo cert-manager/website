@@ -15,9 +15,9 @@ get to a final goal. Below is list of tutorials that you might find helpful:
 - [Securing Ingresses with NGINX-Ingress and
   cert-manager](./acme/ingress/): Tutorial for deploying NGINX into your
   cluster and securing the connection with an ACME certificate.
-- [Issuing ACME Certificate using DNS Validation](./acme/dns-validation/):
+- [Issuing an ACME Certificate using DNS Validation](./acme/dns-validation/):
   Tutorial on how to resolve DNS ownership validation using DNS01 challenges.
-- [Issuing ac ACME Certificate using HTTP Validation](./acme/http-validation/):
+- [Issuing an ACME Certificate using HTTP Validation](./acme/http-validation/):
   Tutorial on how to resolve DNS ownership validation using HTTP01 challenges.
 - [Migrating from kube-lego](./acme/migrating-from-kube-lego/): Tutorial on
   how to migrate from the now deprecated kube-lego project.

@@ -1,7 +1,7 @@
 ---
 title: "Upgrading from v0.13 to v0.14"
 linkTitle: "v0.13 to v0.14"
-weight: 30
+weight: 860
 type: "docs"
 ---
 
@@ -19,6 +19,7 @@ This will delete the deployment so they can be replaced when you apply the upgra
 This step will not affect any existing certificates but will stop renewal or new issuance while upgrading.
 
 Version `v0.14` now comes in 2 versions of static manifests, you will need to use the correct new one:
+
 * Kubernetes 1.15 or higher: you can use the normal `cert-manager.yaml`
 * Kubernetes 1.14 or lower: you have to now use the `cert-manager-legacy.yaml` version
 * OpenShift 4: you can now use the normal `cert-manager.yaml`
