@@ -127,3 +127,44 @@ if the annotation `"cert-manager.io/issue-temporary-certificate": "true"` is
 present on the certificate, a self signed temporary certificate will be present
 on the `Secret` until it is overwritten once the signed certificate has been
 issued.
+
+## Configuring private key rotation
+
+> **WARNING**: This feature requires enabling the `ExperimentalCertificateControllers`
+> feature gate by passing the `--feature-gates=ExperimentalCertificateControllers=true`
+> flag to the controller component, or adding `--set featureGates=ExperimentalCertificateControllers=true`
+> when deploying using the Helm chart.
+
+When a certificate is re-issued for any reason, including because it is nearing
+expiry, when a change to the spec is made or a re-issuance is manually
+triggered, cert-manager supports configuring the 'private key rotation policy'
+to either always re-use the existing private key (the default behavior) or to
+regenerate a new private key on each issuance (the recommended behavior).
+
+This is configured using the `spec.privateKey.rotationPolicy` like so:
+
+```yaml
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: my-cert
+  ...
+spec:
+  secretName: my-cert-tls
+  dnsNames:
+  - example.com
+  privateKey:
+    rotationPolicy: Always
+```
+
+There are two supported rotation policies:
+
+* **Never** (default): a private key is only generated if one does not already exist in
+  the target Secret resource (using the `tls.key` key). All further issuance's will re-use
+  this private key. This is the default in order to maintain compatibility with previous releases.
+* **Always**: a new private key will be generated each time a new certificate is issued.
+  It is recommended you configure this `rotationPolicy` on your Certificate resources as it
+  is good practice to rotate private keys when a certificate is renewed.
+
+Some Issuer types may disallow re-using private keys. If this is the case, you must explicitly
+configure the `rotationPolicy` for each of your Certificates accordingly.
