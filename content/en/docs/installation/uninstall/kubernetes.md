@@ -45,9 +45,13 @@ installation process, *in reverse*, using the delete command on both `kubectl`
 and `helm`.
 
 Firstly, delete the cert-manager installation using `helm`. Ensure the
-`--purge` flag is applied.
+`--purge` flag is applied if you are using Helm 2.
 
 ```bash
+# Helm 3
+$ helm delete cert-manager
+
+# Helm 2.x
 $ helm delete cert-manager --purge
 ```
 
