@@ -25,7 +25,7 @@ Version `v0.14` now comes in 2 versions of static manifests, you will need to us
 * OpenShift 4: you can now use the normal `cert-manager.yaml`
 * OpenShift 3: you have to now use the `cert-manager-legacy.yaml` version instead of the OpenShift version
 
-> **Note**: If you're using the `cert-manager-legacy.yaml` version you will not have API version conversion and thus only support `cert-manager.io/v1apha2` API resources.
+> **Note**: If you're using the `cert-manager-legacy.yaml` version you will not have API version conversion and thus only support `cert-manager.io/v1alpha2` API resources.
 
 The webhook is now a required component, meaning that `no-webhook` variant of the manifests are no longer available in this release. Please use the appropriate manifests as mentioned above according to your Kubernetes version.
 
