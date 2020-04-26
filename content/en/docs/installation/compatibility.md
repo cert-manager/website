@@ -28,7 +28,6 @@ You can read more information on how to add firewall rules for the GKE control
 plane nodes in the [GKE
 docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules).
 
-
 ## AWS EKS
 
 When using a custom CNI (such as Weave or Calico) on EKS, the webhook cannot be
@@ -43,6 +42,37 @@ deployment, or, if using Helm, configuring it in your `values.yaml` file.
 Note that since kubelet uses port `10250` by default on the host network, the
 `webhook.securePort` value must be changed to a different, free port.
 
-
 ## Webhook
+
 Disabling the webhook is not supported anymore since `v0.14`.
+
+## iptables vs. nftables
+
+Some distributions - like [Debian 10](https://wiki.debian.org/nftables) or [RHEL 8](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/8.0_release_notes/rhel-8_0_0_release#networking) - recently switched from iptables to [nftables](https://wiki.nftables.org/) which causes some unexpected behavior:
+
+- ["context deadline exceeded" errors relating to the webhook](https://github.com/jetstack/cert-manager/issues/2319#)
+- [secret "cert-manager-webhook-webhook-tls" not found](https://github.com/jetstack/cert-manager/issues/2484)
+- [Kubernetes compatible with debian 10 buster?](https://discuss.kubernetes.io/t/kubernetes-compatible-with-debian-10-buster/7853)
+
+To overcome to this issue, there are two possibilities
+
+### Switch to `iptables`
+
+You might consider switching back to `iptables`. Here is how:
+
+- [Debian 10](https://wiki.debian.org/nftables)
+
+### Configure network provider
+
+#### Calico
+
+Configure [`FELIX_IPTABLESBACKEND=NFT`](https://github.com/rancher/rke/issues/1788#issuecomment-566138210) in the dameonset
+
+```yaml
+....
+    Environment:
+      FELIX_IPTABLESBACKEND:              NFT
+....
+```
+
+Latest version of `calico` also allows [`Auto` for auto detection of the backend](https://docs.projectcalico.org/reference/felix/configuration#iptables-dataplane-configuration)
