@@ -49,7 +49,7 @@ Firstly, delete the cert-manager installation using `helm`. Ensure the
 
 ```bash
 # Helm 3
-$ helm delete cert-manager
+$ helm --namespace cert-manager delete cert-manager
 
 # Helm 2.x
 $ helm delete cert-manager --purge
