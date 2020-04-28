@@ -265,7 +265,7 @@ spec:
           class: nginx
       selector:
         matchLabels:
-          "user-http01-solver": "true"
+          "use-http01-solver": "true"
     - dns01:
         cloudflare:
           email: user@example.com
