@@ -11,7 +11,7 @@ of deployment resources. It utilizes
 [`CustomResourceDefinitions`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources)
 to configure Certificate Authorities and request certificates.
 
-It is deployed using regular YAML manifests, like any other application on
+It is deployed by using regular YAML manifests or using an operator, like any other application on
 OpenShift.
 
 Once cert-manager has been deployed, you must configure `Issuer` or `ClusterIssuer`
@@ -62,10 +62,10 @@ are included in a single YAML manifest file:
 Install the `CustomResourceDefinitions` and cert-manager itself
 ```bash
 # OpenShift 4+
-oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.1/cert-manager.yaml
+oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager.yaml
 
 # OpenShift 3.11
-$ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.1/cert-manager-legacy.yaml
+$ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager-legacy.yaml
 ```
 
 > **Note**: If you're using OpenShift 3 you will need to install the legacy version of the manifests.
@@ -74,6 +74,11 @@ $ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases
 > **Note**: The `--validate=false` flag is added to the `oc apply` command
 > above else you will receive a validation error relating to the `caBundle`
 > field of the `ValidatingWebhookConfiguration` resource.
+
+## Installing with cert-manager operator
+
+On OpenShift 4 you can also install cert-manager via the OperatorHub using the [cert-manager operator](https://catalog.redhat.com/software/operators/detail/5e999d862937381642a21c7a), this can be found under Red Hat OpenShift Certified Operators in the Embedded OperatorHub of your OpenShift installation.
+Any values set in the Operator configurator get passed through as Helm values.
 
 ## Configuring your first Issuer
 
