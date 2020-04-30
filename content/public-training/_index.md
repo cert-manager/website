@@ -12,32 +12,12 @@ testimonial:
   profileImage:
   quoter: 'Workshop Attendee'
 course_dates:
-- date: '7 April 2020'
-  title: 'Kubernetes in Practice (Stockholm)'
-  level: 'Day 1'
-  eventbriteId: 95256768559
-- date: '8 April 2020'
-  title: 'Kubernetes in Practice (Stockholm)'
-  level: 'Day 2'
-  eventbriteId: 95256959129
-- date: '16 April 2020'
-  title: 'Serverless on Kubernetes'
-  level: 'Knative'
-  eventbriteId: 96659620527
-- date: '29 April 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Day 1'
-  eventbriteId: 96659706785
-- date: '30 April 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Day 2'
-  eventbriteId: 96659875289
-- date: '12 May 2020'
-  title: 'Kubernetes in Practice (Stockholm)'
+- date: '19 May 2020'
+  title: 'Kubernetes in Practice (Nordics)'
   level: 'Day 1'
   eventbriteId: 96660220321
-- date: '13 May 2020'
-  title: 'Kubernetes in Practice (Stockholm)'
+- date: '20 May 2020'
+  title: 'Kubernetes in Practice (Nordics)'
   level: 'Day 2'
   eventbriteId: 96660461041
 - date: '27 May 2020'
