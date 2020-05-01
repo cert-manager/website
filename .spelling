@@ -151,3 +151,4 @@ keystore
 config
 cmctl
 RedHat
+kubectl
