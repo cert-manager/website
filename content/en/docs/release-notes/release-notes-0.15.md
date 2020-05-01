@@ -105,12 +105,12 @@ spec:
 
 For JKS this adds `keystore.jks` and `truststore.jks` and `keystore.p12` for PKCS#12.
 
-## cmctl CLI tool
+## R
 
-cmctl is a CLI tool that assists with controlling cert-manager inside your
-Kubernetes cluster. The cmctl binary can be downloaded from the [GitHub release page](https://github.com/jetstack/cert-manager/releases/tag/v0.15).
+kubectl cert-manager is a kubectl plugin that assists with controlling cert-manager inside your
+Kubernetes cluster. The kubectl cert-manager binary can be downloaded from the [GitHub release page](https://github.com/jetstack/cert-manager/releases/tag/v0.15).
 In `v0.15` the use is currently limited to the `convert` and `renew` commands.
 
-`cmctl renew` can be used to manually trigger renewal of your certificates. This required the `ExperimentalCertificateControllers` feature gate to be set.
+`kubectl cert-manager renew` can be used to manually trigger renewal of your certificates. This required the `ExperimentalCertificateControllers` feature gate to be set.
 
-`cmctl convert` can be used to convert cert-manager config files between different API versions if your cluster does not support the conversion webhook or if you want to upgrade all your local cert-manager configuration files.
+`kubectl cert-manager convert` can be used to convert cert-manager config files between different API versions if your cluster does not support the conversion webhook or if you want to upgrade all your local cert-manager configuration files.
