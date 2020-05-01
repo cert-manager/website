@@ -78,7 +78,7 @@ $ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases
 ## Installing with cert-manager operator
 
 On OpenShift 4 you can also install cert-manager via the OperatorHub using the [cert-manager operator](https://catalog.redhat.com/software/operators/detail/5e999d862937381642a21c7a), this can be found under Red Hat OpenShift Certified Operators in the Embedded OperatorHub of your OpenShift installation.
-Any values set in the Operator configurator get passed through as Helm values.
+Any values set in the Operator configuration get passed through as Helm values.
 
 ## Configuring your first Issuer
 
