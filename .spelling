@@ -146,7 +146,7 @@ analyse
 PKCS#12
 OperatorHub
 keystores
-keystores
 keystore
 config
 kubectl
+stdout

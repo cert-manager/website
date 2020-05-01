@@ -1,0 +1,81 @@
+---
+title: "Kubectl plugin"
+linkTitle: "Kubectl plugin"
+weight: 100
+type: "docs"
+---
+
+`kubectl cert-manager` is a [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) that can help you managing cert-manager resources inside your cluster.
+
+## Installation
+You need the `kubectl-cert-manager.tar.gz` file for the platform you're using, these can be found on our [GitHub releases page](https://github.com/jetstack/cert-manager/releases).
+In order to use the kubectl plugin you need it's binary to be accessible under the name `kubectl-cert_manager` in you `$PATH`.
+You can do this for example using:
+```console
+$ tar xzf kubectl-cert-manager.tar.gz
+$ sudo mv kubectl-cert_manager /usr/local/bin
+```
+
+Once this is installed you can run `kubectl cert-manager`:
+```console
+$ kubectl cert-manager
+
+kubectl cert-manageris a CLI tool manage and configure cert-manager resources for Kubernetes
+
+Usage:
+  kubectl cert-manager [flags]
+  kubectl cert-manager [command]
+
+Available Commands:
+  convert     Convert cert-manager config files between different API versions
+  help        Help about any command
+  renew       Mark a Certificate for manual renewal
+  version     Print the kubectl cert-manager version
+
+Use "kubectl cert-manager [command] --help" for more information about a command.
+```
+
+## Renew
+> **Note**: this feature requires the `ExperimentalCertificateControllers` feature gate set.
+
+`kubectl cert-manager` allows you to manually trigger a a renew of a specific certificate. 
+This can de done for individual and multiple certificates.
+
+For example you can renew the certificate `example-com-tls`
+```console
+$ kubectl get certificate
+NAME                       READY   SECRET               AGE
+example-com-tls            True    example-com-tls      1d
+
+$ kubectl cert-manager renew example-com-tls
+Manually triggered issuance of Certificate default/example-com-tls
+
+$ kubectl get certificaterequest
+NAME                              READY   AGE
+example-com-tls-tls-8rbv2         False    10s
+```
+
+You can also renew all certificates in a given namespace
+```console
+$ kubectl cert-manager renew --namespace=app --all
+```
+
+The renew command allows several options to be specified:
+* `--all` renew all Certificates in the given Namespace, or all namespaces when combined with `--all-namespaces`
+* `-A` or  `--all-namespaces` mark Certificates across namespaces for renewal
+* `-l` `--selector` allows set a label query to filter on
+as well as `kubectl` global flags like `--context` and `--namespace`.
+
+## Convert
+`kubectl cert-manager convert` can be used to convert cert-manager manifest files to the latest API version. Both YAML and JSON formats are accepted.
+
+The command takes file name, directory, or URL as input, and converts into the
+format of the latest version or the one specified by --output-version flag. 
+
+The default output will be printed to stdout in YAML format. One can use -o option
+to change to output destination.
+
+For example this will output `cert.yaml` in the latest API version:
+```console
+kubectl cert-manager convert -f cert.yaml
+```
