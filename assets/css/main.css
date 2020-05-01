@@ -883,9 +883,12 @@ Introduced on new Subscription Page
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 30px;
   padding: 10px 0;
   border-bottom: 1px solid #7e8087;
+}
+
+.media-hero__icon + .media-hero__cta-content {
+  margin-left: 30px;
 }
 
 .media-hero__cta-content.media-hero__cta-content--no-border {

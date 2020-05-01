@@ -13,65 +13,65 @@
 
 <!-- Media Hero Section -->
 <section class="media-hero">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="media-hero__content">
-          <div class="media-hero__graphic">
-            <img src="/img/png/preflight-logo.png" alt="" />
-          </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="media-hero__content">
+                    <div class="media-hero__graphic">
+                        <img src="/img/png/preflight-logo.png" alt="" />
+                    </div>
 
-          <div class="media-hero__copy">
-            <h1>{{ .Title }}</h1>
-            <p>{{ .Params.subtitle }}</p>
+                    <div class="media-hero__copy">
+                        <h1>{{ .Title | markdownify }}</h1>
+                        <p>{{ .Params.subtitle | markdownify }}</p>
 
-            <ul class="media-hero__ctas">
-              {{ range .Params.features }}
-                <li>
-                   <a href="#{{ .title | urlize }}" class="media-hero__cta media-hero__cta--{{ .color }}" data-smooth-scroll>
-                     <span class="media-hero__icon">
-                       {{ printf "svg/icon-%s.svg" .icon | partial }}
-                     </span>
-                     <span class="media-hero__cta-content">
-                       <span class="media-hero__cta-text">{{ .title }}</span>
-                       <span class="media-hero__icon">
-                         {{ partial "svg/icon-arrow-right.svg" }}
-                       </span>
-                     </span>
-                  </a>
-                </li>
-              {{ end }}
-            </ul>
+                        <ul class="media-hero__ctas">
+                            {{ range .Params.features }}
+                            <li>
+                                <a href="#{{ .title | urlize }}" class="media-hero__cta media-hero__cta--{{ .color }}"
+                                    data-smooth-scroll>
+                                    <span class="media-hero__cta-content">
+                                        <span class="media-hero__cta-text">{{ .title }}</span>
+                                        <span class="media-hero__icon">
+                                            {{ partial "svg/icon-arrow-right.svg" }}
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            {{ end }}
+                        </ul>
 
-            <div class="media-hero__main-cta-wrapper">
-              <a href="https://preflight.jetstack.io" target="_blank" class="Button">Visit Preflight</a>
+                        <div class="media-hero__main-cta-wrapper">
+                            <a href="https://preflight.jetstack.io" target="_blank" class="Button">Visit Preflight</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 <!-- Media Hero Section -->
 
 <!-- Info Icon Section  -->
 {{ $features := .Params.features }}
 {{ range .Params.features }}
-  <section id="{{ .title | urlize }}" class="info-icons info-icons--{{ .color }}">
+<section id="{{ .title | urlize }}" class="info-icons info-icons--{{ .color }}">
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="info-icons__hero">
-            <div class="info-icons__hero-icon">
-              {{ printf "svg/icon-%s.svg" .icon | partial }}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="info-icons__hero">
+                    <h2>{{ .title }}</h2>
+                    <p>{{ .description | markdownify }}</p>
+                    {{ with .image }}
+                        <div class="media-hero__graphic">
+                            <img src="{{ .url }}" alt="{{ .alt }}" />
+                        </div>
+                    {{ end }}
+                </div>
             </div>
-            <h2>{{ .title }}</h2>
-            <p>{{ .description | markdownify }}</p>
-          </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
 {{ end }}
 
 {{ end }}
@@ -79,16 +79,16 @@
 {{ define "cta"}}
 <!-- Subscriptions Form -->
 <section id="contactform" class="subscriptions-form">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="media-hero__main-cta-wrapper">
-          Sound interesting? <br/><br/>
-          <a href="https://preflight.jetstack.io" target="_blank" class="Button">Visit Preflight</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="media-hero__main-cta-wrapper">
+                    Sound interesting? <br /><br />
+                    <a href="https://preflight.jetstack.io" target="_blank" class="Button">Visit Preflight</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 <!-- Subscriptions Form -->
 {{ end }}
