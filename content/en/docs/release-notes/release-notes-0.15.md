@@ -105,7 +105,7 @@ spec:
 
 For JKS this adds `keystore.jks` and `truststore.jks` and `keystore.p12` for PKCS#12.
 
-## R
+## kubectl cert-manager tool
 
 kubectl cert-manager is a kubectl plugin that assists with controlling cert-manager inside your
 Kubernetes cluster. The kubectl cert-manager binary can be downloaded from the [GitHub release page](https://github.com/jetstack/cert-manager/releases/tag/v0.15).
