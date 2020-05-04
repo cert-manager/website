@@ -11,7 +11,7 @@ The `v0.15` release has a few focus areas:
 * Support for OpenShift's OLM
 * Improved deployment of the webhook
 * General Availability of JKS and PKCS#12 keystores
-* cmctl CLI tool
+* kubectl cert-manager CLI tool
 
 
 As usual, please read the [upgrade notes](/docs/installation/upgrading/upgrading-0.14-0.15/) before upgrading.
@@ -58,7 +58,7 @@ and edit the `args` to include `--feature-gates=ExperimentalCertificateControlle
 
 ## Support for OpenShift's OLM
 
-cert-manager is now deployable as a RedHat Certified OpenShift Operator.
+cert-manager is now deployable as a Red Hat Certified OpenShift Operator.
 This is done using the [cert-manager operator](https://github.com/jetstack/cert-manager-olm).
 More information on this can be found on the [OpenShift Installation page](https://cert-manager.io/docs/installation/openshift/).
 
