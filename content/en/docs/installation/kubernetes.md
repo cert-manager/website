@@ -260,6 +260,11 @@ You should read the [configuration](../../configuration/) guide to
 learn how to configure cert-manager to issue certificates from one of the
 supported backends.
 
+## Installing the kubectl plugin
+
+cert-manager also has a kubectl plugin which can be used to help you to manage cert-manager resources in the cluster.
+Installation instructions for this can be found in the [kubectl plugin](../../usage/kubectl-plugin/) documentation.
+
 ## Alternative installation methods
 
 ### kubeprod
