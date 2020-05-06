@@ -42,7 +42,7 @@ $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/rel
 ```
 
 > **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the manifests.
-> This version does not have API version conversion and only supports `cert-manager.io/v1alpha2` API resources. 
+> This version does not have API version conversion and only supports `cert-manager.io/v1alpha2` API resources.
 
 > **Note**: If you are running Kubernetes `v1.15.4` or below, you will need to add the
 > `--validate=false` flag to your `kubectl apply` command above else you will
@@ -101,9 +101,39 @@ docs](https://github.com/helm/helm/blob/240e539cec44e2b746b3541529d41f4ba01e77df
 
 ### Steps
 
-In order to install the Helm chart, you must follow these steps.
+In order to install the Helm chart, you must follow these steps:
 
-Install the `CustomResourceDefinition` resources separately.
+Create the namespace for cert-manager:
+```bash
+$ kubectl create namespace cert-manager
+```
+
+Add the Jetstack Helm repository:
+
+> **Warning**: It is important that this repository is used to install
+> cert-manager. The version residing in the helm stable repository is
+> *deprecated* and should *not* be used.
+
+```bash
+$ helm repo add jetstack https://charts.jetstack.io
+```
+
+Update your local Helm chart repository cache:
+
+```bash
+$ helm repo update
+```
+
+cert-manager requires a number of CRD resources to be installed into your
+cluster as part of installation.
+
+This can either be done manually, using `kubectl`, or using the `installCRDs`
+option when installing the Helm chart.
+
+**Option 1: installing CRDs with `kubectl`**
+
+Install the `CustomResourceDefinition` resources using `kubectl`:
+
 ```bash
 # Kubernetes 1.15+
 $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager.crds.yaml
@@ -115,42 +145,32 @@ $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/rel
 > **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the CRDs.
 > This version does not have API version conversion and only supports `cert-manager.io/v1alpha2` API resources. 
 
+**Option 2: install CRDs as part of the Helm release**
 
-Create the namespace for cert-manager.
-```bash
-$ kubectl create namespace cert-manager
-```
+To automatically install and manage the CRDs as part of your Helm release, you
+must add the `--set installCRDs=true` flag to your Helm installation command.
 
-Add the Jetstack Helm repository.
+Uncomment the relevant line in the next steps to enable this.
 
-> **Warning**: It is important that this repository is used to install
-> cert-manager. The version residing in the helm stable repository is
-> *deprecated* and should *not* be used.
+---
 
-```bash
-$ helm repo add jetstack https://charts.jetstack.io
-```
+To install the cert-manager Helm chart:
 
-Update your local Helm chart repository cache.
-```bash
-$ helm repo update
-```
-
-Install the cert-manager Helm chart.
 ```bash
 # Helm v3+
 $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
-  --version v0.15.0
+  --version v0.15.0 \
+  # --set installCRDs=true
 
 # Helm v2
 $ helm install \
   --name cert-manager \
   --namespace cert-manager \
   --version v0.15.0 \
-  jetstack/cert-manager
-
+  jetstack/cert-manager \
+  # --set installCRDs=true
 ```
 
 The default cert-manager configuration is good for the majority of users, but a
