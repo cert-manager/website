@@ -28,12 +28,16 @@ with the name of your Helm release for cert-manager (usually this is
 `cert-manager`) and replacing `<version>` with the version number you want to
 install:
 
-Install the cert-manager `CustomResourceDefinition` resources before upgrading
-the Helm chart.
+If you have installed the CRDs manually instead of with the `--set installCRDs=true`
+option added to your Helm install command, you should upgrade your CRD resources
+before upgrading the Helm chart:
+
 ```bash
-$ kubectl apply \
-       --validate=false \
-       -f https://raw.githubusercontent.com/jetstack/cert-manager/<version>/deploy/manifests/00-crds.yaml
+# Kubernetes 1.15+
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager.crds.yaml
+
+# Kubernetes <1.15
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager-legacy.crds.yaml
 ```
 
 Add the Jetstack Helm repository if you haven't already.
@@ -69,14 +73,9 @@ begin the upgrade process like so - replacing `<version>` with the version
 number you want to install:
 
 ```bash
-$ kubectl apply \
-       --validate=false \
-       -f https://github.com/jetstack/cert-manager/releases/download/<version>/cert-manager.yaml
-```
+# Kubernetes 1.15+
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager.yaml
 
-> Note: If you are running Kubernetes `v1.15.4` or below, you will need to add the
-> `--validate=false` flag to your `kubectl apply` command above else you will
-> receive a validation error relating to the
-> `x-kubernetes-preserve-unknown-fields` field in our `CustomResourceDefinition`
-> resources.  This is a benign error and occurs due to the way `kubectl`
-> performs resource validation.
+# Kubernetes <1.15
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager-legacy.yaml
+```
