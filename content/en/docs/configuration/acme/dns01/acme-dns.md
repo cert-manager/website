@@ -106,6 +106,9 @@ be directed to the correct location by this CNAME record. This proves that you c
 
 4. Create a secret from the credentials JSON that was saved in step 2, this secret is referenced
    in the `accountSecretRef` field of your DNS01 issuer settings.
+   When creating an `Issuer` both this `Issuer` and `Secret` must be in the same namespace.
+   However for a `ClusterIssuer` (which does not have a namespace) the `Secret` must be placed in
+   the same namespace as where the cert-manager pod is running in (in the default setup `cert-manager`).
 
 ```bash
 $ kubectl create secret generic acme-dns --from-file acmedns.json
