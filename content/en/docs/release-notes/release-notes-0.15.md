@@ -8,6 +8,7 @@ type: "docs"
 The `v0.15` release has a few focus areas:
 
 * Experimental new Certificate controller design
+* New `installCRDs` option in the Helm chart
 * Support for Red Hat's [Operator Lifecycle Manager](https://github.com/operator-framework/operator-lifecycle-manager) for easier deployment in OpenShift environments
 * Improved deployment process for webhook component
 * General Availability of JKS and PKCS#12 keystore support
@@ -55,6 +56,18 @@ and edit the `args` to include `--feature-gates=ExperimentalCertificateControlle
         - --feature-gates=ExperimentalCertificateControllers=true
 ```
 
+## Helm chart `installCRDs` option
+
+It's been a long-standing feature request to bundle our CRD resources as part
+of our Helm chart, to make it easier for users installing with Helm to manage
+the lifecycle of the CRDs we create.
+
+To facilitate this, and to help resolve common deployment issues, we have added
+a new `installCRDs` option to the Helm chart which will mean the CRD resources
+will be managed by your regular Helm installation.
+
+This feature is **disabled** by default, and can be enabled either in your
+`values.yaml` file or as a flag with `helm install --set installCRDs=true`.
 
 ## Support for OpenShift's Operator Lifecycle Manager
 
