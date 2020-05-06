@@ -37,6 +37,14 @@ metadata:
 spec:
   selfSigned: {}
 ```
+Optionally, you can specify (CRL)[https://en.wikipedia.org/wiki/Certificate_revocation_list] Distribution Points. An array of strings each of which identifies the location of the CRL from which the revocation of this certificate can be checked:
+```
+...
+spec:
+  selfSigned:
+    crlDistributionPoints:
+    - "http://example.com"
+```
 
 Once deployed, you should be able to see immediately that the issuer is ready
 for signing. Replace `issuers` here with `clusterissuers` if that is what has
