@@ -93,8 +93,6 @@ spec:
   - bar.example.com
   issuerRef:
     name: letsencrypt-prod
-spec:
-  format: PKCS8 # supports PKCS8 or PKCS1 like previous
   keystores:
     jks:
       create: true
