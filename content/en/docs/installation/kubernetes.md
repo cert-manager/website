@@ -32,7 +32,8 @@ guides](../../configuration/).
 All resources (the `CustomResourceDefinitions`, cert-manager, namespace, and the webhook component)
 are included in a single YAML manifest file:
 
-Install the `CustomResourceDefinitions` and cert-manager itself
+Install the `CustomResourceDefinitions` and cert-manager itself:
+
 ```bash
 # Kubernetes 1.15+
 $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.0/cert-manager.yaml
