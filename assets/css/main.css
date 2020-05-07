@@ -809,14 +809,20 @@ Introduced on new Subscription Page
 
 .media-hero__graphic svg,
 .media-hero__graphic img {
-  width: 75%;
+  width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
+  border-radius: 10px;
 }
 
 .media-hero__copy h1 {
   color: white;
+}
+
+.media-hero__copy p {
+  font-size: 1.4em;
+  line-height: 1.4em;
 }
 
 .media-hero__ctas {
@@ -985,9 +991,19 @@ Introduced on new Subscription Page
     padding-top: 100px;
   }
 
+  .media-hero__graphic--small {
+    padding-left: 15px;
+    padding-top: 30px;
+  }
+
   .media-hero__graphic svg,
   .media-hero__graphic img {
     width: 100%;
+  }
+
+  .media-hero__graphic--small svg,
+  .media-hero__graphic--small img {
+    width: 60%;
   }
 
   .media-hero__bottom {
@@ -2678,4 +2694,12 @@ Introduced on new Subscription Page
 /* Contact forms */
 #contactform.sweden-form {
   padding-top: 0;
+}
+
+td, th {
+  padding: 0.5rem;
+}
+
+dt {
+  margin-top: 1.5rem;
 }
