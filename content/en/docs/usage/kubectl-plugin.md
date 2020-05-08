@@ -12,7 +12,7 @@ You need the `kubectl-cert-manager.tar.gz` file for the platform you're using, t
 In order to use the kubectl plugin you need its binary to be accessible under the name `kubectl-cert_manager` in your `$PATH`.
 Run the following commands to set up the plugin:
 ```console
-$ curl -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v0.15.0/kubectl-cert-manager-liux-amd64.tar.gz
+$ curl -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v0.15.0/kubectl-cert_manager-linux-amd64.tar.gz
 $ tar xzf kubectl-cert-manager.tar.gz
 $ sudo mv kubectl-cert_manager /usr/local/bin
 ```
