@@ -23,6 +23,10 @@ Whether it's running on-premises or in a cloud environment, Kubernetes provides 
 
 Common abstractions atop of Kubernetes such as Istio are providing further capabilities to secure, observe and manage our environments and workloads. Coupled with hybrid solutions, multi-mesh architectures can enable communication between federated meshes and organisational boundaries, further bridging the gap between segregated clusters of compute.
 
-**Agenda:** TBC
+**Agenda:** 
 
-Please register now to reserve your place!
+We'll be starting at 1pm and we'll hear from two speakers, Paul Jones, Solutions Engineer from Jetstack on  ‘Running Enterprise workloads in Hybrid Kubernetes and Multi Mesh topologies’ followed by some time for Q&A. We'll also be hearing from Nick Perry, Cloud Platform Architect from William Hill whose talk will also be followed by some time for Q & A
+. 
+A more specific agenda will be released 2 - 3 days prior to the event, along with the link you'll need to join this event. 
+
+Please register now to attend!
