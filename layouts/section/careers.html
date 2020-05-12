@@ -67,17 +67,8 @@
               <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-8 col-lg-offset-3">
                   <h2 class="section-title section-title--left">Current openings:</h2>
-                  <div>
-                      <ul class="current-openings__list">
-                        {{ range $index, $page := .Data.Pages }}
-                        <li class="current-openings__list-item">
-                          <a class="current-openings__link" href="{{ $page.RelPermalink }}">
-                            {{ $page.Title }}
-                          </a>
-                        </li>
-                        {{ end }}
-                      </ul>
-                  </div>
+                  <div id='freshteam-widget'></div>
+                  <script src='//s3.amazonaws.com/files.freshteam.com/production/20857/attachments/3001282961/original/3000010177_widget.js?1586279504'></script>
                 </div>
               </div>
           </div>

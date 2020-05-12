@@ -17,16 +17,22 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="media-hero__content">
-                    <div class="media-hero__graphic media-hero__graphic--banner">
-                        <img src="/img/png/preflight-diagram-simple.png" alt="" />
-                    </div>
-
+                    {{ with .Params.og.image }}
+                        <div class="media-hero__graphic media-hero__graphic--banner {{ if eq .small true }}media-hero__graphic--small{{end}}">
+                            <img src="{{ .url }}" alt="{{ .alt }}" />
+                        </div>
+                    {{ end }}
                     <div class="media-hero__copy">
                         <h1>
-                            <img class="media-hero__main-logo" src="/img/png/preflight-logo.png" alt="Preflight logo" />
+                            {{ with .Params.logo }}
+                                <img class="media-hero__main-logo" src="{{ .url }}" alt="{{ .alt }}" />
+                            {{ end }}
                             {{ .Title | markdownify }}
                         </h1>
-                        <p>{{ .Params.subtitle | markdownify }}</p>
+                        {{ with .Params.subtitle }}
+                            <h3>{{ . | markdownify }}</h3>
+                        {{ end }}
+                        <p>{{ .Params.description | markdownify }}</p>
 
                         <ul class="media-hero__ctas">
                             {{ range .Params.features }}
@@ -45,8 +51,13 @@
                         </ul>
 
                         <div class="media-hero__main-cta-wrapper">
-                            <a href="https://preflight.jetstack.io" target="_blank" class="Button media-hero__main-cta-wrapper__button">Visit Preflight</a>
-                            <a href="#contactform" class="Button media-hero__main-cta-wrapper__button" data-smooth-scroll>Join the Beta</a>
+                            {{ range .Params.links }}
+                                {{ if .contactform }}
+                                    <a href="#contactform" class="media-hero__main-cta-wrapper__button Button" data-smooth-scroll>{{ .text }}</a>
+                                {{ else }}
+                                    <a href="{{ .url }}" {{ if .external }}target="_blank"{{ end }} class="media-hero__main-cta-wrapper__button Button">{{ .text }}</a>
+                                {{ end }}
+                            {{ end }}
                         </div>
                     </div>
                 </div>
@@ -67,7 +78,7 @@
                     <h2>{{ .title }}</h2>
                     <p>{{ .description | markdownify }}</p>
                     {{ with .additional }}
-                        {{ if eq . "packages" }}
+                        {{ if eq . "preflight:packages" }}
                         <div>
                             <h3>Supported Packages</h3>
                             <dl>
@@ -110,19 +121,23 @@
 {{ end }}
 
 {{ define "cta"}}
-<section id="contactform" class="subscriptions-form">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="media-hero__main-cta-wrapper">
-                    <h1>Join the Private Beta</h1>
-                    <p>Jetstack Preflight is currently in Private Beta. Sign up here to receive an invite to join.</p>
-                    <div class="media-hero__cta-freshsales">
-                        <script src='https://jetstacksales.freshsales.io/web_forms/c103886bee5ad88446293623e7aaa1094f4f8a06b002cdb8163b449a50f9a82c/form.js' crossorigin='anonymous' id='fs_c103886bee5ad88446293623e7aaa1094f4f8a06b002cdb8163b449a50f9a82c'></script>
+{{ with .Params.cta }}
+    <section id="contactform" class="subscriptions-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="media-hero__main-cta-wrapper">
+                        <h1>{{ .title }}</h1>
+                        <p>{{ .text | markdownify }} </p>
+                        {{ with .freshsales }}
+                            <div class="media-hero__cta__freshsales">
+                                <script src="{{ .src }}" crossorigin='anonymous' id="{{ .id }}"></script>
+                            </div>
+                        {{ end }}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+{{ end }}
 {{ end }}
