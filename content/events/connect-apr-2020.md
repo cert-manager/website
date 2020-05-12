@@ -3,9 +3,9 @@ title: Kubernetes in Hybrid and Multi-Cloud Environments
 image: /events/connect-apr-2020/thumbnail.jpg
 address: "Virtual Event"
 event_date: "29th May 2020"
-link: /events/connect-apr-2020
+link: /events/connect-may-2020
 timestamp: "20200325"
-aliases: [/events/connect-mar-2020]
+aliases: [/events/connect-mar-2020, /events/connect-apr-2020]
 eventbrite_id: 91594578851
 ---
 
