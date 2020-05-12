@@ -8,6 +8,8 @@ timestamp: "20200219"
 start_time: "8:30am"
 end_time: "11:00am"
 eventbrite_id: 89237633163
+# TODO add to a list of past events
+expirydate: "2020-02-20"
 ---
 
 ## 'Breakfast Briefing' with Jetstack and Google Cloud
