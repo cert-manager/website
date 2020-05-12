@@ -55,7 +55,7 @@ spec:
   ca:
     secretName: ca-key-pair
 ```
-Optionally, you can specify (CRL)[https://en.wikipedia.org/wiki/Certificate_revocation_list] Distribution Points. An array of strings each of which identifies the location of the CRL from which the revocation of this certificate can be checked:
+Optionally, you can specify [CRL](https://en.wikipedia.org/wiki/Certificate_revocation_list) Distribution Points. An array of strings each of which identifies the location of the CRL from which the revocation of this certificate can be checked:
 ```
 ...
 spec:
