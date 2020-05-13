@@ -905,6 +905,14 @@ Introduced on new Subscription Page
   text-align: center;
 }
 
+/* Add to CTA buttons that aren't embedded
+ * within other elements to keep them spaced.
+ */
+.media-hero__main-cta-wrapper__button {
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+}
+
 .media-hero__main-cta {
   display: inline-block;
   background-color: transparent;
@@ -939,6 +947,10 @@ Introduced on new Subscription Page
   text-decoration: none;
 }
 
+.media-hero__cta-freshsales {
+  margin-top: 3rem;
+}
+
 .media-hero__bottom {
   text-align: center;
 }
@@ -963,6 +975,12 @@ Introduced on new Subscription Page
   fill: #6e6f7c;
   margin: 20px;
   width: 33%;
+}
+
+/* The main logo, e.g. the Product logo */
+.media-hero__main-logo {
+  width: 5rem;
+  height: 5rem;
 }
 
 @media (min-width: 991px) {
@@ -994,6 +1012,10 @@ Introduced on new Subscription Page
   .media-hero__graphic--small {
     padding-left: 15px;
     padding-top: 30px;
+  }
+
+  .media-hero__graphic--banner {
+    margin-top: 150px;
   }
 
   .media-hero__graphic svg,
@@ -1033,6 +1055,12 @@ Introduced on new Subscription Page
 
   .media-hero__main-cta-wrapper {
     text-align: left;
+  }
+
+  .media-hero__main-logo {
+   margin-left: -6rem;
+   margin-right: 1rem;
+   float: left;
   }
 }
 
