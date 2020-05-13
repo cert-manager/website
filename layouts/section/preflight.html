@@ -1,0 +1,128 @@
+{{ define "title" }} | {{ .Title }}{{ end }}
+{{ define "description" }}{{ .Params.og.description }}{{ end }}
+
+{{ define "navbar" }}
+{{ partial "navbar/dark.html" . }}
+{{ end }}
+
+{{ define "ogtitle" }}{{ .Title }}{{ end }}
+{{ define "ogdescription" }}{{ .Params.og.description }}{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.og.image }}{{ end }}
+
+{{ define "body" }}
+
+<!-- Media Hero Section -->
+<section class="media-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="media-hero__content">
+                    <div class="media-hero__graphic media-hero__graphic--banner">
+                        <img src="/img/png/preflight-diagram-simple.png" alt="" />
+                    </div>
+
+                    <div class="media-hero__copy">
+                        <h1>
+                            <img class="media-hero__main-logo" src="/img/png/preflight-logo.png" alt="Preflight logo" />
+                            {{ .Title | markdownify }}
+                        </h1>
+                        <p>{{ .Params.subtitle | markdownify }}</p>
+
+                        <ul class="media-hero__ctas">
+                            {{ range .Params.features }}
+                            <li>
+                                <a href="#{{ .title | urlize }}" class="media-hero__cta media-hero__cta--{{ .color }}"
+                                    data-smooth-scroll>
+                                    <span class="media-hero__cta-content">
+                                        <span class="media-hero__cta-text">{{ .short | default .title }}</span>
+                                        <span class="media-hero__icon">
+                                            {{ partial "svg/icon-arrow-right.svg" }}
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            {{ end }}
+                        </ul>
+
+                        <div class="media-hero__main-cta-wrapper">
+                            <a href="https://preflight.jetstack.io" target="_blank" class="Button media-hero__main-cta-wrapper__button">Visit Preflight</a>
+                            <a href="#contactform" class="Button media-hero__main-cta-wrapper__button" data-smooth-scroll>Join the Beta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Media Hero Section -->
+
+<!-- Info Icon Section  -->
+{{ $features := .Params.features }}
+{{ range .Params.features }}
+<section id="{{ .title | urlize }}" class="info-icons info-icons--hr">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="info-icons__hero">
+                    <h2>{{ .title }}</h2>
+                    <p>{{ .description | markdownify }}</p>
+                    {{ with .additional }}
+                        {{ if eq . "packages" }}
+                        <div>
+                            <h3>Supported Packages</h3>
+                            <dl>
+                                <dt>Kubernetes Pods</dt>
+                                <dd>Covers configuration of basic Kubernetes resources</dd>
+
+                                <dt>cert-manager</dt>
+                                <dd>Configuration of cert-manager, and associated resources, e.g. Secrets</dd>
+                                <dt>Google Kubernetes Engine</dt>
+                                <dd>Covers configuration of the cluster within Google Kubernetes Engine</dd>
+                                <dt>Versions</dt>
+                                <dd>Reports outdated or insecure versions of Kubernetes addons</dd>
+                            </dl>
+                            <h3>Coming soon</h3>
+                            <dl>
+                                <dt>AWS Elastic Kubernetes Service, Azure Kubernetes Service</dt>
+                                <dd>Configuration of clusters within these hosted platforms</dd>
+
+                                <dt>API Version Deprecation</dt>
+                                <dd>Reports when using Kubernetes resource versions that have been deprecated and are about to be removed</dd>
+
+                                <dt>Istio</dt>
+                                <dd>Covers configuration of the service mesh and its use by other services</dd>
+                            </dl>
+                        </div>
+                        {{ end }}
+                    {{ end }}
+                    {{ with .image }}
+                        <div class="media-hero__graphic {{ if eq .small true }}media-hero__graphic--small{{end}}">
+                            <img src="{{ .url }}" alt="{{ .alt }}" />
+                        </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{ end }}
+
+{{ end }}
+
+{{ define "cta"}}
+<section id="contactform" class="subscriptions-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="media-hero__main-cta-wrapper">
+                    <h1>Join the Private Beta</h1>
+                    <p>Jetstack Preflight is currently in Private Beta. Sign up here to receive an invite to join.</p>
+                    <div class="media-hero__cta-freshsales">
+                        <script src='https://jetstacksales.freshsales.io/web_forms/c103886bee5ad88446293623e7aaa1094f4f8a06b002cdb8163b449a50f9a82c/form.js' crossorigin='anonymous' id='fs_c103886bee5ad88446293623e7aaa1094f4f8a06b002cdb8163b449a50f9a82c'></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{ end }}
