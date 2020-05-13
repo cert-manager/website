@@ -35,15 +35,14 @@ features:
     Preflight is a core tool for your Kubernetes team, providing a seamless compliance checker so that your business can move quickly on improving your Infrastructure, whilst having the confidence that it meets the highest standards of best practice.
 
     You can rely on our Kubernetes expertise to catch many common Kubernetes errors.
-- title: Ready-made policy packs that are maintained and updated for common cloud native Architecture and patterns
+- title: Ready-made policy packages that are maintained and updated for common cloud native Architecture and patterns
   short: Cloud-native architecture and patterns
   color: purple
   additional: packages
   description: |
-    Preflight packs are constantly updated through shared knowledge in Jetstack, meaning they are always covering the latest developments in upstream technologies and cloud infrastructure.
+    Preflight packages are constantly updated through shared knowledge in Jetstack, meaning they are always covering the latest developments in upstream technologies and cloud infrastructure.
 - title: Hosted, managed, or on-prem
   color: yellow
-  additional: platforms
   description: |
     Preflight supports any Kubernetes environment, hosted or on-prem, and can be used when you have a heterogeneous environment. There are policy packs that check specific rules for each environment so that you be sure that you have the best configuration in each case.
 
