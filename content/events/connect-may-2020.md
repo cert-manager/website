@@ -32,9 +32,11 @@ A more specific agenda will be released 2 - 3 days prior to the event, along wit
 Please register now to attend!
 
 
-### Our Speakers
+
+## Our Speakers
 
 **'Running Enterprise workloads in Hybrid Kubernetes and Multi Mesh topologies'** by Paul Jones
+
 
 *Abstract*
 
@@ -52,6 +54,7 @@ With 3 years experience working with Kubernetes in Hybrid environments, Paul has
 
 
 **‘Using hybrid Kubernetes and Istio to deliver and operate more effectively in regulated markets’** by Nick Perry
+
 
 *Abstract*
 
