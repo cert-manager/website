@@ -35,6 +35,14 @@ $ gcloud projects add-iam-policy-binding $PROJECT_ID \
    --role roles/dns.admin
 ```
 
+> Note: The use of the `dns.admin` role in this example role is for convenience.
+> If you want to ensure cert-manager runs under a least privilege service account,
+> you will need to create a custom role with the following permissions:
+>
+>  * `dns.resourceRecordSets.*`
+>  * `dns.changes.*`
+>  * `dns.managedZones.list`
+
 ## Create a Service Account Secret
 
 To access this service account, cert-manager uses a key stored in a Kubernetes
