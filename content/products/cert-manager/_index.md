@@ -52,8 +52,10 @@ features:
   description: |
     cert-manager can be extended to support custom, internal or otherwise unsupported Issuers.
 
-    There are also many other integration points to have cert-manager work with your
-    infrastructure to request, renew, consume and monitor certificates.
+    There are also many other integration points to have cert-manager work with
+    your infrastructure to request, renew, consume and monitor certificates whilst
+    taking advantage of the automation and deep integration into the cloud native
+    ecosystem provided by cert-manager.
 - title: Open Source
   color: green
   description: |
