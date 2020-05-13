@@ -24,10 +24,10 @@
                     {{ end }}
                     <div class="media-hero__copy">
                         <h1>
+                            {{ .Title | markdownify }}
                             {{ with .Params.logo }}
                                 <img class="media-hero__main-logo" src="{{ .url }}" alt="{{ .alt }}" />
                             {{ end }}
-                            {{ .Title | markdownify }}
                         </h1>
                         {{ with .Params.subtitle }}
                             <h3>{{ . | markdownify }}</h3>

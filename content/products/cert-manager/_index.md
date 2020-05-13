@@ -4,9 +4,11 @@ title: cert-manager
 subtitle: Automate certificate management in cloud native environments
 description: |
     cert-manager builds on top of Kubernetes, introducing certificate issuers and certificates as first-class resource types in the Kubernetes API. This makes it possible to provide 'certificates as a service' to developers working within your Kubernetes clusters.
-logo:
-  url: /img/png/cert-manager-logo.png
-  alt: cert-manager Logo
+og:
+  image:
+    url: /img/png/cert-manager-logo.png
+    alt: cert-manager Logo
+    small: true
 links:
 - text: See the project on GitHub
   url: https://github.com/jetstack/cert-manager
