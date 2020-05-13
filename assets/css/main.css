@@ -947,7 +947,7 @@ Introduced on new Subscription Page
   text-decoration: none;
 }
 
-.media-hero__cta-freshsales {
+.media-hero__cta__freshsales {
   margin-top: 3rem;
 }
 
@@ -981,6 +981,8 @@ Introduced on new Subscription Page
 .media-hero__main-logo {
   width: 5rem;
   height: 5rem;
+  margin-bottom: -0.5rem;
+  vertical-align: baseline;
 }
 
 @media (min-width: 991px) {
@@ -1055,12 +1057,6 @@ Introduced on new Subscription Page
 
   .media-hero__main-cta-wrapper {
     text-align: left;
-  }
-
-  .media-hero__main-logo {
-   margin-left: -6rem;
-   margin-right: 1rem;
-   float: left;
   }
 }
 

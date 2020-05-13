@@ -1,6 +1,7 @@
 ---
+url: /preflight
 title: Preflight
-subtitle: |
+description: |
     Jetstack Preflight helps you better understand your Kubernetes environments by
     constantly scanning for mis-configurations that may be opening security holes,
     causing costly excess resource usage or making your cluster harder to maintain.
@@ -10,9 +11,20 @@ subtitle: |
     customers' production workloads. Data from your environment is continually
     checked against policy rules and the results are summarised in clear reports
     that highlight the areas most in need of your attention.
+logo:
+  url: /img/png/preflight-logo.png
+  alt: Preflight logo
 og:
   description: Preflight is a service that performs automatic configuration checks on your Kubernetes infrastructure.
-  image: /img/png/hero-layers.png
+  image:
+    url: /img/png/preflight-diagram-simple.png
+    alt: Diagram showing that Preflight inspects your clusters and generates reports
+links:
+- text: Visit Preflight
+  url: https://preflight.jetstack.io/
+  external: true
+- contactform: true
+  text: Join the Beta
 features:
 - title: Gain visibility in to the workloads running in your Kubernetes environments
   short: Workload visibility
@@ -38,7 +50,7 @@ features:
 - title: Ready-made policy packages that are maintained and updated for common cloud native Architecture and patterns
   short: Cloud-native architecture and patterns
   color: purple
-  additional: packages
+  additional: preflight:packages
   description: |
     Preflight packages are constantly updated through shared knowledge in Jetstack, meaning they are always covering the latest developments in upstream technologies and cloud infrastructure.
 - title: Hosted, managed, or on-prem
@@ -76,4 +88,11 @@ features:
     Preflight maintains a historical record of the reports from your environments. This allows you to confirm the earlier state of your cluster when needed.
 
     It also powers our notification feature that informs you when new violations occur within one your environments.
+cta:
+  title: Join the Private Beta
+  text: |
+    Jetstack Preflight is currently in Private Beta. Sign up here to be invited to join.
+  freshsales:
+    src: "https://jetstacksales.freshsales.io/web_forms/c103886bee5ad88446293623e7aaa1094f4f8a06b002cdb8163b449a50f9a82c/form.js"
+    id: "fs_c103886bee5ad88446293623e7aaa1094f4f8a06b002cdb8163b449a50f9a82c"
 ---
