@@ -1,6 +1,6 @@
 ---
 title: Kubernetes in Hybrid and Multi-Cloud Environments
-image: /events/connect-apr-2020/thumbnail.jpg
+image: /events/connect-may-2020/thumbnail.jpg
 address: "Virtual Event"
 event_date: "29th May 2020"
 link: /events/connect-may-2020
@@ -23,11 +23,11 @@ Whether it's running on-premises or in a cloud environment, Kubernetes provides 
 
 Common abstractions atop of Kubernetes such as Istio are providing further capabilities to secure, observe and manage our environments and workloads. Coupled with hybrid solutions, multi-mesh architectures can enable communication between federated meshes and organisational boundaries, further bridging the gap between segregated clusters of compute.
 
-**Agenda:** 
+**Agenda:**
 
-We'll be starting at 1pm and we'll hear from two speakers, Paul Jones, Solutions Engineer from Jetstack on  ‘Running Enterprise workloads in Hybrid Kubernetes and Multi Mesh topologies’ followed by some time for Q&A. We'll also be hearing from Nick Perry, Cloud Platform Architect from William Hill on 'Using hybrid Kubernetes and Istio to deliver and operate more effectively in regulated markets' which will also be followed by some time for Q & A. 
+We'll be starting at 1pm and we'll hear from two speakers, Paul Jones, Solutions Engineer from Jetstack on  ‘Running Enterprise workloads in Hybrid Kubernetes and Multi Mesh topologies’ followed by some time for Q&A. We'll also be hearing from Nick Perry, Cloud Platform Architect from William Hill on 'Using hybrid Kubernetes and Istio to deliver and operate more effectively in regulated markets' which will also be followed by some time for Q & A.
 
-A more specific agenda will be released 2 - 3 days prior to the event, along with the link you'll need to join this event. 
+A more specific agenda will be released 2 - 3 days prior to the event, along with the link you'll need to join this event.
 
 Please register now to attend!
 
