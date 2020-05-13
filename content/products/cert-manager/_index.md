@@ -3,7 +3,7 @@ url: /cert-manager
 title: cert-manager
 subtitle: Automate certificate management in cloud native environments
 description: |
-    cert-manager builds on top of Kubernetes, introducing certificate authorities and certificates as first-class resource types in the Kubernetes API. This makes it possible to provide 'certificates as a service' to developers working within your Kubernetes clusters.
+    cert-manager builds on top of Kubernetes, introducing certificate issuers and certificates as first-class resource types in the Kubernetes API. This makes it possible to provide 'certificates as a service' to developers working within your Kubernetes clusters.
 logo:
   url: /img/png/cert-manager-logo.png
   alt: cert-manager Logo
@@ -25,30 +25,30 @@ features:
     Request, renew and monitor certificates with easy to use tools. Use the de-facto
     standard for Kubernetes certificate management and take advantage of integration
     with other tools.
-- title: Standardised API for interacting with multiple Certificate Authorities
-  short: Standardised API for Certificate Authorities
+- title: Standardised API for interacting with multiple Certificate Issuers
+  short: Standardised API for Certificate Issuers
   color: blue
   description: |
-    You can use multiple Certificate Authorities within a single cluster, to allow
+    You can use multiple Certificate Issuers within a single cluster, to allow
     configuration flexibility, while maintaining control over configuration.
 - title: Gives security teams the confidence to allow developers to self-serve certificates
   short: Enable developer self-serve
   color: purple
   description: |
-    cert-manager allows for central configuration of Certificate Authorities and policies,
+    cert-manager allows for central configuration of Certificate Issuers and policies,
     while allowing developers to consume them in a self-serve fashion. Take advantage of
     monitoring to see what certificates are in use across your Kubernetes infrastructure.
-- title: Support for many Certificate Authorities
+- title: Support for many Certificate Issuers
   color: yellow
   description: |
     cert-manager comes with support for ACME (Let's Encrypt), HashiCorp Vault, Venafi,
-    self signed and internal certificate authorities, and others, meaning that you
-    are free to choose your Certificate Authority.
-- title: Extensible to support other CAs
+    self signed and internal certificate issuers, and others, meaning that you
+    are free to choose your Certificate Authority and use any intermediate issuer you wish.
+- title: Extensible to support other Issuers
   short: Extensible
   color: maroon
   description: |
-    cert-manager can be extended to support custom, internal or otherwise unsupported CAs.
+    cert-manager can be extended to support custom, internal or otherwise unsupported Issuers.
 
     There are also many other integration points to have cert-manager work with your
     infrastructure to request, renew, consume and monitor certificates.
