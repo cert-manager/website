@@ -30,3 +30,47 @@ We'll be starting at 1pm and we'll hear from two speakers, Paul Jones, Solutions
 A more specific agenda will be released 2 - 3 days prior to the event, along with the link you'll need to join this event. 
 
 Please register now to attend!
+
+
+### Our Speakers
+
+**'Running Enterprise workloads in Hybrid Kubernetes and Multi Mesh topologies'** by Paul Jones
+
+*Abstract*
+
+The need to quickly adapt to changing market demands have caused a rise in the requirements and expectations that are placed on enterprises. Many companies find it challenging to accommodate and adjust to these trends by using existing compute infrastructure and processes.
+
+Consequently, enterprises are looking to leverage the capabilities of public cloud, with migrating from an on-premises environment yielding many business decisions and technical considerations. Not only must strategic decisions be made regarding vendors and technologies, but also how to provision and manage resources and deploy applications.
+
+In this session we will cover how to achieve environmental consistency across hybrid cloud infrastructure through centralised policy and configuration, how to architect hybrid solutions as well as multi-mesh implementation patterns for Istio, and how Kubernetes' platform agnosticism and abstractions underpins and enables these implementations.
+
+*Bio*
+
+Paul is a Solutions Engineer at Jetstack with a background in building and deploying microservice applications and distributed systems in enterprise environments for both public and private sector clients.
+
+With 3 years experience working with Kubernetes in Hybrid environments, Paul has seen how the evolution of the project has enabled it to deliver homogeneous experiences regardless of infrastructure for developers and operators alike.
+
+
+**‘Using hybrid Kubernetes and Istio to deliver and operate more effectively in regulated markets’** by Nick Perry
+
+*Abstract*
+
+Aggressive expansion in the US market is a key objective for bookmaker and gaming operator William Hill. Underpinning this is a new software stack and AWS-first strategy. However, strict industry regulations mean some of our back-end components must be hosted on-prem in each state. This talk is about how we use Kubernetes and Istio to efficiently deliver and operate software across that hybrid landscape.
+
+I will give our perspective on the value of Kubernetes, particularly as an abstraction layer, normalising differences between public cloud and on-prem infrastructure.
+
+We will look at the tools and techniques we use to build and run our clusters and present them as a coherent, unified platform to developers. I will describe our network architecture and how we use Istio.
+
+Finally, I shall talk candidly about what we have learned, what has worked well, problems we have faced and what the future holds.
+
+This talk may be useful to anyone interested in using Kubernetes and service mesh to enable product teams to ship hybrid cloud / on-prem applications.
+
+*Bio*
+
+I am a cloud platform architect at William Hill. It is my job to ensure we have the right infrastructure and platform services to help us deliver and run our products efficiently and securely. I strive to shield developers from unnecessary context, allowing them concentrate on creating core value and getting features to market. I have worked as an engineer and architect in the gambling sector for the last 10 years.
+
+First got paid for doing computer stuff in 1997 and it involved AS/400, token ring, Netware and 10base2 Ethernet.
+
+First real career job was as a unix admin for Sun Microsystems in early 2000s.
+
+First ran containers in production in 2008 (Solaris ;) ). Embraced Docker in 2015.
