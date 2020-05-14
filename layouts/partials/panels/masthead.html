@@ -3,7 +3,9 @@
         {{ if .latest }}
         <div class="Hero__latest">
             <a href="{{ .latest.link }}" class="Hero__latestLink" target="_blank" rel="noopener noreferrer">
-                <span class="Hero__latestPill">Latest</span>
+                <span class="Hero__latestPill">
+                  <img src="{{ .latest.image }}"/>
+                </span>
                 <span class="Hero__latestText">{{ .latest.text }}</span>
                 {{ partial "svg/icon-small-right-arrow.svg" }}
             </a>
