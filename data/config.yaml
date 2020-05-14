@@ -51,8 +51,13 @@ menus:
   navbar:
   - name: Subscription
     link: /subscription/
-  - name: Open Source
-    link: /open-source/
+  - name: Products
+    link: '#'
+    sublinks:
+    - name: Preflight
+      link: /preflight/
+    - name: cert-manager
+      link: /cert-manager/
   - name: Services
     link: '#'
     sublinks:
@@ -62,6 +67,8 @@ menus:
       link: /training/
     - name: Public Training
       link: /public-training/
+  - name: Open Source
+    link: /open-source/
   - name: About Us
     link: /about/
     sublinks:
@@ -91,6 +98,22 @@ menus:
     - link: /subscription/#support
       text: Support
 
+  - name: Services
+    links:
+    - link: /consulting
+      text: Consulting
+    - link: /training
+      text: Training
+    - link: /public-training
+      text: Public Training
+
+  - name: Products
+    links:
+    - link: /preflight
+      text: Preflight
+    - link: /cert-manager
+      text: cert-manager
+
   - name: Open Source
     link: /open-source
     links:
@@ -106,15 +129,6 @@ menus:
       text: Navigator
     - link: /open-source/#kube-lego
       text: Kube-Lego
-
-  - name: Services
-    links:
-    - link: /consulting
-      text: Consulting
-    - link: /training
-      text: Training
-    - link: /public-training
-      text: Public Training
 
   - name: Company
     links:

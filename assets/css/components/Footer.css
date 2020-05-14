@@ -184,7 +184,7 @@ a.Footer__navSectionLink:visited {
   }
 
   .Footer__nav {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .Footer__topGrid > * {
