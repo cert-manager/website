@@ -186,8 +186,10 @@ headline:
       Jetstack helps businesses to build and operate modern cloud native infrastructure with Kubernetes.
 
     latest: # Use this to configure the display of the latest pill in the hero section. Removing this will remove the pill.
-      text: Preflight cluster configuration and compliance for Kubernetes
-      link: https://blog.jetstack.io/blog/introducing-preflight/
+      text: Jetstack and Venafi join forces to bring machine identity protection to the cloud native stack
+      image: /img/png/venafi-jetstack.png
+      color: white
+      link: https://blog.jetstack.io/blog/jetstack-venafi-join-forces
 
   getStarted:
     headline: Who are we?
@@ -329,8 +331,8 @@ panels:
       name: Practical, real-world training
       desc: Fast access to the skills you’ll need to deploy and operate cloud native infrastructure reliably and at scale
       link: /training
-    
-  what_we_offer_v2: 
+
+  what_we_offer_v2:
     headline: What we offer
     features:
     - img: /img/jpg/wwo-subscription.jpg
@@ -348,7 +350,7 @@ panels:
     - img: /img/jpg/wwo-open-source.jpg
       category: Open source
       name: Building tools to enhance the operational and developer experience
-      desc: We’ve been contributing to the Kubernetes ecosystem from the beginning 
+      desc: We’ve been contributing to the Kubernetes ecosystem from the beginning
       link: /open-source
 
     - img: /img/jpg/wwo-consulting.jpg

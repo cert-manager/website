@@ -66,7 +66,8 @@
 
 .Hero__latestLink:link,
 .Hero__latestLink:visited {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   padding: 5px 10px 5px 5px;
   border-radius: 20px;
   background-color: rgb(255,255,255,0.15);
@@ -81,11 +82,14 @@
 }
 
 .Hero__latestLink svg {
+  visibility: hidden;
   fill: currentColor;
 }
 
 .Hero__latestText {
-  margin: 0 1rem;
+  margin: 0.5rem 1rem 0.5rem 1rem;
+  text-align: left;
+  max-width: 50rem;
 }
 
 .Hero__latestLink:hover .Hero__latestText,
@@ -94,12 +98,13 @@
 }
 
 .Hero__latestPill {
-  background-color: #51D8BA;
-  padding: 5px 10px;
-  border-radius: 20px;
   display: inline-block;
   text-transform: uppercase;
   font-size: 1.2rem;
+}
+.Hero__latestPill img {
+  width: 150px;
+  border-radius: 10rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -108,6 +113,16 @@
     background-image: url(/img/jpg/hero_desktop.jpg);
     display: flex;
     padding-top: 130px;
+  }
+
+  .Hero__latestLink svg {
+    visibility: visible;
+  }
+
+  .Hero__latestText {
+    margin: 0 1rem;
+    text-align: left;
+    max-width: 50rem;
   }
 
   .Hero__container {
@@ -130,7 +145,7 @@
   .Hero__content:first-child {
     margin-top: auto;
   }
-  
+
   .Hero__headline {
     max-width: 500px;
     font-size: 8.9rem;
@@ -140,7 +155,7 @@
     max-width: 460px;
     font-size: 2rem;
   }
-  
+
   .Hero__downButton {
     width: 30px;
     height: 30px;
