@@ -59,16 +59,17 @@ $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/rel
 > 'elevate' your own privileges to that of a 'cluster-admin' **before** running
 > the above command. If you have already run the above command, you should run
 > them again after elevating your permissions:
+```bash
+  kubectl create clusterrolebinding cluster-admin-binding \
+    --clusterrole=cluster-admin \
+    --user=$(gcloud config get-value core/account)
+```
 
 > **Note**: By default, cert-manager will be installed into the `cert-manager`
 > namespace. It is possible to run cert-manager in a different namespace, although you
 > will need to make modifications to the deployment manifests.
 
-```bash
-kubectl create clusterrolebinding cluster-admin-binding \
-  --clusterrole=cluster-admin \
-  --user=$(gcloud config get-value core/account)
-```
+
 
 Once you have deployed cert-manager, you can verify the installation
 [here](./#verifying-the-installation).
