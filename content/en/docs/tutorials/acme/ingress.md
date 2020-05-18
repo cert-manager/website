@@ -465,7 +465,7 @@ quickstart-example-tls   True    quickstart-example-tls   16m
 
 Cert-manager reflects the state of the process for every request in the
 certificate object. You can view this information using the
-`kubectl describe` command:
+`kubectl describe` command: 
 
 ```bash
 $ kubectl describe certificate quickstart-example-tls
