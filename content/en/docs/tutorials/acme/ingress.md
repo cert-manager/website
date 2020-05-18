@@ -566,7 +566,7 @@ you should see the example KUARD running at your domain with a signed TLS
 certificate.
 
 ```bash
-$ kubectl describe certificate
+$ kubectl describe certificate quickstart-example-tls
 Name:         quickstart-example-tls
 Namespace:    default
 Labels:       <none>
@@ -603,7 +603,7 @@ Status:
     Type:                  Ready
 Events:
   Type    Reason        Age   From          Message
-ubectl describe certificate quickstart-example-tls   ----    ------        ----  ----          -------
+  ----    ------        ----  ----          -------
   Normal  Generated     18s   cert-manager  Generated new private key
   Normal  OrderCreated  18s   cert-manager  Created Order resource "quickstart-example-tls-889745041"
 ```
