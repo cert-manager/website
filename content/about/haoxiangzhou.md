@@ -1,7 +1,7 @@
 ---
 title: Haoxiang Zhou
 image: /img/jpg/about-haoxiang.jpg
-position: Software Engineering Intern
+position: Placement Software Engineer
 email: haoxiang.zhou@jetstack.io
 github: 'hzhou97'
 ---
