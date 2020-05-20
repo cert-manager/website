@@ -225,6 +225,35 @@ metadata:
     eks.amazonaws.com/role-arn: arn:aws:iam::XXXXXXXXXXX:role/cert-manager
 ```
 
+Make sure there is no `role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager` field on the issuer definition, otherwise you might end up with `sts:assumerole` permission error.  
+
+Example of `issuer` or `clusterissuer` EKS OIDC definition:
+
+```yaml
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-dvl
+spec:
+  acme:
+    email: user@email.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: tls-key
+    solvers:
+    - selector:
+        dnsZones:
+          - "foobar.cloud"
+          - "*.foobar.cloud"
+      dns01:
+        route53:
+          region: us-east-1
+          hostedZoneID: ABCD123
+
+```
+
+To check for errors, create a `certificate` resource to kickstart the process and monitor  `cert-manager` pod logs.
+
 The cert-manager Helm chart provides a variable for injecting annotations into cert-manager's `ServiceAccount` object like so:
 
 ```yaml
