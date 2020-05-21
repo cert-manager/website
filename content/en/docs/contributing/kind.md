@@ -23,18 +23,18 @@ following installed:
 To start the development cluster run the following:
 
 ```bash
-$ ./hack/ci/run-dev-kind.sh
+$ ./devel/cluster/create.sh
 ```
 
 Once complete, the cluster is able to be interacted with `kubectl`.
 
-## Build cert-manager
+## Buildind and deploying cert-manager
 
 You can build a development build of cert-manager that will be loaded into your
 `kind` cluster.
 
 ```bash
-$ ./hack/ci/lib/build_images.sh
+$ ./devel/addon/certmanager/install.sh 
 ```
 
 The images are now available on the cluster with the following tags:
@@ -55,13 +55,10 @@ re-generated with the following command:
 ./hack/update-crds.sh
 ```
 
-Note that this script only apply patches to the existing CRDs not fully regenerates them.
-The updated CRDs are now available from `./deploy/manifests/00-crds.yaml`.
-
 ## Destroy the Cluster
 
-To clean up the development cluster run the following:
+To clean up the development cluster run the following kind command:
 
 ```bash
-$ ./hack/ci/lib/cluster_destroy.sh
+$ kind delete cluster
 ```
