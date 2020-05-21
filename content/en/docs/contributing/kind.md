@@ -28,7 +28,7 @@ $ ./devel/cluster/create.sh
 
 Once complete, the cluster is able to be interacted with `kubectl`.
 
-## Buildind and deploying cert-manager
+## Building and deploying cert-manager
 
 You can build a development build of cert-manager that will be loaded into your
 `kind` cluster.
