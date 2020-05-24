@@ -56,9 +56,9 @@ challenge.  By default, the DNS servers for this check will be taken from
 authoritative nameservers or split-horizon DNS), the cert-manager controller
 exposes a flag that allows you alter this behavior:
 
-Example usage::
+Example usage:
 ```bash
---dns01-recursive-nameservers "8.8.8.8:53,1.1.1.1:53"
+--dns01-recursive-nameservers="8.8.8.8:53,1.1.1.1:53"
 ```
 
 If you're using the `cert-manager` helm chart, you can set recursive nameservers
