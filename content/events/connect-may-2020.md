@@ -25,9 +25,14 @@ Common abstractions atop of Kubernetes such as Istio are providing further capab
 
 **Agenda:**
 
-We'll be starting at 1pm and we'll hear from two speakers, Paul Jones, Solutions Engineer from Jetstack on  ‘Running Enterprise workloads in Hybrid Kubernetes and Multi Mesh topologies’ followed by some time for Q&A. We'll also be hearing from Nick Perry, Cloud Platform Architect from William Hill on 'Using hybrid Kubernetes and Istio to deliver and operate more effectively in regulated markets' which will also be followed by some time for Q & A.
+1:00pm - 1:15pm - Welcome 
+1:15pm - 1:30pm - Share why you’re here and what you’re hoping to get out of today
+1:30pm - 2:10pm - ‘Running Enterprise workloads in Hybrid Kubernetes and Multi Mesh topologies’ by Paul Jones, Jetstack / Q&A
+2:10pm - 2:50pm - ‘Using hybrid Kubernetes and Istio to deliver and operate more effectively in regulated markets’ by Nick Perry, William Hill / Q & A
+2:50pm - 3:00pm - Thank you for joining / Q & A 
+3:00pm - Close 
 
-A more specific agenda will be released 2 - 3 days prior to the event, along with the link you'll need to join this event.
+The link you will need to join this event will be sent to you 1-2 days prior to the event. 
 
 Please register now to attend!
 
