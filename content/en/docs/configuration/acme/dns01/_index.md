@@ -153,6 +153,7 @@ Links to these supported providers along with their documentation are below:
 - [`AliDNS-Webhook`](https://github.com/pragkent/alidns-webhook)
 - [`cert-manager-webhook-civo`](https://github.com/okteto/cert-manager-webhook-civo)
 - [`cert-manager-webhook-dnspod`](https://github.com/qqshfox/cert-manager-webhook-dnspod)
+- [`cert-manager-webhook-dnsimple`](https://github.com/neoskop/cert-manager-webhook-dnsimple)
 - [`cert-manager-webhook-gandi`](https://github.com/bwolf/cert-manager-webhook-gandi)
 - [`cert-manager-webhook-inwx`](https://gitlab.com/smueller18/cert-manager-webhook-inwx)
 - [`cert-manager-webhook-oci`](https://gitlab.com/dn13/cert-manager-webhook-oci) (Oracle Cloud Infrastructure)
