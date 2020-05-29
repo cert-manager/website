@@ -32,7 +32,7 @@
               </tr>
               <tr>
                 <th>Date</th>
-                <td>{{ .Params.event_date }}</td>
+                <td>{{ (time .Params.event_date).Format "2 Jan 2006" }}</td>
               </tr>
               {{ if .Params.start_time }}
                 <tr>
