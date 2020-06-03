@@ -2,14 +2,12 @@
 title: Migrating and Modernising Workloads with Anthos
 image: /events/anthos-feb-2020/thumbnail.jpg
 address: "123 Buckingham Palace Road"
-event_date: "February 19th 2020"
+event_date: "2020-02-19"
 link: /events/anthos-feb-2020
 timestamp: "20200219"
 start_time: "8:30am"
 end_time: "11:00am"
 eventbrite_id: 89237633163
-# TODO add to a list of past events
-expirydate: "2020-02-20"
 ---
 
 ## 'Breakfast Briefing' with Jetstack and Google Cloud

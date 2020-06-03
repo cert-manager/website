@@ -12,28 +12,56 @@
     <h1 class="header-with-img-bg__title">{{ .Title }}</h1>
   </section>
 
+  {{ $upcoming := slice }}
+  {{ $past := slice }}
+  {{ range sort .Data.Pages "Params.timestamp" }}
+    {{ $event_date := cond (isset .Params "tbc") (time "2037-01-01") (time .Params.event_date) }}
+    {{ if $event_date.After (now.AddDate 0 0 -1) }}
+      {{ $upcoming = $upcoming | append . }}
+    {{ else }}
+      {{ $past = $past | append . }}
+    {{ end }}
+  {{ end }}
+
   <section class="tight media-component">
-    {{ range sort .Data.Pages "Params.timestamp" }}
-      <div class="media-component__row">
-        <div class="media-component__content">
-          <a href="{{ .RelPermalink }}">
-            <img class="media-component__contentImage" src="{{ .Params.image }}" />
-          </a>
-        </div>
-        <div class="media-component__content">
-          <div class="media-component__copy">
-            <h2><a href="{{ .Params.link }}">{{ .Params.Title }}</a></h2>
-            {{ if .Params.tbc }}
-              <p>Details to be confirmed</p>
-            {{ else }}
-              <p><strong>Date:</strong> {{ .Params.event_date }}</p>
-              <p><strong>Address:</strong> {{ .Params.address }}</p>
-            {{ end }}
-          </div>
-        </div>
+    {{ range $upcoming }}
+      {{ block "event_summary" . }}{{ end }}
+    {{ end }}
+  </section>
+
+  <section class="tight media-component">
+    <div class="media-component__row">
+      <div class="media-component__content">
+        <h1>Past Events</h1>
       </div>
+    </div>
+    {{ if len $past }}
+      {{ range $past.Reverse }}
+        {{ block "event_summary" . }}{{ end }}
+      {{ end }}
     {{ end }}
   </section>
 
 </div>
+{{ end }}
+
+{{ define "event_summary" }}
+  <div class="media-component__row">
+    <div class="media-component__content">
+      <a href="{{ .RelPermalink }}">
+        <img class="media-component__contentImage" src="{{ .Params.image }}" />
+      </a>
+    </div>
+    <div class="media-component__content">
+      <div class="media-component__copy">
+        <h2><a href="{{ .Params.link }}">{{ .Params.Title }}</a></h2>
+        {{ if .Params.tbc }}
+          <p>Details to be confirmed</p>
+        {{ else }}
+          <p><strong>Date:</strong> {{ (time .Params.event_date).Format "2 Jan 2006" }}</p>
+          <p><strong>Address:</strong> {{ .Params.address }}</p>
+        {{ end }}
+      </div>
+    </div>
+  </div>
 {{ end }}
