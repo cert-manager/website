@@ -692,6 +692,12 @@ section.bordered {
     padding: 100px;
   }
 
+  .media-component__content-event {
+    padding-left: 100px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+  }
+
   .media-component__image {
     min-height: 400px;
   }
