@@ -2665,6 +2665,14 @@ dt {
   margin-top: 1.5rem;
 }
 
+#freshteam-widget {
+    padding-bottom: 4em;
+}
+
+#freshteam-widget .page-title {
+    padding: 2em 0 25px 0 !important;
+}
+
 #freshteam-widget .btn-primary {
   height: 46px;
 }
@@ -2672,3 +2680,34 @@ dt {
 #freshteam-widget .application-form .btn-primary.btn-lg {
   padding: 6px 12px !important;
 }
+
+#freshteam-widget .job-details-header {
+  background-color: white !important;
+  border-bottom: 1px solid #33333333;
+}
+
+#freshteam-widget .job-details .link-back {
+  color: #333 !important;
+}
+
+#freshteam-widget .job-details .link-back .icon-arrow-left {
+  fill: #333 !important;
+}
+
+#freshteam-widget .job-details-header h1 {
+  color: #7b40a0 !important;
+}
+
+#freshteam-widget .job-details-header .text-color {
+  color: #333 !important;
+}
+
+#freshteam-widget .job-details-content a {
+  color: #1768e2;
+}
+
+#freshteam-widget .job-details-content a:hover,
+#freshteam-widget .job-details-content a:focus {
+  color: #23527c;
+}
+
