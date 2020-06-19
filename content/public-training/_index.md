@@ -64,13 +64,17 @@ og:
 > **Due to current concerns around COVID-19, these courses will be delivered
 > remotely**
 
-Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managing Linux Containers at a massive scale.
+Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managing 
+Linux Containers at a massive scale.
 
-Since then, the Kubernetes project has exploded, gaining over 75,000 commits and 48,000+ stars on Github. It has quickly become the default cluster manager, referred to as the 
-new ‘Datacentre OS.’ Kubernetes is a must to learn if you are using or adopting containers.
+Since then, the Kubernetes project has exploded, gaining over 75,000 commits and
+48,000+ stars on Github. It has quickly become the default cluster manager, 
+referred to as the new ‘Datacentre OS.’ Kubernetes is a must to learn if you are
+using or adopting containers.
 
-These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience. These are FREE courses run by 
-Jetstack, in partnership with Google.
+These are hands-on modular courses that will train you in deploying Kubernetes 
+and operating it efficiently, whatever your level of experience. These are FREE 
+courses run by Jetstack, in partnership with Google.
 
 To attend you must:
 
@@ -81,8 +85,10 @@ To attend you must:
 
 Please note:
 
-* We have a limited number of spaces on these courses and admission is subject to review
-* We will prioritise applicants from companies who have not attended these courses previously
+* We have a limited number of spaces on these courses and admission is subject 
+  to review
+* We will prioritise applicants from companies who have not attended these 
+  courses previously
 * These courses are not available to existing Google partners
 * This training is run in conjunction with our partner Google and your details
   will passed to them when you register
