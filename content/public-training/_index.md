@@ -12,22 +12,6 @@ testimonial:
   profileImage:
   quoter: 'Workshop Attendee'
 course_dates:
-- date: '19 May 2020'
-  title: 'Kubernetes in Practice (Nordics)'
-  level: 'Day 1'
-  eventbriteId: 96660220321
-- date: '20 May 2020'
-  title: 'Kubernetes in Practice (Nordics)'
-  level: 'Day 2'
-  eventbriteId: 96660461041
-- date: '27 May 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Day 1'
-  eventbriteId: 96660751911
-- date: '28 May 2020'
-  title: 'Kubernetes in Practice'
-  level: 'Day 2'
-  eventbriteId: 96661008679
 - date: '24 June 2020'
   title: 'Istio'
   level: 'Day 1'
@@ -36,6 +20,38 @@ course_dates:
   title: 'Serverless on Kubernetes'
   level: 'Knative'
   eventbriteId: 96661516197
+- date: '26 August 2020'
+  title: 'Kubernetes in Practice'
+  level: 'Day 1'
+  eventbriteId: 108111871518
+- date: '27 August 2020'
+  title: 'Kubernetes in Practice'
+  level: 'Day 2'
+  eventbriteId: 109646317086
+- date: '23 September 2020'
+  title: 'Kubernetes in Practice'
+  level: 'Day 1'
+  eventbriteId: 109649422374
+- date: '24 September 2020'
+  title: 'Kubernetes in Practice'
+  level: 'Day 2'
+  eventbriteId: 109649851658
+- date: '21 October 2020'
+  title: 'Istio'
+  level: 'Day 1'
+  eventbriteId: 109661289870
+- date: '22 October 2020'
+  title: 'Serverless on Kubernetes'
+  level: 'Knative'
+  eventbriteId: 109661530590
+- date: '18 November 2020'
+  title: 'Kubernetes in Practice'
+  level: 'Day 1'
+  eventbriteId: 109661761280
+- date: '19 November 2020'
+  title: 'Kubernetes in Practice'
+  level: 'Day 2'
+  eventbriteId: 109661949844
 
 
 og:
@@ -45,36 +61,28 @@ og:
 
 ## Description
 
-> **Due to current concerns around COVID-19 these courses will be delivered
+> **Due to current concerns around COVID-19, these courses will be delivered
 > remotely**
 
-Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managing
-Linux Containers at massive scale.
+Open Sourced by Google in mid-2014 ‘Kubernetes’ builds on 10 years of managing Linux Containers at a massive scale.
 
-Since then the Kubernetes project has exploded, gaining over 75,000 commits and
-48,000+ stars on Github. It has quickly become the default cluster manager,
-referred to as the new ‘Datacentre OS.’ Kubernetes is a must to learn if you are
-using or adopting containers.
+Since then, the Kubernetes project has exploded, gaining over 75,000 commits and 48,000+ stars on Github. It has quickly become the default cluster manager, referred to as the 
+new ‘Datacentre OS.’ Kubernetes is a must to learn if you are using or adopting containers.
 
-These are hands-on modular courses that will train you in deploying Kubernetes
-and operating it efficiently, whatever your level of experience. These are FREE
-courses hosted by Google, run by Jetstack. Lunch is provided.
+These are hands-on modular courses that will train you in deploying Kubernetes and operating it efficiently, whatever your level of experience. These are FREE courses run by 
+Jetstack, in partnership with Google.
 
 To attend you must:
 
-* Register with company email address
-* Either be working on or about to start working on an active Docker/Kubernetes
-  project
+* Register with a company email address
+* Either be working on or about to start working on an active Kubernetes project
 * Demonstrate a skill level consistent with the course level specification (see
   below)
-* Be able to travel and attend course in London
 
 Please note:
 
-* Admission is subject to review based on attendance criteria
-* No more than two attendees from the same company can register on the same
-  course
-* No more than six individuals from the same company may attend a course during
-  a calendar year
+* We have a limited number of spaces on these courses and admission is subject to review
+* We will prioritise applicants from companies who have not attended these courses previously
+* These courses are not available to existing Google partners
 * This training is run in conjunction with our partner Google and your details
   will passed to them when you register
