@@ -2161,10 +2161,6 @@ Introduced on new Subscription Page
   overflow: hidden;
 }
 
-.current-openings .container {
-  position: relative;
-}
-
 .current-openings__bg {
   background-color: #8a63fa;
   position: absolute;
@@ -2175,72 +2171,13 @@ Introduced on new Subscription Page
   z-index: -1;
 }
 
-.current-openings__list {
-  list-style: none;
-  padding: 0;
-}
-
-.current-openings__list-item {
-  border-bottom: 1px solid white;
-}
-
-.current-openings__link {
-  display: block;
-  padding: 10px 0 12px;
-  color: white;
-  position: relative;
-  padding-right: 20px;
-  line-height: 1.2;
-}
-
-.current-openings__link:after {
-  content: '';
-  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjEzIiB2aWV3Qm94PSIwIDAgOCAxMyI+ICA8cG9seWdvbiBmaWxsPSIjRkZGIiBwb2ludHM9IjcgMy45MjkgMTEuNTcxIDguNSAxMy4wNzEgNyA3IC45MjkgLjkyOSA3IDIuNDI5IDguNSIgdHJhbnNmb3JtPSJyb3RhdGUoOTAgNC43MTUgMy43ODYpIi8+PC9zdmc+)
-    no-repeat 50% 50%;
-  height: 12px;
-  width: 8px;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.current-openings__link:link,
-.current-openings__link:visited {
-  color: white;
-}
-
-.current-openings__img-container {
-  position: relative;
-}
-
-.current-openings__img {
-  display: none;
-}
-
-@media (min-width: 992px) {
-  .current-openings__img-container {
-    min-height: 500px;
-  }
-
-  .current-openings__img {
-    display: block;
-    position: absolute;
-    top: -3em;
-    right: calc(100% + 20px);
-  }
-}
-
 @media (min-width: 1200px) {
   .current-openings__bg {
     left: 0;
   }
 
-  .current-openings__img {
-    top: 0;
-    right: auto;
-    left: 0;
-    transform: translateX(calc(-50% - 40px)) translateY(-3em);
+  .current-openings__block {
+    padding-left: 7rem;
   }
 }
 
@@ -2733,3 +2670,50 @@ td, th {
 dt {
   margin-top: 1.5rem;
 }
+
+#freshteam-widget {
+    padding-bottom: 4em;
+}
+
+#freshteam-widget .page-title {
+    padding: 2em 0 25px 0 !important;
+}
+
+#freshteam-widget .btn-primary {
+  height: 46px;
+}
+
+#freshteam-widget .application-form .btn-primary.btn-lg {
+  padding: 6px 12px !important;
+}
+
+#freshteam-widget .job-details-header {
+  background-color: white !important;
+  border-bottom: 1px solid #33333333;
+}
+
+#freshteam-widget .job-details .link-back {
+  color: #333 !important;
+}
+
+#freshteam-widget .job-details .link-back .icon-arrow-left {
+  fill: #333 !important;
+}
+
+#freshteam-widget .job-details-header h1 {
+  color: #7b40a0 !important;
+}
+
+#freshteam-widget .job-details-header .text-color {
+  color: #333 !important;
+}
+
+#freshteam-widget .job-details-content a {
+  color: #1768e2;
+}
+
+#freshteam-widget .job-details-content a:hover,
+#freshteam-widget .job-details-content a:focus {
+  color: #23527c;
+}
+
