@@ -1,8 +1,11 @@
 ---
-title: "Kubernetes In Practice: Day 2"
+title: "Kubernetes In Practice - Day 2"
 weight: 2
-link: /documents/Kubernetes_In_Practice_Day2.pdf
+link: /documents/training-kip-day2.pdf
 type: course
 ---
 
-Participants should have completed our Kubernetes in Practice Day 1 course or have equivalent experience. Those familiar with basic Kubernetes concepts can start here.
+This course is designed for those who have completed our Kubernetes in Practice -
+Day 1 training or previously provisioned a small cluster and deployed different
+applications to it. You must be familiar with the command line, Linux and
+container technology.
