@@ -1,10 +1,10 @@
 ---
-title: "Istio Service Mesh: Day 1"
+title: "Istio Service Mesh - Day 1"
 weight: 3
-link: /documents/istio-day-1.pdf
+link: /documents/training-istio-day1.pdf
 type: course
 ---
 
-Get an understanding of what Istio is and it's components. Learn how you can use
-the basic building blocks to enhance your Kubernetes capabilities and
-application experience all through Istio's features.
+This course is for those just who have experience of deploying applications to
+Kubernetes and wish to make use of the more advanced application deployment and
+networking configurability offered by Istio.

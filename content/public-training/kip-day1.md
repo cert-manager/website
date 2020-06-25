@@ -1,10 +1,11 @@
 ---
-title: "Kubernetes In Practice: Day 1"
+title: "Kubernetes In Practice - Day 1"
 weight: 1
-link: /documents/Kubernetes_In_Practice_Day1.pdf
+link: /documents/training-kip-day1.pdf
 type: course
 ---
 
-This course is for those just starting out with Kubernetes. Participants benefit
-from a high-level understanding of what the platform has to offer. They may have
-some Docker experience but this is not a requirement.
+This course is designed for those who are new to Kubernetes and want to learn
+how to operate a Kubernetes cluster. Our participants typically include SREs,
+DevOps, and Operations people. You should be familiar with the command line,
+Linux and container technology.
