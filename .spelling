@@ -152,3 +152,5 @@ config
 kubectl
 stdout
 Uncomment
+loadbalancer
+propagations

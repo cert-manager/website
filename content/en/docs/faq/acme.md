@@ -11,23 +11,11 @@ investigate and debug if there is a problem during the process. You can read
 more about these resources in the [concepts
 pages](../../concepts/acme-orders-challenges/).
 
-## Orders
+Before you start here you should probably take a look at our [general troubleshooting guide](../troubleshooting/)
 
-In order to debug why a certificate isn't being issued, we can first run
-`kubectl describe` on the `Certificate` resource we're having issues with:
+## 1. Troubleshooting Orders
 
-
-```bash
-$ kubectl describe certificate example-com
-...
-Events:
-  Type    Reason        Age   From          Message
-  ----    ------        ----  ----          -------
-  Normal  GeneratedKey  82s   cert-manager  Generated a new private key
-  Normal  Requested     81s   cert-manager  Created new CertificateRequest resource "example-com-2745722290"
-```
-
-We can then run another describe on the `CertificateRequest` resource that has
+When we run a describe on the `CertificateRequest` resource we see that an `Order` that has
 been created:
 
 ```bash
@@ -39,16 +27,11 @@ Events:
   Normal  OrderCreated  5s    cert-manager  Created Order resource default/example-com-2745722290-439160286
 ```
 
-
-We can see here that `CertificateRequest` controller has created an Order
-resource to request a new certificate from the ACME server.
-
-Orders are a useful source of information when debugging failures issuing ACME
-certificates. By running `kubectl describe order` on a particular order,
+Orders are a request to an ACME instance to issue a certificate. 
+By running `kubectl describe order` on a particular order,
 information can be gleaned about failures in the process:
 
-
-```bash
+```console
 $ kubectl describe order example-com-2745722290-439160286
 ...
 Reason:
@@ -61,8 +44,8 @@ Events:
   Normal  Created  1m    cert-manager  Created Challenge resource "example-com-2745722290-439160286-1" for domain "test2.example.com"
 ```
 
-Here we can see that cert-manager has created two Challenge resources in order
-to complete the requirements of the ACME order to obtain a signed certificate.
+Here we can see that cert-manager has created two Challenge resources to verify we control specific domains, 
+a requirements of the ACME order to obtain a signed certificate.
 
 You can then go on to run
 `kubectl describe challenge example-com-2745722290-439160286-0` to further debug the
@@ -85,18 +68,18 @@ Events:
 ```
 
 If the Order is not completing successfully, you can debug the challenges
-for the Order by running `kubectl describe` on the Challenge resource.
+for the Order by running `kubectl describe` on the `Challenge` resource which is described in the following steps.
 
-## Challenges
+## 2. Troubleshooting Challenges
 
-In order to determine why an ACME Certificate is not being issued, we can debug
-using the 'Challenge' resources that cert-manager has created.
+In order to determine why an ACME Order is not being finished, we can debug
+using the `Challenge` resources that cert-manager has created.
 
-In order to determine which Challenge is failing, you can run
+In order to determine which `Challenge` is failing, you can run
 `kubectl get challenges`:
 
 
-```bash
+```console
 $ kubectl get challenges
 ...
 NAME                                 STATE     DOMAIN            REASON                                     AGE
@@ -106,7 +89,7 @@ example-com-2745722290-4391602865-0  pending   example.com       Waiting for dns
 This shows that the challenge has been presented using the DNS01 solver
 successfully and now cert-manager is waiting for the 'self check' to pass.
 
-You can get more information about the challenge by using `kubectl describe`:
+You can get more information about the challenge and it's lifecycle by using `kubectl describe`:
 
 ```bash
 $ kubectl describe challenge example-com-2745722290-4391602865-0
@@ -125,6 +108,41 @@ Events:
 
 Progress about the state of each challenge will be recorded either as Events
 or on the Challenge's `status` block (as shown above).
+
+In case of DNS01 you will find any errors from your DNS provider here.
+
+Both HTTP01 and DNS01 go through a "self-check" first before cert-manager presents the challenge to the ACME provider.
+This is done not to overload the ACME provider with failed challenges due to DNS or loadbalancer propagations.
+The status of this can be found in the Status block of the describe:
+```console
+$ kubectl describe challenge 
+[...]
+Status:
+  Presented:   true
+  Processing:  true
+  Reason:      Waiting for http-01 challenge propagation: failed to perform self check GET request 'http://example.com/.well-known/acme-challenge/_fgdLz0i3TFiZW4LBjuhjgd5nTOkaMBhxYmTY': Get "http://example.com/.well-known/acme-challenge/_fgdLz0i3TFiZW4LBjuhjgd5nTOkaMBhxYmTY: remote error: tls: handshake failure
+  State:       pending
+[...]
+```
+
+In this example our HTTP01 check fails due a network issue.
+You will also see any errors coming from your DNS provider here.
+
+### HTTP01 troubleshooting
+First of all check if you can see the challenge URL from the public internet, if this does not work check your Ingress and firewall configuration as well as the service and pod cert-manager created to solve the ACME challenge.
+If this does work check if your cluster can see it too. It is important to test this from inside a Pod. If you get a connection error it is suggested to check the cluster's network configuration.
+
+#### Got 404 status code
+If your challenge self-check fails with a 404 not found error. Make sure to check the following:
+
+* you can access the URL from the public internet
+* the the ACME solver pod is up and running
+* use `kubectl describe ingress` to check the status of the HTTP01 solver ingress. (unless you use `acme.cert-manager.io/http01-edit-in-place`, then check the same ingress as your domain)
+
+### DNS01 troubleshooting
+If you see no error events about your DNS provider you can check the following
+Check if you can see the `_acme_challenge.domain` TXT DNS record from the public internet, or in your DNS provider's interface.
+cert-manager will check if a DNS record has been propagated by querying the cluster's DNS solver. If you are able to see it from the public internet but not from inside the cluster you might want to change [the DNS server for self-check](../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check) as some cloud providers overwrite DNS internally. 
 
 ## March 2020 Let's Encrypt CAA Rechecking Bug
 Following the [announcement on March 4](https://community.letsencrypt.org/t/revoking-certain-certificates-on-march-4/114864) Let's Encrypt will be revoking a number of certificates due to a bug in the way they validate CAA records, we have created a tool to analyse your existing cert-manager managed certificates and compare their serial numbers to the publicised list of revoked certificates.
