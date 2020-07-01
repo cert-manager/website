@@ -168,3 +168,11 @@ There are two supported rotation policies:
 
 Some Issuer types may disallow re-using private keys. If this is the case, you must explicitly
 configure the `rotationPolicy` for each of your Certificates accordingly.
+
+## Cleaning up Secrets when Certificates are deleted
+
+By default, cert-manager does not delete the `Secret` resource containing the signed certificate when the corresponding `Certificate` resource is deleted.
+This means that deleting a `Certificate` won't take down any services that are currently relying on that certificate, but the certificate will no longer be renewed.
+The `Secret` needs to be manually deleted if it is no longer needed.
+
+If you would prefer the `Secret` to be deleted automatically when the `Certificate` is deleted, you need to configure your installation to pass the `--enable-certificate-owner-ref` flag to the controller.
