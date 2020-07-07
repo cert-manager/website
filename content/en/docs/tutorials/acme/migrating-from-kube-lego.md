@@ -98,15 +98,15 @@ Once saved, open up this file and change the `metadata.name` field to something
 more relevant to cert-manager. For the rest of this guide, we'll assume you
 chose `letsencrypt-private-key`.
 
-Once done, we need to create this new resource in the `kube-system` namespace.
+Once done, we need to create this new resource in the `cert-manager` namespace.
 By default, cert-manager stores supporting resources for `ClusterIssuers` in the
-namespace that it is running in, and we used `kube-system` when deploying
+namespace that it is running in, and we used `cert-manager` when deploying
 cert-manager above. You should change this if you have deployed cert-manager
 into a different namespace.
 
 ```bash
 $ kubectl create -f kube-lego-account.yaml \
-    --namespace kube-system
+    --namespace cert-manager
 ```
 
 ## 4. Creating an ACME `ClusterIssuer` using your old ACME account
@@ -198,7 +198,7 @@ upgrade` in order to add a few additional flags. Assuming you've named your
 ```bash
 $ helm upgrade cert-manager \
      jetstack/cert-manager \
-     --namespace kube-system \
+     --namespace cert-manager \
      --set ingressShim.defaultIssuerName=letsencrypt-staging \
      --set ingressShim.defaultIssuerKind=ClusterIssuer
 ```
@@ -225,7 +225,7 @@ We can also verify that cert-manager has 'adopted' the old TLS certificates by
 viewing the logs for cert-manager:
 
 ```bash
-$ kubectl logs -n kube-system -l app=cert-manager -c cert-manager
+$ kubectl logs -n cert-manager -l app=cert-manager -c cert-manager
 ...
 I1025 21:54:02.869269       1 sync.go:206] Certificate my-example-certificate scheduled for renewal in 292 hours
 ```
