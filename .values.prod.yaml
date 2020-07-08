@@ -33,3 +33,6 @@ ingressRedirectHostnames:
   "/open-source/":
     - www.jetstack.dev
     - jetstack.dev
+  "/training/":
+    - www.k8s.school
+    - k8s.school
