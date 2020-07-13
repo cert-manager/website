@@ -5,10 +5,10 @@ weight: 50
 type: "docs"
 ---
 
-It is strongly recommended that users are familiar with concepts and
-configuration of resources in the documentation when using cert-manager
-however, set-by-step tutorials are very useful for deploying these resources to
-get to a final goal. Below is list of tutorials that you might find helpful:
+It is strongly recommended that users get familiar with the concepts and
+configuration of resources in the documentation when using cert-manager.
+However, step-by-step tutorials are very useful for deploying these resources to
+get to a final goal. Below is the list of tutorials that you might find helpful:
 
 - [Backup and Restore Resources](./backup/): Backup the cert-manager resources
   in your cluster and then restore them.
