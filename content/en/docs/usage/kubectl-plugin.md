@@ -24,13 +24,14 @@ $ kubectl cert-manager help
 kubectl cert-manageris a CLI tool manage and configure cert-manager resources for Kubernetes
 
 Usage:
-  kubectl cert-manager [flags]
   kubectl cert-manager [command]
 
 Available Commands:
   convert     Convert cert-manager config files between different API versions
+  create      Create cert-manager resources
   help        Help about any command
   renew       Mark a Certificate for manual renewal
+  status      Get details on current status of cert-manager resources
   version     Print the kubectl cert-manager version
 
 Use "kubectl cert-manager [command] --help" for more information about a command.
@@ -39,9 +40,10 @@ Use "kubectl cert-manager [command] --help" for more information about a command
 ## Commands
 
 ### Renew
-> **Note**: this feature requires the `ExperimentalCertificateControllers` feature gate set.
+> **Note**: for cert-manager v0.15 this feature requires the `ExperimentalCertificateControllers` feature gate set.
+> From cert-manager v0.16 onward, the experimental certificate controller is the default.
 
-`kubectl cert-manager` allows you to manually trigger a renewal of a specific certificate. 
+`kubectl cert-manager renew` allows you to manually trigger a renewal of a specific certificate. 
 This can be done either one certificate at a time, using label selectors (`-l app=example`), or with the `--all` flag:
 
 For example you can renew the certificate `example-com-tls`:
@@ -79,4 +81,22 @@ The default output will be printed to stdout in YAML format. One can use -o opti
 For example this will output `cert.yaml` in the latest API version:
 ```console
 kubectl cert-manager convert -f cert.yaml
+```
+
+### Create
+`kubectl cert-manager create` can be used to create cert-manager resources manually. Subcommands are available
+to create different resources:
+#### Certificaterequest
+To create a cert-manager CertificateRequest, use `kubectl cert-manager create certificaterequest`. The command takes in the name of the CertificateRequest to be created, 
+and creates a new CertificateRequest resource based on the YAML description of a Certificate resource as specified by `--from-certificate-file` flag, by generating a private key locally and create a 'certificate signing request' 
+to be submitted to a cert-manager Issuer. The private key will be written to a local file, where the default is `<name_of_cr>.key`, or it can be specified using the `--output-key-file` flag.
+
+If you wish to wait for the CertificateRequest to be signed and store the X.509 certificate in a file, you can set
+the `--fetch-certificate` flag. The default timeout is 5 minutes, but can be specified with the `--timeout` flag. The default name of the file storing the X.509 certificate
+is `<name_of_cr>.crt`, you can use the ` --output-certificate-file` flag to specify otherwise.
+
+For example this will create a CertificateRequest resource with the name "my-cr" based on the cert-manager Certificate described in "my-certificate.yaml" while storing the
+private key and X.509 certificate in "my-cr.key" and "my-cr.crt" respectively.
+```console
+kubectl cert-manager create certificaterequest my-cr --from-certificate-file my-certificate.yaml --fetch-certificate --timeout 20m
 ```
