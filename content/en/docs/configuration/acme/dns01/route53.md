@@ -233,4 +233,27 @@ serviceAccount:
     eks.amazonaws.com/role-arn: arn:aws:iam::XXXXXXXXXXX:role/cert-manager
 ```
 
+## Creating an Issuer (or `ClusterIssuer`)
+
+Here is an example configuration for a `ClusterIssuer`:
+
+```yaml
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    ...
+    solvers:
+
+    # example: basic single-account solver example that leverages the iam role specified in your serviceaccount
+    # note: for this setup do not specify role as shown in the multi-account example above or you may get sts assume role errors
+    - dns01:
+        route53:
+          region: us-west-2
+
+```
+
+
 **Note:** If you're following the Cross Account example above, modify the `ClusterIssuer` in the same way as above with the role from Account Y.
