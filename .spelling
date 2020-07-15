@@ -22,7 +22,6 @@ Bitnami
 BKPR
 boolean
 CAs
-certificaterequest
 CertificateRequest
 Changelog
 CloudDNS
@@ -140,11 +139,8 @@ wildcard
 wildcards
 WIP
 x509
-yaml
 YAML
 YAMLs
-v0.15
-v0.16
 v2
 v3
 publicised
