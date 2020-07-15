@@ -121,7 +121,7 @@ documentation](../../reference/api-docs/#cert-manager.io/v1alpha2.KeyUsage).
 ## Temporary Certificates whilst Issuing
 
 When [requesting certificates using ingress-shim](../ingress/), the component
-`ingres-gce`, if used, requires that a temporary certificate is present while
+`ingress-gce`, if used, requires that a temporary certificate is present while
 waiting for issuance of a signed certificate when serving. To facilitate this,
 if the annotation `"cert-manager.io/issue-temporary-certificate": "true"` is
 present on the certificate, a self signed temporary certificate will be present
