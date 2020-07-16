@@ -21,10 +21,10 @@ It represents the 'full lifecycle' of an x509 private key and certificate, inclu
 private key management and renewal.
 
 In v0.15 we added these under a feature gate to allow users to test these and gather feedback.
-Thanks to everyone testing these and reporting issues we were able fix issues and improve the controller.
-In v0.16 this controller is nor the default one in cert-manager. 
+Thanks to everyone testing these and reporting issues we were able to fix issues and improve the controller.
+In v0.16 this controller is now the default one in cert-manager. 
 
-For more information on this we invite you to read our [design document](https://github.com/jetstack/cert-manager/pull/2753).
+For more information on this, we invite you to read our [design document](https://github.com/jetstack/cert-manager/pull/2753).
 
 
 ## kubectl cert-manager tool for signing certificates
@@ -44,7 +44,7 @@ We are soon reaching cert-manager v1.0, the new v1beta1 API is our first step to
 
 TODO: list improvements
 
-If you're using Kubernetes 1.15 or higher conversion webhooks will allow you seamlessly interact with `v1alpha2`, `v1alpha3` and `v1beta1`
+If you're using Kubernetes 1.15 or higher, conversion webhooks will allow you seamlessly interact with `v1alpha2`, `v1alpha3` and `v1beta1`
 API versions at the same time. This allows you to use the new API version without having to modify or redeploy your older resources.
 Users of the `legacy` version of cert-manager will still only have the `v1alpha2` API. 
 
