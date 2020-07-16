@@ -154,3 +154,4 @@ stdout
 Uncomment
 loadbalancer
 propagations
+CertificateRequest
