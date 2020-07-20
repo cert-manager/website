@@ -51,11 +51,21 @@ read the multiple-solver-types section.
 ## Setting Nameservers for DNS01 Self Check
 
 cert-manager will check the correct DNS records exist before attempting a DNS01
-challenge.  By default cert-manager will check using the NameServers from the 
-DNS domain. If set to use nameservers only, the DNS servers for this check will 
-be taken from `/etc/resolv.conf`.  If this is not desired (for example with multiple
-authoritative nameservers or split-horizon DNS), the cert-manager controller
-exposes a flag that allows you alter this behavior:
+challenge.  By default cert-manager will use the recursive nameservers taken
+from `/etc/resolv.conf` to query for the authoritative nameserver to verify the
+DNS records exist.
+
+If this is not desired (for example with multiple authoritative nameservers or
+split-horizon DNS), the cert-manager controller exposes two flags that allows
+you alter this behavior:
+
+`--dns01-recursive-nameservers` Comma spereated string with host and port of the
+recursive nameservers cert-manager should query.
+
+`--dns01-recurisve-nameservers-only` Forces cert-manager to only use the
+recursive namserver for verification. Enabling this option could cause the DNS01
+self check to take longer due to caching performed by the recursive nameservers.
+
 
 Example usage:
 ```bash
