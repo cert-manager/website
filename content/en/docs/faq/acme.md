@@ -144,6 +144,10 @@ If you see no error events about your DNS provider you can check the following
 Check if you can see the `_acme_challenge.domain` TXT DNS record from the public internet, or in your DNS provider's interface.
 cert-manager will check if a DNS record has been propagated by querying the cluster's DNS solver. If you are able to see it from the public internet but not from inside the cluster you might want to change [the DNS server for self-check](../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check) as some cloud providers overwrite DNS internally. 
 
+#### cert-manager identifies the wrong zone for your domain name
+cert-manager by default uses SOA (Start of Authority) records to detirmine which zone name to use at your DNS provider.
+Some DNS resolvers will filter this information, if this is the case cert-manager cannot determine the zone and it is adviced to [change the DNS server for DNS01 self-checks](../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check).
+
 ## March 2020 Let's Encrypt CAA Rechecking Bug
 Following the [announcement on March 4](https://community.letsencrypt.org/t/revoking-certain-certificates-on-march-4/114864) Let's Encrypt will be revoking a number of certificates due to a bug in the way they validate CAA records, we have created a tool to analyse your existing cert-manager managed certificates and compare their serial numbers to the publicised list of revoked certificates.
 It's advised that all users of Let's Encrypt & cert-manager run a check using this tool to ensure they do not experience any invalid certificate errors in clusters.
