@@ -33,7 +33,14 @@ cert-manager `v0.15` included a kubectl plugin that allowed to interact with cer
 In this release we leverage this plugin to allow users to sign certificates on their computer
 or inside the container itself.
 
-TODO: describe how to do this
+The `kubectl cert-manager create certificaterequest` command creates a new CertificateRequest 
+resource based on the YAML manifest of a Certificate resource as specified by `--from-certificate-file` flag.
+ 
+For example this will create a CertificateRequest resource with the name "my-cr" based on the Certificate described in `my-certificate.yaml` while storing the
+private key and x509 certificate in `my-cr.key` and `my-cr.crt` respectively.
+```console
+$ kubectl cert-manager create certificaterequest my-cr --from-certificate-file my-certificate.yaml --fetch-certificate --timeout 20m
+```
 
 The kubectl cert-manager binary can be downloaded from the [GitHub release page](https://github.com/jetstack/cert-manager/releases/)
 
