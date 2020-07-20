@@ -87,7 +87,7 @@ spec:
 
 ## Troubleshooting
 
-### Actor 'com.cloudflare.api.token.xxxx' requires permission 'com.cloudflare.api.account.zone.list' to list zones
+### Actor `com.cloudflare.api.token.xxxx` requires permission `com.cloudflare.api.account.zone.list` to list zones
 If you get the error that your token does not have the correct permission to list zones there can be 2 causes.
 1. The token lacks the `Zone - Zone - Read` permission
 2. cert-manager identified the wrong zone name for the domain due to DNS issues.
@@ -102,4 +102,4 @@ Events:
             Error: 0: Actor 'com.cloudflare.api.token.xxxx' requires permission 'com.cloudflare.api.account.zone.list' to list zones
 ```
 
-In this case we recommend [changing your DNS01 self-check nameservers)(./#setting-nameservers-for-dns01-self-check).
+In this case we recommend [changing your DNS01 self-check nameservers](../#setting-nameservers-for-dns01-self-check).
