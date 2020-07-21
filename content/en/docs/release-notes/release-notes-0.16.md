@@ -20,7 +20,7 @@ The Certificate controller is one of the most commonly used controllers in the p
 It represents the 'full lifecycle' of an x509 private key and certificate, including
 private key management and renewal.
 
-In `v0.15` we added these under a feature gate to allow users to test these and gather feedback.
+In `v0.15` we added the new certificate controllers under a feature gate to allow users to test these and gather feedback.
 Thanks to everyone testing these and reporting issues we were able to fix issues and improve the controller.
 In `v0.16` this controller is now the default one in cert-manager. 
 
@@ -42,7 +42,7 @@ private key and x509 certificate in `my-cr.key` and `my-cr.crt` respectively.
 $ kubectl cert-manager create certificaterequest my-cr --from-certificate-file my-certificate.yaml --fetch-certificate --timeout 20m
 ```
 
-The kubectl cert-manager binary can be downloaded from the [GitHub release page](https://github.com/jetstack/cert-manager/releases/)
+More information can be found on our [kubectl plugin page](../../usage/kubectl-plugin/).
 
 ## `v1beta1` API
 
