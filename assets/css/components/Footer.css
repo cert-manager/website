@@ -33,7 +33,7 @@
   line-height: 1.6rem;
 }
 
-.Footer__legalsLink:first-child {
+.Footer__legalsLink:not(:last-child) {
   margin-right: 30px;
 }
 
