@@ -48,7 +48,7 @@ More information can be found on our [kubectl plugin page](../../usage/kubectl-p
 
 We are soon reaching cert-manager `v1.0` and the new `v1beta1` API is our first step towards a stable `v1` API.
 The biggest change users may notice is the improved API documentation. We took the time to review and update all the user-facing APIs. You can view the [updated API documentation online](https://cert-manager.io/v0.16-docs/reference/api-docs/), or use `kubectl explain` after installing this version of cert-manager.
-`v1beta1` does not contain many big changes, this version is focused on streamlining field names and general clean up of the API in preparation for the release of the v1.
+`v1beta1` does not contain many big changes, this version is focused on streamlining field names and general clean up of the API in preparation for the release of the `v1` release.
 
 These are the changes made (for reference, our conversion will take care of everything for you):
 
