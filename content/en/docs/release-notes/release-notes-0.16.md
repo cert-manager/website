@@ -29,9 +29,9 @@ For more information on this, we invite you to read our [design document](https:
 
 ## kubectl cert-manager tool for signing certificates
 
-cert-manager `v0.15` included a kubectl plugin that allowed to interact with cert-manager.
-In this release we leverage this plugin to allow users to sign certificates on their computer
-or inside the container itself.
+cert-manager `v0.15` included a kubectl plugin that allows users to interact with cert-manager.
+In this release we have added a new sub-command to the cert-manager CLI which allows users to sign certificates on their computer
+or inside a container.
 
 The `kubectl cert-manager create certificaterequest` command creates a new CertificateRequest 
 resource based on the YAML manifest of a Certificate resource as specified by `--from-certificate-file` flag.
@@ -46,10 +46,9 @@ More information can be found on our [kubectl plugin page](../../usage/kubectl-p
 
 ## `v1beta1` API
 
-We are soon reaching cert-manager `v1.0`, the new `v1beta1` API is our first step towards a stable `v1` API.
-The biggest change users may notice is the improved documentation. We took the time to go over all comments
-which are faced to the user in our documentation or in `kubectl explain`, making them up to date and clear.
-`v1beta1` does not contain many big changes, this version is focused on streamlining field named and general clean up of the API in order to mature.
+We are soon reaching cert-manager `v1.0` and the new `v1beta1` API is our first step towards a stable `v1` API.
+The biggest change users may notice is the improved API documentation. We took the time to review and update all the user-facing APIs. You can view the [updated API documentation online](https://cert-manager.io/v0.16-docs/reference/api-docs/), or use `kubectl explain` after installing this version of cert-manager.
+`v1beta1` does not contain many big changes, this version is focused on streamlining field names and general clean up of the API in preparation for the release of the v1.
 
 These are the changes made (for reference, our conversion will take care of everything for you):
 
