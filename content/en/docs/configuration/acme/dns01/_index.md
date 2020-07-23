@@ -51,14 +51,25 @@ read the multiple-solver-types section.
 ## Setting Nameservers for DNS01 Self Check
 
 cert-manager will check the correct DNS records exist before attempting a DNS01
-challenge.  By default, the DNS servers for this check will be taken from
-`/etc/resolv.conf`.  If this is not desired (for example with multiple
-authoritative nameservers or split-horizon DNS), the cert-manager controller
-exposes a flag that allows you alter this behavior:
+challenge.  By default cert-manager will use the recursive nameservers taken
+from `/etc/resolv.conf` to query for the authoritative nameserver to verify the
+DNS records exist.
+
+If this is not desired (for example with multiple authoritative nameservers or
+split-horizon DNS), the cert-manager controller exposes two flags that allows
+you alter this behavior:
+
+`--dns01-recursive-nameservers` Comma separated string with host and port of the
+recursive nameservers cert-manager should query.
+
+`--dns01-recurisve-nameservers-only` Forces cert-manager to only use the
+recursive nameservers for verification. Enabling this option could cause the DNS01
+self check to take longer due to caching performed by the recursive nameservers.
+
 
 Example usage:
 ```bash
---dns01-recursive-nameservers="8.8.8.8:53,1.1.1.1:53"
+--dns01-recursive-nameservers-only --dns01-recursive-nameservers="8.8.8.8:53,1.1.1.1:53"
 ```
 
 If you're using the `cert-manager` helm chart, you can set recursive nameservers
@@ -66,7 +77,7 @@ through `.Values.extraArgs` or at the command at helm install/upgrade time
 with `--set`:
 
 ```bash
---set 'extraArgs={--dns01-recursive-nameservers=8.8.8.8:53\,1.1.1.1:53}'
+--set 'extraArgs={--dns01-recursive-nameservers-only,--dns01-recursive-nameservers=8.8.8.8:53\,1.1.1.1:53}'
 ```
 
 ## Delegated Domains for DNS01
