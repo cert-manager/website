@@ -36,10 +36,10 @@ Install the `CustomResourceDefinitions` and cert-manager itself:
 
 ```bash
 # Kubernetes 1.15+
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.2/cert-manager.yaml
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.yaml
 
 # Kubernetes <1.15
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.2/cert-manager-legacy.yaml
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager-legacy.yaml
 ```
 
 > **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the manifests.
@@ -138,10 +138,10 @@ Install the `CustomResourceDefinition` resources using `kubectl`:
 
 ```bash
 # Kubernetes 1.15+
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.1/cert-manager.crds.yaml
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.crds.yaml
 
 # Kubernetes <1.15
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.1/cert-manager-legacy.crds.yaml
+$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager-legacy.crds.yaml
 ```
 
 > **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the CRDs.
@@ -163,14 +163,14 @@ To install the cert-manager Helm chart:
 $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
-  --version v0.15.1 \
+  --version v0.16.0 \
   # --set installCRDs=true
 
 # Helm v2
 $ helm install \
   --name cert-manager \
   --namespace cert-manager \
-  --version v0.15.1 \
+  --version v0.16.0 \
   jetstack/cert-manager \
   # --set installCRDs=true
 ```
