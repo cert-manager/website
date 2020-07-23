@@ -49,4 +49,5 @@ echo "+++ Running spell check"
   "!content/en/v0.12-docs/reference/api-docs.md" \
   "!content/en/v0.13-docs/reference/api-docs.md" \
   "!content/en/v0.14-docs/reference/api-docs.md" \
+  "!content/en/v0.15-docs/reference/api-docs.md" \
   "!content/en/next-docs/reference/api-docs.md"
