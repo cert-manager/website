@@ -6,12 +6,12 @@ type: "docs"
 ---
 
 ## Issue with older versions of `kubectl`
-`kubectl` versions lower than `v1.19.0-rc.1` have issues updating the `v0.16` CRD files, this is due to [a bug when handling deelply nested CRDs](https://github.com/kubernetes/kubernetes/issues/91615).
+`kubectl` versions lower than `v1.19.0-rc.1` have issues updating the `v0.16` CRD files, this is due to [a bug when handling deeply nested CRDs](https://github.com/kubernetes/kubernetes/issues/91615).
 This patch is being backported into older versions of `kubectl` as new patch releases soon, at time of writing this was not the case.
 This bug will make `kubectl apply -f [...]` hang. 
 
 This bug only happens if you try to re-apply the `v0.16` CRDs, initial upgrade will not cause any issues. If you have this issue please use the `v1.19.0-rc.2` version of `kubectl` to apply this.
-*Note: cert-manager does not reccomend to use this version to operate older Kubernetes clusters apart from applying the CRD updates.*
+*Note: cert-manager does not recommend to use this version to operate older Kubernetes clusters apart from applying the CRD updates.*
 ```console
 # On Linux
 $ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.19.0-rc.2/bin/linux/amd64/kubectl
