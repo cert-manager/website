@@ -24,6 +24,7 @@ $ ./kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/
 ```
 
 ### Helm
-Helm users who use `installCRDs=true` are not affected by this issue.
+Helm users who use `installCRDs=true` should **not** upgrade to `v0.16` until a Helm version built upon Kubernetes `v1.19` is releases.
+Current testing points out that this issue is only helm v3.1+ which is affected but we do not advice right now to use `installCRDs=true` in 0.16.
 
 From here on you can follow the [regular upgrade process](../).
