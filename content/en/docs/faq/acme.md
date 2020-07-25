@@ -148,6 +148,8 @@ cert-manager will check if a DNS record has been propagated by querying the clus
 cert-manager by default uses SOA (Start of Authority) records to determine which zone name to use at your DNS provider.
 Some DNS resolvers will filter this information, if this is the case cert-manager cannot determine the zone and it is advised to [change the DNS server for DNS01 self-checks](../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check).
 
+If using dnsmasq as your local server this may occur if you use the flag `--filterwin2k`, the OpenWRT/LuCi enables this option if you check "filter useless queries". By enabling this flag, dnsmasq drops all SOA records.
+
 ## March 2020 Let's Encrypt CAA Rechecking Bug
 Following the [announcement on March 4](https://community.letsencrypt.org/t/revoking-certain-certificates-on-march-4/114864) Let's Encrypt will be revoking a number of certificates due to a bug in the way they validate CAA records, we have created a tool to analyse your existing cert-manager managed certificates and compare their serial numbers to the publicised list of revoked certificates.
 It's advised that all users of Let's Encrypt & cert-manager run a check using this tool to ensure they do not experience any invalid certificate errors in clusters.
