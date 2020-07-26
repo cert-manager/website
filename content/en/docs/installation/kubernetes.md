@@ -32,7 +32,7 @@ guides](../../configuration/).
 All resources (the `CustomResourceDefinitions`, cert-manager, namespace, and the webhook component)
 are included in a single YAML manifest file:
 
-> **Note**: If you're using a `kubectl` version below `v1.19.0-rc.1` you will might have issues updating the CRDs.
+> **Note**: If you're using a `kubectl` version below `v1.19.0-rc.1` you will have issues updating the CRDs.
 > For more info see the [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl)
 
 
