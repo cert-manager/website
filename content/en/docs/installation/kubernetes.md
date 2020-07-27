@@ -79,6 +79,9 @@ Once you have deployed cert-manager, you can verify the installation
 As an alternative to the YAML manifests referenced above, we also provide an
 official Helm chart for installing cert-manager.
 
+> **Note**: cert-manager should never be embedded as a sub-chart into other Helm charts.
+> cert-manager manages non-namespaced resources in your cluster and should only be installed once.
+
 ### Prerequisites
 
 - Helm v2 or v3 installed
