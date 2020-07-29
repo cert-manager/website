@@ -29,7 +29,7 @@ plane nodes in the [GKE
 docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules).
 
 
-## EKS
+## AWS EKS
 
 When using a custom CNI (such as Weave or Calico) on EKS, the webhook cannot be
 reached by cert-manager. This happens because the control plane cannot be

@@ -28,6 +28,8 @@ CloudDNS
 CloudFlare
 CNAME
 CNAMEs
+CNI
+CNIs
 codebase
 CRD
 CRDs
@@ -73,6 +75,7 @@ kube-cert-manager
 KubeCon
 kubed
 kube-lego
+kubelet
 kubeprod
 Kubernetes
 labelled
