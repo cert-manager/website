@@ -131,8 +131,8 @@ You will also see any errors coming from your DNS provider here.
 ### HTTP01 troubleshooting
 First of all check if you can see the challenge URL from the public internet, if this does not work check your Ingress and firewall configuration as well as the service and pod cert-manager created to solve the ACME challenge.
 If this does work check if your cluster can see it too. It is important to test this from inside a Pod. If you get a connection error it is suggested to check the cluster's network configuration.
-If you receive a `tls: handshake failure`, try setting the annotation `cert-manager.io/issue-temporary-certificate: "true"` on your application's ingress.
-If you still are having issues, there may be a conflict with having multiple ingress using the same hostname, in this case, the annotation `acme.cert-manager.io/http01-edit-in-place: "true"` is likely required.
+If you receive a `tls: handshake failure`, try setting the annotation `cert-manager.io/issue-temporary-certificate: "true"` on the Ingress or Certificate resource. This will issue a temporary self signed certificate for the ingress controller to use before the actual certificate is issued.
+If you still are having issues, there may be an issue with your ingress controller handling multiple resources for the same hostname, in this case, the annotation `acme.cert-manager.io/http01-edit-in-place: "true"` is likely required.
 
 #### Got 404 status code
 If your challenge self-check fails with a 404 not found error. Make sure to check the following:
