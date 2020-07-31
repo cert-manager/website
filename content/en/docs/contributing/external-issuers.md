@@ -43,7 +43,7 @@ resource to a ready state, as this is what is used to signal to higher order
 controllers, such as the `Certificate` controller, that the resource is ready to
 be consumed. Conversely, if the `CertificateRequest` fails, it is as important
 to mark the resource as such, as this will also be used to signal to higher
-order controllers. You can read the valid condition sates
+order controllers. You can read the valid condition states
 [here](../../concepts/certificaterequest/#conditions).
 
 ## Implementation
