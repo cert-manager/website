@@ -144,15 +144,34 @@ spec:
             driver: csi.cert-manager.io
             volumeAttributes:
                   csi.cert-manager.io/issuer-name: ca-issuer
+                  csi.cert-manager.io/common-name: {{ .PodName }}
                   csi.cert-manager.io/dns-names: my-service.sandbox.svc.cluster.local
 ```
 
 In this example, each Pod will receive a 2048 bit RSA private key with a
 certificate that is valid for the DNS name
 `my-service.sandbox.svc.cluster.local` which has been signed by the `Issuer`
-named `ca-issuer` that exists in the same namespace. The resulting key and
+named `ca-issuer` that exists in the same namespace. It's common name is set
+to the pod's name via the csi.cert-manager.io's templating. The resulting key and
 certificate is available from the Pods file system at `/tls/key.pem` and
 `/tls/cert.pem` respectively.
+
+### Templating
+
+The following `volumeAttributes` can be templated with go templating:
+
+- `csi.cert-manager.io/common-name`
+- `csi.cert-manager.io/dns-names`
+- `csi.cert-manager.io/uri-sans`
+
+The available values are:
+- `PodName`
+- `PodNamespace`
+- `PodUID`
+
+In addition, the full expressivity of go templating is available.
+
+### Attributes
 
 Below is a full list of the available volume attributes to configure resulting
 key certificate pairs.
