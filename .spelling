@@ -158,3 +158,5 @@ propagations
 CertificateRequest
 backported
 v0.16
+CNIs
+kubelet
