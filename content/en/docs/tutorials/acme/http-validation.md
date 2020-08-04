@@ -116,8 +116,9 @@ control how cert-manager interacts with Ingress resources:
 - If the `ingress` field is specified, then an Ingress resource with the same
   name in the same namespace as the Certificate must already exist and it will
   be modified only to add the appropriate rules to solve the challenge.
-  This field is useful for the GCLB ingress controller, as well as a number of
-  others, that assign a single public IP address for each ingress resource.
+  This field is useful for the Google Cloud Loadbalancer ingress controller, 
+  as well as a number of others, that assign a single public IP address for 
+  each ingress resource.
   Without manual intervention, creating a new ingress resource would cause any
   challenges to fail.
 - If the `ingressClass` field is specified, a new ingress resource with a
