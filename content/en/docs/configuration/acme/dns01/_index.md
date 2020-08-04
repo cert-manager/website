@@ -62,7 +62,7 @@ you alter this behavior:
 `--dns01-recursive-nameservers` Comma separated string with host and port of the
 recursive nameservers cert-manager should query.
 
-`--dns01-recurisve-nameservers-only` Forces cert-manager to only use the
+`--dns01-recursive-nameservers-only` Forces cert-manager to only use the
 recursive nameservers for verification. Enabling this option could cause the DNS01
 self check to take longer due to caching performed by the recursive nameservers.
 
