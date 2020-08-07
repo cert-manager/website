@@ -24,6 +24,12 @@ To create a Personal Access Token, see [DigitalOcean documentation](https://www.
 
 Handy direct link: https://cloud.digitalocean.com/account/api/tokens/new
 
+To encode your access token into base64, you can use the following
+
+```bash
+echo -n 'your-access-token' | base64
+```
+
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
 kind: Issuer
