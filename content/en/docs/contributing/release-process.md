@@ -27,22 +27,11 @@ The process for cutting a minor release is as follows:
 
 1. Ensure upgrading document exists.
 
-2. Ensure all strings of versions have been updated.
+2. Create a new release branch (e.g. `release-0.5`)
 
-- in the [`jetstack/cert-manager`](https://github.com/jetstack/cert-manager)
-  repository
- - `deploy/charts/cert-manager/README.md`
-- in the [`cert-manager/webisite`](https://github.com/cert-manager/website)
-  repository
- - `content/en/docs/installation/compatibility.md`
- - `content/en/docs/installation/kubernetes.md`
- - `content/en/docs/installation/openshift.md`
+3. Push it to the `jetstack/cert-manager` repository
 
-3. Create a new release branch (e.g. `release-0.5`)
-
-4. Push it to the `jetstack/cert-manager` repository
-
-5. Gather release notes since the previous release:
+4. Gather release notes since the previous release:
 
 Download, install and run the latest version of release-notes:
 
@@ -81,18 +70,10 @@ Bugs that need to be fixed in a patch release should be [cherry picked into the 
 
 The process for cutting a patch release is as follows:
 
-1. Ensure all strings of versions have been updated:
-
-- `deploy/charts/cert-manager/README.md`
-- `docs/getting-started/install/kubernetes.rst`
-- `docs/getting-started/install/openshift.rst`
-- `docs/getting-started/webhook.rst`
-- `docs/tutorials/acme/quick-start/index.rst`
-
-2. Iterate on review feedback (hopefully this will be minimal) and submit
+1. Iterate on review feedback (hopefully this will be minimal) and submit
    changes to `master` of cert-manager, performing a rebase of release-x.y.
 
-3. Gather release notes since the previous release:
+2. Gather release notes since the previous release:
 
 ```bash
 $ go get k8s.io/release; go install $GOPATH/src/k8s.io/release/cmd/release-notes/.
