@@ -77,9 +77,7 @@ release branch.
 
 > Note: This process document is WIP and may be incomplete
 
-Bugs that need to be fixed in a patch release should be cherry picked into the
-appropriate release branch using the `./hack/cherry-pick-pr.sh` script in this
-repository.
+Bugs that need to be fixed in a patch release should be [cherry picked into the appropriate release branch](contributing-flow.md#cherry-picking).
 
 The process for cutting a patch release is as follows:
 
