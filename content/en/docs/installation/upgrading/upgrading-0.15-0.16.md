@@ -15,9 +15,9 @@ This bug only happens during a re-apply of the v0.16 CRDs. Initial upgrade does 
 ```console
 $ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.19.0-rc.2/bin/$(uname | tr '[:upper:]' '[:lower:]')/amd64/kubectl
 $ chmod +x ./kubectl
-$ ./kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.crds.yaml
+$ ./kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.crds.yaml
 # If you use the static manifest install
-$ ./kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.yaml
+$ ./kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.yaml
 ```
 
 ### Helm
