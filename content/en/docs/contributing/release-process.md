@@ -8,6 +8,14 @@ type: "docs"
 This document aims to outline the process that should be followed for cutting a
 new release of cert-manager.
 
+## Prerequisites
+
+First ensure that you have all the tools and permissions required to perform a cert-manager release:
+
+1. Install [Kubernetes Release Notes Generator](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md)
+2. Install [cert-manager release tooling](https://github.com/cert-manager/release)
+3. Get permission to use the "cert-manager-release" project in Google Cloud Platform.
+
 ## Minor releases
 
 A minor release is a backwards-compatible 'feature' release.  It can contain new
