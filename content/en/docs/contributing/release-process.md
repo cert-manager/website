@@ -15,6 +15,7 @@ First ensure that you have all the tools and permissions required to perform a c
 1. Install [Kubernetes Release Notes Generator](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md)
 2. Install [cert-manager release tooling](https://github.com/cert-manager/release)
 3. Get permission to use the "cert-manager-release" project in Google Cloud Platform.
+4. You must have time to complete all the steps in the release process (~1h).
 
 ## Minor releases
 
@@ -66,6 +67,9 @@ If the last step succeeded, you can now re-run the `cmrel publish` with the `--n
 ```
 cmrel publish --nomock --release-name <RELEASE_NAME>
 ```
+
+NOTE: At this stage there will be a draft release on Github and a live release on HelmHub.
+So you must now complete the release process quickly otherwise users of the latest release on HelmHub will encounter errors.
 
 Finally, create a new tag taken from the release branch, e.g.`v0.5.0`.
 
@@ -120,6 +124,9 @@ If the last step succeeded, you can now re-run the `cmrel publish` with the `--n
 ```
 cmrel publish --nomock --release-name <RELEASE_NAME>
 ```
+
+NOTE: At this stage there will be a draft release on Github and a live release on HelmHub.
+So you must now complete the release process quickly otherwise users of the latest release on HelmHub will encounter errors.
 
 Finally, create a new tag taken from the release branch, e.g. `v0.5.1`.
 
