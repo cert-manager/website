@@ -39,6 +39,15 @@ The process for cutting a minor release is as follows:
 
 3. Push it to the `jetstack/cert-manager` repository
 
+4. Run `cmrel stage`
+
+To stage a release of the 'release-1.0' branch to the default staging bucket,
+overriding the release version as 'v1.0.0':
+
+```#bash
+ cmrel stage --git-ref=release-1.0 --release-version=v1.0.0
+```
+
 4. [Create release notes](#release-notes)
 
 Finally, create a new tag taken from the release branch, e.g.`v0.5.0`.
@@ -67,10 +76,17 @@ Bugs that need to be fixed in a patch release should be [cherry picked into the 
 
 The process for cutting a patch release is as follows:
 
-1. Iterate on review feedback (hopefully this will be minimal) and submit
-   changes to `master` of cert-manager, performing a rebase of release-x.y.
+1. Run `cmrel stage`
+
+To stage a release of the 'release-0.16' branch to the default staging bucket,
+overriding the release version as 'v0.16.1':
+
+```#bash
+ cmrel stage --git-ref=release-0.16 --release-version=v0.16.1
+```
 
 2. [Create release notes](#release-notes)
+
 
 Finally, create a new tag taken from the release branch, e.g. `v0.5.1`.
 
