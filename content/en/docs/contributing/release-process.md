@@ -50,6 +50,23 @@ overriding the release version as 'v1.0.0':
 
 4. [Create release notes](#release-notes)
 
+5. Run `cmrel publish`
+
+5.1. First do a dry-run, to ensure that all the staged resources are valid.
+
+```
+cmrel publish --release-name <RELEASE_NAME>
+```
+Where `<RELEASE_NAME>` is the unique build ID printed by the earlier `cmrel stage` command.
+
+5.2 Next publish the release artifacts for real
+
+If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, helm hub etc.
+
+```
+cmrel publish --nomock --release-name <RELEASE_NAME>
+```
+
 Finally, create a new tag taken from the release branch, e.g.`v0.5.0`.
 
 ## Patch releases
@@ -87,6 +104,22 @@ overriding the release version as 'v0.16.1':
 
 2. [Create release notes](#release-notes)
 
+3. Run `cmrel publish`
+
+3.1. First do a dry-run, to ensure that all the staged resources are valid.
+
+```
+cmrel publish --release-name <RELEASE_NAME>
+```
+Where `<RELEASE_NAME>` is the unique build ID printed by the earlier `cmrel stage` command.
+
+3.2 Next publish the release artifacts for real
+
+If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, helm hub etc.
+
+```
+cmrel publish --nomock --release-name <RELEASE_NAME>
+```
 
 Finally, create a new tag taken from the release branch, e.g. `v0.5.1`.
 
