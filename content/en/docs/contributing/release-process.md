@@ -71,6 +71,11 @@ cmrel publish --nomock --release-name <RELEASE_NAME>
 NOTE: At this stage there will be a draft release on Github and a live release on HelmHub.
 So you must now complete the release process quickly otherwise users of the latest release on HelmHub will encounter errors.
 
+6. Publish the GitHub release
+
+6.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
+6.2 Click "publish" to make the GitHub release live.
+
 Finally, create a new tag taken from the release branch, e.g.`v0.5.0`.
 
 ## Patch releases
@@ -127,6 +132,11 @@ cmrel publish --nomock --release-name <RELEASE_NAME>
 
 NOTE: At this stage there will be a draft release on Github and a live release on HelmHub.
 So you must now complete the release process quickly otherwise users of the latest release on HelmHub will encounter errors.
+
+4. Publish the GitHub release
+
+4.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
+4.2 Click "publish" to make the GitHub release live.
 
 Finally, create a new tag taken from the release branch, e.g. `v0.5.1`.
 
