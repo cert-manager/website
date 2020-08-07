@@ -76,7 +76,7 @@ So you must now complete the release process quickly otherwise users of the late
 6.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
 6.2 Click "publish" to make the GitHub release live.
 
-Finally, create a new tag taken from the release branch, e.g.`v0.5.0`.
+7. Finally, create a new tag taken from the release branch, e.g.`v0.5.0`.
 
 ## Patch releases
 
@@ -138,7 +138,7 @@ So you must now complete the release process quickly otherwise users of the late
 4.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
 4.2 Click "publish" to make the GitHub release live.
 
-Finally, create a new tag taken from the release branch, e.g. `v0.5.1`.
+5. Finally, create a new tag taken from the release branch, e.g. `v0.5.1`.
 
 ## Release Notes
 
