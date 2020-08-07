@@ -31,18 +31,7 @@ The process for cutting a minor release is as follows:
 
 3. Push it to the `jetstack/cert-manager` repository
 
-4. Gather release notes since the previous release:
-
-Download, install and run the latest version of release-notes:
-
-```bash
-$ go get k8s.io/release; go install $GOPATH/src/k8s.io/release/cmd/release-notes/.
-$ mkdir -p design/release-notes/release-*X.Y*
-$ export GITHUB_TOKEN=*your-token*
-$ $GOPATH/bin/release-notes -release-version v*X.Y* -github-repo cert-manager -github-org jetstack -requiredAuthor "" -start-sha=$(git rev-parse *X.Y-1.0*) -end-sha=$(git rev-parse HEAD) -output design/release-notes/release-*X.Y*/draft-release-notes.md
-```
-Add additional blurb, notable items and characterize change log.
-
+4. [Create release notes](#release-notes)
 
 Finally, create a new tag taken from the release branch, e.g.`v0.5.0`.
 
@@ -73,15 +62,25 @@ The process for cutting a patch release is as follows:
 1. Iterate on review feedback (hopefully this will be minimal) and submit
    changes to `master` of cert-manager, performing a rebase of release-x.y.
 
-2. Gather release notes since the previous release:
-
-```bash
-$ go get k8s.io/release; go install $GOPATH/src/k8s.io/release/cmd/release-notes/.
-$ mkdir -p design/release-notes/release-*X.Y*
-$ export GITHUB_TOKEN=*your-token*
-$ $GOPATH/bin/release-notes -release-version v*X.Y* -github-repo cert-manager -github-org jetstack -requiredAuthor "" -start-sha=$(git rev-parse *X.Y.Z-1*) -end-sha=$(git rev-parse release-*X.Y*) -output design/release-notes/release-*X.Y*/draft-release-notes-*Z*.md
-```
-
-Add additional blurb, notable items and characterize change log.
+2. [Create release notes](#release-notes)
 
 Finally, create a new tag taken from the release branch, e.g. `v0.5.1`.
+
+## Release Notes
+
+1. Download and install the latest version of [Kubernetes Release Notes Generator](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md).
+
+2. Run as follows, substituting the current and last versions where appropriate:
+
+```bash
+export GITHUB_TOKEN=*your-token*
+export RELEASE_VERSION=*x.y.z*
+export BRANCH=*release-x.y*
+export END_REV=*x.y.z*
+export START_REV=*x.?.?*
+$GOPATH/bin/release-notes --github-repo cert-manager --github-org jetstack --required-author "" --output release-notes.md
+```
+
+3. Add additional blurb, notable items and characterize change log.
+
+
