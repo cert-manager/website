@@ -998,20 +998,20 @@ Introduced on new Subscription Page
   }
 
   .media-hero__copy {
-    flex: 1 1 45%;
+    flex: 1 1 50%;
     order: 1;
     margin-top: 75px;
   }
 
   .media-hero__graphic {
-    flex: 1 1 55%;
+    flex: 1 1 50%;
     order: 2;
     padding-left: 100px;
     padding-top: 30px;
   }
 
   .media-hero__graphic--spaced {
-    flex: 1 1 55%;
+    flex: 1 1 50%;
     order: 2;
     padding-left: 50px;
     padding-top: 100px;
