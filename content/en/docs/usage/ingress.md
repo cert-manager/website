@@ -30,7 +30,7 @@ metadata:
   namespace: myIngress
 spec:
   rules:
-  - host: myingress.com
+  - host: example.com
     http:
       paths:
       - backend:
@@ -39,7 +39,7 @@ spec:
         path: /
   tls: # < placing a host in the TLS config will indicate a certificate should be created
   - hosts:
-    - myingress.com
+    - example.com
     secretName: myingress-cert # < cert-manager will store the created certificate in this secret.
 ```
 
