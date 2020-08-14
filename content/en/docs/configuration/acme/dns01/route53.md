@@ -162,11 +162,11 @@ spec:
           hostedZoneID: DIKER8JEXAMPLE # optional, see policy above
           role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager
 
-    # this solver handles foobar.cloud challenges
+    # this solver handles example.org challenges
     # and uses explicit credentials
     - selector:
         dnsZones:
-          - "foobar.cloud"
+          - "example.org"
       dns01:
         route53:
           region: eu-central-1
