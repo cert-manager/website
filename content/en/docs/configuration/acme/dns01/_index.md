@@ -86,22 +86,22 @@ By default, cert-manager will not follow CNAME records pointing to subdomains.
 
 If granting cert-manager access to the root DNS zone is not desired, then the
 `_acme-challenge.example.com` subdomain can instead be delegated to some other,
-less privileged domain. This could be achieved in the following way. Say, one has two zones:
+less privileged domain (`example.org`). This could be achieved in the following way. Say, one has two zones:
 
 * `example.com`
-* `less-privileged.com`
+* `example.org`
 
 1. Create a CNAME record pointing to this less privileged domain:
 ```
-_acme-challenge.example.com	IN	CNAME	_acme-challenge.less-privileged.com.
+_acme-challenge.example.com	IN	CNAME	_acme-challenge.example.org.
 ```
 
-2. Grant cert-manager rights to update `less-privileged.com` zone 
+2. Grant cert-manager rights to update less privileged `example.org` zone
 
 3. Provide configuration/credentials for updating this less privileged zone
 and add an additional field into the relevant `dns01` solver. Note that `selector` 
 field is still working for the original `example.com`, while credentials are provided for 
-`less-privileged.com`
+`example.org`
 
 ```yaml
 apiVersion: cert-manager.io/v1alpha2
@@ -120,8 +120,8 @@ spec:
         cnameStrategy: Follow
         route53:
           region: eu-central-1
-          accessKeyID: <Access ID for less-privileged.com here>
-          hostedZoneID: <Zone ID for less-privileged.com here>
+          accessKeyID: <Access ID for example.org here>
+          hostedZoneID: <Zone ID for example.org here>
           secretAccessKeySecretRef:
             ...
 ```
@@ -131,10 +131,10 @@ it is possible to share an aliased less-privileged domain. To achieve it one sho
 create a CNAME record for each (sub)domain like this:
 
 ```txt
-_acme-challenge.example.com	    IN	CNAME	_acme-challenge.less-privileged.com.
-_acme-challenge.www.example.com	IN	CNAME	_acme-challenge.less-privileged.com.
-_acme-challenge.foo.example.com	IN	CNAME	_acme-challenge.less-privileged.com.
-_acme-challenge.bar.example.com	IN	CNAME	_acme-challenge.less-privileged.com.
+_acme-challenge.example.com	    IN	CNAME	_acme-challenge.example.org.
+_acme-challenge.www.example.com	IN	CNAME	_acme-challenge.example.org.
+_acme-challenge.foo.example.com	IN	CNAME	_acme-challenge.example.org.
+_acme-challenge.bar.example.com	IN	CNAME	_acme-challenge.example.org.
 ```
 
 With this configuration cert-manager will follow CNAME records recursively in order to determine
