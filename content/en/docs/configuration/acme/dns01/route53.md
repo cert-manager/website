@@ -92,7 +92,7 @@ in Account Y, and attach a trust relationship like the one below.
 }
 ```
 
-Bear in mind, that you won't be able to define this policy until `cert-manager` role on acount Y is created. If you are setting this up using a configuration language, you may want to define principal as:
+Bear in mind, that you won't be able to define this policy until `cert-manager` role on account Y is created. If you are setting this up using a configuration language, you may want to define principal as:
 
 ```json
 "Principal": {
