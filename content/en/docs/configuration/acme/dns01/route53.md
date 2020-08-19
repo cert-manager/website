@@ -103,9 +103,7 @@ Second, create the cert-manager role in Account X; this will be used as a creden
   "Statement": [
     {
       "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::YYYYYYYYYYYY:role/dns-manager"
-      },
+      "Resource": "arn:aws:iam::YYYYYYYYYYYY:role/dns-manager",
       "Action": "sts:AssumeRole"
     }
   ]
