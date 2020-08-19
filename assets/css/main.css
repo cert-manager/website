@@ -2121,14 +2121,6 @@ Introduced on new Subscription Page
   transition: transform 300ms ease-in-out;
 }
 
-.perk:hover {
-  transform: scale(1.1);
-}
-
-.perk:hover .perk__icon {
-  transform: scale(1.2);
-}
-
 .perk__title {
   color: inherit;
   font-size: 15px;
