@@ -51,7 +51,7 @@ If this field is not specified, and `ingressName` is also not specified,
 cert-manager will default to create *new* `Ingress` resources but will **not**
 set the ingress class on these resources, meaning *all* ingress controllers
 installed in your cluster will serve traffic for the challenge solver,
-potentially occurring additional cost.
+potentially incurring additional cost.
 
 
 ### `ingressName`
