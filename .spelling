@@ -68,6 +68,7 @@ IPv6
 Istio
 Jetstack
 JSON
+Jsonnet
 Knative
 KUARD
 kubebuilder
@@ -84,6 +85,8 @@ MacOS
 metadata
 misconfiguration
 misconfigured
+mixin
+mixins
 mTLS
 nameserver
 nameservers
@@ -159,3 +162,8 @@ Uncomment
 loadbalancer
 propagations
 CertificateRequest
+backported
+v0.16
+CNIs
+kubelet
+awspca
