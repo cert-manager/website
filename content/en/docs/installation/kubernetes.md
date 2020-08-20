@@ -39,10 +39,10 @@ are included in a single YAML manifest file:
 Install the `CustomResourceDefinitions` and cert-manager itself:
 
 ```bash
-# Kubernetes 1.15+
+# Kubernetes 1.16+
 $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.yaml
 
-# Kubernetes <1.15
+# Kubernetes <1.16
 $ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager-legacy.yaml
 ```
 
