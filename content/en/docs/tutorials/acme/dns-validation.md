@@ -54,12 +54,12 @@ spec:
             name: clouddns-dns01-solver-svc-acct
             key: key.json
 
-    # We only use cloudflare to solve challenges for foo.com.
+    # We only use cloudflare to solve challenges for example.org.
     # Alternative options such as 'matchLabels' and 'dnsZones' can be specified
     # as part of a solver's selector too.
     - selector:
         dnsNames:
-        - foo.com
+        - example.org
       dns01:
         cloudflare:
           email: my-cloudflare-acc@example.com
@@ -110,7 +110,7 @@ spec:
   dnsNames:
   - '*.example.com'
   - example.com
-  - foo.com
+  - example.org
 ```
 
 The Certificate resource describes our desired certificate and the possible
@@ -127,7 +127,7 @@ same namespace as the Certificate.
 The certificate will have a common name of `*.example.com` and the [Subject
 Alternative Names
 (SANs)](https://en.wikipedia.org/wiki/Subject_Alternative_Name) will be
-`*.example.com`, `example.com` and `foo.com`.
+`*.example.com`, `example.com` and `example.org`.
 
 In our Certificate we have referenced the `letsencrypt-staging` Issuer above.
 The Issuer must be in the same namespace as the Certificate.  If you want to
@@ -159,7 +159,7 @@ Events:
   Normal  CreateOrder     57m      cert-manager  Created new ACME order, attempting validation...
   Normal  DomainVerified  55m      cert-manager  Domain "*.example.com" verified with "dns-01" validation
   Normal  DomainVerified  55m      cert-manager  Domain "example.com" verified with "dns-01" validation
-  Normal  DomainVerified  55m      cert-manager  Domain "foo.com" verified with "dns-01" validation
+  Normal  DomainVerified  55m      cert-manager  Domain "example.org" verified with "dns-01" validation
   Normal  IssueCert       55m      cert-manager  Issuing certificate...
   Normal  CertObtained    55m      cert-manager  Obtained certificate from ACME server
   Normal  CertIssued      55m      cert-manager  Certificate issued successfully

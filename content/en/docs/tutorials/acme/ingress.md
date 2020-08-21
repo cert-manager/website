@@ -188,7 +188,7 @@ IP address. When it is complete, you can see the external IP address using the
 $ kubectl get svc
 NAME                                       TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
 kubernetes                                 ClusterIP      10.63.240.1     <none>           443/TCP                      23m
-quickstart-nginx-ingress-controller        LoadBalancer   10.63.248.177   35.233.154.161   80:31345/TCP,443:31376/TCP   16m
+quickstart-nginx-ingress-controller        LoadBalancer   10.63.248.177   203.0.113.2      80:31345/TCP,443:31376/TCP   16m
 quickstart-nginx-ingress-default-backend   ClusterIP      10.63.250.234   <none>           80/TCP                       16m
 ```
 
@@ -207,7 +207,7 @@ provider on how to arrange that.
 
 The external IP that is allocated to the ingress-controller is the IP to which
 all incoming traffic should be routed. To enable this, add it to a DNS zone you
-control, for example as `example.your-domain.com`.
+control, for example as `www.example.com`.
 
 This quick-start assumes you know how to assign a DNS entry to an IP address and
 will do so.
@@ -278,7 +278,7 @@ ingress will show an address as well:
 
 ```bash
 NAME      HOSTS     ADDRESS         PORTS     AGE
-kuard     *         35.199.170.62   80        9m
+kuard     *         203.0.113.2   80        9m
 ```
 
 > Note: The IP address on the ingress *may not* match the IP address that the
@@ -290,14 +290,14 @@ kuard     *         35.199.170.62   80        9m
 > your service.
 
 Make sure the service is reachable at the domain name you added above, for
-example `http://example.your-domain.com`. The simplest way is to open a browser
+example `http://www.example.com`. The simplest way is to open a browser
 and enter the name that you set up in DNS, and for which we just added the
 ingress.
 
 You may also use a command line tool like `curl` to check the ingress.
 
 ```bash
-$ curl -kivL -H 'Host: example.your-domain.com' 'http://35.199.164.14'
+$ curl -kivL -H 'Host: www.example.com' 'http://203.0.113.2'
 ```
 
 The options on this curl command will provide verbose output, following any
@@ -405,7 +405,7 @@ Metadata:
   UID:                 25b7ae77-ea93-11e8-82f8-42010a8a00b5
 Spec:
   Acme:
-    Email:  your.email@your-domain.com
+    Email:  email@example.com
     Private Key Secret Ref:
       Key:
       Name:  letsencrypt-staging
@@ -496,7 +496,7 @@ Metadata:
   UID:                     68d43400-ea92-11e8-82f8-42010a8a00b5
 Spec:
   Dns Names:
-    example.your-domain.com
+    www.example.com
   Issuer Ref:
     Kind:       Issuer
     Name:       letsencrypt-staging
@@ -515,7 +515,7 @@ Events:
   Type     Reason          Age                From          Message
   ----     ------          ----               ----          -------
   Normal   CreateOrder     9m                 cert-manager  Created new ACME order, attempting validation...
-  Normal   DomainVerified  8m                 cert-manager  Domain "example.your-domain.com" verified with "http-01" validation
+  Normal   DomainVerified  8m                 cert-manager  Domain "www.example.com" verified with "http-01" validation
   Normal   IssueCert       8m                 cert-manager  Issuing certificate...
   Normal   CertObtained    7m                 cert-manager  Obtained certificate from ACME server
   Normal   CertIssued      7m                 cert-manager  Certificate issued Successfully
@@ -534,8 +534,8 @@ $ kubectl describe secret quickstart-example-tls
 Name:         quickstart-example-tls
 Namespace:    default
 Labels:       cert-manager.io/certificate-name=quickstart-example-tls
-Annotations:  cert-manager.io/alt-names=example.your-domain.com
-              cert-manager.io/common-name=example.your-domain.com
+Annotations:  cert-manager.io/alt-names=www.example.com
+              cert-manager.io/common-name=www.example.com
               cert-manager.io/issuer-kind=Issuer
               cert-manager.io/issuer-name=letsencrypt-staging
 
@@ -594,7 +594,7 @@ Metadata:
   UID:                     bdd93b32-ea97-11e8-82f8-42010a8a00b5
 Spec:
   Dns Names:
-    example.your-domain.com
+    www.example.com
   Issuer Ref:
     Kind:       Issuer
     Name:       letsencrypt-prod
@@ -622,7 +622,7 @@ $ kubectl describe order quickstart-example-tls-889745041
 Events:
   Type    Reason      Age   From          Message
   ----    ------      ----  ----          -------
-  Normal  Created     90s   cert-manager  Created Challenge resource "quickstart-example-tls-889745041-0" for domain "example.your-domain.com"
+  Normal  Created     90s   cert-manager  Created Challenge resource "quickstart-example-tls-889745041-0" for domain "www.example.com"
 ```
 
 Here, we can see that cert-manager has created 1 'Challenge' resource to fulfill
@@ -663,7 +663,7 @@ Events:
   ----    ------          ----  ----          -------
   Normal  Started         71s   cert-manager  Challenge scheduled for processing
   Normal  Presented       70s   cert-manager  Presented challenge using http-01 challenge mechanism
-  Normal  DomainVerified  2s    cert-manager  Domain "example.your-domain.com" verified with "http-01" validation
+  Normal  DomainVerified  2s    cert-manager  Domain "www.example.com" verified with "http-01" validation
 ```
 
 > Note: If your challenges are not becoming 'valid' and remain in the 'pending'
@@ -682,7 +682,7 @@ $ kubectl describe order quickstart-example-tls-889745041
 Events:
   Type    Reason      Age   From          Message
   ----    ------      ----  ----          -------
-  Normal  Created     90s   cert-manager  Created Challenge resource "quickstart-example-tls-889745041-0" for domain "example.your-domain.com"
+  Normal  Created     90s   cert-manager  Created Challenge resource "quickstart-example-tls-889745041-0" for domain "www.example.com"
   Normal  OrderValid  16s   cert-manager  Order completed successfully
 ```
 
