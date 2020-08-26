@@ -100,7 +100,7 @@ ACME server
 > 
 > You can then create the Secret resource with: 
 > 
->     kubectl create secret generic eab-secret --from-literal \
+>     $ kubectl create secret generic eab-secret --from-literal \
 >       secret={base64 encoded secret key}
 
 An example of an ACME issuer with an External Account Binding is as follows.
@@ -133,8 +133,9 @@ spec:
 You may want to reuse a single ACME account across multiple clusters. This
 might especially be useful when using EAB. If the `disableAccountKeyGeneration`
 field is set, cert-manager will not create a new ACME account and use the
-existing key specified in `privateKeySecretRef`.
-
+existing key specified in `privateKeySecretRef`. Note that the 
+`Issuer`/`ClusterIssuer` will not be ready and will continue to retry until the 
+`Secret` is provided.
 
 ```yaml
 apiVersion: cert-manager.io/v1beta1
