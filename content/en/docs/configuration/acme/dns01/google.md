@@ -77,7 +77,7 @@ $ kubectl create secret generic clouddns-dns01-solver-svc-acct \
 
 ## Create an Issuer That Uses CloudDNS
 
-Next, create an `Issuer` (or `ClusterIssuer`) with a `clouddns` provider. An
+Next, create an `Issuer` (or `ClusterIssuer`) with a `cloudDNS` provider. An
 example `Issuer` manifest can be seen below with annotations.
 
 ```yaml
