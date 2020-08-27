@@ -16,6 +16,7 @@ First ensure that you have all the tools and permissions required to perform a c
 2. Install [cert-manager release tooling](https://github.com/cert-manager/release)
 3. Get permission to use the "cert-manager-release" project in Google Cloud Platform.
 4. You must have time to complete all the steps in the release process (~1h).
+5. Gcloud CLI
 
 ## Minor releases
 
@@ -34,11 +35,16 @@ some of these goals are missed, in order to keep up release velocity.
 
 The process for cutting a minor release is as follows:
 
-1. Ensure upgrading document exists.
+1. Ensure upgrading document exists. 
+   (not necessary for alpha releases)
 
-2. Create a new release branch (e.g. `release-0.5`)
+2. Fast forward the release branch to master (e.g. `release-0.5`)
+
+git merge --ff-only origin/master
 
 3. Push it to the `jetstack/cert-manager` repository
+
+git push --set-upstream origin
 
 4. Run `cmrel stage`
 
@@ -48,6 +54,8 @@ overriding the release version as 'v1.0.0':
 ```#bash
  cmrel stage --git-ref=release-1.0 --release-version=v1.0.0
 ```
+
+Look for a build URL and visit it in Google Cloud Console.
 
 4. [Create release notes](#release-notes)
 
@@ -147,12 +155,12 @@ So you must now complete the release process quickly otherwise users of the late
 2. Run as follows, substituting the current and last versions where appropriate:
 
 ```bash
-export GITHUB_TOKEN=*your-token*
-export RELEASE_VERSION=*x.y.z*
-export BRANCH=*release-x.y*
-export END_REV=*x.y.z*
-export START_REV=*x.?.?*
-$GOPATH/bin/release-notes --github-repo cert-manager --github-org jetstack --required-author "" --output release-notes.md
+export GITHUB_TOKEN=1cf8fd6e181e7433dd964272a96d93bc015edbb0
+export RELEASE_VERSION=1.0.0
+export BRANCH=release-1.0
+export END_REV=release-1.0
+export START_REV=v0.16.1
+$GOPATH/bin/release-notes --github-repo cert-manager --github-org jetstack --required-author "jetstack-bot" --output release-notes.md
 ```
 
 3. Add additional blurb, notable items and characterize change log.
