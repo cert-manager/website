@@ -61,7 +61,7 @@ Save the below content after making your amendments to a file named
 `venafi-cloud-issuer.yaml`.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: cloud-venafi-issuer
@@ -139,7 +139,7 @@ Save the below content after making your amendments to a file named
 `venafi-tpp-issuer.yaml`.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: tpp-venafi-issuer
@@ -177,7 +177,7 @@ Starting `v0.14` you can pass custom fields to Venafi (TPP version `v19.2` and h
 The value is a JSON encoded array of custom field objects having a `name` and `value` key.
 For example:
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: example-com-certificate

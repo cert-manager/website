@@ -38,7 +38,7 @@ metadata:
     kubed.appscode.com/sync: "cert-manager-tls=sandbox" # Sync certificate to matching namespaces
 type: kubernetes.io/tls
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: sandbox

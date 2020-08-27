@@ -46,7 +46,7 @@ Next is to deploy the CA issuer which references this `Secret`. This is done by
 referencing the secret name under the `ca` stanza in the `Issuer` spec.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: ca-issuer

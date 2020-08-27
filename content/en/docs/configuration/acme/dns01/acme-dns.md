@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: example-issuer
@@ -15,7 +15,7 @@ spec:
     ...
     solvers:
     - dns01:
-        acmedns:
+        acmeDNS:
           host: https://acme.example.com
           accountSecretRef:
             name: acme-dns

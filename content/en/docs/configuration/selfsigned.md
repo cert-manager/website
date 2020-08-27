@@ -29,7 +29,7 @@ configured, it is the simplest to configure. All that is required is for the
 `SelfSigned` stanza to be present in the issuers spec.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: selfsigned-issuer
