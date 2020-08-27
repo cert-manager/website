@@ -68,10 +68,10 @@ You can find the name of the `CertificateRequest` in the `Certificate` event log
 To get more info we again run `kubectl describe`:
 ```console
 $ kubectl describe certificaterequest <CertificateRequest name>
-API Version:  cert-manager.io/v1alpha3
+API Version:  cert-manager.io/v1
 Kind:         CertificateRequest
 Spec:
-  Csr: [...]
+  Request: [...]
   Issuer Ref:
     Group:  cert-manager.io
     Kind:   ClusterIssuer
