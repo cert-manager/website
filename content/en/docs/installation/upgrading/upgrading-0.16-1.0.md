@@ -22,6 +22,8 @@ This issue only affects `v3.1+` however, we don't currently advise using `instal
 ## Upgrade instructions per Kubernetes version
 
 ### Kubernetes 1.16 and above
+These are the upgrade instructions to upgrade from cert-manager `v0.14.0` or higher, please consult other upgrade guides first before upgrading to `v1.0` if you run an older version of cert-manager.
+
 No special requirements, you can follow the [regular upgrade process](../).
 
 ### Kubernetes 1.15.x
@@ -34,12 +36,13 @@ You can follow the instructions of "Kubernetes 1.14" below on how to upgrade to 
 
 ### Kubernetes 1.14 and below
 
+These are the upgrade instructions to upgrade from cert-manager `v0.11.0` or higher, please consult other upgrade guides first before upgrading to `v1.0` if you run an older version of cert-manager.
+
 > **Note**: Due to the lack of support for conversion webhooks in your Kubernetes version this will not be an easy migration. We advise you to consider upgrading to Kubernetes 1.16 or higher before upgrading. Upgrading your Kubernetes cluster might be easier than upgrading cert-manager.
 
 We have released our `cert-manager.io/v1` API that replaces `cert-manager.io/v1alpha2`.
 Since the legacy version for Kubernetes 1.15 and below only supports one CRD version
 you have to transition all resources to `cert-manager.io/v1`.
-
 
 This makes for a fairly significant breaking change for users, as **all**
 cert-manager resources will need to be updated to reflect these changes.
@@ -53,10 +56,11 @@ This upgrade MUST be performed in the following sequence of steps:
 
 2. [Uninstall cert-manager](../../uninstall/).
 
-3. Ensure the old cert-manager CRD resources have also been deleted: `kubectl get crd | grep cert-manager.io`
-
-4. Update the `apiVersion` on all your backed up resources from
+3. Update the `apiVersion` on all your backed up resources from
    `cert-manager.io/v1alpha2` to `cert-manager.io/v1`. See the converting section for that.
+
+4. Ensure the old cert-manager CRD resources have also been deleted: `kubectl get crd | grep cert-manager.io`
+
 
 5. Re-install cert-manager v1.0 from scratch according to the [installation
    guide](../../).
@@ -75,6 +79,17 @@ kubectl get -o yaml \
 ```
 
 *Note that this will not export private keys or secrets.*
+
+#### Converting resources
+
+You can use our [kubectl plugin](../../../usage/kubectl-plugin/) to automatically convert your backup from v1alpha2 to v1 using the following command:
+
+```bash
+kubectl cert-manager convert --output-version cert-manager.io/v1 -f cert-manager-backup.yaml > cert-manager-v1.yaml
+```
+
+*Tip:* you can use `kubectl apply --dry-run` on a local/test cluster with cert-manager `v1.0` installed to validate your conversion 
+
 
 #### Uninstall cert-manager
 Next step is to uninstall cert-manager. 
@@ -104,14 +119,6 @@ kubectl delete crd orders.acme.cert-manager.io
 ```
 
 For more info see the [uninstall cert-manager guide](../../uninstall/).
-
-#### Converting resources
-
-You can use our [kubectl plugin](../../../usage/kubectl-plugin/) to automatically convert your backup from v1alpha2 to v1 using the following command:
-
-```bash
-kubectl cert-manager convert --output-version cert-manager.io/v1 -f cert-manager-backup.yaml > cert-manager-v1.yaml
-```
 
 #### Reinstall and restore
 To install cert-manager again you can follow the normal [installation guide](../../).
