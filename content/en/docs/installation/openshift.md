@@ -69,7 +69,7 @@ $ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases
 ```
 
 > **Note**: If you're using OpenShift 3 you will need to install the legacy version of the manifests.
-> This version does not have API version conversion and only supports `cert-manager.io/v1alpha2` API resources. 
+> This version does not have API version conversion and only supports `cert-manager.io/v1` API resources.
 
 > **Note**: The `--validate=false` flag is added to the `oc apply` command
 > above else you will receive a validation error relating to the `caBundle`

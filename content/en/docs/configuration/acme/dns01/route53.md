@@ -141,7 +141,7 @@ And the following trust relationship (Add AWS `Service`s as needed):
 Here is an example configuration for a `ClusterIssuer`:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod

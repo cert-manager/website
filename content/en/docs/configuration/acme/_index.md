@@ -49,7 +49,7 @@ a `server` URL, a `privateKeySecretRef`, and one or more `solvers`. Below is an
 example of a simple ACME issuer:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
@@ -98,7 +98,7 @@ Account Binding when registering the account with the ACME server.
 An example of an ACME issuer with an External Account Binding is as follows.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: my-acme-server-with-eab
@@ -146,7 +146,7 @@ the following `Issuer` will only match on `Certificates` that have the labels
 `"user-cloudflare-solver": "true"`, or `"email": "user@example.com"`, or both.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
@@ -185,7 +185,7 @@ The following example will solve challenges of `Certificates` with DNS names
 > a zone.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
@@ -221,7 +221,7 @@ In the following example, this solver will resolve challenges for the domain
 `example.com`, as well as all of its subdomains `*.example.com`.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
@@ -252,7 +252,7 @@ For all other challenges, the `HTTP01` solver will be used *only* if the
 `Certificate` also contains the label `"use-http01-solver": "true"`.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging

@@ -393,15 +393,15 @@ $ kubectl describe issuer letsencrypt-staging
 Name:         letsencrypt-staging
 Namespace:    default
 Labels:       <none>
-Annotations:  kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"cert-manager.io/v1alpha2","kind":"Issuer","metadata":{"annotations":{},"name":"letsencrypt-staging","namespace":"default"},(...)}
-API Version:  cert-manager.io/v1alpha2
+Annotations:  kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"cert-manager.io/v1","kind":"Issuer","metadata":{"annotations":{},"name":"letsencrypt-staging","namespace":"default"},(...)}
+API Version:  cert-manager.io/v1
 Kind:         Issuer
 Metadata:
   Cluster Name:
   Creation Timestamp:  2018-11-17T18:03:54Z
   Generation:          0
   Resource Version:    9092
-  Self Link:           /apis/cert-manager.io/v1alpha2/namespaces/default/issuers/letsencrypt-staging
+  Self Link:           /apis/cert-manager.io/v1/namespaces/default/issuers/letsencrypt-staging
   UID:                 25b7ae77-ea93-11e8-82f8-42010a8a00b5
 Spec:
   Acme:
@@ -478,7 +478,7 @@ Name:         quickstart-example-tls
 Namespace:    default
 Labels:       <none>
 Annotations:  <none>
-API Version:  cert-manager.io/v1alpha2
+API Version:  cert-manager.io/v1
 Kind:         Certificate
 Metadata:
   Cluster Name:
@@ -492,7 +492,7 @@ Metadata:
     Name:                  kuard
     UID:                   a3e9f935-ea87-11e8-82f8-42010a8a00b5
   Resource Version:        9295
-  Self Link:               /apis/cert-manager.io/v1alpha2/namespaces/default/certificates/quickstart-example-tls
+  Self Link:               /apis/cert-manager.io/v1/namespaces/default/certificates/quickstart-example-tls
   UID:                     68d43400-ea92-11e8-82f8-42010a8a00b5
 Spec:
   Dns Names:
@@ -576,7 +576,7 @@ Name:         quickstart-example-tls
 Namespace:    default
 Labels:       <none>
 Annotations:  <none>
-API Version:  cert-manager.io/v1alpha2
+API Version:  cert-manager.io/v1
 Kind:         Certificate
 Metadata:
   Cluster Name:
@@ -590,7 +590,7 @@ Metadata:
     Name:                  kuard
     UID:                   a3e9f935-ea87-11e8-82f8-42010a8a00b5
   Resource Version:        283686
-  Self Link:               /apis/cert-manager.io/v1alpha2/namespaces/default/certificates/quickstart-example-tls
+  Self Link:               /apis/cert-manager.io/v1/namespaces/default/certificates/quickstart-example-tls
   UID:                     bdd93b32-ea97-11e8-82f8-42010a8a00b5
 Spec:
   Dns Names:

@@ -273,7 +273,7 @@ authority within Kubernetes.
 Save the following YAML into a file named `venafi-issuer.yaml`:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: venafi-issuer
@@ -339,7 +339,7 @@ authority within Kubernetes.
 Save the following YAML into a file named `venafi-issuer.yaml`:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: venafi-issuer
@@ -393,7 +393,7 @@ For now, we will create a basic x509 Certificate that is valid for our domain,
 `example.com`:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: example-com-tls

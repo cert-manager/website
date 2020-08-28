@@ -66,7 +66,7 @@ $ echo "AZURE_DNS_ZONE_RESOURCE_GROUP: $AZURE_DNS_ZONE_RESOURCE_GROUP"
 To configure the issuer, substitute the capital cased variables with the values from the previous script.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: example-issuer
@@ -75,7 +75,7 @@ spec:
     ...
     solvers:
     - dns01:
-        azuredns:
+        azureDNS:
           clientID: AZURE_CERT_MANAGER_SP_APP_ID
           clientSecretSecretRef:
           # The following is the secret we created in Kubernetes. Issuer will use this to present challenge to Azure DNS.

@@ -34,7 +34,7 @@ stringData:
 Then in your `Issuer` manifest:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: example-issuer
@@ -69,7 +69,7 @@ stringData:
 Then in your `Issuer` manifest:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: example-issuer

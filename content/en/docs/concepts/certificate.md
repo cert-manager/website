@@ -18,7 +18,7 @@ is created by cert-manager containing the encoded x509 certificate request,
 Here is one such example of a `Certificate` resource.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: acme-crt

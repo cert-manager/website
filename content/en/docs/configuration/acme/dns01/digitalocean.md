@@ -33,7 +33,7 @@ echo -n 'your-access-token' | base64
 ```
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: example-issuer

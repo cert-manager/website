@@ -35,7 +35,7 @@ Below is an example of a configuration to connect a Vault server.
 > been added.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: vault-issuer
@@ -81,7 +81,7 @@ references this `Secret`, as well as the data key of the field that stores the
 secret ID.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: vault-issuer
@@ -130,7 +130,7 @@ authentication by referencing this `Secret` along with the key of the field the
 token data is stored at.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: vault-issuer
@@ -170,7 +170,7 @@ The following example will be making use of the Service Account
 has been created by Kubernetes.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: vault-issuer

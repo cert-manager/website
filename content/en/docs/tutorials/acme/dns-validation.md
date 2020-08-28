@@ -26,7 +26,7 @@ You can read more about the Issuer resource in the [Issuer
 docs](../../../configuration/).
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt-staging
@@ -45,7 +45,7 @@ spec:
     # An empty 'selector' means that this solver matches all domains
     - selector: {}
       dns01:
-        clouddns:
+        cloudDNS:
           # The ID of the GCP project
           # reference: https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/dns01/google.html
           project: $PROJECT_ID
@@ -98,7 +98,7 @@ supported providers, can be found [in the DNS01 reference docs](../../../configu
 Once we have created the above Issuer we can use it to obtain a certificate.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: example-com

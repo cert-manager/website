@@ -13,7 +13,7 @@ issuer that is in a ready condition to attempt to honor the request.
 An example of an `Issuer` type is `CA`. A simple `CA` `Issuer` is as follows:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: ca-issuer
