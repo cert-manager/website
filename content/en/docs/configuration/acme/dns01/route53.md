@@ -92,6 +92,15 @@ in Account Y, and attach a trust relationship like the one below.
 }
 ```
 
+Bear in mind, that you won't be able to define this policy until `cert-manager` role on account Y is created. If you are setting this up using a configuration language, you may want to define principal as:
+
+```json
+"Principal": {
+        "AWS": "XXXXXXXXXXX"
+      }
+```
+And restrict it, in a future step, after all the roles are created.
+
 This allows the role `cert-manager` in Account X to assume the `dns-manager` role in Account Y to manage the Route53 DNS zones in Account Y. For more information visit the [official
 documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html).
 
@@ -103,9 +112,7 @@ Second, create the cert-manager role in Account X; this will be used as a creden
   "Statement": [
     {
       "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::YYYYYYYYYYYY:role/dns-manager"
-      },
+      "Resource": "arn:aws:iam::YYYYYYYYYYYY:role/dns-manager",
       "Action": "sts:AssumeRole"
     }
   ]
@@ -155,11 +162,11 @@ spec:
           hostedZoneID: DIKER8JEXAMPLE # optional, see policy above
           role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager
 
-    # this solver handles foobar.cloud challenges
+    # this solver handles example.org challenges
     # and uses explicit credentials
     - selector:
         dnsZones:
-          - "foobar.cloud"
+          - "example.org"
       dns01:
         route53:
           region: eu-central-1
