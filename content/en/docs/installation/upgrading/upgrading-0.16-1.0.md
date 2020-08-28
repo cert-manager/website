@@ -5,7 +5,7 @@ weight: 830
 type: "docs"
 ---
 
-> The upgrade process for upgrading to v1.0 is very Kubernetes version specific. Please check the version of your cluster using `kubectl version` and follow the steps required for your version of Kubernetes.
+> The upgrade process for upgrading to `v1.0` is very Kubernetes version specific. Please check the version of your cluster using `kubectl version` and follow the steps required for your version of Kubernetes.
 
 ## Issue with older versions of `kubectl`
 `kubectl` versions with patch versions lower than `v1.18.8` `v1.17.11` or `v1.16.14` have issues updating from the `v0.16` CRD files, due to [a bug when handling deeply nested CRDs](https://github.com/kubernetes/kubernetes/issues/91615).
@@ -21,20 +21,20 @@ This issue only affects `v3.1+` however, we don't currently advise using `instal
 
 ## Upgrade instructions per Kubernetes version
 
-### Kubernetes 1.16 and above
+### Kubernetes `1.16` and above
 These are the upgrade instructions to upgrade from cert-manager `v0.14.0` or higher, please consult other upgrade guides first before upgrading to `v1.0` if you run an older version of cert-manager.
 
 No special requirements, you can follow the [regular upgrade process](../).
 
-### Kubernetes 1.15.x
+### Kubernetes `1.15.x`
 
 cert-manager now uses `apiextensions.k8s.io/v1` to install CRDs inside Kubernetes. This got added in Kubernetes `1.16`.
 Our legacy installation will still be using `apiextensions.k8s.io/v1beta1`. For this reason Kubernetes 1.15 users now need to install the legacy version of the cert-manager manifests.
-You can follow the instructions of "Kubernetes 1.14" below on how to upgrade to the legacy version of v1.0.
+You can follow the instructions of "Kubernetes 1.14" below on how to upgrade to the legacy version of `v1.0`.
 
 > **Note**: The legacy version only supports a single CRD version. We advise you to consider upgrading to Kubernetes 1.16 or above for an easier migration.
 
-### Kubernetes 1.14 and below
+### Kubernetes `1.14` and below
 
 These are the upgrade instructions to upgrade from cert-manager `v0.11.0` or higher, please consult other upgrade guides first before upgrading to `v1.0` if you run an older version of cert-manager.
 
@@ -62,7 +62,7 @@ This upgrade MUST be performed in the following sequence of steps:
 4. Ensure the old cert-manager CRD resources have also been deleted: `kubectl get crd | grep cert-manager.io`
 
 
-5. Re-install cert-manager v1.0 from scratch according to the [installation
+5. Re-install cert-manager `v1.0` from scratch according to the [installation
    guide](../../).
 
 6. Apply the backed up resources again.
@@ -82,7 +82,7 @@ kubectl get -o yaml \
 
 #### Converting resources
 
-You can use our [kubectl plugin](../../../usage/kubectl-plugin/) to automatically convert your backup from v1alpha2 to v1 using the following command:
+You can use our [kubectl plugin](../../../usage/kubectl-plugin/) to automatically convert your backup from `v1alpha2` to `v1` using the following command:
 
 ```bash
 kubectl cert-manager convert --output-version cert-manager.io/v1 -f cert-manager-backup.yaml > cert-manager-v1.yaml
@@ -128,4 +128,4 @@ Once it has been fully installed you can re-apply the converted resources:
 kubectl apply -f cert-manager-v1.yaml
 ```
 
-Congratulations you're now fully upgraded to cert-manager v1.0
+Congratulations you're now fully upgraded to cert-manager `v1.0`
