@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34.917" height="31.176" viewBox="0 0 34.917 31.176">
+  <g id="Group_2391" data-name="Group 2391" transform="translate(-659.542 -1769.912)">
+    <g id="icons8-new_ticket" transform="translate(657.542 1764.912)">
+      <path id="Path_996" data-name="Path 996" d="M16.964,27.447A11.2,11.2,0,0,1,31.975,16.893a3.74,3.74,0,0,1,2.448-2.934V7.494A2.493,2.493,0,0,0,31.929,5H4.494A2.493,2.493,0,0,0,2,7.494v6.465a3.719,3.719,0,0,1,0,7.023v6.465a2.493,2.493,0,0,0,2.494,2.494H17.252A11.187,11.187,0,0,1,16.964,27.447Z" transform="translate(0)" fill="#8a63fa"/>
+      <path id="Path_997" data-name="Path 997" d="M24.729,16a8.729,8.729,0,1,0,8.729,8.729A8.729,8.729,0,0,0,24.729,16Z" transform="translate(3.458 2.717)" fill="#8a63fa"/>
+    </g>
+    <g id="icons8-checked_laptop" transform="translate(662 1784)">
+      <path id="Path_999" data-name="Path 999" d="M28.4,6.7,27,5.3,23.7,8.6,21.4,6.3,20,7.7l3.7,3.7Z" fill="#f7f7f7"/>
+    </g>
+  </g>
+</svg>
