@@ -6,10 +6,10 @@ type: "docs"
 ---
 
 With cert-manager v1.0 we're putting a seal of trust on 3 years of development on the cert-manager project.
-In these 3 years cert-manager has grown, in functionality, stability but mostly in the community.
+In these 3 years cert-manager has grown in functionality and stability, but mostly in the community.
 Today we see many people using cert-manager to secure their Kubernetes clusters, as well as cert-manager
 being integrated into many other parts in the ecosystem.
-In the past 16 releases many bugs got fixed, things that needed to be broken were broken.
+In the past 16 releases many bugs got fixed, and things that needed to be broken were broken.
 Several iterations on the API improved the user experience.
 We solved 1500 GitHub Issues with even more PRs by 253 contributors.
 
