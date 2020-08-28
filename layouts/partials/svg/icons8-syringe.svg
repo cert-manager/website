@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30.12" height="30.12" viewBox="0 0 30.12 30.12">
+  <g id="icons8-syringe" transform="translate(-2.586 -1.586)">
+    <path id="Path_977" data-name="Path 977" d="M23,3l4.746,4.746" transform="translate(3.545)" fill="none" stroke="#51d8ba" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Path_978" data-name="Path 978" d="M0,0H3.356V5.035H0Z" transform="matrix(0.707, -0.707, 0.707, 0.707, 24.172, 6.56)" fill="#51d8ba"/>
+    <path id="Path_979" data-name="Path 979" d="M4,26.373,6.373,24" transform="translate(0 3.918)" fill="none" stroke="#51d8ba" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Path_980" data-name="Path 980" d="M28.384,13.654,20.078,5.348A1.186,1.186,0,0,0,18.4,7.026l.348.348L6.391,19.73A4.749,4.749,0,0,0,5,23.087v4.458a1.187,1.187,0,0,0,1.187,1.187h4.458A4.749,4.749,0,0,0,14,27.341L26.359,14.984l.348.348a1.186,1.186,0,0,0,1.678-1.678Zm-5.985.439-1.2-1.2a1.1,1.1,0,0,0-1.55,0l-2.539,2.539.593.593A1.186,1.186,0,1,1,16.027,17.7l-.593-.593-1.882,1.882.593.593a1.186,1.186,0,0,1-1.678,1.678l-.593-.593L9.205,23.34a1.085,1.085,0,1,1-1.534-1.534L20.426,9.051l3.508,3.508a1.085,1.085,0,0,1,0,1.534h0A1.085,1.085,0,0,1,22.4,14.093Z" transform="translate(0.187 0.373)" fill="#51d8ba"/>
+  </g>
+</svg>

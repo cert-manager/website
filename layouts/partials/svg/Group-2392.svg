@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37.277" height="38.271" viewBox="0 0 37.277 38.271">
+  <g id="Group_2392" data-name="Group 2392" transform="translate(-660 -2340)">
+    <g id="icons8-stack_of_coins" transform="translate(656 2337)">
+      <path id="Path_981" data-name="Path 981" d="M11.046,4C7.707,4,5,5.624,5,7.628s2.707,3.628,6.046,3.628,6.046-1.624,6.046-3.628S14.385,4,11.046,4Z" fill="none" stroke="#45cffd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Path_982" data-name="Path 982" d="M5,9v2.418c0,2,2.707,3.628,6.046,3.628s6.046-1.624,6.046-3.628V9" transform="translate(0 1.046)" fill="none" stroke="#45cffd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Path_983" data-name="Path 983" d="M5,13v2.418c0,2,2.707,3.628,6.046,3.628s6.046-1.624,6.046-3.628V13" transform="translate(0 1.883)" fill="none" stroke="#45cffd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Path_984" data-name="Path 984" d="M21.046,12C17.707,12,15,13.624,15,15.628s2.707,3.628,6.046,3.628,6.046-1.624,6.046-3.628S24.385,12,21.046,12Z" transform="translate(2.092 1.674)" fill="none" stroke="#45cffd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Path_985" data-name="Path 985" d="M15,17v2.418c0,2,2.707,3.628,6.046,3.628s6.046-1.624,6.046-3.628V17" transform="translate(2.092 2.72)" fill="none" stroke="#45cffd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Path_986" data-name="Path 986" d="M17.092,21.837v2.418c0,2,2.707,3.628,6.046,3.628s6.046-1.624,6.046-3.628V21.837M5,17v2.418c0,2,2.707,3.628,6.046,3.628s6.046-1.624,6.046-3.628V17" transform="translate(0 2.72)" fill="none" stroke="#45cffd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Path_987" data-name="Path 987" d="M5,21v2.418c0,2,2.707,3.628,6.046,3.628s6.046-1.624,6.046-3.628V21" transform="translate(0 3.556)" fill="none" stroke="#45cffd" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/>
+    </g>
+    <g id="Group_2390" data-name="Group 2390">
+      <path id="icons8-data_protection" d="M16.065,16.037A1.8,1.8,0,0,0,15,17.675v4.212a11.13,11.13,0,0,0,8.065,10.754A11.13,11.13,0,0,0,31.13,21.887V17.675a1.8,1.8,0,0,0-1.065-1.638l-6.273-2.789a1.79,1.79,0,0,0-1.455,0Z" transform="translate(663.898 2342.906)" fill="#0073ff"/>
+      <path id="icons8-data_protection-2" data-name="icons8-data_protection" d="M16.361,16.857A2.3,2.3,0,0,0,15,18.952v5.386A14.233,14.233,0,0,0,25.313,38.089,14.233,14.233,0,0,0,35.626,24.338V18.952a2.3,2.3,0,0,0-1.361-2.095l-8.021-3.566a2.289,2.289,0,0,0-1.861,0Z" transform="translate(661.65 2340.182)" fill="#f7f7f7"/>
+      <path id="icons8-data_protection-3" data-name="icons8-data_protection" d="M16.065,16.037A1.8,1.8,0,0,0,15,17.675v4.212a11.13,11.13,0,0,0,8.065,10.754A11.13,11.13,0,0,0,31.13,21.887V17.675a1.8,1.8,0,0,0-1.065-1.638l-6.273-2.789a1.79,1.79,0,0,0-1.455,0Z" transform="translate(663.898 2342.906)" fill="#45cffd"/>
+    </g>
+  </g>
+</svg>
