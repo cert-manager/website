@@ -138,7 +138,7 @@ existing key specified in `privateKeySecretRef`. Note that the
 `Secret` is provided.
 
 ```yaml
-apiVersion: cert-manager.io/v1beta1
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: my-acme-server-with-existing-acme-account
