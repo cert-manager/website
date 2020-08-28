@@ -93,8 +93,8 @@ URL string of your external account symmetric MAC key
 containing your External Account Binding when registering the account with the
 ACME server
 
-> Note: In _most_ cases, the MAC key must be base64URL-encoded. The following 
-> command will base64-encode a key and convert it to base64URL:
+> Note: In _most_ cases, the MAC key must be encoded in `base64URL`. The 
+> following command will base64-encode a key and convert it to `base64URL`:
 > 
 >     $ echo 'my-secret-key' | base64 | sed -e 's/+/-/g' -e 's///_/g' -e 's/=//g'
 > 
