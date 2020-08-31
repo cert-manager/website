@@ -169,3 +169,5 @@ kubelet
 awspca
 Cloudflare
 TLDs
+ingress-nginx
+external-dns
