@@ -108,4 +108,4 @@ In this case we recommend [changing your DNS01 self-check nameservers](../#setti
 
 You might be hitting this as Cloudflare blocks the use of the API to update DNS records for the following TLDs: `.cf`, `.ga`, `.gq`, `.ml` and `.tk`.
 This is discussed in the [Cloudflare Community](https://community.cloudflare.com/t/unable-to-update-ddns-using-api-for-some-tlds/167228).
-We reccomend uing an alternative DNS provider when using these TLDs.
+We recommend using an alternative DNS provider when using these TLDs.
