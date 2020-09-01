@@ -50,7 +50,7 @@ However you should convert the (Cluster)Issuers and delete the old CRD versions.
 
 This upgrade MUST be performed in the following sequence of steps:
 
-1. Back up existing cert-manager resources. See the backup section.
+1. [Back up](../../../rutorials/backup/) existing cert-manager resources. See the backup section.
 
 2. [Uninstall cert-manager](../../uninstall/).
 
