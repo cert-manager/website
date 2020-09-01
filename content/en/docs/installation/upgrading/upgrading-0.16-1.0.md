@@ -15,9 +15,7 @@ This bug only happens during a re-apply of the v0.16 CRDs or upgrading from it. 
 Versions of `kubectl` of `v1.15.x` or below are not being supported anymore as these are unsupported by the Kubernetes community.
 
 ### Helm
-Helm users who use `installCRDs=true` should **not YET** upgrade to `v1.0` until a Helm `v3.3.1` is released.
-At time of writing a PR has been merged for this but is not yet released.
-This issue only affects `v3.1+` however, we don't currently advise using `installCRDs=true`
+Helm users who use `installCRDs=true` MUST upgrade to Helm `v3.3.1` or later before upgrading.
 
 ## Upgrade instructions per Kubernetes version
 
