@@ -1,6 +1,6 @@
 ---
 title: "Upgrading from v0.16 to v1.0"
-linkTitle: "v0.15 to v0.16"
+linkTitle: "v0.16 to v1.0"
 weight: 830
 type: "docs"
 ---
