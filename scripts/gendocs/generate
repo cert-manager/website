@@ -44,6 +44,10 @@ export GOPROXY="https://proxy.golang.org"
 export GO111MODULE="on"
 GOROOT="$(go env GOROOT)"
 export GOROOT
+GOBIN="${tmpdir}/bin"
+export GOBIN
+go get github.com/ahmetb/gen-crd-api-reference-docs@v0.2.0
+
 mkdir -p "${GOPATH}/src/github.com/jetstack"
 gitdir="${GOPATH}/src/github.com/jetstack/cert-manager"
 echo "+++ Cloning cert-manager repository..."
@@ -61,7 +65,7 @@ genversion() {
 	echo "+++ Running 'go mod vendor' (this may take a while)"
 	go mod vendor
 	echo "+++ Generating reference docs..."
-	"${REPO_ROOT}/scripts/bin/gen-crd-api-reference-docs" \
+	"${GOBIN}/gen-crd-api-reference-docs" \
 		-config "${REPO_ROOT}/scripts/gendocs/config.json" \
 		-template-dir "${REPO_ROOT}/scripts/gendocs/templates" \
 		-api-dir "./pkg/apis" \
