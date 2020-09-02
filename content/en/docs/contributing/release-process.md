@@ -52,7 +52,7 @@ To stage a release of the 'release-1.0' branch to the default staging bucket,
 overriding the release version as 'v1.0.0':
 
 ```#bash
- cmrel stage --git-ref=release-1.0 --release-version=v1.0.0
+cmrel stage --git-ref=release-1.0 --release-version=v1.0.0
 ```
 
 Look for a build URL and visit it in Google Cloud Console.
@@ -166,3 +166,22 @@ $GOPATH/bin/release-notes --github-repo cert-manager --github-org jetstack --req
 3. Add additional blurb, notable items and characterize change log.
 
 
+
+## Final Release
+
+* Same as alpha beta release, but also
+* Release notes back to last minor release
+
+### Rollover testing infra
+* Remove last release (0.16.x)
+* Make release-1.0 the last release
+    * Copy release-next > release-previous
+* Make PR
+* Before merging, 
+    * Create new release branches in cert-manager and website repos
+* https://github.com/jetstack/testing/pull/397
+### Rollover documentation
+
+* Merge master into release-next
+* Merge release-next into master
+* https://github.com/cert-manager/website/pull/309
