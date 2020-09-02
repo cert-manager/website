@@ -26,7 +26,7 @@ The `v1.0` release is a stability release with a few focus areas:
 * `kubectl cert-manager status` command to help with investigating issues
 * Using new and stable Kubernetes APIs
 * Improved logging
-* AMCE improvements
+* ACME improvements
 
 
 As usual, please read the [upgrade notes](/docs/installation/upgrading/upgrading-0.16-1.0/) before upgrading.
@@ -57,9 +57,9 @@ Users of the `legacy` version of cert-manager will still only have the `v1` API,
 
 With the new improvements to our `kubectl` plugin it is easier to investigate issues with certificates not being issued.
 `kubectl cert-manager status` now displays a lot more information about what has been going on with your certificate and in which
-stage of issuance it currently is in. 
+stage of issuance it currently is in.
 
-Once the plugin is installed, you can run `kubectl cert-manager status certificate <name-of-cert>`. That will then look for the Certificate with the name `<name-of-cert>` and any related resources like CertificateRequest, Secret, Issuer, as well as Order and Challenges if it is a ACME Certificate. 
+Once the plugin is installed, you can run `kubectl cert-manager status certificate <name-of-cert>`. That will then look for the Certificate with the name `<name-of-cert>` and any related resources like CertificateRequest, Secret, Issuer, as well as Order and Challenges if it is a ACME Certificate.
 The command outputs information about the resources, including Conditions, Events and resource specific fields like Key Usages and Extended Key Usages of the Secret or Authorizations of the Order.
 
 
@@ -101,7 +101,7 @@ CertificateRequest:
     Normal  OrderCreated  18m   cert-manager  Created Order resource default/acme-certificate-qp5dm-1319513028
 Order:
   Name: acme-certificate-qp5dm-1319513028
-  State: pending, Reason: 
+  State: pending, Reason:
   Authorizations:
     URL: https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/97777571, Identifier: example.com, Initial State: pending, Wildcard: false
 Challenges:
@@ -137,15 +137,15 @@ Renewal Time: 2020-08-01T04:29:56+02:00
 
 cert-manager has been an early adopter of the Kubernetes CRDs. That and us supporting Kubernetes versions as for back as `v1.11`
 made us use the now deprecated `apiextensions.k8s.io/v1beta1` for our CRDs and `admissionregistration.k8s.io/v1beta1` for our webhooks.
-These are now deprecated and to be removed in Kubernetes `v1.22`. In `v1.0` we now offer full support for `apiextensions.k8s.io/v1` and 
+These are now deprecated and to be removed in Kubernetes `v1.22`. In `v1.0` we now offer full support for `apiextensions.k8s.io/v1` and
 `admissionregistration.k8s.io/v1` for Kubernetes `v1.16` (where this got added) and above.
-For users of Kubernetes `v1.15` we keep offering support for the `v1beta1` Kubernetes APIs in our legacy version. 
+For users of Kubernetes `v1.15` we keep offering support for the `v1beta1` Kubernetes APIs in our legacy version.
 
 
 ## Improved logging
 
 For this release we upgraded our logging library to `klog/v2` analog to Kubernetes `v1.19`.
-We also reviewed every log we write to assign it an appropriate log level. 
+We also reviewed every log we write to assign it an appropriate log level.
 
 We followed the (Kubernetes logging guidelines)[https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md]. To come up with 5 log levels ranging from `Error` (level 0) which only prints important errors to `Trace` (level 5) which can help you to know exactly what is gong on.
 With this change we reduced the number of logs when you don't need to have a debugging trace while running cert-manager.
@@ -161,7 +161,7 @@ The most used use case of cert-manager is probably to issue certificates from Le
 ### Disable Account Key Generation
 
 If you deploy ACME issuer certs on a large scale you probably want to re-use your ACME account across multiple clusters
-so your rate limit exceptions get applied everywhere. 
+so your rate limit exceptions get applied everywhere.
 While this was already possible in cert-manager by copying over the secret referenced in `privateKeySecretRef`.
 However this process was quite error prone as cert-manager was trying to be helpful and was happy to create a new account key
 for you if one was not found. This is why we added `disableAccountKeyGeneration` to safe guard you against this behavior,
@@ -172,7 +172,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt
-spec: 
+spec:
   acme:
     privateKeySecretRef:
       name: example-issuer-account-key
@@ -189,7 +189,7 @@ In this release cert-manager adds support for accessing these alternative chains
 The new `preferredChain` option will allow you to specify a CA's common name for the certificate to be issued by.
 If there is a certificate available matching that request it will present you that certificate. Note that this is a Preferred option,
 if none is found matching the request it will give you the default certificate as before. This makes sure you still get your certificate
-renewed once the alternative chain gets removed on the ACME issuer side. 
+renewed once the alternative chain gets removed on the ACME issuer side.
 
 You can already today get certificates from the `ISRG Root` by using:
 ```yaml
@@ -197,7 +197,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt
-spec: 
+spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     preferredChain: "ISRG Root X1"
@@ -209,7 +209,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt
-spec: 
+spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     preferredChain: "DST Root CA X3"
