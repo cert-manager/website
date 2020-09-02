@@ -16,7 +16,7 @@ providers will contain their own specific configuration however all require a
 `groupName` and `solverName` field.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: example-issuer

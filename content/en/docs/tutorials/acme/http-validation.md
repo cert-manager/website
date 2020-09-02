@@ -23,7 +23,7 @@ validation. You can read more about the Issuer resource in the [Issuer
 docs](../../../concepts/issuer/).
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt-staging
@@ -70,7 +70,7 @@ optionally map different domains to use different Solver configurations.
 Once we have created the above Issuer we can use it to obtain a certificate.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: example-com

@@ -140,7 +140,7 @@ resource!
 Create a file named `cluster-issuer.yaml`:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   # Adjust the name here accordingly

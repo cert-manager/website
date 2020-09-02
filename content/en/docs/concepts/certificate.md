@@ -18,7 +18,7 @@ is created by cert-manager containing the encoded x509 certificate request,
 Here is one such example of a `Certificate` resource.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: acme-crt
@@ -37,10 +37,15 @@ spec:
 
 This `Certificate` will tell cert-manager to attempt to use the `Issuer` named
 `letsencrypt-prod` to obtain a certificate key pair for the `foo.example.com`
-and `bar.example.com` domains. If successful, the resulting key and certificate
-will be stored in a secret named `acme-crt-secret` with keys of `tls.key` and
+and `bar.example.com` domains. If successful, resulting TLS key and certificate 
+will be stored in a secret named `acme-crt-secret`, with keys of `tls.key`, and
 `tls.crt` respectively. This secret will live in the same namespace as the
 `Certificate` resource.
+
+Additionally, if the Certificate Authority is known, the corresponding CA 
+certificate will be stored in the secret with key `ca.crt`. For example, with 
+the ACME issuer, the CA is not known and `ca.crt` will not exist in 
+`acme-crt-secret`.
 
 The `dnsNames` field specifies a list of [`Subject Alternative
 Names`](https://en.wikipedia.org/wiki/Subject_Alternative_Name) to be associated

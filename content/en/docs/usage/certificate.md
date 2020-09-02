@@ -28,7 +28,7 @@ an exhaustive list of all options a `Certificate` resource may have however only
 a subset of fields are required as labelled.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: example-com
@@ -38,15 +38,17 @@ spec:
   secretName: example-com-tls
   duration: 2160h # 90d
   renewBefore: 360h # 15d
-  organization:
-  - jetstack
+  subject:
+    organizations:
+    - jetstack
   # The use of the common name field has been deprecated since 2000 and is
   # discouraged from being used.
   commonName: example.com
   isCA: false
-  keySize: 2048
-  keyAlgorithm: rsa
-  keyEncoding: pkcs1
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
   usages:
     - server auth
     - client auth
@@ -54,7 +56,7 @@ spec:
   dnsNames:
   - example.com
   - www.example.com
-  uriSANs:
+  uris:
   - spiffe://cluster.local/ns/sandbox/sa/example
   ipAddresses:
   - 192.168.0.5
@@ -144,7 +146,7 @@ regenerate a new private key on each issuance (the recommended behavior).
 This is configured using the `spec.privateKey.rotationPolicy` like so:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: my-cert

@@ -21,7 +21,7 @@ challenge types
 page](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: example-issuer
@@ -33,7 +33,7 @@ spec:
       name: example-issuer-account-key
     solvers:
     - dns01:
-        clouddns:
+        cloudDNS:
           project: my-project
           serviceAccountSecretRef:
             name: prod-clouddns-svc-acct-secret
@@ -104,7 +104,7 @@ field is still working for the original `example.com`, while credentials are pro
 `less-privileged.example.org`
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   ...
@@ -113,7 +113,7 @@ spec:
     ...
     solvers:
     - selector:
-      dnsZones:
+        dnsZones:
         - 'example.com'
     - dns01:
         # Valid values are None and Follow

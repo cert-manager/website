@@ -20,7 +20,7 @@ Here is an example of a simple `HTTP01` ACME issuer with more options for
 configuration below:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: example-issuer
@@ -95,7 +95,7 @@ spec fields can be edited.
 An example of how you could configure the template is as so:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: ...
@@ -128,7 +128,7 @@ It is possible to add labels and annotations to the solver ingress resources.
 These can be configured under the `metadata` field under `ingressTemplate`:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: ...

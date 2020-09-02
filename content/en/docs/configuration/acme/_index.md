@@ -49,7 +49,7 @@ a `server` URL, a `privateKeySecretRef`, and one or more `solvers`. Below is an
 example of a simple ACME issuer:
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
@@ -83,22 +83,30 @@ external account such as a CA custom database. This is typically not needed for
 most cert-manager users unless you know it is explicitly needed.
 
 External Account Bindings require three fields on an ACME `Issuer` which
-represents your ACME account. These fields are; the `keyID` of which your
-external account binding is indexed by the external account manager,
-`keySecretRef` which references a secret containing a base 64 encoded URL
-string of your external account symmetric MAC key, and finally `keyAlgorithm`,
-the MAC algorithm used to sign the JSON web string containing your External
-Account Binding when registering the account with the ACME server.
+represents your ACME account. These fields are:
 
-> Note: The command `base64` is useful for encoding your MAC key if it is not
-> already `$ echo 'my-secret-key' | base64`, you can then create the Secret
-> resource with: `kubectl create secret generic eab-secret --from-literal
-> secret={base64 encoded secret key}`
+- `keyID` - the key ID of which your external account binding is indexed by the
+external account manager
+- `keySecretRef` - the name and key of a secret containing a base 64 encoded 
+URL string of your external account symmetric MAC key
+- `keyAlgorithm` - the MAC algorithm used to sign the JSON web string 
+containing your External Account Binding when registering the account with the
+ACME server
+
+> Note: In _most_ cases, the MAC key must be encoded in `base64URL`. The 
+> following command will base64-encode a key and convert it to `base64URL`:
+> 
+>     $ echo 'my-secret-key' | base64 | sed -e 's/+/-/g' -e 's///_/g' -e 's/=//g'
+> 
+> You can then create the Secret resource with: 
+> 
+>     $ kubectl create secret generic eab-secret --from-literal \
+>       secret={base64 encoded secret key}
 
 An example of an ACME issuer with an External Account Binding is as follows.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: my-acme-server-with-eab
@@ -118,6 +126,28 @@ spec:
     - http01:
         ingress:
           class: nginx
+```
+
+### Reusing an ACME Account
+
+You may want to reuse a single ACME account across multiple clusters. This
+might especially be useful when using EAB. If the `disableAccountKeyGeneration`
+field is set, cert-manager will not create a new ACME account and use the
+existing key specified in `privateKeySecretRef`. Note that the 
+`Issuer`/`ClusterIssuer` will not be ready and will continue to retry until the 
+`Secret` is provided.
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: my-acme-server-with-existing-acme-account
+spec:
+  acme:
+    email: user@example.com
+    disableAccountKeyGeneration: true
+    privateKeySecretRef:
+      name: example-issuer-account-key
 ```
 
 
@@ -146,7 +176,7 @@ the following `Issuer` will only match on `Certificates` that have the labels
 `"user-cloudflare-solver": "true"`, or `"email": "user@example.com"`, or both.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
@@ -185,7 +215,7 @@ The following example will solve challenges of `Certificates` with DNS names
 > a zone.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
@@ -221,7 +251,7 @@ In the following example, this solver will resolve challenges for the domain
 `example.com`, as well as all of its subdomains `*.example.com`.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
@@ -252,7 +282,7 @@ For all other challenges, the `HTTP01` solver will be used *only* if the
 `Certificate` also contains the label `"use-http01-solver": "true"`.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging

@@ -77,11 +77,11 @@ $ kubectl create secret generic clouddns-dns01-solver-svc-acct \
 
 ## Create an Issuer That Uses CloudDNS
 
-Next, create an `Issuer` (or `ClusterIssuer`) with a `clouddns` provider. An
+Next, create an `Issuer` (or `ClusterIssuer`) with a `cloudDNS` provider. An
 example `Issuer` manifest can be seen below with annotations.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: example-issuer
@@ -90,7 +90,7 @@ spec:
     ...
     solvers:
     - dns01:
-        clouddns:
+        cloudDNS:
           # The ID of the GCP project
           project: $PROJECT_ID
           # This is the secret used to access the service account
@@ -106,7 +106,7 @@ Once an `Issuer` (or `ClusterIssuer`) has been created successfully, a
 `Certificate` can then be added to verify that everything works.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: example-com

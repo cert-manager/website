@@ -12,7 +12,7 @@ You need the `kubectl-cert-manager.tar.gz` file for the platform you're using, t
 In order to use the kubectl plugin you need its binary to be accessible under the name `kubectl-cert_manager` in your `$PATH`.
 Run the following commands to set up the plugin:
 ```console
-$ curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v0.16.1/kubectl-cert_manager-linux-amd64.tar.gz
+$ curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.0.0/kubectl-cert_manager-linux-amd64.tar.gz
 $ tar xzf kubectl-cert-manager.tar.gz
 $ sudo mv kubectl-cert_manager /usr/local/bin
 ```
@@ -102,4 +102,16 @@ For example this will create a CertificateRequest resource with the name "my-cr"
 private key and x509 certificate in `my-cr.key` and `my-cr.crt` respectively.
 ```console
 kubectl cert-manager create certificaterequest my-cr --from-certificate-file my-certificate.yaml --fetch-certificate --timeout 20m
+```
+
+### Status Certificate
+`kubectl cert-manager status certificate` outputs the details of the current status of a Certificate resource and related resources like CertificateRequest, Secret, Issuer, as well as Order and Challenges if it is a ACME Certificate.
+The command outputs information about the resources, including Conditions, Events and resource specific fields like Key Usages and Extended Key Usages of the Secret or Authorizations of the Order. This will be helpful for troubleshooting a Certificate.
+
+The command takes in one argument specifying the name of the Certificate resource and the namespace
+can be specified as usual with the `-n` or `--namespace` flag.
+
+This example queries the status of the Certificate named `my-certificate` in namespace `my-namespace`.
+```console
+kubectl cert-manager status certificate my-certificate -n my-namespace
 ```
