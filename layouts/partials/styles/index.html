@@ -13,6 +13,7 @@
 {{ $cssFiles = $cssFiles | append (resources.Get "css/components/OverlineHeader.css") }}
 {{ $cssFiles = $cssFiles | append (resources.Get "css/components/Partners.css") }}
 {{ $cssFiles = $cssFiles | append (resources.Get "css/components/Testimonials.css") }}
+{{ $cssFiles = $cssFiles | append (resources.Get "css/components/Cert.css") }}
 
 {{ $css := $cssFiles | resources.Concat "css/bundle.css" }}
 

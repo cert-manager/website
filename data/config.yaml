@@ -57,7 +57,7 @@ menus:
     sublinks:
     - name: Preflight
       link: /preflight/
-    - name: cert-manager
+    - name: cert-manager Enterprise 
       link: /cert-manager/
   - name: Services
     link: '#'
@@ -68,8 +68,6 @@ menus:
       link: /training/
     - name: Public Training
       link: /public-training/
-  - name: Open Source
-    link: /open-source/
   - name: About Us
     link: /about/
     sublinks:
@@ -113,23 +111,7 @@ menus:
     - link: /preflight
       text: Preflight
     - link: /cert-manager
-      text: cert-manager
-
-  - name: Open Source
-    link: /open-source
-    links:
-    - link: /open-source/#cert-manager
-      text: Cert-Manager
-    - link: /open-source/#kube-oidc-proxy
-      text: Kube-OIDC-Proxy
-    - link: /open-source/#preflight
-      text: Preflight
-    - link: /open-source/#tarmak
-      text: Tarmak
-    - link: /open-source/#navigator
-      text: Navigator
-    - link: /open-source/#kube-lego
-      text: Kube-Lego
+      text: cert-manager Enterprise
 
   - name: Company
     links:
@@ -187,10 +169,9 @@ headline:
       Jetstack helps businesses to build and operate modern cloud native infrastructure with Kubernetes.
 
     latest: # Use this to configure the display of the latest pill in the hero section. Removing this will remove the pill.
-      text: Jetstack and Venafi join forces to bring machine identity protection to the cloud native stack
-      image: /img/png/venafi-jetstack.png
+      text: Announcing cert-manager v1.0 and availability of enterprise support
       color: white
-      link: https://blog.jetstack.io/blog/jetstack-venafi-join-forces
+      link: https://blog.jetstack.io/blog/cert-manager-1.0
 
   getStarted:
     headline: Who are we?

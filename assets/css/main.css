@@ -2381,6 +2381,18 @@ Introduced on new Subscription Page
   flex: 0 0 calc(50% - 40px);
 }
 
+/* looks better with the shadows */
+.white-tile--cert {
+  /* box-shadow: none;
+  border: 1px solid #E4E5E7; */
+
+  padding: 20px 40px;
+}
+
+.white-tile--cert p {
+  font-weight: 300;
+}
+
 .white-tile__title {
   margin: 0 0 30px;
 }
@@ -2409,6 +2421,7 @@ Introduced on new Subscription Page
   .white-tiles {
     display: flex;
     flex-wrap: wrap;
+    align-items: stretch;;
   }
 
   .white-tile {
@@ -2420,6 +2433,10 @@ Introduced on new Subscription Page
   .white-tile__content {
     min-height: 160px;
     flex: 1 1 100%;
+  }
+
+  .white-tile__content--cert {
+    min-height: 1px;
   }
 }
 

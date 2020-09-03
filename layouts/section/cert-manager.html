@@ -1,0 +1,334 @@
+{{ define "title" }} | {{ .Title }}{{ end }}
+{{ define "description" }}{{ .Params.og.description }}{{ end }}
+
+{{ define "navbar" }}
+{{ partial "navbar/dark.html" . }}
+{{ end }}
+
+{{ define "ogtitle" }}{{ .Title }}{{ end }}
+{{ define "ogdescription" }}{{ .Params.og.description }}{{ end }}
+{{ define "ogimage" }}{{ .Site.BaseURL }}{{ .Params.og.image }}{{ end }}
+
+{{ define "body" }}
+<div class="Hero Cert__hero">
+  <div class="Hero__container">
+    <div class="container">
+      <h1 class="Hero__headline">
+        {{ .Title | markdownify }}
+        <span class="Hero__headling--em">{{ .Params.subheading }}</span>
+      </h1>
+      <p class="Hero__strapline">{{ .Params.subtitle }}</p>
+      {{ partial "panels/signupForm.html" }}
+      <h2 class="Hero__cite">{{ .Params.cite }}</h2>
+    </div>
+  </div>
+</div>
+
+
+<div class="container Cert__section">
+  <div class="Cert__intro">
+    <img class="Cert__logo" src="/img/png/cert-manager-icon.png" width="117" height="113" alt="" />
+    <h1 class="Cert__section-title">{{ .Params.about.title }}</h1>
+    <p class="Cert__section-body">{{ .Params.about.body }}</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="participant-levels">Participant levels</h2>
+      <div class="white-tiles white-tiles--cert">
+
+        {{ range .Params.about.cards }}
+            <article class="white-tile white-tile--cert">
+              <div class="Cert__about-icon-container">
+                <div class="Cert__about-icon">
+                  <img class="hex" src="/img/png/Hexagon@2x.png" width="160" height="160" alt="" />
+                  <img class="icon" src="{{ .icon }}" alt="" />
+                </div>
+              </div>
+
+
+              <h3 class="white-tile__title">{{ .title }}</h3>
+              <div class="white-tile__content white-tile__content--cert">
+                <p>{{ .body }}</p>
+              </div>
+            </article>
+        {{ end }}
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="Cert__section Cert__section--left Cert__section--light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="Cert__intro Cert__intro--automate">
+          <h1 class="Cert__section-title">{{ .Params.automate.title }}</h1>
+          <p class="Cert__section-body">{{ .Params.automate.body }}</p>
+        </div>
+      </div>
+      <div class="col-md-12 Cert__section-graphic Cert__section-graphic--diagram">
+        <img src="/img/png/diagram.png" alt="" width="655" height="552" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="Cert__section">
+  <div class="container">
+    <div class="Cert__intro">
+      <h1 class="Cert__section-title">{{ .Params.integrate.title }}</h1>
+      <p class="Cert__section-body">{{ .Params.integrate.body }}</p>
+    </div>
+
+    <ul class="Cert__integrate-logos">
+      {{ range .Params.integrate.icons }}
+        <li>
+          <div class="Cert__integrate-logo-container">
+            <div class="Cert__integrate-logo-inner">
+              <img src="{{ .icon }}" />
+            </div>
+          </div>
+        </li>
+      {{ end }}
+    </ul>
+    
+  </div>
+</div>
+
+<div class="Cert__section Cert__section--left Cert__section--banner" style="background-image: url(/img/jpg/Banner@2x.jpg)">
+  <div class="container">
+    <h1>Ready to get started?</h1>
+    <p>Learn more about cert-manager Enterprise</p>
+    {{ partial "panels/signupForm.html" }}
+  </div>
+</div>
+
+<div class="Cert__section Cert__section--left">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="Cert__intro Cert__intro--automate">
+          <h1 class="Cert__section-title">{{ .Params.what.title }}</h1>
+          <ul class="Cert__list">
+            {{ range .Params.what.list }}
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                  <circle cx="26" cy="26" r="25" fill="none"/>
+                  <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+                <h3 class="Cert__list-title">{{ .title }}</h3>
+                <p class="Cert__list-text">{{ .text }}</p>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-12 Cert__section-graphic">
+        <div class="Cert__svg-container Cert__svg-container--screenshot">
+          <svg viewBox="0 0 792.557 397.761">
+            <defs/>
+            <g data-name="Group 6675">
+              <g data-name="Group 6632">
+                <g data-name="Group 6630" transform="translate(-355 -3518.738)">
+                  <path fill="#fafafb" d="M355 3571.738h792v35H355z" data-name="Rectangle 7003"/>
+                  <path fill="#e6e6e9" d="M355 3606.738h792v28H355z" data-name="Rectangle 7006"/>
+                  <rect width="46" height="14" fill="#e6e6e9" data-name="Rectangle 7004" rx="7" transform="translate(373 3582.738)"/>
+                  <rect width="92" height="9" fill="#f7f4fd" data-name="Rectangle 7007" rx="4.5" transform="translate(460 3663.738)"/>
+                  <rect width="92" height="9" fill="#f7f4fd" data-name="Rectangle 7011" rx="4.5" transform="translate(460 3760.738)"/>
+                  <rect width="92" height="9" fill="#f7f4fd" data-name="Rectangle 7014" rx="4.5" transform="translate(460 3857.738)"/>
+                  <rect width="68" height="9" fill="#f7f4fd" data-name="Rectangle 7008" rx="4.5" transform="translate(460 3680.738)"/>
+                  <rect width="68" height="9" fill="#f7f4fd" data-name="Rectangle 7012" rx="4.5" transform="translate(460 3777.738)"/>
+                  <rect width="68" height="9" fill="#f7f4fd" data-name="Rectangle 7015" rx="4.5" transform="translate(460 3874.738)"/>
+                  <rect width="46" height="14" fill="#e6e6e9" data-name="Rectangle 7005" rx="7" transform="translate(469 3582.738)"/>
+                  <path fill="none" stroke="#e6e6e9" stroke-width="2" d="M448.942 3571.484v35.284" data-name="Line 26"/>
+                  <path fill="none" stroke="#f4f0fc" stroke-width="2" d="M1147.557 3721.439H355" data-name="Line 27"/>
+                  <path fill="none" stroke="#f4f0fc" stroke-width="2" d="M1147.557 3818.469H355" data-name="Line 28"/>
+                  <path fill="none" stroke="#f4f0fc" stroke-width="2" d="M1147.557 3915.499H355" data-name="Line 29"/>
+                  <path fill="#301c6b" d="M365 3518.738h772a10 10 0 0110 10v43H355v-43a10 10 0 0110-10z" data-name="Rectangle 7001"/>
+                  <rect width="27" height="28" fill="#8a63fa" data-name="Rectangle 7002" rx="8" transform="translate(373 3531.738)"/>
+                  <g data-name="Group 6531">
+                    <g data-name="Group 32">
+                      <path fill="#fff" d="M382.535 3551.127a.872.872 0 01-.617-1.489l10.616-10.617a.872.872 0 111.233 1.233l-10.615 10.617a.87.87 0 01-.617.256z" data-name="Path 28"/>
+                    </g>
+                    <g data-name="Group 33">
+                      <path fill="#fff" d="M387.379 3551.342a.872.872 0 01-.617-1.489l5.094-5.09a.873.873 0 111.234 1.234l-5.094 5.094a.869.869 0 01-.617.251z" data-name="Path 29"/>
+                    </g>
+                    <g data-name="Group 34">
+                      <path fill="#fff" d="M382.319 3546.285a.872.872 0 01-.617-1.489l5.094-5.094a.872.872 0 011.233 1.233l-5.091 5.093a.87.87 0 01-.619.257z" data-name="Path 30"/>
+                    </g>
+                    <g data-name="Group 35">
+                      <path fill="#fff" d="M389.014 3554.763a.872.872 0 01-.617-1.489l2.248-2.248a.872.872 0 011.233 1.233l-2.248 2.248a.87.87 0 01-.616.256z" data-name="Path 31"/>
+                    </g>
+                    <g data-name="Group 36">
+                      <path fill="#fff" d="M378.898 3544.646a.872.872 0 01-.617-1.489l2.248-2.248a.872.872 0 111.233 1.233l-2.252 2.249a.869.869 0 01-.612.255z" data-name="Path 32"/>
+                    </g>
+                  </g>
+                  <circle cx="20.5" cy="20.5" r="20.5" fill="#f7f4fd" data-name="Ellipse 1157" transform="translate(404 3656.738)"/>
+                  <circle cx="20.5" cy="20.5" r="20.5" fill="#f7f4fd" data-name="Ellipse 1158" transform="translate(404 3753.738)"/>
+                  <circle cx="20.5" cy="20.5" r="20.5" fill="#f7f4fd" data-name="Ellipse 1159" transform="translate(404 3850.738)"/>
+                  <g fill="#fff" stroke="#f7f4fd" data-name="Rectangle 7009" transform="translate(373 3667.738)">
+                    <rect width="17" height="17" stroke="none" rx="5"/>
+                    <rect width="16" height="16" x=".5" y=".5" fill="none" rx="4.5"/>
+                  </g>
+                  <g fill="#fff" stroke="#f7f4fd" data-name="Rectangle 7010" transform="translate(373 3764.738)">
+                    <rect width="17" height="17" stroke="none" rx="5"/>
+                    <rect width="16" height="16" x=".5" y=".5" fill="none" rx="4.5"/>
+                  </g>
+                  <g fill="#fff" stroke="#f7f4fd" data-name="Rectangle 7013" transform="translate(373 3861.738)">
+                    <rect width="17" height="17" stroke="none" rx="5"/>
+                    <rect width="16" height="16" x=".5" y=".5" fill="none" rx="4.5"/>
+                  </g>
+                </g>
+                <path fill="#e04f5f" d="M629.45 249.101a12.351 12.351 0 10-12.349 12.349 12.352 12.352 0 0012.349-12.349z" data-name="Path 11483"/>
+                <path fill="#fff" d="M618.544 249.101l3.609-4.192a1.093 1.093 0 10-1.653-1.429l-3.4 3.948-3.4-3.943a1.094 1.094 0 10-1.658 1.429l3.609 4.187-3.609 4.192a1.1 1.1 0 00.115 1.543 1.071 1.071 0 00.712.264 1.086 1.086 0 00.826-.378l3.4-3.943 3.4 3.943a1.094 1.094 0 00.826.378 1.071 1.071 0 00.712-.264 1.1 1.1 0 00.114-1.543z" data-name="Path 11484"/>
+                <path fill="#c8e6c9" d="M629.449 159A12.451 12.451 0 11617 146.549 12.451 12.451 0 01629.449 159z" data-name="Path 11481"/>
+                <path fill="#4caf50" d="M623.59 153.139l-8.448 8.458-3.487-3.477-1.761 1.761 5.25 5.238 10.207-10.219z" data-name="Path 11482"/>
+                <g data-name="icons8-checked">
+                  <path fill="#c8e6c9" d="M629.449 348A12.451 12.451 0 11617 335.549 12.451 12.451 0 01629.449 348z" data-name="Path 11481"/>
+                  <path fill="#4caf50" d="M623.59 342.139l-8.448 8.458-3.487-3.477-1.761 1.761 5.25 5.238 10.207-10.219z" data-name="Path 11482"/>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="Cert__section Cert__section--flat Cert__section--left Cert__section--light">
+  <div class="container container--download-form">
+    <div class="row row--end">
+      <div class="col-md-10 Cert__section-graphic Cert__section-graphic-matrix">
+        <div class="Cert__svg-container Cert__svg-container--matrix">
+          <svg viewBox="0 0 586 696">
+            <defs/>
+            <defs>
+              <filter id="a" width="534" height="658" x="52" y="19" filterUnits="userSpaceOnUse">
+                <feOffset dx="20" dy="50"/>
+                <feGaussianBlur result="blur" stdDeviation="38"/>
+                <feFlood flood-color="#301c6b" flood-opacity=".161"/>
+                <feComposite in2="blur" operator="in"/>
+                <feComposite in="SourceGraphic"/>
+              </filter>
+              <filter id="b" width="560" height="696" x="0" y="0" filterUnits="userSpaceOnUse">
+                <feOffset dx="20" dy="50"/>
+                <feGaussianBlur result="blur-2" stdDeviation="38"/>
+                <feFlood flood-color="#301c6b" flood-opacity=".161"/>
+                <feComposite in2="blur-2" operator="in"/>
+                <feComposite in="SourceGraphic"/>
+              </filter>
+            </defs>
+            <g data-name="Group 6676">
+              <g filter="url(#a)">
+                <rect width="306" height="430" fill="#fff" data-name="Rectangle 7044" rx="10" transform="translate(146 83)"/>
+              </g>
+              <path fill="#8a63fa" d="M156 83h286a10 10 0 0110 10v92H146V93a10 10 0 0110-10z" data-name="Rectangle 7045"/>
+              <g filter="url(#b)">
+                <rect width="332" height="468" fill="#fff" data-name="Rectangle 7024" rx="10" transform="translate(94 64)"/>
+              </g>
+              <path fill="#301c6b" d="M104 64h312a10 10 0 0110 10v101H94V74a10 10 0 0110-10z" data-name="Rectangle 7042"/>
+              <g data-name="Group 6547" transform="translate(126.248 87.992)">
+                <rect width="23" height="23" fill="#8a63fa" data-name="Rectangle 7025" rx="8" transform="translate(-.248 .008)"/>
+                <g data-name="Group 6545">
+                  <g data-name="Group 32">
+                    <path fill="#fff" d="M8.239 15.682a.712.712 0 01-.5-1.215l8.663-8.663a.712.712 0 011.007 1.007l-8.663 8.663a.71.71 0 01-.507.208z" data-name="Path 28"/>
+                  </g>
+                  <g data-name="Group 33">
+                    <path fill="#fff" d="M12.189 15.856a.712.712 0 01-.5-1.215l4.157-4.157a.712.712 0 011.007 1.007l-4.157 4.157a.709.709 0 01-.507.208z" data-name="Path 29"/>
+                  </g>
+                  <g data-name="Group 34">
+                    <path fill="#fff" d="M8.063 11.728a.712.712 0 01-.5-1.215l4.157-4.157a.712.712 0 011.007 1.007L8.57 11.52a.71.71 0 01-.507.208z" data-name="Path 30"/>
+                  </g>
+                  <g data-name="Group 35">
+                    <path fill="#fff" d="M13.527 18.648a.712.712 0 01-.5-1.215l1.835-1.835a.712.712 0 111.007 1.007l-1.835 1.835a.71.71 0 01-.507.208z" data-name="Path 31"/>
+                  </g>
+                  <g data-name="Group 36">
+                    <path fill="#fff" d="M5.27 10.397a.712.712 0 01-.5-1.215l1.835-1.835a.712.712 0 111.007 1.007l-1.834 1.835a.71.71 0 01-.508.208z" data-name="Path 32"/>
+                  </g>
+                </g>
+              </g>
+              <g fill="#c9c8c8" data-name="Group 6546">
+                <path d="M126.248 204.781h187.708v9.724H126.248z" data-name="Rectangle 7026"/>
+                <path d="M126.248 229.348h188.22v2.779h-188.22z" data-name="Rectangle 7027"/>
+                <path d="M126.248 258.215h188.22v2.777h-188.22z" data-name="Rectangle 7028"/>
+                <path d="M126.248 274.097h76.177v2.781h-76.177z" data-name="Rectangle 7029"/>
+                <path d="M126.248 289.984h188.22v2.777h-188.22z" data-name="Rectangle 7030"/>
+                <path d="M126.248 305.868h188.22v2.779h-188.22z" data-name="Rectangle 7031"/>
+                <path d="M126.248 321.752h76.177v2.779h-76.177z" data-name="Rectangle 7032"/>
+                <path d="M126.248 337.637h117.806v2.779H126.248z" data-name="Rectangle 7033"/>
+                <path d="M126.248 353.523h117.806v2.777H126.248z" data-name="Rectangle 7034"/>
+                <path d="M126.248 369.406h188.22v2.781h-188.22z" data-name="Rectangle 7035"/>
+                <path d="M126.248 385.292h188.22v2.777h-188.22z" data-name="Rectangle 7036"/>
+                <path d="M126.248 401.177h188.22v2.779h-188.22z" data-name="Rectangle 7037"/>
+                <path d="M126.248 417.063h74.428v2.777h-74.428z" data-name="Rectangle 7038"/>
+                <path d="M126.248 444.417h188.22v2.779h-188.22z" data-name="Rectangle 7039"/>
+                <path d="M126.248 454.774h188.22v2.779h-188.22z" data-name="Rectangle 7040"/>
+                <path d="M126.248 465.911h188.22v2.781h-188.22z" data-name="Rectangle 7041"/>
+              </g>
+              <text fill="#fff" data-name="Support matrix" font-family="SofiaProRegular, Sofia Pro" font-size="17" letter-spacing=".01em" transform="translate(126.248 143.387)">
+                <tspan x="0" y="0">Support matrix</tspan>
+              </text>
+              <path fill="#fff" d="M125.299 156.316h101.91v2.779h-101.91z" data-name="Rectangle 7043" opacity=".481"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="Cert__intro" id="form-container">
+          {{/*  <h1 class="Cert__section-title">{{ .Params.download.title }}</h1>
+          <p class="Cert__section-body">{{ .Params.download.body }}</p>
+          <a href="{{ .Params.download.body }}" class="Button">Download</a>  */}}
+          <script src='https://jetstacksales.freshsales.io/web_forms/a644d5dc85b571fb4d24c56e5d1d2e1801ae67480c4b7524539b9e46d9abd19c/form.js' crossorigin='anonymous' id='fs_a644d5dc85b571fb4d24c56e5d1d2e1801ae67480c4b7524539b9e46d9abd19c'></script>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  var $forms = document.querySelectorAll('.js-signup-form')
+  var $formContainer = document.getElementById('form-container')
+
+
+  Array.prototype.slice.call($forms).forEach(function($formEl) {
+    $formEl.addEventListener('submit', function(e) {
+      e.preventDefault()
+      var hasFormLoaded = !!$formContainer.querySelector('form')
+  
+      if(hasFormLoaded) {
+        var input = $formEl.querySelector('.js-frm-input')
+        var top = $formContainer.getBoundingClientRect().top
+        var $emailNode = $formContainer.querySelector('[type="email"]')
+        var $firstInput = $formContainer.querySelector('.fserv-input-text')
+        
+        try {
+          $formContainer.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+        } catch {
+          // no problem, the form will be moved into view when the input is focused
+        }
+    
+        $emailNode.value = input.value
+        // wait for the scrollTo to finish
+        setTimeout(function()  {
+          $firstInput.focus() 
+        }, 700)
+      } else {
+        console.error('form failed to load')
+      }
+  
+  
+    })
+  
+  })
+</script>
+
+{{ end }}

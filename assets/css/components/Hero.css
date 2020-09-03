@@ -26,6 +26,26 @@
   font-size: 4rem;
 }
 
+.Hero__headling--em {
+  font-weight: 200;
+}
+
+.Hero__cite {
+  text-transform: uppercase;
+  font-size: 0.6em;
+  color: #fff;
+  letter-spacing: 0.15em;
+  text-align: left;
+  margin-top: auto;
+}
+
+
+@media screen and (min-width: 768px) {
+  .Hero__cite  {
+    font-size: 0.9em;
+  }
+}
+
 .Hero__strapline {
   color: inherit;
   margin-bottom: 30px;
