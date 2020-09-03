@@ -30,5 +30,9 @@ authors are as follows:
   (https://aws.amazon.com/certificate-manager/private-certificate-authority/)
   for cloud native/hybrid environments.
 
+- [awskms-issuer](https://github.com/Skyscanner/kms-issuer): Used to request
+  certificates signed using an [AWS KMS](https://aws.amazon.com/kms/) asymetric key.
+ 
+
 To create your own external issuer type, please follow the guidance in the
 [development documentation](../../contributing/external-issuers/).
