@@ -32,17 +32,17 @@ integrate:
   body: The certificates can be consumed in any way you want, and cert-manager comes with support for use with Kubernetes Ingress. Many other Kubernetes services integrate with cert-manager through its APIs, including service mesh, allowing them to seamlessly issue certificates that are compliant with your policies.
   icons:
     - icon: /img/png/integrate_icon1.png
-      alt: ''
+      alt: 'nginx-ingress'
     - icon: /img/png/integrate_icon2.png
-      alt: ''
+      alt: 'Istio'
     - icon: /img/png/integrate_icon3.png
-      alt: ''
+      alt: 'Knative'
     - icon: /img/png/integrate_icon4.png
-      alt: ''
+      alt: 'Contour'
     - icon: /img/png/integrate_icon5.png
-      alt: ''
+      alt: 'kubeadm'
     - icon: /img/png/integrate_icon6.png
-      alt: ''
+      alt: 'Open Service Mesh'
 
 what:
   title: What you Get with cert-manager Enterprise
