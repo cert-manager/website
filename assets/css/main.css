@@ -1941,6 +1941,7 @@ Introduced on new Subscription Page
   font-size: 14px;
   color: #888a90;
   line-height: 1.2;
+  margin-bottom: 0;
 }
 
 .bio__social {

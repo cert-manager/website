@@ -3,6 +3,8 @@ title: Grace Reeves
 image: /img/jpg/about-grace.jpg
 position: Project Manager
 email: grace.reeves@jetstack.io
+hails_from:
+- ":flag-nz:"
 ---
 
 Grace has recently moved to London from New Zealand where she previously worked

@@ -5,6 +5,15 @@
   <div class="bio__content">
     <h2 class="bio__name">{{ .Title }}</h2>
     <p class="bio__title">{{ .Params.position }}</p>
+    <p class="bio__from">
+      {{ if .Params.hails_from }}
+        {{ range $.Params.hails_from }}
+          {{ range where $.Site.Data.emojis "shortname" "=" . }}
+            {{ safeHTML .html }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </p>
     <p class="bio__social">
       {{ if .Params.twitter }}
       <a href="https://twitter.com/{{.Params.twitter}}" class="bio__social-icon" target="_blank" rel="noopener noreferrer">

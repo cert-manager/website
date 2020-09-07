@@ -5,6 +5,9 @@ image: /img/jpg/about-oana.jpg
 position: Head of Services
 email: oana.garnett@jetstack.io
 twitter: 'oana_garnett'
+hails_from:
+- ":flag-ro:"
+- ":flag-gb:"
 ---
 
 Oana comes from Rackspace and has been working in the industry for the past 7
