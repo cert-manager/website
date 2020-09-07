@@ -24,7 +24,16 @@ Please register now to attend. A link that you will need to join this event will
 
 ### Agenda
 
-Full agenda and speakers coming soon.
+- Welcome and introduction - [Matthew Bates](https://www.jetstack.io/about/mattbates/), Jetstack
+- Introducing cert-manager 1.0 - [Maartje Eyskens](https://www.jetstack.io/about/maartjeeyskens/), Jetstack
+- Integrating cert-manager with service mesh (Openservicemesh and Istio) - [Josh van Leeuwen](https://www.jetstack.io/about/joshvanleeuwen/), Jetstack
+- Running cert-manager at (Web) Scale - [Anurag Goel](https://twitter.com/anuraggoel), [Render](https://render.com/)
+- Advanced cloud patterns with inlets and cert-manager - [Alex Ellis](https://twitter.com/alexellisuk, [OpenFaas](https://www.openfaas.com/)
+- Let’s Encrypt: introduction and Q&A, [Josh Aas](https://twitter.com/0xjosh), ISRG/Let's Encrypt
+- Kubernetes Node certificate provisioning with kubeadm / CAPI - [Richard Wall](https://www.jetstack.io/about/richardwall/), Jetstack
+- Cert-manager "AMA" and Q&A - James Munnelly, Maartje Eyskens, Josh van Leeuwen, Richard Wall,
+- Vault integration - Josh van Leeuwen, Jetstack
+- Managing operators: Using cert-manager for your webhooks - [Danielle Lancashire](https://dani.builds.terrible.systems/), VMware
 
 ## cert-manager Project
 
