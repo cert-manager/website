@@ -1,14 +1,26 @@
-FROM alpine:3.7
+# Hugo build
+FROM alpine:3.12 as build
 
-RUN apk update && apk add ca-certificates
+ENV HUGO_VERSION=0.74.3
+ENV HUGO_CHECKSUM=269482fff497051a7919da213efa29c7f59c000e51cf14c1d207ecf98d87bf33
 
-WORKDIR /www
-EXPOSE 8080
+RUN apk add --no-cache openssl ca-certificates && \
+  mkdir -p /tmp/hugo && \
+  cd /tmp/hugo && \
+  wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -O hugo.tar.gz && \
+  echo "${HUGO_CHECKSUM}  hugo.tar.gz" | sha256sum -c && \
+  tar xvf hugo.tar.gz && ls && cp hugo /usr/bin/hugo && \
+  rm -rf /tmp/hugo
 
-ADD _build/backend-linux-amd64 /backend
-ADD _output/ /www
+WORKDIR /website
+COPY . .
 
-USER 1000
+RUN hugo --environment=production --minify
 
-ENV GIN_MODE=release
-CMD ["/backend"]
+# NGINX container
+FROM nginx:1.19.2-alpine
+
+COPY --from=build /website/public /usr/share/nginx/html
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+WORKDIR /usr/share/nginx/html
