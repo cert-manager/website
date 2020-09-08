@@ -1,7 +1,3 @@
-config:
-  smtpUsername: AKIAJYHII4ZIATIRLUJQ
-  smtpPassword: Asz8vI0W5X1hF07QcoIMKsc6klLEYPQyBidAxewrE/E6
-
 ingress:
   enabled: true
   annotations:

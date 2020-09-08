@@ -20,19 +20,6 @@ spec:
           {{- toYaml .Values.securityContext | nindent 12 }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        env:
-        - name: SMTP_PORT
-          value: {{ .Values.config.smtpPort | quote }}
-        - name: SMTP_HOST
-          value: {{ .Values.config.smtpHost | quote }}
-        - name: SMTP_USERNAME
-          value: {{ .Values.config.smtpUsername | quote }}
-        - name: SMTP_PASSWORD
-          value: {{ .Values.config.smtpPassword | quote }}
-        - name: CONTACT_SENDER_ADDRESS
-          value: {{ .Values.config.contactSenderAddress| quote }}
-        - name: CONTACT_DEST_ADDRESS
-          value: {{ .Values.config.contactDestAddress| quote }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
           name: http

@@ -44,47 +44,15 @@ clean:
 test: test_helm
 
 hugo_build_image:
-	docker build -t $(REGISTRY)/$(IMAGE_NAME):hugo -f Dockerfile.hugo .
+	docker build -t $(REGISTRY)/$(IMAGE_NAME):hugo .
 
 hugo_serve: hugo_build_image
 	docker rm -f jetstack_website_dev || true
 	docker run -it \
 		--rm \
 		--name jetstack_website_dev \
-		-p 1313:1313 \
-		-v $(CURDIR):/var/lib/hugo \
+		-p 1313:80 \
 		$(REGISTRY)/$(IMAGE_NAME):hugo
-
-hugo_build: hugo_build_image
-	# clean up
-	rm -rf _output .hugo-log
-	# create a container
-	$(eval HUGO_CONTAINER_ID := $(shell docker create \
-		$(REGISTRY)/$(IMAGE_NAME):hugo \
-		hugo --environment=production --minify -v -d /var/lib/hugo/_output --logFile=/tmp/.hugo-log))
-	docker cp . $(HUGO_CONTAINER_ID):/var/lib/hugo
-	docker start -a $(HUGO_CONTAINER_ID)
-	docker cp $(HUGO_CONTAINER_ID):/tmp/.hugo-log .
-	cat .hugo-log > /dev/stderr
-	test "$$(cat .hugo-log | grep "^ERROR\|^WARN"| wc -l )" -eq "0"
-	docker cp $(HUGO_CONTAINER_ID):/var/lib/hugo/_output .
-	docker rm -f $(HUGO_CONTAINER_ID)
-
-
-golang_build:
-	# create a container
-	$(eval GOLANG_CONTAINER_ID := $(shell docker create \
-		-e CGO_ENABLED=0 \
-		-e GOOS=$(GOOS) \
-		-e GOARCH=$(GOARCH) \
-		-w $(GOLANG_CONTAINER_DIR) \
-		golang:$(GOLANG_VERSION) \
-		go build -a -tags netgo -o _build/backend-$(GOOS)-$(GOARCH)))
-	docker cp backend/ $(GOLANG_CONTAINER_ID):$(shell dirname $(GOLANG_CONTAINER_DIR))
-	docker start -a $(GOLANG_CONTAINER_ID)
-	rm -rf _build/
-	docker cp $(GOLANG_CONTAINER_ID):$(GOLANG_CONTAINER_DIR)/_build .
-	docker rm -f $(GOLANG_CONTAINER_ID)
 
 docker_build:
 	docker build -t $(REGISTRY)/$(IMAGE_NAME):$(BUILD_TAG) .

@@ -1,9 +1,4 @@
 ingressTLS: true
-config:
-  smtpUsername: AKIAJYHII4ZIATIRLUJQ
-  smtpPassword: Asz8vI0W5X1hF07QcoIMKsc6klLEYPQyBidAxewrE/E6
-  contactSenderAddress: website-staging@jetstack.net
-  contactDestAddress: tech+website-staging@jetstack.io
 
 ingress:
   enabled: true

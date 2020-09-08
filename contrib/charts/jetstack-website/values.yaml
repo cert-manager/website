@@ -34,19 +34,11 @@ tolerations: []
 
 affinity: {}
 
-config:
-  smtpPort: "2587"
-  smtpHost: email-smtp.eu-west-1.amazonaws.com
-  smtpUsername: xx
-  smtpPassword: yy
-  contactSenderAddress: website@jetstack.net
-  contactDestAddress: hello@jetstack.io
-
 service:
   name: site
   type: ClusterIP
   externalPort: 80
-  internalPort: 8080
+  internalPort: 80
 
 ingress:
   enabled: false
