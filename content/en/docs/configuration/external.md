@@ -31,7 +31,7 @@ authors are as follows:
   for cloud native/hybrid environments.
 
 - [awskms-issuer](https://github.com/Skyscanner/kms-issuer): Used to request
-  certificates signed using an [AWS KMS](https://aws.amazon.com/kms/) asymetric key.
+  certificates signed using an [AWS KMS](https://aws.amazon.com/kms/) asymmetric key.
  
 
 To create your own external issuer type, please follow the guidance in the
