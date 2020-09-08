@@ -1,6 +1,6 @@
 ---
-title: "Syncing Secrets Across Namespaces using Kubed"
-linkTitle: "Syncing Secrets Across Namespaces using Kubed"
+title: "Syncing Secrets Across Namespaces"
+linkTitle: "Syncing Secrets Across Namespaces"
 weight: 60
 type: "docs"
 ---
@@ -9,7 +9,29 @@ It may be required for multiple components across namespaces to consume the same
 `Secret` that has been created by a single `Certificate`. The recommended way to
 do this is to use [kubed](https://github.com/appscode/kubed) with its [secret
 syncing
-feature](https://appscode.com/products/kubed/v0.11.0/guides/config-syncer/intra-cluster/).
+feature](https://appscode.com/products/kubed/v0.11.0/guides/config-syncer/intra-cluster/). However if your use case is a wildcard certificate another approach may meet your needs.
+
+## Serving a wildcard to ingress resources in different namespaces (default SSL certificate)
+
+Most ingress controllers, including [ingress-nginx](https://kubernetes.github.io/ingress-nginx/user-guide/tls/#default-ssl-certificate), [Traefik](https://docs.traefik.io/https/tls/#default-certificate), and [Kong](https://docs.konghq.com/2.0.x/configuration/#ssl_cert) support specifying a _single_ certificate to be used for ingress resources which request TLS but do not specify `tls.[].secretName`. This is often referred to as a "default SSL certificate". As long as this is correctly configured, ingress resources in any namespace will be able to use a single wildcard certificate. Wildcard certificates are not supported with HTTP01 validation and require DNS01.
+
+Sample ingress snippet:
+
+```
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+#[...]
+spec:
+  rules:
+  - host: service.example.com
+  #[...]
+  tls:
+  - hosts:
+    - service.example.com
+    #secretName omitted to use default wildcard certificate
+```
+
+## Syncing arbitrary secrets across namespaces using kubed
 
 In order for the target Secret to be synced, the Secret resource must first be
 created with the correct annotations before the creation of the Certificate,
