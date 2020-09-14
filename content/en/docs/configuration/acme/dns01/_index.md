@@ -52,8 +52,8 @@ read the multiple-solver-types section.
 
 cert-manager will check the correct DNS records exist before attempting a DNS01
 challenge.  By default cert-manager will use the recursive nameservers taken
-from `/etc/resolv.conf` to query for the authoritative nameserver to verify the
-DNS records exist.
+from `/etc/resolv.conf` to query for the authoritative nameservers, which it will
+then query directly to verify the DNS records exist.
 
 If this is not desired (for example with multiple authoritative nameservers or
 split-horizon DNS), the cert-manager controller exposes two flags that allows
