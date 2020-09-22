@@ -16,7 +16,12 @@ First ensure that you have all the tools and permissions required to perform a c
 2. Install [cert-manager release tooling](https://github.com/cert-manager/release)
 3. Get permission to use the "cert-manager-release" project in Google Cloud Platform.
 4. You must have time to complete all the steps in the release process (~1h).
-5. Gcloud CLI
+5. Install [Gcloud SDK / CLI](https://cloud.google.com/sdk/)
+5.1. [Run gcloud auth login](https://cloud.google.com/sdk/docs/authorizing#running_gcloud_auth_login)
+6. Get a GitHub access token 
+   Go to your GitHub profile page and set up a token. 
+   It does not need any privileges. 
+   It is used only by the release-notes tool to avoid API rate limiting.
 
 ## Minor releases
 
@@ -52,12 +57,10 @@ To stage a release of the 'release-1.0' branch to the default staging bucket,
 overriding the release version as 'v1.0.0':
 
 ```#bash
-cmrel stage --git-ref=release-1.0 --release-version=v1.0.0
+cmrel stage --branch=release-1.0 --release-version=v1.0.0
 ```
 
 Look for a build URL and visit it in Google Cloud Console.
-
-4. [Create release notes](#release-notes)
 
 5. Run `cmrel publish`
 
@@ -66,7 +69,8 @@ Look for a build URL and visit it in Google Cloud Console.
 ```
 cmrel publish --release-name <RELEASE_NAME>
 ```
-Where `<RELEASE_NAME>` is the unique build ID printed by the earlier `cmrel stage` command.
+
+You can view the progress by clicking the Google Cloud Build URL in the output of this command.
 
 5.2 Next publish the release artifacts for real
 
@@ -78,6 +82,9 @@ cmrel publish --nomock --release-name <RELEASE_NAME>
 
 NOTE: At this stage there will be a draft release on Github and a live release on HelmHub.
 So you must now complete the release process quickly otherwise users of the latest release on HelmHub will encounter errors.
+
+4. [Create release notes](#release-notes)
+
 
 6. Publish the GitHub release
 
@@ -106,20 +113,31 @@ release branch.
 
 > Note: This process document is WIP and may be incomplete
 
-Bugs that need to be fixed in a patch release should be [cherry picked into the appropriate release branch](contributing-flow.md#cherry-picking).
-
 The process for cutting a patch release is as follows:
 
-1. Run `cmrel stage`
+1. Ensure that all PRs have been cherry-picked into the release branch.
 
-To stage a release of the 'release-0.16' branch to the default staging bucket,
-overriding the release version as 'v0.16.1':
-
-```#bash
- cmrel stage --git-ref=release-0.16 --release-version=v0.16.1
-```
+Bugs that need to be fixed in a patch release should be [cherry picked into the appropriate release branch](contributing-flow.md#cherry-picking).
 
 2. [Create release notes](#release-notes)
+
+Sanity check the notes, checking that the notes contain details of all the PRs that have been cherry-picked into the release branch.
+
+3. Run `cmrel stage`
+
+To stage a release of the 'release-1.0' branch to the default staging bucket,
+overriding the release version as 'v1.0.2':
+
+```#bash
+cmrel stage --branch=release-1.0 --release-version=v1.0.2
+```
+
+This step takes ~10 minutes.
+It will build all Docker images and create all the manifest files and upload them to a storage bucket on Google Cloud.
+These artifacts will be published / released in the next steps.
+
+The final line of output contains URL of the bucket containing the release artifacts.
+The final segment in that URL contains the RELEASE_NAME, which you will need in the next step.
 
 3. Run `cmrel publish`
 
@@ -129,6 +147,8 @@ overriding the release version as 'v0.16.1':
 cmrel publish --release-name <RELEASE_NAME>
 ```
 Where `<RELEASE_NAME>` is the unique build ID printed by the earlier `cmrel stage` command.
+E.g. Given gs://cert-manager-release/stage/gcb/release/v1.0.2-219b7934ac499c7818526597cf635a922bddd22e, 
+the RELEASE_NAME would be v1.0.2-219b7934ac499c7818526597cf635a922bddd22e.
 
 3.2 Next publish the release artifacts for real
 
@@ -144,9 +164,19 @@ So you must now complete the release process quickly otherwise users of the late
 4. Publish the GitHub release
 
 4.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
+
+You will need to manually edit the content to match the style of earlier releases.
+In particular:
+ * Remove package related changes
+ * Replace links to @jetstack-bot, in cherry-pick PRs, with links to the GitHub handle of the author of the original PR.
+
 4.2 Click "publish" to make the GitHub release live.
 
-5. Finally, create a new tag taken from the release branch, e.g. `v0.5.1`.
+This will create a Git tag automatically.
+
+5. Finally post a link to the release tag to all cert-manager channels on Slack
+
+E.g. https://github.com/jetstack/cert-manager/releases/tag/v1.0.2 :tada:
 
 ## Release Notes
 
@@ -155,13 +185,16 @@ So you must now complete the release process quickly otherwise users of the late
 2. Run as follows, substituting the current and last versions where appropriate:
 
 ```bash
-export GITHUB_TOKEN=1cf8fd6e181e7433dd964272a96d93bc015edbb0
+export GITHUB_TOKEN=*your-token*
 export RELEASE_VERSION=1.0.0
 export BRANCH=release-1.0
 export END_REV=release-1.0
 export START_REV=v0.16.1
 $GOPATH/bin/release-notes --github-repo cert-manager --github-org jetstack --required-author "jetstack-bot" --output release-notes.md
 ```
+
+NOTE: The GitHub token needs only readonly permission to the cert-manager repository. 
+The token is required only to avoid rate-limits imposed on anonymous API users.
 
 3. Add additional blurb, notable items and characterize change log.
 
