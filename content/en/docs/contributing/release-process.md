@@ -56,7 +56,7 @@ git push --set-upstream origin
 To stage a release of the 'release-1.0' branch to the default staging bucket,
 overriding the release version as 'v1.0.0':
 
-```#bash
+```bash
 cmrel stage --branch=release-1.0 --release-version=v1.0.0
 ```
 
@@ -66,7 +66,7 @@ Look for a build URL and visit it in Google Cloud Console.
 
 5.1. First do a dry-run, to ensure that all the staged resources are valid.
 
-```
+```bash
 cmrel publish --release-name <RELEASE_NAME>
 ```
 
@@ -76,7 +76,7 @@ You can view the progress by clicking the Google Cloud Build URL in the output o
 
 If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, helm hub etc.
 
-```
+```bash
 cmrel publish --nomock --release-name <RELEASE_NAME>
 ```
 
@@ -128,7 +128,7 @@ Sanity check the notes, checking that the notes contain details of all the PRs t
 To stage a release of the 'release-1.0' branch to the default staging bucket,
 overriding the release version as 'v1.0.2':
 
-```#bash
+```bash
 cmrel stage --branch=release-1.0 --release-version=v1.0.2
 ```
 
@@ -143,7 +143,7 @@ The final segment in that URL contains the RELEASE_NAME, which you will need in 
 
 3.1. First do a dry-run, to ensure that all the staged resources are valid.
 
-```
+```bash
 cmrel publish --release-name <RELEASE_NAME>
 ```
 Where `<RELEASE_NAME>` is the unique build ID printed by the earlier `cmrel stage` command.
@@ -154,7 +154,7 @@ the RELEASE_NAME would be v1.0.2-219b7934ac499c7818526597cf635a922bddd22e.
 
 If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, helm hub etc.
 
-```
+```bash
 cmrel publish --nomock --release-name <RELEASE_NAME>
 ```
 
