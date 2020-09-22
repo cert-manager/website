@@ -61,7 +61,7 @@ and [released as a patch release](release-process.md#patch-releases).
 To trigger the cherry-pick process, add a comment to the Github PR 
 For example:
 ```
-/cherry-pick release-x.y.z
+/cherry-pick release-x.y
 ```
 
 The jetstack-bot will then create a new branch and a PR against the release branch,
