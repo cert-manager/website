@@ -15,7 +15,7 @@ First ensure that you have all the tools and permissions required to perform a c
 1. Install [Kubernetes Release Notes Generator](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md)
 2. Install [cert-manager release tooling](https://github.com/cert-manager/release)
 3. Get permission to use the "cert-manager-release" project in Google Cloud Platform.
-4. You must have time to complete all the steps in the release process (~1h).
+4. You must have time to complete all the steps in the release process (~1 hour).
 5. Install [Gcloud SDK / CLI](https://cloud.google.com/sdk/)
 5.1. [Run gcloud auth login](https://cloud.google.com/sdk/docs/authorizing#running_gcloud_auth_login)
 6. Get a GitHub access token 
@@ -45,14 +45,14 @@ The process for cutting a minor release is as follows:
 
 2. Create or update the release branch
 
-If this is the first (alpha1) release, then you will need to create the release branch:
+If this is the first (`alpha1`) release, then you will need to create the release branch:
 
 ```bash
 git fetch --all
 git checkout -b release-1.0 origin/master
 ```
 
-If there has already been an alpha1 release, the release branch will already exist,
+If there has already been an `alpha1` release, the release branch will already exist,
 so you will need to update it with the latest commits from the master branch, as follows:
 
 ```bash
@@ -73,7 +73,7 @@ Sanity check the notes, checking that the notes contain details of all the featu
 5. Run `cmrel stage`
 
 In this example we stage a release using the 'release-1.0' branch,
-setting  the release version to 'v1.0.0':
+setting  the release version to `v1.0.0`:
 
 ```bash
 cmrel stage --branch=release-1.0 --release-version=v1.0.0
@@ -84,7 +84,7 @@ It will build all Docker images and create all the manifest files and upload the
 These artifacts will be published / released in the next steps.
 
 The final line of output contains URL of the bucket containing the release artifacts.
-The final segment in that URL contains the RELEASE_NAME, which you will need in the next step.
+The final segment in that URL contains the `RELEASE_NAME`, which you will need in the next step.
 
 6. Run `cmrel publish`
 
@@ -95,31 +95,31 @@ cmrel publish --release-name <RELEASE_NAME>
 ```
 
 Where `<RELEASE_NAME>` is the unique build ID printed by the earlier `cmrel stage` command.
-E.g. Given gs://cert-manager-release/stage/gcb/release/v1.0.0-219b7934ac499c7818526597cf635a922bddd22e, 
-the RELEASE_NAME would be v1.0.0-219b7934ac499c7818526597cf635a922bddd22e.
+E.g. Given `gs://cert-manager-release/stage/gcb/release/v1.0.0-219b7934ac499c7818526597cf635a922bddd22e`, 
+the `RELEASE_NAME` would be `v1.0.0-219b7934ac499c7818526597cf635a922bddd22e`.
 
 You can view the progress by clicking the Google Cloud Build URL in the output of this command.
 
 6.2 Next publish the release artifacts for real
 
-If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, [Helm Hub] etc.
+If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release artifacts to GitHub, `Quay.io`, [Helm Hub] etc.
 
 ```bash
 cmrel publish --nomock --release-name <RELEASE_NAME>
 ```
 
-NOTE: At this stage there will be a draft release on Github and a live release on [Helm Hub].
+NOTE: At this stage there will be a draft release on GitHub and a live release on [Helm Hub].
 So you must now complete the release process quickly otherwise users of the latest release on [Helm Hub] will encounter errors,
 because the manual CRD install URL will not be available yet.
 
 7. Publish the GitHub release
 
-7.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
+7.1 Visit the draft GitHub release and paste in the release notes that you generated earlier.
 
 You will need to manually edit the content to match the style of earlier releases.
 In particular:
  * Remove package related changes
- * Replace links to @jetstack-bot, in cherry-pick PRs, with links to the GitHub handle of the author of the original PR.
+ * Replace links to `@jetstack-bot`, in cherry-pick PRs, with links to the GitHub handle of the author of the original PR.
 
 7.2 Click "publish" to make the GitHub release live.
 
@@ -127,7 +127,7 @@ This will create a Git tag automatically.
 
 8. Finally post a link to the release tag to all cert-manager channels on Slack
 
-E.g. https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 :tada:
+E.g. `https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 :tada:`
 
 ## Patch releases
 
@@ -162,7 +162,7 @@ Sanity check the notes, checking that the notes contain details of all the PRs t
 3. Run `cmrel stage`
 
 In this example we stage a release using the 'release-1.0' branch,
-setting the release version to 'v1.0.2':
+setting the release version to `v1.0.2`:
 
 ```bash
 cmrel stage --branch=release-1.0 --release-version=v1.0.2
@@ -173,7 +173,7 @@ It will build all Docker images and create all the manifest files and upload the
 These artifacts will be published / released in the next steps.
 
 The final line of output contains URL of the bucket containing the release artifacts.
-The final segment in that URL contains the RELEASE_NAME, which you will need in the next step.
+The final segment in that URL contains the `RELEASE_NAME`, which you will need in the next step.
 
 4. Run `cmrel publish`
 
@@ -183,31 +183,31 @@ The final segment in that URL contains the RELEASE_NAME, which you will need in 
 cmrel publish --release-name <RELEASE_NAME>
 ```
 Where `<RELEASE_NAME>` is the unique build ID printed by the earlier `cmrel stage` command.
-E.g. Given gs://cert-manager-release/stage/gcb/release/v1.0.2-219b7934ac499c7818526597cf635a922bddd22e, 
-the RELEASE_NAME would be v1.0.2-219b7934ac499c7818526597cf635a922bddd22e.
+E.g. Given `gs://cert-manager-release/stage/gcb/release/v1.0.2-219b7934ac499c7818526597cf635a922bddd22e`, 
+the `RELEASE_NAME` would be `v1.0.2-219b7934ac499c7818526597cf635a922bddd22e`.
 
 You can view the progress by clicking the Google Cloud Build URL in the output of this command.
 
 4.2 Next publish the release artifacts for real
 
-If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, [Helm Hub] etc.
+If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release artifacts to GitHub, `Quay.io`, [Helm Hub] etc.
 
 ```bash
 cmrel publish --nomock --release-name <RELEASE_NAME>
 ```
 
-NOTE: At this stage there will be a draft release on Github and a live release on [Helm Hub].
+NOTE: At this stage there will be a draft release on GitHub and a live release on [Helm Hub].
 So you must now complete the release process quickly otherwise users of the latest release on [Helm Hub] will encounter errors,
 because the manual CRD install URL will not be available yet.
 
 5. Publish the GitHub release
 
-5.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
+5.1 Visit the draft GitHub release and paste in the release notes that you generated earlier.
 
 You will need to manually edit the content to match the style of earlier releases.
 In particular:
  * Remove package related changes
- * Replace links to @jetstack-bot, in cherry-pick PRs, with links to the GitHub handle of the author of the original PR.
+ * Replace links to `@jetstack-bot`, in cherry-pick PRs, with links to the GitHub handle of the author of the original PR.
 
 5.2 Click "publish" to make the GitHub release live.
 
@@ -215,7 +215,7 @@ This will create a Git tag automatically.
 
 6. Finally post a link to the release tag to all cert-manager channels on Slack
 
-E.g. https://github.com/jetstack/cert-manager/releases/tag/v1.0.2 :tada:
+E.g. `https://github.com/jetstack/cert-manager/releases/tag/v1.0.2 :tada:`
 
 ## Release Notes
 
@@ -232,7 +232,7 @@ export START_REV=v0.16.1
 $GOPATH/bin/release-notes --github-repo cert-manager --github-org jetstack --required-author "jetstack-bot" --output release-notes.md
 ```
 
-NOTE: The GitHub token needs only readonly permission to the cert-manager repository. 
+NOTE: The GitHub token needs only read-only permission to the cert-manager repository. 
 The token is required only to avoid rate-limits imposed on anonymous API users.
 
 3. Add additional blurb, notable items and characterize change log.
@@ -245,13 +245,14 @@ The token is required only to avoid rate-limits imposed on anonymous API users.
 * Release notes back to last minor release
 
 ### Rollover testing infra
-* Remove last release (0.16.x)
+* Remove last release (`0.16.x`)
 * Make release-1.0 the last release
     * Copy release-next > release-previous
 * Make PR
 * Before merging, 
-    * Create new release branches in cert-manager and website repos
+    * Create new release branches in cert-manager and website repositories
 * https://github.com/jetstack/testing/pull/397
+
 ### Rollover documentation
 
 * Merge master into release-next

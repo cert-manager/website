@@ -58,11 +58,11 @@ cert-manager.
 If the pull request contains a critical bug fix then this should be cherry picked in to the current stable cert-manager branch 
 and [released as a patch release](../release-process/#patch-releases).
 
-To trigger the cherry-pick process, add a comment to the Github PR 
+To trigger the cherry-pick process, add a comment to the GitHub PR.
 For example:
 ```
 /cherry-pick release-x.y
 ```
 
-The jetstack-bot will then create a new branch and a PR against the release branch,
+The `jetstack-bot` will then create a new branch and a PR against the release branch,
 which should be reviewed, approved and merged using the process described above.

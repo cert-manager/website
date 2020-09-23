@@ -53,6 +53,7 @@ eTLD
 FastDNS
 GCE
 GCLB
+gcloud
 GCP
 GKE
 HashiCorp
