@@ -129,6 +129,31 @@ This will create a Git tag automatically.
 
 E.g. `https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 :tada:`
 
+### Final Release
+
+After releasing one or more alpha and beta releases,
+you will release the final version.
+For the final release, you should follow the process described above with the following changes and additional steps:
+
+#### Full Release notes
+
+The release notes for the final release should include all changes since the last minor release.
+
+#### Rollover testing infra
+
+After releasing the final release you will need to update the testing infrastructure,
+so that it uses the latest release as `release-previous`,
+and you will need to create a new release branch in the cert-manager repository which will be treated as `release-next`,
+and both these branches will be tested periodically.
+
+For example see the PR  [Prepare testing for the cert-manager `v1.0` release](https://github.com/jetstack/testing/pull/397).
+
+#### Rollover documentation
+
+You will also need to update the versions and branches in the cert-manager website configuration.
+
+For example see the PR [Configure website for the `v1.0` release](https://github.com/cert-manager/website/pull/309).
+
 ## Patch releases
 
 A patch release contains critical bug fixes for the project.  They are managed on
@@ -238,26 +263,6 @@ The token is required only to avoid rate-limits imposed on anonymous API users.
 3. Add additional blurb, notable items and characterize change log.
 
 
-
-## Final Release
-
-* Same as alpha beta release, but also
-* Release notes back to last minor release
-
-### Rollover testing infra
-* Remove last release (`0.16.x`)
-* Make release-1.0 the last release
-    * Copy release-next > release-previous
-* Make PR
-* Before merging, 
-    * Create new release branches in cert-manager and website repositories
-* https://github.com/jetstack/testing/pull/397
-
-### Rollover documentation
-
-* Merge master into release-next
-* Merge release-next into master
-* https://github.com/cert-manager/website/pull/309
 
 ## Links
 
