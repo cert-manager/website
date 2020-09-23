@@ -109,7 +109,8 @@ cmrel publish --nomock --release-name <RELEASE_NAME>
 ```
 
 NOTE: At this stage there will be a draft release on Github and a live release on [Helm Hub].
-So you must now complete the release process quickly otherwise users of the latest release on [Helm Hub] will encounter errors.
+So you must now complete the release process quickly otherwise users of the latest release on [Helm Hub] will encounter errors,
+because the manual CRD install URL will not be available yet.
 
 7. Publish the GitHub release
 
@@ -196,7 +197,8 @@ cmrel publish --nomock --release-name <RELEASE_NAME>
 ```
 
 NOTE: At this stage there will be a draft release on Github and a live release on [Helm Hub].
-So you must now complete the release process quickly otherwise users of the latest release on [Helm Hub] will encounter errors.
+So you must now complete the release process quickly otherwise users of the latest release on [Helm Hub] will encounter errors,
+because the manual CRD install URL will not be available yet.
 
 5. Publish the GitHub release
 
