@@ -102,14 +102,14 @@ You can view the progress by clicking the Google Cloud Build URL in the output o
 
 6.2 Next publish the release artifacts for real
 
-If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, helm hub etc.
+If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, [Helm Hub] etc.
 
 ```bash
 cmrel publish --nomock --release-name <RELEASE_NAME>
 ```
 
-NOTE: At this stage there will be a draft release on Github and a live release on HelmHub.
-So you must now complete the release process quickly otherwise users of the latest release on HelmHub will encounter errors.
+NOTE: At this stage there will be a draft release on Github and a live release on [Helm Hub].
+So you must now complete the release process quickly otherwise users of the latest release on [Helm Hub] will encounter errors.
 
 7. Publish the GitHub release
 
@@ -189,14 +189,14 @@ You can view the progress by clicking the Google Cloud Build URL in the output o
 
 4.2 Next publish the release artifacts for real
 
-If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, helm hub etc.
+If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, [Helm Hub] etc.
 
 ```bash
 cmrel publish --nomock --release-name <RELEASE_NAME>
 ```
 
-NOTE: At this stage there will be a draft release on Github and a live release on HelmHub.
-So you must now complete the release process quickly otherwise users of the latest release on HelmHub will encounter errors.
+NOTE: At this stage there will be a draft release on Github and a live release on [Helm Hub].
+So you must now complete the release process quickly otherwise users of the latest release on [Helm Hub] will encounter errors.
 
 5. Publish the GitHub release
 
@@ -255,3 +255,7 @@ The token is required only to avoid rate-limits imposed on anonymous API users.
 * Merge master into release-next
 * Merge release-next into master
 * https://github.com/cert-manager/website/pull/309
+
+## Links
+
+* [Helm Hub](https://charts.jetstack.io)
