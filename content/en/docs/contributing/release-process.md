@@ -43,36 +43,64 @@ The process for cutting a minor release is as follows:
 1. Ensure upgrading document exists. 
    (not necessary for alpha releases)
 
-2. Fast forward the release branch to master (e.g. `release-0.5`)
+2. Create or update the release branch
 
+If this is the first (alpha1) release, then you will need to create the release branch:
+
+```bash
+git fetch --all
+git checkout -b release-1.0 origin/master
+```
+
+If there has already been an alpha1 release, the release branch will already exist,
+so you will need to update it with the latest commits from the master branch, as follows:
+
+```bash
+git fetch --all
+git branch --force release-1.0 origin/release-1.0
+git checkout release-1.0
 git merge --ff-only origin/master
+```
 
 3. Push it to the `jetstack/cert-manager` repository
 
 git push --set-upstream origin
 
-4. Run `cmrel stage`
+4. [Create release notes](#release-notes)
 
-To stage a release of the 'release-1.0' branch to the default staging bucket,
-overriding the release version as 'v1.0.0':
+Sanity check the notes, checking that the notes contain details of all the features and bug fixes that you expect to be in the release.
+
+5. Run `cmrel stage`
+
+In this example we stage a release using the 'release-1.0' branch,
+setting  the release version to 'v1.0.0':
 
 ```bash
 cmrel stage --branch=release-1.0 --release-version=v1.0.0
 ```
 
-Look for a build URL and visit it in Google Cloud Console.
+This step takes ~10 minutes.
+It will build all Docker images and create all the manifest files and upload them to a storage bucket on Google Cloud.
+These artifacts will be published / released in the next steps.
 
-5. Run `cmrel publish`
+The final line of output contains URL of the bucket containing the release artifacts.
+The final segment in that URL contains the RELEASE_NAME, which you will need in the next step.
 
-5.1. First do a dry-run, to ensure that all the staged resources are valid.
+6. Run `cmrel publish`
+
+6.1. First do a dry-run, to ensure that all the staged resources are valid.
 
 ```bash
 cmrel publish --release-name <RELEASE_NAME>
 ```
 
+Where `<RELEASE_NAME>` is the unique build ID printed by the earlier `cmrel stage` command.
+E.g. Given gs://cert-manager-release/stage/gcb/release/v1.0.0-219b7934ac499c7818526597cf635a922bddd22e, 
+the RELEASE_NAME would be v1.0.0-219b7934ac499c7818526597cf635a922bddd22e.
+
 You can view the progress by clicking the Google Cloud Build URL in the output of this command.
 
-5.2 Next publish the release artifacts for real
+6.2 Next publish the release artifacts for real
 
 If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, helm hub etc.
 
@@ -83,15 +111,22 @@ cmrel publish --nomock --release-name <RELEASE_NAME>
 NOTE: At this stage there will be a draft release on Github and a live release on HelmHub.
 So you must now complete the release process quickly otherwise users of the latest release on HelmHub will encounter errors.
 
-4. [Create release notes](#release-notes)
+7. Publish the GitHub release
 
+7.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
 
-6. Publish the GitHub release
+You will need to manually edit the content to match the style of earlier releases.
+In particular:
+ * Remove package related changes
+ * Replace links to @jetstack-bot, in cherry-pick PRs, with links to the GitHub handle of the author of the original PR.
 
-6.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
-6.2 Click "publish" to make the GitHub release live.
+7.2 Click "publish" to make the GitHub release live.
 
-7. Finally, create a new tag taken from the release branch, e.g.`v0.5.0`.
+This will create a Git tag automatically.
+
+8. Finally post a link to the release tag to all cert-manager channels on Slack
+
+E.g. https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 :tada:
 
 ## Patch releases
 
@@ -125,8 +160,8 @@ Sanity check the notes, checking that the notes contain details of all the PRs t
 
 3. Run `cmrel stage`
 
-To stage a release of the 'release-1.0' branch to the default staging bucket,
-overriding the release version as 'v1.0.2':
+In this example we stage a release using the 'release-1.0' branch,
+setting the release version to 'v1.0.2':
 
 ```bash
 cmrel stage --branch=release-1.0 --release-version=v1.0.2
@@ -139,9 +174,9 @@ These artifacts will be published / released in the next steps.
 The final line of output contains URL of the bucket containing the release artifacts.
 The final segment in that URL contains the RELEASE_NAME, which you will need in the next step.
 
-3. Run `cmrel publish`
+4. Run `cmrel publish`
 
-3.1. First do a dry-run, to ensure that all the staged resources are valid.
+4.1. First do a dry-run, to ensure that all the staged resources are valid.
 
 ```bash
 cmrel publish --release-name <RELEASE_NAME>
@@ -150,7 +185,9 @@ Where `<RELEASE_NAME>` is the unique build ID printed by the earlier `cmrel stag
 E.g. Given gs://cert-manager-release/stage/gcb/release/v1.0.2-219b7934ac499c7818526597cf635a922bddd22e, 
 the RELEASE_NAME would be v1.0.2-219b7934ac499c7818526597cf635a922bddd22e.
 
-3.2 Next publish the release artifacts for real
+You can view the progress by clicking the Google Cloud Build URL in the output of this command.
+
+4.2 Next publish the release artifacts for real
 
 If the last step succeeded, you can now re-run the `cmrel publish` with the `--nomock` argument to actually publish the release articacts to Github, quay.io, helm hub etc.
 
@@ -161,20 +198,20 @@ cmrel publish --nomock --release-name <RELEASE_NAME>
 NOTE: At this stage there will be a draft release on Github and a live release on HelmHub.
 So you must now complete the release process quickly otherwise users of the latest release on HelmHub will encounter errors.
 
-4. Publish the GitHub release
+5. Publish the GitHub release
 
-4.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
+5.1 Visit the draft GithHub release and paste in the release notes that you generated earlier.
 
 You will need to manually edit the content to match the style of earlier releases.
 In particular:
  * Remove package related changes
  * Replace links to @jetstack-bot, in cherry-pick PRs, with links to the GitHub handle of the author of the original PR.
 
-4.2 Click "publish" to make the GitHub release live.
+5.2 Click "publish" to make the GitHub release live.
 
 This will create a Git tag automatically.
 
-5. Finally post a link to the release tag to all cert-manager channels on Slack
+6. Finally post a link to the release tag to all cert-manager channels on Slack
 
 E.g. https://github.com/jetstack/cert-manager/releases/tag/v1.0.2 :tada:
 
