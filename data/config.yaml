@@ -381,6 +381,12 @@ panels:
 
   # nice things people said about us (homepage)
   testimonials:
+  - name: Jens Alm, CEO
+    link:
+      title: Prorenata
+      url: https://prorenata.se/
+    quote: >
+      Working with Jetstack has been an absolute pleasure! The mix of friendliness, professionalism and deep knowledge of kubernetes makes them a rare find among consultants we've worked with throughout the years.
   - name: Mick Delaney, CTO
     link:
       title: Elevate Direct
