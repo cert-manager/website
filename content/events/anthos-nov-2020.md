@@ -1,5 +1,5 @@
 ---
-title: GKE in hybrid, multi-cloud with Anthos
+title: Google Anthos for hybrid and multi-cloud environments
 image: /events/anthos-nov-2020/thumbnail.jpeg
 address: "Virtual Event"
 event_date: "2020-11-05"
