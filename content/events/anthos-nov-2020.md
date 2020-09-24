@@ -7,7 +7,7 @@ link: /events/anthos-nov-2020
 timestamp: "20201105"
 start_time: "4:00pm"
 end_time: "5:00pm"
-eventbrite_id: TODO
+eventbrite_id: 122532434811
 ---
 
 ## Google Anthos
@@ -17,15 +17,14 @@ Google Anthos is a framework of software components, orientated around managing 
 The value proposition of Google Anthos is to enable environmental agnosticism, with containers and Kubernetes being the common denominator for our workloads. This allows for a level of portability through Google Anthos to manage workload deployments and lifecycles across multi-cloud (GCP, AWS and Azure), as well as on-prem data centres (VMWare & bare metal).
 At Jetstack, we're seeing an increasing amount of clients seeking to either adopt or mature their Kubernetes offering, whilst leveraging the advantages of cloud-native principles in accordance with their business requirements and existing infrastructure investments.
 
-## Migrating and Modernising Workloads
+## Hybrid and multi-cloud environments
 
 This webinar will introduce the context and motivations for Google Anthos and how it builds atop of technologies like Kubernetes and Istio to allow companies to modernise in place by laying the foundations to migrate and align workloads across organisational boundaries.
 
 ## Agenda
 
 - Welcome and introduction - [Mattias Gees](https://www.jetstack.io/about/mattiasgees/), Jetstack
-- <ADD TALK FOCUS> Henry Bell, Google
-- <ADD TALK FOCUS> - [Paul Jones](https://www.jetstack.io/about/pauljons/), Jetstack
+- Google Anthos for hybrid and multi-cloud environments - Henry Bell, Google & [Paul Jones](https://www.jetstack.io/about/pauljones/), Jetstack
 - Q&A and closing - [Mattias Gees](https://www.jetstack.io/about/mattiasgees/), Jetstack
 
 ## Speakers
