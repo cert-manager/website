@@ -51,6 +51,18 @@ testing. To make sure the changes get merged, keep an eye out for reviews which
 can have multiple cycles.
 
 Once code has been merged, your changes will appear in the next minor release of
-cert-manager. If the pull request is a critical bug fix then this will probably
-also be cherry picked to the current stable version of cert-manager as a patch
-release.
+cert-manager. 
+
+### Cherry Picking
+
+If the pull request contains a critical bug fix then this should be cherry picked in to the current stable cert-manager branch 
+and [released as a patch release](../release-process/#patch-releases).
+
+To trigger the cherry-pick process, add a comment to the GitHub PR.
+For example:
+```
+/cherry-pick release-x.y
+```
+
+The `jetstack-bot` will then create a new branch and a PR against the release branch,
+which should be reviewed, approved and merged using the process described above.
