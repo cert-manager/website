@@ -24,7 +24,8 @@ This webinar will introduce the context and motivations for Google Anthos and ho
 ## Agenda
 
 - Welcome and introduction - [Mattias Gees](https://www.jetstack.io/about/mattiasgees/), Jetstack
-- Google Anthos for hybrid and multi-cloud environments - Henry Bell, Google & [Paul Jones](https://www.jetstack.io/about/pauljones/), Jetstack
+- Google Anthos features - Henry Bell, Google
+- Practical implementations of hybrid environments - [Paul Jones](https://www.jetstack.io/about/pauljones/), Jetstack
 - Q&A and closing - [Mattias Gees](https://www.jetstack.io/about/mattiasgees/), Jetstack
 
 ## Speakers
