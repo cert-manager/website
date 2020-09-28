@@ -1,6 +1,6 @@
 ---
 title: Google Anthos for hybrid and multi-cloud environments
-image: /events/anthos-nov-2020/thumbnail.jpeg
+image: /events/anthos-nov-2020/thumbnail.jpg
 address: "Virtual Event"
 event_date: "2020-11-05"
 link: /events/anthos-nov-2020
