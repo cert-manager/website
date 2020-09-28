@@ -8,9 +8,10 @@ type: "docs"
 cert-manager has an end-to-end test suite that verifies functionality against a
 real Kubernetes cluster.
 
-This document explains how you can run the end-to-end tests yourself.  This is
-useful when you have added or changed functionality in cert-manager and want to
-verify the software still works as expected.
+This test takes around 30 minutes, it will be running on every PR in our cluster.
+It is only adviced to run this locally when you made big changes to the codebase.
+
+This document explains how you can run the end-to-end tests yourself.
 
 ## Requirements
 
@@ -27,13 +28,11 @@ run the tests:
   tested is 17.09.
 
 - `kubectl`:  If you are running the tests on Linux, this step is technically
-  not required. For non-Linux hosts (i.e. OSX), you will need to ensure you have
+  not required. For non-Linux hosts (i.e. macOS), you will need to ensure you have
   a relatively new version of `kubectl` available on your PATH.
 
 - `kind`: We use kind to provision a Kubernetes cluster.
 
-- An internet connection: tests require access to DNS, and optionally CloudFlare
-  APIs (if a CloudFlare API token is provided).
 
 Bazel, Docker and `kubectl` should be installed through your preferred means.
 
@@ -41,14 +40,17 @@ Bazel, Docker and `kubectl` should be installed through your preferred means.
 
 You need to have a Kind cluster running, if you don't have one set up you can set one up using:
 ```bash
+export K8S_VERSION=1.19 # optional: this allows you to test different Kubernetes versions
 $ ./devel/cluster/create.sh
 ```
 
-Once you have one set up you need to install all dependencies in the cluster using:
+Once you have one set up you need to install all dependencies (including cert-manager) in the cluster using:
 
 ```bash
 $ ./devel/setup-e2e-deps.sh
 ```
+
+**TIP**: if you only need to update one dependancy you can run `./devel/addon/<name>/install.sh` 
 
 ## Run End-to-End Tests
 
