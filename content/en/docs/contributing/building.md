@@ -33,14 +33,14 @@ Let's take `bazel run //hack/bin:helm` as an example:
 
 ## Help so much Bazel!
 
-No worries we got a lot of helper scripts for you!
+No worries we have a lot of helper scripts for you!
 Need to set up a local cluster and install cert-manager in it? Take a look at [our kind documentation](../kind/).
 
-We got a few very handy tools inside `./hack` and `./devel`. These are the most common ones which you can use:
+We also have a few very handy tools inside `./hack` and `./devel`. These are the most common ones which you can use:
 
 ### Just update everything you can!
 
-Bazel takes care of a lot of automatic code generation for us, from generating CRD updates to updating it's own `BUILD.bazel` files.
+Bazel takes care of a lot of automatic code generation for us, from generating CRD updates to updating its own `BUILD.bazel` files.
 If you just want to do everything at once (and have 5 minutes of your time) you can run:
 
 ```bash 
@@ -49,15 +49,15 @@ $ ./hack/update-all.sh
 
 This will update everything you need without having to care about what needs changing.
 
-> **NOTE:** we strongly reccomend to run this before you create a PR!
+> **NOTE:** we strongly recommend running this before you create a PR!
 
 ### I need granular control 
 
 You can also pick and mix the individual bash helper scripts:
 * `update-bazel.sh`: updates the all `*.bazel` files includding formatting them
 * `update-codegen.sh`: runs all code generation
-* `update-crds.sh`: updates all CRD files to the lastest scheme
-* `update-deps-licenses.sh`: updates the `LICENCES` file, needed when adding/updating dependancies
+* `update-crds.sh`: updates all CRD files to the latest scheme
+* `update-deps-licenses.sh`: updates the `LICENCES` file, needed when adding/updating dependencies
 * `update-deps.sh`: installs new dependancies declared in the code and adds them into the Bazel and Go module files
 * `update-gofmt.sh`: runs `go fmt` on all code
 
@@ -102,20 +102,20 @@ $ bazel run \
 		//build:server-images
 ```
 
-`--stamp` enabled reproducable builds while `--platforms` defines which images to build, in this example for AMD64 Linux.
+`--stamp` enables reproducible builds while `--platforms` defines which images to build, in this example for AMD64 Linux.
 
 ## Testing the project 
 
-cert-manager got 3 kinds of tests, each one has their own way to invoke them to give you granular control
+cert-manager has 3 kinds of tests, which can each be invoked separately to give you granular control.
 
-* Unit tests: you can use `go test` (or your IDE) here, if Bazel using for example `bazel test //pkg/acme/...` for all tests in the ACME package
-* Integration tests: `bazel test //test/integration/...` this will run all integration tests against a Bazel operated `kube-apiserver`
+* Unit tests: you can either use `go test` (or your IDE) here, or Bazel. For example `bazel test //pkg/acme/...` runs all tests in the ACME package
+* Integration tests: `bazel test //test/integration/...` will run all integration tests against a Bazel operated `kube-apiserver`
 * End-to-end tests: see the [e2e documentation](../e2e/)
 
-> **TIP**: `...` is a recursive lookup in Bazel, it will run al tests in all subfolders when set, it is also the easiest way to invoke them.
+> **TIP**: `...` is a recursive lookup in Bazel, it will run all tests in all subfolders when set, it is also the easiest way to invoke them.
 
 
 ## But... I like Makefiles more
 
 We got you covered! The root of the repo has a `Makefile` which you can use for quick actions. Which will use Bazel in the backgroud.
-We reccomend [looking at the file](https://github.com/jetstack/cert-manager/blob/master/Makefile) to learn all possible options.
+We recommend [looking at the file](https://github.com/jetstack/cert-manager/blob/master/Makefile) to learn all possible options.

@@ -8,8 +8,8 @@ type: "docs"
 cert-manager has an end-to-end test suite that verifies functionality against a
 real Kubernetes cluster.
 
-This test takes around 30 minutes, it will be running on every PR in our cluster.
-It is only adviced to run this locally when you made big changes to the codebase.
+This test takes around 30 minutes, it will be run on every PR in our cluster.
+It is only advised to run this locally when you made big changes to the codebase.
 
 This document explains how you can run the end-to-end tests yourself.
 

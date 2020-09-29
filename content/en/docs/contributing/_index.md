@@ -31,7 +31,7 @@ also very welcome if you happen to find an out of date part.
 All the cert-manager meetings are open for everyone to join.
 To get invites you can subscribe to [our mailing list](https://groups.google.com/forum/#!forum/cert-manager-dev).
 
-We got 2 regular repeating meetings
+We have 2 regular repeating meetings
 * our daily stand-up meetings [on Google Meet](
 https://meet.google.com/eum-fyvt-xpa) at 10:30 London time every weekday 
 * our bi-weekly developer meetings [are on Zoon]( https://zoom.us/j/904964148) 17:00 London time every 2 weeks (check calendar invites or [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U)). 

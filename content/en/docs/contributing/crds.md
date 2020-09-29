@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 cert-manager is a heavy user of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
-Chances are high that you need to change anything in our Custom Resource Definition. This guide will give you some tips!
+Chances are high that you may need to change something in our Custom Resource Definition. This guide will give you some tips!
 
 ## Generating updates
 
@@ -37,4 +37,4 @@ However all new fields also have to be added here for the conversion logic to wo
 
 ## Kubebuilder
 
-While cert-manager doesn't fully use Kubebuilder for everything CRDs can make use of special Kubebuilder flags such as [validation flags](https://book.kubebuilder.io/reference/markers/crd-validation.html). We reccomend reading the Kubebuildr book to learn more about them!
+While cert-manager doesn't fully use Kubebuilder for everything CRDs can make use of special Kubebuilder flags such as [validation flags](https://book.kubebuilder.io/reference/markers/crd-validation.html). We reccomend reading the Kubebuilder book to learn more about them!

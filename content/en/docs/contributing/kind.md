@@ -27,7 +27,7 @@ export K8S_VERSION=1.19 # optional: this allows you to test different Kubernetes
 $ ./devel/cluster/create.sh
 ```
 
-> **NOTE:** this script will setup the kind cluster using a set service CIDR to make e2e tests able to use certain fixed IPs
+> **NOTE:** this script will setup the kind cluster using a specific service CIDR to make e2e tests able to use certain fixed IPs
 
 Once complete, the cluster is able to be interacted with `kubectl`.
 
