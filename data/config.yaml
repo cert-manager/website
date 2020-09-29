@@ -37,16 +37,16 @@ offices:
   - BS2 0BY
 
 featured_instagram_photos:
-- link: https://www.instagram.com/p/BzitBxDAjdb
+- link: https://www.instagram.com/p/B08WLtKA79z/
   image_source: photo1.jpg
-- link: https://www.instagram.com/p/BozWHUJAPTq
+- link: https://www.instagram.com/p/BuvmOmHHsmJ/
   image_source: photo2.jpg
-- link: https://www.instagram.com/p/B0QqX-dAj0X
-  image_source: photo5.jpg
-- link: https://www.instagram.com/p/BzJYkXugP0Q
-  image_source: photo4.jpg
-- link: https://www.instagram.com/p/B0lQbLDgymq
+- link: https://www.instagram.com/p/BnbXFv2gL2A/
   image_source: photo3.jpg
+- link: https://www.instagram.com/p/B2yz6f4A47A/
+  image_source: photo4.jpg
+- link: https://www.instagram.com/p/B7qg4ZNgIqn/
+  image_source: photo5.jpg
 
 menus:
   navbar:
@@ -57,7 +57,7 @@ menus:
     sublinks:
     - name: Preflight
       link: /preflight/
-    - name: cert-manager Enterprise 
+    - name: cert-manager Enterprise
       link: /cert-manager/
   - name: Services
     link: '#'
