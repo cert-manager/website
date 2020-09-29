@@ -15,81 +15,81 @@
 # Netlify Domain Alias Redirects
 
 [[redirects]]
-  from = "https://www.istio.co.uk/*"
+  from = "https://www.istio.co.uk"
   to = "/"
   status = 301
       
 [[redirects]]
-  from = "https://istio.co.uk/*"
+  from = "https://istio.co.uk"
   to = "/"
   status = 301
 
 [[redirects]]
-  from = "https://www.jetstack.co/*"
+  from = "https://www.jetstack.co"
   to = "/"
   status = 301
       
 [[redirects]]
-  from = "https://jetstack.co/*"
+  from = "https://jetstack.co"
   to = "/"
   status = 301
 
 [[redirects]]
-  from = "https://www.jetstack.co.uk/*"
+  from = "https://www.jetstack.co.uk"
   to = "/"
   status = 301
       
 [[redirects]]
-  from = "https://jetstack.co.uk/*"
+  from = "https://jetstack.co.uk"
   to = "/"
   status = 301
 
 [[redirects]]
-  from = "https://www.jetstack.net/*"
+  from = "https://www.jetstack.net"
   to = "/"
   status = 301
       
 [[redirects]]
-  from = "https://jetstack.net/*"
+  from = "https://jetstack.net"
   to = "/"
   status = 301
 
 [[redirects]]
-  from = "https://www.k8s.careers/*"
+  from = "https://www.k8s.careers"
   to = "/careers/"
   status = 301
       
 [[redirects]]
-  from = "https://k8s.careers/*"
+  from = "https://k8s.careers"
   to = "/careers/"
   status = 301
 
 [[redirects]]
-  from = "https://www.kubernetes.careers/*"
+  from = "https://www.kubernetes.careers"
   to = "/careers/"
   status = 301
       
 [[redirects]]
-  from = "https://kubernetes.careers/*"
+  from = "https://kubernetes.careers"
   to = "/careers/"
   status = 301
 
 [[redirects]]
-  from = "https://www.jetstack.dev/*"
+  from = "https://www.jetstack.dev"
   to = "/open-source/"
   status = 301
       
 [[redirects]]
-  from = "https://jetstack.dev/*"
+  from = "https://jetstack.dev"
   to = "/open-source/"
   status = 301
 
 [[redirects]]
-  from = "https://www.k8s.school/*"
+  from = "https://www.k8s.school"
   to = "/training/"
   status = 301
       
 [[redirects]]
-  from = "https://k8s.school/*"
+  from = "https://k8s.school"
   to = "/training/"
   status = 301
