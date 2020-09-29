@@ -1,6 +1,6 @@
 # jetstack-website
 
-Hugo build for http://www.jetstack.io
+Hugo build for https://www.jetstack.io
 
 ## Local Development
 
@@ -15,9 +15,8 @@ $ open http://localhost:1313
 
 ## Deployment
 
-Using Gitlab-CI
-
-* Helm chart in contrib
+Jetstack runs on Netlify. Netlify will listen for pull requests. When a pull request has opened, Netlify will deploy it providing a preview link.
+Master branch is considered production therefore any changes to `master` will notify Netlify to deploy those changes.
 
 ## Site Structure
 
