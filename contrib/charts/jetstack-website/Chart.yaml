@@ -1,6 +1,0 @@
-apiVersion: v2
-name: jetstack-website
-version: 0.2.0
-description: Jetstack's website/chart
-type: application
-appVersion: 0.2.0
