@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 cert-manager makes use of [Bazel](https://bazel.build/) to build the project. 
-Bazel manages all developer dependancies, Helm chart building, Docker images and the code itself. 
+Bazel manages all developer dependencies, Helm chart building, Docker images and the code itself. 
 We try to use it as much as possible.
 
 > **TIP**: are you using GoLand? Make sure to exclude the `bazel-` folders! You can do this by right clicking on the folder -> Mark Directory As -> Excluded
@@ -16,9 +16,9 @@ We try to use it as much as possible.
 
 Bazel has 3 main commands which we use:
 
-`bazel build [...]` will build and compile code for you eg. `bazel build //cmd/ctl` will build our CLI. 
+`bazel build [...]` will build and compile code for you e.g. `bazel build //cmd/ctl` will build our CLI. 
 `bazel test [...]` will run any tests for a given package
-`bazel run [...]` is only used to run certain scripts not the compiled code (unlike Go). eg. `bazel run //hack/bin:helm` will download and run Helm.
+`bazel run [...]` is only used to run certain scripts not the compiled code (unlike Go). e.g. `bazel run //hack/bin:helm` will download and run Helm.
 
 ### Package format
 
@@ -54,11 +54,11 @@ This will update everything you need without having to care about what needs cha
 ### I need granular control 
 
 You can also pick and mix the individual bash helper scripts:
-* `update-bazel.sh`: updates the all `*.bazel` files includding formatting them
+* `update-bazel.sh`: updates the all `*.bazel` files including formatting them
 * `update-codegen.sh`: runs all code generation
 * `update-crds.sh`: updates all CRD files to the latest scheme
 * `update-deps-licenses.sh`: updates the `LICENCES` file, needed when adding/updating dependencies
-* `update-deps.sh`: installs new dependancies declared in the code and adds them into the Bazel and Go module files
+* `update-deps.sh`: installs new dependencies declared in the code and adds them into the Bazel and Go module files
 * `update-gofmt.sh`: runs `go fmt` on all code
 
 Most of these have a `verify-*` equivalent which will run inside our CI to verify all the scripts ran before merging the PR.
@@ -117,5 +117,5 @@ cert-manager has 3 kinds of tests, which can each be invoked separately to give 
 
 ## But... I like Makefiles more
 
-We got you covered! The root of the repo has a `Makefile` which you can use for quick actions. Which will use Bazel in the backgroud.
+We got you covered! The root of the repo has a `Makefile` which you can use for quick actions. Which will use Bazel in the background.
 We recommend [looking at the file](https://github.com/jetstack/cert-manager/blob/master/Makefile) to learn all possible options.

@@ -36,10 +36,10 @@ We have 2 regular repeating meetings
 https://meet.google.com/eum-fyvt-xpa) at 10:30 London time every weekday 
 * our bi-weekly developer meetings [are on Zoon]( https://zoom.us/j/904964148) 17:00 London time every 2 weeks (check calendar invites or [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U)). 
 
-You can check what time this is where you are using [everytimezone.com](https://everytimezone.com/).
+You can check what time this is where you are using [`everytimezone.com`](https://everytimezone.com/).
 
 ## Slack
-We have two cert-manager channels on [the Kubernetes Slack](https://slack.k8s.io) which we use to comminucate:
+We have two cert-manager channels on [the Kubernetes Slack](https://slack.k8s.io) which we use to communicate:
 
 * `cert-manager` a general users channel, use this one for any usage related questions.
 * `cert-manager-dev` this is what the developers use to collaborate, please only use this for code related questions

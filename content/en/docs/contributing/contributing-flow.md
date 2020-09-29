@@ -115,4 +115,4 @@ Sometimes `/triage` is also added which helps us when following up Issues.
 
 ### Triage Party!
 
-Every few weeks we will plan a Triage Party meeting, where we use the (Triage Party)[triage.build-infra.jetstack.net/] tool to go recent/old issues to prioritise them so we can address them in a timely matter. These meetings are open to everyone and invites will be sent out using our mailing list (warning: despite the word party these meetings are sometimes boring).
+Every few weeks we will plan a Triage Party meeting, where we use the (Triage Party)[https://triage.build-infra.jetstack.net/] tool to go recent/old issues to prioritise them so we can address them in a timely matter. These meetings are open to everyone and invites will be sent out using our mailing list (warning: despite the word party these meetings are sometimes boring).

@@ -50,7 +50,7 @@ Once you have one set up you need to install all dependencies (including cert-ma
 $ ./devel/setup-e2e-deps.sh
 ```
 
-**TIP**: if you only need to update one dependancy you can run `./devel/addon/<name>/install.sh` 
+**TIP**: if you only need to update one dependency you can run `./devel/addon/<name>/install.sh` 
 
 ## Run End-to-End Tests
 
