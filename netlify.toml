@@ -10,3 +10,86 @@
 
 [context.deploy-preview.environment]
   HUGO_VERSION = "0.74.3"
+
+
+# Netlify Domain Alias Redirects
+
+[[redirects]]
+  from = "www.istio.co.uk"
+  to = "/"
+  status = 302
+      
+[[redirects]]
+  from = "istio.co.uk"
+  to = "/"
+  status = 302
+
+[[redirects]]
+  from = "www.jetstack.co"
+  to = "/"
+  status = 302
+      
+[[redirects]]
+  from = "jetstack.co"
+  to = "/"
+  status = 302
+
+[[redirects]]
+  from = "www.jetstack.co.uk"
+  to = "/"
+  status = 302
+      
+[[redirects]]
+  from = "jetstack.co.uk"
+  to = "/"
+  status = 302
+
+[[redirects]]
+  from = "www.jetstack.net"
+  to = "/"
+  status = 302
+      
+[[redirects]]
+  from = "jetstack.net"
+  to = "/"
+  status = 302
+
+[[redirects]]
+  from = "www.k8s.careers"
+  to = "/careers/"
+  status = 302
+      
+[[redirects]]
+  from = "k8s.careers"
+  to = "/careers/"
+  status = 302
+
+[[redirects]]
+  from = "www.kubernetes.careers"
+  to = "/careers/"
+  status = 302
+      
+[[redirects]]
+  from = "kubernetes.careers"
+  to = "/careers/"
+  status = 302
+
+[[redirects]]
+  from = "www.jetstack.dev"
+  to = "/open-source/"
+  status = 302
+      
+[[redirects]]
+  from = "jetstack.dev"
+  to = "/open-source/"
+  status = 302
+
+[[redirects]]
+  from = "www.k8s.school"
+  to = "/training/"
+  status = 302
+      
+[[redirects]]
+  from = "k8s.school"
+  to = "/training/"
+  status = 302
