@@ -16,42 +16,42 @@
 
 [[redirects]]
   from = "https://www.istio.co.uk"
-  to = "/"
+  to = "https://www.jetstack.io"
   status = 301
       
 [[redirects]]
   from = "https://istio.co.uk"
-  to = "/"
+  to = "https://www.jetstack.io"
   status = 301
 
 [[redirects]]
   from = "https://www.jetstack.co"
-  to = "/"
+  to = "https://www.jetstack.io"
   status = 301
       
 [[redirects]]
   from = "https://jetstack.co"
-  to = "/"
+  to = "https://www.jetstack.io"
   status = 301
 
 [[redirects]]
   from = "https://www.jetstack.co.uk"
-  to = "/"
+  to = "https://www.jetstack.io"
   status = 301
       
 [[redirects]]
   from = "https://jetstack.co.uk"
-  to = "/"
+  to = "https://www.jetstack.io"
   status = 301
 
 [[redirects]]
   from = "https://www.jetstack.net"
-  to = "/"
+  to = "https://www.jetstack.io"
   status = 301
       
 [[redirects]]
   from = "https://jetstack.net"
-  to = "/"
+  to = "https://www.jetstack.io"
   status = 301
 
 [[redirects]]
@@ -61,35 +61,35 @@
       
 [[redirects]]
   from = "https://k8s.careers"
-  to = "/careers/"
+  to = "https://www.jetstack.io/careers/"
   status = 301
 
 [[redirects]]
   from = "https://www.kubernetes.careers"
-  to = "/careers/"
+  to = "https://www.jetstack.io/careers/"
   status = 301
       
 [[redirects]]
   from = "https://kubernetes.careers"
-  to = "/careers/"
+  to = "https://www.jetstack.io/careers/"
   status = 301
 
 [[redirects]]
   from = "https://www.jetstack.dev"
-  to = "/open-source/"
+  to = "https://www.jetstack.io/open-source/"
   status = 301
       
 [[redirects]]
   from = "https://jetstack.dev"
-  to = "/open-source/"
+  to = "https://www.jetstack.io/open-source/"
   status = 301
 
 [[redirects]]
   from = "https://www.k8s.school"
-  to = "/training/"
+  to = "https://www.jetstack.io/training/"
   status = 301
       
 [[redirects]]
   from = "https://k8s.school"
-  to = "/training/"
+  to = "https://www.jetstack.io/training/"
   status = 301
