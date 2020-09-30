@@ -1,4 +1,5 @@
 # jetstack-website
+[![Netlify Status](https://api.netlify.com/api/v1/badges/460632c3-eea0-42c2-962c-205d6de03a8e/deploy-status)](https://app.netlify.com/sites/jetstack-website/deploys)
 
 Hugo build for https://www.jetstack.io
 
