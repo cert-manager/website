@@ -1,6 +1,8 @@
 <div class="bio">
   <a href="{{.RelPermalink}}">
-    <figure class="bio__img" style="background-image: url({{ .Params.image }})" aria-hidden="true"></figure>
+    <figure class="bio__img" aria-hidden="true">
+      <img src="{{ .Params.image }}" style="width: 100%;height: 100%;object-fit: cover;"></img>
+    </figure>
   </a>
   <div class="bio__content">
     <h2 class="bio__name">{{ .Title }}</h2>
