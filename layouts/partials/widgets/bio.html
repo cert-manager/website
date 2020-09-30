@@ -9,7 +9,7 @@
       {{ if .Params.hails_from }}
         {{ range $.Params.hails_from }}
           {{ range where $.Site.Data.emojis "shortname" "=" . }}
-            {{ safeHTML .html }}
+            <span title="{{ .name }}">{{ safeHTML .html }}</span>
           {{ end }}
         {{ end }}
       {{ end }}
