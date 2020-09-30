@@ -11,6 +11,9 @@
 [context.deploy-preview.environment]
   HUGO_VERSION = "0.74.3"
 
+[context.optimize-images.processing.images]
+  compress = true
+
 # Netlify Domain Alias Redirects
 
 [[redirects]]
