@@ -5,12 +5,11 @@
 [context.production.environment]
   HUGO_VERSION = "0.74.3"
 
-[context.branch-deploy.environment]
-  HUGO_VERSION = "0.74.3"
+[context.deploy-preview]
+  command = "hugo && cp _deploypreview_headers public/_headers"
 
 [context.deploy-preview.environment]
   HUGO_VERSION = "0.74.3"
-
 
 # Netlify Domain Alias Redirects
 
