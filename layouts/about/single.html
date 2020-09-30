@@ -21,6 +21,16 @@
                 <figure class="bio__img" style="background-image: url({{ .Params.image }})" aria-hidden="true"></figure>
             {{ end }}
 
+            <div class="text-center">
+              {{ if .Params.hails_from }}
+                {{ range $.Params.hails_from }}
+                  {{ range where $.Site.Data.emojis "shortname" "=" . }}
+                    {{ safeHTML .html }}
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+            </div>
+
             <div class="content justify">
               {{ .Content }}
             </div>

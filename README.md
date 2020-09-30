@@ -24,7 +24,7 @@ The main 2 ways to control the content are:
 
  * edit the config file: `data/config.yaml`
  * add/edit a Markdown file to a section inside `content`
- 
+
 #### Config driven sections
 
 The `Kubernetes` and `Homepage` are special in that they use various partials from `layouts/partials/panels` and data from `data/config.toml`.
@@ -92,7 +92,7 @@ There are some examples where an extra newline is required for a line-break to a
 ```yaml
 kubernetes:
   headline: >
-    Kubernetes - The De Facto Standard      
+    Kubernetes - The De Facto Standard
 
     in Container Orchestration
   strapline: A culmination of Ten Years of Running Linux Containers At Google

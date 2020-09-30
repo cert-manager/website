@@ -5,6 +5,8 @@ position: Solutions Engineer
 email: jonathan.grahl@jetstack.io
 twitter: jonathangrahl
 github: bittermandel
+hails_from:
+- ":flag-se:"
 ---
 
 Jonathan is a Swedish engineer with a particular love for bootstrapped
