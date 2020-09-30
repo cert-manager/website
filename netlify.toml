@@ -11,7 +11,21 @@
 [context.deploy-preview.environment]
   HUGO_VERSION = "0.74.3"
 
-[context.optimize-images.processing.images]
+[build.processing]
+  skip_processing = false
+  
+[build.processing.css]
+  bundle = true
+  minify = false
+  
+[build.processing.js]
+  bundle = true
+  minify = false
+  
+[build.processing.html]
+  pretty_urls = false
+  
+[build.processing.images]
   compress = true
 
 # Netlify Domain Alias Redirects
