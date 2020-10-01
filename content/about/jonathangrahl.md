@@ -6,7 +6,7 @@ email: jonathan.grahl@jetstack.io
 twitter: jonathangrahl
 github: bittermandel
 hails_from:
-- ":flag-se:"
+- se
 ---
 
 Jonathan is a Swedish engineer with a particular love for bootstrapped

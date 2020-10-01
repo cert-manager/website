@@ -1959,6 +1959,11 @@ Introduced on new Subscription Page
   display: block;
 }
 
+.bio__from img {
+  width: 2rem;
+  border: 1px solid LightGrey;
+}
+
 .bio__social-icon svg path,
 .bio__social-icon svg rect {
   fill: #3f56ea;
