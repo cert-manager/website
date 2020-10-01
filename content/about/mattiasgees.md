@@ -2,7 +2,7 @@
 title: Mattias Gees
 weight: 13
 image: /img/jpg/about-mattias.jpg
-position: Field Engineering Manager
+position: Solutions Architect
 email: mattias.gees@jetstack.io
 twitter: 'MattiasGees'
 github: 'MattiasGees'
