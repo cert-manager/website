@@ -5,6 +5,8 @@ position: Software Engineer
 email: jake.sanders@jetstack.io
 twitter: 'jakexks'
 github: 'jakexks'
+hails_from:
+- ':flag-gb:'
 ---
 
 Jake has been working with containers for a while, and Kubernetes since before it was released.
