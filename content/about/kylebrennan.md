@@ -4,7 +4,7 @@ image: /img/jpg/about-kyle.jpg
 position: Finance Director
 email: kyle.brennan@jetstack.io
 hails_from:
-- ":flag-us:"
+- us
 ---
 
 Kyle has supported the growth of a number of startups in the role of CFO, FD,
