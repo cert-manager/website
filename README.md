@@ -11,7 +11,7 @@ We provide a number of scripts that can be used to build and develop the site.
 
 The 'master' branch should be targeted for the majority of PRs.
 
-This repo has 'release branches' (i.e. `release-0.12`, `release-0.13`, ...).
+This report has 'release branches' (i.e. `release-0.12`, `release-0.13`, ...).
 These are kept in-line with the release branches in the
 [`jetstack/cert-manager`](https://github.com/jetstack/cert-manager) repository.
 
