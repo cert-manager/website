@@ -1962,6 +1962,7 @@ Introduced on new Subscription Page
 .bio__from img {
   width: 2rem;
   border: 1px solid LightGrey;
+  background-color: LightGrey;
 }
 
 .bio__social-icon svg path,
