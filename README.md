@@ -1,4 +1,4 @@
-# Cert-manager website
+# Cert-Manager Website
 
 This repository contains the source code for the [cert-manager.io](https://cert-manager.io)
 website, as well as the project documentation.
