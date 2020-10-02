@@ -134,6 +134,13 @@ If this does work check if your cluster can see it too. It is important to test 
 If you receive a `tls: handshake failure`, try setting the annotation `cert-manager.io/issue-temporary-certificate: "true"` on the Ingress or Certificate resource. This will issue a temporary self signed certificate for the ingress controller to use before the actual certificate is issued.
 If you still are having issues, there may be an issue with your ingress controller handling multiple resources for the same hostname, in this case, the annotation `acme.cert-manager.io/http01-edit-in-place: "true"` is likely required.
 
+For example when using GKE with the Google Cloud Loadbalancer it is recommended to set:
+```
+cert-manager.io/issue-temporary-certificate: "true"
+acme.cert-manager.io/http01-edit-in-place: "true"
+```
+This will allow the Google Cloud Loadbalancer to propagate a HTTPS endpoint correctly with a temporary certificate, the `http01-edit-in-place` part will prevent GKE from assigning a 2nd IP address for the challenge endpoint.
+
 #### Got 404 status code
 If your challenge self-check fails with a 404 not found error. Make sure to check the following:
 
