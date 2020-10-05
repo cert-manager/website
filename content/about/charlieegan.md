@@ -6,9 +6,10 @@ email: charlie.egan@jetstack.io
 twitter: 'charlieegan3'
 github: 'charlieegan3'
 hails_from:
-- "gb-sct"
-- "ie"
-- "gb-eng"
+- name: "gb-sct"
+- name: "ie"
+- name: "gb-eng"
+  class: "outline"
 ---
 
 Charlie comes from an application development background, but he’s been tinkering with containers on the side for a few years. He’s interested in how container tech can improve the developer experience and reduce anxiety around deploying software, and is looking forward to working with the team at Jetstack.

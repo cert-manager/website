@@ -6,7 +6,7 @@ email: maartje.eyskens@jetstack.io
 twitter: 'MaartjeME'
 github: 'meyskens'
 hails_from:
-- be
+- name: be
 ---
 
 Maartje has got many years of experience of running containers and Kubernetes in production.

@@ -4,7 +4,7 @@ image: /img/jpg/about-akvile.jpg
 position: Project Manager
 email: akvile.marciukaityte@jetstack.io
 hails_from:
-- lt
+- name: lt
 ---
 
 Akvile is a project manager with experience in software delivery and strategic
