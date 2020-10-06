@@ -26,7 +26,7 @@
             <div class="text-center">
               {{ if .Params.hails_from }}
                 {{ range $.Params.hails_from }}
-                  <img src="/img/svg/flags/{{ . }}.svg"/>
+                  <img class="flag {{ index . "class" }}" src="/img/svg/flags/{{ index . "name" }}.svg"/>
                 {{ end }}
               {{ end }}
             </div>

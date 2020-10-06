@@ -10,7 +10,7 @@
     <p class="bio__from">
       {{ if .Params.hails_from }}
         {{ range $.Params.hails_from }}
-          <img src="/img/svg/flags/{{ . }}.svg"/>
+          <img class="{{ index . "class" }}" src="/img/svg/flags/{{ index . "name" }}.svg"/>
         {{ end }}
       {{ end }}
     </p>
