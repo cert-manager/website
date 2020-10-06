@@ -1,6 +1,6 @@
 ---
 title: Steve Judd
-image: /img/jpg/about-stevej.jpg
+image: /img/jpg/about-stevej.png
 position: Solutions Architect
 email: steve.judd@jetstack.io
 twitter: 'cyberbliss'
