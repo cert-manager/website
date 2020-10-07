@@ -28,7 +28,7 @@ There are several resources that are involved in requesting a certificate.
 The cert-manager flow all starts at a `Certificate` resource, you can create this yourself or your Ingress resource will to this for you if you have the [correct annotations](../../usage/ingress/) set. 
 
 ### 1. Checking the Certificate resource
-Fist we have to check if we have a `Certificate` resource created in our namespace. We can get these using `kubectl get certificate`.
+First we have to check if we have a `Certificate` resource created in our namespace. We can get these using `kubectl get certificate`.
 ```console
 $ kubectl get certificate
 NAME                READY   AGE
@@ -98,7 +98,7 @@ $ kubectl describe issuer <Issuer name>
 $ kubectl describe clusterissuer <ClusterIssuer name>
 ```
 
-These will allow you to to get any error messages regarding accounts or network issues with your issuer.
+These will allow you to get any error messages regarding accounts or network issues with your issuer.
 
 ### 4. ACME Troubleshooting
 ACME (e.g. Let's Encrypt) issuers have 2 additional resources inside cert-manager: `Orders` and `Challenges`.
