@@ -39,24 +39,24 @@ spec:
 
 The HTTP01 Issuer supports a number of additional options.  For full details on
 the range of options available, read the [reference
-documentation](../../../reference/api-docs/#acme.cert-manager.io/v1alpha2.ACMEChallengeSolverHTTP01).
+documentation](../../../reference/api-docs/#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01).
 
-### `ingressClass`
+### `class`
 
-If the `ingressClass` field is specified, cert-manager will create new `Ingress`
+If the `class` field is specified, cert-manager will create new `Ingress`
 resources in order to route traffic to the `acmesolver` pods, which are
 responsible for responding to ACME challenge validation requests.
 
-If this field is not specified, and `ingressName` is also not specified,
+If this field is not specified, and `name` is also not specified,
 cert-manager will default to create *new* `Ingress` resources but will **not**
 set the ingress class on these resources, meaning *all* ingress controllers
 installed in your cluster will serve traffic for the challenge solver,
 potentially incurring additional cost.
 
 
-### `ingressName`
+### `name`
 
-If the `ingressName` field is specified, cert-manager will edit the named
+If the `name` field is specified, cert-manager will edit the named
 ingress resource in order to solve HTTP01 challenges.
 
 This is useful for compatibility with ingress controllers such as `ingress-gce`,
@@ -66,7 +66,7 @@ This mode should be avoided when using ingress controllers that expose a single
 IP for all ingress resources, as it can create compatibility problems with
 certain ingress-controller specific annotations.
 
-### `servicePort`
+### `serviceType`
 
 In rare cases it might be not possible/desired to use `NodePort` as type for the
 HTTP01 challenge response service, e.g. because of Kubernetes limit
@@ -75,8 +75,9 @@ response specify the following HTTP01 configuration:
 
 ```yaml
     http01:
-      # Valid values are ClusterIP and NodePort
-      serviceType: ClusterIP
+      ingress:
+        # Valid values are ClusterIP and NodePort
+        serviceType: ClusterIP
 ```
 
 By default, type `NodePort` will be used when you don't set HTTP01 or when you set
