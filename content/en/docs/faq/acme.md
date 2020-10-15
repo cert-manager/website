@@ -13,7 +13,49 @@ pages](../../concepts/acme-orders-challenges/).
 
 Before you start here you should probably take a look at our [general troubleshooting guide](../troubleshooting/)
 
-## 1. Troubleshooting Orders
+## 1. Troubleshooting (Cluster)Issuers
+
+First of all check if the (Cluster)Issuer you're using is in a ready state:
+```bash
+$ kubectl get issuer
+$ kubectl get clusterissuer
+NAME               READY   AGE
+letsencrypt        True    38m
+letsencrypt-http   False    32m
+```
+
+If you see `False` check the status using `kubectl describe`. For example:
+```bash
+$ kubectl describe issuer letsencrypt-http
+$ kubectl describe clusterissuer letsencrypt-http
+Name:         letsencrypt
+API Version:  cert-manager.io/v1
+Kind:         Issuer
+Spec:
+  Acme:
+    Email:            cert-manager@example.com
+    Private Key Secret Ref:
+      Name:  letsencrypt
+    Server:  https://acme-staging-v02.api.letsencrypt.org/directory
+Status:
+  Acme:
+  Conditions:
+    Message:               Failed to update ACME account:400 urn:ietf:params:acme:error:invalidEmail: Unable to update account :: invalid contact domain. Contact emails @example.com are forbidden
+    Reason:                ErrUpdateACMEAccount
+    Status:                False
+    Type:                  Ready
+Events:
+  Type     Reason                Age                  From          Message
+  ----     ------                ----                 ----          -------
+  Warning  ErrUpdateACMEAccount  101s (x3 over 106s)  cert-manager  Failed to update ACME account:400 urn:ietf:params:acme:error:invalidEmail: Unable to update account :: invalid contact domain. Contact emails @example.com are forbidden
+```
+
+### Common errors
+
+* `Failed to update ACME account:400 urn:ietf:params:acme:error:invalidEmail`: the email you specified in the Issuer configuration isn't valid.
+* `Error initializing issuer: Failed to register ACME account: secrets "acme-key" already exists`: there might be a leftover account from a previous issuer that is no longer valid, you should remove the secret so it can be recreated.
+
+## 2. Troubleshooting Orders
 
 When we run a describe on the `CertificateRequest` resource we see that an `Order` that has
 been created:
@@ -70,7 +112,7 @@ Events:
 If the Order is not completing successfully, you can debug the challenges
 for the Order by running `kubectl describe` on the `Challenge` resource which is described in the following steps.
 
-## 2. Troubleshooting Challenges
+## 3. Troubleshooting Challenges
 
 In order to determine why an ACME Order is not being finished, we can debug
 using the `Challenge` resources that cert-manager has created.
