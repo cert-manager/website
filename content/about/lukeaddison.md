@@ -7,7 +7,7 @@ email: luke.addison@jetstack.io
 twitter: 'dippynark'
 github: 'dippynark'
 hails_from:
-- ":flag-eu:"
+- name: eu
 - name: gb
 ---
 
