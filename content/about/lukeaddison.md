@@ -8,7 +8,7 @@ twitter: 'dippynark'
 github: 'dippynark'
 hails_from:
 - ":flag-eu:"
-- ":flag-gb:"
+- name: gb
 ---
 
 Luke has a background in pure maths and is particularly interested in the applications to computer science. He has spent two years at BAE Systems AI developing and supporting a range of mission-critical services for clients across the UK. When he is not working with Kubernetes he enjoys running or playing the piano.
