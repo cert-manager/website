@@ -23,15 +23,15 @@ This is a feature in cert-manager starting in `v0.16` using the kubectl plugin. 
 ### How can I see all the historic events related to a certificate object ?
 
 cert-manager publishes all evens to the Kubernetes events mechanism, you can get the evens for your specific resources using `kubectl describe <resource> <name>`.
-Due to the nature of the Kubernetes event mechanim these will be purged after a while. If you're using a dedicated logging system it might be able or is already also storing Kubernetes events.
+Due to the nature of the Kubernetes event machanism these will be purged after a while. If you're using a dedicated logging system it might be able or is already also storing Kubernetes events.
 
 ### What happens if a renewal is doesn't happen due to issues? Will it be tried again after sometime?
 
-cert-manager makes use of exponential backoff to retry any failures on requesting or renewing certificates. It will retry any failures unless the Issuer gave a fatal error that it marked as not retryable.
+cert-manager makes use of exponential back off to retry any failures on requesting or renewing certificates. It will retry any failures unless the Issuer gave a fatal error that it marked as not retryable.
 
 ### Is ECC (elliptic-curve cryptography) supported?
 
-cert-manager supports ECDSA keypairs! You can set your certificate to use ECDSA  in the `privateKey` part of your Certificate resource.
+cert-manager supports ECDSA key pairs! You can set your certificate to use ECDSA  in the `privateKey` part of your Certificate resource.
 For example:
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -52,7 +52,7 @@ spec:
 
 ### If `renewBefore` or `duration` is not defined, what will be the default value?
 cert-manager will default to a `duration` of 30 days with a `renewBefore` of 30 days. 
-When setting `duration` it is reccomended to also set `renewBefore`, if `renewBefore` is longer than `duration` you will receive an error.
+When setting `duration` it is recommended to also set `renewBefore`, if `renewBefore` is longer than `duration` you will receive an error.
 
 ## Miscellaneous
 
