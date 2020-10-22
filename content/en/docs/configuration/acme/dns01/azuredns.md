@@ -6,14 +6,14 @@ type: "docs"
 ---
 
 To configure the AzureDNS DNS01 Challenege in a Kubernetes cluster there are 2 ways available:
-- Managed Identity ([Using AAD Pod Identities]((https://azure.github.io/aad-pod-identity)))
+- Managed Identity [Using AAD Pod Identities](https://azure.github.io/aad-pod-identity)
 - Service Principal
 
 ## Managed Identity
 
-- Firstly we need to create the identity and grant this access to contribute to the DNS Zone.
+Firstly we need to create the identity and grant this access to contribute to the DNS Zone.
 
-Example creation using `azure-cli` and `jq`:
+- Example creation using `azure-cli` and `jq`:
 ```bash
 # Choose a unique Identity name and existing resource group to create identity in.
 IDENTITY=$(az identity create --name $IDENTITY_NAME --resource-group $IDENTITY_GROUP )
@@ -32,7 +32,7 @@ ZONE_ID=$(az network dns zone show --name $ZONE_NAME --resource-group $ZONE_GROU
 az role assignment create --role "DNS Zone Contributor" --assignee $PRINCIPAL_ID --scope $ZONE_ID
 ```
 
-Example creation using Terraform
+- Example creation using Terraform
 ```terraform
 variable resource_group_name {}
 variable location {}
@@ -63,9 +63,9 @@ output "identity_resource_id" {
 }
 ```
 
-- Next we need to ensure we have installed [AAD Pod Identity](https://azure.github.io/aad-pod-identity) using their walkthrough. This will install the CRDs and pods required to assign the identity.
+Next we need to ensure we have installed [AAD Pod Identity](https://azure.github.io/aad-pod-identity) using their walkthrough. This will install the CRDs and pods required to assign the identity.
 
-- Now we can create the identity resource and binding using the below yaml
+Now we can create the identity resource and binding using the below yaml
 
 ```yaml
 apiVersion: "aadpodidentity.k8s.io/v1"
@@ -85,12 +85,13 @@ apiVersion: "aadpodidentity.k8s.io/v1"
 kind: AzureIdentityBinding
 metadata:
   name: certman-id-binding
+  namespace: cert-manager # change to your preferred namespace
 spec:
   azureIdentity: certman-identity
   selector: certman-label # This is the label that needs to be set on cert-manager pods
 ```
 
-- Next we need to ensure the Cert-Manager pod has a relevant label to use the pod identity binding. This can be done by editing the deployment and adding the below into the `.spec.template.metadata.labels` field
+Next we need to ensure the Cert-Manager pod has a relevant label to use the pod identity binding. This can be done by editing the deployment and adding the below into the `.spec.template.metadata.labels` field
 
 ```yaml
 spec:
@@ -107,7 +108,7 @@ podLabels:
   aadpodidbinding: certman-label
 ```
 
-- Lastly when we create the certificate issuer we only need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields. Example below:
+Lastly when we create the certificate issuer we only need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields. Example below:
 
 ```yaml
 apiVersion: cert-manager.io/v1
