@@ -5,7 +5,7 @@ weight: 30
 type: "docs"
 ---
 
-To configure the AzureDNS DNS01 Challenege in a Kubernetes cluster there are 2 ways available:
+To configure the AzureDNS DNS01 Challenge in a Kubernetes cluster there are 2 ways available:
 - Managed Identity [Using AAD Pod Identities](https://azure.github.io/aad-pod-identity)
 - Service Principal
 
@@ -63,9 +63,9 @@ output "identity_resource_id" {
 }
 ```
 
-Next we need to ensure we have installed [AAD Pod Identity](https://azure.github.io/aad-pod-identity) using their walkthrough. This will install the CRDs and pods required to assign the identity.
+Next we need to ensure we have installed [AAD Pod Identity](https://azure.github.io/aad-pod-identity) using their walk-through. This will install the CRDs and pods required to assign the identity.
 
-Now we can create the identity resource and binding using the below yaml
+Now we can create the identity resource and binding using the below manifest:
 
 ```yaml
 apiVersion: "aadpodidentity.k8s.io/v1"
