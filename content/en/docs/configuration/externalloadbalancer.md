@@ -11,7 +11,7 @@ This documentation is meant to help in configure HTTP-01 type of challenges for 
 
 ## NAT Loopback / Hairpin
 
-The first configuration point is NAT loopback. You can face `pre check` issues due to Load Balancer preventing instances behind him to access his external interface.
+The first configuration point is NAT loopback. You can face pre-check issues due to Load Balancer preventing instances behind it to access its external interface.
 
 Some Network Load Balancer have this kind of limitation for several reasons. It can be configured through iptables rerouting configuration known as `NAT loopback`.
 
