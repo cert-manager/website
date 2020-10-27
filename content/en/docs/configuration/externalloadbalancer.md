@@ -27,7 +27,7 @@ The HTTP-01 challenge endpoint can be found in the logs when the `pre-check` fai
 
 ## Load Balancer HTTP endpoints
 
-If you are using a Load Balancer, you should be able to configure the Load Balancer protocol as HTTP, HTTPS, TCP, UDP. Several Load Balancer now offer free SSL certificates with Let's Encrypt.
+If you are using a Load Balancer, you should be able to configure the Load Balancer protocol as HTTP, HTTPS, TCP, UDP. Several Load Balancer now offer free TLS certificates with Let's Encrypt.
 
 When using HTTP(s) protocols for your Load Balancer, it can intercept the challenge URL to replace the response's verification hash with their hash.
 
