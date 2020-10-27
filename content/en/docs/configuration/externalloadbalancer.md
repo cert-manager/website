@@ -31,7 +31,7 @@ If you are using a Load Balancer, you should be able to configure the Load Balan
 
 When using HTTP(s) protocols for your Load Balancer, it can intercept the challenge URL to replace the response's verification hash with their hash.
 
-In this case, Cert-Manager will fail `did not get expected response when querying endpoint, expected 'xxxx' but got: yyyy (truncated)`.
+In this case, cert-manager will fail `did not get expected response when querying endpoint, expected 'xxxx' but got: yyyy (truncated)`.
 
 This kind of error can be thrown for multiple reasons. This case shows a correctly formated response, but not the expected one. In the case of OVH host, the HTTP requests replaced the reponse with OVH's Let's Encrpyt code and provoked this error.
 
