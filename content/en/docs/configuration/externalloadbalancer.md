@@ -18,7 +18,7 @@ Some Network Load Balancer have this kind of limitation for several reasons. It 
 To check if you are facing this problem :
 
 1. Check that the challenge endpoint is publically accessible : `curl <endpoint>`
-2. Check that the challenge endpoint is NOT accessible from inside behind the Load Balancer : Use SSH to open a session on a node places behind the LB ; then launch the same command than before : `curl <endpoint`
+2. Check that the challenge endpoint is NOT accessible from inside behind the Load Balancer: use SSH to open a session on a node places behind the LB; then launch the same command than before : `curl <endpoint>`
 
 The HTTP-01 challenge endpoint can be found in the logs when the `pre-check` fails. If it does not appear in the logs, you can check the challenge URL by `kubectl`command.
 
