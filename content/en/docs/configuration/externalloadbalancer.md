@@ -5,7 +5,7 @@ weight: 40
 type: "docs"
 ---
 
-When you are using an external load balancer provided by any host, you can face several configuration issues to get it work with Cert Manager.
+When you are using an external load balancer provided by any host, you can face several configuration issues to get it work with cert-manager.
 
 This documentation is meant to help in configure HTTP-01 type of challenges for instances behind external load balancer.
 
