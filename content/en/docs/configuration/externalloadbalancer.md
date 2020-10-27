@@ -22,7 +22,7 @@ To check if you are facing this problem :
 
 The HTTP-01 challenge endpoint can be found in the logs when the `pre-check` fails. If it does not appear in the logs, you can check the challenge URL by `kubectl`command.
 
-`<endpoint>` is the URL used to test the HTTP-01 from the certificate `Issuer`. For Let's Encrypt for example, the URL is formed like <domain>/.wellknown/<hash>
+`<endpoint>` is the URL used to test the HTTP-01 from the certificate `Issuer`. For Let's Encrypt for example, the URL is formed like `<domain>/.well-known/acme-challenge/<hash>`
 
 
 ## Load Balancer HTTP endpoints
