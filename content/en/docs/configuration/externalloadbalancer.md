@@ -27,12 +27,10 @@ The HTTP-01 challenge endpoint can be found in the logs when the `pre-check` fai
 
 ## Load Balancer HTTP endpoints
 
-If you are using a Load Balancer, you should be able to configure the Load Balancer protocol as HTTP, HTTPS, TCP, UDP. Several Load Balancer now offer free TLS certificates with Let's Encrypt.
+If you are using a Load Balancer (outside a managed Kubernetes service), you should be able to configure the Load Balancer protocol as HTTP, HTTPS, TCP, UDP. Several Load Balancer now offer free TLS certificates with Let's Encrypt.
 
 When using HTTP(s) protocols for your Load Balancer, it can intercept the challenge URL to replace the response's verification hash with their hash.
 
 In this case, cert-manager will fail `did not get expected response when querying endpoint, expected 'xxxx' but got: yyyy (truncated)`.
 
-This kind of error can be thrown for multiple reasons. This case shows a correctly formated response, but not the expected one. In the case of OVH, the HTTP requests replaced the reponse with OVH's Let's Encrpyt code and provoked this error.
-
-The solution is to configure the Load Balancer with TCP protocol so that the HTTP request will not be intercepted by the host.
+This kind of error can be thrown for multiple reasons. This case shows a correctly formated response, but not the expected one. The solution is to configure the Load Balancer with TCP protocol so that the HTTP request will not be intercepted by the host.
