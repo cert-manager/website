@@ -72,7 +72,7 @@ trigger `Certificate` resources to be automatically created:
   ingress. Customizing this is useful when you are trying to secure internal
   services, and need to solve challenges using a different ingress class to that
   of the ingress. If not specified and the `acme-http01-edit-in-place` annotation
-  is not set, this defaults to the ingress class of the ingress resource.
+  is not set, this defaults to the ingress class defined in the Issuer resource.
 
 - `acme.cert-manager.io/http01-edit-in-place: "true"`: this controls whether the
   ingress is modified 'in-place', or a new one is created specifically for the
