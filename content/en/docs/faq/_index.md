@@ -22,7 +22,7 @@ This is a feature in cert-manager starting in `v0.16` using the kubectl plugin. 
 
 ### How can I see all the historic events related to a certificate object ?
 
-cert-manager publishes all evens to the Kubernetes events mechanism, you can get the evens for your specific resources using `kubectl describe <resource> <name>`.
+cert-manager publishes all events to the Kubernetes events mechanism, you can get the events for your specific resources using `kubectl describe <resource> <name>`.
 Due to the nature of the Kubernetes event mechanism these will be purged after a while. If you're using a dedicated logging system it might be able or is already also storing Kubernetes events.
 
 ### What happens if a renewal is doesn't happen due to issues? Will it be tried again after sometime?
