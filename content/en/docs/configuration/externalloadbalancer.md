@@ -7,20 +7,20 @@ type: "docs"
 
 When you are using an external load balancer provided by any host, you can face several configuration issues to get it work with cert-manager.
 
-This documentation is meant to help in configure HTTP-01 type of challenges for instances behind external load balancer.
+This documentation is intended to help configure the HTTP-01 challenge type for instances behind external load balancer.
 
 ## NAT Loopback / Hairpin
 
-The first configuration point is NAT loopback. You can face pre-check issues due to Load Balancer preventing instances behind it to access its external interface.
+The first configuration point is NAT loopback. You can face check issues due to Load Balancer preventing instances behind it to access its external interface.
 
-Some Network Load Balancer have this kind of limitation for several reasons. It can be configured through iptables rerouting configuration known as `NAT loopback`.
+Some Network Load Balancer have this kind of limitation for several reasons. It can be configured through `iptables` rerouting configuration known as `NAT loopback`.
 
 To check if you are facing this problem :
 
-1. Check that the challenge endpoint is publically accessible : `curl <endpoint>`
+1. Check that the endpoint of the challenge is accessible to the public : `curl <endpoint>`
 2. Check that the challenge endpoint is NOT accessible from inside behind the Load Balancer: use SSH to open a session on a node places behind the LB; then launch the same command than before : `curl <endpoint>`
 
-The HTTP-01 challenge endpoint can be found in the logs when the `pre-check` fails. If it does not appear in the logs, you can check the challenge URL by `kubectl`command.
+The `HTTP-01` challenge's endpoint can be found in the logs when the `pre-check` fails. If it does not appear in the logs, you can check the challenge URL by `kubectl`command.
 
 `<endpoint>` is the URL used to test the HTTP-01 from the certificate `Issuer`. For Let's Encrypt for example, the URL is formed like `<domain>/.well-known/acme-challenge/<hash>`
 
@@ -33,4 +33,4 @@ When using HTTP(s) protocols for your Load Balancer, it can intercept the challe
 
 In this case, cert-manager will fail `did not get expected response when querying endpoint, expected 'xxxx' but got: yyyy (truncated)`.
 
-This kind of error can be thrown for multiple reasons. This case shows a correctly formated response, but not the expected one. The solution is to configure the Load Balancer with TCP protocol so that the HTTP request will not be intercepted by the host.
+This kind of error can be thrown for multiple reasons. This case shows a correctly formatted response, but not the expected one. The solution is to configure the Load Balancer with TCP protocol so that the HTTP request will not be intercepted by the host.
