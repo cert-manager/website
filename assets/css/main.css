@@ -1981,6 +1981,15 @@ Introduced on new Subscription Page
   max-width: 60%;
 }
 
+.map-frame {
+  box-shadow: 0 0 4px 4px #fffdfd inset;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .locations-map img {
   max-width: 100%;
   display: block;
