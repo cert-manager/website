@@ -1976,9 +1976,9 @@ Introduced on new Subscription Page
 /* Map with locations */
 
 .locations-map {
-  margin: 1em auto;
+  margin: 3em auto;
   position: relative;
-  max-width: 100%;
+  max-width: 60%;
 }
 
 .locations-map img {
@@ -1991,7 +1991,7 @@ Introduced on new Subscription Page
   display: block;
   width: 5%;
   height: 5%;
-  background: url('/img/png/pin.png') no-repeat center center;
+  background: url("/img/svg/pin.svg") no-repeat center center;
   background-size: contain;
   transition: all .3s ease;
 }
@@ -2000,7 +2000,17 @@ Introduced on new Subscription Page
   transform: translateY(-15%) scale(1.05);
 }
 
-.code-uk {
+.code-london {
+  bottom: 44%;
+  left: 24%;
+}
+
+.code-bristol {
+  bottom: 45%;
+  left: 21%;
+}
+
+.code-uk-north {
   bottom: 50%;
   left: 22%;
 }
