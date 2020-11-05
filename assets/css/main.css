@@ -1981,18 +1981,12 @@ Introduced on new Subscription Page
   max-width: 60%;
 }
 
-.map-frame {
-  box-shadow: 0 0 4px 4px #fffdfd inset;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
 .locations-map img {
   max-width: 100%;
   display: block;
+  border-radius: 50%;
+  border: 1px solid #4f4f4f;
+  background-color: #17344b;
 }
 
 .pin {
@@ -2010,38 +2004,38 @@ Introduced on new Subscription Page
 }
 
 .code-london {
-  bottom: 44%;
-  left: 24%;
+  bottom: 54%;
+  left: 32%;
 }
 
 .code-bristol {
-  bottom: 45%;
-  left: 21%;
+  bottom: 54%;
+  left: 28%;
 }
 
 .code-uk-north {
-  bottom: 50%;
-  left: 22%;
+  bottom: 59%;
+  left: 28%;
 }
 
 .code-sweden {
-  bottom: 69%;
-  left: 47%;
+  bottom: 70%;
+  left: 61%;
 }
 
 .code-lithuania {
-  bottom: 55%;
-  left: 62%;
+  bottom: 62%;
+  left: 74%;
 }
 
 .code-belgium {
-  bottom: 39%;
-  left: 31%;
+  bottom: 51%;
+  left: 38%;
 }
 
 .code-spain {
-  bottom: 10%;
-  left: 7%;
+  bottom: 25%;
+  left: 21%;
 }
 
 /* End - Map with locations */
