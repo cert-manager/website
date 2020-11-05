@@ -1,11 +1,11 @@
 ---
-title: "CloudFlare"
-linkTitle: "CloudFlare"
+title: "Cloudflare"
+linkTitle: "Cloudflare"
 weight: 30
 type: "docs"
 ---
 
-To use CloudFlare, you may use one of two types of tokens. **API Tokens** allow application-scoped keys bound to specific zones and permissions, while **API Keys** are globally-scoped keys that carry the same permissions as your account.
+To use Cloudflare, you may use one of two types of tokens. **API Tokens** allow application-scoped keys bound to specific zones and permissions, while **API Keys** are globally-scoped keys that carry the same permissions as your account.
 
 **API Tokens** are recommended for higher security, since they have more restrictive permissions and are more easily revocable.
 
