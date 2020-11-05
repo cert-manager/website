@@ -184,5 +184,7 @@ IPs
 signoff
 subfolders
 prioritise
+HTTP-01
+loopback
 mechanism
 retryable
