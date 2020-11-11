@@ -68,7 +68,7 @@ metadata:
   namespace: <NAMESPACE YOU WANT TO ISSUE CERTIFICATES IN>
 spec:
   venafi:
-    zone: "DevOps" # Set this to the Venafi policy zone you want to use
+    zone: "801bdbd0-8587-11ea-b487-4d978b4efe3d" # Set this to the GUID of the Venafi policy zone you want to use
     cloud:
       apiTokenSecretRef:
         name: cloud-secret
