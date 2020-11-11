@@ -9,13 +9,14 @@ We are open to feature requests and PRs implementing those. If you plan on contr
 
 # Features we will not allow
 
-Certain features have ben requested before but are not able to being implemented properly or not able to being implemented without breaking the security model.
+Certain features have been requested before, but have not been implemented properly or not able to be implemented without breaking the security model.
 
 Below is a list of a few of these:
 
 ## Vendoring Kubernetes related APIs outside of the `k8s.io/` namespace
 
-Vendoring Kubernetes related APIs like OpenShift specific classes is not recommend as it vendors the `k8s.io/apimachinery` package itself could potentially conflict with cert-manager's instance. It could also cause a conflict with different Kubernetes client versions being used.
+Vendoring project APIs that also vendor k8s.io/apimachinery, such as OpenShift, Contour, or Velero, is not recommend because the kubernetes dependency is likely to conflict with cert-manager's instance.
+It could also cause a conflict with different Kubernetes client versions being used.
 
 If this is needed it is suggested to use a "dynamic client" that converts the objects into internal structured copied into the cert-manager codebase.
 
@@ -38,11 +39,11 @@ The cert-manager installation creates cluster scoped resources like admission we
 ## Secret injection or copying
 
 cert-manager deals with very sensitive information (all TLS certificates for your services) and has cluster-level access to secret resources, therefore when designing features we need to consider all ways these can be abused to escalate privilege.
-Secret data is meant to be securely stored in the secret resources and have narrow scoped access privileges for unauthorized users. Therefore we will not allow any functionality that allows this data to be copied/injected into any non secret resource. 
+Secret data is meant to be securely stored in the secret resources and have narrow scoped access privileges for unauthorized users. Therefore we will not allow any functionality that allows this data to be copied/injected into any resource other than a kubernetes secret.
 
 ### cainjector
 
-The cainjector component is a special exception to this rule. This component is able to inject the `ca.crt` file into predefined fields on `ValidatingWebhookConfiguration`, `MutatingWebhookConfiguration`, and `CustomResourceDefinition` resources from Certificate resources.
+The cainjector component is a special exception to this rule as it deals in non-sensitive information (CAs, not cert/key pairs). This component is able to inject the `ca.crt` file into predefined fields on `ValidatingWebhookConfiguration`, `MutatingWebhookConfiguration`, and `CustomResourceDefinition` resources from Certificate resources.
 These 3 components are already scoped only for privileged users, and will already give you cluster scoped access to resources. 
 
 If you’re designing a resource that needs a CA Certificate or TLS key pair it is strongly recommended to use a reference to a secret instead of embedding it in a resource. 
