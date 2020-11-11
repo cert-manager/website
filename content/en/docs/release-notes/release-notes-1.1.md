@@ -25,7 +25,7 @@ As usual, please read the [upgrade notes](/docs/installation/upgrading/upgrading
 
 ## ACME Improvements
 
-The ACME issuer is the most used cert-manager issuer. While most use is to talk to Let's Encrypt we are seeing a growing number of new ACME endpoints by certificate authorities,
+The ACME issuer is the most used cert-manager issuer. While most use it to talk to Let's Encrypt we are seeing a growing number of new ACME endpoints by certificate authorities,
 PKI software exposing ACME endpoints and even ACME proxies to allow ACME being used to talk to other APIs.
 In this release we focused on adding new features into the ACME issuer to make even more possible!
 
@@ -44,9 +44,10 @@ cert-manager now allows you to request certificates with a certain validity peri
 
 ### Error handling
 
-We improved the recognition and handling of errors given by the ACME server better. We are now able to quickly retry transient errors and surface any fatal errors faster in the Kubernetes events and logs.
+We improved the recognition and handling of errors given by the ACME server. We are now able to quickly retry transient errors and surface any fatal errors faster in the Kubernetes events and logs.
 This allows you to get more insight into any rate limiting or other errors your ACME issuer provides us.
 
 ## Improvements for Venafi TPP Authentication
 
-TODO: Richard
+It is now possible to use a long lived access-token for authentication when configuring [Venafi TPP Issuer and ClusterIssuer types](https://cert-manager.io/docs/configuration/venafi/).
+This authentication mechanism is supported by `Venafi TPP >= 19.2`.
