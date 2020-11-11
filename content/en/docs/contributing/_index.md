@@ -17,6 +17,7 @@ external cert-manager components:
 - [Developing with kind](./kind/)
 - [Running end-to-end tests](./e2e/)
 - [Release process](release-process/)
+- [Feature policy](policy/)
 
 ## Welcome
 

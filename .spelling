@@ -188,3 +188,6 @@ HTTP-01
 loopback
 mechanism
 retryable
+vendoring
+subchart
+cainjector
