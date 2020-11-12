@@ -15,7 +15,7 @@ Below is a list of a few of these:
 
 ## Vendoring Kubernetes related APIs outside of the `k8s.io/` namespace
 
-Vendoring project APIs that also vendor k8s.io/apimachinery, such as OpenShift, Contour, or Velero, is not recommend because the kubernetes dependency is likely to conflict with cert-manager's instance.
+Vendoring project APIs that also vendor `k8s.io/apimachinery`, such as OpenShift, Contour, or Velero, is not recommend because the Kubernetes dependency is likely to conflict with cert-manager's instance.
 It could also cause a conflict with different Kubernetes client versions being used.
 
 If this is needed it is suggested to use a "dynamic client" that converts the objects into internal structured copied into the cert-manager codebase.
@@ -39,7 +39,7 @@ The cert-manager installation creates cluster scoped resources like admission we
 ## Secret injection or copying
 
 cert-manager deals with very sensitive information (all TLS certificates for your services) and has cluster-level access to secret resources, therefore when designing features we need to consider all ways these can be abused to escalate privilege.
-Secret data is meant to be securely stored in the secret resources and have narrow scoped access privileges for unauthorized users. Therefore we will not allow any functionality that allows this data to be copied/injected into any resource other than a kubernetes secret.
+Secret data is meant to be securely stored in the secret resources and have narrow scoped access privileges for unauthorized users. Therefore we will not allow any functionality that allows this data to be copied/injected into any resource other than a Kubernetes secret.
 
 ### cainjector
 
