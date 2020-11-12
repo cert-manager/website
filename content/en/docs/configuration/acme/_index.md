@@ -75,6 +75,46 @@ Solvers come in the form of [`dns01`](./dns01/) and
 these solver types, visit their respective documentation -
 [DNS01](./dns01/), [HTTP01](./http01/).
 
+### Use an Alternative Certificate Chain
+
+On January 11th Let's Encrypt will [change over](https://community.letsencrypt.org/t/transition-to-isrgs-root-delayed-until-jan-11-2021/125516) to using its own `ISRG Root` CA.
+This will replace the cross-signed certificates by `Identrust`. This change over needs no changes to your cert-manager configuration, any renewed or new certificates issued after this date will use the new CA root.
+
+Let's encrypt currently already signs certificates using this CA and offers them as "alternative certificate chain" via ACME.
+In this release cert-manager adds support for accessing these alternative chains in the issuer config.
+The new `preferredChain` option will allow you to specify a CA's common name for the certificate to be issued by.
+If there is a certificate available matching that request it will present you that certificate. Note that this is a Preferred option,
+if none is found matching the request it will give you the default certificate as before. This makes sure you still get your certificate
+renewed once the alternative chain gets removed on the ACME issuer side.
+
+You can already today get certificates from the `ISRG Root` by using:
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    preferredChain: "ISRG Root X1"
+```
+
+If you prefer to keep the `IdenTrust` chain you can do that by setting the option to `DST Root CA X3`:
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    preferredChain: "DST Root CA X3"
+```
+
+Note that this Root CA is expiring soon, Let's Encrypt will keep this certificate chain active until September 29 2021.
+
+This feature is not Let's Encrypt exclusive, if your ACME server supports signing by multiple CAs you can use `preferredChain` with the value of the Common Name in the Issuer part of the certificate. 
+
 ### External Account Bindings
 
 cert-manager supports using External Account Bindings with your ACME account.
