@@ -32,7 +32,11 @@ authors are as follows:
 
 - [awskms-issuer](https://github.com/Skyscanner/kms-issuer): Used to request
   certificates signed using an [AWS KMS](https://aws.amazon.com/kms/) asymmetric key.
- 
+
+- [origin-ca-issuer](https://github.com/cloudflare/origin-ca-issuer): Used
+  to request certificates signed by
+  [Cloudflare Origin CA](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca)
+  to enable TLS between Cloudflare edge and your Kubernetes workloads.
 
 To create your own external issuer type, please follow the guidance in the
 [development documentation](../../contributing/external-issuers/).
