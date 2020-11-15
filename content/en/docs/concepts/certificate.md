@@ -47,6 +47,18 @@ certificate will be stored in the secret with key `ca.crt`. For example, with
 the ACME issuer, the CA is not known and `ca.crt` will not exist in 
 `acme-crt-secret`.
 
+When a certificate is issued by intermediates of the CA and the `Issuer` knows the
+intermediates, the content of `tls.crt` will be a resulting certificate followed by
+a certificate chain. The certificate chain doesn't include a root CA certificate, as
+it is stored in `ca.crt`.
+
+This format is used as it allows TLS implementations to validate the leaf certificate
+as long as the root CA is already trusted. During the TLS handshake, peers construct
+a full trust chain by checking the issuer of each certificate until they end up at a 
+root in their trust store. If the intermediates aren't sent along with the leaf,
+there's no way to know that the issuing CA was signed by the root, and the
+certificate won't be trusted.
+
 The `dnsNames` field specifies a list of [`Subject Alternative
 Names`](https://en.wikipedia.org/wiki/Subject_Alternative_Name) to be associated
 with the certificate.
