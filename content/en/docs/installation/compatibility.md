@@ -43,6 +43,9 @@ deployment, or, if using Helm, configuring it in your `values.yaml` file.
 Note that since kubelet uses port `10250` by default on the host network, the
 `webhook.securePort` value must be changed to a different, free port.
 
+cert-manager is not compatible with AWS Fargate, in order to use it it must be
+placed in a nodegroup.
+
 
 ## Webhook
 Disabling the webhook is not supported anymore since `v0.14`.
