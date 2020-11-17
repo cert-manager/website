@@ -24,6 +24,7 @@ Bazel has 3 main commands which we use:
 
 After any Bazel command you will see something that looks like a path.
 Let's take `bazel run //hack/bin:helm` as an example:
+
 * `//` is the cert-manager project root, no matter in which directory under cert-manager you are it will find it
 * `hack/bin` is the path where the code is to execute/build/test you will for example see `pkg/acme/` to run ACME tests
 * `:helm` is the part of the Bazel file to execute, these are defined in the Bazel config themselves.
@@ -54,6 +55,7 @@ This will update everything you need without having to care about what needs cha
 ### I need granular control 
 
 You can also pick and mix the individual bash helper scripts:
+
 * `update-bazel.sh`: updates the all `*.bazel` files including formatting them
 * `update-codegen.sh`: runs all code generation
 * `update-crds.sh`: updates all CRD files to the latest scheme
