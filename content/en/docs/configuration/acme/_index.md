@@ -77,7 +77,7 @@ these solver types, visit their respective documentation -
 
 ### Use an Alternative Certificate Chain
 
-On January 11th Let's Encrypt will [change over](https://community.letsencrypt.org/t/transition-to-isrgs-root-delayed-until-jan-11-2021/125516) to using its own `ISRG Root` CA.
+On January 11th 2021, Let's Encrypt will [change over](https://community.letsencrypt.org/t/transition-to-isrgs-root-delayed-until-jan-11-2021/125516) to using its own `ISRG Root` CA.
 This will replace the cross-signed certificates by `Identrust`. This change over needs no changes to your cert-manager configuration, any renewed or new certificates issued after this date will use the new CA root.
 
 Let's encrypt currently already signs certificates using this CA and offers them as "alternative certificate chain" via ACME.
