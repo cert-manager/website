@@ -187,7 +187,7 @@ This will allow the Google Cloud Loadbalancer to propagate a HTTPS endpoint corr
 If your challenge self-check fails with a 404 not found error. Make sure to check the following:
 
 * you can access the URL from the public internet
-* the the ACME solver pod is up and running
+* the ACME solver pod is up and running
 * use `kubectl describe ingress` to check the status of the HTTP01 solver ingress. (unless you use `acme.cert-manager.io/http01-edit-in-place`, then check the same ingress as your domain)
 
 ### DNS01 troubleshooting
