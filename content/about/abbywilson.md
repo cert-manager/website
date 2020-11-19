@@ -9,5 +9,5 @@ hails_from:
 
 Abby has been working in professional services, supporting public sector and
 enterprise organisations undergo large scale digital transformation programmes.
-Abby has a genuine interest in the cloud Native landscape and is keen to deepen
+Abby has a genuine interest in the cloud native landscape and is keen to deepen
 her understanding of the Kubernetes ecosystem.
