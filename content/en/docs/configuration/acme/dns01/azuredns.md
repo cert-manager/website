@@ -5,13 +5,19 @@ weight: 30
 type: "docs"
 ---
 
-To configure the AzureDNS DNS01 Challenge in a Kubernetes cluster there are 2 ways available:
-- Managed Identity [Using AAD Pod Identities](https://azure.github.io/aad-pod-identity)
-- Service Principal
+To configure the AzureDNS DNS01 Challenge in a Kubernetes cluster there are 3 ways available:
 
-## Managed Identity
+- [Managed Identity Using AAD Pod Identities](#managed-identity-using-aad-pod-identities)
+- [Managed Identity Using AKS Kubelet Identity](#managed-identity-using-aks-kubelet-identity)
+- [Service Principal](#service-principal)
 
-Firstly we need to create the identity and grant this access to contribute to the DNS Zone.
+## Managed Identity Using AAD Pod Identities
+
+[AAD Pod Identities](https://azure.github.io/aad-pod-identity) allows assigning a [Managed Identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview) to a pod. This removes the need for adding explicit credentials into the cluster to create the required DNS records.
+
+> Note: When using Pod identity, even though assigning multiple identities to a single pod is allowed, currently cert-manager does not support this as it is not able to identify which identity to use.
+
+Firstly an identity should be created that has access to contribute to the DNS Zone.
 
 - Example creation using `azure-cli` and `jq`:
 ```bash
@@ -26,7 +32,7 @@ CLIENT_ID=$(echo $IDENTITY | jq -r '.clientId')
 RESOURCE_ID=$(echo $IDENTITY | jq -r '.id')
 
 # Get existing DNS Zone Id
-ZONE_ID=$(az network dns zone show --name $ZONE_NAME --resource-group $ZONE_GROUP --query "[].id" -o tsv)
+ZONE_ID=$(az network dns zone show --name $ZONE_NAME --resource-group $ZONE_GROUP --query "id" -o tsv)
 
 # Create role assignment
 az role assignment create --role "DNS Zone Contributor" --assignee $PRINCIPAL_ID --scope $ZONE_ID
@@ -63,9 +69,9 @@ output "identity_resource_id" {
 }
 ```
 
-Next we need to ensure we have installed [AAD Pod Identity](https://azure.github.io/aad-pod-identity) using their walk-through. This will install the CRDs and pods required to assign the identity.
+Next we need to ensure we have installed [AAD Pod Identity](https://azure.github.io/aad-pod-identity) using their walk-through. This will install the CRDs and deployment required to assign the identity.
 
-Now we can create the identity resource and binding using the below manifest:
+Now we can create the identity resource and binding using the below manifest as an example:
 
 ```yaml
 apiVersion: "aadpodidentity.k8s.io/v1"
@@ -91,7 +97,7 @@ spec:
   selector: certman-label # This is the label that needs to be set on cert-manager pods
 ```
 
-Next we need to ensure the Cert-Manager pod has a relevant label to use the pod identity binding. This can be done by editing the deployment and adding the below into the `.spec.template.metadata.labels` field
+Next we need to ensure the cert-manager pod has a relevant label to use the pod identity binding. This can be done by editing the deployment and adding the below into the `.spec.template.metadata.labels` field
 
 ```yaml
 spec:
@@ -108,8 +114,73 @@ podLabels:
   aadpodidbinding: certman-label
 ```
 
-Lastly when we create the certificate issuer we only need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields. Example below:
+Lastly when we create the certificate issuer we only need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields for the DNS zone. Example below:
 
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: example-issuer
+spec:
+  acme:
+    ...
+    solvers:
+    - dns01:
+        azureDNS:
+          subscriptionID: AZURE_SUBSCRIPTION_ID
+          resourceGroupName: AZURE_DNS_ZONE_RESOURCE_GROUP
+          hostedZoneName: AZURE_DNS_ZONE
+          # Azure Cloud Environment, default to AzurePublicCloud
+          environment: AzurePublicCloud
+```
+
+## Managed Identity Using AKS Kubelet Identity
+
+When creating an AKS cluster in Azure there is the option to use a managed identity that is assigned to the kubelet. This identity is assigned to the underlying node pool in the AKS cluster and can then be used by the cert-manager pods to authenticate to Azure Active Directory. 
+
+There are some caveats with this approach, these mainly being:
+
+- You will need to ensure only 1 managed identity is assigned to the node pool. This is due to cert-manager not currently being able to select the identity to use
+- Any permissions granted to this identity will also be accessible to all containers running inside the Kubernetes cluster.
+- Using AKS extensions like `Kube Dashboard` will not work with this method as this creates an additional identity that is assigned to the node pools.
+
+To set this up, firstly you will need to retrieve the identity that the kubelet is using by querying the AKS cluster. This can then be used to create the appropriate permissions in the DNS zone.
+
+- Example commands using `azure-cli`:
+```bash
+# Get AKS Kubelet Identity
+PRINCIPAL_ID=$(az aks show -n $CLUSTERNAME -g $CLUSTER_GROUP --query "identityProfile.kubeletidentity.objectId" -o tsv)
+
+# Get existing DNS Zone Id
+ZONE_ID=$(az network dns zone show --name $ZONE_NAME --resource-group $ZONE_GROUP --query "id" -o tsv)
+
+# Create role assignment
+az role assignment create --role "DNS Zone Contributor" --assignee $PRINCIPAL_ID --scope $ZONE_ID
+``` 
+
+- Example terraform:
+```terraform
+variable dns_zone_id {}
+
+# Creating the AKS cluster, abbreviated.
+resource "azurerm_kubernetes_cluster" "cluster" {
+  ...
+  # Creates Identity associated to kubelet
+  identity {
+    type = "SystemAssigned"
+  }
+  ...
+}
+
+resource "azurerm_role_assignment" "dns_contributor" {
+  scope                            = var.dns_zone_id
+  role_definition_name             = "DNS Zone Contributor"  
+  principal_id                     = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id 
+  skip_service_principal_aad_check = true # Allows skipping propagation of identity to ensure assignment succeeds.
+}
+```
+
+Then when creating the cert-manager issuer we only need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields for the DNS Zone. Example below:
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
