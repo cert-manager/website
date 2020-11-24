@@ -38,7 +38,7 @@ This can be done using the `ipAddresses` field of the Certificate resource.
 
 ### Duration
 
-cert-manager now allows you to request certificates with a certain validity period from an ACME issuer. This allows you to get shorter or longer lived certificates from ACME solutions such as [Step-CA](https://smallstep.com/blog/private-acme-server/). You can enable this by setting `requestDuration` to `true` in the ACME Issuer configuration. Be careful, if your ACME issuer does not support this feature it is allowed by the ACME spec to hard fail the Order causing your certificate renewal or creation to stop. 
+cert-manager now allows you to request certificates with a certain validity period from an ACME issuer. This allows you to get shorter or longer lived certificates from ACME solutions such as [Step-CA](https://smallstep.com/blog/private-acme-server/). You can enable this by setting `enableDurationFeature` to `true` in the ACME Issuer configuration. Be careful, if your ACME issuer does not support this feature it is allowed by the ACME spec to hard fail the Order causing your certificate renewal or creation to stop. 
 
 *Note:* Let's Encrypt has announced intention to look into the possibilities of implementing this.
 
