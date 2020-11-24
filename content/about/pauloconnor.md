@@ -1,7 +1,7 @@
 ---
 title: Paul O'Connor
 image: /img/jpg/about-pauloconnor.jpg
-position: Account Manager
+position: Territory Manager
 email: paul.oconnor@jetstack.io
 twitter: 'depowly'
 hails_from:
