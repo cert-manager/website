@@ -46,8 +46,8 @@
 [[versions]]
   version = "v1.0"
   ghbranchname = "release-1.0"
-  url = "/v0.16-docs/"
-  dirpath = "v0.16-docs"
+  url = "/v1.0-docs/"
+  dirpath = "v1.0-docs"
 
 [[versions]]
   version = "v0.16"
