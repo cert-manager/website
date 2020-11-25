@@ -136,7 +136,7 @@ ACME server
 > Note: In _most_ cases, the MAC key must be encoded in `base64URL`. The 
 > following command will base64-encode a key and convert it to `base64URL`:
 > 
->     $ echo 'my-secret-key' | base64 | sed -e 's/+/-/g' -e 's///_/g' -e 's/=//g'
+>     $ echo 'my-secret-key' | base64 -w0 | sed -e 's/+/-/g' -e 's/\//_/g' -e 's/=//g'
 > 
 > You can then create the Secret resource with: 
 > 
