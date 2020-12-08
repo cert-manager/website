@@ -210,10 +210,10 @@ single solver.
 
 #### Match Labels
 
-The `matchLabel` selector requires that all `Certificates` match at least one of
+The `matchLabel` selector requires that all `Certificates` match all of
 the labels that are defined in the string map list of that stanza. For example,
 the following `Issuer` will only match on `Certificates` that have the labels
-`"user-cloudflare-solver": "true"`, or `"email": "user@example.com"`, or both.
+`"user-cloudflare-solver": "true"` and `"email": "user@example.com"`.
 
 ```yaml
 apiVersion: cert-manager.io/v1
