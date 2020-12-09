@@ -71,6 +71,11 @@ If the pull request is a critical bug fix then this will probably
 also be cherry picked to the current stable version of cert-manager as a patch
 release.
 
+To let people know that your PR is still a work in progress, we usually add a
+`WIP:` prefix to the title of the PR. Prow will then automatically set the label
+`do-not-merge/work-in-progress`.
+
+
 ### Cherry Picking
 
 If the pull request contains a critical bug fix then this should be cherry picked in to the current stable cert-manager branch 
