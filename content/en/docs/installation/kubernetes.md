@@ -310,9 +310,9 @@ common infrastructure needs.
 
 It depends on `cert-manager` for certificate management, and it is [regularly
 tested](https://github.com/bitnami/kube-prod-runtime/blob/master/Jenkinsfile) so
-the components are known to work together for GKE and AKS clusters (EKS to be
-added soon). For its ingress stack it creates a DNS entry in the configured DNS
-zone and requests a TLS certificate from the Let's Encrypt staging server.
+the components are known to work together for GKE, AKS, and EKS clusters. For
+its ingress stack it creates a DNS entry in the configured DNS zone and requests
+a TLS certificate from the Let's Encrypt staging server.
 
 BKPR can be deployed using the `kubeprod install` command, which will deploy
 `cert-manager` as part of it. Details available in the [BKPR installation
