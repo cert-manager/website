@@ -201,6 +201,18 @@
 </div>
 
 
+<script>
+  // Send an event to ga when the user submits the datasheet form
+  // See https://support.freshsales.io/support/solutions/articles/232935-how-to-customize-web-forms-to-trigger-custom-events-
+  var WebFormEvent =
+  {
+    afterSubmit: function(event, data, error)
+    {
+      ga('send', 'event', 'datasheet', 'download', 'cert-manager')
+    }
+  }
+</script>
+
 <div class="Cert__section Cert__section--flat Cert__section--left Cert__section--light">
   <div class="container container--download-form">
     <div class="row row--end">
