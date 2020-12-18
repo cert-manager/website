@@ -38,5 +38,9 @@ authors are as follows:
   [Cloudflare Origin CA](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca)
   to enable TLS between Cloudflare edge and your Kubernetes workloads.
 
+- [google-cas-issuer](https://github.com/jetstack/google-cas-issuer): Used
+  to request certificates signed by private CAs managed by the
+  [Google Cloud Certificate Authority Service](https://cloud.google.com/certificate-authority-service/).
+
 To create your own external issuer type, please follow the guidance in the
 [development documentation](../../contributing/external-issuers/).
