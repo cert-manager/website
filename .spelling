@@ -65,6 +65,7 @@ GCLB
 gcloud
 GCP
 GKE
+google-cas-issuer
 HashiCorp
 Helmfile
 hostname
