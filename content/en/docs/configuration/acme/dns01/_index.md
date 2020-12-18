@@ -172,6 +172,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-scaleway`](https://github.com/scaleway/cert-manager-webhook-scaleway)
 - [`cert-manager-webhook-selectel`](https://github.com/selectel/cert-manager-webhook-selectel)
 - [`cert-manager-webhook-softlayer`](https://github.com/cgroschupp/cert-manager-webhook-softlayer)
+- [`cert-manager-webhook-ibmcis`](https://github.com/jb-dk/cert-manager-webhook-ibmcis)
 
 You can find more information on how to configure webhook providers
 [here](./webhook/).
