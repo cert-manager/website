@@ -69,7 +69,7 @@ Events:
   Normal  OrderCreated  5s    cert-manager  Created Order resource default/example-com-2745722290-439160286
 ```
 
-Orders are a request to an ACME instance to issue a certificate. 
+Orders are a request to an ACME instance to issue a certificate.
 By running `kubectl describe order` on a particular order,
 information can be gleaned about failures in the process:
 
@@ -86,7 +86,7 @@ Events:
   Normal  Created  1m    cert-manager  Created Challenge resource "example-com-2745722290-439160286-1" for domain "test2.example.com"
 ```
 
-Here we can see that cert-manager has created two Challenge resources to verify we control specific domains, 
+Here we can see that cert-manager has created two Challenge resources to verify we control specific domains,
 a requirements of the ACME order to obtain a signed certificate.
 
 You can then go on to run
@@ -157,7 +157,7 @@ Both HTTP01 and DNS01 go through a "self-check" first before cert-manager presen
 This is done not to overload the ACME provider with failed challenges due to DNS or loadbalancer propagations.
 The status of this can be found in the Status block of the describe:
 ```console
-$ kubectl describe challenge 
+$ kubectl describe challenge
 [...]
 Status:
   Presented:   true
@@ -193,11 +193,16 @@ If your challenge self-check fails with a 404 not found error. Make sure to chec
 ### DNS01 troubleshooting
 If you see no error events about your DNS provider you can check the following
 Check if you can see the `_acme_challenge.domain` TXT DNS record from the public internet, or in your DNS provider's interface.
-cert-manager will check if a DNS record has been propagated by querying the cluster's DNS solver. If you are able to see it from the public internet but not from inside the cluster you might want to change [the DNS server for self-check](../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check) as some cloud providers overwrite DNS internally. 
+cert-manager will check if a DNS record has been propagated by querying the cluster's DNS solver. If you are able to see it from the public internet but not from inside the cluster you might want to change [the DNS server for self-check](../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check) as some cloud providers overwrite DNS internally.
 
 #### cert-manager identifies the wrong zone for your domain name
 cert-manager by default uses SOA (Start of Authority) records to determine which zone name to use at your DNS provider.
 Some DNS resolvers will filter this information, if this is the case cert-manager cannot determine the zone and it is advised to [change the DNS server for DNS01 self-checks](../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check).
+
+If you use `dnsmasq` as your DNS server, this may occur if you use the [`--filterwin2k` flag](http://www.thekelleys.org.uk/dnsmasq/docs/setup.html).
+In [OpenWRT there is a `filterwin2k` configuration option](https://openwrt.org/docs/guide-user/base-system/dhcp#all_options).
+And in [LuCI there is a "Filter useless" option](https://github.com/openwrt/luci/blob/15757dd5b18f9e00ba3c9b38af4d46702a31fe33/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js#L217-L219).
+By enabling this flag, `dnsmasq` drops all `SOA` records.
 
 ## March 2020 Let's Encrypt CAA Rechecking Bug
 Following the [announcement on March 4](https://community.letsencrypt.org/t/revoking-certain-certificates-on-march-4/114864) Let's Encrypt will be revoking a number of certificates due to a bug in the way they validate CAA records, we have created a tool to analyse your existing cert-manager managed certificates and compare their serial numbers to the publicised list of revoked certificates.

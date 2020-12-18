@@ -96,6 +96,7 @@ Kubernetes
 labelled
 lifecycle
 loadbalancer
+LuCI
 MacOS
 metadata
 misconfiguration
@@ -116,6 +117,7 @@ OpenAPI
 OpenFaaS
 OpenShift
 OperatorHub
+OpenWRT
 PEM
 PKCS#12
 PKCS#8
