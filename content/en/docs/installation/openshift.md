@@ -23,6 +23,11 @@ More information on configuring different Issuer types can be found in the
 > single cluster. This will lead to undefined behavior and you may be banned
 > from providers such as Let's Encrypt.
 
+> Note: From cert-manager `v1.2.0` onward, the minimum supported version of
+> OpenShift is `v3.2` (Kubernetes `v1.16.0`). Users still running versions below should
+> upgrade to a supported version before installing cert-manager or use cert-manager `v1.1.
+
+
 ## Login to your OpenShift cluster
 
 Before you can install cert-manager, you must first ensure your local machine
@@ -61,7 +66,6 @@ are included in a single YAML manifest file:
 
 Install the `CustomResourceDefinitions` and cert-manager itself
 ```bash
-# OpenShift 4+
 oc apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
 ```
 
