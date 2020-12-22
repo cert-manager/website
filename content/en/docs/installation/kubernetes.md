@@ -19,15 +19,15 @@ configuring different `Issuer` types can be found in the [respective configurati
 guides](../../configuration/).
 
 
-> Note: From cert-manager `v0.14.0` onward, the minimum supported version of
-> Kubernetes is `v1.11.0`. Users still running Kubernetes `v1.10` or below should
-> upgrade to a supported version before installing cert-manager.
-
 > **Warning**: You should not install multiple instances of cert-manager on a single
 > cluster. This will lead to undefined behavior and you may be banned from
 > providers such as Let's Encrypt.
 
 ## Installing with regular manifests
+
+> Note: From cert-manager `v1.2.0` onward, the minimum supported version of
+> Kubernetes is `v1.16.0`. Users still running Kubernetes `v1.15` or below should
+> upgrade to a supported version before installing cert-manager or use cert-manager `v1.1.
 
 All resources (the `CustomResourceDefinitions`, cert-manager, namespace, and the webhook component)
 are included in a single YAML manifest file:
@@ -39,23 +39,8 @@ are included in a single YAML manifest file:
 Install the `CustomResourceDefinitions` and cert-manager itself:
 
 ```bash
-# Kubernetes 1.16+
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.yaml
-
-# Kubernetes <1.16
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager-legacy.yaml
+$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
 ```
-
-> **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the manifests.
-> This version does not have API version conversion and only supports `cert-manager.io/v1` API resources.
-
-> **Note**: If you are running Kubernetes `v1.15.4` or below, you will need to add the
-> `--validate=false` flag to your `kubectl apply` command above else you will
-> receive a validation error relating to the
-> `x-kubernetes-preserve-unknown-fields` field in cert-manager's
-> `CustomResourceDefinition` resources.  This is a benign error and occurs due
-> to the way `kubectl` performs resource validation.
-
 
 > **Note**: When running on GKE (Google Kubernetes Engine), you may encounter a
 > 'permission denied' error when creating some of these resources. This is a
@@ -79,6 +64,10 @@ Once you have deployed cert-manager, you can verify the installation
 [here](./#verifying-the-installation).
 
 ## Installing with Helm
+
+> Note: From cert-manager `v1.2.0` onward, the minimum supported version of
+> Kubernetes is `v1.16.0`. Users still running Kubernetes `v1.15` or below should
+> upgrade to a supported version before installing cert-manager or use cert-manager `v1.1.
 
 As an alternative to the YAML manifests referenced above, we also provide an
 official Helm chart for installing cert-manager.
@@ -129,15 +118,9 @@ option when installing the Helm chart.
 Install the `CustomResourceDefinition` resources using `kubectl`:
 
 ```bash
-# Kubernetes 1.15+
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.crds.yaml
-
-# Kubernetes <1.15
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager-legacy.crds.yaml
+$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml
 ```
 
-> **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the CRDs.
-> This version does not have API version conversion and only supports `cert-manager.io/v1` API resources. 
 
 **Option 2: install CRDs as part of the Helm release**
 
@@ -154,7 +137,7 @@ To install the cert-manager Helm chart:
 $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
-  --version v1.1.0 \
+  --version v1.2.0 \
   # --set installCRDs=true
 ```
 
