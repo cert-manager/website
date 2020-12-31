@@ -41,6 +41,9 @@ authors are as follows:
 - [google-cas-issuer](https://github.com/jetstack/google-cas-issuer): Used
   to request certificates signed by private CAs managed by the
   [Google Cloud Certificate Authority Service](https://cloud.google.com/certificate-authority-service/).
+  
+- [freeipa-issuer](https://github.com/guilhem/freeipa-issuer): Used to
+  request certificates signed by [FreeIPA](https://www.freeipa.org).
 
 To create your own external issuer type, please follow the guidance in the
 [development documentation](../../contributing/external-issuers/).
