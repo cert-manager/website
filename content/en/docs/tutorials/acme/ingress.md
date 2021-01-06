@@ -65,6 +65,11 @@ For more information on securing your installation see: https://docs.helm.sh/usi
 Happy Helming!
 ```
 
+Add the latest helm repository for the ingress-nginx
+```bash
+$ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+```
+
 Update the helm repository with the latest charts:
 
 ```bash
@@ -72,6 +77,7 @@ $ helm repo update
 Hang tight while we grab the latest from your chart repositories...
 ...Skip local chart repository
 ...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "ingress-nginx" chart repository
 ...Successfully got an update from the "coreos" chart repository
 Update Complete. ⎈ Happy Helming!⎈
 ```
@@ -92,10 +98,10 @@ Use `helm` to install an NGINX Ingress controller:
 ```bash
 
 # for helm version 2
-$ helm install stable/nginx-ingress --name quickstart
+$ helm install ingress-nginx/nginx-ingress --name quickstart
 
 # for helm version 3
-$ helm install quickstart stable/nginx-ingress
+$ helm install quickstart ingress-nginx/nginx-ingress
 
 NAME:   quickstart
 LAST DEPLOYED: Sat Nov 10 10:25:06 2018
