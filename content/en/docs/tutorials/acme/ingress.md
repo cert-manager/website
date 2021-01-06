@@ -77,7 +77,7 @@ $ helm repo update
 Hang tight while we grab the latest from your chart repositories...
 ...Skip local chart repository
 ...Successfully got an update from the "stable" chart repository
-...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "ingress-nginx" chart repository
 ...Successfully got an update from the "coreos" chart repository
 Update Complete. ⎈ Happy Helming!⎈
 ```
