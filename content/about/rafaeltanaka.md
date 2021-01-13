@@ -1,6 +1,6 @@
 ---
 title: Rafael Tanaka
-image: /img/jpg/about-rafaeltanaka.jpg
+image: /img/jpg/about-rafael-tanaka.jpg
 position: Curriculum Engineer
 email: rafael.tanaka@jetstack.io
 twitter: 'massaox'
