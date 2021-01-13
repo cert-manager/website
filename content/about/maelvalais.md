@@ -12,4 +12,4 @@ hails_from:
 Maël loves writing tools that help other developers, and is passionate
 about programming languages and operating systems. From Rust to Kubernetes,
 to containers and Linux, Maël is an enthusiastic open-source contributor
-who loves being part and participating to OSS communities.
+who loves being part of, and participating in OSS communities.
