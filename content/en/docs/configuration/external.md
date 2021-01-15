@@ -25,7 +25,7 @@ authors are as follows:
   certificates from the [Smallstep](https://smallstep.com) [Certificate
   Authority server](https://github.com/smallstep/certificates).
 
-- [awspca-issuer](https://github.com/codingvirtues/awspca-issuer): Used to
+- [aws-pca-issuer](https://github.com/jniebuhr/aws-pca-issuer): Used to
   request certificates from [AWS Private Certificate Authority]
   (https://aws.amazon.com/certificate-manager/private-certificate-authority/)
   for cloud native/hybrid environments.
