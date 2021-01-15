@@ -1895,7 +1895,17 @@ Introduced on new Subscription Page
   width: 100%;
 }
 
-/* About Page Bio */
+/* About Page Bio (single individual) */
+
+.single-bio__name {
+  color: #1b1c29;
+}
+
+.single-bio__title {
+  color: #888a90;
+}
+
+/* About Page Bio (whole company) */
 
 .bio-list {
   display: flex;
@@ -1996,7 +2006,7 @@ Introduced on new Subscription Page
   height: 5%;
   background: url("/img/svg/pin.svg") no-repeat center center;
   background-size: contain;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .pin:hover {
