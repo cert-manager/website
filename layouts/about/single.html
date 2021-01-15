@@ -13,6 +13,7 @@
         <div style="align-items: center; display: flex; justify-content: center;">
           <div style="max-width: 800px;">
             <h2>{{ .Title }}</h2>
+            <h4>{{ .Params.position }}</h2>
           </div>
         </div>
 
@@ -35,9 +36,9 @@
               {{ .Content }}
             </div>
 
-            <p class="text-center bio__social">
+            <p class="text-center">
               {{ if .Params.twitter }}
-              <a href="https://twitter.com/{{.Params.twitter}}" style="width: 24px; display: inline-block" target="_blank" rel="noopener noreferrer">
+              <a href="https://twitter.com/{{ .Params.twitter }}" style="width: 24px; display: inline-block" target="_blank" rel="noopener noreferrer">
                 {{ partial "svg/icon-bio-twitter.svg" }}
               </a>
               {{ end }}
