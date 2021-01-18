@@ -9,7 +9,7 @@ type: "docs"
 
 ### Kubernetes `1.15.x` and below
 
-cert-manager `v1.2` will no longer support Kubernetes `v1.15` and below following the Kubernetes upstream version support. We advise you to consider upgrading to Kubernetes 1.16 or above. If this isn't possible we advice to stay with the cert-manager `v1.1.x` releases.
+cert-manager `v1.2` will no longer support Kubernetes `v1.15` and below following the Kubernetes upstream version support. We advise you to consider upgrading to Kubernetes 1.16 or above. If this isn't possible we advise you to stay with the cert-manager `v1.1.x` releases.
 
 ### Kubernetes `1.16.x` and above
 
