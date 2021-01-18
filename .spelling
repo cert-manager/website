@@ -14,6 +14,7 @@ APIServices
 AppRole
 AWS
 awspca
+aws-pca-issuer
 AzureDNS
 backend
 backends
