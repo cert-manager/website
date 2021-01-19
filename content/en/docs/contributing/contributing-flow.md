@@ -118,6 +118,19 @@ Sometimes `/triage` is also added which helps us when following up Issues.
 * Kind indicates if it is a `bug` or a `feature` but also can be `documentation` or `cleanup` (general maintenance)
 * Priority is the priority it has for the cert-manager team, PRs are still very welcome for those!
 
+### Assignees meaning in PRs and issues
+
+Sometimes, you might see someone commenting with the
+[`/assign` prow command](https://prow.build-infra.jetstack.net/command-help#assign):
+
+```plain
+/assign @meyskens
+```
+
+We don't have a strong definition yet of what being an assignee means. On issues, it
+means "working on it". On PRs, well... it is meaningless. This is something we want to
+improve with a Kanban board where we then can start defining states of PRs.
+
 ### Triage Party!
 
 Every few weeks we will plan a Triage Party meeting, where we use the (Triage Party)[https://triage.build-infra.jetstack.net/] tool to go recent/old issues to prioritise them so we can address them in a timely matter. These meetings are open to everyone and invites will be sent out using our mailing list (warning: despite the word party these meetings are sometimes boring).
