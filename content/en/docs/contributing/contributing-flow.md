@@ -127,9 +127,13 @@ Sometimes, you might see someone commenting with the
 /assign @meyskens
 ```
 
-We don't have a strong definition yet of what being an assignee means. On issues, it
-means "working on it". On PRs, well... it is meaningless. This is something we want to
-improve with a Kanban board where we then can start defining states of PRs.
+Here is the meaning that we give to the Github assignees:
+
+- On issues, it means that the assignee is working on it.
+- On PRs, we use it as a way to know who should be taking a look at the PR at any time:
+  - When the author is assigned, it means the PR needs work to be done aka "changes requested";
+  - When nobody is assigned, it means this PR needs review;
+  - When someone different from the author is assigned, it means this person is reviewing this PR.
 
 ### Triage Party!
 
