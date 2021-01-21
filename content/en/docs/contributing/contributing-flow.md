@@ -127,7 +127,7 @@ Sometimes, you might see someone commenting with the
 /assign @meyskens
 ```
 
-Here is the meaning that we give to the Github assignees:
+Here is the meaning that we give to the GitHub assignees:
 
 - On issues, it means that the assignee is working on it.
 - On PRs, we use it as a way to know who should be taking a look at the PR at any time:
