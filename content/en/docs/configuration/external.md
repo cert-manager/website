@@ -42,5 +42,10 @@ authors are as follows:
   to request certificates signed by private CAs managed by the
   [Google Cloud Certificate Authority Service](https://cloud.google.com/certificate-authority-service/).
 
+- [ADCS Issuer](https://github.com/nokia/adcs-issuer): Used
+  to request certificates signed by 
+  [Microsoft Active Directory Certificate Service](https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority).
+
+
 To create your own external issuer type, please follow the guidance in the
 [development documentation](../../contributing/external-issuers/).
