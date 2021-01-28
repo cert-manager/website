@@ -92,4 +92,10 @@ This suite tests certificate functionality against all issuers.
 This exists to only test a certain feature (e.g. Email SAN) against issuers that support this feature.
 Each test specifies a used feature using `s.checkFeatures(feature)`, this is then checked against the issuer's `UnsupportedFeatures` list to check if it can be ran against the issuer.
 
+## External dependencies for running end-to-end tests
 
+The Venafi TPP issuer is the only component that requires an "external"
+resource. The CI uses a Venafi TPP server that is maintained by Venafi. The
+credentials are stored in Jetstack's Vault server. Note that we have no
+admin privileges over this server. Our contact point regarding this
+external dependency is Paul Cleary (`paul cleary at venafi com`).
