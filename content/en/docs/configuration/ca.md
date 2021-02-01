@@ -28,7 +28,7 @@ being the `cert-manager` namespace, however can be configured using the
 Below is an example of a secret resource that will be used for signing. Take
 note of the index keys used for each field as these are required in order for
 cert-manager to find the certificate and key. Also note that, like all secrets,
-data must be base64 encoded. The command `$ cat crt.pem | base64` should help
+data must be base64 encoded. The command `$ cat crt.pem | base64 -w0` should help
 you here.
 
 ```yaml
