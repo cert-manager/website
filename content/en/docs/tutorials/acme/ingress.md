@@ -65,7 +65,19 @@ For more information on securing your installation see: https://docs.helm.sh/usi
 Happy Helming!
 ```
 
+## Step 2 - Deploy the NGINX Ingress Controller
+
+A [`kubernetes ingress
+controller`](https://kubernetes.io/docs/concepts/services-networking/ingress) is
+designed to be the access point for HTTP and HTTPS traffic to the software
+running within your cluster. The `ingress-nginx-controller` does this by providing
+an HTTP proxy service supported by your cloud provider's load balancer.
+
+You can get more details about `ingress-nginx` and how it works from the
+[documentation for `ingress-nginx`](https://kubernetes.github.io/ingress-nginx/).
+
 Add the latest helm repository for the ingress-nginx
+
 ```bash
 $ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 ```
@@ -82,76 +94,30 @@ Hang tight while we grab the latest from your chart repositories...
 Update Complete. ⎈ Happy Helming!⎈
 ```
 
-## Step 2 - Deploy the NGINX Ingress Controller
-
-A [`kubernetes ingress
-controller`](https://kubernetes.io/docs/concepts/services-networking/ingress) is
-designed to be the access point for HTTP and HTTPS traffic to the software
-running within your cluster. The `nginx-ingress` controller does this by providing
-an HTTP proxy service supported by your cloud provider's load balancer.
-
-You can get more details about `nginx-ingress` and how it works from the
-[documentation for `nginx-ingress`](https://kubernetes.github.io/ingress-nginx/).
-
 Use `helm` to install an NGINX Ingress controller:
 
 ```bash
 
 # for helm version 2
-$ helm install ingress-nginx/nginx-ingress --name quickstart
+$ helm install ingress-nginx/ingress-nginx --name quickstart
 
 # for helm version 3
-$ helm install quickstart ingress-nginx/nginx-ingress
+$ helm install quickstart ingress-nginx/ingress-nginx
 
-NAME:   quickstart
-LAST DEPLOYED: Sat Nov 10 10:25:06 2018
+NAME: quickstart
+LAST DEPLOYED: Wed Feb  3 12:55:58 2021
 NAMESPACE: default
-STATUS: DEPLOYED
-
-RESOURCES:
-==> v1/ConfigMap
-NAME                                 AGE
-quickstart-nginx-ingress-controller  0s
-
-==> v1beta1/ClusterRole
-quickstart-nginx-ingress  0s
-
-==> v1beta1/Deployment
-quickstart-nginx-ingress-controller       0s
-quickstart-nginx-ingress-default-backend  0s
-
-==> v1/Pod(related)
-
-NAME                                                      READY  STATUS             RESTARTS  AGE
-quickstart-nginx-ingress-controller-6cfc45747-wcxrg       0/1    ContainerCreating  0         0s
-quickstart-nginx-ingress-default-backend-bf9db5c67-dkg4l  0/1    ContainerCreating  0         0s
-
-==> v1/ServiceAccount
-
-NAME                      AGE
-quickstart-nginx-ingress  0s
-
-==> v1beta1/ClusterRoleBinding
-quickstart-nginx-ingress  0s
-
-==> v1beta1/Role
-quickstart-nginx-ingress  0s
-
-==> v1beta1/RoleBinding
-quickstart-nginx-ingress  0s
-
-==> v1/Service
-quickstart-nginx-ingress-controller       0s
-quickstart-nginx-ingress-default-backend  0s
-
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
 NOTES:
-The nginx-ingress controller has been installed.
+The ingress-nginx controller has been installed.
 It may take a few minutes for the LoadBalancer IP to be available.
-You can watch the status by running 'kubectl --namespace default get services -o wide -w quickstart-nginx-ingress-controller'
+You can watch the status by running 'kubectl --namespace default get services -o wide -w quickstart-ingress-nginx-controller'
 
 An example Ingress that makes use of the controller:
 
-  apiVersion: extensions/v1beta1
+  apiVersion: networking.k8s.io/v1beta1
   kind: Ingress
   metadata:
     annotations:
@@ -175,15 +141,15 @@ An example Ingress that makes use of the controller:
 
 If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
 
-apiVersion: v1
-kind: Secret
-metadata:
-  name: example-tls
-  namespace: foo
-data:
-  tls.crt: <base64 encoded cert>
-  tls.key: <base64 encoded key>
-type: kubernetes.io/tls
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: example-tls
+    namespace: foo
+  data:
+    tls.crt: <base64 encoded cert>
+    tls.key: <base64 encoded key>
+  type: kubernetes.io/tls
 ```
 
 It can take a minute or two for the cloud provider to provide and link a public
@@ -192,10 +158,10 @@ IP address. When it is complete, you can see the external IP address using the
 
 ```bash
 $ kubectl get svc
-NAME                                       TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
-kubernetes                                 ClusterIP      10.63.240.1     <none>           443/TCP                      23m
-quickstart-nginx-ingress-controller        LoadBalancer   10.63.248.177   203.0.113.2      80:31345/TCP,443:31376/TCP   16m
-quickstart-nginx-ingress-default-backend   ClusterIP      10.63.250.234   <none>           80/TCP                       16m
+NAME                                            TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
+kubernetes                                      ClusterIP      10.0.0.1       <none>        443/TCP                      13m
+quickstart-ingress-nginx-controller             LoadBalancer   10.0.114.241   <pending>     80:31635/TCP,443:30062/TCP   8m16s
+quickstart-ingress-nginx-controller-admission   ClusterIP      10.0.188.24    <none>        443/TCP                      8m16s
 ```
 
 This command shows you all the services in your cluster (in the `default`
@@ -265,7 +231,7 @@ ingress.extensions "kuard" created
 ```
 
 > Note: The ingress example we show above has a `host` definition within it. The
-> `nginx-ingress-controller` will route traffic when the hostname requested
+> `ingress-nginx-controller` will route traffic when the hostname requested
 > matches the definition in the ingress. You *can* deploy an ingress without a
 > `host` definition in the rule, but that pattern isn't usable with a TLS
 > certificate, which expects a fully qualified domain name.
@@ -288,11 +254,11 @@ kuard     *         203.0.113.2   80        9m
 ```
 
 > Note: The IP address on the ingress *may not* match the IP address that the
-> `nginx-ingress-controller`. This is fine, and is a quirk/implementation detail
+> `ingress-nginx-controller` has. This is fine, and is a quirk/implementation detail
 > of the service provider hosting your Kubernetes cluster. Since we are using
-> the `nginx-ingress-controller` instead of any cloud-provider specific ingress
+> the `ingress-nginx-controller` instead of any cloud-provider specific ingress
 > backend, use the IP address that was defined and allocated for the
-> `nginx-ingress-service` `LoadBalancer` resource as the primary  access point for
+> `quickstart-ingress-nginx-controller ` `LoadBalancer` resource as the primary  access point for
 > your service.
 
 Make sure the service is reachable at the domain name you added above, for
@@ -308,9 +274,9 @@ $ curl -kivL -H 'Host: www.example.com' 'http://203.0.113.2'
 
 The options on this curl command will provide verbose output, following any
 redirects, show the TLS headers in the output,  and not error on insecure
-certificates. With `nginx-ingress-controller`, the service will be available
+certificates. With `ingress-nginx-controller`, the service will be available
 with a TLS certificate, but it will be using a self-signed certificate
-provided as a default from the `nginx-ingress-controller`. Browsers will show
+provided as a default from the `ingress-nginx-controller`. Browsers will show
 a warning that this is an invalid certificate. This is expected and normal,
 as we have not yet used cert-manager to get a fully trusted certificate
 for our site.
@@ -449,7 +415,7 @@ cert-manager will create or update the secret defined in the certificate.
 
 > Note: The secret that is used in the ingress should match the secret defined
 > in the certificate.  There isn't any explicit checking, so a typo will result
-> in the `nginx-ingress-controller` falling back to its self-signed certificate.
+> in the `ingress-nginx-controller` falling back to its self-signed certificate.
 > In our example, we are using annotations on the ingress (and ingress-shim)
 > which will create the correct secrets on your behalf.
 
