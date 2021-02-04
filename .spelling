@@ -61,6 +61,8 @@ enablement
 eTLD
 external-dns
 FastDNS
+FreeIPA
+freeipa-issuer
 GCE
 GCLB
 gcloud
