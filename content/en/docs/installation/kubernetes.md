@@ -27,7 +27,7 @@ guides](../../configuration/).
 
 > Note: From cert-manager `v1.2.0` onward, the minimum supported version of
 > Kubernetes is `v1.16.0`. Users still running Kubernetes `v1.15` or below should
-> upgrade to a supported version before installing cert-manager or use cert-manager `v1.1.
+> upgrade to a supported version before installing cert-manager or use cert-manager `v1.1`.
 
 All resources (the `CustomResourceDefinitions`, cert-manager, namespace, and the webhook component)
 are included in a single YAML manifest file:
@@ -67,7 +67,7 @@ Once you have deployed cert-manager, you can verify the installation
 
 > Note: From cert-manager `v1.2.0` onward, the minimum supported version of
 > Kubernetes is `v1.16.0`. Users still running Kubernetes `v1.15` or below should
-> upgrade to a supported version before installing cert-manager or use cert-manager `v1.1.
+> upgrade to a supported version before installing cert-manager or use cert-manager `v1.1`.
 
 As an alternative to the YAML manifests referenced above, we also provide an
 official Helm chart for installing cert-manager.
