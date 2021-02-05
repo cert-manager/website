@@ -198,3 +198,4 @@ vendoring
 subchart
 cainjector
 Velero
+istio-csr
