@@ -45,8 +45,8 @@ some of these goals are missed, in order to keep up release velocity.
 
 ### Process for releasing a minor version
 
-> Note: please click on the "Edit this page" button if a step is missing or
-> if it oudated.
+> Note: please click on the "Edit this page" button on the top-right corner
+> of this page if a step is missing or if it outdated.
 
 The process for cutting a minor release is as follows:
 
@@ -106,7 +106,7 @@ The process for cutting a minor release is as follows:
    2. While the build is running, send a first Slack message to
       `#cert-manager-dev`:
 
-      > Releasing 1.2.0-alpha.2 🧵
+      > Releasing `1.2.0-alpha.2` 🧵
 
    3. Send a second Slack message in reply to this first message with the
       Cloud Build job link that `cmrel` displayed in "View logs at". For
@@ -165,17 +165,17 @@ The process for cutting a minor release is as follows:
       * Replace links to `@jetstack-bot`, in cherry-pick PRs, with links to
         the GitHub handle of the author of the original PR.
 
-   2. Click on the "This is a pre-release" if your release is an alpha.
+   2. Tick the box "This is a pre-release" if your release is an alpha.
       (not necessary for final releases)
 
    3. Click "publish" to make the GitHub release live.
       This will create a Git tag automatically.
 
 8. Finally, post a Slack message as an answer to the first message. Toggle
-   the checkbox "Also send to #cert-manager-dev" so that the message is
+   the checkbox "Also send to `#cert-manager-dev`" so that the message is
    well visible. Also cross-post the message on `#cert-manager`.
 
-   > <https://github.com/jetstack/cert-manager/releases/tag/v1.0.0> :tada:
+   > <https://github.com/jetstack/cert-manager/releases/tag/v1.0.0> 🎉
 
 ### Final Release
 
