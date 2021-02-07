@@ -39,7 +39,7 @@ are included in a single YAML manifest file:
 Install the `CustomResourceDefinitions` and cert-manager itself:
 
 
-> **Note**: Now 1.2.0 is not available, you may execute below command instead temporarily.
+> **Note**: Now 1.2.0 is not available, If you know what to do, you may execute below command instead temporarily.
 > `kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0-alpha.2/cert-manager.yaml`
 ```bash
 $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
