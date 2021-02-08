@@ -166,11 +166,7 @@ The process for cutting a minor release is as follows:
    1. Visit the draft GitHub release and paste in the release notes that you generated earlier.
 
       You will need to manually edit the content to match the style of earlier releases.
-      In particular:
-
-      * Remove package related changes
-      * Replace links to `@jetstack-bot`, in cherry-pick PRs, with links to
-        the GitHub handle of the author of the original PR.
+      In particular, remember to remove package-related changes.
 
    2. Tick the box "This is a pre-release" if your release is an alpha.
       (not necessary for final releases)
