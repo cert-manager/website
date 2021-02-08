@@ -29,9 +29,9 @@ perform a cert-manager release:
 4. You must have time to complete all the steps in the release process (~1 hour).
 5. Install the [`gcloud`](https://cloud.google.com/sdk/) CLI.
 6. Run [`gcloud auth login`](https://cloud.google.com/sdk/docs/authorizing#running_gcloud_auth_login).
-7. Get a GitHub access token [here](https://github.com/settings/tokens).
-   It does not need any privileges.
-   It is used only by the `release-notes` CLI to avoid API rate limiting.
+7. Get a GitHub access token [here](https://github.com/settings/tokens)
+   with the `public_repo` scope. It is used only by the `release-notes` CLI
+   to avoid API rate limiting.
 
 ## Minor releases
 
@@ -244,8 +244,8 @@ The process for cutting a patch release is as follows:
     release-notes --github-repo cert-manager --github-org jetstack --required-author "jetstack-bot" --output release-notes.md
     ```
 
-    NOTE: The GitHub token needs read-only permission to the cert-manager repository.
-    The token is required only to avoid rate-limits imposed on anonymous API users.
+    > Note: the GitHub token needs the `public_repo` scope. The token is
+    required only to avoid rate-limits imposed on anonymous API users.
 
 2. Sanity check the notes, checking that the notes contain details of all
    the features and bug fixes that you expect to be in the release. Add
