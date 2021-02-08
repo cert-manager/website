@@ -21,9 +21,14 @@ perform a cert-manager release:
    ```sh
    (cd && GO111MODULE=on go get github.com/cert-manager/release/cmd/cmrel@latest)
    ```
-3. Get the "Cloud Build Editor" and "Storage Object Viewer" permission for the
-   [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release)
-   project in Google Cloud Platform. Check that you can see [this Cloud
+3. Make sure you are granted these roles on the GCP project
+   [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release):
+
+   - "Cloud Build Editor" (`roles/cloudbuild.builds.builder`),
+   - "Storage Object Viewer" (`roles/storage.objectViewer`), and
+   - "Cloud KMS CryptoKey Encrypter" `roles/cloudkms.cryptoKeyEncrypter`.
+
+   As a quick check, check that you can open [this Cloud
    Build](https://console.cloud.google.com/cloud-build?project=cert-manager-release)
    page.
 4. You must have time to complete all the steps in the release process (~1 hour).
