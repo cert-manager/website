@@ -57,32 +57,32 @@ The process for cutting a minor release is as follows:
 
 2. Create or update the release branch
 
-    If this is the first (`alpha1`) release, then you will need to create
-    the release branch:
+   If this is the first alpha release (`alpha.0`), then you will need to create
+   the release branch:
 
-    ```bash
-    git fetch --all
-    git checkout -b release-1.0 origin/master
-    ```
+   ```bash
+   git fetch --all
+   git checkout -b release-1.0 origin/master
+   ```
 
-    If there has already been an `alpha1` release, the release branch will
-    already exist, so you will need to update it with the latest commits
-    from the master branch, as follows:
+   If there has already been an alpha release, the release branch will
+   already exist, so you will need to update it with the latest commits
+   from the master branch, as follows:
 
-    ```bash
-    git fetch --all
-    git branch --force release-1.0 origin/release-1.0
-    git checkout release-1.0
-    git merge --ff-only origin/master
-    ```
+   ```bash
+   git fetch --all
+   git branch --force release-1.0 origin/release-1.0
+   git checkout release-1.0
+   git merge --ff-only origin/master
+   ```
 
 3. Push it to the `jetstack/cert-manager` repository
 
-    ```bash
-    git push --set-upstream origin
-    ```
+   ```bash
+   git push --set-upstream origin
+   ```
 
-    > ⚠️ You need to be an "admin" to be able to push to `release-1.0`.
+   > ⚠️ You need to be an "admin" to be able to push to `release-1.0`.
 
 4. [Generate and edit the release notes](#generating-and-editing-the-release-notes)
 
