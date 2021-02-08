@@ -82,7 +82,8 @@ The process for cutting a minor release is as follows:
    git push --set-upstream origin
    ```
 
-   > ⚠️ You need to be an "admin" to be able to push to `release-1.0`.
+   > ⚠️ You need to be an "admin" of the GitHub project to be able to push
+   > to the release branch.
 
 4. [Generate and edit the release notes](#generating-and-editing-the-release-notes)
 
