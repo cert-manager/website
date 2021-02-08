@@ -229,7 +229,7 @@ The process for cutting a patch release is as follows:
 
    Bugs that need to be fixed in a patch release should be [cherry picked into the appropriate release branch](../contributing-flow/#cherry-picking).
 
-2. Then, continue with the instruction in [process for releasing a minor version](#process-for-releasing-a-minor-version).
+2. Then, continue with the instructions in [process for releasing a minor version](#process-for-releasing-a-minor-version).
 
 ## Generating and editing the release notes
 
@@ -241,7 +241,7 @@ The process for cutting a patch release is as follows:
     export BRANCH=release-1.0
     export END_REV=release-1.0
     export START_REV=v0.16.1
-    krel release-notes --github-repo cert-manager --github-org jetstack --required-author "jetstack-bot" --output release-notes.md
+    release-notes --github-repo cert-manager --github-org jetstack --required-author "jetstack-bot" --output release-notes.md
     ```
 
     NOTE: The GitHub token needs read-only permission to the cert-manager repository.
