@@ -112,7 +112,7 @@ The process for cutting a minor release is as follows:
 
       ⚠️ Please have a quick look at the build log as it might contain some
       unredacted data that we forgot to redact. We try to make sure the
-      sensitibe data is properly redacted but sometimes we forget to update
+      sensitive data is properly redacted but sometimes we forget to update
       this.
 
    3. Send a second Slack message in reply to this first message with the
@@ -175,7 +175,7 @@ The process for cutting a minor release is as follows:
       This will create a Git tag automatically.
 
 8. Finally, post a Slack message as an answer to the first message. Toggle
-   the checkbox "Also send to `#cert-manager-dev`" so that the message is
+   the check box "Also send to `#cert-manager-dev`" so that the message is
    well visible. Also cross-post the message on `#cert-manager`.
 
    > <https://github.com/jetstack/cert-manager/releases/tag/v1.0.0> 🎉
