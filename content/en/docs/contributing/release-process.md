@@ -10,7 +10,8 @@ new release of cert-manager.
 
 ## Prerequisites
 
-First ensure that you have all the tools and permissions required to perform a cert-manager release:
+First ensure that you have all the tools and permissions required to
+perform a cert-manager release:
 
 1. Install the [`release-notes`]((https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md)) CLI:
    ```sh
@@ -20,7 +21,7 @@ First ensure that you have all the tools and permissions required to perform a c
    ```sh
    (cd && GO111MODULE=on go get github.com/cert-manager/release/cmd/cmrel@latest)
    ```
-3. Get the "Cloud Build Editor" permission for the
+3. Get the "Cloud Build Editor" and "Storage Object Viewer" permission for the
    [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release)
    project in Google Cloud Platform. Check that you can see [this Cloud
    Build](https://console.cloud.google.com/cloud-build?project=cert-manager-release)
