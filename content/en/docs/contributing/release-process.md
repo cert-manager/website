@@ -144,17 +144,17 @@ The process for cutting a minor release is as follows:
 
       If the last step succeeded, you can now re-run the `cmrel publish`
       with the `--nomock` argument to actually publish the release
-      artifacts to GitHub, `Quay.io`, [Helm Hub] etc.
+      artifacts to GitHub, `Quay.io`, [ArtifactHub][] etc.
 
       ```bash
       cmrel publish --nomock --release-name <RELEASE_NAME>
       ```
 
       NOTE: At this stage there will be a draft release on GitHub and a
-      live release on [Helm Hub]. So you must now complete the release
-      process quickly otherwise users of the latest release on[Helm Hub]
-      will encounter errors, because the manual CRD install URL will not be
-      available yet.
+      live release on [ArtifactHub][]. So you must now complete the release
+      process quickly otherwise users of the latest release on
+      [ArtifactHub][] will encounter errors, because the manual CRD install
+      URL will not be available yet.
 
    4. While the build is running, send a fourth Slack message in reply to
       the first message:
@@ -264,4 +264,4 @@ The process for cutting a patch release is as follows:
 
 ## Links
 
- [Helm Hub]: https://charts.jetstack.io
+ [ArtifactHub]: https://charts.jetstack.io
