@@ -110,6 +110,11 @@ The process for cutting a minor release is as follows:
 
       > Releasing `1.2.0-alpha.2` 🧵
 
+      ⚠️ Please have a quick look at the build log as it might contain some
+      unredacted data that we forgot to redact. We try to make sure the
+      sensitibe data is properly redacted but sometimes we forget to update
+      this.
+
    3. Send a second Slack message in reply to this first message with the
       Cloud Build job link that `cmrel` displayed in "View logs at". For
       example, the message would look like:
