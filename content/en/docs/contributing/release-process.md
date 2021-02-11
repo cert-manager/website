@@ -113,7 +113,8 @@ The process for cutting a minor release is as follows:
        export BRANCH=release-1.0
        export END_REV=release-1.0
        export START_REV=v0.16.1
-       release-notes --github-repo cert-manager --github-org jetstack --required-author "jetstack-bot" --output release-notes.md
+       (cd && GO111MODULE=on go get k8s.io/release/cmd/release-notes@v0.7.0)
+       release-notes --repo cert-manager --org jetstack --required-author "jetstack-bot" --output release-notes.md --repo-path cert-manager --debug
        ```
 
        > Note: the GitHub token does not need any scope. The token is
