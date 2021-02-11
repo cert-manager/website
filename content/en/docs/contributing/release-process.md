@@ -46,8 +46,8 @@ perform a cert-manager release:
    ```
 
 8. Get a GitHub access token [here](https://github.com/settings/tokens)
-   with the `public_repo` scope. It is used only by the `release-notes` CLI
-   to avoid API rate limiting.
+   with no scope ticked. It is used only by the `release-notes` CLI to
+   avoid API rate limiting since it will go through all the PRs one by one.
 
 ## Minor releases
 
