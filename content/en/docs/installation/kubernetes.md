@@ -88,25 +88,7 @@ official Helm chart for installing cert-manager.
 
 ### Prerequisites
 
-- Helm v2 or v3 installed
-
-### Note: Helm v2
-
-Before deploying cert-manager with Helm v2, you must ensure
-[Tiller](https://github.com/helm/helm) is up and running in your cluster. Tiller
-is the server side component to Helm.
-
-Your cluster administrator may have already setup and configured Helm for you,
-in which case you can skip this step.
-
-Full documentation on installing Helm can be found in the [installing helm
-docs](https://v2.helm.sh/docs/install/#installing-helm).
-
-If your cluster has RBAC (Role Based Access Control) enabled (default in GKE
-`v1.7`+), you will need to take special care when deploying Tiller, to ensure
-Tiller has permission to create resources as a cluster administrator. More
-information on deploying Helm with RBAC can be found in the [Helm RBAC
-docs](https://github.com/helm/helm/blob/240e539cec44e2b746b3541529d41f4ba01e77df/docs/rbac.md#Example-Service-account-with-cluster-admin-role).
+- Helm v3 installed
 
 ### Steps
 
@@ -169,19 +151,10 @@ Uncomment the relevant line in the next steps to enable this.
 To install the cert-manager Helm chart:
 
 ```bash
-# Helm v3+
 $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --version v1.1.0 \
-  # --set installCRDs=true
-
-# Helm v2
-$ helm install \
-  --name cert-manager \
-  --namespace cert-manager \
-  --version v1.1.0 \
-  jetstack/cert-manager \
   # --set installCRDs=true
 ```
 
@@ -310,9 +283,9 @@ common infrastructure needs.
 
 It depends on `cert-manager` for certificate management, and it is [regularly
 tested](https://github.com/bitnami/kube-prod-runtime/blob/master/Jenkinsfile) so
-the components are known to work together for GKE and AKS clusters (EKS to be
-added soon). For its ingress stack it creates a DNS entry in the configured DNS
-zone and requests a TLS certificate from the Let's Encrypt staging server.
+the components are known to work together for GKE, AKS, and EKS clusters. For
+its ingress stack it creates a DNS entry in the configured DNS zone and requests
+a TLS certificate from the Let's Encrypt staging server.
 
 BKPR can be deployed using the `kubeprod install` command, which will deploy
 `cert-manager` as part of it. Details available in the [BKPR installation

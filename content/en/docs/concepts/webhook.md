@@ -22,7 +22,7 @@ main functions:
 - [`MutatingAdmissionWebhook`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook):
   Changes the contents of resources during create and update operations, for
   example to set default values.
-- [`CustomResourceConversionWebhook`](https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definition-versioning/#webhook-conversion):
+- [`CustomResourceConversionWebhook`](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#webhook-conversion):
   The webhook is also responsible for implementing a conversion over versions
   in the cert-manager `CustomResources` (`cert-manager.io`). This means that
   multiple API versions can be supported simultaneously; from `v1alpha2` through to `v1`.

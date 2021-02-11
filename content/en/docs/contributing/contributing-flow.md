@@ -71,6 +71,11 @@ If the pull request is a critical bug fix then this will probably
 also be cherry picked to the current stable version of cert-manager as a patch
 release.
 
+To let people know that your PR is still a work in progress, we usually add a
+`WIP:` prefix to the title of the PR. Prow will then automatically set the label
+`do-not-merge/work-in-progress`.
+
+
 ### Cherry Picking
 
 If the pull request contains a critical bug fix then this should be cherry picked in to the current stable cert-manager branch 
@@ -112,6 +117,23 @@ Sometimes `/triage` is also added which helps us when following up Issues.
 * Area indicates the code area which is/will need changing
 * Kind indicates if it is a `bug` or a `feature` but also can be `documentation` or `cleanup` (general maintenance)
 * Priority is the priority it has for the cert-manager team, PRs are still very welcome for those!
+
+### Assignees meaning in PRs and issues
+
+Sometimes, you might see someone commenting with the
+[`/assign` prow command](https://prow.build-infra.jetstack.net/command-help#assign):
+
+```plain
+/assign @meyskens
+```
+
+Here is the meaning that we give to the GitHub assignees:
+
+- On issues, it means that the assignee is working on it.
+- On PRs, we use it as a way to know who should be taking a look at the PR at any time:
+  - When the author is assigned, it means the PR needs work to be done aka "changes requested";
+  - When nobody is assigned, it means this PR needs review;
+  - When someone different from the author is assigned, it means this person is reviewing this PR.
 
 ### Triage Party!
 

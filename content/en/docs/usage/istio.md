@@ -5,8 +5,10 @@ weight: 200
 type: "docs"
 ---
 
-The cert-manager team are currently working on a solution to secure mTLS of
-envoy side cars using cert-manager as the certificate provider. This section
-will be updated when there has been more development in this area.
+cert-manager can be integrated with [Istio](https://istio.io) using the project
+[istio-csr](https://github.com/cert-manager/istio-csr). The istio-csr will
+deploy an agent that is responsible for receiving certificate signing requests
+for all members of the Istio mesh, and signing them through cert-manager.
 
-This is not being _directly_ actively worked on at this time.
+[istio-csr](https://github.com/cert-manager/istio-csr) will sign all
+control plane and workload certificates via your chosen cert-manager Issuer.
