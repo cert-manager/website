@@ -52,7 +52,7 @@ some of these goals are missed, in order to keep up release velocity.
 ### Process for releasing a minor version
 
 > Note: please click on the "Edit this page" button on the top-right corner
-> of this page if a step is missing or if it outdated.
+> of this page if a step is missing or if it is outdated.
 
 The process for cutting a minor release is as follows:
 
