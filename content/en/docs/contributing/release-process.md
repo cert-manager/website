@@ -13,7 +13,7 @@ new release of cert-manager.
 First ensure that you have all the tools and permissions required to
 perform a cert-manager release:
 
-1. Install the [`release-notes`]((https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md)) CLI:
+1. Install the [`release-notes`](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md) CLI:
    ```sh
    (cd && GO111MODULE=on go get k8s.io/release/cmd/release-notes@latest)
    ```
