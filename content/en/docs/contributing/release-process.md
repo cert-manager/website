@@ -21,7 +21,16 @@ perform a cert-manager release:
    ```sh
    (cd && GO111MODULE=on go get github.com/cert-manager/release/cmd/cmrel@latest)
    ```
-3. Make sure you are granted these roles on the GCP project [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release):
+3. Clone and `cd` into the `cert-manager/release` repo. ⚠️ All the commands
+   below have to be run from this  cloned folder as it contains the
+   necessary `cloudbuild.yml` files.
+
+     ```sh
+     git clone https://github.com/cert-manager/release
+     cd release
+     ```
+
+4. Make sure you are granted these roles on the GCP project [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release):
     - "Cloud Build Editor" (`roles/cloudbuild.builds.builder`),
     - "Storage Object Viewer" (`roles/storage.objectViewer`), and
     - "Cloud KMS CryptoKey Encrypter" `roles/cloudkms.cryptoKeyEncrypter`.
@@ -29,22 +38,22 @@ perform a cert-manager release:
     As a quick check, check that you can open [this Cloud
     Build](https://console.cloud.google.com/cloud-build?project=cert-manager-release)
     page.
-4. You must have time to complete all the steps in the release process (~1 hour).
-5. Install the [`gcloud`](https://cloud.google.com/sdk/) CLI.
-6. [Login](https://cloud.google.com/sdk/docs/authorizing#running_gcloud_auth_login)
+5. You must have time to complete all the steps in the release process (~1 hour).
+6. Install the [`gcloud`](https://cloud.google.com/sdk/) CLI.
+7. [Login](https://cloud.google.com/sdk/docs/authorizing#running_gcloud_auth_login)
    to `gcloud`:
 
    ```sh
    gcloud auth application-default login
    ```
 
-7. Make sure `gcloud` points to the cert-manager-release project:
+8. Make sure `gcloud` points to the cert-manager-release project:
 
    ```sh
    gcloud config set project cert-manager-release
    ```
 
-8. Get a GitHub access token [here](https://github.com/settings/tokens)
+9.  Get a GitHub access token [here](https://github.com/settings/tokens)
    with no scope ticked. It is used only by the `release-notes` CLI to
    avoid API rate limiting since it will go through all the PRs one by one.
 
