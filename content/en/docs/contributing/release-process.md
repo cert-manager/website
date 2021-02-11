@@ -105,7 +105,7 @@ The process for cutting a minor release is as follows:
      Note 1: run `git remote -v` to check that `origin` points to the
      upstream <https://github.com/jetstack/cert-manager.git>.
 
-     Note 2: uou need to be an "admin" of the GitHub project to be able to
+     Note 2: you need to be an "admin" of the GitHub project to be able to
      push to the release branch.
 
      ```bash
