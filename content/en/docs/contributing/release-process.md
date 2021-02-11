@@ -103,7 +103,33 @@ The process for cutting a minor release is as follows:
    git push --set-upstream origin
    ```
 
-4. [Generate and edit the release notes](#generating-and-editing-the-release-notes)
+4. Generate and edit the release notes:
+
+   1. Run as follows, substituting the current and last versions where appropriate:
+
+       ```bash
+       export GITHUB_TOKEN=*your-token*
+       export RELEASE_VERSION=1.0.0
+       export BRANCH=release-1.0
+       export END_REV=release-1.0
+       export START_REV=v0.16.1
+       release-notes --github-repo cert-manager --github-org jetstack --required-author "jetstack-bot" --output release-notes.md
+       ```
+
+       > Note: the GitHub token does not need any scope. The token is
+       required only to avoid rate-limits imposed on anonymous API users.
+
+   2. Sanity check the notes, checking that the notes contain details of all
+      the features and bug fixes that you expect to be in the release. Add
+      additional blurb, notable items and characterize change log.
+
+      You can see the commits that will go into this release by using the
+      [GitHub compare](https://github.com/jetstack/cert-manager/compare). For
+      example, while releasing `v1.0.0`, you want to compare it with the
+      latest pre-released version `v1.0.0-beta.1`:
+
+      > <https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master>
+
 
 5. Run `cmrel stage`
 
@@ -192,7 +218,7 @@ The process for cutting a minor release is as follows:
    3. Click "publish" to make the GitHub release live.
       This will create a Git tag automatically.
 
-8. Finally, post a Slack message as an answer to the first message. Toggle
+8.  Finally, post a Slack message as an answer to the first message. Toggle
    the check box "Also send to `#cert-manager-dev`" so that the message is
    well visible. Also cross-post the message on `#cert-manager`.
 
@@ -248,34 +274,6 @@ The process for cutting a patch release is as follows:
    Bugs that need to be fixed in a patch release should be [cherry picked into the appropriate release branch](../contributing-flow/#cherry-picking).
 
 2. Then, continue with the instructions in [process for releasing a minor version](#process-for-releasing-a-minor-version).
-
-## Generating and editing the release notes
-
-1. Run as follows, substituting the current and last versions where appropriate:
-
-    ```bash
-    export GITHUB_TOKEN=*your-token*
-    export RELEASE_VERSION=1.0.0
-    export BRANCH=release-1.0
-    export END_REV=release-1.0
-    export START_REV=v0.16.1
-    release-notes --github-repo cert-manager --github-org jetstack --required-author "jetstack-bot" --output release-notes.md
-    ```
-
-    > Note: the GitHub token needs the `public_repo` scope. The token is
-    required only to avoid rate-limits imposed on anonymous API users.
-
-2. Sanity check the notes, checking that the notes contain details of all
-   the features and bug fixes that you expect to be in the release. Add
-   additional blurb, notable items and characterize change log.
-
-   You can see the commits that will go into this release by using the
-   [GitHub compare](https://github.com/jetstack/cert-manager/compare). For
-   example, while releasing `v1.0.0`, you want to compare it with the
-   latest pre-released version `v1.0.0-beta.1`:
-
-   > <https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master>
-
 ## Links
 
  [ArtifactHub]: https://charts.jetstack.io
