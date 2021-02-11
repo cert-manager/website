@@ -17,6 +17,7 @@ external cert-manager components:
 - [Developing with kind](./kind/)
 - [Running end-to-end tests](./e2e/)
 - [Release process](release-process/)
+- [Feature policy](policy/)
 
 ## Welcome
 
@@ -35,7 +36,7 @@ We have 2 regular repeating meetings:
 
 * our daily stand-up meetings [on Google Meet](
 https://meet.google.com/eum-fyvt-xpa) at 10:30 London time every weekday 
-* our bi-weekly developer meetings [are on Zoom]( https://zoom.us/j/904964148) 17:00 London time every 2 weeks (check calendar invites or [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U)). 
+* our bi-weekly developer meetings [are on Google Meet](https://meet.google.com/abp-bwhk-wxc) 17:00 London time every 2 weeks (check calendar invites or [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U)). 
 
 You can check what time this is where you are using [`everytimezone.com`](https://everytimezone.com/).
 

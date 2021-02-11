@@ -9,9 +9,16 @@ cert-manager has an end-to-end test suite that verifies functionality against a
 real Kubernetes cluster.
 
 This test takes around 30 minutes, it will be run on every PR in our cluster.
-It is only advised to run this locally when you made big changes to the codebase.
 
-This document explains how you can run the end-to-end tests yourself.
+> Note: you can see the status of each commit on the master branch at
+> [`testgrid.k8s.io`](https://testgrid.k8s.io/jetstack-cert-manager-master).
+> You can join the Google group
+> [`cert-manager-dev-alerts`](https://groups.google.com/g/cert-manager-dev-alerts)
+> in order to receive a notification by email whenever a commit on master
+> fails.
+
+It is only advised to run this locally when you made big changes to the
+codebase. This document explains how you can run the end-to-end tests yourself.
 
 ## Requirements
 
@@ -84,3 +91,5 @@ This suite tests certificate functionality against all issuers.
 #### Feature sets
 This exists to only test a certain feature (e.g. Email SAN) against issuers that support this feature.
 Each test specifies a used feature using `s.checkFeatures(feature)`, this is then checked against the issuer's `UnsupportedFeatures` list to check if it can be ran against the issuer.
+
+

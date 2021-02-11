@@ -125,7 +125,7 @@ most cert-manager users unless you know it is explicitly needed.
 External Account Bindings require three fields on an ACME `Issuer` which
 represents your ACME account. These fields are:
 
-- `keyID` - the key ID of which your external account binding is indexed by the
+- `keyID` - the key ID or account ID of which your external account binding is indexed by the
 external account manager
 - `keySecretRef` - the name and key of a secret containing a base 64 encoded 
 URL string of your external account symmetric MAC key
@@ -136,7 +136,7 @@ ACME server
 > Note: In _most_ cases, the MAC key must be encoded in `base64URL`. The 
 > following command will base64-encode a key and convert it to `base64URL`:
 > 
->     $ echo 'my-secret-key' | base64 | sed -e 's/+/-/g' -e 's///_/g' -e 's/=//g'
+>     $ echo 'my-secret-key' | base64 -w0 | sed -e 's/+/-/g' -e 's/\//_/g' -e 's/=//g'
 > 
 > You can then create the Secret resource with: 
 > 
@@ -155,7 +155,7 @@ spec:
     email: user@example.com
     server: https://my-acme-server-with-eab.com/directory
     externalAccountBinding:
-      keyID: my-kid-1
+      keyID: my-keyID-1
       keySecretRef:
         name: eab-secret
         key: secret
@@ -210,10 +210,10 @@ single solver.
 
 #### Match Labels
 
-The `matchLabel` selector requires that all `Certificates` match at least one of
+The `matchLabel` selector requires that all `Certificates` match all of
 the labels that are defined in the string map list of that stanza. For example,
 the following `Issuer` will only match on `Certificates` that have the labels
-`"user-cloudflare-solver": "true"`, or `"email": "user@example.com"`, or both.
+`"user-cloudflare-solver": "true"` and `"email": "user@example.com"`.
 
 ```yaml
 apiVersion: cert-manager.io/v1

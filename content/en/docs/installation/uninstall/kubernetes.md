@@ -44,15 +44,9 @@ Uninstalling cert-manager from a `helm` installation is a case of running the
 installation process, *in reverse*, using the delete command on both `kubectl`
 and `helm`.
 
-Firstly, delete the cert-manager installation using `helm`. Ensure the
-`--purge` flag is applied if you are using Helm 2.
 
 ```bash
-# Helm 3
 $ helm --namespace cert-manager delete cert-manager
-
-# Helm 2.x
-$ helm delete cert-manager --purge
 ```
 
 Next, delete the cert-manager namespace:

@@ -14,6 +14,7 @@ APIServices
 AppRole
 AWS
 awspca
+aws-pca-issuer
 AzureDNS
 backend
 backends
@@ -60,11 +61,14 @@ enablement
 eTLD
 external-dns
 FastDNS
+FreeIPA
+freeipa-issuer
 GCE
 GCLB
 gcloud
 GCP
 GKE
+google-cas-issuer
 HashiCorp
 Helmfile
 hostname
@@ -96,6 +100,7 @@ Kubernetes
 labelled
 lifecycle
 loadbalancer
+LuCI
 MacOS
 metadata
 misconfiguration
@@ -116,6 +121,7 @@ OpenAPI
 OpenFaaS
 OpenShift
 OperatorHub
+OpenWRT
 PEM
 PKCS#12
 PKCS#8
@@ -188,3 +194,14 @@ HTTP-01
 loopback
 mechanism
 retryable
+vendoring
+subchart
+cainjector
+Velero
+istio-csr
+pre-released
+pre-release
+unredacted
+ArtifactHub
+CryptoKey
+Encrypter

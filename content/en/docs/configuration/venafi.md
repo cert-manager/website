@@ -209,14 +209,16 @@ spec:
       caBundle: <base64 encoded string of caBundle PEM file, or empty to use system root CAs>
       credentialsRef:
         name: tpp-secret
--```
+```
 
 You can then create the `Issuer` using `kubectl create -f`.
+
 ```bash
 $ kubectl create -f venafi-tpp-issuer.yaml
 ```
 
 Verify the `Issuer` has been initialized correctly using `kubectl describe`.
+
 ```bash
 $ kubectl describe issuer tpp-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
 ```
@@ -230,9 +232,11 @@ more information on how to create Certificate resources.
 # Issuer specific annotations
 
 ## Custom Fields
+
 Starting `v0.14` you can pass custom fields to Venafi (TPP version `v19.2` and higher) using the `venafi.cert-manager.io/custom-fields` annotation on Certificate resources.
 The value is a JSON encoded array of custom field objects having a `name` and `value` key.
 For example:
+
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Certificate

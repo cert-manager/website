@@ -11,6 +11,7 @@ The `v1.1` release is our first release in the `v1` series with a few focus area
 * Improved Venafi TPP Authentication
 
 We also want to thank several new contributors to the project for their PRs! 
+
 * `alrs`
 * `raphink`
 * `renan`

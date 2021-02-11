@@ -25,7 +25,7 @@ authors are as follows:
   certificates from the [Smallstep](https://smallstep.com) [Certificate
   Authority server](https://github.com/smallstep/certificates).
 
-- [awspca-issuer](https://github.com/codingvirtues/awspca-issuer): Used to
+- [aws-pca-issuer](https://github.com/jniebuhr/aws-pca-issuer): Used to
   request certificates from [AWS Private Certificate Authority]
   (https://aws.amazon.com/certificate-manager/private-certificate-authority/)
   for cloud native/hybrid environments.
@@ -37,6 +37,18 @@ authors are as follows:
   to request certificates signed by
   [Cloudflare Origin CA](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca)
   to enable TLS between Cloudflare edge and your Kubernetes workloads.
+
+- [google-cas-issuer](https://github.com/jetstack/google-cas-issuer): Used
+  to request certificates signed by private CAs managed by the
+  [Google Cloud Certificate Authority Service](https://cloud.google.com/certificate-authority-service/).
+  
+- [freeipa-issuer](https://github.com/guilhem/freeipa-issuer): Used to
+  request certificates signed by [FreeIPA](https://www.freeipa.org).
+
+- [ADCS Issuer](https://github.com/nokia/adcs-issuer): Used
+  to request certificates signed by 
+  [Microsoft Active Directory Certificate Service](https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority).
+
 
 To create your own external issuer type, please follow the guidance in the
 [development documentation](../../contributing/external-issuers/).

@@ -57,3 +57,12 @@ an external issuer controller, it is best to reach out of the #cert-manager
 [slack](https://slack.k8s.io) channel, or to join the weekly community calls which you
 will be invited to once you join the [Google
 Group](https://groups.google.com/forum/#!forum/cert-manager-dev).
+
+## Sample External Issuer
+
+There is a [Sample External Issuer](https://github.com/cert-manager/sample-external-issuer),
+which is maintained by the cert-manager authors,
+and which serves as an example of how to write an external issuer.
+
+The README file has step-by-step instructions on how to write an external issuer using Kubebuilder and controller-runtime,
+and contains detailed notes on all the tools you will need.
