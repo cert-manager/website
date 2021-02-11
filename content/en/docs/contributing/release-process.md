@@ -21,8 +21,7 @@ perform a cert-manager release:
    ```sh
    (cd && GO111MODULE=on go get github.com/cert-manager/release/cmd/cmrel@latest)
    ```
-3. Make sure you are granted these roles on the GCP project
-   [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release):
+3. Make sure you are granted these roles on the GCP project [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release):
 
    - "Cloud Build Editor" (`roles/cloudbuild.builds.builder`),
    - "Storage Object Viewer" (`roles/storage.objectViewer`), and
@@ -33,8 +32,20 @@ perform a cert-manager release:
    page.
 4. You must have time to complete all the steps in the release process (~1 hour).
 5. Install the [`gcloud`](https://cloud.google.com/sdk/) CLI.
-6. Run [`gcloud auth login`](https://cloud.google.com/sdk/docs/authorizing#running_gcloud_auth_login).
-7. Get a GitHub access token [here](https://github.com/settings/tokens)
+6. [Login](https://cloud.google.com/sdk/docs/authorizing#running_gcloud_auth_login)
+   to `gcloud`:
+
+   ```sh
+   gcloud auth application-default login
+   ```
+
+7. Make sure `gcloud` points to the cert-manager-release project:
+
+   ```sh
+   gcloud config set project cert-manager-release
+   ```
+
+8. Get a GitHub access token [here](https://github.com/settings/tokens)
    with the `public_repo` scope. It is used only by the `release-notes` CLI
    to avoid API rate limiting.
 
@@ -83,12 +94,14 @@ The process for cutting a minor release is as follows:
 
 3. Push it to the `jetstack/cert-manager` repository
 
+   > Note: make sure that the `origin` remote points to the upstream <https://github.com/jetstack/cert-manager.git> with `git remote -v`.
+
+   > Note 2: uou need to be an "admin" of the GitHub project to be able to
+   > push to the release branch.
+
    ```bash
    git push --set-upstream origin
    ```
-
-   > ⚠️ You need to be an "admin" of the GitHub project to be able to push
-   > to the release branch.
 
 4. [Generate and edit the release notes](#generating-and-editing-the-release-notes)
 
