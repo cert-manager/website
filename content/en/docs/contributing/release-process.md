@@ -15,7 +15,7 @@ perform a cert-manager release:
 
 1. Install the [`release-notes`](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md) CLI:
    ```sh
-   (cd && GO111MODULE=on go get k8s.io/release/cmd/release-notes@latest)
+   (cd && GO111MODULE=on go get k8s.io/release/cmd/release-notes@v0.7.0)
    ```
 2. Install our [`cmrel`](https://github.com/cert-manager/release) CLI:
    ```sh
