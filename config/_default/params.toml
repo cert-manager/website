@@ -22,7 +22,7 @@
 # Set to "docs" path
 
 [[versions]]
-  version = "v1.1"
+  version = "v1.2"
   # 'master' is used to store the 'current' version documentation.
   # Once the 'next' release becomes 'current', we branch master to
   # release-X.Y and merge 'release-next' into 'master'.
@@ -33,7 +33,7 @@
 # 'Next' version
 ################
 [[versions]]
-  version = "v1.2"
+  version = "v1.3"
   ghbranchname = "release-next"
   url = "/next-docs/"
   dirpath = "next-docs"
