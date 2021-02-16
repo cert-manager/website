@@ -62,10 +62,10 @@ are included in a single YAML manifest file:
 Install the `CustomResourceDefinitions` and cert-manager itself
 ```bash
 # OpenShift 4+
-oc apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.yaml
+oc apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.1/cert-manager.yaml
 
 # OpenShift 3.11
-$ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager-legacy.yaml
+$ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.1.1/cert-manager-legacy.yaml
 ```
 
 > **Note**: If you're using OpenShift 3 you will need to install the legacy version of the manifests.
