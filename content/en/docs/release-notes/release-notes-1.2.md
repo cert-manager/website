@@ -15,4 +15,4 @@ type: "docs"
 1. In an effort to introduce new features whilst keeping the project
    maintainable, cert-manager now only supports Kubernetes down to version
    `v1.16`. This means the `legacy` manifests have now been removed. You can
-   read more [here](../../../concepts/project-maturity).
+   read more [here](../../concepts/project-maturity/).

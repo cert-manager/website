@@ -17,7 +17,7 @@ The cert-manager API is currently at `v1` and is stable.
 cert-manager has a hard guarantee of compatibly with the current stable upstream
 Kubernetes version. Beyond this, cert-manager also aims to be compatible with
 versions down to `N-4`, where `N` is the current upstream version release. This
-means that if the current version is `v1.19`, cert-manager aims to be compatible
+means that if the current version is `v1.20`, cert-manager aims to be compatible
 with versions down to `v1.16`. This is done by running periodic end-to-end test
 jobs against each version of Kubernetes.
 
