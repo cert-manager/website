@@ -20,7 +20,7 @@ This will also update the version conversion code if needed.
 
 ## Versions
 
-cert-manager at time of writing has 4 (5 actually) CRD versions in use, distributed in 2 versions (mainline and legacy). The last 2 Bazel will take care of for you.
+cert-manager at time of writing has 4 CRD versions in use.
 
 These versions are defined in [`//pkg/apis/certmanager`](https://github.com/jetstack/cert-manager/tree/master/pkg/apis/certmanager). ACME related resources are in `//pkg/apis/acme`.
 
