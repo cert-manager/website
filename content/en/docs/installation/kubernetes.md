@@ -19,8 +19,8 @@ configuring different `Issuer` types can be found in the [respective configurati
 guides](../../configuration/).
 
 
-> Note: From cert-manager `v0.14.0` onward, the minimum supported version of
-> Kubernetes is `v1.11.0`. Users still running Kubernetes `v1.10` or below should
+> Note: From cert-manager `v1.2.0` onward, the minimum supported version of
+> Kubernetes is `v1.16.0`. Users still running Kubernetes `v1.15` or below should
 > upgrade to a supported version before installing cert-manager.
 
 > **Warning**: You should not install multiple instances of cert-manager on a single
