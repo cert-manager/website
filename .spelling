@@ -13,11 +13,13 @@ APIService
 APIServices
 AppRole
 AWS
+allowlist
 awspca
 aws-pca-issuer
 AzureDNS
 backend
 backends
+backoff
 backported
 base64
 Bazel
@@ -44,6 +46,7 @@ CronJob
 CSI
 CSR
 CSRs
+customizable
 DaemonSet
 DCO
 DHCP
