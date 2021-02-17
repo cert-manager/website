@@ -270,10 +270,11 @@ A patch release contains critical bug fixes for the project.  They are managed o
 an ad-hoc basis, and should only be required when critical bugs/regressions are
 found in the release.
 
-We will only perform patch release for the **current** version of cert-manager.
+We will only perform patch release for the **current** and **last** minor
+version of cert-manager.
 
 Once a new minor release has been cut, we will stop providing patches for the
-version before it.
+one before last version, [see](../../concepts/project-maturity/).
 
 ### Release schedule
 

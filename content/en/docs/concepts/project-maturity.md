@@ -12,6 +12,13 @@ in both production and non-production clusters.
 
 The cert-manager API is currently at `v1` and is stable.
 
+## Supported Versions
+
+cert-manager supports versions for the current and last minor release.  This
+means that if the latest release is `v1.2`, cert-manager supports the versions
+`v1.2` and `v1.1`. Support means that bug fixes will be backported to supported
+minor versions and patch releases will be made.
+
 ## Compatibility
 
 cert-manager has a hard guarantee of compatibly with the current stable upstream
