@@ -16,6 +16,7 @@ external cert-manager components:
 - [DCO sign off](./sign-off/)
 - [Developing with kind](./kind/)
 - [Running end-to-end tests](./e2e/)
+- [Repository structure](./repo-structure/)
 - [Release process](release-process/)
 - [Feature policy](policy/)
 
