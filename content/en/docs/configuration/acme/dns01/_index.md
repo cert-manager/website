@@ -33,7 +33,7 @@ spec:
       name: example-issuer-account-key
     solvers:
     - dns01:
-        cloudDNS:
+        clouddns:
           project: my-project
           serviceAccountSecretRef:
             name: prod-clouddns-svc-acct-secret
