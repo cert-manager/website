@@ -37,7 +37,7 @@ will then use the information inside that issuer resource to attempt to create a
 signed certificate, based upon the certificate request.
 
 Once a signed certificate has been gathered by the issuer controller, it then
-updates the status of the `CertifiateRequest` resource with the signed
+updates the status of the `CertificateRequest` resource with the signed
 certificate. It is then important to then update the condition status of that
 resource to a ready state, as this is what is used to signal to higher order
 controllers, such as the `Certificate` controller, that the resource is ready to
