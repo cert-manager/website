@@ -361,7 +361,7 @@ Both of these issuers are configured to use the
 Check on the status of the issuer after you create it:
 
 ```bash
-$ kubectl describe issuer letsencrypt-staging
+$ kubectl describe issuer letsencrypt-prod
 Name:         letsencrypt-staging
 Namespace:    default
 Labels:       <none>
