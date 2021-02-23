@@ -5,8 +5,10 @@ weight: 70
 type: "docs"
 ---
 
-This document aims to outline the process that should be followed for cutting a
-new release of cert-manager.
+This document aims to outline the process that should be followed for
+cutting a new release of cert-manager. If you would like to know more about
+current releases and the timeline for future releases, take a look at the
+[Supported Releases](/docs/installation/supported-releases/) page.
 
 ## Prerequisites
 
@@ -389,22 +391,39 @@ page if a step is missing or if it is outdated.
     3. Click "Publish" to make the GitHub release live. This will create a Git
        tag automatically.
 
-9.  Finally, post a Slack message as an answer to the first message. Toggle the
-   check box "Also send to `#cert-manager-dev`" so that the message is well
+9. **(final release only)** Add the new final release to the
+    [supported-releases](/docs/installation/supported-releases/) page.
+
+10. Post a Slack message as an answer to the first message. Toggle the check
+   box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
     <div class="pageinfo pageinfo-primary"><p>
     https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-11. Proceed to the post-release steps:
+11. **(final release only)** Show the release to the world:
 
-    1. **(final release only)** Open a PR to
+    1. Send an email to
+       [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
+       with the `release` label
+       ([examples](https://groups.google.com/g/cert-manager-dev?label=release)).
+
+    2. Send a tweet
+       ([example](https://twitter.com/MaartjeME/status/1286327362121084928))
+       and make sure [@JetstackHQ](https://twitter.com/JetstackHQ) retweets it.
+
+12. Proceed to the post-release steps:
+
+    1. **(final release only)** Add the new final release to the
+       [supported-releases](/docs/installation/supported-releases/) page.
+
+    2. **(final release only)** Open a PR to
        [`jetstack/testing`](https://github.com/jetstack/testing) and change Prow's
        config. To do this, take inspiration from [Maartje's PR
        example](https://github.com/jetstack/testing/pull/397/files).
 
-    2. **(final release only)** Push a new release branch to
+    3. **(final release only)** Push a new release branch to
        [`jetstack/cert-manager`](https://github.com/jetstack/cert-manager). If the
        final release is `v1.0.0`, then push the new branch `release-1.1`:
 
@@ -414,34 +433,8 @@ page if a step is missing or if it is outdated.
         git push origin release-1.1
         ```
 
-    3. **(final release only)** Open a PR to
+    4. **(final release only)** Open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) with
        updates to the website configuration. To do this, take inspiration from
        [Maartje's PR
        example](ttps://github.com/cert-manager/website/pull/309/files).
-
-## Patch Releases
-
-A patch release contains critical bug fixes for the project. They are managed on
-an ad-hoc basis, and should only be required when critical bugs/regressions are
-found in the release.
-
-We will only perform patch release for the **current** version of cert-manager.
-
-Once a new minor release has been cut, we will stop providing patches for the
-version before it.
-
-### Release Schedule
-
-Patch releases are cut on an ad-hoc basis, depending on recent activity on the
-release branch.
-
-### Process for Releasing a Patch Version
-
-The process for cutting a patch release is as follows:
-
-1. Ensure that all PRs have been cherry-picked into the release branch, e.g. `release-1.0`
-
-    Bugs that need to be fixed in a patch release should be [cherry picked into the appropriate release branch](../contributing-flow/#cherry-picking).
-
-2. Then, continue with the instructions in [process for releasing a version](#process-for-releasing-a-version).
