@@ -49,7 +49,7 @@ This release includes changes from:
 ### New `CertificateRequest` Resource
 
 A new resource has been introduced - `CertificateRequest` - that is used to
-request certificates using a raw x509 certificate signing request. This resource
+request certificates using a raw X.509 certificate signing request. This resource
 is not typically used by humans but rather by other controllers or services. For
 example, the `Certificate` controller will now create a `CertificateRequest`
 resource to resolve its own Spec.

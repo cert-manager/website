@@ -17,7 +17,7 @@ As usual, please read the [upgrade notes](/docs/installation/upgrading/upgrading
 ## New certificate controller
 
 The Certificate controller is one of the most commonly used controllers in the project.
-It represents the 'full lifecycle' of an x509 private key and certificate, including
+It represents the 'full lifecycle' of an X.509 private key and certificate, including
 private key management and renewal.
 
 In `v0.15` we added the new certificate controllers under a feature gate to allow users to test these and gather feedback.
@@ -37,7 +37,7 @@ The `kubectl cert-manager create certificaterequest` command creates a new Certi
 resource based on the YAML manifest of a Certificate resource as specified by `--from-certificate-file` flag.
  
 For example this will create a CertificateRequest resource with the name "my-cr" based on the Certificate described in `my-certificate.yaml` while storing the
-private key and x509 certificate in `my-cr.key` and `my-cr.crt` respectively.
+private key and X.509 certificate in `my-cr.key` and `my-cr.crt` respectively.
 ```console
 $ kubectl cert-manager create certificaterequest my-cr --from-certificate-file my-certificate.yaml --fetch-certificate --timeout 20m
 ```
