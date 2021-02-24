@@ -19,7 +19,7 @@ As usual, please read the [upgrade notes](/docs/installation/upgrading/upgrading
 ## Experimental controllers
 
 The Certificate controller is one of the most commonly used controllers in the project.
-It represents the 'full lifecycle' of an x509 private key and certificate, including
+It represents the 'full lifecycle' of an X.509 private key and certificate, including
 private key management and renewal.
 
 As the project is maturing, more requirements around this controller are starting to become

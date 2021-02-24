@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 The `CertificateRequest` is a namespaced resource in cert-manager that is used
-to request x509 certificates from an [`Issuer`](../issuer/). The resource
+to request X.509 certificates from an [`Issuer`](../issuer/). The resource
 contains a base64 encoded string of a PEM encoded certificate request which is
 sent to the referenced issuer. A successful issuance will return a signed
 certificate, based on the certificate signing request. `CertificateRequests` are
@@ -61,8 +61,8 @@ actions to take next on the resource. Each condition consists of the pair
 `Ready` - a boolean value, and `Reason` - a string. The set of values and
 meanings are as follows:
 
-| Ready | Reason  | Condition Meaning                                                                                                                                                                                                                             |
-|-------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| False | Pending | The `CertificateRequest` is currently pending, waiting for some other operation to take place. This could be that the `Issuer` does not exist yet or the `Issuer` is in the process of issuing a certificate.                                       |
+| Ready | Reason  | Condition Meaning                                                                                                                                                                                                                               |
+| ----- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| False | Pending | The `CertificateRequest` is currently pending, waiting for some other operation to take place. This could be that the `Issuer` does not exist yet or the `Issuer` is in the process of issuing a certificate.                                   |
 | False | Failed  | The certificate has failed to be issued - either the returned certificate failed to be decoded or an instance of the referenced issuer used for signing failed. No further action will be taken on the `CertificateRequest` by it's controller. |
-| True  | Issued  | A signed certificate has been successfully issued by the referenced `Issuer`.                                                                                                                                                                 |
+| True  | Issued  | A signed certificate has been successfully issued by the referenced `Issuer`.                                                                                                                                                                   |

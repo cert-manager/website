@@ -21,7 +21,7 @@ A number of new fields have been added to the Certificate resource type:
 - `isCA` - allows generating certificates with the 'signing' usage set
 - `organization` - allows specifying values for the 'O' field of Certificates (for supported providers)
 
-New fields like this make cert-manager more useful for applications beyond just securing Ingress, as well as allowing users to continue meeting their security requirements for x509 certificates.
+New fields like this make cert-manager more useful for applications beyond just securing Ingress, as well as allowing users to continue meeting their security requirements for X.509 certificates.
 
 ## New ACME DNS providers
 This release includes two new DNS provides for the ACME Issuer:

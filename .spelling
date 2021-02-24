@@ -180,7 +180,6 @@ whitespace
 wildcard
 wildcards
 WIP
-x509
 YAML
 YAMLs
 awskms-issuer
@@ -209,3 +208,136 @@ ArtifactHub
 CryptoKey
 Encrypter
 cmrel
+
+# As per the RFCs, X.509 is the right spelling. x509 and X509 are
+# misspellings.
+
+X.509
+
+# Since the Markdown files in content/en/*-docs are copied over from the
+# cert-manager repository using fixed tags, we can't expect these files to
+# contain the right X.509 spelling. The following is a series of exceptions
+# so that the x509 spelling is accepted in those files.
+
+ - content/en/next-docs/concepts/certificate.md
+x509
+ - content/en/next-docs/concepts/certificaterequest.md
+x509
+ - content/en/next-docs/concepts/webhook.md
+x509
+ - content/en/next-docs/release-notes/release-notes-0.13.md
+x509
+ - content/en/next-docs/release-notes/release-notes-0.15.md
+x509
+ - content/en/next-docs/release-notes/release-notes-0.16.md
+x509
+ - content/en/next-docs/release-notes/release-notes-0.5.md
+x509
+ - content/en/next-docs/release-notes/release-notes-0.6.md
+x509
+ - content/en/next-docs/release-notes/release-notes-0.7.md
+x509
+ - content/en/next-docs/release-notes/release-notes-0.9.md
+x509
+ - content/en/next-docs/tutorials/venafi/venafi.md
+x509
+ - content/en/next-docs/usage/certificate.md
+x509
+ - content/en/next-docs/usage/kubectl-plugin.md
+x509
+ - content/en/v0.12-docs/concepts/certificate.md
+x509
+ - content/en/v0.12-docs/concepts/certificaterequest.md
+x509
+ - content/en/v0.12-docs/release-notes/release-notes-0.5.md
+x509
+ - content/en/v0.12-docs/release-notes/release-notes-0.6.md
+x509
+ - content/en/v0.12-docs/release-notes/release-notes-0.7.md
+x509
+ - content/en/v0.12-docs/release-notes/release-notes-0.9.md
+x509
+ - content/en/v0.12-docs/tutorials/venafi/venafi.md
+x509
+ - content/en/v0.12-docs/usage/certificate.md
+x509
+ - content/en/v0.13-docs/concepts/certificate.md
+x509
+ - content/en/v0.13-docs/concepts/certificaterequest.md
+x509
+ - content/en/v0.13-docs/release-notes/release-notes-0.13.md
+x509
+ - content/en/v0.13-docs/release-notes/release-notes-0.5.md
+x509
+ - content/en/v0.13-docs/release-notes/release-notes-0.6.md
+x509
+ - content/en/v0.13-docs/release-notes/release-notes-0.7.md
+x509
+ - content/en/v0.13-docs/release-notes/release-notes-0.9.md
+x509
+ - content/en/v0.13-docs/tutorials/venafi/venafi.md
+x509
+ - content/en/v0.13-docs/usage/certificate.md
+x509
+ - content/en/v0.14-docs/concepts/certificate.md
+x509
+ - content/en/v0.14-docs/concepts/certificaterequest.md
+x509
+ - content/en/v0.14-docs/release-notes/release-notes-0.13.md
+x509
+ - content/en/v0.14-docs/release-notes/release-notes-0.5.md
+x509
+ - content/en/v0.14-docs/release-notes/release-notes-0.6.md
+x509
+ - content/en/v0.14-docs/release-notes/release-notes-0.7.md
+x509
+ - content/en/v0.14-docs/release-notes/release-notes-0.9.md
+x509
+ - content/en/v0.14-docs/tutorials/venafi/venafi.md
+x509
+ - content/en/v0.14-docs/usage/certificate.md
+x509
+ - content/en/v0.15-docs/concepts/certificate.md
+x509
+ - content/en/v0.15-docs/concepts/certificaterequest.md
+x509
+ - content/en/v0.15-docs/release-notes/release-notes-0.13.md
+x509
+ - content/en/v0.15-docs/release-notes/release-notes-0.15.md
+x509
+ - content/en/v0.15-docs/release-notes/release-notes-0.5.md
+x509
+ - content/en/v0.15-docs/release-notes/release-notes-0.6.md
+x509
+ - content/en/v0.15-docs/release-notes/release-notes-0.7.md
+x509
+ - content/en/v0.15-docs/release-notes/release-notes-0.9.md
+x509
+ - content/en/v0.15-docs/tutorials/venafi/venafi.md
+x509
+ - content/en/v0.15-docs/usage/certificate.md
+x509
+ - content/en/v0.16-docs/concepts/certificate.md
+x509
+ - content/en/v0.16-docs/concepts/certificaterequest.md
+x509
+ - content/en/v0.16-docs/release-notes/release-notes-0.13.md
+x509
+ - content/en/v0.16-docs/release-notes/release-notes-0.15.md
+x509
+ - content/en/v0.16-docs/release-notes/release-notes-0.16.md
+x509
+ - content/en/v0.16-docs/release-notes/release-notes-0.5.md
+x509
+ - content/en/v0.16-docs/release-notes/release-notes-0.6.md
+x509
+ - content/en/v0.16-docs/release-notes/release-notes-0.7.md
+x509
+ - content/en/v0.16-docs/release-notes/release-notes-0.9.md
+x509
+ - content/en/v0.16-docs/tutorials/venafi/venafi.md
+x509
+ - content/en/v0.16-docs/usage/certificate.md
+x509
+ - content/en/v0.16-docs/usage/kubectl-plugin.md
+x509
