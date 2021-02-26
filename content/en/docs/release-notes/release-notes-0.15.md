@@ -29,7 +29,7 @@ keystores and manual certificate renewal triggering.
 This new controller aims to facilitate the above features, as well as make it easier to develop
 individual areas of the controller over time and continue to make improvements.
 
-For more information on this we invite you to read our [design document](https://github.com/jetstack/cert-manager/pull/2753).
+For more information on this we invite you to read our [design document](https://github.com/cert-manager/cert-manager/pull/2753).
 
 ### Using the experimental controllers
 
@@ -72,7 +72,7 @@ This feature is **disabled** by default, and can be enabled either in your
 ## Support for OpenShift's Operator Lifecycle Manager
 
 cert-manager can now be deployed as a Red Hat Certified OpenShift Operator.
-This is done using the [cert-manager operator](https://github.com/jetstack/cert-manager-olm).
+This is done using the [cert-manager operator](https://github.com/cert-manager/cert-manager-olm).
 More information on this can be found on the [OpenShift Installation page](https://cert-manager.io/docs/installation/openshift/).
 
 ## Improved deployment of the webhook
@@ -125,7 +125,7 @@ For PKCS#12, it adds the file `keystore.p12`.
 ## kubectl cert-manager tool
 
 kubectl cert-manager is a kubectl plugin that assists with controlling cert-manager inside your
-Kubernetes cluster. The kubectl cert-manager binary can be downloaded from the [GitHub release page](https://github.com/jetstack/cert-manager/releases/tag/v0.15.0).
+Kubernetes cluster. The kubectl cert-manager binary can be downloaded from the [GitHub release page](https://github.com/cert-manager/cert-manager/releases/tag/v0.15.0).
 In `v0.15` the use is currently limited to the `convert` and `renew` commands.
 
 `kubectl cert-manager renew` can be used to manually trigger renewal of your certificates. This required the `ExperimentalCertificateControllers` feature gate to be set.

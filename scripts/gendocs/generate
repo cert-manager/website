@@ -48,10 +48,10 @@ GOBIN="${tmpdir}/bin"
 export GOBIN
 go get github.com/ahmetb/gen-crd-api-reference-docs@v0.2.0
 
-mkdir -p "${GOPATH}/src/github.com/jetstack"
-gitdir="${GOPATH}/src/github.com/jetstack/cert-manager"
+mkdir -p "${GOPATH}/src/github.com/cert-manager"
+gitdir="${GOPATH}/src/github.com/cert-manager/cert-manager"
 echo "+++ Cloning cert-manager repository..."
-git clone "https://github.com/jetstack/cert-manager.git" "$gitdir"
+git clone "https://github.com/cert-manager/cert-manager.git" "$gitdir"
 cd "$gitdir"
 
 genversion() {
@@ -75,7 +75,7 @@ genversion() {
 	popd
 }
 
-# The branches named here exist in the `jetstack/cert-manager` repo.
+# The branches named here exist in the `cert-manager/cert-manager` repo.
 genversion "release-1.2" "next-docs"
 genversion "release-1.1" "docs"
 genversion "release-1.0" "v1.0-docs"

@@ -120,4 +120,4 @@ cert-manager has 3 kinds of tests, which can each be invoked separately to give 
 ## But... I like Makefiles more
 
 We got you covered! The root of the repo has a `Makefile` which you can use for quick actions. Which will use Bazel in the background.
-We recommend [looking at the file](https://github.com/jetstack/cert-manager/blob/master/Makefile) to learn all possible options.
+We recommend [looking at the file](https://github.com/cert-manager/cert-manager/blob/master/Makefile) to learn all possible options.

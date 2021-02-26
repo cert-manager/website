@@ -5,7 +5,7 @@ weight: 10
 type: "docs"
 ---
 
-[kube-lego](https://github.com/jetstack/kube-lego) is an older Jetstack project
+[kube-lego](https://github.com/cert-manager/kube-lego) is an older Jetstack project
 for obtaining TLS certificates from Let's Encrypt (or another ACME server).
 
 Since cert-managers release, kube-lego has been gradually deprecated in favor

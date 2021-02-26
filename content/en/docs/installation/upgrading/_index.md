@@ -33,7 +33,7 @@ option added to your Helm install command, you should upgrade your CRD resources
 before upgrading the Helm chart:
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml
+$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml
 ```
 
 Add the Jetstack Helm repository if you haven't already.
@@ -69,5 +69,5 @@ begin the upgrade process like so - replacing `<version>` with the version
 number you want to install:
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.yaml
+$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.1.0/cert-manager.yaml
 ```

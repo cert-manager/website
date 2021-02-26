@@ -99,4 +99,4 @@ as well as disallows two challenges for the same DNS name and solver type
 (`HTTP01` or `DNS01`) to be completed at once.
 
 The maximum number of challenges that can be processed at a time is 60 as of
-[`ddff78`](https://github.com/jetstack/cert-manager/blob/ddff78f011558e64186d61f7c693edced1496afa/pkg/controller/acmechallenges/scheduler/scheduler.go#L31-L33).
+[`ddff78`](https://github.com/cert-manager/cert-manager/blob/ddff78f011558e64186d61f7c693edced1496afa/pkg/controller/acmechallenges/scheduler/scheduler.go#L31-L33).

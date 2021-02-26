@@ -61,7 +61,7 @@ are included in a single YAML manifest file:
 
 Install the `CustomResourceDefinitions` and cert-manager itself
 ```bash
-oc apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
+oc apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.2.0/cert-manager.yaml
 ```
 
 > **Note**: The `--validate=false` flag is added to the `oc apply` command

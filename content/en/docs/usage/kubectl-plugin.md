@@ -8,11 +8,11 @@ type: "docs"
 `kubectl cert-manager` is a [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) that can help you to manage cert-manager resources inside your cluster.
 
 ## Installation
-You need the `kubectl-cert-manager.tar.gz` file for the platform you're using, these can be found on our [GitHub releases page](https://github.com/jetstack/cert-manager/releases).
+You need the `kubectl-cert-manager.tar.gz` file for the platform you're using, these can be found on our [GitHub releases page](https://github.com/cert-manager/cert-manager/releases).
 In order to use the kubectl plugin you need its binary to be accessible under the name `kubectl-cert_manager` in your `$PATH`.
 Run the following commands to set up the plugin:
 ```console
-$ curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.2.0/kubectl-cert_manager-linux-amd64.tar.gz
+$ curl -L -o kubectl-cert-manager.tar.gz https://github.com/cert-manager/cert-manager/releases/download/v1.2.0/kubectl-cert_manager-linux-amd64.tar.gz
 $ tar xzf kubectl-cert-manager.tar.gz
 $ sudo mv kubectl-cert_manager /usr/local/bin
 ```

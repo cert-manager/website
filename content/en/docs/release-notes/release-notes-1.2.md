@@ -53,7 +53,7 @@ Aside from that, there have been numerous bug fixes and features summarized belo
         key: password
   ```
 
-* ingress-shim now supports the new `cert-manager.io/usages` annotation for specifying custom key usages. If this isn't set, it defaults to `digital signature,key encipherment`, but a comma separated list of [any valid usages](https://pkg.go.dev/github.com/jetstack/cert-manager@v1.2.0/pkg/apis/certmanager/v1#KeyUsage) can be specified.
+* ingress-shim now supports the new `cert-manager.io/usages` annotation for specifying custom key usages. If this isn't set, it defaults to `digital signature,key encipherment`, but a comma separated list of [any valid usages](https://pkg.go.dev/github.com/cert-manager/cert-manager@v1.2.0/pkg/apis/certmanager/v1#KeyUsage) can be specified.
 
 * ingress-shim now also checks for `cert-manager.io/duration` and `cert-manager.io/renew-before` annotations and uses those values to set the `Certificate.Spec.Duration` and `Certificate.Spec.RenewBefore` fields.
 

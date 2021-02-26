@@ -91,7 +91,7 @@ The ingress-shim sub-component is deployed automatically as part of
 installation.
 
 If you would like to use the old
-[kube-lego](https://github.com/jetstack/kube-lego) `kubernetes.io/tls-acme:
+[kube-lego](https://github.com/cert-manager/kube-lego) `kubernetes.io/tls-acme:
 "true"` annotation for fully automated TLS, you will need to configure a default
 `Issuer` when deploying cert-manager. This can be done by adding the following
 `--set` when deploying using Helm:

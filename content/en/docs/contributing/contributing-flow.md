@@ -6,7 +6,7 @@ type: "docs"
 ---
 
 All of cert-manager's development is done via
-[GitHub](https://github.com/jetstack/cert-manager) which contains code, issues and pull
+[GitHub](https://github.com/cert-manager/cert-manager) which contains code, issues and pull
 requests.
 
 All code for the documentation and cert-manager.io can be found at [the cert-manager/website repo](https://github.com/cert-manager/website/).
@@ -22,7 +22,7 @@ Prow will also run all tests and assign certain labels on PRs.
 ## Bugs
 
 All bugs should be tracked as issues inside the
-[GitHub](https://github.com/jetstack/cert-manager/issues) repository. Issues should then be
+[GitHub](https://github.com/cert-manager/cert-manager/issues) repository. Issues should then be
 attached with the `kind/bug` tag. To do this add `/kind bug` to your issue description.
 This may then be assigned a priority and milestone to be addressed in a future release.
 
@@ -45,7 +45,7 @@ Prow can assist you to reopen or close issues you file, you can trigger it using
 ## Features
 
 Feature requests should be created as
-[GitHub](https://github.com/jetstack/cert-manager/issues) issues. They should contain
+[GitHub](https://github.com/cert-manager/cert-manager/issues) issues. They should contain
 clear motivation for the feature you wish to see as well as some possible
 solutions for how it can be implemented.
 Issues should then be tagged with `kind/feature`. To do this add `/kind feature` to your issue description.
@@ -58,7 +58,7 @@ Issues should then be tagged with `kind/feature`. To do this add `/kind feature`
 ## Creating Pull Requests
 
 Changes to the cert-manager code base is done via [pull
-requests](https://github.com/jetstack/cert-manager/pulls). Each pull request
+requests](https://github.com/cert-manager/cert-manager/pulls). Each pull request
 should ideally have a corresponding issue attached that is to be fixed by this
 pull request. It is valid for multiple pull requests to resolve a single issue
 in the interest of keeping code changes self contained and simpler to review.
@@ -101,7 +101,7 @@ Most of cert-manager's project management is done on GitHub, with the help of Pr
 
 ### When will something be released?
 
-Our team works in milestones, you can follow them (inside GitHub)[https://github.com/jetstack/cert-manager/milestones].
+Our team works in milestones, you can follow them (inside GitHub)[https://github.com/cert-manager/cert-manager/milestones].
 When a milestone is set on an Issue it is generally an indication of when we plan to address this.
 Prow will apply milestones on merged PRs, this will tell you in which version that PR will land.
 

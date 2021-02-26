@@ -22,7 +22,7 @@ This will also update the version conversion code if needed.
 
 cert-manager at time of writing has 4 CRD versions in use.
 
-These versions are defined in [`//pkg/apis/certmanager`](https://github.com/jetstack/cert-manager/tree/master/pkg/apis/certmanager). ACME related resources are in `//pkg/apis/acme`.
+These versions are defined in [`//pkg/apis/certmanager`](https://github.com/cert-manager/cert-manager/tree/master/pkg/apis/certmanager). ACME related resources are in `//pkg/apis/acme`.
 
 This has the versions `v1alpha2`, `v1alpha3`, `v1beta1` and `v1`.
 If you need to introduce a new field in any of them it **must** be present in all 4 versions so conversion can be used.
@@ -30,7 +30,7 @@ If you need to introduce a new field in any of them it **must** be present in al
 Code comments on these fields are being converted into documentation on our website and text of `kubectl explain`.
 These comments should be written to be user-facing not developer-facing, they also break the Go standards of code comments on purpose for this reason.
 
-We also have an internal API version, it lives at [`//pkg/internal/apis`](https://github.com/jetstack/cert-manager/tree/master/pkg/internal/apis).
+We also have an internal API version, it lives at [`//pkg/internal/apis`](https://github.com/cert-manager/cert-manager/tree/master/pkg/internal/apis).
 This is a version that is only used for validation and conversion, controllers should not use it as it is not meant to be user-friendly and not stable.
 However all new fields also have to be added here for the conversion logic to work.
 

@@ -264,7 +264,7 @@ field to be specified as a distinct `solver` on the Issuer resource (as
 opposed to in the past where the `ingressName` could be specified as a field on
 the `Certificate` resource).
 
-This is a [known issue](https://github.com/jetstack/cert-manager/issues/1666),
+This is a [known issue](https://github.com/cert-manager/cert-manager/issues/1666),
 and a workaround is scheduled to be completed for `v0.9`.
 
 In the meantime, `ingress-gce` users can either choose to manually create a

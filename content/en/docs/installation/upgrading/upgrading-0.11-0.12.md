@@ -18,7 +18,7 @@ If you are using Kubernetes authentication for Vault `Issuers` then there has
 been a change to the required mount path. This value now requires the entire
 mount path. For example, if the previous path had been set to `kubernetes`, the
 new path will now require `/v1/auth/kubernetes`. You can read why this change
-was made [here](https://github.com/jetstack/cert-manager/issues/2205).
+was made [here](https://github.com/cert-manager/cert-manager/issues/2205).
 
 ## Removal of the Webhook API service
 The Webhook component now no longer makes use of a Kubernetes `APIService`, and

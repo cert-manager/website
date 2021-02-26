@@ -102,7 +102,7 @@ $ helm --namespace cert-manager delete cert-manager
 
 Using `kubectl`:
 ```bash
-kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
+kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
 ```
 
 Make sure you also delete the CRDs. This will delete all cert-manager resources, so make sure your backup is complete.

@@ -42,7 +42,7 @@ Delete the installation manifests using a link to your currently running version
 `vX.Y.Z` like so:
 
 ```bash
-$ oc delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager-openshift.yaml
+$ oc delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager-openshift.yaml
 ```
 
 ## Namespace Stuck in Terminating State

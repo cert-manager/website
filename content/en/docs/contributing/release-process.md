@@ -103,7 +103,7 @@ The process for cutting a minor release is as follows:
 3. Push it to the `jetstack/cert-manager` repository
 
      Note 1: run `git remote -v` to check that `origin` points to the
-     upstream <https://github.com/jetstack/cert-manager.git>.
+     upstream <https://github.com/cert-manager/cert-manager.git>.
 
      Note 2: you need to be an "admin" of the GitHub project to be able to
      push to the release branch.
@@ -137,11 +137,11 @@ The process for cutting a minor release is as follows:
       additional blurb, notable items and characterize change log.
 
         You can see the commits that will go into this release by using the
-        [GitHub compare](https://github.com/jetstack/cert-manager/compare). For
+        [GitHub compare](https://github.com/cert-manager/cert-manager/compare). For
         example, while releasing `v1.0.0`, you want to compare it with the
         latest pre-released version `v1.0.0-beta.1`:
 
-        <https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master>
+        <https://github.com/cert-manager/cert-manager/compare/v1.0.0-beta.1...master>
 
 
 5. Run `cmrel stage`
@@ -237,7 +237,7 @@ The process for cutting a minor release is as follows:
    the check box "Also send to `#cert-manager-dev`" so that the message is
    well visible. Also cross-post the message on `#cert-manager`.
 
-     _<https://github.com/jetstack/cert-manager/releases/tag/v1.0.0> 🎉_
+     _<https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0> 🎉_
 
 ### Final Release
 
@@ -256,7 +256,7 @@ so that it uses the latest release as `release-previous`,
 and you will need to create a new release branch in the cert-manager repository which will be treated as `release-next`,
 and both these branches will be tested periodically.
 
-For example see the PR  [Prepare testing for the cert-manager `v1.0` release](https://github.com/jetstack/testing/pull/397).
+For example see the PR  [Prepare testing for the cert-manager `v1.0` release](https://github.com/cert-manager/testing/pull/397).
 
 #### Rollover documentation
 

@@ -24,7 +24,7 @@ In `v0.15` we added the new certificate controllers under a feature gate to allo
 Thanks to everyone testing these and reporting issues we were able to fix issues and improve the controller.
 In `v0.16` this controller is now the default one in cert-manager. 
 
-For more information on this, we invite you to read our [design document](https://github.com/jetstack/cert-manager/pull/2753).
+For more information on this, we invite you to read our [design document](https://github.com/cert-manager/cert-manager/pull/2753).
 
 
 ## kubectl cert-manager tool for signing certificates
