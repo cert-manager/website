@@ -76,6 +76,7 @@ HashiCorp
 Helmfile
 hostname
 HTTP01
+https
 IAM
 i.e.
 ingress-nginx
