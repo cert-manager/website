@@ -104,7 +104,7 @@ Then compare that with the certificates that are being used by the webhook serve
 kubectl -n cert-manager get secrets cert-manager-webhook-ca  -o yaml
 ```
 
-You should be able to decode the `ca.crt` x509 content from that secret and see that the CA matches that which we saw in the webhook configuration.
+You should be able to decode the `ca.crt` X.509 content from that secret and see that the CA matches that which we saw in the webhook configuration.
 
 You should also find that the `tls.crt` content has a certificate signed by that same CA.
 

@@ -112,15 +112,15 @@ To create a cert-manager CertificateRequest, use `kubectl cert-manager create ce
 and creates a new CertificateRequest resource based on the YAML manifest of a Certificate resource as specified by `--from-certificate-file` flag, by generating a private key locally and creating a 'certificate signing request' 
 to be submitted to a cert-manager Issuer. The private key will be written to a local file, where the default is `<name_of_cr>.key`, or it can be specified using the `--output-key-file` flag.
 
-If you wish to wait for the CertificateRequest to be signed and store the x509 certificate in a file, you can set
+If you wish to wait for the CertificateRequest to be signed and store the X.509 certificate in a file, you can set
 the `--fetch-certificate` flag. The default timeout when waiting for the issuance of the certificate is 5 minutes,
-but can be specified with the `--timeout` flag. The default name of the file storing the x509 certificate
+but can be specified with the `--timeout` flag. The default name of the file storing the X.509 certificate
 is `<name_of_cr>.crt`, you can use the ` --output-certificate-file` flag to specify otherwise.
 
-Note that the private key and the x509 certificate are both written to file, and are **not** stored inside Kubernetes.
+Note that the private key and the X.509 certificate are both written to file, and are **not** stored inside Kubernetes.
 
 For example this will create a CertificateRequest resource with the name "my-cr" based on the cert-manager Certificate described in `my-certificate.yaml` while storing the
-private key and x509 certificate in `my-cr.key` and `my-cr.crt` respectively.
+private key and X.509 certificate in `my-cr.key` and `my-cr.crt` respectively.
 ```console
 kubectl cert-manager create certificaterequest my-cr --from-certificate-file my-certificate.yaml --fetch-certificate --timeout 20m
 ```

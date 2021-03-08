@@ -94,7 +94,7 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 > Note: Take care when setting the `renewBefore` field to be very close to the
 > `duration` as this can lead to a renewal loop, where the `Certificate` is always
 > in the renewal period. Some `Issuers` set the `notBefore` field on their
-> issued x509 certificates before the issue time to fix clock-skew issues,
+> issued X.509 certificates before the issue time to fix clock-skew issues,
 > leading to the working duration of a certificate to be less than the full
 > duration of the certificate. For example, Let's Encrypt sets it to be one hour
 > before issue time, so the actual *working duration* of the certificate is 89
