@@ -232,7 +232,7 @@ $ kubectl delete -f test-resources.yaml
 
 If all the above steps have completed without error, you are good to go!
 
-Optionally the whole verification flow is automated by running tool maintained by the community (cert-manager-verifier)[https://github.com/alenkacz/cert-manager-verifier].
+Optionally the whole verification flow is automated by running tool maintained by the community [cert-manager-verifier](https://github.com/alenkacz/cert-manager-verifier).
 
 If you experience problems, please check the
 [FAQ](../../faq/).
