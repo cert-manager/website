@@ -232,7 +232,7 @@ metadata:
     eks.amazonaws.com/role-arn: arn:aws:iam::XXXXXXXXXXX:role/cert-manager
 ```
 
-You will also need to modify the cert-manager deployment with the correct filesystem permissions, so the serviceaccount token can be read.
+You will also need to modify the cert-manager `Deployment` with the correct filesystem permissions, so the `ServiceAccount` token can be read.
 
 ```yaml
 spec:
