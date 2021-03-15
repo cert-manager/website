@@ -20,7 +20,7 @@ resource with the name provided in the `tls.secretName` field and configured as
 described on the `Ingress` exists. For example:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
