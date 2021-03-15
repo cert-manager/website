@@ -550,7 +550,7 @@ Create a file named `application-ingress.yaml` and save the following in it,
 replacing `example.com` with your own domain name:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend-ingress
