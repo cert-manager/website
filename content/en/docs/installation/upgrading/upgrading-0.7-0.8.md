@@ -142,7 +142,7 @@ Ingress resource which will be automatically copied across to the Certificate
 resource:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-test-ingress
