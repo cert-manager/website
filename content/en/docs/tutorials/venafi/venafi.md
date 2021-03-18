@@ -567,9 +567,12 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Exact
         backend:
-          serviceName: hello-kubernetes
-          servicePort: 80
+          service:
+            name: kuard
+            port:
+              number: 80
 ```
 
 You can then apply this resource with:
