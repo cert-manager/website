@@ -98,7 +98,7 @@ spec:
     ...
     solvers:
     - dns01:
-        cloudDNS:
+        clouddns:
           # The ID of the GCP project
           project: $PROJECT_ID
           # This is the secret used to access the service account
@@ -207,7 +207,7 @@ spec:
     ...
     solvers:
     - dns01:
-        cloudDNS:
+        clouddns:
           # The ID of the GCP project
           project: $PROJECT_ID
 ```
