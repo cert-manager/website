@@ -5,7 +5,7 @@ All authors to the project retain copyright to their work. However, to ensure
 that they are only submitting work that they have rights to, we are requiring
 everyone to acknowledge this by signing their work.
 
-Any copyright notices in this repo should specify the authors as "the Jetstack
+Any copyright notices in this repo should specify the authors as "the
 cert-manager contributors".
 
 To sign your work, just add a line like this at the end of your commit message:
@@ -16,7 +16,7 @@ Signed-off-by: Joe Bloggs <joe@example.com>
 
 This can easily be done with the `--signoff` option to `git commit`.
 You can also mass sign-off a whole PR with `git rebase --signoff master`, replacing
-`master` with the branch you are creating a pull request again if not master.
+`master` with the branch you are creating a pull request against, if not master.
 
 By doing this you state that you can certify the following (from https://developercertificate.org/):
 
