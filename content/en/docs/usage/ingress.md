@@ -33,10 +33,13 @@ spec:
   - host: example.com
     http:
       paths:
-      - backend:
-          serviceName: myservice
-          servicePort: 80
+      - pathType: Prefix
         path: /
+        backend:
+          service:
+            name: myservice
+            port: 
+              number: 80
   tls: # < placing a host in the TLS config will indicate a certificate should be created
   - hosts:
     - example.com
