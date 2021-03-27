@@ -17,8 +17,7 @@ As usual, please read the [upgrade notes](/docs/installation/upgrading/upgrading
 
 ## Webhook changes
 
-**The webhook component is now required.**
-The webhook will be automatically enabled by the `v0.14` manifests, so no additional action is required.
+**The webhook component is now required.** The webhook will be automatically enabled by the `v0.14` manifests, so no additional action is required.
 
 If you have issues running the webhook in your environment, we'd like to hear from you! We are aware of issues relating
 to firewall rules from the Kubernetes API server to the webhook pod(s) - we would like to gather together a corpus of
