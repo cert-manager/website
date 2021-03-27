@@ -64,10 +64,6 @@ Install the `CustomResourceDefinitions` and cert-manager itself
 oc apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
 ```
 
-> **Note**: The `--validate=false` flag is added to the `oc apply` command
-> above else you will receive a validation error relating to the `caBundle`
-> field of the `ValidatingWebhookConfiguration` resource.
-
 ## Installing with cert-manager operator
 
 On OpenShift 4 you can also install cert-manager via the OperatorHub using the [cert-manager operator](https://catalog.redhat.com/software/operators/detail/5e999d862937381642a21c7a), this can be found under Red Hat OpenShift Certified Operators in the Embedded OperatorHub of your OpenShift installation.
