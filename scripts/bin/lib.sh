@@ -1,19 +1,5 @@
 #!/usr/bin/env bash
 
-# Copyright 2019 The Jetstack cert-manager contributors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 # This script constructs a 'content/' directory that contains content for all
 # configured versions of the documentation.
 
@@ -32,23 +18,23 @@ detect_and_set_goos_goarch() {
   # detect GOOS equivalent if unset
   if [ -z "${GOOS:-}" ]; then
     case "$(uname -s)" in
-      Darwin) export GOOS="darwin" ;;
-      Linux) export GOOS="linux" ;;
-      *) echo "Unknown host OS! '$(uname -s)'" exit 2 ;;
+    Darwin) export GOOS="darwin" ;;
+    Linux) export GOOS="linux" ;;
+    *) echo "Unknown host OS! '$(uname -s)'" exit 2 ;;
     esac
   fi
 
   # detect GOARCH equivalent if unset
   if [ -z "${GOARCH:-}" ]; then
     case "$(uname -m)" in
-      x86_64) export GOARCH="amd64" ;;
-      arm*)
-        export GOARCH="arm"
-        if [ "$(getconf LONG_BIT)" = "64" ]; then
-          export GOARCH="arm64"
-        fi
+    x86_64) export GOARCH="amd64" ;;
+    arm*)
+      export GOARCH="arm"
+      if [ "$(getconf LONG_BIT)" = "64" ]; then
+        export GOARCH="arm64"
+      fi
       ;;
-      *) echo "Unknown host architecture! '$(uname -m)'" exit 2 ;;
+    *) echo "Unknown host architecture! '$(uname -m)'" exit 2 ;;
     esac
   fi
 

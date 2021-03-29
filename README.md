@@ -52,8 +52,8 @@ and versioned when you build the site by the tools in `scripts/`.
 You also need to ensure you have the following tool(s) installed on your system
 as they are not managed by the `scripts/` directory:
 
-* npm/nodejs
-* Golang 1.12+
+- npm/nodejs
+- Golang 1.12+
 
 ### Local development
 
@@ -106,3 +106,21 @@ This will automatically run a number of checks against your changes.
 There is also a `./scripts/verify-release` command which will fetch all
 versions of the documentation content before running the regular `verify`
 script.
+
+### Website license
+
+```plain
+Copyright 2021 The cert-manager Authors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
