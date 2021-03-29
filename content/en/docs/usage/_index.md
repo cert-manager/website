@@ -26,8 +26,6 @@ cases and methods for requesting certificates through cert-manager:
 - [Enable mTLS on Pods with CSI](./csi/): Using the cert-manager CSI
   driver to provide unique keys and certificates that share the lifecycle of
   pods.
-- [Securing Istio Service Mesh](./istio/): Secure your Istio service mesh, using
-  cert-manager.
 - [Securing Istio
   Gateway](https://istio.io/docs/tasks/traffic-management/ingress/ingress-certmgr/):
   Secure your Istio Gateway in Kubernetes using cert-manager.
