@@ -103,6 +103,6 @@ To run all the verify checks, run:
 
 This will automatically run a number of checks against your changes.
 
-There is also a `./scripts/verify-release` command which will fetch all
-versions of the documentation content before running the regular `verify`
-script.
+If `./scripts/verify` fails with a number of `..target not found..` errors, you
+can run  `./scripts/verify-release` instead, which will fetch all versions of the
+documentation content before running the regular `verify` script.
