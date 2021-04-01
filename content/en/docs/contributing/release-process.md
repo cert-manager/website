@@ -26,6 +26,7 @@ perform a cert-manager release:
    necessary `cloudbuild.yml` files.
 
      ```sh
+     # Don't clone it from the cert-manager repo folder.
      git clone https://github.com/cert-manager/release
      cd release
      ```
@@ -85,7 +86,7 @@ The process for cutting a minor release is as follows:
     the release branch:
 
     ```bash
-    # inside the cert-manger repo
+    # Must be run from the cert-manger repo folder.
     git fetch --all
     git checkout -b release-1.0 origin/master
     ```
@@ -95,7 +96,7 @@ The process for cutting a minor release is as follows:
     from the master branch, as follows:
 
     ```bash
-    # inside the cert-manger repo
+    # Must be run from the cert-manger repo folder.
     git fetch --all
     git branch --force release-1.0 origin/release-1.0
     git checkout release-1.0
@@ -111,19 +112,55 @@ The process for cutting a minor release is as follows:
      the GitHub project to be able to push to the release branch.
 
      ```bash
+     # Must be run from the cert-manger repo folder.
      git push --set-upstream origin release-1.0
      ```
 
 4. Generate and edit the release notes:
 
-   1. Run as follows, substituting the current and last versions where appropriate:
+   1. Use the following two tables to understand how to fill in the 4
+      environment variables needed for the next step:
 
-        ```bash
+      | Variable          | Description                           |
+      | ----------------- | ------------------------------------- |
+      | `START_REV`\*     | The git tag of the "previous"\* release |
+      | `END_REV`         | Name of your release branch           |
+      | `BRANCH`          | Name of your release branch           |
+      | `RELEASE_VERSION` | The git tag without the leading `v`   |
+
+      Examples for each release type (e.g., initial alpha release):
+
+      | Variable          | Example 1             | Example 2                | Example 3     | Example 4     |
+      | ----------------- | --------------------- | ------------------------ | ------------- | ------------- |
+      |                   |                       |                          |               |               |
+      |                   | initial alpha release | subsequent alpha release | final release | patch release |
+      |                   | `v1.3.0-alpha.0`      | `v1.3.0-alpha.1`         | `v1.3.0`      | `v1.3.1`      |
+      |                   |                       |                          |               |               |
+      | `START_REV`\*     | `v1.2.0`              | `v1.3.0-alpha.0`         | `v1.2.0`      | `v1.3.0`      |
+      | `END_REV`         | `release-1.3`         | `release-1.3`            | `release-1.3` | `release-1.3` |
+      | `BRANCH`          | `release-1.3`         | `release-1.3`            | `release-1.3` | `release-1.3` |
+      | `RELEASE_VERSION` | `1.3.0-alpha.0`       | `1.3.0-alpha.0`          | `1.3.0`       | `1.3.1`       |
+
+      > \*The git tag of the "previous" release (`START_REV`) depends on which
+      > type of release you count on doing. Look at the above examples to
+      > undertand a bit more what those are.
+
+      After finding out the value for each of the 4 environment variables, set
+      the variables in your shell (for example, following the example 1):
+
+        ```sh
+        export START_REV="v1.2.0"
+        export END_REV="release-1.3"
+        export BRANCH="release-1.3"
+        export RELEASE_VERSION="1.3.0-alpha.0"
+        ```
+
+   2. Generate the `release-notes.md` at the root of your the cert-manager repo
+      folder with the following command:
+
+        ```sh
+        # Must be run from the cert-manger folder.
         export GITHUB_TOKEN=*your-token*
-        export RELEASE_VERSION=1.0.0
-        export BRANCH=release-1.0
-        export END_REV=release-1.0
-        export START_REV=v0.16.1
         go install k8s.io/release/cmd/release-notes@v0.7.0
         release-notes --debug --repo-path cert-manager \
           --org jetstack --repo cert-manager \
@@ -131,10 +168,10 @@ The process for cutting a minor release is as follows:
           --output release-notes.md
         ```
 
-        Note: the GitHub token does not need any scope. The token is
+        Note: the GitHub token **does not need any scope**. The token is
         required only to avoid rate-limits imposed on anonymous API users.
 
-   2. Sanity check the notes, checking that the notes contain details of all
+   3. Sanity check the notes, checking that the notes contain details of all
       the features and bug fixes that you expect to be in the release. Add
       additional blurb, notable items and characterize change log.
 
@@ -145,14 +182,13 @@ The process for cutting a minor release is as follows:
 
         <https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master>
 
-
 5. Run `cmrel stage`
 
    1. In this example we stage a release using the 'release-1.0' branch,
       setting  the release version to `v1.0.0`:
 
         ```bash
-        # in cert-manager/release repo
+        # Must be run from the "cert-manager/release" repo folder.
         cmrel stage --branch=release-1.0 --release-version=v1.0.0
         ```
 
@@ -183,19 +219,33 @@ The process for cutting a minor release is as follows:
 
 6. Run `cmrel publish`
 
-   1. First do a dry-run, to ensure that all the staged resources are valid.
+   1. Find the "release name". The release name can be found in the output of
+      the previous command, `cmrel stage`. In the previous command output, look
+      for a line that looks like this:
 
-        ```bash
-        cmrel publish --release-name <RELEASE_NAME>
+        ```sh
+        Once complete, view artifacts at: gs://cert-manager-release/stage/gcb/release/v1.3.0-alpha.1-c2c0fdd78131493707050ffa4a7454885d041b08
         ```
 
-        Where `<RELEASE_NAME>` is the unique build ID printed by the earlier `cmrel stage` command.
+        Copy the part that starts with a version (`v1.3.0`). That's the "release
+        name" that you will need for the next step:
 
-        For example, given the bucket
-        `gs://cert-manager-release/stage/gcb/release/v1.0.0-219b793`, the
-        `RELEASE_NAME` would be `v1.0.0-219b793`.
+        ```sh
+        # This is the "release name":
+        v1.3.0-alpha.0-77b045d159bd20ce0ec454cd79a5edce9187bdd9
+        ```
 
-        You can view the progress by clicking the Google Cloud Build URL in the output of this command.
+   1. Do a `cmrel publish` dry-run to ensure that all the staged resources are
+      valid. Using the "release name" that you copied in the previous step, run
+      the following command:
+
+        ```bash
+        # Must be run from the "cert-manager/release" repo folder.
+        cmrel publish --release-name RELEASE_NAME
+        ```
+
+        You can view the progress by clicking the Google Cloud Build URL in the
+        output of this command.
 
    2. While the build is running, send a third Slack message in reply to
       the first message:
@@ -209,6 +259,7 @@ The process for cutting a minor release is as follows:
         artifacts to GitHub, `Quay.io`, to our [ChartMuseum instance][ChartMuseum], etc.
 
         ```bash
+        # Must be run from the "cert-manager/release" repo folder.
         cmrel publish --nomock --release-name <RELEASE_NAME>
         ```
 
