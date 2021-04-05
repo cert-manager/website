@@ -13,6 +13,9 @@ We currently use Bazel `v3.7.2`. The minimum supported version is `v3.5.0`.
 > **TIP**: are you using GoLand? Make sure to exclude the `bazel-` folders! You can do this by right clicking on the folder -> Mark Directory As -> Excluded
 > This will save you a ton of CPU time!
 
+> **TIP**: are you sitting on a corporate network with internal PKI? Bazel does not honor custom CA certificates by default, but depending on your OS
+> a [clean workaround might be available](https://groups.google.com/g/bazel-discuss/c/13uPDObyfQg/m/UjPbalztCQAJ).
+
 ## A quick intro to Bazel
 
 Bazel has 3 main commands which we use:
