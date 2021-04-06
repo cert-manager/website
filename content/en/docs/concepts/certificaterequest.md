@@ -57,19 +57,20 @@ issuance will _not_ happen. It is the responsibility of some other controller to
 manage the logic and life cycle of `CertificateRequests`.
 
 ## Conditions
-
 `CertificateRequests` have a set of strongly defined conditions that should be
 used and relied upon by controllers or services to make decisions on what
-actions to take next on the resource. Each condition consists of the pair
-`Ready` - a boolean value, and `Reason` - a string. The set of values and
-meanings are as follows:
+actions to take next on the resource.
+
+
+### Ready
+Each ready condition consists of the pair `Ready` - a boolean value, and
+`Reason` - a string. The set of values and meanings are as follows:
 
 | Ready | Reason  | Condition Meaning                                                                                                                                                                                                                               |
 | ----- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | False | Pending | The `CertificateRequest` is currently pending, waiting for some other operation to take place. This could be that the `Issuer` does not exist yet or the `Issuer` is in the process of issuing a certificate.                                   |
 | False | Failed  | The certificate has failed to be issued - either the returned certificate failed to be decoded or an instance of the referenced issuer used for signing failed. No further action will be taken on the `CertificateRequest` by it's controller. |
 | True  | Issued  | A signed certificate has been successfully issued by the referenced `Issuer`.                                                                                                                                                                   |
-
 
 ## UserInfo
 
@@ -80,8 +81,136 @@ the case that the `CertificateRequest` was created by a
 [`Certificate`](../certificate/) resource, or instead the user who created the
 `CertificateRequest` directly.
 
-
 > **Warning**: These fields are managed by cert-manager and should _never_ be
 > set or modified by anything else. When the `CertificateRequest` is created,
 > these fields will be overridden, and any request attempting to modify them
 > will be rejected.
+
+
+### Approval
+CertificateRequests can be `Approved` or `Denied`. These mutually exclusive
+conditions gate a CertificateRequest from being signed by its managed signer.
+
+- A signer should _not_ sign a managed CertificateRequest without an Approved condition
+- A signer _will_ sign a managed CertificateRequest with an Approved condition
+- A signer will _never_ sign a managed CertificateRequest with a Denied condition
+
+These conditions are _permanent_, and cannot be modified or changed once set.
+
+```bash
+NAMESPACE      NAME                    APPROVED   DENIED   READY   ISSUER       REQUESTOR                                         AGE
+istio-system   service-mesh-ca-whh5b   True                True    mesh-ca      system:serviceaccount:istio-system:istiod         16s
+istio-system   my-app-fj9sa                       True             mesh-ca      system:serviceaccount:my-app:my-app               4s
+```
+
+#### Approver Controller
+
+By default, cert-manager will run an internal approval controller which will
+automatically approve _all_ CertificateRequests that reference any internal
+issuer type in any namespace: `cert-manager.io/Issuer`,
+`cert-manager.io/ClusterIssuer`.
+
+To disable this controller, add the following argument to the
+cert-manager-controller: `--controllers=*,-certificaterequests-approver`. This
+can be achieved with helm by appending:
+
+```bash
+--set extraArgs={--controllers='*\,-certificaterequests-approver'}
+```
+
+Alternatively, in order for the internal approver controller to approve
+CertificateRequests that reference an external issuer, add the following RBAC to
+the cert-manager-controller Service Account. Please replace the given resource
+names with the relevant names:
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cert-manager-controller-approve:my-issuer-example-com # edit
+rules:
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - signers
+  verbs:
+  - approve
+  resourceNames:
+  - issuers.my-issuer.example.com/* # edit
+  - clusterissuers.my-issuer.example.com/* # edit
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-controller-approve:my-issuer-example-com # edit
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-controller-approve:my-issuer-example-com # edit
+subjects:
+- kind: ServiceAccount
+  name: cert-manager
+  namespace: cert-manager
+```
+
+#### RBAC Syntax
+
+When a user or controller attempts to approve or deny a CertificateRequest, the
+cert-manager webhook will evaluate whether it has sufficient permissions to do
+so. These permissions are based upon the request
+itself- specifically the request's IssuerRef:
+
+```yaml
+apiGroups: ["cert-manager.io"]
+resources: ["signers"]
+verbs: ["approve"]
+resourceNames:
+ # namesapced signers
+ - "<signer-resource-name>.<signer-group>/<signer-namespace>.<signer-name>"
+ # cluster scoped signers
+ - "<signer-resource-name>.<signer-group>/<signer-name>"
+ # all signers of this resource name
+ - "<signer-resource-name>.<signer-group>/*"
+```
+
+An example ClusterRole that would grant the permissions to set the Approve and
+Denied conditions of CertificateRequests that reference the cluster scoped
+`myissuers` external issuer, in the group `my-example.io`, with the name `myapp`:
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: my-example-io-my-issuer-myapp-approver
+rules:
+  - apiGroups: ["cert-manager.io"]
+    resources: ["signers"]
+    verbs: ["approve"]
+    resourceNames: ["myissuers.my-example.io/myapp"]
+```
+
+If the approver does not have sufficient permissions defined above to set the
+Approved or Denied conditions, the request will be rejected by the cert-manager
+validating admission webhook.
+
+- The RBAC permissions *must* be granted at the cluster scope
+- Namespaced signers are represented by a namespaced resource using the syntax of `<signer-resource-name>.<signer-group>/<signer-namespace>.<signer-name>`
+- Cluster scoped signers are represented using the syntax of `<signer-resource-name>.<signer-group>/<signer-name>`
+- An approver can be granted approval for all namespaces via `<signer-resource-name>.<signer-group>/*`
+- The apiGroup must *always* be `cert-manager.io`
+- The resource must *always* be `signers`
+- The verb must *always* be `approve`, which grants the approver the permissions to set *both* Approved and Denied conditions
+
+An example of signing all `myissuer` signers in all namespaces, and
+`clustermyissuers` with the name `myapp`, in the `my-example.io` group:
+
+```yaml
+    resourceNames: ["myissuers.my-example.io/*", "clustermyissuers.my-example.io/myapp"]
+```
+
+An example of signing `myissuer` with the name `myapp` in the namespaces `foo`
+and `bar`:
+
+```yaml
+    resourceNames: ["myissuers.my-example.io/foo.myapp", "myissuers.my-example.io/bar.myapp"]
+```

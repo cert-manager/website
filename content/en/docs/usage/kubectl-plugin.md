@@ -136,3 +136,21 @@ This example queries the status of the Certificate named `my-certificate` in nam
 ```console
 kubectl cert-manager status certificate my-certificate -n my-namespace
 ```
+
+### Approve/Deny
+CertificateRequests can be [approved or
+denied](../../concepts/certificaterequest/#approval) using their respective kubectl plugin commands:
+
+> **Note**: The internal cert-manager approver may automatically approve all
+> CertificateRequests unless disabled with the flag on the cert-manager-controller
+> `--controllers=*,-certificaterequests-approver`
+
+```bash
+$ kubectl cert-manager approve -n istio-system mesh-ca
+Approved CertificateRequest 'istio-system/mesh-ca'
+```
+
+```bash
+$ kubectl cert-manager deny -n my-app my-app
+Denied CertificateRequest 'my-app/my-app'
+```
