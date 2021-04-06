@@ -103,6 +103,31 @@ istio-system   service-mesh-ca-whh5b   True                True    mesh-ca      
 istio-system   my-app-fj9sa                       True             mesh-ca      system:serviceaccount:my-app:my-app               4s
 ```
 
+
+#### Behaviour
+
+The Approved and Denied conditions are two distinct condition types on the
+CertificateRequest. These conditions must only have the status of True, and
+are mutually exclusive (i.e. a CertificateRequest cannot have an Approved and
+Denied condition simultaneously). This behaviour is enforced in the cert-manager
+validating admission webhook.
+
+An "approver" is an entity that is responsible for setting the Approved/Denied
+conditions. It is up to the approver's implementation as to what
+CertificateRequests are managed by that approver.
+
+The Reason field of the Approved/Denied condition should be set to *who* set the
+condition. Who can be interpreted however makes sense to the approver
+implementation. For example, it may include the API group of an approving policy
+controller, or the client agent of a manual request.
+
+The Message field of the Approved/Denied condition should be set to *why* the
+condition is set. Again, why can be interpreted however makes sense to the
+implementation of the approver. For example, the name of the resource that
+approves this request, the violations which caused the request to be denied, or
+the team to who manually approved the request.
+
+
 #### Approver Controller
 
 By default, cert-manager will run an internal approval controller which will

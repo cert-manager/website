@@ -146,11 +146,11 @@ denied](../../concepts/certificaterequest/#approval) using their respective kube
 > `--controllers=*,-certificaterequests-approver`
 
 ```bash
-$ kubectl cert-manager approve -n istio-system mesh-ca
+$ kubectl cert-manager approve -n istio-system mesh-ca --reason "pki-team" --message "this certificate is valid"
 Approved CertificateRequest 'istio-system/mesh-ca'
 ```
 
 ```bash
-$ kubectl cert-manager deny -n my-app my-app
+$ kubectl cert-manager deny -n my-app my-app --reason "example.com" --message "violates policy"
 Denied CertificateRequest 'my-app/my-app'
 ```
