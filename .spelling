@@ -7,6 +7,7 @@ Akamai
 AKS
 ALB
 analyse
+apiGroup
 APIs
 apiserver
 APIService
@@ -28,12 +29,13 @@ BKPR
 boolean
 CAs
 CertificateRequest
-CertificateRequest
+CertificateRequests
 Changelog
 ChartMuseum
 CloudDNS
 Cloudflare
 CloudFlare
+ClusterRole
 CNAME
 CNAMEs
 CNI
@@ -75,6 +77,7 @@ GKE
 google-cas-issuer
 HashiCorp
 Helmfile
+honour
 hostname
 HTTP01
 https
@@ -84,6 +87,7 @@ ingress-nginx
 injectable
 INWX
 IPv6
+IssuerRef
 Istio
 Jetstack
 JSON
