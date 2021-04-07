@@ -24,9 +24,22 @@ following conditions:
 2. You currently need to be at Jetstack to get the required GitHub and GCP
    permissions. (we'd like contributors outside Jetstack to be able to get
    access; if that's of interest to you, please let us know)
-3. You need to be a GitHub "Maintainer" on the cert-manager project (if you see
-   the "Settings" tab when looking at the cert-manager project, you **are** an
-   owner). To become a GitHub "owner" of the cert-manager project, [open a
+3. You need to have the GitHub `write` permission on the cert-manager project.
+   To check that you have the `write` role, [get a personal access
+   token](https://github.com/settings/tokens) and run:
+     ```sh
+     GH_USER=maelvls
+     curl -sH "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/jetstack/cert-manager/collaborators/$GH_USER/permission
+     ```
+     If your permission is `write` or `admin`, then you are good to go:
+     ```json
+     {
+      "permission": "write",
+      "user": {...}
+     }
+     ```
+
+    To request the `write` permission on the cert-manager project, [open a
    PR](https://github.com/jetstack/platform-board/pulls/new) with a link to
    here.
 4. You need to be added as an "Owner" to the GCP project
