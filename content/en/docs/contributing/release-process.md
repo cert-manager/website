@@ -47,8 +47,8 @@ following conditions:
    Step 4 under "Prerequisites" on the [release-process][1] page means I need
    access to the [cert-manager-release][2] project on GCP.
 
-   I need to be an "Editor" on this project. More specifically, the roles I need are:
-   that I will be using are:
+   I need to be an "Editor" on this project. More specifically, the roles I need
+   are:
 
    - Cloud Build Editor (`roles/cloudbuild.builds.builder`),
    - Storage Object Viewer (`roles/storage.objectViewer`), and
