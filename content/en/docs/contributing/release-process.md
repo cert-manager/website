@@ -42,13 +42,13 @@ following conditions:
     To request the `write` permission on the cert-manager project, [open a
    PR](https://github.com/jetstack/platform-board/pulls/new) with a link to
    here.
-4. You need to be added as an "Owner" to the GCP project
+4. You need to be added as an "Editor" to the GCP project
    [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release).
    To check if you do have access, try opening [the Cloud Build
    page](https://console.cloud.google.com/cloud-build?project=cert-manager-release).
    To get the "Editor" permission on the GCP project, open a [new
-   PR](https://github.com/jetstack/platform-board/pulls/new) and copy-paste the below
-   example template:
+   PR](https://github.com/jetstack/platform-board/pulls/new) and copy-paste the
+   below example template:
    ```markdown
    <!-- PR title: Access to the cert-manager-release GCP project -->
 
