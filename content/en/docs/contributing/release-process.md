@@ -299,7 +299,7 @@ Follow the `cmrel stage` build: <https://console.cloud.google.com/cloud-build/bu
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --release-name $RELEASE_NAME
+        cmrel publish --release-name "$RELEASE_NAME"
         ```
 
         You can view the progress by clicking the Google Cloud Build URL in the
@@ -321,7 +321,7 @@ Follow the `cmrel publish` dry-run build: <https://console.cloud.google.com/clou
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --nomock --release-name $RELEASE_NAME
+        cmrel publish --nomock --release-name "$RELEASE_NAME"
         ```
 
       {{% pageinfo color="info" %}}
