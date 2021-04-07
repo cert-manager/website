@@ -457,7 +457,7 @@ Metadata:
   Creation Timestamp:  2018-11-17T17:58:37Z
   Generation:          0
   Owner References:
-    API Version:           extensions/v1beta1
+    API Version:           networking.k8s.io/v1
     Block Owner Deletion:  true
     Controller:            true
     Kind:                  Ingress
@@ -555,7 +555,7 @@ Metadata:
   Creation Timestamp:  2018-11-17T18:36:48Z
   Generation:          0
   Owner References:
-    API Version:           extensions/v1beta1
+    API Version:           networking.k8s.io/v1
     Block Owner Deletion:  true
     Controller:            true
     Kind:                  Ingress

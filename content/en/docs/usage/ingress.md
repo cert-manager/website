@@ -20,7 +20,7 @@ resource with the name provided in the `tls.secretName` field and configured as
 described on the `Ingress` exists. For example:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -33,10 +33,13 @@ spec:
   - host: example.com
     http:
       paths:
-      - backend:
-          serviceName: myservice
-          servicePort: 80
+      - pathType: Prefix
         path: /
+        backend:
+          service:
+            name: myservice
+            port: 
+              number: 80
   tls: # < placing a host in the TLS config will indicate a certificate should be created
   - hosts:
     - example.com

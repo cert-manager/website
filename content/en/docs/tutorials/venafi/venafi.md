@@ -389,7 +389,7 @@ applications.
 Full information on how to specify and request Certificate resources can be
 found in the [Issuing certificates](../../../usage/certificate/) guide.
 
-For now, we will create a basic x509 Certificate that is valid for our domain,
+For now, we will create a basic X.509 Certificate that is valid for our domain,
 `example.com`:
 
 ```yaml
@@ -550,7 +550,7 @@ Create a file named `application-ingress.yaml` and save the following in it,
 replacing `example.com` with your own domain name:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend-ingress
@@ -567,9 +567,12 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Exact
         backend:
-          serviceName: hello-kubernetes
-          servicePort: 80
+          service:
+            name: kuard
+            port:
+              number: 80
 ```
 
 You can then apply this resource with:

@@ -15,11 +15,11 @@ perform a cert-manager release:
 
 1. Install the [`release-notes`](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md) CLI:
    ```sh
-   (cd && GO111MODULE=on go get k8s.io/release/cmd/release-notes@v0.7.0)
+   go install k8s.io/release/cmd/release-notes@v0.7.0
    ```
 2. Install our [`cmrel`](https://github.com/cert-manager/release) CLI:
    ```sh
-   (cd && GO111MODULE=on go get github.com/cert-manager/release/cmd/cmrel@latest)
+   go install github.com/cert-manager/release/cmd/cmrel@master
    ```
 3. Clone and `cd` into the `cert-manager/release` repo. ⚠️ All the commands
    below have to be run from this  cloned folder as it contains the
@@ -57,18 +57,18 @@ perform a cert-manager release:
    with no scope ticked. It is used only by the `release-notes` CLI to
    avoid API rate limiting since it will go through all the PRs one by one.
 
-## Minor releases
+## Minor Releases
 
 A minor release is a backwards-compatible 'feature' release.  It can contain new
 features and bug fixes.
 
-### Release schedule
+### Release Schedule
 
 We aim to cut a new minor release once per month. The rough goals for each
 release are outlined as part of a GitHub milestone. We cut a release even if
 some of these goals are missed, in order to keep up release velocity.
 
-### Process for releasing a minor version
+### Process for Releasing a Minor Version
 
 > Note: please click on the "Edit this page" button on the top-right corner
 > of this page if a step is missing or if it is outdated.
@@ -85,6 +85,7 @@ The process for cutting a minor release is as follows:
     the release branch:
 
     ```bash
+    # inside the cert-manger repo
     git fetch --all
     git checkout -b release-1.0 origin/master
     ```
@@ -94,6 +95,7 @@ The process for cutting a minor release is as follows:
     from the master branch, as follows:
 
     ```bash
+    # inside the cert-manger repo
     git fetch --all
     git branch --force release-1.0 origin/release-1.0
     git checkout release-1.0
@@ -105,11 +107,11 @@ The process for cutting a minor release is as follows:
      Note 1: run `git remote -v` to check that `origin` points to the
      upstream <https://github.com/jetstack/cert-manager.git>.
 
-     Note 2: you need to be an "admin" of the GitHub project to be able to
-     push to the release branch.
+     Note 2: if the branch doesn't already exist, you need to be an "admin" of
+     the GitHub project to be able to push to the release branch.
 
      ```bash
-     git push --set-upstream origin
+     git push --set-upstream origin release-1.0
      ```
 
 4. Generate and edit the release notes:
@@ -122,7 +124,7 @@ The process for cutting a minor release is as follows:
         export BRANCH=release-1.0
         export END_REV=release-1.0
         export START_REV=v0.16.1
-        (cd && GO111MODULE=on go get k8s.io/release/cmd/release-notes@v0.7.0)
+        go install k8s.io/release/cmd/release-notes@v0.7.0
         release-notes --debug --repo-path cert-manager \
           --org jetstack --repo cert-manager \
           --required-author "jetstack-bot" \
@@ -150,6 +152,7 @@ The process for cutting a minor release is as follows:
       setting  the release version to `v1.0.0`:
 
         ```bash
+        # in cert-manager/release repo
         cmrel stage --branch=release-1.0 --release-version=v1.0.0
         ```
 
@@ -203,16 +206,16 @@ The process for cutting a minor release is as follows:
 
         If the last step succeeded, you can now re-run the `cmrel publish`
         with the `--nomock` argument to actually publish the release
-        artifacts to GitHub, `Quay.io`, [ArtifactHub][] etc.
+        artifacts to GitHub, `Quay.io`, to our [ChartMuseum instance][ChartMuseum], etc.
 
         ```bash
         cmrel publish --nomock --release-name <RELEASE_NAME>
         ```
 
         Note: At this stage there will be a draft release on GitHub and a
-        live release on [ArtifactHub][]. So you must now complete the
-        release process quickly otherwise users of the latest release on
-        [ArtifactHub][] will encounter errors, because the manual CRD
+        live release on our [ChartMuseum instance][ChartMuseum]. So you must now complete the
+        release process quickly otherwise users of the latest release on our
+        [ChartMuseum instance][ChartMuseum] will encounter errors, because the manual CRD
         install URL will not be available yet.
 
    4. While the build is running, send a fourth Slack message in reply to
@@ -245,11 +248,11 @@ After releasing one or more alpha and beta releases,
 you will release the final version.
 For the final release, you should follow the process described above with the following changes and additional steps:
 
-#### Full Release notes
+#### Full Release Notes
 
 The release notes for the final release should include all changes since the last minor release.
 
-#### Rollover testing infra
+#### Rollover Testing Infrastructure
 
 After releasing the final release you will need to update the testing infrastructure,
 so that it uses the latest release as `release-previous`,
@@ -258,13 +261,13 @@ and both these branches will be tested periodically.
 
 For example see the PR  [Prepare testing for the cert-manager `v1.0` release](https://github.com/jetstack/testing/pull/397).
 
-#### Rollover documentation
+#### Rollover Documentation
 
 You will also need to update the versions and branches in the cert-manager website configuration.
 
 For example see the PR [Configure website for the `v1.0` release](https://github.com/cert-manager/website/pull/309).
 
-## Patch releases
+## Patch Releases
 
 A patch release contains critical bug fixes for the project.  They are managed on
 an ad-hoc basis, and should only be required when critical bugs/regressions are
@@ -275,12 +278,12 @@ We will only perform patch release for the **current** version of cert-manager.
 Once a new minor release has been cut, we will stop providing patches for the
 version before it.
 
-### Release schedule
+### Release Schedule
 
 Patch releases are cut on an ad-hoc basis, depending on recent activity on the
 release branch.
 
-### Process for releasing a patch version
+### Process for Releasing a Patch Version
 
 The process for cutting a patch release is as follows:
 
@@ -289,6 +292,5 @@ The process for cutting a patch release is as follows:
    Bugs that need to be fixed in a patch release should be [cherry picked into the appropriate release branch](../contributing-flow/#cherry-picking).
 
 2. Then, continue with the instructions in [process for releasing a minor version](#process-for-releasing-a-minor-version).
-## Links
 
- [ArtifactHub]: https://charts.jetstack.io
+[ChartMuseum]: https://charts.jetstack.io

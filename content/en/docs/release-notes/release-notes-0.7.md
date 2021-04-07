@@ -82,7 +82,7 @@ reason, this information will be displayed when running `kubectl get` and
 - Allow to use PKCS#8 encoded private keys in CA issuers. (#1191, `@chr-fritz`)
 - Add webhook troubleshooting guide (#1288, `@munnerz`)
 - Overhaul documentation and add additional content (#1279, `@munnerz`)
-- Increase x509 certificate duration from 90 days to 1 year for webhook component certificates (#1276, `@munnerz`)
+- Increase X.509 certificate duration from 90 days to 1 year for webhook component certificates (#1276, `@munnerz`)
 - Fix bug where `--dns01-recursive-nameservers` flag was not respected when looking up the zone to update for a DNS01 challenge (#1266, `@munnerz`)
 - Reuse acme clients to limit use of nonce/directory/accounts endpoints (#1265, `@DanielMorsing`)
 - Surface self-check errors in challenge resource (#1244, `@DanielMorsing`)

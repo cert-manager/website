@@ -8,9 +8,13 @@ type: "docs"
 cert-manager makes use of [Bazel](https://bazel.build/) to build the project. 
 Bazel manages all developer dependencies, Helm chart building, Docker images and the code itself. 
 We try to use it as much as possible.
+We currently use Bazel `v3.7.2`. The minimum supported version is `v3.5.0`.
 
 > **TIP**: are you using GoLand? Make sure to exclude the `bazel-` folders! You can do this by right clicking on the folder -> Mark Directory As -> Excluded
 > This will save you a ton of CPU time!
+
+> **TIP**: are you sitting on a corporate network with internal PKI? Bazel does not honor custom CA certificates by default, but depending on your OS
+> a [clean workaround might be available](https://groups.google.com/g/bazel-discuss/c/13uPDObyfQg/m/UjPbalztCQAJ).
 
 ## A quick intro to Bazel
 

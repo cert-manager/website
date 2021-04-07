@@ -9,7 +9,7 @@ The long-awaited `v0.6` release is here! This release includes a huge number of 
 
 We've made a big focus on the ACME implementation, as well as improving the general user-experience when requesting certificates.
 
-We've exposed new x509 certificate fields via the Certificate resource type, as well as improving support for these options across all Issuer types.
+We've exposed new X.509 certificate fields via the Certificate resource type, as well as improving support for these options across all Issuer types.
 
 As of the `v0.6` release being cut, we've also reached a huge 99 code contributors! This is incredible to see, and we're thankful to all those who have contributed in all forms over the last couple of years!
 
