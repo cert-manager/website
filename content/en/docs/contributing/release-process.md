@@ -278,10 +278,8 @@ Follow the `cmrel stage` build: <https://console.cloud.google.com/cloud-build/bu
         {{% /pageinfo %}}
 
 6. Run `cmrel publish`
-   
-   <div class="p-3 display-4">Background: Primary</div>
 
-   1. Set the `RELEASE_NAME` variable in your shell by. The value for the
+   1. Set the `RELEASE_NAME` variable in your shell. The value for the
       `RELEASE_NAME` variable is found in the output of the previous command,
       `cmrel stage`. Look for the line that contains the `gs://` link:
 
