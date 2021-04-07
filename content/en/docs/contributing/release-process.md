@@ -16,22 +16,52 @@ About "alert" and "pageinfo": https://www.docsy.dev/docs/adding-content/shortcod
 
 {{% pageinfo color="warning" %}}
 
-⛔️ Do not proceed with the release process if you do not satify to one of the following:
+⛔️ Do not proceed with the release process if you do not satisfy with one of the
+following:
 
-1. You need to be a GitHub "owner" on the cert-manager project (if you see the
+1. The release process **takes about 40 minutes**. You must have time to
+   complete all the steps.
+2. You need to be at Jetstack to create ask for the GitHub and GCP permissions.
+   _(we wish anyone outside Jetstack could be allowed to ask for the
+   permissions; please let us know if that would be of interest to you)_
+3. You need to be a GitHub "owner" on the cert-manager project (if you see the
    "Settings" tab when looking at the cert-manager project, you **are** an
    owner). To become a GitHub "owner" of the cert-manager project, [open a
    PR](https://github.com/jetstack/platform-board/pulls/new) with a link to
    here.
-2. You need to be added as an "Owner" to the GCP project
+4. You need to be added as an "Owner" to the GCP project
    [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release).
    To check if you do have access, try opening [the Cloud Build
    page](https://console.cloud.google.com/cloud-build?project=cert-manager-release).
-   To get "Editor" access to the GCP project, you can copy-paste [this PR
-   example](https://github.com/jetstack/platform-board/issues/373) into a new PR
-   if you want to get the right permissions.
-3. The release process **takes about 40 minutes**. You must have time to complete
-   all the steps.
+   To get the "Editor" permission on the GCP project, copy-paste the below
+   example template PR into a [new
+   PR](https://github.com/jetstack/platform-board/pulls/new) if you want to get
+   the permissions.
+
+   <details>
+
+   <summary>
+   📝 PR template for requesting access to the GCP project
+   </summary>
+
+   ```markdown
+   Step 4 under "Prerequisites" on the [release-process][1] page means I need
+   access to the [cert-manager-release][2] project on GCP.
+
+   I would need to be an "Editor" on that project. More specifically, the roles
+   that I will be using are:
+
+   - Cloud Build Editor (`roles/cloudbuild.builds.builder`),
+   - Storage Object Viewer (`roles/storage.objectViewer`), and
+   - Cloud KMS CryptoKey Encrypter (`roles/cloudkms.cryptoKeyEncrypter`)
+
+   Thanks!
+
+   [1]: https://cert-manager.io/docs/contributing/release-process/#prerequisites
+   [2]: https://console.cloud.google.com/?project=cert-manager-release
+   ```
+
+   </details>
 
 {{% /pageinfo %}}
 
