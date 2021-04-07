@@ -239,14 +239,22 @@ The process for cutting a minor release is as follows:
         Google Cloud. These artifacts will be published and released in the
         next steps.
 
-        The final line of output contains URL of the bucket containing the
-        release artifacts. The final segment in that URL contains the
-        `RELEASE_NAME`, which you will need in the next step.
+        {{% pageinfo color="info" %}}
+
+👉  Remember to keep open the terminal where you run `cmrel stage`. Its output
+will be used in the next step.
+
+        {{% /pageinfo %}}
 
    2. While the build is running, send a first Slack message to
       `#cert-manager-dev`:
 
-        _Releasing `1.2.0-alpha.2` 🧵_
+         {{% pageinfo %}}
+
+Releasing `1.2.0-alpha.2` 🧵
+
+         {{% /pageinfo %}}
+
 
         ⚠️ Note: please have a quick look at the build log as it might
         contain some unredacted data that we forgot to redact. We try to
@@ -257,33 +265,35 @@ The process for cutting a minor release is as follows:
       Cloud Build job link that `cmrel` displayed in "View logs at". For
       example, the message would look like:
 
-        _Follow the cmrel stage build: <https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237>_
+        {{% pageinfo %}}
+Follow the `cmrel stage` build: <https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237>
+        {{% /pageinfo %}}
 
 6. Run `cmrel publish`
+   
+   <div class="p-3 display-4">Background: Primary</div>
 
-   1. Find the "release name". The release name can be found in the output of
-      the previous command, `cmrel stage`. In the previous command output, look
-      for a line that looks like this:
+   1. Set the `RELEASE_NAME` variable in your shell by. The value for the
+      `RELEASE_NAME` variable is found in the output of the previous command,
+      `cmrel stage`. Look for the line that contains the `gs://` link:
 
-        ```text
-        Once complete, view artifacts at: gs://cert-manager-release/stage/gcb/release/v1.3.0-alpha.1-c2c0fdd78131493707050ffa4a7454885d041b08
-        ```
+        ```sh
+         gs://cert-manager-release/stage/gcb/release/v1.3.0-alpha.1-c2c0fdd78131493707050ffa4a7454885d041b08
+                                                     <------------- RELEASE_NAME -------------------------->
+         ```
 
-        Copy the part that starts with a version (`v1.3.0`). That's the "release
-        name" that you will need for the next step:
+        Copy that part into a variable in your shell:
 
-        ```text
-        # This is the "release name":
-        v1.3.0-alpha.0-77b045d159bd20ce0ec454cd79a5edce9187bdd9
+        ```sh
+        export RELEASE_NAME=v1.3.0-alpha.0-77b045d159bd20ce0ec454cd79a5edce9187bdd9
         ```
 
    1. Do a `cmrel publish` dry-run to ensure that all the staged resources are
-      valid. Using the "release name" that you copied in the previous step, run
-      the following command:
+      valid. Run the following command:
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --release-name RELEASE_NAME
+        cmrel publish --release-name $RELEASE_NAME
         ```
 
         You can view the progress by clicking the Google Cloud Build URL in the
@@ -292,7 +302,10 @@ The process for cutting a minor release is as follows:
    2. While the build is running, send a third Slack message in reply to
       the first message:
 
-        _Follow the cmrel publish dry-run build: <https://console.cloud.google.com/cloud-build/builds16f6f875-0a23-4fff-b24d-3de0af207463?project=1021342095237>_
+        {{% pageinfo %}}
+Follow the `cmrel publish` dry-run build: <https://console.cloud.google.com/cloud-build/builds16f6f875-0a23-4fff-b24d-3de0af207463?project=1021342095237>
+        {{% /pageinfo %}}
+
 
    3. Next publish the release artifacts for real.
 
@@ -302,7 +315,7 @@ The process for cutting a minor release is as follows:
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --nomock --release-name <RELEASE_NAME>
+        cmrel publish --nomock --release-name $RELEASE_NAME
         ```
 
         Note: At this stage there will be a draft release on GitHub and a
@@ -314,7 +327,9 @@ The process for cutting a minor release is as follows:
    4. While the build is running, send a fourth Slack message in reply to
       the first message:
 
-        _Follow the cmrel publish build: <https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237>_
+        {{% pageinfo %}}
+Follow the `cmrel publish` build: <https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237>
+        {{% /pageinfo %}}
 
 7. Publish the GitHub release
 
@@ -333,7 +348,9 @@ The process for cutting a minor release is as follows:
    the check box "Also send to `#cert-manager-dev`" so that the message is
    well visible. Also cross-post the message on `#cert-manager`.
 
-     _<https://github.com/jetstack/cert-manager/releases/tag/v1.0.0> 🎉_
+      {{% pageinfo %}}
+https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 🎉
+      {{% /pageinfo %}}
 
 ### Final Release
 
