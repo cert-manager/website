@@ -72,8 +72,8 @@ following conditions:
 
 {{% /pageinfo %}}
 
-First ensure that you have all the tools and permissions required to
-perform a cert-manager release:
+First, ensure that you have all the tools required to perform a cert-manager
+release:
 
 1. Install the [`release-notes`](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md) CLI:
    ```sh
