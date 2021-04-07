@@ -315,21 +315,19 @@ Follow the `cmrel publish` dry-run build: <https://console.cloud.google.com/clou
 
    3. Next publish the release artifacts for real.
 
-        If the last step succeeded, you can now re-run the `cmrel publish`
-        with the `--nomock` argument to actually publish the release
-        artifacts to GitHub, `Quay.io`, to our [ChartMuseum instance][ChartMuseum], etc.
+        If the last step succeeded, you can now re-run the `cmrel publish` with
+        the `--nomock` argument to actually publish the release artifacts to
+        GitHub, `Quay.io`, to our [ChartMuseum](https://charts.jetstack.io)
+        instance, etc.
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
         cmrel publish --nomock --release-name "$RELEASE_NAME"
         ```
 
-      {{% pageinfo color="info" %}}
-At this stage there will be a draft release on GitHub and a
-live release on our [ChartMuseum instance][ChartMuseum]. So you must now complete the
-release process quickly otherwise users of the latest release on our
-[ChartMuseum instance][ChartMuseum] will encounter errors, because the manual CRD
-install URL will not be available yet.
+       {{% pageinfo color="warning" %}}
+⏰ At this stage, there will be a draft release on GitHub and a live release on our [ChartMuseum](https://charts.jetstack.io) instance. So you must now complete the
+release process quickly; otherwise, users of the latest release on our ChartMuseum instance will encounter errors because the manual CRD install URL will not be available yet.
       {{% /pageinfo %}}
 
    4. While the build is running, send a fourth Slack message in reply to
@@ -410,5 +408,3 @@ The process for cutting a patch release is as follows:
    Bugs that need to be fixed in a patch release should be [cherry picked into the appropriate release branch](../contributing-flow/#cherry-picking).
 
 2. Then, continue with the instructions in [process for releasing a minor version](#process-for-releasing-a-minor-version).
-
-[ChartMuseum]: https://charts.jetstack.io
