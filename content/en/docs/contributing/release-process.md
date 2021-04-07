@@ -136,7 +136,7 @@ The process for cutting a minor release is as follows:
     the release branch:
 
     ```bash
-    # Must be run from the cert-manger repo folder.
+    # Must be run from the cert-manager repo folder.
     git fetch --all
     git checkout -b release-1.0 origin/master
     ```
@@ -146,7 +146,7 @@ The process for cutting a minor release is as follows:
     from the master branch, as follows:
 
     ```bash
-    # Must be run from the cert-manger repo folder.
+    # Must be run from the cert-manager repo folder.
     git fetch --all
     git branch --force release-1.0 origin/release-1.0
     git checkout release-1.0
@@ -163,7 +163,7 @@ The process for cutting a minor release is as follows:
      branch.
 
      ```bash
-     # Must be run from the cert-manger repo folder.
+     # Must be run from the cert-manager repo folder.
      git push --set-upstream origin release-1.0
      ```
 
