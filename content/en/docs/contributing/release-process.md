@@ -33,22 +33,17 @@ following conditions:
    [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release).
    To check if you do have access, try opening [the Cloud Build
    page](https://console.cloud.google.com/cloud-build?project=cert-manager-release).
-   To get the "Editor" permission on the GCP project, copy-paste the below
-   example template PR into a [new
-   PR](https://github.com/jetstack/platform-board/pulls/new).
-
-   <details>
-
-   <summary>
-   📝 PR template for requesting access to the GCP project
-   </summary>
-
+   To get the "Editor" permission on the GCP project, open a [new
+   PR](https://github.com/jetstack/platform-board/pulls/new) and copy-paste the below
+   example template:
    ```markdown
-   Step 4 under "Prerequisites" on the [release-process][1] page means I need
-   access to the [cert-manager-release][2] project on GCP.
+   <!-- PR title: Access to the cert-manager-release GCP project -->
 
-   I need to be an "Editor" on this project. More specifically, the roles I need
-   are:
+   The step 4 under "Prerequisites" on the [release-process][1] page means I
+   need access to the [cert-manager-release][2] project on GCP.
+
+   I need to be an "Editor" on this project. More specifically, the roles
+   I need are:
 
    - Cloud Build Editor (`roles/cloudbuild.builds.builder`),
    - Storage Object Viewer (`roles/storage.objectViewer`), and
@@ -59,8 +54,6 @@ following conditions:
    [1]: https://cert-manager.io/docs/contributing/release-process/#prerequisites
    [2]: https://console.cloud.google.com/?project=cert-manager-release
    ```
-
-   </details>
 
 {{% /pageinfo %}}
 
@@ -318,11 +311,13 @@ Follow the `cmrel publish` dry-run build: <https://console.cloud.google.com/clou
         cmrel publish --nomock --release-name $RELEASE_NAME
         ```
 
-        Note: At this stage there will be a draft release on GitHub and a
-        live release on our [ChartMuseum instance][ChartMuseum]. So you must now complete the
-        release process quickly otherwise users of the latest release on our
-        [ChartMuseum instance][ChartMuseum] will encounter errors, because the manual CRD
-        install URL will not be available yet.
+      {{% pageinfo color="info" %}}
+At this stage there will be a draft release on GitHub and a
+live release on our [ChartMuseum instance][ChartMuseum]. So you must now complete the
+release process quickly otherwise users of the latest release on our
+[ChartMuseum instance][ChartMuseum] will encounter errors, because the manual CRD
+install URL will not be available yet.
+      {{% /pageinfo %}}
 
    4. While the build is running, send a fourth Slack message in reply to
       the first message:
