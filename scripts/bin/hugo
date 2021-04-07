@@ -22,7 +22,7 @@ set -o nounset
 set -o pipefail
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
-VERSION="0.78.1"
+VERSION="0.81.0"
 
 source "${REPO_ROOT}/scripts/bin/lib.sh"
 
@@ -41,10 +41,10 @@ if ! test -f "${hugo}"; then
     tmpdir="$(mktemp -d)"
     if [ "$GOOS" = "darwin" ]; then
         curl -Lo "${tmpdir}/file" "https://github.com/gohugoio/hugo/releases/download/v${VERSION}/hugo_extended_${VERSION}_macOS-64bit.tar.gz"
-        check_sha "${tmpdir}/file" "c7273605ea3f0ae260b57431a36e02dc23a093f286b3e35e8632fa590a674a80"
+        check_sha "${tmpdir}/file" "42346b289f90f02eb135dfbed8d293539655c4fccada36677fab7e9c03d8b28b"
     elif [ "$GOOS" = "linux" ]; then
         curl -Lo "${tmpdir}/file" "https://github.com/gohugoio/hugo/releases/download/v${VERSION}/hugo_extended_${VERSION}_Linux-64bit.tar.gz"
-        check_sha "${tmpdir}/file" "851b3ac01b86969196b8ca40f0c58a6639f243bcb06541fcd27eff4117f7a3f7"
+        check_sha "${tmpdir}/file" "3c7d034405c67bf571b6d8f001d5a9c49dd87dbfa32b3b19d16e898c46f8f5e2"
     else
     	echo "Unsupported OS: $GOOS"
     	exit 1
