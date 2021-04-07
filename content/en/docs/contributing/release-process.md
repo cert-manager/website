@@ -16,14 +16,14 @@ About "alert" and "pageinfo": https://www.docsy.dev/docs/adding-content/shortcod
 
 {{% pageinfo color="warning" %}}
 
-⛔️ Do not proceed with the release process if you do not satisfy with one of the
-following:
+⛔️ Do not proceed with the release process if you do not meet all of the
+following conditions:
 
 1. The release process **takes about 40 minutes**. You must have time to
    complete all the steps.
-2. You need to be at Jetstack to create ask for the GitHub and GCP permissions.
-   *(we wish anyone outside Jetstack could be allowed to ask for the
-   permissions; please let us know if that would be of interest to you)*
+2. You currently need to be at Jetstack to get the required GitHub and GCP
+   permissions. (we'd like contributors outside Jetstack to be able to get
+   access; if that's of interest to you, please let us know)
 3. You need to be a GitHub "Maintainer" on the cert-manager project (if you see
    the "Settings" tab when looking at the cert-manager project, you **are** an
    owner). To become a GitHub "owner" of the cert-manager project, [open a
@@ -35,8 +35,7 @@ following:
    page](https://console.cloud.google.com/cloud-build?project=cert-manager-release).
    To get the "Editor" permission on the GCP project, copy-paste the below
    example template PR into a [new
-   PR](https://github.com/jetstack/platform-board/pulls/new) if you want to get
-   the permissions.
+   PR](https://github.com/jetstack/platform-board/pulls/new).
 
    <details>
 
@@ -48,7 +47,7 @@ following:
    Step 4 under "Prerequisites" on the [release-process][1] page means I need
    access to the [cert-manager-release][2] project on GCP.
 
-   I would need to be an "Editor" on that project. More specifically, the roles
+   I need to be an "Editor" on this project. More specifically, the roles I need are:
    that I will be using are:
 
    - Cloud Build Editor (`roles/cloudbuild.builds.builder`),
@@ -160,8 +159,10 @@ The process for cutting a minor release is as follows:
 
 4. Generate and edit the release notes:
 
-   1. Use the following two tables to understand how to fill in the 4
-      environment variables needed for the next step:
+   1. Use the following two tables to understand how to fill in the four
+      environment variables needed for the next step. These four environment
+      variables are documented on the [release-note's
+      README](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md#options).
 
       | Variable          | Description                           |
       | ----------------- | ------------------------------------- |
@@ -197,8 +198,8 @@ The process for cutting a minor release is as follows:
         export RELEASE_VERSION="1.3.0-alpha.0"
         ```
 
-   2. Generate the `release-notes.md` at the root of your the cert-manager repo
-      folder with the following command:
+   2. Generate `release-note.md` at the root of your cert-manager repo folder
+      with the following command:
 
         ```sh
         # Must be run from the cert-manger folder.
