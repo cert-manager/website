@@ -22,7 +22,7 @@ set -o nounset
 set -o pipefail
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
-VERSION="0.59.1"
+VERSION="0.78.1"
 
 source "${REPO_ROOT}/scripts/bin/lib.sh"
 
