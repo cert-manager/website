@@ -32,6 +32,13 @@ resources, read the [Namespaces](../../concepts/issuer/#namespaces) section.
 
 ### Creating a Venafi Cloud Issuer
 
+⚠ From cert-manager `v1.3` you will need to update your Venafi Cloud configuration to use `OutagePREDICT` instead of `DevOpsACCELERATE`.
+With this update, the zone format changes from a UUID to a string of the form `<Application Name>\<Issuing Template Alias>`.
+Please read [cert-manager 1.2 to 1.3 upgrade notes][] and [Venafi Cloud Prerequisites][] for further information.
+
+[cert-manager 1.2 to 1.3 upgrade notes]: ../../installation/upgrading/upgrading-1.2-1.3/
+[Venafi Cloud Prerequisites]: https://github.com/Venafi/vcert/blob/v4.13.1/README-CLI-CLOUD.md#prerequisites
+
 In order to set up a Venafi Cloud `Issuer`, you must first create a Kubernetes
 `Secret` resource containing your Venafi Cloud API credentials:
 
@@ -68,7 +75,7 @@ metadata:
   namespace: <NAMESPACE YOU WANT TO ISSUE CERTIFICATES IN>
 spec:
   venafi:
-    zone: "801bdbd0-8587-11ea-b487-4d978b4efe3d" # Set this to the GUID of the Venafi policy zone you want to use
+    zone: "My Application\My CIT" # Set this to <Application Name>\<Issuing Template Alias>
     cloud:
       apiTokenSecretRef:
         name: cloud-secret
