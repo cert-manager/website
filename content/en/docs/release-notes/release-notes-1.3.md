@@ -5,13 +5,15 @@ weight: 800
 type: "docs"
 ---
 
+This release prepares for the adoption of the upstream Kubernetes CSR API
+
+Thanks to external contributors:
+
 Please read the [upgrade notes](/docs/installation/upgrading/upgrading-1.2-1.3/) before upgrading.
 
-Aside from that, there have been numerous bug fixes and features summarized below.
+Aside from that, there have been numerous bug fixes and features summarized below. 
 
-# Breaking Changes
-
-## Venafi Cloud Issuer
+# Deprecated Features and Breaking Changes
 
 This release updates the [Venafi Cloud Issuer][] to use `OutagePREDICT` instead of `DevOpsACCELERATE`.
 
@@ -23,5 +25,10 @@ The zone is now `<Application Name>\<Issuing Template Alias>`
 
 # New Features
 
+## Feature
+
+* 
 
 # Bug Fixes
+
+*
