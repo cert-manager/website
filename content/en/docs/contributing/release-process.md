@@ -161,8 +161,7 @@ The process for cutting a minor release is as follows:
 
    1. Use the following two tables to understand how to fill in the four
       environment variables needed for the next step. These four environment
-      variables are documented on the [release-note's
-      README](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md#options).
+      variables are documented on the [README](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md#options) for the Kubernetes `release-notes` tool.
 
       | Variable          | Description                           |
       | ----------------- | ------------------------------------- |
