@@ -266,14 +266,14 @@ The process for cutting a minor release is as follows:
       the previous command, `cmrel stage`. In the previous command output, look
       for a line that looks like this:
 
-        ```sh
+        ```text
         Once complete, view artifacts at: gs://cert-manager-release/stage/gcb/release/v1.3.0-alpha.1-c2c0fdd78131493707050ffa4a7454885d041b08
         ```
 
         Copy the part that starts with a version (`v1.3.0`). That's the "release
         name" that you will need for the next step:
 
-        ```sh
+        ```text
         # This is the "release name":
         v1.3.0-alpha.0-77b045d159bd20ce0ec454cd79a5edce9187bdd9
         ```
