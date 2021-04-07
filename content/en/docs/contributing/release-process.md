@@ -120,8 +120,9 @@ some of these goals are missed, in order to keep up release velocity.
 
 ### Process for Releasing a Minor Version
 
-> Note: please click on the "Edit this page" button on the top-right corner
-> of this page if a step is missing or if it is outdated.
+{{% pageinfo color="info" %}}
+🔰 Please click on the **Edit this page** button on the top-right corner of this page if a step is missing or if it is outdated.
+{{% /pageinfo %}}
 
 The process for cutting a minor release is as follows:
 
@@ -154,11 +155,12 @@ The process for cutting a minor release is as follows:
 
 3. Push it to the `jetstack/cert-manager` repository
 
-     Note 1: run `git remote -v` to check that `origin` points to the
+     **Note 1**: run `git remote -v` to check that `origin` points to the
      upstream <https://github.com/jetstack/cert-manager.git>.
 
-     Note 2: if the branch doesn't already exist, you need to be an "admin" of
-     the GitHub project to be able to push to the release branch.
+     **Note 2:** if the branch doesn't already exist, you will need to have the
+     `write` role on the GitHub project to be able to push to the release
+     branch.
 
      ```bash
      # Must be run from the cert-manger repo folder.
@@ -169,7 +171,9 @@ The process for cutting a minor release is as follows:
 
    1. Use the following two tables to understand how to fill in the four
       environment variables needed for the next step. These four environment
-      variables are documented on the [README](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md#options) for the Kubernetes `release-notes` tool.
+      variables are documented on the
+      [README](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md#options)
+      for the Kubernetes `release-notes` tool.
 
       | Variable          | Description                           |
       | ----------------- | ------------------------------------- |
@@ -190,6 +194,7 @@ The process for cutting a minor release is as follows:
       | `END_REV`         | `release-1.3`         | `release-1.3`            | `release-1.3` | `release-1.3` |
       | `BRANCH`          | `release-1.3`         | `release-1.3`            | `release-1.3` | `release-1.3` |
       | `RELEASE_VERSION` | `1.3.0-alpha.0`       | `1.3.0-alpha.1`          | `1.3.0`       | `1.3.1`       |
+
 
       > \*The git tag of the "previous" release (`START_REV`) depends on which
       > type of release you count on doing. Look at the above examples to
@@ -218,8 +223,10 @@ The process for cutting a minor release is as follows:
           --output release-notes.md
         ```
 
-        Note: the GitHub token **does not need any scope**. The token is
-        required only to avoid rate-limits imposed on anonymous API users.
+        {{% pageinfo color="info" %}}
+The GitHub token **does not need any scope**. The token is
+required only to avoid rate-limits imposed on anonymous API users.
+        {{% /pageinfo %}}
 
    3. Sanity check the notes, checking that the notes contain details of all
       the features and bug fixes that you expect to be in the release. Add
@@ -248,26 +255,23 @@ The process for cutting a minor release is as follows:
         next steps.
 
         {{% pageinfo color="info" %}}
-
-👉  Remember to keep open the terminal where you run `cmrel stage`. Its output
+🔰  Remember to keep open the terminal where you run `cmrel stage`. Its output
 will be used in the next step.
-
         {{% /pageinfo %}}
 
    2. While the build is running, send a first Slack message to
       `#cert-manager-dev`:
 
          {{% pageinfo %}}
-
 Releasing `1.2.0-alpha.2` 🧵
-
          {{% /pageinfo %}}
 
 
-        ⚠️ Note: please have a quick look at the build log as it might
-        contain some unredacted data that we forgot to redact. We try to
-        make sure the sensitive data is properly redacted but sometimes we
-        forget to update this.
+         {{% pageinfo color="info" %}}
+🔰 Please have a quick look at the build log as it might contain some unredacted
+data that we forgot to redact. We try to make sure the sensitive data is
+properly redacted but sometimes we forget to update this.
+         {{% /pageinfo %}}
 
    3. Send a second Slack message in reply to this first message with the
       Cloud Build job link that `cmrel` displayed in "View logs at". For
