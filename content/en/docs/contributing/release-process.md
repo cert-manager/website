@@ -39,8 +39,10 @@ following conditions:
    ```markdown
    <!-- PR title: Access to the cert-manager-release GCP project -->
 
-   The step 4 under "Prerequisites" on the [release-process][1] page means I
-   need access to the [cert-manager-release][2] project on GCP.
+   Hi,
+
+   As stated in step 4 under "Prerequisites" on the [release-process][1] page,
+   I need access to the [cert-manager-release][2] project on GCP.
 
    I need to be an "Editor" on this project. More specifically, the roles
    I need are:
