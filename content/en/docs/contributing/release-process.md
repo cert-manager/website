@@ -22,8 +22,8 @@ following:
 1. The release process **takes about 40 minutes**. You must have time to
    complete all the steps.
 2. You need to be at Jetstack to create ask for the GitHub and GCP permissions.
-   _(we wish anyone outside Jetstack could be allowed to ask for the
-   permissions; please let us know if that would be of interest to you)_
+   *(we wish anyone outside Jetstack could be allowed to ask for the
+   permissions; please let us know if that would be of interest to you)*
 3. You need to be a GitHub "owner" on the cert-manager project (if you see the
    "Settings" tab when looking at the cert-manager project, you **are** an
    owner). To become a GitHub "owner" of the cert-manager project, [open a
