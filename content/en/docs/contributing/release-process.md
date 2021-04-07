@@ -181,11 +181,11 @@ The process for cutting a minor release is as follows:
       | `START_REV`\*     | `v1.2.0`              | `v1.3.0-alpha.0`         | `v1.2.0`      | `v1.3.0`      |
       | `END_REV`         | `release-1.3`         | `release-1.3`            | `release-1.3` | `release-1.3` |
       | `BRANCH`          | `release-1.3`         | `release-1.3`            | `release-1.3` | `release-1.3` |
-      | `RELEASE_VERSION` | `1.3.0-alpha.0`       | `1.3.0-alpha.0`          | `1.3.0`       | `1.3.1`       |
+      | `RELEASE_VERSION` | `1.3.0-alpha.0`       | `1.3.0-alpha.1`          | `1.3.0`       | `1.3.1`       |
 
       > \*The git tag of the "previous" release (`START_REV`) depends on which
       > type of release you count on doing. Look at the above examples to
-      > undertand a bit more what those are.
+      > understand a bit more what those are.
 
       After finding out the value for each of the 4 environment variables, set
       the variables in your shell (for example, following the example 1):
