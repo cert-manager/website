@@ -69,7 +69,7 @@ The `--renew-before-expiration-duration` flag has been removed from the cert-man
 
 # Bug Fixes
 
-## cert-manager controller
+## cert-manager Controller
 
 * Fixed an issue which could cause multiple `CertificateRequests` to be created in a short time for a single `Certificate` resource.
 * Certificate Readiness controller only updates a certificate's status if something has changed.
