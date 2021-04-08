@@ -45,6 +45,9 @@ external, third party issuers you may have installed.
 The resource also exposes the option for stating the certificate as CA, Key
 Usages, and requested validity duration.
 
+All fields within the `spec` of the `CertificateRequest`, as well as any managed
+cert-manager annotations, are immutable and cannot be modified after creation.
+
 A successful issuance of the certificate signing request will cause an update to
 the resource, setting the status with the signed certificate, the CA of the
 certificate (if available), and setting the `Ready` condition to `True`.
@@ -66,3 +69,19 @@ meanings are as follows:
 | False | Pending | The `CertificateRequest` is currently pending, waiting for some other operation to take place. This could be that the `Issuer` does not exist yet or the `Issuer` is in the process of issuing a certificate.                                   |
 | False | Failed  | The certificate has failed to be issued - either the returned certificate failed to be decoded or an instance of the referenced issuer used for signing failed. No further action will be taken on the `CertificateRequest` by it's controller. |
 | True  | Issued  | A signed certificate has been successfully issued by the referenced `Issuer`.                                                                                                                                                                   |
+
+
+## UserInfo
+
+`CertificateRequests` include a set of `UserInfo` fields as part of the spec,
+namely: `username`, `groups`, `uid`, and `extra`. These values contain the user
+who created the `CertificateRequest`. This user will be cert-manager itself in
+the case that the `CertificateRequest` was created by a
+[`Certificate`](../certificate/) resource, or instead the user who created the
+`CertificateRequest` directly.
+
+
+> **Warning**: These fields are managed by cert-manager and should _never_ be
+> set or modified by anything else. When the `CertificateRequest` is created,
+> these fields will be overridden, and any request attempting to modify them
+> will be rejected.
