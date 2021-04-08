@@ -39,7 +39,7 @@ are included in a single YAML manifest file:
 Install the `CustomResourceDefinitions` and cert-manager itself:
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
+$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.0/cert-manager.yaml
 ```
 
 > **Note**: When running on GKE (Google Kubernetes Engine), you may encounter a
@@ -109,15 +109,15 @@ option when installing the Helm chart.
 > **Note**: If you're using a `helm` version based on Kubernetes `v1.18` or below (Helm `v3.2`) `installCRDs` will not work with cert-manager `v0.16`.
 > For more info see the [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#helm)
 
-**Option 1: installing CRDs with `kubectl`**
+#### Option 1: installing CRDs with `kubectl`
 
 Install the `CustomResourceDefinition` resources using `kubectl`:
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml
+$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.0/cert-manager.crds.yaml
 ```
 
-**Option 2: install CRDs as part of the Helm release**
+#### Option 2: install CRDs as part of the Helm release
 
 To automatically install and manage the CRDs as part of your Helm release, you
 must add the `--set installCRDs=true` flag to your Helm installation command.
@@ -132,8 +132,8 @@ To install the cert-manager Helm chart:
 $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
-  --version v1.2.0 \
   --create-namespace \
+  --version v1.3.0 \
   # --set installCRDs=true
 ```
 

@@ -1,5 +1,5 @@
 {{ $links := .Site.Params.links }}
-<footer class="bg-dark py-5 row d-print-none">
+<footer class="bg-dark py-1">
   <div class="container-fluid mx-sm-5">
     <div class="row">
       <div class="col-6 col-sm-4 text-xs-center order-sm-2">
@@ -18,13 +18,12 @@
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
         {{ with .Site.Params.copyright }}
-        <div class="row">
-          <div class="col-12">
-            <small class="text-white">&copy; {{ now.Year}} {{ .}} {{ T "footer_all_rights_reserved" }}</small>
-          </div>
-          <div class="col-12">
-            <small class="text-white">cert-manager was originally created by <a href="https://jetstack.io"><span id="jetstack-footer">{{ with resources.Get "icons/jetstack.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span></a></small>
-          </div>
+            <small class="text-white">
+              &copy; {{ now.Year}} The cert-manager Authors.<br/>
+              &copy; {{ now.Year}} The Linux Foundation. All rights reserved.
+              The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a class="text-white" href="https://www.linuxfoundation.org/trademark-usage">Trademark Usage page</a>.<br />
+              cert-manager was originally created by <a href="https://jetstack.io"><span id="jetstack-footer">{{ with resources.Get "icons/jetstack.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span></a>.
+            </small>
         {{ end }}
         {{ with .Site.Params.privacy_policy }}<small class="ml-1"><a href="{{ . }}" target="_blank">{{ T "footer_privacy_policy" }}</a></small>{{ end }}
 	{{ if not .Site.Params.ui.footer_about_disable }}

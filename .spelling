@@ -30,6 +30,7 @@ CAs
 CertificateRequest
 CertificateRequest
 Changelog
+ChartMuseum
 CloudDNS
 Cloudflare
 CloudFlare
@@ -210,6 +211,21 @@ CryptoKey
 Encrypter
 cmrel
 userinfo
+teejaded
+7opf
+yann-soubeyrand
+Kirill-Garbar
+joshuastern
+lalitadithya
+johejo
+alrs
+jsoref
+RinkiyaKeDad
+jonathansp
+OmairK
+Makefile
+SelfSigned
+justinkillen
 
 # As per https://tools.ietf.org/html/rfc5280, the spelling "X.509" is the
 # correct spelling. The spelling "x509" and "X509" are incorrect.

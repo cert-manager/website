@@ -6,5 +6,5 @@ https://netlify.cert-manager.io/* https://cert-manager.io/:splat 301!
 # Optional: Redirect default Netlify subdomain to primary domain
 https://cert-manager.netlify.com/* https://cert-manager.io/:splat 301!
 
-# We previously released the external loadbalencer page under /configuration, and is now moved to /configuration/acme/http01/
+# We previously released the external loadbalancer page under /configuration, and is now moved to /configuration/acme/http01/
 https://cert-manager.io/docs/configuration/externalloadbalancer/ https://cert-manager.io/docs/configuration/acme/http01/externalloadbalancer/ 301!
