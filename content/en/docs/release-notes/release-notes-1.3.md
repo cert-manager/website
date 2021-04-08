@@ -22,6 +22,7 @@ Special thanks to the external contributors who contributed to this release:
 * [@RinkiyaKeDad](https://github.com/RinkiyaKeDad)
 * [@jonathansp](https://github.com/jonathansp)
 * [@OmairK](https://github.com/OmairK)
+* [@justinkillen](https://github.com/justinkillen)
 
 Please read the [upgrade notes](/docs/installation/upgrading/upgrading-1.2-1.3/) before upgrading.
 
