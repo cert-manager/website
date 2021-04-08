@@ -5,7 +5,7 @@ weight: 800
 type: "docs"
 ---
 
-This release prepares for the adoption of the upstream [Kubernetes CSR](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/) API and improves interoperability with HashiCorp [Vault Enterprise](https://www.vaultproject.io/docs/enterprise).
+This release prepares for the implementation of certificate issuance policies and adoption of the upstream [Kubernetes CSR](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/) API. It also improves interoperability with HashiCorp [Vault Enterprise](https://www.vaultproject.io/docs/enterprise).
 A slew of bugs have also been squashed.
 
 Special thanks to the external contributors who contributed to this release:
@@ -16,7 +16,7 @@ Special thanks to the external contributors who contributed to this release:
 * [@Kirill-Garbar](https://github.com/Kirill-Garbar)
 * [@joshuastern](https://github.com/joshuastern)
 * [@lalitadithya](https://github.com/lalitadithya)
-* [@johejo](https://github.com/lalitadithya)
+* [@johejo](https://github.com/johejo)
 * [@alrs](https://github.com/alrs)
 * [@jsoref](https://github.com/jsoref)
 * [@RinkiyaKeDad](https://github.com/RinkiyaKeDad)
@@ -26,7 +26,7 @@ Special thanks to the external contributors who contributed to this release:
 
 Please read the [upgrade notes](/docs/installation/upgrading/upgrading-1.2-1.3/) before upgrading.
 
-As always, the full change log is available on the [GitHub release](https://github.com/jetstack/cert-manager/releases/tag/v1.3.0)
+As always, the full change log is available on the [GitHub release](https://github.com/jetstack/cert-manager/releases/tag/v1.3.0).
 
 # Deprecated Features and Breaking Changes
 
@@ -50,7 +50,7 @@ The `--renew-before-expiration-duration` flag has been removed from the cert-man
 
 # New Features
 
-## Upstream CSR Support Groundwork
+## Policy Support Preparation
 
 * The [design documentation](https://github.com/jetstack/cert-manager/blob/v1.3.0/design/20210203.certificate-request-identity.md) for Certificate Identity is now available.
 * `CertificateRequests` now have identity fields mirroring the upstream [Kubernetes CSR](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/) object.
