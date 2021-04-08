@@ -16,7 +16,7 @@ Special thanks to the external contributors who contributed to this release:
 * [@Kirill-Garbar](https://github.com/Kirill-Garbar)
 * [@joshuastern](https://github.com/joshuastern)
 * [@lalitadithya](https://github.com/lalitadithya)
-* [@johejo](https://github.com/lalitadithya)
+* [@johejo](https://github.com/johejo)
 * [@alrs](https://github.com/alrs)
 * [@jsoref](https://github.com/jsoref)
 * [@RinkiyaKeDad](https://github.com/RinkiyaKeDad)
