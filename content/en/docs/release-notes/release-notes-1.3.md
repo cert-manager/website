@@ -76,7 +76,7 @@ The `--renew-before-expiration-duration` flag has been removed from the cert-man
 
 ## selfSigned Issuer
 
-* The issuer now warns if you request a certificate with an empty subject DN - creating a certificate that is in violation of RFC 5280 and rejected as malformed by Java.
+* The issuer now warns if you request a certificate with an empty subject DN - creating a certificate that is in violation of RFC 5280. Some applications will reject such certificates as invalid, such as Java's `keytool`.
 
 ## helm Chart
 
