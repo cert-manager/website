@@ -21,6 +21,15 @@ external issuer types can be found in the documentation of that external issuer
 project. A list of known external issuer projects that are maintained by their
 authors are as follows:
 
+# Issuers that Honour Approval
+There are currently no external issuers that honour
+[approval](../../concepts/certificaterequest/#approval).
+
+# Issuers that do NOT Honour Approval
+A list of known external issuer projects that are maintained by their authors
+are as follows. These issuers do _not_ honour
+[approval](../../concepts/certificaterequest/#approval).
+
 - [step-issuer](https://github.com/smallstep/step-issuer): Used to request
   certificates from the [Smallstep](https://smallstep.com) [Certificate
   Authority server](https://github.com/smallstep/certificates).
@@ -41,7 +50,7 @@ authors are as follows:
 - [google-cas-issuer](https://github.com/jetstack/google-cas-issuer): Used
   to request certificates signed by private CAs managed by the
   [Google Cloud Certificate Authority Service](https://cloud.google.com/certificate-authority-service/).
-  
+
 - [freeipa-issuer](https://github.com/guilhem/freeipa-issuer): Used to
   request certificates signed by [FreeIPA](https://www.freeipa.org).
 
