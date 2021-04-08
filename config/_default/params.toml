@@ -42,6 +42,17 @@
 ###################
 # Use format `v0.#-docs` for past version's dirpath
 
+[[versions]]
+  version = "v1.2"
+  ghbranchname = "release-1.2"
+  url = "/v1.2-docs/"
+  dirpath = "v1.2-docs"
+
+[[versions]]
+  version = "v1.1"
+  ghbranchname = "release-1.1"
+  url = "/v1.1-docs/"
+  dirpath = "v1.1-docs"
 
 [[versions]]
   version = "v1.0"
