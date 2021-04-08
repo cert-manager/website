@@ -104,12 +104,12 @@ istio-system   my-app-fj9sa                       True             mesh-ca      
 ```
 
 
-#### Behaviour
+#### Behavior
 
 The Approved and Denied conditions are two distinct condition types on the
 CertificateRequest. These conditions must only have the status of True, and
 are mutually exclusive (i.e. a CertificateRequest cannot have an Approved and
-Denied condition simultaneously). This behaviour is enforced in the cert-manager
+Denied condition simultaneously). This behavior is enforced in the cert-manager
 validating admission webhook.
 
 An "approver" is an entity that is responsible for setting the Approved/Denied
