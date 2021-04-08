@@ -94,4 +94,4 @@ The `--renew-before-expiration-duration` flag has been removed from the cert-man
 
 * cert-manager now can be built with go 1.16 on Apple Silicon.
 * Docker images targets have been added to the Makefile.
-* Bazel v3.5.0 is required to build locally and to run tests.
+* Bazel `v3.5.0` is required to build locally and to run tests.
