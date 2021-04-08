@@ -36,6 +36,11 @@ corresponding issuer resource exists in Kubernetes. If these are both true, it
 will then use the information inside that issuer resource to attempt to create a
 signed certificate, based upon the certificate request.
 
+Issuers must also ensure that before signing, the `CertificateRequest` is
+[`Approved`](../../concepts/certificaterequest/#approval). If the
+`CertificateRequest` is not `Approved`, the issuer should not process it.
+Issuers are not responsible for approving `CertificateRequests`.
+
 Once a signed certificate has been gathered by the issuer controller, it then
 updates the status of the `CertificateRequest` resource with the signed
 certificate. It is then important to then update the condition status of that
