@@ -74,16 +74,16 @@ The `--renew-before-expiration-duration` flag has been removed from the cert-man
 * Fixed an issue which could cause multiple `CertificateRequests` to be created in a short time for a single `Certificate` resource.
 * Certificate Readiness controller only updates a certificate's status if something has changed.
 
-## selfSigned Issuer
+## SelfSigned Issuer
 
 * The issuer now warns if you request a certificate with an empty subject DN - creating a certificate that is in violation of RFC 5280. Some applications will reject such certificates as invalid, such as Java's `keytool`.
 
-## helm Chart
+## Helm Chart
 
 * The `targetPort` used by the Prometheus service monitor is now correctly set from helm values.
 * The correct permissions are added to the aggregate `edit` role.
 
-# Other changes
+# Other Changes
 
 ## Repository Hygiene
 
@@ -94,3 +94,4 @@ The `--renew-before-expiration-duration` flag has been removed from the cert-man
 
 * cert-manager now can be built with go 1.16 on Apple Silicon.
 * Docker images targets have been added to the Makefile.
+* Bazel v3.5.0 is required to build locally and to run tests.
