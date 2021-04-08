@@ -39,7 +39,11 @@ signed certificate, based upon the certificate request.
 Issuers must also ensure that before signing, the `CertificateRequest` is
 [`Approved`](../../concepts/certificaterequest/#approval). If the
 `CertificateRequest` is not `Approved`, the issuer should not process it.
-Issuers are not responsible for approving `CertificateRequests`.
+Issuers are not responsible for approving `CertificateRequests`. Issuer
+implementations may choose to support older versions of cert-manager (pre v1.3)
+by signing `CertificateRequests` that will never have an approval condition set.
+Disabling this gate check should be an optional flag, and the gate **enabled by
+default**.
 
 Once a signed certificate has been gathered by the issuer controller, it then
 updates the status of the `CertificateRequest` resource with the signed
