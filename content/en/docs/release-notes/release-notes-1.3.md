@@ -26,7 +26,7 @@ Special thanks to the external contributors who contributed to this release:
 
 Please read the [upgrade notes](/docs/installation/upgrading/upgrading-1.2-1.3/) before upgrading.
 
-As always, the full change log is available on the [GitHub release](https://github.com/jetstack/cert-manager/releases/tag/v1.3.0)
+As always, the full change log is available on the [GitHub release](https://github.com/jetstack/cert-manager/releases/tag/v1.3.0).
 
 # Deprecated Features and Breaking Changes
 
