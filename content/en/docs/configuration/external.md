@@ -21,13 +21,15 @@ external issuer types can be found in the documentation of that external issuer
 project. A list of known external issuer projects that are maintained by their
 authors are as follows:
 
-# Issuers that Honour Approval
+# Issuers compatible with the CertificateRequest Approval
+
 There are currently no external issuers that honour
 [approval](../../concepts/certificaterequest/#approval).
 
-# Issuers that do NOT Honour Approval
+# Issuers ignoring the CertificateRequest Approval
+
 A list of known external issuer projects that are maintained by their authors
-are as follows. These issuers do _not_ honour
+are as follows. These issuers do **not** honour
 [approval](../../concepts/certificaterequest/#approval).
 
 - [step-issuer](https://github.com/smallstep/step-issuer): Used to request

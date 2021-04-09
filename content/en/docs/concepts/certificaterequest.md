@@ -88,6 +88,7 @@ the case that the `CertificateRequest` was created by a
 
 
 ### Approval
+
 CertificateRequests can be `Approved` or `Denied`. These mutually exclusive
 conditions gate a CertificateRequest from being signed by its managed signer.
 
