@@ -283,19 +283,19 @@ Follow the `cmrel stage` build: <https://console.cloud.google.com/cloud-build/bu
 
 6. Run `cmrel publish`
 
-   1. Set the `RELEASE_NAME` variable in your shell. The value for the
-      `RELEASE_NAME` variable is found in the output of the previous command,
-      `cmrel stage`. Look for the line that contains the `gs://` link:
+   1. Set the `CMREL_RELEASE_NAME` variable in your shell. The value for the
+      `CMREL_RELEASE_NAME` variable is found in the output of the previous
+      command, `cmrel stage`. Look for the line that contains the `gs://` link:
 
         ```sh
          gs://cert-manager-release/stage/gcb/release/v1.3.0-alpha.1-c2c0fdd78131493707050ffa4a7454885d041b08
-                                                     <------------- RELEASE_NAME -------------------------->
+                                                     <------------- CMREL_RELEASE_NAME -------------------->
          ```
 
         Copy that part into a variable in your shell:
 
         ```sh
-        export RELEASE_NAME=v1.3.0-alpha.0-77b045d159bd20ce0ec454cd79a5edce9187bdd9
+        export CMREL_RELEASE_NAME=v1.3.0-alpha.0-77b045d159bd20ce0ec454cd79a5edce9187bdd9
         ```
 
    1. Do a `cmrel publish` dry-run to ensure that all the staged resources are
@@ -303,7 +303,7 @@ Follow the `cmrel stage` build: <https://console.cloud.google.com/cloud-build/bu
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --release-name "$RELEASE_NAME"
+        cmrel publish --release-name "$CMREL_RELEASE_NAME"
         ```
 
         You can view the progress by clicking the Google Cloud Build URL in the
