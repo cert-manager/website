@@ -27,21 +27,27 @@ following conditions:
 3. You need to have the GitHub `write` permission on the cert-manager project.
    To check that you have the `write` role, [get a personal access
    token](https://github.com/settings/tokens) and run:
-     ```sh
-     GH_USER=maelvls
-     curl -sH "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/jetstack/cert-manager/collaborators/$GH_USER/permission
-     ```
-     If your permission is `write` or `admin`, then you are good to go:
-     ```json
-     {
-      "permission": "write",
-      "user": {...}
-     }
-     ```
 
-    To request the `write` permission on the cert-manager project, [open a
+   ```sh
+   go install github.com/cli/cli/cmd/gh@latest
+   gh auth login
+   gh api /repos/jetstack/cert-manager/collaborators/$(gh api /user | jq -r .login)/permission
+   ```
+
+   You should see something like:
+
+   ```json
+   {
+    "permission": "write",
+    "user": {...}
+   }
+   ```
+
+   If your permission is `write` or `admin`, then you are good to go. To request
+   the `write` permission on the cert-manager project, [open a
    PR](https://github.com/jetstack/platform-board/pulls/new) with a link to
    here.
+
 4. You need to be added as an "Editor" to the GCP project
    [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release).
    To check if you do have access, try opening [the Cloud Build
@@ -49,6 +55,7 @@ following conditions:
    To get the "Editor" permission on the GCP project, open a [new
    PR](https://github.com/jetstack/platform-board/pulls/new) and copy-paste the
    below example template:
+
    ```markdown
    <!-- PR title: Access to the cert-manager-release GCP project -->
 
