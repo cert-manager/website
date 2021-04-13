@@ -397,15 +397,13 @@ page if a step is missing or if it is outdated.
 9. Proceed to the post-release steps:
 
     1. **(final release only)** Open a PR to
-       [jetstack/testing](https://github.com/jetstack/testing) and change Prow's
+       [`jetstack/testing`](https://github.com/jetstack/testing) and change Prow's
        config. To do this, take inspiration from [Maartje's PR
        example](https://github.com/jetstack/testing/pull/397/files).
 
     2. **(final release only)** Push a new release branch to
-       [jetstack/cert-manager](https://github.com/jetstack/cert-manager).
-
-        If the final release is `v1.0.0`, then push the new branch
-        `release-1.1`:
+       [`jetstack/cert-manager`](https://github.com/jetstack/cert-manager). If the
+       final release is `v1.0.0`, then push the new branch `release-1.1`:
 
         ```bash
         # Must be run from the cert-manager repo folder.
@@ -413,8 +411,8 @@ page if a step is missing or if it is outdated.
         git push origin release-1.1
         ```
 
-    3. Open a PR to
-       [cert-manager/website](https://github.com/cert-manager/website) with
+    3. **(final release only)** Open a PR to
+       [`cert-manager/website`](https://github.com/cert-manager/website) with
        updates to the website configuration. To do this, take inspiration from
        [Maartje's PR
        example](ttps://github.com/cert-manager/website/pull/309/files).
