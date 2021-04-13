@@ -180,12 +180,7 @@ page if a step is missing or if it is outdated.
        git remote -v | grep origin
        ```
 
-       You should see:
-
-       ```text
-       origin  https://github.com/jetstack/cert-manager (fetch)
-       origin  https://github.com/jetstack/cert-manager (push)
-       ```
+       You should see `https://github.com/jetstack/cert-manager`.
 
     2. Push the release branch:
 
