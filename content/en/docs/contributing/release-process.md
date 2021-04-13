@@ -28,45 +28,50 @@ following conditions:
    To check that you have the `write` role, [get a personal access
    token](https://github.com/settings/tokens) and run:
 
-   ```sh
-   go install github.com/cli/cli/cmd/gh@latest
-   gh auth login
-   gh api /repos/jetstack/cert-manager/collaborators/$(gh api /user | jq -r .login)/permission | jq .permission
-   ```
+    ```sh
+    go install github.com/cli/cli/cmd/gh@latest
+    gh auth login
+    gh api /repos/jetstack/cert-manager/collaborators/$(gh api /user | jq -r .login)/permission | jq .permission
+    ```
 
-   If your permission is `write` or `admin`, then you are good to go. To request
-   the `write` permission on the cert-manager project, [open a
-   PR](https://github.com/jetstack/platform-board/pulls/new) with a link to
-   here.
+    If your permission is `write` or `admin`, then you are good to go. To request
+    the `write` permission on the cert-manager project, [open a
+    PR](https://github.com/jetstack/platform-board/pulls/new) with a link to
+    here.
 
 4. You need to be added as an "Editor" to the GCP project
    [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release).
    To check if you do have access, try opening [the Cloud Build
    page](https://console.cloud.google.com/cloud-build?project=cert-manager-release).
-   To get the "Editor" permission on the GCP project, open a [new
-   PR](https://github.com/jetstack/platform-board/pulls/new) and copy-paste the
-   below example template:
+   To get the "Editor" permission on the GCP project, open a PR with your name
+   added to the maintainers list in
+   [cert_manager_release.tf](https://github.com/jetstack/terraform-jetstack/blob/master/cert_manager_release.tf)
 
-   ```markdown
-   <!-- PR title: Access to the cert-manager-release GCP project -->
+    ```diff
+    --- a/cert_manager_release.tf
+    +++ b/cert_manager_release.tf
+    @@ -17,6 +17,7 @@ locals {
+         var.personal_email["..."],
+         var.personal_email["..."],
+         var.personal_email["..."],
+    +    var.personal_email["mael-valais"],
+       ])
+     }
+    ```
 
-   Hi,
+    You may use the following PR description:
 
-   As stated in step 4 under "Prerequisites" on the [release-process][1] page,
-   I need access to the [cert-manager-release][2] project on GCP.
+    ```markdown
+    Title: Access to the cert-manager-release GCP project
 
-   I need to be an "Editor" on this project. More specifically, the roles
-   I need are:
+    Hi. As stated in "Prerequisites" on the [release-process][1] page,
+    I need access to the [cert-manager-release][2] project on GCP in
+    order to perform the release process. Thanks!
 
-   - Cloud Build Editor (`roles/cloudbuild.builds.builder`),
-   - Storage Object Viewer (`roles/storage.objectViewer`), and
-   - Cloud KMS CryptoKey Encrypter (`roles/cloudkms.cryptoKeyEncrypter`)
+    [1]: https://cert-manager.io/docs/contributing/release-process/#prerequisites
+    [2]: https://console.cloud.google.com/?project=cert-manager-release
+    ```
 
-   Thanks!
-
-   [1]: https://cert-manager.io/docs/contributing/release-process/#prerequisites
-   [2]: https://console.cloud.google.com/?project=cert-manager-release
-   ```
 
 {{% /pageinfo %}}
 
@@ -153,45 +158,45 @@ page if a step is missing or if it is outdated.
 
     - **(initial alpha only)** Create the release branch:
 
-      ```bash
-      # Must be run from the cert-manager repo folder.
-      git fetch --all
-      git checkout -b release-1.0 origin/master
-      ```
+       ```bash
+       # Must be run from the cert-manager repo folder.
+       git fetch --all
+       git checkout -b release-1.0 origin/master
+       ```
 
     - **(subsequent alpha, beta, final, and patch releases only)**
       You need to update it with the latest commits from the master branch, as
       follows:
 
-      ```bash
-      # Must be run from the cert-manager repo folder.
-      git fetch --all
-      git branch --force release-1.0 origin/release-1.0
-      git checkout release-1.0
-      git merge --ff-only origin/master
-      ```
+       ```bash
+       # Must be run from the cert-manager repo folder.
+       git fetch --all
+       git branch --force release-1.0 origin/release-1.0
+       git checkout release-1.0
+       git merge --ff-only origin/master
+       ```
 
 3. Push the new or updated release branch:
 
-    1. Check that the `origin` remote is correct:
+    1. Check that the `origin` remote is correct. To do that, run the following
+        command and make sure it returns
+        the upstream `https://github.com/jetstack/cert-manager.git`:
 
-       ```sh
-       # Must be run from the cert-manager repo folder.
-       git remote -v | grep origin
-       ```
-
-       You should see `https://github.com/jetstack/cert-manager`.
+        ```sh
+        # Must be run from the cert-manager repo folder.
+        git remote -v | grep origin
+        ```
 
     2. Push the release branch:
 
-       ```bash
-       # Must be run from the cert-manager repo folder.
-       git push --set-upstream origin release-1.0
-       ```
+        ```bash
+        # Must be run from the cert-manager repo folder.
+        git push --set-upstream origin release-1.0
+        ```
 
-       **(initial alpha only)**: `git push` will only work if you have the
-       `write` or `admin` GitHub permission on the cert-manager repo to create
-       or push to the branch, see [requirements](#requirements).
+        **(initial alpha only)**: `git push` will only work if you have the
+        `write` or `admin` GitHub permission on the cert-manager repo to create
+        or push to the branch, see [requirements](#requirements).
 
 4. Generate and edit the release notes:
 
