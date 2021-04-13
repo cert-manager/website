@@ -68,7 +68,7 @@ following conditions:
    [2]: https://console.cloud.google.com/?project=cert-manager-release
    ```
 
-</p></div>
+{{% /pageinfo %}}
 
 First, ensure that you have all the tools required to perform a cert-manager
 release:
@@ -129,11 +129,10 @@ some of these goals are missed, in order to keep up release velocity.
 {{% pageinfo color="info" %}}
 🔰 Please click on the **Edit this page** button on the top-right corner of this
 page if a step is missing or if it is outdated.
+{{% /pageinfo %}}
 
-</p></div>
-
-1.  Make sure to note which type of release you are doing. That will be helpful
-    in the next steps.
+1. Make sure to note which type of release you are doing. That will be helpful
+   in the next steps.
 
     | Type of release          | Example of git tag |
     | ------------------------ | ------------------ |
@@ -142,14 +141,15 @@ page if a step is missing or if it is outdated.
     | beta release             | `v1.3.0-beta.0`    |
     | final release            | `v1.3.0`           |
     | patch release            | `v1.3.1`           |
+    </br>
 
-2.  **(final release only)** Make sure that a PR with the new upgrade document
-    is ready to be merged on
-    [cert-manager/website](https://github.com/cert-manager/website). See for
-    example, see
-    [upgrading-1.0-1.1](https://cert-manager.io/docs/installation/upgrading/upgrading-1.0-1.1/).
+1. **(final release only)** Make sure that a PR with the new upgrade document
+   is ready to be merged on
+   [cert-manager/website](https://github.com/cert-manager/website). See for
+   example, see
+   [upgrading-1.0-1.1](https://cert-manager.io/docs/installation/upgrading/upgrading-1.0-1.1/).
 
-3.  Create or update the release branch:
+2. Create or update the release branch:
 
     - **(initial alpha only)** Create the release branch:
 
@@ -171,7 +171,7 @@ page if a step is missing or if it is outdated.
       git merge --ff-only origin/master
       ```
 
-4.  Push the new or updated release branch:
+3. Push the new or updated release branch:
 
     1. Check that the `origin` remote is correct:
 
@@ -193,13 +193,13 @@ page if a step is missing or if it is outdated.
        `write` or `admin` GitHub permission on the cert-manager repo to create
        or push to the branch, see [requirements](#requirements).
 
-5.  Generate and edit the release notes:
+4. Generate and edit the release notes:
 
-    1.  Use the following two tables to understand how to fill in the four
-        environment variables needed for the next step. These four environment
-        variables are documented on the
-        [README](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md#options)
-        for the Kubernetes `release-notes` tool.
+    1. Use the following two tables to understand how to fill in the four
+       environment variables needed for the next step. These four environment
+       variables are documented on the
+       [README](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md#options)
+       for the Kubernetes `release-notes` tool.
 
         | Variable          | Description                             |
         | ----------------- | --------------------------------------- |
@@ -235,8 +235,8 @@ page if a step is missing or if it is outdated.
         export RELEASE_VERSION="1.3.0-alpha.0"
         ```
 
-    2.  Generate `release-note.md` at the root of your cert-manager repo folder
-        with the following command:
+    2. Generate `release-note.md` at the root of your cert-manager repo folder
+       with the following command:
 
         ```sh
         # Must be run from the cert-manger folder.
@@ -253,9 +253,9 @@ page if a step is missing or if it is outdated.
         only to avoid rate-limits imposed on anonymous API users.
         </p></div>
 
-    3.  Sanity check the notes, checking that the notes contain details of all
-        the features and bug fixes that you expect to be in the release. Add
-        additional blurb, notable items and characterize change log.
+    3. Sanity check the notes, checking that the notes contain details of all
+       the features and bug fixes that you expect to be in the release. Add
+       additional blurb, notable items and characterize change log.
 
         You can see the commits that will go into this release by using the
         [GitHub compare](https://github.com/jetstack/cert-manager/compare). For
@@ -264,10 +264,10 @@ page if a step is missing or if it is outdated.
 
         <https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master>
 
-6.  Run `cmrel stage`:
+5. Run `cmrel stage`:
 
-    1.  In this example we stage a release using the 'release-1.0' branch,
-        setting the release version to `v1.0.0`:
+    1. In this example we stage a release using the 'release-1.0' branch,
+       setting the release version to `v1.0.0`:
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
@@ -282,8 +282,8 @@ page if a step is missing or if it is outdated.
         🔰 Remember to keep open the terminal where you run <code>cmrel stage</code>. Its output will be used in the next step.
         </p></div>
 
-    2.  While the build is running, send a first Slack message to
-        `#cert-manager-dev`:
+    2. While the build is running, send a first Slack message to
+       `#cert-manager-dev`:
 
         <div class="pageinfo pageinfo-primary"><p>
         Releasing <code>1.2.0-alpha.2</code> 🧵
@@ -295,19 +295,19 @@ page if a step is missing or if it is outdated.
         properly redacted but sometimes we forget to update this.
         </p></div>
 
-    3.  Send a second Slack message in reply to this first message with the
-        Cloud Build job link that `cmrel` displayed in "View logs at". For
-        example, the message would look like:
+    3. Send a second Slack message in reply to this first message with the
+       Cloud Build job link that `cmrel` displayed in "View logs at". For
+       example, the message would look like:
 
-        <div class="pageinfo pageinfo-primary"><p>
+        <div class="pageinfo pageinfo-info"><p>
         Follow the <code>cmrel stage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
         </p></div>
 
-7.  Run `cmrel publish`:
+6. Run `cmrel publish`:
 
-    1.  Set the `CMREL_RELEASE_NAME` variable in your shell. The value for the
-        `CMREL_RELEASE_NAME` variable is found in the output of the previous command,
-        `cmrel stage`. Look for the line that contains the `gs://` link:
+    1. Set the `CMREL_RELEASE_NAME` variable in your shell. The value for the
+       `CMREL_RELEASE_NAME` variable is found in the output of the previous command,
+       `cmrel stage`. Look for the line that contains the `gs://` link:
 
         ```sh
         gs://cert-manager-release/stage/gcb/release/v1.3.0-alpha.1-c2c0fdd78131493707050ffa4a7454885d041b08
@@ -320,8 +320,8 @@ page if a step is missing or if it is outdated.
         CMREL_RELEASE_NAME=v1.3.0-alpha.0-77b045d159bd20ce0ec454cd79a5edce9187bdd9
         ```
 
-    2.  Do a `cmrel publish` dry-run to ensure that all the staged resources are
-        valid. Run the following command:
+    2. Do a `cmrel publish` dry-run to ensure that all the staged resources are
+       valid. Run the following command:
 
         ```sh
         # Must be run from the "cert-manager/release" repo folder.
@@ -331,26 +331,26 @@ page if a step is missing or if it is outdated.
         You can view the progress by clicking the Google Cloud Build URL in the
         output of this command.
 
-    3.  While the build is running, send a third Slack message in reply to
-        the first message:
+    3. While the build is running, send a third Slack message in reply to
+       the first message:
 
         <div class="pageinfo pageinfo-primary"><p>
         Follow the `cmrel publish` dry-run build: https://console.cloud.google.com/cloud-build/builds16f6f875-0a23-4fff-b24d-3de0af207463?project=1021342095237
         </p></div>
 
-    4.  Next publish the release artifacts for real.
+    4. Next publish the release artifacts for real.
 
-        If the last step succeeded, you can now re-run the `cmrel publish` with
-        the `--nomock` argument to actually publish the release artifacts to
-        GitHub, `Quay.io`, to our [ChartMuseum](https://charts.jetstack.io)
-        instance, etc.
+       If the last step succeeded, you can now re-run the `cmrel publish` with
+       the `--nomock` argument to actually publish the release artifacts to
+       GitHub, `Quay.io`, to our [ChartMuseum](https://charts.jetstack.io)
+       instance, etc.
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
         cmrel publish --nomock --release-name "$RELEASE_NAME"
         ```
 
-        <div class="pageinfo pageinfo-warning">
+        <div class="pageinfo pageinfo-warning"><p>
         ⏰ At this stage, there will be a draft release on GitHub and a live
         release on our ChartMuseum (https://charts.jetstack.io/index.yaml).
         So you must now complete the release process quickly; otherwise, users
@@ -358,14 +358,14 @@ page if a step is missing or if it is outdated.
         because the manual CRD install URL will not be available yet.
         </p></div>
 
-    5.  While the build is running, send a fourth Slack message in reply to
-        the first message:
+    5. While the build is running, send a fourth Slack message in reply to
+       the first message:
 
         <div class="pageinfo pageinfo-primary"><p>
         Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
         </p></div>
 
-8.  Publish the GitHub release:
+7. Publish the GitHub release:
 
     1. Visit the draft GitHub release and paste in the release notes that you
        generated earlier. You will need to manually edit the content to match
@@ -376,9 +376,9 @@ page if a step is missing or if it is outdated.
     3. Click "Publish" to make the GitHub release live. This will create a Git
        tag automatically.
 
-9.  Finally, post a Slack message as an answer to the first message. Toggle the
-    check box "Also send to `#cert-manager-dev`" so that the message is well
-    visible. Also cross-post the message on `#cert-manager`.
+8. Finally, post a Slack message as an answer to the first message. Toggle the
+   check box "Also send to `#cert-manager-dev`" so that the message is well
+   visible. Also cross-post the message on `#cert-manager`.
 
     <div class="pageinfo pageinfo-primary"><p>
     https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 🎉
