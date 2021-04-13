@@ -269,6 +269,9 @@ page if a step is missing or if it is outdated.
 
         <https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master>
 
+    4. **(final release only)** Check the release notes include all changes
+       since the last final release.
+
 5. Run `cmrel stage`:
 
     1. In this example we stage a release using the 'release-1.0' branch,
@@ -391,30 +394,30 @@ page if a step is missing or if it is outdated.
     https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-### Final Release
+9. Proceed to the post-release steps:
 
-After releasing one or more alpha and beta releases,
-you will release the final version.
-For the final release, you should follow the process described above with the following changes and additional steps:
+    1. **(final release only)** Open a PR to
+       [jetstack/testing](https://github.com/jetstack/testing) and change Prow's
+       config. To do this, take inspiration from [Maartje's PR
+       example](https://github.com/jetstack/testing/pull/397/files).
 
-#### Full Release Notes
+    2. **(final release only)** Push a new release branch to
+       [jetstack/cert-manager](https://github.com/jetstack/cert-manager).
 
-The release notes for the final release should include all changes since the last minor release.
+        If the final release is `v1.0.0`, then push the new branch
+        `release-1.1`:
 
-#### Rollover Testing Infrastructure
+        ```bash
+        # Must be run from the cert-manager repo folder.
+        git checkout -b release-1.1 v1.0.0
+        git push origin release-1.1
+        ```
 
-After releasing the final release you will need to update the testing infrastructure,
-so that it uses the latest release as `release-previous`,
-and you will need to create a new release branch in the cert-manager repository which will be treated as `release-next`,
-and both these branches will be tested periodically.
-
-For example see the PR [Prepare testing for the cert-manager `v1.0` release](https://github.com/jetstack/testing/pull/397).
-
-#### Rollover Documentation
-
-You will also need to update the versions and branches in the cert-manager website configuration.
-
-For example see the PR [Configure website for the `v1.0` release](https://github.com/cert-manager/website/pull/309).
+    3. Open a PR to
+       [cert-manager/website](https://github.com/cert-manager/website) with
+       updates to the website configuration. To do this, take inspiration from
+       [Maartje's PR
+       example](ttps://github.com/cert-manager/website/pull/309/files).
 
 ## Patch Releases
 
