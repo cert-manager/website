@@ -343,12 +343,12 @@ page if a step is missing or if it is outdated.
         Follow the `cmrel publish` dry-run build: https://console.cloud.google.com/cloud-build/builds16f6f875-0a23-4fff-b24d-3de0af207463?project=1021342095237
         </p></div>
 
-    4. Next publish the release artifacts for real.
+    4. Next publish the release artifacts for real:
 
-       If the last step succeeded, you can now re-run the `cmrel publish` with
-       the `--nomock` argument to actually publish the release artifacts to
-       GitHub, `Quay.io`, to our [ChartMuseum](https://charts.jetstack.io)
-       instance, etc.
+        If the last step succeeded, you can now re-run the `cmrel publish` with
+        the `--nomock` argument to actually publish the release artifacts to
+        GitHub, `Quay.io`, to our [ChartMuseum](https://charts.jetstack.io)
+        instance, etc.
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
@@ -376,8 +376,10 @@ page if a step is missing or if it is outdated.
        generated earlier. You will need to manually edit the content to match
        the style of earlier releases. In particular, remember to remove
        package-related changes.
+
     2. **(initial alpha, subsequent alpha and beta only)** Tick the box "This is
        a pre-release".
+
     3. Click "Publish" to make the GitHub release live. This will create a Git
        tag automatically.
 
