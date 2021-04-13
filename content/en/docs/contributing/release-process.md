@@ -90,9 +90,7 @@ release:
    go install github.com/cert-manager/release/cmd/cmrel@master
    ```
 
-3. Clone and `cd` into the `cert-manager/release` repo. ⚠️ All the commands
-   below have to be run from this cloned folder as it contains the necessary
-   `cloudbuild.yml` files.
+3. Clone the `cert-manager/release` repo:
 
    ```sh
    # Don't clone it from inside the cert-manager repo folder.
