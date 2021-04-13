@@ -285,7 +285,7 @@ page if a step is missing or if it is outdated.
     2.  While the build is running, send a first Slack message to
         `#cert-manager-dev`:
 
-        <div class="pageinfo pageinfo-primary">
+        <div class="pageinfo pageinfo-primary"><p>
         Releasing <code>1.2.0-alpha.2</code> 🧵
         </p></div>
 
@@ -299,7 +299,7 @@ page if a step is missing or if it is outdated.
         Cloud Build job link that `cmrel` displayed in "View logs at". For
         example, the message would look like:
 
-        <div class="pageinfo pageinfo-primary">
+        <div class="pageinfo pageinfo-primary"><p>
         Follow the <code>cmrel stage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
         </p></div>
 
@@ -334,7 +334,7 @@ page if a step is missing or if it is outdated.
     3.  While the build is running, send a third Slack message in reply to
         the first message:
 
-        <div class="pageinfo pageinfo-primary">
+        <div class="pageinfo pageinfo-primary"><p>
         Follow the `cmrel publish` dry-run build: https://console.cloud.google.com/cloud-build/builds16f6f875-0a23-4fff-b24d-3de0af207463?project=1021342095237
         </p></div>
 
@@ -361,7 +361,7 @@ page if a step is missing or if it is outdated.
     5.  While the build is running, send a fourth Slack message in reply to
         the first message:
 
-        <div class="pageinfo pageinfo-primary">
+        <div class="pageinfo pageinfo-primary"><p>
         Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
         </p></div>
 
@@ -380,7 +380,7 @@ page if a step is missing or if it is outdated.
     check box "Also send to `#cert-manager-dev`" so that the message is well
     visible. Also cross-post the message on `#cert-manager`.
 
-    <div class="pageinfo pageinfo-primary">
+    <div class="pageinfo pageinfo-primary"><p>
     https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
