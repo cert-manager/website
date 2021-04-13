@@ -45,7 +45,7 @@ following conditions:
    page](https://console.cloud.google.com/cloud-build?project=cert-manager-release).
    To get the "Editor" permission on the GCP project, open a PR with your name
    added to the maintainers list in
-   [cert_manager_release.tf](https://github.com/jetstack/terraform-jetstack/blob/master/cert_manager_release.tf)
+   [`cert_manager_release.tf`](https://github.com/jetstack/terraform-jetstack/blob/master/cert_manager_release.tf)
 
     ```diff
     --- a/cert_manager_release.tf
@@ -210,6 +210,7 @@ page if a step is missing or if it is outdated.
         | `END_REV`         | Name of your release branch             |
         | `BRANCH`          | Name of your release branch             |
         | `RELEASE_VERSION` | The git tag without the leading `v`     |
+        </br>
 
         Examples for each release type (e.g., initial alpha release):
 
@@ -223,6 +224,7 @@ page if a step is missing or if it is outdated.
         | `END_REV`         | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `BRANCH`          | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `RELEASE_VERSION` | `1.3.0-alpha.0`  | `1.3.0-alpha.1`  | `1.3.0-beta.0`   | `1.3.0`       | `1.3.1`       |
+        </br>
 
         > \*The git tag of the "previous" release (`START_REV`) depends on which
         > type of release you count on doing. Look at the above examples to
