@@ -31,16 +31,7 @@ following conditions:
    ```sh
    go install github.com/cli/cli/cmd/gh@latest
    gh auth login
-   gh api /repos/jetstack/cert-manager/collaborators/$(gh api /user | jq -r .login)/permission
-   ```
-
-   You should see something like:
-
-   ```json
-   {
-    "permission": "write",
-    "user": {...}
-   }
+   gh api /repos/jetstack/cert-manager/collaborators/$(gh api /user | jq -r .login)/permission | jq .permission
    ```
 
    If your permission is `write` or `admin`, then you are good to go. To request
@@ -122,68 +113,92 @@ release:
    with no scope ticked. It is used only by the `release-notes` CLI to
    avoid API rate limiting since it will go through all the PRs one by one.
 
-## Minor Releases
+## Minor releases
 
 A minor release is a backwards-compatible 'feature' release. It can contain new
 features and bug fixes.
 
-### Release Schedule
+### Release schedule
 
 We aim to cut a new minor release once per month. The rough goals for each
 release are outlined as part of a GitHub milestone. We cut a release even if
 some of these goals are missed, in order to keep up release velocity.
 
-### Process for Releasing a Minor Version
+### Process for releasing a version
 
 {{% pageinfo color="info" %}}
 🔰 Please click on the **Edit this page** button on the top-right corner of this
 page if a step is missing or if it is outdated.
+
 </p></div>
 
-The process for cutting a minor release is as follows:
+1.  Make sure to note which type of release you are doing. That will be helpful
+    in the next steps.
 
-1.  Ensure upgrading document exists. See for example, see
-    [upgrading-1.0-1.1](https://cert-manager.io/docs/installation/upgrading/upgrading-1.0-1.1/)
-    (not necessary for alpha and patch releases)
+    | Type of release          | Example of git tag |
+    | ------------------------ | ------------------ |
+    | initial alpha release    | `v1.3.0-alpha.0`   |
+    | subsequent alpha release | `v1.3.0-alpha.1`   |
+    | beta release             | `v1.3.0-beta.0`    |
+    | final release            | `v1.3.0`           |
+    | patch release            | `v1.3.1`           |
 
-2.  Create or update the release branch
+2.  **(final release only)** Make sure that a PR with the new upgrade document
+    is ready to be merged on
+    [cert-manager/website](https://github.com/cert-manager/website). See for
+    example, see
+    [upgrading-1.0-1.1](https://cert-manager.io/docs/installation/upgrading/upgrading-1.0-1.1/).
 
-    If this is the first alpha release (`alpha.0`), then you will need to create
-    the release branch:
+3.  Create or update the release branch:
 
-    ```bash
-    # Must be run from the cert-manager repo folder.
-    git fetch --all
-    git checkout -b release-1.0 origin/master
-    ```
+    - **(initial alpha only)** Create the release branch:
 
-    If there has already been an alpha release, the release branch will
-    already exist, so you will need to update it with the latest commits
-    from the master branch, as follows:
+      ```bash
+      # Must be run from the cert-manager repo folder.
+      git fetch --all
+      git checkout -b release-1.0 origin/master
+      ```
 
-    ```bash
-    # Must be run from the cert-manager repo folder.
-    git fetch --all
-    git branch --force release-1.0 origin/release-1.0
-    git checkout release-1.0
-    git merge --ff-only origin/master
-    ```
+    - **(subsequent alpha, beta, final, and patch releases only)**
+      You need to update it with the latest commits from the master branch, as
+      follows:
 
-3.  Push it to the `jetstack/cert-manager` repository
+      ```bash
+      # Must be run from the cert-manager repo folder.
+      git fetch --all
+      git branch --force release-1.0 origin/release-1.0
+      git checkout release-1.0
+      git merge --ff-only origin/master
+      ```
 
-    **Note 1**: run `git remote -v` to check that `origin` points to the
-    upstream <https://github.com/jetstack/cert-manager.git>.
+4.  Push the new or updated release branch:
 
-    **Note 2:** if the branch doesn't already exist, you will need to have the
-    `write` role on the GitHub project to be able to push to the release
-    branch.
+    1. Check that the `origin` remote is correct:
 
-    ```bash
-    # Must be run from the cert-manager repo folder.
-    git push --set-upstream origin release-1.0
-    ```
+       ```sh
+       # Must be run from the cert-manager repo folder.
+       git remote -v | grep origin
+       ```
 
-4.  Generate and edit the release notes:
+       You should see:
+
+       ```text
+       origin  https://github.com/jetstack/cert-manager (fetch)
+       origin  https://github.com/jetstack/cert-manager (push)
+       ```
+
+    2. Push the release branch:
+
+       ```bash
+       # Must be run from the cert-manager repo folder.
+       git push --set-upstream origin release-1.0
+       ```
+
+       **(initial alpha only)**: `git push` will only work if you have the
+       `write` or `admin` GitHub permission on the cert-manager repo to create
+       or push to the branch, see [requirements](#requirements).
+
+5.  Generate and edit the release notes:
 
     1.  Use the following two tables to understand how to fill in the four
         environment variables needed for the next step. These four environment
@@ -200,16 +215,16 @@ The process for cutting a minor release is as follows:
 
         Examples for each release type (e.g., initial alpha release):
 
-        | Variable          | Example 1             | Example 2                | Example 3     | Example 4     |
-        | ----------------- | --------------------- | ------------------------ | ------------- | ------------- |
-        |                   |                       |                          |               |               |
-        |                   | initial alpha release | subsequent alpha release | final release | patch release |
-        |                   | `v1.3.0-alpha.0`      | `v1.3.0-alpha.1`         | `v1.3.0`      | `v1.3.1`      |
-        |                   |                       |                          |               |               |
-        | `START_REV`\*     | `v1.2.0`              | `v1.3.0-alpha.0`         | `v1.2.0`      | `v1.3.0`      |
-        | `END_REV`         | `release-1.3`         | `release-1.3`            | `release-1.3` | `release-1.3` |
-        | `BRANCH`          | `release-1.3`         | `release-1.3`            | `release-1.3` | `release-1.3` |
-        | `RELEASE_VERSION` | `1.3.0-alpha.0`       | `1.3.0-alpha.1`          | `1.3.0`       | `1.3.1`       |
+        | Variable          | Example 1        | Example 2        | Example 2        | Example 3     | Example 4     |
+        | ----------------- | ---------------- | ---------------- | ---------------- | ------------- | ------------- |
+        |                   |                  |                  |                  |               |               |
+        |                   | initial alpha    | subsequent alpha | beta release     | final release | patch release |
+        |                   | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.3.0-beta.0`  | `v1.3.0`      | `v1.3.1`      |
+        |                   |                  |                  |                  |               |               |
+        | `START_REV`\*     | `v1.2.0`         | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.2.0`      | `v1.3.0`      |
+        | `END_REV`         | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
+        | `BRANCH`          | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
+        | `RELEASE_VERSION` | `1.3.0-alpha.0`  | `1.3.0-alpha.1`  | `1.3.0-beta.0`   | `1.3.0`       | `1.3.1`       |
 
         > \*The git tag of the "previous" release (`START_REV`) depends on which
         > type of release you count on doing. Look at the above examples to
@@ -254,7 +269,7 @@ The process for cutting a minor release is as follows:
 
         <https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master>
 
-5.  Run `cmrel stage`
+6.  Run `cmrel stage`:
 
     1.  In this example we stage a release using the 'release-1.0' branch,
         setting the release version to `v1.0.0`:
@@ -293,7 +308,7 @@ The process for cutting a minor release is as follows:
         Follow the <code>cmrel stage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
         </p></div>
 
-6.  Run `cmrel publish`
+7.  Run `cmrel publish`:
 
     1.  Set the `CMREL_RELEASE_NAME` variable in your shell. The value for the
         `CMREL_RELEASE_NAME` variable is found in the output of the previous command,
@@ -301,13 +316,13 @@ The process for cutting a minor release is as follows:
 
         ```sh
         gs://cert-manager-release/stage/gcb/release/v1.3.0-alpha.1-c2c0fdd78131493707050ffa4a7454885d041b08
-        #                                            <------------- CMREL_RELEASE_NAME -------------------------->
+        #                                           <---------- CMREL_RELEASE_NAME ----------------------->
         ```
 
-        Copy that part into a variable in your shell:
+        Copy that part into a variable in your shell (no need to export it):
 
         ```sh
-        export CMREL_RELEASE_NAME=v1.3.0-alpha.0-77b045d159bd20ce0ec454cd79a5edce9187bdd9
+        CMREL_RELEASE_NAME=v1.3.0-alpha.0-77b045d159bd20ce0ec454cd79a5edce9187bdd9
         ```
 
     2.  Do a `cmrel publish` dry-run to ensure that all the staged resources are
@@ -355,23 +370,22 @@ The process for cutting a minor release is as follows:
         Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
         </p></div>
 
-7.  Publish the GitHub release:
+8.  Publish the GitHub release:
 
     1. Visit the draft GitHub release and paste in the release notes that you
        generated earlier. You will need to manually edit the content to match
        the style of earlier releases. In particular, remember to remove
        package-related changes.
-    2. Tick the box "This is a pre-release" if your release is an alpha.
-       (not necessary for final releases)
-    3. Click "publish" to make the GitHub release live.
-       This will create a Git tag automatically.
+    2. **(initial alpha, subsequent alpha and beta only)** Tick the box "This is
+       a pre-release".
+    3. Click "Publish" to make the GitHub release live. This will create a Git
+       tag automatically.
 
-8.  Finally, post a Slack message as an answer to the first message. Toggle
-    the check box "Also send to `#cert-manager-dev`" so that the message is
-    well visible. Also cross-post the message on `#cert-manager`.
+9.  Finally, post a Slack message as an answer to the first message. Toggle the
+    check box "Also send to `#cert-manager-dev`" so that the message is well
+    visible. Also cross-post the message on `#cert-manager`.
 
     <div class="pageinfo pageinfo-primary">
-
     https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
