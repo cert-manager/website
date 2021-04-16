@@ -50,3 +50,16 @@ import (
 
 Once this manual split of standard library, external and internal imports has been made, it will be
 enforced automatically by `goimports` when executed in the future.
+
+## UK vs. US spelling
+
+For the sake of consistency, we settled on using the US spelling for the
+documentation in https://cert-manager.io as well as within the cert-manager
+codebase.
+
+For example:
+
+- "authorise" should be spelled "authorize",
+- "honour" should be spelled "honor",
+- "standardise" should be spelled "standardize",
+- "favour" should be spelled "favor".
