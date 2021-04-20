@@ -53,12 +53,9 @@ enforced automatically by `goimports` when executed in the future.
 
 ## UK vs. US spelling
 
-For the sake of consistency, cert-manager uses US spelling for the documentation
-in https://cert-manager.io as well as within the cert-manager codebase.
-
-For example:
-
-- "authorise" should be spelled "authorize",
-- "honour" should be spelled "honor",
-- "standardise" should be spelled "standardize",
-- "favour" should be spelled "favor".
+For the sake of consistency, cert-manager uses en-US spelling for the
+documentation in https://cert-manager.io as well as within the cert-manager
+codebase. A comprehensive list of en-GB → en-US word substitution is available
+on Ubuntu's
+[`WordSubstitution`](https://wiki.ubuntu.com/EnglishTranslation/WordSubstitution)
+page.
