@@ -53,9 +53,8 @@ enforced automatically by `goimports` when executed in the future.
 
 ## UK vs. US spelling
 
-For the sake of consistency, we settled on using the US spelling for the
-documentation in https://cert-manager.io as well as within the cert-manager
-codebase.
+For the sake of consistency, cert-manager uses US spelling for the documentation
+in https://cert-manager.io as well as within the cert-manager codebase.
 
 For example:
 
