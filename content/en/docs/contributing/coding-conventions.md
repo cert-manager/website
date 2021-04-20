@@ -50,3 +50,12 @@ import (
 
 Once this manual split of standard library, external and internal imports has been made, it will be
 enforced automatically by `goimports` when executed in the future.
+
+## UK vs. US spelling
+
+For the sake of consistency, cert-manager uses en-US spelling for the
+documentation in https://cert-manager.io as well as within the cert-manager
+codebase. A comprehensive list of en-GB → en-US word substitution is available
+on Ubuntu's
+[`WordSubstitution`](https://wiki.ubuntu.com/EnglishTranslation/WordSubstitution)
+page.
