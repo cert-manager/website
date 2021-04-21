@@ -24,7 +24,23 @@ prometheus:
 
 ### Regular Manifests
 
-If you're not using helm to deploy cert-manager and instead using the provided regular YAML manifests, this example `PodMonitor` should be all you need to start ingesting cert-manager metrics.
+If you're not using helm to deploy cert-manager and instead using the provided regular YAML manifests, this example `PodMonitor` and deployment patch should be all you need to start ingesting cert-manager metrics.
+
+1. [Apply the following patch](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/#use-a-strategic-merge-patch-to-update-a-deployment) to your cert-manager deployment
+
+```yaml
+spec:
+  template:
+    spec:
+      containers:
+        - name: cert-manager
+          ports:
+            - containerPort: 9402
+              name: http
+              protocol: TCP
+```
+
+2. Create the following `PodMonitor`
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
