@@ -12,9 +12,9 @@ re-install.
 ## Backing up cert-manager resource configuration
 
 The following commands will back up the configuration of `cert-manager`
-resources. This might be useful to back up before upgrading `cert-manager`. As
-this backup does not include the secrets containing the X.509 certificates,
-restoring to a cluster that does not already have those secrets will result in
+resources. Doing that might be useful before upgrading `cert-manager`. As
+this backup does not include the Secrets containing the X.509 certificates,
+restoring to a cluster that does not already have those Secrets will result in
 the certificates being re-issued.
 
 ### Backup
@@ -64,8 +64,8 @@ cluster- including some `cert-manager` ones- for scenarios such as disaster
 recovery, cluster migration etc.
 
 Note that we have not done any extensive testing, only a few common scenarios-
-it is recommended that to test the backup and restore strategy before relying
-on it as there are likely to be some other edge cases.
+it is recommended to test the backup and restore strategy before putting it in place
+as there are likely to be some other edge cases.
 We would like to ensure that users can reliably backup and restore `cert-manager`
 resources using common tools- if you encounter any errors, please do open a
 GitHub issue or PR an update to this document.
@@ -74,64 +74,67 @@ GitHub issue or PR an update to this document.
 
 #### Order of restore
 
-If `cert-manager` does not find a Kubernetes secret with an X.509 certificate
+If `cert-manager` does not find a Kubernetes Secret with an X.509 certificate
 for a `Certificate`, reissuance will be triggered. To avoid unnecessary
-reissuance after a restore, ensure that secrets are restored before
-`Certificate`s. Similarly secrets should be restored before `Ingress`es if you
-are using ingress-shim.
+reissuance after a restore, ensure that Secrets are restored before
+`Certificate`s. Similarly, Secrets should be restored before `Ingress`es if you
+are using [`ingress-shim`](../../usage/ingress/).
 
-#### Excluding one-time `cert-manager` resources from backup
+#### Excluding some cert-manager resources from backup
 
 `cert-manager` has a number of resources- `Order`s, `Challenge`s and
 `CertificateRequest`s -that are designed to represent a point-in-time operation
-such as a request for a certificate. As such their status often depends on other
+such as a request for a certificate. As such, their status often depends on other
 ephemeral resources (i.e a temporary Secret holding a private key), so
 `cert-manager` cannot always correctly re-create the status of these resources
-by just looking at the cluster state. In most cases backup tools will not
-restore the statuses of custom resources so including such one-time resource in a
-backup can result in an unnecessary reissuance after a restore. For example, a
-restored `Order` often ends up in a 'pending' state which results in new
-`Challenge`s being created and reissuance. To avoid reissuance, we recommend
-that `Order`s and `Challenge`s are excluded from the backup. We also don't
-recommend backing up `CertificateRequest`s, see below.
+by just looking at the cluster state at some later time.
 
-### Restoring ingress-shim Certificates
+In most cases backup and restore tools will not restore the statuses of custom resources,
+so including such one-time resources in a backup can result in an unnecessary reissuance
+after a restore as without the status fields `cert-manager` will not be able to tell that,
+for example, an `Order` has already been fulfilled.
+To avoid unnecessary reissuance, we recommend that `Order`s and `Challenge`s are excluded
+from the backup. We also don't recommend backing up `CertificateRequest`s, see [Backing up CertificateRequests](#backing-up-certificaterequests)
 
-A `Certificate` created for an `Ingress` via `ingress-shim` will have an [owner
+### Restoring Ingress Certificates
+
+A `Certificate` created for an `Ingress` via [`ingress-shim`](../../usage/ingress/) will have an [owner
 reference](https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/#owners-and-dependents)
-pointing to the owning `Ingress`. `cert-manager` uses the owner reference to
-verify that the `Certificate` 'belongs' to an `Ingress` and will not attempt to
+pointing to the `Ingress` resource. `cert-manager` uses the owner reference to
+verify that the `Certificate` 'belongs' to that `Ingress` and will not attempt to
 create/correct it for an existing `Certificate`. After a full
 cluster recreation, a restored owner reference would probably be incorrect
-(`Ingress` UUID will have changed). The owner reference not matching could lead
+(`Ingress` UUID will have changed). The incorrect owner reference could lead
 to a situation where updates to the `Ingress` (i.e a new DNS name) are not
 applied to the `Certificate`.
-In most cases it would make sense to exclude the `Certificate`s created for
-`Ingresses` by `ingress-shim` from the backup- given that the restore happens
+
+To avoid this issue, in most cases `Certificate`s created via `ingress-shim`
+can be excluded from the backup- given that the restore happens
 in the correct order- Secret with the X.509 certificate restored before
 the `Ingress`- `cert-manager` will be able to create a new `Certificate`
-for the `Ingress` and determine that the existing secret is for that `Certificate`.
+for the `Ingress` and determine that the existing Secret is for that `Certificate`.
 
 ### Velero
 
 We have briefly tested backup and restore with `velero` `v1.5.3` and
-`cert-manager` `v1.3.1` and `v1.3.0` as well as `velero` `v1.3.1` and
-`cert-manager` `v1.1.0` `velero` `v1.3.1`.
+`cert-manager` versions `v1.3.1` and `v1.3.0` as well as `velero` `v1.3.1`
+ and `cert-manager` `v1.1.0`.
 
  A few potential edge cases:
 
-- Ensure that the backups include `cert-manager` CRDs. We have seen that if
-  `--exclude-namespaces` flag is passed to `velero backup create`, CRDs for
-  which there are no actual custom resources included in the backup might not be
-  included in backup unless `--include-cluster-resources=true` flag is also passed.
+- Ensure that the backups include `cert-manager` CRDs.
+  For example, we have seen that if `--exclude-namespaces` flag is passed to
+  `velero backup create`, CRDs for which there are no actual resources to be
+  included in the backup might also not be included in backup unless
+  `--include-cluster-resources=true` flag is also passed to the backup command.
 
 -  Velero does not restore statuses of custom resources, so you should probably
    exclude `Order`s, `Challenge`s and `CertificateRequest`s from the backup, see
-   the section on excluding one-time resources from backup.
+   [Excluding some cert-manager resources from backup](#excluding-some-cert-manager-resources-from-backup).
 
-- Velero by default restores Secrets before `Ingress`es and Custom Resources
-  are restored last, so there should be no unnecessary certificate reissuance
-  due to `Certificate`s whose `Secret`s have not yet been restored.
+- Velero's [default restore order](https://github.com/vmware-tanzu/velero/blob/main/pkg/cmd/server/server.go#L470)(Secrets before `Ingress`es, Custom Resources
+  restored last), should ensure that there is no unnecessary certificate reissuance
+  due to the order of restore operation, see [Order of restore](#order-of-restore).
 
 - When restoring the deployment of `cert-manager` itself, it may be necessary to
   restore `cert-manager`'s RBAC resources before the rest of the deployment.
@@ -143,16 +146,15 @@ We have briefly tested backup and restore with `velero` `v1.5.3` and
 
 - Velero does not restore owner references, so it may be necessary to exclude
   `Certificate`s created for `Ingress`es from the backup even when not
-  re-creating the `Ingress` itself. See the section on restoring `ingress-shim`
-  `Certificate`s.
+  re-creating the `Ingress` itself. See [Restoring Ingress Certificates](#restoring-ingress-certificates).
 
-## Backing up and Restoring CertificateRequests 
+## Backing up CertificateRequests
 
  We no longer recommend including `CertificateRequest` resources in a backup
  for most scenarios.
  `CertificateRequest`s are designed to represent a one-time
  request for an X.509 certificate- once the request has been fulfilled,
- `CertificateRequest` can usually be safely deleted as in most cases (such as when
+ `CertificateRequest` can usually be safely deleted. In most cases (such as when
  a `CertificateRequest` has been created for a `Certificate`) a new
  `CertificateRequest` will be created when needed (i.e at a time of a renewal
  of a `Certificate`).
@@ -164,5 +166,5 @@ We have briefly tested backup and restore with `velero` `v1.5.3` and
  the `CertificateRequest`.
  This introduces some extra complexity for backing up
  and restoring `CertificateRequest`s as the identity of the restorer might
- differ from that of the original creator and we have seen some edge cases
- where this causes issues at restore time.
+ differ from that of the original creator and in most cases a restored
+ `CertificateRequest` would likely end up with incorrect state.
