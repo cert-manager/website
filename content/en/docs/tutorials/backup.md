@@ -13,8 +13,8 @@ re-install.
 
 The following commands will back up the configuration of `cert-manager`
 resources. Doing that might be useful before upgrading `cert-manager`. As
-this backup does not include the Secrets containing the X.509 certificates,
-restoring to a cluster that does not already have those Secrets will result in
+this backup does not include the `Secrets` containing the X.509 certificates,
+restoring to a cluster that does not already have those `Secret`s will result in
 the certificates being reissued.
 
 ### Backup
@@ -28,24 +28,24 @@ $ kubectl get -o yaml \
 ```
 
 If you are transferring data to a new cluster, you may also need to copy across
-additional Secret resources that are referenced by your configured Issuers, such
+additional `Secret` resources that are referenced by your configured Issuers, such
 as:
 
 #### CA Issuers
 
-- The root CA Secret referenced by `issuer.spec.ca.secretName`
+- The root CA `Secret` referenced by `issuer.spec.ca.secretName`
 
 #### Vault Issuers
 
-- The token authentication Secret referenced by
+- The token authentication `Secret` referenced by
   `issuer.spec.vault.auth.tokenSecretRef`
-- The AppRole configuration Secret referenced by
+- The AppRole configuration `Secret` referenced by
   `issuer.spec.vault.auth.appRole.secretRef`
 
 #### ACME Issuers
 
-- The ACME account private key Secret referenced by `issuer.acme.privateKeySecretRef`
-- Any Secrets referenced by DNS providers configured under the
+- The ACME account private key `Secret` referenced by `issuer.acme.privateKeySecretRef`
+- Any `Secret`s referenced by DNS providers configured under the
   `issuer.acme.dns01.providers` and `issuer.acme.solvers.dns01` fields.
 
 ### Restore
@@ -77,12 +77,12 @@ are using [`ingress-shim`](../../usage/ingress/).
 
 #### Excluding some cert-manager resources from backup
 
-`cert-manager` has a number of resources- `Order`s, `Challenge`s and
-`CertificateRequest`s -that are designed to represent a point-in-time operation
-such as a request for a certificate. As such, their status often depends on other
-ephemeral resources (i.e a temporary Secret holding a private key), so
-`cert-manager` cannot always correctly re-create the status of these resources
-by just looking at the cluster state at some later time.
+`cert-manager` has a number of custom resources that are designed to represent a
+point-in-time operation. An example would be a `CertificateRequest` that
+represents a one-time request for an X.509 certificate. The status of these
+resources can depend on other ephemeral resources (such as a temporary `Secret`
+holding a private key) so `cert-manager` might not be able to correctly recreate
+the state of these resources at a later point.
 
 In most cases backup and restore tools will not restore the statuses of custom resources,
 so including such one-time resources in a backup can result in an unnecessary reissuance
@@ -104,10 +104,10 @@ to a situation where updates to the `Ingress` (i.e a new DNS name) are not
 applied to the `Certificate`.
 
 To avoid this issue, in most cases `Certificate`s created via `ingress-shim`
-can be excluded from the backup- given that the restore happens
-in the correct order- Secret with the X.509 certificate restored before
-the `Ingress`- `cert-manager` will be able to create a new `Certificate`
-for the `Ingress` and determine that the existing Secret is for that `Certificate`.
+can be excluded from the backup. Given that the restore happens
+in the correct order (`Secret` with the X.509 certificate restored before
+the `Ingress`) `cert-manager` will be able to create a new `Certificate`
+for the `Ingress` and determine that the existing `Secret` is for that `Certificate`.
 
 ### Velero
 
@@ -127,7 +127,7 @@ We have briefly tested backup and restore with `velero` `v1.5.3` and
    exclude `Order`s, `Challenge`s and `CertificateRequest`s from the backup, see
    [Excluding some cert-manager resources from backup](#excluding-some-cert-manager-resources-from-backup).
 
-- Velero's [default restore order](https://github.com/vmware-tanzu/velero/blob/main/pkg/cmd/server/server.go#L470)(Secrets before `Ingress`es, Custom Resources
+- Velero's [default restore order](https://github.com/vmware-tanzu/velero/blob/main/pkg/cmd/server/server.go#L470)(`Secrets` before `Ingress`es, Custom Resources
   restored last), should ensure that there is no unnecessary certificate reissuance
   due to the order of restore operation, see [Order of restore](#order-of-restore).
 
@@ -148,7 +148,7 @@ We have briefly tested backup and restore with `velero` `v1.5.3` and
  We no longer recommend including `CertificateRequest` resources in a backup
  for most scenarios.
  `CertificateRequest`s are designed to represent a one-time
- request for an X.509 certificate- once the request has been fulfilled,
+ request for an X.509 certificate. Once the request has been fulfilled,
  `CertificateRequest` can usually be safely deleted. In most cases (such as when
  a `CertificateRequest` has been created for a `Certificate`) a new
  `CertificateRequest` will be created when needed (i.e at a time of a renewal
