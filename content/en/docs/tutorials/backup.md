@@ -15,7 +15,7 @@ The following commands will back up the configuration of `cert-manager`
 resources. Doing that might be useful before upgrading `cert-manager`. As
 this backup does not include the Secrets containing the X.509 certificates,
 restoring to a cluster that does not already have those Secrets will result in
-the certificates being re-issued.
+the certificates being reissued.
 
 ### Backup
 
@@ -60,24 +60,19 @@ $ kubectl apply -f cert-manager-backup.yaml
 ## Full cluster backup and restore
 
 This section refers to backing up and restoring 'all' Kubernetes resources in a
-cluster- including some `cert-manager` ones- for scenarios such as disaster
+cluster — including some `cert-manager` ones — for scenarios such as disaster
 recovery, cluster migration etc.
 
-Note that we have not done any extensive testing, only a few common scenarios-
-it is recommended to test the backup and restore strategy before putting it in place
-as there are likely to be some other edge cases.
-We would like to ensure that users can reliably backup and restore `cert-manager`
-resources using common tools- if you encounter any errors, please do open a
-GitHub issue or PR an update to this document.
+*Note*: We have tested this process on simple Kubernetes test clusters with a limited set of Kubernetes releases. To avoid data loss, please test both the backup and the restore strategy on your own cluster before depending upon it in production. If you encounter any errors, please open a GitHub issue or a PR to document variations on this process for different Kubernetes environments. 
 
 ### Avoiding unnecessary certificate reissuance
 
 #### Order of restore
 
-If `cert-manager` does not find a Kubernetes Secret with an X.509 certificate
+If `cert-manager` does not find a Kubernetes `Secret` with an X.509 certificate
 for a `Certificate`, reissuance will be triggered. To avoid unnecessary
-reissuance after a restore, ensure that Secrets are restored before
-`Certificate`s. Similarly, Secrets should be restored before `Ingress`es if you
+reissuance after a restore, ensure that `Secret`s are restored before
+`Certificate`s. Similarly, `Secret`s should be restored before `Ingress`es if you
 are using [`ingress-shim`](../../usage/ingress/).
 
 #### Excluding some cert-manager resources from backup
