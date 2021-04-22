@@ -22,8 +22,10 @@ project. A list of known external issuer projects that are maintained by their
 authors are as follows:
 
 # Issuers that Honour Approval
-There are currently no external issuers that honour
-[approval](../../concepts/certificaterequest/#approval).
+
+- [google-cas-issuer](https://github.com/jetstack/google-cas-issuer): Used
+  to request certificates signed by private CAs managed by the
+  [Google Cloud Certificate Authority Service](https://cloud.google.com/certificate-authority-service/).
 
 # Issuers that do NOT Honour Approval
 A list of known external issuer projects that are maintained by their authors
@@ -46,10 +48,6 @@ are as follows. These issuers do _not_ honour
   to request certificates signed by
   [Cloudflare Origin CA](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca)
   to enable TLS between Cloudflare edge and your Kubernetes workloads.
-
-- [google-cas-issuer](https://github.com/jetstack/google-cas-issuer): Used
-  to request certificates signed by private CAs managed by the
-  [Google Cloud Certificate Authority Service](https://cloud.google.com/certificate-authority-service/).
 
 - [freeipa-issuer](https://github.com/guilhem/freeipa-issuer): Used to
   request certificates signed by [FreeIPA](https://www.freeipa.org).
