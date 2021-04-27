@@ -14,7 +14,7 @@ to configure Vault as a certificate authority
 [here](https://www.vaultproject.io/docs/secrets/pki/).
 
 This `Issuer` type is typically used when Vault is already being used within
-your infrastructure, or you would like to make use of it's feature set where the
+your infrastructure, or you would like to make use of its feature set where the
 CA issuer alone cannot provide.
 
 ## Deployment
@@ -58,7 +58,7 @@ authenticating to Vault which are detailed below.
 ### Authenticating via an AppRole
 
 An [AppRole](https://www.vaultproject.io/docs/auth/approle.html) is a method of
-authenticating to Vault through use of it's internal role policy system. This
+authenticating to Vault through use of its internal role policy system. This
 authentication method requires that the issuer has possession of the `SecretID`
 secret key, the `RoleID` of the role to assume, and the app role path. Firstly,
 the secret ID key must be stored within a Kubernetes `Secret` that resides in the
