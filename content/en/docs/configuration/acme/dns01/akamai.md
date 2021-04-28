@@ -7,7 +7,7 @@ type: "docs"
 
 ## Edge DNS
 
-Use Akamai Edge DNS to solve DNS01 ACME challenges by creating a `Secret` using [Akamai API credentials](https://developer.akamai.com/getting-started/edgegrid) and an `Issuer` that references the `Secret` and sets akamai as the dns01 solver.
+Use Edge DNS to solve DNS01 ACME challenges by creating a `Secret` using [Akamai API credentials](https://developer.akamai.com/getting-started/edgegrid) and an `Issuer` that references the `Secret` and sets akamai as the dns01 solver.
 
 ### Create a Secret
 
