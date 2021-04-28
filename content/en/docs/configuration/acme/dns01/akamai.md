@@ -7,11 +7,11 @@ type: "docs"
 
 ## Edge DNS
 
-Use Edge DNS to solve DNS01 ACME challenges by creating a `Secret` using [Akamai API credentials](https://developer.akamai.com/getting-started/edgegrid) and an `Issuer` that references the `Secret` and sets akamai as the dns01 solver.
+Use Edge DNS to solve DNS01 ACME challenges by creating a `Secret` using [Akamai API credentials](https://developer.akamai.com/getting-started/edgegrid) and an `Issuer` that references the `Secret` and sets the  solver type.
 
 ### Create a Secret
 
-The `Secret` should look like the following for the `Issuer` to reference. Replace `client_secret`, `access_token` and `client_token` with the respective Akamai API credential values.
+The `Secret` should look like the following for the `Issuer` to reference. Replace `use_akamai_client_secret`, `use_akamai_access_token` and `use_akamai_client_token` with the respective Akamai API credential values.
 
 ```yaml
 apiVersion: v1
@@ -20,14 +20,14 @@ metadata:
   name: akamai-secret
 type: Opaque
 stringData:
-  clientSecret: <client_secret>
-  accessToken: <access_token>
-  clientToken: <client_token>
+  clientSecret: use_akamai_client_secret
+  accessToken: use_akamai_access_token
+  clientToken: use_akamai_client_token
 ```
 
 ### Create an Issuer
 
-To set Edge DNS for challenge tokens, `cert-manager` uses an `Issuer` that references the above `Secret` and other attributes such as the solver type of dns01 and akamai. The `Issuer` should look like the following. Replace `<host>` with the Akamai API credential `host` value.
+To set Edge DNS for challenge tokens, `cert-manager` uses an `Issuer` that references the above `Secret` and other attributes such as the solver type. The `Issuer` should look like the following. Replace `use_akamai_host` with the Akamai API credential `host` value.
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -43,7 +43,7 @@ spec:
     solvers:
     - dns01:
         akamai:
-          serviceConsumerDomain: <host>
+          serviceConsumerDomain: use_akamai_host
           clientTokenSecretRef:
             name: akamai-secret
             key: clientToken
