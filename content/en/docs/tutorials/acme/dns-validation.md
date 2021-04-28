@@ -7,9 +7,6 @@ type: "docs"
 
 ## Issuing an ACME certificate using DNS validation
 
-> TODO: This guide needs rewriting to be clearer, splitting into sections and
-> potentially rewriting altogether.
-
 cert-manager can be used to obtain certificates from a CA using the
 [ACME](https://en.wikipedia.org/wiki/Automated_Certificate_Management_Environment)
 protocol.  The ACME protocol supports various challenge mechanisms which are
