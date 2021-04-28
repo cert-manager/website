@@ -23,23 +23,24 @@ authors are as follows:
 
 # Issuers that Honour Approval
 
-- [step-issuer](https://github.com/smallstep/step-issuer): Used to request
-  certificates from the [Smallstep](https://smallstep.com) [Certificate
-  Authority server](https://github.com/smallstep/certificates).
+- [aws-pca-issuer](https://github.com/jniebuhr/aws-pca-issuer): Used to
+  request certificates from [AWS Private Certificate Authority]
+  (https://aws.amazon.com/certificate-manager/private-certificate-authority/)
+  for cloud native/hybrid environments.
 
 - [google-cas-issuer](https://github.com/jetstack/google-cas-issuer): Used
   to request certificates signed by private CAs managed by the
   [Google Cloud Certificate Authority Service](https://cloud.google.com/certificate-authority-service/).
 
+- [step-issuer](https://github.com/smallstep/step-issuer): Used to request
+  certificates from the [Smallstep](https://smallstep.com) [Certificate
+  Authority server](https://github.com/smallstep/certificates).
+
+
 # Issuers that do NOT Honour Approval
 A list of known external issuer projects that are maintained by their authors
 are as follows. These issuers do _not_ honour
 [approval](../../concepts/certificaterequest/#approval).
-
-- [aws-pca-issuer](https://github.com/jniebuhr/aws-pca-issuer): Used to
-  request certificates from [AWS Private Certificate Authority]
-  (https://aws.amazon.com/certificate-manager/private-certificate-authority/)
-  for cloud native/hybrid environments.
 
 - [awskms-issuer](https://github.com/Skyscanner/kms-issuer): Used to request
   certificates signed using an [AWS KMS](https://aws.amazon.com/kms/) asymmetric key.
