@@ -76,14 +76,13 @@ spec:
 > Note: `cert-manager` will wait for challenge tokens to propagate across the Edge DNS network. Follow the `certificate` status with a command such as the following.
 
 ```bash
-kubectl describe certificate example.zone. -n cert-manager
+kubectl describe certificate example-zone
 ```
 
 ### Troubleshooting
 
-Follow the `cert-manager` logs to identify any issues. These commands will show the running `cert-manager` pod and its logs assuming a namespace of `cert-manager`.
+Follow the `cert-manager` events to identify any issues with a command such as the following.
 
 ```bash
-kubectl get pods -n cert-manager
-kubectl logs cert-manager-dddddddddd-ddddd -n cert-manager
+kubectl cert-manager status certificate example-zone
 ```
