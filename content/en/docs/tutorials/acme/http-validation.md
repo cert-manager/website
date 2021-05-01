@@ -7,7 +7,7 @@ type: "docs"
 
 ## Issuing an ACME certificate using HTTP validation
 
-cert-manager can be used to obtain certificates from a CA using the
+Cert-manager can be used to obtain certificates from a CA using the
 [ACME](https://en.wikipedia.org/wiki/Automated_Certificate_Management_Environment)
 protocol.  The ACME protocol supports various challenge mechanisms which are
 used to prove ownership of a domain so that a valid certificate can be issued
@@ -44,6 +44,17 @@ spec:
       http01:
         ingress:
           class: nginx
+
+    # We only use Istio to solve challenges for example.org.
+    # Alternative options such as 'matchLabels' and 'dnsZones' can be specified
+    # as part of a solver's selector too.
+    - selector:
+        dnsNames:
+        - example.org
+      http01:
+        istio:
+          gateways:
+          - gateway-ns/gateway-name
 ```
 
 We have specified the ACME server URL for Let's Encrypt's [staging
@@ -107,8 +118,14 @@ docs](../../../concepts/issuer/).
 The `acme` stanza defines the configuration for our ACME challenges.  Here we
 have defined the configuration for our HTTP01 challenges which will be used to
 verify domain ownership. To verify ownership of each domain mentioned in an
-`http01` stanza, cert-manager will create a Pod, Service and Ingress that
-exposes an HTTP endpoint that satisfies the HTTP01 challenge.
+`http01` stanza, cert-manager will create a Pod and Service and add the required
+routing rules to route the requests from the external challenger to the challenge
+service and pod. The type of rule that is used depends on whether [Ingress](../../../configuration/acme/http01/ingress/)
+or [Istio](../../../configuration/acme/http01/istio/) is selected as the challenge solver.
+A solver has to be of type Ingress or type Istio. So there is always exactly one of the
+two fields `ingress` or `istio` that has to be filled out.
+
+### The ingress solver
 
 The fields `ingress` and `ingressClass` in the `http01` stanza can be used to
 control how cert-manager interacts with Ingress resources:
@@ -130,11 +147,21 @@ control how cert-manager interacts with Ingress resources:
   generated name, but they will not have the ingress class annotation set.
 - If both are specified, then the `ingress` field will take precedence.
 
+### The istio solver
+
+The field `istio` in the `http01` stanza can be used to control how cert-manager
+interacts with Istio resources:
+
+- If the `gateways` field is specified, this field is copied to the
+  `VirtualService` resource that points to the solver service. The field selects
+  what Istio `Gateway` resources the routing rules should be applied on.
+
+
 Once domain ownership has been verified, any cert-manager affected resources will
 be cleaned up or deleted.
 
 > Note: It is your responsibility to point each domain name at the correct IP
-> address for your ingress controller.
+> address for your ingress controller/ istio gateway.
 
 After creating the above Certificate, we can check whether it has been obtained
 successfully using `kubectl describe`:
