@@ -20,6 +20,7 @@ external cert-manager components:
 - [Feature policy](./policy/)
 - [Coding Conventions](./coding-conventions/)
 - [Reporting security vulnerabilities](./security/)
+- [Donating third party code to cert-manager](./third-party-code-donation/) 
 
 ## Welcome
 
