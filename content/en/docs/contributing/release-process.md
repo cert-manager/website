@@ -145,13 +145,13 @@ page if a step is missing or if it is outdated.
     | patch release            | `v1.3.1`           |
     </br>
 
-1. **(final release only)** Make sure that a PR with the new upgrade document
-   is ready to be merged on
+2. **(final release only)** Make sure that a PR with the new upgrade
+   document is ready to be merged on
    [cert-manager/website](https://github.com/cert-manager/website). See for
    example, see
    [upgrading-1.0-1.1](https://cert-manager.io/docs/installation/upgrading/upgrading-1.0-1.1/).
 
-2. Create or update the release branch:
+3. Create or update the release branch:
 
     - **(initial alpha only)** Create the release branch:
 
@@ -161,9 +161,9 @@ page if a step is missing or if it is outdated.
        git checkout -b release-1.0 origin/master
        ```
 
-    - **(subsequent alpha, beta, final, and patch releases only)**
-      You need to update it with the latest commits from the master branch, as
-      follows:
+    - **(subsequent alpha, beta and final releases only)**; You need to
+      update the release branch with the latest commits from the master
+      branch, as follows:
 
        ```bash
        # Must be run from the cert-manager repo folder.
@@ -173,7 +173,11 @@ page if a step is missing or if it is outdated.
        git merge --ff-only origin/master
        ```
 
-3. Push the new or updated release branch:
+       Patch releases do not require this `git merge --ff-only` step, since
+       the merge is done by opening a PR using the `/cherry-pick
+       release-1.0` command.
+
+4. Push the new or updated release branch:
 
     1. Check that the `origin` remote is correct. To do that, run the following
         command and make sure it returns
@@ -195,7 +199,7 @@ page if a step is missing or if it is outdated.
         `write` or `admin` GitHub permission on the cert-manager repo to create
         or push to the branch, see [requirements](#requirements).
 
-4. Generate and edit the release notes:
+5. Generate and edit the release notes:
 
     1. Use the following two tables to understand how to fill in the four
        environment variables needed for the next step. These four environment
@@ -271,7 +275,7 @@ page if a step is missing or if it is outdated.
     4. **(final release only)** Check the release notes include all changes
        since the last final release.
 
-5. Run `cmrel stage`:
+6. Run `cmrel stage`:
 
     1. In this example we stage a release using the 'release-1.0' branch,
        setting the release version to `v1.0.0`:
@@ -310,7 +314,7 @@ page if a step is missing or if it is outdated.
         Follow the <code>cmrel stage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
         </p></div>
 
-6. Run `cmrel publish`:
+7. Run `cmrel publish`:
 
     1. Set the `CMREL_RELEASE_NAME` variable in your shell. The value for the
        `CMREL_RELEASE_NAME` variable is found in the output of the previous command,
@@ -369,7 +373,7 @@ page if a step is missing or if it is outdated.
         Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
         </p></div>
 
-7. Publish the GitHub release:
+8. Publish the GitHub release:
 
     1. Visit the draft GitHub release and paste in the release notes that you
        generated earlier. You will need to manually edit the content to match
@@ -382,7 +386,7 @@ page if a step is missing or if it is outdated.
     3. Click "Publish" to make the GitHub release live. This will create a Git
        tag automatically.
 
-8. Finally, post a Slack message as an answer to the first message. Toggle the
+9. Finally, post a Slack message as an answer to the first message. Toggle the
    check box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -390,7 +394,7 @@ page if a step is missing or if it is outdated.
     https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-9. Proceed to the post-release steps:
+10. Proceed to the post-release steps:
 
     1. **(final release only)** Open a PR to
        [`jetstack/testing`](https://github.com/jetstack/testing) and change Prow's
