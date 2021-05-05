@@ -359,7 +359,7 @@ page if a step is missing or if it is outdated.
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --nomock --release-name "$RELEASE_NAME"
+        cmrel publish --nomock --release-name "$CMREL_RELEASE_NAME"
         ```
 
         <div class="pageinfo pageinfo-warning"><p>
