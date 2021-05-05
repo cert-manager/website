@@ -210,7 +210,7 @@ page if a step is missing or if it is outdated.
         | Variable          | Description                             |
         | ----------------- | --------------------------------------- |
         | `START_REV`\*     | The git tag of the "previous"\* release |
-        | `END_REV`         | Name of your release branch             |
+        | `END_REV`         | Name of your release branch (inclusive) |
         | `BRANCH`          | Name of your release branch             |
         | `RELEASE_VERSION` | The git tag without the leading `v`     |
         </br>
@@ -261,9 +261,13 @@ page if a step is missing or if it is outdated.
         only to avoid rate-limits imposed on anonymous API users.
         </p></div>
 
-    3. Sanity check the notes, checking that the notes contain details of all
-       the features and bug fixes that you expect to be in the release. Add
-       additional blurb, notable items and characterize change log.
+    3. Sanity check the notes:
+
+        - Make sure you haven't duplicated the final release note from the
+          previous release (`START_REV` and `END_REV` are inclusive)
+        - Make sure the notes contain details of all the features and bug
+          fixes that you expect to be in the release.
+        - Add additional blurb, notable items and characterize change log.
 
         You can see the commits that will go into this release by using the
         [GitHub compare](https://github.com/jetstack/cert-manager/compare). For
@@ -386,7 +390,7 @@ page if a step is missing or if it is outdated.
     3. Click "Publish" to make the GitHub release live. This will create a Git
        tag automatically.
 
-9. Finally, post a Slack message as an answer to the first message. Toggle the
+9.  Finally, post a Slack message as an answer to the first message. Toggle the
    check box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -394,7 +398,7 @@ page if a step is missing or if it is outdated.
     https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-10. Proceed to the post-release steps:
+11. Proceed to the post-release steps:
 
     1. **(final release only)** Open a PR to
        [`jetstack/testing`](https://github.com/jetstack/testing) and change Prow's
