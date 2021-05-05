@@ -243,7 +243,7 @@ page if a step is missing or if it is outdated.
         export RELEASE_VERSION="1.3.0-alpha.0"
         ```
 
-    2. Generate `release-note.md` at the root of your cert-manager repo folder
+    2. Generate `release-notes.md` at the root of your cert-manager repo folder
        with the following command:
 
         ```sh
