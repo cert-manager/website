@@ -23,10 +23,9 @@ following conditions:
    complete all the steps.
 2. You currently need to be at Jetstack to get the required GitHub and GCP
    permissions. (we'd like contributors outside Jetstack to be able to get
-   access; if that's of interest to you, please let us know)
+   access; if that's of interest to you, please let us know).
 3. You need to have the GitHub `write` permission on the cert-manager project.
-   To check that you have the `write` role, [get a personal access
-   token](https://github.com/settings/tokens) and run:
+   To check that you have the `write` role, run:
 
     ```sh
     go install github.com/cli/cli/cmd/gh@latest
