@@ -436,6 +436,6 @@ The process for cutting a patch release is as follows:
 
 1. Ensure that all PRs have been cherry-picked into the release branch, e.g. `release-1.0`
 
-   Bugs that need to be fixed in a patch release should be [cherry picked into the appropriate release branch](../contributing-flow/#cherry-picking).
+    Bugs that need to be fixed in a patch release should be [cherry picked into the appropriate release branch](../contributing-flow/#cherry-picking).
 
-2. Then, continue with the instructions in [process for releasing a minor version](#process-for-releasing-a-minor-version).
+2. Then, continue with the instructions in [process for releasing a version](#process-for-releasing-a-version).
