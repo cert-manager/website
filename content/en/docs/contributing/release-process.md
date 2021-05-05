@@ -28,7 +28,7 @@ following conditions:
    To check that you have the `write` role, run:
 
     ```sh
-    go install github.com/cli/cli/cmd/gh@master
+    brew install gh
     gh auth login
     gh api /repos/jetstack/cert-manager/collaborators/$(gh api /user | jq -r .login)/permission | jq .permission
     ```
