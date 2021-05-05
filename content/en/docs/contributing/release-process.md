@@ -71,7 +71,6 @@ following conditions:
     [2]: https://console.cloud.google.com/?project=cert-manager-release
     ```
 
-
 {{% /pageinfo %}}
 
 First, ensure that you have all the tools required to perform a cert-manager
@@ -197,7 +196,7 @@ page if a step is missing or if it is outdated.
 
         **(initial alpha only)**: `git push` will only work if you have the
         `write` or `admin` GitHub permission on the cert-manager repo to create
-        or push to the branch, see [requirements](#requirements).
+        or push to the branch, see [prerequisites](#prerequisites).
 
 5. Generate and edit the release notes:
 
