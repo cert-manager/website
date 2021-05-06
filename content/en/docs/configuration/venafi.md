@@ -6,15 +6,12 @@ type: "docs"
 ---
 
 The Venafi `Issuer` types allows you to obtain certificates from [Venafi
-Cloud](https://www.venafi.com/cloud) and [Venafi Trust Protection
-Platform](https://venafi.com) instances.
-
-Create your Venafi Cloud account on this [page](https://www.venafi.com/cloud)
-and get an API key from your dashboard.
+as a Service (VaaS)](https://vaas.venafi.com/jetstack) and [Venafi Trust Protection
+Platform (TPP)](https://www.venafi.com/platform/tls-protect) instances.
 
 You can have multiple different Venafi `Issuer` types installed within the same
-cluster, including mixtures of Cloud and TPP issuer types. This allows you to be
-flexible with the types of Venafi account you use.
+cluster, including mixtures of Venafi as a Service and TPP issuer types. This allows
+you to be flexible with the types of Venafi account you use.
 
 Automated certificate renewal and management are provided for `Certificates`
 using the Venafi `Issuer`.
@@ -30,23 +27,27 @@ within a single namespace, or cluster-wide (using a `ClusterIssuer` resource).
 For more information on the distinction between `Issuer` and `ClusterIssuer`
 resources, read the [Namespaces](../../concepts/issuer/#namespaces) section.
 
-### Creating a Venafi Cloud Issuer
+### Creating a Venafi as a Service Issuer
 
-⚠ From cert-manager `v1.3` you will need to update your Venafi Cloud configuration to use `OutagePREDICT` instead of `DevOpsACCELERATE`.
-With this update, the zone format changes from a UUID to a string of the form `<Application Name>\<Issuing Template Alias>`.
-Please read [cert-manager 1.2 to 1.3 upgrade notes][] and [Venafi Cloud Prerequisites][] for further information.
+If you haven't already done so, create your Venafi as a Service account on this
+[page](https://vaas.venafi.com/jetstack) and copy the API key from your user
+preferences.  Then you may want to create a custom CA Account and Issuing Template
+or choose instead to use defaults that are automatically created for testing 
+("Built-in CA" and "Default", respectively).  Lastly you'll need to create an
+Application for establishing ownership of all the certificates requested by your
+cert-manager Issuer, and assign to it the Issuing Template.  
 
-[cert-manager 1.2 to 1.3 upgrade notes]: ../../installation/upgrading/upgrading-1.2-1.3/
-[Venafi Cloud Prerequisites]: https://github.com/Venafi/vcert/blob/v4.13.1/README-CLI-CLOUD.md#prerequisites
+> Make a note of the Application name and API alias of the Issuing Template because
+> they comprise the `zone` value you will need for your `Issuer` configuration.
 
-In order to set up a Venafi Cloud `Issuer`, you must first create a Kubernetes
-`Secret` resource containing your Venafi Cloud API credentials:
+In order to set up a Venafi as a Service `Issuer`, you must first create a Kubernetes
+`Secret` resource containing your Venafi as a Service API credentials:
 
 ```bash
 $ kubectl create secret generic \
-       cloud-secret \
+       vaas-secret \
        --namespace='NAMESPACE OF YOUR ISSUER RESOURCE' \
-       --from-literal=apikey='YOUR_CLOUD_API_KEY_HERE'
+       --from-literal=apikey='YOUR_VAAS_API_KEY_HERE'
 ```
 
 > **Note**: If you are configuring your issuer as a `ClusterIssuer` resource in
@@ -56,8 +57,8 @@ $ kubectl create secret generic \
 > through the `--cluster-resource-namespace` flag on the cert-manager controller
 > component.
 
-This API key will be used by cert-manager to interact with the Venafi Cloud
-service on your behalf.
+This API key will be used by cert-manager to interact with Venafi as a Service
+on your behalf.
 
 Once the API key `Secret` has been created, you can create your `Issuer` or
 `ClusterIssuer` resource. If you are creating a `ClusterIssuer` resource, you
@@ -65,39 +66,39 @@ must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
 
 Save the below content after making your amendments to a file named
-`venafi-cloud-issuer.yaml`.
+`vaas-issuer.yaml`.
 
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: cloud-venafi-issuer
+  name: vaas-issuer
   namespace: <NAMESPACE YOU WANT TO ISSUE CERTIFICATES IN>
 spec:
   venafi:
     zone: "My Application\My CIT" # Set this to <Application Name>\<Issuing Template Alias>
     cloud:
       apiTokenSecretRef:
-        name: cloud-secret
+        name: vaas-secret
         key: apikey
 ```
 
 You can then create the Issuer using `kubectl create`.
 
 ```bash
-$ kubectl create -f venafi-cloud-issuer.yaml
+$ kubectl create -f vaas-issuer.yaml
 ```
 
 Verify the `Issuer` has been initialized correctly using `kubectl describe`.
 
 ```bash
-$ kubectl get issuer cloud-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE' -o wide
+$ kubectl get issuer vaas-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE' -o wide
 NAME           READY   STATUS                 AGE
-venafi-issuer  True    Venafi issuer started  2m
+vaas-issuer    True    Venafi issuer started  2m
 ```
 
 You are now ready to issue certificates using the newly provisioned Venafi
-`Issuer`.
+`Issuer` and Venafi as a Service.
 
 Read the [Issuing Certificates](../../usage/certificate/) document for
 more information on how to create Certificate resources.
@@ -105,13 +106,13 @@ more information on how to create Certificate resources.
 
 ### Creating a Venafi Trust Protection Platform Issuer
 
-The Venafi Trust Protection integration allows you to obtain certificates from
-a properly configured Venafi TPP instance.
+The Venafi Trust Protection Platform integration allows you to obtain certificates
+from a properly configured Venafi TPP instance.
 
-The setup is similar to the Venafi Cloud configuration above, however some of
-the connection parameters are slightly different.
+The setup is similar to the Venafi as a Service configuration above, however some
+of the connection parameters are slightly different.
 
-> Note: You *must* allow "User Provided CSRs" as part of your TPP policy, as
+> **Note**: You *must* allow "User Provided CSRs" as part of your TPP policy, as
 > this is the only type supported by cert-manager at this time.
 
 In order to set up a Venafi Trust Protection Platform `Issuer`, you must first
@@ -125,7 +126,7 @@ and for older versions of TPP, use username / password authentication.
 
 Use access-token authentication if you are connecting to `TPP >= 19.2`.
 
-1. [Set up token authentication](https://docs.venafi.com/Docs/19.2/TopNav/Content/SDK/WebSDK/t-sdk-Setup-OAuth.php).
+1. [Set up token authentication](https://docs.venafi.com/Docs/21.1/TopNav/Content/SDK/AuthSDK/t-SDKa-Setup-OAuth.php).
 
    NOTE: Do not select "Refresh Token Enabled" and set a *long* "Token Validity (days)".
 
@@ -133,14 +134,14 @@ Use access-token authentication if you are connecting to `TPP >= 19.2`.
 
    E.g. `k8s-xyz-automation`
 
-3. [Create a new application integration](https://docs.venafi.com/Docs/19.2/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creatingNew-Aperture.htm)
+3. [Create a new application integration](https://docs.venafi.com/Docs/21.1/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creatingNew-Aperture.php)
 
    Create an application integration with name and ID `cert-manager`.
    Set the "API Access Settings" to `Certificates: Read,Manage,Revoke`.
 
    "Edit Access" to the new application integration, and allow it to be used by the user you created earlier.
 
-4. [Generate an access token](https://github.com/Venafi/vcert/blob/v4.11.0/README-CLI-PLATFORM.md#obtaining-an-authorization-token)
+4. [Generate an access token](https://github.com/Venafi/vcert/blob/master/README-CLI-PLATFORM.md#obtaining-an-authorization-token)
 
    ```
    vcert getcred \
@@ -200,13 +201,13 @@ resource, you must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
 
 Save the below content after making your amendments to a file named
-`venafi-tpp-issuer.yaml`.
+`tpp-issuer.yaml`.
 
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: tpp-venafi-issuer
+  name: tpp-issuer
   namespace: <NAMESPACE YOU WANT TO ISSUE CERTIFICATES IN>
 spec:
   venafi:
@@ -221,17 +222,17 @@ spec:
 You can then create the `Issuer` using `kubectl create -f`.
 
 ```bash
-$ kubectl create -f venafi-tpp-issuer.yaml
+$ kubectl create -f tpp-issuer.yaml
 ```
 
 Verify the `Issuer` has been initialized correctly using `kubectl describe`.
 
 ```bash
-$ kubectl describe issuer tpp-venafi-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
+$ kubectl describe issuer tpp-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
 ```
 
 You are now ready to issue certificates using the newly provisioned Venafi
-`Issuer`.
+`Issuer` and Trust Protection Platform.
 
 Read the [Issuing Certificates](../../usage/certificate/) document for
 more information on how to create Certificate resources.
