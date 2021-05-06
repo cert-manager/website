@@ -18,9 +18,11 @@ using the Venafi `Issuer`.
 
 ## Creating an Issuer resource
 
-A single Venafi `Issuer` represents a single 'zone' within the Venafi API,
-therefore you must create an `Issuer` resource for each Venafi Zone you want to
-obtain certificates from.
+A single Venafi `Issuer` represents a single Venafi 'zone' so you must create one
+`Issuer` resource for each zone you want to use.  A zone is a single entity that
+combines the policy that governs certificate issuance with information about how
+certificates are organized in Venafi to identify the business application and
+establish ownership.
 
 You can configure your `Issuer` resource to either issue certificates only
 within a single namespace, or cluster-wide (using a `ClusterIssuer` resource).
@@ -38,7 +40,7 @@ Application for establishing ownership of all the certificates requested by your
 cert-manager Issuer, and assign to it the Issuing Template.  
 
 > Make a note of the Application name and API alias of the Issuing Template because
-> they comprise the `zone` value you will need for your `Issuer` configuration.
+> together they comprise the 'zone' you will need for your `Issuer` configuration.
 
 In order to set up a Venafi as a Service `Issuer`, you must first create a Kubernetes
 `Secret` resource containing your Venafi as a Service API credentials:
@@ -130,7 +132,7 @@ Use access-token authentication if you are connecting to `TPP >= 19.2`.
 
    NOTE: Do not select "Refresh Token Enabled" and set a *long* "Token Validity (days)".
 
-2. Create a new user with sufficient privileges to manage and revoke certificates in a particular policy zone.
+2. Create a new user with sufficient privileges to manage and revoke certificates in a particular policy folder (zone).
 
    E.g. `k8s-xyz-automation`
 
@@ -211,7 +213,7 @@ metadata:
   namespace: <NAMESPACE YOU WANT TO ISSUE CERTIFICATES IN>
 spec:
   venafi:
-    zone: devops\cert-manager # Set this to the Venafi policy zone you want to use
+    zone: devops\cert-manager # Set this to the Venafi policy folder you want to use
     tpp:
       url: https://tpp.venafi.example/vedsdk # Change this to the URL of your TPP instance
       caBundle: <base64 encoded string of caBundle PEM file, or empty to use system root CAs>
