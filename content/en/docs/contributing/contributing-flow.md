@@ -79,7 +79,7 @@ To let people know that your PR is still a work in progress, we usually add a
 ### Cherry Picking
 
 If the pull request contains a critical bug fix then this should be cherry picked in to the current stable cert-manager branch 
-and [released as a patch release](../release-process/#patch-releases).
+and [released as a patch release](/docs/installation/supported-releases/#support-policy).
 
 To trigger the cherry-pick process, add a comment to the GitHub PR.
 For example:
@@ -101,7 +101,7 @@ Most of cert-manager's project management is done on GitHub, with the help of Pr
 
 ### When will something be released?
 
-Our team works in milestones, you can follow them (inside GitHub)[https://github.com/jetstack/cert-manager/milestones].
+Our team works using [GitHub milestones](https://github.com/jetstack/cert-manager/milestones).
 When a milestone is set on an Issue it is generally an indication of when we plan to address this.
 Prow will apply milestones on merged PRs, this will tell you in which version that PR will land.
 
