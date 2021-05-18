@@ -132,11 +132,6 @@ issued.
 
 ## Configuring private key rotation
 
-> **WARNING**: This feature requires enabling the `ExperimentalCertificateControllers`
-> feature gate by passing the `--feature-gates=ExperimentalCertificateControllers=true`
-> flag to the controller component, or adding `--set featureGates=ExperimentalCertificateControllers=true`
-> when deploying using the Helm chart.
-
 When a certificate is re-issued for any reason, including because it is nearing
 expiry, when a change to the spec is made or a re-issuance is manually
 triggered, cert-manager supports configuring the 'private key rotation policy'
