@@ -26,7 +26,7 @@ release every two months.
 
 | Release |   Release Date    |      EOL      | [Supported Kubernetes versions][s] |
 | ------- | :---------------: | :-----------: | :--------------------------------: |
-| [1.4][] | [~][]Jun 11, 2021 | [~][]Oct 2021 |                TBC                 |
+| [1.4][] | [~][]Jun 11, 2021 | [~][]Oct 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |
 
 > The `~` sign is used when the date is uncertain and might change; the
 > "EOL" abbreviation stands for End Of Life.
@@ -223,6 +223,19 @@ Our testing coverage is:
 [`master`]: https://testgrid.k8s.io/jetstack-cert-manager-master
 [`next`]: https://testgrid.k8s.io/jetstack-cert-manager-next
 [`previous`]: https://testgrid.k8s.io/jetstack-cert-manager-previous
+
+The oldest Kubernetes release supported by cert-manager is 1.16, as we want
+to be supporting most commercial Kubernetes offerings.
+
+|   Vendor   | Oldest Kubernetes release | End of Life |
+| :--------: | :-----------------------: | :---------: |
+| [EKS][eks] |           1.16            | 25 Jul 2021 |
+| [GKE][gke] |           1.17            |  Nov 2021   |
+| [AKS][aks] |           1.18            |  Jun 2021   |
+
+[eks]: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html
+[gke]: https://cloud.google.com/kubernetes-engine/docs/release-schedule
+[aks]: https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions#aks-kubernetes-release-calendar
 
 ## Terminology
 
