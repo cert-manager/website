@@ -364,11 +364,10 @@ page if a step is missing or if it is outdated.
         ```
 
         <div class="pageinfo pageinfo-warning"><p>
-        ⏰ At this stage, there will be a draft release on GitHub and a live
-        release on our ChartMuseum (https://charts.jetstack.io/index.yaml).
-        So you must now complete the release process quickly; otherwise, users
-        of the latest release on our ChartMuseum instance will encounter errors
-        because the manual CRD install URL will not be available yet.
+        ⏰ Upon completion there will be:
+
+        1. [A draft release of cert-manager on GitHub](https://github.com/jetstack/cert-manager/releases).
+        2. [A pull request containing the new Helm chart](https://github.com/jetstack/jetstack-charts/pulls).
         </p></div>
 
     5. While the build is running, send a fourth Slack message in reply to
@@ -391,10 +390,22 @@ page if a step is missing or if it is outdated.
     3. Click "Publish" to make the GitHub release live. This will create a Git
        tag automatically.
 
-9. **(final release only)** Add the new final release to the
+9. Merge the pull request containing the Helm chart:
+
+   The Helm charts for cert-manager are served using Cloudflare pages
+   and the Helm chart files and metadata are stored in the [github.com/jetstack/jetstack-charts](https://github.com/jetstack/jetstack-charts) repository.
+   The `cmrel publish --nomock` step (above) will have created a PR in this repository which you now have to review and merge, as follows:
+
+    1. [Visit the pull request](https://github.com/jetstack/jetstack-charts/pulls)
+    2. Review the changes
+    3. Fix any failing checks
+    4. Merge the PR
+    5. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
+
+10. **(final release only)** Add the new final release to the
     [supported-releases](/docs/installation/supported-releases/) page.
 
-10. Post a Slack message as an answer to the first message. Toggle the check
+11. Post a Slack message as an answer to the first message. Toggle the check
    box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -402,7 +413,7 @@ page if a step is missing or if it is outdated.
     https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-11. **(final release only)** Show the release to the world:
+12. **(final release only)** Show the release to the world:
 
     1. Send an email to
        [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
@@ -413,7 +424,7 @@ page if a step is missing or if it is outdated.
        ([example](https://twitter.com/MaartjeME/status/1286327362121084928))
        and make sure [@JetstackHQ](https://twitter.com/JetstackHQ) retweets it.
 
-12. Proceed to the post-release steps:
+13. Proceed to the post-release steps:
 
     1. **(final release only)** Add the new final release to the
        [supported-releases](/docs/installation/supported-releases/) page.
