@@ -14,7 +14,6 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: digitalocean-dns
-  namespace: cert-manager
 data:
   # insert your DO access token here
   access-token: "base64 encoded access-token here"
