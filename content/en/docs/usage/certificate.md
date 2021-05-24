@@ -16,7 +16,7 @@ In order to issue any certificates, you'll need to configure an
 
 ## Creating Certificate Resources
 
-A `Certificate` resource specifies fields that are used to generated certificate
+A `Certificate` resource specifies fields that are used to generate certificate
 signing requests which are then fulfilled by the issuer type you have
 referenced. `Certificates` specify which issuer they want to obtain the
 certificate from by specifying the `certificate.spec.issuerRef` field.
@@ -90,15 +90,6 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 > the [`webhook component`](../../concepts/webhook/) can prevent cert-manager
 > from functioning correctly
 > [`#1269`](https://github.com/jetstack/cert-manager/issues/1269).
-
-> Note: Take care when setting the `renewBefore` field to be very close to the
-> `duration` as this can lead to a renewal loop, where the `Certificate` is always
-> in the renewal period. Some `Issuers` set the `notBefore` field on their
-> issued X.509 certificates before the issue time to fix clock-skew issues,
-> leading to the working duration of a certificate to be less than the full
-> duration of the certificate. For example, Let's Encrypt sets it to be one hour
-> before issue time, so the actual *working duration* of the certificate is 89
-> days, 23 hours (the *full duration* remains 90 days).
 
 A full list of the fields supported on the Certificate resource can be found in
 the [API reference documentation](../../reference/api-docs/#cert-manager.io/v1alpha2.CertificateSpec)
