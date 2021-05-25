@@ -113,3 +113,49 @@ be directed to the correct location by this CNAME record. This proves that you c
 ```bash
 $ kubectl create secret generic acme-dns --from-file acmedns.json
 ```
+
+## Limitation of ACMEDNS
+
+The [`acme-dns`](https://github.com/joohoi/acme-dns) server has a [known
+limitation](https://github.com/jetstack/cert-manager/issues/3610): the same
+subdomain cannot be used multiple times in the same certificate. For
+example, the following certificate requires two separate challenges that
+will be issued simultaneously using the `acmeDNS` solver:
+
+```yaml
+kind: Issuer
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: my-acme-dns
+spec:
+  acme:
+    solvers:
+      - dns01:
+          acmeDNS:
+            accountSecretRef:
+              name: my-acme-dns-secret
+            host: my-acme-dns.com
+---
+kind: Certificate
+spec:
+  issuerRef:
+    name: issuer-1
+  dnsNames:
+    - "example.com"
+    - "*.example.com"
+```
+
+The two DNS names above will generate two challenges, and one of the two
+challenges will "roll over" the other in a non deterministic way. This
+limitation comes from a "feature" mentioned in `acme-dns`'s README:
+
+> Rolling update of two `TXT` records to be able to answer to challenges
+> for certificates that have both names: `yourdomain.tld` and
+> `*.yourdomain.tld`, as both of the challenges point to the same
+> subdomain.
+
+One workaround is to issue one set of `acme-dns` credentials for each domain.
+Another workaround is to use `--max-concurrent-challenges 1` when running
+the `cert-manager-controller` so that the challenges get solved one after
+the other instead of simultaneously.
