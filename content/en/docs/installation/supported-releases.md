@@ -3,10 +3,6 @@ title: "Supported Releases"
 linkTitle: "Supported Releases"
 weight: 5
 type: "docs"
-# Before May 2021, the project-maturity page listed the various Kubernetes
-# releases that cert-manager was supporting. Since we moved this information
-# to the supported-releases page, we removed the project-maturity page.
-aliases: [/docs/concepts/project-maturity]
 ---
 
 <!--
