@@ -8,3 +8,8 @@ https://cert-manager.netlify.com/* https://cert-manager.io/:splat 301!
 
 # We previously released the external loadbalancer page under /configuration, and is now moved to /configuration/acme/http01/
 https://cert-manager.io/docs/configuration/externalloadbalancer/ https://cert-manager.io/docs/configuration/acme/http01/externalloadbalancer/ 301!
+
+# Before May 2021, the project-maturity page listed the various Kubernetes
+# releases that cert-manager was supporting. Since we moved this information
+# to the supported-releases page, we removed the project-maturity page.
+https://cert-manager.io/docs/concepts/project-maturity/ https://cert-manager.io/docs/installation/supported-releases/
