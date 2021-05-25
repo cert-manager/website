@@ -139,7 +139,7 @@ $ helm install \
 
 The default cert-manager configuration is good for the majority of users, but a
 full list of the available options can be found in the [Helm chart
-README](https://hub.helm.sh/charts/jetstack/cert-manager).
+README](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
 ## Verifying the installation
 
