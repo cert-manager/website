@@ -108,9 +108,8 @@ cert-manager supports requesting certificates that have a number of [custom key
 usages](https://tools.ietf.org/html/rfc5280#section-4.2.1.3) and [extended key
 usages](https://tools.ietf.org/html/rfc5280#section-4.2.1.12). Although
 cert-manager will attempt to honor this request, some issuers will remove, add
-defaults, or otherwise completely ignore the request and is determined on an
-issuer by issuer basis. The `CA` and `SelfSigned` `Issuer` will always return
-certificates matching the usages you have requested.
+defaults, or otherwise completely ignore the request.
+The `CA` and `SelfSigned` `Issuer` will always return certificates matching the usages you have requested.
 
 Unless any number of usages has been set, cert-manager will set the default
 requested usages of `digital signature`, `key encipherment`, and `server auth`.
@@ -120,7 +119,7 @@ certificate does not match the current key usage set.
 An exhaustive list of supported key usages can be found in the [API reference
 documentation](../../reference/api-docs/#cert-manager.io/v1alpha2.KeyUsage).
 
-## Temporary Certificates while Issuing
+## Temporary Certificates while Issuing {#temporary-certificates-whilst-issuing}
 
 On old GKE versions (`1.10.7-gke.1` and below), when requesting certificates
 [using the ingress-shim](../ingress/) alongside the
@@ -139,27 +138,44 @@ to your Ingress objects:
 cert-manager.io/issue-temporary-certificate": "true"
 ```
 
-That made sure that a temporary self-signed certificate is present in the
-`Secret`. The self-signed certificate is replaced with the properly signed
-certificate later on.
+That made sure that a temporary self-signed certificate was present in the
+`Secret`. The self-signed certificate was replaced with the signed certificate
+later on.
 
 ## Rotation of the private key {#rotation-private-key}
 
 By default, the private key won't be rotated automatically. Using the setting
-`rotationPolicy: Always`, the private key secret associated with a certificate
+`rotationPolicy: Always`, the private key Secret associated with a Certificate
 object can be configured to be rotated as soon as an action triggers the
-reissuance of the certificate object (see
-[actions](#actions-triggering-private-key-rotation) below).
+reissuance of the Certificate object (see
+[Actions that will trigger a rotation of the private key](#actions-triggering-private-key-rotation) below).
 
-With this setting, cert-manager waits until the certificate object is correctly
-signed before overwriting the private key secret, which means you can expect
-**no downtime** with regards to the private key secret.
+With `rotationPolicy: Always`, cert-manager waits until the Certificate
+object is correctly signed before overwriting the `tls.key` file in the
+Secret.
 
-Some Issuer types may disallow re-using private keys. If this is the case, you
-must explicitly configure the `rotationPolicy: Always` setting for each of your
-certificates objects accordingly.
+With this setting, you can expect **no downtime** if your application can
+detect changes to the mounted `tls.crt` and `tls.key` using and reload them
+gracefully or automatically restart.
 
-In the following example, the certificate has been set with `rotationPolicy: Always`:
+If your application only loads the private key and signed certificate once
+at start up, the new certificate won't immediately be served by your
+application, and you will want to either manually restart your pod with
+`kubectl rollout restart`, or automate the action by running
+[wave](https://github.com/wave-k8s/wave). Wave is a Secret controller that
+makes sure deployments get restarted whenever a mounted Secret changes.
+
+{{% alert title="Re-use of private keys" color="primary" %}}
+
+Some issuers, like the built-in [Venafi
+issuer](/docs/configuration/venafi/), may disallow re-using private keys.
+If this is the case, you must explicitly configure the `rotationPolicy:
+Always` setting for each of your Certificate objects accordingly.
+
+{{% /alert %}}
+
+In the following example, the certificate has been set with
+`rotationPolicy: Always`:
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -172,12 +188,12 @@ spec:
 
 ### Actions that will trigger a rotation of the private key {#actions-triggering-private-key-rotation}
 
-Setting the `rotationPolicy: Always` won't do anything by itself. In order to
-get the private key secret rotated, the certificate objects must be reissued. A
-certificate object is reissued with either:
+Setting the `rotationPolicy: Always` or change the Certificate's spec won't
+rotate the private key immediately. In order to get the private key secret
+rotated, the certificate objects must be reissued. A certificate object is
+reissued with either:
 
 - when the X.509 certificate is nearing expiry,
-- when a change to the certificate object's spec is made,
 - when a reissuance is manually triggered with the following:
   ```sh
   kubectl cert-manager renew cert-1
@@ -185,14 +201,13 @@ certificate object is reissued with either:
   Note that the above command requires the [kubectl
   cert-manager](/docs/usage/kubectl-plugin/#renew) plugin.
 
-
 {{% pageinfo color="warning" %}}
 
-**🛑** Deleting the Secret resource associated a the Certificate resource is
+**❌** Deleting the Secret resource associated with a Certificate resource is
 **not a recommended solution** for manually rotating the private key. The
-recommended way to manually rotate the private key is to trigger a reissuance of
-the Certificate resource with the following command (requires the [kubectl
-cert-manager](/docs/usage/kubectl-plugin/#renew) plugin):
+recommended way to manually rotate the private key is to trigger the reissuance
+of the Certificate resource with the following command (requires the [`kubectl
+cert-manager`](/docs/usage/kubectl-plugin/#renew) plugin):
 
 ```sh
 kubectl cert-manager renew cert-1
@@ -211,7 +226,7 @@ The possible values for `rotationPolicy` are:
 
 With `rotationPolicy: Never`, a private key is only generated if one does not
 already exist in the target Secret resource (using the `tls.key` key). All
-further issuance's will re-use this private key. This is the default in order to
+further issuances will re-use this private key. This is the default in order to
 maintain compatibility with previous releases.
 
 With `rotationPolicy: Always`, a new private key will be generated each time an
