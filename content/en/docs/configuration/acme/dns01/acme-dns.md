@@ -96,15 +96,17 @@ _acme-challenge.example.com CNAME d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.exam
 _acme-challenge.example.org CNAME d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com
 ```
 
-> Note: that the "name" of the record always has the `_acme-challenge`
-> subdomain, and the "value" of the record matches exactly the `fulldomain`
-> field from registration.
+{{% alert title="Note" color="primary" %}}
+The "name" of the record always has the `_acme-challenge` subdomain, and
+the "value" of the record matches exactly the `fulldomain` field from
+registration.
+{{% /alert %}}
 
 At verification time, the domain name `d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com` will be a TXT
 record that is set to your validation token. When the verifier queries `_acme-challenge.example.com`, it will
 be directed to the correct location by this CNAME record. This proves that you control `example.com`
 
-4. Create a secret from the credentials JSON that was saved in step 2, this secret is referenced
+1. Create a secret from the credentials JSON that was saved in step 2, this secret is referenced
    in the `accountSecretRef` field of your DNS01 issuer settings.
    When creating an `Issuer` both this `Issuer` and `Secret` must be in the same namespace.
    However for a `ClusterIssuer` (which does not have a namespace) the `Secret` must be placed in
