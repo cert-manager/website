@@ -227,11 +227,13 @@ Our testing coverage is:
 The oldest Kubernetes release supported by cert-manager is 1.16, as we want
 to be supporting most commercial Kubernetes offerings.
 
-|   Vendor   | Oldest Kubernetes release | End of Life |
-| :--------: | :-----------------------: | :---------: |
-| [EKS][eks] |           1.16            | 25 Jul 2021 |
-| [GKE][gke] |           1.17            |  Nov 2021   |
-| [AKS][aks] |           1.18            |  Jun 2021   |
+|   Vendor   | Oldest Kubernetes Release\* | End of Life |
+| :--------: | :-------------------------: | :---------: |
+| [EKS][eks] |            1.16             | 25 Jul 2021 |
+| [GKE][gke] |            1.17             |  Nov 2021   |
+| [AKS][aks] |            1.18             |  Jun 2021   |
+
+\*As of 2021-05-25.
 
 [eks]: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html
 [gke]: https://cloud.google.com/kubernetes-engine/docs/release-schedule
