@@ -12,7 +12,6 @@ metadata:
   name: example-issuer
 spec:
   acme:
-    ...
     solvers:
     - dns01:
         acmeDNS:
@@ -31,92 +30,100 @@ Information about setting up and configuring ACMEDNS is available on the
 [ACMEDNS project page](https://github.com/joohoi/acme-dns).
 
 1. First, register with the ACMEDNS server, in this example, there is one
-   running at `auth.example.com`
+   running at `auth.example.com`. The command:
 
-`curl -X POST http://auth.example.com/register` will return a JSON with
-credentials for your registration:
+    ```sh
+    curl -X POST http://auth.example.com/register
+    ```
 
-```json
-{
-  "username":"eabcdb41-d89f-4580-826f-3e62e9755ef2",
-  "password":"pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
-  "fulldomain":"d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
-  "subdomain":"d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
-  "allowfrom":[]
-}
-```
+    will return a JSON with credentials for your registration:
 
-It is strongly recommended to restrict the update endpoint to the IP range of your pods.
-This is done at registration time as follows:
+    ```json
+    {
+      "username": "eabcdb41-d89f-4580-826f-3e62e9755ef2",
+      "password": "pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
+      "fulldomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
+      "subdomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
+      "allowfrom": []
+    }
+    ```
 
-`curl -X POST http://auth.example.com/register -H "Content-Type: application/json" --data '{"allowfrom": ["10.244.0.0/16"]}'`
+    It is strongly recommended to restrict the update endpoint to the IP
+    range of your pods. This is done at registration time as follows:
 
-Make sure to update the `allowfrom` field to match your cluster configuration. The JSON will now look like
+    ```sh
+    curl -X POST http://auth.example.com/register \
+        -H "Content-Type: application/json" \
+        --data '{"allowfrom": ["10.244.0.0/16"]}'
+    ```
 
-```json
-{
-  "username":"eabcdb41-d89f-4580-826f-3e62e9755ef2",
-  "password":"pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
-  "fulldomain":"d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
-  "subdomain":"d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
-  "allowfrom":["10.244.0.0/16"]
-}
-```
+    Make sure to update the `allowfrom` field to match your cluster
+    configuration. The JSON will now look like:
+
+    ```json
+    {
+      "username": "eabcdb41-d89f-4580-826f-3e62e9755ef2",
+      "password": "pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
+      "fulldomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
+      "subdomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
+      "allowfrom": ["10.244.0.0/16"]
+    }
+    ```
 
 2. Save this JSON to a file with the key as your domain. You can specify
-   multiple domains with the same credentials if you like. In our example, the
-  returned credentials can be used to verify ownership of `example.com` and and
-  `example.org`.
+   multiple domains with the same credentials if you like. In our example,
+   the returned credentials can be used to verify ownership of
+   `example.com` and and `example.org`.
 
-```json
-{
-  "example.com": {
-    "username":"eabcdb41-d89f-4580-826f-3e62e9755ef2",
-    "password":"pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
-    "fulldomain":"d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
-    "subdomain":"d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
-    "allowfrom":["10.244.0.0/16"]
-  },
-  "example.org": {
-    "username":"eabcdb41-d89f-4580-826f-3e62e9755ef2",
-    "password":"pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
-    "fulldomain":"d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
-    "subdomain":"d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
-    "allowfrom":["10.244.0.0/16"]
-  }
-}
-```
+    ```json
+    {
+      "example.com": {
+        "username": "eabcdb41-d89f-4580-826f-3e62e9755ef2",
+        "password": "pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
+        "fulldomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
+        "subdomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
+        "allowfrom": ["10.244.0.0/16"]
+      },
+      "example.org": {
+        "username": "eabcdb41-d89f-4580-826f-3e62e9755ef2",
+        "password": "pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
+        "fulldomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
+        "subdomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
+        "allowfrom": ["10.244.0.0/16"]
+      }
+    }
+    ```
 
 3. Next, update your primary DNS server with the CNAME record that will tell the
    verifier how to locate the challenge TXT record. This is obtained from the
-  `fulldomain` field in the registration:
+   `fulldomain` field in the registration:
 
-```
-_acme-challenge.example.com CNAME d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com
-_acme-challenge.example.org CNAME d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com
-```
+    ```
+    _acme-challenge.example.com CNAME d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com
+    _acme-challenge.example.org CNAME d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com
+    ```
 
-{{% alert title="Note" color="primary" %}}
-The "name" of the record always has the `_acme-challenge` subdomain, and
-the "value" of the record matches exactly the `fulldomain` field from
-registration.
-{{% /alert %}}
+    The "name" of the record always has the _acme-challenge subdomain, and
+    the "value" of the record matches exactly the fulldomain field from
+    registration.
 
-At verification time, the domain name `d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com` will be a TXT
-record that is set to your validation token. When the verifier queries `_acme-challenge.example.com`, it will
-be directed to the correct location by this CNAME record. This proves that you control `example.com`
+    At verification time, the domain name `d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com` will be a TXT
+    record that is set to your validation token. When the verifier queries `_acme-challenge.example.com`, it will
+    be directed to the correct location by this CNAME record. This proves that you control `example.com`
 
-1. Create a secret from the credentials JSON that was saved in step 2, this secret is referenced
-   in the `accountSecretRef` field of your DNS01 issuer settings.
-   When creating an `Issuer` both this `Issuer` and `Secret` must be in the same namespace.
-   However for a `ClusterIssuer` (which does not have a namespace) the `Secret` must be placed in
-   the same namespace as where the cert-manager pod is running in (in the default setup `cert-manager`).
+4. Create a secret from the credentials JSON that was saved in step 2, this
+   secret is referenced in the `accountSecretRef` field of your DNS01
+   issuer settings. When creating an `Issuer` both this `Issuer` and
+   `Secret` must be in the same namespace. However for a `ClusterIssuer`
+   (which does not have a namespace) the `Secret` must be placed in the
+   same namespace as where the cert-manager pod is running in (in the
+   default setup `cert-manager`).
 
-```bash
-$ kubectl create secret generic acme-dns --from-file acmedns.json
-```
+   ```sh
+   kubectl create secret generic acme-dns --from-file acmedns.json
+   ```
 
-## Limitation of ACMEDNS
+## Limitation of the `acme-dns` server
 
 The [`acme-dns`](https://github.com/joohoi/acme-dns) server has a [known
 limitation](https://github.com/jetstack/cert-manager/issues/3610): the same
