@@ -126,12 +126,30 @@ Information about setting up and configuring ACMEDNS is available on the
 ## Limitation of the `acme-dns` server
 
 The [`acme-dns`](https://github.com/joohoi/acme-dns) server has a [known
-limitation](https://github.com/jetstack/cert-manager/issues/3610): the same
-subdomain cannot be used multiple times in the same certificate. For
-example, the following certificate requires two separate challenges that
-will be issued simultaneously using the `acmeDNS` solver:
+limitation](https://github.com/jetstack/cert-manager/issues/3610#issuecomment-849792721):
+when a set of credentials is used with more than 2 domains, cert-manager
+will fail solving the DNS01 challenges.
+
+Imagining that you have configured the ACMEDNS issuer with a single set of
+credentials, and that the "subdomain" of this set of credentials is
+`d420c923-bbd7-4056-ab64-c3ca54c9b3cf`:
 
 ```yaml
+kind: Secret
+metadata:
+  name: auth-example-com
+stringData:
+  acmedns.json: |
+    {
+      "example.com": {
+        "username": "eabcdb41-d89f-4580-826f-3e62e9755ef2",
+        "password": "pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
+        "fulldomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
+        "subdomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
+        "allowfrom": ["10.244.0.0/16"]
+      },
+    }
+---
 kind: Issuer
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -143,9 +161,14 @@ spec:
       - dns01:
           acmeDNS:
             accountSecretRef:
-              name: my-acme-dns-secret
-            host: my-acme-dns.com
----
+              name: auth-example-com
+              key: acmedns.json
+            host: auth.example.com
+```
+
+and imagine that you want to create a Certificate with three subdomains:
+
+```yaml
 kind: Certificate
 spec:
   issuerRef:
@@ -153,18 +176,48 @@ spec:
   dnsNames:
     - "example.com"
     - "*.example.com"
+    - "foo.example.com"
 ```
 
-The two DNS names above will generate two challenges, and one of the two
-challenges will "roll over" the other in a non deterministic way. This
-limitation comes from a "feature" mentioned in `acme-dns`'s README:
+cert-manager will only be able to solve 2 challenges out of 3 in a non
+deterministic way. This limitation comes from a "feature" mentioned [this
+acme-dns issue](https://github.com/joohoi/acme-dns/issues/76).
 
-> Rolling update of two `TXT` records to be able to answer to challenges
-> for certificates that have both names: `yourdomain.tld` and
-> `*.yourdomain.tld`, as both of the challenges point to the same
-> subdomain.
+One workaround is to issue one set of `acme-dns` credentials for each
+domain that we want to be challenged, keeping in mind that each acme-dns
+"subdomain" can only accept at most 2 challenged domains. For example, the
+above secret would become:
 
-One workaround is to issue one set of `acme-dns` credentials for each domain.
-Another workaround is to use `--max-concurrent-challenges 1` when running
-the `cert-manager-controller` so that the challenges get solved one after
-the other instead of simultaneously.
+```yaml
+kind: Secret
+metadata:
+  name: auth-example-com
+stringData:
+  acmedns.json: |
+    {
+      "example.com": {
+        "username": "eabcdb41-d89f-4580-826f-3e62e9755ef2",
+        "password": "pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
+        "fulldomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
+        "subdomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
+        "allowfrom": ["10.244.0.0/16"]
+      },
+      "foo.example.com": {
+        "username": "eabcdb41-d89f-4580-826f-3e62e9755ef2",
+        "password": "pbAXVjlIOE01xbut7YnAbkhMQIkcwoHO0ek2j4Q0",
+        "fulldomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf.auth.example.com",
+        "subdomain": "d420c923-bbd7-4056-ab64-c3ca54c9b3cf",
+        "allowfrom": ["10.244.0.0/16"]
+    }
+```
+
+With this setup, we have:
+
+- `example.com` and `*.example.com` are registered in the acme-dns
+  "subdomain" `d420c923-bbd7-4056-ab64-c3ca54c9b3cf`.
+- `foo.example.com` is registered with solved in the acme-dns "subdomain"
+  `d420c923-bbd7-4056-ab64-c3ca54c9b3cf`.
+
+Another workaround is to use `--max-concurrent-challenges 2` when running
+the `cert-manager-controller`. With this setting, acme-dns will only have 2
+TXT records in its database at any time, which mitigates the issue.
