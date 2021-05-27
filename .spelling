@@ -13,6 +13,7 @@ apiserver
 APIService
 APIServices
 AppRole
+ArtifactHUB
 AWS
 allowlist
 awspca

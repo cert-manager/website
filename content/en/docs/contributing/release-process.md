@@ -393,7 +393,7 @@ page if a step is missing or if it is outdated.
 9. Merge the pull request containing the Helm chart:
 
    The Helm charts for cert-manager are served using Cloudflare pages
-   and the Helm chart files and metadata are stored in the [github.com/jetstack/jetstack-charts](https://github.com/jetstack/jetstack-charts) repository.
+   and the Helm chart files and metadata are stored in the [Jetstack charts repository](https://github.com/jetstack/jetstack-charts).
    The `cmrel publish --nomock` step (above) will have created a PR in this repository which you now have to review and merge, as follows:
 
     1. [Visit the pull request](https://github.com/jetstack/jetstack-charts/pulls)
