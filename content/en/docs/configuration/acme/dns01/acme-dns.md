@@ -183,7 +183,7 @@ cert-manager will only be able to solve 2 challenges out of 3 in a non
 deterministic way. This limitation comes from a "feature" mentioned [this
 acme-dns issue](https://github.com/joohoi/acme-dns/issues/76).
 
-One workaround is to issue one set of `acme-dns` credentials for each
+One workaround is to issue one set of acme-dns credentials for each
 domain that we want to be challenged, keeping in mind that each acme-dns
 "subdomain" can only accept at most 2 challenged domains. For example, the
 above secret would become:

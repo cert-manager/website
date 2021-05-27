@@ -241,6 +241,7 @@ kubernetes-supported-versions
 prepended
 retweets
 JetstackHQ
+acme-dns
 
 # As per https://tools.ietf.org/html/rfc5280, the spelling "X.509" is the
 # correct spelling. The spelling "x509" and "X509" are incorrect.
