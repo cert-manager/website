@@ -215,7 +215,7 @@ With this setup, we have:
 
 - `example.com` and `*.example.com` are registered in the acme-dns
   "subdomain" `d420c923-bbd7-4056-ab64-c3ca54c9b3cf`.
-- `foo.example.com` is registered with solved in the acme-dns "subdomain"
+- `foo.example.com` is registered in the acme-dns "subdomain"
   `d420c923-bbd7-4056-ab64-c3ca54c9b3cf`.
 
 Another workaround is to use `--max-concurrent-challenges 2` when running
