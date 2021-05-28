@@ -246,6 +246,7 @@ prepended
 retweets
 JetstackHQ
 acme-dns
+andreas-p
 renewBefore
 
 # As per https://tools.ietf.org/html/rfc5280, the spelling "X.509" is the

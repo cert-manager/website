@@ -9,6 +9,7 @@ no_list: true
 Here you will find a link to all release notes for each version release of
 cert-manager:
 
+- [`v1.4`](./release-notes-1.4/)
 - [`v1.3`](./release-notes-1.3/)
 - [`v1.2`](./release-notes-1.2/)
 - [`v1.1`](./release-notes-1.1/)
