@@ -17,8 +17,7 @@ Google managed project.
 In order to restrict what Google are able to access within your cluster, the
 firewall rules configured restrict access to your Kubernetes pods. This will
 mean that you will experience the webhook to not work and experience errors such
-as `Internal error occurred: failed calling admission webhook ... the server is
-currently unable to handle the request`.
+as `Internal error occurred: failed calling admission webhook ... the server is currently unable to handle the request`.
 
 In order to use the webhook component with a GKE private cluster, you must
 configure an additional firewall rule to allow the GKE control plane access to
@@ -28,6 +27,17 @@ You can read more information on how to add firewall rules for the GKE control
 plane nodes in the [GKE
 docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules).
 
+## GKE Autopilot
+
+As of May 2021, GKE Autopilot has no support for 3rd party webhooks.
+Without webhooks, many Kubernetes plugins such as cert-manager cannot
+operate correctly.
+
+As per [this
+tweet](https://twitter.com/BagadeVivek/status/1365701217469534220), GKE
+Autopilot is meant to support webhooks in a coming release. We will keep
+you updated on the progress on [this
+issue](https://github.com/jetstack/cert-manager/issues/3717).
 
 ## AWS EKS
 
@@ -43,6 +53,6 @@ deployment, or, if using Helm, configuring it in your `values.yaml` file.
 Note that since kubelet uses port `10250` by default on the host network, the
 `webhook.securePort` value must be changed to a different, free port.
 
-
 ## Webhook
+
 Disabling the webhook is not supported anymore since `v0.14`.
