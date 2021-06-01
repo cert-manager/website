@@ -30,12 +30,13 @@ for more details.
 
 When Google configure the control plane for private clusters, they automatically
 configure VPC peering between your Kubernetes cluster's network and a separate
-Google managed project.
+Google-managed project.
 
 In order to restrict what Google are able to access within your cluster, the
-firewall rules configured restrict access to your Kubernetes pods. This will
-mean that you will experience the webhook to not work and experience errors such
-as `Internal error occurred: failed calling admission webhook ... the server is currently unable to handle the request`.
+firewall rules configured restrict access to your Kubernetes pods. This means
+that the webhook won't work, and you'll see errors such as
+`Internal error occurred: failed calling admission webhook ... the server is
+currently unable to handle the request`.
 
 In order to use the webhook component with a GKE private cluster, you must
 configure an additional firewall rule to allow the GKE control plane access to
