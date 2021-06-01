@@ -6,7 +6,25 @@ type: "docs"
 ---
 
 Below you will find details on various compatibility issues and quirks that you
-may be effected by in your environment.
+may be affected by when deploying cert-manager. If you believe we've missed something
+please feel free to raise an issue or a pull request with the details!
+
+{{% alert title="Important" color="warning" %}}
+If you're using AWS Fargate or else if you've specifically configured
+cert-manager to run the host's network, be aware that kubelet listens on port
+`10250` by default which clashes with the default port for the cert-manager
+webhook.
+
+As such, you'll need to change the webhook's port when setting up cert-manager.
+
+For installations using Helm, you can set the `webhook.securePort` parameter
+when installing cert-manager either using a command line flag or an entry in
+your `values.yaml` file.
+
+If you have a port clash, you could see confusing error messages regarding
+untrusted certs. See [#3237](https://github.com/jetstack/cert-manager/issues/3237)
+for more details.
+{{% /alert %}}
 
 ## GKE
 
@@ -50,8 +68,17 @@ To address this, the webhook can be run in the host network so it can be reached
 by cert-manager, by setting the `webhook.hostNetwork` key to true on your
 deployment, or, if using Helm, configuring it in your `values.yaml` file.
 
-Note that since kubelet uses port `10250` by default on the host network, the
-`webhook.securePort` value must be changed to a different, free port.
+Note that running on the host network will necessitate changing the webhook's
+port; see the warning at the top of the page for details.
+
+### AWS Fargate
+
+It's worth noting that using AWS Fargate to run cert-manager will force you to
+run using the host's network, and will force a port clash with the kubelet
+running on port 10250, as seen in [#3237](https://github.com/jetstack/cert-manager/issues/3237).
+
+When deploying cert-manager on Fargate, you _must_ change the port on which
+the webhook listens. See the warning at the top of this page for more details.
 
 ## Webhook
 

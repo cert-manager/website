@@ -68,6 +68,7 @@ ELB
 enablement
 eTLD
 external-dns
+Fargate
 FastDNS
 FreeIPA
 freeipa-issuer
@@ -175,6 +176,7 @@ Uncomment
 unencrypted
 uninstallation
 unschedule
+untrusted
 URIs
 v0.16
 v2
