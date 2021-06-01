@@ -38,9 +38,9 @@ spec:
         backend:
           service:
             name: myservice
-            port: 
+            port:
               number: 80
-  tls: # < placing a host in the TLS config will indicate a certificate should be created
+  tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
   - hosts:
     - example.com
     secretName: myingress-cert # < cert-manager will store the created certificate in this secret.
