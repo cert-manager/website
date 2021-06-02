@@ -8,7 +8,7 @@ type: "docs"
 Kubernetes has an in-built
 [CertificateSigningRequest](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/)
 resource. This resource is similar to the cert-manager
-[CertificateRequest](../../concepts/certificaterequest) in that it is used to
+[CertificateRequest](../../concepts/certificaterequest/) in that it is used to
 request an X.509 signed certificate from a referenced Certificate Authority
 (CA).
 
@@ -42,10 +42,10 @@ $ helm install \
 ```
 
 > Note: cert-manager currently only supports signing CertificateSigningRequests
-> using the [CA issuer](../../configuration/ca).
+> using the [CA issuer](../../configuration/ca/).
 
 > Note: cert-manager _will not_ automatically approve CertificateSigningRequests
-> that reference a cert-manager [Issuer](../../configuration). Please refer to
+> that reference a cert-manager [Issuer](../../configuration/). Please refer to
 > the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process)
 > for the request process of CertificateSigningRequests.
 
