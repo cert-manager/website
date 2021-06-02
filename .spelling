@@ -30,12 +30,16 @@ boolean
 CAs
 CertificateRequest
 CertificateRequests
+CertificateSigningRequest
+CertificateSigningRequests
 Changelog
 ChartMuseum
 CloudDNS
 Cloudflare
 CloudFlare
 ClusterRole
+ClusterIssuer
+ClusterIssuers
 CNAME
 CNAMEs
 CNI
@@ -161,6 +165,7 @@ stdout
 subdomain
 (sub)domains
 subdomains
+SubjectAccessReview
 subresource
 templating
 Tiller
