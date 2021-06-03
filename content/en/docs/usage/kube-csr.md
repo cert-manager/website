@@ -109,9 +109,9 @@ rules:
 ## Annotations
 
 To keep feature parity with CertificateRequests, annotations are used to store
-values that do not exist as `spec` fields on the CertificateSigningRequest
-resource. These fields are either set by the _requester_ or by the _signer_ as
-labelled below.
+values that do not exist as `spec` or `status` fields on the
+CertificateSigningRequest resource. These fields are either set by the
+_requester_ or by the _signer_ as labelled below.
 
 - `experimental.cert-manager.io/request-duration`: **Set by the requester**. Accepts
     a [Go time duration](https://golang.org/pkg/time/#ParseDuration) string
