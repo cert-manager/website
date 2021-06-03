@@ -20,7 +20,12 @@ This will also update the version conversion code if needed.
 
 ## Versions
 
-cert-manager at time of writing has 4 CRD versions in use- `v1alpha2`, `v1alpha3`, `v1beta1` and `v1`. `v1alpha2`, `v1alpha3` and `v1beta1` are getting deprecated in cert-manager `v1.4.0` and will be removed in `v1.6.0`.
+cert-manager currently has 4 CRD versions in use:
+
+- `v1`
+- `v1beta1` (deprecated in cert-manager `v1.4.0`, removed `v1.6.0`)
+- `v1alpha3` (deprecated in cert-manager `v1.4.0`, removed `v1.6.0`)
+- `v1alpha2` (deprecated in cert-manager `v1.4.0`, removed `v1.6.0`)
 
 These versions are defined in [`//pkg/apis/certmanager`](https://github.com/jetstack/cert-manager/tree/master/pkg/apis/certmanager). ACME related resources are in [`//pkg/apis/acme`](https://github.com/jetstack/cert-manager/tree/master/pkg/apis/certmanager).
 
@@ -33,7 +38,7 @@ We also have an internal API version, it lives at [`//pkg/internal/apis`](https:
 This is a version that is only used for validation and conversion, controllers should not use it as it is not meant to be user-friendly and not stable.
 However all new fields also have to be added here for the conversion logic to work.
 
-See the [official Kubernetes docs for CRD versioning](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/) to understand conversion, which version are stored and served etc.
+See the [official Kubernetes docs for CRD versioning](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/) to understand conversion, which versions are stored and served etc.
 
 
 ## Kubebuilder
