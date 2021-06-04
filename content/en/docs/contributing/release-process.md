@@ -162,7 +162,7 @@ page if a step is missing or if it is outdated.
        git checkout -b release-1.0 origin/master
        ```
 
-    - **(subsequent alpha, beta and final releases only)**; You need to
+    - **(subsequent alpha only)**; You need to
       update the release branch with the latest commits from the master
       branch, as follows:
 
@@ -174,9 +174,11 @@ page if a step is missing or if it is outdated.
        git merge --ff-only origin/master
        ```
 
-       Patch releases do not require this `git merge --ff-only` step, since
-       the merge is done by opening a PR using the `/cherry-pick
-       release-1.0` command.
+       Patch releases, beta releases, and final releases do not require to `git
+       merge --ff-only` since we do not merge master into the release branch as
+       soon as the code freeze has started (i.e., when we release our first
+       beta). For patch releases, beta releases, and final releases, the merge is
+       done by opening a PR and using the `/cherry-pick release-1.0` command.
 
 4. Push the new or updated release branch:
 
