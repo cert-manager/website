@@ -7,21 +7,43 @@ type: "docs"
 
 Special thanks to the external contributors who contributed to this release:
 
-* [@andreas-p](https://github.com/andreas-p)
+* [`@andreas-p`](https://github.com/andreas-p)
 
 # Deprecated Features and Breaking Changes
 
 ## Certificate renewal period calculation
 
 There have been slight changes in the renewal period calculation for
-certificates. Renewal time (`rt`) is now calculated using formula `rt = notAfter -
-rb` where `rb = min(renewBefore, cert duration / 3)`. (See [docs](../../usage/certificate/#renewal) for more
-detailed explanation). Previously this was calculated using formula `rt =
-notAfter - rb`  where  `if cert duration < renewBefore; then rb = cert duration
-/ 3; else rb = renewBefore`. This change fixes a bug where, if a certificate's
-duration is very slightly larger than `renewBefore` period, then a cert gets
-renewed at `notAfter - renewBefore` which can lead to a continuous renewal loop,
-see [`cert-manager#3897`](https://github.com/jetstack/cert-manager/issues/3897).
+certificates. Renewal time (`rt`) is now calculated using the following formula
+(see [here](../../usage/certificate/#renewal) for the details):
+
+```
+rt = notAfter - rb
+```
+
+where `rb` is:
+
+```
+rb = min(renewBefore, cert duration / 3)
+```
+
+Before 1.4, `rt` was calculated using formula:
+
+```
+rt = notAfter - rb
+```
+
+where `rb` is:
+
+```
+if cert duration < renewBefore; then rb = cert duration
+/ 3; else rb = renewBefore
+```
+
+This change fixes a bug where, if a certificate's duration is very slightly
+larger than `renewBefore` period, then a cert gets renewed at `notAfter -
+renewBefore` which can lead to a continuous renewal loop, see
+[`cert-manager#3897`](https://github.com/jetstack/cert-manager/issues/3897).
 
 ## Upgrading cert-manager CRDs and stored versions of cert-manager custom resources
 

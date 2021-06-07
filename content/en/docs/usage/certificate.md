@@ -167,10 +167,37 @@ If you would prefer the `Secret` to be deleted automatically when the `Certifica
 
 ## Renewal
 
-`cert-manager` will automatically renew issued certificates. It will calculate _when_ to renew a certificate based on certificate's duration and a 'renewBefore' value which specifies _how long_ before expiry a certificate should be renewed.
+`cert-manager` automatically renews issued certificates. It calculates _when_ to
+renew a certificate based on the X.509 certificate's `duration` as well as the
+`renewBefore` value. The `renewBefore` value specifies _how long_ before expiry
+a certificate should be renewed.
 
-`spec.duration` and `spec.renewBefore` fields on a `Certificate` can be used to specify custom duration and 'renewBefore' values for a certificate. Default values for these fields are 90 days and 30 days respectively. Some issuers might be configured to only issue certificates with a set duration, so the actual duration may be different.
-Minimum value for `spec.duration` is 1 hour and minimum value for `spec.renewBefore` is 5 minutes.
-It is also required that `spec.duration` > `spec.renewBefore` so if you set `spec.duration` to a value smaller than 30 days (720 hours) you will also need to set `spec.renewBefore` to some smaller value.
+The `spec.duration` and `spec.renewBefore` fields on a Certificate can be used
+as hints to the issuer for setting the `duration` and `renewBefore` values on a
+X.509 certificate.
 
-Once a certificate has been issued, `cert-manager` will calculate _how long_ before expiry a cert should be renewed using the formula `min(spec.renewBefore, actual_duration / 3)` and use this value to calculate _when_ a certificate should be renewed. `Certifcate`'s `status.RenewalTime` field will then be set to the time when renewal will be attempted.
+{{% alert title="Duration and renewBefore may be ignored" color="warning" %}}
+Some issuers might be configured to only issue certificates with a set duration,
+so the actual duration may be different. That is why we talk about "hints".
+{{% /alert %}}
+
+The possible values are:
+
+| Field              | Default | Minimum   | Requirement                          |
+|--------------------|---------|-----------|--------------------------------------|
+| `spec.duration`    | 90 days | 1 hour    |                                      |
+| `spec.renewBefore` | 30 days | 5 minutes | `spec.duration` > `spec.renewBefore` |
+
+Note that if you set `spec.duration` to a value smaller than 30 days (720
+hours), you will also need to set `spec.renewBefore` to some smaller value.
+
+Once the X.509 certificate has been issued by the issuer, `cert-manager`
+calculates _how long_ before expiry a cert should be renewed using the formula:
+
+```
+min(spec.renewBefore, actual_duration / 3)
+```
+
+and uses this value to calculate _when_ a certificate should be renewed. The
+Certificate's `status.RenewalTime` field is then set to the time when the
+renewal needs to be attempted.
