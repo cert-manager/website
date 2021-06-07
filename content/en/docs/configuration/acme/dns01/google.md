@@ -26,7 +26,7 @@ DNS01 challenge. To enable this, a GCP service account must be created with the
 
 ```bash
 $ PROJECT_ID=myproject-id
-$ gcloud iam service-accounts create dns01-solver --display-name "dns01-solver"
+$ gcloud iam service-accounts create dns01-solver --display-name "dns01-solver --project $PROJECT_ID"
 ```
 
 In the command above, replace `myproject-id` with the ID of your project.
