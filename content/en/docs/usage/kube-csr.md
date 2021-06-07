@@ -27,7 +27,7 @@ subject to change in further releases.
 the cert-manager controller:
 
 ```bash
---feature-gates=ExperimentalCertificateSigningRequestControllers
+--feature-gates=ExperimentalCertificateSigningRequestControllers=true
 ```
 
 Which can be added using Helm:
@@ -37,7 +37,7 @@ $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --set featureGates=ExperimentalCertificateSigningRequestControllers \
+  --set featureGates="ExperimentalCertificateSigningRequestControllers=true" \
   # --set installCRDs=true
 ```
 
