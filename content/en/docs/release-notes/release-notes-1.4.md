@@ -7,7 +7,7 @@ type: "docs"
 
 Special thanks to the external contributors who contributed to this release:
 
-* [`@andreas-p`](https://github.com/andreas-p)
+* [@andreas-p](https://github.com/andreas-p)
 
 # Deprecated Features and Breaking Changes
 
