@@ -44,7 +44,7 @@ $ helm install \
 > Note: cert-manager currently only supports signing CertificateSigningRequests
 > using the [CA issuer](../../configuration/ca/).
 
-> Note: cert-manager _will not_ automatically approve CertificateSigningRequests
+> Note: cert-manager _does not_ automatically approve CertificateSigningRequests
 > that reference a cert-manager [Issuer](../../configuration/). Please refer to
 > the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process)
 > for the request process of CertificateSigningRequests.
