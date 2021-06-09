@@ -167,11 +167,16 @@ If you would prefer the `Secret` to be deleted automatically when the `Certifica
 
 ## Renewal
 
+cert-manager automatically renews issued Certificates. It calculates _when_ to
+renew a Certificate based on its [`renewBefore`][certspec] field. The
+`renewBefore` field specifies _how long_ before expiry a Certificate should be
+renewed.
 
-cert-manager automatically renews issued certificates. It calculates _when_ to
-renew a certificate based Certificate's [`duration`][certspec] and
-[`renewBefore`][certspec] fields, for example:
+[certspec]: /docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec
 
+Let's imagine that we create a Certificate on the 1st of January. We want the
+Certificate to expire after three months, and we want cert-manager to renew it
+one month before expiry:
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -181,70 +186,64 @@ spec:
   renewBefore: 720h        # 1 month
 ```
 
-[certspec]: /docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec
+{{% alert title="duration may be ignored" color="warning" %}}
+Some issuers might be configured to only issue certificates with a set expiry
+duration, so the actual duration (define below) may be different.
+The `duration` field is a "hint" given to the issuer.
+{{% /alert %}}
 
-The `renewBefore` value specifies _how long_ before expiry a certificate should
-be renewed. In the above example, the Certificate is expected to be renewed 1
-months prior to expiry:
+After issuing the Certificate, cert-manager looks at the
+[`notAfter`](https://www.rfc-editor.org/rfc/rfc5280.html#section-4.1.2.5) field
+(inside the X.509 certificate) in order to calculate what we call the
+`actualDuration`:
+
+```
+actualDuration = notAfter - issuanceTime
+```
+
+Using the `actualDuration`, cert-manager computes the `renewalTime` using the
+following formula:
+
+```
+renewalTime = issuanceTime + min(renewBefore, actualDuration / 3)
+```
+
+The `renewalTime` is then stored into the Certificate's status, and is the time
+at which cert-manager will attempt renewing the Certificate.
+
+Continuing with the above example, the `notAfter` time on the X.509 certificate
+is 31st of March, which means cert-manager will attempt renewing on the 1st of
+March. The status of the Certificate shows that information:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+spec:
+  ...
+status:
+  renewalTime: "2021-03-01T00:00:00Z"
+```
+
+The following diagram shows the relation between each of these values:
 
 ```diagram
-certificate                                        expected                   certificate
-  issued                                          reissuance                    expiry
+issuanceTime                                      renewalTime                   notAfter
     +--------------------------------------------------+---------------------------+
   1 Jan                                              1 Mar                      31 Mar
 
-
-    <------------------------------------duration---------------------------------->
-                                         3 months
-
-                                                        <--------renewBefore------->
+                                                        <------- renewBefore ------>
                                                                    1 month
+
+    <----------------------------------- actualDuration --------------------------->
+                                  (notAfter - issuanceTime)
+                                            = 3 months
 ```
 
-When set, the `duration` and `renewBefore` fields are given as hints to
-cert-manager to decide when to attempt renewal.
-
-{{% alert title="duration may be ignored" color="warning" %}}
-Some issuers might be configured to only issue certificates with a set duration,
-so the actual duration may be different. That is why we talk about "hints".
-{{% /alert %}}
-
-The possible values for `duration` and `renewBefore` are:
+Note that the `duration` set on the Certificate must always be bigger than
+`renewBefore`. The possible values for `duration` and `renewBefore` are:
 
 |     Field     |      Default      |     Minimum      |        Requirement         |
 |---------------|-------------------|------------------|----------------------------|
 | `duration`    | 90 days (`2160h`) | 1 hour (`1h`)    |                            |
 | `renewBefore` | 30 days (`720h`)  | 5 minutes (`5m`) | `duration` > `renewBefore` |
 
-Note that if you set `duration` to a value smaller than 30 days (720
-hours), you will also need to set `renewBefore` to some smaller value.
-
-Once the X.509 certificate has been issued by the issuer, cert-manager looks
-at the actual
-[`notAfter`](https://www.rfc-editor.org/rfc/rfc5280.html#section-4.1.2.5) X.509
-field that was set by the issuer and calculates _how long_ before expiry the
-Certificate should be renewed using the formula:
-
-```
-min(renewBefore, actual_duration / 3)
-```
-
-where `actual_duration` is the duration calculated using the `notAfter` time set
-on the X.509 certificate.
-
-cert-manager uses this value to calculate _when_ a certificate should be
-renewed. The Certificate's `status.renewalTime` field is then set to the time
-when the renewal will be attempted.
-
-Continuing with the previous example, and assuming that the issuer followed the
-`duration` hint, cert-manager then sets the `renewalTime` to the 1st March:
-
-```yaml
-apiVersion: cert-manager.io/v1
-kind: Certificate
-spec:
-  duration: 2160h
-  renewBefore: 720h
-status:
-  renewalTime: "2021-03-01T00:00:00Z"
-```
