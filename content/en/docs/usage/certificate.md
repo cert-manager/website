@@ -168,7 +168,7 @@ If you would prefer the `Secret` to be deleted automatically when the `Certifica
 ## Renewal
 
 
-`cert-manager` automatically renews issued certificates. It calculates _when_ to
+cert-manager automatically renews issued certificates. It calculates _when_ to
 renew a certificate based Certificate's [`duration`][certspec] and
 [`renewBefore`][certspec] fields, for example:
 
@@ -219,7 +219,7 @@ The possible values for `duration` and `renewBefore` are:
 Note that if you set `duration` to a value smaller than 30 days (720
 hours), you will also need to set `renewBefore` to some smaller value.
 
-Once the X.509 certificate has been issued by the issuer, `cert-manager` looks
+Once the X.509 certificate has been issued by the issuer, cert-manager looks
 at the actual
 [`notAfter`](https://www.rfc-editor.org/rfc/rfc5280.html#section-4.1.2.5) X.509
 field that was set by the issuer and calculates _how long_ before expiry the
