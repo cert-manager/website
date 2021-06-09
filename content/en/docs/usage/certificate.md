@@ -167,37 +167,81 @@ If you would prefer the `Secret` to be deleted automatically when the `Certifica
 
 ## Renewal
 
+
 `cert-manager` automatically renews issued certificates. It calculates _when_ to
-renew a certificate based on the X.509 certificate's `duration` as well as the
-`renewBefore` value. The `renewBefore` value specifies _how long_ before expiry
-a certificate should be renewed.
+renew a certificate based Certificate's [`duration`][certspec] and
+[`renewBefore`][certspec] fields, for example:
 
-The `spec.duration` and `spec.renewBefore` fields on a Certificate can be used
-as hints to the issuer for setting the `duration` and `renewBefore` values on a
-X.509 certificate.
 
-{{% alert title="Duration and renewBefore may be ignored" color="warning" %}}
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+spec:
+  duration: 2160h          # 3 months
+  renewBefore: 720h        # 1 month
+```
+
+[certspec]: /docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec
+
+The `renewBefore` value specifies _how long_ before expiry a certificate should
+be renewed. In the above example, the Certificate is expected to be renewed 1
+months prior to expiry:
+
+```diagram
+certificate                                        expected                   certificate
+  issued                                          reissuance                    expiry
+    +--------------------------------------------------+---------------------------+
+  1 Jan                                              1 Mar                      31 Mar
+
+
+    <------------------------------------duration---------------------------------->
+                                         3 months
+
+                                                        <--------renewBefore------->
+                                                                   1 month
+```
+
+When set, the `duration` and `renewBefore` fields are given as hints to
+cert-manager to decide when to attempt renewal.
+
+{{% alert title="duration may be ignored" color="warning" %}}
 Some issuers might be configured to only issue certificates with a set duration,
 so the actual duration may be different. That is why we talk about "hints".
 {{% /alert %}}
 
-The possible values are:
+The possible values for `duration` and `renewBefore` are:
 
-| Field              | Default | Minimum   | Requirement                          |
-|--------------------|---------|-----------|--------------------------------------|
-| `spec.duration`    | 90 days | 1 hour    |                                      |
-| `spec.renewBefore` | 30 days | 5 minutes | `spec.duration` > `spec.renewBefore` |
+|     Field     |      Default      |     Minimum      |        Requirement         |
+|---------------|-------------------|------------------|----------------------------|
+| `duration`    | 90 days (`2160h`) | 1 hour (`1h`)    |                            |
+| `renewBefore` | 30 days (`720h`)  | 5 minutes (`5m`) | `duration` > `renewBefore` |
 
-Note that if you set `spec.duration` to a value smaller than 30 days (720
-hours), you will also need to set `spec.renewBefore` to some smaller value.
+Note that if you set `duration` to a value smaller than 30 days (720
+hours), you will also need to set `renewBefore` to some smaller value.
 
-Once the X.509 certificate has been issued by the issuer, `cert-manager`
-calculates _how long_ before expiry a cert should be renewed using the formula:
+Once the X.509 certificate has been issued by the issuer, `cert-manager` looks
+at the actual
+[`notAfter`](https://www.rfc-editor.org/rfc/rfc5280.html#section-4.1.2.5) X.509
+field that was set by the issuer and calculates _how long_ before expiry the
+Certificate should be renewed using the formula:
 
 ```
-min(spec.renewBefore, actual_duration / 3)
+min(renewBefore, (notAfter - now) / 3)
 ```
 
-and uses this value to calculate _when_ a certificate should be renewed. The
-Certificate's `status.RenewalTime` field is then set to the time when the
-renewal needs to be attempted.
+cert-manager uses this value to calculate _when_ a certificate should be
+renewed. The Certificate's `status.renewalTime` field is then set to the time
+when the renewal will be attempted.
+
+Continuing with the previous example, and assuming that the issuer followed the
+`duration` hint, cert-manager then sets the `renewalTime` to the 1st March:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+spec:
+  duration: 2160h
+  renewBefore: 720h
+status:
+  renewalTime: "2021-03-01T00:00:00Z"
+```
