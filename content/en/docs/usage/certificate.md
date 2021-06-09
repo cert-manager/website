@@ -226,8 +226,11 @@ field that was set by the issuer and calculates _how long_ before expiry the
 Certificate should be renewed using the formula:
 
 ```
-min(renewBefore, (notAfter - now) / 3)
+min(renewBefore, actual_duration / 3)
 ```
+
+where `actual_duration` is the duration calculated using the `notAfter` time set
+on the X.509 certificate.
 
 cert-manager uses this value to calculate _when_ a certificate should be
 renewed. The Certificate's `status.renewalTime` field is then set to the time
