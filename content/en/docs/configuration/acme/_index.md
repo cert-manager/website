@@ -122,16 +122,13 @@ External Account Bindings are used to associate your ACME account with an
 external account such as a CA custom database. This is typically not needed for
 most cert-manager users unless you know it is explicitly needed.
 
-External Account Bindings require three fields on an ACME `Issuer` which
+External Account Bindings require two fields on an ACME `Issuer` which
 represents your ACME account. These fields are:
 
 - `keyID` - the key ID or account ID of which your external account binding is indexed by the
 external account manager
 - `keySecretRef` - the name and key of a secret containing a base 64 encoded 
 URL string of your external account symmetric MAC key
-- `keyAlgorithm` - the MAC algorithm used to sign the JSON web string 
-containing your External Account Binding when registering the account with the
-ACME server
 
 > Note: In _most_ cases, the MAC key must be encoded in `base64URL`. The 
 > following command will base64-encode a key and convert it to `base64URL`:
@@ -159,7 +156,6 @@ spec:
       keySecretRef:
         name: eab-secret
         key: secret
-      keyAlgorithm: HS256
     privateKeySecretRef:
       name: example-issuer-account-key
     solvers:
@@ -167,7 +163,12 @@ spec:
         ingress:
           class: nginx
 ```
-
+> Note: cert-manager versions pre-`v1.3.0` also required users to specify the
+> MAC algorithm for EAB by setting
+> `Issuer.spec.acme.externalAccountBinding.keyAlgorithm` field. This field is
+> now deprecated because the upstream Go `x/crypto` library hardcodes the algorithm
+> to `HS256`. (See related discussion upstream
+> [`CL#41430`](https://github.com/golang/go/issues/41430)).
 ### Reusing an ACME Account
 
 You may want to reuse a single ACME account across multiple clusters. This
