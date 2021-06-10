@@ -88,6 +88,20 @@ trigger `Certificate` resources to be automatically created:
   returned.  This is useful for keeping compatibility with the `ingress-gce`
   component.
 
+- `cert-manager.io/common-name`: (optional) this annotation allows you to
+  configure `spec.commonName` for the `Certificate` to be generated.
+
+- ` cert-manager.io/duration`: (optional) this annotation allows you to
+  configure `spec.duration` field for the `Certificate` to be generated.
+
+- `cert-manager.io/renew-before`: (optional) this annotation allows you to
+  configure `spec.renewBefore` field for the `Certificate` to be generated.
+
+- `cert-manager.io/usages`: (optional) this annotation allows you to configure
+  `spec.usages` field for the `Certificate` to be generated. Pass a string with
+  comma-separated values i.e "key agreement,digital signature, server auth"
+
+
 ## Optional Configuration
 
 The ingress-shim sub-component is deployed automatically as part of
