@@ -167,12 +167,24 @@ If you would prefer the `Secret` to be deleted automatically when the `Certifica
 
 ## Renewal
 
-cert-manager automatically renews issued Certificates. It calculates _when_ to
-renew a Certificate based on its [`renewBefore`][certspec] field. The
-`renewBefore` field specifies _how long_ before expiry a Certificate should be
-renewed.
+cert-manager automatically renews issued Certificates. It calculates when to
+renew a Certificate based on its [`renewBefore`][certspec], which is a hint
+indicating how long before we wish to have the Certificate renewed, as well as
+on the [`notAfter`][notafter] field present on the issued X.509 certificate.
+
+The `duration` field is used as a hint given to the issuer to set the expiry
+time `notAfter`. The possible values for `duration` and `renewBefore` are:
+
+|     Field     |      Default      |     Minimum      |        Requirement         |
+|---------------|-------------------|------------------|----------------------------|
+| `duration`    | 90 days (`2160h`) | 1 hour (`1h`)    |                            |
+| `renewBefore` | 30 days (`720h`)  | 5 minutes (`5m`) | `duration` > `renewBefore` |
+
+The remaining of this section details how cert-manager uses the `renewBefore`
+hint to decide when to attempt renewing the Certificate.
 
 [certspec]: /docs/reference/api-docs/#cert-manager.io/v1.CertificateSpec
+[notafter]: https://www.rfc-editor.org/rfc/rfc5280.html#section-4.1.2.5
 
 Let's imagine that we create a Certificate on the 1st of January. We want the
 Certificate to expire after three months, and we want cert-manager to renew it
@@ -182,34 +194,130 @@ one month before expiry:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 spec:
-  duration: 2160h          # 3 months
-  renewBefore: 720h        # 1 month
+  duration: 2160h          # 90 days
+  renewBefore: 360h        # 15 days
 ```
 
-{{% alert title="duration may be ignored" color="warning" %}}
-Some issuers might be configured to only issue certificates with a set expiry
-duration, so the actual duration (define below) may be different.
-The `duration` field is a "hint" given to the issuer.
-{{% /alert %}}
+With `renewBefore` set to `720h`, we are expecting the renewal to happen on the
+15th of March:
+
+```diagram
+                                    duration (90 days)
+     <------------------------------------------------------------------------------>
+
+                                                                                expected
+                                                              expected         certificate
+ certificate                                                 reissuance          expiry
+   issued                                                       time              time
+     +-----------------------------------------------------------+------------------+
+   1 Jan                                                       15 Mar            31 Mar
+
+                                                                  <-----------------+
+                                                                 renewBefore (15 days)
+```
 
 After issuing the Certificate, cert-manager looks at the
 [`notAfter`](https://www.rfc-editor.org/rfc/rfc5280.html#section-4.1.2.5) field
 (inside the X.509 certificate) in order to calculate what we call the
-`actualDuration`:
+`actualDuration`.
+
+{{% alert title="duration may be ignored by the issuer" color="warning" %}}
+Some issuers might be configured to only issue certificates with a set expiry
+duration, so the actual duration (calculated using the X.509 certificate's
+`notAfter` field) may be different. The `duration` field is a "hint" given
+to the issuer.
+
+We call `actualDuration` the duration before expiry that was set be the issuer:
 
 ```
 actualDuration = notAfter - issuanceTime
 ```
 
-Using the `actualDuration`, cert-manager computes the `renewalTime` using the
-following formula:
+{{% /alert %}}
+
+cert-manager computes a "safe" maximum duration that we call `maxRenewBefore`,
+set to a third of the actual duration:
 
 ```
-renewalTime = issuanceTime + min(renewBefore, actualDuration / 3)
+maxRenewBefore = actualDuration / 3
 ```
 
-The `renewalTime` is then stored into the Certificate's status, and is the time
-at which cert-manager will attempt renewing the Certificate.
+cert-manager picks the smallest value between the expected `renewBefore` and
+`maxRenewBefore`:
+
+```
+renewalTime = issuanceTime + min(renewBefore, maxRenewBefore)
+```
+
+### Case 1
+
+Let's imagine that the issuer issues a X.509 certificate that matches the
+duration of 90 days. That means the actual duration is 90 days. And since the
+given `renewBefore` is the smallest value, cert-manager sets the `renewalTime`
+to the 15th of March:
+
+```diagram
+                                   actualDuration (90 days)
+     <----------------------------------------------------------------------------->
+                                                                                 actual
+                                                                               certificate
+                                                                                 expiry
+ certificate                                                                      time
+   issued                                                                      (notAfter)
+     +-----------------+-------+------------------+--------------+------------------+
+   1 Jan             10 Feb  15 Feb             1 Mar          15 Mar            31 Mar
+                                                                 ^
+                                                                 |
+                                                                 |<-----------------+
+                                                                 |renewBefore (15 days)
+                                                                 |
+                                                   <-------------|------------------+
+                                                        maxRenewBefore (30 days)
+                                                                 |
+                                                                 |
+                                                            renewalTime
+```
+
+This date is available in the Certificate's status:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+spec:
+  ...
+status:
+  renewalTime: "2021-03-15T00:00:00Z"
+```
+
+### Case 2
+
+Let's now imagine that the issuer did not follow the `duration` hint. Instead of
+90 days, the issuer has set the expiry duration to 60 days:
+
+```diagram
+                 actualDuration (60 days)
+     <-------------------------------------------->
+                                                actual
+                                              certificate
+                                                expiry
+ certificate                                     time
+   issued                                     (notAfter)
+     +-----------------+-------+------------------+--------------+------------------+
+   1 Jan             10 Feb  15 Feb             1 Mar          15 Mar            31 Mar
+                               ^
+                               |
+                               |<-----------------+
+                               |renewBefore (15 days)
+                               |
+                        <------|------------------+
+                          maxRenewBefore (20 days)
+                               |
+                               |
+                          renewalTime
+```
+
+Since `renewBefore` is still smaller than `maxRenewBefore`, `renewBefore` is
+picked and the `renewalTime` is set to the 15th of February.
 
 Continuing with the above example, the `notAfter` time on the X.509 certificate
 is 31st of March, which means cert-manager will attempt renewing on the 1st of
@@ -224,26 +332,43 @@ status:
   renewalTime: "2021-03-01T00:00:00Z"
 ```
 
-The following diagram shows the relation between each of these values:
+### Case 3
 
-```diagram
-issuanceTime                                      renewalTime                   notAfter
-    +--------------------------------------------------+---------------------------+
-  1 Jan                                              1 Mar                      31 Mar
+Let's change the Certificate a bit. Instead of a `renewBefore` of 15 days, let's
+pick 30 days:
 
-                                                        <------- renewBefore ------>
-                                                                   1 month
-
-    <----------------------------------- actualDuration --------------------------->
-                                  (notAfter - issuanceTime)
-                                            = 3 months
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+spec:
+  duration: 2160h          # 90 days
+  renewBefore: 720h        # 30 days
 ```
 
-Note that the `duration` set on the Certificate must always be bigger than
-`renewBefore`. The possible values for `duration` and `renewBefore` are:
+Like before, let's imagine that the issuer did not follow the `duration` hint in
+a similar way.
 
-|     Field     |      Default      |     Minimum      |        Requirement         |
-|---------------|-------------------|------------------|----------------------------|
-| `duration`    | 90 days (`2160h`) | 1 hour (`1h`)    |                            |
-| `renewBefore` | 30 days (`720h`)  | 5 minutes (`5m`) | `duration` > `renewBefore` |
+```diagram
+     <-------------------------------------------->
+                      actualDuration            actual
+                        (60 days)             certificate
+                                                expiry
+ certificate                                     time
+   issued                                     (notAfter)
+     +----------+------+--------------------------+--------------+------------------+
+   1 Jan      1 Feb  10 Feb                     1 Mar          15 Mar            31 Mar
+                       ^
+                       |
+                 <--------------------------------+
+                       |      renewBefore (30 days)
+                       |
+                       |<-------------------------+
+                       |  maxRenewBefore (20 days)
+                       |
+                       |
+                  renewalTime
+```
 
+This time around, `maxRenewBefore` is lower than our `renewBefore` duration.
+That means cert-manager will use a duration of 20 days for calculating the
+`renewalTime`, which leads to a planned renewal date of 10th February.
