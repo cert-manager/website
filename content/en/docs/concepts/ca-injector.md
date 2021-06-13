@@ -104,7 +104,7 @@ You should find that the `caBundle` value is now identical to the CA value in th
 
 ```
 kubectl get validatingwebhookconfigurations.admissionregistration.k8s.io webhook1 -o yaml | grep caBundle
-kubectl -n example get secret webhook1-certificate  -o yaml | grep ca.crt
+kubectl -n example1 get secret webhook1-certificate  -o yaml | grep ca.crt
 ```
 
 And after a short time, the Kubernetes API server will read that new `caBundle` value and use it to verify a TLS connection to the webhook server.
