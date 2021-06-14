@@ -70,8 +70,10 @@ because such certificates increase the opportunity for attacks on the Kubernetes
 
 In Kubernetes 1.19 the [Certificate Signing Requests API] has reached V1
 and it can be used more generally by following (or automating) the [Request Signing Process].
-There are plans for cert-manager make greater use of this API now that it is stable.
+
+cert-manager currently has some [limited experimental support] for this resource.
 
 [Certificate Signing Requests API]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#certificatesigningrequest-v1-certificates-k8s-io
 [`kubectl certificates` command]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#certificate
 [Request signing process]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process
+[limited experimental support]: ../usage/kube-csr/
