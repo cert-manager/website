@@ -130,12 +130,8 @@ page](../../usage/kube-csr/).
 
 ### Vault Issuer handle of `ca.crt`
 
-The Vault issuer is now able to fill the `ca.crt` in Secrets. To do that,
-cert-manager reconstructs the certificate chain that is returned by Vault and
-uses the certificate at the start of the chain as the `ca.crt`.
-
-Note that this `ca.crt` may be an intermediate signing CA instead of the actual
-root CA.
+The Vault issuer is now able to fill the `ca.crt` in Secrets. The `ca.crt` set
+by cert-manager may be an intermediate signing CA instead of the actual root CA.
 
 The reason why this feature did not exist previously is that finding which
 certificate is at the top of the chain is not trivial. Take a look at
