@@ -158,9 +158,9 @@ accessible from outside of the cluster. For example, in `values.yaml`:
 # values.yaml
 webhook:
   serviceType: LoadBalancer
-  loadBalancerIP: 85.78.90.100
+  loadBalancerIP: 198.51.100.20
   url:
-    host: 85.78.90.100
+    host: 198.51.100.20
 ```
 
 ### Helm chart: Service labels
