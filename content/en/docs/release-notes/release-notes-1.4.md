@@ -133,12 +133,6 @@ page](../../usage/kube-csr/).
 The Vault issuer is now able to fill the `ca.crt` in Secrets. The `ca.crt` set
 by cert-manager may be an intermediate signing CA instead of the actual root CA.
 
-The reason why this feature did not exist previously is that finding which
-certificate is at the top of the chain is not trivial. Take a look at
-[@JoshVanL](https://github.com/JoshVanL)'s excellent
-[`ParseSingleCertificateChain`](https://github.com/jetstack/cert-manager/blob/5e2a6883c1202739902ac94b5f4884152b810925/pkg/util/pki/parse.go#L167-L244)
-to see what this is all about!
-
 ### Helm chart: webhook externally accessible for bare-metal
 
 In [some](https://github.com/kubernetes/kubernetes/issues/72936#issue-399522387)
