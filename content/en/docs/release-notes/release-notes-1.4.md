@@ -38,15 +38,24 @@ These APIs will be removed in cert-manager 1.6.
 
 {{% pageinfo color="warning" %}}
 
-⛔️  If you have a cert-manager installation that is using or has previously used
-these deprecated APIs, you may need to upgrade your cert-manager custom
-resources and CRDs.
+⛔️  If you are upgrading cert-manager on a cluster which has previously had
+cert-manager < `v1.0.0`, you **must** take steps to upgrade all cert-manager
+custom resources which were created by you or by cert-manager < `v1.0.0`.
 
-This needs to be done before upgrading to cert-manager 1.6. See cert-manager
-[docs](../../installation/upgrading/remove-deprecated-apis/#upgrading-existing-cert-manager-resources)
-for more detailed upgrade instructions.
+Such custom resources may still be stored in `etcd` as `v1alpha2` resources and
+when that version of the API is removed in cert-manager 1.6, they will become
+unreadable.
+
+To work around this, you need to force them to be converted by the cert-manager
+conversion webhook. And the simplest way to do that is to perform a no-change
+update on all cert-manager custom resources.
+
+This is explained in more detail in the [Upgrading existing cert-manager
+resources][upgrade-resources] page.
 
 {{% /pageinfo %}}
+
+[upgrade-resources]: ../../installation/upgrading/remove-deprecated-apis/#upgrading-existing-cert-manager-resources
 
 ### Helm chart: `securityContext` defaults to non-root
 
