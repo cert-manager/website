@@ -49,10 +49,10 @@ for more detailed upgrade instructions.
 ## Helm chart: `securityContext` defaults to non-root
 
 The Helm chart [now](https://github.com/jetstack/cert-manager/pull/4036) follows
-the current Pod hardening best practices as defined by the Kyverno [pod-security
-restricted](https://kyverno.io/policies/pod-security/#restricted) policy.
+the current Pod hardening best practices as defined by the Kyverno [`pod-security
+restricted`](https://kyverno.io/policies/pod-security/#restricted) policy.
 
-To pass the validation, the controller, webbook, and cainjector Pods are now
+To pass the validation, the controller, webhook, and cainjector Pods are now
 running as non-root:
 
 ```yaml
@@ -87,7 +87,7 @@ still available: the intermediate should appear as part of the chain in
 
 ## Vault renewal bug
 
-The renewal behaviour has changed when a Certificate has a `duration` value of
+The renewal behavior has changed when a Certificate has a `duration` value of
 more than 90 days and `renewBefore` has not been set.
 
 Previously, the Certificate was renewed 30 days before expiry;
@@ -177,7 +177,7 @@ to see what this is all about!
 ### Helm chart: webhook externally accessible for bare-metal
 
 In [some](https://github.com/kubernetes/kubernetes/issues/72936#issue-399522387)
-Kubernetes setups, the apiserver is not able to talk to kube-dns (i.e., when
+Kubernetes setups, the apiserver is not able to talk to `kube-dns` (i.e., when
 Kubernetes is running on bare-metal with no special `resolv.conf`).
 
 To work around that, the cert-manager webhook can
@@ -218,17 +218,17 @@ With the above example, the source label
 `__meta_kubernetes_service_label_app='armada-api'` becomes the new label
 `app='armada-api'` when metrics related to this Service are scraped.
 
-## Akamai issuer and Open Edgegrid EdgeDNS v2
+## Akamai issuer
 
 The Akamai issuer has been
-[updated](https://github.com/jetstack/cert-manager/pull/4007) to use Open
-Edgegrid EdgeDNS v2 API.
+[updated](https://github.com/jetstack/cert-manager/pull/4007) to use the v2 of
+the `OPEN EdgeGrid` Go package.
 
 # Bug Fixes
 
 - The [RFC2136](https://cert-manager.io/docs/configuration/acme/dns01/rfc2136/)
   issuer is [now](https://github.com/jetstack/cert-manager/pull/3622) able to
-  handle DNS-01 challenges that map to multiple `TXT` records. This lets you
+  handle DNS01 challenges that map to multiple `TXT` records. This lets you
   create Let's Encrypt certificates using RFC2136 with multiple DNS names.
 - The comparison function `PublicKeysEqual` is
   [now](https://github.com/jetstack/cert-manager/pull/3914) correct for public
@@ -255,7 +255,7 @@ Edgegrid EdgeDNS v2 API.
 # Honorable mentions
 
 Tim Ramlot ([@inteon](https://github.com/inteon)) has done a fantastic job at
-adding the Istio VirtualService support for HTTP01 challenges in
+adding the Istio `VirtualService` support for HTTP01 challenges in
 [#3724](https://github.com/jetstack/cert-manager/pull/3724). It took an immense
 effort to have this PR ready and merged for the 1.4 release.
 
