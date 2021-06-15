@@ -125,7 +125,7 @@ behavior.
 
 ## New Features
 
-### Support for the built-in CertificateSigningRequests
+### Experimental Support for Kubernetes CertificateSigningRequests
 
 It is now possible to use the built-in Kubernetes [CertificateSigningRequest][]
 resources with cert-manager. The CA Issuer is currently the only supported
