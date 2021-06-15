@@ -87,10 +87,9 @@ The CA, Vault, and Venafi issuer now produce a `tls.crt` that is de-duplicated,
 in the correct order (leaf at the top, issuing certificate at the bottom) and
 verified (i.e. each signature can be verified).
 
-The CA issuer now produces a `ca.crt` that contains the root-most CA instead of
-the intermediate CA when the issuing certificate is an intermediate CA. By
-root-most, we mean that `ca.crt` is the root of the chain of certificates that
-cert-manager knows about, but it might not be the self-signed root CA.
+The CA issuer now produces a `ca.crt` that contains the "most" root CA that
+cert-manager is aware of. `ca.crt` may thus not be the actual self-signed root
+CA, since cert-manager may not be aware of it.
 
 [#3982]: https://github.com/jetstack/cert-manager/pull/3982 "All issuers + Vault issuer"
 [#3983]: https://github.com/jetstack/cert-manager/pull/3983 "Venafi issuer"
