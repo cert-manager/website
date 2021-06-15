@@ -17,35 +17,35 @@ release every two months.
 
 ## Supported releases {#supported-releases}
 
-| Release | Release Date |     EOL      | [Supported Kubernetes versions][s] |
-|---------|:------------:|:------------:|:----------------------------------:|
-| [1.4][] | Jun 15, 2021 | Oct 13, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |
-| [1.3][] | Apr 08, 2021 | Aug 11, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |
+| Release | Release Date |     EOL      |    [Supported Kubernetes versions][s]    |
+|---------|:------------:|:------------:|:----------------------------------------:|
+| [1.4][] | Jun 15, 2021 | Oct 13, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
+| [1.3][] | Apr 08, 2021 | Aug 11, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
 
 ## Upcoming releases
 
-| Release | Release Date |     EOL      | [Supported Kubernetes versions][s] |
-|---------|:------------:|:------------:|:----------------------------------:|
-| [1.5][] | Aug 11, 2021 | Dec 15, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |
-| 1.6     | Oct 13, 2021 | Feb 16, 2022 |           to be defined            |
-| 1.7     | Dec 15, 2021 | Apr 13, 2022 |           to be defined            |
+| Release | Release Date |     EOL      |    [Supported Kubernetes versions][s]    |
+|---------|:------------:|:------------:|:----------------------------------------:|
+| [1.5][] | Aug 11, 2021 | Dec 15, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
+| 1.6     | Oct 13, 2021 | Feb 16, 2022 |              to be defined               |
+| 1.7     | Dec 15, 2021 | Apr 13, 2022 |              to be defined               |
 
-> Note that dates in the future are are uncertain and might change. The "EOL"
+> Note that dates in the future are uncertain and might change. The "EOL"
 > abbreviation stands for End Of Life.
 
 ## Old releases
 
 | Release  | Release Date |     EOL      | Compatible Kubernetes versions |
 |----------|:------------:|:------------:|:------------------------------:|
-| [1.2][]  | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.21           |
-| [1.1][]  | Nov 24, 2021 | Apr 08, 2021 |          1.11 → 1.21           |
-| [1.0][]  | Sep 02, 2020 | Feb 10, 2021 |          1.11 → 1.21           |
-| [0.16][] | Jul 23, 2020 | Nov 24, 2020 |          1.11 → 1.21           |
-| [0.15][] | May 06, 2020 | Sep 02, 2020 |          1.11 → 1.21           |
-| [0.14][] | Mar 11, 2020 | Jul 23, 2020 |          1.11 → 1.21           |
-| [0.13][] | Jan 21, 2020 | May 06, 2020 |          1.11 → 1.21           |
-| [0.12][] | Nov 27, 2019 | Mar 11, 2020 |          1.11 → 1.21           |
-| [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |
+| [1.2][]  | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.22           |
+| [1.1][]  | Nov 24, 2021 | Apr 08, 2021 |          1.11 → 1.22           |
+| [1.0][]  | Sep 02, 2020 | Feb 10, 2021 |          1.11 → 1.22           |
+| [0.16][] | Jul 23, 2020 | Nov 24, 2020 |          1.11 → 1.22           |
+| [0.15][] | May 06, 2020 | Sep 02, 2020 |          1.11 → 1.22           |
+| [0.14][] | Mar 11, 2020 | Jul 23, 2020 |          1.11 → 1.22           |
+| [0.13][] | Jan 21, 2020 | May 06, 2020 |          1.11 → 1.22           |
+| [0.12][] | Nov 27, 2019 | Mar 11, 2020 |          1.11 → 1.22           |
+| [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.22           |
 
 [s]: #kubernetes-supported-versions
 [1.5]: https://github.com/jetstack/cert-manager/milestone/26
