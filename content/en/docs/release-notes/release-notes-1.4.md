@@ -72,12 +72,20 @@ will need to set this back to `false`.
 
 {{% /pageinfo %}}
 
-### CA Issuer and `ca.crt`
+### CA, Vault and Venafi issuer handling of `ca.crt` and `tls.crt`
 
-The CA issuer now attempts to store the root CA instead of the issuing CA into
-the `ca.crt` field for issued certificates. All of the information which was
-previously available is still available: the intermediate should appear as part
-of the chain in `tls.crt`.
+The CA, Vault, and Venafi issuer now produce a `tls.crt` that is de-duplicated,
+in the correct order (leaf at the top, issuing certificate at the bottom) and
+verified (i.e. each signature can be verified).
+
+The CA issuer now produces a `ca.crt` that contains the root-most CA instead of
+the intermediate CA when the issuing certificate is an intermediate CA. By
+root-most, we mean that `ca.crt` is the root of the chain of certificates that
+cert-manager knows about, but it might not be the self-signed root CA.
+
+[#3982]: https://github.com/jetstack/cert-manager/pull/3982 "All issuers + Vault issuer"
+[#3983]: https://github.com/jetstack/cert-manager/pull/3983 "Venafi issuer"
+[#3985]: https://github.com/jetstack/cert-manager/pull/3985 "CA issuer"
 
 {{% pageinfo color="warning" %}}
 
@@ -85,6 +93,7 @@ of the chain in `tls.crt`.
 managed by cert-manager with the CA issuer.
 
 {{% /pageinfo %}}
+
 
 ### Vault renewal bug
 
@@ -127,11 +136,6 @@ The documentation is available on the [the Kubernetes CSR usage
 page](../../usage/kube-csr/).
 
 [CertificateSigningRequest]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
-
-### Vault Issuer handle of `ca.crt`
-
-The Vault issuer is now able to fill the `ca.crt` in Secrets. The `ca.crt` set
-by cert-manager may be an intermediate signing CA instead of the actual root CA.
 
 ### Helm chart: webhook externally accessible for bare-metal
 
