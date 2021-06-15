@@ -133,7 +133,7 @@ kubectl certificate approve test
 ```
 
 cert-manager then signs the CSR. To know more about it, see [the
-documentation](../../usage/kube-csr) on how use the built-in
+documentation](../../usage/kube-csr/) on how use the built-in
 CertificateSigningRequests with cert-manager.
 
 [CertificateSigningRequest]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
@@ -246,7 +246,10 @@ effort to have this PR ready and merged for the 1.4 release.
 After a lot of thinking, we have decided that trying to support every custom
 resource for every proxy could not be done in-tree due to the Go dependency
 weight that each integration adds. Jake Sanders proposed an [out-of-tree
-approach](https://github.com/jetstack/cert-manager/issues/3924), and we have Tim
-[has been
+approach](https://github.com/jetstack/cert-manager/issues/3924) that will be
+worked on as part of cert-manager 1.5.
+
+As a side note, we are pleased to announce that Tim [has been
 accepted](https://summerofcode.withgoogle.com/projects/#4841881566969856) for
-the 2021 Google Summer of Code to work on this feature!
+the 2021 Google Summer of Code to work on the `kubectl cert-manager install`
+command.
