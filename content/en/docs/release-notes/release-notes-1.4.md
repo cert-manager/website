@@ -39,16 +39,9 @@ These APIs will be removed in cert-manager 1.6.
 {{% pageinfo color="warning" %}}
 
 ⛔️  If you are upgrading cert-manager on a cluster which has previously had
-cert-manager < `v1.0.0`, you **must** take steps to upgrade all cert-manager
-custom resources which were created by you or by cert-manager < `v1.0.0`.
-
-Such custom resources may still be stored in `etcd` as `v1alpha2` resources and
-when that version of the API is removed in cert-manager 1.6, they will become
-unreadable.
-
-To work around this, you need to force them to be converted by the cert-manager
-conversion webhook. And the simplest way to do that is to perform a no-change
-update on all cert-manager custom resources.
+cert-manager < `v1.0.0`, you will need to ensure that all cert-manager custom resources
+are stored in etcd at `v1` version and that cert-manger CRDs do not reference the deprecated APIs
+**by the time you upgrade to `v1.6`**.
 
 This is explained in more detail in the [Upgrading existing cert-manager
 resources][upgrade-resources] page.
