@@ -187,11 +187,12 @@ With the above example, the source label
 `__meta_kubernetes_service_label_app='armada-api'` becomes the new label
 `app='armada-api'` when metrics related to this Service are scraped.
 
-### Akamai issuer
+### Akamai DNS01 solver
 
-The Akamai issuer has been
-[updated](https://github.com/jetstack/cert-manager/pull/4007) to use the v2 of
-the `OPEN EdgeGrid` Go package.
+The Akamai DNS01 solver has been [updated][4007] to use the v2 of the `OPEN
+EdgeGrid` Go package.
+
+[#4007]: https://github.com/jetstack/cert-manager/pull/4007 "Update of the Akamai DNS01 solver"
 
 ## Bug Fixes
 
