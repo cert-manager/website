@@ -5,6 +5,8 @@ weight: 800
 type: "docs"
 ---
 
+# Final Release `v1.4.0`
+
 Special thanks to the external contributors who contributed to this release:
 
 * [@andreas-p](https://github.com/andreas-p)
@@ -19,9 +21,9 @@ Special thanks to the external contributors who contributed to this release:
 * [@clatour](https://github.com/clatour)
 * [@tamalsaha](https://github.com/tamalsaha)
 
-# Deprecated Features and Breaking Changes
+## Deprecated Features and Breaking Changes
 
-## Upgrading cert-manager CRDs and stored versions of cert-manager custom resources
+### Upgrading cert-manager CRDs and stored versions of cert-manager custom resources
 
 We have deprecated the following cert-manager APIs:
 
@@ -46,7 +48,7 @@ for more detailed upgrade instructions.
 
 {{% /pageinfo %}}
 
-## Helm chart: `securityContext` defaults to non-root
+### Helm chart: `securityContext` defaults to non-root
 
 The Helm chart [now](https://github.com/jetstack/cert-manager/pull/4036) follows
 the current Pod hardening best practices as defined by the Kyverno [`pod-security
@@ -70,7 +72,7 @@ will need to set this back to `false`.
 
 {{% /pageinfo %}}
 
-## CA Issuer and `ca.crt`
+### CA Issuer and `ca.crt`
 
 The CA issuer [now](https://github.com/jetstack/cert-manager/pull/3865) attempts
 to store the root CA instead of the issuing CA into the `ca.crt` field for
@@ -85,7 +87,7 @@ still available: the intermediate should appear as part of the chain in
 
 {{% /pageinfo %}}
 
-## Vault renewal bug
+### Vault renewal bug
 
 The renewal behavior has changed when a Certificate has a `duration` value of
 more than 90 days and `renewBefore` has not been set.
@@ -106,9 +108,9 @@ behavior.
 
 {{% /pageinfo %}}
 
-# New Features
+## New Features
 
-## Support for the built-in CertificateSigningRequests
+### Support for the built-in CertificateSigningRequests
 
 It is [now](https://github.com/jetstack/cert-manager/pull/4064) possible to use
 the built-in Kubernetes [CertificateSigningRequest][] resources with
@@ -159,7 +161,7 @@ CertificateSigningRequests with cert-manager.
 
 [CertificateSigningRequest]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
 
-## Vault Issuer handle of `ca.crt`
+### Vault Issuer handle of `ca.crt`
 
 The Vault issuer is now able to fill the `ca.crt` in Secrets. To do that,
 cert-manager reconstructs the certificate chain that is returned by Vault and
@@ -218,13 +220,13 @@ With the above example, the source label
 `__meta_kubernetes_service_label_app='armada-api'` becomes the new label
 `app='armada-api'` when metrics related to this Service are scraped.
 
-## Akamai issuer
+### Akamai issuer
 
 The Akamai issuer has been
 [updated](https://github.com/jetstack/cert-manager/pull/4007) to use the v2 of
 the `OPEN EdgeGrid` Go package.
 
-# Bug Fixes
+## Bug Fixes
 
 - The [RFC2136](https://cert-manager.io/docs/configuration/acme/dns01/rfc2136/)
   issuer is [now](https://github.com/jetstack/cert-manager/pull/3622) able to
@@ -233,12 +235,6 @@ the `OPEN EdgeGrid` Go package.
 - The comparison function `PublicKeysEqual` is
   [now](https://github.com/jetstack/cert-manager/pull/3914) correct for public
   keys.
-- A Helm upgrade bug was
-  [fixed](https://github.com/jetstack/cert-manager/pull/3882), you should now
-  able to upgrade from 1.3.1 to 1.4.0 when `--set installCRDs=true` is used.
-  This issue was due to [a Helm
-  bug](https://github.com/helm/helm/issues/5806#issuecomment-788116838) with the
-  `minimum` field on the CRDs.
 - The ACME issuer [now](https://github.com/jetstack/cert-manager/pull/3866)
   works correctly with Certificates that have a long name (52 characters or
   more). These Certificates would not get renewed due to non-unique `Order`
@@ -252,7 +248,7 @@ the `OPEN EdgeGrid` Go package.
   CertificateRequest is `Denied`. This is to keep the same behavior where a
   terminal state of a CertificateRequest should have a `Ready` condition.
 
-# Honorable mentions
+## Honorable mentions
 
 Tim Ramlot ([@inteon](https://github.com/inteon)) has done a fantastic job at
 adding the Istio `VirtualService` support for HTTP01 challenges in
