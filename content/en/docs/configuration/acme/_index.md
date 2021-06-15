@@ -122,16 +122,13 @@ External Account Bindings are used to associate your ACME account with an
 external account such as a CA custom database. This is typically not needed for
 most cert-manager users unless you know it is explicitly needed.
 
-External Account Bindings require three fields on an ACME `Issuer` which
+External Account Bindings require two fields on an ACME `Issuer` which
 represents your ACME account. These fields are:
 
 - `keyID` - the key ID or account ID of which your external account binding is indexed by the
 external account manager
 - `keySecretRef` - the name and key of a secret containing a base 64 encoded 
 URL string of your external account symmetric MAC key
-- `keyAlgorithm` - the MAC algorithm used to sign the JSON web string 
-containing your External Account Binding when registering the account with the
-ACME server
 
 > Note: In _most_ cases, the MAC key must be encoded in `base64URL`. The 
 > following command will base64-encode a key and convert it to `base64URL`:
@@ -159,7 +156,6 @@ spec:
       keySecretRef:
         name: eab-secret
         key: secret
-      keyAlgorithm: HS256
     privateKeySecretRef:
       name: example-issuer-account-key
     solvers:
@@ -167,7 +163,12 @@ spec:
         ingress:
           class: nginx
 ```
-
+> Note: cert-manager versions pre-`v1.3.0` also required users to specify the
+> MAC algorithm for EAB by setting
+> `Issuer.spec.acme.externalAccountBinding.keyAlgorithm` field. This field is
+> now deprecated because the upstream Go `x/crypto` library hardcodes the algorithm
+> to `HS256`. (See related discussion upstream
+> [`CL#41430`](https://github.com/golang/go/issues/41430)).
 ### Reusing an ACME Account
 
 You may want to reuse a single ACME account across multiple clusters. This
@@ -313,10 +314,11 @@ spec:
 #### All Together
 
 Each solver is able to have any number of the three selector types defined. In
-the following example, the `DNS01` solver will be used to solve challenges for
-domains for `Certificates` that contain the DNS names `a.example.com` and
-`b.example.com`, or for `test.example.com` and all of its subdomains
-(e.g. `foo.test.example.com`).
+the following example, the `DNS01` solver for CloudFlare will be used to solve
+challenges for domains for `Certificates` that contain the DNS names
+`a.example.com` and `b.example.com`. The `DNS01` solver for Google CloudDNS will
+be used to solve challenges for `Certificates` whose DNS names match
+zone `test.example.com` and all of its subdomains (e.g. `foo.test.example.com`).
 
 For all other challenges, the `HTTP01` solver will be used *only* if the
 `Certificate` also contains the label `"use-http01-solver": "true"`.
@@ -346,6 +348,37 @@ spec:
         dnsNames:
         - 'a.example.com'
         - 'b.example.com'
+    - dns01:
+      cloudDNS:
+        project: my-project-id
+        hostedZoneName: 'test-example.com'
+        serviceAccountSecretRef:
+          key: sa
+          name: gcp-sa-secret
+      selector:
         dnsZones:
-        - 'test.example.com'
+        - 'test.example.com' # This should be the DNS name of the zone
 ```
+
+Each individual selector block can contain more than one selector type  for
+example:
+
+```yaml
+solvers:
+- dns01:
+  cloudflare:
+    email: user@example.com
+    apiKeySecretRef:
+      name: cloudflare-apikey-secret
+      key: apikey
+selector:
+  matchLabels:
+   'email': 'user@example.com'
+   'solver': 'cloudflare'
+  dnsZones:
+    - 'test.example.com'
+    - 'example.dev'
+```
+In this case the `DNS01` solver for CloudFlare will only be used to solve a
+challenge for a DNS name if the `Certificate` has a label from
+`matchLabels` _and_ the DNS name matches a zone from `dnsZones`.
