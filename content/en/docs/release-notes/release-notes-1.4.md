@@ -81,8 +81,8 @@ of the chain in `tls.crt`.
 
 {{% pageinfo color="warning" %}}
 
-⛔️  This is a change of behavior with the CA Issuer, make sure that the change in
-`ca.crt` does not impact you current use.
+⛔️  You may need to adjust systems that consume the `ca.crt` from Secrets
+managed by cert-manager with the CA issuer.
 
 {{% /pageinfo %}}
 
@@ -120,41 +120,11 @@ helm install cert-manager jetstack/cert-manager \
   --set extraArgs="{--feature-gates=ExperimentalCertificateSigningRequestControllers=true}"
 ```
 
-Imagining that you have an existing CA issuer named `my-ca-issuer` in the
-default namespace. To let cert-manager sign your CSR, you (the entity creating
-the CSR) need a [specific
-role](../../usage/kube-csr/#referencing-namespaced-issuers). You can then
-create a CertificateSigningRequest:
+Note that you will still need to manually approve the CSR object before
+cert-manager can sign the CSR.
 
-```sh
-openssl genrsa -out test.key 2048
-kubectl apply -f - <<EOF
-apiVersion: certificates.k8s.io/v1
-kind: CertificateSigningRequest
-metadata:
-  name: test
-spec:
-  groups:
-  - system:authenticated
-  request: $(openssl req -new -key test.key -out /dev/stdout | base64 | tr -d "\n")
-  signerName: issuers.cert-manager.io/default.my-ca-issuer
-  usages:
-  - client auth
-EOF
-```
-
-You will still need to manually approve the CSR since cert-manager does not
-approve CSRs by default
-([unlike](../../concepts/certificaterequest/#approval)
-CertificateRequests that get automatically approved by default):
-
-```sh
-kubectl certificate approve test
-```
-
-cert-manager then signs the CSR. To know more about it, see [the
-documentation](../../usage/kube-csr/) on how use the built-in
-CertificateSigningRequests with cert-manager.
+The documentation is available on the [the Kubernetes CSR usage
+page](../../usage/kube-csr/).
 
 [CertificateSigningRequest]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
 
