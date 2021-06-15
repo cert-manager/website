@@ -314,10 +314,11 @@ spec:
 #### All Together
 
 Each solver is able to have any number of the three selector types defined. In
-the following example, the `DNS01` solver will be used to solve challenges for
-domains for `Certificates` that contain the DNS names `a.example.com` and
-`b.example.com`, or for `test.example.com` and all of its subdomains
-(e.g. `foo.test.example.com`).
+the following example, the `DNS01` solver for CloudFlare will be used to solve
+challenges for domains for `Certificates` that contain the DNS names
+`a.example.com` and `b.example.com`. The `DNS01` solver for Google CloudDNS will
+be used to solve challenges for `Certificates` whose DNS names match
+zone `test.example.com` and all of its subdomains (e.g. `foo.test.example.com`).
 
 For all other challenges, the `HTTP01` solver will be used *only* if the
 `Certificate` also contains the label `"use-http01-solver": "true"`.
@@ -347,6 +348,37 @@ spec:
         dnsNames:
         - 'a.example.com'
         - 'b.example.com'
+    - dns01:
+      cloudDNS:
+        project: my-project-id
+        hostedZoneName: 'test-example.com'
+        serviceAccountSecretRef:
+          key: sa
+          name: gcp-sa-secret
+      selector:
         dnsZones:
-        - 'test.example.com'
+        - 'test.example.com' # This should be the DNS name of the zone
 ```
+
+Each individual selector block can contain more than one selector type  for
+example:
+
+```yaml
+solvers:
+- dns01:
+  cloudflare:
+    email: user@example.com
+    apiKeySecretRef:
+      name: cloudflare-apikey-secret
+      key: apikey
+selector:
+  matchLabels:
+   'email': 'user@example.com'
+   'solver': 'cloudflare'
+  dnsZones:
+    - 'test.example.com'
+    - 'example.dev'
+```
+In this case the `DNS01` solver for CloudFlare will only be used to solve a
+challenge for a DNS name if the `Certificate` has a label from
+`matchLabels` _and_ the DNS name matches a zone from `dnsZones`.
