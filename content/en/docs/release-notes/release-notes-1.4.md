@@ -85,6 +85,27 @@ still available: the intermediate should appear as part of the chain in
 
 {{% /pageinfo %}}
 
+## Vault renewal bug
+
+The renewal behaviour has changed when a Certificate has a `duration` value of
+more than 90 days and `renewBefore` has not been set.
+
+Previously, the Certificate was renewed 30 days before expiry;
+[now](https://github.com/jetstack/cert-manager/pull/4092), the renewal happens
+2/3 through the duration.
+
+This change was necessary to fix a bug where users of the Vault issuer would see
+a clash between the default renewal duration of 30 days and the duration of
+certificates issued by the Vault PKI.
+
+{{% pageinfo color="warning" %}}
+
+⛔️  If you were relying on the default renewal happening 30 days before expiry,
+we would advise setting `renewBefore` to 30 days (`720h`) to keep the old
+behavior.
+
+{{% /pageinfo %}}
+
 # New Features
 
 ## Support for the built-in CertificateSigningRequests
@@ -205,11 +226,6 @@ Edgegrid EdgeDNS v2 API.
 
 # Bug Fixes
 
-- The default certificate renewal duration of 30 days was clashing with the
-  duration of certificates issued by the Vault PKI. All Certificates [are
-  now](https://github.com/jetstack/cert-manager/pull/4092) renewed 2/3 through
-  the duration unless a custom renew period is specified with the setting
-  `spec.renewBefore` on the Certificate.
 - The [RFC2136](https://cert-manager.io/docs/configuration/acme/dns01/rfc2136/)
   issuer is [now](https://github.com/jetstack/cert-manager/pull/3622) able to
   handle DNS-01 challenges that map to multiple `TXT` records. This lets you
