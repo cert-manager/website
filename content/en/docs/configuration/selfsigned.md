@@ -72,6 +72,11 @@ The YAML below will create a `SelfSigned` issuer, issue a root certificate and
 use that root as a `CA` issuer:
 
 ```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sandbox
+---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
@@ -82,12 +87,15 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: osm-ca
+  name: my-selfsigned-ca
   namespace: sandbox
 spec:
   isCA: true
-  commonName: osm-system
-  secretName: osm-ca
+  commonName: my-selfsigned-ca
+  secretName: root-secret
+  privateKey:
+    algorithm: ECDSA
+    size: 256
   issuerRef:
     name: selfsigned-issuer
     kind: ClusterIssuer
@@ -96,11 +104,11 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: osm-ca
+  name: my-ca-issuer
   namespace: sandbox
 spec:
   ca:
-    secretName: osm-ca
+    secretName: root-secret
 ```
 
 ### CRL Distribution Points

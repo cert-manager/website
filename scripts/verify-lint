@@ -26,13 +26,13 @@ cd "${REPO_ROOT}"
 
 echo "+++ Running 'alex' - ignoring any failures"
 "${REPO_ROOT}/node_modules/.bin/alex" \
-	content/ || true
+  content/ || true
 
 echo "+++ Running remark"
 "${REPO_ROOT}/node_modules/.bin/remark" \
-	--rc-path ".remarkrc" \
-	--frail \
-	content/
+  --rc-path ".remarkrc" \
+  --frail \
+  content/
 
 echo "+++ Running spell check"
 "${REPO_ROOT}/node_modules/.bin/mdspell" \
@@ -55,4 +55,16 @@ echo "+++ Running spell check"
   "!content/en/v1.1-docs/reference/api-docs.md" \
   "!content/en/v1.2-docs/reference/api-docs.md" \
   "!content/en/v1.3-docs/reference/api-docs.md" \
-  "!content/en/next-docs/reference/api-docs.md"
+  "!content/en/next-docs/**/*.md"
+
+# About "!content/en/next-docs/**/*.md":
+#
+# mdspell can fail on master due to words that have been added to the
+# release-next branch and aren't on master yet. Since we pull the release-next
+# branch into content/en/next-docs, the yet-to-be-ignored words are unknown to
+# mdspell.
+#
+# As an example, the PR https://github.com/cert-manager/website/pull/570 added
+# the new spellings "andreas-p" and "renewBefore" to the release-next branch.
+# After the merge, all builds on master started failing since "andreas-p" and
+# "renewBefore" were not present on the master branch's .spelling file.
