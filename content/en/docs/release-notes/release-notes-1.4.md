@@ -217,9 +217,10 @@ Edgegrid EdgeDNS v2 API.
 - The comparison function `PublicKeysEqual` is
   [now](https://github.com/jetstack/cert-manager/pull/3914) correct for public
   keys.
-- The upgrade from v1.3.0 to 1.4.0 with Helm and `--set installCRDs=true` is
-  [now](https://github.com/jetstack/cert-manager/pull/3882) possible. This issue
-  was due to [a Helm
+- A Helm upgrade bug was
+  [fixed](https://github.com/jetstack/cert-manager/pull/3882), you should now
+  able to upgrade from 1.3.1 to 1.4.0 when `--set installCRDs=true` is used.
+  This issue was due to [a Helm
   bug](https://github.com/helm/helm/issues/5806#issuecomment-788116838) with the
   `minimum` field on the CRDs.
 - The ACME issuer [now](https://github.com/jetstack/cert-manager/pull/3866)
