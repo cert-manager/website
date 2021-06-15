@@ -48,7 +48,10 @@ resources][upgrade-resources] page.
 
 {{% /pageinfo %}}
 
+This change was made in the cert-manager PR [#4021][].
+
 [upgrade-resources]: ../../installation/upgrading/remove-deprecated-apis/#upgrading-existing-cert-manager-resources
+[#4021]: https://github.com/jetstack/cert-manager/pull/4021 "Warn about removal of old v1alpha2, v1alpha3 and v1beta1 in 1.6"
 
 ### Helm chart: `securityContext` defaults to non-root
 
@@ -74,6 +77,10 @@ will need to set this back to `false`.
 
 {{% /pageinfo %}}
 
+Implemented in the cert-manager PR [#4036][].
+
+[#4036]: https://github.com/jetstack/cert-manager/pull/4036 "controller, cainject and webhook now run as non-root"
+
 ### CA, Vault and Venafi issuer handling of `ca.crt` and `tls.crt`
 
 The CA, Vault, and Venafi issuer now produce a `tls.crt` that is de-duplicated,
@@ -84,9 +91,7 @@ The CA issuer now produces a `ca.crt` that contains the "most" root CA that
 cert-manager is aware of. `ca.crt` may thus not be the actual self-signed root
 CA, since cert-manager may not be aware of it.
 
-[#3982]: https://github.com/jetstack/cert-manager/pull/3982 "All issuers + Vault issuer"
-[#3983]: https://github.com/jetstack/cert-manager/pull/3983 "Venafi issuer"
-[#3985]: https://github.com/jetstack/cert-manager/pull/3985 "CA issuer"
+Fixed in the cert-manager PRs [#3982][], [#3983][], and [#3985][].
 
 {{% pageinfo color="warning" %}}
 
@@ -94,6 +99,10 @@ CA, since cert-manager may not be aware of it.
 managed by cert-manager with the CA issuer.
 
 {{% /pageinfo %}}
+
+[#3982]: https://github.com/jetstack/cert-manager/pull/3982 "All issuers + Vault issuer"
+[#3983]: https://github.com/jetstack/cert-manager/pull/3983 "Venafi issuer"
+[#3985]: https://github.com/jetstack/cert-manager/pull/3985 "CA issuer"
 
 
 ### Vault renewal bug
@@ -116,6 +125,10 @@ behavior.
 
 {{% /pageinfo %}}
 
+Fixed in the cert-manager PR [#4092][].
+
+[#4092]: https://github.com/jetstack/cert-manager/pull/4092 "Defaukt renewal changed from 30 days before to 2/3 of the duration before expiry"
+
 ## New Features
 
 ### Experimental Support for Kubernetes CertificateSigningRequests
@@ -136,6 +149,9 @@ cert-manager can sign the CSR.
 The documentation is available on the [the Kubernetes CSR usage
 page](../../usage/kube-csr/).
 
+Implemented in cert-manager PR [#4064][].
+
+[#4064]: https://github.com/jetstack/cert-manager/pull/4064 "CA issuer experimental support for CertificateSigningRequests"
 [CertificateSigningRequest]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
 
 ### Helm chart: webhook externally accessible for bare-metal
@@ -155,6 +171,8 @@ webhook:
   url:
     host: 198.51.100.20
 ```
+
+Implemented in the cert-manager PR [#4064][].
 
 ### Helm chart: Service labels
 
@@ -180,6 +198,10 @@ With the above example, the source label
 `__meta_kubernetes_service_label_app='armada-api'` becomes the new label
 `app='armada-api'` when metrics related to this Service are scraped.
 
+Implemented in the cert-manager PR [#4009][].
+
+[#4009]: https://github.com/jetstack/cert-manager/pull/4009 "Helm chart: the Service labels can now be set on the controller"
+
 ### Akamai DNS01 solver
 
 The Akamai DNS01 solver has been [updated][4007] to use the v2 of the `OPEN
@@ -192,18 +214,132 @@ EdgeGrid` Go package.
 - The [RFC2136](https://cert-manager.io/docs/configuration/acme/dns01/rfc2136/)
   issuer is now able to handle DNS01 challenges that map to multiple `TXT`
   records. This lets you create Let's Encrypt certificates using RFC2136 with
-  multiple DNS names.
+  multiple DNS names. Fixed in the cert-manager PR [#3622][].
 - The comparison function `PublicKeysEqual` is now correct for public keys.
+  Fixed in PR [#3914][].
 - The ACME issuer now works correctly with Certificates that have a long name
   (52 characters or more). These Certificates would not get renewed due to
-  non-unique `Order` names being generated.
+  non-unique Order names being generated. Fixed in the cert-manager PR
+  [#3866][].
 - Orders that are used with a misbehaving ACME server should not get stuck
   anymore. By misbehaving, we mean an ACME server that would validate the
-  authorizations before having set the status of the order to "ready".
-- The internal signers now set the condition `Ready=False` with the reason
-  `RequestDenied` when a CertificateRequest is `Denied`. This is to keep the
-  same behavior where a terminal state of a CertificateRequest should have a
-  `Ready` condition.
+  authorizations before having set the status of the order to "ready". Fixed in
+  the cert-manager PR [#3805][].
+- The internal issuers now set the condition `Ready=False` with the reason
+  `RequestDenied` when a CertificateRequest has been `Denied`. This is to keep
+  the same behavior where a terminal state of a CertificateRequest should have a
+  `Ready` condition. Fixed in the cert-manager PR [#3878][].
+
+[#3622]: https://github.com/jetstack/cert-manager/pull/3622 "RFC2136 fixed when used with challenge domains that contain multiple TXT records"
+[#3914]: https://github.com/jetstack/cert-manager/pull/3914 "Comparison between public keys now works properly"
+[#3866]: https://github.com/jetstack/cert-manager/pull/3866 "Certificates with long names are not generated non-unique Orders anymore"
+[#3805]: https://github.com/jetstack/cert-manager/pull/3805 "Misbehaving ACME servers won't get Orders stuck anymore"
+[#3878]: https://github.com/jetstack/cert-manager/pull/3878 "When a CertificateRequest is Denied, the internal issuers set Ready=False"
+
+## Other Changes
+
+- The cert-manager controller now uses the `configmapsleases` resource instead
+  of the `configmaps` one for leader election. The only noticeable difference is
+  that a new `Lease` object is now being created in the leader election
+  namespace. Implemented in the cert-manager PR [#4016][].
+
+[#4016]: https://github.com/jetstack/cert-manager/pull/4016 "Use the configmapsleases resource instead of configmaps"
+
+- The `keyAlgorithm` for the ACME Issuer is now deprecated, and the EAB MAC
+  algorithm is now hardcoded to `HS256`.
+
+    ```yaml
+    apiVersion: cert-manager.io/v1
+    kind: Issuer
+      spec:
+        acme:
+          externalAccountBinding:
+            keyAlgorithm: HS256      # DEPRECATED.
+    ```
+    Previously, we used to have a fork of `golang/crypto` which allowed us to set
+    the EAB MAC algorithm. We now use the upstream version of `golang/crypto`
+    where the EAB MAC algorithm is hardcoded to HS256.
+
+    This change were implemented in the cert-manager PRs [#3877][] and [#3936][].
+
+[#3877]: https://github.com/jetstack/cert-manager/pull/3877 "Deprecation of the keyAlgorithm field"
+[#3936]: https://github.com/jetstack/cert-manager/pull/3936 "Webhook warns the user when keyAlgorithm is used"
+
+- If you happen to look at the cert-manager controller logs, you may see this
+  new message about optimistic locking:
+
+    ```
+    I0419 controller.go:158] msg="re-queuing item due to optimistic locking on resource" error="Operation cannot be fulfilled on certificates.cert-manager.io   sauron-adverts-evo-app-tls: the object has been modified; please apply your changes to the latest version and try again"
+    ```
+
+    This message, shown at the `info` level, replaces the `error` level message
+    that showed previously:
+
+    ```
+    E0419 controller.go:158] msg="re-queuing item due to error processing" error="Operation cannot be fulfilled on certificates.cert-manager.io sauron-adverts-evo-app-tls: the   object has been modified; please apply your changes to the latest version and try again"
+    ```
+
+    The goal is to prevent users from thinking that the optimistic locking
+    mechanism has to do with their issues, when in reality it mostly isn't and is
+    the normal operation mode for Kubernetes controllers.
+
+    Fixed in the cert-manager PR [#3794][].
+
+[#3794]: https://github.com/jetstack/cert-manager/pull/3794 "Less alarming message on optimistic locking errors"
+
+- The `util.UsageContentCommittment` (which contained a spelling mistake) was
+  deprecated in favor of `util.UsageContentCommitment`. The only people impacted
+  by this deprecation are the the people importing the Go package
+  `github.com/jetstack/cert-manager/pkg/api/util`.
+
+[#3860]: https://github.com/jetstack/cert-manager/pull/3860 "Fix a spelling mistake in a cert-manager Go package and deprecate the old name"
+
+- The webhook now panics when it is not able to register the API schemes.
+  Previously, the webhook would silently skip the error and start.
+
+[#4037]: https://github.com/jetstack/cert-manager/pull/4037 "Webhook now panics instead of silently starting if the API scheme cannot be registered"
+
+- A couple of legacy functions in `test/e2e/util` package have been removed.
+  These functions can be found in the `test/unit/gen` package.
+
+[#3873]: https://github.com/jetstack/cert-manager/pull/3873 "Legacy functions in the test/e2e/util have been removed"
+
+- The Kubernetes Go packages have been updated from `v0.19.0` to `v0.21.0`.
+
+[#3926]: https://github.com/jetstack/cert-manager/pull/3926 "Update Kubernetes Go imports from v0.19.0 to v0.21.0"
+
+- When waiting for DNS propagating, the ACME DNS01 self-check now returns a
+  better message when an unexpected DNS response code is received, such as
+  `SERVFAIL`.
+
+    Before:
+    ```
+    Could not find the start of authority
+    ```
+
+    After:
+    ```
+    Could not find the SOA record in the DNS tree
+    for the domain '_acme-challenge.foo.example.com'
+    using nameservers [8.8.8.8, 8.8.4.4]
+    ```
+
+    In addition to the above, you will get a new message when the DNS returns an
+    unexpected response code:
+
+    ```
+    When querying the SOA record for the domain
+    '_acme-challenge.foo.example.com' using nameservers
+    [8.8.8.8, 8.8.4.4], rcode was expected to be 'NOERROR'
+    or 'NXDOMAIN', but got 'SERVFAIL'
+    ```
+
+    Fixed in the cert-manager PR [#3906][].
+
+[#3906]: https://github.com/jetstack/cert-manager/pull/3906 "Better message when the ACME DNS01 self-check gets an unexpected DNS response code"
+
+- The `distroless/static` base image was updated to the latest version as of
+  2021-05-20.
 
 ## Honorable mentions
 
