@@ -253,8 +253,20 @@ retweets
 upstream
 JetstackHQ
 acme-dns
+Ramlot
 andreas-p
 renewBefore
+erikgb
+eddiehoffman
+inteon
+anton-johansson
+edglynes
+jandersen-plaid
+foosinn
+clatour
+tamalsaha
+JoshVanL
+Kyverno
 hardcodes
 
 # As per https://tools.ietf.org/html/rfc5280, the spelling "X.509" is the
