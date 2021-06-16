@@ -16,7 +16,7 @@ In order to issue any certificates, you'll need to configure an
 
 ## Creating Certificate Resources
 
-A `Certificate` resource specifies fields that are used to generated certificate
+A `Certificate` resource specifies fields that are used to generate certificate
 signing requests which are then fulfilled by the issuer type you have
 referenced. `Certificates` specify which issuer they want to obtain the
 certificate from by specifying the `certificate.spec.issuerRef` field.
@@ -91,15 +91,6 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 > from functioning correctly
 > [`#1269`](https://github.com/jetstack/cert-manager/issues/1269).
 
-> Note: Take care when setting the `renewBefore` field to be very close to the
-> `duration` as this can lead to a renewal loop, where the `Certificate` is always
-> in the renewal period. Some `Issuers` set the `notBefore` field on their
-> issued X.509 certificates before the issue time to fix clock-skew issues,
-> leading to the working duration of a certificate to be less than the full
-> duration of the certificate. For example, Let's Encrypt sets it to be one hour
-> before issue time, so the actual *working duration* of the certificate is 89
-> days, 23 hours (the *full duration* remains 90 days).
-
 A full list of the fields supported on the Certificate resource can be found in
 the [API reference documentation](../../reference/api-docs/#cert-manager.io/v1alpha2.CertificateSpec)
 
@@ -173,3 +164,13 @@ This means that deleting a `Certificate` won't take down any services that are c
 The `Secret` needs to be manually deleted if it is no longer needed.
 
 If you would prefer the `Secret` to be deleted automatically when the `Certificate` is deleted, you need to configure your installation to pass the `--enable-certificate-owner-ref` flag to the controller.
+
+## Renewal
+
+`cert-manager` will automatically renew issued certificates. It will calculate _when_ to renew a certificate based on certificate's duration and a 'renewBefore' value which specifies _how long_ before expiry a certificate should be renewed.
+
+`spec.duration` and `spec.renewBefore` fields on a `Certificate` can be used to specify custom duration and 'renewBefore' values for a certificate. Default values for these fields are 90 days and 30 days respectively. Some issuers might be configured to only issue certificates with a set duration, so the actual duration may be different.
+Minimum value for `spec.duration` is 1 hour and minimum value for `spec.renewBefore` is 5 minutes.
+It is also required that `spec.duration` > `spec.renewBefore` so if you set `spec.duration` to a value smaller than 30 days (720 hours) you will also need to set `spec.renewBefore` to some smaller value.
+
+Once a certificate has been issued, `cert-manager` will calculate _how long_ before expiry a cert should be renewed using the formula `min(spec.renewBefore, actual_duration / 3)` and use this value to calculate _when_ a certificate should be renewed. `Certifcate`'s `status.RenewalTime` field will then be set to the time when renewal will be attempted.

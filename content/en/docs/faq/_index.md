@@ -52,7 +52,7 @@ spec:
 
 ### If `renewBefore` or `duration` is not defined, what will be the default value?
 cert-manager will default to a `duration` of [90 days](https://github.com/jetstack/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26) with a `renewBefore` of [30 days](https://github.com/jetstack/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L32).
-If `renewBefore` is not set and the duration of the signed certificate is shorter or equal to 30 days, the `renewBefore` time will be set to 2/3 of the signed certificate validity duration.
+The renewal time of the certificate will be calculated using the formula `min(duration / 3, renewBefore)`, see [renewal](../usage/certificate/#renewal) for more detail.
 When setting `duration` it is recommended to also set `renewBefore`, if `renewBefore` is longer than `duration` you will receive an error.
 
 ## Miscellaneous
@@ -70,8 +70,10 @@ because such certificates increase the opportunity for attacks on the Kubernetes
 
 In Kubernetes 1.19 the [Certificate Signing Requests API] has reached V1
 and it can be used more generally by following (or automating) the [Request Signing Process].
-There are plans for cert-manager make greater use of this API now that it is stable.
+
+cert-manager currently has some [limited experimental support] for this resource.
 
 [Certificate Signing Requests API]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#certificatesigningrequest-v1-certificates-k8s-io
 [`kubectl certificates` command]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#certificate
 [Request signing process]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process
+[limited experimental support]: ../usage/kube-csr/
