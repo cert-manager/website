@@ -39,9 +39,9 @@ These APIs will be removed in cert-manager 1.6.
 {{% pageinfo color="warning" %}}
 
 ⛔️  If you are upgrading cert-manager on a cluster which has previously had
-cert-manager < `v1.0.0`, you will need to ensure that all cert-manager custom resources
-are stored in etcd at `v1` version and that cert-manger CRDs do not reference the deprecated APIs
-**by the time you upgrade to `v1.6`**.
+cert-manager < `v1.0.0`, you will need to ensure that all cert-manager custom
+resources are stored in `etcd` at `v1` version and that cert-manger CRDs do not
+reference the deprecated APIs **by the time you upgrade to `v1.6`**.
 
 This is explained in more detail in the [Upgrading existing cert-manager
 resources][upgrade-resources] page.
@@ -246,7 +246,7 @@ EdgeGrid` Go package.
 [#4016]: https://github.com/jetstack/cert-manager/pull/4016 "Use the configmapsleases resource instead of configmaps"
 
 - The `keyAlgorithm` for the ACME Issuer is now deprecated, and the EAB MAC
-  algorithm is now hardcoded to `HS256`.
+  algorithm is now hard-coded to `HS256`.
 
     ```yaml
     apiVersion: cert-manager.io/v1
@@ -258,7 +258,7 @@ EdgeGrid` Go package.
     ```
     Previously, we used to have a fork of `golang/crypto` which allowed us to set
     the EAB MAC algorithm. We now use the upstream version of `golang/crypto`
-    where the EAB MAC algorithm is hardcoded to HS256.
+    where the EAB MAC algorithm is hard-coded to HS256.
 
     This change were implemented in the cert-manager PRs [#3877][] and [#3936][].
 
@@ -304,7 +304,7 @@ EdgeGrid` Go package.
 
 [#3873]: https://github.com/jetstack/cert-manager/pull/3873 "Legacy functions in the test/e2e/util have been removed"
 
-- The Kubernetes Go packages have been updated from `v0.19.0` to `v0.21.0`.
+- The Kubernetes Go dependencies have been updated from `v0.19.0` to `v0.21.0`.
 
 [#3926]: https://github.com/jetstack/cert-manager/pull/3926 "Update Kubernetes Go imports from v0.19.0 to v0.21.0"
 
