@@ -1,16 +1,17 @@
 ---
-title: "Welcome to cert-manager"
-linkTitle: "Welcome to cert-manager"
+title: "cert-manager"
+linkTitle: "cert-manager"
 weight: 10
 type: "docs"
 ---
 
-cert-manager is a native [Kubernetes](https://kubernetes.io) certificate
-management controller. It can help with issuing certificates from a
-variety of sources, such as [Let's Encrypt](https://letsencrypt.org),
-[HashiCorp Vault](https://www.vaultproject.io),
-[Venafi](https://www.venafi.com/), a simple signing key pair, or self
-signed.
+cert-manager adds certificates and certificate issuers as resource types in
+Kubernetes clusters, and simplifies the process of obtaining, renewing and
+using those certificates.
+
+It can issue certificates from a variety of supported sources, including
+[Let's Encrypt](https://letsencrypt.org), [HashiCorp Vault](https://www.vaultproject.io),
+and [Venafi](https://www.venafi.com/) as well as private PKI.
 
 It will ensure certificates are valid and up to date, and attempt to
 renew certificates at a configured time before expiry.
@@ -22,5 +23,6 @@ wisdom from other similar projects such as
 
 ![High level overview diagram explaining cert-manager architecture](/images/high-level-overview.svg)
 
-This is the full technical documentation for the project, and should be
-used as a source of references when seeking help with the project.
+This website provides the full technical documentation for the project, and can be
+used as a reference; if you feel that there's anything missing, please let us know
+or [raise a PR](https://github.com/cert-manager/website/pulls) to add it.
