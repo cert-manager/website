@@ -30,6 +30,7 @@ REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 	--repo-url https://github.com/cert-manager/website.git \
 	--repo-content-dir content/en/docs \
 	--output-dir "${REPO_ROOT}/content/en" \
+	--branches v1.4-docs=release-1.4 \
 	--branches v1.3-docs=release-1.3 \
 	--branches v1.2-docs=release-1.2 \
 	--branches v1.1-docs=release-1.1 \
