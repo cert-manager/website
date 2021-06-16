@@ -1,7 +1,7 @@
 ---
 title: "Release Notes"
 linkTitle: "v1.4"
-weight: 800
+weight: 790
 type: "docs"
 ---
 
@@ -44,13 +44,13 @@ resources are stored in `etcd` at `v1` version and that cert-manger CRDs do not
 reference the deprecated APIs **by the time you upgrade to `v1.6`**.
 
 This is explained in more detail in the [Upgrading existing cert-manager
-resources][upgrade-resources] page.
+resources](../../installation/upgrading/remove-deprecated-apis/#upgrading-existing-cert-manager-resources)
+page.
 
 {{% /pageinfo %}}
 
 This change was made in the cert-manager PR [#4021][].
 
-[upgrade-resources]: ../../installation/upgrading/remove-deprecated-apis/#upgrading-existing-cert-manager-resources
 [#4021]: https://github.com/jetstack/cert-manager/pull/4021 "Warn about removal of old v1alpha2, v1alpha3 and v1beta1 in 1.6"
 
 ### Helm chart: `securityContext` defaults to non-root
