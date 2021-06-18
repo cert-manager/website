@@ -165,7 +165,7 @@ Denied CertificateRequest 'my-app/my-app'
 ### Experimental
 The cert-manager plugin contains experimental commands for operations which are
 currently under evaluation to be included into cert-manager proper. The
-behaviour and interface of these commands are subject to change or removal in
+behavior and interface of these commands are subject to change or removal in
 future releases.
 
 

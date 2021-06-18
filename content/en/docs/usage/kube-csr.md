@@ -124,15 +124,15 @@ Requester annotations:
 
 - `experimental.cert-manager.io/private-key-secret-name`: **Set by the
     requester**. Required only for the SelfSigned signer. Used to reference a
-    Secret which contains the PEM encoded private key of the requesters X.509
-    certificate signing request at key `tls.key`. Used to sign the requesters
+    Secret which contains the PEM encoded private key of the requester's X.509
+    certificate signing request at key `tls.key`. Used to sign the requester's
     request.
 
 - `venafi.experimental.cert-manager.io/custom-fields`: **Set by the
     requester**. Optional for only the Venafi signer. Used for adding custom
-    fields to the Venafi request. This will only work with Venafi TPP v19.3 and
-    higher. The value is a JSON array with objects containing the name and value
-    keys, for example:
+    fields to the Venafi request. This will only work with Venafi TPP `v19.3`
+    and higher. The value is a JSON array with objects containing the name and
+    value keys, for example:
     ```
     venafi.experimental.cert-manager.io/custom-fields: |-
       [
