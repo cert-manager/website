@@ -13,8 +13,8 @@ request an X.509 signed certificate from a referenced Certificate Authority
 (CA).
 
 Using this resource may be useful for users who are using an application that
-supports this resource, and not the cert-manager CertificateRequest resource,
-but they still wish for certificates to be signed through cert-manager.
+supports this resource, but not the cert-manager CertificateRequest resource,
+and they still wish for certificates to be signed through cert-manager.
 
 #### Feature State
 
@@ -41,8 +41,8 @@ $ helm install \
   # --set installCRDs=true
 ```
 
-> Note: cert-manager currently only supports signing CertificateSigningRequests
-> using the [CA issuer](../../configuration/ca/).
+> Note: cert-manager supports signing CertificateSigningRequests
+> using all [internal Issuers](../../configuration/).
 
 > Note: cert-manager _does not_ automatically approve CertificateSigningRequests
 > that reference a cert-manager [Issuer](../../configuration/). Please refer to
@@ -113,6 +113,8 @@ values that do not exist as `spec` or `status` fields on the
 CertificateSigningRequest resource. These fields are either set by the
 _requester_ or by the _signer_ as labelled below.
 
+Requester annotations:
+
 - `experimental.cert-manager.io/request-duration`: **Set by the requester**. Accepts
     a [Go time duration](https://golang.org/pkg/time/#ParseDuration) string
     specifying the requested certificate duration. Defaults to 90 days.
@@ -120,6 +122,46 @@ _requester_ or by the _signer_ as labelled below.
 - `experimental.cert-manager.io/request-is-ca`: **Set by the requester**. If set to
     `"true"`, will request for a CA certificate.
 
+- `experimental.cert-manager.io/private-key-secret-name`: **Set by the
+    requester**. Required only for the SelfSigned signer. Used to reference a
+    Secret which contains the PEM encoded private key of the requesters X.509
+    certificate signing request at key `tls.key`. Used to sign the requesters
+    request.
+
+- `venafi.experimental.cert-manager.io/custom-fields`: **Set by the
+    requester**. Optional for only the Venafi signer. Used for adding custom
+    fields to the Venafi request. This will only work with Venafi TPP v19.3 and
+    higher. The value is a JSON array with objects containing the name and value
+    keys, for example:
+    ```
+    venafi.experimental.cert-manager.io/custom-fields: |-
+      [
+        {"name": "field-name", "value": "field value"},
+        {"name": "field-name-2", "value": "field value 2"}
+      ]
+    ```
+
+Signer annotations:
+
 - `experimental.cert-manager.io/ca`: **Set by the signer**. Once signed, the
-    signer will populate this annotation with the base 64 encode CA certificate
-    of the signing chain.
+    signer will populate this annotation with the base 64 encoded CA certificate
+    of the signing chain. This annotation will always be present after signing,
+    however may have an empty value if a CA certificate is not available.
+
+- `venafi.experimental.cert-manager.io/pickup-id`: **Set by the signer**. Only
+    used for the Venafi signer. Used to record the Venafi Pickup ID of a
+    certificate signing request that has been submitted to the Venafi API for
+    collection during issuance.
+
+## Usage
+
+CertificateSigningRequests can be manually created using the
+[kubectl cert-manager plugin](../kubectl-plugin/#experimental).
+This command takes a manifest file containing a
+[Certificate](../../usage/certificate/) resource as input. This generates a
+private key and creates a CertificateSigningRequest. CertificateSigningRequests
+are not approved by default, so you will likely need to approve it manually:
+
+```bash
+$ kubectl certificate approve <name>
+```
