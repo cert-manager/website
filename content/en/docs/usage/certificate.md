@@ -167,10 +167,10 @@ If you would prefer the `Secret` to be deleted automatically when the `Certifica
 
 ## Renewal
 
-`cert-manager` will automatically renew issued certificates. It will calculate _when_ to renew a certificate based on certificate's duration and a 'renewBefore' value which specifies _how long_ before expiry a certificate should be renewed.
+cert-manager will automatically renew `Certificate`s. It will calculate _when_ to renew a `Certificate` based on the issued X.509 certificate's duration and a 'renewBefore' value which specifies _how long_ before expiry a certificate should be renewed.
 
-`spec.duration` and `spec.renewBefore` fields on a `Certificate` can be used to specify custom duration and 'renewBefore' values for a certificate. Default values for these fields are 90 days and 30 days respectively. Some issuers might be configured to only issue certificates with a set duration, so the actual duration may be different.
+`spec.duration` and `spec.renewBefore` fields on a `Certificate` can be used to specify an X.509 certificate's duration and a 'renewBefore' value. Default value for `spec.duration` is 90 days. Some issuers might be configured to only issue certificates with a set duration, so the actual duration may be different.
 Minimum value for `spec.duration` is 1 hour and minimum value for `spec.renewBefore` is 5 minutes.
-It is also required that `spec.duration` > `spec.renewBefore` so if you set `spec.duration` to a value smaller than 30 days (720 hours) you will also need to set `spec.renewBefore` to some smaller value.
+It is also required that `spec.duration` > `spec.renewBefore`.
 
-Once a certificate has been issued, `cert-manager` will calculate _how long_ before expiry a cert should be renewed using the formula `min(spec.renewBefore, actual_duration / 3)` and use this value to calculate _when_ a certificate should be renewed. `Certifcate`'s `status.RenewalTime` field will then be set to the time when renewal will be attempted.
+Once an X.509 certificate has been issued, cert-manager will calculate the renewal time for the `Certificate`. By default this will be 2/3 through the X.509 certificate's duration. If `spec.renewBefore` has been set, it will be `spec.renewBefore` amount of time before expiry. cert-manager will set `Certificate`'s `status.RenewalTime` to the time when the renewal will be attempted.
