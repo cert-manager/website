@@ -1,7 +1,7 @@
 ---
 title: "Upgrading from v1.3 to v1.4"
 linkTitle: "v1.3 to v1.4"
-weight: 820
+weight: 780
 type: "docs"
 ---
 
