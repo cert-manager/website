@@ -162,7 +162,7 @@ page if a step is missing or if it is outdated.
        git checkout -b release-1.0 origin/master
        ```
 
-    - **(subsequent alpha, beta and final releases only)**; You need to
+    - **(subsequent alpha and initial beta)**; You need to
       update the release branch with the latest commits from the master
       branch, as follows:
 
@@ -173,10 +173,23 @@ page if a step is missing or if it is outdated.
        git checkout release-1.0
        git merge --ff-only origin/master
        ```
+    - **(subsequent beta, patch release and final release)**: do nothing since
+      things have been merged using `/cherry-pick release-1.0`.
 
-       Patch releases do not require this `git merge --ff-only` step, since
-       the merge is done by opening a PR using the `/cherry-pick
-       release-1.0` command.
+       **Note about the code freeze:**
+
+       The first beta starts a new "code freeze" period that lasts until the
+       final release. Just before the code freeze, we fast-forward everything
+       from master into the release branch.
+
+       During the code freeze, we continue merging PRs into master as usual.
+
+       We don't fast-forward master into the release branch for the second (and
+       subsequent) beta, and only `/cherry-pick release-1.0` the fixes that should be part
+       of the subsequent beta.
+
+       We don't fast-forward for patch releases and final releases; instead, we
+       prepare these releases using the `/cherry-pick release-1.0` command.
 
 4. Push the new or updated release branch:
 
