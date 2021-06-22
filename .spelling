@@ -252,6 +252,7 @@ versioning
 cert-manager-dev
 backport
 kubernetes-supported-versions
+openshift-supported-versions
 prepended
 retweets
 upstream
