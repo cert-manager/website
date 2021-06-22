@@ -5,7 +5,10 @@ weight: 10
 type: "docs"
 ---
 
-## Configuring HTTP01 Ingress Provider
+cert-manager uses your existing Ingress or Gateway configuration in order to
+solve HTTP01 challenges.
+
+## Configuring the HTTP01 Ingress solver
 
 This page contains details on the different options available on the `Issuer`
 resource's HTTP01 challenge solver configuration. For more information on
@@ -66,7 +69,7 @@ This mode should be avoided when using ingress controllers that expose a single
 IP for all ingress resources, as it can create compatibility problems with
 certain ingress-controller specific annotations.
 
-### `serviceType`
+### `serviceType` {#ingress-service-type}
 
 In rare cases it might be not possible/desired to use `NodePort` as type for the
 HTTP01 challenge response service, e.g. because of Kubernetes limit
@@ -155,3 +158,71 @@ The added labels and annotations will merge on top of the cert-manager defaults,
 overriding entries with the same key.
 
 No other fields of the ingress can be edited.
+
+## Configuring the HTTP01 Gateway API solver
+
+This feature, introduced in cert-manager 1.5, is currently experimental and
+subject to change.
+
+{{% pageinfo color="info" %}}
+
+📌  This feature requires the installation of the Gateway API CRDs. No
+additional flag is needed on the cert-manager controller; cert-manager discovers
+the presence of the Gateway API CRDs to turn on the ACME HTTP-01 solver.
+
+To install the Gateway API CRDs, run the following command:
+
+```sh
+kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.3.0" | kubectl apply -f -
+```
+
+{{% /pageinfo %}}
+
+Here is an example of a HTTP-01 ACME issuer:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+spec:
+  acme:
+    solvers:
+      - http01:
+          gatewayHTTPRoute:
+            labels:
+              gateway: http01-solver
+```
+
+### `serviceType` {#gatewayhttproute-service-type}
+
+This field has the same meaning as the
+[http01.ingress.serviceType](#ingress-service-type).
+
+### `labels` {#gatewayhttproute-labels}
+
+These labels are copied into the temporary HTTPRoute created by cert-manager for
+solving the HTTP-01 challenge. These labels must match one of the Gateway
+resources on your cluster. The matched Gateway have a listener on port 80.
+
+For example, a valid Gateway resource may look like this:
+
+```yaml
+apiVersion: networking.x-k8s.io/v1alpha1
+kind: Gateway
+metadata:
+  name: traefik
+spec:
+  gatewayClassName: traefik
+  listeners:
+  - protocol: HTTP
+    port: 80
+    routes:
+      kind: HTTPRoute
+      selector:
+        matchLabels:
+          gateway: http01-solver
+      namespaces:
+        from: All
+```
+
+Note that you do not need to have a separate Gateway for solving HTTP-01
+challenges.
