@@ -64,10 +64,49 @@ Install the `CustomResourceDefinitions` and cert-manager itself
 oc apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.0/cert-manager.yaml
 ```
 
-## Installing with cert-manager operator
+## Installing with Operator Lifecycle Manager and OperatorHub Web Console
 
-On OpenShift 4 you can also install cert-manager via the OperatorHub using the [cert-manager operator](https://catalog.redhat.com/software/operators/detail/5e999d862937381642a21c7a), this can be found under Red Hat OpenShift Certified Operators in the Embedded OperatorHub of your OpenShift installation.
-Any values set in the Operator configuration get passed through as Helm values.
+cert-manager is in the [Red Hat-provided Operator catalog][] called "community-operators".
+On OpenShift 4 you can install cert-manager from the [OperatorHub web console][] or from the command line.
+These installation methods are described in Red Hat's [Adding Operators to a cluster][] documentation.
+
+[Red Hat-provided Operator catalog]: https://docs.openshift.com/container-platform/4.7/operators/understanding/olm-rh-catalogs.html#olm-rh-catalogs_olm-rh-catalogs
+[OperatorHub web console]: https://docs.openshift.com/container-platform/4.7/operators/understanding/olm-understanding-operatorhub.html
+[Adding Operators to a cluster]: https://docs.openshift.com/container-platform/4.7/operators/admin/olm-adding-operators-to-cluster.html
+
+
+### Release Channels
+
+Whichever installation method you chose, there will now be an [OLM Subscription resource][] for cert-manager,
+tracking the "stable" release channel. E.g.
+
+```console
+$ kubectl get subscription cert-manager -n operators -o yaml
+...
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: cert-manager
+...
+status:
+  currentCSV: cert-manager.v1.4.0
+  state: AtLatestKnown
+...
+```
+
+This means that OLM will discover new cert-manager releases in the stable channel,
+and, depending on the Subscription settings it will upgrade cert-manager automatically,
+when new releases become available.
+Read [Manually Approving Upgrades via Subscriptions][] for information about automatic and manual upgrades.
+
+[OLM Subscription resource]: https://olm.operatorframework.io/docs/concepts/crds/subscription/
+[Manually Approving Upgrades via Subscriptions]: https://olm.operatorframework.io/docs/concepts/crds/subscription/#manually-approving-upgrades-via-subscriptions
+
+NOTE: There is a single release channel called "stable" which will contain all cert-manager releases, shortly after they are released.
+In future we may introduce other release channels with alternative release schedules,
+in accordance with [OLM's Recommended Channel Naming][].
+
+[OLM's Recommended Channel Naming]: https://olm.operatorframework.io/docs/best-practices/channel-naming/#recommended-channel-naming
 
 ## Configuring your first Issuer
 

@@ -103,6 +103,7 @@ Jsonnet
 keystore
 keystores
 Knative
+Krew
 KUARD
 kubebuilder
 kube-cert-manager
@@ -138,6 +139,7 @@ OpenAPI
 OpenFaaS
 OpenShift
 OperatorHub
+OperatorHub.io
 OpenWRT
 PEM
 PKCS#12
