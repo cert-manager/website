@@ -202,6 +202,7 @@ wildcards
 WIP
 YAML
 YAMLs
+kms-issuer
 awskms-issuer
 GoLand
 Makefiles
