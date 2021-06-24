@@ -18,6 +18,7 @@ AWS
 allowlist
 awspca
 aws-pca-issuer
+aws-privateca-issuer
 AzureDNS
 backend
 backends
