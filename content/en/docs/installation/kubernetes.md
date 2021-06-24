@@ -141,6 +141,69 @@ The default cert-manager configuration is good for the majority of users, but a
 full list of the available options can be found in the [Helm chart
 README](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
+## Installing with Operator Lifecycle Manager and OperatorHub.io
+
+Browse to the [cert-manager page on OperatorHub.io](https://operatorhub.io/operator/cert-manager),
+click the "Install" button and follow the installation instructions.
+
+Alternatively, [install OLM][] and [install the `kubectl operator` plugin][]
+from the [Krew Kubectl plugins index][] and then use that to install the cert-manager as follows:
+
+```sh
+operator-sdk olm install
+kubectl krew install operator
+kubectl operator install cert-manager -n operators --channel stable --approval Automatic
+```
+
+You can monitor the progress of the installation as follows:
+
+```sh
+kubectl get events -w -n operators
+```
+
+And you can see the status of the installation with:
+
+```sh
+kubectl operator list
+```
+
+[install OLM]: https://olm.operatorframework.io/docs/getting-started/
+[install the `kubectl operator` plugin]: https://github.com/operator-framework/kubectl-operator#install
+[Krew Kubectl plugins index]: https://krew.sigs.k8s.io/plugins/
+
+### Release Channels
+
+Whichever installation method you chose, there will now be an [OLM Subscription resource][] for cert-manager,
+tracking the "stable" release channel. E.g.
+
+```console
+$ kubectl get subscription cert-manager -n operators -o yaml
+...
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: cert-manager
+...
+status:
+  currentCSV: cert-manager.v1.4.0
+  state: AtLatestKnown
+...
+```
+
+This means that OLM will discover new cert-manager releases in the stable channel,
+and, depending on the Subscription settings it will upgrade cert-manager automatically,
+when new releases become available.
+Read [Manually Approving Upgrades via Subscriptions][] for information about automatic and manual upgrades.
+
+[OLM Subscription resource]: https://olm.operatorframework.io/docs/concepts/crds/subscription/
+[Manually Approving Upgrades via Subscriptions]: https://olm.operatorframework.io/docs/concepts/crds/subscription/#manually-approving-upgrades-via-subscriptions
+
+NOTE: There is a single release channel called "stable" which will contain all cert-manager releases, shortly after they are released.
+In future we may introduce other release channels with alternative release schedules,
+in accordance with [OLM's Recommended Channel Naming][].
+
+[OLM's Recommended Channel Naming]: https://olm.operatorframework.io/docs/best-practices/channel-naming/#recommended-channel-naming
+
 ## Verifying the installation
 
 Once you've installed cert-manager, you can verify it is deployed correctly by
