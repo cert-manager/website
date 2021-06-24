@@ -23,7 +23,7 @@ authors are as follows:
 
 # Issuers that Honour Approval
 
-- [aws-pca-issuer](https://github.com/jniebuhr/aws-pca-issuer): Used to
+- [aws-privateca-issuer](https://github.com/cert-manager/aws-privateca-issuer): Used to
   request certificates from [AWS Private Certificate Authority]
   (https://aws.amazon.com/certificate-manager/private-certificate-authority/)
   for cloud native/hybrid environments.
