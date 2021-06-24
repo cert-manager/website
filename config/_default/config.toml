@@ -86,6 +86,9 @@ breadcrumb_disable = false
 #  Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
 navbar_logo = true
 
+[markup.goldmark.renderer]
+unsafe= true
+
 [services]
 [services.googleAnalytics]
 id = "UA-78700849-2"
