@@ -5,29 +5,30 @@ weight: 50
 type: "docs"
 ---
 
-cert-manager supports external `Issuer` types. These external `Issuer` types are
-issuers that are not support by cert-manager by default, or are 'out of tree',
-however are treated the exact same as any other internal `Issuer` type. External
-issuer types are typically installed by deploying another pod into your cluster
-that will watch `CertificateRequest` resources and honor them based on
-configured `Issuer` resources. These issuer types exist outside of the
+cert-manager supports external `Issuer` types. While external issuers are not
+implemented in the main cert-manager repository, they are otherwise treated the
+same as any other issuer.
+
+External issuers are typically deployed as a pod which is configured
+to watch for `CertificateRequest` resources in the cluster whose `issuerRef`
+matches the name of the issuer. External issuers exist outside of the
 `cert-manager.io` group.
 
-As of `v0.11`, no changes need to be made to cert-manager to support external
-issuers.
+Installation for each issuer may differ; check the documentation for each
+external issuer for more details on installing, configuring and using it.
 
-The recommended installation process and configuration options for these
-external issuer types can be found in the documentation of that external issuer
-project. A list of known external issuer projects that are maintained by their
-authors are as follows:
+## Known External Issuers
 
-# Issuers that Honour Approval
+If you've created an external issuer which you'd like to share,
+[raise a Pull Request](https://github.com/cert-manager/website/pulls) to have
+it added here!
 
-- [kms-issuer](https://github.com/Skyscanner/kms-issuer): Used to request
+These external issuers are known to support and honor [approval](https://cert-manager.io/docs/concepts/certificaterequest/#approval).
+
+- [kms-issuer](https://github.com/Skyscanner/kms-issuer): Requests
   certificates signed using an [AWS KMS](https://aws.amazon.com/kms/) asymmetric key.
-- [aws-privateca-issuer](https://github.com/cert-manager/aws-privateca-issuer): Used to
-  request certificates from [AWS Private Certificate Authority]
-  (https://aws.amazon.com/certificate-manager/private-certificate-authority/)
+- [aws-privateca-issuer](https://github.com/cert-manager/aws-privateca-issuer): Requests
+  certificates from [AWS Private Certificate Authority] (https://aws.amazon.com/certificate-manager/private-certificate-authority/)
   for cloud native/hybrid environments.
 - [google-cas-issuer](https://github.com/jetstack/google-cas-issuer): Used
   to request certificates signed by private CAs managed by the
@@ -36,22 +37,13 @@ authors are as follows:
   to request certificates signed by
   [Cloudflare Origin CA](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca)
   to enable TLS between Cloudflare edge and your Kubernetes workloads.
-- [step-issuer](https://github.com/smallstep/step-issuer): Used to request
-  certificates from the [Smallstep](https://smallstep.com) [Certificate
-  Authority server](https://github.com/smallstep/certificates).
+- [step-issuer](https://github.com/smallstep/step-issuer): Requests
+  certificates from the [Smallstep](https://smallstep.com) [Certificate Authority server](https://github.com/smallstep/certificates).
+- [freeipa-issuer](https://github.com/guilhem/freeipa-issuer): Requests
+  certificates signed by [FreeIPA](https://www.freeipa.org).
+- [ADCS Issuer](https://github.com/nokia/adcs-issuer): Requests
+  certificates signed by [Microsoft Active Directory Certificate Service](https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority).
 
+## Building New External Issuers
 
-# Issuers that do NOT Honour Approval
-A list of known external issuer projects that are maintained by their authors
-are as follows. These issuers do _not_ honour
-[approval](../../concepts/certificaterequest/#approval).
-
-- [freeipa-issuer](https://github.com/guilhem/freeipa-issuer): Used to
-  request certificates signed by [FreeIPA](https://www.freeipa.org).
-- [ADCS Issuer](https://github.com/nokia/adcs-issuer): Used
-  to request certificates signed by
-  [Microsoft Active Directory Certificate Service](https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority).
-
-
-To create your own external issuer type, please follow the guidance in the
-[development documentation](../../contributing/external-issuers/).
+If you're interested in building a new external issuer, check the [development documentation](../../contributing/external-issuers/).
