@@ -143,11 +143,6 @@ Requester annotations:
 
 Signer annotations:
 
-- `experimental.cert-manager.io/ca`: **Set by the signer**. Once signed, the
-    signer will populate this annotation with the base 64 encoded CA certificate
-    of the signing chain. This annotation will always be present after signing,
-    however may have an empty value if a CA certificate is not available.
-
 - `venafi.experimental.cert-manager.io/pickup-id`: **Set by the signer**. Only
     used for the Venafi signer. Used to record the Venafi Pickup ID of a
     certificate signing request that has been submitted to the Venafi API for
