@@ -151,7 +151,7 @@ behavior.
 
 Fixed in the cert-manager PR [#4092][].
 
-[#4092]: https://github.com/jetstack/cert-manager/pull/4092 "Defaukt renewal changed from 30 days before to 2/3 of the duration before expiry"
+[#4092]: https://github.com/jetstack/cert-manager/pull/4092 "Default renewal changed from 30 days before expiry to 1/3 of the duration before expiry"
 
 ## New Features
 
@@ -196,7 +196,10 @@ webhook:
     host: 198.51.100.20
 ```
 
-Implemented in the cert-manager PR [#4064][].
+Implemented in cert-manager PRs [#3876][], [#3932][].
+
+[#3932]: https://github.com/jetstack/cert-manager/pull/3932 "Adds support for accessing coversion webhook from outside cluster network"
+[#3876]: https://github.com/jetstack/cert-manager/pull/3876 "Adds support for accessing mutating and validating webhooks from outside cluster network"
 
 ### Helm chart: Service labels
 
