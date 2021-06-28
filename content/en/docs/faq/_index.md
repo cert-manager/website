@@ -27,7 +27,7 @@ Due to the nature of the Kubernetes event mechanism these will be purged after a
 
 ### What happens if a renewal is doesn't happen due to issues? Will it be tried again after sometime?
 
-cert-manager makes use of exponential back off to retry any failures on requesting or renewing certificates. It will retry any failures unless the Issuer gave a fatal error that it marked as not retryable.
+cert-manager makes use of exponential back off to retry non-fatal failures (ones that didn't mark the `CertificateRequest` as failed). If the `CertificateRequest` was marked as failed, issuance will be re-tried in 1 hour.
 
 ### Is ECC (elliptic-curve cryptography) supported?
 
