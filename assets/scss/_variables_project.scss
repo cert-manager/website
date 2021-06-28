@@ -8,20 +8,16 @@ $secondary: #326ce5;
 }
 
 .td-navbar .navbar-brand svg {
-	height: 70px !important;
-	width: 70px;
+	height: 60px !important;
+	width: 60px;
 }
 
-.td-toc {
+.td-sidebar-toc {
 	padding-top: 1.75rem !important;
 }
 
 @media (min-width: 768px) {
-	.td-sidebar {
-		padding-top: 4.5rem !important;
-	}
-
 	.td-main main {
-		padding-top: 7.5rem !important;
+		padding-top: 6rem !important;
 	}
 }
