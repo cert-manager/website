@@ -51,9 +51,7 @@ spec:
 ```
 
 ### If `renewBefore` or `duration` is not defined, what will be the default value?
-cert-manager will default to a `duration` of [90 days](https://github.com/jetstack/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26) with a `renewBefore` of [30 days](https://github.com/jetstack/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L32).
-The renewal time of the certificate will be calculated using the formula `min(duration / 3, renewBefore)`, see [renewal](../usage/certificate/#renewal) for more detail.
-When setting `duration` it is recommended to also set `renewBefore`, if `renewBefore` is longer than `duration` you will receive an error.
+Default `duration` is [90 days](https://github.com/jetstack/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26). If `renewBefore` has not been set, `Certificate` will be renewed 2/3 through its _actual_ duration.
 
 ## Miscellaneous
 
