@@ -1,5 +1,12 @@
-# Install cert-manager and get a TLS certificate from Let's Encrypt
+# Quick Start: Install cert-manager and get a TLS certificate from Let's Encrypt
 
+## Prerequisites
+
+You will need a Kubernetes cluster (>v1.16) which can be reached by a public IP address.
+And if you use Let's Encrypt DNS based verification,
+you will need your DNS "zone" to be hosted by one of the DNS providers supported by cert-manager,
+and you will need an account with permission to add TXT records to that zone,
+and credentials which cert-manager can use to interact with the DNS providers API.
 
 ## Install the cert-manager CLI
 
