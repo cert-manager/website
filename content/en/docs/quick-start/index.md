@@ -1,5 +1,9 @@
 # Quick Start: Install cert-manager and get a TLS certificate from Let's Encrypt
 
+This tutorial will show you how to install, configure and manage cert-manager entirely from the `kubectl cert-manager` CLI.
+The CLI helps ensure that you are installing the latest stable version of cert-manager on a compatible Kubernetes cluster,
+and it helps ensure that you are configuring cert-manager according to best-practices set out by The cert-manager maintainers.
+
 ## Prerequisites
 
 You will need a Kubernetes cluster (>v1.16) which can be reached by a public IP address.
