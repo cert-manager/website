@@ -16,3 +16,14 @@ For these reasons, we recommend that you start by installing the cert-manager CL
 ```console
 $ kubectl krew install cert-manager
 ```
+
+## Install cert-manager
+
+Use the cert-manager CLI to install the latest stable version of cert-manager in your cluster, as follows:
+
+```console
+$ kubectl cert-manager install
+```
+
+You will see a series of progress messages as it performs pre-flight checks,
+installs cert-manager and then checks the health of all the cert-manager components.
