@@ -244,8 +244,9 @@ to be supporting most commercial Kubernetes offerings.
 
 ## OpenShift supported versions {#openshift-supported-versions}
 
-We maintain the following table to remember the mapping between
-OpenShift and Kubernetes versions:
+We maintain the following table to remember the mapping between OpenShift and
+Kubernetes versions. The dates are an estimate based on the [OpenShift Updates
+page](https://access.redhat.com/support/policy/updates/openshift#dates).
 
 | Version | Kubernetes | EOL            |
 | ------- | ---------- | -------------- |
