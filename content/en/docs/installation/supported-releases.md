@@ -244,11 +244,6 @@ to be supporting most commercial Kubernetes offerings.
 
 ## OpenShift supported versions {#openshift-supported-versions}
 
-With regards to OpenShift Container Platform 3, cert-manager 1.2 is the last
-release to support OpenShift 3.11 (Kubernetes 1.11). Although OpenShift 3.11 is
-still supported by Red Hat until June 2022, keeping support for very old
-versions of Kubernetes had become too much of a burden.
-
 We maintain the following table to remember the mapping between
 OpenShift and Kubernetes versions:
 
@@ -264,8 +259,13 @@ OpenShift and Kubernetes versions:
 | 4.2     | 1.14       | 13 Jul 2020    |
 | 4.1     | 1.13       | 05 May 2020    |
 
-\*Estimated as of June 22, 2021 given that the average number of months between
+\*Estimated as of June 22, 2021, given that the average number of months between
 two OpenShift releases is 5 to 6 months.
+
+With regard to OpenShift Container Platform 3, cert-manager 1.2 is the last
+release to support OpenShift 3.11 (Kubernetes 1.11). Although OpenShift 3.11 is
+still supported by Red Hat until June 2022, keeping support for very old
+versions of Kubernetes had become too much of a burden.
 
 ## Terminology
 
