@@ -46,7 +46,7 @@ For example tutorials don't have to be updated in case the chart location would 
 
 ### Increases the uptake of `kubectl cert-manager`
 
-It has useful features and yet it is not widely known and it is not widely used.
+`kubectl cert-manager` has useful features and yet it is not widely known and it is not widely used.
 This assumption is based on there being very few questions about it on #cert-manager and very few issues related to it in GitHub issues.
 We aim to increase the usage of `kubectl cert-manager` by documenting that new-users should use `kubectl cert-manager install`,
 as part of the quick start tutorial.
