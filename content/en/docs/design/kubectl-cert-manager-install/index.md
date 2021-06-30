@@ -21,6 +21,29 @@ This will be documented as the preferred installation mechanism.
 Rationale
 ---------
 
+### It's not Helm
+
+It's an emotional and anecdotal reason, but there seem to be a significant number of users who prefer not to use `helm`.
+This may be a legacy of the complexity and security problems associated with the Helm 2 and it's `tiller` component,
+but nevertheless, we have spoken to at least three colleagues who would not use Helm in their deployment process.
+Those same users point to `linkerd install` and `istioctl install`
+as examples of project specific tools which allow them to customize the installation of those projects without using Helm.
+
+NOTE: The funny thing is that both of those installers are using Helm under the hood, via the Helm SDK.
+
+### We anticipate a suite of tools to help with installation, upgrade and uninstall
+
+`kubectl cert-manager install` forms part of a larger planned toolset.
+In cert-manager v1.6 we anticipate a `kubectl cert-manager upgrade` command
+which will convert "stored" version of resources for compatibility with the removal of old API versions in `v1.6`.
+We argue that it would be unbalanced to have an upgrade command without a corresponding install command.
+
+### Reduce the user tool surface
+
+If you reduce the user-tool surface, the tool is easier to use and less prone to deprecation issues.
+For example tutorials don't have to be updated in case the chart location would change from jetstack to cert-manager.io.
+
+
 ### `kubectl cert-manager`  is underused.
 
 It has useful features and yet it is not widely known and it is not widely used.
