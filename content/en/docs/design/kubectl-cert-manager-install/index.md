@@ -30,32 +30,20 @@ as part of the quick start tutorial.
 And we propose a series of related `kubectl cert-manager create ...`  sub-commands
 which will make it easy for new-users to configure cert-manager for a series of common use-cases.
 
-### Helm has inadequate support CRDs.
+We plan to expand the features of `kubectl cert-manager`, starting with `install`.
 
-There are various has short comings and gotchas with how Helm manages the installation, upgrading and uninstallation of projects with CRDs.
-Helm recommend putting CRD manifests in a separate `crds/` directory in the chart, so that it knows to install those before installing the rest of the chart manifests.
-But cert-manager doesn't follow that recommendation because Helm does not then support upgrading those CRDs when they change in subsequent versions of the chart.
-Instead cert-manager puts the CRDs definitions along side the other chart resources and
-For this reason, users who run `helm install jetstack/cert-manager` are required to make a decision about whether or not to have `helm` also install the cert-manager CRDs.
-To have `helm` install the CRDs, the user must use the command line flag `helm install jetstack/cert-manager --set installCRDs=true`,
-but this makes the CRDs part of the Helm installation which means that if the user subsequently runs `helm uninstall jetstack/cert-manager`,
-then all the CRDs will be deleted and this will trigger the garbage collection of all cert-manager CRs (Certificates, Issuers, etc).
+### `helm install jetstack/cert-manager` has confusing CRD installation options
 
-Other users prefer to pre-install the CRDs using `kubectl apply -f https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.crds.yaml`.
-Then they run `helm install jetstack/cert-manager` to install only the cert-manager Deployements and other supporting resources.
-But these users then have to remember to use this same two-step method when later upgrading or uninstalling cert-manager.
+Users who run `helm install jetstack/cert-manager` are required to make a decision about whether or not `helm` should install the cert-manager CRDs.
+The documentation recommends users to pre-install the CRDs using
+`kubectl apply -f https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.crds.yaml`.
+Then run `helm install jetstack/cert-manager` to the cert-manager Deployements and other supporting resources.
 
-There are many support requests from users who are confused about which of these two installation methods they should choose.
+The documentation offers users another choice.
+To have `helm` install the CRDs, they must use the command line flag `helm install jetstack/cert-manager --set installCRDs=true`.
 
-### Static manifests do not allow customization of the installation
+`kubectl cert-manager install` will allow users to install cert-manager without having to make this choice.
 
-`kubectl apply -f ...` can install both the CRDs and the
-
-
-We plan to expand the features of `kubectl cert-manager`, starting with `install` which
-Why are we tackling this problem?
-Why us?
-Why now?
 
 Assumptions
 -----------
