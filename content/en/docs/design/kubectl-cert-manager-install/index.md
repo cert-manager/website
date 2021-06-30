@@ -24,7 +24,7 @@ Rationale
 ### It's not Helm
 
 It's an emotional and anecdotal reason, but there seem to be a significant number of users who prefer not to use `helm`.
-This may be a legacy of the complexity and security problems associated with the Helm 2 and it's `tiller` component,
+This may be a legacy of the complexity and security problems associated with the Helm 2 and its `tiller` component,
 but nevertheless, we have spoken to at least three colleagues who would not use Helm in their deployment process.
 Those same users point to `linkerd install` and `istioctl install`
 as examples of project specific tools which allow them to customize the installation of those projects without using Helm.
