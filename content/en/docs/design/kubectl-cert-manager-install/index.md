@@ -7,7 +7,8 @@ Signed off by:
 
 Summary
 -------
-A mechanism for installing the latest stable version of cert-manager from the `kubectl cert-manager` CLI.
+A mechanism for installing the latest stable version of cert-manager from the `kubectl cert-manager` CLI,
+and waiting until the cert-manager API is usable.
 
 Background
 ----------
@@ -15,8 +16,14 @@ Currently, there are two main methods for installing cert-manager.
 Users can install cert-manager using `helm install jetstack/cert-manager`,
 or they can install it using `kubectl apply -f  https://github.com/jetstack/cert-manager/releases/latest/download/cert-manager.yaml`.
 
+These methods have pros and cons (discussed below) but both commands suffer a common problem,
+that they exit before the cert-manager API is usable.
+This leads to many support requests and work arounds from users who are attempting to automatically install cert-manager
+and then immediately install various cert-manager resources such as Issuer and Certificate resources.
+
 We propose a third mechanism which will allow users to bootstrap cert-manager by first installing the cert-manager CLI.
 This will be documented as the preferred installation mechanism.
+And by default, this CLI will not exit until it is possible to submit an Issuer or a Certificate resource to the Kubernetes API server.
 
 Rationale
 ---------
