@@ -75,3 +75,17 @@ cert-manager currently has some [limited experimental support] for this resource
 [`kubectl certificates` command]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#certificate
 [Request signing process]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process
 [limited experimental support]: ../usage/kube-csr/
+
+
+### Why do certificates issued by a Vault Issuer sometimes not have the intermediate CA in `tls.crt`?
+
+cert-manager `v1.4` introduced more sophisticated certificate chain parsing to sort the chain and determine the root certificate, see the [release notes for `v1.4`] 
+cert-manager now parses all the certificates (leaf and CAs) returned by Vault to build an ordered chain. The root-most certificate from the chain will be written to `ca.crt` and the rest of the ordered chain will be written to `tls.crt` of the `Secret` resource for that certificate.
+
+Depending on how a Vault PKI is configured it may or may not return the root certificate when a certificate is requested from an intermediate.
+In a PKI setup where cert-manager's Vault `Issuer` requests a certificate from a Vault intermediate which is configured to _not_ return the root certificate, the root-most certificate will be the intermediate CA, which `cert-manager` will write to `ca.crt`, but _not_ to `tls.crt`.
+In a PKI setup where cert-manager's Vault `Issuer` requests a certificate from a Vault intermediate which is configured to return the root certificate, the root-most certificate will be the root certificate, so `cert-manager` will write that to `ca.crt` and will include the intermediate CA in the `tls.crt`.
+Related: [`cert-manager#40231`]
+
+[release notes for `v1.4`]: https://cert-manager.io/docs/release-notes/release-notes-1.4/#ca-vault-and-venafi-issuer-handling-of-ca-crt-and-tls-crt
+[cert-manager#4023]: https://github.com/jetstack/cert-manager/issues/4023#issuecomment-868963537
