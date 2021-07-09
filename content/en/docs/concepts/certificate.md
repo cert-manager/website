@@ -67,5 +67,13 @@ The referenced `Issuer` must exist in the same namespace as the `Certificate`.
 A `Certificate` can alternatively reference a `ClusterIssuer` which is
 non-namespaced and so can be referenced from any namespace.
 
+
 You can read more on how to configure your `Certificate` resources
 [here](../../usage/certificate/).
+
+## What happens to my Certificate
+
+Here is a diagram of the life of a Certificate named `cert-1` using a Let's
+Encrypt issuer:
+
+![Life of a Certificate](/images/letsencrypt-flow-cert-manager.png)
