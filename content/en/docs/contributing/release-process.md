@@ -152,18 +152,9 @@ page if a step is missing or if it is outdated.
    example, see
    [upgrading-1.0-1.1](https://cert-manager.io/docs/installation/upgrading/upgrading-1.0-1.1/).
 
-3. Create or update the release branch:
+3. Update the release branch:
 
-    - **(initial alpha only)** Create the release branch:
-
-       ```bash
-       # Must be run from the cert-manager repo folder.
-       git fetch --all
-       git checkout -b release-1.0 origin/master
-       ```
-
-    - **(subsequent alpha and initial beta)**; You need to
-      update the release branch with the latest commits from the master
+      Update the release branch with the latest commits from the master
       branch, as follows:
 
        ```bash
