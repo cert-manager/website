@@ -117,7 +117,9 @@ Requester annotations:
 
 - `experimental.cert-manager.io/request-duration`: **Set by the requester**. Accepts
     a [Go time duration](https://golang.org/pkg/time/#ParseDuration) string
-    specifying the requested certificate duration. Defaults to 90 days.
+    specifying the requested certificate duration. Defaults to 90 days. Some
+    signers such as Venafi or ACME typically _do not_ allow requesting a
+    duration.
 
 - `experimental.cert-manager.io/request-is-ca`: **Set by the requester**. If set to
     `"true"`, will request for a CA certificate.
