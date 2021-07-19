@@ -73,7 +73,7 @@ For these reasons, after installing cert-manager and when performing post-instal
 you will need to check for temporary API configuration errors and retry.
 
 You could also add a post-installation check which performs `kubectl --dry-run` operations on the cert-manager API.
-Or you could add a post-installation check which automatically retries the [Installation Verification](../../installation/kubernetes/#verifying-the-installation) steps until they succeed.
+Or you could add a post-installation check which automatically retries the [Installation Verification](../../installation/verify/) steps until they succeed.
 
 ## Diagnosing Other Webhook Problems
 

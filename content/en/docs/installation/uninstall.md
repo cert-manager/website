@@ -7,8 +7,8 @@ type: "docs"
 
 cert-manager supports running on [Kubernetes](https://kubernetes.io) and
 [OpenShift](https://www.openshift.com). The uninstallation process between the
-two platforms is similar, although there are a number of extra notes to be aware
-of per-platform.
+two platforms is similar. Select the method that was used for installing
+cert-manager to go to the relevant uninstall documentation.
 
-- [Kubernetes](./kubernetes/)
-- [OpenShift](./openshift/)
+- [kubectl](../kubectl/#uninstalling)
+- [helm](../helm/#uninstalling)

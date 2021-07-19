@@ -6,6 +6,6 @@ type: "docs"
 ---
 
 cert-manager supports running on [Kubernetes](https://kubernetes.io) and
-[OpenShift](https://www.openshift.com). The installation mechanism between the
-two platforms is similar, although there are a number of extra notes to be aware
-of per-platform.
+[OpenShift](https://www.openshift.com). On both platforms there are multiple
+ways to install cert-manager. For more information on the different install
+scenarios and the best practices [check this page](./scenarios/).
