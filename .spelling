@@ -68,6 +68,7 @@ DNSimple
 DNSPod
 EC2
 ECDSA
+Ed25519
 e.g.
 EKS
 ELB
