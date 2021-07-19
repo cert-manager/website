@@ -71,7 +71,7 @@ You should see output similar to the above, with all pods in a Running state.
 
 There are no special requirements to note when installing cert-manager on EKS,
 so the regular [running on
-Kubernetes](../../../installation/kubernetes/) guide
+Kubernetes](../../../installation/) guides
 can be used to install cert-manager.
 
 Please walk through the installation guide and return to this step once you
