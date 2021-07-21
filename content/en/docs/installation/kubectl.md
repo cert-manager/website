@@ -5,22 +5,19 @@ weight: 20
 type: "docs"
 ---
 
-> Note: From cert-manager `v1.2.0` onward, the minimum supported version of
-> Kubernetes is `v1.16.0`. Users still running Kubernetes `v1.15` or below should
-> upgrade to a supported version before installing cert-manager.
-
-> **Warning**: You should not install multiple instances of cert-manager on a single
-> cluster. This will lead to undefined behavior and you may be banned from
-> providers such as Let's Encrypt.
-
 ## Installing with regular manifests
+
+### Prerequisites
+
+- `kubectl` version `>= v1.19.0-rc.1` (otherwise, you will have issues updating the CRDs. see [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl))
+- A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
+- cert-manager not already installed on the cluster
+- [Prerequisites specific to Cloud provider](../compatibility/)
+
+### Steps
 
 All resources (the [`CustomResourceDefinitions`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions) and the cert-manager, cainjector and webhook components)
 are included in a single YAML manifest file:
-
-> **Note**: If you're using a `kubectl` version below `v1.19.0-rc.1` you will have issues updating the CRDs.
-> For more info see the [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl)
-
 
 Install all cert-manager components:
 
@@ -35,7 +32,7 @@ $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1
 > the above command. If you have already run the above command, you should run
 > them again after elevating your permissions:
 ```bash
-  kubectl create clusterrolebinding cluster-admin-binding \
+$ kubectl create clusterrolebinding cluster-admin-binding \
     --clusterrole=cluster-admin \
     --user=$(gcloud config get-value core/account)
 ```

@@ -5,32 +5,28 @@ weight: 22
 type: "docs"
 ---
 
-> Note: From cert-manager `v1.2.0` onward, the minimum supported version of
-> Kubernetes is `v1.16.0`. Users still running Kubernetes `v1.15` or below should
-> upgrade to a supported version before installing cert-manager.
-
-> **Warning**: You should not install multiple instances of cert-manager on a single
-> cluster. This will lead to undefined behavior and you may be banned from
-> providers such as Let's Encrypt.
-
 ## Installing with Helm
 
-> **Note**: cert-manager should never be embedded as a sub-chart into other Helm charts.
-> cert-manager manages non-namespaced resources in your cluster and should only be installed once.
+cert-manager provides Helm charts as a first-class method of installation on both Kubernetes and OpenShift.
+
+Be sure never to embed cert-manager as a sub-chart of other Helm charts; cert-manager manages
+non-namespaced resources in your cluster and care must be taken to ensure that it is installed exactly once.
 
 ### Prerequisites
 
-- Helm v3 installed
+- Helm version 3 or later
+- A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
+- cert-manager not already installed on the cluster
+- [Prerequisites specific to Cloud provider](../compatibility/)
 
 ### Steps
 
-In order to install the Helm chart, you must follow these steps:
 
 #### 1. Add the Jetstack Helm repository:
 
-> **Warning**: It is important that this repository is used to install
-> cert-manager. The version residing in the [Helm stable repository](https://github.com/helm/charts/tree/master/stable/cert-manager) is
-> *deprecated* and should *NOT* be used.
+This repository is the only supported source of cert-manager charts. There are some other mirrors and copies across the internet, but those are entirely unofficial and could present a security risk.
+
+Notably, the "Helm stable repository" version of cert-manager is deprecated and should not be used.
 
 ```bash
 $ helm repo add jetstack https://charts.jetstack.io
@@ -44,18 +40,11 @@ $ helm repo update
 
 #### 3. Install `CustomResourceDefinitions`
 
-cert-manager requires a number of CRD resources to be installed into your
-cluster as part of installation.
-
-This can either be done manually, using `kubectl`, or using the `installCRDs`
-option when installing the Helm chart.
-
-> **Note**: If you're using a `helm` version based on Kubernetes `v1.18` or below (Helm `v3.2`) `installCRDs` will not work with cert-manager `v0.16`.
-> For more info see the [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#helm)
+cert-manager requires a number of CRD resources, which can  be installed manually using `kubectl`,
+or using the `installCRDs` option when installing the Helm chart.
 
 ##### Option 1: installing CRDs with `kubectl`
 
-Install the `CustomResourceDefinition` resources using `kubectl`:
 
 ```bash
 $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.0/cert-manager.crds.yaml
@@ -68,7 +57,9 @@ must add the `--set installCRDs=true` flag to your Helm installation command.
 
 Uncomment the relevant line in the next steps to enable this.
 
-#### 3. Install cert-manager
+Note that if you're using a `helm` version based on Kubernetes `v1.18` or below (Helm `v3.2`), `installCRDs` will not work with cert-manager `v0.16`. See the [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#helm) for more details.
+
+#### 4. Install cert-manager
 
 To install the cert-manager Helm chart, use the [Helm install command](https://helm.sh/docs/helm/helm_install/) as described below.
 
@@ -81,7 +72,7 @@ $ helm install \
   # --set installCRDs=true
 ```
 
-On the [cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager) a full list of the available **Helm values** can be found.
+A full list of available Helm values is on [cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
 The example below shows how to tune the cert-manager installation by overwriting the default Helm values:
 
@@ -95,8 +86,7 @@ $ helm install \
   --set webhook.timeoutSeconds=4s   # Example: changing the wehbook timeout using a Helm parameter
 ```
 
-Once you have deployed cert-manager, you can verify the installation
-[here](../verify/).
+Once you have deployed cert-manager, you can [verify](../verify/) the installation.
 
 ## Output YAML
 

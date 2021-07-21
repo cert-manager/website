@@ -1,7 +1,7 @@
 ---
-title: "Compatibility"
-linkTitle: "Compatibility"
-weight: 100
+title: "Compatibility with Kubernetes platform providers"
+linkTitle: "Cloud Compatibility"
+weight: 6
 type: "docs"
 ---
 
@@ -80,7 +80,3 @@ running on port 10250, as seen in [#3237](https://github.com/jetstack/cert-manag
 
 When deploying cert-manager on Fargate, you _must_ change the port on which
 the webhook listens. See the warning at the top of this page for more details.
-
-## Webhook
-
-Disabling the webhook is not supported anymore since `v0.14`.

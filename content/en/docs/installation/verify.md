@@ -18,14 +18,15 @@ cert-manager-webhook-787858fcdb-nlzsq      1/1     Running   0          2m
 ```
 
 You should see the `cert-manager`, `cert-manager-cainjector`, and
-`cert-manager-webhook` pod in a `Running` state.
-It may take a minute or so for the TLS assets required for the webhook to
-function to be provisioned. This may cause the webhook to take a while longer
-to start for the first time than other pods. If you experience problems, please
-check the [FAQ guide](../../faq/).
+`cert-manager-webhook` pods in a `Running` state. The webhook might take a
+little longer to successfully provision than the others.
+
+If you experience problems, first check the [FAQ](../../faq/).
 
 The following steps will confirm that cert-manager is set up correctly and able
-to issue basic certificate types.
+to issue basic certificate types. Alternatively, to automatically check if
+cert-manager is correctly configured, you can run the community-maintained
+[cert-manager-verifier](https://github.com/alenkacz/cert-manager-verifier) tool.
 
 Create an `Issuer` to test the webhook works okay.
 ```bash
@@ -92,12 +93,7 @@ Clean up the test resources.
 $ kubectl delete -f test-resources.yaml
 ```
 
-If all the above steps have completed without error, you are good to go!
-
-Optionally the whole verification flow is automated by running tool maintained by the community [cert-manager-verifier](https://github.com/alenkacz/cert-manager-verifier).
-
-If you experience problems, please check the
-[FAQ](../../faq/).
+If all the above steps have completed without error, you're good to go!
 
 ## Configuring your first Issuer
 

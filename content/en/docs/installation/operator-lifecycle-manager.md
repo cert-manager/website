@@ -5,12 +5,13 @@ weight: 23
 type: "docs"
 ---
 
-> **Warning**: You should not install multiple instances of cert-manager on a
-> single cluster. This will lead to undefined behavior and you may be banned
-> from providers such as Let's Encrypt.
-
-
 ## Installation managed by OLM
+
+### Prerequisites
+
+- A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
+- cert-manager not already installed on the cluster
+- [Prerequisites specific to Cloud provider](../compatibility/)
 
 ### Option 1: Installing from OperatorHub Web Console on OpenShift
 
