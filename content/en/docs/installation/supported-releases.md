@@ -138,47 +138,18 @@ them.
 
 **Critical bugs** include both regression bugs as well as upgrade bugs.
 
-Regressions are functionalities that worked in a previous release but no
-longer work. [#3393][] and [#2857][] are two examples of regressions.
+Regressions are functionalities that worked in a previous release but no longer
+work. [#4142][], [#3393][] and [#2857][] are three examples of regressions.
 
 Upgrade bugs are issues (often Helm-related) preventing users from
 upgrading to currently supported releases from earlier releases of
 cert-manager. [#3882][] and [#3644][] are examples of upgrade bugs.
 
-Note that [intentional breaking changes](#breaking-changes) do not belong
-to this category.
+Note that [intentional breaking changes](#breaking-changes) do not belong to
+this category.
 
-Once merged to the master branch, fixes for critical bugs are not
-immediately back-ported. Instead, we wait until the next final release for
-triggering a patch release. The patch release will be made for all
-supported release, but note that since we do only support the two last
-releases, a single patch release is made for the last release.
-
-In the example below, the release branches `release-1.2` and `release-1.3`
-are the two supported releases at the time of the release of 1.3.0, which
-means that critical bug fixes 1 and 2 will only be back-ported to
-`release-1.2` and not to `release-1.1`:
-
-```diagram
-   v1.2.1                                v1.2.2
-------+-------------------------------------+-----------> release-1.2
-       \      backport ^  backport ^        ^
-        \     commit  /   commit  /         | v1.2.2 is created
-         \           /           /          | along with v1.3.0
-          \         /           /
-           \       /           /
-            \     /           /          v1.3.0
-             --------master-----------------+-----------> release-1.3
-                 ^           ^               \
-                 |           |                \
-                 |           |                 \
-           critical      critical               \
-           bug fix 1     bug fix 2               \
-           merged to     merged to                \
-           master        master                    ------> master
-```
-
-<!-- Diagram source: https://textik.com/#7c4096204b3c0ad3 -->
+Fixes for critical bugs are (usually) immediately back-ported by creating a new
+patch release for the two currently supported releases.
 
 #### Long-standing bugs {#long-standing-bugs}
 
@@ -198,9 +169,11 @@ possible.
 
 [#3393]: https://github.com/jetstack/cert-manager/issues/3393 "Broken CloudFlare DNS01 challenge"
 [#2857]: https://github.com/jetstack/cert-manager/issues/2857 "CloudDNS DNS01 challenge crashes cert-manager"
+[#4142]: https://github.com/jetstack/cert-manager/issues/4142 "Cannot issue a certificate that has the same subject and issuer"
 [#3444]: https://github.com/jetstack/cert-manager/issues/3444 "Certificates do not get immediately updated after updating them"
 [#3882]: https://github.com/jetstack/cert-manager/pull/3882: "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
 [#3644]: https://github.com/jetstack/cert-manager/issues/3644 "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
+
 
 ## How we determine supported Kubernetes versions {#kubernetes-supported-versions}
 

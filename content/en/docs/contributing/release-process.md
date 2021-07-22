@@ -138,14 +138,14 @@ page if a step is missing or if it is outdated.
 1. Make sure to note which type of release you are doing. That will be helpful
    in the next steps.
 
-    | Type of release          | Example of git tag |
-    | ------------------------ | ------------------ |
-    | initial alpha release    | `v1.3.0-alpha.0`   |
-    | subsequent alpha release | `v1.3.0-alpha.1`   |
-    | initial beta release     | `v1.3.0-beta.0`    |
-    | subsequent beta release  | `v1.3.0-beta.1`    |
-    | final release            | `v1.3.0`           |
-    | patch release            | `v1.3.1`           |
+    |          Type of release           | Example of git tag |
+    |------------------------------------|--------------------|
+    | initial alpha release              | `v1.3.0-alpha.0`   |
+    | subsequent alpha release           | `v1.3.0-alpha.1`   |
+    | initial beta release               | `v1.3.0-beta.0`    |
+    | subsequent beta release            | `v1.3.0-beta.1`    |
+    | final release                      | `v1.3.0`           |
+    | patch release (or "point release") | `v1.3.1`           |
     </br>
 
 2. **(final release only)** Make sure that a PR with the new upgrade
