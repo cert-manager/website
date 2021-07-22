@@ -1,5 +1,5 @@
 ---
-title: "Compatibility with Kubernetes platform providers"
+title: "Compatibility with Kubernetes Platform Providers"
 linkTitle: "Cloud Compatibility"
 weight: 6
 type: "docs"

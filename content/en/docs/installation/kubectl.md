@@ -12,7 +12,7 @@ type: "docs"
 - `kubectl` version `>= v1.19.0-rc.1` (otherwise, you will have issues updating the CRDs. see [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl))
 - A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
 - cert-manager not already installed on the cluster
-- [Prerequisites specific to Cloud provider](../compatibility/)
+- [Prerequisites specific to your cloud provider](../compatibility/)
 
 ### Steps
 
@@ -25,25 +25,27 @@ Install all cert-manager components:
 $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.0/cert-manager.yaml
 ```
 
-> **Note**: When running on GKE (Google Kubernetes Engine), you may encounter a
-> 'permission denied' error when creating some of these resources. This is a
-> nuance of the way GKE handles RBAC and IAM permissions, and as such you should
-> 'elevate' your own privileges to that of a 'cluster-admin' **before** running
-> the above command. If you have already run the above command, you should run
-> them again after elevating your permissions:
+By default, cert-manager will be installed into the `cert-manager`
+namespace. It is possible to run cert-manager in a different namespace, although
+you'll need to make modifications to the deployment manifests.
+
+Once you have deployed cert-manager, you can verify the installation
+[here](../verify/).
+
+### Permissions Errors on Google Kubernetes Engine
+
+When running on GKE (Google Kubernetes Engine), you might encounter a 'permission denied' error when creating some
+of the required resources. This is a nuance of the way GKE handles RBAC and IAM permissions,
+and as such you might need to elevate your own privileges to that of a "cluster-admin" **before**
+running `kubectl apply`.
+
+If you have already run `kubectl apply`, you should run it again after elevating your permissions:
+
 ```bash
 $ kubectl create clusterrolebinding cluster-admin-binding \
     --clusterrole=cluster-admin \
     --user=$(gcloud config get-value core/account)
 ```
-
-> **Note**: By default, cert-manager will be installed into the `cert-manager`
-> namespace. It is possible to run cert-manager in a different namespace, although you
-> will need to make modifications to the deployment manifests.
-
-
-Once you have deployed cert-manager, you can verify the installation
-[here](../verify/).
 
 ## Uninstalling
 > **Warning**: To uninstall cert-manger you should always use the same process for

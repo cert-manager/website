@@ -11,7 +11,7 @@ type: "docs"
 
 - A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
 - cert-manager not already installed on the cluster
-- [Prerequisites specific to Cloud provider](../compatibility/)
+- [Prerequisites specific to your cloud provider](../compatibility/)
 
 ### Option 1: Installing from OperatorHub Web Console on OpenShift
 

@@ -1,5 +1,5 @@
 ---
-title: "Verifying the installation"
+title: "Verifying the Installation"
 linkTitle: "Verifying"
 weight: 30
 type: "docs"
