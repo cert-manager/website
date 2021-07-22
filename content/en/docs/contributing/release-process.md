@@ -110,6 +110,7 @@ release:
 
    ```sh
    gcloud config set project cert-manager-release
+   export CLOUDSDK_CORE_PROJECT=cert-manager-release # this is used by cmrel
    ```
 
 7. Get a GitHub access token [here](https://github.com/settings/tokens)
@@ -162,7 +163,7 @@ page if a step is missing or if it is outdated.
        git fetch --all
        git branch --force release-1.0 origin/release-1.0
        git checkout release-1.0
-       git merge --ff-only origin/master
+       git merge --ff-only origin/master # don't run for a point release!
        ```
     - **(subsequent beta, patch release and final release)**: do nothing since
       things have been merged using `/cherry-pick release-1.0`.
