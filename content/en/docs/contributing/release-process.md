@@ -26,8 +26,8 @@ following conditions:
 2. You currently need to be at Jetstack to get the required GitHub and GCP
    permissions. (we'd like contributors outside Jetstack to be able to get
    access; if that's of interest to you, please let us know).
-3. You need to have the GitHub `write` permission on the cert-manager project.
-   To check that you have the `write` role, run:
+3. You need to have the GitHub `admin` permission on the cert-manager project.
+   To check that you have the `admin` role, run:
 
     ```sh
     brew install gh
@@ -35,8 +35,8 @@ following conditions:
     gh api /repos/jetstack/cert-manager/collaborators/$(gh api /user | jq -r .login)/permission | jq .permission
     ```
 
-    If your permission is `write` or `admin`, then you are good to go. To request
-    the `write` permission on the cert-manager project, [open a
+    If your permission is `admin`, then you are good to go. To request the
+    `admin` permission on the cert-manager project, [open a
     PR](https://github.com/jetstack/platform-board/pulls/new) with a link to
     here.
 
@@ -138,13 +138,14 @@ page if a step is missing or if it is outdated.
 1. Make sure to note which type of release you are doing. That will be helpful
    in the next steps.
 
-    | Type of release          | Example of git tag |
-    | ------------------------ | ------------------ |
-    | initial alpha release    | `v1.3.0-alpha.0`   |
-    | subsequent alpha release | `v1.3.0-alpha.1`   |
-    | beta release             | `v1.3.0-beta.0`    |
-    | final release            | `v1.3.0`           |
-    | patch release            | `v1.3.1`           |
+    |          Type of release           | Example of git tag |
+    |------------------------------------|--------------------|
+    | initial alpha release              | `v1.3.0-alpha.0`   |
+    | subsequent alpha release           | `v1.3.0-alpha.1`   |
+    | initial beta release               | `v1.3.0-beta.0`    |
+    | subsequent beta release            | `v1.3.0-beta.1`    |
+    | final release                      | `v1.3.0`           |
+    | patch release (or "point release") | `v1.3.1`           |
     </br>
 
 2. **(final release only)** Make sure that a PR with the new upgrade
@@ -155,8 +156,10 @@ page if a step is missing or if it is outdated.
 
 3. Update the release branch:
 
-      Update the release branch with the latest commits from the master
-      branch, as follows:
+   - **(initial alpha, subsequent alpha and initial beta)** The release branch
+      should already exist (it was created at the end of the last final
+      release). Update the release branch with the latest commits from the
+      master branch, as follows:
 
        ```bash
        # Must be run from the cert-manager repo folder.
@@ -165,6 +168,7 @@ page if a step is missing or if it is outdated.
        git checkout release-1.0
        git merge --ff-only origin/master # don't run for a point release!
        ```
+
     - **(subsequent beta, patch release and final release)**: do nothing since
       things have been merged using `/cherry-pick release-1.0`.
 
@@ -201,9 +205,11 @@ page if a step is missing or if it is outdated.
         git push --set-upstream origin release-1.0
         ```
 
-        **(initial alpha only)**: `git push` will only work if you have the
-        `write` or `admin` GitHub permission on the cert-manager repo to create
-        or push to the branch, see [prerequisites](#prerequisites).
+        **GitHub permissions**: `git push` will only work if you have the
+       `admin` GitHub permission on the cert-manager repo to create or push to
+       the branch, see [prerequisites](#prerequisites). If you do not have this
+       permission, you will have to open a PR to merge master into the release
+       branch), and wait for the PR checks to become green.
 
 5. Generate and edit the release notes:
 
