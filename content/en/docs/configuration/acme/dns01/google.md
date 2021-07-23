@@ -152,7 +152,7 @@ to a GKE cluster with workload identity already enabled.
 
 The cert-manager component that needs to modify DNS records is the pod created
 as part of the cert-manager deployment. The [standard methods for deploying
-cert-manger to Kubernetes](../../../../installation/kubernetes/) create the
+cert-manger to Kubernetes](../../../../installation/) create the
 cert-manager deployment in the cert-manager namespace and its pod spec specifies
 it runs under the cert-manager service account. To link the GSA you created
 above to the cert-manager KSA in the cert-manager namespace in your GKE cluster,

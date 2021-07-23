@@ -68,6 +68,7 @@ DNSimple
 DNSPod
 EC2
 ECDSA
+Ed25519
 e.g.
 EKS
 ELB
@@ -273,6 +274,7 @@ tamalsaha
 JoshVanL
 Kyverno
 hardcodes
+templated
 
 # As per https://tools.ietf.org/html/rfc5280, the spelling "X.509" is the
 # correct spelling. The spelling "x509" and "X509" are incorrect.

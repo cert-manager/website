@@ -1,7 +1,7 @@
 ---
 title: "Upgrading"
 linkTitle: "Upgrading"
-weight: 20
+weight: 40
 type: "docs"
 ---
 
