@@ -24,10 +24,9 @@ and which is therefore available on
 [Community Operators Repository]: https://github.com/operator-framework/community-operators
 
 Please uninstall the existing cert-manager package and re-install
-by following the [Kubernetes OLM Installation Documentation][] or the [OpenShift OLM Installation Documentation][].
+by following the [OLM Installation Documentation][].
 
-[Kubernetes OLM Installation Documentation]: ../../kubernetes/
-[OpenShift OLM Installation Documentation]: ../../openshift/
+[OLM Installation Documentation]: ../../operator-lifecycle-manager/
 
 ## Now Follow the Regular Upgrade Process
 

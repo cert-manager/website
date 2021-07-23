@@ -13,3 +13,10 @@ https://cert-manager.io/docs/configuration/externalloadbalancer/ https://cert-ma
 # releases that cert-manager was supporting. Since we moved this information
 # to the supported-releases page, we removed the project-maturity page.
 https://cert-manager.io/docs/concepts/project-maturity/ https://cert-manager.io/docs/installation/supported-releases/
+
+# Before July 2021, the install pages were organised differently, below
+# are some redirects to fix external references to these old pages.
+https://cert-manager.io/docs/installation/kubernetes/ https://cert-manager.io/docs/installation/supported-releases/
+https://cert-manager.io/docs/installation/openshift/ https://cert-manager.io/docs/installation/supported-releases/
+https://cert-manager.io/docs/installation/uninstall/kubernetes/ https://cert-manager.io/docs/installation/uninstall/
+https://cert-manager.io/docs/installation/uninstall/openshift/ https://cert-manager.io/docs/installation/uninstall/
