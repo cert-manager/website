@@ -29,8 +29,7 @@ By default, cert-manager will be installed into the `cert-manager`
 namespace. It is possible to run cert-manager in a different namespace, although
 you'll need to make modifications to the deployment manifests.
 
-Once you have deployed cert-manager, you can verify the installation
-[here](../verify/).
+Once you have deployed cert-manager, you can [verify](../verify/) the installation.
 
 ### Permissions Errors on Google Kubernetes Engine
 
