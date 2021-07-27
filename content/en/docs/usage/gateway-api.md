@@ -8,7 +8,7 @@ type: "docs"
 Since 1.5, cert-manager supports requesting TLS certificates using annotations
 on Gateway resources. The Gateway resource is part of the [Gateway API][gwapi],
 a set of CRDs that can be installed to your Kubernetes cluster and that aim at
-offering an richer alternative to the Ingress abstraction.
+offering a richer alternative to the Ingress abstraction.
 
 [gwapi]: https://gateway-api.sigs.k8s.io
 
@@ -26,24 +26,38 @@ and no existing implementation supports the TLS passthrough mode in which the
 HTTPRoute contains the TLS configuration and terminates the connection (see
 [istio#31747](https://github.com/istio/istio/issues/31747)).
 
-The Gateway support for Certificate shims must be enabled manually using a flag.
-If you are using Helm:
+Before enabling the Gateway support, you will have to install the Gateway API
+CRDs:
 
 ```sh
-helm upgrade --install cert-manager jetstack/cert-manager
-  --set "extraArgs={--controllers=*\,gateway-shim}"
+kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.3.0" | kubectl apply -f -
 ```
 
-If you are using the raw cert-manager manifests, you can add the following like
-to the cert-manager controller Deployment `args`:
+You then need to manually enable the Gateway support for Certificate using a
+flag:
 
-```sh
---controllers=*,gateway-shim
-```
+- If you are using Helm:
+
+  ```sh
+  helm upgrade --install cert-manager jetstack/cert-manager
+    --set "extraArgs={--controllers=*\,gateway-shim}"
+  ```
+
+- If you are using the raw cert-manager manifests, you can add the following
+  argument to the cert-manager controller Deployment's `args`:
+
+  ```yaml
+  args:
+    # ...
+    - --controllers=*,gateway-shim
+  ```
+
+You can also install the CRDs after installing cert-manager. cert-manager will
+pick up the Gateway CRD as soon as it is installed.
 
 Like with an Ingress, the annotations `cert-manager.io/issuer` or
 `cert-manager.io/cluster-issuer` tells cert-manager that this Gateway should be
-looked at to create Certificate shims. For example, the following Gateway should
+looked at to create Certificate. For example, the following Gateway should
 trigger the creation of the `example-com-tls` Certificate:
 
 ```yaml
@@ -72,7 +86,9 @@ spec:
           group: core
 ```
 
-A few moments later, cert-manager should create a Certificate shim:
+A few moments later, cert-manager should create a Certificate. The Certificate
+is named after the Secret name `example-com-tls`. The `dnsNames` field is set
+with the above `hostname` field.
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -85,12 +101,96 @@ spec:
     kind: Issuer
     group: cert-manager.io
   dnsNames:
-    - example.com
+    - example.com # ✅ Copied from the `hostname` field.
   secretName: example-com-tls
 ```
 
-Contrary to Ingresses, you can set the same secret name multiple times. Let us
-imagine that you have these two listeners:
+## Use cases
+
+### Skipping of invalid listener blocks
+
+Like with an Ingress, the invalid listeners are skipped. For example, no
+Certificate will be created for the following Gateway since both listener that
+does not have a `tls` block won't be used to create the Certificates.
+
+In the below example, the three first listener blocks are invalid:
+
+```yaml
+apiVersion: networking.x-k8s.io/v1alpha1
+kind: Gateway
+metadata:
+  annotations:
+    cert-manager.io/issuer: my-issuer
+spec:
+  listeners:
+    # ❌  Missing "tls" block, the following listener is skipped.
+    - hostname: example.com
+
+    # ❌  Missing "hostname", the following listener is skipped.
+    - tls:
+        certificateRef:
+          name: example-com-tls
+          kind: Secret"
+          group: core
+
+    # ❌  "mode: Passthrough" is not supported, the following listener is skipped.
+    - hostname: example.com
+      tls:
+        mode: Passthrough
+        certificateRef:
+          name: example-com-tls
+          kind: Secret
+          group: core
+
+    # ✅  The following listener is valid.
+    - hostname: foo.example.com # ✅ Required.
+      port: 443
+      protocol: HTTPS
+      routes:
+        kind: HTTPRoute
+        selector:
+          matchLabels:
+            app: foo
+      tls:
+        mode: Terminate # ✅ Required. "Terminate" is the only supported mode.
+        certificateRef:
+          name: example-com-tls # ✅ Required.
+          kind: Secret  # ✅ Required. "Secret" is the only valid value.
+          group: core # ✅ Required. "core" is the only valid value.
+```
+
+The above Gateway will have one Certificate created, named `example-com-tls`
+after the only valid listener block:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-com-tls
+spec:
+  issuerRef:
+    name: my-issuer
+    kind: Issuer
+    group: cert-manager.io
+  dnsNames:
+    - foo.example.com
+  secretName: example-com-tls
+```
+
+Here is the list of requirements for a valid `listener` block:
+
+|           Field            |                         Requirement                         |
+|----------------------------|-------------------------------------------------------------|
+| `tls.hostname`             | Must not be empty.                                          |
+| `tls.mode`                 | Must be set to `Terminate`. `Passthrough` is not supported. |
+| `tls.certificateRef.name`  | Cannot be left empty.                                       |
+| `tls.certificateRef.kind`  | Must be set to `Secret`.                                    |
+| `tls.certificateRef.group` | Must be set to `core`.                                      |
+
+### Two listeners with the same Secret name
+
+Contrary to with an Ingress, you can set the same Secret name multiple times
+regardless of the hostname. Let us imagine that you have these two listeners:
 
 ```yaml
 apiVersion: networking.x-k8s.io/v1alpha1
@@ -98,10 +198,11 @@ kind: Gateway
 metadata:
   name: example
   annotations:
-    cert-manager.io/issuer: foo
+    cert-manager.io/issuer: my-issuer
 spec:
   gatewayClassName: foo
   listeners:
+    # Listener 1.
     - hostname: example.com
       port: 443
       protocol: HTTPS
@@ -116,7 +217,9 @@ spec:
           name: example-com-tls
           kind: Secret
           group: core
-    - hostname: www.example.com
+
+    # Listener 2: Same Secret name as Listener 1, with a different hostname.
+    - hostname: *.example.com
       port: 443
       protocol: HTTPS
       routes:
@@ -130,9 +233,46 @@ spec:
           name: example-com-tls
           kind: Secret
           group: core
+
+    # Listener 3: also same Secret name, except the hostname is also the same.
+    - hostname: *.example.com
+      port: 8443
+      protocol: HTTPS
+      routes:
+        kind: HTTPRoute
+        selector:
+          matchLabels:
+            app: foo
+      tls:
+        mode: Terminate
+        certificateRef:
+          name: example-com-tls
+          kind: Secret
+          group: core
+
+   # Listener 4: different Secret name.
+    - hostname: site.org
+      port: 443
+      protocol: HTTPS
+      routes:
+        kind: HTTPRoute
+        selector:
+          matchLabels:
+            app: foo
+      tls:
+        mode: Terminate
+        certificateRef:
+          name: site-org-tls
+          kind: Secret
+          group: core
 ```
 
-The Certificate "shim" created by cert-manager will looks like this:
+cert-manager will create two Certificates since two Secret names are used:
+`example-com-tls` and `site-org-tls`. Note the Certificate's `dnsNames` contains
+a single occurence of `*.example.com ` for both listener 2 and 3 (hostnames are
+deduplicated).
+
+The two Certificates look like this:
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -145,61 +285,30 @@ spec:
     kind: Issuer
     group: cert-manager.io
   dnsNames:
-    - example.com
-    - www.example.com
+    - example.com # From listener 1.
+    - *.example.com # From listener 2 and 3.
   secretName: example-com-tls
-```
-
-The only kind and group supported in `certificateRef` is `Secret` and `core`,
-and both fields are required for the creation of a Certificate shim:
-
-```yaml
-kind: Gateway
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: site-org-tls
 spec:
-  listeners:
-    - hostname: example.com
-      tls:
-        certificateRef:
-          name: example-com-tls
-          kind: Secret # ✅ Mandatory.
-          group: core # ✅ Mandatory.
+  issuerRef:
+    name: my-issuer
+    kind: Issuer
+    group: cert-manager.io
+  dnsNames:
+    - site.org # From listener 4.
+  secretName: site-org-tls
 ```
 
-The only TLS mode allowed is `Terminate`, which must be set explicitly:
 
-```yaml
-kind: Gateway
-spec:
-  listeners:
-    - hostname: example.com
-      tls:
-        mode: Terminate # ✅ Mandatory.
-```
 
-Like with an Ingress, any invalid listener is skipped. For example, a listener
-that does not have a `tls` block won't be used to create a Certificate:
-
-```yaml
-# No Certificate will be created for this Gateway.
-kind: Gateway
-spec:
-  listeners:
-        - hostname: example.com
-      tls:
-        # ❌ Passthrough is not supported, this listener is skipped.
-        mode:
-        certificateRef:
-          name: example-com-tls
-          kind: Secret
-          group: core
-    - hostname: www.example.com
-      tls:
-        # ❌ Missing "mode", this listener is skipped.
-        certificateRef:
-          name: example-com-tls
-          kind: Secret"
-          group: core
-```
+A Gateway with two listeners each for different hostname and different secret
+name- two separate Certificates get created for each. I guess eventually (but
+not for this PR?) it might make sense to describe this more from a user's
+perspective (i.e scenario based).
 
 ## Supported Annotations
 
