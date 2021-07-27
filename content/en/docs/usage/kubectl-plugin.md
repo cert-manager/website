@@ -163,10 +163,10 @@ Denied CertificateRequest 'my-app/my-app'
 ---
 
 ### Experimental
-The cert-manager plugin contains experimental commands for operations which are
-currently under evaluation to be included into cert-manager proper. The
-behavior and interface of these commands are subject to change or removal in
-future releases.
+`kubectl cert-manager x` has experimental sub-commands for operations which are
+currently under evaluation to be included into cert-manager proper. The behavior
+and interface of these commands are subject to change or removal in future
+releases.
 
 
 #### Create

@@ -16,6 +16,10 @@ Using this resource may be useful for users who are using an application that
 supports this resource, but not the cert-manager CertificateRequest resource,
 and they still wish for certificates to be signed through cert-manager.
 
+CertificateSigningRequests reference a `SignerName` or signer as the entity it
+wishes to sign its request from. For cert-manager, a signer can be mapped to
+either an [Issuer or ClusterIssuer](../../configuration/).
+
 #### Feature State
 
 This feature is currently in an _experimental_ state, and its behavior is
