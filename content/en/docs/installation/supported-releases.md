@@ -205,7 +205,7 @@ to be supporting most commercial Kubernetes offerings.
 
 |   Vendor   | Oldest Kubernetes Release\* | Other Old Kubernetes Releases                                |
 | :--------: | :-------------------------: | ------------------------------------------------------------ |
-| [EKS][eks] |     1.16 (EOL Jul 2021)     | 1.17 (EOL Sep 2021), 1.18 (EOL Nov 2021), 1.9 (EOF Apr 2022) |
+| [EKS][eks] |     1.16 (EOL Jul 2021)     | 1.17 (EOL Sep 2021), 1.18 (EOL Nov 2021), 1.19 (EOF Apr 2022) |
 | [GKE][gke] |     1.17 (EOL Nov 2021)     | 1.18 (EOL Dec 2021), 1.19 (EOL Feb 2022)                     |
 | [AKS][aks] |     1.18 (EOL Jul 2021)     | 1.19 (EOL Aug 2021)                                          |
 
