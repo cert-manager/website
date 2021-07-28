@@ -20,11 +20,14 @@ following diagram (source: https://gateway-api.sigs.k8s.io):
 Note that cert-manager only supports setting up the TLS configuration on the
 Gateway resource when the Gateway is configured to terminate the TLS connection.
 There is still uncertainty around how the HTTPRoute TLS configuration should be
-used (see
-[gateway-api#577](https://github.com/kubernetes-sigs/gateway-api/issues/577)),
-and no existing implementation supports the TLS passthrough mode in which the
-HTTPRoute contains the TLS configuration and terminates the connection (see
-[istio#31747](https://github.com/istio/istio/issues/31747)).
+used (see [the discussion about TLS interaction between HTTPRoute and
+Gateway][gateway-api#577]) and no existing implementation supports the TLS
+pass-through mode in which the HTTPRoute contains the TLS configuration and
+terminates the connection (see the [feature request for supporting `spec.tls` in
+HTTPRoute for Istio][istio#31747]).
+
+[istio#31747]: https://github.com/istio/istio/issues/31747
+[gateway-api#577]: https://github.com/kubernetes-sigs/gateway-api/issues/577
 
 Before enabling the Gateway support, you will have to install the Gateway API
 CRDs:
@@ -269,8 +272,8 @@ spec:
 
 cert-manager will create two Certificates since two Secret names are used:
 `example-com-tls` and `site-org-tls`. Note the Certificate's `dnsNames` contains
-a single occurence of `*.example.com ` for both listener 2 and 3 (hostnames are
-deduplicated).
+a single occurrence of `*.example.com ` for both listener 2 and 3 (the
+`hostname` values are de-duplicated).
 
 The two Certificates look like this:
 
@@ -303,28 +306,14 @@ spec:
   secretName: site-org-tls
 ```
 
-
-
-A Gateway with two listeners each for different hostname and different secret
-name- two separate Certificates get created for each. I guess eventually (but
-not for this PR?) it might make sense to describe this more from a user's
-perspective (i.e scenario based).
-
 ## Supported Annotations
 
-Two Ingress annotations are not available on Gateways:
+Four Ingress annotations are not available on Gateways:
 
-- `acme.cert-manager.io/http01-ingress-class` since the Gateway resource does
-  not have a `class` field.
-
-  🔥 **TODO:** add an annotation `acme.cert-manager.io/http01-gateway-class` to
-  override the `gatewayClass` defined on the Issuer.
-
-- `acme.cert-manager.io/http01-edit-in-place` since this is specific to some
-  ingress controllers like ingress-gce.
-- `kubernetes.io/tls-acme`??
-
-  🔥 **TODO:** should we keep this annotation for the Gateway support?
+- `acme.cert-manager.io/http01-ingress-class`
+- `acme.cert-manager.io/http01-edit-in-place`
+- `kubernetes.io/tls-acme`
+- `cert-manager.io/issue-temporary-certificate`
 
 The following annotations are similar to the ones supported on the Ingress
 resource:
@@ -355,3 +344,9 @@ resource:
 - `cert-manager.io/usages`: (optional) this annotation allows you to configure
   `spec.usages` field for the `Certificate` to be generated. Pass a string with
   comma-separated values i.e "key agreement,digital signature, server auth"
+
+One annotation is specific to the Gateway resource:
+
+- `acme.cert-manager.io/http01-gateway-class` allows you to configure the
+  `spec.gatewayClass` of the created Gateway while solving the HTTP-01
+  challenge.
