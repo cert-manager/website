@@ -8,7 +8,7 @@ type: "docs"
 Below is an aggregation of solutions to some issues that cert-manager users may
 face:
 
-
+- [TLS Terminology, including commonly misused terms](./terminology/)
 - [Troubleshooting issuing ACME certificates](./acme/)
 - [How to change the Cluster Resource Namespace](./cluster-resource/)
 - [How to sync secrets across namespaces](./kubed/)
