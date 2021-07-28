@@ -34,7 +34,8 @@ has the following section for the "Server Certificate" section of the TLS handsh
 > assumption that the remote end must already possess it in order to
 > validate it in any case.
 
-In a standard, secure and correctly configured TLS environment, adding a root certificate to the chain is almost entirely _pure waste_.
+In a standard, secure and correctly configured TLS environment, adding a root certificate to the chain is
+almost always unnecessary and wasteful.
 
 There are two ways that a certificate can be trusted:
 
@@ -46,19 +47,27 @@ Crucially, root certificates are by definition self-signed and they cannot be va
 As such, if we have a client trying to validate the certificate chain sent by the server, the client must already have the
 root before the connection is started. If the client already has the root, there was no point in it being sent by the server!
 
-### How can I see all the historic events related to a certificate object ?
+The same logic with not sending root certificates applies for servers trying to validate client certificates;
+the [same justification](https://datatracker.ietf.org/doc/html/rfc5246#section-7.4.6) is given in the TLS RFC.
+
+### How can I see all the historic events related to a certificate object?
 
 cert-manager publishes all events to the Kubernetes events mechanism, you can get the events for your specific resources using `kubectl describe <resource> <name>`.
+
 Due to the nature of the Kubernetes event mechanism these will be purged after a while. If you're using a dedicated logging system it might be able or is already also storing Kubernetes events.
 
-### What happens if a renewal is doesn't happen due to issues? Will it be tried again after sometime?
+### What happens if a renewal doesn't happen? Will it be tried again after some time?
 
-cert-manager makes use of exponential back off to retry non-fatal failures (ones that didn't mark the `CertificateRequest` as failed). If the `CertificateRequest` was marked as failed, issuance will be re-tried in 1 hour.
+cert-manager will retry renewal if it encounters temporary failures. It uses an exponential backoff algorithm to calculate the delay between each retry.
+
+A temporary failure is one that doesn't mark the `CertificateRequest` as failed. If the `CertificateRequest` is marked as failed, issuance will be re-tried in 1 hour.
 
 ### Is ECC (elliptic-curve cryptography) supported?
 
 cert-manager supports ECDSA key pairs! You can set your certificate to use ECDSA  in the `privateKey` part of your Certificate resource.
+
 For example:
+
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -77,6 +86,7 @@ spec:
 ```
 
 ### If `renewBefore` or `duration` is not defined, what will be the default value?
+
 Default `duration` is [90 days](https://github.com/jetstack/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26). If `renewBefore` has not been set, `Certificate` will be renewed 2/3 through its _actual_ duration.
 
 ## Miscellaneous
