@@ -49,8 +49,8 @@ $ helm repo update
 $ helm upgrade --version <version> <release_name> jetstack/cert-manager
 ```
 
-This will upgrade you to the latest version of cert-manager, as listed in the
-[Jetstack Helm chart repository](https://hub.helm.sh/charts/jetstack).
+This will upgrade you to the latest version of cert-manager, as listed on the
+[cert-manager Helm chart documentation page](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
 > Note: You can find out your release name using `helm list | grep
 > cert-manager`.
