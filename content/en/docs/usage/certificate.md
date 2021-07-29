@@ -186,12 +186,15 @@ spec:
 
 ### Actions that will trigger a rotation of the private key {#actions-triggering-private-key-rotation}
 
-Setting the `rotationPolicy: Always` or changing other fields in the Certificate
-spec won't rotate the private key immediately. In order to rotate the private
-key, the certificate objects must be reissued. A certificate object is reissued
-under the following circumstances:
+Setting the `rotationPolicy: Always` won't rotate the private key immediately.
+In order to rotate the private key, the certificate objects must be reissued. A
+certificate object is reissued under the following circumstances:
 
-- when the X.509 certificate is nearing expiry,
+- when the X.509 certificate is nearing expiry, which is when the Certificate's
+  `status.renewalTime` is reached;
+- when a change is made to one of the following fields on the Certificate's
+  spec: `commonName`, `dnsNames`, `ipAddresses`, `uris`, `emailAddresses`,
+  `subject`, `isCA`, `usages`, `duration` or `issuerRef`;
 - when a reissuance is manually triggered with the following:
   ```sh
   kubectl cert-manager renew cert-1
@@ -236,9 +239,13 @@ rotation mechanism also includes the initial issuance.
 
 {{% pageinfo color="info" %}}
 
-👉 We recommend that you configure `rotationPolicy: Always` on your certificate
-resources. It is considered to be a good practice to rotate private keys when a
-certificate is renewed.
+👉 We recommend that you configure `rotationPolicy: Always` on your Certificate
+resources. Rotating both the certificate and the private key simultaneously
+prevents the risk of issuing a certificate with an exposed private key. Another
+benefit to renewing the private key regularly is to let you be confident that
+the private key rotation can be done in case of emergency. More generally, it is
+a good practice to be rotating the keys as often as possible, reducing the risk
+associated with compromised keys.
 
 {{% /pageinfo %}}
 
