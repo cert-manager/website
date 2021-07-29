@@ -254,59 +254,43 @@ the X.509 CSR contained in a CertificateRequest. We call "approver" the
 Kubernetes controller that takes care of setting the `Approved` and `Denied`
 conditions.
 
-The following diagram shows the two possible scenarios. Note that in both
-cases, the issuer is still responsible for setting the `Ready` condition
-(either to `True` or to `False`):
+The following diagrams shows the two possible scenarios.
 
-```text
- APPROVAL SCENARIO                                               DENIAL SCENARIO
- +------------------------------+        |      +------------------------------+
- | kind: CertificateRequest     |        |      | kind: CertificateRequest     |
- | status:                      |        |      | status:                      |
- |  conditions:                 |        |      |  conditions:                 |
- |   - type: Ready              |        |      |   - type: Ready              |
- |     status: "False"          |        |      |     status: "False"          |
- |     reason: Pending          |        |      |     reason: Pending          |
- +------------------------------+        |      +------------------------------+
-                |                        |                     |
-                |                        |                     |
-                | The approver           |                     | The approver
-                | approves the           |                     | denies the
-                | request                |                     | request
-                |                        |                     |
-                |                        |                     |
-                v                        |                     v
- +------------------------------+        |      +------------------------------+
- | kind: CertificateRequest     |        |      | kind: CertificateRequest     |
- | status:                      |        |      | status:                      |
- |  conditions:                 |        |      |  conditions:                 |
- |   - type: Ready              |        |      |   - type: Ready              |
- |     status: "False"          |        |      |     status: "False"          |
- |     reason: Pending          |        |      |     reason: Pending          |
- |   - type: Approved           |        |      |   - type: Denied             |
- |     status: "True"           |        |      |     status: "True"           |
- +------------------------------+        |      +------------------------------+
-                |                        |                     |
-                |                        |                     |
-                |- The signer signs      |                     |
-                |  the X.509 CSR         |                     |
-                |                        |                     |
-                |- The issuer sets       |                     |- The issuer sets
-                |  Ready=True            |                     |  Ready=False
-                |                        |                     |
-                |                        |                     |
-                v                        |                     v
- +------------------------------+        |      +------------------------------+
- | kind: CertificateRequest     |        |      | kind: CertificateRequest     |
- | status:                      |        |      | status:                      |
- |  conditions:                 |        |      |  conditions:                 |
- |   - type: Ready              |        |      |   - type: Ready              |
- |     status: "True"           |        |      |     status: "False"          |
- |     reason: Issued           |        |      |     reason: Denied           |
- |   - type: Approved           |        |      |   - type: Denied             |
- |     status: "True"           |        |      |     status: "True"           |
- +------------------------------+        |      +------------------------------+
-               ✅                                               ❌
+#### ✅ The `Approved` scenario {#approved-scenario}
+
+Note that the issuer is responsible for setting the `Ready=True` condition. The
+approver does not set `Ready`, nor does cert-manager.
+
+```diagram
+kind: CertificateRequest              kind: CertificateRequest              kind: CertificateRequest
+status:                               status:                               status:
+ conditions:                           conditions:                           conditions:
+  - type: Ready                         - type: Ready                         - type: Ready
+    status: "False"  ---------------->    status: "False"   --------------->    status: "True"
+    reason: Pending                       reason: Pending                       reason: Issued
+                     (1) The approver   - type: Approved     (2) The signer   - type: Approved
+                         approves the     status: "True"         signs the      status: "True"
+                         request                                 X.509 CSR
+
+                                                             (3) The issuer
+                                                                 sets
+                                                                 Ready=True
+```
+
+#### ❌ The `Denied` scenario {#denied-scenario}
+
+Again, the issuer is responsible for setting the `Ready=False` condition.
+
+```diagram
+kind: CertificateRequest               kind: CertificateRequest             kind: CertificateRequest
+status:                                status:                              status:
+ conditions:                            conditions:                          conditions:
+  - type: Ready                          - type: Ready                        - type: Ready
+    status: "False"  ---------------->     status: "False"  --------------->    status: "False"
+    reason: Pending                        reason: Pending                      reason: Denied
+                     (1) The approver    - type: Denied      (2) The issuer   - type: Denied
+                         denies the        status: "True"        sets           status: "True"
+                         request                                 Ready=False
 ```
 
 <!--
