@@ -6,9 +6,13 @@ type: "docs"
 ---
 
 Since 1.5, cert-manager supports requesting TLS certificates using annotations
-on Gateway resources. The Gateway resource is part of the [Gateway API][gwapi],
-a set of CRDs that can be installed to your Kubernetes cluster and that aim at
-offering a richer alternative to the Ingress abstraction.
+on Gateway resources. This works similarly as to what you can do with
+annotations on the Ingress resource, as described on the page [Securing Ingress
+Resources](/docs/usage/ingress/).
+
+The Gateway resource is part of the [Gateway API][gwapi], a set of CRDs that can
+be installed to your Kubernetes cluster and that aim at offering a richer
+alternative to the Ingress abstraction.
 
 [gwapi]: https://gateway-api.sigs.k8s.io
 
@@ -58,10 +62,10 @@ flag:
 You can also install the CRDs after installing cert-manager. cert-manager will
 pick up the Gateway CRD as soon as it is installed.
 
-Like with an Ingress, the annotations `cert-manager.io/issuer` or
-`cert-manager.io/cluster-issuer` tells cert-manager that this Gateway should be
-looked at to create Certificate. For example, the following Gateway should
-trigger the creation of the `example-com-tls` Certificate:
+The annotations `cert-manager.io/issuer` or `cert-manager.io/cluster-issuer`
+tells cert-manager that this Gateway should be looked at to create Certificate.
+For example, the following Gateway should trigger the creation of the
+`example-com-tls` Certificate:
 
 ```yaml
 apiVersion: networking.x-k8s.io/v1alpha1
@@ -110,13 +114,22 @@ spec:
 
 ## Use cases
 
-### Skipping of invalid listener blocks
+### Generate TLS certs for selected TLS blocks
 
-Like with an Ingress, the invalid listeners are skipped. For example, no
-Certificate will be created for the following Gateway since both listener that
-does not have a `tls` block won't be used to create the Certificates.
+cert-manager skips any listener block that cannot be used for generating a
+Certificate. For a listener block to be used for creating a Certificate, it must
+meet the following requirements:
 
-In the below example, the three first listener blocks are invalid:
+|           Field            |                         Requirement                         |
+|----------------------------|-------------------------------------------------------------|
+| `tls.hostname`             | Must not be empty.                                          |
+| `tls.mode`                 | Must be set to `Terminate`. `Passthrough` is not supported. |
+| `tls.certificateRef.name`  | Cannot be left empty.                                       |
+| `tls.certificateRef.kind`  | Must be set to `Secret`.                                    |
+| `tls.certificateRef.group` | Must be set to `core`.                                      |
+
+In the following example, the three first listener blocks are not going to be
+used to generate Certificate resources:
 
 ```yaml
 apiVersion: networking.x-k8s.io/v1alpha1
@@ -162,8 +175,8 @@ spec:
           group: core # ✅ Required. "core" is the only valid value.
 ```
 
-The above Gateway will have one Certificate created, named `example-com-tls`
-after the only valid listener block:
+cert-manager has skipped over the first three listener blocks and has created a
+single Certificate named `example-com-tls` for the last listener block:
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -180,20 +193,10 @@ spec:
   secretName: example-com-tls
 ```
 
-Here is the list of requirements for a valid `listener` block:
-
-|           Field            |                         Requirement                         |
-|----------------------------|-------------------------------------------------------------|
-| `tls.hostname`             | Must not be empty.                                          |
-| `tls.mode`                 | Must be set to `Terminate`. `Passthrough` is not supported. |
-| `tls.certificateRef.name`  | Cannot be left empty.                                       |
-| `tls.certificateRef.kind`  | Must be set to `Secret`.                                    |
-| `tls.certificateRef.group` | Must be set to `core`.                                      |
-
 ### Two listeners with the same Secret name
 
-Contrary to with an Ingress, you can set the same Secret name multiple times
-regardless of the hostname. Let us imagine that you have these two listeners:
+The same Secret name can be re-used in multiple TLS blocks regardless of the
+hostname. Let us imagine that you have these two listeners:
 
 ```yaml
 apiVersion: networking.x-k8s.io/v1alpha1
@@ -308,15 +311,13 @@ spec:
 
 ## Supported Annotations
 
-Four Ingress annotations are not available on Gateways:
+If you are migrating to using Gateway resources instead of Ingress resources to
+generate Certificate resources, be aware that there are some differences in
+which annotations are [supported on the Ingress
+resource](https://cert-manager.io/docs/usage/ingress/#supported-annotations)
+versus which annotations are supported on the Gateway resource.
 
-- `acme.cert-manager.io/http01-ingress-class`
-- `acme.cert-manager.io/http01-edit-in-place`
-- `kubernetes.io/tls-acme`
-- `cert-manager.io/issue-temporary-certificate`
-
-The following annotations are similar to the ones supported on the Ingress
-resource:
+The Gateway resource supports the following annotations:
 
 - `cert-manager.io/issuer`: the name of an `Issuer` to acquire the certificate
   required for this Gateway. The Issuer _must_ be in the same namespace as the
@@ -344,9 +345,3 @@ resource:
 - `cert-manager.io/usages`: (optional) this annotation allows you to configure
   `spec.usages` field for the `Certificate` to be generated. Pass a string with
   comma-separated values i.e "key agreement,digital signature, server auth"
-
-One annotation is specific to the Gateway resource:
-
-- `acme.cert-manager.io/http01-gateway-class` allows you to configure the
-  `spec.gatewayClass` of the created Gateway while solving the HTTP-01
-  challenge.
