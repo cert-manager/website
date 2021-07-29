@@ -126,15 +126,13 @@ On old GKE versions (`1.10.7-gke.1` and below), when requesting certificates
 [`ingress-gce`](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress)
 ingress controller, `ingress-gce`
 [required](https://github.com/kubernetes/ingress-gce/pull/388) a temporary
-certificate is to be present while waiting for the issuance of a signed
+certificate must be present while waiting for the issuance of a signed
 certificate. Note that this issue was
 [solved](https://github.com/jetstack/cert-manager/issues/606#issuecomment-424397233)
 in `1.10.7-gke.2`.
 
-To work around this, you had to add the following annotation
-to your Ingress objects:
-
 ```yaml
+# Required for GKE 1.10.7-gke.1 and below.
 cert-manager.io/issue-temporary-certificate": "true"
 ```
 
@@ -154,9 +152,9 @@ With `rotationPolicy: Always`, cert-manager waits until the Certificate
 object is correctly signed before overwriting the `tls.key` file in the
 Secret.
 
-With this setting, you can expect **no downtime** if your application can
-detect changes to the mounted `tls.crt` and `tls.key` using and reload them
-gracefully or automatically restart.
+With this setting, you can expect **no downtime** if your application can detect
+changes to the mounted `tls.crt` and `tls.key` and reload them gracefully or
+automatically restart.
 
 If your application only loads the private key and signed certificate once
 at start up, the new certificate won't immediately be served by your
@@ -188,10 +186,10 @@ spec:
 
 ### Actions that will trigger a rotation of the private key {#actions-triggering-private-key-rotation}
 
-Setting the `rotationPolicy: Always` or change the Certificate's spec won't
-rotate the private key immediately. In order to get the private key secret
-rotated, the certificate objects must be reissued. A certificate object is
-reissued with either:
+Setting the `rotationPolicy: Always` or changing other fields in the Certificate
+spec won't rotate the private key immediately. In order to rotate the private
+key, the certificate objects must be reissued. A certificate object is reissued
+under the following circumstances:
 
 - when the X.509 certificate is nearing expiry,
 - when a reissuance is manually triggered with the following:
@@ -230,15 +228,15 @@ further issuances will re-use this private key. This is the default in order to
 maintain compatibility with previous releases.
 
 With `rotationPolicy: Always`, a new private key will be generated each time an
-action triggers the reissuance of the certificate object (see
-[actions](#actions-triggering-private-key-rotation) above). Note that if the
-private key secret already exists when creating the certificate object, the
-existing private key will not be used, since the rotation mechanism also
-includes the initial issuance.
+action triggers the reissuance of the certificate object (see [Actions that will
+trigger a rotation of the private key](#actions-triggering-private-key-rotation)
+above). Note that if the private key secret already exists when creating the
+certificate object, the existing private key will not be used, since the
+rotation mechanism also includes the initial issuance.
 
 {{% pageinfo color="info" %}}
 
-👉 It is recommended you configure `rotationPolicy: Always` on your certificate
+👉 We recommend that you configure `rotationPolicy: Always` on your certificate
 resources. It is considered to be a good practice to rotate private keys when a
 certificate is renewed.
 
