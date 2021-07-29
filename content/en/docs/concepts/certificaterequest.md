@@ -222,14 +222,7 @@ CertificateRequests:
 
 - Or you can write your own custom approver.
 
-### The `Approved` and `Denied` conditions and approvers
-
-The approval API is made of two mutually exclusive conditions that can be set on
-the CertificateRequests status: `Approved` and `Denied`. When the approval API
-is enabled, a CertificateRequest must have the `Approved` condition before a
-signer (such as the ACME issuer) can issue the certificate.
-
-{{% pageinfo color="info" %}}
+### Signer vs. Issuer
 
 As part of the approval API, we decided to make use of the term "signer"
 instead of "issuer" as a way to come closer to the terms used in the
@@ -247,7 +240,12 @@ signer. By "issuer" we refer to both external issuers (such as
 [aws-pca-issuer](https://github.com/jniebuhr/aws-pca-issuer)) and internal
 issuers (such as the ACME issuer embedded into cert-manager).
 
-{{% /pageinfo %}}
+### The `Approved` and `Denied` conditions and approvers
+
+The approval API is made of two mutually exclusive conditions that can be set on
+the CertificateRequests status: `Approved` and `Denied`. When the approval API
+is enabled, a CertificateRequest must have the `Approved` condition before a
+signer (such as the ACME issuer) can issue the certificate.
 
 The approval API kicks in right before the signer (e.g., the ACME issuer) signs
 the X.509 CSR contained in a CertificateRequest. We call "approver" the
@@ -259,7 +257,7 @@ The following diagrams shows the two possible scenarios.
 #### ✅ The `Approved` scenario {#approved-scenario}
 
 Note that the issuer is responsible for setting the `Ready=True` condition. The
-approver does not set `Ready`, nor does cert-manager.
+approver (including the built-in cert-manager approver) does not set `Ready`.
 
 ```diagram
 kind: CertificateRequest              kind: CertificateRequest              kind: CertificateRequest
@@ -587,10 +585,10 @@ two rules:
    `Approved`. If the CertificateRequest is marked as `Denied` or has no
    approval condition altogether, the signer is expected not to sign it.
 
-\*Some issuers [do not
-support](/docs/configuration/external/#issuers-that-honour-approval) the
-approval API yet. Such approvers break the rule (2). cert-manager detects
-CertificateRequests that have been signed by an issuer that ignored the approval
-API. When it detects one, cert-manager pretends that the CertificateRequests has
-been approved. To avoid this issue, make sure to run only issuers that support
-the approval API.
+\*Some issuers may not support the approval API. The approver that support the
+Approval API are listed in the [external issuers
+page](/docs/configuration/external/). Approvers that do support the Approval API
+will be breaking the rule (2). cert-manager detects CertificateRequests that
+have been signed by an issuer that ignored the approval API. When it detects
+one, cert-manager pretends that the CertificateRequests has been approved. To
+avoid this issue, make sure to run only issuers that support the approval API.
