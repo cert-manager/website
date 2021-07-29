@@ -23,11 +23,9 @@ More information on this install method [can be found here](./kubectl/).
 
 > You quickly want to learn how to use cert-manager and what it can be used for.
 
-The [kubectl plugin](./kubectl-plugin/) allows installing cert-managers resources customized based on the provided Helm values:
-```bash
-$ kubectl cert-manager x install
-```
-The plugin also provides [other sub-commands](../usage/kubectl-plugin/) for interacting with cert-manager resources.
+We recommend [kubectl cert-manager x install](./kubectl-plugin/) to quickly install cert-manager and [interact with cert-manager resources](../usage/kubectl-plugin/) from the command line. 
+
+Or if you prefer Helm or if you don't want to install the `kubectl cert-manager` plugin, you can [use helm to install cert-manager](./helm/).
 
 In case you are running on an OpenShift cluster, consider installing via [cert-manager on OperatorHub.io](./operator-lifecycle-manager/).
 
@@ -35,10 +33,8 @@ In case you are running on an OpenShift cluster, consider installing via [cert-m
 
 > You know how to configure your cert-manager setup and want to automate this.
 
-The cert-manager kubectl plugin can export [generated YAML to stdout](./kubectl-plugin/#output-yaml).
+You can use either `helm template` or `kubectl cert-manager x install --dry-run` to generate customized cert-manager installation manifests.
+See [Output YAML using kubectl cert-manager x install](./kubectl-plugin/#output-yaml) and [Output YAML using helm template](./helm/#output-yaml) for more details.
 This templated cert-manager manifest can be piped into your preferred deployment tool.
-```bash
-$ kubectl cert-manager x install --dry-run > cert-manager.yaml
-```
 
 In case you are using Helm for automation, cert-manager [supports installing using Helm](./helm/).

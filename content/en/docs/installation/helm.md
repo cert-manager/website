@@ -14,10 +14,9 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 
 ### Prerequisites
 
-- Helm version 3 or later
-- A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
-- cert-manager not already installed on the cluster
-- [Prerequisites specific to your cloud provider](../compatibility/)
+- [Install Helm version 3 or later](https://helm.sh/docs/intro/install/).
+- Install a [supported version of Kubernetes or OpenShift](../supported-releases/).
+- Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Steps
 

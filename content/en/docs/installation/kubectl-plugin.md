@@ -9,10 +9,9 @@ type: "docs"
 
 ### Prerequisites
 
-- **Have the [cert-manager kubectl plugin installed](../../usage/kubectl-plugin/#installation)**
-- A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
-- cert-manager not already installed on the cluster
-- [Prerequisites specific to your cloud provider](../compatibility/)
+- [Install the kubectl cert-manager plugin](../../usage/kubectl-plugin/#installation).
+- Install a [supported version of Kubernetes or OpenShift](../supported-releases/).
+- Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Steps
 
@@ -23,8 +22,7 @@ $ kubectl cert-manager x install
 The command makes sure that the required `CustomResourceDefinitions` are installed together with the cert-manager, cainjector and webhook components.
 Under the hood, a procedure similar to the [Helm install procedure](../helm/#steps) is used.
 
-All Helm templating parameters can also be used with the kubectl plugin.
-On the [cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager) a full list of the available **Helm values** can be found.
+You can also use `kubectl cert-manager x install` to customize the installation of cert-manager.
 
 The example below shows how to tune the cert-manager installation by overwriting the default Helm values:
 
@@ -33,7 +31,7 @@ $ kubectl cert-manager x install \
     --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
     --set webhook.timeoutSeconds=4s   # Example: changing the wehbook timeout using a Helm parameter
 ```
-
+You can find [a full list of the install parameters on cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager#configuration). These are the same parameters that are available when using the Helm chart.
 Once you have deployed cert-manager, you can [verify](../verify/) the installation.
 
 ### Output YAML
