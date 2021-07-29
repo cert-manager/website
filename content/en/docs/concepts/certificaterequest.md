@@ -185,7 +185,7 @@ extraArgs:
   - --controllers=*,-certificaterequests-approver
 ```
 
-{{% alert title="Disable approve-all" color="info" %}}
+{{% alert title="Disable approve-all" color="primary" %}}
 
 The flag `--controllers=*,-certificaterequests-approver` prevents cert-manager
 from starting its allow-all built-in approval controller.
