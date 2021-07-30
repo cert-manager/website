@@ -1,7 +1,7 @@
 ---
 title: "Securing Gateway Resources"
 linkTitle: "Securing Gateway Resources"
-weight: 90
+weight: 105
 type: "docs"
 ---
 
@@ -40,32 +40,15 @@ CRDs:
 kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.3.0" | kubectl apply -f -
 ```
 
-You then need to manually enable the Gateway support for Certificate using a
-flag:
+cert-manager will detect that the Gateway API CRD is installed and will start
+watching Gateway resources. The Gateway API CRDs must be installed before
+cert-manager starts.
 
-- If you are using Helm:
-
-  ```sh
-  helm upgrade --install cert-manager jetstack/cert-manager
-    --set "extraArgs={--controllers=*\,gateway-shim}"
-  ```
-
-- If you are using the raw cert-manager manifests, you can add the following
-  argument to the cert-manager controller Deployment's `args`:
-
-  ```yaml
-  args:
-    # ...
-    - --controllers=*,gateway-shim
-  ```
-
-You can also install the CRDs after installing cert-manager. cert-manager will
-pick up the Gateway CRD as soon as it is installed.
 
 The annotations `cert-manager.io/issuer` or `cert-manager.io/cluster-issuer`
-tells cert-manager that this Gateway should be looked at to create Certificate.
-For example, the following Gateway should trigger the creation of the
-`example-com-tls` Certificate:
+tells cert-manager that this Gateway should be looked at to create a
+Certificate. For example, the following Gateway should trigger the creation of
+the `example-com-tls` Certificate:
 
 ```yaml
 apiVersion: networking.x-k8s.io/v1alpha1
@@ -317,31 +300,33 @@ which annotations are [supported on the Ingress
 resource](https://cert-manager.io/docs/usage/ingress/#supported-annotations)
 versus which annotations are supported on the Gateway resource.
 
-The Gateway resource supports the following annotations:
+The Gateway resource supports the following annotations for generating
+Certificate resources:
 
-- `cert-manager.io/issuer`: the name of an `Issuer` to acquire the certificate
+- `cert-manager.io/issuer`: the name of an Issuer to acquire the certificate
   required for this Gateway. The Issuer _must_ be in the same namespace as the
   Gateway resource.
 
-- `cert-manager.io/cluster-issuer`: the name of a `ClusterIssuer` to acquire the
-  certificate required for this Gateway. It does not matter which namespace
-  your Gateway resides, as `ClusterIssuers` are non-namespaced resources.
+- `cert-manager.io/cluster-issuer`: the name of a ClusterIssuer to acquire the
+  Certificate required for this Gateway. It does not matter which namespace your
+  Gateway resides, as `ClusterIssuers` are non-namespaced resources.
 
-- `cert-manager.io/issuer-kind`: the name of an external `Issuer`
-  controller's `CustomResourceDefinition` (only necessary for out-of-tree `Issuers`)
+- `cert-manager.io/issuer-kind`: the kind of the external issuer resource, for
+  example `AWSPCACIssuer`. This is only necessary for out-of-tree issuers.
 
-- `cert-manager.io/issuer-group`: the name of the API group of external
-  `Issuer` controller (only necessary for out-of-tree `Issuers`)
+- `cert-manager.io/issuer-group`: the API group of the external issuer
+  controller, for example `awspca.cert-manager.io`. This is only necessary for
+  out-of-tree issuers.
 
 - `cert-manager.io/common-name`: (optional) this annotation allows you to
-  configure `spec.commonName` for the `Certificate` to be generated.
+  configure `spec.commonName` for the Certificate to be generated.
 
 - ` cert-manager.io/duration`: (optional) this annotation allows you to
-  configure `spec.duration` field for the `Certificate` to be generated.
+  configure `spec.duration` field for the Certificate to be generated.
 
 - `cert-manager.io/renew-before`: (optional) this annotation allows you to
-  configure `spec.renewBefore` field for the `Certificate` to be generated.
+  configure `spec.renewBefore` field for the Certificate to be generated.
 
 - `cert-manager.io/usages`: (optional) this annotation allows you to configure
-  `spec.usages` field for the `Certificate` to be generated. Pass a string with
+  `spec.usages` field for the Certificate to be generated. Pass a string with
   comma-separated values i.e "key agreement,digital signature, server auth"
