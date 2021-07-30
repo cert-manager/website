@@ -13,10 +13,9 @@ you will interact with cert-manager to request signed certificates.
 In order to issue any certificates, you'll need to configure an
 [`Issuer`](../../configuration/) resource first.
 
-
 ## Creating Certificate Resources
 
-A `Certificate` resource specifies fields that are used to generated certificate
+A `Certificate` resource specifies fields that are used to generate certificate
 signing requests which are then fulfilled by the issuer type you have
 referenced. `Certificates` specify which issuer they want to obtain the
 certificate from by specifying the `certificate.spec.issuerRef` field.
@@ -40,7 +39,7 @@ spec:
   renewBefore: 360h # 15d
   subject:
     organizations:
-    - jetstack
+      - jetstack
   # The use of the common name field has been deprecated since 2000 and is
   # discouraged from being used.
   commonName: example.com
@@ -54,12 +53,12 @@ spec:
     - client auth
   # At least one of a DNS Name, URI, or IP address is required.
   dnsNames:
-  - example.com
-  - www.example.com
+    - example.com
+    - www.example.com
   uris:
-  - spiffe://cluster.local/ns/sandbox/sa/example
+    - spiffe://cluster.local/ns/sandbox/sa/example
   ipAddresses:
-  - 192.168.0.5
+    - 192.168.0.5
   # Issuer references are always required.
   issuerRef:
     name: ca-issuer
@@ -79,7 +78,7 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 `sandbox` namespace (the same namespace as the `Certificate` resource).
 
 > Note: If you want to create an `Issuer` that can be referenced by
-> `Certificate` resources in *all* namespaces, you should create a
+> `Certificate` resources in _all_ namespaces, you should create a
 > [`ClusterIssuer`](../../concepts/issuer/#namespaces) resource and set the
 > `certificate.spec.issuerRef.kind` field to `ClusterIssuer`.
 
@@ -97,79 +96,158 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 > issued X.509 certificates before the issue time to fix clock-skew issues,
 > leading to the working duration of a certificate to be less than the full
 > duration of the certificate. For example, Let's Encrypt sets it to be one hour
-> before issue time, so the actual *working duration* of the certificate is 89
-> days, 23 hours (the *full duration* remains 90 days).
+> before issue time, so the actual _working duration_ of the certificate is 89
+> days, 23 hours (the _full duration_ remains 90 days).
 
 A full list of the fields supported on the Certificate resource can be found in
-the [API reference documentation](../../reference/api-docs/#cert-manager.io/v1alpha2.CertificateSpec)
+the [API reference documentation](../../reference/api-docs/#cert-manager.io/v1alpha2.CertificateSpec).
 
-## Key Usages
+## X.509 key usages and extended key usages {#key-usages}
 
-cert-manager supports requesting certificates that have a number of custom key
-usages and extended key usages. Although cert-manager will attempt to honor this
-request, some issuers will remove, add defaults, or otherwise completely ignore
-the request and is determined on an issuer by issuer basis. The `CA` and
-`SelfSigned` `Issuer` will always return certificates matching the usages you have
-requested.
+cert-manager supports requesting certificates that have a number of [custom key
+usages](https://tools.ietf.org/html/rfc5280#section-4.2.1.3) and [extended key
+usages](https://tools.ietf.org/html/rfc5280#section-4.2.1.12). Although
+cert-manager will attempt to honor this request, some issuers will remove, add
+defaults, or otherwise completely ignore the request.
+The `CA` and `SelfSigned` `Issuer` will always return certificates matching the usages you have requested.
 
 Unless any number of usages has been set, cert-manager will set the default
-requested usages of "digital signature", "key encipherment", and "server auth".
+requested usages of `digital signature`, `key encipherment`, and `server auth`.
 cert-manager will not attempt to request a new certificate if the current
-certificate does not match the current key usages set.
+certificate does not match the current key usage set.
 
 An exhaustive list of supported key usages can be found in the [API reference
 documentation](../../reference/api-docs/#cert-manager.io/v1alpha2.KeyUsage).
 
-## Temporary Certificates whilst Issuing
+## Temporary Certificates while Issuing {#temporary-certificates-whilst-issuing}
 
-When [requesting certificates using ingress-shim](../ingress/), the component
-`ingress-gce`, if used, requires that a temporary certificate is present while
-waiting for issuance of a signed certificate when serving. To facilitate this,
-if the annotation `"cert-manager.io/issue-temporary-certificate": "true"` is
-present on the certificate, a self signed temporary certificate will be present
-on the `Secret` until it is overwritten once the signed certificate has been
-issued.
+On old GKE versions (`1.10.7-gke.1` and below), when requesting certificates
+[using the ingress-shim](../ingress/) alongside the
+[`ingress-gce`](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress)
+ingress controller, `ingress-gce`
+[required](https://github.com/kubernetes/ingress-gce/pull/388) a temporary
+certificate must be present while waiting for the issuance of a signed
+certificate. Note that this issue was
+[solved](https://github.com/jetstack/cert-manager/issues/606#issuecomment-424397233)
+in `1.10.7-gke.2`.
 
-## Configuring private key rotation
+```yaml
+# Required for GKE 1.10.7-gke.1 and below.
+cert-manager.io/issue-temporary-certificate": "true"
+```
 
-> **WARNING**: This feature requires enabling the `ExperimentalCertificateControllers`
-> feature gate by passing the `--feature-gates=ExperimentalCertificateControllers=true`
-> flag to the controller component, or adding `--set featureGates=ExperimentalCertificateControllers=true`
-> when deploying using the Helm chart.
+That made sure that a temporary self-signed certificate was present in the
+`Secret`. The self-signed certificate was replaced with the signed certificate
+later on.
 
-When a certificate is re-issued for any reason, including because it is nearing
-expiry, when a change to the spec is made or a re-issuance is manually
-triggered, cert-manager supports configuring the 'private key rotation policy'
-to either always re-use the existing private key (the default behavior) or to
-regenerate a new private key on each issuance (the recommended behavior).
+## Rotation of the private key {#rotation-private-key}
 
-This is configured using the `spec.privateKey.rotationPolicy` like so:
+By default, the private key won't be rotated automatically. Using the setting
+`rotationPolicy: Always`, the private key Secret associated with a Certificate
+object can be configured to be rotated as soon as an action triggers the
+reissuance of the Certificate object (see
+[Actions that will trigger a rotation of the private key](#actions-triggering-private-key-rotation) below).
+
+With `rotationPolicy: Always`, cert-manager waits until the Certificate
+object is correctly signed before overwriting the `tls.key` file in the
+Secret.
+
+With this setting, you can expect **no downtime** if your application can detect
+changes to the mounted `tls.crt` and `tls.key` and reload them gracefully or
+automatically restart.
+
+If your application only loads the private key and signed certificate once
+at start up, the new certificate won't immediately be served by your
+application, and you will want to either manually restart your pod with
+`kubectl rollout restart`, or automate the action by running
+[wave](https://github.com/wave-k8s/wave). Wave is a Secret controller that
+makes sure deployments get restarted whenever a mounted Secret changes.
+
+{{% alert title="Re-use of private keys" color="primary" %}}
+
+Some issuers, like the built-in [Venafi
+issuer](/docs/configuration/venafi/), may disallow re-using private keys.
+If this is the case, you must explicitly configure the `rotationPolicy:
+Always` setting for each of your Certificate objects accordingly.
+
+{{% /alert %}}
+
+In the following example, the certificate has been set with
+`rotationPolicy: Always`:
 
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Certificate
-metadata:
-  name: my-cert
-  ...
 spec:
   secretName: my-cert-tls
-  dnsNames:
-  - example.com
   privateKey:
-    rotationPolicy: Always
+    rotationPolicy: Always # 🔰 Here.
 ```
 
-There are two supported rotation policies:
+### Actions that will trigger a rotation of the private key {#actions-triggering-private-key-rotation}
 
-* **Never** (default): a private key is only generated if one does not already exist in
-  the target Secret resource (using the `tls.key` key). All further issuance's will re-use
-  this private key. This is the default in order to maintain compatibility with previous releases.
-* **Always**: a new private key will be generated each time a new certificate is issued.
-  It is recommended you configure this `rotationPolicy` on your Certificate resources as it
-  is good practice to rotate private keys when a certificate is renewed.
+Setting the `rotationPolicy: Always` won't rotate the private key immediately.
+In order to rotate the private key, the certificate objects must be reissued. A
+certificate object is reissued under the following circumstances:
 
-Some Issuer types may disallow re-using private keys. If this is the case, you must explicitly
-configure the `rotationPolicy` for each of your Certificates accordingly.
+- when the X.509 certificate is nearing expiry, which is when the Certificate's
+  `status.renewalTime` is reached;
+- when a change is made to one of the following fields on the Certificate's
+  spec: `commonName`, `dnsNames`, `ipAddresses`, `uris`, `emailAddresses`,
+  `subject`, `isCA`, `usages`, `duration` or `issuerRef`;
+- when a reissuance is manually triggered with the following:
+  ```sh
+  kubectl cert-manager renew cert-1
+  ```
+  Note that the above command requires the [kubectl
+  cert-manager](/docs/usage/kubectl-plugin/#renew) plugin.
+
+{{% pageinfo color="warning" %}}
+
+**❌** Deleting the Secret resource associated with a Certificate resource is
+**not a recommended solution** for manually rotating the private key. The
+recommended way to manually rotate the private key is to trigger the reissuance
+of the Certificate resource with the following command (requires the [`kubectl
+cert-manager`](/docs/usage/kubectl-plugin/#renew) plugin):
+
+```sh
+kubectl cert-manager renew cert-1
+```
+
+{{% /pageinfo %}}
+
+### The `rotationPolicy` setting
+
+The possible values for `rotationPolicy` are:
+
+| Value                  | Description                                                   |
+| ---------------------- | ------------------------------------------------------------- |
+| `Never` (default)      | cert-manager reuses the existing private key on each issuance |
+| `Always` (recommended) | cert-manager regenerates a new private key on each issuance   |
+
+With `rotationPolicy: Never`, a private key is only generated if one does not
+already exist in the target Secret resource (using the `tls.key` key). All
+further issuances will re-use this private key. This is the default in order to
+maintain compatibility with previous releases.
+
+With `rotationPolicy: Always`, a new private key will be generated each time an
+action triggers the reissuance of the certificate object (see [Actions that will
+trigger a rotation of the private key](#actions-triggering-private-key-rotation)
+above). Note that if the private key secret already exists when creating the
+certificate object, the existing private key will not be used, since the
+rotation mechanism also includes the initial issuance.
+
+{{% pageinfo color="info" %}}
+
+👉 We recommend that you configure `rotationPolicy: Always` on your Certificate
+resources. Rotating both the certificate and the private key simultaneously
+prevents the risk of issuing a certificate with an exposed private key. Another
+benefit to renewing the private key regularly is to let you be confident that
+the private key rotation can be done in case of emergency. More generally, it is
+a good practice to be rotating the keys as often as possible, reducing the risk
+associated with compromised keys.
+
+{{% /pageinfo %}}
 
 ## Cleaning up Secrets when Certificates are deleted
 
@@ -178,3 +256,13 @@ This means that deleting a `Certificate` won't take down any services that are c
 The `Secret` needs to be manually deleted if it is no longer needed.
 
 If you would prefer the `Secret` to be deleted automatically when the `Certificate` is deleted, you need to configure your installation to pass the `--enable-certificate-owner-ref` flag to the controller.
+
+## Renewal
+
+cert-manager will automatically renew `Certificate`s. It will calculate _when_ to renew a `Certificate` based on the issued X.509 certificate's duration and a 'renewBefore' value which specifies _how long_ before expiry a certificate should be renewed.
+
+`spec.duration` and `spec.renewBefore` fields on a `Certificate` can be used to specify an X.509 certificate's duration and a 'renewBefore' value. Default value for `spec.duration` is 90 days. Some issuers might be configured to only issue certificates with a set duration, so the actual duration may be different.
+Minimum value for `spec.duration` is 1 hour and minimum value for `spec.renewBefore` is 5 minutes.
+It is also required that `spec.duration` > `spec.renewBefore`.
+
+Once an X.509 certificate has been issued, cert-manager will calculate the renewal time for the `Certificate`. By default this will be 2/3 through the X.509 certificate's duration. If `spec.renewBefore` has been set, it will be `spec.renewBefore` amount of time before expiry. cert-manager will set `Certificate`'s `status.RenewalTime` to the time when the renewal will be attempted.

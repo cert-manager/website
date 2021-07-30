@@ -175,6 +175,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-ibmcis`](https://github.com/jb-dk/cert-manager-webhook-ibmcis)
 - [`cert-manager-webhook-loopia`](https://github.com/Identitry/cert-manager-webhook-loopia)
 - [`cert-manager-webhook-arvan`](https://github.com/kiandigital/cert-manager-webhook-arvan)
+- [`bizflycloud-certmanager-dns-webhook`](https://github.com/bizflycloud/bizflycloud-certmanager-dns-webhook)
 
 You can find more information on how to configure webhook providers
 [here](./webhook/).

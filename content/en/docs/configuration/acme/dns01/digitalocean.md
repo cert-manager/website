@@ -14,7 +14,6 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: digitalocean-dns
-  namespace: cert-manager
 data:
   # insert your DO access token here
   access-token: "base64 encoded access-token here"
@@ -22,7 +21,7 @@ data:
 
 The access token must have write access.
 
-To create a Personal Access Token, see [DigitalOcean documentation](https://www.digitalocean.com/docs/api/create-personal-access-token).
+To create a Personal Access Token, see [DigitalOcean documentation](https://docs.digitalocean.com/reference/api/create-personal-access-token/).
 
 Handy direct link: https://cloud.digitalocean.com/account/api/tokens/new
 

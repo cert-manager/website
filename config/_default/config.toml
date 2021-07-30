@@ -33,15 +33,6 @@ pygmentsStyle = "tango"
 [permalinks]
 blog = "/:section/:year/:month/:day/:slug/"
 
-## Configuration for BlackFriday markdown parser: https://github.com/russross/blackfriday
-[blackfriday]
-plainIDAnchors = true
-hrefTargetBlank = true
-angledQuotes = false
-latexDashes = true
-# Needs investigation - opens all links in new tab (canonifyURLs conflict?)
-#hrefTargetBlank = true
-
 # Image processing configuration.
 [imaging]
 resampleFilter = "CatmullRom"
@@ -85,6 +76,14 @@ sidebar_menu_compact = true
 breadcrumb_disable = false
 #  Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
 navbar_logo = true
+
+[markup.goldmark.renderer]
+unsafe = true # By default, Goldmark does not render raw HTML. The endpoint "/docs/reference/api-docs/" for example, needs this option to be true.
+
+[markup.goldmark.parser]
+autoHeadingIDAsciiOnly = true
+autoHeadingID = true
+autoHeadingIDType = "blackfriday" # Compatibility with anchors we had with blackfriday
 
 [services]
 [services.googleAnalytics]

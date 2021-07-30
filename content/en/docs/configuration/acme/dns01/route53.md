@@ -232,12 +232,25 @@ metadata:
     eks.amazonaws.com/role-arn: arn:aws:iam::XXXXXXXXXXX:role/cert-manager
 ```
 
-The cert-manager Helm chart provides a variable for injecting annotations into cert-manager's `ServiceAccount` object like so:
+You will also need to modify the cert-manager `Deployment` with the correct file system permissions, so the `ServiceAccount` token can be read.
+
+```yaml
+spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 1001
+```
+
+The cert-manager Helm chart provides a variable for injecting annotations into cert-manager's `ServiceAccount` and `Deployment` object like so:
 
 ```yaml
 serviceAccount:
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::XXXXXXXXXXX:role/cert-manager
+securityContext:
+  enabled: true
+  fsGroup: 1001
 ```
 
 **Note:** If you're following the Cross Account example above, modify the `ClusterIssuer` in the same way as above with the role from Account Y.

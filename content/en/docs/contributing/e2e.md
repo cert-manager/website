@@ -5,91 +5,102 @@ weight: 70
 type: "docs"
 ---
 
-cert-manager has an end-to-end test suite that verifies functionality against a
+cert-manager has an extensive end-to-end (e2e) test suite that verifies functionality against a
 real Kubernetes cluster.
 
-This test takes around 30 minutes, it will be run on every PR in our cluster.
+The full end-to-end test suite can take a long time to complete and is run against every pull
+request made to the cert-manager project.
 
-> Note: you can see the status of each commit on the master branch at
-> [`testgrid.k8s.io`](https://testgrid.k8s.io/jetstack-cert-manager-master).
-> You can join the Google group
-> [`cert-manager-dev-alerts`](https://groups.google.com/g/cert-manager-dev-alerts)
-> in order to receive a notification by email whenever a commit on master
-> fails.
+Unless you've made huge changes to the cert-manager codebase --- or to the end-to-end
+tests themselves --- you probably don't _need_ to run the tests locally. If you do want to
+run the tests, though, this document explains how.
 
-It is only advised to run this locally when you made big changes to the
-codebase. This document explains how you can run the end-to-end tests yourself.
+{{% alert title="TestGrid Alerts"  %}}
+The status of each commit on the master branch is reported on
+[`testgrid.k8s.io`](https://testgrid.k8s.io/jetstack-cert-manager-master). Join the
+[`cert-manager-dev-alerts`](https://groups.google.com/g/cert-manager-dev-alerts)
+Google group to receive email notifications when tests fail.
+{{% /alert %}}
 
 ## Requirements
 
-Currently, a number of tools **must** be installed on your machine in order to
-run the tests:
+There are a small number of required tools which **must** be installed on your machine
+to run the tests:
 
-- `bazel`: As with all other development, Bazel is required to actually build
-  the project as well as end-to-end test framework. Bazel will also retrieve
-  appropriate versions of any other dependencies depending on what 'target' you
-  choose to run.
-
-- `docker`: We provision a whole Kubernetes cluster within Docker, and so an up
-  to date version of Docker must be installed. The oldest Docker version we have
-  tested is 17.09.
-
-- `kubectl`:  If you are running the tests on Linux, this step is technically
-  not required. For non-Linux hosts (i.e. macOS), you will need to ensure you have
-  a relatively new version of `kubectl` available on your PATH.
-
-- `kind`: We use kind to provision a Kubernetes cluster.
-
-
-Bazel, Docker and `kubectl` should be installed through your preferred means.
+- `bazel`: Builds cert-manager and the end-to-end tests themselves
+- `kind`: Provisions a Kubernetes cluster inside docker.
+- `docker`: Required by kind.
+- `kubectl`: A relatively new version of `kubectl` should be available on your `$PATH`.
 
 ## Set up End-to-End Tests
 
-You need to have a Kind cluster running, if you don't have one set up you can set one up using:
-```bash
-export K8S_VERSION=1.19 # optional: this allows you to test different Kubernetes versions
-$ ./devel/cluster/create.sh
+The test requires a kind cluster to run against. Note that the tests assume a certain configuration
+for the kind cluster, and you should be sure to use this script rather than creating a cluster manually
+unless you're sure you've mimicked the required configuration:
+
+```console
+$ export K8S_VERSION=1.19 # optional: this allows you to test different Kubernetes versions
+$ ./devel/cluster/create-kind.sh
+...
 ```
 
-Once you have one set up you need to install all dependencies (including cert-manager) in the cluster using:
+There are also certain dependencies which the test requires, which can also be installed using
+a helper script:
 
-```bash
+```console
 $ ./devel/setup-e2e-deps.sh
 ```
 
-**TIP**: if you only need to update one dependency you can run `./devel/addon/<name>/install.sh` 
+**TIP**: If you only need to update one dependency in the testing cluster, you can instead run
+`./devel/addon/<name>/install.sh` to save some time.
 
 ## Run End-to-End Tests
 
-You can run the end-to-end tests by executing the following:
+The following script will run the tests. Note that the tests produce a lot of output, and take
+some time (often well over 30 minutes) to complete:
 
-```bash
+```console
 $ ./devel/run-e2e.sh
+... lots of output ...
 ```
 
-The full suite may take up to 30 minutes to run.
-You can monitor output of this command to track progress.
+**NB:** If you don't use `create-kind.sh` to create the kind cluster, the ACME HTTP01 end-to-end tests will fail,
+as they require the 'service CIDR' to be set to `10.0.0.0/16`.
 
-Note: *If you did not use `create.sh` to create the cluster you will notice that ACME HTTP01 end-to-end tests will fail, as they require the 'service CIDR' to be set to 10.0.0.0/16 as the ingress controller is deployed with the fixed IP 10.0.0.15 to allow [Pebble](https://github.com/letsencrypt/pebble) to access it on a predictable address for end-to-end tests as our test DNS name `certmanager.kubernetes.network` points to 10.0.0.15.*
+This is because the ingress controller is deployed with the fixed IP `10.0.0.15` to allow
+[Pebble](https://github.com/letsencrypt/pebble) to access it on a predictable address for end-to-end tests; our
+test DNS name `certmanager.kubernetes.network` points to `10.0.0.15`.
 
-You can also run a specific part of the test using `--ginkgo.focus`
-```bash
+If you don't want to run every test, you can focus on specific parts using `--ginkgo.focus`:
+
+```console
 $ ./devel/run-e2e.sh --ginkgo.focus "<text regex>"
-```
-More info on how to use this can be found in the [Ginkgo documentation](https://onsi.github.io/ginkgo/#focused-specs)
 
+# example: run any test which has "basicConstraint" in the description
+$ ./devel/run-e2e.sh --ginkgo.focus "basicConstraint"
+```
+
+More info on how to use this can be found in the [Ginkgo focused-specs documentation](https://onsi.github.io/ginkgo/#focused-specs)
 
 ## End-to-End Test Structure
 
-The end-to-end tests consist of 2 big parts: the issuer specific tests and the conformance suite. These tests use the [Ginkgo library](https://onsi.github.io/ginkgo/#getting-ginkgo) to run tests.
+The end-to-end tests consist of 2 big parts: the issuer specific tests and the conformance suite. Both parts use
+[Ginkgo](https://onsi.github.io/ginkgo/#getting-ginkgo) to run their tests.
 
-### Conformance suite
+### Conformance Suite
+
 ### RBAC
+
 This suite tests all RBAC permissions granted to cert-manager on the cluster to check that it is able to operate correctly.
+
 ### Certificates
+
 This suite tests certificate functionality against all issuers.
-#### Feature sets
-This exists to only test a certain feature (e.g. Email SAN) against issuers that support this feature.
-Each test specifies a used feature using `s.checkFeatures(feature)`, this is then checked against the issuer's `UnsupportedFeatures` list to check if it can be ran against the issuer.
 
+#### Feature Sets
 
+Some issuers don't support certain features, such as for example issuing Ed25519 certificates or adding an email address
+to the X.509 SAN extension.
+
+Each test specifies a used feature using `s.checkFeatures(feature)`, which is then checked against the issuer's
+`UnsupportedFeatures` list. Tests which use a feature unsupported by an issuer are skipped for that issuer.

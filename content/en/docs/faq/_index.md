@@ -27,7 +27,7 @@ Due to the nature of the Kubernetes event mechanism these will be purged after a
 
 ### What happens if a renewal is doesn't happen due to issues? Will it be tried again after sometime?
 
-cert-manager makes use of exponential back off to retry any failures on requesting or renewing certificates. It will retry any failures unless the Issuer gave a fatal error that it marked as not retryable.
+cert-manager makes use of exponential back off to retry non-fatal failures (ones that didn't mark the `CertificateRequest` as failed). If the `CertificateRequest` was marked as failed, issuance will be re-tried in 1 hour.
 
 ### Is ECC (elliptic-curve cryptography) supported?
 
@@ -51,9 +51,7 @@ spec:
 ```
 
 ### If `renewBefore` or `duration` is not defined, what will be the default value?
-cert-manager will default to a `duration` of [90 days](https://github.com/jetstack/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26) with a `renewBefore` of [30 days](https://github.com/jetstack/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L32).
-If `renewBefore` is not set and the duration of the signed certificate is shorter or equal to 30 days, the `renewBefore` time will be set to 2/3 of the signed certificate validity duration.
-When setting `duration` it is recommended to also set `renewBefore`, if `renewBefore` is longer than `duration` you will receive an error.
+Default `duration` is [90 days](https://github.com/jetstack/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26). If `renewBefore` has not been set, `Certificate` will be renewed 2/3 through its _actual_ duration.
 
 ## Miscellaneous
 
@@ -70,8 +68,10 @@ because such certificates increase the opportunity for attacks on the Kubernetes
 
 In Kubernetes 1.19 the [Certificate Signing Requests API] has reached V1
 and it can be used more generally by following (or automating) the [Request Signing Process].
-There are plans for cert-manager make greater use of this API now that it is stable.
+
+cert-manager currently has some [limited experimental support] for this resource.
 
 [Certificate Signing Requests API]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#certificatesigningrequest-v1-certificates-k8s-io
 [`kubectl certificates` command]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#certificate
 [Request signing process]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process
+[limited experimental support]: ../usage/kube-csr/

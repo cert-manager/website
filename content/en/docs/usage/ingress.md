@@ -38,9 +38,9 @@ spec:
         backend:
           service:
             name: myservice
-            port: 
+            port:
               number: 80
-  tls: # < placing a host in the TLS config will indicate a certificate should be created
+  tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
   - hosts:
     - example.com
     secretName: myingress-cert # < cert-manager will store the created certificate in this secret.
@@ -87,6 +87,20 @@ trigger `Certificate` resources to be automatically created:
   to be set on the resulting `Secret` until the final signed certificate has been
   returned.  This is useful for keeping compatibility with the `ingress-gce`
   component.
+
+- `cert-manager.io/common-name`: (optional) this annotation allows you to
+  configure `spec.commonName` for the `Certificate` to be generated.
+
+- ` cert-manager.io/duration`: (optional) this annotation allows you to
+  configure `spec.duration` field for the `Certificate` to be generated.
+
+- `cert-manager.io/renew-before`: (optional) this annotation allows you to
+  configure `spec.renewBefore` field for the `Certificate` to be generated.
+
+- `cert-manager.io/usages`: (optional) this annotation allows you to configure
+  `spec.usages` field for the `Certificate` to be generated. Pass a string with
+  comma-separated values i.e "key agreement,digital signature, server auth"
+
 
 ## Optional Configuration
 

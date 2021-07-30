@@ -32,14 +32,6 @@
     @import url($web-font-path);
 }
 
-footer {
-    min-height: 150px;
-
-    @include media-breakpoint-down(md) {
-         min-height: 200px;
-    }
-}
-
 // Adjust anchors vs the fixed menu.
 @include media-breakpoint-up(md) {
     .td-offset-anchor:target {

@@ -5,16 +5,13 @@ weight: 50
 type: "docs"
 ---
 
-It is strongly recommended that users get familiar with the concepts and
-configuration of resources in the documentation when using cert-manager.
-However, step-by-step tutorials are very useful for deploying these resources to
-get to a final goal. Below is the list of tutorials that you might find helpful:
+Step-by-step tutorials are a great way to get started with cert-manager, and we provide a few
+for you to learn from. Take a look!
 
 - [Backup and Restore Resources](./backup/): Backup the cert-manager resources
   in your cluster and then restore them.
-- [Securing Ingresses with NGINX-Ingress and
-  cert-manager](./acme/ingress/): Tutorial for deploying NGINX into your
-  cluster and securing the connection with an ACME certificate.
+- [Securing Ingresses with NGINX-Ingress and cert-manager](./acme/ingress/): Tutorial for deploying NGINX into your
+  cluster and securing incoming connections with a certificate from Let's Encrypt.
 - [Issuing an ACME Certificate using DNS Validation](./acme/dns-validation/):
   Tutorial on how to resolve DNS ownership validation using DNS01 challenges.
 - [Issuing an ACME Certificate using HTTP Validation](./acme/http-validation/):
@@ -26,8 +23,8 @@ get to a final goal. Below is the list of tutorials that you might find helpful:
   certificate.
 
 
-User How-To Blog Posts and Examples:
+### External Tutorials
 
-- A full cert-manager installation demo on GKE Cluster. See [How-To: Automatic SSL Certificate Management for your Kubernetes Application Deployment](https://medium.com/contino-engineering/how-to-automatic-ssl-certificate-management-for-your-kubernetes-application-deployment-94b64dfc9114)
+- A full cert-manager installation demo on a GKE Cluster. See [How-To: Automatic SSL Certificate Management for your Kubernetes Application Deployment](https://medium.com/contino-engineering/how-to-automatic-ssl-certificate-management-for-your-kubernetes-application-deployment-94b64dfc9114)
 - cert-manager installation on GKE Cluster using Workload Identity. See [Kubernetes, ingress-nginx, cert-manager & external-dns](https://blog.atomist.com/kubernetes-ingress-nginx-cert-manager-external-dns/)
-- A video tutorial for beginners showing cert-manager in action. See [Free SSL for Kubernetes with Cert-Manager](https://www.youtube.com/watch?v=hoLUigg4V18)
+- A video tutorial for beginners showing cert-manager in action. See [Free SSL for Kubernetes with cert-manager](https://www.youtube.com/watch?v=hoLUigg4V18)
