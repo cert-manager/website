@@ -40,8 +40,9 @@ spec:
   # Secret template is optional. If set, these annotations
   # and labels will be copied to the secret named example-com-tls.
 
-  # Note: Once created, labels and annotations are not yet removed
-  # from the Secret if removed from the secretTemplate.
+  # Note: Labels and annotations from the template are only synced to the Secret at the time when the certificate 
+  is created or renewed. Currently labels and annotations can only be added, but not removed. Removing any 
+  labels or annotations from the template or removing the template itself will have no effect.
   # See https://github.com/jetstack/cert-manager/issues/4292.
   secretTemplate:
     annotations:
