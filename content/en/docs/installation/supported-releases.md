@@ -17,14 +17,14 @@ release every two months.
 
 ## Supported releases {#supported-releases}
 
-| Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][o] |
+| Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 | ------- | :----------: | :----------: | :--------------------------------: | :-------------------------------: |
 | [1.4][] | Jun 15, 2021 | Oct 13, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |      4.3, 4.4, 4.5, 4.6, 4.7      |
 | [1.3][] | Apr 08, 2021 | Aug 11, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |      4.3, 4.4, 4.5, 4.6, 4.7      |
 
 ## Upcoming releases
 
-| Release | Release Date | End of life  |    [Supported Kubernetes versions][s]    | [Supported OpenShift versions][o] |
+| Release | Release Date | End of life  |    [Supported Kubernetes versions][s]    | [Supported OpenShift versions][s] |
 | ------- | :----------: | :----------: | :--------------------------------------: | :-------------------------------: |
 | [1.5][] | Aug 11, 2021 | Dec 15, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |   4.3, 4.4, 4.5, 4.6, 4.7, 4.8    |
 | 1.6     | Oct 13, 2021 | Feb 16, 2022 |              to be defined               |           to be defined           |
@@ -47,7 +47,6 @@ Note that dates in the future are uncertain and might change.
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
-[o]: #openshift-supported-versions
 [1.5]: https://github.com/jetstack/cert-manager/milestone/26
 [1.4]: https://cert-manager.io/docs/release-notes/release-notes-1.4
 [1.3]: https://cert-manager.io/docs/release-notes/release-notes-1.3
@@ -203,43 +202,52 @@ Our testing coverage is:
 The oldest Kubernetes release supported by cert-manager is 1.16, as we want
 to be supporting most commercial Kubernetes offerings.
 
-|   Vendor   | Oldest Kubernetes Release\* | Other Old Kubernetes Releases                                |
-| :--------: | :-------------------------: | ------------------------------------------------------------ |
-| [EKS][eks] |     1.16 (EOL Jul 2021)     | 1.17 (EOL Sep 2021), 1.18 (EOL Nov 2021), 1.9 (EOF Apr 2022) |
-| [GKE][gke] |     1.17 (EOL Nov 2021)     | 1.18 (EOL Dec 2021), 1.19 (EOL Feb 2022)                     |
-| [AKS][aks] |     1.18 (EOL Jul 2021)     | 1.19 (EOL Aug 2021)                                          |
+|      Vendor       | Oldest Kubernetes Release\* |               Other Old\*\* Kubernetes Releases               |
+|:-----------------:|-----------------------------|---------------------------------------------------------------|
+|    [EKS][eks]     | 1.16 (EOL Sep 2021)         | 1.17 (EOL Nov 2021), 1.18 (EOL Dec 2021), 1.19 (EOL Apr 2022) |
+|    [GKE][gke]     | 1.17 (EOL Nov 2021)         | 1.18 (EOL Mar 2022), 1.19 (EOL Jun 2022)                      |
+|    [AKS][aks]     | 1.18 (EOL Jul 2021)         | 1.19 (EOL Aug 2021)                                           |
+| [OpenShift 4][os] | 1.18 (4.5, EOL July 2021)   | 1.19 (4.6 EUS, EOL May 2022)                                  |
 
-\*As of June 22, 2021.
+\*As of July 30, 2021.
+
+\*\*We say that a Kubernetes offering is "old" when it is not supported upstream
+as per the [Version Skew
+Policy](https://kubernetes.io/releases/version-skew-policy/) page.
+
+<!--
+
+To be added when those become "old":
+
+- OpenShift 4: 1.20 (4.7, EOL Jun 2022), 1.21 (4.8, EOL Nov 2022)
+
+-->
+
 
 [eks]: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#kubernetes-release-calendar
 [gke]: https://cloud.google.com/kubernetes-engine/docs/release-schedule
 [aks]: https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions#aks-kubernetes-release-calendar
-
-## OpenShift supported versions {#openshift-supported-versions}
-
-We maintain the following table to remember the mapping between OpenShift and
-Kubernetes versions. The dates are an estimate based on the [OpenShift Updates
-page](https://access.redhat.com/support/policy/updates/openshift#dates).
-
-| Version | Kubernetes | EOL            |
-| ------- | ---------- | -------------- |
-| 4.8     | 1.21       | 01 Nov 2022\*  |
-| 4.7     | 1.20       | 01 Jun 2022\*  |
-| 4.6 EUS | 1.19       | 24 May 2022    |
-| 4.6     | 1.19       | 01 Dec 2021\*  |
-| 4.5     | 1.18       | 01 July 2021\* |
-| 4.4     | 1.17       | 24 Feb 2021    |
-| 4.3     | 1.16       | 27 Oct 2020    |
-| 4.2     | 1.14       | 13 Jul 2020    |
-| 4.1     | 1.13       | 05 May 2020    |
-
-\*Estimated as of June 22, 2021, given that the average number of months between
-two OpenShift releases is 5 to 6 months.
+[os]: https://access.redhat.com/support/policy/updates/openshift#dates
 
 With regard to OpenShift Container Platform 3, cert-manager 1.2 is the last
 release to support OpenShift 3.11 (Kubernetes 1.11). Although OpenShift 3.11 is
 still supported by Red Hat until June 2022, keeping support for very old
 versions of Kubernetes had become too much of a burden.
+
+> **Note:** the following table presents the mapping between each OpenShift
+> version and its associated Kubernetes version:
+>
+> | OpenShift versions | Kubernetes version |
+> |--------------------|--------------------|
+> | 4.9                | 1.22               |
+> | 4.8                | 1.21               |
+> | 4.7                | 1.20               |
+> | 4.6                | 1.19               |
+> | 4.5                | 1.18               |
+> | 4.4                | 1.17               |
+> | 4.3, 3.11          | 1.16               |
+> | 4.2                | 1.14               |
+> | 4.1                | 1.13               |
 
 ## Terminology
 
