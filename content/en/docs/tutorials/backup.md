@@ -13,18 +13,16 @@ re-install.
 
 The following commands will back up the configuration of `cert-manager`
 resources. Doing that might be useful before upgrading `cert-manager`. As
-this backup does not include the `Secrets` containing the X.509 certificates,
-restoring to a cluster that does not already have those `Secret`s will result in
-the certificates being reissued.
+this backup does not include the `Secrets` containing the X.509
+certificates, restoring to a cluster that does not already have those
+`Secret` objects will result in the certificates being reissued.
 
 ### Backup
 
 To backup all of your cert-manager configuration resources, run:
 
 ```bash
-$ kubectl get -o yaml \
-     --all-namespaces \
-     issuer,clusterissuer,certificates > cert-manager-backup.yaml
+kubectl get --all-namespaces -oyaml issuer,clusterissuer,cert > backup.yaml
 ```
 
 If you are transferring data to a new cluster, you may also need to copy across
@@ -50,11 +48,12 @@ as:
 
 ### Restore
 
-In order to restore your configuration, you can simply `kubectl apply` the files
-created above after installing cert-manager.
+In order to restore your configuration, you can `kubectl apply` the files
+created above after installing cert-manager, with the exception of the
+`uid` and `resourceVersion` fields that do not need to be restored:
 
 ```bash
-$ kubectl apply -f cert-manager-backup.yaml
+kubectl apply -f <(awk '!/^ *(resourceVersion|uid): [^ ]+$/' backup.yaml)
 ```
 
 ## Full cluster backup and restore
