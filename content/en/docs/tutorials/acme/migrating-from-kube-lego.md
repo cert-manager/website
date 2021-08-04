@@ -104,9 +104,17 @@ namespace that it is running in, and we used `cert-manager` when deploying
 cert-manager above. You should change this if you have deployed cert-manager
 into a different namespace.
 
+Install [yq](https://kislyuk.github.io/yq/#installation) then run the command below:
+
 ```bash
-$ kubectl create -f kube-lego-account.yaml \
-    --namespace cert-manager
+$ kubectl get secret kube-lego-account -o yaml \
+    --namespace kube-lego | yq -Y \
+    'del(
+       .metadata.creationTimestamp,
+       .metadata.resourceVersion,
+       .metadata.selfLink,
+       .metadata.uid
+     )' > kube-lego-account.yaml
 ```
 
 ## 4. Creating an ACME `ClusterIssuer` using your old ACME account
