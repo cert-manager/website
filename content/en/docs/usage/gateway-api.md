@@ -5,14 +5,16 @@ weight: 105
 type: "docs"
 ---
 
-Since 1.5, cert-manager supports requesting TLS certificates using annotations
-on Gateway resources. This works similarly as to what you can do with
-annotations on the Ingress resource, as described on the page [Securing Ingress
-Resources](/docs/usage/ingress/).
+**FEATURE STATE**: cert-manager 1.5 [stable]
 
-The Gateway resource is part of the [Gateway API][gwapi], a set of CRDs that can
-be installed to your Kubernetes cluster and that aim at offering a richer
-alternative to the Ingress abstraction.
+cert-manager can generate TLS certificates for Gateway resources. This is
+configured by adding annotations to a Gateway and is similar to the process for
+[Securing Ingress Resources](/docs/usage/ingress/).
+
+
+The Gateway resource is part of the [Gateway API][gwapi], a set of CRDs that you
+install on your Kubernetes cluster and which provide various improvements over
+the Ingress API.
 
 [gwapi]: https://gateway-api.sigs.k8s.io
 
@@ -40,15 +42,15 @@ CRDs:
 kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.3.0" | kubectl apply -f -
 ```
 
-cert-manager will detect that the Gateway API CRD is installed and will start
-watching Gateway resources. The Gateway API CRDs must be installed before
-cert-manager starts.
-
+The Gateway API CRDs should either be installed before cert-manager starts or
+the cert-manager Deployment should be restarted after installing the Gateway API
+CRDs. This is important because some of the cert-manager components only perform
+the Gateway API check on startup.
 
 The annotations `cert-manager.io/issuer` or `cert-manager.io/cluster-issuer`
-tells cert-manager that this Gateway should be looked at to create a
-Certificate. For example, the following Gateway should trigger the creation of
-the `example-com-tls` Certificate:
+tell cert-manager  to create a Certificate for a Gateway. For example, the
+following Gateway will trigger the creation of a Certificate with the name
+`example-com-tls`:
 
 ```yaml
 apiVersion: networking.x-k8s.io/v1alpha1
@@ -76,9 +78,9 @@ spec:
           group: core
 ```
 
-A few moments later, cert-manager should create a Certificate. The Certificate
-is named after the Secret name `example-com-tls`. The `dnsNames` field is set
-with the above `hostname` field.
+A few moments later, cert-manager will create a Certificate. The Certificate is
+named after the Secret name `example-com-tls`. The `dnsNames` field is set with
+the `hostname` field from the Gateway spec.
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -111,8 +113,8 @@ meet the following requirements:
 | `tls.certificateRef.kind`  | Must be set to `Secret`.                                    |
 | `tls.certificateRef.group` | Must be set to `core`.                                      |
 
-In the following example, the three first listener blocks are not going to be
-used to generate Certificate resources:
+In the following example, the first three listener blocks will not be used to
+generate Certificate resources:
 
 ```yaml
 apiVersion: networking.x-k8s.io/v1alpha1
@@ -178,7 +180,7 @@ spec:
 
 ### Two listeners with the same Secret name
 
-The same Secret name can be re-used in multiple TLS blocks regardless of the
+The same Secret name can be re-used in multiple TLS blocks, regardless of the
 hostname. Let us imagine that you have these two listeners:
 
 ```yaml
@@ -294,11 +296,10 @@ spec:
 
 ## Supported Annotations
 
-If you are migrating to using Gateway resources instead of Ingress resources to
-generate Certificate resources, be aware that there are some differences in
-which annotations are [supported on the Ingress
-resource](https://cert-manager.io/docs/usage/ingress/#supported-annotations)
-versus which annotations are supported on the Gateway resource.
+If you are migrating to Gateway resources from Ingress resources, be aware that
+there are some differences between [the annotations for Ingress
+resources](https://cert-manager.io/docs/usage/ingress/#supported-annotations)
+versus the annotations for Gateway resources.
 
 The Gateway resource supports the following annotations for generating
 Certificate resources:
