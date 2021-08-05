@@ -60,7 +60,7 @@ To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
 - If you are using Helm:
 
   ```sh
-  helm upgrade --install cert-manager jetstack/cert-manager --set "extraArgs={--feature-gates=GatewayAPI=true}"
+  helm upgrade --install cert-manager jetstack/cert-manager --set "extraArgs={--feature-gates=ExperimentalGatewayAPISupport=true}"
   ```
 
 - If you are using the raw cert-manager manifests, add the following flag to the
@@ -68,7 +68,7 @@ To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
 
   ```yaml
   args:
-    - --feature-gates=GatewayAPI=true
+    - --feature-gates=ExperimentalGatewayAPISupport=true
   ```
 
 The Gateway API CRDs should either be installed before cert-manager starts or
