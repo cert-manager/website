@@ -126,7 +126,7 @@ spec:
     ...
     solvers:
     - dns01:
-        azureDNS:
+        azuredns:
           subscriptionID: AZURE_SUBSCRIPTION_ID
           resourceGroupName: AZURE_DNS_ZONE_RESOURCE_GROUP
           hostedZoneName: AZURE_DNS_ZONE
@@ -191,7 +191,7 @@ spec:
     ...
     solvers:
     - dns01:
-        azureDNS:
+        azuredns:
           subscriptionID: AZURE_SUBSCRIPTION_ID
           resourceGroupName: AZURE_DNS_ZONE_RESOURCE_GROUP
           hostedZoneName: AZURE_DNS_ZONE
@@ -273,7 +273,7 @@ spec:
     ...
     solvers:
     - dns01:
-        azureDNS:
+        azuredns:
           clientID: AZURE_CERT_MANAGER_SP_APP_ID
           clientSecretSecretRef:
           # The following is the secret we created in Kubernetes. Issuer will use this to present challenge to Azure DNS.
