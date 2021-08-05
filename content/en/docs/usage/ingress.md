@@ -48,27 +48,28 @@ spec:
 
 ## Supported Annotations
 
-You can specify the following annotations on `Ingress` resources in order to
-trigger `Certificate` resources to be automatically created:
+You can specify the following annotations on Ingress resources in order to
+trigger Certificate resources to be automatically created:
 
-- `cert-manager.io/issuer`:  the name of an `Issuer` to acquire the certificate
-  required for this `Ingress`. The Issuer *must* be in the same namespace as the
-`Ingress` resource.
+- `cert-manager.io/issuer`:  the name of an Issuer to acquire the certificate
+  required for this Ingress. The Issuer *must* be in the same namespace as the
+  Ingress resource.
 
-- `cert-manager.io/cluster-issuer`: the name of a `ClusterIssuer` to acquire the
-  certificate required for this `Ingress`. It does not matter which namespace
-  your `Ingress` resides, as `ClusterIssuers` are non-namespaced resources.
+- `cert-manager.io/cluster-issuer`: the name of a ClusterIssuer to acquire the
+  certificate required for this Ingress. It does not matter which namespace your
+  Ingress resides, as ClusterIssuers are non-namespaced resources.
 
-- `cert-manager.io/issuer-kind`: the name of an external `Issuer`
-  controller's `CustomResourceDefinition` (only necessary for out-of-tree `Issuers`)
+- `cert-manager.io/issuer-kind`: the kind of the external issuer resource, for
+  example `AWSPCACIssuer`. This is only necessary for out-of-tree issuers.
 
-- `cert-manager.io/issuer-group`: the name of the API group of external
-  `Issuer` controller (only necessary for out-of-tree `Issuers`)
+- `cert-manager.io/issuer-group`: the API group of the external issuer
+  controller, for example `awspca.cert-manager.io`. This is only necessary for
+  out-of-tree issuers.
 
 - `kubernetes.io/tls-acme: "true"`: this annotation requires additional
   configuration of the ingress-shim [see below](./#optional-configuration).
-  Namely, a default `Issuer` must be specified as arguments to the
-  ingress-shim container.
+  Namely, a default Issuer must be specified as arguments to the ingress-shim
+  container.
 
 - `acme.cert-manager.io/http01-ingress-class`: this annotation allows you to
   configure the ingress class that will be used to solve challenges for this
@@ -83,22 +84,22 @@ trigger `Certificate` resources to be automatically created:
   modified. Any other value, or the absence of the annotation assumes "false".
   This annotation will also add the annotation
   `"cert-manager.io/issue-temporary-certificate": "true"` onto created
-  certificates which will cause a [temporary certificate](../certificate/#temporary-certificates-whilst-issuing)
-  to be set on the resulting `Secret` until the final signed certificate has been
-  returned.  This is useful for keeping compatibility with the `ingress-gce`
-  component.
+  certificates which will cause a [temporary
+  certificate](../certificate/#temporary-certificates-whilst-issuing) to be set
+  on the resulting Secret until the final signed certificate has been returned.
+  This is useful for keeping compatibility with the `ingress-gce` component.
 
 - `cert-manager.io/common-name`: (optional) this annotation allows you to
-  configure `spec.commonName` for the `Certificate` to be generated.
+  configure `spec.commonName` for the Certificate to be generated.
 
 - ` cert-manager.io/duration`: (optional) this annotation allows you to
-  configure `spec.duration` field for the `Certificate` to be generated.
+  configure `spec.duration` field for the Certificate to be generated.
 
 - `cert-manager.io/renew-before`: (optional) this annotation allows you to
-  configure `spec.renewBefore` field for the `Certificate` to be generated.
+  configure `spec.renewBefore` field for the Certificate to be generated.
 
 - `cert-manager.io/usages`: (optional) this annotation allows you to configure
-  `spec.usages` field for the `Certificate` to be generated. Pass a string with
+  `spec.usages` field for the Certificate to be generated. Pass a string with
   comma-separated values i.e "key agreement,digital signature, server auth"
 
 
