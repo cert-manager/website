@@ -268,8 +268,55 @@ In the above example, the Gateway has been specifically created for the purpose
 of solving HTTP-01 challenges, but you can also choose to re-use your existing
 Gateway, as long as it has a listener on port 80.
 
-The Issuer may be on a separate namespace to the Gateway, as long as the
-Gateway's port 80 listener is configured with `from: All`.
+The `labels` on your Issuer may reference a Gateway that is on a separate
+namespace, as long as the Gateway's port 80 listener is configured with `from:
+All`. Note that the Certificate will still be created on the same namespace as
+the Issuer, which means that you won't be able to reference this Secret in the
+above-mentioned Gateway.
+
+When the above Issuer is presented with a Certificate, cert-manager creates the
+temporary HTTPRoute. For example, with the following Certificate:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-tls
+  namespace: default
+spec:
+  issuerRef:
+    name: letsencrypt
+  dnsNames:
+  - example.net
+```
+
+You will see an HTTPRoute appear. The `labels` given to this HTTPRoute are the
+labels configured on the Issuer:
+
+```yaml
+kind: HTTPRoute
+metadata:
+  name: cm-acme-http-solver-gdhvg
+  namespace: default
+  labels:
+    gateway: http01-solver # Copied from Issuer's `gatewayHTTPRoute.labels`.
+spec:
+  gateways:
+    allow: All
+  hostnames:
+  - traefik.mael-valais-gcp.jetstacker.net
+  rules:
+  - forwardTo:
+    - port: 8089
+      serviceName: cm-acme-http-solver-gdhvg
+      weight: 1
+    matches:
+    - path:
+        type: Exact
+        value: /.well-known/acme-challenge/YadC4gaAzqEPU1Yea0D2MrzvNRWiBCtUizCtpiRQZqI
+```
+
+After the Certificate is issued, the HTTPRoute is deleted.
 
 ### `labels` {#gatewayhttproute-labels}
 
@@ -280,4 +327,4 @@ resources on your cluster. The matched Gateway have a listener on port 80.
 ### `serviceType` {#gatewayhttproute-service-type}
 
 This field has the same meaning as the
-[http01.ingress.serviceType](#ingress-service-type).
+[`http01.ingress.serviceType`](#ingress-service-type).
