@@ -88,15 +88,20 @@ the value of the `LEGO_SECRET_NAME` environment variable.
 You should download a copy of this secret resource and save it in your local
 directory:
 
+Install [yq](https://kislyuk.github.io/yq/#installation) then run the command below:
+
 ```bash
 $ kubectl get secret kube-lego-account -o yaml \
     --namespace kube-lego \
-    --export > kube-lego-account.yaml
+     | yq -Y \
+    'del(
+       .metadata.creationTimestamp,
+       .metadata.resourceVersion,
+       .metadata.selfLink,
+       .metadata.uid,
+       .metadata.namespace
+     ) | .metadata.name = "letsencrypt-private-key"' > kube-lego-account.yaml
 ```
-
-Once saved, open up this file and change the `metadata.name` field to something
-more relevant to cert-manager. For the rest of this guide, we'll assume you
-chose `letsencrypt-private-key`.
 
 Once done, we need to create this new resource in the `cert-manager` namespace.
 By default, cert-manager stores supporting resources for `ClusterIssuers` in the
