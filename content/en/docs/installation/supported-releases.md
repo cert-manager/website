@@ -17,18 +17,17 @@ release every two months.
 
 ## Supported releases {#supported-releases}
 
-| Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
-| ------- | :----------: | :----------: | :--------------------------------: | :-------------------------------: |
-| [1.4][] | Jun 15, 2021 | Oct 13, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |      4.3, 4.4, 4.5, 4.6, 4.7      |
-| [1.3][] | Apr 08, 2021 | Aug 11, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |      4.3, 4.4, 4.5, 4.6, 4.7      |
+| Release | Release Date | End of life  |    [Supported Kubernetes versions][s]    | [Supported OpenShift versions][s] |
+| ------- | :----------: | :----------: | :--------------------------------------: | :-------------------------------: |
+| [1.5][] | Aug 11, 2021 | Dec 15, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |   4.3, 4.4, 4.5, 4.6, 4.7, 4.8    |
+| [1.4][] | Jun 15, 2021 | Oct 13, 2021 |    1.16, 1.17, 1.18, 1.19, 1.20, 1.21    |      4.3, 4.4, 4.5, 4.6, 4.7      |
 
 ## Upcoming releases
 
 | Release | Release Date | End of life  |    [Supported Kubernetes versions][s]    | [Supported OpenShift versions][s] |
 | ------- | :----------: | :----------: | :--------------------------------------: | :-------------------------------: |
-| [1.5][] | Aug 11, 2021 | Dec 15, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |   4.3, 4.4, 4.5, 4.6, 4.7, 4.8    |
-| 1.6     | Oct 13, 2021 | Feb 16, 2022 |              to be defined               |           to be defined           |
-| 1.7     | Dec 15, 2021 | Apr 13, 2022 |              to be defined               |           to be defined           |
+| [1.6][] | Oct 13, 2021 | Feb 16, 2022 |              to be defined               |           to be defined           |
+|   1.7   | Dec 15, 2021 | Apr 13, 2022 |              to be defined               |           to be defined           |
 
 Note that dates in the future are uncertain and might change.
 
@@ -36,6 +35,7 @@ Note that dates in the future are uncertain and might change.
 
 | Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
 | -------- | :----------: | :----------: | :----------------------------: | :---------------------------: |
+| [1.3][]  | Apr 08, 2021 | Aug 11, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
 | [1.2][]  | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
 | [1.1][]  | Nov 24, 2021 | Apr 08, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
 | [1.0][]  | Sep 02, 2020 | Feb 10, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
@@ -47,7 +47,8 @@ Note that dates in the future are uncertain and might change.
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
-[1.5]: https://github.com/jetstack/cert-manager/milestone/26
+[1.6]: https://github.com/jetstack/cert-manager/milestone/27
+[1.5]: https://cert-manager.io/docs/release-notes/release-notes-1.5
 [1.4]: https://cert-manager.io/docs/release-notes/release-notes-1.4
 [1.3]: https://cert-manager.io/docs/release-notes/release-notes-1.3
 [1.2]: https://cert-manager.io/docs/release-notes/release-notes-1.2
@@ -182,13 +183,13 @@ maintainers think is reasonable to support and to test.
 
 Our testing coverage is:
 
-| Release branch | Prow configuration            | Dashboard                 | Kubernetes versions tested   |  Periodicity  |
-| :------------: | :---------------------------- | :------------------------ | :--------------------------- | :-----------: |
-|      PRs       | [`presubmits.yaml`][]         | [`presubmits-blocking`][] | 1.21                         |  On each PR   |
-|     master     | [`periodics.yaml`][]          | [`master`][]              | 1.16, 1.17, 1.18, 1.19, 1.21 | Every 2 hours |
-|  release-1.5   | [`next-periodics.yaml`][]     | [`next`][]                | 1.16, 1.17, 1.18, 1.19, 1.21 | Every 2 hours |
-|  release-1.4   | [`previous-periodics.yaml`][] | [`previous`][]            | 1.16, 1.17, 1.18, 1.19, 1.21 | Every 2 hours |
-|  release-1.3   | N/A                           |                           | N/A                          |      N/A      |
+| Release branch | Prow configuration            | Dashboard                 | Kubernetes versions tested  |  Periodicity  |
+| :------------: | :---------------------------- | :------------------------ | :-------------------------: | :-----------: |
+|      PRs       | [`presubmits.yaml`][]         | [`presubmits-blocking`][] |         1.21, 1.22          |  On each PR   |
+|     master     | [`periodics.yaml`][]          | [`master`][]              |         1.16 → 1.22         | Every 2 hours |
+|  release-1.6   | [`next-periodics.yaml`][]     | [`next`][]                |         1.16 → 1.22         | Every 2 hours |
+|  release-1.5   | [`previous-periodics.yaml`][] | [`previous`][]            |         1.16 → 1.22         | Every 2 hours |
+|  release-1.4   | N/A                           |                           |             N/A             |      N/A      |
 
 [`presubmits.yaml`]: https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/cert-manager-presubmits.yaml
 [`periodics.yaml`]: https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/cert-manager-periodics.yaml
