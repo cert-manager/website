@@ -27,12 +27,16 @@ Usage:
   kubectl cert-manager [command]
 
 Available Commands:
-  convert     Convert cert-manager config files between different API versions
-  create      Create cert-manager resources
-  help        Help about any command
-  renew       Mark a Certificate for manual renewal
-  status      Get details on current status of cert-manager resources
-  version     Print the kubectl cert-manager version
+  approve      Approve a CertificateRequest
+  convert      Convert cert-manager config files between different API versions
+  create       Create cert-manager resources
+  deny         Deny a CertificateRequest
+  experimental Interact with experimental features
+  help         Help about any command
+  inspect      Get details on certificate related resources
+  renew        Mark a Certificate for manual renewal
+  status       Get details on current status of cert-manager resources
+  version      Print the kubectl cert-manager version
 
 Flags:
       --as string                      Username to impersonate for the operation
@@ -107,6 +111,7 @@ kubectl cert-manager convert -f cert.yaml
 ### Create
 `kubectl cert-manager create` can be used to create cert-manager resources manually. Sub-commands are available
 to create different resources:
+
 #### CertificateRequest
 To create a cert-manager CertificateRequest, use `kubectl cert-manager create certificaterequest`. The command takes in the name of the CertificateRequest to be created, 
 and creates a new CertificateRequest resource based on the YAML manifest of a Certificate resource as specified by `--from-certificate-file` flag, by generating a private key locally and creating a 'certificate signing request' 
@@ -153,4 +158,51 @@ Approved CertificateRequest 'istio-system/mesh-ca'
 ```bash
 $ kubectl cert-manager deny -n my-app my-app --reason "example.com" --message "violates policy"
 Denied CertificateRequest 'my-app/my-app'
+```
+
+---
+
+### Experimental
+`kubectl cert-manager x` has experimental sub-commands for operations which are
+currently under evaluation to be included into cert-manager proper. The behavior
+and interface of these commands are subject to change or removal in future
+releases.
+
+
+#### Create
+`kubectl cert-manager x create` can be used to create cert-manager resources manually. Sub-commands are available
+to create different resources:
+
+##### CertificateSigningRequest
+To create a [CertificateSigningRequest](../kube-csr/), use `kubectl cert-manager
+x create csr`.  This command takes the name of the CertificateSigningRequest to
+be created, as well as a file containing a Certificate manifest (`-f,
+--from-certificate-file`). This command will generate a private key, based on
+the options of the Certificate, and write it to the local file `<name>.key`, or
+specified by `-k, --output-key-file`.
+
+```bash
+$ kubectl cert-manager x create csr -f my-cert.yaml my-req
+```
+
+
+{{% pageinfo color="warning" %}}
+
+cert-manager **will not** automatically approve
+CertificateSigningRequests. If you are not running a custom approver in your
+cluster, you will likely need to manually approve the CertificateSigningRequest:
+
+```bash
+$ kubectl certificate approve <name>
+```
+
+{{% /pageinfo %}}
+
+This command can also wait for the CertificateSigningRequest to be signed using
+the flag `-w, --fetch-certificate`. Once signed it will write the resulting
+signed certificate to the local file `<name>.crt`, or specified by `-c,
+--output-certificate-file`.
+
+```bash
+$ kubectl cert-manager x create csr -f my-cert.yaml my-req -w
 ```

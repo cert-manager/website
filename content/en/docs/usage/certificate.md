@@ -35,6 +35,21 @@ metadata:
 spec:
   # Secret names are always required.
   secretName: example-com-tls
+
+  # Secret template is optional. If set, these annotations
+  # and labels will be copied to the secret named example-com-tls.
+
+  # Note: Labels and annotations from the template are only synced to the Secret at the time when the certificate 
+  # is created or renewed. Currently labels and annotations can only be added, but not removed. Removing any 
+  # labels or annotations from the template or removing the template itself will have no effect.
+  # See https://github.com/jetstack/cert-manager/issues/4292.
+  secretTemplate:
+    annotations:
+      my-secret-annotation-1: "foo"
+      my-secret-annotation-2: "bar"
+    labels:
+      my-secret-label: foo
+
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   subject:
@@ -73,6 +88,9 @@ spec:
 The signed certificate will be stored in a `Secret` resource named
 `example-com-tls` in the same namespace as the `Certificate` once the issuer has
 successfully issued the requested certificate.
+
+If `secretTemplate` is present, annotations and labels set in this property
+will be copied over to `example-com-tls` secret. Both properties are optional.
 
 The `Certificate` will be issued using the issuer named `ca-issuer` in the
 `sandbox` namespace (the same namespace as the `Certificate` resource).

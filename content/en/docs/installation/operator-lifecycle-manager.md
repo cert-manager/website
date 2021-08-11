@@ -9,9 +9,8 @@ type: "docs"
 
 ### Prerequisites
 
-- A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
-- cert-manager not already installed on the cluster
-- [Prerequisites specific to your cloud provider](../compatibility/)
+- Install a [supported version of Kubernetes or OpenShift](../supported-releases/).
+- Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Option 1: Installing from OperatorHub Web Console on OpenShift
 
@@ -70,7 +69,7 @@ spec:
   name: cert-manager
 ...
 status:
-  currentCSV: cert-manager.v1.4.0
+  currentCSV: cert-manager.v1.5.0
   state: AtLatestKnown
 ...
 ```
