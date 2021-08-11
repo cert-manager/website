@@ -459,4 +459,4 @@ page if a step is missing or if it is outdated.
        [`cert-manager/website`](https://github.com/cert-manager/website) with
        updates to the website configuration. To do this, take inspiration from
        [Maartje's PR
-       example](ttps://github.com/cert-manager/website/pull/309/files).
+       example](https://github.com/cert-manager/website/pull/309/files).
