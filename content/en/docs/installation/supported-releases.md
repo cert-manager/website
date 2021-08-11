@@ -17,36 +17,38 @@ release every two months.
 
 ## Supported releases {#supported-releases}
 
-| Release | Release Date |        EOL        | [Supported Kubernetes versions][s] |
-| ------- | :----------: | :---------------: | :--------------------------------: |
-| [1.3][] | Apr 08, 2021 |   [~][]Aug 2021   | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |
-| [1.2][] | Feb 10, 2021 | [~][]Jun 11, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |
+| Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+| ------- | :----------: | :----------: | :--------------------------------: | :-------------------------------: |
+| [1.4][] | Jun 15, 2021 | Oct 13, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |      4.3, 4.4, 4.5, 4.6, 4.7      |
+| [1.3][] | Apr 08, 2021 | Aug 11, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |      4.3, 4.4, 4.5, 4.6, 4.7      |
 
 ## Upcoming releases
 
-| Release |   Release Date    |      EOL      | [Supported Kubernetes versions][s] |
-| ------- | :---------------: | :-----------: | :--------------------------------: |
-| [1.4][] | [~][]Jun 11, 2021 | [~][]Oct 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21 |
+| Release | Release Date | End of life  |    [Supported Kubernetes versions][s]    | [Supported OpenShift versions][s] |
+| ------- | :----------: | :----------: | :--------------------------------------: | :-------------------------------: |
+| [1.5][] | Aug 11, 2021 | Dec 15, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |   4.3, 4.4, 4.5, 4.6, 4.7, 4.8    |
+| 1.6     | Oct 13, 2021 | Feb 16, 2022 |              to be defined               |           to be defined           |
+| 1.7     | Dec 15, 2021 | Apr 13, 2022 |              to be defined               |           to be defined           |
 
-> The `~` sign is used when the date is uncertain and might change; the
-> "EOL" abbreviation stands for End Of Life.
+Note that dates in the future are uncertain and might change.
 
 ## Old releases
 
-| Release  | Release Date |     EOL      | Compatible Kubernetes versions |
-| -------- | :----------: | :----------: | :----------------------------: |
-| [1.1][]  | Nov 24, 2021 | Apr 08, 2021 |          1.11 → 1.21           |
-| [1.0][]  | Sep 02, 2020 | Feb 10, 2021 |          1.11 → 1.21           |
-| [0.16][] | Jul 23, 2020 | Nov 24, 2020 |          1.11 → 1.21           |
-| [0.15][] | May 06, 2020 | Sep 02, 2020 |          1.11 → 1.21           |
-| [0.14][] | Mar 11, 2020 | Jul 23, 2020 |          1.11 → 1.21           |
-| [0.13][] | Jan 21, 2020 | May 06, 2020 |          1.11 → 1.21           |
-| [0.12][] | Nov 27, 2019 | Mar 11, 2020 |          1.11 → 1.21           |
-| [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |
+| Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
+| -------- | :----------: | :----------: | :----------------------------: | :---------------------------: |
+| [1.2][]  | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
+| [1.1][]  | Nov 24, 2021 | Apr 08, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [1.0][]  | Sep 02, 2020 | Feb 10, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.16][] | Jul 23, 2020 | Nov 24, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.15][] | May 06, 2020 | Sep 02, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.14][] | Mar 11, 2020 | Jul 23, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.13][] | Jan 21, 2020 | May 06, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.12][] | Nov 27, 2019 | Mar 11, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
-[~]: https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U/edit?pli=1#bookmark=id.jzi02xg0ngn "Project timeline"
-[1.4]: https://github.com/jetstack/cert-manager/milestone/25
+[1.5]: https://github.com/jetstack/cert-manager/milestone/26
+[1.4]: https://cert-manager.io/docs/release-notes/release-notes-1.4
 [1.3]: https://cert-manager.io/docs/release-notes/release-notes-1.3
 [1.2]: https://cert-manager.io/docs/release-notes/release-notes-1.2
 [1.1]: https://cert-manager.io/docs/release-notes/release-notes-1.1
@@ -135,47 +137,18 @@ them.
 
 **Critical bugs** include both regression bugs as well as upgrade bugs.
 
-Regressions are functionalities that worked in a previous release but no
-longer work. [#3393][] and [#2857][] are two examples of regressions.
+Regressions are functionalities that worked in a previous release but no longer
+work. [#4142][], [#3393][] and [#2857][] are three examples of regressions.
 
 Upgrade bugs are issues (often Helm-related) preventing users from
 upgrading to currently supported releases from earlier releases of
 cert-manager. [#3882][] and [#3644][] are examples of upgrade bugs.
 
-Note that [intentional breaking changes](#breaking-changes) do not belong
-to this category.
+Note that [intentional breaking changes](#breaking-changes) do not belong to
+this category.
 
-Once merged to the master branch, fixes for critical bugs are not
-immediately back-ported. Instead, we wait until the next final release for
-triggering a patch release. The patch release will be made for all
-supported release, but note that since we do only support the two last
-releases, a single patch release is made for the last release.
-
-In the example below, the release branches `release-1.2` and `release-1.3`
-are the two supported releases at the time of the release of 1.3.0, which
-means that critical bug fixes 1 and 2 will only be back-ported to
-`release-1.2` and not to `release-1.1`:
-
-```diagram
-   v1.2.1                                v1.2.2
-------+-------------------------------------+-----------> release-1.2
-       \      backport ^  backport ^        ^
-        \     commit  /   commit  /         | v1.2.2 is created
-         \           /           /          | along with v1.3.0
-          \         /           /
-           \       /           /
-            \     /           /          v1.3.0
-             --------master-----------------+-----------> release-1.3
-                 ^           ^               \
-                 |           |                \
-                 |           |                 \
-           critical      critical               \
-           bug fix 1     bug fix 2               \
-           merged to     merged to                \
-           master        master                    ------> master
-```
-
-<!-- Diagram source: https://textik.com/#7c4096204b3c0ad3 -->
+Fixes for critical bugs are (usually) immediately back-ported by creating a new
+patch release for the two currently supported releases.
 
 #### Long-standing bugs {#long-standing-bugs}
 
@@ -195,9 +168,11 @@ possible.
 
 [#3393]: https://github.com/jetstack/cert-manager/issues/3393 "Broken CloudFlare DNS01 challenge"
 [#2857]: https://github.com/jetstack/cert-manager/issues/2857 "CloudDNS DNS01 challenge crashes cert-manager"
+[#4142]: https://github.com/jetstack/cert-manager/issues/4142 "Cannot issue a certificate that has the same subject and issuer"
 [#3444]: https://github.com/jetstack/cert-manager/issues/3444 "Certificates do not get immediately updated after updating them"
 [#3882]: https://github.com/jetstack/cert-manager/pull/3882: "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
 [#3644]: https://github.com/jetstack/cert-manager/issues/3644 "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
+
 
 ## How we determine supported Kubernetes versions {#kubernetes-supported-versions}
 
@@ -210,10 +185,10 @@ Our testing coverage is:
 | Release branch | Prow configuration            | Dashboard                 | Kubernetes versions tested   |  Periodicity  |
 | :------------: | :---------------------------- | :------------------------ | :--------------------------- | :-----------: |
 |      PRs       | [`presubmits.yaml`][]         | [`presubmits-blocking`][] | 1.21                         |  On each PR   |
-|     master     | [`periodics.yaml`][]          | [`master`][]              | 1.16, 1.17, 1.18, 1.19, 1.20 | Every 2 hours |
-|  release-1.4   | [`next-periodics.yaml`][]     | [`next`][]                | 1.16, 1.17, 1.18, 1.19, 1.20 | Every 2 hours |
-|  release-1.3   | [`previous-periodics.yaml`][] | [`previous`][]            | 1.16, 1.17, 1.18, 1.19, 1.20 | Every 2 hours |
-|  release-1.2   | N/A                           |                           | N/A                          |      N/A      |
+|     master     | [`periodics.yaml`][]          | [`master`][]              | 1.16, 1.17, 1.18, 1.19, 1.21 | Every 2 hours |
+|  release-1.5   | [`next-periodics.yaml`][]     | [`next`][]                | 1.16, 1.17, 1.18, 1.19, 1.21 | Every 2 hours |
+|  release-1.4   | [`previous-periodics.yaml`][] | [`previous`][]            | 1.16, 1.17, 1.18, 1.19, 1.21 | Every 2 hours |
+|  release-1.3   | N/A                           |                           | N/A                          |      N/A      |
 
 [`presubmits.yaml`]: https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/cert-manager-presubmits.yaml
 [`periodics.yaml`]: https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/cert-manager-periodics.yaml
@@ -227,17 +202,52 @@ Our testing coverage is:
 The oldest Kubernetes release supported by cert-manager is 1.16, as we want
 to be supporting most commercial Kubernetes offerings.
 
-|   Vendor   | Oldest Kubernetes Release\* | End of Life |
-| :--------: | :-------------------------: | :---------: |
-| [EKS][eks] |            1.16             | 25 Jul 2021 |
-| [GKE][gke] |            1.17             |  Nov 2021   |
-| [AKS][aks] |            1.18             |  Jun 2021   |
+|      Vendor       | Oldest Kubernetes Release\* |               Other Old\*\* Kubernetes Releases               |
+|:-----------------:|-----------------------------|---------------------------------------------------------------|
+|    [EKS][eks]     | 1.16 (EOL Sep 2021)         | 1.17 (EOL Nov 2021), 1.18 (EOL Dec 2021), 1.19 (EOL Apr 2022) |
+|    [GKE][gke]     | 1.17 (EOL Nov 2021)         | 1.18 (EOL Mar 2022), 1.19 (EOL Jun 2022)                      |
+|    [AKS][aks]     | 1.18 (EOL Jul 2021)         | 1.19 (EOL Aug 2021)                                           |
+| [OpenShift 4][os] | 1.18 (4.5, EOL July 2021)   | 1.19 (4.6 EUS, EOL May 2022)                                  |
 
-\*As of 2021-05-25.
+\*As of July 30, 2021.
 
-[eks]: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html
+\*\*We say that a Kubernetes offering is "old" when it is not supported upstream
+as per the [Version Skew
+Policy](https://kubernetes.io/releases/version-skew-policy/) page.
+
+<!--
+
+To be added when those become "old":
+
+- OpenShift 4: 1.20 (4.7, EOL Jun 2022), 1.21 (4.8, EOL Nov 2022)
+
+-->
+
+
+[eks]: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#kubernetes-release-calendar
 [gke]: https://cloud.google.com/kubernetes-engine/docs/release-schedule
 [aks]: https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions#aks-kubernetes-release-calendar
+[os]: https://access.redhat.com/support/policy/updates/openshift#dates
+
+With regard to OpenShift Container Platform 3, cert-manager 1.2 is the last
+release to support OpenShift 3.11 (Kubernetes 1.11). Although OpenShift 3.11 is
+still supported by Red Hat until June 2022, keeping support for very old
+versions of Kubernetes had become too much of a burden.
+
+> **Note:** the following table presents the mapping between each OpenShift
+> version and its associated Kubernetes version:
+>
+> | OpenShift versions | Kubernetes version |
+> |--------------------|--------------------|
+> | 4.9                | 1.22               |
+> | 4.8                | 1.21               |
+> | 4.7                | 1.20               |
+> | 4.6                | 1.19               |
+> | 4.5                | 1.18               |
+> | 4.4                | 1.17               |
+> | 4.3, 3.11          | 1.16               |
+> | 4.2                | 1.14               |
+> | 4.1                | 1.13               |
 
 ## Terminology
 

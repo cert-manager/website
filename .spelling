@@ -18,6 +18,7 @@ AWS
 allowlist
 awspca
 aws-pca-issuer
+aws-privateca-issuer
 AzureDNS
 backend
 backends
@@ -31,12 +32,16 @@ boolean
 CAs
 CertificateRequest
 CertificateRequests
+CertificateSigningRequest
+CertificateSigningRequests
 Changelog
 ChartMuseum
 CloudDNS
 Cloudflare
 CloudFlare
 ClusterRole
+ClusterIssuer
+ClusterIssuers
 CNAME
 CNAMEs
 CNI
@@ -63,6 +68,7 @@ DNSimple
 DNSPod
 EC2
 ECDSA
+Ed25519
 e.g.
 EKS
 ELB
@@ -99,6 +105,7 @@ Jsonnet
 keystore
 keystores
 Knative
+Krew
 KUARD
 kubebuilder
 kube-cert-manager
@@ -134,6 +141,7 @@ OpenAPI
 OpenFaaS
 OpenShift
 OperatorHub
+OperatorHub.io
 OpenWRT
 PEM
 PKCS#12
@@ -162,6 +170,7 @@ stdout
 subdomain
 (sub)domains
 subdomains
+SubjectAccessReview
 subresource
 templating
 Tiller
@@ -182,6 +191,7 @@ URIs
 v0.16
 v2
 v3
+VaaS
 vCert
 Venafi
 VPC
@@ -194,6 +204,7 @@ wildcards
 WIP
 YAML
 YAMLs
+kms-issuer
 awskms-issuer
 GoLand
 Makefiles
@@ -243,12 +254,30 @@ versioning
 cert-manager-dev
 backport
 kubernetes-supported-versions
+openshift-supported-versions
 prepended
 retweets
 upstream
 JetstackHQ
 acme-dns
+Ramlot
+andreas-p
+renewBefore
+erikgb
+eddiehoffman
+inteon
+anton-johansson
+edglynes
+jandersen-plaid
+foosinn
+clatour
+tamalsaha
+JoshVanL
+Kyverno
 hardcodes
+templated
+manual-rotation-private-key
+issuances
 
 # As per https://tools.ietf.org/html/rfc5280, the spelling "X.509" is the
 # correct spelling. The spelling "x509" and "X509" are incorrect.
