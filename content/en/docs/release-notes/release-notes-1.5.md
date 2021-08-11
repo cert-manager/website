@@ -135,8 +135,8 @@ ready to be used:
 kubectl cert-manager check api
 ```
 
-The plugin also learned to guess the version of cert-manager running on your
-cluster, similarly as to `kubectl version`:
+The plugin also learned how to discover the version of cert-manager running on your
+cluster, similar to `kubectl version`:
 
 ```shell
 kubectl cert-manager version
@@ -294,4 +294,4 @@ out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
   CertificateSigningRequest resources
   ([#4101](https://github.com/jetstack/cert-manager/pull/4101)).
 - Reduce binary sizes from 74MB down to 49MB by adding the Go ldflag `-w`
-  ([#4181](https://github.com/jetstack/cert-manager/pull/4181).
+  ([#4181](https://github.com/jetstack/cert-manager/pull/4181)).
