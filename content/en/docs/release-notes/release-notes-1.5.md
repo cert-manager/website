@@ -45,18 +45,20 @@ traffic into their clusters for solving ACME HTTP-01 challenges. As the
 cloud-native ecosystem has so many different ingress implementations, we
 searched for a solution that would avoid having to add individual support for
 every kind of virtual service to the cert-manager API, and settled on the
-[sig-network Gateway API](https://gateway-api.sigs.k8s.io/). This project aims
-to provide a universal API for modeling service networking in Kubernetes, and
-while it is still in its alpha stages is already gaining [wide
-adoption](https://gateway-api.sigs.k8s.io/references/implementations/). By
-supporting the Gateway API `HTTPRoute`, we hope that anyone using Ambassador,
-Contour, Gloo, HAProxy, Istio, Kong or Traefik will be able to solve HTTP-01
-challenges, with more implementations coming in future.
+[sig-network Gateway API](https://gateway-api.sigs.k8s.io/).
 
-To go along with the `HTTPRoute` support, we have also added a gateway-shim
-controller that will allow users to annotate their `Gateways` to get a
-cert-manager `Certificate` automatically created, similar to the current
-ingress-shim functionality.
+The Gateway API project aims to provide a universal API for modeling service
+networking in Kubernetes, and while it is still in its alpha stages is already
+gaining [wide
+adoption](https://gateway-api.sigs.k8s.io/references/implementations/). By
+supporting the Gateway API HTTPRoute resource, we hope that anyone using
+Ambassador, Contour, Gloo, HAProxy, Istio, Kong or Traefik will be able to solve
+HTTP-01 challenges, with more implementations coming in future.
+
+To go along with the HTTPRoute resource support, we have also added a
+gateway-shim controller that will allow users to annotate their Gateway
+resources to get a cert-manager Certificate automatically created, similar to
+the current ingress-shim functionality.
 
 Implemented in the cert-manager PRs
 [#4276](https://github.com/jetstack/cert-manager/pull/4276) and
@@ -163,6 +165,49 @@ ready.
 Implemented in the cert-manager PR
 [#4234](https://github.com/jetstack/cert-manager/pull/4234) by Tim.
 
+### Labels and annotations on generated Secret and CertificateRequest resources
+
+cert-manager now allows you to add custom annotations and labels to the Secret
+containing the TLS key pair using the new Certificate field `secretTemplate`.
+This is useful when using third-party solutions such as
+[kubed](https://github.com/kubeops/kubed) to copy Secret resources to multiple
+namespaces. The `secretTemplate` is synced to the Secret when the Certificate is
+created or renewed.
+
+Here is an example of Certificate using the `secretTemplate` field:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+spec:
+  secretTemplate:
+    annotations:
+      my-secret-annotation: "foo"
+    labels:
+      my-secret-label: bar
+```
+
+Note that labels and annotations can only be added or replaced, but not removed.
+Removing any labels or annotations from the template or removing the template
+itself will have no effect.
+
+Along with the ability to set your own annotations and labels on Secret
+resources created by cert-manager, you can also tell cert-manager which
+annotations should be copied from Certificate resources to the generated
+CertificateRequest resources. By default, cert-manager will skip copying the
+annotations with the following prefixes:
+
+- `kubectl.kubernetes.io/`,
+- `fluxcd.io`,
+- `argocd.argoproj.io`.
+
+If you wish to keep the old behavior and allow all annotations to be copied, you
+can pass the flag `--copied-annotations=*` to the cert-manager controller.
+
+Implemented in the cert-manager PRs
+[#3828](https://github.com/jetstack/cert-manager/pull/3828) and
+[#4251](https://github.com/jetstack/cert-manager/pull/4251).
+
 ## Community
 
 This is the first time that cert-manager participated in Google Summer of Code.
@@ -190,7 +235,7 @@ Thanks again to all open-source contributors with commits in this release:
 Also thanks to [coderanger](https://github.com/coderanger) for helping people
 out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
 
-&mdash; The cert-manager maintainers.
+
 
 ---
 
@@ -199,16 +244,6 @@ out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
 - cert-manager now supports using Ed25519 private keys and signatures for
   Certificates. Implemented in the cert-manager PR
   [#4079](https://github.com/jetstack/cert-manager/pull/4079).
-- cert-manager now allows you to add custom annotations and labels to the Secret
-  containing the TLS key pair using the new Certificate field `secretTemplate`.
-  This is useful when using third-party solutions such as
-  [kubed](https://github.com/kubeops/kubed) to copy Secret resources to multiple
-  namespaces. The `secretTemplate` is synced to the Secret when the Certificate
-  is created or renewed. Note that labels and annotations can only be added or
-  replaced, but not removed. Removing any labels or annotations from the
-  template or removing the template itself will have no effect. Implemented in
-  the cert-manager PR
-  [#3828](https://github.com/jetstack/cert-manager/pull/3828).
 - cert-manager now emits an event when a CertificateSigningRequest resource has
   not yet been approved. Without this event, the user would never know that
   cert-manager is waiting for the approval of the CertificateSigningRequest
@@ -220,13 +255,6 @@ out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
   implemented in the cert-manager PRs
   [#4254](https://github.com/jetstack/cert-manager/pull/4254) and
   [#4253](https://github.com/jetstack/cert-manager/pull/4253).
-- cert-manager can now be told which annotations should be copied from a
-  Certificate to the generated CertificateRequest. Annotations with keys
-  prefixed with `kubectl.kubernetes.io/`, `fluxcd.io`, and `argocd.argoproj.io`
-  are now excluded by default. If you wish to keep the old behavior and allow
-  all annotations to be copied, you can pass the flag `--copied-annotations=*`.
-  Implemented in the cert-manager PR
-  [#4251](https://github.com/jetstack/cert-manager/pull/4251).
 - cert-manager now restarts more quickly by clearing the leader election before
   shutting down. Also, upon shutdown, the controller loops now cleanly stop,
   which allows all in-flight reconciliation functions to finish before exiting.
