@@ -7,7 +7,7 @@ type: "docs"
 
 # Release `v1.5.0`
 
-## Major themes
+## Major Themes
 
 ### API Deprecation
 
