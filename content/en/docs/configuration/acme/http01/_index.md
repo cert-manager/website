@@ -8,7 +8,7 @@ type: "docs"
 {{% pageinfo color="info" %}}
 
 📌  This page focuses on solving ACME HTTP-01 challenges. If you are looking for
-on how automatically creating Certificate resources by annotating Ingress or
+how to automatically create Certificate resources by annotating Ingress or
 Gateway resources, see [Securing Ingress Resources](/docs/usage/ingress/) and
 [Securing Gateway Resources](/docs/usage/gateway/).
 
@@ -174,15 +174,15 @@ No other fields of the ingress can be edited.
 **FEATURE STATE**: cert-manager 1.5 [alpha]
 
 The Gateway and HTTPRoute resources are part of the [Gateway API][gwapi], a set
-of CRDs that you install on your Kubernetes cluster and which provide various
+of CRDs that you install on your Kubernetes cluster that provide various
 improvements over the Ingress API.
 
 [gwapi]: https://gateway-api.sigs.k8s.io
 
 {{% pageinfo color="info" %}}
 
-📌  This feature requires to pass a feature flag to the cert-manager controller
-and the installation of the Gateway API CRDs.
+📌  This feature requires the installation of the Gateway API CRDs and passing a
+feature flag to the cert-manager controller.
 
 To install the Gateway API CRDs, run the following command:
 
@@ -195,7 +195,8 @@ To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
 - If you are using Helm:
 
   ```sh
-  helm upgrade --install cert-manager jetstack/cert-manager --set "extraArgs={--feature-gates=ExperimentalGatewayAPISupport=true}"
+  helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
+    --set "extraArgs={--feature-gates=ExperimentalGatewayAPISupport=true}"
   ```
 
 - If you are using the raw cert-manager manifests, add the following flag to the
@@ -304,7 +305,7 @@ spec:
   gateways:
     allow: All
   hostnames:
-  - traefik.mael-valais-gcp.jetstacker.net
+  - example.net
   rules:
   - forwardTo:
     - port: 8089
@@ -323,6 +324,9 @@ After the Certificate is issued, the HTTPRoute is deleted.
 These labels are copied into the temporary HTTPRoute created by cert-manager for
 solving the HTTP-01 challenge. These labels must match one of the Gateway
 resources on your cluster. The matched Gateway have a listener on port 80.
+
+Note that when the labels do not match any Gateway on your cluster, cert-manager
+will create the temporary HTTPRoute challenge and nothing will happen.
 
 ### `serviceType` {#gatewayhttproute-service-type}
 

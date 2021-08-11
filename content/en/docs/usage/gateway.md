@@ -9,9 +9,9 @@ type: "docs"
 
 {{% pageinfo color="info" %}}
 
-📌  This page focuses on automatically creating Certificate resources by setting
-annotations on the Gateway resource. If you are looking for using an ACME Issuer
-along with HTTP-01 challenges using the Gateway API, see [ACME
+📌  This page focuses on automatically creating Certificate resources by
+annotating Gateway resource. If you are looking for using an ACME Issuer along
+with HTTP-01 challenges using the Gateway API, see [ACME
 HTTP-01](/docs/configuration/acme/http01/).
 
 {{% /pageinfo %}}
@@ -46,8 +46,8 @@ HTTPRoute for Istio][istio#31747]).
 
 {{% pageinfo color="info" %}}
 
-📌  This feature requires to pass a feature flag to the cert-manager controller
-and the installation of the Gateway API CRDs.
+📌  This feature requires the installation of the Gateway API CRDs and passing a
+feature flag to the cert-manager controller.
 
 To install the Gateway API CRDs, run the following command:
 
@@ -60,7 +60,8 @@ To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
 - If you are using Helm:
 
   ```sh
-  helm upgrade --install cert-manager jetstack/cert-manager --set "extraArgs={--feature-gates=ExperimentalGatewayAPISupport=true}"
+  helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
+    --set "extraArgs={--feature-gates=ExperimentalGatewayAPISupport=true}"
   ```
 
 - If you are using the raw cert-manager manifests, add the following flag to the
