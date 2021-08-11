@@ -7,12 +7,14 @@ Akamai
 AKS
 ALB
 analyse
+annerajb
 apiGroup
 APIs
 apiserver
 APIService
 APIServices
 AppRole
+Arsh
 ArtifactHUB
 AWS
 allowlist
@@ -48,6 +50,7 @@ CNI
 CNIs
 CNIs
 codebase
+coderanger
 config
 containerd
 CoreDNS
@@ -57,9 +60,12 @@ CronJob
 CSI
 CSR
 CSRs
+Ctrl
 customizable
 DaemonSet
+DataDog
 DCO
+Dean-Coakley
 DHCP
 DigitalOcean
 Distroless
@@ -77,6 +83,7 @@ eTLD
 external-dns
 Fargate
 FastDNS
+francescsanjuanmrf
 FreeIPA
 freeipa-issuer
 GCE
@@ -84,7 +91,11 @@ GCLB
 gcloud
 GCP
 GKE
+Gloo
+goroutine
+GSoC
 google-cas-issuer
+HAProxy
 HashiCorp
 Helmfile
 honour
@@ -97,6 +108,7 @@ ingress-nginx
 injectable
 INWX
 IPv6
+irbekrm
 IssuerRef
 Istio
 Jetstack
@@ -104,6 +116,7 @@ JSON
 Jsonnet
 keystore
 keystores
+kit837
 Knative
 Krew
 KUARD
@@ -118,8 +131,10 @@ kubelet
 kubeprod
 Kubernetes
 labelled
+ldflag
 lifecycle
 loadbalancer
+longkai
 LuCI
 MacOS
 metadata
@@ -127,6 +142,7 @@ misconfiguration
 misconfigured
 mixin
 mixins
+mozz-lx
 mTLS
 nameserver
 nameservers
@@ -173,6 +189,7 @@ subdomains
 SubjectAccessReview
 subresource
 templating
+thiscantbeserious
 Tiller
 TLDs
 TODO
@@ -182,6 +199,7 @@ Traefik
 TSIG
 TSIGs
 TXT
+ulrichgi
 Uncomment
 unencrypted
 uninstallation
@@ -202,6 +220,7 @@ whitespace
 wildcard
 wildcards
 WIP
+wpjunior
 YAML
 YAMLs
 kms-issuer

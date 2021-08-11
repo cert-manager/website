@@ -46,7 +46,7 @@ cloud-native ecosystem has so many different ingress implementations, we
 searched for a solution that would avoid having to add individual support for
 every kind of virtual service to the cert-manager API, and settled on the
 [sig-network Gateway API](https://gateway-api.sigs.k8s.io/). This project aims
-to provide a universal API for modelling service networking in Kubernetes, and
+to provide a universal API for modeling service networking in Kubernetes, and
 while it is still in its alpha stages is already gaining [wide
 adoption](https://gateway-api.sigs.k8s.io/references/implementations/). By
 supporting the Gateway API `HTTPRoute`, we hope that anyone using Ambassador,
@@ -214,8 +214,8 @@ out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
   cert-manager is waiting for the approval of the CertificateSigningRequest
   resource. Implemented in the cert-manager PR
   [#4229](https://github.com/jetstack/cert-manager/pull/4229).
-- cert-manager now only supports the version `v1` of the AdmissionReviewVersion
-  and ConversionReviewVersion resources, both available since Kubernetes 1.16.
+- cert-manager now only supports the version `v1` of the `AdmissionReviewVersion`
+  and `ConversionReviewVersion` resources, both available since Kubernetes 1.16.
   The `v1beta1` version is no longer supported by cert-manager. This change was
   implemented in the cert-manager PRs
   [#4254](https://github.com/jetstack/cert-manager/pull/4254) and
@@ -251,7 +251,7 @@ out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
   self-check while solving HTTP-01 challenges. Fixed in the cert-manager PR
   [#4311](https://github.com/jetstack/cert-manager/pull/4311).
 - Cloudflare: Refactored DNS01 challenge to use API for finding the nearest Zone
-  (fixing potential DNS-Issues)
+  (fixing potential DNS issues)
   ([#4147](https://github.com/jetstack/cert-manager/pull/4147),
   [@thiscantbeserious](https://github.com/thiscantbeserious))
 - Fix a bug where failed CertificateRequest resources were not retried
