@@ -5,12 +5,20 @@ weight: 105
 type: "docs"
 ---
 
-**FEATURE STATE**: cert-manager 1.5 [stable]
+**FEATURE STATE**: cert-manager 1.5 [alpha]
+
+{{% pageinfo color="info" %}}
+
+📌  This page focuses on automatically creating Certificate resources by
+annotating Gateway resource. If you are looking for using an ACME Issuer along
+with HTTP-01 challenges using the Gateway API, see [ACME
+HTTP-01](/docs/configuration/acme/http01/).
+
+{{% /pageinfo %}}
 
 cert-manager can generate TLS certificates for Gateway resources. This is
 configured by adding annotations to a Gateway and is similar to the process for
 [Securing Ingress Resources](/docs/usage/ingress/).
-
 
 The Gateway resource is part of the [Gateway API][gwapi], a set of CRDs that you
 install on your Kubernetes cluster and which provide various improvements over
@@ -35,17 +43,46 @@ HTTPRoute for Istio][istio#31747]).
 [istio#31747]: https://github.com/istio/istio/issues/31747
 [gateway-api#577]: https://github.com/kubernetes-sigs/gateway-api/issues/577
 
-Before enabling the Gateway support, you will have to install the Gateway API
-CRDs:
+
+{{% pageinfo color="info" %}}
+
+📌  This feature requires the installation of the Gateway API CRDs and passing a
+feature flag to the cert-manager controller.
+
+To install the Gateway API CRDs, run the following command:
 
 ```sh
 kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.3.0" | kubectl apply -f -
 ```
 
+To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
+
+- If you are using Helm:
+
+  ```sh
+  helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
+    --set "extraArgs={--feature-gates=ExperimentalGatewayAPISupport=true}"
+  ```
+
+- If you are using the raw cert-manager manifests, add the following flag to the
+  cert-manager controller Deployment:
+
+  ```yaml
+  args:
+    - --feature-gates=ExperimentalGatewayAPISupport=true
+  ```
+
 The Gateway API CRDs should either be installed before cert-manager starts or
 the cert-manager Deployment should be restarted after installing the Gateway API
 CRDs. This is important because some of the cert-manager components only perform
-the Gateway API check on startup.
+the Gateway API check on startup. You can restart cert-manager with the
+following command:
+
+```sh
+kubectl rollout restart deployment cert-manager -n cert-manager
+```
+
+{{% /pageinfo %}}
 
 The annotations `cert-manager.io/issuer` or `cert-manager.io/cluster-issuer`
 tell cert-manager  to create a Certificate for a Gateway. For example, the
