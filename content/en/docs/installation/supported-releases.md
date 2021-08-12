@@ -185,7 +185,7 @@ Our testing coverage is:
 
 | Release branch | Prow configuration            | Dashboard                 | Kubernetes versions tested  |  Periodicity  |
 | :------------: | :---------------------------- | :------------------------ | :-------------------------: | :-----------: |
-|      PRs       | [`presubmits.yaml`][]         | [`presubmits-blocking`][] |         1.21, 1.22          |  On each PR   |
+|      PRs       | [`presubmits.yaml`][]         | [`presubmits-blocking`][] |            1.22             |  On each PR   |
 |     master     | [`periodics.yaml`][]          | [`master`][]              |         1.16 → 1.22         | Every 2 hours |
 |  release-1.6   | [`next-periodics.yaml`][]     | [`next`][]                |         1.16 → 1.22         | Every 2 hours |
 |  release-1.5   | [`previous-periodics.yaml`][] | [`previous`][]            |         1.16 → 1.22         | Every 2 hours |
