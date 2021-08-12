@@ -104,3 +104,19 @@ to the X.509 SAN extension.
 
 Each test specifies a used feature using `s.checkFeatures(feature)`, which is then checked against the issuer's
 `UnsupportedFeatures` list. Tests which use a feature unsupported by an issuer are skipped for that issuer.
+
+### Cloud Provider Tests
+
+The master branch of cert-manager can also be tested against different cloud providers. Currently, tests for [EKS](https://aws.amazon.com/eks/) are present which run as a periodic job once every two days. These can also be manually triggered by commenting `/test aws-tests-pre` on any PR. 
+
+#### Extending The Cloud Provider Tests
+
+The infrastructure used to run the e2e tests on cloud providers is present in the [cert-manager/test-infra](https://github.com/cert-manager/test-infra) repository. More cloud providers can be added by creating infrastructure for them using [Terraform](https://www.terraform.io/).
+
+Apart from that, tests for the existing infrastructure can be customized by editing their respective prow jobs present in the [jetstack/testing](https://github.com/jetstack/testing/tree/master/config/jobs/cert-manager) repository. Values like the cert-manager version or the cloud provider version are present as variables in Terraform so their values can be changed when using `terraform apply` in the prow jobs, for example, for the [EKS prow job](https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/cert-manager-periodics.yaml#L524) the cert-manager version being tested can be changed using
+
+```
+terraform apply -var="cert_manager_version=v1.3.3" -auto-approve
+```
+
+To see a list of all configurable variables present for a particular infrastructure you can see the `variables.tf` file for that cloud provider's [infrastructure](https://github.com/cert-manager/test-infra).
