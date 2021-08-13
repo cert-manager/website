@@ -107,7 +107,7 @@ Each test specifies a used feature using `s.checkFeatures(feature)`, which is th
 
 ### Cloud Provider Tests
 
-The master branch of cert-manager can also be tested against different cloud providers. Currently, tests for [EKS](https://aws.amazon.com/eks/) are present which run as a periodic job once every two days. These can also be manually triggered by commenting `/test aws-tests-pre` on any PR. 
+The master branch of cert-manager can also be tested against different cloud providers. Currently, tests for [EKS](https://aws.amazon.com/eks/) are present which run as a periodic job once every two days.
 
 #### Extending The Cloud Provider Tests
 
