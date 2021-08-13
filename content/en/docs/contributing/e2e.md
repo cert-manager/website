@@ -120,3 +120,5 @@ terraform apply -var="cert_manager_version=v1.3.3" -auto-approve
 ```
 
 To see a list of all configurable variables present for a particular infrastructure you can see the `variables.tf` file for that cloud provider's [infrastructure](https://github.com/cert-manager/test-infra).
+
+> Please note that the cloud provider tests run the e2e tests present in the **master** branch of cert-manager on a predefined version of cert-manager (can be changed in the prow job). Currently, they do **not** test code in a PR, but we have an [issue](https://github.com/jetstack/cert-manager/issues/4349) tracking that request.
