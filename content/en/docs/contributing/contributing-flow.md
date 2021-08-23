@@ -75,6 +75,12 @@ To let people know that your PR is still a work in progress, we usually add a
 `WIP:` prefix to the title of the PR. Prow will then automatically set the label
 `do-not-merge/work-in-progress`.
 
+It is advised to keep the PR description and title up to date as the review
+goes, e.g., with the review discussions outcome.
+
+If the pull request contains a new feature, the pull request description is
+expected to contain a link to another pull request that describes the feature on
+the website.
 
 ### Cherry Picking
 
