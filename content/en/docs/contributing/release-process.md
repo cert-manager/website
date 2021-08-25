@@ -460,3 +460,9 @@ page if a step is missing or if it is outdated.
        updates to the website configuration. To do this, take inspiration from
        [Maartje's PR
        example](https://github.com/cert-manager/website/pull/309/files).
+
+    5. Ensure that any installation commands in
+       [`cert-manager/website`](https://github.com/cert-manager/website) install
+       the latest version. This should be done after every release, including
+       patch releases as we want to encourage users to always install the latest
+       patch.
