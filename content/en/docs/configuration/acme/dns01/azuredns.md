@@ -114,7 +114,7 @@ podLabels:
   aadpodidbinding: certman-label
 ```
 
-Lastly when we create the certificate issuer we need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields for the DNS zone. Example below:
+Lastly when we create the certificate issuer we only need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields for the DNS zone. Example below:
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -179,7 +179,7 @@ resource "azurerm_role_assignment" "dns_contributor" {
 }
 ```
 
-Then when creating the cert-manager issuer we only need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields for the DNS Zone.
+Then when creating the cert-manager issuer we need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields for the DNS Zone.
 
 We also need to specify `managedIdentity.clientID` or `managedIdentity.resourceID` if multiple managed identities are assigned to the node pools.
 
