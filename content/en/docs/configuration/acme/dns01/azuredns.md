@@ -140,9 +140,8 @@ When creating an AKS cluster in Azure there is the option to use a managed ident
 
 There are some caveats with this approach, these mainly being:
 
-- You will need to ensure only 1 managed identity is assigned to the node pool. This is due to cert-manager not currently being able to select the identity to use
 - Any permissions granted to this identity will also be accessible to all containers running inside the Kubernetes cluster.
-- Using AKS extensions like `Kube Dashboard` will not work with this method as this creates an additional identity that is assigned to the node pools.
+- Using AKS extensions like `Kube Dashboard`, `Virtual Node`, or `HTTP Application Routing` (see full list [here](https://docs.microsoft.com/en-us/azure/aks/use-managed-identity#summary-of-managed-identities)) will create additional identities that are assigned to your node pools. If your node pools have more than one identity assigned, you will need to specify either clientID or resourceID to select the correct one.
 
 To set this up, firstly you will need to retrieve the identity that the kubelet is using by querying the AKS cluster. This can then be used to create the appropriate permissions in the DNS zone.
 
@@ -180,7 +179,16 @@ resource "azurerm_role_assignment" "dns_contributor" {
 }
 ```
 
-Then when creating the cert-manager issuer we only need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields for the DNS Zone. Example below:
+Then when creating the cert-manager issuer we only need to specify the `hostedZoneName`, `resourceGroupName` and `subscriptionID` fields for the DNS Zone.
+
+We also need to specify `managedIdentity.clientID` or `managedIdentity.resourceID` if multiple managed identities are assigned to the node pools.
+
+The value for `managedIdentity.clientID` can be fetched by running this command:
+```bash
+az aks show -n $CLUSTERNAME -g $CLUSTER_GROUP --query "identityProfile.kubeletidentity.clientId" -o tsv
+```
+
+Example below:
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -197,6 +205,12 @@ spec:
           hostedZoneName: AZURE_DNS_ZONE
           # Azure Cloud Environment, default to AzurePublicCloud
           environment: AzurePublicCloud
+          # optional, only required if node pools have more than 1 managed identity assigned
+          managedIdentity:
+            # client id of the node pool managed identity (can not be set at the same time as resourceID)
+            clientID: YOUR_MANAGED_IDENTITY_CLIENT_ID
+            # resource id of the managed identity (can not be set at the same time as clientID)
+            # resourceID: YOUR_MANAGED_IDENTITY_RESOURCE_ID 
 ```
 
 ## Service Principal
