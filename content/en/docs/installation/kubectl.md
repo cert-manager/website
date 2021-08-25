@@ -22,7 +22,7 @@ are included in a single YAML manifest file:
 Install all cert-manager components:
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.0/cert-manager.yaml
+$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.4/cert-manager.yaml
 ```
 
 By default, cert-manager will be installed into the `cert-manager`
