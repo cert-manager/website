@@ -11,7 +11,8 @@ honored by an issuer which is to be kept up-to-date. This is the usual way that
 you will interact with cert-manager to request signed certificates.
 
 In order to issue any certificates, you'll need to configure an
-[`Issuer`](../../configuration/) resource first.
+[`Issuer`](../../configuration/) or [`ClusterIssuer`](../../configuration/)
+resource first.
 
 ## Creating Certificate Resources
 
