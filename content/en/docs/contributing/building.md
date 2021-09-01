@@ -101,7 +101,7 @@ $ bazel build //cmd/ctl
 If you need the Docker images you can generate these using:
 ```bash
 $ export APP_VERSION="dev"
-$ export DOCKER_REGISTRY="quay.io/jetstack/"
+$ export DOCKER_REGISTRY="quay.io/jetstack"
 $ bazel run \
 		--stamp \
 		--platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 \
