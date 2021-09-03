@@ -141,7 +141,7 @@ When creating an AKS cluster in Azure there is the option to use a managed ident
 There are some caveats with this approach, these mainly being:
 
 - Any permissions granted to this identity will also be accessible to all containers running inside the Kubernetes cluster.
-- Using AKS extensions like `Kube Dashboard`, `Virtual Node`, or `HTTP Application Routing` (see full list [here](https://docs.microsoft.com/en-us/azure/aks/use-managed-identity#summary-of-managed-identities)) will create additional identities that are assigned to your node pools. If your node pools have more than one identity assigned, you will need to specify either clientID or resourceID to select the correct one.
+- Using AKS extensions like `Kube Dashboard`, `Virtual Node`, or `HTTP Application Routing` (see full list [here](https://docs.microsoft.com/en-us/azure/aks/use-managed-identity#summary-of-managed-identities)) will create additional identities that are assigned to your node pools. If your node pools have more than one identity assigned, you will need to specify either `clientID` or `resourceID` to select the correct one.
 
 To set this up, firstly you will need to retrieve the identity that the kubelet is using by querying the AKS cluster. This can then be used to create the appropriate permissions in the DNS zone.
 
