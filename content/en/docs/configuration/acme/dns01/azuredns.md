@@ -79,7 +79,7 @@ kind: AzureIdentity
 metadata:
   annotations:
     # recommended to use namespaced identites https://azure.github.io/aad-pod-identity/docs/configure/match_pods_in_namespace/
-    aadpodidentity.k8s.io/Behavior: namespaced 
+    aadpodidentity.k8s.io/Behavior: namespaced
   name: certman-identity
   namespace: cert-manager # change to your preferred namespace
 spec:
@@ -136,7 +136,7 @@ spec:
 
 ## Managed Identity Using AKS Kubelet Identity
 
-When creating an AKS cluster in Azure there is the option to use a managed identity that is assigned to the kubelet. This identity is assigned to the underlying node pool in the AKS cluster and can then be used by the cert-manager pods to authenticate to Azure Active Directory. 
+When creating an AKS cluster in Azure there is the option to use a managed identity that is assigned to the kubelet. This identity is assigned to the underlying node pool in the AKS cluster and can then be used by the cert-manager pods to authenticate to Azure Active Directory.
 
 There are some caveats with this approach, these mainly being:
 
@@ -155,7 +155,7 @@ ZONE_ID=$(az network dns zone show --name $ZONE_NAME --resource-group $ZONE_GROU
 
 # Create role assignment
 az role assignment create --role "DNS Zone Contributor" --assignee $PRINCIPAL_ID --scope $ZONE_ID
-``` 
+```
 
 - Example terraform:
 ```terraform
@@ -173,8 +173,8 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
 resource "azurerm_role_assignment" "dns_contributor" {
   scope                            = var.dns_zone_id
-  role_definition_name             = "DNS Zone Contributor"  
-  principal_id                     = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id 
+  role_definition_name             = "DNS Zone Contributor"
+  principal_id                     = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
   skip_service_principal_aad_check = true # Allows skipping propagation of identity to ensure assignment succeeds.
 }
 ```
@@ -210,7 +210,7 @@ spec:
             # client id of the node pool managed identity (can not be set at the same time as resourceID)
             clientID: YOUR_MANAGED_IDENTITY_CLIENT_ID
             # resource id of the managed identity (can not be set at the same time as clientID)
-            # resourceID: YOUR_MANAGED_IDENTITY_RESOURCE_ID 
+            # resourceID: YOUR_MANAGED_IDENTITY_RESOURCE_ID
 ```
 
 ## Service Principal
