@@ -74,9 +74,13 @@ port; see the warning at the top of the page for details.
 
 ### AWS Fargate
 
-It's worth noting that using AWS Fargate to run cert-manager will force you to
-run using the host's network, and will force a port clash with the kubelet
-running on port 10250, as seen in [#3237](https://github.com/jetstack/cert-manager/issues/3237).
+It's worth noting that using AWS Fargate doesn't allow much network configuration and
+will cause the webhook's port to clash with the kubelet running on port 10250, as seen
+in [#3237](https://github.com/jetstack/cert-manager/issues/3237).
 
 When deploying cert-manager on Fargate, you _must_ change the port on which
 the webhook listens. See the warning at the top of this page for more details.
+
+Because Fargate forces you to use its networking, you cannot manually set the networking
+type and options such as `webhook.hostNetwork` on the helm chart will cause your
+cert-manager deployment to fail in surprising ways.
