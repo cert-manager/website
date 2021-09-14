@@ -46,18 +46,6 @@ You can read more information on how to add firewall rules for the GKE control
 plane nodes in the [GKE
 docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules).
 
-## GKE Autopilot
-
-As of May 2021, GKE Autopilot has no support for 3rd party webhooks.
-Without webhooks, many Kubernetes plugins such as cert-manager cannot
-operate correctly.
-
-As per [this
-tweet](https://twitter.com/BagadeVivek/status/1365701217469534220), GKE
-Autopilot is meant to support webhooks in a coming release. We will keep
-you updated on the progress on [this
-issue](https://github.com/jetstack/cert-manager/issues/3717).
-
 ## AWS EKS
 
 When using a custom CNI (such as Weave or Calico) on EKS, the webhook cannot be
