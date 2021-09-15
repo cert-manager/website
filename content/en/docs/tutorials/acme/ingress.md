@@ -312,10 +312,10 @@ operation. These two resources are:
 > as your Ingress resources by adding `-n my-namespace` to your `kubectl create`
 > commands. Your other option is to replace your Issuers with `ClusterIssuers`.
 > `ClusterIssuer` resources apply across all Ingress resources in your cluster
-> and don't have this namespace-matching requirement. In thast case, remember to
+> and don't have this namespace-matching requirement. In that case, remember to
 > update the Ingress annotation `cert-manager.io/issuer` with
 > `cert-manager.io/cluster-issuer`. To debug such failures,
-> follow [this guide](../../../faq/acme/).
+> follow the [Troubleshooting Issuing ACME Certificates](../../../faq/acme/) guide.
 >
 > More information on the differences between `Issuers` and `ClusterIssuers` and
 > when you might choose to use each can be found
