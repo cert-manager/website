@@ -315,7 +315,7 @@ operation. These two resources are:
 > and don't have this namespace-matching requirement. In thast case, remember to
 > update the Ingress annotation `cert-manager.io/issuer` with
 > `cert-manager.io/cluster-issuer`. To debug such failures,
-> follow [this guide](https://cert-manager.io/docs/faq/acme/).
+> follow [this guide](../../../faq/acme/).
 >
 > More information on the differences between `Issuers` and `ClusterIssuers` and
 > when you might choose to use each can be found
