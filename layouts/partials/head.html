@@ -18,15 +18,7 @@
 {{- template "_internal/twitter_cards.html" . -}}
 {{ if eq (getenv "HUGO_ENV") "production" }}
 {{ template "_internal/google_analytics_async.html" . }}
-<script type="text/javascript">
-  (function (d, u, h, s) {
-    h = d.getElementsByTagName('head')[0];
-    s = d.createElement('script');
-    s.async = 1;
-    s.src = u + new Date().getTime();
-    h.appendChild(s);
-  })(document, 'https://grow.clearbitjs.com/api/pixel.js?v=');
-</script>
+<script defer data-domain="cert-manager.io" src="https://plausible.io/js/plausible.js"></script>
 {{ end }}
 {{ partialCached "head-css.html" . "asdf" }}
 <script
