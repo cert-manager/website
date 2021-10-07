@@ -15,7 +15,7 @@ install methods are listed below for each of the situations.
 
 The default static configuration can be installed as follows:
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.yaml
+$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
 ```
 More information on this install method [can be found here](./kubectl/).
 
@@ -23,7 +23,7 @@ More information on this install method [can be found here](./kubectl/).
 
 > You quickly want to learn how to use cert-manager and what it can be used for.
 
-We recommend [kubectl cert-manager x install](./kubectl-plugin/) to quickly install cert-manager and [interact with cert-manager resources](../usage/kubectl-plugin/) from the command line. 
+We recommend [kubectl cert-manager x install](./kubectl-plugin/) to quickly install cert-manager and [interact with cert-manager resources](../usage/kubectl-plugin/) from the command line.
 
 Or if you prefer Helm or if you don't want to install the `kubectl cert-manager` plugin, you can [use helm to install cert-manager](./helm/).
 
