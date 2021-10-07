@@ -150,7 +150,6 @@ stringData:
       },
     }
 ---
-kind: Issuer
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
