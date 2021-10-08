@@ -93,7 +93,7 @@ branch is actually supported.
        \                                                           v
         \
          \       v1.1.0
-          \    Nov 24, 2021                                        ^
+          \    Nov 24, 2020                                        ^
            ---------+-------------------------------> release-1.1  |
                      \                                             | SUPPORTED
                       \                                            | RELEASES
