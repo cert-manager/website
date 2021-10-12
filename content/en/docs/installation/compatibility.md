@@ -46,6 +46,17 @@ You can read more information on how to add firewall rules for the GKE control
 plane nodes in the [GKE
 docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules).
 
+
+### GKE Autopilot
+
+GKE Autopilot mode with Kubernetes < 1.21 does not support cert-manager,
+due to a [restriction on mutating admission webhooks](https://github.com/jetstack/cert-manager/issues/3717).
+
+As of October 2021, only the "rapid" Autopilot release channel has rolled
+out version 1.21 for Kubernetes masters. Installation via the helm chart
+may end in an error message but cert-manager is reported to be working by
+some users. Feedback and PRs are welcome.
+
 ## AWS EKS
 
 When using a custom CNI (such as Weave or Calico) on EKS, the webhook cannot be
