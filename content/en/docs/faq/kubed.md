@@ -18,7 +18,7 @@ Most ingress controllers, including [ingress-nginx](https://kubernetes.github.io
 Sample ingress snippet:
 
 ```
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 #[...]
 spec:
