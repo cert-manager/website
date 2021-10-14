@@ -302,8 +302,9 @@ page if a step is missing or if it is outdated.
         ```
 
         This step takes ~10 minutes. It will build all Docker images and create
-        all the manifest files and upload them to a storage bucket on Google
-        Cloud. These artifacts will be published and released in the next steps.
+        all the manifest files, sign Helm charts and upload everything to a storage
+        bucket on Google Cloud. These artifacts will then be published and released
+        in the next steps.
 
         <div class="pageinfo pageinfo-info"><p>
         🔰 Remember to keep open the terminal where you run <code>cmrel stage</code>. Its output will be used in the next step.
