@@ -18,7 +18,7 @@ face:
 
 ### Can I trigger a renewal from cert-manager at will?
 
-This is a feature in cert-manager starting in `v0.16` using the kubectl plugin. More information can be found on [the renew command's page](../usage/kubectl-plugin/#renew)
+This is a feature in cert-manager starting in `v0.16` using the `cmctl` CLI. More information can be found on [the renew command's page](../usage/cmctl/#renew)
 
 ### Why isn't my root certificate in my issued Secret's `tls.crt`?
 
