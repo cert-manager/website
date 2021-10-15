@@ -216,21 +216,20 @@ certificate object is reissued under the following circumstances:
   `subject`, `isCA`, `usages`, `duration` or `issuerRef`;
 - when a reissuance is manually triggered with the following:
   ```sh
-  kubectl cert-manager renew cert-1
+  cmctl renew cert-1
   ```
-  Note that the above command requires the [kubectl
-  cert-manager](/docs/usage/kubectl-plugin/#renew) plugin.
+  Note that the above command requires [cmctl](/docs/usage/cmctl/#renew).
 
 {{% pageinfo color="warning" %}}
 
 **❌** Deleting the Secret resource associated with a Certificate resource is
 **not a recommended solution** for manually rotating the private key. The
 recommended way to manually rotate the private key is to trigger the reissuance
-of the Certificate resource with the following command (requires the [`kubectl
-cert-manager`](/docs/usage/kubectl-plugin/#renew) plugin):
+of the Certificate resource with the following command (requires
+[`cmctl`](/docs/usage/cmctl/#renew)):
 
 ```sh
-kubectl cert-manager renew cert-1
+cmctl renew cert-1
 ```
 
 {{% /pageinfo %}}
