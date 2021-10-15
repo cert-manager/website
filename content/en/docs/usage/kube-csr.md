@@ -156,8 +156,8 @@ Signer annotations:
 
 ## Usage
 
-CertificateSigningRequests can be manually created using the
-[kubectl cert-manager plugin](../kubectl-plugin/#experimental).
+CertificateSigningRequests can be manually created using
+[cmctl](../cmctl/#experimental).
 This command takes a manifest file containing a
 [Certificate](../../usage/certificate/) resource as input. This generates a
 private key and creates a CertificateSigningRequest. CertificateSigningRequests

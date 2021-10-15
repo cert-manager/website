@@ -84,5 +84,5 @@ kubectl describe certificate example-zone
 Follow the `cert-manager` events to identify any issues with a command such as the following.
 
 ```bash
-kubectl cert-manager status certificate example-zone
+cmctl status certificate example-zone
 ```
