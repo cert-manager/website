@@ -8,9 +8,9 @@ type: "docs"
 `cmctl` is a CLI tool that can help you to manage cert-manager resources inside
 your cluster.
 
-While also available as a [kubectl plugin](../kubectl-plugin), it is recommended
+While also available as a [kubectl plugin](../kubectl-plugin/), it is recommended
 to use as a stand alone binary as this allows the use of command
-[auto-completion](#Completion).
+[auto-completion](#completion).
 
 ## Installation
 You need the `cmctl.tar.gz` file for the platform you're using, these can be
