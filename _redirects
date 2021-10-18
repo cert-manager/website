@@ -20,3 +20,18 @@ https://cert-manager.io/docs/installation/kubernetes/ https://cert-manager.io/do
 https://cert-manager.io/docs/installation/openshift/ https://cert-manager.io/docs/installation/supported-releases/
 https://cert-manager.io/docs/installation/uninstall/kubernetes/ https://cert-manager.io/docs/installation/uninstall/
 https://cert-manager.io/docs/installation/uninstall/openshift/ https://cert-manager.io/docs/installation/uninstall/
+
+# In v1.6 we released 'cmctl' which is considered a better CLI experience than
+# 'kubectl cert-manager'. The 'cmctl' page became the source of trust for all
+# subcommands so any existing references to the 'kubctl cert-manager' should be
+# redirected there.
+https://cert-manager.io/docs/usage/kubectl-plugin/#commands https://cert-manager.io/docs/usage/cmctl/#commands
+https://cert-manager.io/docs/usage/kubectl-plugin/#approve-deny https://cert-manager.io/docs/usage/cmctl/#approve-deny
+https://cert-manager.io/docs/usage/kubectl-plugin/#convert https://cert-manager.io/docs/usage/cmctl/#convert
+https://cert-manager.io/docs/usage/kubectl-plugin/#create https://cert-manager.io/docs/usage/cmctl/#create
+https://cert-manager.io/docs/usage/kubectl-plugin/#certificaterequest https://cert-manager.io/docs/usage/cmctl/#certificaterequest
+https://cert-manager.io/docs/usage/kubectl-plugin/#renew https://cert-manager.io/docs/usage/cmctl/#renew
+https://cert-manager.io/docs/usage/kubectl-plugin/#status-certificate https://cert-manager.io/docs/usage/cmctl/#status-certificate
+https://cert-manager.io/docs/usage/kubectl-plugin/#completion https://cert-manager.io/docs/usage/cmctl/#completion
+https://cert-manager.io/docs/usage/kubectl-plugin/#experimental https://cert-manager.io/docs/usage/cmctl/#experimental
+https://cert-manager.io/docs/usage/kubectl-plugin/#certificatesigningrequest https://cert-manager.io/docs/usage/cmctl/#certificatesigningrequest
