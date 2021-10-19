@@ -18,6 +18,7 @@
 {{- template "_internal/twitter_cards.html" . -}}
 {{ if eq (getenv "HUGO_ENV") "production" }}
 {{ template "_internal/google_analytics_async.html" . }}
+<script defer data-domain="cert-manager.io" src="https://plausible.io/js/plausible.js"></script>
 {{ end }}
 {{ partialCached "head-css.html" . "asdf" }}
 <script

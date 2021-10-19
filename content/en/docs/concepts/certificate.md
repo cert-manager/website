@@ -25,8 +25,8 @@ metadata:
 spec:
   secretName: acme-crt-secret
   dnsNames:
+  - example.com
   - foo.example.com
-  - bar.example.com
   issuerRef:
     name: letsencrypt-prod
     # We can reference ClusterIssuers by changing the kind here.
@@ -36,8 +36,8 @@ spec:
 ```
 
 This `Certificate` will tell cert-manager to attempt to use the `Issuer` named
-`letsencrypt-prod` to obtain a certificate key pair for the `foo.example.com`
-and `bar.example.com` domains. If successful, the resulting TLS key and certificate
+`letsencrypt-prod` to obtain a certificate key pair for the `example.com` and
+`foo.example.com` domains. If successful, the resulting TLS key and certificate
 will be stored in a secret named `acme-crt-secret`, with keys of `tls.key`, and
 `tls.crt` respectively. This secret will live in the same namespace as the
 `Certificate` resource.
