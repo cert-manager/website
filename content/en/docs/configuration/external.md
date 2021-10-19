@@ -28,7 +28,7 @@ These external issuers are known to support and honor [approval](https://cert-ma
 - [kms-issuer](https://github.com/Skyscanner/kms-issuer): Requests
   certificates signed using an [AWS KMS](https://aws.amazon.com/kms/) asymmetric key.
 - [aws-privateca-issuer](https://github.com/cert-manager/aws-privateca-issuer): Requests
-  certificates from [AWS Private Certificate Authority] (https://aws.amazon.com/certificate-manager/private-certificate-authority/)
+  certificates from [AWS Private Certificate Authority](https://aws.amazon.com/certificate-manager/private-certificate-authority/)
   for cloud native/hybrid environments.
 - [google-cas-issuer](https://github.com/jetstack/google-cas-issuer): Used
   to request certificates signed by private CAs managed by the

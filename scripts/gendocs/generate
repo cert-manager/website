@@ -40,7 +40,6 @@ trap cleanup EXIT
 # Create fake GOPATH
 echo "+++ Creating temporary GOPATH"
 export GOPATH="${tmpdir}/go"
-export GOPROXY="https://proxy.golang.org"
 export GO111MODULE="on"
 GOROOT="$(go env GOROOT)"
 export GOROOT
