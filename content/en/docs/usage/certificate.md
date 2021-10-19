@@ -219,7 +219,7 @@ certificate object is reissued under the following circumstances:
   kubectl cert-manager renew cert-1
   ```
   Note that the above command requires the [kubectl
-  cert-manager](/docs/usage/kubectl-plugin/#renew) plugin.
+  cert-manager](../kubectl-plugin/#renew) plugin.
 
 {{% pageinfo color="warning" %}}
 
@@ -227,7 +227,7 @@ certificate object is reissued under the following circumstances:
 **not a recommended solution** for manually rotating the private key. The
 recommended way to manually rotate the private key is to trigger the reissuance
 of the Certificate resource with the following command (requires the [`kubectl
-cert-manager`](/docs/usage/kubectl-plugin/#renew) plugin):
+cert-manager`](../kubectl-plugin/#renew) plugin):
 
 ```sh
 kubectl cert-manager renew cert-1
