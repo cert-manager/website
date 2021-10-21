@@ -16,9 +16,39 @@ Signing keys required for verification are all available on this website, but th
 on the artifact you're trying to validate in the future. At the time of writing, all signing is done using the same underlying
 key.
 
+## Helm Charts
+
+<!--
+TODO: uncomment this when cosign signing is in place. The warning doesn't have much value
+if we're not advertising the existence of other public keys.
+{{% alert title="Warning" color="warning" %}}
+Helm requires the use of PGP for verification; the key format is different.
+
+Trying to use PEM encoded public keys will fail.
+{{% /alert %}}
+-->
+
+For all cert-manager versions from `v1.6.0` and later, Helm charts are signed and verifiable through the Helm CLI.
+
+The easiest way to verify is to grab the GPG keyring directly, which can then be passed into `helm verify` like so:
+
+```console
+curl -sSL https://cert-manager.io/public-keys/cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg > cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg
+helm verify --keyring cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg /path/to/cert-manager-vx.y.z.tgz
+```
+
+- ASCII-armored signing key: [`cert-manager-pgp-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.asc`](/public-keys/cert-manager-pgp-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.asc)
+- GPG keyring: [`cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg`](/public-keys/cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg)
+
 ## Container Images / Cosign
 
-For all cert-manager versions from `v1.6.0` and later, container images are verifiable using [`cosign`](https://docs.sigstore.dev/cosign/overview).
+Soon, all container images which make up cert-manager will be verifiable using [`cosign`](https://docs.sigstore.dev/cosign/overview).
+
+Unfortunately, this isn't possible today because the images are hosted on `quay.io` which doesn't have the proper support for cosign signatures yet. When signatures are
+added, this section will contain details of how to verify them.
+
+<!--
+TODO: also uncomment the warning in the helm section!
 
 The simplest way to verify signatures is to download the public key and then pass it to the cosign CLI:
 
@@ -31,23 +61,4 @@ cosign verify -key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-mana
 For a more fully-featured signature verification process in Kubernetes, check out [`connaisseur`](https://sse-secure-systems.github.io/connaisseur/).
 
 - PEM-encoded public key: [`cert-manager-pubkey-2021-09-20.pem`](/public-keys/cert-manager-pubkey-2021-09-20.pem)
-
-## Helm Charts
-
-{{% alert title="Warning" color="warning" %}}
-Helm requires the use of PGP for verification; the key format is different.
-
-Trying to use the PEM encoded public keys above will fail.
-{{% /alert %}}
-
-For all cert-manager versions from `v1.6.0` and later, helm charts are signed and verifiable through the helm CLI.
-
-The easiest way to verify is to grab the GPG keyring directly, which can then be passed into `helm verify` like so:
-
-```console
-curl -sSL https://cert-manager.io/public-keys/cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg > cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg
-helm verify --keyring cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg /path/to/cert-manager-vx.y.z.tgz
-```
-
-- ASCII-armored signing key: [`cert-manager-pgp-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.asc`](/public-keys/cert-manager-pgp-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.asc)
-- GPG keyring: [`cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg`](/public-keys/cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg)
+-->
