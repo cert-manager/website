@@ -73,3 +73,5 @@ spec:
     kind: Issuer
     group: cert-manager.io
 ```
+
+[CertificateSecretTemplate]: ../../reference/api-docs/#cert-manager.io/v1alpha3.CertificateSecretTemplate
