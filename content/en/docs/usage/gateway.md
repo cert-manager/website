@@ -29,7 +29,7 @@ the Ingress API.
 The Gateway resource holds the TLS configuration, as illustrated in the
 following diagram (source: https://gateway-api.sigs.k8s.io):
 
-![Gateway vs. HTTPRoute](/images/gateway-roles.png)
+![Gateway vs. HTTPRoute](../../../images/gateway-roles.png)
 
 Note that cert-manager only supports setting up the TLS configuration on the
 Gateway resource when the Gateway is configured to terminate the TLS connection.

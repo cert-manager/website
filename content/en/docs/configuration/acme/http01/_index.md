@@ -10,7 +10,7 @@ type: "docs"
 📌  This page focuses on solving ACME HTTP-01 challenges. If you are looking for
 how to automatically create Certificate resources by annotating Ingress or
 Gateway resources, see [Securing Ingress Resources](/docs/usage/ingress/) and
-[Securing Gateway Resources](/docs/usage/gateway/).
+[Securing Gateway Resources](../../../usage/gateway/).
 
 {{% /pageinfo %}}
 
