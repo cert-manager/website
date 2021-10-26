@@ -37,8 +37,8 @@ curl -sSL https://cert-manager.io/public-keys/cert-manager-keyring-2021-09-20-10
 helm verify --keyring cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg /path/to/cert-manager-vx.y.z.tgz
 ```
 
-- ASCII-armored signing key: [`cert-manager-pgp-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.asc`](/public-keys/cert-manager-pgp-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.asc)
-- GPG keyring: [`cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg`](/public-keys/cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg)
+- ASCII-armored signing key: [`cert-manager-pgp-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.asc`](../../../public-keys/cert-manager-pgp-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.asc)
+- GPG keyring: [`cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg`](../../../public-keys/cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg)
 
 ## Container Images / Cosign
 
@@ -60,5 +60,5 @@ cosign verify -key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-mana
 
 For a more fully-featured signature verification process in Kubernetes, check out [`connaisseur`](https://sse-secure-systems.github.io/connaisseur/).
 
-- PEM-encoded public key: [`cert-manager-pubkey-2021-09-20.pem`](/public-keys/cert-manager-pubkey-2021-09-20.pem)
+- PEM-encoded public key: [`cert-manager-pubkey-2021-09-20.pem`](../../../public-keys/cert-manager-pubkey-2021-09-20.pem)
 -->
