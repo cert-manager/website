@@ -33,9 +33,7 @@ spec:
 
 ## Syncing arbitrary secrets across namespaces using kubed
 
-In order for the target Secret to be synced, the Secret resource must first be
-created with the correct annotations before the creation of the Certificate,
-else the Secret will need to be edited instead. The example below shows syncing
+In order for the target Secret to be synced, you can use the `secretTemplate` field for annotating the generated secret with the kubed sync annotation (See [CertificateSecretTemplate]). The example below shows syncing
 a certificate belonging to the `sandbox` Certificate from the `cert-manager`
 namespace, into the `sandbox` namespace.
 
