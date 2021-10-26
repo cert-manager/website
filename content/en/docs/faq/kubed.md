@@ -47,19 +47,6 @@ metadata:
   labels:
     cert-manager-tls: sandbox # Define namespace label for kubed
 ---
-apiVersion: v1
-data:
-  ca.crt: ''
-  tls.crt: ''
-  tls.key: ''
-kind: Secret
-metadata:
-  name: sandbox-tls
-  namespace: cert-manager
-  annotations:
-    kubed.appscode.com/sync: "cert-manager-tls=sandbox" # Sync certificate to matching namespaces
-type: kubernetes.io/tls
----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -72,6 +59,9 @@ spec:
     name: sandbox-ca
     kind: Issuer
     group: cert-manager.io
+  secretTemplate:
+    annotations:
+      kubed.appscode.com/sync: "cert-manager-tls=sandbox" # Sync certificate to matching namespaces
 ```
 
 [CertificateSecretTemplate]: ../../reference/api-docs/#cert-manager.io/v1alpha3.CertificateSecretTemplate
