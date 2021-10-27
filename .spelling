@@ -44,6 +44,7 @@ CloudFlare
 ClusterRole
 ClusterIssuer
 ClusterIssuers
+cmctl
 CNAME
 CNAMEs
 CNI
@@ -164,6 +165,7 @@ PKCS#12
 PKCS#8
 Prometheus
 propagations
+powershell
 publicised
 RBAC
 rebase
@@ -183,6 +185,8 @@ Runtime
 Smallstep
 SOA
 stdout
+subcommand
+subcommands
 subdomain
 (sub)domains
 subdomains
@@ -302,6 +306,7 @@ issuances
 HTTPRoute
 gatewayhttproute-labels
 gatewayhttproute-service-type
+zsh
 
 # As per https://tools.ietf.org/html/rfc5280, the spelling "X.509" is the
 # correct spelling. The spelling "x509" and "X509" are incorrect.
