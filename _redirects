@@ -22,11 +22,11 @@ https://cert-manager.io/docs/installation/uninstall/kubernetes/ https://cert-man
 https://cert-manager.io/docs/installation/uninstall/openshift/ https://cert-manager.io/docs/installation/uninstall/
 
 # In v1.6 we released 'cmctl' which is considered a better CLI experience than
-# 'kubectl cert-manager'. The 'cmctl' page became the source of trust for all
-# subcommands so any existing references to the 'kubctl cert-manager' should be
-# redirected there.
+# 'kubectl cert-manager'. The 'cmctl' page became the source of truth for all
+# subcommands so the old references to 'kubectl cert-manager' are redirected
+# there.
 https://cert-manager.io/docs/usage/kubectl-plugin/#commands https://cert-manager.io/docs/usage/cmctl/#commands
-https://cert-manager.io/docs/usage/kubectl-plugin/#approve-deny https://cert-manager.io/docs/usage/cmctl/#approve-deny
+https://cert-manager.io/docs/usage/kubectl-plugin/#approve-deny https://cert-manager.io/docs/usage/cmctl/#approve-and-deny-certificaterequests
 https://cert-manager.io/docs/usage/kubectl-plugin/#convert https://cert-manager.io/docs/usage/cmctl/#convert
 https://cert-manager.io/docs/usage/kubectl-plugin/#create https://cert-manager.io/docs/usage/cmctl/#create
 https://cert-manager.io/docs/usage/kubectl-plugin/#certificaterequest https://cert-manager.io/docs/usage/cmctl/#certificaterequest

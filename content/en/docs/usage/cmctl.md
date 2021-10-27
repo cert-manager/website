@@ -13,6 +13,7 @@ to use as a stand alone binary as this allows the use of command
 [auto-completion](#completion).
 
 ## Installation
+
 You need the `cmctl.tar.gz` file for the platform you're using, these can be
 found on our
 [GitHub releases page](https://github.com/jetstack/cert-manager/releases).
@@ -20,13 +21,15 @@ In order to use `cmctl` you need its binary to be accessible under
 the name `cmctl` in your `$PATH`.
 Run the following commands to set up the CLI. Replace OS and ARCH with your
 systems equivalents:
+
 ```console
-$ OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -L -o cmctl.tar.gz https://github.com/jetstack/cert-manager/releases/latest/download/cmctl-$OS-$ARCH.tar.gz
-$ tar xzf cmctl.tar.gz
-$ sudo mv cmctl /usr/local/bin
+OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -L -o cmctl.tar.gz https://github.com/jetstack/cert-manager/releases/latest/download/cmctl-$OS-$ARCH.tar.gz
+tar xzf cmctl.tar.gz
+sudo mv cmctl /usr/local/bin
 ```
 
 You can run `cmctl help` to test the CLI is set up properly:
+
 ```console
 $ cmctl help
 
@@ -57,7 +60,8 @@ Use "cmctl [command] --help" for more information about a command.
 
 ## Commands
 
-### Approve/Deny
+### Approve and Deny CertificateRequests
+
 CertificateRequests can be
 [approved or denied](../../concepts/certificaterequest/#approval) using their
 respective cmctl commands:
@@ -77,24 +81,29 @@ Denied CertificateRequest 'my-app/my-app'
 ```
 
 ### Convert
+
 `cmctl convert` can be used to convert cert-manager manifest files between
-different API versions. Both YAML and JSON formats are accepted.
-The command takes file name, directory, or URL as input, and converts into the
-format of the latest version or the one specified by --output-version flag.
+different API versions. Both YAML and JSON formats are accepted.  The command
+either takes a file name, directory path, or a URL as input. The contents is
+converted into the format of the latest API version known to cert-manager, or
+the one specified by `--output-version` flag.
 
-The default output will be printed to stdout in YAML format. One can use -o
-option to change the output destination.
+The default output will be printed to stdout in YAML format. One can use the
+option `-o` to change the output destination.
 
-For example this will output `cert.yaml` in the latest API version:
+For example, this will output `cert.yaml` in the latest API version:
+
 ```console
 cmctl convert -f cert.yaml
 ```
 
 ### Create
+
 `cmctl create` can be used to create cert-manager resources manually.
 Sub-commands are available to create different resources:
 
 #### CertificateRequest
+
 To create a cert-manager CertificateRequest, use `cmctl create
 certificaterequest`. The command takes in the name of the CertificateRequest to
 be created, and creates a new CertificateRequest resource based on the YAML
@@ -118,15 +127,17 @@ For example this will create a CertificateRequest resource with the name "my-cr"
 based on the cert-manager Certificate described in `my-certificate.yaml` while
 storing the private key and X.509 certificate in `my-cr.key` and `my-cr.crt`
 respectively.
+
 ```console
 cmctl create certificaterequest my-cr --from-certificate-file my-certificate.yaml --fetch-certificate --timeout 20m
 ```
 
 ### Renew
+
 `cmctl` allows you to manually trigger a renewal of a specific certificate.
 This can be done either one certificate at a time, using label selectors (`-l app=example`), or with the `--all` flag:
 
-For example you can renew the certificate `example-com-tls`:
+For example, you can renew the certificate `example-com-tls`:
 ```console
 $ kubectl get certificate
 NAME                       READY   SECRET               AGE
@@ -141,6 +152,7 @@ example-com-tls-tls-8rbv2         False    10s
 ```
 
 You can also renew all certificates in a given namespace:
+
 ```console
 $ cmctl renew --namespace=app --all
 ```
@@ -152,6 +164,7 @@ The renew command allows several options to be specified:
 as well as `kubectl` like global flags like `--context` and `--namespace`.
 
 ### Status Certificate
+
 `cmctl status certificate` outputs the details of the current status of a
 Certificate resource and related resources like CertificateRequest, Secret,
 Issuer, as well as Order and Challenges if it is a ACME Certificate.  The
@@ -166,6 +179,7 @@ resource and the namespace can be specified as usual with the `-n` or
 
 This example queries the status of the Certificate named `my-certificate` in
 namespace `my-namespace`.
+
 ```console
 cmctl status certificate my-certificate -n my-namespace
 ```
@@ -180,9 +194,9 @@ $ cmctl approve -n <TAB> <TAB>
 default             kube-node-lease     kube-public         kube-system         local-path-storage
 ```
 
-Completion can be installed for your environment by following the
-instructions for the shell you are using. Currently supports bash, fish, zsh,
-and powershell.
+Completion can be installed for your environment by following the instructions
+for the shell you are using. It currently supports bash, fish, zsh, and
+powershell.
 
 ```console
 $ cmctl completion help
