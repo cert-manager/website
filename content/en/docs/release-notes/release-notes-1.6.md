@@ -30,7 +30,7 @@ We are discussing the best remediation for a future `v1.6.1` release.
 
 The cert-manager kubectl plugin has been redesigned as a standalone utility: `cmctl`
 
-While the kubectl plugin functionality remains intact, using `cmctl` allows for full tab completion. See the docs: (Alan please add link)
+While the kubectl plugin functionality remains intact, using `cmctl` allows for full tab completion.
 
 ### Supply Chain Security
 
