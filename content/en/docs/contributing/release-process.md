@@ -87,7 +87,7 @@ release:
 2. Install our [`cmrel`](https://github.com/cert-manager/release) CLI:
 
    ```sh
-   go install github.com/cert-manager/release/cmd/cmrel@master
+   go install github.com/cert-manager/release/cmd/cmrel@latest
    ```
 
 3. Clone the `cert-manager/release` repo:
@@ -302,8 +302,9 @@ page if a step is missing or if it is outdated.
         ```
 
         This step takes ~10 minutes. It will build all Docker images and create
-        all the manifest files and upload them to a storage bucket on Google
-        Cloud. These artifacts will be published and released in the next steps.
+        all the manifest files, sign Helm charts and upload everything to a storage
+        bucket on Google Cloud. These artifacts will then be published and released
+        in the next steps.
 
         <div class="pageinfo pageinfo-info"><p>
         🔰 Remember to keep open the terminal where you run <code>cmrel stage</code>. Its output will be used in the next step.
@@ -352,7 +353,7 @@ page if a step is missing or if it is outdated.
 
         ```sh
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --release-name "$CMREL_RELEASE_NAME"
+        cmrel publish --skip-signing --release-name "$CMREL_RELEASE_NAME"
         ```
 
         You can view the progress by clicking the Google Cloud Build URL in the
@@ -371,7 +372,8 @@ page if a step is missing or if it is outdated.
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --nomock --release-name "$CMREL_RELEASE_NAME"
+        # Skip signing while quay.io doesn't support cosign signatures
+        cmrel publish --nomock --skip-signing --release-name "$CMREL_RELEASE_NAME"
         ```
 
         <div class="pageinfo pageinfo-warning"><p>

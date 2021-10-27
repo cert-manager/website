@@ -82,7 +82,7 @@ $ helm install \
   --create-namespace \
   --version v1.5.4 \
   --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
-  --set webhook.timeoutSeconds=4s   # Example: changing the wehbook timeout using a Helm parameter
+  --set webhook.timeoutSeconds=4   # Example: changing the wehbook timeout using a Helm parameter
 ```
 
 Once you have deployed cert-manager, you can [verify](../verify/) the installation.
