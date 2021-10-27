@@ -7,13 +7,13 @@ type: "docs"
 
 ## Check cert-manager API
 
-First, make sure that the [cert-manager kubectl plugin is installed](../../usage/kubectl-plugin/#installation).
+First, make sure that [cmctl is installed](../../usage/cmctl/#installation).
 
-This kubectl plugin performs a dry-run certificate creation check against the Kubernetes cluster.
+cmctl performs a dry-run certificate creation check against the Kubernetes cluster.
 If successful, the message `The cert-manager API is ready` is displayed.
 
 ```bash
-$ kubectl cert-manager check api
+$ cmctl check api
 The cert-manager API is ready
 ```
 
@@ -21,7 +21,7 @@ The command can also be used to wait for the check to be successful.
 Here is an output example of running the command at the same time that cert-manager is being installed:
 
 ```bash
-$ kubectl cert-manager check api --wait=2m
+$ cmctl check api --wait=2m
 Not ready: the cert-manager CRDs are not yet installed on the Kubernetes API server
 Not ready: the cert-manager CRDs are not yet installed on the Kubernetes API server
 Not ready: the cert-manager webhook deployment is not ready yet

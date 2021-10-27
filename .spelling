@@ -24,7 +24,6 @@ CNAME
 CNAMEs
 CNI
 CNIs
-CNIs
 CRD
 CRDs
 CSI
@@ -177,6 +176,7 @@ boolean
 cainjector
 cert-manager-dev
 clatour
+cmctl
 cmrel
 codebase
 coderanger
@@ -216,7 +216,6 @@ jandersen-plaid
 johanfleury
 johejo
 jonathansp
-jonathansp
 joshuastern
 jsoref
 justinkillen
@@ -229,7 +228,6 @@ kube-lego
 kubebuilder
 kubectl
 kubed
-kubelet
 kubelet
 kubeprod
 kubernetes-supported-versions
@@ -259,6 +257,7 @@ namespaced
 namespaces
 ndegory
 openshift-supported-versions
+powershell
 pre
 pre-release
 pre-released
@@ -281,6 +280,8 @@ signoff
 sigstore
 stdout
 subchart
+subcommand
+subcommands
 subdomain
 subdomains
 subfolders
@@ -316,6 +317,7 @@ wildcard
 wildcards
 wpjunior
 yann-soubeyrand
+zsh
 
 # As per https://tools.ietf.org/html/rfc5280, the spelling "X.509" is the
 # correct spelling. The spelling "x509" and "X509" are incorrect.

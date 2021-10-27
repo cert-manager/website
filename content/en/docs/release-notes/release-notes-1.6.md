@@ -28,9 +28,11 @@ We are discussing the best remediation for a future `v1.6.1` release.
 
 ### Command-line tool User Experience
 
-The cert-manager kubectl plugin has been redesigned as a standalone utility: `cmctl`
+The cert-manager kubectl plugin has been redesigned as a [standalone utility: `cmctl`][cmctl]
 
 While the kubectl plugin functionality remains intact, using `cmctl` allows for full tab completion.
+
+[cmctl]: ../../usage/cmctl/
 
 ### Supply Chain Security
 
