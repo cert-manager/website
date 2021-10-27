@@ -76,8 +76,9 @@ genversion() {
 
 # The branches named here exist in the `jetstack/cert-manager` repo.
 
-genversion "release-1.6" "next-docs"
-genversion "release-1.5" "docs"
+genversion "release-1.7" "next-docs"
+genversion "release-1.6" "docs"
+genversion "release-1.6" "v1.6-docs"
 genversion "release-1.5" "v1.5-docs"
 genversion "release-1.4" "v1.4-docs"
 genversion "release-1.3" "v1.3-docs"

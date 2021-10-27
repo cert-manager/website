@@ -53,6 +53,7 @@ echo "+++ Running spell check"
   "!content/en/v1.3-docs/reference/api-docs.md" \
   "!content/en/v1.4-docs/reference/api-docs.md" \
   "!content/en/v1.5-docs/reference/api-docs.md" \
+  "!content/en/v1.6-docs/reference/api-docs.md" \
   "!content/en/next-docs/**/*.md"
 
 # About "!content/en/next-docs/**/*.md":
