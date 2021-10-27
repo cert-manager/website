@@ -87,7 +87,7 @@ release:
 2. Install our [`cmrel`](https://github.com/cert-manager/release) CLI:
 
    ```sh
-   go install github.com/cert-manager/release/cmd/cmrel@master
+   go install github.com/cert-manager/release/cmd/cmrel@latest
    ```
 
 3. Clone the `cert-manager/release` repo:
@@ -353,7 +353,7 @@ page if a step is missing or if it is outdated.
 
         ```sh
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --release-name "$CMREL_RELEASE_NAME"
+        cmrel publish --skip-signing --release-name "$CMREL_RELEASE_NAME"
         ```
 
         You can view the progress by clicking the Google Cloud Build URL in the
@@ -372,7 +372,8 @@ page if a step is missing or if it is outdated.
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --nomock --release-name "$CMREL_RELEASE_NAME"
+        # Skip signing while quay.io doesn't support cosign signatures
+        cmrel publish --nomock --skip-signing --release-name "$CMREL_RELEASE_NAME"
         ```
 
         <div class="pageinfo pageinfo-warning"><p>
