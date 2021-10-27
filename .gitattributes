@@ -1,0 +1,4 @@
+# We kept having rebase conflicts anytime someone would add a word to the
+# .spelling list. Unless the same word is added on both sides simultaenously
+# (which isn't a big deal), let's just let Git do the merge for us.
+.spelling merge=union

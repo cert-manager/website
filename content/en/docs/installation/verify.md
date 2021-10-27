@@ -5,6 +5,34 @@ weight: 30
 type: "docs"
 ---
 
+## Check cert-manager API
+
+First, make sure that the [cert-manager kubectl plugin is installed](../../usage/kubectl-plugin/#installation).
+
+This kubectl plugin performs a dry-run certificate creation check against the Kubernetes cluster.
+If successful, the message `The cert-manager API is ready` is displayed.
+
+```bash
+$ kubectl cert-manager check api
+The cert-manager API is ready
+```
+
+The command can also be used to wait for the check to be successful.
+Here is an output example of running the command at the same time that cert-manager is being installed:
+
+```bash
+$ kubectl cert-manager check api --wait=2m
+Not ready: the cert-manager CRDs are not yet installed on the Kubernetes API server
+Not ready: the cert-manager CRDs are not yet installed on the Kubernetes API server
+Not ready: the cert-manager webhook deployment is not ready yet
+Not ready: the cert-manager webhook deployment is not ready yet
+Not ready: the cert-manager webhook deployment is not ready yet
+Not ready: the cert-manager webhook deployment is not ready yet
+The cert-manager API is ready
+```
+
+## Manual verification
+
 Once you've installed cert-manager, you can verify it is deployed correctly by
 checking the `cert-manager` namespace for running pods:
 
@@ -22,11 +50,6 @@ You should see the `cert-manager`, `cert-manager-cainjector`, and
 little longer to successfully provision than the others.
 
 If you experience problems, first check the [FAQ](../../faq/).
-
-The following steps will confirm that cert-manager is set up correctly and able
-to issue basic certificate types. Alternatively, to automatically check if
-cert-manager is correctly configured, you can run the community-maintained
-[cert-manager-verifier](https://github.com/alenkacz/cert-manager-verifier) tool.
 
 Create an `Issuer` to test the webhook works okay.
 ```bash
@@ -95,11 +118,7 @@ $ kubectl delete -f test-resources.yaml
 
 If all the above steps have completed without error, you're good to go!
 
-## Configuring your first Issuer
+## Community-maintained tool
 
-Before you can begin issuing certificates, you must configure at least one
-`Issuer` or `ClusterIssuer` resource in your cluster.
-
-You should read the [configuration](../../configuration/) guide to
-learn how to configure cert-manager to issue certificates from one of the
-supported backends.
+Alternatively, to automatically check if cert-manager is correctly configured,
+you can run the community-maintained [cert-manager-verifier](https://github.com/alenkacz/cert-manager-verifier) tool.

@@ -9,10 +9,9 @@ type: "docs"
 
 ### Prerequisites
 
-- `kubectl` version `>= v1.19.0-rc.1` (otherwise, you will have issues updating the CRDs. see [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl))
-- A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
-- cert-manager not already installed on the cluster
-- [Prerequisites specific to your cloud provider](../compatibility/)
+- [Install `kubectl` version `>= v1.19.0-rc.1`](https://kubernetes.io/docs/tasks/tools/). (otherwise, you will have issues updating the CRDs - see [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl))
+- Install a [supported version of Kubernetes or OpenShift](../supported-releases/).
+- Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Steps
 
@@ -22,15 +21,14 @@ are included in a single YAML manifest file:
 Install all cert-manager components:
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.0/cert-manager.yaml
+$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
 ```
 
 By default, cert-manager will be installed into the `cert-manager`
 namespace. It is possible to run cert-manager in a different namespace, although
 you'll need to make modifications to the deployment manifests.
 
-Once you have deployed cert-manager, you can verify the installation
-[here](../verify/).
+Once you have deployed cert-manager, you can [verify the installation](../verify/) .
 
 ### Permissions Errors on Google Kubernetes Engine
 

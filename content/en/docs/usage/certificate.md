@@ -11,7 +11,8 @@ honored by an issuer which is to be kept up-to-date. This is the usual way that
 you will interact with cert-manager to request signed certificates.
 
 In order to issue any certificates, you'll need to configure an
-[`Issuer`](../../configuration/) resource first.
+[`Issuer`](../../configuration/) or [`ClusterIssuer`](../../configuration/)
+resource first.
 
 ## Creating Certificate Resources
 
@@ -35,6 +36,21 @@ metadata:
 spec:
   # Secret names are always required.
   secretName: example-com-tls
+
+  # Secret template is optional. If set, these annotations
+  # and labels will be copied to the secret named example-com-tls.
+
+  # Note: Labels and annotations from the template are only synced to the Secret at the time when the certificate 
+  # is created or renewed. Currently labels and annotations can only be added, but not removed. Removing any 
+  # labels or annotations from the template or removing the template itself will have no effect.
+  # See https://github.com/jetstack/cert-manager/issues/4292.
+  secretTemplate:
+    annotations:
+      my-secret-annotation-1: "foo"
+      my-secret-annotation-2: "bar"
+    labels:
+      my-secret-label: foo
+
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   subject:
@@ -73,6 +89,9 @@ spec:
 The signed certificate will be stored in a `Secret` resource named
 `example-com-tls` in the same namespace as the `Certificate` once the issuer has
 successfully issued the requested certificate.
+
+If `secretTemplate` is present, annotations and labels set in this property
+will be copied over to `example-com-tls` secret. Both properties are optional.
 
 The `Certificate` will be issued using the issuer named `ca-issuer` in the
 `sandbox` namespace (the same namespace as the `Certificate` resource).
@@ -200,7 +219,7 @@ certificate object is reissued under the following circumstances:
   kubectl cert-manager renew cert-1
   ```
   Note that the above command requires the [kubectl
-  cert-manager](/docs/usage/kubectl-plugin/#renew) plugin.
+  cert-manager](../kubectl-plugin/#renew) plugin.
 
 {{% pageinfo color="warning" %}}
 
@@ -208,7 +227,7 @@ certificate object is reissued under the following circumstances:
 **not a recommended solution** for manually rotating the private key. The
 recommended way to manually rotate the private key is to trigger the reissuance
 of the Certificate resource with the following command (requires the [`kubectl
-cert-manager`](/docs/usage/kubectl-plugin/#renew) plugin):
+cert-manager`](../kubectl-plugin/#renew) plugin):
 
 ```sh
 kubectl cert-manager renew cert-1

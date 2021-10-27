@@ -5,7 +5,20 @@ weight: 10
 type: "docs"
 ---
 
-## Configuring HTTP01 Ingress Provider
+{{% pageinfo color="info" %}}
+
+📌  This page focuses on solving ACME HTTP-01 challenges. If you are looking for
+how to automatically create Certificate resources by annotating Ingress or
+Gateway resources, see [Securing Ingress Resources](/docs/usage/ingress/) and
+[Securing Gateway Resources](../../../usage/gateway/).
+
+{{% /pageinfo %}}
+
+cert-manager uses your existing Ingress or Gateway configuration in order to
+solve HTTP01 challenges.
+
+
+## Configuring the HTTP01 Ingress solver
 
 This page contains details on the different options available on the `Issuer`
 resource's HTTP01 challenge solver configuration. For more information on
@@ -66,7 +79,7 @@ This mode should be avoided when using ingress controllers that expose a single
 IP for all ingress resources, as it can create compatibility problems with
 certain ingress-controller specific annotations.
 
-### `serviceType`
+### `serviceType` {#ingress-service-type}
 
 In rare cases it might be not possible/desired to use `NodePort` as type for the
 HTTP01 challenge response service, e.g. because of Kubernetes limit
@@ -155,3 +168,167 @@ The added labels and annotations will merge on top of the cert-manager defaults,
 overriding entries with the same key.
 
 No other fields of the ingress can be edited.
+
+## Configuring the HTTP-01 Gateway API solver
+
+**FEATURE STATE**: cert-manager 1.5 [alpha]
+
+The Gateway and HTTPRoute resources are part of the [Gateway API][gwapi], a set
+of CRDs that you install on your Kubernetes cluster that provide various
+improvements over the Ingress API.
+
+[gwapi]: https://gateway-api.sigs.k8s.io
+
+{{% pageinfo color="info" %}}
+
+📌  This feature requires the installation of the Gateway API CRDs and passing a
+feature flag to the cert-manager controller.
+
+To install the Gateway API CRDs, run the following command:
+
+```sh
+kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.3.0" | kubectl apply -f -
+```
+
+To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
+
+- If you are using Helm:
+
+  ```sh
+  helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
+    --set "extraArgs={--feature-gates=ExperimentalGatewayAPISupport=true}"
+  ```
+
+- If you are using the raw cert-manager manifests, add the following flag to the
+  cert-manager controller Deployment:
+
+  ```yaml
+  args:
+    - --feature-gates=ExperimentalGatewayAPISupport=true
+  ```
+
+The Gateway API CRDs should either be installed before cert-manager starts or
+the cert-manager Deployment should be restarted after installing the Gateway API
+CRDs. This is important because some of the cert-manager components only perform
+the Gateway API check on startup. You can restart cert-manager with the
+following command:
+
+```sh
+kubectl rollout restart deployment cert-manager -n cert-manager
+```
+
+{{% /pageinfo %}}
+
+The Gateway API HTTPRoute HTTP-01 solver creates a temporary HTTPRoute using the
+given labels. These labels must match a Gateway that contains a listener on port
+80.
+
+Here is an example of a HTTP-01 ACME Issuer using the Gateway API:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt
+  namespace: default
+spec:
+  acme:
+    solvers:
+      - http01:
+          gatewayHTTPRoute:
+            labels:
+              gateway: http01-solver
+```
+
+The Issuer relies on an existing Gateway present on the cluster. cert-manager
+does not edit Gateway resources.
+
+For example, the following Gateway will allow the Issuer to solve the challenge:
+
+```yaml
+apiVersion: networking.x-k8s.io/v1alpha1
+kind: Gateway
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  gatewayClassName: traefik
+  listeners:
+  - protocol: HTTP
+    port: 80
+    routes:
+      kind: HTTPRoute
+      selector:
+        matchLabels:
+          gateway: http01-solver
+      namespaces:
+        from: All
+```
+
+In the above example, the Gateway has been specifically created for the purpose
+of solving HTTP-01 challenges, but you can also choose to re-use your existing
+Gateway, as long as it has a listener on port 80.
+
+The `labels` on your Issuer may reference a Gateway that is on a separate
+namespace, as long as the Gateway's port 80 listener is configured with `from:
+All`. Note that the Certificate will still be created on the same namespace as
+the Issuer, which means that you won't be able to reference this Secret in the
+above-mentioned Gateway.
+
+When the above Issuer is presented with a Certificate, cert-manager creates the
+temporary HTTPRoute. For example, with the following Certificate:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-tls
+  namespace: default
+spec:
+  issuerRef:
+    name: letsencrypt
+  dnsNames:
+  - example.net
+```
+
+You will see an HTTPRoute appear. The `labels` given to this HTTPRoute are the
+labels configured on the Issuer:
+
+```yaml
+kind: HTTPRoute
+metadata:
+  name: cm-acme-http-solver-gdhvg
+  namespace: default
+  labels:
+    gateway: http01-solver # Copied from Issuer's `gatewayHTTPRoute.labels`.
+spec:
+  gateways:
+    allow: All
+  hostnames:
+  - example.net
+  rules:
+  - forwardTo:
+    - port: 8089
+      serviceName: cm-acme-http-solver-gdhvg
+      weight: 1
+    matches:
+    - path:
+        type: Exact
+        value: /.well-known/acme-challenge/YadC4gaAzqEPU1Yea0D2MrzvNRWiBCtUizCtpiRQZqI
+```
+
+After the Certificate is issued, the HTTPRoute is deleted.
+
+### `labels` {#gatewayhttproute-labels}
+
+These labels are copied into the temporary HTTPRoute created by cert-manager for
+solving the HTTP-01 challenge. These labels must match one of the Gateway
+resources on your cluster. The matched Gateway have a listener on port 80.
+
+Note that when the labels do not match any Gateway on your cluster, cert-manager
+will create the temporary HTTPRoute challenge and nothing will happen.
+
+### `serviceType` {#gatewayhttproute-service-type}
+
+This field has the same meaning as the
+[`http01.ingress.serviceType`](#ingress-service-type).

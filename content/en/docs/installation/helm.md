@@ -14,10 +14,9 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 
 ### Prerequisites
 
-- Helm version 3 or later
-- A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
-- cert-manager not already installed on the cluster
-- [Prerequisites specific to your cloud provider](../compatibility/)
+- [Install Helm version 3 or later](https://helm.sh/docs/intro/install/).
+- Install a [supported version of Kubernetes or OpenShift](../supported-releases/).
+- Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Steps
 
@@ -47,7 +46,7 @@ or using the `installCRDs` option when installing the Helm chart.
 
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.0/cert-manager.crds.yaml
+$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.crds.yaml
 ```
 
 ##### Option 2: install CRDs as part of the Helm release
@@ -68,7 +67,7 @@ $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.4.0 \
+  --version v1.5.4 \
   # --set installCRDs=true
 ```
 
@@ -81,9 +80,9 @@ $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.4.0 \
+  --version v1.5.4 \
   --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
-  --set webhook.timeoutSeconds=4s   # Example: changing the wehbook timeout using a Helm parameter
+  --set webhook.timeoutSeconds=4   # Example: changing the wehbook timeout using a Helm parameter
 ```
 
 Once you have deployed cert-manager, you can [verify](../verify/) the installation.
@@ -98,7 +97,7 @@ $ helm template \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.4.0 \
+  --version v1.5.4 \
   # --set prometheus.enabled=false \   # Example: disabling prometheus using a Helm parameter
   # --set installCRDs=true \           # Uncomment to also template CRDs
   > cert-manager.custom.yaml
