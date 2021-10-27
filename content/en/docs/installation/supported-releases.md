@@ -17,24 +17,25 @@ release every two months.
 
 ## Supported releases {#supported-releases}
 
-| Release | Release Date | End of life  |    [Supported Kubernetes versions][s]    | [Supported OpenShift versions][s] |
-| ------- | :----------: | :----------: | :--------------------------------------: | :-------------------------------: |
-| [1.5][] | Aug 11, 2021 | Dec 15, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |   4.3, 4.4, 4.5, 4.6, 4.7, 4.8    |
-| [1.4][] | Jun 15, 2021 | Oct 13, 2021 |    1.16, 1.17, 1.18, 1.19, 1.20, 1.21    |      4.3, 4.4, 4.5, 4.6, 4.7      |
+| Release | Release Date | End of life |    [Supported Kubernetes versions][s]    | [Supported OpenShift versions][s] |
+|---------|:------------:|:-----------:|:----------------------------------------:|:---------------------------------:|
+| [1.6][] | Oct 26, 2021 | Feb 9, 2022 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 | 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9 |
+| [1.5][] | Aug 11, 2021 | Dec 7, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |   4.3, 4.4, 4.5, 4.6, 4.7, 4.8    |
 
 ## Upcoming releases
 
-| Release | Release Date | End of life  |    [Supported Kubernetes versions][s]    | [Supported OpenShift versions][s] |
-| ------- | :----------: | :----------: | :--------------------------------------: | :-------------------------------: |
-| [1.6][] | Oct 13, 2021 | Feb 16, 2022 |              to be defined               |           to be defined           |
-|   1.7   | Dec 15, 2021 | Apr 13, 2022 |              to be defined               |           to be defined           |
+| Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+|---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
+| [1.7][] | Dec 7, 2021  | Apr 6, 2022  |           to be defined            |           to be defined           |
+| 1.8     | Feb 9, 2022  | June 8, 2022 |           to be defined            |           to be defined           |
 
 Note that dates in the future are uncertain and might change.
 
 ## Old releases
 
 | Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
-| -------- | :----------: | :----------: | :----------------------------: | :---------------------------: |
+|----------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
+| [1.4][]  | Jun 15, 2021 | Oct 26, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
 | [1.3][]  | Apr 08, 2021 | Aug 11, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
 | [1.2][]  | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
 | [1.1][]  | Nov 24, 2021 | Apr 08, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
@@ -47,7 +48,8 @@ Note that dates in the future are uncertain and might change.
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
-[1.6]: https://github.com/jetstack/cert-manager/milestone/27
+[1.7]: https://github.com/jetstack/cert-manager/milestone/28
+[1.6]: https://cert-manager.io/docs/release-notes/release-notes-1.6
 [1.5]: https://cert-manager.io/docs/release-notes/release-notes-1.5
 [1.4]: https://cert-manager.io/docs/release-notes/release-notes-1.4
 [1.3]: https://cert-manager.io/docs/release-notes/release-notes-1.3
@@ -240,6 +242,7 @@ versions of Kubernetes had become too much of a burden.
 >
 > | OpenShift versions | Kubernetes version |
 > |--------------------|--------------------|
+> | 4.10               | 1.23               |
 > | 4.9                | 1.22               |
 > | 4.8                | 1.21               |
 > | 4.7                | 1.20               |

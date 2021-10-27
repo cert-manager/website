@@ -15,7 +15,7 @@ install methods are listed below for each of the situations.
 
 The default static configuration can be installed as follows:
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
+$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.0/cert-manager.yaml
 ```
 More information on this install method [can be found here](./kubectl/).
 
