@@ -59,7 +59,7 @@ and can now be compiled on Apple Silicon ([#4485](https://github.com/jetstack/ce
 
 ### Bug or Regression
 
-- FIX: Prevent Vault Client panic when request to Vault health endpoint fails. ([#4456](https://github.com/jetstack/cert-manager/pull/4456), [@JoshVanL](https://github.com/JoshVanL))
+- Fix a bug in the Vault client that led to a panic after a request to Vault health endpoint failed. ([#4456](https://github.com/jetstack/cert-manager/pull/4456), [@JoshVanL](https://github.com/JoshVanL))
 - Fix CRDs which were accidentally changed in cert-manager `v1.5.0` ([#4353](https://github.com/jetstack/cert-manager/pull/4353), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Fix regression in Ingress `PathType` introduced in `v1.5.0` ([#4373](https://github.com/jetstack/cert-manager/pull/4373), [@jakexks](https://github.com/jakexks))
 - Fixed the HTTP-01 solver creating `ClusterIP` instead of `NodePort` services by default. ([#4393](https://github.com/jetstack/cert-manager/pull/4393), [@jakexks](https://github.com/jakexks))
