@@ -95,9 +95,3 @@ googleAnalytics = "UA-78700849-2"
 [algolia]
 index = "cert-manager-latest"
 appID = "18N9PEKHUC"
-
-[[redirects]]
-  from = "https://docs.cert-manager.io"
-  to = "https://cert-manager.io/docs/"
-  status = 301
-  force = true
