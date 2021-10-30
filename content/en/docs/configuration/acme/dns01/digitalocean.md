@@ -16,7 +16,7 @@ metadata:
   name: digitalocean-dns
 data:
   # insert your DO access token here
-  access-token: "base64 encoded access-token here"
+  access-token: "access-token here"
   ```
 
 The access token must have write access.
@@ -24,12 +24,6 @@ The access token must have write access.
 To create a Personal Access Token, see [DigitalOcean documentation](https://docs.digitalocean.com/reference/api/create-personal-access-token/).
 
 Handy direct link: https://cloud.digitalocean.com/account/api/tokens/new
-
-To encode your access token into base64, you can use the following
-
-```bash
-echo -n 'your-access-token' | base64
-```
 
 ```yaml
 apiVersion: cert-manager.io/v1
