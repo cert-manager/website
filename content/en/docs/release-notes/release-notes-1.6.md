@@ -27,11 +27,15 @@ page.
 
 ### JKS Keystore Minimum Password Length
 
-[JKS Keystores][jks-keystore] now have a minimum password length of 6 characters,
+ℹ️ This no longer applies as it was fixed in `v1.6.1`, but will remain here for 
+informational purposes. If you haven't upgraded cert-manager to `v1.6.0` from any `v1.5`
+release, we recommend upgrading straight to the latest version, skipping `v1.6.0`.
+
+In cert-manager `v1.6.0` [JKS Keystores][jks-keystore] had a minimum password length of 6 characters,
 as an unintended side effect of [upgrading keystore-go from `v2` to `v4`][jks-keystore-upgrade-pr].
-If you are using a shorter password, certificates will fail to renew,
-and the only observable error will be in the cert-manager logs.
-We are discussing the best remediation for a future `v1.6.1` release.
+If you are using a shorter password, certificates would have failed to renew,
+and the only observable error was in the cert-manager logs.
+This was fixed in cert-manager `v1.6.1`.
 
 [jks-keystore]: ../../reference/api-docs/#cert-manager.io/v1.CertificateKeystores
 [jks-keystore-upgrade-pr]: https://github.com/jetstack/cert-manager/pull/4428
