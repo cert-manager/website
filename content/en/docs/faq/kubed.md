@@ -62,4 +62,4 @@ spec:
       kubed.appscode.com/sync: "cert-manager-tls=sandbox" # Sync certificate to matching namespaces
 ```
 
-[CertificateSecretTemplate]: ../../reference/api-docs/#cert-manager.io/v1alpha3.CertificateSecretTemplate
+[CertificateSecretTemplate]: ../../reference/api-docs/#cert-manager.io/v1.CertificateSecretTemplate
