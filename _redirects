@@ -38,4 +38,21 @@ https://cert-manager.io/docs/usage/kubectl-plugin/#certificatesigningrequest htt
 
 # docs.cert-manager.io was previously a separately hosted service. The dns has since been redirect to the main site and the following redirect
 # rule will force people with historical links or browser to docs.cert-manager.io to be redirected to the /docs endpoint
+https://docs.cert-manager.io/en/release-0.1/* https://cert-manager.io/docs/release-notes/release-notes-0.1/ 301!
+https://docs.cert-manager.io/en/release-0.2/* https://cert-manager.io/docs/release-notes/release-notes-0.2/ 301!
+https://docs.cert-manager.io/en/release-0.3/* https://cert-manager.io/docs/release-notes/release-notes-0.3/ 301!
+https://docs.cert-manager.io/en/release-0.4/* https://cert-manager.io/docs/release-notes/release-notes-0.4/ 301!
+https://docs.cert-manager.io/en/release-0.5/* https://cert-manager.io/docs/release-notes/release-notes-0.5/ 301!
+https://docs.cert-manager.io/en/release-0.6/* https://cert-manager.io/docs/release-notes/release-notes-0.6/ 301!
+https://docs.cert-manager.io/en/release-0.7/* https://cert-manager.io/docs/release-notes/release-notes-0.7/ 301!
+https://docs.cert-manager.io/en/release-0.8/* https://cert-manager.io/docs/release-notes/release-notes-0.8/ 301!
+https://docs.cert-manager.io/en/release-0.9/* https://cert-manager.io/docs/release-notes/release-notes-0.9/ 301!
+https://docs.cert-manager.io/en/release-0.10/* https://cert-manager.io/docs/release-notes/release-notes-0.10/ 301!
+https://docs.cert-manager.io/en/release-0.11/* https://cert-manager.io/docs/release-notes/release-notes-0.11/ 301!
+https://docs.cert-manager.io/en/release-0.13/* https://cert-manager.io/docs/release-notes/release-notes-0.12/ 301!
+https://docs.cert-manager.io/en/release-0.13/* https://cert-manager.io/docs/release-notes/release-notes-0.13/ 301!
+https://docs.cert-manager.io/en/release-0.14/* https://cert-manager.io/docs/release-notes/release-notes-0.14/ 301!
+https://docs.cert-manager.io/en/release-0.15/* https://cert-manager.io/docs/release-notes/release-notes-0.15/ 301!
+https://docs.cert-manager.io/en/release-0.16/* https://cert-manager.io/docs/release-notes/release-notes-0.16/ 301!
+https://docs.cert-manager.io/en/release-* https://cert-manager.io/docs/release-notes/release-notes-:splat 301!
 https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 301!
