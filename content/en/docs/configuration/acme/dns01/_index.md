@@ -162,6 +162,7 @@ cert-manager also supports out of tree DNS providers using an external webhook.
 Links to these supported providers along with their documentation are below:
 
 - [`AliDNS-Webhook`](https://github.com/pragkent/alidns-webhook)
+- [`cert-manager-alidns-webhook`](https://github.com/DEVmachine-fr/cert-manager-alidns-webhook)
 - [`cert-manager-webhook-civo`](https://github.com/okteto/cert-manager-webhook-civo)
 - [`cert-manager-webhook-dnspod`](https://github.com/qqshfox/cert-manager-webhook-dnspod)
 - [`cert-manager-webhook-dnsimple`](https://github.com/neoskop/cert-manager-webhook-dnsimple)
