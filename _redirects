@@ -38,4 +38,5 @@ https://cert-manager.io/docs/usage/kubectl-plugin/#certificatesigningrequest htt
 
 # docs.cert-manager.io was previously a separately hosted service. The dns has since been redirect to the main site and the following redirect
 # rule will force people with historical links or browser to docs.cert-manager.io to be redirected to the /docs endpoint
-https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 301!
+https://docs.cert-manager.io https://cert-manager.io/docs 301!
+https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
