@@ -41,6 +41,7 @@ https://cert-manager.io/docs/usage/kubectl-plugin/#certificatesigningrequest htt
 https://docs.cert-manager.io/en/latest/getting-started/index.html https://cert-manager.io/docs/tutorials/
 https://docs.cert-manager.io/en/latest/tutorials/acme/index.html https://cert-manager.io/docs/tutorials/
 https://docs.cert-manager.io/en/latest/tasks/issuers/index.html https://cert-manager.io/docs/configuration/
+https://docs.cert-manager.io/en/latest/ https://cert-manager.io/docs/
 # These rules should capture all historical links that reference endpoints for specfic release versions. Whilst these endpoints might not exist anymore these
 # redirect rules will capture the request and route the user to the specific release-note page
 https://docs.cert-manager.io/en/release-0.1/* https://cert-manager.io/docs/release-notes/release-notes-0.1/ 301!
