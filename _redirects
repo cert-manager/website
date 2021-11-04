@@ -36,8 +36,13 @@ https://cert-manager.io/docs/usage/kubectl-plugin/#completion https://cert-manag
 https://cert-manager.io/docs/usage/kubectl-plugin/#experimental https://cert-manager.io/docs/usage/cmctl/#experimental
 https://cert-manager.io/docs/usage/kubectl-plugin/#certificatesigningrequest https://cert-manager.io/docs/usage/cmctl/#certificatesigningrequest
 
-# docs.cert-manager.io was previously a separately hosted service. The dns has since been redirect to the main site and the following redirect
-# rule will force people with historical links or browser to docs.cert-manager.io to be redirected to the /docs endpoint
+# docs.cert-manager.io was previously a separately hosted service. The dns has since been redirected and the following rules are required for historical links
+# These rules are in place to capture traffic that is specifically referencing these source urls
+https://docs.cert-manager.io/en/latest/getting-started/index.html https://cert-manager.io/docs/tutorials/
+https://docs.cert-manager.io/en/latest/tutorials/acme/index.html https://cert-manager.io/docs/tutorials/
+https://docs.cert-manager.io/en/latest/tasks/issuers/index.html https://cert-manager.io/docs/configuration/
+# These rules should capture all historical links that reference endpoints for specfic release versions. Whilst these endpoints might not exist anymore these
+# redirect rules will capture the request and route the user to the specific release-note page
 https://docs.cert-manager.io/en/release-0.1/* https://cert-manager.io/docs/release-notes/release-notes-0.1/ 301!
 https://docs.cert-manager.io/en/release-0.2/* https://cert-manager.io/docs/release-notes/release-notes-0.2/ 301!
 https://docs.cert-manager.io/en/release-0.3/* https://cert-manager.io/docs/release-notes/release-notes-0.3/ 301!
@@ -54,5 +59,7 @@ https://docs.cert-manager.io/en/release-0.13/* https://cert-manager.io/docs/rele
 https://docs.cert-manager.io/en/release-0.14/* https://cert-manager.io/docs/release-notes/release-notes-0.14/ 301!
 https://docs.cert-manager.io/en/release-0.15/* https://cert-manager.io/docs/release-notes/release-notes-0.15/ 301!
 https://docs.cert-manager.io/en/release-0.16/* https://cert-manager.io/docs/release-notes/release-notes-0.16/ 301!
+# These rules should capture requests to release-notes pages and re-route them accordingly
 https://docs.cert-manager.io/en/release-* https://cert-manager.io/docs/release-notes/release-notes-:splat 301!
-https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 301!
+https://docs.cert-manager.io https://cert-manager.io/docs 301!
+https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
