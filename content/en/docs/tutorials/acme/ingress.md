@@ -644,7 +644,7 @@ Events:
 > Note: If your challenges are not becoming 'valid' and remain in the 'pending'
 > state (or enter into a 'failed' state), it is likely there is some kind of
 > configuration error. Read the [Challenge resource reference
-> docs](../../../reference/api-docs/#acme.cert-manager.io/v1alpha2.Challenge) for more
+> docs](../../../reference/api-docs/#acme.cert-manager.io/v1.Challenge) for more
 > information on debugging failing challenges.
 
 Once the challenge(s) have been completed, their corresponding challenge
