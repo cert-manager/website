@@ -64,7 +64,7 @@ out of tree issuer will follow in later releases. You can read more on the
 motivations and road map in the [enhancement
 proposal](https://github.com/jetstack/cert-manager/blob/master/design/20190708.certificate-request-crd.md)
 or how this resource is used in the
-[docs](https://docs.cert-manager.io/en/release-0.9/reference/certificaterequests.html).
+[docs](https://cert-manager.io/docs/concepts/certificaterequest/).
 
 
 ### DNS Zones support for ACME challenge solver selector
