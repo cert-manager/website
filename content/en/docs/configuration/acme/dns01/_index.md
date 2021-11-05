@@ -80,6 +80,15 @@ with `--set`:
 --set 'extraArgs={--dns01-recursive-nameservers-only,--dns01-recursive-nameservers=8.8.8.8:53\,1.1.1.1:53}'
 ```
 
+If you are deploying using kubectl, then you can add the following line, to the `spec.template.spec.containers.args`
+```bash
+- args:
+        - --v=2
+        - --cluster-resource-namespace=$(POD_NAMESPACE)
+        - --leader-election-namespace=kube-system
+        - --dns01-self-check-nameservers="8.8.8.8:53"
+```
+
 ## Delegated Domains for DNS01
 
 By default, cert-manager will not follow CNAME records pointing to subdomains.
