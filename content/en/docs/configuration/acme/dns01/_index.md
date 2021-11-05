@@ -86,7 +86,7 @@ If you are deploying using kubectl, then you can add the following line, to the 
         - --v=2
         - --cluster-resource-namespace=$(POD_NAMESPACE)
         - --leader-election-namespace=kube-system
-        - --dns01-self-check-nameservers="8.8.8.8:53"
+        - --dns01-recursive-nameservers="8.8.8.8:53"
 ```
 
 ## Delegated Domains for DNS01
