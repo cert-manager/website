@@ -77,7 +77,3 @@ https://docs.cert-manager.io/en/release-0.16/* https://cert-manager.io/docs/rele
 https://docs.cert-manager.io/en/release-* https://cert-manager.io/docs/release-notes/release-notes-:splat 301!
 https://docs.cert-manager.io https://cert-manager.io/docs 301!
 https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
-
-# redirect anything else to our custom 404 page. this is required as the site generator / theme uses relative links for the 404 page, which break if the
-# 404 page isn't served from /404.html
-/* /404.html 404
