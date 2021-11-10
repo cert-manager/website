@@ -40,8 +40,21 @@ https://cert-manager.io/docs/usage/kubectl-plugin/#certificatesigningrequest htt
 # These rules are in place to capture traffic that is specifically referencing these source urls
 https://docs.cert-manager.io/en/latest/getting-started/index.html https://cert-manager.io/docs/tutorials/
 https://docs.cert-manager.io/en/latest/tutorials/acme/index.html https://cert-manager.io/docs/tutorials/
-https://docs.cert-manager.io/en/latest/tasks/issuers/index.html https://cert-manager.io/docs/configuration/
 https://docs.cert-manager.io/en/latest/ https://cert-manager.io/docs/
+
+# Issuer-specific redirects; these were mined from a wayback machine crawl of the old site:
+# https://web.archive.org/web/20190802192846/http://docs.cert-manager.io/en/latest/tasks/issuers/index.html
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/http01/* https://cert-manager.io/docs/configuration/acme/http01/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/dns01/* https://cert-manager.io/docs/configuration/acme/dns01/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/* https://cert-manager.io/docs/configuration/acme/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-ca.html https://cert-manager.io/docs/configuration/ca/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-selfsigned.html https://cert-manager.io/docs/configuration/selfsigned/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-vault.html https://cert-manager.io/docs/configuration/vault/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-venafi.html https://cert-manager.io/docs/configuration/venafi/
+
+# fallback in case there are any pages we missed:
+https://docs.cert-manager.io/en/latest/tasks/issuers/* https://cert-manager.io/docs/configuration/
+
 # These rules should capture all historical links that reference endpoints for specfic release versions. Whilst these endpoints might not exist anymore these
 # redirect rules will capture the request and route the user to the specific release-note page
 https://docs.cert-manager.io/en/release-0.1/* https://cert-manager.io/docs/release-notes/release-notes-0.1/ 301!
