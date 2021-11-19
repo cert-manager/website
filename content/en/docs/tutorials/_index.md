@@ -10,7 +10,8 @@ for you to learn from. Take a look!
 
 - [Backup and Restore Resources](./backup/): Backup the cert-manager resources
   in your cluster and then restore them.
-- [Securing Ingresses with NGINX-Ingress and cert-manager](./acme/ingress/): Tutorial for deploying NGINX into your
+- [Pomerium Ingress](./acme/pomerium-ingress): Tutorial on using the Pomerium Ingress Controller with cert-manager.
+- [Securing Ingresses with NGINX-Ingress and cert-manager](./acme/nginx-ingress/): Tutorial for deploying NGINX into your
   cluster and securing incoming connections with a certificate from Let's Encrypt.
 - [Issuing an ACME Certificate using DNS Validation](./acme/dns-validation/):
   Tutorial on how to resolve DNS ownership validation using DNS01 challenges.
