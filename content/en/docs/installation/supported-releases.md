@@ -207,12 +207,12 @@ to be supporting most commercial Kubernetes offerings.
 
 |      Vendor       | Oldest Kubernetes Release\* |               Other Old\*\* Kubernetes Releases               |
 |:-----------------:|-----------------------------|---------------------------------------------------------------|
-|    [EKS][eks]     | 1.17 (EOL Nov 2021)         | 1.18 (EOL Dec 2021), 1.19 (EOL Apr 2022)                      |
-|    [GKE][gke]     | 1.17 (EOL Nov 2021)         | 1.18 (EOL Mar 2022), 1.19 (EOL Jun 2022)                      |
-|    [AKS][aks]     | 1.18 (EOL Jul 2021)         | 1.19 (EOL Aug 2021)                                           |
+|    [EKS][eks]     | 1.18 (EOL Feb 2022)         | 1.19 (EOL Apr 2022), 1.20 (EOL Jul 2022)                      |
+|    [GKE][gke]     | 1.18 (EOL Mar 2022)         | 1.19 (EOL Jun 2022), 1.20 (EOL Aug 2022)                      |
+|    [AKS][aks]     | 1.19 (EOL Jan 2022)         | 1.20 (EOL Feb 2022)                                           |
 | [OpenShift 4][os] | 1.18 (4.5, EOL July 2021)   | 1.19 (4.6 EUS, EOL May 2022)                                  |
 
-\*As of July 30, 2021.
+\*Oldest release relevant to the next cert-manager release, as of 2021-11-19
 
 \*\*We say that a Kubernetes offering is "old" when it is not supported upstream
 as per the [Version Skew
