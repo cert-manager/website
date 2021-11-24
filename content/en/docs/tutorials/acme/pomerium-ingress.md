@@ -5,7 +5,7 @@ weight: 50
 type: "docs"
 ---
 
-This tutorial covers installing the [Pomerium Ingress Controller](https://pomerium.com/docs/k8s/ingress.html) and securing it with cert-manager. Pomerium is an identity-aware proxy that can also provide a custom ingress controller for your kubernetes services.
+This tutorial covers installing the [Pomerium Ingress Controller](https://pomerium.com/docs/k8s/ingress.html) and securing it with cert-manager. [Pomerium](https://pomerium.com) is an identity-aware proxy that can also provide a custom ingress controller for your kubernetes services.
 
 ## Prerequisites
 
