@@ -40,10 +40,19 @@ spec:
   # Secret template is optional. If set, these annotations
   # and labels will be copied to the secret named example-com-tls.
 
-  # Note: Labels and annotations from the template are only synced to the Secret at the time when the certificate 
-  # is created or renewed. Currently labels and annotations can only be added, but not removed. Removing any 
-  # labels or annotations from the template or removing the template itself will have no effect.
-  # See https://github.com/jetstack/cert-manager/issues/4292.
+  # Note: Without the cert-manager controller feature gate
+  # 'ExperimentalSecretApplySecretTemplateControllerMinKubernetesVTODO', Labels
+  # and annotations from the template are only synced to the Secret at the time
+  # when the certificate is created or renewed. Without the feature gate, labels
+  # and annotations can only be added, but not removed. Removing any labels or
+  # annotations from the template or removing the template itself will have no
+  # effect.
+  # Adding this feature gate ensures the secretTemplate is correctly reconciled
+  # and behaves as expected, however requires Kubernetes version TODO or higher.
+  # `--feature-gates="ExperimentalCertificateSigningRequestControllers=true"`
+  # See:
+  # - https://github.com/jetstack/cert-manager/issues/4292.
+  # - https://github.com/jetstack/cert-manager/pull/4638
   secretTemplate:
     annotations:
       my-secret-annotation-1: "foo"
