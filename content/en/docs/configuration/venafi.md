@@ -116,6 +116,11 @@ of the connection parameters are slightly different.
 
 > **Note**: You *must* allow "User Provided CSRs" as part of your TPP policy, as
 > this is the only type supported by cert-manager at this time.
+>
+> More specifically, the valid configurations of the "CSR handling" are:
+> - "User Provided CSRs" selected and unlocked,
+> - "User Provided CSRs" selected and locked,
+> - "Service Generated CSRs" selected and unlocked.
 
 In order to set up a Venafi Trust Protection Platform `Issuer`, you must first
 create a Kubernetes `Secret` resource containing your Venafi TPP API
