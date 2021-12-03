@@ -45,7 +45,7 @@ GOROOT="$(go env GOROOT)"
 export GOROOT
 GOBIN="${tmpdir}/bin"
 export GOBIN
-go get github.com/ahmetb/gen-crd-api-reference-docs@v0.2.0
+go get github.com/ahmetb/gen-crd-api-reference-docs@v0.3.0
 
 mkdir -p "${GOPATH}/src/github.com/jetstack"
 gitdir="${GOPATH}/src/github.com/jetstack/cert-manager"
@@ -53,9 +53,16 @@ echo "+++ Cloning cert-manager repository..."
 git clone "https://github.com/jetstack/cert-manager.git" "$gitdir"
 cd "$gitdir"
 
+# genversion takes two arguments (branch in cert-manager repo and a directory in
+# this repo under content/en) and generates API reference docs from cert-manager
+# branch for the path in this repo.
 genversion() {
+	checkout "$1"
+	gendocs "$2"
+}
+
+checkout() {
 	branch="$1"
-	outputdir="$2"
 	pushd "$gitdir"
 	rm -rf vendor/
 	echo "+++ Checking out branch $branch"
@@ -63,6 +70,9 @@ genversion() {
 	git reset --hard "origin/$branch"
 	echo "+++ Running 'go mod vendor' (this may take a while)"
 	go mod vendor
+}
+gendocs() {
+	outputdir="$1"
 	echo "+++ Generating reference docs..."
 	"${GOBIN}/gen-crd-api-reference-docs" \
 		-config "${REPO_ROOT}/scripts/gendocs/config.json" \
@@ -73,12 +83,32 @@ genversion() {
 	rm -rf vendor/
 	popd
 }
-
 # The branches named here exist in the `jetstack/cert-manager` repo.
 
 genversion "release-1.7" "next-docs"
-genversion "release-1.6" "docs"
-genversion "release-1.6" "v1.6-docs"
+
+# In cert-manager 1.6 cert-manager.io and acme.cert-manager.io alpha and beta
+# API versions are no longer served, but the apis are still in the codebase. We
+# don't want to show the docs for those API versions so this is a workaround.
+# This will only be necessary for the release-1.6 branch.
+checkout "release-1.6"
+rm -r pkg/apis/acme/v1alpha2
+rm -r pkg/apis/acme/v1alpha3
+rm -r pkg/apis/acme/v1beta1
+rm -r pkg/apis/certmanager/v1alpha2
+rm -r pkg/apis/certmanager/v1alpha3
+rm -r pkg/apis/certmanager/v1beta1
+gendocs "docs"
+
+checkout "release-1.6"
+rm -r pkg/apis/acme/v1alpha2
+rm -r pkg/apis/acme/v1alpha3
+rm -r pkg/apis/acme/v1beta1
+rm -r pkg/apis/certmanager/v1alpha2
+rm -r pkg/apis/certmanager/v1alpha3
+rm -r pkg/apis/certmanager/v1beta1
+gendocs "v1.6-docs"
+
 genversion "release-1.5" "v1.5-docs"
 genversion "release-1.4" "v1.4-docs"
 genversion "release-1.3" "v1.3-docs"
