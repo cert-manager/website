@@ -5,7 +5,7 @@ weight: 50
 type: "docs"
 ---
 
-This tutorial covers installing the [Pomerium Ingress Controller](https://pomerium.com/docs/k8s/ingress.html) and securing it with cert-manager. [Pomerium](https://pomerium.com) is an identity-aware proxy that can also provide a custom ingress controller for your kubernetes services.
+This tutorial covers installing the [Pomerium Ingress Controller](https://pomerium.com/docs/k8s/ingress.html) and securing it with cert-manager. [Pomerium](https://pomerium.com) is an identity-aware proxy that can also provide a custom ingress controller for your Kubernetes services.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ This tutorial covers installing the [Pomerium Ingress Controller](https://pomeri
     kubectl create namespace cert-manager
     ```
 
-1. Add the jetstack.io repository and update Helm:
+1. Add the `jetstack` repository and update Helm:
 
     ```bash
     helm repo add jetstack https://charts.jetstack.io
@@ -155,9 +155,9 @@ Create certificate configurations for Pomerium. Our example is named `pomerium-c
 Replace `localhost.pomerium.io` with the domain name you'll assign to the Ingress. Keep the subdomain `authenticate`.
 
 This example defines 3 certificates:
- - One using the `letsencrypt-staging` issuer wich covers the route to Pomerium's authentication service,
+ - One using the `letsencrypt-staging` issuer which covers the route to Pomerium's authentication service,
  - One using the self-signed `pomerium-issuer` to encrypt traffic between Pomerium's services,
- - One using the self-signed `pomerium-issuer` to encrypt traffic to to and from the Redis service(s) used by Pomerium.
+ - One using the self-signed `pomerium-issuer` to encrypt traffic to and from the Redis service(s) used by Pomerium.
 
 Additional certificates will be issued as new Ingresses are created.
 </li><li>
