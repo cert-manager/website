@@ -118,9 +118,22 @@ of the connection parameters are slightly different.
 > this is the only type supported by cert-manager at this time.
 >
 > More specifically, the valid configurations of the "CSR handling" are:
+>
 > - "User Provided CSRs" selected and unlocked,
 > - "User Provided CSRs" selected and locked,
 > - "Service Generated CSRs" selected and unlocked.
+>
+> When using "Service Generated CSRs" selected and unlocked, the default CSR
+> configuration present in your policy folder will override the configuration of
+> your Certificate resource. The subject DN, key algorithm, and key size will be
+> overridden by the values set in the policy folder.
+>
+> With "Service Generated CSRs" selected and locked, the certificate issuance
+> will systematically fail with the following message:
+>
+> ```plain
+> 400 PKCS#10 data will not be processed. Policy "\VED\Policy\foo" is locked to a Server Generated CSR.
+> ```
 
 In order to set up a Venafi Trust Protection Platform `Issuer`, you must first
 create a Kubernetes `Secret` resource containing your Venafi TPP API
