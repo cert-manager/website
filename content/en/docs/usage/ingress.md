@@ -133,6 +133,8 @@ In the above example, cert-manager will create `Certificate` resources that
 reference the `ClusterIssuer` `letsencrypt-prod` for all Ingresses that have a
 `kubernetes.io/tls-acme: "true"` annotation.
 
+If you are using the `cert-manager.io/cluster-issuer : "letsencrypt-prod-custom"` (for example) second annotation on your Ingress, then this reference will be overriden and a `Certificate` resource referencing the `ClusterIssuer` `letsencrypt-prod-custom` will be created instead.
+
 For more information on deploying cert-manager, read the [installation
 guide](../../installation/).
 
