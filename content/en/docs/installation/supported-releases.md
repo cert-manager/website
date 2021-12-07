@@ -26,10 +26,15 @@ release every two months.
 
 | Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| [1.7][] | Dec 7, 2021  | Apr 6, 2022  |      1.18+, to be confirmed        |       4.5+, to be confirmed       |
-| 1.8     | Feb 9, 2022  | June 8, 2022 |           to be defined            |           to be defined           |
+| [1.7][] |  ~Dec 2021 &dagger; | ~Apr, 2022  |         1.18 - 1.23          |               4.5+                |
+| 1.8     | Feb 9, 2022  | June 8, 2022 |              To be confirmed       |           To be confirmed         |
 
 Note that dates in the future are uncertain and might change.
+
+&dagger; 1.7 currently has an uncertain release schedule owing to the holiday period and a
+few outstanding features we want to include.
+
+This page will be updated as we get more of an idea of when the release of 1.7 will be.
 
 ## Old releases
 
