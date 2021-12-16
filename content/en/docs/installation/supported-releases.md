@@ -12,29 +12,24 @@ Inspired by https://istio.io/latest/about/supported-releases/
 This page lists the status, timeline and policy for currently supported
 releases.
 
-Each release is supported for a period of four months, and we create a new
+Each release is supported for a period of four months, and we aim to create a new
 release every two months.
 
 ## Supported releases {#supported-releases}
 
-| Release | Release Date | End of life |    [Supported Kubernetes versions][s]    | [Supported OpenShift versions][s] |
-|---------|:------------:|:-----------:|:----------------------------------------:|:---------------------------------:|
-| [1.6][] | Oct 26, 2021 | Feb 9, 2022 |    1.17, 1.18, 1.19, 1.20, 1.21, 1.22    |   4.4, 4.5, 4.6, 4.7, 4.8, 4.9    |
-| [1.5][] | Aug 11, 2021 | Dec 7, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |   4.3, 4.4, 4.5, 4.6, 4.7, 4.8    |
+| Release | Release Date |  End of Life | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+|---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
+| [1.6][] | Oct 26, 2021 | Mar 30, 2022 |             1.17 → 1.22            |             4.4 → 4.9             |
+| [1.5][] | Aug 11, 2021 | Jan 26, 2022 |             1.16 → 1.22            |             4.3 → 4.8             |
 
 ## Upcoming releases
 
 | Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| [1.7][] |  ~Dec 2021 &dagger; | ~Apr, 2022  |         1.18 - 1.23          |               4.5+                |
-| 1.8     | Feb 9, 2022  | June 8, 2022 |              To be confirmed       |           To be confirmed         |
+| [1.7][] | Jan 26, 2022 | May 26, 2022 |            1.18 → 1.23             |            4.5 → 4.9              |
+| 1.8     | Mar 30, 2022 | June 8, 2022 |          To be confirmed           |         To be confirmed           |
 
 Note that dates in the future are uncertain and might change.
-
-&dagger; 1.7 currently has an uncertain release schedule owing to the holiday period and a
-few outstanding features we want to include.
-
-This page will be updated as we get more of an idea of when the release of 1.7 will be.
 
 ## Old releases
 
