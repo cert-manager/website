@@ -183,7 +183,7 @@ The list of supported Kubernetes versions displayed in the [Supported
 Releases](#supported-releases) section depends on what the cert-manager
 maintainers think is reasonable to support and to test.
 
-As of 16 Dec 2021, Our testing coverage is:
+As of 16 Dec 2021, our testing coverage is:
 
 | Release branch |      Prow configuration       |         Dashboard         | Kubernetes versions tested |  Periodicity  |
 |:--------------:|:------------------------------|:--------------------------|:--------------------------:|:-------------:|
