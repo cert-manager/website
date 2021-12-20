@@ -439,15 +439,58 @@ page if a step is missing or if it is outdated.
 
 13. Proceed to the post-release steps:
 
-    1. **(final release only)** Add the new final release to the
-       [supported-releases](/docs/installation/supported-releases/) page.
+    1. **(initial alpha only)** Create a PR on
+       [`cert-manager/release`](https://github.com/cert-manager/release) in
+       order to re-enable the next periodic tests configured in:
 
-    2. **(final release only)** Open a PR to
+       ```plain
+       config/jobs/cert-manager/release-next/cert-manager-release-next-periodics.yaml
+       ```
+
+       Why? Because we disable the "next" periodic tests right after a final release
+       since next periodics are only useful after we do the first alpha (e.g.,
+       in [PR 606](https://github.com/jetstack/testing/pull/606)).
+
+    2. **(initial alpha only)** Open a PR to
+       [`cert-manager/website`](https://github.com/cert-manager/website) in
+       order to:
+
+       - Update the section "How we determine supported Kubernetes versions" on
+         the [supported-releases](/docs/installation/supported-releases/) page.
+         In the table, change the "next periodic" line with the correct links.
+
+    3. **(final release only)** Create a PR on
+       [`cert-manager/release`](https://github.com/cert-manager/release) in
+       order to disable the next periodic tests configured in:
+
+       ```plain
+       config/jobs/cert-manager/release-next/cert-manager-release-next-periodics.yaml
+       ```
+
+       (just remove the file and commit)
+
+       Why? Because that saves us compute time between a final release
+       and the first alpha.
+
+    4. **(final release only)** Open a PR to
+       [`cert-manager/website`](https://github.com/cert-manager/website) in
+       order to:
+
+       - Update the section "Supported releases" in the
+         [supported-releases](/docs/installation/supported-releases/) page.
+       - Update the section "Supported releases" in the
+         [supported-releases](/docs/installation/supported-releases/) page.
+       - Update the section "How we determine supported Kubernetes versions" on
+         the [supported-releases](/docs/installation/supported-releases/) page.
+         In the table, set "n/a" for the line where "next periodic" is since
+         these tests will be disabled until we do our first alpha.
+
+    5. **(final release only)** Open a PR to
        [`jetstack/testing`](https://github.com/jetstack/testing) and change Prow's
        config. To do this, take inspiration from [Maartje's PR
        example](https://github.com/jetstack/testing/pull/397/files).
 
-    3. **(final release only)** Push a new release branch to
+    6. **(final release only)** Push a new release branch to
        [`jetstack/cert-manager`](https://github.com/jetstack/cert-manager). If the
        final release is `v1.0.0`, then push the new branch `release-1.1`:
 
@@ -457,13 +500,13 @@ page if a step is missing or if it is outdated.
         git push origin release-1.1
         ```
 
-    4. **(final release only)** Open a PR to
+    7. **(final release only)** Open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) with
        updates to the website configuration. To do this, take inspiration from
        [Maartje's PR
        example](https://github.com/cert-manager/website/pull/309/files).
 
-    5. Ensure that any installation commands in
+    8. Ensure that any installation commands in
        [`cert-manager/website`](https://github.com/cert-manager/website) install
        the latest version. This should be done after every release, including
        patch releases as we want to encourage users to always install the latest
