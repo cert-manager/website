@@ -9,19 +9,35 @@ type: "docs"
 
 ### Legacy cert-manager API versions are no-longer served
 
-Following their deprecation in version 1.5, the cert-manager API versions `v1alpha2, v1alpha3, and v1beta1` are no longer served.
+Following their deprecation in version 1.4, the cert-manager API versions `v1alpha2, v1alpha3, and v1beta1` are no longer served.
 
-This means if your deployment manifests contain any of these API versions, you will not be able to deploy them after upgrading. Our new `cmctl` utility or old `kubectl cert-manager` plugin can [convert](https://cert-manager.io/docs/usage/kubectl-plugin/#convert) old manifests to `v1` for you.
+This means if your deployment manifests contain any of these API versions, you will not be able to deploy them after upgrading. Our new `cmctl` utility or old `kubectl cert-manager` plugin can [convert](../../usage/cmctl/#convert) old manifests to `v1` for you.
+
+{{% pageinfo color="warning" %}}
+
+⛔️  If you are upgrading cert-manager on a cluster which has previously had
+cert-manager < `v1.0.0`, you will need to ensure that all cert-manager custom
+resources are stored in `etcd` at `v1` version and that cert-manger CRDs do not
+reference the deprecated APIs **before you upgrade to `v1.6`**.
+
+This is explained in more detail in the [Upgrading existing cert-manager resources](../../installation/upgrading/remove-deprecated-apis/#upgrading-existing-cert-manager-resources)
+page.
+
+{{% /pageinfo %}}
 
 ### JKS Keystore Minimum Password Length
 
-[JKS Keystores][jks-keystore] now have a minimum password length of 6 characters,
-as an unintended side effect of [upgrading keystore-go from `v2` to `v4`][jks-keystore-upgrade-pr].
-If you are using a shorter password, certificates will fail to renew,
-and the only observable error will be in the cert-manager logs.
-We are discussing the best remediation for a future `v1.6.1` release.
+ℹ️ This no longer applies as it was fixed in `v1.6.1`, but will remain here for 
+informational purposes. If you haven't upgraded cert-manager to `v1.6.0` from any `v1.5`
+release, we recommend upgrading straight to the latest version, skipping `v1.6.0`.
 
-[jks-keystore]: https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.CertificateKeystores
+In cert-manager `v1.6.0` [JKS Keystores][jks-keystore] had a minimum password length of 6 characters,
+as an unintended side effect of [upgrading keystore-go from `v2` to `v4`][jks-keystore-upgrade-pr].
+If you are using a shorter password, certificates would have failed to renew,
+and the only observable error was in the cert-manager logs.
+This was fixed in cert-manager `v1.6.1`.
+
+[jks-keystore]: ../../reference/api-docs/#cert-manager.io/v1.CertificateKeystores
 [jks-keystore-upgrade-pr]: https://github.com/jetstack/cert-manager/pull/4428
 
 ## Major Themes

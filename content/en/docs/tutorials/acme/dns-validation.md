@@ -44,7 +44,7 @@ spec:
       dns01:
         cloudDNS:
           # The ID of the GCP project
-          # reference: https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/dns01/google.html
+          # reference: https://cert-manager.io/docs/tutorials/acme/dns-validation/
           project: $PROJECT_ID
           # This is the secret used to access the service account
           serviceAccountSecretRef:

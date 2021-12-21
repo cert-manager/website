@@ -47,7 +47,7 @@ The changes to our CRD resources mean that upgrading requires more manual
 intervention than in previous releases.
 
 It's recommended that you backup and completely [uninstall
-cert-manager](https://docs.cert-manager.io/en/release-0.12/tasks/uninstall/)
+cert-manager](https://cert-manager.io/docs/installation/uninstall/)
 before re-installing the `v0.11` release.
 
 You will also need to manually update all your backed up cert-manager resource

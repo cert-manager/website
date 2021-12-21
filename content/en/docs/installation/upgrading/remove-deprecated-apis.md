@@ -14,9 +14,7 @@ We have deprecated the following cert-manager APIs:
 - `acme.cert-manager.io/v1alpha3`
 - `acme.cert-manager.io/v1beta1`
 
-These APIs will be removed in cert-manager `v1.6.0`.
-If you have a cert-manager installation that is using or has previously used these deprecated APIs you may need to upgrade your cert-manager custom resources and CRDs. This needs to be done before upgrading to cert-manager `v1.6.0`. 
-
+These APIs were removed in cert-manager `v1.6.0`. If you have a cert-manager installation that is using or has previously used these deprecated APIs you'll need to upgrade your cert-manager custom resources and CRDs. This needs to be done before upgrading to cert-manager `v1.6.0`.
 
 ## Upgrading existing cert-manager resources
 

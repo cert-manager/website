@@ -12,22 +12,22 @@ Inspired by https://istio.io/latest/about/supported-releases/
 This page lists the status, timeline and policy for currently supported
 releases.
 
-Each release is supported for a period of four months, and we create a new
+Each release is supported for a period of four months, and we aim to create a new
 release every two months.
 
 ## Supported releases {#supported-releases}
 
-| Release | Release Date | End of life |    [Supported Kubernetes versions][s]    | [Supported OpenShift versions][s] |
-|---------|:------------:|:-----------:|:----------------------------------------:|:---------------------------------:|
-| [1.6][] | Oct 26, 2021 | Feb 9, 2022 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 | 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9 |
-| [1.5][] | Aug 11, 2021 | Dec 7, 2021 | 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |   4.3, 4.4, 4.5, 4.6, 4.7, 4.8    |
+| Release | Release Date |  End of Life | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+|---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
+| [1.6][] | Oct 26, 2021 | Mar 30, 2022 |             1.17 → 1.22            |             4.4 → 4.9             |
+| [1.5][] | Aug 11, 2021 | Jan 26, 2022 |             1.16 → 1.22            |             4.3 → 4.8             |
 
 ## Upcoming releases
 
 | Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| [1.7][] | Dec 7, 2021  | Apr 6, 2022  |           to be defined            |           to be defined           |
-| 1.8     | Feb 9, 2022  | June 8, 2022 |           to be defined            |           to be defined           |
+| [1.7][] | Jan 26, 2022 | May 26, 2022 |            1.18 → 1.23             |            4.5 → 4.9              |
+| 1.8     | Mar 30, 2022 | June 8, 2022 |          To be confirmed           |         To be confirmed           |
 
 Note that dates in the future are uncertain and might change.
 
@@ -183,15 +183,21 @@ The list of supported Kubernetes versions displayed in the [Supported
 Releases](#supported-releases) section depends on what the cert-manager
 maintainers think is reasonable to support and to test.
 
-Our testing coverage is:
+As of 16 Dec 2021, our testing coverage is:
 
-| Release branch | Prow configuration            | Dashboard                 | Kubernetes versions tested  |  Periodicity  |
-| :------------: | :---------------------------- | :------------------------ | :-------------------------: | :-----------: |
-|      PRs       | [`presubmits.yaml`][]         | [`presubmits-blocking`][] |            1.22             |  On each PR   |
-|     master     | [`periodics.yaml`][]          | [`master`][]              |         1.16 → 1.22         | Every 2 hours |
-|  release-1.6   | [`next-periodics.yaml`][]     | [`next`][]                |         1.16 → 1.22         | Every 2 hours |
-|  release-1.5   | [`previous-periodics.yaml`][] | [`previous`][]            |         1.16 → 1.22         | Every 2 hours |
-|  release-1.4   | N/A                           |                           |             N/A             |      N/A      |
+| Release branch |      Prow configuration       |         Dashboard         | Kubernetes versions tested |  Periodicity  |
+|:--------------:|:------------------------------|:--------------------------|:--------------------------:|:-------------:|
+|      PRs       | [`presubmits.yaml`][]         | [`presubmits-blocking`][] |            1.22            |  On each PR   |
+|     master     | [`periodics.yaml`][]          | [`master`][]              |        1.18 → 1.23         | Every 2 hours |
+|  release-1.7   | n/a\*                         | n/a                       |            n/a             |      n/a      |
+|  release-1.6   | [`previous-periodics.yaml`][] | [`previous`][]            |        1.18 → 1.23         | Every 2 hours |
+|  release-1.5   | n/a                           |                           |            n/a             |      n/a      |
+
+\*The release-1.7 is currently equal to release-1.6; we decided to disable the
+periodic tests until we release `1.7.0-alpha.0`. The disabling of the periodic
+tests was performed in the [testing PR
+606](https://github.com/jetstack/testing/pull/606). This note should be removed
+as soon as we release `1.7.0-alpha.0`.
 
 [`presubmits.yaml`]: https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/cert-manager-presubmits.yaml
 [`periodics.yaml`]: https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/cert-manager-periodics.yaml
@@ -207,12 +213,12 @@ to be supporting most commercial Kubernetes offerings.
 
 |      Vendor       | Oldest Kubernetes Release\* |               Other Old\*\* Kubernetes Releases               |
 |:-----------------:|-----------------------------|---------------------------------------------------------------|
-|    [EKS][eks]     | 1.16 (EOL Sep 2021)         | 1.17 (EOL Nov 2021), 1.18 (EOL Dec 2021), 1.19 (EOL Apr 2022) |
-|    [GKE][gke]     | 1.17 (EOL Nov 2021)         | 1.18 (EOL Mar 2022), 1.19 (EOL Jun 2022)                      |
-|    [AKS][aks]     | 1.18 (EOL Jul 2021)         | 1.19 (EOL Aug 2021)                                           |
+|    [EKS][eks]     | 1.18 (EOL Feb 2022)         | 1.19 (EOL Apr 2022), 1.20 (EOL Jul 2022)                      |
+|    [GKE][gke]     | 1.18 (EOL Mar 2022)         | 1.19 (EOL Jun 2022), 1.20 (EOL Aug 2022)                      |
+|    [AKS][aks]     | 1.19 (EOL Jan 2022)         | 1.20 (EOL Feb 2022)                                           |
 | [OpenShift 4][os] | 1.18 (4.5, EOL July 2021)   | 1.19 (4.6 EUS, EOL May 2022)                                  |
 
-\*As of July 30, 2021.
+\*Oldest release relevant to the next cert-manager release, as of 2021-11-19
 
 \*\*We say that a Kubernetes offering is "old" when it is not supported upstream
 as per the [Version Skew
