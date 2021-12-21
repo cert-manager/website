@@ -85,21 +85,14 @@ gendocs() {
 }
 # The branches named here exist in the `jetstack/cert-manager` repo.
 
-genversion "release-1.7" "next-docs"
+genversion "release-1.8" "next-docs"
+genversion "release-1.7" "docs"
+genversion "release-1.7" "v1.7-docs"
 
 # In cert-manager 1.6 cert-manager.io and acme.cert-manager.io alpha and beta
 # API versions are no longer served, but the apis are still in the codebase. We
 # don't want to show the docs for those API versions so this is a workaround.
 # This will only be necessary for the release-1.6 branch.
-checkout "release-1.6"
-rm -r pkg/apis/acme/v1alpha2
-rm -r pkg/apis/acme/v1alpha3
-rm -r pkg/apis/acme/v1beta1
-rm -r pkg/apis/certmanager/v1alpha2
-rm -r pkg/apis/certmanager/v1alpha3
-rm -r pkg/apis/certmanager/v1beta1
-gendocs "docs"
-
 checkout "release-1.6"
 rm -r pkg/apis/acme/v1alpha2
 rm -r pkg/apis/acme/v1alpha3
