@@ -64,7 +64,7 @@ Note that dates in the future are uncertain and might change.
 [0.11]: https://cert-manager.io/docs/release-notes/release-notes-0.11
 
 You can find available releases on the [releases
-page](https://github.com/cert-manager/cert-manager/releases). You can find
+page](https://github.com/jetstack/cert-manager/releases). You can find
 the release notes for each minor release
 [here](https://cert-manager.io/docs/release-notes/), and the upgrade
 instructions are
@@ -173,7 +173,7 @@ possible.
 [#2857]: https://github.com/jetstack/cert-manager/issues/2857 "CloudDNS DNS01 challenge crashes cert-manager"
 [#4142]: https://github.com/jetstack/cert-manager/issues/4142 "Cannot issue a certificate that has the same subject and issuer"
 [#3444]: https://github.com/jetstack/cert-manager/issues/3444 "Certificates do not get immediately updated after updating them"
-[#3882]: https://github.com/jetstack/cert-manager/pull/3882: "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
+[#3882]: https://github.com/jetstack/cert-manager/pull/3882 "Certificate's revision history limit validated by webhook"
 [#3644]: https://github.com/jetstack/cert-manager/issues/3644 "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
 
 
