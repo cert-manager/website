@@ -115,7 +115,7 @@ spec:
     - selector:
         dnsZones:
         - 'example.com'
-    - dns01:
+      dns01:
         # Valid values are None and Follow
         cnameStrategy: Follow
         route53:
