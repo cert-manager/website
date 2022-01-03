@@ -43,6 +43,7 @@ These external issuers are known to support and honor [approval](https://cert-ma
   certificates signed by [FreeIPA](https://www.freeipa.org).
 - [ADCS Issuer](https://github.com/nokia/adcs-issuer): Requests
   certificates signed by [Microsoft Active Directory Certificate Service](https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority).
+- [CFSSL Issuer](https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer/): Request certificates signed by a [CFSSL](https://github.com/cloudflare/cfssl) `multirootca` instance.
 
 ## Building New External Issuers
 
