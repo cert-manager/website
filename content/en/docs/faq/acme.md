@@ -177,7 +177,7 @@ Status:
 In this example our HTTP01 check fails due a network issue.
 You will also see any errors coming from your DNS provider here.
 
-You can also see some additional information about the state of the [ACME authorization](https://datatracker.ietf.org/doc/html/rfc8555#section-7.1.4) that the challenge should validate using the authorization URL on from the status of the `Challenge`.
+You can also see some additional information about the state of the [ACME authorization](https://datatracker.ietf.org/doc/html/rfc8555#section-7.1.4) that the challenge should validate using the authorization URL on from the status of the `Challenge`:
 
 ```bash
 $ kubectl get challenge <challenge-name> -ojsonpath='{.spec.authorizationURL}'
