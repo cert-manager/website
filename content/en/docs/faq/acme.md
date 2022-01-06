@@ -54,6 +54,7 @@ Events:
 
 * `Failed to update ACME account:400 urn:ietf:params:acme:error:invalidEmail`: the email you specified in the Issuer configuration isn't valid.
 * `Error initializing issuer: Failed to register ACME account: secrets "acme-key" already exists`: there might be a leftover account from a previous issuer that is no longer valid, you should remove the secret so it can be recreated.
+* `Error accepting challenge: 400 urn:ietf:params:acme:error:malformed: Unable to update challenge :: authorization must be pending`: this suggests that the authorization was not in 'pending' state at a time when cert-manager sent a request to the ACME server to accept the challenge. This may be because the domain validation has already failed and the authorization has been marked as 'invalid'. Check the authorization URL on the status of the `Order` or `Challenge` to see the status of the authorization and any additional information.
 
 ## 2. Troubleshooting Orders
 
@@ -107,6 +108,12 @@ Events:
   Normal  Created     72s   cert-manager  Created Challenge resource "example-com-2745722290-439160286-0" for domain "test1.example.com"
   Normal  Created     72s   cert-manager  Created Challenge resource "example-com-2745722290-439160286-1" for domain "test2.example.com"
   Normal  OrderValid  4s    cert-manager  Order completed successfully
+```
+
+You can see some additional information about the state of the [ACME authorization](https://datatracker.ietf.org/doc/html/rfc8555#section-7.1.4) that needs to be validated as part of this order using the authorization URL from the status of the `Order`:
+
+```bash
+$ kubectl get order <order-name> -ojsonpath='{.status.authorizations[x].url}'
 ```
 
 If the Order is not completing successfully, you can debug the challenges
@@ -169,6 +176,12 @@ Status:
 
 In this example our HTTP01 check fails due a network issue.
 You will also see any errors coming from your DNS provider here.
+
+You can also see some additional information about the state of the [ACME authorization](https://datatracker.ietf.org/doc/html/rfc8555#section-7.1.4) that the challenge should validate using the authorization URL on from the status of the `Challenge`.
+
+```bash
+$ kubectl get challenge <challenge-name> -ojsonpath='{.spec.authorizationURL}'
+```
 
 ### HTTP01 troubleshooting
 First of all check if you can see the challenge URL from the public internet, if this does not work check your Ingress and firewall configuration as well as the service and pod cert-manager created to solve the ACME challenge.
