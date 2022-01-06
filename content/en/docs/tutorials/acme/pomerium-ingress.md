@@ -36,7 +36,7 @@ This tutorial covers installing the [Pomerium Ingress Controller](https://pomeri
 
     ```bash
     helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace \
-    --version v1.4.0 --set installCRDs=true
+    --set installCRDs=true
     ```
 
 1. Confirm deployment with `kubectl get pods --namespace cert-manager`:
@@ -107,7 +107,7 @@ The following YAML defines a staging certificate issuer. You must update the ema
 
 {{% include file="../example/pomerium-staging-issuer.yaml" language="yaml" %}}
 
-You can download and edit the example and apply it with `kubectl -f`, or edit, and apply the custom resource in one command:
+You can download and edit the example and apply it with `kubectl apply -f`, or edit, and apply the custom resource in one command:
 
 ```bash
 kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/pomerium-staging-issuer.yaml
@@ -154,8 +154,7 @@ Create certificate configurations for Pomerium. Our example is named `pomerium-c
 
 Replace `localhost.pomerium.io` with the domain name you'll assign to the Ingress. Keep the subdomain `authenticate`.
 
-This example defines 3 certificates:
- - One using the `letsencrypt-staging` issuer which covers the route to Pomerium's authentication service,
+This example defines 2 certificates:
  - One using the self-signed `pomerium-issuer` to encrypt traffic between Pomerium's services,
  - One using the self-signed `pomerium-issuer` to encrypt traffic to and from the Redis service(s) used by Pomerium.
 
@@ -171,6 +170,7 @@ kubectl apply -f pomerium-certificates.yaml
 ```bash
 kubectl get certificate
 NAME                    READY   SECRET                 AGE
+pomerium-ca           True    pomerium-ca              10s
 pomerium-cert           True    pomerium-tls           10s
 pomerium-redis-cert     True    pomerium-redis-tls     10s
 ```
@@ -183,7 +183,7 @@ Create a values file for Helm to use when installing Pomerium. Our example is na
 
 The options required in the `authenticate.idp` block will vary depending on your identity provider.
 
-Update `config.rootDomain` to match your domain space, omitting the `*`.
+Update `config.rootDomain` to match your domain space.
 
 </li><li>
 
