@@ -230,7 +230,7 @@ You can download and reference these files locally, or you can reference them fr
 To install the example service from the tutorial files straight from GitHub:
 
 ```bash
-kubectl apply -f https://netlify.cert-manager.io/docs/tutorials/acme/example/deployment.yaml
+kubectl apply -f https://cert-manager.io/docs/tutorials/acme/example/deployment.yaml
 kubectl apply -f https://netlify.cert-manager.io/docs/tutorials/acme/example/service.yaml
 ```
 </li><li>
