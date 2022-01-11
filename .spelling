@@ -56,6 +56,7 @@ DataDog
 Dean-Coakley
 DigitalOcean
 Distroless
+etcd
 EC2
 ECDSA
 EKS
@@ -245,6 +246,7 @@ manual-rotation-private-key
 mechanism
 metadata
 middleware
+migrate-api-version
 misconfiguration
 misconfigured
 mixin
