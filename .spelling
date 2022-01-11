@@ -79,6 +79,7 @@ HTTPRoute
 HashiCorp
 Helmfile
 IAM
+IdP
 INWX
 IPs
 IPv6
@@ -94,6 +95,7 @@ KUARD
 Kirill-Garbar
 Knative
 Krew
+kuard
 KubeCon
 Kubernetes
 Kyverno
@@ -116,9 +118,11 @@ OperatorHub.io
 PEM
 PKCS#12
 PKCS#8
+Pomerium
 PowerShell
 Prometheus
 RBAC
+Redis
 RFC2136
 RFC8555
 RR
@@ -257,6 +261,7 @@ namespace
 namespaced
 namespaces
 ndegory
+oauth2
 openshift-supported-versions
 powershell
 pre
