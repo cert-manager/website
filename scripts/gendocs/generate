@@ -59,6 +59,12 @@ cd "$gitdir"
 genversion() {
 	checkout "$1"
 	gendocs "$2"
+
+	genclireference "$2" "cmd/acmesolver/main.go" "acmesolver"
+  genclireference "$2" "cmd/cainjector/main.go" "cainjector"
+  genclireference "$2" "cmd/ctl/main.go" "cmctl"
+  genclireference "$2" "cmd/controller/main.go" "controller"
+  genclireference "$2" "cmd/webhook/main.go" "webhook"
 }
 
 checkout() {
@@ -83,6 +89,39 @@ gendocs() {
 	rm -rf vendor/
 	popd
 }
+
+genclireference() {
+  if ! test -f "$2"; then
+    return
+  fi
+
+  outputdir="$1"
+  target="$2"
+  name="$3"
+  echo "+++ Generating CLI reference docs for $target ..."
+
+  mkdir -p "${REPO_ROOT}/content/en/${outputdir}/cli/"
+
+  output=$(go run "$target" --help)
+  cat >> "${REPO_ROOT}/content/en/${outputdir}/cli/$name.md" << EOF
+---
+title: $name CLI reference
+linkTitle: $name
+weight: 960
+type: "docs"
+---
+\`\`\`
+$output
+\`\`\`
+EOF
+}
+
+genclireference "docs" "cmd/acmesolver/main.go" "acmesolver"
+genclireference "docs" "cmd/cainjector/main.go" "cainjector"
+genclireference "docs" "cmd/ctl/main.go" "cmctl"
+genclireference "docs" "cmd/controller/main.go" "controller"
+genclireference "docs" "cmd/webhook/main.go" "webhook"
+
 # The branches named here exist in the `jetstack/cert-manager` repo.
 
 genversion "release-1.7" "next-docs"
