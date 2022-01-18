@@ -287,13 +287,12 @@ Once an X.509 certificate has been issued, cert-manager will calculate the renew
 
 ## Additional Certificate Output Formats
 
-This feature is currently in an _experimental_ alpha state, and its behavior is
-subject to change in further releases or removed entirely.
-
 {{% pageinfo color="warning" %}}
 
-⛔️ This feature is only enabled by adding it to the `--feature-gates` flag on
-the cert-manager controller and webhook components:
+⛔️ The additional certificate output formats feature is currently in an
+_experimental_ alpha state, and is subject to breaking changes or complete
+removal in future releases. This feature is only enabled by adding it to the
+`--feature-gates` flag on the cert-manager controller and webhook components:
 
 ```bash
 --feature-gates=AdditionalCertificateOutputFormats=true
@@ -301,10 +300,11 @@ the cert-manager controller and webhook components:
 
 {{% /pageinfo %}}
 
-This feature enables defining extra output formats of the Certificate in the
-target Secret resource. There are currently two supported additional output
-formats: `CombinedPEM` and `DER`. Both output formats can be specified on the
-same Certificate.
+`additionalOutputFormats` is a field on the Certificate `spec` that allows
+specifying additional supplimentory formats of issued certificates and their
+private key. There are currently two supported additional output formats:
+`CombinedPEM` and `DER`. Both output formats can be specified on the same
+Certificate.
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -333,11 +333,12 @@ data:
 
 #### `CombinedPEM`
 
-The `CombinedPEM` option will create a new key entry in the resulting
+The `CombinedPEM` type will create a new key entry in the resulting
 Certificate's Secret `tls-combined.pem`. This entry will contain the PEM encoded
 private key, followed by at least one new line character, followed by the PEM
 encoded signed certificate chain-
-```
+
+```text
 <private key> + "\n" + <signed certificate chain>
 ```
 
@@ -354,9 +355,8 @@ data:
 
 #### `DER`
 
-The `DER` option will create a new key entry in the resulting Certificate's
-Secret `key.der`. This entry will contain the DER binary format of the private
-key.
+The `DER` type will create a new key entry in the resulting Certificate's Secret
+`key.der`. This entry will contain the DER binary format of the private key.
 
 ```yaml
 apiVersion: v1
