@@ -77,3 +77,6 @@ https://docs.cert-manager.io/en/release-0.16/* https://cert-manager.io/docs/rele
 https://docs.cert-manager.io/en/release-* https://cert-manager.io/docs/release-notes/release-notes-:splat 301!
 https://docs.cert-manager.io https://cert-manager.io/docs 301!
 https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
+
+# These rules handle page renames
+https://cert-manager.io/docs/faq/kubed/* https://cert-manager.io/docs/faq/sync-secrets/
