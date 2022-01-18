@@ -301,7 +301,7 @@ removal in future releases. This feature is only enabled by adding it to the
 {{% /pageinfo %}}
 
 `additionalOutputFormats` is a field on the Certificate `spec` that allows
-specifying additional supplimentory formats of issued certificates and their
+specifying additional supplementary formats of issued certificates and their
 private key. There are currently two supported additional output formats:
 `CombinedPEM` and `DER`. Both output formats can be specified on the same
 Certificate.
