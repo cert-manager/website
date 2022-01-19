@@ -56,6 +56,7 @@ DataDog
 Dean-Coakley
 DigitalOcean
 Distroless
+etcd
 EC2
 ECDSA
 EKS
@@ -79,6 +80,7 @@ HTTPRoute
 HashiCorp
 Helmfile
 IAM
+IdP
 INWX
 IPs
 IPv6
@@ -94,6 +96,7 @@ KUARD
 Kirill-Garbar
 Knative
 Krew
+kuard
 KubeCon
 Kubernetes
 Kyverno
@@ -116,9 +119,11 @@ OperatorHub.io
 PEM
 PKCS#12
 PKCS#8
+Pomerium
 PowerShell
 Prometheus
 RBAC
+Redis
 RFC2136
 RFC8555
 RR
@@ -245,6 +250,7 @@ manual-rotation-private-key
 mechanism
 metadata
 middleware
+migrate-api-version
 misconfiguration
 misconfigured
 mixin
@@ -257,6 +263,7 @@ namespace
 namespaced
 namespaces
 ndegory
+oauth2
 openshift-supported-versions
 powershell
 pre
@@ -270,6 +277,7 @@ publicised
 reStructuredText
 rebase
 reissuance
+reflector
 remediate
 renewBefore
 repo
