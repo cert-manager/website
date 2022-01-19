@@ -189,7 +189,7 @@ As of 6th January 2022, our testing coverage is:
 |:--------------:|:------------------------------|:--------------------------|:--------------------------:|:-------------:|
 |      PRs       | [`presubmits.yaml`][]         | [`presubmits-blocking`][] |            1.23            |  On each PR   |
 |     master     | [`periodics.yaml`][]          | [`master`][]              |        1.18 → 1.23         | Every 2 hours |
-|  release-1.7   | [`next-periodics.yaml`][]     | [`next`][]                |        1.18 -> 1.23        | Every 2 hours |
+|  release-1.7   | [`next-periodics.yaml`][]     | [`next`][]                |        1.18 → 1.23         | Every 2 hours |
 |  release-1.6   | [`previous-periodics.yaml`][] | [`previous`][]            |        1.18 → 1.22         | Every 2 hours |
 |  release-1.5   | n/a                           |                           |            n/a             |      n/a      |
 
