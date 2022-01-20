@@ -1,2 +1,4 @@
 /v*.*-docs/
 /next-docs/
+docs/cli/*
+!docs/cli/_index.md
