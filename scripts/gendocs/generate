@@ -60,11 +60,16 @@ genversion() {
 	checkout "$1"
 	gendocs "$2"
 
-	genclireference "$2" "cmd/acmesolver/main.go" "acmesolver"
-  genclireference "$2" "cmd/cainjector/main.go" "cainjector"
-  genclireference "$2" "cmd/ctl/main.go" "cmctl"
-  genclireference "$2" "cmd/controller/main.go" "controller"
-  genclireference "$2" "cmd/webhook/main.go" "webhook"
+  genclireference "$2" "cmd/acmesolver" "acmesolver"
+  genclireference "$2" "cmd/cainjector" "cainjector"
+  genclireference "$2" "cmd/ctl" "cmctl"
+  genclireference "$2" "cmd/controller" "controller"
+  genclireference "$2" "cmd/webhook" "webhook"
+
+  # if any of the above steps succeeded copy over the index file
+  if [ -d "$REPO_ROOT/content/en/$2/cli" ]; then
+    cp "$REPO_ROOT/content/en/docs/cli/_index.md" "${REPO_ROOT}/content/en/$2/cli/"
+  fi
 }
 
 checkout() {
@@ -90,8 +95,23 @@ gendocs() {
 	popd
 }
 
+# genclireference will attempt to run main.go --help for the target and write the output to a markdown file
 genclireference() {
-  if ! test -f "$2"; then
+  if [ ! -f "$2/main.go" ]; then
+    echo "+++ target $2 does not exist, skipping..."
+    return
+  fi
+
+  # hacky way to figure out if the target has the correct structure
+  # differs between older version but this catches the corner cases
+  if [[ ! -d "$2/app" ]] && [ ! -d "$2/cmd" ]; then
+    echo "+++ app directory for $2 does not exist, skipping..."
+    return
+  fi
+
+  # combined with the check above we can handle all versions
+  # for example release-0.15 webhook has the correct directory structure but does not use cobra
+  if ! grep -q "@com_github_spf13_cobra//:go_default_library" "$2/app/BUILD.bazel" && ! grep -q "@com_github_spf13_cobra//:go_default_library" "$2/cmd/BUILD.bazel"; then
     return
   fi
 
@@ -102,8 +122,8 @@ genclireference() {
 
   mkdir -p "${REPO_ROOT}/content/en/${outputdir}/cli/"
 
-  output=$(go run "$target" --help)
-  cat >> "${REPO_ROOT}/content/en/${outputdir}/cli/$name.md" << EOF
+  output=$(go run "$target/main.go" --help)
+  cat > "${REPO_ROOT}/content/en/${outputdir}/cli/$name.md" << EOF
 ---
 title: $name CLI reference
 linkTitle: $name
@@ -116,11 +136,11 @@ $output
 EOF
 }
 
-genclireference "docs" "cmd/acmesolver/main.go" "acmesolver"
-genclireference "docs" "cmd/cainjector/main.go" "cainjector"
-genclireference "docs" "cmd/ctl/main.go" "cmctl"
-genclireference "docs" "cmd/controller/main.go" "controller"
-genclireference "docs" "cmd/webhook/main.go" "webhook"
+genclireference "docs" "cmd/acmesolver" "acmesolver"
+genclireference "docs" "cmd/cainjector" "cainjector"
+genclireference "docs" "cmd/ctl" "cmctl"
+genclireference "docs" "cmd/controller" "controller"
+genclireference "docs" "cmd/webhook" "webhook"
 
 # The branches named here exist in the `jetstack/cert-manager` repo.
 
