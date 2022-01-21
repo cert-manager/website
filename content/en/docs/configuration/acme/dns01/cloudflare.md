@@ -47,7 +47,7 @@ spec:
           email: my-cloudflare-acc@example.com
           apiTokenSecretRef:
             name: cloudflare-api-token-secret
-            key: api-token
+            key: api-key
 ```
 
 ## API Keys
