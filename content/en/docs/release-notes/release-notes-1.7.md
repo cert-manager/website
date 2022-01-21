@@ -83,37 +83,39 @@ Thanks again to all open-source contributors with commits in this release, inclu
 And thanks as usual to [coderanger](https://github.com/coderanger) for helping people
 out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
 
+# Changelog since v1.6.1
+
 ## Changes by Kind
 
 ### Feature
 
-- Add `cmctl upgrade migrate` to ensure all CRD resources are stored at 'v1' prior to upgrading to v1.7 onwards ([#4711](https://github.com/jetstack/cert-manager/pull/4711), [@munnerz](https://github.com/munnerz))
-- Add acme-http01-solver-nameservers flag to enable custom nameservers usage for ACME HTT01 challenges propagation checks. ([#4287](https://github.com/jetstack/cert-manager/pull/4287), [@Adphi](https://github.com/Adphi))
+- Add `--acme-http01-solver-nameservers` flag to enable custom nameservers usage for ACME HTT01 challenges propagation checks. ([#4287](https://github.com/jetstack/cert-manager/pull/4287), [@Adphi](https://github.com/Adphi))
+- Add `cmctl upgrade migrate-api-version` to ensure all CRD resources are stored at 'v1' prior to upgrading to v1.7 onwards ([#4711](https://github.com/jetstack/cert-manager/pull/4711), [@munnerz](https://github.com/munnerz))
 - Add goimports verification step for CI ([#4710](https://github.com/jetstack/cert-manager/pull/4710), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Add support for loading webhook flags/options from a WebhookConfiguration file on disk ([#4546](https://github.com/jetstack/cert-manager/pull/4546), [@munnerz](https://github.com/munnerz))
-- Added a makefile-based build workflow which doesn't depend on bazel ([#4554](https://github.com/jetstack/cert-manager/pull/4554), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- Added a new Helm chart parameter "prometheus.servicemonitor.honorLabels", which sets the "honor_labels" field  of the Prometheus scrape config. ([#4608](https://github.com/jetstack/cert-manager/pull/4608), [@thirdeyenick](https://github.com/thirdeyenick))
-- Added additionalOutputFormats parameter to allow `DER` (binary) and `CombinedPEM` (key + cert bundle) formats. ([#4598](https://github.com/jetstack/cert-manager/pull/4598), [@seuf](https://github.com/seuf))
+- Added `additionalOutputFormats` parameter to allow `DER` (binary) and `CombinedPEM` (key + cert bundle) formats. ([#4598](https://github.com/jetstack/cert-manager/pull/4598), [@seuf](https://github.com/seuf))
+- Added a makefile based build workflow which doesn't depend on bazel ([#4554](https://github.com/jetstack/cert-manager/pull/4554), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Added a new Helm chart parameter `prometheus.servicemonitor.honorLabels`, which sets the `honor_labels` field  of the Prometheus scrape config. ([#4608](https://github.com/jetstack/cert-manager/pull/4608), [@thirdeyenick](https://github.com/thirdeyenick))
+- Added helm value `.Values.serviceAnnotations` ([#4329](https://github.com/jetstack/cert-manager/pull/4329), [@jwenz723](https://github.com/jwenz723))
 - Certificate Secrets are now managed by the APPLY API call, rather than UPDATE/CREATE. The issuing controller actively reconciles Certificate SecretTemplate's against corresponding Secrets, garbage collecting and correcting key/value changes. ([#4638](https://github.com/jetstack/cert-manager/pull/4638), [@JoshVanL](https://github.com/JoshVanL))
-- Fixed a bug that can cause `cmctl version` to erroneously display the wrong webhook pod versions when older failed pods are present. (#4616) ([#4615](https://github.com/jetstack/cert-manager/pull/4615), [@johnwchadwick](https://github.com/johnwchadwick))
 
 ### Bug or Regression
 
+- Ensures 1 hour backoff between errored calls for new ACME Orders. ([#4616](https://github.com/jetstack/cert-manager/pull/4616), [@irbekrm](https://github.com/irbekrm))
 - Fix unexpected exit when multiple DNS providers are passed to `RunWebhookServer` ([#4702](https://github.com/jetstack/cert-manager/pull/4702), [@devholic](https://github.com/devholic))
+- Fixed a bug that can cause `cmctl version` to erroneously display the wrong webhook pod versions when older failed pods are present. ([#4615](https://github.com/jetstack/cert-manager/pull/4615), [@johnwchadwick](https://github.com/johnwchadwick))
 - Fixes a bug where a previous failed CertificateRequest was picked up during the next issuance. Thanks to @MattiasGees for raising the issue and help with debugging! ([#4688](https://github.com/jetstack/cert-manager/pull/4688), [@irbekrm](https://github.com/irbekrm))
-- Improve checksum validation in makefile-based tool installation ([#4680](https://github.com/jetstack/cert-manager/pull/4680), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Improve checksum validation in makefile based tool installation ([#4680](https://github.com/jetstack/cert-manager/pull/4680), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - The HTTP-01 ACME solver now uses the `kubernetes.io/ingress.class` annotation instead of the `spec.ingressClassName` in created Ingress resources. ([#4762](https://github.com/jetstack/cert-manager/pull/4762), [@jakexks](https://github.com/jakexks))
 - The `cmctl experimental install` command now uses the cert-manager namespace. This fixes a bug which was introduced in release 1.6 that caused cert-manager to be installed in the default namespace. ([#4763](https://github.com/jetstack/cert-manager/pull/4763), [@wallrj](https://github.com/wallrj))
 
 ### Other (Cleanup or Flake)
 
-- Added helm value `.Values.serviceAnnotations` ([#4329](https://github.com/jetstack/cert-manager/pull/4329), [@jwenz723](https://github.com/jwenz723))
 - Adds `clock_time_seconds_gauge` metric which returns the current clock time, based on seconds since 1970/01/01 UTC ([#4640](https://github.com/jetstack/cert-manager/pull/4640), [@JoshVanL](https://github.com/JoshVanL))
-- Adds an automated script for cert-manager developers to update versions of kind used for dev + testing ([#4574](https://github.com/jetstack/cert-manager/pull/4574), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Adds an automated script for cert-manager developers to update versions of kind used for development and testing. ([#4574](https://github.com/jetstack/cert-manager/pull/4574), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Bump kind image versions ([#4593](https://github.com/jetstack/cert-manager/pull/4593), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- Clean up: Remove `v1beta1` form the webhook's admissionReviewVersions as cert-manager no longer supports v1.16 ([#4639](https://github.com/jetstack/cert-manager/pull/4639), [@JoshVanL](https://github.com/JoshVanL))
+- Clean up: Remove `v1beta1` form the webhook's `admissionReviewVersions` as cert-manager no longer supports v1.16 ([#4639](https://github.com/jetstack/cert-manager/pull/4639), [@JoshVanL](https://github.com/JoshVanL))
 - Cleanup: Pipe feature gate flag to the e2e binary. Test against shared Feature Gate map for feature enabled and whether they should be tested against. ([#4703](https://github.com/jetstack/cert-manager/pull/4703), [@JoshVanL](https://github.com/JoshVanL))
-- Ensures 1 hour backoff between errored calls for new ACME Orders. ([#4616](https://github.com/jetstack/cert-manager/pull/4616), [@irbekrm](https://github.com/irbekrm))
 - Ensures that in cases where an attempt to finalize an already finalized order is made, the originally issued certificate is used (instead of erroring and creating a new ACME order) ([#4697](https://github.com/jetstack/cert-manager/pull/4697), [@irbekrm](https://github.com/irbekrm))
 - No longer log an error when a Certificate is deleted during normal operation. ([#4637](https://github.com/jetstack/cert-manager/pull/4637), [@JoshVanL](https://github.com/JoshVanL))
 - Removed deprecated API versions from the cert-manager CRDs ([#4635](https://github.com/jetstack/cert-manager/pull/4635), [@wallrj](https://github.com/wallrj))
