@@ -21,6 +21,21 @@ for full instructions.
 
 TODO
 
+## Community
+
+Thanks again to all open-source contributors with commits in this release, including:
+
+- [@Adphi](https://github.com/Adphi)
+- [@devholic](https://github.com/devholic)
+- [@johnwchadwick](https://github.com/johnwchadwick)
+- [@jsoref](https://github.com/jsoref)
+- [@jwenz723](https://github.com/jwenz723)
+- [@seuf](https://github.com/seuf)
+- [@thirdeyenick](https://github.com/thirdeyenick)
+
+And thanks as usual to [coderanger](https://github.com/coderanger) for helping people
+out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
+
 ## Changes by Kind
 
 ### Feature
