@@ -7,11 +7,11 @@ type: "docs"
 
 ## Breaking Changes (You **MUST** read this before you upgrade!)
 
-⚠ Following their deprecation in version 1.5, the cert-manager APIVersions v1alpha2, v1alpha3, and v1beta1 have been removed.
+⚠ Following their deprecation in version 1.5, the cert-manager API versions v1alpha2, v1alpha3, and v1beta1 have been removed.
 You must ensure that all cert-manager custom resources are stored in etcd at version v1
 and that all cert-manager `CustomResourceDefinition`s have only v1 as the stored version.
 
-Since `v1.7.0` `cmctl` can automatically migrate any deprecated API resources.
+Since release 1.7, `cmctl` can automatically migrate any deprecated API resources.
 Please download `cmctl-v1.7.0-beta.0` and read [Removing Deprecated API Resources]
 for full instructions.
 
@@ -19,7 +19,54 @@ for full instructions.
 
 ## Major Themes
 
-TODO
+### Additional Certificate Output Formats
+
+`additionalOutputFormats` is a field on the Certificate `spec` that allows
+specifying additional supplementary formats of issued certificates and their
+private key. There are currently two supported additional output formats:
+`CombinedPEM` and `DER`. Both output formats can be specified on the same
+Certificate.
+Read [Additional Certificate Output Formats] for more details and
+thanks to [@seuf](https://github.com/seuf) for getting this across the line!
+
+[Additional Certificate Output Formats]: ../../usage/certificate/#additional-certificate-output-formats
+
+### Removal of Deprecated APIs
+
+In 1.7 the cert-manager API versions v1alpha2, v1alpha3, and v1beta1 have been removed from the custom resource definitions (CRDs).
+You will notice that the YAML manifest files are much smaller as a result.
+These APIs have been deprecated since 1.5.
+
+In this release we have added a new sub-command to the cert-manager CLI (`cmctl upgrade migrate-api-version`),
+which you SHOULD run BEFORE upgrading cert-manager to 1.7.
+Please read [Removing Deprecated API Resources] for full instructions.
+
+### Server-Side Apply
+
+This is the first version of cert-manager which relies on [Server-Side Apply].
+We are using it to properly manage the annotations and labels on the TLS Secret.
+For this reason cert-manager 1.7 requires at least Kubernetes 1.18.
+
+[Server-Side Apply]: https://kubernetes.io/docs/reference/using-api/server-side-apply/
+
+### Configuration Files
+
+In this release we introduce a new configuration file for the cert-manager-webhook.
+Instead of configuring the webhook using command line flags,
+you can now modify the webhook Deployment to mount a ConfigMap
+containing a configuration file.
+Read the [WebhookConfiguration Schema] for more information.
+
+In future releases we will introduce configuration files for the other cert-manager components: controller-manager and cainjector.
+
+[WebhookConfiguration Schema]: https://cert-manager.io/next-docs/reference/api-docs/#webhook.config.cert-manager.io/v1alpha1.WebhookConfiguration
+
+### Non-bazel Development
+
+We aim to stop using `bazel` for building and testing cert-manager.
+It is too difficult for new contributors and frustrates many of our regular contributors.
+So we have been fixing the cert-manager Makefile and trying to make it possible to run the unit-tests
+with `go test ./cmd/... ./internal/... ./pkg/...` etc.
 
 ## Community
 
