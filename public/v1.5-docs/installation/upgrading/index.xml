@@ -1,0 +1,1095 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cert-manager – Upgrading</title>
+    <link>https://cert-manager.io/v1.5-docs/installation/upgrading/</link>
+    <description>Recent content in Upgrading on cert-manager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://cert-manager.io/v1.5-docs/installation/upgrading/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1.5-Docs: Removing Deprecated API Resources</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/remove-deprecated-apis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/remove-deprecated-apis/</guid>
+      <description>
+        
+        
+        &lt;p&gt;We have deprecated the following cert-manager APIs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;cert-manager.io/v1alpha2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cert-manager.io/v1alpha3&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cert-manager.io/v1beta1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;acme.cert-manager.io/v1alpha2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;acme.cert-manager.io/v1alpha3&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;acme.cert-manager.io/v1beta1&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These APIs will be removed in cert-manager &lt;code&gt;v1.6.0&lt;/code&gt;.
+If you have a cert-manager installation that is using or has previously used these deprecated APIs you may need to upgrade your cert-manager custom resources and CRDs. This needs to be done before upgrading to cert-manager &lt;code&gt;v1.6.0&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;upgrading-existing-cert-manager-resources&#34;&gt;Upgrading existing cert-manager resources&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Familiarize yourself with the &lt;a href=&#34;https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#writing-reading-and-updating-versioned-customresourcedefinition-objects&#34;&gt;official Kubernetes documentation&lt;/a&gt; on CRD versioning.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure your installed cert-manager deployment is &lt;code&gt;v1.0.0&lt;/code&gt; or later.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure any version-controlled cert-manager custom resource config files that still use the deprecated APIs are updated to use the &lt;code&gt;cert-manager.io/v1&lt;/code&gt; API and re-applied. This should update stored versions of the given resources.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After that, follow the official Kubernetes documentation &lt;a href=&#34;https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#upgrade-existing-objects-to-a-new-stored-version&#34;&gt;here&lt;/a&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If there are other resources (e.g. &lt;code&gt;Certificate&lt;/code&gt;s created by ingress-shim, &lt;code&gt;CertificateRequest&lt;/code&gt;s, etc.) that are not version controlled and may have been created using the deprecated APIs, run&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl get &amp;lt;resource_name&amp;gt; -oyaml &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; kubectl apply -f -
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;to force the resources to be stored in &lt;code&gt;etcd&lt;/code&gt; at the current storage version.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To remove legacy API versions from cert-manager CRDs run the following &lt;code&gt;curl&lt;/code&gt; commands:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl proxy &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;
+
+curl -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;[{ &amp;#34;op&amp;#34;: &amp;#34;replace&amp;#34;, &amp;#34;path&amp;#34;:&amp;#34;/status/storedVersions&amp;#34;, &amp;#34;value&amp;#34;: [&amp;#34;v1&amp;#34;] }]&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Content-Type: application/json-patch+json&amp;#34;&lt;/span&gt;  -X PATCH http://localhost:8001/apis/apiextensions.k8s.io/v1/customresourcedefinitions/certificates.cert-manager.io/status
+
+curl -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;[{ &amp;#34;op&amp;#34;: &amp;#34;replace&amp;#34;, &amp;#34;path&amp;#34;:&amp;#34;/status/storedVersions&amp;#34;, &amp;#34;value&amp;#34;: [&amp;#34;v1&amp;#34;] }]&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Content-Type: application/json-patch+json&amp;#34;&lt;/span&gt;  -X PATCH http://localhost:8001/apis/apiextensions.k8s.io/v1/customresourcedefinitions/certificaterequests.cert-manager.io/status
+
+curl -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;[{ &amp;#34;op&amp;#34;: &amp;#34;replace&amp;#34;, &amp;#34;path&amp;#34;:&amp;#34;/status/storedVersions&amp;#34;, &amp;#34;value&amp;#34;: [&amp;#34;v1&amp;#34;] }]&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Content-Type: application/json-patch+json&amp;#34;&lt;/span&gt;  -X PATCH http://localhost:8001/apis/apiextensions.k8s.io/v1/customresourcedefinitions/issuers.cert-manager.io/status
+
+curl -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;[{ &amp;#34;op&amp;#34;: &amp;#34;replace&amp;#34;, &amp;#34;path&amp;#34;:&amp;#34;/status/storedVersions&amp;#34;, &amp;#34;value&amp;#34;: [&amp;#34;v1&amp;#34;] }]&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Content-Type: application/json-patch+json&amp;#34;&lt;/span&gt;  -X PATCH http://localhost:8001/apis/apiextensions.k8s.io/v1/customresourcedefinitions/clusterissuers.cert-manager.io/status
+
+curl -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;[{ &amp;#34;op&amp;#34;: &amp;#34;replace&amp;#34;, &amp;#34;path&amp;#34;:&amp;#34;/status/storedVersions&amp;#34;, &amp;#34;value&amp;#34;: [&amp;#34;v1&amp;#34;] }]&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Content-Type: application/json-patch+json&amp;#34;&lt;/span&gt;  -X PATCH http://localhost:8001/apis/apiextensions.k8s.io/v1/customresourcedefinitions/orders.acme.cert-manager.io/status
+
+curl -d &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;[{ &amp;#34;op&amp;#34;: &amp;#34;replace&amp;#34;, &amp;#34;path&amp;#34;:&amp;#34;/status/storedVersions&amp;#34;, &amp;#34;value&amp;#34;: [&amp;#34;v1&amp;#34;] }]&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Content-Type: application/json-patch+json&amp;#34;&lt;/span&gt;  -X PATCH http://localhost:8001/apis/apiextensions.k8s.io/v1/customresourcedefinitions/challenges.acme.cert-manager.io/status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v1.4 to v1.5</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-1.4-1.5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-1.4-1.5/</guid>
+      <description>
+        
+        
+        &lt;p&gt;When upgrading from &lt;code&gt;v1.4&lt;/code&gt; to &lt;code&gt;v1.5&lt;/code&gt;, no special upgrade steps are required 🎉.&lt;/p&gt;
+&lt;h2 id=&#34;now-follow-the-regular-upgrade-process&#34;&gt;Now Follow the Regular Upgrade Process&lt;/h2&gt;
+&lt;p&gt;From here on you can follow the &lt;a href=&#34;../&#34;&gt;regular upgrade process&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v1.3 to v1.4</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-1.3-1.4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-1.3-1.4/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;removal-of-the-cert-manager-operator-package-on-red-hat-marketplace&#34;&gt;Removal of the cert-manager operator package on Red Hat Marketplace&lt;/h2&gt;
+&lt;p&gt;Since cert-manager &lt;code&gt;v0.15&lt;/code&gt; there has been a package for cert-manager on &lt;a href=&#34;https://marketplace.redhat.com&#34;&gt;Red Hat Marketplace&lt;/a&gt;,
+but this has now been removed because it was not maintained and was found to be unreliable:
+&lt;a href=&#34;https://github.com/jetstack/cert-manager/issues/4055&#34;&gt;#4055&lt;/a&gt;
+&lt;a href=&#34;https://github.com/jetstack/cert-manager/issues/3732&#34;&gt;#3732&lt;/a&gt;
+&lt;a href=&#34;https://github.com/cert-manager/website/issues/436&#34;&gt;#436&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It is replaced by a new package which is generated via the &lt;a href=&#34;https://github.com/operator-framework/community-operators&#34;&gt;Community Operators Repository&lt;/a&gt;,
+and which is therefore available on
+&lt;a href=&#34;https://operatorhub.io&#34;&gt;OperatorHub.io&lt;/a&gt;,
+&lt;a href=&#34;https://openshift.com&#34;&gt;OpenShift Container Platform&lt;/a&gt; and
+&lt;a href=&#34;https://okd.io&#34;&gt;OKD&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Please uninstall the existing cert-manager package and re-install
+by following the &lt;a href=&#34;../../operator-lifecycle-manager/&#34;&gt;OLM Installation Documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;now-follow-the-regular-upgrade-process&#34;&gt;Now Follow the Regular Upgrade Process&lt;/h2&gt;
+&lt;p&gt;From here on you can follow the &lt;a href=&#34;../&#34;&gt;regular upgrade process&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v1.2 to v1.3</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-1.2-1.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-1.2-1.3/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;upgrade-notes-for-users-of-the-venafi-cloud-issuer&#34;&gt;Upgrade notes for users of the Venafi Cloud Issuer&lt;/h2&gt;
+&lt;p&gt;This release updates the &lt;a href=&#34;https://cert-manager.io/docs/configuration/venafi/&#34;&gt;Venafi Cloud Issuer&lt;/a&gt; to use &lt;code&gt;OutagePREDICT&lt;/code&gt; instead of &lt;code&gt;DevOpsACCELERATE&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The only impact to Venafi Cloud users is the change in zone syntax.
+The zone is now &lt;code&gt;&amp;lt;Application Name&amp;gt;\&amp;lt;Issuing Template Alias&amp;gt;&lt;/code&gt;
+(e.g. &lt;code&gt;My Application\My CIT&lt;/code&gt;).&lt;/p&gt;
+&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;
+&lt;p&gt;Venafi are currently transitioning Venafi Cloud users to the &lt;code&gt;OutagePREDICT&lt;/code&gt; (&amp;ldquo;OP&amp;rdquo;) product,
+from &lt;code&gt;DevOpsACCELERATE&lt;/code&gt; (&amp;ldquo;DA&amp;rdquo;), which will be sunset later in 2021.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;https://cert-manager.io/docs/configuration/venafi/&#34;&gt;Venafi Cloud Issuer&lt;/a&gt; in cert-manager relies upon the &lt;code&gt;VCert&lt;/code&gt; library,
+and the &lt;a href=&#34;https://github.com/Venafi/vcert/releases/tag/v4.13.0&#34;&gt;&lt;code&gt;VCert&lt;/code&gt; &lt;code&gt;v4.13.0&lt;/code&gt;&lt;/a&gt; release marks this &amp;ldquo;DA2OP&amp;rdquo; transition.
+The &lt;code&gt;VCert&lt;/code&gt; module dependencies in cert-manager have been updated in order for cert-manager to complete the transition as well.&lt;/p&gt;
+&lt;p&gt;With this update, cert-manager users with Venafi Cloud issuers will need to be aware that the zone format changes from a UUID (DA Zone ID) to a string of the form &lt;code&gt;&amp;lt;Application Name&amp;gt;\&amp;lt;Issuing Template Alias&amp;gt;&lt;/code&gt;.
+This means users will need to create an Application in &lt;code&gt;OutagePREDICT&lt;/code&gt; and associate an &lt;em&gt;Issuing Template&lt;/em&gt; with it
+(the same &lt;em&gt;Issuing Templates&lt;/em&gt; assigned to DA Projects Zones can be used since &lt;em&gt;Issuing Templates&lt;/em&gt; are shared between Venafi Cloud products).&lt;/p&gt;
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+&lt;p&gt;You should now follow the &lt;a href=&#34;../&#34;&gt;regular upgrade process&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v1.1 to v1.2</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-1.1-1.2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-1.1-1.2/</guid>
+      <description>
+        
+        
+        &lt;p&gt;In an effort to introduce new features whilst keeping the project maintainable,
+cert-manager now only supports Kubernetes down to version &lt;code&gt;v1.16&lt;/code&gt;. This means
+the &lt;code&gt;legacy&lt;/code&gt; manifests have now been removed. Some users experience issues when
+upgrading the legacy &lt;code&gt;CRD&lt;/code&gt;s to &lt;code&gt;v1.2&lt;/code&gt;. To solve this, you could replace the &lt;code&gt;CRD&lt;/code&gt;s:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Backup &lt;code&gt;cert-manager&lt;/code&gt; resources as described in &lt;a href=&#34;../../../docs/tutorials/backup/&#34;&gt;the docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;kubectl replace -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml&lt;/code&gt; to replace the CRDs.&lt;/li&gt;
+&lt;li&gt;Follow the standard upgrade process.
+You can read more about supported Kubernetes versions
+&lt;a href=&#34;../../../docs/installation/supported-releases/&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In this release some features have been deprecated.  Please read the &lt;a href=&#34;../../../release-notes/release-notes-1.2/&#34;&gt;version
+1.2 release notes&lt;/a&gt; for more details
+and consider whether you are using any of these deprecated features before you
+proceed with the upgrade.&lt;/p&gt;
+&lt;p&gt;From here on you can follow the &lt;a href=&#34;../&#34;&gt;regular upgrade process&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v1.0 to v1.1</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-1.0-1.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-1.0-1.1/</guid>
+      <description>
+        
+        
+        &lt;p&gt;When upgrading from &lt;code&gt;v1.0&lt;/code&gt; to &lt;code&gt;v1.1&lt;/code&gt;, no special upgrade steps are required 🎉.
+From here on you can follow the &lt;a href=&#34;../&#34;&gt;regular upgrade process&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.16 to v1.0</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.16-1.0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.16-1.0/</guid>
+      <description>
+        
+        
+        &lt;blockquote&gt;
+&lt;p&gt;The upgrade process for upgrading to &lt;code&gt;v1.0&lt;/code&gt; is very Kubernetes version specific. Please check the version of your cluster using &lt;code&gt;kubectl version&lt;/code&gt; and follow the steps required for your version of Kubernetes.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;issue-with-older-versions-of-kubectl&#34;&gt;Issue with older versions of &lt;code&gt;kubectl&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;kubectl&lt;/code&gt; versions with patch versions lower than &lt;code&gt;v1.18.8&lt;/code&gt; &lt;code&gt;v1.17.11&lt;/code&gt; or &lt;code&gt;v1.16.14&lt;/code&gt; have issues updating from the &lt;code&gt;v0.16&lt;/code&gt; CRD files, due to &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/91615&#34;&gt;a bug when handling deeply nested CRDs&lt;/a&gt;.
+This bug will make &lt;code&gt;kubectl apply -f [...]&lt;/code&gt; hang.&lt;/p&gt;
+&lt;p&gt;This bug only happens during a re-apply of the v0.16 CRDs or upgrading from it. Upgrades from lower versions do not cause issues. If you have this issue please upgrade your &lt;code&gt;kubectl&lt;/code&gt; to the latest patch release.
+Versions of &lt;code&gt;kubectl&lt;/code&gt; of &lt;code&gt;v1.15.x&lt;/code&gt; or below are not being supported anymore as these are unsupported by the Kubernetes community.&lt;/p&gt;
+&lt;h3 id=&#34;helm&#34;&gt;Helm&lt;/h3&gt;
+&lt;p&gt;Helm users who use &lt;code&gt;installCRDs=true&lt;/code&gt; MUST upgrade to Helm &lt;code&gt;v3.3.1&lt;/code&gt; or later before upgrading.&lt;/p&gt;
+&lt;h2 id=&#34;upgrade-instructions-per-kubernetes-version&#34;&gt;Upgrade instructions per Kubernetes version&lt;/h2&gt;
+&lt;h3 id=&#34;kubernetes-1-16-and-above&#34;&gt;Kubernetes &lt;code&gt;1.16&lt;/code&gt; and above&lt;/h3&gt;
+&lt;p&gt;These are the upgrade instructions to upgrade from cert-manager &lt;code&gt;v0.14.0&lt;/code&gt; or higher, please consult other upgrade guides first before upgrading to &lt;code&gt;v1.0&lt;/code&gt; if you run an older version of cert-manager.&lt;/p&gt;
+&lt;p&gt;No special requirements, you can follow the &lt;a href=&#34;../&#34;&gt;regular upgrade process&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;kubernetes-1-15-x&#34;&gt;Kubernetes &lt;code&gt;1.15.x&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;cert-manager now uses &lt;code&gt;apiextensions.k8s.io/v1&lt;/code&gt; to install CRDs inside Kubernetes. This got added in Kubernetes &lt;code&gt;1.16&lt;/code&gt;.
+Our legacy installation will still be using &lt;code&gt;apiextensions.k8s.io/v1beta1&lt;/code&gt;. For this reason Kubernetes 1.15 users now need to install the legacy version of the cert-manager manifests.
+You can follow the instructions of &amp;ldquo;Kubernetes 1.14&amp;rdquo; below on how to upgrade to the legacy version of &lt;code&gt;v1.0&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The legacy version only supports a single CRD version. We advise you to consider upgrading to Kubernetes 1.16 or above for an easier migration.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;kubernetes-1-14-and-below&#34;&gt;Kubernetes &lt;code&gt;1.14&lt;/code&gt; and below&lt;/h3&gt;
+&lt;p&gt;These are the upgrade instructions to upgrade from cert-manager &lt;code&gt;v0.11.0&lt;/code&gt; or higher, please consult other upgrade guides first before upgrading to &lt;code&gt;v1.0&lt;/code&gt; if you run an older version of cert-manager.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Due to the lack of support for conversion webhooks in your Kubernetes version this will not be an easy migration. We advise you to consider upgrading to Kubernetes 1.16 or higher before upgrading. Upgrading your Kubernetes cluster might be easier than upgrading cert-manager.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We have released our &lt;code&gt;cert-manager.io/v1&lt;/code&gt; API that replaces &lt;code&gt;cert-manager.io/v1alpha2&lt;/code&gt;.
+Since the legacy version for Kubernetes 1.15 and below only supports one CRD version
+you have to transition all resources to &lt;code&gt;cert-manager.io/v1&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This makes for a fairly significant breaking change for users, as &lt;strong&gt;all&lt;/strong&gt;
+cert-manager resources will need to be updated to reflect these changes.
+Ingress annotations will stay the same, this means if you only use ingress-shim
+you do not have to convert these resources over but it is recommended.
+However you should convert the (Cluster)Issuers and delete the old CRD versions.&lt;/p&gt;
+&lt;p&gt;This upgrade MUST be performed in the following sequence of steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;../../../tutorials/backup/&#34;&gt;Back up&lt;/a&gt; existing cert-manager resources. See the backup section.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;../../uninstall/&#34;&gt;Uninstall cert-manager&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Update the &lt;code&gt;apiVersion&lt;/code&gt; on all your backed up resources from
+&lt;code&gt;cert-manager.io/v1alpha2&lt;/code&gt; to &lt;code&gt;cert-manager.io/v1&lt;/code&gt;. See the converting section for that.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ensure the old cert-manager CRD resources have also been deleted: &lt;code&gt;kubectl get crd | grep cert-manager.io&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Re-install cert-manager &lt;code&gt;v1.0&lt;/code&gt; from scratch according to the &lt;a href=&#34;../../&#34;&gt;installation
+guide&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Apply the backed up resources again.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You must be sure to properly &lt;strong&gt;backup&lt;/strong&gt;, &lt;strong&gt;uninstall&lt;/strong&gt;, &lt;strong&gt;re-install&lt;/strong&gt; and
+&lt;strong&gt;restore&lt;/strong&gt; your installation in order to ensure the upgrade is successful.&lt;/p&gt;
+&lt;h4 id=&#34;backing-up-resources&#34;&gt;Backing up resources&lt;/h4&gt;
+&lt;p&gt;You can backup the custom resources you or cert-manager created using the following &lt;code&gt;kubectl&lt;/code&gt; command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl get -o yaml &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;   --all-namespaces &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;   issuer,clusterissuer,certificates,certificaterequests &amp;gt; cert-manager-backup.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Note that this will not export private keys or secrets.&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;converting-resources&#34;&gt;Converting resources&lt;/h4&gt;
+&lt;p&gt;You can use our &lt;a href=&#34;../../../usage/kubectl-plugin/&#34;&gt;kubectl plugin&lt;/a&gt; to automatically convert your backup from &lt;code&gt;v1alpha2&lt;/code&gt; to &lt;code&gt;v1&lt;/code&gt; using the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl cert-manager convert --output-version cert-manager.io/v1 -f cert-manager-backup.yaml &amp;gt; cert-manager-v1.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;Tip:&lt;/em&gt; you can use &lt;code&gt;kubectl apply --dry-run&lt;/code&gt; on a local/test cluster with cert-manager &lt;code&gt;v1.0&lt;/code&gt; installed to validate your conversion&lt;/p&gt;
+&lt;h4 id=&#34;uninstall-cert-manager&#34;&gt;Uninstall cert-manager&lt;/h4&gt;
+&lt;p&gt;Next step is to uninstall cert-manager.
+This will cause a temporary halt to renewal of certificates but will not affect any TLS traffic.&lt;/p&gt;
+&lt;p&gt;How you do this depends on how you installed cert-manager.&lt;/p&gt;
+&lt;p&gt;Using Helm:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ helm --namespace cert-manager delete cert-manager
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Using &lt;code&gt;kubectl&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Make sure you also delete the CRDs. This will delete all cert-manager resources, so make sure your backup is complete.
+You can do this manually by executing the following commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl delete crd certificaterequests.cert-manager.io
+kubectl delete crd certificates.cert-manager.io
+kubectl delete crd challenges.acme.cert-manager.io
+kubectl delete crd clusterissuers.cert-manager.io 
+kubectl delete crd issuers.cert-manager.io
+kubectl delete crd orders.acme.cert-manager.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For more info see the &lt;a href=&#34;../../uninstall/&#34;&gt;uninstall cert-manager guide&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;reinstall-and-restore&#34;&gt;Reinstall and restore&lt;/h4&gt;
+&lt;p&gt;To install cert-manager again you can follow the normal &lt;a href=&#34;../../&#34;&gt;installation guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once it has been fully installed you can re-apply the converted resources:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kubectl apply -f cert-manager-v1.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Congratulations you&amp;rsquo;re now fully upgraded to cert-manager &lt;code&gt;v1.0&lt;/code&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.15 to v0.16</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.15-0.16/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.15-0.16/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;issue-with-older-versions-of-kubectl&#34;&gt;Issue with older versions of &lt;code&gt;kubectl&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;kubectl&lt;/code&gt; versions with patch versions lower than &lt;code&gt;v1.18.8&lt;/code&gt; &lt;code&gt;v1.17.11&lt;/code&gt; or &lt;code&gt;v1.16.14&lt;/code&gt; have issues updating the &lt;code&gt;v0.16&lt;/code&gt; CRD files, due to &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/91615&#34;&gt;a bug when handling deeply nested CRDs&lt;/a&gt;.
+This bug will make &lt;code&gt;kubectl apply -f [...]&lt;/code&gt; hang.&lt;/p&gt;
+&lt;p&gt;This bug only happens during a re-apply of the v0.16 CRDs. Initial upgrade does not cause issues. If you have this issue please upgrade your &lt;code&gt;kubectl&lt;/code&gt; to the latest patch release.
+Versions of &lt;code&gt;kubectl&lt;/code&gt; of &lt;code&gt;v1.15.x&lt;/code&gt; or below are not being supported anymore as these are unsupported by the Kubernetes community.&lt;/p&gt;
+&lt;h3 id=&#34;helm&#34;&gt;Helm&lt;/h3&gt;
+&lt;p&gt;Helm users who use &lt;code&gt;installCRDs=true&lt;/code&gt; MUST upgrade to Helm &lt;code&gt;v3.3.1&lt;/code&gt; before upgrading.&lt;/p&gt;
+&lt;p&gt;From here on you can follow the &lt;a href=&#34;../&#34;&gt;regular upgrade process&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.14 to v0.15</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.14-0.15/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.14-0.15/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;new-installcrds-addition&#34;&gt;New &lt;code&gt;installCRDs&lt;/code&gt; addition&lt;/h2&gt;
+&lt;p&gt;If you&amp;rsquo;re using Helm to install cert-manager you now have the option &lt;code&gt;installCRDs&lt;/code&gt;.
+This will let Helm install CRDs like other cluster resources.
+If you deployed cert-manager before do &lt;strong&gt;NOT&lt;/strong&gt; use this option as it does not support
+upgrading from manually installed CRDs.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If enabled, when uninstalling, CRD resources will be deleted causing all
+installed custom resources to be DELETED.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;removal-of-00-crds-yaml-file&#34;&gt;Removal of &lt;code&gt;00-crds.yaml&lt;/code&gt; file&lt;/h2&gt;
+&lt;p&gt;As part of changes to the way we publish release artifacts, the &lt;code&gt;00-crds.yaml&lt;/code&gt;
+file is no longer made available as part of our repository.&lt;/p&gt;
+&lt;p&gt;You can now find the appropriate version of the CRD resources to install
+attached to the GitHub release. You will need to select the appropriate
+&amp;lsquo;legacy&amp;rsquo; or full manifest variant depending on the Kubernetes or
+OpenShift version you are running.&lt;/p&gt;
+&lt;p&gt;From here on you can follow the &lt;a href=&#34;../&#34;&gt;regular upgrade process&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.13 to v0.14</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.13-0.14/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.13-0.14/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Due to changes in the Deployment selector you will need to remove the deployments first before being able to upgrade.&lt;/p&gt;
+&lt;p&gt;You should run the following before upgrading:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl delete -n cert-manager deployment cert-manager cert-manager-cainjector cert-manager-webhook
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you&amp;rsquo;re using Helm to install cert-manager with a deployment name different than &lt;code&gt;cert-manager&lt;/code&gt; you might need to change the deployment names in the command above.&lt;/p&gt;
+&lt;p&gt;This will delete the deployment so they can be replaced when you apply the upgrade.
+This step will not affect any existing certificates but will stop renewal or new issuance while upgrading.&lt;/p&gt;
+&lt;p&gt;Version &lt;code&gt;v0.14&lt;/code&gt; now comes in 2 versions of static manifests, you will need to use the correct new one:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Kubernetes 1.15 or higher: you can use the normal &lt;code&gt;cert-manager.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Kubernetes 1.14 or lower: you have to now use the &lt;code&gt;cert-manager-legacy.yaml&lt;/code&gt; version&lt;/li&gt;
+&lt;li&gt;OpenShift 4: you can now use the normal &lt;code&gt;cert-manager.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;OpenShift 3: you have to now use the &lt;code&gt;cert-manager-legacy.yaml&lt;/code&gt; version instead of the OpenShift version&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you&amp;rsquo;re using the &lt;code&gt;cert-manager-legacy.yaml&lt;/code&gt; version you will not have API version conversion and thus only support &lt;code&gt;cert-manager.io/v1alpha2&lt;/code&gt; API resources.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The webhook is now a required component, meaning that &lt;code&gt;no-webhook&lt;/code&gt; variant of the manifests are no longer available in this release. Please use the appropriate manifests as mentioned above according to your Kubernetes version.&lt;/p&gt;
+&lt;p&gt;From here on you can follow the &lt;a href=&#34;../&#34;&gt;regular upgrade process&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.12 to v0.13</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.12-0.13/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.12-0.13/</guid>
+      <description>
+        
+        
+        &lt;p&gt;When upgrading from &lt;code&gt;v0.12&lt;/code&gt; to &lt;code&gt;v0.13&lt;/code&gt;, no special upgrade steps are required.
+Follow the regular upgrade process &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.11 to v0.12</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.11-0.12/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.11-0.12/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The focus of this release has been on stability and bug fixes, as well as
+overhauling and improving the documentation website. As such, there has been
+minimal changes that effect end users bar two changes which require action when
+upgrading.&lt;/p&gt;
+&lt;p&gt;After addressing the following points, you should then follow the standard
+upgrade process &lt;a href=&#34;../&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;changes-to-the-vault-kubernetes-auth-mount-path&#34;&gt;Changes to the Vault Kubernetes Auth Mount Path&lt;/h2&gt;
+&lt;p&gt;If you are using Kubernetes authentication for Vault &lt;code&gt;Issuers&lt;/code&gt; then there has
+been a change to the required mount path. This value now requires the entire
+mount path. For example, if the previous path had been set to &lt;code&gt;kubernetes&lt;/code&gt;, the
+new path will now require &lt;code&gt;/v1/auth/kubernetes&lt;/code&gt;. You can read why this change
+was made &lt;a href=&#34;https://github.com/jetstack/cert-manager/issues/2205&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;removal-of-the-webhook-api-service&#34;&gt;Removal of the Webhook API service&lt;/h2&gt;
+&lt;p&gt;The Webhook component now no longer makes use of a Kubernetes &lt;code&gt;APIService&lt;/code&gt;, and
+as such, should be removed. This action is only required if you have installed
+cert-manager using static manifests. The following command will delete the
+service and can be done before or after applying the upgrade.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl delete apiservice v1beta1.webhook.cert-manager.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.10 to v0.11</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.10-0.11/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.10-0.11/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;v0.11&lt;/code&gt; release marks the removal of the &lt;code&gt;v1alpha1&lt;/code&gt; API that was used in
+previous versions of cert-manager, as well as our API group changing to be
+&lt;code&gt;cert-manager.io&lt;/code&gt; instead of &lt;code&gt;certmanager.k8s.io&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We have also removed support for the &lt;strong&gt;old configuration format&lt;/strong&gt; that was
+deprecated in the &lt;code&gt;v0.8&lt;/code&gt; release. This means you &lt;strong&gt;must&lt;/strong&gt; transition to using the
+new &lt;code&gt;solvers&lt;/code&gt; style configuration format for your ACME issuers &lt;strong&gt;before&lt;/strong&gt;
+upgrading to &lt;code&gt;v0.11&lt;/code&gt;. For more information, see the
+&lt;a href=&#34;../upgrading-0.7-0.8/&#34;&gt;upgrading to &lt;code&gt;v0.8&lt;/code&gt;&lt;/a&gt; guide.&lt;/p&gt;
+&lt;p&gt;This makes for a fairly significant breaking change for users, as &lt;strong&gt;all&lt;/strong&gt;
+cert-manager resources, or even Ingresses that reference cert-manager
+resources, will need to be updated to reflect these changes.&lt;/p&gt;
+&lt;p&gt;This upgrade should be performed in a few steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Back up existing cert-manager resources, as per the
+&lt;a href=&#34;../../../tutorials/backup/&#34;&gt;backup and restore guide&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;../../uninstall/&#34;&gt;Uninstall cert-manager&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ensure the old cert-manager CRD resources have also been deleted: &lt;code&gt;kubectl get crd | grep certmanager.k8s.io&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Update the &lt;code&gt;apiVersion&lt;/code&gt; on all your backed up resources from
+&lt;code&gt;certmanager.k8s.io/v1alpha1&lt;/code&gt; to &lt;code&gt;cert-manager.io/v1alpha2&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Re-install cert-manager from scratch according to the &lt;a href=&#34;../../&#34;&gt;installation
+guide&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You must be sure to properly &lt;strong&gt;backup&lt;/strong&gt;, &lt;strong&gt;uninstall&lt;/strong&gt;, &lt;strong&gt;re-install&lt;/strong&gt; and
+&lt;strong&gt;restore&lt;/strong&gt; your installation in order to ensure the upgrade is successful.&lt;/p&gt;
+&lt;h2 id=&#34;additional-annotation-changes&#34;&gt;Additional annotation changes&lt;/h2&gt;
+&lt;p&gt;As well as changing the API group used by our CRDs, we have also changed the
+annotation-based configuration key to &lt;strong&gt;also&lt;/strong&gt; reflect the new API group.&lt;/p&gt;
+&lt;p&gt;This means that if you use any cert-manager annotations on any of your other
+resources (such as Ingresses, &lt;code&gt;{Validating,Mutating}WebhookConfiguration&lt;/code&gt;, etc)
+you will need to update them to reflect the new API group.&lt;/p&gt;
+&lt;p&gt;A full table of annotations, including the old and new equivalents:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;Old Annotation&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;New Annotation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/acme-http01-edit-in-place&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;acme.cert-manager.io/http01-edit-in-place&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/acme-http01-ingress-class&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;acme.cert-manager.io/http01-ingress-class&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/issuer&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;cert-manager.io/issuer&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/cluster-issuer&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;cert-manager.io/cluster-issuer&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/acme-challenge-type&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;DEPRECATED&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/acme-dns01-provider&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;DEPRECATED&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/alt-names&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;cert-manager.io/alt-names&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/ip-sans&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;cert-manager.io/ip-sans&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/common-name&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;cert-manager.io/common-name&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/issuer-name&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;cert-manager.io/issuer-name&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;certmanager.k8s.io/issuer-kind&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;&lt;code&gt;cert-manager.io/issuer-kind&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;You can use the following bash magic to print a list of Ingress resources that
+still contain an old annotation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get ingress &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;       --all-namespaces &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;       -o json &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;       jq &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;.items[] | select(.metadata.annotations| to_entries | map(.key)[] | test(&amp;#34;certmanager&amp;#34;)) | &amp;#34;Ingress resource \(.metadata.namespace)/\(.metadata.name) contains old annotations: (\( .metadata.annotations | to_entries | map(.key)[] | select( . | test(&amp;#34;certmanager&amp;#34;) )  ))&amp;#34;&amp;#39;&lt;/span&gt;
+Ingress resource &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;demo/testcrt contains old annotations: (certmanager.k8s.io/cluster-issuer)&amp;#34;&lt;/span&gt;
+Ingress resource &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example/ingress-resource contains old annotations: (certmanager.k8s.io/cluster-issuer)&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In order to help with this migration, the following CLI tool will automatically
+migrate these annotations for you. Note that it &lt;em&gt;will not&lt;/em&gt; make any changes to
+your cluster for you.&lt;/p&gt;
+&lt;p&gt;Firstly, download the binary for your given platform&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;   $ wget -O api-migration https://github.com/jetstack/cert-manager/releases/download/v0.11.0/api-migration-linux
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Or for Darwin&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;   $ wget -O api-migration https://github.com/jetstack/cert-manager/releases/download/v0.11.0/api-migration-darwin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Mark the binary as executable and run the binary against your cluster&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ chmod +x api-migration &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./api-migration --kubeconfig /path/to/my/kubeconfig.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Follow the CLI output and check for the difference that has been made in files&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ diff ingress.yaml ingress-migrated.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Finally, once the new ingress resources have been reviewed, apply the manifests&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl apply -f ingress-migrated.yaml --kubeconfig /path/to/my/kubeconfig.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You should make sure to update &lt;em&gt;all&lt;/em&gt; Ingress resources to ensure that your
+certificates continue to be kept up to date.&lt;/p&gt;
+&lt;h2 id=&#34;issuer-clusterissuer-solvers&#34;&gt;&lt;code&gt;Issuer/ClusterIssuer&lt;/code&gt; solvers&lt;/h2&gt;
+&lt;p&gt;Support for the deprecated &lt;code&gt;spec.http01&lt;/code&gt; or &lt;code&gt;spec.dns01&lt;/code&gt; fields in &lt;code&gt;Issuer&lt;/code&gt; and
+&lt;code&gt;ClusterIssuer&lt;/code&gt; have been removed. Any &lt;code&gt;Issuer&lt;/code&gt; or &lt;code&gt;ClusterIssuer&lt;/code&gt; objects must
+be converted to use the equivalent &lt;code&gt;spec.solvers[].http01&lt;/code&gt; or
+&lt;code&gt;spec.solvers[].dns01&lt;/code&gt; syntax. You can read more about the Issuer resource in
+the &lt;a href=&#34;../../../configuration/&#34;&gt;configuration documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Any issuers that haven&amp;rsquo;t been converted will result the &lt;code&gt;cert-manager&lt;/code&gt; pod being
+unable to find any solvers at the expected location. This will result in errors
+like the following: &lt;code&gt;no configured challenge solvers can be used for this challenge&lt;/code&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.9 to v0.10</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.9-0.10/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.9-0.10/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Due to changes in the way the webhook component&amp;rsquo;s TLS is bootstrapped in
+&lt;code&gt;v0.10&lt;/code&gt;, you will need to delete your webhook&amp;rsquo;s Certificate and Issuer
+resources.&lt;/p&gt;
+&lt;p&gt;If you are using a deployment tool that automatically handles this (i.e. Helm),
+there should be no additional action to take.&lt;/p&gt;
+&lt;p&gt;If you are using the &amp;lsquo;static manifests&amp;rsquo; to install, you should run the following
+after upgrading:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl delete -n cert-manager issuer cert-manager-webhook-ca cert-manager-webhook-selfsign
+$ kubectl delete -n cert-manager certificate cert-manager-webhook-ca cert-manager-webhook-webhook-tls
+$ kubectl delete apiservice v1beta1.admission.certmanager.k8s.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The Secret resources used to contain TLS assets for the webhook are now
+automatically handled internally by cert-manager, so these resources are no
+longer required.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.8 to v0.9</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.8-0.9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.8-0.9/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Due to a change in the API group that cert-manager deployments use
+(&lt;code&gt;apps/v1beta1&lt;/code&gt; to &lt;code&gt;apps/v1&lt;/code&gt;), cert-manager deployments must first be deleted
+before applying the new version. This will cause downtime until the new version
+has been applied. No data loss will occur during this operation however it is
+always advised to backup your data during an upgrade, which you can follow
+&lt;a href=&#34;../../../tutorials/backup/&#34;&gt;here&lt;/a&gt;. To perform this action run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl delete deployments --namespace cert-manager &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    cert-manager &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    cert-manager-cainjector &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    cert-manager-webhook
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After this operation, follow the standard upgrade process as defined in the
+&lt;a href=&#34;../&#34;&gt;upgrade guide&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.7 to v0.8</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.7-0.8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.7-0.8/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Upgrading from &lt;code&gt;v0.7&lt;/code&gt; to &lt;code&gt;v0.8&lt;/code&gt; is possible using the regular &lt;a href=&#34;../&#34;&gt;upgrade
+guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;All resources should continue to operate as before.&lt;/p&gt;
+&lt;p&gt;As part of &lt;code&gt;v0.8&lt;/code&gt;, a new format &lt;strong&gt;for configure ACME Certificate resources&lt;/strong&gt; has
+been introduced. Notably, challenge solver configuration has moved &lt;strong&gt;from&lt;/strong&gt;
+the Certificate resource (under &lt;code&gt;certificate.spec.acme&lt;/code&gt;) and now resides on
+your configure &lt;strong&gt;Issuer&lt;/strong&gt; resource, under &lt;code&gt;issuer.spec.acme.solvers&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This allows Certificate resources to be portable between different Issuer types.&lt;/p&gt;
+&lt;p&gt;Both the old and the new format of configuration are supported in the &lt;code&gt;v0.8&lt;/code&gt;
+release, so it is possible to &lt;strong&gt;incrementally upgrade your resources&lt;/strong&gt; if you
+have a large, multi-team deployment of cert-manager that makes it complex to
+upgrade all manifests at once in place.&lt;/p&gt;
+&lt;p&gt;After upgrading, it is &lt;strong&gt;strongly recommended&lt;/strong&gt; that you update your ACME Issuer
+and Certificate resources to the &lt;a href=&#34;../../../configuration/acme/&#34;&gt;new format&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We will be removing support for the old format ahead of the 1.0 release.&lt;/p&gt;
+&lt;p&gt;The documentation has been updated to reflect configuring using the new format,
+and as such, exhaustive information can be found in the
+&lt;a href=&#34;../../../configuration/acme/&#34;&gt;document&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;performing-an-incremental-switch-to-the-new-format&#34;&gt;Performing an incremental switch to the new format&lt;/h2&gt;
+&lt;p&gt;The following guide assumes you have 2 &amp;lsquo;solver types&amp;rsquo; currently in use across
+your cert-manager deployment - one for DNS01 and another for HTTP01 using an
+ingress class of &lt;code&gt;nginx&lt;/code&gt;. The &lt;code&gt;nginx&lt;/code&gt; based HTTP01 solver will be configured as
+the default solver type for Certificate resources that reference our issuer.&lt;/p&gt;
+&lt;p&gt;You can adjust the instructions below to fit your own configuration, either
+with more or less solvers as appropriate.&lt;/p&gt;
+&lt;p&gt;First, we will modify our ACME Issuer to add the new HTTP01 and DNS01 solvers.
+This operation &lt;strong&gt;will not&lt;/strong&gt; effect any existing Certificates that already
+explicitly set a &lt;code&gt;certificate.spec.acme&lt;/code&gt; field:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;certmanager.k8s.io/v1alpha2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ClusterIssuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;letsencrypt-staging&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;acme&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;email&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;user@example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;server&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;https://acme-staging-v02.api.letsencrypt.org/directory&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;privateKeySecretRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example-issuer-account-key&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The HTTP01 and DNS01 fields are now **deprecated**.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# We leave them in place here so that any Certificates that still&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# specify a `certificate.spec.acme` stanza will continue to operate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# correctly.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# cert-manager will decide which configuration to use based on whether&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# the Certificate contains a `certificate.spec.acme` stanza.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;http01&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;{}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dns01&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;providers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cloudflare&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cloudflare&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;email&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-cloudflare-acc@example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiKeySecretRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cloudflare-api-key-secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;api-key&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Configure the challenge solvers.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;solvers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# An empty selector will &amp;#39;match&amp;#39; all Certificate resources that&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# reference this Issuer.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selector&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;{}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;http01&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ingress&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;nginx&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selector&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Any Certificate resources, or Ingress resources that use&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# ingress-shim and match the below label selector will use this&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# configured solver type instead of the default nginx based HTTP01&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# solver above.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# You can continue to add new solver types if needed.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The most specific &amp;#39;match&amp;#39; will be used.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;use-cloudflare-solver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dns01&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Adjust the configuration below according to your environment.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# You can view more example configurations for different DNS01&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# providers in the documentation: https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/dns01/index.html&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cloudflare&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;email&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-cloudflare-acc@example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiKeySecretRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cloudflare-api-key-secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;api-key&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;By retaining both the old and the new configuration format on the Issuer
+resource, we can begin the process of incrementally upgrading our Certificate
+resources.&lt;/p&gt;
+&lt;p&gt;Any Certificate resources that you have manually created (i.e. not managed by
+ingress-shim) must then be updated to remove the &lt;code&gt;certificate.spec.acme&lt;/code&gt;
+stanza.&lt;/p&gt;
+&lt;p&gt;Given the above configuration, certificates will use the HTTP01 solver with the
+&lt;code&gt;nginx&lt;/code&gt; ingress class in order to solve ACME challenges.&lt;/p&gt;
+&lt;p&gt;If a particular certificate requires a wildcard, or you simply want to use
+DNS01 for that certificate instead of HTTP01, you can add the &lt;code&gt;use-cloudflare-solver: &amp;quot;true&amp;quot;&lt;/code&gt;
+label to your Certificate resources and the appropriate ACME challenge solver
+will be used.&lt;/p&gt;
+&lt;h2 id=&#34;upgrading-ingress-shim-managed-certificates-to-the-new-format&#34;&gt;Upgrading ingress-shim managed certificates to the new format&lt;/h2&gt;
+&lt;p&gt;When using ingress-shim, cert-manager itself will create and manage your
+Certificate resource for you.&lt;/p&gt;
+&lt;p&gt;In order to support both the old and the new format simultaneously,
+ingress-shim will continue to set the &lt;code&gt;certificate.spec.acme&lt;/code&gt; field on
+Certificate resources it manages.&lt;/p&gt;
+&lt;p&gt;In order to force ingress-shim to also use the new format, you must &lt;strong&gt;remove&lt;/strong&gt;
+the old format configuration from your Issuer resources (i.e. &lt;code&gt;issuer.spec.acme.http01&lt;/code&gt;
+and &lt;code&gt;issuer.spec.acme.dns01&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;When ingress-shim detects that these fields are not specified, it will
+clear/not set the &lt;code&gt;certificate.spec.acme&lt;/code&gt; field.&lt;/p&gt;
+&lt;p&gt;If you are managing a certificate using ingress-shim that requires an
+alternative solver type (other than the default solver configured on the issuer
+which in this instance is the HTTP01 &lt;code&gt;nginx&lt;/code&gt; solver), you can add labels to the
+Ingress resource which will be automatically copied across to the Certificate
+resource:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;networking.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Ingress&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-test-ingress&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;use-cloudflare-solver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;confirming-all-certificate-resources-are-upgraded&#34;&gt;Confirming all Certificate resources are upgraded&lt;/h2&gt;
+&lt;p&gt;In order to check if any of your Certificate resources still have the old
+configuration format, you can run the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get certificate --all-namespaces &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -o custom-columns&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;NAMESPACE:.metadata.namespace,NAME:.metadata.name,OWNER:.metadata.ownerReferences[0].kind,OLD FORMAT:.spec.acme&amp;#34;&lt;/span&gt;
+NAMESPACE   NAME    OWNER    OLD FORMAT
+default     &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt;    &amp;lt;none&amp;gt;   &amp;lt;none&amp;gt;
+default     test2   Ingress  map&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;config:&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;map&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;domains:&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;abc.com&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; http01:map&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;ingressClass:nginx&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]]]]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the above example, we can see there are two Certificate resources.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;test&lt;/code&gt; resource has been updated to no longer include the
+&lt;code&gt;certificate.spec.acme&lt;/code&gt; field.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;test2&lt;/code&gt; resource still specifies the old configuration format, however it
+&lt;strong&gt;also&lt;/strong&gt; has an &lt;code&gt;OwnerReference&lt;/code&gt; linking it to an &lt;strong&gt;Ingress&lt;/strong&gt; resource.
+This is because the &lt;code&gt;test2&lt;/code&gt; Certificate resource is managed by ingress-shim.&lt;/p&gt;
+&lt;p&gt;As mentioned in the previous section, ingress-shim managed certificates will
+only switch to the new format once the &lt;strong&gt;old format&lt;/strong&gt; configuration on the
+&lt;strong&gt;Issuer&lt;/strong&gt; resource has been removed. This means we need to continue to the
+next section in order to remove the old format configuration altogether from
+&lt;strong&gt;Issuer&lt;/strong&gt; resource in order for ingress-shim to automatically migrate the
+&lt;code&gt;test2&lt;/code&gt; Certificate resource.&lt;/p&gt;
+&lt;h2 id=&#34;removing-old-configuration-altogether&#34;&gt;Removing old configuration altogether&lt;/h2&gt;
+&lt;p&gt;Once we&amp;rsquo;ve verified that all non-ingress-shim managed Certificate resources
+have been updated to not specify the &lt;code&gt;certificate.spec.acme&lt;/code&gt; stanza using the
+command above, we can proceed to remove the &lt;code&gt;issuer.spec.acme.http01&lt;/code&gt; and
+&lt;code&gt;issuer.spec.acme.dns01&lt;/code&gt; stanzas from our Issuer resources.
+Once completed, the Issuer resource from the previous section should look like
+the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;certmanager.k8s.io/v1alpha2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ClusterIssuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;letsencrypt-staging&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;acme&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;email&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;user@example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;server&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;https://acme-staging-v02.api.letsencrypt.org/directory&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;privateKeySecretRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example-issuer-account-key&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Configure the challenge solvers.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;solvers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# An empty selector will &amp;#39;match&amp;#39; all Certificate resources that&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# reference this Issuer.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selector&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;{}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;http01&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ingress&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;nginx&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selector&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Any Certificate resources, or Ingress resources that use&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# ingress-shim and match the below label selector will use this&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# configured solver type instead of the default nginx based HTTP01&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# solver above.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# You can continue to add new solver types if needed.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The most specific &amp;#39;match&amp;#39; will be used.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;use-cloudflare-solver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dns01&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Adjust the configuration below according to your environment.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# You can view more example configurations for different DNS01&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# providers in the documentation: https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/dns01/index.html&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cloudflare&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;email&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-cloudflare-acc@example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiKeySecretRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cloudflare-api-key-secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;api-key&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After applying the above Issuer resource, you should re-run the command from
+the last section to verify that the remaining ingress-shim managed Certificate
+resources have also been updated to the new format:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get certificate --all-namespaces &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    -o custom-columns&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;NAMESPACE:.metadata.namespace,NAME:.metadata.name,OWNER:.metadata.ownerReferences[0].kind,OLD FORMAT:.spec.acme&amp;#34;&lt;/span&gt;
+NAMESPACE   NAME    OWNER    OLD FORMAT
+default     &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt;    &amp;lt;none&amp;gt;   &amp;lt;none&amp;gt;
+default     test2   Ingress  &amp;lt;none&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;manually-triggering-a-certificate-to-be-issued-to-validate-the-full-configuration&#34;&gt;Manually triggering a Certificate to be issued to validate the full configuration&lt;/h2&gt;
+&lt;p&gt;To be certain that you&amp;rsquo;ve correctly configured your new Issuer/Certificate
+resources, it is advised you attempt to issue a new Certificate after removing
+the old configuration format.&lt;/p&gt;
+&lt;p&gt;To do so, you can either:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;update the &lt;code&gt;secretName&lt;/code&gt; field of an existing Certificate resource&lt;/li&gt;
+&lt;li&gt;add an additional &lt;code&gt;dnsName&lt;/code&gt; to one of your existing Certificate resources&lt;/li&gt;
+&lt;li&gt;create a new Certificate resource&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You should ensure that your Certificates are still be issued correctly to avoid
+any potential issues at renewal time.&lt;/p&gt;
+&lt;h2 id=&#34;special-notes-for-ingress-gce-users&#34;&gt;Special notes for &lt;code&gt;ingress-gce&lt;/code&gt; users&lt;/h2&gt;
+&lt;p&gt;Users of the &lt;code&gt;ingress-gce&lt;/code&gt; ingress controller may find that their experience
+configuring cert-manager to solve challenges using HTTP01 validation is
+slightly more painful using the new format, as it requires the &lt;code&gt;ingressName&lt;/code&gt;
+field to be specified as a distinct &lt;code&gt;solver&lt;/code&gt; on the Issuer resource (as
+opposed to in the past where the &lt;code&gt;ingressName&lt;/code&gt; could be specified as a field on
+the &lt;code&gt;Certificate&lt;/code&gt; resource).&lt;/p&gt;
+&lt;p&gt;This is a &lt;a href=&#34;https://github.com/jetstack/cert-manager/issues/1666&#34;&gt;known issue&lt;/a&gt;,
+and a workaround is scheduled to be completed for &lt;code&gt;v0.9&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In the meantime, &lt;code&gt;ingress-gce&lt;/code&gt; users can either choose to manually create a
+new solver entry per Ingress resource they want to use to solve challenges, or
+otherwise continue to use the &lt;strong&gt;old format&lt;/strong&gt; until a suitable alternative
+appears in &lt;code&gt;v0.9&lt;/code&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.6 to v0.7</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.6-0.7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.6-0.7/</guid>
+      <description>
+        
+        
+        &lt;p&gt;There are no special notes or considerations when upgrading from &lt;code&gt;v0.6&lt;/code&gt; to &lt;code&gt;v0.7&lt;/code&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.5 to v0.6</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.5-0.6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.5-0.6/</guid>
+      <description>
+        
+        
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: If you are upgrading from a release older than &lt;code&gt;v0.5&lt;/code&gt;, please read
+the &lt;a href=&#34;#upgrading-from-older-versions-using-helm&#34;&gt;Upgrading from older versions using
+Helm&lt;/a&gt; note at the bottom of this
+document!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The upgrade process from &lt;code&gt;v0.5&lt;/code&gt; to &lt;code&gt;v0.6&lt;/code&gt; should be fairly seamless for most users.
+As part of the new release, we have changed how we ship the
+&lt;code&gt;CustomResourceDefinition&lt;/code&gt; resources that cert-manager needs in order to operate
+(as well as introducing two &lt;strong&gt;new&lt;/strong&gt; CRD types).&lt;/p&gt;
+&lt;p&gt;Depending on the way you have installed cert-manager in the past, your upgrade
+process will slightly vary:&lt;/p&gt;
+&lt;h2 id=&#34;upgrading-with-the-helm-chart&#34;&gt;Upgrading with the Helm chart&lt;/h2&gt;
+&lt;p&gt;If you have previously deployed cert-manager &lt;code&gt;v0.5&lt;/code&gt; using the Helm installation
+method, you will now need to perform one extra step before upgrading.&lt;/p&gt;
+&lt;p&gt;Due to issues with the way Helm handles CRD resources in Helm charts, we have
+now moved the installation of these resources into a separate YAML manifest
+that must be installed with &lt;code&gt;kubectl apply&lt;/code&gt; before upgrading the chart.&lt;/p&gt;
+&lt;p&gt;You can follow the &lt;a href=&#34;../&#34;&gt;regular upgrade guide&lt;/a&gt; as usual in order to upgrade
+from &lt;code&gt;v0.5&lt;/code&gt; to &lt;code&gt;v0.6&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;upgrading-with-static-manifests&#34;&gt;Upgrading with static manifests&lt;/h2&gt;
+&lt;p&gt;The static manifests have moved into the &lt;code&gt;deploy/manifests&lt;/code&gt; directory for
+this release.&lt;/p&gt;
+&lt;p&gt;We now also no longer ship different manifests for different configurations, in
+favor of a single &lt;code&gt;cert-manager.yaml&lt;/code&gt; file which should work for all Kubernetes
+clusters from Kubernetes &lt;code&gt;v1.9&lt;/code&gt; onward.&lt;/p&gt;
+&lt;p&gt;You can follow the &lt;a href=&#34;../&#34;&gt;regular upgrade guide&lt;/a&gt;.  usual in order to upgrade from
+&lt;code&gt;v0.5&lt;/code&gt; to &lt;code&gt;v0.6&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;upgrading-from-older-versions-using-helm&#34;&gt;Upgrading from older versions using Helm&lt;/h2&gt;
+&lt;p&gt;If you are upgrading from a version &lt;strong&gt;older than &lt;code&gt;v0.5&lt;/code&gt;&lt;/strong&gt; and
+&lt;strong&gt;have installed with Helm&lt;/strong&gt;, you will need to perform a fresh installation of
+cert-manager due to issues with the Helm upgrade process.
+This will involve the &lt;strong&gt;removal of all cert-manager custom resources&lt;/strong&gt;.
+This &lt;strong&gt;will not&lt;/strong&gt; delete the Secret resources being used by your apps.&lt;/p&gt;
+&lt;p&gt;Before upgrading you will need to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Read and follow the &lt;a href=&#34;../../../tutorials/backup/&#34;&gt;backup guide&lt;/a&gt; to create a
+backup of your configuration.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Delete the existing cert-manager Helm release (replacing &amp;lsquo;cert-manager&amp;rsquo; with
+the name of your Helm release):&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Uninstall the Helm chart.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ helm delete --purge cert-manager
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ensure the cert-manager &lt;code&gt;CustomResourceDefinition&lt;/code&gt; resources do not exist:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl delete crd &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    certificates.certmanager.k8s.io &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    issuers.certmanager.k8s.io &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    clusterissuers.certmanager.k8s.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Perform a fresh install (as per the &lt;a href=&#34;../../&#34;&gt;installation guide&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Install the cert-manager CRDs&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;    $ kubectl apply &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;        -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.6/deploy/manifests/00-crds.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Update helm repository cache&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ helm repo update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Install cert-manager&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ helm install &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    --name cert-manager &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    --namespace cert-manager &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    --version v0.6.6 &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;    stable/cert-manager
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Follow the steps in the &lt;a href=&#34;../../../tutorials/backup/&#34;&gt;restore guide&lt;/a&gt; to
+restore your configuration.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Verify that your Issuers and Certificate resources are &amp;lsquo;Ready&amp;rsquo;:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get clusterissuer,issuer,certificates --all-namespaces
+NAMESPACE      NAME                               READY   SECRET                             AGE
+cert-manager   cert-manager-webhook-ca            True    cert-manager-webhook-ca            1m
+cert-manager   cert-manager-webhook-webhook-tls   True    cert-manager-webhook-webhook-tls   1m
+example-com    example-com-tls                    True    example-com-tls                    11s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.4 to v0.5</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.4-0.5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.4-0.5/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Version 0.5 of cert-manager introduces a new &amp;lsquo;webhook&amp;rsquo; component, which is used
+by the Kubernetes apiserver to validate our CRD resource types.&lt;/p&gt;
+&lt;p&gt;This should help in future to reduce errors caused by misconfigured Certificate
+and Issuer resources.&lt;/p&gt;
+&lt;p&gt;When upgrading from a previous release using Helm, it is &lt;strong&gt;essential&lt;/strong&gt; that
+you perform one extra step before upgrading.&lt;/p&gt;
+&lt;h2 id=&#34;disabling-resource-validation-on-the-cert-manager-namespace&#34;&gt;Disabling resource validation on the cert-manager namespace&lt;/h2&gt;
+&lt;p&gt;Before upgrading, you should add the &lt;code&gt;certmanager.k8s.io/disable-validation: &amp;quot;true&amp;quot;&lt;/code&gt;
+label to the &lt;code&gt;cert-manager&lt;/code&gt; namespace.&lt;/p&gt;
+&lt;p&gt;This will allow the system resources that cert-manager requires to bootstrap
+TLS to be created in its own namespace.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.3 to v0.4</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.3-0.4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.3-0.4/</guid>
+      <description>
+        
+        
+        &lt;p&gt;There are no special notes or considerations when upgrading from &lt;code&gt;v0.3&lt;/code&gt; to &lt;code&gt;v0.4&lt;/code&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.5-Docs: Upgrading from v0.2 to v0.3</title>
+      <link>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.2-0.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.5-docs/installation/upgrading/upgrading-0.2-0.3/</guid>
+      <description>
+        
+        
+        &lt;p&gt;During the &lt;code&gt;v0.3&lt;/code&gt; release, a number of breaking changes were made that require
+you to update either deployment configuration and runtime configuration (e.g.
+&lt;code&gt;Certificate&lt;/code&gt;, &lt;code&gt;Issuer&lt;/code&gt; and &lt;code&gt;ClusterIssuer&lt;/code&gt; resources).&lt;/p&gt;
+&lt;p&gt;After reading these instructions, you should then proceed to upgrade cert-manager
+according to your deployment configuration (e.g. using &lt;code&gt;helm upgrade&lt;/code&gt; if installing
+via Helm chart, or &lt;code&gt;kubectl apply&lt;/code&gt; if installing with raw manifests).&lt;/p&gt;
+&lt;p&gt;A brief summary:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Supporting resources for &lt;code&gt;ClusterIssuers&lt;/code&gt; (e.g. signing CA certificates, or
+ACME account private keys) will now be stored in the same namespace as
+cert-manager, instead of &lt;code&gt;kube-system&lt;/code&gt; in previous versions (#329, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Switch to &lt;code&gt;ConfigMaps&lt;/code&gt; instead of Endpoints for leader election (#327, &lt;code&gt;@mikebryant&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Removing support for ACMEv1 in favor of ACMEv2 (#309, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;Removing ingress-shim and compiling it into cert-manager itself (#502, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;Change to the default behavior of ingress-shim. It now generates Certificates
+with the &lt;code&gt;ingressClass&lt;/code&gt; field set instead of the &lt;code&gt;ingress&lt;/code&gt; field. This will
+mean users of ingress controllers that assign a single IP to a single Ingress (e.g.
+the GCE ingress controller) will no longer work without adding a new annotation
+to your ingress resource.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;supporting-resources-for-clusterissuers-moving-into-the-cert-manager-namespace&#34;&gt;Supporting resources for &lt;code&gt;ClusterIssuers&lt;/code&gt; moving into the cert-manager namespace&lt;/h2&gt;
+&lt;p&gt;In the past, the cert-manager controller was hard coded to look for supplemental
+resources, such as Secrets containing DNS provider credentials, in the &lt;code&gt;kube-system&lt;/code&gt;
+namespace.&lt;/p&gt;
+&lt;p&gt;We now store these resources in the same namespace as the cert-manager pod itself
+runs within.&lt;/p&gt;
+&lt;p&gt;When upgrading, you should make sure to move any of these supplemental resources into
+the cert-manager deployment namespace, or otherwise deploy cert-manager into &lt;code&gt;kube-system&lt;/code&gt;
+itself.&lt;/p&gt;
+&lt;p&gt;You can also change the &amp;lsquo;cluster resource namespace&amp;rsquo; when deploying cert-manager:&lt;/p&gt;
+&lt;p&gt;With the helm chart: &lt;code&gt;--set clusterResourceNamespace=kube-system&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Or if using the static deployment manifests, by adding the &lt;code&gt;--cluster-resource-namespace&lt;/code&gt;
+flag to the &lt;code&gt;args&lt;/code&gt; field of the cert-manager container.&lt;/p&gt;
+&lt;h2 id=&#34;switch-to-configmaps-instead-of-endpoints-for-leader-election&#34;&gt;Switch to &lt;code&gt;ConfigMaps&lt;/code&gt; instead of Endpoints for leader election&lt;/h2&gt;
+&lt;p&gt;cert-manager-controller performs leader election to allow you to run &amp;lsquo;hot standby&amp;rsquo;
+replicas of cert-manager.&lt;/p&gt;
+&lt;p&gt;In the past, we used Endpoint resources to perform this election.
+The new best practice is to use &lt;code&gt;ConfigMap&lt;/code&gt; resources in order to reduce API overhead
+in large clusters.&lt;/p&gt;
+&lt;p&gt;As such, &lt;code&gt;v0.3&lt;/code&gt; switches us to use &lt;code&gt;ConfigMap&lt;/code&gt; resources for leader election.&lt;/p&gt;
+&lt;p&gt;During the upgrade, you should first scale your cert-manager-controller deployment
+to 0 to ensure no other replicas of cert-manager are running when the new &lt;code&gt;v0.3&lt;/code&gt;
+deployment starts:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl scale --namespace &amp;lt;deployment-namespace&amp;gt; --replicas&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;0&lt;/span&gt; deployment &amp;lt;cert-manager-deployment-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;removing-support-for-acmev1-in-favor-of-acmev2&#34;&gt;Removing support for ACMEv1 in favor of ACMEv2&lt;/h2&gt;
+&lt;p&gt;The ACME &lt;code&gt;v2&lt;/code&gt; specification is now in production with Let&amp;rsquo;s Encrypt.
+In order to support this new spec, which includes support for wildcard certificates,
+we have removed support for the &lt;code&gt;v1&lt;/code&gt; protocol altogether.&lt;/p&gt;
+&lt;p&gt;If you have any ACME Issuer or &lt;code&gt;ClusterIssuer&lt;/code&gt; resources, you should update the
+server fields of these to the new ACMEv2 endpoints.&lt;/p&gt;
+&lt;p&gt;For example, if you have a Let&amp;rsquo;s Encrypt production issuer, you should update the
+server URL:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;certmanager.k8s.io/v1alpha2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;acme&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# server: https://acme-v01.api.letsencrypt.org/directory&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;server&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;https://acme-v02.api.letsencrypt.org/directory&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# we switch &amp;#39;v01&amp;#39; to &amp;#39;v02&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;removing-ingress-shim-and-compiling-it-into-cert-manager-itself&#34;&gt;Removing ingress-shim and compiling it into cert-manager itself&lt;/h2&gt;
+&lt;p&gt;In &lt;code&gt;v0.3&lt;/code&gt; we removed the ingress-shim component and instead now compile in its
+functionality into the main cert-manager binary.&lt;/p&gt;
+&lt;p&gt;This change also introduces a change to the way you configure default Issuers
+and &lt;code&gt;ClusterIssuers&lt;/code&gt; at deployment time.&lt;/p&gt;
+&lt;p&gt;The deployment documentation has been updated accordingly, but instead of setting
+&lt;code&gt;ingressShim.extraArgs={--default-issuer-name=letsencrypt-pod}&lt;/code&gt; there are
+now dedicated Helm chart fields:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  --set ingressShim.defaultIssuerName&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;letsencrypt-prod &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set ingressShim.defaultIssuerKind&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;ClusterIssuer
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;change-to-the-default-behavior-of-ingress-shim&#34;&gt;Change to the default behavior of ingress-shim&lt;/h2&gt;
+&lt;p&gt;In the past, when using ingress-shim, we set the &lt;code&gt;ingress&lt;/code&gt; field on the Certificate
+resource to trigger cert-manager to edit the specified Ingress resource to solve
+the challenge.&lt;/p&gt;
+&lt;p&gt;The alternate option is to set the &lt;code&gt;ingressClass&lt;/code&gt; field, which causes
+cert-manager to create temporary Ingress resources to solve the challenge. This
+behavior provides better compatibility with ingress controllers like
+&lt;a href=&#34;https://github.com/kubernetes/ingress-nginx&#34;&gt;&lt;code&gt;nginx-ingress&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In &lt;code&gt;v0.3&lt;/code&gt; we have changed the default behavior of ingress-shim to set the &lt;code&gt;ingressClass&lt;/code&gt;
+field instead of &lt;code&gt;ingress&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This will cause validations for ingress controllers like
+&lt;a href=&#34;https://github.com/kubernetes/ingress-gce&#34;&gt;&lt;code&gt;ingress-gce&lt;/code&gt;&lt;/a&gt; to fail without
+additional configuration in your Ingress resources annotations.&lt;/p&gt;
+&lt;p&gt;Add the follow annotation to your Ingress resources if you are using the GCE ingress
+controller, in addition to the usual ingress-shim annotation(s):&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

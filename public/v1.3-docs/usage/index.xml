@@ -1,0 +1,764 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cert-manager – Usage</title>
+    <link>https://cert-manager.io/v1.3-docs/usage/</link>
+    <description>Recent content in Usage on cert-manager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://cert-manager.io/v1.3-docs/usage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1.3-Docs: Certificate Resources</title>
+      <link>https://cert-manager.io/v1.3-docs/usage/certificate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.3-docs/usage/certificate/</guid>
+      <description>
+        
+        
+        &lt;p&gt;In cert-manager, the &lt;a href=&#34;../../concepts/certificate/&#34;&gt;&lt;code&gt;Certificate&lt;/code&gt;&lt;/a&gt; resource
+represents a human readable definition of a certificate request that is to be
+honored by an issuer which is to be kept up-to-date. This is the usual way that
+you will interact with cert-manager to request signed certificates.&lt;/p&gt;
+&lt;p&gt;In order to issue any certificates, you&amp;rsquo;ll need to configure an
+&lt;a href=&#34;../../configuration/&#34;&gt;&lt;code&gt;Issuer&lt;/code&gt;&lt;/a&gt; resource first.&lt;/p&gt;
+&lt;h2 id=&#34;creating-certificate-resources&#34;&gt;Creating Certificate Resources&lt;/h2&gt;
+&lt;p&gt;A &lt;code&gt;Certificate&lt;/code&gt; resource specifies fields that are used to generated certificate
+signing requests which are then fulfilled by the issuer type you have
+referenced. &lt;code&gt;Certificates&lt;/code&gt; specify which issuer they want to obtain the
+certificate from by specifying the &lt;code&gt;certificate.spec.issuerRef&lt;/code&gt; field.&lt;/p&gt;
+&lt;p&gt;A &lt;code&gt;Certificate&lt;/code&gt; resource, for the &lt;code&gt;example.com&lt;/code&gt; and &lt;code&gt;www.example.com&lt;/code&gt; DNS names,
+&lt;code&gt;spiffe://cluster.local/ns/sandbox/sa/example&lt;/code&gt; URI Subject Alternative Name,
+that is valid for 90 days and renews 15 days before expiry is below. It contains
+an exhaustive list of all options a &lt;code&gt;Certificate&lt;/code&gt; resource may have however only
+a subset of fields are required as labelled.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Certificate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example-com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sandbox&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Secret names are always required.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;secretName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example-com-tls&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;duration&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;2160h&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# 90d&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;renewBefore&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;360h&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# 15d&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;subject&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;organizations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;jetstack&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The use of the common name field has been deprecated since 2000 and is&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# discouraged from being used.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;commonName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;isCA&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;privateKey&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;algorithm&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;RSA&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;encoding&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;PKCS1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;size&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;2048&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;usages&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;server auth&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;client auth&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# At least one of a DNS Name, URI, or IP address is required.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dnsNames&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;www.example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;uris&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;spiffe://cluster.local/ns/sandbox/sa/example&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ipAddresses&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;192.168.0.5&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Issuer references are always required.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;issuerRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca-issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# We can reference ClusterIssuers by changing the kind here.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The default value is Issuer (i.e. a locally namespaced Issuer)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# This is optional since cert-manager will default to this value however&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# if you are using an external issuer, change this to that issuer group.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;group&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The signed certificate will be stored in a &lt;code&gt;Secret&lt;/code&gt; resource named
+&lt;code&gt;example-com-tls&lt;/code&gt; in the same namespace as the &lt;code&gt;Certificate&lt;/code&gt; once the issuer has
+successfully issued the requested certificate.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;Certificate&lt;/code&gt; will be issued using the issuer named &lt;code&gt;ca-issuer&lt;/code&gt; in the
+&lt;code&gt;sandbox&lt;/code&gt; namespace (the same namespace as the &lt;code&gt;Certificate&lt;/code&gt; resource).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: If you want to create an &lt;code&gt;Issuer&lt;/code&gt; that can be referenced by
+&lt;code&gt;Certificate&lt;/code&gt; resources in &lt;em&gt;all&lt;/em&gt; namespaces, you should create a
+&lt;a href=&#34;../../concepts/issuer/#namespaces&#34;&gt;&lt;code&gt;ClusterIssuer&lt;/code&gt;&lt;/a&gt; resource and set the
+&lt;code&gt;certificate.spec.issuerRef.kind&lt;/code&gt; field to &lt;code&gt;ClusterIssuer&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: The &lt;code&gt;renewBefore&lt;/code&gt; and &lt;code&gt;duration&lt;/code&gt; fields must be specified using a &lt;a href=&#34;https://golang.org/pkg/time/#ParseDuration&#34;&gt;Go
+&lt;code&gt;time.Duration&lt;/code&gt;&lt;/a&gt; string format,
+which does not allow the &lt;code&gt;d&lt;/code&gt; (days) suffix. You must specify these values
+using &lt;code&gt;s&lt;/code&gt;, &lt;code&gt;m&lt;/code&gt;, and &lt;code&gt;h&lt;/code&gt; suffixes instead. Failing to do so without installing
+the &lt;a href=&#34;../../concepts/webhook/&#34;&gt;&lt;code&gt;webhook component&lt;/code&gt;&lt;/a&gt; can prevent cert-manager
+from functioning correctly
+&lt;a href=&#34;https://github.com/jetstack/cert-manager/issues/1269&#34;&gt;&lt;code&gt;#1269&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: Take care when setting the &lt;code&gt;renewBefore&lt;/code&gt; field to be very close to the
+&lt;code&gt;duration&lt;/code&gt; as this can lead to a renewal loop, where the &lt;code&gt;Certificate&lt;/code&gt; is always
+in the renewal period. Some &lt;code&gt;Issuers&lt;/code&gt; set the &lt;code&gt;notBefore&lt;/code&gt; field on their
+issued X.509 certificates before the issue time to fix clock-skew issues,
+leading to the working duration of a certificate to be less than the full
+duration of the certificate. For example, Let&amp;rsquo;s Encrypt sets it to be one hour
+before issue time, so the actual &lt;em&gt;working duration&lt;/em&gt; of the certificate is 89
+days, 23 hours (the &lt;em&gt;full duration&lt;/em&gt; remains 90 days).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A full list of the fields supported on the Certificate resource can be found in
+the &lt;a href=&#34;../../reference/api-docs/#cert-manager.io/v1alpha2.CertificateSpec&#34;&gt;API reference documentation&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;key-usages&#34;&gt;Key Usages&lt;/h2&gt;
+&lt;p&gt;cert-manager supports requesting certificates that have a number of custom key
+usages and extended key usages. Although cert-manager will attempt to honor this
+request, some issuers will remove, add defaults, or otherwise completely ignore
+the request and is determined on an issuer by issuer basis. The &lt;code&gt;CA&lt;/code&gt; and
+&lt;code&gt;SelfSigned&lt;/code&gt; &lt;code&gt;Issuer&lt;/code&gt; will always return certificates matching the usages you have
+requested.&lt;/p&gt;
+&lt;p&gt;Unless any number of usages has been set, cert-manager will set the default
+requested usages of &amp;ldquo;digital signature&amp;rdquo;, &amp;ldquo;key encipherment&amp;rdquo;, and &amp;ldquo;server auth&amp;rdquo;.
+cert-manager will not attempt to request a new certificate if the current
+certificate does not match the current key usages set.&lt;/p&gt;
+&lt;p&gt;An exhaustive list of supported key usages can be found in the &lt;a href=&#34;../../reference/api-docs/#cert-manager.io/v1alpha2.KeyUsage&#34;&gt;API reference
+documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;temporary-certificates-whilst-issuing&#34;&gt;Temporary Certificates whilst Issuing&lt;/h2&gt;
+&lt;p&gt;When &lt;a href=&#34;../ingress/&#34;&gt;requesting certificates using ingress-shim&lt;/a&gt;, the component
+&lt;code&gt;ingress-gce&lt;/code&gt;, if used, requires that a temporary certificate is present while
+waiting for issuance of a signed certificate when serving. To facilitate this,
+if the annotation &lt;code&gt;&amp;quot;cert-manager.io/issue-temporary-certificate&amp;quot;: &amp;quot;true&amp;quot;&lt;/code&gt; is
+present on the certificate, a self signed temporary certificate will be present
+on the &lt;code&gt;Secret&lt;/code&gt; until it is overwritten once the signed certificate has been
+issued.&lt;/p&gt;
+&lt;h2 id=&#34;configuring-private-key-rotation&#34;&gt;Configuring private key rotation&lt;/h2&gt;
+&lt;p&gt;When a certificate is re-issued for any reason, including because it is nearing
+expiry, when a change to the spec is made or a re-issuance is manually
+triggered, cert-manager supports configuring the &amp;lsquo;private key rotation policy&amp;rsquo;
+to either always re-use the existing private key (the default behavior) or to
+regenerate a new private key on each issuance (the recommended behavior).&lt;/p&gt;
+&lt;p&gt;This is configured using the &lt;code&gt;spec.privateKey.rotationPolicy&lt;/code&gt; like so:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Certificate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-cert&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;secretName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-cert-tls&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dnsNames&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;privateKey&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;rotationPolicy&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Always&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;There are two supported rotation policies:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Never&lt;/strong&gt; (default): a private key is only generated if one does not already exist in
+the target Secret resource (using the &lt;code&gt;tls.key&lt;/code&gt; key). All further issuance&amp;rsquo;s will re-use
+this private key. This is the default in order to maintain compatibility with previous releases.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Always&lt;/strong&gt;: a new private key will be generated each time a new certificate is issued.
+It is recommended you configure this &lt;code&gt;rotationPolicy&lt;/code&gt; on your Certificate resources as it
+is good practice to rotate private keys when a certificate is renewed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some Issuer types may disallow re-using private keys. If this is the case, you must explicitly
+configure the &lt;code&gt;rotationPolicy&lt;/code&gt; for each of your Certificates accordingly.&lt;/p&gt;
+&lt;h2 id=&#34;cleaning-up-secrets-when-certificates-are-deleted&#34;&gt;Cleaning up Secrets when Certificates are deleted&lt;/h2&gt;
+&lt;p&gt;By default, cert-manager does not delete the &lt;code&gt;Secret&lt;/code&gt; resource containing the signed certificate when the corresponding &lt;code&gt;Certificate&lt;/code&gt; resource is deleted.
+This means that deleting a &lt;code&gt;Certificate&lt;/code&gt; won&amp;rsquo;t take down any services that are currently relying on that certificate, but the certificate will no longer be renewed.
+The &lt;code&gt;Secret&lt;/code&gt; needs to be manually deleted if it is no longer needed.&lt;/p&gt;
+&lt;p&gt;If you would prefer the &lt;code&gt;Secret&lt;/code&gt; to be deleted automatically when the &lt;code&gt;Certificate&lt;/code&gt; is deleted, you need to configure your installation to pass the &lt;code&gt;--enable-certificate-owner-ref&lt;/code&gt; flag to the controller.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.3-Docs: Kubectl plugin</title>
+      <link>https://cert-manager.io/v1.3-docs/usage/kubectl-plugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.3-docs/usage/kubectl-plugin/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;code&gt;kubectl cert-manager&lt;/code&gt; is a &lt;a href=&#34;https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/&#34;&gt;kubectl plugin&lt;/a&gt; that can help you to manage cert-manager resources inside your cluster.&lt;/p&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;You need the &lt;code&gt;kubectl-cert-manager.tar.gz&lt;/code&gt; file for the platform you&amp;rsquo;re using, these can be found on our &lt;a href=&#34;https://github.com/jetstack/cert-manager/releases&#34;&gt;GitHub releases page&lt;/a&gt;.
+In order to use the kubectl plugin you need its binary to be accessible under the name &lt;code&gt;kubectl-cert_manager&lt;/code&gt; in your &lt;code&gt;$PATH&lt;/code&gt;.
+Run the following commands to set up the plugin:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.3.1/kubectl-cert_manager-linux-amd64.tar.gz
+$ tar xzf kubectl-cert-manager.tar.gz
+$ sudo mv kubectl-cert_manager /usr/local/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can run &lt;code&gt;kubectl cert-manager help&lt;/code&gt; to test the plugin is set up properly:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl cert-manager help
+
+kubectl cert-manager is a CLI tool manage and configure cert-manager resources for Kubernetes
+
+Usage:
+  kubectl cert-manager [command]
+
+Available Commands:
+  convert     Convert cert-manager config files between different API versions
+  create      Create cert-manager resources
+  help        Help about any command
+  renew       Mark a Certificate for manual renewal
+  status      Get details on current status of cert-manager resources
+  version     Print the kubectl cert-manager version
+
+Flags:
+      --as string                      Username to impersonate for the operation
+      --as-group stringArray           Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
+      --cache-dir string               Default cache directory (default &amp;quot;~/.kube/cache&amp;quot;)
+      --certificate-authority string   Path to a cert file for the certificate authority
+      --client-certificate string      Path to a client certificate file for TLS
+      --client-key string              Path to a client key file for TLS
+      --cluster string                 The name of the kubeconfig cluster to use
+      --context string                 The name of the kubeconfig context to use
+  -h, --help                           help for cert-manager
+      --insecure-skip-tls-verify       If true, the server&#39;s certificate will not be checked for validity. This will make your HTTPS connections insecure
+      --kubeconfig string              Path to the kubeconfig file to use for CLI requests.
+      --log-flush-frequency duration   Maximum number of seconds between log flushes (default 5s)
+      --match-server-version           Require server version to match client version
+  -n, --namespace string               If present, the namespace scope for this CLI request
+      --request-timeout string         The length of time to wait before giving up on a single server request. Non-zero values should contain a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero means don&#39;t timeout requests. (default &amp;quot;0&amp;quot;)
+  -s, --server string                  The address and port of the Kubernetes API server
+      --tls-server-name string         Server name to use for server certificate validation. If it is not provided, the hostname used to contact the server is used
+      --token string                   Bearer token for authentication to the API server
+      --user string                    The name of the kubeconfig user to use
+
+Use &amp;quot;kubectl cert-manager [command] --help&amp;quot; for more information about a command.
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;commands&#34;&gt;Commands&lt;/h2&gt;
+&lt;h3 id=&#34;renew&#34;&gt;Renew&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: for cert-manager &lt;code&gt;v0.15&lt;/code&gt; this feature requires the &lt;code&gt;ExperimentalCertificateControllers&lt;/code&gt; feature gate set.
+From cert-manager &lt;code&gt;v0.16&lt;/code&gt; onward, the experimental certificate controller is the default.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;kubectl cert-manager renew&lt;/code&gt; allows you to manually trigger a renewal of a specific certificate.
+This can be done either one certificate at a time, using label selectors (&lt;code&gt;-l app=example&lt;/code&gt;), or with the &lt;code&gt;--all&lt;/code&gt; flag:&lt;/p&gt;
+&lt;p&gt;For example you can renew the certificate &lt;code&gt;example-com-tls&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl get certificate
+NAME                       READY   SECRET               AGE
+example-com-tls            True    example-com-tls      1d
+
+$ kubectl cert-manager renew example-com-tls
+Manually triggered issuance of Certificate default/example-com-tls
+
+$ kubectl get certificaterequest
+NAME                              READY   AGE
+example-com-tls-tls-8rbv2         False    10s
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can also renew all certificates in a given namespace:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl cert-manager renew --namespace=app --all
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The renew command allows several options to be specified:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--all&lt;/code&gt; renew all Certificates in the given Namespace, or all namespaces when combined with &lt;code&gt;--all-namespaces&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-A&lt;/code&gt; or  &lt;code&gt;--all-namespaces&lt;/code&gt; mark Certificates across namespaces for renewal&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-l&lt;/code&gt; &lt;code&gt;--selector&lt;/code&gt; allows set a label query to filter on
+as well as &lt;code&gt;kubectl&lt;/code&gt; global flags like &lt;code&gt;--context&lt;/code&gt; and &lt;code&gt;--namespace&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;convert&#34;&gt;Convert&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;kubectl cert-manager convert&lt;/code&gt; can be used to convert cert-manager manifest files between different API versions. Both YAML and JSON formats are accepted.
+The command takes file name, directory, or URL as input, and converts into the
+format of the latest version or the one specified by &amp;ndash;output-version flag.&lt;/p&gt;
+&lt;p&gt;The default output will be printed to stdout in YAML format. One can use -o option to change the output destination.&lt;/p&gt;
+&lt;p&gt;For example this will output &lt;code&gt;cert.yaml&lt;/code&gt; in the latest API version:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;kubectl cert-manager convert -f cert.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;create&#34;&gt;Create&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;kubectl cert-manager create&lt;/code&gt; can be used to create cert-manager resources manually. Sub-commands are available
+to create different resources:&lt;/p&gt;
+&lt;h4 id=&#34;certificaterequest&#34;&gt;CertificateRequest&lt;/h4&gt;
+&lt;p&gt;To create a cert-manager CertificateRequest, use &lt;code&gt;kubectl cert-manager create certificaterequest&lt;/code&gt;. The command takes in the name of the CertificateRequest to be created,
+and creates a new CertificateRequest resource based on the YAML manifest of a Certificate resource as specified by &lt;code&gt;--from-certificate-file&lt;/code&gt; flag, by generating a private key locally and creating a &amp;lsquo;certificate signing request&amp;rsquo;
+to be submitted to a cert-manager Issuer. The private key will be written to a local file, where the default is &lt;code&gt;&amp;lt;name_of_cr&amp;gt;.key&lt;/code&gt;, or it can be specified using the &lt;code&gt;--output-key-file&lt;/code&gt; flag.&lt;/p&gt;
+&lt;p&gt;If you wish to wait for the CertificateRequest to be signed and store the X.509 certificate in a file, you can set
+the &lt;code&gt;--fetch-certificate&lt;/code&gt; flag. The default timeout when waiting for the issuance of the certificate is 5 minutes,
+but can be specified with the &lt;code&gt;--timeout&lt;/code&gt; flag. The default name of the file storing the X.509 certificate
+is &lt;code&gt;&amp;lt;name_of_cr&amp;gt;.crt&lt;/code&gt;, you can use the &lt;code&gt; --output-certificate-file&lt;/code&gt; flag to specify otherwise.&lt;/p&gt;
+&lt;p&gt;Note that the private key and the X.509 certificate are both written to file, and are &lt;strong&gt;not&lt;/strong&gt; stored inside Kubernetes.&lt;/p&gt;
+&lt;p&gt;For example this will create a CertificateRequest resource with the name &amp;ldquo;my-cr&amp;rdquo; based on the cert-manager Certificate described in &lt;code&gt;my-certificate.yaml&lt;/code&gt; while storing the
+private key and X.509 certificate in &lt;code&gt;my-cr.key&lt;/code&gt; and &lt;code&gt;my-cr.crt&lt;/code&gt; respectively.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;kubectl cert-manager create certificaterequest my-cr --from-certificate-file my-certificate.yaml --fetch-certificate --timeout 20m
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;status-certificate&#34;&gt;Status Certificate&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;kubectl cert-manager status certificate&lt;/code&gt; outputs the details of the current status of a Certificate resource and related resources like CertificateRequest, Secret, Issuer, as well as Order and Challenges if it is a ACME Certificate.
+The command outputs information about the resources, including Conditions, Events and resource specific fields like Key Usages and Extended Key Usages of the Secret or Authorizations of the Order. This will be helpful for troubleshooting a Certificate.&lt;/p&gt;
+&lt;p&gt;The command takes in one argument specifying the name of the Certificate resource and the namespace
+can be specified as usual with the &lt;code&gt;-n&lt;/code&gt; or &lt;code&gt;--namespace&lt;/code&gt; flag.&lt;/p&gt;
+&lt;p&gt;This example queries the status of the Certificate named &lt;code&gt;my-certificate&lt;/code&gt; in namespace &lt;code&gt;my-namespace&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;kubectl cert-manager status certificate my-certificate -n my-namespace
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;approve-deny&#34;&gt;Approve/Deny&lt;/h3&gt;
+&lt;p&gt;CertificateRequests can be &lt;a href=&#34;../../concepts/certificaterequest/#approval&#34;&gt;approved or
+denied&lt;/a&gt; using their respective kubectl plugin commands:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The internal cert-manager approver may automatically approve all
+CertificateRequests unless disabled with the flag on the cert-manager-controller
+&lt;code&gt;--controllers=*,-certificaterequests-approver&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl cert-manager approve -n istio-system mesh-ca --reason &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;pki-team&amp;#34;&lt;/span&gt; --message &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;this certificate is valid&amp;#34;&lt;/span&gt;
+Approved CertificateRequest &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;istio-system/mesh-ca&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl cert-manager deny -n my-app my-app --reason &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example.com&amp;#34;&lt;/span&gt; --message &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;violates policy&amp;#34;&lt;/span&gt;
+Denied CertificateRequest &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;my-app/my-app&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.3-Docs: Prometheus Metrics</title>
+      <link>https://cert-manager.io/v1.3-docs/usage/prometheus-metrics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.3-docs/usage/prometheus-metrics/</guid>
+      <description>
+        
+        
+        &lt;p&gt;To help with operations and insights into cert-manager activities, cert-manager exposes metrics in the &lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt; format from the controller component. These are available at the standard &lt;code&gt;/metrics&lt;/code&gt; path of the controller component&amp;rsquo;s configured HTTP port.&lt;/p&gt;
+&lt;h2 id=&#34;scraping-metrics&#34;&gt;Scraping Metrics&lt;/h2&gt;
+&lt;p&gt;How metrics are scraped will depend how you&amp;rsquo;re operating your Prometheus server(s). These examples presume the &lt;a href=&#34;https://github.com/prometheus-operator/prometheus-operator&#34;&gt;Prometheus Operator&lt;/a&gt; is being used to run Prometheus, and configure Pod or Service Monitor CRDs.&lt;/p&gt;
+&lt;h3 id=&#34;helm&#34;&gt;Helm&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;re deploying cert-manager with helm, a &lt;code&gt;ServiceMonitor&lt;/code&gt; resource can be configured. This configuration should enable metric scraping, and the configuration can be further tweaked as described in the &lt;a href=&#34;https://github.com/jetstack/cert-manager/blob/master/deploy/charts/cert-manager/README.template.md#configuration&#34;&gt;Helm configuration documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;prometheus&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;servicemonitor&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;enabled&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;regular-manifests&#34;&gt;Regular Manifests&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;re not using helm to deploy cert-manager and instead using the provided regular YAML manifests, this example &lt;code&gt;PodMonitor&lt;/code&gt; and deployment patch should be all you need to start ingesting cert-manager metrics.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/#use-a-strategic-merge-patch-to-update-a-deployment&#34;&gt;Apply the following patch&lt;/a&gt; to your cert-manager deployment&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ports&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containerPort&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;9402&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;http&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;protocol&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TCP&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Create the following &lt;code&gt;PodMonitor&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;monitoring.coreos.com/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;PodMonitor&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app.kubernetes.io/name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app.kubernetes.io/instance&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app.kubernetes.io/component&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;controller&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;jobLabel&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;app.kubernetes.io/name&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selector&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app.kubernetes.io/name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app.kubernetes.io/instance&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app.kubernetes.io/component&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;controller&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;podMetricsEndpoints&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;http&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;honorLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;monitoring-mixin&#34;&gt;Monitoring Mixin&lt;/h2&gt;
+&lt;p&gt;Monitoring mixins are a way to bundle common alerts, rules, and dashboards for an application in a configurable and extensible way, using the Jsonnet data templating language. A cert-manager monitoring mixin can be found here &lt;a href=&#34;https://gitlab.com/uneeq-oss/cert-manager-mixin&#34;&gt;https://gitlab.com/uneeq-oss/cert-manager-mixin&lt;/a&gt;. Documentation on usage can be found with the &lt;code&gt;cert-manager-mixin&lt;/code&gt; project.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.3-Docs: Securing Ingress Resources</title>
+      <link>https://cert-manager.io/v1.3-docs/usage/ingress/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.3-docs/usage/ingress/</guid>
+      <description>
+        
+        
+        &lt;p&gt;A common use-case for cert-manager is requesting TLS signed certificates to
+secure your ingress resources. This can be done by simply adding annotations to
+your &lt;code&gt;Ingress&lt;/code&gt; resources and cert-manager will facilitate creating the
+&lt;code&gt;Certificate&lt;/code&gt; resource for you. A small sub-component of cert-manager,
+ingress-shim, is responsible for this.&lt;/p&gt;
+&lt;h2 id=&#34;how-it-works&#34;&gt;How It Works&lt;/h2&gt;
+&lt;p&gt;The sub-component ingress-shim watches &lt;code&gt;Ingress&lt;/code&gt; resources across your cluster.
+If it observes an &lt;code&gt;Ingress&lt;/code&gt; with annotations described in the &lt;a href=&#34;#supported-annotations&#34;&gt;Supported
+Annotations&lt;/a&gt; section, it will ensure a &lt;code&gt;Certificate&lt;/code&gt;
+resource with the name provided in the &lt;code&gt;tls.secretName&lt;/code&gt; field and configured as
+described on the &lt;code&gt;Ingress&lt;/code&gt; exists. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;networking.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Ingress&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# add an annotation indicating the issuer to use.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/cluster-issuer&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;nameOfClusterIssuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myIngress&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myIngress&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;rules&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;host&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;http&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;paths&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;pathType&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Prefix&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;backend&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;service&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myservice&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;number&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;80&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;tls&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# &amp;lt; placing a host in the TLS config will determine what ends up in the cert&amp;#39;s subjectAltNames&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;hosts&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;secretName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myingress-cert&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# &amp;lt; cert-manager will store the created certificate in this secret.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;supported-annotations&#34;&gt;Supported Annotations&lt;/h2&gt;
+&lt;p&gt;You can specify the following annotations on &lt;code&gt;Ingress&lt;/code&gt; resources in order to
+trigger &lt;code&gt;Certificate&lt;/code&gt; resources to be automatically created:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cert-manager.io/issuer&lt;/code&gt;:  the name of an &lt;code&gt;Issuer&lt;/code&gt; to acquire the certificate
+required for this &lt;code&gt;Ingress&lt;/code&gt;. The Issuer &lt;em&gt;must&lt;/em&gt; be in the same namespace as the
+&lt;code&gt;Ingress&lt;/code&gt; resource.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cert-manager.io/cluster-issuer&lt;/code&gt;: the name of a &lt;code&gt;ClusterIssuer&lt;/code&gt; to acquire the
+certificate required for this &lt;code&gt;Ingress&lt;/code&gt;. It does not matter which namespace
+your &lt;code&gt;Ingress&lt;/code&gt; resides, as &lt;code&gt;ClusterIssuers&lt;/code&gt; are non-namespaced resources.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cert-manager.io/issuer-kind&lt;/code&gt;: the name of an external &lt;code&gt;Issuer&lt;/code&gt;
+controller&amp;rsquo;s &lt;code&gt;CustomResourceDefinition&lt;/code&gt; (only necessary for out-of-tree &lt;code&gt;Issuers&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cert-manager.io/issuer-group&lt;/code&gt;: the name of the API group of external
+&lt;code&gt;Issuer&lt;/code&gt; controller (only necessary for out-of-tree &lt;code&gt;Issuers&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;kubernetes.io/tls-acme: &amp;quot;true&amp;quot;&lt;/code&gt;: this annotation requires additional
+configuration of the ingress-shim &lt;a href=&#34;./#optional-configuration&#34;&gt;see below&lt;/a&gt;.
+Namely, a default &lt;code&gt;Issuer&lt;/code&gt; must be specified as arguments to the
+ingress-shim container.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;acme.cert-manager.io/http01-ingress-class&lt;/code&gt;: this annotation allows you to
+configure the ingress class that will be used to solve challenges for this
+ingress. Customizing this is useful when you are trying to secure internal
+services, and need to solve challenges using a different ingress class to that
+of the ingress. If not specified and the &lt;code&gt;acme-http01-edit-in-place&lt;/code&gt; annotation
+is not set, this defaults to the ingress class defined in the Issuer resource.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;acme.cert-manager.io/http01-edit-in-place: &amp;quot;true&amp;quot;&lt;/code&gt;: this controls whether the
+ingress is modified &amp;lsquo;in-place&amp;rsquo;, or a new one is created specifically for the
+HTTP01 challenge. If present, and set to &amp;ldquo;true&amp;rdquo;, the existing ingress will be
+modified. Any other value, or the absence of the annotation assumes &amp;ldquo;false&amp;rdquo;.
+This annotation will also add the annotation
+&lt;code&gt;&amp;quot;cert-manager.io/issue-temporary-certificate&amp;quot;: &amp;quot;true&amp;quot;&lt;/code&gt; onto created
+certificates which will cause a &lt;a href=&#34;../certificate/#temporary-certificates-whilst-issuing&#34;&gt;temporary certificate&lt;/a&gt;
+to be set on the resulting &lt;code&gt;Secret&lt;/code&gt; until the final signed certificate has been
+returned.  This is useful for keeping compatibility with the &lt;code&gt;ingress-gce&lt;/code&gt;
+component.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cert-manager.io/common-name&lt;/code&gt;: (optional) this annotation allows you to
+configure &lt;code&gt;spec.commonName&lt;/code&gt; for the &lt;code&gt;Certificate&lt;/code&gt; to be generated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt; cert-manager.io/duration&lt;/code&gt;: (optional) this annotation allows you to
+configure &lt;code&gt;spec.duration&lt;/code&gt; field for the &lt;code&gt;Certificate&lt;/code&gt; to be generated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cert-manager.io/renew-before&lt;/code&gt;: (optional) this annotation allows you to
+configure &lt;code&gt;spec.renewBefore&lt;/code&gt; field for the &lt;code&gt;Certificate&lt;/code&gt; to be generated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;cert-manager.io/usages&lt;/code&gt;: (optional) this annotation allows you to configure
+&lt;code&gt;spec.usages&lt;/code&gt; field for the &lt;code&gt;Certificate&lt;/code&gt; to be generated. Pass a string with
+comma-separated values i.e &amp;ldquo;key agreement,digital signature, server auth&amp;rdquo;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;optional-configuration&#34;&gt;Optional Configuration&lt;/h2&gt;
+&lt;p&gt;The ingress-shim sub-component is deployed automatically as part of
+installation.&lt;/p&gt;
+&lt;p&gt;If you would like to use the old
+&lt;a href=&#34;https://github.com/jetstack/kube-lego&#34;&gt;kube-lego&lt;/a&gt; &lt;code&gt;kubernetes.io/tls-acme: &amp;quot;true&amp;quot;&lt;/code&gt; annotation for fully automated TLS, you will need to configure a default
+&lt;code&gt;Issuer&lt;/code&gt; when deploying cert-manager. This can be done by adding the following
+&lt;code&gt;--set&lt;/code&gt; when deploying using Helm:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;   --set ingressShim.defaultIssuerName&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;letsencrypt-prod &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;   --set ingressShim.defaultIssuerKind&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;ClusterIssuer &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;   --set ingressShim.defaultIssuerGroup&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;cert-manager.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Or by adding the following arguments to the cert-manager deployment
+&lt;code&gt;podTemplate&lt;/code&gt; container arguments.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  - --default-issuer-name=letsencrypt-prod
+  - --default-issuer-kind=ClusterIssuer
+  - --default-issuer-group=cert-manager.io
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In the above example, cert-manager will create &lt;code&gt;Certificate&lt;/code&gt; resources that
+reference the &lt;code&gt;ClusterIssuer&lt;/code&gt; &lt;code&gt;letsencrypt-prod&lt;/code&gt; for all Ingresses that have a
+&lt;code&gt;kubernetes.io/tls-acme: &amp;quot;true&amp;quot;&lt;/code&gt; annotation.&lt;/p&gt;
+&lt;p&gt;For more information on deploying cert-manager, read the &lt;a href=&#34;../../installation/&#34;&gt;installation
+guide&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;troubleshooting&#34;&gt;Troubleshooting&lt;/h2&gt;
+&lt;p&gt;If you do not see a &lt;code&gt;Certificate&lt;/code&gt; resource being created after applying the ingress-shim annotations check that at least &lt;code&gt;cert-manager.io/issuer&lt;/code&gt; or &lt;code&gt;cert-manager.io/cluster-issuer&lt;/code&gt; is set. If you want to use &lt;code&gt;kubernetes.io/tls-acme: &amp;quot;true&amp;quot;&lt;/code&gt; make sure to have checked all steps above and you might want to look for errors in the cert-manager pod logs if not resolved.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.3-Docs: Securing Istio Service Mesh</title>
+      <link>https://cert-manager.io/v1.3-docs/usage/istio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.3-docs/usage/istio/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager can be integrated with &lt;a href=&#34;https://istio.io&#34;&gt;Istio&lt;/a&gt; using the project
+&lt;a href=&#34;https://github.com/cert-manager/istio-csr&#34;&gt;istio-csr&lt;/a&gt;. The istio-csr will
+deploy an agent that is responsible for receiving certificate signing requests
+for all members of the Istio mesh, and signing them through cert-manager.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/cert-manager/istio-csr&#34;&gt;istio-csr&lt;/a&gt; will sign all
+control plane and workload certificates via your chosen cert-manager Issuer.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.3-Docs: CSI Driver</title>
+      <link>https://cert-manager.io/v1.3-docs/usage/csi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.3-docs/usage/csi/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;enabling-mtls-of-pods-using-the-cert-manager-csi-driver&#34;&gt;Enabling mTLS of Pods using the cert-manager CSI Driver&lt;/h2&gt;
+&lt;p&gt;An experimental &lt;a href=&#34;https://github.com/jetstack/cert-manager-csi&#34;&gt;Container Storage Interface (CSI)
+driver&lt;/a&gt; has been created to
+facilitate mTLS of Pods running inside your cluster through use of cert-manager.
+Using this driver will ensure that the private key and corresponding signed
+certificate will be unique to each Pod and will be stored on disk to the node
+that the Pod is scheduled to. The life cycle of the certificate key pair matches
+that of the Pod meaning that they will be created at Pod creation, and destroyed
+during termination. This driver also handles renewal on live certificates on the
+fly.&lt;/p&gt;
+&lt;p&gt;A &lt;a href=&#34;https://github.com/container-storage-interface/spec/blob/master/spec.md&#34;&gt;CSI
+driver&lt;/a&gt;
+is a storage plugin that is deployed into your Kubernetes cluster that can
+honor volume requests specified on Pods, just like those enabled by default such as
+the &lt;code&gt;Secret&lt;/code&gt;, &lt;code&gt;ConfigMap&lt;/code&gt;, or &lt;code&gt;hostPath&lt;/code&gt; volume drivers. In the case of the cert-manager
+CSI driver, it makes use of the ephemeral volume type, made beta as of
+&lt;a href=&#34;https://kubernetes.io/docs/concepts/storage/volumes/#csi-ephemeral-volumes&#34;&gt;&lt;code&gt;v1.16&lt;/code&gt;&lt;/a&gt;
+and as such will only work from the Kubernetes version &lt;code&gt;v1.16&lt;/code&gt;. An ephemeral
+volumes means that the volume is created and destroyed as the Pod is created and
+terminated, as well as specifying the volume attributes, without the need of a
+&lt;code&gt;PersistentVolume&lt;/code&gt;. This gives the feature of not only having unique
+certificates and keys per Pod, where the private key never leaves the hosts
+node, but that the desired certificate for that Pod template can be defined in
+line with the deployment spec.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: Use of the CSI driver is mostly intended for supporting a PKI of
+your cluster and facilitating mTLS, and as such, a private Certificate
+Authority issuer should be used - CA, Vault, and perhaps Venafi, or other
+external issuers. It is &lt;em&gt;not&lt;/em&gt; recommended to use public Certificate
+Authorities, for example Let&amp;rsquo;s Encrypt, which hold strict rate limits on the
+number of certificates that can be issued for a single domain. Like Pods,
+these certificate key pairs are designed to be non-immutable and can be
+created and destroyed at any time during normal operation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;how-does-it-work&#34;&gt;How Does it Work?&lt;/h2&gt;
+&lt;p&gt;The CSI specification is a protocol and standard for building storage drivers
+for container orchestration platforms with the intention that a single driver
+may be ported across multiple platforms and outlines a consistent specification
+to how drivers should behave from an infrastructure perspective. Since
+cert-manager is designed to only be run with a Kubernetes cluster, so too does
+the cert-manager CSI driver.&lt;/p&gt;
+&lt;p&gt;The driver should be deployed as a
+&lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/&#34;&gt;DaemonSet&lt;/a&gt;
+which means a single instance of the driver may be run on each node. The driver
+will not work when running multiple instances on a single node. The set of nodes
+that the driver runs on can be restricted using the
+&lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/assign-pod-node/&#34;&gt;&lt;code&gt;nodeSelector&lt;/code&gt;&lt;/a&gt;
+in its Pod template.&lt;/p&gt;
+&lt;p&gt;When a Pod is scheduled to a node with a cert-manager CSI volume specified, the
+&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/components/#kubelet&#34;&gt;&lt;code&gt;Kubelet&lt;/code&gt;&lt;/a&gt;
+running on that node will send a &lt;code&gt;NodePublishVolume&lt;/code&gt; call to the driver on that
+node, containing that Pods information as well as the attributes detailed from
+the in-line volume attributes. From this, the driver will generate a private key
+as well as a certificate request based upon that key using information built
+from the volume attributes. The driver will create a &lt;code&gt;CertificateRequest&lt;/code&gt;
+resource in the same namespace in the Pod that, if valid, cert-manger will
+return a signed certificate.&lt;/p&gt;
+&lt;p&gt;The resulting signed certificate and generated key will be written to that
+node&amp;rsquo;s file system to be mounted to the Pods file system. Since the driver needs
+access to the nodes file system it must be made privileged. Once mounted, the
+Pod will begin execution with the unique private key and certificate available in
+its file system, as defined by its mount path.&lt;/p&gt;
+&lt;p&gt;By default, the driver will keep track of certificates created in order to
+monitor when they should be marked for renewal. When this happens, the driver
+will request for a new signed certificate, and when successful, will simply
+overwrite the existing certificate in path.&lt;/p&gt;
+&lt;p&gt;When the Pod is marked for termination, the &lt;code&gt;NodeUnpublishVolume&lt;/code&gt; call is made
+to the node&amp;rsquo;s driver which in turn destroys the certificate and key from the
+nodes file system.&lt;/p&gt;
+&lt;p&gt;The CSI driver is able to recover its full state in the event the its Pod being
+terminated.&lt;/p&gt;
+&lt;h2 id=&#34;installation-and-configuration&#34;&gt;Installation and Configuration&lt;/h2&gt;
+&lt;p&gt;TODO (&lt;code&gt;@joshvanl&lt;/code&gt;): add the installation guide once we are closer to a full
+release.&lt;/p&gt;
+&lt;p&gt;TODO (&lt;code&gt;@joshvanl&lt;/code&gt;): add commands to verify installation&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get csinodes
+$ kubectl get csidrivers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The cert-manager CSI driver can be configured to write the key and certificate
+data that is to be mounted to Pods from anywhere in the host file system, but by
+default is at &lt;code&gt;/tmp/cert-manager-csi&lt;/code&gt;. Each volume that is mounted will have
+their own directory created inside this directory.&lt;/p&gt;
+&lt;p&gt;To change this data directory location, change the &lt;code&gt;hostPath.path&lt;/code&gt; location
+inside the driver &lt;code&gt;DaemonSet&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Once the driver has been successfully installed, Pods are ready to request
+in-line ephemeral volumes. This is done by adding a number annotations to the
+volume attributes of the CSI volumes, as described in the volume spec. Below is
+a simple example of a deployment with 5 replicas that will each be mounted with
+their own unique key certificate pairs based upon the volume attributes.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;apps/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Deployment&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-csi-app&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sandbox&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-csi-app&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;replicas&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selector&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-csi-app&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-csi-app&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;containers&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-frontend&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;image&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;busybox&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeMounts&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mountPath&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;/tls&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;tls&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;command&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;sleep&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;1000000&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;tls&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csi&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;driver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;csi.cert-manager.io&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;volumeAttributes&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csi.cert-manager.io/issuer-name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca-issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;                  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csi.cert-manager.io/dns-names&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-service.sandbox.svc.cluster.local&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In this example, each Pod will receive a 2048 bit RSA private key with a
+certificate that is valid for the DNS name
+&lt;code&gt;my-service.sandbox.svc.cluster.local&lt;/code&gt; which has been signed by the &lt;code&gt;Issuer&lt;/code&gt;
+named &lt;code&gt;ca-issuer&lt;/code&gt; that exists in the same namespace. The resulting key and
+certificate is available from the Pods file system at &lt;code&gt;/tls/key.pem&lt;/code&gt; and
+&lt;code&gt;/tls/cert.pem&lt;/code&gt; respectively.&lt;/p&gt;
+&lt;p&gt;Below is a full list of the available volume attributes to configure resulting
+key certificate pairs.&lt;/p&gt;
+&lt;p&gt;The full list of usage keys is available &lt;a href=&#34;https://github.com/jetstack/cert-manager/blob/57034dc1e47d0231d781cb8fe1ab58375fab5faf/pkg/apis/certmanager/v1/types.go#L167-L191&#34;&gt;from code&lt;/a&gt;.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Attribute&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th&gt;Example&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/issuer-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The Issuer name to sign the certificate request.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ca-issuer&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/issuer-kind&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The Issuer kind to sign the certificate request.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Issuer&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ClusterIssuer&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/issuer-group&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The group name the Issuer belongs to.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;example.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/common-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Certificate common name.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;www.example.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/key-usages&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Certificate key usages.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;digital signature,key encipherment&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;signing,timestamping&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/dns-names&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;DNS names the certificate will be requested for. At least a DNS Name, IP or URI name must be present.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;a.example.com,b.example.com&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/ip-sans&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;IP addresses the certificate will be requested for.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;192.0.2.1,192.0.2.2&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/uri-sans&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;URI names the certificate will be requested for.&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;spiffe://foo.bar.cluster.local&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/duration&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Requested duration the signed certificate will be valid for.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;720h&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1880h&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/is-ca&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Mark the certificate as a certificate authority.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/certificate-file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;File name to store the certificate file at.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;crt.pem&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;bar/foo.crt&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/privatekey-file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;File name to store the key file at.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;key.pem&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;bar/foo.key&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/renew-before&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The time to renew the certificate before expiry. Defaults to a third of the requested duration.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$CERT_DURATION/3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;72h&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/disable-auto-renew&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Disable the CSI driver from renewing certificates that are mounted into the pod.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;csi.cert-manager.io/reuse-private-key&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Re-use the same private when when renewing certificates.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,392 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cert-manager – FAQ</title>
+    <link>https://cert-manager.io/v1.1-docs/faq/</link>
+    <description>Recent content in FAQ on cert-manager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://cert-manager.io/v1.1-docs/faq/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1.1-Docs: Cluster Resource Namespace</title>
+      <link>https://cert-manager.io/v1.1-docs/faq/cluster-resource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.1-docs/faq/cluster-resource/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;ClusterIssuer&lt;/code&gt; resource is cluster scoped. This means that when referencing
+a secret via the &lt;code&gt;secretName&lt;/code&gt; field, secrets will be looked for in the &lt;code&gt;Cluster Resource Namespace&lt;/code&gt;. By default, this namespace is &lt;code&gt;cert-manager&lt;/code&gt; however can be
+changed via a flag on the cert-manager-controller component:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;--cluster-resource-namespace&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;my-namespace
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.1-Docs: Syncing Secrets Across Namespaces</title>
+      <link>https://cert-manager.io/v1.1-docs/faq/kubed/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.1-docs/faq/kubed/</guid>
+      <description>
+        
+        
+        &lt;p&gt;It may be required for multiple components across namespaces to consume the same
+&lt;code&gt;Secret&lt;/code&gt; that has been created by a single &lt;code&gt;Certificate&lt;/code&gt;. The recommended way to
+do this is to use &lt;a href=&#34;https://github.com/appscode/kubed&#34;&gt;kubed&lt;/a&gt; with its &lt;a href=&#34;https://appscode.com/products/kubed/v0.11.0/guides/config-syncer/intra-cluster/&#34;&gt;secret
+syncing
+feature&lt;/a&gt;. However if your use case is a wildcard certificate another approach may meet your needs.&lt;/p&gt;
+&lt;h2 id=&#34;serving-a-wildcard-to-ingress-resources-in-different-namespaces-default-ssl-certificate&#34;&gt;Serving a wildcard to ingress resources in different namespaces (default SSL certificate)&lt;/h2&gt;
+&lt;p&gt;Most ingress controllers, including &lt;a href=&#34;https://kubernetes.github.io/ingress-nginx/user-guide/tls/#default-ssl-certificate&#34;&gt;ingress-nginx&lt;/a&gt;, &lt;a href=&#34;https://docs.traefik.io/https/tls/#default-certificate&#34;&gt;Traefik&lt;/a&gt;, and &lt;a href=&#34;https://docs.konghq.com/2.0.x/configuration/#ssl_cert&#34;&gt;Kong&lt;/a&gt; support specifying a &lt;em&gt;single&lt;/em&gt; certificate to be used for ingress resources which request TLS but do not specify &lt;code&gt;tls.[].secretName&lt;/code&gt;. This is often referred to as a &amp;ldquo;default SSL certificate&amp;rdquo;. As long as this is correctly configured, ingress resources in any namespace will be able to use a single wildcard certificate. Wildcard certificates are not supported with HTTP01 validation and require DNS01.&lt;/p&gt;
+&lt;p&gt;Sample ingress snippet:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+#[...]
+spec:
+  rules:
+  - host: service.example.com
+  #[...]
+  tls:
+  - hosts:
+    - service.example.com
+    #secretName omitted to use default wildcard certificate
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;syncing-arbitrary-secrets-across-namespaces-using-kubed&#34;&gt;Syncing arbitrary secrets across namespaces using kubed&lt;/h2&gt;
+&lt;p&gt;In order for the target Secret to be synced, the Secret resource must first be
+created with the correct annotations before the creation of the Certificate,
+else the Secret will need to be edited instead. The example below shows syncing
+a certificate belonging to the &lt;code&gt;sandbox&lt;/code&gt; Certificate from the &lt;code&gt;cert-manager&lt;/code&gt;
+namespace, into the &lt;code&gt;sandbox&lt;/code&gt; namespace.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Namespace&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sandbox&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager-tls&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sandbox&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Define namespace label for kubed&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;---&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ca.crt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;tls.crt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;tls.key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sandbox-tls&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kubed.appscode.com/sync&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cert-manager-tls=sandbox&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Sync certificate to matching namespaces&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;kubernetes.io/tls&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;---&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Certificate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sandbox&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;secretName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sandbox-tls&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;commonName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sandbox&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;issuerRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;sandbox-ca&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;group&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.1-Docs: Troubleshooting</title>
+      <link>https://cert-manager.io/v1.1-docs/faq/troubleshooting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.1-docs/faq/troubleshooting/</guid>
+      <description>
+        
+        
+        &lt;p&gt;When troubleshooting cert-manager your best friend is &lt;code&gt;kubectl describe&lt;/code&gt;, this will give you information on the resources as well as recent events. It is not advised to use the logs as these are quite verbose and only should be looked at if the following steps do not provide help.&lt;/p&gt;
+&lt;p&gt;cert-manager consists of multiple custom resources that live inside your Kubernetes cluster, these resources are linked together and are often created by one another. When such an event happens it will be reflected in a Kubernetes event, you can see these per-namespace using &lt;code&gt;kubectl get event&lt;/code&gt;, or in the output of &lt;code&gt;kubectl describe&lt;/code&gt; when looking at a single resource.&lt;/p&gt;
+&lt;h2 id=&#34;troubleshooting-a-failed-certificate-request&#34;&gt;Troubleshooting a failed certificate request&lt;/h2&gt;
+&lt;p&gt;There are several resources that are involved in requesting a certificate.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+  (  +---------+  )
+  (  | Ingress |  ) Optional                                              ACME Only!
+  (  +---------+  )
+         |                                                     |
+         |   +-------------+      +--------------------+       |  +-------+       +-----------+
+         |-&amp;gt; | Certificate |----&amp;gt; | CertificateRequest | ----&amp;gt; |  | Order | ----&amp;gt; | Challenge | 
+             +-------------+      +--------------------+       |  +-------+       +-----------+
+                                                               |
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The cert-manager flow all starts at a &lt;code&gt;Certificate&lt;/code&gt; resource, you can create this yourself or your Ingress resource will to this for you if you have the &lt;a href=&#34;../../usage/ingress/&#34;&gt;correct annotations&lt;/a&gt; set.&lt;/p&gt;
+&lt;h3 id=&#34;1-checking-the-certificate-resource&#34;&gt;1. Checking the Certificate resource&lt;/h3&gt;
+&lt;p&gt;First we have to check if we have a &lt;code&gt;Certificate&lt;/code&gt; resource created in our namespace. We can get these using &lt;code&gt;kubectl get certificate&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl get certificate
+NAME                READY   AGE
+example-com-tls     False   1h
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If none is present and you plan to use the &lt;a href=&#34;../../usage/ingress/&#34;&gt;ingress-shim&lt;/a&gt;: check the ingress annotations more about that is in the &lt;a href=&#34;../../usage/ingress/#troubleshooting&#34;&gt;ingress troubleshoot guide&lt;/a&gt;.
+If you are not using the ingress-shim: check the output of the command you used to create the certificate.&lt;/p&gt;
+&lt;p&gt;If you see one with ready status &lt;code&gt;False&lt;/code&gt; you can get more info using &lt;code&gt;kubectl describe certificate&lt;/code&gt;, if the status is &lt;code&gt;True&lt;/code&gt; that means that cert-manager has successfully issued a certificate.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl describe certificate &amp;lt;certificate-name&amp;gt;
+[...]
+Status:
+  Conditions:
+    Last Transition Time:        2020-05-15T21:45:22Z
+    Message:                     Issuing certificate as Secret does not exist
+    Reason:                      DoesNotExist
+    Status:                      False
+    Type:                        Ready
+  Next Private Key Secret Name:  example-tls-wtlww
+Events:
+  Type    Reason     Age   From          Message
+  ----    ------     ----  ----          -------
+  Normal  Issuing    105s  cert-manager  Issuing certificate as Secret does not exist
+  Normal  Generated  105s  cert-manager  Stored new private key in temporary Secret resource &amp;quot;example-tls-wtlww&amp;quot;
+  Normal  Requested  104s  cert-manager  Created new CertificateRequest resource &amp;quot;example-tls-bw5t9&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Here you will find more info about the current certificate status under &lt;code&gt;Status&lt;/code&gt; as well as detailed information about what happened to it under &lt;code&gt;Events&lt;/code&gt;. Both will help you determine the current state of the certificate.
+The last status is &lt;code&gt;Created new CertificateRequest resource&lt;/code&gt;, it is worth taking a look at in which state &lt;code&gt;CertificateRequest&lt;/code&gt; is to get more info on why our &lt;code&gt;Certificate&lt;/code&gt; isn&amp;rsquo;t getting issued.&lt;/p&gt;
+&lt;h3 id=&#34;2-checking-the-certificaterequest&#34;&gt;2. Checking the &lt;code&gt;CertificateRequest&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;CertificateRequest&lt;/code&gt; resource represents a CSR in cert-manager and passes this CSR on onto the issuer.
+You can find the name of the &lt;code&gt;CertificateRequest&lt;/code&gt; in the &lt;code&gt;Certificate&lt;/code&gt; event log or using &lt;code&gt;kubectl get certificaterequest&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To get more info we again run &lt;code&gt;kubectl describe&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl describe certificaterequest &amp;lt;CertificateRequest name&amp;gt;
+API Version:  cert-manager.io/v1
+Kind:         CertificateRequest
+Spec:
+  Request: [...]
+  Issuer Ref:
+    Group:  cert-manager.io
+    Kind:   ClusterIssuer
+    Name:   letencrypt-production
+Status:
+  Conditions:
+    Last Transition Time:  2020-05-15T21:45:36Z
+    Message:               Waiting on certificate issuance from order example-tls-fqtfg-1165244518: &amp;quot;pending&amp;quot;
+    Reason:                Pending
+    Status:                False
+    Type:                  Ready
+Events:
+  Type    Reason        Age    From          Message
+  ----    ------        ----   ----          -------
+  Normal  OrderCreated  8m20s  cert-manager  Created Order resource example-tls-fqtfg-1165244518
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Here we will see any issue regarding the Issuer configuration as well as Issuer responses.&lt;/p&gt;
+&lt;h3 id=&#34;3-check-the-issuer-state&#34;&gt;3. Check the issuer state&lt;/h3&gt;
+&lt;p&gt;If in the above steps you saw an issuer not ready error you can do the same steps again for (cluster)issuer resources:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl describe issuer &amp;lt;Issuer name&amp;gt;
+$ kubectl describe clusterissuer &amp;lt;ClusterIssuer name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;These will allow you to get any error messages regarding accounts or network issues with your issuer.
+Troubleshooting ACME issuers is described in more detail in &lt;a href=&#34;../acme/&#34;&gt;Troubleshooting Issuing ACME Certificates&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;4-acme-troubleshooting&#34;&gt;4. ACME Troubleshooting&lt;/h3&gt;
+&lt;p&gt;ACME (e.g. Let&amp;rsquo;s Encrypt) issuers have 2 additional resources inside cert-manager: &lt;code&gt;Orders&lt;/code&gt; and &lt;code&gt;Challenges&lt;/code&gt;.
+Troubleshooting these is described in &lt;a href=&#34;../acme/&#34;&gt;Troubleshooting Issuing ACME Certificates&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.1-Docs: Troubleshooting Issuing ACME Certificates</title>
+      <link>https://cert-manager.io/v1.1-docs/faq/acme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.1-docs/faq/acme/</guid>
+      <description>
+        
+        
+        &lt;p&gt;When requesting ACME certificates, cert-manager will create &lt;code&gt;Order&lt;/code&gt; and
+&lt;code&gt;Challenges&lt;/code&gt; to complete the request. As such, there are more resources to
+investigate and debug if there is a problem during the process. You can read
+more about these resources in the &lt;a href=&#34;../../concepts/acme-orders-challenges/&#34;&gt;concepts
+pages&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Before you start here you should probably take a look at our &lt;a href=&#34;../troubleshooting/&#34;&gt;general troubleshooting guide&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1-troubleshooting-cluster-issuers&#34;&gt;1. Troubleshooting (Cluster)Issuers&lt;/h2&gt;
+&lt;p&gt;First of all check if the (Cluster)Issuer you&amp;rsquo;re using is in a ready state:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get issuer
+$ kubectl get clusterissuer
+NAME               READY   AGE
+letsencrypt        True    38m
+letsencrypt-http   False    32m
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you see &lt;code&gt;False&lt;/code&gt; check the status using &lt;code&gt;kubectl describe&lt;/code&gt;. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl describe issuer letsencrypt-http
+$ kubectl describe clusterissuer letsencrypt-http
+Name:         letsencrypt
+API Version:  cert-manager.io/v1
+Kind:         Issuer
+Spec:
+  Acme:
+    Email:            cert-manager@example.com
+    Private Key Secret Ref:
+      Name:  letsencrypt
+    Server:  https://acme-staging-v02.api.letsencrypt.org/directory
+Status:
+  Acme:
+  Conditions:
+    Message:               Failed to update ACME account:400 urn:ietf:params:acme:error:invalidEmail: Unable to update account :: invalid contact domain. Contact emails @example.com are forbidden
+    Reason:                ErrUpdateACMEAccount
+    Status:                False
+    Type:                  Ready
+Events:
+  Type     Reason                Age                  From          Message
+  ----     ------                ----                 ----          -------
+  Warning  ErrUpdateACMEAccount  101s &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;(&lt;/span&gt;x3 over 106s&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;)&lt;/span&gt;  cert-manager  Failed to update ACME account:400 urn:ietf:params:acme:error:invalidEmail: Unable to update account :: invalid contact domain. Contact emails @example.com are forbidden
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;common-errors&#34;&gt;Common errors&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Failed to update ACME account:400 urn:ietf:params:acme:error:invalidEmail&lt;/code&gt;: the email you specified in the Issuer configuration isn&amp;rsquo;t valid.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Error initializing issuer: Failed to register ACME account: secrets &amp;quot;acme-key&amp;quot; already exists&lt;/code&gt;: there might be a leftover account from a previous issuer that is no longer valid, you should remove the secret so it can be recreated.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-troubleshooting-orders&#34;&gt;2. Troubleshooting Orders&lt;/h2&gt;
+&lt;p&gt;When we run a describe on the &lt;code&gt;CertificateRequest&lt;/code&gt; resource we see that an &lt;code&gt;Order&lt;/code&gt; that has
+been created:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl describe certificaterequest example-com-2745722290
+...
+Events:
+  Type    Reason        Age   From          Message
+  ----    ------        ----  ----          -------
+  Normal  OrderCreated  5s    cert-manager  Created Order resource default/example-com-2745722290-439160286
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Orders are a request to an ACME instance to issue a certificate.
+By running &lt;code&gt;kubectl describe order&lt;/code&gt; on a particular order,
+information can be gleaned about failures in the process:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl describe order example-com-2745722290-439160286
+...
+Reason:
+State:         pending
+URL:           https://acme-v02.api.letsencrypt.org/acme/order/41123272/265506123
+Events:
+  Type    Reason   Age   From          Message
+  ----    ------   ----  ----          -------
+  Normal  Created  1m    cert-manager  Created Challenge resource &amp;quot;example-com-2745722290-439160286-0&amp;quot; for domain &amp;quot;test1.example.com&amp;quot;
+  Normal  Created  1m    cert-manager  Created Challenge resource &amp;quot;example-com-2745722290-439160286-1&amp;quot; for domain &amp;quot;test2.example.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Here we can see that cert-manager has created two Challenge resources to verify we control specific domains,
+a requirements of the ACME order to obtain a signed certificate.&lt;/p&gt;
+&lt;p&gt;You can then go on to run
+&lt;code&gt;kubectl describe challenge example-com-2745722290-439160286-0&lt;/code&gt; to further debug the
+progress of the Order.&lt;/p&gt;
+&lt;p&gt;Once an Order is successful, you should see an event like the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl describe order example-com-2745722290-439160286
+...
+Reason:
+State:         valid
+URL:           https://acme-v02.api.letsencrypt.org/acme/order/41123272/265506123
+Events:
+  Type    Reason      Age   From          Message
+  ----    ------      ----  ----          -------
+  Normal  Created     72s   cert-manager  Created Challenge resource &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-com-2745722290-439160286-0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; domain &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;test1.example.com&amp;#34;&lt;/span&gt;
+  Normal  Created     72s   cert-manager  Created Challenge resource &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-com-2745722290-439160286-1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; domain &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;test2.example.com&amp;#34;&lt;/span&gt;
+  Normal  OrderValid  4s    cert-manager  Order completed successfully
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the Order is not completing successfully, you can debug the challenges
+for the Order by running &lt;code&gt;kubectl describe&lt;/code&gt; on the &lt;code&gt;Challenge&lt;/code&gt; resource which is described in the following steps.&lt;/p&gt;
+&lt;h2 id=&#34;3-troubleshooting-challenges&#34;&gt;3. Troubleshooting Challenges&lt;/h2&gt;
+&lt;p&gt;In order to determine why an ACME Order is not being finished, we can debug
+using the &lt;code&gt;Challenge&lt;/code&gt; resources that cert-manager has created.&lt;/p&gt;
+&lt;p&gt;In order to determine which &lt;code&gt;Challenge&lt;/code&gt; is failing, you can run
+&lt;code&gt;kubectl get challenges&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl get challenges
+...
+NAME                                 STATE     DOMAIN            REASON                                     AGE
+example-com-2745722290-4391602865-0  pending   example.com       Waiting for dns-01 challenge propagation   22s
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This shows that the challenge has been presented using the DNS01 solver
+successfully and now cert-manager is waiting for the &amp;lsquo;self check&amp;rsquo; to pass.&lt;/p&gt;
+&lt;p&gt;You can get more information about the challenge and it&amp;rsquo;s lifecycle by using &lt;code&gt;kubectl describe&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl describe challenge example-com-2745722290-4391602865-0
+...
+Status:
+  Presented:   &lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt;
+  Processing:  &lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt;
+  Reason:      Waiting &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; dns-01 challenge propagation
+  State:       pending
+Events:
+  Type    Reason     Age   From          Message
+  ----    ------     ----  ----          -------
+  Normal  Started    19s   cert-manager  Challenge scheduled &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; processing
+  Normal  Presented  16s   cert-manager  Presented challenge using dns-01 challenge mechanism
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Progress about the state of each challenge will be recorded either as Events
+or on the Challenge&amp;rsquo;s &lt;code&gt;status&lt;/code&gt; block (as shown above).&lt;/p&gt;
+&lt;p&gt;In case of DNS01 you will find any errors from your DNS provider here.&lt;/p&gt;
+&lt;p&gt;Both HTTP01 and DNS01 go through a &amp;ldquo;self-check&amp;rdquo; first before cert-manager presents the challenge to the ACME provider.
+This is done not to overload the ACME provider with failed challenges due to DNS or loadbalancer propagations.
+The status of this can be found in the Status block of the describe:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;$ kubectl describe challenge
+[...]
+Status:
+  Presented:   true
+  Processing:  true
+  Reason:      Waiting for http-01 challenge propagation: failed to perform self check GET request &#39;http://example.com/.well-known/acme-challenge/_fgdLz0i3TFiZW4LBjuhjgd5nTOkaMBhxYmTY&#39;: Get &amp;quot;http://example.com/.well-known/acme-challenge/_fgdLz0i3TFiZW4LBjuhjgd5nTOkaMBhxYmTY: remote error: tls: handshake failure
+  State:       pending
+[...]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this example our HTTP01 check fails due a network issue.
+You will also see any errors coming from your DNS provider here.&lt;/p&gt;
+&lt;h3 id=&#34;http01-troubleshooting&#34;&gt;HTTP01 troubleshooting&lt;/h3&gt;
+&lt;p&gt;First of all check if you can see the challenge URL from the public internet, if this does not work check your Ingress and firewall configuration as well as the service and pod cert-manager created to solve the ACME challenge.
+If this does work check if your cluster can see it too. It is important to test this from inside a Pod. If you get a connection error it is suggested to check the cluster&amp;rsquo;s network configuration.
+If you receive a &lt;code&gt;tls: handshake failure&lt;/code&gt;, try setting the annotation &lt;code&gt;cert-manager.io/issue-temporary-certificate: &amp;quot;true&amp;quot;&lt;/code&gt; on the Ingress or Certificate resource. This will issue a temporary self signed certificate for the ingress controller to use before the actual certificate is issued.
+If you still are having issues, there may be an issue with your ingress controller handling multiple resources for the same hostname, in this case, the annotation &lt;code&gt;acme.cert-manager.io/http01-edit-in-place: &amp;quot;true&amp;quot;&lt;/code&gt; is likely required.&lt;/p&gt;
+&lt;p&gt;For example when using GKE with the Google Cloud Loadbalancer it is recommended to set:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cert-manager.io/issue-temporary-certificate: &amp;quot;true&amp;quot;
+acme.cert-manager.io/http01-edit-in-place: &amp;quot;true&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This will allow the Google Cloud Loadbalancer to propagate a HTTPS endpoint correctly with a temporary certificate, the &lt;code&gt;http01-edit-in-place&lt;/code&gt; part will prevent GKE from assigning a 2nd IP address for the challenge endpoint.&lt;/p&gt;
+&lt;h4 id=&#34;got-404-status-code&#34;&gt;Got 404 status code&lt;/h4&gt;
+&lt;p&gt;If your challenge self-check fails with a 404 not found error. Make sure to check the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;you can access the URL from the public internet&lt;/li&gt;
+&lt;li&gt;the ACME solver pod is up and running&lt;/li&gt;
+&lt;li&gt;use &lt;code&gt;kubectl describe ingress&lt;/code&gt; to check the status of the HTTP01 solver ingress. (unless you use &lt;code&gt;acme.cert-manager.io/http01-edit-in-place&lt;/code&gt;, then check the same ingress as your domain)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dns01-troubleshooting&#34;&gt;DNS01 troubleshooting&lt;/h3&gt;
+&lt;p&gt;If you see no error events about your DNS provider you can check the following
+Check if you can see the &lt;code&gt;_acme_challenge.domain&lt;/code&gt; TXT DNS record from the public internet, or in your DNS provider&amp;rsquo;s interface.
+cert-manager will check if a DNS record has been propagated by querying the cluster&amp;rsquo;s DNS solver. If you are able to see it from the public internet but not from inside the cluster you might want to change &lt;a href=&#34;../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check&#34;&gt;the DNS server for self-check&lt;/a&gt; as some cloud providers overwrite DNS internally.&lt;/p&gt;
+&lt;h4 id=&#34;cert-manager-identifies-the-wrong-zone-for-your-domain-name&#34;&gt;cert-manager identifies the wrong zone for your domain name&lt;/h4&gt;
+&lt;p&gt;cert-manager by default uses SOA (Start of Authority) records to determine which zone name to use at your DNS provider.
+Some DNS resolvers will filter this information, if this is the case cert-manager cannot determine the zone and it is advised to &lt;a href=&#34;../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check&#34;&gt;change the DNS server for DNS01 self-checks&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you use &lt;code&gt;dnsmasq&lt;/code&gt; as your DNS server, this may occur if you use the &lt;a href=&#34;http://www.thekelleys.org.uk/dnsmasq/docs/setup.html&#34;&gt;&lt;code&gt;--filterwin2k&lt;/code&gt; flag&lt;/a&gt;.
+In &lt;a href=&#34;https://openwrt.org/docs/guide-user/base-system/dhcp#all_options&#34;&gt;OpenWRT there is a &lt;code&gt;filterwin2k&lt;/code&gt; configuration option&lt;/a&gt;.
+And in &lt;a href=&#34;https://github.com/openwrt/luci/blob/15757dd5b18f9e00ba3c9b38af4d46702a31fe33/modules/luci-mod-network/htdocs/luci-static/resources/view/network/dhcp.js#L217-L219&#34;&gt;LuCI there is a &amp;ldquo;Filter useless&amp;rdquo; option&lt;/a&gt;.
+By enabling this flag, &lt;code&gt;dnsmasq&lt;/code&gt; drops all &lt;code&gt;SOA&lt;/code&gt; records.&lt;/p&gt;
+&lt;h2 id=&#34;march-2020-let-s-encrypt-caa-rechecking-bug&#34;&gt;March 2020 Let&amp;rsquo;s Encrypt CAA Rechecking Bug&lt;/h2&gt;
+&lt;p&gt;Following the &lt;a href=&#34;https://community.letsencrypt.org/t/revoking-certain-certificates-on-march-4/114864&#34;&gt;announcement on March 4&lt;/a&gt; Let&amp;rsquo;s Encrypt will be revoking a number of certificates due to a bug in the way they validate CAA records, we have created a tool to analyse your existing cert-manager managed certificates and compare their serial numbers to the publicised list of revoked certificates.
+It&amp;rsquo;s advised that all users of Let&amp;rsquo;s Encrypt &amp;amp; cert-manager run a check using this tool to ensure they do not experience any invalid certificate errors in clusters.
+You can find a copy of the checker tool here: &lt;a href=&#34;https://github.com/jetstack/letsencrypt-caa-bug-checker&#34;&gt;https://github.com/jetstack/letsencrypt-caa-bug-checker&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.1-Docs: Webhook</title>
+      <link>https://cert-manager.io/v1.1-docs/faq/webhook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.1-docs/faq/webhook/</guid>
+      <description>
+        
+        
+        &lt;p&gt;You may encounter errors when creating resources that the webhook is unreachable
+and as such no cert-manager resources can be created or updated. In this case,
+it is advised to check the
+&lt;a href=&#34;../../installation/compatibility/&#34;&gt;compatibility&lt;/a&gt; of
+your environment and take necessary action outlined there.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.1-Docs: Writing “cert-manager”</title>
+      <link>https://cert-manager.io/v1.1-docs/faq/style/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.1-docs/faq/style/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager should always be written in lowercase. Even when it would normally be
+capitalized such as in titles or at the start of sentences. A hyphen should always be
+used between the words, don&amp;rsquo;t replace it with a space or remove it.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
