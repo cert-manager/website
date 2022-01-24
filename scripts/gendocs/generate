@@ -53,6 +53,10 @@ echo "+++ Cloning cert-manager repository..."
 git clone "https://github.com/jetstack/cert-manager.git" "$gitdir"
 cd "$gitdir"
 
+# set arg1 to 1 to generate CLI reference for older versions
+# current and next will always be generated
+gencliversions="${1:-0}"
+
 # genversion takes two arguments (branch in cert-manager repo and a directory in
 # this repo under content/en) and generates API reference docs from cert-manager
 # branch for the path in this repo.
@@ -60,15 +64,17 @@ genversion() {
 	checkout "$1"
 	gendocs "$2"
 
-  genclireference "$2" "cmd/acmesolver" "acmesolver"
-  genclireference "$2" "cmd/cainjector" "cainjector"
-  genclireference "$2" "cmd/ctl" "cmctl"
-  genclireference "$2" "cmd/controller" "controller"
-  genclireference "$2" "cmd/webhook" "webhook"
+  if [ "$gencliversions" == 1 ]; then
+    genclireference "$2" "cmd/acmesolver" "acmesolver"
+    genclireference "$2" "cmd/cainjector" "cainjector"
+    genclireference "$2" "cmd/ctl" "cmctl"
+    genclireference "$2" "cmd/controller" "controller"
+    genclireference "$2" "cmd/webhook" "webhook"
 
-  # if any of the above steps succeeded copy over the index file
-  if [ -d "$REPO_ROOT/content/en/$2/cli" ]; then
-    cp "$REPO_ROOT/content/en/docs/cli/_index.md" "${REPO_ROOT}/content/en/$2/cli/"
+    # if any of the above steps succeeded copy over the index file
+    if [ -d "$REPO_ROOT/content/en/$2/cli" ]; then
+      cp "$REPO_ROOT/content/en/docs/cli/_index.md" "${REPO_ROOT}/content/en/$2/cli/"
+    fi
   fi
 }
 
