@@ -44,7 +44,6 @@ cypress/screenshots
 .eslintcache
 
 .env
-.env*
 
 sitemap.xml
 sitemap.xml.gz
