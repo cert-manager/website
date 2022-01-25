@@ -59,7 +59,6 @@ function Enterprise({ router }) {
               </div>
             </div>
           </div>
-          <BottomCta content={page.bottomCta} className="mt-14 lg:mt-24" />
         </div>
       </div>
     </>

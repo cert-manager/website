@@ -68,7 +68,7 @@ function Home({ router }) {
                   <span>&nbsp;was created by </span>
                   <Link href="https://www.jetstack.io/">
                     <a>
-                      <JetstackLogo className="mx-auto md:inline-block" />
+                      <JetstackLogo className="mx-auto md:inline-block w-32" />
                     </a>
                   </Link>
                   <span className="block mt-5">It was proudly <Link href="">donated</Link> to CNCF in 2020.</span>
