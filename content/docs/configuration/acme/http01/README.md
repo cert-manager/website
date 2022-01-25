@@ -2,7 +2,7 @@
 title: HTTP01
 ---
 
-<div class="info">
+<div className="info">
 
 📌 This page focuses on solving ACME HTTP-01 challenges. If you are looking for
 how to automatically create Certificate resources by annotating Ingress or
@@ -73,7 +73,7 @@ This mode should be avoided when using ingress controllers that expose a single
 IP for all ingress resources, as it can create compatibility problems with
 certain ingress-controller specific annotations.
 
-### `serviceType` {#ingress-service-type}
+### `serviceType`
 
 In rare cases it might be not possible/desired to use `NodePort` as type for the
 HTTP01 challenge response service, e.g. because of Kubernetes limit
@@ -172,7 +172,7 @@ improvements over the Ingress API.
 
 [gwapi]: https://gateway-api.sigs.k8s.io
 
-<div class="info"
+<div className="info">
 📌 This feature requires the installation of the Gateway API CRDs and passing a
 feature flag to the cert-manager controller.
 
@@ -311,7 +311,7 @@ spec:
 
 After the Certificate is issued, the HTTPRoute is deleted.
 
-### `labels` {#gatewayhttproute-labels}
+### `labels`
 
 These labels are copied into the temporary HTTPRoute created by cert-manager for
 solving the HTTP-01 challenge. These labels must match one of the Gateway
@@ -320,7 +320,7 @@ resources on your cluster. The matched Gateway have a listener on port 80.
 Note that when the labels do not match any Gateway on your cluster, cert-manager
 will create the temporary HTTPRoute challenge and nothing will happen.
 
-### `serviceType` {#gatewayhttproute-service-type}
+### `serviceType`
 
 This field has the same meaning as the
 [`http01.ingress.serviceType`](#ingress-service-type).

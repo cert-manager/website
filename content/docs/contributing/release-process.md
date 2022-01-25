@@ -74,6 +74,7 @@ following conditions:
    [1]: https://cert-manager.io/docs/contributing/release-process/#prerequisites
    [2]: https://console.cloud.google.com/?project=cert-manager-release
    ```
+
 </div>
 
 First, ensure that you have all the tools required to perform a cert-manager
@@ -150,7 +151,6 @@ on the top-right corner of this page if a step is missing or if it is outdated.
    | final release                      | `v1.3.0`           |
    | patch release (or "point release") | `v1.3.1`           |
 
-    </br>
 
 2. **(final release only)** Make sure that a PR with the new upgrade document is
    ready to be merged on
@@ -230,7 +230,6 @@ on the top-right corner of this page if a step is missing or if it is outdated.
       | `BRANCH`          | Name of your release branch             |
       | `RELEASE_VERSION` | The git tag without the leading `v`     |
 
-       </br>
 
       Examples for each release type (e.g., initial alpha release):
 
@@ -245,7 +244,6 @@ on the top-right corner of this page if a step is missing or if it is outdated.
       | `BRANCH`          | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
       | `RELEASE_VERSION` | `1.3.0-alpha.0`  | `1.3.0-alpha.1`  | `1.3.0-beta.0`   | `1.3.0`       | `1.3.1`       |
 
-       </br>
 
       > \*The git tag of the "previous" release (`START_REV`) depends on which
       > type of release you count on doing. Look at the above examples to
@@ -382,12 +380,17 @@ on the top-right corner of this page if a step is missing or if it is outdated.
       cmrel publish --nomock --skip-signing --release-name "$CMREL_RELEASE_NAME"
       ```
 
-       <div class="pageinfo pageinfo-warning"><p>
-       ⏰ Upon completion there will be:
-
-      1. [A draft release of cert-manager on GitHub](https://github.com/jetstack/cert-manager/releases).
-      2. [A pull request containing the new Helm chart](https://github.com/jetstack/jetstack-charts/pulls).
-      </p></div>
+      <div class="info">
+         ⏰ Upon completion there will be:
+         <ol>
+            <li>
+               <a href="https://github.com/jetstack/cert-manager/releases">A draft release of cert-manager on GitHub</a>
+            </li>
+            <li>
+               <a href="https://github.com/jetstack/cert-manager/releases">A pull request containing the new Helm chart</a>
+            </li>
+         </ol>
+      </div>
 
    5. While the build is running, send a fourth Slack message in reply to the
    first message:
