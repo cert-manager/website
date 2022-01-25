@@ -13,7 +13,7 @@ releases.
 Each release is supported for a period of four months, and we aim to create a
 new release every two months.
 
-## Supported releases {#supported-releases}
+## Supported releases
 
 | Release | Release Date | End of Life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 | ------- | :----------: | :----------: | :--------------------------------: | :-------------------------------: |
@@ -107,7 +107,7 @@ branch is actually supported.
                                                        April 1, 2021
 ```
 
-### Technical support {#technical-support}
+### Technical support
 
 Technical assistance is offered on a best-effort basis for supported releases
 only. You can request support from the community on
@@ -118,7 +118,7 @@ Google group.
 [discussions]: https://github.com/jetstack/cert-manager/discussions
 [group]: https://groups.google.com/g/cert-manager-dev
 
-### Security and bug fixes {#bug-fixes-support}
+### Security and bug fixes
 
 We back-port important bug fixes — including security fixes — to all currently
 supported releases.
@@ -127,12 +127,12 @@ supported releases.
 - [Critical bugs](#critical-bugs),
 - [Long-standing bugs](#long-standing-bugs).
 
-#### Security issues {#security-issues}
+#### Security issues
 
 **Security issues** are fixed as soon as possible. They get back-ported to the
 last two releases, and a new patch release is immediately created for them.
 
-#### Critical bugs {#critical-bugs}
+#### Critical bugs
 
 **Critical bugs** include both regression bugs as well as upgrade bugs.
 
@@ -149,7 +149,7 @@ this category.
 Fixes for critical bugs are (usually) immediately back-ported by creating a new
 patch release for the two currently supported releases.
 
-#### Long-standing bugs {#long-standing-bugs}
+#### Long-standing bugs
 
 **Long-standing bug**: sometimes a bug exists for a long time, and may have
 known workarounds. [#3444][] is an example of a long-standing bug.
@@ -158,7 +158,7 @@ Where we feel that back-porting would be difficult or might be a stability risk
 to clusters running cert-manager, we'll make the fix in a major release but
 avoid back-porting the fix.
 
-#### Breaking changes {#breaking-changes}
+#### Breaking changes
 
 Breaking changes are changes that intentionally break the cert-manager
 Kubernetes API or the command line flags. We avoid making breaking changes where
@@ -183,7 +183,7 @@ possible, and where they're required we'll give as much notice as possible.
   https://github.com/jetstack/cert-manager/issues/3644
   "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
 
-## How we determine supported Kubernetes versions {#kubernetes-supported-versions}
+## How we determine supported Kubernetes versions
 
 The list of supported Kubernetes versions displayed in the
 [Supported Releases](#supported-releases) section depends on what the
