@@ -9,6 +9,7 @@ const filterHits = (item) => item.path.includes('/docs')
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import VersionSelect from './docs/VersionSelect'
 import CertManagerLogo from './snippets/CertManagerLogo'
 import { meta as site } from '../content/pages/site.mdx'
 
@@ -126,6 +127,11 @@ function DesktopNavigation({ active, className = '' }) {
                 {site.navigation.cta.text}
               </a>
             </Link>
+          </li>
+        )}
+        {active === '/docs' && (
+          <li>
+            <VersionSelect />
           </li>
         )}
       </ul>

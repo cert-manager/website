@@ -8,6 +8,7 @@ import Navigation from './Navigation'
 import AlgoliaSearch from 'components/AlgoliaSearch'
 import AlgoliaClient from 'lib/algolia-client'
 import { indexName } from 'lib/instantsearch'
+import VersionSelect from '../VersionSelect'
 const searchClient = new AlgoliaClient()
 const filterHits = (item) => item.path.includes('/docs')
 
@@ -31,6 +32,9 @@ export default function Sidebar({ routes }) {
           <aside className="">
             <ClickAwayListener onClickAway={() => setShowSearchResults(false)}>
               <div>
+                <div className='lg:hidden mb-8'>
+                  <VersionSelect />
+                </div>
                 <AlgoliaSearch
                   indexName={indexName}
                   searchClient={searchClient}
