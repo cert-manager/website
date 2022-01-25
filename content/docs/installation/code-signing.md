@@ -27,11 +27,11 @@ same underlying key.
 <!--
 TODO: uncomment this when cosign signing is in place. The warning doesn't have much value
 if we're not advertising the existence of other public keys.
-{{% alert title="Warning" color="warning" %}}
+<div class="alert">
 Helm requires the use of PGP for verification; the key format is different.
 
 Trying to use PEM encoded public keys will fail.
-{{% /alert %}}
+<div>
 -->
 
 For all cert-manager versions from `v1.6.0` and later, Helm charts are signed

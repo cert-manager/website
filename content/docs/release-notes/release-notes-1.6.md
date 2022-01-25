@@ -15,7 +15,7 @@ will not be able to deploy them after upgrading. Our new `cmctl` utility or old
 `kubectl cert-manager` plugin can [convert](../../usage/cmctl/#convert) old
 manifests to `v1` for you.
 
-{{% pageinfo color="warning" %}}
+<div class="info">
 
 ⛔️ If you are upgrading cert-manager on a cluster which has previously had
 cert-manager < `v1.0.0`, you will need to ensure that all cert-manager custom
@@ -26,7 +26,7 @@ This is explained in more detail in the
 [Upgrading existing cert-manager resources](../../installation/upgrading/remove-deprecated-apis/#upgrading-existing-cert-manager-resources)
 page.
 
-{{% /pageinfo %}}
+</div>
 
 ### JKS Keystore Minimum Password Length
 

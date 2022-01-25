@@ -58,7 +58,7 @@ We have deprecated the following cert-manager APIs:
 
 These APIs will be removed in cert-manager 1.6.
 
-{{% pageinfo color="warning" %}}
+<div class="info">
 
 ⛔️ If you are upgrading cert-manager on a cluster which has previously had
 cert-manager < `v1.0.0`, you will need to ensure that all cert-manager custom
@@ -69,7 +69,7 @@ This is explained in more detail in the
 [Upgrading existing cert-manager resources](../../installation/upgrading/remove-deprecated-apis/#upgrading-existing-cert-manager-resources)
 page.
 
-{{% /pageinfo %}}
+</div>
 
 This change was made in the cert-manager PR [#4021][].
 
@@ -95,12 +95,12 @@ spec:
     runAsNonRoot: true
 ```
 
-{{% pageinfo color="warning" %}}
+<div class="info">
 
 ⛔️ If you are using custom containers that run as root with the Helm chart, you
 will need to set this back to `false`.
 
-{{% /pageinfo %}}
+</div>
 
 Implemented in the cert-manager PR [#4036][].
 
@@ -120,12 +120,12 @@ CA, since cert-manager may not be aware of it.
 
 Fixed in the cert-manager PRs [#3982][], [#3983][], and [#3985][].
 
-{{% pageinfo color="warning" %}}
+<div class="info">
 
 ⛔️ You may need to adjust systems that consume the `ca.crt` from Secrets
 managed by cert-manager with the CA issuer.
 
-{{% /pageinfo %}}
+</div>
 
 [#3982]:
   https://github.com/jetstack/cert-manager/pull/3982
@@ -145,13 +145,13 @@ This change was necessary to fix a bug where users of the Vault issuer would see
 a clash between the default renewal duration of 30 days and the duration of
 certificates issued by the Vault PKI.
 
-{{% pageinfo color="warning" %}}
+<div class="info">
 
 ⛔️ If you were relying on the default renewal happening 30 days before expiry,
 we would advise setting `renewBefore` to 30 days (`720h`) to keep the old
 behavior.
 
-{{% /pageinfo %}}
+</div>
 
 Fixed in the cert-manager PR [#4092][].
 

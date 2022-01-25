@@ -18,7 +18,7 @@ releases and the timeline for future releases, take a look at the
 About "alert" and "pageinfo": https://www.docsy.dev/docs/adding-content/shortcodes/#shortcode-helpers
 -->
 
-{{% pageinfo color="warning" %}}
+<div class="warning">
 
 ⛔️ Do not proceed with the release process if you do not meet all of the
 following conditions:
@@ -74,8 +74,7 @@ following conditions:
    [1]: https://cert-manager.io/docs/contributing/release-process/#prerequisites
    [2]: https://console.cloud.google.com/?project=cert-manager-release
    ```
-
-{{% /pageinfo %}}
+</div>
 
 First, ensure that you have all the tools required to perform a cert-manager
 release:
@@ -134,9 +133,10 @@ some of these goals are missed, in order to keep up release velocity.
 
 ### Process for releasing a version
 
-{{% pageinfo color="info" %}} 🔰 Please click on the **Edit this page** button
+<div class="info">
+🔰 Please click on the **Edit this page** button
 on the top-right corner of this page if a step is missing or if it is outdated.
-{{% /pageinfo %}}
+</div>
 
 1. Make sure to note which type of release you are doing. That will be helpful
    in the next steps.

@@ -5,14 +5,14 @@ description: "FEATURE STATE: cert-manager 1.5 [alpha]"
 
 **FEATURE STATE**: cert-manager 1.5 [alpha]
 
-{{% pageinfo color="info" %}}
+<div class="info">
 
 📌 This page focuses on automatically creating Certificate resources by
 annotating Gateway resource. If you are looking for using an ACME Issuer along
 with HTTP-01 challenges using the Gateway API, see
 [ACME HTTP-01](/docs/configuration/acme/http01/).
 
-{{% /pageinfo %}}
+</div>
 
 cert-manager can generate TLS certificates for Gateway resources. This is
 configured by adding annotations to a Gateway and is similar to the process for
@@ -41,7 +41,7 @@ HTTPRoute for Istio][istio#31747]).
 [istio#31747]: https://github.com/istio/istio/issues/31747
 [gateway-api#577]: https://github.com/kubernetes-sigs/gateway-api/issues/577
 
-{{% pageinfo color="info" %}}
+<div class="info">
 
 📌 This feature requires the installation of the Gateway API CRDs and passing a
 feature flag to the cert-manager controller.
@@ -79,7 +79,7 @@ following command:
 kubectl rollout restart deployment cert-manager -n cert-manager
 ```
 
-{{% /pageinfo %}}
+</div>
 
 The annotations `cert-manager.io/issuer` or `cert-manager.io/cluster-issuer`
 tell cert-manager to create a Certificate for a Gateway. For example, the
