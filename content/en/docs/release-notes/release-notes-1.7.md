@@ -9,43 +9,46 @@ type: "docs"
 
 ⚠ Following their deprecation in version 1.5, the cert-manager API versions v1alpha2, v1alpha3, and v1beta1 have been removed.
 You must ensure that all cert-manager custom resources are stored in etcd at version v1
-and that all cert-manager `CustomResourceDefinition`s have only v1 as the stored version.
+and that all cert-manager `CustomResourceDefinition`s have only v1 as the stored version
+**before** upgrading.
 
 Since release 1.7, `cmctl` can automatically migrate any deprecated API resources.
-Please download `cmctl-v1.7.0-beta.0` and read [Removing Deprecated API Resources]
+Please download `cmctl-v1.7.0` from [here](https://github.com/jetstack/cert-manager/releases/tag/v1.7.0) and read [Removing Deprecated API Resources]
 for full instructions.
 
 [Removing Deprecated API Resources]: https://cert-manager.io/docs/installation/upgrading/remove-deprecated-apis/
 
 ## Major Themes
 
-### Additional Certificate Output Formats
-
-`additionalOutputFormats` is a field on the Certificate `spec` that allows
-specifying additional supplementary formats of issued certificates and their
-private key. There are currently two supported additional output formats:
-`CombinedPEM` and `DER`. Both output formats can be specified on the same
-Certificate.
-Read [Additional Certificate Output Formats] for more details and
-thanks to [@seuf](https://github.com/seuf) for getting this across the line!
-
-[Additional Certificate Output Formats]: ../../usage/certificate/#additional-certificate-output-formats
-
 ### Removal of Deprecated APIs
 
-In 1.7 the cert-manager API versions v1alpha2, v1alpha3, and v1beta1 have been removed from the custom resource definitions (CRDs).
-You will notice that the YAML manifest files are much smaller as a result.
-These APIs have been deprecated since 1.5.
+In 1.7 the cert-manager API versions v1alpha2, v1alpha3, and v1beta1, that were deprecated in 1.5,
+have been removed from the custom resource definitions (CRDs).
+As a result, you will notice that the YAML manifest files are much smaller.
 
 In this release we have added a new sub-command to the cert-manager CLI (`cmctl upgrade migrate-api-version`),
 which you SHOULD run BEFORE upgrading cert-manager to 1.7.
 Please read [Removing Deprecated API Resources] for full instructions.
 
+### Additional Certificate Output Formats
+
+`additionalOutputFormats` is a field on the Certificate `spec` that allows
+specifying additional supplementary formats of issued certificates and their
+private key. There are currently two supported additional output formats:
+`CombinedPEM` (the PEM-encoded private key followed by the certificate chain)
+and `DER` (the DER-encoded private key only). Any combination of output formats
+can be requested for the same certificate.
+Read [Additional Certificate Output Formats] for more details and
+thanks to [@seuf](https://github.com/seuf) for getting this across the line!
+
+[Additional Certificate Output Formats]: ../../usage/certificate/#additional-certificate-output-formats
+
 ### Server-Side Apply
 
 This is the first version of cert-manager which relies on [Server-Side Apply].
-We are using it to properly manage the annotations and labels on the TLS Secret.
-For this reason cert-manager 1.7 requires at least Kubernetes 1.18.
+We use it to properly manage the annotations and labels on TLS secrets.
+For this reason cert-manager 1.7 requires at least Kubernetes 1.18 (see
+[Supported Releases](https://cert-manager.io/docs/installation/supported-releases/) for further compatibility details).
 
 [Server-Side Apply]: https://kubernetes.io/docs/reference/using-api/server-side-apply/
 
@@ -57,16 +60,21 @@ you can now modify the webhook Deployment to mount a ConfigMap
 containing a configuration file.
 Read the [WebhookConfiguration Schema] for more information.
 
-In future releases we will introduce configuration files for the other cert-manager components: controller-manager and cainjector.
+In future releases we will introduce configuration files for the other cert-manager components:
+the controller and the cainjector.
 
 [WebhookConfiguration Schema]: https://cert-manager.io/next-docs/reference/api-docs/#webhook.config.cert-manager.io/v1alpha1.WebhookConfiguration
 
-### Non-bazel Development
+### Developing cert-manager Without Bazel
 
-We aim to stop using `bazel` for building and testing cert-manager.
-It is too difficult for new contributors and frustrates many of our regular contributors.
-So we have been fixing the cert-manager Makefile and trying to make it possible to run the unit-tests
-with `go test ./cmd/... ./internal/... ./pkg/...` etc.
+In a future release, we'll remove the use of `bazel` for building and testing cert-manager,
+with the aim of making it as easy as possible for anyone to contribute and to get involved
+with the cert-manager project.
+
+The [work is ongoing][Bazel -> Make Migration Tracker], but for now we've ensured that cert-manager 1.7 can be built with `go build`,
+and that all unit tests can be run with `go test ./cmd/... ./internal/... ./pkg/...`.
+
+[Bazel -> Make Migration Tracker]: https://github.com/jetstack/cert-manager/issues/4712
 
 ## Community
 
@@ -81,7 +89,9 @@ Thanks again to all open-source contributors with commits in this release, inclu
 - [@thirdeyenick](https://github.com/thirdeyenick)
 
 And thanks as usual to [coderanger](https://github.com/coderanger) for helping people
-out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
+out on the [`#cert-manager` Slack channel]; it's a huge help and much appreciated.
+
+[`#cert-manager` Slack channel]: ../../contributing/#slack
 
 # Changelog since v1.6.1
 
