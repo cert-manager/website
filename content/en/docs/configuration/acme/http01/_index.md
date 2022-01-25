@@ -332,3 +332,31 @@ will create the temporary HTTPRoute challenge and nothing will happen.
 
 This field has the same meaning as the
 [`http01.ingress.serviceType`](#ingress-service-type).
+
+
+## Setting Nameservers for HTTP-01 solver propagation checks
+
+cert-manager will perform reachability tests before attempting a HTT01
+challenge.  By default cert-manager will use the recursive nameservers taken
+from `/etc/resolv.conf` to query the challenge URL.
+
+If this is not desired (for example with split-horizon DNS), the cert-manager 
+controller exposes a flag that allows you alter this behavior:
+
+`--acme-http01-solver-nameservers` Comma separated string with host and port of the
+recursive nameservers cert-manager should query.
+
+
+Example usage:
+```bash
+--acme-http01-solver-nameservers="8.8.8.8:53,1.1.1.1:53"
+```
+
+If you're using the `cert-manager` helm chart, you can set recursive nameservers
+through `.Values.extraArgs` or at the command at helm install/upgrade time
+with `--set`:
+
+```bash
+--set 'extraArgs={--acme-http01-solver-nameservers=8.8.8.8:53\,1.1.1.1:53}'
+```
+
