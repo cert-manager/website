@@ -1,3 +1,0 @@
-{{ $file := (printf "%s/%s" (.Page.Path) (.Get "file")) | readFile }}
-{{ $lang := .Get "language" }}
-{{ (print "```" $lang "\n" $file "\n```") | markdownify }}

@@ -1,28 +1,86 @@
 {
-  "name": "tech-doc-hugo",
-  "version": "0.0.1",
-  "description": "Hugo theme for technical documentation.",
-  "main": "none.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bep/tech-doc-hugo.git"
-  },
-  "author": "",
+  "name": "cert-manager.io",
+  "version": "2.0.0",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bep/tech-doc-hugo/issues"
+  "author": "",
+  "contributors": [
+    {
+      "name": "Chris Mejlak",
+      "email": "chris@zentered.co",
+      "url": "https://zentered.co"
+    },
+    {
+      "name": "Patrick Heneise",
+      "email": "patrick@zentered.co",
+      "url": "https://zentered.co"
+    }
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "postbuild": "run-p generate:sitemap",
+    "generate:sitemap": "next-sitemap",
+    "export": "next export",
+    "start": "next start",
+    "lint": "next lint",
+    "markdown-link-check": "find content/docs -type f -name '*.md' | xargs -L1 markdown-link-check --quiet --config markdown-link-check.json"
   },
-  "homepage": "https://github.com/bep/tech-doc-hugo#readme",
+  "lint-staged": {
+    "*.{scss}": [
+      "stylelint --fix"
+    ],
+    "*.{js,json,jsx,md,mdx}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,md,mdx}": [
+      "eslint --cache --fix"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@zentered/next-product-docs": "0.0.31",
+    "algoliasearch": "^4.12.0",
+    "classnames": "^2.3.1",
+    "next": "12.0.8",
+    "next-seo": "^4.29.0",
+    "react": "17.0.2",
+    "react-click-away-listener": "^2.0.5",
+    "react-dom": "17.0.2",
+    "react-instantsearch-dom": "^6.21.1",
+    "react-scroll": "^1.8.4",
+    "sass": "^1.49.0"
+  },
   "devDependencies": {
-    "@algolia/cli": "^4.0.8",
-    "autoprefixer": "^9.4.6",
-    "hugo-algolia": "git+https://git@github.com/meyskens/hugo-algolia.git#bf56cc21e81d6344338e807d143e64b446613b7e",
-    "markdown-spellcheck": "git+https://git@github.com/lukeapage/node-markdown-spellcheck.git#78ad8e3c21fe982a1e4d1fc1fbf421fb57c9739b",
-    "postcss-cli": "^7.1.0",
-    "remark-cli": "^9.0.0",
-    "remark-lint": "^8.0.0"
+    "esbuild": "^0.14.13",
+    "eslint": "8.7.0",
+    "eslint-config-next": "12.0.8",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-markdown": "2.2.1",
+    "eslint-plugin-mdx": "^1.16.0",
+    "eslint-plugin-react": "^7.28.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.1",
+    "markdown-link-check": "^3.9.2",
+    "markdown-spellcheck": "^1.3.1",
+    "next-sitemap": "^2.0.5",
+    "npm-run-all": "^4.1.5",
+    "pkg-dir": "^6.0.1",
+    "prettier": "^2.5.1",
+    "sass": "^1.49.0",
+    "stylelint": "^14.3.0",
+    "stylelint-config-standard": "^24.0.0",
+    "windicss-webpack-plugin": "^1.6.2"
   }
 }
