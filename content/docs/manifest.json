@@ -266,8 +266,28 @@
               "path": "/docs/tutorials/backup.md"
             },
             {
+              "title": "Migrating from Kube-LEGO",
+              "path": "/docs/tutorials/acme/migrating-from-kube-lego.md"
+            },
+            {
+              "title": "DNS Validation",
+              "path": "/docs/tutorials/acme/dns-validation.md"
+            },
+            {
+              "title": "HTTP Validation",
+              "path": "/docs/tutorials/acme/http-validation.md"
+            },
+            {
+              "title": "Pomerium Ingress",
+              "path": "/docs/tutorials/acme/pomerium-ingress.md"
+            },
+            {
               "title": "Securing Ingresses with Venafi",
               "path": "/docs/tutorials/venafi/venafi.md"
+            },
+            {
+              "title": "Securing NGINX-ingress",
+              "path": "/docs/tutorials/acme/nginx-ingress.md"
             }
           ]
         },
@@ -283,8 +303,28 @@
               "path": "/docs/faq/terminology.md"
             },
             {
+              "title": "Cluster Resource Namespace",
+              "path": "/docs/faq/cluster-resource.md"
+            },
+            {
+              "title": "Syncing Secrets Across Namespaces",
+              "path": "/docs/faq/sync-secrets.md"
+            },
+            {
+              "title": "Troubleshooting",
+              "path": "/docs/faq/troubleshooting.md"
+            },
+            {
+              "title": "Troubleshooting Issuing ACME Certificates",
+              "path": "/docs/faq/acme.md"
+            },
+            {
               "title": "Troubleshooting webhook",
               "path": "/docs/faq/webhook.md"
+            },
+            {
+              "title": "Writing “cert-manager”",
+              "path": "/docs/faq/style.md"
             }
           ]
         },
@@ -296,8 +336,48 @@
               "path": "/docs/contributing/README.md"
             },
             {
+              "title": "Building cert-manager",
+              "path": "/docs/contributing/building.md"
+            },
+            {
+              "title": "Contributing Flow",
+              "path": "/docs/contributing/contributing-flow.md"
+            },
+            {
+              "title": "CRDs",
+              "path": "/docs/contributing/crds.md"
+            },
+            {
               "title": "DCO Sign Off",
               "path": "/docs/contributing/sign-off.md"
+            },
+            {
+              "title": "Developing with Kind",
+              "path": "/docs/contributing/kind.md"
+            },
+            {
+              "title": "DNS Providers",
+              "path": "/docs/contributing/dns-providers.md"
+            },
+            {
+              "title": "Feature Policy",
+              "path": "/docs/contributing/policy.md"
+            },
+            {
+              "title": "Implementing External Issuers",
+              "path": "/docs/contributing/external-issuers.md"
+            },
+            {
+              "title": "Release Process",
+              "path": "/docs/contributing/release-process.md"
+            },
+            {
+              "title": "Running End-to-End Tests",
+              "path": "/docs/contributing/e2e.md"
+            },
+            {
+              "title": "Coding Conventions",
+              "path": "/docs/contributing/coding-conventions.md"
             },
             {
               "title": "Reporting Security Issues",
