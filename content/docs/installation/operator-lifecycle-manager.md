@@ -8,8 +8,8 @@ description: Installation managed by OLM
 ### Prerequisites
 
 - Install a
-  [supported version of Kubernetes or OpenShift](../supported-releases/).
-- Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if
+  [supported version of Kubernetes or OpenShift](./supported-releases.md).
+- Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if
   you are using Kubernetes on a cloud platform.
 
 ### Option 1: Installing from OperatorHub Web Console on OpenShift
@@ -103,7 +103,7 @@ accordance with [OLM's Recommended Channel Naming][].
 ## Debugging installation issues
 
 If you have any issues with your installation, please refer to the
-[FAQ](../../faq/).
+[FAQ](../faq/README.md).
 
 Below is the processes for uninstalling cert-manager on OpenShift.
 

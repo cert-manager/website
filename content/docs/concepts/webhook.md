@@ -36,8 +36,8 @@ cert-manager controller and CA injector components.
 
 In order for the API server to communicate with the webhook component, the
 webhook requires a TLS certificate that the apiserver is configured to trust.
-This is created by the [`cainjector`](../ca-injector/) and is implemented by the
-following two Secrets:
+This is created by the [`cainjector`](./ca-injector.md) and is implemented by
+the following two Secrets:
 
 - `secret/cert-manager-webhook-ca`: A self-signed root CA certificate which is
   used to sign certificates for the webhook pod.
@@ -51,7 +51,7 @@ following two Secrets:
 If errors occur around the webhook but the webhook is running then the webhook
 is most likely not reachable from the API server. In this case, ensure that the
 API server can communicate with the webhook by following the
-[GKE private cluster explanation](../../installation/compatibility/#gke).
+[GKE private cluster explanation](../installation/compatibility.md#gke).
 
 ### Webhook connection problems on AWS EKS
 
@@ -59,7 +59,7 @@ When using a custom CNI (such as Weave or Calico) on EKS, the webhook cannot be
 reached by cert-manager. This happens because the control plane cannot be
 configured to run on a custom CNI on EKS, so the CNIs differ between control
 plane and worker nodes. The solution is to
-[run the webhook in the host network](../../installation/compatibility/#aws-eks)
+[run the webhook in the host network](../installation/compatibility.md#aws-eks)
 so it can be reached by cert-manager.
 
 ### Webhook connection problems shortly after cert-manager installation
@@ -84,8 +84,7 @@ temporary API configuration errors and retry.
 You could also add a post-installation check which performs `kubectl --dry-run`
 operations on the cert-manager API. Or you could add a post-installation check
 which automatically retries the
-[Installation Verification](../../installation/verify/) steps until they
-succeed.
+[Installation Verification](../installation/verify.md) steps until they succeed.
 
 ## Diagnosing Other Webhook Problems
 
@@ -104,7 +103,7 @@ kubectl get validatingwebhookconfigurations cert-manager-webhook -o yaml | grep 
 
 NOTE: If the value is empty there may be a problem with `cainjector`. The
 `caBundle` value is set by
-[`cainjector` Injecting CA data from a Secret resource](../ca-injector/#injecting-ca-data-from-a-secret-resource).
+[`cainjector` Injecting CA data from a Secret resource](./ca-injector.md#injecting-ca-data-from-a-secret-resource).
 Check that the `cainjector` Pod is running and check the `cainjector` logs for
 errors.
 

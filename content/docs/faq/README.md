@@ -8,11 +8,11 @@ description: >-
 Below is an aggregation of solutions to some issues that cert-manager users may
 face:
 
-- [TLS Terminology, including commonly misused terms](./terminology/)
-- [Troubleshooting issuing ACME certificates](./acme/)
-- [How to change the Cluster Resource Namespace](./cluster-resource/)
-- [How to sync secrets across namespaces](./sync-secrets/)
-- [Failing to create resources due to Webhook](./webhook/)
+- [TLS Terminology, including commonly misused terms](./terminology.md)
+- [Troubleshooting issuing ACME certificates](./acme.md)
+- [How to change the Cluster Resource Namespace](./cluster-resource.md)
+- [How to sync secrets across namespaces](./sync-secrets.md)
+- [Failing to create resources due to Webhook](./webhook.md)
 
 ## Certificates
 
@@ -20,7 +20,7 @@ face:
 
 This is a feature in cert-manager starting in `v0.16` using the `cmctl` CLI.
 More information can be found on
-[the renew command's page](../usage/cmctl/#renew)
+[the renew command's page](../usage/cmctl.md#renew)
 
 ### Why isn't my root certificate in my issued Secret's `tls.crt`?
 
@@ -136,4 +136,4 @@ resource.
   https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#certificate
 [request signing process]:
   https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process
-[limited experimental support]: ../usage/kube-csr/
+[limited experimental support]: ../usage/kube-csr.md

@@ -69,8 +69,8 @@ You should see output similar to the above, with all pods in a Running state.
 ## Installing cert-manager
 
 There are no special requirements to note when installing cert-manager on EKS,
-so the regular [running on Kubernetes](../../../installation/) guides can be
-used to install cert-manager.
+so the regular [running on Kubernetes](../../installation/README.md) guides can
+be used to install cert-manager.
 
 Please walk through the installation guide and return to this step once you have
 validated cert-manager is deployed correctly.
@@ -280,7 +280,7 @@ metadata:
   namespace: demo
 spec:
   venafi:
-    zone: "Default" # Set this to the Venafi policy zone you want to use
+    zone: 'Default' # Set this to the Venafi policy zone you want to use
     tpp:
       url: https://venafi-tpp.example.com/vedsdk # Change this to the URL of your TPP instance
       caBundle:
@@ -348,9 +348,9 @@ metadata:
   namespace: demo
 spec:
   venafi:
-    zone: "Default" # Set this to the Venafi policy zone you want to use
+    zone: 'Default' # Set this to the Venafi policy zone you want to use
     cloud:
-      url: "https://api.venafi.cloud/v1"
+      url: 'https://api.venafi.cloud/v1'
       apiTokenSecretRef:
         name: venafi-cloud-secret
         key: apikey
@@ -389,7 +389,7 @@ correctly, we can begin requesting certificates which can be used by Kubernetes
 applications.
 
 Full information on how to specify and request Certificate resources can be
-found in the [Issuing certificates](../../../usage/certificate/) guide.
+found in the [Issuing certificates](../../usage/certificate.md) guide.
 
 For now, we will create a basic X.509 Certificate that is valid for our domain,
 `example.com`:
@@ -558,7 +558,7 @@ metadata:
   name: frontend-ingress
   namespace: demo
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/ingress.class: 'nginx'
 spec:
   tls:
     - hosts:

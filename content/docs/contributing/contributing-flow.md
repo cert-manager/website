@@ -37,7 +37,7 @@ Critical bug fixes are typically also cherry picked to the current minor stable
 releases.
 
 > Note: If you are simply looking for _troubleshooting_ then you should post
-> your question to the community `cert-manager`
+> your question to the community `cert-manager` >
 > [slack channel](https://slack.k8s.io). Many more people read this channel than
 > GitHub issues, it's likely your problem will be solved quicker by using Slack.
 > Please also check that the bug has not already been filed by searching for key
@@ -85,7 +85,7 @@ To let people know that your PR is still a work in progress, we usually add a
 
 If the pull request contains a critical bug fix then this should be cherry
 picked in to the current stable cert-manager branch and
-[released as a patch release](/docs/installation/supported-releases/#support-policy).
+[released as a patch release](../installation/supported-releases.md#support-policy).
 
 To trigger the cherry-pick process, add a comment to the GitHub PR. For example:
 
@@ -100,7 +100,7 @@ described above.
 ### DCO signoff
 
 All commits in the PR should be signed off, more info on how to do this is at
-the [DCO Sign Off](../sign-off/) page. Exceptions can only be made for small
+the [DCO Sign Off](./sign-off.md) page. Exceptions can only be made for small
 documentation fixes.
 
 ## Project Management

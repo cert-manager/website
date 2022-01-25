@@ -11,7 +11,7 @@ description: >-
 
 cert-manager supports requesting certificates from ACME servers, including from
 [Let's Encrypt](https://letsencrypt.org/), with use of the
-[ACME Issuer](../../configuration/acme/). These certificates are typically
+[ACME Issuer](../configuration/acme/README.md). These certificates are typically
 trusted on the public Internet by most computers. To successfully request a
 certificate, cert-manager must solve ACME Challenges which are completed in
 order to prove that the client owns the DNS addresses that are being requested.
@@ -26,9 +26,9 @@ In order to complete these challenges, cert-manager introduces two
 validation can be found on the Let's Encrypt website
 [here](https://letsencrypt.org/how-it-works/). An order represents a single
 certificate request which will be created automatically once a new
-[`CertificateRequest`](../certificaterequest/) resource referencing an ACME
+[`CertificateRequest`](./certificaterequest.md) resource referencing an ACME
 issuer has been created. `CertificateRequest` resources are created
-automatically by cert-manager once a [`Certificate`](../certificate/) resource
+automatically by cert-manager once a [`Certificate`](./certificate.md) resource
 is created, has its specification changed, or needs renewal.
 
 As an end-user, you will never need to manually create an `Order` resource. Once
@@ -59,7 +59,7 @@ processing. Processing will not begin until the challenge has been 'scheduled'
 to start. This scheduling process prevents too many challenges being attempted
 at once, or multiple challenges for the same DNS name being attempted at once.
 For more information on how challenges are scheduled, read the
-[challenge scheduling](./#challenge-scheduling).
+[challenge scheduling](#challenge-scheduling).
 
 Once a challenge has been scheduled, it will first be 'synced' with the ACME
 server in order to determine its current state. If the challenge is already

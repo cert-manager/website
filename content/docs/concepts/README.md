@@ -11,4 +11,4 @@ describes them on a conceptual level, to aid with understanding how cert-manager
 does its job.
 
 You probably don't want this section if you're just getting started; check out a
-[tutorial](../tutorials/) instead.
+[tutorial](../tutorials/README.md) instead.

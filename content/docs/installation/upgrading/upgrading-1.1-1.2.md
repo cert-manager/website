@@ -15,16 +15,16 @@ upgrading the legacy `CRD`s to `v1.2`. To solve this, you could replace the
 `CRD`s:
 
 1. Backup `cert-manager` resources as described in
-   [the docs](/docs/tutorials/backup/)
+   [the docs](../../tutorials/backup.md)
 2. Run
    `kubectl replace -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml`
    to replace the CRDs.
 3. Follow the standard upgrade process. You can read more about supported
-   Kubernetes versions [here](/docs/installation/supported-releases/).
+   Kubernetes versions [here](../supported-releases.md).
 
 In this release some features have been deprecated. Please read the
-[version 1.2 release notes](../../../release-notes/release-notes-1.2/) for more
+[version 1.2 release notes](../../release-notes/release-notes-1.2.md) for more
 details and consider whether you are using any of these deprecated features
 before you proceed with the upgrade.
 
-From here on you can follow the [regular upgrade process](../).
+From here on you can follow the [regular upgrade process](./README.md).

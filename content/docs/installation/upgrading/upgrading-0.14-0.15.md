@@ -23,4 +23,4 @@ attached to the GitHub release. You will need to select the appropriate 'legacy'
 or full manifest variant depending on the Kubernetes or OpenShift version you
 are running.
 
-From here on you can follow the [regular upgrade process](../).
+From here on you can follow the [regular upgrade process](./README.md).

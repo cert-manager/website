@@ -11,7 +11,7 @@ description: >-
 ---
 
 The `CertificateRequest` is a namespaced resource in cert-manager that is used
-to request X.509 certificates from an [`Issuer`](../issuer/). The resource
+to request X.509 certificates from an [`Issuer`](./issuer.md). The resource
 contains a base64 encoded string of a PEM encoded certificate request which is
 sent to the referenced issuer. A successful issuance will return a signed
 certificate, based on the certificate signing request. `CertificateRequests` are
@@ -85,7 +85,7 @@ Each ready condition consists of the pair `Ready` - a boolean value, and
 namely: `username`, `groups`, `uid`, and `extra`. These values contain the user
 who created the `CertificateRequest`. This user will be cert-manager itself in
 the case that the `CertificateRequest` was created by a
-[`Certificate`](../certificate/) resource, or instead the user who created the
+[`Certificate`](./certificate.md) resource, or instead the user who created the
 `CertificateRequest` directly.
 
 > **Warning**: These fields are managed by cert-manager and should _never_ be
@@ -193,16 +193,16 @@ so. These permissions are based upon the request itself- specifically the
 request's IssuerRef:
 
 ```yaml
-apiGroups: ["cert-manager.io"]
-resources: ["signers"]
-verbs: ["approve"]
+apiGroups: ['cert-manager.io']
+resources: ['signers']
+verbs: ['approve']
 resourceNames:
   # namesapced signers
-  - "<signer-resource-name>.<signer-group>/<signer-namespace>.<signer-name>"
+  - '<signer-resource-name>.<signer-group>/<signer-namespace>.<signer-name>'
   # cluster scoped signers
-  - "<signer-resource-name>.<signer-group>/<signer-name>"
+  - '<signer-resource-name>.<signer-group>/<signer-name>'
   # all signers of this resource name
-  - "<signer-resource-name>.<signer-group>/*"
+  - '<signer-resource-name>.<signer-group>/*'
 ```
 
 An example ClusterRole that would grant the permissions to set the Approve and
@@ -216,10 +216,10 @@ kind: ClusterRole
 metadata:
   name: my-example-io-my-issuer-myapp-approver
 rules:
-  - apiGroups: ["cert-manager.io"]
-    resources: ["signers"]
-    verbs: ["approve"]
-    resourceNames: ["myissuers.my-example.io/myapp"]
+  - apiGroups: ['cert-manager.io']
+    resources: ['signers']
+    verbs: ['approve']
+    resourceNames: ['myissuers.my-example.io/myapp']
 ```
 
 If the approver does not have sufficient permissions defined above to set the
@@ -243,7 +243,7 @@ An example of signing all `myissuer` signers in all namespaces, and
 
 ```yaml
 resourceNames:
-  ["myissuers.my-example.io/*", "clustermyissuers.my-example.io/myapp"]
+  ['myissuers.my-example.io/*', 'clustermyissuers.my-example.io/myapp']
 ```
 
 An example of signing `myissuer` with the name `myapp` in the namespaces `foo`
@@ -251,5 +251,5 @@ and `bar`:
 
 ```yaml
 resourceNames:
-  ["myissuers.my-example.io/foo.myapp", "myissuers.my-example.io/bar.myapp"]
+  ['myissuers.my-example.io/foo.myapp', 'myissuers.my-example.io/bar.myapp']
 ```

@@ -9,8 +9,8 @@ description: >-
 
 This guide explains how to set up an `Issuer`, or `ClusterIssuer`, to use Amazon
 Route53 to solve DNS01 ACME challenges. It's advised you read the
-[DNS01 Challenge Provider](../) page first for a more general understanding of
-how cert-manager handles DNS01 challenges.
+[DNS01 Challenge Provider](../README.md) page first for a more general
+understanding of how cert-manager handles DNS01 challenges.
 
 > Note: This guide assumes that your cluster is hosted on Amazon Web Services
 > (AWS) and that you already have a hosted zone in Route53.

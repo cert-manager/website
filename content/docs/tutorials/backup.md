@@ -78,7 +78,7 @@ If `cert-manager` does not find a Kubernetes `Secret` with an X.509 certificate
 for a `Certificate`, reissuance will be triggered. To avoid unnecessary
 reissuance after a restore, ensure that `Secret`s are restored before
 `Certificate`s. Similarly, `Secret`s should be restored before `Ingress`es if
-you are using [`ingress-shim`](../../usage/ingress/).
+you are using [`ingress-shim`](../usage/ingress.md).
 
 #### Excluding some cert-manager resources from backup
 
@@ -101,7 +101,7 @@ backing up `CertificateRequest`s, see
 ### Restoring Ingress Certificates
 
 A `Certificate` created for an `Ingress` via
-[`ingress-shim`](../../usage/ingress/) will have an
+[`ingress-shim`](../usage/ingress.md) will have an
 [owner reference](https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/#owners-and-dependents)
 pointing to the `Ingress` resource. `cert-manager` uses the owner reference to
 verify that the `Certificate` 'belongs' to that `Ingress` and will not attempt

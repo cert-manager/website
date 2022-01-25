@@ -12,7 +12,7 @@ maintainable. ⚠️
 
 This release adds new features for several issuers and fixes several bugs.
 
-Please read the [upgrade notes](/docs/installation/upgrading/upgrading-1.1-1.2/)
+Please read the [upgrade notes](../installation/upgrading/upgrading-1.1-1.2.md)
 before upgrading.
 
 Aside from that, there have been numerous bug fixes and features summarized
@@ -27,7 +27,7 @@ below.
 
 2. As Kubernetes `v1.16` is now the earliest supported version, The `legacy`
    manifests have now been removed. You can read more
-   [here](/docs/installation/supported-releases/).
+   [here](../installation/supported-releases.md).
 
 3. The `User-Agent` request header has been changed from
    `jetstack-cert-manager/<version>` to `cert-manager/<version>`. This may

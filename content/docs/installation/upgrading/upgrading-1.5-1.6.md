@@ -12,7 +12,7 @@ Following their deprecation in version 1.4, the cert-manager API versions
 
 This means if your deployment manifests contain any of these API versions, you
 will not be able to deploy them after upgrading. Our new `cmctl` utility or old
-`kubectl cert-manager` plugin can [convert](../../../usage/cmctl/#convert) old
+`kubectl cert-manager` plugin can [convert](../../usage/cmctl.md#convert) old
 manifests to `v1` for you.
 
 <div class="info">
@@ -23,11 +23,11 @@ resources are stored in `etcd` at `v1` version and that cert-manger CRDs do not
 reference the deprecated APIs **before you upgrade to `v1.6`**.
 
 This is explained in more detail in the
-[Upgrading existing cert-manager resources](../remove-deprecated-apis/#upgrading-existing-cert-manager-resources)
+[Upgrading existing cert-manager resources](./remove-deprecated-apis.md#upgrading-existing-cert-manager-resources)
 page.
 
 </div>
 
 ## Now Follow the Regular Upgrade Process
 
-From here on you can follow the [regular upgrade process](../).
+From here on you can follow the [regular upgrade process](./README.md).

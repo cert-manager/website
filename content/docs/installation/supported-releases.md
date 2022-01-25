@@ -1,6 +1,6 @@
 ---
 title: Supported Releases
-description: ""
+description: ''
 ---
 
 <!--
@@ -63,11 +63,10 @@ Note that dates in the future are uncertain and might change.
 
 You can find available releases on the
 [releases page](https://github.com/jetstack/cert-manager/releases). You can find
-the release notes for each minor release
-[here](https://cert-manager.io/docs/release-notes/), and the upgrade
-instructions are [here](https://cert-manager.io/docs/installation/upgrading/).
-The cert-manager release process is documented on the
-[release-process page](https://cert-manager.io/docs/contributing/release-process/).
+the release notes for each minor release [here](../release-notes/README.md), and
+the upgrade instructions are [here](./upgrading/README.md). The cert-manager
+release process is documented on the
+[release-process page](../contributing/release-process.md).
 
 ## Support policy
 
@@ -166,22 +165,22 @@ possible, and where they're required we'll give as much notice as possible.
 
 [#3393]:
   https://github.com/jetstack/cert-manager/issues/3393
-  "Broken CloudFlare DNS01 challenge"
+  'Broken CloudFlare DNS01 challenge'
 [#2857]:
   https://github.com/jetstack/cert-manager/issues/2857
-  "CloudDNS DNS01 challenge crashes cert-manager"
+  'CloudDNS DNS01 challenge crashes cert-manager'
 [#4142]:
   https://github.com/jetstack/cert-manager/issues/4142
-  "Cannot issue a certificate that has the same subject and issuer"
+  'Cannot issue a certificate that has the same subject and issuer'
 [#3444]:
   https://github.com/jetstack/cert-manager/issues/3444
-  "Certificates do not get immediately updated after updating them"
+  'Certificates do not get immediately updated after updating them'
 [#3882]:
   https://github.com/jetstack/cert-manager/pull/3882
   "Certificate's revision history limit validated by webhook"
 [#3644]:
   https://github.com/jetstack/cert-manager/issues/3644
-  "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
+  'Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug'
 
 ## How we determine supported Kubernetes versions
 

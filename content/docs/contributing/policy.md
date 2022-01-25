@@ -107,4 +107,4 @@ certificates increase the opportunity for attacks on the Kubernetes API server
 as this CA is used to sign certificates used for authorization against the API
 server it could allow any user who can create cert-manager resources to sign
 certificates trusted for API access.
-([see our FAQ](../../faq/#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that))
+([see our FAQ](../faq/README.md#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that))

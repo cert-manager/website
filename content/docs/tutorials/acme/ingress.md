@@ -294,8 +294,8 @@ We need to install cert-manager to do the work with Kubernetes to request a
 certificate and respond to the challenge to validate it. We can use Helm or
 plain Kubernetes manifest to install cert-manager.
 
-Read the [getting started guide](../../../installation/) to install cert-manager
-using your preferred method.
+Read the [getting started guide](../../installation/README.md) to install
+cert-manager using your preferred method.
 
 Cert-manager uses two different custom resources, also known as
 [`CRD`'s](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/),
@@ -314,11 +314,11 @@ operation. These two resources are:
 > and don't have this namespace-matching requirement. In that case, remember to
 > update the Ingress annotation `cert-manager.io/issuer` with
 > `cert-manager.io/cluster-issuer`. To debug such failures, follow the
-> [Troubleshooting Issuing ACME Certificates](../../../faq/acme/) guide.
+> [Troubleshooting Issuing ACME Certificates](../../faq/acme.md) guide.
 >
 > More information on the differences between `Issuers` and `ClusterIssuers` and
 > when you might choose to use each can be found
-> [here](../../../concepts/issuer/#namespaces).
+> [here](../../concepts/issuer.md#namespaces).
 
 > A certificate is the resource that cert-manager uses to expose the state of a
 > request as well as track upcoming expiration.
@@ -358,7 +358,7 @@ issuer.cert-manager.io "letsencrypt-prod" created
 ```
 
 Both of these issuers are configured to use the
-[`HTTP01`](../../../configuration/acme/http01/) challenge provider.
+[`HTTP01`](../../configuration/acme/http01/README.md) challenge provider.
 
 Check on the status of the issuer after you create it:
 
@@ -406,7 +406,7 @@ You should see the issuer listed with a registered account.
 
 With all the prerequisite configuration in place, we can now do the pieces to
 request the TLS certificate. There are two primary ways to do this: using
-annotations on the ingress with [`ingress-shim`](../../../usage/ingress/) or
+annotations on the ingress with [`ingress-shim`](../../usage/ingress.md) or
 directly creating a certificate resource.
 
 In this example, we will add annotations to the ingress, and take advantage of
@@ -642,7 +642,7 @@ Events:
 > Note: If your challenges are not becoming 'valid' and remain in the 'pending'
 > state (or enter into a 'failed' state), it is likely there is some kind of
 > configuration error. Read the
-> [Challenge resource reference docs](../../../reference/api-docs/#acme.cert-manager.io/v1.Challenge)
+> [Challenge resource reference docs](../../../reference/api-docs.md#acme.cert-manager.io/v1.Challenge)
 > for more information on debugging failing challenges.
 
 Once the challenge(s) have been completed, their corresponding challenge

@@ -20,20 +20,20 @@ The default static configuration can be installed as follows:
 $ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.yaml
 ```
 
-More information on this install method [can be found here](./kubectl/).
+More information on this install method [can be found here](./kubectl.md).
 
 ## Getting started
 
 > You quickly want to learn how to use cert-manager and what it can be used for.
 
-We recommend [cmctl x install](./cmctl/) to quickly install cert-manager and
-[interact with cert-manager resources](../usage/cmctl/) from the command line.
+We recommend [cmctl x install](./cmctl.md) to quickly install cert-manager and
+[interact with cert-manager resources](../usage/cmctl.md) from the command line.
 
 Or if you prefer Helm or if you don't want to install `cmctl`, you can
-[use helm to install cert-manager](./helm/).
+[use helm to install cert-manager](./helm.md).
 
 In case you are running on an OpenShift cluster, consider installing via
-[cert-manager on OperatorHub.io](./operator-lifecycle-manager/).
+[cert-manager on OperatorHub.io](./operator-lifecycle-manager.md).
 
 ## Continuous deployment
 
@@ -41,10 +41,10 @@ In case you are running on an OpenShift cluster, consider installing via
 
 You can use either `helm template` or `cmctl x install --dry-run` to generate
 customized cert-manager installation manifests. See
-[Output YAML using cmctl x install](./cmctl/#output-yaml) and
-[Output YAML using helm template](./helm/#output-yaml) for more details. This
+[Output YAML using cmctl x install](./cmctl.md#output-yaml) and
+[Output YAML using helm template](./helm.md#output-yaml) for more details. This
 templated cert-manager manifest can be piped into your preferred deployment
 tool.
 
 In case you are using Helm for automation, cert-manager
-[supports installing using Helm](./helm/).
+[supports installing using Helm](./helm.md).

@@ -108,8 +108,8 @@ spec:
     group: cert-manager.io
   secretTemplate:
     annotations:
-      kubed.appscode.com/sync: "cert-manager-tls=sandbox" # Sync certificate to matching namespaces
+      kubed.appscode.com/sync: 'cert-manager-tls=sandbox' # Sync certificate to matching namespaces
 ```
 
 [certificatesecrettemplate]:
-  ../../reference/api-docs/#cert-manager.io/v1.CertificateSecretTemplate
+  ../reference/api-docs.md#cert-manager.io/v1.CertificateSecretTemplate

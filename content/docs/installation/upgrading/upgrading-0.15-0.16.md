@@ -20,4 +20,4 @@ supported anymore as these are unsupported by the Kubernetes community.
 Helm users who use `installCRDs=true` MUST upgrade to Helm `v3.3.1` before
 upgrading.
 
-From here on you can follow the [regular upgrade process](../).
+From here on you can follow the [regular upgrade process](./README.md).

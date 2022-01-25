@@ -25,8 +25,8 @@ Repository][], and which is therefore available on
 Please uninstall the existing cert-manager package and re-install by following
 the [OLM Installation Documentation][].
 
-[olm installation documentation]: ../../operator-lifecycle-manager/
+[olm installation documentation]: ../operator-lifecycle-manager.md
 
 ## Now Follow the Regular Upgrade Process
 
-From here on you can follow the [regular upgrade process](../).
+From here on you can follow the [regular upgrade process](./README.md).

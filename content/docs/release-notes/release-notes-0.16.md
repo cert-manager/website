@@ -1,6 +1,6 @@
 ---
 title: Release Notes
-description: "The v0.16 release has a few focus areas:"
+description: 'The v0.16 release has a few focus areas:'
 ---
 
 The `v0.16` release has a few focus areas:
@@ -11,7 +11,7 @@ The `v0.16` release has a few focus areas:
 - `v1beta1` API
 
 As usual, please read the
-[upgrade notes](/docs/installation/upgrading/upgrading-0.15-0.16/) before
+[upgrade notes](../installation/upgrading/upgrading-0.15-0.16.md) before
 upgrading.
 
 ## New certificate controller
@@ -48,7 +48,7 @@ $ kubectl cert-manager create certificaterequest my-cr --from-certificate-file m
 ```
 
 More information can be found on our
-[kubectl plugin page](../../usage/kubectl-plugin/).
+[kubectl plugin page](../usage/kubectl-plugin.md).
 
 ## `v1beta1` API
 
@@ -56,7 +56,7 @@ We are soon reaching cert-manager `v1.0` and the new `v1beta1` API is our first
 step towards a stable `v1` API. The biggest change users may notice is the
 improved API documentation. We took the time to review and update all the
 user-facing APIs. You can view the
-[updated API documentation online](../../reference/api-docs/), or use
+[updated API documentation online](../reference/api-docs.md), or use
 `kubectl explain` after installing this version of cert-manager. `v1beta1` does
 not contain many big changes, this version is focused on streamlining field
 names and general clean up of the API in preparation for the release of the `v1`
@@ -110,4 +110,4 @@ $ kubectl cert-manager convert --output-version cert-manager.io/v1beta1 cert.yam
 ```
 
 More information can be found on our
-[kubectl plugin page](../../usage/kubectl-plugin/).
+[kubectl plugin page](../usage/kubectl-plugin.md).

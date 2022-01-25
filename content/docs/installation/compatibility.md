@@ -25,6 +25,7 @@ your `values.yaml` file.
 If you have a port clash, you could see confusing error messages regarding
 untrusted certs. See
 [#3237](https://github.com/jetstack/cert-manager/issues/3237) for more details.
+
 </div>
 
 ## GKE

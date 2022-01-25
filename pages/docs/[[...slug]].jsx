@@ -32,7 +32,7 @@ const DocumentationPage = ({
       />
       <div className="container mt-20 pb-24">
         <div className="w-full md:grid grid-cols-12 gap-12 xl:gap-16">
-          <div className='col-span-4 lg:col-span-3 xl:col-span-2 md:border-r border-gray-2/50 pr-5'>
+          <div className="col-span-4 lg:col-span-3 xl:col-span-2 md:border-r border-gray-2/50 pr-5">
             <Sidebar routes={sidebarRoutes} />
           </div>
           <main className="col-span-8 lg:col-span-9 xl:col-span-8 docs">
@@ -40,7 +40,7 @@ const DocumentationPage = ({
               <Documentation source={source} theme={theme} />
             </div>
           </main>
-          <div className='hidden xl:block col-span-2 border-l border-gray-2/50 pl-5'>
+          <div className="hidden xl:block col-span-2 border-l border-gray-2/50 pl-5">
             <Toc contents={tocHeadings} />
           </div>
         </div>
@@ -57,11 +57,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(ctx) {
-  try {
-    const props = await pageProps(ctx)
-    return { props }
-  } catch (error) {
-    console.log(error)
-    return { props: {} }
-  }
+  const props = await pageProps(ctx)
+  return { props }
 }

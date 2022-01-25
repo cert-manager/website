@@ -9,8 +9,8 @@ description: >-
 
 This guide explains how to set up an `Issuer`, or `ClusterIssuer`, to use Google
 CloudDNS to solve DNS01 ACME challenges. It's advised you read the
-[DNS01 Challenge Provider](../) page first for a more general understanding of
-how cert-manager handles DNS01 challenges.
+[DNS01 Challenge Provider](./README.md) page first for a more general
+understanding of how cert-manager handles DNS01 challenges.
 
 > Note: This guide assumes that your cluster is hosted on Google Cloud Platform
 > (GCP) and that you already have a domain set up with CloudDNS.
@@ -112,7 +112,7 @@ spec:
 ```
 
 For more information about `Issuers` and `ClusterIssuers`, see
-[Configuration](../../../).
+[Configuration](../../README.md).
 
 Once an `Issuer` (or `ClusterIssuer`) has been created successfully, a
 `Certificate` can then be added to verify that everything works.
@@ -133,7 +133,7 @@ spec:
     - www.example.com
 ```
 
-For more details about `Certificates`, see [Usage](../../../../usage/).
+For more details about `Certificates`, see [Usage](../../../usage/README.md).
 
 ## GKE Workload Identity
 
@@ -156,7 +156,7 @@ to a GKE cluster with workload identity already enabled.
 
 The cert-manager component that needs to modify DNS records is the pod created
 as part of the cert-manager deployment. The
-[standard methods for deploying cert-manger to Kubernetes](../../../../installation/)
+[standard methods for deploying cert-manger to Kubernetes](../../../installation/README.md)
 create the cert-manager deployment in the cert-manager namespace and its pod
 spec specifies it runs under the cert-manager service account. To link the GSA
 you created above to the cert-manager KSA in the cert-manager namespace in your
@@ -217,7 +217,7 @@ spec:
 ```
 
 For more information about `Issuers` and `ClusterIssuers`, see
-[Configuration](../../../).
+[Configuration](../../README.md).
 
 Once an `Issuer` (or `ClusterIssuer`) has been created successfully, a
 `Certificate` can then be added to verify that everything works.
@@ -238,4 +238,4 @@ spec:
     - www.example.com
 ```
 
-For more details about `Certificates`, see [Usage](../../../../usage/).
+For more details about `Certificates`, see [Usage](../../../usage/README.md).

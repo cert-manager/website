@@ -92,6 +92,7 @@ server.
 The same concept also applies when configuring a server for
 mutually-authenticated TLS; don't give the server access to Secret containing
 the client certificate and private key.
+
 </div>
 
 The `dnsNames` field specifies a list of
@@ -103,7 +104,7 @@ The referenced `Issuer` must exist in the same namespace as the `Certificate`. A
 non-namespaced and so can be referenced from any namespace.
 
 You can read more on how to configure your `Certificate` resources
-[here](../../usage/certificate/).
+[here](../usage/certificate.md).
 
 ## Certificate Lifecycle
 

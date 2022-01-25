@@ -27,8 +27,8 @@ Due to issues with the way Helm handles CRD resources in Helm charts, we have
 now moved the installation of these resources into a separate YAML manifest that
 must be installed with `kubectl apply` before upgrading the chart.
 
-You can follow the [regular upgrade guide](../) as usual in order to upgrade
-from `v0.5` to `v0.6`.
+You can follow the [regular upgrade guide](./README.md) as usual in order to
+upgrade from `v0.5` to `v0.6`.
 
 ## Upgrading with static manifests
 
@@ -39,8 +39,8 @@ We now also no longer ship different manifests for different configurations, in
 favor of a single `cert-manager.yaml` file which should work for all Kubernetes
 clusters from Kubernetes `v1.9` onward.
 
-You can follow the [regular upgrade guide](../). usual in order to upgrade from
-`v0.5` to `v0.6`.
+You can follow the [regular upgrade guide](./README.md). usual in order to
+upgrade from `v0.5` to `v0.6`.
 
 ## Upgrading from older versions using Helm
 
@@ -52,7 +52,7 @@ being used by your apps.
 
 Before upgrading you will need to:
 
-1. Read and follow the [backup guide](../../../tutorials/backup/) to create a
+1. Read and follow the [backup guide](../../tutorials/backup.md) to create a
    backup of your configuration.
 
 2. Delete the existing cert-manager Helm release (replacing 'cert-manager' with
@@ -73,7 +73,7 @@ $ kubectl delete crd \
     clusterissuers.certmanager.k8s.io
 ```
 
-3. Perform a fresh install (as per the [installation guide](../../)
+3. Perform a fresh install (as per the [installation guide](../README.md)
 
 Install the cert-manager CRDs
 
@@ -98,8 +98,8 @@ $ helm install \
     stable/cert-manager
 ```
 
-4. Follow the steps in the [restore guide](../../../tutorials/backup/) to
-   restore your configuration.
+4. Follow the steps in the [restore guide](../../tutorials/backup.md) to restore
+   your configuration.
 
 5. Verify that your Issuers and Certificate resources are 'Ready':
 

@@ -7,10 +7,10 @@ description: Installing using cmctl
 
 ### Prerequisites
 
-- [Install the cert-manager CLI cmctl](../../usage/cmctl/#installation).
+- [Install the cert-manager CLI cmctl](../usage/cmctl.md#installation).
 - Install a
-  [supported version of Kubernetes or OpenShift](../supported-releases/).
-- Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if
+  [supported version of Kubernetes or OpenShift](./supported-releases.md).
+- Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if
   you are using Kubernetes on a cloud platform.
 
 ### Steps
@@ -24,7 +24,7 @@ $ cmctl x install
 The command makes sure that the required `CustomResourceDefinitions` are
 installed together with the cert-manager, cainjector and webhook components.
 Under the hood, a procedure similar to the
-[Helm install procedure](../helm/#steps) is used.
+[Helm install procedure](./helm.md#steps) is used.
 
 You can also use `cmctl x install` to customize the installation of
 cert-manager.
@@ -41,7 +41,7 @@ $ cmctl x install \
 You can find
 [a full list of the install parameters on cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager#configuration).
 These are the same parameters that are available when using the Helm chart. Once
-you have deployed cert-manager, you can [verify](../verify/) the installation.
+you have deployed cert-manager, you can [verify](./verify.md) the installation.
 
 ### Output YAML
 

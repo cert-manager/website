@@ -1,7 +1,7 @@
 ---
 title: Migrating Deprecated API Resources
 description:
-  "The following cert-manager APIs were deprecated in cert-manager v1.4:"
+  'The following cert-manager APIs were deprecated in cert-manager v1.4:'
 ---
 
 The following cert-manager APIs were deprecated in cert-manager `v1.4`:
@@ -23,7 +23,7 @@ cert-manager 1.6 or later.
 An earlier version of this document
 listed a number of kubectl commands to run to migrate resources. These steps
 have now been encoded in
-[`cmctl upgrade migrate-api-version` command](https://cert-manager.io/docs/usage/cmctl/#migrate-api-version).
+[`cmctl upgrade migrate-api-version` command](../usage/cmctl.md#migrate-api-version).
 If you have already run the kubectl commands, your resources should have been
 migrated and there should be no need to also run the `cmctl` command. However,
 if you are not sure, you can still run the `cmctl` command as well- it will be a
@@ -42,10 +42,9 @@ no-op if no actions are needed.
 3. Make sure that any cert-manager custom resource manifests that refer to the
    deprecated APIs are updated to use the `cert-manager.io/v1` API and
    re-applied. You can use the
-   [cmctl convert command](https://cert-manager.io/docs/usage/cmctl/#convert)to
-   convert manifests.
+   [cmctl convert command](../../usage/cmctl.md#convert)to convert manifests.
 
 4. Run the command
-   [`cmctl upgrade migrate-api-version`](https://cert-manager.io/docs/usage/cmctl/#migrate-api-version).
+   [`cmctl upgrade migrate-api-version`](../../usage/cmctl.md#migrate-api-version).
    It automates the steps described in
    [Upgrade existing objects to a new stored version](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#upgrade-existing-objects-to-a-new-stored-version).

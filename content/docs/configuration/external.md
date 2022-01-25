@@ -25,7 +25,7 @@ If you've created an external issuer which you'd like to share,
 added here!
 
 These external issuers are known to support and honor
-[approval](https://cert-manager.io/docs/concepts/certificaterequest/#approval).
+[approval](../concepts/certificaterequest.md#approval).
 
 - [kms-issuer](https://github.com/Skyscanner/kms-issuer): Requests certificates
   signed using an [AWS KMS](https://aws.amazon.com/kms/) asymmetric key.
@@ -55,4 +55,4 @@ These external issuers are known to support and honor
 ## Building New External Issuers
 
 If you're interested in building a new external issuer, check the
-[development documentation](../../contributing/external-issuers/).
+[development documentation](../contributing/external-issuers.md).

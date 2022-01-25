@@ -81,8 +81,8 @@ extended the support to all existing Issuers.
 
 The support for signing CSR resources is still experimental and requires to be
 explicitly enabled. If you are interested, please take a look at the
-[Kubernetes CertificateSigningRequest](https://cert-manager.io/docs/usage/kube-csr/)
-documentation on the cert-manager website.
+[Kubernetes CertificateSigningRequest](../usage/kube-csr.md) documentation on
+the cert-manager website.
 
 To help you try the CSR support, you may want to try a new command that was
 added to the kubectl plugin. It allows you to create a CSR resource out of a
@@ -180,7 +180,7 @@ kind: Certificate
 spec:
   secretTemplate:
     annotations:
-      my-secret-annotation: "foo"
+      my-secret-annotation: 'foo'
     labels:
       my-secret-label: bar
 ```

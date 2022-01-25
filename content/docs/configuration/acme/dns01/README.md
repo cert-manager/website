@@ -9,7 +9,7 @@ This page contains details on the different options available on the `Issuer`
 resource's DNS01 challenge solver configuration.
 
 For more information on configuring ACME `Issuers` and their API format, read
-the [ACME Issuers](../) documentation.
+the [ACME Issuers](../README.md) documentation.
 
 DNS01 provider configuration must be specified on the `Issuer` resource, similar
 to the examples in the setting up documentation.
@@ -146,14 +146,14 @@ A number of different DNS providers are supported for the ACME `Issuer`. Below
 is a listing of available providers, their `.yaml` configurations, along with
 additional Kubernetes and provider specific notes regarding their usage.
 
-- [ACMEDNS](./acme-dns/)
-- [Akamai](./akamai/)
-- [AzureDNS](./azuredns/)
-- [CloudFlare](./cloudflare/)
-- [Google](./google/)
-- [Route53](./route53/)
-- [DigitalOcean](./digitalocean/)
-- [RFC2136](./rfc2136/)
+- [ACMEDNS](./acme-dns.md)
+- [Akamai](./akamai.md)
+- [AzureDNS](./azuredns.md)
+- [CloudFlare](./cloudflare.md)
+- [Google](./google.md)
+- [Route53](./route53.md)
+- [DigitalOcean](./digitalocean.md)
+- [RFC2136](./rfc2136.md)
 
 ## Webhook
 
@@ -181,7 +181,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-hetzner`](https://github.com/vadimkim/cert-manager-webhook-hetzner)
 
 You can find more information on how to configure webhook providers
-[here](./webhook/).
+[here](./webhook.md).
 
 To create a new unsupported DNS provider, follow the development documentation
-[here](../../../contributing/dns-providers/).
+[here](../../../contributing/dns-providers.md).

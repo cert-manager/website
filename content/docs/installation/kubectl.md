@@ -9,10 +9,10 @@ description: Installing with regular manifests
 
 - [Install `kubectl` version `>= v1.19.0-rc.1`](https://kubernetes.io/docs/tasks/tools/).
   (otherwise, you will have issues updating the CRDs - see
-  [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl))
+  [v0.16 upgrade notes](./upgrading/upgrading-0.15-0.16.md#issue-with-older-versions-of-kubectl))
 - Install a
-  [supported version of Kubernetes or OpenShift](../supported-releases/).
-- Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if
+  [supported version of Kubernetes or OpenShift](./supported-releases.md).
+- Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if
   you are using Kubernetes on a cloud platform.
 
 ### Steps
@@ -33,7 +33,7 @@ is possible to run cert-manager in a different namespace, although you'll need
 to make modifications to the deployment manifests.
 
 Once you have deployed cert-manager, you can
-[verify the installation](../verify/) .
+[verify the installation](./verify.md) .
 
 ### Permissions Errors on Google Kubernetes Engine
 

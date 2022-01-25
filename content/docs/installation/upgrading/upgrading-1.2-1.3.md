@@ -35,4 +35,4 @@ since _Issuing Templates_ are shared between Venafi Cloud products).
 
 ## Next Steps
 
-You should now follow the [regular upgrade process](../).
+You should now follow the [regular upgrade process](./README.md).

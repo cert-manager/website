@@ -11,10 +11,10 @@ When requesting ACME certificates, cert-manager will create `Order` and
 `Challenges` to complete the request. As such, there are more resources to
 investigate and debug if there is a problem during the process. You can read
 more about these resources in the
-[concepts pages](../../concepts/acme-orders-challenges/).
+[concepts pages](../concepts/acme-orders-challenges.md).
 
 Before you start here you should probably take a look at our
-[general troubleshooting guide](../troubleshooting/)
+[general troubleshooting guide](./troubleshooting.md)
 
 ## 1. Troubleshooting (Cluster)Issuers
 
@@ -254,7 +254,7 @@ internet, or in your DNS provider's interface. cert-manager will check if a DNS
 record has been propagated by querying the cluster's DNS solver. If you are able
 to see it from the public internet but not from inside the cluster you might
 want to change
-[the DNS server for self-check](../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check)
+[the DNS server for self-check](../configuration/acme/dns01/README.md#setting-nameservers-for-dns01-self-check)
 as some cloud providers overwrite DNS internally.
 
 #### cert-manager identifies the wrong zone for your domain name
@@ -263,7 +263,7 @@ cert-manager by default uses SOA (Start of Authority) records to determine which
 zone name to use at your DNS provider. Some DNS resolvers will filter this
 information, if this is the case cert-manager cannot determine the zone and it
 is advised to
-[change the DNS server for DNS01 self-checks](../../configuration/acme/dns01/#setting-nameservers-for-dns01-self-check).
+[change the DNS server for DNS01 self-checks](../configuration/acme/dns01/README.md#setting-nameservers-for-dns01-self-check).
 
 If you use `dnsmasq` as your DNS server, this may occur if you use the
 [`--filterwin2k` flag](http://www.thekelleys.org.uk/dnsmasq/docs/setup.html). In

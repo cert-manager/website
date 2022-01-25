@@ -13,7 +13,7 @@ information on things to look out for when upgrading.
 > Note: Before performing upgrades of cert-manager, it is advised to take a
 > backup of all your cert-manager resources just in case an issue occurs whilst
 > upgrading. You can read how to backup and restore cert-manager in the
-> [backup and restore](../../tutorials/backup/) guide.
+> [backup and restore](../../tutorials/backup.md) guide.
 
 ## Upgrading with Helm
 

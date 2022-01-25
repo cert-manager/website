@@ -7,7 +7,7 @@ description: >-
 
 The webhook `Issuer` is a generic ACME solver. The actual work is done by an
 external service. Look at the respective documentation of
-[`dns-providers`](../../../../contributing/dns-providers/).
+[`dns-providers`](../../../contributing/dns-providers.md).
 
 View more webhook solvers at https://github.com/topics/cert-manager-webhook.
 

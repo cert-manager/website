@@ -8,19 +8,19 @@ description: >-
 Below are a list of resources for contributing and developing both core and
 external cert-manager components:
 
-- [Contribution flow](./contributing-flow/)
-- [Building cert-manager](./building/)
-- [CRDs](./crds/)
-- [Implementing ACME DNS01 providers](./dns-providers/)
-- [Implementing out-of-tree Issuer types](./external-issuers/)
-- [DCO sign off](./sign-off/)
-- [Developing with kind](./kind/)
-- [Running end-to-end tests](./e2e/)
-- [Release process](./release-process/)
-- [Feature policy](./policy/)
-- [Coding Conventions](./coding-conventions/)
-- [Reporting security vulnerabilities](./security/)
-- [Donating third party code to cert-manager](./third-party-code-donation/)
+- [Contribution flow](./contributing-flow.md)
+- [Building cert-manager](./building.md)
+- [CRDs](./crds.md)
+- [Implementing ACME DNS01 providers](./dns-providers.md)
+- [Implementing out-of-tree Issuer types](./external-issuers.md)
+- [DCO sign off](./sign-off.md)
+- [Developing with kind](./kind.md)
+- [Running end-to-end tests](./e2e.md)
+- [Release process](./release-process.md)
+- [Feature policy](./policy.md)
+- [Coding Conventions](./coding-conventions.md)
+- [Reporting security vulnerabilities](./security.md)
+- [Donating third party code to cert-manager](./third-party-code-donation.md)
 
 ## Welcome
 

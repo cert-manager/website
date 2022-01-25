@@ -39,7 +39,7 @@ Special thanks to the external contributors who contributed to this release:
 - [@OmairK](https://github.com/OmairK)
 - [@justinkillen](https://github.com/justinkillen)
 
-Please read the [upgrade notes](/docs/installation/upgrading/upgrading-1.2-1.3/)
+Please read the [upgrade notes](../installation/upgrading/upgrading-1.2-1.3.md)
 before upgrading.
 
 As always, the full change log is available on the

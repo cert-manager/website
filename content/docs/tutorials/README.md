@@ -8,21 +8,21 @@ description: >-
 Step-by-step tutorials are a great way to get started with cert-manager, and we
 provide a few for you to learn from. Take a look!
 
-- [Backup and Restore Resources](./backup/): Backup the cert-manager resources
+- [Backup and Restore Resources](./backup.md): Backup the cert-manager resources
   in your cluster and then restore them.
-- [Pomerium Ingress](./acme/pomerium-ingress/): Tutorial on using the Pomerium
+- [Pomerium Ingress](./acme/pomerium-ingress.md): Tutorial on using the Pomerium
   Ingress Controller with cert-manager.
-- [Securing Ingresses with NGINX-Ingress and cert-manager](./acme/nginx-ingress/):
+- [Securing Ingresses with NGINX-Ingress and cert-manager](./acme/nginx-ingress.md):
   Tutorial for deploying NGINX into your cluster and securing incoming
   connections with a certificate from Let's Encrypt.
-- [Issuing an ACME Certificate using DNS Validation](./acme/dns-validation/):
+- [Issuing an ACME Certificate using DNS Validation](./acme/dns-validation.md):
   Tutorial on how to resolve DNS ownership validation using DNS01 challenges.
-- [Issuing an ACME Certificate using HTTP Validation](./acme/http-validation/):
+- [Issuing an ACME Certificate using HTTP Validation](./acme/http-validation.md):
   Tutorial on how to resolve DNS ownership validation using HTTP01 challenges.
-- [Migrating from kube-lego](./acme/migrating-from-kube-lego/): Tutorial on how
-  to migrate from the now deprecated kube-lego project.
-- [Securing an EKS Cluster with Venafi](./venafi/venafi/): Tutorial for creating
-  an EKS cluster and securing an NGINX deployment with a Venafi issued
+- [Migrating from kube-lego](./acme/migrating-from-kube-lego.md): Tutorial on
+  how to migrate from the now deprecated kube-lego project.
+- [Securing an EKS Cluster with Venafi](./venafi/venafi.md): Tutorial for
+  creating an EKS cluster and securing an NGINX deployment with a Venafi issued
   certificate.
 
 ### External Tutorials

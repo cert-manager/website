@@ -6,8 +6,8 @@ title: HTTP01
 
 📌 This page focuses on solving ACME HTTP-01 challenges. If you are looking for
 how to automatically create Certificate resources by annotating Ingress or
-Gateway resources, see [Securing Ingress Resources](/docs/usage/ingress/) and
-[Securing Gateway Resources](../../../usage/gateway/).
+Gateway resources, see [Securing Ingress Resources](../../../usage/ingress.md)
+and [Securing Gateway Resources](../../../usage/gateway.md).
 
 </div>
 
@@ -47,7 +47,7 @@ spec:
 
 The HTTP01 Issuer supports a number of additional options. For full details on
 the range of options available, read the
-[reference documentation](../../../reference/api-docs/#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01).
+[reference documentation](../../../reference/api-docs.md#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01).
 
 ### `class`
 
@@ -117,8 +117,8 @@ spec:
             podTemplate:
               metadata:
                 labels:
-                  foo: "bar"
-                  env: "prod"
+                  foo: 'bar'
+                  env: 'prod'
               spec:
                 nodeSelector:
                   bar: baz
@@ -150,11 +150,11 @@ spec:
             ingressTemplate:
               metadata:
                 labels:
-                  foo: "bar"
+                  foo: 'bar'
                 annotations:
-                  "nginx.ingress.kubernetes.io/whitelist-source-range": "0.0.0.0/0,::/0"
-                  "nginx.org/mergeable-ingress-type": "minion"
-                  "traefik.ingress.kubernetes.io/frontend-entry-points": "http"
+                  'nginx.ingress.kubernetes.io/whitelist-source-range': '0.0.0.0/0,::/0'
+                  'nginx.org/mergeable-ingress-type': 'minion'
+                  'traefik.ingress.kubernetes.io/frontend-entry-points': 'http'
 ```
 
 The added labels and annotations will merge on top of the cert-manager defaults,

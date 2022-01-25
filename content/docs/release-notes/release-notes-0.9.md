@@ -63,8 +63,7 @@ resolve requests. Other issuer implementations and details on how to develop an
 out of tree issuer will follow in later releases. You can read more on the
 motivations and road map in the
 [enhancement proposal](https://github.com/jetstack/cert-manager/blob/master/design/20190708.certificate-request-crd.md)
-or how this resource is used in the
-[docs](https://cert-manager.io/docs/concepts/certificaterequest/).
+or how this resource is used in the [docs](../concepts/certificaterequest.md).
 
 ### DNS Zones support for ACME challenge solver selector
 

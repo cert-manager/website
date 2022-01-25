@@ -1,6 +1,6 @@
 ---
 title: Release Notes
-description: "The v0.15 release has a few focus areas:"
+description: 'The v0.15 release has a few focus areas:'
 ---
 
 The `v0.15` release has a few focus areas:
@@ -16,7 +16,7 @@ The `v0.15` release has a few focus areas:
   conversion
 
 As usual, please read the
-[upgrade notes](/docs/installation/upgrading/upgrading-0.14-0.15/) before
+[upgrade notes](../installation/upgrading/upgrading-0.14-0.15.md) before
 upgrading.
 
 ## Experimental controllers
@@ -48,7 +48,7 @@ The experimental controllers are currently feature gated and disabled by
 default. You can enable these by the following steps, in the Helm values set:
 
 ```yaml
-featureGates: "ExperimentalCertificateControllers=true"
+featureGates: 'ExperimentalCertificateControllers=true'
 ```
 
 If you're using the static manifests you need to edit the cert-manager
@@ -83,7 +83,7 @@ cert-manager can now be deployed as a Red Hat Certified OpenShift Operator. This
 is done using the
 [cert-manager operator](https://github.com/jetstack/cert-manager-olm). More
 information on this can be found on the
-[OpenShift Installation page](https://cert-manager.io/docs/installation/openshift/).
+[OpenShift Installation page](../installation/openshift.md).
 
 ## Improved deployment of the webhook
 

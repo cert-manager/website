@@ -18,8 +18,8 @@ certificates.
 
 There are important [caveats](#caveats) - including security issues - to
 consider with `SelfSigned` issuers; in general you'd likely want to use a
-[`CA`](../ca/) issuer rather than a `SelfSigned` issuer. That said, `SelfSigned`
-issuers are really useful for initially
+[`CA`](./ca.md) issuer rather than a `SelfSigned` issuer. That said,
+`SelfSigned` issuers are really useful for initially
 [bootstrapping](#bootstrapping-ca-issuers) a `CA` issuer.
 
 > Note: a `CertificateRequest` that references a self-signed certificate _must_
@@ -68,7 +68,7 @@ selfsigned-cluster-issuer   True             3m
 
 One of the ideal use cases for `SelfSigned` issuers is to bootstrap a custom
 root certificate for a private PKI, including with the cert-manager
-[`CA`](../ca/) issuer.
+[`CA`](./ca.md) issuer.
 
 The YAML below will create a `SelfSigned` issuer, issue a root certificate and
 use that root as a `CA` issuer:
@@ -125,7 +125,7 @@ which the revocation status of issued certificates can be checked:
 spec:
   selfSigned:
     crlDistributionPoints:
-      - "http://example.com"
+      - 'http://example.com'
 ```
 
 ## Caveats

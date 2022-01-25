@@ -8,7 +8,7 @@ description: >-
 `cmctl` is a CLI tool that can help you to manage cert-manager resources inside
 your cluster.
 
-While also available as a [kubectl plugin](../kubectl-plugin/), it is
+While also available as a [kubectl plugin](./kubectl-plugin.md), it is
 recommended to use as a stand alone binary as this allows the use of command
 [auto-completion](#completion).
 
@@ -63,7 +63,7 @@ Use "cmctl [command] --help" for more information about a command.
 ### Approve and Deny CertificateRequests
 
 CertificateRequests can be
-[approved or denied](../../concepts/certificaterequest/#approval) using their
+[approved or denied](../concepts/certificaterequest.md#approval) using their
 respective cmctl commands:
 
 > **Note**: The internal cert-manager approver may automatically approve all
@@ -221,7 +221,7 @@ Sub-commands are available to create different resources:
 
 ##### CertificateSigningRequest
 
-To create a [CertificateSigningRequest](../kube-csr/), use
+To create a [CertificateSigningRequest](./kube-csr.md), use
 
 ```console
 cmctl x create csr`
@@ -272,7 +272,7 @@ This command can be used to prepare a cert-manager installation that was created
 before cert-manager `v1` for upgrading to a cert-manager version `v1.6` or
 later. It ensures that any cert-manager custom resources that may have been
 stored in etcd at a deprecated API version get migrated to `v1`. See
-[Migrating Deprecated API Resources](https://cert-manager.io/docs/installation/upgrading/remove-deprecated-apis)
+[Migrating Deprecated API Resources](../installation/upgrading/remove-deprecated-apis.md)
 for more context.
 
 ```bash

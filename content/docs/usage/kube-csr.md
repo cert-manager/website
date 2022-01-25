@@ -10,7 +10,7 @@ description: >-
 Kubernetes has an in-built
 [CertificateSigningRequest](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/)
 resource. This resource is similar to the cert-manager
-[CertificateRequest](../../concepts/certificaterequest/) in that it is used to
+[CertificateRequest](../concepts/certificaterequest.md) in that it is used to
 request an X.509 signed certificate from a referenced Certificate Authority
 (CA).
 
@@ -20,7 +20,7 @@ and they still wish for certificates to be signed through cert-manager.
 
 CertificateSigningRequests reference a `SignerName` or signer as the entity it
 wishes to sign its request from. For cert-manager, a signer can be mapped to
-either an [Issuer or ClusterIssuer](../../configuration/).
+either an [Issuer or ClusterIssuer](../configuration/README.md).
 
 #### Feature State
 
@@ -48,11 +48,11 @@ $ helm install \
 ```
 
 > Note: cert-manager supports signing CertificateSigningRequests using all
-> [internal Issuers](../../configuration/).
+> [internal Issuers](../configuration/README.md).
 
 > Note: cert-manager _does not_ automatically approve CertificateSigningRequests
-> that reference a cert-manager [Issuer](../../configuration/). Please refer to
-> the
+> that reference a cert-manager [Issuer](../configuration/README.md). Please
+> refer to the
 > [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process)
 > for the request process of CertificateSigningRequests.
 
@@ -103,12 +103,12 @@ metadata:
   name: cert-manager-referencer:my-issuer
   namespace: sandbox
 rules:
-  - apiGroups: ["cert-manager.io"]
-    resources: ["signers"]
-    verbs: ["reference"]
+  - apiGroups: ['cert-manager.io']
+    resources: ['signers']
+    verbs: ['reference']
     resourceNames:
-      - "my-issuer" # To give permission to _only_ reference Issuers with the name 'my-issuer'
-      - "*" # To give permission to reference Issuers with any name in this namespace
+      - 'my-issuer' # To give permission to _only_ reference Issuers with the name 'my-issuer'
+      - '*' # To give permission to reference Issuers with any name in this namespace
 ```
 
 ## Annotations
@@ -158,10 +158,10 @@ Signer annotations:
 ## Usage
 
 CertificateSigningRequests can be manually created using
-[cmctl](../cmctl/#experimental). This command takes a manifest file containing a
-[Certificate](../../usage/certificate/) resource as input. This generates a
-private key and creates a CertificateSigningRequest. CertificateSigningRequests
-are not approved by default, so you will likely need to approve it manually:
+[cmctl](./cmctl.md#experimental). This command takes a manifest file containing
+a [Certificate](./certificate.md) resource as input. This generates a private
+key and creates a CertificateSigningRequest. CertificateSigningRequests are not
+approved by default, so you will likely need to approve it manually:
 
 ```bash
 $ kubectl certificate approve <name>

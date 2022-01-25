@@ -35,6 +35,10 @@
               "path": "/docs/installation/helm.md"
             },
             {
+              "title": "CMCTL",
+              "path": "/docs/installation/cmctl.md"
+            },
+            {
               "title": "OLM",
               "path": "/docs/installation/operator-lifecycle-manager.md"
             },
@@ -249,8 +253,20 @@
               "path": "/docs/usage/kube-csr.md"
             },
             {
+              "title": "Kubectl Plugin CertificateSigningRequests",
+              "path": "/docs/usage/kubectl-plugin.md"
+            },
+            {
               "title": "Policy for cert-manager certificates",
               "path": "/docs/usage/approver-policy.md"
+            },
+            {
+              "title": "CMCTL",
+              "path": "/docs/usage/cmctl.md"
+            },
+            {
+              "title": "Ingress",
+              "path": "/docs/usage/ingress.md"
             }
           ]
         },
@@ -276,6 +292,10 @@
             {
               "title": "HTTP Validation",
               "path": "/docs/tutorials/acme/http-validation.md"
+            },
+            {
+              "title": "Ingress",
+              "path": "/docs/tutorials/acme/ingress.md"
             },
             {
               "title": "Pomerium Ingress",
@@ -526,6 +546,10 @@
               "path": "/docs/concepts/ca-injector.md"
             }
           ]
+        },
+        {
+          "title": "API Reference",
+          "path": "/docs/reference/api-docs.md"
         },
         {
           "title": "About Jetstack",

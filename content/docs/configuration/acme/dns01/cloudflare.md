@@ -115,7 +115,7 @@ Events:
 ```
 
 In this case we recommend
-[changing your DNS01 self-check nameservers](../#setting-nameservers-for-dns01-self-check).
+[changing your DNS01 self-check nameservers](./README.md#setting-nameservers-for-dns01-self-check).
 
 ## `Cloudflare API error for POST "/zones/<id>/dns_records` generic error
 

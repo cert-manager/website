@@ -5,7 +5,7 @@ description: Check cert-manager API
 
 ## Check cert-manager API
 
-First, make sure that [cmctl is installed](../../usage/cmctl/#installation).
+First, make sure that [cmctl is installed](../usage/cmctl.md#installation).
 
 cmctl performs a dry-run certificate creation check against the Kubernetes
 cluster. If successful, the message `The cert-manager API is ready` is
@@ -49,7 +49,7 @@ You should see the `cert-manager`, `cert-manager-cainjector`, and
 `cert-manager-webhook` pods in a `Running` state. The webhook might take a
 little longer to successfully provision than the others.
 
-If you experience problems, first check the [FAQ](../../faq/).
+If you experience problems, first check the [FAQ](../faq/README.md).
 
 Create an `Issuer` to test the webhook works okay.
 

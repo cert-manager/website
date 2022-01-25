@@ -11,5 +11,5 @@ cert-manager supports running on [Kubernetes](https://kubernetes.io) and
 two platforms is similar. Select the method that was used for installing
 cert-manager to go to the relevant uninstall documentation.
 
-- [kubectl](../kubectl/#uninstalling)
-- [helm](../helm/#uninstalling)
+- [kubectl](./kubectl.md#uninstalling)
+- [helm](./helm.md#uninstalling)

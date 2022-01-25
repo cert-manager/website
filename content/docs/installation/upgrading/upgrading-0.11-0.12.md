@@ -13,7 +13,7 @@ minimal changes that effect end users bar two changes which require action when
 upgrading.
 
 After addressing the following points, you should then follow the standard
-upgrade process [here](../).
+upgrade process [here](./README.md).
 
 ## Changes to the Vault Kubernetes Auth Mount Path
 

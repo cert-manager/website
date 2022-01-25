@@ -36,7 +36,8 @@ These are the upgrade instructions to upgrade from cert-manager `v0.14.0` or
 higher, please consult other upgrade guides first before upgrading to `v1.0` if
 you run an older version of cert-manager.
 
-No special requirements, you can follow the [regular upgrade process](../).
+No special requirements, you can follow the
+[regular upgrade process](./README.md).
 
 ### Kubernetes `1.15.x`
 
@@ -74,10 +75,10 @@ should convert the (Cluster)Issuers and delete the old CRD versions.
 
 This upgrade MUST be performed in the following sequence of steps:
 
-1. [Back up](../../../tutorials/backup/) existing cert-manager resources. See
-   the backup section.
+1. [Back up](../../tutorials/backup.md) existing cert-manager resources. See the
+   backup section.
 
-2. [Uninstall cert-manager](../../uninstall/).
+2. [Uninstall cert-manager](../uninstall.md).
 
 3. Update the `apiVersion` on all your backed up resources from
    `cert-manager.io/v1alpha2` to `cert-manager.io/v1`. See the converting
@@ -87,7 +88,7 @@ This upgrade MUST be performed in the following sequence of steps:
    `kubectl get crd | grep cert-manager.io`
 
 5. Re-install cert-manager `v1.0` from scratch according to the
-   [installation guide](../../).
+   [installation guide](../README.md).
 
 6. Apply the backed up resources again.
 
@@ -109,9 +110,8 @@ _Note that this will not export private keys or secrets._
 
 #### Converting resources
 
-You can use our [kubectl plugin](../../../usage/kubectl-plugin/) to
-automatically convert your backup from `v1alpha2` to `v1` using the following
-command:
+You can use our [kubectl plugin](../../usage/kubectl-plugin.md) to automatically
+convert your backup from `v1alpha2` to `v1` using the following command:
 
 ```bash
 kubectl cert-manager convert --output-version cert-manager.io/v1 -f cert-manager-backup.yaml > cert-manager-v1.yaml
@@ -152,12 +152,12 @@ kubectl delete crd issuers.cert-manager.io
 kubectl delete crd orders.acme.cert-manager.io
 ```
 
-For more info see the [uninstall cert-manager guide](../../uninstall/).
+For more info see the [uninstall cert-manager guide](../uninstall.md).
 
 #### Reinstall and restore
 
 To install cert-manager again you can follow the normal
-[installation guide](../../).
+[installation guide](../README.md).
 
 Once it has been fully installed you can re-apply the converted resources:
 

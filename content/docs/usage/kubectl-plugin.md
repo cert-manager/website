@@ -10,7 +10,7 @@ description: >-
 that can help you to manage cert-manager resources inside your cluster.
 
 While the kubectl plugin is supported, it is recommended to use
-[cmctl](../cmctl/) as this enables a better experience via tab auto-completion.
+[cmctl](./cmctl.md) as this enables a better experience via tab auto-completion.
 
 ## Installation
 
@@ -69,7 +69,7 @@ Use "kubectl cert-manager [command] --help" for more information about a command
 
 ## Commands
 
-Please refer to [cmctl](../cmctl/) for command documentation. The plugin
+Please refer to [cmctl](./cmctl.md) for command documentation. The plugin
 provides the same functionality bar the `completion` subcommand. Commands are
 invoked with `kubectl cert-manager` rather than `cmctl`, but function the same
 otherwise.

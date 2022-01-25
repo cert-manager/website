@@ -18,7 +18,7 @@ domains DNS records.
 
 The following Issuer defines the necessary information to enable DNS validation.
 You can read more about the Issuer resource in the
-[Issuer docs](../../../configuration/).
+[Issuer docs](../../configuration/README.md).
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -88,7 +88,7 @@ which one to use when obtaining certificates.
 
 More information about the DNS provider configuration, including a list of
 supported providers, can be found
-[in the DNS01 reference docs](../../../configuration/acme/dns01/).
+[in the DNS01 reference docs](../../configuration/acme/dns01/README.md).
 
 Once we have created the above Issuer we can use it to obtain a certificate.
 
@@ -103,7 +103,7 @@ spec:
   issuerRef:
     name: letsencrypt-staging
   dnsNames:
-    - "*.example.com"
+    - '*.example.com'
     - example.com
     - example.org
 ```
@@ -115,7 +115,7 @@ in your YAML resources, to avoid formatting issues. If you specify both
 `example.com` and `*.example.com` on the same Certificate, it will take slightly
 longer to perform validation as each domain will have to be validated one after
 the other. You can learn more about the Certificate resource in the
-[docs](../../../usage/). If the certificate is obtained successfully, the
+[docs](../../usage/README.md). If the certificate is obtained successfully, the
 resulting key pair will be stored in a secret called `example-com-tls` in the
 same namespace as the Certificate.
 
@@ -129,7 +129,7 @@ reference a `ClusterIssuer`, which is a cluster-scoped version of an Issuer, you
 must add `kind: ClusterIssuer` to the `issuerRef` stanza.
 
 For more information on `ClusterIssuers`, read the
-[issuer concepts](../../../concepts/issuer/).
+[issuer concepts](../..//concepts/issuer.md).
 
 The `acme` stanza defines the configuration for our ACME challenges. Here we
 have defined the configuration for our DNS challenges which will be used to

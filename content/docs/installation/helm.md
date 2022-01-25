@@ -16,8 +16,8 @@ taken to ensure that it is installed exactly once.
 
 - [Install Helm version 3 or later](https://helm.sh/docs/intro/install/).
 - Install a
-  [supported version of Kubernetes or OpenShift](../supported-releases/).
-- Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if
+  [supported version of Kubernetes or OpenShift](./supported-releases.md).
+- Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if
   you are using Kubernetes on a cloud platform.
 
 ### Steps
@@ -62,7 +62,7 @@ Uncomment the relevant line in the next steps to enable this.
 
 Note that if you're using a `helm` version based on Kubernetes `v1.18` or below
 (Helm `v3.2`), `installCRDs` will not work with cert-manager `v0.16`. See the
-[v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#helm) for more details.
+[v0.16 upgrade notes](./upgrading/upgrading-0.15-0.16.md#helm) for more details.
 
 #### 4. Install cert-manager
 
@@ -95,7 +95,7 @@ $ helm install \
   --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
 ```
 
-Once you have deployed cert-manager, you can [verify](../verify/) the
+Once you have deployed cert-manager, you can [verify](./verify.md) the
 installation.
 
 ## Output YAML

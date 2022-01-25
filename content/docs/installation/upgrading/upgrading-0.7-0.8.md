@@ -5,7 +5,7 @@ description:
 ---
 
 Upgrading from `v0.7` to `v0.8` is possible using the regular
-[upgrade guide](../).
+[upgrade guide](./README.md).
 
 All resources should continue to operate as before.
 
@@ -22,13 +22,14 @@ have a large, multi-team deployment of cert-manager that makes it complex to
 upgrade all manifests at once in place.
 
 After upgrading, it is **strongly recommended** that you update your ACME Issuer
-and Certificate resources to the [new format](../../../configuration/acme/).
+and Certificate resources to the
+[new format](../../configuration/acme/README.md).
 
 We will be removing support for the old format ahead of the 1.0 release.
 
 The documentation has been updated to reflect configuring using the new format,
 and as such, exhaustive information can be found in the
-[document](../../../configuration/acme/).
+[document](../../configuration/acme/README.md).
 
 ## Performing an incremental switch to the new format
 
@@ -88,7 +89,7 @@ spec:
           # You can continue to add new solver types if needed.
           # The most specific 'match' will be used.
           matchLabels:
-            use-cloudflare-solver: "true"
+            use-cloudflare-solver: 'true'
         dns01:
           # Adjust the configuration below according to your environment.
           # You can view more example configurations for different DNS01
@@ -143,7 +144,7 @@ kind: Ingress
 metadata:
   name: my-test-ingress
   labels:
-    use-cloudflare-solver: "true"
+    use-cloudflare-solver: 'true'
 ```
 
 ## Confirming all Certificate resources are upgraded
@@ -211,7 +212,7 @@ spec:
           # You can continue to add new solver types if needed.
           # The most specific 'match' will be used.
           matchLabels:
-            use-cloudflare-solver: "true"
+            use-cloudflare-solver: 'true'
         dns01:
           # Adjust the configuration below according to your environment.
           # You can view more example configurations for different DNS01

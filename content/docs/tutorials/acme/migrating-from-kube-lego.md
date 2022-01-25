@@ -35,7 +35,7 @@ By the end of the guide, we should have:
 4. Created an ACME `ClusterIssuer` using this private key, to issue certificates
    throughout your cluster
 
-5. Configured cert-manager's [`ingress-shim`](../../../usage/ingress/) to
+5. Configured cert-manager's [`ingress-shim`](../../usage/ingress.md) to
    automatically provision Certificate resources for all Ingress resources with
    the `kubernetes.io/tls-acme: "true"` annotation, using the `ClusterIssuer` we
    have created
@@ -64,9 +64,9 @@ $ kubectl get pods --namespace kube-lego
 ## 2. Deploy cert-manager
 
 cert-manager should be deployed using Helm, according to our official
-[installation guide](../../../installation/). No special steps are required
-here. We will return to this deployment at the end of this guide and perform an
-upgrade of some of the CLI flags we deploy cert-manager with however.
+[installation guide](../../installation/README.md). No special steps are
+required here. We will return to this deployment at the end of this guide and
+perform an upgrade of some of the CLI flags we deploy cert-manager with however.
 
 Please take extra care to ensure you have configured RBAC correctly when
 deploying Helm and cert-manager - there are some nuances described in our
@@ -189,7 +189,7 @@ cert-manager) to automatically create Certificate resources for all Ingress
 resources it finds with appropriate annotations.
 
 More information on the role of ingress-shim can be found
-[in the docs](../../../usage/ingress/), but for now we can just run a
+[in the docs](../../usage/ingress.md), but for now we can just run a
 `helm upgrade` in order to add a few additional flags. Assuming you've named
 your `ClusterIssuer` `letsencrypt-staging` (as above), run:
 

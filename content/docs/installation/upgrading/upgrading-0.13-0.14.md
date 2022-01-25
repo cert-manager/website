@@ -40,4 +40,4 @@ The webhook is now a required component, meaning that `no-webhook` variant of
 the manifests are no longer available in this release. Please use the
 appropriate manifests as mentioned above according to your Kubernetes version.
 
-From here on you can follow the [regular upgrade process](../).
+From here on you can follow the [regular upgrade process](./README.md).

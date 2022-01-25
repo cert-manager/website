@@ -14,7 +14,7 @@ We have also removed support for the **old configuration format** that was
 deprecated in the `v0.8` release. This means you **must** transition to using
 the new `solvers` style configuration format for your ACME issuers **before**
 upgrading to `v0.11`. For more information, see the
-[upgrading to `v0.8`](../upgrading-0.7-0.8/) guide.
+[upgrading to `v0.8`](./upgrading-0.7-0.8.md) guide.
 
 This makes for a fairly significant breaking change for users, as **all**
 cert-manager resources, or even Ingresses that reference cert-manager resources,
@@ -23,9 +23,9 @@ will need to be updated to reflect these changes.
 This upgrade should be performed in a few steps:
 
 1. Back up existing cert-manager resources, as per the
-   [backup and restore guide](../../../tutorials/backup/).
+   [backup and restore guide](../../tutorials/backup.md).
 
-2. [Uninstall cert-manager](../../uninstall/).
+2. [Uninstall cert-manager](../uninstall.md).
 
 3. Ensure the old cert-manager CRD resources have also been deleted:
    `kubectl get crd | grep certmanager.k8s.io`
@@ -34,7 +34,7 @@ This upgrade should be performed in a few steps:
    `certmanager.k8s.io/v1alpha1` to `cert-manager.io/v1alpha2`.
 
 5. Re-install cert-manager from scratch according to the
-   [installation guide](../../).
+   [installation guide](../README.md).
 
 You must be sure to properly **backup**, **uninstall**, **re-install** and
 **restore** your installation in order to ensure the upgrade is successful.
@@ -119,7 +119,7 @@ Support for the deprecated `spec.http01` or `spec.dns01` fields in `Issuer` and
 `ClusterIssuer` have been removed. Any `Issuer` or `ClusterIssuer` objects must
 be converted to use the equivalent `spec.solvers[].http01` or
 `spec.solvers[].dns01` syntax. You can read more about the Issuer resource in
-the [configuration documentation](../../../configuration/).
+the [configuration documentation](../../configuration/README.md).
 
 Any issuers that haven't been converted will result the `cert-manager` pod being
 unable to find any solvers at the expected location. This will result in errors

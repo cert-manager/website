@@ -12,7 +12,7 @@ Following their deprecation in version 1.4, the cert-manager API versions
 
 This means if your deployment manifests contain any of these API versions, you
 will not be able to deploy them after upgrading. Our new `cmctl` utility or old
-`kubectl cert-manager` plugin can [convert](../../usage/cmctl/#convert) old
+`kubectl cert-manager` plugin can [convert](../usage/cmctl.md#convert) old
 manifests to `v1` for you.
 
 <div class="info">
@@ -23,7 +23,7 @@ resources are stored in `etcd` at `v1` version and that cert-manger CRDs do not
 reference the deprecated APIs **before you upgrade to `v1.6`**.
 
 This is explained in more detail in the
-[Upgrading existing cert-manager resources](../../installation/upgrading/remove-deprecated-apis/#upgrading-existing-cert-manager-resources)
+[Upgrading existing cert-manager resources](../installation/upgrading/remove-deprecated-apis.md#upgrading-existing-cert-manager-resources)
 page.
 
 </div>
@@ -41,8 +41,7 @@ from `v2` to `v4`][jks-keystore-upgrade-pr]. If you are using a shorter
 password, certificates would have failed to renew, and the only observable error
 was in the cert-manager logs. This was fixed in cert-manager `v1.6.1`.
 
-[jks-keystore]:
-  ../../reference/api-docs/#cert-manager.io/v1.CertificateKeystores
+[jks-keystore]: ../reference/api-docs.md#cert-manager.io/v1.CertificateKeystores
 [jks-keystore-upgrade-pr]: https://github.com/jetstack/cert-manager/pull/4428
 
 ## Major Themes
@@ -55,7 +54,7 @@ The cert-manager kubectl plugin has been redesigned as a [standalone utility:
 While the kubectl plugin functionality remains intact, using `cmctl` allows for
 full tab completion.
 
-[cmctl]: ../../usage/cmctl/
+[cmctl]: ../usage/cmctl.md
 
 ### Supply Chain Security
 
@@ -64,7 +63,7 @@ aiming to achieve [SLSA 3](https://slsa.dev/levels#level-requirements) by the
 1.7 release date. cert-manager 1.6 has achieved the requirements for SLSA 2 when
 installed via helm. Our helm chart's signature can be verified with the
 cert-manager maintainers' public key
-[published on our website](../../installation/code-signing/).
+[published on our website](../installation/code-signing.md).
 
 Our container images will be signed using sigstore's
 [cosign](https://github.com/sigstore/cosign) as soon as our OCI registry

@@ -50,7 +50,7 @@ take `bazel run //hack/bin:helm` as an example:
 
 No worries we have a lot of helper scripts for you! Need to set up a local
 cluster and install cert-manager in it? Take a look at
-[our kind documentation](../kind/).
+[our kind documentation](./kind.md).
 
 We also have a few very handy tools inside `./hack` and `./devel`. These are the
 most common ones which you can use:
@@ -107,7 +107,7 @@ $ bazel build //cmd/...
 ```
 
 If you need them inside a local cluster check out
-[our kind documentation](../kind/).
+[our kind documentation](./kind.md).
 
 ### Building the CLI
 
@@ -143,7 +143,7 @@ you granular control.
   example `bazel test //pkg/acme/...` runs all tests in the ACME package
 - Integration tests: `bazel test //test/integration/...` will run all
   integration tests against a Bazel operated `kube-apiserver`
-- End-to-end tests: see the [e2e documentation](../e2e/)
+- End-to-end tests: see the [e2e documentation](./e2e.md)
 
 > **TIP**: `...` is a recursive lookup in Bazel, it will run all tests in all
 > subfolders when set, it is also the easiest way to invoke them.

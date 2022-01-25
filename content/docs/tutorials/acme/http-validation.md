@@ -18,7 +18,7 @@ the given file under a given path.
 
 The following Issuer defines the necessary information to enable HTTP
 validation. You can read more about the Issuer resource in the
-[Issuer docs](../../../concepts/issuer/).
+[Issuer docs](../../concepts/issuer.md).
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -84,7 +84,7 @@ spec:
 
 The Certificate resource describes our desired certificate and the possible
 methods that can be used to obtain it. You can learn more about the Certificate
-resource in the [docs](../../../concepts/certificate/). If the certificate is
+resource in the [docs](../../concepts/certificate.md). If the certificate is
 obtained successfully, the resulting key pair will be stored in a secret called
 `example-com-tls` in the same namespace as the Certificate.
 
@@ -99,7 +99,7 @@ reference a `ClusterIssuer`, which is a cluster-scoped version of an Issuer, you
 must add `kind: ClusterIssuer` to the `issuerRef` stanza.
 
 For more information on `ClusterIssuers`, read the
-[`ClusterIssuer` docs](../../../concepts/issuer/).
+[`ClusterIssuer` docs](../../concepts/issuer.md).
 
 The `acme` stanza defines the configuration for our ACME challenges. Here we
 have defined the configuration for our HTTP01 challenges which will be used to

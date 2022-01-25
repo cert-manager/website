@@ -10,7 +10,7 @@ description: >-
 This document aims to outline the process that should be followed for cutting a
 new release of cert-manager. If you would like to know more about current
 releases and the timeline for future releases, take a look at the
-[Supported Releases](/docs/installation/supported-releases/) page.
+[Supported Releases](../installation/supported-releases.md) page.
 
 ## Prerequisites
 
@@ -151,12 +151,11 @@ on the top-right corner of this page if a step is missing or if it is outdated.
    | final release                      | `v1.3.0`           |
    | patch release (or "point release") | `v1.3.1`           |
 
-
 2. **(final release only)** Make sure that a PR with the new upgrade document is
    ready to be merged on
    [cert-manager/website](https://github.com/cert-manager/website). See for
    example, see
-   [upgrading-1.0-1.1](https://cert-manager.io/docs/installation/upgrading/upgrading-1.0-1.1/).
+   [upgrading-1.0-1.1](../installation/upgrading/upgrading-1.0-1.1.md).
 
 3. Update the release branch:
 
@@ -230,7 +229,6 @@ on the top-right corner of this page if a step is missing or if it is outdated.
       | `BRANCH`          | Name of your release branch             |
       | `RELEASE_VERSION` | The git tag without the leading `v`     |
 
-
       Examples for each release type (e.g., initial alpha release):
 
       | Variable          | Example 1        | Example 2        | Example 2        | Example 3     | Example 4     |
@@ -243,7 +241,6 @@ on the top-right corner of this page if a step is missing or if it is outdated.
       | `END_REV`         | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
       | `BRANCH`          | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
       | `RELEASE_VERSION` | `1.3.0-alpha.0`  | `1.3.0-alpha.1`  | `1.3.0-beta.0`   | `1.3.0`       | `1.3.1`       |
-
 
       > \*The git tag of the "previous" release (`START_REV`) depends on which
       > type of release you count on doing. Look at the above examples to
@@ -328,8 +325,8 @@ on the top-right corner of this page if a step is missing or if it is outdated.
       </p></div>
 
    3. Send a second Slack message in reply to this first message with the Cloud
-   Build job link that `cmrel` displayed in "View logs at". For example, the
-   message would look like:
+      Build job link that `cmrel` displayed in "View logs at". For example, the
+      message would look like:
 
    <div class="pageinfo pageinfo-info"><p>
    Follow the <code>cmrel stage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
@@ -364,7 +361,7 @@ on the top-right corner of this page if a step is missing or if it is outdated.
       output of this command.
 
    3. While the build is running, send a third Slack message in reply to the
-   first message:
+      first message:
 
    <div class="pageinfo pageinfo-primary"><p>
    Follow the `cmrel publish` dry-run build: https://console.cloud.google.com/cloud-build/builds16f6f875-0a23-4fff-b24d-3de0af207463?project=1021342095237
@@ -393,7 +390,7 @@ on the top-right corner of this page if a step is missing or if it is outdated.
       </div>
 
    5. While the build is running, send a fourth Slack message in reply to the
-   first message:
+      first message:
 
    <div class="pageinfo pageinfo-primary"><p>
    Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
@@ -428,7 +425,7 @@ on the top-right corner of this page if a step is missing or if it is outdated.
       [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
 10. **(final release only)** Add the new final release to the
-    [supported-releases](/docs/installation/supported-releases/) page.
+    [supported-releases](../installation/supported-releases.md) page.
 
 11. Post a Slack message as an answer to the first message. Toggle the check box
     "Also send to `#cert-manager-dev`" so that the message is well visible. Also
@@ -468,7 +465,7 @@ on the top-right corner of this page if a step is missing or if it is outdated.
        order to:
 
        - Update the section "How we determine supported Kubernetes versions" on
-         the [supported-releases](/docs/installation/supported-releases/) page.
+         the [supported-releases](../installation/supported-releases.md) page.
          In the table, change the "next periodic" line with the correct links.
 
     3. **(final release only)** Create a PR on
@@ -489,11 +486,11 @@ on the top-right corner of this page if a step is missing or if it is outdated.
        order to:
 
        - Update the section "Supported releases" in the
-         [supported-releases](/docs/installation/supported-releases/) page.
+         [supported-releases](../installation/supported-releases.md) page.
        - Update the section "Supported releases" in the
-         [supported-releases](/docs/installation/supported-releases/) page.
+         [supported-releases](../installation/supported-releases.md) page.
        - Update the section "How we determine supported Kubernetes versions" on
-         the [supported-releases](/docs/installation/supported-releases/) page.
+         the [supported-releases](../installation/supported-releases.md) page.
          In the table, set "n/a" for the line where "next periodic" is since
          these tests will be disabled until we do our first alpha.
 

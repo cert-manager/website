@@ -124,7 +124,7 @@ configuration or operation while building your stack.
 Because of this, we will start with the Let's Encrypt staging issuer. Once your
 configuration is all but finalized, we will switch to a production issuer. Both
 of these issuers are configured to use the
-[`HTTP01`](../../../configuration/acme/http01/) challenge provider.
+[`HTTP01`](../../configuration/acme/http01/README.md) challenge provider.
 
 <ol>
 <li>

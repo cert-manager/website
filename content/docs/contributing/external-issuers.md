@@ -8,12 +8,12 @@ description: >-
   configure external issuer types, read the documentation here.
 ---
 
-cert-manager offers a number of [core issuer types](../../configuration/) that
+cert-manager offers a number of [core issuer types](../configuration/README.md) that
 represent certificate authorities that can sign certificates when requested. As
 of `v0.11`, cert-manager also supports out-of-tree external issuers, and treats
 them the same as in-tree issuer types. For more information on how to install
 and configure external issuer types, read the documentation
-[here](../../configuration/external/).
+[here](../configuration/external.md).
 
 ## Concepts
 
@@ -39,7 +39,7 @@ will then use the information inside that issuer resource to attempt to create a
 signed certificate, based upon the certificate request.
 
 Issuers must also ensure that before signing, the `CertificateRequest` is
-[`Approved`](../../concepts/certificaterequest/#approval). If the
+[`Approved`](../concepts/certificaterequest.md#approval). If the
 `CertificateRequest` is not `Approved`, the issuer should not process it.
 Issuers are not responsible for approving `CertificateRequests`. Issuer
 implementations may choose to support older versions of cert-manager (pre
@@ -55,7 +55,7 @@ controllers, such as the `Certificate` controller, that the resource is ready to
 be consumed. Conversely, if the `CertificateRequest` fails, it is as important
 to mark the resource as such, as this will also be used to signal to higher
 order controllers. You can read the valid condition states
-[here](../../concepts/certificaterequest/#conditions).
+[here](../concepts/certificaterequest.md#conditions).
 
 ## Implementation
 

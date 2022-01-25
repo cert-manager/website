@@ -7,14 +7,14 @@ description: >-
   cert-manager to request signed certificates.
 ---
 
-In cert-manager, the [`Certificate`](../../concepts/certificate/) resource
+In cert-manager, the [`Certificate`](../concepts/certificate.md) resource
 represents a human readable definition of a certificate request that is to be
 honored by an issuer which is to be kept up-to-date. This is the usual way that
 you will interact with cert-manager to request signed certificates.
 
 In order to issue any certificates, you'll need to configure an
-[`Issuer`](../../configuration/) or [`ClusterIssuer`](../../configuration/)
-resource first.
+[`Issuer`](../configuration/README.md) or
+[`ClusterIssuer`](../configuration/README.md) resource first.
 
 ## Creating Certificate Resources
 
@@ -48,8 +48,8 @@ spec:
   # See https://github.com/jetstack/cert-manager/issues/4292.
   secretTemplate:
     annotations:
-      my-secret-annotation-1: "foo"
-      my-secret-annotation-2: "bar"
+      my-secret-annotation-1: 'foo'
+      my-secret-annotation-2: 'bar'
     labels:
       my-secret-label: foo
 
@@ -100,14 +100,14 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 
 > Note: If you want to create an `Issuer` that can be referenced by
 > `Certificate` resources in _all_ namespaces, you should create a
-> [`ClusterIssuer`](../../concepts/issuer/#namespaces) resource and set the
+> [`ClusterIssuer`](../concepts/issuer.md#namespaces) resource and set the
 > `certificate.spec.issuerRef.kind` field to `ClusterIssuer`.
 
 > Note: The `renewBefore` and `duration` fields must be specified using a
 > [Go `time.Duration`](https://golang.org/pkg/time/#ParseDuration) string
 > format, which does not allow the `d` (days) suffix. You must specify these
 > values using `s`, `m`, and `h` suffixes instead. Failing to do so without
-> installing the [`webhook component`](../../concepts/webhook/) can prevent
+> installing the [`webhook component`](../concepts/webhook.md) can prevent
 > cert-manager from functioning correctly
 > [`#1269`](https://github.com/jetstack/cert-manager/issues/1269).
 
@@ -122,7 +122,7 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 
 A full list of the fields supported on the Certificate resource can be found in
 the
-[API reference documentation](../../reference/api-docs/#cert-manager.io/v1.CertificateSpec).
+[API reference documentation](../reference/api-docs.md#cert-manager.io/v1.CertificateSpec).
 
 ## X.509 key usages and extended key usages {#key-usages}
 
@@ -140,12 +140,12 @@ cert-manager will not attempt to request a new certificate if the current
 certificate does not match the current key usage set.
 
 An exhaustive list of supported key usages can be found in the
-[API reference documentation](../../reference/api-docs/#cert-manager.io/v1.KeyUsage).
+[API reference documentation](../reference/api-docs.md#cert-manager.io/v1.KeyUsage).
 
 ## Temporary Certificates while Issuing {#temporary-certificates-whilst-issuing}
 
 On old GKE versions (`1.10.7-gke.1` and below), when requesting certificates
-[using the ingress-shim](../ingress/) alongside the
+[using the ingress-shim](./ingress.md) alongside the
 [`ingress-gce`](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress)
 ingress controller, `ingress-gce`
 [required](https://github.com/kubernetes/ingress-gce/pull/388) a temporary
@@ -156,7 +156,7 @@ in `1.10.7-gke.2`.
 
 ```yaml
 # Required for GKE 1.10.7-gke.1 and below.
-cert-manager.io/issue-temporary-certificate": "true"
+cert-manager.io/issue-temporary-certificate": 'true'
 ```
 
 That made sure that a temporary self-signed certificate was present in the
@@ -190,8 +190,8 @@ sure deployments get restarted whenever a mounted Secret changes.
 
 ### Re-use of private keys
 
-Some issuers, like the built-in [Venafi issuer](/docs/configuration/venafi/),
-may disallow re-using private keys. If this is the case, you must explicitly
+Some issuers, like the built-in [Venafi issuer](../configuration/venafi.md), may
+disallow re-using private keys. If this is the case, you must explicitly
 configure the `rotationPolicy: Always` setting for each of your Certificate
 objects accordingly.
 
@@ -209,7 +209,7 @@ spec:
     rotationPolicy: Always # 🔰 Here.
 ```
 
-### Actions that will trigger a rotation of the private key {#actions-triggering-private-key-rotation}
+### Actions that will trigger a rotation of the private key
 
 Setting the `rotationPolicy: Always` won't rotate the private key immediately.
 In order to rotate the private key, the certificate objects must be reissued. A
@@ -224,7 +224,7 @@ certificate object is reissued under the following circumstances:
   ```sh
   cmctl renew cert-1
   ```
-  Note that the above command requires [cmctl](../cmctl/#renew).
+  Note that the above command requires [cmctl](./cmctl.md#renew).
 
 <div class="info">
 
@@ -232,7 +232,7 @@ certificate object is reissued under the following circumstances:
 **not a recommended solution** for manually rotating the private key. The
 recommended way to manually rotate the private key is to trigger the reissuance
 of the Certificate resource with the following command (requires
-[`cmctl`](../cmctl/#renew)):
+[`cmctl`](./cmctl.md#renew)):
 
 ```sh
 cmctl renew cert-1

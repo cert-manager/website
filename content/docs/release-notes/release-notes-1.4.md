@@ -43,7 +43,7 @@ Repository][], and which is therefore available on
 Please uninstall the existing cert-manager package and re-install by following
 the [OLM Installation Documentation][].
 
-[olm installation documentation]: ../../installation/operator-lifecycle-manager/
+[olm installation documentation]: ../installation/operator-lifecycle-manager/
 
 ### Upgrading cert-manager CRDs and stored versions of cert-manager custom resources
 
@@ -66,7 +66,7 @@ resources are stored in `etcd` at `v1` version and that cert-manger CRDs do not
 reference the deprecated APIs **by the time you upgrade to `v1.6`**.
 
 This is explained in more detail in the
-[Upgrading existing cert-manager resources](../../installation/upgrading/remove-deprecated-apis/#upgrading-existing-cert-manager-resources)
+[Upgrading existing cert-manager resources](../installation/upgrading/remove-deprecated-apis.md#upgrading-existing-cert-manager-resources)
 page.
 
 </div>
@@ -75,7 +75,7 @@ This change was made in the cert-manager PR [#4021][].
 
 [#4021]:
   https://github.com/jetstack/cert-manager/pull/4021
-  "Warn about removal of old v1alpha2, v1alpha3 and v1beta1 in 1.6"
+  'Warn about removal of old v1alpha2, v1alpha3 and v1beta1 in 1.6'
 
 ### Helm chart: `securityContext` defaults to non-root
 
@@ -106,7 +106,7 @@ Implemented in the cert-manager PR [#4036][].
 
 [#4036]:
   https://github.com/jetstack/cert-manager/pull/4036
-  "controller, cainject and webhook now run as non-root"
+  'controller, cainject and webhook now run as non-root'
 
 ### CA, Vault and Venafi issuer handling of `ca.crt` and `tls.crt`
 
@@ -129,9 +129,9 @@ managed by cert-manager with the CA issuer.
 
 [#3982]:
   https://github.com/jetstack/cert-manager/pull/3982
-  "All issuers + Vault issuer"
-[#3983]: https://github.com/jetstack/cert-manager/pull/3983 "Venafi issuer"
-[#3985]: https://github.com/jetstack/cert-manager/pull/3985 "CA issuer"
+  'All issuers + Vault issuer'
+[#3983]: https://github.com/jetstack/cert-manager/pull/3983 'Venafi issuer'
+[#3985]: https://github.com/jetstack/cert-manager/pull/3985 'CA issuer'
 
 ### Vault renewal bug
 
@@ -157,7 +157,7 @@ Fixed in the cert-manager PR [#4092][].
 
 [#4092]:
   https://github.com/jetstack/cert-manager/pull/4092
-  "Default renewal changed from 30 days before expiry to 1/3 of the duration before expiry"
+  'Default renewal changed from 30 days before expiry to 1/3 of the duration before expiry'
 
 ## New Features
 
@@ -177,13 +177,13 @@ Note that you will still need to manually approve the CSR object before
 cert-manager can sign the CSR.
 
 The documentation is available on the
-[the Kubernetes CSR usage page](../../usage/kube-csr/).
+[the Kubernetes CSR usage page](../usage/kube-csr.md).
 
 Implemented in cert-manager PR [#4064][].
 
 [#4064]:
   https://github.com/jetstack/cert-manager/pull/4064
-  "CA issuer experimental support for CertificateSigningRequests"
+  'CA issuer experimental support for CertificateSigningRequests'
 [certificatesigningrequest]:
   https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
 
@@ -209,10 +209,10 @@ Implemented in cert-manager PRs [#3876][], [#3932][].
 
 [#3932]:
   https://github.com/jetstack/cert-manager/pull/3932
-  "Adds support for accessing coversion webhook from outside cluster network"
+  'Adds support for accessing coversion webhook from outside cluster network'
 [#3876]:
   https://github.com/jetstack/cert-manager/pull/3876
-  "Adds support for accessing mutating and validating webhooks from outside cluster network"
+  'Adds support for accessing mutating and validating webhooks from outside cluster network'
 
 ### Helm chart: Service labels
 
@@ -242,7 +242,7 @@ Implemented in the cert-manager PR [#4009][].
 
 [#4009]:
   https://github.com/jetstack/cert-manager/pull/4009
-  "Helm chart: the Service labels can now be set on the controller"
+  'Helm chart: the Service labels can now be set on the controller'
 
 ### Akamai DNS01 solver
 
@@ -251,14 +251,14 @@ The Akamai DNS01 solver has been [updated][4007] to use the v2 of the
 
 [#4007]:
   https://github.com/jetstack/cert-manager/pull/4007
-  "Update of the Akamai DNS01 solver"
+  'Update of the Akamai DNS01 solver'
 
 ## Bug Fixes
 
-- The [RFC2136](https://cert-manager.io/docs/configuration/acme/dns01/rfc2136/)
-  issuer is now able to handle DNS01 challenges that map to multiple `TXT`
-  records. This lets you create Let's Encrypt certificates using RFC2136 with
-  multiple DNS names. Fixed in the cert-manager PR [#3622][].
+- The [RFC2136](../configuration/acme/dns01/rfc2136.md) issuer is now able to
+  handle DNS01 challenges that map to multiple `TXT` records. This lets you
+  create Let's Encrypt certificates using RFC2136 with multiple DNS names. Fixed
+  in the cert-manager PR [#3622][].
 - The comparison function `PublicKeysEqual` is now correct for public keys.
   Fixed in PR [#3914][].
 - The ACME issuer now works correctly with Certificates that have a long name
@@ -276,19 +276,19 @@ The Akamai DNS01 solver has been [updated][4007] to use the v2 of the
 
 [#3622]:
   https://github.com/jetstack/cert-manager/pull/3622
-  "RFC2136 fixed when used with challenge domains that contain multiple TXT records"
+  'RFC2136 fixed when used with challenge domains that contain multiple TXT records'
 [#3914]:
   https://github.com/jetstack/cert-manager/pull/3914
-  "Comparison between public keys now works properly"
+  'Comparison between public keys now works properly'
 [#3866]:
   https://github.com/jetstack/cert-manager/pull/3866
-  "Certificates with long names are not generated non-unique Orders anymore"
+  'Certificates with long names are not generated non-unique Orders anymore'
 [#3805]:
   https://github.com/jetstack/cert-manager/pull/3805
   "Misbehaving ACME servers won't get Orders stuck anymore"
 [#3878]:
   https://github.com/jetstack/cert-manager/pull/3878
-  "When a CertificateRequest is Denied, the internal issuers set Ready=False"
+  'When a CertificateRequest is Denied, the internal issuers set Ready=False'
 
 ## Other Changes
 
@@ -299,7 +299,7 @@ The Akamai DNS01 solver has been [updated][4007] to use the v2 of the
 
 [#4016]:
   https://github.com/jetstack/cert-manager/pull/4016
-  "Use the configmapsleases resource instead of configmaps"
+  'Use the configmapsleases resource instead of configmaps'
 
 - The `keyAlgorithm` for the ACME Issuer is now deprecated, and the EAB MAC
   algorithm is now hard-coded to `HS256`.
@@ -321,10 +321,10 @@ The Akamai DNS01 solver has been [updated][4007] to use the v2 of the
 
 [#3877]:
   https://github.com/jetstack/cert-manager/pull/3877
-  "Deprecation of the keyAlgorithm field"
+  'Deprecation of the keyAlgorithm field'
 [#3936]:
   https://github.com/jetstack/cert-manager/pull/3936
-  "Webhook warns the user when keyAlgorithm is used"
+  'Webhook warns the user when keyAlgorithm is used'
 
 - If you happen to look at the cert-manager controller logs, you may see this
   new message about optimistic locking:
@@ -348,7 +348,7 @@ The Akamai DNS01 solver has been [updated][4007] to use the v2 of the
 
 [#3794]:
   https://github.com/jetstack/cert-manager/pull/3794
-  "Less alarming message on optimistic locking errors"
+  'Less alarming message on optimistic locking errors'
 
 - The `util.UsageContentCommittment` (which contained a spelling mistake) was
   deprecated in favor of `util.UsageContentCommitment`. The only people impacted
@@ -357,27 +357,27 @@ The Akamai DNS01 solver has been [updated][4007] to use the v2 of the
 
 [#3860]:
   https://github.com/jetstack/cert-manager/pull/3860
-  "Fix a spelling mistake in a cert-manager Go package and deprecate the old name"
+  'Fix a spelling mistake in a cert-manager Go package and deprecate the old name'
 
 - The webhook now panics when it is not able to register the API schemes.
   Previously, the webhook would silently skip the error and start.
 
 [#4037]:
   https://github.com/jetstack/cert-manager/pull/4037
-  "Webhook now panics instead of silently starting if the API scheme cannot be registered"
+  'Webhook now panics instead of silently starting if the API scheme cannot be registered'
 
 - A couple of legacy functions in `test/e2e/util` package have been removed.
   These functions can be found in the `test/unit/gen` package.
 
 [#3873]:
   https://github.com/jetstack/cert-manager/pull/3873
-  "Legacy functions in the test/e2e/util have been removed"
+  'Legacy functions in the test/e2e/util have been removed'
 
 - The Kubernetes Go dependencies have been updated from `v0.19.0` to `v0.21.0`.
 
 [#3926]:
   https://github.com/jetstack/cert-manager/pull/3926
-  "Update Kubernetes Go imports from v0.19.0 to v0.21.0"
+  'Update Kubernetes Go imports from v0.19.0 to v0.21.0'
 
 - When waiting for DNS propagating, the ACME DNS01 self-check now returns a
   better message when an unexpected DNS response code is received, such as
@@ -411,7 +411,7 @@ The Akamai DNS01 solver has been [updated][4007] to use the v2 of the
 
 [#3906]:
   https://github.com/jetstack/cert-manager/pull/3906
-  "Better message when the ACME DNS01 self-check gets an unexpected DNS response code"
+  'Better message when the ACME DNS01 self-check gets an unexpected DNS response code'
 
 - The `distroless/static` base image was updated to the latest version as of
   2021-05-20.

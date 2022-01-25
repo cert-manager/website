@@ -36,7 +36,7 @@ The `v1.0` release is a stability release with a few focus areas:
 - ACME improvements
 
 As usual, please read the
-[upgrade notes](/docs/installation/upgrading/upgrading-0.16-1.0/) before
+[upgrade notes](../installation/upgrading/upgrading-0.16-1.0.md) before
 upgrading.
 
 ## `v1` API
@@ -68,7 +68,7 @@ manifests to the `v1` API as older versions will soon be deprecated.
 
 Users of the `legacy` version of cert-manager will still only have the `v1` API,
 migration steps can be found in the
-[upgrade notes](/docs/installation/upgrading/upgrading-0.16-1.0/).
+[upgrade notes](../installation/upgrading/upgrading-0.16-1.0.md).
 
 ## `kubectl cert-manager status` command
 
@@ -188,7 +188,7 @@ Tip: My default cert-manager runs on level 2 (Info), you can set this using
 
 _Note_: Looking at the logs while troubleshooting cert-manager should be last
 resort behavior, for more info check out our
-[troubleshooting guide](../../faq/troubleshooting/)
+[troubleshooting guide](../faq/troubleshooting.md)
 
 ## ACME improvements
 
@@ -248,7 +248,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    preferredChain: "ISRG Root X1"
+    preferredChain: 'ISRG Root X1'
 ```
 
 If you prefer to keep the `IdenTrust` chain you can do that by setting the
@@ -262,7 +262,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    preferredChain: "DST Root CA X3"
+    preferredChain: 'DST Root CA X3'
 ```
 
 Note that this Root CA is expiring soon, Let's Encrypt will keep this

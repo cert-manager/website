@@ -1,8 +1,8 @@
 ---
 title: Release Notes
 description:
-  "The v1.1 release is our first release in the v1 series with a few focus
-  areas:"
+  'The v1.1 release is our first release in the v1 series with a few focus
+  areas:'
 ---
 
 The `v1.1` release is our first release in the `v1` series with a few focus
@@ -26,7 +26,7 @@ check out
 [our road map](https://github.com/jetstack/cert-manager/blob/master/ROADMAP.md)!
 
 As usual, please read the
-[upgrade notes](/docs/installation/upgrading/upgrading-1.0-1.1/) before
+[upgrade notes](../installation/upgrading/upgrading-1.0-1.1.md) before
 upgrading.
 
 ## ACME Improvements
@@ -71,5 +71,5 @@ into any rate limiting or other errors your ACME issuer provides us.
 
 It is now possible to use a long lived access-token for authentication when
 configuring
-[Venafi TPP `Issuer` and `ClusterIssuer` types](/docs/configuration/venafi/).
+[Venafi TPP `Issuer` and `ClusterIssuer` types](../configuration/venafi.md).
 This authentication mechanism is supported by `Venafi TPP >= 19.2`.

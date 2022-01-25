@@ -1,6 +1,6 @@
 ---
 title: Securing Gateway Resources
-description: "FEATURE STATE: cert-manager 1.5 [alpha]"
+description: 'FEATURE STATE: cert-manager 1.5 [alpha]'
 ---
 
 **FEATURE STATE**: cert-manager 1.5 [alpha]
@@ -10,13 +10,13 @@ description: "FEATURE STATE: cert-manager 1.5 [alpha]"
 📌 This page focuses on automatically creating Certificate resources by
 annotating Gateway resource. If you are looking for using an ACME Issuer along
 with HTTP-01 challenges using the Gateway API, see
-[ACME HTTP-01](/docs/configuration/acme/http01/).
+[ACME HTTP-01](../configuration/acme/http01/README.md).
 
 </div>
 
 cert-manager can generate TLS certificates for Gateway resources. This is
 configured by adding annotations to a Gateway and is similar to the process for
-[Securing Ingress Resources](/docs/usage/ingress/).
+[Securing Ingress Resources](../usage/ingress.md).
 
 The Gateway resource is part of the [Gateway API][gwapi], a set of CRDs that you
 install on your Kubernetes cluster and which provide various improvements over
@@ -332,7 +332,7 @@ spec:
 
 If you are migrating to Gateway resources from Ingress resources, be aware that
 there are some differences between
-[the annotations for Ingress resources](https://cert-manager.io/docs/usage/ingress/#supported-annotations)
+[the annotations for Ingress resources](../usage/ingress.md#supported-annotations)
 versus the annotations for Gateway resources.
 
 The Gateway resource supports the following annotations for generating
