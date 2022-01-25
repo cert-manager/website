@@ -25,10 +25,10 @@ function Dropdown({ setSidebarCollapsed, routes }) {
           <Icon name="chevronDown" />
         </span>
       </button>
-      <ul className={open ? 'h-auto pl-8 border-l border-gray-2/40' : 'h-0 overflow-y-hidden'}>
+      <ul className={open ? 'h-auto pl-4 border-l border-gray-2/40' : 'h-0 overflow-y-hidden'}>
         {routes.routes.map((r, idx) => {
           if (!r.path) {
-            return <li key={`${r.title}-${idx}`}>{r.title}</li>
+            return <Dropdown routes={r} sidebarCollapsed={setSidebarCollapsed} key={`${r.title}-${idx}`} />
           } else {
             return (
               <li key={`${r.path}-${idx}`}>
