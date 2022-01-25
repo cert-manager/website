@@ -37,13 +37,11 @@ spec:
   # Secret names are always required.
   secretName: example-com-tls
 
-  # Secret template is optional. If set, these annotations
-  # and labels will be copied to the secret named example-com-tls.
-
-  # Note: Labels and annotations from the template are only synced to the Secret at the time when the certificate 
-  # is created or renewed. Currently labels and annotations can only be added, but not removed. Removing any 
-  # labels or annotations from the template or removing the template itself will have no effect.
-  # See https://github.com/jetstack/cert-manager/issues/4292.
+  # secretTemplate is optional. If set, these annotations and labels will be
+  # copied to the Secret named example-com-tls. These labels and annotations will
+  # be re-reconciled if the Certificate's secretTemplate changes. secretTemplate
+  # is also enforced, so relevant label and annotation changes on the Secret by a
+  # third party will be overwriten by cert-manager to match the secretTemplate.
   secretTemplate:
     annotations:
       my-secret-annotation-1: "foo"
