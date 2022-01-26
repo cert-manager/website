@@ -143,7 +143,6 @@ out on the [`#cert-manager` Slack channel]; it's a huge help and much appreciate
 - Added `additionalOutputFormats` parameter to allow `DER` (binary) and `CombinedPEM` (key + cert bundle) formats. ([#4598](https://github.com/jetstack/cert-manager/pull/4598), [@seuf](https://github.com/seuf))
 - Added a makefile based build workflow which doesn't depend on bazel ([#4554](https://github.com/jetstack/cert-manager/pull/4554), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Added a new Helm chart parameter `prometheus.servicemonitor.honorLabels`, which sets the `honor_labels` field  of the Prometheus scrape config. ([#4608](https://github.com/jetstack/cert-manager/pull/4608), [@thirdeyenick](https://github.com/thirdeyenick))
-- Added helm value `.Values.serviceAnnotations` ([#4329](https://github.com/jetstack/cert-manager/pull/4329), [@jwenz723](https://github.com/jwenz723))
 - Certificate Secrets are now managed by the APPLY API call, rather than UPDATE/CREATE. The issuing controller actively reconciles Certificate SecretTemplate's against corresponding Secrets, garbage collecting and correcting key/value changes. ([#4638](https://github.com/jetstack/cert-manager/pull/4638), [@JoshVanL](https://github.com/JoshVanL))
 
 ### Bug or Regression
@@ -155,6 +154,7 @@ out on the [`#cert-manager` Slack channel]; it's a huge help and much appreciate
 - Improve checksum validation in makefile based tool installation ([#4680](https://github.com/jetstack/cert-manager/pull/4680), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - The HTTP-01 ACME solver now uses the `kubernetes.io/ingress.class` annotation instead of the `spec.ingressClassName` in created Ingress resources. ([#4762](https://github.com/jetstack/cert-manager/pull/4762), [@jakexks](https://github.com/jakexks))
 - The `cmctl experimental install` command now uses the cert-manager namespace. This fixes a bug which was introduced in release 1.6 that caused cert-manager to be installed in the default namespace. ([#4763](https://github.com/jetstack/cert-manager/pull/4763), [@wallrj](https://github.com/wallrj))
+- Fixed a bug in the way the Helm chart handles service annotations on the controller and webhook services. ([#4329](https://github.com/jetstack/cert-manager/pull/4329), [@jwenz723](https://github.com/jwenz723))
 
 ### Other (Cleanup or Flake)
 
