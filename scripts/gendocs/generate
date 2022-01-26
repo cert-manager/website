@@ -162,11 +162,11 @@ checkout "release-1.6"
 # otherwise unreleased CLI flags are included.
 # For 1.6 they must happen before removing the legacy APIs
 # as it will not compile without them.
-genclireference "docs" "cmd/acmesolver" "acmesolver"
-genclireference "docs" "cmd/cainjector" "cainjector"
-genclireference "docs" "cmd/ctl" "cmctl"
-genclireference "docs" "cmd/controller" "controller"
-genclireference "docs" "cmd/webhook" "webhook"
+genclireference "v1.6-docs" "cmd/acmesolver" "acmesolver"
+genclireference "v1.6-docs" "cmd/cainjector" "cainjector"
+genclireference "v1.6-docs" "cmd/ctl" "cmctl"
+genclireference "v1.6-docs" "cmd/controller" "controller"
+genclireference "v1.6-docs" "cmd/webhook" "webhook"
 
 # In cert-manager 1.6 cert-manager.io and acme.cert-manager.io alpha and beta
 # API versions are no longer served, but the apis are still in the codebase. We
