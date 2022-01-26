@@ -511,3 +511,8 @@ page if a step is missing or if it is outdated.
        the latest version. This should be done after every release, including
        patch releases as we want to encourage users to always install the latest
        patch.
+
+    9. Open a PR against our
+       [Algolia indexing configuration](https://github.com/algolia/docsearch-configs/blob/master/configs/cert-manager.json#L7-L13)
+       including the new version for search indexing, as in
+       [this PR](https://github.com/algolia/docsearch-configs/pull/2278).
