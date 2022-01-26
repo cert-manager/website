@@ -22,6 +22,9 @@ cert-manager 1.5 is now compatible with both Ingress `v1` and `v1beta1`.
 cert-manager will default to using `v1` Ingress, and fall back to `v1beta1` when
 `v1` is not available.
 
+Please read the [Ingress class compatibility](../../installation/upgrading/ingress-class-compatibility/)
+notes to see if your Ingress controller has any known issues.
+
 Additionally, the cert-manager API versions `v1alpha2`, `v1alpha3` and `v1beta1`
 are now deprecated, and will be removed in cert-manager 1.7. Please change all
 your YAML manifests that use a deprecated API version to use
