@@ -226,7 +226,9 @@ honour
 hostname
 https
 i.e.
+ingress-gce
 ingress-nginx
+ingressclass
 injectable
 inteon
 io
@@ -246,6 +248,7 @@ keystores
 kit837
 kms-issuer
 kube-cert-manager
+kube-ingress-aws-controller
 kube-lego
 kubebuilder
 kubectl
@@ -334,6 +337,7 @@ v0.16
 v0.23.1
 v1
 v1.16
+v1.19
 v1.6.1
 v1.7
 v1alpha2
