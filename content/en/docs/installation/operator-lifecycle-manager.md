@@ -69,7 +69,7 @@ spec:
   name: cert-manager
 ...
 status:
-  currentCSV: cert-manager.v1.6.0
+  currentCSV: cert-manager.v1.7.0
   state: AtLatestKnown
 ...
 ```
