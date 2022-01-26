@@ -75,7 +75,7 @@ genversionwithcli() {
   genclireference "$2" "cmd/webhook" "webhook"
 
   # if any of the above steps succeeded copy over the index file
-  if [ -d "$REPO_ROOT/content/en/$2/cli" ]; then
+  if [ "$2" != "docs" ] && [ -d "$REPO_ROOT/content/en/$2/cli" ]; then
     cp "$REPO_ROOT/content/en/docs/cli/_index.md" "${REPO_ROOT}/content/en/$2/cli/"
   fi
 }
