@@ -28,7 +28,7 @@ create an `IngressClass` object matching the field to work.
 cert-manager aims to be compatible with as many ingress controllers as possible. According to the
 Ingress v1 [Kubernetes enhancement proposal], the deprecated annotation, if present, takes
 precedence over the new field. From our perspective, the option that maintains the highest
-compatibility is to only use the annotation, even when creating `v1` Ingresses
+compatibility is to only use the annotation, even when creating `v1` Ingresses.
 
 [Kubernetes enhancement proposal]: https://github.com/kubernetes/enhancements/tree/44dd2975dc6cdad96ca73e7b0ba1794f1196f604/keps/sig-network/1453-ingress-api#interoperability-with-previous-annotation
 
@@ -47,13 +47,13 @@ If you chose not to use the IngressClass `nginx` that is created by default by t
 ## Istio
 
 If you are using Istio and you had to create an IngressClass while migrating to cert-manager 1.5 or 1.6
-and that you chose to create an IngressClass that isn't named `istio` (e.g., you named it `istio-internal`),
+and you chose to create an IngressClass that isn't named `istio` (e.g., you named it `istio-internal`),
 you will need to change the `class` field on those Issuers back to `istio`.
 
 ## Traefik
 
 If you are using Traefik and you had to create an IngressClass while migrating to cert-manager 1.5
-or 1.6 and that the IngressClass you created isn't named `traefik` (for example, you called
+or 1.6 and the IngressClass you created isn't named `traefik` (for example, you called
 the IngressClass `traefik-external`), you will need to add a command-line argument to your
 Traefik deployment:
 
@@ -63,6 +63,6 @@ Traefik deployment:
 
 ## Ambassador
 
-If you are using Ambassador and found that you had to create an IngressClass while migrating to
-cert-manager 1.5 or 1.6, and that the IngressClass you created isn't named `ambassador`
+If you are using Ambassador and you had to create an IngressClass while migrating to
+cert-manager 1.5 or 1.6, and the IngressClass you created isn't named `ambassador`
 (e.g., `ambassador-internal`), you will need to change the `class` field on the affected Issuers back to `ambassador`.
