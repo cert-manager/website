@@ -134,11 +134,11 @@ and can now be compiled on Apple Silicon ([#4485](https://github.com/jetstack/ce
 
 - Fix a bug in the Vault client that led to a panic after a request to Vault health endpoint failed. ([#4456](https://github.com/jetstack/cert-manager/pull/4456), [@JoshVanL](https://github.com/JoshVanL))
 - Fix CRDs which were accidentally changed in cert-manager `v1.5.0` ([#4353](https://github.com/jetstack/cert-manager/pull/4353), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- Fix regression in Ingress `PathType` introduced in `v1.5.0` ([#4373](https://github.com/jetstack/cert-manager/pull/4373), [@jakexks](https://github.com/jakexks))
+- Fix a regression in Ingress `PathType` introduced in `v1.5.0` ([#4373](https://github.com/jetstack/cert-manager/pull/4373), [@jakexks](https://github.com/jakexks))
 - Fixed the HTTP-01 solver creating `ClusterIP` instead of `NodePort` services by default. ([#4393](https://github.com/jetstack/cert-manager/pull/4393), [@jakexks](https://github.com/jakexks))
-- Fixes renewal time issue for certs with skewed duration period. ([#4399](https://github.com/jetstack/cert-manager/pull/4399), [@irbekrm](https://github.com/irbekrm))
-- Pod Security Policy for startup API check job ([#4364](https://github.com/jetstack/cert-manager/pull/4364), [@ndegory](https://github.com/ndegory))
-- The `startupapicheck` post-install hook in the Helm chart now deletes any post-install hook resources left after a previous failed install allowing helm install to be re-run after a previous failure. ([#4433](https://github.com/jetstack/cert-manager/pull/4433), [@wallrj](https://github.com/wallrj))
+- Fix a bug where a Certificate may not get renewed when the issued Certificate has a one-second skew between `notBefore` and `notAfter` and `spec.duration` is not used. This one-second skew can be observed on certificates issued with Let's Encrypt and caused a mismatch in time precision between the time stored in `status.renewalTime` and the time internally computed by cert-manager. ([#4399](https://github.com/jetstack/cert-manager/pull/4399), [@irbekrm](https://github.com/irbekrm))
+- Helm chart: the post-install hook `startupapicheck` is now compatible with PodSecurityPolicy. ([#4364](https://github.com/jetstack/cert-manager/pull/4364), [@ndegory](https://github.com/ndegory))
+- Helm chart: the post-install hook `startupapicheck` now deletes any post-install hook resources left after a previous failed install allowing `helm install` to be re-run after a failed attempt. ([#4433](https://github.com/jetstack/cert-manager/pull/4433), [@wallrj](https://github.com/wallrj))
 - The defaults for leader election parameters are now consistent across cert-manager and cainjector. ([#4359](https://github.com/jetstack/cert-manager/pull/4359), [@johanfleury](https://github.com/johanfleury))
 - Use `GetAuthorization` instead of `GetChallenge` when querying the current state of an ACME challenge. ([#4430](https://github.com/jetstack/cert-manager/pull/4430), [@JoshVanL](https://github.com/JoshVanL))
 

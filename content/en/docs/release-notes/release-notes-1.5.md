@@ -1,15 +1,62 @@
 ---
-title: "Release Notes"
+title: "Release 1.5"
 linkTitle: "v1.5"
 weight: 780
 type: "docs"
 ---
 
-# Release `v1.5.0`
+## v1.5.4
 
-## Major Themes
+### Changelog since v1.5.3
 
-### API Deprecation
+#### Bug or Regression
+
+- Fixed a bug that caused cert-manager to panic when the Vault Issuer failed to reach the health endpoint. ([#4476](https://github.com/jetstack/cert-manager/pull/4476), [@JoshVanL](https://github.com/JoshVanL))
+- Helm chart: the post-install hook `startupapicheck` is now compatible with PodSecurityPolicy. ([#4432](https://github.com/jetstack/cert-manager/pull/4432), [@ndegory](https://github.com/ndegory))
+- Helm chart: the post-install hook `startupapicheck` now deletes any post-install hook resources left after a previous failed install allowing `helm install` to be re-run after a failed attempt. ([#4435](https://github.com/jetstack/cert-manager/pull/4435), [@wallrj](https://github.com/wallrj))
+
+#### Other (Cleanup or Flake)
+
+- Update cert-manager base image versions ([#4479](https://github.com/jetstack/cert-manager/pull/4479), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+## v1.5.3
+
+### Changelog since v1.5.2
+
+#### Bug or Regression
+
+- Fix a bug where a Certificate may not get renewed when the issued Certificate has a one-second skew between `notBefore` and `notAfter` and `spec.duration` is not used. This one-second skew can be observed on certificates issued with Let's Encrypt and caused a mismatch in time precision between the time stored in `status.renewalTime` and the time internally computed by cert-manager. ([#4403](https://github.com/jetstack/cert-manager/pull/4403), @irbekrm). Thanks to @mfmbarros for help with debugging the issue!
+
+## v1.5.2
+
+### Changelog since v1.5.1
+
+#### Bug or Regression
+
+- Fix a regression introduced in v1.5.0 where the Ingress created for solving HTTP-01 challenges was created with `pathType: Exact` instead of `pathType: ImplementationSpecific`. ([#4385](https://github.com/jetstack/cert-manager/pull/4385), [@jakexks](https://github.com/jakexks))
+- Fixed the HTTP-01 solver creating ClusterIP instead of NodePort services by default. ([#4394](https://github.com/jetstack/cert-manager/pull/4394), [@jakexks](https://github.com/jakexks))
+- Removes status fields from CRD configs ([#4387](https://github.com/jetstack/cert-manager/pull/4387), [@irbekrm](https://github.com/irbekrm))
+
+## v1.5.1
+
+The CRDs for the cert-manager v1beta1 API were mistakenly changed in cert-manager v1.5.0. If you
+installed the CRDs for v1.5.0, you should upgrade your CRDs to v1.5.1.
+
+The only affected API version is v1beta1, so if you're using the latest version - v1 - you won't
+be affected by the CRD changes. It's worth upgrading to v1 in any case, since v1alpha2, v1alpha3 and
+v1beta1 are all deprecated and will be removed in a future release.
+
+### Changelog since v1.5.0
+
+#### Bug or Regression
+
+- Fix `v1beta1` CRDs which were accidentally changed in cert-manager v1.5.0 ([#4355](https://github.com/jetstack/cert-manager/pull/4355), [@jetstack-bot](https://github.com/jetstack-bot))
+
+## v1.5.0
+
+### Major Themes
+
+#### API Deprecation
 
 The recent Kubernetes 1.22 release has removed a number of deprecated APIs. You
 can read the official blog post [Kubernetes API and Feature Removals In
@@ -34,14 +81,14 @@ These deprecation changes have been implemented in the cert-manager PRs
 [#4225](https://github.com/jetstack/cert-manager/pull/4225) and
 [#4172](https://github.com/jetstack/cert-manager/pull/4172).
 
-## Experimental Features
+### Experimental Features
 
 Features that we are currently working on are included in cert-manager releases
 but disabled by default, as they are likely to change in future. If any of them
 look interesting to you, please try them out and report bugs or quirks in a
 GitHub Issue.
 
-### Gateway API
+#### Gateway API
 
 We have seen many requests from users to support different ways of routing HTTP
 traffic into their clusters for solving ACME HTTP-01 challenges. As the
@@ -67,7 +114,7 @@ Implemented in the cert-manager PRs
 [#4276](https://github.com/jetstack/cert-manager/pull/4276) and
 [#4158](https://github.com/jetstack/cert-manager/pull/4158).
 
-### CertificateSigningRequests
+#### CertificateSigningRequests
 
 CertificateSigningRequest is a built-in Kubernetes resource that was originally
 aimed at requesting X.509 client certificates and serving certificates for
@@ -112,9 +159,9 @@ The above features were implemented in the cert-manager PRs
 [#4106](https://github.com/jetstack/cert-manager/pull/4106), and
 [#4143](https://github.com/jetstack/cert-manager/pull/4143)
 
-## User Experience
+### User Experience
 
-### kubectl plugin
+#### kubectl plugin
 
 cert-manager comes with a kubectl plugin, `kubectl cert-manager`, that comes in
 handy for checking the status of your cert-manager Certificate resources.
@@ -156,7 +203,7 @@ These features were implemented by Tim in the cert-manager PRs
 [#4205](https://github.com/jetstack/cert-manager/pull/4205), and
 [#4138](https://github.com/jetstack/cert-manager/pull/4138).
 
-### Helm chart
+#### Helm chart
 
 While installing cert-manager using Helm, you might have noticed that the
 `--wait` flag does not wait until cert-manager is fully functional.
@@ -168,7 +215,7 @@ ready.
 Implemented in the cert-manager PR
 [#4234](https://github.com/jetstack/cert-manager/pull/4234) by Tim.
 
-### Labels and annotations on generated Secret and CertificateRequest resources
+#### Labels and annotations on generated Secret and CertificateRequest resources
 
 cert-manager now allows you to add custom annotations and labels to the Secret
 containing the TLS key pair using the new Certificate field `secretTemplate`.
@@ -211,7 +258,7 @@ Implemented in the cert-manager PRs
 [#3828](https://github.com/jetstack/cert-manager/pull/3828) and
 [#4251](https://github.com/jetstack/cert-manager/pull/4251).
 
-## Community
+### Community
 
 This is the first time that cert-manager participated in Google Summer of Code.
 Congratulations to [Arsh](https://github.com/RinkiyaKeDad) and
@@ -242,7 +289,7 @@ out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
 
 ---
 
-### New Features
+#### New Features
 
 - cert-manager now supports using Ed25519 private keys and signatures for
   Certificates. Implemented in the cert-manager PR
@@ -276,7 +323,7 @@ out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
   service using the Helm value `webhook.serviceLabels`. Implemented in the
   cert-manager PR [#4260](https://github.com/jetstack/cert-manager/pull/4260).
 
-### Bug or Regression
+#### Bug or Regression
 
 - Security: cert-manager now times out after 10 second when performing the
   self-check while solving HTTP-01 challenges. Fixed in the cert-manager PR
@@ -319,7 +366,7 @@ out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
   Helm-specific labels from the static manifests. Fixed in the cert-manager PR
   [#4190](https://github.com/jetstack/cert-manager/pull/4190).
 
-### Other (Cleanup or Flake)
+#### Other (Cleanup or Flake)
 
 - A conformance end-to-end testing suite was added for the
   CertificateSigningRequest resources
