@@ -24,7 +24,7 @@ for full instructions.
 ### Ingress Class Semantics
 
 In 1.7, we have reverted a change that caused a regression in the ACME Issuer.
-Before 1.5, the Ingress created by cert-manager while solving an HTTP-01 challenge contained the `kubernetes.io/ingress.class` annotation:
+Before v1.5.4, the Ingress created by cert-manager while solving an HTTP-01 challenge contained the `kubernetes.io/ingress.class` annotation:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -33,7 +33,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: istio # The `class` present on the Issuer.
 ```
-After 1.5, the Ingress does not contain the annotation anymore. Instead, cert-manager uses the `ingressClassName` field:
+Since v1.5.4, the Ingress does not contain the annotation anymore. Instead, cert-manager uses the `ingressClassName` field:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -44,7 +44,7 @@ spec:
 
 This broke many users that either don't use an Ingress controller that supports the field (such as ingress-gce and Azure AGIC), as well as people who did not need to create an IngressClass previously (such as with Istio and Traefik).
 
-The regression is present in cert-manager 1.5.0, 1.5.1, 1.5.2, 1.5.3, 1.5.4,
+The regression is present in cert-manager 1.5.4,
 1.6.0, 1.6.1, 1.6.2, and 1.6.3. It is only present on Kubernetes 1.19+ and only appears when using an Issuer or ClusterIssuer with an ACME HTTP-01 solver configured.
 
 In 1.7, we have restored the original behavior which is to use the annotation. We will also backport this fix to 1.5.5 and 1.6.4, allowing people to upgrade safely.
