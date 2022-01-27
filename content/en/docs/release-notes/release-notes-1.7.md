@@ -44,12 +44,12 @@ spec:
 
 This broke many users that either don't use an Ingress controller that supports the field (such as ingress-gce and Azure AGIC), as well as people who did not need to create an IngressClass previously (such as with Istio and Traefik).
 
-The regression is present in cert-manager 1.5.4,
-1.6.0, 1.6.1, 1.6.2, and 1.6.3. It is only present on Kubernetes 1.19+ and only appears when using an Issuer or ClusterIssuer with an ACME HTTP-01 solver configured.
+The regression is present in cert-manager 1.5.4, 1.6.0, and 1.6.1.
+It is only present on Kubernetes 1.19+ and only appears when using an Issuer or ClusterIssuer with an ACME HTTP-01 solver configured.
 
-In 1.7, we have restored the original behavior which is to use the annotation. We will also backport this fix to 1.5.5 and 1.6.4, allowing people to upgrade safely.
+In 1.7, we have restored the original behavior which is to use the annotation. We will also backport this fix to 1.5.5 and 1.6.2, allowing people to upgrade safely.
 
-Most people won't have any trouble upgrading from a version that contains the regression to 1.7.0, 1.6.4 or 1.5.5. If you are using Gloo, Contour, Skipper, or kube-ingress-aws-controller, you shouldn't have any issues. If you use the default "class" (e.g., `istio` for Istio) for Traefik, Istio, Ambassador, or ingress-nginx, then these should also continue to work without issue.
+Most people won't have any trouble upgrading from a version that contains the regression to 1.7.0, 1.6.2 or 1.5.5. If you are using Gloo, Contour, Skipper, or kube-ingress-aws-controller, you shouldn't have any issues. If you use the default "class" (e.g., `istio` for Istio) for Traefik, Istio, Ambassador, or ingress-nginx, then these should also continue to work without issue.
 
 If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are using a non-default value for the class (e.g., `istio-internal`), or if you experience any issues with your HTTP-01 challenges please read the [notes on Ingress v1 compatibility].
 
