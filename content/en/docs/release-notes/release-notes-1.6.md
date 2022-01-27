@@ -5,9 +5,64 @@ weight: 770
 type: "docs"
 ---
 
-## Breaking Changes (You **MUST** read this before you upgrade!)
+## v1.6.2
 
-### Legacy cert-manager API versions are no-longer served
+In 1.6.2, we have reverted a change that caused a regression in the ACME Issuer. In 1.6.0 and 1.6.1, the Ingress created by cert-manager while solving an HTTP-01 challenge contained the `kubernetes.io/ingress.class` annotation:
+
+```yaml
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: istio # The `class` present on the Issuer.
+```
+
+After 1.5, the Ingress does not contain the annotation anymore. Instead, cert-manager uses the `ingressClassName` field:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+spec:
+  ingressClassName: istio # 🔥 Breaking change!
+```
+
+This broke many users that either don't use an Ingress controller that supports the field (such as ingress-gce and Azure AGIC), as well as people who did not need to create an IngressClass previously (such as with Istio and Traefik).
+
+The regression is present in cert-manager 1.5.4, 1.6.0, and 1.6.1. It is only present on Kubernetes 1.19+ and only appears when using an Issuer or ClusterIssuer with an ACME HTTP-01 solver configured.
+
+In 1.6.2, we have restored the original behavior which is to use the annotation. This patch is also available in 1.5.5 and in 1.7.0.
+
+Most people won't have any trouble upgrading from 1.6.0 or 1.6.1 to 1.6.2. If you are using Gloo, Contour, Skipper, or kube-ingress-aws-controller, you shouldn't have any issues. If you use the default "class" (e.g., `istio` for Istio) for Traefik, Istio, Ambassador, or ingress-nginx, then these should also continue to work without issue.
+
+If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are using a non-default value for the class (e.g., `istio-internal`), or if you experience any issues with your HTTP-01 challenges please read the [notes on Ingress v1 compatibility].
+
+[notes on Ingress v1 compatibility]: https://cert-manager.io/docs/installation/upgrading/ingress-class-compatibility/
+
+### Changelog since v1.6.1
+
+#### Bug or Regression
+
+- The HTTP-01 ACME solver now uses the `kubernetes.io/ingress.class` annotation instead of the `spec.ingressClassName` in created Ingress resources. ([#4785](https://github.com/jetstack/cert-manager/pull/4785), [@maelvls](https://github.com/maelvls))
+
+#### Other (Cleanup or Flake)
+
+- cert-manager now does one call to the ACME API instead of two when an Order fails. This fix is part of the effort towards mitigating [the high load](https://github.com/jetstack/cert-manager/issues/3298) that cert-manager deployments have on the Let's Encrypt API ([#4619](https://github.com/jetstack/cert-manager/pull/4619), [@irbekrm](https://github.com/irbekrm))
+- Bump base images to latest versions ([#4707](https://github.com/jetstack/cert-manager/pull/4707), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+## v1.6.1
+
+### Changelog since v1.6.0
+
+#### Bug or Regression
+
+- Fixes an issue in `cmctl` that prevented displaying the Order resource with cert-manager 1.6 when running `cmctl status certificate`. ([#4572](https://github.com/jetstack/cert-manager/pull/4572), [@maelvls](https://github.com/maelvls))
+- Update to latest version of keystore-go to address a backwards incompatible change introduced in v1.6.0 ([#4564](https://github.com/jetstack/cert-manager/pull/4564), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+## v1.6.0
+
+### Breaking Changes (You **MUST** read this before you upgrade!)
+
+#### Legacy cert-manager API versions are no-longer served
 
 Following their deprecation in version 1.4, the cert-manager API versions `v1alpha2, v1alpha3, and v1beta1` are no longer served.
 
@@ -25,7 +80,7 @@ page.
 
 {{% /pageinfo %}}
 
-### JKS Keystore Minimum Password Length
+#### JKS Keystore Minimum Password Length
 
 ℹ️ This no longer applies as it was fixed in `v1.6.1`, but will remain here for 
 informational purposes. If you haven't upgraded cert-manager to `v1.6.0` from any `v1.5`
@@ -40,9 +95,9 @@ This was fixed in cert-manager `v1.6.1`.
 [jks-keystore]: ../../reference/api-docs/#cert-manager.io/v1.CertificateKeystores
 [jks-keystore-upgrade-pr]: https://github.com/jetstack/cert-manager/pull/4428
 
-## Major Themes
+### Major Themes
 
-### Command-line tool User Experience
+#### Command-line tool User Experience
 
 The cert-manager kubectl plugin has been redesigned as a [standalone utility: `cmctl`][cmctl]
 
@@ -50,20 +105,20 @@ While the kubectl plugin functionality remains intact, using `cmctl` allows for 
 
 [cmctl]: ../../usage/cmctl/
 
-### Supply Chain Security
+#### Supply Chain Security
 
 As part of the wider ecosystem's push for greater supply chain security we are aiming to achieve [SLSA 3](https://slsa.dev/levels#level-requirements) by the 1.7 release date. cert-manager 1.6 has achieved the requirements for SLSA 2 when installed via helm. Our helm chart's signature can be verified with the cert-manager maintainers' public key [published on our website](../../installation/code-signing/).
 
 Our container images will be signed using sigstore's [cosign](https://github.com/sigstore/cosign) as soon as our OCI registry supports it.
 
-### Tool Chain Updates
+#### Tool Chain Updates
 
 cert-manager is now built with go 1.17 ([#4478](https://github.com/jetstack/cert-manager/pull/4478), [@irbekrm](https://github.com/irbekrm))
 and can now be compiled on Apple Silicon ([#4485](https://github.com/jetstack/cert-manager/pull/4485), [@munnerz](https://github.com/munnerz)).
 
-## Changes by Kind
+### Changelog since v1.5.0
 
-### Feature
+#### Feature
 
 - Add Certificate `RenewBefore` Prometheus metrics ([#4419](https://github.com/jetstack/cert-manager/pull/4419), [@artificial-aidan](https://github.com/artificial-aidan))
 - Add option to specify managed identity id when using Azure DNS DNS01 solver ([#4332](https://github.com/jetstack/cert-manager/pull/4332), [@tomasfreund](https://github.com/tomasfreund))
@@ -75,7 +130,7 @@ and can now be compiled on Apple Silicon ([#4485](https://github.com/jetstack/ce
 - CLI: Only expose Kubernetes related flags on commands that use them ([#4407](https://github.com/jetstack/cert-manager/pull/4407), [@JoshVanL](https://github.com/JoshVanL))
 - Enable configuring CLI command name and registering completion sub-command at build time. ([#4522](https://github.com/jetstack/cert-manager/pull/4522), [@JoshVanL](https://github.com/JoshVanL))
 
-### Bug or Regression
+#### Bug or Regression
 
 - Fix a bug in the Vault client that led to a panic after a request to Vault health endpoint failed. ([#4456](https://github.com/jetstack/cert-manager/pull/4456), [@JoshVanL](https://github.com/JoshVanL))
 - Fix CRDs which were accidentally changed in cert-manager `v1.5.0` ([#4353](https://github.com/jetstack/cert-manager/pull/4353), [@SgtCoDFish](https://github.com/SgtCoDFish))
@@ -87,7 +142,7 @@ and can now be compiled on Apple Silicon ([#4485](https://github.com/jetstack/ce
 - The defaults for leader election parameters are now consistent across cert-manager and cainjector. ([#4359](https://github.com/jetstack/cert-manager/pull/4359), [@johanfleury](https://github.com/johanfleury))
 - Use `GetAuthorization` instead of `GetChallenge` when querying the current state of an ACME challenge. ([#4430](https://github.com/jetstack/cert-manager/pull/4430), [@JoshVanL](https://github.com/JoshVanL))
 
-### Other (Cleanup or Flake)
+#### Other (Cleanup or Flake)
 
 - Adds middleware logging back to ACME client for debugging ([#4429](https://github.com/jetstack/cert-manager/pull/4429), [@JoshVanL](https://github.com/JoshVanL))
 - Deprecation: The API versions: `v1alpha2`, `v1alpha3`, and `v1beta1`, are no longer served in cert-manager 1.6 and will be removed in cert-manager 1.7. ([#4482](https://github.com/jetstack/cert-manager/pull/4482), [@wallrj](https://github.com/wallrj))
