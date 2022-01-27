@@ -35,7 +35,7 @@ type: "docs"
 
 - Fix a regression introduced in v1.5.0 where the Ingress created for solving HTTP-01 challenges was created with `pathType: Exact` instead of `pathType: ImplementationSpecific`. ([#4385](https://github.com/jetstack/cert-manager/pull/4385), [@jakexks](https://github.com/jakexks))
 - Fixed the HTTP-01 solver creating ClusterIP instead of NodePort services by default. ([#4394](https://github.com/jetstack/cert-manager/pull/4394), [@jakexks](https://github.com/jakexks))
-- Removes status fields from CRD configs ([#4387](https://github.com/jetstack/cert-manager/pull/4387), [@irbekrm](https://github.com/irbekrm))
+- Helm chart and static manifest: the pointless `status` field is now stripped from the CRD manifests. ([#4387](https://github.com/jetstack/cert-manager/pull/4387), [@irbekrm](https://github.com/irbekrm))
 
 ## v1.5.1
 

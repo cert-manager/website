@@ -150,6 +150,6 @@ and can now be compiled on Apple Silicon ([#4485](https://github.com/jetstack/ce
 - Fix manually specified `PKCS#10` CSR and X.509 Certificate version numbers (although these were ignored in practice) ([#4392](https://github.com/jetstack/cert-manager/pull/4392), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Improves logging for 'owner not found' errors for `CertificateRequest`s owning `Order`s. ([#4369](https://github.com/jetstack/cert-manager/pull/4369), [@irbekrm](https://github.com/irbekrm))
 - Refactor: move from `io/ioutil` to `io` and `os` package ([#4402](https://github.com/jetstack/cert-manager/pull/4402), [@Juneezee](https://github.com/Juneezee))
-- Removes status fields from CRD manifests ([#4379](https://github.com/jetstack/cert-manager/pull/4379), [@irbekrm](https://github.com/irbekrm))
+- Helm chart and static manifest: the pointless `status` field is now stripped from the CRD manifests. ([#4379](https://github.com/jetstack/cert-manager/pull/4379), [@irbekrm](https://github.com/irbekrm))
 - Update cert-manager base image versions ([#4474](https://github.com/jetstack/cert-manager/pull/4474), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- Uses Go 1.17 ([#4478](https://github.com/jetstack/cert-manager/pull/4478), [@irbekrm](https://github.com/irbekrm))
+- cert-manager now uses Go 1.17. ([#4478](https://github.com/jetstack/cert-manager/pull/4478), [@irbekrm](https://github.com/irbekrm))
