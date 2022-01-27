@@ -94,7 +94,7 @@ spec:
       dns01:
         # Adjust the configuration below according to your environment.
         # You can view more example configurations for different DNS01
-        # providers in the documentation: https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/dns01/index.html
+        # providers in the documentation: https://cert-manager.io/docs/tutorials/acme/dns-validation/
         cloudflare:
           email: my-cloudflare-acc@example.com
           apiKeySecretRef:
@@ -220,7 +220,7 @@ spec:
       dns01:
         # Adjust the configuration below according to your environment.
         # You can view more example configurations for different DNS01
-        # providers in the documentation: https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/dns01/index.html
+        # providers in the documentation: https://cert-manager.io/docs/tutorials/acme/dns-validation/
         cloudflare:
           email: my-cloudflare-acc@example.com
           apiKeySecretRef:
