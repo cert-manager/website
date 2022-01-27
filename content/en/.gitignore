@@ -1,2 +1,5 @@
-/v*.*-docs/
+v*.*-docs/*
+!v*.*-docs/cli
 /next-docs/
+docs/cli/*
+!docs/cli/_index.md

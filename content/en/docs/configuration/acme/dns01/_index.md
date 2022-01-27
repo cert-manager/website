@@ -115,7 +115,7 @@ spec:
     - selector:
         dnsZones:
         - 'example.com'
-    - dns01:
+      dns01:
         # Valid values are None and Follow
         cnameStrategy: Follow
         route53:
@@ -162,12 +162,14 @@ cert-manager also supports out of tree DNS providers using an external webhook.
 Links to these supported providers along with their documentation are below:
 
 - [`AliDNS-Webhook`](https://github.com/pragkent/alidns-webhook)
+- [`cert-manager-alidns-webhook`](https://github.com/DEVmachine-fr/cert-manager-alidns-webhook)
 - [`cert-manager-webhook-civo`](https://github.com/okteto/cert-manager-webhook-civo)
 - [`cert-manager-webhook-dnspod`](https://github.com/qqshfox/cert-manager-webhook-dnspod)
 - [`cert-manager-webhook-dnsimple`](https://github.com/neoskop/cert-manager-webhook-dnsimple)
 - [`cert-manager-webhook-gandi`](https://github.com/bwolf/cert-manager-webhook-gandi)
 - [`cert-manager-webhook-infomaniak`](https://github.com/Infomaniak/cert-manager-webhook-infomaniak)
 - [`cert-manager-webhook-inwx`](https://gitlab.com/smueller18/cert-manager-webhook-inwx)
+- [`cert-manager-webhook-linode`](https://github.com/slicen/cert-manager-webhook-linode)
 - [`cert-manager-webhook-oci`](https://gitlab.com/dn13/cert-manager-webhook-oci) (Oracle Cloud Infrastructure)
 - [`cert-manager-webhook-scaleway`](https://github.com/scaleway/cert-manager-webhook-scaleway)
 - [`cert-manager-webhook-selectel`](https://github.com/selectel/cert-manager-webhook-selectel)
@@ -176,6 +178,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-loopia`](https://github.com/Identitry/cert-manager-webhook-loopia)
 - [`cert-manager-webhook-arvan`](https://github.com/kiandigital/cert-manager-webhook-arvan)
 - [`bizflycloud-certmanager-dns-webhook`](https://github.com/bizflycloud/bizflycloud-certmanager-dns-webhook)
+- [`cert-manager-webhook-hetzner`](https://github.com/vadimkim/cert-manager-webhook-hetzner)
 
 You can find more information on how to configure webhook providers
 [here](./webhook/).
