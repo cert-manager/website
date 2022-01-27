@@ -129,9 +129,7 @@ out on the [`#cert-manager` Slack channel]; it's a huge help and much appreciate
 
 [`#cert-manager` Slack channel]: ../../contributing/#slack
 
-# Changelog since v1.6.1
-
-## Changes by Kind
+## Changelog since v1.6.0
 
 ### Feature
 
