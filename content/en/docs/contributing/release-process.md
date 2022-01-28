@@ -440,16 +440,15 @@ page if a step is missing or if it is outdated.
 13. Proceed to the post-release steps:
 
     1. **(initial alpha only)** Create a PR on
-       [`cert-manager/release`](https://github.com/cert-manager/release) in
-       order to re-enable the next periodic tests configured in:
+       [`jetstack/testing`](https://github.com/jetstack/testing),
+       changing the `release-next` periodic tests interval to `2h`, configured in:
 
        ```plain
        config/jobs/cert-manager/release-next/cert-manager-release-next-periodics.yaml
        ```
 
-       Why? Because we disable the "next" periodic tests right after a final release
-       since next periodics are only useful after we do the first alpha (e.g.,
-       in [PR 606](https://github.com/jetstack/testing/pull/606)).
+       Why? Because we increase the interval of the "next" periodic tests right after a final release
+       since next periodics are only useful after we do the first alpha.
 
     2. **(initial alpha only)** Open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) in
@@ -460,17 +459,19 @@ page if a step is missing or if it is outdated.
          In the table, change the "next periodic" line with the correct links.
 
     3. **(final release only)** Create a PR on
-       [`cert-manager/release`](https://github.com/cert-manager/release) in
-       order to disable the next periodic tests configured in:
+       [`jetstack/testing`](https://github.com/jetstack/testing),
+       changing the `release-next` periodic tests interval to 168h, configured in:
 
        ```plain
        config/jobs/cert-manager/release-next/cert-manager-release-next-periodics.yaml
        ```
 
-       (just remove the file and commit)
-
        Why? Because that saves us compute time between a final release
        and the first alpha.
+
+       ⛔️ Do not remove the file or comment out the file contents,
+       because this will break [Test Grid](https://testgrid.k8s.io/jetstack-cert-manager-next),
+       as happened in [kubernetes/test-infra #25035](https://github.com/kubernetes/test-infra/pull/25035).
 
     4. **(final release only)** Open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) in
