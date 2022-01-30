@@ -235,7 +235,7 @@ page if a step is missing or if it is outdated.
         |                   | initial alpha    | subsequent alpha | beta release     | final release | patch release |
         |                   | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.3.0-beta.0`  | `v1.3.0`      | `v1.3.1`      |
         |                   |                  |                  |                  |               |               |
-        | `START_REV`\*     | `v1.2.0`         | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.2.0`      | `v1.3.0`      |
+        | `START_REV`\*     | `v1.2.0`         | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.2.0`\*\*  | `v1.3.0`      |
         | `END_REV`         | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `BRANCH`          | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `RELEASE_VERSION` | `1.3.0-alpha.0`  | `1.3.0-alpha.1`  | `1.3.0-beta.0`   | `1.3.0`       | `1.3.1`       |
@@ -244,6 +244,11 @@ page if a step is missing or if it is outdated.
         > \*The git tag of the "previous" release (`START_REV`) depends on which
         > type of release you count on doing. Look at the above examples to
         > understand a bit more what those are.
+
+        > \*\*Do not use a patch here (e.g., no `v1.2.3`). It must be `v1.2.0`:
+        > you must use the latest tag that belongs to the release branch you are
+        > releasing on; in the above example, the release branch is
+        > `release-1.3`, and the latest tag on that branch is `v1.2.0`.
 
         After finding out the value for each of the 4 environment variables, set
         the variables in your shell (for example, following the example 1):
