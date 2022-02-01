@@ -517,3 +517,6 @@ page if a step is missing or if it is outdated.
        [Algolia indexing configuration](https://github.com/algolia/docsearch-configs/blob/master/configs/cert-manager.json#L7-L13)
        including the new version for search indexing, as in
        [this PR](https://github.com/algolia/docsearch-configs/pull/2278).
+
+    10. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
+        bumping the versions of our kubectl plugins.
