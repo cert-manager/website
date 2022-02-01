@@ -22,9 +22,9 @@ type = "docs"
 
     {{ with (index .GoPackages 0 )}}
         {{ with .DocComments }}
-        <p>
+        <div>
             {{ safe (renderComments .) }}
-        </p>
+        </div>
         {{ end }}
     {{ end }}
 
