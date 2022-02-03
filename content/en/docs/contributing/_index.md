@@ -20,7 +20,8 @@ external cert-manager components:
 - [Feature policy](./policy/)
 - [Coding Conventions](./coding-conventions/)
 - [Reporting security vulnerabilities](./security/)
-- [Donating third party code to cert-manager](./third-party-code-donation/) 
+- [Donating third party code to cert-manager](./third-party-code-donation/)
+- [Importing cert-manager in Go](./importing/)
 
 ## Welcome
 
@@ -32,7 +33,8 @@ also very welcome if you happen to find an out of date part.
 
 ## Meetings
 
-All the cert-manager meetings are open for everyone to join.
+All cert-manager meetings are open for everyone to join.
+
 To get invites you can subscribe to [our mailing list](https://groups.google.com/forum/#!forum/cert-manager-dev).
 
 We have 2 regular repeating meetings:
