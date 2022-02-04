@@ -5,9 +5,11 @@ weight: 760
 type: "docs"
 ---
 
-## Breaking Changes (You **MUST** read this before you upgrade!)
+## v1.7.0
 
-### Removal of Deprecated APIs
+### Breaking Changes (You **MUST** read this before you upgrade!)
+
+#### Removal of Deprecated APIs
 
 ⚠ Following their deprecation in version 1.5, the cert-manager API versions v1alpha2, v1alpha3, and v1beta1 have been removed.
 You must ensure that all cert-manager custom resources are stored in etcd at version v1
@@ -21,7 +23,7 @@ for full instructions.
 [download `cmctl-v1.7.0`]: https://github.com/jetstack/cert-manager/releases/tag/v1.7.0
 [Migrating Deprecated API Resources]: https://cert-manager.io/docs/installation/upgrading/remove-deprecated-apis/
 
-### Ingress Class Semantics
+#### Ingress Class Semantics
 
 In 1.7, we have reverted a change that caused a regression in the ACME Issuer.
 Before v1.5.4, the Ingress created by cert-manager while solving an HTTP-01 challenge contained the `kubernetes.io/ingress.class` annotation:
@@ -54,9 +56,9 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 [notes on Ingress v1 compatibility]: https://cert-manager.io/docs/installation/upgrading/ingress-class-compatibility/
 
-## Major Themes
+### Major Themes
 
-### Removal of Deprecated APIs
+#### Removal of Deprecated APIs
 
 In 1.7 the cert-manager API versions v1alpha2, v1alpha3, and v1beta1, that were deprecated in 1.5,
 have been removed from the custom resource definitions (CRDs).
@@ -66,7 +68,7 @@ In this release we have added a new sub-command to the cert-manager CLI (`cmctl 
 which you SHOULD run BEFORE upgrading cert-manager to 1.7.
 Please read [Removing Deprecated API Resources] for full instructions.
 
-### Additional Certificate Output Formats
+#### Additional Certificate Output Formats
 
 `additionalOutputFormats` is a field on the Certificate `spec` that allows
 specifying additional supplementary formats of issued certificates and their
@@ -79,7 +81,7 @@ thanks to [@seuf](https://github.com/seuf) for getting this across the line!
 
 [Additional Certificate Output Formats]: ../../usage/certificate/#additional-certificate-output-formats
 
-### Server-Side Apply
+#### Server-Side Apply
 
 This is the first version of cert-manager which relies on [Server-Side Apply].
 We use it to properly manage the annotations and labels on TLS secrets.
@@ -88,7 +90,7 @@ For this reason cert-manager 1.7 requires at least Kubernetes 1.18 (see
 
 [Server-Side Apply]: https://kubernetes.io/docs/reference/using-api/server-side-apply/
 
-### Configuration Files
+#### Configuration Files
 
 In this release we introduce a new configuration file for the cert-manager-webhook.
 Instead of configuring the webhook using command line flags,
@@ -101,7 +103,7 @@ the controller and the cainjector.
 
 [WebhookConfiguration Schema]: https://cert-manager.io/next-docs/reference/api-docs/#webhook.config.cert-manager.io/v1alpha1.WebhookConfiguration
 
-### Developing cert-manager Without Bazel
+#### Developing cert-manager Without Bazel
 
 In a future release, we'll remove the use of `bazel` for building and testing cert-manager,
 with the aim of making it as easy as possible for anyone to contribute and to get involved
@@ -112,7 +114,7 @@ and that all unit tests can be run with `go test ./cmd/... ./internal/... ./pkg/
 
 [Bazel -> Make Migration Tracker]: https://github.com/jetstack/cert-manager/issues/4712
 
-## Community
+### Community
 
 Thanks again to all open-source contributors with commits in this release, including:
 
@@ -129,9 +131,9 @@ out on the [`#cert-manager` Slack channel]; it's a huge help and much appreciate
 
 [`#cert-manager` Slack channel]: ../../contributing/#slack
 
-## Changelog since v1.6.0
+### Changelog since v1.6.0
 
-### Feature
+#### Feature
 
 - Add `--acme-http01-solver-nameservers` flag to enable custom nameservers usage for ACME HTT01 challenges propagation checks. ([#4287](https://github.com/jetstack/cert-manager/pull/4287), [@Adphi](https://github.com/Adphi))
 - Add `cmctl upgrade migrate-api-version` to ensure all CRD resources are stored at 'v1' prior to upgrading to v1.7 onwards ([#4711](https://github.com/jetstack/cert-manager/pull/4711), [@munnerz](https://github.com/munnerz))
@@ -143,7 +145,7 @@ out on the [`#cert-manager` Slack channel]; it's a huge help and much appreciate
 - Breaking change: pprof now runs by default on `localhost:6060` on the webhook and the controller, but only if explicitly enabled. Pprof can now be enabled also for cainjector. All three components have `--enable-profiling`, `--profiler-address` CLI flags to configure profiling. Thanks to @bitscuit for help with this! ([#4550](https://github.com/cert-manager/cert-manager/pull/4550), [@irbekrm](https://github.com/irbekrm))
 - Certificate Secrets are now managed by the APPLY API call, rather than UPDATE/CREATE. The issuing controller actively reconciles Certificate SecretTemplate's against corresponding Secrets, garbage collecting and correcting key/value changes. ([#4638](https://github.com/jetstack/cert-manager/pull/4638), [@JoshVanL](https://github.com/JoshVanL))
 
-### Bug or Regression
+#### Bug or Regression
 
 - Ensures 1 hour backoff between errored calls for new ACME Orders. ([#4616](https://github.com/jetstack/cert-manager/pull/4616), [@irbekrm](https://github.com/irbekrm))
 - Fix unexpected exit when multiple DNS providers are passed to `RunWebhookServer` ([#4702](https://github.com/jetstack/cert-manager/pull/4702), [@devholic](https://github.com/devholic))
@@ -156,7 +158,7 @@ out on the [`#cert-manager` Slack channel]; it's a huge help and much appreciate
 - Fixed a bug in the way the Helm chart handles service annotations on the controller and webhook services. ([#4329](https://github.com/jetstack/cert-manager/pull/4329), [@jwenz723](https://github.com/jwenz723))
 - Update to latest version of keystore-go to address a backwards incompatible change introduced in v1.6.0 ([#4563](https://github.com/cert-manager/cert-manager/pull/4563), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
-### Other (Cleanup or Flake)
+#### Other (Cleanup or Flake)
 
 - Adds `clock_time_seconds_gauge` metric which returns the current clock time, based on seconds since 1970/01/01 UTC ([#4640](https://github.com/jetstack/cert-manager/pull/4640), [@JoshVanL](https://github.com/JoshVanL))
 - Adds an automated script for cert-manager developers to update versions of kind used for development and testing. ([#4574](https://github.com/jetstack/cert-manager/pull/4574), [@SgtCoDFish](https://github.com/SgtCoDFish))
