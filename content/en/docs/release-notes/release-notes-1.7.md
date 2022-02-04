@@ -25,10 +25,10 @@ and that all cert-manager `CustomResourceDefinition`s have only v1 as the stored
 **before** upgrading.
 
 Since release 1.7, `cmctl` can automatically migrate any deprecated API resources.
-Please [download `cmctl-v1.7.0`] and read [Migrating Deprecated API Resources]
+Please [download `cmctl-v1.7.1`] and read [Migrating Deprecated API Resources]
 for full instructions.
 
-[download `cmctl-v1.7.0`]: https://github.com/jetstack/cert-manager/releases/tag/v1.7.0
+[download `cmctl-v1.7.1`]: https://github.com/cert-manager/cert-manager/releases/tag/v1.7.1
 [Migrating Deprecated API Resources]: https://cert-manager.io/docs/installation/upgrading/remove-deprecated-apis/
 
 #### Ingress Class Semantics

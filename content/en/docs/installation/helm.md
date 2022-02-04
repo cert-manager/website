@@ -46,7 +46,7 @@ or using the `installCRDs` option when installing the Helm chart.
 
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.7.0/cert-manager.crds.yaml
+$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
 ```
 
 ##### Option 2: install CRDs as part of the Helm release
@@ -67,7 +67,7 @@ $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.7.0 \
+  --version v1.7.1 \
   # --set installCRDs=true
 ```
 
@@ -80,7 +80,7 @@ $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.7.0 \
+  --version v1.7.1 \
   --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
   --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
 ```
@@ -97,7 +97,7 @@ $ helm template \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.7.0 \
+  --version v1.7.1 \
   # --set prometheus.enabled=false \   # Example: disabling prometheus using a Helm parameter
   # --set installCRDs=true \           # Uncomment to also template CRDs
   > cert-manager.custom.yaml
@@ -146,7 +146,7 @@ using the link to the version `vX.Y.Z` you installed:
 > be removed by Kubernetes' garbage collector.
 
 ```bash
-$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
+$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
 ```
 
 ### Namespace Stuck in Terminating State
