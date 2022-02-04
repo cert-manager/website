@@ -235,24 +235,29 @@ page if a step is missing or if it is outdated.
         |                   | initial alpha    | subsequent alpha | beta release     | final release | patch release |
         |                   | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.3.0-beta.0`  | `v1.3.0`      | `v1.3.1`      |
         |                   |                  |                  |                  |               |               |
-        | `START_REV`\*     | `v1.2.0`         | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.2.0`      | `v1.3.0`      |
+        | `START_TAG`\*     | `v1.2.0`         | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.2.0`\*\*  | `v1.3.0`      |
         | `END_REV`         | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `BRANCH`          | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `RELEASE_VERSION` | `1.3.0-alpha.0`  | `1.3.0-alpha.1`  | `1.3.0-beta.0`   | `1.3.0`       | `1.3.1`       |
         </br>
 
-        > \*The git tag of the "previous" release (`START_REV`) depends on which
+        > \*The git tag of the "previous" release (`START_TAG`) depends on which
         > type of release you count on doing. Look at the above examples to
         > understand a bit more what those are.
+
+        > \*\*Do not use a patch here (e.g., no `v1.2.3`). It must be `v1.2.0`:
+        > you must use the latest tag that belongs to the release branch you are
+        > releasing on; in the above example, the release branch is
+        > `release-1.3`, and the latest tag on that branch is `v1.2.0`.
 
         After finding out the value for each of the 4 environment variables, set
         the variables in your shell (for example, following the example 1):
 
         ```sh
-        export START_REV="v1.2.0"
-        export END_REV="release-1.3"
-        export BRANCH="release-1.3"
         export RELEASE_VERSION="1.3.0-alpha.0"
+        export BRANCH="release-1.3"
+        export START_TAG="v1.2.0"
+        export END_REV="release-1.3"
         ```
 
     2. Generate `release-notes.md` at the root of your cert-manager repo folder
@@ -261,7 +266,8 @@ page if a step is missing or if it is outdated.
         ```sh
         # Must be run from the cert-manger folder.
         export GITHUB_TOKEN=*your-token*
-        go install k8s.io/release/cmd/release-notes@v0.7.0
+        git fetch origin $BRANCH:$BRANCH
+        export START_SHA="$(git rev-list --reverse --ancestry-path $START_TAG..$BRANCH | head -1)"
         release-notes --debug --repo-path cert-manager \
           --org jetstack --repo cert-manager \
           --required-author "jetstack-bot" \
@@ -275,8 +281,6 @@ page if a step is missing or if it is outdated.
 
     3. Sanity check the notes:
 
-        - Make sure you haven't duplicated the final release note from the
-          previous release (`START_REV` and `END_REV` are inclusive)
         - Make sure the notes contain details of all the features and bug
           fixes that you expect to be in the release.
         - Add additional blurb, notable items and characterize change log.
