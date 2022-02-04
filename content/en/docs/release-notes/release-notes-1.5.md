@@ -12,7 +12,7 @@ type: "docs"
 #### Bug or Regression
 
 - Fixed a bug that caused cert-manager to panic when the Vault Issuer failed to reach the health endpoint. ([#4476](https://github.com/jetstack/cert-manager/pull/4476), [@JoshVanL](https://github.com/JoshVanL))
-- Helm chart: the post-install hook `startupapicheck` is now compatible with PodSecurityPolicy. ([#4432](https://github.com/jetstack/cert-manager/pull/4432), [@ndegory](https://github.com/ndegory))
+- Helm chart: the post-install hook `startupapicheck` is now compatible with the PodSecurityPolicy resource. ([#4432](https://github.com/jetstack/cert-manager/pull/4432), [@ndegory](https://github.com/ndegory))
 - Helm chart: the post-install hook `startupapicheck` now deletes any post-install hook resources left after a previous failed install allowing `helm install` to be re-run after a failed attempt. ([#4435](https://github.com/jetstack/cert-manager/pull/4435), [@wallrj](https://github.com/wallrj))
 
 #### Other (Cleanup or Flake)
@@ -25,7 +25,7 @@ type: "docs"
 
 #### Bug or Regression
 
-- Fix a bug where a Certificate may not get renewed when the issued Certificate has a one-second skew between `notBefore` and `notAfter` and `spec.duration` is not used. This one-second skew can be observed on certificates issued with Let's Encrypt and caused a mismatch in time precision between the time stored in `status.renewalTime` and the time internally computed by cert-manager. ([#4403](https://github.com/jetstack/cert-manager/pull/4403), @irbekrm). Thanks to @mfmbarros for help with debugging the issue!
+- Fix a bug where a Certificate may not get renewed when the issued Certificate has a one-second skew between `notBefore` and `notAfter` and `spec.duration` is not used. This one-second skew can be observed on certificates issued with Let's Encrypt and caused a mismatch in time precision between the time stored in `status.renewalTime` and the time internally computed by cert-manager. ([#4403](https://github.com/jetstack/cert-manager/pull/4403), [@irbekrm](https://github.com/irbekrm)). Thanks to [@mfmbarros](https://github.com/mfmbarros) for help with debugging the issue!
 
 ## v1.5.2
 
@@ -50,7 +50,7 @@ v1beta1 are all deprecated and will be removed in a future release.
 
 #### Bug or Regression
 
-- Fix `v1beta1` CRDs which were accidentally changed in cert-manager v1.5.0 ([#4355](https://github.com/jetstack/cert-manager/pull/4355), [@jetstack-bot](https://github.com/jetstack-bot))
+- Fix `v1beta1` CRDs which were accidentally changed in cert-manager v1.5.0 ([#4355](https://github.com/jetstack/cert-manager/pull/4355), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## v1.5.0
 

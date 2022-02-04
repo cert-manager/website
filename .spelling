@@ -338,6 +338,12 @@ v0.23.1
 v1
 v1.16
 v1.19
+v1.5
+v1.5.0
+v1.5.0.
+v1.5.1
+v1.5.1.
+v1.5.2
 v1.5.3
 v1.5.4
 v1.5.5
@@ -363,7 +369,14 @@ wildcard
 wildcards
 wpjunior
 yann-soubeyrand
+mfmbarros
+maelvls
+bitscuit
 zsh
+PodSecurityPolicy
+ClusterIP
+NodePort
+pprof
 
 # As per https://tools.ietf.org/html/rfc5280, the spelling "X.509" is the
 # correct spelling. The spelling "x509" and "X509" are incorrect.

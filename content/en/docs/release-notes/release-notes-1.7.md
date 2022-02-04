@@ -7,6 +7,8 @@ type: "docs"
 
 ## v1.7.0
 
+{{< youtube id="XcAD8Xlj-NE?t=2171s" >}}
+
 ### Breaking Changes (You **MUST** read this before you upgrade!)
 
 #### Removal of Deprecated APIs
@@ -142,7 +144,7 @@ out on the [`#cert-manager` Slack channel]; it's a huge help and much appreciate
 - Added `additionalOutputFormats` parameter to allow `DER` (binary) and `CombinedPEM` (key + cert bundle) formats. ([#4598](https://github.com/jetstack/cert-manager/pull/4598), [@seuf](https://github.com/seuf))
 - Added a makefile based build workflow which doesn't depend on bazel ([#4554](https://github.com/jetstack/cert-manager/pull/4554), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Added a new Helm chart parameter `prometheus.servicemonitor.honorLabels`, which sets the `honor_labels` field  of the Prometheus scrape config. ([#4608](https://github.com/jetstack/cert-manager/pull/4608), [@thirdeyenick](https://github.com/thirdeyenick))
-- Breaking change: pprof now runs by default on `localhost:6060` on the webhook and the controller, but only if explicitly enabled. Pprof can now be enabled also for cainjector. All three components have `--enable-profiling`, `--profiler-address` CLI flags to configure profiling. Thanks to @bitscuit for help with this! ([#4550](https://github.com/cert-manager/cert-manager/pull/4550), [@irbekrm](https://github.com/irbekrm))
+- Breaking change: pprof now runs by default on `localhost:6060` on the webhook and the controller, but only if explicitly enabled. Pprof can now be enabled also for cainjector. All three components have `--enable-profiling`, `--profiler-address` CLI flags to configure profiling. Thanks to [@bitscuit](https://github.com/bitscuit) for help with this! ([#4550](https://github.com/cert-manager/cert-manager/pull/4550), [@irbekrm](https://github.com/irbekrm))
 - Certificate Secrets are now managed by the APPLY API call, rather than UPDATE/CREATE. The issuing controller actively reconciles Certificate SecretTemplate's against corresponding Secrets, garbage collecting and correcting key/value changes. ([#4638](https://github.com/jetstack/cert-manager/pull/4638), [@JoshVanL](https://github.com/JoshVanL))
 
 #### Bug or Regression
