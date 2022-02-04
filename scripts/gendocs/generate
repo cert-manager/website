@@ -45,7 +45,7 @@ GOROOT="$(go env GOROOT)"
 export GOROOT
 GOBIN="${tmpdir}/bin"
 export GOBIN
-go get github.com/ahmetb/gen-crd-api-reference-docs@v0.3.0
+go install github.com/ahmetb/gen-crd-api-reference-docs@v0.3.0
 
 mkdir -p "${GOPATH}/src/github.com/jetstack"
 gitdir="${GOPATH}/src/github.com/jetstack/cert-manager"
