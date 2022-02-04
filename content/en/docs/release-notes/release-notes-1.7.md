@@ -4,6 +4,14 @@ linkTitle: "v1.7"
 weight: 760
 type: "docs"
 ---
+## v1.7.1
+
+### Changes since v1.7.0
+
+#### Bug or Regression
+
+- Fix: The alpha feature Certificate's `additionalOutputFormats` is now correctly validated at admission time, and no longer _only_ validated if the `privateKey` field of the Certificate is set. The Webhook component now contains a separate feature set.
+  `AdditionalCertificateOutputFormats` feature gate (disabled by default) has been added to the webhook. This gate is required to be enabled on both the controller and webhook components in order to make use of the Certificate's `additionalOutputFormat` feature. ([#4816](https://github.com/cert-manager/cert-manager/pull/4816), [@JoshVanL](https://github.com/JoshVanL))
 
 ## v1.7.0
 
@@ -17,10 +25,10 @@ and that all cert-manager `CustomResourceDefinition`s have only v1 as the stored
 **before** upgrading.
 
 Since release 1.7, `cmctl` can automatically migrate any deprecated API resources.
-Please [download `cmctl-v1.7.0`] and read [Migrating Deprecated API Resources]
+Please [download `cmctl-v1.7.1`] and read [Migrating Deprecated API Resources]
 for full instructions.
 
-[download `cmctl-v1.7.0`]: https://github.com/jetstack/cert-manager/releases/tag/v1.7.0
+[download `cmctl-v1.7.1`]: https://github.com/cert-manager/cert-manager/releases/tag/v1.7.1
 [Migrating Deprecated API Resources]: https://cert-manager.io/docs/installation/upgrading/remove-deprecated-apis/
 
 #### Ingress Class Semantics
