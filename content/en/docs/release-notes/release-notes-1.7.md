@@ -7,8 +7,6 @@ type: "docs"
 
 ## v1.7.0
 
-{{< youtube id="XcAD8Xlj-NE?t=2171s" >}}
-
 ### Breaking Changes (You **MUST** read this before you upgrade!)
 
 #### Removal of Deprecated APIs
