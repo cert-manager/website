@@ -4,6 +4,14 @@ linkTitle: "v1.7"
 weight: 760
 type: "docs"
 ---
+## v1.7.1
+
+### Changes since v1.7.0
+
+#### Bug or Regression
+
+- Fix: The alpha feature Certificate's `additionalOutputFormats` is now correctly validated at admission time, and no longer _only_ validated if the `privateKey` field of the Certificate is set. The Webhook component now contains a separate feature set.
+  `AdditionalCertificateOutputFormats` feature gate (disabled by default) has been added to the webhook. This gate is required to be enabled on both the controller and webhook components in order to make use of the Certificate's `additionalOutputFormat` feature. ([#4816](https://github.com/cert-manager/cert-manager/pull/4816), [@JoshVanL](https://github.com/JoshVanL))
 
 ## v1.7.0
 
