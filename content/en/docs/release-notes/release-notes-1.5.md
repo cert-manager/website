@@ -19,6 +19,23 @@ type: "docs"
 
 - Update cert-manager base image versions ([#4479](https://github.com/jetstack/cert-manager/pull/4479), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
+## v1.5.4
+
+### Changes since v1.5.3
+
+#### Bug or Regression
+
+- Fixed a bug that caused cert-manager to panic when the Vault Issuer failed to reach the health endpoint. ([#4476](https://github.com/cert-manager/cert-manager/pull/4476), [@JoshVanL](https://github.com/JoshVanL))
+- Fixed a regression where cert-manager was creating Ingresses using the field `ingressClassName` instead of
+  the annotation `kubernetes.io/ingress.class`. ([#4783](https://github.com/cert-manager/cert-manager/pull/4783), [@maelvls](https://github.com/maelvls))
+- Helm chart: the post-install hook `startupapicheck` is now compatible with the PodSecurityPolicy resource. ([#4432](https://github.com/cert-manager/cert-manager/pull/4432), [@ndegory](https://github.com/ndegory))
+- Helm chart: the post-install hook `startupapicheck` now deletes any post-install hook resources left after a previous failed install allowing `helm install` to be re-run after a failed attempt. ([#4435](https://github.com/cert-manager/cert-manager/pull/4435), [@wallrj](https://github.com/wallrj))
+
+#### Other (Cleanup or Flake)
+
+- Ensures 1 hour backoff between errored calls for new ACME Orders. ([#4618](https://github.com/cert-manager/cert-manager/pull/4618), [@irbekrm](https://github.com/irbekrm))
+- Update cert-manager base image versions ([#4479](https://github.com/cert-manager/cert-manager/pull/4479), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
 ## v1.5.3
 
 ### Changelog since v1.5.2
