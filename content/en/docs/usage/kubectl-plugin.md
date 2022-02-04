@@ -22,14 +22,14 @@ In order to use the kubectl plugin you need its binary to be accessible under th
 Run the following commands to set up the plugin:
 
 ```console
-OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/latest/download/kubectl-cert_manager-$OS-$ARCH.tar.gz
+OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -sSL -o kubectl-cert-manager.tar.gz https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/kubectl-cert_manager-$OS-$ARCH.tar.gz
 tar xzf kubectl-cert-manager.tar.gz
 sudo mv kubectl-cert_manager /usr/local/bin
 ```
 
 ### Windows
 
-1. Download the [latest version](https://github.com/jetstack/cert-manager/releases/latest/download/kubectl-cert_manager-windows-amd64.tar.gz).
+1. Download the [latest version](https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/kubectl-cert_manager-windows-amd64.tar.gz).
 2. Extract the archive.
 3. Add the `.exe` file extension to the extracted `kubectl-cert_manager`.
 4. Copy `kubectl-cert_manager.exe` to a location which is also in your `PATH`.
