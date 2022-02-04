@@ -10,9 +10,9 @@ See [Regression: HTTP-01 challenges fail with Istio, Traefik, ingress-gce and Az
 
 [Regression: HTTP-01 challenges fail with Istio, Traefik, ingress-gce and Azure AGIC]: https://github.com/jetstack/cert-manager/issues/4537
 
-In v1.5.5, v1.6.2 and 1.7.0 we have fixed this problem.
+In v1.5.5, v1.6.2 and 1.7.1 we have fixed this problem.
 
-If you have cert-manager v1.5.3 (or below) you should skip v1.5.4 and upgrade to v1.5.5 then v1.6.2 and then v1.7.0
+If you have cert-manager v1.5.3 (or below) you should skip v1.5.4 and upgrade to v1.5.5 then v1.6.2 and then v1.7.1
 and you can ignore the rest of this document.
 
 The following notes apply to anyone upgrading from cert-manager v1.5.4, v1.6.0, v1.6.1 on Kubernetes v1.19 or later.
