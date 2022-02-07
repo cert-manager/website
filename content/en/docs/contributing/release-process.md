@@ -267,7 +267,7 @@ page if a step is missing or if it is outdated.
         # Must be run from the cert-manger folder.
         export GITHUB_TOKEN=*your-token*
         git fetch origin $BRANCH:$BRANCH
-        export START_SHA="$(git rev-list --reverse --ancestry-path $START_TAG..$BRANCH | head -1)"
+        export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1
         release-notes --debug --repo-path cert-manager \
           --org jetstack --repo cert-manager \
           --required-author "jetstack-bot" \
