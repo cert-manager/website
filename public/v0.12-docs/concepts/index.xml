@@ -1,0 +1,392 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cert-manager – Concepts</title>
+    <link>https://cert-manager.io/v0.12-docs/concepts/</link>
+    <description>Recent content in Concepts on cert-manager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://cert-manager.io/v0.12-docs/concepts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.12-Docs: Issuer</title>
+      <link>https://cert-manager.io/v0.12-docs/concepts/issuer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/concepts/issuer/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;code&gt;Issuers&lt;/code&gt;, and &lt;code&gt;ClusterIssuers&lt;/code&gt;, are Kubernetes resources that represent
+certificate authorities (CAs) that are able to generate signed certificates by honoring
+certificate signing requests. All cert-manager certificates require a referenced
+issuer that is in a ready condition to attempt to honor the request.&lt;/p&gt;
+&lt;p&gt;An example of an &lt;code&gt;Issuer&lt;/code&gt; type is &lt;code&gt;CA&lt;/code&gt;. A simple &lt;code&gt;CA&lt;/code&gt; &lt;code&gt;Issuer&lt;/code&gt; is as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1alpha2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca-issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mesh-system&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ca&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;secretName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca-key-pair&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is a simple &lt;code&gt;Issuer&lt;/code&gt; that will sign certificates based on a private key.
+The certificate stored in the secret &lt;code&gt;ca-key-pair&lt;/code&gt; can then be used to trust
+newly signed certificates by this &lt;code&gt;Issuer&lt;/code&gt; in a Public Key Infrastructure (PKI)
+system.&lt;/p&gt;
+&lt;h2 id=&#34;namespaces&#34;&gt;Namespaces&lt;/h2&gt;
+&lt;p&gt;An &lt;code&gt;Issuer&lt;/code&gt; is a namespaced resource, and it is not possible to issue
+certificates from an &lt;code&gt;Issuer&lt;/code&gt; in a different namespace. This means you will need
+to create an &lt;code&gt;Issuer&lt;/code&gt; in each namespace you wish to obtain &lt;code&gt;Certificates&lt;/code&gt; in.&lt;/p&gt;
+&lt;p&gt;If you want to create a single &lt;code&gt;Issuer&lt;/code&gt; that can be consumed in multiple
+namespaces, you should consider creating a &lt;code&gt;ClusterIssuer&lt;/code&gt; resource. This is
+almost identical to the &lt;code&gt;Issuer&lt;/code&gt; resource, however is non-namespaced so it
+can be used to issue &lt;code&gt;Certificates&lt;/code&gt; across all namespaces.&lt;/p&gt;
+&lt;h2 id=&#34;supported-issuers&#34;&gt;Supported Issuers&lt;/h2&gt;
+&lt;p&gt;cert-manager supports a number of &amp;lsquo;in-tree&amp;rsquo;, as well as &amp;lsquo;out-of-tree&amp;rsquo; &lt;code&gt;Issuer&lt;/code&gt;
+types. An exhaustive list of these &lt;code&gt;Issuer&lt;/code&gt; types can be found in the
+cert-manager &lt;a href=&#34;../../configuration/&#34;&gt;configuration documentation&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.12-Docs: Certificate</title>
+      <link>https://cert-manager.io/v0.12-docs/concepts/certificate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/concepts/certificate/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager has the concept of &lt;code&gt;Certificates&lt;/code&gt; that define a desired x509
+certificate which will be renewed and kept up to date. A &lt;code&gt;Certificate&lt;/code&gt; is a
+namespaced resource that references an &lt;code&gt;Issuer&lt;/code&gt; or &lt;code&gt;ClusterIssuer&lt;/code&gt; that
+determine what will be honoring the certificate request.&lt;/p&gt;
+&lt;p&gt;When a &lt;code&gt;Certificate&lt;/code&gt; is created, a corresponding &lt;code&gt;CertificateRequest&lt;/code&gt; resource
+is created by cert-manager containing the encoded x509 certificate request,
+&lt;code&gt;Issuer&lt;/code&gt; reference, and other options based upon the specification of the
+&lt;code&gt;Certificate&lt;/code&gt; resource.&lt;/p&gt;
+&lt;p&gt;Here is one such example of a &lt;code&gt;Certificate&lt;/code&gt; resource.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1alpha2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Certificate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;acme-crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;secretName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;acme-crt-secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dnsNames&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;foo.example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;bar.example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;issuerRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;letsencrypt-prod&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# We can reference ClusterIssuers by changing the kind here.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The default value is Issuer (i.e. a locally namespaced Issuer)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;group&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This &lt;code&gt;Certificate&lt;/code&gt; will tell cert-manager to attempt to use the &lt;code&gt;Issuer&lt;/code&gt; named
+&lt;code&gt;letsencrypt-prod&lt;/code&gt; to obtain a certificate key pair for the &lt;code&gt;foo.example.com&lt;/code&gt;
+and &lt;code&gt;bar.example.com&lt;/code&gt; domains. If successful, the resulting key and certificate
+will be stored in a secret named &lt;code&gt;acme-crt-secret&lt;/code&gt; with keys of &lt;code&gt;tls.key&lt;/code&gt; and
+&lt;code&gt;tls.crt&lt;/code&gt; respectively. This secret will live in the same namespace as the
+&lt;code&gt;Certificate&lt;/code&gt; resource.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;dnsNames&lt;/code&gt; field specifies a list of &lt;a href=&#34;https://en.wikipedia.org/wiki/Subject_Alternative_Name&#34;&gt;&lt;code&gt;Subject Alternative Names&lt;/code&gt;&lt;/a&gt; to be associated
+with the certificate.&lt;/p&gt;
+&lt;p&gt;The referenced &lt;code&gt;Issuer&lt;/code&gt; must exist in the same namespace as the &lt;code&gt;Certificate&lt;/code&gt;.
+A &lt;code&gt;Certificate&lt;/code&gt; can alternatively reference a &lt;code&gt;ClusterIssuer&lt;/code&gt; which is
+non-namespaced and so can be referenced from any namespace.&lt;/p&gt;
+&lt;p&gt;You can read more on how to configure your &lt;code&gt;Certificate&lt;/code&gt; resources
+&lt;a href=&#34;../../usage/certificate/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.12-Docs: CertificateRequest</title>
+      <link>https://cert-manager.io/v0.12-docs/concepts/certificaterequest/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/concepts/certificaterequest/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;CertificateRequest&lt;/code&gt; is a namespaced resource in cert-manager that is used
+to request x509 certificates from an &lt;a href=&#34;../issuer/&#34;&gt;&lt;code&gt;Issuer&lt;/code&gt;&lt;/a&gt;. The resource
+contains a base64 encoded string of a PEM encoded certificate request which is
+sent to the referenced issuer. A successful issuance will return a signed
+certificate, based on the certificate signing request. &lt;code&gt;CertificateRequests&lt;/code&gt; are
+typically consumed and managed by controllers or other systems and should not be
+used by humans - unless specifically needed.&lt;/p&gt;
+&lt;p&gt;A simple &lt;code&gt;CertificateRequest&lt;/code&gt; looks like the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1alpha2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;CertificateRequest&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-ca-cr&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;csr&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQzNqQ0NBY1lDQVFBd2daZ3hDekFKQmdOVkJBWVRBbHBhTVE4d0RRWURWUVFJREFaQmNHOXNiRzh4RFRBTApCZ05WQkFjTUJFMXZiMjR4RVRBUEJnTlZCQW9NQ0VwbGRITjBZV05yTVJVd0V3WURWUVFMREF4alpYSjBMVzFoCmJtRm5aWEl4RVRBUEJnTlZCQU1NQ0dwdmMyaDJZVzVzTVN3d0tnWUpLb1pJaHZjTkFRa0JGaDFxYjNOb2RXRXUKZG1GdWJHVmxkWGRsYmtCcVpYUnpkR0ZqYXk1cGJ6Q0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQwpBUW9DZ2dFQkFLd01tTFhuQkNiRStZdTIvMlFtRGsxalRWQ3BvbHU3TlZmQlVFUWl1bDhFMHI2NFBLcDRZQ0c5Cmx2N2kwOHdFMEdJQUgydnJRQmxVd3p6ZW1SUWZ4YmQvYVNybzRHNUFBYTJsY2NMaFpqUlh2NEVMaER0aVg4N3IKaTQ0MWJ2Y01OM0ZPTlRuczJhRkJYcllLWGxpNG4rc0RzTEVuZmpWdXRiV01Zeis3M3ptaGZzclRJUjRzTXo3cQpmSzM2WFM4UkRjNW5oVVcyYU9BZ3lnbFZSOVVXRkxXNjNXYXVhcHg2QUpBR1RoZnJYdVVHZXlZUUVBSENxZmZmCjhyOEt3YTFYK1NwYm9YK1ppSVE0Nk5jQ043OFZnL2dQVHNLZmphZURoNWcyNlk1dEVidHd3MWdRbWlhK0MyRHIKWHpYNU13RzJGNHN0cG5kUnRQckZrU1VnMW1zd0xuc0NBd0VBQWFBQU1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQgpBUUFXR0JuRnhaZ0gzd0N3TG5IQ0xjb0l5RHJrMUVvYkRjN3BJK1VVWEJIS2JBWk9IWEFhaGJ5RFFLL2RuTHN3CjJkZ0J3bmlJR3kxNElwQlNxaDBJUE03eHk5WjI4VW9oR3piN0FVakRJWHlNdmkvYTJyTVhjWjI1d1NVQmxGc28Kd005dE1QU2JwcEVvRERsa3NsOUIwT1BPdkFyQ0NKNnZGaU1UbS9wMUJIUWJSOExNQW53U0lUYVVNSFByRzJVMgpjTjEvRGNMWjZ2enEyeENjYVoxemh2bzBpY1VIUm9UWmV1ZEp6MkxmR0VHM1VOb2ppbXpBNUZHd0RhS3BySWp3ClVkd1JmZWZ1T29MT1dNVnFNbGRBcTlyT24wNHJaT3Jnak1HSE9tTWxleVdPS1AySllhaDNrVDdKU01zTHhYcFYKV0ExQjRsLzFFQkhWeGlKQi9Zby9JQWVsCi0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo=&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;isCA&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;keyUsages&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;signing&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;digital signature&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;server auth&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;duraton&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;90d&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;issuerRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca-issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# We can reference ClusterIssuers by changing the kind here.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The default value is Issuer (i.e. a locally namespaced Issuer)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;group&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This &lt;code&gt;CertificateRequest&lt;/code&gt; will make cert-manager attempt to request the &lt;code&gt;Issuer&lt;/code&gt;
+&lt;code&gt;letsencrypt-prod&lt;/code&gt; in the default issuer group &lt;code&gt;cert-manager.io&lt;/code&gt;, return a
+certificate based upon the certificate signing request. Other groups can be
+specified inside the &lt;code&gt;issuerRef&lt;/code&gt; which will change the targeted issuer to other
+external, third party issuers you may have installed.&lt;/p&gt;
+&lt;p&gt;The resource also exposes the option for stating the certificate as CA, Key
+Usages, and requested validity duration.&lt;/p&gt;
+&lt;p&gt;A successful issuance of the certificate signing request will cause an update to
+the resource, setting the status with the signed certificate, the CA of the
+certificate (if available), and setting the &lt;code&gt;Ready&lt;/code&gt; condition to &lt;code&gt;True&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Whether issuance of the controller was successful or not, a retry of the
+issuance will &lt;em&gt;not&lt;/em&gt; happen. It is the responsibility of some other controller to
+manage the logic and life cycle of &lt;code&gt;CertificateRequests&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;conditions&#34;&gt;Conditions&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;CertificateRequests&lt;/code&gt; have a set of strongly defined conditions that should be
+used and relied upon by controllers or services to make decisions on what
+actions to take next on the resource. Each condition consists of the pair
+&lt;code&gt;Ready&lt;/code&gt; - a boolean value, and &lt;code&gt;Reason&lt;/code&gt; - a string. The set of values and
+meanings are as follows:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Ready&lt;/th&gt;
+&lt;th&gt;Reason&lt;/th&gt;
+&lt;th&gt;Condition Meaning&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;False&lt;/td&gt;
+&lt;td&gt;Pending&lt;/td&gt;
+&lt;td&gt;The &lt;code&gt;CertificateRequest&lt;/code&gt; is currently pending, waiting for some other operation to take place. This could be that the &lt;code&gt;Issuer&lt;/code&gt; does not exist yet or the &lt;code&gt;Issuer&lt;/code&gt; is in the process of issuing a certificate.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;False&lt;/td&gt;
+&lt;td&gt;Failed&lt;/td&gt;
+&lt;td&gt;The certificate has failed to be issued - either the returned certificate failed to be decoded or an instance of the referenced issuer used for signing failed. No further action will be taken on the &lt;code&gt;CertificateRequest&lt;/code&gt; by it&amp;rsquo;s controller.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;True&lt;/td&gt;
+&lt;td&gt;Issued&lt;/td&gt;
+&lt;td&gt;A signed certificate has been successfully issued by the referenced &lt;code&gt;Issuer&lt;/code&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.12-Docs: ACME Orders and Challenges</title>
+      <link>https://cert-manager.io/v0.12-docs/concepts/acme-orders-challenges/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/concepts/acme-orders-challenges/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager supports requesting certificates from ACME servers, including from
+&lt;a href=&#34;https://letsencrypt.org/&#34;&gt;Let&amp;rsquo;s Encrypt&lt;/a&gt;, with use of the &lt;a href=&#34;../../configuration/acme/&#34;&gt;ACME
+Issuer&lt;/a&gt;. These certificates are typically trusted on
+the public Internet by most computers. To successfully request a certificate,
+cert-manager must solve ACME Challenges which are completed in order to prove
+that the client owns the DNS addresses that are being requested.&lt;/p&gt;
+&lt;p&gt;In order to complete these challenges, cert-manager introduces two
+&lt;code&gt;CustomResource&lt;/code&gt; types; &lt;code&gt;Orders&lt;/code&gt; and &lt;code&gt;Challenges&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;orders&#34;&gt;Orders&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Order&lt;/code&gt; resources are used by the ACME issuer to manage the lifecycle of an ACME
+&amp;lsquo;order&amp;rsquo; for a signed TLS certificate.  More details on ACME orders and domain
+validation can be found on the Let&amp;rsquo;s Encrypt website
+&lt;a href=&#34;https://letsencrypt.org/how-it-works/&#34;&gt;here&lt;/a&gt;. An order represents a single
+certificate request which will be created automatically once a new
+&lt;a href=&#34;../certificaterequest/&#34;&gt;&lt;code&gt;CertificateRequest&lt;/code&gt;&lt;/a&gt; resource referencing an ACME
+issuer has been created. &lt;code&gt;CertificateRequest&lt;/code&gt; resources are created
+automatically by cert-manager once a &lt;a href=&#34;../certificate/&#34;&gt;&lt;code&gt;Certificate&lt;/code&gt;&lt;/a&gt; resource
+is created, has its specification changed, or needs renewal.&lt;/p&gt;
+&lt;p&gt;As an end-user, you will never need to manually create an &lt;code&gt;Order&lt;/code&gt; resource.
+Once created, an &lt;code&gt;Order&lt;/code&gt; cannot be changed. Instead, a new &lt;code&gt;Order&lt;/code&gt; resource must
+be created.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;Order&lt;/code&gt; resource encapsulates multiple ACME &amp;lsquo;challenges&amp;rsquo; for that &amp;lsquo;order&amp;rsquo;,
+and as such, will manage one or more &lt;code&gt;Challenge&lt;/code&gt; resources.&lt;/p&gt;
+&lt;h2 id=&#34;challenges&#34;&gt;Challenges&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Challenge&lt;/code&gt; resources are used by the ACME issuer to manage the lifecycle of an
+ACME &amp;lsquo;challenge&amp;rsquo; that must be completed in order to complete an &amp;lsquo;authorization&amp;rsquo;
+for a single DNS name/identifier.&lt;/p&gt;
+&lt;p&gt;When an &lt;code&gt;Order&lt;/code&gt; resource is created, the order controller will create
+&lt;code&gt;Challenge&lt;/code&gt; resources for each DNS name that is being authorized with the ACME
+server.&lt;/p&gt;
+&lt;p&gt;As an end-user, you will never need to manually create a &lt;code&gt;Challenge&lt;/code&gt; resource.
+Once created, a &lt;code&gt;Challenge&lt;/code&gt; cannot be changed. Instead, a new &lt;code&gt;Challenge&lt;/code&gt;
+resource must be created.&lt;/p&gt;
+&lt;h3 id=&#34;challenge-lifecycle&#34;&gt;Challenge Lifecycle&lt;/h3&gt;
+&lt;p&gt;After a &lt;code&gt;Challenge&lt;/code&gt; resource has been created, it will be initially queued for
+processing. Processing will not begin until the challenge has been &amp;lsquo;scheduled&amp;rsquo;
+to start.  This scheduling process prevents too many challenges being attempted
+at once, or multiple challenges for the same DNS name being attempted at once.
+For more information on how challenges are scheduled, read the &lt;a href=&#34;./#challenge-scheduling&#34;&gt;challenge
+scheduling&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once a challenge has been scheduled, it will first be &amp;lsquo;synced&amp;rsquo; with the ACME
+server in order to determine its current state. If the challenge is already
+valid, its &amp;lsquo;state&amp;rsquo; will be updated to &amp;lsquo;valid&amp;rsquo;, and will also set
+&lt;code&gt;status.processing = false&lt;/code&gt; to &amp;lsquo;unschedule&amp;rsquo; itself.&lt;/p&gt;
+&lt;p&gt;If the challenge is still &amp;lsquo;pending&amp;rsquo;, the challenge controller will &amp;lsquo;present&amp;rsquo; the
+challenge using the configured solver, one of HTTP01 or DNS01.  Once the
+challenge has been &amp;lsquo;presented&amp;rsquo;, it will set &lt;code&gt;status.presented = true&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Once &amp;lsquo;presented&amp;rsquo;, the challenge controller will perform a &amp;lsquo;self check&amp;rsquo; to
+ensure that the challenge has &amp;lsquo;propagated&amp;rsquo; (i.e. the authoritative DNS servers
+have been updated to respond correctly, or the changes to the ingress resources
+have been observed and in-use by the ingress controller).&lt;/p&gt;
+&lt;p&gt;If the self check fails, cert-manager will retry the self check with a fixed 10
+second retry interval. Challenges that do not ever complete the self check will
+continue retrying until the user intervenes by either retrying the &lt;code&gt;Order&lt;/code&gt; (by
+deleting the &lt;code&gt;Order&lt;/code&gt; resource) or amending the associated &lt;code&gt;Certificate&lt;/code&gt; resource
+to resolve any configuration errors.&lt;/p&gt;
+&lt;p&gt;Once the self check is passing, the ACME &amp;lsquo;authorization&amp;rsquo; associated with this
+challenge will be &amp;lsquo;accepted&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;The final state of the authorization after accepting it will be copied across to
+the Challenge&amp;rsquo;s &lt;code&gt;status.state&lt;/code&gt; field, as well as the &amp;lsquo;error reason&amp;rsquo; if an error
+occurred whilst the ACME server attempted to validate the challenge.&lt;/p&gt;
+&lt;p&gt;Once a Challenge has entered the &lt;code&gt;valid&lt;/code&gt;, &lt;code&gt;invalid&lt;/code&gt;, &lt;code&gt;expired&lt;/code&gt; or &lt;code&gt;revoked&lt;/code&gt;
+state, it will set &lt;code&gt;status.processing = false&lt;/code&gt; to prevent any further processing
+of the ACME challenge, and to allow another challenge to be scheduled if there
+is a backlog of challenges to complete.&lt;/p&gt;
+&lt;h3 id=&#34;challenge-scheduling&#34;&gt;Challenge Scheduling&lt;/h3&gt;
+&lt;p&gt;Instead of attempting to process all challenges at once, challenges are
+&amp;lsquo;scheduled&amp;rsquo; by cert-manager.&lt;/p&gt;
+&lt;p&gt;This scheduler applies a cap on the maximum number of simultaneous challenges
+as well as disallows two challenges for the same DNS name and solver type
+(&lt;code&gt;HTTP01&lt;/code&gt; or &lt;code&gt;DNS01&lt;/code&gt;) to be completed at once.&lt;/p&gt;
+&lt;p&gt;The maximum number of challenges that can be processed at a time is 60 as of
+&lt;a href=&#34;https://github.com/jetstack/cert-manager/blob/ddff78f011558e64186d61f7c693edced1496afa/pkg/controller/acmechallenges/scheduler/scheduler.go#L31-L33&#34;&gt;&lt;code&gt;ddff78&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.12-Docs: Webhook</title>
+      <link>https://cert-manager.io/v0.12-docs/concepts/webhook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/concepts/webhook/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager makes use of extending the Kubernetes API server using a Webhook
+server to provide &lt;a href=&#34;https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/&#34;&gt;dynamic admission
+control&lt;/a&gt;
+over cert-manager resources. This means that cert-manager benefits from most of
+the same behavior that core Kubernetes resource have. The webhook has three
+main functions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook&#34;&gt;&lt;code&gt;ValidatingAdmissionWebhook&lt;/code&gt;&lt;/a&gt;:
+Ensures that when cert-manager resources are created or updated, they conform
+to the rules of the API. This validation is more in depth than for example
+ensuring resources conform to the OpenAPI schema, but instead contains logic such as
+not allowing to specify more than one &lt;code&gt;Issuer&lt;/code&gt; type per &lt;code&gt;Issuer&lt;/code&gt; resource. The
+validating admission is always called and will respond with a success or
+failed response.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook&#34;&gt;&lt;code&gt;MutatingAdmissionWebhook&lt;/code&gt;&lt;/a&gt;:
+Changes the contents of resources during create and update operations, for
+example to set default values.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definition-versioning/#webhook-conversion&#34;&gt;&lt;code&gt;CustomResourceConversionWebhook&lt;/code&gt;&lt;/a&gt;:
+The webhook will also be responsible for implementing a conversion over
+versions in the cert-manager &lt;code&gt;CustomResources&lt;/code&gt; (&lt;code&gt;cert-manager.io&lt;/code&gt;). Although
+none are currently implemented, the webhook will convert versions from
+&lt;code&gt;v1alpha2&lt;/code&gt; to newer versions as they are released.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The webhook component is deployed as another pod that runs alongside the main
+cert-manager controller and CA injector components.&lt;/p&gt;
+&lt;p&gt;In order for the API server to communicate with the webhook component, the
+webhook requires a TLS certificate that the apiserver is configured to trust.
+This is created by the &lt;a href=&#34;../ca-injector/&#34;&gt;&lt;code&gt;cainjector&lt;/code&gt;&lt;/a&gt; and is implemented by the
+following two Secrets:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;secret/cert-manager-webhook-ca&lt;/code&gt;: A self-signed root CA certificate which is
+used to sign certificates for the webhook pod.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;secret/cert-manager-webhook-tls&lt;/code&gt;: A TLS certificate issued by the root CA
+above, served by the webhook.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If errors occur around the webhook but the webhook is running then the webhook
+is most likely not reachable from the API server. In this case, ensure that the
+API server can communicate with the webhook by following the &lt;a href=&#34;../../installation/compatibility/#gke&#34;&gt;GKE private
+cluster explanation&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.12-Docs: CA Injector</title>
+      <link>https://cert-manager.io/v0.12-docs/concepts/ca-injector/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/concepts/ca-injector/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The cert-manager CA injector controller is responsible for injecting the CA
+bundle into the &lt;a href=&#34;../webhook/&#34;&gt;webhook&amp;rsquo;s&lt;/a&gt; &lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt; and
+&lt;code&gt;MutatingWebhookConfiguration&lt;/code&gt; resources in order to allow the Kubernetes
+API server to &amp;lsquo;trust&amp;rsquo; the webhook API server.&lt;/p&gt;
+&lt;p&gt;This component is configured using the &lt;code&gt;cert-manager.io/inject-apiserver-ca: &amp;quot;true&amp;quot;&lt;/code&gt; and &lt;code&gt;cert-manager.io/inject-apiserver-ca: &amp;quot;true&amp;quot;&lt;/code&gt; annotations on the
+&lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt; and &lt;code&gt;MutatingWebhookConfiguration&lt;/code&gt; resources.&lt;/p&gt;
+&lt;p&gt;It copies across the CA defined in the &lt;code&gt;cert-manager-webhook-ca&lt;/code&gt; &lt;code&gt;Secret&lt;/code&gt; over
+to the &lt;code&gt;clientConfig.caBundle&lt;/code&gt; field in both the
+&lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt; and &lt;code&gt;MutatingWebhookConfiguration&lt;/code&gt; resources in
+order for the API server to trust their respective endpoints.&lt;/p&gt;
+&lt;p&gt;The CA injector runs as a separate pod along side the main cert-manager
+controller and webhook components.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.12-Docs: Project Maturity</title>
+      <link>https://cert-manager.io/v0.12-docs/concepts/project-maturity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/concepts/project-maturity/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager has wide adoption in the Kubernetes community with it being in use
+in both production and non-production clusters. The project is still in an alpha
+state where it has yet to reach &lt;code&gt;v1.0&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;api&#34;&gt;API&lt;/h2&gt;
+&lt;p&gt;The cert-manager API is currently in an &lt;code&gt;v1alpha2&lt;/code&gt; version and as such is
+subject to change. We foresee one beta version of &lt;code&gt;v1beta1&lt;/code&gt; at which we expect
+minimal changes, if any, to the next version release of &lt;code&gt;v1&lt;/code&gt;. We expect to hit
+version &lt;code&gt;v1&lt;/code&gt; late 2019, early 2020.&lt;/p&gt;
+&lt;h2 id=&#34;compatibility&#34;&gt;Compatibility&lt;/h2&gt;
+&lt;p&gt;cert-manager has a hard guarantee of compatibly with the current stable upstream
+Kubernetes version. Beyond this, cert-manager also aims to be compatible with
+versions down to &lt;code&gt;N-4&lt;/code&gt;, where &lt;code&gt;N&lt;/code&gt; is the current upstream version release. This
+means that if the current version is &lt;code&gt;v0.16&lt;/code&gt;, cert-manager aims to be compatible
+with versions down to &lt;code&gt;v0.12&lt;/code&gt;. This is done by running periodic end-to-end test
+jobs against each version of Kubernetes.&lt;/p&gt;
+&lt;p&gt;Versions lower than the current Kubernetes version down to &lt;code&gt;N-4&lt;/code&gt; is &lt;em&gt;not
+guaranteed&lt;/em&gt;. Although considerations will be made to ensure compatibility with as
+many versions as possible, it is sometimes required to loose compatibility in
+the interest of furthering the feature set of cert-manager and making use of
+newer features available in upstream Kubernetes.&lt;/p&gt;
+&lt;p&gt;As of cert-manager version &lt;code&gt;v0.11&lt;/code&gt;, the lowest Kubernetes version supported is
+&lt;code&gt;v0.12&lt;/code&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

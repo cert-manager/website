@@ -1,0 +1,1656 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cert-manager – Release Notes</title>
+    <link>https://cert-manager.io/v0.14-docs/release-notes/</link>
+    <description>Recent content in Release Notes on cert-manager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://cert-manager.io/v0.14-docs/release-notes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.14/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.14/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;v0.14&lt;/code&gt; release has a few focus areas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Improving the deployment/installation process&lt;/li&gt;
+&lt;li&gt;Improving the release process&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CustomResourceDefinition&lt;/code&gt; conversion&lt;/li&gt;
+&lt;li&gt;Support for older Kubernetes and OpenShift versions&lt;/li&gt;
+&lt;li&gt;Experimental &amp;lsquo;bundle&amp;rsquo; output format for Certificates&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As usual, please read the &lt;a href=&#34;../../docs/installation/upgrading/upgrading-0.13-0.14/&#34;&gt;upgrade notes&lt;/a&gt; before upgrading.&lt;/p&gt;
+&lt;h2 id=&#34;webhook-changes&#34;&gt;Webhook changes&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;The webhook component is now required.&lt;/strong&gt;
+The webhook will be automatically enabled by the &lt;code&gt;v0.14&lt;/code&gt; manifests, so no additional action is required.&lt;/p&gt;
+&lt;p&gt;If you have issues running the webhook in your environment, we&amp;rsquo;d like to hear from you! We are aware of issues relating
+to firewall rules from the Kubernetes API server to the webhook pod(s) - we would like to gather together a corpus of
+configuration snippets that can be used to ensure the webhook is successfully deployed in these environments too.&lt;/p&gt;
+&lt;p&gt;This change is required in order to support the upcoming changes to our API versions, as we introduce &lt;code&gt;v1alpha3&lt;/code&gt;,
+&lt;code&gt;v1beta1&lt;/code&gt; and &lt;code&gt;v1&lt;/code&gt; over the coming months!&lt;/p&gt;
+&lt;h2 id=&#34;improving-our-deployment-and-release-process&#34;&gt;Improving our deployment and release process&lt;/h2&gt;
+&lt;p&gt;After reports of various issues installing on older Kubernetes and OpenShift versions, we&amp;rsquo;ve taken some time to revise
+our installation manifests.&lt;/p&gt;
+&lt;p&gt;There are now two &amp;lsquo;variants&amp;rsquo; to choose from, &amp;lsquo;standard&amp;rsquo; and the &amp;lsquo;legacy&amp;rsquo;, with a simple way to know which to use:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Environment&lt;/th&gt;
+&lt;th&gt;Variant to use&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Kubernetes 1.15+&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.yaml&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;OpenShift 4&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.yaml&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Kubernetes 1.11-1.14&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager-legacy.yaml&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;OpenShift 3.11&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager-legacy.yaml&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Please be sure to read the upgrade guide for more information on how to upgrade from a previous release.&lt;/p&gt;
+&lt;h2 id=&#34;customresourcedefinition-conversion-webhook-v1alpha3-api-version&#34;&gt;&lt;code&gt;CustomResourceDefinition&lt;/code&gt; conversion webhook + &lt;code&gt;v1alpha3&lt;/code&gt; API version&lt;/h2&gt;
+&lt;p&gt;As part of the effort to mature our API, we are releasing the &lt;code&gt;v1alpha3&lt;/code&gt; API version. This contains a number of small
+changes, notably moving some fields to the &lt;code&gt;subject&lt;/code&gt; stanza on the Certificate resource to be more consistent with how
+certain options are specified.&lt;/p&gt;
+&lt;p&gt;With this we have enabled the &amp;lsquo;conversion webhook&amp;rsquo;, which enables API clients to utilize both the &lt;code&gt;v1alpha2&lt;/code&gt; and
+&lt;code&gt;v1alpha3&lt;/code&gt; APIs simultaneously, similar to other core resources in Kubernetes.&lt;/p&gt;
+&lt;p&gt;Thanks to this conversion webhook, this upgrade and future upgrades after it should be seamless. The ability to make
+these kinds of changes to our API will enable the &lt;code&gt;v1beta1&lt;/code&gt; API version to be released in a seamless manner in an
+upcoming release too.&lt;/p&gt;
+&lt;p&gt;More information on the webhook can be found in the &lt;a href=&#34;../../docs/concepts/webhook/&#34;&gt;concepts section&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;support-for-kubernetes-1-11-and-openshift-3-11&#34;&gt;Support for Kubernetes 1.11 and OpenShift 3.11&lt;/h2&gt;
+&lt;p&gt;We&amp;rsquo;ve had a number of users who are using OpenShift 3.11 &amp;amp; Kubernetes 1.11 reach out requesting support with
+installation. In this release, we&amp;rsquo;ve expanded the range of Kubernetes versions we support to once again include 1.11,
+as well as adding support for OpenShift 3.11.&lt;/p&gt;
+&lt;p&gt;A big thanks to &lt;a href=&#34;https://github.com/meyskens&#34;&gt;&lt;code&gt;@meyskens&lt;/code&gt;&lt;/a&gt; for putting this together!&lt;/p&gt;
+&lt;h2 id=&#34;experimental-bundle-format-support-jks-and-pkcs-12&#34;&gt;Experimental &amp;lsquo;bundle format&amp;rsquo; support (JKS and PKCS#12)&lt;/h2&gt;
+&lt;p&gt;One of our top feature requests has been for support for &lt;a href=&#34;https://github.com/jetstack/cert-manager/issues/586&#34;&gt;JKS and PKCS#12&lt;/a&gt;
+bundle files as an output from Certificate resources.&lt;/p&gt;
+&lt;p&gt;In this release, we&amp;rsquo;ve added experimental support for both of these bundle formats. This can currently only be
+configured globally with flags provided to the &lt;code&gt;cert-manager&lt;/code&gt; pod (&lt;code&gt;--experimental-issue-jks&lt;/code&gt; and
+&lt;code&gt;--experimental-issue-pkcs12&lt;/code&gt;). The password used for this bundle must &lt;em&gt;also&lt;/em&gt; be configured using the flags
+&lt;code&gt;--experimental-jks-password&lt;/code&gt; and &lt;code&gt;--experimental-pkcs12-keystore-password&lt;/code&gt; respectively.&lt;/p&gt;
+&lt;p&gt;In the next release, we are aiming to provide native support for these bundle format types as part of the Certificate
+resource configuration. We have added these flags now in order to gather feedback on the way this feature works, and
+help guide how this feature should work in future.&lt;/p&gt;
+&lt;h2 id=&#34;extended-support-for-venafi-features&#34;&gt;Extended support for Venafi features&lt;/h2&gt;
+&lt;p&gt;Users of the Venafi issuer often need to set custom metadata on their certificate requests in order to better associate
+each request with different business areas, or in order to validate &amp;amp; authorize whether a request should be signed.&lt;/p&gt;
+&lt;p&gt;In this release, we&amp;rsquo;ve added support for setting custom metadata by adding the &lt;code&gt;venafi.cert-manager.io/custom-fields&lt;/code&gt;
+annotation on &lt;code&gt;Certificate&lt;/code&gt; and &lt;code&gt;CertificateRequest&lt;/code&gt; resources. If using the Venafi TPP integration, version 19.2 or
+greater is required.&lt;/p&gt;
+&lt;h2 id=&#34;urgent-upgrade-notes&#34;&gt;Urgent Upgrade Notes&lt;/h2&gt;
+&lt;h3 id=&#34;no-really-you-must-read-this-before-you-upgrade&#34;&gt;(No, really, you MUST read this before you upgrade)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Update Deployment selector to follow Helm chart best practices. This will require deleting the three cert-manager Deployment resources before upgrading. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2654&#34;&gt;#2654&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;changes-by-kind&#34;&gt;Changes by Kind&lt;/h2&gt;
+&lt;h3 id=&#34;feature&#34;&gt;Feature&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;--experimental-issue-jks&lt;/code&gt; flag to enable JKS bundle generation in generated Secret resources. This flag will be replaced with native support for JKS bundles in future and is currently an experimental feature. If enabled, the &lt;code&gt;--experimental-jks-password&lt;/code&gt; flag must also be set to the password used to encrypt JKS bundles. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2647&#34;&gt;#2647&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;--experimental-issue-pkcs12&lt;/code&gt; flag to enable PKCS12 bundle generation in generated Secret resources. This flag will be replaced with native support for PKCS12 bundles in future and is currently an experimental feature. If enabled, the &lt;code&gt;--experimental-pkcs12-keystore-password&lt;/code&gt; flag must also be set to the password used to encrypt PKCS12 bundles. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2643&#34;&gt;#2643&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;venafi.cert-manager.io/custom-fields&lt;/code&gt; annotation for Venafi custom fields (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2573&#34;&gt;#2573&lt;/a&gt;, &lt;a href=&#34;https://github.com/meyskens&#34;&gt;&lt;code&gt;@meyskens&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;emailSANs&lt;/code&gt; field to Certificate resource (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2597&#34;&gt;#2597&lt;/a&gt;, &lt;a href=&#34;https://github.com/meyskens&#34;&gt;&lt;code&gt;@meyskens&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Added &lt;code&gt;--tls-cipher-suites&lt;/code&gt; command line flag to the webhook binary with sensible defaults (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2562&#34;&gt;#2562&lt;/a&gt;, &lt;a href=&#34;https://github.com/willthames&#34;&gt;&lt;code&gt;@willthames&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Build OpenShift 3.11 compatible CRDs (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2609&#34;&gt;#2609&lt;/a&gt;, &lt;a href=&#34;https://github.com/meyskens&#34;&gt;&lt;code&gt;@meyskens&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Enable CRD conversion webhook and begin serving &lt;code&gt;v1alpha3&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2563&#34;&gt;#2563&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Improve startup time for webhook pod. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2574&#34;&gt;#2574&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Replace &lt;code&gt;00-crds.yaml&lt;/code&gt; file with a manifest file published as part of the release (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2665&#34;&gt;#2665&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;other-bug-cleanup-or-flake&#34;&gt;Other (Bug, Cleanup or Flake)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Bump &lt;code&gt;Venafi/vcert&lt;/code&gt; dependency to support custom fields in Venafi TPP 19.2 (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2663&#34;&gt;#2663&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix &lt;code&gt;GroupVersionKind&lt;/code&gt; set on &lt;code&gt;OwnerReference&lt;/code&gt; of resources created by HTTP01 challenge solver, causing HTTP01 validations to fail on OpenShift 4 (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2546&#34;&gt;#2546&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix Venafi Cloud URL field being marked required (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2568&#34;&gt;#2568&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug in ingress-shim causing Certificate resources to be rapidly updated if multiple &lt;code&gt;spec.tls[].hosts&lt;/code&gt; entries refer to the same Secret name but a different set of hosts (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2611&#34;&gt;#2611&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug that could cause certificates to be incorrectly issued with an invalid public key (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2539&#34;&gt;#2539&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix &lt;code&gt;cainjector.enabled=False&lt;/code&gt; override being ignored by the Helm Chart (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2544&#34;&gt;#2544&lt;/a&gt;, &lt;a href=&#34;https://github.com/gtaylor&#34;&gt;&lt;code&gt;@gtaylor&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Include license header in manifests attached to GitHub releases (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2684&#34;&gt;#2684&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Make the webhook &lt;code&gt;RoleBinding&lt;/code&gt; the leader election namespace instead of hard-coded &lt;code&gt;kube-system&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2621&#34;&gt;#2621&lt;/a&gt;, &lt;a href=&#34;https://github.com/travisghansen&#34;&gt;&lt;code&gt;@travisghansen&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Replace &lt;code&gt;openshift&lt;/code&gt; and &lt;code&gt;no-webhook&lt;/code&gt; manifest variants with a &amp;ldquo;legacy&amp;rdquo; variant (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2648&#34;&gt;#2648&lt;/a&gt;, &lt;a href=&#34;https://github.com/meyskens&#34;&gt;&lt;code&gt;@meyskens&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Truncate message display if HTTP01 self check fails (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2613&#34;&gt;#2613&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Upgrade to Go 1.14 (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2656&#34;&gt;#2656&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;other-changes&#34;&gt;Other Changes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;//build/release-tars&lt;/code&gt; targets for generating release artifacts (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2556&#34;&gt;#2556&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Improve local testing and development environment setup code (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2534&#34;&gt;#2534&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Remove &lt;code&gt;isOpenShift&lt;/code&gt; from Helm chart (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2642&#34;&gt;#2642&lt;/a&gt;, &lt;a href=&#34;https://github.com/meyskens&#34;&gt;&lt;code&gt;@meyskens&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Remove &lt;code&gt;webhook.enabled&lt;/code&gt; variable in Helm chart as the webhook now is a required component (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2649&#34;&gt;#2649&lt;/a&gt;, &lt;a href=&#34;https://github.com/meyskens&#34;&gt;&lt;code&gt;@meyskens&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.13/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.13/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;v0.13&lt;/code&gt; contains a number of important bug-fixes and a few notable feature additions. It is a minor, incremental
+update over &lt;code&gt;v0.12&lt;/code&gt; and does not require any special upgrade steps.&lt;/p&gt;
+&lt;h2 id=&#34;acme-external-account-binding-support&#34;&gt;ACME External Account Binding support&lt;/h2&gt;
+&lt;p&gt;Users that wish to use cert-manager with ACME servers other than Let&amp;rsquo;s Encrypt may have found themselves unable to
+register an account due to the lack of (EAB) &amp;lsquo;External Account Binding&amp;rsquo; support. This allows an ACME server to validate
+that a user is somehow associated with some other entity, like an account in the CAs customer management system.&lt;/p&gt;
+&lt;p&gt;With EAB support, it&amp;rsquo;s now possible to specify additional parameters (&lt;code&gt;spec.acme.externalAccountBinding&lt;/code&gt;) on your ACME
+Issuer resource and utilize cert-manager with your preferred ACME provider.&lt;/p&gt;
+&lt;h2 id=&#34;support-for-full-set-of-x509-subject-parameters&#34;&gt;Support for full set of x509 &amp;lsquo;subject&amp;rsquo; parameters&lt;/h2&gt;
+&lt;p&gt;In this release, support for the full range of &amp;lsquo;subject&amp;rsquo; parameters as per the x509 specification has been added.
+This means you can set fields like &lt;code&gt;organizationalUnit&lt;/code&gt;, &lt;code&gt;provinces&lt;/code&gt;, &lt;code&gt;serialNumber&lt;/code&gt;, &lt;code&gt;country&lt;/code&gt;, and all other standard
+x509 subject fields.&lt;/p&gt;
+&lt;p&gt;A big thanks to &lt;a href=&#34;https://github.com/mathianasj&#34;&gt;&lt;code&gt;@mathianasj&lt;/code&gt;&lt;/a&gt; for this addition!&lt;/p&gt;
+&lt;h2 id=&#34;invalidrequest-status-condition-for-certificaterequest-resources&#34;&gt;&lt;code&gt;InvalidRequest&lt;/code&gt; status condition for &lt;code&gt;CertificateRequest&lt;/code&gt; resources&lt;/h2&gt;
+&lt;p&gt;For the growing ecosystem of developers creating their own &amp;lsquo;external issuer types&amp;rsquo; for cert-manager, we have added
+support for a new &amp;lsquo;status condition&amp;rsquo; type &lt;code&gt;InvalidRequest&lt;/code&gt; - this can be used to signal from your signer/issuer to
+cert-manager that the parameters that the user has requested on the x509 CSR are &amp;lsquo;invalid&amp;rsquo; and the CSR should &lt;strong&gt;not&lt;/strong&gt;
+be retried.&lt;/p&gt;
+&lt;p&gt;This prevents users expending API quotas and making requests that will never succeed.&lt;/p&gt;
+&lt;h3 id=&#34;bug-fixes&#34;&gt;Bug Fixes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix invalid service account name used in RBAC resources when manually specifying a service account name (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2509&#34;&gt;#2509&lt;/a&gt;, &lt;a href=&#34;https://github.com/castlemilk&#34;&gt;&lt;code&gt;@castlemilk&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;fixed a bug that in certain cases could cause HTTP01 ingress &lt;code&gt;serviceName&lt;/code&gt; fields to be incorrectly set (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2460&#34;&gt;#2460&lt;/a&gt;, &lt;a href=&#34;https://github.com/greywolve&#34;&gt;&lt;code&gt;@greywolve&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug causing ever-increasing CPU usage in webhook component (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2467&#34;&gt;#2467&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug causing temporary certificates to overwrite previously issued certificates when adding a new &lt;code&gt;dnsName&lt;/code&gt; to an existing Certificate resource (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2469&#34;&gt;#2469&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix &lt;code&gt;certmanager_certificate_expiration_timestamp_seconds&lt;/code&gt; metric recording (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2416&#34;&gt;#2416&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fixes &lt;code&gt;ClusterIssuers&lt;/code&gt; not finding the secret when the secret is in a different namespace than the certificate request using the Venafi issuer type (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2520&#34;&gt;#2520&lt;/a&gt;, &lt;a href=&#34;https://github.com/mathianasj&#34;&gt;&lt;code&gt;@mathianasj&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fixes generation if invalid certificate name the the 52nd character in a domain name is a symbol. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2516&#34;&gt;#2516&lt;/a&gt;, &lt;a href=&#34;https://github.com/meyskens&#34;&gt;&lt;code&gt;@meyskens&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;other-notable-changes&#34;&gt;Other Notable Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Adds &lt;code&gt;InvalidRequest&lt;/code&gt; condition type to &lt;code&gt;CertificateRequest&lt;/code&gt;, signaling to not retry the request. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2508&#34;&gt;#2508&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add volume and volume mounts field to cert-manager helm chart (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2504&#34;&gt;#2504&lt;/a&gt;, &lt;a href=&#34;https://github.com/joshuastern&#34;&gt;&lt;code&gt;@joshuastern&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add support for additional x509 &amp;lsquo;subject&amp;rsquo; fields (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2518&#34;&gt;#2518&lt;/a&gt;, &lt;a href=&#34;https://github.com/mathianasj&#34;&gt;&lt;code&gt;@mathianasj&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Bump &lt;code&gt;k8s.io/*&lt;/code&gt; dependencies to Kubernetes 1.17.0 (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2452&#34;&gt;#2452&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;It is now possible to disable &lt;code&gt;AppArmor&lt;/code&gt; when Pod Security Policies are used. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2489&#34;&gt;#2489&lt;/a&gt;, &lt;a href=&#34;https://github.com/czunker&#34;&gt;&lt;code&gt;@czunker&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Support for arbitrary &lt;code&gt;securityContext&lt;/code&gt; parameters (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2455&#34;&gt;#2455&lt;/a&gt;, &lt;a href=&#34;https://github.com/nefischer&#34;&gt;&lt;code&gt;@nefischer&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Remove misleading &amp;lsquo;error decoding x509 certificate&amp;rsquo; message (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2470&#34;&gt;#2470&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Remove IP address validation on &lt;code&gt;dns01-recursive-nameservers&lt;/code&gt; to allow domain names (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2428&#34;&gt;#2428&lt;/a&gt;, &lt;a href=&#34;https://github.com/haines&#34;&gt;&lt;code&gt;@haines&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Optional &lt;code&gt;webhook.securityContext&lt;/code&gt; and &lt;code&gt;cainjector.securityContext&lt;/code&gt; chart parameters to specify pods security context. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2449&#34;&gt;#2449&lt;/a&gt;, &lt;a href=&#34;https://github.com/nefischer&#34;&gt;&lt;code&gt;@nefischer&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;webhook: register HTTP handlers for &lt;code&gt;pprof&lt;/code&gt; debug endpoints (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2450&#34;&gt;#2450&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds support for chart configurable parameters  &lt;code&gt;deploymentAnnotations&lt;/code&gt;, &lt;code&gt;webhook.deploymentAnnotations&lt;/code&gt; and &lt;code&gt;cainjector.deploymentAnnotations&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2447&#34;&gt;#2447&lt;/a&gt;, &lt;a href=&#34;https://github.com/nefischer&#34;&gt;&lt;code&gt;@nefischer&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds ACME external account binding support (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2392&#34;&gt;#2392&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix false-y values in helm chart to mitigate &lt;a href=&#34;https://github.com/kubernetes/kubernetes/issues/66450&#34;&gt;&lt;code&gt;kubernetes/kubernetes#66450&lt;/code&gt;&lt;/a&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2383&#34;&gt;#2383&lt;/a&gt;, &lt;a href=&#34;https://github.com/colek42&#34;&gt;&lt;code&gt;@colek42&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Explicitly define &lt;code&gt;containerPort&lt;/code&gt; protocol in helm chart (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2405&#34;&gt;#2405&lt;/a&gt;, &lt;a href=&#34;https://github.com/bouk&#34;&gt;&lt;code&gt;@bouk&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Switch to using upstream &lt;code&gt;golang.org/x/crypto/acme&lt;/code&gt; ACME client library (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2422&#34;&gt;#2422&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.12/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.12/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;v0.12.0&lt;/code&gt; release is finally ready! After a KubeCon-induced delay, this
+version focuses on usability, user experience, bug-fixes and documentation.&lt;/p&gt;
+&lt;p&gt;A big notable feature in this release is the new &lt;a href=&#34;https://cert-manager.io&#34;&gt;&lt;code&gt;cert-manager.io&lt;/code&gt;&lt;/a&gt;
+website - this has been a long time coming, but we hope that the information
+on this site should more clearly walk new and experienced users alike through
+the tool, and with it the rewrite into Markdown (with &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt;)
+should make external contributions easier!&lt;/p&gt;
+&lt;p&gt;The rest of the notable features below are all focused on usability, and as
+such, the upgrade process from &lt;code&gt;v0.11&lt;/code&gt; should be nice and easy :holiday:.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll be doing an in-depth walk-through of this release and what&amp;rsquo;s planned for
+for the next release during the next community call on Wednesday 4th December!
+For more details on joining and getting involved, see the
+&lt;a href=&#34;https://github.com/jetstack/cert-manager#community&#34;&gt;community section&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;contributors&#34;&gt;Contributors&lt;/h2&gt;
+&lt;p&gt;This release has seen code contributions from a number of people in the
+community:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Adrian Mouat&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Benjamin P. Jung&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Bouke van der Bijl&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Christian Groschupp&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Christophe Courtaut&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Eric Bailey&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Harold Drost&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ingo Gottwald&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;James Munnelly&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;JayatiGoyal&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Joshua Van Leeuwen&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Krishna Durai&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Luca Berneking&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Matevz Mihalic&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Max Goltzsche&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Nick Parker&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Nils Cant&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Nolan Reisbeck&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Pierre Dorbais&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Sam Cogan&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Thomas&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;chenjun.cj&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ismail BASKIN&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;walter.goulet&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As always, a big thank you to those opening issues, replying to issues and
+helping out in the Slack channel. As well as working in other projects to help
+users secure services running on Kubernetes.&lt;/p&gt;
+&lt;h2 id=&#34;notable-changes&#34;&gt;Notable changes&lt;/h2&gt;
+&lt;h3 id=&#34;new-website&#34;&gt;New website&lt;/h3&gt;
+&lt;p&gt;We have launched a new website to better showcase cert-manager, which can be
+found at &lt;a href=&#34;https://cert-manager.io&#34;&gt;&lt;code&gt;cert-manager.io&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With this new site, we have also significantly restructured and rewritten the
+documentation for the site in order to flow better, and hopefully inform users
+more on the inner-workings of cert-manager whilst still making on-boarding to
+the project easy.&lt;/p&gt;
+&lt;p&gt;Whilst this is the first launch of the new website, there is still lots to do!
+If you have any feedback, ideas or expertise to improve the site, please open
+an issue or make a contribution over in the new
+&lt;a href=&#34;https://github.com/cert-manager/website&#34;&gt;cert-manager/website&lt;/a&gt; repository.&lt;/p&gt;
+&lt;h3 id=&#34;multi-architecture-images&#34;&gt;Multi-architecture images&lt;/h3&gt;
+&lt;p&gt;If you run a non-homogeneous or alt-architecture cluster (i.e. &lt;code&gt;arm&lt;/code&gt; or &lt;code&gt;arm64&lt;/code&gt;)
+then you may have run into issues when deploying cert-manager.&lt;/p&gt;
+&lt;p&gt;For almost a year now, we have published Docker images built for these
+architectures, but due to limitations in &lt;code&gt;quay.io&lt;/code&gt;, using these images has
+required changing deployment manifests and passing additional flags to
+different cert-manager components.&lt;/p&gt;
+&lt;p&gt;As of &lt;code&gt;v0.12&lt;/code&gt;, we make use of &lt;a href=&#34;https://docs.docker.com/registry/spec/manifest-v2-2/&#34;&gt;&lt;code&gt;Docker Image Manifests v2.2&lt;/code&gt;&lt;/a&gt;,
+which means that you will no longer have to make &lt;em&gt;any changes&lt;/em&gt; to the
+deployment manifests in order to deploy cert-manager into your cluster!&lt;/p&gt;
+&lt;p&gt;This is a big usability win for users of non-&lt;code&gt;amd64&lt;/code&gt; systems, and a big +1
+for usability!&lt;/p&gt;
+&lt;h3 id=&#34;making-it-easier-to-debug-failing-acme-challenges&#34;&gt;Making it easier to debug failing ACME challenges&lt;/h3&gt;
+&lt;p&gt;During the ACME authorization flow, a number of issues can arise such as
+misconfigured DNS records or ingress controllers.&lt;/p&gt;
+&lt;p&gt;This release makes it simpler to identify these issues when they occur,
+providing additional debugging information through the user of
+&lt;code&gt;kubectl describe challenge &amp;lt;name-of-failing-challenge&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Whilst this is a small addition, it vastly improves the user experience for
+first time users who may have configuration issues with their DNS records or
+cert-manager installation, another win for usability!&lt;/p&gt;
+&lt;h3 id=&#34;simplifying-the-webhook-component&#34;&gt;Simplifying the webhook component&lt;/h3&gt;
+&lt;p&gt;For those of you upgrading from older versions of cert-manager, you may already
+be aware of some of the deployment issues with the &amp;lsquo;webhook&amp;rsquo; component in
+cert-manager.&lt;/p&gt;
+&lt;p&gt;In previous releases, this component relied on the creation of an &lt;code&gt;APIService&lt;/code&gt;
+resource in order for the Kubernetes apiserver to utilize the webhook and
+provide additional validation for our &lt;code&gt;CustomResourceDefinition&lt;/code&gt; types.&lt;/p&gt;
+&lt;p&gt;An &lt;code&gt;APIService&lt;/code&gt; is a powerful resource, however, due to its nature, can cause
+certain core operations (such as garbage collection) to not function if the
+webhook becomes unavailable at any point, which can in turn cause cascading
+failures in your Kubernetes cluster in the worst of cases.&lt;/p&gt;
+&lt;p&gt;In &lt;code&gt;v0.12&lt;/code&gt;, we have rewritten this component almost entirely, and we no longer
+make use of the &lt;code&gt;APIService&lt;/code&gt; resource in order to expose it.&lt;/p&gt;
+&lt;p&gt;This should mean deploying the webhook is far easier, and far less likely to
+cause cluster-wide issues.&lt;/p&gt;
+&lt;p&gt;We have also extended the webhook to support &amp;lsquo;API conversions&amp;rsquo; for our CRD
+types. Whilst we don&amp;rsquo;t currently make use of this functionality, when we
+release the &lt;code&gt;v1beta1&lt;/code&gt; we &lt;strong&gt;will&lt;/strong&gt; make use of it, at which point the webhook
+will be a required component in clusters running Kubernetes 1.15 or greater.&lt;/p&gt;
+&lt;h2 id=&#34;changelog&#34;&gt;Changelog&lt;/h2&gt;
+&lt;h3 id=&#34;action-required&#34;&gt;Action Required&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ACTION REQUIRED
+Users who have previously set the Kubernetes Auth Mount Path will need to update their manifests to include the entire mount path. The &lt;code&gt;/login&lt;/code&gt; endpoint is added for you.&lt;/p&gt;
+&lt;p&gt;Changes the Vault Kubernetes Auth Path to require the entire mount path. &lt;code&gt;/login&lt;/code&gt; is added to all mount paths when authenticating.
+The default auth path has now changed from &lt;code&gt;kubernetes&lt;/code&gt; to &lt;code&gt;/v1/auth/kubernetes&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2349&#34;&gt;#2349&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bug-fixes&#34;&gt;Bug Fixes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixes issues with Pod Security Policies that prevented pods from running when Pod Security Policy is enabled in Kubernetes (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2234&#34;&gt;#2234&lt;/a&gt;,
+&lt;a href=&#34;https://github.com/sam-cogan&#34;&gt;&lt;code&gt;@sam-cogan&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix issue causing certificates not to be issued when running with &lt;code&gt;OwnerReferencesPermissionEnforcement&lt;/code&gt; admission controller enabled (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2325&#34;&gt;#2325&lt;/a&gt;,
+&lt;a href=&#34;https://github.com/CoaxVex&#34;&gt;&lt;code&gt;@CoaxVex&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug causing SIGTERM and SIGINT signals to not be respected whilst the controller is performing leader election (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2236&#34;&gt;#2236&lt;/a&gt;,
+&lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix setting &lt;code&gt;ownerReference&lt;/code&gt; on Challenge resources created by Orders controller (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2324&#34;&gt;#2324&lt;/a&gt;, &lt;a href=&#34;https://github.com/CoaxVex&#34;&gt;&lt;code&gt;@CoaxVex&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Allow &lt;code&gt;CloudDNS&lt;/code&gt; resolvers to be validated correctly without &lt;code&gt;serviceAccountSecretRef&lt;/code&gt; to allow ambient permissions to be used. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2250&#34;&gt;#2250&lt;/a&gt;,
+&lt;a href=&#34;https://github.com/baelish&#34;&gt;&lt;code&gt;@baelish&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add missing &lt;code&gt;apiVersion&lt;/code&gt; to &lt;code&gt;Chart.yaml&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2270&#34;&gt;#2270&lt;/a&gt;, &lt;a href=&#34;https://github.com/yurrriq&#34;&gt;&lt;code&gt;@yurrriq&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Perform API resource validation of the &amp;lsquo;status&amp;rsquo; subresource on cert-manager resources (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2283&#34;&gt;#2283&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix outdated documentation for solver configuration in &lt;code&gt;Issuers&lt;/code&gt; and &lt;code&gt;ClusterIssuers&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2210&#34;&gt;#2210&lt;/a&gt;, &lt;a href=&#34;https://github.com/nickbp&#34;&gt;&lt;code&gt;@nickbp&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;other-notable-changes&#34;&gt;Other Notable Changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Explicitly define &lt;code&gt;containerPort&lt;/code&gt; protocol in helm chart (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2405&#34;&gt;#2405&lt;/a&gt;, &lt;a href=&#34;https://github.com/bouk&#34;&gt;&lt;code&gt;@bouk&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Allow permissive acceptance for matching Certificates with Secrets that are using legacy annotations to reduce non-required certificate reissue.
+(&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2400&#34;&gt;#2400&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add API token authentication option to CloudFlare issuer (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2170&#34;&gt;#2170&lt;/a&gt;, &lt;a href=&#34;https://github.com/matevzmihalic&#34;&gt;&lt;code&gt;@matevzmihalic&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Bump Kubernetes client library dependencies to 1.16.3 (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2290&#34;&gt;#2290&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Build using go 1.13.4 (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2366&#34;&gt;#2366&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Mark &lt;code&gt;certificaterequest.spec.csr&lt;/code&gt; field as required in OpenAPI schema (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2368&#34;&gt;#2368&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;serverAuth&lt;/code&gt; extended key usage to Certificates by default (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2351&#34;&gt;#2351&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Surface more information about ACME authorization failures on Challenge resources (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2261&#34;&gt;#2261&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add documentation for the webhook (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2252&#34;&gt;#2252&lt;/a&gt;, &lt;a href=&#34;https://github.com/cgroschupp&#34;&gt;&lt;code&gt;@cgroschupp&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add support for API resource conversion to the webhook. NOTE: this feature is &lt;strong&gt;not&lt;/strong&gt; currently utilized by cert-manager (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2001&#34;&gt;#2001&lt;/a&gt;,
+&lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Remove nested &lt;code&gt;cainjector&lt;/code&gt; sub chart and include it in main chart (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2285&#34;&gt;#2285&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Change the default webhook listen address to 10250 for better compatibility with GKE private clusters (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2278&#34;&gt;#2278&lt;/a&gt;,
+&lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Bump Helm &amp;amp; Tiller version used during end-to-end tests to 2.15.1 (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2275&#34;&gt;#2275&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Make &lt;code&gt;spec.csr&lt;/code&gt;, &lt;code&gt;status.url&lt;/code&gt;, &lt;code&gt;status.finalizeURL&lt;/code&gt;, &lt;code&gt;status.certificate&lt;/code&gt;, &lt;code&gt;status.authorizations&lt;/code&gt;, &lt;code&gt;status.authorizations[].url&lt;/code&gt;, &lt;code&gt;status.authorizations[].identifier&lt;/code&gt;,
+&lt;code&gt;status.authorizations[].wildcard&lt;/code&gt;, &lt;code&gt;status.authorizations[].challenges&lt;/code&gt;, &lt;code&gt;status.authorizations[].challenges[].url&lt;/code&gt;, &lt;code&gt;status.authorizations[].challenges[].type&lt;/code&gt;,
+&lt;code&gt;status.authorizations[].challenges[].token&lt;/code&gt; fields on Order resources immutable (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2219&#34;&gt;#2219&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;No longer use architecture specific &lt;code&gt;acmesolver&lt;/code&gt; images (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2242&#34;&gt;#2242&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;enable cert-manager using &lt;code&gt;--kubeconfig&lt;/code&gt; to connect API Server with &lt;code&gt;kubeconfig&lt;/code&gt; file (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2224&#34;&gt;#2224&lt;/a&gt;, &lt;a href=&#34;https://github.com/answer1991&#34;&gt;&lt;code&gt;@answer1991&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Publish multi-architecture docker manifest lists (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2230&#34;&gt;#2230&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Make &lt;code&gt;order.status.authorizations[].wildcard&lt;/code&gt; field a &lt;code&gt;*bool&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2225&#34;&gt;#2225&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/reference/using-api/api-concepts/#dry-run&#34;&gt;Kubernetes APIServer dry-run&lt;/a&gt; is supported. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2206&#34;&gt;#2206&lt;/a&gt;,
+&lt;a href=&#34;https://github.com/ismailbaskin&#34;&gt;&lt;code&gt;@ismailbaskin&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.11/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.11/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;v0.11&lt;/code&gt; release is a significant milestone for the cert-manager project, and
+is full of new features.
+We are making a number of changes to our CRDs in a backwards incompatible way,
+in preparation for moving into &lt;code&gt;v1beta1&lt;/code&gt; and eventually &lt;code&gt;v1&lt;/code&gt; in the coming
+releases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Renaming our API group from &lt;code&gt;certmanager.k8s.io&lt;/code&gt; to &lt;code&gt;cert-manager.io&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Bumping the API version from &lt;code&gt;v1alpha1&lt;/code&gt; to &lt;code&gt;v1alpha2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Removing fields deprecated in &lt;code&gt;v0.8&lt;/code&gt; (&lt;code&gt;certificate.spec.acme&lt;/code&gt;,
+&lt;code&gt;issuer.spec.http01&lt;/code&gt; and &lt;code&gt;issuer.spec.dns01&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Renaming annotation prefixes on Ingress &amp;amp; cert-manager resources to use the
+new &lt;code&gt;cert-manager.io&lt;/code&gt; prefix, and in some cases &lt;code&gt;acme.cert-manager.io&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Using the &lt;code&gt;status&lt;/code&gt; subresource for submitting status updates to the API,
+first introduced in Kubernetes 1.9.&lt;/li&gt;
+&lt;li&gt;Tightening use of common name vs DNS name with ACME certificates&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We have also switched to using the new [&lt;code&gt;CertificateRequest&lt;/code&gt;] based Certificate
+issuance implementation, first introduced in alpha in cert-manager &lt;code&gt;v0.9&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;These changes enable exciting new integrations points in cert-manager, enabling
+new things like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;External issuer types, such as the [Smallstep Step Issuer]&lt;/li&gt;
+&lt;li&gt;Deeper integrations into Kubernetes, with an experimental [CSI driver] that
+can be used to automatically mount signed certificates into pods&lt;/li&gt;
+&lt;li&gt;Experimental integration with Istio, allowing you to utilize any of
+cert-manager&amp;rsquo;s configured issuer types/CAs with the [node agent]&lt;/li&gt;
+&lt;li&gt;Retrieving certificates without giving cert-manager access to your private
+keys&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is a really exciting time for cert-manager, as these changes have been
+made possible by refining our past decisions around API types, and they will
+enable us to push ahead with many new features in the project.&lt;/p&gt;
+&lt;h2 id=&#34;important-information&#34;&gt;Important information&lt;/h2&gt;
+&lt;p&gt;With all of these great changes, there is also work to do.&lt;/p&gt;
+&lt;p&gt;The changes to our CRD resources mean that upgrading requires more manual
+intervention than in previous releases.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s recommended that you backup and completely &lt;a href=&#34;https://docs.cert-manager.io/en/release-0.12/tasks/uninstall/&#34;&gt;uninstall
+cert-manager&lt;/a&gt;
+before re-installing the &lt;code&gt;v0.11&lt;/code&gt; release.&lt;/p&gt;
+&lt;p&gt;You will also need to manually update all your backed up cert-manager resource
+types to use the new &lt;code&gt;apiVersion&lt;/code&gt; setting.&lt;/p&gt;
+&lt;p&gt;A table of resources and their old and new &lt;code&gt;apiVersion&lt;/code&gt;s:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Kind&lt;/th&gt;
+&lt;th&gt;Old &lt;code&gt;apiVersion&lt;/code&gt;&lt;/th&gt;
+&lt;th&gt;New &lt;code&gt;apiVersion&lt;/code&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Certificate&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/v1alpha1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/v1alpha2&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Issuer&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/v1alpha1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/v1alpha2&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ClusterIssuer&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/v1alpha1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/v1alpha2&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CertificateRequest&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/v1alpha1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/v1alpha2&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Order&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/v1alpha1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;acme.cert-manager.io/v1alpha2&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Challenge&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/v1alpha1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;acme.cert-manager.io/v1alpha2&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;You must also make sure to update all references to cert-manager in annotations to their
+new prefix:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Annotation&lt;/th&gt;
+&lt;th&gt;Affected resources&lt;/th&gt;
+&lt;th&gt;New annotation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/acme-http01-edit-in-place&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;acme.cert-manager.io/http01-edit-in-place&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/acme-http01-ingress-class&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;acme.cert-manager.io/http01-ingress-class&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/issuer&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/issuer&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/cluster-issuer&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/cluster-issuer&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/acme-challenge-type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;REMOVED&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/acme-dns01-provider&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;REMOVED&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/alt-names&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress, Secret&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/alt-names&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/ip-sans&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress, Secret&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/ip-sans&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/common-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress, Secret&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/common-name&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/issuer-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress, Secret&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/issuer-name&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress, Secret&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/issuer-kind&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress, Secret&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/issuer-group&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ingress, Secret&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/uri-sans&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Certificate&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/issue-temporary-certificate&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;CertificateRequest&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/private-key-secret-name&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;certmanager.k8s.io/certificate-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;CertificateRequest, Secret&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;cert-manager.io/certificate-name&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;contributors&#34;&gt;Contributors&lt;/h2&gt;
+&lt;p&gt;This release has seen code contributions from a number of people in the
+community:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Adam Kunicki&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Alpha&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Brian Hong&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Dan Farrell&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Dig-Doug&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Galo Navarro&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ingo Gottwald&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;James Munnelly&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;JoshVanL&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Kevin Lefevre&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Lachlan Cooper&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Michel Blankleder&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Toni Menzel&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Wellington F Silva&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Woz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dulltz&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As always, a big thank you to those opening issues, replying to issues and
+helping out in the Slack channel. As well as working in other projects to help
+users secure services running on Kubernetes.&lt;/p&gt;
+&lt;h2 id=&#34;notable-changes&#34;&gt;Notable changes&lt;/h2&gt;
+&lt;h3 id=&#34;renamed-api-group&#34;&gt;Renamed API group&lt;/h3&gt;
+&lt;p&gt;Due to new policies in the upstream Kubernetes project, we have renamed the
+API group from &lt;code&gt;certmanager.k8s.io&lt;/code&gt; to &lt;code&gt;cert-manager.io&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This is a breaking change to our API surface as mentioned above, but it
+is a long time coming. The original &lt;code&gt;k8s.io&lt;/code&gt; suffix was used when the project
+first started as there was not official guidance or information on how
+&lt;code&gt;ThirdPartyResources&lt;/code&gt; should be structured. Now that this area of the
+Kubernetes project has evolved further, we&amp;rsquo;re retrospectively changing this to
+conform with the new requirements.&lt;/p&gt;
+&lt;h3 id=&#34;moving-to-v1alpha2&#34;&gt;Moving to &lt;code&gt;v1alpha2&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;When cert-manager first started, we defined our APIs based on what we thought
+made sense for end-users.&lt;/p&gt;
+&lt;p&gt;Over time, through gathering feedback and monitoring the way users are actually
+using cert-manager, we&amp;rsquo;ve identified some issues with our original API design.&lt;/p&gt;
+&lt;p&gt;As part of the project moving towards &lt;code&gt;v1&lt;/code&gt;, we&amp;rsquo;ve identified certain areas of our
+APIs that are not fit for purpose.&lt;/p&gt;
+&lt;p&gt;In order to begin the process of moving towards &lt;code&gt;v1&lt;/code&gt;, we first deprecated a
+number of fields in our &lt;code&gt;v1alpha1&lt;/code&gt; API. We&amp;rsquo;ve now &lt;strong&gt;dropped&lt;/strong&gt; these API fields
+in &lt;code&gt;v1alpha2&lt;/code&gt;, in preparation for declaring this new API as &lt;code&gt;v1beta1&lt;/code&gt; in the
+coming releases.&lt;/p&gt;
+&lt;h3 id=&#34;new-certificaterequest-resource-type&#34;&gt;New &lt;code&gt;CertificateRequest&lt;/code&gt; resource type&lt;/h3&gt;
+&lt;p&gt;The activation of &lt;code&gt;CertificateRequest&lt;/code&gt; controllers are no longer behind a
+feature and are now instead enabled by default. This means that when requesting
+certificates using the &lt;code&gt;Certificate&lt;/code&gt; resource the &lt;code&gt;CertificateRequest&lt;/code&gt; resource
+will be used as the default and only way to honor the request. The addition of
+this resource introduces the ability for much greater extension points to
+cert-manager, notably out-of-tree issuers, Istio integrations, and experimental
+tooling such as a CSI driver. You can read more about the motivation and design
+of this resource in the &lt;a href=&#34;https://github.com/jetstack/cert-manager/blob/master/design/20190708.certificate-request-crd.md&#34;&gt;enhancement
+document&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This change should cause no disruption to how end users interact with
+cert-manager, with the exception of debugging now requiring this resource to be
+inspected also.&lt;/p&gt;
+&lt;h3 id=&#34;support-for-out-of-tree-issuer-types&#34;&gt;Support for out-of-tree issuer types&lt;/h3&gt;
+&lt;p&gt;With the graduation of the &lt;code&gt;CertificateRequest&lt;/code&gt; resource, cert-manager now
+supports out-of-tree issuers by default and treats them the same as any other
+core issuer. This process is facilitated by the addition of the &lt;code&gt;group&lt;/code&gt; field on
+issuer references inside your &lt;code&gt;Certificate&lt;/code&gt; and &lt;code&gt;CertificateRequest&lt;/code&gt; resources.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re interested in implementing your own out-of-tree issuer, or if there
+is a provider you would like see implemented, feel free to reach out either
+through a &lt;a href=&#34;https://github.com/jetstack/cert-manager/issues/new?template=feature-request.md&#34;&gt;GitHub
+issue&lt;/a&gt;
+or send us a message in the #cert-manager channel on &lt;a href=&#34;http://slack.kubernetes.io/&#34;&gt;Kubernetes
+Slack&lt;/a&gt;!&lt;/p&gt;
+&lt;h3 id=&#34;new-fields-on-certificate-resources&#34;&gt;New fields on Certificate resources&lt;/h3&gt;
+&lt;p&gt;This release includes a new field &lt;code&gt;URISANs&lt;/code&gt; on the &lt;code&gt;Certificate&lt;/code&gt; resource. With
+this, you can specify unique resource identifier URLs as subject alternative
+names on your certificates. This addition unblocks development for an Istio
+integration where mTLS can be configured using cert-manager as the backend and
+in turn opens up all cert-manager issuer types as valid certificate providers in
+your Istio PKI.&lt;/p&gt;
+&lt;h3 id=&#34;improved-acme-order-controller-design&#34;&gt;Improved ACME Order controller design&lt;/h3&gt;
+&lt;p&gt;Some users may have noticed issues with the &amp;lsquo;Order&amp;rsquo; resource not automatically
+detecting changes to their configure &amp;lsquo;solvers&amp;rsquo; on their Issuer resources.&lt;/p&gt;
+&lt;p&gt;In &lt;code&gt;v0.11&lt;/code&gt;, we&amp;rsquo;ve rewritten the ACME Order handling code to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;better handle updates to Issuers during an Order&lt;/li&gt;
+&lt;li&gt;improve ACME API usage - we now cache more information about the ACME Order
+process in the Kubernetes API, which allows us to act more reliably and
+without causing excessive requests to the ACME server.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;no-longer-generating-temporary-certificates-by-default&#34;&gt;No longer generating &amp;lsquo;temporary certificates&amp;rsquo; by default&lt;/h3&gt;
+&lt;p&gt;Previously, we have issued a temporary certificate when a &lt;code&gt;Certificate&lt;/code&gt; resource
+targeting an ACME issuer has been created. This would later be overridden once
+the real signed certificate has been issued. The reason for this behavior was
+to facilitate compatibility with &lt;code&gt;ingress-gce&lt;/code&gt; however, many users have had trouble
+with this in the past and has led to lots of confusion - namely where
+applications would need restarting to take on the signed certificate rather than
+the temporary.&lt;/p&gt;
+&lt;p&gt;In this release, no temporary certificates will be created unless explicitly
+requested. This can be done using the annotation
+&lt;code&gt;&amp;quot;cert-manager.io/issue-temporary-certificate&amp;quot;: &amp;quot;true&lt;/code&gt; on &lt;code&gt;Certifcate&lt;/code&gt;
+resources.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve additionally changed the behavior of ingress-shim to now add this new
+annotation to &lt;code&gt;Certificate&lt;/code&gt; resources if
+&lt;code&gt;&amp;quot;acme.cert-manager.io/http01-edit-in-place&amp;quot;&lt;/code&gt; is present on the Ingress
+resource.&lt;/p&gt;
+&lt;h2 id=&#34;changelog&#34;&gt;Changelog&lt;/h2&gt;
+&lt;h2 id=&#34;action-required&#34;&gt;Action Required&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Rename &lt;code&gt;certmanager.k8s.io&lt;/code&gt; API group to &lt;code&gt;cert-manager.io&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2096&#34;&gt;#2096&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Move Order and Challenge resources to the &lt;code&gt;acme.cert-manager.io&lt;/code&gt; API group (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2093&#34;&gt;#2093&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Move &lt;code&gt;v1alpha1&lt;/code&gt; API to &lt;code&gt;v1alpha2&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2087&#34;&gt;#2087&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Allow controlling whether temporary certificates are issued using a new annotation &lt;code&gt;certmanager.k8s.io/issue-temporary-certificate&lt;/code&gt;
+on Certificate resources. Previously, when an ACME certificate was requested, a temporary certificate would be issued in order
+to improve compatibility with &lt;code&gt;ingress-gce&lt;/code&gt;. ingress-shim has been updated to automatically set this annotation on managed Certificate
+resources when using the &amp;lsquo;edit-in-place&amp;rsquo; annotation, but users that have manually created their Certificate resources will need to
+manually add the new annotation to their Certificate resources. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2089&#34;&gt;#2089&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;other-notable-changes&#34;&gt;Other Notable Changes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Change the default leader election namespace to &lt;code&gt;kube-system&lt;/code&gt; instead of the same namespace as the cert-manager pod, to avoid multiple copies of cert-manager accidentally being run at once (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2155&#34;&gt;#2155&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds &lt;code&gt;URISANs&lt;/code&gt; field to &lt;code&gt;Certificate.Spec&lt;/code&gt; resource. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2085&#34;&gt;#2085&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Move status to a CRD Subresource (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2097&#34;&gt;#2097&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Enables supporting out of tree issuers with ingress annotations (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2105&#34;&gt;#2105&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Bump Kubernetes dependencies to 1.16.0 (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2095&#34;&gt;#2095&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds Certificate conformance suite (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2034&#34;&gt;#2034&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Build using Go 1.13.1 (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2114&#34;&gt;#2114&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds Kubernetes authentication type for Vault Issue (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2040&#34;&gt;#2040&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Service account annotation support in Helm chart (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2086&#34;&gt;#2086&lt;/a&gt;, &lt;a href=&#34;https://github.com/serialx&#34;&gt;&lt;code&gt;@serialx&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Update AWS Go SDK to 1.24.1 to support IAM Roles for Service Accounts (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2083&#34;&gt;#2083&lt;/a&gt;, &lt;a href=&#34;https://github.com/serialx&#34;&gt;&lt;code&gt;@serialx&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Remove deprecated API fields and functionality (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2082&#34;&gt;#2082&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Update &lt;code&gt;hack/ci/run-dev-kind.sh&lt;/code&gt; script to use the right path of cert-manager charts. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2074&#34;&gt;#2074&lt;/a&gt;, &lt;a href=&#34;https://github.com/srvaroa&#34;&gt;&lt;code&gt;@srvaroa&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Simplify, improve and rewrite the &lt;code&gt;acmeorders&lt;/code&gt; controller (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2041&#34;&gt;#2041&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.10/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.10/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;v0.10&lt;/code&gt; release comes quick on the heels of &lt;code&gt;v0.9&lt;/code&gt;. It continues the work on
+the new &lt;code&gt;CertificateRequest&lt;/code&gt; resource type, moving us towards a world where
+out-of-tree Issuer types are first class citizens.&lt;/p&gt;
+&lt;p&gt;As a project, we&amp;rsquo;re pushing towards a &amp;lsquo;stable&amp;rsquo; API release and eventually, a
+&lt;code&gt;v1.0&lt;/code&gt; release. This release, and the releases to follow over the coming months,
+lay the foundation for these milestones. Keep an eye on the releases page over
+the coming months for some exciting new developments!&lt;/p&gt;
+&lt;p&gt;You can get started using the new &lt;code&gt;CertificateRequest&lt;/code&gt; controllers by enabling
+the &lt;code&gt;CertificateRequestControllers&lt;/code&gt; feature gate - all Issuer types are now
+supported, and your feedback is extremely valuable before we switch the new
+implementation to be the default in &lt;code&gt;v0.11&lt;/code&gt;!&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve also simplified the way we bootstrap TLS certificates for the &amp;lsquo;webhook&amp;rsquo;
+component. Now, instead of creating an &lt;code&gt;Issuer&lt;/code&gt; and &lt;code&gt;Certificate&lt;/code&gt; resource for the
+webhook (requiring you to disable validation on the cert-manager namespace),
+we&amp;rsquo;ve implemented a dedicated &lt;code&gt;webhookbootstrap&lt;/code&gt; controller which will manage
+TLS assets for the webhook.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;This release includes changes from:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Alejandro Garrido Mota&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Alpha&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Hans Kristian Flaatten&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;James Munnelly&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Jonas-Taha El Sesiy&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;JoshVanL&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Marcello Romani&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Moritz Johner&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Nicolas Kowenski&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Olaf Klischat&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Vasilis Remmas&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;stuart.warren&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;zeeZ&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;notable-items&#34;&gt;Notable Items&lt;/h2&gt;
+&lt;h3 id=&#34;all-issuer-types-now-supported-with-certificaterequests&#34;&gt;All Issuer types now supported with &lt;code&gt;CertificateRequests&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;CertificateRequest&lt;/code&gt; design proposal, first implemented in &lt;code&gt;v0.9&lt;/code&gt;, changes the
+way we request certificates from &lt;code&gt;Issuers&lt;/code&gt; in order to allow out-of-tree Issuer
+types.
+This required us to refactor and adapt our existing in-tree &lt;code&gt;Issuer&lt;/code&gt; types to
+follow a similar pattern.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;v0.10&lt;/code&gt; release finishes this refactoring so that all &lt;code&gt;Issuer&lt;/code&gt; types now
+support the new format.&lt;/p&gt;
+&lt;p&gt;As the feature is currently still in an &amp;lsquo;alpha&amp;rsquo; state, you must set the
+&lt;code&gt;issuerRef.group&lt;/code&gt; field on your Certificate resources to &lt;code&gt;certmanager.k8s.io&lt;/code&gt;,
+as well as enabling the &lt;code&gt;CertificateRequestControllers&lt;/code&gt; feature gate on the
+&lt;code&gt;controller&lt;/code&gt; component of cert-manager.&lt;/p&gt;
+&lt;h3 id=&#34;simplified-webhook-tls-bootstrapping&#34;&gt;Simplified webhook TLS bootstrapping&lt;/h3&gt;
+&lt;p&gt;In past releases, we&amp;rsquo;ve managed TLS for the webhook component by creating an
+internal self signed and CA issuer that is used to mint serving certificates
+for the apiserver to authenticate the webhook&amp;rsquo;s identity.&lt;/p&gt;
+&lt;p&gt;This introduced a number of complexities in our installation process and has
+caused trouble for users in the past.&lt;/p&gt;
+&lt;p&gt;In order to simplify this process and to support running a CRD conversion
+webhook in future (to provide seamless migration between API versions), we&amp;rsquo;ve
+introduced a dedicated &lt;code&gt;webhookbootstrap&lt;/code&gt; controller that relies on flags and
+Secret resources in order to configure TLS for the webhook.&lt;/p&gt;
+&lt;p&gt;This will mean easier installation as well as future-proofing for our upcoming
+plans in future releases.&lt;/p&gt;
+&lt;h3 id=&#34;keyusages-on-certificate-resources&#34;&gt;&lt;code&gt;KeyUsages&lt;/code&gt; on Certificate resources&lt;/h3&gt;
+&lt;p&gt;In order to support a more diverse set of applications, including apps that
+require client-auth certificates, a new field &lt;code&gt;keyUsages&lt;/code&gt; has been added which
+accepts a list of usages that must be present on a Certificate.&lt;/p&gt;
+&lt;p&gt;These will be automatically added when certificates are issued, just like any
+other field on the Certificate.&lt;/p&gt;
+&lt;p&gt;Thanks to Stuart Warren from Ocado for this change!&lt;/p&gt;
+&lt;h3 id=&#34;preparation-for-v1alpha2-and-beyond&#34;&gt;Preparation for &lt;code&gt;v1alpha2&lt;/code&gt; and beyond&lt;/h3&gt;
+&lt;p&gt;Over the last few releases, we&amp;rsquo;ve been making a number of significant changes
+to our API types (i.e. moving ACME configuration from Certificate resources
+onto the Issuer resource). This has involved deprecating some old API fields.&lt;/p&gt;
+&lt;p&gt;In a future release, we&amp;rsquo;ll be removing these deprecated fields altogether,
+requiring users to update their manifests to utilize the new way to specify
+configuration.&lt;/p&gt;
+&lt;p&gt;A number of steps have been taken in our own code base to support this change,
+and in a future release, you&amp;rsquo;ll be required to update &lt;strong&gt;all&lt;/strong&gt; your manifests for
+this new format. Future API revisions (e.g. &lt;code&gt;v1beta1&lt;/code&gt; and &lt;code&gt;v1&lt;/code&gt;) will be
+automatically converted using a Kubernetes conversion webhook (available in
+beta from Kubernetes 1.15 onward).&lt;/p&gt;
+&lt;h2 id=&#34;action-required&#34;&gt;Action Required&lt;/h2&gt;
+&lt;p&gt;No special actions are required as part of this release.&lt;/p&gt;
+&lt;h2 id=&#34;changelog&#34;&gt;Changelog&lt;/h2&gt;
+&lt;h3 id=&#34;general&#34;&gt;General&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;DisableDeprecatedACMECertificates&lt;/code&gt; feature gate to disable the old deprecated ACME configuration format (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1923&#34;&gt;#1923&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;chart: fix formatting of values table in &lt;code&gt;README.md&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1936&#34;&gt;#1936&lt;/a&gt;, &lt;a href=&#34;https://github.com/Starefossen&#34;&gt;&lt;code&gt;@Starefossen&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add internal API version and implement machinery for defaulting &amp;amp; conversion (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/2002&#34;&gt;#2002&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix concurrent map write panic in certificates controller (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1980&#34;&gt;#1980&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cainjector&lt;/code&gt;: allow injecting CAs directly from Secret resources (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1990&#34;&gt;#1990&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Mark &lt;code&gt;spec&lt;/code&gt; and &lt;code&gt;status&lt;/code&gt; as non-required fields in CRDs (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1957&#34;&gt;#1957&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add ability to specify key usages and extended key usages in certificates (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1996&#34;&gt;#1996&lt;/a&gt;, &lt;a href=&#34;https://github.com/stuart-warren&#34;&gt;&lt;code&gt;@stuart-warren&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;acme-issuer&#34;&gt;ACME Issuer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add option to assume role in Route53 DNS01 provider (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1917&#34;&gt;#1917&lt;/a&gt;, &lt;a href=&#34;https://github.com/moolen&#34;&gt;&lt;code&gt;@moolen&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix documentation for AzureDNS service principal creation (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1960&#34;&gt;#1960&lt;/a&gt;, &lt;a href=&#34;https://github.com/elsesiy&#34;&gt;&lt;code&gt;@elsesiy&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;webhook&#34;&gt;Webhook&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Use dedicated controller for webhook TLS bootstrapping (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1993&#34;&gt;#1993&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;certificaterequest&#34;&gt;&lt;code&gt;CertificateRequest&lt;/code&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add ACME &lt;code&gt;CertificateRequest&lt;/code&gt; controller implementation (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1943&#34;&gt;#1943&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add Vault &lt;code&gt;CertificateRequest&lt;/code&gt; controller implementation (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1934&#34;&gt;#1934&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;SelfSigned&lt;/code&gt; &lt;code&gt;CertificateRequest&lt;/code&gt; controller implementation (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1906&#34;&gt;#1906&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add Venafi &lt;code&gt;CertificateRequest&lt;/code&gt; controller implementation (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1968&#34;&gt;#1968&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t validate &lt;code&gt;issuerRef.kind&lt;/code&gt; field if &lt;code&gt;issuerRef.group &lt;/code&gt;is set in order to support out-of-tree Issuer types (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1949&#34;&gt;#1949&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds &lt;code&gt;CertificateRequest&lt;/code&gt; &lt;code&gt;FailureTime&lt;/code&gt;. The Certificate controller will re-try failed &lt;code&gt;CertificateRequests&lt;/code&gt; at least one hour after this failed time. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1979&#34;&gt;#1979&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;monitoring&#34;&gt;Monitoring&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added variable to specify custom namespace where to deploy &lt;code&gt;ServiceMonitor&lt;/code&gt; resource (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1970&#34;&gt;#1970&lt;/a&gt;, &lt;a href=&#34;https://github.com/mogaal&#34;&gt;&lt;code&gt;@mogaal&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;helm: fix labels and add Service for Prometheus &lt;code&gt;ServiceMonitor&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1942&#34;&gt;#1942&lt;/a&gt;, &lt;a href=&#34;https://github.com/Starefossen&#34;&gt;&lt;code&gt;@Starefossen&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.9/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.9/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;v0.9&lt;/code&gt; release is one of our biggest yet, packed with new features and bug
+fixes!&lt;/p&gt;
+&lt;p&gt;The introduction of the new &lt;code&gt;CertificateRequest&lt;/code&gt; resource type is significant as
+it is a step towards where we want to be for 1.0, defining an API specification
+for Certificates and allowing anyone to implement their own issuers and CAs as
+first class citizens.&lt;/p&gt;
+&lt;p&gt;This release includes changes from:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Aaron Gershman&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Aled James&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Artem Yarmoluk&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Carlos Panato&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Chris Abiad&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Christopher Abiad&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Crystal-Chun&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Dan&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Dobes Vandermeer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Hans Kristian Flaatten&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Hays Clark&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ivan Wallis&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;James Munnelly&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Joshua Van Leeuwen&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Kevin Woo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Lachlan Cooper&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Louis Taylor&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Michael Cristina&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Michael Tsang&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PirateBread&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Qiu Yu&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Sergej Nikolaev&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Solly Ross&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Stefan Kolb&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Steven Tobias&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Stuart Hu&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Till Wiese&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;kfoozminus&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;notable-items&#34;&gt;Notable Items&lt;/h2&gt;
+&lt;h3 id=&#34;new-certificaterequest-resource&#34;&gt;New &lt;code&gt;CertificateRequest&lt;/code&gt; Resource&lt;/h3&gt;
+&lt;p&gt;A new resource has been introduced - &lt;code&gt;CertificateRequest&lt;/code&gt; - that is used to
+request certificates using a raw x509 certificate signing request. This resource
+is not typically used by humans but rather by other controllers or services. For
+example, the &lt;code&gt;Certificate&lt;/code&gt; controller will now create a &lt;code&gt;CertificateRequest&lt;/code&gt;
+resource to resolve its own Spec.&lt;/p&gt;
+&lt;p&gt;Controllers to resolve &lt;code&gt;CertificateRequest&lt;/code&gt;s are currently disabled by default
+and enabled via the feature gate &lt;code&gt;CertificateRequestControllers&lt;/code&gt;. This feature
+is currently in Alpha and only the CA issuer has been implemented.&lt;/p&gt;
+&lt;p&gt;This resource is going to enable out of tree, external issuer controllers to
+resolve requests. Other issuer implementations and details on how to develop an
+out of tree issuer will follow in later releases. You can read more on the
+motivations and road map in the &lt;a href=&#34;https://github.com/jetstack/cert-manager/blob/master/design/20190708.certificate-request-crd.md&#34;&gt;enhancement
+proposal&lt;/a&gt;
+or how this resource is used in the
+&lt;a href=&#34;https://docs.cert-manager.io/en/release-0.9/reference/certificaterequests.html&#34;&gt;docs&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;dns-zones-support-for-acme-challenge-solver-selector&#34;&gt;DNS Zones support for ACME challenge solver selector&lt;/h3&gt;
+&lt;p&gt;A list of DNS zones can now be added to the ACME challenge solver selector.  The
+most specific DNS zone match specified here will take precedence over other DNS
+zone matches, so a solver specifying &lt;code&gt;sys.example.com&lt;/code&gt; will be selected over one
+specifying &lt;code&gt;example.com&lt;/code&gt; for the domain &lt;code&gt;www.sys.example.com&lt;/code&gt;. If multiple
+solvers match with the same &lt;code&gt;dnsZones&lt;/code&gt; value, the solver with the most matching
+labels in &lt;code&gt;matchLabels&lt;/code&gt; will be selected. If neither has more matches, the solver
+defined earlier in the list will be selected.&lt;/p&gt;
+&lt;h3 id=&#34;certificate-readiness-prometheus-metrics&#34;&gt;Certificate Readiness Prometheus Metrics&lt;/h3&gt;
+&lt;p&gt;Cert-manager now exposes Prometheus metrics on Certificate ready statuses as
+&lt;code&gt;certmanager_certificate_ready_status&lt;/code&gt;. This is useful for monitoring
+Certificate resources to ensure they have a &lt;code&gt;Ready=True&lt;/code&gt; status.&lt;/p&gt;
+&lt;h3 id=&#34;prometheus-operator-servicemonitor&#34;&gt;Prometheus Operator &lt;code&gt;ServiceMonitor&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Support has been added to include a Prometheus &lt;code&gt;ServiceMonitor&lt;/code&gt; for cert-manager
+in the helm chart. This enables monitoring of cert-manager when in conjunction
+with the &lt;a href=&#34;https://github.com/coreos/prometheus-operator&#34;&gt;Prometheus Operator&lt;/a&gt;.
+This is disabled by default but can be enabled via the helm configuration.&lt;/p&gt;
+&lt;h3 id=&#34;acmev2-post-as-get&#34;&gt;ACMEv2 POST-as-GET&lt;/h3&gt;
+&lt;p&gt;We have now switched to use the new POST-as-GET feature that was introduced
+into the latest version of the ACME spec a few months ago.&lt;/p&gt;
+&lt;p&gt;If you are running your own ACME server, please ensure it supports POST-as-GET
+as we no longer supported the old behavior.&lt;/p&gt;
+&lt;h3 id=&#34;acme-issuer-solver-pod-template&#34;&gt;ACME Issuer Solver Pod Template&lt;/h3&gt;
+&lt;p&gt;The ACME Solver Pod Spec now exposes a template that can be used to change
+metadata about that pod. Currently, a template will expose labels, annotations,
+node selector, tolerations, and affinity. This is useful when running
+cert-manager in multi-arch clusters, or when you run workloads across different
+types of nodes and need to restrict where the &lt;code&gt;acmesolver&lt;/code&gt; pod runs.&lt;/p&gt;
+&lt;h2 id=&#34;action-required&#34;&gt;Action Required&lt;/h2&gt;
+&lt;h3 id=&#34;length-limit-for-common-names&#34;&gt;Length limit for Common Names&lt;/h3&gt;
+&lt;p&gt;Common names with a character length of over 63 will be rejected during
+validation. This is due to the upper limit being detailed in RFC 5280.&lt;/p&gt;
+&lt;h3 id=&#34;distroless-cert-manager-base-images&#34;&gt;Distroless Cert-Manager Base Images&lt;/h3&gt;
+&lt;p&gt;For each container, cert-manager ships with the base image
+&lt;code&gt;gcr.io/distroless/static&lt;/code&gt; which is a minimal image that includes no binaries.
+Users who want to debug from within the cert-manager pod will need to attach an
+additional container with their debug utilities to the pod&amp;rsquo;s namespace.&lt;/p&gt;
+&lt;h3 id=&#34;csrs-in-order-resources-now-pem-encoded&#34;&gt;CSRs in Order Resources now PEM Encoded&lt;/h3&gt;
+&lt;p&gt;CSRs in Order resources have previously been incorrectly DER encoded due to an
+error in implementation. This has now been corrected to PEM encoding. Current
+orders that were created with a previous version of cert-manager will fail to
+validate and so will be recreated. This should resume the order normally.&lt;/p&gt;
+&lt;h2 id=&#34;changelog&#34;&gt;Changelog&lt;/h2&gt;
+&lt;h3 id=&#34;general&#34;&gt;General&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Reduce cert-manager&amp;rsquo;s RBAC permissions (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1658&#34;&gt;#1658&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;commented-out &lt;code&gt;extraArg&lt;/code&gt; for &lt;code&gt;enable-certificate-owner-ref&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1828&#34;&gt;#1828&lt;/a&gt;, &lt;a href=&#34;https://github.com/aegershman&#34;&gt;&lt;code&gt;@aegershman&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Validate that Certificates in a namespace have unique &lt;code&gt;secretName&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1689&#34;&gt;#1689&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Feature addition: Support for PKCS#8 keys. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1308&#34;&gt;#1308&lt;/a&gt;, &lt;a href=&#34;https://github.com/Crystal-Chun&#34;&gt;&lt;code&gt;@Crystal-Chun&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add the removal of certificates when no longer required by the owner ingress (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1705&#34;&gt;#1705&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug causing ECDSA certificates to be issued using 2048 bit RSA private keys (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1757&#34;&gt;#1757&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Updated the labels in the helm charts to use the newer ones. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1769&#34;&gt;#1769&lt;/a&gt;, &lt;a href=&#34;https://github.com/cpanato&#34;&gt;&lt;code&gt;@cpanato&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Allow disabling issuing temporary certificates with feature flag &lt;code&gt;--feature-gates=IssueTemporaryCertificate=false&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1764&#34;&gt;#1764&lt;/a&gt;, &lt;a href=&#34;https://github.com/gordonbondon&#34;&gt;&lt;code&gt;@gordonbondon&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Switch to using Distroless for base images (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1663&#34;&gt;#1663&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Limit length for &lt;code&gt;CommonName&lt;/code&gt; to 63 bytes (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1818&#34;&gt;#1818&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;acme-issuer&#34;&gt;ACME Issuer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Properly encode the CSR field on Order resources as PEM data instead of DER (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1884&#34;&gt;#1884&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fire informational Event if an ACME solver cannot be chosen for a domain on an Order (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1856&#34;&gt;#1856&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug with auto-generated Order names being longer than 63 characters (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1765&#34;&gt;#1765&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix a panic when a misconfigured Issuer is used for HTTP01 challenge solving (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1758&#34;&gt;#1758&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix a bug where the logic to select a solver would always return the last solver and may return the wrong kind of solver for the challenge that it returned. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1717&#34;&gt;#1717&lt;/a&gt;, &lt;a href=&#34;https://github.com/dobesv&#34;&gt;&lt;code&gt;@dobesv&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix indentation on ACME setup examples (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1785&#34;&gt;#1785&lt;/a&gt;, &lt;a href=&#34;https://github.com/lachlancooper&#34;&gt;&lt;code&gt;@lachlancooper&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix a the logic to select the most specific solver from an issuer if multiple matched (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1715&#34;&gt;#1715&lt;/a&gt;, &lt;a href=&#34;https://github.com/dobesv&#34;&gt;&lt;code&gt;@dobesv&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds support for &lt;code&gt;nodeSelector&lt;/code&gt; and &lt;code&gt;tolerations&lt;/code&gt; in &lt;code&gt;podTemplate.spec&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1803&#34;&gt;#1803&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;support azure non-public regions (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1830&#34;&gt;#1830&lt;/a&gt;, &lt;a href=&#34;https://github.com/stuarthu&#34;&gt;&lt;code&gt;@stuarthu&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix issue causing challenge controller to attempt to list Secrets across all namespaces even when &amp;ndash;namespace is specified (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1849&#34;&gt;#1849&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds the handling of updates to the &lt;code&gt;spec.acme.email&lt;/code&gt; field in Issuers (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1763&#34;&gt;#1763&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix issue with private managed-zone being picked in CloudDNS (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1704&#34;&gt;#1704&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Expose pod template for the ACME issuer solver pod (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1749&#34;&gt;#1749&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Ingress skips updating Certificate resource if already exists and not owned (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1670&#34;&gt;#1670&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add support for ACMEv2 POST-as-GET (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1648&#34;&gt;#1648&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix incorrect handling of &lt;code&gt;issuewild&lt;/code&gt; tag when verifying CAA (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1777&#34;&gt;#1777&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add support for selecting ACME challenge solver to use by specifying &lt;code&gt;dnsZones&lt;/code&gt; in the selector (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1806&#34;&gt;#1806&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Use proxy environment variables in self-check request (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1850&#34;&gt;#1850&lt;/a&gt;, &lt;a href=&#34;https://github.com/kinolaev&#34;&gt;&lt;code&gt;@kinolaev&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;venafi-issuer&#34;&gt;Venafi Issuer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Venafi: use vCert &lt;code&gt;v4.1.0&lt;/code&gt; (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1827&#34;&gt;#1827&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Bump Venafi vCert dependency to latest version (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1754&#34;&gt;#1754&lt;/a&gt;, &lt;a href=&#34;https://github.com/munnerz&#34;&gt;&lt;code&gt;@munnerz&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;webhook&#34;&gt;Webhook&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;cert-manager-webhook&lt;/code&gt; secret exists in cert-manager namespace (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1791&#34;&gt;#1791&lt;/a&gt;, &lt;a href=&#34;https://github.com/jetstack-bot&#34;&gt;&lt;code&gt;@jetstack-bot&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Support CRD conversion webhooks in the CA injector controller. (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1505&#34;&gt;#1505&lt;/a&gt;, &lt;a href=&#34;https://github.com/DirectXMan12&#34;&gt;&lt;code&gt;@DirectXMan12&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ca-issuer&#34;&gt;CA Issuer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Adds CSR signing to CA issuer (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1835&#34;&gt;#1835&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;certificaterequest&#34;&gt;&lt;code&gt;CertificateRequest&lt;/code&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Adds &lt;code&gt;CertificateRequest&lt;/code&gt; resource (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1789&#34;&gt;#1789&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds CA issuer controller to resolve &lt;code&gt;CertificateRequests&lt;/code&gt; where CA is the issuer reference (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1836&#34;&gt;#1836&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds Sign interface to Issuers (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1807&#34;&gt;#1807&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds &lt;code&gt;group&lt;/code&gt; to &lt;code&gt;issuerRef&lt;/code&gt; in &lt;code&gt;CertificateRequest&lt;/code&gt; resources to distinguish resource ownership of incoming &lt;code&gt;CertificateRequests&lt;/code&gt; so enabling full external issuer support.  (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1860&#34;&gt;#1860&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;documentation&#34;&gt;Documentation&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Adds Design and Proposals page to website docs (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1876&#34;&gt;#1876&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds &lt;code&gt;CertificateRequest&lt;/code&gt; proposal (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1866&#34;&gt;#1866&lt;/a&gt;, &lt;a href=&#34;https://github.com/JoshVanL&#34;&gt;&lt;code&gt;@JoshVanL&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;monitoring&#34;&gt;Monitoring&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Prometheus metrics for deleted Certificates are cleaned up (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1681&#34;&gt;#1681&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Adds &lt;code&gt;ControllerSyncCallCount&lt;/code&gt; Prometheus metric to count sync calls from each controller (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1692&#34;&gt;#1692&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add support for Prometheus Operator &lt;code&gt;ServiceMonitor&lt;/code&gt; object in Helm Chart (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1761&#34;&gt;#1761&lt;/a&gt;, &lt;a href=&#34;https://github.com/Starefossen&#34;&gt;&lt;code&gt;@Starefossen&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Add Prometheus metrics for tracking Certificate readiness (&lt;a href=&#34;https://github.com/jetstack/cert-manager/pull/1811&#34;&gt;#1811&lt;/a&gt;, &lt;a href=&#34;https://github.com/cheukwing&#34;&gt;&lt;code&gt;@cheukwing&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.8/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Following on from the &lt;code&gt;v0.7.x&lt;/code&gt; releases and a series of prerelease candidates,
+cert-manager &lt;code&gt;v0.8.0&lt;/code&gt; is available at last!&lt;/p&gt;
+&lt;p&gt;This release packs in a tonne of stability improvements, as well as a whole load
+of new features grinning&lt;/p&gt;
+&lt;p&gt;As part of this release, we&amp;rsquo;re updating our API format in order to better
+support the 1.0 release, which we hope to reach within the next few months.
+This has been accomplished in a backwards-compatible for now, to make the
+upgrade process easier, especially for users that manage large numbers of
+certificate resources.&lt;/p&gt;
+&lt;p&gt;As well as the new release, we&amp;rsquo;ve also finally created a project logo!
+For those of you who are attending KubeCon EU, we&amp;rsquo;ll be handing out stickers
+at the Jetstack booth from tomorrow onward!&lt;/p&gt;
+&lt;h2 id=&#34;action-required&#34;&gt;Action required&lt;/h2&gt;
+&lt;p&gt;The deployment manifests have now moved from being a part of our GitHub
+repository and are now published alongside each image tag. Please double
+check the installation guide for more information on where the manifests
+can now be found. This change does not affect the Helm chart!&lt;/p&gt;
+&lt;h2 id=&#34;new-acme-configuration-format&#34;&gt;New ACME configuration format&lt;/h2&gt;
+&lt;p&gt;As part of stabilizing our API surface, we&amp;rsquo;ve made a change to the way
+you configure your ACME based certificates.&lt;/p&gt;
+&lt;p&gt;Instead of Certificate resources containing an extra &lt;code&gt;certificate.spec.acme&lt;/code&gt;
+field, which is only relevant for ACME certificates, the configuration has now
+moved over to the Issuer resource instead. More details on this change can be
+found in the upgrade notes.&lt;/p&gt;
+&lt;h2 id=&#34;openshift-installation-instructions&#34;&gt;OpenShift installation instructions&lt;/h2&gt;
+&lt;p&gt;In order to make it easier for users to run cert-manager on platforms other
+than Kubernetes, we&amp;rsquo;ve improved our OpenShift support, including an official
+installation guide for users of OpenShift.&lt;/p&gt;
+&lt;p&gt;If you use OpenShift in your organization, check out the getting started section
+for more information on how to get up and running!&lt;/p&gt;
+&lt;h2 id=&#34;webhook-based-acme-dns01-solver&#34;&gt;Webhook based ACME DNS01 solver&lt;/h2&gt;
+&lt;p&gt;Over the last year and a half, we&amp;rsquo;ve had more than 15 pull requests to add new
+ACME DNS01 providers to our codebase. It&amp;rsquo;s been brilliant to see such vibrant
+community involvement, however it&amp;rsquo;s become infeasible for us to continue to
+accept, test and maintain such a rapidly growing matrix of providers.&lt;/p&gt;
+&lt;p&gt;As a result, we&amp;rsquo;ve put together a new &amp;lsquo;webhook&amp;rsquo; DNS01 solver type.
+This allows you to create and install your own DNS01 providers without having
+to make changes in cert-manager itself.&lt;/p&gt;
+&lt;p&gt;You can see an example repository to get started building your own over in the
+cert-manager-webhook-example repo on GitHub.&lt;/p&gt;
+&lt;p&gt;This is a new and experimental feature, however we&amp;rsquo;re excited to see the community
+move to this new model of extending cert-manager.&lt;/p&gt;
+&lt;h2 id=&#34;switch-to-structured-logging&#34;&gt;Switch to structured logging&lt;/h2&gt;
+&lt;p&gt;As the project has grown, we&amp;rsquo;ve also increased the verbosity and frequency of our log messages.
+Over time, this has become difficult to manage and work with, and so with the &lt;code&gt;v0.8&lt;/code&gt; release
+we have begun the process of switching over our code base to structured logging.&lt;/p&gt;
+&lt;p&gt;This should make it far easier to index, search and grep through log messages that cert-manager
+emits.&lt;/p&gt;
+&lt;p&gt;Your feedback here is really valuable, so please open issues and comment on Slack if you
+have any issues!&lt;/p&gt;
+&lt;h2 id=&#34;changelog&#34;&gt;Changelog&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;make email address an optional field in ACME issuers (#1483, &lt;code&gt;@DanielMorsing&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug when handling resources that have &lt;code&gt;lastTransitionTime&lt;/code&gt; set to null (#1628, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Allow OpenShift to install cert-manager chart (#1395, &lt;code&gt;@JGodin-C2C&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Update documentation for new &amp;lsquo;solvers&amp;rsquo; field (#1623, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix issue where ingress-shim would not clear old configuration when migrating to the new &amp;lsquo;solvers&amp;rsquo; field (#1620, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add new &lt;code&gt;issuer.spec.acme.solvers&lt;/code&gt; field that replaces &lt;code&gt;certificate.spec.acme&lt;/code&gt; in order to make all certificate resources portable between issuer types. The previously syntax is still supported to allow easy migration to the new configuration format. (#1450, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fixes &lt;code&gt;additionalPrinterColumn&lt;/code&gt; formatting for Certificate resources (#1616, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix update loop in certificates controller and add additional debug logging (#1602, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Automatically retry expired Challenge resources (#1603, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Build under MacOS. (#1601, &lt;code&gt;@michaelfig&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Disable the CAA check by default, and introduce a new &lt;code&gt;--feature-gates=ValidateCAA=true&lt;/code&gt; option to enable it (#1585, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Improve error handling when ACME challenges fail to Present or CleanUp (#1597, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add static label for solver identification to allow usage of custom service (#1575, &lt;code&gt;@christianhuening&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix issues running the &lt;code&gt;cainjector&lt;/code&gt; controller on Kubernetes 1.9 (#1579, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix upgrade bug where &lt;code&gt;lastTransitionTime&lt;/code&gt; may be set to nil, rendering cert-manager inoperable without manual intervention (#1576, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add webhook based DNS01 provider (#1563, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add DNS01 provider conformance test suite (#1562, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;fix typo in the deployment template (#1546, &lt;code&gt;@cpanato&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Automatically generate LICENSES file (#1549, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Switch to go modules for dependency management (#1523, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Bump to use Go 1.12 (#1429, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;use authoritative nameservers for CAA checks (#1521, &lt;code&gt;@DanielMorsing&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Update certificate if issuer changes (#1512, &lt;code&gt;@lentzi90&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;also whitelist IPv6 (#1497, &lt;code&gt;@mdonoughe&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Set default &lt;code&gt;acmesolver&lt;/code&gt; image based on arch (#1494, &lt;code&gt;@lentzi90&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Improve logging in ACME HTTP01 solver (#1474, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Run metrics server on cert-manager instances that have not been elected as leader (#1482, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Switch to structured logging using &lt;code&gt;logr&lt;/code&gt; (#1409, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;fixing the quick-start documentation to use the new helm chart repo &lt;code&gt;charts.jetstack.io&lt;/code&gt; (#1468, &lt;code&gt;@BradErz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Removes need for &lt;code&gt;hostedZoneName&lt;/code&gt; to be specified. Uses discovered DNS zone name instead. (#1466, &lt;code&gt;@logicfox&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.7/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;action-required&#34;&gt;Action Required&lt;/h2&gt;
+&lt;p&gt;The Helm chart &lt;code&gt;rbac.create&lt;/code&gt; option has moved to be &lt;code&gt;global.rbac.create&lt;/code&gt;.
+Users of the Helm chart will need to update their install overrides to use
+the new format.&lt;/p&gt;
+&lt;p&gt;The Helm chart has now moved to be hosted on &lt;code&gt;charts.jetstack.io&lt;/code&gt;, and
+exposed via the Helm Hub. This allows us to make
+and test changes to the Helm chart more easily, and better manage versions.&lt;/p&gt;
+&lt;h2 id=&#34;highlights&#34;&gt;Highlights&lt;/h2&gt;
+&lt;h3 id=&#34;venafi-issuer-type&#34;&gt;Venafi Issuer type&lt;/h3&gt;
+&lt;p&gt;This release introduces a new issuer type for Venafi Cloud and Venafi Trust
+Protection Platform.&lt;/p&gt;
+&lt;p&gt;The Venafi adapter will be built out over the coming months to improve the
+integration and expose more of the Venafi platform&amp;rsquo;s advanced functionality.&lt;/p&gt;
+&lt;h3 id=&#34;new-cainjector-controller&#34;&gt;New &lt;code&gt;cainjector&lt;/code&gt; controller&lt;/h3&gt;
+&lt;p&gt;This release introduces support for injecting CA bundles into Kubernetes
+&lt;code&gt;{Validating,Mutating}WebhookConfiguration&lt;/code&gt; &amp;amp; APIService resources.&lt;/p&gt;
+&lt;p&gt;You can utilize the new controller by adding the &lt;code&gt;certmanager.k8s.io/inject-ca-from&lt;/code&gt;
+annotation to your webhook and APIService resources.&lt;/p&gt;
+&lt;p&gt;This was needed in order to improve our own deployment of the &amp;lsquo;webhook&amp;rsquo;
+component as part of this release.&lt;/p&gt;
+&lt;h3 id=&#34;improved-webhook-deployment&#34;&gt;Improved webhook deployment&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;v0.6&lt;/code&gt; release utilized an additional ca-sync CronJob resource that allowed
+us to secure the webhook component automatically using cert-manager itself.&lt;/p&gt;
+&lt;p&gt;Thanks to the new &lt;code&gt;cainjector&lt;/code&gt; controller described above, we have now removed
+this CronJob altogether in favor of using the far more reliable controller.&lt;/p&gt;
+&lt;h3 id=&#34;experimental-arm-support&#34;&gt;Experimental ARM support&lt;/h3&gt;
+&lt;p&gt;Support for ARM was adding as part of this release (#1212). We do not currently
+have automated testing using ARM platforms, so this feature is still marked
+experimental.&lt;/p&gt;
+&lt;p&gt;To utilize the new ARM support, you&amp;rsquo;ll need to update your manifests and append
+the architecture to the image name (i.e. &lt;code&gt;quay.io/jetstack/cert-manager-controller-arm64:v0.7.0&lt;/code&gt;).&lt;/p&gt;
+&lt;h3 id=&#34;easier-debugging-of-failing-acme-challenges&#34;&gt;Easier debugging of failing ACME challenges&lt;/h3&gt;
+&lt;p&gt;The introduction of the Challenge resource in the last release has allowed us
+to provide better means for debugging failures.&lt;/p&gt;
+&lt;p&gt;In the &lt;code&gt;v0.7.0 release&lt;/code&gt;, if a self check or ACME validation is failing for some
+reason, this information will be displayed when running &lt;code&gt;kubectl get&lt;/code&gt; and
+&lt;code&gt;kubectl describe&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;changelog-since-v0-6-0&#34;&gt;Changelog since &lt;code&gt;v0.6.0&lt;/code&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add Venafi Cloud &amp;amp; TPP issuer type (#1250, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cainjector&lt;/code&gt;: add support for injecting apiserver CA (#1420, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Generate temporary self signed certificate whilst waiting for issuer to issue certificate (#1392, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Added kubeprod as an alternative way to deploy cert-manager to the documentation (#1421, &lt;code&gt;@arapulido&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Use new &lt;code&gt;cainjector&lt;/code&gt; controller for webhook APIService resource (#1415, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Adds a controller for injecting CA data into webhooks and APIServices (#1398, &lt;code&gt;@DirectXMan12&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Bump Kubernetes dependencies to &lt;code&gt;v1.13&lt;/code&gt; (#1268, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;charts.jetstack.io&lt;/code&gt; instead of the &lt;code&gt;helm/charts&lt;/code&gt; repository to publish Helm chart (#1377, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Recreate dead solver pods during self-check (#1388, &lt;code&gt;@DanielMorsing&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Improve RFC2136 DNS01 provider documentation (#944, &lt;code&gt;@briantopping&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add more information to Google CloudDNS guide (#1295, &lt;code&gt;@wwwil&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add validation schema to CRD resources (#1322, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fire additional events when syncing ACME certificates fails (#1327, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Publish ARM32 and ARM64 images for all cert-manager components (#1212, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Extend ACME self check to check CAA records (#1325, &lt;code&gt;@DanielMorsing&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Bump Kubernetes &lt;code&gt;apimachinery&lt;/code&gt; dependencies to &lt;code&gt;v1.10.12&lt;/code&gt; (#1344, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Increase &lt;code&gt;acmesolver&lt;/code&gt; default CPU resource limit to &lt;code&gt;100m&lt;/code&gt; (#1335, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix potential race when updating secret resource (#1318, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug causing certificates to be re-issued endlessly in certain edge cases (#1280, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug when specify certificate &lt;code&gt;keyAlgorithm&lt;/code&gt; without an explicit &lt;code&gt;keySize&lt;/code&gt; (#1309, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Bump Go version to 1.11.5 (#1304, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix typo in &lt;code&gt;SelfSigned&lt;/code&gt; Issuer in webhook deployment manifests (#1294, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add IP Address in CSR (#1128, &lt;code&gt;@lrolaz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Allow to use PKCS#8 encoded private keys in CA issuers. (#1191, &lt;code&gt;@chr-fritz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add webhook troubleshooting guide (#1288, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Overhaul documentation and add additional content (#1279, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Increase x509 certificate duration from 90 days to 1 year for webhook component certificates (#1276, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug where &lt;code&gt;--dns01-recursive-nameservers&lt;/code&gt; flag was not respected when looking up the zone to update for a DNS01 challenge (#1266, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Reuse acme clients to limit use of nonce/directory/accounts endpoints (#1265, &lt;code&gt;@DanielMorsing&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Surface self-check errors in challenge resource (#1244, &lt;code&gt;@DanielMorsing&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.6/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The long-awaited &lt;code&gt;v0.6&lt;/code&gt; release is here! This release includes a huge number of improvements, bug fixes and new features.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve made a big focus on the ACME implementation, as well as improving the general user-experience when requesting certificates.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve exposed new x509 certificate fields via the Certificate resource type, as well as improving support for these options across all Issuer types.&lt;/p&gt;
+&lt;p&gt;As of the &lt;code&gt;v0.6&lt;/code&gt; release being cut, we&amp;rsquo;ve also reached a huge 99 code contributors! This is incredible to see, and we&amp;rsquo;re thankful to all those who have contributed in all forms over the last couple of years!&lt;/p&gt;
+&lt;p&gt;Read on to get some of the highlights, as well as the full list of note-worthy changes below!&lt;/p&gt;
+&lt;h1 id=&#34;highlights&#34;&gt;Highlights&lt;/h1&gt;
+&lt;h2 id=&#34;introducing-acme-order-and-challenge-crds&#34;&gt;Introducing ACME &amp;lsquo;Order&amp;rsquo; and &amp;lsquo;Challenge&amp;rsquo; CRDs&lt;/h2&gt;
+&lt;p&gt;This release of cert-manager refactors how ACME certificates are handled significantly.&lt;/p&gt;
+&lt;p&gt;This should result in:&lt;/p&gt;
+&lt;p&gt;Fewer API calls to ACME servers - information about orders and challenges is now stored within the Kubernetes API
+Better behavior with regards to rate limits
+A cleaner surface for debugging issues - we can now provide more context and information through the Events API as well as the &amp;lsquo;status&amp;rsquo; field on our API types
+This is largely an internal change, but with far reaching benefits.
+For more details, check out the details in the pull request (#788).&lt;/p&gt;
+&lt;p&gt;We are keen to hear feedback on this new design, so please create issues including the /area provider-acme text in order to report feedback/problems.&lt;/p&gt;
+&lt;h2 id=&#34;improved-handling-of-acme-rate-limits&#34;&gt;Improved handling of ACME rate limits&lt;/h2&gt;
+&lt;p&gt;After extensive testing, we&amp;rsquo;ve found in the most extreme cases a 100 times reduction in ACME API client calls.&lt;/p&gt;
+&lt;p&gt;This is a massive difference, and helps reduce the load that instances of cert-manager put on services like Let&amp;rsquo;s Encrypt.&lt;/p&gt;
+&lt;p&gt;As a result, we strongly recommend all users upgrade to the &lt;code&gt;v0.6&lt;/code&gt; release as soon as possible!&lt;/p&gt;
+&lt;h2 id=&#34;prometheus-metrics-for-the-acme-client&#34;&gt;Prometheus metrics for the ACME client&lt;/h2&gt;
+&lt;p&gt;In order to support the API client testing above, we&amp;rsquo;ve also added support for Prometheus metrics into our ACME client.&lt;/p&gt;
+&lt;p&gt;This means you can now start instrumenting cert-manager&amp;rsquo;s own usage of ACME APIs, in order to detect issues and understand behavior before it becomes a problem.&lt;/p&gt;
+&lt;p&gt;The metrics are broken down by path, status code and a number of other labels.&lt;/p&gt;
+&lt;h2 id=&#34;validating-resource-webhook-enabled-by-default&#34;&gt;Validating resource webhook enabled by default&lt;/h2&gt;
+&lt;p&gt;In order to provide a better experience out of the box, we&amp;rsquo;ve now enabled the validating webhook component by default.&lt;/p&gt;
+&lt;p&gt;This means that when you submit resources to the API server, they will be checked for misconfiguration before they are persisted to the API, meaning configuration errors are surfaced immediately, and in some cases alongside steps that can be taken to remediate the errors.&lt;/p&gt;
+&lt;h2 id=&#34;ecdsa-keys-supported-for-acme-certificates&#34;&gt;ECDSA keys supported for ACME certificates&lt;/h2&gt;
+&lt;p&gt;It&amp;rsquo;s now possible to create ECDSA private keys when issuing certificates from ACME servers. You can configure the key type and key size using &lt;code&gt;certificate.spec.keyAlgorithm&lt;/code&gt; and &lt;code&gt;certificate.spec.keySize&lt;/code&gt; respectively.&lt;/p&gt;
+&lt;h2 id=&#34;scalability-improvements&#34;&gt;Scalability improvements&lt;/h2&gt;
+&lt;p&gt;As part of our validation for this release, we&amp;rsquo;ve been able to test cert-manager in larger deployment configurations.&lt;/p&gt;
+&lt;p&gt;This includes running with an ACME issuer with 6,000+ domain names, showing that our client usage remains sensible and cert-manager itself does not begin to strain.&lt;/p&gt;
+&lt;p&gt;Off the back of this scale testing, we&amp;rsquo;ve also got numerous scale-related improvements lined up for the next minor release, &lt;code&gt;v0.7&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;action-required&#34;&gt;Action Required&lt;/h1&gt;
+&lt;p&gt;There is only one PR that changes previous behavior in this release.&lt;/p&gt;
+&lt;p&gt;Between &lt;code&gt;v0.4.0&lt;/code&gt; and &lt;code&gt;v0.5.0&lt;/code&gt;, we introduced support for following CNAME records when presenting DNS01 challenges. This inadvertently broke DNS01 challenge solving when a user used a CNAME record at the route of their DNS zone (i.e. on Route53 when using an Amazon ELB).&lt;/p&gt;
+&lt;p&gt;This change reverts the default behavior to support this kind of setup without additional changes, and instead introduces a new &lt;code&gt;cnameStrategy&lt;/code&gt; field on ACME Issuer resources. You can set this field to Follow to restore the behavior introduced in &lt;code&gt;v0.5.0&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This note only affects the ACME Issuer type.&lt;/p&gt;
+&lt;h1 id=&#34;changelog&#34;&gt;Changelog&lt;/h1&gt;
+&lt;h2 id=&#34;general&#34;&gt;General&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Bump Go version to 1.11 (#1050, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Removed the Git commit hash from the version string in non canary builds (#997) (#1021, &lt;code&gt;@Nalum&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Include &lt;code&gt;ca.crt&lt;/code&gt; in created secrets for Issuers that support it (Vault, CA and &lt;code&gt;SelfSigned&lt;/code&gt;) (#848, &lt;code&gt;@Queuecumber&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Added RBAC permissions for user facing roles to access Certificates and Issuers. (#902, &lt;code&gt;@fuel-wlightning&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;global.priorityClassName&lt;/code&gt; option to Helm chart (#1190, &lt;code&gt;@Art3mK&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;--namespace&lt;/code&gt; option to limit scope to a single namespace (#1188, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Print more useful information about Certificate, Order and Challenge resources when running &lt;code&gt;kubectl get&lt;/code&gt; (#1194, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;acme-issuer&#34;&gt;ACME Issuer&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Introduce ACME &amp;lsquo;Order&amp;rsquo; and &amp;lsquo;Challenge&amp;rsquo; resource types &amp;amp; re-implement ACME Issuer to be completely driven by CRDs (#788, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;ACTION REQUIRED: Fix ACME issues relating to wildcard CNAME records and add a &lt;code&gt;cnameStrategy&lt;/code&gt; field to the ACME Issuer DNS01 provider configuration (#1136, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Added &lt;code&gt;certmanager.k8s.io/acme-http01-ingress-class&lt;/code&gt; annotation to ingress-shim (#1006, &lt;code&gt;@kinolaev&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Make HTTP01 solver &lt;code&gt;serviceType&lt;/code&gt; configurable, so one can use &lt;code&gt;ClusterIP&lt;/code&gt; instead of the previously hard coded type &lt;code&gt;NodePort&lt;/code&gt;. &lt;code&gt;NodePort&lt;/code&gt; still remains as default. (#924, &lt;code&gt;@arnisoph&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Revised Cert Issuer Docs for DNS01 challenge and added a doc for AzureDNS (#915, &lt;code&gt;@damienwebdev&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Make HTTP01 solver pod resource request/limits configurable (#923, &lt;code&gt;@arnisoph&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Allow ECDSA keys for ACME certificates (#937, &lt;code&gt;@acoshift&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;RFC2136 provider: fixes a minor bug where DNS01 nameserver key has value with no port (#908, &lt;code&gt;@splashx&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add ACME HTTP client Prometheus metrics (#1226, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Reduce usage of ACME &lt;code&gt;new-acct&lt;/code&gt; endpoint (#1227, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Disable TLS verification when self-checking (#1221, &lt;code&gt;@DanielMorsing&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Adds new flag &lt;code&gt;--dns01-recursive-nameservers-only=[true|false]&lt;/code&gt; that defaults to false. When true, cert-manager will only ever query the configured DNS resolvers to perform the ACME DNS01 self check. This is useful in DNS constrained environments, where access to authoritative nameservers is restricted. Enabling this option could cause the DNS01 self check to take longer due to caching performed by the recursive nameservers. (#1184, &lt;code&gt;@tlmiller&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Retain Challenge resources when an Order has entered a failed state to make debugging easier (#1197, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Increase back-off time between ACME order attempts on failure from 5 minutes to 1 hour (#1195, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add &amp;lsquo;reason&amp;rsquo; field when an order/challenge gets marked invalid (#1192, &lt;code&gt;@DanielMorsing&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add DigitalOcean DNS Provider (#972, &lt;code&gt;@aslafy-z&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ca-issuer&#34;&gt;CA Issuer&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Update CA Issuer status condition usage (#961, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;It is now possible to include a certificate chain in the secret for the CA Issuer. This will then be propagated to generated certificates. (#1077, &lt;code&gt;@mikebryant&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;vault-issuer&#34;&gt;Vault Issuer&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A new field &lt;code&gt;caBundle&lt;/code&gt; added to the Vault Issuer configures a CA certificate used to validate the connection to the Vault Server. (#911, &lt;code&gt;@vdesjardins&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;bug-fixes&#34;&gt;Bug fixes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Increase time between retries for failing &lt;code&gt;Issuers&lt;/code&gt; and &lt;code&gt;ClusterIssuers&lt;/code&gt; (#981, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix concurrent map write race condition in ACME solver (#1033, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug when updating ACME server URL on an existing Issuer resource (#1230, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix issuing a certificate into a preexisting secret resource (#1217, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix affinity and tolerations declaration (#1209, &lt;code&gt;@GuillaumeSmaha&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.5/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;highlights&#34;&gt;Highlights&lt;/h1&gt;
+&lt;h2 id=&#34;resource-validation-webhook&#34;&gt;Resource validation webhook&lt;/h2&gt;
+&lt;p&gt;Following the &lt;code&gt;v0.4.0&lt;/code&gt; release, we have now added a &amp;lsquo;validating webhook&amp;rsquo; for our API resources. This will help prevent invalid configurations being submitted to the API server.&lt;/p&gt;
+&lt;p&gt;This feature is disabled by default.&lt;/p&gt;
+&lt;p&gt;Information on enabling the new webhook component can be found in the Resource Validation Webhook document.&lt;/p&gt;
+&lt;h2 id=&#34;new-certificate-options&#34;&gt;New Certificate options&lt;/h2&gt;
+&lt;p&gt;A number of new fields have been added to the Certificate resource type:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;keyAlgorithm&lt;/code&gt; - support alternative private key algorithms (e.g. RSA or ECDSA) for generated certificates.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;keySize&lt;/code&gt; - allow specifying an alternative key bit size&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;isCA&lt;/code&gt; - allows generating certificates with the &amp;lsquo;signing&amp;rsquo; usage set&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;organization&lt;/code&gt; - allows specifying values for the &amp;lsquo;O&amp;rsquo; field of Certificates (for supported providers)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;New fields like this make cert-manager more useful for applications beyond just securing Ingress, as well as allowing users to continue meeting their security requirements for x509 certificates.&lt;/p&gt;
+&lt;h2 id=&#34;new-acme-dns-providers&#34;&gt;New ACME DNS providers&lt;/h2&gt;
+&lt;p&gt;This release includes two new DNS provides for the ACME Issuer:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ACMEDNS&lt;/li&gt;
+&lt;li&gt;RFC2136
+These additions should help more users begin using cert-manager with their chosen DNS provider, without having to delegate to an alternate provider that is supported&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;changelog&#34;&gt;Changelog&lt;/h1&gt;
+&lt;h2 id=&#34;general&#34;&gt;General&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;renew-before-expiry-duration&lt;/code&gt; option to configure how long before expiration a certificate should be attempted to be renewed (#801, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add validation webhooks for API types (#478, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add extended issuer specific validation to certificates at runtime (#761, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;api-changes&#34;&gt;API changes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Adds new fields: &lt;code&gt;keyAlgorithm&lt;/code&gt;, &lt;code&gt;keySize&lt;/code&gt; onto &lt;code&gt;CertificateSpec&lt;/code&gt; to allow specifying algorithm (RSA, ECDSA) and key size to use when generating TLS keys (#722, &lt;code&gt;@badie&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;isCA&lt;/code&gt; field to Certificates (#658, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add &amp;ldquo;organization&amp;rdquo; field to certificate objects (#838, &lt;code&gt;@Queuecumber&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ca-issuer&#34;&gt;CA Issuer&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Don&amp;rsquo;t bundle the CA certificate when using the self signed issuer (#811, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;acme&#34;&gt;ACME&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix issue that could cause Certificates to fail renewal (#800, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add ACMEDNS as a DNS01 provider (#787, &lt;code&gt;@Queuecumber&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix panic from &lt;code&gt;acmedns.go&lt;/code&gt; constructor failure (#858, &lt;code&gt;@jjo&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix CloudFlare provider failing on cleanup if no record is found (#849, &lt;code&gt;@frankh&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fixed Route53 cleanup errors for already deleted records. (#746, &lt;code&gt;@euank&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add support for delegating DNS01 challenges using CNAME records. (#670, &lt;code&gt;@gurvindersingh&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix a race that could cause ACME orders to fail despite them being in a &amp;lsquo;valid&amp;rsquo; state (#764, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix cleanup of Google Cloud DNS hosted zone for DNS01 challenge records (#754, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix issue causing existing Ingresses to not be cleaned up properly after HTTP01 challenges in some cases (#831, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Allow metadata server authentication for Google Cloud DNS (#664, &lt;code&gt;@rpahli&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add RFC2136 DNS Provider (#661, &lt;code&gt;@splashx&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.4/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This is the next feature release of cert-manager, containing a number of additions
+that have been in the works for a while now.&lt;/p&gt;
+&lt;p&gt;As you will notice from the release notes below, we are seeing a lot more community
+contributions to the project which is brilliant! smile&lt;/p&gt;
+&lt;p&gt;A massive thank you to everyone involved in making this release a reality.&lt;/p&gt;
+&lt;p&gt;We have moved to a more regular minor-release schedule, and aim to cut new feature
+releases monthly. That means the next minor release (&lt;code&gt;v0.5&lt;/code&gt;) is scheduled for
+around the 11th August.&lt;/p&gt;
+&lt;h1 id=&#34;highlights&#34;&gt;Highlights&lt;/h1&gt;
+&lt;h2 id=&#34;resource-validation-for-issuers-clusterissuers-and-certificates&#34;&gt;Resource validation for &lt;code&gt;Issuers&lt;/code&gt;, &lt;code&gt;ClusterIssuers&lt;/code&gt; and &lt;code&gt;Certificates&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;A common pain point for users has been around submitting invalid resources to the
+API, which cannot be handled or processed.&lt;/p&gt;
+&lt;p&gt;Other Kubernetes API types handle this well by applying &amp;lsquo;validation&amp;rsquo; before the
+resource is persisted or operated upon, and up until now we have not supported this.&lt;/p&gt;
+&lt;p&gt;When submitting your resources to the Kubernetes apiserver, they will now be validated
+and if invalid, cert-manager will inform you of why and how they are invalid and
+suspend processing of that resource.&lt;/p&gt;
+&lt;p&gt;In the next release, this validation will be turned into a &lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt;
+which will allow us to prevent these resources being persisted into the API in
+the first place, similar to all other Kubernetes resource types.&lt;/p&gt;
+&lt;p&gt;Due to some limitations with the current release of Helm, we have been unable to
+support this webhook operation mode in the &lt;code&gt;v0.4&lt;/code&gt; release of cert-manager.
+However, releasing validation this way allows us to pilot the new validation rules
+we have in place and it allows you to get started with it immediately!&lt;/p&gt;
+&lt;h2 id=&#34;added-reference-documentation-for-api-types&#34;&gt;Added reference documentation for API types&lt;/h2&gt;
+&lt;p&gt;Regularly, users ask us &amp;ldquo;what can I specify on my resources&amp;rdquo;. In the past, we have
+had to recommend users check out our source code (namely &lt;code&gt;types.go&lt;/code&gt;) in order to
+find out what can and cannot be specified.&lt;/p&gt;
+&lt;p&gt;Digging through source code is no longer required! As part of our documentation
+publishing process, we now generate reference API documentation (similar to the
+upstream Kubernetes project!). This is available under the
+&amp;lsquo;Reference documentation -&amp;gt; API documentation&amp;rsquo; section of our docs site!&lt;/p&gt;
+&lt;h2 id=&#34;better-support-for-split-horizon-dns-environments-with-acme-dns01-challenges&#34;&gt;Better support for &amp;lsquo;split horizon&amp;rsquo; DNS environments with ACME DNS01 challenges&lt;/h2&gt;
+&lt;p&gt;A number of users have noticed that when running cert-manager with DNS01 challenges
+in split-horizon DNS environments (using the ACME issuer), the self check stage
+of the validation process failed as the &amp;lsquo;internal&amp;rsquo; DNS resolvers were used to
+check for challenge record propagation.&lt;/p&gt;
+&lt;p&gt;We have added a new flag, &lt;code&gt;--dns01-self-check-nameservers&lt;/code&gt;, that allows users to specify
+custom recursive DNS servers to use for performing DNS01 self checks.&lt;/p&gt;
+&lt;p&gt;In these environments, this flag can be set to some external nameserver list that
+will be used for DNS01 resolution, e.g. 8.8.8.8:53,8.8.4.4:53.&lt;/p&gt;
+&lt;h2 id=&#34;self-signed-issuers&#34;&gt;Self-signed Issuers&lt;/h2&gt;
+&lt;p&gt;We recently merged support for &amp;lsquo;self signed&amp;rsquo; issuers. This allows users to create
+the basis for a completely cert-manager managed PKI by &amp;lsquo;self signing&amp;rsquo; certificates.&lt;/p&gt;
+&lt;p&gt;This can be useful when debugging, or once cert-manager also supports setting the
+&lt;code&gt;isCA&lt;/code&gt; bit on a Certificate, for creating a self signed root CA!&lt;/p&gt;
+&lt;p&gt;Read up on how to get started with this new issuer type in the documentation.&lt;/p&gt;
+&lt;h1 id=&#34;changelog&#34;&gt;Changelog&lt;/h1&gt;
+&lt;h2 id=&#34;action-required&#34;&gt;Action Required&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Check the acme issuer has the &amp;lsquo;HTTP01&amp;rsquo; challenge type configured if in use. (#629, &lt;code&gt;@groner&lt;/code&gt;)
+ACME HTTP01 validation is no longer attempted using an
+&lt;code&gt;Issuer&lt;/code&gt;/&lt;code&gt;ClusterIssuer&lt;/code&gt; with no ACME HTTP01 configuration. Note that the minimal
+&lt;code&gt;http01: {}&lt;/code&gt; configuration IS sufficient.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you rely on ACME HTTP01 validation, you should check your issuers to make
+sure HTTP01 validation is explicitly enabled as in previous release, this was
+not verified!&lt;/p&gt;
+&lt;h2 id=&#34;other-notable-changes&#34;&gt;Other notable changes&lt;/h2&gt;
+&lt;h3 id=&#34;acme-issuer&#34;&gt;ACME Issuer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;--dns01-nameservers&lt;/code&gt; flag for setting nameservers for DNS01 check (#710, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bugs affecting eTLD and CNAMEs during DNS zone resolution (#582, &lt;code&gt;@ThatWasBrilliant&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;acmesolver&lt;/code&gt; container as non-root user (#585, &lt;code&gt;@klausenbusk&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Support for ACME HTTP01 validations when using &lt;code&gt;istio-ingress&lt;/code&gt; with a mTLS enabled mesh (#622, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;vault-issuer&#34;&gt;Vault Issuer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Configurable Vault AppRole authentication path using the attribute is &lt;code&gt;spec.vault.auth.authPath&lt;/code&gt; in the issuer. (#612, &lt;code&gt;@vdesjardins&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;self-signed-issuer&#34;&gt;Self-signed Issuer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add &amp;lsquo;self signed&amp;rsquo; Issuer type (#637, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;docs&#34;&gt;Docs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add reference documentation for API types (#644, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;helm&#34;&gt;Helm&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added configuration variables to set &lt;code&gt;http_proxy&lt;/code&gt;, &lt;code&gt;https_proxy&lt;/code&gt; and &lt;code&gt;no_proxy&lt;/code&gt; environment variables in Helm chart. (#680, &lt;code&gt;@fllaca&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;added option to set additional environment variable values to the Helm chart (#556, &lt;code&gt;@nazarewk&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;other&#34;&gt;Other&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;certmanager.k8s.io/certificate-name&lt;/code&gt; label to secrets. (#719, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add resource validation at start of sync loops, and mark resources as not Ready when invalid (#682, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;To disable &lt;code&gt;ingress-shim&lt;/code&gt;, you can now set this flag: &lt;code&gt;--controllers=issuers,clusterissuers,certificates&lt;/code&gt; (#717, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.3/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;highlights&#34;&gt;Highlights&lt;/h1&gt;
+&lt;p&gt;This is a big feature filled release of cert-manager, and the first since moving to a
+more frequent release model.&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s been a huge uptick in community contributions to the project, and this release
+comprises the combined effort of 38 code contributors and hundreds of users reporting
+issues, feature requests and bug reports!&lt;/p&gt;
+&lt;p&gt;There&amp;rsquo;s quite a few big headline points, so we&amp;rsquo;ll get straight in:&lt;/p&gt;
+&lt;h2 id=&#34;acmev2-and-let-s-encrypt-wildcard-certificates&#34;&gt;ACMEv2 and Let&amp;rsquo;s Encrypt wildcard certificates&lt;/h2&gt;
+&lt;p&gt;This release of cert-manager brings the long-awaited ACMEv2 support, and with it, Let&amp;rsquo;s Encrypt
+wildcard certificates!&lt;/p&gt;
+&lt;p&gt;This allows you to request certificates for wildcard domains, e.g. &lt;code&gt;*.example.com&lt;/code&gt;, which can be used
+to secure many different subdomains of your domain!&lt;/p&gt;
+&lt;p&gt;The introduction of ACMEv2 is a &lt;em&gt;breaking change&lt;/em&gt;. Please read the notes below in the &lt;em&gt;Action Required&lt;/em&gt;
+section for details on how to handle your existing ACME Issuers whilst upgrading from &lt;code&gt;v0.2.x&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;alpha-support-for-hashicorp-vault&#34;&gt;Alpha support for HashiCorp Vault&lt;/h2&gt;
+&lt;p&gt;This release introduces initial support for HashiCorp Vault as an &lt;code&gt;Issuer&lt;/code&gt; backend! Initially, this includes support for authenticating via AppRole and static token.&lt;/p&gt;
+&lt;p&gt;The support for this &lt;code&gt;Issuer&lt;/code&gt; is classed as &amp;lsquo;alpha&amp;rsquo; - feedback is invaluable at this stage of development, so we are getting it out there in a tagged release to gather usage info.&lt;/p&gt;
+&lt;p&gt;More information on configuring a Vault Issuer can be found in the Vault Issuer docs.&lt;/p&gt;
+&lt;h2 id=&#34;readthedocs-io-documentation-site&#34;&gt;&lt;code&gt;readthedocs.io&lt;/code&gt; documentation site&lt;/h2&gt;
+&lt;p&gt;Whilst this note applies to the &lt;code&gt;v0.2.x&lt;/code&gt; release series also, it is worth noting.&lt;/p&gt;
+&lt;p&gt;We have now moved to &lt;code&gt;readthedocs.io&lt;/code&gt; and reStructuredText for our documentation.
+This should hopefully make it easier for external collaborators to make quick edits
+to our documentation, and should provide more structure.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;d like to take the time to thank all those that have opened issues or opened pull requests against
+our documentation - it&amp;rsquo;s a difficult thing to get right, but it&amp;rsquo;s imperative our documentation is
+clear for new users adopting the project.&lt;/p&gt;
+&lt;h2 id=&#34;new-acme-dns01-providers&#34;&gt;New ACME DNS01 providers&lt;/h2&gt;
+&lt;p&gt;When cert-manager was first released, only CloudDNS and CloudFlare DNS01 providers were
+supported when solving ACME challenges.&lt;/p&gt;
+&lt;p&gt;As new users, each using their own DNS providers, have adopted the project; there has been
+a flurry of contributions adding support for the variety of providers out there.&lt;/p&gt;
+&lt;p&gt;With this release, we support the following DNS providers when solving ACME DNS01 challenges:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Akamai FastDNS (#322, &lt;code&gt;@twz123&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Amazon Route53&lt;/li&gt;
+&lt;li&gt;Azure DNS (#246, &lt;code&gt;@mwieczorek&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;CloudFlare&lt;/li&gt;
+&lt;li&gt;Google CloudDNS
+There are pull requests in flight to add support for:&lt;/li&gt;
+&lt;li&gt;DNSPod (#486, &lt;code&gt;@hemslo&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;DNSimple (#483, &lt;code&gt;@marc-sensenich&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;DigitalOcean (#345, &lt;code&gt;@dl00&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;INWX (#336, &lt;code&gt;@steigr&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;RFC2136 (#245, &lt;code&gt;@simonfuhrer&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;changelog&#34;&gt;Changelog&lt;/h1&gt;
+&lt;h2 id=&#34;action-required&#34;&gt;Action Required&lt;/h2&gt;
+&lt;p&gt;Please check the &amp;lsquo;upgrading from 0.2 to 0.3&amp;rsquo; guide in the Administrative Tasks section of the docs here before upgrading.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Supporting resources for &lt;code&gt;ClusterIssuers&lt;/code&gt; (e.g. signing CA certificates, or ACME account private keys) will now be stored in the same namespace as cert-manager, instead of &lt;code&gt;kube-system&lt;/code&gt; in previous versions (#329, &lt;code&gt;@munnerz&lt;/code&gt;):
+&lt;em&gt;Action required&lt;/em&gt;: you will need to ensure to properly manually migrate these referenced resources across into the deployment namespace of cert-manager, else cert-manager may not be able to find account private keys or signing CA certificates.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;code&gt;ConfigMaps&lt;/code&gt; for leader election (#327, &lt;code&gt;@mikebryant&lt;/code&gt;):&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Action required&lt;/em&gt;: Before upgrading, scale the cert-manager Deployment to 0, to avoid two controllers attempting to operate on the same resources&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove support for ACMEv1 in favor of ACMEv2 (#309, &lt;code&gt;@munnerz&lt;/code&gt;):
+&lt;em&gt;Action required&lt;/em&gt;: As this release drops support for ACMEv1, all Issuer resources that use ACMEv1 endpoints (e.g. existing Let&amp;rsquo;s Encrypt Issuers) will need updating to use equivalent ACMEv2 endpoints. (TODO: link to docs guide)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove &lt;code&gt;ingress-shim&lt;/code&gt; and link it into cert-manager itself (#502, &lt;code&gt;@munnerz&lt;/code&gt;)
+&lt;em&gt;Action required&lt;/em&gt;: You must change your &amp;lsquo;helm install&amp;rsquo; command to use the new &lt;code&gt;--ingressShim.defaultIssuerName&lt;/code&gt;, &lt;code&gt;--ingressShim.defaultIssuerKind&lt;/code&gt; options when upgrading as &lt;code&gt;--ingressShim.extraArgs&lt;/code&gt; has been removed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add &lt;code&gt;certmanager.k8s.io/acme-http01-edit-in-place&lt;/code&gt; annotation and change ingress-shim to set &lt;code&gt;ingressClass&lt;/code&gt; on ACME Certificate resources by default. (#493, &lt;code&gt;@munnerz&lt;/code&gt;)
+&lt;em&gt;Action required&lt;/em&gt;: This is a potentially breaking change for users of ingress controllers that map a single IP address to a single Ingress resource, such as the GCE ingress controller. These users will need to add the following annotation to their ingress: &lt;code&gt;certmanager.k8s.io/acme-http01-edit-in-place: &amp;quot;true&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;other-notable-changes&#34;&gt;Other notable changes&lt;/h2&gt;
+&lt;h3 id=&#34;acme-issuer&#34;&gt;ACME Issuer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add ACME DNS01 provider for Akamai FastDNS (#322, &lt;code&gt;@twz123&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add a meaningful user agent to the ACME client to help diagnosing abusive traffic patterns (#422, &lt;code&gt;@jsha&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Issuers using the AWS Route53 solver may attempt to find credentials using the environment, EC2 IAM Role, and other sources available to the cert-manager controller. This behavior is on by default for cluster issuers and off by default for issuers. This behavior may be enabled or disabled for all issuers or cluster issuers using the &amp;ndash;issuer-ambient-credentials and &lt;code&gt;--cluster-issuer-ambient-credentials&lt;/code&gt; flags on the cert-manager controller. (#363, &lt;code&gt;@euank&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add limits to HTTP01 validation pod (#408, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;The ACME DNS01 solver now trims excess whitespace from AWS credentials (#391, &lt;code&gt;@euank&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;ACME DNS01 challenge mechanism for Azure DNS (#246, &lt;code&gt;@mwieczorek&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix panic when ACME server returns an error other than HTTP Status Conflict during registration (#237, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ca-issuer&#34;&gt;CA Issuer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add the Key Encipherment purpose to CA Issuer generated certificates (#488, &lt;code&gt;@bradleybluebean&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Bundle CA certificate with issued certificates (#317, &lt;code&gt;@radhus&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;vault-issuer&#34;&gt;Vault Issuer&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add experimental support for HashiCorp Vault issuers (#292, &lt;code&gt;@vdesjardins&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;ingress-shim&lt;/li&gt;
+&lt;li&gt;ingress-shim now reconfigures certificates (#386, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;ingress-shim will only sync Ingress resources with &lt;code&gt;kubernetes.io/tls-acme&lt;/code&gt; annotation if the value of that annotation is true. (#325, &lt;code&gt;@wmedlar&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;docs&#34;&gt;Docs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Rewrite documentation and publish on &lt;code&gt;readthedocs&lt;/code&gt; (#428, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Document the minimum necessary permissions for using cert-manager with Route53 (#359, &lt;code&gt;@wmedlar&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Improve deployment documentation (#264, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;helm&#34;&gt;Helm&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;clusterResourceNamespace&lt;/code&gt; option to Helm chart (#547, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Enhance Helm chart in-line with best practices (#229, &lt;code&gt;@unguiculus&lt;/code&gt;):&lt;/li&gt;
+&lt;li&gt;Add support for node affinity and tolerations in Helm chart (#350, &lt;code&gt;@kiall&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;podAnnotations&lt;/code&gt; to Helm chart (#387, &lt;code&gt;@etiennetremel&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Add Certificate CRD short names &lt;code&gt;cert&lt;/code&gt; and &lt;code&gt;certs&lt;/code&gt;. This is configurable in the Helm Chart with &lt;code&gt;certificateResourceShortNames&lt;/code&gt;. (#312, &lt;code&gt;@Mikulas&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Remove default resource requests in Helm chart. Improve post-deployment informational messages. (#290, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;End-to-end testing now covers the helm chart for cert-manager on Kubernetes 1.7-1.9 (#216, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;other&#34;&gt;Other&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Produce a single static manifest instead of a directory when generating deployment manifests (#574, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Use cert-manager deployment namespace by default for leader election (#548, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Removed &amp;ndash;namespace flag (#433, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Run cert-manager container as a non root user (#415, &lt;code&gt;@tettaji&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;TLS secrets are now annotated with information about the certificate (#388, &lt;code&gt;@kragniz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;The static deployment manifests now automatically deploy into the &amp;lsquo;cert-manager&amp;rsquo; namespace by default (#330, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Rename Event types to be prefixed &amp;lsquo;Err&amp;rsquo; instead of &amp;lsquo;Error&amp;rsquo; for brevity (#332, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Clearer event logging when issuing a certificate for the first time (#331, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Provide static deployment manifests as an alternative to a Helm chart based deployment (#276, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Update existing secrets instead of replacing in order to preserve annotations/labels (#221, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Update to Go 1.9 (#200, &lt;code&gt;@euank&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bug-fixes&#34;&gt;Bug fixes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix a race condition in the package responsible for scheduling renewals (#218, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix a bug that caused ACME certificates to not be automatically renewed (#215, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix a bug in checking certificate validity and improve validation of &lt;code&gt;dnsNames&lt;/code&gt; and &lt;code&gt;commonName&lt;/code&gt; (#183, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bugs when checking validity of certificate resources (#184, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.2/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;changelog-since-v0-1-0&#34;&gt;Changelog since &lt;code&gt;v0.1.0&lt;/code&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;action-required&#34;&gt;Action Required&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Move to &lt;code&gt;jetstack&lt;/code&gt; organization. Action required: this will require updating your existing deployments to point to the new image repository, as new tags will not be pushed to the old &lt;code&gt;jetstackexperimental/cert-manager-controller&lt;/code&gt; repository. A helm upgrade should take care of this. (#145, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Set the Kubernetes secret type to TLS. Action required: this will cause renewals of existing certificates to fail. You must delete certificates that have been previously produced by cert-manager else cert-manager may enter a renewal loop when saving the new certificates. Alternatively, you may specify a new secret to store your certificate in and manually update your ingress resource/applications to reference the new secret. (#172, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;other-notable-changes&#34;&gt;Other notable changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;No longer support &lt;code&gt;ClusterIssuer&lt;/code&gt; resources when cert-manager is running with &amp;ndash;namespace flag set (#179, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Overcome &amp;lsquo;registration already exists for provider key&amp;rsquo; errors in ACME provider by auto-detecting lost ACME registration URIs (#171, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix checking for invalid data in issuer secrets (#170, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix bug in ACME HTTP01 solver causing self-check to return true before paths have propagated (#166, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix panic if the secret named in an ACME issuer exists but contains invalid data (or no data) (#165, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Ensure 5 consecutive HTTP01 self-checks pass before issuing ACME certificate (#156, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Fix race condition in ACME HTTP01 solver when validating multiple domains (#155, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Consistently use &lt;code&gt;glog&lt;/code&gt; throughout (#126, &lt;code&gt;@munnerz&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.14-Docs: Release Notes</title>
+      <link>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.14-docs/release-notes/release-notes-0.1/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This is the first release of cert-manager. It is currently still not in a production ready state, and features are subject to change.&lt;/p&gt;
+&lt;p&gt;Notable features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Automated certificate renewal&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;ACME DNS01 challenge mechanism&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;CloudDNS&lt;/li&gt;
+&lt;li&gt;Route53&lt;/li&gt;
+&lt;li&gt;CloudFlare&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;ACME HTTP01 challenge mechanism&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;Should be compatible with all ingress controllers following ingress spec (GCE &amp;amp; NGINX tested)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Simple CA based issuance&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;Create an Issuer that references a Secret resource containing a signing key pair, and issue/renew certificates from that.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Cluster-wide issuers (aka &lt;code&gt;ClusterIssuer&lt;/code&gt;)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Backed by CRDs&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;Events logged to the Kubernetes API&lt;/li&gt;
+&lt;li&gt;Status block utilized to store additional state about resources&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Please check the [README(https://github.com/jetstack-experimental/cert-manager) for a quick-start guide.&lt;/p&gt;
+&lt;p&gt;We really value any feedback and contributions to the project. If you&amp;rsquo;d like to get involved, please open some issues, comment or pick something up and get started!&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
