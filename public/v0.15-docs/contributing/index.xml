@@ -1,0 +1,438 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cert-manager – Contributing</title>
+    <link>https://cert-manager.io/v0.15-docs/contributing/</link>
+    <description>Recent content in Contributing on cert-manager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://cert-manager.io/v0.15-docs/contributing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.15-Docs: Contributing Flow</title>
+      <link>https://cert-manager.io/v0.15-docs/contributing/contributing-flow/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.15-docs/contributing/contributing-flow/</guid>
+      <description>
+        
+        
+        &lt;p&gt;All of cert-manager&amp;rsquo;s development is done via
+&lt;a href=&#34;https://github.com/jetstack/cert-manager&#34;&gt;GitHub&lt;/a&gt; which contains code, issues and pull
+requests.&lt;/p&gt;
+&lt;h2 id=&#34;bugs&#34;&gt;Bugs&lt;/h2&gt;
+&lt;p&gt;All bugs should be tracked as issues inside the
+&lt;a href=&#34;https://github.com/jetstack/cert-manager/issues&#34;&gt;GitHub&lt;/a&gt; repository. Issues should then be
+attached with the &lt;code&gt;kind/bug&lt;/code&gt; tag. This may then be assigned a priority and
+milestone to be addressed in a future release.&lt;/p&gt;
+&lt;p&gt;The more logs and information you can give about what and how the bug has been
+discovered, the faster it can be resolved.&lt;/p&gt;
+&lt;p&gt;Critical bug fixes are typically also cherry picked to the current minor stable release.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: If you are simply looking for &lt;em&gt;troubleshooting&lt;/em&gt; then you should post
+your question to the community &lt;code&gt;cert-manager&lt;/code&gt; &lt;a href=&#34;https://slack.k8s.io&#34;&gt;slack channel&lt;/a&gt;.
+Please also check that the bug has not already been filed by searching for key
+terms in the issue search bar.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+&lt;p&gt;Feature requests should be created as
+&lt;a href=&#34;https://github.com/jetstack/cert-manager/issues&#34;&gt;GitHub&lt;/a&gt; issues. They should contain
+clear motivation for the feature you wish to see as well as some possible
+solutions for how it can be implemented.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: It is often a good idea to bring your feature request up on the
+community &lt;code&gt;cert-manger-dev&lt;/code&gt; &lt;a href=&#34;https://slack.k8s.io&#34;&gt;slack channel&lt;/a&gt; to discuss whether
+the feature request has already been made or is aligned with the project&amp;rsquo;s
+priorities.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;creating-pull-requests&#34;&gt;Creating Pull Requests&lt;/h2&gt;
+&lt;p&gt;Changes to the cert-manager code base is done via &lt;a href=&#34;https://github.com/jetstack/cert-manager/pulls&#34;&gt;pull
+requests&lt;/a&gt;. Each pull request
+should ideally have a corresponding issue attached that is to be fixed by this
+pull request. It is valid for multiple pull requests to resolve a single issue
+in the interest of keeping code changes self contained and simpler to review.&lt;/p&gt;
+&lt;p&gt;Once created, a Jetstack member will assign themselves for review and enable
+testing. To make sure the changes get merged, keep an eye out for reviews which
+can have multiple cycles.&lt;/p&gt;
+&lt;p&gt;Once code has been merged, your changes will appear in the next minor release of
+cert-manager. If the pull request is a critical bug fix then this will probably
+also be cherry picked to the current stable version of cert-manager as a patch
+release.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.15-Docs: DCO Sign Off</title>
+      <link>https://cert-manager.io/v0.15-docs/contributing/sign-off/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.15-docs/contributing/sign-off/</guid>
+      <description>
+        
+        
+        &lt;p&gt;All authors to the project retain copyright to their work. However, to ensure
+that they are only submitting work that they have rights to, we are requiring
+everyone to acknowledge this by signing their work.&lt;/p&gt;
+&lt;p&gt;Any copyright notices in this repo should specify the authors as &amp;ldquo;the Jetstack
+cert-manager contributors&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;To sign your work, just add a line like this at the end of your commit message:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Signed-off-by: Joe Bloggs &amp;lt;joe@example.com&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This can easily be done with the &lt;code&gt;--signoff&lt;/code&gt; option to &lt;code&gt;git commit&lt;/code&gt;.
+You can also mass sign-off a whole PR with &lt;code&gt;git rebase --signoff master&lt;/code&gt;,
+replacing &lt;code&gt;master&lt;/code&gt; with the branch you are creating a pull request again if
+not master.&lt;/p&gt;
+&lt;p&gt;By doing this you state that you certify the following (from &lt;a href=&#34;https://developercertificate.org/):&#34;&gt;https://developercertificate.org/):&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Developer Certificate of Origin
+Version 1.1
+
+Copyright (C) 2004, 2006 The Linux Foundation and its contributors.
+1 Letterman Drive
+Suite D4700
+San Francisco, CA, 94129
+
+Everyone is permitted to copy and distribute verbatim copies of this
+license document, but changing it is not allowed.
+
+
+Developer&#39;s Certificate of Origin 1.1
+
+By making a contribution to this project, I certify that:
+
+(a) The contribution was created in whole or in part by me and I
+    have the right to submit it under the open source license
+    indicated in the file; or
+
+(b) The contribution is based upon previous work that, to the best
+    of my knowledge, is covered under an appropriate open source
+    license and I have the right under that license to submit that
+    work with modifications, whether created in whole or in part
+    by me, under the same open source license (unless I am
+    permitted to submit under a different license), as indicated
+    in the file; or
+
+(c) The contribution was provided directly to me by some other
+    person who certified (a), (b) or (c) and I have not modified
+    it.
+
+(d) I understand and agree that this project and the contribution
+    are public and that a record of the contribution (including all
+    personal information I submit with it, including my sign-off) is
+    maintained indefinitely and may be redistributed consistent with
+    this project or the open source license(s) involved.
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.15-Docs: Developing with Kind</title>
+      <link>https://cert-manager.io/v0.15-docs/contributing/kind/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.15-docs/contributing/kind/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Kind is a tool to quickly provision Kubernetes clusters locally using nested
+docker containers with no requirement for virtual machines. These clusters can
+be easily created and destroyed and are useful for simple testing for
+development.&lt;/p&gt;
+&lt;p&gt;To setup the development cluster and building cert-manager you will need the
+following installed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.bazel.build/versions/master/install.html&#34;&gt;Bazel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://store.docker.com/search?type=edition&amp;amp;offering=community&#34;&gt;Docker&lt;/a&gt; (and
+enable for non-root user)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/tools/install-kubectl/&#34;&gt;&lt;code&gt;kubectl&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;start-kind-cluster&#34;&gt;Start Kind Cluster&lt;/h2&gt;
+&lt;p&gt;To start the development cluster run the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ ./devel/cluster/create.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once complete, the cluster is able to be interacted with &lt;code&gt;kubectl&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;building-and-deploying-cert-manager&#34;&gt;Building and deploying cert-manager&lt;/h2&gt;
+&lt;p&gt;You can build a development build of cert-manager that will be loaded into your
+&lt;code&gt;kind&lt;/code&gt; cluster.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ ./devel/addon/certmanager/install.sh 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The images are now available on the cluster with the following tags:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;quay.io/jetstack/cert-manager-controller:build
+quay.io/jetstack/cert-manager-cainjector:build
+quay.io/jetstack/cert-manager-acmesolver:build
+quay.io/jetstack/cert-manager-webhook:build
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;generating-crds&#34;&gt;Generating CRDs&lt;/h2&gt;
+&lt;p&gt;After changes have been made to the API, the Custom Resource Definitions can be
+re-generated with the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./hack/update-crds.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;destroy-the-cluster&#34;&gt;Destroy the Cluster&lt;/h2&gt;
+&lt;p&gt;To clean up the development cluster run the following kind command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kind delete cluster
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.15-Docs: DNS Providers</title>
+      <link>https://cert-manager.io/v0.15-docs/contributing/dns-providers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.15-docs/contributing/dns-providers/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;creating-dns-providers&#34;&gt;Creating DNS Providers&lt;/h2&gt;
+&lt;p&gt;Due to the large number of requests to support DNS providers to resolve DNS
+challenges, it have become unpractical and unfeasible to maintain and test all
+coming in. For this reason, it has been decided to instead support out-of-tree
+DNS providers via way of an external webhook.&lt;/p&gt;
+&lt;p&gt;To implement an external DNS provider webhook, it is recommended to base your
+implementation on the &lt;a href=&#34;https://github.com/jetstack/cert-manager-webhook-example&#34;&gt;example
+repository&lt;/a&gt;. Please
+reach out on the &lt;code&gt;cert-manager-dev&lt;/code&gt; channel on the &lt;a href=&#34;https://slack.k8s.io&#34;&gt;community
+slack&lt;/a&gt; for advise and guidance on getting a DNS webhook
+running and released.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.15-Docs: Implementing External Issuers</title>
+      <link>https://cert-manager.io/v0.15-docs/contributing/external-issuers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.15-docs/contributing/external-issuers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager offers a number of &lt;a href=&#34;../../configuration/&#34;&gt;core issuer
+types&lt;/a&gt; that represent certificate authorities
+that can sign certificates when requested. As of &lt;code&gt;v0.11&lt;/code&gt;, cert-manager also
+supports out-of-tree external issuers, and treats them the same as
+in-tree issuer types. For more information on how to install and configure
+external issuer types, read the documentation
+&lt;a href=&#34;../../configuration/external/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;concepts&#34;&gt;Concepts&lt;/h2&gt;
+&lt;p&gt;An issuer represents a certificate authority that signs incoming certificate
+requests. In cert-manager, the &lt;code&gt;CertificateRequest&lt;/code&gt; resource represents a single
+request for a signed certificate, containing the raw certificate request PEM
+data as well as other information that can be used to describe the designed
+certificate.&lt;/p&gt;
+&lt;p&gt;In cert-manager, each issuer type has its own controller that watches these
+&lt;code&gt;CertificateRequest&lt;/code&gt; resources and waits for one to be created which is meant
+for itself. This is done by the &lt;code&gt;issuerRef&lt;/code&gt; stanza on the &lt;code&gt;CertificateRequest&lt;/code&gt;
+which inside contains - name, kind, group. The &lt;code&gt;group&lt;/code&gt; denotes an API group, for
+example &lt;code&gt;cert-manager.io&lt;/code&gt; which is responsible for all core issuer types. &lt;code&gt;kind&lt;/code&gt;
+denotes the kind resource type of the issuer, such as an &lt;code&gt;Issuer&lt;/code&gt; or
+&lt;code&gt;ClusterIssuer&lt;/code&gt;. Finally, the &lt;code&gt;name&lt;/code&gt; denotes the name of the issuer resource
+inside of that kind.&lt;/p&gt;
+&lt;p&gt;When an issuer controller observes a new &lt;code&gt;CertificateRequest&lt;/code&gt;, it ensure that
+the request is meant for its controller type, and if so, then ensures that the
+corresponding issuer resource exists in Kubernetes. If these are both true, it
+will then use the information inside that issuer resource to attempt to create a
+signed certificate, based upon the certificate request.&lt;/p&gt;
+&lt;p&gt;Once a signed certificate has been gathered by the issuer controller, it then
+updates the status of the &lt;code&gt;CertifiateRequest&lt;/code&gt; resource with the signed
+certificate. It is then important to then update the condition status of that
+resource to a ready state, as this is what is used to signal to higher order
+controllers, such as the &lt;code&gt;Certificate&lt;/code&gt; controller, that the resource is ready to
+be consumed. Conversely, if the &lt;code&gt;CertificateRequest&lt;/code&gt; fails, it is as important
+to mark the resource as such, as this will also be used to signal to higher
+order controllers. You can read the valid condition sates
+&lt;a href=&#34;../../concepts/certificaterequest/#conditions&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;implementation&#34;&gt;Implementation&lt;/h2&gt;
+&lt;p&gt;It is recommended that you make use of the
+&lt;a href=&#34;https://github.com/kubernetes-sigs/kubebuilder&#34;&gt;kubebuilder&lt;/a&gt; project in order
+to implement your external issuer controller. This makes it very simple to
+generate &lt;code&gt;CustomResourceDefinitions&lt;/code&gt; and gives you a lot of controller
+functionality out of the box. If you have further questions on how to implement
+an external issuer controller, it is best to reach out of the #cert-manager
+&lt;a href=&#34;https://slack.k8s.io&#34;&gt;slack&lt;/a&gt; channel, or to join the weekly community calls which you
+will be invited to once you join the &lt;a href=&#34;https://groups.google.com/forum/#!forum/cert-manager-dev&#34;&gt;Google
+Group&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.15-Docs: Release Process</title>
+      <link>https://cert-manager.io/v0.15-docs/contributing/release-process/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.15-docs/contributing/release-process/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This document aims to outline the process that should be followed for cutting a
+new release of cert-manager.&lt;/p&gt;
+&lt;h2 id=&#34;minor-releases&#34;&gt;Minor releases&lt;/h2&gt;
+&lt;p&gt;A minor release is a backwards-compatible &amp;lsquo;feature&amp;rsquo; release.  It can contain new
+features and bug fixes.&lt;/p&gt;
+&lt;h3 id=&#34;release-schedule&#34;&gt;Release schedule&lt;/h3&gt;
+&lt;p&gt;We aim to cut a new minor release once per month. The rough goals for each
+release are outlined as part of a GitHub milestone. We cut a release even if
+some of these goals are missed, in order to keep up release velocity.&lt;/p&gt;
+&lt;h3 id=&#34;process&#34;&gt;Process&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: This process document is WIP and may be incomplete&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The process for cutting a minor release is as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Ensure upgrading document exists.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ensure all strings of versions have been updated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;in the &lt;a href=&#34;https://github.com/jetstack/cert-manager&#34;&gt;&lt;code&gt;jetstack/cert-manager&lt;/code&gt;&lt;/a&gt;
+repository&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;deploy/charts/cert-manager/README.md&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;in the &lt;a href=&#34;https://github.com/cert-manager/website&#34;&gt;&lt;code&gt;cert-manager/webisite&lt;/code&gt;&lt;/a&gt;
+repository&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;content/en/docs/installation/compatibility.md&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;content/en/docs/installation/kubernetes.md&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;content/en/docs/installation/openshift.md&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Create a new release branch (e.g. &lt;code&gt;release-0.5&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Push it to the &lt;code&gt;jetstack/cert-manager&lt;/code&gt; repository&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Gather release notes since the previous release:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Download, install and run the latest version of release-notes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ go get k8s.io/release&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;;&lt;/span&gt; go install &lt;span style=&#34;color:#000&#34;&gt;$GOPATH&lt;/span&gt;/src/k8s.io/release/cmd/release-notes/.
+$ mkdir -p design/release-notes/release-*X.Y*
+$ &lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;*your-token*
+$ &lt;span style=&#34;color:#000&#34;&gt;$GOPATH&lt;/span&gt;/bin/release-notes -release-version v*X.Y* -github-repo cert-manager -github-org jetstack -requiredAuthor &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; -start-sha&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;git rev-parse *X.Y-1.0*&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt; -end-sha&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;git rev-parse HEAD&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt; -output design/release-notes/release-*X.Y*/draft-release-notes.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Add additional blurb, notable items and characterize change log.&lt;/p&gt;
+&lt;p&gt;Finally, create a new tag taken from the release branch, e.g.&lt;code&gt;v0.5.0&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;patch-releases&#34;&gt;Patch releases&lt;/h2&gt;
+&lt;p&gt;A patch release contains critical bug fixes for the project.  They are managed on
+an ad-hoc basis, and should only be required when critical bugs/regressions are
+found in the release.&lt;/p&gt;
+&lt;p&gt;We will only perform patch release for the &lt;strong&gt;current&lt;/strong&gt; version of cert-manager.&lt;/p&gt;
+&lt;p&gt;Once a new minor release has been cut, we will stop providing patches for the
+version before it.&lt;/p&gt;
+&lt;h3 id=&#34;release-schedule-1&#34;&gt;Release schedule&lt;/h3&gt;
+&lt;p&gt;Patch releases are cut on an ad-hoc basis, depending on recent activity on the
+release branch.&lt;/p&gt;
+&lt;h3 id=&#34;process-1&#34;&gt;Process&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: This process document is WIP and may be incomplete&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Bugs that need to be fixed in a patch release should be cherry picked into the
+appropriate release branch using the &lt;code&gt;./hack/cherry-pick-pr.sh&lt;/code&gt; script in this
+repository.&lt;/p&gt;
+&lt;p&gt;The process for cutting a patch release is as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ensure all strings of versions have been updated:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;deploy/charts/cert-manager/README.md&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docs/getting-started/install/kubernetes.rst&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docs/getting-started/install/openshift.rst&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docs/getting-started/webhook.rst&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docs/tutorials/acme/quick-start/index.rst&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Iterate on review feedback (hopefully this will be minimal) and submit
+changes to &lt;code&gt;master&lt;/code&gt; of cert-manager, performing a rebase of release-x.y.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Gather release notes since the previous release:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ go get k8s.io/release&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;;&lt;/span&gt; go install &lt;span style=&#34;color:#000&#34;&gt;$GOPATH&lt;/span&gt;/src/k8s.io/release/cmd/release-notes/.
+$ mkdir -p design/release-notes/release-*X.Y*
+$ &lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;*your-token*
+$ &lt;span style=&#34;color:#000&#34;&gt;$GOPATH&lt;/span&gt;/bin/release-notes -release-version v*X.Y* -github-repo cert-manager -github-org jetstack -requiredAuthor &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; -start-sha&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;git rev-parse *X.Y.Z-1*&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt; -end-sha&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;$(&lt;/span&gt;git rev-parse release-*X.Y*&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;)&lt;/span&gt; -output design/release-notes/release-*X.Y*/draft-release-notes-*Z*.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Add additional blurb, notable items and characterize change log.&lt;/p&gt;
+&lt;p&gt;Finally, create a new tag taken from the release branch, e.g. &lt;code&gt;v0.5.1&lt;/code&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.15-Docs: Running End-to-End Tests</title>
+      <link>https://cert-manager.io/v0.15-docs/contributing/e2e/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.15-docs/contributing/e2e/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager has an end-to-end test suite that verifies functionality against a
+real Kubernetes cluster.&lt;/p&gt;
+&lt;p&gt;This document explains how you can run the end-to-end tests yourself.  This is
+useful when you have added or changed functionality in cert-manager and want to
+verify the software still works as expected.&lt;/p&gt;
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;Currently, a number of tools &lt;strong&gt;must&lt;/strong&gt; be installed on your machine in order to
+run the tests:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;bazel&lt;/code&gt;: As with all other development, Bazel is required to actually build
+the project as well as end-to-end test framework. Bazel will also retrieve
+appropriate versions of any other dependencies depending on what &amp;lsquo;target&amp;rsquo; you
+choose to run.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;docker&lt;/code&gt;: We provision a whole Kubernetes cluster within Docker, and so an up
+to date version of Docker must be installed. The oldest Docker version we have
+tested is 17.09.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;kubectl&lt;/code&gt;:  If you are running the tests on Linux, this step is technically
+not required. For non-Linux hosts (i.e. OSX), you will need to ensure you have
+a relatively new version of &lt;code&gt;kubectl&lt;/code&gt; available on your PATH.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;kind&lt;/code&gt;: We use kind to provision a Kubernetes cluster.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;An internet connection: tests require access to DNS, and optionally CloudFlare
+APIs (if a CloudFlare API token is provided).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bazel, Docker and &lt;code&gt;kubectl&lt;/code&gt; should be installed through your preferred means.&lt;/p&gt;
+&lt;h2 id=&#34;set-up-end-to-end-tests&#34;&gt;Set up End-to-End Tests&lt;/h2&gt;
+&lt;p&gt;You need to have a Kind cluster running, if you don&amp;rsquo;t have one set up you can set one up using:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ ./devel/cluster/create.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once you have one set up you need to install all dependencies in the cluster using:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ ./devel/setup-e2e-deps.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;run-end-to-end-tests&#34;&gt;Run End-to-End Tests&lt;/h2&gt;
+&lt;p&gt;You can run the end-to-end tests by executing the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ ./devel/run-e2e.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The full suite may take up to 30 minutes to run.
+You can monitor output of this command to track progress.&lt;/p&gt;
+&lt;p&gt;Note: &lt;em&gt;If you did not use &lt;code&gt;create.sh&lt;/code&gt; to create the cluster you will notice that ACME HTTP01 end-to-end tests will fail, as they require the &amp;lsquo;service CIDR&amp;rsquo; to be set to 10.0.0.0/16 as the ingress controller is deployed with the fixed IP 10.0.0.15 to allow &lt;a href=&#34;https://github.com/letsencrypt/pebble&#34;&gt;Pebble&lt;/a&gt; to access it on a predictable address for end-to-end tests as our test DNS name &lt;code&gt;certmanager.kubernetes.network&lt;/code&gt; points to 10.0.0.15.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;You can also run a specific part of the test using &lt;code&gt;--ginkgo.focus&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ ./devel/run-e2e.sh --ginkgo.focus &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;lt;text regex&amp;gt;&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;More info on how to use this can be found in the &lt;a href=&#34;https://onsi.github.io/ginkgo/#focused-specs&#34;&gt;Ginkgo documentation&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;end-to-end-test-structure&#34;&gt;End-to-End Test Structure&lt;/h2&gt;
+&lt;p&gt;The end-to-end tests consist of 2 big parts: the issuer specific tests and the conformance suite. These tests use the &lt;a href=&#34;https://onsi.github.io/ginkgo/#getting-ginkgo&#34;&gt;Ginkgo library&lt;/a&gt; to run tests.&lt;/p&gt;
+&lt;h3 id=&#34;conformance-suite&#34;&gt;Conformance suite&lt;/h3&gt;
+&lt;h3 id=&#34;rbac&#34;&gt;RBAC&lt;/h3&gt;
+&lt;p&gt;This suite tests all RBAC permissions granted to cert-manager on the cluster to check that it is able to operate correctly.&lt;/p&gt;
+&lt;h3 id=&#34;certificates&#34;&gt;Certificates&lt;/h3&gt;
+&lt;p&gt;This suite tests certificate functionality against all issuers.&lt;/p&gt;
+&lt;h4 id=&#34;feature-sets&#34;&gt;Feature sets&lt;/h4&gt;
+&lt;p&gt;This exists to only test a certain feature (e.g. Email SAN) against issuers that support this feature.
+Each test specifies a used feature using &lt;code&gt;s.checkFeatures(feature)&lt;/code&gt;, this is then checked against the issuer&amp;rsquo;s &lt;code&gt;UnsupportedFeatures&lt;/code&gt; list to check if it can be ran against the issuer.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

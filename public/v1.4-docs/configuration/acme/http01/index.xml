@@ -1,0 +1,48 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cert-manager – HTTP01</title>
+    <link>https://cert-manager.io/v1.4-docs/configuration/acme/http01/</link>
+    <description>Recent content in HTTP01 on cert-manager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://cert-manager.io/v1.4-docs/configuration/acme/http01/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1.4-Docs: External Load Balancer</title>
+      <link>https://cert-manager.io/v1.4-docs/configuration/acme/http01/externalloadbalancer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.4-docs/configuration/acme/http01/externalloadbalancer/</guid>
+      <description>
+        
+        
+        &lt;p&gt;When you are using an external load balancer provided by any host, you can face several configuration issues to get it work with cert-manager.&lt;/p&gt;
+&lt;p&gt;This documentation is intended to help configure the HTTP-01 challenge type for instances behind external load balancer.&lt;/p&gt;
+&lt;h2 id=&#34;nat-loopback-hairpin&#34;&gt;NAT Loopback / Hairpin&lt;/h2&gt;
+&lt;p&gt;The first configuration point is NAT loopback. You can face check issues due to Load Balancer preventing instances behind it to access its external interface.&lt;/p&gt;
+&lt;p&gt;Some Network Load Balancer have this kind of limitation for several reasons. It can be configured through &lt;code&gt;iptables&lt;/code&gt; rerouting configuration known as &lt;code&gt;NAT loopback&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To check if you are facing this problem :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Check that the endpoint of the challenge is accessible to the public : &lt;code&gt;curl &amp;lt;endpoint&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Check that the challenge endpoint is NOT accessible from inside behind the Load Balancer: use SSH to open a session on a node places behind the LB; then launch the same command than before : &lt;code&gt;curl &amp;lt;endpoint&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The &lt;code&gt;HTTP-01&lt;/code&gt; challenge&amp;rsquo;s endpoint can be found in the logs when the &lt;code&gt;pre-check&lt;/code&gt; fails. If it does not appear in the logs, you can check the challenge URL by &lt;code&gt;kubectl&lt;/code&gt;command.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;endpoint&amp;gt;&lt;/code&gt; is the URL used to test the HTTP-01 from the certificate &lt;code&gt;Issuer&lt;/code&gt;. For Let&amp;rsquo;s Encrypt for example, the URL is formed like &lt;code&gt;&amp;lt;domain&amp;gt;/.well-known/acme-challenge/&amp;lt;hash&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;load-balancer-http-endpoints&#34;&gt;Load Balancer HTTP endpoints&lt;/h2&gt;
+&lt;p&gt;If you are using a Load Balancer (outside a managed Kubernetes service), you should be able to configure the Load Balancer protocol as HTTP, HTTPS, TCP, UDP. Several Load Balancer now offer free TLS certificates with Let&amp;rsquo;s Encrypt.&lt;/p&gt;
+&lt;p&gt;When using HTTP(s) protocols for your Load Balancer, it can intercept the challenge URL to replace the response&amp;rsquo;s verification hash with their hash.&lt;/p&gt;
+&lt;p&gt;In this case, cert-manager will fail &lt;code&gt;did not get expected response when querying endpoint, expected &#39;xxxx&#39; but got: yyyy (truncated)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This kind of error can be thrown for multiple reasons. This case shows a correctly formatted response, but not the expected one. The solution is to configure the Load Balancer with TCP protocol so that the HTTP request will not be intercepted by the host.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

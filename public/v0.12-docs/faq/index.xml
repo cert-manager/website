@@ -1,0 +1,167 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cert-manager – FAQ</title>
+    <link>https://cert-manager.io/v0.12-docs/faq/</link>
+    <description>Recent content in FAQ on cert-manager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://cert-manager.io/v0.12-docs/faq/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.12-Docs: Cluster Resource Namespace</title>
+      <link>https://cert-manager.io/v0.12-docs/faq/cluster-resource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/faq/cluster-resource/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;ClusterIssuer&lt;/code&gt; resource is cluster scoped. This means that when referencing
+a secret via the &lt;code&gt;secretName&lt;/code&gt; field, secrets will be looked for in the &lt;code&gt;Cluster Resource Namespace&lt;/code&gt;. By default, this namespace is &lt;code&gt;cert-manager&lt;/code&gt; however can be
+changed via a flag on the cert-manager-controller component:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;--cluster-resource-namespace&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;my-namespace
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.12-Docs: Syncing Secrets Across Namespaces using Kubed</title>
+      <link>https://cert-manager.io/v0.12-docs/faq/kubed/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/faq/kubed/</guid>
+      <description>
+        
+        
+        &lt;p&gt;It may be required for multiple components across namespaces to consume the same
+&lt;code&gt;Secret&lt;/code&gt; that has been created by a single &lt;code&gt;Certificate&lt;/code&gt;. The recommended way to
+do this is to use &lt;a href=&#34;https://github.com/appscode/kubed&#34;&gt;kubed&lt;/a&gt; with its &lt;a href=&#34;https://appscode.com/products/kubed/v0.11.0/guides/config-syncer/intra-cluster/&#34;&gt;secret
+syncing
+feature&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.12-Docs: Troubleshooting Issuing ACME Certificates</title>
+      <link>https://cert-manager.io/v0.12-docs/faq/acme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/faq/acme/</guid>
+      <description>
+        
+        
+        &lt;p&gt;When requesting ACME certificates, cert-manager will create &lt;code&gt;Order&lt;/code&gt; and
+&lt;code&gt;Challenges&lt;/code&gt; to complete the request. As such, there are more resources to
+investigate and debug if there is a problem during the process. You can read
+more about these resources in the &lt;a href=&#34;../../concepts/acme-orders-challenges/&#34;&gt;concepts
+pages&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;orders&#34;&gt;Orders&lt;/h2&gt;
+&lt;p&gt;In order to debug why a certificate isn&amp;rsquo;t being issued, we can first run
+&lt;code&gt;kubectl describe&lt;/code&gt; on the &lt;code&gt;Certificate&lt;/code&gt; resource we&amp;rsquo;re having issues with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl describe certificate example-com
+...
+Events:
+  Type    Reason        Age   From          Message
+  ----    ------        ----  ----          -------
+  Normal  GeneratedKey  82s   cert-manager  Generated a new private key
+  Normal  Requested     81s   cert-manager  Created new CertificateRequest resource &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-com-2745722290&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We can then run another describe on the &lt;code&gt;CertificateRequest&lt;/code&gt; resource that has
+been created:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl describe certificaterequest example-com-2745722290
+...
+Events:
+  Type    Reason        Age   From          Message
+  ----    ------        ----  ----          -------
+  Normal  OrderCreated  5s    cert-manager  Created Order resource default/example-com-2745722290-439160286
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We can see here that &lt;code&gt;CertificateRequest&lt;/code&gt; controller has created an Order
+resource to request a new certificate from the ACME server.&lt;/p&gt;
+&lt;p&gt;Orders are a useful source of information when debugging failures issuing ACME
+certificates. By running &lt;code&gt;kubectl describe order&lt;/code&gt; on a particular order,
+information can be gleaned about failures in the process:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl describe order example-com-2745722290-439160286
+...
+Reason:
+State:         pending
+URL:           https://acme-v02.api.letsencrypt.org/acme/order/41123272/265506123
+Events:
+  Type    Reason   Age   From          Message
+  ----    ------   ----  ----          -------
+  Normal  Created  1m    cert-manager  Created Challenge resource &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-com-2745722290-439160286-0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; domain &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;test1.example.com&amp;#34;&lt;/span&gt;
+  Normal  Created  1m    cert-manager  Created Challenge resource &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-com-2745722290-439160286-1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; domain &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;test2.example.com&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here we can see that cert-manager has created two Challenge resources in order
+to complete the requirements of the ACME order to obtain a signed certificate.&lt;/p&gt;
+&lt;p&gt;You can then go on to run
+&lt;code&gt;kubectl describe challenge example-com-2745722290-439160286-0&lt;/code&gt; to further debug the
+progress of the Order.&lt;/p&gt;
+&lt;p&gt;Once an Order is successful, you should see an event like the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl describe order example-com-2745722290-439160286
+...
+Reason:
+State:         valid
+URL:           https://acme-v02.api.letsencrypt.org/acme/order/41123272/265506123
+Events:
+  Type    Reason      Age   From          Message
+  ----    ------      ----  ----          -------
+  Normal  Created     72s   cert-manager  Created Challenge resource &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-com-2745722290-439160286-0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; domain &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;test1.example.com&amp;#34;&lt;/span&gt;
+  Normal  Created     72s   cert-manager  Created Challenge resource &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;example-com-2745722290-439160286-1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; domain &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;test2.example.com&amp;#34;&lt;/span&gt;
+  Normal  OrderValid  4s    cert-manager  Order completed successfully
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If the Order is not completing successfully, you can debug the challenges
+for the Order by running &lt;code&gt;kubectl describe&lt;/code&gt; on the Challenge resource.&lt;/p&gt;
+&lt;h2 id=&#34;challenges&#34;&gt;Challenges&lt;/h2&gt;
+&lt;p&gt;In order to determine why an ACME Certificate is not being issued, we can debug
+using the &amp;lsquo;Challenge&amp;rsquo; resources that cert-manager has created.&lt;/p&gt;
+&lt;p&gt;In order to determine which Challenge is failing, you can run
+&lt;code&gt;kubectl get challenges&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl get challenges
+...
+NAME                                 STATE     DOMAIN            REASON                                     AGE
+example-com-2745722290-4391602865-0  pending   example.com       Waiting &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; dns-01 challenge propagation   22s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This shows that the challenge has been presented using the DNS01 solver
+successfully and now cert-manager is waiting for the &amp;lsquo;self check&amp;rsquo; to pass.&lt;/p&gt;
+&lt;p&gt;You can get more information about the challenge by using &lt;code&gt;kubectl describe&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ kubectl describe challenge example-com-2745722290-4391602865-0
+...
+Status:
+  Presented:   &lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt;
+  Processing:  &lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt;
+  Reason:      Waiting &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; dns-01 challenge propagation
+  State:       pending
+Events:
+  Type    Reason     Age   From          Message
+  ----    ------     ----  ----          -------
+  Normal  Started    19s   cert-manager  Challenge scheduled &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;for&lt;/span&gt; processing
+  Normal  Presented  16s   cert-manager  Presented challenge using dns-01 challenge mechanism
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Progress about the state of each challenge will be recorded either as Events
+or on the Challenge&amp;rsquo;s &lt;code&gt;status&lt;/code&gt; block (as shown above).&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.12-Docs: Webhook</title>
+      <link>https://cert-manager.io/v0.12-docs/faq/webhook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.12-docs/faq/webhook/</guid>
+      <description>
+        
+        
+        &lt;p&gt;You may encounter errors when creating resources that the webhook is unreachable
+and as such no cert-manager resources can be created or updated. In this case,
+it is advised to check the
+&lt;a href=&#34;../../installation/compatibility/&#34;&gt;compatibility&lt;/a&gt; of
+your environment and take necessary action outlined there.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

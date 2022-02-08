@@ -1,0 +1,246 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cert-manager – CLI reference</title>
+    <link>https://cert-manager.io/v0.16-docs/cli/</link>
+    <description>Recent content in CLI reference on cert-manager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://cert-manager.io/v0.16-docs/cli/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V0.16-Docs: acmesolver CLI reference</title>
+      <link>https://cert-manager.io/v0.16-docs/cli/acmesolver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.16-docs/cli/acmesolver/</guid>
+      <description>
+        
+        
+        &lt;pre&gt;&lt;code&gt;HTTP server used to solve ACME challenges.
+
+Usage:
+  acmesolver [flags]
+
+Flags:
+      --domain string     the domain name to verify
+  -h, --help              help for acmesolver
+      --key string        the challenge key to respond with
+      --listen-port int   the port number to listen on for connections (default 8089)
+      --token string      the challenge token to verify against
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.16-Docs: cainjector CLI reference</title>
+      <link>https://cert-manager.io/v0.16-docs/cli/cainjector/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.16-docs/cli/cainjector/</guid>
+      <description>
+        
+        
+        &lt;pre&gt;&lt;code&gt;
+cert-manager CA injector is a Kubernetes addon to automate the injection of CA data into
+webhooks and APIServices from cert-manager certificates.
+
+It will ensure that annotated webhooks and API services always have the correct
+CA data from the referenced certificates, which can then be used to serve API
+servers and webhook servers.
+
+Usage:
+  ca-injector [flags]
+
+Flags:
+      --add_dir_header                     If true, adds the file directory to the header
+      --alsologtostderr                    log to standard error as well as files
+  -h, --help                               help for ca-injector
+      --kubeconfig string                  Paths to a kubeconfig. Only required if out-of-cluster.
+      --leader-elect                       If true, cainjector will perform leader election between instances to ensure no more than one instance of cainjector operates at a time (default true)
+      --leader-election-namespace string   Namespace used to perform leader election (defaults to controller&#39;s namespace). Only used if leader election is enabled
+      --log-flush-frequency duration       Maximum number of seconds between log flushes (default 5s)
+      --log_backtrace_at traceLocation     when logging hits line file:N, emit a stack trace (default :0)
+      --log_dir string                     If non-empty, write log files in this directory
+      --log_file string                    If non-empty, use this log file
+      --log_file_max_size uint             Defines the maximum size a log file can grow to. Unit is megabytes. If the value is 0, the maximum file size is unlimited. (default 1800)
+      --logtostderr                        log to standard error instead of files (default true)
+      --master --kubeconfig                (Deprecated: switch to --kubeconfig) The address of the Kubernetes API server. Overrides any value in kubeconfig. Only required if out-of-cluster.
+      --namespace string                   If set, this limits the scope of cainjector to a single namespace. If set, cainjector will not update resources with certificates outside of the configured namespace.
+      --skip_headers                       If true, avoid header prefixes in the log messages
+      --skip_log_headers                   If true, avoid headers when opening log files
+      --stderrthreshold severity           logs at or above this threshold go to stderr (default 2)
+  -v, --v Level                            number for the log level verbosity
+      --vmodule moduleSpec                 comma-separated list of pattern=N settings for file-filtered logging
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.16-Docs: cmctl CLI reference</title>
+      <link>https://cert-manager.io/v0.16-docs/cli/cmctl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.16-docs/cli/cmctl/</guid>
+      <description>
+        
+        
+        &lt;pre&gt;&lt;code&gt;
+kubectl cert-manager is a CLI tool manage and configure cert-manager resources for Kubernetes
+
+Usage:
+  kubectl cert-manager [command]
+
+Available Commands:
+  convert     Convert cert-manager config files between different API versions
+  create      Create cert-manager resources
+  help        Help about any command
+  renew       Mark a Certificate for manual renewal
+  status      Get details on current status of cert-manager resources
+  version     Print the kubectl cert-manager version
+
+Flags:
+      --as string                      Username to impersonate for the operation
+      --as-group stringArray           Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
+      --cache-dir string               Default HTTP cache directory (default &amp;quot;/Users/joakim/.kube/http-cache&amp;quot;)
+      --certificate-authority string   Path to a cert file for the certificate authority
+      --client-certificate string      Path to a client certificate file for TLS
+      --client-key string              Path to a client key file for TLS
+      --cluster string                 The name of the kubeconfig cluster to use
+      --context string                 The name of the kubeconfig context to use
+  -h, --help                           help for cert-manager
+      --insecure-skip-tls-verify       If true, the server&#39;s certificate will not be checked for validity. This will make your HTTPS connections insecure
+      --kubeconfig string              Path to the kubeconfig file to use for CLI requests.
+      --match-server-version           Require server version to match client version
+  -n, --namespace string               If present, the namespace scope for this CLI request
+      --request-timeout string         The length of time to wait before giving up on a single server request. Non-zero values should contain a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero means don&#39;t timeout requests. (default &amp;quot;0&amp;quot;)
+  -s, --server string                  The address and port of the Kubernetes API server
+      --tls-server-name string         Server name to use for server certificate validation. If it is not provided, the hostname used to contact the server is used
+      --token string                   Bearer token for authentication to the API server
+      --user string                    The name of the kubeconfig user to use
+
+Use &amp;quot;kubectl cert-manager [command] --help&amp;quot; for more information about a command.
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.16-Docs: controller CLI reference</title>
+      <link>https://cert-manager.io/v0.16-docs/cli/controller/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.16-docs/cli/controller/</guid>
+      <description>
+        
+        
+        &lt;pre&gt;&lt;code&gt;
+cert-manager is a Kubernetes addon to automate the management and issuance of
+TLS certificates from various issuing sources.
+
+It will ensure certificates are valid and up to date periodically, and attempt
+to renew certificates at an appropriate time before expiry.
+
+Usage:
+  cert-manager-controller [flags]
+
+Flags:
+      --acme-http01-solver-image string                     The docker image to use to solve ACME HTTP01 challenges. You most likely will not need to change this parameter unless you are testing a new feature or developing cert-manager. (default &amp;quot;quay.io/jetstack/cert-manager-acmesolver:canary&amp;quot;)
+      --acme-http01-solver-resource-limits-cpu string       Defines the resource limits CPU size when spawning new ACME HTTP01 challenge solver pods. (default &amp;quot;100m&amp;quot;)
+      --acme-http01-solver-resource-limits-memory string    Defines the resource limits Memory size when spawning new ACME HTTP01 challenge solver pods. (default &amp;quot;64Mi&amp;quot;)
+      --acme-http01-solver-resource-request-cpu string      Defines the resource request CPU size when spawning new ACME HTTP01 challenge solver pods. (default &amp;quot;10m&amp;quot;)
+      --acme-http01-solver-resource-request-memory string   Defines the resource request Memory size when spawning new ACME HTTP01 challenge solver pods. (default &amp;quot;64Mi&amp;quot;)
+      --add_dir_header                                      If true, adds the file directory to the header
+      --alsologtostderr                                     log to standard error as well as files
+      --auto-certificate-annotations strings                The annotation consumed by the ingress-shim controller to indicate a ingress is requesting a certificate (default [kubernetes.io/tls-acme])
+      --cluster-issuer-ambient-credentials                  Whether a cluster-issuer may make use of ambient credentials for issuers. &#39;Ambient Credentials&#39; are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the ClusterIssuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata. (default true)
+      --cluster-resource-namespace string                   Namespace to store resources owned by cluster scoped resources such as ClusterIssuer in. This must be specified if ClusterIssuers are enabled. (default &amp;quot;kube-system&amp;quot;)
+      --controllers strings                                 The set of controllers to enable. (default [issuers,clusterissuers,CertificateMetrics,ingress-shim,orders,challenges,certificaterequests-issuer-acme,certificaterequests-issuer-ca,certificaterequests-issuer-selfsigned,certificaterequests-issuer-vault,certificaterequests-issuer-venafi,CertificateTrigger,CertificateIssuing,CertificateKeyManager,CertificateRequestManager,CertificateReadiness])
+      --default-issuer-group string                         Group of the Issuer to use when the tls is requested but issuer group is not specified on the ingress resource. (default &amp;quot;cert-manager.io&amp;quot;)
+      --default-issuer-kind string                          Kind of the Issuer to use when the tls is requested but issuer kind is not specified on the ingress resource. (default &amp;quot;Issuer&amp;quot;)
+      --default-issuer-name string                          Name of the Issuer to use when the tls is requested but issuer name is not specified on the ingress resource.
+      --dns01-recursive-nameservers strings                 A list of comma separated dns server endpoints used for DNS01 check requests. This should be a list containing host and port, for example 8.8.8.8:53,8.8.4.4:53
+      --dns01-recursive-nameservers-only                    When true, cert-manager will only ever query the configured DNS resolvers to perform the ACME DNS01 self check. This is useful in DNS constrained environments, where access to authoritative nameservers is restricted. Enabling this option could cause the DNS01 self check to take longer due to caching performed by the recursive nameservers.
+      --enable-certificate-owner-ref                        Whether to set the certificate resource as an owner of secret where the tls certificate is stored. When this flag is enabled, the secret will be automatically removed when the certificate resource is deleted.
+      --feature-gates mapStringBool                         A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
+                                                            AllAlpha=true|false (ALPHA - default=false)
+                                                            AllBeta=true|false (BETA - default=false)
+                                                            ValidateCAA=true|false (ALPHA - default=false)
+  -h, --help                                                help for cert-manager-controller
+      --issuer-ambient-credentials                          Whether an issuer may make use of ambient credentials. &#39;Ambient Credentials&#39; are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the Issuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata.
+      --kubeconfig string                                   Paths to a kubeconfig. Only required if out-of-cluster.
+      --leader-elect                                        If true, cert-manager will perform leader election between instances to ensure no more than one instance of cert-manager operates at a time (default true)
+      --leader-election-lease-duration duration             The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled. (default 1m0s)
+      --leader-election-namespace string                    Namespace used to perform leader election. Only used if leader election is enabled (default &amp;quot;kube-system&amp;quot;)
+      --leader-election-renew-deadline duration             The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled. (default 40s)
+      --leader-election-retry-period duration               The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled. (default 15s)
+      --log-flush-frequency duration                        Maximum number of seconds between log flushes (default 5s)
+      --log_backtrace_at traceLocation                      when logging hits line file:N, emit a stack trace (default :0)
+      --log_dir string                                      If non-empty, write log files in this directory
+      --log_file string                                     If non-empty, use this log file
+      --log_file_max_size uint                              Defines the maximum size a log file can grow to. Unit is megabytes. If the value is 0, the maximum file size is unlimited. (default 1800)
+      --logtostderr                                         log to standard error instead of files (default true)
+      --master string                                       Optional apiserver host address to connect to. If not specified, autoconfiguration will be attempted.
+      --max-concurrent-challenges int                       The maximum number of challenges that can be scheduled as &#39;processing&#39; at once. (default 60)
+      --metrics-listen-address string                       The host and port that the metrics endpoint should listen on. (default &amp;quot;0.0.0.0:9402&amp;quot;)
+      --namespace string                                    If set, this limits the scope of cert-manager to a single namespace and ClusterIssuers are disabled. If not specified, all namespaces will be watched
+      --renew-before-expiry-duration duration               The default &#39;renew before expiry&#39; time for Certificates. Once a certificate is within this duration until expiry, a new Certificate will be attempted to be issued. (default 720h0m0s)
+      --skip_headers                                        If true, avoid header prefixes in the log messages
+      --skip_log_headers                                    If true, avoid headers when opening log files
+      --stderrthreshold severity                            logs at or above this threshold go to stderr (default 2)
+  -v, --v Level                                             number for the log level verbosity
+      --vmodule moduleSpec                                  comma-separated list of pattern=N settings for file-filtered logging
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>V0.16-Docs: webhook CLI reference</title>
+      <link>https://cert-manager.io/v0.16-docs/cli/webhook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v0.16-docs/cli/webhook/</guid>
+      <description>
+        
+        
+        &lt;pre&gt;&lt;code&gt;Webhook component providing API validation, mutation and conversion functionality for cert-manager (canary) ()
+
+Usage:
+  webhook [flags]
+
+Flags:
+      --add_dir_header                               If true, adds the file directory to the header
+      --alsologtostderr                              log to standard error as well as files
+      --dynamic-serving-ca-secret-name string        name of the secret used to store the CA that signs serving certificates certificates
+      --dynamic-serving-ca-secret-namespace string   namespace of the secret used to store the CA that signs serving certificates
+      --dynamic-serving-dns-names strings            DNS names that should be present on certificates generated by the dynamic serving CA
+      --healthz-port int                             port number to listen on for insecure healthz connections (default 6080)
+  -h, --help                                         help for webhook
+      --kubeconfig string                            optional path to the kubeconfig used to connect to the apiserver. If not specified, in-cluster-config will be used
+      --log-flush-frequency duration                 Maximum number of seconds between log flushes (default 5s)
+      --log_backtrace_at traceLocation               when logging hits line file:N, emit a stack trace (default :0)
+      --log_dir string                               If non-empty, write log files in this directory
+      --log_file string                              If non-empty, use this log file
+      --log_file_max_size uint                       Defines the maximum size a log file can grow to. Unit is megabytes. If the value is 0, the maximum file size is unlimited. (default 1800)
+      --logtostderr                                  log to standard error instead of files (default true)
+      --secure-port int                              port number to listen on for secure TLS connections (default 6443)
+      --skip_headers                                 If true, avoid header prefixes in the log messages
+      --skip_log_headers                             If true, avoid headers when opening log files
+      --stderrthreshold severity                     logs at or above this threshold go to stderr (default 2)
+      --tls-cert-file string                         path to the file containing the TLS certificate to serve with
+      --tls-cipher-suites strings                    Comma-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be use.  Possible values: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_RSA_WITH_3DES_EDE_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_RC4_128_SHA
+      --tls-min-version string                       Minimum TLS version supported. Possible values: VersionTLS10, VersionTLS11, VersionTLS12, VersionTLS13
+      --tls-private-key-file string                  path to the file containing the TLS private key to serve with
+  -v, --v Level                                      number for the log level verbosity
+      --vmodule moduleSpec                           comma-separated list of pattern=N settings for file-filtered logging
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

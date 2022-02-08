@@ -1,0 +1,610 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cert-manager – Concepts</title>
+    <link>https://cert-manager.io/v1.2-docs/concepts/</link>
+    <description>Recent content in Concepts on cert-manager</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	  <atom:link href="https://cert-manager.io/v1.2-docs/concepts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>V1.2-Docs: Issuer</title>
+      <link>https://cert-manager.io/v1.2-docs/concepts/issuer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.2-docs/concepts/issuer/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;code&gt;Issuers&lt;/code&gt;, and &lt;code&gt;ClusterIssuers&lt;/code&gt;, are Kubernetes resources that represent
+certificate authorities (CAs) that are able to generate signed certificates by honoring
+certificate signing requests. All cert-manager certificates require a referenced
+issuer that is in a ready condition to attempt to honor the request.&lt;/p&gt;
+&lt;p&gt;An example of an &lt;code&gt;Issuer&lt;/code&gt; type is &lt;code&gt;CA&lt;/code&gt;. A simple &lt;code&gt;CA&lt;/code&gt; &lt;code&gt;Issuer&lt;/code&gt; is as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca-issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;mesh-system&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ca&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;secretName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca-key-pair&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is a simple &lt;code&gt;Issuer&lt;/code&gt; that will sign certificates based on a private key.
+The certificate stored in the secret &lt;code&gt;ca-key-pair&lt;/code&gt; can then be used to trust
+newly signed certificates by this &lt;code&gt;Issuer&lt;/code&gt; in a Public Key Infrastructure (PKI)
+system.&lt;/p&gt;
+&lt;h2 id=&#34;namespaces&#34;&gt;Namespaces&lt;/h2&gt;
+&lt;p&gt;An &lt;code&gt;Issuer&lt;/code&gt; is a namespaced resource, and it is not possible to issue
+certificates from an &lt;code&gt;Issuer&lt;/code&gt; in a different namespace. This means you will need
+to create an &lt;code&gt;Issuer&lt;/code&gt; in each namespace you wish to obtain &lt;code&gt;Certificates&lt;/code&gt; in.&lt;/p&gt;
+&lt;p&gt;If you want to create a single &lt;code&gt;Issuer&lt;/code&gt; that can be consumed in multiple
+namespaces, you should consider creating a &lt;code&gt;ClusterIssuer&lt;/code&gt; resource. This is
+almost identical to the &lt;code&gt;Issuer&lt;/code&gt; resource, however is non-namespaced so it
+can be used to issue &lt;code&gt;Certificates&lt;/code&gt; across all namespaces.&lt;/p&gt;
+&lt;h2 id=&#34;supported-issuers&#34;&gt;Supported Issuers&lt;/h2&gt;
+&lt;p&gt;cert-manager supports a number of &amp;lsquo;in-tree&amp;rsquo;, as well as &amp;lsquo;out-of-tree&amp;rsquo; &lt;code&gt;Issuer&lt;/code&gt;
+types. An exhaustive list of these &lt;code&gt;Issuer&lt;/code&gt; types can be found in the
+cert-manager &lt;a href=&#34;../../configuration/&#34;&gt;configuration documentation&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.2-Docs: Certificate</title>
+      <link>https://cert-manager.io/v1.2-docs/concepts/certificate/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.2-docs/concepts/certificate/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager has the concept of &lt;code&gt;Certificates&lt;/code&gt; that define a desired X.509
+certificate which will be renewed and kept up to date. A &lt;code&gt;Certificate&lt;/code&gt; is a
+namespaced resource that references an &lt;code&gt;Issuer&lt;/code&gt; or &lt;code&gt;ClusterIssuer&lt;/code&gt; that
+determine what will be honoring the certificate request.&lt;/p&gt;
+&lt;p&gt;When a &lt;code&gt;Certificate&lt;/code&gt; is created, a corresponding &lt;code&gt;CertificateRequest&lt;/code&gt; resource
+is created by cert-manager containing the encoded X.509 certificate request,
+&lt;code&gt;Issuer&lt;/code&gt; reference, and other options based upon the specification of the
+&lt;code&gt;Certificate&lt;/code&gt; resource.&lt;/p&gt;
+&lt;p&gt;Here is one such example of a &lt;code&gt;Certificate&lt;/code&gt; resource.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Certificate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;acme-crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;secretName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;acme-crt-secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dnsNames&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;foo.example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;bar.example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;issuerRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;letsencrypt-prod&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# We can reference ClusterIssuers by changing the kind here.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The default value is Issuer (i.e. a locally namespaced Issuer)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;group&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This &lt;code&gt;Certificate&lt;/code&gt; will tell cert-manager to attempt to use the &lt;code&gt;Issuer&lt;/code&gt; named
+&lt;code&gt;letsencrypt-prod&lt;/code&gt; to obtain a certificate key pair for the &lt;code&gt;foo.example.com&lt;/code&gt;
+and &lt;code&gt;bar.example.com&lt;/code&gt; domains. If successful, resulting TLS key and certificate
+will be stored in a secret named &lt;code&gt;acme-crt-secret&lt;/code&gt;, with keys of &lt;code&gt;tls.key&lt;/code&gt;, and
+&lt;code&gt;tls.crt&lt;/code&gt; respectively. This secret will live in the same namespace as the
+&lt;code&gt;Certificate&lt;/code&gt; resource.&lt;/p&gt;
+&lt;p&gt;Additionally, if the Certificate Authority is known, the corresponding CA
+certificate will be stored in the secret with key &lt;code&gt;ca.crt&lt;/code&gt;. For example, with
+the ACME issuer, the CA is not known and &lt;code&gt;ca.crt&lt;/code&gt; will not exist in
+&lt;code&gt;acme-crt-secret&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;When a certificate is issued by intermediates of the CA and the &lt;code&gt;Issuer&lt;/code&gt; knows the
+intermediates, the content of &lt;code&gt;tls.crt&lt;/code&gt; will be a resulting certificate followed by
+a certificate chain. The certificate chain doesn&amp;rsquo;t include a root CA certificate, as
+it is stored in &lt;code&gt;ca.crt&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This format is used as it allows TLS implementations to validate the leaf certificate
+as long as the root CA is already trusted. During the TLS handshake, peers construct
+a full trust chain by checking the issuer of each certificate until they end up at a
+root in their trust store. If the intermediates aren&amp;rsquo;t sent along with the leaf,
+there&amp;rsquo;s no way to know that the issuing CA was signed by the root, and the
+certificate won&amp;rsquo;t be trusted.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;dnsNames&lt;/code&gt; field specifies a list of &lt;a href=&#34;https://en.wikipedia.org/wiki/Subject_Alternative_Name&#34;&gt;&lt;code&gt;Subject Alternative Names&lt;/code&gt;&lt;/a&gt; to be associated
+with the certificate.&lt;/p&gt;
+&lt;p&gt;The referenced &lt;code&gt;Issuer&lt;/code&gt; must exist in the same namespace as the &lt;code&gt;Certificate&lt;/code&gt;.
+A &lt;code&gt;Certificate&lt;/code&gt; can alternatively reference a &lt;code&gt;ClusterIssuer&lt;/code&gt; which is
+non-namespaced and so can be referenced from any namespace.&lt;/p&gt;
+&lt;p&gt;You can read more on how to configure your &lt;code&gt;Certificate&lt;/code&gt; resources
+&lt;a href=&#34;../../usage/certificate/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.2-Docs: CertificateRequest</title>
+      <link>https://cert-manager.io/v1.2-docs/concepts/certificaterequest/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.2-docs/concepts/certificaterequest/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;CertificateRequest&lt;/code&gt; is a namespaced resource in cert-manager that is used
+to request X.509 certificates from an &lt;a href=&#34;../issuer/&#34;&gt;&lt;code&gt;Issuer&lt;/code&gt;&lt;/a&gt;. The resource
+contains a base64 encoded string of a PEM encoded certificate request which is
+sent to the referenced issuer. A successful issuance will return a signed
+certificate, based on the certificate signing request. &lt;code&gt;CertificateRequests&lt;/code&gt; are
+typically consumed and managed by controllers or other systems and should not be
+used by humans - unless specifically needed.&lt;/p&gt;
+&lt;p&gt;A simple &lt;code&gt;CertificateRequest&lt;/code&gt; looks like the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;CertificateRequest&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;my-ca-cr&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;request&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQzNqQ0NBY1lDQVFBd2daZ3hDekFKQmdOVkJBWVRBbHBhTVE4d0RRWURWUVFJREFaQmNHOXNiRzh4RFRBTApCZ05WQkFjTUJFMXZiMjR4RVRBUEJnTlZCQW9NQ0VwbGRITjBZV05yTVJVd0V3WURWUVFMREF4alpYSjBMVzFoCmJtRm5aWEl4RVRBUEJnTlZCQU1NQ0dwdmMyaDJZVzVzTVN3d0tnWUpLb1pJaHZjTkFRa0JGaDFxYjNOb2RXRXUKZG1GdWJHVmxkWGRsYmtCcVpYUnpkR0ZqYXk1cGJ6Q0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQwpBUW9DZ2dFQkFLd01tTFhuQkNiRStZdTIvMlFtRGsxalRWQ3BvbHU3TlZmQlVFUWl1bDhFMHI2NFBLcDRZQ0c5Cmx2N2kwOHdFMEdJQUgydnJRQmxVd3p6ZW1SUWZ4YmQvYVNybzRHNUFBYTJsY2NMaFpqUlh2NEVMaER0aVg4N3IKaTQ0MWJ2Y01OM0ZPTlRuczJhRkJYcllLWGxpNG4rc0RzTEVuZmpWdXRiV01Zeis3M3ptaGZzclRJUjRzTXo3cQpmSzM2WFM4UkRjNW5oVVcyYU9BZ3lnbFZSOVVXRkxXNjNXYXVhcHg2QUpBR1RoZnJYdVVHZXlZUUVBSENxZmZmCjhyOEt3YTFYK1NwYm9YK1ppSVE0Nk5jQ043OFZnL2dQVHNLZmphZURoNWcyNlk1dEVidHd3MWdRbWlhK0MyRHIKWHpYNU13RzJGNHN0cG5kUnRQckZrU1VnMW1zd0xuc0NBd0VBQWFBQU1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQgpBUUFXR0JuRnhaZ0gzd0N3TG5IQ0xjb0l5RHJrMUVvYkRjN3BJK1VVWEJIS2JBWk9IWEFhaGJ5RFFLL2RuTHN3CjJkZ0J3bmlJR3kxNElwQlNxaDBJUE03eHk5WjI4VW9oR3piN0FVakRJWHlNdmkvYTJyTVhjWjI1d1NVQmxGc28Kd005dE1QU2JwcEVvRERsa3NsOUIwT1BPdkFyQ0NKNnZGaU1UbS9wMUJIUWJSOExNQW53U0lUYVVNSFByRzJVMgpjTjEvRGNMWjZ2enEyeENjYVoxemh2bzBpY1VIUm9UWmV1ZEp6MkxmR0VHM1VOb2ppbXpBNUZHd0RhS3BySWp3ClVkd1JmZWZ1T29MT1dNVnFNbGRBcTlyT24wNHJaT3Jnak1HSE9tTWxleVdPS1AySllhaDNrVDdKU01zTHhYcFYKV0ExQjRsLzFFQkhWeGlKQi9Zby9JQWVsCi0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo=&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;isCA&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;usages&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;signing&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;digital signature&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;server auth&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;duration&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;90d&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;issuerRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca-issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# We can reference ClusterIssuers by changing the kind here.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The default value is Issuer (i.e. a locally namespaced Issuer)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;group&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This &lt;code&gt;CertificateRequest&lt;/code&gt; will make cert-manager attempt to request the &lt;code&gt;Issuer&lt;/code&gt;
+&lt;code&gt;ca-issuer&lt;/code&gt; in the default issuer group &lt;code&gt;cert-manager.io&lt;/code&gt;, return a
+certificate based upon the certificate signing request. Other groups can be
+specified inside the &lt;code&gt;issuerRef&lt;/code&gt; which will change the targeted issuer to other
+external, third party issuers you may have installed.&lt;/p&gt;
+&lt;p&gt;The resource also exposes the option for stating the certificate as CA, Key
+Usages, and requested validity duration.&lt;/p&gt;
+&lt;p&gt;A successful issuance of the certificate signing request will cause an update to
+the resource, setting the status with the signed certificate, the CA of the
+certificate (if available), and setting the &lt;code&gt;Ready&lt;/code&gt; condition to &lt;code&gt;True&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Whether issuance of the certificate signing request was successful or not, a retry of the
+issuance will &lt;em&gt;not&lt;/em&gt; happen. It is the responsibility of some other controller to
+manage the logic and life cycle of &lt;code&gt;CertificateRequests&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;conditions&#34;&gt;Conditions&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;CertificateRequests&lt;/code&gt; have a set of strongly defined conditions that should be
+used and relied upon by controllers or services to make decisions on what
+actions to take next on the resource. Each condition consists of the pair
+&lt;code&gt;Ready&lt;/code&gt; - a boolean value, and &lt;code&gt;Reason&lt;/code&gt; - a string. The set of values and
+meanings are as follows:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Ready&lt;/th&gt;
+&lt;th&gt;Reason&lt;/th&gt;
+&lt;th&gt;Condition Meaning&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;False&lt;/td&gt;
+&lt;td&gt;Pending&lt;/td&gt;
+&lt;td&gt;The &lt;code&gt;CertificateRequest&lt;/code&gt; is currently pending, waiting for some other operation to take place. This could be that the &lt;code&gt;Issuer&lt;/code&gt; does not exist yet or the &lt;code&gt;Issuer&lt;/code&gt; is in the process of issuing a certificate.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;False&lt;/td&gt;
+&lt;td&gt;Failed&lt;/td&gt;
+&lt;td&gt;The certificate has failed to be issued - either the returned certificate failed to be decoded or an instance of the referenced issuer used for signing failed. No further action will be taken on the &lt;code&gt;CertificateRequest&lt;/code&gt; by it&amp;rsquo;s controller.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;True&lt;/td&gt;
+&lt;td&gt;Issued&lt;/td&gt;
+&lt;td&gt;A signed certificate has been successfully issued by the referenced &lt;code&gt;Issuer&lt;/code&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.2-Docs: ACME Orders and Challenges</title>
+      <link>https://cert-manager.io/v1.2-docs/concepts/acme-orders-challenges/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.2-docs/concepts/acme-orders-challenges/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager supports requesting certificates from ACME servers, including from
+&lt;a href=&#34;https://letsencrypt.org/&#34;&gt;Let&amp;rsquo;s Encrypt&lt;/a&gt;, with use of the &lt;a href=&#34;../../configuration/acme/&#34;&gt;ACME
+Issuer&lt;/a&gt;. These certificates are typically trusted on
+the public Internet by most computers. To successfully request a certificate,
+cert-manager must solve ACME Challenges which are completed in order to prove
+that the client owns the DNS addresses that are being requested.&lt;/p&gt;
+&lt;p&gt;In order to complete these challenges, cert-manager introduces two
+&lt;code&gt;CustomResource&lt;/code&gt; types; &lt;code&gt;Orders&lt;/code&gt; and &lt;code&gt;Challenges&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;orders&#34;&gt;Orders&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Order&lt;/code&gt; resources are used by the ACME issuer to manage the lifecycle of an ACME
+&amp;lsquo;order&amp;rsquo; for a signed TLS certificate.  More details on ACME orders and domain
+validation can be found on the Let&amp;rsquo;s Encrypt website
+&lt;a href=&#34;https://letsencrypt.org/how-it-works/&#34;&gt;here&lt;/a&gt;. An order represents a single
+certificate request which will be created automatically once a new
+&lt;a href=&#34;../certificaterequest/&#34;&gt;&lt;code&gt;CertificateRequest&lt;/code&gt;&lt;/a&gt; resource referencing an ACME
+issuer has been created. &lt;code&gt;CertificateRequest&lt;/code&gt; resources are created
+automatically by cert-manager once a &lt;a href=&#34;../certificate/&#34;&gt;&lt;code&gt;Certificate&lt;/code&gt;&lt;/a&gt; resource
+is created, has its specification changed, or needs renewal.&lt;/p&gt;
+&lt;p&gt;As an end-user, you will never need to manually create an &lt;code&gt;Order&lt;/code&gt; resource.
+Once created, an &lt;code&gt;Order&lt;/code&gt; cannot be changed. Instead, a new &lt;code&gt;Order&lt;/code&gt; resource must
+be created.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;Order&lt;/code&gt; resource encapsulates multiple ACME &amp;lsquo;challenges&amp;rsquo; for that &amp;lsquo;order&amp;rsquo;,
+and as such, will manage one or more &lt;code&gt;Challenge&lt;/code&gt; resources.&lt;/p&gt;
+&lt;h2 id=&#34;challenges&#34;&gt;Challenges&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Challenge&lt;/code&gt; resources are used by the ACME issuer to manage the lifecycle of an
+ACME &amp;lsquo;challenge&amp;rsquo; that must be completed in order to complete an &amp;lsquo;authorization&amp;rsquo;
+for a single DNS name/identifier.&lt;/p&gt;
+&lt;p&gt;When an &lt;code&gt;Order&lt;/code&gt; resource is created, the order controller will create
+&lt;code&gt;Challenge&lt;/code&gt; resources for each DNS name that is being authorized with the ACME
+server.&lt;/p&gt;
+&lt;p&gt;As an end-user, you will never need to manually create a &lt;code&gt;Challenge&lt;/code&gt; resource.
+Once created, a &lt;code&gt;Challenge&lt;/code&gt; cannot be changed. Instead, a new &lt;code&gt;Challenge&lt;/code&gt;
+resource must be created.&lt;/p&gt;
+&lt;h3 id=&#34;challenge-lifecycle&#34;&gt;Challenge Lifecycle&lt;/h3&gt;
+&lt;p&gt;After a &lt;code&gt;Challenge&lt;/code&gt; resource has been created, it will be initially queued for
+processing. Processing will not begin until the challenge has been &amp;lsquo;scheduled&amp;rsquo;
+to start.  This scheduling process prevents too many challenges being attempted
+at once, or multiple challenges for the same DNS name being attempted at once.
+For more information on how challenges are scheduled, read the &lt;a href=&#34;./#challenge-scheduling&#34;&gt;challenge
+scheduling&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once a challenge has been scheduled, it will first be &amp;lsquo;synced&amp;rsquo; with the ACME
+server in order to determine its current state. If the challenge is already
+valid, its &amp;lsquo;state&amp;rsquo; will be updated to &amp;lsquo;valid&amp;rsquo;, and will also set
+&lt;code&gt;status.processing = false&lt;/code&gt; to &amp;lsquo;unschedule&amp;rsquo; itself.&lt;/p&gt;
+&lt;p&gt;If the challenge is still &amp;lsquo;pending&amp;rsquo;, the challenge controller will &amp;lsquo;present&amp;rsquo; the
+challenge using the configured solver, one of HTTP01 or DNS01.  Once the
+challenge has been &amp;lsquo;presented&amp;rsquo;, it will set &lt;code&gt;status.presented = true&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Once &amp;lsquo;presented&amp;rsquo;, the challenge controller will perform a &amp;lsquo;self check&amp;rsquo; to
+ensure that the challenge has &amp;lsquo;propagated&amp;rsquo; (i.e. the authoritative DNS servers
+have been updated to respond correctly, or the changes to the ingress resources
+have been observed and in-use by the ingress controller).&lt;/p&gt;
+&lt;p&gt;If the self check fails, cert-manager will retry the self check with a fixed 10
+second retry interval. Challenges that do not ever complete the self check will
+continue retrying until the user intervenes by either retrying the &lt;code&gt;Order&lt;/code&gt; (by
+deleting the &lt;code&gt;Order&lt;/code&gt; resource) or amending the associated &lt;code&gt;Certificate&lt;/code&gt; resource
+to resolve any configuration errors.&lt;/p&gt;
+&lt;p&gt;Once the self check is passing, the ACME &amp;lsquo;authorization&amp;rsquo; associated with this
+challenge will be &amp;lsquo;accepted&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;The final state of the authorization after accepting it will be copied across to
+the Challenge&amp;rsquo;s &lt;code&gt;status.state&lt;/code&gt; field, as well as the &amp;lsquo;error reason&amp;rsquo; if an error
+occurred whilst the ACME server attempted to validate the challenge.&lt;/p&gt;
+&lt;p&gt;Once a Challenge has entered the &lt;code&gt;valid&lt;/code&gt;, &lt;code&gt;invalid&lt;/code&gt;, &lt;code&gt;expired&lt;/code&gt; or &lt;code&gt;revoked&lt;/code&gt;
+state, it will set &lt;code&gt;status.processing = false&lt;/code&gt; to prevent any further processing
+of the ACME challenge, and to allow another challenge to be scheduled if there
+is a backlog of challenges to complete.&lt;/p&gt;
+&lt;h3 id=&#34;challenge-scheduling&#34;&gt;Challenge Scheduling&lt;/h3&gt;
+&lt;p&gt;Instead of attempting to process all challenges at once, challenges are
+&amp;lsquo;scheduled&amp;rsquo; by cert-manager.&lt;/p&gt;
+&lt;p&gt;This scheduler applies a cap on the maximum number of simultaneous challenges
+as well as disallows two challenges for the same DNS name and solver type
+(&lt;code&gt;HTTP01&lt;/code&gt; or &lt;code&gt;DNS01&lt;/code&gt;) to be completed at once.&lt;/p&gt;
+&lt;p&gt;The maximum number of challenges that can be processed at a time is 60 as of
+&lt;a href=&#34;https://github.com/jetstack/cert-manager/blob/ddff78f011558e64186d61f7c693edced1496afa/pkg/controller/acmechallenges/scheduler/scheduler.go#L31-L33&#34;&gt;&lt;code&gt;ddff78&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.2-Docs: Webhook</title>
+      <link>https://cert-manager.io/v1.2-docs/concepts/webhook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.2-docs/concepts/webhook/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager makes use of extending the Kubernetes API server using a Webhook
+server to provide &lt;a href=&#34;https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/&#34;&gt;dynamic admission
+control&lt;/a&gt;
+over cert-manager resources. This means that cert-manager benefits from most of
+the same behavior that core Kubernetes resource have. The webhook has three
+main functions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook&#34;&gt;&lt;code&gt;ValidatingAdmissionWebhook&lt;/code&gt;&lt;/a&gt;:
+Ensures that when cert-manager resources are created or updated, they conform
+to the rules of the API. This validation is more in depth than for example
+ensuring resources conform to the OpenAPI schema, but instead contains logic such as
+not allowing to specify more than one &lt;code&gt;Issuer&lt;/code&gt; type per &lt;code&gt;Issuer&lt;/code&gt; resource. The
+validating admission is always called and will respond with a success or
+failed response.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook&#34;&gt;&lt;code&gt;MutatingAdmissionWebhook&lt;/code&gt;&lt;/a&gt;:
+Changes the contents of resources during create and update operations, for
+example to set default values.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#webhook-conversion&#34;&gt;&lt;code&gt;CustomResourceConversionWebhook&lt;/code&gt;&lt;/a&gt;:
+The webhook is also responsible for implementing a conversion over versions
+in the cert-manager &lt;code&gt;CustomResources&lt;/code&gt; (&lt;code&gt;cert-manager.io&lt;/code&gt;). This means that
+multiple API versions can be supported simultaneously; from &lt;code&gt;v1alpha2&lt;/code&gt; through to &lt;code&gt;v1&lt;/code&gt;.
+This makes it possible to rely on a particular version of our
+configuration schema.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The webhook component is deployed as another pod that runs alongside the main
+cert-manager controller and CA injector components.&lt;/p&gt;
+&lt;p&gt;In order for the API server to communicate with the webhook component, the
+webhook requires a TLS certificate that the apiserver is configured to trust.
+This is created by the &lt;a href=&#34;../ca-injector/&#34;&gt;&lt;code&gt;cainjector&lt;/code&gt;&lt;/a&gt; and is implemented by the
+following two Secrets:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;secret/cert-manager-webhook-ca&lt;/code&gt;: A self-signed root CA certificate which is
+used to sign certificates for the webhook pod.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;secret/cert-manager-webhook-tls&lt;/code&gt;: A TLS certificate issued by the root CA
+above, served by the webhook.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;known-problems-and-solutions&#34;&gt;Known Problems and Solutions&lt;/h2&gt;
+&lt;h3 id=&#34;webhook-connection-problems-on-gke-private-cluster&#34;&gt;Webhook connection problems on GKE private cluster&lt;/h3&gt;
+&lt;p&gt;If errors occur around the webhook but the webhook is running then the webhook
+is most likely not reachable from the API server. In this case, ensure that the
+API server can communicate with the webhook by following the &lt;a href=&#34;../../installation/compatibility/#gke&#34;&gt;GKE private
+cluster explanation&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;webhook-connection-problems-on-aws-eks&#34;&gt;Webhook connection problems on AWS EKS&lt;/h3&gt;
+&lt;p&gt;When using a custom CNI (such as Weave or Calico) on EKS, the webhook cannot be reached by cert-manager.
+This happens because the control plane cannot be configured to run on a custom CNI on EKS,
+so the CNIs differ between control plane and worker nodes.
+The solution is to &lt;a href=&#34;../../installation/compatibility/#aws-eks&#34;&gt;run the webhook in the host network&lt;/a&gt; so it can be reached by cert-manager.&lt;/p&gt;
+&lt;h3 id=&#34;webhook-connection-problems-shortly-after-cert-manager-installation&#34;&gt;Webhook connection problems shortly after cert-manager installation&lt;/h3&gt;
+&lt;p&gt;When you first install cert-manager, it will take a few seconds before the cert-manager API is usable.
+This is because the cert-manager API requires the cert-manager webhook server, which takes some time to start up.
+Here&amp;rsquo;s why:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The webhook server performs a leader election at startup which may take a few seconds.&lt;/li&gt;
+&lt;li&gt;The webhook server may take a few seconds to start up and to generate its self-signed CA and serving certificate and to publish those to a Secret.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cainjector&lt;/code&gt; performs a leader election at start up which can take a few seconds.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cainjector&lt;/code&gt;, once started, will take a few seconds to update the &lt;code&gt;caBundle&lt;/code&gt; in all the webhook configurations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For these reasons, after installing cert-manager and when performing post-installation cert-manager API operations,
+you will need to check for temporary API configuration errors and retry.&lt;/p&gt;
+&lt;p&gt;You could also add a post-installation check which performs &lt;code&gt;kubectl --dry-run&lt;/code&gt; operations on the cert-manager API.
+Or you could add a post-installation check which automatically retries the &lt;a href=&#34;../../installation/kubernetes/#verifying-the-installation&#34;&gt;Installation Verification&lt;/a&gt; steps until they succeed.&lt;/p&gt;
+&lt;h2 id=&#34;diagnosing-other-webhook-problems&#34;&gt;Diagnosing Other Webhook Problems&lt;/h2&gt;
+&lt;h3 id=&#34;check-the-webhook-tls-certificates&#34;&gt;Check the webhook TLS certificates&lt;/h3&gt;
+&lt;p&gt;The Kubernetes API server will load the CA content from the webhook configuration and use that to verify the serving certificate presented by the webhook server, when the TLS connection is established.&lt;/p&gt;
+&lt;p&gt;Get the webhook configuration and check the &lt;code&gt;caBundle&lt;/code&gt; value.
+For example, to check the &lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get validatingwebhookconfigurations cert-manager-webhook -o yaml | grep caBundle
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;NOTE: If the value is empty there may be a problem with &lt;code&gt;cainjector&lt;/code&gt;.
+The &lt;code&gt;caBundle&lt;/code&gt; value is set by &lt;a href=&#34;../ca-injector/#injecting-ca-data-from-a-secret-resource&#34;&gt;&lt;code&gt;cainjector&lt;/code&gt; Injecting CA data from a Secret resource&lt;/a&gt;.
+Check that the &lt;code&gt;cainjector&lt;/code&gt; Pod is running and check the &lt;code&gt;cainjector&lt;/code&gt; logs for errors.&lt;/p&gt;
+&lt;p&gt;Next check that the &lt;code&gt;caBundle&lt;/code&gt; has a valid CA certificate.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo &amp;lt;CA BUNDLE VALUE&amp;gt; | base64 -d  | openssl x509 -in - -noout -text
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Then compare that with the certificates that are being used by the webhook server:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl -n cert-manager get secrets cert-manager-webhook-ca  -o yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You should be able to decode the &lt;code&gt;ca.crt&lt;/code&gt; X.509 content from that secret and see that the CA matches that which we saw in the webhook configuration.&lt;/p&gt;
+&lt;p&gt;You should also find that the &lt;code&gt;tls.crt&lt;/code&gt; content has a certificate signed by that same CA.&lt;/p&gt;
+&lt;p&gt;NOTE: This process can also be repeated for the &lt;code&gt;caBundle&lt;/code&gt; field in &lt;code&gt;MutatingWebhookConfiguration&lt;/code&gt; and &lt;code&gt;CustomResourceDefinition&lt;/code&gt; resources.&lt;/p&gt;
+&lt;h4 id=&#34;temporarily-work-around-webhook-tls-problems&#34;&gt;Temporarily work around webhook TLS problems&lt;/h4&gt;
+&lt;p&gt;If necessary, you can manually add / update the TLS certificates in the &lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt;, &lt;code&gt;MutatingWebhookConfiguration&lt;/code&gt;,
+and in each of the cert-manager &lt;code&gt;CustomResourceDefinition&lt;/code&gt; resources.
+Add the &lt;code&gt;caBundle&lt;/code&gt; value, copied from the &lt;code&gt;ca.crt&lt;/code&gt; field of the &lt;code&gt;cert-manager-webhook-ca&lt;/code&gt; Secret.&lt;/p&gt;
+&lt;p&gt;NOTE: This should only be used as a temporary measure, while you investigate the root cause of  &lt;code&gt;cainjector&lt;/code&gt; failing to update the fields automatically.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.2-Docs: CA Injector</title>
+      <link>https://cert-manager.io/v1.2-docs/concepts/ca-injector/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.2-docs/concepts/ca-injector/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;code&gt;cainjector&lt;/code&gt; helps to configure the CA certificates for:
+&lt;a href=&#34;https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook&#34;&gt;Mutating Webhooks&lt;/a&gt;,
+&lt;a href=&#34;https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook&#34;&gt;Validating Webhooks&lt;/a&gt;, and
+&lt;a href=&#34;https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#webhook-conversion&#34;&gt;Conversion Webhooks&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In particular, &lt;code&gt;cainjector&lt;/code&gt; populates the &lt;code&gt;caBundle&lt;/code&gt; field of three API types:
+&lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt;,
+&lt;code&gt;MutatingWebhookConfiguration&lt;/code&gt;, and
+&lt;code&gt;CustomResourceDefinition&lt;/code&gt;.
+These APIs are used to configure how the Kubernetes API server connects to webhooks.
+This &lt;code&gt;caBundle&lt;/code&gt; data is loaded by the Kubernetes API server and used to verify the serving certificates of webhook API servers.
+We will refer to these three API types as the &lt;em&gt;injectable&lt;/em&gt; resources.&lt;/p&gt;
+&lt;p&gt;An &lt;em&gt;injectable&lt;/em&gt; resource MUST have one of these annotations:
+&lt;code&gt;cert-manager.io/inject-ca-from&lt;/code&gt;,
+&lt;code&gt;cert-manager.io/inject-ca-from-secret&lt;/code&gt;, or
+&lt;code&gt;cert-manager.io/inject-apiserver-ca&lt;/code&gt;, depending on the injection &lt;em&gt;source&lt;/em&gt;.
+This is explained in more detail below.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cainjector&lt;/code&gt; copies CA data from one of three &lt;em&gt;sources&lt;/em&gt;:
+a Kubernetes &lt;code&gt;Secret&lt;/code&gt;,
+a cert-manager &lt;code&gt;Certificate&lt;/code&gt;, or from
+the Kubernetes API server CA certificate (which &lt;code&gt;cainjector&lt;/code&gt; itself uses to verify its TLS connection to the Kubernetes API server).&lt;/p&gt;
+&lt;p&gt;If the &lt;em&gt;source&lt;/em&gt; is a Kubernetes &lt;code&gt;Secret&lt;/code&gt;, that resource MUST also have an &lt;code&gt;cert-manager.io/allow-direct-injection: &amp;quot;true&amp;quot;&lt;/code&gt; annotation.
+The three &lt;em&gt;source&lt;/em&gt; types are explained in more detail below.&lt;/p&gt;
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
+&lt;p&gt;Here are examples demonstrating how to use the three &lt;code&gt;cainjector&lt;/code&gt; &lt;em&gt;sources&lt;/em&gt;.
+In each case we use &lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt; as the &lt;em&gt;injectable&lt;/em&gt;,
+but you can substitute &lt;code&gt;MutatingWebhookConfiguration&lt;/code&gt; or &lt;code&gt;CustomResourceDefinition&lt;/code&gt; definition instead.&lt;/p&gt;
+&lt;h3 id=&#34;injecting-ca-data-from-a-certificate-resource&#34;&gt;Injecting CA data from a Certificate resource&lt;/h3&gt;
+&lt;p&gt;Here is an example of a &lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt;
+configured with the annotation &lt;code&gt;cert-manager.io/inject-ca-from&lt;/code&gt;,
+which will make &lt;code&gt;cainjector&lt;/code&gt; populate the &lt;code&gt;caBundle&lt;/code&gt; field using CA data from a cert-manager &lt;code&gt;Certificate&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;NOTE: This example does not deploy a webhook server,
+it only deploys a partial webhook configuration,
+but it should be sufficient to help you understand what &lt;code&gt;cainjector&lt;/code&gt; does:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Namespace&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;---&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;admissionregistration.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ValidatingWebhookConfiguration&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/inject-ca-from&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example1/webhook1-certificate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;webhooks&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook1.example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;admissionReviewVersions&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;clientConfig&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;service&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;/validate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;443&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sideEffects&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;---&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Certificate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook1-certificate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;secretName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook1-certificate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;dnsNames&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;webhook1.example1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;issuerRef&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;selfsigned&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;---&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cert-manager.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Issuer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;selfsigned&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selfSigned&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;{}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You should find that the &lt;code&gt;caBundle&lt;/code&gt; value is now identical to the CA value in the &lt;code&gt;Secret&lt;/code&gt; for the &lt;code&gt;Certificate&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get validatingwebhookconfigurations.admissionregistration.k8s.io webhook1 -o yaml | grep caBundle
+kubectl -n example get secret webhook1-certificate  -o yaml | grep ca.crt
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And after a short time, the Kubernetes API server will read that new &lt;code&gt;caBundle&lt;/code&gt; value and use it to verify a TLS connection to the webhook server.&lt;/p&gt;
+&lt;h3 id=&#34;injecting-ca-data-from-a-secret-resource&#34;&gt;Injecting CA data from a Secret resource&lt;/h3&gt;
+&lt;p&gt;Here is another example of a &lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt;
+this time configured with the annotation &lt;code&gt;cert-manager.io/inject-ca-from-secret&lt;/code&gt;,
+which will make &lt;code&gt;cainjector&lt;/code&gt; populate the &lt;code&gt;caBundle&lt;/code&gt; field using CA data from a Kubernetes &lt;code&gt;Secret&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;NOTE: This example does not deploy a webhook server,
+it only deploys a partial webhook configuration,
+but it should be sufficient to help you understand what &lt;code&gt;cainjector&lt;/code&gt; does:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Namespace&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;---&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;admissionregistration.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ValidatingWebhookConfiguration&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/inject-ca-from-secret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example2/example-ca&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;webhooks&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook2.example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;admissionReviewVersions&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;clientConfig&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;service&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;/validate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;443&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sideEffects&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;---&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Secret&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example-ca&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example2&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/allow-direct-injection&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;kubernetes.io/tls&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ca.crt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM5akNDQWQ2Z0F3SUJBZ0lRTkdJZ24yM3BQYVpNbk9MUjJnVmZHakFOQmdrcWhraUc5dzBCQVFzRkFEQVYKTVJNd0VRWURWUVFERXdwRmVHRnRjR3hsSUVOQk1CNFhEVEl3TURreU5ERTFOREEwTVZvWERUSXdNVEl5TXpFMQpOREEwTVZvd0ZURVRNQkVHQTFVRUF4TUtSWGhoYlhCc1pTQkRRVENDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFECmdnRVBBRENDQVFvQ2dnRUJBS2F3RzVoMzlreHdyNEl0WCtHaDNYVWQrdTVJc2ZlSFdoTTc4TTRQTmZFeXhQMXoKRmNLN1d0MHJFMkwwNUppYmQ4ZjNpb3k5OXNnQ3I4OEw2SWxYZTB0RnkzNysxenJ4TFluR2hDQnZzZjltd0hLbgpIVTEvNERwQjROZkhPbFllNE9tbHVoNE9HdmZINU1EbDh5OWZGMjhXRXVBQ2dwdmpCUWxvRDNlVjJ5UmJvQ2kyCmtSTDJWYTFZL0FQZEpWK21VYkFvZmg0bllmUmNLRTJsSUg0RG5ZdXFPU3JaaituZUQ2M2RTSktxcHQ5K2luN2YKNHljZ2pQYU93MmdyKzhLK291QTlSQTV1VDI3SVNJcUJDcEV6elRqbVBUUWNvUTYxZGF0aDZkc1lsTEU4aWZWUwp4RWZuVEdQKy94M0FXQXR4eU5lanVuZGFXbVNFL3h5OHh0K0FxblVDQXdFQUFhTkNNRUF3RGdZRFZSMFBBUUgvCkJBUURBZ0trTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRkowNkc5eEc2V1VBTHB6T3JYaHAKV2dsTm5qMkFNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUI3ZG9CZnBLR3o4VlRQSnc0YXhpdisybzJpMHE1SQpSRzU2UE81WnhKQktZQlRROElHQmFOSm1yeGtmNTJCV0ttUGp4cXlNSGRwWjVBU00zOUJkZVUzRGtEWHp4RkgwCjM5RU12UnhIUERyMGQ4cTFFbndQT0xZY1hzNjJhYjdidE11cTJUMFNNZzRYMkY5VmNKTW5YdjlrNnA0VGZNR3MKVThCQnJhVGhUZm53ejBsWXMyblFjdzNmZjZ1bG1wWlk4K3BTak1aVDNJZHZOMFA4Y2hOdUlmUFRHWDJmSlo2NQpxcUUrelRoU3hIeXFTOTVoczhsd1lRRUhGQlVsalRnMCtQZThXL0hOSXZBOU9TYWw1U3UvdlhydmcxN04xdHVyCk5XcWRyZU5OVm1ubXMvTFJodmthWTBGblRvbFNBRkNXWS9GSDY5ZzRPcThiMHVyK3JVMHZOZFFXCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;tls.key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;tls.crt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You should find that the &lt;code&gt;caBundle&lt;/code&gt; value is now identical to the &lt;code&gt;ca.crt&lt;/code&gt; value in the &lt;code&gt;Secret&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get validatingwebhookconfigurations.admissionregistration.k8s.io webhook2  -o yaml | grep caBundle
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And after a short time, the Kubernetes API server will read that new &lt;code&gt;caBundle&lt;/code&gt; value and use it to verify a TLS connection to the webhook server.&lt;/p&gt;
+&lt;p&gt;This &lt;code&gt;Secret&lt;/code&gt; based injection mechanism can operate independently of the &lt;code&gt;Certificate&lt;/code&gt; based mechanism described earlier.
+It will work without the cert-manager CRDs installed
+and it will work if the cert-manager CRDs and associated webhook servers are not yet configured.&lt;/p&gt;
+&lt;p&gt;NOTE: For this reason, cert-manager uses the &lt;code&gt;Secret&lt;/code&gt; based injection mechanism to bootstrap its own webhook server.
+The cert-manager webhook server generates its own private key and self-signed certificate and places them in a &lt;code&gt;Secret&lt;/code&gt; when it starts up.&lt;/p&gt;
+&lt;h3 id=&#34;injecting-the-kubernetes-api-server-ca&#34;&gt;Injecting the Kubernetes API Server CA&lt;/h3&gt;
+&lt;p&gt;Here is another example of a &lt;code&gt;ValidatingWebhookConfiguration&lt;/code&gt;
+this time configured with the annotation &lt;code&gt;cert-manager.io/inject-apiserver-ca: &amp;quot;true&amp;quot;&lt;/code&gt;,
+which will make &lt;code&gt;cainjector&lt;/code&gt; populate the &lt;code&gt;caBundle&lt;/code&gt; field using the same CA certificate used by the Kubernetes API server.&lt;/p&gt;
+&lt;p&gt;NOTE: This example does not deploy a webhook server,
+it only deploys a partial webhook configuration,
+but it should be sufficient to help you understand what &lt;code&gt;cainjector&lt;/code&gt; does:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Namespace&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example3&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;---&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;admissionregistration.k8s.io/v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ValidatingWebhookConfiguration&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook3&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/inject-apiserver-ca&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;webhooks&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook3.example.com&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;admissionReviewVersions&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;clientConfig&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;service&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;webhook3&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;namespace&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;example3&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;/validate&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;443&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;sideEffects&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You should find that the &lt;code&gt;caBundle&lt;/code&gt; value is now identical to the CA used in your &lt;code&gt;KubeConfig&lt;/code&gt; file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kubectl get validatingwebhookconfigurations.admissionregistration.k8s.io webhook3 -o yaml | grep caBundle
+kubectl config  view --minify --raw | grep certificate-authority-data
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And after a short time, the Kubernetes API server will read that new &lt;code&gt;caBundle&lt;/code&gt; value and use it to verify a TLS connection to the webhook server.&lt;/p&gt;
+&lt;p&gt;NOTE: In this case you will have to ensure that your webhook is configured to serve a TLS certificate that has been signed by the Kubernetes cluster CA.
+The disadvantages of this mechanism are that: you will require access to the private key of the Kubernetes cluster CA and you will need to manually rotate the webhook certificate.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>V1.2-Docs: Project Maturity</title>
+      <link>https://cert-manager.io/v1.2-docs/concepts/project-maturity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cert-manager.io/v1.2-docs/concepts/project-maturity/</guid>
+      <description>
+        
+        
+        &lt;p&gt;cert-manager has wide adoption in the Kubernetes community with it being in use
+in both production and non-production clusters.&lt;/p&gt;
+&lt;h2 id=&#34;api&#34;&gt;API&lt;/h2&gt;
+&lt;p&gt;The cert-manager API is currently at &lt;code&gt;v1&lt;/code&gt; and is stable.&lt;/p&gt;
+&lt;h2 id=&#34;compatibility&#34;&gt;Compatibility&lt;/h2&gt;
+&lt;p&gt;cert-manager has a hard guarantee of compatibility with the current stable upstream
+Kubernetes version. Beyond this, cert-manager also aims to be compatible with
+versions down to &lt;code&gt;N-4&lt;/code&gt;, where &lt;code&gt;N&lt;/code&gt; is the current upstream version release. This
+means that if the current version is &lt;code&gt;v1.20&lt;/code&gt;, cert-manager aims to be compatible
+with versions down to &lt;code&gt;v1.16&lt;/code&gt;. This is done by running periodic end-to-end test
+jobs against each version of Kubernetes.&lt;/p&gt;
+&lt;p&gt;Versions lower than the current Kubernetes version down to &lt;code&gt;N-4&lt;/code&gt; is &lt;em&gt;not
+guaranteed&lt;/em&gt;. Although considerations will be made to ensure compatibility with as
+many versions as possible, it is sometimes required to lose compatibility in
+the interest of furthering the feature set of cert-manager and making use of
+newer features available in upstream Kubernetes.&lt;/p&gt;
+&lt;p&gt;As of cert-manager version &lt;code&gt;v1.2&lt;/code&gt;, the lowest Kubernetes version supported is
+&lt;code&gt;v1.16&lt;/code&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
