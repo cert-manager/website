@@ -66,7 +66,7 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 #### Upgrading with Server Side Apply
 
-As part of the work to [remove deprecated APIs](#removal-of-deprecated-apis) cert-manager `CustomResourceDefinition`s no longer require a conversion webhook. The related change in cert-manager `CustomResourceDefinition` specs results in invalid `CustomResourceDefinition` configs for users who are upgrading to cert-manager 1.7 using `kubectl apply --server-side=true -f <manifests>`. This can be solved either by performing the upgrade with client side apply or by manually patching the [managed fields](https://kubernetes.io/docs/reference/using-api/server-side-apply/#field-management) of cert-manager `CustomResourceDefinitions`:
+As part of the work to [remove deprecated APIs](#removal-of-deprecated-apis) cert-manager `CustomResourceDefinition`s no longer require a conversion webhook. The related change in cert-manager `CustomResourceDefinition` specs results in invalid `CustomResourceDefinition` configurations for users who are upgrading to cert-manager 1.7 using `kubectl apply --server-side=true -f <manifests>`. This can be solved either by performing the upgrade with client side apply or by manually patching the [managed fields](https://kubernetes.io/docs/reference/using-api/server-side-apply/#field-management) of cert-manager `CustomResourceDefinitions`:
 
 ```bash
 crds=("certificaterequests.cert-manager.io" "certificates.cert-manager.io" "challenges.acme.cert-manager.io" "clusterissuers.cert-manager.io" "issuers.cert-manager.io" "orders.acme.cert-manager.io")
@@ -78,7 +78,7 @@ done
 ```
 Thanks to [@stevehipwell](https://github.com/stevehipwell) for the above patch commands.
 
-See the original Github issue [cert-manager#](https://github.com/cert-manager/cert-manager/issues/4831)
+See the original GitHub issue [`cert-manager#4831`](https://github.com/cert-manager/cert-manager/issues/4831)
 
 ### Major Themes
 
