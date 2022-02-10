@@ -64,6 +64,22 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 [notes on Ingress v1 compatibility]: https://cert-manager.io/docs/installation/upgrading/ingress-class-compatibility/
 
+#### Upgrading with Server Side Apply
+
+As part of the work to [remove deprecated APIs](#removal-of-deprecated-apis) cert-manager `CustomResourceDefinition`s no longer require a conversion webhook. The related change in cert-manager `CustomResourceDefinition` specs results in invalid `CustomResourceDefinition` configs for users who are upgrading to cert-manager 1.7 using `kubectl apply --server-side=true -f <manifests>`. This can be solved either by performing the upgrade with client side apply or by manually patching the [managed fields](https://kubernetes.io/docs/reference/using-api/server-side-apply/#field-management) of cert-manager `CustomResourceDefinitions`:
+
+```bash
+crds=("certificaterequests.cert-manager.io" "certificates.cert-manager.io" "challenges.acme.cert-manager.io" "clusterissuers.cert-manager.io" "issuers.cert-manager.io" "orders.acme.cert-manager.io")
+
+for crd in "${crds[@]}"; do
+  manager_index="$(kubectl get crd "${crd}" --show-managed-fields --output json | jq -r '.metadata.managedFields | map(.manager == "cainjector") | index(true)')"
+  kubectl patch crd "${crd}" --type=json -p="[{\"op\": \"remove\", \"path\": \"/metadata/managedFields/${manager_index}\"}]"
+done
+```
+Thanks to [@stevehipwell](https://github.com/stevehipwell) for the above patch commands.
+
+See the original Github issue [cert-manager#](https://github.com/cert-manager/cert-manager/issues/4831)
+
 ### Major Themes
 
 #### Removal of Deprecated APIs
