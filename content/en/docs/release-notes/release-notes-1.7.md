@@ -19,7 +19,7 @@ type: "docs"
 
 #### Removal of Deprecated APIs
 
-⚠ Following their deprecation in version 1.5, the cert-manager API versions v1alpha2, v1alpha3, and v1beta1 have been removed.
+⚠ Following their deprecation in version 1.4, the cert-manager API versions v1alpha2, v1alpha3, and v1beta1 have been removed.
 You must ensure that all cert-manager custom resources are stored in etcd at version v1
 and that all cert-manager `CustomResourceDefinition`s have only v1 as the stored version
 **before** upgrading.
@@ -64,11 +64,27 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 [notes on Ingress v1 compatibility]: https://cert-manager.io/docs/installation/upgrading/ingress-class-compatibility/
 
+#### Upgrading with Server Side Apply
+
+As part of the work to [remove deprecated APIs](#removal-of-deprecated-apis) cert-manager `CustomResourceDefinition`s no longer require a conversion webhook. The related change in cert-manager `CustomResourceDefinition` specs results in invalid `CustomResourceDefinition` configurations for users who are upgrading to cert-manager 1.7 using `kubectl apply --server-side=true -f <manifests>`. This can be solved either by performing the upgrade with client side apply or by manually patching the [managed fields](https://kubernetes.io/docs/reference/using-api/server-side-apply/#field-management) of cert-manager `CustomResourceDefinitions`:
+
+```bash
+crds=("certificaterequests.cert-manager.io" "certificates.cert-manager.io" "challenges.acme.cert-manager.io" "clusterissuers.cert-manager.io" "issuers.cert-manager.io" "orders.acme.cert-manager.io")
+
+for crd in "${crds[@]}"; do
+  manager_index="$(kubectl get crd "${crd}" --show-managed-fields --output json | jq -r '.metadata.managedFields | map(.manager == "cainjector") | index(true)')"
+  kubectl patch crd "${crd}" --type=json -p="[{\"op\": \"remove\", \"path\": \"/metadata/managedFields/${manager_index}\"}]"
+done
+```
+Thanks to [@stevehipwell](https://github.com/stevehipwell) for the above patch commands.
+
+See the original GitHub issue [`cert-manager#4831`](https://github.com/cert-manager/cert-manager/issues/4831)
+
 ### Major Themes
 
 #### Removal of Deprecated APIs
 
-In 1.7 the cert-manager API versions v1alpha2, v1alpha3, and v1beta1, that were deprecated in 1.5,
+In 1.7 the cert-manager API versions v1alpha2, v1alpha3, and v1beta1, that were deprecated in 1.4,
 have been removed from the custom resource definitions (CRDs).
 As a result, you will notice that the YAML manifest files are much smaller.
 
