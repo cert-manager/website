@@ -19,7 +19,7 @@ type: "docs"
 
 #### Removal of Deprecated APIs
 
-⚠ Following their deprecation in version 1.5, the cert-manager API versions v1alpha2, v1alpha3, and v1beta1 have been removed.
+⚠ Following their deprecation in version 1.4, the cert-manager API versions v1alpha2, v1alpha3, and v1beta1 have been removed.
 You must ensure that all cert-manager custom resources are stored in etcd at version v1
 and that all cert-manager `CustomResourceDefinition`s have only v1 as the stored version
 **before** upgrading.
@@ -84,7 +84,7 @@ See the original Github issue [cert-manager#](https://github.com/cert-manager/ce
 
 #### Removal of Deprecated APIs
 
-In 1.7 the cert-manager API versions v1alpha2, v1alpha3, and v1beta1, that were deprecated in 1.5,
+In 1.7 the cert-manager API versions v1alpha2, v1alpha3, and v1beta1, that were deprecated in 1.4,
 have been removed from the custom resource definitions (CRDs).
 As a result, you will notice that the YAML manifest files are much smaller.
 
