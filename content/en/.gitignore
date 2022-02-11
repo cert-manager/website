@@ -1,6 +1,4 @@
-v*.*-docs/*
-!v*.*-docs/cli
-!v*.*-docs/reference
-/next-docs/
 docs/cli/*
 !docs/cli/_index.md
+next-docs/cli/*
+!next-docs/cli/_index.md
