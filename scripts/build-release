@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright 2019 The Jetstack cert-manager contributors.
+# Copyright 2022 The cert-manager Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,6 +27,5 @@ cd "${REPO_ROOT}"
 
 export HUGO_ENV="production"
 
-"${REPO_ROOT}/scripts/update-content"
 "${REPO_ROOT}/scripts/gendocs/generate"
 "${REPO_ROOT}/scripts/build" "$@"
