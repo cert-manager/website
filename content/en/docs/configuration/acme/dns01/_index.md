@@ -69,7 +69,7 @@ self check to take longer due to caching performed by the recursive nameservers.
 
 Example usage:
 ```bash
---dns01-recursive-nameservers-only --dns01-recursive-nameservers="8.8.8.8:53,1.1.1.1:53"
+--dns01-recursive-nameservers-only --dns01-recursive-nameservers=8.8.8.8:53,8.8.4.4:53
 ```
 
 If you're using the `cert-manager` helm chart, you can set recursive nameservers
