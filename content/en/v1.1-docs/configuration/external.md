@@ -51,4 +51,4 @@ authors are as follows:
 
 
 To create your own external issuer type, please follow the guidance in the
-[development documentation](../../contributing/external-issuers/).
+[development documentation](/docs/contributing/external-issuers/).

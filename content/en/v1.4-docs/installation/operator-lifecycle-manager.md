@@ -9,7 +9,7 @@ type: "docs"
 
 ### Prerequisites
 
-- A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
+- A Kubernetes or OpenShift cluster running a [supported version](/docs/installation/supported-releases/)
 - cert-manager not already installed on the cluster
 - [Prerequisites specific to your cloud provider](../compatibility/)
 

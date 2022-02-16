@@ -15,7 +15,7 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 ### Prerequisites
 
 - Helm version 3 or later
-- A Kubernetes or OpenShift cluster running a [supported version](../supported-releases/)
+- A Kubernetes or OpenShift cluster running a [supported version](/docs/installation/supported-releases/)
 - cert-manager not already installed on the cluster
 - [Prerequisites specific to your cloud provider](../compatibility/)
 
@@ -57,7 +57,7 @@ must add the `--set installCRDs=true` flag to your Helm installation command.
 
 Uncomment the relevant line in the next steps to enable this.
 
-Note that if you're using a `helm` version based on Kubernetes `v1.18` or below (Helm `v3.2`), `installCRDs` will not work with cert-manager `v0.16`. See the [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#helm) for more details.
+Note that if you're using a `helm` version based on Kubernetes `v1.18` or below (Helm `v3.2`), `installCRDs` will not work with cert-manager `v0.16`. See the [v0.16 upgrade notes](/docs/installation/upgrading/upgrading-0.15-0.16/#helm) for more details.
 
 #### 4. Install cert-manager
 
