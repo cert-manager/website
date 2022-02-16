@@ -34,13 +34,13 @@ cert-manager controller and CA injector components.
 
 In order for the API server to communicate with the webhook component, the
 webhook requires a TLS certificate that the apiserver is configured to trust.
-This is created by the [`cainjector`](../ca-injector/) and is implemented by the
-following two Secrets:
 
-- `secret/cert-manager-webhook-ca`: A self-signed root CA certificate which is
-  used to sign certificates for the webhook pod.
-- `secret/cert-manager-webhook-tls`: A TLS certificate issued by the root CA
-  above, served by the webhook.
+The [`cainjector`](../ca-injector/) creates `secret/cert-manager-webhook-ca`, a self-signed root CA certificate which is used to sign certificates for the webhook pod.
+
+Then the webhook can be configured with either
+
+1. paths to a TLS certificate and key signed by the webhook CA, or
+2. a reference to the CA Secret for dynamic generation of the certificate and key on webhook startup
 
 ## Known Problems and Solutions
 
@@ -116,4 +116,4 @@ If necessary, you can manually add / update the TLS certificates in the `Validat
 and in each of the cert-manager `CustomResourceDefinition` resources.
 Add the `caBundle` value, copied from the `ca.crt` field of the `cert-manager-webhook-ca` Secret.
 
-NOTE: This should only be used as a temporary measure, while you investigate the root cause of  `cainjector` failing to update the fields automatically.
+NOTE: This should only be used as a temporary measure, while you investigate the root cause of `cainjector` failing to update the fields automatically.
