@@ -23,9 +23,6 @@ Flags:
                 AdditionalCertificateOutputFormats=true|false (ALPHA - default=false)
                 AllAlpha=true|false (ALPHA - default=false)
                 AllBeta=true|false (BETA - default=false)
-                ExperimentalCertificateSigningRequestControllers=true|false (ALPHA - default=false)
-                ExperimentalGatewayAPISupport=true|false (ALPHA - default=false)
-                ValidateCAA=true|false (ALPHA - default=false)
       --healthz-port int                             port number to listen on for insecure healthz connections (default 6080)
   -h, --help                                         help for webhook
       --kubeconfig string                            optional path to the kubeconfig used to connect to the apiserver. If not specified, in-cluster-config will be used
