@@ -1,7 +1,7 @@
-+++
-title = "API reference docs"
-type = "docs"
-+++
+---
+title: "API reference docs"
+type: "docs"
+---
 <p>Packages:</p>
 <ul>
 <li>

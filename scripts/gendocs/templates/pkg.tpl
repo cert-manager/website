@@ -1,8 +1,8 @@
 {{ define "packages" }}
-+++
-title = "API reference docs"
-type = "docs"
-+++
+---
+title: "API reference docs"
+type: "docs"
+---
 
 {{ with .packages}}
 <p>Packages:</p>
