@@ -134,6 +134,15 @@ spec:
           environment: AzurePublicCloud
 ```
 
+This authentication mechanism is what cert-manager considers 'ambient credentials'. Use of ambient credentials is disabled by default for cert-manager `Issuer`s. This to ensure unprivileged users who have permission to create issuers cannot issue certificates using any credentials cert-manager incidentally has access to. To enable this authentication mechanism for `Issuer`s, you will need to set `--issuer-ambient-credentials` flag on cert-manager controller to true. (There is a corresponding `--cluster-issuer-ambient-credentials` flag which is set to `true` by default).
+
+If you are using this authentication mechanism and ambient credentials are not enabled, you will see this error:
+```bash
+error instantiating azuredns challenge solver: ClientID is not set but neither --cluster-issuer-ambient-credentials nor --issuer-ambient-credentials are set.
+```
+
+These are necessary to enable Azure Managed Identities.
+
 ## Managed Identity Using AKS Kubelet Identity
 
 When creating an AKS cluster in Azure there is the option to use a managed identity that is assigned to the kubelet. This identity is assigned to the underlying node pool in the AKS cluster and can then be used by the cert-manager pods to authenticate to Azure Active Directory.
