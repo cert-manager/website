@@ -146,7 +146,6 @@ page if a step is missing or if it is outdated.
     | subsequent beta release            | `v1.3.0-beta.1`    |
     | final release                      | `v1.3.0`           |
     | patch release (or "point release") | `v1.3.1`           |
-    </br>
 
 2. **(final release only)** Make sure that a PR with the new upgrade
    document is ready to be merged on
@@ -225,7 +224,6 @@ page if a step is missing or if it is outdated.
         | `END_REV`         | Name of your release branch (inclusive) |
         | `BRANCH`          | Name of your release branch             |
         | `RELEASE_VERSION` | The git tag without the leading `v`     |
-        </br>
 
         Examples for each release type (e.g., initial alpha release):
 
@@ -239,7 +237,6 @@ page if a step is missing or if it is outdated.
         | `END_REV`         | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `BRANCH`          | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `RELEASE_VERSION` | `1.3.0-alpha.0`  | `1.3.0-alpha.1`  | `1.3.0-beta.0`   | `1.3.0`       | `1.3.1`       |
-        </br>
 
         > \*The git tag of the "previous" release (`START_TAG`) depends on which
         > type of release you count on doing. Look at the above examples to
@@ -290,7 +287,9 @@ page if a step is missing or if it is outdated.
         example, while releasing `v1.0.0`, you want to compare it with the
         latest pre-released version `v1.0.0-beta.1`:
 
-        <https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master>
+        ```text
+        https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master
+        ```
 
     4. **(final release only)** Check the release notes include all changes
        since the last final release.

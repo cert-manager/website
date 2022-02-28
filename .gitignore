@@ -4,3 +4,5 @@
 /bin/
 /tmp/
 /scripts/gendocs/postprocess/node_modules/
+
+.next/

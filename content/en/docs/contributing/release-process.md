@@ -287,7 +287,9 @@ page if a step is missing or if it is outdated.
         example, while releasing `v1.0.0`, you want to compare it with the
         latest pre-released version `v1.0.0-beta.1`:
 
-        <https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master>
+        ```text
+        https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master
+        ```
 
     4. **(final release only)** Check the release notes include all changes
        since the last final release.
@@ -377,12 +379,17 @@ page if a step is missing or if it is outdated.
         cmrel publish --nomock --skip-signing --release-name "$CMREL_RELEASE_NAME"
         ```
 
-        <div class="pageinfo pageinfo-warning"><p>
-        ⏰ Upon completion there will be:
-
-        1. [A draft release of cert-manager on GitHub](https://github.com/jetstack/cert-manager/releases).
-        2. [A pull request containing the new Helm chart](https://github.com/jetstack/jetstack-charts/pulls).
-        </p></div>
+      <div className="info">
+         ⏰ Upon completion there will be:
+         <ol>
+            <li>
+               <a href="https://github.com/jetstack/cert-manager/releases">A draft release of cert-manager on GitHub</a>
+            </li>
+            <li>
+               <a href="https://github.com/jetstack/cert-manager/releases">A pull request containing the new Helm chart</a>
+            </li>
+         </ol>
+      </div>
 
     5. While the build is running, send a fourth Slack message in reply to
        the first message:
