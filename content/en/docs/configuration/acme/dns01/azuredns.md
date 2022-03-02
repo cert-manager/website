@@ -22,7 +22,7 @@ Firstly an identity should be created that has access to contribute to the DNS Z
 - Example creation using `azure-cli` and `jq`:
 ```bash
 # Choose a unique Identity name and existing resource group to create identity in.
-IDENTITY=$(az identity create --name $IDENTITY_NAME --resource-group $IDENTITY_GROUP )
+IDENTITY=$(az identity create --name $IDENTITY_NAME --resource-group $IDENTITY_GROUP --output json)
 
 # Gets principalId to use for role assignment
 PRINCIPAL_ID=$(echo $IDENTITY | jq -r '.principalId')
@@ -230,11 +230,11 @@ $ AZURE_DNS_ZONE_RESOURCE_GROUP=AZURE_DNS_ZONE_RESOURCE_GROUP
 # The DNS zone name. It should be something like domain.com or sub.domain.com.
 $ AZURE_DNS_ZONE=AZURE_DNS_ZONE
 
-$ DNS_SP=$(az ad sp create-for-rbac --name $AZURE_CERT_MANAGER_NEW_SP_NAME)
+$ DNS_SP=$(az ad sp create-for-rbac --name $AZURE_CERT_MANAGER_NEW_SP_NAME --output json)
 $ AZURE_CERT_MANAGER_SP_APP_ID=$(echo $DNS_SP | jq -r '.appId')
 $ AZURE_CERT_MANAGER_SP_PASSWORD=$(echo $DNS_SP | jq -r '.password')
 $ AZURE_TENANT_ID=$(echo $DNS_SP | jq -r '.tenant')
-$ AZURE_SUBSCRIPTION_ID=$(az account show | jq -r '.id')
+$ AZURE_SUBSCRIPTION_ID=$(az account show --output json | jq -r '.id')
 ```
 
 For security purposes, it is appropriate to utilize RBAC to ensure that you
