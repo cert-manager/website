@@ -1,6 +1,6 @@
 ---
-title: "Meet the maintainers"
-linkTitle: "talk-to-us"
+title: "Contact the maintainers"
+linkTitle: "Contact the maintainers"
 weight: 70
 type: "docs"
 ---
