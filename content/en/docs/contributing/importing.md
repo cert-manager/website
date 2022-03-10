@@ -27,7 +27,7 @@ You might need to import cert-manager if you're writing Go code which:
 - implements an external DNS solver webhook, as in the [webhook-example](https://github.com/cert-manager/webhook-example)
 - implements an external issuer, as in the [sample-external-issuer](https://github.com/cert-manager/sample-external-issuer)
 
-If you think you really need to import other parts of the code, please do reach out and [talk to us](../#slack) so we're
+If you think you really need to import other parts of the code, please do reach out and [talk to us](../talk-to-us/#slack) so we're
 aware of this need! We'll always try to avoid breakage where we can.
 
 ## Module Import Paths
