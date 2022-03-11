@@ -86,6 +86,7 @@ checkout() {
 	echo "+++ Running 'go mod vendor' (this may take a while)"
 	go mod vendor
 }
+
 gendocs() {
 	outputdir="$1"
 	echo "+++ Generating reference docs..."
@@ -93,8 +94,7 @@ gendocs() {
 		-config "${REPO_ROOT}/scripts/gendocs/config.json" \
 		-template-dir "${REPO_ROOT}/scripts/gendocs/templates" \
 		-api-dir "./pkg/apis" \
-		-out-file "${REPO_ROOT}/content/en/${outputdir}/reference/api-docs.md" \
-		"$@"
+		-out-file "${REPO_ROOT}/content/en/${outputdir}/reference/api-docs.md"
 	rm -rf vendor/
 	popd
 }
