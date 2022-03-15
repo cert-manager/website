@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright 2019 The Jetstack cert-manager contributors.
+# Copyright 2022 The cert-manager Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,18 +24,31 @@ set -o pipefail
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
 
 if ! command -v go &>/dev/null; then
-    echo "Ensure go command is installed"
+    echo "Ensure go is installed"
+    exit 1
+fi
+
+if ! command -v npm &>/dev/null; then
+    echo "Ensure npm is installed"
     exit 1
 fi
 
 tmpdir="$(mktemp -d)"
+apidocstmpdir="$(mktemp -d)"
+
 cleanup() {
+	# we can't simply remove tmpdir because the modcache is written as read-only
+	# and we'll get permissions errors, so we use go clean instead
 	export GO111MODULE="auto"
 	echo "+++ Cleaning up temporary GOPATH"
 	go clean -modcache
+
+	rm -rf "${apidocstmpdir}"
 	rm -rf "${tmpdir}"
 }
 trap cleanup EXIT
+
+pushd scripts/gendocs/postprocess && npm install && popd
 
 # Create fake GOPATH
 echo "+++ Creating temporary GOPATH"
@@ -45,6 +58,7 @@ GOROOT="$(go env GOROOT)"
 export GOROOT
 GOBIN="${tmpdir}/bin"
 export GOBIN
+
 go install github.com/ahmetb/gen-crd-api-reference-docs@v0.3.0
 
 mkdir -p "${GOPATH}/src/github.com/jetstack"
@@ -89,12 +103,16 @@ checkout() {
 
 gendocs() {
 	outputdir="$1"
+	mkdir -p ${apidocstmpdir}/${outputdir}/
 	echo "+++ Generating reference docs..."
 	"${GOBIN}/gen-crd-api-reference-docs" \
 		-config "${REPO_ROOT}/scripts/gendocs/config.json" \
 		-template-dir "${REPO_ROOT}/scripts/gendocs/templates" \
 		-api-dir "./pkg/apis" \
-		-out-file "${REPO_ROOT}/content/en/${outputdir}/reference/api-docs.md"
+		-out-file ${apidocstmpdir}/${outputdir}/api-docs.md
+
+	${REPO_ROOT}/scripts/gendocs/postprocess/api-doc-postprocess.js <${apidocstmpdir}/${outputdir}/api-docs.md > "${REPO_ROOT}/content/en/${outputdir}/reference/api-docs.md"
+
 	rm -rf vendor/
 	popd
 }
@@ -163,32 +181,36 @@ genversionwithcli "release-1.7" "v1.7-docs"
 
 # Special handling for release-1.6 because the legacy APIs were still present in
 # the CRDs and in public `pkg/` directory but we do not want to generate API
-# docs for those legacy API docs.
+# docs for those legacy API versions.
+
 # In cert-manager 1.6 cert-manager.io and acme.cert-manager.io alpha and beta
 # API versions are no longer served, but the apis are still in the codebase. We
 # don't want to show the docs for those API versions so this is a workaround.
 # This will only be necessary for the release-1.6 branch.
 
-#checkout "release-1.6"
-#
-## Generate CLI reference docs before deleting the legacy API,
-## as they will not compile.
-#genclireference "v1.6-docs" "cmd/acmesolver" "acmesolver"
-#genclireference "v1.6-docs" "cmd/cainjector" "cainjector"
-#genclireference "v1.6-docs" "cmd/ctl" "cmctl"
-#genclireference "v1.6-docs" "cmd/controller" "controller"
-#genclireference "v1.6-docs" "cmd/webhook" "webhook"
-#
-#rm -r pkg/apis/acme/v1alpha2
-#rm -r pkg/apis/acme/v1alpha3
-#rm -r pkg/apis/acme/v1beta1
-#rm -r pkg/apis/certmanager/v1alpha2
-#rm -r pkg/apis/certmanager/v1alpha3
-#rm -r pkg/apis/certmanager/v1beta1
-#gendocs "v1.6-docs"
-# v1.6 end
+generate_release16() {
+    # The special-case for release-1.6 is in a function to make it easier to
+    # comment and uncomment below
+    checkout "release-1.6"
+    # Generate CLI reference docs before deleting the legacy API,
+    # as they will not compile otherwise
+    genclireference "v1.6-docs" "cmd/acmesolver" "acmesolver"
+    genclireference "v1.6-docs" "cmd/cainjector" "cainjector"
+    genclireference "v1.6-docs" "cmd/ctl" "cmctl"
+    genclireference "v1.6-docs" "cmd/controller" "controller"
+    genclireference "v1.6-docs" "cmd/webhook" "webhook"
 
+    rm -r pkg/apis/acme/v1alpha2
+    rm -r pkg/apis/acme/v1alpha3
+    rm -r pkg/apis/acme/v1beta1
+    rm -r pkg/apis/certmanager/v1alpha2
+    rm -r pkg/apis/certmanager/v1alpha3
+    rm -r pkg/apis/certmanager/v1beta1
 
+    gendocs "v1.6-docs"
+}
+
+#generate_release16
 #genversionwithcli "release-1.5" "v1.5-docs"
 #genversionwithcli "release-1.4" "v1.4-docs"
 #genversionwithcli "release-1.3" "v1.3-docs"
