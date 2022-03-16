@@ -20,18 +20,11 @@ This will also update the version conversion code if needed.
 
 ## Versions
 
-cert-manager currently has 4 CRD versions in use:
+cert-manager currently has a single `v1` API version.
 
-- `v1`
-- `v1beta1` (deprecated in cert-manager `v1.4.0`, removed `v1.6.0`)
-- `v1alpha3` (deprecated in cert-manager `v1.4.0`, removed `v1.6.0`)
-- `v1alpha2` (deprecated in cert-manager `v1.4.0`, removed `v1.6.0`)
+The API types are defined in [`//pkg/apis/certmanager`](https://github.com/jetstack/cert-manager/tree/master/pkg/apis/certmanager). ACME related resources are in [`//pkg/apis/acme`](https://github.com/jetstack/cert-manager/tree/master/pkg/apis/certmanager).
 
-These versions are defined in [`//pkg/apis/certmanager`](https://github.com/jetstack/cert-manager/tree/master/pkg/apis/certmanager). ACME related resources are in [`//pkg/apis/acme`](https://github.com/jetstack/cert-manager/tree/master/pkg/apis/certmanager).
-
-If you need to introduce a new field in any of them it **must** be present in all 4 versions so conversion can be used.
-
-Code comments on these fields are being converted into documentation on our website and text of `kubectl explain`.
+Code comments on API type fields are being converted into documentation on our website and text of `kubectl explain`.
 These comments should be written to be user-facing not developer-facing, they also break the Go standards of code comments on purpose for this reason.
 
 We also have an internal API version, it lives at [`//pkg/internal/apis`](https://github.com/jetstack/cert-manager/tree/master/pkg/internal/apis).
