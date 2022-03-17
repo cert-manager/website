@@ -1,0 +1,267 @@
+{
+  "routes": [
+    {
+      "title": "Welcome to cert-manager",
+      "routes": [
+        {
+          "title": "Introduction",
+          "path": "/v0.14-docs/README.md"
+        },
+        {
+          "title": "Concepts",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v0.14-docs/concepts/README.md"
+            },
+            {
+              "title": "Issuer",
+              "path": "/v0.14-docs/concepts/issuer.md"
+            },
+            {
+              "title": "Certificate",
+              "path": "/v0.14-docs/concepts/certificate.md"
+            },
+            {
+              "title": "CertificateRequest",
+              "path": "/v0.14-docs/concepts/certificaterequest.md"
+            },
+            {
+              "title": "ACME Orders and Challenges",
+              "path": "/v0.14-docs/concepts/acme-orders-challenges.md"
+            },
+            {
+              "title": "Webhook",
+              "path": "/v0.14-docs/concepts/webhook.md"
+            },
+            {
+              "title": "CA Injector",
+              "path": "/v0.14-docs/concepts/ca-injector.md"
+            },
+            {
+              "title": "Project Maturity",
+              "path": "/v0.14-docs/concepts/project-maturity.md"
+            }
+          ]
+        },
+        {
+          "title": "Installation",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v0.14-docs/installation/README.md"
+            },
+            {
+              "title": "Kubernetes",
+              "path": "/v0.14-docs/installation/kubernetes.md"
+            },
+            {
+              "title": "OpenShift",
+              "path": "/v0.14-docs/installation/openshift.md"
+            },
+            {
+              "title": "Uninstall",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/v0.14-docs/installation/uninstall/README.md"
+                },
+                {
+                  "title": "Uninstalling on Kubernetes",
+                  "path": "/v0.14-docs/installation/uninstall/kubernetes.md"
+                },
+                {
+                  "title": "Uninstalling on OpenShift",
+                  "path": "/v0.14-docs/installation/uninstall/openshift.md"
+                }
+              ]
+            },
+            {
+              "title": "Compatibility",
+              "path": "/v0.14-docs/installation/compatibility.md"
+            }
+          ]
+        },
+        {
+          "title": "Configuration",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v0.14-docs/configuration/README.md"
+            },
+            {
+              "title": "SelfSigned",
+              "path": "/v0.14-docs/configuration/selfsigned.md"
+            },
+            {
+              "title": "CA",
+              "path": "/v0.14-docs/configuration/ca.md"
+            },
+            {
+              "title": "Vault",
+              "path": "/v0.14-docs/configuration/vault.md"
+            },
+            {
+              "title": "Venafi",
+              "path": "/v0.14-docs/configuration/venafi.md"
+            },
+            {
+              "title": "External",
+              "path": "/v0.14-docs/configuration/external.md"
+            },
+            {
+              "title": "ACME",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/v0.14-docs/configuration/acme/README.md"
+                },
+                {
+                  "title": "HTTP01",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/v0.14-docs/configuration/acme/http01/README.md"
+                    }
+                  ]
+                },
+                {
+                  "title": "DNS01",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/v0.14-docs/configuration/acme/dns01/README.md"
+                    },
+                    {
+                      "title": "ACMEDNS",
+                      "path": "/v0.14-docs/configuration/acme/dns01/acme-dns.md"
+                    },
+                    {
+                      "title": "Akamai",
+                      "path": "/v0.14-docs/configuration/acme/dns01/akamai.md"
+                    },
+                    {
+                      "title": "AzureDNS",
+                      "path": "/v0.14-docs/configuration/acme/dns01/azuredns.md"
+                    },
+                    {
+                      "title": "CloudFlare",
+                      "path": "/v0.14-docs/configuration/acme/dns01/cloudflare.md"
+                    },
+                    {
+                      "title": "DigitalOcean",
+                      "path": "/v0.14-docs/configuration/acme/dns01/digitalocean.md"
+                    },
+                    {
+                      "title": "Google CloudDNS",
+                      "path": "/v0.14-docs/configuration/acme/dns01/google.md"
+                    },
+                    {
+                      "title": "RFC-2136",
+                      "path": "/v0.14-docs/configuration/acme/dns01/rfc2136.md"
+                    },
+                    {
+                      "title": "Route53",
+                      "path": "/v0.14-docs/configuration/acme/dns01/route53.md"
+                    },
+                    {
+                      "title": "Webhook",
+                      "path": "/v0.14-docs/configuration/acme/dns01/webhook.md"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Usage",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v0.14-docs/usage/README.md"
+            },
+            {
+              "title": "Certificate Resources",
+              "path": "/v0.14-docs/usage/certificate.md"
+            },
+            {
+              "title": "Securing Ingress Resources",
+              "path": "/v0.14-docs/usage/ingress.md"
+            },
+            {
+              "title": "Securing Istio Service Mesh",
+              "path": "/v0.14-docs/usage/istio.md"
+            },
+            {
+              "title": "CSI Driver",
+              "path": "/v0.14-docs/usage/csi.md"
+            }
+          ]
+        },
+        {
+          "title": "Tutorials",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v0.14-docs/tutorials/README.md"
+            },
+            {
+              "title": "Migrating from Kube-LEGO",
+              "path": "/v0.14-docs/tutorials/acme/migrating-from-kube-lego.md"
+            },
+            {
+              "title": "Backup and Restore Resources",
+              "path": "/v0.14-docs/tutorials/backup.md"
+            },
+            {
+              "title": "DNS Validation",
+              "path": "/v0.14-docs/tutorials/acme/dns-validation.md"
+            },
+            {
+              "title": "HTTP Validation",
+              "path": "/v0.14-docs/tutorials/acme/http-validation.md"
+            },
+            {
+              "title": "Securing NGINX-ingress",
+              "path": "/v0.14-docs/tutorials/acme/ingress.md"
+            },
+            {
+              "title": "Securing Ingresses with Venafi",
+              "path": "/v0.14-docs/tutorials/venafi/venafi.md"
+            }
+          ]
+        },
+        {
+          "title": "FAQ",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v0.14-docs/faq/README.md"
+            },
+            {
+              "title": "Troubleshooting Issuing ACME Certificates",
+              "path": "/v0.14-docs/faq/acme.md"
+            },
+            {
+              "title": "Cluster Resource Namespace",
+              "path": "/v0.14-docs/faq/cluster-resource.md"
+            },
+            {
+              "title": "Syncing Secrets Across Namespaces using Kubed",
+              "path": "/v0.14-docs/faq/kubed.md"
+            },
+            {
+              "title": "Webhook",
+              "path": "/v0.14-docs/faq/webhook.md"
+            }
+          ]
+        },
+        {
+          "title": "API reference docs",
+          "path": "/v0.14-docs/reference/api-docs.md"
+        }
+      ]
+    }
+  ]
+}
