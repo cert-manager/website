@@ -17,17 +17,21 @@ function Home({ router }) {
   return (
     <>
       <NextSeo
-          title={page.title}
-          description={page.description}
-          canonical={currentUrl}
-          openGraph={{
-            url: currentUrl,
-            title: page.title,
-            description: page.description
+        title={page.title}
+        description={page.description}
+        canonical={currentUrl}
+        openGraph={{
+          url: currentUrl,
+          title: page.title,
+          description: page.description
         }}
       />
       <div className="bg-gray-1 relative overflow-x-hidden pb-117px">
-        <Hero heading={page.hero.heading} description={page.hero.description} image={page.hero.image} />
+        <Hero
+          heading={page.hero.heading}
+          description={page.hero.description}
+          image={page.hero.image}
+        />
         <div className="hidden lg:block absolute top-600px right-0 z-0">
           <CirclesBackground />
         </div>
@@ -55,7 +59,9 @@ function Home({ router }) {
                 />
               </div>
               <p className="font-semibold text-lg mt-8 md:mt-0">
-                <span className="text-xl text-blue-2 font-bold">{page.certManager.emphasize}</span>
+                <span className="text-xl text-blue-2 font-bold">
+                  {page.certManager.emphasize}
+                </span>
                 <span>&nbsp;{page.certManager.description}</span>
               </p>
             </Card>
@@ -71,23 +77,33 @@ function Home({ router }) {
               </div>
               <div className="pt-9 text-lg md:pt-0 md:pl-14">
                 <p>
-                  <span className="font-bold inline-block mb-2">cert-manager</span>
+                  <span className="font-bold inline-block mb-2">
+                    cert-manager
+                  </span>
                   <span>&nbsp;was created by </span>
                   <Link href="https://www.jetstack.io/">
                     <a>
                       <JetstackLogo className="mx-auto md:inline-block w-32" />
                     </a>
                   </Link>
-                   <span className="block mt-5">
+                  <span className="block mt-5">
                     It was proudly &nbsp;
-                    <Link href="https://www.jetstack.io/blog/cert-manager-cncf/"><a target="_blank">donated</a></Link>
+                    <Link href="https://www.jetstack.io/blog/cert-manager-cncf/">
+                      <a target="_blank">donated</a>
+                    </Link>
                     &nbsp; to CNCF in 2020.
                   </span>
                 </p>
               </div>
             </Card>
-
             <Features features={page.features} className="mt-24" />
+            <div>
+              <CtasRow
+                className="my-8 lg:mb-14 lg:mt-20"
+                title={page.bottomCta.title}
+                ctas={page.bottomCta.ctas}
+              />
+            </div>
           </div>
         </div>
       </div>

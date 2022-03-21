@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="relative w-screen h-117px overflow-x-hidden">
         <FooterSepartor className="absolute top-0 -left-696px" />
       </div>
-      <div className="bg-dark-2 pb-10">
+      <div className="bg-dark-2 pb-10 pt-5">
         <div className="container text-sm text-white">
           <p>&copy; 2022 The cert-manager Authors.</p>
           <p className="mb-6">
