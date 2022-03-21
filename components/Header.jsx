@@ -1,17 +1,12 @@
-import ClickAwayListener from 'react-click-away-listener'
-
-import AlgoliaSearch from 'components/AlgoliaSearch'
-import AlgoliaClient from 'lib/algolia-client'
-import { indexName } from 'lib/instantsearch'
-const searchClient = new AlgoliaClient()
-const filterHits = (item) => item.path.includes('/docs')
-
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import VersionSelect from './docs/VersionSelect'
 import CertManagerLogo from './snippets/CertManagerLogo'
 import { meta as site } from '../content/pages/site.mdx'
+
+import { DocSearch } from '@docsearch/react'
+import '@docsearch/css'
 
 export default function Header() {
   const router = useRouter()
@@ -88,7 +83,11 @@ function MobileNavigation({ active, className = '' }) {
           <div>
             <ul className="flex flex-col justify-between items-end max-w-200px h-full">
               <li className="max-w-full">
-                <Search />
+                <DocSearch
+                  appId={process.env.NEXT_PUBLIC_DOCS_SEARCH_APP_ID}
+                  indexName={process.env.NEXT_PUBLIC_DOCS_SEARCH_INDEX_NAME}
+                  apiKey={process.env.NEXT_PUBLIC_DOCS_SEARCH_API_KEY}
+                />
               </li>
               {active !== '/docs' && (
                 <li>
@@ -118,7 +117,11 @@ function DesktopNavigation({ active, className = '' }) {
           <NavItem active={active} item={item} key={item.href} />
         ))}
         <li className="">
-          <Search />
+          <DocSearch
+            appId={process.env.NEXT_PUBLIC_DOCS_SEARCH_APP_ID}
+            indexName={process.env.NEXT_PUBLIC_DOCS_SEARCH_INDEX_NAME}
+            apiKey={process.env.NEXT_PUBLIC_DOCS_SEARCH_API_KEY}
+          />
         </li>
         {active !== '/docs' && (
           <li>
@@ -192,37 +195,5 @@ function NavItem({ active, item, setOpen = null }) {
         </a>
       </Link>
     </li>
-  )
-}
-
-function Search() {
-  const router = useRouter()
-  const [showSearchResults, setShowSearchResults] = useState(false)
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    router.push({
-      pathname: '/search',
-      query: `search=${inputRef.current.value}`
-    })
-  }
-
-  return (
-    <div className="inline-block max-w-full">
-      <ClickAwayListener onClickAway={() => setShowSearchResults(false)}>
-        <div>
-          <AlgoliaSearch
-            indexName={indexName}
-            searchClient={searchClient}
-            onAutoCompleteFocus={() => setShowSearchResults(true)}
-            showSearchResults={showSearchResults}
-            onClickResult={() => setShowSearchResults(false)}
-            handleSubmit={handleSubmit}
-            hitsClassName="header__hits"
-            filterHits={filterHits}
-          ></AlgoliaSearch>
-        </div>
-      </ClickAwayListener>
-    </div>
   )
 }
