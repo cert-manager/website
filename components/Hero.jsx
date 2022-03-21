@@ -2,7 +2,7 @@ export default function Hero({ heading, description = '', className = '' }) {
   return (
     <div className={className}>
       <div className="relative hero-gradient overflow-hidden">
-        <div className="relative z-100 container pt-10 pb-52 text-white lg:pt-20 lg:pb-320px">
+        <div className="relative z-100 container pt-10 pb-52 text-white lg:pt-24 lg:pb-320px">
           <h1 className="text-3xl mb-5 max-w-2xl lg:text-5xl">{heading}</h1>
           {description && (
             <p className="font-semibold text-xl">{description}</p>
