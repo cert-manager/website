@@ -136,12 +136,16 @@ ACME server
 > Note: In _most_ cases, the MAC key must be encoded in `base64URL`. The 
 > following command will base64-encode a key and convert it to `base64URL`:
 > 
->     $ echo 'my-secret-key' | base64 -w0 | sed -e 's/+/-/g' -e 's/\//_/g' -e 's/=//g'
+> ```console
+> $ echo 'my-secret-key' | base64 -w0 | sed -e 's/+/-/g' -e 's/\//_/g' -e 's/=//g'
+> ```
 > 
 > You can then create the Secret resource with: 
 > 
->     $ kubectl create secret generic eab-secret --from-literal \
->       secret={base64 encoded secret key}
+> ```console
+> $ kubectl create secret generic eab-secret --from-literal \
+>   secret={base64 encoded secret key}
+> ```
 
 An example of an ACME issuer with an External Account Binding is as follows.
 
