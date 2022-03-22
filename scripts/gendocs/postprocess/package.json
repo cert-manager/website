@@ -1,0 +1,17 @@
+{
+  "name": "format-api-docs",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "format-api-docs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "prettier": "^2.5.1"
+  }
+}
