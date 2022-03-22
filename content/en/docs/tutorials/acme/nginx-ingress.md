@@ -8,7 +8,7 @@ type: "docs"
 This tutorial will detail how to install and secure ingress to your cluster
 using NGINX.
 
-## Step 0 - Install Helm Client
+## Step 1 - Install Helm Client
 
 > *Skip this section if you have helm installed.*
 
@@ -24,46 +24,7 @@ For example, on MacOS:
 $ brew install kubernetes-helm
 ```
 
-## Step 1 - Install Tiller
-
-> *Skip this section if you have Tiller set-up. Ignore this part for Helm version 3*
-
-Tiller is Helm's server-side component, which the `helm` client uses to
-deploy resources.
-
-Deploying resources is a privileged operation; in the general case requiring
-arbitrary privileges. With this example, we give Tiller complete control of the
-cluster. View the documentation on [securing
-helm](https://docs.helm.sh/using_helm/#securing-your-helm-installation) for
-details on setting up appropriate permissions for your environment.
-
-Create a `ServiceAccount` for Tiller:
-
-```bash
-$ kubectl create serviceaccount tiller --namespace=kube-system
-serviceaccount "tiller" created
-```
-
-Grant the `tiller` service account cluster admin privileges:
-
-```bash
-$ kubectl create clusterrolebinding tiller-admin --serviceaccount=kube-system:tiller --clusterrole=cluster-admin
-clusterrolebinding.rbac.authorization.k8s.io "tiller-admin" created
-```
-
-Install tiller with the `tiller` service account:
-
-```bash
-$ helm init --service-account=tiller
-$HELM_HOME has been configured at /Users/myaccount/.helm.
-
-Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
-
-Please note: by default, Tiller is deployed with an insecure 'allow unauthenticated users' policy.
-To prevent this, run `helm init` with the --tiller-tls-verify flag.
-For more information on securing your installation see: https://docs.helm.sh/using_helm/#securing-your-helm-installation
-Happy Helming!
-```
+Note: If you use Helm v2, then you may need to install Tiller, too.
 
 ## Step 2 - Deploy the NGINX Ingress Controller
 
