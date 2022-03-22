@@ -90,10 +90,18 @@ string of your external account symmetric MAC key, and finally `keyAlgorithm`,
 the MAC algorithm used to sign the JSON web string containing your External
 Account Binding when registering the account with the ACME server.
 
-> Note: The command `base64` is useful for encoding your MAC key if it is not
-> already `$ echo 'my-secret-key' | base64`, you can then create the Secret
-> resource with: `kubectl create secret generic eab-secret --from-literal
-> secret={base64 encoded secret key}`
+> Note: The `base64` command is useful for encoding your MAC key if it is not
+> already encoded:
+>
+> ```console
+> $ echo 'my-secret-key' | base64
+> ```
+>
+> You can then create the Secret resource with:
+>
+> ```console
+> $ kubectl create secret generic eab-secret --from-literal secret={base64 encoded secret key}
+> ```
 
 An example of an ACME issuer with an External Account Binding is as follows.
 
