@@ -12,11 +12,11 @@ See [Regression: HTTP-01 challenges fail with Istio, Traefik, ingress-gce and Az
 
 In v1.5.5, v1.6.2 and 1.7.1 we fixed this problem.
 
-If you have cert-manager v1.5.3 (or below) you should skip v1.5.4. Instead:
+If you have cert-manager v1.5.3 (or below) you should skip v1.5.4 and instead:
 
 - upgrade to v1.5.5
-- then the newest version of v1.6
-- and then the newest version of v1.7
+- then the newest version of cert-manager 1.6
+- and then the newest version of cert-manager 1.7
 
 and you can ignore the rest of this document.
 

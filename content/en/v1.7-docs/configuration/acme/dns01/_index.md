@@ -180,8 +180,6 @@ Links to these supported providers along with their documentation are below:
 - [`bizflycloud-certmanager-dns-webhook`](https://github.com/bizflycloud/bizflycloud-certmanager-dns-webhook)
 - [`cert-manager-webhook-hetzner`](https://github.com/vadimkim/cert-manager-webhook-hetzner)
 
-You can find more information on how to configure webhook providers
-[here](./webhook/).
+You can find more information on how to configure webhook providers [here](./webhook/).
 
-To create a new unsupported DNS provider, follow the development documentation
-[here](../../../contributing/dns-providers/).
+To create a new unsupported DNS provider, follow the development documentation [here](../../../../docs/contributing/dns-providers/).

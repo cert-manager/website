@@ -36,6 +36,8 @@ CRDs
 CSI
 CSR
 CSRs
+CVE
+CVEs
 CertificateRequest
 CertificateRequests
 CertificateSecretTemplate
@@ -223,6 +225,7 @@ goimports
 google-cas-issuer
 goroutine
 hardcodes
+hardcoded
 honour
 hostname
 https
@@ -334,6 +337,7 @@ unschedule
 untrusted
 upstream
 userinfo
+vhosakot
 v0.16
 v0.23.1
 v1
@@ -351,9 +355,11 @@ v1.5.5
 v1.6.0
 v1.6.1
 v1.6.2
+v1.6.3
 v1.7
 v1.7.0
 v1.7.1
+v1.7.2
 v1alpha2
 v1alpha3
 v1beta1

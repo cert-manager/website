@@ -9,7 +9,7 @@ type: "docs"
 
 ### Prerequisites
 
-- Install a [supported version of Kubernetes or OpenShift](../supported-releases/).
+- Install a [supported version of Kubernetes or OpenShift](../../../docs/installation/supported-releases/).
 - Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Option 1: Installing from OperatorHub Web Console on OpenShift
