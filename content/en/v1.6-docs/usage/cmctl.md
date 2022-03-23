@@ -23,7 +23,7 @@ Run the following commands to set up the CLI. Replace OS and ARCH with your
 systems equivalents:
 
 ```console
-OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -L -o cmctl.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.6.2/cmctl-$OS-$ARCH.tar.gz
+OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -L -o cmctl.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.6.3/cmctl-$OS-$ARCH.tar.gz
 tar xzf cmctl.tar.gz
 sudo mv cmctl /usr/local/bin
 ```
