@@ -1,43 +1,34 @@
-import Link from 'next/link'
+import { useState } from 'react'
+import classNames from 'classnames'
+import ListItems from './ListItems'
+import Icon from 'components/Icon'
 import VersionSelect from 'components/docs/VersionSelect'
 
-function ListItems({ routes }) {
-  if (routes) {
-    return routes.map((r) => {
-      if (!r.path) {
-        return (
-          <li key={r.title}>
-            <h4 className="text-gray-500 uppercase font-bold">{r.title}</h4>
-            <ul>
-              <ListItems routes={r.routes} />
-            </ul>
-          </li>
-        )
-      } else {
-        return (
-          <li key={r.title}>
-            <Link key={r.path} href={r.path}>
-              <a className="flex py-2 pl-2 text-sm font-medium text-gray-600 transition ease-in-out duration-150">
-                {r.title}
-              </a>
-            </Link>
-          </li>
-        )
-      }
-    })
-  } else {
-    return <></>
-  }
-}
-
 export default function Sidebar({ routes, versions }) {
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
+  const iconClasses = classNames({
+    'block w-4 h-4 transform text-blue-1': true,
+    'rotate-180': !sidebarCollapsed
+  })
+
   return (
     <div className="flex-none ">
       <div className="sticky top-4  overflow-y-auto">
-        <div className="">
+        <button
+          className="md:hidden mb-4 px-2 border-b border-gray-2 relative text-blue-800 text-base font-medium w-full text-left flex items-center justify-between"
+          onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+        >
+          <span className='block'>
+            Docs Menu
+          </span>
+          <span className={iconClasses}>
+            <Icon name="chevronDown" />
+          </span>
+        </button>
+        <div className={sidebarCollapsed ? 'hidden md:block' : 'block'}>
           <aside className="">
             <div className="mb-8">
-              <VersionSelect versions={versions} />
+              <VersionSelect versions={versions} setSidebarCollapsed={setSidebarCollapsed} />
             </div>
             <nav className="flex-1 px-2 space-y-1 mt-6">
               {routes &&
@@ -45,11 +36,8 @@ export default function Sidebar({ routes, versions }) {
                   const obj = routes[route]
                   return (
                     <div key={`sidebar-${idx}`}>
-                      <h3 className="text-gray-800 uppercase font-bold">
-                        {obj.title}
-                      </h3>
                       <ul>
-                        <ListItems routes={obj.routes} />
+                        <ListItems routes={obj.routes} setSidebarCollapsed={setSidebarCollapsed} />
                       </ul>
                     </div>
                   )
