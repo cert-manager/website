@@ -9,8 +9,8 @@ type: "docs"
 
 ### Prerequisites
 
-- [Install `kubectl` version `>= v1.19.0-rc.1`](https://kubernetes.io/docs/tasks/tools/). (otherwise, you will have issues updating the CRDs - see [v0.16 upgrade notes](/docs/installation/upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl))
-- Install a [supported version of Kubernetes or OpenShift](/docs/installation/supported-releases/).
+- [Install `kubectl` version `>= v1.19.0-rc.1`](https://kubernetes.io/docs/tasks/tools/). (otherwise, you will have issues updating the CRDs - see [v0.16 upgrade notes](../upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl))
+- Install a [supported version of Kubernetes or OpenShift](../supported-releases/).
 - Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Steps
@@ -21,7 +21,7 @@ are included in a single YAML manifest file:
 Install all cert-manager components:
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.yaml
+$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.2/cert-manager.yaml
 ```
 
 By default, cert-manager will be installed into the `cert-manager`
@@ -75,7 +75,7 @@ Delete the installation manifests using a link to your currently running version
 > be removed by Kubernetes' garbage collector.
 
 ```bash
-$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
+$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
 ```
 
 ### Namespace Stuck in Terminating State

@@ -44,8 +44,8 @@ spec:
       name: example-issuer-account-key
     solvers:
     - http01:
-       ingress:
-         class: nginx
+        ingress:
+          class: nginx
 ```
 
 ## Options
@@ -139,6 +139,7 @@ No other fields of the `podTemplate` exist.
 ### `ingressTemplate`
 
 It is possible to add labels and annotations to the solver ingress resources.
+It can be really useful when you are managing several Ingress Controllers across your cluster and you want to make sure that the right one will pick up and expose the solver (for the upcoming challenge to resolve).
 These can be configured under the `metadata` field under `ingressTemplate`:
 
 ```yaml

@@ -10,7 +10,7 @@ type: "docs"
 ### Prerequisites
 
 - [Install the kubectl cert-manager plugin](../../usage/kubectl-plugin/#installation).
-- Install a [supported version of Kubernetes or OpenShift](/docs/installation/supported-releases/).
+- Install a [supported version of Kubernetes or OpenShift](../supported-releases/).
 - Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Steps

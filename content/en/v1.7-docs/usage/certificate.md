@@ -37,13 +37,11 @@ spec:
   # Secret names are always required.
   secretName: example-com-tls
 
-  # Secret template is optional. If set, these annotations
-  # and labels will be copied to the secret named example-com-tls.
-
-  # Note: Labels and annotations from the template are only synced to the Secret at the time when the certificate 
-  # is created or renewed. Currently labels and annotations can only be added, but not removed. Removing any 
-  # labels or annotations from the template or removing the template itself will have no effect.
-  # See https://github.com/jetstack/cert-manager/issues/4292.
+  # secretTemplate is optional. If set, these annotations and labels will be
+  # copied to the Secret named example-com-tls. These labels and annotations will
+  # be re-reconciled if the Certificate's secretTemplate changes. secretTemplate
+  # is also enforced, so relevant label and annotation changes on the Secret by a
+  # third party will be overwriten by cert-manager to match the secretTemplate.
   secretTemplate:
     annotations:
       my-secret-annotation-1: "foo"
@@ -284,3 +282,87 @@ Minimum value for `spec.duration` is 1 hour and minimum value for `spec.renewBef
 It is also required that `spec.duration` > `spec.renewBefore`.
 
 Once an X.509 certificate has been issued, cert-manager will calculate the renewal time for the `Certificate`. By default this will be 2/3 through the X.509 certificate's duration. If `spec.renewBefore` has been set, it will be `spec.renewBefore` amount of time before expiry. cert-manager will set `Certificate`'s `status.RenewalTime` to the time when the renewal will be attempted.
+
+## Additional Certificate Output Formats
+
+{{% pageinfo color="warning" %}}
+
+⛔️ The additional certificate output formats feature is currently in an
+_experimental_ alpha state, and is subject to breaking changes or complete
+removal in future releases. This feature is only enabled by adding it to the
+`--feature-gates` flag on the cert-manager controller and webhook components:
+
+```bash
+--feature-gates=AdditionalCertificateOutputFormats=true
+```
+
+{{% /pageinfo %}}
+
+`additionalOutputFormats` is a field on the Certificate `spec` that allows
+specifying additional supplementary formats of issued certificates and their
+private key. There are currently two supported additional output formats:
+`CombinedPEM` and `DER`. Both output formats can be specified on the same
+Certificate.
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+spec:
+  ...
+  secretName: my-cert-tls
+  additionalOutputFormats:
+  - type: CombinedPEM
+  - type: DER
+
+# Results in:
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-cert-tls
+type: kubernetes.io/tls
+data:
+  ca.crt: <PEM CA certificate>
+  tls.key: <PEM private key>
+  tls.crt: <PEM signed certificate chain>
+  tls-combined.pem: <PEM private key + "\n" + PEM signed certificate chain>
+  key.der: <DER binary format of private key>
+```
+
+#### `CombinedPEM`
+
+The `CombinedPEM` type will create a new key entry in the resulting
+Certificate's Secret `tls-combined.pem`. This entry will contain the PEM encoded
+private key, followed by at least one new line character, followed by the PEM
+encoded signed certificate chain-
+
+```text
+<private key> + "\n" + <signed certificate chain>
+```
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-cert-tls
+type: kubernetes.io/tls
+data:
+  tls-combined.pem: <PEM private key + "\n" + PEM signed certificate chain>
+  ...
+```
+
+#### `DER`
+
+The `DER` type will create a new key entry in the resulting Certificate's Secret
+`key.der`. This entry will contain the DER binary format of the private key.
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-cert-tls
+type: kubernetes.io/tls
+data:
+  key.der: <DER binary format of private key>
+  ...
+```

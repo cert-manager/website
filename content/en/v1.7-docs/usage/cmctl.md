@@ -23,7 +23,7 @@ Run the following commands to set up the CLI. Replace OS and ARCH with your
 systems equivalents:
 
 ```console
-OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -L -o cmctl.tar.gz https://github.com/jetstack/cert-manager/releases/latest/download/cmctl-$OS-$ARCH.tar.gz
+OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -sSL -o cmctl.tar.gz https://github.com/cert-manager/cert-manager/releases/download/v1.7.2/cmctl-$OS-$ARCH.tar.gz
 tar xzf cmctl.tar.gz
 sudo mv cmctl /usr/local/bin
 ```
@@ -49,6 +49,7 @@ Available Commands:
   inspect      Get details on certificate related resources
   renew        Mark a Certificate for manual renewal
   status       Get details on current status of cert-manager resources
+  upgrade      Tools that assist in upgrading cert-manager
   version      Print the cert-manager CLI version and the deployed cert-manager version
 
 Flags:
@@ -249,4 +250,23 @@ signed certificate to the local file `<name>.crt`, or specified by `-c,
 
 ```bash
 $ cmctl x create csr -f my-cert.yaml my-req -w
+```
+
+#### Upgrade
+
+Tools that assist in upgrading cert-manager
+
+```bash
+$ cmctl upgrade --help
+```
+##### Migrate API version
+
+This command can be used to prepare a cert-manager installation that was created
+before cert-manager `v1` for upgrading to a cert-manager version `v1.6` or later.
+It ensures that any cert-manager custom resources that may have been stored in etcd at
+a deprecated API version get migrated to `v1`. See [Migrating Deprecated API
+Resources](https://cert-manager.io/docs/installation/upgrading/remove-deprecated-apis) for more context.
+
+```bash
+$ cmctl upgrade migrate-api-version --qps 5 --burst 10
 ```

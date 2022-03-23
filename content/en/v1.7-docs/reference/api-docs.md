@@ -5585,5 +5585,5 @@ Resource Types:
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>527537d03</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>2e0bfc87d</code>. </em>
 </p>

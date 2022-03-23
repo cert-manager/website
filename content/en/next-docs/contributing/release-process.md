@@ -264,7 +264,7 @@ page if a step is missing or if it is outdated.
         # Must be run from the cert-manger folder.
         export GITHUB_TOKEN=*your-token*
         git fetch origin $BRANCH:$BRANCH
-        export START_SHA="$(git rev-list --reverse --ancestry-path $START_TAG..$BRANCH | head -1)"
+        export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
         release-notes --debug --repo-path cert-manager \
           --org jetstack --repo cert-manager \
           --required-author "jetstack-bot" \
@@ -379,12 +379,17 @@ page if a step is missing or if it is outdated.
         cmrel publish --nomock --skip-signing --release-name "$CMREL_RELEASE_NAME"
         ```
 
-        <div class="pageinfo pageinfo-warning"><p>
-        ⏰ Upon completion there will be:
-
-        1. [A draft release of cert-manager on GitHub](https://github.com/jetstack/cert-manager/releases).
-        2. [A pull request containing the new Helm chart](https://github.com/jetstack/jetstack-charts/pulls).
-        </p></div>
+      <div className="info">
+         ⏰ Upon completion there will be:
+         <ol>
+            <li>
+               <a href="https://github.com/jetstack/cert-manager/releases">A draft release of cert-manager on GitHub</a>
+            </li>
+            <li>
+               <a href="https://github.com/jetstack/cert-manager/releases">A pull request containing the new Helm chart</a>
+            </li>
+         </ol>
+      </div>
 
     5. While the build is running, send a fourth Slack message in reply to
        the first message:

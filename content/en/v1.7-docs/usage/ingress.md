@@ -60,7 +60,7 @@ trigger Certificate resources to be automatically created:
   Ingress resides, as ClusterIssuers are non-namespaced resources.
 
 - `cert-manager.io/issuer-kind`: the kind of the external issuer resource, for
-  example `AWSPCACIssuer`. This is only necessary for out-of-tree issuers.
+  example `AWSPCAIssuer`. This is only necessary for out-of-tree issuers.
 
 - `cert-manager.io/issuer-group`: the API group of the external issuer
   controller, for example `awspca.cert-manager.io`. This is only necessary for
@@ -132,6 +132,8 @@ Or by adding the following arguments to the cert-manager deployment
 In the above example, cert-manager will create `Certificate` resources that
 reference the `ClusterIssuer` `letsencrypt-prod` for all Ingresses that have a
 `kubernetes.io/tls-acme: "true"` annotation.
+
+Issuers configured via annotations have a preference over the default issuer. If a default issuer is configured via CLI flags and a `cert-manager.io/cluster-issuer` or `cert-manager.io/issuer` annotation also has been added to an Ingress, the created `Certificate` will refer to the issuer configured via annotation.
 
 For more information on deploying cert-manager, read the [installation
 guide](../../installation/).
