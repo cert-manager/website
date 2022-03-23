@@ -4,6 +4,16 @@ linkTitle: "v1.7"
 weight: 760
 type: "docs"
 ---
+
+## v1.7.2
+
+### Changes since 1.7.1
+
+#### Bug or Regression
+
+- Bumps the version of Go used to build the cert-manager binaries to 1.17.8, to fix a slew of CVEs (none of which were likely to be exploited) ([#4976](https://github.com/cert-manager/cert-manager/pull/4976), [@vhosakot](https://github.com/vhosakot))
+- Fixes an expired hardcoded certificate which broke unit tests ([#4978](https://github.com/cert-manager/cert-manager/pull/4978), [@SgtCoDFish](https://github.com/SgtCoDFish), [@jakexks](https://github.com/jakexks))
+
 ## v1.7.1
 
 ### Changes since v1.7.0
