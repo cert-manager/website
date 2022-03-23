@@ -153,7 +153,7 @@ Thanks again to all open-source contributors with commits in this release, inclu
 And thanks as usual to [coderanger](https://github.com/coderanger) for helping people
 out on the [`#cert-manager` Slack channel]; it's a huge help and much appreciated.
 
-[`#cert-manager` Slack channel]: ../../contributing/#slack
+[`#cert-manager` Slack channel]: ../../contributing/contact-the-maintainers/#slack
 
 ### Changelog since v1.6.0
 
