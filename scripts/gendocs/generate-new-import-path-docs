@@ -1,0 +1,170 @@
+#!/usr/bin/env bash
+
+# Copyright 2022 The cert-manager Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# This script constructs a 'content/' directory that contains content for all
+# configured versions of the documentation which use the "github.com/cert-manager/cert-manager" import path
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
+
+if ! command -v go &>/dev/null; then
+    echo "Ensure go is installed"
+    exit 1
+fi
+
+if ! command -v npm &>/dev/null; then
+    echo "Ensure npm is installed"
+    exit 1
+fi
+
+tmpdir="$(mktemp -d)"
+apidocstmpdir="$(mktemp -d)"
+
+cleanup() {
+	# we can't simply remove tmpdir because the modcache is written as read-only
+	# and we'll get permissions errors, so we use go clean instead
+	export GO111MODULE="auto"
+	echo "+++ Cleaning up temporary GOPATH"
+	go clean -modcache
+
+	rm -rf "${apidocstmpdir}"
+	rm -rf "${tmpdir}"
+}
+trap cleanup EXIT
+
+pushd scripts/gendocs/postprocess && npm install && popd
+
+# Create fake GOPATH
+echo "+++ Creating temporary GOPATH"
+export GOPATH="${tmpdir}/go"
+export GO111MODULE="on"
+GOROOT="$(go env GOROOT)"
+export GOROOT
+GOBIN="${tmpdir}/bin"
+export GOBIN
+
+go install github.com/ahmetb/gen-crd-api-reference-docs@v0.3.0
+
+mkdir -p "${GOPATH}/src/github.com/cert-manager"
+gitdir="${GOPATH}/src/github.com/cert-manager/cert-manager"
+echo "+++ Cloning cert-manager repository..."
+git clone "https://github.com/cert-manager/cert-manager.git" "$gitdir"
+cd "$gitdir"
+
+# genversion takes two arguments (branch in cert-manager repo and a directory in
+# this repo under content/en) and generates API reference docs from cert-manager
+# branch for the path in this repo.
+genversion() {
+	checkout "$1"
+	gendocs "$2"
+}
+
+genversionwithcli() {
+  genversion "$1" "$2"
+
+  genclireference "$2" "cmd/acmesolver" "acmesolver"
+  genclireference "$2" "cmd/cainjector" "cainjector"
+  genclireference "$2" "cmd/ctl" "cmctl"
+  genclireference "$2" "cmd/controller" "controller"
+  genclireference "$2" "cmd/webhook" "webhook"
+
+  # if any of the above steps succeeded copy over the index file
+  if [ "$2" != "docs" ] && [ -d "$REPO_ROOT/content/en/$2/cli" ]; then
+    cp "$REPO_ROOT/content/en/docs/cli/_index.md" "${REPO_ROOT}/content/en/$2/cli/"
+  fi
+}
+
+checkout() {
+	branch="$1"
+	pushd "$gitdir"
+	rm -rf vendor/
+	echo "+++ Checking out branch $branch"
+	git fetch origin "$branch"
+	git reset --hard "origin/$branch"
+	echo "+++ Running 'go mod vendor' (this may take a while)"
+	go mod vendor
+}
+
+gendocs() {
+	outputdir="$1"
+	mkdir -p ${apidocstmpdir}/${outputdir}/
+	echo "+++ Generating reference docs..."
+	"${GOBIN}/gen-crd-api-reference-docs" \
+		-config "${REPO_ROOT}/scripts/gendocs/config.json" \
+		-template-dir "${REPO_ROOT}/scripts/gendocs/templates" \
+		-api-dir "./pkg/apis" \
+		-out-file ${apidocstmpdir}/${outputdir}/api-docs.md
+
+	${REPO_ROOT}/scripts/gendocs/postprocess/api-doc-postprocess.js <${apidocstmpdir}/${outputdir}/api-docs.md > "${REPO_ROOT}/content/en/${outputdir}/reference/api-docs.md"
+
+	rm -rf vendor/
+	popd
+}
+
+# genclireference will attempt to run main.go --help for the target and write the output to a markdown file
+genclireference() {
+  if [ ! -f "$2/main.go" ]; then
+    echo "+++ target $2 does not exist, skipping..."
+    return
+  fi
+
+  # hacky way to figure out if the target has the correct structure
+  # differs between older version but this catches the corner cases
+  if [[ ! -d "$2/app" ]] && [ ! -d "$2/cmd" ]; then
+    echo "+++ app directory for $2 does not exist, skipping..."
+    return
+  fi
+
+  # combined with the check above we can handle all versions
+  # for example release-0.15 webhook has the correct directory structure but does not use cobra
+  if ! grep -q "@com_github_spf13_cobra//:go_default_library" "$2/app/BUILD.bazel" && ! grep -q "@com_github_spf13_cobra//:go_default_library" "$2/cmd/BUILD.bazel"; then
+    return
+  fi
+
+  outputdir="$1"
+  target="$2"
+  name="$3"
+  echo "+++ Generating CLI reference docs for $target ..."
+
+  mkdir -p "${REPO_ROOT}/content/en/${outputdir}/cli/"
+
+  output=$(go run "$target/main.go" --help)
+  cat > "${REPO_ROOT}/content/en/${outputdir}/cli/$name.md" << EOF
+---
+title: $name CLI reference
+linkTitle: $name
+weight: 960
+type: "docs"
+---
+\`\`\`
+$output
+\`\`\`
+EOF
+}
+
+# The branches named here exist in the `cert-manager/cert-manager` repo.
+
+# Note that we cannot generate docs for any version before 1.8 using this script!
+# In 1.8 we changed the import path, and gen-crd-api-reference-docs doesn't seem module-aware
+# This script is _only_ for generating docs for versions of cert-manager with the
+# github.com/cert-manager/cert-manager import path!
+
+genversionwithcli "release-1.8" "next-docs"
+
+echo "Generated reference documentation for cert-manager versions with a new github.com/cert-manager/cert-manager import path"
