@@ -356,7 +356,7 @@ page if a step is missing or if it is outdated.
 
         ```sh
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --skip-signing --release-name "$CMREL_RELEASE_NAME"
+        cmrel publish --release-name "$CMREL_RELEASE_NAME"
         ```
 
         You can view the progress by clicking the Google Cloud Build URL in the
@@ -375,8 +375,7 @@ page if a step is missing or if it is outdated.
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        # Skip signing while quay.io doesn't support cosign signatures
-        cmrel publish --nomock --skip-signing --release-name "$CMREL_RELEASE_NAME"
+        cmrel publish --nomock --release-name "$CMREL_RELEASE_NAME"
         ```
 
       <div className="info">

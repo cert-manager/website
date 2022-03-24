@@ -16,17 +16,33 @@ Signing keys required for verification are all available on this website, but th
 on the artifact you're trying to validate in the future. At the time of writing, all signing is done using the same underlying
 key.
 
+## Container Images / Cosign
+
+For all cert-manager versions from `v1.8.0` and later, cert-manager container images are signed and verifiable using [`cosign`](https://docs.sigstore.dev/cosign/overview).
+
+The simplest way to verify signatures is to download the public key and then pass it to the cosign CLI directly:
+
+```console
+curl -sSOL https://cert-manager.io/public-keys/cert-manager-pubkey-2021-09-20.pem
+IMAGE_TAG=v1.8.0  # change as needed
+cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-acmesolver:$IMAGE_TAG
+cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-cainjector:$IMAGE_TAG
+cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-ctl:$IMAGE_TAG
+cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-controller:$IMAGE_TAG
+cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-webhook:$IMAGE_TAG
+```
+
+For a more fully-featured signature verification process in Kubernetes, check out [`connaisseur`](https://sse-secure-systems.github.io/connaisseur/).
+
+- PEM-encoded public key: [`cert-manager-pubkey-2021-09-20.pem`](../../../public-keys/cert-manager-pubkey-2021-09-20.pem)
+
 ## Helm Charts
 
-<!--
-TODO: uncomment this when cosign signing is in place. The warning doesn't have much value
-if we're not advertising the existence of other public keys.
 {{% alert title="Warning" color="warning" %}}
 Helm requires the use of PGP for verification; the key format is different.
 
-Trying to use PEM encoded public keys will fail.
+Trying to use "plain" PEM encoded public keys during verification will fail.
 {{% /alert %}}
--->
 
 For all cert-manager versions from `v1.6.0` and later, Helm charts are signed and verifiable through the Helm CLI.
 
@@ -43,26 +59,3 @@ If you know what you're doing and you want the signing key in a format that's ea
 it's available in an ASCII armored version:
 
 - ASCII-armored signing key: [`cert-manager-pgp-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.asc`](../../../public-keys/cert-manager-pgp-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.asc)
-
-## Container Images / Cosign
-
-Soon, all container images which make up cert-manager will be verifiable using [`cosign`](https://docs.sigstore.dev/cosign/overview).
-
-Unfortunately, this isn't possible today because the images are hosted on `quay.io` which doesn't have the proper support for cosign signatures yet. When signatures are
-added, this section will contain details of how to verify them.
-
-<!--
-TODO: also uncomment the warning in the helm section!
-
-The simplest way to verify signatures is to download the public key and then pass it to the cosign CLI:
-
-```console
-curl -sSL https://cert-manager.io/public-keys/cert-manager-pubkey-2021-09-20.pem > cert-manager-pubkey-2021-09-20.pem
-cosign verify -key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-controller
-# repeat for other images as desired
-```
-
-For a more fully-featured signature verification process in Kubernetes, check out [`connaisseur`](https://sse-secure-systems.github.io/connaisseur/).
-
-- PEM-encoded public key: [`cert-manager-pubkey-2021-09-20.pem`](../../../public-keys/cert-manager-pubkey-2021-09-20.pem)
--->
