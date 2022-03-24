@@ -31,6 +31,12 @@ as well as how to compile, run and test cert-manager and all it's components.
 This document sometimes can get out of date due to changes in the code and/or tooling. PRs to this part are
 also very welcome if you happen to find an out of date part.
 
+## Google Season of Docs
+
+The cert-manager team are participating in  [Google Season of Docs](https://developers.google.com/season-of-docs):
+
+ * [2022 Project Proposals](google-season-of-docs/2022/)
+
 ## Meetings
 
 All cert-manager meetings are open for everyone to join.
