@@ -10,15 +10,17 @@ type: "docs"
 ### Prerequisites
 
 - [Install the cert-manager CLI cmctl](../../usage/cmctl/#installation).
-- Install a [supported version of Kubernetes or OpenShift](/docs/installation/supported-releases/).
+- Install a [supported version of Kubernetes or OpenShift](../../../docs/installation/supported-releases/).
 - Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Steps
 
 The CLI provides the simplest way of installing cert-manager:
+
 ```bash
 $ cmctl x install
 ```
+
 The command makes sure that the required `CustomResourceDefinitions` are installed together with the cert-manager, cainjector and webhook components.
 Under the hood, a procedure similar to the [Helm install procedure](../helm/#steps) is used.
 

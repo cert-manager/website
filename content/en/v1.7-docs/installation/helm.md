@@ -14,8 +14,8 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 
 ### Prerequisites
 
-- [Install Helm version 3 or later](https://helm.sh/docs/intro/install/).
-- Install a [supported version of Kubernetes or OpenShift](/docs/installation/supported-releases/).
+- [Install the kubectl cert-manager plugin](../../usage/kubectl-plugin/#installation).
+- Install a [supported version of Kubernetes or OpenShift](../../../docs/installation/supported-releases/).
 - Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Steps
@@ -46,7 +46,7 @@ or using the `installCRDs` option when installing the Helm chart.
 
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml
+$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.2/cert-manager.crds.yaml
 ```
 
 ##### Option 2: install CRDs as part of the Helm release
@@ -55,8 +55,6 @@ To automatically install and manage the CRDs as part of your Helm release, you
 must add the `--set installCRDs=true` flag to your Helm installation command.
 
 Uncomment the relevant line in the next steps to enable this.
-
-Note that if you're using a `helm` version based on Kubernetes `v1.18` or below (Helm `v3.2`), `installCRDs` will not work with cert-manager `v0.16`. See the [v0.16 upgrade notes](/docs/installation/upgrading/upgrading-0.15-0.16/#helm) for more details.
 
 #### 4. Install cert-manager
 
@@ -67,7 +65,7 @@ $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.6.1 \
+  --version v1.7.2 \
   # --set installCRDs=true
 ```
 
@@ -80,9 +78,9 @@ $ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.6.1 \
+  --version v1.7.2 \
   --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
-  --set webhook.timeoutSeconds=4   # Example: changing the wehbook timeout using a Helm parameter
+  --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
 ```
 
 Once you have deployed cert-manager, you can [verify](../verify/) the installation.
@@ -97,7 +95,7 @@ $ helm template \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.6.1 \
+  --version v1.7.2 \
   # --set prometheus.enabled=false \   # Example: disabling prometheus using a Helm parameter
   # --set installCRDs=true \           # Uncomment to also template CRDs
   > cert-manager.custom.yaml
@@ -146,7 +144,7 @@ using the link to the version `vX.Y.Z` you installed:
 > be removed by Kubernetes' garbage collector.
 
 ```bash
-$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
+$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
 ```
 
 ### Namespace Stuck in Terminating State

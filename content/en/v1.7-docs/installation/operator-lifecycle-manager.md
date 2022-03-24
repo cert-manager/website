@@ -9,7 +9,7 @@ type: "docs"
 
 ### Prerequisites
 
-- Install a [supported version of Kubernetes or OpenShift](/docs/installation/supported-releases/).
+- Install a [supported version of Kubernetes or OpenShift](../../../docs/installation/supported-releases/).
 - Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Option 1: Installing from OperatorHub Web Console on OpenShift
@@ -69,7 +69,7 @@ spec:
   name: cert-manager
 ...
 status:
-  currentCSV: cert-manager.v1.6.0
+  currentCSV: cert-manager.v1.7.1
   state: AtLatestKnown
 ...
 ```

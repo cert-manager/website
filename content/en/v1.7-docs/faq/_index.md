@@ -11,7 +11,7 @@ face:
 - [TLS Terminology, including commonly misused terms](./terminology/)
 - [Troubleshooting issuing ACME certificates](./acme/)
 - [How to change the Cluster Resource Namespace](./cluster-resource/)
-- [How to sync secrets across namespaces](./kubed/)
+- [How to sync secrets across namespaces](./sync-secrets/)
 - [Failing to create resources due to Webhook](./webhook/)
 
 ## Certificates

@@ -69,7 +69,7 @@ self check to take longer due to caching performed by the recursive nameservers.
 
 Example usage:
 ```bash
---dns01-recursive-nameservers-only --dns01-recursive-nameservers="8.8.8.8:53,1.1.1.1:53"
+--dns01-recursive-nameservers-only --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
 ```
 
 If you're using the `cert-manager` helm chart, you can set recursive nameservers
@@ -115,7 +115,7 @@ spec:
     - selector:
         dnsZones:
         - 'example.com'
-    - dns01:
+      dns01:
         # Valid values are None and Follow
         cnameStrategy: Follow
         route53:
@@ -169,6 +169,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-gandi`](https://github.com/bwolf/cert-manager-webhook-gandi)
 - [`cert-manager-webhook-infomaniak`](https://github.com/Infomaniak/cert-manager-webhook-infomaniak)
 - [`cert-manager-webhook-inwx`](https://gitlab.com/smueller18/cert-manager-webhook-inwx)
+- [`cert-manager-webhook-linode`](https://github.com/slicen/cert-manager-webhook-linode)
 - [`cert-manager-webhook-oci`](https://gitlab.com/dn13/cert-manager-webhook-oci) (Oracle Cloud Infrastructure)
 - [`cert-manager-webhook-scaleway`](https://github.com/scaleway/cert-manager-webhook-scaleway)
 - [`cert-manager-webhook-selectel`](https://github.com/selectel/cert-manager-webhook-selectel)
@@ -177,9 +178,8 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-loopia`](https://github.com/Identitry/cert-manager-webhook-loopia)
 - [`cert-manager-webhook-arvan`](https://github.com/kiandigital/cert-manager-webhook-arvan)
 - [`bizflycloud-certmanager-dns-webhook`](https://github.com/bizflycloud/bizflycloud-certmanager-dns-webhook)
+- [`cert-manager-webhook-hetzner`](https://github.com/vadimkim/cert-manager-webhook-hetzner)
 
-You can find more information on how to configure webhook providers
-[here](./webhook/).
+You can find more information on how to configure webhook providers [here](./webhook/).
 
-To create a new unsupported DNS provider, follow the development documentation
-[here](/docs/contributing/dns-providers/).
+To create a new unsupported DNS provider, follow the development documentation [here](../../../../docs/contributing/dns-providers/).
