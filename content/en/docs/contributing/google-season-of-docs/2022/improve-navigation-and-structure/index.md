@@ -72,3 +72,15 @@ we will measure a baseline number of clicks required to achieve the task and we 
 | Technical writer audit and restructuring of the cert-manager.io documentation | 12,000      | 12,000            |                                 |
 | Volunteer stipends                                                            | 1,500       | 13,500            | 3 volunteer stipends x 500 each |
 | TOTAL                                                                         |             | 13,500            |                                 |
+
+Regarding the amount of $12,000, we assume that it will be enough to fund one experienced technical writer
+part-time (for example, they could work half day from Tuesday to Friday, for a total of 24 days, for 3 months
+at a daily rate of $500).
+
+We will give the "volonteer stipend" to contributors who can show they have one PR within the project
+timeframe (from 1st May to 30th July) in which a re-write of one page or a set of pages. Before
+starting the rewriting, the volonteer will suggest which page they wish to work on either on Slack
+(Kubernetes Slack, channel #cert-manager-dev), or in an issue on GitHub, and make sure by asking the
+team whether it makes sense to rework this page. As long as at least one positive reaction, the
+volonteer can start working. For the stipend to be validated, the PR needs to be reviewed and merged.
+
