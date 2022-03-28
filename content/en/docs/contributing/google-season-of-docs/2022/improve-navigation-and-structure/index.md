@@ -77,10 +77,10 @@ Regarding the amount of $12,000, we assume that it will be enough to fund one ex
 part-time (for example, they could work half day from Tuesday to Friday, for a total of 24 days, for 3 months
 at a daily rate of $500).
 
-We will give the "volonteer stipend" to contributors who can show they have one PR within the project
+We will give the "volunteer stipend" to contributors who can show they have one PR within the project
 timeframe (from 1st May to 30th July) in which a re-write of one page or a set of pages. Before
-starting the rewriting, the volonteer will suggest which page they wish to work on either on Slack
+starting the rewriting, the volunteer will suggest which page they wish to work on either on Slack
 (Kubernetes Slack, channel #cert-manager-dev), or in an issue on GitHub, and make sure by asking the
 team whether it makes sense to rework this page. As long as at least one positive reaction, the
-volonteer can start working. For the stipend to be validated, the PR needs to be reviewed and merged.
+volunteer can start working. For the stipend to be validated, the PR needs to be reviewed and merged.
 
