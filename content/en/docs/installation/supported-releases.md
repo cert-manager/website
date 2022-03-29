@@ -48,7 +48,7 @@ Note that dates in the future are uncertain and might change.
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
-[1.8]: https://github.com/jetstack/cert-manager/milestone/29
+[1.8]: https://github.com/cert-manager/cert-manager/milestone/29
 [1.7]: https://cert-manager.io/docs/release-notes/release-notes-1.7
 [1.6]: https://cert-manager.io/docs/release-notes/release-notes-1.6
 [1.5]: https://cert-manager.io/docs/release-notes/release-notes-1.5
@@ -64,14 +64,10 @@ Note that dates in the future are uncertain and might change.
 [0.12]: https://cert-manager.io/docs/release-notes/release-notes-0.12
 [0.11]: https://cert-manager.io/docs/release-notes/release-notes-0.11
 
-You can find available releases on the [releases
-page](https://github.com/jetstack/cert-manager/releases). You can find
-the release notes for each minor release
-[here](https://cert-manager.io/docs/release-notes/), and the upgrade
-instructions are
-[here](https://cert-manager.io/docs/installation/upgrading/). The
-cert-manager release process is documented on the [release-process
-page](https://cert-manager.io/docs/contributing/release-process/).
+We list cert-manager releases on [GitHub](https://github.com/cert-manager/cert-manager/releases),
+and release notes on [cert-manager.io](https://cert-manager.io/docs/release-notes/).
+
+We also maintain detailed [upgrade instructions](https://cert-manager.io/docs/installation/upgrading/).
 
 ## Support policy
 
@@ -119,7 +115,7 @@ Slack](https://slack.k8s.io/) (in the `#cert-manager` channel), using
 [GitHub Discussions][discussions] or using the [cert-manager-dev][group]
 Google group.
 
-[discussions]: https://github.com/jetstack/cert-manager/discussions
+[discussions]: https://github.com/cert-manager/cert-manager/discussions
 [group]: https://groups.google.com/g/cert-manager-dev
 
 ### Security and bug fixes {#bug-fixes-support}
@@ -170,12 +166,12 @@ Kubernetes API or the command line flags. We avoid making breaking changes
 where possible, and where they're required we'll give as much notice as
 possible.
 
-[#3393]: https://github.com/jetstack/cert-manager/issues/3393 "Broken CloudFlare DNS01 challenge"
-[#2857]: https://github.com/jetstack/cert-manager/issues/2857 "CloudDNS DNS01 challenge crashes cert-manager"
-[#4142]: https://github.com/jetstack/cert-manager/issues/4142 "Cannot issue a certificate that has the same subject and issuer"
-[#3444]: https://github.com/jetstack/cert-manager/issues/3444 "Certificates do not get immediately updated after updating them"
-[#3882]: https://github.com/jetstack/cert-manager/pull/3882 "Certificate's revision history limit validated by webhook"
-[#3644]: https://github.com/jetstack/cert-manager/issues/3644 "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
+[#3393]: https://github.com/cert-manager/cert-manager/issues/3393 "Broken CloudFlare DNS01 challenge"
+[#2857]: https://github.com/cert-manager/cert-manager/issues/2857 "CloudDNS DNS01 challenge crashes cert-manager"
+[#4142]: https://github.com/cert-manager/cert-manager/issues/4142 "Cannot issue a certificate that has the same subject and issuer"
+[#3444]: https://github.com/cert-manager/cert-manager/issues/3444 "Certificates do not get immediately updated after updating them"
+[#3882]: https://github.com/cert-manager/cert-manager/pull/3882 "Certificate's revision history limit validated by webhook"
+[#3644]: https://github.com/cert-manager/cert-manager/issues/3644 "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
 
 
 ## How we determine supported Kubernetes versions {#kubernetes-supported-versions}
