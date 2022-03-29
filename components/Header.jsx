@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import VersionSelect from './docs/VersionSelect'
 import CertManagerLogo from './snippets/CertManagerLogo'
 import { meta as site } from '../content/pages/site.mdx'
 
@@ -89,18 +88,16 @@ function MobileNavigation({ active, className = '' }) {
                   apiKey={process.env.NEXT_PUBLIC_DOCS_SEARCH_API_KEY}
                 />
               </li>
-              {active !== '/docs' && (
-                <li>
-                  <Link href={site.navigation.cta.href}>
-                    <a
-                      onClick={() => closeMenu(setOpen)}
-                      className="block btn-gradient text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px"
-                    >
-                      {site.navigation.cta.text}
-                    </a>
-                  </Link>
-                </li>
-              )}
+              <li>
+                <Link href={site.navigation.cta.href}>
+                  <a
+                    onClick={() => closeMenu(setOpen)}
+                    className="block btn-gradient text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px"
+                  >
+                    {site.navigation.cta.text}
+                  </a>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -123,20 +120,13 @@ function DesktopNavigation({ active, className = '' }) {
             apiKey={process.env.NEXT_PUBLIC_DOCS_SEARCH_API_KEY}
           />
         </li>
-        {active !== '/docs' && (
-          <li>
-            <Link href={site.navigation.cta.href}>
-              <a className="block btn-gradient text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px">
-                {site.navigation.cta.text}
-              </a>
-            </Link>
-          </li>
-        )}
-        {active === '/docs' && (
-          <li>
-            <VersionSelect />
-          </li>
-        )}
+        <li>
+          <Link href={site.navigation.cta.href}>
+            <a className="block btn-gradient text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px">
+              {site.navigation.cta.text}
+            </a>
+          </Link>
+        </li>
       </ul>
     </nav>
   )

@@ -1,5 +1,5 @@
-import SidebarLink from "./SidebarLink"
-import Dropdown from "./Dropdown"
+import SidebarLink from './SidebarLink'
+import Dropdown from './Dropdown'
 
 export default function ListItems({ routes, setSidebarCollapsed }) {
   if (!routes) return null
@@ -14,7 +14,11 @@ export default function ListItems({ routes, setSidebarCollapsed }) {
       } else {
         return (
           <li key={`${r.path}-${idx}`}>
-            <SidebarLink href={r.path} caption={r.title} setSidebarCollapsed={setSidebarCollapsed} />
+            <SidebarLink
+              href={r.path}
+              caption={r.title}
+              setSidebarCollapsed={setSidebarCollapsed}
+            />
           </li>
         )
       }

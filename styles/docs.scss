@@ -52,7 +52,8 @@
       @apply block align-baseline font-normal text-dark-2;
     }
 
-    p, div {
+    p,
+    div {
       @apply text-lg text-dark-2;
     }
 
@@ -83,7 +84,7 @@
       visibility: visible;
     }
 
-    blockquote  {
+    blockquote {
       @apply font-normal border-blue-1 m-0 not-italic;
       p:before,
       p:after {

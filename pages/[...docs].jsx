@@ -37,7 +37,11 @@ const DocumentationPage = ({
       <div className="container mt-20 pb-24">
         <div className="w-full md:grid grid-cols-12 gap-12 xl:gap-16">
           <div className="col-span-4 lg:col-span-3 xl:col-span-2 md:border-r border-gray-2/50 pr-5">
-            <Sidebar routes={sidebarRoutes} versions={versions} />
+            <Sidebar
+              router={router}
+              routes={sidebarRoutes}
+              versions={versions}
+            />
           </div>
           <main className="col-span-8 lg:col-span-9 xl:col-span-8 docs">
             <div className="mx-auto md:mx-0 prose max-w-full main-docs-section">

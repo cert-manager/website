@@ -1,8 +1,11 @@
-import Image from "../Image"
+import Image from '../Image'
 
 export default function Hero({ heading, description = '', image = '' }) {
   return (
-    <div className="relative overflow-hidden" style={{backgroundColor: '#E7EAFA'}}>
+    <div
+      className="relative overflow-hidden"
+      style={{ backgroundColor: '#E7EAFA' }}
+    >
       <div className="relative z-100 container pt-10 pb-52 text-blue-1 lg:pt-20 lg:pb-320px">
         <div className="lg:flex lg:gap-16">
           <div className="lg:w-5/12">

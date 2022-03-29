@@ -13,13 +13,13 @@ function Support({ router }) {
   return (
     <>
       <NextSeo
-          title={page.title}
-          description={page.description}
-          canonical={currentUrl}
-          openGraph={{
-            url: currentUrl,
-            title: page.title,
-            description: page.description
+        title={page.title}
+        description={page.description}
+        canonical={currentUrl}
+        openGraph={{
+          url: currentUrl,
+          title: page.title,
+          description: page.description
         }}
       />
       <div className="bg-gray-1 relative overflow-hidden pb-117px">
@@ -28,32 +28,39 @@ function Support({ router }) {
           <CirclesBackground />
         </div>
         <div className="relative z-100 container">
-          <div className='max-w-3xl'>
+          <div className="max-w-3xl">
             <Dots className="mb-8">
-              <h2 className='text-4xl uppercase'>{page.intro.heading}</h2>
+              <h2 className="text-4xl uppercase">{page.intro.heading}</h2>
             </Dots>
-            <p className='text-lg mb-6'>{page.intro.description}</p>
-            <div className='bg-black px-9 py-8 rounded-5px relative overflow-hidden'>
+            <p className="text-lg mb-6">{page.intro.description}</p>
+            <div className="bg-black px-9 py-8 rounded-5px relative overflow-hidden">
               <div className="absolute top-0 right-0 h-full w-full">
                 <Image
-                  src='/images/enterprise-cta-background.svg'
-                  alt='Jetstack secure'
+                  src="/images/enterprise-cta-background.svg"
+                  alt="Jetstack secure"
                   width={507}
                   height={206}
                   layout="fill"
                   className="object-cover"
                 />
               </div>
-              <div className='relative z-100'>
+              <div className="relative z-100">
                 <Image
                   src={page.intro.cta.logo}
                   alt={page.intro.heading}
                   width={228}
                   height={58}
                 />
-                <p className='text-white font-semibold text-lg mb-5'>{page.intro.cta.description}</p>
+                <p className="text-white font-semibold text-lg mb-5">
+                  {page.intro.cta.description}
+                </p>
                 <Link href={page.intro.cta.href}>
-                  <a target="_blank" className='inline-block bg-indigo px-6 py-3 rounded-5px text-white text-sm no-underline'>{page.intro.cta.caption}</a>
+                  <a
+                    target="_blank"
+                    className="inline-block bg-indigo px-6 py-3 rounded-5px text-white text-sm no-underline"
+                  >
+                    {page.intro.cta.caption}
+                  </a>
                 </Link>
               </div>
             </div>

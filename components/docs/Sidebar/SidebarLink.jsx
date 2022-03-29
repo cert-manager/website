@@ -1,8 +1,13 @@
-import { useRouter } from "next/router"
-import Link from "next/link"
-import classNames from "classnames"
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import classNames from 'classnames'
 
-export default function SidebarLink({ href, caption, parentOpen = true, setSidebarCollapsed }) {
+export default function SidebarLink({
+  href,
+  caption,
+  parentOpen = true,
+  setSidebarCollapsed
+}) {
   const router = useRouter()
   const active = router.asPath === href + '/'
   const linkClasses = classNames({
@@ -11,7 +16,11 @@ export default function SidebarLink({ href, caption, parentOpen = true, setSideb
   })
   return (
     <Link href={href}>
-      <a className={linkClasses} tabIndex={parentOpen ? 0 : -1 } onClick={() => setSidebarCollapsed(true)}>
+      <a
+        className={linkClasses}
+        tabIndex={parentOpen ? 0 : -1}
+        onClick={() => setSidebarCollapsed(true)}
+      >
         {caption}
       </a>
     </Link>

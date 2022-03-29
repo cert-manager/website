@@ -4,7 +4,8 @@ import ListItems from './ListItems'
 import Icon from 'components/Icon'
 import VersionSelect from 'components/docs/VersionSelect'
 
-export default function Sidebar({ routes, versions }) {
+export default function Sidebar({ router, routes, versions }) {
+  const version = router.query?.docs.length > 0 ? router.query.docs[0] : 'docs'
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
   const iconClasses = classNames({
     'block w-4 h-4 transform text-blue-1': true,
@@ -18,9 +19,7 @@ export default function Sidebar({ routes, versions }) {
           className="md:hidden mb-4 px-2 border-b border-gray-2 relative text-blue-800 text-base font-medium w-full text-left flex items-center justify-between"
           onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
         >
-          <span className='block'>
-            Docs Menu
-          </span>
+          <span className="block">Docs Menu</span>
           <span className={iconClasses}>
             <Icon name="chevronDown" />
           </span>
@@ -28,7 +27,11 @@ export default function Sidebar({ routes, versions }) {
         <div className={sidebarCollapsed ? 'hidden md:block' : 'block'}>
           <aside className="">
             <div className="mb-8">
-              <VersionSelect versions={versions} setSidebarCollapsed={setSidebarCollapsed} />
+              <VersionSelect
+                version={version}
+                versions={versions}
+                setSidebarCollapsed={setSidebarCollapsed}
+              />
             </div>
             <nav className="flex-1 px-2 space-y-1 mt-6">
               {routes &&
@@ -37,7 +40,10 @@ export default function Sidebar({ routes, versions }) {
                   return (
                     <div key={`sidebar-${idx}`}>
                       <ul>
-                        <ListItems routes={obj.routes} setSidebarCollapsed={setSidebarCollapsed} />
+                        <ListItems
+                          routes={obj.routes}
+                          setSidebarCollapsed={setSidebarCollapsed}
+                        />
                       </ul>
                     </div>
                   )
