@@ -40,6 +40,7 @@ export default function Dropdown({
                 routes={r}
                 parentOpen={open}
                 key={`${r.title}-${idx}`}
+                setSidebarCollapsed={setSidebarCollapsed}
               />
             )
           } else {
