@@ -19,14 +19,14 @@ release every two months.
 
 | Release | Release Date |  End of Life | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| [1.7][] | Jan 26, 2022 | May 26, 2022 |             1.18 → 1.23            |             4.5 → 4.9             |
-| [1.6][] | Oct 26, 2021 | Mar 30, 2022 |             1.17 → 1.22            |             4.4 → 4.9             |
+| [1.7][] | Jan 26, 2022 | May 26, 2022 |             1.18 → 1.23            |             4.5 → 4.10            |
+| [1.6][] | Oct 26, 2021 | Apr 05, 2022 |             1.17 → 1.22            |             4.4 → 4.9             |
 
 ## Upcoming releases
 
 | Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| 1.8     | Apr 05, 2022 | June 8, 2022 |          To be confirmed           |         To be confirmed           |
+| 1.8     | Apr 05, 2022 | June 8, 2022 |             1.19 → 1.23            |             4.6 → 4.10            |
 
 Note that dates in the future are uncertain and might change.
 
