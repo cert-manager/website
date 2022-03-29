@@ -26,7 +26,7 @@ release every two months.
 
 | Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| 1.8     | Mar 30, 2022 | June 8, 2022 |          To be confirmed           |         To be confirmed           |
+| 1.8     | Apr 05, 2022 | June 8, 2022 |          To be confirmed           |         To be confirmed           |
 
 Note that dates in the future are uncertain and might change.
 
