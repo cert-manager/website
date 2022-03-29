@@ -1,0 +1,84 @@
+export const meta = {
+  title: 'cert-manager',
+  description: '',
+  hero: {
+    heading: 'Cloud Native certificate management',
+    description: 'X.509 certificate management for Kubernetes and OpenShift',
+    image: '/images/cert-manager-graphic.svg'
+  },
+  stats: [
+    {
+      icon: 'github',
+      description: '8000+ Github Stars'
+    },
+    {
+      icon: 'slack',
+      description: '5000+ Slack members'
+    },
+    {
+      icon: 'downloads',
+      description: '1 million+ daily downloads'
+    }
+  ],
+  topCta: {
+    ctas: [
+      {
+        icon: 'github',
+        href: 'https://github.com/jetstack/cert-manager',
+        caption: 'Github Repository',
+        target: '_blank'
+      },
+      {
+        icon: 'slack',
+        href: 'https://kubernetes.slack.com/',
+        caption: 'Join us on Slack',
+        target: '_blank'
+      },
+      {
+        icon: '',
+        href: '/docs',
+        caption: 'View docs'
+      }
+    ]
+  },
+  certManager: {
+    image: { src: '/images/cert-manager-logo-icon.svg', alt: 'cert manager' },
+    emphasize: 'cert-manager',
+    description:
+      'is a powerful and extensible X.509 certificate controller for Kubernetes and OpenShift workloads. It will obtain certificates from a variety of Issuers, both popular public Issuers as well as private Issuers, and ensure the certificates are valid and up-to-date, and will attempt to renew certificates at a configured time before expiry.'
+  },
+  features: {
+    heading: 'Key Features',
+    items: [
+      {
+        imageSrc: '/images/features/award.svg',
+        description:
+          'Automated issuance and renewal of certificates to secure Ingress with TLS'
+      },
+      {
+        imageSrc: '/images/features/file-certificate.svg',
+        description:
+          'Fully integrated Issuers from recognised public and private Certificate Authorities'
+      },
+      {
+        imageSrc: '/images/features/router.svg',
+        description:
+          'Secure pod-to pod communication with mTLS using private PKI Issuers '
+      },
+      {
+        imageSrc: '/images/features/world.svg',
+        description:
+          'Supports certificate use cases for web facing and internal workloads'
+      },
+      {
+        imageSrc: '/images/features/shield-check.svg',
+        description:
+          'Open source add-ons for enhanced cloud native service mesh security'
+      },
+      {
+        imageSrc: '/images/features/stars.svg',
+        description: 'Backed by major cloud service providers and distributions'
+      }
+    ]
+  }
+}
