@@ -1,0 +1,13 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^https://github.com"
+    },
+    {
+      "pattern": "^https://acme.example.com"
+    },
+    {
+      "pattern": "^https://developers.cloudflare.com"
+    }
+  ]
+}

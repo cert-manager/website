@@ -1,0 +1,42 @@
+html, body {
+  @apply font-hind font-medium text-dark-2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-montserrat font-bold;
+}
+
+a:not(.btn-gradient):not(.no-underline) {
+  @apply text-blue-2 underline;
+}
+
+a,
+button,
+input,
+select {
+  @apply focus:outline-none;
+  @apply focus-visible:ring;
+}
+
+.container {
+  max-width: calc(1313px + 8%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 4%;
+  padding-left: 4%;
+}
+
+.header__hits {
+  position: absolute;
+  top: 100%;
+  background: white;
+  z-index: 1000;
+  max-height: 400px;
+  @apply shadow-lg;
+}
+
+.header__hits ul {
+  max-height: 352px;
+  padding-bottom: 48px;
+  overflow-y: scroll;
+}
