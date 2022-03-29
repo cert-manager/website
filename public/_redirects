@@ -1,0 +1,82 @@
+# These rules will change if you change your site’s custom domains or HTTPS settings
+
+# Redirect domain aliases to primary domain
+https://netlify.cert-manager.io/* https://cert-manager.io/:splat 301!
+
+# Optional: Redirect default Netlify subdomain to primary domain
+https://cert-manager.netlify.com/* https://cert-manager.io/:splat 301!
+
+# We previously released the external loadbalancer page under /configuration, and is now moved to /configuration/acme/http01/
+https://cert-manager.io/docs/configuration/externalloadbalancer/ https://cert-manager.io/docs/configuration/acme/http01/externalloadbalancer/ 301!
+
+# Before May 2021, the project-maturity page listed the various Kubernetes
+# releases that cert-manager was supporting. Since we moved this information
+# to the supported-releases page, we removed the project-maturity page.
+https://cert-manager.io/docs/concepts/project-maturity/ https://cert-manager.io/docs/installation/supported-releases/
+
+# Before July 2021, the install pages were organised differently, below
+# are some redirects to fix external references to these old pages.
+https://cert-manager.io/docs/installation/kubernetes/ https://cert-manager.io/docs/installation/supported-releases/
+https://cert-manager.io/docs/installation/openshift/ https://cert-manager.io/docs/installation/supported-releases/
+https://cert-manager.io/docs/installation/uninstall/kubernetes/ https://cert-manager.io/docs/installation/uninstall/
+https://cert-manager.io/docs/installation/uninstall/openshift/ https://cert-manager.io/docs/installation/uninstall/
+
+# In v1.6 we released 'cmctl' which is considered a better CLI experience than
+# 'kubectl cert-manager'. The 'cmctl' page became the source of truth for all
+# subcommands so the old references to 'kubectl cert-manager' are redirected
+# there.
+https://cert-manager.io/docs/usage/kubectl-plugin/#commands https://cert-manager.io/docs/usage/cmctl/#commands
+https://cert-manager.io/docs/usage/kubectl-plugin/#approve-deny https://cert-manager.io/docs/usage/cmctl/#approve-and-deny-certificaterequests
+https://cert-manager.io/docs/usage/kubectl-plugin/#convert https://cert-manager.io/docs/usage/cmctl/#convert
+https://cert-manager.io/docs/usage/kubectl-plugin/#create https://cert-manager.io/docs/usage/cmctl/#create
+https://cert-manager.io/docs/usage/kubectl-plugin/#certificaterequest https://cert-manager.io/docs/usage/cmctl/#certificaterequest
+https://cert-manager.io/docs/usage/kubectl-plugin/#renew https://cert-manager.io/docs/usage/cmctl/#renew
+https://cert-manager.io/docs/usage/kubectl-plugin/#status-certificate https://cert-manager.io/docs/usage/cmctl/#status-certificate
+https://cert-manager.io/docs/usage/kubectl-plugin/#completion https://cert-manager.io/docs/usage/cmctl/#completion
+https://cert-manager.io/docs/usage/kubectl-plugin/#experimental https://cert-manager.io/docs/usage/cmctl/#experimental
+https://cert-manager.io/docs/usage/kubectl-plugin/#certificatesigningrequest https://cert-manager.io/docs/usage/cmctl/#certificatesigningrequest
+
+# docs.cert-manager.io was previously a separately hosted service. The dns has since been redirected and the following rules are required for historical links
+# These rules are in place to capture traffic that is specifically referencing these source urls
+https://docs.cert-manager.io/en/latest/getting-started/index.html https://cert-manager.io/docs/tutorials/
+https://docs.cert-manager.io/en/latest/tutorials/acme/index.html https://cert-manager.io/docs/tutorials/
+https://docs.cert-manager.io/en/latest/ https://cert-manager.io/docs/
+
+# Issuer-specific redirects; these were mined from a wayback machine crawl of the old site:
+# https://web.archive.org/web/20190802192846/http://docs.cert-manager.io/en/latest/tasks/issuers/index.html
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/http01/* https://cert-manager.io/docs/configuration/acme/http01/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/dns01/* https://cert-manager.io/docs/configuration/acme/dns01/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/* https://cert-manager.io/docs/configuration/acme/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-ca.html https://cert-manager.io/docs/configuration/ca/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-selfsigned.html https://cert-manager.io/docs/configuration/selfsigned/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-vault.html https://cert-manager.io/docs/configuration/vault/
+https://docs.cert-manager.io/en/latest/tasks/issuers/setup-venafi.html https://cert-manager.io/docs/configuration/venafi/
+
+# fallback in case there are any pages we missed:
+https://docs.cert-manager.io/en/latest/tasks/issuers/* https://cert-manager.io/docs/configuration/
+
+# These rules should capture all historical links that reference endpoints for specfic release versions. Whilst these endpoints might not exist anymore these
+# redirect rules will capture the request and route the user to the specific release-note page
+https://docs.cert-manager.io/en/release-0.1/* https://cert-manager.io/docs/release-notes/release-notes-0.1/ 301!
+https://docs.cert-manager.io/en/release-0.2/* https://cert-manager.io/docs/release-notes/release-notes-0.2/ 301!
+https://docs.cert-manager.io/en/release-0.3/* https://cert-manager.io/docs/release-notes/release-notes-0.3/ 301!
+https://docs.cert-manager.io/en/release-0.4/* https://cert-manager.io/docs/release-notes/release-notes-0.4/ 301!
+https://docs.cert-manager.io/en/release-0.5/* https://cert-manager.io/docs/release-notes/release-notes-0.5/ 301!
+https://docs.cert-manager.io/en/release-0.6/* https://cert-manager.io/docs/release-notes/release-notes-0.6/ 301!
+https://docs.cert-manager.io/en/release-0.7/* https://cert-manager.io/docs/release-notes/release-notes-0.7/ 301!
+https://docs.cert-manager.io/en/release-0.8/* https://cert-manager.io/docs/release-notes/release-notes-0.8/ 301!
+https://docs.cert-manager.io/en/release-0.9/* https://cert-manager.io/docs/release-notes/release-notes-0.9/ 301!
+https://docs.cert-manager.io/en/release-0.10/* https://cert-manager.io/docs/release-notes/release-notes-0.10/ 301!
+https://docs.cert-manager.io/en/release-0.11/* https://cert-manager.io/docs/release-notes/release-notes-0.11/ 301!
+https://docs.cert-manager.io/en/release-0.12/* https://cert-manager.io/docs/release-notes/release-notes-0.12/ 301!
+https://docs.cert-manager.io/en/release-0.13/* https://cert-manager.io/docs/release-notes/release-notes-0.13/ 301!
+https://docs.cert-manager.io/en/release-0.14/* https://cert-manager.io/docs/release-notes/release-notes-0.14/ 301!
+https://docs.cert-manager.io/en/release-0.15/* https://cert-manager.io/docs/release-notes/release-notes-0.15/ 301!
+https://docs.cert-manager.io/en/release-0.16/* https://cert-manager.io/docs/release-notes/release-notes-0.16/ 301!
+# These rules should capture requests to release-notes pages and re-route them accordingly
+https://docs.cert-manager.io/en/release-* https://cert-manager.io/docs/release-notes/release-notes-:splat 301!
+https://docs.cert-manager.io https://cert-manager.io/docs 301!
+https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
+
+# These rules handle page renames
+https://cert-manager.io/docs/faq/kubed/* https://cert-manager.io/docs/faq/sync-secrets/
