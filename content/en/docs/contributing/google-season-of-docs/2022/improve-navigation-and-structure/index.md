@@ -78,7 +78,7 @@ part-time (for example, they could work half day from Tuesday to Friday, for a t
 at a daily rate of $500).
 
 We will give the "volunteer stipend" to contributors who can show they have one PR within the project
-timeframe (from 1st May to 30th July) in which a re-write of one page or a set of pages. Before
+time frame (from 1st May to 30th July) in which a re-write of one page or a set of pages. Before
 starting the rewriting, the volunteer will suggest which page they wish to work on either on Slack
 (Kubernetes Slack, channel #cert-manager-dev), or in an issue on GitHub, and make sure by asking the
 team whether it makes sense to rework this page. As long as at least one positive reaction, the
