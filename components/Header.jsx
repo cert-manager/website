@@ -13,28 +13,6 @@ export default function Header() {
 
   return (
     <div className="bg-white">
-      <svg
-        width="18"
-        height="18"
-        viewBox="0 0 18 18"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <linearGradient
-            id="paint0_linear_63_52"
-            x1="6.50769"
-            y1="2.7"
-            x2="15.4024"
-            y2="11.6052"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#326CE5" />
-            <stop offset="1" stopColor="#5545D3" />
-          </linearGradient>
-        </defs>
-      </svg>
-
       <div className="relative container py-3 flex justify-between items-center">
         <Link href="/">
           <a>
