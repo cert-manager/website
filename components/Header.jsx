@@ -92,7 +92,7 @@ function MobileNavigation({ active, className = '' }) {
                 <Link href={site.navigation.cta.href}>
                   <a
                     onClick={() => closeMenu(setOpen)}
-                    className="block btn-gradient text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px"
+                    className="block btn-primary text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px"
                   >
                     {site.navigation.cta.text}
                   </a>
@@ -122,7 +122,7 @@ function DesktopNavigation({ active, className = '' }) {
         </li>
         <li>
           <Link href={site.navigation.cta.href}>
-            <a className="block btn-gradient text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px">
+            <a className="block btn-primary font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px">
               {site.navigation.cta.text}
             </a>
           </Link>

@@ -65,7 +65,7 @@ h6 {
   @apply font-montserrat font-bold;
 }
 
-a:not(.btn-gradient):not(.no-underline) {
+a {
   @apply text-blue-2 underline;
 }
 
@@ -98,4 +98,32 @@ select {
   max-height: 352px;
   padding-bottom: 48px;
   overflow-y: scroll;
+}
+
+.btn-primary {
+  border-radius: 0.3rem;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+  background-image: linear-gradient(141.3deg, #ff00b8 14.53%, #326ce5 129.58%);
+}
+
+.btn-primary::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(141.3deg, #326ce5 14.53%, #326ce5 129.58%);
+  z-index: -1;
+  transition: opacity 0.5s linear;
+  opacity: 0;
+  border-radius: 0.3rem;
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
 }
