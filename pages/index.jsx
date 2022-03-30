@@ -96,8 +96,14 @@ function Home({ router }) {
                 </p>
               </div>
             </Card>
-
             <Features features={page.features} className="mt-24" />
+            <div>
+              <CtasRow
+                className="my-8 lg:mb-14 lg:mt-20"
+                title={page.bottomCta.title}
+                ctas={page.bottomCta.ctas}
+              />
+            </div>
           </div>
         </div>
       </div>
