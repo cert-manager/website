@@ -127,3 +127,15 @@ select {
 .btn-primary:hover::before {
   opacity: 1;
 }
+
+.DocSearch-Form {
+  @apply ring-2 ring-blue-2;
+}
+
+.DocSearch-Input {
+  background: transparent;
+}
+
+.DocSearch-Input:focus {
+  @apply ring-0;
+}
