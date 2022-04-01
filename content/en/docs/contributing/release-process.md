@@ -186,7 +186,7 @@ page if a step is missing or if it is outdated.
        We don't fast-forward for patch releases and final releases; instead, we
        prepare these releases using the `/cherry-pick release-1.0` command.
 
-4. Push the new or updated release branch:
+4. Push the new or updated release branch and create the tag:
 
     1. Check that the `origin` remote is correct. To do that, run the following
         command and make sure it returns
@@ -209,6 +209,13 @@ page if a step is missing or if it is outdated.
        the branch, see [prerequisites](#prerequisites). If you do not have this
        permission, you will have to open a PR to merge master into the release
        branch), and wait for the PR checks to become green.
+
+    3. Create the tag for the new release locally and push it upstream:
+
+       ```bash
+       git tag -s -m"v1.8.0-beta.0" v1.8.0-beta.0
+       git push --tags
+       ```
 
 5. Generate and edit the release notes:
 
