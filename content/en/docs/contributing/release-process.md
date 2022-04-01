@@ -294,17 +294,16 @@ page if a step is missing or if it is outdated.
     4. **(final release only)** Check the release notes include all changes
        since the last final release.
 
-6. Run `cmrel stage`:
+6. Run `cmrel makestage`:
 
-    1. In this example we stage a release using the 'release-1.0' branch,
-       setting the release version to `v1.0.0`:
+    1. In this example we stage a release using the `v1.8.0-beta.0` git ref:
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel stage --branch=release-1.0 --release-version=v1.0.0
+        cmrel makestage --ref=v1.8.0-beta.0
         ```
 
-        This step takes ~10 minutes. It will build all Docker images and create
+        This step takes ~5 minutes. It will build all Docker images and create
         all the manifest files, sign Helm charts and upload everything to a storage
         bucket on Google Cloud. These artifacts will then be published and released
         in the next steps.
