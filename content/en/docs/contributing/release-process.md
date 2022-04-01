@@ -388,10 +388,10 @@ page if a step is missing or if it is outdated.
          ⏰ Upon completion there will be:
          <ol>
             <li>
-               <a href="https://github.com/jetstack/cert-manager/releases">A draft release of cert-manager on GitHub</a>
+               <a href="https://github.com/cert-manager/cert-manager/releases">A draft release of cert-manager on GitHub</a>
             </li>
             <li>
-               <a href="https://github.com/jetstack/cert-manager/releases">A pull request containing the new Helm chart</a>
+               <a href="https://github.com/jetstack/jetstack-charts/pulls">A pull request containing the new Helm chart</a>
             </li>
          </ol>
       </div>
