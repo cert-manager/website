@@ -186,7 +186,7 @@ page if a step is missing or if it is outdated.
        We don't fast-forward for patch releases and final releases; instead, we
        prepare these releases using the `/cherry-pick release-1.0` command.
 
-4. Push the new or updated release branch:
+4. Push the new or updated release branch and create the tag:
 
     1. Check that the `origin` remote is correct. To do that, run the following
         command and make sure it returns
@@ -209,6 +209,13 @@ page if a step is missing or if it is outdated.
        the branch, see [prerequisites](#prerequisites). If you do not have this
        permission, you will have to open a PR to merge master into the release
        branch), and wait for the PR checks to become green.
+
+    3. Create the tag for the new release locally and push it upstream:
+
+       ```bash
+       git tag -s -m"v1.8.0-beta.0" v1.8.0-beta.0
+       git push --tags
+       ```
 
 5. Generate and edit the release notes:
 
@@ -294,17 +301,16 @@ page if a step is missing or if it is outdated.
     4. **(final release only)** Check the release notes include all changes
        since the last final release.
 
-6. Run `cmrel stage`:
+6. Run `cmrel makestage`:
 
-    1. In this example we stage a release using the 'release-1.0' branch,
-       setting the release version to `v1.0.0`:
+    1. In this example we stage a release using the `v1.8.0-beta.0` git ref:
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel stage --branch=release-1.0 --release-version=v1.0.0
+        cmrel makestage --ref=v1.8.0-beta.0
         ```
 
-        This step takes ~10 minutes. It will build all Docker images and create
+        This step takes ~5 minutes. It will build all Docker images and create
         all the manifest files, sign Helm charts and upload everything to a storage
         bucket on Google Cloud. These artifacts will then be published and released
         in the next steps.
@@ -382,10 +388,10 @@ page if a step is missing or if it is outdated.
          ⏰ Upon completion there will be:
          <ol>
             <li>
-               <a href="https://github.com/jetstack/cert-manager/releases">A draft release of cert-manager on GitHub</a>
+               <a href="https://github.com/cert-manager/cert-manager/releases">A draft release of cert-manager on GitHub</a>
             </li>
             <li>
-               <a href="https://github.com/jetstack/cert-manager/releases">A pull request containing the new Helm chart</a>
+               <a href="https://github.com/jetstack/jetstack-charts/pulls">A pull request containing the new Helm chart</a>
             </li>
          </ol>
       </div>
