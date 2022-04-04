@@ -1,8 +1,7 @@
 ---
 title: cmctl CLI reference
-description: cmctl CLI documentation
+descripion: "cert-manager cmd/ctl CLI documentation"
 ---
-
 ```
 
 cmctl is a CLI tool manage and configure cert-manager resources for Kubernetes

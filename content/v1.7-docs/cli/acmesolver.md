@@ -1,8 +1,7 @@
 ---
 title: acmesolver CLI reference
-description: cert-manager ACME solver CLI documentation
+descripion: "cert-manager cmd/acmesolver CLI documentation"
 ---
-
 ```
 HTTP server used to solve ACME challenges.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright 2019 The Jetstack cert-manager contributors.
+# Copyright 2022 The cert-manager Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
 cd "${REPO_ROOT}"
 
-"${REPO_ROOT}/scripts/update-node_modules"
-"${REPO_ROOT}/scripts/update-theme"
-"${REPO_ROOT}/scripts/bin/hugo" "$@"
+npm install
+
+npm run build && npm run export
 
 # Move _redirects file into public/ directory as per https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file
-\cp "${REPO_ROOT}/_redirects" "${REPO_ROOT}/public/"
+cp "${REPO_ROOT}/_redirects" "${REPO_ROOT}/public/"
