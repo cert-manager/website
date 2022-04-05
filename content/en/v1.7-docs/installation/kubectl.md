@@ -9,7 +9,7 @@ type: "docs"
 
 ### Prerequisites
 
-- [Install `kubectl` version `>= v1.19.0`](https://kubernetes.io/docs/tasks/tools/).
+- [Install `kubectl` version `>= v1.19.0-rc.1`](https://kubernetes.io/docs/tasks/tools/). (otherwise, you will have issues updating the CRDs - see [v0.16 upgrade notes](../../../docs/installation/upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl))
 - Install a [supported version of Kubernetes or OpenShift](../../../docs/installation/supported-releases/).
 - Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 

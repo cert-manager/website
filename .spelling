@@ -1,5 +1,19 @@
+acmesolver
+startupapicheck
+ServiceAccount
+mikebryant
+jayme-github
+nodeSelector
 Adphi
+ajvn
+illrill
+davidsbond
+fvlaicu
+4molybdenum2
+andreadecorte
+tasharnvb
 devholic
+jahrlin
 johnwchadwick
 jwenz723
 seuf
@@ -19,6 +33,7 @@ APIs
 AWS
 Akamai
 AppRole
+ArgoCD
 Arsh
 ArtifactHUB
 ArtifactHub
@@ -51,6 +66,7 @@ Cloudflare
 ClusterIssuer
 ClusterIssuers
 ClusterRole
+ClusterRoles
 ConfigMap
 CoreDNS
 CronJob
@@ -68,6 +84,7 @@ DigitalOcean
 Distroless
 etcd
 EC2
+enj
 ECDSA
 EKS
 ELB
@@ -80,6 +97,7 @@ GCE
 GCLB
 GCP
 GKE
+GitOps
 GSoC
 Gloo
 GoLand
@@ -145,6 +163,7 @@ Route53
 Runtime
 SOA
 SecretTemplate
+ServerSideApply
 SelfSigned
 SgtCoDFish
 Smallstep
@@ -159,6 +178,7 @@ TXT
 Tiller
 Traefik
 URIs
+Uncategorized
 Uncomment
 VPC
 VaaS
@@ -268,6 +288,7 @@ loadbalancer
 longkai
 loopback
 mTLS
+multivalue
 macOS
 makefile
 manual-rotation-private-key
@@ -321,6 +342,7 @@ subdomain
 subdomains
 subfolders
 subresource
+symlink
 tamalsaha
 teejaded
 templated
@@ -360,6 +382,8 @@ v1.7
 v1.7.0
 v1.7.1
 v1.7.2
+v1.8
+v1.8.0
 v1alpha2
 v1alpha3
 v1beta1

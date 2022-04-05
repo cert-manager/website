@@ -33,12 +33,14 @@ $ cmctl x install \
     --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
     --set webhook.timeoutSeconds=4s   # Example: changing the wehbook timeout using a Helm parameter
 ```
+
 You can find [a full list of the install parameters on cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager#configuration). These are the same parameters that are available when using the Helm chart.
 Once you have deployed cert-manager, you can [verify](../verify/) the installation.
 
 ### Output YAML
 
 The CLI also allows the user to output the templated manifest to `stdout`, instead of installing the manifest on the cluster.
+
 ```bash
 $ cmctl x install --dry-run > cert-manager.custom.yaml
 ```

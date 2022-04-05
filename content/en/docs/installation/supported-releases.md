@@ -19,14 +19,14 @@ release every two months.
 
 | Release | Release Date |  End of Life | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| [1.7][] | Jan 26, 2022 | May 26, 2022 |             1.18 → 1.23            |             4.5 → 4.10            |
-| [1.6][] | Oct 26, 2021 | Apr 05, 2022 |             1.17 → 1.22            |             4.4 → 4.9             |
+| [1.8][] | Apr 05, 2022 | Aug 10, 2022 |             1.19 → 1.23            |             4.6 → 4.10            |
+| [1.7][] | Jan 26, 2022 |  Jun 8, 2022 |             1.18 → 1.23            |             4.5 → 4.10            |
 
 ## Upcoming releases
 
 | Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| 1.8     | Apr 05, 2022 | June 8, 2022 |             1.19 → 1.23            |             4.6 → 4.10            |
+| [1.9][] |  Jun 8, 2022 | Oct 12, 2022 |              TBC → TBC             |             TBC → TBC             |
 
 Note that dates in the future are uncertain and might change.
 
@@ -34,6 +34,7 @@ Note that dates in the future are uncertain and might change.
 
 | Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
 |----------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
+| [1.6][]  | Oct 26, 2021 | Apr 05, 2022 |          1.17 → 1.22           |           4.4 → 4.9           |
 | [1.5][]  | Aug 11, 2021 | Jan 26, 2022 |          1.16 → 1.22           |           4.3 → 4.8           |
 | [1.4][]  | Jun 15, 2021 | Oct 26, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
 | [1.3][]  | Apr 08, 2021 | Aug 11, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
@@ -48,7 +49,8 @@ Note that dates in the future are uncertain and might change.
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
-[1.8]: https://github.com/cert-manager/cert-manager/milestone/29
+[1.9]: https://github.com/cert-manager/cert-manager/milestone/30
+[1.8]: https://cert-manager.io/docs/release-notes/release-notes-1.8
 [1.7]: https://cert-manager.io/docs/release-notes/release-notes-1.7
 [1.6]: https://cert-manager.io/docs/release-notes/release-notes-1.6
 [1.5]: https://cert-manager.io/docs/release-notes/release-notes-1.5
