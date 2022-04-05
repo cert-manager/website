@@ -35,7 +35,7 @@ If you are using Server-Side Apply, i.e., you are running the cert-manager
 controller with the flag
 
 ```text
---feature-gate=ServerSideApply=true
+--feature-gates=ServerSideApply=true
 ```
 
 Then you need to take action before upgrading to cert-manger 1.8. You will have

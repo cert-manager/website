@@ -77,12 +77,12 @@ details on why we don't recommend importing cert-manager as a module if that's a
 
 ### Major Themes
 
-#### Server Side Apply
+#### Server-Side Apply
 
-cert-manager v1.8.0 adds initial support for Kubernetes [Server Side Apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/), which became stable
+cert-manager v1.8.0 adds initial support for Kubernetes [Server-Side Apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/), which became stable
 in Kubernetes 1.22. This support is behind a feature gate for now, and is only supported by cert-manager on Kubernetes 1.22 and later.
 
-Server Side Apply helps to ensure that changes to resources are made in a managed way, and aims to prevent certain classes of bugs. Notably, it should
+Server-Side Apply helps to ensure that changes to resources are made in a managed way, and aims to prevent certain classes of bugs. Notably, it should
 eliminate conflicts when multiple controllers try to apply status changes to a single resource. You'll likely have seen messages relating to this kind of
 conflict in logs before, e.g.:
 
@@ -93,7 +93,7 @@ I0119 12:34:56.000000       1 controller.go:161] cert-manager/controller/certifi
 These conflicts aren't usually actually a problem which will block the issuance of a certificate, but they can delay things as they cause extra
 reconcile loops. Server-side apply cleans things up, which should mean less noise in logs and fewer pointless reconcile loops.
 
-If you want to test it out, you can enable alpha-level cert-manager Server Side Apply support through the
+If you want to test it out, you can enable alpha-level cert-manager Server-Side Apply support through the
 `--feature-gates` [controller flag](https://cert-manager.io/docs/cli/controller/).
 
 #### From Bazel to Make
@@ -133,12 +133,12 @@ We're also considering reducing the initial backoff from 1 hour. If you have a u
 - cert-manager now supports the field `spec.expirationSeconds` on Kubernetes CertificateSigningRequest resources. Using this field requires Kubernetes 1.22. You can still use the annotation `experimental.cert-manager.io/request-duration` to request a duration. ([#4957](https://github.com/cert-manager/cert-manager/pull/4957), [@enj](https://github.com/enj))
 - cert-manager now properly updates the content of the data keys `tls-combined.pem` and `key.der` on Secret resources that are associated to Certificate resources that use the field `additionalOutputFormats`. The field `additionalOutputFormat` is an alpha feature and can be enabled by passing the flag `--feature-gates=AdditionalCertificateOutputFormats=true` to the cert-manager controller. ([#4813](https://github.com/cert-manager/cert-manager/pull/4813), [@JoshVanL](https://github.com/JoshVanL))
 - ClusterRoles aggregation to user-facing admin/edit/view ClusterRoles can be optionally turned off ([#4937](https://github.com/cert-manager/cert-manager/pull/4937), [@illrill](https://github.com/illrill))
-- ACTION REQUIRED: ServerSideApply: The feature gate `ServerSideApply=true` now configures the certificate-shim controllers to use Kubernetes Server Side Apply on Certificate resources. When upgrading to cert-manger 1.8 with `ServerSideApply=true`, do make sure there are no Challenge resources currently in the cluster. If there are some, you will need to manually delete them once they are in 'valid' state as cert-manager post-1.8 with the SSA feature is not able to clean up Challenge resources created pre-1.8. ([#4811](https://github.com/cert-manager/cert-manager/pull/4811), [@JoshVanL](https://github.com/JoshVanL))
-- ServerSideApply: The feature gate `ServerSideApply=true` configures the `certificaterequest` controllers to use Kubernetes Server Side Apply on `CertificateRequest` resources. ([#4792](https://github.com/cert-manager/cert-manager/pull/4792), [@JoshVanL](https://github.com/JoshVanL))
-- ServerSideApply: The feature gate `ServerSideApply=true` configures the `certificate` controllers to use Kubernetes Server Side Apply on `Certificate` resources. ([#4777](https://github.com/cert-manager/cert-manager/pull/4777), [@JoshVanL](https://github.com/JoshVanL))
-- ServerSideApply: The feature gate `ServerSideApply=true` configures the `certificatesigningrequest` controllers to use Kubernetes Server Side Apply on `CertificateSigningRequest` resources. ([#4798](https://github.com/cert-manager/cert-manager/pull/4798), [@JoshVanL](https://github.com/JoshVanL))
-- ServerSideApply: The feature gate `ServerSideApply=true` configures the `issuer` and `clusterissuer` controllers to use Kubernetes Server Side Apply on `Issuer` and `ClusterIssuer` resources. ([#4794](https://github.com/cert-manager/cert-manager/pull/4794), [@JoshVanL](https://github.com/JoshVanL))
-- ServerSideApply: The feature gate `ServerSideApply=true` configures the `order` controller to use Kubernetes Server Side Apply on `Order` resources. ([#4799](https://github.com/cert-manager/cert-manager/pull/4799), [@JoshVanL](https://github.com/JoshVanL))
+- ACTION REQUIRED: Server-Side Apply: the feature gate `ServerSideApply=true` now configures the `ingress-shim` and `gateway-shim` controllers to use Kubernetes Server-Side Apply on Certificate resources. When upgrading to cert-manger 1.8 with `ServerSideApply=true`, do make sure there are no Challenge resources currently in the cluster. If there are some, you will need to manually delete them once they are in 'valid' state as cert-manager post-1.8 with the Server-Side Apply feature is not able to clean up Challenge resources created pre-1.8. ([#4811](https://github.com/cert-manager/cert-manager/pull/4811), [@JoshVanL](https://github.com/JoshVanL))
+- Server-Side Apply: the feature gate `ServerSideApply=true` configures the `certificaterequests-*` controllers to use Kubernetes Server-Side Apply on CertificateRequest resources. ([#4792](https://github.com/cert-manager/cert-manager/pull/4792), [@JoshVanL](https://github.com/JoshVanL))
+- Server-Side Apply: the feature gate `ServerSideApply=true` configures the `certificates-*` controllers to use Kubernetes Server-Side Apply on Certificate resources. ([#4777](https://github.com/cert-manager/cert-manager/pull/4777), [@JoshVanL](https://github.com/JoshVanL))
+- Server-Side Apply: the feature gate `ServerSideApply=true` configures the CertificateSigningRequest controllers to use Kubernetes Server-Side Apply on CertificateSigningRequest resources. ([#4798](https://github.com/cert-manager/cert-manager/pull/4798), [@JoshVanL](https://github.com/JoshVanL))
+- Server-Side Apply: the feature gate `ServerSideApply=true` configures the `issuers` and `clusterissuers` controllers to use Kubernetes Server-Side Apply on Issuer and ClusterIssuer resources. ([#4794](https://github.com/cert-manager/cert-manager/pull/4794), [@JoshVanL](https://github.com/JoshVanL))
+- Server-Side Apply: the feature gate `ServerSideApply=true` configures the `orders` controller to use Kubernetes Server-Side Apply on Order resources. ([#4799](https://github.com/cert-manager/cert-manager/pull/4799), [@JoshVanL](https://github.com/JoshVanL))
 - The annotation `experimental.cert-manager.io/request-duration` now has a minimum value of 600 seconds. This annotation This change ensures compatibility with the Kubernetes resource CertificateSigningRequest, which requires a minimum of 600 seconds on the field `spec.expirationSeconds`. ([#4973](https://github.com/cert-manager/cert-manager/pull/4973), [@irbekrm](https://github.com/irbekrm))
 - The annotation `ingress.kubernetes.io/whitelist-source-range` used by the Ingress shim when creating Ingress resources can now be overridden by setting the field `ingressTemplate` on the Issuer and ClusterIssuer. ([#4789](https://github.com/cert-manager/cert-manager/pull/4789), [@tasharnvb](https://github.com/tasharnvb))
 - The experimental Gateway API support now uses the v1alpha2 CRDs. ([#4791](https://github.com/cert-manager/cert-manager/pull/4791), [@jakexks](https://github.com/jakexks))
