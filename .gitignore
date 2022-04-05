@@ -6,3 +6,5 @@
 /scripts/gendocs/postprocess/node_modules/
 
 .next/
+
+/out/
