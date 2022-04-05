@@ -55,6 +55,7 @@ echo "+++ Running spell check"
   "!content/en/v1.5-docs/reference/api-docs.md" \
   "!content/en/v1.6-docs/reference/api-docs.md" \
   "!content/en/v1.7-docs/reference/api-docs.md" \
+  "!content/en/v1.8-docs/reference/api-docs.md" \
   "!content/en/next-docs/**/*.md"
 
 # About "!content/en/next-docs/**/*.md":
