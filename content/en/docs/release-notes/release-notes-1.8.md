@@ -112,6 +112,18 @@ document the new build system, ensure it's at full feature-parity with Bazel and
 A neat side effect of this change is that our build times have significantly improved. Bazel took around 14 minutes to build every cert-manager
 artifact for every platform during a release, while the new `make` build system can do the same (and more) in under 5 minutes.
 
+#### Exponential backoff
+
+cert-manager v1.8.0 introduces [exponential backoff after failed certificate issuance](https://github.com/cert-manager/cert-manager/blob/f8900ad1d8cc9b7c3697d7554911e2959fa56480/design/20220118.certificate-issuance-exponential-backoff.md).
+
+Previously, a failed issuance was retried every hour which - especially in larger cert-manager installations - could cause rate limits to be hit as well as overwhelm external services. Failed attempts
+are now retried with a binary exponential backoff starting with `1h` then `2h`, `4h` up to a maximum of `32h`. As part of the new backoff behavior, a new `failedIssuanceAttempts` field was added to the
+`Certificate` spec to track the number of currently failed issuances.
+
+The `cmctl renew` [command](../../cli/cmctl/) command can still be used to force `Certificate` renewal immediately.
+
+We're also considering reducing the initial backoff from 1 hour. If you have a use case where this would be useful please do comment on [our tracking issue](https://github.com/cert-manager/cert-manager/issues/4786).
+
 ## Changelog since v1.7.0
 
 ### Feature
