@@ -24,4 +24,4 @@ set -o pipefail
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
 
 ${REPO_ROOT}/scripts/gendocs/generate-new-import-path-docs
-${REPO_ROOT}/scripts/gendocs/generate-old-import-path-docs
+# ${REPO_ROOT}/scripts/gendocs/generate-old-import-path-docs

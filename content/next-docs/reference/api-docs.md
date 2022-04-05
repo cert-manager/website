@@ -2,7 +2,6 @@
 title: API reference docs
 description: cert-manager API reference documentation
 ---
-
 <p>Packages:</p>
 <ul>
   <li>
@@ -740,7 +739,8 @@ Resource Types:
         <em>map[string]string</em>
       </td>
       <td>
-        <p>The labels that cert-manager will use when creating the temporary HTTPRoute needed for solving the HTTP-01 challenge. These labels must match the label selector of at least one Gateway.</p>
+        <em>(Optional)</em>
+        <p>Custom labels that will be applied to HTTPRoutes created by cert-manager while solving HTTP-01 challenges.</p>
       </td>
     </tr>
     <tr>
@@ -751,7 +751,7 @@ Resource Types:
       </td>
       <td>
         <p>
-          ParentRefs define the Gateways that the HTTP-01 challenges will be solvable through. See
+          When solving an HTTP-01 challenge, cert-manager creates an HTTPRoute. cert-manager needs to know which parentRefs should be used when creating the HTTPRoute. Usually, the parentRef references a Gateway. See:
           <a href="https://gateway-api.sigs.k8s.io/v1alpha2/api-types/httproute/#attaching-to-gateways">https://gateway-api.sigs.k8s.io/v1alpha2/api-types/httproute/#attaching-to-gateways</a>
         </p>
       </td>

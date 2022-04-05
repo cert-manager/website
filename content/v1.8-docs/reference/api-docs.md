@@ -2,7 +2,6 @@
 title: API reference docs
 description: cert-manager API reference documentation
 ---
-
 <p>Packages:</p>
 <ul>
   <li>
@@ -5611,5 +5610,5 @@ Resource Types:
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>e466a521b</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>57a216e51</code>. </em>
 </p>

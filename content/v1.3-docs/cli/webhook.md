@@ -1,8 +1,7 @@
 ---
 title: webhook CLI reference
-description: cert-manager webhook CLI documentation
+description: "cert-manager webhook CLI documentation"
 ---
-
 ```
 Webhook component providing API validation, mutation and conversion functionality for cert-manager (canary) ()
 

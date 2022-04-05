@@ -1,8 +1,7 @@
 ---
 title: cainjector CLI reference
-description: cert-manager CA injector CLI documentation
+description: "cert-manager cainjector CLI documentation"
 ---
-
 ```
 
 cert-manager CA injector is a Kubernetes addon to automate the injection of CA data into

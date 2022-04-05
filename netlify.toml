@@ -1,0 +1,7 @@
+[build]
+	publish = "out/"
+	command = "./scripts/build-release"
+
+[build.environment]
+	NODE_VERSION = "16"
+	NETLIFY_NEXT_PLUGIN_SKIP = "true"

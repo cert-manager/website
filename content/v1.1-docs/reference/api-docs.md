@@ -2,7 +2,6 @@
 title: API reference docs
 description: cert-manager API reference documentation
 ---
-
 <p>Packages:</p>
 <ul>
   <li>

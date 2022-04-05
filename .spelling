@@ -352,6 +352,7 @@ tolerations
 tomasfreund
 treydock
 ulrichgi
+uncomment
 unencrypted
 uninstallation
 unredacted
@@ -373,7 +374,9 @@ v1.5.1.
 v1.5.2
 v1.5.3
 v1.5.4
+v1.5.4.
 v1.5.5
+v1.6
 v1.6.0
 v1.6.1
 v1.6.2
@@ -411,135 +414,148 @@ ClusterIP
 NodePort
 pprof
 
+# TEMPORARY
+# these are temporarily ignored because the spellchecker
+# has difficulty detecting that they're in comments or links
+# and thus shouldn't be checked
+
+ingress.md
+README.md
+certificate.md
+pageinfo
+md#renew
+
+# END TEMPORARY
+
 # As per https://tools.ietf.org/html/rfc5280, the spelling "X.509" is the
 # correct spelling. The spelling "x509" and "X509" are incorrect.
 
 X.509
 
-# Since the Markdown files in content/en/*-docs are copied over from the
+# Since the Markdown files in content/*-docs are copied over from the
 # cert-manager repository using fixed tags, we can't expect these files to
 # contain the right X.509 spelling. The following is a series of exceptions
 # so that the x509 spelling is accepted in those files.
 
- - content/en/next-docs/concepts/certificate.md
+ - content/next-docs/concepts/certificate.md
 x509
- - content/en/next-docs/concepts/certificaterequest.md
+ - content/next-docs/concepts/certificaterequest.md
 x509
- - content/en/next-docs/concepts/webhook.md
+ - content/next-docs/concepts/webhook.md
 x509
- - content/en/next-docs/release-notes/release-notes-0.13.md
+ - content/next-docs/release-notes/release-notes-0.13.md
 x509
- - content/en/next-docs/release-notes/release-notes-0.15.md
+ - content/next-docs/release-notes/release-notes-0.15.md
 x509
- - content/en/next-docs/release-notes/release-notes-0.16.md
+ - content/next-docs/release-notes/release-notes-0.16.md
 x509
- - content/en/next-docs/release-notes/release-notes-0.5.md
+ - content/next-docs/release-notes/release-notes-0.5.md
 x509
- - content/en/next-docs/release-notes/release-notes-0.6.md
+ - content/next-docs/release-notes/release-notes-0.6.md
 x509
- - content/en/next-docs/release-notes/release-notes-0.7.md
+ - content/next-docs/release-notes/release-notes-0.7.md
 x509
- - content/en/next-docs/release-notes/release-notes-0.9.md
+ - content/next-docs/release-notes/release-notes-0.9.md
 x509
- - content/en/next-docs/tutorials/venafi/venafi.md
+ - content/next-docs/tutorials/venafi/venafi.md
 x509
- - content/en/next-docs/usage/certificate.md
+ - content/next-docs/usage/certificate.md
 x509
- - content/en/next-docs/usage/kubectl-plugin.md
+ - content/next-docs/usage/kubectl-plugin.md
 x509
- - content/en/v0.12-docs/concepts/certificate.md
+ - content/v0.12-docs/concepts/certificate.md
 x509
- - content/en/v0.12-docs/concepts/certificaterequest.md
+ - content/v0.12-docs/concepts/certificaterequest.md
 x509
- - content/en/v0.12-docs/release-notes/release-notes-0.5.md
+ - content/v0.12-docs/release-notes/release-notes-0.5.md
 x509
- - content/en/v0.12-docs/release-notes/release-notes-0.6.md
+ - content/v0.12-docs/release-notes/release-notes-0.6.md
 x509
- - content/en/v0.12-docs/release-notes/release-notes-0.7.md
+ - content/v0.12-docs/release-notes/release-notes-0.7.md
 x509
- - content/en/v0.12-docs/release-notes/release-notes-0.9.md
+ - content/v0.12-docs/release-notes/release-notes-0.9.md
 x509
- - content/en/v0.12-docs/tutorials/venafi/venafi.md
+ - content/v0.12-docs/tutorials/venafi/venafi.md
 x509
- - content/en/v0.12-docs/usage/certificate.md
+ - content/v0.12-docs/usage/certificate.md
 x509
- - content/en/v0.13-docs/concepts/certificate.md
+ - content/v0.13-docs/concepts/certificate.md
 x509
- - content/en/v0.13-docs/concepts/certificaterequest.md
+ - content/v0.13-docs/concepts/certificaterequest.md
 x509
- - content/en/v0.13-docs/release-notes/release-notes-0.13.md
+ - content/v0.13-docs/release-notes/release-notes-0.13.md
 x509
- - content/en/v0.13-docs/release-notes/release-notes-0.5.md
+ - content/v0.13-docs/release-notes/release-notes-0.5.md
 x509
- - content/en/v0.13-docs/release-notes/release-notes-0.6.md
+ - content/v0.13-docs/release-notes/release-notes-0.6.md
 x509
- - content/en/v0.13-docs/release-notes/release-notes-0.7.md
+ - content/v0.13-docs/release-notes/release-notes-0.7.md
 x509
- - content/en/v0.13-docs/release-notes/release-notes-0.9.md
+ - content/v0.13-docs/release-notes/release-notes-0.9.md
 x509
- - content/en/v0.13-docs/tutorials/venafi/venafi.md
+ - content/v0.13-docs/tutorials/venafi/venafi.md
 x509
- - content/en/v0.13-docs/usage/certificate.md
+ - content/v0.13-docs/usage/certificate.md
 x509
- - content/en/v0.14-docs/concepts/certificate.md
+ - content/v0.14-docs/concepts/certificate.md
 x509
- - content/en/v0.14-docs/concepts/certificaterequest.md
+ - content/v0.14-docs/concepts/certificaterequest.md
 x509
- - content/en/v0.14-docs/release-notes/release-notes-0.13.md
+ - content/v0.14-docs/release-notes/release-notes-0.13.md
 x509
- - content/en/v0.14-docs/release-notes/release-notes-0.5.md
+ - content/v0.14-docs/release-notes/release-notes-0.5.md
 x509
- - content/en/v0.14-docs/release-notes/release-notes-0.6.md
+ - content/v0.14-docs/release-notes/release-notes-0.6.md
 x509
- - content/en/v0.14-docs/release-notes/release-notes-0.7.md
+ - content/v0.14-docs/release-notes/release-notes-0.7.md
 x509
- - content/en/v0.14-docs/release-notes/release-notes-0.9.md
+ - content/v0.14-docs/release-notes/release-notes-0.9.md
 x509
- - content/en/v0.14-docs/tutorials/venafi/venafi.md
+ - content/v0.14-docs/tutorials/venafi/venafi.md
 x509
- - content/en/v0.14-docs/usage/certificate.md
+ - content/v0.14-docs/usage/certificate.md
 x509
- - content/en/v0.15-docs/concepts/certificate.md
+ - content/v0.15-docs/concepts/certificate.md
 x509
- - content/en/v0.15-docs/concepts/certificaterequest.md
+ - content/v0.15-docs/concepts/certificaterequest.md
 x509
- - content/en/v0.15-docs/release-notes/release-notes-0.13.md
+ - content/v0.15-docs/release-notes/release-notes-0.13.md
 x509
- - content/en/v0.15-docs/release-notes/release-notes-0.15.md
+ - content/v0.15-docs/release-notes/release-notes-0.15.md
 x509
- - content/en/v0.15-docs/release-notes/release-notes-0.5.md
+ - content/v0.15-docs/release-notes/release-notes-0.5.md
 x509
- - content/en/v0.15-docs/release-notes/release-notes-0.6.md
+ - content/v0.15-docs/release-notes/release-notes-0.6.md
 x509
- - content/en/v0.15-docs/release-notes/release-notes-0.7.md
+ - content/v0.15-docs/release-notes/release-notes-0.7.md
 x509
- - content/en/v0.15-docs/release-notes/release-notes-0.9.md
+ - content/v0.15-docs/release-notes/release-notes-0.9.md
 x509
- - content/en/v0.15-docs/tutorials/venafi/venafi.md
+ - content/v0.15-docs/tutorials/venafi/venafi.md
 x509
- - content/en/v0.15-docs/usage/certificate.md
+ - content/v0.15-docs/usage/certificate.md
 x509
- - content/en/v0.16-docs/concepts/certificate.md
+ - content/v0.16-docs/concepts/certificate.md
 x509
- - content/en/v0.16-docs/concepts/certificaterequest.md
+ - content/v0.16-docs/concepts/certificaterequest.md
 x509
- - content/en/v0.16-docs/release-notes/release-notes-0.13.md
+ - content/v0.16-docs/release-notes/release-notes-0.13.md
 x509
- - content/en/v0.16-docs/release-notes/release-notes-0.15.md
+ - content/v0.16-docs/release-notes/release-notes-0.15.md
 x509
- - content/en/v0.16-docs/release-notes/release-notes-0.16.md
+ - content/v0.16-docs/release-notes/release-notes-0.16.md
 x509
- - content/en/v0.16-docs/release-notes/release-notes-0.5.md
+ - content/v0.16-docs/release-notes/release-notes-0.5.md
 x509
- - content/en/v0.16-docs/release-notes/release-notes-0.6.md
+ - content/v0.16-docs/release-notes/release-notes-0.6.md
 x509
- - content/en/v0.16-docs/release-notes/release-notes-0.7.md
+ - content/v0.16-docs/release-notes/release-notes-0.7.md
 x509
- - content/en/v0.16-docs/release-notes/release-notes-0.9.md
+ - content/v0.16-docs/release-notes/release-notes-0.9.md
 x509
- - content/en/v0.16-docs/tutorials/venafi/venafi.md
+ - content/v0.16-docs/tutorials/venafi/venafi.md
 x509
- - content/en/v0.16-docs/usage/certificate.md
+ - content/v0.16-docs/usage/certificate.md
 x509
- - content/en/v0.16-docs/usage/kubectl-plugin.md
+ - content/v0.16-docs/usage/kubectl-plugin.md
 x509

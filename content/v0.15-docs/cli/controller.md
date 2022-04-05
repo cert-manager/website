@@ -1,8 +1,7 @@
 ---
 title: controller CLI reference
-description: cert-manager controller CLI documentation
+description: "cert-manager controller CLI documentation"
 ---
-
 ```
 
 cert-manager is a Kubernetes addon to automate the management and issuance of
