@@ -3,9 +3,7 @@ title: Supported Releases
 description: cert-manager supported releases, supported Kubernetes versions and release timeline
 ---
 
-/*
-Inspired by https://istio.io/latest/about/supported-releases/
-*/
+{/* Inspired by https://istio.io/latest/about/supported-releases/ */}
 
 This page lists the status, timeline and policy for currently supported
 releases.

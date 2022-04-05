@@ -146,6 +146,7 @@ function closeMenu(setOpen) {
 }
 
 function NavItem({ active, item, setOpen = null }) {
+  active = active === '/[...docs]' ? '/docs' : active
   const isActive = active === item.href
   return (
     <li key={item.href}>
