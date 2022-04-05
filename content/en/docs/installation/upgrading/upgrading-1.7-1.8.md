@@ -25,3 +25,21 @@ This command will show you, the name and namespace of each Certificate resource 
 smoketest-cert in namespace default has rotationPolicy=Foo
 ```
 
+#### Server-Side Apply
+
+Server-Side Apply is an alpha feature of cert-manager introduced in 1.8. By
+default, the feature is disabled, in which case you do not need to do any
+upgrade steps.
+
+If you are using Server-Side Apply, i.e., you are running the cert-manager
+controller with the flag
+
+```text
+--feature-gate=ServerSideApply=true
+```
+
+Then you need to take action before upgrading to cert-manger 1.8. You will have
+to make sure that there are no Challenge resources currently in the cluster. If
+there are some, you will need to manually delete them once they are in 'valid'
+state as cert-manager post-1.8 with the Server-Side Apply feature is not able to
+clean up Challenge resources created pre-1.8.
