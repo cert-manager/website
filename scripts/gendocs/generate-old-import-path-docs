@@ -158,15 +158,12 @@ $output
 EOF
 }
 
-# The branches named here exist in the `jetstack/cert-manager` repo.
+# The branches named here exist in the `cert-manager/cert-manager` repo.
 
 # Note that we cannot generate docs for any version after 1.7 using this script!
 # In 1.8 we changed the import path, and gen-crd-api-reference-docs doesn't seem module-aware
 # This script is _only_ for generating docs for versions of cert-manager with the
 # github.com/jetstack/cert-manager import path!
-
-genversionwithcli "release-1.7" "docs"
-genversionwithcli "release-1.7" "v1.7-docs"
 
 ###############################################################################
 # The commands below can be used to re-generate
@@ -181,7 +178,6 @@ genversionwithcli "release-1.7" "v1.7-docs"
 # Afterwards you should put the commands behind a comment to avoid
 # slowing down builds in CI.
 ###############################################################################
-
 
 # Special handling for release-1.6 because the legacy APIs were still present in
 # the CRDs and in public `pkg/` directory but we do not want to generate API
@@ -214,6 +210,7 @@ generate_release16() {
     gendocs "v1.6-docs"
 }
 
+#genversionwithcli "release-1.7" "v1.7-docs"
 #generate_release16
 #genversionwithcli "release-1.5" "v1.5-docs"
 #genversionwithcli "release-1.4" "v1.4-docs"
