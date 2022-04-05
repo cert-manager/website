@@ -49,9 +49,11 @@ not able to clean up Challenge resources that were created pre-1.8.
 
 #### Migrating from the Gateway API v1alpha1 to v1alpha2
 
+This section only applies to you if you are using the feature gate
+`ExperimentalGatewayAPISupport`.
+
 cert-manager 1.8 drops support for the Gateway API v1alpha1, and now only
-supports v1alpha2. You should read this section if you are using the feature
-flag `ExperimentalGatewayAPISupport`.
+supports v1alpha2.
 
 Before upgrading cert-manager, you will need to:
 

@@ -22,9 +22,11 @@ HTTP-01](/docs/configuration/acme/http01/).
 Gateway API. The version v1alpha1 was supported in cert-manager 1.5, 1.6, and
 1.7.
 
-You can read [Upgrading from v1.7 to v1.8](<!-- TODO: -->) to know more about
+You can read [Upgrading from v1.7 to v1.8][upgrading-1.7-1.8] to know more about
 migrating your Issuer and ClusterIssuer resources that use `gatewayHTTPRoute`
 from v1alpha1 to v1alpha2.
+
+[upgrading-1.7-1.8]: /docs/installation/upgrading/upgrading-1.6-1.7/
 
 {{% /pageinfo %}}
 
