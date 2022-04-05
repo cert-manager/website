@@ -14,7 +14,7 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 
 ### Prerequisites
 
-- [Install the kubectl cert-manager plugin](../../usage/kubectl-plugin/#installation).
+- [Install Helm version 3 or later](https://helm.sh/docs/intro/install/).
 - Install a [supported version of Kubernetes or OpenShift](../../../docs/installation/supported-releases/).
 - Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
@@ -55,6 +55,8 @@ To automatically install and manage the CRDs as part of your Helm release, you
 must add the `--set installCRDs=true` flag to your Helm installation command.
 
 Uncomment the relevant line in the next steps to enable this.
+
+Note that if you're using a `helm` version based on Kubernetes `v1.18` or below (Helm `v3.2`), `installCRDs` will not work with cert-manager `v0.16`. See the [v0.16 upgrade notes](../../../docs/installation/upgrading/upgrading-0.15-0.16/#helm) for more details.
 
 #### 4. Install cert-manager
 

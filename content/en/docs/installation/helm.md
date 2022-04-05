@@ -15,7 +15,7 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 ### Prerequisites
 
 - [Install Helm version 3 or later](https://helm.sh/docs/intro/install/).
-- Install a [supported version of Kubernetes or OpenShift](../supported-releases/).
+- Install a [supported version of Kubernetes or OpenShift](../../../docs/installation/supported-releases/).
 - Read [Compatibility with Kubernetes Platform Providers](../compatibility/) if you are using Kubernetes on a cloud platform.
 
 ### Steps
