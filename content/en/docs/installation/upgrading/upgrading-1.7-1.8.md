@@ -40,6 +40,9 @@ controller with the flag
 
 Then you need to take action before upgrading to cert-manger 1.8. You will have
 to make sure that there are no Challenge resources currently in the cluster. If
-there are some, you will need to manually delete them once they are in 'valid'
-state as cert-manager post-1.8 with the Server-Side Apply feature is not able to
-clean up Challenge resources created pre-1.8.
+there are some, you will need to manually delete them once they are in a 'valid'
+state.
+
+The reason the Challenge resources need to be removed before upgrading to 1.8
+when using the new Server-Side Apply feature is that cert-manager post-1.8 is
+not able to clean up Challenge resources that were created pre-1.8.
