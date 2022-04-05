@@ -94,7 +94,7 @@ These conflicts aren't usually actually a problem which will block the issuance 
 reconcile loops. Server-side apply cleans things up, which should mean less noise in logs and fewer pointless reconcile loops.
 
 If you want to test it out, you can enable alpha-level cert-manager Server-Side Apply support through the
-`--feature-gates` [controller flag](https://cert-manager.io/docs/cli/controller/).
+`--feature-gates` [controller flag](../../../v1.8-docs/cli/controller/).
 
 #### From Bazel to Make
 
