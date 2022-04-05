@@ -149,7 +149,7 @@ We're also considering reducing the initial backoff from 1 hour. If you have a u
 
 ### Design
 
-- The import path for cert-manager has been updated to `github.com/cert-manager/cert-manager`. If you import cert-manager as a go module (which isn't currently recommended), you'll need to update the module import path in your code to import cert-manager 1.8 or later. ([#4587](https://github.com/cert-manager/cert-manager/pull/4587), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- ACTION REQUIRED: The import path for cert-manager has been updated to `github.com/cert-manager/cert-manager`. If you import cert-manager as a go module (which isn't currently recommended), you'll need to update the module import path in your code to import cert-manager 1.8 or later. ([#4587](https://github.com/cert-manager/cert-manager/pull/4587), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ### Bug or Regression
 
