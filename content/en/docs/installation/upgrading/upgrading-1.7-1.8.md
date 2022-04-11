@@ -28,8 +28,7 @@ smoketest-cert in namespace default has rotationPolicy=Foo
 #### Server-Side Apply
 
 Server-Side Apply is an alpha feature of cert-manager introduced in 1.8. By
-default, the feature is disabled, in which case you do not need to do any
-upgrade steps.
+default, the feature is disabled, in which case you can skip this section.
 
 If you are using Server-Side Apply, i.e., you are running the cert-manager
 controller with the flag
