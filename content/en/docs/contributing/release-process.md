@@ -536,10 +536,9 @@ page if a step is missing or if it is outdated.
 
     11. Create a new OLM package and publish to OperatorHub
 
-        [cert-manager can be installed using Operator Lifecycle Manager (OLM)](https://cert-manager.io/docs/installation/operator-lifecycle-manager/)
-        so we need to create OLM packages for each cert-manager version,
-        and publish them to [operatorhub.io]https://operatorhub.io/operator/cert-manager
-        and to the equivalent package index for RedHat OpenShift.
+        cert-manager can be [installed](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) using Operator Lifecycle Manager (OLM)
+        so we need to create OLM packages for each cert-manager version and publish them to both
+        [operatorhub.io](https://operatorhub.io/operator/cert-manager) and the equivalent package index for RedHat OpenShift.
 
-        Follow [the cert-manager OLM release process](https://github.com/jetstack/cert-manager-olm#release-process) and once published
+        Follow [the cert-manager OLM release process](https://github.com/jetstack/cert-manager-olm#release-process) and, once published,
         [verify that the cert-manager OLM installation instructions](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) still work.
