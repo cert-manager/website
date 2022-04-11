@@ -179,6 +179,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-arvan`](https://github.com/kiandigital/cert-manager-webhook-arvan)
 - [`bizflycloud-certmanager-dns-webhook`](https://github.com/bizflycloud/bizflycloud-certmanager-dns-webhook)
 - [`cert-manager-webhook-hetzner`](https://github.com/vadimkim/cert-manager-webhook-hetzner)
+- [`cert-manager-webhook-yandex-cloud`](https://github.com/malinink/cert-manager-webhook-yandex-cloud)
 
 You can find more information on how to configure webhook providers [here](./webhook/).
 
