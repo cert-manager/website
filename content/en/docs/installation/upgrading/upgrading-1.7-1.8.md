@@ -1,12 +1,9 @@
 ---
 title: "Upgrading from v1.7 to v1.8"
 linkTitle: "v1.7 to v1.8"
-weight: 750
+weight: 740
 type: "docs"
 ---
-
-When upgrading from 1.7 to 1.8, no special upgrade steps are required 🎉. From
-here on you can follow the [regular upgrade process](../).
 
 #### Validation of the `rotationPolicy` field
 
@@ -28,8 +25,7 @@ smoketest-cert in namespace default has rotationPolicy=Foo
 #### Server-Side Apply
 
 Server-Side Apply is an alpha feature of cert-manager introduced in 1.8. By
-default, the feature is disabled, in which case you do not need to do any
-upgrade steps.
+default, the feature is disabled, in which case you can skip this section.
 
 If you are using Server-Side Apply, i.e., you are running the cert-manager
 controller with the flag
@@ -46,3 +42,47 @@ state.
 The reason the Challenge resources need to be removed before upgrading to 1.8
 when using the new Server-Side Apply feature is that cert-manager post-1.8 is
 not able to clean up Challenge resources that were created pre-1.8.
+
+#### Migrating from the Gateway API v1alpha1 to v1alpha2
+
+This section only applies to you if you are using the feature gate
+`ExperimentalGatewayAPISupport`.
+
+cert-manager 1.8 drops support for the Gateway API v1alpha1, and now only
+supports v1alpha2.
+
+Before upgrading cert-manager, you will need to:
+
+1. remove all existing Gateway API v1alpha1 resources,
+2. upgrade the Gateway API CRDs to v1alpha2,
+3. re-create the Gateway API resources with the v1alpha2.
+
+This manual intervention is needed because the Gateway API project does not
+come with a conversion webhook that would allow an easier migration from
+v1alpha1 to v1alpha2.
+
+After upgrading cert-manager to 1.8, you will need to remove the `labels` field,
+and add the `parentRefs`:
+
+```diff
+ apiVersion: cert-manager.io/v1
+ kind: Issuer
+ metadata:
+   name: letsencrypt
+   namespace: default
+ spec:
+   acme:
+     solvers:
+       - http01:
+           gatewayHTTPRoute:
+-            labels:
+-              gateway: traefik
++            parentRefs:
++              - name: traefik
++                namespace: traefik
++                kind: Gateway
+```
+
+## Now, Follow the Regular Upgrade Process
+
+From here on you can follow the [regular upgrade process](../).

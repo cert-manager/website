@@ -16,6 +16,20 @@ HTTP-01](/docs/configuration/acme/http01/).
 
 {{% /pageinfo %}}
 
+{{% pageinfo color="info" %}}
+
+🚧  Since cert-manager 1.8, v1alpha2 is the only supported version of the
+Gateway API. The version v1alpha1 was supported in cert-manager 1.5, 1.6, and
+1.7.
+
+You can read [Upgrading from v1.7 to v1.8][upgrading-1.7-1.8] to know more about
+migrating your Issuer and ClusterIssuer resources that use `gatewayHTTPRoute`
+from v1alpha1 to v1alpha2.
+
+[upgrading-1.7-1.8]: /docs/installation/upgrading/upgrading-1.6-1.7/
+
+{{% /pageinfo %}}
+
 cert-manager can generate TLS certificates for Gateway resources. This is
 configured by adding annotations to a Gateway and is similar to the process for
 [Securing Ingress Resources](/docs/usage/ingress/).
@@ -43,7 +57,6 @@ HTTPRoute for Istio][istio#31747]).
 [istio#31747]: https://github.com/istio/istio/issues/31747
 [gateway-api#577]: https://github.com/kubernetes-sigs/gateway-api/issues/577
 
-
 {{% pageinfo color="info" %}}
 
 📌  This feature requires the installation of the Gateway API CRDs and passing a
@@ -52,7 +65,7 @@ feature flag to the cert-manager controller.
 To install the Gateway API CRDs, run the following command:
 
 ```sh
-kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.3.0" | kubectl apply -f -
+kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.4.1" | kubectl apply -f -
 ```
 
 To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
@@ -90,7 +103,7 @@ following Gateway will trigger the creation of a Certificate with the name
 `example-com-tls`:
 
 ```yaml
-apiVersion: networking.x-k8s.io/v1alpha1
+apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: Gateway
 metadata:
   name: example
@@ -99,20 +112,17 @@ metadata:
 spec:
   gatewayClassName: foo
   listeners:
-    - hostname: example.com
+    - name: http
+      hostname: example.com
       port: 443
       protocol: HTTPS
-      routes:
-        kind: HTTPRoute
-        selector:
-          matchLabels:
-            app: foo
+      allowedRoutes:
+        namespaces:
+          from: All
       tls:
         mode: Terminate
-        certificateRef:
-          name: example-com-tls
-          kind: Secret
-          group: core
+        certificateRefs:
+          - name: example-com-tls
 ```
 
 A few moments later, cert-manager will create a Certificate. The Certificate is
@@ -154,7 +164,7 @@ In the following example, the first three listener blocks will not be used to
 generate Certificate resources:
 
 ```yaml
-apiVersion: networking.x-k8s.io/v1alpha1
+apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: Gateway
 metadata:
   annotations:
@@ -166,35 +176,33 @@ spec:
 
     # ❌  Missing "hostname", the following listener is skipped.
     - tls:
-        certificateRef:
-          name: example-com-tls
-          kind: Secret"
-          group: core
+        certificateRefs:
+          - name: example-com-tls
+            kind: Secret"
+            group: core
 
     # ❌  "mode: Passthrough" is not supported, the following listener is skipped.
     - hostname: example.com
       tls:
         mode: Passthrough
-        certificateRef:
-          name: example-com-tls
-          kind: Secret
-          group: core
+        certificateRefs:
+          - name: example-com-tls
+            kind: Secret
+            group: core
 
     # ✅  The following listener is valid.
     - hostname: foo.example.com # ✅ Required.
       port: 443
       protocol: HTTPS
-      routes:
-        kind: HTTPRoute
-        selector:
-          matchLabels:
-            app: foo
+      allowedRoutes:
+        namespaces:
+          from: All
       tls:
         mode: Terminate # ✅ Required. "Terminate" is the only supported mode.
-        certificateRef:
-          name: example-com-tls # ✅ Required.
-          kind: Secret  # ✅ Required. "Secret" is the only valid value.
-          group: core # ✅ Required. "core" is the only valid value.
+        certificateRefs:
+          - name: example-com-tls # ✅ Required.
+            kind: Secret  # ✅ Required. "Secret" is the only valid value.
+            group: core # ✅ Required. "core" is the only valid value.
 ```
 
 cert-manager has skipped over the first three listener blocks and has created a
@@ -221,7 +229,7 @@ The same Secret name can be re-used in multiple TLS blocks, regardless of the
 hostname. Let us imagine that you have these two listeners:
 
 ```yaml
-apiVersion: networking.x-k8s.io/v1alpha1
+apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: Gateway
 metadata:
   name: example
@@ -236,15 +244,15 @@ spec:
       protocol: HTTPS
       routes:
         kind: HTTPRoute
-        selector:
-          matchLabels:
-            app: foo
+        parentRefs:
+          - name: example
+            kind: Gateway
       tls:
         mode: Terminate
-        certificateRef:
-          name: example-com-tls
-          kind: Secret
-          group: core
+        certificateRefs:
+          - name: example-com-tls
+            kind: Secret
+            group: core
 
     # Listener 2: Same Secret name as Listener 1, with a different hostname.
     - hostname: *.example.com
@@ -252,15 +260,15 @@ spec:
       protocol: HTTPS
       routes:
         kind: HTTPRoute
-        selector:
-          matchLabels:
-            app: foo
+        parentRefs:
+          - name: example
+            kind: Gateway
       tls:
         mode: Terminate
-        certificateRef:
-          name: example-com-tls
-          kind: Secret
-          group: core
+        certificateRefs:
+          - name: example-com-tls
+            kind: Secret
+            group: core
 
     # Listener 3: also same Secret name, except the hostname is also the same.
     - hostname: *.example.com
@@ -268,15 +276,15 @@ spec:
       protocol: HTTPS
       routes:
         kind: HTTPRoute
-        selector:
-          matchLabels:
-            app: foo
+        parentRefs:
+          - name: example
+            kind: Gateway
       tls:
         mode: Terminate
-        certificateRef:
-          name: example-com-tls
-          kind: Secret
-          group: core
+        certificateRefs:
+          - name: example-com-tls
+            kind: Secret
+            group: core
 
    # Listener 4: different Secret name.
     - hostname: site.org
@@ -284,15 +292,15 @@ spec:
       protocol: HTTPS
       routes:
         kind: HTTPRoute
-        selector:
-          matchLabels:
-            app: foo
+        parentRefs:
+          - name: example
+            kind: Gateway
       tls:
         mode: Terminate
-        certificateRef:
-          name: site-org-tls
-          kind: Secret
-          group: core
+        certificateRefs:
+          - name: site-org-tls
+            kind: Secret
+            group: core
 ```
 
 cert-manager will create two Certificates since two Secret names are used:
