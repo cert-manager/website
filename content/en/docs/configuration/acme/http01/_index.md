@@ -231,7 +231,7 @@ You can read [Upgrading from v1.7 to v1.8][upgrading-1.7-1.8] to know more about
 migrating your Issuer and ClusterIssuer resources that use `gatewayHTTPRoute`
 from v1alpha1 to v1alpha2.
 
-[upgrading-1.7-1.8]: /docs/installation/upgrading/upgrading-1.6-1.7/
+[upgrading-1.7-1.8]: /docs/installation/upgrading/upgrading-1.7-1.8/
 
 {{% /pageinfo %}}
 
