@@ -38,7 +38,10 @@ permissions:
     },
     {
       "Effect": "Allow",
-      "Action": "route53:ListHostedZonesByName",
+      "Action": [
+        "route53:ListHostedZonesByName", 
+        "route53:ListHostedZones"
+      ],
       "Resource": "*"
     }
   ]
