@@ -229,7 +229,7 @@ You can read [Upgrading from v1.7 to v1.8][upgrading-1.7-1.8] to know more about
 migrating your Issuer and ClusterIssuer resources that use `gatewayHTTPRoute`
 from v1alpha1 to v1alpha2.
 
-[upgrading-1.7-1.8]: /docs/installation/upgrading/upgrading-1.7-1.8/
+[upgrading-1.7-1.8]: ../../../installation/upgrading/upgrading-1.7-1.8.md
 
 </div>
 
@@ -352,7 +352,7 @@ cert-manager will perform reachability tests before attempting a HTT01
 challenge.  By default cert-manager will use the recursive nameservers taken
 from `/etc/resolv.conf` to query the challenge URL.
 
-If this is not desired (for example with split-horizon DNS), the cert-manager 
+If this is not desired (for example with split-horizon DNS), the cert-manager
 controller exposes a flag that allows you alter this behavior:
 
 `--acme-http01-solver-nameservers` Comma separated string with host and port of the

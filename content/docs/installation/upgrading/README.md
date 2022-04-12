@@ -10,7 +10,7 @@ versions, and information on things to look out for when upgrading.
 > Note: Before performing upgrades of cert-manager, it is advised to take a
 > backup of all your cert-manager resources just in case an issue occurs whilst
 > upgrading. You can read how to backup and restore cert-manager in the [backup
-> and restore](../tutorials/backup.md) guide.
+> and restore](../../tutorials/backup.md) guide.
 
 We recommend that you upgrade cert-manager one minor version at a time, always
 choosing the latest patch version for the minor version. You should always read
@@ -78,7 +78,7 @@ number you want to install:
 $ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<version>/cert-manager.yaml
 ```
 
-Once you have deployed the new version of cert-manager, you can [verify](../verify/README.md) the installation.
+Once you have deployed the new version of cert-manager, you can [verify](../../verify.md) the installation.
 
 ## Reinstalling cert-manager
 

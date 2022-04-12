@@ -10,7 +10,7 @@ description: 'cert-manager usage: Kubernetes Gateways'
 📌  This page focuses on automatically creating Certificate resources by
 annotating Gateway resource. If you are looking for using an ACME Issuer along
 with HTTP-01 challenges using the Gateway API, see [ACME
-HTTP-01](../configuration/acme/http01.md).
+HTTP-01](../configuration/acme/http01/README.md).
 
 </div>
 
@@ -24,7 +24,7 @@ You can read [Upgrading from v1.7 to v1.8][upgrading-1.7-1.8] to know more about
 migrating your Issuer and ClusterIssuer resources that use `gatewayHTTPRoute`
 from v1alpha1 to v1alpha2.
 
-[upgrading-1.7-1.8]: /docs/installation/upgrading/upgrading-1.7-1.8/
+[upgrading-1.7-1.8]: ../installation/upgrading/upgrading-1.7-1.8.md
 
 </div>
 
@@ -41,7 +41,7 @@ the Ingress API.
 The Gateway resource holds the TLS configuration, as illustrated in the
 following diagram (source: https://gateway-api.sigs.k8s.io):
 
-![Gateway vs. HTTPRoute](../../../images/gateway-roles.png)
+![Gateway vs. HTTPRoute](/images/gateway-roles.png)
 
 Note that cert-manager only supports setting up the TLS configuration on the
 Gateway resource when the Gateway is configured to terminate the TLS connection.
@@ -340,8 +340,7 @@ spec:
 ## Supported Annotations
 
 If you are migrating to Gateway resources from Ingress resources, be aware that
-there are some differences between [the annotations for Ingress
-resources](https://cert-manager.io/docs/usage/ingress/#supported-annotations)
+there are some differences between [the annotations for Ingress resources](ingress.md#supported-annotations)
 versus the annotations for Gateway resources.
 
 The Gateway resource supports the following annotations for generating

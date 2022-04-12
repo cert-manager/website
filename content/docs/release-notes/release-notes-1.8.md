@@ -92,7 +92,7 @@ These conflicts aren't usually actually a problem which will block the issuance 
 reconcile loops. Server-side apply cleans things up, which should mean less noise in logs and fewer pointless reconcile loops.
 
 If you want to test it out, you can enable alpha-level cert-manager Server-Side Apply support through the
-`--feature-gates` [controller flag](../../../v1.8-docs/cli/controller.md).
+`--feature-gates` [controller flag](../cli/controller.md).
 
 #### From Bazel to Make
 
@@ -118,7 +118,7 @@ Previously, a failed issuance was retried every hour which — especially in lar
 are now retried with a binary exponential backoff starting with `1h` then `2h`, `4h` up to a maximum of `32h`. As part of the new backoff behavior, a new `failedIssuanceAttempts` field was added to the
 `Certificate` spec to track the number of currently failed issuances.
 
-The `cmctl renew` [command](../../cli/cmctl.md) command can still be used to force `Certificate` renewal immediately.
+The `cmctl renew` [command](../cli/cmctl.md) command can still be used to force `Certificate` renewal immediately.
 
 We're also considering reducing the initial backoff from 1 hour. If you have a use case where this would be useful please do comment on [our tracking issue](https://github.com/cert-manager/cert-manager/issues/4786).
 

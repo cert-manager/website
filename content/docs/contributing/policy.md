@@ -25,7 +25,7 @@ However this has the side effect that CRDs will not be upgraded any more if chan
 CRDs being upgraded without them being removed and re-installed is essential for cert-manager to move forward.
 The mechanics of this are currently being discussed [in the Helm community](https://github.com/helm/helm/issues/5871).
 
-cert-manager currently works around this by shipping the CRDs in the templates. 
+cert-manager currently works around this by shipping the CRDs in the templates.
 
 ## Helm Subchart capabilities
 
@@ -42,14 +42,14 @@ Secret data is meant to be securely stored in the secret resources and have narr
 ### cainjector
 
 The cainjector component is a special exception to this rule as it deals in non-sensitive information (CAs, not cert/key pairs). This component is able to inject the `ca.crt` file into predefined fields on `ValidatingWebhookConfiguration`, `MutatingWebhookConfiguration`, and `CustomResourceDefinition` resources from Certificate resources.
-These 3 components are already scoped only for privileged users, and will already give you cluster scoped access to resources. 
+These 3 components are already scoped only for privileged users, and will already give you cluster scoped access to resources.
 
-If you’re designing a resource that needs a CA Certificate or TLS key pair it is strongly recommended to use a reference to a secret instead of embedding it in a resource. 
+If you’re designing a resource that needs a CA Certificate or TLS key pair it is strongly recommended to use a reference to a secret instead of embedding it in a resource.
 
 ## Cross namespace resources
 
 Namespace boundaries in Kubernetes provide a barrier for access scopes. Apps or users can be limited to only access resources in a certain namespace. cert-manager is a controller that operates on cluster wide resources, while it may seems interesting to allow access to copy or write certificate data from one namespace to the other it will cause a bypass of this security model for all our users which is not intended and a security issue.
-If this behavior is intended for your use case there are other Kubernetes controllers that will do this for you however we want to suggest a certain caution when installing these. 
+If this behavior is intended for your use case there are other Kubernetes controllers that will do this for you however we want to suggest a certain caution when installing these.
 
 ## Sign certificates using the Kubernetes CA (used for your nodes)
 
@@ -57,4 +57,5 @@ If this behavior is intended for your use case there are other Kubernetes contro
 Kubernetes has a Certificate Signing Requests API, and a `kubectl certificates` command which allows you to approve certificate signing requests and have them signed by the certificate authority (CA) of the Kubernetes cluster.
 
 This API and CLI have occasionally been misused to sign certificates for use by non-control-plane Pods but this is a mistake. For the security of the Kubernetes cluster, it is important to limit access to the Kubernetes certificate authority, and it is important that you do not use that certificate authority to sign certificates which are used outside of the control-plane, because such certificates increase the opportunity for attacks on the Kubernetes API server as this CA is used to sign certificates used for authorization against the API server it could allow any user who can create cert-manager resources to sign certificates trusted for API access.
-([see our FAQ](../faq/README.md#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that))
+
+([See our FAQ](../faq/README.md#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that) for more details)

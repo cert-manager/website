@@ -45,4 +45,4 @@ These external issuers are known to support and honor [approval](https://cert-ma
 
 ## Building New External Issuers
 
-If you're interested in building a new external issuer, check the [development documentation](../../contributing/external-issuers/).
+If you're interested in building a new external issuer, check the [development documentation](../../../contributing/external-issuers/).
