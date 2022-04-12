@@ -52,5 +52,5 @@ We have 2 regular repeating meetings:
 
 We have two cert-manager channels on [the Kubernetes Slack](https://slack.k8s.io) which we use to communicate:
 
-* `cert-manager`: a general channel for all users of cert-manager; use this one for any usage related questions.
-* `cert-manager-dev`: a channel for collaboration between cert-manager contributors and maintainers; please only use this for code related questions
+* [`cert-manager`](https://kubernetes.slack.com/messages/cert-manager): a general channel for all users of cert-manager; use this one for any usage related questions.
+* [`cert-manager-dev`](https://kubernetes.slack.com/messages/cert-manager-dev): a channel for collaboration between cert-manager contributors and maintainers; please only use this for code related questions.
