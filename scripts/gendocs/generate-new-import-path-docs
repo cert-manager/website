@@ -68,7 +68,7 @@ git clone "https://github.com/cert-manager/cert-manager.git" "$gitdir"
 cd "$gitdir"
 
 # genversion takes two arguments (branch in cert-manager repo and a directory in
-# this repo under content/en) and generates API reference docs from cert-manager
+# this repo under content) and generates API reference docs from cert-manager
 # branch for the path in this repo.
 genversion() {
 	checkout "$1"
@@ -85,8 +85,8 @@ genversionwithcli() {
   genclireference "$2" "cmd/webhook" "webhook"
 
   # if any of the above steps succeeded copy over the index file
-  if [ "$2" != "docs" ] && [ -d "$REPO_ROOT/content/en/$2/cli" ]; then
-    cp "$REPO_ROOT/content/en/docs/cli/_index.md" "${REPO_ROOT}/content/en/$2/cli/"
+  if [ "$2" != "docs" ] && [ -d "$REPO_ROOT/content/$2/cli" ]; then
+    cp "$REPO_ROOT/content/docs/cli/README.md" "${REPO_ROOT}/content/$2/cli/"
   fi
 }
 
@@ -111,7 +111,7 @@ gendocs() {
 		-api-dir "./pkg/apis" \
 		-out-file ${apidocstmpdir}/${outputdir}/api-docs.md
 
-	${REPO_ROOT}/scripts/gendocs/postprocess/api-doc-postprocess.js <${apidocstmpdir}/${outputdir}/api-docs.md > "${REPO_ROOT}/content/en/${outputdir}/reference/api-docs.md"
+	${REPO_ROOT}/scripts/gendocs/postprocess/api-doc-postprocess.js <${apidocstmpdir}/${outputdir}/api-docs.md > "${REPO_ROOT}/content/${outputdir}/reference/api-docs.md"
 
 	rm -rf vendor/
 	popd
@@ -142,15 +142,13 @@ genclireference() {
   name="$3"
   echo "+++ Generating CLI reference docs for $target ..."
 
-  mkdir -p "${REPO_ROOT}/content/en/${outputdir}/cli/"
+  mkdir -p "${REPO_ROOT}/content/${outputdir}/cli/"
 
   output=$(go run "$target/main.go" --help)
-  cat > "${REPO_ROOT}/content/en/${outputdir}/cli/$name.md" << EOF
+  cat > "${REPO_ROOT}/content/${outputdir}/cli/$name.md" << EOF
 ---
 title: $name CLI reference
-linkTitle: $name
-weight: 960
-type: "docs"
+description: "cert-manager $name CLI documentation"
 ---
 \`\`\`
 $output
@@ -171,13 +169,13 @@ genversionwithcli "release-1.8" "$LATEST_VERSION"
 
 # Rather than generate the same docs again for /docs, copy from the latest version
 
-cp -r "${REPO_ROOT}/content/en/${LATEST_VERSION}/cli" "${REPO_ROOT}/content/en/docs/"
-cp -r "${REPO_ROOT}/content/en/${LATEST_VERSION}/reference" "${REPO_ROOT}/content/en/docs/"
+cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/cli" "${REPO_ROOT}/content/docs/"
+cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/reference" "${REPO_ROOT}/content/docs/"
 
 # Unless we keep the next release branch up-to-date (which we never do), it's pointless to generate reference docs for next-docs.
 # Instead just use the same as we have for docs.
 
-cp -r "${REPO_ROOT}/content/en/${LATEST_VERSION}/cli" "${REPO_ROOT}/content/en/next-docs/"
-cp -r "${REPO_ROOT}/content/en/${LATEST_VERSION}/reference" "${REPO_ROOT}/content/en/next-docs/"
+cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/cli" "${REPO_ROOT}/content/next-docs/"
+cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/reference" "${REPO_ROOT}/content/next-docs/"
 
 echo "Generated reference documentation for cert-manager versions with a new github.com/cert-manager/cert-manager import path"

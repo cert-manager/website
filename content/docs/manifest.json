@@ -1,0 +1,649 @@
+{
+  "routes": [
+    {
+      "title": "cert-manager",
+      "routes": [
+        {
+          "title": "Introduction",
+          "path": "/docs/README.md"
+        },
+        {
+          "title": "Installation",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/installation/README.md"
+            },
+            {
+              "title": "Supported Releases",
+              "path": "/docs/installation/supported-releases.md"
+            },
+            {
+              "title": "Cloud Compatibility",
+              "path": "/docs/installation/compatibility.md"
+            },
+            {
+              "title": "Kubectl apply",
+              "path": "/docs/installation/kubectl.md"
+            },
+            {
+              "title": "Kubectl plugin",
+              "path": "/docs/installation/kubectl-plugin.md"
+            },
+            {
+              "title": "cmctl",
+              "path": "/docs/installation/cmctl.md"
+            },
+            {
+              "title": "Helm",
+              "path": "/docs/installation/helm.md"
+            },
+            {
+              "title": "OLM",
+              "path": "/docs/installation/operator-lifecycle-manager.md"
+            },
+            {
+              "title": "Other tools",
+              "path": "/docs/installation/other-tools.md"
+            },
+            {
+              "title": "Verifying",
+              "path": "/docs/installation/verify.md"
+            },
+            {
+              "title": "Upgrading",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/docs/installation/upgrading/README.md"
+                },
+                {
+                  "title": "Notes on Ingress Class Compatibility",
+                  "path": "/docs/installation/upgrading/ingress-class-compatibility.md"
+                },
+                {
+                  "title": "Migrating Deprecated API Resources",
+                  "path": "/docs/installation/upgrading/remove-deprecated-apis.md"
+                },
+                {
+                  "title": "v1.7 to v1.8",
+                  "path": "/docs/installation/upgrading/upgrading-1.7-1.8.md"
+                },
+                {
+                  "title": "v1.6 to v1.7",
+                  "path": "/docs/installation/upgrading/upgrading-1.6-1.7.md"
+                },
+                {
+                  "title": "v1.5 to v1.6",
+                  "path": "/docs/installation/upgrading/upgrading-1.5-1.6.md"
+                },
+                {
+                  "title": "v1.4 to v1.5",
+                  "path": "/docs/installation/upgrading/upgrading-1.4-1.5.md"
+                },
+                {
+                  "title": "v1.3 to v1.4",
+                  "path": "/docs/installation/upgrading/upgrading-1.3-1.4.md"
+                },
+                {
+                  "title": "v1.2 to v1.3",
+                  "path": "/docs/installation/upgrading/upgrading-1.2-1.3.md"
+                },
+                {
+                  "title": "v1.1 to v1.2",
+                  "path": "/docs/installation/upgrading/upgrading-1.1-1.2.md"
+                },
+                {
+                  "title": "v1.0 to v1.1",
+                  "path": "/docs/installation/upgrading/upgrading-1.0-1.1.md"
+                },
+                {
+                  "title": "v0.16 to v1.0",
+                  "path": "/docs/installation/upgrading/upgrading-0.16-1.0.md"
+                },
+                {
+                  "title": "v0.15 to v0.16",
+                  "path": "/docs/installation/upgrading/upgrading-0.15-0.16.md"
+                },
+                {
+                  "title": "v0.14 to v0.15",
+                  "path": "/docs/installation/upgrading/upgrading-0.14-0.15.md"
+                },
+                {
+                  "title": "v0.13 to v0.14",
+                  "path": "/docs/installation/upgrading/upgrading-0.13-0.14.md"
+                },
+                {
+                  "title": "v0.12 to v0.13",
+                  "path": "/docs/installation/upgrading/upgrading-0.12-0.13.md"
+                },
+                {
+                  "title": "v0.11 to v0.12",
+                  "path": "/docs/installation/upgrading/upgrading-0.11-0.12.md"
+                },
+                {
+                  "title": "v0.10 to v0.11",
+                  "path": "/docs/installation/upgrading/upgrading-0.10-0.11.md"
+                },
+                {
+                  "title": "v0.9 to v0.10",
+                  "path": "/docs/installation/upgrading/upgrading-0.9-0.10.md"
+                },
+                {
+                  "title": "v0.8 to v0.9",
+                  "path": "/docs/installation/upgrading/upgrading-0.8-0.9.md"
+                },
+                {
+                  "title": "v0.7 to v0.8",
+                  "path": "/docs/installation/upgrading/upgrading-0.7-0.8.md"
+                },
+                {
+                  "title": "v0.6 to v0.7",
+                  "path": "/docs/installation/upgrading/upgrading-0.6-0.7.md"
+                },
+                {
+                  "title": "v0.5 to v0.6",
+                  "path": "/docs/installation/upgrading/upgrading-0.5-0.6.md"
+                },
+                {
+                  "title": "v0.4 to v0.5",
+                  "path": "/docs/installation/upgrading/upgrading-0.4-0.5.md"
+                },
+                {
+                  "title": "v0.3 to v0.4",
+                  "path": "/docs/installation/upgrading/upgrading-0.3-0.4.md"
+                },
+                {
+                  "title": "v0.2 to v0.3",
+                  "path": "/docs/installation/upgrading/upgrading-0.2-0.3.md"
+                }
+              ]
+            },
+            {
+              "title": "Uninstall",
+              "path": "/docs/installation/uninstall.md"
+            },
+            {
+              "title": "API compatibility",
+              "path": "/docs/installation/api-compatibility.md"
+            },
+            {
+              "title": "Signature Verification",
+              "path": "/docs/installation/code-signing.md"
+            }
+          ]
+        },
+        {
+          "title": "Configuration",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/configuration/README.md"
+            },
+            {
+              "title": "SelfSigned",
+              "path": "/docs/configuration/selfsigned.md"
+            },
+            {
+              "title": "CA",
+              "path": "/docs/configuration/ca.md"
+            },
+            {
+              "title": "Vault",
+              "path": "/docs/configuration/vault.md"
+            },
+            {
+              "title": "Venafi",
+              "path": "/docs/configuration/venafi.md"
+            },
+            {
+              "title": "External",
+              "path": "/docs/configuration/external.md"
+            },
+            {
+              "title": "ACME",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/docs/configuration/acme/README.md"
+                },
+                {
+                  "title": "HTTP01",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/docs/configuration/acme/http01/README.md"
+                    },
+                    {
+                      "title": "External Load Balancer",
+                      "path": "/docs/configuration/acme/http01/externalloadbalancer.md"
+                    }
+                  ]
+                },
+                {
+                  "title": "DNS01",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/docs/configuration/acme/dns01/README.md"
+                    },
+                    {
+                      "title": "ACMEDNS",
+                      "path": "/docs/configuration/acme/dns01/acme-dns.md"
+                    },
+                    {
+                      "title": "Akamai",
+                      "path": "/docs/configuration/acme/dns01/akamai.md"
+                    },
+                    {
+                      "title": "AzureDNS",
+                      "path": "/docs/configuration/acme/dns01/azuredns.md"
+                    },
+                    {
+                      "title": "Cloudflare",
+                      "path": "/docs/configuration/acme/dns01/cloudflare.md"
+                    },
+                    {
+                      "title": "DigitalOcean",
+                      "path": "/docs/configuration/acme/dns01/digitalocean.md"
+                    },
+                    {
+                      "title": "Google CloudDNS",
+                      "path": "/docs/configuration/acme/dns01/google.md"
+                    },
+                    {
+                      "title": "RFC-2136",
+                      "path": "/docs/configuration/acme/dns01/rfc2136.md"
+                    },
+                    {
+                      "title": "Route53",
+                      "path": "/docs/configuration/acme/dns01/route53.md"
+                    },
+                    {
+                      "title": "Webhook",
+                      "path": "/docs/configuration/acme/dns01/webhook.md"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Usage",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/usage/README.md"
+            },
+            {
+              "title": "Certificate Resources",
+              "path": "/docs/usage/certificate.md"
+            },
+            {
+              "title": "cmctl",
+              "path": "/docs/usage/cmctl.md"
+            },
+            {
+              "title": "Prometheus Metrics",
+              "path": "/docs/usage/prometheus-metrics.md"
+            },
+            {
+              "title": "Securing Ingress Resources",
+              "path": "/docs/usage/ingress.md"
+            },
+            {
+              "title": "Kubectl plugin",
+              "path": "/docs/usage/kubectl-plugin.md"
+            },
+            {
+              "title": "Securing Gateway Resources",
+              "path": "/docs/usage/gateway.md"
+            },
+            {
+              "title": "Securing Istio Service Mesh",
+              "path": "/docs/usage/istio.md"
+            },
+            {
+              "title": "CSI Driver",
+              "path": "/docs/usage/csi.md"
+            },
+            {
+              "title": "Kubernetes CertificateSigningRequests",
+              "path": "/docs/usage/kube-csr.md"
+            },
+            {
+              "title": "Policy for cert-manager certificates",
+              "path": "/docs/usage/approver-policy.md"
+            }
+          ]
+        },
+        {
+          "title": "Tutorials",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/tutorials/README.md"
+            },
+            {
+              "title": "Migrating from Kube-LEGO",
+              "path": "/docs/tutorials/acme/migrating-from-kube-lego.md"
+            },
+            {
+              "title": "Backup and Restore Resources",
+              "path": "/docs/tutorials/backup.md"
+            },
+            {
+              "title": "DNS Validation",
+              "path": "/docs/tutorials/acme/dns-validation.md"
+            },
+            {
+              "title": "HTTP Validation",
+              "path": "/docs/tutorials/acme/http-validation.md"
+            },
+            {
+              "title": "Securing NGINX-ingress",
+              "path": "/docs/tutorials/acme/nginx-ingress.md"
+            },
+            {
+              "title": "Pomerium Ingress",
+              "path": "/docs/tutorials/acme/pomerium-ingress.md"
+            },
+            {
+              "title": "Securing Ingresses with Venafi",
+              "path": "/docs/tutorials/venafi/venafi.md"
+            }
+          ]
+        },
+        {
+          "title": "FAQ",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/faq/README.md"
+            },
+            {
+              "title": "TLS Terminology",
+              "path": "/docs/faq/terminology.md"
+            },
+            {
+              "title": "Troubleshooting Issuing ACME Certificates",
+              "path": "/docs/faq/acme.md"
+            },
+            {
+              "title": "Cluster Resource Namespace",
+              "path": "/docs/faq/cluster-resource.md"
+            },
+            {
+              "title": "Writing “cert-manager”",
+              "path": "/docs/faq/style.md"
+            },
+            {
+              "title": "Syncing Secrets Across Namespaces",
+              "path": "/docs/faq/sync-secrets.md"
+            },
+            {
+              "title": "Troubleshooting",
+              "path": "/docs/faq/troubleshooting.md"
+            },
+            {
+              "title": "Troubleshooting webhook",
+              "path": "/docs/faq/webhook.md"
+            }
+          ]
+        },
+        {
+          "title": "Contributing",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/contributing/README.md"
+            },
+            {
+              "title": "Feature Policy",
+              "path": "/docs/contributing/policy.md"
+            },
+            {
+              "title": "Building cert-manager",
+              "path": "/docs/contributing/building.md"
+            },
+            {
+              "title": "Contributing Flow",
+              "path": "/docs/contributing/contributing-flow.md"
+            },
+            {
+              "title": "CRDs",
+              "path": "/docs/contributing/crds.md"
+            },
+            {
+              "title": "DNS Providers",
+              "path": "/docs/contributing/dns-providers.md"
+            },
+            {
+              "title": "Running End-to-End Tests",
+              "path": "/docs/contributing/e2e.md"
+            },
+            {
+              "title": "Implementing External Issuers",
+              "path": "/docs/contributing/external-issuers.md"
+            },
+            {
+              "title": "DCO Sign Off",
+              "path": "/docs/contributing/sign-off.md"
+            },
+            {
+              "title": "Release Process",
+              "path": "/docs/contributing/release-process.md"
+            },
+            {
+              "title": "Developing with Kind",
+              "path": "/docs/contributing/kind.md"
+            },
+            {
+              "title": "Google Season of Docs",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/docs/contributing/google-season-of-docs/README.md"
+                },
+                {
+                  "title": "2022",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/docs/contributing/google-season-of-docs/2022/README.md"
+                    },
+                    {
+                      "title": "Improve the Navigation and Structure of the cert-manager Website",
+                      "path": "/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure/index.md"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reporting Security Issues",
+              "path": "/docs/contributing/security.md"
+            },
+            {
+              "title": "Coding Conventions",
+              "path": "/docs/contributing/coding-conventions.md"
+            },
+            {
+              "title": "Third Party Code Donations",
+              "path": "/docs/contributing/third-party-code-donation.md"
+            },
+            {
+              "title": "Signing Keys",
+              "path": "/docs/contributing/signing-keys.md"
+            },
+            {
+              "title": "Importing cert-manager in Go",
+              "path": "/docs/contributing/importing.md"
+            }
+          ]
+        },
+        {
+          "title": "Release Notes",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/release-notes/README.md"
+            },
+            {
+              "title": "v1.8",
+              "path": "/docs/release-notes/release-notes-1.8.md"
+            },
+            {
+              "title": "v1.7",
+              "path": "/docs/release-notes/release-notes-1.7.md"
+            },
+            {
+              "title": "v1.6",
+              "path": "/docs/release-notes/release-notes-1.6.md"
+            },
+            {
+              "title": "v1.5",
+              "path": "/docs/release-notes/release-notes-1.5.md"
+            },
+            {
+              "title": "v1.4",
+              "path": "/docs/release-notes/release-notes-1.4.md"
+            },
+            {
+              "title": "v1.3",
+              "path": "/docs/release-notes/release-notes-1.3.md"
+            },
+            {
+              "title": "v1.2",
+              "path": "/docs/release-notes/release-notes-1.2.md"
+            },
+            {
+              "title": "v1.1",
+              "path": "/docs/release-notes/release-notes-1.1.md"
+            },
+            {
+              "title": "v1.0",
+              "path": "/docs/release-notes/release-notes-1.0.md"
+            },
+            {
+              "title": "v0.16",
+              "path": "/docs/release-notes/release-notes-0.16.md"
+            },
+            {
+              "title": "v0.15",
+              "path": "/docs/release-notes/release-notes-0.15.md"
+            },
+            {
+              "title": "v0.14",
+              "path": "/docs/release-notes/release-notes-0.14.md"
+            },
+            {
+              "title": "v0.13",
+              "path": "/docs/release-notes/release-notes-0.13.md"
+            },
+            {
+              "title": "v0.12",
+              "path": "/docs/release-notes/release-notes-0.12.md"
+            },
+            {
+              "title": "v0.11",
+              "path": "/docs/release-notes/release-notes-0.11.md"
+            },
+            {
+              "title": "v0.10",
+              "path": "/docs/release-notes/release-notes-0.10.md"
+            },
+            {
+              "title": "v0.9",
+              "path": "/docs/release-notes/release-notes-0.9.md"
+            },
+            {
+              "title": "v0.8",
+              "path": "/docs/release-notes/release-notes-0.8.md"
+            },
+            {
+              "title": "v0.7",
+              "path": "/docs/release-notes/release-notes-0.7.md"
+            },
+            {
+              "title": "v0.6",
+              "path": "/docs/release-notes/release-notes-0.6.md"
+            },
+            {
+              "title": "v0.5",
+              "path": "/docs/release-notes/release-notes-0.5.md"
+            },
+            {
+              "title": "v0.4",
+              "path": "/docs/release-notes/release-notes-0.4.md"
+            },
+            {
+              "title": "v0.3",
+              "path": "/docs/release-notes/release-notes-0.3.md"
+            },
+            {
+              "title": "v0.2",
+              "path": "/docs/release-notes/release-notes-0.2.md"
+            },
+            {
+              "title": "v0.1",
+              "path": "/docs/release-notes/release-notes-0.1.md"
+            }
+          ]
+        },
+        {
+          "title": "Concepts",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/concepts/README.md"
+            },
+            {
+              "title": "Issuer",
+              "path": "/docs/concepts/issuer.md"
+            },
+            {
+              "title": "Certificate",
+              "path": "/docs/concepts/certificate.md"
+            },
+            {
+              "title": "CertificateRequest",
+              "path": "/docs/concepts/certificaterequest.md"
+            },
+            {
+              "title": "ACME Orders and Challenges",
+              "path": "/docs/concepts/acme-orders-challenges.md"
+            },
+            {
+              "title": "Webhook",
+              "path": "/docs/concepts/webhook.md"
+            },
+            {
+              "title": "CA Injector",
+              "path": "/docs/concepts/ca-injector.md"
+            }
+          ]
+        },
+        {
+          "title": "About Jetstack",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/aboutjetstack/README.md"
+            }
+          ]
+        },
+        {
+          "title": "CLI reference",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/cli/README.md"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

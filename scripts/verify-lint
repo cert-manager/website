@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright 2019 The Jetstack cert-manager contributors.
+# Copyright 2022 The cert-manager Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,31 +41,19 @@ echo "+++ Running spell check"
   "_layouts/*.html" \
   "_includes/*.html" \
   "*.html" \
-  "!content/en/docs/reference/api-docs.md" \
-  "!content/en/v0.12-docs/reference/api-docs.md" \
-  "!content/en/v0.13-docs/reference/api-docs.md" \
-  "!content/en/v0.14-docs/reference/api-docs.md" \
-  "!content/en/v0.15-docs/reference/api-docs.md" \
-  "!content/en/v0.16-docs/reference/api-docs.md" \
-  "!content/en/v1.0-docs/reference/api-docs.md" \
-  "!content/en/v1.1-docs/reference/api-docs.md" \
-  "!content/en/v1.2-docs/reference/api-docs.md" \
-  "!content/en/v1.3-docs/reference/api-docs.md" \
-  "!content/en/v1.4-docs/reference/api-docs.md" \
-  "!content/en/v1.5-docs/reference/api-docs.md" \
-  "!content/en/v1.6-docs/reference/api-docs.md" \
-  "!content/en/v1.7-docs/reference/api-docs.md" \
-  "!content/en/v1.8-docs/reference/api-docs.md" \
-  "!content/en/next-docs/**/*.md"
-
-# About "!content/en/next-docs/**/*.md":
-#
-# mdspell can fail on master due to words that have been added to the
-# release-next branch and aren't on master yet. Since we pull the release-next
-# branch into content/en/next-docs, the yet-to-be-ignored words are unknown to
-# mdspell.
-#
-# As an example, the PR https://github.com/cert-manager/website/pull/570 added
-# the new spellings "andreas-p" and "renewBefore" to the release-next branch.
-# After the merge, all builds on master started failing since "andreas-p" and
-# "renewBefore" were not present on the master branch's .spelling file.
+  "!content/docs/reference/api-docs.md" \
+  "!content/next-docs/reference/api-docs.md" \
+  "!content/v0.12-docs/reference/api-docs.md" \
+  "!content/v0.13-docs/reference/api-docs.md" \
+  "!content/v0.14-docs/reference/api-docs.md" \
+  "!content/v0.15-docs/reference/api-docs.md" \
+  "!content/v0.16-docs/reference/api-docs.md" \
+  "!content/v1.0-docs/reference/api-docs.md" \
+  "!content/v1.1-docs/reference/api-docs.md" \
+  "!content/v1.2-docs/reference/api-docs.md" \
+  "!content/v1.3-docs/reference/api-docs.md" \
+  "!content/v1.4-docs/reference/api-docs.md" \
+  "!content/v1.5-docs/reference/api-docs.md" \
+  "!content/v1.6-docs/reference/api-docs.md" \
+  "!content/v1.7-docs/reference/api-docs.md" \
+  "!content/v1.8-docs/reference/api-docs.md" \

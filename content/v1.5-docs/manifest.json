@@ -1,0 +1,335 @@
+{
+  "routes": [
+    {
+      "title": "cert-manager",
+      "routes": [
+        {
+          "title": "Introduction",
+          "path": "/v1.5-docs/README.md"
+        },
+        {
+          "title": "Installation",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.5-docs/installation/README.md"
+            },
+            {
+              "title": "Cloud Compatibility",
+              "path": "/v1.5-docs/installation/compatibility.md"
+            },
+            {
+              "title": "Kubectl apply",
+              "path": "/v1.5-docs/installation/kubectl.md"
+            },
+            {
+              "title": "Kubectl plugin",
+              "path": "/v1.5-docs/installation/kubectl-plugin.md"
+            },
+            {
+              "title": "Helm",
+              "path": "/v1.5-docs/installation/helm.md"
+            },
+            {
+              "title": "OLM",
+              "path": "/v1.5-docs/installation/operator-lifecycle-manager.md"
+            },
+            {
+              "title": "Other tools",
+              "path": "/v1.5-docs/installation/other-tools.md"
+            },
+            {
+              "title": "Verifying",
+              "path": "/v1.5-docs/installation/verify.md"
+            },
+            {
+              "title": "Uninstall",
+              "path": "/v1.5-docs/installation/uninstall.md"
+            },
+            {
+              "title": "Signature Verification",
+              "path": "/v1.5-docs/installation/code-signing.md"
+            }
+          ]
+        },
+        {
+          "title": "Configuration",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.5-docs/configuration/README.md"
+            },
+            {
+              "title": "SelfSigned",
+              "path": "/v1.5-docs/configuration/selfsigned.md"
+            },
+            {
+              "title": "CA",
+              "path": "/v1.5-docs/configuration/ca.md"
+            },
+            {
+              "title": "Vault",
+              "path": "/v1.5-docs/configuration/vault.md"
+            },
+            {
+              "title": "Venafi",
+              "path": "/v1.5-docs/configuration/venafi.md"
+            },
+            {
+              "title": "External",
+              "path": "/v1.5-docs/configuration/external.md"
+            },
+            {
+              "title": "ACME",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/v1.5-docs/configuration/acme/README.md"
+                },
+                {
+                  "title": "HTTP01",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/v1.5-docs/configuration/acme/http01/README.md"
+                    },
+                    {
+                      "title": "External Load Balancer",
+                      "path": "/v1.5-docs/configuration/acme/http01/externalloadbalancer.md"
+                    }
+                  ]
+                },
+                {
+                  "title": "DNS01",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/v1.5-docs/configuration/acme/dns01/README.md"
+                    },
+                    {
+                      "title": "ACMEDNS",
+                      "path": "/v1.5-docs/configuration/acme/dns01/acme-dns.md"
+                    },
+                    {
+                      "title": "Akamai",
+                      "path": "/v1.5-docs/configuration/acme/dns01/akamai.md"
+                    },
+                    {
+                      "title": "AzureDNS",
+                      "path": "/v1.5-docs/configuration/acme/dns01/azuredns.md"
+                    },
+                    {
+                      "title": "Cloudflare",
+                      "path": "/v1.5-docs/configuration/acme/dns01/cloudflare.md"
+                    },
+                    {
+                      "title": "DigitalOcean",
+                      "path": "/v1.5-docs/configuration/acme/dns01/digitalocean.md"
+                    },
+                    {
+                      "title": "Google CloudDNS",
+                      "path": "/v1.5-docs/configuration/acme/dns01/google.md"
+                    },
+                    {
+                      "title": "RFC-2136",
+                      "path": "/v1.5-docs/configuration/acme/dns01/rfc2136.md"
+                    },
+                    {
+                      "title": "Route53",
+                      "path": "/v1.5-docs/configuration/acme/dns01/route53.md"
+                    },
+                    {
+                      "title": "Webhook",
+                      "path": "/v1.5-docs/configuration/acme/dns01/webhook.md"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Usage",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.5-docs/usage/README.md"
+            },
+            {
+              "title": "Certificate Resources",
+              "path": "/v1.5-docs/usage/certificate.md"
+            },
+            {
+              "title": "Prometheus Metrics",
+              "path": "/v1.5-docs/usage/prometheus-metrics.md"
+            },
+            {
+              "title": "Securing Ingress Resources",
+              "path": "/v1.5-docs/usage/ingress.md"
+            },
+            {
+              "title": "Kubectl plugin",
+              "path": "/v1.5-docs/usage/kubectl-plugin.md"
+            },
+            {
+              "title": "Securing Gateway Resources",
+              "path": "/v1.5-docs/usage/gateway.md"
+            },
+            {
+              "title": "Securing Istio Service Mesh",
+              "path": "/v1.5-docs/usage/istio.md"
+            },
+            {
+              "title": "CSI Driver",
+              "path": "/v1.5-docs/usage/csi.md"
+            },
+            {
+              "title": "Kubernetes CertificateSigningRequests",
+              "path": "/v1.5-docs/usage/kube-csr.md"
+            },
+            {
+              "title": "Policy for cert-manager certificates",
+              "path": "/v1.5-docs/usage/approver-policy.md"
+            }
+          ]
+        },
+        {
+          "title": "Tutorials",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.5-docs/tutorials/README.md"
+            },
+            {
+              "title": "Migrating from Kube-LEGO",
+              "path": "/v1.5-docs/tutorials/acme/migrating-from-kube-lego.md"
+            },
+            {
+              "title": "Backup and Restore Resources",
+              "path": "/v1.5-docs/tutorials/backup.md"
+            },
+            {
+              "title": "DNS Validation",
+              "path": "/v1.5-docs/tutorials/acme/dns-validation.md"
+            },
+            {
+              "title": "HTTP Validation",
+              "path": "/v1.5-docs/tutorials/acme/http-validation.md"
+            },
+            {
+              "title": "Securing NGINX-ingress",
+              "path": "/v1.5-docs/tutorials/acme/ingress.md"
+            },
+            {
+              "title": "Securing Ingresses with Venafi",
+              "path": "/v1.5-docs/tutorials/venafi/venafi.md"
+            }
+          ]
+        },
+        {
+          "title": "FAQ",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.5-docs/faq/README.md"
+            },
+            {
+              "title": "TLS Terminology",
+              "path": "/v1.5-docs/faq/terminology.md"
+            },
+            {
+              "title": "Troubleshooting Issuing ACME Certificates",
+              "path": "/v1.5-docs/faq/acme.md"
+            },
+            {
+              "title": "Cluster Resource Namespace",
+              "path": "/v1.5-docs/faq/cluster-resource.md"
+            },
+            {
+              "title": "Syncing Secrets Across Namespaces",
+              "path": "/v1.5-docs/faq/kubed.md"
+            },
+            {
+              "title": "Writing “cert-manager”",
+              "path": "/v1.5-docs/faq/style.md"
+            },
+            {
+              "title": "Troubleshooting",
+              "path": "/v1.5-docs/faq/troubleshooting.md"
+            },
+            {
+              "title": "Webhook",
+              "path": "/v1.5-docs/faq/webhook.md"
+            }
+          ]
+        },
+        {
+          "title": "Concepts",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.5-docs/concepts/README.md"
+            },
+            {
+              "title": "Issuer",
+              "path": "/v1.5-docs/concepts/issuer.md"
+            },
+            {
+              "title": "Certificate",
+              "path": "/v1.5-docs/concepts/certificate.md"
+            },
+            {
+              "title": "CertificateRequest",
+              "path": "/v1.5-docs/concepts/certificaterequest.md"
+            },
+            {
+              "title": "ACME Orders and Challenges",
+              "path": "/v1.5-docs/concepts/acme-orders-challenges.md"
+            },
+            {
+              "title": "Webhook",
+              "path": "/v1.5-docs/concepts/webhook.md"
+            },
+            {
+              "title": "CA Injector",
+              "path": "/v1.5-docs/concepts/ca-injector.md"
+            }
+          ]
+        },
+        {
+          "title": "CLI reference",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.5-docs/cli/README.md"
+            },
+            {
+              "title": "acmesolver",
+              "path": "/v1.5-docs/cli/acmesolver.md"
+            },
+            {
+              "title": "cainjector",
+              "path": "/v1.5-docs/cli/cainjector.md"
+            },
+            {
+              "title": "cmctl",
+              "path": "/v1.5-docs/cli/cmctl.md"
+            },
+            {
+              "title": "controller",
+              "path": "/v1.5-docs/cli/controller.md"
+            },
+            {
+              "title": "webhook",
+              "path": "/v1.5-docs/cli/webhook.md"
+            }
+          ]
+        },
+        {
+          "title": "API reference docs",
+          "path": "/v1.5-docs/reference/api-docs.md"
+        }
+      ]
+    }
+  ]
+}

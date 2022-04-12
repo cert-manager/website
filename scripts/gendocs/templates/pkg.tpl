@@ -1,7 +1,7 @@
 {{ define "packages" }}
 ---
 title: "API reference docs"
-type: "docs"
+description: "cert-manager API reference documentation"
 ---
 
 {{ with .packages}}
