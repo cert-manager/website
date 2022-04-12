@@ -210,6 +210,13 @@ generate_release16() {
     gendocs "v1.6-docs"
 }
 
+###### WARNING ######
+# If you uncomment any of the below lines,
+# you'll also need to uncomment
+# "${REPO_ROOT}/scripts/gendocs/generate-old-import-path-docs" in "scripts/gendocs/generate"
+# for any of the below to be used!
+###### WARNING ######
+
 #genversionwithcli "release-1.7" "v1.7-docs"
 #generate_release16
 #genversionwithcli "release-1.5" "v1.5-docs"
@@ -224,4 +231,4 @@ generate_release16() {
 #genversionwithcli "release-0.13" "v0.13-docs"
 #genversionwithcli "release-0.12" "v0.12-docs"
 
-echo "Generated reference documentation for cert-manager versions with an old github.com/jetstack/cert-manager import path"
+# echo "Generated reference documentation for cert-manager versions with an old github.com/jetstack/cert-manager import path"
