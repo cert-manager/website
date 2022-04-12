@@ -5,7 +5,12 @@ import Icon from 'components/Icon'
 import VersionSelect from 'components/docs/VersionSelect'
 
 export default function Sidebar({ router, routes, versions }) {
-  const version = router.query?.docs.length > 0 ? router.query.docs[0] : 'docs'
+  let version = 'docs'
+  if (router.query?.docsFolder) {
+    version = router.query.docsFolder
+  } else {
+    version = router.query?.docs.length >= 0 ? router.query.docs[0] : 'docs'
+  }
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
   const iconClasses = classNames({
     'block w-4 h-4 transform text-blue-1': true,
