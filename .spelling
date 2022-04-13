@@ -280,6 +280,7 @@ kubectl
 kubed
 kubelet
 kubeprod
+kubernetes-replicator
 kubernetes-supported-versions
 labelled
 lalitadithya
