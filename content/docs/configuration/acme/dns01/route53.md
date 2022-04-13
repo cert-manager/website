@@ -178,7 +178,20 @@ spec:
 
 Note that, as mentioned above, the pod is using `arn:aws:iam::XXXXXXXXXXX:role/cert-manager` as a credentials source in Account X, but the `ClusterIssuer` ultimately assumes the `arn:aws:iam::YYYYYYYYYYYY:role/dns-manager` role to actually make changes in Route53 zones located in Account Y.
 
-If you are using an Issuer instead of a ClusterIssuer and assuming a role you will need to ensure that cert-manager is started with the `--issuer-ambient-credentials=true` argument.
+## When are Ambient Credentials used
+
+Ambient credentials are supported for the 'route53' ACME dns01 provider.
+
+They will only be used if no credentials are supplied, even if the supplied credentials are incorrect.
+
+By default, they may be used by ClusterIssuers, but not regular issuers. The
+`--issuer-ambient-credentials` and
+`--cluster-issuer-ambient-credentials=false` flags on the cert-manager may be
+used to override this behavior.
+
+Note that ambient credentials are disabled for regular Issuers by default to
+ensure unprivileged users who may create issuers cannot issue certificates
+using any credentials cert-manager incidentally has access to.
 
 ## EKS IAM Role for Service Accounts (IRSA)
 
