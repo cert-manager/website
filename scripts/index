@@ -14,36 +14,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script constructs a 'content/' directory that contains content for all
-# configured versions of the documentation.
-
 set -o errexit
 set -o nounset
 set -o pipefail
 
+# TODO: Re-implement indexing for the new website
+
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
 if [ -z ${ALGOLIA_WRITE_KEY+x} ]; then
-    echo "Misssing ALGOLIA_WRITE_KEY, skipping index"
+    echo "Missing ALGOLIA_WRITE_KEY, skipping index"
     exit
 fi
 
 cd "${REPO_ROOT}"
-# Ensure the 'public/' directory exists
-mkdir -p "public/"
 
 "${REPO_ROOT}/scripts/update-node_modules"
-${REPO_ROOT}/node_modules/.bin/hugo-algolia -i 'content/docs/**' --config ./config/_default/config.toml --config-toml --all -s
-# A small hack to enable snippets:
-TMPFILE=$(mktemp)
-${REPO_ROOT}/node_modules/.bin/algolia getsettings -a 18N9PEKHUC -k $ALGOLIA_WRITE_KEY -n cert-manager-latest > $TMPFILE
-${REPO_ROOT}/node_modules/.bin/algolia setsettings -a 18N9PEKHUC -k $ALGOLIA_WRITE_KEY -n cert-manager-latest -p '{"attributesToSnippet": ["content:6"]}' -s $TMPFILE
 
-# Do versioning
-for i in content/*-docs/; do
-    ${REPO_ROOT}/node_modules/.bin/hugo-algolia -i "$i**" --config ./config/_default/config.toml --config-toml --all -s --override-index-name cert-manager-$(echo $i | grep -Po "v.*(?=-docs)")
-    # A small hack to enable snippets:
-    TMPFILE=$(mktemp)
-    ${REPO_ROOT}/node_modules/.bin/algolia getsettings -a 18N9PEKHUC -k $ALGOLIA_WRITE_KEY -n cert-manager-$(echo $i | grep -Po "v.*(?=-docs)") > $TMPFILE
-    ${REPO_ROOT}/node_modules/.bin/algolia setsettings -a 18N9PEKHUC -k $ALGOLIA_WRITE_KEY -n cert-manager-$(echo $i | grep -Po "v.*(?=-docs)") -p '{"attributesToSnippet": ["content:6"]}' -s $TMPFILE
-done
+# TODO: this is commented out because it won't work on the new website, and because the variables we need here aren't documented (we don't know what our ALGOLIA_WRITE_KEY is)
+
+#${REPO_ROOT}/node_modules/.bin/hugo-algolia -i 'content/docs/**' --config ./config/_default/config.toml --config-toml --all -s
+## A small hack to enable snippets:
+#TMPFILE=$(mktemp)
+#${REPO_ROOT}/node_modules/.bin/algolia getsettings -a 18N9PEKHUC -k $ALGOLIA_WRITE_KEY -n cert-manager-latest > $TMPFILE
+#${REPO_ROOT}/node_modules/.bin/algolia setsettings -a 18N9PEKHUC -k $ALGOLIA_WRITE_KEY -n cert-manager-latest -p '{"attributesToSnippet": ["content:6"]}' -s $TMPFILE
+#
+## Do versioning
+#for i in content/*-docs/; do
+#    ${REPO_ROOT}/node_modules/.bin/hugo-algolia -i "$i**" --config ./config/_default/config.toml --config-toml --all -s --override-index-name cert-manager-$(echo $i | grep -Po "v.*(?=-docs)")
+#    # A small hack to enable snippets:
+#    TMPFILE=$(mktemp)
+#    ${REPO_ROOT}/node_modules/.bin/algolia getsettings -a 18N9PEKHUC -k $ALGOLIA_WRITE_KEY -n cert-manager-$(echo $i | grep -Po "v.*(?=-docs)") > $TMPFILE
+#    ${REPO_ROOT}/node_modules/.bin/algolia setsettings -a 18N9PEKHUC -k $ALGOLIA_WRITE_KEY -n cert-manager-$(echo $i | grep -Po "v.*(?=-docs)") -p '{"attributesToSnippet": ["content:6"]}' -s $TMPFILE
+#done
