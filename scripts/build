@@ -28,6 +28,3 @@ cd "${REPO_ROOT}"
 npm install
 
 npm run build && npm run export
-
-# Move _redirects file into public/ directory as per https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file
-cp "${REPO_ROOT}/_redirects" "${REPO_ROOT}/public/"
