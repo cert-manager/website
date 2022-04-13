@@ -18,9 +18,36 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# NOTE: Usually you'd not run this directly.
+
+# Run either:
+# - scripts/verify
+# - scripts/verify-release
+
+# Runs automated checks of website content.
+
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
-cd "${REPO_ROOT}"
+echo "+++ Running remark"
+"${REPO_ROOT}/node_modules/.bin/remark" \
+  --rc-path ".remarkrc" \
+  --frail \
+  content/
 
-"${REPO_ROOT}/scripts/build"
-"${REPO_ROOT}/scripts/bin/htmltest" -l 3 -s public/
+echo "+++ Running spell check"
+"${REPO_ROOT}/node_modules/.bin/mdspell" \
+  --report \
+  --en-us \
+  --ignore-numbers \
+  --ignore-acronyms \
+  "content/**/*.md" \
+  "content/**/*.html" \
+  "_layouts/*.html" \
+  "_includes/*.html" \
+  "*.html" \
+  "!**/api-docs.md"
+
+# TODO: Currently disabled until links are generated with trailing slashes correctly
+
+# echo "+++ Running htmltest"
+# "${REPO_ROOT}/scripts/bin/htmltest" -l 3 -s out/

@@ -18,22 +18,17 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# This script constructs a 'content/' directory that contains content for all
-# configured versions of the documentation.
-#
-# It then runs all the verify-*.sh scripts against this copy of the website in
-# order to ensure the final version of the site to be published passes all
-# verification steps.
+# Runs automated checks of website content, first building website content
+# and then re-generating latest API / CLI docs.
+
+# Should be run in CI to verify changes.
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
-# Run all commands relative to the repository root
 cd "${REPO_ROOT}"
 
-export HUGO_ENV="production"
-
-# Fetch all required content versions & assemble the content/ directory
+echo "+++ Building site fully"
 "${REPO_ROOT}/scripts/build-release"
 
-# 3. Run ./scripts/verify-all.sh
-"${REPO_ROOT}/scripts/verify"
+echo "+++ Running verification checks"
+"${REPO_ROOT}/scripts/_verify"

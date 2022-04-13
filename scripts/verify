@@ -18,7 +18,17 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# Runs automated checks of website content, first building website content
+# but without re-generating API / CLI docs.
+
+# Should be run to check local changes.
+
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
-"${REPO_ROOT}/scripts/verify-links"
-"${REPO_ROOT}/scripts/verify-lint"
+cd "${REPO_ROOT}"
+
+echo "+++ Building site"
+"${REPO_ROOT}/scripts/build"
+
+echo "+++ Running verification checks"
+"${REPO_ROOT}/scripts/_verify"
