@@ -1,116 +1,101 @@
-# cert-manager website
+# cert-manager Website
 
-This repository contains the source code for the [cert-manager.io](https://cert-manager.io)
-website, as well as the project documentation.
+Source code for the [cert-manager.io](https://cert-manager.io) website, which includes
+documentation for each version of cert-manager as well as supported version information,
+installation instructions, tutorials, guides, FAQs and information for contributors.
 
-## Developing
+The site uses [next.js](https://nextjs.org/) as a framework, and all documentation is written
+in [MDX](https://github.com/mdx-js/mdx) (Markdown).
 
-We provide a number of scripts that can be used to build and develop the site.
+## Development Requirements
 
-### Branches
+At the very least, you'll need to install a couple of tools to be able to build and run
+the site locally and to test your changes.
 
-The 'master' branch should be targeted for the majority of PRs.
+The following tool(s) must be installed on your system prior to developing the website:
 
-This repo has 'release branches' (i.e. `release-0.12`, `release-0.13`, ...).
-These are kept in-line with the release branches in the
-[`jetstack/cert-manager`](https://github.com/jetstack/cert-manager) repository.
+* cURL
+* NodeJS, version 16+
+* Golang, version 1.17+
 
-Once your pull request has been merged into master, it is typically
-'cherrypicked' into whatever release branches it is appropriate to make the
-change in.
+We also assume you've got GNU coreutils installed, which is usually the case by default on Linux
+and should be installable via Homebrew on macOS.
 
-If a change **only** affects a specific older version, pull requests can be
-opened directly against the documentation content in the `contents/docs`
-directory.
+## Website Development
 
-Changes to other areas of the codebase on release branches are not permitted.
+### Development Server
 
-The HTML/CSS/JavaScript used for the final website will always be deployed
-from the latest 'release branch' - this means that all versions of our
-documentation have a consistent style, and avoids us having to run the
-`hugo` command from multiple different release branches.
+Running a development server with hot-reload functionality is a one-liner:
 
-### Multi-versioning
-
-Because we publish documentation for multiple versions of cert-manager, we have
-an additional 'release' mode that can be used when building, developing or
-deploying the website.
-
-The majority of scripts mentioned below have corresponding `*-release` versions
-that can be used. These scripts will first gather all content from all the
-configured documentation versions and include them in the output.
-
-This is **not** enabled by default as it requires running `git clone` multiple
-times against multiple copies of the repository, which is a time consuming
-operation.
-
-### Requirements
-
-The majority of tools needed to build the website are automatically installed
-and versioned when you build the site by the tools in `scripts/`.
-
-You also need to ensure you have the following tool(s) installed on your system
-as they are not managed by the `scripts/` directory:
-
-* npm/nodejs
-* Golang 1.12+
-
-### Local development
-
-When developing locally, you can use the `hugo server` mode to start a local
-webserver that watches for changes on your filesystem and automatically
-refreshes the generated content and page when changes are detected.
-
-To run this mode, run:
-
-```
+```bash
 ./scripts/server
 ```
 
-This will start a local webserver on `http://localhost:1313` where you can view
-the built site.
+This script will run `npm install` and then start a development server.
 
-There is also a `./scripts/server-release` command which will fetch all
-versions of the documentation content before running the regular `server`
-script.
+If you've already run `npm install`, you can manually run `npm run dev` as another option.
 
-### Building output HTML
+In any case, a server will spin up at `http://localhost:3000`.
 
-If you want to build a directory containing the built HTML, you can run the
-following command:
+Initial builds of a page on the development server can be quite slow - a few seconds - but
+after the initial build changes should be picked up quickly and the development server
+should be snappy to use.
 
-```
-./scripts/build
-```
-
-This will generate a directory named `public/` that can be easily served by the
-default configuration of most webservers.
-
-There is also a `./scripts/build-release` command which will fetch all
-versions of the documentation content before running the regular `build`
-script.
-
-### Running verification scripts
+### Running Verification Scripts
 
 After you have made changes to the website, you should run the `verify` scripts
 to ensure things like spelling and links are valid.
 
-To run all the verify checks, run:
+To run all verification checks:
 
-```
+```bash
 ./scripts/verify
 ```
 
-This will automatically run a number of checks against your changes.
+This will automatically run a number of checks against your local environment.
 
-If `./scripts/verify` fails with a number of `..target not found..` errors, you
-can run  `./scripts/verify-release` instead, which will fetch all versions of the
-documentation content before running the regular `verify` script.
+If you want to be thorough, you can run `./scripts/verify-release` to also regenerate API / CLI docs
+before verification, but that check is slower and unlikely to provide any useful insight.
+
+### Building for a Release
+
+On release, all output is placed into the `out/` directory.
+
+Building a full release includes re-running API + CLI doc generation for the latest
+version of cert-manager, and then running a next.js `build` followed by `export`. The full
+release process can be run through one script:
+
+```bash
+./scripts/build-release
+```
+
+If you want to test that the build still works locally, you can run `./scripts/build` to build while
+skipping regeneration of API / CLI docs.
+
+### API / CLI Documentation Generation
+
+To generate API / CLI reference docs manually, run:
+
+```bash
+./scripts/gendocs/generate
+```
+
+Since there are many old versions of cert-manager, none of which change regularly (or at all),
+the website build process does not re-generate documentation for older versions, on the assumption
+that doing so would be a waste of effort.
+
+The solution for achieving this is simple; the generation scripts for older cert-manager versions
+are commented out. To rebuild, uncomment them and then re-comment after.
+
+For versions of cert-manager older than v1.8, API doc generation used the old cert-manager import
+path and for this reason there's a different script - `scripts/gendocs/generate-old-import-path-docs`.
+If you want to rebuild reference docs for versions older than 1.8, you'll also need to uncomment
+`generate-old-import-path-docs` in `scripts/gendocs/generate`.
 
 ### Signing Keys
 
-Public keys used for verifying signatures are served on the website statically, and
-are located in `static/public-keys`.
+Public keys used for verifying signatures are served on the website statically, and are located
+in `public/public-keys` directory.
 
-See the [docs on signing keys](./content/docs/contributing/signing-keys.md) for
-more information about how and why these keys are generated and provided here.
+See the [docs on signing keys](./content/docs/contributing/signing-keys.md) for more information
+about how and why these keys are generated and provided here.

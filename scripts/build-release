@@ -14,18 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script constructs a 'content/' directory that contains content for all
-# configured versions of the documentation.
-
 set -o errexit
 set -o nounset
 set -o pipefail
+
+# This script runs generation for the latest cert-manager API and CLI docs, and then
+# creates a production build of the site, placing output into the `out/` directory.
+
+# This script is ideal to run in a CI environment or build pipeline; after this script
+# runs, the `out/` directory should contain a full, deployable site.
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
 cd "${REPO_ROOT}"
 
-export HUGO_ENV="production"
-
 "${REPO_ROOT}/scripts/gendocs/generate"
-"${REPO_ROOT}/scripts/build" "$@"
+"${REPO_ROOT}/scripts/build"

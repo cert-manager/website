@@ -48,7 +48,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-pushd scripts/gendocs/postprocess && npm install && popd
+"${REPO_ROOT}/scripts/update-node_modules"
 
 # Create fake GOPATH
 echo "+++ Creating temporary GOPATH"

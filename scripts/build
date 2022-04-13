@@ -14,20 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script constructs a 'content/' directory that contains content for all
-# configured versions of the documentation.
-
 set -o errexit
 set -o nounset
 set -o pipefail
+
+# NOTE: You probably don't want to run this script in CI! Use `./scripts/build-release` there.
+
+# This script creates a production build of the site, placing output into the `out/` directory.
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
 cd "${REPO_ROOT}"
 
-npm install
+"${REPO_ROOT}/scripts/update-node_modules"
 
 npm run build && npm run export
-
-# Move _redirects file into public/ directory as per https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file
-cp "${REPO_ROOT}/_redirects" "${REPO_ROOT}/public/"
