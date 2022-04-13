@@ -1,10 +1,46 @@
-/node_modules/
-/public/
-/resources/
-/bin/
-/tmp/
+# dependencies
+/node_modules
+node_modules
+.github/actions/sync/node_modules
+/functions/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# cypress
+cypress/videos
+cypress/screenshots
+
+# eslint
+.eslintcache
+
+sitemap.xml
+sitemap.xml.gz
+robots.txt
+
+public/sitemap*.xml
+public/atom.xml
+public/feed.*
+
 /scripts/gendocs/postprocess/node_modules/
 
-.next/
-
-/out/
+# leftovers from previous design
+/bin
+/tmp
