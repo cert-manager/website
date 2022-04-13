@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright 2019 The cert-manager contributors.
+# Copyright 2022 The cert-manager contributors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,15 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
+# This script runs a local server for developing the website, with hot-reload
+# functionality.
 
-HUGO_BIND_ADDRESS=${HUGO_BIND_ADDRESS:-127.0.0.1}
+# If you've already run "npm install", running "npm run dev" in the root of this repo
+# should work too - you don't need to use this script.
+
+REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
 cd "${REPO_ROOT}"
 
-"${REPO_ROOT}/scripts/build" server --bind $HUGO_BIND_ADDRESS
+npm install
+npm run dev

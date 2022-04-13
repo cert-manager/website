@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright 2019 The cert-manager contributors.
+# Copyright 2022 The cert-manager contributors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,12 +18,17 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
+# NOTE: You probably want ./scripts/server for most development work. Rebuilding
+# API docs is not likely to be a hugely beneficial thing for most changes a user
+# might want to make for the website and is likely to do nothing but slow you down.
 
-HUGO_BIND_ADDRESS=${HUGO_BIND_ADDRESS:-127.0.0.1}
+# This script rebuilds the API + CLI docs for the latest version of cert-manager
+# and then runs the development server. This will be a good approximation of the
+# end result when running the deployed site.
+
+REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
 cd "${REPO_ROOT}"
 
-export HUGO_ENV="production"
-
-"${REPO_ROOT}/scripts/build-release" server --bind $HUGO_BIND_ADDRESS
+"${REPO_ROOT}/scripts/build-release"
+"${REPO_ROOT}/scripts/server"
