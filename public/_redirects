@@ -153,4 +153,4 @@ https://cert-manager.io/v1.7-docs/aboutjetstack/* https://cert-manager.io/docs/a
 # Google Season of Docs link became 404'd. We use a temporary 302 because we
 # might want to fix this breakage in the future. See:
 # https://github.com/cert-manager/website/issues/917
-https://cert-manager.io/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure/ https://cert-manager.io/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure/index/:splat 302!
+https://cert-manager.io/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure/ https://cert-manager.io/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure/index/ 302!
