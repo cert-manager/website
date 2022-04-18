@@ -16,7 +16,7 @@ description: 'cert-manager installation: cmctl'
 The CLI provides the simplest way of installing cert-manager:
 
 ```bash
-$ cmctl x install
+cmctl x install
 ```
 
 The command makes sure that the required `CustomResourceDefinitions` are installed together with the cert-manager, cainjector and webhook components.
@@ -27,7 +27,7 @@ You can also use `cmctl x install` to customize the installation of cert-manager
 The example below shows how to tune the cert-manager installation by overwriting the default Helm values:
 
 ```bash
-$ cmctl x install \
+cmctl x install \
     --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
     --set webhook.timeoutSeconds=4s   # Example: changing the wehbook timeout using a Helm parameter
 ```
@@ -40,5 +40,5 @@ Once you have deployed cert-manager, you can [verify](./verify.md) the installat
 The CLI also allows the user to output the templated manifest to `stdout`, instead of installing the manifest on the cluster.
 
 ```bash
-$ cmctl x install --dry-run > cert-manager.custom.yaml
+cmctl x install --dry-run > cert-manager.custom.yaml
 ```

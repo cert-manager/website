@@ -16,7 +16,7 @@ description: 'cert-manger installation: Using kubectl'
 The plugin provides the simplest way of installing cert-manager:
 
 ```bash
-$ kubectl cert-manager x install
+kubectl cert-manager x install
 ```
 
 The command makes sure that the required `CustomResourceDefinitions` are installed together with the cert-manager, cainjector and webhook components.
@@ -27,7 +27,7 @@ You can also use `kubectl cert-manager x install` to customize the installation 
 The example below shows how to tune the cert-manager installation by overwriting the default Helm values:
 
 ```bash
-$ kubectl cert-manager x install \
+kubectl cert-manager x install \
     --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
     --set webhook.timeoutSeconds=4s   # Example: changing the wehbook timeout using a Helm parameter
 ```
@@ -39,7 +39,7 @@ Once you have deployed cert-manager, you can [verify](./verify.md) the installat
 
 The kubectl plugin also allows the user to output the templated manifest to `stdout`, instead of installing the manifest on the cluster.
 ```bash
-$ kubectl cert-manager x install \
+kubectl cert-manager x install \
     --dry-run \
     > cert-manager.custom.yaml
 ```

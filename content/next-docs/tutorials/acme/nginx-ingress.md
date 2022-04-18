@@ -6,7 +6,7 @@ description: 'cert-manager tutorials: Using ingress-nginx to solve an ACME HTTP-
 This tutorial will detail how to install and secure ingress to your cluster
 using NGINX.
 
-## Step 0 - Install Helm Client
+## Step 1 - Install Helm
 
 > *Skip this section if you have helm installed.*
 
@@ -19,54 +19,12 @@ instructions](https://helm.sh/docs/intro/install/).
 For example, on MacOS:
 
 ```bash
-$ brew install kubernetes-helm
-```
-
-## Step 1 - Install Tiller
-
-> *Skip this section if you have Tiller set-up. Ignore this part for Helm version 3*
-
-Tiller is Helm's server-side component, which the `helm` client uses to
-deploy resources.
-
-Deploying resources is a privileged operation; in the general case requiring
-arbitrary privileges. With this example, we give Tiller complete control of the
-cluster. View the documentation on [securing
-helm](https://docs.helm.sh/using_helm/#securing-your-helm-installation) for
-details on setting up appropriate permissions for your environment.
-
-Create a `ServiceAccount` for Tiller:
-
-```bash
-$ kubectl create serviceaccount tiller --namespace=kube-system
-serviceaccount "tiller" created
-```
-
-Grant the `tiller` service account cluster admin privileges:
-
-```bash
-$ kubectl create clusterrolebinding tiller-admin --serviceaccount=kube-system:tiller --clusterrole=cluster-admin
-clusterrolebinding.rbac.authorization.k8s.io "tiller-admin" created
-```
-
-Install tiller with the `tiller` service account:
-
-```bash
-$ helm init --service-account=tiller
-$HELM_HOME has been configured at /Users/myaccount/.helm.
-
-Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
-
-Please note: by default, Tiller is deployed with an insecure 'allow unauthenticated users' policy.
-To prevent this, run `helm init` with the --tiller-tls-verify flag.
-For more information on securing your installation see: https://docs.helm.sh/using_helm/#securing-your-helm-installation
-Happy Helming!
+brew install kubernetes-helm
 ```
 
 ## Step 2 - Deploy the NGINX Ingress Controller
 
-A [`kubernetes ingress
-controller`](https://kubernetes.io/docs/concepts/services-networking/ingress) is
+A [`kubernetes ingress controller`](https://kubernetes.io/docs/concepts/services-networking/ingress) is
 designed to be the access point for HTTP and HTTPS traffic to the software
 running within your cluster. The `ingress-nginx-controller` does this by providing
 an HTTP proxy service supported by your cloud provider's load balancer.
@@ -77,7 +35,7 @@ You can get more details about `ingress-nginx` and how it works from the
 Add the latest helm repository for the ingress-nginx
 
 ```bash
-$ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 ```
 
 Update the helm repository with the latest charts:
@@ -95,59 +53,10 @@ Update Complete. ⎈ Happy Helming!⎈
 Use `helm` to install an NGINX Ingress controller:
 
 ```bash
-
-# for helm version 2
-$ helm install ingress-nginx/ingress-nginx --name quickstart
-
-# for helm version 3
 $ helm install quickstart ingress-nginx/ingress-nginx
 
 NAME: quickstart
-LAST DEPLOYED: Wed Feb  3 12:55:58 2021
-NAMESPACE: default
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
-The ingress-nginx controller has been installed.
-It may take a few minutes for the LoadBalancer IP to be available.
-You can watch the status by running 'kubectl --namespace default get services -o wide -w quickstart-ingress-nginx-controller'
-
-An example Ingress that makes use of the controller:
-
-  apiVersion: networking.k8s.io/v1beta1
-  kind: Ingress
-  metadata:
-    annotations:
-      kubernetes.io/ingress.class: nginx
-    name: example
-    namespace: foo
-  spec:
-    rules:
-      - host: www.example.com
-        http:
-          paths:
-            - backend:
-                serviceName: exampleService
-                servicePort: 80
-              path: /
-    # This section is only required if TLS is to be enabled for the Ingress
-    tls:
-        - hosts:
-            - www.example.com
-          secretName: example-tls
-
-If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
-
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: example-tls
-    namespace: foo
-  data:
-    tls.crt: <base64 encoded cert>
-    tls.key: <base64 encoded key>
-  type: kubernetes.io/tls
+... lots of output ...
 ```
 
 It can take a minute or two for the cloud provider to provide and link a public
@@ -186,9 +95,8 @@ will do so.
 
 Your service may have its own chart, or you may be deploying it directly with
 manifests. This quick-start uses manifests to create and expose a sample service.
-The example service uses
-[`kuard`](https://github.com/kubernetes-up-and-running/kuard), a demo
-application which makes an excellent back-end for examples.
+The example service uses [`kuard`](https://github.com/kubernetes-up-and-running/kuard),
+a demo application.
 
 The quick-start example uses three manifests for the sample. The first two are a
 sample deployment and an associated service:
@@ -201,34 +109,34 @@ sample deployment and an associated service:
 
 You can create download and reference these files locally, or you can
 reference them from the GitHub source repository for this documentation.
-To install the example service from the tutorial files straight from GitHub,
-you may use the commands:
+To install the example service from the tutorial files straight from GitHub, do
+the following:
 
 ```bash
-$ kubectl apply -f https://netlify.cert-manager.io/docs/tutorials/acme/example/deployment.yaml
-deployment.extensions "kuard" created
+kubectl apply -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/deployment.yaml
+# expected output: deployment.extensions "kuard" created
 
-$ kubectl apply -f https://netlify.cert-manager.io/docs/tutorials/acme/example/service.yaml
-service "kuard" created
+kubectl apply -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/service.yaml
+# expected output: service "kuard" created
 ```
 
-An [`ingress
-resource`](https://kubernetes.io/docs/concepts/services-networking/ingress/) is
+An [Ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress/) is
 what Kubernetes uses to expose this example service outside the cluster.  You
 will need to download and modify the example manifest to reflect the domain that
 you own or  control to complete this example.
 
 A sample ingress you can start with is:
+
 ```yaml file=./example/ingress.yaml
 ```
 
 You can download the sample manifest from GitHub , edit it, and submit the
-manifest to Kubernetes with the command. Edit the file in your editor, and once
+manifest to Kubernetes with the command below. Edit the file in your editor, and once
 it is saved:
 
 ```bash
-$ kubectl create --edit -f https://netlify.cert-manager.io/docs/tutorials/acme/example/ingress.yaml
-ingress.extensions "kuard" created
+kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/ingress.yaml
+# expected output: ingress.extensions "kuard" created
 ```
 
 > Note: The ingress example we show above has a `host` definition within it. The
@@ -240,7 +148,7 @@ ingress.extensions "kuard" created
 Once it is deployed, you can use the command `kubectl get ingress` to see the status
  of the ingress:
 
-```bash
+```text
 NAME      HOSTS     ADDRESS   PORTS     AGE
 kuard     *                   80, 443   17s
 ```
@@ -249,7 +157,7 @@ It may take a few minutes, depending on your service provider, for the ingress
 to be fully created. When it has been created and linked into place, the
 ingress will show an address as well:
 
-```bash
+```text
 NAME      HOSTS     ADDRESS         PORTS     AGE
 kuard     *         203.0.113.2   80        9m
 ```
@@ -289,55 +197,61 @@ for our site.
 > that validation as proof that the request for the domain belongs to someone
 > with sufficient control over the domain.
 
-## Step 5 - Deploy Cert Manager
+## Step 5 - Deploy cert-manager
 
 We need to install cert-manager to do the work with Kubernetes to request a
 certificate and respond to the challenge to validate it. We can use Helm or
-plain Kubernetes manifest to install cert-manager.
+plain Kubernetes manifests to install cert-manager.
 
-Read the [getting started guide](../../installation/README.md) to install
-cert-manager using your preferred method.
+Since we installed Helm earlier, we'll assume you want to use Helm; follow the
+[Helm guide](../../installation/helm.md). For other methods, read the
+[installation documentation](../../installation/README.md) for cert-manager.
 
-Cert-manager uses two different custom resources, also known as
-[`CRD`'s](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/),
-to configure and control how it operates, as well as share status of its
-operation. These two resources are:
+cert-manager mainly uses two different custom Kubernetes resources - known as
+[`CRDs`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) -
+to configure and control how it operates, as well as to store state. These
+resources are Issuers and Certificates.
 
-> An Issuer is the definition for where cert-manager will get request TLS
-> certificates. An Issuer is specific to a single namespace in Kubernetes,
-> and a `ClusterIssuer` is meant to be a cluster-wide definition for the same
-> purpose.
->
-> Note that if you're using this document as a guide to configure cert-manager
-> for your own Issuer, you must create the Issuers in the same namespace
-> as your Ingress resources by adding `-n my-namespace` to your `kubectl create`
-> commands. Your other option is to replace your Issuers with `ClusterIssuers`.
-> `ClusterIssuer` resources apply across all Ingress resources in your cluster
-> and don't have this namespace-matching requirement. In that case, remember to
-> update the Ingress annotation `cert-manager.io/issuer` with
-> `cert-manager.io/cluster-issuer`. To debug such failures,
-> follow the [Troubleshooting Issuing ACME Certificates](../../faq/acme.md) guide.
->
-> More information on the differences between `Issuers` and `ClusterIssuers` and
-> when you might choose to use each can be found
-> [here](../../concepts/issuer.md#namespaces).
+### Issuers
 
-> A certificate is the resource that cert-manager uses to expose the state
-> of a request as well as track upcoming expiration.
+An Issuer defines _how_ cert-manager will request TLS certificates. Issuers are
+specific to a single namespace in Kubernetes, but there's also a `ClusterIssuer`
+which is meant to be a cluster-wide version.
 
-## Step 6 - Configure Let's Encrypt Issuer
+Take care to ensure that your Issuers are created in the same namespace as the
+certificates you want to create. You might need to add `-n my-namespace` to your
+`kubectl create` commands.
 
-We will set up two issuers for Let's Encrypt in this example. The Let's Encrypt
-production issuer has [very strict rate
-limits](https://letsencrypt.org/docs/rate-limits/). When you are experimenting
-and learning, it is very easy to  hit those limits, and confuse rate limiting
-with errors in configuration or operation.
+Your other option is to replace your `Issuers` with `ClusterIssuers`;
+`ClusterIssuer` resources apply across all Ingress resources in your cluster.
+If using a `ClusterIssuer`, remember to update the Ingress annotation `cert-manager.io/issuer` to
+`cert-manager.io/cluster-issuer`.
 
-Because of this, we will start with the Let's Encrypt staging issuer, and once
-that is working switch to a production issuer.
+If you see issues with issuers, follow the [Troubleshooting Issuing ACME Certificates](../../faq/acme.md) guide.
+
+More information on the differences between `Issuers` and `ClusterIssuers` - including
+when you might choose to use each can be found on [Issuer concepts](../../concepts/issuer.md#namespaces).
+
+### Certificates
+
+Certificates resources allow you to specify the details of the certificate you
+want to request. They reference an issuer to define _how_ they'll be issued.
+
+For more information, see [Certificate concepts](../../concepts/certificate.md).
+
+## Step 6 - Configure a Let's Encrypt Issuer
+
+We'll set up two issuers for Let's Encrypt in this example: staging and production.
+
+The Let's Encrypt production issuer has [very strict rate limits](https://letsencrypt.org/docs/rate-limits/).
+When you're experimenting and learning, it can be very easy to hit those limits. Because of that risk,
+we'll start with the Let's Encrypt staging issuer, and once we're happy that it's working
+we'll switch to the production issuer.
+
+Note that you'll see a warning about untrusted certificates from the staging issuer, but that's totally expected.
 
 Create this definition locally and update the email address to your own. This
-email required by Let's Encrypt and used to notify you of certificate
+email is required by Let's Encrypt and used to notify you of certificate
 expiration and updates.
 
 ```yaml file=./example/staging-issuer.yaml
@@ -346,8 +260,8 @@ expiration and updates.
 Once edited, apply the custom resource:
 
 ```bash
-$ kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/staging-issuer.yaml
-issuer.cert-manager.io "letsencrypt-staging" created
+kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/staging-issuer.yaml
+# expected output: issuer.cert-manager.io "letsencrypt-staging" created
 ```
 
 Also create a production issuer and deploy it. As with the staging issuer, you
@@ -357,12 +271,11 @@ will need to update this example and add in your own email address.
 ```
 
 ```bash
-$ kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/production-issuer.yaml
-issuer.cert-manager.io "letsencrypt-prod" created
+kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/production-issuer.yaml
+# expected output: issuer.cert-manager.io "letsencrypt-prod" created
 ```
 
-Both of these issuers are configured to use the
-[`HTTP01`](../../configuration/acme/http01/README.md) challenge provider.
+Both of these issuers are configured to use the [`HTTP01`](../../configuration/acme/http01/README.md) challenge provider.
 
 Check on the status of the issuer after you create it:
 
@@ -434,8 +347,8 @@ example:
 and apply it:
 
 ```bash
-$ kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/ingress-tls.yaml
-ingress.extensions "kuard" configured
+kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/ingress-tls.yaml
+# expected output: ingress.extensions "kuard" configured
 ```
 
 Cert-manager will read these annotations and use them to create a certificate,
@@ -447,7 +360,7 @@ NAME                     READY   SECRET                   AGE
 quickstart-example-tls   True    quickstart-example-tls   16m
 ```
 
-Cert-manager reflects the state of the process for every request in the
+cert-manager reflects the state of the process for every request in the
 certificate object. You can view this information using the
 `kubectl describe` command:
 
@@ -533,7 +446,7 @@ can update the annotations in the ingress to specify the production issuer:
 ```
 
 ```bash
-$ kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/ingress-tls-final.yaml
+$ kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/ingress-tls-final.yaml
 ingress.extensions "kuard" configured
 ```
 
