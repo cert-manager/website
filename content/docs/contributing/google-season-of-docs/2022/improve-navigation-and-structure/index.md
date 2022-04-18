@@ -3,6 +3,25 @@ title: Improve the Navigation and Structure of the cert-manager Website
 description: Google season of docs 2022 proposal
 ---
 
+# GSoD 2022: Improve the Navigation and Structure of the cert-manager Website
+
+We have registered our interest to  participate in Google Season of Docs 2022,
+and have submitted a single project proposal detailed in the remaining of this
+page. This project was accepted on 14 April 2022.
+
+To apply as a technical writer, please let us know by one of the two ways
+below:
+
+- e-mail us at `cert-manager-maintainers@googlegroups.com` with the prefix
+  `GSoD2022:` in the e-mail subject.
+- or open an issue on
+  [cert-manager/website](https://github.com/cert-manager/website) with the
+  prefix `GSoD2022:` in the issue title.
+
+You can join our open standup (every day at 10:30 UK time), and join the
+Kubernetes Slack channel `#cert-manager-dev` to know more about this project
+proposal.
+
 ## About cert-manager
 
 cert-manager (current version 1.7.2, first release in October 2017) is an Apache-2.0 licensed Kubernetes add-on to automate the management and issuance of TLS certificates.
