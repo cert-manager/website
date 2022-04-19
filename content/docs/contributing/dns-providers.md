@@ -12,7 +12,7 @@ DNS providers via way of an external webhook.
 
 To implement an external DNS provider webhook, it is recommended to base your
 implementation on the [example
-repository](https://github.com/jetstack/cert-manager-webhook-example). Please
+repository](https://github.com/cert-manager/webhook-example). Please
 reach out on the `cert-manager-dev` channel on the [community
 slack](https://slack.k8s.io) for advise and guidance on getting a DNS webhook
 running and released.

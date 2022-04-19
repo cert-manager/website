@@ -155,7 +155,7 @@ certificate is available from the Pods file system at `/tls/key.pem` and
 Below is a full list of the available volume attributes to configure resulting
 key certificate pairs.
 
-The full list of usage keys is available [from code](https://github.com/jetstack/cert-manager/blob/57034dc1e47d0231d781cb8fe1ab58375fab5faf/pkg/apis/certmanager/v1/types.go#L167-L191).
+The full list of usage keys is available [from code](https://github.com/cert-manager/cert-manager/blob/57034dc1e47d0231d781cb8fe1ab58375fab5faf/pkg/apis/certmanager/v1/types.go#L167-L191).
 
 | Attribute                                | Description                                                                                           | Default                              | Example                          |
 |------------------------------------------|-------------------------------------------------------------------------------------------------------|--------------------------------------|----------------------------------|

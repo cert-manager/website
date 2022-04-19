@@ -14,7 +14,7 @@ to use as a stand alone binary as this allows the use of command
 
 You need the `cmctl.tar.gz` file for the platform you're using, these can be
 found on our
-[GitHub releases page](https://github.com/jetstack/cert-manager/releases).
+[GitHub releases page](https://github.com/cert-manager/cert-manager/releases).
 In order to use `cmctl` you need its binary to be accessible under
 the name `cmctl` in your `$PATH`.
 Run the following commands to set up the CLI. Replace OS and ARCH with your
