@@ -50,16 +50,25 @@ $ kubectl create clusterrolebinding cluster-admin-binding \
 > and potentially broken states. Please ensure you follow the below steps when
 > uninstalling to prevent this happening.
 
-Before continuing, ensure that all cert-manager resources that have been created
+Before continuing, ensure that unwanted cert-manager resources that have been created
 by users have been deleted. You can check for any existing resources with the
 following command:
 
 ```bash
 $ kubectl get Issuers,ClusterIssuers,Certificates,CertificateRequests,Orders,Challenges --all-namespaces
 ```
+It is recommended that you delete all these resources before uninstalling cert-manager. 
+If plan on reinstalling later and don't want to lose some custom resources, you can keep them. 
+However, this can potentially lead to problems with finalizers. Some resources, like 
+`Challenges`, should be deleted to avoid [getting stuck in a pending state](#namespace-stuck-in-terminating-state). 
 
-Once all these resources have been deleted you are ready to uninstall
+Once the unneeded resources have been deleted, you are ready to uninstall
 cert-manager using the procedure determined by how you installed.
+
+> **Warning**: Uninstalling cert-manager or simply deleting a `Certificate` resource can result in 
+> TLS `Secret`s being deleted if they have `metadata.ownerReferences` set by cert-manager.
+> You can disable this behavior by setting `-enable-certificate-owner-ref=false` before deleting
+> a `Certificate` or `cert-manager`.
 
 ### Uninstalling with regular manifests
 
@@ -87,4 +96,24 @@ experiencing issues then run:
 
 ```bash
 $ kubectl delete apiservice v1beta1.webhook.cert-manager.io
+```
+
+#### Deleting pending challenges
+
+`Challenge`s can get stuck in a pending state when the finalizer is unable to complete 
+and Kubernetes is waiting for the cert-manager controller to finish. 
+This happens when the controller is no longer running to remove the flag, 
+and the resources are defined as needing to wait.
+You can fix this problem by doing what the controller does manually. 
+
+First, delete existing cert-manager webhook configurations, if any:
+
+```bash
+$ kubectl delete validatingwebhookconfigurations cert-manager-webhook
+$ kubectl delete validatingwebhookconfigurations cert-manager-webhook
+```
+Then change the `.metadata.finalizers` field to an empty list by editing the challenge file:
+
+```bash
+$ kubectl edit challenge <the-challenge>
 ```
