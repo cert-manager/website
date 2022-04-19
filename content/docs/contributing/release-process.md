@@ -30,7 +30,7 @@ following conditions:
     ```sh
     brew install gh
     gh auth login
-    gh api /repos/jetstack/cert-manager/collaborators/$(gh api /user | jq -r .login)/permission | jq .permission
+    gh api /repos/cert-manager/cert-manager/collaborators/$(gh api /user | jq -r .login)/permission | jq .permission
     ```
 
     If your permission is `admin`, then you are good to go. To request the
@@ -188,7 +188,7 @@ page if a step is missing or if it is outdated.
 
     1. Check that the `origin` remote is correct. To do that, run the following
         command and make sure it returns
-        the upstream `https://github.com/jetstack/cert-manager.git`:
+        the upstream `https://github.com/cert-manager/cert-manager.git`:
 
         ```sh
         # Must be run from the cert-manager repo folder.
@@ -288,12 +288,12 @@ page if a step is missing or if it is outdated.
         - Add additional blurb, notable items and characterize change log.
 
         You can see the commits that will go into this release by using the
-        [GitHub compare](https://github.com/jetstack/cert-manager/compare). For
+        [GitHub compare](https://github.com/cert-manager/cert-manager/compare). For
         example, while releasing `v1.0.0`, you want to compare it with the
         latest pre-released version `v1.0.0-beta.1`:
 
         ```text
-        https://github.com/jetstack/cert-manager/compare/v1.0.0-beta.1...master
+        https://github.com/cert-manager/cert-manager/compare/v1.0.0-beta.1...master
         ```
 
     4. **(final release only)** Check the release notes include all changes
@@ -434,7 +434,7 @@ page if a step is missing or if it is outdated.
    visible. Also cross-post the message on `#cert-manager`.
 
     <div className="pageinfo pageinfo-primary"><p>
-    https://github.com/jetstack/cert-manager/releases/tag/v1.0.0 🎉
+    https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
 12. **(final release only)** Show the release to the world:
@@ -503,7 +503,7 @@ page if a step is missing or if it is outdated.
        example](https://github.com/jetstack/testing/pull/397/files).
 
     6. **(final release only)** Push a new release branch to
-       [`jetstack/cert-manager`](https://github.com/jetstack/cert-manager). If the
+       [`cert-manager/cert-manager`](https://github.com/cert-manager/cert-manager). If the
        final release is `v1.0.0`, then push the new branch `release-1.1`:
 
         ```bash

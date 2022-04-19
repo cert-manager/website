@@ -157,6 +157,6 @@ To avoid this, be sure to set a Subject for `SelfSigned` certs. This can be
 done by setting the `spec.subject` on a cert-manager `Certificate` object
 which will be issued by a `SelfSigned` issuer.
 
-Starting in version 1.3, cert-manager will emit a Kubernetes [warning event](https://github.com/jetstack/cert-manager/blob/45befd86966c563663d18848943a1066d9681bf8/pkg/controller/certificaterequests/selfsigned/selfsigned.go#L140)
+Starting in version 1.3, cert-manager will emit a Kubernetes [warning event](https://github.com/cert-manager/cert-manager/blob/45befd86966c563663d18848943a1066d9681bf8/pkg/controller/certificaterequests/selfsigned/selfsigned.go#L140)
 of type `BadConfig` if it detects that a certificate is being created
 by a `SelfSigned` issuer which has an empty Issuer DN.
