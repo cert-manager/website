@@ -657,10 +657,6 @@
         {
           "title": "API reference",
           "path": "/docs/reference/api-docs.md"
-        },
-        {
-          "title": "About Jetstack",
-          "path": "/docs/aboutjetstack/README.md"
         }
       ]
     }
