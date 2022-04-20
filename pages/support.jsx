@@ -22,7 +22,7 @@ function Support({ router }) {
           description: page.description
         }}
       />
-      <div className="bg-gray-1 relative overflow-hidden pb-117px">
+      <div className="bg-gray-1 relative overflow-hidden pb-48">
         <Hero heading={page.hero.heading} description={page.hero.description} />
         <div className="hidden lg:block absolute top-400px right-0 z-0 overflow-hidden">
           <CirclesBackground />
