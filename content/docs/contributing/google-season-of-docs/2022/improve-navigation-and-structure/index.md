@@ -9,6 +9,10 @@ We have registered our interest to  participate in Google Season of Docs 2022,
 and have submitted a single project proposal detailed in the remaining of this
 page. This project was accepted on 14 April 2022.
 
+You have until 27 April 2022 18:00 UTC to apply for the technical writer role.
+We will be sharing the name of the selected candidate on Wed 4 May 2022 at
+14:00 UTC (13:00 BST) on Slack in the channel `#cert-manager-dev`.
+
 To apply as a technical writer, please let us know by one of the two ways
 below:
 
