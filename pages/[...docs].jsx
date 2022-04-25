@@ -45,6 +45,7 @@ const DocumentationPage = ({
           </div>
           <main className="col-span-8 lg:col-span-9 xl:col-span-8 docs">
             <div className="mx-auto md:mx-0 prose max-w-full main-docs-section">
+              <h1>{title}</h1>
               <Documentation source={source} theme={theme} />
             </div>
           </main>
