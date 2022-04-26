@@ -3,59 +3,125 @@ title: Feature Policy
 description: 'cert-manager contributing guide: Contribution Policy'
 ---
 
-We are open to feature requests and PRs implementing those. If you plan on contributing a new feature into cert-manager we recommend creating an issue first for it to be discussed with the cert-manager maintainers. Another possibility is bringing it up in a community meeting discussion for an open discussion with the maintainers and community on the implementation.
+We love to receive both feature requests and PRs which add stuff to cert-manager; the community is at the heart of what we do!
 
-# Features we will not allow
+If you're thinking of adding a feature, we recommend you read this doc to maximize the chances of your contribution getting the attention it deserves and hopefully to get it merged quickly!
 
-Certain features have been requested before, but have not been implemented properly or not able to be implemented without breaking the security model.
+We recommend creating an issue first for it to be discussed with the cert-manager maintainers. Another possibility is bringing it up in a community meeting discussion for an open discussion with the maintainers and community on the implementation.
 
-Below is a list of a few of these:
+## Feature Sizing: Getting Your Change Accepted
 
-## Vendoring Kubernetes related APIs outside of the `k8s.io/` namespace
+We evaluate new features and PRs based on their size and their significance; either they're small or large.
+
+### Smaller Features
+
+Many contributions are small. That usually - but not always - means that implementing them won't require many lines of code to be added or changed, and in any case they should be easy
+for maintainers to review. A PR being small is a good thing; if you can down-scope your feature to make it smaller, we won't complain!
+
+If you believe your feature is small, please feel free to just raise a PR and optionally also post a link to your PR in the [cert-manager-dev slack channel](./README.md#slack). Usually a sufficiently small PR can be merged without too much ceremony. If we think it's actually a larger piece of work, we'll let you know.
+
+### Larger Features
+
+If you're not sure whether your PR is small, or if you know it's bigger, you'll want to speak to us first before raising a PR. This
+will help to ensure that your PR is something we're likely to merge to avoid wasting your time. It'll also make it easier
+for us to do the design process.
+
+#### Design Documents
+
+Larger PRs should normally come with a design document. This doesn't need to be a huge piece of work; rather, it should specify
+_why_ we'd want a given feature, _how_ it'll be implemented, and perhaps evaluate pros and cons. You can add this design in a
+markdown document in a pull request to the cert-manager [design](https://github.com/cert-manager/cert-manager/tree/master/design) folder.
+
+Part of the process of discussing a design document may also include a video call with you included! That helps us to plan how a feature should
+be implemented and approached. It'll be pretty informal and casual; we just want to make sure we're all on the same page. This call might be part
+of a biweekly meeting.
+
+#### Making Progress with Larger Features
+
+Larger features with a design document are much more likely to be accepted, and in turn we're much more likely to commit a single
+named cert-manager maintainer to the effort to help the PR to be successful. That maintainer might not be able to answer all your
+questions, but they should certainly be able to point you in the right direction.
+
+To get in touch to discuss a feature, please reach out on the [cert-manager-dev slack channel](./README.md#slack), or join a [cert-manager public meeting](./README.md#meetings) to talk about your proposal.
+
+If you have an open PR with a design document, you should absolutely feel free to add it to the [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U/edit) for our next biweekly meeting
+and join in so we're sure to discuss it and so you can contribute to the discussion!
+
+#### Large Feature Lifecycle
+
+1. Informally ask about the feature in slack or a public meeting
+2. Create a PR with a lightweight design document, for discussion
+3. Design doc PR gets reviewed - possibly includes meeting or discussion in a biweekly meeting
+4. Implement your feature, helped and reviewed by a named cert-manager maintainer
+
+## Feature Requests We'll Likely Reject
+
+In some cases, people will request features which we've previously rejected or which for some reason we have to reject.
+
+It's nothing personal; sometimes we have to make tough choices and especially when it comes to security and maintainability we have to reject certain
+proposals. If your feature request is listed below, there's a high chance we'll have to reject it.
+
+That said, if you think we've made a mistake and that we should reconsider, we're open to chatting - consider joining our [biweekly meetings](./README.md#meetings) to discuss it with us!
+
+### Vendoring Kubernetes related APIs outside of the `k8s.io/` namespace
 
 Vendoring project APIs that also vendor `k8s.io/apimachinery`, such as OpenShift, Contour, or Velero, is not recommend because the Kubernetes dependency is likely to conflict with cert-manager's instance.
 It could also cause a conflict with different Kubernetes client versions being used.
 
-If this is needed it is suggested to use a "dynamic client" that converts the objects into internal structured copied into the cert-manager codebase.
+If this is needed it is suggested to use a "dynamic client" that converts the objects into internal structures copied into the cert-manager codebase.
 
-## Helm + CRDs
+### Helm + CRDs
 
-Currently Helm suggests CRDs is to include them in the `crds/` subdirectory of a chart with the `crd-install` annotation included.
-However this has the side effect that CRDs will not be upgraded any more if changes are made in a later release.
-CRDs being upgraded without them being removed and re-installed is essential for cert-manager to move forward.
-The mechanics of this are currently being discussed [in the Helm community](https://github.com/helm/helm/issues/5871).
+Helm suggests that CRDs be included in a `crds/` subdirectory of a chart, with the `crd-install` annotation included. This has the unfortunate side effect that CRDs are not upgraded if changed in a later release.
 
-cert-manager currently works around this by shipping the CRDs in the templates.
+CRDs being upgraded without being removed and re-installed is essential for cert-manager to move forward.
 
-## Helm Subchart capabilities
+This was previously discussed [in the Helm community](https://github.com/helm/helm/issues/5871).
+
+cert-manager works around this limitation by shipping CRDs in the templates.
+
+### Helm Subchart capabilities
 
 cert-manager should not be used as a sub-chart in Helm deployments.
-Helm deployments are namespaced by design and do not support a dependency model that would support cert-manager being operated on a cluster scope nor preventing cert-manager from being installed twice (with conflicting versions) or being upgraded independently from the application.
 
-The cert-manager installation creates cluster scoped resources like admission webhooks and custom resource definitions. cert-manager should be seen as part of your cluster and should be treated as such for being installed. A comparison to other Kubernetes components would be a LoadBalancer controller or a PV provisioner
+Helm deployments are namespaced by design and do not support a dependency model that would support cert-manager being operated at cluster scope; nor is it possible using this method to prevent cert-manager being installed twice (with conflicting versions)
+or being upgraded independently from the application.
 
-## Secret injection or copying
+The cert-manager installation creates cluster scoped resources like admission webhooks and custom resource definitions. cert-manager should be seen as part of your cluster and should be treated as such for being installed. An apt comparison
+to other Kubernetes components would be a LoadBalancer controller or a PV provisioner
 
-cert-manager deals with very sensitive information (all TLS certificates for your services) and has cluster-level access to secret resources, therefore when designing features we need to consider all ways these can be abused to escalate privilege.
-Secret data is meant to be securely stored in the secret resources and have narrow scoped access privileges for unauthorized users. Therefore we will not allow any functionality that allows this data to be copied/injected into any resource other than a Kubernetes secret.
+### Secret injection or copying
 
-### cainjector
+cert-manager deals with very sensitive information (all TLS certificates for your services) and has cluster-level access to secret resources. As such, when designing features we need to consider all of the ways these secrets might be abused to escalate privilege.
+
+Secret data is meant to be securely stored in `Secret` resources and have narrow scoped access privileges for unauthorized users. Because of this, we won't usually add any functionality that allows this data to be copied/injected into any resource
+other than a Kubernetes `Secret`.
+
+#### cainjector
 
 The cainjector component is a special exception to this rule as it deals in non-sensitive information (CAs, not cert/key pairs). This component is able to inject the `ca.crt` file into predefined fields on `ValidatingWebhookConfiguration`, `MutatingWebhookConfiguration`, and `CustomResourceDefinition` resources from Certificate resources.
+
 These 3 components are already scoped only for privileged users, and will already give you cluster scoped access to resources.
 
 If you’re designing a resource that needs a CA Certificate or TLS key pair it is strongly recommended to use a reference to a secret instead of embedding it in a resource.
 
-## Cross namespace resources
+### Cross namespace resources
 
-Namespace boundaries in Kubernetes provide a barrier for access scopes. Apps or users can be limited to only access resources in a certain namespace. cert-manager is a controller that operates on cluster wide resources, while it may seems interesting to allow access to copy or write certificate data from one namespace to the other it will cause a bypass of this security model for all our users which is not intended and a security issue.
-If this behavior is intended for your use case there are other Kubernetes controllers that will do this for you however we want to suggest a certain caution when installing these.
+Namespace boundaries in Kubernetes provide a barrier for access scopes. Apps or users can be limited to only access resources in a certain namespace.
 
-## Sign certificates using the Kubernetes CA (used for your nodes)
+cert-manager is a controller that operates on cluster wide resources however, and while it may seem interesting to allow access to copy or write certificate data from one namespace to the other, this can cause a bypass of the
+namespace security model for all users, which is usually not intended and can be a major a security issue.
 
+We don't support this behavior; if you believe you need it, and it's intended for your use case then there are other Kubernetes controllers that can do this, although we'd suggest extreme caution.
 
-Kubernetes has a Certificate Signing Requests API, and a `kubectl certificates` command which allows you to approve certificate signing requests and have them signed by the certificate authority (CA) of the Kubernetes cluster.
+### Sign certificates using the Kubernetes CA
 
-This API and CLI have occasionally been misused to sign certificates for use by non-control-plane Pods but this is a mistake. For the security of the Kubernetes cluster, it is important to limit access to the Kubernetes certificate authority, and it is important that you do not use that certificate authority to sign certificates which are used outside of the control-plane, because such certificates increase the opportunity for attacks on the Kubernetes API server as this CA is used to sign certificates used for authorization against the API server it could allow any user who can create cert-manager resources to sign certificates trusted for API access.
+Kubernetes has a Certificate Signing Requests API, and a `kubectl certificates` command which allows you to approve certificate signing requests and have them signed by the certificate authority (CA) of the Kubernetes cluster. This
+CA is generally used for your nodes.
 
-([See our FAQ](../faq/README.md#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that) for more details)
+This API and CLI have occasionally been misused to sign certificates for use by pods outside of the control plane; we believe this is a mistake.
+
+For the security of the Kubernetes cluster it's important to limit access to the Kubernetes certificate authority; such certificates increase the attack surface for the Kubernetes API server since this CA signs certificates for
+authorization against the API server. If cert-manager used this cert, it could allow any user with permission to create cert-manager resources to elevate privileges by signing certificates which are trusted for API access.
+
+[See our FAQ](../faq/README.md#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that) for more details on this.
