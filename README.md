@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/cert-manager/cert-manager/d7a3a3976785bd5717d9d06b115878feaf257597/logo/logo.png" height="241" width="250" alt="cert-manager project logo" />
+</p>
+
 # cert-manager Website
 
 Source code for the [cert-manager.io](https://cert-manager.io) website, which includes
