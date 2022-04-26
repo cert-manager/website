@@ -57,6 +57,8 @@ some users. Feedback and PRs are welcome.
 
 **Problem**: GKE Autopilot does not allow modifications to the `kube-system`-namespace.
 
+Historically we've used the `kube-system` namespace to prevent multiple installations of cert-manager in the same cluster.
+
 Installing cert-manager in these environments with default configuration can cause issues with bootstrapping.
 Some signals are:
 
