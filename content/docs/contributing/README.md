@@ -29,12 +29,6 @@ as well as how to compile, run and test cert-manager and all it's components.
 This document sometimes can get out of date due to changes in the code and/or tooling. PRs to this part are
 also very welcome if you happen to find an out of date part.
 
-## Google Season of Docs
-
-The cert-manager team are participating in  [Google Season of Docs](https://developers.google.com/season-of-docs):
-
- * [2022 Project Proposals](google-season-of-docs/2022/)
-
 ## Meetings
 
 All cert-manager meetings are open for everyone to join.
@@ -50,6 +44,11 @@ We have 2 regular repeating meetings:
 
 We have two cert-manager channels on [the Kubernetes Slack](https://slack.k8s.io) which we use to communicate:
 
-
 * [`cert-manager`](https://kubernetes.slack.com/messages/cert-manager): a general channel for all users of cert-manager; use this one for any usage related questions.
 * [`cert-manager-dev`](https://kubernetes.slack.com/messages/cert-manager-dev): a channel for collaboration between cert-manager contributors and maintainers; please only use this for code related questions
+
+## Google Season of Docs 2022
+
+The cert-manager team are participating in [Google Season of Docs 2022](https://developers.google.com/season-of-docs)!
+
+Check out our [2022 Project Proposals](./google-season-of-docs/2022/) if you want to get involved!

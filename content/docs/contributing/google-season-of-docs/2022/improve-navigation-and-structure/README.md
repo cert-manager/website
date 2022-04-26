@@ -3,15 +3,14 @@ title: Improve the Navigation and Structure of the cert-manager Website
 description: Google season of docs 2022 proposal
 ---
 
-# GSoD 2022: Improve the Navigation and Structure of the cert-manager Website
-
 We have registered our interest to  participate in Google Season of Docs 2022,
 and have submitted a single project proposal detailed in the remaining of this
 page. This project was accepted on 14 April 2022.
 
 You have until 27 April 2022 18:00 UTC to apply for the technical writer role.
+
 We will be sharing the name of the selected candidate on Wed 4 May 2022 at
-14:00 UTC (13:00 BST) on Slack in the channel `#cert-manager-dev`.
+15:00 London Time (14:00 UTC) on Slack in the channel `#cert-manager-dev`.
 
 To apply as a technical writer, please let us know by one of the two ways
 below:
@@ -28,9 +27,12 @@ proposal.
 
 ## About cert-manager
 
-cert-manager (current version 1.7.2, first release in October 2017) is an Apache-2.0 licensed Kubernetes add-on to automate the management and issuance of TLS certificates.
+cert-manager (current version 1.8.0, first release in October 2017) is an Apache-2.0 licensed Kubernetes add-on to automate the management and issuance of TLS certificates.
+
 Our typical contributors are Go developers from around the world with experience of the Kubernetes ecosystem with experience contributing to core Kubernetes components and Kubernetes operators.
+
 Our users are often developers and system administrators who are trying to automate the rotation of TLS certificates for applications running in their Kubernetes clusters.
+
 Our largest users have cert-manager installed on multiple Kubernetes clusters and managing many thousands of TLS certificates.
 
 ## Project Overview
@@ -43,6 +45,8 @@ The information exists but is spread across multiple pages and is often not at t
 As a visual example, a user looking for a guide on how the Certificate resource can be used may feel helpless when realizing that the "Certificate" page exists twice: once under the "Usage" section, and once under the "Concepts" section.
 
 ![Screenshot of the cert-manager.io website with Usage and Concepts visible in the menu](/images/google-season-of-docs-2022-improve-navigation-and-structure.png)
+
+(NB: This screenshot is from our old site design but the text and layout are broadly the same)
 
 We would like a technical writer:
 
