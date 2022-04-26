@@ -81,7 +81,7 @@ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.8.0 --set global.leaderElection.namespace=cert-manager
+  --version ${CERT_MANAGER_VERSION} --set global.leaderElection.namespace=cert-manager
 ```
 
 ## AWS EKS
