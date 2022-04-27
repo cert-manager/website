@@ -51,4 +51,4 @@ We have two cert-manager channels on [the Kubernetes Slack](https://slack.k8s.io
 
 The cert-manager team are participating in [Google Season of Docs 2022](https://developers.google.com/season-of-docs)!
 
-Check out our [2022 Project Proposals](./google-season-of-docs/2022/) if you want to get involved!
+Check out our [2022 Project Proposals](./google-season-of-docs/2022/README.md) if you want to get involved!
