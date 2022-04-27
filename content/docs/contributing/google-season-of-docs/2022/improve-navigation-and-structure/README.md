@@ -44,7 +44,7 @@ The information exists but is spread across multiple pages and is often not at t
 
 As a visual example, a user looking for a guide on how the Certificate resource can be used may feel helpless when realizing that the "Certificate" page exists twice: once under the "Usage" section, and once under the "Concepts" section.
 
-![Screenshot of the cert-manager.io website with Usage and Concepts visible in the menu](/images/google-season-of-docs-2022-improve-navigation-and-structure.png)
+![Screenshot of the cert-manager.io website with Usage and Concepts visible in the menu](/public/images/google-season-of-docs-2022-improve-navigation-and-structure.png)
 
 (NB: This screenshot is from our old site design but the text and layout are broadly the same)
 
