@@ -79,6 +79,15 @@ site you're working on.
 For example, the [manifest for the docs section](https://github.com/cert-manager/website/blob/master/content/docs/manifest.json)
 contains the expected path for every file.
 
+### Task: Changing OpenGraph / social sharing tags
+
+These tags are defined in Next.js code and config.
+
+For docs pages, OpenGraph titles and descriptions are based on the titles and descriptions in the docs themselves, which
+is configured in the frontmatter for each docs page. The magic happens in in `pages/[...docs].jsx`.
+
+For pages _except_ docs and for some other tags, look at changing [`next-seo.config.js`](./next-seo.config.js).
+
 ## Website Development Tooling
 
 ### Development Server
