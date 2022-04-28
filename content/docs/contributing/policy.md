@@ -3,11 +3,11 @@ title: Feature Policy
 description: 'cert-manager contributing guide: Contribution Policy'
 ---
 
-We love to receive both feature requests and PRs which add stuff to cert-manager; the community is at the heart of what we do!
+We love to receive both feature requests and PRs which add to and improve cert-manager; the community is at the heart of what we do!
 
 If you're thinking of adding a feature, we recommend you read this doc to maximize the chances of your contribution getting the attention it deserves and hopefully to get it merged quickly!
 
-We recommend creating an issue first for it to be discussed with the cert-manager maintainers. Another possibility is bringing it up in a community meeting discussion for an open discussion with the maintainers and community on the implementation.
+We recommend creating an issue first for it to be discussed with the cert-manager maintainers. Another possibility is bringing it up in a community meeting for an open discussion on the implementation.
 
 ## Feature Sizing: Getting Your Change Accepted
 
