@@ -76,6 +76,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(ctx) {
   ctx.params.docsFolder = ctx.params.docs[0]
   ctx.params.slug = ctx.params.docs
+  ctx.params.trailingSlash = true
 
   const props = await pageProps(ctx)
 
