@@ -4,11 +4,11 @@ export default {
   openGraph: {
     type: 'website',
     locale: 'en_EN',
-    url: 'https://cert-manager.io/',
+    url: `${deployUrl}`,
     site_name: 'cert-manager',
     images: [
       {
-        url: `https://${deployUrl}/images/og.png`,
+        url: `${deployUrl}/images/og.png`,
         width: 184,
         height: 78,
         alt: 'cert-manager'
