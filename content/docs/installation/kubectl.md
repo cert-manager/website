@@ -67,8 +67,10 @@ cert-manager using the procedure determined by how you installed.
 
 > **Warning**: Uninstalling cert-manager or simply deleting a `Certificate` resource can result in 
 > TLS `Secret`s being deleted if they have `metadata.ownerReferences` set by cert-manager.
-> By default in cert-manager 1.8+, `--enable-certificate-owner-ref` is set to `false`, which will ensure
-> that owner references are removed. 
+> You can control whether owner references are added to `Secret`s using the `--enable-certificate-owner-ref` controller flag. 
+> By default, this flag is set to false, which means that no owner references are added. 
+> However, in cert-manager v1.8 and older, changing the flag's value from true to false _did not_ 
+> result in existing owner references being removed. This behaviour was fixed in cert-manager v1.8.
 > Do check the owner references to confirm that they actually are removed. 
 
 ### Uninstalling with regular manifests
