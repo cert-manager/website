@@ -8,3 +8,5 @@
 
 [context.production.environment]
 	NEXT_PUBLIC_ENABLE_ANALYTICS = "true"
+	NEXT_PUBLIC_DOCS_SEARCH_APP_ID = "18N9PEKHUC"
+	NEXT_PUBLIC_DOCS_SEARCH_INDEX_NAME = "cert-manager-latest"
