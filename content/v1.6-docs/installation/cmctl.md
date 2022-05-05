@@ -8,7 +8,7 @@ description: 'cert-manager installation: cmctl'
 ### Prerequisites
 
 - [Install the cert-manager CLI cmctl](../usage/cmctl.md#installation).
-- Install a [supported version of Kubernetes or OpenShift](./supported-releases.md).
+- Install a [supported version of Kubernetes or OpenShift](../../docs/installation/supported-releases.md).
 - Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if you are using Kubernetes on a cloud platform.
 
 ### Steps

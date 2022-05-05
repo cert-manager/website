@@ -13,7 +13,7 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 ### Prerequisites
 
 - [Install Helm version 3 or later](https://helm.sh/docs/intro/install/).
-- Install a [supported version of Kubernetes or OpenShift](./supported-releases.md).
+- Install a [supported version of Kubernetes or OpenShift](../../docs/installation/supported-releases.md).
 - Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if you are using Kubernetes on a cloud platform.
 
 ### Steps
@@ -54,7 +54,7 @@ must add the `--set installCRDs=true` flag to your Helm installation command.
 
 Uncomment the relevant line in the next steps to enable this.
 
-Note that if you're using a `helm` version based on Kubernetes `v1.18` or below (Helm `v3.2`), `installCRDs` will not work with cert-manager `v0.16`. See the [v0.16 upgrade notes](./upgrading/upgrading-0.15-0.16.md#helm) for more details.
+Note that if you're using a `helm` version based on Kubernetes `v1.18` or below (Helm `v3.2`), `installCRDs` will not work with cert-manager `v0.16`. See the [v0.16 upgrade notes](../../docs/installation/upgrading/upgrading-0.15-0.16.md#helm) for more details.
 
 #### 4. Install cert-manager
 
