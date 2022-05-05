@@ -18,7 +18,8 @@ const DocumentationPage = ({
   sidebarRoutes,
   versions,
   source,
-  tocHeadings
+  tocHeadings,
+  frontmatter
 }) => {
   const currentUrl = getCurrentUrl(router)
   if (!source) return null
@@ -31,7 +32,7 @@ const DocumentationPage = ({
         openGraph={{
           url: currentUrl,
           title: page.title,
-          description: page.description
+          description: frontmatter.description
         }}
       />
       <div className="container mt-20 pb-48">

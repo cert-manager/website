@@ -8,10 +8,10 @@ export default {
     site_name: 'cert-manager',
     images: [
       {
-        url: `${deployUrl}/images/og.png`,
-        width: 184,
-        height: 78,
-        alt: 'cert-manager'
+        url: `${deployUrl}/images/og1.png`,
+        width: 1200,
+        height: 630,
+        alt: 'cert-manager — automated Kubernetes X.509 certificates'
       }
     ]
   }
