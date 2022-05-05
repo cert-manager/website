@@ -176,4 +176,4 @@ You can find more information on how to configure webhook providers
 [here](./webhook.md).
 
 To create a new unsupported DNS provider, follow the development documentation
-[here](../../../../contributing/dns-providers.md).
+[here](../../../../docs/contributing/dns-providers.md).
