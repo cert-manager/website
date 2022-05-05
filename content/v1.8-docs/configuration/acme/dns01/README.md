@@ -181,4 +181,4 @@ Links to these supported providers along with their documentation are below:
 
 You can find more information on how to configure webhook providers [here](./webhook.md).
 
-To create a new unsupported DNS provider, follow the development documentation [here](../../../contributing/dns-providers/).
+To create a new unsupported DNS provider, follow the development documentation [here](../../../../docs/contributing/dns-providers.md).
