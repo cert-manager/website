@@ -7,7 +7,7 @@ description: 'cert-manager installation: Using static manifests'
 
 ### Prerequisites
 
-- [Install `kubectl` version `>= v1.19.0`](https://kubernetes.io/docs/tasks/tools/). (otherwise, you'll have issues updating the CRDs - see [v0.16 upgrade notes](../../../installation/upgrading/upgrading-0.15-0.16/#issue-with-older-versions-of-kubectl))
+- [Install `kubectl` version `>= v1.19.0`](https://kubernetes.io/docs/tasks/tools/). (otherwise, you'll have issues updating the CRDs - see [v0.16 upgrade notes](./upgrading/upgrading-0.15-0.16.md#issue-with-older-versions-of-kubectl))
 - Install a [supported version of Kubernetes or OpenShift](./supported-releases.md).
 - Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if you are using Kubernetes on a cloud platform.
 
@@ -57,15 +57,15 @@ following command:
 ```bash
 kubectl get Issuers,ClusterIssuers,Certificates,CertificateRequests,Orders,Challenges --all-namespaces
 ```
-It is recommended that you delete all these resources before uninstalling cert-manager. 
-If plan on reinstalling later and don't want to lose some custom resources, you can keep them. 
-However, this can potentially lead to problems with finalizers. Some resources, like 
-`Challenges`, should be deleted to avoid [getting stuck in a pending state](#namespace-stuck-in-terminating-state). 
+It is recommended that you delete all these resources before uninstalling cert-manager.
+If plan on reinstalling later and don't want to lose some custom resources, you can keep them.
+However, this can potentially lead to problems with finalizers. Some resources, like
+`Challenges`, should be deleted to avoid [getting stuck in a pending state](#namespace-stuck-in-terminating-state).
 
 Once the unneeded resources have been deleted, you are ready to uninstall
 cert-manager using the procedure determined by how you installed.
 
-> **Warning**: Uninstalling cert-manager or simply deleting a `Certificate` resource can result in 
+> **Warning**: Uninstalling cert-manager or simply deleting a `Certificate` resource can result in
 > TLS `Secret`s being deleted if they have `metadata.ownerReferences` set by cert-manager.
 > You can control whether owner references are added to `Secret`s using the `--enable-certificate-owner-ref` controller flag. 
 > By default, this flag is set to false, which means that no owner references are added. 
@@ -105,11 +105,11 @@ kubectl delete apiservice v1beta1.webhook.cert-manager.io
 
 #### Deleting pending challenges
 
-`Challenge`s can get stuck in a pending state when the finalizer is unable to complete 
-and Kubernetes is waiting for the cert-manager controller to finish. 
-This happens when the controller is no longer running to remove the flag, 
+`Challenge`s can get stuck in a pending state when the finalizer is unable to complete
+and Kubernetes is waiting for the cert-manager controller to finish.
+This happens when the controller is no longer running to remove the flag,
 and the resources are defined as needing to wait.
-You can fix this problem by doing what the controller does manually. 
+You can fix this problem by doing what the controller does manually.
 
 First, delete existing cert-manager webhook configurations, if any:
 

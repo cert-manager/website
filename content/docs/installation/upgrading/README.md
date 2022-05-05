@@ -88,7 +88,7 @@ number you want to install:
 $ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<version>/cert-manager.yaml
 ```
 
-Once you have deployed the new version of cert-manager, you can [verify](../../verify.md) the installation.
+Once you have deployed the new version of cert-manager, you can [verify](../verify.md) the installation.
 
 ## Reinstalling cert-manager
 
