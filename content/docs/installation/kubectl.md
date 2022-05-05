@@ -70,7 +70,7 @@ cert-manager using the procedure determined by how you installed.
 > You can control whether owner references are added to `Secret`s using the `--enable-certificate-owner-ref` controller flag. 
 > By default, this flag is set to false, which means that no owner references are added. 
 > However, in cert-manager v1.8 and older, changing the flag's value from true to false _did not_ 
-> result in existing owner references being removed. This behaviour was fixed in cert-manager v1.8.
+> result in existing owner references being removed. This behavior was fixed in cert-manager v1.8.
 > Do check the owner references to confirm that they actually are removed. 
 
 ### Uninstalling with regular manifests
