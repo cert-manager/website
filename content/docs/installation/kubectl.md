@@ -67,8 +67,11 @@ cert-manager using the procedure determined by how you installed.
 
 > **Warning**: Uninstalling cert-manager or simply deleting a `Certificate` resource can result in 
 > TLS `Secret`s being deleted if they have `metadata.ownerReferences` set by cert-manager.
-> You can disable this behavior by setting `-enable-certificate-owner-ref=false` before deleting
-> a `Certificate` or `cert-manager`.
+> You can control whether owner references are added to `Secret`s using the `--enable-certificate-owner-ref` controller flag. 
+> By default, this flag is set to false, which means that no owner references are added. 
+> However, in cert-manager v1.8 and older, changing the flag's value from true to false _did not_ 
+> result in existing owner references being removed. This behavior was fixed in cert-manager v1.8.
+> Do check the owner references to confirm that they actually are removed. 
 
 ### Uninstalling with regular manifests
 
@@ -79,7 +82,9 @@ Delete the installation manifests using a link to your currently running version
 `vX.Y.Z` like so:
 > **Warning**: This command will also remove installed cert-manager CRDs. All
 > cert-manager resources (e.g. `certificates.cert-manager.io` resources) will
-> be removed by Kubernetes' garbage collector.
+> be removed by Kubernetes' garbage collector. 
+> You cannot keep any custom resources if you delete the `CustomResourceDefinition`s.
+> If you want to keep resources, you should manage `CustomResourceDefinition`s separately.
 
 ```bash
 kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
@@ -109,10 +114,9 @@ You can fix this problem by doing what the controller does manually.
 First, delete existing cert-manager webhook configurations, if any:
 
 ```bash
-$ kubectl delete validatingwebhookconfigurations cert-manager-webhook
-$ kubectl delete validatingwebhookconfigurations cert-manager-webhook
+$ kubectl delete mutatingwebhookconfigurations cert-manager-webhook
 ```
-Then change the `.metadata.finalizers` field to an empty list by editing the challenge file:
+Then change the `.metadata.finalizers` field to an empty list by editing the challenge resource:
 
 ```bash
 $ kubectl edit challenge <the-challenge>
