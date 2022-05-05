@@ -20,7 +20,7 @@ resources, will need to be updated to reflect these changes.
 This upgrade should be performed in a few steps:
 
 1. Back up existing cert-manager resources, as per the
-   [backup and restore guide](../../../tutorials/backup.md).
+   [backup and restore guide](../../tutorials/backup.md).
 
 2. [Uninstall cert-manager](../uninstall.md).
 
