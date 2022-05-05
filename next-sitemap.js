@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: 'https://cert-manager-io',
+  siteUrl: process.env.NEXT_PUBLIC_URL,
   generateRobotsTxt: true,
   changefreq: 'daily',
   priority: 0.7,
