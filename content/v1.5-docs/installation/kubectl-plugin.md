@@ -8,7 +8,7 @@ description: 'cert-manger installation: Using kubectl'
 ### Prerequisites
 
 - [Install the kubectl cert-manager plugin](../usage/kubectl-plugin.md#installation).
-- Install a [supported version of Kubernetes or OpenShift](./supported-releases.md).
+- Install a [supported version of Kubernetes or OpenShift](../../docs/installation/supported-releases.md).
 - Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if you are using Kubernetes on a cloud platform.
 
 ### Steps
