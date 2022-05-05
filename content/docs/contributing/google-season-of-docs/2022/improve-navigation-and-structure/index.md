@@ -3,9 +3,25 @@ title: Improve the Navigation and Structure of the cert-manager Website
 description: Google season of docs 2022 proposal
 ---
 
-We have registered our interest to  participate in Google Season of Docs 2022,
+## Project Updates
+
+### 5 May 2022: Announcing Mehak Saeed as Technical Writer
+
+We are delighted to announce that [Mehak Saeed](https://www.linkedin.com/in/mehak-saeed-29121a12a) will be the technical writer working on this project.
+We were extremely impressed with Mehak's presentation during her interview and impressed with her detailed preparations and planning.
+We look forward to working with her.
+
+Thank you to all the other technical writers who applied for this project.
+
+### 14 April 2022: Project Accepted
+
+This project was [accepted on 14 April 2022](https://developers.google.com/season-of-docs/docs/participants).
+
+### 24 March 2022: Project Registered
+
+We have [registered our interest to  participate in Google Season of Docs 2022](https://github.com/google/season-of-docs/pull/483),
 and have submitted a single project proposal detailed in the remaining of this
-page. This project was accepted on 14 April 2022.
+page.
 
 You have until 27 April 2022 18:00 UTC to apply for the technical writer role.
 
