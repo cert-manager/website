@@ -109,7 +109,7 @@ The following YAML defines a staging certificate issuer. You must update the ema
 You can download and edit the example and apply it with `kubectl apply -f`, or edit, and apply the custom resource in one command:
 
 ```bash
-kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/pomerium-staging-issuer.yaml
+kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/pomerium-staging-issuer.yaml
 ```
 </li>
 <li>
@@ -120,7 +120,7 @@ Create a production issuer and deploy it. As with the staging issuer, update thi
 ```
 
 ```bash
-kubectl create --edit -f https://cert-manager.io/docs/tutorials/acme/example/pomerium-production-issuer.yaml
+kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/pomerium-production-issuer.yaml
 ```
 </li>
 </ol>
@@ -234,8 +234,8 @@ You can download and reference these files locally, or you can reference them fr
 To install the example service from the tutorial files straight from GitHub:
 
 ```bash
-kubectl apply -f https://cert-manager.io/docs/tutorials/acme/example/deployment.yaml
-kubectl apply -f https://netlify.cert-manager.io/docs/tutorials/acme/example/service.yaml
+kubectl apply -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/service.yaml
 ```
 </li><li>
 
