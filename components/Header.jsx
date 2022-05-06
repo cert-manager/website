@@ -31,7 +31,7 @@ export default function Header() {
           href={
             'https://docs.google.com/forms/d/e/1FAIpQLSfLX4SQEC0phxVLB2shSzv2s__IDCB6GmlnvsqQ06CD0IYOeA/viewform'
           }
-          caption="Take this short survey"
+          caption="Take this short anonymous survey"
           target="_blank"
           className="px-3 py-1 text-11px mx-4 "
         />
