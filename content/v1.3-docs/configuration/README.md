@@ -18,4 +18,3 @@ When using `ClusterIssuer` resource types, ensure you understand the [`Cluster
 Resource Namespace`](../faq/cluster-resource.md) where other Kubernetes resources
 will be referenced from.
 
-## Supported Issuer Types
