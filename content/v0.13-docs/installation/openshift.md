@@ -4,7 +4,7 @@ description: 'cert-manager installation: OpenShift'
 ---
 
 cert-manager supports running on OpenShift in a similar manner to [Running on
-Kubernetes](.kubernetes.md).  It runs within your OpenShift cluster as a series
+Kubernetes](./kubernetes.md).  It runs within your OpenShift cluster as a series
 of deployment resources. It utilizes
 [`CustomResourceDefinitions`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources)
 to configure Certificate Authorities and request certificates.
@@ -51,7 +51,7 @@ resource is deployed to validate cert-manager resources we will create after
 installation.  No mutating webhooks are currently implemented.
 
 You can read more about the webhook on the [webhook
-document](../../concepts/webhook.md).
+document](../concepts/webhook.md).
 
 We can now go ahead and install cert-manager. All resources
 (the `CustomResourceDefinitions`, cert-manager, and the webhook component)

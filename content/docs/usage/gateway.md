@@ -340,7 +340,7 @@ spec:
 ## Supported Annotations
 
 If you are migrating to Gateway resources from Ingress resources, be aware that
-there are some differences between [the annotations for Ingress resources](ingress.md#supported-annotations)
+there are some differences between [the annotations for Ingress resources](./ingress.md#supported-annotations)
 versus the annotations for Gateway resources.
 
 The Gateway resource supports the following annotations for generating

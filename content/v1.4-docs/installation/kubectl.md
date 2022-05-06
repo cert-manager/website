@@ -7,8 +7,8 @@ description: 'cert-manager installation: Using static manifests'
 
 ### Prerequisites
 
-- `kubectl` version `>= v1.19.0-rc.1` (otherwise, you will have issues updating the CRDs. see [v0.16 upgrade notes](./upgrading/upgrading-0.15-0.16.md#issue-with-older-versions-of-kubectl))
-- A Kubernetes or OpenShift cluster running a [supported version](./supported-releases.md)
+- `kubectl` version `>= v1.19.0-rc.1` (otherwise, you will have issues updating the CRDs. see [v0.16 upgrade notes](../../docs/installation/upgrading/upgrading-0.15-0.16.md#issue-with-older-versions-of-kubectl))
+- A Kubernetes or OpenShift cluster running a [supported version](../../docs/installation/supported-releases.md)
 - cert-manager not already installed on the cluster
 - [Prerequisites specific to your cloud provider](./compatibility.md)
 

@@ -7,7 +7,7 @@ description: 'cert-manager installation: Using OLM'
 
 ### Prerequisites
 
-- A Kubernetes or OpenShift cluster running a [supported version](./supported-releases.md)
+- A Kubernetes or OpenShift cluster running a [supported version](../../docs/installation/supported-releases.md)
 - cert-manager not already installed on the cluster
 - [Prerequisites specific to your cloud provider](./compatibility.md)
 
