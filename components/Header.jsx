@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import CertManagerLogo from './snippets/CertManagerLogo'
 import { meta as site } from '../content/pages/site.mdx'
+import Button from './Button'
 
 import { DocSearch } from '@docsearch/react'
 import '@docsearch/css'
@@ -23,6 +24,17 @@ export default function Header() {
           <DesktopNavigation active={currentPath} className="hidden lg:block" />
           <MobileNavigation active={currentPath} className="lg:hidden" />
         </div>
+      </div>
+      <div className="text-center p-4 bg-blue-1 text-white">
+        Tell the project team how you are using cert-manager{' '}
+        <Button
+          href={
+            'https://docs.google.com/forms/d/e/1FAIpQLSfLX4SQEC0phxVLB2shSzv2s__IDCB6GmlnvsqQ06CD0IYOeA/viewform'
+          }
+          caption="Take this short survey"
+          target="_blank"
+          className="px-3 py-1 text-11px mx-4 "
+        />
       </div>
     </div>
   )
