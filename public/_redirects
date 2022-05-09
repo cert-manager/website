@@ -137,7 +137,8 @@ https://cert-manager.io/v1.5-docs/release-notes/* https://cert-manager.io/docs/r
 https://cert-manager.io/v1.6-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
 https://cert-manager.io/v1.7-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
 
-# Starting from version 0.15 we added an aboutjetstack page; only the latest one is really relevant
+# Starting in version 0.15 we added an aboutjetstack page to the docs, and after the website refresh
+# we added a new dedicated section for listing companies who offer cert-manager support
 https://cert-manager.io/v0.15-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
 https://cert-manager.io/v0.16-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
 https://cert-manager.io/v1.0-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
@@ -148,10 +149,9 @@ https://cert-manager.io/v1.4-docs/aboutjetstack/* https://cert-manager.io/suppor
 https://cert-manager.io/v1.5-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
 https://cert-manager.io/v1.6-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
 https://cert-manager.io/v1.7-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-
-# After the website refresh, we added a new section to plug Jetstack, so the aboutjetstack page
-# looked out of place in the docs.
+https://cert-manager.io/v1.8-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
 https://cert-manager.io/docs/aboutjetstack/* https://cert-manager.io/support/ 301!
+https://cert-manager.io/next-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
 
 # Work around for the fact that when we migrated to the new docs site, the
 # Google Season of Docs link became 404'd. We use a temporary 302 because we
