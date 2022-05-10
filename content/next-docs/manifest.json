@@ -596,15 +596,6 @@
           ]
         },
         {
-          "title": "About Jetstack",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/next-docs/aboutjetstack/README.md"
-            }
-          ]
-        },
-        {
           "title": "CLI reference",
           "routes": [
             {
