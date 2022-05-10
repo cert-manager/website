@@ -109,7 +109,7 @@ if you also install `entr`, which is available in Linux package managers and in 
 
 This script will run `npm install` and then start a development server at `http://localhost:8888`.
 
-Note that the server will also be accessibly locally at port 3000, but that on this port there'll be no
+Note that the server will also be accessible locally at port 3000, but that on this port there'll be no
 support for debugging redirects or environment variables. Use port 8888.
 
 #### Simpler development environment
