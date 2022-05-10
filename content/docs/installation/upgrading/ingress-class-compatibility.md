@@ -50,11 +50,21 @@ compatibility is to only use the annotation, even when creating `v1` Ingresses.
 ## ingress-nginx
 
 If you chose not to use the IngressClass `nginx` that is created by default by the Helm chart
-(e.g., you named the IngressClass `nginx-outside`), you will need to add the flag
-`--ingress-class` to your ingress-nginx deployment:
+(e.g., you named the IngressClass `nginx-outside`), you will need to add the flags
+`--ingress-class` and `--ingress-class-by-name` to your ingress-nginx deployment:
 
 ```
---ingress-class=nginx-outside
+--ingress-class=nginx-outside --ingress-class-by-name=true
+```
+
+In case you are using the Helm chart, you will need to use at least these values:
+
+```yaml
+ingressClassResource:
+  name: nginx-outside
+  controllerValue: k8s.io/ingress-nginx-outside
+ingressClassByName: true
+ingressClass: nginx-outside
 ```
 
 ## Istio
