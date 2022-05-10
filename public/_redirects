@@ -1,43 +1,117 @@
-# These rules will change if you change your site’s custom domains or HTTPS settings
-
 # Redirect domain aliases to primary domain
 https://netlify.cert-manager.io/* https://cert-manager.io/:splat 301!
-
-# Optional: Redirect default Netlify subdomain to primary domain
 https://cert-manager.netlify.com/* https://cert-manager.io/:splat 301!
 
-# We previously released the external loadbalancer page under /configuration, and is now moved to /configuration/acme/http01/
-https://cert-manager.io/docs/configuration/externalloadbalancer/ https://cert-manager.io/docs/configuration/acme/http01/externalloadbalancer/ 301!
+# Various older renamed pages
+/docs/configuration/externalloadbalancer/ /docs/configuration/acme/http01/externalloadbalancer/ 301!
 
-# Before May 2021, the project-maturity page listed the various Kubernetes
-# releases that cert-manager was supporting. Since we moved this information
-# to the supported-releases page, we removed the project-maturity page.
-https://cert-manager.io/docs/concepts/project-maturity/ https://cert-manager.io/docs/installation/supported-releases/
+/docs/faq/kubed/* /docs/faq/sync-secrets/
 
-# Before July 2021, the install pages were organised differently, below
-# are some redirects to fix external references to these old pages.
-https://cert-manager.io/docs/installation/kubernetes/ https://cert-manager.io/docs/installation/supported-releases/
-https://cert-manager.io/docs/installation/openshift/ https://cert-manager.io/docs/installation/supported-releases/
-https://cert-manager.io/docs/installation/uninstall/kubernetes/ https://cert-manager.io/docs/installation/uninstall/
-https://cert-manager.io/docs/installation/uninstall/openshift/ https://cert-manager.io/docs/installation/uninstall/
+/docs/concepts/project-maturity/ /docs/installation/supported-releases/
 
-# In v1.6 we released 'cmctl' which is considered a better CLI experience than
-# 'kubectl cert-manager'. The 'cmctl' page became the source of truth for all
-# subcommands so the old references to 'kubectl cert-manager' are redirected
-# there.
-https://cert-manager.io/docs/usage/kubectl-plugin/#commands https://cert-manager.io/docs/usage/cmctl/#commands
-https://cert-manager.io/docs/usage/kubectl-plugin/#approve-deny https://cert-manager.io/docs/usage/cmctl/#approve-and-deny-certificaterequests
-https://cert-manager.io/docs/usage/kubectl-plugin/#convert https://cert-manager.io/docs/usage/cmctl/#convert
-https://cert-manager.io/docs/usage/kubectl-plugin/#create https://cert-manager.io/docs/usage/cmctl/#create
-https://cert-manager.io/docs/usage/kubectl-plugin/#certificaterequest https://cert-manager.io/docs/usage/cmctl/#certificaterequest
-https://cert-manager.io/docs/usage/kubectl-plugin/#renew https://cert-manager.io/docs/usage/cmctl/#renew
-https://cert-manager.io/docs/usage/kubectl-plugin/#status-certificate https://cert-manager.io/docs/usage/cmctl/#status-certificate
-https://cert-manager.io/docs/usage/kubectl-plugin/#completion https://cert-manager.io/docs/usage/cmctl/#completion
-https://cert-manager.io/docs/usage/kubectl-plugin/#experimental https://cert-manager.io/docs/usage/cmctl/#experimental
-https://cert-manager.io/docs/usage/kubectl-plugin/#certificatesigningrequest https://cert-manager.io/docs/usage/cmctl/#certificatesigningrequest
+/docs/installation/kubernetes/ /docs/installation/supported-releases/
+/docs/installation/openshift/  /docs/installation/supported-releases/
 
-# docs.cert-manager.io was previously a separately hosted service. The dns has since been redirected and the following rules are required for historical links
-# These rules are in place to capture traffic that is specifically referencing these source urls
+/docs/installation/uninstall/kubernetes/ /docs/installation/uninstall/
+/docs/installation/uninstall/openshift/  /docs/installation/uninstall/
+
+# In v1.6 we released 'cmctl' which is considered a better CLI experience than 'kubectl cert-manager'.
+# The 'cmctl' page became the source of truth for all subcommands so old references to 'kubectl cert-manager' are redirected there.
+/docs/usage/kubectl-plugin/#commands                  /docs/usage/cmctl/#commands
+/docs/usage/kubectl-plugin/#approve-deny              /docs/usage/cmctl/#approve-and-deny-certificaterequests
+/docs/usage/kubectl-plugin/#convert                   /docs/usage/cmctl/#convert
+/docs/usage/kubectl-plugin/#create                    /docs/usage/cmctl/#create
+/docs/usage/kubectl-plugin/#certificaterequest        /docs/usage/cmctl/#certificaterequest
+/docs/usage/kubectl-plugin/#renew                     /docs/usage/cmctl/#renew
+/docs/usage/kubectl-plugin/#status-certificate        /docs/usage/cmctl/#status-certificate
+/docs/usage/kubectl-plugin/#completion                /docs/usage/cmctl/#completion
+/docs/usage/kubectl-plugin/#experimental              /docs/usage/cmctl/#experimental
+/docs/usage/kubectl-plugin/#certificatesigningrequest /docs/usage/cmctl/#certificatesigningrequest
+
+# Redirects for old docs pages which used to be versioned but aren't any more
+# This was done during the release of cert-manager v1.7 and so we don't need to add redirects for any newer versions
+
+# Single source of truth for information on how to upgrade between all cert-manager versions
+/v0.12-docs/installation/upgrading/* /docs/installation/upgrading/ 301!
+/v0.13-docs/installation/upgrading/* /docs/installation/upgrading/ 301!
+/v0.14-docs/installation/upgrading/* /docs/installation/upgrading/ 301!
+/v0.15-docs/installation/upgrading/* /docs/installation/upgrading/ 301!
+/v0.16-docs/installation/upgrading/* /docs/installation/upgrading/ 301!
+/v1.0-docs/installation/upgrading/*  /docs/installation/upgrading/ 301!
+/v1.1-docs/installation/upgrading/*  /docs/installation/upgrading/ 301!
+/v1.2-docs/installation/upgrading/*  /docs/installation/upgrading/ 301!
+/v1.3-docs/installation/upgrading/*  /docs/installation/upgrading/ 301!
+/v1.4-docs/installation/upgrading/*  /docs/installation/upgrading/ 301!
+/v1.5-docs/installation/upgrading/*  /docs/installation/upgrading/ 301!
+/v1.6-docs/installation/upgrading/*  /docs/installation/upgrading/ 301!
+/v1.7-docs/installation/upgrading/*  /docs/installation/upgrading/ 301!
+
+# Release notes are similar to "upgrading" notes - we want one source of truth
+/v0.12-docs/release-notes/* /docs/release-notes/ 301!
+/v0.13-docs/release-notes/* /docs/release-notes/ 301!
+/v0.14-docs/release-notes/* /docs/release-notes/ 301!
+/v0.15-docs/release-notes/* /docs/release-notes/ 301!
+/v0.16-docs/release-notes/* /docs/release-notes/ 301!
+/v1.0-docs/release-notes/*  /docs/release-notes/ 301!
+/v1.1-docs/release-notes/*  /docs/release-notes/ 301!
+/v1.2-docs/release-notes/*  /docs/release-notes/ 301!
+/v1.3-docs/release-notes/*  /docs/release-notes/ 301!
+/v1.4-docs/release-notes/*  /docs/release-notes/ 301!
+/v1.5-docs/release-notes/*  /docs/release-notes/ 301!
+/v1.6-docs/release-notes/*  /docs/release-notes/ 301!
+/v1.7-docs/release-notes/*  /docs/release-notes/ 301!
+
+# Contributing guidelines are only really useful to view as the latest version; it's not important
+# what they were for a given release, it's important what they are today.
+/v0.12-docs/contributing/* /docs/contributing/ 301!
+/v0.13-docs/contributing/* /docs/contributing/ 301!
+/v0.14-docs/contributing/* /docs/contributing/ 301!
+/v0.15-docs/contributing/* /docs/contributing/ 301!
+/v0.16-docs/contributing/* /docs/contributing/ 301!
+/v1.0-docs/contributing/*  /docs/contributing/ 301!
+/v1.1-docs/contributing/*  /docs/contributing/ 301!
+/v1.2-docs/contributing/*  /docs/contributing/ 301!
+/v1.3-docs/contributing/*  /docs/contributing/ 301!
+/v1.4-docs/contributing/*  /docs/contributing/ 301!
+/v1.5-docs/contributing/*  /docs/contributing/ 301!
+/v1.6-docs/contributing/*  /docs/contributing/ 301!
+/v1.7-docs/contributing/*  /docs/contributing/ 301!
+
+# We introduced "Supported Releases" in cert-manager 1.3. The page is only really useful in its "latest" form
+/v1.3-docs/installation/supported-releases/* /docs/installation/supported-releases/ 301!
+/v1.4-docs/installation/supported-releases/* /docs/installation/supported-releases/ 301!
+/v1.5-docs/installation/supported-releases/* /docs/installation/supported-releases/ 301!
+/v1.6-docs/installation/supported-releases/* /docs/installation/supported-releases/ 301!
+/v1.7-docs/installation/supported-releases/* /docs/installation/supported-releases/ 301!
+
+# Starting in version 0.15 we added an aboutjetstack page to the docs, and after the website refresh
+# we added a new dedicated section for listing companies who offer cert-manager support
+/v0.15-docs/aboutjetstack/* /support/ 301!
+/v0.16-docs/aboutjetstack/* /support/ 301!
+/v1.0-docs/aboutjetstack/*  /support/ 301!
+/v1.1-docs/aboutjetstack/*  /support/ 301!
+/v1.2-docs/aboutjetstack/*  /support/ 301!
+/v1.3-docs/aboutjetstack/*  /support/ 301!
+/v1.4-docs/aboutjetstack/*  /support/ 301!
+/v1.5-docs/aboutjetstack/*  /support/ 301!
+/v1.6-docs/aboutjetstack/*  /support/ 301!
+/v1.7-docs/aboutjetstack/*  /support/ 301!
+/v1.8-docs/aboutjetstack/*  /support/ 301!
+/docs/aboutjetstack/*       /support/ 301!
+/next-docs/aboutjetstack/*  /support/ 301!
+
+# A series of events led to a broken URL after the website refresh, which is detailed in https://github.com/cert-manager/website/issues/952
+# In short, the path for the 2022 GSoD proposal shouldn't have "index" at the end but it did for a while after the refresh.
+/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure/index/ /docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure/ 301!
+
+########################
+# docs.cert-manager.io #
+########################
+
+# docs.cert-manager.io was previously a separately hosted service.
+
+# The DNS has since been redirected to point at cert-manager.io, and we maintain a list of redirects to preserve old links.
+# Note that these links use the fully specified domains because they're only relevant on live
 https://docs.cert-manager.io/en/latest/getting-started/index.html https://cert-manager.io/docs/tutorials/
 https://docs.cert-manager.io/en/latest/tutorials/acme/index.html https://cert-manager.io/docs/tutorials/
 https://docs.cert-manager.io/en/latest/ https://cert-manager.io/docs/
@@ -57,15 +131,15 @@ https://docs.cert-manager.io/en/latest/tasks/issuers/* https://cert-manager.io/d
 
 # Capture historical links that reference endpoints for specfic release versions. Whilst these endpoints might not exist anymore these
 # redirect rules will capture the request and route the user to the specific release-note page
-https://docs.cert-manager.io/en/release-0.1/* https://cert-manager.io/docs/release-notes/release-notes-0.1/ 301!
-https://docs.cert-manager.io/en/release-0.2/* https://cert-manager.io/docs/release-notes/release-notes-0.2/ 301!
-https://docs.cert-manager.io/en/release-0.3/* https://cert-manager.io/docs/release-notes/release-notes-0.3/ 301!
-https://docs.cert-manager.io/en/release-0.4/* https://cert-manager.io/docs/release-notes/release-notes-0.4/ 301!
-https://docs.cert-manager.io/en/release-0.5/* https://cert-manager.io/docs/release-notes/release-notes-0.5/ 301!
-https://docs.cert-manager.io/en/release-0.6/* https://cert-manager.io/docs/release-notes/release-notes-0.6/ 301!
-https://docs.cert-manager.io/en/release-0.7/* https://cert-manager.io/docs/release-notes/release-notes-0.7/ 301!
-https://docs.cert-manager.io/en/release-0.8/* https://cert-manager.io/docs/release-notes/release-notes-0.8/ 301!
-https://docs.cert-manager.io/en/release-0.9/* https://cert-manager.io/docs/release-notes/release-notes-0.9/ 301!
+https://docs.cert-manager.io/en/release-0.1/*  https://cert-manager.io/docs/release-notes/release-notes-0.1/ 301!
+https://docs.cert-manager.io/en/release-0.2/*  https://cert-manager.io/docs/release-notes/release-notes-0.2/ 301!
+https://docs.cert-manager.io/en/release-0.3/*  https://cert-manager.io/docs/release-notes/release-notes-0.3/ 301!
+https://docs.cert-manager.io/en/release-0.4/*  https://cert-manager.io/docs/release-notes/release-notes-0.4/ 301!
+https://docs.cert-manager.io/en/release-0.5/*  https://cert-manager.io/docs/release-notes/release-notes-0.5/ 301!
+https://docs.cert-manager.io/en/release-0.6/*  https://cert-manager.io/docs/release-notes/release-notes-0.6/ 301!
+https://docs.cert-manager.io/en/release-0.7/*  https://cert-manager.io/docs/release-notes/release-notes-0.7/ 301!
+https://docs.cert-manager.io/en/release-0.8/*  https://cert-manager.io/docs/release-notes/release-notes-0.8/ 301!
+https://docs.cert-manager.io/en/release-0.9/*  https://cert-manager.io/docs/release-notes/release-notes-0.9/ 301!
 https://docs.cert-manager.io/en/release-0.10/* https://cert-manager.io/docs/release-notes/release-notes-0.10/ 301!
 https://docs.cert-manager.io/en/release-0.11/* https://cert-manager.io/docs/release-notes/release-notes-0.11/ 301!
 https://docs.cert-manager.io/en/release-0.12/* https://cert-manager.io/docs/release-notes/release-notes-0.12/ 301!
@@ -74,85 +148,6 @@ https://docs.cert-manager.io/en/release-0.14/* https://cert-manager.io/docs/rele
 https://docs.cert-manager.io/en/release-0.15/* https://cert-manager.io/docs/release-notes/release-notes-0.15/ 301!
 https://docs.cert-manager.io/en/release-0.16/* https://cert-manager.io/docs/release-notes/release-notes-0.16/ 301!
 
-# Capture requests to old docs release-notes pages and re-route them accordingly
 https://docs.cert-manager.io/en/release-* https://cert-manager.io/docs/release-notes/release-notes-:splat 301!
 https://docs.cert-manager.io https://cert-manager.io/docs 301!
 https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
-
-# Handle a page rename
-https://cert-manager.io/docs/faq/kubed/* https://cert-manager.io/docs/faq/sync-secrets/
-
-# Redirect old docs pages which used to be versioned but which don't need to be, so that they point at the latest version of the page
-
-# Upgrading is in effect a list of pages which are only appended to
-https://cert-manager.io/v0.12-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v0.13-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v0.14-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v0.15-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v0.16-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v1.0-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v1.1-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v1.2-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v1.3-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v1.4-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v1.5-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v1.6-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-https://cert-manager.io/v1.7-docs/installation/upgrading/* https://cert-manager.io/docs/installation/upgrading/ 301!
-
-# Contributing guidelines are only really useful to view as the latest version; it's not important
-# what they were for a given release, it's important what they are today.
-https://cert-manager.io/v0.12-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v0.13-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v0.14-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v0.15-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v0.16-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v1.0-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v1.1-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v1.2-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v1.3-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v1.4-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v1.5-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v1.6-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-https://cert-manager.io/v1.7-docs/contributing/* https://cert-manager.io/docs/contributing/ 301!
-
-# We introduced "Supported Releases" in cert-manager 1.3. The page is only really useful in its "latest" form
-https://cert-manager.io/v1.3-docs/installation/supported-releases/* https://cert-manager.io/docs/installation/supported-releases/ 301!
-https://cert-manager.io/v1.4-docs/installation/supported-releases/* https://cert-manager.io/docs/installation/supported-releases/ 301!
-https://cert-manager.io/v1.5-docs/installation/supported-releases/* https://cert-manager.io/docs/installation/supported-releases/ 301!
-https://cert-manager.io/v1.6-docs/installation/supported-releases/* https://cert-manager.io/docs/installation/supported-releases/ 301!
-https://cert-manager.io/v1.7-docs/installation/supported-releases/* https://cert-manager.io/docs/installation/supported-releases/ 301!
-
-# Release notes are similar to "upgrading" notes - there's one canonical list which is appended to
-https://cert-manager.io/v0.12-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v0.13-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v0.14-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v0.15-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v0.16-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v1.0-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v1.1-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v1.2-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v1.3-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v1.4-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v1.5-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v1.6-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-https://cert-manager.io/v1.7-docs/release-notes/* https://cert-manager.io/docs/release-notes/ 301!
-
-# Starting in version 0.15 we added an aboutjetstack page to the docs, and after the website refresh
-# we added a new dedicated section for listing companies who offer cert-manager support
-https://cert-manager.io/v0.15-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/v0.16-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/v1.0-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/v1.1-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/v1.2-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/v1.3-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/v1.4-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/v1.5-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/v1.6-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/v1.7-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/v1.8-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-https://cert-manager.io/next-docs/aboutjetstack/* https://cert-manager.io/support/ 301!
-
-# A series of events led to a broken URL after the website refresh, which is detailed in https://github.com/cert-manager/website/issues/952
-# In short, the path for the 2022 GSoD proposal shouldn't have "index" at the end but it did for a while after the refresh.
-https://cert-manager.io/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure/index/ https://cert-manager.io/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure/ 301!

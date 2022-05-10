@@ -92,17 +92,40 @@ For pages _except_ docs and for some other tags, look at changing [`next-seo.con
 
 ### Development Server
 
-Running a development server with hot-reload functionality is a one-liner:
+#### Ideal development environment: Netlify CLI
+
+The best development environment uses the Netlify CLI to serve the site locally. The Netlify CLI server much more
+closely matches the environment in which the website is deployed, and will enable local debugging of redirects and
+environment variables.
+
+To run this server, install the [Netlify CLI](https://docs.netlify.com/cli/get-started/).
+
+This server supports hot-reloading, but note that hot-reloading of the `public/_redirects` file is only enabled
+if you also install `entr`, which is available in Linux package managers and in Homebrew.
+
+```bash
+./scripts/server-netlify
+```
+
+This script will run `npm install` and then start a development server at `http://localhost:8888`.
+
+Note that the server will also be accessibly locally at port 3000, but that on this port there'll be no
+support for debugging redirects or environment variables. Use port 8888.
+
+#### Simpler development environment
+
+The Netlify environment above should be preferred.
+
+If you don't want to install any other tools though, you can run the local development server on its own
+with no support for debugging redirects or environment variables.
+
+To run the simpler, less-powerful server, run:
 
 ```bash
 ./scripts/server
 ```
 
-This script will run `npm install` and then start a development server.
-
-If you've already run `npm install`, you can manually run `npm run dev` as another option.
-
-In any case, a server will spin up at `http://localhost:3000`.
+This script will run `npm install` and then start a development server at `http://localhost:3000`.
 
 Initial builds of a page on the development server can be quite slow - a few seconds - but
 after the initial build changes should be picked up quickly and the development server
