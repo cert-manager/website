@@ -1,32 +1,33 @@
 ---
 title: Supported Releases
-description: cert-manager supported releases, supported Kubernetes versions and release timeline
+description: Supported releases, Kubernetes versions, OpenShift versions and upcoming release timeline
 ---
 
 {/*
 Inspired by https://istio.io/latest/about/supported-releases/
 */}
 
-This page lists the status, timeline and policy for currently supported
-releases.
+This page lists the status, timeline and policy for currently supported releases.
 
 Each release is supported for a period of four months, and we aim to create a new
 release every two months.
 
-<h2 id="supported-releases">Supported releases</h2>
+<h2 id="supported-releases">Currently supported releases</h2>
 
 | Release | Release Date |  End of Life | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| [1.8][] | Apr 05, 2022 | Aug 10, 2022 |             1.19 → 1.23            |             4.6 → 4.10            |
-| [1.7][] | Jan 26, 2022 |  Jun 8, 2022 |             1.18 → 1.23            |             4.5 → 4.10            |
+| [1.8][] | Apr 05, 2022 | Sep 07, 2022 |             1.19 → 1.24            |             4.6 → 4.11            |
+| [1.7][] | Jan 26, 2022 | Jul 06, 2022 |             1.18 → 1.23            |             4.5 → 4.10            |
 
 ## Upcoming releases
 
 | Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| [1.9][] |  Jun 8, 2022 | Oct 12, 2022 |             1.19 → 1.24            |             4.6 → 4.11            |
+| [1.9][] | Jul 06, 2022 | Nov 09, 2022 |             1.20 → 1.24            |             4.7 → 4.11            |
 
-Note that dates in the future are uncertain and might change.
+Note that 1.9 was delayed by roughly a month because of KubeCon in May.
+
+Dates in the future are uncertain and might change.
 
 ## Old releases
 
@@ -202,12 +203,12 @@ As of 2022-04-06, our testing coverage is:
 
 |      Vendor       | Oldest Kubernetes Release\*  |               Other Older Kubernetes Releases                 |
 |:-----------------:|------------------------------|---------------------------------------------------------------|
-|    [EKS][eks]     | 1.19 (EOL Jun 2022)          | 1.20 (EOL Sep 2022), 1.21 (EOL Feb 2023)                      |
-|    [GKE][gke]     | 1.19 (EOL Jun 2022)          | 1.20 (EOL Aug 2022), 1.21 (EOL Dec 2022)                      |
-|    [AKS][aks]     | 1.21 (EOL Apr 2022)          | 1.22 (EOL on release of k8s 1.25)                             |
-| [OpenShift 4][os] | 1.19 (4.6 EUS, EOL Oct 2022) | 1.20 (4.7, EOL Aug 2022), 1.21 (4.8, EOL Jan 2023, EUS after) |
+|    [EKS][eks]     | 1.19 (EOL Jun 2022)          | 1.20 (EOL Sep 2022), 1.21 (EOL Feb 2023), 1.22 (EOL May 2023) |
+|    [GKE][gke]     | 1.19 (EOL Jun 2022)          | 1.20 (EOL Aug 2022), 1.21 (EOL Mar 2023), 1.22 (EOL Apr 2023) |
+|    [AKS][aks]     | 1.21 (EOL Jul 2022)          | 1.22 (EOL Nov 2022)                                           |
+| [OpenShift 4][os] | 1.19 (4.6 EUS, EOL Dec 2022) | 1.20 (4.7, EOL Nov 2022), 1.21 (4.8, EOL Feb 2023, EUS after) |
 
-\*Oldest release relevant to the next cert-manager release, as of 2022-04-06
+\*Oldest release relevant to the next cert-manager release, as of 2022-05-12
 
 [eks]: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#kubernetes-release-calendar
 [gke]: https://cloud.google.com/kubernetes-engine/docs/release-schedule
