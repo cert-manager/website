@@ -20,7 +20,7 @@ for you to learn from. Take a look!
 - [Securing an EKS Cluster with Venafi](./venafi/venafi.md): Tutorial for
   creating an EKS cluster and securing an NGINX deployment with a Venafi issued
   certificate.
-
+- [Obtaining SSL certificates with the `ZeroSSL`](./zerossl/zerossl.md): Tutorial describing usage of the `ZeroSSL` as external ACME server.
 
 ### External Tutorials
 
