@@ -106,7 +106,7 @@ but the options are quite limited.
 The configuration which you add to the Subscription will be applied immediately to the current cert-manager Deployments.
 It will also be re-applied if OLM upgrades cert-manager.
 
-> 🔰  Read the [Configuring Operators deployed by OLM](https://github.com/operator-framework/operator-lifecycle-manager/blob/master/doc/design/subscription-config.md#configuring-operators-deployed-by-olm) design doc in the OLM repository.
+> 🔰 Read the [Configuring Operators deployed by OLM](https://github.com/operator-framework/operator-lifecycle-manager/blob/master/doc/design/subscription-config.md#configuring-operators-deployed-by-olm) design doc in the OLM repository.
 >
 > 🔰 Refer to the [Subscription API documentation](https://pkg.go.dev/github.com/operator-framework/api@v0.14.0/pkg/operators/v1alpha1#Subscription).
 
@@ -163,8 +163,8 @@ cert-manager-cainjector-7b7fff8b9c-dxw6b   map[limits:map[cpu:500m memory:128Mi]
 cert-manager-webhook-975bc87b5-tqdj4       map[limits:map[cpu:500m memory:128Mi] requests:map[cpu:250m memory:100Mi]]
 ```
 
-> :warning: This configuration will apply to **all** the cert-manager Deployments.
-> This is a known limitation of OLM which [does not support configuration of individual Deployments][https://github.com/operator-framework/operator-lifecycle-manager/issues/1794].
+> ⚠️ This configuration will apply to **all** the cert-manager Deployments.
+> This is a known limitation of OLM which [does not support configuration of individual Deployments](https://github.com/operator-framework/operator-lifecycle-manager/issues/1794).
 
 #### Change the NodeSelector
 
@@ -192,15 +192,15 @@ cert-manager-cainjector-b89cd6f46-kdkk2   map[kubernetes.io/arch:amd64 kubernete
 cert-manager-webhook-8464bc7cc8-64b4w     map[kubernetes.io/arch:amd64 kubernetes.io/os:linux]
 ```
 
-> :warning: This configuration will apply to **all** the cert-manager Deployments.
-> This is a known limitation of OLM which [does not support configuration of individual Deployments][https://github.com/operator-framework/operator-lifecycle-manager/issues/1794].
+> ⚠️ This configuration will apply to **all** the cert-manager Deployments.
+> This is a known limitation of OLM which [does not support configuration of individual Deployments](https://github.com/operator-framework/operator-lifecycle-manager/issues/1794).
 
 ### Configuration Via ClusterServiceVersion (CSV)
 
 The ClusterServiceVersion (CSV) resource contains the templates for all the cert-manager Deployments.
 If you patch these templates, OLM will immediately roll out the changes to the Deployments.
 
-> :warning: If OLM upgrades cert-manager your changes will be lost because it will create a new CSV with default Deployment templates.
+> ⚠️ If OLM upgrades cert-manager your changes will be lost because it will create a new CSV with default Deployment templates.
 
 Nevertheless, editing (patching) the CSV can be a useful way to override certain cert-manager settings. An example:
 
@@ -209,7 +209,7 @@ Nevertheless, editing (patching) the CSV can be a useful way to override certain
 The following JSON patch will append `-v=6` to command line arguments of the cert-manager controller-manager
 (the first container of the first Deployment).
 
-```
+```bash
 kubectl patch csv cert-manager.v1.8.0 \
   --type json \
   -p '[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "-v=6" }]'
@@ -217,7 +217,7 @@ kubectl patch csv cert-manager.v1.8.0 \
 
 You will see the controller-manager Pod is restarted with the new arguments.
 
-```
+```console
 $ kubectl  -n operators get pods -o "custom-columns=name:.metadata.name,args:.spec.containers[0].args"
 name                                      args
 cert-manager-797979cbdb-g444r             [-v=2 --cluster-resource-namespace=$(POD_NAMESPACE) --leader-election-namespace=kube-system -v=6]
@@ -230,7 +230,7 @@ cert-manager-797979cbdb-g444r             [-v=2 --cluster-resource-namespace=$(P
 
 Below is the processes for uninstalling cert-manager on OpenShift.
 
-> **Warning**: To uninstall cert-manger you should always use the same process for
+> ⚠️ To uninstall cert-manger you should always use the same process for
 > installing but in reverse. Deviating from the following process can cause
 > issues and potentially broken states. Please ensure you follow the below steps
 > when uninstalling to prevent this happening.
