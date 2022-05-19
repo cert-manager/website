@@ -93,22 +93,22 @@ If you have any issues with your installation, please refer to the
 
 ## Configuration
 
-The configuration options are quite limited you install cert-manager using OLM.
+The configuration options are quite limited when you install cert-manager using OLM.
 There are a few Deployment settings which can be overridden permanently in the Subscription
-and most other elements of the cert-manager manifests can be changed by patching the ClusterServiceVersion,
+and most other elements of the cert-manager manifests can be changed by editing the ClusterServiceVersion,
 but changes to the ClusterServiceVersion are temporary and will be lost if OLM upgrades cert-manager,
 because an upgrade results in a new ClusterServiceVersion resource.
 
 ### Configuration Via Subscription
 
-When you create an OLM Subscription you can override *some* of the cert-manager Deployment settings,
+When you create an OLM Subscription you can override **some** of the cert-manager Deployment settings,
 but the options are quite limited.
 The configuration which you add to the Subscription will be applied immediately to the current cert-manager Deployments.
 It will also be re-applied if OLM upgrades cert-manager.
 
 > 🔰  Read the [Configuring Operators deployed by OLM](https://github.com/operator-framework/operator-lifecycle-manager/blob/master/doc/design/subscription-config.md#configuring-operators-deployed-by-olm) design doc in the OLM repository.
 >
-> 🔰 Refer to the [Subscription API documentation](https://github.com/operator-framework/api/blob/master/pkg/operators/v1alpha1/subscription_types.go).
+> 🔰 Refer to the [Subscription API documentation](https://pkg.go.dev/github.com/operator-framework/api@v0.14.0/pkg/operators/v1alpha1#Subscription).
 
 Here are some examples of configuration that can be achieved by modifying the Subscription resource.
 In each case we assume that you are starting with the following [default Subscription from OperatorHub.io]((https://operatorhub.io/install/cert-manager.yaml)):
@@ -223,6 +223,8 @@ name                                      args
 cert-manager-797979cbdb-g444r             [-v=2 --cluster-resource-namespace=$(POD_NAMESPACE) --leader-election-namespace=kube-system -v=6]
 ...
 ```
+
+> 🔰 Refer to the [ClusterServiceVersion API documentation](https://pkg.go.dev/github.com/operator-framework/api@v0.14.0/pkg/operators/v1alpha1#ClusterServiceVersion).
 
 ## Uninstall
 
