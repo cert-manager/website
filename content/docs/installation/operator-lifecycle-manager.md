@@ -154,7 +154,36 @@ cert-manager-webhook-975bc87b5-tqdj4       map[limits:map[cpu:500m memory:128Mi]
 ```
 
 > :warning: This configuration will apply to **all** the cert-manager Deployments.
-> This is a known limitation of OLM which [does not support configuration of individual Deployment resources][https://github.com/operator-framework/operator-lifecycle-manager/issues/1794].
+> This is a known limitation of OLM which [does not support configuration of individual Deployments][https://github.com/operator-framework/operator-lifecycle-manager/issues/1794].
+
+### Change the NodeSelector
+
+It is possible to change the `nodeSelector` for cert-manager Pods by adding the following stanza to the Subscription:
+
+```yaml
+# nodeselector-patch.yaml
+spec:
+  config:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+```
+
+```bash
+kubectl patch -n operators subscription my-cert-manager --type merge --patch-file nodeselector-patch.yaml
+```
+
+You will see **all** the cert-manager Pods are restarted with the new `nodeSelector`:
+
+```console
+$ kubectl get pods -o "custom-columns=name:.metadata.name,nodeselector:.spec.nodeSelector"
+name                                      nodeselector
+cert-manager-5b6b8f7d74-k7l94             map[kubernetes.io/arch:amd64 kubernetes.io/os:linux]
+cert-manager-cainjector-b89cd6f46-kdkk2   map[kubernetes.io/arch:amd64 kubernetes.io/os:linux]
+cert-manager-webhook-8464bc7cc8-64b4w     map[kubernetes.io/arch:amd64 kubernetes.io/os:linux]
+```
+
+> :warning: This configuration will apply to **all** the cert-manager Deployments.
+> This is a known limitation of OLM which [does not support configuration of individual Deployments][https://github.com/operator-framework/operator-lifecycle-manager/issues/1794].
 
 ## Uninstall
 
