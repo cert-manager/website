@@ -91,6 +91,71 @@ in accordance with [OLM's Recommended Channel Naming][].
 If you have any issues with your installation, please refer to the
 [FAQ](../faq/README.md).
 
+## Configuration
+
+When you create an OLM Subscription you can override *some* of the cert-manager Deployment settings,
+but the options are quite limited.
+
+> Read the [Configuring Operators deployed by OLM](https://github.com/operator-framework/operator-lifecycle-manager/blob/master/doc/design/subscription-config.md#configuring-operators-deployed-by-olm) design doc in the OLM repository.
+
+Here are some examples of configuration that can be achieved by modifying the Subscription resource.
+In each case we assume that you are starting with the following [default Subscription from OperatorHub.io]((https://operatorhub.io/install/cert-manager.yaml)):
+
+```yaml
+# subscription.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: my-cert-manager
+  namespace: operators
+spec:
+  channel: stable
+  name: cert-manager
+  source: operatorhubio-catalog
+  sourceNamespace: olm
+```
+
+```bash
+kubectl apply -f subscription.yaml
+```
+
+### Change the Resource Requests and Limits
+
+It is possible to change the resource requests and limits by adding a `config` stanza to the Subscription:
+
+```yaml
+# resources-patch.yaml
+spec:
+  config:
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+```
+
+
+```bash
+kubectl patch -n operators subscription my-cert-manager --type merge --patch-file resources-patch.yaml
+```
+
+You will see **all** the cert-manager Pods are restarted with the new resources:
+
+```console
+$ kubectl get pods -o "custom-columns=name:.metadata.name,mem:.spec.containers[*].resources"
+name                                       mem
+cert-manager-669867589c-n8dcn              map[limits:map[cpu:500m memory:128Mi] requests:map[cpu:250m memory:100Mi]]
+cert-manager-cainjector-7b7fff8b9c-dxw6b   map[limits:map[cpu:500m memory:128Mi] requests:map[cpu:250m memory:100Mi]]
+cert-manager-webhook-975bc87b5-tqdj4       map[limits:map[cpu:500m memory:128Mi] requests:map[cpu:250m memory:100Mi]]
+```
+
+> :warning: This configuration will apply to **all** the cert-manager Deployments.
+> This is a known limitation of OLM which [does not support configuration of individual Deployment resources][https://github.com/operator-framework/operator-lifecycle-manager/issues/1794].
+
+## Uninstall
+
 Below is the processes for uninstalling cert-manager on OpenShift.
 
 > **Warning**: To uninstall cert-manger you should always use the same process for
