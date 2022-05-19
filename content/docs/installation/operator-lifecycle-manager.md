@@ -206,7 +206,7 @@ Nevertheless, editing (patching) the CSV can be a useful way to override certain
 
 #### Change the log level of cert-manager components
 
-The following json patch will append `-v=6` to command line arguments of the cert-manager controller-manager
+The following JSON patch will append `-v=6` to command line arguments of the cert-manager controller-manager
 (the first container of the first Deployment).
 
 ```
