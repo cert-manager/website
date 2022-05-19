@@ -96,7 +96,9 @@ If you have any issues with your installation, please refer to the
 When you create an OLM Subscription you can override *some* of the cert-manager Deployment settings,
 but the options are quite limited.
 
-> Read the [Configuring Operators deployed by OLM](https://github.com/operator-framework/operator-lifecycle-manager/blob/master/doc/design/subscription-config.md#configuring-operators-deployed-by-olm) design doc in the OLM repository.
+> 🔰  Read the [Configuring Operators deployed by OLM](https://github.com/operator-framework/operator-lifecycle-manager/blob/master/doc/design/subscription-config.md#configuring-operators-deployed-by-olm) design doc in the OLM repository.
+>
+> 🔰 Refer to the [Subscription API documentation](https://github.com/operator-framework/api/blob/master/pkg/operators/v1alpha1/subscription_types.go).
 
 Here are some examples of configuration that can be achieved by modifying the Subscription resource.
 In each case we assume that you are starting with the following [default Subscription from OperatorHub.io]((https://operatorhub.io/install/cert-manager.yaml)):
