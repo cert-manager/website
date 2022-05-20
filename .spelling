@@ -69,6 +69,7 @@ ClusterIssuer
 ClusterIssuers
 ClusterRole
 ClusterRoles
+ClusterServiceVersion
 ConfigMap
 CoreDNS
 CronJob
@@ -419,6 +420,7 @@ zsh
 PodSecurityPolicy
 ClusterIP
 NodePort
+NodeSelector
 pprof
 GSoD
 GSoC
