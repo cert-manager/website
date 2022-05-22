@@ -16,7 +16,7 @@ Version 1.8 also marks our first release in which the Go import path for cert-ma
 
 #### Validation of the `rotationPolicy` field
 
-The field `spec.privateKey.rotationPolicy` on Certificate resources is now validated. Valid options are Never and Always. If you are using a GitOps flow and one of your YAML manifests contains a Certificate with an invalid value, you will need to update it with a valid value to prevent your GitOps tool from failing on the new validation. Please follow the instructions listed on the page [Upgrading from v1.7 to v1.8](https://cert-manager.io/docs/installation/upgrading/upgrading-1.7-1.8.md). ([#4913](https://github.com/cert-manager/cert-manager/pull/4913), [@jahrlin](https://github.com/jahrlin))
+The field `spec.privateKey.rotationPolicy` on Certificate resources is now validated. Valid options are Never and Always. If you are using a GitOps flow and one of your YAML manifests contains a Certificate with an invalid value, you will need to update it with a valid value to prevent your GitOps tool from failing on the new validation. Please follow the instructions listed on the page [Upgrading from v1.7 to v1.8](https://cert-manager.io/docs/installation/upgrading/upgrading-1.7-1.8/). ([#4913](https://github.com/cert-manager/cert-manager/pull/4913), [@jahrlin](https://github.com/jahrlin))
 
 ##### What happens if I upgrade to 1.8.0 without doing the above steps?
 
