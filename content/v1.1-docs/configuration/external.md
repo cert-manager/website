@@ -46,7 +46,6 @@ authors are as follows:
 - [ADCS Issuer](https://github.com/nokia/adcs-issuer): Used
   to request certificates signed by 
   [Microsoft Active Directory Certificate Service](https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority).
-- [ncm-issuer](https://github.com/nokia/ncm-issuer): Requests certificates from the [Nokia](https://www.nokia.com/) [Netguard Certificate Manager](https://www.nokia.com/networks/security-portfolio/netguard/certificate-manager)
 
 
 To create your own external issuer type, please follow the guidance in the

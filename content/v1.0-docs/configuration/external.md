@@ -35,8 +35,6 @@ authors are as follows:
   to request certificates signed by
   [Cloudflare Origin CA](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca)
   to enable TLS between Cloudflare edge and your Kubernetes workloads.
-- [ncm-issuer](https://github.com/nokia/ncm-issuer): Requests certificates from the [Nokia](https://www.nokia.com/) [Netguard Certificate Manager](https://www.nokia.com/networks/security-portfolio/netguard/certificate-manager)
-
 
 To create your own external issuer type, please follow the guidance in the
 [development documentation](../../docs/contributing/external-issuers.md).
