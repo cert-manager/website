@@ -38,6 +38,7 @@ authors are as follows:
 - [step-issuer](https://github.com/smallstep/step-issuer): Used to request
   certificates from the [Smallstep](https://smallstep.com) [Certificate
   Authority server](https://github.com/smallstep/certificates).
+- [ncm-issuer](https://github.com/nokia/ncm-issuer): Requests certificates from the [Nokia](https://www.nokia.com/) [Netguard Certificate Manager](https://www.nokia.com/networks/security-portfolio/netguard/certificate-manager)
 
 
 # Issuers that do NOT Honour Approval
