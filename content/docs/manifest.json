@@ -473,6 +473,10 @@
               "path": "/docs/contributing/kind.md"
             },
             {
+              "title": "Implementing feature gates",
+              "path": "/docs/contributing/featuregates.md"
+            },
+            {
               "title": "Google Season of Docs",
               "routes": [
                 {
