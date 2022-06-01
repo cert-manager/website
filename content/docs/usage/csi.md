@@ -5,8 +5,8 @@ description: 'cert-manager usage: CSI driver'
 
 ## Enabling mTLS of Pods using the cert-manager CSI Driver
 
-An experimental [Container Storage Interface (CSI)
-driver](https://github.com/jetstack/cert-manager-csi) has been created to
+A [Container Storage Interface (CSI)
+driver](https://github.com/cert-manager/csi-driver) has been created to
 facilitate mTLS of Pods running inside your cluster through use of cert-manager.
 Using this driver will ensure that the private key and corresponding signed
 certificate will be unique to each Pod and will be stored on disk to the node
