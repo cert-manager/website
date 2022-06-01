@@ -127,3 +127,11 @@ For the security of the Kubernetes cluster it's important to limit access to the
 authorization against the API server. If cert-manager used this cert, it could allow any user with permission to create cert-manager resources to elevate privileges by signing certificates which are trusted for API access.
 
 [See our FAQ](../faq/README.md#kubernetes-has-a-builtin-certificatesigningrequest-api-why-not-use-that) for more details on this.
+
+### Integrations with third party infrastructure providers
+
+We try to not include in core cert-manager new functionality that involves calling third party APIs that we don't have infrastructure to test (or that the maintainers don't have the skills to work with).
+
+Instead we try to build interfaces such as [external DNS webhook solver](../configuration/acme/dns01/webhook.md) that can be implemented to use cert-manager with a particular third party implementation.
+We believe that this is a more sustainable approach as that way folks who have knowledge and skills to work with particular infrastructure can own a project that interacts with it and it lets us avoid merging potentially untested code to core cert-manager.
+An example of a PR that might be rejected would be adding a new external DNS solver kind, see https://github.com/cert-manager/cert-manager/pull/1088

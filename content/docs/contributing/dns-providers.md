@@ -16,3 +16,8 @@ repository](https://github.com/cert-manager/webhook-example). Please
 reach out on the `cert-manager-dev` channel on the [community
 slack](https://slack.k8s.io) for advise and guidance on getting a DNS webhook
 running and released.
+
+Additional resources:
+
+- [ACME DNS01 via webhook](../configuration/acme/dns01/README.md#webhook)
+- [Configuring an ACME issuer with external webhook](../configuration/acme/dns01/webhook.md)
