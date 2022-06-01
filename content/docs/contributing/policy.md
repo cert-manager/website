@@ -28,9 +28,11 @@ for us to do the design process.
 
 #### Design Documents
 
-Larger PRs should normally come with a design document. This doesn't need to be a huge piece of work; rather, it should specify
-_why_ we'd want a given feature, _how_ it'll be implemented, and perhaps evaluate pros and cons. You can add this design in a
-markdown document in a pull request to the cert-manager [design](https://github.com/cert-manager/cert-manager/tree/master/design) folder.
+Larger feature development should normally start with a design discussion. To get that started, you would raise a PR with a design document against [cert-manager/cert-manager/design](https://github.com/cert-manager/cert-manager/tree/master/design). This allows us to discuss the proposed functionality before starting the work to implement it and serves as a way to document the decisions and reasoning behind them. Ideally, a good design document should allow for faster and more consistent feature development and implementation process by providing a single place where all potential concerns and questions are answered.
+
+We have a [design template](https://github.com/cert-manager/cert-manager/blob/master/design/template.md) that outlines the structure of the document.
+(This is a simplified version of [Kubernetes enhancements KEP template](https://github.com/kubernetes/enhancements/tree/master/keps/NNNN-kep-template)).
+Do reach out if you need help with the design.
 
 Part of the process of discussing a design document may also include a video call with you included! That helps us to plan how a feature should
 be implemented and approached. It'll be pretty informal and casual; we just want to make sure we're all on the same page. This call might be part
@@ -44,13 +46,13 @@ questions, but they should certainly be able to point you in the right direction
 
 To get in touch to discuss a feature, please reach out on the [cert-manager-dev slack channel](./README.md#slack), or join a [cert-manager public meeting](./README.md#meetings) to talk about your proposal.
 
-If you have an open PR with a design document, you should absolutely feel free to add it to the [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U/edit) for our next biweekly meeting
+If you have an open PR with a design document (or have some questions about how to proceed with a design), you should absolutely feel free to add the PR with your design or a link to the relevant GitHub issue to the [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U/edit) for our next biweekly meeting
 and join in so we're sure to discuss it and so you can contribute to the discussion!
 
 #### Large Feature Lifecycle
 
 1. Informally ask about the feature in slack or a public meeting
-2. Create a PR with a lightweight design document, for discussion
+2. Create a PR with a lightweight design document using the [design template](https://github.com/cert-manager/cert-manager/tree/master/design/template.md), for discussion
 3. Design doc PR gets reviewed - possibly includes meeting or discussion in a biweekly meeting
 4. Implement your feature, helped and reviewed by a named cert-manager maintainer
 
