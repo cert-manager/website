@@ -20,8 +20,8 @@ for you to learn from. Take a look!
 - [Securing an EKS Cluster with Venafi](./venafi/venafi.md): Tutorial for
   creating an EKS cluster and securing an NGINX deployment with a Venafi issued
   certificate.
-- [Securing an istio service mesh with cert-manager](./istio-csr/istio-csr.md): Tutorial for
-  securing an istio service mesh using a cert-manager issuer.
+- [Securing an Istio service mesh with cert-manager](./istio-csr/istio-csr.md): Tutorial for
+  securing an Istio service mesh using a cert-manager issuer.
 
 
 ### External Tutorials

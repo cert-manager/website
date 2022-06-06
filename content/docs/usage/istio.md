@@ -40,8 +40,7 @@ Running istio-csr requires a few steps and preconditions in order:
 3. An `Issuer` or `ClusterIssuer` which will be used to issue Istio certificates
 4. istio-csr installed (likely via helm)
 5. Istio [installed](https://istio.io/latest/docs/setup/install/istioctl/) with
-   some custom config required, e.g. using the example config from the [getting
-   started guide](../tutorials/istio-csr/istio-csr.md).
+   some custom config required, e.g. using the example config from the [getting started guide](../tutorials/istio-csr/istio-csr.md).
 
 ### Why Custom Istio Install Manifests?
 
@@ -81,7 +80,7 @@ Istio places SPIFFE IDs there.
 That means that the ACME issuer **will not work** &mdash; publicly trusted certificates such as those issued by Let's Encrypt
 don't allow arbitrary entries in the SAN, for very good reasons.
 
-If you're already using [Hashicorp Vault](https://www.vaultproject.io/) then the Vault issuer is an obvious choice. If
+If you're already using [HashiCorp Vault](https://www.vaultproject.io/) then the Vault issuer is an obvious choice. If
 you want to control your own PKI entirely, we'd recommend the CA issuer. The choice is ultimately yours.
 
 ### Installing istio-csr After Istio
@@ -97,5 +96,5 @@ authorizes, and signs incoming certificate signing requests from Istio
 workloads, routing all certificate handling through cert-manager installed in
 the cluster.
 
-This seamlessly matches the behaviour of istiod in a typical installation, while
+This seamlessly matches the behavior of istiod in a typical installation, while
 allowing certificate management through cert-manager.

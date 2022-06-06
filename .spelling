@@ -105,6 +105,7 @@ GCLB
 GCP
 GKE
 GitOps
+gRPC
 GSoC
 Gloo
 GoLand
@@ -121,6 +122,8 @@ IPs
 IPv6
 IssuerRef
 Istio
+IstioOperator
+istiod
 JSON
 Jetstack
 JetstackHQ
@@ -269,12 +272,14 @@ io
 irbekrm
 issuances
 istio-csr
+istioctl
 jakexks
 jandersen-plaid
 johanfleury
 johejo
 jonathansp
 joshuastern
+jq
 jsoref
 justinkillen
 keystore

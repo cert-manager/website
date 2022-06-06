@@ -146,7 +146,7 @@ The following steps are option but can be followed to validate everything is hoo
 4. Using `istioctl` to fetch the certificate info for the `istio-proxy` container
 
 To see this all in action, lets deploy a very simple sample application from the
-[istio samples](https://github.com/istio/istio/tree/master/samples/httpbin).
+[Istio samples](https://github.com/istio/istio/tree/master/samples/httpbin).
 
 First set some environment variables whose values could be changed if needed:
 
@@ -159,7 +159,7 @@ export APP=httpbin
 export ISTIO_VERSION=$(istioctl version -o json | jq -r '.meshVersion[0].Info.version')
 ```
 
-We use the `default` namespace for simplicity, so let's label the namespace for istio injection:
+We use the `default` namespace for simplicity, so let's label the namespace for Istio injection:
 
 ```shell
 kubectl label namespace $NAMESPACE istio-injection=enabled --overwrite
@@ -178,7 +178,7 @@ kubectl get certificaterequests.cert-manager.io -n istio-system -w
 ```
 
 Now deploy the sample application `httpbin` in the labeled namespace. Note the use of a
-variable to match the manifest version to your installed istio version:
+variable to match the manifest version to your installed Istio version:
 
 ```shell
 kubectl apply -n $NAMESPACE -f https://raw.githubusercontent.com/istio/istio/$ISTIO_VERSION/samples/httpbin/httpbin.yaml
@@ -212,7 +212,7 @@ NAME                       READY   STATUS    RESTARTS   AGE
 httpbin-74fb669cc6-559cg   2/2     Running   0           4m
 ```
 
-To validate that the `istio-proxy` sidecar container has requested the certifiate from the correct
+To validate that the `istio-proxy` sidecar container has requested the certificate from the correct
 service, check the container logs:
 
 ```shell
