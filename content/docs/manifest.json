@@ -315,6 +315,10 @@
             {
               "title": "Policy for cert-manager certificates",
               "path": "/docs/usage/approver-policy.md"
+            },
+            {
+              "title": "Distributing Trust Bundles in Kubernetes",
+              "path": "/docs/usage/trust.md"
             }
           ]
         },

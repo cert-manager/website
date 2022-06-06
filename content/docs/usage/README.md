@@ -26,3 +26,6 @@ There are several use cases and methods for requesting certificates through cert
 - [Securing Istio Service Mesh](./istio.md): Using the cert-manager
   [Istio](https://istio.io) integration, secure the mTLS PKI for each pod
   through cert-manager managed certificates.
+- [Distributing Trust Bundles in Kubernetes](./trust.md): Using the trust
+    operator to distribute trust bundles, like CA certificates, across a
+    Kubernetes cluster.
