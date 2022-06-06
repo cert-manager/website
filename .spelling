@@ -3,6 +3,7 @@ Saeed
 acmesolver
 startupapicheck
 ServiceAccount
+ServiceAccounts
 mikebryant
 jayme-github
 nodeSelector
@@ -35,6 +36,7 @@ APIs
 AWS
 Akamai
 AppRole
+approvers
 ArgoCD
 Arsh
 ArtifactHUB
@@ -56,6 +58,8 @@ CSRs
 CVE
 CVEs
 CertificateRequest
+CertificateRequestPolicy
+CertificateRequestPolicies
 CertificateRequests
 CertificateSecretTemplate
 CertificateSigningRequest
