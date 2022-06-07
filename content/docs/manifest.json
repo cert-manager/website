@@ -322,11 +322,11 @@
           "title": "Projects",
           "routes": [
             {
-              "title": "Introduction",
+              "title": "Contents",
               "path": "/docs/projects/README.md"
             },
             {
-              "title": "Distributing Trust Bundles in Kubernetes",
+              "title": "trust",
               "path": "/docs/projects/trust.md"
             }
           ]
