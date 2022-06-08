@@ -373,6 +373,15 @@
           ]
         },
         {
+          "title": "Projects",
+          "routes": [
+            {
+              "title": "istio-csr",
+              "path": "/docs/projects/istio-csr.md"
+            }
+          ]
+        },
+        {
           "title": "FAQ",
           "routes": [
             {

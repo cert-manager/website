@@ -124,6 +124,7 @@ IssuerRef
 Istio
 IstioOperator
 istiod
+intra
 JSON
 Jetstack
 JetstackHQ
