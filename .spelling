@@ -98,6 +98,7 @@ DaemonSet
 DataDog
 Dean-Coakley
 DigitalOcean
+OVHCloud
 Distroless
 DuckDuckGo
 etcd
@@ -312,6 +313,9 @@ kms-issuer
 kube-cert-manager
 kube-ingress-aws-controller
 kube-lego
+kube-apiserver
+kube-proxy
+tcpdump
 kubebuilder
 kubectl
 kubed
@@ -487,6 +491,13 @@ rodrigorfk
 craigminihan
 hawksight
 lucacome
+iptables
+Wireshark
+microVM
+microVMs
+MutatingWebhookConfiguration
+ValidatingWebhookConfiguration
+OVHcloud
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
