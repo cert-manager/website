@@ -139,3 +139,7 @@ select {
 .DocSearch-Input:focus {
   @apply ring-0;
 }
+
+a.hidden-link {
+  display: none;
+}
