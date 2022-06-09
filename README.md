@@ -88,6 +88,12 @@ is configured in the frontmatter for each docs page. The magic happens in in `pa
 
 For pages _except_ docs and for some other tags, look at changing [`next-seo.config.js`](./next-seo.config.js).
 
+### Task: Adding a Comment in Documentation
+
+Sometimes you'll want to add a comment which is only for documentation maintainers.
+
+Use `{/* my comment */}` rather than the HTML-style comments you'd normally use for Markdown files. Other comment types will cause errors.
+
 ## Website Development Tooling
 
 ### Development Server
