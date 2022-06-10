@@ -54,11 +54,15 @@ cert-manager publishes all events to the Kubernetes events mechanism, you can ge
 
 Due to the nature of the Kubernetes event mechanism these will be purged after a while. If you're using a dedicated logging system it might be able or is already also storing Kubernetes events.
 
-### What happens if a renewal doesn't happen? Will it be tried again after some time?
+### What happens if an issuance failed? Will it be retried?
 
-cert-manager will retry renewal if it encounters temporary failures. It uses an exponential backoff algorithm to calculate the delay between each retry.
+cert-manager will retry a failed issuance except for a few rare edge cases where manual intervention is needed.
 
-A temporary failure is one that doesn't mark the `CertificateRequest` as failed. If the `CertificateRequest` is marked as failed, issuance will be re-tried in 1 hour.
+If an issuance failed because of a temporary error, it will be retried again with a short exponential backoff (currently 5 seconds to 5 minutes). A temporary error is one that does not result in a failed `CertificateRequest`.
+
+If the issuance has failed with an error that resulted in a failed `CertificateRequest`, it will be retried with a longer binary exponential backoff (1 hour to 32 hours) to avoid overwhelming external services.
+
+You can always trigger immediate renewal using [`cmctl renew` command](../usage/cmctl.md#renew)
 
 ### Is ECC (elliptic-curve cryptography) supported?
 
