@@ -341,10 +341,10 @@ solvers:
       - 'test.example.com'
       - 'example.dev'
 ```
-In this case the `DNS01` solver for CloudFlare will only be used to solve a
+
+In this case the `DNS01` solver for Cloudflare will only be used to solve a
 challenge for a DNS name if the `Certificate` has a label from
 `matchLabels` _and_ the DNS name matches a zone from `dnsZones`.
-
 
 ## Alternative Certificate Chains
 
