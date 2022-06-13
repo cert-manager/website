@@ -56,7 +56,7 @@ not have to store permanent credentials in a secret.
 
 cert-manager supports two ways of specifying credentials:
 
-- explicit by providing a `accessKeyID` and `secretAccessKey`
+- explicit by providing an `accessKeyID` or an `accessKeyIDSecretRef`, and a `secretAccessKeySecretRef`
 - or implicit (using [metadata
   service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
   or [environment variables or credentials
@@ -168,7 +168,13 @@ spec:
       dns01:
         route53:
           region: eu-central-1
+          # The AWS access key ID can be specified using the literal accessKeyID parameter
+          # or retrieved from a secret using the accessKeyIDSecretRef
+          # If using accessKeyID, omit the accessKeyIDSecretRef parameter and vice-versa
           accessKeyID: AKIAIOSFODNN7EXAMPLE
+          accessKeyIDSecretRef:
+            name: prod-route53-credentials-secret
+            key: access-key-id
           secretAccessKeySecretRef:
             name: prod-route53-credentials-secret
             key: secret-access-key
