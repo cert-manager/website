@@ -352,11 +352,13 @@ challenge for a DNS name if the `Certificate` has a label from
 
 <a id="alternative-certificate-chain" className="hidden-link"></a>
 
-It's possible to choose alternative certificate chains when fetching a certificate from an ACME server. This allows issuers to gracefully roll people over to a new root.
+It's possible to choose alternative certificate chains when fetching a certificate from an ACME server. This allows issuers to gracefully roll people over to a new root certificate during a transition period; the most famous example was the Let's Encrypt ["ISRG Root" changeover](https://community.letsencrypt.org/t/transition-to-isrgs-root-delayed-until-jan-11-2021/125516).
 
-This functionality is not exclusive to Let's Encrypt; if your ACME server supports signing by multiple CAs you can use `preferredChain` with the value of the Common Name of the chain you want in the Issuer part of the certificate.
+This functionality is not exclusive to Let's Encrypt; if your ACME server supports signing by multiple CAs you can use `preferredChain` with the value of the Common Name of the chain you want in the Issuer part of the certificate. If the common name matches a difference chain, the server can choose to use and return that new chain.
 
-By way of an example, below is how a user would have requested an alternative chain before the (now completed) ["ISRG Root" changeover](https://community.letsencrypt.org/t/transition-to-isrgs-root-delayed-until-jan-11-2021/125516). Since this change has already happened, there's no need for this with Let's Encrypt any more:
+If the `preferredChain` does not match a certificate the server will return whatever it considers to be its default certificate.
+
+By way of an example, below is how a user would have requested an alternative chain before the (now completed) "ISRG Root" changeover, but note that since this change has already happened there's no need for this with Let's Encrypt any more:
 
 ```yaml
 apiVersion: cert-manager.io/v1
