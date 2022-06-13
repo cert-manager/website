@@ -73,46 +73,6 @@ Solvers come in the form of [`dns01`](./dns01/README.md) and
 these solver types, visit their respective documentation -
 [DNS01](./dns01/README.md), [HTTP01](./http01/README.md).
 
-### Use an Alternative Certificate Chain
-
-On January 11th 2021, Let's Encrypt will [change over](https://community.letsencrypt.org/t/transition-to-isrgs-root-delayed-until-jan-11-2021/125516) to using its own `ISRG Root` CA.
-This will replace the cross-signed certificates by `Identrust`. This change over needs no changes to your cert-manager configuration, any renewed or new certificates issued after this date will use the new CA root.
-
-Let's encrypt currently already signs certificates using this CA and offers them as "alternative certificate chain" via ACME.
-In this release cert-manager adds support for accessing these alternative chains in the issuer config.
-The new `preferredChain` option will allow you to specify a CA's common name for the certificate to be issued by.
-If there is a certificate available matching that request it will present you that certificate. Note that this is a Preferred option,
-if none is found matching the request it will give you the default certificate as before. This makes sure you still get your certificate
-renewed once the alternative chain gets removed on the ACME issuer side.
-
-You can already today get certificates from the `ISRG Root` by using:
-```yaml
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: letsencrypt
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    preferredChain: "ISRG Root X1"
-```
-
-If you prefer to keep the `IdenTrust` chain you can do that by setting the option to `DST Root CA X3`:
-```yaml
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: letsencrypt
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    preferredChain: "DST Root CA X3"
-```
-
-Note that this Root CA is expiring soon, Let's Encrypt will keep this certificate chain active until September 29 2021.
-
-This feature is not Let's Encrypt exclusive, if your ACME server supports signing by multiple CAs you can use `preferredChain` with the value of the Common Name in the Issuer part of the certificate. 
-
 ### External Account Bindings
 
 cert-manager supports using External Account Bindings with your ACME account.
@@ -125,18 +85,18 @@ represents your ACME account. These fields are:
 
 - `keyID` - the key ID or account ID of which your external account binding is indexed by the
 external account manager
-- `keySecretRef` - the name and key of a secret containing a base 64 encoded 
+- `keySecretRef` - the name and key of a secret containing a base 64 encoded
 URL string of your external account symmetric MAC key
 
-> Note: In _most_ cases, the MAC key must be encoded in `base64URL`. The 
+> Note: In _most_ cases, the MAC key must be encoded in `base64URL`. The
 > following command will base64-encode a key and convert it to `base64URL`:
-> 
+>
 > ```console
 > $ echo 'my-secret-key' | base64 -w0 | sed -e 's/+/-/g' -e 's/\//_/g' -e 's/=//g'
 > ```
-> 
-> You can then create the Secret resource with: 
-> 
+>
+> You can then create the Secret resource with:
+>
 > ```console
 > $ kubectl create secret generic eab-secret --from-literal \
 >   secret={base64 encoded secret key}
@@ -176,8 +136,8 @@ spec:
 You may want to reuse a single ACME account across multiple clusters. This
 might especially be useful when using EAB. If the `disableAccountKeyGeneration`
 field is set, cert-manager will not create a new ACME account and use the
-existing key specified in `privateKeySecretRef`. Note that the 
-`Issuer`/`ClusterIssuer` will not be ready and will continue to retry until the 
+existing key specified in `privateKeySecretRef`. Note that the
+`Issuer`/`ClusterIssuer` will not be ready and will continue to retry until the
 `Secret` is provided.
 
 ```yaml
@@ -381,6 +341,32 @@ solvers:
       - 'test.example.com'
       - 'example.dev'
 ```
-In this case the `DNS01` solver for CloudFlare will only be used to solve a
+
+In this case the `DNS01` solver for Cloudflare will only be used to solve a
 challenge for a DNS name if the `Certificate` has a label from
 `matchLabels` _and_ the DNS name matches a zone from `dnsZones`.
+
+## Alternative Certificate Chains
+
+{/* This empty link preserves old links to #alternative-certificate-chain", which matched the old title of this section */}
+
+<a id="alternative-certificate-chain" className="hidden-link"></a>
+
+It's possible to choose alternative certificate chains when fetching a certificate from an ACME server. This allows issuers to gracefully roll people over to a new root certificate during a transition period; the most famous example was the Let's Encrypt ["ISRG Root" changeover](https://community.letsencrypt.org/t/transition-to-isrgs-root-delayed-until-jan-11-2021/125516).
+
+This functionality is not exclusive to Let's Encrypt; if your ACME server supports signing by multiple CAs you can use `preferredChain` with the value of the Common Name of the chain you want in the Issuer part of the certificate. If the common name matches a difference chain, the server can choose to use and return that new chain.
+
+If the `preferredChain` does not match a certificate the server will return whatever it considers to be its default certificate.
+
+By way of an example, below is how a user would have requested an alternative chain before the (now completed) "ISRG Root" changeover, but note that since this change has already happened there's no need for this with Let's Encrypt any more:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    preferredChain: "ISRG Root X1"
+```
