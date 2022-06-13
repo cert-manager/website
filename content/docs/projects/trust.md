@@ -3,7 +3,7 @@ title: Trust
 description: 'Distributing Trust Bundles in Kubernetes'
 ---
 
-# Distributing Trust Bundles in Kubernetes
+## Distributing Trust Bundles in Kubernetes
 
 trust is an operator for distributing trust bundles across a Kubernetes cluster.
 trust is designed to complement
