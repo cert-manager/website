@@ -12,3 +12,6 @@ These tools help with security, compliance and control.
 - [Distributing Trust Bundles in Kubernetes](./trust.md): Using the trust
     operator to distribute trust bundles, like CA certificates, across a
     Kubernetes cluster.
+- [Secure istio mesh with cert-manager](./istio-csr.md): istio-csr is an agent
+  that allows for [Istio](https://istio.io) workload and control plane
+  components to be secured using [cert-manager](https://cert-manager.io).

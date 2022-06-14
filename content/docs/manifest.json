@@ -326,6 +326,10 @@
               "path": "/docs/projects/README.md"
             },
             {
+              "title": "istio-csr",
+              "path": "/docs/projects/istio-csr.md"
+            },
+            {
               "title": "trust",
               "path": "/docs/projects/trust.md"
             }
@@ -369,15 +373,6 @@
             {
               "title": "Securing the istio Service Mesh using cert-manager",
               "path": "/docs/tutorials/istio-csr/istio-csr.md"
-            }
-          ]
-        },
-        {
-          "title": "Projects",
-          "routes": [
-            {
-              "title": "istio-csr",
-              "path": "/docs/projects/istio-csr.md"
             }
           ]
         },
