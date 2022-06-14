@@ -311,7 +311,7 @@ page if a step is missing or if it is outdated.
         cmrel makestage --ref=v1.8.0-beta.0
         ```
 
-        This step takes ~5 minutes. It will build all Docker images and create
+        This step takes ~5 minutes. It will build all container images and create
         all the manifest files, sign Helm charts and upload everything to a storage
         bucket on Google Cloud. These artifacts will then be published and released
         in the next steps.
@@ -505,10 +505,9 @@ page if a step is missing or if it is outdated.
        patch releases as we want to encourage users to always install the latest
        patch.
 
-    9. Open a PR against our
-       [Algolia indexing configuration](https://github.com/algolia/docsearch-configs/blob/master/configs/cert-manager.json#L7-L13)
-       including the new version for search indexing, as in
-       [this PR](https://github.com/algolia/docsearch-configs/pull/2278).
+    9. Future: check that our Algolia search indexing is up-to-date for the website - i.e. that the new version of the docs
+       is being indexed correctly. This is listed here as it's a step we should be checking after a release of a major version
+       but at the time of writing we don't know how to do it!
 
     10. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
         bumping the versions of our kubectl plugins.
