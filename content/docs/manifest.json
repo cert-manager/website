@@ -325,6 +325,9 @@
               "title": "Contents",
               "path": "/docs/projects/README.md"
             },
+              "title": "approver-policy",
+              "path": "/docs/projects/approver-policy.md"
+            },
             {
               "title": "istio-csr",
               "path": "/docs/projects/istio-csr.md"
@@ -336,9 +339,6 @@
             {
               "title": "trust",
               "path": "/docs/projects/trust.md"
-            },
-              "title": "approver-policy",
-              "path": "/docs/projects/approver-policy.md"
             }
           ]
         },
