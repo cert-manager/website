@@ -65,17 +65,17 @@ cluster, and then the trust operator. It is advised to run the trust operator in
 the `cert-manager` namespace.
 
 ```bash
-$ helm repo add jetstack https://charts.jetstack.io --force-update
-$ helm upgrade -i -n cert-manager cert-manager jetstack/cert-manager --set installCRDs=true --wait --create-namespace
-$ helm upgrade -i -n cert-manager cert-manager-trust jetstack/cert-manager-trust --wait
+helm repo add jetstack https://charts.jetstack.io --force-update
+helm upgrade -i -n cert-manager cert-manager jetstack/cert-manager --set installCRDs=true --wait --create-namespace
+helm upgrade -i -n cert-manager cert-manager-trust jetstack/cert-manager-trust --wait
 ```
 
 #### Quick Start Example
 
 ```bash
-$ kubectl create -n cert-manager configmap source-1 --from-literal=cm-key=123
-$ kubectl create -n cert-manager secret generic source-2 --from-literal=sec-key=ABC
-$ kubectl apply -f - <<EOF
+kubectl create -n cert-manager configmap source-1 --from-literal=cm-key=123
+kubectl create -n cert-manager secret generic source-2 --from-literal=sec-key=ABC
+kubectl apply -f - <<EOF
 apiVersion: trust.cert-manager.io/v1alpha1
 kind: Bundle
 metadata:
@@ -97,13 +97,13 @@ EOF
 ```
 
 ```bash
-$ kubectl get bundle
+kubectl get bundle
 NAME             TARGET       SYNCED   REASON   AGE
 example-bundle   target-key   True     Synced   5s
 ```
 
 ```bash
-$ kubectl get cm -A --field-selector=metadata.name=example-bundle
+kubectl get cm -A --field-selector=metadata.name=example-bundle
 NAMESPACE            NAME             DATA   AGE
 cert-manager         example-bundle   1      2m18s
 default              example-bundle   1      2m18s
@@ -114,7 +114,7 @@ local-path-storage   example-bundle   1      2m18s
 ```
 
 ```bash
-$ kubectl get cm -n kube-system example-bundle -o jsonpath="{.data['target-key']}"
+kubectl get cm -n kube-system example-bundle -o jsonpath="{.data['target-key']}"
 123
 ABC
 hello world!
