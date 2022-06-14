@@ -3,8 +3,7 @@ title: approver-policy
 description: ''
 ---
 
-[approver-policy](https://github.com/cert-manager/policy-approver) is a
-cert-manager
+approver-policy is a cert-manager
 [approver](https://cert-manager.io/docs/concepts/certificaterequest/#approval)
 that will approve or deny CertificateRequests based on CRD defined policies.
 
