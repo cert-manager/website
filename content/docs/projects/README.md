@@ -9,7 +9,7 @@ functionality, and complement the core cert-manager feature-set.
 
 These tools help with security, compliance and control.
 
-- [istio-csr](./istio-csr.md): Secure istio service mesh with istio-csr which is
+- [istio-csr](./istio-csr.md): Secure Istio service mesh with istio-csr which is
   an agent that allows for [Istio](https://istio.io) workload and control plane
   components to be secured using cert-manager.
 - [approver-policy](./approver-policy.md):
