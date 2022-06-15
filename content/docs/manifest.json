@@ -326,16 +326,16 @@
               "path": "/docs/projects/README.md"
             },
             {
-              "title": "approver-policy",
-              "path": "/docs/projects/approver-policy.md"
-            },
-            {
               "title": "istio-csr",
               "path": "/docs/projects/istio-csr.md"
             },
             {
               "title": "csi-driver",
               "path": "/docs/projects/csi-driver.md"
+            },
+            {
+              "title": "approver-policy",
+              "path": "/docs/projects/approver-policy.md"
             },
             {
               "title": "trust",
