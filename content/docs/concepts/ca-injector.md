@@ -5,16 +5,19 @@ description: 'cert-manager core concepts: CA Injector'
 
 `cainjector` helps to configure the CA certificates for:
 [Mutating Webhooks],
-[Validating Webhooks], and
-[Conversion Webhooks].
+[Validating Webhooks]
+[Conversion Webhooks] and [API Services]
 
-In particular, `cainjector` populates the `caBundle` field of three API types:
+In particular, `cainjector` populates the `caBundle` field of four API types:
 `ValidatingWebhookConfiguration`,
-`MutatingWebhookConfiguration`, and
-`CustomResourceDefinition`.
-These APIs are used to configure how the Kubernetes API server connects to webhooks.
+`MutatingWebhookConfiguration`
+`CustomResourceDefinition` and `APIService`.
+The first three resource types are used to configure how the Kubernetes API server connects to webhooks.
 This `caBundle` data is loaded by the Kubernetes API server and used to verify the serving certificates of webhook API servers.
-We will refer to these three API types as the *injectable* resources.
+`APIService` is used to represent an [Extension API Server]. `caBundle` of `APIService` can be populated with CA cert that can be used to validate the API server's serving certificate.
+
+We will refer to these four API types as *injectable* resources.
+
 
 An *injectable* resource MUST have one of these annotations:
 `cert-manager.io/inject-ca-from`,
@@ -227,3 +230,5 @@ The disadvantages of this mechanism are that: you will require access to the pri
 [Validating Webhooks]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook
 [Mutating Webhooks]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook
 [Conversion Webhooks]: https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#webhook-conversion
+[API Services]: https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/api-service-v1/
+[Extension API Server]: https://kubernetes.io/docs/tasks/extend-kubernetes/setup-extension-api-server/
