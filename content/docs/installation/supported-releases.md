@@ -131,8 +131,7 @@ currently supported releases.
 <h4 id="security-issues">Security issues</h4>
 
 **Security issues** are fixed as soon as possible. They get back-ported to
-the last two releases, and a new patch release is immediately created for
-them.
+the last two releases, and a new patch release is immediately created for them.
 
 <h4 id="critical-bugs">Critical bugs</h4>
 
@@ -149,7 +148,7 @@ Note that [intentional breaking changes](#breaking-changes) do not belong to
 this category.
 
 Fixes for critical bugs are (usually) immediately back-ported by creating a new
-patch release for the two currently supported releases.
+patch release for the currently supported releases.
 
 <h4 id="long-standing-bugs">Long-standing bugs</h4>
 
@@ -167,12 +166,30 @@ Kubernetes API or the command line flags. We avoid making breaking changes
 where possible, and where they're required we'll give as much notice as
 possible.
 
+<h4 id="other-backports">Other back-ports</h4>
+
+We aim to be conservative in what we back-port. That applies especially for anything which
+could be a _runtime_ change - that is, a change which might alter behavior for someone
+upgrading between patch releases.
+
+That means that if a candidate for back-porting has a chance of having a runtime impact we're
+unlikely to accept the change unless it addresses a security issue or a critical bug.
+
+We reserve the right to back-port other changes which are unlikely to have a runtime impact, such as
+documentation or tooling changes. An example would be [#5209][] which updated how we perform a release of
+cert-manager but didn't have any realistic chance of having a runtime impact.
+
+Generally we'll seek to be pragmatic. A rule of thumb might be to ask:
+
+"Does this back-port improve cert-manager, bearing in mind that we really value stability for already-released versions?"
+
 [#3393]: https://github.com/cert-manager/cert-manager/issues/3393 "Broken CloudFlare DNS01 challenge"
 [#2857]: https://github.com/cert-manager/cert-manager/issues/2857 "CloudDNS DNS01 challenge crashes cert-manager"
 [#4142]: https://github.com/cert-manager/cert-manager/issues/4142 "Cannot issue a certificate that has the same subject and issuer"
 [#3444]: https://github.com/cert-manager/cert-manager/issues/3444 "Certificates do not get immediately updated after updating them"
 [#3882]: https://github.com/cert-manager/cert-manager/pull/3882 "Certificate's revision history limit validated by webhook"
 [#3644]: https://github.com/cert-manager/cert-manager/issues/3644 "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
+[#5209]: https://github.com/cert-manager/cert-manager/pull/5209 "release-1.8: rclone"
 
 
 <h2 id="kubernetes-supported-versions">How we determine supported Kubernetes versions</h2>
