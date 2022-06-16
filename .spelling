@@ -53,6 +53,8 @@ CNIs
 CRD
 CRDs
 CSI
+CSIDriver
+CSINode
 CSR
 CSRs
 CVE
@@ -78,6 +80,7 @@ ConfigMap
 CoreDNS
 CronJob
 CryptoKey
+csi-driver
 Ctrl
 DCO
 DHCP
