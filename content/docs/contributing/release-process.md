@@ -215,7 +215,8 @@ page if a step is missing or if it is outdated.
 
        ```bash
        git tag -s -m"v1.8.0-beta.0" v1.8.0-beta.0
-       git push --tags
+       # be sure to push the named tag explicitly; you don't want to push any other local tags!
+       git push origin v1.8.0-beta.0
        ```
 
 5. Generate and edit the release notes:
