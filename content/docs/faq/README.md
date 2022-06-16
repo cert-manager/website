@@ -18,6 +18,40 @@ face:
 
 This is a feature in cert-manager starting in `v0.16` using the `cmctl` CLI. More information can be found on [the renew command's page](../usage/cmctl.md#renew)
 
+### When do certs get re-issued?
+
+To determine if a certificate needs to be re-issued, cert-manager looks at the the spec of `Certificate` resource and latest `CertificateRequest`s as well as the data in `Secret` containing the X.509 certificate.
+
+The issuance process will always get triggered if the:
+
+- `Secret` named on `Certificate`'s spec, does not exist, is missing private key or certificate data or contains corrupt data
+- private key stored in the `Secret` does not match the private key spec on `Certificate`
+- public key of the issued certificate does not match the private key stored in the `Secret`
+- cert-manager issuer annotations on the `Secret` do not match the issuer specified on the `Certificate`
+- DNS names, IP addresses, URLS or email addresses on the issued certificate do not match those on the `Certificate` spec
+- certificate needs to be renewed (because it has expired or the renewal time is now or in the past)
+- certificate has been marked for renewal manually [using `cmctl`](../usage/cmctl.md#renew)
+
+Additionally, if the latest `CertificateRequest` for the `Certificate` is found, cert-manager will also re-issue if:
+
+- the common name on the CSR found on the `CertificateRequest` does not match that on the `Certificate` spec
+- the subject fields on the CSR found on the `CertificateRequest` do not match the subject fields of the `Certificate` spec
+- the duration on the `CertificateRequest` does not match the duration on the `Certificate` spec
+- `isCA` field value on the `Certificate` spec does not match that on the `CertificateRequest`
+- the DNS names, IP addresses, URLS or email addresses on the `CertificateRequest` spec do not match those on the `Certificate` spec
+- key usages on the `CertificateRequest` spec do not match those on the `Certificate` spec
+
+Note that for certain fields re-issuance on change gets triggered only if there
+is a `CertificateRequest` that cert-manager can use to determine whether
+`Certificate`'s spec has changed since the previous issuance. This is because
+some issuers may not respect the requested values for these fields, so we cannot
+rely on the values in the issued X.509 certificates. One such field is
+`.spec.duration`- change to this field will only trigger re-issuance if there is
+a `CertificateRequest` to compare with. In case where you need to re-issue, but
+re-issuance does not get triggered automatically due to there being no
+`CertificateRequest` (i.e after backup and restore), you can use [`cmctl
+renew`](../usage/cmctl.md#renew) to trigger it manually.
+
 ### Why isn't my root certificate in my issued Secret's `tls.crt`?
 
 Occasionally, people work with systems which have made a flawed choice regarding TLS chains. The [TLS spec](https://datatracker.ietf.org/doc/html/rfc5246#section-7.4.2)

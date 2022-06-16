@@ -146,7 +146,7 @@ We have briefly tested backup and restore with `velero` `v1.5.3` and
  for most scenarios.
  `CertificateRequest`s are designed to represent a one-time
  request for an X.509 certificate. Once the request has been fulfilled,
- `CertificateRequest` can usually be safely deleted. In most cases (such as when
+ `CertificateRequest` can usually be safely deleted[^1]. In most cases (such as when
  a `CertificateRequest` has been created for a `Certificate`) a new
  `CertificateRequest` will be created when needed (i.e at a time of a renewal
  of a `Certificate`).
@@ -160,3 +160,8 @@ We have briefly tested backup and restore with `velero` `v1.5.3` and
  and restoring `CertificateRequest`s as the identity of the restorer might
  differ from that of the original creator and in most cases a restored
  `CertificateRequest` would likely end up with incorrect state.
+
+ [^1]: there is an edge case where certain changes to `Certificate` spec may not
+    trigger re-issuance if there is no `CertificateRequest` for that
+    `Certificate`. See [documentation on when do certificates get
+    re-issued](../faq/README.md#when-do-certs-get-re-issued).
