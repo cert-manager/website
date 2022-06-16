@@ -22,20 +22,23 @@ This is a feature in cert-manager starting in `v0.16` using the `cmctl` CLI. Mor
 
 To determine if a certificate needs to be re-issued, cert-manager looks at the the spec of `Certificate` resource and latest `CertificateRequest`s as well as the data in `Secret` containing the X.509 certificate.
 
-Issuance process will always get triggered if:
-- the `Secret` named on `Certificate`'s spec, does not exist, is missing private key or certificate data or contains corrupt data
-- private key stored in the `Secret` does not match private key spec on `Certificate`
-- public key of the issued certificate does not match the private key stored in the `Secret`
-- cert-manager issuer annotations on the `Secret` do not match the issuer specified on `Certificate`
-- DNS names, IP addresses, URLS or email addresses on the issued certificate do not match those on the `Certificate` spec
-- certificate needs to be renewed
+The issuance process will always get triggered if the:
 
-Additionally if the latest `CertificateRequest` for the `Certificate` is found, cert-manager will also re-issue if:
+- `Secret` named on `Certificate`'s spec, does not exist, is missing private key or certificate data or contains corrupt data
+- private key stored in the `Secret` does not match the private key spec on `Certificate`
+- public key of the issued certificate does not match the private key stored in the `Secret`
+- cert-manager issuer annotations on the `Secret` do not match the issuer specified on the `Certificate`
+- DNS names, IP addresses, URLS or email addresses on the issued certificate do not match those on the `Certificate` spec
+- certificate needs to be renewed (because it has expired or the renewal time is now or in the past)
+- certificate has been marked for renewal manually [using `cmctl`](../usage/cmctl.md#renew)
+
+Additionally, if the latest `CertificateRequest` for the `Certificate` is found, cert-manager will also re-issue if:
+
 - the common name on the CSR found on the `CertificateRequest` does not match that on the `Certificate` spec
 - the subject fields on the CSR found on the `CertificateRequest` do not match the subject fields of the `Certificate` spec
 - the duration on the `CertificateRequest` does not match the duration on the `Certificate` spec
 - `isCA` field value on the `Certificate` spec does not match that on the `CertificateRequest`
-- DNS names, IP addresses, URLS or email addresses on the `CertificateRequest` spec do not match those on the `Certificate` spec
+- the DNS names, IP addresses, URLS or email addresses on the `CertificateRequest` spec do not match those on the `Certificate` spec
 - key usages on the `CertificateRequest` spec do not match those on the `Certificate` spec
 
 Note that for certain fields re-issuance on change gets triggered only if there
