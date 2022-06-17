@@ -1,14 +1,13 @@
 ---
-title: istio-csr
+title: csi-driver
 description: ''
 ---
 
 csi-driver is a Container Storage Interface (CSI) driver plugin for Kubernetes
-to work along cert-manager. The goal for this plugin is to facilitate requesting
-and mounting certificate key pairs to pods seamlessly. This is useful for
-facilitating mTLS, or otherwise securing connections of pods with guaranteed
-present certificates whilst having all of the features that cert-manager
-provides.
+to work along cert-manager. The goal for this plugin is to seamlessly request
+and mount certificate key pairs to pods. This is useful for facilitating mTLS,
+or otherwise securing connections of pods with guaranteed present certificates
+whilst having all of the features that cert-manager provides.
 
 ## Why a CSI Driver?
 
