@@ -89,13 +89,30 @@ cert-manager works around this limitation by shipping CRDs in the templates.
 
 ### Helm Subchart capabilities
 
-cert-manager should not be used as a sub-chart in Helm deployments.
+cert-manager now has the capability to install it as a subchart [link]
 
-Helm deployments are namespaced by design and do not support a dependency model that would support cert-manager being operated at cluster scope; nor is it possible using this method to prevent cert-manager being installed twice (with conflicting versions)
-or being upgraded independently from the application.
+But you need to be careful when adding it to your umbrella chart.
 
-The cert-manager installation creates cluster scoped resources like admission webhooks and custom resource definitions. cert-manager should be seen as part of your cluster and should be treated as such for being installed. An apt comparison
+This is because the cert-manager installation creates cluster scoped resources like admission webhooks and custom resource definitions. cert-manager should be seen as part of your cluster and should be treated as such for being installed. An apt comparison
 to other Kubernetes components would be a LoadBalancer controller or a PV provisioner
+
+It is your responsibility to ensure that cert-manager is only installed once in your cluster.
+This can be managed via the `condition` parameter of the dependency in your Chart.yaml, which allows users to disable the installation of a subchart. The condition parameter must be added when using cert-manager as a subchart to allow users to disable your dependency
+
+```yaml
+apiVersion: v2
+name: example_chart
+description: A Helm chart with cert-manager as subchart
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+dependencies:
+  - name: cert-manager
+    version: v1.8.0
+    repository: https://charts.jetstack.io
+    alias: cert-manager
+    condition: cert-manager.enabled
+```
 
 ### Secret injection or copying
 
