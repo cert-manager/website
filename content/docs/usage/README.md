@@ -26,3 +26,6 @@ There are several use cases and methods for requesting certificates through cert
 - [Securing Istio Service Mesh](./istio.md): Using the cert-manager
   [Istio](https://istio.io) integration, secure the mTLS PKI for each pod
   through cert-manager managed certificates.
+- [Policy for cert-manager certificates](./approver-policy.md): Manage
+  what cert-manager certificates are able to be signed or rejected through
+  custom resource defined policy.

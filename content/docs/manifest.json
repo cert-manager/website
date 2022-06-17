@@ -334,6 +334,10 @@
               "path": "/docs/projects/csi-driver.md"
             },
             {
+              "title": "approver-policy",
+              "path": "/docs/projects/approver-policy.md"
+            },
+            {
               "title": "trust",
               "path": "/docs/projects/trust.md"
             }
