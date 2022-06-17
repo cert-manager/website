@@ -89,7 +89,7 @@ cert-manager works around this limitation by shipping CRDs in the templates.
 
 ### Helm Subchart capabilities
 
-cert-manager now has the capability to be [installed as a subchart](./helm.md#installing-cert-manager-as-subchart)
+cert-manager now has the capability to be [installed as a subchart](../installation/helm.md#installing-cert-manager-as-subchart)
 
 But you need to be careful when adding it to your umbrella chart.
 
