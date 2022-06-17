@@ -330,6 +330,10 @@
               "path": "/docs/projects/istio-csr.md"
             },
             {
+              "title": "csi-driver",
+              "path": "/docs/projects/csi-driver.md"
+            },
+            {
               "title": "trust",
               "path": "/docs/projects/trust.md"
             }
