@@ -72,6 +72,11 @@ It could also cause a conflict with different Kubernetes client versions being u
 
 If this is needed it is suggested to use a "dynamic client" that converts the objects into internal structures copied into the cert-manager codebase.
 
+### Additional configuration options for the Helm chart
+
+cert-manager's Helm chart is intended to allow to create a standard, best practices cert-manager installation with basic configuration options, such as being able to provide flags to cert-manager components, label resources etc.
+We do not aim to include every possible configuration option for resources that the chart creates to avoid maintenance burden and because we do not have automated testing for all chart configuration options. Therefore we are likely to not accept PRs that add advanced or niche configuration options to Helm charts- we recommend that users who require that configuration use another mechanism such as [Helm's post-install hooks](https://helm.sh/docs/topics/charts_hooks/).
+
 ### Helm + CRDs
 
 Helm suggests that CRDs be included in a `crds/` subdirectory of a chart, with the `crd-install` annotation included. This has the unfortunate side effect that CRDs are not upgraded if changed in a later release.
