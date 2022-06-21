@@ -160,7 +160,7 @@ namespace as the `Issuer`, or otherwise in the `Cluster Resource Namespace` in
 the case of using a `ClusterIssuer`.
 
 This authentication method also expects a `role` field which is the Vault role
-that the Service Account is to assume, as well as an optional `path` field which
+that the Service Account is to assume, as well as an optional `mountPath` field which
 is the authentication mount path, defaulting to `kubernetes`.
 
 The following example will be making use of the Service Account
