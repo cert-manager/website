@@ -3,9 +3,18 @@ title: Release 1.6
 description: 'cert-manager release notes: cert-manager v1.6'
 ---
 
+## v1.6.3
+
+### Changes since 1.6.2
+
+#### Bug or Regression
+
+- Bumps the version of Go used to build the cert-manager binaries to 1.17.8, to fix a slew of CVEs (none of which were likely to be exploited) ([#4975](https://github.com/cert-manager/cert-manager/pull/4975), [@vhosakot](https://github.com/vhosakot))
+- Fixes an expired hardcoded certificate which broke unit tests ([#4977](https://github.com/cert-manager/cert-manager/pull/4977), [@SgtCoDFish](https://github.com/SgtCoDFish), [@jakexks](https://github.com/jakexks))
+
 ## v1.6.2
 
-In 1.6.2, we have reverted a change that caused a regression in the ACME Issuer. In 1.6.0 and 1.6.1, the Ingress created by cert-manager while solving an HTTP-01 challenge contained the `kubernetes.io/ingress.class` annotation:
+In 1.6.2, we reverted a change that caused a regression in the ACME Issuer. In 1.6.0 and 1.6.1, the Ingress created by cert-manager while solving an HTTP-01 challenge contained the `kubernetes.io/ingress.class` annotation:
 
 ```yaml
 apiVersion: networking.k8s.io/v1beta1
@@ -28,7 +37,7 @@ This broke many users that either don't use an Ingress controller that supports 
 
 The regression is present in cert-manager 1.5.4, 1.6.0, and 1.6.1. It is only present on Kubernetes 1.19+ and only appears when using an Issuer or ClusterIssuer with an ACME HTTP-01 solver configured.
 
-In 1.6.2, we have restored the original behavior which is to use the annotation. This patch is also available in 1.5.5 and in 1.7.0.
+In 1.6.2, we restored the original behavior which is to use the annotation. This patch is also available in 1.5.5 and in 1.7.0.
 
 Most people won't have any trouble upgrading from 1.6.0 or 1.6.1 to 1.6.2. If you are using Gloo, Contour, Skipper, or kube-ingress-aws-controller, you shouldn't have any issues. If you use the default "class" (e.g., `istio` for Istio) for Traefik, Istio, Ambassador, or ingress-nginx, then these should also continue to work without issue.
 
@@ -80,7 +89,7 @@ page.
 
 #### JKS Keystore Minimum Password Length
 
-ℹ️ This no longer applies as it was fixed in `v1.6.1`, but will remain here for 
+ℹ️ This no longer applies as it was fixed in `v1.6.1`, but will remain here for
 informational purposes. If you haven't upgraded cert-manager to `v1.6.0` from any `v1.5`
 release, we recommend upgrading straight to the latest version, skipping `v1.6.0`.
 

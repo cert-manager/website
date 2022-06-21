@@ -229,7 +229,7 @@ metadata:
   namespace: <NAMESPACE YOU WANT TO ISSUE CERTIFICATES IN>
 spec:
   venafi:
-    zone: devops\cert-manager # Set this to the Venafi policy folder you want to use
+    zone: \VED\Policy\devops\cert-manager # Set this to the Venafi policy folder you want to use
     tpp:
       url: https://tpp.venafi.example/vedsdk # Change this to the URL of your TPP instance
       caBundle: <base64 encoded string of caBundle PEM file, or empty to use system root CAs>

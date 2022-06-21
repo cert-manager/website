@@ -186,7 +186,7 @@ feature flag to the cert-manager controller.
 To install the Gateway API CRDs, run the following command:
 
 ```sh
-kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.3.0" | kubectl apply -f -
+kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.4.1" | kubectl apply -f -
 ```
 
 To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
@@ -218,6 +218,21 @@ kubectl rollout restart deployment cert-manager -n cert-manager
 
 </div>
 
+
+<div className="info">
+
+🚧  Since cert-manager 1.8, v1alpha2 is the only supported version of the
+Gateway API. The version v1alpha1 was supported in cert-manager 1.5, 1.6, and
+1.7.
+
+You can read [Upgrading from v1.7 to v1.8][upgrading-1.7-1.8] to know more about
+migrating your Issuer and ClusterIssuer resources that use `gatewayHTTPRoute`
+from v1alpha1 to v1alpha2.
+
+[upgrading-1.7-1.8]: ../../../installation/upgrading/upgrading-1.7-1.8.md
+
+</div>
+
 The Gateway API HTTPRoute HTTP-01 solver creates a temporary HTTPRoute using the
 given labels. These labels must match a Gateway that contains a listener on port
 80.
@@ -235,8 +250,10 @@ spec:
     solvers:
       - http01:
           gatewayHTTPRoute:
-            labels:
-              gateway: http01-solver
+            parentRefs:
+              - name: traefik
+                namespace: traefik
+                kind: Gateway
 ```
 
 The Issuer relies on an existing Gateway present on the cluster. cert-manager
@@ -245,7 +262,7 @@ does not edit Gateway resources.
 For example, the following Gateway will allow the Issuer to solve the challenge:
 
 ```yaml
-apiVersion: networking.x-k8s.io/v1alpha1
+apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: Gateway
 metadata:
   name: traefik
@@ -253,15 +270,12 @@ metadata:
 spec:
   gatewayClassName: traefik
   listeners:
-  - protocol: HTTP
+  - name: http
+    protocol: HTTP
     port: 80
-    routes:
-      kind: HTTPRoute
-      selector:
-        matchLabels:
-          gateway: http01-solver
-      namespaces:
-        from: All
+    allowedRoutes:
+        namespaces:
+          from: All
 ```
 
 In the above example, the Gateway has been specifically created for the purpose
@@ -290,19 +304,18 @@ spec:
   - example.net
 ```
 
-You will see an HTTPRoute appear. The `labels` given to this HTTPRoute are the
-labels configured on the Issuer:
+You will see an HTTPRoute appear:
 
 ```yaml
 kind: HTTPRoute
 metadata:
   name: cm-acme-http-solver-gdhvg
   namespace: default
-  labels:
-    gateway: http01-solver # Copied from Issuer's `gatewayHTTPRoute.labels`.
 spec:
-  gateways:
-    allow: All
+  parentRefs:
+    - name: traefik
+      namespace: traefik
+      kind: Gateway
   hostnames:
   - example.net
   rules:
@@ -339,7 +352,7 @@ cert-manager will perform reachability tests before attempting a HTT01
 challenge.  By default cert-manager will use the recursive nameservers taken
 from `/etc/resolv.conf` to query the challenge URL.
 
-If this is not desired (for example with split-horizon DNS), the cert-manager 
+If this is not desired (for example with split-horizon DNS), the cert-manager
 controller exposes a flag that allows you alter this behavior:
 
 `--acme-http01-solver-nameservers` Comma separated string with host and port of the

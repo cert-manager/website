@@ -20,7 +20,7 @@ when installing cert-manager either using a command line flag or an entry in
 your `values.yaml` file.
 
 If you have a port clash, you could see confusing error messages regarding
-untrusted certs. See [#3237](https://github.com/jetstack/cert-manager/issues/3237)
+untrusted certs. See [#3237](https://github.com/cert-manager/cert-manager/issues/3237)
 for more details.
 </div>
 
@@ -48,12 +48,41 @@ docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#ad
 ### GKE Autopilot
 
 GKE Autopilot mode with Kubernetes < 1.21 does not support cert-manager,
-due to a [restriction on mutating admission webhooks](https://github.com/jetstack/cert-manager/issues/3717).
+due to a [restriction on mutating admission webhooks](https://github.com/cert-manager/cert-manager/issues/3717).
 
 As of October 2021, only the "rapid" Autopilot release channel has rolled
 out version 1.21 for Kubernetes masters. Installation via the helm chart
 may end in an error message but cert-manager is reported to be working by
 some users. Feedback and PRs are welcome.
+
+**Problem**: GKE Autopilot does not allow modifications to the `kube-system`-namespace.
+
+Historically we've used the `kube-system` namespace to prevent multiple installations of cert-manager in the same cluster.
+
+Installing cert-manager in these environments with default configuration can cause issues with bootstrapping.
+Some signals are:
+
+* `cert-manager-cainjector` logging errors like:
+
+```text
+E0425 09:04:01.520150       1 leaderelection.go:334] error initially creating leader election record: leases.coordination.k8s.io is forbidden: User "system:serviceaccount:cert-manager:cert-manager-cainjector" cannot create resource "leases" in API group "coordination.k8s.io" in the namespace "kube-system": GKEAutopilot authz: the namespace "kube-system" is managed and the request's verb "create" is denied
+```
+
+* `cert-manager-startupapicheck` not completing and logging messages like:
+
+```text
+Not ready: the cert-manager webhook CA bundle is not injected yet
+```
+
+**Solution**: Configure cert-manager to use a different namespace for leader election, like this:
+
+```console
+helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version ${CERT_MANAGER_VERSION} --set global.leaderElection.namespace=cert-manager
+```
 
 ## AWS EKS
 
@@ -73,7 +102,7 @@ port; see the warning at the top of the page for details.
 
 It's worth noting that using AWS Fargate doesn't allow much network configuration and
 will cause the webhook's port to clash with the kubelet running on port 10250, as seen
-in [#3237](https://github.com/jetstack/cert-manager/issues/3237).
+in [#3237](https://github.com/cert-manager/cert-manager/issues/3237).
 
 When deploying cert-manager on Fargate, you _must_ change the port on which
 the webhook listens. See the warning at the top of this page for more details.
