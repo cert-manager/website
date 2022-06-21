@@ -100,6 +100,9 @@ trigger Certificate resources to be automatically created:
   `spec.usages` field for the Certificate to be generated. Pass a string with
   comma-separated values i.e "key agreement,digital signature, server auth"
 
+- `cert-manager.io/revision-history-limit`: (optional) this annotation allows you to
+  configure `spec.revistionHistoryLimit` field to limit the number of CertificateRequests to be kept for a Certificate. Minimum value is 1. If unset all CertificateRequests will be kept.
+
 
 ## Optional Configuration
 
