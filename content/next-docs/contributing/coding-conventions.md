@@ -26,7 +26,7 @@ import (
 ```
 
 An example might be the following, taken from
-[`pkg/acme/accounts/client.go`](https://github.com/jetstack/cert-manager/blob/0c71fe7795858b96cabcddabf706d997cd2fba3f/pkg/acme/accounts/client.go):
+[`pkg/acme/accounts/client.go`](https://github.com/cert-manager/cert-manager/blob/0c71fe7795858b96cabcddabf706d997cd2fba3f/pkg/acme/accounts/client.go):
 
 ```go
 import (
@@ -38,11 +38,11 @@ import (
 
 	acmeapi "golang.org/x/crypto/acme"
 
-	acmecl "github.com/jetstack/cert-manager/pkg/acme/client"
-	acmeutil "github.com/jetstack/cert-manager/pkg/acme/util"
-	cmacme "github.com/jetstack/cert-manager/pkg/apis/acme/v1"
-	"github.com/jetstack/cert-manager/pkg/metrics"
-	"github.com/jetstack/cert-manager/pkg/util"
+	acmecl "github.com/cert-manager/cert-manager/pkg/acme/client"
+	acmeutil "github.com/cert-manager/cert-manager/pkg/acme/util"
+	cmacme "github.com/cert-manager/cert-manager/pkg/apis/acme/v1"
+	"github.com/cert-manager/cert-manager/pkg/metrics"
+	"github.com/cert-manager/cert-manager/pkg/util"
 )
 ```
 
