@@ -10,6 +10,7 @@ do this is to use extensions such as:
    for auto secret reflection
   - [kubed](https://github.com/appscode/kubed) with its 
   [secret syncing feature](https://appscode.com/products/kubed/v0.11.0/guides/config-syncer/intra-cluster/)
+  - [kubernetes-replicator](https://github.com/mittwald/kubernetes-replicator) secret replication
 
 ## Serving a wildcard to ingress resources in different namespaces (default SSL certificate)
 
@@ -62,7 +63,7 @@ spec:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"  
       reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "dev,staging,prod"  # Control destination namespaces
       reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true" # Auto create reflection for matching namespaces
-      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "dev,staging,prod" # Control auto-reflection namespaces
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "dev,staging,prod" # Control auto-reflection namespaces
 ```
 
 
@@ -94,6 +95,47 @@ spec:
   secretTemplate:
     annotations:
       kubed.appscode.com/sync: "cert-manager-tls=sandbox" # Sync certificate to matching namespaces
+```
+
+
+### Using `kubernetes-replicator`
+Replicator supports both push- and pull-based replication. Push-based
+replication will "push out" the TLS secret into namespaces when new ones are
+created, or when the secret changes. Pull-based replication makes it possible
+to create an empty TLS secret in the destination namespace and select a
+"source" resource from which the data is replicated from. The following example
+shows the pull-based approach:
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: source
+  namespace: cert-manager
+spec:
+  secretName: source-tls
+  commonName: source
+  issuerRef:
+    name: source-ca
+    kind: Issuer
+  secretTemplate:
+    annotations:
+      replicator.v1.mittwald.de/replication-allowed: "true"  # permit replication
+      replicator.v1.mittwald.de/replication-allowed-namespaces: "dev,test,prod-[0-9]*"  # comma separated list of namespaces or regular expressions
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tls-secret-replica
+  namespace: prod-1
+  annotations:
+    replicator.v1.mittwald.de/replicate-from: cert-manager/source-tls
+type: kubernetes.io/tls
+# Normally, we'd create an empty destination secret, but secrets of type
+# 'kubernetes.io/tls' are treated in a special way and need to have properties
+# data["tls.crt"] and data["tls.key"] to begin with, though they may be empty.
+data:
+  tls.key: ""
+  tls.crt: ""
 ```
 
 [CertificateSecretTemplate]: ../reference/api-docs.md#cert-manager.io/v1.CertificateSecretTemplate
