@@ -10,11 +10,11 @@ See [Regression: HTTP-01 challenges fail with Istio, Traefik, ingress-gce and Az
 
 In v1.5.5, v1.6.2 and 1.7.1 we fixed this problem.
 
-If you have cert-manager v1.5.3 (or below) you should skip v1.5.4. Instead:
+If you have cert-manager v1.5.3 (or below) you should skip v1.5.4 and instead:
 
 - upgrade to v1.5.5
-- then the newest version of v1.6
-- and then the newest version of v1.7
+- then the newest version of cert-manager 1.6
+- and then the newest version of cert-manager 1.7
 
 and you can ignore the rest of this document.
 
@@ -50,11 +50,21 @@ compatibility is to only use the annotation, even when creating `v1` Ingresses.
 ## ingress-nginx
 
 If you chose not to use the IngressClass `nginx` that is created by default by the Helm chart
-(e.g., you named the IngressClass `nginx-outside`), you will need to add the flag
-`--ingress-class` to your ingress-nginx deployment:
+(e.g., you named the IngressClass `nginx-outside`), you will need to add the flags
+`--ingress-class` and `--ingress-class-by-name` to your ingress-nginx deployment:
 
 ```
---ingress-class=nginx-outside
+--ingress-class=nginx-outside --ingress-class-by-name=true
+```
+
+In case you are using the Helm chart, you will need to use at least these values:
+
+```yaml
+ingressClassResource:
+  name: nginx-outside
+  controllerValue: k8s.io/ingress-nginx-outside
+ingressClassByName: true
+ingressClass: nginx-outside
 ```
 
 ## Istio
