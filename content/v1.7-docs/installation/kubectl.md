@@ -19,7 +19,7 @@ are included in a single YAML manifest file:
 Install all cert-manager components:
 
 ```bash
-$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.2/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.3/cert-manager.yaml
 ```
 
 By default, cert-manager will be installed into the `cert-manager`
@@ -38,7 +38,7 @@ running `kubectl apply`.
 If you have already run `kubectl apply`, you should run it again after elevating your permissions:
 
 ```bash
-$ kubectl create clusterrolebinding cluster-admin-binding \
+kubectl create clusterrolebinding cluster-admin-binding \
     --clusterrole=cluster-admin \
     --user=$(gcloud config get-value core/account)
 ```
@@ -55,7 +55,7 @@ by users have been deleted. You can check for any existing resources with the
 following command:
 
 ```bash
-$ kubectl get Issuers,ClusterIssuers,Certificates,CertificateRequests,Orders,Challenges --all-namespaces
+kubectl get Issuers,ClusterIssuers,Certificates,CertificateRequests,Orders,Challenges --all-namespaces
 ```
 
 Once all these resources have been deleted you are ready to uninstall
@@ -73,7 +73,7 @@ Delete the installation manifests using a link to your currently running version
 > be removed by Kubernetes' garbage collector.
 
 ```bash
-$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
+kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
 ```
 
 ### Namespace Stuck in Terminating State
@@ -86,5 +86,5 @@ this, ensure you have run the above commands correctly, and if you're still
 experiencing issues then run:
 
 ```bash
-$ kubectl delete apiservice v1beta1.webhook.cert-manager.io
+kubectl delete apiservice v1beta1.webhook.cert-manager.io
 ```
