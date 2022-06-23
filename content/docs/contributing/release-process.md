@@ -232,7 +232,7 @@ page if a step is missing or if it is outdated.
         | `START_REV`\*     | The git tag of the "previous"\* release |
         | `END_REV`         | Name of your release branch (inclusive) |
         | `BRANCH`          | Name of your release branch             |
-        | `RELEASE_VERSION` | The git tag without the leading `v`     |
+        | `RELEASE_VERSION` | The git tag                             |
 
         Examples for each release type (e.g., initial alpha release):
 
@@ -245,7 +245,7 @@ page if a step is missing or if it is outdated.
         | `START_TAG`\*     | `v1.2.0`         | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.2.0`\*\*  | `v1.3.0`      |
         | `END_REV`         | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `BRANCH`          | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
-        | `RELEASE_VERSION` | `1.3.0-alpha.0`  | `1.3.0-alpha.1`  | `1.3.0-beta.0`   | `1.3.0`       | `1.3.1`       |
+        | `RELEASE_VERSION` | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.3.0-beta.0`  | `v1.3.0`      | `v1.3.1`      |
 
         > \*The git tag of the "previous" release (`START_TAG`) depends on which
         > type of release you count on doing. Look at the above examples to
@@ -260,7 +260,7 @@ page if a step is missing or if it is outdated.
         the variables in your shell (for example, following the example 1):
 
         ```sh
-        export RELEASE_VERSION="1.3.0-alpha.0"
+        export RELEASE_VERSION="v1.3.0-alpha.0"
         export BRANCH="release-1.3"
         export START_TAG="v1.2.0"
         export END_REV="release-1.3"
@@ -275,7 +275,7 @@ page if a step is missing or if it is outdated.
         git fetch origin $BRANCH:$BRANCH
         export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
         release-notes --debug --repo-path cert-manager \
-          --org jetstack --repo cert-manager \
+          --org cert-manager --repo cert-manager \
           --required-author "jetstack-bot" \
           --output release-notes.md
         ```
@@ -309,7 +309,7 @@ page if a step is missing or if it is outdated.
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel makestage --ref=v1.8.0-beta.0
+        cmrel makestage --ref=$RELEASE_VERSION
         ```
 
         This step takes ~5 minutes. It will build all container images and create

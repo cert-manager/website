@@ -3,6 +3,37 @@ title: Release 1.8
 description: 'cert-manager release notes: cert-manager v1.8'
 ---
 
+## v1.8.2
+
+v1.8.2 is in effect a bug fix release which increases some hard-coded timeouts which were preventing the use of certain ACME issuers
+which sometimes had slower response times. This is known to include ZeroSSL and Sectigo.
+
+These issues were reported by many users, who we listed and thanked on the [GitHub release](https://github.com/cert-manager/cert-manager/releases/tag/v1.8.2).
+
+### Changes since v1.8.1
+
+#### Bug
+
+- Increase timeouts for `Issuer` and `ClusterIssuer` controllers to 2 minutes and increase ACME client HTTP timeouts to 90 seconds, in order to enable the use of slower ACME issuers which take a long time to process certain requests. ([#5231](https://github.com/cert-manager/cert-manager/pull/5231), [@JoooostB](https://github.com/JoooostB) [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+#### Other (Cleanup or Flake)
+
+- Bump distroless base images to latest versions ([#5235](https://github.com/cert-manager/cert-manager/pull/5235), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+## v1.8.1
+
+v1.8.1 is a patch release rebuilding cert-manager 1.8 using the latest version of Go, and reverting a previous commit which had negatively affected some GitOps workflows.
+
+### Changes since v1.8.0
+
+#### Bug
+
+- Reverts a check for Prometheus APIs before creating cert-manager `ServiceMonitor`s which broke users' GitOps flows ([#5204](https://github.com/cert-manager/cert-manager/pull/5204))
+
+#### Cleanup
+
+- Bumps the version of Go used to build the cert-manager binaries to 1.17.11 which fixes a few CVEs (although we don't think that any of those CVEs were likely to be exploited in cert-manager) ([#5203](https://github.com/cert-manager/cert-manager/pull/5203), [@irbekrm](https://github.com/irbekrm))
+
 ## v1.8.0
 
 cert-manager 1.8 includes wider support for Kubernetes server-side-apply, a new build and development experience based around

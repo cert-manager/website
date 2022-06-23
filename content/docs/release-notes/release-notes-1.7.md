@@ -3,6 +3,23 @@ title: Release 1.7
 description: 'cert-manager release notes: cert-manager v1.7'
 ---
 
+## v1.7.3
+
+v1.7.3 is in effect a bug fix release which increases some hard-coded timeouts which were preventing the use of certain ACME issuers
+which sometimes had slower response times. This is known to include ZeroSSL and Sectigo.
+
+These issues were reported by many users, who we listed and thanked on the [GitHub release](https://github.com/cert-manager/cert-manager/releases/tag/v1.7.3).
+
+### Changes since v1.7.2
+
+#### Bug
+
+- Increase timeouts for `Issuer` and `ClusterIssuer` controllers to 2 minutes and increase ACME client HTTP timeouts to 90 seconds, in order to enable the use of slower ACME issuers which take a long time to process certain requests. ([#5232](https://github.com/cert-manager/cert-manager/pull/5232), [@JoooostB](https://github.com/JoooostB) [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+#### Other (Cleanup)
+
+- Bumps go to 1.17.11 and bumps base images to latest distroless images ([#5234](https://github.com/cert-manager/cert-manager/pull/5234), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
 ## v1.7.2
 
 ### Changes since 1.7.1
