@@ -383,6 +383,35 @@
               "path": "/docs/tutorials/istio-csr/istio-csr.md"
             },
             {
+              "title": "Securing Ingresses with ZeroSSL",
+              "path": "/docs/tutorials/zerossl/zerossl.md"
+            }
+          ]
+        },
+        {
+          "title": "FAQ",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/faq/README.md"
+            },
+            {
+              "title": "TLS Terminology",
+              "path": "/docs/faq/terminology.md"
+            },
+            {
+              "title": "Troubleshooting Issuing ACME Certificates",
+              "path": "/docs/faq/acme.md"
+            },
+            {
+              "title": "Cluster Resource Namespace",
+              "path": "/docs/faq/cluster-resource.md"
+            },
+            {
+              "title": "Writing “cert-manager”",
+              "path": "/docs/faq/style.md"
+            },
+            {
               "title": "Syncing Secrets Across Namespaces",
               "path": "/docs/tutorials/syncing-secrets-across-namespaces.md"
             }
