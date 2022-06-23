@@ -134,6 +134,7 @@ JetstackHQ
 JoshVanL
 Jsonnet
 Juneezee
+JoooostB
 KUARD
 Kirill-Garbar
 Knative
@@ -407,9 +408,12 @@ v1.7
 v1.7.0
 v1.7.1
 v1.7.2
+v1.7.3
 v1.8
 v1.8.
 v1.8.0
+v1.8.1
+v1.8.2
 v1alpha1
 v1alpha2
 v1alpha3
@@ -442,6 +446,8 @@ GSoC
 ncm-issuer
 Nokia
 Netguard
+ZeroSSL
+Sectigo
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
