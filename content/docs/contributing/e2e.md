@@ -22,76 +22,102 @@ Google group to receive email notifications when tests fail.
 
 ## Requirements
 
-There are a small number of required tools which **must** be installed on your machine
-to run the tests:
-
-- `bazel`: Builds cert-manager and the end-to-end tests themselves
-- `kind`: Provisions a Kubernetes cluster inside docker.
-- `docker`: Required by kind.
-- `kubectl`: A relatively new version of `kubectl` should be available on your `$PATH`.
+There are no special requirements for the end-to-end tests. All dependencies can be
+provisioned automatically through the make build system.
 
 ## Set up End-to-End Tests
 
-The test requires a kind cluster to run against. Note that the tests assume a certain configuration
-for the kind cluster, and you should be sure to use this script rather than creating a cluster manually
-unless you're sure you've mimicked the required configuration:
+### Create a Cluster
+
+You can create a kind cluster using Make:
 
 ```console
-$ export K8S_VERSION=1.19 # optional: this allows you to test different Kubernetes versions
-$ ./devel/cluster/create-kind.sh
-...
+# Create a cluster using whatever K8s version is default, named "kind"
+make e2e-setup-kind
+
+# Create a cluster using K8s 1.23 named "keith"
+make K8S_VERSION=1.23 KIND_CLUSTER_NAME=keith e2e-setup-kind
 ```
 
-There are also certain dependencies which the test requires, which can also be installed using
-a helper script:
+**IMPORTANT:** the kind cluster will be set up using a specific service CIDR range to enable certain functionality in end-to-end tests. This CIDR range is not currently configurable.
+
+Once complete, the cluster is available via `kubectl` as you'd expect.
+
+### Install Test Dependencies
+
+There are various dependencies which the end-to-end tests require, all of which can also
+be installed via Make:
 
 ```console
-$ ./devel/setup-e2e-deps.sh
+make e2e-setup
 ```
 
-**TIP**: If you only need to update one dependency in the testing cluster, you can instead run
-`./devel/addon/<name>/install.sh` to save some time.
+If you only need to update or reinstall one of these dependencies in your test cluster, you can instead install named components explicitly to save some time.
+
+The most common use case for this is to **reinstall cert-manager itself**, say if you've made a change
+locally and want to test that change in a cluster:
+
+```console
+# Most important: reinstall cert-manager, including rebuilding changed containers locally
+make e2e-setup-certmanager
+
+# An example of reinstalling something else; reinstall bind
+make e2e-setup-bind
+
+# More generally, see make/e2e-setup.mk for different targets!
+```
 
 ## Run End-to-End Tests
 
-The following script will run the tests. Note that the tests produce a lot of output, and take
-some time (often well over 30 minutes) to complete:
+As with setup, running tests is available through make. In fact, you can just run `make e2e` directly
+and avoid having to set anything up manually!
 
 ```console
-$ ./devel/run-e2e.sh
-... lots of output ...
+# Set up a cluster using the defaults if one's not already present, and then run the end-to-end tests
+make e2e
+
+# Set up a K8s 1.23 cluster and then run tests
+make K8S_VERSION=1.23 e2e
+
+# Run tests exactly as they're run in CI; usually not needed
+make e2e-ci
 ```
 
-**NB:** If you don't use `create-kind.sh` to create the kind cluster, the ACME HTTP01 end-to-end tests will fail,
-as they require the 'service CIDR' to be set to `10.0.0.0/16`.
-
-This is because the ingress controller is deployed with the fixed IP `10.0.0.15` to allow
-[Pebble](https://github.com/letsencrypt/pebble) to access it on a predictable address for end-to-end tests; our
-test DNS name `certmanager.kubernetes.network` points to `10.0.0.15`.
-
-If you don't want to run every test, you can focus on specific parts using `--ginkgo.focus`:
+If you don't want to run every test you can focus on specific tests using `GINKGO_FOCUS` syntax, as described in the
+[Ginkgo documentation](https://onsi.github.io/ginkgo/#focused-specs):
 
 ```console
-$ ./devel/run-e2e.sh --ginkgo.focus "<text regex>"
-
-# example: run any test which has "basicConstraint" in the description
-$ ./devel/run-e2e.sh --ginkgo.focus "basicConstraint"
+make GINKGO_FOCUS=".*my test description" e2e
 ```
 
-More info on how to use this can be found in the [Ginkgo focused-specs documentation](https://onsi.github.io/ginkgo/#focused-specs)
+## Cluster IP Details
+
+As mentioned above, the end-to-end tests expect that certain components are deployed in a
+specific way and even at specific IP addresses.
+
+By way of illustration, the following cluster components are deployed with specific IPs:
+
+| Component / Make Target    | Used in                    | IP          | DNS A Record                            |
+| -------------------------- | -------------------------- | ----------- | --------------------------------------- |
+| `e2e-setup-bind`           | DNS-01 tests               | `10.0.0.16` |                                         |
+| `e2e-setup-ingressnginx`   | HTTP-01 `Ingress` tests    | `10.0.0.15` | `*.ingress-nginx.db.http01.example.com` |
+| `e2e-setup-projectcontour` | HTTP-01 `GatewayAPI` tests | `10.0.0.14` | `*.gateway.db.http01.example.com`       |
+
+If you don't set these components up correctly, you might see that the ACME HTTP01 (and other) end-to-end tests fail.
 
 ## End-to-End Test Structure
 
-The end-to-end tests consist of 2 big parts: the issuer specific tests and the conformance suite. Both parts use
-[Ginkgo](https://onsi.github.io/ginkgo/#getting-ginkgo) to run their tests.
+The end-to-end tests consist of 2 main parts: issuer specific tests and the conformance suite.
+
+Both parts use [Ginkgo](https://onsi.github.io/ginkgo/#getting-ginkgo) to run their tests under the hood.
 
 ### Conformance Suite
 
-### RBAC
+#### RBAC
 
 This suite tests all RBAC permissions granted to cert-manager on the cluster to check that it is able to operate correctly.
 
-### Certificates
+#### Certificates
 
 This suite tests certificate functionality against all issuers.
 
@@ -113,7 +139,7 @@ The infrastructure used to run the e2e tests on cloud providers is present in th
 
 Apart from that, tests for the existing infrastructure can be customized by editing their respective prow jobs present in the [Jetstack testing repository](https://github.com/jetstack/testing/tree/master/config/jobs/cert-manager) repository. Values like the cert-manager version or the cloud provider version are present as variables in Terraform so their values can be changed when using `terraform apply` in the prow jobs, for example, for the [EKS prow job](https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/cert-manager-periodics.yaml#L524) the cert-manager version being tested can be changed using
 
-```
+```console
 terraform apply -var="cert_manager_version=v1.3.3" -auto-approve
 ```
 
