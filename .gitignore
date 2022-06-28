@@ -47,3 +47,6 @@ public/feed.*
 
 # ignore netlify-cli tmp dir
 .netlify/
+
+# IntelliJ
+.idea
