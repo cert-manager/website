@@ -136,6 +136,14 @@ istioctl install -f istio-install-config.yaml
 # istioctl install --set profile=openshift -f istio-install-config.yaml
 ```
 
+You will be prompted for input to confirm your choice of Istio profile:
+
+```console
+This will install the Istio 1.14.1 demo profile with ["Istio core" "Istiod" "Ingress gateways" "Egress gateways"] components into the cluster. Proceed? (y/N)
+```
+
+Confirm your selection by entering `y` into the console to proceed with installation.
+
 ## Validating Install
 
 The following steps are option but can be followed to validate everything is hooked correctly:
@@ -265,4 +273,4 @@ namespace or application.
 Assuming your running inside kind, you can simply remove the cluster:
 
 ```shell
-kind delete cluster kind
+kind delete cluster
