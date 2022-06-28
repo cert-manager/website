@@ -92,10 +92,10 @@ There may be a situation where you want to specify the namespace to install cert
 
 This is a [known issue](https://github.com/helm/helm/issues/5358) with helm and subcharts, that you can't specify the namespace for the subchart and is being solved by most public charts by allowing users to set the namespace via the values file, but needs to be a capability added to the chart by the maintainers.
 
-This capability is now available in the cert-manager chart and can be set either in the values file or via the `--set` switch
+This capability is now available in the cert-manager chart and can be set either in the values file or via the `--set` switch.
 
 #### Example usage
-Below is an example Chart.yaml with cert-manager as a subchart 
+Below is an example `Chart.yaml` with cert-manager as a subchart 
 ```yaml
 apiVersion: v2
 name: example_chart
@@ -111,7 +111,7 @@ dependencies:
     condition: cert-manager.enabled
 ```
 You can then override the namespace in 2 ways
-1. In Values.yaml file
+1. In `Values.yaml` file
 ```yaml
 cert-manager: #defined by either the name or alias of your dependency in Chart.yaml
   namespace: security
@@ -124,7 +124,7 @@ helm install example example_chart \
   --set cert-manager.namespace=security
 ```
 
-The above example will install cert-manager into the security namespace
+The above example will install cert-manager into the security namespace.
 
 ## Output YAML
 

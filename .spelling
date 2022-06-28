@@ -594,3 +594,5 @@ x509
 x509
  - content/v0.16-docs/usage/kubectl-plugin.md
 x509
+subchart
+subcharts
