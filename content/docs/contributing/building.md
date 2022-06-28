@@ -3,123 +3,211 @@ title: Building cert-manager
 description: 'cert-manager contributing guide: Building cert-manager'
 ---
 
-cert-manager makes use of [Bazel](https://bazel.build/) to build the project. 
-Bazel manages all developer dependencies, Helm chart building, Docker images and the code itself. 
-We try to use it as much as possible.
-We currently use Bazel `v4.2.1`. The minimum supported version is `v4.0.0`.
+cert-manager is built and tested using [make](https://www.gnu.org/software/make/manual/make.html), with a focus on using the standard Go tooling
+where possible and keeping system dependencies to a minimum. The cert-manager build system can provision most of its dependencies - including Go -
+automatically if required.
 
-> **TIP**: are you using GoLand? Make sure to exclude the `bazel-` folders! You can do this by right clicking on the folder -> Mark Directory As -> Excluded
-> This will save you a ton of CPU time!
+cert-manager's build system fully supports developers who use `Linux amd64`, `macOS amd64` and `macOS arm64`. Other operating systems and architectures may
+work, but are largely untested.
 
-> **TIP**: are you sitting on a corporate network with internal PKI? Bazel does not honor custom CA certificates by default, but depending on your OS
-> a [clean workaround might be available](https://groups.google.com/g/bazel-discuss/c/13uPDObyfQg/m/UjPbalztCQAJ).
+## Prerequisites
 
-## A quick intro to Bazel
+There are very few other requirements needed for developing cert-manager, and crucially the build system should tell you with a friendly error
+message if there's anything missing. If you think an error message which relates to a missing dependency is unhelpful, we consider that a bug and
+we'd appreciate if you raised [an issue](https://github.com/cert-manager/cert-manager/issues/new?assignees=&labels=&template=bug.md) to tell us about it!
 
-Bazel has 3 main commands which we use:
+You should install the following tools before you start developing cert-manager:
 
-`bazel build [...]` will build and compile code for you e.g. `bazel build //cmd/ctl` will build our CLI. 
-`bazel test [...]` will run any tests for a given package
-`bazel run [...]` is only used to run certain scripts not the compiled code (unlike Go). e.g. `bazel run //hack/bin:helm` will download and run Helm.
+- [git](https://git-scm.com/)
+- [curl](https://curl.se/)
+- GNU Coreutils (available via [homebrew](https://formulae.brew.sh/formula/coreutils) for macOS)
+- `jq` (available in package managers and in homebrew)
+- `docker` (or `podman`, see [Container Engines](#container-engines) below)
 
-### Package format
+## Getting Started
 
-After any Bazel command you will see something that looks like a path.
-Let's take `bazel run //hack/bin:helm` as an example:
+The vast majority of commands which you're likely to need to use are documented via `make help`. That's probably the first place to start if you're
+developing cert-manager. We'll also provide an overview on this page of some of the key targets and things to bear in mind.
 
-* `//` is the cert-manager project root, no matter in which directory under cert-manager you are it will find it
-* `hack/bin` is the path where the code is to execute/build/test you will for example see `pkg/acme/` to run ACME tests
-* `:helm` is the part of the Bazel file to execute, these are defined in the Bazel config themselves.
+### Go Versions
 
-> **TIP**: `...` is a recursive lookup in Bazel, it will run al tests in all subfolders when set, it is also the easiest way to invoke them.
-> For example `bazel test //pkg/...` will test all tests in all packages.
+cert-manager can be built with the version of Go you've installed locally on your system. Alternatively, you can "vendor" Go to ensure you use the
+same version that's built with in CI.
 
-## Help so much Bazel!
+To check which version of Go is _currently_ being used, run: `make which-go`.
 
-No worries we have a lot of helper scripts for you!
-Need to set up a local cluster and install cert-manager in it? Take a look at [our kind documentation](./kind.md).
+To start using a vendored Go, run: `make vendor-go`. You only need to run `vendor-go` once and it'll be "sticky", being used for all future make invocations
+in your local checkout.
 
-We also have a few very handy tools inside `./hack` and `./devel`. These are the most common ones which you can use:
+To return to using your system version of go, run: `make unvendor-go`.
 
-### Just update everything you can!
+### Parallelism
 
-Bazel takes care of a lot of automatic code generation for us, from generating CRD updates to updating its own `BUILD.bazel` files.
-If you just want to do everything at once (and have 5 minutes of your time) you can run:
+The cert-manager Makefile is designed to be highly parallel wherever possible. Any build and test commands should be able to be executed in parallel using
+standard Make functionality.
 
-```bash 
-$ ./hack/update-all.sh
-```
+One important caveat is that that Go will default to detecting the number of cores available on the system and spinning up as many threads as it can. If you're
+using Make functionality to run multiple builds in parallel, this number of threads can be excessive and actually lead to slower builds.
 
-This will update everything you need without having to care about what needs changing.
+It's possible to limit the number of threads Go uses we'd generally recommend doing so when using Make parallelism.
 
-> **NOTE:** we strongly recommend running this before you create a PR!
+The best values to use will depend on your system, but we've had success using around half of the available number of cores for Make and limiting Go to between
+2 and 4 threads per core.
 
-### I need granular control 
+For example, using an 8-core machine:
 
-You can also pick and mix the individual bash helper scripts:
-
-* `update-bazel.sh`: updates the all `*.bazel` files including formatting them
-* `update-codegen.sh`: runs all code generation
-* `update-crds.sh`: updates all CRD files to the latest scheme
-* `update-deps-licenses.sh`: updates the `LICENCES` file, needed when adding/updating dependencies
-* `update-deps.sh`: installs new dependencies declared in the code and adds them into the Bazel and Go module files
-* `update-gofmt.sh`: runs `go fmt` on all code
-
-Most of these have a `verify-*` equivalent which will run inside our CI to verify all the scripts ran before merging the PR.
-
-## Building the project
-
-You can ask Bazel to build the code for you to run in your local machine.
-The output will end up in `bazel-out` on your disk.
-
-You can get the exact path by looking at the Bazel output:
-```
-Target //cmd/ctl:ctl up-to-date:
-  bazel-out/k8-fastbuild-ST-4c64f0b3d5c7/bin/cmd/ctl/kubectl-cert_manager
-```
-
-### Building the Go binaries (for local OS)
-
-You can build the controllers to run them locally using:
 ```bash
-$ bazel build //cmd/...
+# Run 4 make targets in parallel, and limit each `go build` to 2 threads.
+make GOMAXPROCS=2 -j4 release-artifacts
 ```
-If you need them inside a local cluster check out [our kind documentation](./kind.md).
 
-### Building the CLI
+## Testing
 
-You can use `go run ./cmd/ctl` to quickly run the CLI.
-You can also compile it using Bazel:
+cert-manager's build pipeline and <abbr title="continuous integration">CI</abbr> infrastructure uses the same Makefile that you use when developing locally,
+so there should be no divergence between what the tests run and what you run. That means you should be able to be pretty confident that any changes you make
+won't break when tested in CI.
+
+### Running Local Changes in a Cluster
+
+It's common that you might want to run a local Kubernetes cluster with your locally-changed copy of cert-manager in it, for manual testing.
+
+There are make targets to help with this; see [Developing with Kind](./kind.md) for more information.
+
+### Unit and Integration Tests
+
+First of all: If you want to test using `go test`, feel free! For unit tests (which we define as any test outside of the `test/` directory), `go test` will
+work on a fresh checkout.
+
+Integration tests may require some external tools to be set up first, so to run the integration tests inside `test/` you might need to run:
+
 ```bash
-$ bazel build //cmd/ctl
+make setup-integration-tests
 ```
 
-### Building images
+Helper targets are also available which use [`gotestsum`](https://github.com/gotestyourself/gotestsum) for prettier output. It's also possible to
+configure these targets to run specific tests:
 
-If you need the Docker images you can generate these using:
 ```bash
-$ export APP_VERSION="dev"
-$ export DOCKER_REGISTRY="quay.io/jetstack"
-$ bazel run \
-		--stamp \
-		--platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 \
-		//build:server-images
+# Run all unit and integration tests
+make test
+
+# Run only unit tests
+make unit-test
+
+# Run only integration tests
+make integration-test
+
+# Run all tests in pkg
+make WHAT=./pkg/... test
+
+# Run unit and integration tests exactly as run in CI
+# (NB: usually not needed - this is mostly for JUnit test output for dashboards)
+make test-ci
 ```
 
-`--stamp` enables reproducible builds while `--platforms` defines which images to build, in this example for AMD64 Linux.
+### End-to-End Testing
 
-## Testing the project 
+cert-manager's end-to-end tests are a little more involved and have [dedicated documentation](./e2e.md) describing their use.
 
-cert-manager has 3 kinds of tests, which can each be invoked separately to give you granular control.
+### Other Checks
 
-* Unit tests: you can either use `go test` (or your IDE) here, or Bazel. For example `bazel test //pkg/acme/...` runs all tests in the ACME package
-* Integration tests: `bazel test //test/integration/...` will run all integration tests against a Bazel operated `kube-apiserver`
-* End-to-end tests: see the [e2e documentation](./e2e.md)
+We run a variety of other tools on every Pull Request to check things like formatting, import ordering and licensing. These checks can all be run locally:
 
-> **TIP**: `...` is a recursive lookup in Bazel, it will run all tests in all subfolders when set, it is also the easiest way to invoke them.
+```bash
+make ci-presubmit
+```
 
+NB: One of these checks currently requires Python 3 to be installed, which is a unique requirement in the code base. We'd like to remove that requirement in the future.
 
-## But... I like Makefiles more
+## Updating CRDs and Code Generation
 
-We got you covered! The root of the repo has a `Makefile` which you can use for quick actions. Which will use Bazel in the background.
-We recommend [looking at the file](https://github.com/cert-manager/cert-manager/blob/master/Makefile) to learn all possible options.
+Changes to cert-manager's CRDs require some code generation to be done, which will be checked on every pull request.
+
+If you make changes to cert-manager CRDs, you'll need to run some commands locally before raising your PR.
+
+This is documented in our [CRDs](./crds.md) section.
+
+## Building
+
+cert-manager produces many artifacts for a lot of different OS / architecture combinations, including:
+
+- Container images
+- Client binaries (`cmctl` and `kubectl_cert-manager`)
+- Manifests (Helm charts, static YAML)
+
+All of these artifacts can be built locally using make.
+
+### Containers
+
+cert-manager's most important artifacts are the containers which actually run cert-manager in a cluster. We default to using `docker` for this,
+but aim to support docker-compatible CLI tools such as `podman`, too. See [Container Engines](#container-engines) for more info.
+
+There are several targets for building different cert-manager containers locally. These will all default to using `docker`:
+
+```bash
+# Build everything for every architecture
+make all-containers
+
+# Build just the controller containers on every architecture
+make cert-manager-controller-linux
+
+# As above, but for the webhook, cainjector, acmesolver and cmctl containers
+make cert-manager-webhook-linux
+make cert-manager-cainjector-linux
+make cert-manager-acmesolver-linux
+make cert-manager-ctl-linux
+```
+
+#### Container Engines
+
+NB: This section doesn't apply to end-to-end tests, which might not work outside of Docker at the time of writing. See the [end-to-end documentation](./e2e.md#container-engines)
+for more information.
+
+It's possible to use an alternative container engine to build cert-manager containers. This has been successfully tested using `podman`.
+
+Configure an alternative container engine by setting the `CTR` variable:
+
+```bash
+# Build everything for every architecture, using podman
+make CTR=podman all-containers
+```
+
+### Client Binaries
+
+Both `cmctl` and `kubectl_cert-manager` can be built locally for a release. These binaries are built for Linux, macOS and Windows across several architectures.
+
+```bash
+# Build all cmctl binaries for all platforms, then for linux only, then for macOS only, then for Windows only
+make cmctl
+make cmctl-linux
+make cmctl-darwin
+make cmctl-windows
+
+# As above but for kubectl_cert-manager
+make kubectl_cert-manager
+make kubectl_cert-manager-linux
+make kubectl_cert-manager-darwin
+make kubectl_cert-manager-windows
+```
+
+### Manifests
+
+We use "manifests" as a catch-all term for non-binary artifacts which we build as part of a release including static installation YAML and our Helm chart.
+
+Everything can be built using make:
+
+```bash
+make helm-chart
+make static-manifests
+```
+
+### Everything
+
+Sometimes it's useful to build absolutely everything locally, to be sure that a change didn't break some obscure architecture and to build confidence when raising a PR.
+
+It's not easy to build a _complete_ release locally since a full release includes signatures which depend on KMS keys being configured. Most users probably don't
+need that, though, and for this use case there's a make target which will build everything except the signed artifacts:
+
+```bash
+make GOMAXPROCS=2 -j4 release-artifacts
+```
