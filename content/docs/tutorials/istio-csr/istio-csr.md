@@ -136,7 +136,7 @@ istioctl install -f istio-install-config.yaml
 # istioctl install --set profile=openshift -f istio-install-config.yaml
 ```
 
-You will be prompted for input to confirm your choice of istio profile:
+You will be prompted for input to confirm your choice of Istio profile:
 
 ```console
 This will install the Istio 1.14.1 demo profile with ["Istio core" "Istiod" "Ingress gateways" "Egress gateways"] components into the cluster. Proceed? (y/N)
