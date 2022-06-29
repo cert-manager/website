@@ -448,6 +448,8 @@ Nokia
 Netguard
 ZeroSSL
 Sectigo
+subchart
+subcharts
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
@@ -594,5 +596,3 @@ x509
 x509
  - content/v0.16-docs/usage/kubectl-plugin.md
 x509
-subchart
-subcharts
