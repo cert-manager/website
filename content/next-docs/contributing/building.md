@@ -20,9 +20,11 @@ You should install the following tools before you start developing cert-manager:
 
 - [git](https://git-scm.com/)
 - [curl](https://curl.se/)
-- GNU Coreutils (available via [homebrew](https://formulae.brew.sh/formula/coreutils) for macOS)
-- `jq` (available in package managers and in homebrew)
+- [GNU make](https://www.gnu.org/software/make/manual/make.html), `v3.82` or newer
+- GNU Coreutils (usually already installed on Linux, available via [homebrew](https://formulae.brew.sh/formula/coreutils) for macOS)
+- `jq` (available in Linux package managers and in [homebrew](https://formulae.brew.sh/formula/jq))
 - `docker` (or `podman`, see [Container Engines](#container-engines) below)
+- `Go` (optional; see [Go Versions](#go-versions) below)
 
 ## Getting Started
 
@@ -31,15 +33,39 @@ developing cert-manager. We'll also provide an overview on this page of some of 
 
 ### Go Versions
 
-cert-manager can be built with the version of Go you've installed locally on your system. Alternatively, you can "vendor" Go to ensure you use the
-same version that's built with in CI.
+cert-manager defaults to using whatever version of Go you've installed locally on your system. If you want to use your system Go, that's totally fine.
 
-To check which version of Go is _currently_ being used, run: `make which-go`.
+Alternatively, make can provision and "vendor" Go specifically for cert-manager, helping to ensure you use the same version that's used in CI and to
+make it easier to get started developing.
 
-To start using a vendored Go, run: `make vendor-go`. You only need to run `vendor-go` once and it'll be "sticky", being used for all future make invocations
-in your local checkout.
+To start using a vendored Go, run: `make vendor-go`.
+
+You only need to run `vendor-go` once and it'll be "sticky", being used for all future make invocations in your local checkout.
 
 To return to using your system version of go, run: `make unvendor-go`.
+
+To check which version of Go is _currently_ being used, run: `make which-go`, which prints the version number of Go and the path to the Go binary.
+
+```console
+# Use a vendored version of go
+$ make vendor-go
+cd _bin/tools/ && ln -f -s ../downloaded/tools/_go-1.XY.Z-linux-amd64/goroot .
+cd _bin/tools/ && ln -f -s ../downloaded/tools/_go-1.XY.Z-linux-amd64/goroot/bin/go .
+
+# A path to go inside the cert-manager directory indicates that a vendored Go is being used
+$ make which-go
+go version go1.XY.Z linux/amd64
+go binary used for above version information: /home/user/workspace/cert-manager/_bin/tools/go
+
+# Go back to the system Go
+$ make unvendor-go
+rm -rf _bin/tools/go _bin/tools/goroot
+
+# The binary is now "go" which should be found in $PATH
+$ make which-go
+go version go1.AB.C linux/amd64
+go binary used for above version information: go
+```
 
 ### Parallelism
 
