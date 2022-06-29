@@ -78,6 +78,7 @@ ClusterRoles
 ClusterServiceVersion
 ConfigMap
 CoreDNS
+Coreutils
 CronJob
 CryptoKey
 csi-driver
@@ -85,6 +86,7 @@ Ctrl
 DCO
 DHCP
 DNS01
+DNS-01
 DNSPod
 DNSimple
 DaemonSet
@@ -267,6 +269,8 @@ hardcoded
 honour
 hostname
 https
+homebrew
+Homebrew
 i.e.
 ingress-gce
 ingress-nginx
@@ -422,6 +426,7 @@ v2
 v3
 vCert
 vendoring
+vendored
 versioning
 wallrj
 webhook

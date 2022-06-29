@@ -3,27 +3,38 @@ title: DCO Sign Off
 description: 'cert-manager contributing: DCO Sign-off'
 ---
 
-All authors to the project retain copyright to their work. However, to ensure
-that they are only submitting work that they have rights to, we are requiring
-everyone to acknowledge this by signing their work.
+All contributors to the project retain copyright to their work, but must only submit
+work which they have the rights to submit.
 
-Any copyright notices in this repo should specify the authors as "the Jetstack
-cert-manager contributors".
+We require all contributors to acknowledge that they have the rights to the code they're contributing
+by signing their commits in git using a "DCO Sign Off". Note that this is different to "commit signing"
+using something like PGP or [`gitsign`](https://github.com/sigstore/gitsign)!
 
-To sign your work, just add a line like this at the end of your commit message:
+Any copyright notices in a cert-manager repo should specify the authors as
+"The cert-manager Authors".
 
+To sign your work, pass the `--signoff` option to `git commit` or `git rebase`:
+
+```bash
+# Sign off a commit as you're making it
+git commit --signoff -m"my commit"
+
+# Add a signoff to the last commit you made
+git commit --amend --signoff
+
+# Rebase your branch against master and sign off every commit in your branch
+git rebase --signoff master
 ```
+
+This will add a line similar to the following at the end of your commit:
+
+```text
 Signed-off-by: Joe Bloggs <joe@example.com>
 ```
 
-This can easily be done with the `--signoff` option to `git commit`.
-You can also mass sign-off a whole PR with `git rebase --signoff master`,
-replacing `master` with the branch you are creating a pull request again if
-not master.
+By signing off a commit you're stating that you certify the following:
 
-By doing this you state that you certify the following (from [https://developercertificate.org/](https://developercertificate.org/)):
-
-```
+```text
 Developer Certificate of Origin
 Version 1.1
 
@@ -62,3 +73,5 @@ By making a contribution to this project, I certify that:
     maintained indefinitely and may be redistributed consistent with
     this project or the open source license(s) involved.
 ```
+
+That statement is taken from [https://developercertificate.org/](https://developercertificate.org/).
