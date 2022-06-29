@@ -85,6 +85,47 @@ helm install \
 
 Once you have deployed cert-manager, you can [verify](./verify.md) the installation.
 
+### Installing cert-manager as subchart
+If you have configured cert-manager as a subchart all the components of cert-manager will be installed into the namespace of the helm release you are installing.
+
+There may be a situation where you want to specify the namespace to install cert-manager different to the umbrella chart's namespace.
+
+This is a [known issue](https://github.com/helm/helm/issues/5358) with helm and subcharts, that you can't specify the namespace for the subchart and is being solved by most public charts by allowing users to set the namespace via the values file, but needs to be a capability added to the chart by the maintainers.
+
+This capability is now available in the cert-manager chart and can be set either in the values file or via the `--set` switch.
+
+#### Example usage
+Below is an example `Chart.yaml` with cert-manager as a subchart 
+```yaml
+apiVersion: v2
+name: example_chart
+description: A Helm chart with cert-manager as subchart
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+dependencies:
+  - name: cert-manager
+    version: v1.8.0
+    repository: https://charts.jetstack.io
+    alias: cert-manager
+    condition: cert-manager.enabled
+```
+You can then override the namespace in 2 ways
+1. In `Values.yaml` file
+```yaml
+cert-manager: #defined by either the name or alias of your dependency in Chart.yaml
+  namespace: security
+```
+2. In the helm command using `--set`
+```bash
+helm install example example_chart \
+  --namespace example \
+  --create-namespace \
+  --set cert-manager.namespace=security
+```
+
+The above example will install cert-manager into the security namespace.
+
 ## Output YAML
 
 Instead of directly installing cert-manager using Helm, a static YAML manifest can be created using the [Helm template command](https://helm.sh/docs/helm/helm_template/).
