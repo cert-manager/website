@@ -1,4 +1,8 @@
-# Getting Started With Cert-Manager
+---
+title: Getting Started
+description: Learn how to deploy cert-manager in your Kubernetes cluster and how to configure it to sign SSL certificates using Let's Encrypt
+---
+
 # Introduction
 In this section, we will discuss how to deploy a cert-manager for your Kubernetes cluster. Typically, the TLS or SSL certificates are stored as Kubernetes secrets. These certificates are utilized by various namespaces to further be consumed by applications or ingress controllers. However, these certificates come with an expiry date which can vary for each certificate. Not timely updating these certificates can cause issues and disruptions.
 
