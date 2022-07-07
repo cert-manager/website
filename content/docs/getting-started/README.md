@@ -7,7 +7,9 @@ In this tutorial you will learn how to deploy and configure cert-manager.
 You will learn how to create an SSL certificate using Let's Encrypt.
 And finally you will learn how that certificate can be used in Kubernetes to serve an HTTPS website.
 
-> 🔰 Let’s Encrypt is an Internet service that allows you to generate free short-lived SSL certificates automatically.
+> **Let’s Encrypt**: An Internet service. Allows you to generate free short-lived SSL certificates.<br/>
+> **Kubernetes**: Runs on your servers. Automates the deployment, scaling, and management of containerized applications.<br/>
+> **cert-manager**: Runs in Kubernetes. Obtains TLS / SSL certificates and ensures the certificates are valid and up-to-date.
 
 ## Prerequisites
 
