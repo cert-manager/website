@@ -50,44 +50,77 @@ kubectl -n cert-manager get all
 
 > ℹ️ Learn about other ways to install cert-manager by reading the [Installing cert-manager Section](../installation).
 
-## Configure a Certificate Issuer
+## 3. Check that cert-manager is working
 
-Once the cert-manager has been installed, we need to tie it with a certificate authority.  To do so, we need an issuer. An issuer is used to define the certificate authority to be used. If you already have an issuer, skip this section.
+Once the cert-manager has been installed, you can check that it is working by configuring it to create a test SSL certificate in a temporary Kubernetes namespace.
 
-1. To test certificate generation, create a temporary namespace.
+Open a text editor and create a new file called `cert-manager-test.yaml` with the following content:
 
-        $ kubectl create ns cert-manager-test
+```yaml
+# cert-manager-test.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager-test
 
-    The code below shows what information does an issuer have.
+---
 
-    TBD
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: test-selfsigned
+  namespace: cert-manager-test
+spec:
+  selfSigned: {}
 
-2. To deploy the issuer, run the following command:
+---
 
-        $ kubectl apply -f ./selfsigned/issuer.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: selfsigned-cert
+  namespace: cert-manager-test
+spec:
+  dnsNames:
+    - example.com
+  secretName: selfsigned-cert-tls
+  issuerRef:
+    name: test-selfsigned
+```
 
-    An issuer will be created.
-    The next step is to request a certificate. To do so, we will use a `certificate.yaml` file. The code below shows how does the certificate.yaml file look like:
+Now apply that configuration to the Kubernetes cluster:
 
-    TBD
+```bash
+kubectl apply -f cert-manager-test.yaml
+```
 
-    The cert-manager will go ahead and request a certificate from the issuer and place the certificate in the `secretName` which in this case is `selfsigned-cert-tls`. Similarly, the issuer being used `test-selfsigned` that we have just deployed.
+An Issuer and a Certificate will be created.
+You'll learn more about those resources shortly.
+For now, you just need to check whether cert-manager has processed the Certificate.
+It should have created a Secret called selfsigned-cert-tls containing a `tls.key` and a `tls.crt`.
 
-## Generate a Certificate
+```bash
+kubectl describe secrets -n cert-manager-test selfsigned-cert-tls
+```
 
-1. With all the resources and issuers deployed, the next step is to generate a certificate.
+The output should look something like this:
 
-        $ kubectl apply -f ./selfsigned/certificate.yaml
+```console
+Name:         selfsigned-cert-tls
+Namespace:    cert-manager-test
+Type:  kubernetes.io/tls
 
-2. The cert-manager will now look at the **create a certiifcate request** for the issuer and then create a secret. You can then go ahead and describe that certificate using the following command:
+Data
+====
+ca.crt:   1021 bytes
+tls.crt:  1021 bytes
+tls.key:  1675 bytes
+```
 
-        $ kubectl describe certificate -n cert-manager-test
+> ℹ️ Read more about [Kubernetes Secrets and how to use them](https://kubernetes.io/docs/concepts/configuration/secret/).
 
-3. To view the certificate, list the secrets in that namespace by executing the following:
 
-        $ kubectl get secrets -n cert-manager-test
 
-   A secret will be created in our cluster, ready to use.
 
 ### Setup Ingress Controller
 In Kubernetes Cluster, there is an Ingress Controller that accepts public traffic. In this example, we will use an existing ingress controller to accept the incoming web requests for the let’s encrypt challenge. This will allow us to solve the let’s encrypt challenge.
