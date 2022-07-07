@@ -13,9 +13,10 @@ And finally you will learn how that certificate can be used in Kubernetes to ser
 
 ## Prerequisites
 
-1. [minikube](https://minikube.sigs.k8s.io/docs/start/): minikube quickly sets up a local Kubernetes cluster on macOS, Linux, and Windows.
+You will need to install the following software on your laptop:
 
-To get started, let's create a Kubernetes cluster. If your Kubernetes cluster already exists, then skip the first step.
+1. [minikube](https://kubernetes.io/docs/tasks/tools/#minikube): Quickly set up a local Kubernetes cluster on macOS, Linux, and Windows.
+2. [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl): The Kubernetes command-line tool which allows you to configure Kubernetes clusters.
 
 1. In the Kubernetes cluster, there is a utility called kind that will spin up lightweight Kubernetes cluster. Use the following command to create a Kubernetes cluster.
 
