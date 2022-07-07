@@ -7,14 +7,6 @@ In this tutorial you will learn how to deploy and configure cert-manager.
 You will learn how to create an SSL certificate using Let's Encrypt.
 And finally you will learn how that certificate can be used in Kubernetes to serve an HTTPS website.
 
-## Introduction
-In this section, we will discuss how to deploy a cert-manager for your Kubernetes cluster. Typically, the TLS or SSL certificates are stored as Kubernetes secrets. These certificates are utilized by various namespaces to further be consumed by applications or ingress controllers. However, these certificates come with an expiry date which can vary for each certificate. Not timely updating these certificates can cause issues and disruptions.
-
-## The Challenge
-There can be two main reasons for the disruption:
-* The first reason is human error. The more Kubernetes cluster or namespaces there are, the more effort it would take to put in to manually update and maintain them. Also, there can be chances of missing out on one or more clusters and it can cause downtime.
-* The second reason is the security of the certificates. Long-term certificates that have an expiry date of two years have more chances of security breaches. Kubernetes provides a way to protect the certificates using RBAC, but cluster administrators still have access to them.
-
 ### What is Let’s Encrypt?
 Let’s Encrypt is a certificate authority that allows to generate free short-lived certificates automatically. To get a certificate, run a certbot on the server. It forwards a request for certificate to Let’s Encrypt which in return provides a challenge. The certbot successfully fulfills the challenge, upon which Let’s Encrypt provides the certificate. You can automate this process using a cron job.
 
