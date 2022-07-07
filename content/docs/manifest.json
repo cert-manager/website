@@ -8,6 +8,10 @@
           "path": "/docs/README.md"
         },
         {
+            "title": "Getting Started",
+            "path": "/docs/getting-started/getting-started.md"
+        },
+        {
           "title": "Installation",
           "routes": [
             {
