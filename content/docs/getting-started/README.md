@@ -9,12 +9,6 @@ And finally you will learn how that certificate can be used in Kubernetes to ser
 
 > 🔰 Let’s Encrypt is an Internet service that allows you to generate free short-lived SSL certificates automatically.
 
-### How is YAML File Used?
-In the Yaml file, simply specify the domain for which the certificate is required, along with the secret for where the certificate will be stored in. The cert-manager will interact with the CA and place the newly issued certificate in the specified Kubernetes secret. It will also replace the Kubernetes secret with a new one when it is about to expire. This means you can get free and automated SSL certificate generation with complete certificate lifecycle management.
-
-### What is cert-manager?
-Cert-manager is a Kubernetes add-on that automates the management and issuance of TLS certificate. It looks at different issuers, certificate objects, and pods. We can use the cert-managr using a yaml file. The [cert-manager documentation](https://cert-manager.io/docs/) provides a good description about how to use Let’s encrypt, create certificate objects, and pull up certificate requests.
-
 ## Step-by-Step Process
 ### Prerequisites
 * You must have a working container
