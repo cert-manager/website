@@ -319,6 +319,31 @@
           ]
         },
         {
+          "title": "Projects",
+          "routes": [
+            {
+              "title": "Contents",
+              "path": "/docs/projects/README.md"
+            },
+            {
+              "title": "istio-csr",
+              "path": "/docs/projects/istio-csr.md"
+            },
+            {
+              "title": "csi-driver",
+              "path": "/docs/projects/csi-driver.md"
+            },
+            {
+              "title": "approver-policy",
+              "path": "/docs/projects/approver-policy.md"
+            },
+            {
+              "title": "trust",
+              "path": "/docs/projects/trust.md"
+            }
+          ]
+        },
+        {
           "title": "Tutorials",
           "routes": [
             {
@@ -352,6 +377,10 @@
             {
               "title": "Securing Ingresses with Venafi",
               "path": "/docs/tutorials/venafi/venafi.md"
+            },
+            {
+              "title": "Securing the istio Service Mesh using cert-manager",
+              "path": "/docs/tutorials/istio-csr/istio-csr.md"
             }
           ]
         },
@@ -455,7 +484,7 @@
                     },
                     {
                       "title": "Improve the Navigation and Structure of the cert-manager Website",
-                      "path": "/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure/index.md"
+                      "path": "/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure.md"
                     }
                   ]
                 }

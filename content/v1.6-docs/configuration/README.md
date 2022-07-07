@@ -17,4 +17,3 @@ When using `ClusterIssuer` resource types, ensure you understand the purpose of 
 [`Cluster Resource Namespace`](../faq/cluster-resource.md); this can be a common source
 of issues for people getting started with cert-manager.
 
-## Supported Issuer Types

@@ -3,25 +3,30 @@ title: CA
 description: 'cert-manager configuration: CA Issuers'
 ---
 
-The CA issuer represents a Certificate Authority whereby its certificate and
-private key are stored inside the cluster as a Kubernetes `Secret`, and will be
-used to sign incoming certificate requests. This internal CA certificate can
-then be used to trust resulting signed certificates.
+⚠️ CA issuers are generally either for trying cert-manager out or else for advanced users with
+a good idea of how to run a PKI. To be used safely in production, CA issuers introduce complex
+planning requirements around rotation, trust store distribution and disaster recovery.
 
-This issuer type is typically used in a Public Key Infrastructure (PKI) setup to
-secure your infrastructure components to establish mTLS or otherwise provide a
-means to issue certificates where you also own the private key. Signed
-certificates will _not_ be trusted by clients, such a web browser, by default.
+If you're not planning to run your own PKI, use a different issuer type.
+
+The CA issuer represents a Certificate Authority whose certificate and
+private key are stored inside the cluster as a Kubernetes `Secret`.
+
+Certificates issued by a CA issuer will not be publicly trusted and so are unlikely to be trusted
+by your applications without further configuration work. Consider the [cert-manager/trust](../projects/trust.md)
+project for distributing trust stores.
 
 ## Deployment
 
-In order to create your CA issuer, you must first submit your CA certificate and
-signing private key to the Kubernetes API server so that cert-manager is able to
-retrieve them and sign certificates. This secret should reside in the same
-namespace as the `Issuer`, or otherwise in the `Cluster Resource Namespace` in
-the case of a `ClusterIssuer`. The `Cluster Resource Namespace` is defaulted as
-being the `cert-manager` namespace, however can be configured using the
-`--cluster-resource-namespace` flag on the cert-manager controller component.
+CA Issuers must be configured with a certificate and private key stored in a Kubernetes
+secret. You can create this externally if you wish, or you could bootstrap a root certificate
+using a [`SelfSigned` issuer](./selfsigned.md#bootstrapping-ca-issuers).
+
+Your certificate's secret should reside in the same namespace as the `Issuer`, or otherwise
+in the `Cluster Resource Namespace` in the case of a `ClusterIssuer`.
+
+The `Cluster Resource Namespace` is defaulted as being the `cert-manager` namespace, but
+can be configured using the `--cluster-resource-namespace` flag on the cert-manager controller.
 
 Below is an example of a secret resource that will be used for signing. Take
 note of the index keys used for each field as these are required in order for
@@ -61,8 +66,10 @@ spec:
   ca:
     secretName: ca-key-pair
 ```
-Optionally, you can specify [CRL](https://en.wikipedia.org/wiki/Certificate_revocation_list) Distribution Points. An array of strings each of which identifies the location of the CRL from which the revocation of this certificate can be checked:
-```
+
+Optionally, you can specify [CRL](https://en.wikipedia.org/wiki/Certificate_revocation_list) Distribution Points; an array of strings each of which identifies the location of the CRL from which the revocation of this certificate can be checked.
+
+```yaml
 ...
 spec:
   ca:
@@ -70,11 +77,11 @@ spec:
     crlDistributionPoints:
     - "http://example.com"
 ```
+
 Once deployed, you can then check that the issuer has been successfully
 configured by checking the ready status of the certificate. Replace `issuers`
 here with `clusterissuers` if that is what has been deployed.
 
-configured for the CLI.
 ```bash
 $ kubectl get issuers ca-issuer -n sandbox -o wide
 NAME          READY   STATUS                AGE

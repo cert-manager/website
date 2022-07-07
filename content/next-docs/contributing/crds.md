@@ -3,40 +3,63 @@ title: CRDs
 description: 'cert-manager contribution guide: CRDs'
 ---
 
-cert-manager is a heavy user of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/).
-Chances are high that you may need to change something in our Custom Resource Definition. This guide will give you some tips!
+cert-manager uses [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) to define
+the resources which users interact with when using cert-manager, such as `Certificate`s and `Issuer`s.
 
-## Generating updates
+When changes are made to the CRDs in code, there are a couple of extra steps which are required.
 
-We use [`controller-gen`](https://book.kubebuilder.io/reference/controller-gen.html) to update our CRDs.
-This all is handled using Bazel, just run:
+## Generating CRD Updates
+
+We use [`controller-gen`](https://book.kubebuilder.io/reference/controller-gen.html) to update our CRDs, and [`k8s-code-generator`](https://github.com/kubernetes/code-generator)
+for code generation.
+
+Verifying and updating CRDs and generated code can be done entirely through make. There are two steps; one will update CRDs and one will update generated code:
+
 ```bash
-$ ./hack/update-all.sh
-```
+# Check that CRDs and codegen are up to date
+make verify-crds verify-codegen
 
-This will also update the version conversion code if needed.
+# Update CRDs based on code
+make update-crds
+
+# Update generated code based on CRD defintions in code
+make update-codegen
+```
 
 ## Versions
 
-cert-manager currently has a single `v1` API version.
+cert-manager currently has a single `v1` API version for public use.
 
-The API types are defined in [`//pkg/apis/certmanager`](https://github.com/cert-manager/cert-manager/tree/master/pkg/apis/certmanager). ACME related resources are in [`//pkg/apis/acme`](https://github.com/cert-manager/cert-manager/tree/master/pkg/apis/certmanager).
+cert-manager API types are defined in [`pkg/apis/certmanager`](https://github.com/cert-manager/cert-manager/tree/master/pkg/apis/certmanager).
 
-Code comments on API type fields are being converted into documentation on our website as well as the output of `kubectl explain`.
-These comments should be written to be user-facing not developer-facing, they also break the Go standards of code comments on purpose for this reason.
+ACME related resources are in [`pkg/apis/acme`](https://github.com/cert-manager/cert-manager/tree/master/pkg/apis/acme).
 
-We also have an internal API version, it lives at [`//pkg/internal/apis`](https://github.com/cert-manager/cert-manager/tree/master/pkg/internal/apis).
-This is a version that is only used for validation and conversion, controllers should not use it as it is not meant to be user-friendly and not stable.
+### Code Comments
+
+Code comments on API type fields are converted into documentation on this website as well as appearing in the output of `kubectl explain`.
+
+That means that `go doc`-style comments on API fields should be written to be user-facing and not developer-facing. For this reason it's also fine to break from
+usual Go standards regarding code comments when editing these fields.
+
+### Internal API Versions
+
+cert-manager also has an internal API version which lives under [`internal/apis`](https://github.com/cert-manager/cert-manager/tree/master/internal/apis).
+
+The internal version is only used for validation and conversion and controllers should not generally use it; it's not intended to be user-friendly or stable and can change.
 However all new fields also have to be added here for the conversion logic to work.
 
-See the [official Kubernetes docs for CRD versioning](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/) to understand conversion, which versions are stored and served etc.
-
+For details on conversion and versions, see the [official Kubernetes docs for CRD versioning](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/).
 
 ## Kubebuilder
 
-While cert-manager doesn't fully use Kubebuilder for everything CRDs can make use of special Kubebuilder flags such as [validation flags](https://book.kubebuilder.io/reference/markers/crd-validation.html). We recommend reading the Kubebuilder book to learn more about them!
+While cert-manager doesn't fully use Kubebuilder, CRDs can make use of special Kubebuilder flags such as [validation flags](https://book.kubebuilder.io/reference/markers/crd-validation.html).
 
+## Making Changes to APIs
 
-## Making changes to API
+Please see our [API compatibility promise](../installation/api-compatibility.md) for details on which types of changes to APIs are acceptable.
 
-Please see our [API compatibility promise](../installation/api-compatibility.md) to understand what changes to API are acceptable- the gist of it is that new fields can be added, but not removed. This also means that when a field is added to a version of the API, it can no longer be removed and its name cannot be changed- so we try to be cautious when adding new fields. Same applies to [constants and enumerated types](https://kubernetes.io/docs/reference/using-api/deprecation-policy/#enumerated-or-constant-values).
+Generally, the gist is that new fields can be added but that existing fields cannot be removed.
+
+This also means that when a field is added to a version of the API, it's permanent and its name cannot be changed. Because of this, we try to be cautious when adding new fields.
+
+The same principles apply to [constants and enumerated types](https://kubernetes.io/docs/reference/using-api/deprecation-policy/#enumerated-or-constant-values).

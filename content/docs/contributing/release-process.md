@@ -74,8 +74,11 @@ following conditions:
 
 </div>
 
-First, ensure that you have all the tools required to perform a cert-manager
-release:
+This guide applies for versions of cert-manager released using `make`, which should be every version from cert-manger 1.8 and later.
+
+**If you need to release a version of cert-manager 1.7 or earlier** see [older releases](#older-releases).
+
+First, ensure that you have all the tools required to perform a cert-manager release:
 
 1. Install the [`release-notes`](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md) CLI:
 
@@ -213,7 +216,8 @@ page if a step is missing or if it is outdated.
 
        ```bash
        git tag -s -m"v1.8.0-beta.0" v1.8.0-beta.0
-       git push --tags
+       # be sure to push the named tag explicitly; you don't want to push any other local tags!
+       git push origin v1.8.0-beta.0
        ```
 
 5. Generate and edit the release notes:
@@ -229,7 +233,7 @@ page if a step is missing or if it is outdated.
         | `START_REV`\*     | The git tag of the "previous"\* release |
         | `END_REV`         | Name of your release branch (inclusive) |
         | `BRANCH`          | Name of your release branch             |
-        | `RELEASE_VERSION` | The git tag without the leading `v`     |
+        | `RELEASE_VERSION` | The git tag                             |
 
         Examples for each release type (e.g., initial alpha release):
 
@@ -242,7 +246,7 @@ page if a step is missing or if it is outdated.
         | `START_TAG`\*     | `v1.2.0`         | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.2.0`\*\*  | `v1.3.0`      |
         | `END_REV`         | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `BRANCH`          | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
-        | `RELEASE_VERSION` | `1.3.0-alpha.0`  | `1.3.0-alpha.1`  | `1.3.0-beta.0`   | `1.3.0`       | `1.3.1`       |
+        | `RELEASE_VERSION` | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.3.0-beta.0`  | `v1.3.0`      | `v1.3.1`      |
 
         > \*The git tag of the "previous" release (`START_TAG`) depends on which
         > type of release you count on doing. Look at the above examples to
@@ -257,7 +261,7 @@ page if a step is missing or if it is outdated.
         the variables in your shell (for example, following the example 1):
 
         ```sh
-        export RELEASE_VERSION="1.3.0-alpha.0"
+        export RELEASE_VERSION="v1.3.0-alpha.0"
         export BRANCH="release-1.3"
         export START_TAG="v1.2.0"
         export END_REV="release-1.3"
@@ -272,7 +276,7 @@ page if a step is missing or if it is outdated.
         git fetch origin $BRANCH:$BRANCH
         export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
         release-notes --debug --repo-path cert-manager \
-          --org jetstack --repo cert-manager \
+          --org cert-manager --repo cert-manager \
           --required-author "jetstack-bot" \
           --output release-notes.md
         ```
@@ -306,17 +310,13 @@ page if a step is missing or if it is outdated.
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel makestage --ref=v1.8.0-beta.0
+        cmrel makestage --ref=$RELEASE_VERSION
         ```
 
-        This step takes ~5 minutes. It will build all Docker images and create
+        This step takes ~5 minutes. It will build all container images and create
         all the manifest files, sign Helm charts and upload everything to a storage
         bucket on Google Cloud. These artifacts will then be published and released
         in the next steps.
-
-        <div className="pageinfo pageinfo-info"><p>
-        🔰 Remember to keep open the terminal where you run <code>cmrel stage</code>. Its output will be used in the next step.
-        </p></div>
 
     2. While the build is running, send a first Slack message to
        `#cert-manager-dev`:
@@ -341,46 +341,29 @@ page if a step is missing or if it is outdated.
 
 7. Run `cmrel publish`:
 
-    1. Set the `CMREL_RELEASE_NAME` variable in your shell. The value for the
-       `CMREL_RELEASE_NAME` variable is found in the output of the previous command,
-       `cmrel stage`. Look for the line that contains the `gs://` link:
-
-        ```sh
-        gs://cert-manager-release/stage/gcb/release/v1.3.0-alpha.1-c2c0fdd78131493707050ffa4a7454885d041b08
-        #                                           <---------- CMREL_RELEASE_NAME ----------------------->
-        ```
-
-        Copy that part into a variable in your shell (no need to export it):
-
-        ```sh
-        CMREL_RELEASE_NAME=v1.3.0-alpha.0-77b045d159bd20ce0ec454cd79a5edce9187bdd9
-        ```
-
-    2. Do a `cmrel publish` dry-run to ensure that all the staged resources are
+    1. Do a `cmrel publish` dry-run to ensure that all the staged resources are
        valid. Run the following command:
 
         ```sh
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --release-name "$CMREL_RELEASE_NAME"
+        cmrel publish --release-name "$RELEASE_VERSION"
         ```
 
         You can view the progress by clicking the Google Cloud Build URL in the
         output of this command.
 
-    3. While the build is running, send a third Slack message in reply to
-       the first message:
+    2. While the build is running, send a third Slack message in reply to the first message:
 
         <div className="pageinfo pageinfo-primary"><p>
         Follow the `cmrel publish` dry-run build: https://console.cloud.google.com/cloud-build/builds16f6f875-0a23-4fff-b24d-3de0af207463?project=1021342095237
         </p></div>
 
-    4. Next publish the release artifacts for real. The following command will
-       publish "for real" the artifacts to GitHub, `Quay.io`, to our
-       [ChartMuseum](https://charts.jetstack.io) instance:
+    3. Now publish the release artifacts for real. The following command will publish the artifacts to GitHub, `Quay.io` and to our
+       [helm chart repository](https://charts.jetstack.io):
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
-        cmrel publish --nomock --release-name "$CMREL_RELEASE_NAME"
+        cmrel publish --nomock --release-name "$RELEASE_VERSION"
         ```
 
       <div className="info">
@@ -395,8 +378,7 @@ page if a step is missing or if it is outdated.
          </ol>
       </div>
 
-    5. While the build is running, send a fourth Slack message in reply to
-       the first message:
+    4. While the build is running, send a fourth Slack message in reply to the first message:
 
         <div className="pageinfo pageinfo-primary"><p>
         Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
@@ -525,10 +507,9 @@ page if a step is missing or if it is outdated.
        patch releases as we want to encourage users to always install the latest
        patch.
 
-    9. Open a PR against our
-       [Algolia indexing configuration](https://github.com/algolia/docsearch-configs/blob/master/configs/cert-manager.json#L7-L13)
-       including the new version for search indexing, as in
-       [this PR](https://github.com/algolia/docsearch-configs/pull/2278).
+    9. Future: check that our Algolia search indexing is up-to-date for the website - i.e. that the new version of the docs
+       is being indexed correctly. This is listed here as it's a step we should be checking after a release of a major version
+       but at the time of writing we don't know how to do it!
 
     10. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
         bumping the versions of our kubectl plugins.
@@ -541,3 +522,40 @@ page if a step is missing or if it is outdated.
 
         Follow [the cert-manager OLM release process](https://github.com/jetstack/cert-manager-olm#release-process) and, once published,
         [verify that the cert-manager OLM installation instructions](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) still work.
+
+
+## Older Releases
+
+The above guide only applies for versions of cert-manager from v1.8 onwards.
+
+Older versions were built using Bazel and this difference in build process is reflected in the release process.
+
+### cert-manager 1.6 and 1.7
+
+Follow [this older version][older-release-process] of the release process on GitHub, rather than the guide on this website.
+
+The most notable difference is you'll call `cmrel stage` rather than `cmrel makestage`. You should be fine to use the latest
+version of `cmrel` to do the release.
+
+### cert-manager 1.5 and earlier
+
+If you're releasing version 1.5 or earlier you must also be sure to install a different version of `cmrel`.
+
+In the step where you install `cmrel`, you'll want to run the following instead:
+
+```bash
+go install github.com/cert-manager/release/cmd/cmrel@cert-manager-pre-1.6
+```
+
+This will ensure that the version of `cmrel` you're using is compatible with the version of cert-manager you're releasing.
+
+In addition, when you check out the `cert-manager/release` repository you should be sure to check out the `cert-manager-pre-1.6` tag in that repo:
+
+```bash
+git checkout cert-manager-pre-1.6
+```
+
+Other than the different `cert-manager/release` tag and `cmrel` version, you can follow the [same older release documentation][older-release-process] as
+is used for 1.6 and 1.7 - just remember to change the version of `cmrel` you install!
+
+[older-release-process]: https://github.com/cert-manager/website/blob/6fa0db74de0ae17d7be638a08155d1b4e036aaa9/content/en/docs/contributing/release-process.md?plain=1

@@ -596,22 +596,37 @@
           ]
         },
         {
-          "title": "About Jetstack",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/next-docs/aboutjetstack/README.md"
-            }
-          ]
-        },
-        {
           "title": "CLI reference",
           "routes": [
             {
               "title": "Introduction",
               "path": "/next-docs/cli/README.md"
+            },
+            {
+              "title": "acmesolver",
+              "path": "/next-docs/cli/acmesolver.md"
+            },
+            {
+              "title": "cainjector",
+              "path": "/next-docs/cli/cainjector.md"
+            },
+            {
+              "title": "cmctl",
+              "path": "/next-docs/cli/cmctl.md"
+            },
+            {
+              "title": "controller",
+              "path": "/next-docs/cli/controller.md"
+            },
+            {
+              "title": "webhook",
+              "path": "/next-docs/cli/webhook.md"
             }
           ]
+        },
+        {
+          "title": "API reference",
+          "path": "/next-docs/reference/api-docs.md"
         }
       ]
     }

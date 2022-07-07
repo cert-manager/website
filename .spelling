@@ -1,6 +1,9 @@
+Mehak
+Saeed
 acmesolver
 startupapicheck
 ServiceAccount
+ServiceAccounts
 mikebryant
 jayme-github
 nodeSelector
@@ -33,6 +36,7 @@ APIs
 AWS
 Akamai
 AppRole
+approvers
 ArgoCD
 Arsh
 ArtifactHUB
@@ -49,11 +53,15 @@ CNIs
 CRD
 CRDs
 CSI
+CSIDriver
+CSINode
 CSR
 CSRs
 CVE
 CVEs
 CertificateRequest
+CertificateRequestPolicy
+CertificateRequestPolicies
 CertificateRequests
 CertificateSecretTemplate
 CertificateSigningRequest
@@ -67,14 +75,18 @@ ClusterIssuer
 ClusterIssuers
 ClusterRole
 ClusterRoles
+ClusterServiceVersion
 ConfigMap
 CoreDNS
+Coreutils
 CronJob
 CryptoKey
+csi-driver
 Ctrl
 DCO
 DHCP
 DNS01
+DNS-01
 DNSPod
 DNSimple
 DaemonSet
@@ -98,6 +110,7 @@ GCLB
 GCP
 GKE
 GitOps
+gRPC
 GSoC
 Gloo
 GoLand
@@ -114,12 +127,16 @@ IPs
 IPv6
 IssuerRef
 Istio
+IstioOperator
+istiod
+intra
 JSON
 Jetstack
 JetstackHQ
 JoshVanL
 Jsonnet
 Juneezee
+JoooostB
 KUARD
 Kirill-Garbar
 Knative
@@ -252,6 +269,8 @@ hardcoded
 honour
 hostname
 https
+homebrew
+Homebrew
 i.e.
 ingress-gce
 ingress-nginx
@@ -262,12 +281,14 @@ io
 irbekrm
 issuances
 istio-csr
+istioctl
 jakexks
 jandersen-plaid
 johanfleury
 johejo
 jonathansp
 joshuastern
+jq
 jsoref
 justinkillen
 keystore
@@ -368,6 +389,8 @@ vhosakot
 v0.16
 v0.23.1
 v1
+v1.12
+v1.13
 v1.16
 v1.19
 v1.5
@@ -389,8 +412,12 @@ v1.7
 v1.7.0
 v1.7.1
 v1.7.2
+v1.7.3
 v1.8
+v1.8.
 v1.8.0
+v1.8.1
+v1.8.2
 v1alpha1
 v1alpha2
 v1alpha3
@@ -399,6 +426,7 @@ v2
 v3
 vCert
 vendoring
+vendored
 versioning
 wallrj
 webhook
@@ -416,9 +444,17 @@ zsh
 PodSecurityPolicy
 ClusterIP
 NodePort
+NodeSelector
 pprof
 GSoD
 GSoC
+ncm-issuer
+Nokia
+Netguard
+ZeroSSL
+Sectigo
+subchart
+subcharts
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker

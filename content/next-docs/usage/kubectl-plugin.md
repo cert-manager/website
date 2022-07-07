@@ -12,7 +12,7 @@ While the kubectl plugin is supported, it is recommended to use
 
 ## Installation
 
-You need the `kubectl-cert-manager.tar.gz` file for the platform you're using, these can be found on our [GitHub releases page](https://github.com/jetstack/cert-manager/releases).
+You need the `kubectl-cert-manager.tar.gz` file for the platform you're using, these can be found on our [GitHub releases page](https://github.com/cert-manager/cert-manager/releases).
 In order to use the kubectl plugin you need its binary to be accessible under the name `kubectl-cert_manager` in your `$PATH`.
 
 ### macOS/Linux

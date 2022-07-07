@@ -1,32 +1,33 @@
 ---
 title: Supported Releases
-description: cert-manager supported releases, supported Kubernetes versions and release timeline
+description: Supported releases, Kubernetes versions, OpenShift versions and upcoming release timeline
 ---
 
 {/*
 Inspired by https://istio.io/latest/about/supported-releases/
 */}
 
-This page lists the status, timeline and policy for currently supported
-releases.
+This page lists the status, timeline and policy for currently supported releases.
 
 Each release is supported for a period of four months, and we aim to create a new
 release every two months.
 
-<h2 id="supported-releases">Supported releases</h2>
+<h2 id="supported-releases">Currently supported releases</h2>
 
 | Release | Release Date |  End of Life | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| [1.8][] | Apr 05, 2022 | Aug 10, 2022 |             1.19 → 1.23            |             4.6 → 4.10            |
-| [1.7][] | Jan 26, 2022 |  Jun 8, 2022 |             1.18 → 1.23            |             4.5 → 4.10            |
+| [1.8][] | Apr 05, 2022 | Sep 07, 2022 |             1.19 → 1.24            |             4.6 → 4.11            |
+| [1.7][] | Jan 26, 2022 | Jul 06, 2022 |             1.18 → 1.23            |             4.5 → 4.10            |
 
 ## Upcoming releases
 
 | Release | Release Date | End of life  | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |---------|:------------:|:------------:|:----------------------------------:|:---------------------------------:|
-| [1.9][] |  Jun 8, 2022 | Oct 12, 2022 |             1.19 → 1.24            |             4.6 → 4.11            |
+| [1.9][] | Jul 06, 2022 | Nov 09, 2022 |             1.20 → 1.24            |             4.7 → 4.11            |
 
-Note that dates in the future are uncertain and might change.
+Note that 1.9 was delayed by roughly a month because of KubeCon in May.
+
+Dates in the future are uncertain and might change.
 
 ## Old releases
 
@@ -130,8 +131,7 @@ currently supported releases.
 <h4 id="security-issues">Security issues</h4>
 
 **Security issues** are fixed as soon as possible. They get back-ported to
-the last two releases, and a new patch release is immediately created for
-them.
+the last two releases, and a new patch release is immediately created for them.
 
 <h4 id="critical-bugs">Critical bugs</h4>
 
@@ -148,7 +148,7 @@ Note that [intentional breaking changes](#breaking-changes) do not belong to
 this category.
 
 Fixes for critical bugs are (usually) immediately back-ported by creating a new
-patch release for the two currently supported releases.
+patch release for the currently supported releases.
 
 <h4 id="long-standing-bugs">Long-standing bugs</h4>
 
@@ -166,12 +166,30 @@ Kubernetes API or the command line flags. We avoid making breaking changes
 where possible, and where they're required we'll give as much notice as
 possible.
 
+<h4 id="other-backports">Other back-ports</h4>
+
+We aim to be conservative in what we back-port. That applies especially for anything which
+could be a _runtime_ change - that is, a change which might alter behavior for someone
+upgrading between patch releases.
+
+That means that if a candidate for back-porting has a chance of having a runtime impact we're
+unlikely to accept the change unless it addresses a security issue or a critical bug.
+
+We reserve the right to back-port other changes which are unlikely to have a runtime impact, such as
+documentation or tooling changes. An example would be [#5209][] which updated how we perform a release of
+cert-manager but didn't have any realistic chance of having a runtime impact.
+
+Generally we'll seek to be pragmatic. A rule of thumb might be to ask:
+
+"Does this back-port improve cert-manager, bearing in mind that we really value stability for already-released versions?"
+
 [#3393]: https://github.com/cert-manager/cert-manager/issues/3393 "Broken CloudFlare DNS01 challenge"
 [#2857]: https://github.com/cert-manager/cert-manager/issues/2857 "CloudDNS DNS01 challenge crashes cert-manager"
 [#4142]: https://github.com/cert-manager/cert-manager/issues/4142 "Cannot issue a certificate that has the same subject and issuer"
 [#3444]: https://github.com/cert-manager/cert-manager/issues/3444 "Certificates do not get immediately updated after updating them"
 [#3882]: https://github.com/cert-manager/cert-manager/pull/3882 "Certificate's revision history limit validated by webhook"
 [#3644]: https://github.com/cert-manager/cert-manager/issues/3644 "Helm upgrade from v1.2 to v1.2 impossible due to a Helm bug"
+[#5209]: https://github.com/cert-manager/cert-manager/pull/5209 "release-1.8: rclone"
 
 
 <h2 id="kubernetes-supported-versions">How we determine supported Kubernetes versions</h2>
@@ -202,12 +220,12 @@ As of 2022-04-06, our testing coverage is:
 
 |      Vendor       | Oldest Kubernetes Release\*  |               Other Older Kubernetes Releases                 |
 |:-----------------:|------------------------------|---------------------------------------------------------------|
-|    [EKS][eks]     | 1.19 (EOL Jun 2022)          | 1.20 (EOL Sep 2022), 1.21 (EOL Feb 2023)                      |
-|    [GKE][gke]     | 1.19 (EOL Jun 2022)          | 1.20 (EOL Aug 2022), 1.21 (EOL Dec 2022)                      |
-|    [AKS][aks]     | 1.21 (EOL Apr 2022)          | 1.22 (EOL on release of k8s 1.25)                             |
-| [OpenShift 4][os] | 1.19 (4.6 EUS, EOL Oct 2022) | 1.20 (4.7, EOL Aug 2022), 1.21 (4.8, EOL Jan 2023, EUS after) |
+|    [EKS][eks]     | 1.19 (EOL Jun 2022)          | 1.20 (EOL Sep 2022), 1.21 (EOL Feb 2023), 1.22 (EOL May 2023) |
+|    [GKE][gke]     | 1.19 (EOL Jun 2022)          | 1.20 (EOL Aug 2022), 1.21 (EOL Mar 2023), 1.22 (EOL Apr 2023) |
+|    [AKS][aks]     | 1.21 (EOL Jul 2022)          | 1.22 (EOL Nov 2022)                                           |
+| [OpenShift 4][os] | 1.19 (4.6 EUS, EOL Dec 2022) | 1.20 (4.7, EOL Nov 2022), 1.21 (4.8, EOL Feb 2023, EUS after) |
 
-\*Oldest release relevant to the next cert-manager release, as of 2022-04-06
+\*Oldest release relevant to the next cert-manager release, as of 2022-05-12
 
 [eks]: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#kubernetes-release-calendar
 [gke]: https://cloud.google.com/kubernetes-engine/docs/release-schedule

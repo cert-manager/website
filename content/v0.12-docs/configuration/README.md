@@ -14,4 +14,3 @@ in the `cert-manager.io` group. cert-manager also supports external issuers than
 can be installed into your cluster that belong to other groups. These external
 issuer types behave no different and are treated equal to in tree issuer types.
 
-## Supported Issuer Types

@@ -5,3 +5,10 @@
 [build.environment]
 	NODE_VERSION = "16"
 	NETLIFY_NEXT_PLUGIN_SKIP = "true"
+	NEXT_PUBLIC_DOMAIN_URL = "https://cert-manager.io"
+
+[context.production.environment]
+	NEXT_PUBLIC_ENABLE_ANALYTICS = "true"
+	NEXT_PUBLIC_DOCS_SEARCH_APP_ID = "18N9PEKHUC"
+	NEXT_PUBLIC_DOCS_SEARCH_INDEX_NAME = "cert-manager-latest"
+	NEXT_PUBLIC_DOMAIN_URL = "https://cert-manager.io"

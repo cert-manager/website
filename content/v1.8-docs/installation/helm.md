@@ -13,7 +13,7 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 ### Prerequisites
 
 - [Install Helm version 3 or later](https://helm.sh/docs/intro/install/).
-- Install a [supported version of Kubernetes or OpenShift](../../installation/supported-releases/).
+- Install a [supported version of Kubernetes or OpenShift](../../docs/installation/supported-releases.md).
 - Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if you are using Kubernetes on a cloud platform.
 
 ### Steps
@@ -26,13 +26,13 @@ This repository is the only supported source of cert-manager charts. There are s
 Notably, the "Helm stable repository" version of cert-manager is deprecated and should not be used.
 
 ```bash
-$ helm repo add jetstack https://charts.jetstack.io
+helm repo add jetstack https://charts.jetstack.io
 ```
 
 #### 2. Update your local Helm chart repository cache:
 
 ```bash
-$ helm repo update
+helm repo update
 ```
 
 #### 3. Install `CustomResourceDefinitions`
@@ -44,7 +44,7 @@ or using the `installCRDs` option when installing the Helm chart.
 
 
 ```bash
-$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.crds.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cert-manager.crds.yaml
 ```
 
 ##### Option 2: install CRDs as part of the Helm release
@@ -61,11 +61,11 @@ Note that if you're using a `helm` version based on Kubernetes `v1.18` or below 
 To install the cert-manager Helm chart, use the [Helm install command](https://helm.sh/docs/helm/helm_install/) as described below.
 
 ```bash
-$ helm install \
+helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.8.0 \
+  --version v1.8.2 \
   # --set installCRDs=true
 ```
 
@@ -74,11 +74,11 @@ A full list of available Helm values is on [cert-manager's ArtifactHub page](htt
 The example below shows how to tune the cert-manager installation by overwriting the default Helm values:
 
 ```bash
-$ helm install \
+helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.8.0 \
+  --version v1.8.2 \
   --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
   --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
 ```
@@ -91,11 +91,11 @@ Instead of directly installing cert-manager using Helm, a static YAML manifest c
 This static manifest can be tuned by providing the flags to overwrite the default Helm values:
 
 ```bash
-$ helm template \
+helm template \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.8.0 \
+  --version v1.8.2 \
   # --set prometheus.enabled=false \   # Example: disabling prometheus using a Helm parameter
   # --set installCRDs=true \           # Uncomment to also template CRDs
   > cert-manager.custom.yaml
@@ -113,7 +113,7 @@ by users have been deleted. You can check for any existing resources with the
 following command:
 
 ```bash
-$ kubectl get Issuers,ClusterIssuers,Certificates,CertificateRequests,Orders,Challenges --all-namespaces
+kubectl get Issuers,ClusterIssuers,Certificates,CertificateRequests,Orders,Challenges --all-namespaces
 ```
 
 Once all these resources have been deleted you are ready to uninstall
@@ -127,13 +127,13 @@ and `helm`.
 
 
 ```bash
-$ helm --namespace cert-manager delete cert-manager
+helm --namespace cert-manager delete cert-manager
 ```
 
 Next, delete the cert-manager namespace:
 
 ```bash
-$ kubectl delete namespace cert-manager
+kubectl delete namespace cert-manager
 ```
 
 Finally, delete the cert-manger
@@ -144,7 +144,7 @@ using the link to the version `vX.Y.Z` you installed:
 > be removed by Kubernetes' garbage collector.
 
 ```bash
-$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
+kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
 ```
 
 ### Namespace Stuck in Terminating State
@@ -157,5 +157,5 @@ this, ensure you have run the above commands correctly, and if you're still
 experiencing issues then run:
 
 ```bash
-$ kubectl delete apiservice v1beta1.webhook.cert-manager.io
+kubectl delete apiservice v1beta1.webhook.cert-manager.io
 ```

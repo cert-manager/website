@@ -34,7 +34,7 @@ resources, read the [Namespaces](../concepts/issuer.md#namespaces) section.
 With this update, the zone format changes from a UUID to a string of the form `<Application Name>\<Issuing Template Alias>`.
 Please read [cert-manager 1.2 to 1.3 upgrade notes][] and [Venafi Cloud Prerequisites][] for further information.
 
-[cert-manager 1.2 to 1.3 upgrade notes]: /docs/installation/upgrading/upgrading-1.2-1.3/
+[cert-manager 1.2 to 1.3 upgrade notes]: ../../docs/installation/upgrading/upgrading-1.2-1.3.md
 [Venafi Cloud Prerequisites]: https://github.com/Venafi/vcert/blob/v4.13.1/README-CLI-CLOUD.md#prerequisites
 
 In order to set up a Venafi Cloud `Issuer`, you must first create a Kubernetes

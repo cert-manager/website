@@ -37,4 +37,4 @@ authors are as follows:
   to enable TLS between Cloudflare edge and your Kubernetes workloads.
 
 To create your own external issuer type, please follow the guidance in the
-[development documentation](../contributing/external-issuers.md).
+[development documentation](../../docs/contributing/external-issuers.md).

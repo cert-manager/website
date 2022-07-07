@@ -8,8 +8,11 @@ CloudDNS to solve DNS01 ACME challenges. It's advised you read the [DNS01
 Challenge Provider](./README.md) page first for a more general understanding of
 how cert-manager handles DNS01 challenges.
 
-> Note: This guide assumes that your cluster is hosted on Google Cloud Platform
-> (GCP) and that you already have a domain set up with CloudDNS.
+This guide assumes that your cluster is hosted on Google Cloud Platform (GCP)
+and that you already have a domain set up with CloudDNS.
+
+You'll need to be using a **Public DNS Zone**, so that the ACME challenge checker
+is able to access the DNS records that cert-manager will create.
 
 ## Set up a Service Account
 
@@ -23,14 +26,14 @@ DNS01 challenge. To enable this, a GCP service account must be created with the
 > Console.
 
 ```bash
-$ PROJECT_ID=myproject-id
-$ gcloud iam service-accounts create dns01-solver --display-name "dns01-solver"
+PROJECT_ID=myproject-id
+gcloud iam service-accounts create dns01-solver --display-name "dns01-solver"
 ```
 
 In the command above, replace `myproject-id` with the ID of your project.
 
 ```bash
-$ gcloud projects add-iam-policy-binding $PROJECT_ID \
+gcloud projects add-iam-policy-binding $PROJECT_ID \
    --member serviceAccount:dns01-solver@$PROJECT_ID.iam.gserviceaccount.com \
    --role roles/dns.admin
 ```
@@ -55,24 +58,24 @@ To access this service account, cert-manager uses a key stored in a Kubernetes
 `Secret`. First, create a key for the service account and download it as a JSON
 file, then create a `Secret` from this file.
 
+Keep the key file safe and do not share it, as it could be used to gain access
+access to your cloud resources. The key file can be deleted once it has been
+used to generate the `Secret`.
+
 If you did not create the service account `dns01-solver` before, you need to
 create it first.
 
 ```bash
-$ gcloud iam service-accounts create dns01-solver
+gcloud iam service-accounts create dns01-solver
 ```
 
 Replace instances of `$PROJECT_ID` with the ID of your project.
 ```bash
-$ gcloud iam service-accounts keys create key.json \
+gcloud iam service-accounts keys create key.json \
    --iam-account dns01-solver@$PROJECT_ID.iam.gserviceaccount.com
-$ kubectl create secret generic clouddns-dns01-solver-svc-acct \
+kubectl create secret generic clouddns-dns01-solver-svc-acct \
    --from-file=key.json
 ```
-
-> Note: Keep the key file safe and do not share it, as it could be used to gain
-> access to your cloud resources. The key file can be deleted once it has been
-> used to generate the `Secret`.
 
 > Note: If you have already added the `Secret` but get an error: `...due to
 > error processing: error getting clouddns service account: secret "XXX" not
@@ -157,7 +160,7 @@ above to the cert-manager KSA in the cert-manager namespace in your GKE cluster,
 run the following command.
 
 ```bash
-$ gcloud iam service-accounts add-iam-policy-binding \
+gcloud iam service-accounts add-iam-policy-binding \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:$PROJECT_ID.svc.id.goog[cert-manager/cert-manager]" \
     dns01-solver@$PROJECT_ID.iam.gserviceaccount.com
@@ -174,7 +177,7 @@ After deploying cert-manager, add the proper workload identity annotation to the
 cert-manager service account.
 
 ```bash
-$ kubectl annotate serviceaccount --namespace=cert-manager cert-manager \
+kubectl annotate serviceaccount --namespace=cert-manager cert-manager \
     "iam.gke.io/gcp-service-account=dns01-solver@$PROJECT_ID.iam.gserviceaccount.com"
 ```
 

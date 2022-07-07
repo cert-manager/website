@@ -18,6 +18,40 @@ face:
 
 This is a feature in cert-manager starting in `v0.16` using the `cmctl` CLI. More information can be found on [the renew command's page](../usage/cmctl.md#renew)
 
+### When do certs get re-issued?
+
+To determine if a certificate needs to be re-issued, cert-manager looks at the the spec of `Certificate` resource and latest `CertificateRequest`s as well as the data in `Secret` containing the X.509 certificate.
+
+The issuance process will always get triggered if the:
+
+- `Secret` named on `Certificate`'s spec, does not exist, is missing private key or certificate data or contains corrupt data
+- private key stored in the `Secret` does not match the private key spec on `Certificate`
+- public key of the issued certificate does not match the private key stored in the `Secret`
+- cert-manager issuer annotations on the `Secret` do not match the issuer specified on the `Certificate`
+- DNS names, IP addresses, URLS or email addresses on the issued certificate do not match those on the `Certificate` spec
+- certificate needs to be renewed (because it has expired or the renewal time is now or in the past)
+- certificate has been marked for renewal manually [using `cmctl`](../usage/cmctl.md#renew)
+
+Additionally, if the latest `CertificateRequest` for the `Certificate` is found, cert-manager will also re-issue if:
+
+- the common name on the CSR found on the `CertificateRequest` does not match that on the `Certificate` spec
+- the subject fields on the CSR found on the `CertificateRequest` do not match the subject fields of the `Certificate` spec
+- the duration on the `CertificateRequest` does not match the duration on the `Certificate` spec
+- `isCA` field value on the `Certificate` spec does not match that on the `CertificateRequest`
+- the DNS names, IP addresses, URLS or email addresses on the `CertificateRequest` spec do not match those on the `Certificate` spec
+- key usages on the `CertificateRequest` spec do not match those on the `Certificate` spec
+
+Note that for certain fields re-issuance on change gets triggered only if there
+is a `CertificateRequest` that cert-manager can use to determine whether
+`Certificate`'s spec has changed since the previous issuance. This is because
+some issuers may not respect the requested values for these fields, so we cannot
+rely on the values in the issued X.509 certificates. One such field is
+`.spec.duration`- change to this field will only trigger re-issuance if there is
+a `CertificateRequest` to compare with. In case where you need to re-issue, but
+re-issuance does not get triggered automatically due to there being no
+`CertificateRequest` (i.e after backup and restore), you can use [`cmctl
+renew`](../usage/cmctl.md#renew) to trigger it manually.
+
 ### Why isn't my root certificate in my issued Secret's `tls.crt`?
 
 Occasionally, people work with systems which have made a flawed choice regarding TLS chains. The [TLS spec](https://datatracker.ietf.org/doc/html/rfc5246#section-7.4.2)
@@ -54,11 +88,19 @@ cert-manager publishes all events to the Kubernetes events mechanism, you can ge
 
 Due to the nature of the Kubernetes event mechanism these will be purged after a while. If you're using a dedicated logging system it might be able or is already also storing Kubernetes events.
 
-### What happens if a renewal doesn't happen? Will it be tried again after some time?
+### What happens if issuance fails? Will it be retried?
 
-cert-manager will retry renewal if it encounters temporary failures. It uses an exponential backoff algorithm to calculate the delay between each retry.
+{/* This empty link preserves old links to #what-happens-if-a-renewal-doesn't happen?-will-it-be-tried-again-after-some-time?", which matched the old title of this section */}
 
-A temporary failure is one that doesn't mark the `CertificateRequest` as failed. If the `CertificateRequest` is marked as failed, issuance will be re-tried in 1 hour.
+<a id="alternative-certificate-chain" className="hidden-link"></a>
+
+cert-manager will retry a failed issuance except for a few rare edge cases where manual intervention is needed.
+
+If an issuance fails because of a temporary error, it will be retried again with a short exponential backoff (currently 5 seconds to 5 minutes). A temporary error is one that does not result in a failed `CertificateRequest`.
+
+If the issuance fails with an error that resulted in a failed `CertificateRequest`, it will be retried with a longer binary exponential backoff (1 hour to 32 hours) to avoid overwhelming external services.
+
+You can always trigger immediate renewal using the [`cmctl renew` command](../usage/cmctl.md#renew)
 
 ### Is ECC (elliptic-curve cryptography) supported?
 
@@ -85,7 +127,7 @@ spec:
 
 ### If `renewBefore` or `duration` is not defined, what will be the default value?
 
-Default `duration` is [90 days](https://github.com/jetstack/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26). If `renewBefore` has not been set, `Certificate` will be renewed 2/3 through its _actual_ duration.
+Default `duration` is [90 days](https://github.com/cert-manager/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26). If `renewBefore` has not been set, `Certificate` will be renewed 2/3 through its _actual_ duration.
 
 ## Miscellaneous
 

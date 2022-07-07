@@ -44,3 +44,9 @@ public/feed.*
 # leftovers from previous design
 /bin
 /tmp
+
+# ignore netlify-cli tmp dir
+.netlify/
+
+# IntelliJ
+.idea

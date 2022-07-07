@@ -3,6 +3,12 @@ title: SelfSigned
 description: 'cert-manager configuration: SelfSigned Issuers'
 ---
 
+⚠️ `SelfSigned` issuers are generally useful for bootstrapping a PKI locally, which
+is a complex topic for advanced users. To be used safely in production, running a PKI
+introduces complex planning requirements around rotation, trust store distribution and disaster recovery.
+
+If you're not planning to run your own PKI, use a different issuer type.
+
 The `SelfSigned` issuer doesn't represent a certificate authority as such, but
 instead denotes that certificates will "sign themselves" using a given private
 key. In other words, the private key of the certificate will be used to sign
@@ -10,7 +16,7 @@ the certificate itself.
 
 This `Issuer` type is useful for bootstrapping a root certificate for a
 custom PKI (Public Key Infrastructure), or for otherwise creating simple
-ad-hoc certificates.
+ad-hoc certificates for a quick test.
 
 There are important [caveats](#caveats) - including security issues - to
 consider with `SelfSigned` issuers; in general you'd likely  want to use a
@@ -38,7 +44,9 @@ metadata:
   namespace: sandbox
 spec:
   selfSigned: {}
----
+```
+
+```yaml
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
@@ -123,17 +131,16 @@ spec:
     - "http://example.com"
 ```
 
-
 ## Caveats
 
 ### Trust
 
 Clients consuming `SelfSigned` certificates have _no way_ to trust them
-without already having the certificates beforehand. This becomes hard to 
-manage when the client of the server using the certificate exists in a 
-different namespace. This limitation can be tackled by using [trust](https://github.com/cert-manager/trust) 
-to distribute the `ca.crt` to other namespaces. The alternative is to use 
-"TOFU" (trust on first use), which has security implications in the event 
+without already having the certificates beforehand. This becomes hard to
+manage when the client of the server using the certificate exists in a
+different namespace. This limitation can be tackled by using [trust](../projects/trust.md)
+to distribute the `ca.crt` to other namespaces. The alternative is to use
+"TOFU" (trust on first use), which has security implications in the event
 of a man-in-the-middle attack.
 
 ### Certificate Validity
@@ -157,6 +164,6 @@ To avoid this, be sure to set a Subject for `SelfSigned` certs. This can be
 done by setting the `spec.subject` on a cert-manager `Certificate` object
 which will be issued by a `SelfSigned` issuer.
 
-Starting in version 1.3, cert-manager will emit a Kubernetes [warning event](https://github.com/jetstack/cert-manager/blob/45befd86966c563663d18848943a1066d9681bf8/pkg/controller/certificaterequests/selfsigned/selfsigned.go#L140)
+Starting in version 1.3, cert-manager will emit a Kubernetes [warning event](https://github.com/cert-manager/cert-manager/blob/45befd86966c563663d18848943a1066d9681bf8/pkg/controller/certificaterequests/selfsigned/selfsigned.go#L140)
 of type `BadConfig` if it detects that a certificate is being created
 by a `SelfSigned` issuer which has an empty Issuer DN.

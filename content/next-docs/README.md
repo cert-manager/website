@@ -1,6 +1,6 @@
 ---
 title: cert-manager
-description: cert-manager documentation
+description: cert-manager documentation homepage
 ---
 
 cert-manager adds certificates and certificate issuers as resource types in

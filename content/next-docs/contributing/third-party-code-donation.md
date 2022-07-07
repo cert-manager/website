@@ -23,7 +23,7 @@ and containerd.
 
 1.  Code must be licensed appropriately, including any dependencies   
     We'd prefer [Apache 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)) since that's
-    what cert-manager [uses](https://github.com/jetstack/cert-manager/blob/master/LICENSE), but the
+    what cert-manager [uses](https://github.com/cert-manager/cert-manager/blob/master/LICENSE), but the
     license must be [OSI approved](https://opensource.org/licenses).
 2.  Code must conform to CNCF standards and due diligence requirements   
     You don't need to go over this with a fine-toothed comb; the intent here is that no code donation
@@ -34,7 +34,7 @@ and containerd.
     donation. This ensures that there's a single point of contact for the party donating the code.
 4.  Must pass cert-manager conformance tests   
     This might not apply to all donations, but where conformance tests exist any donated code must
-    pass them. E.g. for [external issuers](https://github.com/jetstack/cert-manager/blob/dffbf391dbb0fc6c1cfea62e561a9c6f54362ab0/test/e2e/suite/conformance/certificates/external/external.go#L41-L62)
+    pass them. E.g. for [external issuers](https://github.com/cert-manager/cert-manager/blob/dffbf391dbb0fc6c1cfea62e561a9c6f54362ab0/test/e2e/suite/conformance/certificates/external/external.go#L41-L62)
 5.  Must provide a point-of-contact for questions about the project for at least 3 months after acceptance
     We don't anticipate that we'd need to reach out often after the donation has been accepted,
     but it's important to have someone we can reach out to if we need to.
@@ -65,7 +65,7 @@ These items are not absolutely necessary but they definitely help if a code dona
 As a method of ensuring that the donator has permission to donate the code, we require DCO sign-offs -
 or something equivalent - to be in place at the time of the donation.
 
-The cert-manager [DCO signoff process](https://github.com/jetstack/cert-manager/blob/master/CONTRIBUTING.md#dco-sign-off)
+The cert-manager [DCO signoff process](https://cert-manager.io/docs/contributing/sign-off/)
 would be appropriate. Existing contributors could bootstrap this process by creating an empty signed-off
 with a note that previous code should be considered signed off as of that commit:
 
@@ -76,4 +76,4 @@ git commit --allow-empty --signoff --message="bootstrapping DCO signoff for past
 ## After Donation
 
 Code files in the donated repository must be updated to include the relevant 
-[cert-manger boilerplate](https://github.com/jetstack/cert-manager/blob/master/hack/boilerplate/boilerplate.go.txt)
+[cert-manger boilerplate](https://github.com/cert-manager/cert-manager/blob/master/hack/boilerplate/boilerplate.go.txt)

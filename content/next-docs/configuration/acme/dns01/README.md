@@ -97,8 +97,8 @@ _acme-challenge.example.com	IN	CNAME	_acme-challenge.less-privileged.example.org
 2. Grant cert-manager rights to update less privileged `less-privileged.example.org` zone
 
 3. Provide configuration/credentials for updating this less privileged zone
-and add an additional field into the relevant `dns01` solver. Note that `selector` 
-field is still working for the original `example.com`, while credentials are provided for 
+and add an additional field into the relevant `dns01` solver. Note that `selector`
+field is still working for the original `example.com`, while credentials are provided for
 `less-privileged.example.org`
 
 ```yaml
@@ -124,8 +124,8 @@ spec:
             ...
 ```
 
-If you have a multitude of (sub)domains requiring separate certificates, 
-it is possible to share an aliased less-privileged domain. To achieve it one should 
+If you have a multitude of (sub)domains requiring separate certificates,
+it is possible to share an aliased less-privileged domain. To achieve it one should
 create a CNAME record for each (sub)domain like this:
 
 ```txt
@@ -177,9 +177,8 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-arvan`](https://github.com/kiandigital/cert-manager-webhook-arvan)
 - [`bizflycloud-certmanager-dns-webhook`](https://github.com/bizflycloud/bizflycloud-certmanager-dns-webhook)
 - [`cert-manager-webhook-hetzner`](https://github.com/vadimkim/cert-manager-webhook-hetzner)
+- [`cert-manager-webhook-yandex-cloud`](https://github.com/malinink/cert-manager-webhook-yandex-cloud)
 
-You can find more information on how to configure webhook providers
-[here](./webhook.md).
+You can find more information on how to configure webhook providers [here](./webhook.md).
 
-To create a new unsupported DNS provider, follow the development documentation
-[here](../../../contributing/dns-providers.md).
+To create a new unsupported DNS provider, follow the development documentation [here](../../../contributing/dns-providers.md).
