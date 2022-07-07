@@ -7,11 +7,7 @@ In this tutorial you will learn how to deploy and configure cert-manager.
 You will learn how to create an SSL certificate using Let's Encrypt.
 And finally you will learn how that certificate can be used in Kubernetes to serve an HTTPS website.
 
-### What is Let’s Encrypt?
-Let’s Encrypt is a certificate authority that allows to generate free short-lived certificates automatically. To get a certificate, run a certbot on the server. It forwards a request for certificate to Let’s Encrypt which in return provides a challenge. The certbot successfully fulfills the challenge, upon which Let’s Encrypt provides the certificate. You can automate this process using a cron job.
-
-In case, you have multiple domains and want multiple SSL certificates for each, how to automate the certificate lifecycle to keep them secure? This is where cert-manager comes in. It lives in your Kubernetes clusters. It is wired up to a certificate authority such as Let’s Encrypt, Vault, etc. The certificate request can be forwarded using a YAML file.
-
+> 🔰 Let’s Encrypt is an Internet service that allows you to generate free short-lived SSL certificates automatically.
 
 ### How is YAML File Used?
 In the Yaml file, simply specify the domain for which the certificate is required, along with the secret for where the certificate will be stored in. The cert-manager will interact with the CA and place the newly issued certificate in the specified Kubernetes secret. It will also replace the Kubernetes secret with a new one when it is about to expire. This means you can get free and automated SSL certificate generation with complete certificate lifecycle management.
