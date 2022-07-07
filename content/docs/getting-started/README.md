@@ -18,13 +18,21 @@ You will need to install the following software on your laptop:
 1. [minikube](https://kubernetes.io/docs/tasks/tools/#minikube): Quickly set up a local Kubernetes cluster on macOS, Linux, and Windows.
 2. [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl): The Kubernetes command-line tool which allows you to configure Kubernetes clusters.
 
-1. In the Kubernetes cluster, there is a utility called kind that will spin up lightweight Kubernetes cluster. Use the following command to create a Kubernetes cluster.
+## 1. Create a Kubernetes Cluster
 
-        $ kind create cluster --name certmanager --image kindest/node:v1.19.1
+To get started, let's create a Kubernetes cluster using `minikube`:
 
-2. After the cluster has been created, access the up and running nodes that exist within that cluster. To do so, execute the following kubectl command:
+```bash
+minikube start
+```
 
-        $ kubectl get nodes
+Now check that you can connect to the cluster:
+
+```bash
+kubectl get nodes
+```
+
+> ⚠️ It may take 2-3 minutes to create the cluster because minikube will need to download and cache all the software.
 
 ### Install cert-manager
 1. Visit the [cert-manager’s GitHub page](https://github.com/cert-manager/cert-manager).
