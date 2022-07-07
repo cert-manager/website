@@ -9,14 +9,9 @@ And finally you will learn how that certificate can be used in Kubernetes to ser
 
 > 🔰 Let’s Encrypt is an Internet service that allows you to generate free short-lived SSL certificates automatically.
 
-## Step-by-Step Process
-### Prerequisites
-* You must have a working container
-* Mount Kubeconfig file and code using the command:
-  `docker run -it --rm -v ${HOME}:/root/ -v ${PWD}:/work -w /work --net host alpine sh`
-* Install kubectl
+## Prerequisites
 
-### Create a Kubernetes Cluster
+1. [minikube](https://minikube.sigs.k8s.io/docs/start/): minikube quickly sets up a local Kubernetes cluster on macOS, Linux, and Windows.
 
 To get started, let's create a Kubernetes cluster. If your Kubernetes cluster already exists, then skip the first step.
 
