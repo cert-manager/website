@@ -34,27 +34,21 @@ kubectl get nodes
 
 > ⚠️ It may take 2-3 minutes to create the cluster because minikube will need to download and cache all the software.
 
-### Install cert-manager
-1. Visit the [cert-manager’s GitHub page](https://github.com/cert-manager/cert-manager).
-2. Locate the release section, select the release to be downloaded.
-3. Scroll down to the Assets section and download the `cert-manager.yaml` file. Alternatively, you can also run a curl command as shown below to download it.
-    ```
-    curl -LO https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml
-    ```
+## 2. Install cert-manager
 
-4. Create a new namespace.
+Install cert-manager using `kubectl` as follows:
 
-        $ kubectl create ns cert-manager
+```
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cert-manager.yaml
+```
 
-5. The next step is to deploy cert-manager. Run the following command:
+You can view some of the resources that have been installed as follows:
 
-        $ kubectl apply --validate=false -f cert-manager.yaml
+```bash
+kubectl -n cert-manager get all
+```
 
-    Doing so will install all the required resources and packages. It will also create all the custom resources, bindings, and back permissions, with the service account.
-
-6. To view all of the resources that have been downloaded with the cert-manager installation such as CA injector pods, webhook pods, etc., execute the following command:
-
-        $ kubectl -n cert-manager get all
+> ℹ️ Learn about other ways to install cert-manager by reading the [Installing cert-manager Section](../installation).
 
 ## Configure a Certificate Issuer
 
