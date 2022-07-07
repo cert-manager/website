@@ -3,34 +3,34 @@ title: Getting Started
 description: Learn how to deploy cert-manager in your Kubernetes cluster and how to configure it to sign SSL certificates using Let's Encrypt
 ---
 
-# Introduction
+## Introduction
 In this section, we will discuss how to deploy a cert-manager for your Kubernetes cluster. Typically, the TLS or SSL certificates are stored as Kubernetes secrets. These certificates are utilized by various namespaces to further be consumed by applications or ingress controllers. However, these certificates come with an expiry date which can vary for each certificate. Not timely updating these certificates can cause issues and disruptions.
 
-# The Challenge
+## The Challenge
 There can be two main reasons for the disruption:
 * The first reason is human error. The more Kubernetes cluster or namespaces there are, the more effort it would take to put in to manually update and maintain them. Also, there can be chances of missing out on one or more clusters and it can cause downtime.
 * The second reason is the security of the certificates. Long-term certificates that have an expiry date of two years have more chances of security breaches. Kubernetes provides a way to protect the certificates using RBAC, but cluster administrators still have access to them.
 
-## What is Let’s Encrypt?
+### What is Let’s Encrypt?
 Let’s Encrypt is a certificate authority that allows to generate free short-lived certificates automatically. To get a certificate, run a certbot on the server. It forwards a request for certificate to Let’s Encrypt which in return provides a challenge. The certbot successfully fulfills the challenge, upon which Let’s Encrypt provides the certificate. You can automate this process using a cron job.
 
 In case, you have multiple domains and want multiple SSL certificates for each, how to automate the certificate lifecycle to keep them secure? This is where cert-manager comes in. It lives in your Kubernetes clusters. It is wired up to a certificate authority such as Let’s Encrypt, Vault, etc. The certificate request can be forwarded using a YAML file.
 
 
-## How is YAML File Used?
+### How is YAML File Used?
 In the Yaml file, simply specify the domain for which the certificate is required, along with the secret for where the certificate will be stored in. The cert-manager will interact with the CA and place the newly issued certificate in the specified Kubernetes secret. It will also replace the Kubernetes secret with a new one when it is about to expire. This means you can get free and automated SSL certificate generation with complete certificate lifecycle management.
 
-## What is cert-manager?
+### What is cert-manager?
 Cert-manager is a Kubernetes add-on that automates the management and issuance of TLS certificate. It looks at different issuers, certificate objects, and pods. We can use the cert-managr using a yaml file. The [cert-manager documentation](https://cert-manager.io/docs/) provides a good description about how to use Let’s encrypt, create certificate objects, and pull up certificate requests.
 
-# Step-by-Step Process
-## Prerequisites
+## Step-by-Step Process
+### Prerequisites
 * You must have a working container
 * Mount Kubeconfig file and code using the command:
   `docker run -it --rm -v ${HOME}:/root/ -v ${PWD}:/work -w /work --net host alpine sh`
 * Install kubectl
 
-## Create a Kubernetes Cluster
+### Create a Kubernetes Cluster
 
 To get started, let's create a Kubernetes cluster. If your Kubernetes cluster already exists, then skip the first step.
 
@@ -42,7 +42,7 @@ To get started, let's create a Kubernetes cluster. If your Kubernetes cluster al
 
         $ kubectl get nodes
 
-## Install cert-manager
+### Install cert-manager
 1. Visit the [cert-manager’s GitHub page](https://github.com/cert-manager/cert-manager).
 2. Locate the release section, select the release to be downloaded.
 3. Scroll down to the Assets section and download the `cert-manager.yaml` file. Alternatively, you can also run a curl command as shown below to download it.
@@ -64,7 +64,7 @@ To get started, let's create a Kubernetes cluster. If your Kubernetes cluster al
 
         $ kubectl -n cert-manager get all
 
-# Configure a Certificate Issuer
+## Configure a Certificate Issuer
 
 Once the cert-manager has been installed, we need to tie it with a certificate authority.  To do so, we need an issuer. An issuer is used to define the certificate authority to be used. If you already have an issuer, skip this section.
 
@@ -87,7 +87,7 @@ Once the cert-manager has been installed, we need to tie it with a certificate a
 
     The cert-manager will go ahead and request a certificate from the issuer and place the certificate in the `secretName` which in this case is `selfsigned-cert-tls`. Similarly, the issuer being used `test-selfsigned` that we have just deployed.
 
-# Generate a Certificate
+## Generate a Certificate
 
 1. With all the resources and issuers deployed, the next step is to generate a certificate.
 
@@ -103,7 +103,7 @@ Once the cert-manager has been installed, we need to tie it with a certificate a
 
    A secret will be created in our cluster, ready to use.
 
-## Setup Ingress Controller
+### Setup Ingress Controller
 In Kubernetes Cluster, there is an Ingress Controller that accepts public traffic. In this example, we will use an existing ingress controller to accept the incoming web requests for the let’s encrypt challenge. This will allow us to solve the let’s encrypt challenge.
 
 Let’s go ahead and deploy an Ingress controller to our cluster. If you already have an existing ingress controller, skip this section.
@@ -129,7 +129,7 @@ Let’s go ahead and deploy an Ingress controller to our cluster. If you already
         $ kubectl -n ingress-nginx --address 0.0.0.0 port-forward svc/ingress-nginx-controller 80
         $ kubectl -n ingress-nginx --address 0.0.0.0 port-forward svc/ingress-nginx-controller 443
 
-## Setup DNS
+### Setup DNS
 
 1. Now that the ingress controller has been deployed, the next step is to get the public IP of this machine so we can link the DNS record with the IP address. To do so, run the following command:
 
@@ -142,6 +142,6 @@ Let’s go ahead and deploy an Ingress controller to our cluster. If you already
 4. Add an 'A' record followed by the IP returned by the server. Wait for a while for the DNS to be propagated.
 5. Now try to access your DNS in your browser which will also be publically accessible.
 
-## Setup Let's Encrypt
+### Setup Let's Encrypt
 
 TBD
