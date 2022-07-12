@@ -63,9 +63,9 @@ conditionally disable different components, we also ship a copy of the
 deployment files that do not include the webhook.
 
 Instead of installing with
-[`cert-manager.yaml`](https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml)
+[`cert-manager.yaml`](https://github.com/cert-manager/cert-manager/releases/download/v0.12.0/cert-manager.yaml)
 file, you should instead use the
-[`cert-manager-no-webhook.yaml`](https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml)
+[`cert-manager-no-webhook.yaml`](https://github.com/cert-manager/cert-manager/releases/download/v0.12.0/cert-manager.yaml)
 file located in the deploy directory.
 
 This is a destructive operation, as it will remove the
@@ -78,8 +78,8 @@ running the following commands.
 To re-install cert-manager without the webhook, run:
 
 ```bash
-$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager-no-webhook.yaml
+$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/v0.12.0/cert-manager.yaml
+$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v0.12.0/cert-manager-no-webhook.yaml
 ```
 
 Once you have re-installed cert-manager, you should then [restore your

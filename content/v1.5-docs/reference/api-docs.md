@@ -9577,7 +9577,7 @@ Resource Types:
             </td>
             <td>
               <em>(Optional)</em>
-              <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/jetstack/cert-manager/issues/4292">https://github.com/jetstack/cert-manager/issues/4292</a> </p>
+              <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/cert-manager/cert-manager/issues/4292">https://github.com/cert-manager/cert-manager/issues/4292</a> </p>
             </td>
           </tr>
           <tr>
@@ -10800,7 +10800,7 @@ Resource Types:
       </td>
       <td>
         <em>(Optional)</em>
-        <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/jetstack/cert-manager/issues/4292">https://github.com/jetstack/cert-manager/issues/4292</a> </p>
+        <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/cert-manager/cert-manager/issues/4292">https://github.com/cert-manager/cert-manager/issues/4292</a> </p>
       </td>
     </tr>
     <tr>
@@ -12263,7 +12263,7 @@ Resource Types:
             </td>
             <td>
               <em>(Optional)</em>
-              <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/jetstack/cert-manager/issues/4292">https://github.com/jetstack/cert-manager/issues/4292</a> </p>
+              <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/cert-manager/cert-manager/issues/4292">https://github.com/cert-manager/cert-manager/issues/4292</a> </p>
             </td>
           </tr>
           <tr>
@@ -13491,7 +13491,7 @@ Resource Types:
       </td>
       <td>
         <em>(Optional)</em>
-        <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/jetstack/cert-manager/issues/4292">https://github.com/jetstack/cert-manager/issues/4292</a> </p>
+        <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/cert-manager/cert-manager/issues/4292">https://github.com/cert-manager/cert-manager/issues/4292</a> </p>
       </td>
     </tr>
     <tr>
@@ -14961,7 +14961,7 @@ Resource Types:
             </td>
             <td>
               <em>(Optional)</em>
-              <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/jetstack/cert-manager/issues/4292">https://github.com/jetstack/cert-manager/issues/4292</a> </p>
+              <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/cert-manager/cert-manager/issues/4292">https://github.com/cert-manager/cert-manager/issues/4292</a> </p>
             </td>
           </tr>
           <tr>
@@ -16178,7 +16178,7 @@ Resource Types:
       </td>
       <td>
         <em>(Optional)</em>
-        <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/jetstack/cert-manager/issues/4292">https://github.com/jetstack/cert-manager/issues/4292</a> </p>
+        <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/cert-manager/cert-manager/issues/4292">https://github.com/cert-manager/cert-manager/issues/4292</a> </p>
       </td>
     </tr>
     <tr>
@@ -17659,7 +17659,7 @@ Resource Types:
             </td>
             <td>
               <em>(Optional)</em>
-              <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/jetstack/cert-manager/issues/4292">https://github.com/jetstack/cert-manager/issues/4292</a> </p>
+              <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/cert-manager/cert-manager/issues/4292">https://github.com/cert-manager/cert-manager/issues/4292</a> </p>
             </td>
           </tr>
           <tr>
@@ -18882,7 +18882,7 @@ Resource Types:
       </td>
       <td>
         <em>(Optional)</em>
-        <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/jetstack/cert-manager/issues/4292">https://github.com/jetstack/cert-manager/issues/4292</a> </p>
+        <p> SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See <a href="https://github.com/cert-manager/cert-manager/issues/4292">https://github.com/cert-manager/cert-manager/issues/4292</a> </p>
       </td>
     </tr>
     <tr>

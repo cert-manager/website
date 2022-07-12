@@ -34,10 +34,10 @@ Install the `CustomResourceDefinitions` and cert-manager itself:
 
 ```bash
 # Kubernetes 1.15+
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.2/cert-manager.yaml
+$ kubectl apply --validate=false -f https://github.com/cert-manager/cert-manager/releases/download/v0.15.2/cert-manager.yaml
 
 # Kubernetes <1.15
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.2/cert-manager-legacy.yaml
+$ kubectl apply --validate=false -f https://github.com/cert-manager/cert-manager/releases/download/v0.15.2/cert-manager-legacy.yaml
 ```
 
 > **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the manifests.
@@ -136,10 +136,10 @@ Install the `CustomResourceDefinition` resources using `kubectl`:
 
 ```bash
 # Kubernetes 1.15+
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.1/cert-manager.crds.yaml
+$ kubectl apply --validate=false -f https://github.com/cert-manager/cert-manager/releases/download/v0.15.1/cert-manager.crds.yaml
 
 # Kubernetes <1.15
-$ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.1/cert-manager-legacy.crds.yaml
+$ kubectl apply --validate=false -f https://github.com/cert-manager/cert-manager/releases/download/v0.15.1/cert-manager-legacy.crds.yaml
 ```
 
 > **Note**: If you're using a Kubernetes version below `v1.15` you will need to install the legacy version of the CRDs.

@@ -33,7 +33,7 @@ Delete the installation manifests using a link to your currently running version
 `vX.Y.Z` like so:
 
 ```bash
-$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
+$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
 ```
 
 ## Uninstalling with Helm

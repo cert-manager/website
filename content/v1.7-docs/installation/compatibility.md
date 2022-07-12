@@ -20,7 +20,7 @@ when installing cert-manager either using a command line flag or an entry in
 your `values.yaml` file.
 
 If you have a port clash, you could see confusing error messages regarding
-untrusted certs. See [#3237](https://github.com/jetstack/cert-manager/issues/3237)
+untrusted certs. See [#3237](https://github.com/cert-manager/cert-manager/issues/3237)
 for more details.
 </div>
 
@@ -48,7 +48,7 @@ docs](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#ad
 ### GKE Autopilot
 
 GKE Autopilot mode with Kubernetes < 1.21 does not support cert-manager,
-due to a [restriction on mutating admission webhooks](https://github.com/jetstack/cert-manager/issues/3717).
+due to a [restriction on mutating admission webhooks](https://github.com/cert-manager/cert-manager/issues/3717).
 
 As of October 2021, only the "rapid" Autopilot release channel has rolled
 out version 1.21 for Kubernetes masters. Installation via the helm chart
@@ -73,7 +73,7 @@ port; see the warning at the top of the page for details.
 
 It's worth noting that using AWS Fargate doesn't allow much network configuration and
 will cause the webhook's port to clash with the kubelet running on port 10250, as seen
-in [#3237](https://github.com/jetstack/cert-manager/issues/3237).
+in [#3237](https://github.com/cert-manager/cert-manager/issues/3237).
 
 When deploying cert-manager on Fargate, you _must_ change the port on which
 the webhook listens. See the warning at the top of this page for more details.

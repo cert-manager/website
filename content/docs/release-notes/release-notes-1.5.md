@@ -40,11 +40,11 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 #### Bug or Regression
 
-- Fixed a regression where cert-manager was creating Ingresses using the field `ingressClassName` instead of the annotation `kubernetes.io/ingress.class`. More details about this regression are available [in the 1.7 release notes](https://cert-manager.io/next-docs/release-notes/release-notes-1.7/#ingress-class-semantics). ([#4783](https://github.com/jetstack/cert-manager/pull/4783), [@maelvls](https://github.com/maelvls))
+- Fixed a regression where cert-manager was creating Ingresses using the field `ingressClassName` instead of the annotation `kubernetes.io/ingress.class`. More details about this regression are available [in the 1.7 release notes](https://cert-manager.io/next-docs/release-notes/release-notes-1.7/#ingress-class-semantics). ([#4783](https://github.com/cert-manager/cert-manager/pull/4783), [@maelvls](https://github.com/maelvls))
 
 #### Other (Cleanup or Flake)
 
-- cert-manager now does one call to the ACME API instead of two when an Order fails. This belongs to the effort towards mitigating [the high load](https://github.com/jetstack/cert-manager/issues/3298) that cert-manager deployments have on the Let's Encrypt API ([#4618](https://github.com/jetstack/cert-manager/pull/4618), [@irbekrm](https://github.com/irbekrm))
+- cert-manager now does one call to the ACME API instead of two when an Order fails. This belongs to the effort towards mitigating [the high load](https://github.com/cert-manager/cert-manager/issues/3298) that cert-manager deployments have on the Let's Encrypt API ([#4618](https://github.com/cert-manager/cert-manager/pull/4618), [@irbekrm](https://github.com/irbekrm))
 
 ## v1.5.4
 
@@ -52,13 +52,13 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 #### Bug or Regression
 
-- Fixed a bug that caused cert-manager to panic when the Vault Issuer failed to reach the health endpoint. ([#4476](https://github.com/jetstack/cert-manager/pull/4476), [@JoshVanL](https://github.com/JoshVanL))
-- Helm chart: the post-install hook `startupapicheck` is now compatible with the PodSecurityPolicy resource. ([#4432](https://github.com/jetstack/cert-manager/pull/4432), [@ndegory](https://github.com/ndegory))
-- Helm chart: the post-install hook `startupapicheck` now deletes any post-install hook resources left after a previous failed install allowing `helm install` to be re-run after a failed attempt. ([#4435](https://github.com/jetstack/cert-manager/pull/4435), [@wallrj](https://github.com/wallrj))
+- Fixed a bug that caused cert-manager to panic when the Vault Issuer failed to reach the health endpoint. ([#4476](https://github.com/cert-manager/cert-manager/pull/4476), [@JoshVanL](https://github.com/JoshVanL))
+- Helm chart: the post-install hook `startupapicheck` is now compatible with the PodSecurityPolicy resource. ([#4432](https://github.com/cert-manager/cert-manager/pull/4432), [@ndegory](https://github.com/ndegory))
+- Helm chart: the post-install hook `startupapicheck` now deletes any post-install hook resources left after a previous failed install allowing `helm install` to be re-run after a failed attempt. ([#4435](https://github.com/cert-manager/cert-manager/pull/4435), [@wallrj](https://github.com/wallrj))
 
 #### Other (Cleanup or Flake)
 
-- Update cert-manager base image versions ([#4479](https://github.com/jetstack/cert-manager/pull/4479), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Update cert-manager base image versions ([#4479](https://github.com/cert-manager/cert-manager/pull/4479), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## v1.5.3
 
@@ -66,7 +66,7 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 #### Bug or Regression
 
-- Fix a bug where a Certificate may not get renewed when the issued Certificate has a one-second skew between `notBefore` and `notAfter` and `spec.duration` is not used. This one-second skew can be observed on certificates issued with Let's Encrypt and caused a mismatch in time precision between the time stored in `status.renewalTime` and the time internally computed by cert-manager. ([#4403](https://github.com/jetstack/cert-manager/pull/4403), [@irbekrm](https://github.com/irbekrm)). Thanks to [@mfmbarros](https://github.com/mfmbarros) for help with debugging the issue!
+- Fix a bug where a Certificate may not get renewed when the issued Certificate has a one-second skew between `notBefore` and `notAfter` and `spec.duration` is not used. This one-second skew can be observed on certificates issued with Let's Encrypt and caused a mismatch in time precision between the time stored in `status.renewalTime` and the time internally computed by cert-manager. ([#4403](https://github.com/cert-manager/cert-manager/pull/4403), [@irbekrm](https://github.com/irbekrm)). Thanks to [@mfmbarros](https://github.com/mfmbarros) for help with debugging the issue!
 
 ## v1.5.2
 
@@ -74,9 +74,9 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 #### Bug or Regression
 
-- Fix a regression introduced in v1.5.0 where the Ingress created for solving HTTP-01 challenges was created with `pathType: Exact` instead of `pathType: ImplementationSpecific`. ([#4385](https://github.com/jetstack/cert-manager/pull/4385), [@jakexks](https://github.com/jakexks))
-- Fixed the HTTP-01 solver creating ClusterIP instead of NodePort services by default. ([#4394](https://github.com/jetstack/cert-manager/pull/4394), [@jakexks](https://github.com/jakexks))
-- Helm chart and static manifest: the pointless `status` field is now stripped from the CRD manifests. ([#4387](https://github.com/jetstack/cert-manager/pull/4387), [@irbekrm](https://github.com/irbekrm))
+- Fix a regression introduced in v1.5.0 where the Ingress created for solving HTTP-01 challenges was created with `pathType: Exact` instead of `pathType: ImplementationSpecific`. ([#4385](https://github.com/cert-manager/cert-manager/pull/4385), [@jakexks](https://github.com/jakexks))
+- Fixed the HTTP-01 solver creating ClusterIP instead of NodePort services by default. ([#4394](https://github.com/cert-manager/cert-manager/pull/4394), [@jakexks](https://github.com/jakexks))
+- Helm chart and static manifest: the pointless `status` field is now stripped from the CRD manifests. ([#4387](https://github.com/cert-manager/cert-manager/pull/4387), [@irbekrm](https://github.com/irbekrm))
 
 ## v1.5.1
 
@@ -91,7 +91,7 @@ v1beta1 are all deprecated and will be removed in a future release.
 
 #### Bug or Regression
 
-- Fix `v1beta1` CRDs which were accidentally changed in cert-manager v1.5.0 ([#4355](https://github.com/jetstack/cert-manager/pull/4355), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix `v1beta1` CRDs which were accidentally changed in cert-manager v1.5.0 ([#4355](https://github.com/cert-manager/cert-manager/pull/4355), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## v1.5.0
 
@@ -119,8 +119,8 @@ your YAML manifests that use a deprecated API version to use
 `cert-manager.io/v1` instead, and re-apply them.
 
 These deprecation changes have been implemented in the cert-manager PRs
-[#4225](https://github.com/jetstack/cert-manager/pull/4225) and
-[#4172](https://github.com/jetstack/cert-manager/pull/4172).
+[#4225](https://github.com/cert-manager/cert-manager/pull/4225) and
+[#4172](https://github.com/cert-manager/cert-manager/pull/4172).
 
 ### Experimental Features
 
@@ -152,8 +152,8 @@ resources to get a cert-manager Certificate automatically created, similar to
 the current ingress-shim functionality.
 
 Implemented in the cert-manager PRs
-[#4276](https://github.com/jetstack/cert-manager/pull/4276) and
-[#4158](https://github.com/jetstack/cert-manager/pull/4158).
+[#4276](https://github.com/cert-manager/cert-manager/pull/4276) and
+[#4158](https://github.com/cert-manager/cert-manager/pull/4158).
 
 #### CertificateSigningRequests
 
@@ -193,12 +193,12 @@ due to a technical limitation related to the fact that Kubernetes resources have
 a status subresource that is separate from the main resource.
 
 The above features were implemented in the cert-manager PRs
-[#4112](https://github.com/jetstack/cert-manager/pull/4112),
-[#4100](https://github.com/jetstack/cert-manager/pull/4100),
-[#4103](https://github.com/jetstack/cert-manager/pull/4103),
-[#4108](https://github.com/jetstack/cert-manager/pull/4108),
-[#4106](https://github.com/jetstack/cert-manager/pull/4106), and
-[#4143](https://github.com/jetstack/cert-manager/pull/4143)
+[#4112](https://github.com/cert-manager/cert-manager/pull/4112),
+[#4100](https://github.com/cert-manager/cert-manager/pull/4100),
+[#4103](https://github.com/cert-manager/cert-manager/pull/4103),
+[#4108](https://github.com/cert-manager/cert-manager/pull/4108),
+[#4106](https://github.com/cert-manager/cert-manager/pull/4106), and
+[#4143](https://github.com/cert-manager/cert-manager/pull/4143)
 
 ### User Experience
 
@@ -240,9 +240,9 @@ plugin](https://cert-manager.io/next-docs/installation/kubectl-plugin/) page on
 the cert-manager website.
 
 These features were implemented by Tim in the cert-manager PRs
-[#4226](https://github.com/jetstack/cert-manager/pull/4226),
-[#4205](https://github.com/jetstack/cert-manager/pull/4205), and
-[#4138](https://github.com/jetstack/cert-manager/pull/4138).
+[#4226](https://github.com/cert-manager/cert-manager/pull/4226),
+[#4205](https://github.com/cert-manager/cert-manager/pull/4205), and
+[#4138](https://github.com/cert-manager/cert-manager/pull/4138).
 
 #### Helm chart
 
@@ -254,7 +254,7 @@ comes with a small startup job that waits until the cert-manager API becomes
 ready.
 
 Implemented in the cert-manager PR
-[#4234](https://github.com/jetstack/cert-manager/pull/4234) by Tim.
+[#4234](https://github.com/cert-manager/cert-manager/pull/4234) by Tim.
 
 #### Labels and annotations on generated Secret and CertificateRequest resources
 
@@ -296,8 +296,8 @@ If you wish to keep the old behavior and allow all annotations to be copied, you
 can pass the flag `--copied-annotations=*` to the cert-manager controller.
 
 Implemented in the cert-manager PRs
-[#3828](https://github.com/jetstack/cert-manager/pull/3828) and
-[#4251](https://github.com/jetstack/cert-manager/pull/4251).
+[#3828](https://github.com/cert-manager/cert-manager/pull/3828) and
+[#4251](https://github.com/cert-manager/cert-manager/pull/4251).
 
 ### Community
 
@@ -334,83 +334,83 @@ out on the Slack `#cert-manager` channel; it's a huge help and much appreciated.
 
 - cert-manager now supports using Ed25519 private keys and signatures for
   Certificates. Implemented in the cert-manager PR
-  [#4079](https://github.com/jetstack/cert-manager/pull/4079).
+  [#4079](https://github.com/cert-manager/cert-manager/pull/4079).
 - cert-manager now emits an event when a CertificateSigningRequest resource has
   not yet been approved. Without this event, the user would never know that
   cert-manager is waiting for the approval of the CertificateSigningRequest
   resource. Implemented in the cert-manager PR
-  [#4229](https://github.com/jetstack/cert-manager/pull/4229).
+  [#4229](https://github.com/cert-manager/cert-manager/pull/4229).
 - cert-manager now only supports the version `v1` of the `AdmissionReviewVersion`
   and `ConversionReviewVersion` resources, both available since Kubernetes 1.16.
   The `v1beta1` version is no longer supported by cert-manager. This change was
   implemented in the cert-manager PRs
-  [#4254](https://github.com/jetstack/cert-manager/pull/4254) and
-  [#4253](https://github.com/jetstack/cert-manager/pull/4253).
+  [#4254](https://github.com/cert-manager/cert-manager/pull/4254) and
+  [#4253](https://github.com/cert-manager/cert-manager/pull/4253).
 - cert-manager now restarts more quickly by clearing the leader election before
   shutting down. Also, upon shutdown, the controller loops now cleanly stop,
   which allows all in-flight reconciliation functions to finish before exiting.
   Implemented in the cert-manager PR
-  [#4243](https://github.com/jetstack/cert-manager/pull/4243).
+  [#4243](https://github.com/cert-manager/cert-manager/pull/4243).
 - Metrics: a new metric, named `clock_time_seconds` was added; this metric
   allows for monitoring systems that do not have a built-in time function (e.g.
   DataDog) to calculate the number of seconds until a certificate expires by
   subtracting this metric from the existing `certificate_expiration_timestamp`
   metrics. Implemented in the cert-manager PR
-  [#4105](https://github.com/jetstack/cert-manager/pull/4105).
+  [#4105](https://github.com/cert-manager/cert-manager/pull/4105).
 - Helm chart: the Prometheus scraping service port now has a name. Implemented
   in the cert-manager PR
-  [#4072](https://github.com/jetstack/cert-manager/pull/4072).
+  [#4072](https://github.com/cert-manager/cert-manager/pull/4072).
 - Helm chart: you can now configure the labels for the cert-manager-webhook
   service using the Helm value `webhook.serviceLabels`. Implemented in the
-  cert-manager PR [#4260](https://github.com/jetstack/cert-manager/pull/4260).
+  cert-manager PR [#4260](https://github.com/cert-manager/cert-manager/pull/4260).
 
 #### Bug or Regression
 
 - Security: cert-manager now times out after 10 second when performing the
   self-check while solving HTTP-01 challenges. Fixed in the cert-manager PR
-  [#4311](https://github.com/jetstack/cert-manager/pull/4311).
+  [#4311](https://github.com/cert-manager/cert-manager/pull/4311).
 - Cloudflare: Refactored DNS01 challenge to use API for finding the nearest Zone
   (fixing potential DNS issues)
-  ([#4147](https://github.com/jetstack/cert-manager/pull/4147),
+  ([#4147](https://github.com/cert-manager/cert-manager/pull/4147),
   [@thiscantbeserious](https://github.com/thiscantbeserious))
 - Fix a bug where failed CertificateRequest resources were not retried
-  ([#4130](https://github.com/jetstack/cert-manager/pull/4130),
+  ([#4130](https://github.com/cert-manager/cert-manager/pull/4130),
   [@irbekrm](https://github.com/irbekrm))
 - Fix a regression that would lead to a Certificate becoming "Failed" when the
   issued X.509 certificate's subject DN would be equal to the issuer's subject
   DN. Fixed in the cert-manager PR
-  [#4237](https://github.com/jetstack/cert-manager/pull/4237).
+  [#4237](https://github.com/cert-manager/cert-manager/pull/4237).
 - Fix a regression where the `tls.crt` certificate chain would unexpectedly not
   contain an intermediate CA certificate when no root CA is available in the CA
   chain returned by the issuer. This bug affected the Vault Issuer, Venafi
   Issuer and CA Issuer. This bug was fixed in the cert-manager PR
-  [#4261](https://github.com/jetstack/cert-manager/pull/4261).
+  [#4261](https://github.com/cert-manager/cert-manager/pull/4261).
 - Fix a goroutine leak that was causing the controller's memory usage to grow
   with time. Fixed in the cert-manager PR
-  [#4233](https://github.com/jetstack/cert-manager/pull/4233).
+  [#4233](https://github.com/cert-manager/cert-manager/pull/4233).
 - Fix a race condition introduced in cert-manager 0.15 that would crash
   cert-manager for clusters with a large number of certificates. Fixed in the
-  cert-manager PR [#4231](https://github.com/jetstack/cert-manager/pull/4231).
+  cert-manager PR [#4231](https://github.com/cert-manager/cert-manager/pull/4231).
 - Fix a bug where the default renewal duration of certificate, set to 30 days,
   would clash with the duration of certificates issued by the Vault Issuer. All
   Certificate resources are now renewed 2/3 through the duration unless a custom
   renew period is specified by setting `renewBefore` on the Certificate. Fixed
   in the cert-manager PR
-  [#4092](https://github.com/jetstack/cert-manager/pull/4092).
+  [#4092](https://github.com/cert-manager/cert-manager/pull/4092).
 - The cert-manager binaries, including the kubectl plugin, now exit with the
   correct exit code on SIGINT (Ctrl+C) and SIGTERM events. More specifically,
   when one of these events is caught, cert-manager will exit with the code 128 +
   signal number. Fixed in
-  [#4230](https://github.com/jetstack/cert-manager/pull/4230).
+  [#4230](https://github.com/cert-manager/cert-manager/pull/4230).
 - The static manifests available on the GitHub Releases page now contain a
   version label `app.kubernetes.io/version: v1.5.0`. We also removed the
   Helm-specific labels from the static manifests. Fixed in the cert-manager PR
-  [#4190](https://github.com/jetstack/cert-manager/pull/4190).
+  [#4190](https://github.com/cert-manager/cert-manager/pull/4190).
 
 #### Other (Cleanup or Flake)
 
 - A conformance end-to-end testing suite was added for the
   CertificateSigningRequest resources
-  ([#4101](https://github.com/jetstack/cert-manager/pull/4101)).
+  ([#4101](https://github.com/cert-manager/cert-manager/pull/4101)).
 - Reduce binary sizes from 74MB down to 49MB by adding the Go ldflag `-w`
-  ([#4181](https://github.com/jetstack/cert-manager/pull/4181)).
+  ([#4181](https://github.com/cert-manager/cert-manager/pull/4181)).

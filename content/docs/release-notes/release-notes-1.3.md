@@ -8,7 +8,7 @@ description: 'cert-manager release notes: cert-manager v1.3'
 ## Bug and Security Fixes
 
 - A Helm upgrade bug was
-  [fixed](https://github.com/jetstack/cert-manager/pull/3882), you should now
+  [fixed](https://github.com/cert-manager/cert-manager/pull/3882), you should now
   able to upgrade from cert-manager 1.2 to 1.3 when `--set installCRDs=true` is
   used. This issue was due to [a Helm
   bug](https://github.com/helm/helm/issues/5806#issuecomment-788116838) with the
@@ -37,7 +37,7 @@ Special thanks to the external contributors who contributed to this release:
 
 Please read the [upgrade notes](../installation/upgrading/upgrading-1.2-1.3.md) before upgrading.
 
-As always, the full change log is available on the [GitHub release](https://github.com/jetstack/cert-manager/releases/tag/v1.3.0).
+As always, the full change log is available on the [GitHub release](https://github.com/cert-manager/cert-manager/releases/tag/v1.3.0).
 
 ## Deprecated Features and Breaking Changes
 
@@ -63,7 +63,7 @@ The `--renew-before-expiration-duration` flag has been removed from the cert-man
 
 ### Policy Support Preparation
 
-* The [design documentation](https://github.com/jetstack/cert-manager/blob/v1.3.0/design/20210203.certificate-request-identity.md) for Certificate Identity is now available.
+* The [design documentation](https://github.com/cert-manager/cert-manager/blob/v1.3.0/design/20210203.certificate-request-identity.md) for Certificate Identity is now available.
 * `CertificateRequests` now have identity fields mirroring the upstream [Kubernetes CSR](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/) object.
 * `CertificateRequests` are now immutable.
 * `CertificateRequests` now have an Approval condition type, with `Approved` and `Denied` reasons.

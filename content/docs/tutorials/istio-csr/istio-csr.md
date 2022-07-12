@@ -33,7 +33,7 @@ helm repo add jetstack https://charts.jetstack.io
 helm repo update
 
 # install cert-manager CRDs
-kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.8.0/cert-manager.crds.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.crds.yaml
 
 # install cert-manager; this might take a little time
 helm install cert-manager jetstack/cert-manager \

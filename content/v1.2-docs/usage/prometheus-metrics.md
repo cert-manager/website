@@ -11,7 +11,7 @@ How metrics are scraped will depend how you're operating your Prometheus server(
 
 ### Helm
 
-If you're deploying cert-manager with helm, a `ServiceMonitor` resource can be configured. This configuration should enable metric scraping, and the configuration can be further tweaked as described in the [Helm configuration documentation](https://github.com/jetstack/cert-manager/blob/master/deploy/charts/cert-manager/README.template.md#configuration).
+If you're deploying cert-manager with helm, a `ServiceMonitor` resource can be configured. This configuration should enable metric scraping, and the configuration can be further tweaked as described in the [Helm configuration documentation](https://github.com/cert-manager/cert-manager/blob/master/deploy/charts/cert-manager/README.template.md#configuration).
 
 ```yaml
 prometheus:

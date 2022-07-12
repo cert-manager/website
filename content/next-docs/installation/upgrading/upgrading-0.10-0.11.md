@@ -79,12 +79,12 @@ your cluster for you.
 
 Firstly, download the binary for your given platform
 ```bash
-   $ wget -O api-migration https://github.com/jetstack/cert-manager/releases/download/v0.11.0/api-migration-linux
+   $ wget -O api-migration https://github.com/cert-manager/cert-manager/releases/download/v0.11.0/api-migration-linux
 ```
 
 Or for Darwin
 ```bash
-   $ wget -O api-migration https://github.com/jetstack/cert-manager/releases/download/v0.11.0/api-migration-darwin
+   $ wget -O api-migration https://github.com/cert-manager/cert-manager/releases/download/v0.11.0/api-migration-darwin
 ```
 
 Mark the binary as executable and run the binary against your cluster

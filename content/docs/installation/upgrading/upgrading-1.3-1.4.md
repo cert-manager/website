@@ -7,8 +7,8 @@ description: 'cert-manager installation: Upgrading v1.3 to v1.4'
 
 Since cert-manager `v0.15` there has been a package for cert-manager on [Red Hat Marketplace][],
 but this has now been removed because it was not maintained and was found to be unreliable:
-[#4055](https://github.com/jetstack/cert-manager/issues/4055)
-[#3732](https://github.com/jetstack/cert-manager/issues/3732)
+[#4055](https://github.com/cert-manager/cert-manager/issues/4055)
+[#3732](https://github.com/cert-manager/cert-manager/issues/3732)
 [#436](https://github.com/cert-manager/website/issues/436)
 
 [Red Hat Marketplace]: https://marketplace.redhat.com
