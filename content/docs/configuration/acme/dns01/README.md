@@ -178,6 +178,7 @@ Links to these supported providers along with their documentation are below:
 - [`bizflycloud-certmanager-dns-webhook`](https://github.com/bizflycloud/bizflycloud-certmanager-dns-webhook)
 - [`cert-manager-webhook-hetzner`](https://github.com/vadimkim/cert-manager-webhook-hetzner)
 - [`cert-manager-webhook-yandex-cloud`](https://github.com/malinink/cert-manager-webhook-yandex-cloud)
+- [`cert-manager-webhook-pdns`](https://github.com/zachomedia/cert-manager-webhook-pdns)
 
 You can find more information on how to configure webhook providers [here](./webhook.md).
 
