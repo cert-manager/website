@@ -244,7 +244,7 @@ gcloud dns record-sets create $DOMAIN_NAME \
 >
 > 🔰 Read more about how to [Add, modify, and delete DNS records in Google Cloud](https://cloud.google.com/dns/docs/records/)
 
-### Create an Ingress
+## 7. Create an Ingress
 
 You won't be able to reach your website yet.
 Your web server is running inside your Kubernetes cluster but there is no route or proxy through which Internet clients can connect to it, yet!
@@ -279,24 +279,17 @@ And apply it:
 kubectl apply -f ingress.yaml
 ```
 
-> ℹ️ There are two Ingress classes available for GKE Ingress. The `gce` class deploys an external load balancer and the `gce-internal` class deploys an internal load balancer. Ingress resources without a class specified default to gce.
-> Read more about [Configuring Ingress for external load balancing in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#creating_an_ingress)
->
-> ⚠️Contrary to the Kubernetes Ingress documentation, you MUST use the `kubernetes.io/ingress.class` annotation rather than the `Ingress.Spec.IngressClassName` field.
-> See [kubernetes/ingress-gce/issues#1301](https://github.com/kubernetes/ingress-gce/issues/1301#issuecomment-1133356812) and [kubernetes/ingress-gce#1337](https://github.com/kubernetes/ingress-gce/pull/1337).
-
 This will trigger the creation of a Google HTTP(S) loadbalancer associated with the IP address that you created earlier.
-This will take 2-3 minutes.
-You can watch the progress
+You can watch the progress and the resources that are being created:
 
 ```bash
-kubectl describe ingress example-ingress
+kubectl describe ingress web-ingress
 ```
 
-Within 4-5 minutes all the load balancer components should be ready and you should be able to connect to the DNS name and see the response from the hello-world app that we deployed earlier:
+Within 4-5 minutes all the load balancer components should be ready and you should be able to connect to the DNS name and see the response from the hello-world web server that we deployed earlier:
 
 ```
-curl http://www.richard-gcp.jetstacker.net
+curl $DOMAIN_NAME
 ```
 
 Example output:
@@ -308,12 +301,25 @@ Version: 1.0.0
 Hostname: web-79d88c97d6-t8hj2
 ```
 
-At this point we have a Google loadbalancer which is forwarding HTTP traffic to the hello-world web server running in a Pod in our cluster.
+At this point we have a Google load balancer which is forwarding HTTP traffic to the hello-world web server running in a Pod in our cluster.
 
+> ⏲️ It may take 4-5 minutes for the load balancer components to be created and
+> configured and for Internet clients to be routed to your web server.
+>
 > 🔰 Read about how to [Specify certificates for your Ingress in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-multi-ssl#specifying_certificates_for_your_ingress)
+>
 > 🔰 Read about how to [Use a static IP addresses for HTTP(S) load balancers via Ingress annotation](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb#static_ip_addresses_for_https_load_balancers)
+>
 > 🔰 Read a [Summary of external Ingress annotations for GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#summary_of_external_ingress_annotations)
+>
 > 🔰 Read about [Troubleshooting Ingress with External HTTP(S) Load Balancing on GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#testing_the)
+>
+> ℹ️ There are two Ingress classes available for GKE Ingress. The `gce` class deploys an external load balancer and the `gce-internal` class deploys an internal load balancer. Ingress resources without a class specified default to gce.
+> Read more about [Configuring Ingress for external load balancing in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#creating_an_ingress)
+>
+> ⚠️Contrary to the Kubernetes Ingress documentation, you MUST use the `kubernetes.io/ingress.class` annotation rather than the `Ingress.Spec.IngressClassName` field.
+> See [kubernetes/ingress-gce/issues#1301](https://github.com/kubernetes/ingress-gce/issues/1301#issuecomment-1133356812) and [kubernetes/ingress-gce#1337](https://github.com/kubernetes/ingress-gce/pull/1337).
+
 
 ### Set up a Let's Encrypt Staging Issuer
 
@@ -321,7 +327,7 @@ Now we want to create a Let's Encrypt SSL certificate so that we can use HTTPS t
 This Issuer will be configured to connect to the Let's Encrypt staging server,
 which allows us to test everything is working without using up our Let's Encrypt certificate quota for the domain name.
 
-Save the following content to a file called `issuer-lets-encrypt-staging.yaml`:
+Save the following content to a file called `issuer-lets-encrypt-staging.yaml` and apply it:
 
 ```yaml
 # issuer-lets-encrypt-staging.yaml
