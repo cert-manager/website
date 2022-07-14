@@ -45,6 +45,7 @@ export REGION=europe-west1
 export CLUSTER=test-cluster-1
 export ZONE=jetstacker-richard
 export DOMAIN_NAME=www.richard-gcp.jetstacker.net
+export EMAIL_ADDRESS=richard.wall@jetstack.io
 ```
 
 Once you've installed `gcloud` configure it to use your preferred project and region:
@@ -252,7 +253,8 @@ Now we will create a Kubernetes Ingress object and in Google Cloud this will tri
 
 Initially we are going to create an HTTP (not an HTTPS) Ingress so that we can test the basic connectivity before adding the SSL layer.
 
-Copy the following YAML into a file called `ingress.yaml`:
+Copy the following YAML into a file called `ingress.yaml` and apply it:
+
 ```yaml
 # ingress.yaml
 apiVersion: networking.k8s.io/v1
@@ -274,7 +276,6 @@ spec:
         number: 8080
 ```
 
-And apply it:
 ```bash
 kubectl apply -f ingress.yaml
 ```
@@ -306,26 +307,26 @@ At this point we have a Google load balancer which is forwarding HTTP traffic to
 > ⏲️ It may take 4-5 minutes for the load balancer components to be created and
 > configured and for Internet clients to be routed to your web server.
 >
-> 🔰 Read about how to [Specify certificates for your Ingress in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-multi-ssl#specifying_certificates_for_your_ingress)
->
 > 🔰 Read about how to [Use a static IP addresses for HTTP(S) load balancers via Ingress annotation](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb#static_ip_addresses_for_https_load_balancers)
 >
 > 🔰 Read a [Summary of external Ingress annotations for GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#summary_of_external_ingress_annotations)
 >
 > 🔰 Read about [Troubleshooting Ingress with External HTTP(S) Load Balancing on GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#testing_the)
 >
-> ℹ️ There are two Ingress classes available for GKE Ingress. The `gce` class deploys an external load balancer and the `gce-internal` class deploys an internal load balancer. Ingress resources without a class specified default to gce.
-> Read more about [Configuring Ingress for external load balancing in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#creating_an_ingress)
+> ℹ️ There are two Ingress classes available for GKE Ingress. The `gce` class deploys an external load balancer and the `gce-internal` class deploys an internal load balancer. Ingress resources without a class specified default to `gce`.
 >
 > ⚠️Contrary to the Kubernetes Ingress documentation, you MUST use the `kubernetes.io/ingress.class` annotation rather than the `Ingress.Spec.IngressClassName` field.
 > See [kubernetes/ingress-gce/issues#1301](https://github.com/kubernetes/ingress-gce/issues/1301#issuecomment-1133356812) and [kubernetes/ingress-gce#1337](https://github.com/kubernetes/ingress-gce/pull/1337).
 
 
-### Set up a Let's Encrypt Staging Issuer
+## 8. Create an Issuer for Let's Encrypt Staging
 
-Now we want to create a Let's Encrypt SSL certificate so that we can use HTTPS to connect to our web server.
-This Issuer will be configured to connect to the Let's Encrypt staging server,
-which allows us to test everything is working without using up our Let's Encrypt certificate quota for the domain name.
+Now you need to create a Let's Encrypt SSL certificate so that you can use HTTPS to connect to your web server.
+This involves creating an Issuer and then updating the Ingress object.
+
+An Issuer is a custom resource which tells cert-manager how to sign a Certificate.
+In this case the Issuer will be configured to connect to the Let's Encrypt staging server,
+which allows us to test everything without using up our Let's Encrypt certificate quota for the domain name.
 
 Save the following content to a file called `issuer-lets-encrypt-staging.yaml` and apply it:
 
@@ -338,15 +339,14 @@ metadata:
 spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: le1+richard.wall@jetstack.io
+    email: $EMAIL_ADDRESS # ❗ Replace this with your email address
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
     - http01:
         ingress:
-          name: example-ingress
+          name: web-ingress
 ```
-
 
 ```bash
 kubectl apply -f issuer-lets-encrypt-staging.yaml
@@ -375,9 +375,9 @@ Status:
 ```
 
 
-### Configure the Ingress for SSL
+## 9. Re-configure the Ingress for SSL
 
-Create an empty Secret before reconfiguring the Ingress:
+Create an empty Secret for your SSL certificate **before reconfiguring the Ingress** and apply it:
 
 ```yaml
 # secret.yaml
@@ -403,10 +403,9 @@ kubectl apply -f secret.yaml
 > Ingress and which must then be translated into Google Cloud forwarding rules,
 > by the ingress-gce controller.
 
-Make the following changes to the Ingress:
+Now make the following changes to the Ingress and apply them:
 
 ```diff
-
 --- a/ingress.yaml
 +++ b/ingress.yaml
 @@ -7,7 +7,12 @@ metadata:
@@ -418,27 +417,196 @@ Make the following changes to the Ingress:
 +  tls:
 +    - secretName: web-ssl
 +      hosts:
-+        - www.richard-gcp.jetstacker.net
++        - $DOMAIN_NAME
    defaultBackend:
      service:
        name: web
 ```
 
-Apply the new config:
-
 ```
 kubectl apply -f ingress.yaml
 ```
 
-> ⚠️ You will have to wait 5-10 minutes for the SSL certificate to be signed and then loaded by the Google Cloud load balancer.
+This triggers a complex set of operations which may take many minutes to eventually complete.
+Here's a brief summary:
 
-Use curl to check the HTTPS connection to your website:
+* cert-manager connects to Let's Encrypt and sends an SSL certificate signing request..
+* Let's Encrypt responds with a "challenge", which is a unique token that cert-manager must make available at a well-known location on the target web site. This proves that you are an administrator of that web site and domain name.
+* cert-manager deploys a Pod containing a temporary web server that serves the Let's Encrypt challenge token.
+* cert-manager reconfigures the Ingress, adding a `rule` to route requests for from Let's Encrypt to that temporary web server.
+* Google Cloud ingress controller reconfigures the external HTTP load balancer with that new rule.
+* Let's Encrypt now connects and receives the expected challenge token and the signs the SSL certificate and returns it to cert-manager.
+* cert-manager stores the signed SSL certificate in the Kubernetes Secret called `web-ssl`.
+* Google Cloud ingress controller uploads the signed certificate and associated private key to a Google Cloud certificate.
+* Google Cloud ingress controller reconfigures the external load balancer to serve the uploaded SSL certificate.
 
-```bash
-curl -v --insecure https://www.richard-gcp.jetstacker.net
+Some of these steps take 2-3 minutes and some will initially fail but then subsequently succeed when either cert-manager or the Google ingress controller re-reconciles.
+In short, you should expect this to take around 10 minutes and you should expect to see some errors and warnings when you run `kubectl describe ingress web-ingress`. Eventually you should see something like:
+
+```console
+$ kubectl describe ingress web-ingress
+Name:             web-ingress
+Labels:           <none>
+Namespace:        default
+Address:          34.120.159.51
+Ingress Class:    <none>
+Default backend:  web:8080 (10.52.0.13:8080)
+TLS:
+  web-ssl terminates www.richard-gcp.jetstacker.net
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  *           *     web:8080 (10.52.0.13:8080)
+Annotations:  cert-manager.io/issuer: letsencrypt-staging
+              ingress.kubernetes.io/backends: {"k8s1-01784147-default-web-8080-1647ccd2":"HEALTHY"}
+              ingress.kubernetes.io/forwarding-rule: k8s2-fr-1lt9dzcy-default-web-ingress-yteotwe4
+              ingress.kubernetes.io/https-forwarding-rule: k8s2-fs-1lt9dzcy-default-web-ingress-yteotwe4
+              ingress.kubernetes.io/https-target-proxy: k8s2-ts-1lt9dzcy-default-web-ingress-yteotwe4
+              ingress.kubernetes.io/ssl-cert: k8s2-cr-1lt9dzcy-4gjeakdb9n7k6ls7-a257650b5fefd174
+              ingress.kubernetes.io/target-proxy: k8s2-tp-1lt9dzcy-default-web-ingress-yteotwe4
+              ingress.kubernetes.io/url-map: k8s2-um-1lt9dzcy-default-web-ingress-yteotwe4
+              kubernetes.io/ingress.allow-http: true
+              kubernetes.io/ingress.class: gce
+              kubernetes.io/ingress.global-static-ip-name: web-ip
+Events:
+  Type     Reason             Age                 From                       Message
+  ----     ------             ----                ----                       -------
+  Normal   CreateCertificate  28m                 cert-manager-ingress-shim  Successfully created Certificate "web-ssl"
+  Normal   Sync               28m                 loadbalancer-controller    UrlMap "k8s2-um-1lt9dzcy-default-web-ingress-yteotwe4" updated
+  Warning  Sync               24m (x16 over 28m)  loadbalancer-controller    Error syncing to GCP: error running load balancer syncing routine: loadbalancer 1lt9dzcy-default-web-ingress-yteotwe4 does not exist: googleapi: Error 404: The resource 'projects/jetstack-richard/global/sslCertificates/k8s2-cr-1lt9dzcy-4gjeakdb9n7k6ls7-e3b0c44298fc1c14' was not found, notFound
+  Normal   Sync               34s (x16 over 65m)  loadbalancer-controller    Scheduled for sync
 ```
 
-You should see that the HTTPS connection is established but that the SSL certificate is not trusted, that's why you use the `--insecure` flag at this stage.:
+And if you have installed the cert-manager CLI (cmctl) you will see some temporary errors, like:
+
+```console
+$ cmctl status certificate web-ssl
+Name: web-ssl
+Namespace: default
+Created at: 2022-07-14T17:30:06+01:00
+Conditions:
+  Ready: False, Reason: MissingData, Message: Issuing certificate as Secret does not contain a private key
+  Issuing: True, Reason: MissingData, Message: Issuing certificate as Secret does not contain a private key
+DNS Names:
+- www.richard-gcp.jetstacker.net
+Events:
+  Type    Reason     Age    From                                       Message
+  ----    ------     ----   ----                                       -------
+  Normal  Issuing    4m37s  cert-manager-certificates-trigger          Issuing certificate as Secret does not contain a private key
+  Normal  Generated  4m37s  cert-manager-certificates-key-manager      Stored new private key in temporary Secret resource "web-ssl-8gsqc"
+  Normal  Requested  4m37s  cert-manager-certificates-request-manager  Created new CertificateRequest resource "web-ssl-dblrj"
+Issuer:
+  Name: letsencrypt-staging
+  Kind: Issuer
+  Conditions:
+    Ready: True, Reason: ACMEAccountRegistered, Message: The ACME account was registered with the ACME server
+  Events:  <none>
+error: 'tls.crt' of Secret "web-ssl" is not set
+Not Before: <none>
+Not After: <none>
+Renewal Time: <none>
+CertificateRequest:
+  Name: web-ssl-dblrj
+  Namespace: default
+  Conditions:
+    Approved: True, Reason: cert-manager.io, Message: Certificate request has been approved by cert-manager.io
+  Ready: False, Reason: Pending, Message: Waiting on certificate issuance from order default/web-ssl-dblrj-327645514: "pending"
+  Events:
+    Type    Reason           Age    From                                          Message
+    ----    ------           ----   ----                                          -------
+    Normal  cert-manager.io  4m37s  cert-manager-certificaterequests-approver     Certificate request has been approved by cert-manager.io
+    Normal  OrderCreated     4m37s  cert-manager-certificaterequests-issuer-acme  Created Order resource default/web-ssl-dblrj-327645514
+    Normal  OrderPending     4m37s  cert-manager-certificaterequests-issuer-acme  Waiting on certificate issuance from order default/web-ssl-dblrj-327645514: ""
+Order:
+  Name: web-ssl-dblrj-327645514
+  State: pending, Reason:
+  Authorizations:
+    URL: https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/3008789144, Identifier: www.richard-gcp.jetstacker.net, Initial State: pending, Wildcard: false
+Challenges:
+- Name: web-ssl-dblrj-327645514-2671694319, Type: HTTP-01, Token: TKspp86xMjQzTvMVXWkezEA2sE2GSWjnld5Lt4X13ro, Key: TKspp86xMjQzTvMVXWkezEA2sE2GSWjnld5Lt4X13ro.f4bppCOm-jXasFGMKjpBE5aQlhiQBeTPIs0Lx822xao, State: pending, Reason: Waiting for HTTP-01 challenge propagation: did not get expected response when querying endpoint, expected "TKspp86xMjQzTvMVXWkezEA2sE2GSWjnld5Lt4X13ro.f4bppCOm-jXasFGMKjpBE5aQlhiQBeTPIs0Lx822xao" but got: Hello, world!
+Version: 1... (truncated), Processing: true, Presented: true
+```
+
+But eventually you will see that the Certificate is Ready and signed:
+
+```console
+$ cmctl status certificate web-ssl
+Name: web-ssl
+Namespace: default
+Created at: 2022-07-14T17:30:06+01:00
+Conditions:
+  Ready: True, Reason: Ready, Message: Certificate is up to date and has not expired
+DNS Names:
+- www.richard-gcp.jetstacker.net
+Events:
+  Type    Reason     Age   From                                       Message
+  ----    ------     ----  ----                                       -------
+  Normal  Issuing    31m   cert-manager-certificates-trigger          Issuing certificate as Secret does not contain a private key
+  Normal  Generated  31m   cert-manager-certificates-key-manager      Stored new private key in temporary Secret resource "web-ssl-8gsqc"
+  Normal  Requested  31m   cert-manager-certificates-request-manager  Created new CertificateRequest resource "web-ssl-dblrj"
+  Normal  Issuing    26m   cert-manager-certificates-issuing          The certificate has been successfully issued
+Issuer:
+  Name: letsencrypt-staging
+  Kind: Issuer
+  Conditions:
+    Ready: True, Reason: ACMEAccountRegistered, Message: The ACME account was registered with the ACME server
+  Events:  <none>
+Secret:
+  Name: web-ssl
+  Issuer Country: US
+  Issuer Organisation: (STAGING) Let's Encrypt
+  Issuer Common Name: (STAGING) Artificial Apricot R3
+  Key Usage: Digital Signature, Key Encipherment
+  Extended Key Usages: Server Authentication, Client Authentication
+  Public Key Algorithm: RSA
+  Signature Algorithm: SHA256-RSA
+  Subject Key ID: a51e3621f5c1138947810f27dce425b33c88cb16
+  Authority Key ID: de727a48df31c3a650df9f8523df57374b5d2e65
+  Serial Number: fa8bb0b603ca2cdbfdfb2872d05ee52cda10
+  Events:  <none>
+Not Before: 2022-07-14T16:34:52+01:00
+Not After: 2022-10-12T16:34:51+01:00
+Renewal Time: 2022-09-12T16:34:51+01:00
+
+```
+
+You will see a certificate in Google Cloud:
+
+```console
+$ gcloud compute ssl-certificates list
+NAME                                                TYPE          CREATION_TIMESTAMP             EXPIRE_TIME                    MANAGED_STATUS
+k8s2-cr-1lt9dzcy-4gjeakdb9n7k6ls7-a257650b5fefd174  SELF_MANAGED  2022-07-14T09:37:06.920-07:00  2022-10-12T08:34:51.000-07:00
+```
+
+And you will see a forwarding-rule for the SSL connections:
+
+```console
+$ gcloud compute forwarding-rules describe k8s2-fs-1lt9dzcy-default-web-ingress-yteotwe4 --global
+IPAddress: 34.120.159.51
+IPProtocol: TCP
+creationTimestamp: '2022-07-14T09:37:12.362-07:00'
+description: '{"kubernetes.io/ingress-name": "default/web-ingress"}'
+fingerprint: oBTg7dRaIqI=
+id: '2303318464959215831'
+kind: compute#forwardingRule
+labelFingerprint: 42WmSpB8rSM=
+loadBalancingScheme: EXTERNAL
+name: k8s2-fs-1lt9dzcy-default-web-ingress-yteotwe4
+networkTier: PREMIUM
+portRange: 443-443
+selfLink: https://www.googleapis.com/compute/v1/projects/jetstack-richard/global/forwardingRules/k8s2-fs-1lt9dzcy-default-web-ingress-yteotwe4
+target: https://www.googleapis.com/compute/v1/projects/jetstack-richard/global/targetHttpsProxies/k8s2-ts-1lt9dzcy-default-web-ingress-yteotwe4
+```
+
+When all these pieces are in place you should eventually be able to
+use curl to check the HTTPS connection to your website:
+
+```bash
+curl -v --insecure https://$DOMAIN_NAME
+```
+
+You should see that the HTTPS connection is established but that the SSL certificate is not trusted,
+that's why you use the `--insecure` flag at this stage:
 
 ```console
 * Server certificate:
@@ -449,10 +617,15 @@ You should see that the HTTPS connection is established but that the SSL certifi
 *  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
 ```
 
+> ⏲️You will have to wait 5-10 minutes for the SSL certificate to be signed and then loaded by the Google Cloud load balancer.
+>
+> 🔰 Read about how to [Specify certificates for your Ingress in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-multi-ssl#specifying_certificates_for_your_ingress)
+
+## 10. Create a production ready SSL certificate
 
 Now that everything is working with the Let's Encrypt staging server, we can switch to the production server and get a trusted SSL certificate.
 
-Create a Let's Encrypt production Issuer:
+Create a Let's Encrypt production Issuer and apply it:
 
 ```yaml
 # issuer-lets-encrypt-production.yaml
@@ -463,13 +636,13 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: le1+richard.wall@jetstack.io
+    email: $EMAIL_ADDRESS
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
     - http01:
         ingress:
-          name: example-ingress
+          name: web-ingress
 ```
 
 ```bash
@@ -479,7 +652,7 @@ kubectl apply -f issuer-lets-encrypt-production.yaml
 Then update the Ingress annotation to use the production Issuer:
 
 ```bash
-kubectl annotate ingress example-ingress cert-manager.io/issuer=letsencrypt-production --overwrite
+kubectl annotate ingress web-ingress cert-manager.io/issuer=letsencrypt-production --overwrite
 ```
 
 And finally renew the certificate:
@@ -492,7 +665,7 @@ This will trigger cert-manager to get a new SSL certificate signed by the Let's 
 Within about 10 minutes, this new certificate will be synced to the Google Cloud load balancer and you will be able to connect to the website using secure HTTPS:
 
 ```bash
-curl -v https://www.richard-gcp.jetstacker.net/
+curl -v https://$DOMAIN_NAME
 ```
 
 
