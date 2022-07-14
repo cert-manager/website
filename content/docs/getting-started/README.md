@@ -5,16 +5,19 @@ description: Learn how to deploy cert-manager in your Kubernetes cluster and how
 
 In this tutorial you will learn how to deploy and configure cert-manager on Kubernetes in Google Cloud (GKE).
 You will learn how to create an SSL certificate using Let's Encrypt using cert-manager.
-And finally you will learn how that certificate can be used in Kubernetes to serve an HTTPS website.
+And finally you will learn how that certificate can be used in Kubernetes to serve an HTTPS website with a public domain name.
 
 > **Let’s Encrypt**: An Internet service. Allows you to generate free short-lived SSL certificates.<br/>
 > **Kubernetes**: Runs on your servers. Automates the deployment, scaling, and management of containerized applications.<br/>
-> **cert-manager**: Runs in Kubernetes. Obtains TLS / SSL certificates and ensures the certificates are valid and up-to-date.
-> **Google Cloud**:
+> **cert-manager**: Runs in Kubernetes. Obtains TLS / SSL certificates and ensures the certificates are valid and up-to-date.<br/>
+> **Google Cloud**: A suite of cloud computing services by Google.
+
+You will create a Kubernetes cluster, install cert-manager, deploy a sample web server, set up Ingress and load balancers so that Internet clients can connect to the web server using HTTP. Finally you will use cert-manager to create an SSL certificate signed by Let's Encrypt and configure the load balancer to use that certificate allowing Internet clients to connect to the web server using HTTPS by visiting https://$DOMAIN_NAME.
 
 ## Prerequisites
 
 You will need a Google Cloud account.
+Registration requires a credit card or bank account details.
 Visit the [Get started with Google Cloud](https://cloud.google.com/docs/get-started) page and follow the instructions.
 
 > ℹ️ If you have never used Google Cloud before, you may be eligible for the
@@ -29,41 +32,63 @@ You will also need to install the following software on your laptop:
 2. [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl): The Kubernetes command-line tool which allows you to configure Kubernetes clusters.
 3. [curl](https://everything.curl.dev/get): A command-line tool for connecting to a web server using HTTP and HTTPS.
 
+> ℹ️ Try running `gcloud components install kubectl` to quickly install `kubectl`.
+
+This tutorial requires you to run certain commands and you will need to adapt some of them for your environment.
+Where ever you see a `$VARIABLE_NAME` in a command, you need to either replace the variable before you execute the command,
+or assign a value to the variable and export it so that the value can be substituted automatically by your shell.
+E.g. Here are the values that I used while writing this tutorial:
+
+```bash
+export PROJECT=jetstack-richard
+export REGION=europe-west1
+export CLUSTER=test-cluster-1
+export ZONE=jetstacker-richard
+export DOMAIN_NAME=www.richard-gcp.jetstacker.net
+```
+
+Once you've installed `gcloud` configure it to use your preferred project and region:
+
+```bash
+gcloud config set project $PROJECT
+gcloud config set compute/region $REGION
+```
+
 ## 1. Create a Kubernetes Cluster
 
 To get started, let's create a Kubernetes cluster in Google Cloud:
 
 ```bash
-gcloud container clusters create test-cluster-1 --preemptible --num-nodes=1
+gcloud container clusters create $CLUSTER --preemptible --num-nodes=1
 ```
 
 > ℹ️ To minimise your cloud bill, this command creates a 1-node cluster using a
 > [preemptible virtual
 > machine](https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms)
 > which is cheaper than a normal virtual machine.
+>
+> ⚠️ It will take 4-5 minutes to create the cluster.
 
 Set up the [Google Kubernetes Engine auth plugin for kubectl](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke):
 
 ```bash
 gcloud components install gke-gcloud-auth-plugin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-gcloud container clusters get-credentials test-cluster-1
+gcloud container clusters get-credentials $CLUSTER
 ```
 
 Now check that you can connect to the cluster:
 
 ```bash
-kubectl get nodes
+kubectl get nodes -o wide
 ```
-
-> ⚠️ It may take 2-3 minutes to create the cluster.
-
 ## 2. Install cert-manager
 
 Install cert-manager using `kubectl` as follows:
 
 ```
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cert-manager.yaml
+kubectl apply \
+  -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cert-manager.yaml
 ```
 
 You can view some of the resources that have been installed as follows:
@@ -72,7 +97,7 @@ You can view some of the resources that have been installed as follows:
 kubectl -n cert-manager get all
 ```
 
-> ℹ️ Learn about other ways to install cert-manager by reading the [Installing cert-manager Section](../installation).
+> 🔰 Learn about other ways to install cert-manager by reading the [Installing cert-manager pages](../installation).
 
 ## 3. Check that cert-manager is working
 
@@ -149,20 +174,23 @@ kubectl delete -f cert-manager-test.yaml
 
 > ℹ️ Read more about [Kubernetes Secrets and how to use them](https://kubernetes.io/docs/concepts/configuration/secret/).
 
+## 4. Deploy a sample web server
 
-### Deploy a hello world app
+We will deploy a very simple web server which responds to HTTP requests with the message "hello world!".
 
 ```bash
 kubectl create deployment web --image=gcr.io/google-samples/hello-app:1.0
 ```
 
-Create a service too:
+We also need to create a Kubernetes Service, so that connections can be routed to the web server Pods:
 
 ```bash
 kubectl expose deployment web --port=8080
 ```
 
-### Create a static external IP address
+> 🔰 Read more about [Using a Service to Expose Your App](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/).
+
+## 5. Create a static external IP address
 
 Create a static IP address as follows:
 
@@ -170,7 +198,12 @@ Create a static IP address as follows:
 gcloud compute addresses create web-ip --global
 ```
 
-You should see it listed:
+> ℹ️ You MUST create a `global` IP address because that is a prerequisite of the [External HTTP(S) Load Balancer](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb) which we will be using in this tutorial.
+>
+> ⚠️ Global static IP addresses are only available in the Premium network service tier and are more expensive than ephemeral and standard public IP addresses.>
+> 🔰 Read more about [Network service tiers in Google Cloud](https://cloud.google.com/network-tiers).
+
+You should see the new IP address listed:
 
 ```bash
 gcloud compute addresses list
@@ -178,24 +211,28 @@ gcloud compute addresses list
 
 > 🔰 Read more about [Reserving a static external IP address in Google Cloud](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
 
-### Create a DNS name
+## 6. Create a domain name for your website
 
-You will need a DNS record for the ingress.
-The DNS record should by associated with the IP address that we created earlier.
+You will need a domain name for your website and Let's Encrypt checks your domain before it signs your SSL certificate,
+so the domain name needs to be reachable from the Internet.
 
-Print the IP address:
+If your top-level domain name is registered with Google cloud you will have a Google Cloud DNS zone for it.
+And within that zone you can create a sub-domain DNS record and associate it with the IP address that we created earlier.
+For example, if your top-level domain name is example.com, you might create a sub-domain `www.example.com` for your web server.
+Here's how you might do that using `gcloud`.
 
+Get the IP address of the global static address you created in the previous step:
 ```bash
-ip_address=$(gcloud compute addresses describe web-ip --format='value(address)' --global)
-echo ${ip_address}
+export IP_ADDRESS=$(gcloud compute addresses describe web-ip --format='value(address)' --global)
+echo ${IP_ADDRESS}
 ```
 
 Create an A record:
 ```bash
-gcloud dns record-sets create www.richard-gcp.jetstacker.net. \
-    --rrdatas=${ip_address} \
+gcloud dns record-sets create $DOMAIN_NAME \
+    --rrdatas=$IP_ADDRESS \
     --type=A \
-    --ttl=60 --zone=jetstacker-richard
+    --ttl=60 --zone=$ZONE
 ```
 
 > ⚠️You can't use the reverse DNS name for a Google Cloud address because the parent domain has a CAA record
@@ -206,14 +243,12 @@ gcloud dns record-sets create www.richard-gcp.jetstacker.net. \
 
 ### Create an Ingress
 
-Copy the DNS name into the "host"  field below and save it to a file called `ingress.yaml`.
-
 ```yaml
 # ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: example-ingress
+  name: web-ingress
   annotations:
     kubernetes.io/ingress.class: gce
     kubernetes.io/ingress.allow-http: "true"
