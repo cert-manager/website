@@ -20,7 +20,7 @@ You will need a Google Cloud account.
 Registration requires a credit card or bank account details.
 Visit the [Get started with Google Cloud](https://cloud.google.com/docs/get-started) page and follow the instructions.
 
-> ℹ️ If you have never used Google Cloud before, you may be eligible for the
+> 💵 If you have never used Google Cloud before, you may be eligible for the
 > [Google Cloud Free
 > Program](https://cloud.google.com/free/docs/gcp-free-tier/#free-trial), which
 > gives you a 90-day trial period that includes $300 in free Cloud Billing
@@ -37,7 +37,7 @@ You will also need to install the following software on your laptop:
 This tutorial requires you to run certain commands and you will need to adapt some of them for your environment.
 Where ever you see a `$VARIABLE_NAME` in a command, you need to either replace the variable before you execute the command,
 or assign a value to the variable and export it so that the value can be substituted automatically by your shell.
-E.g. Here are the values that I used while writing this tutorial:
+For example, here are the values that I used while writing this tutorial:
 
 ```bash
 export PROJECT=jetstack-richard
@@ -45,7 +45,7 @@ export REGION=europe-west1
 export CLUSTER=test-cluster-1
 export ZONE=jetstacker-richard
 export DOMAIN_NAME=www.richard-gcp.jetstacker.net
-export EMAIL_ADDRESS=richard.wall@jetstack.io
+export EMAIL_ADDRESS=********@jetstack.io
 ```
 
 Once you've installed `gcloud` configure it to use your preferred project and region:
@@ -77,106 +77,14 @@ Now check that you can connect to the cluster:
 kubectl get nodes -o wide
 ```
 
-> ℹ️ To minimise your cloud bill, this command creates a 1-node cluster using a
+> ⏲️It will take 4-5 minutes to create the cluster.
+>
+> 💵 To minimise your cloud bill, this command creates a 1-node cluster using a
 > [preemptible virtual
 > machine](https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms)
 > which is cheaper than a normal virtual machine.
->
-> ⏲️It will take 4-5 minutes to create the cluster.
 
-## 2. Install cert-manager
-
-Install cert-manager using `kubectl` as follows:
-
-```
-kubectl apply \
-  -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cert-manager.yaml
-```
-
-You can view some of the resources that have been installed as follows:
-
-```bash
-kubectl -n cert-manager get all
-```
-
-> 🔰 Read about [other ways to install cert-manager](../installation).
-
-## 3. Check that cert-manager is working
-
-Once the cert-manager has been installed, you can check that it is working by configuring it to create a test SSL certificate in a temporary Kubernetes namespace.
-
-Open a text editor and create a new file called `cert-manager-test.yaml` with the following content:
-
-```yaml
-# cert-manager-test.yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: cert-manager-test
-
----
-
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: test-selfsigned
-  namespace: cert-manager-test
-spec:
-  selfSigned: {}
-
----
-
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: selfsigned-cert
-  namespace: cert-manager-test
-spec:
-  dnsNames:
-    - example.com
-  secretName: selfsigned-cert-tls
-  issuerRef:
-    name: test-selfsigned
-```
-
-Now apply that configuration to the Kubernetes cluster:
-
-```bash
-kubectl apply -f cert-manager-test.yaml
-```
-
-An Issuer and a Certificate will be created.
-You'll learn more about those resources shortly.
-For now, you just need to check whether cert-manager has processed the Certificate.
-It should have created a Secret called selfsigned-cert-tls containing a `tls.key` and a `tls.crt`.
-
-```bash
-kubectl describe secrets -n cert-manager-test selfsigned-cert-tls
-```
-
-The output should look something like this:
-
-```console
-Name:         selfsigned-cert-tls
-Namespace:    cert-manager-test
-Type:  kubernetes.io/tls
-
-Data
-====
-ca.crt:   1021 bytes
-tls.crt:  1021 bytes
-tls.key:  1675 bytes
-```
-
-Delete the test configuration afterwards:
-
-```bash
-kubectl delete -f cert-manager-test.yaml
-```
-
-> 🔰 Read more about [Kubernetes Secrets and how to use them](https://kubernetes.io/docs/concepts/configuration/secret/).
-
-## 4. Deploy a sample web server
+## 2. Deploy a sample web server
 
 We will deploy a very simple web server which responds to HTTP requests with the message "hello world!".
 
@@ -192,7 +100,7 @@ kubectl expose deployment web --port=8080
 
 > 🔰 Read more about [Using a Service to Expose Your App](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/).
 
-## 5. Create a static external IP address
+## 3. Create a static external IP address
 
 Create a static IP address as follows:
 
@@ -214,7 +122,7 @@ gcloud compute addresses list
 >
 > 🔰 Read more about [Reserving a static external IP address in Google Cloud](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
 
-## 6. Create a domain name for your website
+## 4. Create a domain name for your website
 
 You will need a domain name for your website and Let's Encrypt checks your domain before it signs your SSL certificate,
 so the domain name needs to be reachable from the Internet.
@@ -245,7 +153,7 @@ gcloud dns record-sets create $DOMAIN_NAME \
 >
 > 🔰 Read more about how to [Add, modify, and delete DNS records in Google Cloud](https://cloud.google.com/dns/docs/records/)
 
-## 7. Create an Ingress
+## 5. Create an Ingress
 
 You won't be able to reach your website yet.
 Your web server is running inside your Kubernetes cluster but there is no route or proxy through which Internet clients can connect to it, yet!
@@ -319,7 +227,24 @@ At this point we have a Google load balancer which is forwarding HTTP traffic to
 > See [kubernetes/ingress-gce/issues#1301](https://github.com/kubernetes/ingress-gce/issues/1301#issuecomment-1133356812) and [kubernetes/ingress-gce#1337](https://github.com/kubernetes/ingress-gce/pull/1337).
 
 
-## 8. Create an Issuer for Let's Encrypt Staging
+## 6. Install cert-manager
+
+Install cert-manager using `kubectl` as follows:
+
+```
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cert-manager.yaml
+```
+
+You can view some of the resources that have been installed as follows:
+
+```bash
+kubectl -n cert-manager get all
+```
+
+> 🔰 Read about [other ways to install cert-manager](../installation).
+>
+
+## 7. Create an Issuer for Let's Encrypt Staging
 
 Now you need to create a Let's Encrypt SSL certificate so that you can use HTTPS to connect to your web server.
 This involves creating an Issuer and then updating the Ingress object.
@@ -375,7 +300,7 @@ Status:
 ```
 
 
-## 9. Re-configure the Ingress for SSL
+## 8. Re-configure the Ingress for SSL
 
 Create an empty Secret for your SSL certificate **before reconfiguring the Ingress** and apply it:
 
@@ -402,6 +327,8 @@ kubectl apply -f secret.yaml
 > `.../.well-known/acme-challenge/...` URL which cert-manager adds to the
 > Ingress and which must then be translated into Google Cloud forwarding rules,
 > by the ingress-gce controller.
+>
+> 🔰 Read more about [Kubernetes Secrets and how to use them](https://kubernetes.io/docs/concepts/configuration/secret/).
 
 Now make the following changes to the Ingress and apply them:
 
@@ -428,7 +355,112 @@ kubectl apply -f ingress.yaml
 ```
 
 This triggers a complex set of operations which may take many minutes to eventually complete.
-Here's a brief summary:
+Some of these steps take 2-3 minutes and some will initially fail.
+They should all eventually succeed because cert-manager and ingress-gce (the Google Cloud ingress controller) will periodically re-reconcile.
+
+Eventually, When all the pieces are in place, you should be able to
+use curl to check the HTTPS connection to your website:
+
+```bash
+curl -v --insecure https://$DOMAIN_NAME
+```
+
+You should see that the HTTPS connection is established but that the SSL certificate is not trusted;
+that's why you use the `--insecure` flag at this stage:
+
+```console
+* Server certificate:
+*  subject: CN=www.richard-gcp.jetstacker.net
+*  start date: Jul 14 08:52:29 2022 GMT
+*  expire date: Oct 12 08:52:28 2022 GMT
+*  issuer: C=US; O=(STAGING) Let's Encrypt; CN=(STAGING) Artificial Apricot R3
+*  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
+```
+
+> ⏲️You will have to wait 5-10 minutes for the SSL certificate to be signed and then loaded by the Google Cloud load balancer.
+>
+> 🔰 Read about how to [Specify certificates for your Ingress in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-multi-ssl#specifying_certificates_for_your_ingress)
+
+## 9. Create a production ready SSL certificate
+
+Now that everything is working with the Let's Encrypt staging server, we can switch to the production server and get a trusted SSL certificate.
+
+Create a Let's Encrypt production Issuer and apply it:
+
+```yaml
+# issuer-lets-encrypt-production.yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-production
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: $EMAIL_ADDRESS
+    privateKeySecretRef:
+      name: letsencrypt-production
+    solvers:
+    - http01:
+        ingress:
+          name: web-ingress
+```
+
+```bash
+kubectl apply -f issuer-lets-encrypt-production.yaml
+```
+
+Then update the Ingress annotation to use the production Issuer:
+
+```bash
+kubectl annotate ingress web-ingress cert-manager.io/issuer=letsencrypt-production --overwrite
+```
+
+This will trigger cert-manager to get a new SSL certificate signed by the Let's Encrypt production CA and store it to the `web-ssl` Secret.
+Within about 10 minutes, this new certificate will be synced to the Google Cloud load balancer and you will be able to connect to the website using secure HTTPS:
+
+```bash
+curl -v https://$DOMAIN_NAME
+```
+
+```console
+...
+* Server certificate:
+*  subject: CN=www.richard-gcp.jetstacker.net
+*  start date: Jul 14 09:44:29 2022 GMT
+*  expire date: Oct 12 09:44:28 2022 GMT
+*  subjectAltName: host "www.richard-gcp.jetstacker.net" matched cert's "www.richard-gcp.jetstacker.net"
+*  issuer: C=US; O=Let's Encrypt; CN=R3
+*  SSL certificate verify ok.
+...
+Hello, world!
+Version: 1.0.0
+Hostname: web-79d88c97d6-t8hj2
+```
+
+It should also be possible to visit `https://$DOMAIN_NAME` in your web browser, without any errors or warnings.
+
+## Clean up
+
+After completing the tutorial you can clean up by deleting the cluster and the domain name and the static IP as follows:
+
+```bash
+# Delete the cluster and all the Google Cloud resources related to the Ingress that it contains
+gcloud container clusters delete $CLUSTER
+
+# Delete the domain name
+gcloud dns record-sets delete $DOMAIN_NAME --zone $ZONE --type A
+
+# Delete the static IP address
+gcloud compute addresses delete web-ip --global
+```
+
+## Troubleshooting
+
+When you create or update the Ingress object in this tutorial it triggers a complex set of operations which may take many minutes to eventually complete.
+Some of these steps take 2-3 minutes and some will initially fail but then subsequently succeed when either cert-manager or the Google ingress controller re-reconciles.
+In short, you should allow 5-10 minutes after you create or change the Ingress and you should expect to see some errors and warnings when you run `kubectl describe ingress web-ingress`.
+
+Here's a brief summary of the operations performed by cert-manager and ingress-gce (the Google Cloud Ingress controller):
 
 * cert-manager connects to Let's Encrypt and sends an SSL certificate signing request..
 * Let's Encrypt responds with a "challenge", which is a unique token that cert-manager must make available at a well-known location on the target web site. This proves that you are an administrator of that web site and domain name.
@@ -440,8 +472,14 @@ Here's a brief summary:
 * Google Cloud ingress controller uploads the signed certificate and associated private key to a Google Cloud certificate.
 * Google Cloud ingress controller reconfigures the external load balancer to serve the uploaded SSL certificate.
 
-Some of these steps take 2-3 minutes and some will initially fail but then subsequently succeed when either cert-manager or the Google ingress controller re-reconciles.
-In short, you should expect this to take around 10 minutes and you should expect to see some errors and warnings when you run `kubectl describe ingress web-ingress`. Eventually you should see something like:
+
+### Check Ingress and associated events
+
+Use `kubectl describe` to view the Ingress configuration and all the associated Events.
+Check that the IP address is correct and that the TLS and Host entries match the domain name that you chose for your website.
+Notice that `ingress-gce` creates an Event for each of the Google Cloud components that it manages.
+And notice that it adds annotations with references to the ID of each of those components.
+cert-manager also creates Events when it reconciles the Ingress object, including details of the Certificate object that it creates for the Ingress.
 
 ```console
 $ kubectl describe ingress web-ingress
@@ -477,7 +515,15 @@ Events:
   Normal   Sync               34s (x16 over 65m)  loadbalancer-controller    Scheduled for sync
 ```
 
-And if you have installed the cert-manager CLI (cmctl) you will see some temporary errors, like:
+### Use cmctl to show the state of a cert-manager Certificate and all its associated resources
+
+> ℹ️ Install `cmctl` if you have not already done so.
+
+When you create a cert-manager Certificate associated with an Issuer for Let's Encrypt,
+cert-manager will create a collection of other resources which all contain information about the status of certificate signing process.
+Use the `cmctl status` command to view details of all these resources and all the associated Events and error messages.
+
+You may see some temporary errors, like:
 
 ```console
 $ cmctl status certificate web-ssl
@@ -527,7 +573,9 @@ Challenges:
 Version: 1... (truncated), Processing: true, Presented: true
 ```
 
-But eventually you will see that the Certificate is Ready and signed:
+This is because cert-manager is performing a preflight check to see if the temporary challenge web server is reachable at the expected URL.
+Initially it will not be reachable, because cert-manager takes some time to deploy the temporary web server and the Ingress controller takes time to set up the new HTTP routing rules.
+Eventually you will see that the Certificate is Ready and signed:
 
 ```console
 $ cmctl status certificate web-ssl
@@ -567,10 +615,13 @@ Secret:
 Not Before: 2022-07-14T16:34:52+01:00
 Not After: 2022-10-12T16:34:51+01:00
 Renewal Time: 2022-09-12T16:34:51+01:00
-
 ```
 
-You will see a certificate in Google Cloud:
+### Check that the SSL certificate has been copied to Google Cloud
+
+After cert-manager receives the signed Certificate it stores in the web-ssl Secret,
+and this in turn triggers the Google Cloud ingress controller to copy that SSL certificate to Google Cloud.
+You can see the certificate using the `gcloud` command, as follows:
 
 ```console
 $ gcloud compute ssl-certificates list
@@ -578,7 +629,28 @@ NAME                                                TYPE          CREATION_TIMES
 k8s2-cr-1lt9dzcy-4gjeakdb9n7k6ls7-a257650b5fefd174  SELF_MANAGED  2022-07-14T09:37:06.920-07:00  2022-10-12T08:34:51.000-07:00
 ```
 
-And you will see a forwarding-rule for the SSL connections:
+And you can view its contents and check its attributes as follows:
+
+```console
+$ gcloud compute ssl-certificates describe k8s2-cr-1lt9dzcy-4gjeakdb9n7k6ls7-a257650b5fefd174 --format='value(certificate)' \
+  | openssl x509 -in - -noout -text
+...
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            04:9f:47:f1:cb:25:37:9b:86:a3:ef:bf:2e:77:3b:45:fc:1a
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C = US, O = Let's Encrypt, CN = R3
+        Validity
+            Not Before: Jul 14 17:11:15 2022 GMT
+            Not After : Oct 12 17:11:14 2022 GMT
+        Subject: CN = www.richard-gcp.jetstacker.net
+```
+
+### Check the Google Cloud forwarding-rules
+
+After you add the TLS stanza to the Ingress object, you should eventually see a forwarding-rule for the SSL connection:
 
 ```console
 $ gcloud compute forwarding-rules describe k8s2-fs-1lt9dzcy-default-web-ingress-yteotwe4 --global
@@ -596,90 +668,4 @@ networkTier: PREMIUM
 portRange: 443-443
 selfLink: https://www.googleapis.com/compute/v1/projects/jetstack-richard/global/forwardingRules/k8s2-fs-1lt9dzcy-default-web-ingress-yteotwe4
 target: https://www.googleapis.com/compute/v1/projects/jetstack-richard/global/targetHttpsProxies/k8s2-ts-1lt9dzcy-default-web-ingress-yteotwe4
-```
-
-When all these pieces are in place you should eventually be able to
-use curl to check the HTTPS connection to your website:
-
-```bash
-curl -v --insecure https://$DOMAIN_NAME
-```
-
-You should see that the HTTPS connection is established but that the SSL certificate is not trusted,
-that's why you use the `--insecure` flag at this stage:
-
-```console
-* Server certificate:
-*  subject: CN=www.richard-gcp.jetstacker.net
-*  start date: Jul 14 08:52:29 2022 GMT
-*  expire date: Oct 12 08:52:28 2022 GMT
-*  issuer: C=US; O=(STAGING) Let's Encrypt; CN=(STAGING) Artificial Apricot R3
-*  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
-```
-
-> ⏲️You will have to wait 5-10 minutes for the SSL certificate to be signed and then loaded by the Google Cloud load balancer.
->
-> 🔰 Read about how to [Specify certificates for your Ingress in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-multi-ssl#specifying_certificates_for_your_ingress)
-
-## 10. Create a production ready SSL certificate
-
-Now that everything is working with the Let's Encrypt staging server, we can switch to the production server and get a trusted SSL certificate.
-
-Create a Let's Encrypt production Issuer and apply it:
-
-```yaml
-# issuer-lets-encrypt-production.yaml
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: letsencrypt-production
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: $EMAIL_ADDRESS
-    privateKeySecretRef:
-      name: letsencrypt-production
-    solvers:
-    - http01:
-        ingress:
-          name: web-ingress
-```
-
-```bash
-kubectl apply -f issuer-lets-encrypt-production.yaml
-```
-
-Then update the Ingress annotation to use the production Issuer:
-
-```bash
-kubectl annotate ingress web-ingress cert-manager.io/issuer=letsencrypt-production --overwrite
-```
-
-And finally renew the certificate:
-
-```bash
-cmctl renew web-ssl
-```
-
-This will trigger cert-manager to get a new SSL certificate signed by the Let's Encrypt production CA and store it to the `web-ssl` Secret.
-Within about 10 minutes, this new certificate will be synced to the Google Cloud load balancer and you will be able to connect to the website using secure HTTPS:
-
-```bash
-curl -v https://$DOMAIN_NAME
-```
-
-
-```console
-...
-* Server certificate:
-*  subject: CN=www.richard-gcp.jetstacker.net
-*  start date: Jul 14 09:44:29 2022 GMT
-*  expire date: Oct 12 09:44:28 2022 GMT
-*  subjectAltName: host "www.richard-gcp.jetstacker.net" matched cert's "www.richard-gcp.jetstacker.net"
-*  issuer: C=US; O=Let's Encrypt; CN=R3
-*  SSL certificate verify ok.
-...
-Hello, world!
-Version: 1.0.0
-Hostname: web-79d88c97d6-t8hj2
 ```
