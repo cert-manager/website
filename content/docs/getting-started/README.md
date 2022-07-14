@@ -243,6 +243,13 @@ gcloud dns record-sets create $DOMAIN_NAME \
 
 ### Create an Ingress
 
+You won't be able to reach your website yet.
+Your web server is running inside your Kubernetes cluster but there is no route or proxy through which Internet clients can connect to it, yet!
+Now we will create a Kubernetes Ingress object and in Google Cloud this will trigger the creation of a various services which together allow Internet clients to reach your web server running inside your Kubernetes cluster.
+
+Initially we are going to create an HTTP (not an HTTPS) Ingress so that we can test the basic connectivity before adding the SSL layer.
+
+Copy the following YAML into a file called `ingress.yaml`:
 ```yaml
 # ingress.yaml
 apiVersion: networking.k8s.io/v1
@@ -250,8 +257,11 @@ kind: Ingress
 metadata:
   name: web-ingress
   annotations:
+    # This tells Google Cloud to create an External Load Balancer to realize this Ingress
     kubernetes.io/ingress.class: gce
+    # This enables HTTP connections from Internet clients
     kubernetes.io/ingress.allow-http: "true"
+    # This tells Google Cloud to associate the External Load Balancer with the static IP which we created earlier
     kubernetes.io/ingress.global-static-ip-name: web-ip
 spec:
   defaultBackend:
@@ -261,9 +271,11 @@ spec:
         number: 8080
 ```
 
+And apply it:
 ```bash
 kubectl apply -f ingress.yaml
 ```
+
 > ℹ️ There are two Ingress classes available for GKE Ingress. The `gce` class deploys an external load balancer and the `gce-internal` class deploys an internal load balancer. Ingress resources without a class specified default to gce.
 > Read more about [Configuring Ingress for external load balancing in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#creating_an_ingress)
 >
