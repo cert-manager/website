@@ -3,20 +3,31 @@ title: Getting Started
 description: Learn how to deploy cert-manager in your Kubernetes cluster and how to configure it to sign SSL certificates using Let's Encrypt
 ---
 
-In this tutorial you will learn how to deploy and configure cert-manager.
-You will learn how to create an SSL certificate using Let's Encrypt.
+In this tutorial you will learn how to deploy and configure cert-manager on Kubernetes in Google Cloud (GKE).
+You will learn how to create an SSL certificate using Let's Encrypt using cert-manager.
 And finally you will learn how that certificate can be used in Kubernetes to serve an HTTPS website.
 
 > **Let’s Encrypt**: An Internet service. Allows you to generate free short-lived SSL certificates.<br/>
 > **Kubernetes**: Runs on your servers. Automates the deployment, scaling, and management of containerized applications.<br/>
 > **cert-manager**: Runs in Kubernetes. Obtains TLS / SSL certificates and ensures the certificates are valid and up-to-date.
+> **Google Cloud**:
 
 ## Prerequisites
 
-You will need to install the following software on your laptop:
+You will need a Google Cloud account.
+Visit the [Get started with Google Cloud](https://cloud.google.com/docs/get-started) page and follow the instructions.
 
-1. [gcloud](https://cloud.google.com/sdk/docs/install): A set of tools to create and manage Google Cloud resources
+> ℹ️ If you have never used Google Cloud before, you may be eligible for the
+> [Google Cloud Free
+> Program](https://cloud.google.com/free/docs/gcp-free-tier/#free-trial), which
+> gives you a 90-day trial period that includes $300 in free Cloud Billing
+> credits to explore and evaluate Google Cloud.
+
+You will also need to install the following software on your laptop:
+
+1. [gcloud](https://cloud.google.com/sdk/docs/install): A set of tools to create and manage Google Cloud resources.
 2. [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl): The Kubernetes command-line tool which allows you to configure Kubernetes clusters.
+3. [curl](https://everything.curl.dev/get): A command-line tool for connecting to a web server using HTTP and HTTPS.
 
 ## 1. Create a Kubernetes Cluster
 
@@ -25,6 +36,11 @@ To get started, let's create a Kubernetes cluster in Google Cloud:
 ```bash
 gcloud container clusters create test-cluster-1 --preemptible --num-nodes=1
 ```
+
+> ℹ️ To minimise your cloud bill, this command creates a 1-node cluster using a
+> [preemptible virtual
+> machine](https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms)
+> which is cheaper than a normal virtual machine.
 
 Set up the [Google Kubernetes Engine auth plugin for kubectl](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke):
 
