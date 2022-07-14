@@ -62,13 +62,6 @@ To get started, let's create a Kubernetes cluster in Google Cloud:
 gcloud container clusters create $CLUSTER --preemptible --num-nodes=1
 ```
 
-> ℹ️ To minimise your cloud bill, this command creates a 1-node cluster using a
-> [preemptible virtual
-> machine](https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms)
-> which is cheaper than a normal virtual machine.
->
-> ⚠️ It will take 4-5 minutes to create the cluster.
-
 Set up the [Google Kubernetes Engine auth plugin for kubectl](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke):
 
 ```bash
@@ -82,6 +75,14 @@ Now check that you can connect to the cluster:
 ```bash
 kubectl get nodes -o wide
 ```
+
+> ℹ️ To minimise your cloud bill, this command creates a 1-node cluster using a
+> [preemptible virtual
+> machine](https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms)
+> which is cheaper than a normal virtual machine.
+>
+> ⏲️It will take 4-5 minutes to create the cluster.
+
 ## 2. Install cert-manager
 
 Install cert-manager using `kubectl` as follows:
@@ -97,7 +98,7 @@ You can view some of the resources that have been installed as follows:
 kubectl -n cert-manager get all
 ```
 
-> 🔰 Learn about other ways to install cert-manager by reading the [Installing cert-manager pages](../installation).
+> 🔰 Read about [other ways to install cert-manager](../installation).
 
 ## 3. Check that cert-manager is working
 
@@ -172,7 +173,7 @@ Delete the test configuration afterwards:
 kubectl delete -f cert-manager-test.yaml
 ```
 
-> ℹ️ Read more about [Kubernetes Secrets and how to use them](https://kubernetes.io/docs/concepts/configuration/secret/).
+> 🔰 Read more about [Kubernetes Secrets and how to use them](https://kubernetes.io/docs/concepts/configuration/secret/).
 
 ## 4. Deploy a sample web server
 
@@ -198,17 +199,18 @@ Create a static IP address as follows:
 gcloud compute addresses create web-ip --global
 ```
 
-> ℹ️ You MUST create a `global` IP address because that is a prerequisite of the [External HTTP(S) Load Balancer](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb) which we will be using in this tutorial.
->
-> ⚠️ Global static IP addresses are only available in the Premium network service tier and are more expensive than ephemeral and standard public IP addresses.>
-> 🔰 Read more about [Network service tiers in Google Cloud](https://cloud.google.com/network-tiers).
-
 You should see the new IP address listed:
 
 ```bash
 gcloud compute addresses list
 ```
 
+> ⚠️ You MUST create a `global` IP address because that is a prerequisite of the [External HTTP(S) Load Balancer](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb) which we will be using in this tutorial.
+>
+> 💵 Global static IP addresses are only available in the Premium network service tier and are more expensive than ephemeral and standard public IP addresses.
+>
+> 🔰 Read more about [Network service tiers in Google Cloud](https://cloud.google.com/network-tiers).
+>
 > 🔰 Read more about [Reserving a static external IP address in Google Cloud](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
 
 ## 6. Create a domain name for your website
@@ -235,9 +237,10 @@ gcloud dns record-sets create $DOMAIN_NAME \
     --ttl=60 --zone=$ZONE
 ```
 
-> ⚠️You can't use the reverse DNS name for a Google Cloud address because the parent domain has a CAA record
-> which prevents Let's Encrypt from signing certificates for that domain. E.g.
-> `CAA record for 51.159.120.34.bc.googleusercontent.com prevents issuance`.
+> ℹ️ Every Google Cloud address has an automatically generated reverse DNS name like `51.159.120.34.bc.googleusercontent.com`,
+> but the parent domain `googleusercontent.com` has a CAA record which prevents
+> Let's Encrypt from signing certificates for the sub-domains.
+> See [Certificate Authority Authorization (CAA)](https://letsencrypt.org/docs/caa/) in the Let's Encrypt documentation.
 >
 > 🔰 Read more about how to [Add, modify, and delete DNS records in Google Cloud](https://cloud.google.com/dns/docs/records/)
 
