@@ -94,6 +94,7 @@ DataDog
 Dean-Coakley
 DigitalOcean
 Distroless
+DuckDuckGo
 etcd
 EC2
 enj
@@ -338,6 +339,7 @@ onwards
 openshift-supported-versions
 powershell
 pre
+preemptible
 pre-release
 pre-released
 pre-releases

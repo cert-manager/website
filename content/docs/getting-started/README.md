@@ -31,7 +31,7 @@ Visit the [Get started with Google Cloud](https://cloud.google.com/docs/get-star
 > 💵 If you have never used Google Cloud before, you may be eligible for the
 > [Google Cloud Free
 > Program](https://cloud.google.com/free/docs/gcp-free-tier/#free-trial), which
-> gives you a 90-day trial period that includes $300 in free Cloud Billing
+> gives you a 90 day trial period that includes $300 in free Cloud Billing
 > credits to explore and evaluate Google Cloud.
 
 **💻 Domain Name**
@@ -97,7 +97,7 @@ kubectl get nodes -o wide
 
 > ⏲ It will take 4-5 minutes to create the cluster.
 >
-> 💵 To minimise your cloud bill, this command creates a 1-node cluster using a
+> 💵 To minimize your cloud bill, this command creates a 1-node cluster using a
 > [preemptible virtual
 > machine](https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms)
 > which is cheaper than a normal virtual machine.
@@ -158,7 +158,7 @@ so the domain name needs to be reachable from the Internet.
 If you do not have a domain name you will need to go and register one,
 but that is outside the scope of this tutorial and is left as an exercise for the reader.
 
-Once you have a domain name (e.g. example.com) you will need to create a new A record (e.g. www.example.com) pointing at the IP address that we created above.
+Once you have a domain name (e.g. `example.com`) you will need to create a new A record (e.g. `www.example.com`) pointing at the IP address that we created above.
 
 You can get the IP address of the global static address you created in the previous step:
 
@@ -259,7 +259,7 @@ At this point we have a Google load balancer which is forwarding HTTP traffic to
 > ℹ️ There are two Ingress classes available for GKE Ingress. The `gce` class deploys an external load balancer and the `gce-internal` class deploys an internal load balancer. Ingress resources without a class specified default to `gce`.
 >
 > ⚠️ Contrary to the Kubernetes Ingress documentation, you MUST use the `kubernetes.io/ingress.class` annotation rather than the `Ingress.Spec.IngressClassName` field.
-> See [kubernetes/ingress-gce/issues#1301](https://github.com/kubernetes/ingress-gce/issues/1301#issuecomment-1133356812) and [kubernetes/ingress-gce#1337](https://github.com/kubernetes/ingress-gce/pull/1337).
+> See [ingress-gce #1301](https://github.com/kubernetes/ingress-gce/issues/1301#issuecomment-1133356812) and [ingress-gce #1337](https://github.com/kubernetes/ingress-gce/pull/1337).
 
 
 ## 6. Install cert-manager
@@ -458,7 +458,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: $EMAIL_ADDRESS
+    email: $EMAIL_ADDRESS # ❗ Replace this with your email address
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
@@ -507,9 +507,9 @@ You have learned how to use cert-manager to get free Let's Encrypt SSL certifica
 And you have seen how the certificates can be used by a cloud based load balancer to terminate SSL connections from Internet clients
 and forward HTTPS requests to a web server running in your Kubernetes cluster.
 
-> 💵 Read the [Clean up section](#clean-up) to learn how to delete all the resources that you created in this tutorial and reduce your cloud bill.
+> 💵 Read the [Clean up](#clean-up) section to learn how to delete all the resources that you created in this tutorial and reduce your cloud bill.
 >
-> 🔰 Read the [Troubleshooting section](#troubleshooting) if you encounter difficulties with the steps described in this tutorial.
+> 🔰 Read the [Troubleshooting](#troubleshooting) section if you encounter difficulties with the steps described in this tutorial.
 
 ## Clean up
 
@@ -586,12 +586,13 @@ Events:
   Normal   Sync               34s (x16 over 65m)  loadbalancer-controller    Scheduled for sync
 ```
 
-### Use cmctl to show the state of a cert-manager Certificate and all its associated resources
+### Use cmctl to show the state of a Certificate and its associated resources
 
 > ℹ️ [Install `cmctl`](../usage/cmctl) if you have not already done so.
 
-When you create a cert-manager Certificate associated with an Issuer for Let's Encrypt,
-cert-manager will create a collection of other resources which all contain information about the status of certificate signing process.
+When you create a Certificate, cert-manager will create a collection of temporary resources
+which each contain information about the status of certificate signing process.
+You can read more about these in the [Certificate Lifecycle](../concepts/certificate#certificate-lifecycle) section.
 Use the `cmctl status` command to view details of all these resources and all the associated Events and error messages.
 
 You may see some temporary errors, like:
@@ -690,7 +691,7 @@ Renewal Time: 2022-09-12T16:34:51+01:00
 
 ### Check that the SSL certificate has been copied to Google Cloud
 
-After cert-manager receives the signed Certificate it stores in the web-ssl Secret,
+After cert-manager receives the signed Certificate it stores in the `web-ssl` Secret,
 and this in turn triggers the Google Cloud ingress controller to copy that SSL certificate to Google Cloud.
 You can see the certificate using the `gcloud` command, as follows:
 
