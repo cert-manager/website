@@ -49,12 +49,12 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 #### Bug or Regression
 
-- The HTTP-01 ACME solver now uses the `kubernetes.io/ingress.class` annotation instead of the `spec.ingressClassName` in created Ingress resources. ([#4785](https://github.com/jetstack/cert-manager/pull/4785), [@maelvls](https://github.com/maelvls))
+- The HTTP-01 ACME solver now uses the `kubernetes.io/ingress.class` annotation instead of the `spec.ingressClassName` in created Ingress resources. ([#4785](https://github.com/cert-manager/cert-manager/pull/4785), [@maelvls](https://github.com/maelvls))
 
 #### Other (Cleanup or Flake)
 
-- cert-manager now does one call to the ACME API instead of two when an Order fails. This fix is part of the effort towards mitigating [the high load](https://github.com/jetstack/cert-manager/issues/3298) that cert-manager deployments have on the Let's Encrypt API ([#4619](https://github.com/jetstack/cert-manager/pull/4619), [@irbekrm](https://github.com/irbekrm))
-- Bump base images to latest versions ([#4707](https://github.com/jetstack/cert-manager/pull/4707), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- cert-manager now does one call to the ACME API instead of two when an Order fails. This fix is part of the effort towards mitigating [the high load](https://github.com/cert-manager/cert-manager/issues/3298) that cert-manager deployments have on the Let's Encrypt API ([#4619](https://github.com/cert-manager/cert-manager/pull/4619), [@irbekrm](https://github.com/irbekrm))
+- Bump base images to latest versions ([#4707](https://github.com/cert-manager/cert-manager/pull/4707), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## v1.6.1
 
@@ -62,8 +62,8 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 #### Bug or Regression
 
-- Fixes an issue in `cmctl` that prevented displaying the Order resource with cert-manager 1.6 when running `cmctl status certificate`. ([#4572](https://github.com/jetstack/cert-manager/pull/4572), [@maelvls](https://github.com/maelvls))
-- Update to latest version of keystore-go to address a backwards incompatible change introduced in v1.6.0 ([#4564](https://github.com/jetstack/cert-manager/pull/4564), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fixes an issue in `cmctl` that prevented displaying the Order resource with cert-manager 1.6 when running `cmctl status certificate`. ([#4572](https://github.com/cert-manager/cert-manager/pull/4572), [@maelvls](https://github.com/maelvls))
+- Update to latest version of keystore-go to address a backwards incompatible change introduced in v1.6.0 ([#4564](https://github.com/cert-manager/cert-manager/pull/4564), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## v1.6.0
 
@@ -100,7 +100,7 @@ and the only observable error was in the cert-manager logs.
 This was fixed in cert-manager `v1.6.1`.
 
 [jks-keystore]: ../reference/api-docs.md#cert-manager.io/v1.CertificateKeystores
-[jks-keystore-upgrade-pr]: https://github.com/jetstack/cert-manager/pull/4428
+[jks-keystore-upgrade-pr]: https://github.com/cert-manager/cert-manager/pull/4428
 
 ### Major Themes
 
@@ -120,43 +120,43 @@ Our container images will be signed using sigstore's [cosign](https://github.com
 
 #### Tool Chain Updates
 
-cert-manager is now built with go 1.17 ([#4478](https://github.com/jetstack/cert-manager/pull/4478), [@irbekrm](https://github.com/irbekrm))
-and can now be compiled on Apple Silicon ([#4485](https://github.com/jetstack/cert-manager/pull/4485), [@munnerz](https://github.com/munnerz)).
+cert-manager is now built with go 1.17 ([#4478](https://github.com/cert-manager/cert-manager/pull/4478), [@irbekrm](https://github.com/irbekrm))
+and can now be compiled on Apple Silicon ([#4485](https://github.com/cert-manager/cert-manager/pull/4485), [@munnerz](https://github.com/munnerz)).
 
 ### Changelog since v1.5.0
 
 #### Feature
 
-- Add Certificate `RenewBefore` Prometheus metrics ([#4419](https://github.com/jetstack/cert-manager/pull/4419), [@artificial-aidan](https://github.com/artificial-aidan))
-- Add option to specify managed identity id when using Azure DNS DNS01 solver ([#4332](https://github.com/jetstack/cert-manager/pull/4332), [@tomasfreund](https://github.com/tomasfreund))
-- Add support for building & developing on M1 macs ([#4485](https://github.com/jetstack/cert-manager/pull/4485), [@munnerz](https://github.com/munnerz))
-- Adds release targets for both `cmctl` as well as `kubectl-cert_manager` ([#4523](https://github.com/jetstack/cert-manager/pull/4523), [@JoshVanL](https://github.com/JoshVanL))
-- Allow setting Helm chart service annotations ([#3639](https://github.com/jetstack/cert-manager/pull/3639), [@treydock](https://github.com/treydock))
-- CLI: Adds `cmctl completion` command for generating shell completion scripts for Bash, ZSH, Fish, and PowerShell ([#4408](https://github.com/jetstack/cert-manager/pull/4408), [@JoshVanL](https://github.com/JoshVanL))
-- CLI: Adds support for auto-completion on runtime objects (Namespaces, CertificateRequests, Certificates etc.) ([#4409](https://github.com/jetstack/cert-manager/pull/4409), [@JoshVanL](https://github.com/JoshVanL))
-- CLI: Only expose Kubernetes related flags on commands that use them ([#4407](https://github.com/jetstack/cert-manager/pull/4407), [@JoshVanL](https://github.com/JoshVanL))
-- Enable configuring CLI command name and registering completion sub-command at build time. ([#4522](https://github.com/jetstack/cert-manager/pull/4522), [@JoshVanL](https://github.com/JoshVanL))
+- Add Certificate `RenewBefore` Prometheus metrics ([#4419](https://github.com/cert-manager/cert-manager/pull/4419), [@artificial-aidan](https://github.com/artificial-aidan))
+- Add option to specify managed identity id when using Azure DNS DNS01 solver ([#4332](https://github.com/cert-manager/cert-manager/pull/4332), [@tomasfreund](https://github.com/tomasfreund))
+- Add support for building & developing on M1 macs ([#4485](https://github.com/cert-manager/cert-manager/pull/4485), [@munnerz](https://github.com/munnerz))
+- Adds release targets for both `cmctl` as well as `kubectl-cert_manager` ([#4523](https://github.com/cert-manager/cert-manager/pull/4523), [@JoshVanL](https://github.com/JoshVanL))
+- Allow setting Helm chart service annotations ([#3639](https://github.com/cert-manager/cert-manager/pull/3639), [@treydock](https://github.com/treydock))
+- CLI: Adds `cmctl completion` command for generating shell completion scripts for Bash, ZSH, Fish, and PowerShell ([#4408](https://github.com/cert-manager/cert-manager/pull/4408), [@JoshVanL](https://github.com/JoshVanL))
+- CLI: Adds support for auto-completion on runtime objects (Namespaces, CertificateRequests, Certificates etc.) ([#4409](https://github.com/cert-manager/cert-manager/pull/4409), [@JoshVanL](https://github.com/JoshVanL))
+- CLI: Only expose Kubernetes related flags on commands that use them ([#4407](https://github.com/cert-manager/cert-manager/pull/4407), [@JoshVanL](https://github.com/JoshVanL))
+- Enable configuring CLI command name and registering completion sub-command at build time. ([#4522](https://github.com/cert-manager/cert-manager/pull/4522), [@JoshVanL](https://github.com/JoshVanL))
 
 #### Bug or Regression
 
-- Fix a bug in the Vault client that led to a panic after a request to Vault health endpoint failed. ([#4456](https://github.com/jetstack/cert-manager/pull/4456), [@JoshVanL](https://github.com/JoshVanL))
-- Fix CRDs which were accidentally changed in cert-manager `v1.5.0` ([#4353](https://github.com/jetstack/cert-manager/pull/4353), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- Fix a regression in Ingress `PathType` introduced in `v1.5.0` ([#4373](https://github.com/jetstack/cert-manager/pull/4373), [@jakexks](https://github.com/jakexks))
-- Fixed the HTTP-01 solver creating `ClusterIP` instead of `NodePort` services by default. ([#4393](https://github.com/jetstack/cert-manager/pull/4393), [@jakexks](https://github.com/jakexks))
-- Fix a bug where a Certificate may not get renewed when the issued Certificate has a one-second skew between `notBefore` and `notAfter` and `spec.duration` is not used. This one-second skew can be observed on certificates issued with Let's Encrypt and caused a mismatch in time precision between the time stored in `status.renewalTime` and the time internally computed by cert-manager. ([#4399](https://github.com/jetstack/cert-manager/pull/4399), [@irbekrm](https://github.com/irbekrm))
-- Helm chart: the post-install hook `startupapicheck` is now compatible with PodSecurityPolicy. ([#4364](https://github.com/jetstack/cert-manager/pull/4364), [@ndegory](https://github.com/ndegory))
-- Helm chart: the post-install hook `startupapicheck` now deletes any post-install hook resources left after a previous failed install allowing `helm install` to be re-run after a failed attempt. ([#4433](https://github.com/jetstack/cert-manager/pull/4433), [@wallrj](https://github.com/wallrj))
-- The defaults for leader election parameters are now consistent across cert-manager and cainjector. ([#4359](https://github.com/jetstack/cert-manager/pull/4359), [@johanfleury](https://github.com/johanfleury))
-- Use `GetAuthorization` instead of `GetChallenge` when querying the current state of an ACME challenge. ([#4430](https://github.com/jetstack/cert-manager/pull/4430), [@JoshVanL](https://github.com/JoshVanL))
+- Fix a bug in the Vault client that led to a panic after a request to Vault health endpoint failed. ([#4456](https://github.com/cert-manager/cert-manager/pull/4456), [@JoshVanL](https://github.com/JoshVanL))
+- Fix CRDs which were accidentally changed in cert-manager `v1.5.0` ([#4353](https://github.com/cert-manager/cert-manager/pull/4353), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix a regression in Ingress `PathType` introduced in `v1.5.0` ([#4373](https://github.com/cert-manager/cert-manager/pull/4373), [@jakexks](https://github.com/jakexks))
+- Fixed the HTTP-01 solver creating `ClusterIP` instead of `NodePort` services by default. ([#4393](https://github.com/cert-manager/cert-manager/pull/4393), [@jakexks](https://github.com/jakexks))
+- Fix a bug where a Certificate may not get renewed when the issued Certificate has a one-second skew between `notBefore` and `notAfter` and `spec.duration` is not used. This one-second skew can be observed on certificates issued with Let's Encrypt and caused a mismatch in time precision between the time stored in `status.renewalTime` and the time internally computed by cert-manager. ([#4399](https://github.com/cert-manager/cert-manager/pull/4399), [@irbekrm](https://github.com/irbekrm))
+- Helm chart: the post-install hook `startupapicheck` is now compatible with PodSecurityPolicy. ([#4364](https://github.com/cert-manager/cert-manager/pull/4364), [@ndegory](https://github.com/ndegory))
+- Helm chart: the post-install hook `startupapicheck` now deletes any post-install hook resources left after a previous failed install allowing `helm install` to be re-run after a failed attempt. ([#4433](https://github.com/cert-manager/cert-manager/pull/4433), [@wallrj](https://github.com/wallrj))
+- The defaults for leader election parameters are now consistent across cert-manager and cainjector. ([#4359](https://github.com/cert-manager/cert-manager/pull/4359), [@johanfleury](https://github.com/johanfleury))
+- Use `GetAuthorization` instead of `GetChallenge` when querying the current state of an ACME challenge. ([#4430](https://github.com/cert-manager/cert-manager/pull/4430), [@JoshVanL](https://github.com/JoshVanL))
 
 #### Other (Cleanup or Flake)
 
-- Adds middleware logging back to ACME client for debugging ([#4429](https://github.com/jetstack/cert-manager/pull/4429), [@JoshVanL](https://github.com/JoshVanL))
-- Deprecation: The API versions: `v1alpha2`, `v1alpha3`, and `v1beta1`, are no longer served in cert-manager 1.6 and will be removed in cert-manager 1.7. ([#4482](https://github.com/jetstack/cert-manager/pull/4482), [@wallrj](https://github.com/wallrj))
-- Expose error messages (e.g., invalid access token) from the Cloudflare API to users; allow live testing using Cloudflare API token (not just key). ([#4465](https://github.com/jetstack/cert-manager/pull/4465), [@andrewmwhite](https://github.com/andrewmwhite))
-- Fix manually specified `PKCS#10` CSR and X.509 Certificate version numbers (although these were ignored in practice) ([#4392](https://github.com/jetstack/cert-manager/pull/4392), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- Improves logging for 'owner not found' errors for `CertificateRequest`s owning `Order`s. ([#4369](https://github.com/jetstack/cert-manager/pull/4369), [@irbekrm](https://github.com/irbekrm))
-- Refactor: move from `io/ioutil` to `io` and `os` package ([#4402](https://github.com/jetstack/cert-manager/pull/4402), [@Juneezee](https://github.com/Juneezee))
-- Helm chart and static manifest: the pointless `status` field is now stripped from the CRD manifests. ([#4379](https://github.com/jetstack/cert-manager/pull/4379), [@irbekrm](https://github.com/irbekrm))
-- Update cert-manager base image versions ([#4474](https://github.com/jetstack/cert-manager/pull/4474), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- cert-manager now uses Go 1.17. ([#4478](https://github.com/jetstack/cert-manager/pull/4478), [@irbekrm](https://github.com/irbekrm))
+- Adds middleware logging back to ACME client for debugging ([#4429](https://github.com/cert-manager/cert-manager/pull/4429), [@JoshVanL](https://github.com/JoshVanL))
+- Deprecation: The API versions: `v1alpha2`, `v1alpha3`, and `v1beta1`, are no longer served in cert-manager 1.6 and will be removed in cert-manager 1.7. ([#4482](https://github.com/cert-manager/cert-manager/pull/4482), [@wallrj](https://github.com/wallrj))
+- Expose error messages (e.g., invalid access token) from the Cloudflare API to users; allow live testing using Cloudflare API token (not just key). ([#4465](https://github.com/cert-manager/cert-manager/pull/4465), [@andrewmwhite](https://github.com/andrewmwhite))
+- Fix manually specified `PKCS#10` CSR and X.509 Certificate version numbers (although these were ignored in practice) ([#4392](https://github.com/cert-manager/cert-manager/pull/4392), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Improves logging for 'owner not found' errors for `CertificateRequest`s owning `Order`s. ([#4369](https://github.com/cert-manager/cert-manager/pull/4369), [@irbekrm](https://github.com/irbekrm))
+- Refactor: move from `io/ioutil` to `io` and `os` package ([#4402](https://github.com/cert-manager/cert-manager/pull/4402), [@Juneezee](https://github.com/Juneezee))
+- Helm chart and static manifest: the pointless `status` field is now stripped from the CRD manifests. ([#4379](https://github.com/cert-manager/cert-manager/pull/4379), [@irbekrm](https://github.com/irbekrm))
+- Update cert-manager base image versions ([#4474](https://github.com/cert-manager/cert-manager/pull/4474), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- cert-manager now uses Go 1.17. ([#4478](https://github.com/cert-manager/cert-manager/pull/4478), [@irbekrm](https://github.com/irbekrm))

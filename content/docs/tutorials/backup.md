@@ -151,7 +151,7 @@ We have briefly tested backup and restore with `velero` `v1.5.3` and
  `CertificateRequest` will be created when needed (i.e at a time of a renewal
  of a `Certificate`).
  In `v1.3.0` , as part of our work towards [policy
- implementation](https://github.com/jetstack/cert-manager/pull/3727) we
+ implementation](https://github.com/cert-manager/cert-manager/pull/3727) we
  introduced identity fields for `CertificateRequest` resources where, at a time
  of creation, `cert-mananager`'s webhook updates `CertificateRequest`'s spec
  with immutable identity fields, representing the identity of the creator of

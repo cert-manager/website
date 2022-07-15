@@ -18,7 +18,7 @@ We also want to thank several new contributors to the project for their PRs!
 
 All help is very appreciated and very welcome!
 
-Interested in knowing what will happen in the next releases of cert-manager? Go check out [our road map](https://github.com/jetstack/cert-manager/blob/master/ROADMAP.md)!
+Interested in knowing what will happen in the next releases of cert-manager? Go check out [our road map](https://github.com/cert-manager/cert-manager/blob/master/ROADMAP.md)!
 
 As usual, please read the [upgrade notes](../installation/upgrading/upgrading-1.0-1.1.md) before upgrading.
 

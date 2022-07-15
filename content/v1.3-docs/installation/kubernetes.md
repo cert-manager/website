@@ -37,7 +37,7 @@ are included in a single YAML manifest file:
 Install the `CustomResourceDefinitions` and cert-manager itself:
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.yaml
+$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.3.1/cert-manager.yaml
 ```
 
 > **Note**: When running on GKE (Google Kubernetes Engine), you may encounter a
@@ -112,7 +112,7 @@ option when installing the Helm chart.
 Install the `CustomResourceDefinition` resources using `kubectl`:
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.3.1/cert-manager.crds.yaml
+$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.3.1/cert-manager.crds.yaml
 ```
 
 #### Option 2: install CRDs as part of the Helm release

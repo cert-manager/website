@@ -25,8 +25,8 @@ Special thanks to the external contributors who contributed to this release:
 
 Since cert-manager `v0.15` there has been a package for cert-manager on [Red Hat Marketplace][],
 but this has now been removed because it was not maintained and was found to be unreliable:
-[#4055](https://github.com/jetstack/cert-manager/issues/4055)
-[#3732](https://github.com/jetstack/cert-manager/issues/3732)
+[#4055](https://github.com/cert-manager/cert-manager/issues/4055)
+[#3732](https://github.com/cert-manager/cert-manager/issues/3732)
 [#436](https://github.com/cert-manager/website/issues/436)
 
 [Red Hat Marketplace]: https://marketplace.redhat.com
@@ -72,7 +72,7 @@ page.
 
 This change was made in the cert-manager PR [#4021][].
 
-[#4021]: https://github.com/jetstack/cert-manager/pull/4021 "Warn about removal of old v1alpha2, v1alpha3 and v1beta1 in 1.6"
+[#4021]: https://github.com/cert-manager/cert-manager/pull/4021 "Warn about removal of old v1alpha2, v1alpha3 and v1beta1 in 1.6"
 
 ### Helm chart: `securityContext` defaults to non-root
 
@@ -100,7 +100,7 @@ will need to set this back to `false`.
 
 Implemented in the cert-manager PR [#4036][].
 
-[#4036]: https://github.com/jetstack/cert-manager/pull/4036 "controller, cainject and webhook now run as non-root"
+[#4036]: https://github.com/cert-manager/cert-manager/pull/4036 "controller, cainject and webhook now run as non-root"
 
 ### CA, Vault and Venafi issuer handling of `ca.crt` and `tls.crt`
 
@@ -121,9 +121,9 @@ managed by cert-manager with the CA issuer.
 
 </div>
 
-[#3982]: https://github.com/jetstack/cert-manager/pull/3982 "All issuers + Vault issuer"
-[#3983]: https://github.com/jetstack/cert-manager/pull/3983 "Venafi issuer"
-[#3985]: https://github.com/jetstack/cert-manager/pull/3985 "CA issuer"
+[#3982]: https://github.com/cert-manager/cert-manager/pull/3982 "All issuers + Vault issuer"
+[#3983]: https://github.com/cert-manager/cert-manager/pull/3983 "Venafi issuer"
+[#3985]: https://github.com/cert-manager/cert-manager/pull/3985 "CA issuer"
 
 
 ### Vault renewal bug
@@ -148,7 +148,7 @@ behavior.
 
 Fixed in the cert-manager PR [#4092][].
 
-[#4092]: https://github.com/jetstack/cert-manager/pull/4092 "Default renewal changed from 30 days before expiry to 1/3 of the duration before expiry"
+[#4092]: https://github.com/cert-manager/cert-manager/pull/4092 "Default renewal changed from 30 days before expiry to 1/3 of the duration before expiry"
 
 ## New Features
 
@@ -172,7 +172,7 @@ page](../usage/kube-csr.md).
 
 Implemented in cert-manager PR [#4064][].
 
-[#4064]: https://github.com/jetstack/cert-manager/pull/4064 "CA issuer experimental support for CertificateSigningRequests"
+[#4064]: https://github.com/cert-manager/cert-manager/pull/4064 "CA issuer experimental support for CertificateSigningRequests"
 [CertificateSigningRequest]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
 
 ### Helm chart: webhook externally accessible for bare-metal
@@ -195,8 +195,8 @@ webhook:
 
 Implemented in cert-manager PRs [#3876][], [#3932][].
 
-[#3932]: https://github.com/jetstack/cert-manager/pull/3932 "Adds support for accessing coversion webhook from outside cluster network"
-[#3876]: https://github.com/jetstack/cert-manager/pull/3876 "Adds support for accessing mutating and validating webhooks from outside cluster network"
+[#3932]: https://github.com/cert-manager/cert-manager/pull/3932 "Adds support for accessing coversion webhook from outside cluster network"
+[#3876]: https://github.com/cert-manager/cert-manager/pull/3876 "Adds support for accessing mutating and validating webhooks from outside cluster network"
 
 ### Helm chart: Service labels
 
@@ -224,14 +224,14 @@ With the above example, the source label
 
 Implemented in the cert-manager PR [#4009][].
 
-[#4009]: https://github.com/jetstack/cert-manager/pull/4009 "Helm chart: the Service labels can now be set on the controller"
+[#4009]: https://github.com/cert-manager/cert-manager/pull/4009 "Helm chart: the Service labels can now be set on the controller"
 
 ### Akamai DNS01 solver
 
 The Akamai DNS01 solver has been [updated][4007] to use the v2 of the `OPEN
 EdgeGrid` Go package.
 
-[#4007]: https://github.com/jetstack/cert-manager/pull/4007 "Update of the Akamai DNS01 solver"
+[#4007]: https://github.com/cert-manager/cert-manager/pull/4007 "Update of the Akamai DNS01 solver"
 
 ## Bug Fixes
 
@@ -254,11 +254,11 @@ EdgeGrid` Go package.
   the same behavior where a terminal state of a CertificateRequest should have a
   `Ready` condition. Fixed in the cert-manager PR [#3878][].
 
-[#3622]: https://github.com/jetstack/cert-manager/pull/3622 "RFC2136 fixed when used with challenge domains that contain multiple TXT records"
-[#3914]: https://github.com/jetstack/cert-manager/pull/3914 "Comparison between public keys now works properly"
-[#3866]: https://github.com/jetstack/cert-manager/pull/3866 "Certificates with long names are not generated non-unique Orders anymore"
-[#3805]: https://github.com/jetstack/cert-manager/pull/3805 "Misbehaving ACME servers won't get Orders stuck anymore"
-[#3878]: https://github.com/jetstack/cert-manager/pull/3878 "When a CertificateRequest is Denied, the internal issuers set Ready=False"
+[#3622]: https://github.com/cert-manager/cert-manager/pull/3622 "RFC2136 fixed when used with challenge domains that contain multiple TXT records"
+[#3914]: https://github.com/cert-manager/cert-manager/pull/3914 "Comparison between public keys now works properly"
+[#3866]: https://github.com/cert-manager/cert-manager/pull/3866 "Certificates with long names are not generated non-unique Orders anymore"
+[#3805]: https://github.com/cert-manager/cert-manager/pull/3805 "Misbehaving ACME servers won't get Orders stuck anymore"
+[#3878]: https://github.com/cert-manager/cert-manager/pull/3878 "When a CertificateRequest is Denied, the internal issuers set Ready=False"
 
 ## Other Changes
 
@@ -267,7 +267,7 @@ EdgeGrid` Go package.
   that a new `Lease` object is now being created in the leader election
   namespace. Implemented in the cert-manager PR [#4016][].
 
-[#4016]: https://github.com/jetstack/cert-manager/pull/4016 "Use the configmapsleases resource instead of configmaps"
+[#4016]: https://github.com/cert-manager/cert-manager/pull/4016 "Use the configmapsleases resource instead of configmaps"
 
 - The `keyAlgorithm` for the ACME Issuer is now deprecated, and the EAB MAC
   algorithm is now hard-coded to `HS256`.
@@ -286,8 +286,8 @@ EdgeGrid` Go package.
 
     This change were implemented in the cert-manager PRs [#3877][] and [#3936][].
 
-[#3877]: https://github.com/jetstack/cert-manager/pull/3877 "Deprecation of the keyAlgorithm field"
-[#3936]: https://github.com/jetstack/cert-manager/pull/3936 "Webhook warns the user when keyAlgorithm is used"
+[#3877]: https://github.com/cert-manager/cert-manager/pull/3877 "Deprecation of the keyAlgorithm field"
+[#3936]: https://github.com/cert-manager/cert-manager/pull/3936 "Webhook warns the user when keyAlgorithm is used"
 
 - If you happen to look at the cert-manager controller logs, you may see this
   new message about optimistic locking:
@@ -309,28 +309,28 @@ EdgeGrid` Go package.
 
     Fixed in the cert-manager PR [#3794][].
 
-[#3794]: https://github.com/jetstack/cert-manager/pull/3794 "Less alarming message on optimistic locking errors"
+[#3794]: https://github.com/cert-manager/cert-manager/pull/3794 "Less alarming message on optimistic locking errors"
 
 - The `util.UsageContentCommittment` (which contained a spelling mistake) was
   deprecated in favor of `util.UsageContentCommitment`. The only people impacted
   by this deprecation are the the people importing the Go package
   `github.com/jetstack/cert-manager/pkg/api/util`.
 
-[#3860]: https://github.com/jetstack/cert-manager/pull/3860 "Fix a spelling mistake in a cert-manager Go package and deprecate the old name"
+[#3860]: https://github.com/cert-manager/cert-manager/pull/3860 "Fix a spelling mistake in a cert-manager Go package and deprecate the old name"
 
 - The webhook now panics when it is not able to register the API schemes.
   Previously, the webhook would silently skip the error and start.
 
-[#4037]: https://github.com/jetstack/cert-manager/pull/4037 "Webhook now panics instead of silently starting if the API scheme cannot be registered"
+[#4037]: https://github.com/cert-manager/cert-manager/pull/4037 "Webhook now panics instead of silently starting if the API scheme cannot be registered"
 
 - A couple of legacy functions in `test/e2e/util` package have been removed.
   These functions can be found in the `test/unit/gen` package.
 
-[#3873]: https://github.com/jetstack/cert-manager/pull/3873 "Legacy functions in the test/e2e/util have been removed"
+[#3873]: https://github.com/cert-manager/cert-manager/pull/3873 "Legacy functions in the test/e2e/util have been removed"
 
 - The Kubernetes Go dependencies have been updated from `v0.19.0` to `v0.21.0`.
 
-[#3926]: https://github.com/jetstack/cert-manager/pull/3926 "Update Kubernetes Go imports from v0.19.0 to v0.21.0"
+[#3926]: https://github.com/cert-manager/cert-manager/pull/3926 "Update Kubernetes Go imports from v0.19.0 to v0.21.0"
 
 - When waiting for DNS propagating, the ACME DNS01 self-check now returns a
   better message when an unexpected DNS response code is received, such as
@@ -360,7 +360,7 @@ EdgeGrid` Go package.
 
     Fixed in the cert-manager PR [#3906][].
 
-[#3906]: https://github.com/jetstack/cert-manager/pull/3906 "Better message when the ACME DNS01 self-check gets an unexpected DNS response code"
+[#3906]: https://github.com/cert-manager/cert-manager/pull/3906 "Better message when the ACME DNS01 self-check gets an unexpected DNS response code"
 
 - The `distroless/static` base image was updated to the latest version as of
   2021-05-20.
@@ -369,11 +369,11 @@ EdgeGrid` Go package.
 
 Tim Ramlot ([@inteon](https://github.com/inteon)) has done a fantastic job at
 adding the Istio `VirtualService` support for HTTP01 challenges in
-[#3724](https://github.com/jetstack/cert-manager/pull/3724). It took an immense
+[#3724](https://github.com/cert-manager/cert-manager/pull/3724). It took an immense
 effort to have this PR ready and merged for the 1.4 release.
 
 After a lot of thinking, we have decided that trying to support every custom
 resource for every proxy could not be done in-tree due to the Go dependency
 weight that each integration adds. Jake Sanders proposed an [out-of-tree
-approach](https://github.com/jetstack/cert-manager/issues/3924) that will be
+approach](https://github.com/cert-manager/cert-manager/issues/3924) that will be
 worked on as part of cert-manager 1.5.

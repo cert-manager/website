@@ -33,7 +33,7 @@ Delete the installation manifests using a link to your currently running version
 `vX.Y.Z` like so:
 
 ```bash
-$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
+$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
 ```
 
 ## Uninstalling with Helm
@@ -64,7 +64,7 @@ Finally, delete the cert-manger
 using the link to the version `vX.Y.Z` you installed:
 
 ```bash
-$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
+$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
 ```
 
 ## Namespace Stuck in Terminating State

@@ -44,7 +44,7 @@ or using the `installCRDs` option when installing the Helm chart.
 
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.3/cert-manager.crds.yaml
+$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.6.3/cert-manager.crds.yaml
 ```
 
 ##### Option 2: install CRDs as part of the Helm release
@@ -144,7 +144,7 @@ using the link to the version `vX.Y.Z` you installed:
 > be removed by Kubernetes' garbage collector.
 
 ```bash
-$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
+$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
 ```
 
 ### Namespace Stuck in Terminating State

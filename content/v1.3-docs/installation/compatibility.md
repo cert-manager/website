@@ -20,7 +20,7 @@ when installing cert-manager either using a command line flag or an entry in
 your `values.yaml` file.
 
 If you have a port clash, you could see confusing error messages regarding
-untrusted certs. See [#3237](https://github.com/jetstack/cert-manager/issues/3237)
+untrusted certs. See [#3237](https://github.com/cert-manager/cert-manager/issues/3237)
 for more details.
 </div>
 
@@ -54,7 +54,7 @@ As per [this
 tweet](https://twitter.com/BagadeVivek/status/1365701217469534220), GKE
 Autopilot is meant to support webhooks in a coming release. We will keep
 you updated on the progress on [this
-issue](https://github.com/jetstack/cert-manager/issues/3717).
+issue](https://github.com/cert-manager/cert-manager/issues/3717).
 
 ## AWS EKS
 
@@ -74,7 +74,7 @@ port; see the warning at the top of the page for details.
 
 It's worth noting that using AWS Fargate to run cert-manager will force you to
 run using the host's network, and will force a port clash with the kubelet
-running on port 10250, as seen in [#3237](https://github.com/jetstack/cert-manager/issues/3237).
+running on port 10250, as seen in [#3237](https://github.com/cert-manager/cert-manager/issues/3237).
 
 When deploying cert-manager on Fargate, you _must_ change the port on which
 the webhook listens. See the warning at the top of this page for more details.

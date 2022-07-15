@@ -124,7 +124,7 @@ Information about setting up and configuring ACMEDNS is available on the
 ## Limitation of the `acme-dns` server
 
 The [`acme-dns`](https://github.com/joohoi/acme-dns) server has a [known
-limitation](https://github.com/jetstack/cert-manager/issues/3610#issuecomment-849792721):
+limitation](https://github.com/cert-manager/cert-manager/issues/3610#issuecomment-849792721):
 when a set of credentials is used with more than 2 domains, cert-manager
 will fail solving the DNS01 challenges.
 

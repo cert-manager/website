@@ -87,7 +87,7 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 > using `s`, `m`, and `h` suffixes instead. Failing to do so without installing
 > the [`webhook component`](../concepts/webhook.md) can prevent cert-manager
 > from functioning correctly
-> [`#1269`](https://github.com/jetstack/cert-manager/issues/1269).
+> [`#1269`](https://github.com/cert-manager/cert-manager/issues/1269).
 
 > Note: Take care when setting the `renewBefore` field to be very close to the
 > `duration` as this can lead to a renewal loop, where the `Certificate` is always

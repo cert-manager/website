@@ -19,7 +19,7 @@ are included in a single YAML manifest file:
 Install all cert-manager components:
 
 ```bash
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.5/cert-manager.yaml
+$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.5.5/cert-manager.yaml
 ```
 
 By default, cert-manager will be installed into the `cert-manager`
@@ -73,7 +73,7 @@ Delete the installation manifests using a link to your currently running version
 > be removed by Kubernetes' garbage collector.
 
 ```bash
-$ kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
+$ kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
 ```
 
 ### Namespace Stuck in Terminating State
