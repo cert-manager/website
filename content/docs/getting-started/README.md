@@ -22,6 +22,8 @@ By the end of this tutorial you will be able to connect to your website from the
 
 ## Prerequisites
 
+**💻 Google Cloud account**
+
 You will need a Google Cloud account.
 Registration requires a credit card or bank account details.
 Visit the [Get started with Google Cloud](https://cloud.google.com/docs/get-started) page and follow the instructions.
@@ -31,6 +33,13 @@ Visit the [Get started with Google Cloud](https://cloud.google.com/docs/get-star
 > Program](https://cloud.google.com/free/docs/gcp-free-tier/#free-trial), which
 > gives you a 90-day trial period that includes $300 in free Cloud Billing
 > credits to explore and evaluate Google Cloud.
+
+**💻 Domain Name**
+
+You will need a domain name and the ability to create DNS records in that domain.
+If you haven't got a domain name you should be able to adapt this tutorial to use an IP address for your website and for the SSL certificate.
+
+**💻 Software**
 
 You will also need to install the following software on your laptop:
 
@@ -45,12 +54,12 @@ Where ever you see a `$VARIABLE_NAME` in a command, you need to either replace t
 or assign a value to the variable and export it so that the value can be substituted automatically by your shell.
 
 ```bash
-export PROJECT="<GOOGLE_CLOUD_PROJECT>" # Your Google Cloud project ID e.g. jetstack-richard
-export REGION="<GOOGLE_CLOUD_REGION>"   # Your Google Cloud region e.g. europe-west1
-export CLUSTER="<GKE_CLUSTER_NAME>"     # A name for your GKE cluster e.g. test-cluster-1
-export ZONE="<GOOGLE_CLOUD_DNS_ZONE>"   # The Google Cloud DNS zone in which to create your website domain name e.g. example-zone
-export DOMAIN_NAME="<WEBSITE_DOMAIN_NAME>" # The domain name for your website e.g. www.example.com
-export EMAIL_ADDRESS="<EMAIL_ADDRESS>"  # The email address to register with Let's Encrypt e.g. devops@example.com
+export PROJECT="..."       # Your Google Cloud project ID e.g. jetstack-richard
+export REGION="..."        # Your Google Cloud region e.g. europe-west1
+export CLUSTER="..."       # A name for your GKE cluster e.g. test-cluster-1
+export ZONE="..."          # The Google Cloud DNS zone in which to create your website domain name e.g. example-zone
+export DOMAIN_NAME="..."   # The domain name for your website e.g. www.example.com
+export EMAIL_ADDRESS="..." # The email address to register with Let's Encrypt e.g. devops@example.com
 ```
 
 Once you've installed `gcloud` configure it to use your preferred project and region:
@@ -139,7 +148,7 @@ gcloud compute addresses list
 >
 > 🔰 Read more about [Network service tiers in Google Cloud](https://cloud.google.com/network-tiers).
 >
-> 🔰 Read more about [Reserving a static external IP address in Google Cloud](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
+> 🔰 Read more about [Reserving a static external IP address in Google Cloud](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address).
 
 ## 4. Create a domain name for your website
 
@@ -176,7 +185,7 @@ gcloud dns record-sets create $DOMAIN_NAME \
 > Let's Encrypt from signing certificates for the sub-domains.
 > See [Certificate Authority Authorization (CAA)](https://letsencrypt.org/docs/caa/) in the Let's Encrypt documentation.
 >
-> 🔰 Read more about how to [Add, modify, and delete DNS records in Google Cloud](https://cloud.google.com/dns/docs/records/)
+> 🔰 Read more about how to [Add, modify, and delete DNS records in Google Cloud](https://cloud.google.com/dns/docs/records/).
 
 ## 5. Create an Ingress
 
@@ -239,6 +248,7 @@ At this point we have a Google load balancer which is forwarding HTTP traffic to
 
 > ⏲ It may take 4-5 minutes for the load balancer components to be created and
 > configured and for Internet clients to be routed to your web server.
+> Refer to the [Troubleshooting](#troubleshooting) section if it takes longer.
 >
 > 🔰 Read about how to [Use a static IP addresses for HTTP(S) load balancers via Ingress annotation](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb#static_ip_addresses_for_https_load_balancers).
 >
@@ -248,7 +258,7 @@ At this point we have a Google load balancer which is forwarding HTTP traffic to
 >
 > ℹ️ There are two Ingress classes available for GKE Ingress. The `gce` class deploys an external load balancer and the `gce-internal` class deploys an internal load balancer. Ingress resources without a class specified default to `gce`.
 >
-> ⚠️Contrary to the Kubernetes Ingress documentation, you MUST use the `kubernetes.io/ingress.class` annotation rather than the `Ingress.Spec.IngressClassName` field.
+> ⚠️ Contrary to the Kubernetes Ingress documentation, you MUST use the `kubernetes.io/ingress.class` annotation rather than the `Ingress.Spec.IngressClassName` field.
 > See [kubernetes/ingress-gce/issues#1301](https://github.com/kubernetes/ingress-gce/issues/1301#issuecomment-1133356812) and [kubernetes/ingress-gce#1337](https://github.com/kubernetes/ingress-gce/pull/1337).
 
 
@@ -280,13 +290,16 @@ kubectl explain Issuer
 
 > 🔰 Read about [other ways to install cert-manager](../installation).
 >
-> 🔰 Read about [cert-manager Certificates, Issuers and other concepts](../concepts).
+> 🔰 Read more about [Certificates and Issuers](../concepts).
 
 ## 7. Create an Issuer for Let's Encrypt Staging
 
 An Issuer is a custom resource which tells cert-manager how to sign a Certificate.
 In this case the Issuer will be configured to connect to the Let's Encrypt staging server,
 which allows us to test everything without using up our Let's Encrypt certificate quota for the domain name.
+
+> ℹ️ Let's Encrypt uses the Automatic Certificate Management Environment (ACME) protocol
+> which is why the configuration below is under a key called `acme`.
 
 Save the following content to a file called `issuer-lets-encrypt-staging.yaml` and apply it:
 
@@ -341,6 +354,8 @@ Status:
 >
 > ⚠️ In the next step you will see a warning about untrusted certificates because
 > we start with the staging issuer, but that's totally expected.
+>
+> 🔰 Read more about [configuring the ACME Issuer](../configuration/acme).
 
 ## 8. Re-configure the Ingress for SSL
 
@@ -424,6 +439,7 @@ that's why you use the `--insecure` flag at this stage:
 ```
 
 > ⏲ You will have to wait 5-10 minutes for the SSL certificate to be signed and then loaded by the Google Cloud load balancer.
+> Refer to the [Troubleshooting](#troubleshooting) section if it takes longer.
 >
 > 🔰 Read about how to [Specify certificates for your Ingress in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-multi-ssl#specifying_certificates_for_your_ingress).
 
@@ -572,7 +588,7 @@ Events:
 
 ### Use cmctl to show the state of a cert-manager Certificate and all its associated resources
 
-> ℹ [Install `cmctl`](../usage/cmctl) if you have not already done so.
+> ℹ️ [Install `cmctl`](../usage/cmctl) if you have not already done so.
 
 When you create a cert-manager Certificate associated with an Issuer for Let's Encrypt,
 cert-manager will create a collection of other resources which all contain information about the status of certificate signing process.
