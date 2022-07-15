@@ -441,6 +441,11 @@ that's why you use the `--insecure` flag at this stage:
 > ⏲ You will have to wait 5-10 minutes for the SSL certificate to be signed and then loaded by the Google Cloud load balancer.
 > Refer to the [Troubleshooting](#troubleshooting) section if it takes longer.
 >
+> ℹ️ Adding the annotation `cert-manager.io/issuer: letsencrypt-staging` marks the Ingress for the attention of the cert-manager `ingress-shim`
+> and causes it to create a new Certificate with a reference to the Issuer that we created earlier.
+>
+> 🔰 Read [Securing Ingress Resources](../usage/ingress) to learn more.
+>
 > 🔰 Read about how to [Specify certificates for your Ingress in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-multi-ssl#specifying_certificates_for_your_ingress).
 
 ## 9. Create a production ready SSL certificate
