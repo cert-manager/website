@@ -26,12 +26,12 @@ export default function Header() {
         </div>
       </div>
       <div className="text-center p-4 bg-blue-1 text-white">
-        Tell the project team how you are using cert-manager{' '}
+        Help us improve the cert-manager documentation{' '}
         <Button
           href={
-            'https://docs.google.com/forms/d/e/1FAIpQLSfLX4SQEC0phxVLB2shSzv2s__IDCB6GmlnvsqQ06CD0IYOeA/viewform'
+            'https://docs.google.com/forms/d/e/1FAIpQLSeqfRkd86_N0L7VOW_ImCT0iyUabhczdiDk2dQDLp55V8kqvw/viewform'
           }
-          caption="Take this short anonymous survey"
+          caption="Take this short survey"
           target="_blank"
           className="px-3 py-1 text-11px mx-4 "
         />
