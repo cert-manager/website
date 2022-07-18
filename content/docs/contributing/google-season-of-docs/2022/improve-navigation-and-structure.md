@@ -5,6 +5,25 @@ description: Google season of docs 2022 proposal
 
 ## Project Updates
 
+### 18 July 2022: The cert-manager.io Documentation Survey
+
+<img src="/images/google-season-of-docs-2022-improve-navigation-and-structure/Screenshot_2022-07-18_at_14-35-48_cert-manager_documentation_survey.png" style={{float: "right", clear: "right", margin: "5px"}} alt="Screenshot 2022-07-18 at 14-35-48 cert-manager documentation survey" title="Screenshot 2022-07-18 at 14-35-48 cert-manager documentation survey" />
+
+We have created a short survey, to help us identify what are the top-priorities for the cert-manager.io documentation.
+
+1. We want identify the most useful documentation, so that we don't go and change things that are already working well.
+2. We want to know which documentation is not useful, so that we can make improvements.
+3. We'd like to hear from new and experienced users about how and how often you use the documentation.
+4. And we'd like to know where else you find good information about cert-manager, outside of the cert-manager.io website,
+so that we can try and incorporate some of those sources.
+
+We've added a link to the survey to the banner at the top of this site
+and we will also be sharing the link in our Slack channels and mailing lists.
+
+[Please take 10 minutes to fill in the survey](https://docs.google.com/forms/d/e/1FAIpQLSeqfRkd86_N0L7VOW_ImCT0iyUabhczdiDk2dQDLp55V8kqvw/viewform).
+
+<div style={{clear: "both"}} />
+
 ### 5 May 2022: Announcing Mehak Saeed as Technical Writer
 
 We are delighted to announce that [Mehak Saeed](https://www.linkedin.com/in/mehak-saeed-29121a12a) will be the technical writer working on this project.
