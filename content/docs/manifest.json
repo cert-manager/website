@@ -334,6 +334,10 @@
               "path": "/docs/projects/csi-driver.md"
             },
             {
+              "title": "csi-driver-spiffe",
+              "path": "/docs/projects/csi-driver-spiffe.md"
+            },
+            {
               "title": "approver-policy",
               "path": "/docs/projects/approver-policy.md"
             },
