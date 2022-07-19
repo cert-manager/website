@@ -5,7 +5,7 @@ description: Learn how to deploy cert-manager in your Kubernetes cluster and how
 
 In this tutorial you will learn how to deploy and configure cert-manager on Google Kubernetes Engine (GKE).
 You will learn how to configure cert-manager to get a signed SSL certificate from Let's Encrypt,
-using an [HTTP01 challenge](https://letsencrypt.org/docs/challenge-types/#http-01-challenge).
+using an [HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/#http-01-challenge).
 Finally you will learn how the certificate can be used to serve an HTTPS website with a public domain name.
 
 > **Google Cloud**: A suite of cloud computing services by Google.<br/>
@@ -36,10 +36,12 @@ Visit the [Get started with Google Cloud](https://cloud.google.com/docs/get-star
 
 **💻 Domain Name**
 
-You will need a domain name and the ability to create DNS records in that domain.
-If you haven't got a domain name you should be able to adapt this tutorial to use an IP address for your website and for the SSL certificate.
+You will need a domain name and the ability to create DNS records in that domain. We will be getting a $12 domain name from Google Domains. Google Domains is one of the many possible "domain name registrars". NameCheap and GoDaddy are two other well-known registrars.
+
+> 💵 If you prefer not purchasing a domain name, it is also possible to adapt this tutorial to use the IP address to serve your website and for the SSL certificate.
 
 **💻 Software**
+
 
 You will also need to install the following software on your laptop:
 
@@ -49,33 +51,48 @@ You will also need to install the following software on your laptop:
 
 > ℹ️ Try running `gcloud components install kubectl` to quickly install `kubectl`.
 
-This tutorial requires you to run certain commands and you will need to adapt some of them for your environment.
-Where ever you see a `$VARIABLE_NAME` in a command, you need to either replace the variable before you execute the command,
-or assign a value to the variable and export it so that the value can be substituted automatically by your shell.
+## 0. Configure `gcloud` with a Google Cloud project
+
+If you don't have a Google Cloud account, do not worry, the command below will create it for you:
 
 ```bash
-export PROJECT="..."       # Your Google Cloud project ID e.g. jetstack-richard
-export REGION="..."        # Your Google Cloud region e.g. europe-west1
-export CLUSTER="..."       # A name for your GKE cluster e.g. test-cluster-1
-export ZONE="..."          # The Google Cloud DNS zone in which to create your website domain name e.g. example-zone
-export DOMAIN_NAME="..."   # The domain name for your website e.g. www.example.com
-export EMAIL_ADDRESS="..." # The email address to register with Let's Encrypt e.g. devops@example.com
+gcloud init
 ```
 
-Once you've installed `gcloud` configure it to use your preferred project and region:
+You will need to answer "yes" to the following question:
+
+```text
+Do you want to configure a default Compute Region and Zone? (Y/n)?  Y
+```
+
+After running the command, you will shown the project name, default region, and default zone; the output looks like this:
+
+```text
+* Commands that require authentication will use richard.wall@jetstack.io by default
+* Commands will reference project `jetstack-richard` by default
+* Compute Engine commands will use region `europe-west1` by default
+* Compute Engine commands will use zone `europe-west1-b` by default
+```
+
+In the remaining of this tutorial, we will refer to the name of the project that was selected while running `gcloud init` with the variable `PROJECT`. Where ever you see `$PROJECT` in a command, you need to either (1) replace the variable manually before you execute the command,
+or (2) export the variable variable in your shell session. This applies to all environment variables that you will encounter in the commands listed in this tutorial.
+
+We will go with option (2), so we need to export the environment variables before continuing using the information that was printed by `gcloud init`:
 
 ```bash
-# Interactive
-gcloud init
-
-# Non-interactive
-gcloud config set project $PROJECT
-gcloud config set compute/region $REGION
+export PROJECT=jetstack-richard  # Your Google Cloud project ID.
+export REGION=europe-west1       # Your Google Cloud region. 
 ```
 
 ## 1. Create a Kubernetes Cluster
 
-To get started, let's create a Kubernetes cluster in Google Cloud:
+To get started, let's create a Kubernetes cluster in Google Cloud. You will need to pick a name for your cluster. Here, we will go with "test-cluster-1". Let us save it in an environement variable:
+
+```bash
+export CLUSTER=test-cluster-1
+```
+
+Now, create the cluster using the following command:
 
 ```bash
 gcloud container clusters create $CLUSTER --preemptible --num-nodes=1
@@ -150,33 +167,43 @@ gcloud compute addresses list
 >
 > 🔰 Read more about [Reserving a static external IP address in Google Cloud](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address).
 
+Finally, we will save the IP address into an environment variable for later use. Display the IP address with the following command:
+
+```console
+$ gcloud compute addresses describe web-ip --format='value(address)' --global
+35.24.56.78
+```
+
+Then, copy the output and save it into an environment variable:
+
+```bash
+export IP_ADDRESS=35.24.56.78
+```
+
 ## 4. Create a domain name for your website
 
 You will need a domain name for your website and Let's Encrypt checks your domain before it signs your SSL certificate,
 so the domain name needs to be reachable from the Internet.
 
-If you do not have a domain name you will need to go and register one,
-but that is outside the scope of this tutorial and is left as an exercise for the reader.
+We will purchase a cheap domain name using a credit card. Go to https://domains.google.com, and type something in the search box. For the example, we searched for `hello-app.com` because the example container that we will be deploying is called `hello-app`. Most importantly, we make sure to sort the domain names by price:
 
-Once you have a domain name (e.g. `example.com`) you will need to create a new A record (e.g. `www.example.com`) pointing at the IP address that we created above.
+![](https://hackmd.io/_uploads/ryNBT3M2q.png)
 
-You can get the IP address of the global static address you created in the previous step:
+We don't pick `hello-app.com` because it costs $2,800; instead, we go with the one at the top: `heyapp.net`. It looks good! We then click the cart button. On the next scren, you will want to disable the auto-renewal, since we don't want to pay for this domain every year:
 
-```bash
-export IP_ADDRESS=$(gcloud compute addresses describe web-ip --format='value(address)' --global)
-echo ${IP_ADDRESS}
-```
+![](https://hackmd.io/_uploads/S14B62fhc.png)
 
-If your domain name is registered with Google cloud you will have a Google Cloud DNS zone for it.
-And within that zone you can create a DNS A record and associate it with the IP address that we created earlier.
-Here's how you might do that using `gcloud`:
+Now that you know your domain name, save it in an environment variable:
 
 ```bash
-gcloud dns record-sets create $DOMAIN_NAME \
-    --rrdatas=$IP_ADDRESS \
-    --type=A \
-    --ttl=60 --zone=$ZONE
+export DOMAIN_NAME=heyapp.net
 ```
+
+Next, you will need to create a new `A` record pointing at the IP address that we created above. Head back to https://domains.google.com/registrar, open your domain (here, `heyapp.net`) and click "DNS" on the left menu. You will see "Custom records". You want to add a new record of type `A` and put the IP address from the previous step into "data". You must leave "Host name" empty because we are configuring the top-level domain name:
+
+![](https://hackmd.io/_uploads/HJ0bc6Mh9.png)
+
+> 🎓️ You can learn more about DNS and `A` records on the excellent [Cloudflare documentation](https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/).
 
 > ℹ️ It is not strictly necessary to create a domain name for your website. You can connect to it using the IP address and later you can create an SSL certificate for the IP address instead of a domain name. If for some reason you can't create a domain name, then feel free to skip this section and adapt the instructions below to use an IP address instead.
 >
@@ -184,8 +211,6 @@ gcloud dns record-sets create $DOMAIN_NAME \
 > but the parent domain `googleusercontent.com` has a CAA record which prevents
 > Let's Encrypt from signing certificates for the sub-domains.
 > See [Certificate Authority Authorization (CAA)](https://letsencrypt.org/docs/caa/) in the Let's Encrypt documentation.
->
-> 🔰 Read more about how to [Add, modify, and delete DNS records in Google Cloud](https://cloud.google.com/dns/docs/records/).
 
 ## 5. Create an Ingress
 
@@ -301,7 +326,7 @@ which allows us to test everything without using up our Let's Encrypt certificat
 > ℹ️ Let's Encrypt uses the Automatic Certificate Management Environment (ACME) protocol
 > which is why the configuration below is under a key called `acme`.
 
-Save the following content to a file called `issuer-lets-encrypt-staging.yaml` and apply it:
+Save the following content to a file called `issuer-lets-encrypt-staging.yaml`, change the `email` field to use your email address and apply it:
 
 ```yaml
 # issuer-lets-encrypt-staging.yaml
@@ -312,7 +337,7 @@ metadata:
 spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: $EMAIL_ADDRESS # ❗ Replace this with your email address
+    email: <email-address> # ❗ Replace this with your email address
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
@@ -324,6 +349,8 @@ spec:
 ```bash
 kubectl apply -f issuer-lets-encrypt-staging.yaml
 ```
+
+> 🎓️ The email address is only used by Let's Encrypt to remind you to renew the certificate after 30 days before expiry. You will only receive this email if something goes wrong when renewing the certificate with cert-manager.
 
 You can check the status of the Issuer:
 
