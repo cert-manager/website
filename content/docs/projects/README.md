@@ -22,9 +22,9 @@ These tools help with security, compliance and control.
   or otherwise securing connections of pods with guaranteed present certificates
   whilst having all of the features that cert-manager provides.
 - [csi-driver-spiffe](./csi-driver-spiffe.md):
-  csi-driver-spiffe is a Container Storage Interface (CSI) driver plugin for
-  Kubernetes to work along [cert-manager](https://cert-manager.io/). This CSI driver
-  transparently delivers [SPIFFE](https://spiffe.io/)
+  csi-driver-spiffe is another CSI driver plugin to work along
+  [cert-manager](https://cert-manager.io/). This CSI driver transparently
+  delivers [SPIFFE](https://spiffe.io/)
   [SVIDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-verifiable-identity-document-svid)
   in the form of X.509 certificate key pairs to mounting Kubernetes Pods.
 - [trust](./trust.md): an
