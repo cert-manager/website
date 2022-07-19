@@ -15,6 +15,18 @@ These tools help with security, compliance and control.
 - [approver-policy](./approver-policy.md):
   a cert-manager **approver** that will automatically approve or deny
   certificate requests based on defined policy.
+- [csi-driver](./csi-driver.md):
+  csi-driver is a Container Storage Interface (CSI) driver plugin for Kubernetes
+  to work along cert-manager. The goal for this plugin is to seamlessly request
+  and mount certificate key pairs to pods. This is useful for facilitating mTLS,
+  or otherwise securing connections of pods with guaranteed present certificates
+  whilst having all of the features that cert-manager provides.
+- [csi-driver-spiffe](./csi-driver-spiffe.md):
+  csi-driver-spiffe is a Container Storage Interface (CSI) driver plugin for
+  Kubernetes to work along [cert-manager](https://cert-manager.io/). This CSI driver
+  transparently delivers [SPIFFE](https://spiffe.io/)
+  [SVIDs](https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/#spiffe-verifiable-identity-document-svid)
+  in the form of X.509 certificate key pairs to mounting Kubernetes Pods.
 - [trust](./trust.md): an
   operator to distribute trust bundles, like CA certificates, across a
   Kubernetes cluster.
