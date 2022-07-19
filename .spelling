@@ -82,6 +82,7 @@ Coreutils
 CronJob
 CryptoKey
 csi-driver
+csi-driver-spiffe
 Ctrl
 DCO
 DHCP
@@ -105,6 +106,7 @@ Encrypter
 Fargate
 FastDNS
 FreeIPA
+fs-group
 GCE
 GCLB
 GCP
@@ -168,6 +170,7 @@ PKCS#8
 Pomerium
 PowerShell
 Prometheus
+P-521
 RBAC
 Redis
 RFC2136
@@ -186,6 +189,7 @@ SelfSigned
 SgtCoDFish
 Smallstep
 SubjectAccessReview
+SVIDs
 stevehipwell
 TLDs
 TODO
@@ -372,6 +376,7 @@ tamalsaha
 teejaded
 templated
 templating
+tmpfs
 thiscantbeserious
 tolerations
 tomasfreund
