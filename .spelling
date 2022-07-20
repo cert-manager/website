@@ -95,6 +95,7 @@ DataDog
 Dean-Coakley
 DigitalOcean
 Distroless
+DuckDuckGo
 etcd
 EC2
 enj
@@ -115,6 +116,7 @@ GitOps
 gRPC
 GSoC
 Gloo
+GoDaddy
 GoLand
 HAProxy
 HTTP-01
@@ -153,6 +155,7 @@ Maartje
 MacOS
 Makefile
 Makefiles
+NameCheap
 NGINX
 NLB
 NLBs
@@ -342,6 +345,7 @@ onwards
 openshift-supported-versions
 powershell
 pre
+preemptible
 pre-release
 pre-released
 pre-releases
