@@ -88,7 +88,7 @@ export REGION=europe-west1   # Your Google Cloud region.
 
 ## 1. Create a Kubernetes Cluster
 
-To get started, let's create a Kubernetes cluster in Google Cloud. You will need to pick a name for your cluster. Here, we will go with "test-cluster-1". Let us save it in an environement variable:
+To get started, let's create a Kubernetes cluster in Google Cloud. You will need to pick a name for your cluster. Here, we will go with "test-cluster-1". Let us save it in an environment variable:
 
 ```bash
 export CLUSTER=test-cluster-1
@@ -190,7 +190,7 @@ We will purchase a cheap domain name using a credit card. Go to https://domains.
 
 ![](/images/getting-started/screenshot_google-domains_get-a-new-domain.png)
 
-We don't pick `hello-app.com` because it costs $2,800; instead, we go with the one at the top: `heyapp.net`. It looks good! We then click the cart button. On the next scren, you will want to disable the auto-renewal, since we don't want to pay for this domain every year:
+We don't pick `hello-app.com` because it costs $2,800; instead, we go with the one at the top: `heyapp.net`. It looks good! We then click the cart button. On the next screen, you will want to disable the auto-renewal, since we don't want to pay for this domain every year:
 
 ![](/images/getting-started/screenshot_google-domains_your-cart.png)
 
