@@ -65,23 +65,25 @@ You will need to answer "yes" to the following question:
 Do you want to configure a default Compute Region and Zone? (Y/n)?  Y
 ```
 
-After running the command, you will shown the project name, default region, and default zone; the output looks like this:
+After running the command, you will shown the project name, default region, and default zone.
+
+Example output:
 
 ```text
-* Commands that require authentication will use richard.wall@jetstack.io by default
-* Commands will reference project `jetstack-richard` by default
+* Commands that require authentication will use firstname.lastname@example.com by default
+* Commands will reference project `your-project` by default
 * Compute Engine commands will use region `europe-west1` by default
 * Compute Engine commands will use zone `europe-west1-b` by default
 ```
 
 In the remaining of this tutorial, we will refer to the name of the project that was selected while running `gcloud init` with the variable `PROJECT`. Where ever you see `$PROJECT` in a command, you need to either (1) replace the variable manually before you execute the command,
-or (2) export the variable variable in your shell session. This applies to all environment variables that you will encounter in the commands listed in this tutorial.
+or (2) export the variable in your shell session. This applies to all environment variables that you will encounter in the commands listed in this tutorial.
 
 We will go with option (2), so we need to export the environment variables before continuing using the information that was printed by `gcloud init`:
 
 ```bash
-export PROJECT=jetstack-richard  # Your Google Cloud project ID.
-export REGION=europe-west1       # Your Google Cloud region. 
+export PROJECT=your-project  # Your Google Cloud project ID.
+export REGION=europe-west1   # Your Google Cloud region.
 ```
 
 ## 1. Create a Kubernetes Cluster
@@ -169,15 +171,14 @@ gcloud compute addresses list
 
 Finally, we will save the IP address into an environment variable for later use. Display the IP address with the following command:
 
-```console
-$ gcloud compute addresses describe web-ip --format='value(address)' --global
-35.24.56.78
+```bash
+gcloud compute addresses describe web-ip --format='value(address)' --global
 ```
 
 Then, copy the output and save it into an environment variable:
 
 ```bash
-export IP_ADDRESS=35.24.56.78
+export IP_ADDRESS=198.51.100.1  # Replace with your IP address
 ```
 
 ## 4. Create a domain name for your website
@@ -187,11 +188,11 @@ so the domain name needs to be reachable from the Internet.
 
 We will purchase a cheap domain name using a credit card. Go to https://domains.google.com, and type something in the search box. For the example, we searched for `hello-app.com` because the example container that we will be deploying is called `hello-app`. Most importantly, we make sure to sort the domain names by price:
 
-![](https://hackmd.io/_uploads/ryNBT3M2q.png)
+![](/images/getting-started/screenshot_google-domains_get-a-new-domain.png)
 
 We don't pick `hello-app.com` because it costs $2,800; instead, we go with the one at the top: `heyapp.net`. It looks good! We then click the cart button. On the next scren, you will want to disable the auto-renewal, since we don't want to pay for this domain every year:
 
-![](https://hackmd.io/_uploads/S14B62fhc.png)
+![](/images/getting-started/screenshot_google-domains_your-cart.png)
 
 Now that you know your domain name, save it in an environment variable:
 
@@ -201,9 +202,9 @@ export DOMAIN_NAME=heyapp.net
 
 Next, you will need to create a new `A` record pointing at the IP address that we created above. Head back to https://domains.google.com/registrar, open your domain (here, `heyapp.net`) and click "DNS" on the left menu. You will see "Custom records". You want to add a new record of type `A` and put the IP address from the previous step into "data". You must leave "Host name" empty because we are configuring the top-level domain name:
 
-![](https://hackmd.io/_uploads/HJ0bc6Mh9.png)
+![](/images/getting-started/screenshot_google-domains_resource-records.png)
 
-> 🎓️ You can learn more about DNS and `A` records on the excellent [Cloudflare documentation](https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/).
+> 🔰 Learn more about [What is a DNS A record? from the Cloudflare DNS tutorial](https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/).
 
 > ℹ️ It is not strictly necessary to create a domain name for your website. You can connect to it using the IP address and later you can create an SSL certificate for the IP address instead of a domain name. If for some reason you can't create a domain name, then feel free to skip this section and adapt the instructions below to use an IP address instead.
 >
@@ -263,7 +264,6 @@ curl http://$DOMAIN_NAME
 Example output:
 
 ```console
-$ curl  http://www.richard-gcp.jetstacker.net
 Hello, world!
 Version: 1.0.0
 Hostname: web-79d88c97d6-t8hj2
@@ -350,7 +350,7 @@ spec:
 kubectl apply -f issuer-lets-encrypt-staging.yaml
 ```
 
-> 🎓️ The email address is only used by Let's Encrypt to remind you to renew the certificate after 30 days before expiry. You will only receive this email if something goes wrong when renewing the certificate with cert-manager.
+> ℹ️ The email address is only used by Let's Encrypt to remind you to renew the certificate after 30 days before expiry. You will only receive this email if something goes wrong when renewing the certificate with cert-manager.
 
 You can check the status of the Issuer:
 
@@ -363,7 +363,7 @@ Example output
 ```console
 Status:
   Acme:
-    Last Registered Email:  le1+richard.wall@jetstack.io
+    Last Registered Email:  firstname.lastname@example.com
     Uri:                    https://acme-staging-v02.api.letsencrypt.org/acme/acct/60706744
   Conditions:
     Last Transition Time:  2022-07-13T16:13:25Z
@@ -454,11 +454,12 @@ curl -v --insecure https://$DOMAIN_NAME
 ```
 
 You should see that the HTTPS connection is established but that the SSL certificate is not trusted;
-that's why you use the `--insecure` flag at this stage:
+that's why you use the `--insecure` flag at this stage
 
+Example output:
 ```console
 * Server certificate:
-*  subject: CN=www.richard-gcp.jetstacker.net
+*  subject: CN=www.example.com
 *  start date: Jul 14 08:52:29 2022 GMT
 *  expire date: Oct 12 08:52:28 2022 GMT
 *  issuer: C=US; O=(STAGING) Let's Encrypt; CN=(STAGING) Artificial Apricot R3
@@ -516,13 +517,14 @@ Within about 10 minutes, this new certificate will be synced to the Google Cloud
 curl -v https://$DOMAIN_NAME
 ```
 
+Example output:
 ```console
 ...
 * Server certificate:
-*  subject: CN=www.richard-gcp.jetstacker.net
+*  subject: CN=www.example.com
 *  start date: Jul 14 09:44:29 2022 GMT
 *  expire date: Oct 12 09:44:28 2022 GMT
-*  subjectAltName: host "www.richard-gcp.jetstacker.net" matched cert's "www.richard-gcp.jetstacker.net"
+*  subjectAltName: host "www.example.com" matched cert's "www.example.com"
 *  issuer: C=US; O=Let's Encrypt; CN=R3
 *  SSL certificate verify ok.
 ...
@@ -593,7 +595,7 @@ Address:          34.120.159.51
 Ingress Class:    <none>
 Default backend:  web:8080 (10.52.0.13:8080)
 TLS:
-  web-ssl terminates www.richard-gcp.jetstacker.net
+  web-ssl terminates www.example.com
 Rules:
   Host        Path  Backends
   ----        ----  --------
@@ -614,7 +616,7 @@ Events:
   ----     ------             ----                ----                       -------
   Normal   CreateCertificate  28m                 cert-manager-ingress-shim  Successfully created Certificate "web-ssl"
   Normal   Sync               28m                 loadbalancer-controller    UrlMap "k8s2-um-1lt9dzcy-default-web-ingress-yteotwe4" updated
-  Warning  Sync               24m (x16 over 28m)  loadbalancer-controller    Error syncing to GCP: error running load balancer syncing routine: loadbalancer 1lt9dzcy-default-web-ingress-yteotwe4 does not exist: googleapi: Error 404: The resource 'projects/jetstack-richard/global/sslCertificates/k8s2-cr-1lt9dzcy-4gjeakdb9n7k6ls7-e3b0c44298fc1c14' was not found, notFound
+  Warning  Sync               24m (x16 over 28m)  loadbalancer-controller    Error syncing to GCP: error running load balancer syncing routine: loadbalancer 1lt9dzcy-default-web-ingress-yteotwe4 does not exist: googleapi: Error 404: The resource 'projects/your-project/global/sslCertificates/k8s2-cr-1lt9dzcy-4gjeakdb9n7k6ls7-e3b0c44298fc1c14' was not found, notFound
   Normal   Sync               34s (x16 over 65m)  loadbalancer-controller    Scheduled for sync
 ```
 
@@ -638,7 +640,7 @@ Conditions:
   Ready: False, Reason: MissingData, Message: Issuing certificate as Secret does not contain a private key
   Issuing: True, Reason: MissingData, Message: Issuing certificate as Secret does not contain a private key
 DNS Names:
-- www.richard-gcp.jetstacker.net
+- www.example.com
 Events:
   Type    Reason     Age    From                                       Message
   ----    ------     ----   ----                                       -------
@@ -671,7 +673,7 @@ Order:
   Name: web-ssl-dblrj-327645514
   State: pending, Reason:
   Authorizations:
-    URL: https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/3008789144, Identifier: www.richard-gcp.jetstacker.net, Initial State: pending, Wildcard: false
+    URL: https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/3008789144, Identifier: www.example.com, Initial State: pending, Wildcard: false
 Challenges:
 - Name: web-ssl-dblrj-327645514-2671694319, Type: HTTP-01, Token: TKspp86xMjQzTvMVXWkezEA2sE2GSWjnld5Lt4X13ro, Key: TKspp86xMjQzTvMVXWkezEA2sE2GSWjnld5Lt4X13ro.f4bppCOm-jXasFGMKjpBE5aQlhiQBeTPIs0Lx822xao, State: pending, Reason: Waiting for HTTP-01 challenge propagation: did not get expected response when querying endpoint, expected "TKspp86xMjQzTvMVXWkezEA2sE2GSWjnld5Lt4X13ro.f4bppCOm-jXasFGMKjpBE5aQlhiQBeTPIs0Lx822xao" but got: Hello, world!
 Version: 1... (truncated), Processing: true, Presented: true
@@ -689,7 +691,7 @@ Created at: 2022-07-14T17:30:06+01:00
 Conditions:
   Ready: True, Reason: Ready, Message: Certificate is up to date and has not expired
 DNS Names:
-- www.richard-gcp.jetstacker.net
+- www.example.com
 Events:
   Type    Reason     Age   From                                       Message
   ----    ------     ----  ----                                       -------
@@ -749,7 +751,7 @@ Certificate:
         Validity
             Not Before: Jul 14 17:11:15 2022 GMT
             Not After : Oct 12 17:11:14 2022 GMT
-        Subject: CN = www.richard-gcp.jetstacker.net
+        Subject: CN = www.example.com
 ```
 
 ### Check the Google Cloud forwarding-rules
@@ -770,6 +772,6 @@ loadBalancingScheme: EXTERNAL
 name: k8s2-fs-1lt9dzcy-default-web-ingress-yteotwe4
 networkTier: PREMIUM
 portRange: 443-443
-selfLink: https://www.googleapis.com/compute/v1/projects/jetstack-richard/global/forwardingRules/k8s2-fs-1lt9dzcy-default-web-ingress-yteotwe4
-target: https://www.googleapis.com/compute/v1/projects/jetstack-richard/global/targetHttpsProxies/k8s2-ts-1lt9dzcy-default-web-ingress-yteotwe4
+selfLink: https://www.googleapis.com/compute/v1/projects/your-project/global/forwardingRules/k8s2-fs-1lt9dzcy-default-web-ingress-yteotwe4
+target: https://www.googleapis.com/compute/v1/projects/your-project/global/targetHttpsProxies/k8s2-ts-1lt9dzcy-default-web-ingress-yteotwe4
 ```
