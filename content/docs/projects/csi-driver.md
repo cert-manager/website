@@ -136,7 +136,7 @@ values available through the cert-manager API however currently supports the
 following values;
 
 | Attribute                               | Description                                                                                                                | Default                              | Example                          |
-|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------|--------------------------------------|----------------------------------|
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | -------------------------------- |
 | `csi.cert-manager.io/issuer-name`       | The Issuer name to sign the certificate request.                                                                           |                                      | `ca-issuer`                      |
 | `csi.cert-manager.io/issuer-kind`       | The Issuer kind to sign the certificate request.                                                                           | `Issuer`                             | `ClusterIssuer`                  |
 | `csi.cert-manager.io/issuer-group`      | The group name the Issuer belongs to.                                                                                      | `cert-manager.io`                    | `out.of.tree.foo`                |
@@ -175,6 +175,7 @@ access to the following variables:
 ${POD_NAME}
 ${POD_NAMESPACE}
 ${POD_UID}
+${SERVICE_ACCOUNT_NAME}
 ```
 
 #### Example Usage
@@ -184,7 +185,7 @@ volumeAttributes:
   csi.cert-manager.io/issuer-name: ca-issuer
   csi.cert-manager.io/dns-names: "${POD_NAME}.${POD_NAMESPACE}.svc.cluster.local"
   csi.cert-manager.io/uri-sans: "spiffe://cluster.local/ns/${POD_NAMESPACE}/pod/${POD_NAME}/${POD_UID}"
-  csi.cert-manager.io/common-name: "${POD_NAME}.${POD_NAMESPACE}"
+  csi.cert-manager.io/common-name: "${SERVICE_ACCOUNT_NAME}.${POD_NAMESPACE}"
 ```
 
 ## Requesting Certificates using the mounting Pod's ServiceAccount
