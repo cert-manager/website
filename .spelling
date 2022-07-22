@@ -7,12 +7,16 @@ ServiceAccounts
 mikebryant
 jayme-github
 nodeSelector
+Compy
 Adphi
 ajvn
 illrill
 davidsbond
 fvlaicu
 4molybdenum2
+jetstack-bot
+codegen
+yongk802
 andreadecorte
 tasharnvb
 devholic
@@ -185,6 +189,7 @@ Ramlot
 RinkiyaKeDad
 Route53
 Runtime
+roadmap
 SOA
 SecretTemplate
 ServerSideApply
@@ -427,6 +432,7 @@ v1.8.
 v1.8.0
 v1.8.1
 v1.8.2
+v1.9.0
 v1alpha1
 v1alpha2
 v1alpha3
@@ -466,6 +472,17 @@ subchart
 subcharts
 testgrid
 cert-manager-jetstack-cert-manager-next
+PromQL
+DynamicSource
+AcidLeroy
+oGi4i
+spockz
+andrewgkew
+sveba
+rodrigorfk
+craigminihan
+hawksight
+lucacome
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
