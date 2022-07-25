@@ -19,7 +19,7 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 ### Steps
 
 
-#### 1. Add the Jetstack Helm repository
+#### 1. Add the Helm repository
 
 This repository is the only supported source of cert-manager charts. There are some other mirrors and copies across the internet, but those are entirely unofficial and could present a security risk.
 
@@ -44,7 +44,7 @@ or using the `installCRDs` option when installing the Helm chart.
 
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cert-manager.crds.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.0/cert-manager.crds.yaml
 ```
 
 ##### Option 2: install CRDs as part of the Helm release
@@ -65,7 +65,7 @@ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.8.2 \
+  --version v1.9.0 \
   # --set installCRDs=true
 ```
 
@@ -78,7 +78,7 @@ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.8.2 \
+  --version v1.9.0 \
   --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
   --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
 ```
@@ -86,6 +86,7 @@ helm install \
 Once you have deployed cert-manager, you can [verify](./verify.md) the installation.
 
 ### Installing cert-manager as subchart
+
 If you have configured cert-manager as a subchart all the components of cert-manager will be installed into the namespace of the helm release you are installing.
 
 There may be a situation where you want to specify the namespace to install cert-manager different to the umbrella chart's namespace.
@@ -95,7 +96,9 @@ This is a [known issue](https://github.com/helm/helm/issues/5358) with helm and 
 This capability is now available in the cert-manager chart and can be set either in the values file or via the `--set` switch.
 
 #### Example usage
+
 Below is an example `Chart.yaml` with cert-manager as a subchart 
+
 ```yaml
 apiVersion: v2
 name: example_chart
@@ -105,7 +108,7 @@ version: 0.1.0
 appVersion: "0.1.0"
 dependencies:
   - name: cert-manager
-    version: v1.8.0
+    version: v1.9.0
     repository: https://charts.jetstack.io
     alias: cert-manager
     condition: cert-manager.enabled
@@ -136,7 +139,7 @@ helm template \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.8.2 \
+  --version v1.9.0 \
   # --set prometheus.enabled=false \   # Example: disabling prometheus using a Helm parameter
   # --set installCRDs=true \           # Uncomment to also template CRDs
   > cert-manager.custom.yaml
