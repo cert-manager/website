@@ -19,12 +19,13 @@ About "alert" and "pageinfo": https://www.docsy.dev/docs/adding-content/shortcod
 ⛔️ Do not proceed with the release process if you do not meet all of the
 following conditions:
 
-1. The release process **takes about 40 minutes**. You must have time to
+1. The testgrid must not be failing for [cert-manager-jetstack-cert-manager-next](https://testgrid.k8s.io/cert-manager-jetstack-cert-manager-next)
+2. The release process **takes about 40 minutes**. You must have time to
    complete all the steps.
-2. You currently need to be at Jetstack to get the required GitHub and GCP
+3. You currently need to be at Jetstack to get the required GitHub and GCP
    permissions. (we'd like contributors outside Jetstack to be able to get
    access; if that's of interest to you, please let us know).
-3. You need to have the GitHub `admin` permission on the cert-manager project.
+4. You need to have the GitHub `admin` permission on the cert-manager project.
    To check that you have the `admin` role, run:
 
     ```sh
@@ -38,7 +39,7 @@ following conditions:
     PR](https://github.com/jetstack/platform-board/pulls/new) with a link to
     here.
 
-4. You need to be added as an "Editor" to the GCP project
+5. You need to be added as an "Editor" to the GCP project
    [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release).
    To check if you do have access, try opening [the Cloud Build
    page](https://console.cloud.google.com/cloud-build?project=cert-manager-release).

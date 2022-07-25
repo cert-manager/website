@@ -373,3 +373,25 @@ Certificate resources:
 - `cert-manager.io/usages`: (optional) this annotation allows you to configure
   `spec.usages` field for the Certificate to be generated. Pass a string with
   comma-separated values i.e "key agreement,digital signature, server auth"
+
+- `cert-manager.io/revision-history-limit`: (optional) this annotation allows you to
+  configure `spec.revisionHistoryLimit` field to limit the number of CertificateRequests to be kept for a Certificate.
+  Minimum value is 1. If unset all CertificateRequests will be kept.
+
+- `cert-manager.io/private-key-algorithm`: (optional) this annotation allows you to
+  configure `spec.privateKey.algorithm` field to set the algorithm for private key generation for a Certificate.
+  Valid values are `RSA`, `ECDSA` and `Ed25519`. If unset an algorithm `RSA` will be used.
+
+- `cert-manager.io/private-key-encoding`: (optional) this annotation allows you to
+  configure `spec.privateKey.encoding` field to set the encoding for private key generation for a Certificate.
+  Valid values are `PKCS1` and `PKCS8`. If unset an algorithm `PKCS1` will be used.
+
+- `cert-manager.io/private-key-size`: (optional) this annotation allows you to
+  configure `spec.privateKey.size` field to set the size of the private key for a Certificate.
+  If algorithm is set to `RSA`, valid values are `2048`, `4096` or `8192`, and will default to `2048` if not specified.
+  If algorithm is set to `ECDSA`, valid values are `256`, `384` or `521`, and will default to `256` if not specified.
+  If algorithm is set to `Ed25519`, size is ignored.
+
+- `cert-manager.io/private-key-rotation-policy`: (optional) this annotation allows you to
+  configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
+  Valid values are `Never` and `Always`. If unset a rotation policy `Never` will be used.
