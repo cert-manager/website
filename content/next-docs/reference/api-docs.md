@@ -1698,7 +1698,20 @@ Resource Types:
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The AccessKeyID is used for authentication. If not set we fall-back to using env vars, shared credentials file or AWS Instance metadata see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
+        <p> The AccessKeyID is used for authentication. Cannot be set when SecretAccessKeyID is set. If neither the Access Key nor Key ID are set, we fall-back to using env vars, shared credentials file or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>accessKeyIDSecretRef</code>
+        <br />
+        <em>
+          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> The SecretAccessKey is used for authentication. If set, pull the AWS access key ID from a key within a Kubernetes Secret. Cannot be set when AccessKeyID is set. If neither the Access Key nor Key ID are set, we fall-back to using env vars, shared credentials file or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
       </td>
     </tr>
     <tr>
@@ -1711,10 +1724,7 @@ Resource Types:
       </td>
       <td>
         <em>(Optional)</em>
-        <p>
-          The SecretAccessKey is used for authentication. If not set we fall-back to using env vars, shared credentials file or AWS Instance metadata
-          <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a>
-        </p>
+        <p> The SecretAccessKey is used for authentication. If neither the Access Key nor Key ID are set, we fall-back to using env vars, shared credentials file or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
       </td>
     </tr>
     <tr>
@@ -2515,6 +2525,17 @@ Resource Types:
             <td>
               <em>(Optional)</em>
               <p> Full X509 name specification (<a href="https://golang.org/pkg/crypto/x509/pkix/#Name">https://golang.org/pkg/crypto/x509/pkix/#Name</a>). </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>literalSubject</code>
+              <br />
+              <em>string</em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p> LiteralSubject is an LDAP formatted string that represents the <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6">X.509 Subject field</a>. Use this <em>instead</em> of the Subject field if you need to ensure the correct ordering of the RDN sequence, such as when issuing certs for LDAP authentication. See <a href="https://github.com/cert-manager/cert-manager/issues/3203">https://github.com/cert-manager/cert-manager/issues/3203</a>, <a href="https://github.com/cert-manager/cert-manager/issues/4424">https://github.com/cert-manager/cert-manager/issues/4424</a>. This field is alpha level and is only supported by cert-manager installations where LiteralCertificateSubject feature gate is enabled on both cert-manager controller and webhook. </p>
             </td>
           </tr>
           <tr>
@@ -3818,6 +3839,17 @@ Resource Types:
       <td>
         <em>(Optional)</em>
         <p> Full X509 name specification (<a href="https://golang.org/pkg/crypto/x509/pkix/#Name">https://golang.org/pkg/crypto/x509/pkix/#Name</a>). </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>literalSubject</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> LiteralSubject is an LDAP formatted string that represents the <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6">X.509 Subject field</a>. Use this <em>instead</em> of the Subject field if you need to ensure the correct ordering of the RDN sequence, such as when issuing certs for LDAP authentication. See <a href="https://github.com/cert-manager/cert-manager/issues/3203">https://github.com/cert-manager/cert-manager/issues/3203</a>, <a href="https://github.com/cert-manager/cert-manager/issues/4424">https://github.com/cert-manager/cert-manager/issues/4424</a>. This field is alpha level and is only supported by cert-manager installations where LiteralCertificateSubject feature gate is enabled on both cert-manager controller and webhook. </p>
       </td>
     </tr>
     <tr>
@@ -5610,5 +5642,5 @@ Resource Types:
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>57a216e51</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>feb7979cb</code>. </em>
 </p>

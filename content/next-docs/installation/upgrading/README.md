@@ -37,15 +37,14 @@ install.
 Add the Jetstack Helm repository (if you haven't already) and update it.
 
 ```bash
-$ helm repo add jetstack https://charts.jetstack.io
-$ helm repo update jetstack
+helm repo add jetstack https://charts.jetstack.io
+helm repo update jetstack
 ```
 
 The helm upgrade command will upgrade cert-manager to the specified or latest version of cert-manager, as listed on the
 [cert-manager Helm chart documentation page](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-> Note: You can find out your release name using `helm list | grep
-> cert-manager`.
+> Note: You can find out your release name using `helm list | grep cert-manager`.
 
 ### CRDs managed separately
 
@@ -53,13 +52,13 @@ If you have installed the CRDs separately (instead of with the `--set installCRD
 option added to your Helm install command), you should upgrade your CRD resources first:
 
 ```bash
-$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<version>/cert-manager.crds.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<version>/cert-manager.crds.yaml
 ```
 
 And then upgrade the Helm chart:
 
 ```bash
-$ helm upgrade --version <version> <release_name> jetstack/cert-manager
+helm upgrade --version <version> <release_name> jetstack/cert-manager
 ```
 
 ### CRDs managed using helm
@@ -68,7 +67,7 @@ If you have installed the CRDs together with the helm install command, you shoul
 include CRD resources when upgrading the Helm chart:
 
 ```bash
-$ helm upgrade --set installCRDs=true --version <version> <release_name> jetstack/cert-manager
+helm upgrade --set installCRDs=true --version <version> <release_name> jetstack/cert-manager
 ```
 
 ## Upgrading using static manifests
@@ -85,7 +84,7 @@ begin the upgrade process like so - replacing `<version>` with the version
 number you want to install:
 
 ```bash
-$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<version>/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<version>/cert-manager.yaml
 ```
 
 Once you have deployed the new version of cert-manager, you can [verify](../verify.md) the installation.
@@ -116,6 +115,7 @@ through the release notes for each skipped version.
 
 Some things to look out for when considering uninstalling and re-installing
 cert-manager _including the CRDs_:
+
 - Is `--enable-certificate-owner-ref` flag currently set to true or could it have been set to true at some point previously? Due to an earlier bug, the owner reference that gets added to `Secret`s is _not_ removed when the value of `--enable-certificate-owner-ref` is changed from true to false, see [`cert-manager#4788`](https://github.com/cert-manager/cert-manager/issues/4788)
 - Are there currently any certificate issuances in progress? If so, with the custom resources deleted, the progress will be lost. This could potentially cause duplicated issuances.
 - Is there a need to convert cert-manager custom resource manifests to v1 API? You can use [`cmctl convert` command](https://cert-manager.io/docs/usage/cmctl/#convert) to do that.

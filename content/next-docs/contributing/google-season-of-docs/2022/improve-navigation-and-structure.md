@@ -5,6 +5,50 @@ description: Google season of docs 2022 proposal
 
 ## Project Updates
 
+### 18 July 2022: The cert-manager.io Documentation Survey
+
+<img src="/images/google-season-of-docs-2022-improve-navigation-and-structure/Screenshot_2022-07-18_at_14-35-48_cert-manager_documentation_survey.png" style={{float: "right", clear: "right", margin: "5px"}} alt="Screenshot 2022-07-18 at 14-35-48 cert-manager documentation survey" title="Screenshot 2022-07-18 at 14-35-48 cert-manager documentation survey" />
+
+We have created a short survey, to help us identify what are the top-priorities for the cert-manager.io documentation.
+
+1. We want identify the most useful documentation, so that we don't go and change things that are already working well.
+2. We want to know which documentation is not useful, so that we can make improvements.
+3. We'd like to hear from new and experienced users about how and how often you use the documentation.
+4. And we'd like to know where else you find good information about cert-manager, outside of the cert-manager.io website,
+so that we can try and incorporate some of those sources.
+
+We've added a link to the survey to the banner at the top of this site
+and we will also be sharing the link in our Slack channels and mailing lists.
+
+[Please take 10 minutes to fill in the survey](https://docs.google.com/forms/d/e/1FAIpQLSeqfRkd86_N0L7VOW_ImCT0iyUabhczdiDk2dQDLp55V8kqvw/viewform).
+
+<div style={{clear: "both"}} />
+
+### 15 July 2022: New "Getting Started" pages
+
+<img src="/images/google-season-of-docs-2022-improve-navigation-and-structure/Screenshot_2022-07-15_at_10-22-50_Let_s_Encrypt_Kubernetes_-_Google_Search.png" style={{float: "right", clear: "right"}} />
+<img src="/images/google-season-of-docs-2022-improve-navigation-and-structure/Screenshot_2022-07-15_at_10-23-04_Let_s_Encrypt_Kubernetes_at_DuckDuckGo.png" style={{float: "right", clear: "right"}} />
+
+We have been auditing the existing documentation to identify some key tasks that our users and potential new users need to carry out.
+We have created "friction logs" for some of these tasks.
+What this means is that we imagine ourselves in the place of the user and ask, for example,
+
+> How can I get a Let's Encrypt certificate for my server in Kubernetes?
+
+So we searched Google and DuckDuckGo for "Let's Encrypt Kubernetes" and to our surprise, cert-manager.io does not feature among the top search results.
+
+Among the results are some excellent third-party tutorials and videos about using cert-manager to create Let's Encrypt certificates,
+and we are grateful to the authors for taking the time to write such detailed content.
+But inevitably, some of these refer to much older versions of cert-manager and Kubernetes.
+So we have decided to write some official guides, for the cert-manager.io website which demonstrate how to quickly install cert-manager and configure it for Let's Encrypt.
+We hope that in time these will be indexed by the search engines and that they will reach the top of the search results for "Let's Encrypt Kubernetes".
+The advantages will be that users and potential users will find up-to-date information,
+and the cert-manager.io maintainers will receive fewer support requests from new users who are attempting this task.
+
+Go and read the new [Getting Started Guide for GKE Users](../../../getting-started) and tell us what you think.
+
+<div style={{clear: "both"}} />
+
 ### 5 May 2022: Announcing Mehak Saeed as Technical Writer
 
 We are delighted to announce that [Mehak Saeed](https://www.linkedin.com/in/mehak-saeed-29121a12a) will be the technical writer working on this project.

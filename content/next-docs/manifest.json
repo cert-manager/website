@@ -8,6 +8,10 @@
           "path": "/next-docs/README.md"
         },
         {
+            "title": "Getting Started",
+            "path": "/next-docs/getting-started/README.md"
+        },
+        {
           "title": "Installation",
           "routes": [
             {
@@ -64,6 +68,14 @@
                 {
                   "title": "Migrating Deprecated API Resources",
                   "path": "/next-docs/installation/upgrading/remove-deprecated-apis.md"
+                },
+                {
+                  "title": "v1.8 to v1.9",
+                  "path": "/next-docs/installation/upgrading/upgrading-1.8-1.9.md"
+                },
+                {
+                  "title": "v1.7 to v1.8",
+                  "path": "/next-docs/installation/upgrading/upgrading-1.7-1.8.md"
                 },
                 {
                   "title": "v1.6 to v1.7",
@@ -315,6 +327,35 @@
           ]
         },
         {
+          "title": "Projects",
+          "routes": [
+            {
+              "title": "Contents",
+              "path": "/next-docs/projects/README.md"
+            },
+            {
+              "title": "istio-csr",
+              "path": "/next-docs/projects/istio-csr.md"
+            },
+            {
+              "title": "csi-driver",
+              "path": "/next-docs/projects/csi-driver.md"
+            },
+            {
+              "title": "csi-driver-spiffe",
+              "path": "/next-docs/projects/csi-driver-spiffe.md"
+            },
+            {
+              "title": "approver-policy",
+              "path": "/next-docs/projects/approver-policy.md"
+            },
+            {
+              "title": "trust",
+              "path": "/next-docs/projects/trust.md"
+            }
+          ]
+        },
+        {
           "title": "Tutorials",
           "routes": [
             {
@@ -348,6 +389,10 @@
             {
               "title": "Securing Ingresses with Venafi",
               "path": "/next-docs/tutorials/venafi/venafi.md"
+            },
+            {
+              "title": "Securing the istio Service Mesh using cert-manager",
+              "path": "/next-docs/tutorials/istio-csr/istio-csr.md"
             }
           ]
         },
@@ -396,12 +441,12 @@
               "path": "/next-docs/contributing/README.md"
             },
             {
-              "title": "DCO Sign Off",
-              "path": "/next-docs/contributing/sign-off.md"
+              "title": "Feature Policy",
+              "path": "/next-docs/contributing/policy.md"
             },
             {
-              "title": "Release Process",
-              "path": "/next-docs/contributing/release-process.md"
+              "title": "Building cert-manager",
+              "path": "/next-docs/contributing/building.md"
             },
             {
               "title": "Contributing Flow",
@@ -424,24 +469,46 @@
               "path": "/next-docs/contributing/external-issuers.md"
             },
             {
-              "title": "Building cert-manager",
-              "path": "/next-docs/contributing/building.md"
+              "title": "DCO Sign Off",
+              "path": "/next-docs/contributing/sign-off.md"
+            },
+            {
+              "title": "Release Process",
+              "path": "/next-docs/contributing/release-process.md"
             },
             {
               "title": "Developing with Kind",
               "path": "/next-docs/contributing/kind.md"
             },
             {
-              "title": "Feature Policy",
-              "path": "/next-docs/contributing/policy.md"
-            },
-            {
-              "title": "Coding Conventions",
-              "path": "/next-docs/contributing/coding-conventions.md"
+              "title": "Google Season of Docs",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/next-docs/contributing/google-season-of-docs/README.md"
+                },
+                {
+                  "title": "2022",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/next-docs/contributing/google-season-of-docs/2022/README.md"
+                    },
+                    {
+                      "title": "Improve the Navigation and Structure of the cert-manager Website",
+                      "path": "/next-docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure.md"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "title": "Reporting Security Issues",
               "path": "/next-docs/contributing/security.md"
+            },
+            {
+              "title": "Coding Conventions",
+              "path": "/next-docs/contributing/coding-conventions.md"
             },
             {
               "title": "Third Party Code Donations",
@@ -463,6 +530,14 @@
             {
               "title": "Introduction",
               "path": "/next-docs/release-notes/README.md"
+            },
+            {
+              "title": "v1.9",
+              "path": "/next-docs/release-notes/release-notes-1.9.md"
+            },
+            {
+              "title": "v1.8",
+              "path": "/next-docs/release-notes/release-notes-1.8.md"
             },
             {
               "title": "v1.7",
