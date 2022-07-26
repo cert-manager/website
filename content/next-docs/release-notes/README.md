@@ -3,9 +3,7 @@ title: Release Notes
 description: 'cert-manager release notes: Overview'
 ---
 
-Here you will find a link to all release notes for each version release of
-cert-manager:
-
+- [`v1.9`](./release-notes-1.9.md)
 - [`v1.8`](./release-notes-1.8.md)
 - [`v1.7`](./release-notes-1.7.md)
 - [`v1.6`](./release-notes-1.6.md)
