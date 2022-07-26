@@ -10,18 +10,11 @@ current releases and the timeline for future releases, take a look at the
 
 ## Prerequisites
 
-{/*
-About "alert" and "pageinfo": https://www.docsy.dev/docs/adding-content/shortcodes/#shortcode-helpers
-*/}
-
-<div className="warning">
-
 ⛔️ Do not proceed with the release process if you do not meet all of the
 following conditions:
 
-1. The testgrid must not be failing for [cert-manager-jetstack-cert-manager-next](https://testgrid.k8s.io/cert-manager-jetstack-cert-manager-next)
-2. The release process **takes about 40 minutes**. You must have time to
-   complete all the steps.
+1. The relevant [testgrid dashboard](https://testgrid.k8s.io/cert-manager-jetstack) should not be failing for the release you're trying to perform.
+2. The release process **takes about 40 minutes**. You must have time to complete all the steps.
 3. You currently need to be at Jetstack to get the required GitHub and GCP
    permissions. (we'd like contributors outside Jetstack to be able to get
    access; if that's of interest to you, please let us know).
@@ -71,8 +64,6 @@ following conditions:
     [1]: https://cert-manager.io/docs/contributing/release-process/#prerequisites
     [2]: https://console.cloud.google.com/?project=cert-manager-release
     ```
-
-</div>
 
 This guide applies for versions of cert-manager released using `make`, which should be every version from cert-manger 1.8 and later.
 
