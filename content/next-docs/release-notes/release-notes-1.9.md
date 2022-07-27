@@ -3,6 +3,17 @@ title: Release 1.9
 description: 'cert-manager release notes: cert-manager v1.9'
 ---
 
+## v1.9.1
+
+cert-manager v1.9.1 is a bug fix release which removes an incorrect check in the Route53 DNS solver. This accidental change prevented the use of credentials derived from
+instance metadata or AWS pod metadata.
+
+## Changes since v1.9.0
+
+### Bug or Regression
+
+- DNS Route53: Remove incorrect validation which rejects solvers that don't define either a `accessKeyID` or `secretAccessKeyID`. ([#5341](https://github.com/cert-manager/cert-manager/pull/5341), [@jetstack-bot](https://github.com/jetstack-bot))
+
 ## v1.9.0
 
 cert-manager v1.9.0 adds alpha support for using cert-manager `Certificate`s in scenarios where the ordering of the Relative Distinguished Names (RDN) sequence that constitutes an X.509 certificate's subject needs to be preserved; improves the ability to configure the `Certificate` created via ingress-shim using annotations on the `Ingress` resource; introduces various changes/improvements in contributor flow; and finishes the  new make-based contributor workflow.
