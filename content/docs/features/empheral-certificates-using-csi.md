@@ -1,5 +1,5 @@
 ---
-title: CSI Driver
+title: Empheral Certifcates Using CSI
 description: 'cert-manager usage: CSI driver'
 ---
 
@@ -80,6 +80,3 @@ overwrite the existing certificate in path.
 When the Pod is marked for termination, the `NodeUnpublishVolume` call is made
 to the node's driver which in turn destroys the certificate and key from the
 nodes file system.
-
-The CSI driver is able to recover its full state in the event the its Pod being
-terminated.

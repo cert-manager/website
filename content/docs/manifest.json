@@ -193,6 +193,10 @@
               "path": "/docs/configuration/selfsigned.md"
             },
             {
+              "title": "Certificate Resources",
+              "path": "/docs/configuration/certificate-resources.md"
+            },
+            {
               "title": "CA",
               "path": "/docs/configuration/ca.md"
             },
@@ -285,44 +289,33 @@
               "path": "/docs/usage/README.md"
             },
             {
-              "title": "Certificate Resources",
-              "path": "/docs/usage/certificate.md"
-            },
-            {
-              "title": "cmctl",
-              "path": "/docs/usage/cmctl.md"
-            },
-            {
-              "title": "Prometheus Metrics",
-              "path": "/docs/usage/prometheus-metrics.md"
-            },
-            {
-              "title": "Securing Ingress Resources",
-              "path": "/docs/usage/ingress.md"
-            },
-            {
               "title": "Kubectl plugin",
               "path": "/docs/usage/kubectl-plugin.md"
             },
             {
-              "title": "Securing Gateway Resources",
-              "path": "/docs/usage/gateway.md"
-            },
-            {
-              "title": "Securing Istio Service Mesh",
-              "path": "/docs/usage/istio.md"
-            },
-            {
-              "title": "CSI Driver",
-              "path": "/docs/usage/csi.md"
-            },
-            {
               "title": "Kubernetes CertificateSigningRequests",
               "path": "/docs/usage/kube-csr.md"
+            }
+          ]
+        },
+        {
+          "title": "Features",
+          "routes": [
+            {
+              "title": "Securing Gateway Resources",
+              "path": "/docs/features/securing-gateway-resources.md"
             },
             {
-              "title": "Policy for cert-manager certificates",
-              "path": "/docs/usage/approver-policy.md"
+              "title": "Securing Pods with mTLS",
+              "path": "/docs/features/securing-pods-with-mTLS.md"
+            },
+             {
+              "title": "Empheral Certifcates Using CSI",
+              "path": "/docs/features/empheral-certificates-using-csi.md"
+            },
+             {
+              "title": "Policy for cert-manager Certificates",
+              "path": "/docs/features/approver-policy.md"
             }
           ]
         },
@@ -367,8 +360,12 @@
               "path": "/docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md"
             },
             {
-                "title": "Migrating from Kube-LEGO",
-                "path": "/docs/tutorials/acme/migrating-from-kube-lego.md"
+              "title": "Monitoring cert-manager",
+              "path": "/docs/tutorials/monitoring-cert-manager.md"
+            },
+            {
+              "title": "Migrating from Kube-LEGO",
+              "path": "/docs/tutorials/acme/migrating-from-kube-lego.md"
             },
             {
               "title": "Backup and Restore Resources",
@@ -395,8 +392,8 @@
               "path": "/docs/tutorials/venafi/venafi.md"
             },
             {
-              "title": "Securing the istio Service Mesh using cert-manager",
-              "path": "/docs/tutorials/istio-csr/istio-csr.md"
+              "title": "Securing Ingresses with Venafi",
+              "path": "/docs/tutorials/securing-ingress.md"
             }
           ]
         },
@@ -675,37 +672,44 @@
           ]
         },
         {
-          "title": "CLI reference",
+          "title": "Reference",
           "routes": [
             {
-              "title": "Introduction",
-              "path": "/docs/cli/README.md"
+              "title": "cmctl CLI",
+              "path": "/docs/reference/cmctl-cli.md"
             },
             {
               "title": "acmesolver",
-              "path": "/docs/cli/acmesolver.md"
+              "path": "/docs/reference/acmesolver.md"
             },
-            {
+             {
               "title": "cainjector",
-              "path": "/docs/cli/cainjector.md"
+              "path": "/docs/reference/cainjector.md"
             },
-            {
-              "title": "cmctl",
-              "path": "/docs/cli/cmctl.md"
-            },
-            {
-              "title": "controller",
-              "path": "/docs/cli/controller.md"
-            },
-            {
+             {
+                  "title": "CLI reference",
+                  "routes": [
+                    {
+                       "title": "Introduction",
+                        "path": "/docs/cli/README.md"
+                    },
+                    {
+                      "title": "controller",
+                      "path": "/docs/cli/controller.md"
+                    },
+                      {
               "title": "webhook",
               "path": "/docs/cli/webhook.md"
             }
+                  ]
+
+             },
+            {
+              "title": "API reference",
+              "path": "/docs/reference/api-docs.md"
+            }
+
           ]
-        },
-        {
-          "title": "API reference",
-          "path": "/docs/reference/api-docs.md"
         }
       ]
     }

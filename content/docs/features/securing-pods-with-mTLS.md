@@ -1,5 +1,5 @@
 ---
-title: Securing Istio Service Mesh
+title: Securing Pods with mTLS
 description: 'cert-manager usage: Istio and istio-csr'
 ---
 
