@@ -247,7 +247,6 @@ serviceAccount:
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::XXXXXXXXXXX:role/cert-manager
 securityContext:
-  enabled: true
   fsGroup: 1001
 ```
 
