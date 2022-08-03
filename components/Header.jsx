@@ -25,17 +25,6 @@ export default function Header() {
           <MobileNavigation active={currentPath} className="lg:hidden" />
         </div>
       </div>
-      <div className="text-center p-4 bg-blue-1 text-white">
-        Help us improve the cert-manager documentation{' '}
-        <Button
-          href={
-            'https://docs.google.com/forms/d/e/1FAIpQLSeqfRkd86_N0L7VOW_ImCT0iyUabhczdiDk2dQDLp55V8kqvw/viewform'
-          }
-          caption="Take this short survey"
-          target="_blank"
-          className="px-3 py-1 text-11px mx-4 "
-        />
-      </div>
     </div>
   )
 }

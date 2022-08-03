@@ -5,6 +5,12 @@ description: Google season of docs 2022 proposal
 
 ## Project Updates
 
+### 3 August 2022: The cert-manager.io Documentation Survey is now closed
+
+Thank you to everyone who participated in our documentation survey.
+We will use the results to prioritize sections of the website for restructuring and rewriting.
+Before the conclusion of this Season-of-Docs we will select a random winner from among the responses and contact you about your prize.
+
 ### 18 July 2022: The cert-manager.io Documentation Survey
 
 <img src="/images/google-season-of-docs-2022-improve-navigation-and-structure/Screenshot_2022-07-18_at_14-35-48_cert-manager_documentation_survey.png" style={{float: "right", clear: "right", margin: "5px"}} alt="Screenshot 2022-07-18 at 14-35-48 cert-manager documentation survey" title="Screenshot 2022-07-18 at 14-35-48 cert-manager documentation survey" />
