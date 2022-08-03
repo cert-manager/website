@@ -1,6 +1,6 @@
 ---
-title: Getting Started with cert-manager on GKE
-description: Learn how to deploy cert-manager in your Kubernetes cluster and how to configure it to sign SSL certificates using Let's Encrypt
+title: Deploy cert-manager on Google Kubernetes Engine (GKE) and create SSL certificates for Ingress using Let's Encrypt
+description: Learn how to deploy cert-manager on Google Kubernetes (GKE) Engine and then configure it to sign SSL certificates using Let's Encrypt
 ---
 
 In this tutorial you will learn how to deploy and configure cert-manager on Google Kubernetes Engine (GKE).
