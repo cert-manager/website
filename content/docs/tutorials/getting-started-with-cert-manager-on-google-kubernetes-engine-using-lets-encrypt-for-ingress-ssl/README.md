@@ -53,7 +53,7 @@ You will also need to install the following software on your laptop:
 
 ## 0. Configure `gcloud` with a Google Cloud project
 
-If you don't have a Google Cloud account, do not worry, the command below will create it for you:
+If you don't have a Google Cloud account, the command below will create one for you:
 
 ```bash
 gcloud init
@@ -76,7 +76,7 @@ Example output:
 * Compute Engine commands will use zone `europe-west1-b` by default
 ```
 
-In the remaining of this tutorial, we will refer to the name of the project that was selected while running `gcloud init` with the variable `PROJECT`. Where ever you see `$PROJECT` in a command, you need to either (1) replace the variable manually before you execute the command,
+In this tutorial, we will refer to the name of the project that was selected while running `gcloud init` with the variable `PROJECT`. Where ever you see `$PROJECT` in a command, you need to either (1) replace the variable manually before you execute the command,
 or (2) export the variable in your shell session. This applies to all environment variables that you will encounter in the commands listed in this tutorial.
 
 We will go with option (2), so we need to export the environment variables before continuing using the information that was printed by `gcloud init`:
@@ -491,7 +491,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: $EMAIL_ADDRESS # ❗ Replace this with your email address
+    email: <email-address> # ❗ Replace this with your email address
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
