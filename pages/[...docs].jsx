@@ -35,7 +35,7 @@ const DocumentationPage = ({
           description: frontmatter.description
         }}
       />
-      <div className="container mt-20 pb-48">
+      <div className="container mt-6 pb-48">
         <div className="w-full md:grid grid-cols-12 gap-12 xl:gap-16">
           <div className="col-span-4 lg:col-span-3 xl:col-span-2 md:border-r border-gray-2/50 pr-5">
             <Sidebar
