@@ -1,10 +1,11 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 import { GA_TRACKING_ID } from '../lib/ga'
 
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html className={"no-js"}>
         <Head>
           <link
             rel="apple-touch-icon"
@@ -38,10 +39,17 @@ class MyDocument extends Document {
               />
             </>
           )}
+
         </Head>
         <body className="overflow-x-hidden">
           <Main />
           <NextScript />
+          <>
+              <script dangerouslySetInnerHTML={{
+                  __html: `document.querySelector('html').classList.remove('no-js')`
+              }}
+              />
+          </>
         </body>
       </Html>
     )
