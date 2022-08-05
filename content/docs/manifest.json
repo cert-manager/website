@@ -189,105 +189,113 @@
               "path": "/docs/configuration/README.md"
             },
             {
-              "title": "SelfSigned",
-              "path": "/docs/configuration/selfsigned.md"
-            },
-            {
-              "title": "Certificate Resources",
-              "path": "/docs/configuration/certificate-resources.md"
-            },
-            {
-              "title": "CA",
-              "path": "/docs/configuration/ca.md"
-            },
-            {
-              "title": "Vault",
-              "path": "/docs/configuration/vault.md"
-            },
-            {
-              "title": "Venafi",
-              "path": "/docs/configuration/venafi.md"
-            },
-            {
-              "title": "External",
-              "path": "/docs/configuration/external.md"
-            },
-            {
-              "title": "ACME",
-              "routes": [
-                {
-                  "title": "Introduction",
-                  "path": "/docs/configuration/acme/README.md"
-                },
-                {
-                  "title": "HTTP01",
-                  "routes": [
+                "title": "Issuers",
+                "routes": [
                     {
-                      "title": "Introduction",
-                      "path": "/docs/configuration/acme/http01/README.md"
+                      "title": "SelfSigned",
+                      "path": "/docs/configuration/selfsigned.md"
                     },
                     {
-                      "title": "External Load Balancer",
-                      "path": "/docs/configuration/acme/http01/externalloadbalancer.md"
+                      "title": "CA",
+                      "path": "/docs/configuration/ca.md"
+                    },
+                    {
+                      "title": "Vault",
+                      "path": "/docs/configuration/vault.md"
+                    },
+                    {
+                      "title": "Venafi",
+                      "path": "/docs/configuration/venafi.md"
+                    },
+                    {
+                      "title": "External",
+                      "path": "/docs/configuration/external.md"
+                    },
+                    {
+                      "title": "ACME",
+                      "routes": [
+                        {
+                          "title": "Introduction",
+                          "path": "/docs/configuration/acme/README.md"
+                        },
+                        {
+                          "title": "HTTP01",
+                          "routes": [
+                            {
+                              "title": "Introduction",
+                              "path": "/docs/configuration/acme/http01/README.md"
+                            },
+                            {
+                              "title": "External Load Balancer",
+                              "path": "/docs/configuration/acme/http01/externalloadbalancer.md"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "DNS01",
+                          "routes": [
+                            {
+                              "title": "Introduction",
+                              "path": "/docs/configuration/acme/dns01/README.md"
+                            },
+                            {
+                              "title": "ACMEDNS",
+                              "path": "/docs/configuration/acme/dns01/acme-dns.md"
+                            },
+                            {
+                              "title": "Akamai",
+                              "path": "/docs/configuration/acme/dns01/akamai.md"
+                            },
+                            {
+                              "title": "AzureDNS",
+                              "path": "/docs/configuration/acme/dns01/azuredns.md"
+                            },
+                            {
+                              "title": "Cloudflare",
+                              "path": "/docs/configuration/acme/dns01/cloudflare.md"
+                            },
+                            {
+                              "title": "DigitalOcean",
+                              "path": "/docs/configuration/acme/dns01/digitalocean.md"
+                            },
+                            {
+                              "title": "Google CloudDNS",
+                              "path": "/docs/configuration/acme/dns01/google.md"
+                            },
+                            {
+                              "title": "RFC-2136",
+                              "path": "/docs/configuration/acme/dns01/rfc2136.md"
+                            },
+                            {
+                              "title": "Route53",
+                              "path": "/docs/configuration/acme/dns01/route53.md"
+                            },
+                            {
+                              "title": "Webhook",
+                              "path": "/docs/configuration/acme/dns01/webhook.md"
+                            }
+                          ]
+                        }
+                      ]
                     }
-                  ]
-                },
-                {
-                  "title": "DNS01",
-                  "routes": [
-                    {
-                      "title": "Introduction",
-                      "path": "/docs/configuration/acme/dns01/README.md"
-                    },
-                    {
-                      "title": "ACMEDNS",
-                      "path": "/docs/configuration/acme/dns01/acme-dns.md"
-                    },
-                    {
-                      "title": "Akamai",
-                      "path": "/docs/configuration/acme/dns01/akamai.md"
-                    },
-                    {
-                      "title": "AzureDNS",
-                      "path": "/docs/configuration/acme/dns01/azuredns.md"
-                    },
-                    {
-                      "title": "Cloudflare",
-                      "path": "/docs/configuration/acme/dns01/cloudflare.md"
-                    },
-                    {
-                      "title": "DigitalOcean",
-                      "path": "/docs/configuration/acme/dns01/digitalocean.md"
-                    },
-                    {
-                      "title": "Google CloudDNS",
-                      "path": "/docs/configuration/acme/dns01/google.md"
-                    },
-                    {
-                      "title": "RFC-2136",
-                      "path": "/docs/configuration/acme/dns01/rfc2136.md"
-                    },
-                    {
-                      "title": "Route53",
-                      "path": "/docs/configuration/acme/dns01/route53.md"
-                    },
-                    {
-                      "title": "Webhook",
-                      "path": "/docs/configuration/acme/dns01/webhook.md"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Usage",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/docs/usage/README.md"
-            }
+                ]
+            },
+                                {
+                                    "title": "Certificates",
+                                    "path": "/docs/configuration/certificate-resources.md"
+                                },
+                                {
+                                    "title": "Ingress",
+                                    "path": "/docs/configuration/securing-ingress.md"
+                                },
+                                {
+                                    "title": "CSI",
+                                    "path": "/docs/configuration/csi.md"
+                                },
+                                {
+                                    "title": "Istio",
+                                    "path": "/docs/configuration/istio.md"
+                                }
           ]
         },
         {
