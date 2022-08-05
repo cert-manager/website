@@ -289,10 +289,6 @@
               "path": "/docs/usage/README.md"
             },
             {
-              "title": "Kubectl plugin",
-              "path": "/docs/usage/kubectl-plugin.md"
-            },
-            {
               "title": "Kubernetes CertificateSigningRequests",
               "path": "/docs/usage/kube-csr.md"
             }
