@@ -287,10 +287,6 @@
             {
               "title": "Introduction",
               "path": "/docs/usage/README.md"
-            },
-            {
-              "title": "Kubernetes CertificateSigningRequests",
-              "path": "/docs/usage/kube-csr.md"
             }
           ]
         },
@@ -312,6 +308,10 @@
              {
               "title": "Policy for cert-manager Certificates",
               "path": "/docs/features/approver-policy.md"
+            },
+            {
+                "title": "Kubernetes CertificateSigningRequests",
+                "path": "/docs/features/kube-csr.md"
             }
           ]
         },
