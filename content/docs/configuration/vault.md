@@ -158,7 +158,7 @@ Tokens are already stored in `Secret` resources however, you must ensure that
 it is present in the same namespace as the `Issuer`, or otherwise in the
 `Cluster Resource Namespace` in the case of using a `ClusterIssuer`.
 
-> **Note**: In kubernetes 1.24 onwards, the token secret is no longer created
+> **Note**: In Kubernetes 1.24 onwards, the token secret is no longer created
 > by default for the Service Account. In this case you need to manually create
 > the secret resource. See [this guide](https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets)
 > for more details.
@@ -219,7 +219,7 @@ Kubernetes 1.24 and above.
     kubectl create serviceaccount -n sandbox vault-issuer
     ```
 
-1) Create the Secret resource for Kuberentes to populate the `token` value:
+1) Create the Secret resource for Kubernetes to populate the `token` value:
 
     ```yaml
     apiVersion: v1
