@@ -167,7 +167,7 @@ This authentication method also expects a `role` field which is the Vault role
 that the Service Account is to assume, as well as an optional `mountPath` field which
 is the authentication mount path, defaulting to `kubernetes`.
 
-#### Kubernetes <= 1.23 Example
+#### Kubernetes version less than 1.24
 
 The following example will be making use of the Service Account
 `my-service-account`. The secret data field key will be `token` if the `Secret`
@@ -208,7 +208,7 @@ default mount path of `/v1/auth/kubernetes`
               key: token
     ```
 
-#### Kubernetes >= 1.24 Example
+#### Kubernetes version 1.24 and greater
 
 This example is almost the same as above but adjusted for the change in
 Kubernetes 1.24 and above.
