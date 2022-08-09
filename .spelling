@@ -137,6 +137,7 @@ IssuerRef
 Istio
 IstioOperator
 istiod
+Intel
 intra
 JSON
 Jetstack
@@ -190,6 +191,7 @@ RinkiyaKeDad
 Route53
 Runtime
 roadmap
+SGX
 SOA
 SecretTemplate
 ServerSideApply
@@ -382,6 +384,7 @@ subfolders
 subresource
 symlink
 tamalsaha
+tcs-issuer
 teejaded
 templated
 templating
