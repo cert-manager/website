@@ -8,10 +8,6 @@
           "path": "/docs/README.md"
         },
         {
-            "title": "Features",
-            "path": "/docs/features/README.md"
-        },
-        {
             "title": "Getting Started",
             "path": "/docs/getting-started/README.md"
         },
