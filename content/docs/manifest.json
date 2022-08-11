@@ -8,6 +8,10 @@
           "path": "/docs/README.md"
         },
         {
+            "title": "Features",
+            "path": "/docs/features/README.md"
+        },
+        {
             "title": "Getting Started",
             "path": "/docs/getting-started/README.md"
         },
@@ -189,6 +193,16 @@
               "path": "/docs/configuration/README.md"
             },
             {
+              "title": "Securing Gateway Resources",
+              "path": "/docs/configuration/securing-gateway-resources.md"
+
+            },
+            {
+              "title": "Securing Pods with mTLS",
+              "path": "/docs/configuration/securing-pods-with-mTLS.md"
+
+            },
+            {
                 "title": "Issuers",
                 "routes": [
                     {
@@ -296,31 +310,6 @@
                                     "title": "Istio",
                                     "path": "/docs/configuration/istio.md"
                                 }
-          ]
-        },
-        {
-          "title": "Features",
-          "routes": [
-            {
-              "title": "Securing Gateway Resources",
-              "path": "/docs/features/securing-gateway-resources.md"
-            },
-            {
-              "title": "Securing Pods with mTLS",
-              "path": "/docs/features/securing-pods-with-mTLS.md"
-            },
-             {
-              "title": "Empheral Certifcates Using CSI",
-              "path": "/docs/features/empheral-certificates-using-csi.md"
-            },
-             {
-              "title": "Policy for cert-manager Certificates",
-              "path": "/docs/features/approver-policy.md"
-            },
-            {
-                "title": "Kubernetes CertificateSigningRequests",
-                "path": "/docs/features/kube-csr.md"
-            }
           ]
         },
         {
