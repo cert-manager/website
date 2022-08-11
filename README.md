@@ -60,7 +60,7 @@ There's an external link to an RFC which is fully specified as expected:
 
 But towards the end of the page we link to the "Certificate Usage" page:
 
-> `[here](../usage/certificate.md).`
+> `[here](../configuration/certificate-resources.md).`
 
 If we're browsing the repository on the GitHub website (i.e. on [this page](https://github.com/cert-manager/website/blob/d398905baef9841590fab6c2b854b74f0eecb006/content/docs/concepts/certificate.md)), that relative link will work. In addition,
 the next.js framework will ensure that the link is correct by stripping the `.md`, so the final rendered link
