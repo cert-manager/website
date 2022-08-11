@@ -189,18 +189,12 @@
               "path": "/docs/configuration/README.md"
             },
             {
-              "title": "Securing Gateway Resources",
-              "path": "/docs/configuration/securing-gateway-resources.md"
-
-            },
-            {
-              "title": "Securing Pods with mTLS",
-              "path": "/docs/configuration/securing-pods-with-mTLS.md"
-
-            },
-            {
                 "title": "Issuers",
                 "routes": [
+                    {
+                        "title": "Overview",
+                        "path": "/docs/configuration/issuers/README.md"
+                    },
                     {
                       "title": "SelfSigned",
                       "path": "/docs/configuration/selfsigned.md"
@@ -298,14 +292,15 @@
                                     "title": "Ingress",
                                     "path": "/docs/configuration/securing-ingress.md"
                                 },
-                                {
-                                    "title": "CSI",
-                                    "path": "/docs/configuration/csi.md"
-                                },
-                                {
-                                    "title": "Istio",
-                                    "path": "/docs/configuration/istio.md"
-                                }
+
+            {
+                "title": "Securing Gateway Resources",
+                "path": "/docs/configuration/securing-gateway-resources.md"
+            },
+            {
+                "title": "Securing Pods with mTLS",
+                "path": "/docs/configuration/securing-pods-with-mTLS.md"
+            }
           ]
         },
         {
@@ -633,10 +628,6 @@
             {
               "title": "Introduction",
               "path": "/docs/concepts/README.md"
-            },
-            {
-              "title": "Issuer",
-              "path": "/docs/concepts/issuer.md"
             },
             {
               "title": "Certificate",

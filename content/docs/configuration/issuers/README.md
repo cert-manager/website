@@ -1,7 +1,9 @@
 ---
-title: Issuer
+title: Configuring Issuers and ClusterIssuers
 description: 'cert-manager core concepts: Issuers and ClusterIssuers'
 ---
+
+This section documents the concept of issuers and how the different issuer types can be configured.
 
 `Issuers`, and `ClusterIssuers`, are Kubernetes resources that represent
 certificate authorities (CAs) that are able to generate signed certificates by honoring
@@ -26,7 +28,7 @@ The certificate stored in the secret `ca-key-pair` can then be used to trust
 newly signed certificates by this `Issuer` in a Public Key Infrastructure (PKI)
 system.
 
-## Namespaces
+## What is the difference between an Issuer and ClusterIssuer?
 
 An `Issuer` is a namespaced resource, and it is not possible to issue
 certificates from an `Issuer` in a different namespace. This means you will need
@@ -37,8 +39,15 @@ namespaces, you should consider creating a `ClusterIssuer` resource. This is
 almost identical to the `Issuer` resource, however is non-namespaced so it
 can be used to issue `Certificates` across all namespaces.
 
-## Supported Issuers
+## Supported Issuer types
 
-cert-manager supports a number of 'in-tree', as well as 'out-of-tree' `Issuer`
-types. An exhaustive list of these `Issuer` types can be found in the
-cert-manager [configuration documentation](../configuration.md).
+cert-manager comes with a number of built-in certificate issuers which are denoted by being in
+the `cert-manager.io` group. You can also install external issuers in addition to the built-in types.
+Both built-in and external issuers are treated the same and are configured similarly.
+
+- [SelfSigned]
+- [CA]
+- [ACME]
+- [Venafi]
+- [Vault]
+- [External]
