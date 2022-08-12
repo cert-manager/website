@@ -382,97 +382,6 @@
             ]
         },
         {
-          "title": "Contributing",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/docs/contributing/README.md"
-            },
-            {
-              "title": "Feature Policy",
-              "path": "/docs/contributing/policy.md"
-            },
-            {
-              "title": "Building cert-manager",
-              "path": "/docs/contributing/building.md"
-            },
-            {
-              "title": "Contributing Flow",
-              "path": "/docs/contributing/contributing-flow.md"
-            },
-            {
-              "title": "CRDs",
-              "path": "/docs/contributing/crds.md"
-            },
-            {
-              "title": "DNS Providers",
-              "path": "/docs/contributing/dns-providers.md"
-            },
-            {
-              "title": "Running End-to-End Tests",
-              "path": "/docs/contributing/e2e.md"
-            },
-            {
-              "title": "Implementing External Issuers",
-              "path": "/docs/contributing/external-issuers.md"
-            },
-            {
-              "title": "DCO Sign Off",
-              "path": "/docs/contributing/sign-off.md"
-            },
-            {
-              "title": "Release Process",
-              "path": "/docs/contributing/release-process.md"
-            },
-            {
-              "title": "Developing with Kind",
-              "path": "/docs/contributing/kind.md"
-            },
-            {
-              "title": "Google Season of Docs",
-              "routes": [
-                {
-                  "title": "Introduction",
-                  "path": "/docs/contributing/google-season-of-docs/README.md"
-                },
-                {
-                  "title": "2022",
-                  "routes": [
-                    {
-                      "title": "Introduction",
-                      "path": "/docs/contributing/google-season-of-docs/2022/README.md"
-                    },
-                    {
-                      "title": "Improve the Navigation and Structure of the cert-manager Website",
-                      "path": "/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure.md"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "Reporting Security Issues",
-              "path": "/docs/contributing/security.md"
-            },
-            {
-              "title": "Coding Conventions",
-              "path": "/docs/contributing/coding-conventions.md"
-            },
-            {
-              "title": "Third Party Code Donations",
-              "path": "/docs/contributing/third-party-code-donation.md"
-            },
-            {
-              "title": "Signing Keys",
-              "path": "/docs/contributing/signing-keys.md"
-            },
-            {
-              "title": "Importing cert-manager in Go",
-              "path": "/docs/contributing/importing.md"
-            }
-          ]
-        },
-        {
           "title": "Release Notes",
           "routes": [
             {
@@ -657,7 +566,100 @@
             }
 
           ]
+        },
+
+        {
+          "title": "Contributing",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/contributing/README.md"
+            },
+            {
+              "title": "Feature Policy",
+              "path": "/docs/contributing/policy.md"
+            },
+            {
+              "title": "Building cert-manager",
+              "path": "/docs/contributing/building.md"
+            },
+            {
+              "title": "Contributing Flow",
+              "path": "/docs/contributing/contributing-flow.md"
+            },
+            {
+              "title": "CRDs",
+              "path": "/docs/contributing/crds.md"
+            },
+            {
+              "title": "DNS Providers",
+              "path": "/docs/contributing/dns-providers.md"
+            },
+            {
+              "title": "Running End-to-End Tests",
+              "path": "/docs/contributing/e2e.md"
+            },
+            {
+              "title": "Implementing External Issuers",
+              "path": "/docs/contributing/external-issuers.md"
+            },
+            {
+              "title": "DCO Sign Off",
+              "path": "/docs/contributing/sign-off.md"
+            },
+            {
+              "title": "Release Process",
+              "path": "/docs/contributing/release-process.md"
+            },
+            {
+              "title": "Developing with Kind",
+              "path": "/docs/contributing/kind.md"
+            },
+            {
+              "title": "Google Season of Docs",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/docs/contributing/google-season-of-docs/README.md"
+                },
+                {
+                  "title": "2022",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/docs/contributing/google-season-of-docs/2022/README.md"
+                    },
+                    {
+                      "title": "Improve the Navigation and Structure of the cert-manager Website",
+                      "path": "/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure.md"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reporting Security Issues",
+              "path": "/docs/contributing/security.md"
+            },
+            {
+              "title": "Coding Conventions",
+              "path": "/docs/contributing/coding-conventions.md"
+            },
+            {
+              "title": "Third Party Code Donations",
+              "path": "/docs/contributing/third-party-code-donation.md"
+            },
+            {
+              "title": "Signing Keys",
+              "path": "/docs/contributing/signing-keys.md"
+            },
+            {
+              "title": "Importing cert-manager in Go",
+              "path": "/docs/contributing/importing.md"
+            }
+          ]
         }
+
       ]
     }
   ]
