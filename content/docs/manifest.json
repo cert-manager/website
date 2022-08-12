@@ -286,7 +286,7 @@
             },
                                 {
                                     "title": "Certificate",
-                                    "path": "/docs/configuration/certificate-resources/README.md"
+                                    "path": "/docs/configuration/certificate-resources.md"
                                 },
                                 {
                                     "title": "Ingress",

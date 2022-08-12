@@ -1,9 +1,7 @@
 ---
 title: Issuer and ClusterIssuer resources
-description: 'cert-manager core concepts: Issuers and ClusterIssuers'
+description: Configure cert-manager to sign SSL / TLS certificates using the Issuer and ClusterIssuer resources.
 ---
-
-This section documents the concept of issuers and how the different issuer types can be configured.
 
 `Issuers`, and `ClusterIssuers`, are Kubernetes resources that represent
 certificate authorities (CAs) that are able to generate signed certificates by honoring

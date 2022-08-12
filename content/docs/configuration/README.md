@@ -28,7 +28,7 @@ This resource represents a desired X.509 certificate which will be signed and re
 The private key and signed certificate will be stored in a `Secret` which you can then mount in to a `Pod`
 or use in an `Ingress` resource.
 
-📖 [Learn more about Certificate resources](certificate-resources/README.md)
+📖 [Learn more about Certificate resources](certificate-resources.md)
 
 ## Ingress
 
