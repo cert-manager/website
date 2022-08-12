@@ -54,7 +54,7 @@ members of the Istio mesh, and signing them through cert-manager.
 
 TODO
 
-## Fully integrated Issuers from recognised public and private Certificate Authorities
+## Fully integrated Issuers from recognized public and private Certificate Authorities
 
 TODO
 

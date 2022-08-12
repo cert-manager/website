@@ -630,10 +630,6 @@
               "path": "/docs/concepts/README.md"
             },
             {
-              "title": "Certificate",
-              "path": "/docs/concepts/certificate.md"
-            },
-            {
               "title": "CertificateRequest",
               "path": "/docs/concepts/certificaterequest.md"
             },
