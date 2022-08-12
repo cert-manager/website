@@ -623,27 +623,27 @@
           ]
         },
         {
-          "title": "Concepts",
+          "title": "Troubleshooting",
           "routes": [
             {
               "title": "Introduction",
-              "path": "/docs/concepts/README.md"
+              "path": "/docs/troubleshooting/README.md"
             },
             {
               "title": "CertificateRequest",
-              "path": "/docs/concepts/certificaterequest.md"
+              "path": "/docs/troubleshooting/certificaterequest.md"
             },
             {
               "title": "ACME Orders and Challenges",
-              "path": "/docs/concepts/acme-orders-challenges.md"
+              "path": "/docs/troubleshooting/acme-orders-challenges.md"
             },
             {
               "title": "Webhook",
-              "path": "/docs/concepts/webhook.md"
+              "path": "/docs/troubleshooting/webhook.md"
             },
             {
               "title": "CA Injector",
-              "path": "/docs/concepts/ca-injector.md"
+              "path": "/docs/troubleshooting/ca-injector.md"
             }
           ]
         },
