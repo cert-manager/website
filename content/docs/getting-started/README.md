@@ -1,5 +1,5 @@
 ---
-title: Getting Started with cert-manager
+title: Getting Started
 description: Quick start guides for cert-manager
 ---
 <a style={{float: "left", marginBottom: "20px", padding: "10px", boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.1)", textDecoration: "none"}}

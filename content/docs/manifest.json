@@ -189,34 +189,14 @@
               "path": "/docs/configuration/README.md"
             },
             {
-                "title": "Issuers",
+                "title": "Issuer and ClusterIssuer",
                 "routes": [
                     {
-                        "title": "Overview",
-                        "path": "/docs/configuration/issuers/README.md"
+                        "title": "Introduction",
+                        "path": "/docs/configuration/issuer-and-clusterissuer-resources/README.md"
                     },
                     {
-                      "title": "SelfSigned",
-                      "path": "/docs/configuration/selfsigned.md"
-                    },
-                    {
-                      "title": "CA",
-                      "path": "/docs/configuration/ca.md"
-                    },
-                    {
-                      "title": "Vault",
-                      "path": "/docs/configuration/vault.md"
-                    },
-                    {
-                      "title": "Venafi",
-                      "path": "/docs/configuration/venafi.md"
-                    },
-                    {
-                      "title": "External",
-                      "path": "/docs/configuration/external.md"
-                    },
-                    {
-                      "title": "ACME",
+                        "title": "Let's Encrypt",
                       "routes": [
                         {
                           "title": "Introduction",
@@ -281,12 +261,32 @@
                           ]
                         }
                       ]
+                    },
+                    {
+                        "title": "SelfSigned",
+                        "path": "/docs/configuration/issuer-and-clusterissuer-resources/selfsigned.md"
+                    },
+                    {
+                        "title": "CA",
+                        "path": "/docs/configuration/issuer-and-clusterissuer-resources/ca.md"
+                    },
+                    {
+                        "title": "Vault",
+                        "path": "/docs/configuration/issuer-and-clusterissuer-resources/vault.md"
+                    },
+                    {
+                        "title": "Venafi",
+                        "path": "/docs/configuration/issuer-and-clusterissuer-resources/venafi.md"
+                    },
+                    {
+                        "title": "External",
+                        "path": "/docs/configuration/issuer-and-clusterissuer-resources/external.md"
                     }
                 ]
             },
                                 {
-                                    "title": "Certificates",
-                                    "path": "/docs/configuration/certificate-resources.md"
+                                    "title": "Certificate",
+                                    "path": "/docs/configuration/certificate-resources/README.md"
                                 },
                                 {
                                     "title": "Ingress",
@@ -300,35 +300,6 @@
             {
                 "title": "Securing Pods with mTLS",
                 "path": "/docs/configuration/securing-pods-with-mTLS.md"
-            }
-          ]
-        },
-        {
-          "title": "Projects",
-          "routes": [
-            {
-              "title": "Contents",
-              "path": "/docs/projects/README.md"
-            },
-            {
-              "title": "istio-csr",
-              "path": "/docs/projects/istio-csr.md"
-            },
-            {
-              "title": "csi-driver",
-              "path": "/docs/projects/csi-driver.md"
-            },
-            {
-              "title": "csi-driver-spiffe",
-              "path": "/docs/projects/csi-driver-spiffe.md"
-            },
-            {
-              "title": "approver-policy",
-              "path": "/docs/projects/approver-policy.md"
-            },
-            {
-              "title": "trust",
-              "path": "/docs/projects/trust.md"
             }
           ]
         },
@@ -380,6 +351,35 @@
               "path": "/docs/tutorials/securing-ingress.md"
             }
           ]
+        },
+        {
+            "title": "Projects",
+            "routes": [
+                {
+                    "title": "Contents",
+                    "path": "/docs/projects/README.md"
+                },
+                {
+                    "title": "istio-csr",
+                    "path": "/docs/projects/istio-csr.md"
+                },
+                {
+                    "title": "csi-driver",
+                    "path": "/docs/projects/csi-driver.md"
+                },
+                {
+                    "title": "csi-driver-spiffe",
+                    "path": "/docs/projects/csi-driver-spiffe.md"
+                },
+                {
+                    "title": "approver-policy",
+                    "path": "/docs/projects/approver-policy.md"
+                },
+                {
+                    "title": "trust",
+                    "path": "/docs/projects/trust.md"
+                }
+            ]
         },
         {
           "title": "FAQ",

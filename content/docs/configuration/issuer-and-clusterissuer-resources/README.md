@@ -1,5 +1,5 @@
 ---
-title: Configuring Issuers and ClusterIssuers
+title: Issuer and ClusterIssuer resources
 description: 'cert-manager core concepts: Issuers and ClusterIssuers'
 ---
 
@@ -45,9 +45,9 @@ cert-manager comes with a number of built-in certificate issuers which are denot
 the `cert-manager.io` group. You can also install external issuers in addition to the built-in types.
 Both built-in and external issuers are treated the same and are configured similarly.
 
+- [ACME]
 - [SelfSigned]
 - [CA]
-- [ACME]
 - [Venafi]
 - [Vault]
 - [External]
