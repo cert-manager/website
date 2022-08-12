@@ -389,10 +389,6 @@
               "path": "/docs/faq/README.md"
             },
             {
-              "title": "TLS Terminology",
-              "path": "/docs/faq/terminology.md"
-            },
-            {
               "title": "Cluster Resource Namespace",
               "path": "/docs/faq/cluster-resource.md"
             },
@@ -642,6 +638,10 @@
         {
           "title": "Reference",
           "routes": [
+            {
+                "title": "Terminology",
+                "path": "/docs/reference/terminology.md"
+            },
             {
               "title": "cmctl CLI",
               "path": "/docs/reference/cmctl-cli.md"
