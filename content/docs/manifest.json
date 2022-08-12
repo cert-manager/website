@@ -393,10 +393,6 @@
               "path": "/docs/faq/terminology.md"
             },
             {
-              "title": "Troubleshooting Issuing ACME Certificates",
-              "path": "/docs/faq/acme.md"
-            },
-            {
               "title": "Cluster Resource Namespace",
               "path": "/docs/faq/cluster-resource.md"
             },
@@ -407,10 +403,6 @@
             {
               "title": "Syncing Secrets Across Namespaces",
               "path": "/docs/faq/sync-secrets.md"
-            },
-            {
-              "title": "Troubleshooting",
-              "path": "/docs/faq/troubleshooting.md"
             },
             {
               "title": "Troubleshooting webhook",
@@ -635,7 +627,7 @@
             },
             {
               "title": "ACME Orders and Challenges",
-              "path": "/docs/troubleshooting/acme-orders-challenges.md"
+              "path": "/docs/troubleshooting/acme-orders-challenges/README.md"
             },
             {
               "title": "Webhook",

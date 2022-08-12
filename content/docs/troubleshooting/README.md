@@ -1,11 +1,12 @@
 ---
-title: Concepts
-description: cert-manager core concepts
+title: Troubleshooting
+description: Learn how to debug common issues with cert-manager.
 ---
 
-There are several components and ideas that make up cert-manager. This section
-describes them on a conceptual level, to aid with understanding how cert-manager
-does its job.
+In this section:
 
-You probably don't want this section if you're just getting started; check out
-a [tutorial](../tutorials/README.md) instead.
+ * Learn troubleshooting techniques that will help you find the possible root cause of an issue.
+ * Read about common misconfigurations which have been reported by cert-manager users.
+ * Learn about the validation webhook component and some of the problems associated with it.
+ * Learn about the cainjector component and some of the problems associated with it.
+ * Learn about the how the ACME issuer works and some of the problems associated with it.
