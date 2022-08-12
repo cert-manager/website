@@ -414,19 +414,11 @@
                 "path": "/docs/reference/faq.md"
             },
             {
-              "title": "cmctl CLI",
+              "title": "CLI",
               "path": "/docs/reference/cmctl-cli.md"
             },
-            {
-              "title": "acmesolver",
-              "path": "/docs/reference/acmesolver.md"
-            },
              {
-              "title": "cainjector",
-              "path": "/docs/reference/cainjector.md"
-            },
-             {
-                  "title": "CLI reference",
+                  "title": "Components",
                   "routes": [
                     {
                        "title": "Introduction",
@@ -439,12 +431,20 @@
                       {
               "title": "webhook",
               "path": "/docs/cli/webhook.md"
+                    },
+            {
+                "title": "acmesolver",
+                "path": "/docs/cli/acmesolver.md"
+            },
+            {
+                "title": "cainjector",
+                "path": "/docs/cli/cainjector.md"
             }
                   ]
 
              },
             {
-              "title": "API reference",
+              "title": "API",
               "path": "/docs/reference/api-docs.md"
              },
         {
