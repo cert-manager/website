@@ -378,35 +378,6 @@
           ]
         },
         {
-            "title": "Projects",
-            "routes": [
-                {
-                    "title": "Contents",
-                    "path": "/docs/projects/README.md"
-                },
-                {
-                    "title": "istio-csr",
-                    "path": "/docs/projects/istio-csr.md"
-                },
-                {
-                    "title": "csi-driver",
-                    "path": "/docs/projects/csi-driver.md"
-                },
-                {
-                    "title": "csi-driver-spiffe",
-                    "path": "/docs/projects/csi-driver-spiffe.md"
-                },
-                {
-                    "title": "approver-policy",
-                    "path": "/docs/projects/approver-policy.md"
-                },
-                {
-                    "title": "trust",
-                    "path": "/docs/projects/trust.md"
-                }
-            ]
-        },
-        {
           "title": "Troubleshooting",
           "routes": [
             {
@@ -475,7 +446,36 @@
             {
               "title": "API reference",
               "path": "/docs/reference/api-docs.md"
-            }
+             },
+        {
+            "title": "Projects",
+            "routes": [
+                {
+                    "title": "Introduction",
+                    "path": "/docs/projects/README.md"
+                },
+                {
+                    "title": "istio-csr",
+                    "path": "/docs/projects/istio-csr.md"
+                },
+                {
+                    "title": "csi-driver",
+                    "path": "/docs/projects/csi-driver.md"
+                },
+                {
+                    "title": "csi-driver-spiffe",
+                    "path": "/docs/projects/csi-driver-spiffe.md"
+                },
+                {
+                    "title": "approver-policy",
+                    "path": "/docs/projects/approver-policy.md"
+                },
+                {
+                    "title": "trust",
+                    "path": "/docs/projects/trust.md"
+                }
+            ]
+        }
 
           ]
         },
