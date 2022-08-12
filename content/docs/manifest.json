@@ -395,10 +395,6 @@
             {
               "title": "Syncing Secrets Across Namespaces",
               "path": "/docs/faq/sync-secrets.md"
-            },
-            {
-              "title": "Troubleshooting webhook",
-              "path": "/docs/faq/webhook.md"
             }
           ]
         },
