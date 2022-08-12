@@ -6,12 +6,6 @@ description: 'cert-manager FAQ: Overview / General Questions'
 Below is an aggregation of solutions to some issues that cert-manager users may
 face:
 
-- [TLS Terminology, including commonly misused terms](./terminology.md)
-- [Troubleshooting issuing ACME certificates](./acme.md)
-- [How to change the Cluster Resource Namespace](./cluster-resource.md)
-- [How to sync secrets across namespaces](./sync-secrets.md)
-- [Failing to create resources due to Webhook](./webhook.md)
-
 ## Certificates
 
 ### Can I trigger a renewal from cert-manager at will?
@@ -151,3 +145,9 @@ cert-manager currently has some [limited experimental support] for this resource
 [`kubectl certificates` command]: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#certificate
 [Request signing process]: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process
 [limited experimental support]: ../usage/kube-csr.md
+
+### How to write "cert-manager"
+
+cert-manager should always be written in lowercase. Even when it would normally be
+capitalized such as in titles or at the start of sentences. A hyphen should always be
+used between the words, don't replace it with a space or remove it.

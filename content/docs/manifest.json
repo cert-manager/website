@@ -382,19 +382,6 @@
             ]
         },
         {
-          "title": "FAQ",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/docs/faq/README.md"
-            },
-            {
-              "title": "Writing “cert-manager”",
-              "path": "/docs/faq/style.md"
-            }
-          ]
-        },
-        {
           "title": "Contributing",
           "routes": [
             {
@@ -629,6 +616,10 @@
             {
                 "title": "Terminology",
                 "path": "/docs/reference/terminology.md"
+            },
+            {
+                "title": "FAQ",
+                "path": "/docs/reference/faq.md"
             },
             {
               "title": "cmctl CLI",
