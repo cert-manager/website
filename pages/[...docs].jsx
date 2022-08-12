@@ -83,7 +83,7 @@ export async function getStaticProps(ctx) {
 
   // fetch content/*-docs folders as versions
   const dirs = await readdir(join(process.cwd(), 'content'))
-  const docs = dirs.filter((d) => d.endsWith('docs'))
+  const docs = dirs.filter((d) => d.endsWith('docs') && d.startsWith('v'))
   props.versions = docs
 
   return { props }
