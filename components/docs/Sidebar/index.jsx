@@ -19,7 +19,7 @@ export default function Sidebar({ router, routes, versions }) {
 
   return (
     <div className="flex-none ">
-      <div className="sticky top-4  overflow-y-auto">
+      <div className="sticky top-4">
         <button
           className="md:hidden mb-4 px-2 border-b border-gray-2 relative text-blue-800 text-base font-medium w-full text-left flex items-center justify-between"
           onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
@@ -31,14 +31,7 @@ export default function Sidebar({ router, routes, versions }) {
         </button>
         <div className={sidebarCollapsed ? 'hidden md:block' : 'block'}>
           <aside className="">
-            <div className="mb-8">
-              <VersionSelect
-                version={version}
-                versions={versions}
-                setSidebarCollapsed={setSidebarCollapsed}
-              />
-            </div>
-            <nav className="flex-1 px-2 space-y-1 mt-6">
+            <nav className="flex-1 px-2 space-y-1">
               {routes &&
                 Object.keys(routes).map((route, idx) => {
                   const obj = routes[route]
@@ -54,6 +47,13 @@ export default function Sidebar({ router, routes, versions }) {
                   )
                 })}
             </nav>
+            <div className="mt-8">
+              <VersionSelect
+                version={version}
+                versions={versions}
+                setSidebarCollapsed={setSidebarCollapsed}
+              />
+            </div>
           </aside>
         </div>
       </div>

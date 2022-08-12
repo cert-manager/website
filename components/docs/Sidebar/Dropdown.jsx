@@ -15,7 +15,7 @@ export default function Dropdown({
   })
 
   return (
-    <div className="mt-4">
+    <div className="pt-2 pb-2">
       <button
         tabIndex={parentOpen ? 0 : -1}
         className="relative text-blue-800 text-base font-medium w-full text-left flex items-center justify-between"

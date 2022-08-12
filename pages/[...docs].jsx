@@ -37,14 +37,14 @@ const DocumentationPage = ({
       />
       <div className="container mt-6 pb-48">
         <div className="w-full md:grid grid-cols-12 gap-12 xl:gap-16">
-          <div className="col-span-4 lg:col-span-3 xl:col-span-2 md:border-r border-gray-2/50 pr-5">
+          <div className="col-span-4 lg:col-span-3 xl:col-span-3 md:border-r border-gray-2/50 pr-5">
             <Sidebar
               router={router}
               routes={sidebarRoutes}
               versions={versions}
             />
           </div>
-          <main className="col-span-8 lg:col-span-9 xl:col-span-8 docs">
+          <main className="col-span-8 lg:col-span-9 xl:col-span-7 docs">
             <div className="mx-auto md:mx-0 prose max-w-full main-docs-section">
               <h1>{title}</h1>
               <Documentation source={source} theme={theme} />
@@ -83,7 +83,7 @@ export async function getStaticProps(ctx) {
 
   // fetch content/*-docs folders as versions
   const dirs = await readdir(join(process.cwd(), 'content'))
-  const docs = dirs.filter((d) => d.endsWith('docs'))
+  const docs = dirs.filter((d) => d.endsWith('docs') && d.startsWith('v'))
   props.versions = docs
 
   return { props }
