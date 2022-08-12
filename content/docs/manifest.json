@@ -12,6 +12,31 @@
             "path": "/docs/getting-started/README.md"
         },
         {
+          "title": "Releases",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/releases/README.md"
+            },
+            {
+              "title": "v1.9",
+              "path": "/docs/releases/release-notes-1.9.md"
+            },
+            {
+              "title": "v1.8",
+              "path": "/docs/releases/release-notes-1.8.md"
+            },
+            {
+              "title": "v1.7",
+              "path": "/docs/releases/release-notes-1.7.md"
+            },
+            {
+              "title": "v1.6",
+              "path": "/docs/releases/release-notes-1.6.md"
+           }
+          ]
+        },
+        {
           "title": "Installation",
           "routes": [
             {
@@ -380,119 +405,6 @@
                     "path": "/docs/projects/trust.md"
                 }
             ]
-        },
-        {
-          "title": "Release Notes",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/docs/release-notes/README.md"
-            },
-            {
-              "title": "v1.9",
-              "path": "/docs/release-notes/release-notes-1.9.md"
-            },
-            {
-              "title": "v1.8",
-              "path": "/docs/release-notes/release-notes-1.8.md"
-            },
-            {
-              "title": "v1.7",
-              "path": "/docs/release-notes/release-notes-1.7.md"
-            },
-            {
-              "title": "v1.6",
-              "path": "/docs/release-notes/release-notes-1.6.md"
-            },
-            {
-              "title": "v1.5",
-              "path": "/docs/release-notes/release-notes-1.5.md"
-            },
-            {
-              "title": "v1.4",
-              "path": "/docs/release-notes/release-notes-1.4.md"
-            },
-            {
-              "title": "v1.3",
-              "path": "/docs/release-notes/release-notes-1.3.md"
-            },
-            {
-              "title": "v1.2",
-              "path": "/docs/release-notes/release-notes-1.2.md"
-            },
-            {
-              "title": "v1.1",
-              "path": "/docs/release-notes/release-notes-1.1.md"
-            },
-            {
-              "title": "v1.0",
-              "path": "/docs/release-notes/release-notes-1.0.md"
-            },
-            {
-              "title": "v0.16",
-              "path": "/docs/release-notes/release-notes-0.16.md"
-            },
-            {
-              "title": "v0.15",
-              "path": "/docs/release-notes/release-notes-0.15.md"
-            },
-            {
-              "title": "v0.14",
-              "path": "/docs/release-notes/release-notes-0.14.md"
-            },
-            {
-              "title": "v0.13",
-              "path": "/docs/release-notes/release-notes-0.13.md"
-            },
-            {
-              "title": "v0.12",
-              "path": "/docs/release-notes/release-notes-0.12.md"
-            },
-            {
-              "title": "v0.11",
-              "path": "/docs/release-notes/release-notes-0.11.md"
-            },
-            {
-              "title": "v0.10",
-              "path": "/docs/release-notes/release-notes-0.10.md"
-            },
-            {
-              "title": "v0.9",
-              "path": "/docs/release-notes/release-notes-0.9.md"
-            },
-            {
-              "title": "v0.8",
-              "path": "/docs/release-notes/release-notes-0.8.md"
-            },
-            {
-              "title": "v0.7",
-              "path": "/docs/release-notes/release-notes-0.7.md"
-            },
-            {
-              "title": "v0.6",
-              "path": "/docs/release-notes/release-notes-0.6.md"
-            },
-            {
-              "title": "v0.5",
-              "path": "/docs/release-notes/release-notes-0.5.md"
-            },
-            {
-              "title": "v0.4",
-              "path": "/docs/release-notes/release-notes-0.4.md"
-            },
-            {
-              "title": "v0.3",
-              "path": "/docs/release-notes/release-notes-0.3.md"
-            },
-            {
-              "title": "v0.2",
-              "path": "/docs/release-notes/release-notes-0.2.md"
-            },
-            {
-              "title": "v0.1",
-              "path": "/docs/release-notes/release-notes-0.1.md"
-            }
-          ]
         },
         {
           "title": "Troubleshooting",
