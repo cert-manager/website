@@ -5,6 +5,13 @@ description: Google season of docs 2022 proposal
 
 ## Project Updates
 
+### 12 Aug 2022: Increased the width of the navigation menu
+
+On displays `>=1280px` the left-hand menu was too narrow to display the nested menu items clearly,
+On smaller displays the [responsive CSS](https://tailwindcss.com/docs/responsive-design) actually made the menu larger.
+So we've widened it by 1 column on displays `>=1280px`  and reduced the width of the content by 1 column to compensate.
+This makes the menu much easier to read on laptop and desktop computer screens.
+
 ### 3 August 2022: The cert-manager.io Documentation Survey is now closed
 
 Thank you to everyone who participated in our documentation survey.
