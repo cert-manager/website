@@ -347,8 +347,8 @@
               "path": "/docs/tutorials/venafi/venafi.md"
             },
             {
-              "title": "Securing Ingresses with Venafi",
-              "path": "/docs/tutorials/securing-ingress.md"
+                "title": "Syncing Secrets Across Namespaces",
+                "path": "/docs/tutorials/sync-secrets.md"
             }
           ]
         },
@@ -391,10 +391,6 @@
             {
               "title": "Writing “cert-manager”",
               "path": "/docs/faq/style.md"
-            },
-            {
-              "title": "Syncing Secrets Across Namespaces",
-              "path": "/docs/faq/sync-secrets.md"
             }
           ]
         },
