@@ -389,10 +389,6 @@
               "path": "/docs/faq/README.md"
             },
             {
-              "title": "Cluster Resource Namespace",
-              "path": "/docs/faq/cluster-resource.md"
-            },
-            {
               "title": "Writing “cert-manager”",
               "path": "/docs/faq/style.md"
             },
