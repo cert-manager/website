@@ -12,7 +12,7 @@ export default function Toc({ contents }) {
   return (
     contents.length > 0 && (
       <div className="sticky top-4">
-        <div className="flex flex-col flex-grow overflow-y-auto rounded-lg">
+        <div className="flex flex-col flex-grow rounded-lg">
           <div className="flex items-center flex-shrink-0 px-2 pb-8">
             <div className="flex-grow flex flex-col">
               <nav className="flex-1 px-2 space-y-1">
@@ -33,6 +33,7 @@ export default function Toc({ contents }) {
                           secondLevelActiveLink === item.slug
                         }
                         onSetActive={onSetActive}
+                        className="truncate"
                       />
                     )
                   })}
