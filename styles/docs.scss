@@ -121,3 +121,10 @@
   overflow-y: scroll;
   @apply shadow-lg;
 }
+
+html.no-js aside ul li ul {
+  border-left: 1px solid rgba(204, 204, 204, 0.4);
+  height: auto;
+  overflow-y: visible;
+  padding-left: 1rem;
+}
