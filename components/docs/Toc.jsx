@@ -1,6 +1,3 @@
-import TocMenuItem from './TocMenuItem'
-import useHighLightLinks from './useHighLightLinks'
-
 /*
   Toc renders the table-of-contents based on the headings found in the current document (excluding the title heading)
   It is displayed in the right-hand column when the display is >= 1280.
@@ -18,13 +15,6 @@ import useHighLightLinks from './useHighLightLinks'
 */
 
 export default function Toc({ contents, maxHeadingLevel, indentation=2 }) {
-  const {
-    firstLevelActiveLink,
-    thirdLevelActiveLink,
-    secondLevelActiveLink,
-    onSetActive
-  } = useHighLightLinks()
-
   const items = contents.filter((item) => item.depth <= maxHeadingLevel)
   const minLevel = Math.min(...items.map((item) => item.depth))
 
@@ -37,19 +27,15 @@ export default function Toc({ contents, maxHeadingLevel, indentation=2 }) {
           <ul>
             {items.map((item) => {
                 return (
-                    <TocMenuItem
-                      key={item.slug}
-                      slug={item.slug}
-                      raw={item.raw}
-                      text={item.text}
-                      isActive={
-                          firstLevelActiveLink === item.slug ||
-                              thirdLevelActiveLink === item.slug ||
-                              secondLevelActiveLink === item.slug
-                      }
-                      onSetActive={onSetActive}
-                      className={`pl-${(item.depth - minLevel) * indentation} whitespace-nowrap mb-2`}
-                    />
+                    <li className={`pl-${(item.depth - minLevel) * indentation} whitespace-nowrap mb-2`}>
+                      <a
+                        className="text-sm text-blue-900 cursor-pointer no-underline"
+                        href={`#${item.slug}`}
+                        title={item.text}
+                      >
+                        {item.text}
+                      </a>
+                    </li>
                 )
             })}
           </ul>
