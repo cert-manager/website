@@ -51,7 +51,7 @@ const DocumentationPage = ({
             </div>
           </main>
           <div className="hidden xl:block col-span-2 border-l border-gray-2/50 pl-5">
-            <Toc contents={tocHeadings} />
+            <Toc contents={tocHeadings} maxHeadingLevel={2} />
           </div>
         </div>
       </div>

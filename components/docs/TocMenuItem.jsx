@@ -7,7 +7,7 @@ const TocMenuItem = ({ slug, raw, text, isActive, onSetActive, className }) => {
     <li className={className}>
       <Link
         activeClass={activeClass}
-        className={`text-sm w-full text-blue-900 cursor-pointer inline-flex items-center py-2 leading-4 no-underline ${
+        className={`text-sm text-blue-900 cursor-pointer no-underline ${
           isActive && activeClass
         }`}
         to={slug}
@@ -17,6 +17,7 @@ const TocMenuItem = ({ slug, raw, text, isActive, onSetActive, className }) => {
         duration={500}
         delay={10}
         onSetActive={(to) => onSetActive(to, raw)}
+        title={text}
       >
         {text.replace(/`/g, '')}
       </Link>

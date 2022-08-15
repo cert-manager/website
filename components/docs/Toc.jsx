@@ -1,7 +1,23 @@
 import TocMenuItem from './TocMenuItem'
 import useHighLightLinks from './useHighLightLinks'
 
-export default function Toc({ contents }) {
+/*
+  Toc renders the table-of-contents based on the headings found in the current document (excluding the title heading)
+  It is displayed in the right-hand column when the display is >= 1280.
+
+  This component uses the following tailwind / windicss classes dynamically, so
+  we include the names here so that they can be extracted:
+
+  pl-0 pl-1 pl-2 pl-3 pl-4 pl-5 pl-6 pl-7 pl-8 pl-9 pl-10
+
+  See https://tailwindcss.com/docs/content-configuration#dynamic-class-names
+
+  @maxHeadingLevel: Headings at higher levels than this will be hidden from the TOC
+
+  @indentation: Each item will be indented by this much relative to the lowest heading level found in the TOC content.
+*/
+
+export default function Toc({ contents, maxHeadingLevel, indentation=2 }) {
   const {
     firstLevelActiveLink,
     thirdLevelActiveLink,
@@ -9,39 +25,35 @@ export default function Toc({ contents }) {
     onSetActive
   } = useHighLightLinks()
 
+  const items = contents.filter((item) => item.depth <= maxHeadingLevel)
+  const minLevel = Math.min(...items.map((item) => item.depth))
+
   return (
-    contents.length > 0 && (
-      <div className="sticky top-4">
-        <div className="flex flex-col flex-grow overflow-y-auto rounded-lg">
-          <div className="flex items-center flex-shrink-0 px-2 pb-8">
-            <div className="flex-grow flex flex-col">
-              <nav className="flex-1 px-2 space-y-1">
-                <h4 className="text-blue-900 text-xs uppercase font-bold mt-6">
-                  On this page
-                </h4>
-                <ul>
-                  {contents.map((item) => {
-                    return (
-                      <TocMenuItem
-                        key={item.slug}
-                        slug={item.slug}
-                        raw={item.raw}
-                        text={item.text}
-                        isActive={
+    items.length > 0 && (
+        <nav className="sticky top-4">
+          <h4 className="text-blue-900 text-xs uppercase font-bold mb-2">
+            On this page
+          </h4>
+          <ul>
+            {items.map((item) => {
+                return (
+                    <TocMenuItem
+                      key={item.slug}
+                      slug={item.slug}
+                      raw={item.raw}
+                      text={item.text}
+                      isActive={
                           firstLevelActiveLink === item.slug ||
-                          thirdLevelActiveLink === item.slug ||
-                          secondLevelActiveLink === item.slug
-                        }
-                        onSetActive={onSetActive}
-                      />
-                    )
-                  })}
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
+                              thirdLevelActiveLink === item.slug ||
+                              secondLevelActiveLink === item.slug
+                      }
+                      onSetActive={onSetActive}
+                      className={`pl-${(item.depth - minLevel) * indentation} whitespace-nowrap mb-2`}
+                    />
+                )
+            })}
+          </ul>
+        </nav>
     )
   )
 }
