@@ -1,5 +1,5 @@
 ---
-title: Release Notes
+title: Releases
 description: 'cert-manager release notes: Overview'
 ---
 
