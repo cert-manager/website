@@ -99,7 +99,7 @@ as well as disallows two challenges for the same DNS name and solver type
 The maximum number of challenges that can be processed at a time is 60 as of
 [`ddff78`](https://github.com/cert-manager/cert-manager/blob/ddff78f011558e64186d61f7c693edced1496afa/pkg/controller/acmechallenges/scheduler/scheduler.go#L31-L33).
 
-## Troublshooting 1
+## Troubleshooting
 
 When troubleshooting cert-manager your best friend is `kubectl describe`, this will give you information on the resources as well as recent events. It is not advised to use the logs as these are quite verbose and only should be looked at if the following steps do not provide help.
 
