@@ -1,6 +1,6 @@
 ---
 title: Configuration
-description: cert-manager configuration
+description: Learn about post-installation cert-manager configuration using Issuer, ClusterIssuer and Certificate as well as integrations with Ingress and Gateway API.
 ---
 
 After installing cert-manager you will find that some new resource types have been added to the Kubernetes API server
@@ -13,7 +13,7 @@ it will do some work and it will update the status with information about what i
 
 Here is an overview of each of these resources explaining when you should create them and what cert-manager will do in each case.
 
-## Issuer and ClusterIssuer
+## Issuer / ClusterIssuer
 
 The first thing you'll need to configure after you've installed cert-manager is an `Issuer` or a `ClusterIssuer`.
 These are resources that represent certificate authorities (CAs)
@@ -30,12 +30,14 @@ or use in an `Ingress` resource.
 
 📖 [Learn more about Certificate resources](certificate-resources.md)
 
-## Ingress
+## Ingress / Gateway
 
-There are several ways to do this:
+There are several ways for cert-manager to create SSL / TLS certificates for your Ingress,
+and it can even create certificates for Gateway API and for Openshift Routes.
 
-- [Securing Ingress Resources](./securing-ingress.md): A method to secure ingress resources
-  in your cluster.
+* 📖 [Learn more about cert-manager and Ingress Resources](./securing-ingress.md)
+* 📖 [Learn more about cert-manager and Gateway API]()
+* 📖 [Learn more about cert-manager and Openshift Routes]()
 
 ## mTLS
 
