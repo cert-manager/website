@@ -214,7 +214,7 @@
               "path": "/docs/configuration/README.md"
             },
             {
-                "title": "Issuer and ClusterIssuer",
+                "title": "Issuer / ClusterIssuer",
                 "routes": [
                     {
                         "title": "Introduction",
