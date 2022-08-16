@@ -225,18 +225,18 @@
                       "routes": [
                         {
                           "title": "Introduction",
-                          "path": "/docs/configuration/acme/README.md"
+                          "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/README.md"
                         },
                         {
                           "title": "HTTP01",
                           "routes": [
                             {
                               "title": "Introduction",
-                              "path": "/docs/configuration/acme/http01/README.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/http01/README.md"
                             },
                             {
                               "title": "External Load Balancer",
-                              "path": "/docs/configuration/acme/http01/externalloadbalancer.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/http01/externalloadbalancer.md"
                             }
                           ]
                         },
@@ -245,43 +245,43 @@
                           "routes": [
                             {
                               "title": "Introduction",
-                              "path": "/docs/configuration/acme/dns01/README.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/README.md"
                             },
                             {
                               "title": "ACMEDNS",
-                              "path": "/docs/configuration/acme/dns01/acme-dns.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/acme-dns.md"
                             },
                             {
                               "title": "Akamai",
-                              "path": "/docs/configuration/acme/dns01/akamai.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/akamai.md"
                             },
                             {
                               "title": "AzureDNS",
-                              "path": "/docs/configuration/acme/dns01/azuredns.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/azuredns.md"
                             },
                             {
                               "title": "Cloudflare",
-                              "path": "/docs/configuration/acme/dns01/cloudflare.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/cloudflare.md"
                             },
                             {
                               "title": "DigitalOcean",
-                              "path": "/docs/configuration/acme/dns01/digitalocean.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/digitalocean.md"
                             },
                             {
                               "title": "Google CloudDNS",
-                              "path": "/docs/configuration/acme/dns01/google.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/google.md"
                             },
                             {
                               "title": "RFC-2136",
-                              "path": "/docs/configuration/acme/dns01/rfc2136.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/rfc2136.md"
                             },
                             {
                               "title": "Route53",
-                              "path": "/docs/configuration/acme/dns01/route53.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/route53.md"
                             },
                             {
                               "title": "Webhook",
-                              "path": "/docs/configuration/acme/dns01/webhook.md"
+                              "path": "/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/webhook.md"
                             }
                           ]
                         }
