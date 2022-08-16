@@ -50,31 +50,31 @@ agent that is responsible for receiving certificate signing requests for all
 members of the Istio mesh, and signing them through cert-manager.
 </a>
 
-## Automated issuance and renewal of certificates to secure Ingress with TLS
+### Automated issuance and renewal of certificates to secure Ingress with TLS
 
 TODO
 
-## Fully integrated Issuers from recognized public and private Certificate Authorities
+### Fully integrated Issuers from recognized public and private Certificate Authorities
 
 TODO
 
-## Secure pod-to pod communication with mTLS using private PKI Issuers
+### Secure pod-to pod communication with mTLS using private PKI Issuers
 
 TODO
 
-## Backed by major cloud service providers and distributions
+### Backed by major cloud service providers and distributions
 
 TODO
 
-## Ephemeral Certificates Using CSI
+### Ephemeral Certificates Using CSI
 
 [docs](/docs/configuration/empheral-certificates-using-csi.md)
 
-## Policy for cert-manager Certificates
+### Policy for cert-manager Certificates
 
 [docs](/docs/configuration/approver-policy.md)
 
-## Integration with the Kubernetes CertificateSigningRequest API
+### Integration with the Kubernetes CertificateSigningRequest API
 
 [docs](/docs/features/kube-csr.md)
 
