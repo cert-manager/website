@@ -155,8 +155,8 @@ following values;
 | `csi.cert-manager.io/renew-before`             | The time to renew the certificate before expiry. Defaults to a third of the requested duration.                            | `$CERT_DURATION/3`                   | `72h`                            |
 | `csi.cert-manager.io/reuse-private-key`        | Re-use the same private when when renewing certificates.                                                                   | `false`                              | `true`                           |
 | `csi.cert-manager.io/keystore-pkcs12-enable`   | Enable writing the signed certificate chain and private key as a PKCS12 file.                                              |                                    | `true`                           |
-| `csi.cert-manager.io/keystore-pkcs12-file`     | File location to write the PKCS12 file. Requires `csi.cert-manager.io/keystore-pkcs12-file` be set to `true`.                  | `keystore.p12`                       | `tls.p12`                        |
-| `csi.cert-manager.io/keystore-pkcs12-password` | Password used to encode the PKCS12 file. Required when PKCS12 is enabled (`csi.cert-manager.io/keystore-pkcs12-file: true`). |                                    | `my-password`                    |
+| `csi.cert-manager.io/keystore-pkcs12-file`     | File location to write the PKCS12 file. Requires `csi.cert-manager.io/keystore-pkcs12-enable` be set to `true`.                  | `keystore.p12`                       | `tls.p12`                        |
+| `csi.cert-manager.io/keystore-pkcs12-password` | Password used to encode the PKCS12 file. Required when PKCS12 is enabled (`csi.cert-manager.io/keystore-pkcs12-enable: true`). |                                    | `my-password`                    |
 
 ### Variables
 
