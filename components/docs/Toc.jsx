@@ -25,9 +25,9 @@ export default function Toc({ contents, maxHeadingLevel, indentation=2 }) {
             On this page
           </h4>
           <ul>
-            {items.map((item) => {
+            {items.map((item, idx) => {
                 return (
-                    <li className={`pl-${(item.depth - minLevel) * indentation} whitespace-nowrap mb-2`}>
+                    <li className={`pl-${(item.depth - minLevel) * indentation} whitespace-nowrap mb-2`} key={idx}>
                       <a
                         className="text-sm text-blue-900 cursor-pointer no-underline"
                         href={`#${item.slug}`}
