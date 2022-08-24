@@ -397,6 +397,10 @@
             {
               "title": "Securing the istio Service Mesh using cert-manager",
               "path": "/docs/tutorials/istio-csr/istio-csr.md"
+            },
+            {
+              "title": "Syncing Secrets Across Namespaces",
+              "path": "/docs/tutorials/syncing-secrets-across-namespaces.md"
             }
           ]
         },
@@ -418,10 +422,6 @@
             {
               "title": "Cluster Resource Namespace",
               "path": "/docs/faq/cluster-resource.md"
-            },
-            {
-              "title": "Syncing Secrets Across Namespaces",
-              "path": "/docs/faq/sync-secrets.md"
             },
             {
               "title": "Troubleshooting",
