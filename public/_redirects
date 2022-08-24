@@ -159,3 +159,6 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 /docs/faq/style/  /docs/faq/
 # Moved the syncing secrets page to the tutorials section
 /docs/faq/sync-secrets/  /docs/tutorials/syncing-secrets-across-namespaces/
+
+# Moved the information about cluster-scoped resources to the Configuration > Issuers page
+/docs/faq/cluster-resource/  /docs/configuration/

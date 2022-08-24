@@ -420,10 +420,6 @@
               "path": "/docs/faq/acme.md"
             },
             {
-              "title": "Cluster Resource Namespace",
-              "path": "/docs/faq/cluster-resource.md"
-            },
-            {
               "title": "Troubleshooting",
               "path": "/docs/faq/troubleshooting.md"
             },
