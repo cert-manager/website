@@ -1,11 +1,11 @@
 ---
 title: All About the cert-manager Webhook
 description: |
-    Learn about the webhhook component of cert-manager, which validates, converts and sets default values for the cert-manager custom resources
+    Learn about the webhook component of cert-manager, which validates, converts and sets default values for the cert-manager custom resources
 ---
 
-cert-manager extends the Kubernetes API using Custom Resource Definitions
-and it installs a webhook which has three main functions:
+cert-manager extends the Kubernetes API using Custom Resource Definitions.
+It installs a webhook which has three main functions:
 
 - [Validation](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook):
   Ensures that when cert-manager resources are created or updated, they conform

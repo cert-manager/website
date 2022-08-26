@@ -10,13 +10,13 @@ Learn how to diagnose problems with the cert-manager webhook, such as connection
 
 You may encounter errors when creating cert-manager resources indicating that the webhook is unreachable.
 In this case, it is advised to first check the [compatibility](../installation/compatibility.md) of your environment
-and take necessary action outlined there.
+and take necessary actions outlined there.
 Then refer to the [known webhook problems](../concepts/webhook.md#known-problems-and-solutions).
 And finally, if you are still having problems follow the steps below.
 
 ## Check the webhook TLS certificates
 
-The Kubernetes API server will load the CA content from the webhook configuration and use that to verify the serving certificate presented by the webhook server, when the TLS connection is established.
+The Kubernetes API server will load the CA content from the webhook configuration and use that to verify the serving certificate presented by the webhook server when the TLS connection is established.
 
 Get the webhook configuration and check the `caBundle` value.
 For example, to check the `ValidatingWebhookConfiguration`:
