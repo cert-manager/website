@@ -7,8 +7,6 @@ Below is an aggregation of solutions to some issues that cert-manager users may
 face:
 
 - [TLS Terminology, including commonly misused terms](./terminology.md)
-- [Troubleshooting issuing ACME certificates](./acme.md)
-- [Failing to create resources due to Webhook](./webhook.md)
 
 ## Certificates
 

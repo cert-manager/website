@@ -73,45 +73,6 @@ you will need to check for temporary API configuration errors and retry.
 You could also add a post-installation check which performs `kubectl --dry-run` operations on the cert-manager API.
 Or you could add a post-installation check which automatically retries the [Installation Verification](../installation/verify.md) steps until they succeed.
 
-## Diagnosing Other Webhook Problems
+## Other Webhook Problems
 
-### Check the webhook TLS certificates
-
-The Kubernetes API server will load the CA content from the webhook configuration and use that to verify the serving certificate presented by the webhook server, when the TLS connection is established.
-
-Get the webhook configuration and check the `caBundle` value.
-For example, to check the `ValidatingWebhookConfiguration`:
-
-```
-kubectl get validatingwebhookconfigurations cert-manager-webhook -o yaml | grep caBundle
-```
-
-NOTE: If the value is empty there may be a problem with `cainjector`.
-The `caBundle` value is set by [`cainjector` Injecting CA data from a Secret resource](./ca-injector.md#injecting-ca-data-from-a-secret-resource).
-Check that the `cainjector` Pod is running and check the `cainjector` logs for errors.
-
-Next check that the `caBundle` has a valid CA certificate.
-
-```
-echo <CA BUNDLE VALUE> | base64 -d  | openssl x509 -in - -noout -text
-```
-
-Then compare that with the certificates that are being used by the webhook server:
-
-```
-kubectl -n cert-manager get secrets cert-manager-webhook-ca  -o yaml
-```
-
-You should be able to decode the `ca.crt` X.509 content from that secret and see that the CA matches that which we saw in the webhook configuration.
-
-You should also find that the `tls.crt` content has a certificate signed by that same CA.
-
-NOTE: This process can also be repeated for the `caBundle` field in `MutatingWebhookConfiguration` and `CustomResourceDefinition` resources.
-
-#### Temporarily work around webhook TLS problems
-
-If necessary, you can manually add / update the TLS certificates in the `ValidatingWebhookConfiguration`, `MutatingWebhookConfiguration`,
-and in each of the cert-manager `CustomResourceDefinition` resources.
-Add the `caBundle` value, copied from the `ca.crt` field of the `cert-manager-webhook-ca` Secret.
-
-NOTE: This should only be used as a temporary measure, while you investigate the root cause of `cainjector` failing to update the fields automatically.
+If you encounter any other problems with the webhook, please refer to the [webhook troubleshooting guide](../troubleshooting/webhook/).

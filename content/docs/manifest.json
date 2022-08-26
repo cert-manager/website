@@ -404,6 +404,23 @@
             }
           ]
         },
+          {
+            "title": "Troubleshooting",
+            "routes": [
+                {
+                "title": "Introduction",
+                "path": "/docs/troubleshooting/README.md"
+            },
+            {
+                "title": "Troubleshooting Issuing ACME Certificates",
+                "path": "/docs/troubleshooting/acme.md"
+            },
+            {
+                "title": "Troubleshooting webhook",
+                "path": "/docs/troubleshooting/webhook.md"
+            }
+            ]
+        },
         {
           "title": "FAQ",
           "routes": [
@@ -414,18 +431,6 @@
             {
               "title": "TLS Terminology",
               "path": "/docs/faq/terminology.md"
-            },
-            {
-              "title": "Troubleshooting Issuing ACME Certificates",
-              "path": "/docs/faq/acme.md"
-            },
-            {
-              "title": "Troubleshooting",
-              "path": "/docs/faq/troubleshooting.md"
-            },
-            {
-              "title": "Troubleshooting webhook",
-              "path": "/docs/faq/webhook.md"
             }
           ]
         },

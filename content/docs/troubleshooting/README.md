@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: 'cert-manager FAQ: Troubleshooting'
+description: 'Troubleshooting'
 ---
 
 When troubleshooting cert-manager your best friend is `kubectl describe`, this will give you information on the resources as well as recent events. It is not advised to use the logs as these are quite verbose and only should be looked at if the following steps do not provide help.
@@ -18,12 +18,12 @@ There are several resources that are involved in requesting a certificate.
   (  +---------+  )
          |                                                     |
          |   +-------------+      +--------------------+       |  +-------+       +-----------+
-         |-> | Certificate |----> | CertificateRequest | ----> |  | Order | ----> | Challenge | 
+         |-> | Certificate |----> | CertificateRequest | ----> |  | Order | ----> | Challenge |
              +-------------+      +--------------------+       |  +-------+       +-----------+
                                                                |
 ```
 
-The cert-manager flow all starts at a `Certificate` resource, you can create this yourself or your Ingress resource will do this for you if you have the [correct annotations](../usage/ingress.md) set. 
+The cert-manager flow all starts at a `Certificate` resource, you can create this yourself or your Ingress resource will do this for you if you have the [correct annotations](../usage/ingress.md) set.
 
 ### 1. Checking the Certificate resource
 First we have to check if we have a `Certificate` resource created in our namespace. We can get these using `kubectl get certificate`.
@@ -87,7 +87,7 @@ Events:
   Normal  OrderCreated  8m20s  cert-manager  Created Order resource example-tls-fqtfg-1165244518
 ```
 
-Here we will see any issue regarding the Issuer configuration as well as Issuer responses. 
+Here we will see any issue regarding the Issuer configuration as well as Issuer responses.
 
 ### 3. Check the issuer state
 If in the above steps you saw an issuer not ready error you can do the same steps again for (cluster)issuer resources:
