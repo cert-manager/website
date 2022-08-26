@@ -5,8 +5,13 @@ description: |
 ---
 
 In this section, you will learn troubleshooting techniques that will help you find the root cause if your Certificate fails to be issued or renewed.
-You will learn how to diagnose problems with the cert-manager webhook.
-And you will learn more about how the ACME issuer works and how to diagnose problems with it.
+
+This section also includes the following guides:
+
+* [Troubleshooting Problems with ACME / Let's Encrypt Certificates](./acme.md):
+  Learn more about how the ACME issuer works and how to diagnose problems with it.
+* [Troubleshooting Problems with the Webhook](./webhook.md):
+  Learn how to diagnose problems with the cert-manager webhook.
 
 ## Overview
 
