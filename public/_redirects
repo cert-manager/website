@@ -163,3 +163,9 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Moved the information about cluster-scoped resources to the Configuration > Issuers page
 /docs/faq/cluster-resource/  /docs/configuration/ 301!
+
+# Moved troubleshooting content out of the FAQ section and into a dedicated
+# troubleshooting section
+/docs/faq/troubleshooting/ /docs/troubleshooting/ 301!
+/docs/faq/webhook/ /docs/troubleshooting/webhook/ 301!
+/docs/faq/acme/ /docs/troubleshooting/acme/ 301!
