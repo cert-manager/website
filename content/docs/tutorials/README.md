@@ -22,6 +22,8 @@ for you to learn from. Take a look!
   certificate.
 - [Securing an Istio service mesh with cert-manager](./istio-csr/istio-csr.md): Tutorial for
   securing an Istio service mesh using a cert-manager issuer.
+- [Syncing Secrets Across Namespaces](./syncing-secrets-across-namespaces.md):
+  Learn how to synchronize Kubernetes Secret resources across namespaces using extensions such as: reflector, kubed and kubernetes-replicator.
 
 
 ### External Tutorials

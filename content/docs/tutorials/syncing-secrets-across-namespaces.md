@@ -1,6 +1,8 @@
 ---
 title: Syncing Secrets Across Namespaces
-description: 'cert-manager FAQ: Syncing secrets across namespaces'
+description: |
+    Learn how to synchronize Kubernetes Secret resources across namespaces
+    using extensions such as: reflector, kubed and kubernetes-replicator.
 ---
 
 It may be required for multiple components across namespaces to consume the same
@@ -8,7 +10,7 @@ It may be required for multiple components across namespaces to consume the same
 do this is to use extensions such as:
   - [reflector](https://github.com/emberstack/kubernetes-reflector) with support
    for auto secret reflection
-  - [kubed](https://github.com/appscode/kubed) with its 
+  - [kubed](https://github.com/appscode/kubed) with its
   [secret syncing feature](https://appscode.com/products/kubed/v0.11.0/guides/config-syncer/intra-cluster/)
   - [kubernetes-replicator](https://github.com/mittwald/kubernetes-replicator) secret replication
 
@@ -35,7 +37,7 @@ spec:
 
 ## Syncing arbitrary secrets across namespaces using extensions
 
-In order for the target Secret to be synced, you can use the `secretTemplate` field 
+In order for the target Secret to be synced, you can use the `secretTemplate` field
 for annotating the generated secret with the extension specific annotation (See [CertificateSecretTemplate]).
 
 
@@ -60,7 +62,7 @@ spec:
     group: cert-manager.io
   secretTemplate:
     annotations:
-      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"  
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
       reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "dev,staging,prod"  # Control destination namespaces
       reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true" # Auto create reflection for matching namespaces
       reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "dev,staging,prod" # Control auto-reflection namespaces

@@ -151,3 +151,15 @@ https://docs.cert-manager.io/en/release-0.16/* https://cert-manager.io/docs/rele
 https://docs.cert-manager.io/en/release-* https://cert-manager.io/docs/release-notes/release-notes-:splat 301!
 https://docs.cert-manager.io https://cert-manager.io/docs 301!
 https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
+
+
+# Redirects arising from the Season-of-Docs-2022 re-organization of menu items and pages
+#
+# Moved the writing cert-manager content into the main FAQ page.
+/docs/faq/style/  /docs/faq/ 301!
+
+# Moved the syncing secrets page to the tutorials section
+/docs/faq/sync-secrets/  /docs/tutorials/syncing-secrets-across-namespaces/ 301!
+
+# Moved the information about cluster-scoped resources to the Configuration > Issuers page
+/docs/faq/cluster-resource/  /docs/configuration/ 301!
