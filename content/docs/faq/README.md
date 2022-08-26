@@ -8,8 +8,6 @@ face:
 
 - [TLS Terminology, including commonly misused terms](./terminology.md)
 - [Troubleshooting issuing ACME certificates](./acme.md)
-- [How to change the Cluster Resource Namespace](./cluster-resource.md)
-- [How to sync secrets across namespaces](./sync-secrets.md)
 - [Failing to create resources due to Webhook](./webhook.md)
 
 ## Certificates
