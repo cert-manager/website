@@ -1,19 +1,20 @@
 ---
-title: Troubleshooting webhook
-description: Webhook
+title: Troubleshooting Problems with the Webhook
+description: |
+    Learn how to diagnose problems with the cert-manager webhook, such as connection errors or invalid or missing TLS certificate errors
 ---
 
-You may encounter errors when creating resources that the webhook is unreachable
-and as such no cert-manager resources can be created or updated. In this case,
-it is advised to first check the
-[compatibility](../installation/compatibility.md) of
-your environment and take necessary action outlined there.
+Learn how to diagnose problems with the cert-manager webhook, such as connection errors or invalid or missing TLS certificate errors.
 
+## Overview
+
+You may encounter errors when creating cert-manager resources indicating that the webhook is unreachable.
+In this case, it is advised to first check the [compatibility](../installation/compatibility.md) of your environment
+and take necessary action outlined there.
 Then refer to the [known webhook problems](../concepts/webhook.md#known-problems-and-solutions).
-
 And finally, if you are still having problems follow the steps below.
 
-### Check the webhook TLS certificates
+## Check the webhook TLS certificates
 
 The Kubernetes API server will load the CA content from the webhook configuration and use that to verify the serving certificate presented by the webhook server, when the TLS connection is established.
 
@@ -46,7 +47,7 @@ You should also find that the `tls.crt` content has a certificate signed by that
 
 NOTE: This process can also be repeated for the `caBundle` field in `MutatingWebhookConfiguration` and `CustomResourceDefinition` resources.
 
-#### Temporarily work around webhook TLS problems
+## Temporarily work around webhook TLS problems
 
 If necessary, you can manually add / update the TLS certificates in the `ValidatingWebhookConfiguration`, `MutatingWebhookConfiguration`,
 and in each of the cert-manager `CustomResourceDefinition` resources.

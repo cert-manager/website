@@ -412,7 +412,7 @@
                 "path": "/docs/troubleshooting/README.md"
             },
             {
-                "title": "Troubleshooting Issuing ACME Certificates",
+                "title": "Troubleshooting ACME / Let's Encrypt Certificates",
                 "path": "/docs/troubleshooting/acme.md"
             },
             {

@@ -1,7 +1,14 @@
 ---
 title: Troubleshooting
-description: 'Troubleshooting'
+description: |
+    Learn how to debug common problems with cert-manager
 ---
+
+In this section, you will learn troubleshooting techniques that will help you find the root cause if your Certificate fails to be issued or renewed.
+You will learn how to diagnose problems with the cert-manager webhook.
+And you will learn more about how the ACME issuer works and how to diagnose problems with it.
+
+## Overview
 
 When troubleshooting cert-manager your best friend is `kubectl describe`, this will give you information on the resources as well as recent events. It is not advised to use the logs as these are quite verbose and only should be looked at if the following steps do not provide help.
 

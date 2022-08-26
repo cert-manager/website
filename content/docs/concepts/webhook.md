@@ -1,31 +1,33 @@
 ---
-title: Webhook
-description: 'cert-manager core concepts: Webhook'
+title: All About the cert-manager Webhook
+description: |
+    Learn about the webhhook component of cert-manager, which validates, converts and sets default values for the cert-manager custom resources
 ---
 
-cert-manager makes use of extending the Kubernetes API server using a Webhook
-server to provide [dynamic admission
-control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)
-over cert-manager resources. This means that cert-manager benefits from most of
-the same behavior that core Kubernetes resource have. The webhook has three
-main functions:
+cert-manager extends the Kubernetes API using Custom Resource Definitions
+and it installs a webhook which has three main functions:
 
-- [`ValidatingAdmissionWebhook`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook):
+- [Validation](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook):
   Ensures that when cert-manager resources are created or updated, they conform
   to the rules of the API. This validation is more in depth than for example
   ensuring resources conform to the OpenAPI schema, but instead contains logic such as
   not allowing to specify more than one `Issuer` type per `Issuer` resource. The
   validating admission is always called and will respond with a success or
   failed response.
-- [`MutatingAdmissionWebhook`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook):
+- [Mutation / Defaulting](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook):
   Changes the contents of resources during create and update operations, for
   example to set default values.
-- [`CustomResourceConversionWebhook`](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#webhook-conversion):
+- [Conversion](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#webhook-conversion):
   The webhook is also responsible for implementing a conversion over versions
   in the cert-manager `CustomResources` (`cert-manager.io`). This means that
   multiple API versions can be supported simultaneously; from `v1alpha2` through to `v1`.
   This makes it possible to rely on a particular version of our
   configuration schema.
+
+> ℹ️ This is known as Dynamic Admission Control.
+> Read more about [Dynamic Admission Control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) in the Kubernetes documentation.
+
+## Overview
 
 The webhook component is deployed as another pod that runs alongside the main
 cert-manager controller and CA injector components.
@@ -73,6 +75,6 @@ you will need to check for temporary API configuration errors and retry.
 You could also add a post-installation check which performs `kubectl --dry-run` operations on the cert-manager API.
 Or you could add a post-installation check which automatically retries the [Installation Verification](../installation/verify.md) steps until they succeed.
 
-## Other Webhook Problems
+### Other Webhook Problems
 
 If you encounter any other problems with the webhook, please refer to the [webhook troubleshooting guide](../troubleshooting/webhook/).
