@@ -169,3 +169,6 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 /docs/faq/troubleshooting/ /docs/troubleshooting/ 301!
 /docs/faq/webhook/ /docs/troubleshooting/webhook/ 301!
 /docs/faq/acme/ /docs/troubleshooting/acme/ 301!
+
+# Moved FAQ terminology page to a new reference section
+/docs/faq/terminology/ /docs/reference/tls-terminology/ 301!

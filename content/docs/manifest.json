@@ -423,16 +423,7 @@
         },
         {
           "title": "FAQ",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/docs/faq/README.md"
-            },
-            {
-              "title": "TLS Terminology",
-              "path": "/docs/faq/terminology.md"
-            }
-          ]
+          "path": "/docs/faq/README.md"
         },
         {
           "title": "Contributing",
@@ -671,38 +662,48 @@
             }
           ]
         },
-        {
-          "title": "CLI reference",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/docs/cli/README.md"
+          {
+            "title": "Reference",
+            "routes": [
+                {
+                "title": "TLS Terminology",
+                "path": "/docs/reference/tls-terminology.md"
             },
-            {
-              "title": "acmesolver",
-              "path": "/docs/cli/acmesolver.md"
+
+                {
+                "title": "Components",
+                "routes": [
+                    {
+                    "title": "Introduction",
+                    "path": "/docs/cli/README.md"
+                },
+                    {
+                    "title": "acmesolver",
+                    "path": "/docs/cli/acmesolver.md"
+                },
+                    {
+                    "title": "cainjector",
+                    "path": "/docs/cli/cainjector.md"
+                },
+                    {
+                    "title": "cmctl",
+                    "path": "/docs/cli/cmctl.md"
+                },
+                    {
+                    "title": "controller",
+                    "path": "/docs/cli/controller.md"
+                },
+                    {
+                    "title": "webhook",
+                    "path": "/docs/cli/webhook.md"
+                }
+                ]
             },
-            {
-              "title": "cainjector",
-              "path": "/docs/cli/cainjector.md"
-            },
-            {
-              "title": "cmctl",
-              "path": "/docs/cli/cmctl.md"
-            },
-            {
-              "title": "controller",
-              "path": "/docs/cli/controller.md"
-            },
-            {
-              "title": "webhook",
-              "path": "/docs/cli/webhook.md"
+                {
+                "title": "API",
+                "path": "/docs/reference/api-docs.md"
             }
-          ]
-        },
-        {
-          "title": "API reference",
-          "path": "/docs/reference/api-docs.md"
+            ]
         }
       ]
     }

@@ -1,7 +1,12 @@
 ---
 title: TLS Terminology
-description: 'cert-manager FAQ: TLS terminology'
+description: |
+    Learn about the TLS terminology used in the cert-manager documentation such as publicly trusted, self-signed, root, intermediate and leaf certificate
 ---
+
+Learn about the TLS terminology used in the cert-manager documentation such as publicly trusted, self-signed, root, intermediate and leaf certificate.
+
+## Overview
 
 With TLS being so widely deployed, terminology can sometimes get confused or be used to mean different things, and that reality
 combined with the complexity of TLS can lead to serious misunderstandings and confusion.
@@ -11,6 +16,8 @@ For further reference, you might want to check out some relevant RFCs:
 - [RFC 5246: TLS 1.2](https://datatracker.ietf.org/doc/html/rfc5246)
 - [RFC 8446: TLS 1.3](https://datatracker.ietf.org/doc/html/rfc8446)
 - [RFC 5280: X.509](https://datatracker.ietf.org/doc/html/rfc5280)
+
+## Definitions
 
 ### What does "publicly trusted" mean?
 
