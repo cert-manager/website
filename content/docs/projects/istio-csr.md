@@ -21,14 +21,6 @@ Following the guide is the best way to see istio-csr in action.
 If you've already seen istio-csr in action or if you're experienced with running
 Istio and just want quick installation instructions, read on for more details.
 
-## Getting Started Guide For istio-csr
-
-We have [a guide](../tutorials/istio-csr/istio-csr.md) for setting up istio-csr in a fresh [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) cluster.
-
-Following the guide is the best way to see istio-csr in action.
-
-If you've already seen istio-csr in action or if you're experienced with running Istio and just want quick installation instructions, read on for more details.
-
 ## Lower-Level Details (For Experienced Istio Users)
 
 ⚠️  The [getting started](../tutorials/istio-csr/istio-csr.md) guide is a better place if you just want to try istio-csr out!
