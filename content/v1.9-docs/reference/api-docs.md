@@ -1,7 +1,10 @@
 ---
-title: API reference docs
-description: cert-manager API reference documentation
+title: API Reference
+description: >-
+  Learn about the cert-manager API which comprises Custom Resources such as
+  Certificate, CertificateRequest, Issuer and ClusterIssuer
 ---
+Learn about the cert-manager API which comprises Custom Resources such as Certificate, CertificateRequest, Issuer and ClusterIssuer.
 <p>Packages:</p>
 <ul>
   <li>
@@ -5642,5 +5645,5 @@ Resource Types:
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>feb7979cb</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>4486c01f7</code>. </em>
 </p>
