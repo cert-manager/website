@@ -3,6 +3,8 @@ title: Deploy cert-manager on Google Kubernetes Engine (GKE) and create SSL cert
 description: Learn how to deploy cert-manager on Google Kubernetes (GKE) Engine and then configure it to sign SSL certificates using Let's Encrypt
 ---
 
+*Last Verified: 15 July 2022*
+
 In this tutorial you will learn how to deploy and configure cert-manager on Google Kubernetes Engine (GKE).
 You will learn how to configure cert-manager to get a signed SSL certificate from Let's Encrypt,
 using an [HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/#http-01-challenge).
