@@ -4,7 +4,7 @@ description: |
     Learn about the TLS terminology used in the cert-manager documentation such as publicly trusted, self-signed, root, intermediate and leaf certificate
 ---
 
-Learn about the TLS terminology used in the cert-manager documentation such as publicly trusted, self-signed, root, intermediate and leaf certificate.
+Learn about the TLS terminology used in the cert-manager documentation such as `publicly trusted`, `self-signed`, `root`, `intermediate` and `leaf` _certificate_.
 
 ## Overview
 
@@ -19,7 +19,9 @@ For further reference, you might want to check out some relevant RFCs:
 
 ## Definitions
 
-### What does "publicly trusted" mean?
+### `publicly trusted`
+
+What does "publicly trusted" mean?
 
 Broadly speaking, a "publicly trusted" certificate is one that you can use on the Internet and expect
 that most reasonably up-to-date computers will be able to verify it using their system trust store.

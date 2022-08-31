@@ -1,7 +1,7 @@
 {{ define "packages" }}
 ---
 title: "API Reference"
-description: "Learn about the cert-manager API which comprises Custom Resources such as Certificate, CertificateRequest, Issuer and ClusterIssuer"
+description: "Learn about the cert-manager API which includes Custom Resources such as Certificate, CertificateRequest, Issuer and ClusterIssuer."
 ---
 
 Learn about the cert-manager API which comprises Custom Resources such as Certificate, CertificateRequest, Issuer and ClusterIssuer.
