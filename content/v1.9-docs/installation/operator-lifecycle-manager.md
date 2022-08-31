@@ -230,7 +230,7 @@ cert-manager-797979cbdb-g444r             [-v=2 --cluster-resource-namespace=$(P
 
 Below is the processes for uninstalling cert-manager on OpenShift.
 
-> ⚠️ To uninstall cert-manger you should always use the same process for
+> ⚠️ To uninstall cert-manager you should always use the same process for
 > installing but in reverse. Deviating from the following process can cause
 > issues and potentially broken states. Please ensure you follow the below steps
 > when uninstalling to prevent this happening.

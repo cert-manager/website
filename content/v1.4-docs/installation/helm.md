@@ -103,7 +103,7 @@ $ helm template \
 ```
 
 ## Uninstalling
-> **Warning**: To uninstall cert-manger you should always use the same process for
+> **Warning**: To uninstall cert-manager you should always use the same process for
 > installing but in reverse. Deviating from the following process whether
 > cert-manager has been installed from static manifests or Helm can cause issues
 > and potentially broken states. Please ensure you follow the below steps when
@@ -137,7 +137,7 @@ Next, delete the cert-manager namespace:
 $ kubectl delete namespace cert-manager
 ```
 
-Finally, delete the cert-manger
+Finally, delete the cert-manager
 [`CustomResourceDefinitions`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 using the link to the version `vX.Y.Z` you installed:
 > **Warning**: This command will also remove installed cert-manager CRDs. All

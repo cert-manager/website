@@ -76,4 +76,4 @@ git commit --allow-empty --signoff --message="bootstrapping DCO signoff for past
 ## After Donation
 
 Code files in the donated repository must be updated to include the relevant 
-[cert-manger boilerplate](https://github.com/cert-manager/cert-manager/blob/master/hack/boilerplate/boilerplate.go.txt)
+[cert-manager boilerplate](https://github.com/cert-manager/cert-manager/blob/master/hack/boilerplate/boilerplate.go.txt)

@@ -44,7 +44,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
 ```
 
 ## Uninstalling
-> **Warning**: To uninstall cert-manger you should always use the same process for
+> **Warning**: To uninstall cert-manager you should always use the same process for
 > installing but in reverse. Deviating from the following process whether
 > cert-manager has been installed from static manifests or Helm can cause issues
 > and potentially broken states. Please ensure you follow the below steps when

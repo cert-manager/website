@@ -65,7 +65,7 @@ following conditions:
     [2]: https://console.cloud.google.com/?project=cert-manager-release
     ```
 
-This guide applies for versions of cert-manager released using `make`, which should be every version from cert-manger 1.8 and later.
+This guide applies for versions of cert-manager released using `make`, which should be every version from cert-manager 1.8 and later.
 
 **If you need to release a version of cert-manager 1.7 or earlier** see [older releases](#older-releases).
 
@@ -262,7 +262,7 @@ page if a step is missing or if it is outdated.
        with the following command:
 
         ```sh
-        # Must be run from the cert-manger folder.
+        # Must be run from the cert-manager folder.
         export GITHUB_TOKEN=*your-token*
         git fetch origin $BRANCH:$BRANCH
         export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
