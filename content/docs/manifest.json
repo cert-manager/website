@@ -665,13 +665,17 @@
           {
             "title": "Reference",
             "routes": [
+            {
+                "title": "Introduction",
+                "path": "/docs/reference/README.md"
+            },
                 {
                 "title": "TLS Terminology",
                 "path": "/docs/reference/tls-terminology.md"
             },
 
                 {
-                "title": "Components",
+                "title": "Components / Docker Images",
                 "routes": [
                     {
                     "title": "Introduction",
@@ -700,7 +704,7 @@
                 ]
             },
                 {
-                "title": "API",
+                "title": "API Reference",
                 "path": "/docs/reference/api-docs.md"
             }
             ]
