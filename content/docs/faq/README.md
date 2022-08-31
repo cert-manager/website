@@ -1,12 +1,19 @@
 ---
-title: FAQ
-description: 'cert-manager FAQ: Overview / General Questions'
+title: Frequently Asked Questions (FAQ)
+description: Find answers to some frequently asked questions about cert-manager
 ---
 
-Below is an aggregation of solutions to some issues that cert-manager users may
-face:
+On this page you will find answers to some frequently asked questions about cert-manager.
 
-- [TLS Terminology, including commonly misused terms](./terminology.md)
+## Terminology
+
+### What does `publicly trusted` and `self-signed` mean?
+
+These terms are defined in the [TLS Terminology page](../reference/tls-terminology.md).
+
+### What do the terms `root`, `intermediate` and `leaf` _certificate_ mean?
+
+These terms are defined in the [TLS Terminology page](../reference/tls-terminology.md).
 
 ## Certificates
 
