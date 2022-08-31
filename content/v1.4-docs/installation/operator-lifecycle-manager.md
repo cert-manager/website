@@ -94,7 +94,7 @@ If you have any issues with your installation, please refer to the
 
 Below is the processes for uninstalling cert-manager on OpenShift.
 
-> **Warning**: To uninstall cert-manger you should always use the same process for
+> **Warning**: To uninstall cert-manager you should always use the same process for
 > installing but in reverse. Deviating from the following process can cause
 > issues and potentially broken states. Please ensure you follow the below steps
 > when uninstalling to prevent this happening.

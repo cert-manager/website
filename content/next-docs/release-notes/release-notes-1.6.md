@@ -79,7 +79,7 @@ This means if your deployment manifests contain any of these API versions, you w
 
 ⛔️  If you are upgrading cert-manager on a cluster which has previously had
 cert-manager < `v1.0.0`, you will need to ensure that all cert-manager custom
-resources are stored in `etcd` at `v1` version and that cert-manger CRDs do not
+resources are stored in `etcd` at `v1` version and that cert-manager CRDs do not
 reference the deprecated APIs **before you upgrade to `v1.6`**.
 
 This is explained in more detail in the [Upgrading existing cert-manager resources](../installation/upgrading/remove-deprecated-apis.md#upgrading-existing-cert-manager-resources)

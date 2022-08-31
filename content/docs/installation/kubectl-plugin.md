@@ -1,6 +1,6 @@
 ---
 title: Kubectl plugin
-description: 'cert-manger installation: Using kubectl'
+description: 'cert-manager installation: Using kubectl'
 ---
 
 ## Installing using the kubectl plugin

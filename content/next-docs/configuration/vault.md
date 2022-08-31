@@ -50,7 +50,7 @@ spec:
 ## Authenticating
 
 In order to request signing of certificates by Vault, the issuer must be able to
-properly authenticate against it. cert-manger provides multiple approaches to
+properly authenticate against it. cert-manager provides multiple approaches to
 authenticating to Vault which are detailed below.
 
 ### Authenticating via an AppRole

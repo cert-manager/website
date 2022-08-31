@@ -63,7 +63,7 @@ node, containing that Pods information as well as the attributes detailed from
 the in-line volume attributes. From this, the driver will generate a private key
 as well as a certificate request based upon that key using information built
 from the volume attributes. The driver will create a `CertificateRequest`
-resource in the same namespace in the Pod that, if valid, cert-manger will
+resource in the same namespace in the Pod that, if valid, cert-manager will
 return a signed certificate.
 
 The resulting signed certificate and generated key will be written to that

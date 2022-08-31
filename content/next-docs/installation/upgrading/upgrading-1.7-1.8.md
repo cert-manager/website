@@ -32,7 +32,7 @@ controller with the flag
 --feature-gates=ServerSideApply=true
 ```
 
-Then you need to take action before upgrading to cert-manger 1.8. You will have
+Then you need to take action before upgrading to cert-manager 1.8. You will have
 to make sure that there are no Challenge resources currently in the cluster. If
 there are some, you will need to manually delete them once they are in a 'valid'
 state.
