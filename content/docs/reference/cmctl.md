@@ -1,14 +1,10 @@
 ---
-title: cmctl
-description: 'cert-manager usage: cmctl'
+title: The cert-manager Command Line Tool (cmctl)
+description: |
+    cmctl is a command line tool that can help you manage cert-manager and its resources inside your cluster
 ---
 
-`cmctl` is a CLI tool that can help you to manage cert-manager resources inside
-your cluster.
-
-While also available as a [kubectl plugin](./kubectl-plugin.md), it is recommended
-to use as a stand alone binary as this allows the use of command
-[auto-completion](#completion).
+`cmctl` is a command line tool that can help you manage cert-manager and its resources inside your cluster.
 
 ## Installation
 
@@ -56,6 +52,9 @@ Flags:
 
 Use "cmctl [command] --help" for more information about a command.
 ```
+
+> ℹ️ There is also a [legacy kubectl plugin](#legacy-kubectl-plugin), but this is no longer recommended
+> because the stand alone `cmctl` binary provides better [auto-completion](#completion).
 
 ## Commands
 
@@ -268,3 +267,13 @@ Resources](https://cert-manager.io/docs/installation/upgrading/remove-deprecated
 ```bash
 $ cmctl upgrade migrate-api-version --qps 5 --burst 10
 ```
+
+## Legacy kubectl plugin
+
+While the kubectl plugin is supported, it is recommended to use `cmctl` as this enables a better experience via tab auto-completion.
+
+To install the plugin you need the `kubectl-cert-manager.tar.gz` file for the platform you're using,
+these can be found on our [GitHub releases page](https://github.com/cert-manager/cert-manager/releases).
+In order to use the kubectl plugin you need its binary to be accessible under the name `kubectl-cert_manager` in your `$PATH`.
+
+You can run `kubectl cert-manager help` to test the plugin is set up properly.
