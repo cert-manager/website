@@ -27,19 +27,15 @@
               "path": "/docs/installation/compatibility.md"
             },
             {
-              "title": "Kubectl apply",
+              "title": "kubectl apply",
               "path": "/docs/installation/kubectl.md"
-            },
-            {
-              "title": "cmctl",
-              "path": "/docs/installation/cmctl.md"
             },
             {
               "title": "Helm",
               "path": "/docs/installation/helm.md"
             },
             {
-              "title": "OLM",
+              "title": "OperatorHub (OLM)",
               "path": "/docs/installation/operator-lifecycle-manager.md"
             },
             {

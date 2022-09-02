@@ -1,11 +1,9 @@
 ---
 title: Installation
-description: 'cert-manager installation: Overview'
+description: Learn about the various ways you can install cert-manager and how to choose between them
 ---
 
-Below you will find details on various scenarios we aim to support and that are
-compatible with the documentation on this website. Furthermore, the most applicable
-install methods are listed below for each of the situations.
+Learn about the various ways you can install cert-manager and how to choose between them.
 
 ## Default static install
 
@@ -17,24 +15,27 @@ The default static configuration can be installed as follows:
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml
 ```
 
-More information on this install method [can be found here](./kubectl.md).
+📖 Read more about [installing cert-manager using kubectl apply and static manifests](./kubectl.md).
 
 ## Getting started
 
 > You quickly want to learn how to use cert-manager and what it can be used for.
 
-We recommend [cmctl x install](./cmctl.md) to quickly install cert-manager and [interact with cert-manager resources](../usage/cmctl.md) from the command line.
+📖 **kubectl apply**: For new users we recommend [installing cert-manager using kubectl apply and static manifests](./kubectl.md) to quickly install cert-manager.
 
-Or if you prefer Helm or if you don't want to install `cmctl`, you can [use helm to install cert-manager](./helm.md).
+📖 **helm**: You can [use helm to install cert-manager](./helm.md) and this also allows you to customize the installation if necessary.
 
-In case you are running on an OpenShift cluster, consider installing via [cert-manager on OperatorHub.io](./operator-lifecycle-manager.md).
+📖 **OperatorHub**: If you have an OpenShift cluster, consider [installing cert-manager via OperatorHub](./operator-lifecycle-manager.md),
+which you can do from the OpenShift web console.
+
+🚧 **cmctl**: Try the [experimental `cmctl x install` command](../reference/cmctl.md#install) to quickly install cert-manager.
 
 ## Continuous deployment
 
 > You know how to configure your cert-manager setup and want to automate this.
 
-You can use either `helm template` or `cmctl x install --dry-run` to generate customized cert-manager installation manifests.
-See [Output YAML using cmctl x install](./cmctl.md#output-yaml) and [Output YAML using helm template](./helm.md#output-yaml) for more details.
-This templated cert-manager manifest can be piped into your preferred deployment tool.
+📖 **helm**: You can use [the cert-manager Helm chart](./helm.md) directly with systems like Flux, ArgoCD and Anthos.
 
-In case you are using Helm for automation, cert-manager [supports installing using Helm](./helm.md).
+📖 **helm template**: You can use `helm template` to generate customized cert-manager installation manifests.
+See [Output YAML using helm template](./helm.md#output-yaml) for more details.
+This templated cert-manager manifest can be piped into your preferred deployment tool.

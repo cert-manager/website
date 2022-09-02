@@ -178,4 +178,7 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 /docs/usage/kubectl-plugin/ /docs/reference/cmctl/ 301!
 
 # Removed the separate kubectl-plugin installation page
-/docs/installation/kubectl-plugin/ /docs/installation/cmctl/ 301!
+/docs/installation/kubectl-plugin/ /docs/reference/cmctl/ 301!
+
+# Demoted the cmctl x install page
+/docs/installation/cmctl/ /docs/reference/cmctl/ 301!

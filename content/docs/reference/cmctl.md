@@ -249,7 +249,55 @@ signed certificate to the local file `<name>.crt`, or specified by `-c,
 $ cmctl x create csr -f my-cert.yaml my-req -w
 ```
 
-#### Upgrade
+#### Install
+
+```bash
+cmctl x install
+```
+
+The command makes sure that the required `CustomResourceDefinitions` are installed together with the cert-manager, cainjector and webhook components.
+Under the hood, a procedure similar to the [Helm install procedure](../install/helm.md#steps) is used.
+
+You can also use `cmctl x install` to customize the installation of cert-manager.
+
+The example below shows how to tune the cert-manager installation by overwriting the default Helm values:
+
+```bash
+cmctl x install \
+    --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
+    --set webhook.timeoutSeconds=4s   # Example: changing the wehbook timeout using a Helm parameter
+```
+
+You can find [a full list of the install parameters on cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager#configuration). These are the same parameters that are available when using the Helm chart.
+Once you have deployed cert-manager, you can [verify](../install/verify.md) the installation.
+
+The CLI also allows the user to output the templated manifest to `stdout`, instead of installing the manifest on the cluster.
+
+```bash
+cmctl x install --dry-run > cert-manager.custom.yaml
+```
+
+#### Uninstall
+
+```bash
+$ cmctl x uninstall --help
+This command uninstalls any Helm-managed release of cert-manager.
+
+The CRDs will be deleted if you installed cert-manager with the option --set CRDs=true.
+
+Most of the features supported by 'helm uninstall' are also supported by this command.
+
+Some example uses:
+	$ cmctl x uninstall
+or
+	$ cmctl x uninstall --namespace my-cert-manager
+or
+	$ cmctl x uninstall --dry-run
+or
+	$ cmctl x uninstall --no-hooks
+```
+
+### Upgrade
 
 Tools that assist in upgrading cert-manager
 
