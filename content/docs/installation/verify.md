@@ -5,7 +5,7 @@ description: 'cert-manager installation: Verifying an upgrade was successful'
 
 ## Check cert-manager API
 
-First, make sure that [cmctl is installed](../usage/cmctl.md#installation).
+First, make sure that [cmctl is installed](../reference/cmctl.md#installation).
 
 cmctl performs a dry-run certificate creation check against the Kubernetes cluster.
 If successful, the message `The cert-manager API is ready` is displayed.

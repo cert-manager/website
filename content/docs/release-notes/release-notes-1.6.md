@@ -73,7 +73,7 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 Following their deprecation in version 1.4, the cert-manager API versions `v1alpha2, v1alpha3, and v1beta1` are no longer served.
 
-This means if your deployment manifests contain any of these API versions, you will not be able to deploy them after upgrading. Our new `cmctl` utility or old `kubectl cert-manager` plugin can [convert](../usage/cmctl.md#convert) old manifests to `v1` for you.
+This means if your deployment manifests contain any of these API versions, you will not be able to deploy them after upgrading. Our new `cmctl` utility or old `kubectl cert-manager` plugin can [convert](../reference/cmctl.md#convert) old manifests to `v1` for you.
 
 <div className="warning">
 
@@ -110,7 +110,7 @@ The cert-manager kubectl plugin has been redesigned as a [standalone utility: `c
 
 While the kubectl plugin functionality remains intact, using `cmctl` allows for full tab completion.
 
-[cmctl]: ../usage/cmctl.md
+[cmctl]: ../reference/cmctl.md
 
 #### Supply Chain Security
 

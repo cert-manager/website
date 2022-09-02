@@ -624,7 +624,7 @@ Events:
 
 ### Use cmctl to show the state of a Certificate and its associated resources
 
-> ℹ️ [Install `cmctl`](../usage/cmctl) if you have not already done so.
+> ℹ️ [Install `cmctl`](../reference/cmctl) if you have not already done so.
 
 When you create a Certificate, cert-manager will create a collection of temporary resources
 which each contain information about the status of certificate signing process.

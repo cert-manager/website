@@ -118,4 +118,4 @@ cert-manager _including the CRDs_:
 
 - Is `--enable-certificate-owner-ref` flag currently set to true or could it have been set to true at some point previously? Due to an earlier bug, the owner reference that gets added to `Secret`s is _not_ removed when the value of `--enable-certificate-owner-ref` is changed from true to false, see [`cert-manager#4788`](https://github.com/cert-manager/cert-manager/issues/4788)
 - Are there currently any certificate issuances in progress? If so, with the custom resources deleted, the progress will be lost. This could potentially cause duplicated issuances.
-- Is there a need to convert cert-manager custom resource manifests to v1 API? You can use [`cmctl convert` command](https://cert-manager.io/docs/usage/cmctl/#convert) to do that.
+- Is there a need to convert cert-manager custom resource manifests to v1 API? You can use [`cmctl convert` command](../../reference/cmctl.md#convert) to do that.
