@@ -21,7 +21,7 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 
 > You quickly want to learn how to use cert-manager and what it can be used for.
 
-📖 **kubectl apply**: For new users we recommend [installing cert-manager using kubectl apply and static manifests](./kubectl.md) to quickly install cert-manager.
+📖 **kubectl apply**: For new users we recommend [installing cert-manager using kubectl apply and static manifests](./kubectl.md).
 
 📖 **helm**: You can [use helm to install cert-manager](./helm.md) and this also allows you to customize the installation if necessary.
 

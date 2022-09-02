@@ -53,8 +53,8 @@ Flags:
 Use "cmctl [command] --help" for more information about a command.
 ```
 
-> ℹ️ There is also a [legacy kubectl plugin](#legacy-kubectl-plugin), but this is no longer recommended
-> because the stand alone `cmctl` binary provides better [auto-completion](#completion).
+>  There is also a [legacy kubectl plugin](#legacy-kubectl-plugin), but it is no longer recommended
+> because the standalone `cmctl` binary provides better [auto-completion](#completion).
 
 ## Commands
 
@@ -255,12 +255,12 @@ $ cmctl x create csr -f my-cert.yaml my-req -w
 cmctl x install
 ```
 
-The command makes sure that the required `CustomResourceDefinitions` are installed together with the cert-manager, cainjector and webhook components.
+This command makes sure that the required `CustomResourceDefinitions` are installed together with the cert-manager, cainjector and webhook components.
 Under the hood, a procedure similar to the [Helm install procedure](../install/helm.md#steps) is used.
 
 You can also use `cmctl x install` to customize the installation of cert-manager.
 
-The example below shows how to tune the cert-manager installation by overwriting the default Helm values:
+The example below shows how to tune the cert-manager installation by overriding the default Helm values:
 
 ```bash
 cmctl x install \
@@ -280,21 +280,25 @@ cmctl x install --dry-run > cert-manager.custom.yaml
 #### Uninstall
 
 ```bash
-$ cmctl x uninstall --help
+cmctl x uninstall
+```
+
 This command uninstalls any Helm-managed release of cert-manager.
 
-The CRDs will be deleted if you installed cert-manager with the option --set CRDs=true.
+The CRDs will be deleted if you installed cert-manager with the option `--set CRDs=true`.
 
-Most of the features supported by 'helm uninstall' are also supported by this command.
+Most of the features supported by `helm uninstall` are also supported by this command.
 
 Some example uses:
-	$ cmctl x uninstall
-or
-	$ cmctl x uninstall --namespace my-cert-manager
-or
-	$ cmctl x uninstall --dry-run
-or
-	$ cmctl x uninstall --no-hooks
+
+```bash
+cmctl x uninstall
+
+cmctl x uninstall --namespace my-cert-manager
+
+cmctl x uninstall --dry-run
+
+cmctl x uninstall --no-hooks
 ```
 
 ### Upgrade
@@ -324,4 +328,4 @@ To install the plugin you need the `kubectl-cert-manager.tar.gz` file for the pl
 these can be found on our [GitHub releases page](https://github.com/cert-manager/cert-manager/releases).
 In order to use the kubectl plugin you need its binary to be accessible under the name `kubectl-cert_manager` in your `$PATH`.
 
-You can run `kubectl cert-manager help` to test the plugin is set up properly.
+You can run `kubectl cert-manager help` to test that the plugin is set up properly.
