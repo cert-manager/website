@@ -172,3 +172,13 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Moved FAQ terminology page to a new reference section
 /docs/faq/terminology/ /docs/reference/tls-terminology/ 301!
+
+# Moved the cmctl documentation into a dedicated reference section
+/docs/usage/cmctl/ /docs/reference/cmctl/ 301!
+/docs/usage/kubectl-plugin/ /docs/reference/cmctl/ 301!
+
+# Removed the separate kubectl-plugin installation page
+/docs/installation/kubectl-plugin/ /docs/reference/cmctl/ 301!
+
+# Demoted the cmctl x install page
+/docs/installation/cmctl/ /docs/reference/cmctl/ 301!

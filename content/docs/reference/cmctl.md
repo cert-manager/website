@@ -1,14 +1,10 @@
 ---
-title: cmctl
-description: 'cert-manager usage: cmctl'
+title: The cert-manager Command Line Tool (cmctl)
+description: |
+    cmctl is a command line tool that can help you manage cert-manager and its resources inside your cluster
 ---
 
-`cmctl` is a CLI tool that can help you to manage cert-manager resources inside
-your cluster.
-
-While also available as a [kubectl plugin](./kubectl-plugin.md), it is recommended
-to use as a stand alone binary as this allows the use of command
-[auto-completion](#completion).
+`cmctl` is a command line tool that can help you manage cert-manager and its resources inside your cluster.
 
 ## Installation
 
@@ -56,6 +52,9 @@ Flags:
 
 Use "cmctl [command] --help" for more information about a command.
 ```
+
+>  There is also a [legacy kubectl plugin](#legacy-kubectl-plugin), but it is no longer recommended
+> because the standalone `cmctl` binary provides better [auto-completion](#completion).
 
 ## Commands
 
@@ -250,7 +249,59 @@ signed certificate to the local file `<name>.crt`, or specified by `-c,
 $ cmctl x create csr -f my-cert.yaml my-req -w
 ```
 
-#### Upgrade
+#### Install
+
+```bash
+cmctl x install
+```
+
+This command makes sure that the required `CustomResourceDefinitions` are installed together with the cert-manager, cainjector and webhook components.
+Under the hood, a procedure similar to the [Helm install procedure](../install/helm.md#steps) is used.
+
+You can also use `cmctl x install` to customize the installation of cert-manager.
+
+The example below shows how to tune the cert-manager installation by overriding the default Helm values:
+
+```bash
+cmctl x install \
+    --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
+    --set webhook.timeoutSeconds=4s   # Example: changing the wehbook timeout using a Helm parameter
+```
+
+You can find [a full list of the install parameters on cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager#configuration). These are the same parameters that are available when using the Helm chart.
+Once you have deployed cert-manager, you can [verify](../install/verify.md) the installation.
+
+The CLI also allows the user to output the templated manifest to `stdout`, instead of installing the manifest on the cluster.
+
+```bash
+cmctl x install --dry-run > cert-manager.custom.yaml
+```
+
+#### Uninstall
+
+```bash
+cmctl x uninstall
+```
+
+This command uninstalls any Helm-managed release of cert-manager.
+
+The CRDs will be deleted if you installed cert-manager with the option `--set CRDs=true`.
+
+Most of the features supported by `helm uninstall` are also supported by this command.
+
+Some example uses:
+
+```bash
+cmctl x uninstall
+
+cmctl x uninstall --namespace my-cert-manager
+
+cmctl x uninstall --dry-run
+
+cmctl x uninstall --no-hooks
+```
+
+### Upgrade
 
 Tools that assist in upgrading cert-manager
 
@@ -268,3 +319,13 @@ Resources](https://cert-manager.io/docs/installation/upgrading/remove-deprecated
 ```bash
 $ cmctl upgrade migrate-api-version --qps 5 --burst 10
 ```
+
+## Legacy kubectl plugin
+
+While the kubectl plugin is supported, it is recommended to use `cmctl` as this enables a better experience via tab auto-completion.
+
+To install the plugin you need the `kubectl-cert-manager.tar.gz` file for the platform you're using,
+these can be found on our [GitHub releases page](https://github.com/cert-manager/cert-manager/releases).
+In order to use the kubectl plugin you need its binary to be accessible under the name `kubectl-cert_manager` in your `$PATH`.
+
+You can run `kubectl cert-manager help` to test that the plugin is set up properly.

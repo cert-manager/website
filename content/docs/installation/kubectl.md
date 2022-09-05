@@ -1,17 +1,17 @@
 ---
-title: Kubectl apply
-description: 'cert-manager installation: Using static manifests'
+title: kubectl apply
+description: Learn how to install cert-manager using kubectl and static manifests
 ---
 
-## Installing with regular manifests
+Learn how to install cert-manager using kubectl and static manifests.
 
-### Prerequisites
+## Prerequisites
 
 - [Install `kubectl` version `>= v1.19.0`](https://kubernetes.io/docs/tasks/tools/). (otherwise, you'll have issues updating the CRDs - see [v0.16 upgrade notes](./upgrading/upgrading-0.15-0.16.md#issue-with-older-versions-of-kubectl))
 - Install a [supported version of Kubernetes or OpenShift](./supported-releases.md).
 - Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if you are using Kubernetes on a cloud platform.
 
-### Steps
+## Steps
 
 All resources (the [`CustomResourceDefinitions`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions) and the cert-manager, cainjector and webhook components)
 are included in a single YAML manifest file:
@@ -28,7 +28,7 @@ you'll need to make modifications to the deployment manifests.
 
 Once you have deployed cert-manager, you can [verify the installation](./verify.md).
 
-### Permissions Errors on Google Kubernetes Engine
+## Permissions Errors on Google Kubernetes Engine
 
 When running on GKE (Google Kubernetes Engine), you might encounter a 'permission denied' error when creating some
 of the required resources. This is a nuance of the way GKE handles RBAC and IAM permissions,

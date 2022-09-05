@@ -8,7 +8,7 @@ description: 'cert-manager installation: Upgrading v1.5 to v1.6'
 Following their deprecation in version 1.4, the cert-manager API versions `v1alpha2, v1alpha3, and v1beta1` are no longer served.
 
 This means if your deployment manifests contain any of these API versions, you will not be able to deploy them after upgrading.
-Our new `cmctl` utility or old `kubectl cert-manager` plugin can [convert](../../usage/cmctl.md#convert) old manifests to `v1` for you.
+Our new `cmctl` utility or old `kubectl cert-manager` plugin can [convert](../../reference/cmctl.md#convert) old manifests to `v1` for you.
 
 <div className="warning">
 

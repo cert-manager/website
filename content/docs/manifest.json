@@ -27,23 +27,15 @@
               "path": "/docs/installation/compatibility.md"
             },
             {
-              "title": "Kubectl apply",
+              "title": "kubectl apply",
               "path": "/docs/installation/kubectl.md"
-            },
-            {
-              "title": "Kubectl plugin",
-              "path": "/docs/installation/kubectl-plugin.md"
-            },
-            {
-              "title": "cmctl",
-              "path": "/docs/installation/cmctl.md"
             },
             {
               "title": "Helm",
               "path": "/docs/installation/helm.md"
             },
             {
-              "title": "OLM",
+              "title": "OperatorHub (OLM)",
               "path": "/docs/installation/operator-lifecycle-manager.md"
             },
             {
@@ -289,20 +281,12 @@
               "path": "/docs/usage/certificate.md"
             },
             {
-              "title": "cmctl",
-              "path": "/docs/usage/cmctl.md"
-            },
-            {
               "title": "Prometheus Metrics",
               "path": "/docs/usage/prometheus-metrics.md"
             },
             {
               "title": "Securing Ingress Resources",
               "path": "/docs/usage/ingress.md"
-            },
-            {
-              "title": "Kubectl plugin",
-              "path": "/docs/usage/kubectl-plugin.md"
             },
             {
               "title": "Securing Gateway Resources",
@@ -668,6 +652,10 @@
             {
                 "title": "Introduction",
                 "path": "/docs/reference/README.md"
+            },
+            {
+                "title": "Command Line Tool (cmctl)",
+                "path": "/docs/reference/cmctl.md"
             },
                 {
                 "title": "TLS Terminology",

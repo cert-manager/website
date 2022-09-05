@@ -19,7 +19,7 @@ These terms are defined in the [TLS Terminology page](../reference/tls-terminolo
 
 ### Can I trigger a renewal from cert-manager at will?
 
-This is a feature in cert-manager starting in `v0.16` using the `cmctl` CLI. More information can be found on [the renew command's page](../usage/cmctl.md#renew)
+This is a feature in cert-manager starting in `v0.16` using the `cmctl` CLI. More information can be found on [the renew command's page](../reference/cmctl.md#renew)
 
 ### When do certs get re-issued?
 
@@ -33,7 +33,7 @@ The issuance process will always get triggered if the:
 - cert-manager issuer annotations on the `Secret` do not match the issuer specified on the `Certificate`
 - DNS names, IP addresses, URLS or email addresses on the issued certificate do not match those on the `Certificate` spec
 - certificate needs to be renewed (because it has expired or the renewal time is now or in the past)
-- certificate has been marked for renewal manually [using `cmctl`](../usage/cmctl.md#renew)
+- certificate has been marked for renewal manually [using `cmctl`](../reference/cmctl.md#renew)
 
 Additionally, if the latest `CertificateRequest` for the `Certificate` is found, cert-manager will also re-issue if:
 
@@ -53,7 +53,7 @@ rely on the values in the issued X.509 certificates. One such field is
 a `CertificateRequest` to compare with. In case where you need to re-issue, but
 re-issuance does not get triggered automatically due to there being no
 `CertificateRequest` (i.e after backup and restore), you can use [`cmctl
-renew`](../usage/cmctl.md#renew) to trigger it manually.
+renew`](../reference/cmctl.md#renew) to trigger it manually.
 
 ### Why isn't my root certificate in my issued Secret's `tls.crt`?
 
@@ -103,7 +103,7 @@ If an issuance fails because of a temporary error, it will be retried again with
 
 If the issuance fails with an error that resulted in a failed `CertificateRequest`, it will be retried with a longer binary exponential backoff (1 hour to 32 hours) to avoid overwhelming external services.
 
-You can always trigger immediate renewal using the [`cmctl renew` command](../usage/cmctl.md#renew)
+You can always trigger immediate renewal using the [`cmctl renew` command](../reference/cmctl.md#renew)
 
 ### Is ECC (elliptic-curve cryptography) supported?
 
