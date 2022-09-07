@@ -1,23 +1,19 @@
 ---
 title: cert-manager
-description: cert-manager documentation homepage
+description: |
+    cert-manager creates signed TLS / SSL certificates for workloads in your Kubernetes or OpenShift cluster
+    and renews the certificates before they expire.
 ---
 
-cert-manager adds certificates and certificate issuers as resource types in
-Kubernetes clusters, and simplifies the process of obtaining, renewing and
-using those certificates.
+cert-manager creates signed TLS / SSL certificates for workloads in your Kubernetes or OpenShift cluster
+and renews the certificates before they expire.
+Typically, the private key and signed certificate are stored in Kubernetes secrets
+and used by applications or ingress controllers.
 
-It can issue certificates from a variety of supported sources, including
-[Let's Encrypt](https://letsencrypt.org), [HashiCorp Vault](https://www.vaultproject.io),
-and [Venafi](https://www.venafi.com/) as well as private PKI.
+cert-manager can obtain the signed certificates from a variety of certificate authorities, including:
+[Let's Encrypt](configuration/acme/), [HashiCorp Vault](configuration/vault/),
+[Venafi](configuration/venafi/) and [private PKI](configuration/ca/).
 
-It will ensure certificates are valid and up to date, and attempt to
-renew certificates at a configured time before expiry.
-
-It is loosely based upon the work of
-[kube-lego](https://github.com/jetstack/kube-lego) and has borrowed some
-wisdom from other similar projects such as
-[kube-cert-manager](https://github.com/PalmStoneGames/kube-cert-manager).
 
 ![High level overview diagram explaining cert-manager architecture](/images/high-level-overview.svg)
 
