@@ -10,7 +10,7 @@ and renews the certificates before they expire.
 Typically, the private key and signed certificate are stored in Kubernetes secrets
 and used by applications or ingress controllers.
 
-cert-manager can obtain the signed certificates from a variety of certificate authorities, including:
+cert-manager can obtain signed certificates from a variety of certificate authorities, including:
 [Let's Encrypt](configuration/acme/README.md), [HashiCorp Vault](configuration/vault.md),
 [Venafi](configuration/venafi.md) and [private PKI](configuration/ca.md).
 
