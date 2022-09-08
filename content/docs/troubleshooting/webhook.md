@@ -3,6 +3,8 @@ title: The Definitive Debugging Guide for the cert-manager Webhook Pod
 description: 'This guide helps you debug communication issues between the Kubernetes API server and the cert-manager webhook Pod.'
 ---
 
+> Last verified: 8 Sept 2022
+
 The cert-manager webhook is a pod that runs as part of your cert-manager
 installation. When applying a manifest with `kubectl`, the Kubernetes API server
 calls the cert-manager webhook over TLS to validate your manifests. This guide
@@ -14,8 +16,6 @@ upgrading cert-manager, or shortly after installing or upgrading cert-manager
 when trying to create a Certificate, Issuer, or any other cert-manager custom
 resource.
 
-> Last updated on 26 August 2022 (cert-manager 1.9).
-
 In the below diagram, we show the common pattern when debugging an issue with
 the cert-manager webhook: when creating a cert-manager custom resource, the API
 server connects over TLS to the cert-manager webhook pod. The red cross
@@ -26,7 +26,7 @@ indicates that the API server fails talking to the webhook.
 The rest of this document presents the known error messages that you may
 encounter.
 
-## Error 1: `connect: connection refused`
+## Error: `connect: connection refused`
 
 > This issue was reported in 4 GitHub issues ([#2736](https://github.com/jetstack/cert-manager/issues/2736 "Getting WebHook Connection Refused error when using Azure DevOps Pipelines"), [#3133](https://github.com/jetstack/cert-manager/issues/3133 "Failed calling webhook webhook.cert-manager.io: connect: connection refused"), [#3445](https://github.com/jetstack/cert-manager/issues/3445 "Connection refused for cert-manager-webhook service"), [#4425](https://github.com/cert-manager/cert-manager/issues/4425 "Webhook error")), was reported in 1 GitHub issue in an external project ([`aws-load-balancer-controller#1563`](https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/1563 "Internal error occurred: failed calling webhook webhook.cert-manager.io, no endpoints available")), on Stack Overflow ([`serverfault#1076563`](https://web.archive.org/web/20210903183221/https://serverfault.com/questions/1076563/creating-issuer-for-kubernetes-cert-manager-is-causing-404-and-500-error "Creating issuer for kubernetes cert-manager is causing 404 and 500 error")), and was mentioned in 13 Slack messages that can be listed with the search `in:#cert-manager in:#cert-manager-dev ":443: connect: connection refused"`. This error message can also be found in other projects that are building webhooks ([`kubewarden-controller#110`](https://github.com/kubewarden/kubewarden-controller/issues/110 "Investigate failure on webhooks not ready when installing cert-manager from helm chart: connection refused")).
 
@@ -86,7 +86,7 @@ reasons of connection refused errors?](https://stackoverflow.com/a/2333446/38085
 Note that firewalls usually don't return an `RST` packet; they usually drop the
 `SYN` packet entirely, and you end up with the error message `i/o timeout` or
 `context deadline exceeded`. If that is the case, continue your investigation
-with the section [Error 2: `i/o timeout` (connectivity issue)](#io-timeout) and [Error 8: `context
+with the section [Error: `i/o timeout` (connectivity issue)](#io-timeout) and [Error: `context
 deadline exceeded`](#context-deadline-exceeded) respectively.
 
 Let's eliminate the possible causes from the closest to the source of the TCP
@@ -218,7 +218,7 @@ the readiness configuration.
 
 <a id="io-timeout"></a>
 
-## Error 2: `i/o timeout` (connectivity issue)
+## Error: `i/o timeout` (connectivity issue)
 
 > This error message was reported 26 times on Slack. To list these messages, do a search with `in:#cert-manager in:#cert-manager-dev "443: i/o timeout"`. The error message was reported X times in GitHub issues ([#2811](https://github.com/cert-manager/cert-manager/issues/2811 "i/o timeout from apiserver when connecting to webhook on k3s"), [#4073](https://github.com/cert-manager/cert-manager/issues/4073 "Internal error occurred: failed calling webhook"))
 
@@ -416,7 +416,7 @@ article [Debugging Kubernetes Networking: my `kube-dns` is not
 working!](https://maelvls.dev/debugging-kubernetes-networking/) to learn
 how to use `tcpdump` with Wireshark to debug networking issues.
 
-## Error 3: `x509: certificate is valid for xxx.internal, not cert-manager-webhook.cert-manager.svc` (EKS with Fargate pods)
+## Error: `x509: certificate is valid for xxx.internal, not cert-manager-webhook.cert-manager.svc` (EKS with Fargate pods)
 
 ```text
 Internal error occurred: failed calling webhook "webhook.cert-manager.io":
@@ -473,7 +473,7 @@ helm install \
   --set webhook.securePort=10260
 ```
 
-## Error 4: `service "cert-managercert-manager-webhook" not found`
+## Error: `service "cert-managercert-manager-webhook" not found`
 
 ```text
 Error from server (InternalError): error when creating "test-resources.yaml": Internal error occurred:
@@ -488,7 +488,7 @@ Error from server (InternalError): error when creating "test-resources.yaml": In
 We are unsure about the cause of this error, please comment on one of the GitHub
 issues above if you happen to come across the issue.
 
-## Error 5: `no endpoints available for service "cert-manager-webhook"` (OVHCloud)
+## Error: `no endpoints available for service "cert-manager-webhook"` (OVHCloud)
 
 ```text
 Error: INSTALLATION FAILED: Internal error occurred:
@@ -520,7 +520,7 @@ The workaround is to remove some resources such as CertificateRequest resources
 to get under the limit, as explained in OVHCloud's [ETCD Quotas error,
 troubleshooting](https://docs.ovh.com/gb/en/kubernetes/etcd-quota-error/) page.
 
-## Error 6: `x509: certificate has expired or is not yet valid`
+## Error: `x509: certificate has expired or is not yet valid`
 
 > This error message was reported once in Slack:
 > [1](https://kubernetes.slack.com/archives/C4NV3DWUC/p1618579222346800).
@@ -540,7 +540,7 @@ Please answer to the above Slack message since we are still unsure as to what
 may cause this issue; to get access to the Kubernetes Slack, visit
 [https://slack.k8s.io/](https://slack.k8s.io/).
 
-## Error 7: `net/http: request canceled while waiting for connection`
+## Error: `net/http: request canceled while waiting for connection`
 
 ```text
 Error from server (InternalError): error when creating "STDIN":
@@ -555,7 +555,7 @@ This
 
 <a id="context-deadline-exceeded"></a>
 
-## Error 8: `context deadline exceeded`
+## Error: `context deadline exceeded`
 
 > This error message was reported in GitHub issues ([2319](https://github.com/cert-manager/cert-manager/issues/2319 "Documenting context deadline exceeded errors relating to the webhook, on bare metal"), [2706](https://github.com/cert-manager/cert-manager/issues/2706 "") [5189](https://github.com/cert-manager/cert-manager/issues/5189 "Post https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s: context deadline exceeded"), [5004](https://github.com/cert-manager/cert-manager/issues/5004 "After installing cert-manager using kubectl, cmctl check api fails with https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s: context deadline exceeded")), and once [on Stack Overflow](https://stackoverflow.com/questions/72059332/how-can-i-fix-failed-calling-webhook-webhook-cert-manager-io).
 
@@ -715,10 +715,10 @@ issue such as `x509: certificate signed by unknown authority` or `x509:
 certificate has expired or is not yet valid`, we can conclude that the problem
 is a connectivity issue: the Kubernetes API server isn't able to establish a TCP
 connection to the cert-manager webhook. Please follow the instructions in the
-section [Error 2: `i/o timeout` (connectivity issue)](#io-timeout) above to
+section [Error: `i/o timeout` (connectivity issue)](#io-timeout) above to
 continue debugging.
 
-## Error 8: `net/http: TLS handshake timeout`
+## Error: `net/http: TLS handshake timeout`
 
 > This error message was reported in 1 GitHub issue ([#2602](https://github.com/cert-manager/cert-manager/issues/2602 "Internal error occurred: failed calling webhook webhook.cert-manager.io: Post https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=30s: net/http: TLS handshake timeout")).
 
@@ -739,7 +739,7 @@ instead a `ClientHello` packet.
 We are unsure of the cause of this error. Please comment on the above GitHub
 issue if you notice this error.
 
-## Error 9: `HTTP probe failed with statuscode: 500`
+## Error: `HTTP probe failed with statuscode: 500`
 
 > This error message was reported in 2 GitHub issue ([#3185](https://github.com/cert-manager/cert-manager/issues/3185 "kubectl install cert-manager: Readiness probe failed: HTTP probe failed with statuscode: 500"), [#4557](https://github.com/cert-manager/cert-manager/issues/4557 "kubectl install cert-manager: Readiness probe failed: HTTP probe failed with statuscode: 500")).
 
@@ -753,7 +753,7 @@ Warning  Unhealthy  <invalid> (x13 over 15s)  kubelet, node83
 We are unsure of the cause of this error. Please comment on the above GitHub
 issue if you notice this error.
 
-## Error 10: `Service Unavailable`
+## Error: `Service Unavailable`
 
 > This error was reported in 1 GitHub issue ([#4281](https://github.com/cert-manager/cert-manager/issues/4281 "Can't deploy Issuer, Service Unavailable"))
 
@@ -769,7 +769,7 @@ The above message appears in Kubernetes clusters using the Weave CNI.
 We are unsure of the cause of this error. Please comment on the above GitHub
 issue if you notice this error.
 
-## Error 11: `failed calling admission webhook: the server is currently unable to handle the request`
+## Error: `failed calling admission webhook: the server is currently unable to handle the request`
 
 > This issue was reported in 4 GitHub issues ([1369](https://github.com/cert-manager/cert-manager/issues/1369 "the server is currently unable to handle the request"), [1425](https://github.com/cert-manager/cert-manager/issues/1425 "Verifying Install: failed calling admission webhook (Azure, GKE private cluster)") [3542](https://github.com/cert-manager/cert-manager/issues/3542 "SSL Certificate Manager has got expired, we need to renew SSL certificate in existing ClusterIssuer Kubernetes Service (AKS)"), [4852](https://github.com/cert-manager/cert-manager/issues/4852 "error: unable to retrieve the complete list of server APIs: webhook.cert-manager.io/v1beta1: the server is currently unable to handle the request (AKS)"))
 
@@ -782,7 +782,7 @@ Error from server (InternalError): error when creating "test-resources.yaml": In
 We are unsure of the cause of this error. Please comment in one of the above
 GitHub issues if you are able to reproduce this error.
 
-## Error 12: `x509: certificate signed by unknown authority`
+## Error: `x509: certificate signed by unknown authority`
 
 > Reported in GitHub issues
 > ([2602](https://github.com/cert-manager/cert-manager/issues/2602#issuecomment-606474055 "x509: certificate signed by unknown authority"))
@@ -1006,7 +1006,7 @@ Content-Type: text/plain; charset=utf-8
 ...
 ```
 
-## Error 13: `cluster scoped resource "mutatingwebhookconfigurations/" is managed and access is denied`
+## Error: `cluster scoped resource "mutatingwebhookconfigurations/" is managed and access is denied`
 
 > This message was reported in GitHub issue
 > [3717](https://github.com/cert-manager/cert-manager/issues/3717 "Cannot
@@ -1033,7 +1033,7 @@ As of October 2021, the "rapid" Autopilot release channel has rolled out version
 message but cert-manager is reported to be working by some users. Feedback and
 PRs are welcome.
 
-## Error 14: `the namespace "kube-system" is managed and the request's verb "create" is denied`
+## Error: `the namespace "kube-system" is managed and the request's verb "create" is denied`
 
 When installing cert-manager on GKE Autopilot with Helm, you will see the
 following error message:
