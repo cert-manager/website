@@ -1,12 +1,12 @@
 ---
 title: The Definitive Debugging Guide for the cert-manager Webhook Pod
-description: 'The cert-manager webhook is a Pod that runs as part of your cert-manager installation. When applying a manifest with kubectl, the Kubernetes API server calls the cert-manager webhook over TLS to validate your manifests. This guide helps you debug connectivity issues between the Kubernetes API server and the cert-manager webhook Pod.'
+description: 'This guide helps you debug communication issues between the Kubernetes API server and the cert-manager webhook Pod.'
 ---
 
 The cert-manager webhook is a pod that runs as part of your cert-manager
 installation. When applying a manifest with `kubectl`, the Kubernetes API server
 calls the cert-manager webhook over TLS to validate your manifests. This guide
-helps you debug connectivity issues between the Kubernetes API server and the
+helps you debug communication issues between the Kubernetes API server and the
 cert-manager webhook pod.
 
 The error messages listed in this page are encountered while installing or
