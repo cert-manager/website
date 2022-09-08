@@ -5,6 +5,34 @@ description: Google season of docs 2022 proposal
 
 ## Project Updates
 
+### 7 Sept 2022: The Webhook Debugging Guide
+
+<img src="/images/google-season-of-docs-2022-improve-navigation-and-structure/screenshot-friction-log-before.png" style={{float: "right", clear: "right", margin: "5px"}} width="40%" alt="friction log for task 3, before" />
+<img src="/images/google-season-of-docs-2022-improve-navigation-and-structure/screenshot-friction-log-after.png" style={{float: "right", clear: "right", margin: "5px"}} width="40%" alt="friction log for task 3, after" />
+
+At the start of the Google Season of Docs program, we built friction logs for
+common user tasks, such as debugging the error "connect: connection refused".
+The friction log for this task, visible in the [GSoD work
+document](https://docs.google.com/document/d/1O-MFWwtpOcNlrRzsiBvrpGHC10EXnvw0XK37M2nEjzg/edit#bookmark=id.cu9ss8s7yl46),
+was to serve as a reference point to see whether the improvements we aimed to
+bring would have an impact or not.
+
+The friction log showed a consistent pattern: the user searches the error on
+Google, is confused by GitHub issues that don't have any solutions, then clicks
+the second link in the Google results, without much luck. We realized that one
+improvement we could make was to add a link to the FAQ page "Troubleshooting
+Problems with the Webhook". We found two problems with this FAQ page:
+
+1. It could not be found by anyone because the error messages were not listed in
+   the page, meaning that Google would not show the page in the search results.
+2. Many error messages were not listed in the page.
+
+We set ourselves to rewrite this page with the goal of making it error-focused,
+meaning that the user would just be able to look for their particular error and
+start debugging it. We called it "The Definitive Debugging Guide for the
+cert-manager Webhook Pod", and it can be found
+[here](../../../troubleshooting/webhook/).
+
 ### 12 Aug 2022: Improved the layout of the navigation menu
 
 On displays `>=1280px` the left-hand menu was too narrow to display the nested menu items clearly,
