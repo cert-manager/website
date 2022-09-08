@@ -31,7 +31,7 @@ const DocumentationPage = ({
         canonical={currentUrl}
         openGraph={{
           url: currentUrl,
-          title: page.title,
+          title: frontmatter.title,
           description: frontmatter.description
         }}
       />
