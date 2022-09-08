@@ -11,8 +11,8 @@ Typically, the private key and signed certificate are stored in Kubernetes secre
 and used by applications or ingress controllers.
 
 cert-manager can obtain the signed certificates from a variety of certificate authorities, including:
-[Let's Encrypt](configuration/acme/), [HashiCorp Vault](configuration/vault/),
-[Venafi](configuration/venafi/) and [private PKI](configuration/ca/).
+[Let's Encrypt](configuration/acme/README.md), [HashiCorp Vault](configuration/vault.md),
+[Venafi](configuration/venafi.md) and [private PKI](configuration/ca.md).
 
 
 ![High level overview diagram explaining cert-manager architecture](/images/high-level-overview.svg)
