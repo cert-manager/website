@@ -23,8 +23,7 @@ indicates that the API server fails talking to the webhook.
 
 <img alt="Diagram that shows a kubectl command that aims to create an issuer resource, and an arrow towards the Kubernetes API server, and an arrow between the API server and the webhook that indicates that the API server tries to connect to the webhook. This last arrow is crossed in red." src="/images/troubleshooting/webhook-pod-networking-diagram.png" width="500"/>
 
-The rest of this document presents the known error messages that you may
-encounter.
+The rest of this document presents error messages you may encounter.
 
 ## Error: `connect: connection refused`
 
@@ -81,7 +80,7 @@ packet returned to the API server:
 The `RST` packet is sent by the Linux kernel when nothing is listening to the
 requested port. The `RST` packet can also be returned by one of the TCP hops,
 e.g., a firewall, as detailed in the Stack Overflow page [What can be the
-reasons of connection refused errors?](https://stackoverflow.com/a/2333446/3808537).
+reasons of connection refused errors?](https://stackoverflow.com/a/2333446/3808537)
 
 Note that firewalls usually don't return an `RST` packet; they usually drop the
 `SYN` packet entirely, and you end up with the error message `i/o timeout` or
@@ -122,8 +121,8 @@ already able to reach the readiness endpoint.
 Common issues include firewall dropping traffic from the control plane to
 workers; for example, the API server on GKE is only allowed to talk to worker
 nodes (which is where the cert-manager webhook is running) over port
-10250. In EKS, your security groups might deny traffic from your control
-plane VPC towards your workers VPC over TCP 10250.
+`10250`. In EKS, your security groups might deny traffic from your control
+plane VPC towards your workers VPC over TCP `10250`.
 
 If you see `<none>`, it indicates that the cert-manager webhook is properly
 running but its readiness endpoint can't be reached:
@@ -134,8 +133,8 @@ cert-manager-webhook   <none>              236d   ❌
 ```
 
 To fix `<none>`, you will have to check whether the cert-manager-webhook
-deployment is healthy. The endpoints stays to `<none>` as long as
-cert-manager-webhook isn't marked as "healthy".
+deployment is healthy. The endpoints stays at `<none>` while the
+cert-manager-webhook isn't marked as `healthy`.
 
 ```sh
 kubectl get pod -n cert-manager -l app.kubernetes.io/name=webhook
@@ -220,7 +219,7 @@ the readiness configuration.
 
 ## Error: `i/o timeout` (connectivity issue)
 
-> This error message was reported 26 times on Slack. To list these messages, do a search with `in:#cert-manager in:#cert-manager-dev "443: i/o timeout"`. The error message was reported X times in GitHub issues ([#2811](https://github.com/cert-manager/cert-manager/issues/2811 "i/o timeout from apiserver when connecting to webhook on k3s"), [#4073](https://github.com/cert-manager/cert-manager/issues/4073 "Internal error occurred: failed calling webhook"))
+> This error message was reported 26 times on Slack. To list these messages, do a search with `in:#cert-manager in:#cert-manager-dev "443: i/o timeout"`. The error message was reported in 2 GitHub issues ([#2811](https://github.com/cert-manager/cert-manager/issues/2811 "i/o timeout from apiserver when connecting to webhook on k3s"), [#4073](https://github.com/cert-manager/cert-manager/issues/4073 "Internal error occurred: failed calling webhook"))
 
 ```text
 Error from server (InternalError): error when creating "STDIN": Internal error occurred:
@@ -251,13 +250,13 @@ changing `securePort` might break it.
 
 For context, unlike public GKE clusters where the control plane can freely talk
 to pods over any TCP port, the control plane in private GKE clusters can only
-talk to the pods in worker nodes over TCP port 10250 and 443. These two open
+talk to the pods in worker nodes over TCP port `10250` and `443`. These two open
 ports refer to the `containerPort` inside the pod, not the port called `port` in
 the Service resource.
 
 For it to work, the `containerPort` inside the Deployment must match either
-10250 or 443; `containerPort` is configured by the Helm value
-`webhook.securePort`. By default, `webhook.securePort` is set to 10250.
+`10250` or `443`; `containerPort` is configured by the Helm value
+`webhook.securePort`. By default, `webhook.securePort` is set to `10250`.
 
 To see if something is off with the `containerPort`, let us start looking at the
 Service resource:
@@ -293,26 +292,26 @@ Deployment resource:
 kubectl get deploy -n cert-manager cert-manager-webhook -oyaml | grep -A3 ports:
 ```
 
-The output shows that the `containerPort` is not set to 10250, meaning that
+The output shows that the `containerPort` is not set to `10250`, meaning that
 a new firewall rule will have to be added in Google Cloud.
 
 ```yaml
         ports:
-        - containerPort: 12345 # 🌟 This port doesn't match 10250 nor 443.
+        - containerPort: 12345 # 🌟 This port matches neither 10250 nor 443.
           name: https
           protocol: TCP
 ```
 
-To recap, if the above `containerPort` doesn't say 443 or 10250 and that
-you prefer not changing `containerPort` to 10250, you will have to add a
+To recap, if the above `containerPort` is something other than `443` or `10250` and
+you prefer not changing `containerPort` to `10250`, you will have to add a
 new firewall rule. You can read the section [Adding a firewall rule in a
 GKE private
 cluster](https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules)
 in the Google documentation.
 
-For context, the reason we did not default `securePort` to 443 is because
-binding to 443 requires one additional Linux capability
-(`NET_BIND_SERVICE`); on the other side, 10250 doesn't require any
+For context, the reason we did not default `securePort` to `443` is because
+binding to `443` requires one additional Linux capability
+(`NET_BIND_SERVICE`); on the other side, `10250` doesn't require any
 additional capability.
 
 ### Cause 2: EKS on a custom CNI
@@ -345,10 +344,10 @@ webhook pod becomes accessible over the node's IP, which means you will
 work around the fact that kube-apiserver can't reach any pod IPs nor
 cluster IPs.
 
-By setting `securePort` to 10260 instead of relying on the default value
-(which is 10250), you will prevent a conflict between the webhook and the
+By setting `securePort` to `10260` instead of relying on the default value
+(which is `10250`), you will prevent a conflict between the webhook and the
 kubelet. The kubelet, which is an agent that runs on every Kubernetes
-worker node and that runs directly on the host, uses the port 10250 to
+worker node and runs directly on the host, uses the port `10250` to
 expose its internal API to kube-apiserver.
 
 To understand how `hostnetwork` and `securePort` interact, we have to look
@@ -386,23 +385,23 @@ cluster IP to the webhook's host IP:
    +-------------------+
 ```
 
-The reason 10250 is used as the default `securePort` is because it works
+The reason `10250` is used as the default `securePort` is because it works
 around another limitation with GKE Private Clusters, as detailed in the
 above section [GKE Private Cluster](#gke-private-cluster).
 
 ### Cause 3: Network Policies, Calico
 
 Assuming that you are using the Helm chart and that you are using the
-default value of `webhook.securePort` (which is 10250), and that you are
+default value of `webhook.securePort` (which is `10250`), and that you are
 using a network policy controller such as Calico, check that there exists a
 policy allowing traffic from the API server to the webhook pod over TCP
-port 10250.
+port `10250`.
 
 ### Cause 4: EKS and Security Groups
 
 Assuming that you are using the Helm chart and that you are using the
-default value of `webhook.securePort` (which is 10250), you might want to
-check that your AWS Security Groups allow TCP traffic over 10250 from the
+default value of `webhook.securePort` (which is `10250`), you might want to
+check that your AWS Security Groups allow TCP traffic over `10250` from the
 control plane's VPC to the workers VPC.
 
 ### Other causes
@@ -429,11 +428,11 @@ Internal error occurred: failed calling webhook "webhook.cert-manager.io":
 > [#3237](https://github.com/cert-manager/cert-manager/issues/3237 "Can't
 > create an issuer when cert-manager runs on EKS in Fargate pods (AWS)").
 
-This is most probably because you are running on EKS with Fargate enabled.
+This is probably because you are running on EKS with Fargate enabled.
 Fargate creates a microVM per pod, and the VM's kernel is used to run the
 container in its own namespace. The problem is that each microVM gets its
-own kubelet. As for any Kubernetes node, the VM's port 10250 is listened to
-by a kubelet process. And 10250 is also the port that the cert-manager
+own kubelet. As for any Kubernetes node, the VM's port `10250` is listened to
+by a kubelet process. And `10250` is also the port that the cert-manager
 webhook listens on.
 
 But that's not a problem: the kubelet process and the cert-manager webhook
@@ -445,13 +444,13 @@ The problem arises when the API server tries hitting the Fargate pod: the
 microVM's host net namespace is configured to port-forward every possible port
 for maximum compatibility with traditional pods, as demonstrated in the Stack
 Overflow page [EKS Fargate connect to local kubelet][66445207]. But the port
-10250 is already used by the microVM's kubelet, so anything hitting this port
+`10250` is already used by the microVM's kubelet, so anything hitting this port
 won't be port-forwarded and will hit the kubelet instead.
 
 [66445207]: https://stackoverflow.com/questions/66445207 "EKS Fargate connect to local kubelet"
 
 To sum up, the cert-manager webhook looks healthy and is able to listen to port
-10250 as per its logs, but the microVM's host does not port-forward 10250 to the
+`10250` as per its logs, but the microVM's host does not port-forward `10250` to the
 webhook's net namespace. That's the reason you see a message about an unexpected
 domain showing up when doing the TLS handshake: although the cert-manager
 webhook is properly running, the kubelet is the one responding to the API
@@ -485,8 +484,8 @@ Error from server (InternalError): error when creating "test-resources.yaml": In
 > This error was reported in 2 GitHub issues ([#3195](https://github.com/jetstack/cert-manager/issues/3195 "service cert-manager-webhook not found"),
 > [#4999](https://github.com/cert-manager/cert-manager/issues/4999 "Verification on 1.7.2 fails (Kubectl apply), service cert-manager-webhook not found")).
 
-We are unsure about the cause of this error, please comment on one of the GitHub
-issues above if you happen to come across the issue.
+We do not know the cause of this error, please comment on one of the GitHub
+issues above if you happen to come across it.
 
 ## Error: `no endpoints available for service "cert-manager-webhook"` (OVHCloud)
 
@@ -522,8 +521,8 @@ troubleshooting](https://docs.ovh.com/gb/en/kubernetes/etcd-quota-error/) page.
 
 ## Error: `x509: certificate has expired or is not yet valid`
 
-> This error message was reported once in Slack:
-> [1](https://kubernetes.slack.com/archives/C4NV3DWUC/p1618579222346800).
+> This error message was reported once in Slack
+> ([1](https://kubernetes.slack.com/archives/C4NV3DWUC/p1618579222346800)).
 
 When using `kubectl apply`:
 
@@ -533,7 +532,7 @@ Internal error occurred: failed calling webhook "webhook.cert-manager.io":
     x509: certificate has expired or is not yet valid
 ```
 
-> This error was reported in 1 Slack message
+> This error message was reported once in Slack
 ([1](https://kubernetes.slack.com/archives/C4NV3DWUC/p1618579222346800)).
 
 Please answer to the above Slack message since we are still unsure as to what
@@ -549,9 +548,8 @@ Error from server (InternalError): error when creating "STDIN":
       net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
 ```
 
-> This error was reported in 1 Slack message: [1](https://kubernetes.slack.com/archives/C4NV3DWUC/p1632849763397100).
-
-This
+> This error message was reported once in Slack
+([1](https://kubernetes.slack.com/archives/C4NV3DWUC/p1632849763397100)).
 
 <a id="context-deadline-exceeded"></a>
 
@@ -736,7 +734,7 @@ the cert-manager webhook process isn't the one ending the TCP connection: there
 is some HTTP proxy in between that is probably waiting for a plain HTTP request
 instead a `ClientHello` packet.
 
-We are unsure of the cause of this error. Please comment on the above GitHub
+We do not know the cause of this error. Please comment on the above GitHub
 issue if you notice this error.
 
 ## Error: `HTTP probe failed with statuscode: 500`
@@ -750,7 +748,7 @@ Warning  Unhealthy  <invalid> (x13 over 15s)  kubelet, node83
   Readiness probe failed: HTTP probe failed with statuscode: 500
 ```
 
-We are unsure of the cause of this error. Please comment on the above GitHub
+We do not know the cause of this error. Please comment on the above GitHub
 issue if you notice this error.
 
 ## Error: `Service Unavailable`
@@ -766,7 +764,7 @@ Error from server (InternalError): error when creating "STDIN": Internal error o
 
 The above message appears in Kubernetes clusters using the Weave CNI.
 
-We are unsure of the cause of this error. Please comment on the above GitHub
+We do not know the cause of this error. Please comment on the above GitHub
 issue if you notice this error.
 
 ## Error: `failed calling admission webhook: the server is currently unable to handle the request`
@@ -779,7 +777,7 @@ Error from server (InternalError): error when creating "test-resources.yaml": In
     the server is currently unable to handle the request
 ```
 
-We are unsure of the cause of this error. Please comment in one of the above
+We do not know the cause of this error. Please comment in one of the above
 GitHub issues if you are able to reproduce this error.
 
 ## Error: `x509: certificate signed by unknown authority`
@@ -837,9 +835,9 @@ cert-manager.io/inject-ca-from-secret: cert-manager/cert-manager-webhook-ca
 fixed](https://github.com/cert-manager/cert-manager/commit/f33beefc) in
 cert-manager 0.15.
 >
-> **Note 2:** since cert-manager 1.6, this annotation is [not being
-> used](https://github.com/cert-manager/cert-manager/pull/4841) anymore on the
-> cert-manager CRDs since there is no need for conversion anymore.
+> **Note 2:** since cert-manager 1.6, this annotation is [no longer
+> used](https://github.com/cert-manager/cert-manager/pull/4841) on the
+> cert-manager CRDs since conversion is no longer needed.
 
 The solution, if you are still using cert-manager 0.14 or below, is to render
 the manifest using `helm template`, then edit the annotation to use the correct
