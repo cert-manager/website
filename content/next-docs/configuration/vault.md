@@ -48,7 +48,7 @@ spec:
       ...
 ```
 
-The CA Bundle can also be optionally defined by referencing a Secret. The Secret
+The CA Bundle can also optionally be defined by referencing a Secret. The Secret
 should exist in the same Namespace as that of the Issuer, or in the [`Cluster
 Resource Namespace` (default cert-manager)][] when using a ClusterIssuer.
 
