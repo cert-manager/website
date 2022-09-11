@@ -99,8 +99,8 @@ Because of this, we will start with the Let's Encrypt staging issuer. Once your 
 1. You can confirm on the status of the issuers after you create them:
 
     ```bash
-    kubectl describe issuer letsencrypt-staging
-    kubectl describe issuer letsencrypt-prod
+    kubectl describe issuer -n pomerium letsencrypt-staging
+    kubectl describe issuer -n pomerium letsencrypt-prod
     ```
 
     You should see the issuer listed with a registered account.
