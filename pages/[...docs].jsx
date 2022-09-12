@@ -1,7 +1,7 @@
 import { withRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
-import { pageProps, staticPaths } from '@zentered/next-product-docs/serialize'
-import { Documentation } from '@zentered/next-product-docs'
+import { pageProps, staticPaths } from 'lib/serialize'
+import { Documentation } from 'pages/documentation'
 
 import Sidebar from 'components/docs/Sidebar'
 import Toc from 'components/docs/Toc'
