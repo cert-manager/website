@@ -50,6 +50,7 @@
   },
   "browser": {
     "fs": false,
+    "path": false,
     "child_process": false
   },
   "dependencies": {
