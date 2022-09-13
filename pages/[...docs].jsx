@@ -1,16 +1,26 @@
-import { withRouter } from 'next/router'
-import { NextSeo } from 'next-seo'
-import { pageProps, staticPaths } from 'lib/serialize'
-import { Documentation } from 'pages/documentation'
-
-import Sidebar from 'components/docs/Sidebar'
-import Toc from 'components/docs/Toc'
-import getCurrentUrl from 'lib/currentUrl'
-import { meta as page } from 'content/pages/docs.mdx'
-import theme from 'lib/github.js'
+// You probably wonder why this file, [...docs].jsx, contains square brackets and
+// dots. The reason is that the only way to do "dynamic routes" in Next.js is to
+// use a file name containing square brackets and dots. You can learn more at:
+// https://nextjs.org/docs/routing/dynamic-routes.
 
 import { readdir } from 'fs/promises'
 import { join } from 'path'
+
+import { MDXRemote } from 'next-mdx-remote'
+import { NextSeo } from 'next-seo'
+import { withRouter } from 'next/router'
+import { Element } from 'react-scroll'
+
+import CodeBlock from 'components/docs/CodeBlock.jsx'
+import InlineCode from 'components/docs/InlineCode.jsx'
+import Sidebar from 'components/docs/Sidebar'
+import Toc from 'components/docs/Toc'
+
+import getCurrentUrl from 'lib/currentUrl'
+import theme from 'lib/github.js'
+import { pageProps, staticPaths } from 'lib/serialize'
+
+import { meta as page } from 'content/pages/docs.mdx'
 
 const DocumentationPage = ({
   router,
@@ -60,6 +70,25 @@ const DocumentationPage = ({
 }
 
 export default withRouter(DocumentationPage)
+
+function Documentation({ source, theme }) {
+  const components = {
+    Element: ({ name, ...props }) => {
+      return (
+        <Element
+          // remove name from parent div
+          name={props.children[0]?.props?.id === name ? null : name}
+          {...props}
+        />
+      )
+    },
+    pre: (props) => <CodeBlock {...props} theme={theme} />,
+    code: (props) => <InlineCode {...props} theme={theme} />
+  }
+
+  return <MDXRemote {...source} components={components} theme={theme} />
+}
+
 
 export async function getStaticPaths() {
   const dirs = await readdir(join(process.cwd(), 'content'))
