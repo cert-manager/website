@@ -4,6 +4,10 @@ description: |
     Learn about how to configure cert-manager using Issuer, ClusterIssuer and Certificate resources.
 ---
 
+Learn about how to configure cert-manager using Issuer, ClusterIssuer and Certificate resources.
+
+## Overview
+
 After installing cert-manager you will find that some new resource types have been added to the Kubernetes API server
 such as `Issuer`, `ClusterIssuer`, and `Certificate`.
 They all have `metadata`, `spec` and `status` fields, just like other Kubernetes resources.

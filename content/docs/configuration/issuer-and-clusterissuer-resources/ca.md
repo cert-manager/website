@@ -1,16 +1,20 @@
 ---
 title: CA
-description: 'cert-manager configuration: CA Issuers'
+description: |
+    Learn about the CA Issuer which generates a Certificate Authority whose certificate and
+    private key are stored inside the cluster as a Kubernetes `Secret`.
 ---
+
+Learn about the CA Issuer which generates a Certificate Authority whose certificate and
+private key are stored inside the cluster as a Kubernetes `Secret`.
+
+## Overview
 
 ⚠️ CA issuers are generally either for trying cert-manager out or else for advanced users with
 a good idea of how to run a PKI. To be used safely in production, CA issuers introduce complex
 planning requirements around rotation, trust store distribution and disaster recovery.
 
 If you're not planning to run your own PKI, use a different issuer type.
-
-The CA issuer represents a Certificate Authority whose certificate and
-private key are stored inside the cluster as a Kubernetes `Secret`.
 
 Certificates issued by a CA issuer will not be publicly trusted and so are unlikely to be trusted
 by your applications without further configuration work. Consider the [cert-manager/trust](../projects/trust.md)
