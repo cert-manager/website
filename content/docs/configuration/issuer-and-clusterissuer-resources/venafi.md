@@ -105,7 +105,7 @@ vaas-issuer    True    Venafi issuer started  2m
 You are now ready to issue certificates using the newly provisioned Venafi
 `Issuer` and Venafi as a Service.
 
-Read the [Issuing Certificates](../usage/certificate.md) document for
+Read the [Issuing Certificates](../configuration/certificate-resources.md) document for
 more information on how to create Certificate resources.
 
 
@@ -257,7 +257,7 @@ $ kubectl describe issuer tpp-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOU
 You are now ready to issue certificates using the newly provisioned Venafi
 `Issuer` and Trust Protection Platform.
 
-Read the [Issuing Certificates](../usage/certificate.md) document for
+Read the [Issuing Certificates](../configuration/certificate-resources.md) document for
 more information on how to create Certificate resources.
 
 # Issuer specific annotations

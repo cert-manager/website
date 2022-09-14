@@ -385,7 +385,7 @@ correctly, we can begin requesting certificates which can be used by Kubernetes
 applications.
 
 Full information on how to specify and request Certificate resources can be
-found in the [Issuing certificates](../../usage/certificate.md) guide.
+found in the [Issuing certificates](../../configuration/certificate-resources.md) guide.
 
 For now, we will create a basic X.509 Certificate that is valid for our domain,
 `example.com`:

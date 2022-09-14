@@ -1,7 +1,13 @@
 ---
 title: Certificate Resources
-description: 'cert-manager usage: Certificates'
+description: |
+    Learn about Certificate resources which represent a desired X.509 certificates which will be signed and renewed before they expire.
 ---
+
+Learn about Certificate resources which represent a desired X.509 certificates which will be signed and renewed before they expire.
+The private key and signed certificate will be stored in a Secret which you can then mount in to a Pod or use in an Ingress resource.
+
+## Overview
 
 In cert-manager, the [`Certificate`](../concepts/certificate.md) resource
 represents a human readable definition of a certificate request that is to be

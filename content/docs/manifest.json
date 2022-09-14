@@ -279,6 +279,10 @@
                       "path": "/docs/configuration/issuer-and-clusterissuer-resources/external.md"
                     }
                  ]
+            },
+            {
+                "title": "Certificate Resources",
+                "path": "/docs/configuration/certificate-resources.md"
             }
               ]
         },
@@ -288,10 +292,6 @@
             {
               "title": "Introduction",
               "path": "/docs/usage/README.md"
-            },
-            {
-              "title": "Certificate Resources",
-              "path": "/docs/usage/certificate.md"
             },
             {
               "title": "Prometheus Metrics",
