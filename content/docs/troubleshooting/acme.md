@@ -209,11 +209,11 @@ If your challenge self-check fails with a 404 not found error. Make sure to chec
 ### DNS01 troubleshooting
 If you see no error events about your DNS provider you can check the following
 Check if you can see the `_acme_challenge.domain` TXT DNS record from the public internet, or in your DNS provider's interface.
-cert-manager will check if a DNS record has been propagated by querying the cluster's DNS solver. If you are able to see it from the public internet but not from inside the cluster you might want to change [the DNS server for self-check](../configuration/acme/dns01/README.md#setting-nameservers-for-dns01-self-check) as some cloud providers overwrite DNS internally.
+cert-manager will check if a DNS record has been propagated by querying the cluster's DNS solver. If you are able to see it from the public internet but not from inside the cluster you might want to change [the DNS server for self-check](../configuration/issuer-and-clusterissuer-resources/acme/dns01/README.md#setting-nameservers-for-dns01-self-check) as some cloud providers overwrite DNS internally.
 
 #### cert-manager identifies the wrong zone for your domain name
 cert-manager by default uses SOA (Start of Authority) records to determine which zone name to use at your DNS provider.
-Some DNS resolvers will filter this information, if this is the case cert-manager cannot determine the zone and it is advised to [change the DNS server for DNS01 self-checks](../configuration/acme/dns01/README.md#setting-nameservers-for-dns01-self-check).
+Some DNS resolvers will filter this information, if this is the case cert-manager cannot determine the zone and it is advised to [change the DNS server for DNS01 self-checks](../configuration/issuer-and-clusterissuer-resources/acme/dns01/README.md#setting-nameservers-for-dns01-self-check).
 
 If you use `dnsmasq` as your DNS server, this may occur if you use the [`--filterwin2k` flag](http://www.thekelleys.org.uk/dnsmasq/docs/setup.html).
 In [OpenWRT there is a `filterwin2k` configuration option](https://openwrt.org/docs/guide-user/base-system/dhcp#all_options).

@@ -9,7 +9,7 @@ honored by an issuer which is to be kept up-to-date. This is the usual way that
 you will interact with cert-manager to request signed certificates.
 
 In order to issue any certificates, you'll need to configure an
-[`Issuer`](../configuration/README.md) or [`ClusterIssuer`](../configuration/README.md)
+[`Issuer`](../configuration/issuer-and-clusterissuer-resources/README.md) or [`ClusterIssuer`](../configuration/issuer-and-clusterissuer-resources/README.md)
 resource first.
 
 ## Creating Certificate Resources
@@ -183,7 +183,7 @@ makes sure deployments get restarted whenever a mounted Secret changes.
 Re-use of private keys
 
 Some issuers, like the built-in [Venafi
-issuer](../configuration/venafi.md), may disallow re-using private keys.
+issuer](../configuration/issuer-and-clusterissuer-resources/venafi.md), may disallow re-using private keys.
 If this is the case, you must explicitly configure the `rotationPolicy:
 Always` setting for each of your Certificate objects accordingly.
 

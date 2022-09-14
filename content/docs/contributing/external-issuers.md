@@ -3,7 +3,7 @@ title: Implementing External Issuers
 description: 'cert-manager contributing guide: External Issuers'
 ---
 
-cert-manager offers a number of [core issuer types](../configuration/README.md) that represent
+cert-manager offers a number of [core issuer types](../configuration/issuer-and-clusterissuer-resources/README.md) that represent
 various certificate authorities.
 
 Since the number of potential issuers is larger than what could reasonably be supported in the
@@ -11,7 +11,7 @@ main cert-manager repository, cert-manager also supports out-of-tree external is
 them the same as in-tree issuer types.
 
 This document is for people looking to _create_ external issuers. For more information on how to
-install and configure external issuer types, read the [configuration documentation](../configuration/external.md).
+install and configure external issuer types, read the [configuration documentation](../configuration/issuer-and-clusterissuer-resources/external.md).
 
 ## General Overview
 

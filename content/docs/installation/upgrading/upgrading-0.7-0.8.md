@@ -21,13 +21,13 @@ have a large, multi-team deployment of cert-manager that makes it complex to
 upgrade all manifests at once in place.
 
 After upgrading, it is **strongly recommended** that you update your ACME Issuer
-and Certificate resources to the [new format](../../configuration/acme/README.md).
+and Certificate resources to the [new format](../../configuration/issuer-and-clusterissuer-resources/acme/README.md).
 
 We will be removing support for the old format ahead of the 1.0 release.
 
 The documentation has been updated to reflect configuring using the new format,
 and as such, exhaustive information can be found in the
-[document](../../configuration/acme/README.md).
+[document](../../configuration/issuer-and-clusterissuer-resources/acme/README.md).
 
 ## Performing an incremental switch to the new format
 

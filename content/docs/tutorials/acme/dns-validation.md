@@ -18,7 +18,7 @@ have control of the domains DNS records.
 
 The following Issuer defines the necessary information to enable DNS validation.
 You can read more about the Issuer resource in the [Issuer
-docs](../../configuration/README.md).
+docs](../../configuration/issuer-and-clusterissuer-resources/README.md).
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -88,7 +88,7 @@ solve DNS challenges. Our Issuer defines two providers. This gives us a choice
 of which one to use when obtaining certificates.
 
 More information about the DNS provider configuration, including a list of
-supported providers, can be found [in the DNS01 reference docs](../../configuration/acme/dns01/README.md).
+supported providers, can be found [in the DNS01 reference docs](../../configuration/issuer-and-clusterissuer-resources/acme/dns01/README.md).
 
 Once we have created the above Issuer we can use it to obtain a certificate.
 

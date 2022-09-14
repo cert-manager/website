@@ -17,7 +17,7 @@ implementation on the [cert-manager webhook-example](https://github.com/cert-man
 
 There's further information available in the configuration section:
 
-- [ACME DNS01 via webhook](../configuration/acme/dns01/README.md#webhook)
-- [Configuring an ACME issuer with external webhook](../configuration/acme/dns01/webhook.md)
+- [ACME DNS01 via webhook](../configuration/issuer-and-clusterissuer-resources/acme/dns01/README.md#webhook)
+- [Configuring an ACME issuer with external webhook](../configuration/issuer-and-clusterissuer-resources/acme/dns01/webhook.md)
 
 If you're struggling with creating a new DNS webhook, reach out on [Slack](./README.md#slack)!

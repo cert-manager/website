@@ -16,7 +16,7 @@ and they still wish for certificates to be signed through cert-manager.
 
 CertificateSigningRequests reference a `SignerName` or signer as the entity it
 wishes to sign its request from. For cert-manager, a signer can be mapped to
-either an [Issuer or ClusterIssuer](../configuration/README.md).
+either an [Issuer or ClusterIssuer](../configuration/issuer-and-clusterissuer-resources/README.md).
 
 #### Feature State
 
@@ -44,10 +44,10 @@ $ helm install \
 ```
 
 > Note: cert-manager supports signing CertificateSigningRequests
-> using all [internal Issuers](../configuration/README.md).
+> using all [internal Issuers](../configuration/issuer-and-clusterissuer-resources/README.md).
 
 > Note: cert-manager _does not_ automatically approve CertificateSigningRequests
-> that reference a cert-manager [Issuer](../configuration/README.md). Please refer to
+> that reference a cert-manager [Issuer](../configuration/issuer-and-clusterissuer-resources/README.md). Please refer to
 > the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process)
 > for the request process of CertificateSigningRequests.
 

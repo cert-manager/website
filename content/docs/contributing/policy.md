@@ -154,6 +154,6 @@ authorization against the API server. If cert-manager used this cert, it could a
 
 We try to not include in core cert-manager new functionality that involves calling third party APIs that we don't have infrastructure to test (or that the maintainers don't have the skills to work with).
 
-Instead we try to build interfaces such as [external DNS webhook solver](../configuration/acme/dns01/webhook.md) that can be implemented to use cert-manager with a particular third party implementation.
+Instead we try to build interfaces such as [external DNS webhook solver](../configuration/issuer-and-clusterissuer-resources/acme/dns01/webhook.md) that can be implemented to use cert-manager with a particular third party implementation.
 We believe that this is a more sustainable approach as that way folks who have knowledge and skills to work with particular infrastructure can own a project that interacts with it and it lets us avoid merging potentially untested code to core cert-manager.
 An example of a PR that might be rejected would be adding a new external DNS solver kind, see https://github.com/cert-manager/cert-manager/pull/1088

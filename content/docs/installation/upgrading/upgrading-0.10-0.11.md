@@ -111,7 +111,7 @@ Support for the deprecated `spec.http01` or `spec.dns01` fields in `Issuer` and
 `ClusterIssuer` have been removed. Any `Issuer` or `ClusterIssuer` objects must
 be converted to use the equivalent `spec.solvers[].http01` or
 `spec.solvers[].dns01` syntax. You can read more about the Issuer resource in
-the [configuration documentation](../../configuration/README.md).
+the [configuration documentation](../../configuration/issuer-and-clusterissuer-resources/README.md).
 
 Any issuers that haven't been converted will result the `cert-manager` pod being
 unable to find any solvers at the expected location. This will result in errors
