@@ -1,3 +1,7 @@
+// This file originates from https://github.com/zentered/next-product-docs on
+// the branch "feat/cert-manager-adjustments" (commit f4fb801), copyright
+// Zentered 2022, licensed under the Apache 2.0 license.
+
 import React from 'react'
 
 export default function InlineCode({ className, children, theme }) {

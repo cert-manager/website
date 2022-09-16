@@ -1,12 +1,13 @@
+// This file originates from https://github.com/zentered/next-product-docs on
+// the branch "feat/cert-manager-adjustments" (commit f4fb801), copyright
+// Zentered 2022, licensed under the Apache 2.0 license.
+
 /* eslint-disable react/display-name */
 import React from 'react'
 import { MDXRemote } from 'next-mdx-remote'
-// import { State, Observe } from 'mdx-observable'
-// import Tabs, { Tab } from './components/Tabs.jsx'
-// import Interpolate from './components/Interpolate.jsx'
 import { Element } from 'react-scroll'
-import CodeBlock from '../components/docs/CodeBlock.jsx/index.js'
-import InlineCode from './components/InlineCode.jsx'
+import CodeBlock from 'components/docs/CodeBlock.jsx/index.js'
+import InlineCode from 'components/InlineCode.jsx'
 
 export function Documentation({ source, theme }) {
   const components = {
