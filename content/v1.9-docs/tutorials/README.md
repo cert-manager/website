@@ -22,6 +22,7 @@ for you to learn from. Take a look!
   certificate.
 - [Securing an Istio service mesh with cert-manager](./istio-csr/istio-csr.md): Tutorial for
   securing an Istio service mesh using a cert-manager issuer.
+- [Obtaining SSL certificates with the ZeroSSL](./zerossl/zerossl.md): Tutorial describing usage of the ZeroSSL as external ACME server.
 
 
 ### External Tutorials
