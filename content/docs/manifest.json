@@ -383,9 +383,14 @@
               "path": "/docs/tutorials/istio-csr/istio-csr.md"
             },
             {
+              "title": "Syncing Secrets Across Namespaces",
+              "path": "/docs/tutorials/syncing-secrets-across-namespaces.md"
+            },
+            {
               "title": "Securing Ingresses with ZeroSSL",
               "path": "/docs/tutorials/zerossl/zerossl.md"
             }
+
           ]
         },
           {
