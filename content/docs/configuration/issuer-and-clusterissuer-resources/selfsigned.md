@@ -1,7 +1,14 @@
 ---
 title: SelfSigned
-description: 'cert-manager configuration: SelfSigned Issuers'
+description: |
+    Learn about the SelfSigned Issuer which is useful for bootstrapping a root certificate for custom Public Key Infrastructure,
+    or for creating simple ad-hoc certificates.
 ---
+
+Learn about the SelfSigned Issuer which is useful for bootstrapping a root certificate for custom Public Key Infrastructure,
+or for creating simple ad-hoc certificates.
+
+## Overview
 
 ⚠️ `SelfSigned` issuers are generally useful for bootstrapping a PKI locally, which
 is a complex topic for advanced users. To be used safely in production, running a PKI
@@ -13,10 +20,6 @@ The `SelfSigned` issuer doesn't represent a certificate authority as such, but
 instead denotes that certificates will "sign themselves" using a given private
 key. In other words, the private key of the certificate will be used to sign
 the certificate itself.
-
-This `Issuer` type is useful for bootstrapping a root certificate for a
-custom PKI (Public Key Infrastructure), or for otherwise creating simple
-ad-hoc certificates for a quick test.
 
 There are important [caveats](#caveats) - including security issues - to
 consider with `SelfSigned` issuers; in general you'd likely  want to use a

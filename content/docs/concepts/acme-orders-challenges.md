@@ -5,7 +5,7 @@ description: 'cert-manager core concepts: ACME Orders and Challenges'
 
 cert-manager supports requesting certificates from ACME servers, including from
 [Let's Encrypt](https://letsencrypt.org/), with use of the [ACME
-Issuer](../configuration/acme/README.md). These certificates are typically trusted on
+Issuer](../configuration/issuer-and-clusterissuer-resources/acme/README.md). These certificates are typically trusted on
 the public Internet by most computers. To successfully request a certificate,
 cert-manager must solve ACME Challenges which are completed in order to prove
 that the client owns the DNS addresses that are being requested.

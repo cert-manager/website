@@ -48,5 +48,5 @@ This allows you to get more insight into any rate limiting or other errors your 
 
 ## Improvements for Venafi TPP Authentication
 
-It is now possible to use a long lived access-token for authentication when configuring [Venafi TPP `Issuer` and `ClusterIssuer` types](../configuration/venafi.md).
+It is now possible to use a long lived access-token for authentication when configuring [Venafi TPP `Issuer` and `ClusterIssuer` types](../configuration/issuer-and-clusterissuer-resources/venafi.md).
 This authentication mechanism is supported by `Venafi TPP >= 19.2`.

@@ -1,7 +1,12 @@
 ---
 title: External
-description: 'cert-manager configuration: External Issuers'
+description: |
+    Learn about external issuers which are extensions for cert-manager and allow it to get signed certificates from a variety of other certificate authorities.
 ---
+
+Learn about external issuers which are extensions for cert-manager and allow it to get signed certificates from a variety of other certificate authorities.
+
+## Overview
 
 cert-manager supports external `Issuer` types. While external issuers are not
 implemented in the main cert-manager repository, they are otherwise treated the

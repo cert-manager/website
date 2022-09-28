@@ -1,7 +1,12 @@
 ---
 title: Venafi
-description: 'cert-manager configuration: Venafi Issuers'
+description: |
+    Learn about the Venafi Issuer which signs certificates using Venafi TPP or Venafi-as-a-Service.
 ---
+
+Learn about the Venafi Issuer which signs certificates using Venafi TPP or Venafi-as-a-Service.
+
+## Overview
 
 The Venafi `Issuer` types allows you to obtain certificates from [Venafi
 as a Service (VaaS)](https://vaas.venafi.com/jetstack) and [Venafi Trust Protection
@@ -32,10 +37,10 @@ resources, read the [Namespaces](../concepts/issuer.md#namespaces) section.
 If you haven't already done so, create your Venafi as a Service account on this
 [page](https://vaas.venafi.com/jetstack) and copy the API key from your user
 preferences.  Then you may want to create a custom CA Account and Issuing Template
-or choose instead to use defaults that are automatically created for testing 
+or choose instead to use defaults that are automatically created for testing
 ("Built-in CA" and "Default", respectively).  Lastly you'll need to create an
 Application for establishing ownership of all the certificates requested by your
-cert-manager Issuer, and assign to it the Issuing Template.  
+cert-manager Issuer, and assign to it the Issuing Template.
 
 > Make a note of the Application name and API alias of the Issuing Template because
 > together they comprise the 'zone' you will need for your `Issuer` configuration.
@@ -100,7 +105,7 @@ vaas-issuer    True    Venafi issuer started  2m
 You are now ready to issue certificates using the newly provisioned Venafi
 `Issuer` and Venafi as a Service.
 
-Read the [Issuing Certificates](../usage/certificate.md) document for
+Read the [Issuing Certificates](../configuration/certificate-resources.md) document for
 more information on how to create Certificate resources.
 
 
@@ -252,7 +257,7 @@ $ kubectl describe issuer tpp-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOU
 You are now ready to issue certificates using the newly provisioned Venafi
 `Issuer` and Trust Protection Platform.
 
-Read the [Issuing Certificates](../usage/certificate.md) document for
+Read the [Issuing Certificates](../configuration/certificate-resources.md) document for
 more information on how to create Certificate resources.
 
 # Issuer specific annotations

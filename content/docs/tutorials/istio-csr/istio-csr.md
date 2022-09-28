@@ -49,7 +49,7 @@ kubectl create namespace istio-system
 
 An Issuer tells cert-manager how to issue certificates; we'll create a self-signed root CA in our cluster because it's really simple to configure.
 
-The approach of using a locally generated root certificate would work in a production deployment too, but there are also several [other issuers](https://cert-manager.io/docs/configuration/) in cert-manager which could be used. Note that the ACME issuer **will not work**, since it can't add the required fields to issued certificates.
+The approach of using a locally generated root certificate would work in a production deployment too, but there are also several [other issuers](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/) in cert-manager which could be used. Note that the ACME issuer **will not work**, since it can't add the required fields to issued certificates.
 
 There are also some comments on the [example-issuer](https://github.com/cert-manager/website/blob/master/content/docs/tutorials/istio-csr/example/example-issuer.yaml) providing a little more detail. Note also that this guide only uses `Issuer`s and not `ClusterIssuer`s - using a `ClusterIssuer` isn't a drop-in replacement, and in any case we recommend that production deployments use Issuers for easier access controls and scoping.
 

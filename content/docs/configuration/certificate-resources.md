@@ -1,7 +1,13 @@
 ---
 title: Certificate Resources
-description: 'cert-manager usage: Certificates'
+description: |
+    Learn about Certificate resources which represent a desired X.509 certificates which will be signed and renewed before they expire.
 ---
+
+Learn about Certificate resources which represent a desired X.509 certificates which will be signed and renewed before they expire.
+The private key and signed certificate will be stored in a Secret which you can then mount in to a Pod or use in an Ingress resource.
+
+## Overview
 
 In cert-manager, the [`Certificate`](../concepts/certificate.md) resource
 represents a human readable definition of a certificate request that is to be
@@ -9,7 +15,7 @@ honored by an issuer which is to be kept up-to-date. This is the usual way that
 you will interact with cert-manager to request signed certificates.
 
 In order to issue any certificates, you'll need to configure an
-[`Issuer`](../configuration/README.md) or [`ClusterIssuer`](../configuration/README.md)
+[`Issuer`](../configuration/issuer-and-clusterissuer-resources/README.md) or [`ClusterIssuer`](../configuration/issuer-and-clusterissuer-resources/README.md)
 resource first.
 
 ## Creating Certificate Resources
@@ -183,7 +189,7 @@ makes sure deployments get restarted whenever a mounted Secret changes.
 Re-use of private keys
 
 Some issuers, like the built-in [Venafi
-issuer](../configuration/venafi.md), may disallow re-using private keys.
+issuer](../configuration/issuer-and-clusterissuer-resources/venafi.md), may disallow re-using private keys.
 If this is the case, you must explicitly configure the `rotationPolicy:
 Always` setting for each of your Certificate objects accordingly.
 

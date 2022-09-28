@@ -3,11 +3,11 @@ title: Issuing Certificates
 description: 'cert-manager usage: Overview'
 ---
 
-Once an [`Issuer`](../configuration/README.md) has been configured, you're ready to issue your first certificate!
+Once an [`Issuer`](../configuration/issuer-and-clusterissuer-resources/README.md) has been configured, you're ready to issue your first certificate!
 
 There are several use cases and methods for requesting certificates through cert-manager:
 
-- [Certificate Resources](./certificate.md): The simplest and most common method for
+- [Certificate Resources](../configuration/certificate-resources.md): The simplest and most common method for
   requesting signed certificates.
 - [Securing Ingress Resources](./ingress.md): A method to secure ingress resources
   in your cluster.

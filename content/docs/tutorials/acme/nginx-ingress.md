@@ -275,7 +275,7 @@ kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/
 # expected output: issuer.cert-manager.io "letsencrypt-prod" created
 ```
 
-Both of these issuers are configured to use the [`HTTP01`](../../configuration/acme/http01/README.md) challenge provider.
+Both of these issuers are configured to use the [`HTTP01`](../../configuration/issuer-and-clusterissuer-resources/acme/http01/README.md) challenge provider.
 
 Check on the status of the issuer after you create it:
 

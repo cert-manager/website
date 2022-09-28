@@ -235,7 +235,7 @@ EdgeGrid` Go package.
 
 ## Bug Fixes
 
-- The [RFC2136](https://cert-manager.io/docs/configuration/acme/dns01/rfc2136/)
+- The [RFC2136](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/acme/dns01/rfc2136/)
   issuer is now able to handle DNS01 challenges that map to multiple `TXT`
   records. This lets you create Let's Encrypt certificates using RFC2136 with
   multiple DNS names. Fixed in the cert-manager PR [#3622][].

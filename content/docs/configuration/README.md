@@ -1,30 +1,36 @@
 ---
-title: Issuer Configuration
-description: Learn about configuring cert-manager using Issuer and ClusterIssuer resources.
+title: Configuration
+description: |
+    Learn about how to configure cert-manager using Issuer, ClusterIssuer and Certificate resources.
 ---
+
+Learn about how to configure cert-manager using Issuer, ClusterIssuer and Certificate resources.
+
+## Overview
+
+After installing cert-manager you will find that some new resource types have been added to the Kubernetes API server
+such as `Issuer`, `ClusterIssuer`, and `Certificate`.
+They all have `metadata`, `spec` and `status` fields, just like other Kubernetes resources.
+
+You can create them by writing the content to a YAML file and using `kubectl apply` to send them to the Kubernetes API server.
+Whenever you create or update one of these resources cert-manager will react;
+it will do some work and it will update the status with information about what it has done.
+
+Here is an overview of each of these resources explaining when you should create them and what cert-manager will do in each case.
+
+## Issuer / ClusterIssuer Resources
 
 The first thing you'll need to configure after you've installed cert-manager is an `Issuer` or a `ClusterIssuer`.
 These are resources that represent certificate authorities (CAs)
-able to sign certificates in response to certificate signing requests.
+which are able to sign certificates in response to certificate signing requests.
 
-This section documents how the different issuer types can be configured. You might want to
-[read more about `Issuer` and `ClusterIssuer` resources](../concepts/issuer.md).
+📖 [Learn more about Issuer and ClusterIssuer resources](issuer-and-clusterissuer-resources/README.md).
 
-cert-manager comes with a number of built-in certificate issuers which are denoted by being in
-the `cert-manager.io` group. You can also install external issuers in addition to the built-in types.
-Built-in and external issuers are treated the same and are configured similarly.
 
-## Cluster Resource Namespace
+## Certificate Resources
 
-When using `ClusterIssuer` resource types, ensure you understand the purpose of the
-Cluster Resource Namespace; this can be a common source
-of issues for people getting started with cert-manager.
+Next you'll probably want to create a Certificate.
+This resource represents a desired X.509 certificate which will be signed and renewed before it expires.
+The private key and signed certificate will be stored in a Secret which you can then mount in to a Pod or use in an Ingress resource.
 
-The `ClusterIssuer` resource is cluster scoped. This means that when referencing
-a secret via the `secretName` field, secrets will be looked for in the `Cluster
-Resource Namespace`. By default, this namespace is `cert-manager` however it can be
-changed via a flag on the cert-manager-controller component:
-
-```bash
---cluster-resource-namespace=my-namespace
-```
+📖 [Learn more about Certificate resources](certificate-resources.md).

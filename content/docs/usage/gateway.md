@@ -10,7 +10,7 @@ description: 'cert-manager usage: Kubernetes Gateways'
 📌  This page focuses on automatically creating Certificate resources by
 annotating Gateway resource. If you are looking for using an ACME Issuer along
 with HTTP-01 challenges using the Gateway API, see [ACME
-HTTP-01](../configuration/acme/http01/README.md).
+HTTP-01](../configuration/issuer-and-clusterissuer-resources/acme/http01/README.md).
 
 </div>
 

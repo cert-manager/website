@@ -182,3 +182,15 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Demoted the cmctl x install page
 /docs/installation/cmctl/ /docs/reference/cmctl/ 301!
+
+
+# Moved Issuer and ClusterIssuer resources to a subdirectory
+/docs/configuration/acme/* /docs/configuration/issuer-and-clusterissuer-resources/acme/:splat 301!
+/docs/configuration/ca/ /docs/configuration/issuer-and-clusterissuer-resources/ca/ 301!
+/docs/configuration/external/ /docs/configuration/issuer-and-clusterissuer-resources/external/ 301!
+/docs/configuration/selfsigned/ /docs/configuration/issuer-and-clusterissuer-resources/selfsigned/ 301!
+/docs/configuration/vault/ /docs/configuration/issuer-and-clusterissuer-resources/vault/ 301!
+/docs/configuration/venafi/ /docs/configuration/issuer-and-clusterissuer-resources/venafi/ 301!
+
+# Moved Certificate resources documentation from usage to configuration
+/docs/usage/certificate/ /docs/configuration/certificate-resources/ 301!

@@ -62,9 +62,9 @@ Our [getting started guide](../tutorials/istio-csr/istio-csr.md) uses an `Issuer
 
 Whether you choose to use an `Issuer` or a `ClusterIssuer`, you'll also need to choose the type of issuer you want such as:
 
-- [CA](https://cert-manager.io/docs/configuration/ca/)
-- [Vault](https://cert-manager.io/docs/configuration/vault/)
-- or an [external issuer](https://cert-manager.io/docs/configuration/external/)
+- [CA](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/ca/)
+- [Vault](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/vault/)
+- or an [external issuer](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/external/)
 
 The key requirement is that arbitrary values can be placed into the `subjectAltName` (SAN) X.509 extension, since
 Istio places SPIFFE IDs there.

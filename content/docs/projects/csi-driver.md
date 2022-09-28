@@ -122,7 +122,7 @@ this process has been completed.
 
 For more information on how to set up issuers for your cluster, refer to the
 cert-manager documentation
-[here](https://cert-manager.io/docs/configuration/). **Note** it is not
+[here](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/). **Note** it is not
 possible to use `SelfSigned` Issuers with the CSI Driver. In order for
 cert-manager to self sign a certificate, it needs access to the secret
 containing the private key that signed the certificate request to sign the end

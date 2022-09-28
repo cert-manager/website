@@ -24,7 +24,7 @@ With this update, cert-manager users with Venafi Cloud issuers will need to be a
 This means users will need to create an Application in `OutagePREDICT` and associate an _Issuing Template_ with it
 (the same _Issuing Templates_ assigned to DA Projects Zones can be used since _Issuing Templates_ are shared between Venafi Cloud products).
 
-[Venafi Cloud Issuer]: https://cert-manager.io/docs/configuration/venafi/
+[Venafi Cloud Issuer]: https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/venafi/
 [`VCert` `v4.13.0`]: https://github.com/Venafi/vcert/releases/tag/v4.13.0
 
 ## Next Steps

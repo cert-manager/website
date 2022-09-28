@@ -109,20 +109,20 @@ been configured.
 > :warning:
 
 2. Install or configure a
-   [ClusterIssuer](https://cert-manager.io/docs/configuration/) to give
+   [ClusterIssuer](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/) to give
    cert-manager the ability to sign against your Trust Domain. If a namespace
    scoped Issuer is desired, then that Issuer must be created in every namespace
    that Pods will mount volumes from.
    You must use an Issuer type which is compatible with signing URI SAN
    certificates and the private does not need to be available to the signer, for
-   example [CA](https://cert-manager.io/docs/configuration/ca/),
-   [Vault](https://cert-manager.io/docs/configuration/vault/),
-   [Venafi](https://cert-manager.io/docs/configuration/venafi/),
+   example [CA](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/ca/),
+   [Vault](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/vault/),
+   [Venafi](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/venafi/),
    [AWS PCA](https://github.com/cert-manager/aws-privateca-issuer),
    [Google CAS](https://github.com/jetstack/google-cas-issuer),
    [Small Step](https://github.com/smallstep/step-issuer). Issuers such as
-   [SelfSigned](https://cert-manager.io/docs/configuration/selfsigned/) or
-   [ACME](https://cert-manager.io/docs/configuration/acme/) *will not work*.
+   [SelfSigned](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/selfsigned/) or
+   [ACME](https://cert-manager.io/docs/configuration/issuer-and-clusterissuer-resources/acme/) *will not work*.
 
    An example demo
    [ClusterIssuer](https://cert-manager.io/docs/concepts/issuer/#namespaces) can

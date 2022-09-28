@@ -128,7 +128,7 @@ can be requested for the same certificate.
 Read [Additional Certificate Output Formats] for more details and
 thanks to [@seuf](https://github.com/seuf) for getting this across the line!
 
-[Additional Certificate Output Formats]: ../usage/certificate.md#additional-certificate-output-formats
+[Additional Certificate Output Formats]: ../configuration/certificate-resources.md#additional-certificate-output-formats
 
 #### Server-Side Apply
 

@@ -74,7 +74,7 @@ For communication between the Ingresses and the internet, we'll want to use cert
 
 The Let's Encrypt production issuer has [strict rate limits](https://letsencrypt.org/docs/rate-limits/). Before your configuration is finalized you may have to recreate services several times, hitting those limits. It's easy to confuse rate limiting with errors in configuration or operation while building your stack.
 
-Because of this, we will start with the Let's Encrypt staging issuer. Once your configuration is all but finalized, we will switch to a production issuer. Both of these issuers are configured to use the [`HTTP01`](../../configuration/acme/http01/README.md) challenge provider.
+Because of this, we will start with the Let's Encrypt staging issuer. Once your configuration is all but finalized, we will switch to a production issuer. Both of these issuers are configured to use the [`HTTP01`](../../configuration/issuer-and-clusterissuer-resources/acme/http01/README.md) challenge provider.
 
 1. The following YAML defines a staging certificate issuer. You must update the email address to your own. The `email` field is required by Let's Encrypt and used to notify you of certificate expiration and updates.
 

@@ -384,7 +384,7 @@ Status:
 > ⚠️ In the next step you will see a warning about untrusted certificates because
 > we start with the staging issuer, but that's totally expected.
 >
-> 🔰 Read more about [configuring the ACME Issuer](../configuration/acme).
+> 🔰 Read more about [configuring the ACME Issuer](../configuration/issuer-and-clusterissuer-resources/acme).
 
 ## 8. Re-configure the Ingress for SSL
 

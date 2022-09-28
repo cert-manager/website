@@ -1,7 +1,12 @@
 ---
 title: Vault
-description: 'cert-manager configuration: Vault Issuers'
+description: |
+    Learn about the Vault Issuer which signs certificates using HashiCorp Vault.
 ---
+
+Learn about the Vault Issuer which signs certificates using HashiCorp Vault.
+
+## Overview
 
 The `Vault` `Issuer` represents the certificate authority
 [Vault](https://www.vaultproject.io/) - a multi-purpose secret store that can be
@@ -233,7 +238,7 @@ Kubernetes 1.24 and above.
     ```
 
 1) Create the Issuer resource referencing the Secret resource:
-  
+
     ```yaml
     apiVersion: cert-manager.io/v1
     kind: Issuer
