@@ -143,3 +143,11 @@ select {
 a.hidden-link {
   display: none;
 }
+
+.DocSearch--active #nav-menu-mobile {
+  margin-top: -1000px;
+}
+
+.DocSearch-SearchBar {
+  margin-bottom: 5px;
+}

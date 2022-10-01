@@ -42,6 +42,7 @@ function MobileNavigation({ active, className = '' }) {
         <BarsIcon />
       </button>
       <nav
+        id="nav-menu-mobile"
         className={`absolute left-0 z-1000 ${classNames}`}
         style={{ marginLeft: '4%', marginRight: '4%', width: '92%' }}
       >
