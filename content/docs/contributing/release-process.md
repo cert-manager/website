@@ -74,7 +74,7 @@ First, ensure that you have all the tools required to perform a cert-manager rel
 1. Install the [`release-notes`](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md) CLI:
 
    ```sh
-   go install k8s.io/release/cmd/release-notes@v0.7.0
+   go install k8s.io/release/cmd/release-notes@v0.13.0
    ```
 
 2. Install our [`cmrel`](https://github.com/cert-manager/release) CLI:
