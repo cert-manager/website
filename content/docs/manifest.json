@@ -375,7 +375,7 @@
               "path": "/docs/tutorials/acme/pomerium-ingress.md"
             },
             {
-              "title": "Securing Ingresses with Venafi",
+              "title": "EKS + Ingress + Venafi",
               "path": "/docs/tutorials/venafi/venafi.md"
             },
             {

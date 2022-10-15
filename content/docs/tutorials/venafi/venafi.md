@@ -92,12 +92,12 @@ To deploy `ingress-nginx` using an ELB to expose the service, run the following:
 
 Deploy the AWS specific prerequisite manifest
 ```bash
-$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/aws/service-nlb.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.4.0/deploy/static/provider/aws/deploy.yaml
 ```
 
 Deploy the 'generic' `ingress-nginx` manifest
 ```bash
-$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/aws/deploy.yaml
 ```
 
 You may have to wait up to 5 minutes for all the required components in your
@@ -346,7 +346,6 @@ spec:
   venafi:
     zone: "Default" # Set this to the Venafi policy zone you want to use
     cloud:
-      url: "https://api.venafi.cloud/v1"
       apiTokenSecretRef:
         name: venafi-cloud-secret
         key: apikey
@@ -400,6 +399,7 @@ spec:
   secretName: example-com-tls
   dnsNames:
   - example.com
+  commonName: example.com
   issuerRef:
     name: venafi-issuer
 ```
