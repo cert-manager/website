@@ -7,9 +7,6 @@ description: 'cert-manager installation: Using Helm'
 
 cert-manager provides Helm charts as a first-class method of installation on both Kubernetes and OpenShift.
 
-Be sure never to embed cert-manager as a sub-chart of other Helm charts; cert-manager manages
-non-namespaced resources in your cluster and care must be taken to ensure that it is installed exactly once.
-
 ### Prerequisites
 
 - [Install Helm version 3 or later](https://helm.sh/docs/intro/install/).
