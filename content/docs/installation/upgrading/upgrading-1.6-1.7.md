@@ -14,6 +14,10 @@ Please read [Migrating Deprecated API Resources] for full instructions.
 If you are currently using HTTP-01 challenges or the Ingress shim annotations, please read the [Ingress class compatibility](./ingress-class-compatibility.md)
 notes to see if your Ingress controller has any known issues with the migration to Ingress v1.
 
+If running Kubernetes versions before `v1.22`, the 
+[`ServerSideApply`](https://kubernetes.io/docs/reference/using-api/server-side-apply/)
+feature gate _must_ be enabled in the cluster. This beta feature is enabled by default
+on supported versions before `v1.22`.
 
 ## Now Follow the Regular Upgrade Process
 

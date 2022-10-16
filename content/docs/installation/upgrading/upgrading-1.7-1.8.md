@@ -41,6 +41,11 @@ The reason the Challenge resources need to be removed before upgrading to 1.8
 when using the new Server-Side Apply feature is that cert-manager post-1.8 is
 not able to clean up Challenge resources that were created pre-1.8.
 
+If running Kubernetes versions before `v1.22`, the
+[`ServerSideApply`](https://kubernetes.io/docs/reference/using-api/server-side-apply/) 
+feature gate _must_ be enabled in the cluster. This beta feature is enabled by
+default on supported versions before `v1.22`.
+
 #### Migrating from the Gateway API v1alpha1 to v1alpha2
 
 This section only applies to you if you are using the feature gate
