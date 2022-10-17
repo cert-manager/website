@@ -425,40 +425,34 @@ page if a step is missing or if it is outdated.
 13. Proceed to the post-release steps:
 
     1. **(initial alpha only)** Create a PR on
-       [`jetstack/testing`](https://github.com/jetstack/testing),
-       changing the `release-next` periodic tests interval to `2h`, configured in:
+       [cert-manager/release](https://github.com/cert-manager/release),
+       add the new release to our list of periodic ProwJobs. Use [this PR](https://github.com/cert-manager/release/pull/105/) as an example.
 
-       ```plain
-       config/jobs/cert-manager/release-next/cert-manager-release-next-periodics.yaml
-       ```
+    2. **(initial alpha only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
+       open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs. 
+       Use [this PR](https://github.com/jetstack/testing/pull/766) as an example.
 
-       Why? Because we increase the interval of the "next" periodic tests right after a final release
-       since next periodics are only useful after we do the first alpha.
-
-    2. **(initial alpha only)** Open a PR to
+    3. **(initial alpha only)** If needed, open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) in
        order to:
 
        - Update the section "How we determine supported Kubernetes versions" on
          the [supported-releases](../installation/supported-releases.md) page.
-         In the table, change the "next periodic" line with the correct links.
 
-    3. **(final release only)** Create a PR on
-       [`jetstack/testing`](https://github.com/jetstack/testing),
-       changing the `release-next` periodic tests interval to 168h, configured in:
+    4. **(final release only)** Create a PR on
+       [cert-manager/release](https://github.com/cert-manager/release),
+       removing the now unsupported release version (2 versions back) in this file:
 
        ```plain
-       config/jobs/cert-manager/release-next/cert-manager-release-next-periodics.yaml
+       prowspecs/specs.go
        ```
 
-       Why? Because that saves us compute time between a final release
-       and the first alpha.
+       This will remove the periodic ProwJob for this version as it is no longer needed.
 
-       ⛔️ Do not remove the file or comment out the file contents,
-       because this will break [Test Grid](https://testgrid.k8s.io/jetstack-cert-manager-next),
-       as happened in [kubernetes/test-infra #25035](https://github.com/kubernetes/test-infra/pull/25035).
+    5. **(final release only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
+       open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs. 
 
-    4. **(final release only)** Open a PR to
+    6. **(final release only)** Open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) in
        order to:
 
@@ -471,12 +465,12 @@ page if a step is missing or if it is outdated.
          In the table, set "n/a" for the line where "next periodic" is since
          these tests will be disabled until we do our first alpha.
 
-    5. **(final release only)** Open a PR to
+    7. **(final release only)** Open a PR to
        [`jetstack/testing`](https://github.com/jetstack/testing) and change Prow's
        config. To do this, take inspiration from [Maartje's PR
        example](https://github.com/jetstack/testing/pull/397/files).
 
-    6. **(final release only)** Push a new release branch to
+    8. **(final release only)** Push a new release branch to
        [`cert-manager/cert-manager`](https://github.com/cert-manager/cert-manager). If the
        final release is `v1.0.0`, then push the new branch `release-1.1`:
 
@@ -486,26 +480,26 @@ page if a step is missing or if it is outdated.
         git push origin release-1.1
         ```
 
-    7. **(final release only)** Open a PR to
+    9. **(final release only)** Open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) with
        updates to the website configuration. To do this, take inspiration from
        [Maartje's PR
        example](https://github.com/cert-manager/website/pull/309/files).
 
-    8. Ensure that any installation commands in
+    10. Ensure that any installation commands in
        [`cert-manager/website`](https://github.com/cert-manager/website) install
        the latest version. This should be done after every release, including
        patch releases as we want to encourage users to always install the latest
        patch.
 
-    9. Future: check that our Algolia search indexing is up-to-date for the website - i.e. that the new version of the docs
+    11. Future: check that our Algolia search indexing is up-to-date for the website - i.e. that the new version of the docs
        is being indexed correctly. This is listed here as it's a step we should be checking after a release of a major version
        but at the time of writing we don't know how to do it!
 
-    10. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
+    12. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
         bumping the versions of our kubectl plugins.
 
-    11. Create a new OLM package and publish to OperatorHub
+    13. Create a new OLM package and publish to OperatorHub
 
         cert-manager can be [installed](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) using Operator Lifecycle Manager (OLM)
         so we need to create OLM packages for each cert-manager version and publish them to both
