@@ -750,7 +750,7 @@ Resource Types:
       <td>
         <code>parentRefs</code>
         <br />
-        <em>[]sigs.k8s.io/gateway-api/apis/v1alpha2.ParentRef</em>
+        <em>[]sigs.k8s.io/gateway-api/apis/v1alpha2.ParentReference</em>
       </td>
       <td>
         <p>
@@ -4491,10 +4491,11 @@ Resource Types:
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequestSpec">CertificateRequestSpec</a>, <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
 <div>
   <p>
-    KeyUsage specifies valid usage contexts for keys. See: <a href="https://tools.ietf.org/html/rfc5280#section-4.2.1.3">https://tools.ietf.org/html/rfc5280#section-4.2.1.3</a>
+    KeyUsage specifies valid usage contexts for keys. See:
+    <a href="https://tools.ietf.org/html/rfc5280#section-4.2.1.3">https://tools.ietf.org/html/rfc5280#section-4.2.1.3</a>
     <a href="https://tools.ietf.org/html/rfc5280#section-4.2.1.12">https://tools.ietf.org/html/rfc5280#section-4.2.1.12</a>
-    Valid KeyUsage values are as follows: &ldquo;signing&rdquo;, &ldquo;digital signature&rdquo;, &ldquo;content commitment&rdquo;, &ldquo;key encipherment&rdquo;, &ldquo;key agreement&rdquo;, &ldquo;data encipherment&rdquo;, &ldquo;cert sign&rdquo;, &ldquo;crl sign&rdquo;, &ldquo;encipher only&rdquo;, &ldquo;decipher only&rdquo;, &ldquo;any&rdquo;, &ldquo;server auth&rdquo;, &ldquo;client auth&rdquo;, &ldquo;code signing&rdquo;, &ldquo;email protection&rdquo;, &ldquo;s/mime&rdquo;, &ldquo;ipsec end system&rdquo;, &ldquo;ipsec tunnel&rdquo;, &ldquo;ipsec user&rdquo;, &ldquo;timestamping&rdquo;, &ldquo;ocsp signing&rdquo;, &ldquo;microsoft sgc&rdquo;, &ldquo;netscape sgc&rdquo;
   </p>
+  <p>Valid KeyUsage values are as follows: &ldquo;signing&rdquo;, &ldquo;digital signature&rdquo;, &ldquo;content commitment&rdquo;, &ldquo;key encipherment&rdquo;, &ldquo;key agreement&rdquo;, &ldquo;data encipherment&rdquo;, &ldquo;cert sign&rdquo;, &ldquo;crl sign&rdquo;, &ldquo;encipher only&rdquo;, &ldquo;decipher only&rdquo;, &ldquo;any&rdquo;, &ldquo;server auth&rdquo;, &ldquo;client auth&rdquo;, &ldquo;code signing&rdquo;, &ldquo;email protection&rdquo;, &ldquo;s/mime&rdquo;, &ldquo;ipsec end system&rdquo;, &ldquo;ipsec tunnel&rdquo;, &ldquo;ipsec user&rdquo;, &ldquo;timestamping&rdquo;, &ldquo;ocsp signing&rdquo;, &ldquo;microsoft sgc&rdquo;, &ldquo;netscape sgc&rdquo;</p>
 </div>
 <table>
   <thead>
@@ -4949,7 +4950,20 @@ Resource Types:
       </td>
       <td>
         <em>(Optional)</em>
-        <p>PEM-encoded CA bundle (base64-encoded) used to validate Vault server certificate. Only used if the Server URL is using HTTPS protocol. This parameter is ignored for plain HTTP protocol connection. If not set the system root certificates are used to validate the TLS connection.</p>
+        <p>PEM-encoded CA bundle (base64-encoded) used to validate Vault server certificate. Only used if the Server URL is using HTTPS protocol. This parameter is ignored for plain HTTP protocol connection. If not set the system root certificates are used to validate the TLS connection. Mutually exclusive with CABundleSecretRef. If neither CABundle nor CABundleSecretRef are defined, the cert-manager controller system root certificates are used to validate the TLS connection.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>caBundleSecretRef</code>
+        <br />
+        <em>
+          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>CABundleSecretRef is a reference to a Secret which contains the CABundle which will be used when connecting to Vault when using HTTPS. Mutually exclusive with CABundle. If neither CABundleSecretRef nor CABundle are defined, the cert-manager controller system root certificates are used to validate the TLS connection. If no key for the Secret is specified, cert-manager will default to &lsquo;ca.crt&rsquo;.</p>
       </td>
     </tr>
   </tbody>
@@ -5363,7 +5377,7 @@ Resource Types:
 <h3 id="meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</h3>
 <p>
   (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEExternalAccountBinding">ACMEExternalAccountBinding</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuer">ACMEIssuer</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAcmeDNS">ACMEIssuerDNS01ProviderAcmeDNS</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAkamai">ACMEIssuerDNS01ProviderAkamai</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderCloudDNS">ACMEIssuerDNS01ProviderCloudDNS</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderCloudflare">ACMEIssuerDNS01ProviderCloudflare</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderDigitalOcean">ACMEIssuerDNS01ProviderDigitalOcean</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRFC2136">ACMEIssuerDNS01ProviderRFC2136</a>,
-  <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRoute53">ACMEIssuerDNS01ProviderRoute53</a>, <a href="#cert-manager.io/v1.JKSKeystore">JKSKeystore</a>, <a href="#cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</a>, <a href="#cert-manager.io/v1.VaultAppRole">VaultAppRole</a>, <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>, <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>, <a href="#cert-manager.io/v1.VenafiCloud">VenafiCloud</a>)
+  <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRoute53">ACMEIssuerDNS01ProviderRoute53</a>, <a href="#cert-manager.io/v1.JKSKeystore">JKSKeystore</a>, <a href="#cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</a>, <a href="#cert-manager.io/v1.VaultAppRole">VaultAppRole</a>, <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>, <a href="#cert-manager.io/v1.VaultIssuer">VaultIssuer</a>, <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>, <a href="#cert-manager.io/v1.VenafiCloud">VenafiCloud</a>)
 </p>
 <div>
   <p> A reference to a specific &lsquo;key&rsquo; within a Secret resource. In some instances, <code>key</code> is a required field. </p>
@@ -5645,5 +5659,5 @@ Resource Types:
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>4486c01f7</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>da3265115</code>. </em>
 </p>
