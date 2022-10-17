@@ -502,6 +502,23 @@ ValidatingWebhookConfiguration
 OVHcloud
 ProwJobs
 configs
+dkulchinsky
+trivy
+caBundleSecretRef
+caBundle
+Tolsto
+StableCertificateRequestName
+sathyanarays
+thib-mary
+securityContext
+joebowbeer
+InvalidRequest
+james-callahan
+ServiceMonitor
+sathieu
+NetworkPolicy
+mjudeikis
+rgl
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
