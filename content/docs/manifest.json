@@ -62,6 +62,10 @@
                   "path": "/docs/installation/upgrading/remove-deprecated-apis.md"
                 },
                 {
+                  "title": "v1.9 to v1.10",
+                  "path": "/docs/installation/upgrading/upgrading-1.9-1.10.md"
+                },
+                {
                   "title": "v1.8 to v1.9",
                   "path": "/docs/installation/upgrading/upgrading-1.8-1.9.md"
                 },
