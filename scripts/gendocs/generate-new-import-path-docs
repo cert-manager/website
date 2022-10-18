@@ -131,12 +131,6 @@ genclireference() {
     return
   fi
 
-  # combined with the check above we can handle all versions
-  # for example release-0.15 webhook has the correct directory structure but does not use cobra
-  if ! grep -q "@com_github_spf13_cobra//:go_default_library" "$2/app/BUILD.bazel" && ! grep -q "@com_github_spf13_cobra//:go_default_library" "$2/cmd/BUILD.bazel"; then
-    return
-  fi
-
   outputdir="$1"
   target="$2"
   name="$3"
@@ -163,9 +157,9 @@ EOF
 # This script is _only_ for generating docs for versions of cert-manager with the
 # github.com/cert-manager/cert-manager import path!
 
-LATEST_VERSION="v1.9-docs"
+LATEST_VERSION="v1.10-docs"
 
-genversionwithcli "release-1.9" "$LATEST_VERSION"
+genversionwithcli "release-1.10" "$LATEST_VERSION"
 
 # Rather than generate the same docs again for /docs, copy from the latest version
 

@@ -44,6 +44,7 @@ Flags:
                                                             ExperimentalGatewayAPISupport=true|false (ALPHA - default=false)
                                                             LiteralCertificateSubject=true|false (ALPHA - default=false)
                                                             ServerSideApply=true|false (ALPHA - default=false)
+                                                            StableCertificateRequestName=true|false (ALPHA - default=false)
                                                             ValidateCAA=true|false (ALPHA - default=false)
   -h, --help                                                help for cert-manager-controller
       --issuer-ambient-credentials                          Whether an issuer may make use of ambient credentials. 'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the Issuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata.

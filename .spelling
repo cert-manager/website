@@ -408,6 +408,7 @@ untrusted
 upstream
 userinfo
 vhosakot
+v0.5.0
 v0.16
 v0.23.1
 v1
@@ -442,6 +443,7 @@ v1.8.1
 v1.8.2
 v1.9.0
 v1.9.1
+v1.10
 v1alpha1
 v1alpha2
 v1alpha3
@@ -501,6 +503,23 @@ ValidatingWebhookConfiguration
 OVHcloud
 ProwJobs
 configs
+dkulchinsky
+trivy
+caBundleSecretRef
+caBundle
+Tolsto
+StableCertificateRequestName
+sathyanarays
+thib-mary
+securityContext
+joebowbeer
+InvalidRequest
+james-callahan
+ServiceMonitor
+sathieu
+NetworkPolicy
+mjudeikis
+rgl
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
