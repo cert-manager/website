@@ -19,10 +19,6 @@
               "path": "/v1.10-docs/installation/README.md"
             },
             {
-              "title": "Supported Releases",
-              "path": "/v1.10-docs/installation/supported-releases.md"
-            },
-            {
               "title": "Cloud Compatibility",
               "path": "/v1.10-docs/installation/compatibility.md"
             },
