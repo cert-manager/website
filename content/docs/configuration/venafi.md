@@ -140,7 +140,7 @@ credentials.
 NOTE: Starting with TPP 22.2, the username and password authentication will
 require you to ask Venafi's customer service for a license key to continue
 using usernames and passwords in cert-manager. This is due to cert-manager
-relying on the old WebSDK authentication.
+relying on the old Web SDK authentication.
 
 #### Access Token Authentication
 
@@ -189,7 +189,7 @@ $ kubectl create secret generic \
 
 #### Username / Password Authentication
 
-NOTE: cert-manager uses the deprecated "API key WebSDK authentication" for
+NOTE: cert-manager uses the deprecated "API key Web SDK authentication" for
 authenticating with a username and password. Because cert-manager has not been
 updated to use the newer authentication, it will become necessary for you to
 request a license key to Venafi's customer service in order to continue using
