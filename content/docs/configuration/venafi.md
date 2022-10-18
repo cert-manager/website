@@ -189,10 +189,10 @@ $ kubectl create secret generic \
 
 #### Username / Password Authentication
 
-NOTE: username / password authentication is deprecated and should only be used when connecting to TPP < 19.2.
-It requires the username and password of a TPP user to be stored in the Kubernetes cluster
-and it does not allow scoped access to the API.
-This means that if these credentials are leaked an attacker may gain long term access to the TPP API and web UI.
+NOTE: cert-manager uses a deprecated TPP endpoint for authenticating with a username
+and password. cert-manager has not been updated to use the newer authentication
+endpoint. Because of this limitation in cert-manager, you should only use username
+and password with to TPP < 19.2.
 
 ```bash
 $ kubectl create secret generic \
