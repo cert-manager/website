@@ -138,7 +138,7 @@ create a Kubernetes `Secret` resource containing your Venafi TPP API
 credentials.
 
 NOTE: Starting with TPP 22.2, the username and password authentication will
-require you to ask Venafi's customer service for a license key to continue
+require you to ask Venafi's customer support for a license key to continue
 using usernames and passwords in cert-manager. This is due to cert-manager
 relying on the old Web SDK authentication.
 
@@ -192,7 +192,7 @@ $ kubectl create secret generic \
 NOTE: cert-manager uses the deprecated "API key Web SDK authentication" for
 authenticating with a username and password. Because cert-manager has not been
 updated to use the newer authentication, it will become necessary for you to
-request a license key to Venafi's customer service in order to continue using
+request a license key to Venafi's customer support in order to continue using
 the username and password authentication with cert-manager.
 
 ```bash
