@@ -512,6 +512,10 @@
               "path": "/docs/release-notes/README.md"
             },
             {
+              "title": "v1.10",
+              "path": "/docs/release-notes/release-notes-1.10.md"
+            },
+            {
               "title": "v1.9",
               "path": "/docs/release-notes/release-notes-1.9.md"
             },
