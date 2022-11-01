@@ -16,23 +16,25 @@ release every two months.
 
 | Release  | Release Date |   End of Life   | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:---------------:|:----------------------------------:|:---------------------------------:|
-| [1.10][] | Oct 17, 2022 | Release of 1.12 |            1.20 → 1.25             |             4.7 → 4.11            |
-| [1.9][]  | Jul 22, 2022 | Release of 1.11 |            1.20 → 1.24             |             4.7 → 4.11            |
+| [1.10][] | Oct 17, 2022 | Release of 1.12 |            1.20 → 1.25*            |            4.7 → 4.11             |
+| [1.9][]  | Jul 22, 2022 | Release of 1.11 |            1.20 → 1.24*            |            4.7 → 4.11             |
 
+\*ServerSideApply should be enabled in the cluster
 ## Upcoming releases
 
 | Release  |         Release Date          |  End of life   | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:-----------------------------:|:--------------:|:----------------------------------:|:---------------------------------:|
-| [1.11][] |   ~Late Dec 22/Early Jan 23   | Mid June, 2023 |            1.20 → 1.25             |             4.7 → 4.11            |
+| [1.11][] |   ~Late Dec 22/Early Jan 23   | Mid June, 2023 |            1.20 → 1.25*            |            4.7 → 4.11             |
 
 Dates in the future are uncertain and might change.
 
+\*ServerSideApply must be enabled in the cluster.
 ## Old releases
 
 | Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
 |----------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
-| [1.8][]  | Apr 05, 2022 | Oct 17, 2022 |          1.19 → 1.24           |          4.6 → 4.11           |
-| [1.7][]  | Jan 26, 2021 | Jul 22, 2022 |          1.18 → 1.23           |           4.5 → 4.9           |
+| [1.8][]  | Apr 05, 2022 | Oct 17, 2022 |          1.19 → 1.24*          |          4.6 → 4.11           |
+| [1.7][]  | Jan 26, 2021 | Jul 22, 2022 |          1.18 → 1.23*          |           4.5 → 4.9           |
 | [1.6][]  | Oct 26, 2021 | Apr 05, 2022 |          1.17 → 1.22           |           4.4 → 4.9           |
 | [1.5][]  | Aug 11, 2021 | Jan 26, 2022 |          1.16 → 1.22           |           4.3 → 4.8           |
 | [1.4][]  | Jun 15, 2021 | Oct 26, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
@@ -72,6 +74,7 @@ and release notes on [cert-manager.io](https://cert-manager.io/docs/release-note
 
 We also maintain detailed [upgrade instructions](https://cert-manager.io/docs/installation/upgrading/).
 
+\*ServerSideApply must be enabled in the cluster.
 ## Support policy
 
 ### What we mean by support
