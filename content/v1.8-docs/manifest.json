@@ -239,6 +239,10 @@
             {
               "title": "Securing Ingresses with Venafi",
               "path": "/v1.8-docs/tutorials/venafi/venafi.md"
+            },
+            {
+              "title": "Securing Ingresses with ZeroSSL",
+              "path": "/v1.8-docs/tutorials/zerossl/zerossl.md"
             }
           ]
         },

@@ -247,6 +247,10 @@
             {
               "title": "Securing the istio Service Mesh using cert-manager",
               "path": "/v1.9-docs/tutorials/istio-csr/istio-csr.md"
+            },
+            {
+              "title": "Securing Ingresses with ZeroSSL",
+              "path": "/v1.8-docs/tutorials/zerossl/zerossl.md"
             }
           ]
         },
