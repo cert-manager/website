@@ -25,7 +25,8 @@ namely the server, path, and CA bundle:
   *must* use the `sign` endpoint.
 - CA bundle denotes an optional field containing a base64 encoded string of the
   Certificate Authority to trust the Vault connection. This is typically
-  _always_ required when using an `https` URL.
+  _always_ required when using an `https` URL. When no CA bundle is defined, the
+  system CA roots will be used.
 
 Below is an example of a configuration to connect a Vault server.
 
@@ -46,6 +47,33 @@ spec:
     auth:
       ...
 ```
+
+The CA Bundle can also optionally be defined by referencing a Secret. The Secret
+should exist in the same Namespace as that of the Issuer, or in the [`Cluster
+Resource Namespace` (default cert-manager)][] when using a ClusterIssuer.
+
+> `caBundle` and `caBundleSecretRef` cannot both be defined on the same Vault
+> Issuer.
+
+[`Cluster Resource Namespace` (default cert-manager)]: ../README.md#cluster-resource-namespace
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: vault-issuer
+  namespace: sandbox
+spec:
+  vault:
+    path: pki_int/sign/example-dot-com
+    server: https://vault.local
+    caBundleSecretRef:
+      name: my-ca-bundle-secret
+      key: secret-key-containing-ca-bundle # defaults to `ca.crt`.
+    auth:
+      ...
+```
+
 
 ## Authenticating
 
