@@ -16,6 +16,13 @@ cert-manager is in the [Red Hat-provided Operator catalog][] called "community-o
 On OpenShift 4 you can install cert-manager from the [OperatorHub web console][] or from the command line.
 These installation methods are described in Red Hat's [Adding Operators to a cluster][] documentation.
 
+> ⚠️ In cert-manager `v1.10.0` the [secure computing (seccomp) profile](https://kubernetes.io/docs/tutorials/security/seccomp/) for all the Pods
+> is set to `RuntimeDefault`.
+> On some versions and configurations of OpenShift this can cause the Pod to be rejected by the
+> [Security Context Constraints admission webhook](https://docs.openshift.com/container-platform/4.10/authentication/managing-security-context-constraints.html#admission_configuring-internal-oauth).
+>
+> 📖 Read the [Breaking Changes section in the `v1.10.0` release notes](../release-notes/release-notes-1.10.md) before installing or upgrading.
+
 [Red Hat-provided Operator catalog]: https://docs.openshift.com/container-platform/4.7/operators/understanding/olm-rh-catalogs.html#olm-rh-catalogs_olm-rh-catalogs
 [OperatorHub web console]: https://docs.openshift.com/container-platform/4.7/operators/understanding/olm-understanding-operatorhub.html
 [Adding Operators to a cluster]: https://docs.openshift.com/container-platform/4.7/operators/admin/olm-adding-operators-to-cluster.html

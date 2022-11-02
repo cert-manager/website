@@ -5,6 +5,80 @@ description: 'cert-manager release notes: cert-manager v1.10'
 
 Version 1.10 adds a variety of quality-of-life fixes and features including improvements to the test suite.
 
+## Breaking Changes (You **MUST** read this before you upgrade!)
+
+### On OpenShift the cert-manager Pods may fail until you modify Security Context Constraints
+
+In cert-manager `v1.10.0` the [secure computing (seccomp) profile](https://kubernetes.io/docs/tutorials/security/seccomp/) for all the Pods
+is set to `RuntimeDefault`.
+(See [cert-manager pull request 5259](https://github.com/cert-manager/cert-manager/pull/5259/files).)
+The `securityContext` fields of the Pod are set as follows:
+```yaml
+...
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+securityContext:
+  seccompProfile:
+    type: RuntimeDefault
+    ...
+```
+
+On some versions and configurations of OpenShift this can cause the Pod to be rejected by the
+[Security Context Constraints admission webhook](https://docs.openshift.com/container-platform/4.10/authentication/managing-security-context-constraints.html#admission_configuring-internal-oauth).
+
+#### On OpenShift `v4.7`, `v4.8`, `v4.9` and `v4.10` you may need to modify Security Context Constraints to allow cert-manager Pods to be deployed
+
+In OpenShift `v4.7`, `v4.8`, `v4.9` and `v4.10`, the default SecurityContextConstraint is called "restricted", and it forbids Pods that have the `RuntimeDefault` seccomp profile.
+If you deploy cert-manager on these versions of OpenShift you may see the following error condition on the cert-manager Deployments:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+# ...
+status:
+  conditions:
+# ...
+  - lastTransitionTime: "2022-11-01T09:41:41Z"
+    lastUpdateTime: "2022-11-01T09:41:41Z"
+    message: 'pods "cert-manager-84bc577876-qzbnf" is forbidden: unable to validate
+      against any security context constraint: [pod.metadata.annotations.seccomp.security.alpha.kubernetes.io/pod:
+      Forbidden: seccomp may not be set pod.metadata.annotations.container.seccomp.security.alpha.kubernetes.io/cert-manager-controller:
+      Forbidden: seccomp may not be set provider "anyuid": Forbidden: not usable by
+      user or serviceaccount provider "nonroot": Forbidden: not usable by user or
+      serviceaccount provider "hostmount-anyuid": Forbidden: not usable by user or
+      serviceaccount provider "machine-api-termination-handler": Forbidden: not usable
+      by user or serviceaccount provider "hostnetwork": Forbidden: not usable by user
+      or serviceaccount provider "hostaccess": Forbidden: not usable by user or serviceaccount
+      provider "privileged": Forbidden: not usable by user or serviceaccount]'
+    reason: FailedCreate
+    status: "True"
+    type: ReplicaFailure
+# ...
+```
+
+The work around is to copy the "restricted" SecurityContextConstraint resource and then modify it to allow Pods with `RuntimeDefault` seccomp profile.
+Then use `oc adm policy add-scc-to-user` to create a Role and a RoleBinding that allows all the cert-manager ServiceAccounts to use that SecurityContextConstraint.
+
+> 📖 Read [Enabling the default seccomp profile for all pods](https://docs.openshift.com/container-platform/4.10/security/seccomp-profiles.html#configuring-default-seccomp-profile_configuring-seccomp-profiles) to learn more about this process.
+
+#### On OpenShift `v4.11` you may need to modify Security Context Constraints to allow cert-manager Pods to be deployed
+
+In OpenShift `v4.11`, there is a new SecurityContextConstraint called `restricted-v2`, which permits Pods that have the `RuntimeDefault` seccomp profile and this will used for the cert-manager Pods by default, allowing the Pods to be created.
+
+But if you have upgraded OpenShift from a previous version, the old `restricted` SecurityContextConstraint may still be used and you will have to make changes to the RoleBindings in order to make it the default for all Pods.
+
+> 📖 Read [Pod security admission in the OpenShift `v4.11` release notes](https://docs.openshift.com/container-platform/4.11/release_notes/ocp-4-11-release-notes.html#ocp-4-11-auth-pod-security-admission) to learn more about the changes to the default security context constraints in `v4.11`.
+>
+> 📖 Read [Default security context constraints](https://docs.openshift.com/container-platform/4.11/authentication/managing-security-context-constraints.html#default-sccs_configuring-internal-oauth) in the OpenShift `v4.11` documentation to learn about the characteristics of the default Security Context Constraints in OpenShift.
+
+#### When using the OLM packages for OperatorHub on OpenShift `>= v4.7`, you may need to modify Security Context Constraints to allow the cert-manager ACME HTTP01 Pod to be deployed
+
+In the cert-manager OLM packages for RedHat OpenShift OperatorHub, the `seccompProfile` field in the Deployment resource has been removed,
+and this should allow you to install it on OpenShift `v4.7`, `v4.8`, `v4.9`, `v4.10`, and `v4.11` without any extra configuration.
+
+But if you are using the ACME Issuer with the HTTP01 solver, cert-manager will deploy a short lived Pod that uses the `RuntimDefault` seccomp profile which may be denied because of the existing Security Context Constraints.
+
+> 📖 Read [Enabling the default seccomp profile for all pods](https://docs.openshift.com/container-platform/4.10/security/seccomp-profiles.html#configuring-default-seccomp-profile_configuring-seccomp-profiles) to learn how to configure your system to allow Pods that use the `RuntimeDefault` seccomp profile.
+
 ## Changes since v1.9.1
 
 ### Feature
