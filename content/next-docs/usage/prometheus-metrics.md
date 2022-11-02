@@ -31,7 +31,7 @@ spec:
   template:
     spec:
       containers:
-        - name: cert-manager
+        - name: cert-manager-controller
           ports:
             - containerPort: 9402
               name: http
