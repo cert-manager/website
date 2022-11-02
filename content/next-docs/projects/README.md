@@ -28,6 +28,6 @@ These tools help with security, compliance and control.
   in the form of X.509 certificate key pairs to mounting Kubernetes Pods. The
   end result is all and any Pod running in Kubernetes can securely request their
   SPIFFE identity document from a Trust Domain with minimal configuration.
-- [trust](./trust.md): an
+- [trust-manager](./trust-manager.md): an
   operator to distribute trust bundles, like CA certificates, across a
   Kubernetes cluster.
