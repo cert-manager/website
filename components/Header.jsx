@@ -48,8 +48,11 @@ function MobileNavigation({ active, className = '' }) {
         className={`absolute left-0 z-1000 ${classNames}`}
         style={{ marginLeft: '4%', marginRight: '4%', width: '92%' }}
       >
-        <div className="bg-white flex justify-between shadow-inner pt-6 pb-8 px-5">
-          <div ref={ref}>
+        <div
+          ref={ref}
+          className="bg-white flex justify-between shadow-inner pt-6 pb-8 px-5"
+        >
+          <div>
             <ul className="space-y-4">
               {site.navigation.items.map((item) => (
                 <NavItem
