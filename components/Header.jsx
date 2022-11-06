@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import CertManagerLogo from './snippets/CertManagerLogo'
 import { meta as site } from '../content/pages/site.mdx'
-import Button from './Button'
 
 import { DocSearch } from '@docsearch/react'
 import '@docsearch/css'
+import { useRef } from 'react'
+import useOutsideAlerter from 'lib/useOutsideClick'
 
 export default function Header() {
   const router = useRouter()
@@ -31,7 +32,9 @@ export default function Header() {
 
 function MobileNavigation({ active, className = '' }) {
   const [open, setOpen] = useState(false)
+  const ref = useRef(null)
   const classNames = open ? 'top-65px' : '-top-1000px'
+  useOutsideAlerter(ref, setOpen)
 
   return (
     <div className={className}>
@@ -46,7 +49,7 @@ function MobileNavigation({ active, className = '' }) {
         style={{ marginLeft: '4%', marginRight: '4%', width: '92%' }}
       >
         <div className="bg-white flex justify-between shadow-inner pt-6 pb-8 px-5">
-          <div>
+          <div ref={ref}>
             <ul className="space-y-4">
               {site.navigation.items.map((item) => (
                 <NavItem
