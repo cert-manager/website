@@ -403,7 +403,24 @@ page if a step is missing or if it is outdated.
 10. **(final release only)** Add the new final release to the
     [supported-releases](../installation/supported-releases.md) page.
 
-11. Post a Slack message as an answer to the first message. Toggle the check
+11. Open a PR for a [Homebrew](https://brew.sh) formula update for `cmctl`. 
+
+    Assuming you have `brew` installed, you can use the `brew bump-formula-pr`
+    command to do this. You'll need the new tag name and the commit hash of that
+    tag. See `brew bump-formula-pr --help` for up to date details, but the command
+    will be of the form:
+
+    ```sh
+    brew bump-formula-pr --dry-run --tag v0.10.0 --revision da3265115bfd8be5780801cc6105fa857ef71965 cmctl
+    ```
+
+    Replacing the tag and revision with the new ones.
+
+    This will take time for the Homebrew team to review. Once the pull reqeust
+    against https://github.com/homebrew/homebrew-core has been opened, continue
+    with further release steps.
+
+12. Post a Slack message as an answer to the first message. Toggle the check
    box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -411,7 +428,7 @@ page if a step is missing or if it is outdated.
     https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-12. **(final release only)** Show the release to the world:
+13. **(final release only)** Show the release to the world:
 
     1. Send an email to
        [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
@@ -422,7 +439,7 @@ page if a step is missing or if it is outdated.
        ([example](https://twitter.com/MaartjeME/status/1286327362121084928))
        and make sure [@JetstackHQ](https://twitter.com/JetstackHQ) retweets it.
 
-13. Proceed to the post-release steps:
+14. Proceed to the post-release steps:
 
     1. **(initial alpha only)** Create a PR on
        [cert-manager/release](https://github.com/cert-manager/release),
