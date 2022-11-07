@@ -8,6 +8,19 @@ description: |
 
 ## Installation
 
+### Homebrew
+
+On Mac or Linux if you have [Homebrew](https://brew.sh) installed, you can
+install `cmctl` with: 
+
+```console
+brew install cmctl
+```
+
+This will also install shell completion.
+
+### Manual Installation
+
 You need the `cmctl.tar.gz` file for the platform you're using, these can be
 found on our
 [GitHub releases page](https://github.com/cert-manager/cert-manager/releases).
