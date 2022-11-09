@@ -315,9 +315,9 @@ kubectl explain CertificateRequest
 kubectl explain Issuer
 ```
 
-> 🔰 Read about [other ways to install cert-manager](../installation).
+> 🔰 Read about [other ways to install cert-manager](../../installation).
 >
-> 🔰 Read more about [Certificates and Issuers](../concepts).
+> 🔰 Read more about [Certificates and Issuers](../../concepts).
 
 ## 7. Create an Issuer for Let's Encrypt Staging
 
@@ -384,7 +384,7 @@ Status:
 > ⚠️ In the next step you will see a warning about untrusted certificates because
 > we start with the staging issuer, but that's totally expected.
 >
-> 🔰 Read more about [configuring the ACME Issuer](../configuration/acme).
+> 🔰 Read more about [configuring the ACME Issuer](../../configuration/acme).
 
 ## 8. Re-configure the Ingress for SSL
 
@@ -474,7 +474,7 @@ Example output:
 > ℹ️ Adding the annotation `cert-manager.io/issuer: letsencrypt-staging` marks the Ingress for the attention of the cert-manager `ingress-shim`
 > and causes it to create a new Certificate with a reference to the Issuer that we created earlier.
 >
-> 🔰 Read [Securing Ingress Resources](../usage/ingress) to learn more.
+> 🔰 Read [Securing Ingress Resources](../../usage/ingress) to learn more.
 >
 > 🔰 Read about how to [Specify certificates for your Ingress in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-multi-ssl#specifying_certificates_for_your_ingress).
 
@@ -624,11 +624,11 @@ Events:
 
 ### Use cmctl to show the state of a Certificate and its associated resources
 
-> ℹ️ [Install `cmctl`](../reference/cmctl) if you have not already done so.
+> ℹ️ [Install `cmctl`](../../reference/cmctl) if you have not already done so.
 
 When you create a Certificate, cert-manager will create a collection of temporary resources
 which each contain information about the status of certificate signing process.
-You can read more about these in the [Certificate Lifecycle](../concepts/certificate#certificate-lifecycle) section.
+You can read more about these in the [Certificate Lifecycle](../../concepts/certificate#certificate-lifecycle) section.
 Use the `cmctl status` command to view details of all these resources and all the associated Events and error messages.
 
 You may see some temporary errors, like:
