@@ -350,8 +350,8 @@
               "path": "/docs/projects/approver-policy.md"
             },
             {
-              "title": "trust",
-              "path": "/docs/projects/trust.md"
+              "title": "trust-manager",
+              "path": "/docs/projects/trust-manager.md"
             }
           ]
         },

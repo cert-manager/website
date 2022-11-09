@@ -13,7 +13,7 @@ The CA issuer represents a Certificate Authority whose certificate and
 private key are stored inside the cluster as a Kubernetes `Secret`.
 
 Certificates issued by a CA issuer will not be publicly trusted and so are unlikely to be trusted
-by your applications without further configuration work. Consider the [cert-manager/trust](../projects/trust.md)
+by your applications without further configuration work. Consider the [trust-manager](../projects/trust-manager.md)
 project for distributing trust stores.
 
 ## Deployment

@@ -1,12 +1,12 @@
 ---
-title: Trust
+title: trust-manager
 description: 'Distributing Trust Bundles in Kubernetes'
 ---
 
 ## Distributing Trust Bundles in Kubernetes
 
-trust is an operator for distributing trust bundles across a Kubernetes cluster.
-trust is designed to complement
+trust-manager is an operator for distributing trust bundles across a Kubernetes cluster.
+trust-manager is designed to complement
 [cert-manager](https://github.com/cert-manager/cert-manager) by enabling services to
 trust X.509 certificates signed by Issuers, as well as external CAs which may
 not be known to cert-manager at all.
@@ -80,7 +80,7 @@ the `cert-manager` namespace.
 ```bash
 helm repo add jetstack https://charts.jetstack.io --force-update
 helm upgrade -i -n cert-manager cert-manager jetstack/cert-manager --set installCRDs=true --wait --create-namespace
-helm upgrade -i -n cert-manager cert-manager-trust jetstack/cert-manager-trust --wait
+helm upgrade -i -n cert-manager trust-manager jetstack/trust-manager --wait
 ```
 
 #### Quick Start Example
