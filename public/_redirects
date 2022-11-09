@@ -182,3 +182,6 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Demoted the cmctl x install page
 /docs/installation/cmctl/ /docs/reference/cmctl/ 301!
+
+# Rename trust to trust-manager
+/docs/projects/trust/ /docs/projects/trust-manager/ 301!
