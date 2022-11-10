@@ -4,6 +4,7 @@ import classNames from 'classnames'
 
 export default function Button({
   icon = '',
+  iconWClass = 'w-8',
   caption,
   href,
   className = '',
@@ -20,7 +21,7 @@ export default function Button({
         target={target || '_self'}
         className={`font-montserrat font-bold uppercase text-sm leading-20px btn-primary rounded-5px ${styles} ${className}`}
       >
-        <span className="block w-8">{icon && <Icon name={icon} />}</span>
+        <span className={"block " + iconWClass}>{icon && <Icon name={icon} />}</span>
         <span>{caption}</span>
       </a>
     </Link>

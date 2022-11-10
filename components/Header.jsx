@@ -25,6 +25,30 @@ export default function Header() {
           <MobileNavigation active={currentPath} className="lg:hidden" />
         </div>
       </div>
+      <div className="text-center p-4 bg-blue-1 text-white">
+        NEW: Get project updates on
+        <Button
+          href={
+            'https://twitter.com/CertManager/'
+          }
+          caption="Twitter"
+          target="_blank"
+          icon="twitter"
+          iconWClass="w-4"
+          className="px-3 py-1 text-11px mx-4 "
+        />
+        and
+        <Button
+          href={
+            'https://infosec.exchange/@CertManager'
+          }
+          caption="Mastodon"
+          target="_blank"
+          icon="mastodon"
+          iconWClass="w-4"
+          className="px-3 py-1 text-11px mx-4 "
+        />
+      </div>
     </div>
   )
 }
