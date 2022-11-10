@@ -137,11 +137,6 @@ In order to set up a Venafi Trust Protection Platform `Issuer`, you must first
 create a Kubernetes `Secret` resource containing your Venafi TPP API
 credentials.
 
-NOTE: Starting with TPP 22.2, the username and password authentication will
-require you to ask Venafi's customer support for a license key to continue
-using usernames and passwords in cert-manager. This is due to cert-manager
-relying on the old Web SDK authentication.
-
 ### Access Token Authentication
 
 1. [Set up token authentication](https://docs.venafi.com/Docs/21.1/TopNav/Content/SDK/AuthSDK/t-SDKa-Setup-OAuth.php).
@@ -189,11 +184,19 @@ $ kubectl create secret generic \
 
 ### Username / Password Authentication
 
-NOTE: cert-manager uses the deprecated "API key Web SDK authentication" for
-authenticating with a username and password. Because cert-manager has not been
-updated to use the newer authentication, it will become necessary for you to
-request a license key to Venafi's customer support in order to continue using
-the username and password authentication with cert-manager.
+> ⚠️ When you supply a Venafi TPP username and password,
+> cert-manager uses an older authentication method which is called "API Keys",
+> which has been deprecated since Venafi TPP `19.2`.
+>
+> Beginning in Venafi TPP `22.2`, "API Keys" are disabled by default.
+> You will need to contact Venafi customer support for a special license key which will allow you to re-enable the "API Keys" feature,
+> so that you can continue to use username and password authentication with cert-manager.
+>
+> In Venafi TPP `22.3`, the "API Keys" feature will be permanently removed,
+> and you will need to use access-token authentication instead.
+>
+> 📖 Read [Deprecated functionality from Venafi Platform](https://docs.venafi.com/22.3/deprecation-list-current)
+> and [Functionality Scheduled for Deprecation](https://support.venafi.com/hc/en-us/articles/115001662292) for more information.
 
 ```bash
 $ kubectl create secret generic \
