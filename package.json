@@ -84,7 +84,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-markdown": "2.2.1",
-    "eslint-plugin-mdx": "^1.17.0",
+    "eslint-plugin-mdx": "^2.0.5",
     "eslint-plugin-react": "^7.29.4",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
