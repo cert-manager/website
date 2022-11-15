@@ -206,7 +206,7 @@ page if a step is missing or if it is outdated.
     3. Create the tag for the new release locally and push it upstream:
 
        ```bash
-       git tag -s -m"v1.8.0-beta.0" v1.8.0-beta.0
+       git tag -m"v1.8.0-beta.0" v1.8.0-beta.0
        # be sure to push the named tag explicitly; you don't want to push any other local tags!
        git push origin v1.8.0-beta.0
        ```
