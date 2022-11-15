@@ -138,10 +138,10 @@ page if a step is missing or if it is outdated.
     | initial beta release               | `v1.3.0-beta.0`    |
     | subsequent beta release            | `v1.3.0-beta.1`    |
     | final release                      | `v1.3.0`           |
-    | (optional) patch pre-release[^1]   | `v1.3.1-rc.0`      |
+    | (optional) patch pre-release[^1]   | `v1.3.1-beta.0`    |
     | patch release (or "point release") | `v1.3.1`           |
 
-[^1]: One or more "patch pre-releases" may be created to allow voluntary community testing of a bug fix or security fix before the fix is made generally available. The suffix `-rc` must be used for patch pre-releases.
+[^1]: One or more "patch pre-releases" may be created to allow voluntary community testing of a bug fix or security fix before the fix is made generally available. The suffix `-beta` must be used for patch pre-releases.
 
 2. **(final release only)** Make sure that a PR with the new upgrade
    document is ready to be merged on
