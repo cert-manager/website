@@ -403,7 +403,7 @@ page if a step is missing or if it is outdated.
 10. **(final release only)** Add the new final release to the
     [supported-releases](../installation/supported-releases.md) page.
 
-11. Open a PR for a [Homebrew](https://brew.sh) formula update for `cmctl`. 
+11. Open a PR for a [Homebrew](https://brew.sh) formula update for `cmctl`.
 
     Assuming you have `brew` installed, you can use the `brew bump-formula-pr`
     command to do this. You'll need the new tag name and the commit hash of that
@@ -446,7 +446,7 @@ page if a step is missing or if it is outdated.
        add the new release to our list of periodic ProwJobs. Use [this PR](https://github.com/cert-manager/release/pull/105/) as an example.
 
     2. **(initial alpha only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
-       open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs. 
+       open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs.
        Use [this PR](https://github.com/jetstack/testing/pull/766) as an example.
 
     3. **(initial alpha only)** If needed, open a PR to
@@ -467,7 +467,7 @@ page if a step is missing or if it is outdated.
        This will remove the periodic ProwJob for this version as it is no longer needed.
 
     5. **(final release only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
-       open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs. 
+       open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs.
 
     6. **(final release only)** Open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) in
