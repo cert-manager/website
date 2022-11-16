@@ -17,7 +17,7 @@ and other world events.
 
 | Release  | Release Date |   End of Life   | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:---------------:|:----------------------------------:|:---------------------------------:|
-| [1.10][] | Oct 17, 2022 | Release of 1.12 |            1.20 → 1.25\*            |            4.7 → 4.11             |
+| [1.10][] | Oct 17, 2022 | Release of 1.12 |            1.20 → 1.25\*            |            4.8 → 4.12             |
 | [1.9][]  | Jul 22, 2022 | Release of 1.11 |            1.20 → 1.24\*            |            4.7 → 4.11             |
 
 \*ServerSideApply should be enabled in the cluster
@@ -26,7 +26,7 @@ and other world events.
 
 | Release  |  Release Date  |  End of Life   | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:--------------:|:--------------:|:----------------------------------:|:---------------------------------:|
-| [1.11][] |  Jan 11, 2023  | Mid June, 2023 |            1.20 → 1.25\*            |            4.7 → 4.11             |
+| [1.11][] |  Jan 11, 2023  | Mid June, 2023 |            1.20 → 1.25\*            |            4.8 → 4.12            |
 
 Dates in the future are uncertain and might change.
 
@@ -231,6 +231,7 @@ that each version maps to. For convenience, the following table shows these vers
 
 | OpenShift versions | Kubernetes version |
 |--------------------|--------------------|
+| 4.12               | 1.25               |
 | 4.11               | 1.24               |
 | 4.10, 4.10 EUS     | 1.23               |
 | 4.9                | 1.22               |
