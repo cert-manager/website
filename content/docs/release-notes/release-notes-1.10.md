@@ -1,15 +1,16 @@
 ---
 title: Release 1.10
-description: 'cert-manager release notes: cert-manager v1.10'
+description: 'cert-manager release notes: cert-manager 1.10'
 ---
 
-Version 1.10 adds a variety of quality-of-life fixes and features including improvements to the test suite.
+Release 1.10 adds a variety of quality-of-life fixes and features including improvements to the test suite.
+The latest version is `v1.10.1`.
 
 ## Breaking Changes (You **MUST** read this before you upgrade!)
 
 ### On OpenShift the cert-manager Pods may fail until you modify Security Context Constraints
 
-In cert-manager `v1.10.0` the [secure computing (seccomp) profile](https://kubernetes.io/docs/tutorials/security/seccomp/) for all the Pods
+In cert-manager 1.10 the [secure computing (seccomp) profile](https://kubernetes.io/docs/tutorials/security/seccomp/) for all the Pods
 is set to `RuntimeDefault`.
 (See [cert-manager pull request 5259](https://github.com/cert-manager/cert-manager/pull/5259/files).)
 The `securityContext` fields of the Pod are set as follows:
@@ -79,7 +80,17 @@ But if you are using the ACME Issuer with the HTTP01 solver, cert-manager will d
 
 > 📖 Read [Enabling the default seccomp profile for all pods](https://docs.openshift.com/container-platform/4.10/security/seccomp-profiles.html#configuring-default-seccomp-profile_configuring-seccomp-profiles) to learn how to configure your system to allow Pods that use the `RuntimeDefault` seccomp profile.
 
-## Changes since v1.9.1
+## `v1.10.1`: Changes since `v1.10.0`
+
+### Bug or Regression
+
+- The Venafi Issuer now supports TLS 1.2 renegotiation, so that it can connect to TPP servers where the `vedauth` API endpoints are configured to *accept* client certificates.
+  (Note: This does not mean that the Venafi Issuer supports client certificate authentication).
+  ([#5576](https://github.com/cert-manager/cert-manager/pull/5371), [@wallrj](https://github.com/wallrj))
+- Upgrade to latest go patch release
+  ([#5560](https://github.com/cert-manager/cert-manager/pull/5560), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+## `v1.10.0`: Changes since `v1.9.1`
 
 ### Feature
 
