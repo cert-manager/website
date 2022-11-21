@@ -180,13 +180,13 @@ improvements over the Ingress API.
 
 <div className="info">
 
-📌  This feature requires the installation of the Gateway API CRDs and passing a
+📌  This feature requires the installation of the [Gateway API bundle](https://gateway-api.sigs.k8s.io/guides/#installing-a-gateway-controller) and passing a
 feature flag to the cert-manager controller.
 
-To install the Gateway API CRDs, run the following command:
+To install v1.5.1 Gateway API bundle (Gateway CRDs and webhook), run the following command:
 
 ```sh
-kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.4.1" | kubectl apply -f -
+kubectl apply -f "https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.1/standard-install.yaml"
 ```
 
 To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
@@ -221,16 +221,8 @@ kubectl rollout restart deployment cert-manager -n cert-manager
 
 <div className="info">
 
-🚧  Since cert-manager 1.8, v1alpha2 is the only supported version of the
-Gateway API. The version v1alpha1 was supported in cert-manager 1.5, 1.6, and
-1.7.
-
-You can read [Upgrading from v1.7 to v1.8][upgrading-1.7-1.8] to know more about
-migrating your Issuer and ClusterIssuer resources that use `gatewayHTTPRoute`
-from v1alpha1 to v1alpha2.
-
-[upgrading-1.7-1.8]: ../../../installation/upgrading/upgrading-1.7-1.8.md
-
+🚧   cert-manager 1.8+ is tested with v1alpha2 Kubernetes Gateway API. It should also work
+with v1beta1 because of resource conversion, but has not been tested with it.
 </div>
 
 The Gateway API HTTPRoute HTTP-01 solver creates a temporary HTTPRoute using the
@@ -307,6 +299,7 @@ spec:
 You will see an HTTPRoute appear:
 
 ```yaml
+apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: HTTPRoute
 metadata:
   name: cm-acme-http-solver-gdhvg
