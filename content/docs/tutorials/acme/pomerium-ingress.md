@@ -65,7 +65,7 @@ This tutorial covers installing the [Pomerium Ingress Controller](https://pomeri
 Install cert-manager using any of the methods documented in the [Installation](https://cert-manager.io/docs/installation/) section of the cert-manager docs. The simplest method is to download and apply the provided manifest:
 
 ```sh
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.1/cert-manager.yaml
 ```
 
 ## Configure Let's Encrypt Issuer
