@@ -1,5 +1,5 @@
 ---
-title: Securing Gateway Resources
+title: Securing gateway.networking.k8s.io Gateway Resources
 description: 'cert-manager usage: Kubernetes Gateways'
 ---
 
@@ -8,23 +8,16 @@ description: 'cert-manager usage: Kubernetes Gateways'
 <div className="info">
 
 📌  This page focuses on automatically creating Certificate resources by
-annotating Gateway resource. If you are looking for using an ACME Issuer along
-with HTTP-01 challenges using the Gateway API, see [ACME
+annotating Kubernetes Gateway resource. If you are looking for using an ACME Issuer along
+with HTTP-01 challenges using the Kubernetes Gateway API, see [ACME
 HTTP-01](../configuration/acme/http01/README.md).
 
 </div>
 
 <div className="info">
 
-🚧  Since cert-manager 1.8, v1alpha2 is the only supported version of the
-Gateway API. The version v1alpha1 was supported in cert-manager 1.5, 1.6, and
-1.7.
-
-You can read [Upgrading from v1.7 to v1.8][upgrading-1.7-1.8] to know more about
-migrating your Issuer and ClusterIssuer resources that use `gatewayHTTPRoute`
-from v1alpha1 to v1alpha2.
-
-[upgrading-1.7-1.8]: ../installation/upgrading/upgrading-1.7-1.8.md
+🚧   cert-manager 1.8+ is tested with v1alpha2 Kubernetes Gateway API. It should also work
+with v1beta1 because of resource conversion, but has not been tested with it.
 
 </div>
 
@@ -43,27 +36,15 @@ following diagram (source: https://gateway-api.sigs.k8s.io):
 
 ![Gateway vs. HTTPRoute](/images/gateway-roles.png)
 
-Note that cert-manager only supports setting up the TLS configuration on the
-Gateway resource when the Gateway is configured to terminate the TLS connection.
-There is still uncertainty around how the HTTPRoute TLS configuration should be
-used (see [the discussion about TLS interaction between HTTPRoute and
-Gateway][gateway-api#577]) and no existing implementation supports the TLS
-pass-through mode in which the HTTPRoute contains the TLS configuration and
-terminates the connection (see the [feature request for supporting `spec.tls` in
-HTTPRoute for Istio][istio#31747]).
-
-[istio#31747]: https://github.com/istio/istio/issues/31747
-[gateway-api#577]: https://github.com/kubernetes-sigs/gateway-api/issues/577
-
 <div className="info">
 
-📌  This feature requires the installation of the Gateway API CRDs and passing a
+📌  This feature requires the installation of the [Gateway API bundle](https://gateway-api.sigs.k8s.io/guides/#installing-a-gateway-controller) and passing a
 feature flag to the cert-manager controller.
 
-To install the Gateway API CRDs, run the following command:
+To install v1.5.1 Gateway API bundle (Gateway CRDs and webhook), run the following command:
 
 ```sh
-kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.4.1" | kubectl apply -f -
+kubectl apply -f "https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.1/standard-install.yaml"
 ```
 
 To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
