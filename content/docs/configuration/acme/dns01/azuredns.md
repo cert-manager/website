@@ -18,6 +18,7 @@ To configure the AzureDNS DNS01 Challenge in a Kubernetes cluster there are 3 wa
 Firstly an identity should be created that has access to contribute to the DNS Zone.
 
 - Example creation using `azure-cli` and `jq`:
+
 ```bash
 # Choose a unique Identity name and existing resource group to create identity in.
 IDENTITY=$(az identity create --name $IDENTITY_NAME --resource-group $IDENTITY_GROUP --output json)
@@ -37,6 +38,7 @@ az role assignment create --role "DNS Zone Contributor" --assignee $PRINCIPAL_ID
 ```
 
 - Example creation using Terraform
+
 ```terraform
 variable resource_group_name {}
 variable location {}
@@ -153,6 +155,7 @@ There are some caveats with this approach, these mainly being:
 To set this up, firstly you will need to retrieve the identity that the kubelet is using by querying the AKS cluster. This can then be used to create the appropriate permissions in the DNS zone.
 
 - Example commands using `azure-cli`:
+
 ```bash
 # Get AKS Kubelet Identity
 PRINCIPAL_ID=$(az aks show -n $CLUSTERNAME -g $CLUSTER_GROUP --query "identityProfile.kubeletidentity.objectId" -o tsv)
@@ -165,6 +168,7 @@ az role assignment create --role "DNS Zone Contributor" --assignee $PRINCIPAL_ID
 ```
 
 - Example terraform:
+
 ```terraform
 variable dns_zone_id {}
 
@@ -191,11 +195,13 @@ Then when creating the cert-manager issuer we need to specify the `hostedZoneNam
 We also need to specify `managedIdentity.clientID` or `managedIdentity.resourceID` if multiple managed identities are assigned to the node pools.
 
 The value for `managedIdentity.clientID` can be fetched by running this command:
+
 ```bash
 az aks show -n $CLUSTERNAME -g $CLUSTER_GROUP --query "identityProfile.kubeletidentity.clientId" -o tsv
 ```
 
 Example below:
+
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -251,27 +257,32 @@ DNS Zone in the specific resource group specified. It requires this permission
 so that it can read/write the \_acme\_challenge TXT records to the zone.
 
 Lower the Permissions of the service principal.
+
 ```bash
 $ az role assignment delete --assignee $AZURE_CERT_MANAGER_SP_APP_ID --role Contributor
 ```
 
 Give Access to DNS Zone.
+
 ```bash
 $ DNS_ID=$(az network dns zone show --name $AZURE_DNS_ZONE --resource-group $AZURE_DNS_ZONE_RESOURCE_GROUP --query "id" --output tsv)
 $ az role assignment create --assignee $AZURE_CERT_MANAGER_SP_APP_ID --role "DNS Zone Contributor" --scope $DNS_ID
 ```
 
 Check Permissions. As the result of the following command, we would like to see just one object in the permissions array with "DNS Zone Contributor" role.
+
 ```bash
 $ az role assignment list --all --assignee $AZURE_CERT_MANAGER_SP_APP_ID
 ```
 
 A secret containing service principal password should be created on Kubernetes to facilitate presenting the challenge to Azure DNS. You can create the secret with the following command:
+
 ```bash
 $ kubectl create secret generic azuredns-config --from-literal=client-secret=$AZURE_CERT_MANAGER_SP_PASSWORD
 ```
 
 Get the variables for configuring the issuer.
+
 ```bash
 $ echo "AZURE_CERT_MANAGER_SP_APP_ID: $AZURE_CERT_MANAGER_SP_APP_ID"
 $ echo "AZURE_CERT_MANAGER_SP_PASSWORD: $AZURE_CERT_MANAGER_SP_PASSWORD"
