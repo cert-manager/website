@@ -355,8 +355,12 @@
               "path": "/docs/tutorials/README.md"
             },
             {
-              "title": "GKE + Ingress + Let's Encrypt",
-              "path": "/docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md"
+              "title": "AKS + LoadBalancer + Let's Encrypt",
+              "path": "/docs/tutorials/getting-started-with-cert-manager-on-azure-kubernetes-service-using-lets-encrypt-for-ssl/README.md"
+            },
+            {
+                "title": "GKE + Ingress + Let's Encrypt",
+                "path": "/docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md"
             },
             {
                 "title": "Migrating from Kube-LEGO",
