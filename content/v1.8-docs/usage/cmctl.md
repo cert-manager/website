@@ -21,7 +21,7 @@ Run the following commands to set up the CLI. Replace OS and ARCH with your
 systems equivalents:
 
 ```console
-OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -sSL -o cmctl.tar.gz https://github.com/cert-manager/cert-manager/releases/download/v1.7.2/cmctl-$OS-$ARCH.tar.gz
+OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -fsSL -o cmctl.tar.gz https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cmctl-$OS-$ARCH.tar.gz
 tar xzf cmctl.tar.gz
 sudo mv cmctl /usr/local/bin
 ```
