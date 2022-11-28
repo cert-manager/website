@@ -4,9 +4,24 @@ description: 'cert-manager release notes: cert-manager 1.10'
 ---
 
 Release 1.10 adds a variety of quality-of-life fixes and features including improvements to the test suite.
+
 The latest version is `v1.10.1`.
 
 ## Breaking Changes (You **MUST** read this before you upgrade!)
+
+### Container Name Changes
+
+This change is only relevant if you install cert-manager using Helm or the static manifest files. `v1.10.0` changes the names of containers in pods created by cert-manager.
+
+The names are changed to better reflect what they do; for example, the container in the controller pod had its name changed from `cert-manager` to `cert-manager-controller`,
+and the webhook pod had its container name changed from `cert-manager` to `cert-manager-webhook`.
+
+This change could cause a break if you:
+
+1. Use Helm or the static manifests, and
+2. Have scripts, tools or tasks which rely on the names of the cert-manager containers being static
+
+If both of these are true, you may need to update your automation before you upgrade.
 
 ### On OpenShift the cert-manager Pods may fail until you modify Security Context Constraints
 
