@@ -123,6 +123,12 @@ spec:
   secretName: example-com-tls
 ```
 
+<div className="info">
+
+🚧   this mechanism can only be used to create Secrets in the same namespace as the `Gateway`, see [`cert-manager#5610`](https://github.com/cert-manager/cert-manager/issues/5610)
+
+</div>
+
 ## Use cases
 
 ### Generate TLS certs for selected TLS blocks
@@ -136,8 +142,8 @@ meet the following requirements:
 | `tls.hostname`             | Must not be empty.                                          |
 | `tls.mode`                 | Must be set to `Terminate`. `Passthrough` is not supported. |
 | `tls.certificateRef.name`  | Cannot be left empty.                                       |
-| `tls.certificateRef.kind`  | Must be set to `Secret`.                                    |
-| `tls.certificateRef.group` | Must be set to `core`.                                      |
+| `tls.certificateRef.kind`  | If specified, must be set to `Secret`.                                    |
+| `tls.certificateRef.group` | If specified, must be set to `core`.                                      |
 
 In the following example, the first three listener blocks will not be used to
 generate Certificate resources:
