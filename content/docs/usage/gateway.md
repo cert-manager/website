@@ -122,6 +122,13 @@ spec:
     - example.com # ✅ Copied from the `hostname` field.
   secretName: example-com-tls
 ```
+</div>
+
+<div className="info">
+
+🚧   this mechanism can only be used to create Secrets in the same namespace as the `Gateway`, see [cert-manager#5610](https://github.com/cert-manager/cert-manager/issues/5610)
+
+</div>
 
 ## Use cases
 
