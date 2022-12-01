@@ -915,7 +915,7 @@ $ kubectl get validatingwebhookconfigurations cert-manager-webhook -ojson | jq '
 ```
 
 ```console
-$ kubectl get mutatingtingwebhookconfigurations cert-manager-webhook -ojson | jq '.webhooks[].clientConfig'
+$ kubectl get mutatingwebhookconfigurations cert-manager-webhook -ojson | jq '.webhooks[].clientConfig'
 {
   "caBundle": "LS0tLS1...RFLS0tLS0K",
   "service": {
