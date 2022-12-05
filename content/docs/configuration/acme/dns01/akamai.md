@@ -17,7 +17,7 @@ kind: Secret
 metadata:
   name: akamai-secret
 type: Opaque
-stringData:
+data:
   clientSecret: use_akamai_client_secret
   accessToken: use_akamai_access_token
   clientToken: use_akamai_client_token
