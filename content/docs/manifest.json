@@ -62,8 +62,12 @@
                   "path": "/docs/installation/upgrading/remove-deprecated-apis.md"
                 },
                 {
-                  "title": "v1.9 to v1.10",
-                  "path": "/docs/installation/upgrading/upgrading-1.9-1.10.md"
+                  "title": "v1.10 to v1.11",
+                  "path": "/docs/installation/upgrading/upgrading-1.10-1.11.md"
+                },
+                {
+                    "title": "v1.9 to v1.10",
+                    "path": "/docs/installation/upgrading/upgrading-1.9-1.10.md"
                 },
                 {
                   "title": "v1.8 to v1.9",
@@ -516,8 +520,12 @@
               "path": "/docs/release-notes/README.md"
             },
             {
-              "title": "v1.10",
-              "path": "/docs/release-notes/release-notes-1.10.md"
+              "title": "v1.11",
+              "path": "/docs/release-notes/release-notes-1.11.md"
+            },
+            {
+                "title": "v1.10",
+                "path": "/docs/release-notes/release-notes-1.10.md"
             },
             {
               "title": "v1.9",
