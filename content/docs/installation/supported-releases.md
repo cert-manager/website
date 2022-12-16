@@ -13,36 +13,37 @@ Each release is supported for a period of four months, and we aim to create a ne
 release roughly every two months, accounting for holiday periods, major conferences
 and other world events.
 
+cert-manager expects that ServerSideApply is enabled in the cluster for all version of Kubernetes from 1.24 and above.
+
 <h2 id="supported-releases">Currently supported releases</h2>
 
 | Release  | Release Date |   End of Life   | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:---------------:|:----------------------------------:|:---------------------------------:|
-| [1.10][] | Oct 17, 2022 | Release of 1.12 |            1.20 → 1.25\*            |            4.8 → 4.12             |
-| [1.9][]  | Jul 22, 2022 | Release of 1.11 |            1.20 → 1.24\*            |            4.7 → 4.11             |
+| [1.10][] | Oct 17, 2022 | Release of 1.12 |            1.20 → 1.26             |            4.7 → 4.13             |
+| [1.9][]  | Jul 22, 2022 | Release of 1.11 |            1.20 → 1.24             |            4.7 → 4.11             |
 
 \*ServerSideApply should be enabled in the cluster
 
 ## Upcoming releases
 
-| Release  |  Release Date  |  End of Life   | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
-|----------|:--------------:|:--------------:|:----------------------------------:|:---------------------------------:|
-| [1.11][] |  Jan 11, 2023  | Mid June, 2023 |            1.20 → 1.25\*            |            4.8 → 4.12            |
+| Release  |  Release Date  |  End of Life   | [Supported Kubernetes versions][s]  | [Supported OpenShift versions][s] |
+|----------|:--------------:|:--------------:|:-----------------------------------:|:---------------------------------:|
+| [1.11][] |  Jan 11, 2023  |  Mid May, 2023 |            1.21 → 1.26              |            4.8 → 4.13             |
+| [1.12][] | ~Mar 15, 2023  | Mid July, 2023 |            1.22 → 1.26              |            4.9 → 4.13             |
 
 Dates in the future are uncertain and might change.
-
-\*ServerSideApply must be enabled in the cluster.
 
 ## Old releases
 
 | Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
 |----------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
-| [1.8][]  | Apr 05, 2022 | Oct 17, 2022 |          1.19 → 1.24\*          |          4.6 → 4.11           |
-| [1.7][]  | Jan 26, 2021 | Jul 22, 2022 |          1.18 → 1.23\*          |           4.5 → 4.9           |
-| [1.6][]  | Oct 26, 2021 | Apr 05, 2022 |          1.17 → 1.22           |           4.4 → 4.9           |
-| [1.5][]  | Aug 11, 2021 | Jan 26, 2022 |          1.16 → 1.22           |           4.3 → 4.8           |
-| [1.4][]  | Jun 15, 2021 | Oct 26, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
-| [1.3][]  | Apr 08, 2021 | Aug 11, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
-| [1.2][]  | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.21           |           4.3 → 4.7           |
+| [1.8][]  | Apr 05, 2022 | Oct 17, 2022 |          1.19 → 1.24           |          4.6 → 4.11           |
+| [1.7][]  | Jan 26, 2021 | Jul 22, 2022 |          1.18 → 1.23           |          4.5 → 4.9            |
+| [1.6][]  | Oct 26, 2021 | Apr 05, 2022 |          1.17 → 1.22           |          4.4 → 4.9            |
+| [1.5][]  | Aug 11, 2021 | Jan 26, 2022 |          1.16 → 1.22           |          4.3 → 4.8            |
+| [1.4][]  | Jun 15, 2021 | Oct 26, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
+| [1.3][]  | Apr 08, 2021 | Aug 11, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
+| [1.2][]  | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
 | [1.1][]  | Nov 24, 2020 | Apr 08, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
 | [1.0][]  | Sep 02, 2020 | Feb 10, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
 | [0.16][] | Jul 23, 2020 | Nov 24, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
@@ -76,8 +77,6 @@ We list cert-manager releases on [GitHub](https://github.com/cert-manager/cert-m
 and release notes on [cert-manager.io](https://cert-manager.io/docs/release-notes/).
 
 We also maintain detailed [upgrade instructions](https://cert-manager.io/docs/installation/upgrading/).
-
-\*ServerSideApply must be enabled in the cluster.
 
 ## Support policy
 
@@ -212,10 +211,10 @@ including EKS, GKE, AKS and OpenShift.
 
 |      Vendor       | Oldest Kubernetes Release\*  |               Other Older Kubernetes Releases                 |
 |:-----------------:|------------------------------|---------------------------------------------------------------|
-|    [EKS][eks]     | 1.20 (EOL Nov 2022)          | 1.21 (EOL Feb 2023), 1.22 (EOL May 2023)                      |
-|    [GKE][gke]     | 1.20 (EOL Aug 2022)          | 1.21 (EOL Dec 2022), 1.22 (EOL Mar 2023)                      |
-|    [AKS][aks]     | 1.22 (EOL Nov 2022)          |                                                               |
-| [OpenShift 4][os] | 1.19 (4.6 EUS, EOL Dec 2022) | 1.20 (4.7, EOL Aug 2022), 1.21 (4.8, EOL Jan 2023, EUS after) |
+|    [EKS][eks]     | 1.21 (EOL Feb 2023)          | 1.22 (EOL May 2023)                                           |
+|    [GKE][gke]     | 1.21 (EOL Feb 2023)          | 1.22 (EOL May 2023)                                           |
+|    [AKS][aks]     | 1.23 (EOL ~Feb 2023)         |                                                               |
+| [OpenShift 4][os] | 1.21 (4.8 EUS, EOL Feb 2023) | 1.22 (4.9, EOL Apr 2023)                                      |
 
 \*Oldest release relevant to the next cert-manager release, as of 2022-07-18
 
@@ -226,11 +225,14 @@ including EKS, GKE, AKS and OpenShift.
 
 ### OpenShift
 
-cert-manager supports several versions of OpenShift 4, based on the versions of Kubernetes
-that each version maps to. For convenience, the following table shows these version mappings:
+cert-manager supports versions of OpenShift 4 based on the version of Kubernetes
+that each version maps to.
+
+For convenience, the following table shows these version mappings:
 
 | OpenShift versions | Kubernetes version |
 |--------------------|--------------------|
+| 4.13               | 1.26               |
 | 4.12               | 1.25               |
 | 4.11               | 1.24               |
 | 4.10, 4.10 EUS     | 1.23               |
@@ -238,6 +240,9 @@ that each version maps to. For convenience, the following table shows these vers
 | 4.8, 4.8 EUS       | 1.21               |
 | 4.7                | 1.20               |
 | 4.6, 4.6 EUS       | 1.19               |
+
+Note that some OpenShift versions listed above may be predicted, since an updated version of OpenShift may
+not yet be available for the latest Kubernetes releases.
 
 The last version of cert-manager to support OpenShift 3 was cert-manager 1.2, which is
 no longer maintained.
