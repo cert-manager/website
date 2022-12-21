@@ -346,9 +346,29 @@ In this case the `DNS01` solver for Cloudflare will only be used to solve a
 challenge for a DNS name if the `Certificate` has a label from
 `matchLabels` _and_ the DNS name matches a zone from `dnsZones`.
 
+## Private ACME Servers
+
+cert-manager should also work with private or self-hosted ACME servers, as long as they follow the ACME spec.
+
+If your ACME server doesn't use a publicly trusted certificate, you can pass a trusted CA to use when creating your
+issuer, from cert-manager 1.11 onwards:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    ...
+    caBundle: <base64 encoded CA Bundle in PEM format>
+    ...
+```
+
+
 ## Alternative Certificate Chains
 
-{/* This empty link preserves old links to #alternative-certificate-chain", which matched the old title of this section */}
+{/* The empty link below preserves old links to #alternative-certificate-chain", which matched the old title of this section */}
 
 <a id="alternative-certificate-chain" className="hidden-link"></a>
 
