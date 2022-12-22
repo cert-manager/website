@@ -54,6 +54,7 @@ Dates in the future are uncertain and might change.
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
+[1.12]: https://github.com/cert-manager/cert-manager/milestone/33
 [1.11]: https://github.com/cert-manager/cert-manager/milestone/32
 [1.10]: https://cert-manager.io/docs/release-notes/release-notes-1.10
 [1.9]: https://cert-manager.io/docs/release-notes/release-notes-1.9

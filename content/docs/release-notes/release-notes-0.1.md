@@ -21,6 +21,6 @@ Notable features:
   - Events logged to the Kubernetes API
   - Status block utilized to store additional state about resources
 
-Please check the [README(https://github.com/jetstack-experimental/cert-manager) for a quick-start guide.
+Please check the [README](https://github.com/cert-manager/cert-manager) for a quick-start guide.
 
 We really value any feedback and contributions to the project. If you'd like to get involved, please open some issues, comment or pick something up and get started!
