@@ -3,13 +3,198 @@ title: AzureDNS
 description: 'cert-manager configuration: ACME DNS-01 challenges using AzureDNS'
 ---
 
-To configure the AzureDNS DNS01 Challenge in a Kubernetes cluster there are 3 ways available:
+cert-manager can create and then delete DNS-01 records in Azure DNS but it needs to authenticate to Azure first.
+There are four authentication methods available:
 
-- [Managed Identity Using AAD Pod Identities](#managed-identity-using-aad-pod-identities)
+- [Managed Identity Using AAD Workload Identity](#managed-identity-using-aad-pod-identity) (recommended)
+- [Managed Identity Using AAD Pod Identities](#managed-identity-using-aad-pod-identities) (deprecated)
 - [Managed Identity Using AKS Kubelet Identity](#managed-identity-using-aks-kubelet-identity)
 - [Service Principal](#service-principal)
 
+## Managed Identity Using AAD Workload Identity
+
+> ℹ️ This feature is available in cert-manager `>= v1.11.0`.
+>
+> 📖 Read the [AKS + LoadBalancer + Let's Encrypt tutorial](../../tutorials/getting-started-with-cert-manager-on-azure-kubernetes-service-using-lets-encrypt-for-ssl/README.md) for an end-to-end example of this authentication method.
+
+Azure AD workload identity (preview) on Azure Kubernetes Service (AKS) allows cert-manager to authenticate to Azure using a Kubernetes ServiceAccount Token and then to manage DNS-01 records in Azure DNS.
+This is the recommended authentication method because it is more secure and easier to maintain than the other methods.
+
+### Reconfigure the cluster
+
+Enable the workload identity federation features on your cluster.
+If you have an Azure AKS cluster you can use the following command:
+
+```bash
+az aks update \
+    --name ${CLUSTER} \
+    --enable-oidc-issuer \
+    --enable-workload-identity # ℹ️ This option is currently only available when using the aks-preview extension.
+```
+
+> ℹ️ You can [install the Azure workload identity extension on other managed and self-managed clusters](https://azure.github.io/azure-workload-identity/docs/installation.html) if you are not using Azure AKS.
+>
+> 📖 Read [Deploy and configure workload identity on an Azure Kubernetes Service (AKS) cluster](https://learn.microsoft.com/en-us/azure/aks/workload-identity-deploy-cluster) for more information about the `--enable-workload-identity` feature.
+>
+### Reconfigure cert-manager
+
+Label the cert-manager controller Pod and ServiceAccount for the attention of the Azure Workload Identity webhook,
+which will result in the cert-manager controller Pod having an extra volume containing a Kubernetes ServiceAccount token which it will use to authenticate with Azure.
+
+If you installed cert-manager using Helm, the labels can be configured using Helm values:
+
+```yaml
+# values.yaml
+podLabels:
+  azure.workload.identity/use: "true"
+serviceAccount:
+  labels:
+    azure.workload.identity/use: "true"
+```
+
+If successful, the cert-manager Pod will have some new environment variables set,
+and the Azure workload-identity ServiceAccount token as a projected volume:
+
+```bash
+kubectl describe pod -n cert-manager -l app.kubernetes.io/component=controller
+```
+
+```terminal
+Containers:
+    ...
+    cert-manager-controller:
+        ...
+        Environment:
+        ...
+        AZURE_CLIENT_ID:
+        AZURE_TENANT_ID:             f99bd6a4-665c-41cf-aff1-87a89d5c62d4
+        AZURE_FEDERATED_TOKEN_FILE:  /var/run/secrets/azure/tokens/azure-identity-token
+        AZURE_AUTHORITY_HOST:        https://login.microsoftonline.com/
+    Mounts:
+      /var/run/secrets/azure/tokens from azure-identity-token (ro)
+Volumes:
+   ...
+  azure-identity-token:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3600
+```
+
+> 📖 Read about [the role of the Mutating Admission Webhook](https://azure.github.io/azure-workload-identity/docs/installation/mutating-admission-webhook.html) in Azure AD Workload Identity for Kubernetes.
+
+
+### Create a Managed Identity
+
+In order for cert-manager to use the Azure API and manipulate the records in the Azure DNS zone,
+it needs an Azure account and the best type of account to use is called a "Managed Identity".
+This account does not come with a password or an API key and it is designed for use by machines rather than humans.
+
+Choose a managed identity name and create the Managed Identity:
+
+```bash
+export IDENTITY_NAME=cert-manager
+az identity create --name "${IDENTITY_NAME}"
+```
+
+Grant it permission to modify the DNS zone records:
+
+```bash
+export IDENTITY_CLIENT_ID=$(az identity show --name "${IDENTITY_NAME}" --query 'clientId' -o tsv)
+az role assignment create \
+    --role "DNS Zone Contributor" \
+    --assignee IDENTITY_CLIENT_ID \
+    --scope $(az network dns zone show --name $DOMAIN_NAME -o tsv --query id)
+```
+
+> 📖 Read [What are managed identities for Azure resources?](https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview)
+> for an overview of managed identities and their uses.
+>
+> 📖 Read [Azure built-in roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles) to learn about the "DNS Zone Contributor" role.
+>
+> 📖 Read more about [the `az identity` command](https://learn.microsoft.com/en-us/cli/azure/identity).
+
+### Add a Federated Identity
+
+Now associate a federated identity with the managed identity that you created earlier.
+cert-manager will authenticate to Azure using a short lived Kubernetes ServiceAccount token,
+and it will be able to impersonate the managed identity that you created in the previous step.
+
+```bash
+export SERVICE_ACCOUNT_NAME=cert-manager # ℹ️ This is the default Kubernetes ServiceAccount used by the cert-manager controller.
+export SERVICE_ACCOUNT_NAMESPACE=cert-manager # ℹ️ This is the default namespace for cert-manager.
+export SERVICE_ACCOUNT_ISSUER=$(az aks show --resource-group $AZURE_DEFAULTS_GROUP --name $CLUSTER --query "oidcIssuerProfile.issuerUrl" -o tsv)
+az identity federated-credential create \
+  --name "cert-manager" \
+  --identity-name "${IDENTITY_NAME}" \
+  --issuer "${SERVICE_ACCOUNT_ISSUER}" \
+  --subject "system:serviceaccount:${SERVICE_ACCOUNT_NAMESPACE}:${SERVICE_ACCOUNT_NAME}"
+```
+
+- `--subject`: is the distinguishing name of the Kubernetes ServiceAccount.
+- `--issuer`: is a URL from which the Azure will download the JWT signing certificate and other metadata
+
+> 📖 Read about [Workload identity federation](https://learn.microsoft.com/en-us/azure/active-directory/develop/workload-identity-federation) in the Microsoft identity platform documentation.
+>
+> 📖 Read more about [the `az identity federated-credential` command](https://learn.microsoft.com/en-us/cli/azure/identity/federated-credential).
+
+### Configure a ClusterIssuer
+
+For example:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: $EMAIL_ADDRESS
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    solvers:
+    - dns01:
+        azureDNS:
+          hostedZoneName: $AZURE_ZONE_NAME
+          resourceGroupName: $AZURE_RESOURCE_GROUP
+          subscriptionID: $AZURE_SUBSCRIPTION_ID
+          environment: AzurePublicCloud
+          managedIdentity:
+            clientID: $IDENTITY_CLIENT_ID
+```
+
+The following variables need to be filled in.
+
+```bash
+# An email address to which Let's Encrypt will send renewal reminders.
+export EMAIL_ADDRESS=<email-address>
+# The Azure DNS zone in which the DNS-01 records will be created and deleted.
+export AZURE_ZONE_NAME=<domain.example.com>
+# The Azure resource group containing the DNS zone.
+export AZURE_RESOURCE_GROUP=<azure-resource-group>
+# The Azure billing account name and ID for the DNS zone.
+export AZURE_SUBSCRIPTION=<azure-billing-account-name>
+export AZURE_SUBSCRIPTION_ID=$(az account show --name $AZURE_SUBSCRIPTION --query 'id' -o tsv)
+```
+
+#### ⚠️ Using 'Ambient Credentials' with ClusterIssuer and Issuer resources
+
+This authentication method is an example of what cert-manager calls 'ambient credentials'.
+Ambient credentials are enabled by default for ClusterIssuer resources, but disabled by default for Issuer resources.
+This is to prevent unprivileged users, who have permission to create Issuer resources, from issuing certificates using credentials that cert-manager incidentally has access to.
+ClusterIssuer resources are cluster scoped (not namespaced) and only platform administrators should be granted permission to create them.
+
+If you are using this authentication mechanism and ambient credentials are not enabled, you will see this error:
+
+```bash
+error instantiating azuredns challenge solver: ClientID is not set but neither --cluster-issuer-ambient-credentials nor --issuer-ambient-credentials are set.
+```
+
+> ⚠️ It is possible (but not recommended) to enable this authentication mechanism for `Issuer` resources, by setting the `--issuer-ambient-credentials` flag on the cert-manager controller to true.
+
 ## Managed Identity Using AAD Pod Identities
+
+> ⚠️ The [open source Azure AD pod-managed identity (preview) in Azure Kubernetes Service has been deprecated as of 10/24/2022](https://github.com/Azure/aad-pod-identity#-announcement).
+> Use Workload Identity instead.
 
 [AAD Pod Identities](https://azure.github.io/aad-pod-identity) allows assigning a [Managed Identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview) to a pod. This removes the need for adding explicit credentials into the cluster to create the required DNS records.
 
