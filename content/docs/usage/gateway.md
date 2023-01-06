@@ -137,21 +137,24 @@ cert-manager skips any listener block that cannot be used for generating a
 Certificate. For a listener block to be used for creating a Certificate, it must
 meet the following requirements:
 
-|           Field            |                         Requirement                         |
-|----------------------------|-------------------------------------------------------------|
-| `tls.hostname`             | Must not be empty.                                          |
-| `tls.mode`                 | Must be set to `Terminate`. `Passthrough` is not supported. |
-| `tls.certificateRef.name`  | Cannot be left empty.                                       |
-| `tls.certificateRef.kind`  | If specified, must be set to `Secret`.                                    |
-| `tls.certificateRef.group` | If specified, must be set to `core`.                                      |
+|           Field                |                         Requirement                         |
+|--------------------------------|-------------------------------------------------------------|
+| `tls.hostname`                 | Must not be empty.                                          |
+| `tls.mode`                     | Must be set to `Terminate`. `Passthrough` is not supported. |
+| `tls.certificateRef.name`      | Cannot be left empty.                                       |
+| `tls.certificateRef.kind`      | If specified, must be set to `Secret`.                      |
+| `tls.certificateRef.group`     | If specified, must be set to `core`.                        |
+| `tls.certificateRef.namespace` | If specified, must be the same as the `Gateway`.            |
 
-In the following example, the first three listener blocks will not be used to
+In the following example, the first four listener blocks will not be used to
 generate Certificate resources:
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: Gateway
 metadata:
+  name: my-gateway
+  namespace: default
   annotations:
     cert-manager.io/issuer: my-issuer
 spec:
@@ -175,6 +178,21 @@ spec:
             kind: Secret
             group: core
 
+    # ❌  Cross-namespace secret references are not supported, the following listener is skipped.
+    - hostname: foo.example.com
+      port: 443
+      protocol: HTTPS
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: example-com-tls
+            kind: Secret
+            group: core
+            namespace: other-namespace
+
     # ✅  The following listener is valid.
     - hostname: foo.example.com # ✅ Required.
       port: 443
@@ -190,7 +208,7 @@ spec:
             group: core # ✅ Required. "core" is the only valid value.
 ```
 
-cert-manager has skipped over the first three listener blocks and has created a
+cert-manager has skipped over the first four listener blocks and has created a
 single Certificate named `example-com-tls` for the last listener block:
 
 ```yaml
