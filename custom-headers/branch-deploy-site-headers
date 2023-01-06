@@ -1,0 +1,5 @@
+# Prevent search engines from indexing preview sites for branch deploys. See
+# - https://docs.netlify.com/routing/headers/#custom-headers-for-different-branch-or-deploy-contexts
+# - https://developers.google.com/search/docs/crawling-indexing/block-indexing
+/*
+  X-Robots-Tag: noindex
