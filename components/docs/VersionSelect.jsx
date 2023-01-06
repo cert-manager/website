@@ -51,6 +51,13 @@ export default function VersionSelect({
               </div>
             </Listbox.Option>
           ))}
+          <div className="block px-2">
+            <SidebarLink
+              href="https://release-next--cert-manager-website.netlify.app/docs/"
+              caption="next release"
+              setSidebarCollapsed={setSidebarCollapsed}
+            />
+          </div>
         </Listbox.Options>
       </Listbox>
     </div>
