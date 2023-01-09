@@ -19,6 +19,12 @@ Thanks again to all open-source contributors with commits in this release, inclu
 - [@sathyanarays](https://github.com/sathyanarays)
 - [@weisdd](https://github.com/weisdd)
 - [@yann-soubeyrand](https://github.com/yann-soubeyrand)
+- [@joycebrum](https://github.com/joycebrum)
+- [@Git-Jiro](https://github.com/Git-Jiro)
+- [@thib-mary](https://github.com/thib-mary)
+- [@yk](https://github.com/yk)
+- [@RomanenkoDenys](https://github.com/RomanenkoDenys)
+- [@lucacome](https://github.com/lucacome)
 
 ## Changes since 1.10.1
 
