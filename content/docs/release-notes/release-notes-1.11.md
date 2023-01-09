@@ -5,7 +5,7 @@ description: 'cert-manager release notes: cert-manager 1.11'
 
 > ⚠️ This release is not yet ready for production.
 > The first stable version is due to be published in January 2023.
-> The latest **pre-release** version is [`v1.11.0-beta.0`](https://github.com/cert-manager/cert-manager/releases/tag/v1.11.0-beta.0).
+> The latest **pre-release** version is [`v1.11.0-beta.1`](https://github.com/cert-manager/cert-manager/releases/tag/v1.11.0-beta.1).
 
 ## Community
 
@@ -57,3 +57,11 @@ Thanks again to all open-source contributors with commits in this release, inclu
 - The Venafi Issuer now supports TLS 1.2 renegotiation, so that it can connect to TPP servers where the vedauth API endpoints are configured to *accept* client certificates. (Note: This does not mean that the Venafi Issuer supports client certificate authentication). ([#5568](https://github.com/cert-manager/cert-manager/pull/5568), [@wallrj](https://github.com/wallrj))
 - Upgrade to go 1.19.4 to fix CVE-2022-41717 ([#5619](https://github.com/cert-manager/cert-manager/pull/5619), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Upgrade to latest go minor release ([#5559](https://github.com/cert-manager/cert-manager/pull/5559), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Ensure `extraArgs` in Helm takes precedence over the new acmesolver image options ([#5702](https://github.com/cert-manager/cert-manager/pull/5702), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix cainjector's --namespace flag. Users who want to prevent cainjector from reading all Secrets and Certificates in all namespaces (i.e to prevent excessive memory consumption) can now scope it to a single namespace using the --namespace flag. A cainjector that is only used as part of cert-manager installation only needs access to the cert-manager installation namespace. ([#5694](https://github.com/cert-manager/cert-manager/pull/5694), [@irbekrm](https://github.com/irbekrm))
+- Fixes a bug where cert-manager controller was caching all Secrets twice ([#5691](https://github.com/cert-manager/cert-manager/pull/5691), [@irbekrm](https://github.com/irbekrm))
+
+### Other
+
+- `certificate.spec.secretName` Secrets will now be labelled with the `controller.cert-manager.io/fao` label ([#5703](https://github.com/cert-manager/cert-manager/pull/5703), [@irbekrm](https://github.com/irbekrm))
+
