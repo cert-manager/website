@@ -15,7 +15,7 @@ There are four authentication methods available:
 
 > ℹ️ This feature is available in cert-manager `>= v1.11.0`.
 >
-> 📖 Read the [AKS + LoadBalancer + Let's Encrypt tutorial](../../tutorials/getting-started-with-cert-manager-on-azure-kubernetes-service-using-lets-encrypt-for-ssl/README.md) for an end-to-end example of this authentication method.
+> 📖 Read the [AKS + LoadBalancer + Let's Encrypt tutorial](../../tutorials/getting-started-aks-letsencrypt/README.md) for an end-to-end example of this authentication method.
 
 Azure AD workload identity (preview) on Azure Kubernetes Service (AKS) allows cert-manager to authenticate to Azure using a Kubernetes ServiceAccount Token and then to manage DNS-01 records in Azure DNS.
 This is the recommended authentication method because it is more secure and easier to maintain than the other methods.

@@ -25,7 +25,7 @@ description: Quick start guides for cert-manager
 </a>
 
 <a style={{float: "left", marginBottom: "20px", padding: "10px", boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.1)", textDecoration: "none"}}
-    href="../tutorials/getting-started-with-cert-manager-on-azure-kubernetes-service-using-lets-encrypt-for-ssl">
+    href="../tutorials/getting-started-aks-letsencrypt">
         <img style={{margin: "0", clear: "right", float: "right", width: "64px"}}
             alt="Azure Kubernetes Services icon" src="/images/icons/azure_kubernetes_service.svg"
             title="Azure Kubernetes Service (AKS)" />

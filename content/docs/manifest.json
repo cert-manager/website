@@ -356,7 +356,7 @@
             },
             {
               "title": "AKS + LoadBalancer + Let's Encrypt",
-              "path": "/docs/tutorials/getting-started-with-cert-manager-on-azure-kubernetes-service-using-lets-encrypt-for-ssl/README.md"
+              "path": "/docs/tutorials/getting-started-aks-letsencrypt/README.md"
             },
             {
                 "title": "GKE + Ingress + Let's Encrypt",
