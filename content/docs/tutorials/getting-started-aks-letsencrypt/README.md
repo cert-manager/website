@@ -480,7 +480,7 @@ serviceAccount:
 ```
 🔗 <a href="values.yaml">`values.yaml`</a>
 
-```
+```bash
 helm upgrade cert-manager jetstack/cert-manager \
     --namespace cert-manager \
     --reuse-values \
