@@ -355,12 +355,16 @@
               "path": "/docs/tutorials/README.md"
             },
             {
-              "title": "AKS + LoadBalancer + Let's Encrypt",
-              "path": "/docs/tutorials/getting-started-aks-letsencrypt/README.md"
+                "title": "Securing NGINX-ingress",
+                "path": "/docs/tutorials/acme/nginx-ingress.md"
             },
             {
                 "title": "GKE + Ingress + Let's Encrypt",
                 "path": "/docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md"
+            },
+            {
+                "title": "AKS + LoadBalancer + Let's Encrypt",
+                "path": "/docs/tutorials/getting-started-aks-letsencrypt/README.md"
             },
             {
                 "title": "Migrating from Kube-LEGO",
@@ -377,10 +381,6 @@
             {
               "title": "HTTP Validation",
               "path": "/docs/tutorials/acme/http-validation.md"
-            },
-            {
-              "title": "Securing NGINX-ingress",
-              "path": "/docs/tutorials/acme/nginx-ingress.md"
             },
             {
               "title": "Pomerium Ingress",

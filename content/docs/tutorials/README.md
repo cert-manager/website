@@ -6,11 +6,15 @@ description: 'cert-manager tutorials: Overview'
 Step-by-step tutorials are a great way to get started with cert-manager, and we provide a few
 for you to learn from. Take a look!
 
+- [Securing Ingresses with NGINX-Ingress and cert-manager](./acme/nginx-ingress.md): Tutorial for deploying NGINX into your
+  cluster and securing incoming connections with a certificate from Let's Encrypt.
+- [GKE + Ingress + Let's Encrypt](./getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md):
+  Learn how to deploy cert-manager on Google Kubernetes Engine and how to configure it to get certificates for Ingress, from Let's Encrypt.
+- [AKS + LoadBalancer + Let's Encrypt](getting-started-aks-letsencrypt/README.md):
+  Learn how to deploy cert-manager on Azure Kubernetes Service (AKS) and how to configure it to get certificates for an HTTPS web server, from Let's Encrypt.
 - [Backup and Restore Resources](./backup.md): Backup the cert-manager resources
   in your cluster and then restore them.
 - [Pomerium Ingress](./acme/pomerium-ingress.md): Tutorial on using the Pomerium Ingress Controller with cert-manager.
-- [Securing Ingresses with NGINX-Ingress and cert-manager](./acme/nginx-ingress.md): Tutorial for deploying NGINX into your
-  cluster and securing incoming connections with a certificate from Let's Encrypt.
 - [Issuing an ACME Certificate using DNS Validation](./acme/dns-validation.md):
   Tutorial on how to resolve DNS ownership validation using DNS01 challenges.
 - [Issuing an ACME Certificate using HTTP Validation](./acme/http-validation.md):
