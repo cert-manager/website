@@ -37,7 +37,7 @@ There are several folders in `content/` and which one you need depends on what y
 - Something which applies to the current version of cert-manager? <br />
   Add it to `docs/` and possibly to the specific version of cert-manager that's latest (e.g. `v1.8-docs/`)
 - Something which only applies to the next major version of cert-manager? <br />
-  Add it to `next-docs`
+  Add it to `docs/` but branch from the [`release-next` branch](https://github.com/cert-manager/website/tree/release-next) and merge the PR into that branch.
 - Something which isn't "versioned", e.g. a page under "contributing", release notes or our supported-releases page? <br />
   Add it to `docs/`, which is the only place such pages should appear
 - Something which applies only to versions of cert-manager which have already been released? <br />
