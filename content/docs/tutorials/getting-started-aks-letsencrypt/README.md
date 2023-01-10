@@ -229,6 +229,8 @@ spec:
 envsubst < certificate.yaml | kubectl apply -f -
 ```
 
+> 🔗 If you don't already have `envsubst` installed you can [download and install a Go implementation of `envsubst`](https://github.com/a8m/envsubst).
+
 Use `cmctl status certificate` to check the status of the Certificate:
 
 ```bash
@@ -253,8 +255,6 @@ Valid for:
                 - server auth
 ...
 ```
-
-> 🔗 If you don't already have `envsubst` installed you can [download and install a Go implementation of `envsubst`](https://github.com/a8m/envsubst).
 
 ## Deploy a sample web server
 
