@@ -7,6 +7,23 @@ description: 'cert-manager release notes: cert-manager 1.11'
 > The first stable version is due to be published in January 2023.
 > The latest **pre-release** version is [`v1.11.0-beta.1`](https://github.com/cert-manager/cert-manager/releases/tag/v1.11.0-beta.1).
 
+
+## Major Themes
+
+### Support for Azure Workload Identity Federation with Azure DNS and ACME DNS-01
+
+cert-manager can now authenticate using [Azure Workload Identity Federation](https://learn.microsoft.com/en-us/azure/active-directory/develop/workload-identity-federation) to manage ACME DNS-01 records in Azure DNS.
+The advantage of this authentication mechanism is that you do not need to store and manage Azure credentials in Kubernetes Secret resources.
+Instead cert-manager authenticates to Azure using a short lived Kubernetes ServiceAccount token.
+This is now the recommended authentication method because it is more secure and easier to maintain than the other methods,
+and it should be used instead of the [deprecated pod-managed identify mechanism](https://github.com/Azure/aad-pod-identity#-announcement).
+
+> 📖 Read about [configuring the ACME issuer with Azure DNS](../../configuration/acme/dns01/azuredns/README.md).
+>
+> 📖 Read the [AKS + LoadBalancer + Let's Encrypt tutorial](../../tutorials/getting-started-aks-letsencrypt/README.md) for an end-to-end example of this authentication method.
+>
+> 🔗 See [pull request #5570](https://github.com/cert-manager/cert-manager/pull/5570) for the implementation
+
 ## Community
 
 Thanks again to all open-source contributors with commits in this release, including:
