@@ -664,7 +664,7 @@ Status:
 > we'll start with the Let's Encrypt staging issuer, and once we're happy that it's working
 > we'll switch to the production issuer.
 >
-> 📖 Read more about [configuring the ACME Issuer](../../configuration/acme).
+> 📖 Read more about [configuring the ACME Issuer](../../configuration/acme/README.md).
 >
 
 
