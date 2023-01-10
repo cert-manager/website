@@ -383,6 +383,9 @@ you should now be able to connect to it using curl or using your web browser:
 curl --insecure -v https://www.$DOMAIN_NAME
 ```
 
+> ⚠️ We used curl's `--insecure` option because it rejects self-signed certificates by default.
+> Later you will learn how to create a trusted SSL certificate signed by Let's Encrypt.
+
 You should see that the SSL certificate has the expected DNS names and that it is self-signed:
 
 ```terminal
@@ -399,9 +402,6 @@ Protocol: HTTP/2.0!
 Hostname: helloweb-55cb4cd887-tjlvh
 ```
 
-> ⚠️ We used curl's `--insecure` option because it rejects self-signed certificates by default.
-> Later you will learn how to create a trusted SSL certificate signed by Let's Encrypt.
->
 > 📖 Read more about [Using a Service to Expose Your App](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/).
 >
 > 📖 Read more about [Using a public IP address and DNS label with the Azure Kubernetes Service (AKS) load balancer](https://learn.microsoft.com/en-us/azure/aks/static-ip).
