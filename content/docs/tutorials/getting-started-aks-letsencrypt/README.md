@@ -1,16 +1,19 @@
 ---
-title: Deploy cert-manager on Azure Kubernetes Service (AKS) and create SSL certificates using Let's Encrypt
-description: Learn how to deploy cert-manager on Azure Kubernetes Service (AKS) and then configure it to sign SSL certificates using Let's Encrypt
+title: Deploy cert-manager on Azure Kubernetes Service (AKS) and use Let's Encrypt to sign a certificate for an HTTPS website
+description: |
+    Learn how to deploy cert-manager on Azure Kubernetes Service (AKS)
+    and configure it to get a signed certificate from Let's Encrypt for an HTTPS web server,
+    using the DNS-01 protocol and Azure DNS with workload identity federation.
 ---
 
-*Last Verified: 3 January 2023*
+*Last Verified: 10 January 2023*
 
-In this tutorial you will learn how to deploy and configure cert-manager on Azure Kubernetes Service (AKS).
-You will learn how to configure cert-manager to get a signed SSL certificate from Let's Encrypt,
-using the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge) mechanism.
-You will grant permission for cert-manager to use the Azure DNS service and you will learn about workload identity federation / OIDC,
-which allows cert-manager (or any Kubernetes workload) to authenticate to Azure using a Kubernetes ServiceAccount token.
-Finally you will learn how the certificate can be used to serve an HTTPS website with a public domain name.
+In this tutorial you will learn how to deploy and configure cert-manager on Azure Kubernetes Service (AKS)
+and how to deploy an HTTPS web server and make it available on the Internet.
+You will learn how to configure cert-manager to get a signed certificate from Let's Encrypt,
+which will allow clients to connect to your HTTPS website securely.
+You will configure cert-manager to use the [Let's Encrypt DNS-01 challenge protocol](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge) with Azure DNS,
+using workload identity federation to authenticate to Azure.
 
 > **Microsoft Azure**: A suite of cloud computing services by Microsoft.<br/>
 > **Kubernetes**: Runs on your servers. Automates the deployment, scaling, and management of containerized applications.<br/>
@@ -259,7 +262,7 @@ Valid for:
 ## Deploy a sample web server
 
 Now deploy a simple web server which responds to HTTPS requests with "hello world!".
-The SSL / TLS  key and certificate are supplied to the web server by using the `www-tls` Secret as a volume
+The SSL / TLS key and certificate are supplied to the web server by using the `www-tls` Secret as a volume
 and by mounting its contents into the file system of the `hello-app` container in the Pod:
 
 ```yaml
@@ -384,9 +387,9 @@ curl --insecure -v https://www.$DOMAIN_NAME
 ```
 
 > ⚠️ We used curl's `--insecure` option because it rejects self-signed certificates by default.
-> Later you will learn how to create a trusted SSL certificate signed by Let's Encrypt.
+> Later you will learn how to create a trusted certificate signed by Let's Encrypt.
 
-You should see that the SSL certificate has the expected DNS names and that it is self-signed:
+You should see that the certificate has the expected DNS names and that it is self-signed:
 
 ```terminal
 ...
@@ -408,9 +411,9 @@ Hostname: helloweb-55cb4cd887-tjlvh
 
 # Part 2
 
-In part 1 you created a test SSL certificate.
-Now you will learn how to configure cert-manager to use Let's Encrypt and Azure DNS to create a trusted SSL certificate which you can use in production.
-You need to prove to Let's Encrypt that you own the domain name of the SSL certificate and one way to do this is to create a special DNS record in that domain.
+In part 1 you created a test certificate.
+Now you will learn how to configure cert-manager to use Let's Encrypt and Azure DNS to create a trusted certificate which you can use in production.
+You need to prove to Let's Encrypt that you own the domain name of the certificate and one way to do this is to create a special DNS record in that domain.
 This is known as the [DNS-01 challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
 
 cert-manager can create that DNS record for you in by using the Azure DNS API  but it needs to authenticate to Azure first,
@@ -517,8 +520,8 @@ Volumes:
 
 ## Create an Azure Managed Identity
 
-When cert-manager creates an SSL certificate using Let's Encrypt
-it can use DNS records to prove that it controls the DNS domain names in the SSL certificate.
+When cert-manager creates a certificate using Let's Encrypt
+it can use DNS records to prove that it controls the DNS domain names in the certificate.
 In order for cert-manager to use the Azure API and manipulate the records in the Azure DNS zone,
 it needs an Azure account and the best type of account to use is called a "Managed Identity".
 This account does not come with a password or an API key and it is designed for use by machines rather than humans.
@@ -673,7 +676,7 @@ Patch the Certificate to use the staging ClusterIssuer:
 kubectl patch certificate www --type merge  -p '{"spec":{"issuerRef":{"name":"letsencrypt-staging"}}}'
 ```
 
-That should trigger cert-manager to renew the SSL certificate:
+That should trigger cert-manager to renew the certificate:
 Use `cmctl` to check:
 
 ```bash
@@ -681,7 +684,7 @@ cmctl status certificate www
 cmctl inspect secret www-tls
 ```
 
-And finally, when the new SSL certificate has been issued, you can restart the web server to use the new SSL certificates:
+And finally, when the new certificate has been issued, you must restart the web server to use it:
 
 ```bash
 kubectl rollout restart deployment helloweb
@@ -704,9 +707,9 @@ Protocol: HTTP/2.0!
 Hostname: helloweb-9b8bcdd56-6rxm8
 ```
 
-## Create a production ready SSL certificate
+## Create a production ready certificate
 
-Now that everything is working with the Let's Encrypt staging server, we can switch to the production server and get a trusted SSL certificate.
+Now that everything is working with the Let's Encrypt staging server, we can switch to the production server and get a trusted certificate.
 
 Create a Let's Encrypt production Issuer by copying the staging ClusterIssuer YAML and modifying the server URL and the names,
 then apply it:
@@ -752,7 +755,7 @@ Patch the Certificate to use the production ClusterIssuer:
 kubectl patch certificate www --type merge  -p '{"spec":{"issuerRef":{"name":"letsencrypt-production"}}}'
 ```
 
-That should trigger cert-manager to renew the SSL certificate:
+That should trigger cert-manager to renew the certificate:
 Use `cmctl` to check:
 
 ```bash
@@ -760,7 +763,7 @@ cmctl status certificate www
 cmctl inspect secret www-tls
 ```
 
-And finally, when the new SSL certificate has been issued, you can restart the web server to use the new SSL certificates:
+And finally, when the new certificate has been issued, you must restart the web server to use it:
 
 ```bash
 kubectl rollout restart deployment helloweb
@@ -786,7 +789,7 @@ curl -v https://www.$DOMAIN_NAME
 ```
 
 That concludes this tutorial.
-You have learned how to deploy cert-manager on Azure AKS and how to configure it to issue Let's Encrypt signed SSL certificates using the DNS-01 protocol with Azure DNS.
+You have learned how to deploy cert-manager on Azure AKS and how to configure it to issue Let's Encrypt signed certificates using the DNS-01 protocol with Azure DNS.
 You have learned about workload identity federation in Azure and learned how to configure cert-manager to authenticate to Azure using a Kubernetes ServiceAccount Token.
 
 ## Cleanup
