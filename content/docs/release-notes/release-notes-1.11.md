@@ -18,9 +18,9 @@ Instead cert-manager authenticates to Azure using a short lived Kubernetes Servi
 This is now the recommended authentication method because it is more secure and easier to maintain than the other methods,
 and it should be used instead of the [deprecated pod-managed identify mechanism](https://github.com/Azure/aad-pod-identity#-announcement).
 
-> 📖 Read about [configuring the ACME issuer with Azure DNS](../../configuration/acme/dns01/azuredns/README.md).
+> 📖 Read about [configuring the ACME issuer with Azure DNS](../configuration/acme/dns01/azuredns/README.md).
 >
-> 📖 Read the [AKS + LoadBalancer + Let's Encrypt tutorial](../../tutorials/getting-started-aks-letsencrypt/README.md) for an end-to-end example of this authentication method.
+> 📖 Read the [AKS + LoadBalancer + Let's Encrypt tutorial](../tutorials/getting-started-aks-letsencrypt/README.md) for an end-to-end example of this authentication method.
 >
 > 🔗 See [pull request #5570](https://github.com/cert-manager/cert-manager/pull/5570) for the implementation
 
@@ -81,4 +81,3 @@ Thanks again to all open-source contributors with commits in this release, inclu
 ### Other
 
 - `certificate.spec.secretName` Secrets will now be labelled with the `controller.cert-manager.io/fao` label ([#5703](https://github.com/cert-manager/cert-manager/pull/5703), [@irbekrm](https://github.com/irbekrm))
-
