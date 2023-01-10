@@ -176,9 +176,9 @@ kubectl explain CertificateRequest
 kubectl explain Issuer
 ```
 
-> 📖 Read about [other ways to install cert-manager](../../installation).
+> 📖 Read about [other ways to install cert-manager](../../installation/README.md).
 >
-> 📖 Read more about [Certificates and Issuers](../../concepts).
+> 📖 Read more about [Certificates and Issuers](../../concepts/README.md).
 
 ## Create a test ClusterIssuer and a Certificate
 
