@@ -692,7 +692,7 @@ kubectl rollout restart deployment helloweb
 
 You should once again be able to connect to the website, but this time you will see the Let's Encrypt staging certificate:
 
-```
+```terminal
 $ curl -v --insecure https://www.$DOMAIN_NAME
 ...
 * Server certificate:
