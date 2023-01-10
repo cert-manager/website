@@ -707,6 +707,9 @@ Protocol: HTTP/2.0!
 Hostname: helloweb-9b8bcdd56-6rxm8
 ```
 
+> ⚠️ We used curl's `--insecure` option again here because the Let's Encrypt staging issuer creates untrusted certificates.
+> Next you will learn how to create a trusted certificate signed by the Let's Encrypt production issuer.
+
 ## Create a production ready certificate
 
 Now that everything is working with the Let's Encrypt staging server, we can switch to the production server and get a trusted certificate.
