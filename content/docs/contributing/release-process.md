@@ -483,9 +483,17 @@ page if a step is missing or if it is outdated.
        This will remove the periodic ProwJobs for this version as they're no longer needed.
 
     5. **(final release only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
-       open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs.
+       open a PR to [jetstack/testing](https://github.com/jetstack/testing) adding the generated prow configs.
 
-    6. **(final release only)** Open a PR to
+    6. **(final release only)** Open a PR to [`jetstack/testing`](https://github.com/jetstack/testing)
+       and update the [milestone_applier](https://github.com/jetstack/testing/blob/3110b68e082c3625bf0d26265be2d29e41da14b2/config/plugins.yaml#L69)
+       config so that newly raised PRs on master are applied to a new milestone
+       for the next release. E.g. if master currently points at the `v1.10` milestone, change it to point at `v1.11`.
+
+       If the [milestone](https://github.com/cert-manager/cert-manager/milestones) for the next release doesn't exist,
+       create it first. If you consider the milestone for the version you just released to be complete, close it.
+
+    7. **(final release only)** Open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) in
        order to:
 
@@ -496,21 +504,21 @@ page if a step is missing or if it is outdated.
          In the table, set "n/a" for the line where "next periodic" is since
          these tests will be disabled until we do our first alpha.
 
-    7. Ensure that any installation commands in
+    8. Ensure that any installation commands in
        [`cert-manager/website`](https://github.com/cert-manager/website) install
        the latest version. This should be done after every release, including
        patch releases as we want to encourage users to always install the latest
        patch. In addition, ensure that release notes for the latest version are added.
 
-    8. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
+    9. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
       bumping the versions of our kubectl plugins. This is likely only worthwhile if
       cmctl / kubectl plugin functionality has changed significantly or after the first release of a new major version.
 
-    9. Create a new OLM package and publish to OperatorHub
+   10. Create a new OLM package and publish to OperatorHub
 
        cert-manager can be [installed](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) using Operator Lifecycle Manager (OLM)
        so we need to create OLM packages for each cert-manager version and publish them to both
-       [operatorhub.io](https://operatorhub.io/operator/cert-manager) and the equivalent package index for RedHat OpenShift.
+       [`operatorhub.io`](https://operatorhub.io/operator/cert-manager) and the equivalent package index for RedHat OpenShift.
 
        Follow [the cert-manager OLM release process](https://github.com/cert-manager/cert-manager-olm#release-process) and, once published,
        [verify that the cert-manager OLM installation instructions](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) still work.
