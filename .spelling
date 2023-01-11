@@ -567,32 +567,6 @@ X.509
 # contain the right X.509 spelling. The following is a series of exceptions
 # so that the x509 spelling is accepted in those files.
 
- - content/next-docs/concepts/certificate.md
-x509
- - content/next-docs/concepts/certificaterequest.md
-x509
- - content/next-docs/concepts/webhook.md
-x509
- - content/next-docs/release-notes/release-notes-0.13.md
-x509
- - content/next-docs/release-notes/release-notes-0.15.md
-x509
- - content/next-docs/release-notes/release-notes-0.16.md
-x509
- - content/next-docs/release-notes/release-notes-0.5.md
-x509
- - content/next-docs/release-notes/release-notes-0.6.md
-x509
- - content/next-docs/release-notes/release-notes-0.7.md
-x509
- - content/next-docs/release-notes/release-notes-0.9.md
-x509
- - content/next-docs/tutorials/venafi/venafi.md
-x509
- - content/next-docs/usage/certificate.md
-x509
- - content/next-docs/usage/kubectl-plugin.md
-x509
  - content/v0.12-docs/concepts/certificate.md
 x509
  - content/v0.12-docs/concepts/certificaterequest.md
