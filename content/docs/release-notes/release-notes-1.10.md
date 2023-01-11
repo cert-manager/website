@@ -5,7 +5,7 @@ description: 'cert-manager release notes: cert-manager 1.10'
 
 Release 1.10 adds a variety of quality-of-life fixes and features including improvements to the test suite.
 
-The latest version is `v1.10.1`.
+The latest version is `v1.10.2`.
 
 ## Breaking Changes (You **MUST** read this before you upgrade!)
 
@@ -94,6 +94,30 @@ and this should allow you to install it on OpenShift `v4.7`, `v4.8`, `v4.9`, `v4
 But if you are using the ACME Issuer with the HTTP01 solver, cert-manager will deploy a short lived Pod that uses the `RuntimDefault` seccomp profile which may be denied because of the existing Security Context Constraints.
 
 > 📖 Read [Enabling the default seccomp profile for all pods](https://docs.openshift.com/container-platform/4.10/security/seccomp-profiles.html#configuring-default-seccomp-profile_configuring-seccomp-profiles) to learn how to configure your system to allow Pods that use the `RuntimeDefault` seccomp profile.
+
+## `v1.10.2`: Changes since `v1.10.1`
+
+cert-manager `v1.10.2` is primarily a performance enhancement release which might reduce memory consumption by up to 50% in some cases thanks to some brilliant work by [@irbekrm](https://github.com/irbekrm)!
+
+It also patches several vulnerabilities reported by scanners and updates the base images used for cert-manager containers. In addition, it removes a potentially confusing log line which had been introduced in `v1.10.0` which implied that an error had occurred when using external issuers even though there had been no error.
+
+### Feature
+
+- Enable support for Kubernetes 1.26 in tests ([#5647](https://github.com/cert-manager/cert-manager/pull/5647), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+### Bug or Regression
+
+- Fixes a bug where the cert-manager controller was caching all Secrets twice ([#5704](https://github.com/cert-manager/cert-manager/pull/5704), [@irbekrm](https://github.com/irbekrm))
+- Bump helm version to fix `CVE-2022-23525` ([#5676](https://github.com/cert-manager/cert-manager/pull/5676), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Don't log errors relating to `SelfSigned` issuer checks for external issuers ([#5687](https://github.com/cert-manager/cert-manager/pull/5687), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix `golang.org/x/text` vulnerability ([#5592](https://github.com/cert-manager/cert-manager/pull/5592), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Upgrade `golang/x/net` to fix `CVE-2022-41717` ([#5635](https://github.com/cert-manager/cert-manager/pull/5635), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Upgrade to go `1.19.4` to fix `CVE-2022-41717` ([#5620](https://github.com/cert-manager/cert-manager/pull/5620), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Use manually specified temporary directory template when verifying CRDs ([#5682](https://github.com/cert-manager/cert-manager/pull/5682), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+### Other (Cleanup or Flake)
+
+- Bump distroless base images to latest versions ([#5677](https://github.com/cert-manager/cert-manager/pull/5677), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## `v1.10.1`: Changes since `v1.10.0`
 

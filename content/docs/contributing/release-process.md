@@ -151,6 +151,16 @@ page if a step is missing or if it is outdated.
 
 3. Update the release branch:
 
+   - **(initial alpha only)** Create the new release branch. There's usually no real use for it
+      until the first beta, because we're likely to fast forward the release branch to match
+      the master branch until the first beta and therefore the feature freeze at which point
+      we'll cherry-pick commits as needed. Still, it needs to be created at some point!
+
+      ```bash
+      git checkout -b release-1.12 master
+      git push origin release-1.12
+      ```
+
    - **(initial alpha, subsequent alpha and initial beta)** The release branch
       should already exist (it was created at the end of the last final
       release). Update the release branch with the latest commits from the
@@ -438,9 +448,11 @@ page if a step is missing or if it is outdated.
        with the `release` label
        ([examples](https://groups.google.com/g/cert-manager-dev?label=release)).
 
-    2. Send a tweet
-       ([example](https://twitter.com/MaartjeME/status/1286327362121084928))
-       and make sure [@JetstackHQ](https://twitter.com/JetstackHQ) retweets it.
+    2. Send a tweet on the cert-manager Twitter account! Login details are in Jetstack's 1password (for now).
+       ([Example tweet](https://twitter.com/CertManager/status/1612886311957831680)). Make sure [@JetstackHQ](https://twitter.com/JetstackHQ) retweets it!
+
+    3. Send a toot from the cert-manager Mastodon account! Login details are in Jetstack's 1password (for now).
+       ([Example toot](https://infosec.exchange/@CertManager/109666434738850493))
 
 14. Proceed to the post-release steps:
 
@@ -458,6 +470,7 @@ page if a step is missing or if it is outdated.
 
        - Update the section "How we determine supported Kubernetes versions" on
          the [supported-releases](../installation/supported-releases.md) page.
+       - Add any new release notes, if needed.
 
     4. **(final release only)** Create a PR on
        [cert-manager/release](https://github.com/cert-manager/release),
@@ -467,7 +480,7 @@ page if a step is missing or if it is outdated.
        prowspecs/specs.go
        ```
 
-       This will remove the periodic ProwJob for this version as it is no longer needed.
+       This will remove the periodic ProwJobs for this version as they're no longer needed.
 
     5. **(final release only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
        open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs.
@@ -478,60 +491,34 @@ page if a step is missing or if it is outdated.
 
        - Update the section "Supported releases" in the
          [supported-releases](../installation/supported-releases.md) page.
-       - Update the section "Supported releases" in the
-         [supported-releases](../installation/supported-releases.md) page.
        - Update the section "How we determine supported Kubernetes versions" on
          the [supported-releases](../installation/supported-releases.md) page.
          In the table, set "n/a" for the line where "next periodic" is since
          these tests will be disabled until we do our first alpha.
 
-    7. **(final release only)** Open a PR to
-       [`jetstack/testing`](https://github.com/jetstack/testing) and change Prow's
-       config. To do this, take inspiration from [Maartje's PR
-       example](https://github.com/jetstack/testing/pull/397/files).
-
-    8. **(final release only)** Push a new release branch to
-       [`cert-manager/cert-manager`](https://github.com/cert-manager/cert-manager). If the
-       final release is `v1.0.0`, then push the new branch `release-1.1`:
-
-        ```bash
-        # Must be run from the cert-manager repo folder.
-        git checkout -b release-1.1 v1.0.0
-        git push origin release-1.1
-        ```
-
-    9. **(final release only)** Open a PR to
-       [`cert-manager/website`](https://github.com/cert-manager/website) with
-       updates to the website configuration. To do this, take inspiration from
-       [Maartje's PR
-       example](https://github.com/cert-manager/website/pull/309/files).
-
-    10. Ensure that any installation commands in
+    7. Ensure that any installation commands in
        [`cert-manager/website`](https://github.com/cert-manager/website) install
        the latest version. This should be done after every release, including
        patch releases as we want to encourage users to always install the latest
-       patch.
+       patch. In addition, ensure that release notes for the latest version are added.
 
-    11. Future: check that our Algolia search indexing is up-to-date for the website - i.e. that the new version of the docs
-       is being indexed correctly. This is listed here as it's a step we should be checking after a release of a major version
-       but at the time of writing we don't know how to do it!
+    8. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
+      bumping the versions of our kubectl plugins. This is likely only worthwhile if
+      cmctl / kubectl plugin functionality has changed significantly or after the first release of a new major version.
 
-    12. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
-        bumping the versions of our kubectl plugins.
+    9. Create a new OLM package and publish to OperatorHub
 
-    13. Create a new OLM package and publish to OperatorHub
+       cert-manager can be [installed](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) using Operator Lifecycle Manager (OLM)
+       so we need to create OLM packages for each cert-manager version and publish them to both
+       [operatorhub.io](https://operatorhub.io/operator/cert-manager) and the equivalent package index for RedHat OpenShift.
 
-        cert-manager can be [installed](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) using Operator Lifecycle Manager (OLM)
-        so we need to create OLM packages for each cert-manager version and publish them to both
-        [operatorhub.io](https://operatorhub.io/operator/cert-manager) and the equivalent package index for RedHat OpenShift.
-
-        Follow [the cert-manager OLM release process](https://github.com/cert-manager/cert-manager-olm#release-process) and, once published,
-        [verify that the cert-manager OLM installation instructions](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) still work.
+       Follow [the cert-manager OLM release process](https://github.com/cert-manager/cert-manager-olm#release-process) and, once published,
+       [verify that the cert-manager OLM installation instructions](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) still work.
 
 
 ## Older Releases
 
-The above guide only applies for versions of cert-manager from v1.8 onwards.
+The above guide only applies for versions of cert-manager from v1.8 and newer.
 
 Older versions were built using Bazel and this difference in build process is reflected in the release process.
 

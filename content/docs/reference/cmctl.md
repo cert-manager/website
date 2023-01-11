@@ -228,7 +228,7 @@ Sub-commands are available to create different resources:
 ##### CertificateSigningRequest
 To create a [CertificateSigningRequest](./kube-csr.md), use
 ```console
-cmctl x create csr`
+cmctl x create csr
 ```
 This command takes the name of the CertificateSigningRequest to be created, as
 well as a file containing a Certificate manifest (`-f,
