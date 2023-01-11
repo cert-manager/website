@@ -19,8 +19,8 @@ cert-manager expects that ServerSideApply is enabled in the cluster for all vers
 
 | Release  | Release Date |   End of Life   | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:---------------:|:----------------------------------:|:---------------------------------:|
+| [1.11][] | Jan 11, 2023 | Release of 1.13 |            1.21 → 1.26             |            4.8 → 4.13             |
 | [1.10][] | Oct 17, 2022 | Release of 1.12 |            1.20 → 1.26             |            4.7 → 4.13             |
-| [1.9][]  | Jul 22, 2022 | Release of 1.11 |            1.20 → 1.24             |            4.7 → 4.11             |
 
 \*ServerSideApply should be enabled in the cluster
 
@@ -28,7 +28,6 @@ cert-manager expects that ServerSideApply is enabled in the cluster for all vers
 
 | Release  |  Release Date  |  End of Life   | [Supported Kubernetes versions][s]  | [Supported OpenShift versions][s] |
 |----------|:--------------:|:--------------:|:-----------------------------------:|:---------------------------------:|
-| [1.11][] |  Jan 11, 2023  |  Mid May, 2023 |            1.21 → 1.26              |            4.8 → 4.13             |
 | [1.12][] | ~Mar 15, 2023  | Mid July, 2023 |            1.22 → 1.26              |            4.9 → 4.13             |
 
 Dates in the future are uncertain and might change.
@@ -37,6 +36,7 @@ Dates in the future are uncertain and might change.
 
 | Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
 |----------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
+| [1.9][]  | Jul 22, 2022 | Jan 11, 2023 |          1.20 → 1.24           |          4.7 → 4.11           |
 | [1.8][]  | Apr 05, 2022 | Oct 17, 2022 |          1.19 → 1.24           |          4.6 → 4.11           |
 | [1.7][]  | Jan 26, 2021 | Jul 22, 2022 |          1.18 → 1.23           |          4.5 → 4.9            |
 | [1.6][]  | Oct 26, 2021 | Apr 05, 2022 |          1.17 → 1.22           |          4.4 → 4.9            |
@@ -55,7 +55,7 @@ Dates in the future are uncertain and might change.
 
 [s]: #kubernetes-supported-versions
 [1.12]: https://github.com/cert-manager/cert-manager/milestone/33
-[1.11]: https://github.com/cert-manager/cert-manager/milestone/32
+[1.11]: https://cert-manager.io/docs/release-notes/release-notes-1.11
 [1.10]: https://cert-manager.io/docs/release-notes/release-notes-1.10
 [1.9]: https://cert-manager.io/docs/release-notes/release-notes-1.9
 [1.8]: https://cert-manager.io/docs/release-notes/release-notes-1.8

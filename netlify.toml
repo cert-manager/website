@@ -12,3 +12,9 @@
 	NEXT_PUBLIC_DOCS_SEARCH_APP_ID = "01YP6XYAE7"
 	NEXT_PUBLIC_DOCS_SEARCH_INDEX_NAME = "cert-manager"
 	NEXT_PUBLIC_DOMAIN_URL = "https://cert-manager.io"
+
+# Prevent search engines from indexing preview sites for branch deploys. See
+# - https://docs.netlify.com/routing/headers/#custom-headers-for-different-branch-or-deploy-contexts
+# - https://developers.google.com/search/docs/crawling-indexing/block-indexing
+[context.branch-deploy]
+  command = "./scripts/build-release && cp ./custom-headers/branch-deploy-site-headers ./out/_headers"

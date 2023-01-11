@@ -1,0 +1,16 @@
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: helloweb
+    annotations:
+        service.beta.kubernetes.io/azure-dns-label-name: $AZURE_LOADBALANCER_DNS_LABEL_NAME
+spec:
+    ports:
+    - port: 443
+      protocol: TCP
+      targetPort: 8443
+    selector:
+        app: hello
+        tier: web
+    type: LoadBalancer

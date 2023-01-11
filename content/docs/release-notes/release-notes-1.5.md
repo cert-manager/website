@@ -40,7 +40,7 @@ If you are using Traefik, Istio, Ambassador, or ingress-nginx _and_ you are usin
 
 #### Bug or Regression
 
-- Fixed a regression where cert-manager was creating Ingresses using the field `ingressClassName` instead of the annotation `kubernetes.io/ingress.class`. More details about this regression are available [in the 1.7 release notes](https://cert-manager.io/next-docs/release-notes/release-notes-1.7/#ingress-class-semantics). ([#4783](https://github.com/cert-manager/cert-manager/pull/4783), [@maelvls](https://github.com/maelvls))
+- Fixed a regression where cert-manager was creating Ingresses using the field `ingressClassName` instead of the annotation `kubernetes.io/ingress.class`. More details about this regression are available [in the 1.7 release notes](https://cert-manager.io/docs/release-notes/release-notes-1.7/#ingress-class-semantics). ([#4783](https://github.com/cert-manager/cert-manager/pull/4783), [@maelvls](https://github.com/maelvls))
 
 #### Other (Cleanup or Flake)
 
@@ -236,7 +236,7 @@ kubectl cert-manager version
 ```
 
 To install the plugin, check out the [Kubectl
-plugin](https://cert-manager.io/next-docs/installation/kubectl-plugin/) page on
+plugin](https://cert-manager.io/docs/installation/kubectl-plugin/) page on
 the cert-manager website.
 
 These features were implemented by Tim in the cert-manager PRs

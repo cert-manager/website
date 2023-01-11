@@ -157,19 +157,17 @@ EOF
 # This script is _only_ for generating docs for versions of cert-manager with the
 # github.com/cert-manager/cert-manager import path!
 
-LATEST_VERSION="v1.10-docs"
+LATEST_VERSION="v1.11-docs"
 
-genversionwithcli "release-1.10" "$LATEST_VERSION"
+#genversionwithcli "release-1.8" "v1.8-docs"
+#genversionwithcli "release-1.9" "v1.9-docs"
+#genversionwithcli "release-1.10" "v1.10-docs"
+
+genversionwithcli "release-1.11" "$LATEST_VERSION"
 
 # Rather than generate the same docs again for /docs, copy from the latest version
 
 cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/cli" "${REPO_ROOT}/content/docs/"
 cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/reference" "${REPO_ROOT}/content/docs/"
 
-# Unless we keep the next release branch up-to-date (which we never do), it's pointless to generate reference docs for next-docs.
-# Instead just use the same as we have for docs.
-
-cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/cli" "${REPO_ROOT}/content/next-docs/"
-cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/reference" "${REPO_ROOT}/content/next-docs/"
-
-echo "Generated reference documentation for cert-manager versions with a new github.com/cert-manager/cert-manager import path"
+echo "Generated reference documentation for cert-manager versions with the github.com/cert-manager/cert-manager import path"

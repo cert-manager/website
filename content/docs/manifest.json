@@ -62,8 +62,12 @@
                   "path": "/docs/installation/upgrading/remove-deprecated-apis.md"
                 },
                 {
-                  "title": "v1.9 to v1.10",
-                  "path": "/docs/installation/upgrading/upgrading-1.9-1.10.md"
+                  "title": "v1.10 to v1.11",
+                  "path": "/docs/installation/upgrading/upgrading-1.10-1.11.md"
+                },
+                {
+                    "title": "v1.9 to v1.10",
+                    "path": "/docs/installation/upgrading/upgrading-1.9-1.10.md"
                 },
                 {
                   "title": "v1.8 to v1.9",
@@ -351,8 +355,16 @@
               "path": "/docs/tutorials/README.md"
             },
             {
-              "title": "GKE + Ingress + Let's Encrypt",
-              "path": "/docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md"
+                "title": "Securing NGINX-ingress",
+                "path": "/docs/tutorials/acme/nginx-ingress.md"
+            },
+            {
+                "title": "GKE + Ingress + Let's Encrypt",
+                "path": "/docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md"
+            },
+            {
+                "title": "AKS + LoadBalancer + Let's Encrypt",
+                "path": "/docs/tutorials/getting-started-aks-letsencrypt/README.md"
             },
             {
                 "title": "Migrating from Kube-LEGO",
@@ -369,10 +381,6 @@
             {
               "title": "HTTP Validation",
               "path": "/docs/tutorials/acme/http-validation.md"
-            },
-            {
-              "title": "Securing NGINX-ingress",
-              "path": "/docs/tutorials/acme/nginx-ingress.md"
             },
             {
               "title": "Pomerium Ingress",
@@ -516,8 +524,12 @@
               "path": "/docs/release-notes/README.md"
             },
             {
-              "title": "v1.10",
-              "path": "/docs/release-notes/release-notes-1.10.md"
+              "title": "v1.11",
+              "path": "/docs/release-notes/release-notes-1.11.md"
+            },
+            {
+                "title": "v1.10",
+                "path": "/docs/release-notes/release-notes-1.10.md"
             },
             {
               "title": "v1.9",

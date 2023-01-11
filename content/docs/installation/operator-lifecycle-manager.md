@@ -21,7 +21,7 @@ These installation methods are described in Red Hat's [Adding Operators to a clu
 > On some versions and configurations of OpenShift this can cause the Pod to be rejected by the
 > [Security Context Constraints admission webhook](https://docs.openshift.com/container-platform/4.10/authentication/managing-security-context-constraints.html#admission_configuring-internal-oauth).
 >
-> 📖 Read the [Breaking Changes section in the 1.10 release notes](../release-notes/release-notes-1.10.md) before installing or upgrading.
+> 📖 Read the [Breaking Changes section in the 1.10 release notes](https://cert-manager.io/docs/release-notes/release-notes-1.10/#on-openshift-the-cert-manager-pods-may-fail-until-you-modify-security-context-constraints) before installing or upgrading from an older version to 1.10 or newer.
 
 [Red Hat-provided Operator catalog]: https://docs.openshift.com/container-platform/4.7/operators/understanding/olm-rh-catalogs.html#olm-rh-catalogs_olm-rh-catalogs
 [OperatorHub web console]: https://docs.openshift.com/container-platform/4.7/operators/understanding/olm-understanding-operatorhub.html
@@ -217,7 +217,7 @@ The following JSON patch will append `-v=6` to command line arguments of the cer
 (the first container of the first Deployment).
 
 ```bash
-kubectl patch csv cert-manager.v1.10.1 \
+kubectl patch csv cert-manager.v1.11.0 \
   --type json \
   -p '[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "-v=6" }]'
 ```

@@ -1,3 +1,17 @@
+yann-soubeyrand
+pinkfloydx33
+karlschriek
+cmcga1125
+OIDs
+rfc4514
+SpectralHiss
+weisdd
+lvyanru8200
+UseCertificateRequestBasicConstraints
+mmontes11
+lvyanru8200
+vedauth
+CVE-2022-41717
 seccomp
 RedHat
 RoleBinding
@@ -22,11 +36,13 @@ fvlaicu
 jetstack-bot
 codegen
 yongk802
+yanggangtony
 andreadecorte
 tasharnvb
 devholic
 jahrlin
 johnwchadwick
+joycebrum
 jwenz723
 seuf
 thirdeyenick
@@ -122,6 +138,7 @@ fs-group
 GCE
 GCLB
 GCP
+Git-Jiro
 GKE
 GitOps
 gRPC
@@ -187,6 +204,9 @@ PowerShell
 Prometheus
 P-521
 RBAC
+RDN
+RDNs
+RomanenkoDenys
 Redis
 RFC2136
 RFC8555
@@ -468,6 +488,7 @@ wildcard
 wildcards
 wpjunior
 yann-soubeyrand
+yk
 mfmbarros
 maelvls
 bitscuit
@@ -550,32 +571,6 @@ X.509
 # contain the right X.509 spelling. The following is a series of exceptions
 # so that the x509 spelling is accepted in those files.
 
- - content/next-docs/concepts/certificate.md
-x509
- - content/next-docs/concepts/certificaterequest.md
-x509
- - content/next-docs/concepts/webhook.md
-x509
- - content/next-docs/release-notes/release-notes-0.13.md
-x509
- - content/next-docs/release-notes/release-notes-0.15.md
-x509
- - content/next-docs/release-notes/release-notes-0.16.md
-x509
- - content/next-docs/release-notes/release-notes-0.5.md
-x509
- - content/next-docs/release-notes/release-notes-0.6.md
-x509
- - content/next-docs/release-notes/release-notes-0.7.md
-x509
- - content/next-docs/release-notes/release-notes-0.9.md
-x509
- - content/next-docs/tutorials/venafi/venafi.md
-x509
- - content/next-docs/usage/certificate.md
-x509
- - content/next-docs/usage/kubectl-plugin.md
-x509
  - content/v0.12-docs/concepts/certificate.md
 x509
  - content/v0.12-docs/concepts/certificaterequest.md
