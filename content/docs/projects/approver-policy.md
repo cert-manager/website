@@ -265,12 +265,27 @@ spec:
 ### Selector
 
 Selector is a required field that is used for matching
-CertificateRequestPolicies against a CertificateRequest for evaluation.
-approver-policy currently only supports selecting over the `issuerRef` of a
+CertificateRequestPolicies against CertificateRequests for evaluation.  A
+CertificateRequestPolicy must select, and therefore match, a CertificateRequest
+for it to be considered for evaluation of the request.
+
+> ⚠️ Note that the user must still be bound by [RBAC](#Configuration) for
+> the policy to be considered for evaluation against a request.
+
+approver-policy supports selecting over the `issuerRef` and the `namespace` of a
 request.
 
+At least either an `issuerRef` *or* `namespace` selector must be defined, even
+if set to empty (`{}`). **Both** selectors must match on a CertificateRequest
+for the request to evaluated by the policy if both are defined.
+
+#### `issuerRef`
+
+The `issuerRef` CertificateRequestPolicy selector selects on the corresponding
+`issuerRef` stanza on the CertificateRequest.
+
 `issuerRef` values accept wildcards "\*". If an `issuerRef` is set to an empty
-object "{}", then the policy will match against _all_ RBAC bound requests.
+object `{}`, then the policy will match against _all_ requests.
 
 ```yaml
 apiVersion: policy.cert-manager.io/v1alpha1
@@ -297,8 +312,51 @@ spec:
     issuerRef: {}
 ```
 
-> ⚠️ Note that the user must still be bound by [RBAC](#Configuration) for
-> the policy to be considered for evaluation against a request.
+#### `namespace`
+
+The `namespace` CertificateRequestPolicy selector selects on the Namespace to
+which the CertificateRequest was created in.  The selector can be defined with
+either `matchNames` or `matchLabels`.
+
+`matchNames` takes a list of strings which match the _name_ of the Namespace.
+Accepts wildcards "\*".
+
+`matchLabels` takes a list of key value strings which match on the labels of the
+Namespace that the CertificateRequest was created in. Please see the [Kubernetes
+documentation][] for more information on `matchLabels` behavior.
+
+If a `namespace` is set to an empty object `{}`, then the policy will match
+against _all_ requests.
+
+```yaml
+apiVersion: policy.cert-manager.io/v1alpha1
+kind: CertificateRequestPolicy
+metadata:
+  name: my-policy
+spec:
+  ...
+  selector:
+    namespace:
+      matchNames:
+      - "default"
+      - "app-team-*"
+    matchLabels:
+      foo: bar
+      team: dev
+```
+
+```yaml
+apiVersion: policy.cert-manager.io/v1alpha1
+kind: CertificateRequestPolicy
+metadata:
+  name: match-all-requests
+spec:
+  ...
+  selector:
+    namespace: {}
+```
+
+[Kubernetes documentation]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
 
 ### Plugins
 

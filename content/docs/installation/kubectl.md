@@ -19,7 +19,7 @@ are included in a single YAML manifest file:
 Install all cert-manager components:
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.1/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.2/cert-manager.yaml
 ```
 
 By default, cert-manager will be installed into the `cert-manager`
@@ -58,7 +58,7 @@ following command:
 kubectl get Issuers,ClusterIssuers,Certificates,CertificateRequests,Orders,Challenges --all-namespaces
 ```
 It is recommended that you delete all these resources before uninstalling cert-manager.
-If plan on reinstalling later and don't want to lose some custom resources, you can keep them.
+If you plan on reinstalling later and don't want to lose some custom resources, you can keep them.
 However, this can potentially lead to problems with finalizers. Some resources, like
 `Challenges`, should be deleted to avoid [getting stuck in a pending state](#namespace-stuck-in-terminating-state).
 

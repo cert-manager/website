@@ -149,6 +149,10 @@ detailed instructions on how to enable workload identity in your GKE cluster.
 The instructions in the following sections assume you are deploying cert-manager
 to a GKE cluster with workload identity already enabled.
 
+### Enable Ambient Credential Usage
+
+'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the ClusterIssuer API object. When this flag is enabled Cert-Manager will access the GKE Metadata server for credentials. By default this is enabled for ClusterIssuer resources but is disabled for Issuer resources. To enable it for Issuer resources set the `--issuer-ambient-credentials` flag.
+
 ### Link KSA to GSA in GCP
 
 The cert-manager component that needs to modify DNS records is the pod created
