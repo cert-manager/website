@@ -58,7 +58,7 @@ following command:
 kubectl get Issuers,ClusterIssuers,Certificates,CertificateRequests,Orders,Challenges --all-namespaces
 ```
 It is recommended that you delete all these resources before uninstalling cert-manager.
-If plan on reinstalling later and don't want to lose some custom resources, you can keep them.
+If you plan on reinstalling later and don't want to lose some custom resources, you can keep them.
 However, this can potentially lead to problems with finalizers. Some resources, like
 `Challenges`, should be deleted to avoid [getting stuck in a pending state](#namespace-stuck-in-terminating-state).
 
