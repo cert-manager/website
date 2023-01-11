@@ -3,10 +3,10 @@ title: Release 1.11
 description: 'cert-manager release notes: cert-manager 1.11'
 ---
 
-> ⚠️ This release is not yet ready for production.
-> The first stable version is due to be published in January 2023.
-> The latest **pre-release** version is [`v1.11.0-beta.1`](https://github.com/cert-manager/cert-manager/releases/tag/v1.11.0-beta.1).
-
+cert-manager `v1.11.0` includes a drastic reduction in cert-manager's runtime memory usage,
+a slew of improvements to AKS integrations and various other tweaks, fixes and improvements,
+all towards cert-manager's goal of being the best way to handle certificates in modern
+Cloud Native applications.
 
 ## Major Themes
 
@@ -23,6 +23,36 @@ and it should be used instead of the [deprecated pod-managed identify mechanism]
 > 📖 Read the [AKS + LoadBalancer + Let's Encrypt tutorial](../tutorials/getting-started-aks-letsencrypt/README.md) for an end-to-end example of this authentication method.
 >
 > 🔗 See [pull request #5570](https://github.com/cert-manager/cert-manager/pull/5570) for the implementation
+
+### Custom CA Bundles for ACME Servers
+
+Some users choose to run their own ACME servers rather than relying on services such as Let's Encrypt. cert-manager supports any server which
+complies with the ACME spec for the ACME issuer, but some users had issues when using a private CA certificate for their ACME server, requiring
+either that they ignore certificate validation (which is insecure) or that they hack their certificate into the cert-manager trust store.
+
+Now, users can set a caBundle flag on their ACME issuer, specifying the trust store that cert-manager should use when communicating with the
+server. For more details, see [Private ACME Servers](../configuration/acme.md#private-acme-servers)
+
+### `LiteralSubject` Improvements
+
+In cert-manager `1.9` we [added alpha support](./release-notes-1.9.md#literal-certificate-subjects) for the `LiteralSubject` field in the Certificate resource, which
+allowed power-users to specify the exact subject they wanted for their certificate. This helps with forcing
+an exact ordering of subject fields, for example.
+
+cert-manager `v1.11` improves on that support by [adding](https://github.com/cert-manager/cert-manager/pull/5587) the
+ability to use several other fields which are used primarily in LDAP RDNs.
+
+### Potentially Breaking: Gateway API Upgrade
+
+It's exciting to see the [Gateway API](https://gateway-api.sigs.k8s.io) project progressing
+nicely, and cert-manager still has experimental support for Gateway API.
+
+Unless you've _explicitly_ opted in to using the Gateway API support, you don't need to do
+anything. If you've been using the support, however, you might need to take some actions
+to ensure there aren't any breakages when you update.
+
+Check out the [upgrade guide](../installation/upgrading/upgrading-1.10-1.11.md) for more
+details on what you'll need to do.
 
 ## Community
 
@@ -42,8 +72,9 @@ Thanks again to all open-source contributors with commits in this release, inclu
 - [@yk](https://github.com/yk)
 - [@RomanenkoDenys](https://github.com/RomanenkoDenys)
 - [@lucacome](https://github.com/lucacome)
+- [@yanggangtony](https://github.com/yanggangtony)
 
-## Changes since 1.10.1
+## Changes since cert-manager `v1.10`
 
 ### Feature
 
@@ -81,3 +112,4 @@ Thanks again to all open-source contributors with commits in this release, inclu
 ### Other
 
 - `certificate.spec.secretName` Secrets will now be labelled with the `controller.cert-manager.io/fao` label ([#5703](https://github.com/cert-manager/cert-manager/pull/5703), [@irbekrm](https://github.com/irbekrm))
+- Upgrade to go 1.19.5 ([#5714](https://github.com/cert-manager/cert-manager/pull/5714), [@yanggangtony](https://github.com/yanggangtony))
