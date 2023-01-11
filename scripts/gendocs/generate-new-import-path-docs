@@ -166,10 +166,4 @@ genversionwithcli "release-1.10" "$LATEST_VERSION"
 cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/cli" "${REPO_ROOT}/content/docs/"
 cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/reference" "${REPO_ROOT}/content/docs/"
 
-# Unless we keep the next release branch up-to-date (which we never do), it's pointless to generate reference docs for next-docs.
-# Instead just use the same as we have for docs.
-
-cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/cli" "${REPO_ROOT}/content/next-docs/"
-cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/reference" "${REPO_ROOT}/content/next-docs/"
-
 echo "Generated reference documentation for cert-manager versions with a new github.com/cert-manager/cert-manager import path"

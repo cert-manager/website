@@ -150,7 +150,7 @@ Read the [WebhookConfiguration Schema] for more information.
 In future releases we will introduce configuration files for the other cert-manager components:
 the controller and the cainjector.
 
-[WebhookConfiguration Schema]: https://cert-manager.io/next-docs/reference/api-docs/#webhook.config.cert-manager.io/v1alpha1.WebhookConfiguration
+[WebhookConfiguration Schema]: https://cert-manager.io/v1.7-docs/reference/api-docs/#webhook.config.cert-manager.io/v1alpha1.WebhookConfiguration
 
 #### Developing cert-manager Without Bazel
 
