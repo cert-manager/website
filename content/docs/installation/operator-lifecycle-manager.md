@@ -217,7 +217,7 @@ The following JSON patch will append `-v=6` to command line arguments of the cer
 (the first container of the first Deployment).
 
 ```bash
-kubectl patch csv cert-manager.v1.10.1 \
+kubectl patch csv cert-manager.v1.11.0 \
   --type json \
   -p '[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "-v=6" }]'
 ```
