@@ -3,9 +3,6 @@ const path = require('path')
 
 module.exports = {
   reactStrictMode: true,
-  images: {
-    loader: 'custom'
-  },
   // By default, Next.js doesn't create index.html files in directories.
   // Instead, it creates an HTML file named after the directory, which also
   // works fine in browsers.
