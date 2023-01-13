@@ -275,8 +275,8 @@ metadata:
   annotations:
     venafi.cert-manager.io/custom-fields: |-
       [
-        {"name": "field-name", "value": "vield value"},
-        {"name": "field-name-2", "value": "vield value 2"}
+        {"name": "field-name", "value": "field value"},
+        {"name": "field-name-2", "value": "field value 2"}
       ]
 ...
 ```
