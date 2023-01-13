@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import CertManagerLogo from './snippets/CertManagerLogo'
@@ -7,6 +7,7 @@ import Button from './Button'
 
 import { DocSearch } from '@docsearch/react'
 import '@docsearch/css'
+import useOutsideAlerter from 'lib/useOutsideClick'
 
 export default function Header() {
   const router = useRouter()
@@ -56,6 +57,8 @@ export default function Header() {
 function MobileNavigation({ active, className = '' }) {
   const [open, setOpen] = useState(false)
   const classNames = open ? 'top-65px' : '-top-1000px'
+  const ref = useRef(null)
+  useOutsideAlerter(ref, setOpen)
 
   return (
     <div className={className}>
@@ -70,7 +73,7 @@ function MobileNavigation({ active, className = '' }) {
         className={`absolute left-0 z-1000 ${classNames}`}
         style={{ marginLeft: '4%', marginRight: '4%', width: '92%' }}
       >
-        <div className="bg-white flex justify-between shadow-inner pt-6 pb-8 px-5">
+        <div ref={ref} className="bg-white flex justify-between shadow-inner pt-6 pb-8 px-5">
           <div>
             <ul className="space-y-4">
               {site.navigation.items.map((item) => (
@@ -179,9 +182,8 @@ function NavItem({ active, item, setOpen = null }) {
       <Link href={item.href}>
         <a
           onClick={() => closeMenu(setOpen)}
-          className={`block relative text-sm uppercase font-montserrat font-semibold tracking-wide no-underline ${
-            isActive && 'text-blue-1'
-          }`}
+          className={`block relative text-sm uppercase font-montserrat font-semibold tracking-wide no-underline ${isActive && 'text-blue-1'
+            }`}
         >
           {item.text}
           {isActive && (
