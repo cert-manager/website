@@ -6,11 +6,9 @@ import Icon from 'components/Icon'
 import { compareVersions } from 'compare-versions';
 
 function labelFromVersion(version) {
-    return (
-        version === 'docs'
-            ? 'latest'
-            : version.replace(/-docs$/, '').replace(/^v/, '')
-    );
+    return version === 'docs'
+        ? 'latest'
+        : version.replace(/-docs$/, '').replace(/^v/, '');
 }
 
 export default function VersionSelect({

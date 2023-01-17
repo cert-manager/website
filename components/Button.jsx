@@ -16,14 +16,14 @@ export default function Button({
   })
 
   return (
-    <Link href={href}>
-      <a
-        target={target || '_self'}
-        className={`font-montserrat font-bold uppercase text-sm leading-20px btn-primary rounded-5px ${styles} ${className}`}
-      >
-        <span className={"block " + iconWClass}>{icon && <Icon name={icon} />}</span>
-        <span>{caption}</span>
-      </a>
-    </Link>
-  )
+    (<Link
+      href={href}
+      target={target || '_self'}
+      className={`font-montserrat font-bold uppercase text-sm leading-20px btn-primary rounded-5px ${styles} ${className}`}>
+
+      <span className={"block " + iconWClass}>{icon && <Icon name={icon} />}</span>
+      <span>{caption}</span>
+
+    </Link>)
+  );
 }

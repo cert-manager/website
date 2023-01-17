@@ -17,9 +17,9 @@ export default function Header() {
     <div className="bg-white">
       <div className="relative container py-3 flex justify-between items-center">
         <Link href="/">
-          <a>
-            <CertManagerLogo />
-          </a>
+
+          <CertManagerLogo />
+
         </Link>
         <div>
           <DesktopNavigation active={currentPath} className="hidden lg:block" />
@@ -51,7 +51,7 @@ export default function Header() {
         />
       </div>
     </div>
-  )
+  );
 }
 
 function MobileNavigation({ active, className = '' }) {
@@ -96,13 +96,13 @@ function MobileNavigation({ active, className = '' }) {
                 />
               </li>
               <li>
-                <Link href={site.navigation.cta.href}>
-                  <a
-                    onClick={() => closeMenu(setOpen)}
-                    className="block btn-primary text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px"
-                  >
-                    {site.navigation.cta.text}
-                  </a>
+                <Link
+                  href={site.navigation.cta.href}
+                  onClick={() => closeMenu(setOpen)}
+                  className="block btn-primary text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px">
+
+                  {site.navigation.cta.text}
+
                 </Link>
               </li>
             </ul>
@@ -110,7 +110,7 @@ function MobileNavigation({ active, className = '' }) {
         </div>
       </nav>
     </div>
-  )
+  );
 }
 
 function DesktopNavigation({ active, className = '' }) {
@@ -128,15 +128,17 @@ function DesktopNavigation({ active, className = '' }) {
           />
         </li>
         <li>
-          <Link href={site.navigation.cta.href}>
-            <a className="block btn-primary font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px">
-              {site.navigation.cta.text}
-            </a>
+          <Link
+            href={site.navigation.cta.href}
+            className="block btn-primary font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px">
+
+            {site.navigation.cta.text}
+
           </Link>
         </li>
       </ul>
     </nav>
-  )
+  );
 }
 
 function BarsIcon() {
@@ -179,18 +181,18 @@ function NavItem({ active, item, setOpen = null }) {
   const isActive = active === item.href
   return (
     <li key={item.href}>
-      <Link href={item.href}>
-        <a
-          onClick={() => closeMenu(setOpen)}
-          className={`block relative text-sm uppercase font-montserrat font-semibold tracking-wide no-underline ${isActive && 'text-blue-1'
-            }`}
-        >
-          {item.text}
-          {isActive && (
-            <span className="block absolute top-6 left-0 w-33px h-3px bg-blue-1"></span>
-          )}
-        </a>
+      <Link
+        href={item.href}
+        onClick={() => closeMenu(setOpen)}
+        className={`block relative text-sm uppercase font-montserrat font-semibold tracking-wide no-underline ${isActive && 'text-blue-1'
+          }`}>
+
+        {item.text}
+        {isActive && (
+          <span className="block absolute top-6 left-0 w-33px h-3px bg-blue-1"></span>
+        )}
+
       </Link>
     </li>
-  )
+  );
 }
