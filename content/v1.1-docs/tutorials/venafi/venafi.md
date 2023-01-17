@@ -387,7 +387,7 @@ applications.
 Full information on how to specify and request Certificate resources can be
 found in the [Issuing certificates](../../usage/certificate.md) guide.
 
-For now, we will create a basic x509 Certificate that is valid for our domain,
+For now, we will create a basic X.509 Certificate that is valid for our domain,
 `example.com`:
 
 ```yaml
