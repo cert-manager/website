@@ -13,7 +13,7 @@ function PageNotFound() {
             <h1 className="text-2xl mb-5 lg:mb-4 lg:text-4xl max-w-3xl">Oops, We can&apos;t seem to find
                 the page you are looking for.</h1>
             <p className="text-base mb-5 lg:mb-14 lg:text-xl max-w-3xl">
-                The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+                The page you are looking for might have been removed, had its name changed, or be temporarily unavailable.
             </p>
             <Button href={'/'} caption={'Back to home'} />
         </div>
