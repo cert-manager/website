@@ -140,7 +140,7 @@ should be snappy to use.
 ### Running Verification Scripts
 
 After you have made changes to the website, you should run the `verify` scripts
-to ensure things like spelling and links are valid.
+to ensure things like spelling are valid.
 
 To run all verification checks:
 
@@ -152,6 +152,22 @@ This will automatically run a number of checks against your local environment.
 
 If you want to be thorough, you can run `./scripts/verify-release` to also regenerate API / CLI docs
 before verification, but that check is slower and unlikely to provide any useful insight.
+
+To run quick lint checks on the nextjs code, run [next lint](https://nextjs.org/docs/basic-features/eslint):
+
+```bash
+npm run lint
+```
+
+To check the links in all pages, run [markdown-link-check](https://github.com/tcort/markdown-link-check):
+
+```bash
+npm run markdown-link-check
+```
+
+> ℹ️ All these checks are also run automatically for pull requests.
+> The results will be reported in the [checks summary](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks) at the bottom of your GitHub PR.
+> Read the [cert-manager-website-presubmits.yaml prow configuration file](https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/website/cert-manager-website-presubmits.yaml) and the [check.yaml workflow file](.github/workflows/check.yaml) for more details.
 
 ### Building for a Release
 
