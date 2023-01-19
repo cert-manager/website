@@ -188,14 +188,7 @@ kubectl explain Issuer
 Now everything is ready for you to create your first certificate.
 This will be a self-signed certificate but later we'll replace it with a Let's Encrypt signed certificate.
 
-```yaml
-# clusterissuer-selfsigned.yaml
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: selfsigned
-spec:
-  selfSigned: {}
+```yaml file=../../../../public/docs/tutorials/getting-started-aks-letsencrypt/clusterissuer-selfsigned.yaml
 ```
 🔗 <a href="clusterissuer-selfsigned.yaml">`clusterissuer-selfsigned.yaml`</a>
 
