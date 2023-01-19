@@ -14,3 +14,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+  link-check:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+      - run: npm ci
+      - run: npm run markdown-link-check
