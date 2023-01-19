@@ -118,7 +118,7 @@ It will also be re-applied if OLM upgrades cert-manager.
 > 🔰 Refer to the [Subscription API documentation](https://pkg.go.dev/github.com/operator-framework/api@v0.14.0/pkg/operators/v1alpha1#Subscription).
 
 Here are some examples of configuration that can be achieved by modifying the Subscription resource.
-In each case we assume that you are starting with the following [default Subscription from OperatorHub.io]((https://operatorhub.io/install/cert-manager.yaml)):
+In each case we assume that you are starting with the following [default Subscription from OperatorHub.io](https://operatorhub.io/install/cert-manager.yaml):
 
 ```yaml
 # cert-manager.yaml

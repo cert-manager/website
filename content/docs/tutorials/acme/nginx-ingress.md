@@ -227,7 +227,7 @@ Your other option is to replace your `Issuers` with `ClusterIssuers`;
 If using a `ClusterIssuer`, remember to update the Ingress annotation `cert-manager.io/issuer` to
 `cert-manager.io/cluster-issuer`.
 
-If you see issues with issuers, follow the [Troubleshooting Issuing ACME Certificates](../../faq/acme.md) guide.
+If you see issues with issuers, follow the [Troubleshooting Issuing ACME Certificates](../../troubleshooting/acme.md) guide.
 
 More information on the differences between `Issuers` and `ClusterIssuers` - including
 when you might choose to use each can be found on [Issuer concepts](../../concepts/issuer.md#namespaces).

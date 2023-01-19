@@ -423,7 +423,7 @@ The advantages of this method are that cert-manager will use an ephemeral Kubern
 > ℹ️ cert-manager `>= v1.11.0` supports workload identity federation for ACME (Let's Encrypt) DNS-01 with Azure DNS.
 > Older versions of cert-manager support other authentication mechanisms which are not covered in this tutorial.
 >
-> 📖 Read about [other ways to configure the ACME issuer with Azure DNS](../../configuration/acme/dns01/azuredns/README.md).
+> 📖 Read about [other ways to configure the ACME issuer with Azure DNS](../../configuration/acme/dns01/azuredns.md).
 
 ## Install the Azure workload identity features
 
@@ -809,4 +809,4 @@ az identity delete --name $USER_ASSIGNED_IDENTITY_NAME
 
 > 📖 Read other [cert-manager tutorials](../README.md) and [getting started guides](../../getting-started/README.md).
 >
-> 📖 Read more about [configuring the cert-manager ACME issuer with Azure DNS](../../configuration/acme/dns01/azuredns/README.md).
+> 📖 Read more about [configuring the cert-manager ACME issuer with Azure DNS](../../configuration/acme/dns01/azuredns.md).

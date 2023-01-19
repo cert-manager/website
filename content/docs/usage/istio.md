@@ -14,4 +14,4 @@ plane and workload certificates via your chosen cert-manager Issuer.
 ---
 
 Please follow the instructions for installing and using istio-csr on the
-[project page](../projects/istio-csr).
+[project page](../projects/istio-csr.md).
