@@ -41,4 +41,4 @@ can be used to issue `Certificates` across all namespaces.
 
 cert-manager supports a number of 'in-tree', as well as 'out-of-tree' `Issuer`
 types. An exhaustive list of these `Issuer` types can be found in the
-cert-manager [configuration documentation](../configuration.md).
+cert-manager [configuration documentation](../configuration/README.md).

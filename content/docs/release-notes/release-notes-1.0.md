@@ -145,12 +145,12 @@ For users of Kubernetes `v1.15` we keep offering support for the `v1beta1` Kuber
 For this release we upgraded our logging library to `klog/v2` analog to Kubernetes `v1.19`.
 We also reviewed every log we write to assign it an appropriate log level.
 
-We followed the (Kubernetes logging guidelines)[https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md]. To come up with 5 log levels ranging from `Error` (level 0) which only prints important errors to `Trace` (level 5) which can help you to know exactly what is gong on.
+We followed the [Kubernetes logging guidelines](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md). To come up with 5 log levels ranging from `Error` (level 0) which only prints important errors to `Trace` (level 5) which can help you to know exactly what is gong on.
 With this change we reduced the number of logs when you don't need to have a debugging trace while running cert-manager.
 
 Tip: My default cert-manager runs on level 2 (Info), you can set this using `global.logLevel` in the Helm chart.
 
-*Note*: Looking at the logs while troubleshooting cert-manager should be last resort behavior, for more info check out our [troubleshooting guide](../faq/troubleshooting.md)
+*Note*: Looking at the logs while troubleshooting cert-manager should be last resort behavior, for more info check out our [troubleshooting guide](../troubleshooting/README.md)
 
 ## ACME improvements
 

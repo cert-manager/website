@@ -216,7 +216,7 @@ certificate object is reissued under the following circumstances:
   ```sh
   cmctl renew cert-1
   ```
-  Note that the above command requires [cmctl](./cmctl.md#renew).
+  Note that the above command requires [cmctl](../reference/cmctl.md#renew).
 
 <div className="warning">
 
@@ -224,7 +224,7 @@ certificate object is reissued under the following circumstances:
 **not a recommended solution** for manually rotating the private key. The
 recommended way to manually rotate the private key is to trigger the reissuance
 of the Certificate resource with the following command (requires
-[`cmctl`](./cmctl.md#renew)):
+[`cmctl`](../reference/cmctl.md#renew)):
 
 ```sh
 cmctl renew cert-1

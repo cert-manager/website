@@ -226,7 +226,7 @@ of these commands are subject to change or removal in future releases.
 Sub-commands are available to create different resources:
 
 ##### CertificateSigningRequest
-To create a [CertificateSigningRequest](./kube-csr.md), use
+To create a [CertificateSigningRequest](../usage/kube-csr.md), use
 ```console
 cmctl x create csr
 ```

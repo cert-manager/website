@@ -6,7 +6,7 @@ description: 'cert-manager usage: CSI driver'
 ## Enabling mTLS of Pods using the cert-manager CSI Driver
 
 A [Container Storage Interface (CSI)
-driver](../projects/csi-driver) has been created to
+driver](../projects/csi-driver.md) has been created to
 facilitate mTLS of Pods running inside your cluster through use of cert-manager.
 Using this driver will ensure that the private key and corresponding signed
 certificate will be unique to each Pod and will be stored on disk to the node

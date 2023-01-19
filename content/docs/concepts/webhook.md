@@ -77,4 +77,4 @@ Or you could add a post-installation check which automatically retries the [Inst
 
 ### Other Webhook Problems
 
-If you encounter any other problems with the webhook, please refer to the [webhook troubleshooting guide](../troubleshooting/webhook/).
+If you encounter any other problems with the webhook, please refer to the [webhook troubleshooting guide](../troubleshooting/webhook.md).

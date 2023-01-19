@@ -14,7 +14,7 @@ investigate and debug if there is a problem during the process. You can read
 more about these resources in the [concepts
 pages](../concepts/acme-orders-challenges.md).
 
-Before you start here you should probably take a look at our [general troubleshooting guide](./troubleshooting.md)
+Before you start here you should probably take a look at our [general troubleshooting guide](./README.md)
 
 ## 1. Troubleshooting (Cluster)Issuers
 

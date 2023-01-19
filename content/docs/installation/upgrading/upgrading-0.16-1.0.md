@@ -7,7 +7,7 @@ description: 'cert-manager installation: Upgrading v0.16 to v1.0'
 
 ## Issue with older versions of `kubectl`
 `kubectl` versions with patch versions lower than `v1.18.8` `v1.17.11` or `v1.16.14` have issues updating from the `v0.16` CRD files, due to [a bug when handling deeply nested CRDs](https://github.com/kubernetes/kubernetes/issues/91615).
-This bug will make `kubectl apply -f [...]` hang. 
+This bug will make `kubectl apply -f [...]` hang.
 
 This bug only happens during a re-apply of the v0.16 CRDs or upgrading from it. Upgrades from lower versions do not cause issues. If you have this issue please upgrade your `kubectl` to the latest patch release.
 Versions of `kubectl` of `v1.15.x` or below are not being supported anymore as these are unsupported by the Kubernetes community.
@@ -42,8 +42,8 @@ you have to transition all resources to `cert-manager.io/v1`.
 
 This makes for a fairly significant breaking change for users, as **all**
 cert-manager resources will need to be updated to reflect these changes.
-Ingress annotations will stay the same, this means if you only use ingress-shim 
-you do not have to convert these resources over but it is recommended. 
+Ingress annotations will stay the same, this means if you only use ingress-shim
+you do not have to convert these resources over but it is recommended.
 However you should convert the (Cluster)Issuers and delete the old CRD versions.
 
 This upgrade MUST be performed in the following sequence of steps:
@@ -78,17 +78,17 @@ kubectl get -o yaml \
 
 #### Converting resources
 
-You can use our [kubectl plugin](../../usage/kubectl-plugin.md) to automatically convert your backup from `v1alpha2` to `v1` using the following command:
+You can use [cmctl convert](../../reference/cmctl.md#convert) to automatically convert your backup from `v1alpha2` to `v1` using the following command:
 
 ```bash
-kubectl cert-manager convert --output-version cert-manager.io/v1 -f cert-manager-backup.yaml > cert-manager-v1.yaml
+cmctl convert --output-version cert-manager.io/v1 -f cert-manager-backup.yaml > cert-manager-v1.yaml
 ```
 
-*Tip:* you can use `kubectl apply --dry-run` on a local/test cluster with cert-manager `v1.0` installed to validate your conversion 
+*Tip:* you can use `kubectl apply --dry-run` on a local/test cluster with cert-manager `v1.0` installed to validate your conversion
 
 
 #### Uninstall cert-manager
-Next step is to uninstall cert-manager. 
+Next step is to uninstall cert-manager.
 This will cause a temporary halt to renewal of certificates but will not affect any TLS traffic.
 
 How you do this depends on how you installed cert-manager.
@@ -109,7 +109,7 @@ You can do this manually by executing the following commands:
 kubectl delete crd certificaterequests.cert-manager.io
 kubectl delete crd certificates.cert-manager.io
 kubectl delete crd challenges.acme.cert-manager.io
-kubectl delete crd clusterissuers.cert-manager.io 
+kubectl delete crd clusterissuers.cert-manager.io
 kubectl delete crd issuers.cert-manager.io
 kubectl delete crd orders.acme.cert-manager.io
 ```
