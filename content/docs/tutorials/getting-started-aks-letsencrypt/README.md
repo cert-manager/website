@@ -198,26 +198,7 @@ kubectl apply -f clusterissuer-selfsigned.yaml
 
 Then use `envsubst` to substitute your chosen domain name into the following Certificate template:
 
-```yaml
-# certificate.yaml
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: www
-spec:
-  secretName: www-tls
-  privateKey:
-    rotationPolicy: Always
-  commonName: www.$DOMAIN_NAME
-  dnsNames:
-    - www.$DOMAIN_NAME
-  usages:
-    - digital signature
-    - key encipherment
-    - server auth
-  issuerRef:
-    name: selfsigned
-    kind: ClusterIssuer
+```yaml file=../../../../public/docs/tutorials/getting-started-aks-letsencrypt/certificate.yaml
 ```
 🔗 <a href="certificate.yaml">`certificate.yaml`</a>
 
@@ -258,44 +239,7 @@ Now deploy a simple web server which responds to HTTPS requests with "hello worl
 The SSL / TLS key and certificate are supplied to the web server by using the `www-tls` Secret as a volume
 and by mounting its contents into the file system of the `hello-app` container in the Pod:
 
-```yaml
-# deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: helloweb
-  labels:
-    app: hello
-spec:
-  selector:
-    matchLabels:
-      app: hello
-      tier: web
-  template:
-    metadata:
-      labels:
-        app: hello
-        tier: web
-    spec:
-      containers:
-      - name: hello-app
-        image: us-docker.pkg.dev/google-samples/containers/gke/hello-app-tls:1.0
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8443
-        volumeMounts:
-          - name: tls
-            mountPath: /etc/tls
-            readOnly: true
-        env:
-          - name: TLS_CERT
-            value: /etc/tls/tls.crt # ℹ️ The signed certificate file.
-          - name: TLS_KEY
-            value: /etc/tls/tls.key # ℹ️ The private key file.
-      volumes:
-      - name: tls
-        secret:
-          secretName: www-tls
+```yaml file=../../../../public/docs/tutorials/getting-started-aks-letsencrypt/deployment.yaml
 ```
 🔗 <a href="deployment.yaml">`deployment.yaml`</a>
 
@@ -306,23 +250,7 @@ kubectl apply -f deployment.yaml
 You also need to create a Kubernetes LoadBalancer Service, so that connections from the Internet can be routed to the web server Pod.
 When you create the following Kubernetes Service, an Azure load balancer with an ephemeral public IP address will also be created:
 
-```yaml
-# service.yaml
-apiVersion: v1
-kind: Service
-metadata:
-    name: helloweb
-    annotations:
-        service.beta.kubernetes.io/azure-dns-label-name: $AZURE_LOADBALANCER_DNS_LABEL_NAME
-spec:
-    ports:
-    - port: 443
-      protocol: TCP
-      targetPort: 8443
-    selector:
-        app: hello
-        tier: web
-    type: LoadBalancer
+```yaml file=../../../../public/docs/tutorials/getting-started-aks-letsencrypt/service.yaml
 ```
 🔗 <a href="service.yaml">`service.yaml`</a>
 
@@ -463,13 +391,7 @@ which will result in the cert-manager controller Pod having an extra volume cont
 
 The labels can be configured using the Helm values file below:
 
-```yaml
-# values.yaml
-podLabels:
-  azure.workload.identity/use: "true"
-serviceAccount:
-  labels:
-    azure.workload.identity/use: "true"
+```yaml file=../../../../public/docs/tutorials/getting-started-aks-letsencrypt/values.yaml
 ```
 🔗 <a href="values.yaml">`values.yaml`</a>
 
@@ -585,27 +507,7 @@ which allows us to test everything without using up our Let's Encrypt certificat
 
 Save the following content to a file called `clusterissuer-lets-encrypt-staging.yaml`, change the `email` field to use your email address and apply it:
 
-```yaml
-# clusterissuer-lets-encrypt-staging.yaml
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt-staging
-spec:
-  acme:
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: $EMAIL_ADDRESS
-    privateKeySecretRef:
-      name: letsencrypt-staging
-    solvers:
-    - dns01:
-        azureDNS:
-          resourceGroupName: $AZURE_DEFAULTS_GROUP
-          subscriptionID: $AZURE_SUBSCRIPTION_ID
-          hostedZoneName: $DOMAIN_NAME
-          environment: AzurePublicCloud
-          managedIdentity:
-            clientID: $USER_ASSIGNED_IDENTITY_CLIENT_ID
+```yaml file=../../../../public/docs/tutorials/getting-started-aks-letsencrypt/clusterissuer-lets-encrypt-staging.yaml
 ```
 🔗 <a href="clusterissuer-lets-encrypt-staging.yaml">`clusterissuer-lets-encrypt-staging.yaml`</a>
 
@@ -710,27 +612,7 @@ Now that everything is working with the Let's Encrypt staging server, we can swi
 Create a Let's Encrypt production Issuer by copying the staging ClusterIssuer YAML and modifying the server URL and the names,
 then apply it:
 
-```yaml
-# clusterissuer-lets-encrypt-production.yaml
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt-production
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: $EMAIL_ADDRESS
-    privateKeySecretRef:
-      name: letsencrypt-production
-    solvers:
-    - dns01:
-        azureDNS:
-          resourceGroupName: $AZURE_DEFAULTS_GROUP
-          subscriptionID: $AZURE_SUBSCRIPTION_ID
-          hostedZoneName: $DOMAIN_NAME
-          environment: AzurePublicCloud
-          managedIdentity:
-            clientID: $USER_ASSIGNED_IDENTITY_CLIENT_ID
+```yaml file=../../../../public/docs/tutorials/getting-started-aks-letsencrypt/clusterissuer-lets-encrypt-production.yaml
 ```
 🔗 <a href="clusterissuer-lets-encrypt-production.yaml">`clusterissuer-lets-encrypt-production.yaml`</a>
 
