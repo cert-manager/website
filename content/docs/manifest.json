@@ -47,6 +47,10 @@
               "path": "/docs/installation/verify.md"
             },
             {
+              "title": "Features",
+              "path": "/docs/installation/features.md"
+            },
+            {
               "title": "Upgrading",
               "routes": [
                 {
