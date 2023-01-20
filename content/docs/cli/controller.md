@@ -20,6 +20,7 @@ Flags:
       --acme-http01-solver-resource-limits-memory string    Defines the resource limits Memory size when spawning new ACME HTTP01 challenge solver pods. (default "64Mi")
       --acme-http01-solver-resource-request-cpu string      Defines the resource request CPU size when spawning new ACME HTTP01 challenge solver pods. (default "10m")
       --acme-http01-solver-resource-request-memory string   Defines the resource request Memory size when spawning new ACME HTTP01 challenge solver pods. (default "64Mi")
+      --acme-http01-solver-run-as-non-root                  Defines the ability to run the http01 solver as root for troubleshooting issues (default true)
       --add_dir_header                                      If true, adds the file directory to the header of the log messages
       --alsologtostderr                                     log to standard error as well as files (no effect when -logtostderr=true)
       --auto-certificate-annotations strings                The annotation consumed by the ingress-shim controller to indicate a ingress is requesting a certificate (default [kubernetes.io/tls-acme])
@@ -45,6 +46,7 @@ Flags:
                                                             LiteralCertificateSubject=true|false (ALPHA - default=false)
                                                             ServerSideApply=true|false (ALPHA - default=false)
                                                             StableCertificateRequestName=true|false (ALPHA - default=false)
+                                                            UseCertificateRequestBasicConstraints=true|false (ALPHA - default=false)
                                                             ValidateCAA=true|false (ALPHA - default=false)
   -h, --help                                                help for cert-manager-controller
       --issuer-ambient-credentials                          Whether an issuer may make use of ambient credentials. 'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the Issuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata.

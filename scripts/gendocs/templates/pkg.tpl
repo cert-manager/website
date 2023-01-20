@@ -1,10 +1,10 @@
 {{ define "packages" }}
 ---
 title: "API Reference"
-description: "Learn about the cert-manager API which includes Custom Resources such as Certificate, CertificateRequest, Issuer and ClusterIssuer."
+description: "cert-manager API documentation, including Custom Resources such as Certificate, CertificateRequest, Issuer and ClusterIssuer"
 ---
 
-Learn about the cert-manager API which includes Custom Resources such as Certificate, CertificateRequest, Issuer and ClusterIssuer.
+<p>cert-manager API documentation, including various Custom Resource Definitions</p>
 
 {{ with .packages}}
 <p>Packages:</p>
@@ -30,7 +30,8 @@ Learn about the cert-manager API which includes Custom Resources such as Certifi
         {{ end }}
     {{ end }}
 
-    Resource Types:
+    <p>Resource Types:</p>
+
     <ul>
     {{- range (visibleTypes (sortedTypes .Types)) -}}
         {{ if isExportedType . -}}
