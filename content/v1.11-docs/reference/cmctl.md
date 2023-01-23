@@ -226,9 +226,9 @@ of these commands are subject to change or removal in future releases.
 Sub-commands are available to create different resources:
 
 ##### CertificateSigningRequest
-To create a [CertificateSigningRequest](./kube-csr.md), use
+To create a [CertificateSigningRequest](../usage/kube-csr.md), use
 ```console
-cmctl x create csr`
+cmctl x create csr
 ```
 This command takes the name of the CertificateSigningRequest to be created, as
 well as a file containing a Certificate manifest (`-f,
@@ -269,7 +269,7 @@ cmctl x install
 ```
 
 This command makes sure that the required `CustomResourceDefinitions` are installed together with the cert-manager, cainjector and webhook components.
-Under the hood, a procedure similar to the [Helm install procedure](../install/helm.md#steps) is used.
+Under the hood, a procedure similar to the [Helm install procedure](../installation/helm.md#steps) is used.
 
 You can also use `cmctl x install` to customize the installation of cert-manager.
 
@@ -282,7 +282,7 @@ cmctl x install \
 ```
 
 You can find [a full list of the install parameters on cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager#configuration). These are the same parameters that are available when using the Helm chart.
-Once you have deployed cert-manager, you can [verify](../install/verify.md) the installation.
+Once you have deployed cert-manager, you can [verify](../installation/verify.md) the installation.
 
 The CLI also allows the user to output the templated manifest to `stdout`, instead of installing the manifest on the cluster.
 

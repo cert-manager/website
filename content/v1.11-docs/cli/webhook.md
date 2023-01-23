@@ -26,6 +26,7 @@ Flags:
                 LiteralCertificateSubject=true|false (ALPHA - default=false)
                 ServerSideApply=true|false (ALPHA - default=false)
                 StableCertificateRequestName=true|false (ALPHA - default=false)
+                UseCertificateRequestBasicConstraints=true|false (ALPHA - default=false)
                 ValidateCAA=true|false (ALPHA - default=false)
       --healthz-port int                             port number to listen on for insecure healthz connections (default 6080)
   -h, --help                                         help for webhook

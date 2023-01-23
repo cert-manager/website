@@ -168,6 +168,6 @@ genversionwithcli "release-1.11" "$LATEST_VERSION"
 # Rather than generate the same docs again for /docs, copy from the latest version
 
 cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/cli" "${REPO_ROOT}/content/docs/"
-cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/reference" "${REPO_ROOT}/content/docs/"
+cp "${REPO_ROOT}/content/${LATEST_VERSION}/reference/api-docs.md" "${REPO_ROOT}/content/docs/reference/"
 
 echo "Generated reference documentation for cert-manager versions with the github.com/cert-manager/cert-manager import path"

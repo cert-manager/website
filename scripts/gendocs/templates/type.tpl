@@ -57,8 +57,10 @@
         {{ if isExportedType . }}
         <tr>
             <td>
-                <code>apiVersion</code><br/>
-                string</td>
+                <code>apiVersion</code>
+                <br/>
+                string
+            </td>
             <td>
                 <code>
                     {{apiGroup .}}
@@ -67,10 +69,13 @@
         </tr>
         <tr>
             <td>
-                <code>kind</code><br/>
+                <code>kind</code>
+                <br/>
                 string
             </td>
-            <td><code>{{.Name.Name}}</code></td>
+            <td>
+                <code>{{.Name.Name}}</code>
+            </td>
         </tr>
         {{ end }}
         {{ template "members" .}}

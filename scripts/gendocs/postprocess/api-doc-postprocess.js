@@ -2,12 +2,16 @@
 
 import { readFileSync, writeFileSync } from 'fs'
 import prettier from 'prettier'
+
+// matter is used to split front-matter from the main doc content
 import matter from 'gray-matter'
 
 const apiDocsFile = readFileSync(0, 'utf8')
 
 const { content, data } = matter(apiDocsFile)
+
 let result = content
+
 result = prettier.format(`<div>${result}</div>`, {
   parser: 'babel',
   htmlWhitespaceSensitivity: 'strict',

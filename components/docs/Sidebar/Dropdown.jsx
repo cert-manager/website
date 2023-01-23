@@ -36,12 +36,14 @@ export default function Dropdown({
         {routes.routes.map((r, idx) => {
           if (!r.path) {
             return (
-              <Dropdown
-                routes={r}
-                parentOpen={open}
-                key={`${r.title}-${idx}`}
-                setSidebarCollapsed={setSidebarCollapsed}
-              />
+              <li key={`${r.title}-${idx}`}>
+                  <Dropdown
+                    routes={r}
+                    parentOpen={open}
+                    key={`${r.title}-${idx}`}
+                    setSidebarCollapsed={setSidebarCollapsed}
+                  />
+              </li>
             )
           } else {
             return (

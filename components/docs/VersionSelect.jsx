@@ -27,7 +27,7 @@ export default function VersionSelect({
       <div className="bg-gray-1 rounded-md border-2 border-gray-2/50">
       <Listbox value={selectedVersion} onChange={setSelectedVersion}>
         <Listbox.Button className="w-full">
-          <Listbox.Label className="cursor-pointer">version: </Listbox.Label>{labelFromVersion(version)}
+          version: {labelFromVersion(version)}
         </Listbox.Button>
         <Listbox.Options>
           <Listbox.Option key={version} value={version}>

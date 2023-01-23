@@ -1,10 +1,10 @@
 ---
 title: API Reference
 description: >-
-  Learn about the cert-manager API which includes Custom Resources such as
-  Certificate, CertificateRequest, Issuer and ClusterIssuer.
+  cert-manager API documentation, including Custom Resources such as
+  Certificate, CertificateRequest, Issuer and ClusterIssuer
 ---
-Learn about the cert-manager API which includes Custom Resources such as Certificate, CertificateRequest, Issuer and ClusterIssuer.
+<p>cert-manager API documentation, including various Custom Resource Definitions</p>
 <p>Packages:</p>
 <ul>
   <li>
@@ -24,7 +24,7 @@ Learn about the cert-manager API which includes Custom Resources such as Certifi
 <div>
   <p>Package v1 is the v1 version of the API.</p>
 </div>
-Resource Types:
+<p>Resource Types:</p>
 <ul>
   <li>
     <a href="#acme.cert-manager.io/v1.Challenge">Challenge</a>
@@ -2443,7 +2443,7 @@ Resource Types:
 <div>
   <p>Package v1 is the v1 version of the API.</p>
 </div>
-Resource Types:
+<p>Resource Types:</p>
 <ul>
   <li>
     <a href="#cert-manager.io/v1.Certificate">Certificate</a>
@@ -5261,7 +5261,7 @@ Resource Types:
 <div>
   <p>Package v1 contains meta types for cert-manager APIs</p>
 </div>
-Resource Types:
+<p>Resource Types:</p>
 <ul></ul>
 <h3 id="meta.cert-manager.io/v1.ConditionStatus"> ConditionStatus (<code>string</code> alias) </h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateCondition">CertificateCondition</a>, <a href="#cert-manager.io/v1.CertificateRequestCondition">CertificateRequestCondition</a>, <a href="#cert-manager.io/v1.IssuerCondition">IssuerCondition</a>) </p>
@@ -5421,7 +5421,7 @@ Resource Types:
 <div>
   <p>Package v1alpha1 is the v1alpha1 version of the webhook config API.</p>
 </div>
-Resource Types:
+<p>Resource Types:</p>
 <ul></ul>
 <h3 id="webhook.config.cert-manager.io/v1alpha1.DynamicServingConfig">DynamicServingConfig</h3>
 <p> (<em>Appears on:</em> <a href="#webhook.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>) </p>
@@ -5659,5 +5659,5 @@ Resource Types:
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>da3265115</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>83791ee45</code>. </em>
 </p>
