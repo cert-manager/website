@@ -343,7 +343,16 @@
             },
             {
               "title": "trust-manager",
-              "path": "/docs/projects/trust-manager.md"
+              "routes": [
+                {
+                    "title": "Introduction",
+                    "path": "/docs/projects/trust-manager/README.md"
+                },
+                {
+                    "title": "API Reference",
+                    "path": "/docs/projects/trust-manager/api-reference.md"
+                }
+              ]
             }
           ]
         },
