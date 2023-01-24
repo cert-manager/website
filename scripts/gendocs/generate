@@ -25,6 +25,12 @@ REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
 
 ${REPO_ROOT}/scripts/gendocs/generate-new-import-path-docs
 
+# NOTE: Currently, generate-trust-manager builds against a specific named tag. Given that we we should (hopefully)
+# never change an already existing tag, there's little need to run this script against every build, but we might
+# want to add this in the future if we start building against branches (as we do for cert-manager)
+
+# ${REPO_ROOT}/scripts/gendocs/generate-trust-manager
+
 ###### WARNING ######
 # If you uncomment the below line to build API docs with the import path "github.com/jetstack/cert-manager",
 # you'll also need to uncomment versions in "${REPO_ROOT}/scripts/gendocs/generate-old-import-path-docs"

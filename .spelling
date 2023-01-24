@@ -71,6 +71,10 @@ AzureDNS
 BKPR
 Bazel
 Bitnami
+BundleSource
+BundleTarget
+BundleCondition
+NamespaceSelector
 CAs
 CNAME
 CNAMEs
