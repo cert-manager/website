@@ -26,7 +26,7 @@ This recommendation is described in the [Kyverno Policy Catalogue](https://kyver
 The cert-manager components *do* need to speak to the API server but we still recommend setting `automountServiceAccountToken: false` for the following reasons:
 1. Setting `automountServiceAccountToken: false` will allow cert-manager to be installed on clusters where Kyverno (or some other policy system) is configured to deny Pods that have this field set to `true`. The Kubernetes default value is `true`.
 2. With `automountServiceAccountToken: true`, *all* the containers in the Pod will mount the ServiceAccount token, including side-car and init containers that might have been injected into the cert-manager Pod resources by Kubernetes admission controllers. 
-   Principle of least privilege suggests that it is better to explicitly mount the ServiceAccount token into the cert-manager containers.
+   The principle of least privilege suggests that it is better to explicitly mount the ServiceAccount token into the cert-manager containers.
 
 So it is recommended to set `automountServiceAccountToken: false` and manually add a projected `Volume` to each of the cert-manager Deployment resources, containing the ServiceAccount token, CA certificate and namespace files that would normally be [added automatically by the Kubernetes ServiceAccount controller](https://github.com/kubernetes/kubernetes/blob/3992eda8e61725c470fb6141a7fe4e7f9ee31ea5/plugin/pkg/admission/serviceaccount/admission.go#L421-L460).
 And explicitly add a read-only `VolumeMount` to each of the cert-manager containers.
