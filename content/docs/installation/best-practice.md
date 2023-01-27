@@ -10,7 +10,7 @@ the [BSI Kubernetes Security Recommendations](https://www.bsi.bund.de/SharedDocs
 
 ## Overview
 
-The default cert-manager resources in the Helm chart or YAML manifests ( Deployment, Pod, ServiceAccount etc) are designed for backwards compatibility rather than for best practice or maximum security.
+The default cert-manager resources in the Helm chart or YAML manifests (Deployment, Pod, ServiceAccount etc) are designed for backwards compatibility rather than for best practice or maximum security.
 You may find that the default resources do not comply with the security policy on your Kubernetes cluster
 and in that case you can modify the installation configuration using Helm chart values to override the defaults.
 
