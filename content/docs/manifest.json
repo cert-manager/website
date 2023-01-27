@@ -178,6 +178,10 @@
             {
               "title": "Signature Verification",
               "path": "/docs/installation/code-signing.md"
+            },
+            {
+              "title": "Best Practice",
+              "path": "/docs/installation/best-practice.md"
             }
           ]
         },
