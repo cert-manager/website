@@ -1,6 +1,6 @@
 ---
 title: Best Practice
-description: Learn how to deploy cert-manager to comply with popular security standards such as CIS, NSA, and BSI.
+description: Learn how to deploy cert-manager to comply with popular security standards such as those produced by the CIS, NSA, and BSI.
 ---
 
 Learn how to deploy cert-manager to comply with popular security standards such as
