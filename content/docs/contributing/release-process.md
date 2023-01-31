@@ -151,6 +151,13 @@ page if a step is missing or if it is outdated.
 
 3. Update the release branch:
 
+    The release branches are protected by [GitHub branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule), which is [configured automatically by Prow](https://github.com/jetstack/testing/blob/500b990ad1278982b10d57bf8fbca383040d2fe8/config/config.yaml#L27-L36).
+    This prevents anyone *accidentally* pushing changes directly to these branches, even repository administrators.
+    But for the alpha releases and the initial beta release you will need to fast forward the release branch,
+    so you should delete the branch protection for that release branch, using the [GitHub branch protection web UI](https://github.com/cert-manager/cert-manager/settings/branches).
+    This is only a temporary change to allow you to update the branch.
+    [Prow will re-apply the branch protection within 24 hours](https://docs.prow.k8s.io/docs/components/optional/branchprotector/#updating).
+
    - **(initial alpha only)** Create the new release branch. There's usually no real use for it
       until the first beta, because we're likely to fast forward the release branch to match
       the master branch until the first beta and therefore the feature freeze at which point
