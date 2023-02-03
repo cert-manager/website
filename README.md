@@ -148,22 +148,12 @@ To run all verification checks:
 ./scripts/verify
 ```
 
-This will automatically run a number of checks against your local environment.
+This will automatically run a number of checks against your local environment, including:
 
-If you want to be thorough, you can run `./scripts/verify-release` to also regenerate API / CLI docs
-before verification, but that check is slower and unlikely to provide any useful insight.
-
-To run quick lint checks on the nextjs code, run [next lint](https://nextjs.org/docs/basic-features/eslint):
-
-```bash
-npm run lint
-```
-
-To check the links in all pages, run [markdown-link-check](https://github.com/tcort/markdown-link-check):
-
-```bash
-npm run markdown-link-check
-```
+* Lint checks on the nextjs code using [next lint](https://nextjs.org/docs/basic-features/eslint).
+* Link checks on all pages using [markdown-link-check](https://github.com/tcort/markdown-link-check).
+* Spelling in all pages using [mdspell](https://github.com/lukeapage/node-markdown-spellcheck).
+* Formatting of the markdown in all pages using [remark](https://github.com/remarkjs/remark).
 
 > ℹ️ All these checks are also run automatically for pull requests.
 > The results will be reported in the [checks summary](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks) at the bottom of your GitHub PR.
