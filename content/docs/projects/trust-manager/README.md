@@ -269,6 +269,8 @@ defaultPackageImage:
   tag: XYZ
 ```
 
+These versions of the default package image tags are derived directly from the version of the `ca-certificates` package in Debian.
+
 Finally, apply back the changes, being sure to manually specify the version of trust-manager which is installed, to avoid
 also updating the trust-manager controller at the same as the default CA package:
 
@@ -283,11 +285,14 @@ echo $TRUST_MANAGER_VER
 helm upgrade -f values.yaml -n cert-manager trust-manager jetstack/trust-manager --version $TRUST_MANAGER_VER
 ```
 
+If an incorrect tag is used, your deployment will fail and you'll likely need to use `helm rollback` to get back
+to a working state.
+
 ## Preparing for Production
 
-TLS is a complicated beast and there are plenty of ways to use TLS certificates in ways which will cause problems
-down the line. We'd like to document a few of these potential gotchas here to help prepare users for running
-trust-manager safely in production.
+TLS can be complicated and there are many ways to misuse TLS certificates.
+
+Here are some potential gotchas here to be aware of before running trust-manager in production.
 
 If you're planning on running trust-manager in production and you're using more than just the default CA package,
 we **strongly** advise you to read and understand this section. It could save you from causing an outage later.
