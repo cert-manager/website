@@ -136,6 +136,13 @@ BundleSource is the set of sources whose data will be appended and synced to the
           Secret is a reference to a Secrets's `data` key, in the trust Namespace.<br/>
         </td>
         <td>false</td>
+      </tr><tr>
+        <td><b>useDefaultCAs</b></td>
+        <td>boolean</td>
+        <td>
+          UseDefaultCAs, when true, requests the default CA bundle to be used as a source. Default CAs are available if trust-manager was installed via Helm or was otherwise set up to include a package-injecting init container by using the "--default-package-location" flag when starting the trust-manager controller. If default CAs were not configured at start-up, any request to use the default CAs will fail. The version of the default CA package which is used for a Bundle is stored in the defaultCAPackageVersion field of the Bundle's status field.<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -305,6 +312,13 @@ Status of the Bundle. This is set and managed automatically.
         <td>[]object</td>
         <td>
           List of status conditions to indicate the status of the Bundle. Known condition types are `Bundle`.<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>defaultCAVersion</b></td>
+        <td>string</td>
+        <td>
+          DefaultCAPackageVersion, if set and non-empty, indicates the version information which was retrieved when the set of default CAs was requested in the bundle source. This should only be set if useDefaultCAs was set to "true" on a source, and will be the same for the same version of a bundle with identical certificates.<br/>
         </td>
         <td>false</td>
       </tr><tr>

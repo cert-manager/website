@@ -32,6 +32,7 @@ ajvn
 illrill
 davidsbond
 fvlaicu
+facto
 4molybdenum2
 jetstack-bot
 codegen
@@ -89,6 +90,7 @@ CSR
 CSRs
 CVE
 CVEs
+Certbot
 CertificateRequest
 CertificateRequestPolicy
 CertificateRequestPolicies
