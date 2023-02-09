@@ -28,24 +28,7 @@ set -o pipefail
 
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
-echo "+++ Running remark"
-"${REPO_ROOT}/node_modules/.bin/remark" \
-  --rc-path ".remarkrc" \
-  --frail \
-  content/
-
-echo "+++ Running spell check"
-"${REPO_ROOT}/node_modules/.bin/mdspell" \
-  --report \
-  --en-us \
-  --ignore-numbers \
-  --ignore-acronyms \
-  "content/**/*.md" \
-  "content/**/*.html" \
-  "_layouts/*.html" \
-  "_includes/*.html" \
-  "*.html" \
-  "!**/api-docs.md"
+npm run check
 
 # TODO: Currently disabled until links are generated with trailing slashes correctly
 

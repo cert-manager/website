@@ -22,8 +22,11 @@
     "generate:sitemap": "next-sitemap",
     "export": "next export",
     "start": "next start",
-    "lint": "next lint",
-    "markdown-link-check": "find content/docs -type f -name '*.md' | xargs -L1 markdown-link-check --quiet --config markdown-link-check.json"
+    "check": "concurrently --group --timings npm:check:* # Run all the npm check:* scripts in parallel",
+    "check:next-lint": "next lint",
+    "check:links": "find content/docs -type f -name '*.md' | xargs markdown-link-check --quiet --config markdown-link-check.json 2>&1 | awk -v RS=FILE: '/ERROR/{f=1; print RS $0} END{exit f}' # Split into records based on the word FILE and print only records containing word ERROR",
+    "check:spelling": "FORCE_COLOR=1 mdspell --report --en-us --ignore-numbers --ignore-acronyms 'content/**/*.md' 'content/**/*.html' '_layouts/*.html' '_includes/*.html' '*.html' '!**/api-docs.md' # Force color output in mdspell. # See https://github.com/lukeapage/node-markdown-spellcheck/issues/36#issuecomment-482649408 ",
+    "check:markdown": "remark --rc-path .remarkrc --frail --quiet content/"
   },
   "lint-staged": {
     "*.{scss}": [
@@ -79,6 +82,7 @@
     "unist-util-visit": "4.1.1"
   },
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "esbuild": "0.16.17",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.2",

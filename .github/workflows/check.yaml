@@ -1,10 +1,11 @@
+# Check the content and lint the code
 name: check
 on:
   push:
     branches: [master]
   pull_request:
 jobs:
-  lint:
+  pull-cert-manager-website-verify:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -13,14 +14,4 @@ jobs:
           node-version: 16
           cache: npm
       - run: npm ci
-      - run: npm run lint
-  link-check:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: npm
-      - run: npm ci
-      - run: npm run markdown-link-check
+      - run: npm run check
