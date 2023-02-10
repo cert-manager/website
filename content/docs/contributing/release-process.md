@@ -158,28 +158,16 @@ page if a step is missing or if it is outdated.
     This is only a temporary change to allow you to update the branch.
     [Prow will re-apply the branch protection within 24 hours](https://docs.prow.k8s.io/docs/components/optional/branchprotector/#updating).
 
-   - **(initial alpha only)** Create the new release branch. There's usually no real use for it
-      until the first beta, because we're likely to fast forward the release branch to match
-      the master branch until the first beta and therefore the feature freeze at which point
-      we'll cherry-pick commits as needed. Still, it needs to be created at some point!
+   - **(initial beta only)** Create the new release branch. There's no need to
+      create that branch before the first beta because alphas are always cut on
+      the master branch.
 
       ```bash
-      git checkout -b release-1.12 master
+      # Must be run from the cert-manager repo folder.
+      git fetch origin master
+      git checkout -b release-1.12 origin/master
       git push origin release-1.12
       ```
-
-   - **(initial alpha, subsequent alpha and initial beta)** The release branch
-      should already exist (it was created at the end of the last final
-      release). Update the release branch with the latest commits from the
-      master branch, as follows:
-
-       ```bash
-       # Must be run from the cert-manager repo folder.
-       git fetch --all
-       git branch --force release-1.0 origin/release-1.0
-       git checkout release-1.0
-       git merge --ff-only origin/master # don't run for a point release!
-       ```
 
     - **(subsequent beta, patch release and final release)**: do nothing since
       things have been merged using `/cherry-pick release-1.0`.
