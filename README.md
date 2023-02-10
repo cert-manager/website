@@ -96,6 +96,15 @@ Use `{/* my comment */}` rather than the HTML-style comments you'd normally use 
 
 ## Website Development Tooling
 
+First [install nodejs (and package manager called `npm`)](https://nodejs.org/en/).
+Then install all the tools and packages required to build the website as follows:
+
+```bash
+npm ci
+```
+
+This command is similar to `npm install` but it ensures that you will have a clean install of all the dependencies.
+
 ### Development Server
 
 #### Ideal development environment: Netlify CLI
@@ -139,9 +148,8 @@ should be snappy to use.
 
 ### Running Verification Scripts
 
-After you have made changes to the website, you should run the `verify` scripts
+After you have made changes to the website, you should run the `verify` script
 to ensure things like spelling are valid.
-
 To run all verification checks:
 
 ```bash
