@@ -416,7 +416,10 @@ page if a step is missing or if it is outdated.
     2. **(initial alpha, subsequent alpha and beta only)** Tick the box "This is
        a pre-release".
 
-    3. Click "Publish" to make the GitHub release live. This will create a Git
+    3. **(final release and patch release)** Tick the box "Set as the latest
+       release".
+
+    4. Click "Publish" to make the GitHub release live. This will create a Git
        tag automatically.
 
 9. Merge the pull request containing the Helm chart:
