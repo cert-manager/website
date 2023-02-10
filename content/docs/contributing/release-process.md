@@ -13,7 +13,7 @@ current releases and the timeline for future releases, take a look at the
 ⛔️ Do not proceed with the release process if you do not meet all of the
 following conditions:
 
-1. The relevant [testgrid dashboard](https://testgrid.k8s.io/cert-manager-jetstack) should not be failing for the release you're trying to perform.
+1. The relevant [testgrid dashboard](https://testgrid.k8s.io/cert-manager) should not be failing for the release you're trying to perform.
 2. The release process **takes about 40 minutes**. You must have time to complete all the steps.
 3. You currently need to be at Jetstack to get the required GitHub and GCP
    permissions. (we'd like contributors outside Jetstack to be able to get
@@ -463,15 +463,15 @@ page if a step is missing or if it is outdated.
 
 14. Proceed to the post-release steps:
 
-    1. **(initial alpha only)** Create a PR on
-       [cert-manager/release](https://github.com/cert-manager/release),
-       add the new release to our list of periodic ProwJobs. Use [this PR](https://github.com/cert-manager/release/pull/105/) as an example.
+    1. **(initial beta only)** Create a PR on
+       [cert-manager/release](https://github.com/cert-manager/release) in order to
+       add the new release to our list of periodic ProwJobs. Use [this PR](https://github.com/jetstack/testing/pull/774/) as an example.
 
-    2. **(initial alpha only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
+    2. **(initial beta only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
        open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs.
        Use [this PR](https://github.com/jetstack/testing/pull/766) as an example.
 
-    3. **(initial alpha only)** If needed, open a PR to
+    3. **(final release only)** If needed, open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) in
        order to:
 
@@ -521,7 +521,7 @@ page if a step is missing or if it is outdated.
       bumping the versions of our kubectl plugins. This is likely only worthwhile if
       cmctl / kubectl plugin functionality has changed significantly or after the first release of a new major version.
 
-   10. Create a new OLM package and publish to OperatorHub
+   1.  Create a new OLM package and publish to OperatorHub
 
        cert-manager can be [installed](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) using Operator Lifecycle Manager (OLM)
        so we need to create OLM packages for each cert-manager version and publish them to both
