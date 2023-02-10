@@ -170,17 +170,11 @@ This will automatically run a number of checks against your local environment, i
 ### Building for a Release
 
 On release, all output is placed into the `out/` directory.
-
-Building a full release includes re-running API + CLI doc generation for the latest
-version of cert-manager, and then running a next.js `build` followed by `export`. The full
-release process can be run through one script:
+The full release process can be run through one script:
 
 ```bash
 ./scripts/build-release
 ```
-
-If you want to test that the build still works locally, you can run `./scripts/build` to build while
-skipping regeneration of API / CLI docs.
 
 ### API / CLI Documentation Generation
 
