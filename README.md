@@ -178,11 +178,15 @@ The full release process can be run through one script:
 
 ### API / CLI Documentation Generation
 
-To generate API / CLI reference docs manually, run:
+To update the [API documentation](https://cert-manager.io/docs/reference/api-docs/) and [CLI documentation](https://cert-manager.io/docs/cli/), run:
 
 ```bash
 ./scripts/gendocs/generate
 ```
+
+This should be done before every cert-manager release (if the API or CLI flags have changed)
+and any time the API or CLI of the [satellite projects](https://cert-manager.io/docs/projects/) changes,
+and the changes should be committed.
 
 Since there are many old versions of cert-manager, none of which change regularly (or at all),
 the website build process does not re-generate documentation for older versions, on the assumption
