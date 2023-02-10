@@ -149,6 +149,22 @@ page if a step is missing or if it is outdated.
    example, see
    [upgrading-1.0-1.1](https://cert-manager.io/docs/installation/upgrading/upgrading-1.0-1.1/).
 
+3. Check that the `origin` remote is correct. To do that, run the following
+   command and make sure it returns the upstream
+   `https://github.com/cert-manager/cert-manager.git`:
+
+    ```bash
+    # Must be run from the cert-manager repo folder.
+    git remote -v | grep origin
+    ```
+
+    It should show:
+
+    ```text
+    origin  https://github.com/jetstack/cert-manager (fetch)
+    origin  https://github.com/jetstack/cert-manager (push)
+    ```
+
 3. Update the release branch:
 
     The release branches are protected by [GitHub branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule), which is [configured automatically by Prow](https://github.com/jetstack/testing/blob/500b990ad1278982b10d57bf8fbca383040d2fe8/config/config.yaml#L27-L36).
@@ -164,10 +180,17 @@ page if a step is missing or if it is outdated.
 
       ```bash
       # Must be run from the cert-manager repo folder.
-      git fetch origin master
-      git checkout -b release-1.12 origin/master
+      git checkout master
+      git pull origin master
+      git checkout -b release-1.12 master
       git push origin release-1.12
       ```
+
+      **GitHub permissions**: `git push` will only work if you have the `admin`
+      GitHub permission on the cert-manager repo to create or push to the
+      branch, see [prerequisites](#prerequisites). If you do not have this
+      permission, you will have to open a PR to merge master into the release
+      branch), and wait for the PR checks to become green.
 
     - **(subsequent beta, patch release and final release)**: do nothing since
       things have been merged using `/cherry-pick release-1.0`.
@@ -187,37 +210,39 @@ page if a step is missing or if it is outdated.
        We don't fast-forward for patch releases and final releases; instead, we
        prepare these releases using the `/cherry-pick release-1.0` command.
 
-4. Push the new or updated release branch and create the tag:
+1. Place yourself on the correct branch:
 
-    1. Check that the `origin` remote is correct. To do that, run the following
-        command and make sure it returns
-        the upstream `https://github.com/cert-manager/cert-manager.git`:
+   - **(initial beta)**: since you have just created the release branch, you are
+     already on it.
 
-        ```bash
-        # Must be run from the cert-manager repo folder.
-        git remote -v | grep origin
-        ```
+   - **(subsequent beta)**:
 
-    2. Push the release branch:
+      ```bash
+      git checkout release-1.12
+      git pull origin release-1.12
+      ```
 
-        ```bash
-        # Must be run from the cert-manager repo folder.
-        git push --set-upstream origin release-1.0
-        ```
+   - **(initial alpha and subsequent alpha)**:
 
-        **GitHub permissions**: `git push` will only work if you have the
-       `admin` GitHub permission on the cert-manager repo to create or push to
-       the branch, see [prerequisites](#prerequisites). If you do not have this
-       permission, you will have to open a PR to merge master into the release
-       branch), and wait for the PR checks to become green.
+      ```bash
+      git checkout master
+      git pull origin master
+      ```
 
-    3. Create the tag for the new release locally and push it upstream:
+2. Create the tag for the new release locally and push it upstream:
 
-       ```bash
-       git tag -m"v1.8.0-beta.0" v1.8.0-beta.0
-       # be sure to push the named tag explicitly; you don't want to push any other local tags!
-       git push origin v1.8.0-beta.0
-       ```
+     ```bash
+     RELEASE_VERSION=v1.8.0-beta.0
+     git tag -m"$RELEASE_VERSION" $RELEASE_VERSION
+     # be sure to push the named tag explicitly; you don't want to push any other local tags!
+     git push origin $RELEASE_VERSION
+     ```
+
+      **GitHub permissions**: `git push` will only work if you have the
+      `admin` GitHub permission on the cert-manager repo to create or push to
+      the branch, see [prerequisites](#prerequisites). If you do not have this
+      permission, you will have to open a PR to merge master into the release
+      branch), and wait for the PR checks to become green.
 
 5. Generate and edit the release notes:
 
@@ -240,12 +265,10 @@ page if a step is missing or if it is outdated.
         | ----------------- | ---------------- | ---------------- | ---------------- | ------------- | ------------- |
         |                   |                  |                  |                  |               |               |
         |                   | initial alpha    | subsequent alpha | beta release     | final release | patch release |
-        |                   | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.3.0-beta.0`  | `v1.3.0`      | `v1.3.1`      |
-        |                   |                  |                  |                  |               |               |
-        | `START_TAG`\*     | `v1.2.0`         | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.2.0`\*\*  | `v1.3.0`      |
-        | `END_REV`         | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
-        | `BRANCH`          | `release-1.3`    | `release-1.3`    | `release-1.3`    | `release-1.3` | `release-1.3` |
         | `RELEASE_VERSION` | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.3.0-beta.0`  | `v1.3.0`      | `v1.3.1`      |
+        | `START_TAG`\*     | `v1.2.0`         | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.2.0`\*\*  | `v1.3.0`      |
+        | `END_REV`         | `master`         | `master`         | `release-1.3`    | `release-1.3` | `release-1.3` |
+        | `BRANCH`          | `master`         | `master`         | `release-1.3`    | `release-1.3` | `release-1.3` |
 
         > \*The git tag of the "previous" release (`START_TAG`) depends on which
         > type of release you count on doing. Look at the above examples to
@@ -261,9 +284,9 @@ page if a step is missing or if it is outdated.
 
         ```bash
         export RELEASE_VERSION="v1.3.0-alpha.0"
-        export BRANCH="release-1.3"
         export START_TAG="v1.2.0"
         export END_REV="release-1.3"
+        export BRANCH="release-1.3"
         ```
 
     2. Generate `release-notes.md` at the root of your cert-manager repo folder
@@ -272,7 +295,7 @@ page if a step is missing or if it is outdated.
         ```bash
         # Must be run from the cert-manager folder.
         export GITHUB_TOKEN=*your-token*
-        git fetch origin $BRANCH:$BRANCH
+        git fetch origin $BRANCH
         export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
         release-notes --debug --repo-path cert-manager \
           --org cert-manager --repo cert-manager \
@@ -335,7 +358,7 @@ page if a step is missing or if it is outdated.
        example, the message would look like:
 
         <div className="pageinfo pageinfo-info"><p>
-        Follow the <code>cmrel stage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
+        Follow the <code>cmrel makestage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
         </p></div>
 
 7. Run `cmrel publish`:
@@ -459,7 +482,7 @@ page if a step is missing or if it is outdated.
        open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs.
        Use [this PR](https://github.com/jetstack/testing/pull/766) as an example.
 
-    3. **(final release only)** If needed, open a PR to
+    3. If needed, open a PR to
        [`cert-manager/website`](https://github.com/cert-manager/website) in
        order to:
 
@@ -517,7 +540,6 @@ page if a step is missing or if it is outdated.
 
        Follow [the cert-manager OLM release process](https://github.com/cert-manager/cert-manager-olm#release-process) and, once published,
        [verify that the cert-manager OLM installation instructions](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) still work.
-
 
 ## Older Releases
 
