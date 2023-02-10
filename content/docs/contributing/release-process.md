@@ -21,7 +21,7 @@ following conditions:
 4. You need to have the GitHub `admin` permission on the cert-manager project.
    To check that you have the `admin` role, run:
 
-    ```sh
+    ```bash
     brew install gh
     gh auth login
     gh api /repos/cert-manager/cert-manager/collaborators/$(gh api /user | jq -r .login)/permission | jq .permission
@@ -73,19 +73,19 @@ First, ensure that you have all the tools required to perform a cert-manager rel
 
 1. Install the [`release-notes`](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md) CLI:
 
-   ```sh
+   ```bash
    go install k8s.io/release/cmd/release-notes@v0.13.0
    ```
 
 2. Install our [`cmrel`](https://github.com/cert-manager/release) CLI:
 
-   ```sh
+   ```bash
    go install github.com/cert-manager/release/cmd/cmrel@latest
    ```
 
 3. Clone the `cert-manager/release` repo:
 
-   ```sh
+   ```bash
    # Don't clone it from inside the cert-manager repo folder.
    git clone https://github.com/cert-manager/release
    cd release
@@ -95,13 +95,13 @@ First, ensure that you have all the tools required to perform a cert-manager rel
 5. [Login](https://cloud.google.com/sdk/docs/authorizing#running_gcloud_auth_login)
    to `gcloud`:
 
-   ```sh
+   ```bash
    gcloud auth application-default login
    ```
 
 6. Make sure `gcloud` points to the cert-manager-release project:
 
-   ```sh
+   ```bash
    gcloud config set project cert-manager-release
    export CLOUDSDK_CORE_PROJECT=cert-manager-release # this is used by cmrel
    ```
@@ -205,7 +205,7 @@ page if a step is missing or if it is outdated.
         command and make sure it returns
         the upstream `https://github.com/cert-manager/cert-manager.git`:
 
-        ```sh
+        ```bash
         # Must be run from the cert-manager repo folder.
         git remote -v | grep origin
         ```
@@ -271,7 +271,7 @@ page if a step is missing or if it is outdated.
         After finding out the value for each of the 4 environment variables, set
         the variables in your shell (for example, following the example 1):
 
-        ```sh
+        ```bash
         export RELEASE_VERSION="v1.3.0-alpha.0"
         export BRANCH="release-1.3"
         export START_TAG="v1.2.0"
@@ -281,7 +281,7 @@ page if a step is missing or if it is outdated.
     2. Generate `release-notes.md` at the root of your cert-manager repo folder
        with the following command:
 
-        ```sh
+        ```bash
         # Must be run from the cert-manager folder.
         export GITHUB_TOKEN=*your-token*
         git fetch origin $BRANCH:$BRANCH
@@ -355,7 +355,7 @@ page if a step is missing or if it is outdated.
     1. Do a `cmrel publish` dry-run to ensure that all the staged resources are
        valid. Run the following command:
 
-        ```sh
+        ```bash
         # Must be run from the "cert-manager/release" repo folder.
         cmrel publish --release-name "$RELEASE_VERSION"
         ```
@@ -430,7 +430,7 @@ page if a step is missing or if it is outdated.
     tag. See `brew bump-formula-pr --help` for up to date details, but the command
     will be of the form:
 
-    ```sh
+    ```bash
     brew bump-formula-pr --dry-run --tag v0.10.0 --revision da3265115bfd8be5780801cc6105fa857ef71965 cmctl
     ```
 
