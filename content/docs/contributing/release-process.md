@@ -519,6 +519,10 @@ page if a step is missing or if it is outdated.
          the [supported-releases](../installation/supported-releases.md) page.
          In the table, set "n/a" for the line where "next periodic" is since
          these tests will be disabled until we do our first alpha.
+       - Update the [API docs](../reference/api-docs.md) and [CLI docs](../cli/README.md) by running `scripts/gendocs/generate`
+         and commit any changes to a branch and create a PR to merge those into
+         `master` or `release-next` depending on whether this is a minor or
+         patch release.
 
     8. Ensure that any installation commands in
        [`cert-manager/website`](https://github.com/cert-manager/website) install
