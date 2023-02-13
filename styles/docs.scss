@@ -27,7 +27,6 @@
     li {
       @apply mb-0;
       @apply mt-0;
-      @apply text-lg;
     }
 
     .docs-copy-btn {
@@ -52,9 +51,12 @@
       @apply block align-baseline font-normal text-dark-2;
     }
 
-    p,
-    div {
-      @apply text-lg text-dark-2;
+    .prism-code {
+      font-size: 0.8rem;
+    }
+
+    p {
+      @apply text-dark-2;
     }
 
     a:hover {
