@@ -63,14 +63,14 @@ Once you will get your credentials first step is to create seed with secrets. Th
 $ kubectl create secret generic \
        zero-ssl-eabsecret \
        --namespace=cert-manager \
-       --from-literal=secret='YOUR_ZEROSSL_EAB_SECRET'
+       --from-literal=secret='YOUR_ZEROSSL_EAB_HMAC_KEY'
 ```
 
 ### Another way of creating secret.
 
 Encode it in base64 first.
 ```bash
-echo -n "YOUR_ZEROSSL_EAB_SECRET" | base64 -w 0
+echo -n "YOUR_ZEROSSL_EAB_HMAC_KEY" | base64 -w 0
 ```
 
 ```yaml
@@ -79,7 +79,7 @@ kind: Secret
 metadata:
   name: zero-ssl-eabsecret
 data:
-  secret: YOUR_ENCODED_ZEROSSL_EAB_SECRET
+  secret: YOUR_ENCODED_ZEROSSL_EAB_HMAC_KEY
 ```
 ```bash
 kubectl apply -f zero-ssl-eabsecret.yaml -n cert-manager
@@ -105,7 +105,7 @@ spec:
 
     # for each cert-manager new EAB credencials are required
     externalAccountBinding:
-      keyID: ZEROSSL_KEY_ID
+      keyID: YOUR_ZEROSSL_EAB_KEY_ID
       keySecretRef:
         name: zero-ssl-eabsecret
         key: secret
