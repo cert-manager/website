@@ -254,10 +254,10 @@ page if a step is missing or if it is outdated.
 
         | Variable          | Description                             |
         | ----------------- | --------------------------------------- |
-        | `START_REV`\*     | The git tag of the "previous"\* release |
+        | `RELEASE_VERSION` | The git tag                             |
+        | `START_TAG`\*     | The git tag of the "previous"\* release |
         | `END_REV`         | Name of your release branch (inclusive) |
         | `BRANCH`          | Name of your release branch             |
-        | `RELEASE_VERSION` | The git tag                             |
 
         Examples for each release type (e.g., initial alpha release):
 
