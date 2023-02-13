@@ -18,3 +18,12 @@
 # - https://developers.google.com/search/docs/crawling-indexing/block-indexing
 [context.branch-deploy]
   command = "./scripts/build-release && cp ./custom-headers/branch-deploy-site-headers ./out/_headers"
+
+# Configuration for `netlify dev` which tells it to load nextjs, tells it where
+# to find (and reload) static content and _redirects, and tells it not to open a
+# new browser window.
+[dev]
+  framework = "next"
+  port = 8888
+  publish = "public"
+  autoLaunch = false

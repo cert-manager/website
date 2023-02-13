@@ -107,40 +107,24 @@ This command is similar to `npm install` but it ensures that you will have a cle
 
 ### Development Server
 
-#### Ideal development environment: Netlify CLI
-
-The best development environment uses the Netlify CLI to serve the site locally. The Netlify CLI server much more
+The best development environment uses the Netlify CLI to serve the site locally. The Netlify CLI server
 closely matches the environment in which the website is deployed, and will enable local debugging of redirects and
 environment variables.
 
-To run this server, install the [Netlify CLI](https://docs.netlify.com/cli/get-started/).
-
-This server supports hot-reloading, but note that hot-reloading of the `public/_redirects` file is only enabled
-if you also install `entr`, which is available in Linux package managers and in Homebrew.
+To run this server, install the [Netlify CLI](https://docs.netlify.com/cli/get-started/) as follows:
 
 ```bash
-./scripts/server-netlify
+npm install -g netlify-cli
 ```
 
-This script will run `npm install` and then start a development server at `http://localhost:8888`.
-
-Note that the server will also be accessible locally at port 3000, but that on this port there'll be no
-support for debugging redirects or environment variables. Use port 8888.
-
-#### Simpler development environment
-
-The Netlify environment above should be preferred.
-
-If you don't want to install any other tools though, you can run the local development server on its own
-with no support for debugging redirects or environment variables.
-
-To run the simpler, less-powerful server, run:
+Then run the server:
 
 ```bash
 ./scripts/server
 ```
 
-This script will run `npm install` and then start a development server at `http://localhost:3000`.
+Note that the server will also be accessible locally at port 3000, but that on this port there'll be no
+support for debugging redirects or environment variables. Use port 8888.
 
 Initial builds of a page on the development server can be quite slow - a few seconds - but
 after the initial build changes should be picked up quickly and the development server
