@@ -27,6 +27,16 @@ and should be installable via Homebrew on macOS.
 
 ## Website Development Guides
 
+### Which branch should I use?
+
+There are two relevant branches used for website development: `master` and `release-next`.
+
+Changes to `master` will be reflected on the live website shortly after they're merged. If your change is relevant
+to any version of cert-manager which has already been released, your change likely needs to be made against master.
+
+`release-next` is used for features which haven't been released in a stable version of cert-manager yet. Changes
+will be reflected on a preview deployment for the release-next branch which is linked to from the main site.
+
 ### Where's the documentation content?
 
 First, docs go under `content/`; you shouldn't normally need to change files outside of `content/` when
@@ -37,7 +47,7 @@ There are several folders in `content/` and which one you need depends on what y
 - Something which applies to the current version of cert-manager? <br />
   Add it to `docs/` and possibly to the specific version of cert-manager that's latest (e.g. `v1.8-docs/`)
 - Something which only applies to the next major version of cert-manager? <br />
-  Add it to `docs/` but branch from the [`release-next` branch](https://github.com/cert-manager/website/tree/release-next) and merge the PR into that branch.
+  Add it to `docs/` but branch from the [`release-next` branch](https://github.com/cert-manager/website/tree/release-next) and merge the PR into that branch. See above.
 - Something which isn't "versioned", e.g. a page under "contributing", release notes or our supported-releases page? <br />
   Add it to `docs/`, which is the only place such pages should appear
 - Something which applies only to versions of cert-manager which have already been released? <br />
