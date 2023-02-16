@@ -47,8 +47,8 @@
               "path": "/docs/installation/verify.md"
             },
             {
-              "title": "Features",
-              "path": "/docs/installation/features.md"
+              "title": "Feature flags",
+              "path": "/docs/installation/featureflags.md"
             },
             {
               "title": "Upgrading",
@@ -477,7 +477,7 @@
               "path": "/docs/contributing/kind.md"
             },
             {
-              "title": "Implementing feature gates",
+              "title": "Implementing Feature Gates",
               "path": "/docs/contributing/featuregates.md"
             },
             {

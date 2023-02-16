@@ -32,7 +32,7 @@ This mechanism differs from [the one that Kubernetes uses for feature gated API 
 
 - The person deploying cert-manager has to remember to set two cert-manager feature gates, one of the webhook one on the controller for the feature to function. Forgetting to set one of them might result in unexpected behavior
 
-- A user must remember to remove the alpha fields from their manifests when disabling a previously enabled API feature. Failing to do so might result in unexpected behavior- for example forgetting to remove feature gated field from a `Certificate` resource might result in failed renewals at some later point when cert-manager's controller will attempt to update the `Certificate` spec, but the webhook will reject the update due to the feature gated field being set
+- A user must remember to remove the alpha fields from their manifests when disabling a previously enabled API feature. Failing to do so might result in unexpected behavior- for example forgetting to remove feature gated field from a `Certificate` resource might result in failed renewals at some later point when cert-manager's controller will attempt to update the `Certificate` spec, but the webhook will reject the update due to the feature gated field being set.
 
 ### References
 
@@ -44,4 +44,4 @@ This mechanism differs from [the one that Kubernetes uses for feature gated API 
 
 - Kubernetes [API change design](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api_changes.md)
 
-[^1]: for example, functionality that might change in the future in response to user feedback
+[^1]: For example, functionality that might change in the future in response to user feedback
