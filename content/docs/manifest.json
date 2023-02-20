@@ -47,6 +47,10 @@
               "path": "/docs/installation/verify.md"
             },
             {
+              "title": "Feature flags",
+              "path": "/docs/installation/featureflags.md"
+            },
+            {
               "title": "Upgrading",
               "routes": [
                 {
@@ -484,6 +488,10 @@
             {
               "title": "Developing with Kind",
               "path": "/docs/contributing/kind.md"
+            },
+            {
+              "title": "Implementing Feature Gates",
+              "path": "/docs/contributing/featuregates.md"
             },
             {
               "title": "Google Season of Docs",
