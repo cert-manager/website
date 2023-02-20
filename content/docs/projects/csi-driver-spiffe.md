@@ -68,14 +68,13 @@ signer.
 
 The approver ensures that requests have:
 
-1. the correct key type (ECDSA P-521);
-2. acceptable key usages (Key Encipherment, Digital Signature, Client Auth, Server Auth);
-3. the requested duration matches the enforced duration (default 1 hour);
-4. no [SANs](https://en.wikipedia.org/wiki/Subject_Alternative_Name) or other
-   identifiable attributes except a single [URI SANs](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier);
-5. the single URI SAN is the SPIFFE identity of the ServiceAccount who created
+1. acceptable key usages (Key Encipherment, Digital Signature, Client Auth, Server Auth);
+2. a requested duration which matches the enforced duration (default 1 hour);
+3. no [SANs](https://en.wikipedia.org/wiki/Subject_Alternative_Name) or other
+   identifiable attributes except a single [URI SAN](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier);
+4. a URI SAN which is the SPIFFE identity of the ServiceAccount which created
    the CertificateRequest;
-5. the SPIFFE ID Trust Domain is the same as configured.
+5. a SPIFFE ID Trust Domain matching the one that was configured at startup.
 
 If any of these checks do not pass, the CertificateRequest will be marked as
 Denied, else it will be marked as Approved. The approver will only manage
