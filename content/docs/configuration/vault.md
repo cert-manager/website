@@ -144,15 +144,125 @@ spec:
           key: token
 ```
 
-<a id="static-service-account-token"></a>
+<a id="authenticating-with-kubernetes-service-accounts"></a>
 
 ### Authenticating with Kubernetes Service Accounts
 
-Vault can be configured so that applications can authenticate using Kubernetes
-[`Service Account
-Tokens`](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin).
-You find documentation on how to configure Vault to authenticate using Service
-Account Tokens [here](https://www.vaultproject.io/docs/auth/kubernetes.html).
+The [Vault Kubernetes
+Auth](https://developer.hashicorp.com/vault/docs/auth/kubernetes) allows
+cert-manager to authenticate to Vault using a Kubernetes Service Account Token
+in order to issue certificates using Vault as a certification authority. The
+Kubernetes service account token can be provided in two ways:
+
+- [Secretless Authentication with a Service Account](#secretless-authentication-with-a-service-account) (recommended),
+- [Authentication with a Static Service Account Token](#static-service-account-token).
+
+#### Secretless Authentication with a Service Account
+
+ℹ️ This feature is available in cert-manager >= v1.12.0.
+
+With the secretless authentication with a service account, cert-manager creates
+an ephemeral service account token using the TokenRequest API and uses it to
+authenticates with Vault. These tokens are short-lived (10 minutes) and are
+never stored to disk.
+
+This is the recommended authentication method because it does not rely on the
+deprecated static service account tokens. The static service account tokens pose
+a threat due to their infinite lifetime. Static service account tokens have been
+disabled by default on Kubernetes 1.24.
+
+The first step is to create a `ServiceAccount` resource:
+
+```sh
+kubectl create serviceaccount -n sandbox vault-issuer
+```
+
+Then add an RBAC Role so that cert-manager can get tokens for the
+ServiceAccount:
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: vault-issuer
+  namespace: sandbox
+rules:
+  - apiGroups: ['']
+    resources: ['serviceaccounts/token']
+    resourceNames: ['vault-issuer']
+    verbs: ['create']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: vault-issuer
+  namespace: sandbox
+subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: vault-issuer
+```
+
+Finally, create the Issuer resource:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: vault-issuer
+  namespace: sandbox
+spec:
+  vault:
+    path: pki_int/sign/example-dot-com
+    server: https://vault.local
+    auth:
+      kubernetes:
+        role: my-app-1
+        mountPath: /v1/auth/kubernetes
+        serviceAccountRef:
+          name: vault-issuer
+```
+
+> **Issuer vs. ClusterIssuer:** With an Issuer resource, you can only refer to a
+> service account located in the same namespace as the Issuer. With a
+> ClusterIssuer, the service account must be located in the namespace that is
+> configured by the flag `--cluster-scoped namespace`.
+
+To create the role in Vault, you can use the following command:
+
+```bash
+vault write auth/kubernetes/role/vault-issuer \
+    bound_service_account_names=vault-issuer \
+    bound_service_account_namespaces=sandbox \
+    audience="vault://sandbox/vault-issuer" \
+    policies=vault-issuer \
+    ttl=1m
+```
+
+It is recommended to use a different Vault role each per Issuer or
+ClusterIssuer. The `audience` allows you to restrict the Vault role to a single
+Issuer or ClusterIssuer. The syntax is the following:
+
+```yaml
+"vault://<namespace>/<issuer-name>"   # For an Issuer.
+"vault://<issuer-name>"               # For a ClusterIssuer.
+```
+
+The expiration duration for the Kubernetes tokens that are requested is
+hard-coded to 10 minutes (that's the minimum accepted). The `ttl` field can be
+as short as possible, since cert-manager requests a new token every time it
+needs to talks to Vault.
+
+Although it is not recommended, you can also use the same Vault role for all of
+your Issuers and ClusterIssuers by omitting the `audience` field and re-using
+the same service account.
+<a name="static-service-account-token"></a>
+
+#### Authentication with a Static Service Account Token
 
 For the Vault issuer to use this authentication, cert-manager must get access to
 the token that is stored in a Kubernetes `Secret`. Kubernetes Service Account
@@ -255,101 +365,6 @@ Kubernetes 1.24 and above.
               name: vault-issuer-token
               key: token
     ```
-
-### Authenticating with a Kubernetes Service Account Without A Secret
-
-The [previous method](#static-service-account-token) of authenticating with
-Vault has a major disadvantage: it relies on a less secure "static" token (by
-"static", we mean a token that does not have an expiry time).
-
-Using the field `serviceAccountRef` instead of `secretRef`, you can let
-cert-manager request ephemeral tokens.
-
-The first step is to create a `ServiceAccount` resource, like in the `secretRef`
-method:
-
-```sh
-kubectl create serviceaccount -n sandbox vault-issuer
-```
-
-Then, you will need to add an RBAC Role so that cert-manager can use the service
-account:
-
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: vault-issuer
-  namespace: sandbox
-rules:
-  - apiGroups: ['']
-    resources: ['serviceaccounts/token']
-    resourceNames: ['vault-issuer']
-    verbs: ['create']
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: vault-issuer
-  namespace: sandbox
-subjects:
-  - kind: ServiceAccount
-    name: cert-manager
-    namespace: cert-manager
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: vault-issuer
-```
-
-Finally, you can create the Issuer resource:
-
-```yaml
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: vault-issuer
-  namespace: sandbox
-spec:
-  vault:
-    path: pki_int/sign/example-dot-com
-    server: https://vault.local
-    auth:
-      kubernetes:
-        role: my-app-1
-        mountPath: /v1/auth/kubernetes
-        serviceAccountRef:
-          name: vault-issuer
-```
-
-To create the role in Vault, you can use the following command:
-
-```bash
-vault write auth/kubernetes/role/vault-issuer \
-    bound_service_account_names=vault-issuer \
-    bound_service_account_namespaces=sandbox \
-    audience="vault://sandbox/vault-issuer" \
-    policies=vault-issuer \
-    ttl=1m
-```
-
-It is recommended to use a different Vault role each per Issuer or
-ClusterIssuer. The `audience` allows you to restrict the Vault role to a single
-Issuer or ClusterIssuer. The syntax is the following:
-
-```yaml
-"vault://<namespace>/<issuer-name>"   # For an Issuer.
-"vault://<issuer-name>"               # For a ClusterIssuer.
-```
-
-The expiration duration for the Kubernetes tokens that are requested is
-hard-coded to 10 minutes (that's the minimum accepted). The `ttl` field can be
-as short as possible, since cert-manager requests a new token every time it
-needs to talks to Vault.
-
-Although it is not recommended, you can also use the same Vault role for all of
-your Issuers and ClusterIssuers by omitting the `audience` field and re-using
-the same service account.
 
 ## Verifying the issuer Deployment
 
