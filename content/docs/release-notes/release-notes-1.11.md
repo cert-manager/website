@@ -18,7 +18,7 @@ Instead cert-manager authenticates to Azure using a short lived Kubernetes Servi
 This is now the recommended authentication method because it is more secure and easier to maintain than the other methods,
 and it should be used instead of the [deprecated pod-managed identify mechanism](https://github.com/Azure/aad-pod-identity#-announcement).
 
-> 📖 Read about [configuring the ACME issuer with Azure DNS](../configuration/acme/dns01/azuredns/README.md).
+> 📖 Read about [configuring the ACME issuer with Azure DNS](../configuration/acme/dns01/azuredns.md).
 >
 > 📖 Read the [AKS + LoadBalancer + Let's Encrypt tutorial](../tutorials/getting-started-aks-letsencrypt/README.md) for an end-to-end example of this authentication method.
 >
@@ -31,7 +31,7 @@ complies with the ACME spec for the ACME issuer, but some users had issues when 
 either that they ignore certificate validation (which is insecure) or that they hack their certificate into the cert-manager trust store.
 
 Now, users can set a caBundle flag on their ACME issuer, specifying the trust store that cert-manager should use when communicating with the
-server. For more details, see [Private ACME Servers](../configuration/acme.md#private-acme-servers)
+server. For more details, see [Private ACME Servers](../configuration/acme/README.md#private-acme-servers)
 
 ### `LiteralSubject` Improvements
 

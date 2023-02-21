@@ -155,7 +155,7 @@ Signer annotations:
 ## Usage
 
 CertificateSigningRequests can be manually created using
-[cmctl](./cmctl.md#experimental).
+[cmctl](../reference/cmctl.md#experimental).
 This command takes a manifest file containing a
 [Certificate](../usage/certificate.md) resource as input. This generates a
 private key and creates a CertificateSigningRequest. CertificateSigningRequests

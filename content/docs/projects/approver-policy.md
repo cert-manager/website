@@ -4,19 +4,19 @@ description: ''
 ---
 
 approver-policy is a cert-manager
-[approver](https://cert-manager.io/docs/concepts/certificaterequest/#approval)
+[approver](../concepts/certificaterequest.md#approval)
 that will approve or deny CertificateRequests based on CRD defined policies.
 
 ---
 
 ## Installation
 
-[cert-manager](https://cert-manager.io) is required to be installed with approver-policy.
+[cert-manager](../installation/README.md) is required to be installed with approver-policy.
 
 > ⚠️
 >
 > It is important that the
-> [default approver is disabled in cert-manager](https://cert-manager.io/docs/concepts/certificaterequest/#approver-controller).
+> [default approver is disabled in cert-manager](../concepts/certificaterequest.md#approver-controller).
 > If the default approver is not disabled in cert-manager, approver-policy will
 > race with cert-manager and thus policy becomes useless.
 >
@@ -34,10 +34,10 @@ $ helm upgrade -i -n cert-manager cert-manager-approver-policy jetstack/cert-man
 ```
 
 If you are using approver-policy with [external
-issuers](https://cert-manager.io/docs/configuration/external/), you _must_
+issuers](../configuration/external.md), you _must_
 include their signer names so that approver-policy has permissions to approve
 and deny CertificateRequests that
-[reference them](https://cert-manager.io/docs/concepts/certificaterequest/#rbac-syntax).
+[reference them](../concepts/certificaterequest.md#rbac-syntax).
 For example, if using approver-policy for the internal issuer types, along with
 [google-ca-issuer](https://github.com/jetstack/google-cas-issuer), and
 [aws-privateca-issuer](https://github.com/cert-manager/aws-privateca-issuer),
@@ -269,7 +269,7 @@ CertificateRequestPolicies against CertificateRequests for evaluation.  A
 CertificateRequestPolicy must select, and therefore match, a CertificateRequest
 for it to be considered for evaluation of the request.
 
-> ⚠️ Note that the user must still be bound by [RBAC](#Configuration) for
+> ⚠️ Note that the user must still be bound by [RBAC](#configuration) for
 > the policy to be considered for evaluation against a request.
 
 approver-policy supports selecting over the `issuerRef` and the `namespace` of a

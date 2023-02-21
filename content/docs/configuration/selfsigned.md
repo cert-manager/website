@@ -136,12 +136,14 @@ spec:
 ### Trust
 
 Clients consuming `SelfSigned` certificates have _no way_ to trust them
-without already having the certificates beforehand. This becomes hard to
-manage when the client of the server using the certificate exists in a
-different namespace. This limitation can be tackled by using [trust-manager](../projects/trust-manager.md)
-to distribute the `ca.crt` to other namespaces. The alternative is to use
-"TOFU" (trust on first use), which has security implications in the event
-of a man-in-the-middle attack.
+without already having the certificates beforehand, which can be hard to
+manage when the client is in a different namespace to the server.
+
+This limitation can be tackled by using [trust-manager](../projects/trust-manager/README.md) to distribute `ca.crt`
+to other namespaces.
+
+There is no secure alternative to solving the problem of distributing trust stores; it's possible
+to "TOFU" (trust-on-first-use) a certificate, but that approach is vulnerable to man-in-the-middle attacks.
 
 ### Certificate Validity
 

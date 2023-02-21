@@ -27,6 +27,16 @@ and should be installable via Homebrew on macOS.
 
 ## Website Development Guides
 
+### Which branch should I use?
+
+There are two relevant branches used for website development: `master` and `release-next`.
+
+Changes to `master` will be reflected on the live website shortly after they're merged. If your change is relevant
+to any version of cert-manager which has already been released, your change likely needs to be made against master.
+
+`release-next` is used for features which haven't been released in a stable version of cert-manager yet. Changes
+will be reflected on a preview deployment for the release-next branch which is linked to from the main site.
+
 ### Where's the documentation content?
 
 First, docs go under `content/`; you shouldn't normally need to change files outside of `content/` when
@@ -37,7 +47,7 @@ There are several folders in `content/` and which one you need depends on what y
 - Something which applies to the current version of cert-manager? <br />
   Add it to `docs/` and possibly to the specific version of cert-manager that's latest (e.g. `v1.8-docs/`)
 - Something which only applies to the next major version of cert-manager? <br />
-  Add it to `docs/` but branch from the [`release-next` branch](https://github.com/cert-manager/website/tree/release-next) and merge the PR into that branch.
+  Add it to `docs/` but branch from the [`release-next` branch](https://github.com/cert-manager/website/tree/release-next) and merge the PR into that branch. See above.
 - Something which isn't "versioned", e.g. a page under "contributing", release notes or our supported-releases page? <br />
   Add it to `docs/`, which is the only place such pages should appear
 - Something which applies only to versions of cert-manager which have already been released? <br />
@@ -96,42 +106,35 @@ Use `{/* my comment */}` rather than the HTML-style comments you'd normally use 
 
 ## Website Development Tooling
 
+First [install nodejs (and package manager called `npm`)](https://nodejs.org/en/).
+Then install all the tools and packages required to build the website as follows:
+
+```bash
+npm ci
+```
+
+This command is similar to `npm install` but it ensures that you will have a clean install of all the dependencies.
+
 ### Development Server
 
-#### Ideal development environment: Netlify CLI
-
-The best development environment uses the Netlify CLI to serve the site locally. The Netlify CLI server much more
+The best development environment uses the Netlify CLI to serve the site locally. The Netlify CLI server
 closely matches the environment in which the website is deployed, and will enable local debugging of redirects and
 environment variables.
 
-To run this server, install the [Netlify CLI](https://docs.netlify.com/cli/get-started/).
-
-This server supports hot-reloading, but note that hot-reloading of the `public/_redirects` file is only enabled
-if you also install `entr`, which is available in Linux package managers and in Homebrew.
+To run this server, install the [Netlify CLI](https://docs.netlify.com/cli/get-started/) as follows:
 
 ```bash
-./scripts/server-netlify
+npm install -g netlify-cli
 ```
 
-This script will run `npm install` and then start a development server at `http://localhost:8888`.
-
-Note that the server will also be accessible locally at port 3000, but that on this port there'll be no
-support for debugging redirects or environment variables. Use port 8888.
-
-#### Simpler development environment
-
-The Netlify environment above should be preferred.
-
-If you don't want to install any other tools though, you can run the local development server on its own
-with no support for debugging redirects or environment variables.
-
-To run the simpler, less-powerful server, run:
+Then run the server:
 
 ```bash
 ./scripts/server
 ```
 
-This script will run `npm install` and then start a development server at `http://localhost:3000`.
+Note that the server will also be accessible locally at port 3000, but that on this port there'll be no
+support for debugging redirects or environment variables. Use port 8888.
 
 Initial builds of a page on the development server can be quite slow - a few seconds - but
 after the initial build changes should be picked up quickly and the development server
@@ -139,42 +142,45 @@ should be snappy to use.
 
 ### Running Verification Scripts
 
-After you have made changes to the website, you should run the `verify` scripts
-to ensure things like spelling and links are valid.
-
+After you have made changes to the website, you should run the `verify` script
+to ensure things like spelling are valid.
 To run all verification checks:
 
 ```bash
 ./scripts/verify
 ```
 
-This will automatically run a number of checks against your local environment.
+This will automatically run a number of checks against your local environment, including:
 
-If you want to be thorough, you can run `./scripts/verify-release` to also regenerate API / CLI docs
-before verification, but that check is slower and unlikely to provide any useful insight.
+* Lint checks on the nextjs code using [next lint](https://nextjs.org/docs/basic-features/eslint).
+* Link checks on all pages using [markdown-link-check](https://github.com/tcort/markdown-link-check).
+* Spelling in all pages using [mdspell](https://github.com/lukeapage/node-markdown-spellcheck).
+* Formatting of the markdown in all pages using [remark](https://github.com/remarkjs/remark).
+
+> ℹ️ All these checks are also run automatically for pull requests.
+> The results will be reported in the [checks summary](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks) at the bottom of your GitHub PR.
+> Read the [cert-manager-website-presubmits.yaml prow configuration file](https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/website/cert-manager-website-presubmits.yaml) and the [check.yaml workflow file](.github/workflows/check.yaml) for more details.
 
 ### Building for a Release
 
 On release, all output is placed into the `out/` directory.
-
-Building a full release includes re-running API + CLI doc generation for the latest
-version of cert-manager, and then running a next.js `build` followed by `export`. The full
-release process can be run through one script:
+The full release process can be run through one script:
 
 ```bash
 ./scripts/build-release
 ```
 
-If you want to test that the build still works locally, you can run `./scripts/build` to build while
-skipping regeneration of API / CLI docs.
-
 ### API / CLI Documentation Generation
 
-To generate API / CLI reference docs manually, run:
+To update the [API documentation](https://cert-manager.io/docs/reference/api-docs/) and [CLI documentation](https://cert-manager.io/docs/cli/), run:
 
 ```bash
 ./scripts/gendocs/generate
 ```
+
+This should be done before every cert-manager release (if the API or CLI flags have changed)
+and any time the API or CLI of the [satellite projects](https://cert-manager.io/docs/projects/) changes,
+and the changes should be committed.
 
 Since there are many old versions of cert-manager, none of which change regularly (or at all),
 the website build process does not re-generate documentation for older versions, on the assumption

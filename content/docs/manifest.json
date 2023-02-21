@@ -47,6 +47,10 @@
               "path": "/docs/installation/verify.md"
             },
             {
+              "title": "Feature flags",
+              "path": "/docs/installation/featureflags.md"
+            },
+            {
               "title": "Upgrading",
               "routes": [
                 {
@@ -178,6 +182,10 @@
             {
               "title": "Signature Verification",
               "path": "/docs/installation/code-signing.md"
+            },
+            {
+              "title": "Best Practice",
+              "path": "/docs/installation/best-practice.md"
             }
           ]
         },
@@ -343,7 +351,16 @@
             },
             {
               "title": "trust-manager",
-              "path": "/docs/projects/trust-manager.md"
+              "routes": [
+                {
+                    "title": "Introduction",
+                    "path": "/docs/projects/trust-manager/README.md"
+                },
+                {
+                    "title": "API Reference",
+                    "path": "/docs/projects/trust-manager/api-reference.md"
+                }
+              ]
             }
           ]
         },
@@ -471,6 +488,10 @@
             {
               "title": "Developing with Kind",
               "path": "/docs/contributing/kind.md"
+            },
+            {
+              "title": "Implementing Feature Gates",
+              "path": "/docs/contributing/featuregates.md"
             },
             {
               "title": "Google Season of Docs",

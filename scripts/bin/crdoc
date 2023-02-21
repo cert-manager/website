@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+# Copyright 2023 The cert-manager Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# This script downloads a crdoc binary for local use if such a binary doesn't already exist.
+
+REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
+VERSION="0.6.2"
+
+source "${REPO_ROOT}/scripts/bin/lib.sh"
+
+crdoc="${REPO_ROOT}/bin/crdoc"
+mkdir -p "$(dirname "$crdoc")"
+
+if ! command -v curl &>/dev/null; then
+    echo "Ensure curl command is installed"
+    exit 1
+fi
+
+if ! test -f "${crdoc}"; then
+    echo "+++ Fetching crdoc binary and saving to $crdoc"
+    detect_and_set_goos_goarch
+
+    tmpdir="$(mktemp -d)"
+
+    if [ "$GOOS" = "darwin" ]; then
+        curl -Lo "${tmpdir}/file" "https://github.com/fybrik/crdoc/releases/download/v${VERSION}/crdoc_${VERSION}_Darwin_x86_64.tar.gz"
+
+        check_sha "${tmpdir}/file" "dbc00cbb59115a8fea8c3027423c14e3209f13d7019a9a3be267b2760b85d28a"
+    elif [ "$GOOS" = "linux" ]; then
+        curl -Lo "${tmpdir}/file" "https://github.com/fybrik/crdoc/releases/download/v${VERSION}/crdoc_${VERSION}_Linux_x86_64.tar.gz"
+
+        check_sha "${tmpdir}/file" "8a513a59c78462b65ef2bfe0bfc5d4981d7d6632c627d01ba1431c3afda0b251"
+    else
+        echo "Unsupported OS: $GOOS"
+        exit 1
+    fi
+
+	tar xfO "${tmpdir}/file" "crdoc" > ${crdoc}
+
+    chmod +x "${crdoc}"
+    rm -rf "${tmpdir}"
+fi
+
+"${crdoc}" "$@"

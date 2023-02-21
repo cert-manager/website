@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 import { GA_TRACKING_ID } from '../lib/ga'
 
 class MyDocument extends Document {

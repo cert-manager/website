@@ -13,20 +13,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# This script runs a local development server fronted by the netlify CLI.
+# This allows redirect rules and netlify environment variables to be tested locally.
+# Use port 8888 since that'll have working redirects!
 
 set -o errexit
 set -o nounset
 set -o pipefail
 
-# This script runs a local server for developing the website, with hot-reload
-# functionality.
-
-# If you've already run "npm install", running "npm run dev" in the root of this repo
-# should work too - you don't need to use this script.
-
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 
 cd "${REPO_ROOT}"
 
-npm install
-npm run dev
+netlify dev --offline

@@ -4,7 +4,7 @@ description: 'cert-manager core concepts: CertificateRequests'
 ---
 
 The `CertificateRequest` is a namespaced resource in cert-manager that is used
-to request x509 certificates from an [`Issuer`](./issuer.md). The resource
+to request X.509 certificates from an [`Issuer`](./issuer.md). The resource
 contains a base64 encoded string of a PEM encoded certificate request which is
 sent to the referenced issuer. A successful issuance will return a signed
 certificate, based on the certificate signing request. `CertificateRequests` are

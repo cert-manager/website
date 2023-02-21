@@ -19,14 +19,17 @@ export default function Footer() {
           <p>
             For a list of trademarks of The Linux Foundation, please see our
             &nbsp;
-            <Link href="https://www.linuxfoundation.org/trademark-usage/">
-              <a target="_blank" className="no-underline">
+            <Link
+              href="https://www.linuxfoundation.org/trademark-usage/"
+              target="_blank"
+              className="no-underline">
+              
                 Trademark Usage page.
-              </a>
+              
             </Link>
           </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

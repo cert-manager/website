@@ -34,7 +34,7 @@ no extra configuration however `v1.15` requires the following feature gate set:
 
 You must have a working installation of cert-manager present on the cluster.
 Instructions on how to install cert-manager can be found
-[on cert-manager.io](https://cert-manager.io/docs/installation/).
+[on cert-manager.io](../installation/README.md).
 
 To install the csi-driver, use helm install:
 
@@ -122,7 +122,7 @@ this process has been completed.
 
 For more information on how to set up issuers for your cluster, refer to the
 cert-manager documentation
-[here](https://cert-manager.io/docs/configuration/). **Note** it is not
+[here](../configuration/README.md). **Note** it is not
 possible to use `SelfSigned` Issuers with the CSI Driver. In order for
 cert-manager to self sign a certificate, it needs access to the secret
 containing the private key that signed the certificate request to sign the end
@@ -194,9 +194,9 @@ volumeAttributes:
 ## Requesting Certificates using the mounting Pod's ServiceAccount
 
 If the flag `--use-token-request` is enabled on the csi-driver DaemonSet, the
-[CertificateRequest](../concepts/certificaterequest/) resource will be created
+[CertificateRequest](../concepts/certificaterequest.md) resource will be created
 by the mounting Pod's ServiceAccount. This can be pared with
-[approver-policy](./approver-policy/) to enable advanced policy on a per
+[approver-policy](./approver-policy.md) to enable advanced policy on a per
 ServiceAccount basis.
 
 Ensure to give permissions to Pod ServiceAccounts to create CertificateRequests

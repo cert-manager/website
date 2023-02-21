@@ -1,10 +1,10 @@
 ---
 title: API Reference
 description: >-
-  Learn about the cert-manager API which includes Custom Resources such as
-  Certificate, CertificateRequest, Issuer and ClusterIssuer.
+  cert-manager API documentation, including Custom Resources such as
+  Certificate, CertificateRequest, Issuer and ClusterIssuer
 ---
-Learn about the cert-manager API which includes Custom Resources such as Certificate, CertificateRequest, Issuer and ClusterIssuer.
+<p>cert-manager API documentation, including various Custom Resource Definitions</p>
 <p>Packages:</p>
 <ul>
   <li>
@@ -24,7 +24,7 @@ Learn about the cert-manager API which includes Custom Resources such as Certifi
 <div>
   <p>Package v1 is the v1 version of the API.</p>
 </div>
-Resource Types:
+<p>Resource Types:</p>
 <ul>
   <li>
     <a href="#acme.cert-manager.io/v1.Challenge">Challenge</a>
@@ -750,12 +750,12 @@ Resource Types:
       <td>
         <code>parentRefs</code>
         <br />
-        <em>[]sigs.k8s.io/gateway-api/apis/v1alpha2.ParentReference</em>
+        <em>[]sigs.k8s.io/gateway-api/apis/v1beta1.ParentReference</em>
       </td>
       <td>
         <p>
           When solving an HTTP-01 challenge, cert-manager creates an HTTPRoute. cert-manager needs to know which parentRefs should be used when creating the HTTPRoute. Usually, the parentRef references a Gateway. See:
-          <a href="https://gateway-api.sigs.k8s.io/v1alpha2/api-types/httproute/#attaching-to-gateways">https://gateway-api.sigs.k8s.io/v1alpha2/api-types/httproute/#attaching-to-gateways</a>
+          <a href="https://gateway-api.sigs.k8s.io/api-types/httproute/#attaching-to-gateways">https://gateway-api.sigs.k8s.io/api-types/httproute/#attaching-to-gateways</a>
         </p>
       </td>
     </tr>
@@ -1233,13 +1233,24 @@ Resource Types:
     </tr>
     <tr>
       <td>
+        <code>caBundle</code>
+        <br />
+        <em>[]byte</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Base64-encoded bundle of PEM CAs which can be used to validate the certificate chain presented by the ACME server. Mutually exclusive with SkipTLSVerify; prefer using CABundle to prevent various kinds of security vulnerabilities. If CABundle and SkipTLSVerify are unset, the system certificate bundle inside the container is used to validate the TLS connection.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>skipTLSVerify</code>
         <br />
         <em>bool</em>
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Enables or disables validation of the ACME server TLS certificate. If true, requests to the ACME server will not have their TLS certificate validated (i.e. insecure connections will be allowed). Only enable this option in development environments. The cert-manager system installed roots will be used to verify connections to the ACME server if this is false. Defaults to false.</p>
+        <p>INSECURE: Enables or disables validation of the ACME server TLS certificate. If true, requests to the ACME server will not have the TLS certificate chain validated. Mutually exclusive with CABundle; prefer using CABundle to prevent various kinds of security vulnerabilities. Only enable this option in development environments. If CABundle and SkipTLSVerify are unset, the system certificate bundle inside the container is used to validate the TLS connection. Defaults to false.</p>
       </td>
     </tr>
     <tr>
@@ -2443,7 +2454,7 @@ Resource Types:
 <div>
   <p>Package v1 is the v1 version of the API.</p>
 </div>
-Resource Types:
+<p>Resource Types:</p>
 <ul>
   <li>
     <a href="#cert-manager.io/v1.Certificate">Certificate</a>
@@ -4470,7 +4481,7 @@ Resource Types:
         <em>bool</em>
       </td>
       <td>
-        <p> Create enables JKS keystore creation for the Certificate. If true, a file named <code>keystore.jks</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>. The keystore file will only be updated upon re-issuance. A file named <code>truststore.jks</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority </p>
+        <p> Create enables JKS keystore creation for the Certificate. If true, a file named <code>keystore.jks</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>. The keystore file will be updated immediately. A file named <code>truststore.jks</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority </p>
       </td>
     </tr>
     <tr>
@@ -4668,7 +4679,7 @@ Resource Types:
         <em>bool</em>
       </td>
       <td>
-        <p> Create enables PKCS12 keystore creation for the Certificate. If true, a file named <code>keystore.p12</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>. The keystore file will only be updated upon re-issuance. A file named <code>truststore.p12</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority </p>
+        <p> Create enables PKCS12 keystore creation for the Certificate. If true, a file named <code>keystore.p12</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>. The keystore file will be updated immediately. A file named <code>truststore.p12</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority </p>
       </td>
     </tr>
     <tr>
@@ -4950,7 +4961,7 @@ Resource Types:
       </td>
       <td>
         <em>(Optional)</em>
-        <p>PEM-encoded CA bundle (base64-encoded) used to validate Vault server certificate. Only used if the Server URL is using HTTPS protocol. This parameter is ignored for plain HTTP protocol connection. If not set the system root certificates are used to validate the TLS connection. Mutually exclusive with CABundleSecretRef. If neither CABundle nor CABundleSecretRef are defined, the cert-manager controller system root certificates are used to validate the TLS connection.</p>
+        <p>Base64-encoded bundle of PEM CAs which will be used to validate the certificate chain presented by Vault. Only used if using HTTPS to connect to Vault and ignored for HTTP connections. Mutually exclusive with CABundleSecretRef. If neither CABundle nor CABundleSecretRef are defined, the certificate bundle in the cert-manager controller container is used to validate the TLS connection.</p>
       </td>
     </tr>
     <tr>
@@ -4963,7 +4974,7 @@ Resource Types:
       </td>
       <td>
         <em>(Optional)</em>
-        <p>CABundleSecretRef is a reference to a Secret which contains the CABundle which will be used when connecting to Vault when using HTTPS. Mutually exclusive with CABundle. If neither CABundleSecretRef nor CABundle are defined, the cert-manager controller system root certificates are used to validate the TLS connection. If no key for the Secret is specified, cert-manager will default to &lsquo;ca.crt&rsquo;.</p>
+        <p>Reference to a Secret containing a bundle of PEM-encoded CAs to use when verifying the certificate chain presented by Vault when using HTTPS. Mutually exclusive with CABundle. If neither CABundle nor CABundleSecretRef are defined, the certificate bundle in the cert-manager controller container is used to validate the TLS connection. If no key for the Secret is specified, cert-manager will default to &lsquo;ca.crt&rsquo;.</p>
       </td>
     </tr>
   </tbody>
@@ -5148,7 +5159,7 @@ Resource Types:
       </td>
       <td>
         <em>(Optional)</em>
-        <p>CABundle is a PEM encoded TLS certificate to use to verify connections to the TPP instance. If specified, system roots will not be used and the issuing CA for the TPP instance must be verifiable using the provided root. If not specified, the connection will be verified using the cert-manager system root certificates.</p>
+        <p>Base64-encoded bundle of PEM CAs which will be used to validate the certificate chain presented by the TPP server. Only used if using HTTPS; ignored for HTTP. If undefined, the certificate bundle in the cert-manager controller container is used to validate the chain.</p>
       </td>
     </tr>
   </tbody>
@@ -5261,7 +5272,7 @@ Resource Types:
 <div>
   <p>Package v1 contains meta types for cert-manager APIs</p>
 </div>
-Resource Types:
+<p>Resource Types:</p>
 <ul></ul>
 <h3 id="meta.cert-manager.io/v1.ConditionStatus"> ConditionStatus (<code>string</code> alias) </h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateCondition">CertificateCondition</a>, <a href="#cert-manager.io/v1.CertificateRequestCondition">CertificateRequestCondition</a>, <a href="#cert-manager.io/v1.IssuerCondition">IssuerCondition</a>) </p>
@@ -5421,7 +5432,7 @@ Resource Types:
 <div>
   <p>Package v1alpha1 is the v1alpha1 version of the webhook config API.</p>
 </div>
-Resource Types:
+<p>Resource Types:</p>
 <ul></ul>
 <h3 id="webhook.config.cert-manager.io/v1alpha1.DynamicServingConfig">DynamicServingConfig</h3>
 <p> (<em>Appears on:</em> <a href="#webhook.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>) </p>
@@ -5659,5 +5670,5 @@ Resource Types:
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>da3265115</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>7ebb5f515</code>. </em>
 </p>

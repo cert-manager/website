@@ -31,7 +31,7 @@ We set ourselves to rewrite this page with the goal of making it error-focused,
 meaning that the user would just be able to look for their particular error and
 start debugging it. We called it "The Definitive Debugging Guide for the
 cert-manager Webhook Pod", and it can be found
-[here](../../../troubleshooting/webhook/).
+[here](../../../troubleshooting/webhook.md).
 
 ### 12 Aug 2022: Improved the layout of the navigation menu
 

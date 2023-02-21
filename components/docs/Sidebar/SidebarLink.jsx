@@ -15,14 +15,14 @@ export default function SidebarLink({
     'font-medium opacity-60 w-full': active
   })
   return (
-    <Link href={href}>
-      <a
-        className={linkClasses}
-        tabIndex={parentOpen ? 0 : -1}
-        onClick={() => setSidebarCollapsed(true)}
-      >
-        {caption}
-      </a>
-    </Link>
-  )
+    (<Link
+      href={href}
+      className={linkClasses}
+      tabIndex={parentOpen ? 0 : -1}
+      onClick={() => setSidebarCollapsed(true)}>
+
+      {caption}
+
+    </Link>)
+  );
 }

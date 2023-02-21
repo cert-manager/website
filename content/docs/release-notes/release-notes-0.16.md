@@ -20,7 +20,7 @@ private key management and renewal.
 
 In `v0.15` we added the new certificate controllers under a feature gate to allow users to test these and gather feedback.
 Thanks to everyone testing these and reporting issues we were able to fix issues and improve the controller.
-In `v0.16` this controller is now the default one in cert-manager. 
+In `v0.16` this controller is now the default one in cert-manager.
 
 For more information on this, we invite you to read our [design document](https://github.com/cert-manager/cert-manager/pull/2753).
 
@@ -31,16 +31,16 @@ cert-manager `v0.15` included a kubectl plugin that allows users to interact wit
 In this release we have added a new sub-command to the cert-manager CLI which allows users to sign certificates on their computer
 or inside a container.
 
-The `kubectl cert-manager create certificaterequest` command creates a new CertificateRequest 
+The `kubectl cert-manager create certificaterequest` command creates a new CertificateRequest
 resource based on the YAML manifest of a Certificate resource as specified by `--from-certificate-file` flag.
- 
+
 For example this will create a CertificateRequest resource with the name "my-cr" based on the Certificate described in `my-certificate.yaml` while storing the
 private key and X.509 certificate in `my-cr.key` and `my-cr.crt` respectively.
 ```console
 $ kubectl cert-manager create certificaterequest my-cr --from-certificate-file my-certificate.yaml --fetch-certificate --timeout 20m
 ```
 
-More information can be found on our [kubectl plugin page](../usage/kubectl-plugin.md).
+More information can be found on our [kubectl plugin page](../reference/cmctl.md#legacy-kubectl-plugin).
 
 ## `v1beta1` API
 
@@ -77,7 +77,7 @@ ACME Challenge:
 
 If you're using Kubernetes 1.15 or higher, conversion webhooks will allow you seamlessly interact with `v1alpha2`, `v1alpha3` and `v1beta1`
 API versions at the same time. This allows you to use the new API version without having to modify or redeploy your older resources.
-Users of the `legacy` version of cert-manager will still only have the `v1alpha2` API. 
+Users of the `legacy` version of cert-manager will still only have the `v1alpha2` API.
 
 ### `kubectl cert-manager convert` tool
 
@@ -88,4 +88,4 @@ The `kubectl cert-manager convert` command will be able to convert your manifest
 $ kubectl cert-manager convert --output-version cert-manager.io/v1beta1 cert.yaml
 ```
 
-More information can be found on our [kubectl plugin page](../usage/kubectl-plugin.md).
+More information can be found on our [kubectl plugin page](../reference/cmctl.md#legacy-kubectl-plugin).

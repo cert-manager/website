@@ -179,6 +179,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-hetzner`](https://github.com/vadimkim/cert-manager-webhook-hetzner)
 - [`cert-manager-webhook-yandex-cloud`](https://github.com/malinink/cert-manager-webhook-yandex-cloud)
 - [`cert-manager-webhook-netcup`](https://github.com/aellwein/cert-manager-webhook-netcup)
+- [`cert-manager-webhook-pdns`](https://github.com/zachomedia/cert-manager-webhook-pdns)
 
 You can find more information on how to configure webhook providers [here](./webhook.md).
 

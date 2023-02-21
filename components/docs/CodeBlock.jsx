@@ -34,7 +34,7 @@ const doneIcon = (
   </svg>
 )
 
-export default function CodeBlock({ children, theme = github }) {
+export default function CodeBlock({ children, theme = 'github' }) {
   const className = children.props.className || ''
   const [copied, setCopied] = useState(copyIcon)
   const language = className.replace(/language-/, '')
