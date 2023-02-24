@@ -79,6 +79,7 @@ helm install \
   --namespace cert-manager \
   --create-namespace \
   --version v1.11.0 \
+  # --set installCRDs=true
   --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
   --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
 ```
