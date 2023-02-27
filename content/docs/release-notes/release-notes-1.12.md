@@ -16,4 +16,4 @@ cert-manager in a secretless manner. With this new feature, cert-manager will
 create an ephemeral service account token on your behalf and use that to
 authenticate to Vault.
 
-> 📖 Read about [Secretless Authentication with a Service Account](../configuration/vault#secretless-authentication-with-a-service-account).
+> 📖 Read about [Secretless Authentication with a Service Account](../configuration/vault.md#secretless-authentication-with-a-service-account).
