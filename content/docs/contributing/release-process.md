@@ -581,19 +581,21 @@ is used for 1.6 and 1.7 - just remember to change the version of `cmrel` you ins
 
 ## Documentation Process
 
-Everytime a PR is opened on the cert-manager/website repository, you will need
-to check that the "base branch" is correct.
+Authors of PRs to cert-manager/website need to check that the "base branch" is
+correct:
 
 |                Description                 |  Base branch   |     Folder     |
 |--------------------------------------------|----------------|----------------|
 | Documentation PR for an existing feature   | `master`       | `content/docs` |
 | Documentation PR for an unreleased feature | `release-next` | `content/docs` |
 
-When creating a documentation PR for an unreleased feature, you will need to
-fast-forward the `release-next` branch to `master` before asking for a review of
-the PR:
+In rare occasions, when writing documentation for an unreleased feature, you may
+notice that some recent changes in `master` aren't present in `release-next`. If
+that is a problem, you will want to update `release-next` branch with the latest
+changes from `master`. To update `release-next` with the changes made to
+`master`, follow these steps:
 
-1. Create a PR to fast-forward `release-next` to `master` using [this magic
+1. Create a PR to merge `master` into `release-next` using [this magic
    link][ff-release-next].
 2. If you see the label `dco-signoff: no`, add a comment on the PR with:
 
@@ -603,7 +605,5 @@ the PR:
 
    It is necessary because some the merge commits have been written by the bot
    and do not have a DCO signoff.
-3. Once the PR is merged, look at your PR and check that the unrelated commits
-   that were previously showing are gone.
 
 [ff-release-next]: https://github.com/cert-manager/website/compare/release-next...master?quick_pull=1&title=%5Brelease-next%5D+Fast-forward+to+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
