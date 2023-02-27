@@ -163,7 +163,7 @@ Kubernetes service account token can be provided in two ways:
 
 With the secretless authentication with a service account, cert-manager creates
 an ephemeral service account token using the TokenRequest API and uses it to
-authenticates with Vault. These tokens are short-lived (10 minutes) and are
+authenticate with Vault. These tokens are short-lived (10 minutes) and are
 never stored to disk.
 
 This is the recommended authentication method because it does not rely on the
