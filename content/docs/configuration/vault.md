@@ -230,7 +230,7 @@ spec:
 > **Issuer vs. ClusterIssuer:** With an Issuer resource, you can only refer to a
 > service account located in the same namespace as the Issuer. With a
 > ClusterIssuer, the service account must be located in the namespace that is
-> configured by the flag `--cluster-scoped namespace`.
+> configured by the flag `--cluster-resource-namespace`.
 
 To create the role in Vault, you can use the following command:
 
@@ -249,7 +249,7 @@ Issuer or ClusterIssuer. The syntax is the following:
 
 ```yaml
 "vault://<namespace>/<issuer-name>"   # For an Issuer.
-"vault://<issuer-name>"               # For a ClusterIssuer.
+"vault://<cluster-issuer-name>"       # For a ClusterIssuer.
 ```
 
 The expiration duration for the Kubernetes tokens that are requested is
