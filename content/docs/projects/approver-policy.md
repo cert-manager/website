@@ -72,6 +72,14 @@ selector.
 least one policy is appropriate for the request but none of those permit the
 request, the request is denied.**
 
+A denied CertificateRequest is considered to be permanently failed. If it was
+created for a Certificate resource, the issuance will be retried with
+[exponential
+backoff](../faq/README.md#what-happens-if-issuance-fails-will-it-be-retried)
+like all other permanent issuance failures. A CertificateRequest that is neither
+approved nor denied (because no matching policy was found) will not be further
+processed by cert-manager until it gets either approved or denied.
+
 CertificateRequestPolicies are cluster scoped resources that can be thought of
 as "policy profiles". They describe any request that is approved by that
 policy. Policies are bound to Kubernetes users and ServiceAccounts using RBAC.
