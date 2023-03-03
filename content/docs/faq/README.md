@@ -97,13 +97,33 @@ Due to the nature of the Kubernetes event mechanism these will be purged after a
 
 <a id="alternative-certificate-chain" className="hidden-link"></a>
 
-cert-manager will retry a failed issuance except for a few rare edge cases where manual intervention is needed.
+cert-manager will retry a failed issuance except for a few rare edge cases where
+manual intervention is needed.
 
-If an issuance fails because of a temporary error, it will be retried again with a short exponential backoff (currently 5 seconds to 5 minutes). A temporary error is one that does not result in a failed `CertificateRequest`.
+We aim to retry after a short delay in case of ephemeral failures such as
+network connection errors and with a longer exponentially increasing delay after
+'terminal' failures.
 
-If the issuance fails with an error that resulted in a failed `CertificateRequest`, it will be retried with a longer binary exponential backoff (1 hour to 32 hours) to avoid overwhelming external services.
+You can observe that latest issuance has terminally failed if the `Certificate`
+has `Issuing` condition set to false and has `status.lastFailureTime` set. In
+this case the issuance will be retried after an exponentially increasing delay
+(1 to 32 hours) by creating a new `CertficateRequest`. You can trigger an
+immediate renewal using the [`cmctl renew`
+command](../reference/cmctl.md#renew). Terminal failures occur if the issuer
+sets the `CertificateRequest` to failed (for example if CA rejected the request
+due to a rate limit being reached) or invalid or if the `CertificateRequest`
+gets denied by an approver.
 
-You can always trigger immediate renewal using the [`cmctl renew` command](../reference/cmctl.md#renew)
+Ephemeral failures result in the same `CertificateRequest` being re-synced after
+a short delay (up to 5 minutes). Typically they can only be observed in
+cert-manager controller logs.
+
+If it appears the issuance has got stuck and `cmctl renew` does not work, you
+can delete the latest `CertificateRequest`. This is mostly a harmless action
+(the worst that could happen is duplicate issuance if there was a potentially
+successful one in progress), but we do aim for this to not be part of user flow-
+do reach out if you think you have found a case where the flow could be
+improved.
 
 ### Is ECC (elliptic-curve cryptography) supported?
 
