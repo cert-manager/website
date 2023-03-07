@@ -17,3 +17,9 @@ create an ephemeral service account token on your behalf and use that to
 authenticate to Vault.
 
 > 📖 Read about [Secretless Authentication with a Service Account](../configuration/vault.md#secretless-authentication-with-a-service-account).
+
+### Support for `ingressClassName` in the HTTP-01 solver
+
+cert-manager now supports the `ingressClassName` field in the HTTP-01 solver. We
+recommend using `ingressClassName` instead of the field `class` in your Issuers
+and ClusterIssuers.
