@@ -553,6 +553,10 @@ NetworkPolicy
 mjudeikis
 rgl
 1password
+secretless
+TokenRequest
+v1.12.0
+v1.12.0.
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
