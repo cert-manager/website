@@ -52,18 +52,33 @@ The HTTP01 Issuer supports a number of additional options.  For full details on
 the range of options available, read the [reference
 documentation](../../../reference/api-docs.md#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01).
 
+### `ingressClassName`
+
+> The field `ingressClassName` was added in cert-manager 1.12.
+
+If the `ingressClassName` field is specified, cert-manager will create new
+`Ingress` resources in order to route traffic to the `acmesolver` pods, which
+are responsible for responding to ACME challenge validation requests.
+
+This is the recommended way of configuring the Ingress controller. Most Ingress
+controllers support `ingressClassName`, with the notable exception of
+ingress-gce.
+
+If `class` and `ingressClassName` are not specified, and `name` is also not
+specified, cert-manager will default to create *new* `Ingress` resources but
+will **not** set the ingress class on these resources, meaning *all* ingress
+controllers installed in your cluster will serve traffic for the challenge
+solver, potentially incurring additional cost.
+
 ### `class`
 
-If the `class` field is specified, cert-manager will create new `Ingress`
-resources in order to route traffic to the `acmesolver` pods, which are
-responsible for responding to ACME challenge validation requests.
+If the `class` field is specified, a new ingress resource with a randomly
+generated name will be created in order to solve the challenge. This new
+resource will have an annotation with key `kubernetes.io/ingress.class` and
+value set to the value of the `class` field. 
 
-If this field is not specified, and `name` is also not specified,
-cert-manager will default to create *new* `Ingress` resources but will **not**
-set the ingress class on these resources, meaning *all* ingress controllers
-installed in your cluster will serve traffic for the challenge solver,
-potentially incurring additional cost.
-
+This field is only recommended with ingress-gce. ingress-gce doesn't support the
+`ingressClassName` field.
 
 ### `name`
 
