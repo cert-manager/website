@@ -553,9 +553,8 @@ kind: Ingress
 metadata:
   name: frontend-ingress
   namespace: demo
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
 spec:
+  ingressClassName: nginx
   tls:
   - hosts:
     - example.com

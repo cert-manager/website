@@ -156,7 +156,7 @@ spec:
     solvers:
     - http01:
         ingress:
-          class: nginx
+          ingressClassName: nginx
 ```
 
 We then submit this file to our Kubernetes cluster:

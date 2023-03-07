@@ -41,7 +41,7 @@ spec:
     - selector: {}
       http01:
         ingress:
-          class: nginx
+          ingressClassName: nginx
 ```
 
 We have specified the ACME server URL for Let's Encrypt's [staging

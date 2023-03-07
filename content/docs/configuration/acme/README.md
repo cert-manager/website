@@ -65,7 +65,7 @@ spec:
     solvers:
     - http01:
         ingress:
-          class: nginx
+          ingressClassName: nginx
 ```
 
 Solvers come in the form of [`dns01`](./dns01/README.md) and
@@ -123,8 +123,9 @@ spec:
     solvers:
     - http01:
         ingress:
-          class: nginx
+          ingressClassName: nginx
 ```
+
 > Note: cert-manager versions pre-`v1.3.0` also required users to specify the
 > MAC algorithm for EAB by setting
 > `Issuer.spec.acme.externalAccountBinding.keyAlgorithm` field. This field is
@@ -296,7 +297,7 @@ spec:
     solvers:
     - http01:
         ingress:
-          class: nginx
+          ingressClassName: nginx
       selector:
         matchLabels:
           "use-http01-solver": "true"
