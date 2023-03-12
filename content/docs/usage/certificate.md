@@ -267,11 +267,54 @@ associated with compromised keys.
 
 ## Cleaning up Secrets when Certificates are deleted
 
-By default, cert-manager does not delete the `Secret` resource containing the signed certificate when the corresponding `Certificate` resource is deleted.
-This means that deleting a `Certificate` won't take down any services that are currently relying on that certificate, but the certificate will no longer be renewed.
+By default, cert-manager does not delete the `Secret` resource containing the
+signed certificate when the corresponding `Certificate` resource is deleted.
+This means that deleting a `Certificate` won't take down any services that are
+currently relying on that certificate, but the certificate will no longer be renewed.
 The `Secret` needs to be manually deleted if it is no longer needed.
 
-If you would prefer the `Secret` to be deleted automatically when the `Certificate` is deleted, you need to configure your installation to pass the `--enable-certificate-owner-ref` flag to the controller.
+If you would prefer the `Secret` to be deleted automatically when the `Certificate`
+is deleted, you need to configure your installation to pass the 
+`--default-secret-cleanup-policy=OnDelete` flag to the controller.
+
+Also `Secret` deletion can be configured per-certificate, by setting
+`Certificate` `spec.cleanupPolicy` field.
+
+#### `cleanupPolicy`
+
+`cleanupPolicy` is when this field is set to `OnDelete`, the owner reference
+is always created on the Secret resource and the secret will be automatically
+removed when the certificate resource is deleted. When this field is set to `Never`,
+the owner reference is never created on the Secret resource and the secret will not
+be automatically removed when the certificate resource is deleted.
+If the value of this field is unset this field "inherits" the value of
+the flag `--default-secret-cleanup-policy`.
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: my-cert
+spec:
+  ...
+  secretName: my-cert-tls
+  cleanupPolicy: OnDelete
+
+# Results in:
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-cert-tls
+  ownerReferences:
+  - apiVersion: cert-manager.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Certificate
+    name: my-cert
+    ...
+type: kubernetes.io/tls
+```
 
 ## Renewal
 
