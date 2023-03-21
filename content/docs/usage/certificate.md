@@ -274,11 +274,7 @@ currently relying on that certificate, but the certificate will no longer be ren
 The `Secret` needs to be manually deleted if it is no longer needed.
 
 If you would prefer the `Secret` to be deleted automatically when the `Certificate`
-is deleted, you need to configure your installation to pass the 
-`--default-secret-cleanup-policy=OnDelete` flag to the controller.
-
-Also `Secret` deletion can be configured per-certificate, by setting
-`Certificate` `spec.cleanupPolicy` field.
+is deleted, you will need to set `cleanupPolicy: OnDelete` on the Certificate resource. Alternatively, you can add the flag `--default-secret-cleanup-policy=OnDelete` to the cert-manager controller pod in case you want all Secret resources to be cleaned up by default.
 
 #### `cleanupPolicy`
 
