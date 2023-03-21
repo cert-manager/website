@@ -295,9 +295,11 @@ spec:
   ...
   secretName: my-cert-tls
   cleanupPolicy: OnDelete
+```
 
-# Results in:
+Results in:
 
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
