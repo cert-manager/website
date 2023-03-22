@@ -48,8 +48,6 @@ cleanup() {
 }
 trap cleanup EXIT
 
-"${REPO_ROOT}/scripts/update-node_modules"
-
 # Create fake GOPATH
 echo "+++ Creating temporary GOPATH"
 export GOPATH="${tmpdir}/go"
