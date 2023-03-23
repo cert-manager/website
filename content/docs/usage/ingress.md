@@ -49,13 +49,25 @@ spec:
 You can specify the following annotations on Ingress resources in order to
 trigger Certificate resources to be automatically created:
 
-- `cert-manager.io/issuer`:  the name of an Issuer to acquire the certificate
-  required for this Ingress. The Issuer *must* be in the same namespace as the
-  Ingress resource.
+- `cert-manager.io/issuer`:  the name of the issuer that should issue the certificate
+  required for this Ingress.
 
-- `cert-manager.io/cluster-issuer`: the name of a ClusterIssuer to acquire the
-  certificate required for this Ingress. It does not matter which namespace your
-  Ingress resides, as ClusterIssuers are non-namespaced resources.
+  > ⚠️ This annotation does _not_ assume a namespace scoped issuer. It will
+  default to cert-manager.io Issuer, however in case of external issuer types,
+  this should be used for both namespaced and cluster scoped issuer types.
+
+  > ⚠️ If a namespace scoped issuer is used then the issuer *must* be in
+  the same namespace as the Ingress resource.
+
+- `cert-manager.io/cluster-issuer`: the name of a cert-manager.io ClusterIssuer
+  to acquire the certificate required for this Ingress. It does not matter which
+  namespace your Ingress resides, as ClusterIssuers are non-namespaced
+  resources.
+
+  > ⚠️ This annotation is a shortcut to refer to to
+  cert-manager.io ClusterIssuer without having to specify group and kind. It is
+  _not_ intended to be used to specify an external cluster-scoped issuer- please
+  use `cert-manager.io/issuer` annotation for those.
 
 - `cert-manager.io/issuer-kind`: the kind of the external issuer resource, for
   example `AWSPCAIssuer`. This is only necessary for out-of-tree issuers.
