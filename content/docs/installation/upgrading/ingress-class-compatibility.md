@@ -3,10 +3,6 @@ title: Notes on the breaking change with the `class` field that happened in cert
 description: 'cert-manager installation: Notes on ingress classes and safe upgrades'
 ---
 
-<div className="info">
-
-⚠️ This document focuses on the `class` field of the Issuer and ClusterIssuer
-resources and the annotation `kubernetes.io/ingress.class`.
 
 > ⚠️ This document focuses on the `class` field of the Issuer and ClusterIssuer
 > resources and the annotation `kubernetes.io/ingress.class`. If you are
