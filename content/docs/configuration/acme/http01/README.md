@@ -66,7 +66,8 @@ are responsible for responding to ACME challenge validation requests.
 
 This is the recommended way of configuring the Ingress controller. Most Ingress
 controllers support `ingressClassName`, with the notable exception of
-ingress-gce.
+ingress-gce (as per the page [Configure Ingress for external load
+balancing](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress)).
 
 If `class` and `ingressClassName` are not specified, and `name` is also not
 specified, cert-manager will default to create *new* `Ingress` resources but
@@ -76,13 +77,13 @@ solver, potentially incurring additional cost.
 
 ### `class`
 
-If the `class` field is specified, a new ingress resource with a randomly
+If the `class` field is specified, a new Ingress resource with a randomly
 generated name will be created in order to solve the challenge. This new
 resource will have an annotation with key `kubernetes.io/ingress.class` and
-value set to the value of the `class` field. 
+value set to the value of the `class` field.
 
-This field is only recommended with ingress-gce. ingress-gce doesn't support the
-`ingressClassName` field.
+This field is only recommended with ingress-gce. ingress-gce [doesn't support the
+`ingressClassName` field](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress).
 
 ### `name`
 
