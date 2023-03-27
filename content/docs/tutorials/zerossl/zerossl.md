@@ -13,9 +13,6 @@ The ZeroSSL just like Let's Encrypt and its competitors allows to create free 90
 `Please note!` \
 EAB credentials are not stored in your account, please make sure to note them somewhere. Each click on "Generate" will create a new set of credentials. Even if you create multiple credentials, all of them will remain functional.
 
-`Please note!` \
-EAB credentials are one-use only. Create additional pair for different environments.
-
 
 
 # Prerequisites
