@@ -69,12 +69,6 @@ controllers support `ingressClassName`, with the notable exception of
 ingress-gce (as per the page [Configure Ingress for external load
 balancing](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress)).
 
-If `class` and `ingressClassName` are not specified, and `name` is also not
-specified, cert-manager will default to create *new* `Ingress` resources but
-will **not** set the ingress class on these resources, meaning *all* ingress
-controllers installed in your cluster will serve traffic for the challenge
-solver, potentially incurring additional cost.
-
 ### `class`
 
 If the `class` field is specified, a new Ingress resource with a randomly
@@ -96,6 +90,16 @@ which utilize a unique IP address for each `Ingress` resource created.
 This mode should be avoided when using ingress controllers that expose a single
 IP for all ingress resources, as it can create compatibility problems with
 certain ingress-controller specific annotations.
+
+<div className="warning">
+
+If `class` and `ingressClassName` are not specified, and `name` is also not
+specified, cert-manager will default to create *new* `Ingress` resources but
+will **not** set the ingress class on these resources, meaning *all* ingress
+controllers installed in your cluster will serve traffic for the challenge
+solver, potentially incurring additional cost.
+
+</div>
 
 <h3 id="ingress-service-type">`serviceType`</h3>
 
