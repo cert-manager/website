@@ -54,7 +54,11 @@ documentation](../../../reference/api-docs.md#acme.cert-manager.io/v1.ACMEChalle
 
 ### `ingressClassName`
 
-> The field `ingressClassName` was added in cert-manager 1.12.
+<div className="info">
+
+📌 The field `ingressClassName` was added in cert-manager 1.12.
+
+</div>
 
 If the `ingressClassName` field is specified, cert-manager will create new
 `Ingress` resources in order to route traffic to the `acmesolver` pods, which

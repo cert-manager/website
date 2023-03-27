@@ -8,11 +8,11 @@ description: 'cert-manager installation: Notes on ingress classes and safe upgra
 ⚠️ This document focuses on the `class` field of the Issuer and ClusterIssuer
 resources and the annotation `kubernetes.io/ingress.class`.
 
-If you are interested in using `ingressClassName` on your Ingress resources
-when using cert-manager's HTTP-01 solver, see the page [Securing Ingress
-Resources](../../configuration/acme/http01#ingressclassname).
-
-</div>
+> ⚠️ This document focuses on the `class` field of the Issuer and ClusterIssuer
+> resources and the annotation `kubernetes.io/ingress.class`. If you are
+> interested in using `ingressClassName` on your Ingress resources when using
+> cert-manager's HTTP-01 solver, see the page [Securing Ingress
+> Resources](../../configuration/acme/http01#ingressclassname).
 
 In cert-manager v1.5.4 we made a change to the HTTP-01 code which was not
 backwards compatible. Before v1.5.4, cert-manager was using the `class` field on
