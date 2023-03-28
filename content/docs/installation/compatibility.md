@@ -84,7 +84,7 @@ helm install \
   --version ${CERT_MANAGER_VERSION} --set global.leaderElection.namespace=cert-manager
 ```
 
-The implication for a `kubectl apply` type installation is then either "you must manually update the manifests prior to installation by replacing kube-system with cert-manager" or "Don't install cert-manager using kubectl apply. Helm is the recommended solution".
+The implication for a `kubectl apply` type installation is then either "you must manually update the manifests prior to installation by replacing `kube-system` with cert-manager" or "Don't install cert-manager using kubectl apply. Helm is the recommended solution".
 
 ## AWS EKS
 
