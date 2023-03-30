@@ -136,24 +136,24 @@ documentation](../reference/api-docs.md#cert-manager.io/v1.KeyUsage).
 
 <h2 id="temporary-certificates-whilst-issuing">Temporary Certificates while Issuing</h2>
 
-On old GKE versions (`1.10.7-gke.1` and below), when requesting certificates
-[using the ingress-shim](./ingress.md) alongside the
-[`ingress-gce`](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress)
-ingress controller, `ingress-gce`
-[required](https://github.com/kubernetes/ingress-gce/pull/388) a temporary
-certificate must be present while waiting for the issuance of a signed
-certificate. Note that this issue was
-[solved](https://github.com/cert-manager/cert-manager/issues/606#issuecomment-424397233)
-in `1.10.7-gke.2`.
+When requesting certificates [using the ingress-shim](./ingress.md), the
+component `ingress-gce`, if used, requires that a temporary certificate is
+present while waiting for the issuance of a signed certificate when serving. To
+facilitate this, if the following annotation:
 
-```yaml
-# Required for GKE 1.10.7-gke.1 and below.
-cert-manager.io/issue-temporary-certificate": "true"
-```
+ ```yaml
+ cert-manager.io/issue-temporary-certificate": "true"
+ ```
 
-That made sure that a temporary self-signed certificate was present in the
-`Secret`. The self-signed certificate was replaced with the signed certificate
-later on.
+is present on the certificate, a self-signed temporary certificate will be
+present on the `Secret` until it is overwritten once the signed certificate has
+been issued.
+
+Adding the following annotation on an ingress will automatically set "issue-temporary-certificate" on the certificate:
+
+ ```yaml
+ acme.cert-manager.io/http01-edit-in-place: "true"
+ ```
 
 <h2 id="rotation-private-key">Rotation of the private key</h2>
 
