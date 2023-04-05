@@ -55,14 +55,7 @@ If the `CertificateRequest` is not `Approved`, the issuer **must** not process i
 responsible for approving `CertificateRequests` and should refuse to proceed if they find a certificate
 that is not approved.
 
-### Supporting Legacy cert-manager Releases
-
-Certificate approval was added to cert-manager in `v1.3`. In order to support older versions of cert-manager,
-external issuers may choose to sign `CertificateRequests` that will never have an approval
-condition set, but this should be feature-gated and disabled by default.
-
-If you're creating a new External Issuer today, we'd strongly recommend that you do not support such old
-versions of cert-manager.
+If a `CertificateRequest` created for an issuance associated with a `Certificate` gets [`Denied`](../concepts/certificaterequest.md#approval), the issuance will be failed by cert-manager's issuing controller.
 
 ## Conditions
 

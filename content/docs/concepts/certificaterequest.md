@@ -60,7 +60,6 @@ manage the logic and life cycle of `CertificateRequests`.
 used and relied upon by controllers or services to make decisions on what
 actions to take next on the resource.
 
-
 ### Ready
 Each ready condition consists of the pair `Ready` - a boolean value, and
 `Reason` - a string. The set of values and meanings are as follows:
@@ -68,8 +67,30 @@ Each ready condition consists of the pair `Ready` - a boolean value, and
 | Ready | Reason  | Condition Meaning                                                                                                                                                                                                                               |
 | ----- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | False | Pending | The `CertificateRequest` is currently pending, waiting for some other operation to take place. This could be that the `Issuer` does not exist yet or the `Issuer` is in the process of issuing a certificate.                                   |
-| False | Failed  | The certificate has failed to be issued - either the returned certificate failed to be decoded or an instance of the referenced issuer used for signing failed. No further action will be taken on the `CertificateRequest` by it's controller. |
-| True  | Issued  | A signed certificate has been successfully issued by the referenced `Issuer`.                                                                                                                                                                   |
+| False | Failed  | The certificate has failed to be issued - either the returned certificate failed to be decoded or an instance of the referenced issuer used for signing failed. No further action will be taken on the `CertificateRequest` by its controller and it can be considered terminally failed. |
+| True  | Issued  | A signed certificate has been successfully issued by the referenced `Issuer`.                                                                                                                                                             |
+
+This condition should be set by the issuer.
+
+### Denied
+| Denied | Reason  | Condition Meaning                                                                                                                                                                                                                               |
+| ----- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| True | \<name of the approver\> | The `CertificateRequest` was Denied by an approver. This `CertificateRequest` can be considered terminally failed.
+
+This condition should only be set by an approver.
+
+### Approved
+| Approved | Reason  | Condition Meaning                                                                                                                                                                                                                               |
+| ----- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| True | \<name of the approver\> | The `CertificateRequest` was approved by the approver. This `CertificateRequest` is approved and can be issued by the issuer.
+
+This condition should only be set by an approver.
+
+### InvalidRequest
+| InvalidRequest | Reason  | Condition Meaning                                                                                                                                                                                                                               |
+| ----- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| True | \<some reason\> | The `CertificateRequest` is invalid. This `CertificateRequest` can be considered terminally failed.
+
 
 ## UserInfo
 
