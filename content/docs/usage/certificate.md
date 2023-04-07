@@ -277,6 +277,7 @@ If you would prefer the `Secret` to be deleted automatically when the `Certifica
 is deleted, you will need to set `cleanupPolicy: OnDelete` on the Certificate resource. Alternatively, you can add the flag `--default-secret-cleanup-policy=OnDelete` to the cert-manager controller pod in case you want all Secret resources to be cleaned up by default.
 
 #### `cleanupPolicy`
+
 **FEATURE STATE**: This feature is available since cert-manager 1.12.
 
 `cleanupPolicy` is when this field is set to `OnDelete`, the owner reference
