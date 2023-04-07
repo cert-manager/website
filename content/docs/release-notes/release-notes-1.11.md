@@ -3,12 +3,25 @@ title: Release 1.11
 description: 'cert-manager release notes: cert-manager 1.11'
 ---
 
+## v1.11.1
+
+### Bug or Regression
+
+- Bump helm and other dependencies to fix CVEs, along with upgrading go and base images ([#5815](https://github.com/cert-manager/cert-manager/pull/5815), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Bump the distroless base images ([#5930](https://github.com/cert-manager/cert-manager/pull/5930), [@maelvls](https://github.com/maelvls))
+- The auto-retry mechanism added in VCert 4.23.0 and part of cert-manager 1.11.0 ([#5674](https://github.com/cert-manager/cert-manager/pull/5674)) has been found to be faulty. Until this issue is fixed upstream, we now use a patched version of VCert. This patch will slowdown the issuance of certificates by 9% in case of heavy load on TPP. We aim to release at an ulterior date a patch release of cert-manager to fix this slowdown. ([#5819](https://github.com/cert-manager/cert-manager/pull/5819), [@maelvls](https://github.com/maelvls))
+- Use a fake kube-apiserver version when generating helm template in `cmctl x install`, to work around a hardcoded Kubernetes version in Helm. ([#5726](https://github.com/cert-manager/cert-manager/pull/5726), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+### Other
+
+- Bump keystore-go to v4.4.1 to work around an upstream rewrite of history ([#5730](https://github.com/cert-manager/cert-manager/pull/5730), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+## v1.11.0
+
 cert-manager `v1.11.0` includes a drastic reduction in cert-manager's runtime memory usage,
 a slew of improvements to AKS integrations and various other tweaks, fixes and improvements,
 all towards cert-manager's goal of being the best way to handle certificates in modern
 Cloud Native applications.
-
-## Major Themes
 
 ### Support for Azure Workload Identity Federation with Azure DNS and ACME DNS-01
 
