@@ -280,13 +280,19 @@ is deleted, you will need to set `cleanupPolicy: OnDelete` on the Certificate re
 
 **FEATURE STATE**: This feature is available since cert-manager 1.12.
 
-`cleanupPolicy` is when this field is set to `OnDelete`, the owner reference
-is always created on the Secret resource and the secret will be automatically
-removed when the certificate resource is deleted. When this field is set to `Never`,
-the owner reference is never created on the Secret resource and the secret will not
-be automatically removed when the certificate resource is deleted.
-If the value of this field is unset this field "inherits" the value of
-the flag `--default-secret-cleanup-policy`.
+The field `cleanupPolicy` can be used on the Certificate resource to configure
+whether cert-manager should remove the leftover Secret resource when the 
+Certificate is deleted.
+
+When this field is set to `OnDelete`, the Secret resource will automatically
+be removed when the Certificate is deleted. That works by adding an owner 
+reference on the Secret resource.
+
+When this field is set to `Never`, the Secret resource is preserved when
+the Certificate is deleted.
+
+When this field is unset, the value of the flag `--default-secret-cleanup-policy`
+is used.
 
 ```yaml
 apiVersion: cert-manager.io/v1
