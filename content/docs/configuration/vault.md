@@ -255,6 +255,7 @@ Kubernetes 1.24 and above.
     ```
 
 ### Authenticating with TLS Client Certificate
+**FEATURE STATE**: This feature is available since cert-manager 1.12.
 
 Another way to authenticate against Vault is by presenting a client certificate
 while performing the TLS handshake.
