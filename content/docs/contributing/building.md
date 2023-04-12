@@ -88,7 +88,7 @@ You can run `make go-workspace` to generate a `go.work` file which should enable
 whole repo, and which should help editors to understand the module structure.
 
 Note that go workspaces are not used when testing pull requests in CI. If you see errors in CI which you can't replicate
-locally, try deleting the `go.work` file.
+locally, try building with the `GOWORK` environment variable set to `off` or deleting the `go.work` file.
 
 ### Parallelism
 
