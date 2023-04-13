@@ -578,32 +578,3 @@ Other than the different `cert-manager/release` tag and `cmrel` version, you can
 is used for 1.6 and 1.7 - just remember to change the version of `cmrel` you install!
 
 [older-release-process]: https://github.com/cert-manager/website/blob/6fa0db74de0ae17d7be638a08155d1b4e036aaa9/content/en/docs/contributing/release-process.md?plain=1
-
-## Documentation Process
-
-Authors of PRs to cert-manager/website need to check that the "base branch" is
-correct:
-
-|                Description                 |  Base branch   |     Folder     |
-|--------------------------------------------|----------------|----------------|
-| Documentation PR for an existing feature   | `master`       | `content/docs` |
-| Documentation PR for an unreleased feature | `release-next` | `content/docs` |
-
-In rare occasions, when writing documentation for an unreleased feature, you may
-notice that some recent changes in `master` aren't present in `release-next`. If
-that is a problem, you will want to update `release-next` branch with the latest
-changes from `master`. To update `release-next` with the changes made to
-`master`, follow these steps:
-
-1. Create a PR to merge `master` into `release-next` using [this magic
-   link][ff-release-next].
-2. If you see the label `dco-signoff: no`, add a comment on the PR with:
-
-   ```text
-    /override dco
-    ```
-
-   It is necessary because some the merge commits have been written by the bot
-   and do not have a DCO signoff.
-
-[ff-release-next]: https://github.com/cert-manager/website/compare/release-next...master?quick_pull=1&title=%5Brelease-next%5D+Fast-forward+to+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
