@@ -29,6 +29,7 @@ for you to learn from. Take a look!
 - [Syncing Secrets Across Namespaces](./syncing-secrets-across-namespaces.md):
   Learn how to synchronize Kubernetes Secret resources across namespaces using extensions such as: reflector, kubed and kubernetes-replicator.
 - [Obtaining SSL certificates with the ZeroSSL](./zerossl/zerossl.md): Tutorial describing usage of the ZeroSSL as external ACME server.
+- [Configuring Google's Public Certificate Authority](./google-public-ca/README.md): Configure Google's new Public CA
 
 ### External Tutorials
 
