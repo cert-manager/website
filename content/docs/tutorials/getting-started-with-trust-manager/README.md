@@ -276,7 +276,7 @@ var certDirectories = []string{
 Having checked Python the `ssl` library uses the same two environment variables
 for finding the trusted CAs: `SSL_CERT_DIR` and / or `SSL_CERT_FILE`. You can
 verify this [in documentation](https://docs.python.org/3/library/ssl.html#ssl.get_default_verify_paths)
-and from a python3 runtime:
+and from a `python3` runtime:
 
 ```python3
 >>> import ssl
