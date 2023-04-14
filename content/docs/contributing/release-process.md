@@ -225,7 +225,7 @@ page if a step is missing or if it is outdated.
    >  This is only a temporary change to allow you to update the branch.
    >  [Prow will re-apply the branch protection within 24 hours](https://docs.prow.k8s.io/docs/components/optional/branchprotector/#updating).
 
-5. Create the tag for the new release locally and push it upstream:
+5. Create the tag for the new release locally and push it upstream (starting the cert-manager build):
 
      ```bash
      RELEASE_VERSION=v1.8.0-beta.0
@@ -239,6 +239,10 @@ page if a step is missing or if it is outdated.
       the branch, see [prerequisites](#prerequisites). If you do not have this
       permission, you will have to open a PR to merge master into the release
       branch), and wait for the PR checks to become green.
+
+      For recent versions of cert-manager, the tag being pushed will trigger a Google Cloud Build job to start,
+      kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
+      the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
 6. Generate and edit the release notes:
 
@@ -322,22 +326,27 @@ page if a step is missing or if it is outdated.
     4. **(final release only)** Check the release notes include all changes
        since the last final release.
 
-7. Run `cmrel makestage`:
+7. Check that the build is complete and send Slack messages about the release:
 
-    1. In this example we stage a release using the `v1.8.0-beta.0` git ref:
+    1. For recent versions of cert-manager, the build will have been automatically
+       triggered by the tag being pushed earlier. You can check if it's complete on
+       the [GCB Build History](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
+
+    2. If you're releasing an older version of cert-manager (earlier than 1.10) then the automatic build
+       will failed because the GCB config for that build wasn't backported.
+       In this case, you'll need to trigger the build manually using `cmrel`, which takes about 5 minutes:
 
         ```bash
         # Must be run from the "cert-manager/release" repo folder.
         cmrel makestage --ref=$RELEASE_VERSION
         ```
 
-        This step takes ~5 minutes. It will build all container images and create
+        This build takes ~5 minutes. It will build all container images and create
         all the manifest files, sign Helm charts and upload everything to a storage
         bucket on Google Cloud. These artifacts will then be published and released
         in the next steps.
 
-    2. While the build is running, send a first Slack message to
-       `#cert-manager-dev`:
+    3. In any case, send a first Slack message to `#cert-manager-dev`:
 
         <div className="pageinfo pageinfo-primary"><p>
         Releasing <code>1.2.0-alpha.2</code> 🧵
@@ -345,13 +354,12 @@ page if a step is missing or if it is outdated.
 
         <div className="pageinfo pageinfo-info"><p>
         🔰 Please have a quick look at the build log as it might contain some unredacted
-        data that we forgot to redact. We try to make sure the sensitive data is
+        data that we forgot to hide. We try to make sure the sensitive data is
         properly redacted but sometimes we forget to update this.
         </p></div>
 
     3. Send a second Slack message in reply to this first message with the
-       Cloud Build job link that `cmrel` displayed in "View logs at". For
-       example, the message would look like:
+       Cloud Build job link. For example, the message might look like:
 
         <div className="pageinfo pageinfo-info"><p>
         Follow the <code>cmrel makestage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
