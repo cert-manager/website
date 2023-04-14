@@ -428,6 +428,10 @@
             {
               "title": "Securing Ingresses with ZeroSSL",
               "path": "/docs/tutorials/zerossl/zerossl.md"
+            },
+            {
+              "title": "Managing Public Trust in Kubernetes with Trust Manager",
+              "path": "/docs/tutorials/getting-started-with-trust-manager/README.md"
             }
           ]
         },
