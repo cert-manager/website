@@ -602,6 +602,16 @@ liveness
 apiservices
 arm64
 IaC
+Kyverno
+Stakater
+Reloader
+reloader
+yq
+usr
+ssl
+cert.pem
+Rollout
+rollout
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker

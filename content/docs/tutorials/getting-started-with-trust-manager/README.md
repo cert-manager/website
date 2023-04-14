@@ -33,22 +33,22 @@ For this tutorial we assume that you know about
 [trust-manager](https://cert-manager.io/docs/projects/trust-manager/) already,
 and you are aware of how it distributes CA certificate from a `Bundle` into
 `ConfigMap` resources across the cluster. If not then check out 
-[the documentation](https://cert-manager.io/docs/projects/trust-manager/)
+[the documentation](../../projects/trust-manager/README.md)
 for a good understanding.
 
 **💻 Software**
 
 1. [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl): The Kubernetes
 command-line tool which allows you to configure Kubernetes clusters.
-1. [helm](https://helm.sh/): A packge manager for Kubernetes
+1. [helm](https://helm.sh/): A package manager for Kubernetes.
 1. [yq](https://github.com/mikefarah/yq#install): A command line tool for
-parsing yaml with helpful coloring
+parsing YAML with helpful coloring.
 
 ## Distribute Public CA Trust
 
 ### Setup Application & Bundle
 
-1) Ensure you have [trust-manager](https://cert-manager.io/docs/projects/trust/#installation) installed. If not simply use:
+1) Ensure you have [trust-manager](../../projects/trust-manager/README.md#installation) installed. If not simply use:
 
     ```shell
     helm repo add jetstack https://charts.jetstack.io
@@ -243,7 +243,7 @@ having to pass the additional `--cacert` flag:
 
 ## Configure Real Applications
 
-Based on the example above, kubernetes is able to mount over the top of the
+Based on the example above, Kubernetes is able to mount over the top of the
 default CA certificate bundle. You can use this with applications assuming you
 know where the default locations they retrieve CA certificates from.
 
@@ -307,7 +307,7 @@ Let's tackle both of these scenarios using additional Open Source tools.
 
 If your CA bundle changes, those changes will be synced to the namespaces
 pretty quickly. This change will be reflected in the volume attached to the
-container, but most applications will not pickup on the filesystem change.
+container, but most applications will not pickup on the file system change.
 The common approach is restarting the client application deployment, through
 the use of `kubectl rollout restart deployment <DEPLOY_NAME>`. There is an
 option to automate this process through a third party piece of open-source
@@ -321,7 +321,7 @@ as volumes or environment variables.
 
 **Please note** that there are many alternative pieces of software that you
 could bundle or write into your application container. They would simply watch
-the filesystem for changes and trigger a reload of the application process.
+the file system for changes and trigger a reload of the application process.
 Such an approach requires container image or code changes and this could be
 difficult to implement with many tenants. The advantage to using ,reloader here
 is that it's a generic solution applicable to all applications running in a
@@ -444,8 +444,8 @@ one CA certificate `ca-certificates.crt` file, the one we have just applied:
     -----END CERTIFICATE-----
     ```
 
-1. The CA output here is the one that is trust by the website bbc.co.uk. We
-can validate this by using `curl` from that container:
+1. The CA output here is the one that is trust by the website 
+`https://bbc.co.uk`. We can validate this by using `curl` from that container:
 
     ```shell
     kubectl exec -ti -n team-a $(kubectl get po -n team-a -l app=sleep-auto -o jsonpath='{.items[0].metadata.name}') -- curl -v https://bbc.co.uk
@@ -553,7 +553,7 @@ publicly trusted website, for example: `https://bbc.co.uk`
     kubectl exec -n team-a -ti $(kubectl get pod -n team-a -l app=test-assign -o jsonpath='{.items[0].metadata.name}') -- curl -v https://bbc.co.uk
     ```
 
-    Success looks like a valid 200 response from the webpage.
+    Success looks like a valid 200 response from the web page.
 
     Note that this should now work without any additional configuration. If you
     get an SSL error at the point, check that the correct `configMap` is 
@@ -572,7 +572,7 @@ no action is taken if the relevant configuration is already present:
     ```
 
 **Note:** If you have problems with your `Assign` policy resource, try checking
-the kubernetes events (`kubectl get events`) for issues.
+the Kubernetes events (`kubectl get events`) for issues.
 
 ## Public Trust with trust-manager
 
@@ -585,7 +585,7 @@ Whilst this may appear to be more work for something that currently "works" in
 your environment, consider how this solution positions you to handle situations
 where you no longer trust a particular Certificate Authority.
 
-Next time we will look at how simple it is to integrate Prviate Certificate
+Next time we will look at how simple it is to integrate Private Certificate
 Authorities into this trust management process.
 
 ## Cleanup
