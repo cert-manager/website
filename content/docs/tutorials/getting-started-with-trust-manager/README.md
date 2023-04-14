@@ -5,9 +5,6 @@ description: Learn how to deploy and configure trust-manager to automatically di
 
 *Last Verified: 14 April 2023*
 
-<!-- **Note:** All resources provided are demonstrative and should be reviewed
-properly before using in production environments. -->
-
 In this tutorial we will walk through how we can use 
 [trust-manager](https://cert-manager.io/docs/projects/trust-manager/) to
 distribute publicly trusted Certificate Authority (CA) certificates inside
@@ -24,6 +21,9 @@ configuration to make use of your trusted CA certificates bundle.
 In this tutorial we will be limiting the scope of our changes to only impact
 the `team-a` namespace. To get the most out of these features you will want to
 remove this limitation.
+
+**Note:** All resources provided are demonstrative and should be reviewed
+properly before using in production environments.
 
 ## Prerequisites
 
