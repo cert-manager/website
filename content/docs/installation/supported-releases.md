@@ -26,9 +26,9 @@ cert-manager expects that ServerSideApply is enabled in the cluster for all vers
 
 ## Upcoming releases
 
-| Release  |  Release Date  |  End of Life   | [Supported Kubernetes versions][s]  | [Supported OpenShift versions][s] |
-|----------|:--------------:|:--------------:|:-----------------------------------:|:---------------------------------:|
-| [1.12][] | End of April, 2023  | End of August, 2023 |            1.22 → 1.27              |            4.9 → 4.13             |
+| Release  |  Release Date  |  End of Life       | [Supported Kubernetes versions][s]  | [Supported OpenShift versions][s] |
+|----------|:--------------:|:------------------:|:-----------------------------------:|:---------------------------------:|
+| [1.12][] | Apr 26, 2023  | End of August, 2023 |            1.22 → 1.26              |            4.9 → 4.13             |
 
 Dates in the future are uncertain and might change.
 
