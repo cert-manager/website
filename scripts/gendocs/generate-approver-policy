@@ -35,7 +35,7 @@ checkout() {
 
 	pushd "$tmpdir"
 
-	echo "+++ Checking out trust-manager ref $ref"
+	echo "+++ Checking out ref $ref"
 
 	git fetch origin "$ref"
 	git reset --hard "$ref"
@@ -44,21 +44,17 @@ checkout() {
 gendocs() {
 	outputdir="$1"
 
-	echo "+++ Generating trust-manager reference docs..."
+	echo "+++ Generating reference docs..."
 
 	$CRDOC \
-		--resources "$tmpdir/deploy/charts/trust-manager/templates/trust.cert-manager.io_bundles.yaml" \
+    --resources "$tmpdir/deploy/charts/approver-policy/templates/crds/policy.cert-manager.io_certificaterequestpolicies.yaml" \
 		--template $REPO_ROOT/scripts/gendocs/templates-trust-manager/markdown.tmpl \
 		--output $outputdir
 }
 
-# Note that this script only supports generating a single version of trust-manager API docs,
-# since trust-manager is under active development and we wouldn't generally expect older version
-# of docs to be useful. The version is also hardcoded for simplicity
+echo "+++ Cloning repository..."
+git clone "https://github.com/cert-manager/approver-policy.git" "$tmpdir"
 
-echo "+++ Cloning trust-manager repository..."
-git clone "https://github.com/cert-manager/trust-manager.git" "$tmpdir"
+checkout "main"
 
-checkout "v0.4.0"
-
-gendocs "$REPO_ROOT/content/docs/projects/trust-manager/api-reference.md"
+gendocs "$REPO_ROOT/content/docs/projects/approver-policy/api-reference.md"
