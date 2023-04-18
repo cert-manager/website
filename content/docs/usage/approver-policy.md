@@ -10,5 +10,5 @@ API](../concepts/certificaterequest.md#approval).
 cert-manager project that enables you to write policy to automatically manage
 this approval mechanism.
 
-Please read the [project page](../projects/approver-policy.md) for more
+Please read the [project page](../projects/approver-policy/README.md) for more
 information on how to install and use approver-policy.

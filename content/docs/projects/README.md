@@ -11,7 +11,7 @@ These tools help with security, compliance and control.
 - [istio-csr](./istio-csr.md): Secure Istio service mesh with istio-csr which is
   an agent that allows for [Istio](https://istio.io) workload and control plane
   components to be secured using cert-manager.
-- [approver-policy](./approver-policy.md):
+- [approver-policy](./approver-policy/README.md):
   a cert-manager **approver** that will automatically approve or deny
   certificate requests based on defined policy.
 - [csi-driver](./csi-driver.md):
