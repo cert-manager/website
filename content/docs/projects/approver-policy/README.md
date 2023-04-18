@@ -383,3 +383,7 @@ spec:
 ```
 
 There are currently no open source plugins.
+
+## API Reference
+
+> 📖 Read the [approver-policy API reference](api-reference.md).
