@@ -29,12 +29,22 @@
     "check:markdown": "remark --rc-path .remarkrc --frail --quiet content/"
   },
   "lint-staged": {
-    "*.{scss}": ["stylelint --fix"],
-    "*.{js,json,jsx,md,mdx}": ["prettier --write"],
-    "*.{js,jsx,md,mdx}": ["eslint --cache --fix"]
+    "*.{scss}": [
+      "stylelint --fix"
+    ],
+    "*.{js,json,jsx,md,mdx}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,md,mdx}": [
+      "eslint --cache --fix"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
