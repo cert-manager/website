@@ -298,7 +298,7 @@ spec:
   ...
   selector:
     issuerRef:
-    - name: "my-ca"
+      name: "my-ca"
       kind: "*Issuer"
       group: "cert-manager.io"
 ```
