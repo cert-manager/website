@@ -48,7 +48,7 @@ gendocs() {
 
 	$CRDOC \
     --resources "$tmpdir/deploy/charts/approver-policy/templates/crds/policy.cert-manager.io_certificaterequestpolicies.yaml" \
-		--template $REPO_ROOT/scripts/gendocs/templates-trust-manager/markdown.tmpl \
+		--template $REPO_ROOT/scripts/gendocs/templates-approver-policy/markdown.tmpl \
 		--output $outputdir
 }
 
