@@ -8,22 +8,55 @@ approver-policy is a cert-manager
 that will approve or deny CertificateRequests based on policies defined in
 the `CertificateRequestPolicy` custom resource.
 
-## Installation
+## Prerequisites
 
-[cert-manager](../../installation/README.md) is a dependency of approver-policy.
+[cert-manager must be installed](../../installation/README.md), and
+the [the default approver in cert-manager must be disabled](../../concepts/certificaterequest.md#approver-controller).
 
-> ⚠️
->
-> It is important that the
-> [default approver is disabled in cert-manager](../../concepts/certificaterequest.md#approver-controller).
-> If the default approver is not disabled in cert-manager, approver-policy will
+> ⚠️ If the default approver is not disabled in cert-manager, approver-policy will
 > race with cert-manager and policy will be ineffective.
+
+If you install cert-manager using `helm install` or `helm upgrade`,
+you can disable the default approver by [Customizing the Chart Before Installing](https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing) using the `--set` or `--values` command line flags:
+
+```
+# Example --set value
+--set extraArgs={--controllers='*\,-certificaterequests-approver'} # ⚠ Disable cert-manager's built-in approver
+```
+
+```yaml
+# Example --values file content
+extraArgs:
+ - "--controllers=*,-certificaterequests-approver" # ⚠ Disable cert-manager's built-in approver
+```
+
+Here's a full example which will install cert-manager or reconfigure it if it is already installed:
+
+```terminal
+helm upgrade cert-manager jetstack/cert-manager \
+  --install \
+  --create-namespace \
+  --namespace cert-manager \
+  --version REPLACE-WITH-YOUR-CERT-MANAGER-VERSION \
+  --set installCRDs=true \
+  --set extraArgs={--controllers='*\,-certificaterequests-approver'} # ⚠ Disable cert-manager's built-in approver
+```
+
+> ℹ️ The `--set installCRDs=true` setting is a convenient way to install the
+> cert-manager CRDS, but it is optional and has some drawbacks.
+> Read [Helm: Installing Custom Resource Definitions](https://deploy-preview-1216--cert-manager-website.netlify.app/docs/installation/helm/#3-install-customresourcedefinitions) to learn more.
 >
-> ```terminal
-> helm upgrade -i -n cert-manager cert-manager jetstack/cert-manager --set extraArgs={--controllers='*\,-certificaterequests-approver'} --set installCRDs=true --create-namespace
-> ```
+> ℹ️ Be sure to customize the cert-manager controller `extraArgs`,
+> which are at the top level of the values file.
+> *Do not* change the `webhook.extraArgs`, `startupAPICheck.extraArgs` or `cainjector.extraArgs` settings.
 >
-> ⚠️
+> ⚠️ If you are reconfiguring an already installed cert-manager,
+> check whether the original installation already customized the `extraArgs` value
+> by running `helm get values cert-manager --namespace cert-manager`.
+> If there are already `extraArgs` values, merge those with the extra `--controllers` value.
+> Otherwise your original `extraArgs` values will be overwritten.
+
+## Installation
 
 To install approver-policy:
 
