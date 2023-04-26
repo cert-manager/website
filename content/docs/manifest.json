@@ -2,14 +2,15 @@
   "routes": [
     {
       "title": "cert-manager",
+
       "routes": [
         {
           "title": "Introduction",
           "path": "/docs/README.md"
         },
         {
-            "title": "Getting Started",
-            "path": "/docs/getting-started/README.md"
+          "title": "Getting Started",
+          "path": "/docs/getting-started/README.md"
         },
         {
           "title": "Installation",
@@ -70,8 +71,8 @@
                   "path": "/docs/installation/upgrading/upgrading-1.10-1.11.md"
                 },
                 {
-                    "title": "v1.9 to v1.10",
-                    "path": "/docs/installation/upgrading/upgrading-1.9-1.10.md"
+                  "title": "v1.9 to v1.10",
+                  "path": "/docs/installation/upgrading/upgrading-1.9-1.10.md"
                 },
                 {
                   "title": "v1.8 to v1.9",
@@ -347,18 +348,27 @@
             },
             {
               "title": "approver-policy",
-              "path": "/docs/projects/approver-policy.md"
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/docs/projects/approver-policy/README.md"
+                },
+                {
+                  "title": "API Reference",
+                  "path": "/docs/projects/approver-policy/api-reference.md"
+                }
+              ]
             },
             {
               "title": "trust-manager",
               "routes": [
                 {
-                    "title": "Introduction",
-                    "path": "/docs/projects/trust-manager/README.md"
+                  "title": "Introduction",
+                  "path": "/docs/projects/trust-manager/README.md"
                 },
                 {
-                    "title": "API Reference",
-                    "path": "/docs/projects/trust-manager/api-reference.md"
+                  "title": "API Reference",
+                  "path": "/docs/projects/trust-manager/api-reference.md"
                 }
               ]
             }
@@ -372,20 +382,20 @@
               "path": "/docs/tutorials/README.md"
             },
             {
-                "title": "Securing NGINX-ingress",
-                "path": "/docs/tutorials/acme/nginx-ingress.md"
+              "title": "Securing NGINX-ingress",
+              "path": "/docs/tutorials/acme/nginx-ingress.md"
             },
             {
-                "title": "GKE + Ingress + Let's Encrypt",
-                "path": "/docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md"
+              "title": "GKE + Ingress + Let's Encrypt",
+              "path": "/docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md"
             },
             {
-                "title": "AKS + LoadBalancer + Let's Encrypt",
-                "path": "/docs/tutorials/getting-started-aks-letsencrypt/README.md"
+              "title": "AKS + LoadBalancer + Let's Encrypt",
+              "path": "/docs/tutorials/getting-started-aks-letsencrypt/README.md"
             },
             {
-                "title": "Migrating from Kube-LEGO",
-                "path": "/docs/tutorials/acme/migrating-from-kube-lego.md"
+              "title": "Migrating from Kube-LEGO",
+              "path": "/docs/tutorials/acme/migrating-from-kube-lego.md"
             },
             {
               "title": "Backup and Restore Resources",
@@ -421,22 +431,22 @@
             }
           ]
         },
-          {
-            "title": "Troubleshooting",
-            "routes": [
-                {
-                "title": "Introduction",
-                "path": "/docs/troubleshooting/README.md"
+        {
+          "title": "Troubleshooting",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/docs/troubleshooting/README.md"
             },
             {
-                "title": "Troubleshooting ACME / Let's Encrypt Certificates",
-                "path": "/docs/troubleshooting/acme.md"
+              "title": "Troubleshooting ACME / Let's Encrypt Certificates",
+              "path": "/docs/troubleshooting/acme.md"
             },
             {
-                "title": "Troubleshooting webhook",
-                "path": "/docs/troubleshooting/webhook.md"
+              "title": "Troubleshooting webhook",
+              "path": "/docs/troubleshooting/webhook.md"
             }
-            ]
+          ]
         },
         {
           "title": "FAQ",
@@ -549,8 +559,8 @@
               "path": "/docs/release-notes/release-notes-1.11.md"
             },
             {
-                "title": "v1.10",
-                "path": "/docs/release-notes/release-notes-1.10.md"
+              "title": "v1.10",
+              "path": "/docs/release-notes/release-notes-1.10.md"
             },
             {
               "title": "v1.9",
@@ -691,56 +701,56 @@
             }
           ]
         },
-          {
-            "title": "Reference",
-            "routes": [
+        {
+          "title": "Reference",
+          "routes": [
             {
-                "title": "Introduction",
-                "path": "/docs/reference/README.md"
+              "title": "Introduction",
+              "path": "/docs/reference/README.md"
             },
             {
-                "title": "Command Line Tool (cmctl)",
-                "path": "/docs/reference/cmctl.md"
+              "title": "Command Line Tool (cmctl)",
+              "path": "/docs/reference/cmctl.md"
             },
-                {
-                "title": "TLS Terminology",
-                "path": "/docs/reference/tls-terminology.md"
+            {
+              "title": "TLS Terminology",
+              "path": "/docs/reference/tls-terminology.md"
             },
 
+            {
+              "title": "Components / Docker Images",
+              "routes": [
                 {
-                "title": "Components / Docker Images",
-                "routes": [
-                    {
-                    "title": "Introduction",
-                    "path": "/docs/cli/README.md"
+                  "title": "Introduction",
+                  "path": "/docs/cli/README.md"
                 },
-                    {
-                    "title": "acmesolver",
-                    "path": "/docs/cli/acmesolver.md"
+                {
+                  "title": "acmesolver",
+                  "path": "/docs/cli/acmesolver.md"
                 },
-                    {
-                    "title": "cainjector",
-                    "path": "/docs/cli/cainjector.md"
+                {
+                  "title": "cainjector",
+                  "path": "/docs/cli/cainjector.md"
                 },
-                    {
-                    "title": "cmctl",
-                    "path": "/docs/cli/cmctl.md"
+                {
+                  "title": "cmctl",
+                  "path": "/docs/cli/cmctl.md"
                 },
-                    {
-                    "title": "controller",
-                    "path": "/docs/cli/controller.md"
+                {
+                  "title": "controller",
+                  "path": "/docs/cli/controller.md"
                 },
-                    {
-                    "title": "webhook",
-                    "path": "/docs/cli/webhook.md"
+                {
+                  "title": "webhook",
+                  "path": "/docs/cli/webhook.md"
                 }
-                ]
+              ]
             },
-                {
-                "title": "API Reference",
-                "path": "/docs/reference/api-docs.md"
+            {
+              "title": "API Reference",
+              "path": "/docs/reference/api-docs.md"
             }
-            ]
+          ]
         }
       ]
     }

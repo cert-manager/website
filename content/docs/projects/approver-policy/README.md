@@ -4,18 +4,18 @@ description: 'Policy plugin for cert-manager'
 ---
 
 approver-policy is a cert-manager
-[approver](../concepts/certificaterequest.md#approval)
+[approver](../../concepts/certificaterequest.md#approval)
 that will approve or deny CertificateRequests based on policies defined in
 the `CertificateRequestPolicy` custom resource.
 
 ## Installation
 
-[cert-manager](../installation/README.md) is a dependency of approver-policy.
+[cert-manager](../../installation/README.md) is a dependency of approver-policy.
 
 > ⚠️
 >
 > It is important that the
-> [default approver is disabled in cert-manager](../concepts/certificaterequest.md#approver-controller).
+> [default approver is disabled in cert-manager](../../concepts/certificaterequest.md#approver-controller).
 > If the default approver is not disabled in cert-manager, approver-policy will
 > race with cert-manager and policy will be ineffective.
 >
@@ -33,10 +33,10 @@ helm upgrade -i -n cert-manager cert-manager-approver-policy jetstack/cert-manag
 ```
 
 If you are using approver-policy with [external
-issuers](../configuration/external.md), you _must_
+issuers](../../configuration/external.md), you _must_
 include their signer names so that approver-policy has permissions to approve
 and deny CertificateRequests that
-[reference them](../concepts/certificaterequest.md#rbac-syntax).
+[reference them](../../concepts/certificaterequest.md#rbac-syntax).
 For example, if using approver-policy for the internal issuer types, along with
 [google-cas-issuer](https://github.com/jetstack/google-cas-issuer), and
 [aws-privateca-issuer](https://github.com/cert-manager/aws-privateca-issuer),
@@ -71,7 +71,7 @@ request, the request is denied.**
 
 A denied CertificateRequest is considered to be permanently failed. If it was
 created for a Certificate resource, the issuance will be retried with
-[exponential backoff](../faq/README.md#what-happens-if-issuance-fails-will-it-be-retried)
+[exponential backoff](../../faq/README.md#what-happens-if-issuance-fails-will-it-be-retried)
 like all other permanent issuance failures. A CertificateRequest that is neither
 approved nor denied (because no matching policy was found) will not be further
 processed by cert-manager until it gets either approved or denied.
@@ -383,3 +383,7 @@ spec:
 ```
 
 There are currently no open source plugins.
+
+## API Reference
+
+> 📖 Read the [approver-policy API reference](api-reference.md).
