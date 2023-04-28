@@ -143,6 +143,17 @@ and ClusterIssuers.
 
 > 📖 Read more about `ingressClassName` in the documentation page [HTTP01](../configuration/acme/http01/#ingressclassname).
 
+### Liveness probe and healthz endpoint in the controller
+
+A healthz HTTP server has been added to the controller component.
+It serves a `/livez`  endpoint, which reports the health status of the leader election system.
+If the leader process has failed to renew its lease but has unexpectedly failed to exit,
+the `/livez` endpoint will return an error code and an error message.
+In conjunction with a new liveness probe in the controller Pod,
+this will cause the controller to be restarted by the kubelet.
+
+> 📖 Read more about this new feature in [Best Practice: Use Liveness Probes](../installation/best-practice.md#use-liveness-probes).
+
 ## Community
 
 We extend our gratitude to all the open-source contributors who have made
