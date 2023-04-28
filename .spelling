@@ -126,6 +126,7 @@ DNSPod
 DNSimple
 DaemonSet
 DataDog
+Datree
 Dean-Coakley
 DigitalOcean
 OVHCloud
@@ -188,6 +189,7 @@ k8s
 KubeCon
 Kubernetes
 Kyverno
+Learnk8s
 LuCI
 Maartje
 MacOS
@@ -316,6 +318,7 @@ google-cas-issuer
 goroutine
 hardcodes
 hardcoded
+healthz
 honour
 hostname
 https
@@ -362,6 +365,7 @@ labelled
 lalitadithya
 ldflag
 lifecycle
+liveness
 loadbalancer
 longkai
 loopback
