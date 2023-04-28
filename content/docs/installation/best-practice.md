@@ -41,11 +41,19 @@ and the [timings and thresholds can be configured using Helm values](https://git
 
 ### controller
 
-> ℹ️ The cert-manager controller liveness probe was introduced in cert-manager `v1.12.0`.
+> ℹ️ The cert-manager controller liveness probe was introduced in cert-manager release `1.12`.
 
 The cert-manager controller has a liveness probe, but it is **disabled by default**.
 You can enable it using the Helm chart value `livenessProbe.enabled=true`,
 but first read the background information below.
+
+> 📢 The controller liveness probe is a new feature in cert-manager release 1.12
+> and it is disabled by default, as a precaution, in case it causes problems in the field.
+> [Please get in touch](../contributing/README.md)
+> and tell is if you have enabled the controller liveness probe in production
+> and tell us whether you would like it to be turned on by default.
+> Tell us about any circumstances where the controller has become stuck
+> and where the liveness probe has been necessary to automatically restart the process.
 
 The liveness probe for the cert-manager controller is an HTTP probe which connects
 to the `/livez` endpoint of a healthz server which listens on port 9443 and runs in its own thread.
