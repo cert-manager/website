@@ -7,8 +7,11 @@ cert-manager is built and tested using [make](https://www.gnu.org/software/make/
 where possible and keeping system dependencies to a minimum. The cert-manager build system can provision most of its dependencies - including Go -
 automatically if required.
 
-cert-manager's build system fully supports developers who use `Linux amd64`, `macOS amd64` and `macOS arm64`. Other operating systems and architectures may
-work, but are largely untested.
+cert-manager's build system fully supports developers who use `Linux amd64`, `macOS amd64` and `macOS arm64`.
+
+It also has limited support for `Linux arm64`, although that platform is largely untested and isn't fully supported.
+
+Other operating systems and architectures may work but will likely require hacks and workarounds to develop on.
 
 ## Prerequisites
 
