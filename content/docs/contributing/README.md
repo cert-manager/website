@@ -21,7 +21,7 @@ you should receive calendar invites by mail shortly after joining. The complexit
 might be sent multiple times depending on your email and calendar providers and you might get some invites for past
 or future meetings which have been rescheduled or edited. Sorry about that!
 
-We have 2 regular repeating meetings: our quick daily check-in and a hour-long community meeting every two weeks.
+We have 2 regular repeating meetings: our quick daily check-in and an hour-long community meeting every two weeks.
 
 If you're having any issues joining our meetings, ensure that you're part of the [`cert-manager-dev`](https://groups.google.com/forum/#!forum/cert-manager-dev) Google group, and always feel free to ask in [Slack](./#slack) for help!
 
