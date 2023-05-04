@@ -66,9 +66,3 @@ We have two cert-manager channels on [Kubernetes Slack](https://slack.k8s.io) wh
 
 * [`cert-manager`](https://kubernetes.slack.com/messages/cert-manager): for all users of cert-manager; use this one for any usage related questions
 * [`cert-manager-dev`](https://kubernetes.slack.com/messages/cert-manager-dev): for collaboration between cert-manager contributors and maintainers; please only use this for code related questions
-
-## Google Season of Docs 2022
-
-The cert-manager team are participating in [Google Season of Docs 2022](https://developers.google.com/season-of-docs)!
-
-Check out our [2022 Project Proposals](./google-season-of-docs/2022/README.md) if you want to get involved!
