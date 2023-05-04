@@ -1,8 +1,8 @@
 ---
 title: Google Season of Docs
-description: Google season of docs 2022 proposal
+description: cert-manager and Google Season of Docs
 ---
 
-The cert-manager organization has registered for the Google Season of Docs!
+The cert-manager project participated in Google Season of Docs 2022
 
-Check out our [2022](./2022/README.md) proposals!
+If you're interested in what happened, you can check out our [2022 proposals!](./2022/README.md).
