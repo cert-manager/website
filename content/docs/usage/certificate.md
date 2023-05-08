@@ -142,7 +142,7 @@ present while waiting for the issuance of a signed certificate when serving. To
 facilitate this, if the following annotation:
 
  ```yaml
- cert-manager.io/issue-temporary-certificate": "true"
+ cert-manager.io/issue-temporary-certificate: "true"
  ```
 
 is present on the certificate, a self-signed temporary certificate will be
