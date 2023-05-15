@@ -417,6 +417,10 @@ spec:
 
 There are currently no open source plugins.
 
+If you want to implement an external approver policy plugin take a look at the
+example implementation at
+https://github.com/cert-manager/example-approver-policy-plugin.
+
 ## API Reference
 
 > 📖 Read the [approver-policy API reference](api-reference.md).
