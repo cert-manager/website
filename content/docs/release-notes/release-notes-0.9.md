@@ -163,8 +163,8 @@ validate and so will be recreated. This should resume the order normally.
 
 ### Venafi Issuer
 
-- Venafi: use vCert `v4.1.0` ([#1827](https://github.com/cert-manager/cert-manager/pull/1827), [`@munnerz`](https://github.com/munnerz))
-- Bump Venafi vCert dependency to latest version ([#1754](https://github.com/cert-manager/cert-manager/pull/1754), [`@munnerz`](https://github.com/munnerz))
+- Venafi: use VCert `v4.1.0` ([#1827](https://github.com/cert-manager/cert-manager/pull/1827), [`@munnerz`](https://github.com/munnerz))
+- Bump Venafi VCert dependency to latest version ([#1754](https://github.com/cert-manager/cert-manager/pull/1754), [`@munnerz`](https://github.com/munnerz))
 
 ### Webhook
 
