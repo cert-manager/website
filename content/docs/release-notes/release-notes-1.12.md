@@ -29,7 +29,60 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
 
 ### Lower memory footprint
 
-TBD
+In 1.12 we continued the work started in 1.11 to reduce cert-manager component's memory consumption.
+
+### Controller
+
+Caching of the full contents of all cluster `Secret`s can now be disabled by
+setting a `SecretsFilteredCaching` alpha feature gate to true. This will ensure
+that only `Secret` resources that are labelled with
+`controller.cert-manager.io/fao` label are cached in full. Cert-manager
+automatically adds this label to all `Certificate` `Secret`s.
+
+This change has been placed behind alpha feature gate as it could potentially
+slow down large scale issuance because issuer credentials `Secret`s will now be
+retrieved from kube apiserver instead of local cache. To prevent the slow down,
+users can manually label issuer `Secret`s with a
+`controller.cert-manager.io/fao` label.
+See the
+[design](https://github.com/cert-manager/cert-manager/blob/master/design/20221205-memory-management.md)
+and [implementation](https://github.com/cert-manager/cert-manager/pull/5824) for
+additional details.
+We would like to gather some feedback on this change before
+it can graduate- please leave your comments on
+(`cert-manager#6074`)[https://github.com/cert-manager/cert-manager/issues/6074].
+
+Additionally, controller no longer watches and caches all `Pod` and `Service`
+resources.
+See [`cert-manager#5976`](https://github.com/cert-manager/cert-manager/pull/5976) for implementation.
+
+### Cainjector
+
+[Cainjector's](../concepts/ca-injector.md) control loops have been refactored, so by default it should
+consume up to twice less memory, see
+[`cert-manager#5746`](https://github.com/cert-manager/cert-manager/pull/5746).
+
+Additionally, a number of flags have been added to cainjector that can be used
+to scope down what resources it watches and caches.
+
+If cainjector is only used as part of cert-manager installation, it only needs
+to inject CA certs to cert-manager's `MutatingWebhookConfiguration` and
+`ValidatingWebhookConfiguration` from a `Secret` in cert-manager's installation
+namespace so all the other injectable/source types can be turned off and
+cainjector can be scoped to a single namespace, see the relevant flags below:
+
+```go
+// cainjector flags
+--namespace=<cert-manager-installation-namespace> \
+--enable-customresourcedefinitions-injectable=false \
+--enable-certificates-data-source=false \
+--enable-apiservices-injectable=false
+```
+
+See [`cert-manager#5766`](https://github.com/cert-manager/cert-manager/pull/5766) for more detail.
+
+A big thanks to everyone who put in time reporting and writing up issues
+describing performance problems in large scale installations.
 
 ### Support for ephemeral service account tokens in Vault
 
