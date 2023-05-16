@@ -84,20 +84,33 @@ See [`cert-manager#5766`](https://github.com/cert-manager/cert-manager/pull/5766
 A big thanks to everyone who put in time reporting and writing up issues
 describing performance problems in large scale installations.
 
-### Improved Security with Independent Go Modules for Each Binary
+### Faster Response to CVEs By Reducing Transitive Dependencies
 
-With cert-manager 1.12, we have made significant changes aimed at improving our
-reaction time to vulnerability reports. Each binary now has its own `go.mod`
-file, providing us with more flexibility to react to CVEs.
+In cert-manager 1.12, we have worked on reducing the impacts that unsupported
+dependencies have on our ability to patch CVEs.
 
-In the past, we have been unable to offer security patches due to unsupported
-dependencies. An example of this was seen with Helm: in cert-manager 1.10, we
-were unable to fix a CVE reported in Helm because Helm only offers security
-patches for its latest minor version.
+Each binary now has its own `go.mod` file. When a CVE is declared in an
+unsupported minor version of a dependency, and that the only solution is to bump
+the minor version of the dependency, we can now choose to make an exception and
+bump that minor version but limit the impact to a single binary.
 
-While this doesn't decrease the dependency attack surface for any of the
-binaries, it does allow us to react more quickly and effectively when a
-vulnerability is reported.
+For example, in cert-manager 1.10, we chose not to fix a CVE reported in Helm
+because it was forcing us to bump the minor versions of `k8s.io/api` and many
+other dependencies.
+
+A side effect of the new `go.mod` layout is that it's now easier to import
+cert-manager in Go, in terms of transitive dependencies that might show up in
+your `go.mod` files or potential version conflicts between cert-manager and your
+other dependencies.
+
+The caveat here is that we still only recommend importing cert-manager in [very
+specific circumstances](../contributing/importing.md), and the module changes
+mean that if you imported some paths (specifically under `cmd` or some paths
+under `test`) you might see broken imports when you try to upgrade.
+
+If you experience a break as part of this, we're sorry and we'd be interested to
+chat about it. The vast majority of projects using cert-manager should notice no
+impact, and there should be no runtime impact either.
 
 ### Support for ephemeral service account tokens in Vault
 
