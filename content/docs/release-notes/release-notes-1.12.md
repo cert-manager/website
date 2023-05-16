@@ -134,10 +134,11 @@ Once again, we extend our gratitude to all the open-source contributors who have
 - [@maumontesilva](https://github.com/maumontesilva)
 - [@tobotg](https://github.com/tobotg)
 - [@TrilokGeer](https://github.com/TrilokGeer)
+- [@vidarno](https://github.com/vidarno)
+- [@vinzent](https://github.com/vinzent)
 - [@waterfoul](https://github.com/waterfoul)
 - [@yanggangtony](https://github.com/yanggangtony)
 - [@yulng](https://github.com/yulng)
-- [@vidarno](https://github.com/vidarno)
 
 ## Changes since v1.11.0
 
@@ -148,9 +149,9 @@ Once again, we extend our gratitude to all the open-source contributors who have
 - Added support for JSON logging (using `--logging-format=json`) (#5828, @malovme)
 - Added the --concurrent-workers flag that lets you control the number of concurrent workers for each of our controllers. (#5936, @inteon)
 - Adds `acme.solvers.http01.ingress.podTemplate.spec.imagePullSecrets` field to issuer spec to allow to specify image pull secrets for the ACME HTTP01 solver pod. (#5801, @malovme)
-- Cainjector:
-  - adds a couple new flags to cainjector that can be used to modify what injectable kinds are enabled. If cainjector is only used as a cert-manager's internal component it is sufficient to only enable validatingwebhookconfigurations and mutatingwebhookconfigurations injectables- disabling the rest can improve memory consumption. By default all are enabled.
-  - renames --watch-certs flag to --enable-certificates-data-source (#5766, @irbekrm)
+- cainjector:
+  - New flags were added to the cainjector binary. They can be used to modify what injectable kinds are enabled. If cainjector is only used as a cert-manager's internal component it is sufficient to only enable validatingwebhookconfigurations and mutatingwebhookconfigurations injectables; disabling the rest can improve memory consumption. By default all are enabled.
+  - The `--watch-certs` flag was renamed to `--enable-certificates-data-source`. (#5766, @irbekrm)
 - Helm: you can now add volumes and volumeMounts via Helm variables for the cainjector, webhook, and startupapicheck. (#5668, @waterfoul)
 - Helm: you can now enable the flags `--dns01-recursive-nameservers`, `--enable-certificate-owner-ref`, and `--dns01-recursive-nameservers-only` through Helm values. (#5614, @jkroepke)
 - POTENTIALLY BREAKING: the cert-manager binaries and some tests have been split into separate Go modules, allowing them to be easily patched independently. This should have no impact if you simply run cert-manager in your cluster. If you import cert-manager binaries, integration tests or end-to-end tests in Golang, you may need to make code changes in response to this. See https://cert-manager.io/docs/contributing/importing/ for more details (#5880, @SgtCoDFish)
@@ -162,7 +163,8 @@ Once again, we extend our gratitude to all the open-source contributors who have
 - Webhook now logs requests to mutating/validating webhook (with `--v=5` flag) (#5975, @tobotg)
 - Certificate issuances are always failed (and retried with a backoff) for denied or invalid CertificateRequests.
   This is not necessarily a breaking change as due to a race condition this may already have been the case. (#5887, @irbekrm)
-- ServerSideApply: The feature gate `ServerSideApply=true` configures the ca-injector controller to use Kubernetes Server Side Apply on CA Injector injectable target resources. (#5991, @inteon)
+- The cainjector controller can now use server-side apply to patch mutatingwebhookconfigurations, validatingwebhookconfigurations, apiservices, and customresourcedefinitions. This feature is currently in alpha and is not enabled by default. To enable server-side apply for the cainjector, add the flag --feature-gates=ServerSideApply=true to the deployment. (#5991, @inteon)
+- Helm: Egress 6443/TCP is now allowed in the webhook. This is required for OpenShift and OKD clusters for which the Kubernetes API server listens on port 6443 instead of 443. (#5788, @ExNG)
 
 ### Documentation
 
@@ -170,7 +172,7 @@ Once again, we extend our gratitude to all the open-source contributors who have
 
 ### Bug or Regression
 
-- Adds missing comparisons for certain fields which were incorrectly skipped if a LiteralSubject was set (#5747, @inteon)
+- When using the literalSubject field on a Certificate resource, the IPs, URIs, DNSNames, and EmailAddresses segments are now properly compared. (#5747, @inteon)
 - Check JKS/PKCS12 truststore in Secrets only if issuer provides the CA (#5972, @vinzent)
 - Cmctl renew now prints an error message unless Certificate name(s) or --all are supplied (#5896, @maumontesilva)
 - Fix development environment and go vendoring on Linux ARM64. (#5810, @SgtCoDFish)
@@ -179,7 +181,7 @@ Once again, we extend our gratitude to all the open-source contributors who have
 - Ingress and Gateway resources will not be synced if deleted via [foreground cascading](https://kubernetes.io/docs/concepts/architecture/garbage-collection/#foreground-deletion). (#5878, @avi-08)
 - The auto-retry mechanism added in VCert 4.23.0 and part of cert-manager 1.11.0 (#5674) has been found to be faulty. Until this issue is fixed upstream, we now use a patched version of VCert. This patch will slowdown the issuance of certificates by 9% in case of heavy load on TPP. We aim to release at an ulterior date a patch release of cert-manager to fix this slowdown. (#5805, @inteon)
 - Upgrade to go 1.19.6 along with newer helm and containerd versions and updated base images (#5813, @SgtCoDFish)
-- Use a fake kube apiserver version when generating helm template in `cmctl x install`, to work around a hardcoded Kubernetes version in Helm. (#5720, @irbekrm)
+- cmctl: In order work around a hardcoded Kubernetes version in Helm, we now use a fake kube-apiserver version when generating the helm template when running `cmctl x install`. (#5720, @irbekrm)
 
 ### Other (Cleanup or Flake)
 
@@ -189,20 +191,19 @@ Once again, we extend our gratitude to all the open-source contributors who have
 - Bump keystore-go to v4.4.1 to work around an upstream rewrite of history (#5724, @g-gaston)
 - Bump the distroless base images (#5929, @maelvls)
 - Bumps base images (#5793, @irbekrm)
-- Caches metadata only for filtered Pods and Services (#5976, @irbekrm)
+- The memory usage of the controller has been reduced by only caching the metadata of Pods and Services. (#5976, @irbekrm)
 - Cainjector memory improvements: removes second cache of secrets, CRDs, validating/mutatingwebhookconfigurations and APIServices that should reduce memory consumption by about half.
   BREAKING: users who are relying on cainjector to work when `certificates.cert-manager.io` CRD is not installed in the cluster, now need to pass `--watch-certificates=false` flag to cainjector else it will not start.
   Users who only use cainjector as cert-manager's internal component and have a large number of `Certificate` resources in cluster can pass `--watch-certificates=false` to avoid cainjector from caching `Certificate` resources and save some memory. (#5746, @irbekrm)
 - Cainjector now only reconciles annotated objects of injectable kind. (#5764, @irbekrm)
 - Container images are have an OCI source label (#5722, @james-callahan)
-- Disable automountServiceAccountToken in the ACME HTTP01 solver Pod (#5754, @wallrj)
-- Ensures that annotations, labels and managed fields are not cached for partial metadata `Secret`s. (#5966, @irbekrm)
-- Filters Secret caching to ensure only relevant Secrets are cached in full. This should reduce controller's memory consumption in clusters with a large number of cert-manager unrelated `Secret` resources. The filtering functionality is currently placed behind `SecretsFilteredCaching` feature flag.
-  The filtering mechanism might, in some cases, slightly slow down issuance or cause additional requests to kube apiserver, because unlabelled `Secret`s that cert-manager controller needs will now be retrieved from kube apiserver instead of being cached locally. To prevent this from happening, users can label all issuer `Secret`s with `controller.cert-manager.io/fao: true` label. (#5824, @irbekrm)
-- Reduces the amount of ACME calls during an ACME certificate issuance.
-  **Warning**: this PR slightly changes how `Challenge` names are calculated. To avoid duplicate issuances due to `Challenge`s being recreated, ensure that there is no in-progress ACME certificate issuance when you upgrade to this version of cert-manager. (#5901, @irbekrm)
-- Storing the latest private key hash on issuer status prevents unnecessary calls to ACME server during controller startup (#6006, @vidarno)
-- Tests on Kubernetes v1.27.1 by default. (#5979, @irbekrm)
+- The acmesolver pods created by cert-manager now have `automountServiceAccountToken` turned off. (#5754, @wallrj)
+- The controller memory usage has been further decreased by ignoring annotations, labels and managed fields when caching Secret resources. (#5966, @irbekrm)
+- The controller binary now uses much less memory on Kubernetes clusters with large or numerous Secret resources. The controller now ignores the contents of Secrets that aren't relevant to cert-manager. This functionality is currently placed behind `SecretsFilteredCaching` feature flag. The filtering mechanism might, in some cases, slightly slow down issuance or cause additional requests to kube-apiserver because unlabelled Secret resources that cert-manager controller needs will now be retrieved from kube-apiserver instead of being cached locally. To prevent this from happening, users can label all issuer Secret resources with the `controller.cert-manager.io/fao: true` label. (#5824, @irbekrm)
+- The controller now makes fewer calls to the ACME server.
+  **Warning**: this PR slightly changes how the name of the Challenge resources are calculated. To avoid duplicate issuances due to the Challenge resource being recreated, ensure that there is no in-progress ACME certificate issuance when you upgrade to this version of cert-manager.
+- The number of calls made to the ACME server during the controller startup has been reduced by storing the private key hash in the Issuer's status. (#6006, @vidarno)
+- We are now testing with Kubernetes v1.27.1 by default. (#5979, @irbekrm)
 - Updates Kubernetes libraries to `v0.26.2`. (#5820, @lucacome)
 - Updates Kubernetes libraries to `v0.26.3`. (#5907, @lucacome)
 - Updates Kubernetes libraries to `v0.27.1`. (#5961, @lucacome)
@@ -214,5 +215,4 @@ Once again, we extend our gratitude to all the open-source contributors who have
 
 ### Uncategorized
 
-- Add 6443/TCP to webhook egress rules (#5788, @ExNG)
-- Replaces our python boilerplate checker with an installed golang version, removing the need to have Python installed when developing or building cert-manager (#6000, @SgtCoDFish)
+- We have replaced our python boilerplate checker with an installed Go version, removing the need to have Python installed when developing or building cert-manager. (#6000, @SgtCoDFish)
