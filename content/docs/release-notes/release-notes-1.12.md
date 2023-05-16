@@ -31,7 +31,7 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
 
 In 1.12 we continued the work started in 1.11 to reduce cert-manager component's memory consumption.
 
-### Controller
+#### Controller
 
 Caching of the full contents of all cluster `Secret`s can now be disabled by
 setting a `SecretsFilteredCaching` alpha feature gate to true. This will ensure
@@ -56,7 +56,7 @@ Additionally, controller no longer watches and caches all `Pod` and `Service`
 resources.
 See [`cert-manager#5976`](https://github.com/cert-manager/cert-manager/pull/5976) for implementation.
 
-### Cainjector
+#### Cainjector
 
 [Cainjector's](../concepts/ca-injector.md) control loops have been refactored, so by default it should
 consume up to twice less memory, see
@@ -83,6 +83,21 @@ See [`cert-manager#5766`](https://github.com/cert-manager/cert-manager/pull/5766
 
 A big thanks to everyone who put in time reporting and writing up issues
 describing performance problems in large scale installations.
+
+### Improved Security with Independent Go Modules for Each Binary
+
+With cert-manager 1.12, we have made significant changes aimed at improving our
+reaction time to vulnerability reports. Each binary now has its own `go.mod`
+file, providing us with more flexibility to react to CVEs.
+
+In the past, we have been unable to offer security patches due to unsupported
+dependencies. An example of this was seen with Helm: in cert-manager 1.10, we
+were unable to fix a CVE reported in Helm because Helm only offers security
+patches for its latest minor version.
+
+While this doesn't decrease the dependency attack surface for any of the
+binaries, it does allow us to react more quickly and effectively when a
+vulnerability is reported.
 
 ### Support for ephemeral service account tokens in Vault
 
