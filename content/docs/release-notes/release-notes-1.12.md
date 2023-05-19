@@ -59,7 +59,7 @@ See [`cert-manager#5976`](https://github.com/cert-manager/cert-manager/pull/5976
 #### Cainjector
 
 [Cainjector's](../concepts/ca-injector.md) control loops have been refactored, so by default it should
-consume up to twice less memory, see
+consume up to half as much memory as before, see
 [`cert-manager#5746`](https://github.com/cert-manager/cert-manager/pull/5746).
 
 Additionally, a number of flags have been added to cainjector that can be used
