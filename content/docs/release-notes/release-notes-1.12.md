@@ -5,13 +5,16 @@ description: 'cert-manager release notes: cert-manager 1.12'
 
 cert-manager 1.12 brings support for JSON logging, a lower memory footprint, the
 support for ephemeral service account tokens with Vault, and the support of the
-`ingressClassName` field.
+`ingressClassName` field. We also improved on our ability to patch
+vulnerabilities.
 
 ## Major Themes
 
 ### Support for JSON logging
 
-JSON logs are now available in cert-manager! A massive thank you to [@malovme](https://github.com/malovme) for going the extra mile to get #5828 merged!
+JSON logs are now available in cert-manager! A massive thank you to
+[@malovme](https://github.com/malovme) for going the extra mile to get
+[#5828](https://github.com/cert-manager/cert-manager/pull/5828) merged!
 
 To enable JSON logs, add the flag `--logging-format=json` to the three
 deployments (`cert-manager`, `cert-manager-webhook`, and
@@ -29,7 +32,8 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
 
 ### Lower memory footprint
 
-In 1.12 we continued the work started in 1.11 to reduce cert-manager component's memory consumption.
+In 1.12 we continued the work started in 1.11 to reduce cert-manager component's
+memory consumption.
 
 #### Controller
 
@@ -112,11 +116,14 @@ If you experience a break as part of this, we're sorry and we'd be interested to
 chat about it. The vast majority of projects using cert-manager should notice no
 impact, and there should be no runtime impact either.
 
+You can read more about this change in the design document at
+[20230302.gomod.md](https://github.com/cert-manager/cert-manager/blob/master/design/20230302.gomod.md).
+
 ### Support for ephemeral service account tokens in Vault
 
 cert-manager can now authenticate to Vault using ephemeral service account
-tokens. cert-manager already knew to authenticate to Vault using the [Vault
-Kubernetes Auth
+tokens (JWT). cert-manager already knew to authenticate to Vault using the
+[Vault Kubernetes Auth
 Method](https://developer.hashicorp.com/vault/docs/auth/kubernetes) but relied
 on insecure service account tokens stored in Secrets. You can now configure
 cert-manager in a secretless manner. With this new feature, cert-manager will
@@ -125,11 +132,16 @@ authenticate to Vault.
 
 > 📖 Read about [Secretless Authentication with a Service Account](../configuration/vault.md#secretless-authentication-with-a-service-account).
 
+This change was implemented in the pull request
+[`cert-manager#5502`](https://github.com/cert-manager/cert-manager/pull/5502).
+
 ### Support for `ingressClassName` in the HTTP-01 solver
 
 cert-manager now supports the `ingressClassName` field in the HTTP-01 solver. We
 recommend using `ingressClassName` instead of the field `class` in your Issuers
 and ClusterIssuers.
+
+> 📖 Read more about `ingressClassName` in the documentation page [HTTP01](../configuration/acme/http01/#ingressclassname).
 
 ## Community
 
