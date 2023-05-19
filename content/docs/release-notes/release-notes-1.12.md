@@ -116,8 +116,8 @@ If you experience a break as part of this, we're sorry and we'd be interested to
 chat about it. The vast majority of projects using cert-manager should notice no
 impact, and there should be no runtime impact either.
 
-You can read more about this change in the design document at
-[20230302.gomod.md](https://github.com/cert-manager/cert-manager/blob/master/design/20230302.gomod.md).
+You can read more about this change in the design document
+[`20230302.gomod.md`](https://github.com/cert-manager/cert-manager/blob/master/design/20230302.gomod.md).
 
 ### Support for ephemeral service account tokens in Vault
 
@@ -180,7 +180,7 @@ Thanks also to the following cert-manager maintainers for their contributions du
 - [@munnerz](https://github.com/munnerz)
 
 Equally thanks to everyone who provided feedback, helped users and raised issues
-on Github and Slack, joined our meetings and talked to us at Kubecon!
+on GitHub and Slack, joined our meetings and talked to us at KubeCon!
 
 Special thanks to [@erikgb](https://github.com/erikgb) for continuously great
 input and feedback and to [@lucacome](https://github.com/lucacome) for always
@@ -188,7 +188,7 @@ ensuring that our Kubernetes dependencies are up to date!
 
 Thanks also to the CNCF, which provides resources and support, and to the AWS
 open source team for being good community members and for their maintenance of
-the PrivateCA Issuer.
+the Private CA Issuer.
 
 In addition, massive thanks to Jetstack (by Venafi) for contributing developer
 time and resources towards the continued maintenance of cert-manager projects.
