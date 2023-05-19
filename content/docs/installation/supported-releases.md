@@ -212,14 +212,14 @@ In practice, this is largely determined based on what versions of [kind](https:/
 are available for testing, and which versions of Kubernetes are provided by major upstream cloud Kubernetes vendors
 including EKS, GKE, AKS and OpenShift.
 
-|      Vendor       | Oldest Kubernetes Release\*  |               Other Older Kubernetes Releases                 |
-|:-----------------:|------------------------------|---------------------------------------------------------------|
-|    [EKS][eks]     | 1.21 (EOL Feb 2023)          | 1.22 (EOL May 2023)                                           |
-|    [GKE][gke]     | 1.21 (EOL Feb 2023)          | 1.22 (EOL May 2023)                                           |
-|    [AKS][aks]     | 1.23 (EOL ~Feb 2023)         |                                                               |
-| [OpenShift 4][os] | 1.21 (4.8 EUS, EOL Feb 2023) | 1.22 (4.9, EOL Apr 2023)                                      |
+|      Vendor       | Oldest Kubernetes Release\* |                          Other Older Kubernetes Releases                           |
+|:-----------------:|-----------------------------|------------------------------------------------------------------------------------|
+|    [EKS][eks]     | 1.22 (EOL Jun 2023)         | 1.23 (EOL Oct 2023), 1.24 (EOL Jan 2024), 1.25 (EOL May 2024), 1.26 (EOL Jun 2024) |
+|    [GKE][gke]     | 1.23 (EOL Jul 2023)         | 1.24 (EOL Oct 2023), 1.25 (EOL Feb 2024), 1.26 (EOL May 2024), 1.27 (EOL Jan 2025) |
+|    [AKS][aks]     | 1.24 (EOL Jul 2023)         | 1.25 (EOL Dec 2023), 1.26 (EOL Mar 2024), 1.27 (EOL Jun 2024)                      |
+| [OpenShift 4][os] | 1.22 (4.9, EOL Jun 2023)    | 1.23 (4.10, EOL Oct 2023), 1.24 (4.11, EOL Feb 2024), 1.25 (4.12, EOL Jan 2025)    |
 
-\*Oldest release relevant to the next cert-manager release, as of 2022-07-18
+\*Oldest release relevant to the next cert-manager release, as of 2023-05-19
 
 [eks]: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#kubernetes-release-calendar
 [gke]: https://cloud.google.com/kubernetes-engine/docs/release-schedule
