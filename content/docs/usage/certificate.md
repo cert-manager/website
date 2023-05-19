@@ -267,11 +267,60 @@ associated with compromised keys.
 
 ## Cleaning up Secrets when Certificates are deleted
 
-By default, cert-manager does not delete the `Secret` resource containing the signed certificate when the corresponding `Certificate` resource is deleted.
-This means that deleting a `Certificate` won't take down any services that are currently relying on that certificate, but the certificate will no longer be renewed.
+By default, cert-manager does not delete the `Secret` resource containing the
+signed certificate when the corresponding `Certificate` resource is deleted.
+This means that deleting a `Certificate` won't take down any services that are
+currently relying on that certificate, but the certificate will no longer be renewed.
 The `Secret` needs to be manually deleted if it is no longer needed.
 
-If you would prefer the `Secret` to be deleted automatically when the `Certificate` is deleted, you need to configure your installation to pass the `--enable-certificate-owner-ref` flag to the controller.
+If you would prefer the `Secret` to be deleted automatically when the `Certificate`
+is deleted, you will need to set `cleanupPolicy: OnDelete` on the Certificate resource. Alternatively, you can add the flag `--default-secret-cleanup-policy=OnDelete` to the cert-manager controller pod in case you want all Secret resources to be cleaned up by default.
+
+#### `cleanupPolicy`
+
+**FEATURE STATE**: This feature is available since cert-manager 1.12.
+
+The field `cleanupPolicy` can be used on the Certificate resource to configure
+whether cert-manager should remove the leftover Secret resource when the 
+Certificate is deleted.
+
+When this field is set to `OnDelete`, the Secret resource will automatically
+be removed when the Certificate is deleted. That works by adding an owner 
+reference on the Secret resource.
+
+When this field is set to `Never`, the Secret resource is preserved when
+the Certificate is deleted.
+
+When this field is unset, the value of the flag `--default-secret-cleanup-policy`
+is used.
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: my-cert
+spec:
+  ...
+  secretName: my-cert-tls
+  cleanupPolicy: OnDelete
+```
+
+Results in:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-cert-tls
+  ownerReferences:
+  - apiVersion: cert-manager.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Certificate
+    name: my-cert
+    ...
+type: kubernetes.io/tls
+```
 
 ## Renewal
 
