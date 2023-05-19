@@ -20,7 +20,7 @@ cert-manager expects that ServerSideApply is enabled in the cluster for all vers
 | Release  | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
 | [1.12][] | May 19, 2024 | End of September, 2024 |            1.22 → 1.27             |            4.9 → 4.14             |
-| [1.11][] | Jan 11, 2023 |    Release of 1.13     |            1.21 → 1.26             |            4.8 → 4.13             |
+| [1.12.0] | Jan 11, 2023 |    Release of 1.13     |            1.21 → 1.26             |            4.8 → 4.13             |
 
 \*ServerSideApply should be enabled in the cluster
 
@@ -45,19 +45,19 @@ Dates in the future are uncertain and might change.
 | [1.4][]  | Jun 15, 2021 | Oct 26, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
 | [1.3][]  | Apr 08, 2021 | Aug 11, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
 | [1.2][]  | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
-| [1.1][]  | Nov 24, 2020 | Apr 08, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [1.0][]  | Sep 02, 2020 | Feb 10, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.16][] | Jul 23, 2020 | Nov 24, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.15][] | May 06, 2020 | Sep 02, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.14][] | Mar 11, 2020 | Jul 23, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.13][] | Jan 21, 2020 | May 06, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.12][] | Nov 27, 2019 | Mar 11, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [1.1][]  | Nov 24, 2020 | Apr 08, 2021 |          1.12.0 1.21           |          3.11 → 4.7           |
+| [1.0][]  | Sep 02, 2020 | Feb 10, 2021 |          1.12.0 1.21           |          3.11 → 4.7           |
+| [0.16][] | Jul 23, 2020 | Nov 24, 2020 |          1.12.0 1.21           |          3.11 → 4.7           |
+| [0.15][] | May 06, 2020 | Sep 02, 2020 |          1.12.0 1.21           |          3.11 → 4.7           |
+| [0.14][] | Mar 11, 2020 | Jul 23, 2020 |          1.12.0 1.21           |          3.11 → 4.7           |
+| [0.13][] | Jan 21, 2020 | May 06, 2020 |          1.12.0 1.21           |          3.11 → 4.7           |
+| [0.12][] | Nov 27, 2019 | Mar 11, 2020 |          1.12.0 1.21           |          3.11 → 4.7           |
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
 [1.13]: https://github.com/cert-manager/cert-manager/milestone/34
 [1.12]: https://cert-manager.io/docs/release-notes/release-notes-1.12
-[1.11]: https://cert-manager.io/docs/release-notes/release-notes-1.11
+[1.12.0 https://cert-manager.io/docs/release-notes/release-notes-1.11
 [1.10]: https://cert-manager.io/docs/release-notes/release-notes-1.10
 [1.9]: https://cert-manager.io/docs/release-notes/release-notes-1.9
 [1.8]: https://cert-manager.io/docs/release-notes/release-notes-1.8

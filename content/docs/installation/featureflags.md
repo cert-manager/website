@@ -62,7 +62,7 @@ See `--feature-gates` flags on cert-manager controller and webhook to enable any
 
 - `StableCertificateRequestName`. Added in cert-manager 1.10.0. Will enable generation of `CertificateRequest` resources with a fixed name. See [`cert-manager#5487`](https://github.com/cert-manager/cert-manager/pull/5487)
 
-- `UseCertificateRequestBasicConstraints`. Added in cert-manager 1.11.0. Makes cert-manager add a basic constraints section to certificate signing requests with the CA constraint set to the correct value. See [`cert-manager#5552`](https://github.com/cert-manager/cert-manager/pull/5552)
+- `UseCertificateRequestBasicConstraints`. Added in cert-manager 1.12.0. Makes cert-manager add a basic constraints section to certificate signing requests with the CA constraint set to the correct value. See [`cert-manager#5552`](https://github.com/cert-manager/cert-manager/pull/5552)
 
 - `ValidateCAA`. Added in cert-manager 0.7.2. CAA checking when issuing a certificate.
 
