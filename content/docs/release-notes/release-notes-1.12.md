@@ -145,13 +145,15 @@ and ClusterIssuers.
 
 ## Community
 
-Once again, we extend our gratitude to all the open-source contributors who have made commits in this release, including:
+We extend our gratitude to all the open-source contributors who have made
+commits in this release, including:
 
 - [@andrewsomething](https://github.com/andrewsomething)
 - [@avi-08](https://github.com/avi-08)
 - [@dsonck92](https://github.com/dsonck92)
 - [@e96wic](https://github.com/e96wic)
 - [@ExNG](https://github.com/ExNG)
+- [@erikgb](https://github.com/erikgb)
 - [@g-gaston](https://github.com/g-gaston)
 - [@james-callahan](https://github.com/james-callahan)
 - [@jkroepke](https://github.com/jkroepke)
@@ -165,6 +167,31 @@ Once again, we extend our gratitude to all the open-source contributors who have
 - [@waterfoul](https://github.com/waterfoul)
 - [@yanggangtony](https://github.com/yanggangtony)
 - [@yulng](https://github.com/yulng)
+
+Thanks also to the following cert-manager maintainers for their contributions during this release:
+
+- [@inteon](https://github.com/inteon)
+- [@wallrj](https://github.com/wallrj)
+- [@maelvls](https://github.com/maelvls)
+- [@SgtCoDFish](https://github.com/SgtCoDFish)
+- [@irbekrm](https://github.com/irbekrm)
+- [@jakexks](https://github.com/jakexks)
+- [@JoshVanL](https://github.com/JoshVanL)
+- [@munnerz](https://github.com/munnerz)
+
+Equally thanks to everyone who provided feedback, helped users and raised issues
+on Github and Slack, joined our meetings and talked to us at Kubecon!
+
+Special thanks to [@erikgb](https://github.com/erikgb) for continuously great
+input and feedback and to [@lucacome](https://github.com/lucacome) for always
+ensuring that our Kubernetes dependencies are up to date!
+
+Thanks also to the CNCF, which provides resources and support, and to the AWS
+open source team for being good community members and for their maintenance of
+the PrivateCA Issuer.
+
+In addition, massive thanks to Jetstack (by Venafi) for contributing developer
+time and resources towards the continued maintenance of cert-manager projects.
 
 ## Changes since v1.11.0
 
