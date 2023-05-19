@@ -26,14 +26,14 @@ if needed.
 
 ## Usage
 
-trust-manager is intentionally simple, and adds one new Kubernetes `CustomResourceDefintion`: `Bundle`.
+trust-manager is intentionally simple, adding just one new Kubernetes `CustomResourceDefintion`: `Bundle`.
 
-A `Bundle` represents a set of PEM-encoded X.509 certificates that should be distributed and made
-available across the cluster. `Bundle`s are cluster scoped.
+A `Bundle` represents a set of X.509 certificates that should be distributed across a cluster.
 
-Users specify a list of `sources`, which trust-manager will query and concatenate certificate data from.
-The only other required field is the `target`, which describes how and where the resulting bundle will
-be written.
+All `Bundle`s are cluster scoped.
+
+`Bundle`s comprise a list of `sources` from which trust-manager will assemble the final bundle, along with
+a `target` describing how and where the resulting bundle will be written.
 
 An example `Bundle` might look like this:
 
@@ -67,10 +67,15 @@ spec:
       0V3NCaQrXoh+3xrXgX/vMdijYLUSo/YPEWmo
       -----END CERTIFICATE-----
   target:
-    # Data synced to the ConfigMap `my-org.com` at the key `root-certs.pem` in
-    # every namespace that has the label "linkerd.io/inject=enabled".
+    # Sync the bundle to a ConfigMap called `my-org.com` in every namespace which
+    # has the label "linkerd.io/inject=enabled"
+    # All ConfigMaps will include a PEM-formatted bundle, here named "root-certs.pem"
+    # and in this case we also request a binary JKS formatted bundle, here named "bundle.jks"
     configMap:
       key: "root-certs.pem"
+    additionalFormats:
+      jks:
+        key: "bundle.jks"
     namespaceSelector:
       matchLabels:
         linkerd.io/inject: "enabled"
@@ -85,6 +90,16 @@ spec:
 
 These sources, along with the single currently supported target type (`configMap`)
 are documented in the trust-manager [API reference documentation](./api-reference.md).
+
+#### Targets
+
+All `Bundle` targets are written to `ConfigMap`s whose name matches that of the `Bundle`, and every
+target has a PEM-formatted bundle included.
+
+Users can also optionally - as of trust-manager v0.5.0 - choose to write a JKS formatted binary
+bundle to the target. We understand that most Java applications tend to require a password on JKS
+files (even though trust bundles don't contain secrets), so all trust-manager JKS bundles use the
+default password `changeit`.
 
 #### Namespace Selector
 
