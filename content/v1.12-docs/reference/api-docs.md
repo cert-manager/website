@@ -787,13 +787,24 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>ingressClassName</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> This field configures the field <code>ingressClassName</code> on the created Ingress resources used to solve ACME challenges that use this challenge solver. This is the recommended way of configuring the ingress class. Only one of <code>class</code>, <code>name</code> or <code>ingressClassName</code> may be specified. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>class</code>
         <br />
         <em>string</em>
       </td>
       <td>
         <em>(Optional)</em>
-        <p>The ingress class to use when creating Ingress resources to solve ACME challenges that use this challenge solver. Only one of &lsquo;class&rsquo; or &lsquo;name&rsquo; may be specified.</p>
+        <p> This field configures the annotation <code>kubernetes.io/ingress.class</code> when creating Ingress resources to solve ACME challenges that use this challenge solver. Only one of <code>class</code>, <code>name</code> or <code>ingressClassName</code> may be specified. </p>
       </td>
     </tr>
     <tr>
@@ -804,7 +815,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>The name of the ingress resource that should have ACME challenge solving routes inserted into it in order to solve HTTP01 challenges. This is typically used in conjunction with ingress controllers like ingress-gce, which maintains a 1:1 mapping between external IPs and ingress resources.</p>
+        <p> The name of the ingress resource that should have ACME challenge solving routes inserted into it in order to solve HTTP01 challenges. This is typically used in conjunction with ingress controllers like ingress-gce, which maintains a 1:1 mapping between external IPs and ingress resources. Only one of <code>class</code>, <code>name</code> or <code>ingressClassName</code> may be specified. </p>
       </td>
     </tr>
     <tr>
@@ -975,6 +986,19 @@ description: >-
         <p>If specified, the pod&rsquo;s service account</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>imagePullSecrets</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#localobjectreference-v1-core">[]Kubernetes core/v1.LocalObjectReference</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>If specified, the pod&rsquo;s imagePullSecrets</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodTemplate">ACMEChallengeSolverHTTP01IngressPodTemplate</h3>
@@ -1011,7 +1035,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>PodSpec defines overrides for the HTTP01 challenge solver pod. Only the &lsquo;priorityClassName&rsquo;, &lsquo;nodeSelector&rsquo;, &lsquo;affinity&rsquo;, &lsquo;serviceAccountName&rsquo; and &lsquo;tolerations&rsquo; fields are supported currently. All other fields will be ignored.</p>
+        <p>PodSpec defines overrides for the HTTP01 challenge solver pod. Check ACMEChallengeSolverHTTP01IngressPodSpec to find out currently supported fields. All other fields will be ignored.</p>
         <br />
         <br />
         <table>
@@ -1072,6 +1096,19 @@ description: >-
             <td>
               <em>(Optional)</em>
               <p>If specified, the pod&rsquo;s service account</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>imagePullSecrets</code>
+              <br />
+              <em>
+                <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#localobjectreference-v1-core">[]Kubernetes core/v1.LocalObjectReference</a>
+              </em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p>If specified, the pod&rsquo;s imagePullSecrets</p>
             </td>
           </tr>
         </table>
@@ -1854,6 +1891,17 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>LastRegisteredEmail is the email associated with the latest registered ACME account, in order to track changes made to registered account associated with the Issuer</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>lastPrivateKeyHash</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>LastPrivateKeyHash is a hash of the private key associated with the latest registered ACME account, in order to track changes made to registered account associated with the Issuer</p>
       </td>
     </tr>
   </tbody>
@@ -4114,7 +4162,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>LastFailureTime is the time as recorded by the Certificate controller of the most recent failure to complete a CertificateRequest for this Certificate resource. If set, cert-manager will not re-request another Certificate until 1 hour has elapsed from this time.</p>
+        <p>LastFailureTime is set only if the lastest issuance for this Certificate failed and contains the time of the failure. If an issuance has failed, the delay till the next issuance will be calculated using formula time.Hour * 2 ^ (failedIssuanceAttempts - 1). If the latest issuance has succeeded this field will be unset.</p>
       </td>
     </tr>
     <tr>
@@ -4481,7 +4529,10 @@ description: >-
         <em>bool</em>
       </td>
       <td>
-        <p> Create enables JKS keystore creation for the Certificate. If true, a file named <code>keystore.jks</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>. The keystore file will be updated immediately. A file named <code>truststore.jks</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority </p>
+        <p>
+          Create enables JKS keystore creation for the Certificate. If true, a file named <code>keystore.jks</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>. The keystore file will be updated immediately. If the issuer provided a CA certificate, a file named <code>truststore.jks</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>
+          containing the issuing Certificate Authority
+        </p>
       </td>
     </tr>
     <tr>
@@ -4679,7 +4730,7 @@ description: >-
         <em>bool</em>
       </td>
       <td>
-        <p> Create enables PKCS12 keystore creation for the Certificate. If true, a file named <code>keystore.p12</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>. The keystore file will be updated immediately. A file named <code>truststore.p12</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority </p>
+        <p> Create enables PKCS12 keystore creation for the Certificate. If true, a file named <code>keystore.p12</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>. The keystore file will be updated immediately. If the issuer provided a CA certificate, a file named <code>truststore.p12</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority </p>
       </td>
     </tr>
     <tr>
@@ -4796,6 +4847,31 @@ description: >-
     </tr>
   </tbody>
 </table>
+<h3 id="cert-manager.io/v1.ServiceAccountRef">ServiceAccountRef</h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>) </p>
+<div>
+  <p> ServiceAccountRef is a service account used by cert-manager to request a token. The audience cannot be configured. The audience is generated by cert-manager and takes the form <code>vault://namespace-name/issuer-name</code> for an Issuer and <code>vault://issuer-name</code> for a ClusterIssuer. The expiration of the token is also set by cert-manager to 10 minutes. </p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>name</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Name of the ServiceAccount used to request a token.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <h3 id="cert-manager.io/v1.VaultAppRole">VaultAppRole</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>) </p>
 <div>
@@ -4846,7 +4922,7 @@ description: >-
 <h3 id="cert-manager.io/v1.VaultAuth">VaultAuth</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultIssuer">VaultIssuer</a>) </p>
 <div>
-  <p> Configuration used to authenticate with a Vault server. Only one of <code>tokenSecretRef</code>, <code>appRole</code> or <code>kubernetes</code> may be specified. </p>
+  <p> VaultAuth is configuration used to authenticate with a Vault server. The order of precedence is [<code>tokenSecretRef</code>, <code>appRole</code> or <code>kubernetes</code>]. </p>
 </div>
 <table>
   <thead>
@@ -5012,7 +5088,21 @@ description: >-
         </em>
       </td>
       <td>
+        <em>(Optional)</em>
         <p>The required Secret field containing a Kubernetes ServiceAccount JWT used for authenticating with Vault. Use of &lsquo;ambient credentials&rsquo; is not supported.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>serviceAccountRef</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.ServiceAccountRef">ServiceAccountRef</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>A reference to a service account that will be used to request a bound token (also known as &ldquo;projected token&rdquo;). Compared to using &ldquo;secretRef&rdquo;, using this field means that you don&rsquo;t rely on statically bound tokens. To use this field, you must configure an RBAC rule to let cert-manager request a token.</p>
       </td>
     </tr>
     <tr>
@@ -5670,5 +5760,5 @@ description: >-
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>7ebb5f515</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>65bf16d</code>. </em>
 </p>
