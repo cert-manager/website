@@ -43,6 +43,8 @@ spec:
     solvers:
     - http01:
         ingress:
+          # check your classes using `kubectl get ingressclass`
+          # or leave unset to use default (e.g. microk8s uses `public`)
           class: nginx
 ```
 
