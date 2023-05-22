@@ -13,16 +13,12 @@ Each release is supported for a period of four months, and we aim to create a ne
 release roughly every two months, accounting for holiday periods, major conferences
 and other world events.
 
-cert-manager expects that ServerSideApply is enabled in the cluster for all version of Kubernetes from 1.24 and above.
-
 <h2 id="supported-releases">Currently supported releases</h2>
 
 | Release  | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
 | [1.12][] | May 19, 2024 | End of September, 2024 |            1.22 → 1.27             |            4.9 → 4.14             |
-| [1.11][] | Jan 11, 2023 |    Release of 1.13     |            1.21 → 1.26             |            4.8 → 4.13             |
-
-\*ServerSideApply should be enabled in the cluster
+| [1.11][] | Jan 11, 2023 |    Release of 1.13     |            1.21 → 1.27             |            4.8 → 4.13             |
 
 ## Upcoming releases
 
