@@ -18,7 +18,7 @@ and other world events.
 | Release  | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
 | [1.12][] | May 19, 2024 | End of September, 2024 |            1.22 → 1.27             |            4.9 → 4.14             |
-| [1.11][] | Jan 11, 2023 |    Release of 1.13     |            1.21 → 1.27             |            4.8 → 4.13             |
+| [1.11][] | Jan 11, 2023 |    Release of 1.13     |            1.21 → 1.27             |            4.8 → 4.14             |
 
 ## Upcoming releases
 
