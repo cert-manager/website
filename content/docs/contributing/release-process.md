@@ -225,7 +225,7 @@ page if a step is missing or if it is outdated.
    >  This is only a temporary change to allow you to update the branch.
    >  [Prow will re-apply the branch protection within 24 hours](https://docs.prow.k8s.io/docs/components/optional/branchprotector/#updating).
 
-5. Create the tag for the new release locally and push it upstream (starting the cert-manager build):
+5. Create the required tags for the new release locally and push it upstream (starting the cert-manager build):
 
      ```bash
      RELEASE_VERSION=v1.8.0-beta.0
@@ -244,7 +244,19 @@ page if a step is missing or if it is outdated.
       kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
       the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-6. Generate and edit the release notes:
+6. Ensure that cmctl refers to the latest tag of cert-manager:
+
+Bump cert-manager version in [cmctl `go.mod` file](https://github.com/cert-manager/cert-manager/blob/v1.12.0/cmd/ctl/go.mod#L15) and cherry-pick the commit to the release branch.
+
+Add the tag for cmctl:
+     ```bash
+     # This tag is required to be able to go install cmctl
+     # See https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
+     git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELASE_VERSION"
+     git push origin "cmd/ctl/$RELEASE_VERSION"
+     ```
+
+7. Generate and edit the release notes:
 
     1. Use the following two tables to understand how to fill in the four
        environment variables needed for the next step. These four environment
@@ -326,7 +338,7 @@ page if a step is missing or if it is outdated.
     4. **(final release only)** Check the release notes include all changes
        since the last final release.
 
-7. Check that the build is complete and send Slack messages about the release:
+8. Check that the build is complete and send Slack messages about the release:
 
     1. For recent versions of cert-manager, the build will have been automatically
        triggered by the tag being pushed earlier. You can check if it's complete on
@@ -365,7 +377,7 @@ page if a step is missing or if it is outdated.
         Follow the <code>cmrel makestage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
         </p></div>
 
-8. Run `cmrel publish`:
+9. Run `cmrel publish`:
 
     1. Do a `cmrel publish` dry-run to ensure that all the staged resources are
        valid. Run the following command:
@@ -410,7 +422,7 @@ page if a step is missing or if it is outdated.
         Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
         </p></div>
 
-9. Publish the GitHub release:
+10. Publish the GitHub release:
 
     1. Visit the draft GitHub release and paste in the release notes that you
        generated earlier. You will need to manually edit the content to match
@@ -425,7 +437,7 @@ page if a step is missing or if it is outdated.
 
     4. Click "Publish" to make the GitHub release live.
 
-10. Merge the pull request containing the Helm chart:
+11. Merge the pull request containing the Helm chart:
 
    The Helm charts for cert-manager are served using Cloudflare pages
    and the Helm chart files and metadata are stored in the [Jetstack charts repository](https://github.com/jetstack/jetstack-charts).
@@ -437,10 +449,10 @@ page if a step is missing or if it is outdated.
     4. Merge the PR
     5. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-11. **(final release only)** Add the new final release to the
+12. **(final release only)** Add the new final release to the
     [supported-releases](../installation/supported-releases.md) page.
 
-12. Open a PR for a [Homebrew](https://brew.sh) formula update for `cmctl`.
+13. Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
 
     Assuming you have `brew` installed, you can use the `brew bump-formula-pr`
     command to do this. You'll need the new tag name and the commit hash of that
@@ -457,7 +469,7 @@ page if a step is missing or if it is outdated.
     against https://github.com/homebrew/homebrew-core has been opened, continue
     with further release steps.
 
-13. Post a Slack message as an answer to the first message. Toggle the check
+14. Post a Slack message as an answer to the first message. Toggle the check
    box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -465,7 +477,7 @@ page if a step is missing or if it is outdated.
     https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-14. **(final release only)** Show the release to the world:
+15. **(final release only)** Show the release to the world:
 
     1. Send an email to
        [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
@@ -478,7 +490,7 @@ page if a step is missing or if it is outdated.
     3. Send a toot from the cert-manager Mastodon account! Login details are in Jetstack's 1password (for now).
        ([Example toot](https://infosec.exchange/@CertManager/109666434738850493))
 
-15. Proceed to the post-release steps:
+16. Proceed to the post-release steps:
 
     1. **(initial beta only)** Create a PR on
        [cert-manager/release](https://github.com/cert-manager/release) in order to
