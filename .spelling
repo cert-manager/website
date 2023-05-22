@@ -54,6 +54,7 @@ ACLs
 ACMEDNS
 ACMEv1
 ACMEv2
+AdditionalFormats
 AKS
 ALB
 APIService
@@ -176,6 +177,7 @@ JoshVanL
 Jsonnet
 Juneezee
 JoooostB
+KeySelector
 KUARD
 Kirill-Garbar
 Knative

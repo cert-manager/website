@@ -226,6 +226,13 @@ Target is the target location in all namespaces to sync source data to.
         </tr>
     </thead>
     <tbody><tr>
+        <td><b><a href="#bundlespectargetadditionalformats">additionalFormats</a></b></td>
+        <td>object</td>
+        <td>
+          AdditionalFormats specifies any additional formats to write to the target<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b><a href="#bundlespectargetconfigmap">configMap</a></b></td>
         <td>object</td>
         <td>
@@ -239,6 +246,56 @@ Target is the target location in all namespaces to sync source data to.
           NamespaceSelector will, if set, only sync the target resource in Namespaces which match the selector.<br/>
         </td>
         <td>false</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.spec.target.additionalFormats`
+
+
+AdditionalFormats specifies any additional formats to write to the target
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#bundlespectargetadditionalformatsjks">jks</a></b></td>
+        <td>object</td>
+        <td>
+          KeySelector is a reference to a key for some map data object.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.spec.target.additionalFormats.jks`
+
+
+KeySelector is a reference to a key for some map data object.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          Key is the key of the entry in the object's `data` field to be used.<br/>
+        </td>
+        <td>true</td>
       </tr></tbody>
 </table>
 
@@ -411,6 +468,13 @@ Target is the current Target that the Bundle is attempting or has completed sync
         </tr>
     </thead>
     <tbody><tr>
+        <td><b><a href="#bundlestatustargetadditionalformats">additionalFormats</a></b></td>
+        <td>object</td>
+        <td>
+          AdditionalFormats specifies any additional formats to write to the target<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b><a href="#bundlestatustargetconfigmap">configMap</a></b></td>
         <td>object</td>
         <td>
@@ -424,6 +488,56 @@ Target is the current Target that the Bundle is attempting or has completed sync
           NamespaceSelector will, if set, only sync the target resource in Namespaces which match the selector.<br/>
         </td>
         <td>false</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.status.target.additionalFormats`
+
+
+AdditionalFormats specifies any additional formats to write to the target
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b><a href="#bundlestatustargetadditionalformatsjks">jks</a></b></td>
+        <td>object</td>
+        <td>
+          KeySelector is a reference to a key for some map data object.<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.status.target.additionalFormats.jks`
+
+
+KeySelector is a reference to a key for some map data object.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          Key is the key of the entry in the object's `data` field to be used.<br/>
+        </td>
+        <td>true</td>
       </tr></tbody>
 </table>
 
