@@ -73,6 +73,46 @@ To let people know that your PR is still a work in progress, we usually add a
 `WIP:` prefix to the title of the PR. Prow will then automatically set the label
 `do-not-merge/work-in-progress`.
 
+### Release Note Guidelines
+
+The `release-note` code block in the PR description aims at explaining to the
+end-user whether they should care about this change and whether they will be
+affected. It is OK to have multiple sentences as long as it is written in good
+English (subject verb complement, ends with a dot).
+
+A release note block shouldn't just paraphrase the commit message. For example,
+the end-user doesn't know what "comparisons" are and which custom resources are
+affected:
+
+~~~markdown
+```release-note
+Adds missing comparisons for certain fields which were incorrectly skipped if a LiteralSubject was set
+```
+~~~
+
+A better release note block gives context and specifically tells the end-user
+how they will be affected:
+
+~~~markdown
+```release-note
+When using the `literalSubject` on a Certificate, the IPs, URIs, DNS names, and email addresses subject segments are now properly compared.
+```
+~~~
+
+New lines in the release note block translate to hard line breaks, which means
+it is not possible to soft-wrap the release note. A new line can be useful for
+lists:
+
+~~~markdown
+```release-note
+cainjector:
+- New flags were added to the cainjector binary. They can be used to modify what injectable kinds are enabled. If cainjector is only used as a cert-manager's internal component it is sufficient to only enable validatingwebhookconfigurations and mutatingwebhookconfigurations injectable resources; disabling the rest can improve memory consumption. By default all are enabled.
+- The `--watch-certs` flag was renamed to `--enable-certificates-data-source`.
+```
+~~~
+
+If this PR introduces a breaking change, the release note block must start with
+`**BREAKING:**` (note the bold text).
 
 ### Cherry Picking
 
