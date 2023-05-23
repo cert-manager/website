@@ -479,13 +479,15 @@ v1.8.2
 v1.9.0
 v1.9.1
 v1.10
+v1.11.0
+v1.12.0
 v1alpha1
 v1alpha2
 v1alpha3
 v1beta1
 v2
 v3
-vCert
+VCert
 vendoring
 vendored
 versioning
@@ -561,6 +563,38 @@ VCert
 v1.11.0
 v1.11.1
 v4.4.1
+secretless
+TokenRequest
+v1.12.0
+v1.12.0.
+PodDisruptionBudgets
+andrewsomething
+avi-08
+e96wic
+ExNG
+g-gaston
+jkroepke
+malovme
+maumontesilva
+tobotg
+TrilokGeer
+waterfoul
+yulng
+vidarno
+vinzent
+dsonck92
+go.work
+go.mod
+validatingwebhookconfigurations
+mutatingwebhookconfigurations
+customresourcedefinitions
+unlabelled
+v1.27.1
+v0.6.0.
+v4.4.1
+liveness
+apiservices
+arm64
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker

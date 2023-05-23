@@ -41,7 +41,7 @@ spec:
     - selector: {}
       http01:
         ingress:
-          class: nginx
+          ingressClassName: nginx
 ```
 
 We have specified the ACME server URL for Let's Encrypt's [staging
@@ -108,22 +108,29 @@ verify domain ownership. To verify ownership of each domain mentioned in an
 `http01` stanza, cert-manager will create a Pod, Service and Ingress that
 exposes an HTTP endpoint that satisfies the HTTP01 challenge.
 
-The fields `ingress` and `ingressClass` in the `http01` stanza can be used to
-control how cert-manager interacts with Ingress resources:
+The fields `ingressClassName`, `class`, and `name` in the `http01` stanza can be
+used to control how cert-manager interacts with Ingress resources:
 
-- If the `ingress` field is specified, then an Ingress resource with the same
-  name in the same namespace as the Certificate must already exist and it will
-  be modified only to add the appropriate rules to solve the challenge.
-  This field is useful for the Google Cloud Loadbalancer ingress controller, 
-  as well as a number of others, that assign a single public IP address for 
-  each ingress resource.
-  Without manual intervention, creating a new ingress resource would cause any
-  challenges to fail.
-- If the `ingressClass` field is specified, a new ingress resource with a
-  randomly generated name will be created in order to solve the challenge.
-  This new resource will have an annotation with key `kubernetes.io/ingress.class`
-  and value set to the value of the `ingressClass` field.
-  This works for the likes of the NGINX ingress controller.
+- If the `ingressClassName` field is specified, a new ingress resource with a
+  randomly generated name will be created in order to solve the challenge. This
+  new resource will have the field `ingressClassName` with the value of the
+  `ingressClassName` field. This is the recommended way of configuring which
+  Ingress controller should be used. This works for the likes of the NGINX
+  ingress controller.
+- If the `class` field is specified, a new ingress resource with a randomly
+  generated name will be created in order to solve the challenge. This new
+  resource will have an annotation with key `kubernetes.io/ingress.class` and
+  value set to the value of the `class` field. This field is only recommended
+  with ingress-gce which [does not support the `ingressClassName`
+  field](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress).
+- If the `name` field is specified, then an Ingress resource with the same name
+  in the same namespace as the Certificate must already exist and it will be
+  modified only to add the appropriate rules to solve the challenge. This field
+  is useful for the Google Cloud Loadbalancer ingress controller, as well as a
+  number of others, that assign a single public IP address for each ingress
+  resource. Without manual intervention, creating a new ingress resource would
+  cause any challenges to fail.
+
 - If neither are specified, new ingress resources will be created with a randomly
   generated name, but they will not have the ingress class annotation set.
 - If both are specified, then the `ingress` field will take precedence.

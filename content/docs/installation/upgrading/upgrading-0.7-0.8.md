@@ -78,7 +78,7 @@ spec:
     - selector: {}
       http01:
         ingress:
-          class: nginx
+          ingressClassName: nginx
     - selector:
         # Any Certificate resources, or Ingress resources that use
         # ingress-shim and match the below label selector will use this
@@ -204,7 +204,7 @@ spec:
     - selector: {}
       http01:
         ingress:
-          class: nginx
+          ingressClassName: nginx
     - selector:
         # Any Certificate resources, or Ingress resources that use
         # ingress-shim and match the below label selector will use this

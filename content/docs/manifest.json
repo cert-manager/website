@@ -555,6 +555,10 @@
               "path": "/docs/release-notes/README.md"
             },
             {
+              "title": "v1.12",
+              "path": "/docs/release-notes/release-notes-1.12.md"
+            },
+            {
               "title": "v1.11",
               "path": "/docs/release-notes/release-notes-1.11.md"
             },

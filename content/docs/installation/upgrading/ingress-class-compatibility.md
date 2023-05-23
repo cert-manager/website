@@ -1,12 +1,21 @@
 ---
-title: Notes on Ingress Class Compatibility
+title: Notes on the breaking change with the `class` field that happened in cert-manager v1.5.4
 description: 'cert-manager installation: Notes on ingress classes and safe upgrades'
 ---
 
-In cert-manager v1.5.4 we made a change to the HTTP-01 code which was not backwards compatible.
-See [Regression: HTTP-01 challenges fail with Istio, Traefik, ingress-gce and Azure AGIC].
 
-[Regression: HTTP-01 challenges fail with Istio, Traefik, ingress-gce and Azure AGIC]: https://github.com/cert-manager/cert-manager/issues/4537
+> ⚠️ This document focuses on the `class` field of the Issuer and ClusterIssuer
+> resources and the annotation `kubernetes.io/ingress.class`. If you are
+> interested in using `ingressClassName` on your Ingress resources when using
+> cert-manager's HTTP-01 solver, see the page [Securing Ingress
+> Resources](../../configuration/acme/http01#ingressclassname).
+
+In cert-manager v1.5.4 we made a change to the HTTP-01 code which was not
+backwards compatible. Before v1.5.4, cert-manager was using the `class` field on
+the Issuer and ClusterIssuer to add the annotation
+`kubernetes.io/ingress.class`. In cert-manager v1.5.4, cert-manager stopped
+setting the annotation. See [Regression: HTTP-01 challenges fail with Istio,
+Traefik, ingress-gce and Azure AGIC].
 
 In v1.5.5, v1.6.2 and 1.7.1 we fixed this problem.
 
@@ -17,6 +26,8 @@ If you have cert-manager v1.5.3 (or below) you should skip v1.5.4 and instead:
 - and then the newest version of cert-manager 1.7
 
 and you can ignore the rest of this document.
+
+[Regression: HTTP-01 challenges fail with Istio, Traefik, ingress-gce and Azure AGIC]: https://github.com/cert-manager/cert-manager/issues/4537
 
 The following notes apply to anyone upgrading from cert-manager v1.5.4, v1.6.0, v1.6.1 on Kubernetes v1.19 or later.
 
@@ -49,9 +60,9 @@ compatibility is to only use the annotation, even when creating `v1` Ingresses.
 
 ## ingress-nginx
 
-If you chose not to use the IngressClass `nginx` that is created by default by the Helm chart
-(e.g., you named the IngressClass `nginx-outside`), you will need to add the flags
-`--ingress-class` and `--ingress-class-by-name` to your ingress-nginx deployment:
+If you chose not to use the IngressClass `nginx` that is created by default by
+the Helm chart (e.g., you named the IngressClass `nginx-outside`), you will need
+to add the flags `--ingress-class` to your ingress-nginx deployment:
 
 ```
 --ingress-class=nginx-outside --ingress-class-by-name=true
