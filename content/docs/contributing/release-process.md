@@ -143,14 +143,15 @@ page if a step is missing or if it is outdated.
 
    [^1]: One or more "patch pre-releases" may be created to allow voluntary community testing of a bug fix or security fix before the fix is made generally available. The suffix `-beta` must be used for patch pre-releases.
 
-2. **(final release only)** Make sure that a PR with the new upgrade
+2. **(final release only)** Prepare the Website "Upgrade Notes" PR.
+
+   Make sure that a PR with the new upgrade
    document is ready to be merged on
    [cert-manager/website](https://github.com/cert-manager/website). See for
    example, see
    [upgrading-1.0-1.1](https://cert-manager.io/docs/installation/upgrading/upgrading-1.0-1.1/).
 
-3. **(final + patch releases)** **Website Updates, part 1** (creating the "release
-   notes" PR).
+3. **(final + patch releases)** Prepare the Website "Release Notes" PR.
 
      **⚠️ This step can be done ahead of time.**
 
@@ -198,7 +199,7 @@ page if a step is missing or if it is outdated.
 
    8. Add a line to the file `content/docs/release-notes/README.md`.
 
-4. **(final + patch release)** Prepare the "website updates" PR for the website.
+4. **(final + patch release)** Prepare the Website "Release Notes" PR.
 
    > ⚠️ This step can be done ahead of time.
 
@@ -211,6 +212,7 @@ page if a step is missing or if it is outdated.
      [supported-releases](../installation/supported-releases.md) page.
    3. (**final release**) Bump the version that appears in
      `scripts/gendocs/generate-new-import-path-docs`. For example:
+
       ```diff
       -LATEST_VERSION="v1.11-docs"
       +LATEST_VERSION="v1.12-docs"
@@ -235,11 +237,14 @@ page if a step is missing or if it is outdated.
 
    5. (**final release only**) Freeze the `docs/` folder by creating a copy
      and remove the `docs/`-only folders:
+
       ```bash
       cp -r content/docs content/v1.12-docs
       rm -rf content/v1.12-docs/{installation/supported-releases,installation/upgrading,release-notes}
       ```
+
    6. (**final + patch releases**) Update the [API docs](https://cert-manager.io/docs/reference/api-docs/) and [CLI docs](https://cert-manager.io/docs/cli//):
+
       ```bash
       # From the website repository, on the master branch.
       ./scripts/gendocs/generate
@@ -535,10 +540,23 @@ page if a step is missing or if it is outdated.
     4. Merge the PR
     5. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-14. **(final + patch releases)** **Website Updates, part 2.**
+14. **(final + patch releases)** Merge the 4 Website PRs:
 
-    Proceed with merging the website PRs "release notes" and "website bump" you
-    have created previously.
+    1. Merge the PRs "Release Notes", "Upgrade Notes", and "Freeze And Bump
+       Versions" that you have created previously.
+    2. Create the PR "Merge release-next into master" by [clicking
+       here][ff-release-next].
+
+       If you see the label `dco-signoff: no`, add a comment on the PR with:
+
+       ```text
+       /override dco
+       ```
+
+       This command is necessary because some the merge commits have been
+       written by the bot and do not have a DCO signoff.
+
+      [ff-release-next]: https://github.com/cert-manager/website/compare/master...release-next?quick_pull=1&title=%5BPost-Release%5D+Merge+release-next+into+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
 
 15. Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
 
