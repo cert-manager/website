@@ -148,13 +148,14 @@ EOF
 # This script is _only_ for generating docs for versions of cert-manager with the
 # github.com/cert-manager/cert-manager import path!
 
-LATEST_VERSION="v1.11-docs"
+LATEST_VERSION="v1.12-docs"
 
 #genversionwithcli "release-1.8" "v1.8-docs"
 #genversionwithcli "release-1.9" "v1.9-docs"
 #genversionwithcli "release-1.10" "v1.10-docs"
+#genversionwithcli "release-1.11" "v1.11-docs"
 
-genversionwithcli "release-1.11" "$LATEST_VERSION"
+genversionwithcli "release-1.12" "$LATEST_VERSION"
 
 # Rather than generate the same docs again for /docs, copy from the latest version
 

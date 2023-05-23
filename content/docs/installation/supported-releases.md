@@ -13,22 +13,18 @@ Each release is supported for a period of four months, and we aim to create a ne
 release roughly every two months, accounting for holiday periods, major conferences
 and other world events.
 
-cert-manager expects that ServerSideApply is enabled in the cluster for all version of Kubernetes from 1.24 and above.
-
 <h2 id="supported-releases">Currently supported releases</h2>
 
-| Release  | Release Date |   End of Life   | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
-|----------|:------------:|:---------------:|:----------------------------------:|:---------------------------------:|
-| [1.11][] | Jan 11, 2023 | Release of 1.13 |            1.21 → 1.26             |            4.8 → 4.13             |
-| [1.10][] | Oct 17, 2022 | Release of 1.12 |            1.20 → 1.26             |            4.7 → 4.13             |
-
-\*ServerSideApply should be enabled in the cluster
+| Release  | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+|----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
+| [1.12][] | May 19, 2024 | End of September, 2024 |            1.22 → 1.27             |            4.9 → 4.14             |
+| [1.11][] | Jan 11, 2023 |    Release of 1.13     |            1.21 → 1.27             |            4.8 → 4.14             |
 
 ## Upcoming releases
 
-| Release  |  Release Date  |  End of Life       | [Supported Kubernetes versions][s]  | [Supported OpenShift versions][s] |
-|----------|:--------------:|:------------------:|:-----------------------------------:|:---------------------------------:|
-| [1.12][] | Apr 26, 2023  | End of August, 2023 |            1.22 → 1.26              |            4.9 → 4.13             |
+| Release  |      Release Date      |      End of Life      | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+|----------|:----------------------:|:---------------------:|:----------------------------------:|:---------------------------------:|
+| [1.13][] | End of September, 2024 | End of November, 2024 |            1.22 → 1.27             |            4.9 → 4.14             |
 
 Dates in the future are uncertain and might change.
 
@@ -36,6 +32,7 @@ Dates in the future are uncertain and might change.
 
 | Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
 |----------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
+| [1.10][] | Oct 17, 2022 | May 19, 2024 |          1.20 → 1.26           |          4.7 → 4.13           |
 | [1.9][]  | Jul 22, 2022 | Jan 11, 2023 |          1.20 → 1.24           |          4.7 → 4.11           |
 | [1.8][]  | Apr 05, 2022 | Oct 17, 2022 |          1.19 → 1.24           |          4.6 → 4.11           |
 | [1.7][]  | Jan 26, 2021 | Jul 22, 2022 |          1.18 → 1.23           |          4.5 → 4.9            |
@@ -54,7 +51,8 @@ Dates in the future are uncertain and might change.
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
-[1.12]: https://github.com/cert-manager/cert-manager/milestone/33
+[1.13]: https://github.com/cert-manager/cert-manager/milestone/34
+[1.12]: https://cert-manager.io/docs/release-notes/release-notes-1.12
 [1.11]: https://cert-manager.io/docs/release-notes/release-notes-1.11
 [1.10]: https://cert-manager.io/docs/release-notes/release-notes-1.10
 [1.9]: https://cert-manager.io/docs/release-notes/release-notes-1.9
@@ -210,14 +208,14 @@ In practice, this is largely determined based on what versions of [kind](https:/
 are available for testing, and which versions of Kubernetes are provided by major upstream cloud Kubernetes vendors
 including EKS, GKE, AKS and OpenShift.
 
-|      Vendor       | Oldest Kubernetes Release\*  |               Other Older Kubernetes Releases                 |
-|:-----------------:|------------------------------|---------------------------------------------------------------|
-|    [EKS][eks]     | 1.21 (EOL Feb 2023)          | 1.22 (EOL May 2023)                                           |
-|    [GKE][gke]     | 1.21 (EOL Feb 2023)          | 1.22 (EOL May 2023)                                           |
-|    [AKS][aks]     | 1.23 (EOL ~Feb 2023)         |                                                               |
-| [OpenShift 4][os] | 1.21 (4.8 EUS, EOL Feb 2023) | 1.22 (4.9, EOL Apr 2023)                                      |
+|      Vendor       | Oldest Kubernetes Release\* |                          Other Older Kubernetes Releases                           |
+|:-----------------:|-----------------------------|------------------------------------------------------------------------------------|
+|    [EKS][eks]     | 1.22 (EOL Jun 2023)         | 1.23 (EOL Oct 2023), 1.24 (EOL Jan 2024), 1.25 (EOL May 2024), 1.26 (EOL Jun 2024) |
+|    [GKE][gke]     | 1.23 (EOL Jul 2023)         | 1.24 (EOL Oct 2023), 1.25 (EOL Feb 2024), 1.26 (EOL May 2024), 1.27 (EOL Jan 2025) |
+|    [AKS][aks]     | 1.24 (EOL Jul 2023)         | 1.25 (EOL Dec 2023), 1.26 (EOL Mar 2024), 1.27 (EOL Jun 2024)                      |
+| [OpenShift 4][os] | 1.22 (4.9, EOL Jun 2023)    | 1.23 (4.10, EOL Oct 2023), 1.24 (4.11, EOL Feb 2024), 1.25 (4.12, EOL Jan 2025)    |
 
-\*Oldest release relevant to the next cert-manager release, as of 2022-07-18
+\*Oldest release relevant to the next cert-manager release, as of 2023-05-19
 
 [eks]: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#kubernetes-release-calendar
 [gke]: https://cloud.google.com/kubernetes-engine/docs/release-schedule
@@ -233,6 +231,7 @@ For convenience, the following table shows these version mappings:
 
 | OpenShift versions | Kubernetes version |
 |--------------------|--------------------|
+| 4.14               | 1.27               |
 | 4.13               | 1.26               |
 | 4.12               | 1.25               |
 | 4.11               | 1.24               |
