@@ -254,7 +254,7 @@ that commit to the release branch _before_ pushing the tag for the new release.
      ```bash
      # This tag is required to be able to go install cmctl
      # See https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
-     git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELASE_VERSION"
+     git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELEASE_VERSION"
      git push origin "cmd/ctl/$RELEASE_VERSION"
      ```
 
