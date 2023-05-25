@@ -225,7 +225,7 @@ page if a step is missing or if it is outdated.
    >  This is only a temporary change to allow you to update the branch.
    >  [Prow will re-apply the branch protection within 24 hours](https://docs.prow.k8s.io/docs/components/optional/branchprotector/#updating).
 
-5. Ensure that cert-manager library dependency in `cmctl` refers to the latest
+5. (only required when releasing cert-manager v1.12 and newer) Ensure that cert-manager library dependency in `cmctl` refers to the latest
 cert-manager commit on the branch you want to release from. See comment
 [here](https://github.com/cert-manager/cert-manager/blob/v1.12.1/cmd/ctl/go.mod#L5-L12).
 You must bump the cert-manager version in `cmctl` `go.mod` file and cherry-pick
@@ -250,7 +250,7 @@ that commit to the release branch _before_ pushing the tag for the new release.
       kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
       the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-Add the tag for cmctl:
+(only required when releasing cert-manager v1.12 and newer) Add the tag for cmctl:
      ```bash
      # This tag is required to be able to go install cmctl
      # See https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
