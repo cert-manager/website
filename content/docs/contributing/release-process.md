@@ -225,7 +225,13 @@ page if a step is missing or if it is outdated.
    >  This is only a temporary change to allow you to update the branch.
    >  [Prow will re-apply the branch protection within 24 hours](https://docs.prow.k8s.io/docs/components/optional/branchprotector/#updating).
 
-5. Create the required tags for the new release locally and push it upstream (starting the cert-manager build):
+5. Ensure that cert-manager library dependency in `cmctl` refers to the latest
+cert-manager commit on the branch you want to release from. See comment
+[here](https://github.com/cert-manager/cert-manager/blob/v1.12.1/cmd/ctl/go.mod#L5-L12).
+You must bump the cert-manager version in `cmctl` `go.mod` file and cherry-pick
+that commit to the release branch _before_ pushing the tag for the new release.
+
+6. Create the required tags for the new release locally and push it upstream (starting the cert-manager build):
 
      ```bash
      RELEASE_VERSION=v1.8.0-beta.0
@@ -238,15 +244,11 @@ page if a step is missing or if it is outdated.
       `admin` GitHub permission on the cert-manager repo to create or push to
       the branch, see [prerequisites](#prerequisites). If you do not have this
       permission, you will have to open a PR to merge master into the release
-      branch), and wait for the PR checks to become green.
+      branch, and wait for the PR checks to become green.
 
       For recent versions of cert-manager, the tag being pushed will trigger a Google Cloud Build job to start,
       kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
       the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
-
-6. Ensure that cmctl refers to the latest tag of cert-manager:
-
-Bump cert-manager version in [cmctl `go.mod` file](https://github.com/cert-manager/cert-manager/blob/v1.12.0/cmd/ctl/go.mod#L15) and cherry-pick the commit to the release branch.
 
 Add the tag for cmctl:
      ```bash
