@@ -117,6 +117,11 @@ First, delete existing cert-manager webhook configurations, if any:
 kubectl delete mutatingwebhookconfigurations cert-manager-webhook
 ```
 
+Then try do delete the corresponding validatingwebhookconfigurations
+```bash
+kubectl delete validatingwebhookconfigurations cert-manager-webhook
+```
+
 Then change the `.metadata.finalizers` field to an empty list by editing the challenge resource:
 
 ```bash
