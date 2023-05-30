@@ -22,9 +22,9 @@ and other world events.
 
 ## Upcoming releases
 
-| Release  |      Release Date      |      End of Life      | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
-|----------|:----------------------:|:---------------------:|:----------------------------------:|:---------------------------------:|
-| [1.13][] | End of September, 2024 | End of November, 2024 |            1.22 → 1.27             |            4.9 → 4.14             |
+| Release  |      Release Date      |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+|----------|:----------------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
+| [1.13][] | End of July, 2023      | End of November, 2023  |            1.22 → 1.27             |            4.9 → 4.14             |
 
 Dates in the future are uncertain and might change.
 
