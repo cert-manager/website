@@ -40,7 +40,7 @@ memory consumption.
 Caching of the full contents of all cluster `Secret`s can now be disabled by
 setting a `SecretsFilteredCaching` alpha feature gate to true. This will ensure
 that only `Secret` resources that are labelled with
-`controller.cert-manager.io/fao` label are cached in full. Cert-manager
+`controller.cert-manager.io/fao` label [^1] are cached in full. Cert-manager
 automatically adds this label to all `Certificate` `Secret`s.
 
 This change has been placed behind alpha feature gate as it could potentially
@@ -268,3 +268,5 @@ time and resources towards the continued maintenance of cert-manager projects.
 ### Uncategorized
 
 - We have replaced our python boilerplate checker with an installed Go version, removing the need to have Python installed when developing or building cert-manager. ([#6000](https://github.com/cert-manager/cert-manager/pull/6000), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+[^1]: fao = 'for attention of'
