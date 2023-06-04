@@ -180,6 +180,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-yandex-cloud`](https://github.com/malinink/cert-manager-webhook-yandex-cloud)
 - [`cert-manager-webhook-netcup`](https://github.com/aellwein/cert-manager-webhook-netcup)
 - [`cert-manager-webhook-pdns`](https://github.com/zachomedia/cert-manager-webhook-pdns)
+- [`cert-manager-webhook-zilore`](https://gitlab.com/zilore/cert-manager-webhook-zilore)
 
 You can find more information on how to configure webhook providers [here](./webhook.md).
 
