@@ -211,6 +211,7 @@ PEM
 PKCS#12
 PKCS#8
 Pomerium
+PostgreSQL
 PowerShell
 Prometheus
 P-521
