@@ -172,7 +172,7 @@ By making it easier for each group to find the information they need we aim to r
 Has never used cert-manager and may never have used Kubernetes.
 Wants to find out what cert-manager can offer.
 May have heard about cert-manager in another tutorial.
-May want to know what are the alternatives to cert-manager and the tradeoffs.
+May want to know what are the alternatives to cert-manager and the trade offs.
 Needs to install cert-manager quickly so that they evaluate it on their laptop.
 Needs to learn basic configuration of cert-manager.
 Needs to understand what are the next steps.
@@ -194,12 +194,12 @@ Needs to know which errors they can fix and which errors require assistance from
 Knows Kubernetes.
 Has a long running cert-manager installation.
 Wants to know how to configure it and upgrade it for optimum performance.
-Wants to optimise for large numbers of certificates.
+Wants to optimize for large numbers of certificates.
 Wants to upgrade from older versions.
 Wants to monitor cert-manager performance
 Wants to set up alerts to notify them when cert-manager goes wrong.
 May want to configure cert-manager for multiple cloud providers.
-May want to get cert-manager working with some other cluster scoped system like Istio or knative.
+May want to get cert-manager working with some other cluster scoped system like Istio or Knative.
 
 ### Integrator
 
