@@ -139,7 +139,7 @@ credentials.
 
 ### Access Token Authentication
 
-1. [Set up token authentication](https://docs.venafi.com/Docs/21.1/TopNav/Content/SDK/AuthSDK/t-SDKa-Setup-OAuth.php).
+1. [Set up token authentication](https://docs.venafi.com/Docs/current/TopNav/Content/SDK/AuthSDK/t-SDKa-Setup-OAuth.php).
 
    NOTE: Do not select "Refresh Token Enabled" and set a *long* "Token Validity (days)".
 
