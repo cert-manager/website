@@ -375,8 +375,7 @@ been deployed.
 The Vault issuer tests your Vault instance by querying the `v1/sys/health`
 endpoint, to ensure your Vault instance is unsealed and initialized before
 requesting certificates. The result of that query will populate the `STATUS`
-column
-
+column.
 
 ```bash
 $ kubectl get issuers vault-issuer -n sandbox -o wide
