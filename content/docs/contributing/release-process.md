@@ -236,7 +236,7 @@ page if a step is missing or if it is outdated.
       ```
 
    5. (**final release only**) Freeze the `docs/` folder by creating a copy ,
-     removing the pages from that copy that don't make sense to be versionned,
+     removing the pages from that copy that don't make sense to be versioned,
      and updating the `manifest.json` file:
 
       ```bash
