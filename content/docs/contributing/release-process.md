@@ -235,12 +235,14 @@ page if a step is missing or if it is outdated.
       grep -R -n -F 'v1.11.' content/docs/installation
       ```
 
-   5. (**final release only**) Freeze the `docs/` folder by creating a copy
-     and remove the `docs/`-only folders:
+   5. (**final release only**) Freeze the `docs/` folder by creating a copy ,
+     removing the pages from that copy that don't make sense to be versionned,
+     and updating the `manifest.json` file:
 
       ```bash
       cp -r content/docs content/v1.12-docs
       rm -rf content/v1.12-docs/{installation/supported-releases,installation/upgrading,release-notes}
+      sed -i.bak 's|docs|v1.12-docs|g' content/v1.12-docs/manifest.json
       ```
 
    6. (**final + patch releases**) Update the [API docs](https://cert-manager.io/docs/reference/api-docs/) and [CLI docs](https://cert-manager.io/docs/cli//):
