@@ -1,9 +1,9 @@
 ---
 title: Managing Public Trust in Kubernetes with Trust Manager
-description: Learn how to deploy and configure trust-manager to automatically distribute your approved Public CA configuration to you entire Kubernetes cluster.
+description: Learn how to deploy and configure trust-manager to automatically distribute your approved Public CA configuration to your entire Kubernetes cluster.
 ---
 
-*Last Verified: 14 April 2023*
+*Last Verified: 19 June 2023*
 
 In this tutorial we will walk through how we can use 
 [trust-manager](https://cert-manager.io/docs/projects/trust-manager/) to
@@ -13,8 +13,8 @@ a Kubernetes cluster. Once distributed we will also show:
 - How you can automatically reload applications when your trust bundle changes
 - How you can enforce applications to use your distributed CA bundle
 
-From there we will use a simple `curl` pod to show to automatically mount the
-trusted CA `Bundle`, so it can be used without having to configure curl 
+From there we will use a simple `curl` pod to show how to automatically mount
+the trusted CA `Bundle`, so it can be used without having to configure curl
 manually. This mimics how an application would not need any additional
 configuration to make use of your trusted CA certificates bundle.
 
@@ -22,19 +22,10 @@ In this tutorial we will be limiting the scope of our changes to only impact
 the `team-a` namespace. To get the most out of these features you will want to
 remove this limitation.
 
-**Note:** All resources provided are demonstrative and should be reviewed
-properly before using in production environments.
+> **Note:** All resources provided are demonstrative and should be reviewed 
+  properly before using in production environments.
 
 ## Prerequisites
-
-**💻 Knowledge**
-
-For this tutorial we assume that you know about 
-[trust-manager](https://cert-manager.io/docs/projects/trust-manager/) already,
-and you are aware of how it distributes CA certificate from a `Bundle` into
-`ConfigMap` resources across the cluster. If not then check out 
-[the documentation](../../projects/trust-manager/README.md)
-for a good understanding.
 
 **💻 Software**
 
@@ -45,6 +36,9 @@ command-line tool which allows you to configure Kubernetes clusters.
 parsing YAML with helpful coloring.
 
 ## Distribute Public CA Trust
+
+Let us first setup trust-manager and have our public CAs distributed to our
+demo namespace: `team-a`.
 
 ### Setup Application & Bundle
 
@@ -79,7 +73,7 @@ parsing YAML with helpful coloring.
     EOF
     ```
 
-1) Lets create a namespace where our application will run:
+1) Let's create a namespace where our application will run:
 
     ```shell
     kubectl apply -f - <<EOF
@@ -297,9 +291,9 @@ Similar could be achieved with other languages.
 So now we have mounted trust-manager's bundle manually, you might be thinking:
 
 - What happens if the CA Bundle is changed, how do I get that change to my
-application?
+  application?
 - How do I ensure that my CA Bundle is mounted to all applications in my
-cluster without having to request changes from my tenants?
+  cluster without having to request changes from my tenants?
 
 Let's tackle both of these scenarios using additional Open Source tools.
 
@@ -323,8 +317,8 @@ as volumes or environment variables.
 could bundle or write into your application container. They would simply watch
 the file system for changes and trigger a reload of the application process.
 Such an approach requires container image or code changes and this could be
-difficult to implement with many tenants. The advantage to using ,reloader here
-is that it's a generic solution applicable to all applications running in a
+difficult to implement with many tenants. The advantage to using reloader here
+is that it's a generic solution, applicable to all applications running in a
 cluster.
 
 1. Continuing with the reloader, it can be installed with helm:
@@ -336,7 +330,7 @@ cluster.
     ```
 
 1. We can reuse the deployment `sleep-auto` from the previous section and 
-configured it to enabled the reload functionality:
+  configured it to enabled the reload functionality:
 
     ```shell
     kubectl annotate deployment -n team-a sleep-auto reloader.stakater.com/auto="true"
@@ -354,7 +348,7 @@ configured it to enabled the reload functionality:
     ```
 
 1. To test this change we can edit our `Bundle` resource to remove all the
-default Public CA certificates and only provide one CA certificate instead:
+  default Public CA certificates and only provide one CA certificate instead:
 
     ```yaml file=./trust/bundle-one-ca.yaml
     ```
@@ -407,7 +401,7 @@ default Public CA certificates and only provide one CA certificate instead:
     your other terminal. 
     
 1. Once the new pod is running, use the following to confirm that you have only
-one CA certificate `ca-certificates.crt` file, the one we have just applied:
+  one CA certificate `ca-certificates.crt` file, the one we have just applied:
 
     ```shell
     kubectl exec -ti -n team-a $(kubectl get po -n team-a -l app=sleep-auto -o jsonpath='{.items[0].metadata.name}') -- cat /etc/ssl/certs/ca-certificates.crt
@@ -415,7 +409,7 @@ one CA certificate `ca-certificates.crt` file, the one we have just applied:
 
     You should get exactly this output:
 
-    ```
+    ```shell
     -----BEGIN CERTIFICATE-----
     MIIETjCCAzagAwIBAgINAe5fFp3/lzUrZGXWajANBgkqhkiG9w0BAQsFADBXMQsw
     CQYDVQQGEwJCRTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTEQMA4GA1UECxMH
@@ -444,8 +438,9 @@ one CA certificate `ca-certificates.crt` file, the one we have just applied:
     -----END CERTIFICATE-----
     ```
 
-1. The CA output here is the one that is trust by the website 
-`https://bbc.co.uk`. We can validate this by using `curl` from that container:
+1. This CA certificate is one that can be used to verify the authenticity of
+  the website `https://bbc.co.uk`. We can validate this by using `curl` from
+  that container:
 
     ```shell
     kubectl exec -ti -n team-a $(kubectl get po -n team-a -l app=sleep-auto -o jsonpath='{.items[0].metadata.name}') -- curl -v https://bbc.co.uk
@@ -486,11 +481,11 @@ one CA certificate `ca-certificates.crt` file, the one we have just applied:
 Using tools such as 
 [Gatekeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/howto/)
 & [Kyverno](https://kyverno.io/) we can require that particular
-`volume` & `volumeMount` configurations are enforced at application time to
-Kubernetes. With this method a cluster administrator can setup rules to
-automatically insert the relevant configuration to every running pod. This may
-be beneficial to enforce configuration but can be more opaque to your cluster's
-application teams or tenants.
+`volume` & `volumeMount` configurations are enforced when applications are
+deployed to Kubernetes. With this method, a cluster administrator can setup
+rules to automatically insert the relevant configuration to every pod.
+This may be beneficial to enforce configuration but can be more opaque to your
+cluster's application teams or tenants.
 
 In this tutorial we will show how to use Gatekeeper
 
