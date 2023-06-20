@@ -19,8 +19,8 @@ manually. This mimics how an application would not need any additional
 configuration to make use of your trusted CA certificates bundle.
 
 In this tutorial we will be limiting the scope of our changes to only impact
-the `team-a` namespace. To get the most out of these features you will want to
-remove this limitation.
+the `team-a` namespace. To get the most out of these features you will want 
+to remove this limitation.
 
 > **Note:** All resources provided are demonstrative and should be reviewed 
   properly before using in production environments.
@@ -42,13 +42,8 @@ demo namespace: `team-a`.
 
 ### Setup Application & Bundle
 
-1) Ensure you have [trust-manager](../../projects/trust-manager/README.md#installation) installed. If not simply use:
-
-    ```shell
-    helm repo add jetstack https://charts.jetstack.io
-    helm upgrade -i -n cert-manager cert-manager jetstack/cert-manager --set installCRDs=true --wait --create-namespace
-    helm upgrade -i -n cert-manager trust-manager jetstack/trust-manager --wait
-    ```
+1) Install trust-manager following the 
+  [instructions here](../../projects/trust-manager/README.md#installation).
 
 1) Create your first `Bundle` resource including only Public CA certificates
 
@@ -81,7 +76,6 @@ demo namespace: `team-a`.
     kind: Namespace
     metadata:
       labels:
-        kubernetes.io/metadata.name: team-a
         trust: enabled
       name: team-a
     EOF
@@ -96,8 +90,11 @@ demo namespace: `team-a`.
           trust: enabled
     ```
 
+    > **Note**: this is to limit the scope of our trust bundle to only the
+    `team-a` namespace as mentioned previously.
+
 1) Verify that the trust-manager controller has correctly propagated the
-CA bundle to the namespace:
+  CA bundle to the namespace:
 
     ```shell
     kubectl get configmap -n team-a public-bundle -o yaml
@@ -108,13 +105,19 @@ CA bundle to the namespace:
 
 ### Mount Trust Bundle to Application with Automatic Use
 
-Now we will mount our trusted CAs to the application in the default location
-that most applications expect to find a `ca-certificates.crt` file. The benefit
-to this approach is that any application code inside the container will use
-this file by default and not require any additional configuration. There is
-the added benefit that you will be mounting over the top of 
-`/etc/ssl/certs` which will remove any existing CA certificates usually
-present from a container base image.
+To use our trusted CAs we will mount them to the application in a default 
+location that most applications expect to find a `ca-certificates.crt` file.
+The benefit to this approach is that most application code inside the container
+will use this file by default and not require any additional configuration. There is the added benefit that you will be mounting over the top of 
+`/etc/ssl/certs` which will remove existing CA certificates, usually
+present from a container base image or pulled in during CI builds.
+
+> **WARNING:** We have chosen one well known location in this example which
+  is used by alpine and `curl` for sourcing trusted CAs. This is not the only
+  location that can be used, so a container may have other default locations.
+  If you want to see where default CAs are located you can use
+  [paranoia](https://github.com/jetstack/paranoia) to inspect a built container
+  image.
 
 1) Apply the application deployment:
 
@@ -167,7 +170,7 @@ present from a container base image.
 1) Create a shell inside the running pod:
 
     ```shell
-    kubectl exec -n team-a -ti $(k get po -n team-a -l app=sleep-auto -o jsonpath='{.items[0].metadata.name}') -- /bin/sh
+    kubectl exec -n team-a -ti $(kubectl get po -n team-a -l app=sleep-auto -o jsonpath='{.items[0].metadata.name}') -- /bin/sh
     ```
 
 1) List the contents of `/etc/ssl/certs/` to validate that only your
