@@ -406,6 +406,7 @@ page if a step is missing or if it is outdated.
      # Must be run from the cert-manager repo folder.
      cd cmd/cmctl
      go get github.com/cert-manager/cert-manager@$RELEASE_VERSION
+     go mod tidy
      git add go.mod go.sum
      git commit -m"Update cmd/cmctl's go.mod to $RELEASE_VERSION"
      cd ../..
@@ -424,15 +425,28 @@ page if a step is missing or if it is outdated.
 
     [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
 
-    Finally, open a PR to merge that change and go back to the release branch
+    Then, open a PR to merge that change and go back to the release branch
     with the following commands:
 
-    ```bash
-    gh pr create \
-      --title "[Release $RELEASE_VERSION] Update cmd/cmctl's go.mod to $RELEASE_VERSION" \
-      --body "Update cmd/cmctl's go.mod to $RELEASE_VERSION" --base $BRANCH
-    git checkout $BRANCH
-    ```
+     ```bash
+     gh pr create \
+       --title "[Release $RELEASE_VERSION] Update cmd/cmctl's go.mod to $RELEASE_VERSION" \
+       --body-file - --base $BRANCH <<EOF
+     This PR cmd/cmctl's go.mod to $RELEASE_VERSION as part of the release process.
+
+     **To the reviewer:** the version changes in \`go.mod\` must be reviewed.
+
+     \`\`\`release-note
+     NONE
+     \`\`\`
+     EOF
+     ```
+
+    Finally, get back to the main tag:
+
+     ```bash
+     git checkout $RELEASE_VERSION
+     ```
 
 10. In this section, we will be creating the description for the GitHub Release.
 
