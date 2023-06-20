@@ -415,11 +415,16 @@ spec:
         val-1: key-1
 ```
 
-There are currently no open source plugins.
+## Known Plugins from the Community
+
+- [CEL approver-policy plugin](https://github.com/erikgb/cel-approver-policy-plugin) (experimental)
 
 If you want to implement an external approver policy plugin take a look at the
 example implementation at
 https://github.com/cert-manager/example-approver-policy-plugin.
+
+Have you implemented a plugin for approver-policy? Feel free to add a link to your plugin from this page by
+opening a pull request in the [cert-manager website project](https://github.com/cert-manager/website).
 
 ## API Reference
 
