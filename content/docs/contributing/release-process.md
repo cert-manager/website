@@ -355,12 +355,12 @@ page if a step is missing or if it is outdated.
 
    2. Add the tag for cmctl:
 
-     ```bash
-     # This tag is required to be able to go install cmctl
-     # See https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
-     git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELASE_VERSION"
-     git push origin "cmd/ctl/$RELEASE_VERSION"
-     ```
+       ```bash
+       # This tag is required to be able to go install cmctl
+       # See https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
+       git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELEASE_VERSION"
+       git push origin "cmd/ctl/$RELEASE_VERSION"
+       ```
 
 9. Create the description for the GitHub Release:
 
