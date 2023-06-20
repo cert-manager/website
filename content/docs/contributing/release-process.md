@@ -243,6 +243,8 @@ page if a step is missing or if it is outdated.
       cp -r content/docs content/v1.12-docs
       rm -rf content/v1.12-docs/{installation/supported-releases,installation/upgrading,release-notes}
       sed -i.bak 's|docs|v1.12-docs|g' content/v1.12-docs/manifest.json
+      jq 'del(.. | select(.path? | select(.) | test(".*(installation/supported-releases.md|installation/upgrading|release-notes).*")))' \
+         content/v1.12-docs/manifest.json >tmp && mv tmp content/v1.12-docs/manifest.json
       ```
 
    6. (**final + patch releases**) Update the [API docs](https://cert-manager.io/docs/reference/api-docs/) and [CLI docs](https://cert-manager.io/docs/cli//):
