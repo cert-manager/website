@@ -18,7 +18,6 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 
 ### Steps
 
-
 #### 1. Add the Helm repository
 
 This repository is the only supported source of cert-manager charts. There are some other mirrors and copies across the internet, but those are entirely unofficial and could present a security risk.
@@ -38,16 +37,22 @@ helm repo update
 #### 3. Install `CustomResourceDefinitions`
 
 cert-manager requires a number of CRD resources, which can  be installed manually using `kubectl`,
-or using the `installCRDs` option when installing the Helm chart.
+or using the `installCRDs` option when installing the Helm chart. Both options
+are described below and will achieve the same result but with varying
+consequences. You should consult the [CRD Considerations](#crd-considerations)
+section below for details on each method.
 
 ##### Option 1: installing CRDs with `kubectl`
 
+> Recommended for production installations
 
 ```bash
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.crds.yaml
 ```
 
 ##### Option 2: install CRDs as part of the Helm release
+
+> Recommended for ease of use & compatibility
 
 To automatically install and manage the CRDs as part of your Helm release, you
 must add the `--set installCRDs=true` flag to your Helm installation command.
@@ -114,12 +119,15 @@ dependencies:
     alias: cert-manager
     condition: cert-manager.enabled
 ```
-You can then override the namespace in 2 ways
+
+You can then override the namespace in 2 ways:
+
 1. In `Values.yaml` file
 ```yaml
 cert-manager: #defined by either the name or alias of your dependency in Chart.yaml
   namespace: security
 ```
+
 2. In the helm command using `--set`
 ```bash
 helm install example example_chart \
@@ -171,7 +179,6 @@ Uninstalling cert-manager from a `helm` installation is a case of running the
 installation process, *in reverse*, using the delete command on both `kubectl`
 and `helm`.
 
-
 ```bash
 helm --namespace cert-manager delete cert-manager
 ```
@@ -193,6 +200,10 @@ using the link to the version `vX.Y.Z` you installed:
 kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.crds.yaml
 ```
 
+*Note:* If you used `helm` to install the CRDs with the `installCRDs=true`
+value for the chart, then the CRDs will have been automatically removed and
+you do not need to run this final `kubectl` command.
+
 ### Namespace Stuck in Terminating State
 
 If the namespace has been marked for deletion without deleting the cert-manager
@@ -205,3 +216,73 @@ experiencing issues then run:
 ```bash
 kubectl delete apiservice v1beta1.webhook.cert-manager.io
 ```
+
+## CRD considerations
+
+### kubectl installation
+
+When installing CRDs with `kubectl`, you will need to upgrade these in tandem
+with your cert-manager installation upgrades. This approach may be useful when
+you do not have the ability to install CRDs all the time in your environment.
+If you do not upgrade these as you upgrade cert-manager itself, you may miss
+out on new features for cert-manager.
+
+Benefits:
+
+- CRDs will not change once applied
+
+Drawbacks:
+
+- CRDs are not automatically updated and need to be reapplied before
+  upgrading cert-manager
+- You may have different installation processes for CRDs compared to
+  the other resources.
+
+### helm installation
+
+cert-manager **does not use** the [official helm method](https://helm.sh/docs/chart_best_practices/custom_resource_definitions/ )
+of installing CRD resources. This is because it makes upgrading CRDs
+impossible with `helm` CLI alone. The helm team explain the limitations
+of their approach [here](https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#some-caveats-and-explanations).
+
+cert-manager actually bundles the CRDs along with the other templates
+in the Helm chart. This means that Helm manages these resources so they are
+upgraded with your cert-manager release when you use 
+`installCRDs: true` in your values file or CLI command. This does also mean
+that if you uninstall the release, the CRDs will also be uninstalled. If that
+happens then you will loose all instances of those CRDs, e.g. all `Certificate`
+resources in the cluster. You should consider if this is likely to happen to
+you and have a mitigation, such as
+[backups](https://cert-manager.io/docs/tutorials/backup/#backing-up-cert-manager-resource-configuration)
+or a means to reapply resources from an Infrastructure as Code (IaC) pattern.
+
+**Note** this also means a typo like `installCRD: true` would be an invalid
+value and helm would silently ignore this and remove the CRDs when you next
+run your `helm upgrade`.
+
+Benefits:
+
+- CRDS are automatically updated when you upgrade cert-manager via `helm`
+- Same action manages both CRDs and other installation resources
+
+Drawbacks:
+
+- If you uninstall cert-manager, the CRDs are also uninstalled.
+- Helm values need to be correct to avoid accidental removal of CRDs.
+
+### CRD Installation Advice
+
+> You should follow the path that makes sense for your environment.
+
+Generally we recommend:
+
+- For **Safety**, install CRDs outside of Helm, e.g. `kubectl`
+- For **Ease of use**, install CRDS with `helm`
+
+You may want to consider your approach along with other tools that may offer
+helm compatible installs, for a standardized approach to managing CRD
+resources. If you have an approach that cert-manager does not currently
+support, then please 
+[raise an issue](https://github.com/cert-manager/cert-manager/issues) to
+discuss.
+

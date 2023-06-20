@@ -601,6 +601,7 @@ v4.4.1
 liveness
 apiservices
 arm64
+IaC
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
