@@ -406,10 +406,11 @@ page if a step is missing or if it is outdated.
      # Must be run from the cert-manager repo folder.
      cd cmd/cmctl
      go get github.com/cert-manager/cert-manager@$RELEASE_VERSION
-     go mod tidy
-     git add go.mod go.sum
-     git commit -m"Update cmd/cmctl's go.mod to $RELEASE_VERSION"
      cd ../..
+
+     find . -name go.mod -not -path ./_bin/\* -exec dirname '{}' \; | xargs -L1 -I@ sh -c 'cd @; go mod tidy'
+     git add **/go.mod **/go.sum
+     git commit -m"Update cmd/cmctl's go.mod to $RELEASE_VERSION"
      ```
 
     Third, create a tag for the `cmd/cmctl` module:
