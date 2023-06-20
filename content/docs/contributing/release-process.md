@@ -349,20 +349,35 @@ page if a step is missing or if it is outdated.
       kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
       the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-8. Ensure that cmctl refers to the latest tag of cert-manager:
+8. In this step, we make sure the Go module
+   `github.com/cert-manager/cert-manager/cmd/cmctl` can be imported by
+   third-parties.
 
-   1. Bump cert-manager version in [cmctl `go.mod` file](https://github.com/cert-manager/cert-manager/blob/v1.12.0/cmd/ctl/go.mod#L15) and cherry-pick the commit to the release branch.
+    First, update the `cmd/cmctl`'s `go.mod` with the tag we just created:
 
-   2. Add the tag for cmctl:
+     ```bash
+     # Must be run from the cert-manager repo folder.
+     cd cmd/cmctl
+     go get github.com/cert-manager/cert-manager@$RELEASE_VERSION
+     git add go.mod go.sum
+     git commit -m"Update cmd/cmctl's go.mod to $RELEASE_VERSION"
+     cd ../..
+     ```
 
-       ```bash
-       # This tag is required to be able to go install cmctl
-       # See https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
-       git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELEASE_VERSION"
-       git push origin "cmd/ctl/$RELEASE_VERSION"
-       ```
+    Then, create a tag for the `cmd/cmctl` module:
 
-9. Create the description for the GitHub Release:
+     ```bash
+     # Must be run from the cert-manager repo folder.
+     git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELEASE_VERSION"
+     git push origin "cmd/ctl/$RELEASE_VERSION"
+     ```
+
+    > **Note:** the reason we need to do this is explained on Stack Overflow:
+    [how-are-versions-of-a-sub-module-managed][]
+
+    [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
+
+9. In this section, we will be creating the description for the GitHub Release.
 
     > **Note:** This step is about creating the description that will be
     > copy-pasted into the GitHub release page. The creation of the "Release
