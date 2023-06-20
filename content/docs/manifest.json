@@ -40,10 +40,6 @@
               "path": "/docs/installation/operator-lifecycle-manager.md"
             },
             {
-              "title": "Other tools",
-              "path": "/docs/installation/other-tools.md"
-            },
-            {
               "title": "Verifying",
               "path": "/docs/installation/verify.md"
             },
