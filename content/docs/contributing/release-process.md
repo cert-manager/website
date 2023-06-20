@@ -145,7 +145,8 @@ page if a step is missing or if it is outdated.
 
    [^1]: One or more "patch pre-releases" may be created to allow voluntary community testing of a bug fix or security fix before the fix is made generally available. The suffix `-beta` must be used for patch pre-releases.
 
-2. Set the 4 env variables by copying the following snippet in your shell table:
+2. Set the 4 environment variables by copying the following snippet in your
+   shell table:
 
      ```bash
      export RELEASE_VERSION="v1.3.0-alpha.0"
@@ -388,7 +389,7 @@ page if a step is missing or if it is outdated.
       > kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
       > the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-1.  In this step, we make sure the Go module
+9. In this step, we make sure the Go module
    `github.com/cert-manager/cert-manager/cmd/cmctl` can be imported by
    third-parties.
 
@@ -423,24 +424,23 @@ page if a step is missing or if it is outdated.
 
     [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
 
-    Finally, open a PR to merge that change to master with the following
-    command:
+    Finally, open a PR to merge that change and go back to the release branch
+    with the following commands:
 
     ```bash
     gh pr create \
       --title "[Release $RELEASE_VERSION] Update cmd/cmctl's go.mod to $RELEASE_VERSION" \
-      --body "Update cmd/cmctl's go.mod to $RELEASE_VERSION" \
-      --base $BRANCH --head "update-cmd/ctl/$RELEASE_VERSION"
-    ```
+      --body "Update cmd/cmctl's go.mod to $RELEASE_VERSION" --base $BRANCH
+    git checkout $BRANCH
     ```
 
-2.  In this section, we will be creating the description for the GitHub Release.
+10. In this section, we will be creating the description for the GitHub Release.
 
     > **Note:** This step is about creating the description that will be
     > copy-pasted into the GitHub release page. The creation of the "Release
     > Note" page on the website is done in a previous step.
 
-    1. Check that all the env vars are ready:
+    1. Check that all the 4 environment variables are ready:
 
         ```bash
         echo $RELEASE_VERSION
@@ -471,7 +471,7 @@ page if a step is missing or if it is outdated.
     4. **(final release only)** Write the section "Community" by taking example
        on past GitHub Releases.
 
-3.  Check that the build is complete and send Slack messages about the release:
+11. Check that the build is complete and send Slack messages about the release:
 
     1. For recent versions of cert-manager, the build will have been automatically
        triggered by the tag being pushed earlier. You can check if it's complete on
@@ -510,7 +510,7 @@ page if a step is missing or if it is outdated.
         Follow the <code>cmrel makestage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
         </p></div>
 
-4.  Run `cmrel publish`:
+12. Run `cmrel publish`:
 
     1. Do a `cmrel publish` dry-run to ensure that all the staged resources are
        valid. Run the following command:
@@ -537,17 +537,17 @@ page if a step is missing or if it is outdated.
         cmrel publish --nomock --release-name "$RELEASE_VERSION"
         ```
 
-      <div className="info">
-         ⏰ Upon completion there will be:
-         <ol>
-            <li>
-               <a href="https://github.com/cert-manager/cert-manager/releases">A draft release of cert-manager on GitHub</a>
-            </li>
-            <li>
-               <a href="https://github.com/jetstack/jetstack-charts/pulls">A pull request containing the new Helm chart</a>
-            </li>
-         </ol>
-      </div>
+       <div className="info">
+          ⏰ Upon completion there will be:
+          <ol>
+             <li>
+                <a href="https://github.com/cert-manager/cert-manager/releases">A draft release of cert-manager on GitHub</a>
+             </li>
+             <li>
+                <a href="https://github.com/jetstack/jetstack-charts/pulls">A pull request containing the new Helm chart</a>
+             </li>
+          </ol>
+       </div>
 
     4. While the build is running, send a fourth Slack message in reply to the first message:
 
@@ -555,7 +555,7 @@ page if a step is missing or if it is outdated.
         Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
         </p></div>
 
-5.  Publish the GitHub release:
+13. Publish the GitHub release:
 
     1. Visit the draft GitHub release and paste in the release notes that you
        generated earlier. You will need to manually edit the content to match
@@ -570,7 +570,7 @@ page if a step is missing or if it is outdated.
 
     4. Click "Publish" to make the GitHub release live.
 
-6.  Merge the pull request containing the Helm chart:
+14. Merge the pull request containing the Helm chart:
 
     The Helm charts for cert-manager are served using Cloudflare pages
     and the Helm chart files and metadata are stored in the [Jetstack charts repository](https://github.com/jetstack/jetstack-charts).
@@ -582,7 +582,7 @@ page if a step is missing or if it is outdated.
     4. Merge the PR
     5. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-7.  **(final + patch releases)** Merge the 4 Website PRs:
+15. **(final + patch releases)** Merge the 4 Website PRs:
 
     1. Merge the PRs "Release Notes", "Upgrade Notes", and "Freeze And Bump
        Versions" that you have created previously.
@@ -600,7 +600,7 @@ page if a step is missing or if it is outdated.
 
       [ff-release-next]: https://github.com/cert-manager/website/compare/master...release-next?quick_pull=1&title=%5BPost-Release%5D+Merge+release-next+into+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
 
-8.  Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
+16. Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
 
     Assuming you have `brew` installed, you can use the `brew bump-formula-pr`
     command to do this. You'll need the new tag name and the commit hash of that
@@ -617,7 +617,7 @@ page if a step is missing or if it is outdated.
     against https://github.com/homebrew/homebrew-core has been opened, continue
     with further release steps.
 
-9.  Post a Slack message as an answer to the first message. Toggle the check
+17. Post a Slack message as an answer to the first message. Toggle the check
    box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -625,7 +625,7 @@ page if a step is missing or if it is outdated.
     https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-10. **(final release only)** Show the release to the world:
+18. **(final release only)** Show the release to the world:
 
     1. Send an email to
        [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
@@ -638,7 +638,7 @@ page if a step is missing or if it is outdated.
     3. Send a toot from the cert-manager Mastodon account! Login details are in Jetstack's 1password (for now).
        ([Example toot](https://infosec.exchange/@CertManager/109666434738850493))
 
-11. Proceed to the post-release "testing and release" steps:
+19. Proceed to the post-release "testing and release" steps:
 
     1. **(initial beta only)** Create a PR on
        [cert-manager/release](https://github.com/cert-manager/release) in order to
