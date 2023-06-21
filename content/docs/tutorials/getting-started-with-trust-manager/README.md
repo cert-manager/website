@@ -1,6 +1,6 @@
 ---
-title: Managing Public Trust in Kubernetes with Trust Manager
-description: Learn how to deploy and configure trust-manager to automatically distribute your approved Public CA configuration to your entire Kubernetes cluster.
+title: Managing public trust in kubernetes with trust-manager
+description: Learn how to deploy and configure trust-manager to automatically distribute your approved Public CA configuration to your Kubernetes cluster.
 ---
 
 *Last Verified: 19 June 2023*

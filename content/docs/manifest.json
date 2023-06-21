@@ -430,7 +430,7 @@
               "path": "/docs/tutorials/zerossl/zerossl.md"
             },
             {
-              "title": "Managing Public Trust in Kubernetes with Trust Manager",
+              "title": "Managing public trust in kubernetes with trust-manager",
               "path": "/docs/tutorials/getting-started-with-trust-manager/README.md"
             }
           ]
