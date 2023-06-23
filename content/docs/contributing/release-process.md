@@ -269,7 +269,7 @@ page if a step is missing or if it is outdated.
       rm -f **/*.bak
       ```
 
-      To check that all mentions of that versions are gone, run:
+      To check that all mentions of that version are gone, run:
 
       ```bash
       grep -R -n -F 'v1.11.' content/docs/installation
@@ -485,8 +485,7 @@ page if a step is missing or if it is outdated.
         </p></div>
     3. Add a one-sentence summary at the top.
 
-    4. **(final release only)** Write the section "Community" by taking example
-       on past GitHub Releases.
+    4. **(final release only)** Write the "Community" section, following the example of past releases such as [v1.12.0](https://github.com/cert-manager/cert-manager/releases/tag/v1.12.0). If there are any users who didn't make code contributions but helped in other ways (testing, PR discussion, etc), be sure to thank them here!
 
 11. Check that the build is complete and send Slack messages about the release:
 
