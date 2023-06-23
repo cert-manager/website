@@ -47,10 +47,6 @@
               "path": "/v1.12-docs/installation/featureflags.md"
             },
             {
-              "title": "Upgrading",
-              "routes": []
-            },
-            {
               "title": "Uninstall",
               "path": "/v1.12-docs/installation/uninstall.md"
             },
@@ -424,10 +420,6 @@
               "path": "/v1.12-docs/contributing/importing.md"
             }
           ]
-        },
-        {
-          "title": "Release Notes",
-          "routes": []
         },
         {
           "title": "Concepts",
