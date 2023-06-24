@@ -239,9 +239,9 @@ page if a step is missing or if it is outdated.
 
    8. Add a line to the file `content/docs/release-notes/README.md`.
 
-5. **(final + patch release)** Prepare the Website "Release Notes" PR.
+5. **(final + patch release)** Prepare the Website "Bump Versions" PR.
 
-   > ⚠️ This step can be done ahead of time.
+   **⚠️ This step can be done ahead of time.**
 
    In that PR:
 
