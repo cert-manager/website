@@ -9,10 +9,6 @@
           "path": "/docs/README.md"
         },
         {
-          "title": "Getting Started",
-          "path": "/docs/getting-started/README.md"
-        },
-        {
           "title": "Installation",
           "routes": [
             {
@@ -195,7 +191,7 @@
           ]
         },
         {
-          "title": "Configuration",
+          "title": "Configuring Issuers",
           "routes": [
             {
               "title": "Introduction",
@@ -291,7 +287,7 @@
           ]
         },
         {
-          "title": "Usage",
+          "title": "Issuing Certificates",
           "routes": [
             {
               "title": "Introduction",
@@ -332,58 +328,15 @@
           ]
         },
         {
-          "title": "Projects",
-          "routes": [
-            {
-              "title": "Contents",
-              "path": "/docs/projects/README.md"
-            },
-            {
-              "title": "istio-csr",
-              "path": "/docs/projects/istio-csr.md"
-            },
-            {
-              "title": "csi-driver",
-              "path": "/docs/projects/csi-driver.md"
-            },
-            {
-              "title": "csi-driver-spiffe",
-              "path": "/docs/projects/csi-driver-spiffe.md"
-            },
-            {
-              "title": "approver-policy",
-              "routes": [
-                {
-                  "title": "Introduction",
-                  "path": "/docs/projects/approver-policy/README.md"
-                },
-                {
-                  "title": "API Reference",
-                  "path": "/docs/projects/approver-policy/api-reference.md"
-                }
-              ]
-            },
-            {
-              "title": "trust-manager",
-              "routes": [
-                {
-                  "title": "Introduction",
-                  "path": "/docs/projects/trust-manager/README.md"
-                },
-                {
-                  "title": "API Reference",
-                  "path": "/docs/projects/trust-manager/api-reference.md"
-                }
-              ]
-            }
-          ]
-        },
-        {
           "title": "Tutorials",
           "routes": [
             {
               "title": "Introduction",
               "path": "/docs/tutorials/README.md"
+            },
+            {
+              "title": "Getting Started",
+              "path": "/docs/getting-started/README.md"
             },
             {
               "title": "Securing NGINX-ingress",
@@ -457,268 +410,15 @@
           ]
         },
         {
-          "title": "FAQ",
-          "path": "/docs/faq/README.md"
-        },
-        {
-          "title": "Contributing",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/docs/contributing/README.md"
-            },
-            {
-              "title": "Feature Policy",
-              "path": "/docs/contributing/policy.md"
-            },
-            {
-              "title": "Building cert-manager",
-              "path": "/docs/contributing/building.md"
-            },
-            {
-              "title": "Contributing Flow",
-              "path": "/docs/contributing/contributing-flow.md"
-            },
-            {
-              "title": "CRDs",
-              "path": "/docs/contributing/crds.md"
-            },
-            {
-              "title": "DNS Providers",
-              "path": "/docs/contributing/dns-providers.md"
-            },
-            {
-              "title": "Running End-to-End Tests",
-              "path": "/docs/contributing/e2e.md"
-            },
-            {
-              "title": "Implementing External Issuers",
-              "path": "/docs/contributing/external-issuers.md"
-            },
-            {
-              "title": "DCO Sign Off",
-              "path": "/docs/contributing/sign-off.md"
-            },
-            {
-              "title": "Release Process",
-              "path": "/docs/contributing/release-process.md"
-            },
-            {
-              "title": "Developing with Kind",
-              "path": "/docs/contributing/kind.md"
-            },
-            {
-              "title": "Implementing Feature Gates",
-              "path": "/docs/contributing/featuregates.md"
-            },
-            {
-              "title": "Google Season of Docs",
-              "routes": [
-                {
-                  "title": "Introduction",
-                  "path": "/docs/contributing/google-season-of-docs/README.md"
-                },
-                {
-                  "title": "2022",
-                  "routes": [
-                    {
-                      "title": "Introduction",
-                      "path": "/docs/contributing/google-season-of-docs/2022/README.md"
-                    },
-                    {
-                      "title": "Improve the Navigation and Structure of the cert-manager Website",
-                      "path": "/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure.md"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "Reporting Security Issues",
-              "path": "/docs/contributing/security.md"
-            },
-            {
-              "title": "Coding Conventions",
-              "path": "/docs/contributing/coding-conventions.md"
-            },
-            {
-              "title": "Third Party Code Donations",
-              "path": "/docs/contributing/third-party-code-donation.md"
-            },
-            {
-              "title": "Signing Keys",
-              "path": "/docs/contributing/signing-keys.md"
-            },
-            {
-              "title": "Importing cert-manager in Go",
-              "path": "/docs/contributing/importing.md"
-            }
-          ]
-        },
-        {
-          "title": "Release Notes",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/docs/release-notes/README.md"
-            },
-            {
-              "title": "v1.12",
-              "path": "/docs/release-notes/release-notes-1.12.md"
-            },
-            {
-              "title": "v1.11",
-              "path": "/docs/release-notes/release-notes-1.11.md"
-            },
-            {
-              "title": "v1.10",
-              "path": "/docs/release-notes/release-notes-1.10.md"
-            },
-            {
-              "title": "v1.9",
-              "path": "/docs/release-notes/release-notes-1.9.md"
-            },
-            {
-              "title": "v1.8",
-              "path": "/docs/release-notes/release-notes-1.8.md"
-            },
-            {
-              "title": "v1.7",
-              "path": "/docs/release-notes/release-notes-1.7.md"
-            },
-            {
-              "title": "v1.6",
-              "path": "/docs/release-notes/release-notes-1.6.md"
-            },
-            {
-              "title": "v1.5",
-              "path": "/docs/release-notes/release-notes-1.5.md"
-            },
-            {
-              "title": "v1.4",
-              "path": "/docs/release-notes/release-notes-1.4.md"
-            },
-            {
-              "title": "v1.3",
-              "path": "/docs/release-notes/release-notes-1.3.md"
-            },
-            {
-              "title": "v1.2",
-              "path": "/docs/release-notes/release-notes-1.2.md"
-            },
-            {
-              "title": "v1.1",
-              "path": "/docs/release-notes/release-notes-1.1.md"
-            },
-            {
-              "title": "v1.0",
-              "path": "/docs/release-notes/release-notes-1.0.md"
-            },
-            {
-              "title": "v0.16",
-              "path": "/docs/release-notes/release-notes-0.16.md"
-            },
-            {
-              "title": "v0.15",
-              "path": "/docs/release-notes/release-notes-0.15.md"
-            },
-            {
-              "title": "v0.14",
-              "path": "/docs/release-notes/release-notes-0.14.md"
-            },
-            {
-              "title": "v0.13",
-              "path": "/docs/release-notes/release-notes-0.13.md"
-            },
-            {
-              "title": "v0.12",
-              "path": "/docs/release-notes/release-notes-0.12.md"
-            },
-            {
-              "title": "v0.11",
-              "path": "/docs/release-notes/release-notes-0.11.md"
-            },
-            {
-              "title": "v0.10",
-              "path": "/docs/release-notes/release-notes-0.10.md"
-            },
-            {
-              "title": "v0.9",
-              "path": "/docs/release-notes/release-notes-0.9.md"
-            },
-            {
-              "title": "v0.8",
-              "path": "/docs/release-notes/release-notes-0.8.md"
-            },
-            {
-              "title": "v0.7",
-              "path": "/docs/release-notes/release-notes-0.7.md"
-            },
-            {
-              "title": "v0.6",
-              "path": "/docs/release-notes/release-notes-0.6.md"
-            },
-            {
-              "title": "v0.5",
-              "path": "/docs/release-notes/release-notes-0.5.md"
-            },
-            {
-              "title": "v0.4",
-              "path": "/docs/release-notes/release-notes-0.4.md"
-            },
-            {
-              "title": "v0.3",
-              "path": "/docs/release-notes/release-notes-0.3.md"
-            },
-            {
-              "title": "v0.2",
-              "path": "/docs/release-notes/release-notes-0.2.md"
-            },
-            {
-              "title": "v0.1",
-              "path": "/docs/release-notes/release-notes-0.1.md"
-            }
-          ]
-        },
-        {
-          "title": "Concepts",
-          "routes": [
-            {
-              "title": "Introduction",
-              "path": "/docs/concepts/README.md"
-            },
-            {
-              "title": "Issuer",
-              "path": "/docs/concepts/issuer.md"
-            },
-            {
-              "title": "Certificate",
-              "path": "/docs/concepts/certificate.md"
-            },
-            {
-              "title": "CertificateRequest",
-              "path": "/docs/concepts/certificaterequest.md"
-            },
-            {
-              "title": "ACME Orders and Challenges",
-              "path": "/docs/concepts/acme-orders-challenges.md"
-            },
-            {
-              "title": "Webhook",
-              "path": "/docs/concepts/webhook.md"
-            },
-            {
-              "title": "CA Injector",
-              "path": "/docs/concepts/ca-injector.md"
-            }
-          ]
-        },
-        {
           "title": "Reference",
           "routes": [
             {
               "title": "Introduction",
               "path": "/docs/reference/README.md"
+            },
+            {
+              "title": "FAQ",
+              "path": "/docs/faq/README.md"
             },
             {
               "title": "Command Line Tool (cmctl)",
@@ -728,7 +428,6 @@
               "title": "TLS Terminology",
               "path": "/docs/reference/tls-terminology.md"
             },
-
             {
               "title": "Components / Docker Images",
               "routes": [
@@ -761,6 +460,306 @@
             {
               "title": "API Reference",
               "path": "/docs/reference/api-docs.md"
+            },
+            {
+              "title": "Projects",
+              "routes": [
+                {
+                  "title": "Contents",
+                  "path": "/docs/projects/README.md"
+                },
+                {
+                  "title": "istio-csr",
+                  "path": "/docs/projects/istio-csr.md"
+                },
+                {
+                  "title": "csi-driver",
+                  "path": "/docs/projects/csi-driver.md"
+                },
+                {
+                  "title": "csi-driver-spiffe",
+                  "path": "/docs/projects/csi-driver-spiffe.md"
+                },
+                {
+                  "title": "approver-policy",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/docs/projects/approver-policy/README.md"
+                    },
+                    {
+                      "title": "API Reference",
+                      "path": "/docs/projects/approver-policy/api-reference.md"
+                    }
+                  ]
+                },
+                {
+                  "title": "trust-manager",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/docs/projects/trust-manager/README.md"
+                    },
+                    {
+                      "title": "API Reference",
+                      "path": "/docs/projects/trust-manager/api-reference.md"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Contributing",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/docs/contributing/README.md"
+                },
+                {
+                  "title": "Feature Policy",
+                  "path": "/docs/contributing/policy.md"
+                },
+                {
+                  "title": "Building cert-manager",
+                  "path": "/docs/contributing/building.md"
+                },
+                {
+                  "title": "Contributing Flow",
+                  "path": "/docs/contributing/contributing-flow.md"
+                },
+                {
+                  "title": "CRDs",
+                  "path": "/docs/contributing/crds.md"
+                },
+                {
+                  "title": "DNS Providers",
+                  "path": "/docs/contributing/dns-providers.md"
+                },
+                {
+                  "title": "Running End-to-End Tests",
+                  "path": "/docs/contributing/e2e.md"
+                },
+                {
+                  "title": "Implementing External Issuers",
+                  "path": "/docs/contributing/external-issuers.md"
+                },
+                {
+                  "title": "DCO Sign Off",
+                  "path": "/docs/contributing/sign-off.md"
+                },
+                {
+                  "title": "Release Process",
+                  "path": "/docs/contributing/release-process.md"
+                },
+                {
+                  "title": "Developing with Kind",
+                  "path": "/docs/contributing/kind.md"
+                },
+                {
+                  "title": "Implementing Feature Gates",
+                  "path": "/docs/contributing/featuregates.md"
+                },
+                {
+                  "title": "Google Season of Docs",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/docs/contributing/google-season-of-docs/README.md"
+                    },
+                    {
+                      "title": "2022",
+                      "routes": [
+                        {
+                          "title": "Introduction",
+                          "path": "/docs/contributing/google-season-of-docs/2022/README.md"
+                        },
+                        {
+                          "title": "Improve the Navigation and Structure of the cert-manager Website",
+                          "path": "/docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure.md"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "Reporting Security Issues",
+                  "path": "/docs/contributing/security.md"
+                },
+                {
+                  "title": "Coding Conventions",
+                  "path": "/docs/contributing/coding-conventions.md"
+                },
+                {
+                  "title": "Third Party Code Donations",
+                  "path": "/docs/contributing/third-party-code-donation.md"
+                },
+                {
+                  "title": "Signing Keys",
+                  "path": "/docs/contributing/signing-keys.md"
+                },
+                {
+                  "title": "Importing cert-manager in Go",
+                  "path": "/docs/contributing/importing.md"
+                }
+              ]
+            },
+            {
+              "title": "Release Notes",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/docs/release-notes/README.md"
+                },
+                {
+                  "title": "v1.12",
+                  "path": "/docs/release-notes/release-notes-1.12.md"
+                },
+                {
+                  "title": "v1.11",
+                  "path": "/docs/release-notes/release-notes-1.11.md"
+                },
+                {
+                  "title": "v1.10",
+                  "path": "/docs/release-notes/release-notes-1.10.md"
+                },
+                {
+                  "title": "v1.9",
+                  "path": "/docs/release-notes/release-notes-1.9.md"
+                },
+                {
+                  "title": "v1.8",
+                  "path": "/docs/release-notes/release-notes-1.8.md"
+                },
+                {
+                  "title": "v1.7",
+                  "path": "/docs/release-notes/release-notes-1.7.md"
+                },
+                {
+                  "title": "v1.6",
+                  "path": "/docs/release-notes/release-notes-1.6.md"
+                },
+                {
+                  "title": "v1.5",
+                  "path": "/docs/release-notes/release-notes-1.5.md"
+                },
+                {
+                  "title": "v1.4",
+                  "path": "/docs/release-notes/release-notes-1.4.md"
+                },
+                {
+                  "title": "v1.3",
+                  "path": "/docs/release-notes/release-notes-1.3.md"
+                },
+                {
+                  "title": "v1.2",
+                  "path": "/docs/release-notes/release-notes-1.2.md"
+                },
+                {
+                  "title": "v1.1",
+                  "path": "/docs/release-notes/release-notes-1.1.md"
+                },
+                {
+                  "title": "v1.0",
+                  "path": "/docs/release-notes/release-notes-1.0.md"
+                },
+                {
+                  "title": "v0.16",
+                  "path": "/docs/release-notes/release-notes-0.16.md"
+                },
+                {
+                  "title": "v0.15",
+                  "path": "/docs/release-notes/release-notes-0.15.md"
+                },
+                {
+                  "title": "v0.14",
+                  "path": "/docs/release-notes/release-notes-0.14.md"
+                },
+                {
+                  "title": "v0.13",
+                  "path": "/docs/release-notes/release-notes-0.13.md"
+                },
+                {
+                  "title": "v0.12",
+                  "path": "/docs/release-notes/release-notes-0.12.md"
+                },
+                {
+                  "title": "v0.11",
+                  "path": "/docs/release-notes/release-notes-0.11.md"
+                },
+                {
+                  "title": "v0.10",
+                  "path": "/docs/release-notes/release-notes-0.10.md"
+                },
+                {
+                  "title": "v0.9",
+                  "path": "/docs/release-notes/release-notes-0.9.md"
+                },
+                {
+                  "title": "v0.8",
+                  "path": "/docs/release-notes/release-notes-0.8.md"
+                },
+                {
+                  "title": "v0.7",
+                  "path": "/docs/release-notes/release-notes-0.7.md"
+                },
+                {
+                  "title": "v0.6",
+                  "path": "/docs/release-notes/release-notes-0.6.md"
+                },
+                {
+                  "title": "v0.5",
+                  "path": "/docs/release-notes/release-notes-0.5.md"
+                },
+                {
+                  "title": "v0.4",
+                  "path": "/docs/release-notes/release-notes-0.4.md"
+                },
+                {
+                  "title": "v0.3",
+                  "path": "/docs/release-notes/release-notes-0.3.md"
+                },
+                {
+                  "title": "v0.2",
+                  "path": "/docs/release-notes/release-notes-0.2.md"
+                },
+                {
+                  "title": "v0.1",
+                  "path": "/docs/release-notes/release-notes-0.1.md"
+                }
+              ]
+            },
+            {
+              "title": "Concepts",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/docs/concepts/README.md"
+                },
+                {
+                  "title": "Issuer",
+                  "path": "/docs/concepts/issuer.md"
+                },
+                {
+                  "title": "Certificate",
+                  "path": "/docs/concepts/certificate.md"
+                },
+                {
+                  "title": "CertificateRequest",
+                  "path": "/docs/concepts/certificaterequest.md"
+                },
+                {
+                  "title": "ACME Orders and Challenges",
+                  "path": "/docs/concepts/acme-orders-challenges.md"
+                },
+                {
+                  "title": "Webhook",
+                  "path": "/docs/concepts/webhook.md"
+                },
+                {
+                  "title": "CA Injector",
+                  "path": "/docs/concepts/ca-injector.md"
+                }
+              ]
             }
           ]
         }
