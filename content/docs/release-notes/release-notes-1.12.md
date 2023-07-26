@@ -204,7 +204,51 @@ the Private CA Issuer.
 In addition, massive thanks to Jetstack (by Venafi) for contributing developer
 time and resources towards the continued maintenance of cert-manager projects.
 
-## Changes since v1.11.0
+## `v1.12.3`: changes since `v1.12.2`
+
+### Changes by Kind
+#### Bugfixes
+
+- BUGFIX: 1-character bug was causing invalid log messages and a memory leak ([#6235](https://github.com/cert-manager/cert-manager/pull/6235), @jetstack-bot)
+
+## `v1.12.2`: changes since `v1.12.1`
+
+### Known issues
+
+- cainjector contains a memory leak due to re-assignment of a log variable (see https://github.com/cert-manager/cert-manager/issues/6217). The fix will be released in v1.12.3.
+See https://github.com/cert-manager/cert-manager/pull/6232 for context.
+
+### Changes by Kind
+
+#### Bugfixes
+
+- BUGFIX: `cmctl check api --wait 0` exited without output; we now make sure we perform the API check at least once (#6116, @jetstack-bot)
+
+
+## `v1.12.1`: changes since `v1.12.0`
+
+This release contains a couple dependency bumps and changes to ACME external webhook library.
+
+### Known issues
+
+- [`cmctl` API check](https://cert-manager.io/docs/installation/verify/) is broken in v1.12.1. We suggest that you do not upgrade `cmctl` to this version. The fix will be released in v1.12.2.
+See #6116 for context.
+- cainjector contains a memory leak due to re-assignment of a log variable (see https://github.com/cert-manager/cert-manager/issues/6217). The fix will be released in v1.12.3.
+See https://github.com/cert-manager/cert-manager/pull/6232 for context.
+
+### Changes by Kind
+
+#### Other (Cleanup or Flake)
+
+- Don't run API Priority and Fairness controller in webhook's extension apiserver ([#6085](https://github.com/cert-manager/cert-manager/pull/6085), [@irbekrm](https://github.com/irbekrm))
+- Adds a warning for folks to not use controller feature gates helm value to configure webhook feature gates ([#6100](https://github.com/cert-manager/cert-manager/pull/6100), [@irbekrm](https://github.com/irbekrm))
+
+#### Uncategorized
+
+- Updates Kubernetes libraries to `v0.27.2`. ([#6077](https://github.com/cert-manager/cert-manager/pull/6077), [@lucacome](https://github.com/lucacome))
+- Updates controller-runtime to `v0.15.0` ([#6098](https://github.com/cert-manager/cert-manager/pull/6098), [@lucacome](https://github.com/lucacome))
+
+## `v1.12.0`: changes since `v1.11.0`
 
 ### Feature
 
