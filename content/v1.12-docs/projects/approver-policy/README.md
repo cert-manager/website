@@ -95,8 +95,8 @@ should be approved or denied.
 
 For a CertificateRequest to be appropriate for a policy and therefore be
 evaluated by it, it must be both bound via RBAC _and_ be selected by the policy
-selector. CertificateRequestPolicy currently only supports `issuerRef` as a
-selector.
+selector. CertificateRequestPolicy currently supports `issuerRef` and `namespace`
+as a selector.
 
 **If at least one policy permits the request, the request is approved. If at
 least one policy is appropriate for the request but none of those permit the
