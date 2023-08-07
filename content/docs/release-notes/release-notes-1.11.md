@@ -2,6 +2,34 @@
 title: Release 1.11
 description: 'cert-manager release notes: cert-manager 1.11'
 ---
+## v1.11.4
+
+### Other
+
+- Resolved docker/docker trivy CVE alert ([#6164](https://github.com/cert-manager/cert-manager/pull/6164), [@inteon](https://github.com/inteon))
+- Upgraded base images ([#6128](https://github.com/cert-manager/cert-manager/pull/6128), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+
+## v1.11.3
+
+cert-manager `v1.11.3` mostly contains ACME library changes. API Priority and Fairness feature is now disabled in the external webhook's extension apiserver.
+
+### Other
+
+- API Priority and Fairness controller is now disabled in extension apiserver for DNS webhook implementation. ([#6092](https://github.com/cert-manager/cert-manager/pull/6092), [@irbekrm](https://github.com/irbekrm))
+- Adds a warning for folks to not use controller feature gates helm value to configure webhook feature gates ([#6101](https://github.com/cert-manager/cert-manager/pull/6101), [@irbekrm](https://github.com/irbekrm))
+
+## v1.11.2
+
+### Bug or Regression
+
+- Build with go 1.19.9 ([#6014](https://github.com/cert-manager/cert-manager/pull/6014), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+### Other
+- Bump the distroless base images ([#5930](https://github.com/cert-manager/cert-manager/pull/5930), [@maelvls](https://github.com/maelvls))
+- Bumps Docker libraries to fix vulnerability scan alert for `CVE-2023-28840`, `CVE-2023-28841`, `CVE-2023-28842` ([#6037](https://github.com/cert-manager/cert-manager/pull/6037), [@irbekrm](https://github.com/irbekrm)) - cert-manager was not actually affected by these CVEs which are all to do with Docker daemon's overlay network.
+- Bumps Kubernetes libraries `v0.26.0` -> `v0.26.4` ([#6038](https://github.com/cert-manager/cert-manager/pull/6038), [@irbekrm](https://github.com/irbekrm)) - this might help with running cert-manager v1.11 on Kubernetes `v1.27`
+
 
 ## v1.11.1
 
