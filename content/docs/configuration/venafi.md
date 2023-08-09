@@ -139,7 +139,7 @@ credentials.
 
 ### Access Token Authentication
 
-1. [Set up token authentication](https://docs.venafi.com/Docs/23.1/TopNav/Content/SDK/AuthSDK/t-SDKa-Setup-OAuth.php). 
+1. [Set up token authentication](https://docs.venafi.com/Docs/23.1/TopNav/Content/SDK/AuthSDK/t-SDKa-Setup-OAuth.php).
 
    NOTE: Do not select "Refresh Token Enabled" and set a *long* "Token Validity (days)".
 
@@ -147,7 +147,7 @@ credentials.
 
    E.g. `k8s-xyz-automation`
 
-3. [Create a new application integration](https://docs.venafi.com/Docs/21.1/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creatingNew-Aperture.php)
+3. [Create a new application integration](https://docs.venafi.com/Docs/21.4/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creatingNew-Aperture.php)
 
    Create an application integration with name and ID `cert-manager`.
    Set the "API Access Settings" to `Certificates: Read,Manage,Revoke`.
