@@ -132,6 +132,20 @@ helm upgrade -i -n cert-manager cert-manager jetstack/cert-manager --set install
 helm upgrade -i -n cert-manager trust-manager jetstack/trust-manager --wait
 ```
 
+### approver-policy Integration
+
+If you're running [approver-policy](../approver-policy/README.md) then cert-manager's default approver will be disabled which will mean that
+trust-manager's webhook certificate will - by default - block when you install the Helm chart until it's manually approved.
+
+As of trust-manager v0.6.0 you can choose to automatically add an approver-policy `CertificateRequestPolicy` which
+will approve the trust-manager webhook certificate:
+
+```bash
+helm upgrade -i -n cert-manager trust-manager jetstack/trust-manager --set app.webhook.tls.approverPolicy.enabled=true --set app.webhook.tls.approverPolicy.certManagerNamespace=cert-manager --wait
+```
+
+Note that if you've installed cert-manager to a different namespace, you'll need to pass that namespace in `app.webhook.tls.approverPolicy.certManagerNamespace`!
+
 ### Manual Installation
 
 We strongly recommend that you install trust-manager using Helm and we don't currently support manually installed
