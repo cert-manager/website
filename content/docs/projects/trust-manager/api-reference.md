@@ -268,7 +268,7 @@ AdditionalFormats specifies any additional formats to write to the target
         <td><b><a href="#bundlespectargetadditionalformatsjks">jks</a></b></td>
         <td>object</td>
         <td>
-          KeySelector is a reference to a key for some map data object.<br/>
+          JKS requests a JKS-formatted binary trust bundle to be written to the target. The bundle is created with the hardcoded password "changeit".<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -278,7 +278,7 @@ AdditionalFormats specifies any additional formats to write to the target
 ### `Bundle.spec.target.additionalFormats.jks`
 
 
-KeySelector is a reference to a key for some map data object.
+JKS requests a JKS-formatted binary trust bundle to be written to the target. The bundle is created with the hardcoded password "changeit".
 
 <table>
     <thead>
@@ -510,7 +510,7 @@ AdditionalFormats specifies any additional formats to write to the target
         <td><b><a href="#bundlestatustargetadditionalformatsjks">jks</a></b></td>
         <td>object</td>
         <td>
-          KeySelector is a reference to a key for some map data object.<br/>
+          JKS requests a JKS-formatted binary trust bundle to be written to the target. The bundle is created with the hardcoded password "changeit".<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -520,7 +520,7 @@ AdditionalFormats specifies any additional formats to write to the target
 ### `Bundle.status.target.additionalFormats.jks`
 
 
-KeySelector is a reference to a key for some map data object.
+JKS requests a JKS-formatted binary trust bundle to be written to the target. The bundle is created with the hardcoded password "changeit".
 
 <table>
     <thead>
