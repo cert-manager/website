@@ -269,11 +269,11 @@ page if a step is missing or if it is outdated.
       +genversionwithcli "release-1.12" "$LATEST_VERSION"
       ```
 
-   4. (**final + patch release**) Bump all versions present in installation
+   4. (**final + patch release of the latest minor version**) Bump all versions present in installation
      instructions. To find these versions:
 
       ```bash
-      find ./content/docs/installation -name '*.md' -not -path '*/upgrad**' -exec sed -i.bak 's/1.11../1.12.0/g' '{}' \;
+      find ./content/docs/installation -name '*.md' -not -path '*/upgrad**' -and -not -path '*supported-releases.md' -exec sed -i.bak 's/1.11./1.12.0/g' '{}' \;
       rm -f **/*.bak
       ```
 
