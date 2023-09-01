@@ -137,7 +137,7 @@ The master branch of cert-manager can also be tested against different cloud pro
 
 The infrastructure used to run the e2e tests on cloud providers is present in the [cert-manager/test-infra](https://github.com/cert-manager/test-infra) repository. More cloud providers can be added by creating infrastructure for them using [Terraform](https://www.terraform.io/).
 
-Apart from that, tests for the existing infrastructure can be customized by editing their respective prow jobs present in the [Jetstack testing repository](https://github.com/jetstack/testing/tree/master/config/jobs/cert-manager) repository. Values like the cert-manager version or the cloud provider version are present as variables in Terraform so their values can be changed when using `terraform apply` in the prow jobs, for example, for the [EKS prow job](https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/cert-manager-periodics.yaml#L524) the cert-manager version being tested can be changed using
+Apart from that, tests for the existing infrastructure can be customized by editing their respective prow jobs present in the [Jetstack testing repository](https://github.com/cert-manager/testing/tree/master/config/jobs/cert-manager) repository. Values like the cert-manager version or the cloud provider version are present as variables in Terraform so their values can be changed when using `terraform apply` in the prow jobs, for example, for the [EKS prow job](https://github.com/cert-manager/testing/blob/master/config/jobs/cert-manager/cert-manager-periodics.yaml#L524) the cert-manager version being tested can be changed using
 
 ```console
 terraform apply -var="cert_manager_version=v1.3.3" -auto-approve
