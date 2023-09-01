@@ -269,8 +269,8 @@ page if a step is missing or if it is outdated.
       +genversionwithcli "release-1.12" "$LATEST_VERSION"
       ```
 
-   4. (**final + patch release of the latest minor version**) Bump all versions present in installation
-     instructions. To find these versions:
+   4. (**final + patch release of the latest minor version**) Bump all versions
+      present in installation instructions. To find these versions:
 
       ```bash
       find ./content/docs/installation -name '*.md' -not -path '*/upgrad**' -and -not -path '*supported-releases.md' -exec sed -i.bak 's/1.11./1.12.0/g' '{}' \;
@@ -316,8 +316,8 @@ page if a step is missing or if it is outdated.
     It should show:
 
     ```text
-    origin  https://github.com/jetstack/cert-manager (fetch)
-    origin  https://github.com/jetstack/cert-manager (push)
+    origin  https://github.com/cert-manager/cert-manager (fetch)
+    origin  https://github.com/cert-manager/cert-manager (push)
     ```
 
 7. Place yourself on the correct branch:
