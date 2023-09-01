@@ -436,8 +436,16 @@ page if a step is missing or if it is outdated.
 
     [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
 
-    Then, open a PR to merge that change and go back to the release branch
-    with the following commands:
+    Then, push the branch to your fork of cert-manager. For example:
+
+     ```bash
+     # Must be run from the cert-manager repo folder.
+     gh repo fork --remote-name fork
+     git push -u fork "update-cmd/ctl/$RELEASE_VERSION"
+     ```
+
+   Then, open a PR to merge that change and go back to the release branch with
+   the following commands:
 
      ```bash
      gh pr create \
