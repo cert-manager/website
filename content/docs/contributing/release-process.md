@@ -365,7 +365,7 @@ page if a step is missing or if it is outdated.
        We don't fast-forward for patch releases and final releases; instead, we
        prepare these releases using the `/cherry-pick release-1.0` command.
 
-   > Note about branch protection: The release branches are protected by [GitHub branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule), which is [configured automatically by Prow](https://github.com/jetstack/testing/blob/500b990ad1278982b10d57bf8fbca383040d2fe8/config/config.yaml#L27-L36).
+   > Note about branch protection: The release branches are protected by [GitHub branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule), which is [configured automatically by Prow](https://github.com/cert-manager/testing/blob/500b990ad1278982b10d57bf8fbca383040d2fe8/config/config.yaml#L27-L36).
    >  This prevents anyone *accidentally* pushing changes directly to these branches, even repository administrators.
    >  If you need, for some reason, to fast forward the release branch,
    >  you should delete the branch protection for that release branch, using the [GitHub branch protection web UI](https://github.com/cert-manager/cert-manager/settings/branches).
@@ -658,11 +658,11 @@ page if a step is missing or if it is outdated.
 
     1. **(initial beta only)** Create a PR on
        [cert-manager/release](https://github.com/cert-manager/release) in order to
-       add the new release to our list of periodic ProwJobs. Use [this PR](https://github.com/jetstack/testing/pull/774/) as an example.
+       add the new release to our list of periodic ProwJobs. Use [this PR](https://github.com/cert-manager/testing/pull/774/) as an example.
 
     2. **(initial beta only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
-       open a PR to [cert-manager/testing](https://github.com/jetstack/testing) adding the generated prow configs.
-       Use [this PR](https://github.com/jetstack/testing/pull/766) as an example.
+       open a PR to [cert-manager/testing](https://github.com/cert-manager/testing) adding the generated prow configs.
+       Use [this PR](https://github.com/cert-manager/testing/pull/766) as an example.
 
     3. **(final release only)** Create a PR on
        [cert-manager/release](https://github.com/cert-manager/release),
@@ -675,10 +675,10 @@ page if a step is missing or if it is outdated.
        This will remove the periodic ProwJobs for this version as they're no longer needed.
 
     4. **(final release only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
-       open a PR to [jetstack/testing](https://github.com/jetstack/testing) adding the generated prow configs.
+       open a PR to [jetstack/testing](https://github.com/cert-manager/testing) adding the generated prow configs.
 
-    5. **(final release only)** Open a PR to [`jetstack/testing`](https://github.com/jetstack/testing)
-       and update the [milestone_applier](https://github.com/jetstack/testing/blob/3110b68e082c3625bf0d26265be2d29e41da14b2/config/plugins.yaml#L69)
+    5. **(final release only)** Open a PR to [`jetstack/testing`](https://github.com/cert-manager/testing)
+       and update the [milestone_applier](https://github.com/cert-manager/testing/blob/3110b68e082c3625bf0d26265be2d29e41da14b2/config/plugins.yaml#L69)
        config so that newly raised PRs on master are applied to a new milestone
        for the next release. E.g. if master currently points at the `v1.10` milestone, change it to point at `v1.11`.
 
