@@ -399,8 +399,8 @@ page if a step is missing or if it is outdated.
       > kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
       > the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-9. In this step, we make sure the Go module
-   `github.com/cert-manager/cert-manager/cmd/cmctl` can be imported by
+9. **(1.12 and above)** In this step, we make sure the Go module
+   `github.com/cert-manager/cert-manager/cmd/ctl` can be imported by
    third-parties.
 
     First, create a temporary branch.
@@ -410,20 +410,20 @@ page if a step is missing or if it is outdated.
      git checkout -b "update-cmd/ctl/$RELEASE_VERSION"
      ```
 
-    Second, update the `cmd/cmctl`'s `go.mod` with the tag we just created:
+    Second, update the `cmd/ctl`'s `go.mod` with the tag we just created:
 
      ```bash
      # Must be run from the cert-manager repo folder.
-     cd cmd/cmctl
+     cd cmd/ctl
      go get github.com/cert-manager/cert-manager@$RELEASE_VERSION
      cd ../..
 
      find . -name go.mod -not -path ./_bin/\* -exec dirname '{}' \; | xargs -L1 -I@ sh -c 'cd @; go mod tidy'
      git add **/go.mod **/go.sum
-     git commit -m"Update cmd/cmctl's go.mod to $RELEASE_VERSION"
+     git commit -m"Update cmd/ctl's go.mod to $RELEASE_VERSION"
      ```
 
-    Third, create a tag for the `cmd/cmctl` module:
+    Third, create a tag for the `cmd/ctl` module:
 
      ```bash
      # Must be run from the cert-manager repo folder.
