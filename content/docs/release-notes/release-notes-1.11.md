@@ -2,13 +2,17 @@
 title: Release 1.11
 description: 'cert-manager release notes: cert-manager 1.11'
 ---
+
+## v1.11.5
+
+- Use Go 1.19.9 to fix a security issue in Go's `crypto/tls` library. ([#6317](https://github.com/cert-manager/cert-manager/pull/6317), [@maelvls](https://github.com/maelvls))
+
 ## v1.11.4
 
 ### Other
 
 - Resolved docker/docker trivy CVE alert ([#6164](https://github.com/cert-manager/cert-manager/pull/6164), [@inteon](https://github.com/inteon))
 - Upgraded base images ([#6128](https://github.com/cert-manager/cert-manager/pull/6128), [@SgtCoDFish](https://github.com/SgtCoDFish))
-
 
 ## v1.11.3
 
