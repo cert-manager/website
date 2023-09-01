@@ -3,14 +3,77 @@ title: Release 1.12
 description: 'cert-manager release notes: cert-manager 1.12'
 ---
 
+## v1.12.4
+
+v1.12.4 contains an important security fix that
+addresses [CVE-2023-29409](https://cve.report/CVE-2023-29409).
+
+### Changes
+
+- Fixes an issue where cert-manager would incorrectly reject two IP addresses as
+  being unequal when they should have compared equal. This would be most
+  noticeable when using an IPv6 address which doesn't match how Go's
+  `net.IP.String()` function would have printed that address.
+  ([#6297](https://github.com/cert-manager/cert-manager/pull/6297),
+  [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Use Go 1.20.7 to fix a security issue in Go's `crypto/tls` library.
+  ([#6318](https://github.com/cert-manager/cert-manager/pull/6318),
+  [@maelvls](https://github.com/maelvls))
+
+## v1.12.3
+
+v1.12.3 contains a bug fix for the cainjector which addresses a memory leak!
+
+### Changes
+
+- BUGFIX\[cainjector\]: 1-character bug was causing invalid log messages and a memory leak (#6235, @jetstack-bot)
+
+## v1.12.2
+
+v1.12.2 is a bugfix release, but includes a known issue. You should prefer
+upgrading to the latest patch version available for 1.12.
+
+### Known issues
+
+- cainjector contains a memory leak due to re-assignment of a log variable (see https://github.com/cert-manager/cert-manager/issues/6217). The fix will be released in v1.12.3. See https://github.com/cert-manager/cert-manager/pull/6232 for context.
+
+### Changes
+
+- BUGFIX: `cmctl check api --wait 0` exited without output; we now make sure we perform the API check at least once (#6116, @jetstack-bot)
+
+## v1.12.1
+
+The v1.12.1 release contains a couple dependency bumps and changes to ACME
+external webhook library. Note that v1.12.1 contains a known issue, and you
+should prefer upgrading to the latest patch version available for 1.12.
+
+### Known issues
+
+- [`cmctl` API check](https://cert-manager.io/docs/installation/verify/) is broken in v1.12.1. We suggest that you do not upgrade `cmctl` to this version. The fix will be released in v1.12.2.
+See #6116 for context.
+- cainjector contains a memory leak due to re-assignment of a log variable (see https://github.com/cert-manager/cert-manager/issues/6217). The fix will be released in v1.12.3.
+See https://github.com/cert-manager/cert-manager/pull/6232 for context.
+
+### Other
+
+- Don't run API Priority and Fairness controller in webhook's extension apiserver ([#6085](https://github.com/cert-manager/cert-manager/pull/6085), [@irbekrm](https://github.com/irbekrm))
+- Adds a warning for folks to not use controller feature gates helm value to configure webhook feature gates ([#6100](https://github.com/cert-manager/cert-manager/pull/6100), [@irbekrm](https://github.com/irbekrm))
+
+### Uncategorized
+
+- Updates Kubernetes libraries to `v0.27.2`. ([#6077](https://github.com/cert-manager/cert-manager/pull/6077), [@lucacome](https://github.com/lucacome))
+- Updates controller-runtime to `v0.15.0` ([#6098](https://github.com/cert-manager/cert-manager/pull/6098), [@lucacome](https://github.com/lucacome))
+
+## v1.12.0
+
 cert-manager 1.12 brings support for JSON logging, a lower memory footprint, the
 support for ephemeral service account tokens with Vault, and the support of the
 `ingressClassName` field. We also improved on our ability to patch
 vulnerabilities.
 
-## Major Themes
+### Major Themes
 
-### Support for JSON logging
+#### Support for JSON logging
 
 JSON logs are now available in cert-manager! A massive thank you to
 [@malovme](https://github.com/malovme) for going the extra mile to get
@@ -30,12 +93,12 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
   --set cainjector.extraArgs='{--logging-format=json}'
 ```
 
-### Lower memory footprint
+#### Lower memory footprint
 
 In 1.12 we continued the work started in 1.11 to reduce cert-manager component's
 memory consumption.
 
-#### Controller
+##### Controller
 
 Caching of the full contents of all cluster `Secret`s can now be disabled by
 setting a `SecretsFilteredCaching` alpha feature gate to true. This will ensure
@@ -60,7 +123,7 @@ Additionally, controller no longer watches and caches all `Pod` and `Service`
 resources.
 See [`cert-manager#5976`](https://github.com/cert-manager/cert-manager/pull/5976) for implementation.
 
-#### Cainjector
+##### Cainjector
 
 [Cainjector's](../concepts/ca-injector.md) control loops have been refactored, so by default it should
 consume up to half as much memory as before, see
@@ -88,7 +151,7 @@ See [`cert-manager#5766`](https://github.com/cert-manager/cert-manager/pull/5766
 A big thanks to everyone who put in time reporting and writing up issues
 describing performance problems in large scale installations.
 
-### Faster Response to CVEs By Reducing Transitive Dependencies
+#### Faster Response to CVEs By Reducing Transitive Dependencies
 
 In cert-manager 1.12, we have worked on reducing the impacts that unsupported
 dependencies have on our ability to patch CVEs.
@@ -119,7 +182,7 @@ impact, and there should be no runtime impact either.
 You can read more about this change in the design document
 [`20230302.gomod.md`](https://github.com/cert-manager/cert-manager/blob/master/design/20230302.gomod.md).
 
-### Support for ephemeral service account tokens in Vault
+#### Support for ephemeral service account tokens in Vault
 
 cert-manager can now authenticate to Vault using ephemeral service account
 tokens (JWT). cert-manager already knew to authenticate to Vault using the
@@ -135,7 +198,7 @@ authenticate to Vault.
 This change was implemented in the pull request
 [`cert-manager#5502`](https://github.com/cert-manager/cert-manager/pull/5502).
 
-### Support for `ingressClassName` in the HTTP-01 solver
+#### Support for `ingressClassName` in the HTTP-01 solver
 
 cert-manager now supports the `ingressClassName` field in the HTTP-01 solver. We
 recommend using `ingressClassName` instead of the field `class` in your Issuers
@@ -143,7 +206,7 @@ and ClusterIssuers.
 
 > 📖 Read more about `ingressClassName` in the documentation page [HTTP01](../configuration/acme/http01/#ingressclassname).
 
-### Liveness probe and healthz endpoint in the controller
+#### Liveness probe and healthz endpoint in the controller
 
 A healthz HTTP server has been added to the controller component.
 It serves a `/livez`  endpoint, which reports the health status of the leader election system.
@@ -154,7 +217,7 @@ this will cause the controller to be restarted by the kubelet.
 
 > 📖 Read more about this new feature in [Best Practice: Use Liveness Probes](../installation/best-practice.md#use-liveness-probes).
 
-## Community
+### Community
 
 We extend our gratitude to all the open-source contributors who have made
 commits in this release, including:
@@ -204,53 +267,9 @@ the Private CA Issuer.
 In addition, massive thanks to Jetstack (by Venafi) for contributing developer
 time and resources towards the continued maintenance of cert-manager projects.
 
-## `v1.12.3`: changes since `v1.12.2`
+### Changes
 
-### Changes by Kind
-#### Bugfixes
-
-- BUGFIX: 1-character bug was causing invalid log messages and a memory leak ([#6235](https://github.com/cert-manager/cert-manager/pull/6235), @jetstack-bot)
-
-## `v1.12.2`: changes since `v1.12.1`
-
-### Known issues
-
-- cainjector contains a memory leak due to re-assignment of a log variable (see https://github.com/cert-manager/cert-manager/issues/6217). The fix will be released in v1.12.3.
-See https://github.com/cert-manager/cert-manager/pull/6232 for context.
-
-### Changes by Kind
-
-#### Bugfixes
-
-- BUGFIX: `cmctl check api --wait 0` exited without output; we now make sure we perform the API check at least once (#6116, @jetstack-bot)
-
-
-## `v1.12.1`: changes since `v1.12.0`
-
-This release contains a couple dependency bumps and changes to ACME external webhook library.
-
-### Known issues
-
-- [`cmctl` API check](https://cert-manager.io/docs/installation/verify/) is broken in v1.12.1. We suggest that you do not upgrade `cmctl` to this version. The fix will be released in v1.12.2.
-See #6116 for context.
-- cainjector contains a memory leak due to re-assignment of a log variable (see https://github.com/cert-manager/cert-manager/issues/6217). The fix will be released in v1.12.3.
-See https://github.com/cert-manager/cert-manager/pull/6232 for context.
-
-### Changes by Kind
-
-#### Other (Cleanup or Flake)
-
-- Don't run API Priority and Fairness controller in webhook's extension apiserver ([#6085](https://github.com/cert-manager/cert-manager/pull/6085), [@irbekrm](https://github.com/irbekrm))
-- Adds a warning for folks to not use controller feature gates helm value to configure webhook feature gates ([#6100](https://github.com/cert-manager/cert-manager/pull/6100), [@irbekrm](https://github.com/irbekrm))
-
-#### Uncategorized
-
-- Updates Kubernetes libraries to `v0.27.2`. ([#6077](https://github.com/cert-manager/cert-manager/pull/6077), [@lucacome](https://github.com/lucacome))
-- Updates controller-runtime to `v0.15.0` ([#6098](https://github.com/cert-manager/cert-manager/pull/6098), [@lucacome](https://github.com/lucacome))
-
-## `v1.12.0`: changes since `v1.11.0`
-
-### Feature
+#### Feature
 
 - Helm: Added PodDisruptionBudgets for cert-manager components to the Helm chart (disabled by default). ([#3931](https://github.com/cert-manager/cert-manager/pull/3931), [@e96wic](https://github.com/e96wic))
 - Added support for JSON logging (using `--logging-format=json`) ([#5828](https://github.com/cert-manager/cert-manager/pull/5828), [@malovme](https://github.com/malovme))
@@ -273,11 +292,11 @@ See https://github.com/cert-manager/cert-manager/pull/6232 for context.
 - The cainjector controller can now use server-side apply to patch mutatingwebhookconfigurations, validatingwebhookconfigurations, apiservices, and customresourcedefinitions. This feature is currently in alpha and is not enabled by default. To enable server-side apply for the cainjector, add the flag --feature-gates=ServerSideApply=true to the deployment. ([#5991](https://github.com/cert-manager/cert-manager/pull/5991), [@inteon](https://github.com/inteon))
 - Helm: Egress 6443/TCP is now allowed in the webhook. This is required for OpenShift and OKD clusters for which the Kubernetes API server listens on port 6443 instead of 443. ([#5788](https://github.com/cert-manager/cert-manager/pull/5788), [@ExNG](https://github.com/ExNG))
 
-### Documentation
+#### Documentation
 
 - Helm: the dead links in `values.yaml` are now working ([#5999](https://github.com/cert-manager/cert-manager/pull/5999), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
-### Bug or Regression
+#### Bug or Regression
 
 - When using the `literalSubject` field on a Certificate resource, the IPs, URIs, DNS names, and email addresses segments are now properly compared. ([#5747](https://github.com/cert-manager/cert-manager/pull/5747), [@inteon](https://github.com/inteon))
 - When using the `jks` and `pkcs12` fields on a Certificate resource with a CA issuer that doesn't set the `ca.crt` in the Secret resource, cert-manager no longer loop trying to copy `ca.crt` into `truststore.jks` or `truststore.p12`. ([#5972](https://github.com/cert-manager/cert-manager/pull/5972), [@vinzent](https://github.com/vinzent))
@@ -290,7 +309,7 @@ See https://github.com/cert-manager/cert-manager/pull/6232 for context.
 - Upgrade to go 1.19.6 along with newer helm and containerd versions and updated base images ([#5813](https://github.com/cert-manager/cert-manager/pull/5813), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - cmctl: In order work around a hardcoded Kubernetes version in Helm, we now use a fake kube-apiserver version when generating the helm template when running `cmctl x install`. ([#5720](https://github.com/cert-manager/cert-manager/pull/5720), [@irbekrm](https://github.com/irbekrm))
 
-### Other (Cleanup or Flake)
+#### Other (Cleanup or Flake)
 
 - ACME account registration is now re-verified if account key is manually changed. ([#5949](https://github.com/cert-manager/cert-manager/pull/5949), [@TrilokGeer](https://github.com/TrilokGeer))
 - Add `make go-workspace` target for generating a go.work file for local development ([#5935](https://github.com/cert-manager/cert-manager/pull/5935), [@SgtCoDFish](https://github.com/SgtCoDFish))
@@ -320,7 +339,7 @@ See https://github.com/cert-manager/cert-manager/pull/6232 for context.
 - Validates that `certificate.spec.secretName` is a valid `Secret` name ([#5967](https://github.com/cert-manager/cert-manager/pull/5967), [@avi-08](https://github.com/avi-08))
 - `certificate.spec.secretName` Secrets will now be labelled with `controller.cert-manager.io/fao` label ([#5660](https://github.com/cert-manager/cert-manager/pull/5660), [@irbekrm](https://github.com/irbekrm))
 
-### Uncategorized
+#### Uncategorized
 
 - We have replaced our python boilerplate checker with an installed Go version, removing the need to have Python installed when developing or building cert-manager. ([#6000](https://github.com/cert-manager/cert-manager/pull/6000), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
