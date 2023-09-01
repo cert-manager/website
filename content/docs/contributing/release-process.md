@@ -495,46 +495,42 @@ page if a step is missing or if it is outdated.
 
     4. **(final release only)** Write the "Community" section, following the example of past releases such as [v1.12.0](https://github.com/cert-manager/cert-manager/releases/tag/v1.12.0). If there are any users who didn't make code contributions but helped in other ways (testing, PR discussion, etc), be sure to thank them here!
 
-11. Check that the build is complete and send Slack messages about the release:
+11. Check that the build that was automatically triggered when you pushed the
+    tag is complete and send Slack messages about the release:
 
-    1. For recent versions of cert-manager, the build will have been automatically
-       triggered by the tag being pushed earlier. You can check if it's complete on
-       the [GCB Build History](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
-
-    2. If you're releasing an older version of cert-manager (earlier than 1.10) then the automatic build
-       will failed because the GCB config for that build wasn't backported.
-       In this case, you'll need to trigger the build manually using `cmrel`, which takes about 5 minutes:
-
-        ```bash
-        # Must be run from the "cert-manager/release" repo folder.
-        cmrel makestage --ref=$RELEASE_VERSION
-        ```
-
-        This build takes ~5 minutes. It will build all container images and create
-        all the manifest files, sign Helm charts and upload everything to a storage
-        bucket on Google Cloud. These artifacts will then be published and released
-        in the next steps.
-
-    3. In any case, send a first Slack message to `#cert-manager-dev`:
+    1. Send a first Slack message to `#cert-manager-dev`:
 
         <div className="pageinfo pageinfo-primary"><p>
         Releasing <code>1.2.0-alpha.2</code> 🧵
         </p></div>
 
+    2. Check that the build completed in the [GCB Build
+    History](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
+
+       <div className="pageinfo pageinfo-info"><p>
+       🔰 Please have a quick look at the build log as it might contain some unredacted
+       data that we forgot to hide. We try to make sure the sensitive data is
+       properly redacted but sometimes we forget to update this.
+       </p></div>
+
+       > **NOTE (1.10 and earlier):** If you're releasing an older version of
+       > cert-manager then the automatic build will failed because the GCB config
+       > for that build wasn't backported. In this case, you'll need to trigger the
+       > build manually using `cmrel`, which takes about 5 minutes:
+       >
+       > ```bash
+       > # Must be run from the "cert-manager/release" repo folder.
+       > cmrel makestage --ref=$RELEASE_VERSION
+       > ```
+
+    3. Copy the build logs URL and send a second Slack message in reply to this first message with the Cloud
+       Build job link. For example, the message might look like:
+
         <div className="pageinfo pageinfo-info"><p>
-        🔰 Please have a quick look at the build log as it might contain some unredacted
-        data that we forgot to hide. We try to make sure the sensitive data is
-        properly redacted but sometimes we forget to update this.
+        <code>cmrel makestage</code> build logs: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
         </p></div>
 
-    4. Send a second Slack message in reply to this first message with the
-       Cloud Build job link. For example, the message might look like:
-
-        <div className="pageinfo pageinfo-info"><p>
-        Follow the <code>cmrel makestage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
-        </p></div>
-
-12. Run `cmrel publish`:
+13. Run `cmrel publish`:
 
     1. Do a `cmrel publish` dry-run to ensure that all the staged resources are
        valid. Run the following command:
@@ -579,7 +575,7 @@ page if a step is missing or if it is outdated.
         Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
         </p></div>
 
-13. Publish the GitHub release:
+14. Publish the GitHub release:
 
     1. Visit the draft GitHub release and paste in the release notes that you
        generated earlier. You will need to manually edit the content to match
@@ -594,7 +590,7 @@ page if a step is missing or if it is outdated.
 
     4. Click "Publish" to make the GitHub release live.
 
-14. Merge the pull request containing the Helm chart:
+15. Merge the pull request containing the Helm chart:
 
     The Helm charts for cert-manager are served using Cloudflare pages
     and the Helm chart files and metadata are stored in the [Jetstack charts repository](https://github.com/jetstack/jetstack-charts).
@@ -606,7 +602,7 @@ page if a step is missing or if it is outdated.
     4. Merge the PR
     5. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-15. **(final + patch releases)** Merge the 4 Website PRs:
+16. **(final + patch releases)** Merge the 4 Website PRs:
 
     1. Merge the PRs "Release Notes", "Upgrade Notes", and "Freeze And Bump
        Versions" that you have created previously.
