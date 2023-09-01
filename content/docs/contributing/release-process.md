@@ -198,11 +198,19 @@ page if a step is missing or if it is outdated.
      The steps below need to happen using `master` (**final release**) or
      `release-1.x` (**patch release**). The PR will be merged after the release.
 
-   1. Go to the Generate `release-notes.md` using the instructions further below
-     (<kbd>Ctrl+F</kbd> and look for `github-release-description.md`).
+   Go to the section "Generate `github-release-description.md`" using the
+      instructions further below (<kbd>Ctrl+F</kbd> and look for
+      `github-release-description.md`).
    2. Remove the "Dependencies" section.
-   3. Edit any `release-note` block in the PR description that doesn't follow
-      the [release-note guidelines](../contributing/contributing-flow.md#release-note-guidelines)
+   3. For each bullet point in the Markdown file, read the changelog entry and
+      check that it follows the [release-note
+      guidelines](../contributing/contributing-flow.md#release-note-guidelines).
+      If you find a changelog entry that doesn't follow the guidelines, then:
+      - Go to that PR and edit the PR description to change the contents of the
+        `release-note` block.
+      - Go back to the release notes page, and copy the same change into
+        `release-notes.md` (or re-generate the file).
+
       and copy the same change into `release-notes.md` (or re-generate the
       file).
    4. Add the section "Major themes" and "Community" by taking example on the
@@ -211,11 +219,11 @@ page if a step is missing or if it is outdated.
        `@maelvls`) with actual links using the following command:
 
        ```bash
-       sed github-release-description.md \
+       sed \
          -e 's$#([0-9]+)$[#\1](https://github.com/cert-manager/cert-manager/pull/\1)$g' \
          -e 's$@(\w+)$[@\1](https://github.com/\1)$g' \
          -E \
-         -i
+         github-release-description.md >release-notes.md
        ```
 
    6. Move `release-notes.md` to the website repo:
