@@ -461,11 +461,11 @@ page if a step is missing or if it is outdated.
      EOF
      ```
 
-    Finally, get back to the main tag:
+   Finally, get back to the branch you were on initially:
 
-     ```bash
-     git checkout $RELEASE_VERSION
-     ```
+   ```bash
+   git checkout $BRANCH
+   ```
 
 10. In this section, we will be creating the description for the GitHub Release.
 
