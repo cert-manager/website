@@ -104,6 +104,7 @@ CertificateSecretTemplate
 CertificateSigningRequest
 CertificateSigningRequests
 Changelog
+changelog
 ChartMuseum
 CloudDNS
 CloudFlare

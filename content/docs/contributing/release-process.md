@@ -203,8 +203,7 @@ page if a step is missing or if it is outdated.
       `github-release-description.md`).
    2. Remove the "Dependencies" section.
    3. For each bullet point in the Markdown file, read the changelog entry and
-      check that it follows the [release-note
-      guidelines](../contributing/contributing-flow.md#release-note-guidelines).
+      check that it follows the [release-note guidelines](../contributing/contributing-flow.md#release-note-guidelines).
       If you find a changelog entry that doesn't follow the guidelines, then:
       - Go to that PR and edit the PR description to change the contents of the
         `release-note` block.
