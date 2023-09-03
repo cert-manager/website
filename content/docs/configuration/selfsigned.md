@@ -117,6 +117,48 @@ spec:
     secretName: root-secret
 ```
 
+Alternatively, if you are looking to use `ClusterIssuer` for signing `Certificates` anywhere in your cluster with the `SelfSigned` `Certificate` CA, use the YAML below (slight modification to the last step):
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sandbox
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: my-selfsigned-ca
+  namespace: sandbox
+spec:
+  isCA: true
+  commonName: my-selfsigned-ca
+  secretName: root-secret
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: my-ca-issuer
+spec:
+  ca:
+    secretName: root-secret
+```
+The first `ClusterIssuer` is used to sign the Root CA, in this case. The second `ClusterIssuer` is used to sign certificates using said Root CA.
+
 ### CRL Distribution Points
 
 You may also optionally specify [CRL](https://en.wikipedia.org/wiki/Certificate_revocation_list)
