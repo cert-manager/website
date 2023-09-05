@@ -369,8 +369,13 @@ Kubernetes 1.24 and above.
 ## Verifying the issuer Deployment
 
 Once the Vault issuer has been deployed, it will be marked as ready if the
-configuration is valid. Replace `issuers` here with `clusterissuers` if that is what has
+configuration is valid. Replace `issuers` below with `clusterissuers` if that is what has
 been deployed.
+
+The Vault issuer tests your Vault instance by querying the `v1/sys/health`
+endpoint, to ensure your Vault instance is unsealed and initialized before
+requesting certificates. The result of that query will populate the `STATUS`
+column.
 
 ```bash
 $ kubectl get issuers vault-issuer -n sandbox -o wide
