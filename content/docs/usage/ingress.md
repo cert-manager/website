@@ -170,6 +170,10 @@ trigger Certificate resources to be automatically created:
   configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
   Valid values are `Never` and `Always`. If unset a rotation policy `Never` will be used.
 
+## Generate multiple certificates with multiple ingresses
+
+If you need to generate certificates from multiple ingresses make sure it has the issuer annotation.
+Besides the annotation, it is necessary that each ingress possess a unique `tls.secretName`
 
 ## Optional Configuration
 
