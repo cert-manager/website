@@ -107,7 +107,7 @@ tweak the [various liveness probe time settings and thresholds](https://github.c
 
 ## Restrict Auto-Mount of Service Account Tokens
 
-This recommendation is described in the [Kyverno Policy Catalogue](https://kyverno.io/policies/other/restrict_automount_sa_token/restrict_automount_sa_token/) as follows:
+This recommendation is described in the [Kyverno Policy Catalogue](https://kyverno.io/policies/other/res/restrict-automount-sa-token/restrict-automount-sa-token/) as follows:
 > Kubernetes automatically mounts ServiceAccount credentials in each Pod. The
 > ServiceAccount may be assigned roles allowing Pods to access API resources.
 > Blocking this ability is an extension of the least privilege best practice and
