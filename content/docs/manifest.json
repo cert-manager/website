@@ -195,7 +195,7 @@
           ]
         },
         {
-          "title": "Configuration",
+          "title": "Configuring Issuers",
           "routes": [
             {
               "title": "Introduction",
@@ -291,7 +291,7 @@
           ]
         },
         {
-          "title": "Usage",
+          "title": "Requesting Certificates",
           "routes": [
             {
               "title": "Introduction",
