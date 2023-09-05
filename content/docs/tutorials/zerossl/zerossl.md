@@ -86,7 +86,7 @@ kubectl apply -f zero-ssl-eabsecret.yaml -n cert-manager
 Then we must create the `ZeroSSL` `ClusterIssuer`, let's call it `zerossl-production`. In our case we are using AWS. See pre-conditions to provision all required elements.
 
 ```yaml
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: zerossl-production
