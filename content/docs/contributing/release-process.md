@@ -269,17 +269,17 @@ page if a step is missing or if it is outdated.
       ```
 
    4. (**final + patch release of the latest minor version**) Bump all versions
-      present in installation instructions. To find these versions:
+      present in installation instructions. To update these versions:
 
       ```bash
-      find ./content/docs/installation -name '*.md' -not -path '*/upgrad**' -and -not -path '*supported-releases.md' -exec sed -i.bak 's/1.11./1.12.0/g' '{}' \;
+      sed -i.bak 's/1.12.[0-9]/1.12.4/g' content/docs/installation/{README.md,code-signing.md,helm.md,kubectl.md,operator-lifecycle-manager.md}
       rm -f **/*.bak
       ```
 
       To check that all mentions of that version are gone, run:
 
       ```bash
-      grep -R -n -F 'v1.11.' content/docs/installation
+      grep -R -n -F 'v1.11.[0-9]' content/docs/installation
       ```
 
    5. (**final release only**) Freeze the `docs/` folder by creating a copy ,
