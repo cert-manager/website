@@ -403,7 +403,7 @@ Certificate resources:
 
 - `cert-manager.io/subject-serialnumber`: (optional) this annotation allows you to
   configure `spec.subject.serialNumber` field for the Certificate to be generated.
-  Supports comma-separated values e.g. "123 Example St,456 Other Blvd"
+  Supports comma-separated values e.g. "10978342379280287615,1111144445555522228888"
 
 - ` cert-manager.io/duration`: (optional) this annotation allows you to
   configure `spec.duration` field for the Certificate to be generated.
