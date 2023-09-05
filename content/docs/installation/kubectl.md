@@ -115,10 +115,6 @@ First, delete existing cert-manager webhook configurations, if any:
 
 ```bash
 kubectl delete mutatingwebhookconfigurations cert-manager-webhook
-```
-
-Then try do delete the corresponding validatingwebhookconfigurations
-```bash
 kubectl delete validatingwebhookconfigurations cert-manager-webhook
 ```
 
