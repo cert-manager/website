@@ -216,7 +216,6 @@ the webhook deployment, the argument `--healthz-port=6081` was mismatched with
 the readiness configuration.
 
 <a id="io-timeout"></a>
-
 ## Error: `i/o timeout` (connectivity issue)
 
 > This error message was reported 26 times on Slack. To list these messages, do a search with `in:#cert-manager in:#cert-manager-dev "443: i/o timeout"`. The error message was reported in 2 GitHub issues ([#2811](https://github.com/cert-manager/cert-manager/issues/2811 "i/o timeout from apiserver when connecting to webhook on k3s"), [#4073](https://github.com/cert-manager/cert-manager/issues/4073 "Internal error occurred: failed calling webhook"))
@@ -242,7 +241,6 @@ inside the webhook's net namespace, we would see:
 This issue is caused by the `SYN` packet being dropped somewhere.
 
 <a id="gke-private-cluster"></a>
-
 ### Cause 1: GKE Private Cluster
 
 The default Helm configuration should work with GKE private clusters, but
@@ -552,7 +550,6 @@ Error from server (InternalError): error when creating "STDIN":
 ([1](https://kubernetes.slack.com/archives/C4NV3DWUC/p1632849763397100)).
 
 <a id="context-deadline-exceeded"></a>
-
 ## Error: `context deadline exceeded`
 
 > This error message was reported in GitHub issues ([2319](https://github.com/cert-manager/cert-manager/issues/2319 "Documenting context deadline exceeded errors relating to the webhook, on bare metal"), [2706](https://github.com/cert-manager/cert-manager/issues/2706 "") [5189](https://github.com/cert-manager/cert-manager/issues/5189 "Post https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s: context deadline exceeded"), [5004](https://github.com/cert-manager/cert-manager/issues/5004 "After installing cert-manager using kubectl, cmctl check api fails with https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s: context deadline exceeded")), and once [on Stack Overflow](https://stackoverflow.com/questions/72059332/how-can-i-fix-failed-calling-webhook-webhook-cert-manager-io).

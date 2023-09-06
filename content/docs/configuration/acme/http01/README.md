@@ -101,7 +101,8 @@ solver, potentially incurring additional cost.
 
 </div>
 
-<h3 id="ingress-service-type">`serviceType`</h3>
+<a id="ingress-service-type"></a>
+### `serviceType`
 
 In rare cases it might be not possible/desired to use `NodePort` as type for the
 HTTP01 challenge response service, e.g. because of Kubernetes limit
@@ -348,7 +349,8 @@ spec:
 
 After the Certificate is issued, the HTTPRoute is deleted.
 
-<h3 id="gatewayhttproute-labels">`labels`</h3>
+<a id="gatewayhttproute-labels"></a>
+### `labels`
 
 These labels are copied into the temporary HTTPRoute created by cert-manager for
 solving the HTTP-01 challenge. These labels must match one of the Gateway
@@ -357,7 +359,8 @@ resources on your cluster. The matched Gateway have a listener on port 80.
 Note that when the labels do not match any Gateway on your cluster, cert-manager
 will create the temporary HTTPRoute challenge and nothing will happen.
 
-<h3 id="gatewayhttproute-service-type">`serviceType`</h3>
+<a id="gatewayhttproute-service-type"></a>
+### `serviceType`
 
 This field has the same meaning as the
 [`http01.ingress.serviceType`](#ingress-service-type).
