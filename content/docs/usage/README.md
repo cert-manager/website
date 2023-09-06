@@ -1,5 +1,5 @@
 ---
-title: Issuing Certificates
+title: Requesting Certificates
 description: 'cert-manager usage: Overview'
 ---
 
