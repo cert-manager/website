@@ -4,14 +4,14 @@ description: 'Policy plugin for cert-manager'
 ---
 
 approver-policy is a cert-manager
-[approver](../../concepts/certificaterequest.md#approval)
+[approver](../../usage/certificaterequest.md#approval)
 that will approve or deny CertificateRequests based on policies defined in
 the `CertificateRequestPolicy` custom resource.
 
 ## Prerequisites
 
 [cert-manager must be installed](../../installation/README.md), and
-the [the default approver in cert-manager must be disabled](../../concepts/certificaterequest.md#approver-controller).
+the [the default approver in cert-manager must be disabled](../../usage/certificaterequest.md#approver-controller).
 
 > ⚠️ If the default approver is not disabled in cert-manager, approver-policy will
 > race with cert-manager and policy will be ineffective.
@@ -69,7 +69,7 @@ If you are using approver-policy with [external
 issuers](../../configuration/external.md), you _must_
 include their signer names so that approver-policy has permissions to approve
 and deny CertificateRequests that
-[reference them](../../concepts/certificaterequest.md#rbac-syntax).
+[reference them](../../usage/certificaterequest.md#rbac-syntax).
 For example, if using approver-policy for the internal issuer types, along with
 [google-cas-issuer](https://github.com/jetstack/google-cas-issuer), and
 [aws-privateca-issuer](https://github.com/cert-manager/aws-privateca-issuer),
