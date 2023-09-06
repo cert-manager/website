@@ -367,11 +367,9 @@ spec:
 ```
 
 
-## Alternative Certificate Chains
-
 {/* The empty link below preserves old links to #alternative-certificate-chain", which matched the old title of this section */}
-
-<a id="alternative-certificate-chain" className="hidden-link"></a>
+<a id="alternative-certificate-chain"></a>
+## Alternative Certificate Chains
 
 It's possible to choose alternative certificate chains when fetching a certificate from an ACME server. This allows issuers to gracefully roll people over to a new root certificate during a transition period; the most famous example was the Let's Encrypt ["ISRG Root" changeover](https://community.letsencrypt.org/t/transition-to-isrgs-root-delayed-until-jan-11-2021/125516).
 
