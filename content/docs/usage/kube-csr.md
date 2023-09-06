@@ -1,5 +1,5 @@
 ---
-title: Kubernetes CertificateSigningRequests
+title: certificates.k8s.io CertificateSigningRequest
 description: 'cert-manager usage: Kubernetes CertificateSigningRequest resources'
 ---
 

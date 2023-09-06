@@ -1,5 +1,5 @@
 ---
-title: CertificateRequest
+title: cert-manager.io CertificateRequest
 description: 'cert-manager core concepts: CertificateRequests'
 ---
 
