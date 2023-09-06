@@ -298,36 +298,58 @@
               "path": "/docs/usage/README.md"
             },
             {
-              "title": "Certificate Resources",
+              "title": "cm Certificate",
               "path": "/docs/usage/certificate.md"
             },
             {
-              "title": "Prometheus Metrics",
-              "path": "/docs/usage/prometheus-metrics.md"
+              "title": "cm CertificateRequest",
+              "path": "/docs/usage/certificaterequest.md"
             },
             {
-              "title": "Securing Ingress Resources",
+              "title": "k8s Ingress",
               "path": "/docs/usage/ingress.md"
             },
             {
-              "title": "Securing Gateway Resources",
+              "title": "k8s Gateway",
               "path": "/docs/usage/gateway.md"
             },
             {
-              "title": "Securing Istio Service Mesh",
-              "path": "/docs/usage/istio.md"
+              "title": "k8s CertificateSigningRequests",
+              "path": "/docs/usage/kube-csr.md"
+            },
+            {
+              "title": "Service Mesh",
+              "routes": [
+                {
+                  "title": "istio-csr",
+                  "path": "/docs/usage/istio-csr.md"
+                }
+              ]
             },
             {
               "title": "CSI Driver",
-              "path": "/docs/usage/csi.md"
-            },
-            {
-              "title": "Kubernetes CertificateSigningRequests",
-              "path": "/docs/usage/kube-csr.md"
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/docs/usage/csi.md"
+                },
+                {
+                  "title": "csi-driver",
+                  "path": "/docs/usage/csi-driver.md"
+                },
+                {
+                  "title": "csi-driver-spiffe",
+                  "path": "/docs/usage/csi-driver-spiffe.md"
+                }
+              ]
             },
             {
               "title": "Policy for cert-manager certificates",
               "path": "/docs/usage/approver-policy.md"
+            },
+            {
+              "title": "Prometheus Metrics",
+              "path": "/docs/usage/prometheus-metrics.md"
             }
           ]
         },
@@ -337,18 +359,6 @@
             {
               "title": "Contents",
               "path": "/docs/projects/README.md"
-            },
-            {
-              "title": "istio-csr",
-              "path": "/docs/projects/istio-csr.md"
-            },
-            {
-              "title": "csi-driver",
-              "path": "/docs/projects/csi-driver.md"
-            },
-            {
-              "title": "csi-driver-spiffe",
-              "path": "/docs/projects/csi-driver-spiffe.md"
             },
             {
               "title": "approver-policy",
@@ -694,10 +704,6 @@
             {
               "title": "Certificate",
               "path": "/docs/concepts/certificate.md"
-            },
-            {
-              "title": "CertificateRequest",
-              "path": "/docs/concepts/certificaterequest.md"
             },
             {
               "title": "ACME Orders and Challenges",

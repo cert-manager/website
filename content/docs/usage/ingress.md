@@ -1,5 +1,5 @@
 ---
-title: Securing Ingress Resources
+title: Annotated networking.k8s.io Ingress
 description: 'cert-manager usage: Kubernetes Ingress'
 ---
 

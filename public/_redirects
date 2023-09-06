@@ -2,6 +2,12 @@
 https://netlify.cert-manager.io/* https://cert-manager.io/:splat 301!
 https://cert-manager.netlify.com/* https://cert-manager.io/:splat 301!
 
+# Integrating the project pages into the main website
+/docs/usage/istio/ /docs/usage/istio-csr/ 301!
+/docs/projects/istio-csr/ /docs/usage/istio-csr/ 301!
+/docs/projects/csi-driver/ /docs/usage/csi-driver/ 301!
+/docs/projects/csi-driver-spiffe/ /docs/usage/csi-driver-spiffe/ 301!
+
 # Redirect all next-docs on the main site to the release-next preview
 https://cert-manager.io/next-docs/* https://release-next--cert-manager-website.netlify.app/docs/:splat 301!
 
