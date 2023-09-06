@@ -6,7 +6,7 @@ description: 'cert-manager usage: Kubernetes CertificateSigningRequest resources
 Kubernetes has an in-built
 [CertificateSigningRequest](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/)
 resource. This resource is similar to the cert-manager
-[CertificateRequest](../concepts/certificaterequest.md) in that it is used to
+[CertificateRequest](../usage/certificaterequest.md) in that it is used to
 request an X.509 signed certificate from a referenced Certificate Authority
 (CA).
 

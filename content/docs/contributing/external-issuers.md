@@ -49,13 +49,13 @@ on how to write an external issuer using Kubebuilder and controller-runtime.
 ## Approval
 
 Before signing a certificate, Issuers **must** also ensure that the `CertificateRequest` is
-[`Approved`](../concepts/certificaterequest.md#approval).
+[`Approved`](../usage/certificaterequest.md#approval).
 
 If the `CertificateRequest` is not `Approved`, the issuer **must** not process it. Issuers are not
 responsible for approving `CertificateRequests` and should refuse to proceed if they find a certificate
 that is not approved.
 
-If a `CertificateRequest` created for an issuance associated with a `Certificate` gets [`Denied`](../concepts/certificaterequest.md#approval), the issuance will be failed by cert-manager's issuing controller.
+If a `CertificateRequest` created for an issuance associated with a `Certificate` gets [`Denied`](../usage/certificaterequest.md#approval), the issuance will be failed by cert-manager's issuing controller.
 
 ## Conditions
 
@@ -65,7 +65,7 @@ status of that resource to a ready state, as this is what is used to signal to h
 controllers - such as the `Certificate` controller - that the resource is ready to be consumed.
 
 Conversely, if the `CertificateRequest` fails, it is as important to mark the resource as such, as this will
-also be used as a signal to higher order controllers. Valid condition states are listed under [concepts](../concepts/certificaterequest.md#conditions).
+also be used as a signal to higher order controllers. Valid condition states are listed under [concepts](../usage/certificaterequest.md#conditions).
 
 ## Implementation
 
