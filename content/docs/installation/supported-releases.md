@@ -13,7 +13,8 @@ Each release is supported for a period of four months, and we aim to create a ne
 release roughly every two months, accounting for holiday periods, major conferences
 and other world events.
 
-<h2 id="supported-releases">Currently supported releases</h2>
+<a id="supported-releases"></a>
+## Currently supported releases
 
 | Release  | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
@@ -117,7 +118,8 @@ branch is actually supported.
                                                        April 1, 2021
 ```
 
-<h3 id="technical-support">Technical support</h3>
+<a id="technical-support"></a>
+### Technical support
 
 Technical assistance is offered on a best-effort basis for supported
 releases only. You can request support from the community on [Kubernetes
@@ -128,7 +130,8 @@ Google group.
 [discussions]: https://github.com/cert-manager/cert-manager/discussions
 [group]: https://groups.google.com/g/cert-manager-dev
 
-<h3 id="bug-fixes-support">Security and bug fixes</h3>
+<a id="bug-fixes-support"></a>
+### Security and bug fixes
 
 We back-port important bug fixes — including security fixes — to all
 currently supported releases.
@@ -137,12 +140,14 @@ currently supported releases.
 - [Critical bugs](#critical-bugs),
 - [Long-standing bugs](#long-standing-bugs).
 
-<h4 id="security-issues">Security issues</h4>
+<a id="security-issues"></a>
+#### Security issues
 
 **Security issues** are fixed as soon as possible. They get back-ported to
 the last two releases, and a new patch release is immediately created for them.
 
-<h4 id="critical-bugs">Critical bugs</h4>
+<a id="critical-bugs"></a>
+#### Critical bugs
 
 **Critical bugs** include both regression bugs as well as upgrade bugs.
 
@@ -159,7 +164,8 @@ this category.
 Fixes for critical bugs are (usually) immediately back-ported by creating a new
 patch release for the currently supported releases.
 
-<h4 id="long-standing-bugs">Long-standing bugs</h4>
+<a id="long-standing-bugs"></a>
+#### Long-standing bugs
 
 **Long-standing bug**: sometimes a bug exists for a long time, and may have
 known workarounds. [#3444][] is an example of a long-standing bug.
@@ -168,14 +174,16 @@ Where we feel that back-porting would be difficult or might be a stability
 risk to clusters running cert-manager, we'll make the fix in a major
 release but avoid back-porting the fix.
 
-<h4 id="breaking-changes">Breaking changes</h4>
+<a id="breaking-changes"></a>
+#### Breaking changes
 
 Breaking changes are changes that intentionally break the cert-manager
 Kubernetes API or the command line flags. We avoid making breaking changes
 where possible, and where they're required we'll give as much notice as
 possible.
 
-<h4 id="other-backports">Other back-ports</h4>
+<a id="other-backports"></a>
+#### Other back-ports
 
 We aim to be conservative in what we back-port. That applies especially for anything which
 could be a _runtime_ change - that is, a change which might alter behavior for someone
@@ -201,7 +209,8 @@ Generally we'll seek to be pragmatic. A rule of thumb might be to ask:
 [#5209]: https://github.com/cert-manager/cert-manager/pull/5209 "release-1.8: rclone"
 
 
-<h2 id="kubernetes-supported-versions">How we determine supported Kubernetes versions</h2>
+<a id="kubernetes-supported-versions"></a>
+## How we determine supported Kubernetes versions
 
 The list of supported Kubernetes versions displayed in the [Supported Releases](#supported-releases) section
 depends on what the cert-manager maintainers think is reasonable to support and to test.

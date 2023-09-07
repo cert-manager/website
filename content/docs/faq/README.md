@@ -91,11 +91,9 @@ cert-manager publishes all events to the Kubernetes events mechanism, you can ge
 
 Due to the nature of the Kubernetes event mechanism these will be purged after a while. If you're using a dedicated logging system it might be able or is already also storing Kubernetes events.
 
-### What happens if issuance fails? Will it be retried?
-
 {/* This empty link preserves old links to #what-happens-if-a-renewal-doesn't happen?-will-it-be-tried-again-after-some-time?", which matched the old title of this section */}
-
-<a id="alternative-certificate-chain" className="hidden-link"></a>
+<a id="alternative-certificate-chain"></a>
+### What happens if issuance fails? Will it be retried?
 
 cert-manager will retry a failed issuance except for a few rare edge cases where
 manual intervention is needed.

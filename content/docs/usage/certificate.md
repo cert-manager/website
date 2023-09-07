@@ -117,7 +117,8 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 A full list of the fields supported on the Certificate resource can be found in
 the [API reference documentation](../reference/api-docs.md#cert-manager.io/v1.CertificateSpec).
 
-<h2 id="key-usages">X.509 key usages and extended key usages</h2>
+<a id="key-usages"></a>
+## X.509 key usages and extended key usages
 
 cert-manager supports requesting certificates that have a number of [custom key
 usages](https://tools.ietf.org/html/rfc5280#section-4.2.1.3) and [extended key
@@ -134,7 +135,8 @@ certificate does not match the current key usage set.
 An exhaustive list of supported key usages can be found in the [API reference
 documentation](../reference/api-docs.md#cert-manager.io/v1.KeyUsage).
 
-<h2 id="temporary-certificates-whilst-issuing">Temporary Certificates while Issuing</h2>
+<a id="temporary-certificates-whilst-issuing"></a>
+## Temporary Certificates while Issuing
 
 When requesting certificates [using the ingress-shim](./ingress.md), the
 component `ingress-gce`, if used, requires that a temporary certificate is
@@ -155,7 +157,8 @@ Adding the following annotation on an ingress will automatically set "issue-temp
  acme.cert-manager.io/http01-edit-in-place: "true"
  ```
 
-<h2 id="rotation-private-key">Rotation of the private key</h2>
+<a id="rotation-private-key"></a>
+## Rotation of the private key
 
 By default, the private key won't be rotated automatically. Using the setting
 `rotationPolicy: Always`, the private key Secret associated with a Certificate
@@ -201,7 +204,8 @@ spec:
     rotationPolicy: Always # 🔰 Here.
 ```
 
-<h3 id="actions-triggering-private-key-rotation">Actions that will trigger a rotation of the private key</h3>
+<a id="actions-triggering-private-key-rotation"></a>
+### Actions that will trigger a rotation of the private key
 
 Setting the `rotationPolicy: Always` won't rotate the private key immediately.
 In order to rotate the private key, the certificate objects must be reissued. A
