@@ -259,3 +259,7 @@ and `bar`:
 ```yaml
     resourceNames: ["myissuers.my-example.io/foo.myapp", "myissuers.my-example.io/bar.myapp"]
 ```
+
+## Understanding the internal workings and debugging
+
+<object data="/images/request-certificate-flow/certificate-request-flow.svg"></object>

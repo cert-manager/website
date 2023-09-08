@@ -164,3 +164,7 @@ are not approved by default, so you will likely need to approve it manually:
 ```bash
 $ kubectl certificate approve <name>
 ```
+
+## Understanding the internal workings and debugging
+
+<object data="/images/request-certificate-flow/certificate-signing-request-flow.svg"></object>
