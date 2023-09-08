@@ -23,9 +23,9 @@ and other world events.
 
 ## Upcoming releases
 
-| Release  |      Release Date      |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
-|----------|:----------------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
-| [1.13][] | TBD                    | ~4 months post release |            1.22 → 1.27             |            4.9 → 4.14             |
+| Release  | Release Date  |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+|----------|:-------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
+| [1.13][] | Sep 12, 2023  | ~4 months post release |            1.23 → 1.28             |           4.10 → 4.14             |
 
 The release of cert-manager 1.13 has been delayed while we work to ensure it's the best it can possibly be. We'll have more updates soon!
 
