@@ -218,10 +218,9 @@ page if a step is missing or if it is outdated.
        `@maelvls`) with actual links using the following command:
 
        ```bash
-       sed \
+       sed -E \
          -e 's$#([0-9]+)$[#\1](https://github.com/cert-manager/cert-manager/pull/\1)$g' \
          -e 's$@(\w+)$[@\1](https://github.com/\1)$g' \
-         -E \
          github-release-description.md >release-notes.md
        ```
 
