@@ -1,0 +1,372 @@
+{
+  "routes": [
+    {
+      "title": "cert-manager",
+      "routes": [
+        {
+          "title": "Introduction",
+          "path": "/v1.13-docs/README.md"
+        },
+        {
+          "title": "Getting Started",
+          "path": "/v1.13-docs/getting-started/README.md"
+        },
+        {
+          "title": "Installation",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.13-docs/installation/README.md"
+            },
+            {
+              "title": "Cloud Compatibility",
+              "path": "/v1.13-docs/installation/compatibility.md"
+            },
+            {
+              "title": "kubectl apply",
+              "path": "/v1.13-docs/installation/kubectl.md"
+            },
+            {
+              "title": "Helm",
+              "path": "/v1.13-docs/installation/helm.md"
+            },
+            {
+              "title": "OperatorHub (OLM)",
+              "path": "/v1.13-docs/installation/operator-lifecycle-manager.md"
+            },
+            {
+              "title": "Other tools",
+              "path": "/v1.13-docs/installation/other-tools.md"
+            },
+            {
+              "title": "Verifying",
+              "path": "/v1.13-docs/installation/verify.md"
+            },
+            {
+              "title": "Feature flags",
+              "path": "/v1.13-docs/installation/featureflags.md"
+            },
+            {
+              "title": "Uninstall",
+              "path": "/v1.13-docs/installation/uninstall.md"
+            },
+            {
+              "title": "API compatibility",
+              "path": "/v1.13-docs/installation/api-compatibility.md"
+            },
+            {
+              "title": "Signature Verification",
+              "path": "/v1.13-docs/installation/code-signing.md"
+            },
+            {
+              "title": "Best Practice",
+              "path": "/v1.13-docs/installation/best-practice.md"
+            }
+          ]
+        },
+        {
+          "title": "Configuring Issuers",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.13-docs/configuration/README.md"
+            },
+            {
+              "title": "SelfSigned",
+              "path": "/v1.13-docs/configuration/selfsigned.md"
+            },
+            {
+              "title": "CA",
+              "path": "/v1.13-docs/configuration/ca.md"
+            },
+            {
+              "title": "Vault",
+              "path": "/v1.13-docs/configuration/vault.md"
+            },
+            {
+              "title": "Venafi",
+              "path": "/v1.13-docs/configuration/venafi.md"
+            },
+            {
+              "title": "External",
+              "path": "/v1.13-docs/configuration/external.md"
+            },
+            {
+              "title": "ACME",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/v1.13-docs/configuration/acme/README.md"
+                },
+                {
+                  "title": "HTTP01",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/v1.13-docs/configuration/acme/http01/README.md"
+                    },
+                    {
+                      "title": "External Load Balancer",
+                      "path": "/v1.13-docs/configuration/acme/http01/externalloadbalancer.md"
+                    }
+                  ]
+                },
+                {
+                  "title": "DNS01",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/v1.13-docs/configuration/acme/dns01/README.md"
+                    },
+                    {
+                      "title": "ACMEDNS",
+                      "path": "/v1.13-docs/configuration/acme/dns01/acme-dns.md"
+                    },
+                    {
+                      "title": "Akamai",
+                      "path": "/v1.13-docs/configuration/acme/dns01/akamai.md"
+                    },
+                    {
+                      "title": "AzureDNS",
+                      "path": "/v1.13-docs/configuration/acme/dns01/azuredns.md"
+                    },
+                    {
+                      "title": "Cloudflare",
+                      "path": "/v1.13-docs/configuration/acme/dns01/cloudflare.md"
+                    },
+                    {
+                      "title": "DigitalOcean",
+                      "path": "/v1.13-docs/configuration/acme/dns01/digitalocean.md"
+                    },
+                    {
+                      "title": "Google CloudDNS",
+                      "path": "/v1.13-docs/configuration/acme/dns01/google.md"
+                    },
+                    {
+                      "title": "RFC-2136",
+                      "path": "/v1.13-docs/configuration/acme/dns01/rfc2136.md"
+                    },
+                    {
+                      "title": "Route53",
+                      "path": "/v1.13-docs/configuration/acme/dns01/route53.md"
+                    },
+                    {
+                      "title": "Webhook",
+                      "path": "/v1.13-docs/configuration/acme/dns01/webhook.md"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Requesting Certificates",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.13-docs/usage/README.md"
+            },
+            {
+              "title": "Certificate Resources",
+              "path": "/v1.13-docs/usage/certificate.md"
+            },
+            {
+              "title": "Prometheus Metrics",
+              "path": "/v1.13-docs/usage/prometheus-metrics.md"
+            },
+            {
+              "title": "Securing Ingress Resources",
+              "path": "/v1.13-docs/usage/ingress.md"
+            },
+            {
+              "title": "Securing Gateway Resources",
+              "path": "/v1.13-docs/usage/gateway.md"
+            },
+            {
+              "title": "Securing Istio Service Mesh",
+              "path": "/v1.13-docs/usage/istio.md"
+            },
+            {
+              "title": "CSI Driver",
+              "path": "/v1.13-docs/usage/csi.md"
+            },
+            {
+              "title": "Kubernetes CertificateSigningRequests",
+              "path": "/v1.13-docs/usage/kube-csr.md"
+            },
+            {
+              "title": "Policy for cert-manager certificates",
+              "path": "/v1.13-docs/usage/approver-policy.md"
+            }
+          ]
+        },
+        {
+          "title": "Tutorials",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.13-docs/tutorials/README.md"
+            },
+            {
+              "title": "Securing NGINX-ingress",
+              "path": "/v1.13-docs/tutorials/acme/nginx-ingress.md"
+            },
+            {
+              "title": "GKE + Ingress + Let's Encrypt",
+              "path": "/v1.13-docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md"
+            },
+            {
+              "title": "AKS + LoadBalancer + Let's Encrypt",
+              "path": "/v1.13-docs/tutorials/getting-started-aks-letsencrypt/README.md"
+            },
+            {
+              "title": "Migrating from Kube-LEGO",
+              "path": "/v1.13-docs/tutorials/acme/migrating-from-kube-lego.md"
+            },
+            {
+              "title": "Backup and Restore Resources",
+              "path": "/v1.13-docs/tutorials/backup.md"
+            },
+            {
+              "title": "DNS Validation",
+              "path": "/v1.13-docs/tutorials/acme/dns-validation.md"
+            },
+            {
+              "title": "HTTP Validation",
+              "path": "/v1.13-docs/tutorials/acme/http-validation.md"
+            },
+            {
+              "title": "Pomerium Ingress",
+              "path": "/v1.13-docs/tutorials/acme/pomerium-ingress.md"
+            },
+            {
+              "title": "EKS + Ingress + Venafi",
+              "path": "/v1.13-docs/tutorials/venafi/venafi.md"
+            },
+            {
+              "title": "Securing the istio Service Mesh using cert-manager",
+              "path": "/v1.13-docs/tutorials/istio-csr/istio-csr.md"
+            },
+            {
+              "title": "Syncing Secrets Across Namespaces",
+              "path": "/v1.13-docs/tutorials/syncing-secrets-across-namespaces.md"
+            },
+            {
+              "title": "Securing Ingresses with ZeroSSL",
+              "path": "/v1.13-docs/tutorials/zerossl/zerossl.md"
+            },
+            {
+              "title": "Managing public trust in kubernetes with trust-manager",
+              "path": "/v1.13-docs/tutorials/getting-started-with-trust-manager/README.md"
+            }
+          ]
+        },
+        {
+          "title": "Troubleshooting",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.13-docs/troubleshooting/README.md"
+            },
+            {
+              "title": "Troubleshooting ACME / Let's Encrypt Certificates",
+              "path": "/v1.13-docs/troubleshooting/acme.md"
+            },
+            {
+              "title": "Troubleshooting webhook",
+              "path": "/v1.13-docs/troubleshooting/webhook.md"
+            }
+          ]
+        },
+        {
+          "title": "FAQ",
+          "path": "/v1.13-docs/faq/README.md"
+        },
+        {
+          "title": "Concepts",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.13-docs/concepts/README.md"
+            },
+            {
+              "title": "Issuer",
+              "path": "/v1.13-docs/concepts/issuer.md"
+            },
+            {
+              "title": "Certificate",
+              "path": "/v1.13-docs/concepts/certificate.md"
+            },
+            {
+              "title": "CertificateRequest",
+              "path": "/v1.13-docs/concepts/certificaterequest.md"
+            },
+            {
+              "title": "ACME Orders and Challenges",
+              "path": "/v1.13-docs/concepts/acme-orders-challenges.md"
+            },
+            {
+              "title": "Webhook",
+              "path": "/v1.13-docs/concepts/webhook.md"
+            },
+            {
+              "title": "CA Injector",
+              "path": "/v1.13-docs/concepts/ca-injector.md"
+            }
+          ]
+        },
+        {
+          "title": "Reference",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.13-docs/reference/README.md"
+            },
+            {
+              "title": "Command Line Tool (cmctl)",
+              "path": "/v1.13-docs/reference/cmctl.md"
+            },
+            {
+              "title": "TLS Terminology",
+              "path": "/v1.13-docs/reference/tls-terminology.md"
+            },
+            {
+              "title": "Components / Docker Images",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/v1.13-docs/cli/README.md"
+                },
+                {
+                  "title": "acmesolver",
+                  "path": "/v1.13-docs/cli/acmesolver.md"
+                },
+                {
+                  "title": "cainjector",
+                  "path": "/v1.13-docs/cli/cainjector.md"
+                },
+                {
+                  "title": "cmctl",
+                  "path": "/v1.13-docs/cli/cmctl.md"
+                },
+                {
+                  "title": "controller",
+                  "path": "/v1.13-docs/cli/controller.md"
+                },
+                {
+                  "title": "webhook",
+                  "path": "/v1.13-docs/cli/webhook.md"
+                }
+              ]
+            },
+            {
+              "title": "API Reference",
+              "path": "/v1.13-docs/reference/api-docs.md"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
