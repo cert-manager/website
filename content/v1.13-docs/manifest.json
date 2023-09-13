@@ -386,18 +386,18 @@
               "routes": [
                 {
                   "title": "Introduction",
-                  "path": "/v1.13-docs/contributing/google-season-of-v1.13-docs/README.md"
+                  "path": "/v1.13-docs/contributing/google-season-of-docs/README.md"
                 },
                 {
                   "title": "2022",
                   "routes": [
                     {
                       "title": "Introduction",
-                      "path": "/v1.13-docs/contributing/google-season-of-v1.13-docs/2022/README.md"
+                      "path": "/v1.13-docs/contributing/google-season-of-docs/2022/README.md"
                     },
                     {
                       "title": "Improve the Navigation and Structure of the cert-manager Website",
-                      "path": "/v1.13-docs/contributing/google-season-of-v1.13-docs/2022/improve-navigation-and-structure.md"
+                      "path": "/v1.13-docs/contributing/google-season-of-docs/2022/improve-navigation-and-structure.md"
                     }
                   ]
                 }
@@ -504,7 +504,7 @@
             },
             {
               "title": "API Reference",
-              "path": "/v1.13-docs/reference/api-v1.13-docs.md"
+              "path": "/v1.13-docs/reference/api-docs.md"
             }
           ]
         }
