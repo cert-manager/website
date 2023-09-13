@@ -3,6 +3,7 @@ title: Release Notes
 description: 'cert-manager release notes: Overview'
 ---
 
+- [`v1.13`](./release-notes-1.13.md)
 - [`v1.12`](./release-notes-1.12.md)
 - [`v1.11`](./release-notes-1.11.md)
 - [`v1.10`](./release-notes-1.10.md)

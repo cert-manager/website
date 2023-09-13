@@ -615,6 +615,7 @@ unlabelled
 v1.27.1
 v0.6.0.
 v4.4.1
+v1.13.0
 liveness
 apiservices
 arm64
@@ -631,6 +632,22 @@ Rollout
 rollout
 JKS-formatted
 changeit
+ctl
+PrivateCA
+structs
+klog
+relabelings
+
+FlorianLiebhart
+cypres
+ubergesundheit
+gdvalle
+rouke-broersma
+schrodit
+zhangzhiqiangcs
+arukiidou
+Richardds
+kahirokunn
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
