@@ -1,0 +1,29 @@
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: demo-trust-ca-volume
+spec:
+  applyTo:
+  - groups: [""]
+    kinds: ["Pod"]
+    versions: ["v1"]
+  match:
+    scope: Namespaced
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["Pod"]
+    namespaces: ["team-a"]
+    excludedNamespaces: ["kube-system", "public", "kyverno", "gatekeeper-system"]
+  # Mounting the volume named "ca-certificates" from ConfigMap
+  location: "spec.volumes[name:ca-certificates]"
+  parameters:
+    assign:
+      value:
+        name: ca-certificates
+        configMap:
+          name: public-bundle
+          defaultMode: 0644
+          optional: false
+          items:
+          - key: ca-certificates.crt
+            path: ca-certificates.crt
