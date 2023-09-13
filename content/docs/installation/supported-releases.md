@@ -19,7 +19,12 @@ and other world events.
 | Release  | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
 | [1.13][] | Sep 12, 2023 |    Release of 1.15     |            1.23 → 1.28             |           4.10 → 4.15             |
-| [1.13.0] | May 19, 2023 |    Release of 1.14     |            1.22 → 1.27             |            4.9 → 4.14             |
+| [1.12][] | May 19, 2023 |    Release of 1.14*    |            1.22 → 1.27             |            4.9 → 4.14             |
+
+\*This is an LTS release sponsored by [Venafi](https://www.venafi.com/).
+It will be supported for a longer period of time than other releases.
+The EOL date for this release has not yet been determined & communicated, but can be decided by the Sponsor.
+The cert-manager maintainers guarantee that this release will be supported until the release of 1.14.
 
 ## Upcoming releases
 
@@ -53,8 +58,9 @@ Dates in the future are uncertain and might change.
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
-[1.13]: https://github.com/cert-manager/cert-manager/milestone/34
-[1.13.0 https://cert-manager.io/docs/release-notes/release-notes-1.12
+[1.14]: https://github.com/cert-manager/cert-manager/milestone/35
+[1.13]: https://cert-manager.io/docs/release-notes/release-notes-1.13
+[1.12]: https://cert-manager.io/docs/release-notes/release-notes-1.12
 [1.11]: https://cert-manager.io/docs/release-notes/release-notes-1.11
 [1.10]: https://cert-manager.io/docs/release-notes/release-notes-1.10
 [1.9]: https://cert-manager.io/docs/release-notes/release-notes-1.9
