@@ -23,7 +23,7 @@ it added here!
 
 These external issuers are known to support and honor [approval](https://cert-manager.io/docs/concepts/certificaterequest/#approval).
 
-- [Akeyless Issuer](https://docs.akeyless.io/docs/cert-manager): Use Akeyless Certificate Automation to generate certificates
+- [Akeyless Issuer](https://docs.akeyless.io/docs/kubernetes-cert-manager): Generate certificate requests from a Kubernetes cluster to Akeyless and simplify the process of obtaining, renewing, and using those certificates.
 - [kms-issuer](https://github.com/Skyscanner/kms-issuer): Requests
   certificates signed using an [AWS KMS](https://aws.amazon.com/kms/) asymmetric key.
 - [aws-privateca-issuer](https://github.com/cert-manager/aws-privateca-issuer): Requests
