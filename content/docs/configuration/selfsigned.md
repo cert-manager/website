@@ -136,7 +136,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: my-selfsigned-ca
-  namespace: sandbox
+  namespace: cert-manager
 spec:
   isCA: true
   commonName: my-selfsigned-ca
