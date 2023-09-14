@@ -157,7 +157,7 @@ spec:
   ca:
     secretName: root-secret
 ```
-The first `ClusterIssuer` is used to sign the Root CA, in this case. The second `ClusterIssuer` is used to sign certificates using said Root CA.
+The "selfsigned-issuer" `ClusterIssuer` is used to issue the Root CA Certificate. Then, "my-ca-issuer" `ClusterIssuer` is used to issue but also sign certificates using the newly created Root CA `Certificate`, which is what you will use for future certificates cluster-wide.
 
 ### CRL Distribution Points
 
