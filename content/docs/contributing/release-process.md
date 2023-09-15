@@ -494,15 +494,11 @@ page if a step is missing or if it is outdated.
          --output github-release-description.md
        ```
 
-       <div className="pageinfo pageinfo-info"><p>
-       The GitHub token **does not need any scope**. The token is required
-       only to avoid rate-limits imposed on anonymous API users.
-       </p></div>
-
         <div className="pageinfo pageinfo-info"><p>
         The GitHub token **does not need any scope**. The token is required
         only to avoid rate-limits imposed on anonymous API users.
         </p></div>
+
     3. Add a one-sentence summary at the top.
 
     4. **(final release only)** Write the "Community" section, following the example of past releases such as [v1.12.0](https://github.com/cert-manager/cert-manager/releases/tag/v1.12.0). If there are any users who didn't make code contributions but helped in other ways (testing, PR discussion, etc), be sure to thank them here!
