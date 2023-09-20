@@ -1,42 +1,30 @@
 ---
 title: csi-driver
-description: ''
+description: 'Mounting cert-manager certificates without secrets'
 ---
 
-csi-driver is a Container Storage Interface (CSI) driver plugin for Kubernetes
-to work along cert-manager. The goal for this plugin is to seamlessly request
-and mount certificate key pairs to pods. This is useful for facilitating mTLS,
-or otherwise securing connections of pods with guaranteed present certificates
-whilst having all of the features that cert-manager provides.
+csi-driver is a [Container Storage Interface (CSI)](https://kubernetes-csi.github.io/docs/) driver plugin for Kubernetes
+which works alongside cert-manager.
 
-## Why a CSI Driver?
+Pods which mount the cert-manager csi-driver will request certificates from cert-manager
+without needing a `Certificate` resource to be created. These certificates will be mounted
+directly into the pod, with no intermediate Secret being created.
 
-- Ensure private keys never leave the node and are never sent over the network.
-  All private keys are stored locally on the node.
-- Unique key and certificate per application replica with a grantee to be
-  present on application run time.
-- Reduce resource management overhead by defining certificate request spec
-  in-line of the Kubernetes Pod template.
-- Automatic renewal of certificates based on expiry of each individual
-  certificate.
-- Keys and certificates are destroyed during application termination.
-- Scope for extending plugin behavior with visibility on each replica's
-  certificate request and termination.
+## Why use csi-driver?
 
-## Requirements and Installation
+- Ensure private keys never leave the node and are never sent over the network. All private keys are stored locally on the node
+- Unique key and certificate per application replica.
+- Fewer `Certificate` resources means writing less YAML
+- Keys and certificates are destroyed when an application terminates
+- No `Secret` resources needed for storing the certificate means less RBAC
 
-This CSI driver plugin makes use of the 'CSI inline volume' feature - Alpha as
-of `v1.15` and beta in `v1.16`. Kubernetes versions `v1.16` and higher require
-no extra configuration however `v1.15` requires the following feature gate set:
-```
---feature-gates=CSIInlineVolume=true
-```
+## Installation
 
 You must have a working installation of cert-manager present on the cluster.
-Instructions on how to install cert-manager can be found
-[on cert-manager.io](../installation/README.md).
 
-To install the csi-driver, use helm install:
+Instructions on how to install cert-manager can be found [on this website](../installation/README.md).
+
+To install csi-driver, use helm:
 
 ```terminal
 helm repo add jetstack https://charts.jetstack.io --force-update
@@ -55,7 +43,7 @@ You can verify the installation has completed correctly by checking the presence
 of the CSIDriver resource as well as a CSINode resource present for each node,
 referencing `csi.cert-manager.io`.
 
-```
+```terminal
 $ kubectl get csidrivers
 NAME                     CREATED AT
 csi.cert-manager.io   2019-09-06T16:55:19Z
@@ -80,17 +68,29 @@ items:
 ...
 ```
 
-The CSI driver is now installed and is ready to be used for pods in the cluster.
+### Kubernetes Requirements
+
+This CSI driver plugin makes use of the 'CSI inline volume' feature which was Alpha as
+of Kubernetes `v1.15` and Beta in `v1.16`.
+
+This means that Kubernetes versions `v1.16` and higher require no extra configuration to be
+able to run csi-driver.
+
+Using Kubernetes `v1.15` requires the following feature gate to be set:
+
+```text
+--feature-gates=CSIInlineVolume=true
+```
 
 ## Requesting and Mounting Certificates
 
-To request certificates from cert-manager, simply define a volume mount where
-the key and certificate will be written to, along with a volume with attributes
-that define the cert-manager request. The following is a dummy app that mounts a
-key certificate pair to `/tls` and has been signed by the `ca-issuer` with a DNS
-name valid for `my-service.sandbox.svc.cluster.local`.
+Requesting a certificate using csi-driver means mounting a volume, with some attributes
+set to define exactly what you need to request.
 
-```
+The following example is a dummy app that mounts a key certificate pair to `/tls`, signed using
+a cert-manager issuer called `ca-issuer` with a DNS name valid for `my-service.sandbox.svc.cluster.local`.
+
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -115,25 +115,21 @@ spec:
               csi.cert-manager.io/dns-names: ${POD_NAME}.${POD_NAMESPACE}.svc.cluster.local
 ```
 
-Once created, the CSI driver will generate a private key locally, request a
-certificate from cert-manager based on the given attributes, then store both
-locally to be mounted to the pod. The pod will remain in a pending state until
-this process has been completed.
+Once created, the CSI driver will generate a private key locally (for the pod), request a
+certificate from cert-manager based on the given attributes, and store the certificate ready for the pod to use.
 
-For more information on how to set up issuers for your cluster, refer to the
-cert-manager documentation
-[here](../configuration/README.md). **Note** it is not
-possible to use `SelfSigned` Issuers with the CSI Driver. In order for
-cert-manager to self sign a certificate, it needs access to the secret
-containing the private key that signed the certificate request to sign the end
-certificate. This secret is not used and so not available in the CSI driver use
-case.
+The pod will remain in a pending state until issuance has been completed.
+
+For more information on how to set up issuers for your cluster, refer to the cert-manager documentation
+[here](../configuration/README.md).
+
+**Note** it is not possible to use `SelfSigned` Issuers with csi-driver because `SelfSigned` issuers are a
+special case.
 
 ## Supported Volume Attributes
 
 The csi-driver driver aims to have complete feature parity with all possible
-values available through the cert-manager API however currently supports the
-following values;
+values available through the cert-manager API. It currently supports the following values:
 
 | Attribute                               | Description                                                                                                                    | Default                              | Example                          |
 |-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|--------------------------------------|----------------------------------|
@@ -164,17 +160,17 @@ The following attributes support variables that are evaluated when a request is
 made for the mounting Pod. These variables are useful for constructing requests
 with SANs that contain values from the mounting Pod.
 
-```
-`csi.cert-manager.io/common-name`
-`csi.cert-manager.io/dns-names`
-`csi.cert-manager.io/uri-sans`
+```text
+csi.cert-manager.io/common-name
+csi.cert-manager.io/dns-names
+csi.cert-manager.io/uri-sans
 ```
 
 Variables follow the [go `os.Expand`](https://pkg.go.dev/os#Expand) structure,
 which is generally what you would expect on a UNIX shell. The CSI driver has
 access to the following variables:
 
-```
+```text
 ${POD_NAME}
 ${POD_NAMESPACE}
 ${POD_UID}
@@ -195,18 +191,18 @@ volumeAttributes:
 
 If the flag `--use-token-request` is enabled on the csi-driver DaemonSet, the
 [CertificateRequest](../concepts/certificaterequest.md) resource will be created
-by the mounting Pod's ServiceAccount. This can be pared with
-[approver-policy](./approver-policy/README.md) to enable advanced policy on a per
-ServiceAccount basis.
+by the mounting Pod's ServiceAccount. This can be paired with
+[approver-policy](./approver-policy/README.md) to enable advanced policy control
+on a per-ServiceAccount basis.
 
-Ensure to give permissions to Pod ServiceAccounts to create CertificateRequests
+Ensure that you give permissions to Pod ServiceAccounts to create CertificateRequests
 with this flag enabled, i.e:
 
 ```yaml
-# WARNING: This RBAC will enable any identiy in the cluster to create
-# CertificateRequests. This may or may not be problimatic based on your security
-# model. It is likely worth scoping the set of identities in the
-# `ClusterRoleBinding` `subjects` stanza.
+# WARNING: This RBAC will enable any identity in the cluster to create
+# CertificateRequests and is dangerous to use in production. Instead, you should
+# give permissions only to identities which need to be able to create certificates.
+# This would be done via scoping the set of identities in the `ClusterRoleBinding` `subjects` stanza.
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
