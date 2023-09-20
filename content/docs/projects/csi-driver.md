@@ -12,15 +12,15 @@ directly into the pod, with no intermediate Secret being created.
 
 ## Why use csi-driver?
 
-- Ensure private keys never leave the node and are never sent over the network. All private keys are stored locally on the node
-- Unique key and certificate per application replica.
+- Ensure private keys never leave the node and are never sent over the network. Private keys are stored in memory, and shouldn't be written to disk.
+- Unique key and certificate per application replica
 - Fewer `Certificate` resources means writing less YAML
 - Keys and certificates are destroyed when an application terminates
 - No `Secret` resources needed for storing the certificate means less RBAC
 
 ## Installation
 
-You must have a working installation of cert-manager present on the cluster.
+You must have a working installation of cert-manager present on your cluster and be running at least Kubernetes v1.16.
 
 Instructions on how to install cert-manager can be found [on this website](../installation/README.md).
 
@@ -66,20 +66,6 @@ items:
       nodeID: kind-control-plane
       topologyKeys: null
 ...
-```
-
-### Kubernetes Requirements
-
-This CSI driver plugin makes use of the 'CSI inline volume' feature which was Alpha as
-of Kubernetes `v1.15` and Beta in `v1.16`.
-
-This means that Kubernetes versions `v1.16` and higher require no extra configuration to be
-able to run csi-driver.
-
-Using Kubernetes `v1.15` requires the following feature gate to be set:
-
-```text
---feature-gates=CSIInlineVolume=true
 ```
 
 ## Requesting and Mounting Certificates
