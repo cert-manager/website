@@ -17,10 +17,16 @@ directly into the pod, with no intermediate Secret being created.
 - Fewer `Certificate` resources means writing less YAML
 - Keys and certificates are destroyed when an application terminates
 - No `Secret` resources needed for storing the certificate means less RBAC
+- Great for ephemeral, short-lived certificates which don't need to survive a restart (e.g. certificates for mTLS)
+
+## Why _not_ use csi-driver?
+
+- If you need certificates to be persisted through a node restart
+- If you need the same certificate to be shared by multiple components
 
 ## Installation
 
-You must have a working installation of cert-manager present on your cluster and be running at least Kubernetes v1.16.
+You must have a working installation of cert-manager present on your cluster and be running at least Kubernetes `v1.16`.
 
 Instructions on how to install cert-manager can be found [on this website](../installation/README.md).
 
