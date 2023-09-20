@@ -139,6 +139,7 @@ etcd
 EC2
 enj
 ECDSA
+ejbca
 EKS
 ELB
 Ed25519
