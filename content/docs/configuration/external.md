@@ -46,6 +46,7 @@ These external issuers are known to support and honor [approval](https://cert-ma
 - [ncm-issuer](https://github.com/nokia/ncm-issuer): Requests certificates from the [Nokia](https://www.nokia.com/) [Netguard Certificate Manager](https://www.nokia.com/networks/security-portfolio/netguard/certificate-manager)
 - [tcs-issuer](https://github.com/intel/trusted-certificate-issuer) Requests certificates signed securely using [Intel's SGX technology](https://www.intel.com/content/www/us/en/developer/tools/software-guard-extensions/overview.html).
 - [ejbca-issuer](https://github.com/Keyfactor/ejbca-cert-manager-issuer): Request certificates from [EJBCA](https://www.ejbca.org/).
+- [command-issuer](https://github.com/Keyfactor/command-cert-manager-issuer): Request certificates from [Keyfactor Command](https://www.keyfactor.com/products/command/).
 
 ## Building New External Issuers
 
