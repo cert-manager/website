@@ -195,3 +195,8 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Rename trust to trust-manager
 /docs/projects/trust/ /docs/projects/trust-manager/ 301!
+
+# Moved pages to new operationalising section
+/docs/usage/prometheus-metrics/ /docs/operationalising/prometheus-metrics/ 301!
+/docs/tutorials/backup/ /docs/operationalising/backup/ 301!
+/docs/tutorials/syncing-secrets-across-namespaces/ /docs/operationalising/syncing-secrets-across-namespaces/ 301!
