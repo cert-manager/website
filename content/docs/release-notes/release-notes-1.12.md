@@ -3,6 +3,21 @@ title: Release 1.12
 description: 'cert-manager release notes: cert-manager 1.12'
 ---
 
+## v1.12.5
+
+v1.12.5 contains a backport for a name collision bug that was found in v1.13.0
+
+### Changes
+
+#### Bug or Regression
+
+- BUGFIX: fix CertificateRequest name collision bug in StableCertificateRequestName feature. (#6359, @jetstack-bot)
+
+#### Other (Cleanup or Flake)
+
+- Updated base images to the latest version. (#6372, @inteon)
+- Upgrade Go from 1.20.7 to 1.20.8. (#6371, @jetstack-bot)
+
 ## v1.12.4
 
 v1.12.4 contains an important security fix that
