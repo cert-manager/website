@@ -22,7 +22,7 @@ The simplest way to verify signatures is to download the public key and then pas
 
 ```console
 curl -sSOL https://cert-manager.io/public-keys/cert-manager-pubkey-2021-09-20.pem
-IMAGE_TAG=v1.13.0  # change as needed
+IMAGE_TAG=v1.13.1  # change as needed
 cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-acmesolver:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-cainjector:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-ctl:$IMAGE_TAG
