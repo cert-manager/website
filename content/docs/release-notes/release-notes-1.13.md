@@ -3,6 +3,21 @@ title: Release 1.13
 description: 'cert-manager release notes: cert-manager 1.13'
 ---
 
+## v1.13.1
+
+v1.13.1 contains a bugfix for a name collision bug in the StableCertificateRequestName feature that was enabled by default in v1.13.0.
+
+### Changes
+
+#### Bug or Regression
+
+- BUGFIX: fix CertificateRequest name collision bug in StableCertificateRequestName feature. (#6358, @jetstack-bot)
+
+#### Other (Cleanup or Flake)
+
+- Upgrade `github.com/emicklei/go-restful/v3` to `v3.11.0` because `v3.10.2` is labeled as "DO NOT USE". (#6368, @inteon)
+- Upgrade Go from 1.20.7 to 1.20.8. (#6370, @jetstack-bot)
+
 ## v1.13.0
 
 cert-manager 1.13 brings support for DNS over HTTPS, support for loading options from a versioned
