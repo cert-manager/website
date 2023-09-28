@@ -184,7 +184,7 @@ volumeAttributes:
 If the flag `--use-token-request` is enabled on the csi-driver DaemonSet, the
 [CertificateRequest](../concepts/certificaterequest.md) resource will be created
 by the mounting Pod's ServiceAccount. This can be paired with
-[approver-policy](./approver-policy/README.md) to enable advanced policy control
+[approver-policy](../policy/approval/approver-policy/README.md) to enable advanced policy control
 on a per-ServiceAccount basis.
 
 Ensure that you give permissions to Pod ServiceAccounts to create CertificateRequests

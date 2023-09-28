@@ -181,7 +181,7 @@ Clients consuming `SelfSigned` certificates have _no way_ to trust them
 without already having the certificates beforehand, which can be hard to
 manage when the client is in a different namespace to the server.
 
-This limitation can be tackled by using [trust-manager](../projects/trust-manager/README.md) to distribute `ca.crt`
+This limitation can be tackled by using [trust-manager](../trust/trust-manager/README.md) to distribute `ca.crt`
 to other namespaces.
 
 There is no secure alternative to solving the problem of distributing trust stores; it's possible

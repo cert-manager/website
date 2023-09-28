@@ -8,7 +8,7 @@ Due to a change in the API group that cert-manager deployments use
 before applying the new version. This will cause downtime until the new version
 has been applied. No data loss will occur during this operation however it is
 always advised to backup your data during an upgrade, which you can follow
-[here](../../tutorials/backup.md). To perform this action run:
+[here](../../devops-tips/backup.md). To perform this action run:
 
 ```bash
 $ kubectl delete deployments --namespace cert-manager \

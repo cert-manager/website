@@ -7,7 +7,7 @@ In an effort to introduce new features whilst keeping the project maintainable,
 cert-manager now only supports Kubernetes down to version `v1.16`. This means
 the `legacy` manifests have now been removed. Some users experience issues when
 upgrading the legacy `CRD`s to `v1.2`. To solve this, you could replace the `CRD`s:
-1. Backup `cert-manager` resources as described in [the docs](../../tutorials/backup.md)
+1. Backup `cert-manager` resources as described in [the docs](../../devops-tips/backup.md)
 2. Run `kubectl replace -f https://github.com/cert-manager/cert-manager/releases/download/v1.2.0/cert-manager.crds.yaml` to replace the CRDs.
 3. Follow the standard upgrade process.
 You can read more about supported Kubernetes versions

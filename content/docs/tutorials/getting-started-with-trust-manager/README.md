@@ -6,7 +6,7 @@ description: Learn how to deploy and configure trust-manager to automatically di
 *Last Verified: 19 June 2023*
 
 In this tutorial we will walk through how we can use 
-[trust-manager](https://cert-manager.io/docs/projects/trust-manager/) to
+[trust-manager](https://cert-manager.io/docs/trust/trust-manager/) to
 distribute publicly trusted Certificate Authority (CA) certificates inside
 a Kubernetes cluster. Once distributed we will also show:
 
@@ -43,7 +43,7 @@ demo namespace: `team-a`.
 ### Setup Application & Bundle
 
 1) Install trust-manager following the 
-  [instructions here](../../projects/trust-manager/README.md#installation).
+  [instructions here](../../trust/trust-manager/README.md#installation).
 
 1) Create your first `Bundle` resource including only Public CA certificates
 
