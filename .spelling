@@ -642,6 +642,7 @@ PrivateCA
 structs
 klog
 relabelings
+kustomize
 
 FlorianLiebhart
 cypres
