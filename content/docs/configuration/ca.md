@@ -15,7 +15,7 @@ private key are stored inside the cluster as a Kubernetes `Secret`.
 Certificates issued by a CA issuer will not be publicly trusted and so are unlikely to be trusted
 by your applications without further configuration.
 
-Consider [trust-manager](../projects/trust-manager/README.md) for distributing your CA certificate safely
+Consider [trust-manager](../trust/trust-manager/README.md) for distributing your CA certificate safely
 across your cluster!
 
 ## Deployment

@@ -187,4 +187,19 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 /docs/installation/cmctl/ /docs/reference/cmctl/ 301!
 
 # Rename trust to trust-manager
-/docs/projects/trust/ /docs/projects/trust-manager/ 301!
+/docs/projects/trust/ /docs/trust/trust-manager/ 301!
+
+# Moved pages to new devops section
+/docs/usage/prometheus-metrics/ /docs/devops-tips/prometheus-metrics/ 301!
+/docs/tutorials/backup/ /docs/devops-tips/backup/ 301!
+/docs/tutorials/syncing-secrets-across-namespaces/ /docs/devops-tips/syncing-secrets-across-namespaces/ 301!
+
+# Integrating the project pages into the main website
+/docs/usage/istio/ /docs/usage/istio-csr/ 301!
+/docs/projects/istio-csr/ /docs/usage/istio-csr/ 301!
+/docs/projects/csi-driver/ /docs/usage/csi-driver/ 301!
+/docs/projects/csi-driver-spiffe/ /docs/usage/csi-driver-spiffe/ 301!
+/docs/projects/trust-manager/ /docs/trust/trust-manager/ 301!
+/docs/projects/trust-manager/api-reference/ /docs/trust/trust-manager/api-reference/ 301!
+/docs/projects/approver-policy/ /docs/policy/approval/approver-policy/ 301!
+/docs/projects/approver-policy/api-reference/ /docs/policy/approval/approver-policy/api-reference/ 301!

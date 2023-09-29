@@ -134,7 +134,7 @@ helm upgrade -i -n cert-manager trust-manager jetstack/trust-manager --wait
 
 ### approver-policy Integration
 
-If you're running [approver-policy](../approver-policy/README.md) then cert-manager's default approver will be disabled which will mean that
+If you're running [approver-policy](../../policy/approval/approver-policy/README.md) then cert-manager's default approver will be disabled which will mean that
 trust-manager's webhook certificate will - by default - block when you install the Helm chart until it's manually approved.
 
 As of trust-manager v0.6.0 you can choose to automatically add an approver-policy `CertificateRequestPolicy` which

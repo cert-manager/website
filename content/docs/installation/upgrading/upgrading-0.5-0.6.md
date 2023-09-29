@@ -50,7 +50,7 @@ This **will not** delete the Secret resources being used by your apps.
 
 Before upgrading you will need to:
 
-1. Read and follow the [backup guide](../../tutorials/backup.md) to create a
+1. Read and follow the [backup guide](../../devops-tips/backup.md) to create a
    backup of your configuration.
 
 2. Delete the existing cert-manager Helm release (replacing 'cert-manager' with
@@ -91,7 +91,7 @@ $ helm install \
     stable/cert-manager
 ```
 
-4. Follow the steps in the [restore guide](../../tutorials/backup.md) to
+4. Follow the steps in the [restore guide](../../devops-tips/backup.md) to
    restore your configuration.
 
 5. Verify that your Issuers and Certificate resources are 'Ready':

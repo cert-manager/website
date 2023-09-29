@@ -61,4 +61,4 @@ git clone "https://github.com/cert-manager/trust-manager.git" "$tmpdir"
 
 checkout "v0.6.0"
 
-gendocs "$REPO_ROOT/content/docs/projects/trust-manager/api-reference.md"
+gendocs "$REPO_ROOT/content/docs/trust/trust-manager/api-reference.md"
