@@ -7,6 +7,7 @@ export default function SidebarLink({
   href,
   caption,
   parentOpen = true,
+  setSidebarCollapsed,
   setParentOpen
 }) {
   const router = useRouter()
@@ -24,7 +25,8 @@ export default function SidebarLink({
     (<Link
       href={href}
       className={linkClasses}
-      tabIndex={parentOpen ? 0 : -1}>
+      tabIndex={parentOpen ? 0 : -1}
+      onClick={() => setSidebarCollapsed(true)}>
 
       {caption}
 
