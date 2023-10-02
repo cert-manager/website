@@ -6,6 +6,7 @@ import SidebarLink from './SidebarLink'
 export default function Dropdown({
   routes,
   parentOpen = true,
+  setSidebarCollapsed,
   setParentOpen
 }) {
   const [open, setSelfOpen] = useState(false)
@@ -45,6 +46,7 @@ export default function Dropdown({
                     routes={r}
                     parentOpen={open}
                     key={`${r.title}-${idx}`}
+                    setSidebarCollapsed={setSidebarCollapsed}
                     setParentOpen={setOpen}
                   />
               </li>
@@ -56,6 +58,7 @@ export default function Dropdown({
                   href={r.path}
                   caption={r.title}
                   parentOpen={open}
+                  setSidebarCollapsed={setSidebarCollapsed}
                   setParentOpen={setOpen}
                 />
               </li>
