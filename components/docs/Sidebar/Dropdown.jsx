@@ -6,9 +6,13 @@ import SidebarLink from './SidebarLink'
 export default function Dropdown({
   routes,
   parentOpen = true,
-  setSidebarCollapsed
+  setParentOpen
 }) {
-  const [open, setOpen] = useState(false)
+  const [open, setSelfOpen] = useState(false)
+  const setOpen = (v) => {
+    if (v) setParentOpen(v)
+    setSelfOpen(v)
+  }
   const iconClasses = classNames({
     'block w-4 h-4 transform text-blue-1': true,
     'rotate-180': open
@@ -41,7 +45,7 @@ export default function Dropdown({
                     routes={r}
                     parentOpen={open}
                     key={`${r.title}-${idx}`}
-                    setSidebarCollapsed={setSidebarCollapsed}
+                    setParentOpen={setOpen}
                   />
               </li>
             )
@@ -52,7 +56,7 @@ export default function Dropdown({
                   href={r.path}
                   caption={r.title}
                   parentOpen={open}
-                  setSidebarCollapsed={setSidebarCollapsed}
+                  setParentOpen={setOpen}
                 />
               </li>
             )

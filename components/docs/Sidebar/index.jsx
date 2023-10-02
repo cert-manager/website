@@ -40,7 +40,7 @@ export default function Sidebar({ router, routes, versions }) {
                       <ul>
                         <ListItems
                           routes={obj.routes}
-                          setSidebarCollapsed={setSidebarCollapsed}
+                          setParentOpen={setSidebarCollapsed}
                         />
                       </ul>
                     </div>
@@ -51,7 +51,7 @@ export default function Sidebar({ router, routes, versions }) {
               <VersionSelect
                 version={version}
                 versions={versions}
-                setSidebarCollapsed={setSidebarCollapsed}
+                setParentOpen={setSidebarCollapsed}
               />
             </div>
           </aside>
