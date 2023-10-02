@@ -46,7 +46,7 @@ which is used to create and mount Pod volumes from.
 
 When a Pod is created with the CSI volume configured, the
 driver will locally generate a private key, and create a cert-manager
-[CertificateRequest](../concepts/certificaterequest.md)
+[CertificateRequest](../usage/certificaterequest.md)
 in the same Namespace as the Pod.
 
 The driver uses [CSI Token Request](https://kubernetes-csi.github.io/docs/token-requests.html) to both
@@ -61,7 +61,7 @@ expiry of the signed certificate.
 
 #### Approver
 
-A distinct [cert-manager approver](../concepts/certificaterequest.md#approval)
+A distinct [cert-manager approver](../usage/certificaterequest.md#approval)
 Deployment is responsible for managing the approval and denial condition of
 created CertificateRequests that target the configured SPIFFE Trust Domain
 signer.
@@ -78,7 +78,7 @@ The approver ensures that requests have:
 
 If any of these checks do not pass, the CertificateRequest will be marked as
 Denied, else it will be marked as Approved. The approver will only manage
-CertificateRequests who request from the same [IssuerRef](../concepts/certificaterequest.md)
+CertificateRequests who request from the same [IssuerRef](../usage/certificaterequest.md)
 that has been configured.
 
 ## Installation
@@ -98,7 +98,7 @@ cert-manager `v1.3` or higher is also required.
 csi-driver-spiffe requires cert-manager to be [installed](../installation/README.md) but
 a default installation of cert-manager **will not work**.
 
-> ⚠️ It is **vital** that the [default approver is disabled in cert-manager](../concepts/certificaterequest.md#approver-controller) ⚠️
+> ⚠️ It is **vital** that the [default approver is disabled in cert-manager](../usage/certificaterequest.md#approver-controller) ⚠️
 
 If the default approver is not disabled, the csi-driver-spiffe approver will
 race with cert-manager and policy enforcement will become useless.
@@ -149,7 +149,7 @@ cmctl approve -n cert-manager \
 
 Install csi-driver-spiffe into the cluster using the issuer we configured. We
 must also configure the issuer resource type and name of the issuer we
-configured so that the approver has [permissions to approve referencing CertificateRequests](../concepts/certificaterequest.md#rbac-syntax).
+configured so that the approver has [permissions to approve referencing CertificateRequests](../usage/certificaterequest.md#rbac-syntax).
 
 Note that the `issuer.name`, `issuer.kind` and `issuer.group` will need to be changed to match
 the issuer you're actually using!
