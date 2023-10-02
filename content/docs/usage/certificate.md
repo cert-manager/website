@@ -1,5 +1,5 @@
 ---
-title: Certificate Resources
+title: cert-manager.io Certificate
 description: 'cert-manager usage: Certificates'
 ---
 
