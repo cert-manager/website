@@ -1,5 +1,5 @@
 ---
-title: Securing gateway.networking.k8s.io Gateway Resources
+title: Annotated gateway.networking.k8s.io Gateway
 description: 'cert-manager usage: Kubernetes Gateways'
 ---
 
