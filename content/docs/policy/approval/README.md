@@ -13,10 +13,10 @@ that rejects the request.
 
 ## Rejecting requests before sending the X.509 Certificate Signing Request (CSR) to the issuer
 
-cert-manager requires that a [CertificateRequest](../../concepts/certificaterequest.md)
+cert-manager requires that a [CertificateRequest](../../usage/certificaterequest.md)
 is approved before it is sent to the issuer. Also, CertificateSigningRequests must
 be approved before they are sent to the issuer. This approval is done by adding an
-[approval condition](../../concepts/certificaterequest.md#approval) to the resource.
+[approval condition](../../usage/certificaterequest.md#approval) to the resource.
 
 In a default installation, cert-manager automatically approves all CertificateRequests
 and CertificateSigningRequests that use any of its built-in issuers. This is done to

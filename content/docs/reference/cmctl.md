@@ -74,7 +74,7 @@ Use "cmctl [command] --help" for more information about a command.
 ### Approve and Deny CertificateRequests
 
 CertificateRequests can be
-[approved or denied](../concepts/certificaterequest.md#approval) using their
+[approved or denied](../usage/certificaterequest.md#approval) using their
 respective cmctl commands:
 
 > **Note**: The internal cert-manager approver may automatically approve all
