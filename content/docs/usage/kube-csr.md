@@ -1,7 +1,10 @@
 ---
-title: certificates.k8s.io CertificateSigningRequest
+title: CertificateSigningRequest resource
 description: 'cert-manager usage: Kubernetes CertificateSigningRequest resources'
 ---
+
+> **apiVersion:** certificates.k8s.io/v1  
+> **kind:** CertificateSigningRequest
 
 Kubernetes has an in-built
 [CertificateSigningRequest](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/)
