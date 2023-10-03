@@ -656,6 +656,10 @@ arukiidou
 Richardds
 kahirokunn
 selfsigned-issuer
+apiVersion
+gateway.networking.k8s.io
+networking.k8s.io
+certificates.k8s.io
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker

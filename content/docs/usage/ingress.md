@@ -1,7 +1,10 @@
 ---
-title: Annotated networking.k8s.io Ingress
+title: Annotated Ingress resource
 description: 'cert-manager usage: Kubernetes Ingress'
 ---
+
+> **apiVersion:** networking.k8s.io/v1  
+> **kind:** Ingress
 
 A common use-case for cert-manager is requesting TLS signed certificates to
 secure your ingress resources. This can be done by simply adding annotations to
