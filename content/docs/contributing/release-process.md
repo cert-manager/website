@@ -6,7 +6,7 @@ description: 'cert-manager contributing: Release process'
 This document aims to outline the process that should be followed for
 cutting a new release of cert-manager. If you would like to know more about
 current releases and the timeline for future releases, take a look at the
-[Supported Releases](../installation/supported-releases.md) page.
+[Supported Releases](../releases) page.
 
 ## Prerequisites
 
@@ -189,7 +189,7 @@ page if a step is missing or if it is outdated.
    document is ready to be merged on
    [cert-manager/website](https://github.com/cert-manager/website). See for
    example, see
-   [upgrading-1.0-1.1](https://cert-manager.io/docs/installation/upgrading/upgrading-1.0-1.1/).
+   [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1/).
 
 4. **(final + patch releases)** Prepare the Website "Release Notes" PR.
 
@@ -246,10 +246,10 @@ page if a step is missing or if it is outdated.
    In that PR:
 
    1. (**final release**) Update the section "Supported releases" in the
-     [supported-releases](../installation/supported-releases.md) page.
+     [supported-releases](../releases) page.
    2. (**final release**) Update the section "How we determine supported
      Kubernetes versions" on the
-     [supported-releases](../installation/supported-releases.md) page.
+     [supported-releases](../releases) page.
    3. (**final release**) Bump the version that appears in
      `scripts/gendocs/generate-new-import-path-docs`. For example:
 

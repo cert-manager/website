@@ -327,7 +327,7 @@ This command can be used to prepare a cert-manager installation that was created
 before cert-manager `v1` for upgrading to a cert-manager version `v1.6` or later.
 It ensures that any cert-manager custom resources that may have been stored in etcd at
 a deprecated API version get migrated to `v1`. See [Migrating Deprecated API
-Resources](https://cert-manager.io/docs/installation/upgrading/remove-deprecated-apis) for more context.
+Resources](https://cert-manager.io/docs/releases/upgrading/remove-deprecated-apis) for more context.
 
 ```bash
 $ cmctl upgrade migrate-api-version --qps 5 --burst 10

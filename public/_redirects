@@ -204,3 +204,8 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 /docs/projects/trust-manager/api-reference/ /docs/trust/trust-manager/api-reference/ 301!
 /docs/projects/approver-policy/ /docs/policy/approval/approver-policy/ 301!
 /docs/projects/approver-policy/api-reference/ /docs/policy/approval/approver-policy/api-reference/ 301!
+
+# Moved the "upgrading" and "release-notes" pages to the release section
+/docs/installation/upgrading/* /docs/releases/upgrading/:splat 301!
+/docs/release-notes/* /docs/releases/release-notes/:splat 301!
+/docs/installation/supported-releases/ /docs/releases/ 301!
