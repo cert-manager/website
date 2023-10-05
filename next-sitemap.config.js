@@ -4,7 +4,7 @@ module.exports = {
   changefreq: 'daily',
   priority: 0.7,
   sitemapSize: 7000,
-  exclude: ['[fallback]', '404', '/500', '*README'],
+  exclude: ['[fallback]', '404', '/500', '*README', '/v*-docs', '/v*-docs/*'],
   robotsTxtOptions: {
     policies: [
       {
