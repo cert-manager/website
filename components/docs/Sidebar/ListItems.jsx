@@ -1,14 +1,22 @@
 import SidebarLink from './SidebarLink'
 import Dropdown from './Dropdown'
 
-export default function ListItems({ routes, setParentOpen }) {
+export default function ListItems({
+  routes,
+  setSidebarCollapsed,
+  setParentOpen
+}) {
   if (!routes) return null
   if (routes) {
     return routes.map((r, idx) => {
       if (!r.path) {
         return (
           <li key={`${r.title}-${idx}`}>
-            <Dropdown routes={r} setParentOpen={setParentOpen} />
+            <Dropdown
+              routes={r}
+              setSidebarCollapsed={setSidebarCollapsed}
+              setParentOpen={setParentOpen}
+            />
           </li>
         )
       } else {
@@ -17,6 +25,7 @@ export default function ListItems({ routes, setParentOpen }) {
             <SidebarLink
               href={r.path}
               caption={r.title}
+              setSidebarCollapsed={setSidebarCollapsed}
               setParentOpen={setParentOpen}
             />
           </li>
