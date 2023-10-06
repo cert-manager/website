@@ -3,8 +3,8 @@ title: Upgrading from v0.7 to v0.8
 description: 'cert-manager installation: Upgrading v0.7 to v0.8'
 ---
 
-Upgrading from `v0.7` to `v0.8` is possible using the regular [upgrade
-guide](../../installation/upgrade.md).
+Upgrading from `v0.7` to `v0.8` is possible using the regular
+[upgrade guide](../../installation/upgrade.md).
 
 All resources should continue to operate as before.
 

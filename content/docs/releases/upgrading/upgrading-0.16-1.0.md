@@ -58,8 +58,8 @@ This upgrade MUST be performed in the following sequence of steps:
 4. Ensure the old cert-manager CRD resources have also been deleted: `kubectl get crd | grep cert-manager.io`
 
 
-5. Re-install cert-manager `v1.0` from scratch according to the [installation
-   guide](../../installation/upgrade.md).
+5. Re-install cert-manager `v1.0` from scratch according to the
+   [installation guide](../../installation/upgrade.md).
 
 6. Apply the backed up resources again.
 

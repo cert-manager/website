@@ -29,8 +29,8 @@ This upgrade should be performed in a few steps:
 4. Update the `apiVersion` on all your backed up resources from
    `certmanager.k8s.io/v1alpha1` to `cert-manager.io/v1alpha2`.
 
-5. Re-install cert-manager from scratch according to the [installation
-   guide](../../installation/upgrade.md).
+5. Re-install cert-manager from scratch according to the
+   [installation guide](../../installation/upgrade.md).
 
 You must be sure to properly **backup**, **uninstall**, **re-install** and
 **restore** your installation in order to ensure the upgrade is successful.
