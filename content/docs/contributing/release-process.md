@@ -189,7 +189,7 @@ page if a step is missing or if it is outdated.
    document is ready to be merged on
    [cert-manager/website](https://github.com/cert-manager/website). See for
    example, see
-   [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1/).
+   [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1.md).
 
 4. **(final + patch releases)** Prepare the Website "Release Notes" PR.
 
