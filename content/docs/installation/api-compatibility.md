@@ -19,4 +19,4 @@ As in upstream Kubernetes, We don't commit to preserving alpha or beta API versi
 
 In cert-manager v1.7 [all alpha and beta API versions prior to `v1` were removed](https://github.com/cert-manager/cert-manager/pull/4635).
 
-NB: The Kubernetes deprecation policy notes that API removal introduces an issue with objects stored at the removed versions. To fix this, we wrote a [custom tool](https://cert-manager.io/docs/installation/upgrading/remove-deprecated-apis/) that users could run once to migrate their resources.
+NB: The Kubernetes deprecation policy notes that API removal introduces an issue with objects stored at the removed versions. To fix this, we wrote a [custom tool](https://cert-manager.io/docs/releases/upgrading/remove-deprecated-apis/) that users could run once to migrate their resources.

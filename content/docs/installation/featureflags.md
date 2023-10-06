@@ -47,18 +47,18 @@ Generally, we find user feedback most valuable when determining if a feature is 
 
 See `--feature-gates` flags on cert-manager controller and webhook to enable any of these features.
 
-- `AdditionalCertificateOutputFormats`. Added in cert-manager 1.7.0. Allows to specify additional formats in which cert-manager will store issued certificates and keys. See [release note](../release-notes/release-notes-1.7.md#additional-certificate-output-formats). Requires the feature to be enabled on both cert-manager controller and webhook
+- `AdditionalCertificateOutputFormats`. Added in cert-manager 1.7.0. Allows to specify additional formats in which cert-manager will store issued certificates and keys. See [release note](../releases/release-notes/release-notes-1.7.md#additional-certificate-output-formats). Requires the feature to be enabled on both cert-manager controller and webhook
 
 - `ExperimentalCertificateSigningRequestControllers`. Added in cert-manager
   1.4.0. Allows to use Kubernetes
   [CertificateSigningRequest](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/)
-  resources with cert-manager. See [release notes](../release-notes/release-notes-1.4.md#experimental-support-for-kubernetes-certificatesigningrequests)
+  resources with cert-manager. See [release notes](../releases/release-notes/release-notes-1.4.md#experimental-support-for-kubernetes-certificatesigningrequests)
 
 - `ExperimentalGatewayAPISupport`. Added in cert-manager 1.5.0. Allows to use cert-manager to automatically issue certificates for `Gateway` resources as well as use `Gateway`s and `HTTPRoute`s to solve ACME HTTP-01 challenges. See [Securing Gateway resources](../usage/gateway.md)
 
-- `LiteralCertificateSubject`. Added in cert-manager 1.9.0. Allows to specify certificate subject in a form that can be used to define a location in LDAP directory tree. See [release notes](../release-notes/release-notes-1.9.md#literal-certificate-subjects)
+- `LiteralCertificateSubject`. Added in cert-manager 1.9.0. Allows to specify certificate subject in a form that can be used to define a location in LDAP directory tree. See [release notes](../releases/release-notes/release-notes-1.9.md#literal-certificate-subjects)
 
-- `ServerSideApply`. Added in cert-manager 1.8.0. If this feature is enabled, cert-manager uses [Server side apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/) when creating or updating API resources. This will speed cert-manager operations and prevent the resource version conflict errors. See [release notes](../release-notes/release-notes-1.8.md#server-side-apply)
+- `ServerSideApply`. Added in cert-manager 1.8.0. If this feature is enabled, cert-manager uses [Server side apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/) when creating or updating API resources. This will speed cert-manager operations and prevent the resource version conflict errors. See [release notes](../releases/release-notes/release-notes-1.8.md#server-side-apply)
 
 - `UseCertificateRequestBasicConstraints`. Added in cert-manager 1.12.0. Makes cert-manager add a basic constraints section to certificate signing requests with the CA constraint set to the correct value. See [`cert-manager#5552`](https://github.com/cert-manager/cert-manager/pull/5552)
 

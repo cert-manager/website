@@ -7,7 +7,7 @@ description: 'cert-manager installation: Using OLM'
 
 ### Prerequisites
 
-- Install a [supported version of Kubernetes or OpenShift](./supported-releases.md).
+- Install a [supported version of Kubernetes or OpenShift](../releases/README.md).
 - Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if you are using Kubernetes on a cloud platform.
 
 ### Option 1: Installing from OperatorHub Web Console on OpenShift
