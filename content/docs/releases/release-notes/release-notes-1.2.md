@@ -15,7 +15,7 @@ Aside from that, there have been numerous bug fixes and features summarized belo
 
 1. The `--renew-before-expiration-duration` flag of the cert-manager controller-manager has been deprecated. Please set the `Certificate.Spec.RenewBefore` field instead. This flag will be removed in the next release.
 
-2. As Kubernetes `v1.16` is now the earliest supported version, The `legacy` manifests have now been removed. You can read more [here](../).
+2. As Kubernetes `v1.16` is now the earliest supported version, The `legacy` manifests have now been removed. You can read more [here](../README.md).
 
 3. The `User-Agent` request header has been changed from `jetstack-cert-manager/<version>` to `cert-manager/<version>`. This may affect functionality if you rely on an a User-Agent allowlist in a corporate environment.
 
