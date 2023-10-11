@@ -56,7 +56,7 @@ While cert-manager doesn't fully use Kubebuilder, CRDs can make use of special K
 
 ## Making Changes to APIs
 
-Please see our [API compatibility promise](../installation/api-compatibility.md) for details on which types of changes to APIs are acceptable.
+Please see our [API compatibility promise](../contributing/api-compatibility.md) for details on which types of changes to APIs are acceptable.
 
 Generally, the gist is that new fields can be added but that existing fields cannot be removed.
 
