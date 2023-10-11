@@ -282,7 +282,7 @@ cmctl x install \
 ```
 
 You can find [a full list of the install parameters on cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager#configuration). These are the same parameters that are available when using the Helm chart.
-Once you have deployed cert-manager, you can [verify](../installation/verify.md) the installation.
+Once you have deployed cert-manager, you can [verify](../installation/kubectl.md#verify) the installation.
 
 The CLI also allows the user to output the templated manifest to `stdout`, instead of installing the manifest on the cluster.
 
