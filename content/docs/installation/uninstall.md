@@ -1,5 +1,5 @@
 ---
-title: Uninstall
+title: Uninstalling cert-manager
 description: 'cert-manager installation: Uninstalling cert-manager'
 ---
 

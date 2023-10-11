@@ -89,7 +89,7 @@ helm install \
   --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
 ```
 
-Once you have deployed cert-manager, you can [verify](./verify.md) the installation.
+Once you have deployed cert-manager, you can [verify](./kubectl.md#verify) the installation.
 
 ### Installing cert-manager as subchart
 

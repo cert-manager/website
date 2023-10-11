@@ -261,6 +261,7 @@ Velero
 Venafi
 versioned
 WebhookConfiguration
+ControllerConfiguration
 WIP
 YAML
 YAMLs

@@ -266,17 +266,12 @@
             }
           ]
         },
-        
         {
           "title": "0. Installation",
           "routes": [
             {
               "title": "Introduction",
               "path": "/docs/installation/README.md"
-            },
-            {
-              "title": "Cloud Compatibility",
-              "path": "/docs/installation/compatibility.md"
             },
             {
               "title": "a. kubectl apply",
@@ -291,32 +286,20 @@
               "path": "/docs/installation/operator-lifecycle-manager.md"
             },
             {
-              "title": "d. Other tools",
-              "path": "/docs/installation/other-tools.md"
-            },
-            {
-              "title": "Feature flags",
-              "path": "/docs/installation/featureflags.md"
-            },
-            {
-              "title": "Best Practice",
-              "path": "/docs/installation/best-practice.md"
-            },
-            {
-              "title": "Verify installation",
-              "path": "/docs/installation/verify.md"
+              "title": "Configuring Components",
+              "path": "/docs/installation/configuring-components.md"
             },
             {
               "title": "Upgrade",
               "path": "/docs/installation/upgrade.md"
             },
             {
-              "title": "Uninstall",
-              "path": "/docs/installation/uninstall.md"
+              "title": "Reinstall",
+              "path": "/docs/installation/reinstall.md"
             },
             {
-              "title": "API compatibility",
-              "path": "/docs/installation/api-compatibility.md"
+              "title": "Uninstall",
+              "path": "/docs/installation/uninstall.md"
             },
             {
               "title": "Signature Verification",
@@ -589,6 +572,10 @@
           "title": "DevOps Tips",
           "routes": [
             {
+              "title": "Installing on a Cloud Provider",
+              "path": "/docs/installation/compatibility.md"
+            },
+            {
               "title": "Prometheus Metrics",
               "path": "/docs/devops-tips/prometheus-metrics.md"
             },
@@ -599,6 +586,10 @@
             {
               "title": "Syncing Secrets Across Namespaces",
               "path": "/docs/devops-tips/syncing-secrets-across-namespaces.md"
+            },
+            {
+              "title": "Best Practice Installation Options",
+              "path": "/docs/installation/best-practice.md"
             }
           ]
         },
@@ -675,7 +666,7 @@
               "path": "/docs/contributing/kind.md"
             },
             {
-              "title": "Implementing Feature Gates",
+              "title": "Feature gates",
               "path": "/docs/contributing/featuregates.md"
             },
             {
@@ -715,6 +706,10 @@
             {
               "title": "Signing Keys",
               "path": "/docs/contributing/signing-keys.md"
+            },
+            {
+              "title": "API compatibility",
+              "path": "/docs/contributing/api-compatibility.md"
             },
             {
               "title": "Importing cert-manager in Go",
