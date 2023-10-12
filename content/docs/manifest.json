@@ -411,23 +411,23 @@
               "path": "/docs/usage/README.md"
             },
             {
-              "title": "⚓ Certificate",
+              "title": "Certificate",
               "path": "/docs/usage/certificate.md"
             },
             {
-              "title": "⚓ CertificateRequest",
+              "title": "CertificateRequest",
               "path": "/docs/usage/certificaterequest.md"
             },
             {
-              "title": "☸️ Ingress",
+              "title": "Ingress",
               "path": "/docs/usage/ingress.md"
             },
             {
-              "title": "☸️ Gateway",
+              "title": "Gateway",
               "path": "/docs/usage/gateway.md"
             },
             {
-              "title": "☸️ CertificateSigningRequests",
+              "title": "CertificateSigningRequests",
               "path": "/docs/usage/kube-csr.md"
             },
             {
