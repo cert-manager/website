@@ -1,7 +1,10 @@
 ---
-title: Securing gateway.networking.k8s.io Gateway Resources
+title: Annotated Gateway resource
 description: 'cert-manager usage: Kubernetes Gateways'
 ---
+
+> **apiVersion:** gateway.networking.k8s.io/v1alpha2  
+> **kind:** Gateway
 
 **FEATURE STATE**: cert-manager 1.5 [alpha]
 

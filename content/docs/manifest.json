@@ -411,19 +411,23 @@
               "path": "/docs/usage/README.md"
             },
             {
-              "title": "Certificate Resources",
+              "title": "Certificate",
               "path": "/docs/usage/certificate.md"
             },
             {
-              "title": "Securing Ingress Resources",
+              "title": "CertificateRequest",
+              "path": "/docs/usage/certificaterequest.md"
+            },
+            {
+              "title": "Ingress",
               "path": "/docs/usage/ingress.md"
             },
             {
-              "title": "Securing Gateway Resources",
+              "title": "Gateway",
               "path": "/docs/usage/gateway.md"
             },
             {
-              "title": "Kubernetes CertificateSigningRequests",
+              "title": "CertificateSigningRequests",
               "path": "/docs/usage/kube-csr.md"
             },
             {
@@ -781,10 +785,6 @@
                 {
                   "title": "Certificate",
                   "path": "/docs/concepts/certificate.md"
-                },
-                {
-                  "title": "CertificateRequest",
-                  "path": "/docs/concepts/certificaterequest.md"
                 },
                 {
                   "title": "ACME Orders and Challenges",

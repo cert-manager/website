@@ -1,7 +1,10 @@
 ---
-title: Certificate Resources
+title: Certificate resource
 description: 'cert-manager usage: Certificates'
 ---
+
+> **apiVersion:** cert-manager.io/v1  
+> **kind:** Certificate
 
 In cert-manager, the [`Certificate`](../concepts/certificate.md) resource
 represents a human readable definition of a certificate request that is to be
