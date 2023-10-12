@@ -45,6 +45,8 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 >  * `dns.resourceRecordSets.*`
 >  * `dns.changes.*`
 >  * `dns.managedZones.list`
+>
+> In case you do not use the `dns.admin` role, you will also need to make sure that the Service Account used by your GKE cluster (e.g. the Compute Engine default service account) has the `https://www.googleapis.com/auth/cloud-platform` access scope assigned to it. See [Access scopes in GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/access-scopes).
 
 ## Use Static Credentials
 
