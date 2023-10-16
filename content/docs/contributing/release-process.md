@@ -198,11 +198,18 @@ page if a step is missing or if it is outdated.
      The steps below need to happen using `master` (**final release**) or
      `release-1.x` (**patch release**). The PR will be merged after the release.
 
-   1. Go to the Generate `release-notes.md` using the instructions further below
-     (<kbd>Ctrl+F</kbd> and look for `github-release-description.md`).
+   Go to the section "Generate `github-release-description.md`" using the
+      instructions further below (<kbd>Ctrl+F</kbd> and look for
+      `github-release-description.md`).
    2. Remove the "Dependencies" section.
-   3. Edit any `release-note` block in the PR description that doesn't follow
-      the [release-note guidelines](../contributing/contributing-flow.md#release-note-guidelines)
+   3. For each bullet point in the Markdown file, read the changelog entry and
+      check that it follows the [release-note guidelines](../contributing/contributing-flow.md#release-note-guidelines).
+      If you find a changelog entry that doesn't follow the guidelines, then:
+      - Go to that PR and edit the PR description to change the contents of the
+        `release-note` block.
+      - Go back to the release notes page, and copy the same change into
+        `release-notes.md` (or re-generate the file).
+
       and copy the same change into `release-notes.md` (or re-generate the
       file).
    4. Add the section "Major themes" and "Community" by taking example on the
@@ -211,11 +218,10 @@ page if a step is missing or if it is outdated.
        `@maelvls`) with actual links using the following command:
 
        ```bash
-       sed github-release-description.md \
+       sed -E \
          -e 's$#([0-9]+)$[#\1](https://github.com/cert-manager/cert-manager/pull/\1)$g' \
          -e 's$@(\w+)$[@\1](https://github.com/\1)$g' \
-         -E \
-         -i
+         github-release-description.md >release-notes.md
        ```
 
    6. Move `release-notes.md` to the website repo:
@@ -261,18 +267,18 @@ page if a step is missing or if it is outdated.
       +genversionwithcli "release-1.12" "$LATEST_VERSION"
       ```
 
-   4. (**final + patch release**) Bump all versions present in installation
-     instructions. To find these versions:
+   4. (**final + patch release of the latest minor version**) Bump all versions
+      present in installation instructions. To update these versions:
 
       ```bash
-      find ./content/docs/installation -name '*.md' -not -path '*/upgrad**' -exec sed -i.bak 's/1.11../1.12.0/g' '{}' \;
+      sed -i.bak 's/1.12.[0-9]/1.12.4/g' content/docs/installation/{README.md,code-signing.md,helm.md,kubectl.md,operator-lifecycle-manager.md}
       rm -f **/*.bak
       ```
 
       To check that all mentions of that version are gone, run:
 
       ```bash
-      grep -R -n -F 'v1.11.' content/docs/installation
+      grep -R -n -F 'v1.11.[0-9]' content/docs/installation
       ```
 
    5. (**final release only**) Freeze the `docs/` folder by creating a copy ,
@@ -308,8 +314,8 @@ page if a step is missing or if it is outdated.
     It should show:
 
     ```text
-    origin  https://github.com/jetstack/cert-manager (fetch)
-    origin  https://github.com/jetstack/cert-manager (push)
+    origin  https://github.com/cert-manager/cert-manager (fetch)
+    origin  https://github.com/cert-manager/cert-manager (push)
     ```
 
 7. Place yourself on the correct branch:
@@ -391,8 +397,8 @@ page if a step is missing or if it is outdated.
       > kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
       > the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-9. In this step, we make sure the Go module
-   `github.com/cert-manager/cert-manager/cmd/cmctl` can be imported by
+9. **(1.12 and above)** In this step, we make sure the Go module
+   `github.com/cert-manager/cert-manager/cmd/ctl` can be imported by
    third-parties.
 
     First, create a temporary branch.
@@ -402,20 +408,20 @@ page if a step is missing or if it is outdated.
      git checkout -b "update-cmd/ctl/$RELEASE_VERSION"
      ```
 
-    Second, update the `cmd/cmctl`'s `go.mod` with the tag we just created:
+    Second, update the `cmd/ctl`'s `go.mod` with the tag we just created:
 
      ```bash
      # Must be run from the cert-manager repo folder.
-     cd cmd/cmctl
+     cd cmd/ctl
      go get github.com/cert-manager/cert-manager@$RELEASE_VERSION
      cd ../..
 
      find . -name go.mod -not -path ./_bin/\* -exec dirname '{}' \; | xargs -L1 -I@ sh -c 'cd @; go mod tidy'
      git add **/go.mod **/go.sum
-     git commit -m"Update cmd/cmctl's go.mod to $RELEASE_VERSION"
+     git commit -m"Update cmd/ctl's go.mod to $RELEASE_VERSION"
      ```
 
-    Third, create a tag for the `cmd/cmctl` module:
+    Third, create a tag for the `cmd/ctl` module:
 
      ```bash
      # Must be run from the cert-manager repo folder.
@@ -428,8 +434,16 @@ page if a step is missing or if it is outdated.
 
     [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
 
-    Then, open a PR to merge that change and go back to the release branch
-    with the following commands:
+    Then, push the branch to your fork of cert-manager. For example:
+
+     ```bash
+     # Must be run from the cert-manager repo folder.
+     gh repo fork --remote-name fork
+     git push -u fork "update-cmd/ctl/$RELEASE_VERSION"
+     ```
+
+   Then, open a PR to merge that change and go back to the release branch with
+   the following commands:
 
      ```bash
      gh pr create \
@@ -445,11 +459,11 @@ page if a step is missing or if it is outdated.
      EOF
      ```
 
-    Finally, get back to the main tag:
+   Finally, get back to the branch you were on initially:
 
-     ```bash
-     git checkout $RELEASE_VERSION
-     ```
+   ```bash
+   git checkout $BRANCH
+   ```
 
 10. In this section, we will be creating the description for the GitHub Release.
 
@@ -468,62 +482,61 @@ page if a step is missing or if it is outdated.
 
     2. Generate `github-release-description.md` with the following command:
 
-        ```bash
-        # Must be run from the cert-manager folder.
-        export GITHUB_TOKEN=*your-token*
-        git fetch origin $BRANCH
-        export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
-        release-notes --debug --repo-path cert-manager \
-          --org cert-manager --repo cert-manager \
-          --required-author "jetstack-bot" \
-          --output github-release-description.md
-        ```
+       ```bash
+       # Must be run from the cert-manager folder.
+       export GITHUB_TOKEN=*your-token*
+       git fetch origin $BRANCH
+       export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
+       release-notes --debug --repo-path cert-manager \
+         --org cert-manager --repo cert-manager \
+         --required-author "jetstack-bot" \
+         --markdown-links=false \
+         --output github-release-description.md
+       ```
 
         <div className="pageinfo pageinfo-info"><p>
         The GitHub token **does not need any scope**. The token is required
         only to avoid rate-limits imposed on anonymous API users.
         </p></div>
+
     3. Add a one-sentence summary at the top.
 
     4. **(final release only)** Write the "Community" section, following the example of past releases such as [v1.12.0](https://github.com/cert-manager/cert-manager/releases/tag/v1.12.0). If there are any users who didn't make code contributions but helped in other ways (testing, PR discussion, etc), be sure to thank them here!
 
-11. Check that the build is complete and send Slack messages about the release:
+11. Check that the build that was automatically triggered when you pushed the
+    tag is complete and send Slack messages about the release:
 
-    1. For recent versions of cert-manager, the build will have been automatically
-       triggered by the tag being pushed earlier. You can check if it's complete on
-       the [GCB Build History](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
-
-    2. If you're releasing an older version of cert-manager (earlier than 1.10) then the automatic build
-       will failed because the GCB config for that build wasn't backported.
-       In this case, you'll need to trigger the build manually using `cmrel`, which takes about 5 minutes:
-
-        ```bash
-        # Must be run from the "cert-manager/release" repo folder.
-        cmrel makestage --ref=$RELEASE_VERSION
-        ```
-
-        This build takes ~5 minutes. It will build all container images and create
-        all the manifest files, sign Helm charts and upload everything to a storage
-        bucket on Google Cloud. These artifacts will then be published and released
-        in the next steps.
-
-    3. In any case, send a first Slack message to `#cert-manager-dev`:
+    1. Send a first Slack message to `#cert-manager-dev`:
 
         <div className="pageinfo pageinfo-primary"><p>
         Releasing <code>1.2.0-alpha.2</code> 🧵
         </p></div>
 
-        <div className="pageinfo pageinfo-info"><p>
-        🔰 Please have a quick look at the build log as it might contain some unredacted
-        data that we forgot to hide. We try to make sure the sensitive data is
-        properly redacted but sometimes we forget to update this.
-        </p></div>
+    2. Check that the build completed in the
+       [GCB Build History](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-    4. Send a second Slack message in reply to this first message with the
-       Cloud Build job link. For example, the message might look like:
+          <div className="pageinfo pageinfo-info"><p>
+          🔰 Please have a quick look at the build log as it might contain some unredacted
+          data that we forgot to hide. We try to make sure the sensitive data is
+          properly redacted but sometimes we forget to update this.
+          </p></div>
+
+       > **NOTE (1.10 and earlier):** If you're releasing an older version of
+       > cert-manager then the automatic build will failed because the GCB
+       > config for that build wasn't backported. In this case, you'll need to
+       > trigger the build manually using `cmrel`, which takes about 5 minutes:
+       >
+       > ```bash
+       > # Must be run from the "cert-manager/release" repo folder.
+       > cmrel makestage --ref=$RELEASE_VERSION
+       > ```
+
+    3. Copy the build logs URL and send a second Slack message in reply to this
+       first message with the Cloud Build job link. For example, the message
+       might look like:
 
         <div className="pageinfo pageinfo-info"><p>
-        Follow the <code>cmrel makestage</code> build: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
+        <code>cmrel makestage</code> build logs: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
         </p></div>
 
 12. Run `cmrel publish`:
