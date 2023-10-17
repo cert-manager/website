@@ -54,7 +54,7 @@ featureGates:
   UseCertificateRequestBasicConstraints: true
 ```
 
-> NOTE: This is included as an example only and not intended to be used as default settings.
+> **Note:** This is included as an example only and not intended to be used as default settings.
 
 ### Webhook configuration file
 
@@ -78,7 +78,7 @@ featureGates:
   LiteralCertificateSubject: true
 ```
 
-> NOTE: This is included as an example only and not intended to be used as default settings.
+> **Note:** This is included as an example only and not intended to be used as default settings.
 
 ## Feature gates
 
