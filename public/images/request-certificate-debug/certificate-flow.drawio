@@ -1,0 +1,286 @@
+<mxfile host="app.diagrams.net" modified="2023-10-17T11:31:26.390Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="BLNnvM51OorlBAXHIw23" version="22.0.4" type="device">
+  <diagram id="AW3OrBCQwjyOdo3bwChp" name="Page-1">
+    <mxGraphModel dx="1357" dy="736" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MYaeiiRs0e1uR92Mewc--69" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="489.63" y="1095.5" width="340.37" height="348.5" as="geometry" />
+        </mxCell>
+        <mxCell id="TSZrMiCZuQzLwb3cwMG9-9" value="kind: CertificateRequest&lt;br&gt;metadata:&lt;br&gt;&amp;nbsp; name:&amp;nbsp;cert-1-ab0123&lt;br&gt;&amp;nbsp; annotations:&lt;br&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;cert-manager.io/certificate-revision:&amp;nbsp;&quot;1&quot;&lt;br&gt;&lt;div&gt;status:&lt;/div&gt;&lt;div&gt;&amp;nbsp; conditions:&lt;/div&gt;&lt;div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; - type: &lt;b&gt;Ready&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; status: &lt;b&gt;&quot;True&quot;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; reason: &lt;b&gt;Issued&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; certificate: |&lt;/div&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; -----BEGIN CERTIFICATE-----&lt;br&gt;&amp;nbsp; &amp;nbsp; (leaf)&lt;br&gt;&amp;nbsp; &amp;nbsp; -----END CERTIFICATE-----&lt;br&gt;&lt;/b&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; -----BEGIN CERTIFICATE-----&lt;br&gt;&amp;nbsp; &amp;nbsp; (intermediate)&lt;br&gt;&amp;nbsp; &amp;nbsp; -----END CERTIFICATE-----&lt;/b&gt;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=#d79b00;fillColor=#ffe6cc;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacingTop=0;spacingBottom=0;spacing=5;" parent="MYaeiiRs0e1uR92Mewc--69" vertex="1">
+          <mxGeometry width="340.37" height="258.5" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--37" value="&lt;div&gt;&lt;font&gt;STAYS FOREVER&lt;br&gt;(by default)&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;fontColor=#757575;" parent="MYaeiiRs0e1uR92Mewc--69" vertex="1">
+          <mxGeometry x="241.37" y="306.5" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--38" value="" style="endArrow=none;html=1;dashed=1;startArrow=classic;startFill=1;fontColor=#757575;strokeColor=#B3B3B3;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fontFamily=Courier New;" parent="MYaeiiRs0e1uR92Mewc--69" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="285.7500000000001" y="301.5" as="sourcePoint" />
+            <mxPoint x="285.37" y="261.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TSZrMiCZuQzLwb3cwMG9-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Courier New;endArrow=classic;endFill=1;" parent="1" source="ZZ92xPVQZ7XZ2kMUYkGM-23" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="548" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-23" value="kind: CertificateRequest&lt;br&gt;metadata:&lt;br&gt;&amp;nbsp; name: cert-1-ab0123&lt;br&gt;&amp;nbsp; annotations:&lt;br&gt;&amp;nbsp; &amp;nbsp; &lt;b&gt;cert-manager.io/certificate-revision:&amp;nbsp;&quot;1&quot;&lt;/b&gt;&lt;br&gt;spec:&lt;br&gt;&amp;nbsp; issuerRef: issuer-1&lt;br&gt;&amp;nbsp; request: |&lt;br&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;span&gt;-----BEGIN CERTIFICATE REQUEST-----&lt;br&gt;&amp;nbsp; &amp;nbsp; ...&lt;br&gt;&lt;/span&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; -----END CERTIFICATE REQUEST-----&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=#d79b00;fillColor=#ffe6cc;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacingTop=0;spacingBottom=0;spacing=5;" parent="1" vertex="1">
+          <mxGeometry x="376" y="733" width="344" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-26" value="kind: Issuer&lt;br&gt;metadata:&lt;br&gt;&amp;nbsp; name: &lt;b&gt;issuer-1&lt;/b&gt;&lt;br&gt;spec: ..." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacing=5;fillColor=#EEEEEE;" parent="1" vertex="1">
+          <mxGeometry x="536.63" y="114.33" width="210" height="69.67" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-5" value="user creates the Certificate &lt;b&gt;&quot;cert-1&quot;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;" parent="1" vertex="1">
+          <mxGeometry x="190" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-7" value="triggercontroller marks for reissuance" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;" parent="1" vertex="1">
+          <mxGeometry x="190" y="190" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-16" value="" style="group;fontFamily=Courier New;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="73" y="30" width="225" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Courier New;" parent="SW6BRf9NdE8UDbDrH991-16" vertex="1">
+          <mxGeometry width="225" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-2" value="kind: Certificate&lt;br&gt;metadata:&lt;br&gt;&amp;nbsp; name: cert-1&lt;br&gt;spec:&lt;br&gt;&amp;nbsp; dnsNames:&lt;br&gt;&amp;nbsp; &amp;nbsp; - example.com&lt;br&gt;&amp;nbsp; &amp;nbsp; - foo.example.com&lt;br&gt;&amp;nbsp; issuerRef: &lt;b&gt;issuer-1&lt;/b&gt;&lt;br&gt;&amp;nbsp; secretName: &lt;b&gt;sec-1&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacing=5;" parent="SW6BRf9NdE8UDbDrH991-16" vertex="1">
+          <mxGeometry y="0.6599999999999965" width="225" height="139.34" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-17" value="" style="group;fontFamily=Courier New;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="80" y="240" width="210" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-8" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Courier New;" parent="SW6BRf9NdE8UDbDrH991-17" vertex="1">
+          <mxGeometry width="210" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-9" value="kind: Certificate&lt;br&gt;spec:&lt;br&gt;&amp;nbsp; issuerRef: issuer-1&lt;br&gt;&amp;nbsp; secretName: sec-1&lt;br&gt;status:&lt;br&gt;&amp;nbsp; conditions:&lt;br&gt;&amp;nbsp; - type: &lt;b&gt;Issuing&lt;/b&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; status: &lt;b&gt;&quot;True&quot;&lt;/b&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; reason: &lt;b&gt;Pending&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacingTop=0;spacingBottom=0;spacing=5;" parent="SW6BRf9NdE8UDbDrH991-17" vertex="1">
+          <mxGeometry width="210.00000000000003" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Courier New;endArrow=classic;endFill=1;" parent="1" source="SW6BRf9NdE8UDbDrH991-2" target="SW6BRf9NdE8UDbDrH991-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SW6BRf9NdE8UDbDrH991-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Courier New;endArrow=classic;endFill=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="185" y="10" as="sourcePoint" />
+            <mxPoint x="185" y="40" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-2" value="" style="endArrow=classic;html=1;fontFamily=Courier New;exitX=0.804;exitY=0.835;exitDx=0;exitDy=0;exitPerimeter=0;dashed=1;edgeStyle=elbowEdgeStyle;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="SW6BRf9NdE8UDbDrH991-26" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240.9000000000001" y="149.00890000000004" as="sourcePoint" />
+            <mxPoint x="527" y="149" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-5" value="" style="group;fontFamily=Courier New;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="50" y="460" width="270" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-6" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Courier New;" parent="ZZ92xPVQZ7XZ2kMUYkGM-5" vertex="1">
+          <mxGeometry width="270" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-7" value="kind: Certificate&lt;br&gt;spec:&lt;br&gt;&amp;nbsp; issuerRef: issuer-1&lt;br&gt;&amp;nbsp; secretName: sec-1&lt;br&gt;status:&lt;br&gt;&amp;nbsp; nextPrivateKeySecret: &lt;b&gt;sec-1-01ab4f&lt;/b&gt;&lt;br&gt;&amp;nbsp; conditions:&lt;br&gt;&amp;nbsp; - type: Issuing&lt;br&gt;&amp;nbsp; &amp;nbsp; status: &quot;True&quot;&lt;br&gt;&amp;nbsp; &amp;nbsp; reason: Pending" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacingTop=0;spacingBottom=0;spacing=5;" parent="ZZ92xPVQZ7XZ2kMUYkGM-5" vertex="1">
+          <mxGeometry width="270.00000000000006" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-8" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Courier New;endArrow=classic;endFill=1;elbow=vertical;" parent="1" source="SW6BRf9NdE8UDbDrH991-9" target="ZZ92xPVQZ7XZ2kMUYkGM-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-9" value="keymanager creates a temporary private key" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;" parent="1" vertex="1">
+          <mxGeometry x="190" y="400" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-14" value="" style="group;fontFamily=Courier New;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="390" y="460" width="240" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-13" value="" style="group;fillColor=#f8cecc;strokeColor=#b85450;container=0;fontFamily=Courier New;" parent="ZZ92xPVQZ7XZ2kMUYkGM-14" vertex="1" connectable="0">
+          <mxGeometry width="240" height="135.00000000000003" as="geometry" />
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-12" value="kind: Secret&lt;br&gt;metadata:&lt;br&gt;&amp;nbsp; name: sec&lt;b&gt;-1-01ab4f&lt;/b&gt;&lt;br&gt;stringData:&lt;br&gt;&amp;nbsp; tls.key: |&lt;br&gt;&amp;nbsp; &lt;b&gt;&amp;nbsp;&amp;nbsp;&lt;span&gt;-----BEGIN PRIVATE KEY-----&lt;br&gt;&amp;nbsp; &amp;nbsp; AaBbCcDd0&lt;br&gt;&lt;/span&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; -----END PRIVATE KEY-----&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacingTop=0;spacingBottom=0;spacing=5;" parent="ZZ92xPVQZ7XZ2kMUYkGM-14" vertex="1">
+          <mxGeometry width="240" height="135.00000000000003" as="geometry" />
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-15" value="" style="endArrow=classic;html=1;fontFamily=Courier New;dashed=1;edgeStyle=elbowEdgeStyle;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="315" y="548.5" as="sourcePoint" />
+            <mxPoint x="407" y="506.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-19" value="kind: Certificate&lt;br&gt;spec:&lt;br&gt;&amp;nbsp; issuerRef: issuer-1&lt;br&gt;&amp;nbsp; secretName: sec-1&lt;br&gt;status:&lt;br&gt;&amp;nbsp; nextPrivateKeySecret: sec-1-01ab4f&lt;br&gt;&amp;nbsp; &lt;b&gt;revision: nil&lt;/b&gt;&lt;br&gt;&amp;nbsp; conditions:&lt;br&gt;&amp;nbsp; - type: Issuing&lt;br&gt;&amp;nbsp; &amp;nbsp; status: &quot;True&quot;&lt;br&gt;&amp;nbsp; &amp;nbsp; reason: Pending" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacingTop=0;spacingBottom=0;spacing=5;" parent="1" vertex="1">
+          <mxGeometry x="50" y="740" width="270.00000000000006" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-20" value="" style="endArrow=classic;html=1;fontFamily=Courier New;dashed=1;edgeStyle=elbowEdgeStyle;exitX=0.426;exitY=0.588;exitDx=0;exitDy=0;exitPerimeter=0;rounded=0;entryX=0.084;entryY=0.384;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+          <mxGeometry x="51" y="739" width="50" height="50" as="geometry">
+            <mxPoint x="166.0200000000002" y="843.9999999999995" as="sourcePoint" />
+            <mxPoint x="405.89599999999996" y="807" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="820" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-24" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Courier New;endArrow=classic;endFill=1;elbow=vertical;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="187.5" y="620" as="sourcePoint" />
+            <mxPoint x="188" y="740" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="262.5" y="698" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-25" value="&lt;span style=&quot;text-align: right;&quot;&gt;(a.1) requestmanager&amp;nbsp;&lt;/span&gt;creates CertificateRequest&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; with revision = &quot;1&quot; (the next revision)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;" parent="1" vertex="1">
+          <mxGeometry x="231.87" y="630" width="348.13" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="ZZ92xPVQZ7XZ2kMUYkGM-28" value="(a.2) requestmanager signs the CSR&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; using the private key" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;" parent="1" vertex="1">
+          <mxGeometry x="231.87" y="672" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="TSZrMiCZuQzLwb3cwMG9-2" value="(a.1)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;labelBorderColor=none;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="324.88" y="815" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="TSZrMiCZuQzLwb3cwMG9-6" value="" style="endArrow=classic;html=1;fontFamily=Courier New;exitX=0.89;exitY=1.022;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.865;entryY=0.747;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;endFill=1;rounded=0;" parent="1" source="ZZ92xPVQZ7XZ2kMUYkGM-12" target="ZZ92xPVQZ7XZ2kMUYkGM-23" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="590" as="sourcePoint" />
+            <mxPoint x="410" y="540" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="604" y="640" />
+              <mxPoint x="740" y="640" />
+              <mxPoint x="740" y="867" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TSZrMiCZuQzLwb3cwMG9-7" value="(a.2)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;labelBorderColor=none;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="746.63" y="750" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--25" value="" style="endArrow=none;html=1;startArrow=classic;startFill=1;fontFamily=Courier New;exitX=0.214;exitY=0.009;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="549.46918" y="1097.8265000000001" as="sourcePoint" />
+            <mxPoint x="549" y="1040" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--39" value="kind: Certificate&lt;br&gt;spec:&lt;br&gt;&amp;nbsp; issuerRef: issuer-1&lt;br&gt;&amp;nbsp; secretName: sec-1&lt;br&gt;status:&lt;br&gt;&amp;nbsp; nextPrivateKeySecret: sec-1-01ab4f&lt;br&gt;&amp;nbsp; &lt;b&gt;revision: 1&lt;/b&gt;&lt;br&gt;&amp;nbsp; conditions:&lt;br&gt;&amp;nbsp; &amp;nbsp; - type: &lt;b&gt;Issuing&lt;/b&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; status: &lt;b&gt;&quot;False&quot;&lt;/b&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; reason: &lt;b&gt;Issued&lt;/b&gt;" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacingTop=0;spacingBottom=0;spacing=5;" parent="1" vertex="1">
+          <mxGeometry x="54.879999999999995" y="1068" width="270" height="173" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--48" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;courier new&amp;quot;; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; word-spacing: 0px; display: inline; float: none;&quot;&gt;(c) issuing&lt;br&gt;&amp;nbsp; &amp;nbsp; controller&lt;br&gt;&amp;nbsp; &amp;nbsp; sets&lt;br&gt;&amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;courier new&amp;quot;; font-size: 12px; font-style: normal; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; word-spacing: 0px; display: inline; float: none;&quot;&gt;&lt;b&gt;revision = 1&lt;/b&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; and&lt;br&gt;&amp;nbsp; &amp;nbsp; &lt;b&gt;Issuing = False&lt;/b&gt;&lt;br&gt;&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="340" y="1175.5" width="180" height="94.5" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--51" value="TEMPORARY SECRET" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;labelBackgroundColor=none;fontFamily=Courier New;fontColor=#757575;" parent="1" vertex="1">
+          <mxGeometry x="500" y="440" width="131.87" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--62" value="kind: Secret&lt;br&gt;metadata:&lt;br&gt;&amp;nbsp; name:&amp;nbsp;sec-1-01ab4f&lt;br&gt;stringData:&lt;br&gt;&amp;nbsp; tls.key: |&lt;br&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;-----BEGIN PRIVATE KEY-----&lt;br&gt;&amp;nbsp; &amp;nbsp; AaBbCcDd0&lt;br&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; -----END PRIVATE KEY-----&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacingTop=0;spacingBottom=0;spacing=5;" parent="1" vertex="1">
+          <mxGeometry x="530" y="1497" width="232.57" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--64" value="kind: Secret&lt;br&gt;metadata:&lt;br&gt;&amp;nbsp; name:&amp;nbsp;&lt;b&gt;sec-1&lt;/b&gt;&lt;br&gt;stringData:&lt;br&gt;&amp;nbsp; tls.crt: |&lt;br&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; -----BEGIN CERTIFICATE-----&lt;br&gt;&amp;nbsp; &amp;nbsp; (leaf)&lt;br&gt;&amp;nbsp; &amp;nbsp; -----END CERTIFICATE-----&lt;br&gt;&lt;/b&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; -----BEGIN CERTIFICATE-----&lt;br&gt;&amp;nbsp; &amp;nbsp; (intermediate)&lt;br&gt;&amp;nbsp; &amp;nbsp; -----END CERTIFICATE-----&lt;/b&gt;&lt;br&gt;&amp;nbsp; ca.crt:&amp;nbsp;&lt;b&gt;&quot;&quot;&lt;/b&gt;&lt;br&gt;&amp;nbsp; tls.key: |&lt;br&gt;&amp;nbsp; &lt;b&gt;&amp;nbsp;&amp;nbsp;&lt;span&gt;-----BEGIN PRIVATE KEY-----&lt;br&gt;&amp;nbsp; &amp;nbsp; AaBbCcDd0&lt;br&gt;&lt;/span&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; -----END PRIVATE KEY-----&lt;/b&gt;&lt;/div&gt;" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacingTop=0;spacingBottom=0;spacing=5;" parent="1" vertex="1">
+          <mxGeometry x="70" y="1385" width="250" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--65" value="TEMPORARY SECRET" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;labelBackgroundColor=none;fontFamily=Courier New;fontColor=#757575;" parent="1" vertex="1">
+          <mxGeometry x="641.13" y="1477" width="131.87" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--67" value="" style="endArrow=none;html=1;dashed=1;fontFamily=Courier New;fontColor=#000000;strokeColor=#000000;elbow=vertical;startArrow=classic;startFill=1;endFill=0;exitX=0.932;exitY=0.484;exitDx=0;exitDy=0;exitPerimeter=0;jumpStyle=sharp;rounded=0;" parent="1" source="MYaeiiRs0e1uR92Mewc--64" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="330" y="1564" as="sourcePoint" />
+            <mxPoint x="510" y="1290" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="360" y="1506" />
+              <mxPoint x="360" y="1340" />
+              <mxPoint x="360" y="1290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--68" value="" style="endArrow=none;html=1;dashed=1;fontFamily=Courier New;fontColor=#000000;strokeColor=#000000;elbow=vertical;startArrow=classic;startFill=1;endFill=0;exitX=0.956;exitY=0.851;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="305.06263999999993" y="1597.002" as="sourcePoint" />
+            <mxPoint x="554.93" y="1596" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--70" value="" style="endArrow=none;html=1;dashed=1;fontFamily=Courier New;fontColor=#757575;strokeColor=#000000;rounded=0;startArrow=classic;startFill=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="1560" as="sourcePoint" />
+            <mxPoint x="360" y="1500" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="360" y="1560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--72" value="&lt;div&gt;&lt;font&gt;REMOVED AFTER USE&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;fontColor=#757575;" parent="1" vertex="1">
+          <mxGeometry x="609.63" y="1672" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--73" value="" style="endArrow=none;html=1;dashed=1;startArrow=classic;startFill=1;fontColor=#757575;strokeColor=#B3B3B3;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fontFamily=Courier New;" parent="1" source="MYaeiiRs0e1uR92Mewc--72" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="654.25" y="1676" as="sourcePoint" />
+            <mxPoint x="654.25" y="1632" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--76" value="" style="endArrow=none;html=1;dashed=1;fontFamily=Courier New;fontColor=#000000;strokeColor=#000000;elbow=vertical;startArrow=classic;startFill=1;endFill=0;jumpStyle=sharp;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="1430" as="sourcePoint" />
+            <mxPoint x="69" y="1157" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="200" y="1430" />
+              <mxPoint x="199" y="1360" />
+              <mxPoint x="40" y="1360" />
+              <mxPoint x="39" y="1157" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--77" value="" style="endArrow=none;html=1;fontFamily=Courier New;fontColor=#757575;strokeColor=#000000;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endFill=0;startArrow=classic;startFill=1;exitX=0.444;exitY=-0.013;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="MYaeiiRs0e1uR92Mewc--78" target="MYaeiiRs0e1uR92Mewc--64" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="195" y="1695" as="sourcePoint" />
+            <mxPoint x="350" y="1535" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--78" value="kind: Certificate&lt;br&gt;spec:&lt;br&gt;&amp;nbsp; issuerRef: issuer-1&lt;br&gt;&amp;nbsp; secretName: sec-1&lt;br&gt;status:&lt;br&gt;&amp;nbsp; revision: 1&lt;br&gt;&amp;nbsp; conditions:&lt;br&gt;&amp;nbsp; &amp;nbsp; - type: &lt;b&gt;Ready&lt;/b&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; status: &lt;b&gt;&quot;True&quot;&lt;/b&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; reason: &lt;b&gt;Issued&lt;/b&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; - type: Issuing&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; status: &quot;False&quot;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; reason: Issued&lt;b&gt;&lt;br&gt;&lt;/b&gt;" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;spacingTop=0;spacingBottom=0;spacing=5;" parent="1" vertex="1">
+          <mxGeometry x="90" y="1712" width="234.87" height="199" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--46" value="" style="endArrow=none;html=1;dashed=1;fontFamily=Courier New;fontColor=#000000;strokeColor=#000000;elbow=vertical;startArrow=classic;startFill=1;endFill=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="159" y="1170" as="sourcePoint" />
+            <mxPoint x="518" y="1170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--79" value="(b.3) issuing controller&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; copies&amp;nbsp;&lt;b&gt;tls.key&lt;br&gt;&lt;/b&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; from temporary&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; private key" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;" parent="1" vertex="1">
+          <mxGeometry x="333" y="1600" width="182.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--80" value="ready controller&lt;br&gt;sets readiness" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;" parent="1" vertex="1">
+          <mxGeometry x="204.88" y="1655" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--82" value="&lt;div&gt;&lt;font&gt;DOES NOT EXIST YET&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Courier New;fontColor=#757575;" parent="1" vertex="1">
+          <mxGeometry x="415.63" y="164" width="75" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--83" value="" style="endArrow=none;html=1;dashed=1;startArrow=classic;startFill=1;fontColor=#757575;strokeColor=#B3B3B3;fontFamily=Courier New;rounded=0;entryX=0.644;entryY=0.921;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="MYaeiiRs0e1uR92Mewc--82" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="411" y="204" as="sourcePoint" />
+            <mxPoint x="238.89999999999998" y="162.99214" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="391" y="184" />
+              <mxPoint x="391" y="163" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--84" value="ISSUER" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;dashed=1;fontColor=#757575;fontFamily=Courier New;" parent="1" vertex="1">
+          <mxGeometry x="549.63" y="90" width="130" height="20" as="geometry" />
+        </mxCell>
+        <UserObject label="CertificateRequest&lt;br&gt;Flow [1]" link="/docs/usage/certificaterequest/" linkTarget="_blank" id="MYaeiiRs0e1uR92Mewc--26">
+          <mxCell style="rounded=0;whiteSpace=wrap;html=1;align=center;fontFamily=Courier New;strokeColor=none;fillColor=#EEEEEE;fontSize=20;fontColor=#898989;" parent="1" vertex="1">
+            <mxGeometry x="376" y="950" width="344" height="90" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" link="/docs/usage/certificaterequest/" linkTarget="_blank" id="rx8n2CbqFHwidEofS_HW-1">
+          <mxCell style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgaGVpZ2h0PSI0OCIgd2lkdGg9IjQ4Ij48cGF0aCBkPSJNMzggMzhIMTBWMTBoMTRWNkgxMGMtMi4yMSAwLTQgMS43OS00IDR2MjhjMCAyLjIxIDEuNzkgNCA0IDRoMjhjMi4yMSAwIDQtMS43OSA0LTRWMjRoLTR2MTR6TTI4IDZ2NGg3LjE3TDE1LjUxIDI5LjY2bDIuODMgMi44M0wzOCAxMi44M1YyMGg0VjZIMjh6IiBmaWxsPSIjRkZGRiIvPjwvc3ZnPg==;" parent="1" vertex="1">
+            <mxGeometry x="687.5" y="955.5" width="27.5" height="27.5" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="kwf5w-d_zNN2IxEcem40-2" value="(b.1) issuing controller&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; creates or updates&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;sec-1&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="54.88" y="1290" width="225.12" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MYaeiiRs0e1uR92Mewc--71" value="(b.2) issuing controller&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; sets &lt;b&gt;tls.crt&lt;br&gt;&lt;/b&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; and &lt;b&gt;ca.crt&lt;/b&gt;(if returned by&amp;nbsp;CA)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;" parent="1" vertex="1">
+          <mxGeometry x="367.89" y="1400" width="262.11" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="kwf5w-d_zNN2IxEcem40-4" value="" style="endArrow=none;html=1;dashed=1;fontFamily=Courier New;fontColor=#757575;strokeColor=#000000;rounded=0;startArrow=classic;startFill=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="220" y="1220" as="sourcePoint" />
+            <mxPoint x="340" y="1170" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="340" y="1220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
