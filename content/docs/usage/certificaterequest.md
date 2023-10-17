@@ -263,6 +263,6 @@ and `bar`:
     resourceNames: ["myissuers.my-example.io/foo.myapp", "myissuers.my-example.io/bar.myapp"]
 ```
 
-## Inner workings diagram
+## Inner workings diagram for developers
 
 <object data="/images/request-certificate-debug/certificate-request-flow.svg"></object>

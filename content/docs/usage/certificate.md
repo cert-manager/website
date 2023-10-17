@@ -374,7 +374,7 @@ data:
   ...
 ```
 
-## Inner workings diagram
+## Inner workings diagram for developers
 
 <object data="/images/request-certificate-debug/certificate-flow.svg"></object>
 
