@@ -440,7 +440,7 @@ Certificate resources:
   configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
   Valid values are `Never` and `Always`. If unset a rotation policy `Never` will be used.
 
-## Inner workings diagram
+## Inner workings diagram for developers
 
 <object data="/images/request-certificate-debug/gateway-shim-flow.svg"></object>
 
