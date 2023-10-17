@@ -262,3 +262,7 @@ and `bar`:
 ```yaml
     resourceNames: ["myissuers.my-example.io/foo.myapp", "myissuers.my-example.io/bar.myapp"]
 ```
+
+## Inner workings diagram
+
+<object data="/images/request-certificate-debug/certificate-request-flow.svg"></object>

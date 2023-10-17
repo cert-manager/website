@@ -439,3 +439,9 @@ Certificate resources:
 - `cert-manager.io/private-key-rotation-policy`: (optional) this annotation allows you to
   configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
   Valid values are `Never` and `Always`. If unset a rotation policy `Never` will be used.
+
+## Inner workings diagram
+
+<object data="/images/request-certificate-debug/gateway-shim-flow.svg"></object>
+
+[1] https://cert-manager.io/docs/usage/certificate
