@@ -27,7 +27,8 @@ configuration file can be specified in the `config` and `webhook.config` values.
 
 The webhook configuration API documentation can be found on the [ControllerConfiguration](../reference/api-docs.md#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration) page.
 
-This is an example configuration file for the controller:
+This is an example configuration file for the controller component:
+
 ```yaml
 apiVersion: controller.config.cert-manager.io/v1alpha1
 kind: ControllerConfiguration
@@ -45,19 +46,22 @@ kubernetesAPIBurst: 50
 numberOfConcurrentWorkers: 200
 
 featureGates:
-  additionalCertificateOutputFormats: true
-  experimentalCertificateSigningRequestControllers: true
-  experimentalGatewayAPISupport: true
-  serverSideApply: true
-  literalCertificateSubject: true
-  useCertificateRequestBasicConstraints: true
+  AdditionalCertificateOutputFormats: true
+  ExperimentalCertificateSigningRequestControllers: true
+  ExperimentalGatewayAPISupport: true
+  ServerSideApply: true
+  LiteralCertificateSubject: true
+  UseCertificateRequestBasicConstraints: true
 ```
+
+> NOTE: This is included as an example only and not intended to be used as default settings.
 
 ### Webhook configuration file
 
 The webhook configuration API documentation can be found on the [WebhookConfiguration](../reference/api-docs.md#webhook.config.cert-manager.io/v1alpha1.WebhookConfiguration) page.
 
-This is an example configuration file for the webhook:
+Here is an example configuration file for the webhook component:
+
 ```yaml
 apiVersion: webhook.config.cert-manager.io/v1alpha1
 kind: WebhookConfiguration
@@ -70,9 +74,11 @@ securePort: 6443
 healthzPort: 6080
 
 featureGates:
-  additionalCertificateOutputFormats: true
-  literalCertificateSubject: true
+  AdditionalCertificateOutputFormats: true
+  LiteralCertificateSubject: true
 ```
+
+> NOTE: This is included as an example only and not intended to be used as default settings.
 
 ## Feature gates
 
