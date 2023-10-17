@@ -373,3 +373,9 @@ data:
   key.der: <DER binary format of private key>
   ...
 ```
+
+## Inner workings diagram
+
+<object data="/images/request-certificate-debug/certificate-flow.svg"></object>
+
+[1] https://cert-manager.io/docs/usage/certificaterequest
