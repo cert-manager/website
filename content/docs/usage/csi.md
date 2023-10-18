@@ -3,6 +3,10 @@ title: CSI Driver
 description: 'cert-manager usage: CSI driver'
 ---
 
+<div style={{textAlign: "center"}}>
+<object data="/images/request-certificate-overview/request-certificate-csi.svg"></object>
+</div>
+
 ## Enabling mTLS of Pods using the cert-manager CSI Driver
 
 A [Container Storage Interface (CSI)
