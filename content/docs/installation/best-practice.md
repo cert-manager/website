@@ -39,13 +39,13 @@ So in these components you can use multiple replicas to achieve high availabilit
 
 Use two replicas to ensures that there is a standby Pod scheduled to a Node which is ready to take leadership,
 should the current leader encounter a disruption.
-For example, if the Node on which the leader Pod is running is drained.
+For example, when the leader Pod is drained from its node.
 Or, if the leader Pod encounters an unexpected deadlock.
 
 There is little justification for using more than 2 replicas of these components.
 Further replicas *may* add a degree of resilience
 if you have the luxury of sufficient Nodes
-with sufficient CPU and memory to accommodate the standby replicas.
+with sufficient CPU and memory to accommodate additional standby replicas.
 
 ### webhook
 
@@ -128,7 +128,7 @@ cainjector:
 
 For high availability you should also deploy a `PodDisruptionBudget` resource,
 with `minAvailable=1` *or* with `maxUnavailable=1`.
-This ensures that a *voluntary* disruption, such as the draining of a Node, can not proceed
+This ensures that a *voluntary* disruption, such as the draining of a Node, cannot proceed
 until at least one other replica has been successfully scheduled and started on another Node.
 The Helm chart has parameters to enable and configure a PodDisruptionBudget
 for each of the long-running cert-manager components.
@@ -145,7 +145,7 @@ so you should supply resource requests and limits which are appropriate for your
 
 The controller and cainjector components use leader election to ensure that only one replica is active.
 This prevents conflicts which would arise if multiple replicas were reconciling the same API resources.
-You can not use horizontal scaling for these components.
+You cannot use horizontal scaling for these components.
 Use vertical scaling instead.
 
 #### Memory
