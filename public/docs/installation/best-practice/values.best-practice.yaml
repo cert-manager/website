@@ -99,6 +99,9 @@ webhook:
     readOnly: true
 
 cainjector:
+  extraArgs:
+  - --namespace=cert-manager
+  - --enable-certificates-data-source=false
   replicaCount: 2
   topologySpreadConstraints:
   - maxSkew: 1
