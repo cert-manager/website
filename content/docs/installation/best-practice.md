@@ -156,7 +156,7 @@ This is because each of the components reconciles one or more Kubernetes API res
 and each component will cache the metadata and sometimes the entire resource in memory,
 so as to reduce the load on the Kubernetes API server.
 
-For example, if the cluster contains very many CertificateRequest resources,
+If your cluster contains a high volume of `CertificateRequest` resources such as when using many ephemeral or short lived certificates rotated frequently,
 you will need to increase the memory limit of the controller Pod.
 
 #### CPU
