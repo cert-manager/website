@@ -183,6 +183,23 @@ so as to reduce the load on the Kubernetes API server.
 If your cluster contains a high volume of `CertificateRequest` resources such as when using many ephemeral or short lived certificates rotated frequently,
 you will need to increase the memory limit of the controller Pod.
 
+You can also reduce the memory consumption of `cainjector`
+by configuring it to only watch resources in the `cert-manager` namespace,
+and by configuring it to **not** watch `Certificate` resources.
+Here's how to configure the [cainjector command line flags](../cli/cainjector.md) using Helm chart values:
+
+```yaml
+cainjector:
+  extraArgs:
+  - --namespace=cert-manager
+  - --enable-certificates-data-source=false
+```
+
+> ⚠️️ This optimization is only appropriate if `cainjector` is being used exclusively for the the cert-manager webhook.
+> It is not appropriate if `cainjector` is also being used to manage the TLS certificates for webhooks of other software.
+> For example, some Kubebuilder derived projects may depend on `cainjector`
+> to [inject TLS certificates for their webhooks](https://book.kubebuilder.io/cronjob-tutorial/running-webhook.html#cert-manager).
+
 #### CPU
 
 Use vertical scaling to assign sufficient CPU resources to the these components.
