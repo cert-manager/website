@@ -27,8 +27,16 @@ and in that case you can modify the installation configuration using Helm chart 
 cert-manager has three long-running components: controller, cainjector, and webhook.
 Each of these components has a Deployment and by default each Deployment has 1 replica
 but this does not provide high availability.
-The Helm chart for cert-manager has parameters to configure the `replicaCount` for each Deployment,
-and in production you should use 2 or more replicas to achieve high availability.
+The Helm chart for cert-manager has parameters to configure the `replicaCount` for each Deployment.
+In production we recommend the following `replicaCount` parameters:
+
+```yaml
+replicaCount: 2
+webhook:
+  replicaCount: 3
+cainjector:
+  replicaCount: 2
+```
 
 ### controller and cainjector
 
@@ -51,8 +59,9 @@ with sufficient CPU and memory to accommodate additional standby replicas.
 
 By default the cert-manager webhook Deployment has 1 replica, but in production you should use 3 or more.
 If the cert-manager webhook is unavailable, all API operations on cert-manager custom resources will fail,
-and this will disrupt any software that creates, updates or deletes cert-manager custom resources.
-So it is *especially* important to keep at least one replica of the cert-manager webhook running at all times.
+and this will disrupt any software that creates, updates or deletes cert-manager custom resources,
+and it may cause other disruptions to your cluster.
+So it is *especially* important to keep at multiple replicas of the cert-manager webhook running at all times.
 
 > ℹ️ By contrast, if there is only a single replica of the cert-manager controller, there is less risk of disruption.
 > For example, if the Node hosting the single cert-manager controller manager Pod is drained,
@@ -61,6 +70,10 @@ So it is *especially* important to keep at least one replica of the cert-manager
 > But the controller manager works asynchronously anyway, so any applications which depend on the cert-manager custom resources
 > will be designed to tolerate this situation.
 > That being said, the best practice is to run 2 or more replicas of each controller if the cluster has sufficient resources.
+>
+> 📖 Read [Ensure control plane stability when using webhooks](https://cloud.google.com/kubernetes-engine/docs/how-to/optimize-webhooks)
+> in the Google Kubernetes Engine (GKE) documentation,
+> for examples of how webhook disruptions might disrupt your cluster.
 
 ### Topology Spread Constraints
 
@@ -88,7 +101,6 @@ topologySpreadConstraints:
       app.kubernetes.io/component: controller
 
 webhook:
-  replicaCount: 3
   topologySpreadConstraints:
   - maxSkew: 1
     topologyKey: topology.kubernetes.io/zone
@@ -106,7 +118,6 @@ webhook:
         app.kubernetes.io/component: webhook
 
 cainjector:
-  replicaCount: 2
   topologySpreadConstraints:
   - maxSkew: 1
     topologyKey: topology.kubernetes.io/zone
@@ -132,6 +143,21 @@ This ensures that a *voluntary* disruption, such as the draining of a Node, cann
 until at least one other replica has been successfully scheduled and started on another Node.
 The Helm chart has parameters to enable and configure a PodDisruptionBudget
 for each of the long-running cert-manager components.
+We recommend the following parameters:
+
+```yaml
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+webhook:
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+cainjector:
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+```
 
 ## Scalability
 
