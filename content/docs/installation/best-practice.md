@@ -133,8 +133,6 @@ until at least one other replica has been successfully scheduled and started on 
 The Helm chart has parameters to enable and configure a PodDisruptionBudget
 for each of the long-running cert-manager components.
 
-
-
 ## Scalability
 
 cert-manager has three long-running components: controller, cainjector, and webhook.
@@ -165,20 +163,6 @@ Use vertical scaling to assign sufficient CPU resources to the these components.
 The CPU requirements will be higher on clusters where there are very frequent updates to the resources which are reconciled by these components.
 Whenever a resource changes, it will be queued to be re-reconciled by the component.
 Higher CPU resources allow the component to process the queue faster.
-
-#### Workers
-
-Each of these component spawns a pool of worker threads to reconcile the queue of API resources.
-You may need to increase this if you increase the CPU resources,
-so that each component can make efficient use of the CPU cores assigned to it.
-
-By default the controller [uses 5 workers per controller](https://github.com/cert-manager/cert-manager/blob/3b0a5cec4140e92ba12f3eace362a4bd65fbb30e/cmd/controller/app/options/options.go#L180-L181)
-which should be adequate for most clusters.
-You can change the number of workers using the `--concurrent-workers` [flag of the controller manager](../cli/controller.md).
-
-The cainjector uses a single worker for each of the resource types that it reconciles,
-
-> ⚠️ This this is not yet configurable.
 
 ### webhook
 
