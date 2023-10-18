@@ -230,7 +230,7 @@ data:
 ## Issuance triggers
 
 <a id="renewal-reissuance"></a>
-### Renewal-triggered reissuance
+### Reissuance triggered by expiry (renewal)
 
 cert-manager will automatically renew `Certificate`s. It will calculate _when_ to renew a `Certificate` based on the issued X.509 certificate's duration and a 'renewBefore' value which specifies _how long_ before expiry a certificate should be renewed.
 
@@ -242,14 +242,10 @@ Once an X.509 certificate has been issued, cert-manager will calculate the renew
 
 <a id="non-renewal-reissuance"></a>
 <a id="actions-triggering-private-key-rotation"></a>
-### Non-renewal-triggered reissuance
+### Reissuance triggered by user actions
 
-Setting the `rotationPolicy: Always` won't rotate the private key immediately.
-In order to rotate the private key, the certificate objects must be reissued. A
-certificate object is reissued under the following circumstances:
+A certificate object is reissued under the following circumstances:
 
-- when the X.509 certificate is nearing expiry, which is when the Certificate's
-  `status.renewalTime` is reached;
 - when a change is made to one of the following fields on the Certificate's
   spec: `commonName`, `dnsNames`, `ipAddresses`, `uris`, `emailAddresses`,
   `subject`, `isCA`, `usages`, `duration` or `issuerRef`;
