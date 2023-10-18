@@ -3,6 +3,10 @@ title: Securing Istio Service Mesh
 description: 'cert-manager usage: Istio and istio-csr'
 ---
 
+<div style={{textAlign: "center"}}>
+<object data="/images/request-certificate-overview/request-certificate-mesh.svg"></object>
+</div>
+
 cert-manager can be integrated with [Istio](https://istio.io) using the project
 [istio-csr](https://github.com/cert-manager/istio-csr). istio-csr will deploy an
 agent that is responsible for receiving certificate signing requests for all

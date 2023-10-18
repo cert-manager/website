@@ -6,6 +6,10 @@ description: 'cert-manager usage: Kubernetes Ingress'
 > **apiVersion:** networking.k8s.io/v1  
 > **kind:** Ingress
 
+<div style={{textAlign: "center"}}>
+<object data="/images/request-certificate-overview/request-certificate-ingress.svg"></object>
+</div>
+
 A common use-case for cert-manager is requesting TLS signed certificates to
 secure your ingress resources. This can be done by simply adding annotations to
 your `Ingress` resources and cert-manager will facilitate creating the
