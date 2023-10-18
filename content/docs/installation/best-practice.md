@@ -22,6 +22,174 @@ are designed for backwards compatibility rather than for best practice or maximu
 You may find that the default resources do not comply with the security policy on your Kubernetes cluster
 and in that case you can modify the installation configuration using Helm chart values to override the defaults.
 
+## High Availability
+
+cert-manager has three long-running components: controller, cainjector, and webhook.
+Each of these components has a Deployment and by default each Deployment has 1 replica
+but this does not provide high availability.
+The Helm chart for cert-manager has parameters to configure the `replicaCount` for each Deployment,
+and in production you should use 2 or more replicas to achieve high availability.
+
+### controller and cainjector
+
+The controller and cainjector components use [leader election](https://pkg.go.dev/k8s.io/client-go/tools/leaderelection)
+to ensure that only one replica is active.
+This prevents conflicts which would arise if multiple replicas were reconciling the same API resources.
+So in these components you can use multiple replicas to achieve high availability but not for horizontal scaling.
+
+Use two replicas to ensures that there is a standby Pod scheduled to a Node which is ready to take leadership,
+should the current leader encounter a disruption.
+For example, if the Node on which the leader Pod is running is drained.
+Or, if the leader Pod encounters an unexpected deadlock.
+
+There is little justification for using more than 2 replicas of these components.
+Further replicas *may* add a degree of resilience
+if you have the luxury of sufficient Nodes
+with sufficient CPU and memory to accommodate the standby replicas.
+
+### webhook
+
+By default the cert-manager webhook Deployment has 1 replica, but in production you should use 3 or more.
+If the cert-manager webhook is unavailable, all API operations on cert-manager custom resources will fail,
+and this will disrupt any software that creates, updates or deletes cert-manager custom resources.
+So it is *especially* important to keep at least one replica of the cert-manager webhook running at all times.
+
+> ℹ️ By contrast, if there is only a single replica of the cert-manager controller, there is less risk of disruption.
+> For example, if the Node hosting the single cert-manager controller manager Pod is drained,
+> there will be a delay while a new Pod is started on another Node,
+> and any cert-manager resources that are created or changed during that time will not be reconciled until the new Pod starts up.
+> But the controller manager works asynchronously anyway, so any applications which depend on the cert-manager custom resources
+> will be designed to tolerate this situation.
+> That being said, the best practice is to run 2 or more replicas of each controller if the cluster has sufficient resources.
+
+### Topology Spread Constraints
+
+Ensure that a disruption of a node or data center does not degrade the operation of cert-manager,
+by configuring [Topology Spread Constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
+for each of the components.
+For example, the following Helm chart values add topology spread constraints for all three long-running components,
+to request (but not require) Kubernetes to avoid scheduling Pods of the same Deployment to the same zone or node.
+
+```yaml
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: topology.kubernetes.io/zone
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector:
+    matchLabels:
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/component: controller
+- maxSkew: 1
+  topologyKey: kubernetes.io/hostname
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector:
+    matchLabels:
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/component: controller
+
+webhook:
+  replicaCount: 3
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: cert-manager
+        app.kubernetes.io/component: webhook
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: cert-manager
+        app.kubernetes.io/component: webhook
+
+cainjector:
+  replicaCount: 2
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: cert-manager
+        app.kubernetes.io/component: cainjector
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: cert-manager
+        app.kubernetes.io/component: cainjector
+```
+
+### PodDisruptionBudget
+
+For high availability you should also deploy a `PodDisruptionBudget` resource,
+with `minAvailable=1` *or* with `maxUnavailable=1`.
+This ensures that a *voluntary* disruption, such as the draining of a Node, can not proceed
+until at least one other replica has been successfully scheduled and started on another Node.
+The Helm chart has parameters to enable and configure a PodDisruptionBudget
+for each of the long-running cert-manager components.
+
+
+
+## Scalability
+
+cert-manager has three long-running components: controller, cainjector, and webhook.
+The Helm chart does not include resource requests and limits for any of these,
+so you should supply resource requests and limits which are appropriate for your cluster.
+
+### controller and cainjector
+
+The controller and cainjector components use leader election to ensure that only one replica is active.
+This prevents conflicts which would arise if multiple replicas were reconciling the same API resources.
+You can not use horizontal scaling for these components.
+Use vertical scaling instead.
+
+#### Memory
+
+Use vertical scaling to assign sufficient memory resources to these components.
+The memory requirements will be higher on clusters with very many API resources or with large API resources.
+This is because each of the components reconciles one or more Kubernetes API resources,
+and each component will cache the metadata and sometimes the entire resource in memory,
+so as to reduce the load on the Kubernetes API server.
+
+For example, if the cluster contains very many CertificateRequest resources,
+you will need to increase the memory limit of the controller Pod.
+
+#### CPU
+
+Use vertical scaling to assign sufficient CPU resources to the these components.
+The CPU requirements will be higher on clusters where there are very frequent updates to the resources which are reconciled by these components.
+Whenever a resource changes, it will be queued to be re-reconciled by the component.
+Higher CPU resources allow the component to process the queue faster.
+
+#### Workers
+
+Each of these component spawns a pool of worker threads to reconcile the queue of API resources.
+You may need to increase this if you increase the CPU resources,
+so that each component can make efficient use of the CPU cores assigned to it.
+
+By default the controller [uses 5 workers per controller](https://github.com/cert-manager/cert-manager/blob/3b0a5cec4140e92ba12f3eace362a4bd65fbb30e/cmd/controller/app/options/options.go#L180-L181)
+which should be adequate for most clusters.
+You can change the number of workers using the `--concurrent-workers` [flag of the controller manager](../cli/controller.md).
+
+The cainjector uses a single worker for each of the resource types that it reconciles,
+
+> ⚠️ This this is not yet configurable.
+
+### webhook
+
+The cert-manager webhook does not use leader election, so you *can* scale it horizontally by increasing the number of replicas.
+When the Kubernetes API server connects to the cert-manager webhook it does so via a Service which load balances the connections
+between all the Ready replicas.
+For this reason, there is a clear benefit to increasing the number of webhook replicas to 3 or more,
+on clusters where there is a high frequency of cert-manager custom resource interactions.
+Furthermore, the webhook has modest memory requirements because it does not use a cache.
+For this reason, the resource cost of scaling out the webhook is relatively low.
+
 ## Use Liveness Probes
 
 An example of this recommendation is found in the Datree Documentation:

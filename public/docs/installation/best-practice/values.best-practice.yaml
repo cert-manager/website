@@ -1,5 +1,29 @@
 # Helm chart values which make cert-manager comply with CIS, BSI and NSA
-# security benchmarks.
+# security benchmarks and other best practices for deploying cert-manager in
+# production.
+#
+# Read the rationale for these values in:
+# * https://cert-manager.io/docs/installation/best-practice/
+
+replicaCount: 2
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: topology.kubernetes.io/zone
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector:
+    matchLabels:
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/component: controller
+- maxSkew: 1
+  topologyKey: kubernetes.io/hostname
+  whenUnsatisfiable: ScheduleAnyway
+  labelSelector:
+    matchLabels:
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/component: controller
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
 automountServiceAccountToken: false
 serviceAccount:
   automountServiceAccountToken: false
@@ -28,6 +52,25 @@ volumeMounts:
   readOnly: true
 
 webhook:
+  replicaCount: 3
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: cert-manager
+        app.kubernetes.io/component: webhook
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: cert-manager
+        app.kubernetes.io/component: webhook
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
   automountServiceAccountToken: false
   serviceAccount:
     automountServiceAccountToken: false
@@ -56,6 +99,25 @@ webhook:
     readOnly: true
 
 cainjector:
+  replicaCount: 2
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: cert-manager
+        app.kubernetes.io/component: cainjector
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: cert-manager
+        app.kubernetes.io/component: cainjector
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
   automountServiceAccountToken: false
   serviceAccount:
     automountServiceAccountToken: false

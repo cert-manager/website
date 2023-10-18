@@ -532,6 +532,7 @@ mfmbarros
 maelvls
 bitscuit
 zsh
+PodDisruptionBudget
 PodSecurityPolicy
 ClusterIP
 NodePort
