@@ -51,9 +51,6 @@ For example, when the leader Pod is drained from its node.
 Or, if the leader Pod encounters an unexpected deadlock.
 
 There is little justification for using more than 2 replicas of these components.
-Further replicas *may* add a degree of resilience
-if you have the luxury of sufficient Nodes
-with sufficient CPU and memory to accommodate additional standby replicas.
 
 ### webhook
 
