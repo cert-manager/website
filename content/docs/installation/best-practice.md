@@ -22,6 +22,109 @@ are designed for backwards compatibility rather than for best practice or maximu
 You may find that the default resources do not comply with the security policy on your Kubernetes cluster
 and in that case you can modify the installation configuration using Helm chart values to override the defaults.
 
+## Isolate cert-manager on dedicated node pools
+
+cert-manager is a cluster scoped operator and you should treat it as part of your platform control plane.
+
+The cert-manager controller caches all the Secret resources of the cluster in memory,
+so if an untrusted / malicious workload were to be scheduled to the same Node as the controller,
+and somehow gain privileged access to the underlying node,
+it may be able to read the secrets from memory.
+You can mitigate this risk by running cert-manager on nodes that are reserved for trusted platform operators.
+
+This can be achieved using node taints and node affinity to schedule cert-manager Pods to Nodes
+which are dedicated to running your platform components.
+A node taint tells Kubernetes to avoid scheduling Pods without a corresponding toleration on those nodes.
+The node affinity on Pods tells Kubernetes to schedule those Pods on the dedicated nodes.
+
+The Helm chart for cert-manager has parameters to configure the `tolerations`  and `nodeAffinity` for each component.
+The exact values of these parameters will depend on you particular cluster.
+For example, if you have a pool of nodes
+labelled with `kubectl label node ... node-restriction.kubernetes.io/reserved-for=platform` and
+tainted with `kubectl taint node ... node-restriction.kubernetes.io/reserved-for=platform:NoExecute`,
+you can add the following affinity and tolerations values to allow cert-manager Pods to run on those nodes:
+
+```yaml
+affinity:
+  nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: node-restriction.kubernetes.io/reserved-for
+         operator: In
+         values:
+         - platform
+tolerations:
+- key: node-restriction.kubernetes.io/reserved-for
+  operator: Equal
+  value: platform
+
+webhook:
+  affinity:
+    nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: node-restriction.kubernetes.io/reserved-for
+           operator: In
+           values:
+           - platform
+  tolerations:
+  - key: node-restriction.kubernetes.io/reserved-for
+    operator: Equal
+    value: platform
+
+cainjector:
+  affinity:
+    nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: node-restriction.kubernetes.io/reserved-for
+           operator: In
+           values:
+           - platform
+  tolerations:
+  - key: node-restriction.kubernetes.io/reserved-for
+    operator: Equal
+    value: platform
+
+startupapicheck:
+  affinity:
+    nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: node-restriction.kubernetes.io/reserved-for
+           operator: In
+           values:
+           - platform
+  tolerations:
+  - key: node-restriction.kubernetes.io/reserved-for
+    operator: Equal
+    value: platform
+```
+
+> 📖 Read more about [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
+> in the Kubernetes documentation.
+>
+> 📖 Read the [Guide to isolating tenant workloads to specific nodes](https://aws.github.io/aws-eks-best-practices/security/docs/multitenancy/#isolating-tenant-workloads-to-specific-nodes)
+> in the EKS Best Practice Guides,
+> for an in-depth explanation of these techniques.
+>
+> 📖 Learn how to [Isolate your workloads in dedicated node pools](https://cloud.google.com/kubernetes-engine/docs/how-to/isolate-workloads-dedicated-nodes) on Google Kubernetes Engine.
+>
+> 📖 Read more about the [`node-restriction.kubernetes.io/` prefix and the `NodeRestriction` admission plugin](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction).
+>
+> ℹ️ On a multi-tenant cluster,
+> consider enabling the [`PodTolerationRestriction` plugin](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podtolerationrestriction)
+> to limit which tolerations tenants may add to their Pods.
+> You may also use that plugin to add default tolerations to the `cert-manager` namespace,
+> which obviates the need to explicitly set the tolerations in the Helm chart.
+>
+> ℹ️ Alternatively, you could use Kyverno to limit which tolerations Pods are allowed to use.
+> Read [Restrict control plane scheduling](https://kyverno.io/policies/other/res/restrict-controlplane-scheduling/restrict-controlplane-scheduling/) as a starting point.
+
 ## High Availability
 
 cert-manager has three long-running components: controller, cainjector, and webhook.
