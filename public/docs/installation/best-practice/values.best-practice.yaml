@@ -6,21 +6,6 @@
 # * https://cert-manager.io/docs/installation/best-practice/
 
 replicaCount: 2
-topologySpreadConstraints:
-- maxSkew: 1
-  topologyKey: topology.kubernetes.io/zone
-  whenUnsatisfiable: ScheduleAnyway
-  labelSelector:
-    matchLabels:
-      app.kubernetes.io/instance: cert-manager
-      app.kubernetes.io/component: controller
-- maxSkew: 1
-  topologyKey: kubernetes.io/hostname
-  whenUnsatisfiable: ScheduleAnyway
-  labelSelector:
-    matchLabels:
-      app.kubernetes.io/instance: cert-manager
-      app.kubernetes.io/component: controller
 podDisruptionBudget:
   enabled: true
   minAvailable: 1
@@ -53,21 +38,6 @@ volumeMounts:
 
 webhook:
   replicaCount: 3
-  topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: topology.kubernetes.io/zone
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/instance: cert-manager
-        app.kubernetes.io/component: webhook
-  - maxSkew: 1
-    topologyKey: kubernetes.io/hostname
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/instance: cert-manager
-        app.kubernetes.io/component: webhook
   podDisruptionBudget:
     enabled: true
     minAvailable: 1
@@ -103,21 +73,6 @@ cainjector:
   - --namespace=cert-manager
   - --enable-certificates-data-source=false
   replicaCount: 2
-  topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: topology.kubernetes.io/zone
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/instance: cert-manager
-        app.kubernetes.io/component: cainjector
-  - maxSkew: 1
-    topologyKey: kubernetes.io/hostname
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/instance: cert-manager
-        app.kubernetes.io/component: cainjector
   podDisruptionBudget:
     enabled: true
     minAvailable: 1
