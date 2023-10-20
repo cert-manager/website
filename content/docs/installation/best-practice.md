@@ -77,63 +77,30 @@ So it is *especially* important to keep at multiple replicas of the cert-manager
 
 ### Topology Spread Constraints
 
-Ensure that a disruption of a node or data center does not degrade the operation of cert-manager,
-by configuring [Topology Spread Constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
-for each of the components.
-For example, the following Helm chart values add topology spread constraints for all three long-running components,
-to request (but not require) Kubernetes to avoid scheduling Pods of the same Deployment to the same zone or node.
+Consider using [Topology Spread Constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/),
+to ensure that a disruption of a node or data center does not degrade the operation of cert-manager.
 
-```yaml
-topologySpreadConstraints:
-- maxSkew: 1
-  topologyKey: topology.kubernetes.io/zone
-  whenUnsatisfiable: ScheduleAnyway
-  labelSelector:
-    matchLabels:
-      app.kubernetes.io/instance: cert-manager
-      app.kubernetes.io/component: controller
-- maxSkew: 1
-  topologyKey: kubernetes.io/hostname
-  whenUnsatisfiable: ScheduleAnyway
-  labelSelector:
-    matchLabels:
-      app.kubernetes.io/instance: cert-manager
-      app.kubernetes.io/component: controller
+For high availability you do not want the replica Pods to be scheduled on the same Node,
+because if that node fails, both the active and standby Pods will exit,
+and there will be no further reconciliation of the resources by that controller,
+until there is another Node with sufficient free resources to run a new Pod,
+and until that Pod has become Ready.
 
-webhook:
-  topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: topology.kubernetes.io/zone
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/instance: cert-manager
-        app.kubernetes.io/component: webhook
-  - maxSkew: 1
-    topologyKey: kubernetes.io/hostname
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/instance: cert-manager
-        app.kubernetes.io/component: webhook
+It is also desirable for the Pods to be running in separate data centers (availability zones),
+if the cluster has nodes distributed between zones.
+Then, in the event of a failure at the data center hosting the active Pod ,
+the standby Pod will immediately be available to take leadership.
 
-cainjector:
-  topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: topology.kubernetes.io/zone
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/instance: cert-manager
-        app.kubernetes.io/component: cainjector
-  - maxSkew: 1
-    topologyKey: kubernetes.io/hostname
-    whenUnsatisfiable: ScheduleAnyway
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/instance: cert-manager
-        app.kubernetes.io/component: cainjector
-```
+Fortunately you may not need to do anything to achieve these goals
+because [Kubernetes >= 1.24 has Built-in default constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#internal-default-constraints)
+which should mean that the high availablity scheduling described above will happen implicitly.
+
+> ℹ️ In case your cluster does not use Built-in default constraints.
+>
+> You can add [Topology Spread Constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
+> to each of the cert-manager components using Helm chart values.
+> For example, the following Helm chart values add topology spread constraints for all three long-running components,
+> to request (but not require) Kubernetes to avoid scheduling Pods of the same Deployment to the same zone or node.
 
 ### PodDisruptionBudget
 
