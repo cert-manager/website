@@ -71,6 +71,9 @@ So it is *especially* important to keep at multiple replicas of the cert-manager
 > 📖 Read [Ensure control plane stability when using webhooks](https://cloud.google.com/kubernetes-engine/docs/how-to/optimize-webhooks)
 > in the Google Kubernetes Engine (GKE) documentation,
 > for examples of how webhook disruptions might disrupt your cluster.
+>
+> 📖 Read [The dark side of Kubernetes admission webhooks](https://techblog.cisco.com/blog/dark-side-of-kubernetes-admission-webhooks)
+> on the Cisco Tech Blog, to learn more about potential issues caused by webhooks and how you can avoid them.
 
 ### Topology Spread Constraints
 
