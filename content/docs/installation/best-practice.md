@@ -93,11 +93,8 @@ because [Kubernetes >= 1.24 has Built-in default constraints](https://kubernetes
 which should mean that the high availability scheduling described above will happen implicitly.
 
 > ℹ️ In case your cluster does not use Built-in default constraints.
->
 > You can add [Topology Spread Constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
 > to each of the cert-manager components using Helm chart values.
-> For example, the following Helm chart values add topology spread constraints for all three long-running components,
-> to request (but not require) Kubernetes to avoid scheduling Pods of the same Deployment to the same zone or node.
 
 ### PodDisruptionBudget
 
