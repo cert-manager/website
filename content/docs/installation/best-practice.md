@@ -90,7 +90,7 @@ the standby Pod will immediately be available to take leadership.
 
 Fortunately you may not need to do anything to achieve these goals
 because [Kubernetes >= 1.24 has Built-in default constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#internal-default-constraints)
-which should mean that the high availablity scheduling described above will happen implicitly.
+which should mean that the high availability scheduling described above will happen implicitly.
 
 > ℹ️ In case your cluster does not use Built-in default constraints.
 >
