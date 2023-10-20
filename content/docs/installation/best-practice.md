@@ -101,8 +101,8 @@ which should mean that the high availability scheduling described above will hap
 
 ### PodDisruptionBudget
 
-For high availability you should also deploy a `PodDisruptionBudget` resource,
-with `minAvailable=1` *or* with `maxUnavailable=1`.
+For high availability you should also deploy a `PodDisruptionBudget` resource with `minAvailable=1`.
+
 This ensures that a *voluntary* disruption, such as the draining of a Node, cannot proceed
 until at least one other replica has been successfully scheduled and started on another Node.
 The Helm chart has parameters to enable and configure a PodDisruptionBudget
@@ -122,6 +122,12 @@ cainjector:
     enabled: true
     minAvailable: 1
 ```
+
+> 📖 Read about [Specifying a Disruption Budget for your Application](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) in the Kubernetes documentation.
+>
+> ⚠️ These PodDisruptionBudget settings are only suitable for high availability deployments.
+> You must increase the `replicaCount` of each Deployment to more than the `minAvailable` value,
+> otherwise the PodDisruptionBudget will prevent you from draining cert-manager Pods.
 
 ## Scalability
 
