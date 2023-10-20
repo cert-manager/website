@@ -59,7 +59,7 @@ with sufficient CPU and memory to accommodate additional standby replicas.
 
 By default the cert-manager webhook Deployment has 1 replica, but in production you should use 3 or more.
 If the cert-manager webhook is unavailable, all API operations on cert-manager custom resources will fail,
-and this will disrupt any software that creates, updates or deletes cert-manager custom resources,
+and this will disrupt any software that creates, updates or deletes cert-manager custom resources (including cert-manager itself),
 and it may cause other disruptions to your cluster.
 So it is *especially* important to keep at multiple replicas of the cert-manager webhook running at all times.
 
