@@ -39,7 +39,7 @@ This can be achieved using a combination of Node taints, Pod tolerations and Pod
 * A Pod `toleration` tells the Kubernetes scheduler to *allow* Pods on the tainted Node.
 * A Pod `nodeSelector` tells the Kubernetes scheduler to *place* Pods on a Node with matching labels.
 
-The Helm chart for cert-manager has parameters to configure the Pod `tolerations`  and `nodeSelector` for each component.
+The Helm chart for cert-manager has parameters to configure the Pod `tolerations` and `nodeSelector` for each component.
 The exact values of these parameters will depend on your particular cluster.
 For example, if you have a pool of nodes
 labelled with `kubectl label node ... node-restriction.kubernetes.io/reserved-for=platform` and
