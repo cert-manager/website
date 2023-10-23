@@ -25,86 +25,70 @@ and in that case you can modify the installation configuration using Helm chart 
 ## Isolate cert-manager on dedicated node pools
 
 cert-manager is a cluster scoped operator and you should treat it as part of your platform control plane.
+The cert-manager controller creates and modifies Kubernetes Secret resources
+and the controller and cainjector both cache TLS Secret resources in memory.
+These are two reasons why you should consider isolating the cert-manager components from
+other less privileged workloads.
+For example, if an untrusted or malicious workload runs on the same Node as the cert-manager controller,
+and somehow gains root access to the underlying node,
+it may be able to read the private keys in Secrets that the controller has cached in memory.
 
-The cert-manager controller caches all the Secret resources of the cluster in memory,
-so if an untrusted / malicious workload were to be scheduled to the same Node as the controller,
-and somehow gain privileged access to the underlying node,
-it may be able to read the secrets from memory.
 You can mitigate this risk by running cert-manager on nodes that are reserved for trusted platform operators.
+This can be achieved using a combination of Node taints, Pod tolerations and Pod node selector settings.
+* A Node `taint` tells the Kubernetes scheduler to *exclude* Pods from a Node, by default.
+* A Pod `toleration` tells the Kubernetes scheduler to *allow* Pods on the tainted Node.
+* A Pod `nodeSelector` tells the Kubernetes scheduler to *place* Pods on a Node with matching labels.
 
-This can be achieved using node taints and node affinity to schedule cert-manager Pods to Nodes
-which are dedicated to running your platform components.
-A node taint tells Kubernetes to avoid scheduling Pods without a corresponding toleration on those nodes.
-The node affinity on Pods tells Kubernetes to schedule those Pods on the dedicated nodes.
-
-The Helm chart for cert-manager has parameters to configure the `tolerations`  and `nodeAffinity` for each component.
-The exact values of these parameters will depend on you particular cluster.
+The Helm chart for cert-manager has parameters to configure the Pod `tolerations`  and `nodeSelector` for each component.
+The exact values of these parameters will depend on your particular cluster.
 For example, if you have a pool of nodes
 labelled with `kubectl label node ... node-restriction.kubernetes.io/reserved-for=platform` and
 tainted with `kubectl taint node ... node-restriction.kubernetes.io/reserved-for=platform:NoExecute`,
-you can add the following affinity and tolerations values to allow cert-manager Pods to run on those nodes:
+you can use the following values to run cert-manager Pods on those nodes:
 
 ```yaml
-affinity:
-  nodeAffinity:
-   requiredDuringSchedulingIgnoredDuringExecution:
-     nodeSelectorTerms:
-     - matchExpressions:
-       - key: node-restriction.kubernetes.io/reserved-for
-         operator: In
-         values:
-         - platform
+nodeSelector:
+  kubernetes.io/os: linux
+  node-restriction.kubernetes.io/reserved-for: platform
 tolerations:
 - key: node-restriction.kubernetes.io/reserved-for
   operator: Equal
   value: platform
 
 webhook:
-  affinity:
-    nodeAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-       nodeSelectorTerms:
-       - matchExpressions:
-         - key: node-restriction.kubernetes.io/reserved-for
-           operator: In
-           values:
-           - platform
+  nodeSelector:
+    kubernetes.io/os: linux
+    node-restriction.kubernetes.io/reserved-for: platform
   tolerations:
   - key: node-restriction.kubernetes.io/reserved-for
     operator: Equal
     value: platform
 
 cainjector:
-  affinity:
-    nodeAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-       nodeSelectorTerms:
-       - matchExpressions:
-         - key: node-restriction.kubernetes.io/reserved-for
-           operator: In
-           values:
-           - platform
+  nodeSelector:
+    kubernetes.io/os: linux
+    node-restriction.kubernetes.io/reserved-for: platform
   tolerations:
   - key: node-restriction.kubernetes.io/reserved-for
     operator: Equal
     value: platform
 
 startupapicheck:
-  affinity:
-    nodeAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-       nodeSelectorTerms:
-       - matchExpressions:
-         - key: node-restriction.kubernetes.io/reserved-for
-           operator: In
-           values:
-           - platform
+  nodeSelector:
+    kubernetes.io/os: linux
+    node-restriction.kubernetes.io/reserved-for: platform
   tolerations:
   - key: node-restriction.kubernetes.io/reserved-for
     operator: Equal
     value: platform
 ```
 
+> ℹ️ This example uses `nodeSelector` to *place* the Pods but you could also use `affinity.nodeAffinity`.
+> `nodeSelector` is chosen here because it has a simpler syntax.
+>
+> ℹ️ The default `nodeSelector` value `kubernetes.io/os: linux` [avoids placing cert-manager Pods on Windows nodes in a mixed OS cluster](https://github.com/cert-manager/cert-manager/pull/3605),
+> so that must be explicitly included here too.
+>
 > 📖 Read more about [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
 > in the Kubernetes documentation.
 >
