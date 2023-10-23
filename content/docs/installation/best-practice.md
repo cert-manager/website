@@ -24,7 +24,7 @@ and in that case you can modify the installation configuration using Helm chart 
 
 ## Isolate cert-manager on dedicated node pools
 
-cert-manager is a cluster scoped operator and you should treat it as part of your platform control plane.
+cert-manager is a cluster scoped operator and you should treat it as part of your platform's control plane.
 The cert-manager controller creates and modifies Kubernetes Secret resources
 and the controller and cainjector both cache TLS Secret resources in memory.
 These are two reasons why you should consider isolating the cert-manager components from
@@ -90,13 +90,13 @@ startupapicheck:
 > so that must be explicitly included here too.
 >
 > 📖 Read more about [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
-> in the Kubernetes documentation.
+> in the [Kubernetes documentation](https://kubernetes.io/docs/).
 >
 > 📖 Read the [Guide to isolating tenant workloads to specific nodes](https://aws.github.io/aws-eks-best-practices/security/docs/multitenancy/#isolating-tenant-workloads-to-specific-nodes)
-> in the EKS Best Practice Guides,
+> in the [EKS Best Practice Guides](https://aws.github.io/aws-eks-best-practices/),
 > for an in-depth explanation of these techniques.
 >
-> 📖 Learn how to [Isolate your workloads in dedicated node pools](https://cloud.google.com/kubernetes-engine/docs/how-to/isolate-workloads-dedicated-nodes) on Google Kubernetes Engine.
+> 📖 Learn how to [Isolate your workloads in dedicated node pools](https://cloud.google.com/kubernetes-engine/docs/how-to/isolate-workloads-dedicated-nodes) on [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/).
 >
 > 📖 Read more about the [`node-restriction.kubernetes.io/` prefix and the `NodeRestriction` admission plugin](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction).
 >
@@ -106,7 +106,7 @@ startupapicheck:
 > You may also use that plugin to add default tolerations to the `cert-manager` namespace,
 > which obviates the need to explicitly set the tolerations in the Helm chart.
 >
-> ℹ️ Alternatively, you could use Kyverno to limit which tolerations Pods are allowed to use.
+> ℹ️ Alternatively, you could use [Kyverno](https://kyverno.io/docs/) to limit which tolerations Pods are allowed to use.
 > Read [Restrict control plane scheduling](https://kyverno.io/policies/other/res/restrict-controlplane-scheduling/restrict-controlplane-scheduling/) as a starting point.
 
 ## High Availability
