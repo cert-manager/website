@@ -3,9 +3,10 @@ title: Upgrading cert-manager
 description: 'cert-manager installation: Upgrading cert-manager overview'
 ---
 
-This section contains information on upgrading cert-manager.
-It also contains documents detailing breaking changes between cert-manager
-versions, and information on things to look out for when upgrading.
+In the [releases section](../releases/README.md) of the documentation, you can find the release notes
+and upgrade instructions for each release of cert-manager. It also contains
+information on the breaking changes between each release and things to look out
+for when upgrading.
 
 > Note: Before performing upgrades of cert-manager, it is advised to take a
 > backup of all your cert-manager resources just in case an issue occurs whilst
