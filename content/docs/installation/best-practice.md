@@ -34,17 +34,30 @@ and somehow gains root access to the underlying node,
 it may be able to read the private keys in Secrets that the controller has cached in memory.
 
 You can mitigate this risk by running cert-manager on nodes that are reserved for trusted platform operators.
-This can be achieved using a combination of Node taints, Pod tolerations and Pod node selector settings.
-* A Node `taint` tells the Kubernetes scheduler to *exclude* Pods from a Node, by default.
-* A Pod `toleration` tells the Kubernetes scheduler to *allow* Pods on the tainted Node.
-* A Pod `nodeSelector` tells the Kubernetes scheduler to *place* Pods on a Node with matching labels.
 
 The Helm chart for cert-manager has parameters to configure the Pod `tolerations` and `nodeSelector` for each component.
 The exact values of these parameters will depend on your particular cluster.
-For example, if you have a pool of nodes
-labelled with `kubectl label node ... node-restriction.kubernetes.io/reserved-for=platform` and
-tainted with `kubectl taint node ... node-restriction.kubernetes.io/reserved-for=platform:NoExecute`,
-you can use the following values to run cert-manager Pods on those nodes:
+
+### Example
+
+This example demonstrates how to use:
+`taints` to *repel* non-platform Pods from Nodes which you have reserved for your platform's control-plane,
+`tolerations` to *allow* cert-manager Pods to run on those Nodes, and
+`nodeSelector` to *place* the cert-manager Pods on those Nodes.
+
+Label the Nodes:
+
+```bash
+kubectl label node ... node-restriction.kubernetes.io/reserved-for=platform
+```
+
+Taint the Nodes:
+
+```bash
+kubectl taint node ... node-restriction.kubernetes.io/reserved-for=platform:NoExecute
+```
+
+Then install cert-manager using the following Helm chart values:
 
 ```yaml
 nodeSelector:
@@ -85,6 +98,7 @@ startupapicheck:
 
 > ℹ️ This example uses `nodeSelector` to *place* the Pods but you could also use `affinity.nodeAffinity`.
 > `nodeSelector` is chosen here because it has a simpler syntax.
+> Read [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) to learn more.
 >
 > ℹ️ The default `nodeSelector` value `kubernetes.io/os: linux` [avoids placing cert-manager Pods on Windows nodes in a mixed OS cluster](https://github.com/cert-manager/cert-manager/pull/3605),
 > so that must be explicitly included here too.
