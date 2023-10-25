@@ -112,6 +112,8 @@ startupapicheck:
 >
 > 📖 Learn how to [Isolate your workloads in dedicated node pools](https://cloud.google.com/kubernetes-engine/docs/how-to/isolate-workloads-dedicated-nodes) on [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/).
 >
+> 📖 Learn about [Placing pods on specific nodes using node selectors, with RedHat OpenShift](https://docs.openshift.com/container-platform/4.13/nodes/scheduling/nodes-scheduler-node-selectors.html).
+>
 > 📖 Read more about the [`node-restriction.kubernetes.io/` prefix and the `NodeRestriction` admission plugin](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction).
 >
 > ℹ️ On a multi-tenant cluster,
