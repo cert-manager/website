@@ -80,10 +80,6 @@ The following list contains all known cert-manager issuer integrations.
 If you've created an issuer which you'd like to share,
 [raise a Pull Request](https://github.com/cert-manager/website/pulls) to have it added here!
 
-## Building New External Issuers
-
-If you're interested in building a new external issuer, check the [development documentation](../contributing/external-issuers.md).
-
 ## Issuer Tier system
 
 The cert-manager project has a tier system for issuers. This is to help users
@@ -109,3 +105,7 @@ Other
 
 [^1]: checked on 12th of October 2023
 [^2]: checked on 12th of October 2023
+
+## Building New External Issuers
+
+If you're interested in building a new external issuer, check the [development documentation](../contributing/external-issuers.md).
