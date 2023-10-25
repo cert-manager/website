@@ -10,8 +10,8 @@ Since the number of potential issuers is larger than what could reasonably be su
 main cert-manager repository, cert-manager also supports out-of-tree external issuers, and treats
 them the same as in-tree issuer types.
 
-This document is for people looking to _create_ external issuers. For more information on how to
-install and configure external issuer types, read the [configuration documentation](../configuration/external.md).
+This document is for people looking to _create_ external issuers.
+For a list of example external issuers, see the [issuers page](../configuration/issuers.md).
 
 ## General Overview
 
