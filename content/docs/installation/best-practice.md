@@ -22,6 +22,111 @@ are designed for backwards compatibility rather than for best practice or maximu
 You may find that the default resources do not comply with the security policy on your Kubernetes cluster
 and in that case you can modify the installation configuration using Helm chart values to override the defaults.
 
+## Isolate cert-manager on dedicated node pools
+
+cert-manager is a cluster scoped operator and you should treat it as part of your platform's control plane.
+The cert-manager controller creates and modifies Kubernetes Secret resources
+and the controller and cainjector both cache TLS Secret resources in memory.
+These are two reasons why you should consider isolating the cert-manager components from
+other less privileged workloads.
+For example, if an untrusted or malicious workload runs on the same Node as the cert-manager controller,
+and somehow gains root access to the underlying node,
+it may be able to read the private keys in Secrets that the controller has cached in memory.
+
+You can mitigate this risk by running cert-manager on nodes that are reserved for trusted platform operators.
+
+The Helm chart for cert-manager has parameters to configure the Pod `tolerations` and `nodeSelector` for each component.
+The exact values of these parameters will depend on your particular cluster.
+
+> 📖 Read [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
+> in the [Kubernetes documentation](https://kubernetes.io/docs/).
+>
+> 📖 Read about [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
+> in the [Kubernetes documentation](https://kubernetes.io/docs/).
+
+### Example
+
+This example demonstrates how to use:
+`taints` to *repel* non-platform Pods from Nodes which you have reserved for your platform's control-plane,
+`tolerations` to *allow* cert-manager Pods to run on those Nodes, and
+`nodeSelector` to *place* the cert-manager Pods on those Nodes.
+
+Label the Nodes:
+
+```bash
+kubectl label node ... node-restriction.kubernetes.io/reserved-for=platform
+```
+
+Taint the Nodes:
+
+```bash
+kubectl taint node ... node-restriction.kubernetes.io/reserved-for=platform:NoExecute
+```
+
+Then install cert-manager using the following Helm chart values:
+
+```yaml
+nodeSelector:
+  kubernetes.io/os: linux
+  node-restriction.kubernetes.io/reserved-for: platform
+tolerations:
+- key: node-restriction.kubernetes.io/reserved-for
+  operator: Equal
+  value: platform
+
+webhook:
+  nodeSelector:
+    kubernetes.io/os: linux
+    node-restriction.kubernetes.io/reserved-for: platform
+  tolerations:
+  - key: node-restriction.kubernetes.io/reserved-for
+    operator: Equal
+    value: platform
+
+cainjector:
+  nodeSelector:
+    kubernetes.io/os: linux
+    node-restriction.kubernetes.io/reserved-for: platform
+  tolerations:
+  - key: node-restriction.kubernetes.io/reserved-for
+    operator: Equal
+    value: platform
+
+startupapicheck:
+  nodeSelector:
+    kubernetes.io/os: linux
+    node-restriction.kubernetes.io/reserved-for: platform
+  tolerations:
+  - key: node-restriction.kubernetes.io/reserved-for
+    operator: Equal
+    value: platform
+```
+
+> ℹ️ This example uses `nodeSelector` to *place* the Pods but you could also use `affinity.nodeAffinity`.
+> `nodeSelector` is chosen here because it has a simpler syntax.
+>
+> ℹ️ The default `nodeSelector` value `kubernetes.io/os: linux` [avoids placing cert-manager Pods on Windows nodes in a mixed OS cluster](https://github.com/cert-manager/cert-manager/pull/3605),
+> so that must be explicitly included here too.
+>
+> 📖 Read the [Guide to isolating tenant workloads to specific nodes](https://aws.github.io/aws-eks-best-practices/security/docs/multitenancy/#isolating-tenant-workloads-to-specific-nodes)
+> in the [EKS Best Practice Guides](https://aws.github.io/aws-eks-best-practices/),
+> for an in-depth explanation of these techniques.
+>
+> 📖 Learn how to [Isolate your workloads in dedicated node pools](https://cloud.google.com/kubernetes-engine/docs/how-to/isolate-workloads-dedicated-nodes) on [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/).
+>
+> 📖 Learn about [Placing pods on specific nodes using node selectors, with RedHat OpenShift](https://docs.openshift.com/container-platform/4.13/nodes/scheduling/nodes-scheduler-node-selectors.html).
+>
+> 📖 Read more about the [`node-restriction.kubernetes.io/` prefix and the `NodeRestriction` admission plugin](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction).
+>
+> ℹ️ On a multi-tenant cluster,
+> consider enabling the [`PodTolerationRestriction` plugin](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podtolerationrestriction)
+> to limit which tolerations tenants may add to their Pods.
+> You may also use that plugin to add default tolerations to the `cert-manager` namespace,
+> which obviates the need to explicitly set the tolerations in the Helm chart.
+>
+> ℹ️ Alternatively, you could use [Kyverno](https://kyverno.io/docs/) to limit which tolerations Pods are allowed to use.
+> Read [Restrict control plane scheduling](https://kyverno.io/policies/other/res/restrict-controlplane-scheduling/restrict-controlplane-scheduling/) as a starting point.
+
 ## High Availability
 
 cert-manager has three long-running components: controller, cainjector, and webhook.
