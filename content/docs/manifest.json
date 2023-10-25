@@ -24,7 +24,7 @@
               "path": "/docs/releases/release-notes/release-notes-1.13.md"
             },
             {
-              "title": "upgrade 1.12 to 1.13",
+              "title": "Upgrade 1.12 to 1.13",
               "path": "/docs/releases/upgrading/upgrading-1.12-1.13.md"
             },
             {
@@ -32,7 +32,7 @@
               "path": "/docs/releases/release-notes/release-notes-1.12.md"
             },
             {
-              "title": "upgrade 1.11 to 1.12",
+              "title": "Upgrade 1.11 to 1.12",
               "path": "/docs/releases/upgrading/upgrading-1.11-1.12.md"
             },
             {
@@ -51,7 +51,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.11.md"
                 },
                 {
-                  "title": "upgrade 1.10 to 1.11",
+                  "title": "Upgrade 1.10 to 1.11",
                   "path": "/docs/releases/upgrading/upgrading-1.10-1.11.md"
                 },
                 {
@@ -59,7 +59,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.10.md"
                 },
                 {
-                  "title": "upgrade 1.9 to 1.10",
+                  "title": "Upgrade 1.9 to 1.10",
                   "path": "/docs/releases/upgrading/upgrading-1.9-1.10.md"
                 },
                 {
@@ -67,7 +67,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.9.md"
                 },
                 {
-                  "title": "upgrade 1.8 to 1.9",
+                  "title": "Upgrade 1.8 to 1.9",
                   "path": "/docs/releases/upgrading/upgrading-1.8-1.9.md"
                 },
                 {
@@ -75,7 +75,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.8.md"
                 },
                 {
-                  "title": "upgrade 1.7 to 1.8",
+                  "title": "Upgrade 1.7 to 1.8",
                   "path": "/docs/releases/upgrading/upgrading-1.7-1.8.md"
                 },
                 {
@@ -83,7 +83,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.7.md"
                 },
                 {
-                  "title": "upgrade 1.6 to 1.7",
+                  "title": "Upgrade 1.6 to 1.7",
                   "path": "/docs/releases/upgrading/upgrading-1.6-1.7.md"
                 },
                 {
@@ -91,7 +91,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.6.md"
                 },
                 {
-                  "title": "upgrade 1.5 to 1.6",
+                  "title": "Upgrade 1.5 to 1.6",
                   "path": "/docs/releases/upgrading/upgrading-1.5-1.6.md"
                 },
                 {
@@ -99,7 +99,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.5.md"
                 },
                 {
-                  "title": "upgrade 1.4 to 1.5",
+                  "title": "Upgrade 1.4 to 1.5",
                   "path": "/docs/releases/upgrading/upgrading-1.4-1.5.md"
                 },
                 {
@@ -107,7 +107,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.4.md"
                 },
                 {
-                  "title": "upgrade 1.3 to 1.4",
+                  "title": "Upgrade 1.3 to 1.4",
                   "path": "/docs/releases/upgrading/upgrading-1.3-1.4.md"
                 },
                 {
@@ -115,7 +115,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.3.md"
                 },
                 {
-                  "title": "upgrade 1.2 to 1.3",
+                  "title": "Upgrade 1.2 to 1.3",
                   "path": "/docs/releases/upgrading/upgrading-1.2-1.3.md"
                 },
                 {
@@ -123,7 +123,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.2.md"
                 },
                 {
-                  "title": "upgrade 1.1 to 1.2",
+                  "title": "Upgrade 1.1 to 1.2",
                   "path": "/docs/releases/upgrading/upgrading-1.1-1.2.md"
                 },
                 {
@@ -131,7 +131,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.1.md"
                 },
                 {
-                  "title": "upgrade 1.0 to 1.1",
+                  "title": "Upgrade 1.0 to 1.1",
                   "path": "/docs/releases/upgrading/upgrading-1.0-1.1.md"
                 },
                 {
@@ -139,7 +139,7 @@
                   "path": "/docs/releases/release-notes/release-notes-1.0.md"
                 },
                 {
-                  "title": "upgrade 0.16 to 1.0",
+                  "title": "Upgrade 0.16 to 1.0",
                   "path": "/docs/releases/upgrading/upgrading-0.16-1.0.md"
                 },
                 {
@@ -147,7 +147,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.16.md"
                 },
                 {
-                  "title": "upgrade 0.15 to 0.16",
+                  "title": "Upgrade 0.15 to 0.16",
                   "path": "/docs/releases/upgrading/upgrading-0.15-0.16.md"
                 },
                 {
@@ -155,7 +155,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.15.md"
                 },
                 {
-                  "title": "upgrade 0.14 to 0.15",
+                  "title": "Upgrade 0.14 to 0.15",
                   "path": "/docs/releases/upgrading/upgrading-0.14-0.15.md"
                 },
                 {
@@ -163,7 +163,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.14.md"
                 },
                 {
-                  "title": "upgrade 0.13 to 0.14",
+                  "title": "Upgrade 0.13 to 0.14",
                   "path": "/docs/releases/upgrading/upgrading-0.13-0.14.md"
                 },
                 {
@@ -171,7 +171,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.13.md"
                 },
                 {
-                  "title": "upgrade 0.12 to 0.13",
+                  "title": "Upgrade 0.12 to 0.13",
                   "path": "/docs/releases/upgrading/upgrading-0.12-0.13.md"
                 },
                 {
@@ -179,7 +179,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.12.md"
                 },
                 {
-                  "title": "upgrade 0.11 to 0.12",
+                  "title": "Upgrade 0.11 to 0.12",
                   "path": "/docs/releases/upgrading/upgrading-0.11-0.12.md"
                 },
                 {
@@ -187,7 +187,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.11.md"
                 },
                 {
-                  "title": "upgrade 0.10 to 0.11",
+                  "title": "Upgrade 0.10 to 0.11",
                   "path": "/docs/releases/upgrading/upgrading-0.10-0.11.md"
                 },
                 {
@@ -195,7 +195,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.10.md"
                 },
                 {
-                  "title": "upgrade 0.9 to 0.10",
+                  "title": "Upgrade 0.9 to 0.10",
                   "path": "/docs/releases/upgrading/upgrading-0.9-0.10.md"
                 },
                 {
@@ -203,7 +203,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.9.md"
                 },
                 {
-                  "title": "upgrade 0.8 to 0.9",
+                  "title": "Upgrade 0.8 to 0.9",
                   "path": "/docs/releases/upgrading/upgrading-0.8-0.9.md"
                 },
                 {
@@ -211,7 +211,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.8.md"
                 },
                 {
-                  "title": "upgrade 0.7 to 0.8",
+                  "title": "Upgrade 0.7 to 0.8",
                   "path": "/docs/releases/upgrading/upgrading-0.7-0.8.md"
                 },
                 {
@@ -219,7 +219,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.7.md"
                 },
                 {
-                  "title": "upgrade 0.6 to 0.7",
+                  "title": "Upgrade 0.6 to 0.7",
                   "path": "/docs/releases/upgrading/upgrading-0.6-0.7.md"
                 },
                 {
@@ -227,7 +227,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.6.md"
                 },
                 {
-                  "title": "upgrade 0.5 to 0.6",
+                  "title": "Upgrade 0.5 to 0.6",
                   "path": "/docs/releases/upgrading/upgrading-0.5-0.6.md"
                 },
                 {
@@ -235,7 +235,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.5.md"
                 },
                 {
-                  "title": "upgrade 0.4 to 0.5",
+                  "title": "Upgrade 0.4 to 0.5",
                   "path": "/docs/releases/upgrading/upgrading-0.4-0.5.md"
                 },
                 {
@@ -243,7 +243,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.4.md"
                 },
                 {
-                  "title": "upgrade 0.3 to 0.4",
+                  "title": "Upgrade 0.3 to 0.4",
                   "path": "/docs/releases/upgrading/upgrading-0.3-0.4.md"
                 },
                 {
@@ -251,7 +251,7 @@
                   "path": "/docs/releases/release-notes/release-notes-0.3.md"
                 },
                 {
-                  "title": "upgrade 0.2 to 0.3",
+                  "title": "Upgrade 0.2 to 0.3",
                   "path": "/docs/releases/upgrading/upgrading-0.2-0.3.md"
                 },
                 {
