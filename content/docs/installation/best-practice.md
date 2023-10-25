@@ -38,6 +38,12 @@ You can mitigate this risk by running cert-manager on nodes that are reserved fo
 The Helm chart for cert-manager has parameters to configure the Pod `tolerations` and `nodeSelector` for each component.
 The exact values of these parameters will depend on your particular cluster.
 
+> 📖 Read [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
+> in the [Kubernetes documentation](https://kubernetes.io/docs/).
+>
+> 📖 Read about [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
+> in the [Kubernetes documentation](https://kubernetes.io/docs/).
+
 ### Example
 
 This example demonstrates how to use:
@@ -98,13 +104,9 @@ startupapicheck:
 
 > ℹ️ This example uses `nodeSelector` to *place* the Pods but you could also use `affinity.nodeAffinity`.
 > `nodeSelector` is chosen here because it has a simpler syntax.
-> Read [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) to learn more.
 >
 > ℹ️ The default `nodeSelector` value `kubernetes.io/os: linux` [avoids placing cert-manager Pods on Windows nodes in a mixed OS cluster](https://github.com/cert-manager/cert-manager/pull/3605),
 > so that must be explicitly included here too.
->
-> 📖 Read more about [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
-> in the [Kubernetes documentation](https://kubernetes.io/docs/).
 >
 > 📖 Read the [Guide to isolating tenant workloads to specific nodes](https://aws.github.io/aws-eks-best-practices/security/docs/multitenancy/#isolating-tenant-workloads-to-specific-nodes)
 > in the [EKS Best Practice Guides](https://aws.github.io/aws-eks-best-practices/),
