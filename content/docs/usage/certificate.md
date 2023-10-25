@@ -249,6 +249,7 @@ A certificate object is reissued under the following circumstances:
 - when a change is made to one of the following fields on the Certificate's
   spec: `commonName`, `dnsNames`, `ipAddresses`, `uris`, `emailAddresses`,
   `subject`, `isCA`, `usages`, `duration` or `issuerRef`;
+  A more detailed explanation can be found on the [FAQ page](../faq/README.md#when-do-certs-get-re-issued).
 - when a reissuance is manually triggered with the following:
   ```sh
   cmctl renew cert-1
@@ -269,10 +270,8 @@ cmctl renew cert-1
 
 </div>
 
-## Issuance behavior
-
 <a id="temporary-certificates-whilst-issuing"></a>
-### Temporary Certificates while Issuing
+## Issuance behavior: Temporary Certificates while Issuing
 
 When requesting certificates [using the ingress-shim](./ingress.md), the
 component `ingress-gce`, if used, requires that a temporary certificate is
@@ -294,7 +293,7 @@ Adding the following annotation on an ingress will automatically set "issue-temp
  ```
 
 <a id="rotation-private-key"></a>
-### Rotation of the private key
+## Issuance behavior: Rotation of the private key
 
 By default, the private key won't be rotated automatically. Using the setting
 `rotationPolicy: Always`, the private key Secret associated with a Certificate
