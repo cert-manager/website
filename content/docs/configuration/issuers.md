@@ -6,7 +6,7 @@ description: 'cert-manager configuration: Issuers'
 The following list contains all known cert-manager issuer integrations.
 
 <div className="rotate">
-| Tier | Controller | Docs | Issuer | cert-manager<br/>version used<br/>in tutorial[^1] | Released within<br/>3 months[^2] | Is Open Source |
+| Tier | Controller | Docs | Issuer | cert-manager<br/>version used<br/>in tutorial[^1] | Released within<br/>12 months[^2] | Is Open Source |
 |------|------------|------|--------|--------|--------|--------|
 | 🥇 | acme-issuer (in-tree)        | [📄][config:acme-issuer] | [ACME](https://datatracker.ietf.org/doc/html/rfc8555) | [latest][production:acme-issuer] | [✔️][release:cert-manager] | ✔️ |
 | 🥇 | venafi-enhanced-issuer       | [📄][config:venafi-enhanced-issuer] | [Venafi TLS Protect](https://venafi.com/tls-protect/) | [v1.12.1][production:venafi-enhanced-issuer] | [✔️][release:venafi-enhanced-issuer] | ❌ |
@@ -93,11 +93,16 @@ of tiers at any time.
 
 - 🥈 Tier criteria.
 - The issuer has an end-to-end tutorial on how to set it up with cert-manager for use in production.
-At the time of checking all tutorials[^1], the used cert-manager version has to be still supported (see [Supported Releases](../releases/README.md))
+At the time of checking[^1], the used cert-manager version has to be still supported (see [Supported Releases](../releases/README.md)).  
+An end-to-end tutorial must include:
+  1. a short explanation on how to install cert-manager (including the used version and a link to [https://cert-manager.io/docs/installation/](../installation/))
+  2. all required steps to install the issuer
+  3. an explanation on how to configure the issuer's Custom Resources
+  4. an explanation on how to issue a certificate using the issuer (using a Certificate resource)
 
 ### 🥈 Tier (Maintained)
 
-- The issuer has had a release in the last 3 months (at the time of checking all issuers[^2]).
+- The issuer has had a release in the last 12 months (at the time of checking all issuers[^2]).
 
 ### 🥉 Tier (Unmaintained)
 
