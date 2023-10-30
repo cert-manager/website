@@ -3,6 +3,26 @@ title: Release 1.13
 description: 'cert-manager release notes: cert-manager 1.13'
 ---
 
+## v1.13.2
+
+v1.13.2 fixes some CVE alerts and contains fixes for:
+1. a CertificateRequest runaway situation in case two Certificate resources point to the same Secret target resource
+2. a small bug in the Helm chart (feature gate options)
+3. a Venafi issuer bug
+
+### Changes
+
+#### Bug or Regression
+
+- Bump `golang.org/x/net v0.15.0 => v0.17.0` as part of addressing `CVE-2023-44487` / `CVE-2023-39325` (#6432, @SgtCoDFish)
+- BUGFIX[helm]: Fix issue where webhook feature gates were only set if controller feature gates are set. (#6381, @jetstack-bot)
+- Fix runaway bug caused by multiple Certificate resources that point to the same Secret resource. (#6425, @jetstack-bot)
+- The Venafi issuer now properly resets the certificate and should no longer get stuck with `WebSDK CertRequest Module Requested Certificate` or `This certificate cannot be processed while it is in an error state. Fix any errors, and then click Retry.`. (#6402, @jetstack-bot)
+
+#### Other (Cleanup or Flake)
+
+- Bump go to 1.20.10 to address `CVE-2023-39325`. Also bumps base images. (#6411, @SgtCoDFish)
+
 ## v1.13.1
 
 v1.13.1 contains a bugfix for a name collision bug in the StableCertificateRequestName feature that was enabled by default in v1.13.0.
