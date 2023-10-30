@@ -3,6 +3,21 @@ title: Release 1.12
 description: 'cert-manager release notes: cert-manager 1.12'
 ---
 
+## v1.12.6
+
+v1.12.6 fixes some CVE alerts and a Venafi issuer bug
+
+### Changes
+
+#### Bug or Regression
+
+- Bump `golang.org/x/net v0.15.0 => v0.17.0` as part of addressing `CVE-2023-44487` / `CVE-2023-39325` (#6431, @SgtCoDFish)
+- The Venafi issuer now properly resets the certificate and should no longer get stuck with `WebSDK CertRequest Module Requested Certificate` or `This certificate cannot be processed while it is in an error state. Fix any errors, and then click Retry.`. (#6401, @jetstack-bot)
+
+#### Other (Cleanup or Flake)
+
+- Bump go to 1.20.10 to address `CVE-2023-39325`. Also bumps base images. (#6412, @SgtCoDFish)
+
 ## v1.12.5
 
 v1.12.5 contains a backport for a name collision bug that was found in v1.13.0
