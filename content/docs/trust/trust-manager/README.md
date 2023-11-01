@@ -157,8 +157,8 @@ we currently have available.
 One of the more important configuration options you might need to consider at install time is which "trust namespace" to use,
 which can be set via the Helm value `app.trust.namespace`.
 
-The trust namespace is the only one in which `Secret` and `ConfigMap` sources can be read. This restriction is in place
-for security reasons - we don't want to give trust-manager the permission to read all `Secret`s or `ConfigMap`s in all namespaces.
+The trust namespace is the only one in which `Secret` sources can be read. This restriction is in place
+for security reasons - we don't want to give trust-manager the permission to read all `Secret`s in all namespaces.
 
 The trust namespace defaults to `cert-manager`, but there's no need for it to be set to the namespace that cert-manager
 is installed in - trust-manager has no runtime dependency on cert-manager at all! - so we'd recommend setting the trust
