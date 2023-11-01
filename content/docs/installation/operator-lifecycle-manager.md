@@ -42,7 +42,7 @@ from the [Krew Kubectl plugins index][] and then use that to install the cert-ma
 operator-sdk olm install
 kubectl krew install operator
 kubectl create ns cert-manager
-kubectl operator install cert-manager -n operators --channel stable --approval Automatic --create-operator-group -n cert-manager
+kubectl operator install cert-manager -n cert-manager --channel stable --approval Automatic --create-operator-group
 ```
 
 You can monitor the progress of the installation as follows:
