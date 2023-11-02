@@ -292,7 +292,7 @@ discuss.
 The cert-manager Helm chart can be installed by [Flux](https://fluxcd.io/).
 
 First create a [`HelmRepository` resource](https://fluxcd.io/flux/components/source/helmrepositories/),
-configured with URL of the  cert-manager Helm repository.
+configured with URL of the cert-manager Helm repository.
 Then create a [`HelmRelease` resource](https://fluxcd.io/flux/components/helm/helmreleases/),
 configured with your desired cert-manager chart values and release.
 
