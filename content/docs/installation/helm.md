@@ -247,7 +247,7 @@ of their approach [here](https://helm.sh/docs/chart_best_practices/custom_resour
 
 cert-manager actually bundles the CRDs along with the other templates
 in the Helm chart. This means that Helm manages these resources so they are
-upgraded with your cert-manager release when you use 
+upgraded with your cert-manager release when you use
 `installCRDs: true` in your values file or CLI command. This does also mean
 that if you uninstall the release, the CRDs will also be uninstalled. If that
 happens then you will loose all instances of those CRDs, e.g. all `Certificate`
@@ -282,7 +282,100 @@ Generally we recommend:
 You may want to consider your approach along with other tools that may offer
 helm compatible installs, for a standardized approach to managing CRD
 resources. If you have an approach that cert-manager does not currently
-support, then please 
+support, then please
 [raise an issue](https://github.com/cert-manager/cert-manager/issues) to
 discuss.
 
+
+## Install the Helm chart using Flux
+
+The cert-manager Helm chart can be installed by [Flux](https://fluxcd.io/).
+
+First create a [`HelmRepository` resource](https://fluxcd.io/flux/components/source/helmrepositories/),
+configured with URL of the  cert-manager Helm repository.
+Then create a [`HelmRelease` resource](https://fluxcd.io/flux/components/helm/helmreleases/),
+configured with your desired cert-manager chart values and release.
+
+Here is an example which installs the latest patch version of the cert-manager 1.12 release,
+and then upgrades to the latest patch version of the 1.13 release.
+
+### Prerequisites
+
+You'll need the [`flux` CLI](https://fluxcd.io/flux/cmd/)
+and a Kubernetes cluster with [Flux installed](https://fluxcd.io/flux/installation/).
+
+Here's how to quickly install Flux on a [Kind](https://kind.sigs.k8s.io/) cluster:
+
+```bash
+kind create cluster
+flux check --pre
+flux install
+flux check
+```
+
+### Create a `HelmRepository` resource
+
+```bash
+flux create source helm cert-manager --url https://charts.jetstack.io
+```
+
+### Create a `HelmRelease` resource
+
+Put your Helm chart values in a `values.yaml` file.
+Use the `installCRDs` value, so that Flux can install and upgrade the CRD resources.
+
+```yaml
+# values.yaml
+installCRDs: true
+```
+
+```bash
+flux create helmrelease cert-manager \
+  --chart cert-manager \
+  --source HelmRepository/cert-manager.flux-system \
+  --release-name cert-manager \
+  --target-namespace cert-manager \
+  --create-target-namespace \
+  --crds CreateReplace \
+  --values values.yaml \
+  --chart-version '>1.12.0 <1.13.0'
+```
+
+### Updates and Upgrades
+
+And when you want to upgrade to the cert-manager 1.13 release,
+you can simply update the semantic version range in the chart version:
+
+```bash
+flux create helmrelease cert-manager \
+  --chart cert-manager \
+  --source HelmRepository/cert-manager.flux-system \
+  --release-name cert-manager \
+  --target-namespace cert-manager \
+  --create-target-namespace \
+  --crds CreateReplace \
+  --values values.yaml \
+  --chart-version '>1.12.0 <1.14.0'
+```
+
+### Troubleshooting
+
+Check Flux events and logs for warnings and errors:
+
+```bash
+flux events
+flux logs
+```
+
+Use `cmctl` to check for problems with the cert-manager webhook or CRDs:
+
+```bash
+cmctl check api
+cmctl version -o yaml
+```
+
+Check the cert-manager logs for warnings and errors:
+
+```bash
+kubectl logs -n cert-manager -l app.kubernetes.io/instance=cert-manager --prefix --all-containers
+```
