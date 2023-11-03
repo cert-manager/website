@@ -338,13 +338,13 @@ flux create helmrelease cert-manager \
   --create-target-namespace \
   --crds CreateReplace \
   --values values.yaml \
-  --chart-version '>1.12.0 <1.13.0'
+  --chart-version 1.12.x
 ```
 
 ### Updates and Upgrades
 
 And when you want to upgrade to the cert-manager 1.13 release,
-you can simply update the semantic version range in the chart version:
+you can simply update the partial semantic version in the chart version:
 
 ```bash
 flux create helmrelease cert-manager \
@@ -355,7 +355,7 @@ flux create helmrelease cert-manager \
   --create-target-namespace \
   --crds CreateReplace \
   --values values.yaml \
-  --chart-version '>1.12.0 <1.14.0'
+  --chart-version 1.13.x
 ```
 
 ### Troubleshooting
