@@ -3,6 +3,10 @@ title: Requesting Certificates
 description: 'cert-manager usage: Overview'
 ---
 
+<div style={{textAlign: "center"}}>
+<object data="/images/request-certificate-overview/request-certificate.svg"></object>
+</div>
+
 Once an [`Issuer`](../configuration/README.md) has been configured, you're ready to issue your first certificate!
 
 There are several use cases and methods for requesting certificates through cert-manager:

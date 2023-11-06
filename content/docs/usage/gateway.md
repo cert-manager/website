@@ -6,6 +6,10 @@ description: 'cert-manager usage: Kubernetes Gateways'
 > **apiVersion:** gateway.networking.k8s.io/v1alpha2  
 > **kind:** Gateway
 
+<div style={{textAlign: "center"}}>
+<object data="/images/request-certificate-overview/request-certificate-gateway.svg"></object>
+</div>
+
 **FEATURE STATE**: cert-manager 1.5 [alpha]
 
 <div className="info">

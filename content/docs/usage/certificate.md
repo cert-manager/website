@@ -6,6 +6,10 @@ description: 'cert-manager usage: Certificates'
 > **apiVersion:** cert-manager.io/v1  
 > **kind:** Certificate
 
+<div style={{textAlign: "center"}}>
+<object data="/images/request-certificate-overview/request-certificate-cert.svg"></object>
+</div>
+
 In cert-manager, the `Certificate` resource represents a human readable definition
 of a certificate request. cert-manager uses this input to generate a private key
 and [`CertificateRequest`](./certificaterequest.md) resource in order to obtain

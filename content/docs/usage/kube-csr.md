@@ -6,6 +6,10 @@ description: 'cert-manager usage: Kubernetes CertificateSigningRequest resources
 > **apiVersion:** certificates.k8s.io/v1  
 > **kind:** CertificateSigningRequest
 
+<div style={{textAlign: "center"}}>
+<object data="/images/request-certificate-overview/request-certificate-csr.svg"></object>
+</div>
+
 Kubernetes has an in-built
 [CertificateSigningRequest](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/)
 resource. This resource is similar to the cert-manager
