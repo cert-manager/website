@@ -22,6 +22,99 @@ are designed for backwards compatibility rather than for best practice or maximu
 You may find that the default resources do not comply with the security policy on your Kubernetes cluster
 and in that case you can modify the installation configuration using Helm chart values to override the defaults.
 
+## Network Requirements and Network Policy
+
+The network requirements of each cert-manager Pod are summarized below.
+Some network requirements depend on specific Issuer / ClusterIssuer configurations
+and / or specific configuration options.
+
+When you have understood the network requirements of **your** cert-manager installation,
+you should consider implementing a "least privilege" network policy,
+using a [Kubernetes Network (CNI) Plugin](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) such as [Calico](https://www.tigera.io/project-calico/).
+
+The network policy should prevent untrusted clients from connecting to the cert-manager Pods
+and it should prevent cert-manager from connecting to untrusted servers.
+
+An example of this recommendation is found in the Calico Documentation:
+> We recommend creating an implicit default deny policy for your Kubernetes pods, regardless of whether you use Calico or Kubernetes network policy. This ensures that unwanted traffic is denied by default.
+>
+> 📖 [Calico Best practice: implicit default deny policy](https://docs.tigera.io/calico/latest/network-policy/get-started/kubernetes-default-deny#best-practice-implicit-default-deny-policy).
+
+You can use the Kubernetes builtin `NetworkPolicy` resource,
+which is portable because it is recognized by any of the [Kubernetes Network (CNI) Plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/).
+Or you may prefer to use the custom resources provided by your CNI software.
+
+> 📖 Learn about the [Kubernetes builtin NetworkPolicy API](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+> and see [some example policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/#default-policies).
+
+### Network Requirements
+
+Here is an overview of the network requirements:
+
+1. **UDP / TCP: cert-manager (all) -> Kubernetes DNS**:
+   All cert-manager components perform UDP DNS queries for both cluster and external domain names.
+   Some DNS queries may use TCP.
+
+1. **TCP: Kubernetes (API server) -> cert-manager (webhook)**:
+   The Kubernetes API server establishes HTTPS connections to the [cert-manager webhook component](../concepts/webhook.md).
+   Read the cert-manager [webhook troubleshooting guide](../troubleshooting/webhook.md)
+   to understand the webhook networking requirements.
+
+1. **TCP: cert-manager (webhook, controller, cainjector, startupapicheck) -> Kubernetes API server**:
+   The cert-manager webhook, controller, cainjector and startupapicheck
+   establish HTTPS connections to the Kubernetes API server,
+   to interact with cert-manager custom resources and Kubernetes resources.
+   The cert-manager webhook is a special case;
+   it connects to the Kubernetes API server to use the `SubjectAccessReview` API,
+   to verify clients attempting to modify `Approved` or `Denied` conditions of `CertificateRequest` resources.
+
+1. **TCP: cert-manager (controller) -> HashiCorp Vault (authentication and resource API endpoints)**:
+   The cert-manager controller may establish HTTPS connections to one or more Vault API endpoints,
+   if you are using the [Vault Issuer](../configuration/vault.md).
+   The target host and port of the Vault endpoints
+   are configured in Issuer or ClusterIssuer resources.
+
+1. **TCP: cert-manager (controller) -> Venafi TLS Protect (authentication and resource API endpoints)**:
+   The cert-manager controller may establish HTTPS connections to one or more Venafi API endpoints,
+   if you are using the [Venafi Issuer](../configuration/venafi.md).
+   The target host and port of the Venafi API endpoints
+   are configured in Issuer or ClusterIssuer resources.
+
+1. **TCP: cert-manager (controller) -> DNS API endpoints (for ACME DNS01)**:
+   The cert-manager controller may establish HTTPS connections to DNS API endpoints such as Amazon Route53,
+   and to any associated authentication endpoints,
+   if you are using the [ACME Issuer with DNS01 solvers](../configuration/acme/dns01/README.md#supported-dns01-providers).
+
+1. **UDP / TCP: cert-manager (controller) -> External DNS**:
+   If you use the ACME Issuer, the cert-manager controller may send
+   DNS queries to recursive DNS servers,
+   as part of the ACME challenge self-check process.
+   It does this to ensure that the DNS01 or HTTP01 challenge is resolvable,
+   before asking the ACME server to perform its checks.
+
+   In the case of DNS01 it may also perform a series of DNS queries to authoritative DNS servers,
+   to compute the DNS zone in which to add the DNS01 challenge record.
+   In the case of DNS01, cert-manager also [supports DNS over HTTPS](../releases/release-notes/release-notes-1.13.md#dns-over-https-doh-support).
+
+   You can choose the host and port of the DNS servers, using the following [controller flags](../cli/controller.md):
+   `--acme-http01-solver-nameservers`,
+   `--dns01-recursive-nameservers`, and
+   `--dns01-recursive-nameservers-only`.
+
+1. **TCP: ACME (Let's Encrypt) -> cert-manager (acmesolver)**:
+   If you use an ACME Issuer configured for HTTP01,
+   cert-manager will deploy an `acmesolver` Pod, a Service and an Ingress (or Gateway API) resource
+   in the namespace of the Issuer
+   or in the cert-manager namespace if it is a ClusterIssuer.
+   The ACME implementation will establish an HTTP connection to this Pod via your chosen ingress load balancer,
+   so your network policy must allow this.
+
+   > ℹ️ The acmesolver Pod **does not** require access to the Kubernetes API server.
+
+1. **TCP: Metrics Server -> cert-manager (controller)**:
+   The cert-manager controller has a metrics server which listens for HTTP connections on TCP port 9402.
+   Create a network policy which allows access to this service from your chosen metrics collector.
+
 ## Isolate cert-manager on dedicated node pools
 
 cert-manager is a cluster scoped operator and you should treat it as part of your platform's control plane.
