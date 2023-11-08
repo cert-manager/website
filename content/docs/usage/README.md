@@ -20,7 +20,7 @@ There are several use cases and methods for requesting certificates through cert
 - [Integration with Garden](https://docs.garden.io/guides/cert-manager-integration): Garden is a
   developer tool for developing Kubernetes applications which has first class
   support for integrating cert-manager.
-- [Securing Knative](https://knative.dev/docs/serving/using-auto-tls/): Secure
+- [Securing Knative](https://knative.dev/docs/serving/encryption/enabling-automatic-tls-certificate-provisioning/): Secure
   your Knative services with trusted HTTPS certificates.
 - [Enable mTLS on Pods with CSI](./csi.md): Using the cert-manager CSI
   driver to provide unique keys and certificates that share the lifecycle of
