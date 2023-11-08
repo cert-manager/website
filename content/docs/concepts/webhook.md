@@ -35,7 +35,7 @@ cert-manager controller and CA injector components.
 In order for the API server to communicate with the webhook component, the
 webhook requires a TLS certificate that the apiserver is configured to trust.
 
-The [`cainjector`](./ca-injector.md) creates `secret/cert-manager-webhook-ca`, a self-signed root CA certificate which is used to sign certificates for the webhook pod.
+The webhook creates `secret/cert-manager-webhook-ca` in the namespace where the webhook is deployed. This secret contains a self-signed root CA certificate which is used to sign certificates for the webhook pod in order to fulfill this requirement.
 
 Then the webhook can be configured with either
 
