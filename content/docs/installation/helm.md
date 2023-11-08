@@ -247,7 +247,7 @@ of their approach [here](https://helm.sh/docs/chart_best_practices/custom_resour
 
 cert-manager actually bundles the CRDs along with the other templates
 in the Helm chart. This means that Helm manages these resources so they are
-upgraded with your cert-manager release when you use 
+upgraded with your cert-manager release when you use
 `installCRDs: true` in your values file or CLI command. This does also mean
 that if you uninstall the release, the CRDs will also be uninstalled. If that
 happens then you will loose all instances of those CRDs, e.g. all `Certificate`
@@ -282,7 +282,12 @@ Generally we recommend:
 You may want to consider your approach along with other tools that may offer
 helm compatible installs, for a standardized approach to managing CRD
 resources. If you have an approach that cert-manager does not currently
-support, then please 
+support, then please
 [raise an issue](https://github.com/cert-manager/cert-manager/issues) to
 discuss.
 
+## Using the Flux Helm Controller
+
+The cert-manager Helm chart can be installed and upgraded by the Flux Helm Controller.
+
+> 📖 Read more at [Continuous Deployment: Using the Flux Helm Controller](./continuous-deployment-and-gitops.md).

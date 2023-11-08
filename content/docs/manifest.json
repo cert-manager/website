@@ -286,6 +286,10 @@
               "path": "/docs/installation/operator-lifecycle-manager.md"
             },
             {
+              "title": "d. Continuous Deployment",
+              "path": "/docs/installation/continuous-deployment-and-gitops.md"
+            },
+            {
               "title": "Configuring Components",
               "path": "/docs/installation/configuring-components.md"
             },
