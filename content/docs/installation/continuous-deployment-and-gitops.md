@@ -71,7 +71,6 @@ flux create helmrelease cert-manager \
   --release-name cert-manager \
   --target-namespace cert-manager \
   --create-target-namespace \
-  --crds CreateReplace \
   --values values.yaml \
   --chart-version 1.12.x
 ```
@@ -88,7 +87,6 @@ flux create helmrelease cert-manager \
   --release-name cert-manager \
   --target-namespace cert-manager \
   --create-target-namespace \
-  --crds CreateReplace \
   --values values.yaml \
   --chart-version 1.13.x
 ```
