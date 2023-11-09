@@ -321,8 +321,8 @@ but first read the background information below.
 > and it is disabled by default, as a precaution, in case it causes problems in the field.
 > [Please get in touch](../contributing/README.md)
 > and tell us if you have enabled the controller liveness probe in production
-> and tell us whether you would like it to be turned on by default.
-> Tell us about any circumstances where the controller has become stuck
+> and whether you would like it to be turned on by default.
+> Please also include any circumstances where the controller has become stuck
 > and where the liveness probe has been necessary to automatically restart the process.
 
 The liveness probe for the cert-manager controller is an HTTP probe which connects
