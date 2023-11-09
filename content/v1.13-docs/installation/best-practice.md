@@ -50,7 +50,7 @@ but first read the background information below.
 > 📢 The controller liveness probe is a new feature in cert-manager release 1.12
 > and it is disabled by default, as a precaution, in case it causes problems in the field.
 > [Please get in touch](../contributing/README.md)
-> and tell is if you have enabled the controller liveness probe in production
+> and tell us if you have enabled the controller liveness probe in production
 > and tell us whether you would like it to be turned on by default.
 > Tell us about any circumstances where the controller has become stuck
 > and where the liveness probe has been necessary to automatically restart the process.
