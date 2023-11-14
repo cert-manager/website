@@ -28,6 +28,12 @@ configured with your desired cert-manager chart values and release.
 Here is an example which installs the latest patch version of the cert-manager 1.12 release,
 and then upgrades to the latest patch version of the 1.13 release.
 
+> ⚠️ This is a simple example which may not be suitable for production use.
+> You should also refer to the [official Flux example repo](https://github.com/fluxcd/flux2-kustomize-helm-example),
+> where cert-manager is now fully integrated.
+> It shows how to deploy ClusterIssuer resources in the right order,
+> after cert-manager CRDs and controller have been installed.
+
 ### Prerequisites
 
 You'll need the [`flux` CLI](https://fluxcd.io/flux/cmd/)
@@ -65,7 +71,6 @@ flux create helmrelease cert-manager \
   --release-name cert-manager \
   --target-namespace cert-manager \
   --create-target-namespace \
-  --crds CreateReplace \
   --values values.yaml \
   --chart-version 1.12.x
 ```
@@ -82,7 +87,6 @@ flux create helmrelease cert-manager \
   --release-name cert-manager \
   --target-namespace cert-manager \
   --create-target-namespace \
-  --crds CreateReplace \
   --values values.yaml \
   --chart-version 1.13.x
 ```
