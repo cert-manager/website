@@ -47,6 +47,7 @@ These external issuers are known to support and honor [approval](https://cert-ma
 - [tcs-issuer](https://github.com/intel/trusted-certificate-issuer) Requests certificates signed securely using [Intel's SGX technology](https://www.intel.com/content/www/us/en/developer/tools/software-guard-extensions/overview.html).
 - [ejbca-issuer](https://github.com/Keyfactor/ejbca-cert-manager-issuer): Request certificates from [EJBCA](https://www.ejbca.org/).
 - [command-issuer](https://github.com/Keyfactor/command-cert-manager-issuer): Request certificates from [Keyfactor Command](https://www.keyfactor.com/products/command/).
+- [horizon-issuer](https://github.com/evertrust/horizon-issuer): Request certificates from [EVERTRUST Horizon](https://evertrust.fr/horizon).
 
 ## Building New External Issuers
 
