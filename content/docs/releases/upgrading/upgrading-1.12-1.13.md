@@ -5,7 +5,7 @@ description: 'cert-manager installation: Upgrading v1.12 to v1.13'
 
 When upgrading cert-manager from 1.12 to 1.13, in few cases you might need to take additional steps to ensure a smooth upgrade:
 
-1. **IMPORTANT NOTE**: Before upgrading to v1.13, upgrade to a v1.12+ version first. Otherwise, you might unexpectedly experience certificates to be re-issued (see https://github.com/cert-manager/cert-manager/issues/6494#issuecomment-1816112309)
+1. **IMPORTANT NOTE**: If upgrading from a version below v1.12, upgrade to the latest v1.12 release before upgrading to v1.13. Otherwise, some certificates may be unexpectedly re-issued (see https://github.com/cert-manager/cert-manager/issues/6494#issuecomment-1816112309)
 
 2. BREAKING: If you deploy cert-manager using helm and have `.featureGates` value set, the features defined
 there will no longer be passed to cert-manager webhook, only to cert-manager controller. Use `webhook.featureGates` field
