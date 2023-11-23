@@ -34,7 +34,7 @@ The following list contains all known cert-manager issuer integrations.
 
 [//]: # (Configuration docs)
 
-[config:venafi-enhanced-issuer]: https://platform.jetstack.io/documentation/configuration/venafi-enhanced-issuer
+[config:venafi-enhanced-issuer]: https://docs.venafi.cloud/vaas/k8s-components/t-vei-install/
 [config:acme-issuer]: ./acme.md
 
 [config:aws-privateca-issuer]: https://github.com/cert-manager/aws-privateca-issuer
