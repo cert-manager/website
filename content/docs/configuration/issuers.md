@@ -15,6 +15,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈 | command-issuer               | [📄][config:command-issuer] | [Keyfactor Command](https://www.keyfactor.com/products/command/) | - | [✔️][release:command-issuer] | ✔️ |
 | 🥈 | ejbca-issuer                 | [📄][config:ejbca-issuer] | [EJBCA](https://www.ejbca.org/) | - | [✔️][release:ejbca-issuer] | ✔️ |
 | 🥈 | google-cas-issuer            | [📄][config:google-cas-issuer] | [Google Cloud Certificate<br/>Authority Service](https://cloud.google.com/certificate-authority-service/) | - | [✔️][release:google-cas-issuer] | ✔️ |
+| 🥈 | horizon-issuer               | [📄][config:horizon-issuer] | [EVERTRUST Horizon](https://evertrust.fr/horizon) | - | [✔️][release:horizon-issuer] | ✔️ |
 | 🥈 | ncm-issuer                   | [📄][config:ncm-issuer] | [Nokia Netguard Certificate Manager](https://www.nokia.com/networks/security-portfolio/netguard/certificate-manager) | - | [✔️][release:ncm-issuer] | ✔️ |
 | 🥈 | selfsigned-issuer (in-tree)  | [📄][config:selfsigned-issuer] | Self-Signed issuer | - | [✔️][release:cert-manager] | ✔️ |
 | 🥈 | step-issuer                  | [📄][config:step-issuer] | [Certificate Authority server](https://github.com/smallstep/certificates) | - | [✔️][release:step-issuer] | ✔️ |
@@ -48,6 +49,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:google-cas-issuer]: https://github.com/jetstack/google-cas-issuer
 [config:ejbca-issuer]: https://github.com/Keyfactor/ejbca-cert-manager-issuer
 [config:command-issuer]: https://github.com/Keyfactor/command-cert-manager-issuer
+[config:horizon-issuer]: https://github.com/evertrust/horizon-issuer
 
 [config:kms-issuer]: https://github.com/Skyscanner/kms-issuer
 [config:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer
@@ -67,6 +69,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:google-cas-issuer]: https://github.com/jetstack/google-cas-issuer/releases
 [release:ejbca-issuer]: https://github.com/Keyfactor/ejbca-cert-manager-issuer/tags
 [release:command-issuer]: https://github.com/Keyfactor/command-cert-manager-issuer/releases
+[release:horizon-issuer]: https://github.com/evertrust/horizon-issuer/releases
 
 [release:kms-issuer]: https://github.com/Skyscanner/kms-issuer/releases
 [release:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer/releases
