@@ -666,6 +666,11 @@ gateway.networking.k8s.io
 networking.k8s.io
 certificates.k8s.io
 
+venafi-enhanced-issuer
+venafi-issuer
+adcs-issuer
+cfssl-issuer
+
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
 # has difficulty detecting that they're in comments or links

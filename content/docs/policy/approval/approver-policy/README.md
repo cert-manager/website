@@ -66,7 +66,7 @@ helm upgrade -i -n cert-manager cert-manager-approver-policy jetstack/cert-manag
 ```
 
 If you are using approver-policy with [external
-issuers](../../../configuration/external.md), you _must_
+issuers](../../../configuration/issuers.md), you _must_
 include their signer names so that approver-policy has permissions to approve
 and deny CertificateRequests that
 [reference them](../../../usage/certificaterequest.md#rbac-syntax).
