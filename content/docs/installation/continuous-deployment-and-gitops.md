@@ -234,11 +234,6 @@ spec:
     helm:
       values: |
         installCRDs: true
-        podLabels:
-          azure.workload.identity/use: "true"
-        serviceAccount:
-          labels:
-            azure.workload.identity/use: "true"
   ignoreDifferences:
   - group: admissionregistration.k8s.io
     kind: ValidatingWebhookConfiguration
