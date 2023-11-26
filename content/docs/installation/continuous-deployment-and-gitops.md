@@ -118,7 +118,7 @@ kubectl logs -n cert-manager -l app.kubernetes.io/instance=cert-manager --prefix
 Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes.
 
 ### Pre-requisites
-Ensure, the following are in place before proceeding:
+Ensure the following are in place before proceeding:
 - A Kubernetes cluster
 - ArgoCD deployed on the Kubernetes cluster: [installation guide](https://argo-cd.readthedocs.io/en/stable/getting_started/)
 - Optional: A GitOps repository connected with ArgoCD: [setup guide](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/)
@@ -156,22 +156,22 @@ Ensure, the following are in place before proceeding:
           - CreateNamespace=true
     ```
 2. Commit the manifest file and sync the changes in ArgoCD. If a GitOps repository is not set up, use `kubectl apply -f <above-file-path>` to apply the manifest [installation guide for kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-3. ArgoCD will synchronize the Desired manifest and deploy cert-manager on Kubernetes based on the configuration provided.
+3. ArgoCD will synchronize the `DESIRED MANIFEST` and deploy cert-manager on Kubernetes based on the provided configuration.
 
 
 ### Troubleshooting
 
 #### Scenario 1:
-Out-of-sync cert-manager in AKS(Azure Kubernetes Service) cluster
+Out-of-sync cert-manager in the AKS (Azure Kubernetes Service) cluster
 
 ##### Issue: 
-Cert-manager in the AKS cluster remains out-of-sync due to discrepancies between the Desired and Live manifest files.
+Cert-manager in the AKS cluster remains out-of-sync due to discrepancies between the `DESIRED MANIFEST` and `LIVE MANIFEST` files.
 
 ##### Potential Reasons
 Multiple factors could cause the OutOfSync issue; refer to [ArgoCD documentation](https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/#diffing-customization) for potential causes.
 
 ##### Example configuration differences
-Below configurations are observed to be present in the Live manifest but not in the Desired manifest file.
+The below configurations are observed to be present in the `LIVE MANIFEST` but not in the `DESIRED MANIFEST` file.
 
 ```yaml
 apiVersion: admissionregistration.k8s.io/v1
@@ -194,10 +194,10 @@ webhooks:
 ```
 
 ##### Root Cause Analysis
-The discrepancy is rooted in how AKS manages admission controllers to protect internal services in the kube-system namespace. More details can be found [here](https://learn.microsoft.com/en-us/azure/aks/faq#can-admission-controller-webhooks-impact-kube-system-and-internal-aks-namespaces)
+The discrepancy stems from how AKS manages admission controllers to protect internal services in the kube-system namespace. More details can be found in [Frequently Asked Questions about Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/faq#can-admission-controller-webhooks-impact-kube-system-and-internal-aks-namespaces)
 
 ##### Suggested Fix
-It is also possible to ignore differences from fields owned by specific managers defined in `metadata.managedFields` in live resources. More details can be found [here](https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/#application-level-configuration)
+It is also possible to ignore differences from fields owned by specific managers defined in `metadata.managedFields` in live resources. More details can be found in [(ArgoCD) Diffing Customization](https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/#application-level-configuration)
 
 To resolve this issue, modify the cert-manager manifest file under spec to ignore specific differences:
 ```
@@ -249,4 +249,4 @@ spec:
       - CreateNamespace=true
 ```
 
-Once ArgoCD syncs the updated manifest, the differences due to above 2 keys would be ignored and cert-manager would be in complete synchronization state.
+Once ArgoCD syncs the updated manifest, the differences due to the above two keys will be ignored, and cert-manager will be in a complete synchronization state.
