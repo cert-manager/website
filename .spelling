@@ -214,6 +214,7 @@ OpenWRT
 OperatorHub
 OperatorHub.io
 PEM
+PKCS12-formatted
 PKCS#12
 PKCS#8
 Pomerium
@@ -402,6 +403,7 @@ ndegory
 oauth2
 onwards
 openshift-supported-versions
+plaintext
 powershell
 pre
 preemptible
@@ -458,6 +460,8 @@ upstream
 userinfo
 vhosakot
 v0.5.0
+v0.7.0
+v0.7.0.
 v0.16
 v0.23.1
 v1
