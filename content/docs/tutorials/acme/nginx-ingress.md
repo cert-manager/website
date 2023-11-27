@@ -237,7 +237,7 @@ when you might choose to use each can be found on [Issuer concepts](../../concep
 Certificates resources allow you to specify the details of the certificate you
 want to request. They reference an issuer to define _how_ they'll be issued.
 
-For more information, see [Certificate concepts](../../concepts/certificate.md).
+For more information, see [Certificate concepts](../../usage/certificate.md).
 
 ## Step 6 - Configure a Let's Encrypt Issuer
 

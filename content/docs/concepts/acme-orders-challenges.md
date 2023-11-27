@@ -22,7 +22,7 @@ validation can be found on the Let's Encrypt website
 certificate request which will be created automatically once a new
 [`CertificateRequest`](../usage/certificaterequest.md) resource referencing an ACME
 issuer has been created. `CertificateRequest` resources are created
-automatically by cert-manager once a [`Certificate`](./certificate.md) resource
+automatically by cert-manager once a [`Certificate`](../usage/certificate.md) resource
 is created, has its specification changed, or needs renewal.
 
 As an end-user, you will never need to manually create an `Order` resource.

@@ -11,8 +11,6 @@ Once an [`Issuer`](../configuration/README.md) has been configured, you're ready
 
 There are several use cases and methods for requesting certificates through cert-manager:
 
-- [Certificate Resources](./certificate.md): The simplest and most common method for
-  requesting signed certificates.
 - [Securing Ingress Resources](./ingress.md): A method to secure ingress resources
   in your cluster.
 - [Securing OpenFaaS functions](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/):
