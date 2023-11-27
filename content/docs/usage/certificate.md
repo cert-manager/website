@@ -128,6 +128,31 @@ The `Certificate` will be issued using the issuer named `ca-issuer` in the
 A full list of the fields supported on the Certificate resource can be found in
 the [API reference documentation](../reference/api-docs.md#cert-manager.io/v1.CertificateSpec).
 
+### Target Secret
+
+When a certificate is issued by an intermediate CA and the `Issuer` can provide
+the issued certificate's chain, the contents of `tls.crt` will be the requested
+certificate followed by the certificate chain.
+
+Additionally, if the Certificate Authority is known, the corresponding CA
+certificate will be stored in the secret with key `ca.crt`. For example, with
+the ACME issuer, the CA is not known and `ca.crt` will not exist in the Secret.
+The `ca.crt` value at the time of issuance can be copied to the trust store of
+the application that is using the certificate. However, DO NOT directly mount
+the `ca.crt` value into the application's trust store, as it will be updated
+when the certificate is renewed (see [Trusting certificates](../trust/README.md) for more details).
+
+cert-manager intentionally avoids adding root certificates to `tls.crt`, because they
+are useless in a situation where TLS is being done securely. For more information,
+see [RFC 5246 section 7.4.2](https://datatracker.ietf.org/doc/html/rfc5246#section-7.4.2)
+which contains the following explanation:
+
+> Because certificate validation requires that root keys be distributed
+> independently, the self-signed certificate that specifies the root
+> certificate authority MAY be omitted from the chain, under the
+> assumption that the remote end must already possess it in order to
+> validate it in any case.
+
 <a id="key-usages"></a>
 ### X.509 key usages and extended key usages
 

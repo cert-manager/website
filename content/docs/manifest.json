@@ -792,10 +792,6 @@
                   "path": "/docs/concepts/issuer.md"
                 },
                 {
-                  "title": "Certificate",
-                  "path": "/docs/concepts/certificate.md"
-                },
-                {
                   "title": "ACME Orders and Challenges",
                   "path": "/docs/concepts/acme-orders-challenges.md"
                 },
