@@ -84,7 +84,7 @@ spec:
 
 The Certificate resource describes our desired certificate and the possible
 methods that can be used to obtain it. You can learn more about the Certificate
-resource in the [docs](../../concepts/certificate.md).  If the certificate is
+resource in the [docs](../../usage/certificate.md).  If the certificate is
 obtained successfully, the resulting key pair will be stored in a secret called
 `example-com-tls` in the same namespace as the Certificate.
 

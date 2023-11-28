@@ -221,6 +221,7 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Moved the concept pages into the main website
 /docs/concepts/certificaterequest/ /docs/usage/certificaterequest/ 301!
+/docs/concepts/certificate/ /docs/usage/certificate/ 301!
 
 # Moved the external issuer section to the main issuers page
 /docs/configuration/external/ /docs/configuration/issuers/ 301!

@@ -628,7 +628,7 @@ Events:
 
 When you create a Certificate, cert-manager will create a collection of temporary resources
 which each contain information about the status of certificate signing process.
-You can read more about these in the [Certificate Lifecycle](../../concepts/certificate.md#certificate-lifecycle) section.
+You can read more about these in the [Certificate Lifecycle](../../usage/certificate.md#certificate-lifecycle) section.
 Use the `cmctl status` command to view details of all these resources and all the associated Events and error messages.
 
 You may see some temporary errors, like:

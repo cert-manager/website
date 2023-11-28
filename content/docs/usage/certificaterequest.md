@@ -105,7 +105,7 @@ This condition should only be set by an approver.
 namely: `username`, `groups`, `uid`, and `extra`. These values contain the user
 who created the `CertificateRequest`. This user will be cert-manager itself in
 the case that the `CertificateRequest` was created by a
-[`Certificate`](./certificate.md) resource, or instead the user who created the
+[`Certificate`](../usage/certificate.md) resource, or instead the user who created the
 `CertificateRequest` directly.
 
 > **Warning**: These fields are managed by cert-manager and should _never_ be
