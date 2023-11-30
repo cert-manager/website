@@ -21,7 +21,7 @@ and enables cluster administrators to easily automate providing a secure bundle 
 to worry about rebuilding containers to update trust stores.
 
 It's designed to complement cert-manager and works well when consuming CA certificates from a
-cert-manager `Issuer` or `ClusterIssuer` but can be used entirely independently from cert-manager
+cert-manager `Issuer` or `ClusterIssuer` but can be used entirely independently of cert-manager
 if needed.
 
 ## Usage
@@ -70,12 +70,15 @@ spec:
     # Sync the bundle to a ConfigMap called `my-org.com` in every namespace which
     # has the label "linkerd.io/inject=enabled"
     # All ConfigMaps will include a PEM-formatted bundle, here named "root-certs.pem"
-    # and in this case we also request a binary JKS formatted bundle, here named "bundle.jks"
+    # and in this case we also request binary formatted bundles in JKS and PKCS#12 formats,
+    # here named "bundle.jks" and "bundle.p12".
     configMap:
       key: "root-certs.pem"
     additionalFormats:
       jks:
         key: "bundle.jks"
+      pkcs12:
+        key: "bundle.p12"
     namespaceSelector:
       matchLabels:
         linkerd.io/inject: "enabled"
@@ -88,18 +91,23 @@ spec:
 - `inLine` - a manually specified string containing at least one certificate
 - `useDefaultCAs` - usually, a bundle of publicly trusted certificates
 
-These sources, along with the single currently supported target type (`configMap`)
-are documented in the trust-manager [API reference documentation](./api-reference.md).
+`ConfigMap` is the default target type, but as of v0.7.0 trust-manager also supports `Secret` resources as targets.
+
+Support for `Secret` targets must be explicitly enabled in the trust-manager controller; see details below under "Enable Secret targets".
+
+All sources and target options are documented in the trust-manager [API reference documentation](./api-reference.md).
 
 #### Targets
 
-All `Bundle` targets are written to `ConfigMap`s whose name matches that of the `Bundle`, and every
-target has a PEM-formatted bundle included.
+All `Bundle` targets are written to `ConfigMap`s (and/or `Secret`s) whose name matches that of the
+`Bundle`, and every target has a PEM-formatted bundle included.
 
-Users can also optionally - as of trust-manager v0.5.0 - choose to write a JKS formatted binary
-bundle to the target. We understand that most Java applications tend to require a password on JKS
-files (even though trust bundles don't contain secrets), so all trust-manager JKS bundles use the
-default password `changeit`.
+Users can also optionally choose to write JKS/PKCS#12 formatted binary trust store(s) to targets.
+JKS has been supported since v0.5.0, and PKCS#12 since v0.7.0.
+
+Applications consuming JKS and PKCS#12 trust stores often require a password to be set for legacy reasons. These passwords are often security theater - either they use very weak encryption or the passwords are provided in plaintext next to the files they encrypt which defeats the purpose of having them.
+
+Trust bundles do not contain private keys, and so for most use cases there wouldn't be any security benefit to encrypting them. As such, passwords for trust stores are hard-coded to `changeit` for JKS and `""` (the empty string or "password-less") for PKCS#12. Future releases of trust-manager may make these passwords configurable.
 
 #### Namespace Selector
 
@@ -132,7 +140,16 @@ helm upgrade -i -n cert-manager cert-manager jetstack/cert-manager --set install
 helm upgrade -i -n cert-manager trust-manager jetstack/trust-manager --wait
 ```
 
-### approver-policy Integration
+#### Enable Secret targets
+
+`Secret` targets are supported as of trust-manager v0.7.0, but need to be explicitly enabled on the controller.
+The feature can be enabled with a Helm value `--set secretTargets.enabled=true`, but since the controller needs
+RBAC to read and update secrets, you also need to set `secretTargets.authorizedSecretsAll` or `secretTargets.authorizedSecrets`.
+Please consult the
+[trust-manager Helm chart docs](https://github.com/cert-manager/trust-manager/blob/main/deploy/charts/trust-manager/README.md#values)
+for details and trade-offs.
+
+#### approver-policy Integration
 
 If you're running [approver-policy](../../policy/approval/approver-policy/README.md) then cert-manager's default approver will be disabled which will mean that
 trust-manager's webhook certificate will - by default - block when you install the Helm chart until it's manually approved.

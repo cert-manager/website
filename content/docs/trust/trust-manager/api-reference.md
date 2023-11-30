@@ -246,6 +246,13 @@ Target is the target location in all namespaces to sync source data to.
           NamespaceSelector will, if set, only sync the target resource in Namespaces which match the selector.<br/>
         </td>
         <td>false</td>
+      </tr><tr>
+        <td><b><a href="#bundlespectargetsecret">secret</a></b></td>
+        <td>object</td>
+        <td>
+          Secret is the target Secret that all Bundle source data will be synced to. Using Secrets as targets is only supported if enabled at trust-manager startup. By default, trust-manager has no permissions for writing to secrets and can only read secrets in the trust namespace.<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -271,6 +278,13 @@ AdditionalFormats specifies any additional formats to write to the target
           JKS requests a JKS-formatted binary trust bundle to be written to the target. The bundle is created with the hardcoded password "changeit".<br/>
         </td>
         <td>false</td>
+      </tr><tr>
+        <td><b><a href="#bundlespectargetadditionalformatspkcs12">pkcs12</a></b></td>
+        <td>object</td>
+        <td>
+          PKCS12 requests a PKCS12-formatted binary trust bundle to be written to the target. The bundle is created without a password.<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -279,6 +293,31 @@ AdditionalFormats specifies any additional formats to write to the target
 
 
 JKS requests a JKS-formatted binary trust bundle to be written to the target. The bundle is created with the hardcoded password "changeit".
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          Key is the key of the entry in the object's `data` field to be used.<br/>
+        </td>
+        <td>true</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.spec.target.additionalFormats.pkcs12`
+
+
+PKCS12 requests a PKCS12-formatted binary trust bundle to be written to the target. The bundle is created without a password.
 
 <table>
     <thead>
@@ -346,6 +385,31 @@ NamespaceSelector will, if set, only sync the target resource in Namespaces whic
           MatchLabels matches on the set of labels that must be present on a Namespace for the Bundle target to be synced there.<br/>
         </td>
         <td>false</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.spec.target.secret`
+
+
+Secret is the target Secret that all Bundle source data will be synced to. Using Secrets as targets is only supported if enabled at trust-manager startup. By default, trust-manager has no permissions for writing to secrets and can only read secrets in the trust namespace.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          Key is the key of the entry in the object's `data` field to be used.<br/>
+        </td>
+        <td>true</td>
       </tr></tbody>
 </table>
 
@@ -488,6 +552,13 @@ Target is the current Target that the Bundle is attempting or has completed sync
           NamespaceSelector will, if set, only sync the target resource in Namespaces which match the selector.<br/>
         </td>
         <td>false</td>
+      </tr><tr>
+        <td><b><a href="#bundlestatustargetsecret">secret</a></b></td>
+        <td>object</td>
+        <td>
+          Secret is the target Secret that all Bundle source data will be synced to. Using Secrets as targets is only supported if enabled at trust-manager startup. By default, trust-manager has no permissions for writing to secrets and can only read secrets in the trust namespace.<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -513,6 +584,13 @@ AdditionalFormats specifies any additional formats to write to the target
           JKS requests a JKS-formatted binary trust bundle to be written to the target. The bundle is created with the hardcoded password "changeit".<br/>
         </td>
         <td>false</td>
+      </tr><tr>
+        <td><b><a href="#bundlestatustargetadditionalformatspkcs12">pkcs12</a></b></td>
+        <td>object</td>
+        <td>
+          PKCS12 requests a PKCS12-formatted binary trust bundle to be written to the target. The bundle is created without a password.<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -521,6 +599,31 @@ AdditionalFormats specifies any additional formats to write to the target
 
 
 JKS requests a JKS-formatted binary trust bundle to be written to the target. The bundle is created with the hardcoded password "changeit".
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          Key is the key of the entry in the object's `data` field to be used.<br/>
+        </td>
+        <td>true</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.status.target.additionalFormats.pkcs12`
+
+
+PKCS12 requests a PKCS12-formatted binary trust bundle to be written to the target. The bundle is created without a password.
 
 <table>
     <thead>
@@ -588,5 +691,30 @@ NamespaceSelector will, if set, only sync the target resource in Namespaces whic
           MatchLabels matches on the set of labels that must be present on a Namespace for the Bundle target to be synced there.<br/>
         </td>
         <td>false</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.status.target.secret`
+
+
+Secret is the target Secret that all Bundle source data will be synced to. Using Secrets as targets is only supported if enabled at trust-manager startup. By default, trust-manager has no permissions for writing to secrets and can only read secrets in the trust namespace.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          Key is the key of the entry in the object's `data` field to be used.<br/>
+        </td>
+        <td>true</td>
       </tr></tbody>
 </table>
