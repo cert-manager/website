@@ -101,18 +101,16 @@ to a situation where updates to the `Ingress` (i.e a new DNS name) are not
 applied to the `Certificate`.
 
 To avoid this issue, in most cases `Certificate`s created via `ingress-shim`
-can be excluded from the backup. Given that the restore happens
+should be excluded from the backup. Given that the restore happens
 in the correct order (`Secret` with the X.509 certificate restored before
 the `Ingress`) `cert-manager` will be able to create a new `Certificate`
 for the `Ingress` and determine that the existing `Secret` is for that `Certificate`.
 
 ### Velero
 
-We have briefly tested backup and restore with `velero` `v1.5.3` and
-`cert-manager` versions `v1.3.1` and `v1.3.0` as well as `velero` `v1.3.1`
- and `cert-manager` `v1.1.0`.
+We have tested backup and restore with `velero` `v1.12.2` and `cert-manager` version `v1.13.2`.
 
- A few potential edge cases:
+A few potential edge cases:
 
 - Ensure that the backups include `cert-manager` CRDs.
   For example, we have seen that if `--exclude-namespaces` flag is passed to
@@ -124,7 +122,7 @@ We have briefly tested backup and restore with `velero` `v1.5.3` and
    exclude `Order`s, `Challenge`s and `CertificateRequest`s from the backup, see
    [Excluding some cert-manager resources from backup](#excluding-some-cert-manager-resources-from-backup).
 
-- Velero's [default restore order](https://github.com/vmware-tanzu/velero/blob/main/pkg/cmd/server/server.go#L470)(`Secrets` before `Ingress`es, Custom Resources
+- Velero's [default restore order](https://github.com/vmware-tanzu/velero/blob/a318e1da995a390c9f10e4aef7df356594944377/pkg/cmd/server/server.go#L511-L543) (`Secrets` before `Ingress`es, Custom Resources
   restored last), should ensure that there is no unnecessary certificate reissuance
   due to the order of restore operation, see [Order of restore](#order-of-restore).
 
@@ -139,6 +137,41 @@ We have briefly tested backup and restore with `velero` `v1.5.3` and
 - Velero does not restore owner references, so it may be necessary to exclude
   `Certificate`s created for `Ingress`es from the backup even when not
   re-creating the `Ingress` itself. See [Restoring Ingress Certificates](#restoring-ingress-certificates).
+
+
+#### Example backup and restore using Velero
+
+The following command will create a backup of all Kubernetes resources in the
+default and cert-manager namespaces, excluding `Order`s, `Challenge`s and
+`CertificateRequest`s (see above):
+```bash
+velero backup create \
+  full-backup \
+  --include-namespaces cert-manager,default \
+  --include-cluster-resources=true \
+  --exclude-resources challenges.acme.cert-manager.io,orders.acme.cert-manager.io,certificaterequests.cert-manager.io
+```
+
+To workaround Velero not restoring owner references, you can restore the backup
+in two steps: first restore the `Secret`s and `Ingress`es and the `cert-manager`
+deployment, second restore the `Certificate` resources. This will allow `cert-manager`'s
+controller to create the `Certificate` for the ingresses and set the owner reference.
+The second restore will then restore the manually created `Certificate`s and detect that
+the generated `Certificate`s for the `Ingress`es already exist and will not attempt to
+recreate them.
+
+1. Restore everything except `Certificate` resources:
+```bash
+velero restore create \
+  --from-backup full-backup \
+  --exclude-resources certificates.cert-manager.io
+```
+
+2. Wait for cert-manager to create the `Certificate`s for the `Ingress`es (if cert-manager is having RBAC/ webhook issues, you might have to manually restart the deployments). After the auto-generated `Certificate`s are created, restore the manually created `Certificate`s:
+```bash
+velero restore create \
+  --from-backup full-backup
+```
 
 ## Backing up CertificateRequests
 
