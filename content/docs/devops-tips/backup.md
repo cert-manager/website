@@ -122,7 +122,7 @@ A few potential edge cases:
    exclude `Order`s, `Challenge`s and `CertificateRequest`s from the backup, see
    [Excluding some cert-manager resources from backup](#excluding-some-cert-manager-resources-from-backup).
 
-- Velero's [default restore order](https://github.com/vmware-tanzu/velero/blob/main/pkg/cmd/server/server.go#L470) (`Secrets` before `Ingress`es, Custom Resources
+- Velero's [default restore order](https://github.com/vmware-tanzu/velero/blob/a318e1da995a390c9f10e4aef7df356594944377/pkg/cmd/server/server.go#L511-L543) (`Secrets` before `Ingress`es, Custom Resources
   restored last), should ensure that there is no unnecessary certificate reissuance
   due to the order of restore operation, see [Order of restore](#order-of-restore).
 
@@ -152,10 +152,13 @@ velero backup create \
   --exclude-resources challenges.acme.cert-manager.io,orders.acme.cert-manager.io,certificaterequests.cert-manager.io
 ```
 
-We recommend that you restore the backup in two steps, first restoring the
-`Secret`s and `Ingress`es and the `cert-manager` deployment, and then restoring
-the rest of the resources. This is because `cert-manager`'s controller needs to
-be able to create `Certificate` for the ingresses, so the owner reference is set.
+To workaround Velero not restoring owner references, you can restore the backup
+in two steps: first restore the `Secret`s and `Ingress`es and the `cert-manager`
+deployment, second restore the `Certificate` resources. This will allow `cert-manager`'s
+controller to create the `Certificate` for the ingresses and set the owner reference.
+The second restore will then restore the manually created `Certificate`s and detect that
+the generated `Certificate`s for the `Ingress`es already exist and will not attempt to
+recreate them.
 
 1. Restore everything except `Certificate` resources:
 ```bash
