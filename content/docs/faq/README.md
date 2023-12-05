@@ -150,6 +150,35 @@ spec:
 
 Default `duration` is [90 days](https://github.com/cert-manager/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26). If `renewBefore` has not been set, `Certificate` will be renewed 2/3 through its _actual_ duration.
 
+### Why do you say that passwords on JKS or PKCS#12 files aren't helpful?
+
+#### Simple Answer
+
+"Passwords" on PKCS#12 or JKS files are almost always security theater, and they're only needed to support applications which are unable to parse password-less versions of these files. Even if you use a secure password for these files (which is rare), weak encryption algorithms and the management of the underlying material usually invalidate the secure password.
+
+We recommend that you treat these passwords as legacy implementation details, and use short hard-coded strings for these passwords when you're
+forced to use one. Don't spend time trying to generate or handle "secure" passwords for these files - simply choose a constant such as `changeit` or `notapassword123` and use that for every PKCS#12 or JKS bundle you generate.
+
+#### Longer Answer
+
+Lots of people see the word "password" when handling JKS or PKCS#12 bundles and they draw the obvious
+conclusion that it's a valuable security resource which needs to be handled carefully.
+
+This is generally not the case - not only are these passwords not really passwords, but they're also vanishingly unlikely to be meaningful for security of any kind.
+
+Mostly, these passwords exist only because some applications require some password to be set. That requirement is the sole reason for cert-manager and its sub-projects supporting setting a password on these types of bundles.
+
+There are several main reasons why we don't consider these passwords to be security critical:
+
+1. Most applications which use these passwords will mount the file containing the password in plain text right next to the bundle which uses it, with the same permissions and access control. This would make even the most secure password completely pointless as a security measure.
+2. Most PKCS#12 and JKS bundles which are encrypted use extremely old encryption algorithms which are fundamentally insecure
+3. The word "password" leads people to think of human-memorable passwords, which are not appropriate for this kind of encryption. This means that the passwords used are often themselves insecure in this context.
+4. When we generate PKCS#12 or JKS files, they almost always live in the same Secret as an unencrypted private key anyway!
+
+Without a very detailed threat model and putting serious time into your system's architecture in an extremely paranoid way, spending time on these "passwords" is going to be a red herring time sink with little to no return. Your efforts would almost always be better spent on securing systems through other methods.
+
+See "simple answer" above for usage guidelines for these "passwords".
+
 ## Miscellaneous
 
 ### Kubernetes has a builtin `CertificateSigningRequest` API. Why not use that?
