@@ -150,7 +150,16 @@ spec:
 
 Default `duration` is [90 days](https://github.com/cert-manager/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26). If `renewBefore` has not been set, `Certificate` will be renewed 2/3 through its _actual_ duration.
 
-### Why do you say that passwords on JKS or PKCS#12 files aren't helpful?
+<a id="keystore-passwords"></a>
+### Why are passwords on JKS or PKCS#12 files not helpful?
+
+This question comes in many forms, including:
+
+- "Why is it OK to hard code these passwords?"
+- "Do I need to keep these passwords secure?"
+- "Are these passwords used in a secure way?"
+
+Specifically, this FAQ talks about passwords for PKCS#12 and JKS "keystores".
 
 #### Simple Answer
 
