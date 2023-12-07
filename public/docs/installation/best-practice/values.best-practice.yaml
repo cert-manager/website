@@ -1,5 +1,14 @@
 # Helm chart values which make cert-manager comply with CIS, BSI and NSA
-# security benchmarks.
+# security benchmarks and other best practices for deploying cert-manager in
+# production.
+#
+# Read the rationale for these values in:
+# * https://cert-manager.io/docs/installation/best-practice/
+
+replicaCount: 2
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
 automountServiceAccountToken: false
 serviceAccount:
   automountServiceAccountToken: false
@@ -28,6 +37,10 @@ volumeMounts:
   readOnly: true
 
 webhook:
+  replicaCount: 3
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
   automountServiceAccountToken: false
   serviceAccount:
     automountServiceAccountToken: false
@@ -56,6 +69,13 @@ webhook:
     readOnly: true
 
 cainjector:
+  extraArgs:
+  - --namespace=cert-manager
+  - --enable-certificates-data-source=false
+  replicaCount: 2
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
   automountServiceAccountToken: false
   serviceAccount:
     automountServiceAccountToken: false

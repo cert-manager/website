@@ -1,12 +1,19 @@
 ---
-title: Kubernetes CertificateSigningRequests
+title: CertificateSigningRequest resource
 description: 'cert-manager usage: Kubernetes CertificateSigningRequest resources'
 ---
+
+> **apiVersion:** certificates.k8s.io/v1  
+> **kind:** CertificateSigningRequest
+
+<div style={{textAlign: "center"}}>
+<object data="/images/request-certificate-overview/request-certificate-csr.svg"></object>
+</div>
 
 Kubernetes has an in-built
 [CertificateSigningRequest](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/)
 resource. This resource is similar to the cert-manager
-[CertificateRequest](../concepts/certificaterequest.md) in that it is used to
+[CertificateRequest](../usage/certificaterequest.md) in that it is used to
 request an X.509 signed certificate from a referenced Certificate Authority
 (CA).
 
@@ -164,3 +171,7 @@ are not approved by default, so you will likely need to approve it manually:
 ```bash
 $ kubectl certificate approve <name>
 ```
+
+## Inner workings diagram for developers
+
+<object data="/images/request-certificate-debug/certificate-signing-request-flow.svg"></object>

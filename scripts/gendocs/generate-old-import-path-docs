@@ -24,31 +24,23 @@ set -o pipefail
 REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "$0")/../.." && pwd)}"
 
 if ! command -v go &>/dev/null; then
-    echo "Ensure go is installed"
-    exit 1
+  echo "Ensure go is installed"
+  exit 1
 fi
 
 if ! command -v npm &>/dev/null; then
-    echo "Ensure npm is installed"
-    exit 1
+  echo "Ensure npm is installed"
+  exit 1
 fi
 
 tmpdir="$(mktemp -d)"
 apidocstmpdir="$(mktemp -d)"
 
 cleanup() {
-	# we can't simply remove tmpdir because the modcache is written as read-only
-	# and we'll get permissions errors, so we use go clean instead
-	export GO111MODULE="auto"
-	echo "+++ Cleaning up temporary GOPATH"
-	go clean -modcache
-
-	rm -rf "${apidocstmpdir}"
-	rm -rf "${tmpdir}"
+  rm -rf "${apidocstmpdir}"
+  rm -rf "${tmpdir}"
 }
 trap cleanup EXIT
-
-"${REPO_ROOT}/scripts/update-node_modules"
 
 # Create fake GOPATH
 echo "+++ Creating temporary GOPATH"
@@ -61,18 +53,12 @@ export GOBIN
 
 go install github.com/ahmetb/gen-crd-api-reference-docs@v0.3.0
 
-mkdir -p "${GOPATH}/src/github.com/jetstack"
-gitdir="${GOPATH}/src/github.com/jetstack/cert-manager"
-echo "+++ Cloning cert-manager repository..."
-git clone "https://github.com/jetstack/cert-manager.git" "$gitdir"
-cd "$gitdir"
-
 # genversion takes two arguments (branch in cert-manager repo and a directory in
 # this repo under content) and generates API reference docs from cert-manager
 # branch for the path in this repo.
 genversion() {
-	checkout "$1"
-	gendocs "$2"
+  checkout "$1"
+  gendocs "$2"
 }
 
 genversionwithcli() {
@@ -91,30 +77,31 @@ genversionwithcli() {
 }
 
 checkout() {
-	branch="$1"
-	pushd "$gitdir"
-	rm -rf vendor/
-	echo "+++ Checking out branch $branch"
-	git fetch origin "$branch"
-	git reset --hard "origin/$branch"
-	echo "+++ Running 'go mod vendor' (this may take a while)"
-	go mod vendor
+  branch="$1"
+
+  mkdir -p "${GOPATH}/src/github.com/jetstack"
+  gitdir="${GOPATH}/src/github.com/jetstack/cert-manager"
+  echo "+++ Cloning cert-manager repository..."
+  git clone "https://github.com/jetstack/cert-manager.git" "$gitdir" --depth 1 --branch "$branch"
+  pushd "$gitdir"
+  echo "+++ Running 'go mod vendor' (this may take a while)"
+  go mod vendor
 }
 
 gendocs() {
-	outputdir="$1"
-	mkdir -p ${apidocstmpdir}/${outputdir}/
-	echo "+++ Generating reference docs..."
-	"${GOBIN}/gen-crd-api-reference-docs" \
-		-config "${REPO_ROOT}/scripts/gendocs/config.json" \
-		-template-dir "${REPO_ROOT}/scripts/gendocs/templates" \
-		-api-dir "./pkg/apis" \
-		-out-file ${apidocstmpdir}/${outputdir}/api-docs.md
+  outputdir="$1"
+  mkdir -p "${apidocstmpdir}/${outputdir}"/
+  echo "+++ Generating reference docs..."
+  "${GOBIN}/gen-crd-api-reference-docs" \
+    -config "${REPO_ROOT}/scripts/gendocs/config.json" \
+    -template-dir "${REPO_ROOT}/scripts/gendocs/templates" \
+    -api-dir "./pkg/apis" \
+    -out-file "${apidocstmpdir}/${outputdir}"/api-docs.md
 
-	${REPO_ROOT}/scripts/gendocs/postprocess/api-doc-postprocess.js <${apidocstmpdir}/${outputdir}/api-docs.md > "${REPO_ROOT}/content/${outputdir}/reference/api-docs.md"
+  "${REPO_ROOT}"/scripts/gendocs/postprocess/api-doc-postprocess.js <"${apidocstmpdir}/${outputdir}/api-docs.md" >"${REPO_ROOT}/content/${outputdir}/reference/api-docs.md"
 
-	rm -rf vendor/
-	popd
+  rm -rf vendor/
+  popd
 }
 
 # genclireference will attempt to run main.go --help for the target and write the output to a markdown file
@@ -145,7 +132,7 @@ genclireference() {
   mkdir -p "${REPO_ROOT}/content/${outputdir}/cli/"
 
   output=$(go run "$target/main.go" --help)
-  cat > "${REPO_ROOT}/content/${outputdir}/cli/$name.md" << EOF
+  cat >"${REPO_ROOT}/content/${outputdir}/cli/$name.md" <<EOF
 ---
 title: $name CLI reference
 description: "cert-manager $name CLI documentation"
@@ -187,25 +174,25 @@ EOF
 # This will only be necessary for the release-1.6 branch.
 
 generate_release16() {
-    # The special-case for release-1.6 is in a function to make it easier to
-    # comment and uncomment below
-    checkout "release-1.6"
-    # Generate CLI reference docs before deleting the legacy API,
-    # as they will not compile otherwise
-    genclireference "v1.6-docs" "cmd/acmesolver" "acmesolver"
-    genclireference "v1.6-docs" "cmd/cainjector" "cainjector"
-    genclireference "v1.6-docs" "cmd/ctl" "cmctl"
-    genclireference "v1.6-docs" "cmd/controller" "controller"
-    genclireference "v1.6-docs" "cmd/webhook" "webhook"
+  # The special-case for release-1.6 is in a function to make it easier to
+  # comment and uncomment below
+  checkout "release-1.6"
+  # Generate CLI reference docs before deleting the legacy API,
+  # as they will not compile otherwise
+  genclireference "v1.6-docs" "cmd/acmesolver" "acmesolver"
+  genclireference "v1.6-docs" "cmd/cainjector" "cainjector"
+  genclireference "v1.6-docs" "cmd/ctl" "cmctl"
+  genclireference "v1.6-docs" "cmd/controller" "controller"
+  genclireference "v1.6-docs" "cmd/webhook" "webhook"
 
-    rm -r pkg/apis/acme/v1alpha2
-    rm -r pkg/apis/acme/v1alpha3
-    rm -r pkg/apis/acme/v1beta1
-    rm -r pkg/apis/certmanager/v1alpha2
-    rm -r pkg/apis/certmanager/v1alpha3
-    rm -r pkg/apis/certmanager/v1beta1
+  rm -r pkg/apis/acme/v1alpha2
+  rm -r pkg/apis/acme/v1alpha3
+  rm -r pkg/apis/acme/v1beta1
+  rm -r pkg/apis/certmanager/v1alpha2
+  rm -r pkg/apis/certmanager/v1alpha3
+  rm -r pkg/apis/certmanager/v1beta1
 
-    gendocs "v1.6-docs"
+  gendocs "v1.6-docs"
 }
 
 ###### WARNING ######

@@ -20,9 +20,9 @@ In order to complete these challenges, cert-manager introduces two
 validation can be found on the Let's Encrypt website
 [here](https://letsencrypt.org/how-it-works/). An order represents a single
 certificate request which will be created automatically once a new
-[`CertificateRequest`](./certificaterequest.md) resource referencing an ACME
+[`CertificateRequest`](../usage/certificaterequest.md) resource referencing an ACME
 issuer has been created. `CertificateRequest` resources are created
-automatically by cert-manager once a [`Certificate`](./certificate.md) resource
+automatically by cert-manager once a [`Certificate`](../usage/certificate.md) resource
 is created, has its specification changed, or needs renewal.
 
 As an end-user, you will never need to manually create an `Order` resource.

@@ -7,7 +7,7 @@ description: 'cert-manager installation: Using OLM'
 
 ### Prerequisites
 
-- Install a [supported version of Kubernetes or OpenShift](./supported-releases.md).
+- Install a [supported version of Kubernetes or OpenShift](../releases/README.md).
 - Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if you are using Kubernetes on a cloud platform.
 
 ### Option 1: Installing from OperatorHub Web Console on OpenShift
@@ -41,7 +41,8 @@ from the [Krew Kubectl plugins index][] and then use that to install the cert-ma
 ```sh
 operator-sdk olm install
 kubectl krew install operator
-kubectl operator install cert-manager -n operators --channel stable --approval Automatic
+kubectl create ns cert-manager
+kubectl operator install cert-manager -n cert-manager --channel stable --approval Automatic --create-operator-group
 ```
 
 You can monitor the progress of the installation as follows:
@@ -217,7 +218,7 @@ The following JSON patch will append `-v=6` to command line arguments of the cer
 (the first container of the first Deployment).
 
 ```bash
-kubectl patch csv cert-manager.v1.11.0 \
+kubectl patch csv cert-manager.v1.13.2 \
   --type json \
   -p '[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "-v=6" }]'
 ```

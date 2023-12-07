@@ -2,8 +2,8 @@
 title: cmctl CLI reference
 description: "cert-manager cmctl CLI documentation"
 ---
-```
 
+```
 cmctl is a CLI tool manage and configure cert-manager resources for Kubernetes
 
 Usage: cmctl [command]
@@ -11,6 +11,7 @@ Usage: cmctl [command]
 Available Commands:
   approve      Approve a CertificateRequest
   check        Check cert-manager components
+  completion   Generate completion scripts for the cert-manager CLI
   convert      Convert cert-manager config files between different API versions
   create       Create cert-manager resources
   deny         Deny a CertificateRequest
@@ -25,6 +26,9 @@ Available Commands:
 Flags:
   -h, --help                           help for cmctl
       --log-flush-frequency duration   Maximum number of seconds between log flushes (default 5s)
+      --logging-format string          Sets the log format. Permitted formats: "json" (gated by LoggingBetaOptions), "text". (default "text")
+  -v, --v Level[=2]                    number for the log level verbosity
+      --vmodule pattern=N,...          comma-separated list of pattern=N settings for file-filtered logging (only works for text log format)
 
 Use "cmctl [command] --help" for more information about a command.
 ```

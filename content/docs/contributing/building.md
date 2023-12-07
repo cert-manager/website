@@ -7,8 +7,11 @@ cert-manager is built and tested using [make](https://www.gnu.org/software/make/
 where possible and keeping system dependencies to a minimum. The cert-manager build system can provision most of its dependencies - including Go -
 automatically if required.
 
-cert-manager's build system fully supports developers who use `Linux amd64`, `macOS amd64` and `macOS arm64`. Other operating systems and architectures may
-work, but are largely untested.
+cert-manager's build system fully supports developers who use `Linux amd64`, `macOS amd64` and `macOS arm64`.
+
+It also has limited support for `Linux arm64`, although that platform is largely untested and isn't fully supported.
+
+Other operating systems and architectures may work but will likely require hacks and workarounds to develop on.
 
 ## Prerequisites
 
@@ -67,6 +70,29 @@ go version go1.AB.C linux/amd64
 go binary used for above version information: go
 ```
 
+### Go Workspaces
+
+In short: Some development tools will complain about cert-manager's module layout; to help with this, generate a
+`go.work` file using `make go-workspace`.
+
+The cert-manager repository as of cert-manager 1.12 contains multiple Go modules, in a setup where only the core module `github.com/cert-manager/cert-manager`
+is expected to be imported by third party modules. There are separate modules (which we call submodules), all of which have replace statements for the core
+cert-manager module.
+
+This setup is intentional to convey that these submodules are not intended to be imported by third parties, and to ensure that each submodule always uses
+whatever the cert-manager core module version is at the same commit - but this structure can have the side effect that certain development tools and scripts
+will not work as expected.
+
+As an example, `go test ./...` will by default only affect the core module. To test, say, the controller, you'd need to use `cd cmd/controller && go test ./...`.
+
+This can be avoided through the use of go workspaces, which will handle local replacements for you and work better with editors such as VS Code.
+
+You can run `make go-workspace` to generate a `go.work` file which should enable `go test ./...` to work across the
+whole repo, and which should help editors to understand the module structure.
+
+Note that go workspaces are not used when testing pull requests in CI. If you see errors in CI which you can't replicate
+locally, try building with the `GOWORK` environment variable set to `off` or deleting the `go.work` file.
+
 ### Parallelism
 
 The cert-manager Makefile is designed to be highly parallel wherever possible. Any build and test commands should be able to be executed in parallel using
@@ -103,6 +129,8 @@ There are make targets to help with this; see [Developing with Kind](./kind.md) 
 
 First of all: If you want to test using `go test`, feel free! For unit tests (which we define as any test outside of the `test/` directory), `go test` will
 work on a fresh checkout.
+
+Note that the cert-manager repo is split into multiple modules and unless you're using go workspaces `go test ./...` won't actually run all tests. See [Go Workspaces](./building.md#go-workspaces) above for more details.
 
 Integration tests may require some external tools to be set up first, so to run the integration tests inside `test/` you might need to run:
 

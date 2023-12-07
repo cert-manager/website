@@ -10,8 +10,8 @@ Since the number of potential issuers is larger than what could reasonably be su
 main cert-manager repository, cert-manager also supports out-of-tree external issuers, and treats
 them the same as in-tree issuer types.
 
-This document is for people looking to _create_ external issuers. For more information on how to
-install and configure external issuer types, read the [configuration documentation](../configuration/external.md).
+This document is for people looking to _create_ external issuers.
+For a list of example external issuers, see the [issuers page](../configuration/issuers.md).
 
 ## General Overview
 
@@ -49,20 +49,13 @@ on how to write an external issuer using Kubebuilder and controller-runtime.
 ## Approval
 
 Before signing a certificate, Issuers **must** also ensure that the `CertificateRequest` is
-[`Approved`](../concepts/certificaterequest.md#approval).
+[`Approved`](../usage/certificaterequest.md#approval).
 
 If the `CertificateRequest` is not `Approved`, the issuer **must** not process it. Issuers are not
 responsible for approving `CertificateRequests` and should refuse to proceed if they find a certificate
 that is not approved.
 
-### Supporting Legacy cert-manager Releases
-
-Certificate approval was added to cert-manager in `v1.3`. In order to support older versions of cert-manager,
-external issuers may choose to sign `CertificateRequests` that will never have an approval
-condition set, but this should be feature-gated and disabled by default.
-
-If you're creating a new External Issuer today, we'd strongly recommend that you do not support such old
-versions of cert-manager.
+If a `CertificateRequest` created for an issuance associated with a `Certificate` gets [`Denied`](../usage/certificaterequest.md#approval), the issuance will be failed by cert-manager's issuing controller.
 
 ## Conditions
 
@@ -72,7 +65,7 @@ status of that resource to a ready state, as this is what is used to signal to h
 controllers - such as the `Certificate` controller - that the resource is ready to be consumed.
 
 Conversely, if the `CertificateRequest` fails, it is as important to mark the resource as such, as this will
-also be used as a signal to higher order controllers. Valid condition states are listed under [concepts](../concepts/certificaterequest.md#conditions).
+also be used as a signal to higher order controllers. Valid condition states are listed under [concepts](../usage/certificaterequest.md#conditions).
 
 ## Implementation
 

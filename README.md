@@ -104,6 +104,27 @@ Sometimes you'll want to add a comment which is only for documentation maintaine
 
 Use `{/* my comment */}` rather than the HTML-style comments you'd normally use for Markdown files. Other comment types will cause errors.
 
+### Task: Merging `master` into `release-next`
+
+In rare occasions, when writing documentation for an unreleased feature, you may
+notice that some recent changes in `master` aren't present in `release-next`. If
+that is a problem, you will want to update `release-next` branch with the latest
+changes from `master`. To update `release-next` with the changes made to
+`master`, follow these steps:
+
+1. Create a PR to merge `master` into `release-next` using [this magic
+   link][ff-release-next].
+2. If you see the label `dco-signoff: no`, add a comment on the PR with:
+
+   ```text
+    /override dco
+    ```
+
+   It is necessary because some the merge commits have been written by the bot
+   and do not have a DCO signoff.
+
+[ff-release-next]: https://github.com/cert-manager/website/compare/release-next...master?quick_pull=1&title=%5Brelease-next%5D+Merge+master+into+release-next&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
+
 ## Website Development Tooling
 
 First [install nodejs (and package manager called `npm`)](https://nodejs.org/en/).
@@ -159,7 +180,7 @@ This will automatically run a number of checks against your local environment, i
 
 > ℹ️ All these checks are also run automatically for pull requests.
 > The results will be reported in the [checks summary](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks) at the bottom of your GitHub PR.
-> Read the [cert-manager-website-presubmits.yaml prow configuration file](https://github.com/jetstack/testing/blob/master/config/jobs/cert-manager/website/cert-manager-website-presubmits.yaml) and the [check.yaml workflow file](.github/workflows/check.yaml) for more details.
+> Read the [cert-manager-website-presubmits.yaml prow configuration file](https://github.com/cert-manager/testing/blob/master/config/jobs/cert-manager/website/cert-manager-website-presubmits.yaml) and the [check.yaml workflow file](.github/workflows/check.yaml) for more details.
 
 ### Building for a Release
 

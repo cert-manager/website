@@ -7,41 +7,144 @@ Learn how to install cert-manager using kubectl and static manifests.
 
 ## Prerequisites
 
-- [Install `kubectl` version `>= v1.19.0`](https://kubernetes.io/docs/tasks/tools/). (otherwise, you'll have issues updating the CRDs - see [v0.16 upgrade notes](./upgrading/upgrading-0.15-0.16.md#issue-with-older-versions-of-kubectl))
-- Install a [supported version of Kubernetes or OpenShift](./supported-releases.md).
+- [Install `kubectl` version `>= v1.19.0`](https://kubernetes.io/docs/tasks/tools/). (otherwise, you'll have issues updating the CRDs - see [v0.16 upgrade notes](../releases/upgrading/upgrading-0.15-0.16.md#issue-with-older-versions-of-kubectl))
+- Install a [supported version of Kubernetes or OpenShift](../releases/README.md).
 - Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if you are using Kubernetes on a cloud platform.
 
 ## Steps
 
-All resources (the [`CustomResourceDefinitions`](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions) and the cert-manager, cainjector and webhook components)
+### 1. Install from the cert-manager release manifest
+
+All resources (the CustomResourceDefinitions and the cert-manager, cainjector and webhook components)
 are included in a single YAML manifest file:
 
 Install all cert-manager components:
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml
 ```
 
 By default, cert-manager will be installed into the `cert-manager`
 namespace. It is possible to run cert-manager in a different namespace, although
 you'll need to make modifications to the deployment manifests.
 
-Once you have deployed cert-manager, you can [verify the installation](./verify.md).
-
-## Permissions Errors on Google Kubernetes Engine
-
-When running on GKE (Google Kubernetes Engine), you might encounter a 'permission denied' error when creating some
-of the required resources. This is a nuance of the way GKE handles RBAC and IAM permissions,
-and as such you might need to elevate your own privileges to that of a "cluster-admin" **before**
-running `kubectl apply`.
-
-If you have already run `kubectl apply`, you should run it again after elevating your permissions:
+Once you've installed cert-manager, you can verify it is deployed correctly by
+checking the `cert-manager` namespace for running pods:
 
 ```bash
-kubectl create clusterrolebinding cluster-admin-binding \
-    --clusterrole=cluster-admin \
-    --user=$(gcloud config get-value core/account)
+$ kubectl get pods --namespace cert-manager
+
+NAME                                       READY   STATUS    RESTARTS   AGE
+cert-manager-5c6866597-zw7kh               1/1     Running   0          2m
+cert-manager-cainjector-577f6d9fd7-tr77l   1/1     Running   0          2m
+cert-manager-webhook-787858fcdb-nlzsq      1/1     Running   0          2m
 ```
+
+You should see the `cert-manager`, `cert-manager-cainjector`, and
+`cert-manager-webhook` pods in a `Running` state. The webhook might take a
+little longer to successfully provision than the others.
+
+If you experience problems, first check the [FAQ](../faq/README.md).
+
+### 2. (optional) Wait for cert-manager webhook to be ready
+
+The webhook component can take some time to start, and make the Kubernetes API server trust the webhook's certificate.
+
+First, make sure that [cmctl is installed](../reference/cmctl.md#installation).
+
+cmctl performs a dry-run certificate creation check against the Kubernetes cluster.
+If successful, the message `The cert-manager API is ready` is displayed.
+
+```bash
+$ cmctl check api
+The cert-manager API is ready
+```
+
+The command can also be used to wait for the check to be successful.
+Here is an output example of running the command at the same time that cert-manager is being installed:
+
+```bash
+$ cmctl check api --wait=2m
+Not ready: the cert-manager CRDs are not yet installed on the Kubernetes API server
+Not ready: the cert-manager CRDs are not yet installed on the Kubernetes API server
+Not ready: the cert-manager webhook deployment is not ready yet
+Not ready: the cert-manager webhook deployment is not ready yet
+Not ready: the cert-manager webhook deployment is not ready yet
+Not ready: the cert-manager webhook deployment is not ready yet
+The cert-manager API is ready
+```
+
+<a id="verify"></a>
+### 2. (optional) End-to-end verify the installation
+
+Best way to fully verify the installation is to issue a test certificate. For this, we will create a self-signed issuer and a certificate resource in a test namespace.
+
+
+```bash
+$ cat <<EOF > test-resources.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager-test
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: test-selfsigned
+  namespace: cert-manager-test
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: selfsigned-cert
+  namespace: cert-manager-test
+spec:
+  dnsNames:
+    - example.com
+  secretName: selfsigned-cert-tls
+  issuerRef:
+    name: test-selfsigned
+EOF
+```
+
+Create the test resources.
+```bash
+$ kubectl apply -f test-resources.yaml
+```
+
+Check the status of the newly created certificate. You may need to wait a few
+seconds before cert-manager processes the certificate request.
+```bash
+$ kubectl describe certificate -n cert-manager-test
+
+...
+Spec:
+  Common Name:  example.com
+  Issuer Ref:
+    Name:       test-selfsigned
+  Secret Name:  selfsigned-cert-tls
+Status:
+  Conditions:
+    Last Transition Time:  2019-01-29T17:34:30Z
+    Message:               Certificate is up to date and has not expired
+    Reason:                Ready
+    Status:                True
+    Type:                  Ready
+  Not After:               2019-04-29T17:34:29Z
+Events:
+  Type    Reason      Age   From          Message
+  ----    ------      ----  ----          -------
+  Normal  CertIssued  4s    cert-manager  Certificate issued successfully
+```
+
+Clean up the test resources.
+```bash
+$ kubectl delete -f test-resources.yaml
+```
+
+If all the above steps have completed without error, you're good to go!
 
 ## Uninstalling
 > **Warning**: To uninstall cert-manager you should always use the same process for
@@ -115,6 +218,7 @@ First, delete existing cert-manager webhook configurations, if any:
 
 ```bash
 kubectl delete mutatingwebhookconfigurations cert-manager-webhook
+kubectl delete validatingwebhookconfigurations cert-manager-webhook
 ```
 
 Then change the `.metadata.finalizers` field to an empty list by editing the challenge resource:

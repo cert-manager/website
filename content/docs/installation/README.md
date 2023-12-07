@@ -12,7 +12,7 @@ Learn about the various ways you can install cert-manager and how to choose betw
 The default static configuration can be installed as follows:
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.yaml
 ```
 
 📖 Read more about [installing cert-manager using kubectl apply and static manifests](./kubectl.md).
@@ -32,10 +32,9 @@ which you can do from the OpenShift web console.
 
 ## Continuous deployment
 
-> You know how to configure your cert-manager setup and want to automate this.
+> If you know how to configure your cert-manager setup and want to automate this,
+> you can use the cert-manager Helm chart directly with tools like Flux, ArgoCD and Anthos.
+> Or you can output YAML using `helm template` to generate customized cert-manager installation manifests,
+> which can be piped into your preferred deployment tool.
 
-📖 **helm**: You can use [the cert-manager Helm chart](./helm.md) directly with systems like Flux, ArgoCD and Anthos.
-
-📖 **helm template**: You can use `helm template` to generate customized cert-manager installation manifests.
-See [Output YAML using helm template](./helm.md#output-yaml) for more details.
-This templated cert-manager manifest can be piped into your preferred deployment tool.
+📖 **Continuous Deployment**: Learn [how to automate the installation of cert-manager using tools like Flux and Argo CD](./continuous-deployment-and-gitops.md).

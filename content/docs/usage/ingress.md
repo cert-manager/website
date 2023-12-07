@@ -1,7 +1,14 @@
 ---
-title: Securing Ingress Resources
+title: Annotated Ingress resource
 description: 'cert-manager usage: Kubernetes Ingress'
 ---
+
+> **apiVersion:** networking.k8s.io/v1  
+> **kind:** Ingress
+
+<div style={{textAlign: "center"}}>
+<object data="/images/request-certificate-overview/request-certificate-ingress.svg"></object>
+</div>
 
 A common use-case for cert-manager is requesting TLS signed certificates to
 secure your ingress resources. This can be done by simply adding annotations to
@@ -49,13 +56,25 @@ spec:
 You can specify the following annotations on Ingress resources in order to
 trigger Certificate resources to be automatically created:
 
-- `cert-manager.io/issuer`:  the name of an Issuer to acquire the certificate
-  required for this Ingress. The Issuer *must* be in the same namespace as the
-  Ingress resource.
+- `cert-manager.io/issuer`:  the name of the issuer that should issue the certificate
+  required for this Ingress.
 
-- `cert-manager.io/cluster-issuer`: the name of a ClusterIssuer to acquire the
-  certificate required for this Ingress. It does not matter which namespace your
-  Ingress resides, as ClusterIssuers are non-namespaced resources.
+  > ⚠️ This annotation does _not_ assume a namespace scoped issuer. It will
+  default to cert-manager.io Issuer, however in case of external issuer types,
+  this should be used for both namespaced and cluster scoped issuer types.
+
+  > ⚠️ If a namespace scoped issuer is used then the issuer *must* be in
+  the same namespace as the Ingress resource.
+
+- `cert-manager.io/cluster-issuer`: the name of a cert-manager.io ClusterIssuer
+  to acquire the certificate required for this Ingress. It does not matter which
+  namespace your Ingress resides, as ClusterIssuers are non-namespaced
+  resources.
+
+  > ⚠️ This annotation is a shortcut to refer to to
+  cert-manager.io ClusterIssuer without having to specify group and kind. It is
+  _not_ intended to be used to specify an external cluster-scoped issuer- please
+  use `cert-manager.io/issuer` annotation for those.
 
 - `cert-manager.io/issuer-kind`: the kind of the external issuer resource, for
   example `AWSPCAIssuer`. This is only necessary for out-of-tree issuers.
@@ -83,12 +102,48 @@ trigger Certificate resources to be automatically created:
   This annotation will also add the annotation
   `"cert-manager.io/issue-temporary-certificate": "true"` onto created
   certificates which will cause a [temporary
-  certificate](./certificate.md#temporary-certificates-whilst-issuing) to be set
+  certificate](../usage/certificate.md#temporary-certificates-whilst-issuing) to be set
   on the resulting Secret until the final signed certificate has been returned.
   This is useful for keeping compatibility with the `ingress-gce` component.
 
 - `cert-manager.io/common-name`: (optional) this annotation allows you to
   configure `spec.commonName` for the Certificate to be generated.
+
+- `cert-manager.io/email-sans`: (optional) this annotation allows you to
+  configure `spec.emailAddresses` field for the Certificate to be generated.
+  Supports comma-separated values e.g. "me@example.com,you@example.com"
+
+- `cert-manager.io/subject-organizations`: (optional) this annotation allows you to
+  configure `spec.subject.organizations` field for the Certificate to be generated.
+  Supports comma-separated values e.g. "Company 1,Company 2"
+
+- `cert-manager.io/subject-organizationalunits`: (optional) this annotation allows you to
+  configure `spec.subject.organizationalUnits` field for the Certificate to be generated.
+  Supports comma-separated values e.g. "IT Services,Cloud Services"
+
+- `cert-manager.io/subject-countries`: (optional) this annotation allows you to
+  configure `spec.subject.countries` field for the Certificate to be generated.
+  Supports comma-separated values e.g. "Country 1,Country 2"
+
+- `cert-manager.io/subject-provinces`: (optional) this annotation allows you to
+  configure `spec.subject.provinces` field for the Certificate to be generated.
+  Supports comma-separated values e.g. "Province 1,Province 2"
+
+- `cert-manager.io/subject-localities`: (optional) this annotation allows you to
+  configure `spec.subject.localities` field for the Certificate to be generated.
+  Supports comma-separated values e.g. "City 1,City 2"
+
+- `cert-manager.io/subject-postalcodes`: (optional) this annotation allows you to
+  configure `spec.subject.postalCodes` field for the Certificate to be generated.
+  Supports comma-separated values e.g. "123ABC,456DEF"
+
+- `cert-manager.io/subject-streetaddresses`: (optional) this annotation allows you to
+  configure `spec.subject.streetAddresses` field for the Certificate to be generated.
+  Supports comma-separated values e.g. "123 Example St,456 Other Blvd"
+
+- `cert-manager.io/subject-serialnumber`: (optional) this annotation allows you to
+  configure `spec.subject.serialNumber` field for the Certificate to be generated.
+  Supports comma-separated values e.g. "10978342379280287615,1111144445555522228888"
 
 - ` cert-manager.io/duration`: (optional) this annotation allows you to
   configure `spec.duration` field for the Certificate to be generated.
@@ -122,6 +177,10 @@ trigger Certificate resources to be automatically created:
   configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
   Valid values are `Never` and `Always`. If unset a rotation policy `Never` will be used.
 
+## Generate multiple certificates with multiple ingresses
+
+If you need to generate certificates from multiple ingresses make sure it has the issuer annotation.
+Besides the annotation, it is necessary that each ingress possess a unique `tls.secretName`
 
 ## Optional Configuration
 
@@ -161,3 +220,9 @@ guide](../installation/README.md).
 ## Troubleshooting
 
 If you do not see a `Certificate` resource being created after applying the ingress-shim annotations check that at least `cert-manager.io/issuer` or `cert-manager.io/cluster-issuer` is set. If you want to use `kubernetes.io/tls-acme: "true"` make sure to have checked all steps above and you might want to look for errors in the cert-manager pod logs if not resolved.
+
+## Inner workings diagram for developers
+
+<object data="/images/request-certificate-debug/ingress-shim-flow.svg"></object>
+
+[1] https://cert-manager.io/docs/usage/certificate

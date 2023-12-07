@@ -30,14 +30,13 @@ aware of this need! We'll always try to avoid breakage where we can.
 
 ## Module Import Paths
 
-The original cert-manager repository was created on GitHub as `https://github.com/jetstack/cert-manager`, and was later
+For all supported versions of cert-manager, the module import path is `github.com/cert-manager/cert-manager`.
+
+Historically, the cert-manager repository was created on GitHub as `https://github.com/jetstack/cert-manager`, and was later
 migrated to `https://github.com/cert-manager/cert-manager`.
 
-This means the Go module import path you need depends on the version of cert-manager you're trying to use.
+This means that the Go module import path you need may be different if you're trying to use an older version of cert-manager.
 
-For cert-manager 1.8 and later, use the new path:   
-`github.com/cert-manager/cert-manager`
+For cert-manager 1.8 and later, use the new path listed above.
 
-
-For cert-manager 1.7 and earlier, including all point releases, use the old path:   
-`github.com/jetstack/cert-manager`
+For cert-manager versions older than 1.8 use the old path: `github.com/jetstack/cert-manager`

@@ -117,6 +117,48 @@ spec:
     secretName: root-secret
 ```
 
+Alternatively, if you are looking to use `ClusterIssuer` for signing `Certificates` anywhere in your cluster with the `SelfSigned` `Certificate` CA, use the YAML below (slight modification to the last step):
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sandbox
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: my-selfsigned-ca
+  namespace: cert-manager
+spec:
+  isCA: true
+  commonName: my-selfsigned-ca
+  secretName: root-secret
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: my-ca-issuer
+spec:
+  ca:
+    secretName: root-secret
+```
+The "selfsigned-issuer" `ClusterIssuer` is used to issue the Root CA Certificate. Then, "my-ca-issuer" `ClusterIssuer` is used to issue but also sign certificates using the newly created Root CA `Certificate`, which is what you will use for future certificates cluster-wide.
+
 ### CRL Distribution Points
 
 You may also optionally specify [CRL](https://en.wikipedia.org/wiki/Certificate_revocation_list)
@@ -139,7 +181,7 @@ Clients consuming `SelfSigned` certificates have _no way_ to trust them
 without already having the certificates beforehand, which can be hard to
 manage when the client is in a different namespace to the server.
 
-This limitation can be tackled by using [trust-manager](../projects/trust-manager/README.md) to distribute `ca.crt`
+This limitation can be tackled by using [trust-manager](../trust/trust-manager/README.md) to distribute `ca.crt`
 to other namespaces.
 
 There is no secure alternative to solving the problem of distributing trust stores; it's possible

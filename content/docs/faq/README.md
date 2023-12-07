@@ -91,19 +91,37 @@ cert-manager publishes all events to the Kubernetes events mechanism, you can ge
 
 Due to the nature of the Kubernetes event mechanism these will be purged after a while. If you're using a dedicated logging system it might be able or is already also storing Kubernetes events.
 
+{/* This empty link preserves old links to #what-happens-if-a-renewal-doesn't happen?-will-it-be-tried-again-after-some-time?", which matched the old title of this section */}
+<a id="alternative-certificate-chain"></a>
 ### What happens if issuance fails? Will it be retried?
 
-{/* This empty link preserves old links to #what-happens-if-a-renewal-doesn't happen?-will-it-be-tried-again-after-some-time?", which matched the old title of this section */}
+cert-manager will retry a failed issuance except for a few rare edge cases where
+manual intervention is needed.
 
-<a id="alternative-certificate-chain" className="hidden-link"></a>
+We aim to retry after a short delay in case of ephemeral failures such as
+network connection errors and with a longer exponentially increasing delay after
+'terminal' failures.
 
-cert-manager will retry a failed issuance except for a few rare edge cases where manual intervention is needed.
+You can observe that latest issuance has terminally failed if the `Certificate`
+has `Issuing` condition set to false and has `status.lastFailureTime` set. In
+this case the issuance will be retried after an exponentially increasing delay
+(1 to 32 hours) by creating a new `CertficateRequest`. You can trigger an
+immediate renewal using the [`cmctl renew`
+command](../reference/cmctl.md#renew). Terminal failures occur if the issuer
+sets the `CertificateRequest` to failed (for example if CA rejected the request
+due to a rate limit being reached) or invalid or if the `CertificateRequest`
+gets denied by an approver.
 
-If an issuance fails because of a temporary error, it will be retried again with a short exponential backoff (currently 5 seconds to 5 minutes). A temporary error is one that does not result in a failed `CertificateRequest`.
+Ephemeral failures result in the same `CertificateRequest` being re-synced after
+a short delay (up to 5 minutes). Typically they can only be observed in
+cert-manager controller logs.
 
-If the issuance fails with an error that resulted in a failed `CertificateRequest`, it will be retried with a longer binary exponential backoff (1 hour to 32 hours) to avoid overwhelming external services.
-
-You can always trigger immediate renewal using the [`cmctl renew` command](../reference/cmctl.md#renew)
+If it appears the issuance has got stuck and `cmctl renew` does not work, you
+can delete the latest `CertificateRequest`. This is mostly a harmless action
+(the worst that could happen is duplicate issuance if there was a potentially
+successful one in progress), but we do aim for this to not be part of user flow-
+do reach out if you think you have found a case where the flow could be
+improved.
 
 ### Is ECC (elliptic-curve cryptography) supported?
 
@@ -131,6 +149,44 @@ spec:
 ### If `renewBefore` or `duration` is not defined, what will be the default value?
 
 Default `duration` is [90 days](https://github.com/cert-manager/cert-manager/blob/v1.2.0/pkg/apis/certmanager/v1/const.go#L26). If `renewBefore` has not been set, `Certificate` will be renewed 2/3 through its _actual_ duration.
+
+<a id="keystore-passwords"></a>
+### Why are passwords on JKS or PKCS#12 files not helpful?
+
+This question comes in many forms, including:
+
+- "Why is it OK to hard code these passwords?"
+- "Do I need to keep these passwords secure?"
+- "Are these passwords used in a secure way?"
+
+Specifically, this FAQ talks about passwords for PKCS#12 and JKS "keystores".
+
+#### Simple Answer
+
+"Passwords" on PKCS#12 or JKS files are almost always security theater, and they're only needed to support applications which are unable to parse password-less versions of these files. Even if you use a secure password for these files (which is rare), weak encryption algorithms and the management of the underlying material usually invalidate the secure password.
+
+We recommend that you treat these passwords as legacy implementation details, and use short hard-coded strings for these passwords when you're
+forced to use one. Don't spend time trying to generate or handle "secure" passwords for these files - simply choose a constant such as `changeit` or `notapassword123` and use that for every PKCS#12 or JKS bundle you generate.
+
+#### Longer Answer
+
+Lots of people see the word "password" when handling JKS or PKCS#12 bundles and they draw the obvious
+conclusion that it's a valuable security resource which needs to be handled carefully.
+
+This is generally not the case - not only are these passwords not really passwords, but they're also vanishingly unlikely to be meaningful for security of any kind.
+
+Mostly, these passwords exist only because some applications require some password to be set. That requirement is the sole reason for cert-manager and its sub-projects supporting setting a password on these types of bundles.
+
+There are several main reasons why we don't consider these passwords to be security critical:
+
+1. Most applications which use these passwords will mount the file containing the password in plain text right next to the bundle which uses it, with the same permissions and access control. This would make even the most secure password completely pointless as a security measure.
+2. Most PKCS#12 and JKS bundles which are encrypted use extremely old encryption algorithms which are fundamentally insecure
+3. The word "password" leads people to think of human-memorable passwords, which are not appropriate for this kind of encryption. This means that the passwords used are often themselves insecure in this context.
+4. When we generate PKCS#12 or JKS files, they almost always live in the same Secret as an unencrypted private key anyway!
+
+Without a very detailed threat model and putting serious time into your system's architecture in an extremely paranoid way, spending time on these "passwords" is going to be a red herring time sink with little to no return. Your efforts would almost always be better spent on securing systems through other methods.
+
+See "simple answer" above for usage guidelines for these "passwords".
 
 ## Miscellaneous
 

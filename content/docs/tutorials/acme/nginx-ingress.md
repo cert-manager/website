@@ -136,7 +136,7 @@ it is saved:
 
 ```bash
 kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/ingress.yaml
-# expected output: ingress.extensions "kuard" created
+# expected output: ingress.networking.k8s.io/kuard created
 ```
 
 > Note: The ingress example we show above has a `host` definition within it. The
@@ -237,7 +237,7 @@ when you might choose to use each can be found on [Issuer concepts](../../concep
 Certificates resources allow you to specify the details of the certificate you
 want to request. They reference an issuer to define _how_ they'll be issued.
 
-For more information, see [Certificate concepts](../../concepts/certificate.md).
+For more information, see [Certificate concepts](../../usage/certificate.md).
 
 ## Step 6 - Configure a Let's Encrypt Issuer
 
@@ -348,7 +348,7 @@ and apply it:
 
 ```bash
 kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/ingress-tls.yaml
-# expected output: ingress.extensions "kuard" configured
+# expected output: ingress.networking.k8s.io/kuard configured
 ```
 
 Cert-manager will read these annotations and use them to create a certificate,
@@ -447,7 +447,7 @@ can update the annotations in the ingress to specify the production issuer:
 
 ```bash
 $ kubectl create --edit -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/acme/example/ingress-tls-final.yaml
-ingress.extensions "kuard" configured
+ingress.networking.k8s.io/kuard configured
 ```
 
 You will also need to delete the existing secret, which cert-manager is watching

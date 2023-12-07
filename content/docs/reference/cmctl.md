@@ -74,7 +74,7 @@ Use "cmctl [command] --help" for more information about a command.
 ### Approve and Deny CertificateRequests
 
 CertificateRequests can be
-[approved or denied](../concepts/certificaterequest.md#approval) using their
+[approved or denied](../usage/certificaterequest.md#approval) using their
 respective cmctl commands:
 
 > **Note**: The internal cert-manager approver may automatically approve all
@@ -282,7 +282,7 @@ cmctl x install \
 ```
 
 You can find [a full list of the install parameters on cert-manager's ArtifactHub page](https://artifacthub.io/packages/helm/cert-manager/cert-manager#configuration). These are the same parameters that are available when using the Helm chart.
-Once you have deployed cert-manager, you can [verify](../installation/verify.md) the installation.
+Once you have deployed cert-manager, you can [verify](../installation/kubectl.md#verify) the installation.
 
 The CLI also allows the user to output the templated manifest to `stdout`, instead of installing the manifest on the cluster.
 
@@ -327,7 +327,7 @@ This command can be used to prepare a cert-manager installation that was created
 before cert-manager `v1` for upgrading to a cert-manager version `v1.6` or later.
 It ensures that any cert-manager custom resources that may have been stored in etcd at
 a deprecated API version get migrated to `v1`. See [Migrating Deprecated API
-Resources](https://cert-manager.io/docs/installation/upgrading/remove-deprecated-apis) for more context.
+Resources](https://cert-manager.io/docs/releases/upgrading/remove-deprecated-apis) for more context.
 
 ```bash
 $ cmctl upgrade migrate-api-version --qps 5 --burst 10

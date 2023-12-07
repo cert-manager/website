@@ -13,7 +13,8 @@ function labelFromVersion(version) {
 export default function VersionSelect({
   version,
   versions,
-  setSidebarCollapsed
+  setSidebarCollapsed,
+  setParentOpen
 }) {
   const [selectedVersion, setSelectedVersion] = useState(version)
 
@@ -36,6 +37,7 @@ export default function VersionSelect({
                 href="docs"
                 caption="latest"
                 setSidebarCollapsed={setSidebarCollapsed}
+                setParentOpen={setParentOpen}
               />
             </div>
           </Listbox.Option>
@@ -46,6 +48,7 @@ export default function VersionSelect({
                   href={version}
                   caption={labelFromVersion(version)}
                   setSidebarCollapsed={setSidebarCollapsed}
+                  setParentOpen={setParentOpen}
                 />
               </div>
             </Listbox.Option>
@@ -55,6 +58,7 @@ export default function VersionSelect({
               href="https://release-next--cert-manager-website.netlify.app/docs/"
               caption="next release"
               setSidebarCollapsed={setSidebarCollapsed}
+              setParentOpen={setParentOpen}
             />
           </div>
         </Listbox.Options>
