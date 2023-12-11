@@ -47,6 +47,7 @@ export default function Header() {
           target="_blank"
           icon="mastodon"
           iconWClass="w-4"
+           rel="me"
           className="px-3 py-1 text-11px mx-4 "
         />
       </div>
