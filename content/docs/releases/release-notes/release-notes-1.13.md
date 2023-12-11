@@ -3,6 +3,70 @@ title: Release 1.13
 description: 'cert-manager release notes: cert-manager 1.13'
 ---
 
+## v1.13.3
+
+This patch release contains fixes for the following security vulnerabilities in the cert-manager-controller:
+- [`GO-2023-2334`](https://pkg.go.dev/vuln/GO-2023-2334): Decryption of malicious PBES2 JWE objects can consume unbounded system resources.
+
+If you use
+[ArtifactHub Security report](https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.13.2?modal=security-report) or
+[trivy](https://trivy.dev/),
+this patch will also silence the following warning
+about a vulnerability in code which is imported but **not used** by the cert-manager-controller:
+- [`CVE-2023-47108`](https://access.redhat.com/security/cve/CVE-2023-47108): DoS vulnerability in `otelgrpc` due to unbound cardinality metrics.
+
+An ongoing security audit of cert-manager suggested some changes to the webhook code to mitigate DoS attacks,
+and these are included in this patch release.
+
+### Changes
+
+#### Bug or Regression
+
+- The webhook server now returns HTTP error 413 (Content Too Large) for requests with body size `>= 3MiB`.
+  This is to mitigate DoS attacks that attempt to crash the webhook process by sending large requests that exceed the available memory.
+  ([#6507](https://github.com/cert-manager/cert-manager/pull/6507), [@inteon](https://github.com/inteon))
+- The webhook server now returns HTTP error 400 (Bad Request) if the request contains an empty body.
+  ([#6507](https://github.com/cert-manager/cert-manager/pull/6507), [@inteon](https://github.com/inteon))
+- The webhook server now returns HTTP error 500 (Internal Server Error) rather than crashing, if the code panics while handling a request.
+  ([#6507](https://github.com/cert-manager/cert-manager/pull/6507), [@inteon](https://github.com/inteon))
+- Mitigate potential "Slowloris" attacks by setting `ReadHeaderTimeout` in all `http.Server` instances.
+  ([#6538](https://github.com/cert-manager/cert-manager/pull/6538), [@wallrj](https://github.com/wallrj))
+- Upgrade Go modules: `otel`, `docker`, and `jose` to fix CVE alerts. See
+  https://github.com/advisories/GHSA-8pgv-569h-w5rw,
+  https://github.com/advisories/GHSA-jq35-85cj-fj4p, and
+  https://github.com/advisories/GHSA-2c7c-3mj9-8fqh.
+  ([#6514](https://github.com/cert-manager/cert-manager/pull/6514), [@inteon](https://github.com/inteon))
+
+### Dependencies
+
+#### Added
+_Nothing has changed._
+
+#### Changed
+- `cloud.google.com/go/firestore`: `v1.11.0 → v1.12.0`
+- `cloud.google.com/go`: `v0.110.6 → v0.110.7`
+- `github.com/felixge/httpsnoop`: [`v1.0.3 → v1.0.4`](https://github.com/felixge/httpsnoop/compare/v1.0.3...v1.0.4)
+- `github.com/go-jose/go-jose/v3`: [`v3.0.0 → v3.0.1`](https://github.com/go-jose/go-jose/v3/compare/v3.0.0...v3.0.1)
+- `github.com/go-logr/logr`: [`v1.2.4 → v1.3.0`](https://github.com/go-logr/logr/compare/v1.2.4...v1.3.0)
+- `github.com/golang/glog`: [`v1.1.0 → v1.1.2`](https://github.com/golang/glog/compare/v1.1.0...v1.1.2)
+- `github.com/google/go-cmp`: [`v0.5.9 → v0.6.0`](https://github.com/google/go-cmp/compare/v0.5.9...v0.6.0)
+- `go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc`: `v0.45.0 → v0.46.0`
+- `go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp`: `v0.44.0 → v0.46.0`
+- `go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc`: `v1.19.0 → v1.20.0`
+- `go.opentelemetry.io/otel/exporters/otlp/otlptrace`: `v1.19.0 → v1.20.0`
+- `go.opentelemetry.io/otel/metric`: `v1.19.0 → v1.20.0`
+- `go.opentelemetry.io/otel/sdk`: `v1.19.0 → v1.20.0`
+- `go.opentelemetry.io/otel/trace`: `v1.19.0 → v1.20.0`
+- `go.opentelemetry.io/otel`: `v1.19.0 → v1.20.0`
+- `go.uber.org/goleak`: `v1.2.1 → v1.3.0`
+- `golang.org/x/sys`: `v0.13.0 → v0.14.0`
+- `google.golang.org/genproto/googleapis/api`: `f966b18 → b8732ec`
+- `google.golang.org/genproto`: `f966b18 → b8732ec`
+- `google.golang.org/grpc`: `v1.58.3 → v1.59.0`
+
+#### Removed
+_Nothing has changed._
+
 ## v1.13.2
 
 v1.13.2 fixes some CVE alerts and contains fixes for:
@@ -72,29 +136,29 @@ plan to promote these feature gates to GA in the future, which will mean that th
 
 ### Community
 
-Welcome to these new cert-manager members (more info - https://github.com/cert-manager/cert-manager/pull/6260):  
-@jsoref  
-@FlorianLiebhart  
-@hawksight  
-@erikgb  
+Welcome to these new cert-manager members (more info - https://github.com/cert-manager/cert-manager/pull/6260):
+@jsoref
+@FlorianLiebhart
+@hawksight
+@erikgb
 
-Thanks again to all open-source contributors with commits in this release, including:  
-@AcidLeroy  
-@FlorianLiebhart  
-@lucacome  
-@cypres  
-@erikgb  
-@ubergesundheit  
-@jkroepke  
-@jsoref  
-@gdvalle  
-@rouke-broersma  
-@schrodit  
-@zhangzhiqiangcs  
-@arukiidou  
-@hawksight  
-@Richardds  
-@kahirokunn  
+Thanks again to all open-source contributors with commits in this release, including:
+@AcidLeroy
+@FlorianLiebhart
+@lucacome
+@cypres
+@erikgb
+@ubergesundheit
+@jkroepke
+@jsoref
+@gdvalle
+@rouke-broersma
+@schrodit
+@zhangzhiqiangcs
+@arukiidou
+@hawksight
+@Richardds
+@kahirokunn
 
 Thanks also to the following cert-manager maintainers for their contributions during this release:
 @SgtCoDFish

@@ -243,6 +243,7 @@ SecretTemplate
 ServerSideApply
 SelfSigned
 SgtCoDFish
+Slowloris
 Smallstep
 SubjectAccessReview
 SVIDs
@@ -628,6 +629,7 @@ v1.13.0
 v1.13.0.
 v1.13.1
 v1.13.2
+v1.13.3
 v1.13.
 v1.12.5
 v1.12.6
