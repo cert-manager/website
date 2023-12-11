@@ -47,7 +47,7 @@ section below for details on each method.
 > Recommended for production installations
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.2/cert-manager.crds.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.3/cert-manager.crds.yaml
 ```
 
 ##### Option 2: install CRDs as part of the Helm release
@@ -70,7 +70,7 @@ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.13.2 \
+  --version v1.13.3 \
   # --set installCRDs=true
 ```
 
@@ -83,7 +83,7 @@ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.13.2 \
+  --version v1.13.3 \
   # --set installCRDs=true
   --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
   --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
@@ -114,7 +114,7 @@ version: 0.1.0
 appVersion: "0.1.0"
 dependencies:
   - name: cert-manager
-    version: v1.13.2
+    version: v1.13.3
     repository: https://charts.jetstack.io
     alias: cert-manager
     condition: cert-manager.enabled
@@ -148,7 +148,7 @@ helm template \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.13.2 \
+  --version v1.13.3 \
   # --set prometheus.enabled=false \   # Example: disabling prometheus using a Helm parameter
   # --set installCRDs=true \           # Uncomment to also template CRDs
   > cert-manager.custom.yaml
@@ -247,7 +247,7 @@ of their approach [here](https://helm.sh/docs/chart_best_practices/custom_resour
 
 cert-manager actually bundles the CRDs along with the other templates
 in the Helm chart. This means that Helm manages these resources so they are
-upgraded with your cert-manager release when you use 
+upgraded with your cert-manager release when you use
 `installCRDs: true` in your values file or CLI command. This does also mean
 that if you uninstall the release, the CRDs will also be uninstalled. If that
 happens then you will loose all instances of those CRDs, e.g. all `Certificate`
@@ -282,7 +282,6 @@ Generally we recommend:
 You may want to consider your approach along with other tools that may offer
 helm compatible installs, for a standardized approach to managing CRD
 resources. If you have an approach that cert-manager does not currently
-support, then please 
+support, then please
 [raise an issue](https://github.com/cert-manager/cert-manager/issues) to
 discuss.
-
