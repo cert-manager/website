@@ -631,6 +631,10 @@ page if a step is missing or if it is outdated.
 
 16. Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
 
+    > ℹ️ The PR is [created automatically](https://github.com/search?q=repo%3AHomebrew%2Fhomebrew-core+cmctl&type=pullrequests&s=created&o=desc)
+    > if you are publishing the `latest` version of cert-manager, in which case this step can be skipped.
+    > But not if you are publishing a patch for a previous version.
+
     Assuming you have `brew` installed, you can use the `brew bump-formula-pr`
     command to do this. You'll need the new tag name and the commit hash of that
     tag. See `brew bump-formula-pr --help` for up to date details, but the command
