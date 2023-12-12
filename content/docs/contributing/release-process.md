@@ -421,19 +421,6 @@ page if a step is missing or if it is outdated.
      git commit -m"Update cmd/ctl's go.mod to $RELEASE_VERSION"
      ```
 
-    Third, create a tag for the `cmd/ctl` module:
-
-     ```bash
-     # Must be run from the cert-manager repo folder.
-     git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELEASE_VERSION"
-     git push origin "cmd/ctl/$RELEASE_VERSION"
-     ```
-
-    > **Note:** the reason we need to do this is explained on Stack Overflow:
-    [how-are-versions-of-a-sub-module-managed][]
-
-    [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
-
     Then, push the branch to your fork of cert-manager. For example:
 
      ```bash
@@ -459,11 +446,22 @@ page if a step is missing or if it is outdated.
      EOF
      ```
 
-   Finally, get back to the branch you were on initially:
+   Wait for the PR to be merged.
 
-   ```bash
-   git checkout $BRANCH
-   ```
+   Finally, create a tag for the `cmd/ctl` module:
+
+    ```bash
+     # Must be run from the cert-manager repo folder.
+     git fetch origin $BRANCH
+     git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELEASE_VERSION" origin/$BRANCH
+     git push origin "cmd/ctl/$RELEASE_VERSION"
+     ```
+
+    > **Note:** the reason we need to do this is explained on Stack Overflow:
+    [how-are-versions-of-a-sub-module-managed][]
+
+    [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
+
 
 10. In this section, we will be creating the description for the GitHub Release.
 
