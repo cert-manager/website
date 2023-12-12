@@ -453,6 +453,8 @@ page if a step is missing or if it is outdated.
     ```bash
      # Must be run from the cert-manager repo folder.
      git fetch origin $BRANCH
+     git checkout $BRANCH
+     git pull --ff-only origin $BRANCH
      git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELEASE_VERSION" origin/$BRANCH
      git push origin "cmd/ctl/$RELEASE_VERSION"
      ```
