@@ -418,7 +418,7 @@ page if a step is missing or if it is outdated.
 
      find . -name go.mod -not -path ./_bin/\* -exec dirname '{}' \; | xargs -L1 -I@ sh -c 'cd @; go mod tidy'
      git add **/go.mod **/go.sum
-     git commit -m"Update cmd/ctl's go.mod to $RELEASE_VERSION"
+     git commit --signoff -m"Update cmd/ctl's go.mod to $RELEASE_VERSION"
      ```
 
     Then, push the branch to your fork of cert-manager. For example:
