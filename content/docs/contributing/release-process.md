@@ -417,22 +417,9 @@ page if a step is missing or if it is outdated.
      cd ../..
 
      find . -name go.mod -not -path ./_bin/\* -exec dirname '{}' \; | xargs -L1 -I@ sh -c 'cd @; go mod tidy'
-     git add **/go.mod **/go.sum
-     git commit -m"Update cmd/ctl's go.mod to $RELEASE_VERSION"
+     git add "**/go.mod" "**/go.sum"
+     git commit --signoff -m"Update cmd/ctl's go.mod to $RELEASE_VERSION"
      ```
-
-    Third, create a tag for the `cmd/ctl` module:
-
-     ```bash
-     # Must be run from the cert-manager repo folder.
-     git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELEASE_VERSION"
-     git push origin "cmd/ctl/$RELEASE_VERSION"
-     ```
-
-    > **Note:** the reason we need to do this is explained on Stack Overflow:
-    [how-are-versions-of-a-sub-module-managed][]
-
-    [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
 
     Then, push the branch to your fork of cert-manager. For example:
 
@@ -459,11 +446,24 @@ page if a step is missing or if it is outdated.
      EOF
      ```
 
-   Finally, get back to the branch you were on initially:
+   Wait for the PR to be merged.
 
-   ```bash
-   git checkout $BRANCH
-   ```
+   Finally, create a tag for the `cmd/ctl` module:
+
+    ```bash
+     # Must be run from the cert-manager repo folder.
+     git fetch origin $BRANCH
+     git checkout $BRANCH
+     git pull --ff-only origin $BRANCH
+     git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELEASE_VERSION" origin/$BRANCH
+     git push origin "cmd/ctl/$RELEASE_VERSION"
+     ```
+
+    > **Note:** the reason we need to do this is explained on Stack Overflow:
+    [how-are-versions-of-a-sub-module-managed][]
+
+    [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
+
 
 10. In this section, we will be creating the description for the GitHub Release.
 
@@ -630,6 +630,10 @@ page if a step is missing or if it is outdated.
       [ff-release-next]: https://github.com/cert-manager/website/compare/master...release-next?quick_pull=1&title=%5BPost-Release%5D+Merge+release-next+into+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
 
 16. Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
+
+    > ℹ️ The PR is [created automatically](https://github.com/search?q=repo%3AHomebrew%2Fhomebrew-core+cmctl&type=pullrequests&s=created&o=desc)
+    > if you are publishing the `latest` version of cert-manager, in which case this step can be skipped.
+    > But not if you are publishing a patch for a previous version.
 
     Assuming you have `brew` installed, you can use the `brew bump-formula-pr`
     command to do this. You'll need the new tag name and the commit hash of that
