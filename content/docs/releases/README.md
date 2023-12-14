@@ -16,21 +16,18 @@ and other world events.
 <a id="supported-releases"></a>
 ## Currently supported releases
 
-| Release  | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
-|----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
-| [1.13][] | Sep 12, 2023 |    Release of 1.15     |            1.23 → 1.28             |           4.10 → 4.15             |
-| [1.12][] | May 19, 2023 |    Release of 1.14*    |            1.22 → 1.27             |            4.9 → 4.14             |
+|   Release    | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+|--------------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
+|     [1.13][] | Sep 12, 2023 |    Release of 1.15     |            1.23 → 1.28             |           4.10 → 4.15             |
+| [1.12 LTS][] | May 19, 2023 |      May 19, 2025      |            1.22 → 1.28             |            4.9 → 4.15             |
 
-\*This is an LTS release sponsored by [Venafi](https://www.venafi.com/).
-It will be supported for a longer period of time than other releases.
-The EOL date for this release has not yet been determined & communicated, but can be decided by the Sponsor.
-The cert-manager maintainers guarantee that this release will be supported until the release of 1.14.
+cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It will continue to be supported for at least 2 years from release.
 
 ## Upcoming releases
 
 | Release  | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
-| [1.14][] | Jan 15, 2024 | ~4 months post release |               TBD                  |                TBD                |
+| [1.14][] | Jan 31, 2024 | ~4 months post release |             1.24 → 1.29            |           4.11 → 4.15             |
 
 Dates in the future are uncertain and might change.
 
@@ -224,19 +221,19 @@ In practice, this is largely determined based on what versions of [kind](https:/
 are available for testing, and which versions of Kubernetes are provided by major upstream cloud Kubernetes vendors
 including EKS, GKE, AKS and OpenShift.
 
-|      Vendor       | Oldest Kubernetes Release\* |                          Other Older Kubernetes Releases                           |
+|      Vendor       | Oldest Kubernetes Release\* |                                Other Kubernetes Releases                           |
 |:-----------------:|-----------------------------|------------------------------------------------------------------------------------|
-|    [EKS][eks]     | 1.23 (EOL Oct 2023)         | 1.24 (EOL Jan 2024), 1.25 (EOL May 2024), 1.26 (EOL Jun 2024), 1.28 (EOL Nov 2024) |
-|    [GKE][gke]     | 1.24 (EOL Oct 2023)         | 1.25 (EOL Feb 2024), 1.26 (EOL May 2024), 1.27 (EOL Jan 2025), 1.28 (EOL -)        |
-|    [AKS][aks]     | 1.25 (EOL Dec 2023)         | 1.26 (EOL Mar 2024), 1.27 (EOL Jun 2024), 1.28 (EOL -)                             |
-| [OpenShift 4][os] | 1.23 (4.10, EOL Sep 2023)   | 1.24 (4.11, EOL Feb 2024), 1.25 (4.12, EOL Jan 2025), 1.25 (4.13, EOL Nov 2024)    |
+|    [EKS][eks]     | 1.24 (EOL Jan 2024)         | 1.25 (EOL May 2024), 1.26 (EOL Jun 2024), 1.27 (EOL Jul 2024), 1.28 (EOL Nov 2024) |
+|    [GKE][gke]     | 1.25 (EOL Feb 2024)         | 1.26 (EOL May 2024), 1.27 (EOL Aug 2024), 1.28 (EOL -)                             |
+|    [AKS][aks]     | 1.25 (EOL Jan 2024)         | 1.26 (EOL Mar 2024), 1.27 (EOL Jul 2024), 1.28 (EOL Nov 2024)                      |
+| [OpenShift 4][os] | 1.24 (4.11, EOL Feb 2024)   | 1.25 (4.12, EOL Jan 2025), 1.26 (4.13, EOL Nov 2024), 1.27 (4.14, EOL Oct 2025)    |
 
-\*Oldest release relevant to the next cert-manager release, as of 2023-09-13
+\*Oldest release relevant to the next cert-manager release, as of 2023-12-14
 
-[eks]: https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#kubernetes-release-calendar
-[gke]: https://cloud.google.com/kubernetes-engine/docs/release-schedule
-[aks]: https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions#aks-kubernetes-release-calendar
-[os]: https://access.redhat.com/support/policy/updates/openshift#dates
+[eks]: https://endoflife.date/amazon-eks
+[gke]: https://endoflife.date/google-kubernetes-engine
+[aks]: https://endoflife.date/azure-kubernetes-service
+[os]: https://endoflife.date/red-hat-openshift
 
 ### OpenShift
 
