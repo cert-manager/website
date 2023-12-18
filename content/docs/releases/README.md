@@ -57,7 +57,7 @@ Dates in the future are uncertain and might change.
 [s]: #kubernetes-supported-versions
 [1.14]: https://github.com/cert-manager/cert-manager/milestone/35
 [1.13]: ./release-notes/release-notes-1.13.md
-[1.12]: ./release-notes/release-notes-1.12.md
+[1.12 LTS]: ./release-notes/release-notes-1.12.md
 [1.11]: ./release-notes/release-notes-1.11.md
 [1.10]: ./release-notes/release-notes-1.10.md
 [1.9]: ./release-notes/release-notes-1.9.md
