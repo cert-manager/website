@@ -22,7 +22,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈 | tcs-issuer                   | [📄][config:tcs-issuer] | [Intel's SGX technology](https://www.intel.com/content/www/us/en/developer/tools/software-guard-extensions/overview.html) | - | [✔️][release:tcs-issuer] | ✔️ |
 | 🥈 | vault-issuer (in-tree)       | [📄][config:vault-issuer] | [HashiCorp Vault](https://www.vaultproject.io/) | - | [✔️][release:cert-manager] | ✔️ |
 | 🥈 | venafi-issuer (in-tree)      | [📄][config:venafi-issuer] | [Venafi TLS Protect](https://venafi.com/tls-protect/) | - | [✔️][release:cert-manager] | ✔️ |
-| 🥉 | adcs-issuer                  | [📄][config:adcs-issuer] | [Microsoft Active Directory<br/>Certificate Service](https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority) | - | [❌][release:adcs-issuer] | ✔️ |
+| 🥈 | adcs-issuer                  | [📄][config:adcs-issuer] | [Microsoft Active Directory<br/>Certificate Service](https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority) | - | [✔️][release:adcs-issuer] | ✔️ |
 | 🥉 | cfssl-issuer                 | [📄][config:cfssl-issuer] | [CFSSL](https://github.com/cloudflare/cfssl) | - | [❌][release:cfssl-issuer] | ✔️ |
 | 🥉 | freeipa-issuer               | [📄][config:freeipa-issuer] | [FreeIPA](https://www.freeipa.org) | - | [❌][release:freeipa-issuer] | ✔️ |
 | 🥉 | kms-issuer                   | [📄][config:kms-issuer] | [AWS KMS](https://aws.amazon.com/kms/) | - | [❌][release:kms-issuer] | ✔️ |
@@ -53,7 +53,7 @@ The following list contains all known cert-manager issuer integrations.
 
 [config:kms-issuer]: https://github.com/Skyscanner/kms-issuer
 [config:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer
-[config:adcs-issuer]: https://github.com/nokia/adcs-issuer
+[config:adcs-issuer]: https://djkormo.github.io/adcs-issuer/
 [config:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer
 
 [//]: # (Release pages)
