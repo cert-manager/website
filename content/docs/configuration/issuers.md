@@ -7,9 +7,10 @@ The following list contains all known cert-manager issuer integrations.
 
 <div className="rotate">
 | Tier | Controller | Docs | Issuer | cert-manager<br/>version used<br/>in tutorial[^1] | Released within<br/>12 months[^2] | Is Open Source |
-|------|------------|------|--------|--------|--------|--------|
+|------|------------|------|--------|--------|--------|--------|  
 | 🥇 | acme-issuer (in-tree)        | [📄][config:acme-issuer] | [ACME](https://datatracker.ietf.org/doc/html/rfc8555) | [latest][production:acme-issuer] | [✔️][release:cert-manager] | ✔️ |
 | 🥇 | venafi-enhanced-issuer       | [📄][config:venafi-enhanced-issuer] | [Venafi TLS Protect](https://venafi.com/tls-protect/) | [v1.12.1][production:venafi-enhanced-issuer] | [✔️][release:venafi-enhanced-issuer] | ❌ |
+| 🥈 | adcs-issuer                  | [📄][config:adcs-issuer] | [Microsoft Active Directory<br/>Certificate Service](https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority) | - | [✔️][release:adcs-issuer] | ✔️ |
 | 🥈 | aws-privateca-issuer         | [📄][config:aws-privateca-issuer] | [AWS Private Certificate Authority](https://aws.amazon.com/certificate-manager/private-certificate-authority/) | - | [✔️][release:aws-privateca-issuer] | ✔️ |
 | 🥈 | ca-issuer (in-tree)          | [📄][config:ca-issuer] | CA issuer | - | [✔️][release:cert-manager] | ✔️ |
 | 🥈 | command-issuer               | [📄][config:command-issuer] | [Keyfactor Command](https://www.keyfactor.com/products/command/) | - | [✔️][release:command-issuer] | ✔️ |
@@ -22,7 +23,6 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈 | tcs-issuer                   | [📄][config:tcs-issuer] | [Intel's SGX technology](https://www.intel.com/content/www/us/en/developer/tools/software-guard-extensions/overview.html) | - | [✔️][release:tcs-issuer] | ✔️ |
 | 🥈 | vault-issuer (in-tree)       | [📄][config:vault-issuer] | [HashiCorp Vault](https://www.vaultproject.io/) | - | [✔️][release:cert-manager] | ✔️ |
 | 🥈 | venafi-issuer (in-tree)      | [📄][config:venafi-issuer] | [Venafi TLS Protect](https://venafi.com/tls-protect/) | - | [✔️][release:cert-manager] | ✔️ |
-| 🥈 | adcs-issuer                  | [📄][config:adcs-issuer] | [Microsoft Active Directory<br/>Certificate Service](https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority) | - | [✔️][release:adcs-issuer] | ✔️ |
 | 🥉 | cfssl-issuer                 | [📄][config:cfssl-issuer] | [CFSSL](https://github.com/cloudflare/cfssl) | - | [❌][release:cfssl-issuer] | ✔️ |
 | 🥉 | freeipa-issuer               | [📄][config:freeipa-issuer] | [FreeIPA](https://www.freeipa.org) | - | [❌][release:freeipa-issuer] | ✔️ |
 | 🥉 | kms-issuer                   | [📄][config:kms-issuer] | [AWS KMS](https://aws.amazon.com/kms/) | - | [❌][release:kms-issuer] | ✔️ |
