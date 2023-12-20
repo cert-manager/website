@@ -3,7 +3,7 @@ title: Annotated Gateway resource
 description: 'cert-manager usage: Kubernetes Gateways'
 ---
 
-> **apiVersion:** gateway.networking.k8s.io/v1alpha2  
+> **apiVersion:** gateway.networking.k8s.io/v1  
 > **kind:** Gateway
 
 <div style={{textAlign: "center"}}>
@@ -23,7 +23,7 @@ HTTP-01](../configuration/acme/http01/README.md).
 
 <div className="info">
 
-🚧   cert-manager 1.8+ is tested with v1alpha2 Kubernetes Gateway API. It should also work
+🚧   cert-manager 1.14+ is tested with v1 Kubernetes Gateway API. It should also work
 with v1beta1 because of resource conversion, but has not been tested with it.
 
 </div>
@@ -51,7 +51,7 @@ feature flag to the cert-manager controller.
 To install v1.5.1 Gateway API bundle (Gateway CRDs and webhook), run the following command:
 
 ```sh
-kubectl apply -f "https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.1/standard-install.yaml"
+kubectl apply -f "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml"
 ```
 
 To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
@@ -89,7 +89,7 @@ following Gateway will trigger the creation of a Certificate with the name
 `example-com-tls`:
 
 ```yaml
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: example
@@ -157,7 +157,7 @@ In the following example, the first four listener blocks will not be used to
 generate Certificate resources:
 
 ```yaml
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: my-gateway
@@ -165,19 +165,29 @@ metadata:
   annotations:
     cert-manager.io/issuer: my-issuer
 spec:
+  gatewayClassName: foo
   listeners:
     # ❌  Missing "tls" block, the following listener is skipped.
-    - hostname: example.com
+    - name: example-1
+      port: 80
+      protocol: HTTP
+      hostname: example.com
 
     # ❌  Missing "hostname", the following listener is skipped.
-    - tls:
+    - name: example-2
+      port: 443
+      protocol: HTTPS
+      tls:
         certificateRefs:
           - name: example-com-tls
-            kind: Secret"
+            kind: Secret
             group: core
 
     # ❌  "mode: Passthrough" is not supported, the following listener is skipped.
-    - hostname: example.com
+    - name: example-3
+      hostname: example.com
+      port: 8443
+      protocol: HTTPS
       tls:
         mode: Passthrough
         certificateRefs:
@@ -186,8 +196,9 @@ spec:
             group: core
 
     # ❌  Cross-namespace secret references are not supported, the following listener is skipped.
-    - hostname: foo.example.com
-      port: 443
+    - name: example-4
+      hostname: foo.example.com
+      port: 8443
       protocol: HTTPS
       allowedRoutes:
         namespaces:
@@ -201,8 +212,9 @@ spec:
             namespace: other-namespace
 
     # ✅  The following listener is valid.
-    - hostname: foo.example.com # ✅ Required.
-      port: 443
+    - name: example-5
+      hostname: bar.example.com # ✅ Required.
+      port: 8443
       protocol: HTTPS
       allowedRoutes:
         namespaces:
@@ -239,7 +251,7 @@ The same Secret name can be re-used in multiple TLS blocks, regardless of the
 hostname. Let us imagine that you have these two listeners:
 
 ```yaml
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: example
@@ -249,14 +261,10 @@ spec:
   gatewayClassName: foo
   listeners:
     # Listener 1.
-    - hostname: example.com
+    - name: example-1
+      hostname: example.com
       port: 443
       protocol: HTTPS
-      routes:
-        kind: HTTPRoute
-        parentRefs:
-          - name: example
-            kind: Gateway
       tls:
         mode: Terminate
         certificateRefs:
@@ -265,14 +273,10 @@ spec:
             group: core
 
     # Listener 2: Same Secret name as Listener 1, with a different hostname.
-    - hostname: *.example.com
+    - name: example-2
+      hostname: "*.example.com"
       port: 443
       protocol: HTTPS
-      routes:
-        kind: HTTPRoute
-        parentRefs:
-          - name: example
-            kind: Gateway
       tls:
         mode: Terminate
         certificateRefs:
@@ -281,14 +285,10 @@ spec:
             group: core
 
     # Listener 3: also same Secret name, except the hostname is also the same.
-    - hostname: *.example.com
+    - name: example-3
+      hostname: "*.example.com"
       port: 8443
       protocol: HTTPS
-      routes:
-        kind: HTTPRoute
-        parentRefs:
-          - name: example
-            kind: Gateway
       tls:
         mode: Terminate
         certificateRefs:
@@ -297,14 +297,10 @@ spec:
             group: core
 
    # Listener 4: different Secret name.
-    - hostname: site.org
+    - name: example-4
+      hostname: site.org
       port: 443
       protocol: HTTPS
-      routes:
-        kind: HTTPRoute
-        parentRefs:
-          - name: example
-            kind: Gateway
       tls:
         mode: Terminate
         certificateRefs:
