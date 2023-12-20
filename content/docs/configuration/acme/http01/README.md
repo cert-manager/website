@@ -211,7 +211,7 @@ feature flag to the cert-manager controller.
 To install v1.5.1 Gateway API bundle (Gateway CRDs and webhook), run the following command:
 
 ```sh
-kubectl apply -f "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml"
+kubectl apply -f "https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.1/standard-install.yaml"
 ```
 
 To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
@@ -279,7 +279,7 @@ does not edit Gateway resources.
 For example, the following Gateway will allow the Issuer to solve the challenge:
 
 ```yaml
-apiVersion: gateway.networking.k8s.io/v1
+apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: Gateway
 metadata:
   name: traefik
@@ -324,7 +324,7 @@ spec:
 You will see an HTTPRoute appear:
 
 ```yaml
-apiVersion: gateway.networking.k8s.io/v1
+apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: HTTPRoute
 metadata:
   name: cm-acme-http-solver-gdhvg
@@ -337,9 +337,9 @@ spec:
   hostnames:
   - example.net
   rules:
-  - backendRefs:
+  - forwardTo:
     - port: 8089
-      name: cm-acme-http-solver-gdhvg
+      serviceName: cm-acme-http-solver-gdhvg
       weight: 1
     matches:
     - path:
