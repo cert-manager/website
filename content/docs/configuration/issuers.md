@@ -73,7 +73,7 @@ The following list contains all known cert-manager issuer integrations.
 
 [release:kms-issuer]: https://github.com/Skyscanner/kms-issuer/releases
 [release:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer/releases
-[release:adcs-issuer]: https://github.com/nokia/adcs-issuer/releases
+[release:adcs-issuer]: https://github.com/djkormo/adcs-issuer/releases
 [release:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer/+refs
 
 - The issuers are sorted by their tier and then alphabetically.
