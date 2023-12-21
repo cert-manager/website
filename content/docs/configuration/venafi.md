@@ -141,7 +141,9 @@ credentials.
 
 1. [Set up token authentication](https://docs.venafi.com/Docs/23.1/TopNav/Content/SDK/AuthSDK/t-SDKa-Setup-OAuth.php).
 
-   NOTE: Do not select "Refresh Token Enabled" and set a *long* "Token Validity (days)".
+   NOTE: Do not select "Refresh Token Enabled" and set a *long* "Token Validity
+   (days)". The Refresh Token feature is not supported by cert-manager's Venafi
+   `Issuer`.
 
 2. Create a new user with sufficient privileges to manage and revoke certificates in a particular policy folder (zone).
 
