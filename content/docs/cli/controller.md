@@ -2,8 +2,8 @@
 title: controller CLI reference
 description: "cert-manager controller CLI documentation"
 ---
-
 ```
+
 cert-manager is a Kubernetes addon to automate the management and issuance of
 TLS certificates from various issuing sources.
 
@@ -14,15 +14,13 @@ Usage:
   controller [flags]
 
 Flags:
-      --acme-http01-solver-image string                     The docker image to use to solve ACME HTTP01 challenges. You most likely will not need to change this parameter unless you are testing a new feature or developing cert-manager. (default "quay.io/jetstack/cert-manager-acmesolver:v1.13.3")
+      --acme-http01-solver-image string                     The docker image to use to solve ACME HTTP01 challenges. You most likely will not need to change this parameter unless you are testing a new feature or developing cert-manager. (default "quay.io/jetstack/cert-manager-acmesolver:canary")
       --acme-http01-solver-nameservers strings              A list of comma separated dns server endpoints used for ACME HTTP01 check requests. This should be a list containing host and port, for example 8.8.8.8:53,8.8.4.4:53
       --acme-http01-solver-resource-limits-cpu string       Defines the resource limits CPU size when spawning new ACME HTTP01 challenge solver pods. (default "100m")
       --acme-http01-solver-resource-limits-memory string    Defines the resource limits Memory size when spawning new ACME HTTP01 challenge solver pods. (default "64Mi")
       --acme-http01-solver-resource-request-cpu string      Defines the resource request CPU size when spawning new ACME HTTP01 challenge solver pods. (default "10m")
       --acme-http01-solver-resource-request-memory string   Defines the resource request Memory size when spawning new ACME HTTP01 challenge solver pods. (default "64Mi")
       --acme-http01-solver-run-as-non-root                  Defines the ability to run the http01 solver as root for troubleshooting issues (default true)
-      --add_dir_header                                      If true, adds the file directory to the header of the log messages (DEPRECATED: this flag may be removed in the future)
-      --alsologtostderr                                     log to standard error as well as files (no effect when -logtostderr=true) (DEPRECATED: this flag may be removed in the future)
       --auto-certificate-annotations strings                The annotation consumed by the ingress-shim controller to indicate a ingress is requesting a certificate (default [kubernetes.io/tls-acme])
       --cluster-issuer-ambient-credentials                  Whether a cluster-issuer may make use of ambient credentials for issuers. 'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the ClusterIssuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata. (default true)
       --cluster-resource-namespace string                   Namespace to store resources owned by cluster scoped resources such as ClusterIssuer in. This must be specified if ClusterIssuers are enabled. (default "kube-system")
@@ -51,6 +49,7 @@ Flags:
                                                             ServerSideApply=true|false (ALPHA - default=false)
                                                             StableCertificateRequestName=true|false (BETA - default=true)
                                                             UseCertificateRequestBasicConstraints=true|false (ALPHA - default=false)
+                                                            UseCertificateRequestNameConstraints=true|false (ALPHA - default=false)
                                                             ValidateCAA=true|false (ALPHA - default=false)
   -h, --help                                                help for controller
       --issuer-ambient-credentials                          Whether an issuer may make use of ambient credentials. 'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the Issuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata.
@@ -63,21 +62,12 @@ Flags:
       --leader-election-renew-deadline duration             The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled. (default 40s)
       --leader-election-retry-period duration               The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled. (default 15s)
       --log-flush-frequency duration                        Maximum number of seconds between log flushes (default 5s)
-      --log_backtrace_at traceLocation                      when logging hits line file:N, emit a stack trace (default :0) (DEPRECATED: this flag may be removed in the future)
-      --log_dir string                                      If non-empty, write log files in this directory (no effect when -logtostderr=true) (DEPRECATED: this flag may be removed in the future)
-      --log_file string                                     If non-empty, use this log file (no effect when -logtostderr=true) (DEPRECATED: this flag may be removed in the future)
-      --log_file_max_size uint                              Defines the maximum size a log file can grow to (no effect when -logtostderr=true). Unit is megabytes. If the value is 0, the maximum file size is unlimited. (default 1800) (DEPRECATED: this flag may be removed in the future)
       --logging-format string                               Sets the log format. Permitted formats: "json" (gated by LoggingBetaOptions), "text". (default "text")
-      --logtostderr                                         log to standard error instead of files (default true) (DEPRECATED: this flag may be removed in the future)
       --master string                                       Optional apiserver host address to connect to. If not specified, autoconfiguration will be attempted.
       --max-concurrent-challenges int                       The maximum number of challenges that can be scheduled as 'processing' at once. (default 60)
       --metrics-listen-address string                       The host and port that the metrics endpoint should listen on. (default "0.0.0.0:9402")
       --namespace string                                    If set, this limits the scope of cert-manager to a single namespace and ClusterIssuers are disabled. If not specified, all namespaces will be watched
-      --one_output                                          If true, only write logs to their native severity level (vs also writing to each lower severity level; no effect when -logtostderr=true) (DEPRECATED: this flag may be removed in the future)
       --profiler-address string                             The host and port that Go profiler should listen on, i.e localhost:6060. Ensure that profiler is not exposed on a public address. Profiler will be served at /debug/pprof. (default "localhost:6060")
-      --skip_headers                                        If true, avoid header prefixes in the log messages (DEPRECATED: this flag may be removed in the future)
-      --skip_log_headers                                    If true, avoid headers when opening log files (no effect when -logtostderr=true) (DEPRECATED: this flag may be removed in the future)
-      --stderrthreshold severity                            logs at or above this threshold go to stderr when writing to files and stderr (no effect when -logtostderr=true or -alsologtostderr=false) (default 2) (DEPRECATED: this flag may be removed in the future)
   -v, --v Level                                             number for the log level verbosity
       --vmodule pattern=N,...                               comma-separated list of pattern=N settings for file-filtered logging (only works for text log format)
 ```

@@ -11,6 +11,9 @@ description: >-
     <a href="#acme.cert-manager.io%2fv1">acme.cert-manager.io/v1</a>
   </li>
   <li>
+    <a href="#cainjector.config.cert-manager.io%2fv1alpha1">cainjector.config.cert-manager.io/v1alpha1</a>
+  </li>
+  <li>
     <a href="#cert-manager.io%2fv1">cert-manager.io/v1</a>
   </li>
   <li>
@@ -753,7 +756,7 @@ description: >-
       <td>
         <code>parentRefs</code>
         <br />
-        <em>[]sigs.k8s.io/gateway-api/apis/v1beta1.ParentReference</em>
+        <em>[]sigs.k8s.io/gateway-api/apis/v1.ParentReference</em>
       </td>
       <td>
         <p>
@@ -2501,6 +2504,264 @@ description: >-
   </tbody>
 </table>
 <hr />
+<h2 id="cainjector.config.cert-manager.io/v1alpha1">cainjector.config.cert-manager.io/v1alpha1</h2>
+<div>
+  <p>Package v1alpha1 is the v1alpha1 version of the cainjector config API.</p>
+</div>
+<p>Resource Types:</p>
+<ul></ul>
+<h3 id="cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</h3>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>kubeConfig</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>kubeConfig is the kubeconfig file used to connect to the Kubernetes apiserver. If not specified, the cainjector will attempt to load the in-cluster-config.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>namespace</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>If set, this limits the scope of cainjector to a single namespace. If set, cainjector will not update resources with certificates outside of the configured namespace.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>leaderElectionConfig</code>
+        <br />
+        <em>
+          <a href="#cainjector.config.cert-manager.io/v1alpha1.LeaderElectionConfig">LeaderElectionConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>LeaderElectionConfig configures the behaviour of the leader election</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>enableDataSourceConfig</code>
+        <br />
+        <em>
+          <a href="#cainjector.config.cert-manager.io/v1alpha1.EnableDataSourceConfig">EnableDataSourceConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>EnableDataSourceConfig determines whether cainjector&rsquo;s control loops will watch cert-manager resources as potential sources of CA data.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>enableInjectableConfig</code>
+        <br />
+        <em>
+          <a href="#cainjector.config.cert-manager.io/v1alpha1.EnableInjectableConfig">EnableInjectableConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>EnableInjectableConfig determines whether cainjector&rsquo;s control loops will watch cert-manager resources as potential targets for CA data injection.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>enablePprof</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>Enable profiling for cainjector.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>pprofAddress</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>The host and port that Go profiler should listen on, i.e localhost:6060. Ensure that profiler is not exposed on a public address. Profiler will be served at /debug/pprof.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>logging</code>
+        <br />
+        <em>k8s.io/component-base/logs/api/v1.LoggingConfiguration</em>
+      </td>
+      <td>
+        <p>
+          logging configures the logging behaviour of the cainjector.
+          <a href="https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration">https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>featureGates</code>
+        <br />
+        <em>map[string]bool</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>featureGates is a map of feature names to bools that enable or disable experimental features.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cainjector.config.cert-manager.io/v1alpha1.EnableDataSourceConfig">EnableDataSourceConfig</h3>
+<p> (<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>certificates</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>Certificates detemines whether cainjector&rsquo;s control loops will watch cert-manager Certificate resources as potential sources of CA data. If not set, defaults to true.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cainjector.config.cert-manager.io/v1alpha1.EnableInjectableConfig">EnableInjectableConfig</h3>
+<p> (<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>validatingWebhookConfigurations</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>ValidatingWebhookConfigurations determines whether cainjector will spin up a control loop to inject CA data to annotated ValidatingWebhookConfigurations If not set, defaults to true.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>mutatingWebhookConfigurations</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>MutatingWebhookConfigurations determines whether cainjector will spin up a control loop to inject CA data to annotated MutatingWebhookConfigurations If not set, defaults to true.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>customResourceDefinitions</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>CustomResourceDefinitions determines whether cainjector will spin up a control loop to inject CA data to annotated CustomResourceDefinitions If not set, defaults to true.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>apiServices</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>APIServices determines whether cainjector will spin up a control loop to inject CA data to annotated APIServices If not set, defaults to true.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cainjector.config.cert-manager.io/v1alpha1.LeaderElectionConfig">LeaderElectionConfig</h3>
+<p> (<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>enabled</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>If true, cert-manager will perform leader election between instances to ensure no more than one instance of cert-manager operates at a time</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>namespace</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace used to perform leader election. Only used if leader election is enabled</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>leaseDuration</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>renewDeadline</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>retryPeriod</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr />
 <h2 id="cert-manager.io/v1">cert-manager.io/v1</h2>
 <div>
   <p>Package v1 is the v1 version of the API.</p>
@@ -2825,6 +3086,23 @@ description: >-
               <p>
                 This is an Alpha Feature and is only enabled with the
                 <code>--feature-gates=AdditionalCertificateOutputFormats=true</code> option set on both the controller and webhook components.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>nameConstraints</code>
+              <br />
+              <em>
+                <a href="#cert-manager.io/v1.NameConstraints">NameConstraints</a>
+              </em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p> x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate. More Info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10">https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10</a> </p>
+              <p>
+                This is an Alpha Feature and is only enabled with the
+                <code>--feature-gates=useCertificateRequestNameConstraints=true</code> option set on both the controller and webhook components.
               </p>
             </td>
           </tr>
@@ -3256,6 +3534,17 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p> The OCSP server list is an X.509 v3 extension that defines a list of URLs of OCSP responders. The OCSP responders can be queried for the revocation status of an issued certificate. If not set, the certificate will be issued with no OCSP servers set. For example, an OCSP server URL could be &ldquo;<a href='http://ocsp.int-x3.letsencrypt.org"'>http://ocsp.int-x3.letsencrypt.org&rdquo;</a>. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>issuingCertificateURLs</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> IssuingCertificateURLs is a list of URLs which this issuer should embed into certificates it creates. See <a href="https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1">https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1</a> for more details. As an example, such a URL might be &ldquo;<a href='http://ca.domain.com/ca.crt"'>http://ca.domain.com/ca.crt&rdquo;</a>. </p>
       </td>
     </tr>
   </tbody>
@@ -4173,6 +4462,23 @@ description: >-
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>nameConstraints</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.NameConstraints">NameConstraints</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate. More Info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10">https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10</a> </p>
+        <p>
+          This is an Alpha Feature and is only enabled with the
+          <code>--feature-gates=useCertificateRequestNameConstraints=true</code> option set on both the controller and webhook components.
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateStatus">CertificateStatus</h3>
@@ -4753,6 +5059,115 @@ description: >-
         <p>&#34;timestamping&#34;</p>
       </td>
       <td></td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.NameConstraintItem">NameConstraintItem</h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.NameConstraints">NameConstraints</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>dnsDomains</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>DNSDomains is a list of DNS domains that are permitted or excluded.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>ipRanges</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>IPRanges is a list of IP Ranges that are permitted or excluded. This should be a valid CIDR notation.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>emailAddresses</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>EmailAddresses is a list of Email Addresses that are permitted or excluded.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>uriDomains</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>URIDomains is a list of URI domains that are permitted or excluded.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.NameConstraints">NameConstraints</h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<div>
+  <p>NameConstraints is a type to represent x509 NameConstraints</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>critical</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>if true then the name constraints are marked critical.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>permitted</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.NameConstraintItem">NameConstraintItem</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Permitted contains the constraints in which the names must be located.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>excluded</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.NameConstraintItem">NameConstraintItem</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Excluded contains the constraints which must be disallowed. Any name matching a restriction in the excluded field is invalid regardless of information appearing in the permitted</p>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -5749,7 +6164,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>featureGates is a map of feature names to bools that enable or disable experimental features. Default: nil</p>
+        <p>featureGates is a map of feature names to bools that enable or disable experimental features.</p>
       </td>
     </tr>
     <tr>
@@ -6170,6 +6585,16 @@ description: >-
         <p>DNSNames that must be present on serving certificates signed by the CA.</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>LeafDuration</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>LeafDuration is a customizable duration on serving certificates signed by the CA.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="webhook.config.cert-manager.io/v1alpha1.FilesystemServingConfig">FilesystemServingConfig</h3>
@@ -6369,12 +6794,12 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>featureGates is a map of feature names to bools that enable or disable experimental features. Default: nil</p>
+        <p>featureGates is a map of feature names to bools that enable or disable experimental features.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>d34bd7a</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>47d720b</code>. </em>
 </p>
