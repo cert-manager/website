@@ -87,9 +87,11 @@ checkout() {
   gitdir="${GOPATH}/src/github.com/cert-manager/cert-manager"
   echo "+++ Cloning cert-manager repository..."
   git clone "https://github.com/cert-manager/cert-manager.git" "$gitdir" --depth 1 --branch="$branch"
-  pushd "$gitdir"
+  cd "$gitdir"
   echo "+++ Running 'go mod vendor'"
   go mod vendor
+
+  make go-workspace || true
 }
 
 gendocs() {
@@ -105,7 +107,6 @@ gendocs() {
   "${REPO_ROOT}"/scripts/gendocs/postprocess/api-doc-postprocess.js <"${apidocstmpdir}/${outputdir}/api-docs.md" >"${REPO_ROOT}/content/${outputdir}/reference/api-docs.md"
 
   rm -rf vendor/
-  popd
 }
 
 # genclireference will attempt to run main.go --help for the target and write the output to a markdown file
@@ -148,15 +149,16 @@ EOF
 # This script is _only_ for generating docs for versions of cert-manager with the
 # github.com/cert-manager/cert-manager import path!
 
-LATEST_VERSION="v1.13-docs"
+LATEST_VERSION="docs" # to also upgrade a specific version, use v1.13-docs, v1.12-docs, etc.
 
 #genversionwithcli "release-1.8" "v1.8-docs"
 #genversionwithcli "release-1.9" "v1.9-docs"
 #genversionwithcli "release-1.10" "v1.10-docs"
 #genversionwithcli "release-1.11" "v1.11-docs"
 #genversionwithcli "release-1.12" "v1.12-docs"
+#genversionwithcli "release-1.13" "v1.13-docs"
 
-genversionwithcli "release-1.13" "$LATEST_VERSION"
+genversionwithcli "master" "$LATEST_VERSION"
 
 # Rather than generate the same docs again for /docs, copy from the latest version
 
