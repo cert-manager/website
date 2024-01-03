@@ -1,3 +1,14 @@
+allenmunC1
+jeremycampbell
+snorwin
+JoeNorth
+tanujd11
+asapekia
+pevidex
+vinny
+lauraseidler
+ABWassim
+ThatsMrTalbot
 yann-soubeyrand
 pinkfloydx33
 karlschriek
@@ -72,6 +83,7 @@ Arsh
 ArtifactHUB
 ArtifactHub
 AzureDNS
+BasicConstraints
 BKPR
 Bazel
 Bitnami
@@ -149,6 +161,7 @@ Fargate
 FastDNS
 FreeIPA
 fs-group
+GatewayAPI
 GCE
 GCLB
 GCP
@@ -186,6 +199,7 @@ Juneezee
 JoooostB
 Keyfactor
 KeySelector
+KeyUsage
 KUARD
 Kirill-Garbar
 Knative
@@ -269,6 +283,7 @@ ControllerConfiguration
 WIP
 YAML
 YAMLs
+accessors
 acme-dns
 ad-hoc
 allowlist
@@ -327,6 +342,7 @@ gcloud
 goimports
 google-cas-issuer
 goroutine
+gosec
 hardcodes
 hardcoded
 healthz
