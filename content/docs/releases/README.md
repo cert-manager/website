@@ -25,9 +25,11 @@ cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](htt
 
 ## Upcoming releases
 
-| Release  | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+| Release  | Release Date | End of Life            | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
-| [1.14][] | Jan 31, 2024 | ~4 months post release |             1.24 → 1.29            |           4.11 → 4.15             |
+| [1.14][] | Jan 31, 2024 | ~4 months post release | 1.24 → 1.29                        | 4.11 → 4.15                       |
+| [1.15][] | TBD          | TBD                    | TBD                                | TBD                               |
+
 
 Dates in the future are uncertain and might change.
 
@@ -55,7 +57,8 @@ Dates in the future are uncertain and might change.
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
-[1.14]: https://github.com/cert-manager/cert-manager/milestone/35
+[1.15]: https://github.com/cert-manager/cert-manager/milestone/36
+[1.14]: ./release-notes/release-notes-1.14.md
 [1.13]: ./release-notes/release-notes-1.13.md
 [1.12 LTS]: ./release-notes/release-notes-1.12.md
 [1.11]: ./release-notes/release-notes-1.11.md
