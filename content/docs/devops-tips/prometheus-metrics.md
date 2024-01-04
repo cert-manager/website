@@ -64,6 +64,48 @@ spec:
       honorLabels: true
 ```
 
+### TLS
+
+TLS can be enabled on the metrics endpoint for end-to-end encryption. This is achieved either using pre-signed static certificates, or using the internal dynamic certificate signing.
+
+#### Static certificates
+
+Static certificates can be provided to the cert-manager controller to use when listening on the metric endpoint. If the certificate files are changed then cert-manager will reload the certificates for zero-downtime rotation.
+
+Static certificates can be specified via the flags `--metrics-tls-cert-file` and `--metrics-tls-private-key-file` or the corresponding config file parameters `metricsTLSConfig.filesystem.certFile` and `metricsTLSConfig.filesystem.keyFile`.
+
+An example config file would be:
+
+```yaml
+apiVersion: controller.config.cert-manager.io/v1alpha1
+kind: ControllerConfiguration
+metricsTLSConfig:
+  filesystem:
+    certFile: "/path/to/cert.pem"
+    keyFile: "/path/to/key.pem"
+```
+
+#### Dynamic certificates
+
+In this mode cert-manager will create a CA in a named secret, then use this CA to sign the metrics endpoint certificate. This mode will also take care of rotation, auto rotating the certificate as required.
+
+Dynamic certificates can be specified via the flags `--metrics-dynamic-serving-ca-secret-namespace`, `--metrics-dynamic-serving-ca-secret-name` and `--metrics-dynamic-serving-dns-names` or the corresponding config file parameters `metricsTLSConfig.dynamic.secretNamespace`, `metricsTLSConfig.dynamic.secretName` and `metricsTLSConfig.dynamic.dnsNames`. 
+
+An example config file would be:
+
+```yaml
+apiVersion: controller.config.cert-manager.io/v1alpha1
+kind: ControllerConfiguration
+metricsTLSConfig:
+  dynamic:
+    secretNamespace: "cert-manager"
+    secretName: "cert-manager-metrics-ca"
+    dnsNames:
+    - cert-manager-metrics
+    - cert-manager-metrics.cert-manager
+    - cert-manager-metrics.cert-manager.svc
+```
+
 ## Monitoring Mixin
 
 Monitoring mixins are a way to bundle common alerts, rules, and dashboards for an application in a configurable and extensible way, using the Jsonnet data templating language. A cert-manager monitoring mixin can be found here https://gitlab.com/uneeq-oss/cert-manager-mixin. Documentation on usage can be found with the `cert-manager-mixin` project.
