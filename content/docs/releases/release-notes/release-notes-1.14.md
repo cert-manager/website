@@ -97,7 +97,7 @@ In addition, massive thanks to [Venafi](https://www.venafi.com/) for contributin
 #### Bug or Regression
 
 - BUGFIX[helm]: Fix issue where webhook feature gates were only set if controller feature gates are set. ([#6380](https://github.com/cert-manager/cert-manager/pull/6380), [@asapekia](https://github.com/asapekia))
-- Controller ConfigMap if now created only if `.Values.config` is set. ([#6357](https://github.com/cert-manager/cert-manager/pull/6357), [@ABWassim](https://github.com/ABWassim))
+- Controller ConfigMap is now created only if `.Values.config` is set. ([#6357](https://github.com/cert-manager/cert-manager/pull/6357), [@ABWassim](https://github.com/ABWassim))
 - Fix runaway bug caused by multiple Certificate resources that point to the same Secret resource. ([#6406](https://github.com/cert-manager/cert-manager/pull/6406), [@inteon](https://github.com/inteon))
 - Fix(helm): templating of required value in controller and webhook ConfigMap resources ([#6435](https://github.com/cert-manager/cert-manager/pull/6435), [@ABWassim](https://github.com/ABWassim))
 - Fixed a webhook validation error message when the key algorithm was invalid. ([#6571](https://github.com/cert-manager/cert-manager/pull/6571), [@pevidex](https://github.com/pevidex))
