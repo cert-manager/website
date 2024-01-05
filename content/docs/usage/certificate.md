@@ -74,7 +74,7 @@ spec:
   usages:
     - server auth
     - client auth
-  # At least one of a DNS Name, URI, or IP address is required.
+  # At least one of a DNS Name, URI, IP address or otherName is required.
   dnsNames:
     - example.com
     - www.example.com
@@ -82,6 +82,11 @@ spec:
     - spiffe://cluster.local/ns/sandbox/sa/example
   ipAddresses:
     - 192.168.0.5
+  # Needs cert-manager 1.14+ and OtherName feature flag
+  otherNames:
+    # Should only supply oid of ut8 valued types 
+    - oid: 1.3.6.1.4.1.311.20.2.3 # User Principal Name "OID"
+      utf8Value: upn@example.local
   # Issuer references are always required.
   issuerRef:
     name: ca-issuer
