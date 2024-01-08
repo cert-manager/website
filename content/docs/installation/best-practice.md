@@ -392,8 +392,7 @@ An example of this recommendation is found in the Datree Documentation:
 > Liveness probes allow Kubernetes to determine when a pod should be replaced.
 > They are fundamental in configuring a resilient cluster architecture.
 
-The cert-manager webhook and controller Pods do have liveness probes,
-but only the webhook liveness probe is enabled by default.
+The cert-manager webhook and controller Pods do have liveness probes.
 The cainjector Pod does not have a liveness probe, yet.
 More information below.
 
@@ -404,19 +403,9 @@ and the [timings and thresholds can be configured using Helm values](https://git
 
 ### controller
 
-> ℹ️ The cert-manager controller liveness probe was introduced in cert-manager release `1.12`.
-
-The cert-manager controller has a liveness probe, but it is **disabled by default**.
-You can enable it using the Helm chart value `livenessProbe.enabled=true`,
-but first read the background information below.
-
-> 📢 The controller liveness probe is a new feature in cert-manager release 1.12
-> and it is disabled by default, as a precaution, in case it causes problems in the field.
-> [Please get in touch](../contributing/README.md)
-> and tell us if you have enabled the controller liveness probe in production
-> and whether you would like it to be turned on by default.
-> Please also include any circumstances where the controller has become stuck
-> and where the liveness probe has been necessary to automatically restart the process.
+> 📢 The cert-manager controller liveness probe was introduced in cert-manager release `1.12` and
+> enabled by default in release `1.14`. In case it causes problems in the field,
+> [Please get in touch](../contributing/README.md).
 
 The liveness probe for the cert-manager controller is an HTTP probe which connects
 to the `/livez` endpoint of a healthz server which listens on port 9443 and runs in its own thread.
@@ -425,6 +414,8 @@ and each sub-system has its own `/livez` endpoint. These are:
 
 * `/livez/leaderElection`: Returns an error if the leader election record has not been renewed
   or if the leader election thread has exited without also crashing the parent process.
+* `/livez/clockHealth`: Returns an error if a clock skew is detected between the system clock
+  and the monotonic clock used by Go to schedule timers.
 
 > ℹ️ In future more sub-systems could be checked by the `/livez`  endpoint,
 > similar to how Kubernetes [ensure logging is not blocked](https://github.com/kubernetes/kubernetes/pull/64946)
@@ -459,10 +450,6 @@ there will be increasing time delays between successive restarts.
 
 For this reason, the liveness probe should only be needed if there is a bug in this orderly shutdown process,
 or if there is a bug in one of the other threads which causes the process to deadlock and not shutdown.
-
-You may want to enable the liveness probe anyway, for defense against unforeseen bugs and deadlocks,
-but you will need to monitor the processes closely and,
-tweak the [various liveness probe time settings and thresholds](https://github.com/cert-manager/cert-manager/blob/eafe0d0aae4b7a9411825424f6b43fb623e1ba65/deploy/charts/cert-manager/values.yaml#L254-L268), if necessary.
 
 > 📖 Read [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#before-you-begin) in the Kubernetes documentation, paying particular attention to the notes and cautions in that document.
 >
