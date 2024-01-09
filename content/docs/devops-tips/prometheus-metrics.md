@@ -74,6 +74,8 @@ Static certificates can be provided to the cert-manager controller to use when l
 
 Static certificates can be specified via the flags `--metrics-tls-cert-file` and `--metrics-tls-private-key-file` or the corresponding config file parameters `metricsTLSConfig.filesystem.certFile` and `metricsTLSConfig.filesystem.keyFile`.
 
+The certificate and private key must be mounted into the controller pod for this to work, if cert-manager is deployed using helm the `.volumes[]` and `.mounts[]` properties can facilitate this.
+
 An example config file would be:
 
 ```yaml
