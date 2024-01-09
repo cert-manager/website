@@ -22,8 +22,17 @@ The KeyUsage and BasicConstraints extensions will now be encoded as critical in 
 
 #### New X.509 Features
 
-The cert-manager Certificate resource now allows you to configure "Other Name" SANs,
-which are useful when issuing certificates for authenticating with LDAP systems such as Microsoft Active Directory.
+The cert-manager Certificate resource now allows you to configure a subset of "Other Name" SANs.
+Other Name is one of the GeneralNames like dnsName, IP , URL or URI SAN, described [page 37 in this RFC section on SANs](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.6)
+
+We specifically support any utf8 valued otherName type such as the [User Principal Name](https://docs.venafi.com/Docs/current/TopNav/Content/Certificates/r-UEP-support-SANs.php) or [sAMAccountName](https://learn.microsoft.com/en-us/windows/win32/ad/naming-properties).
+These are useful when issuing unique certificates for authenticating with LDAP systems such as Microsoft Active Directory.
+For example you can create certificates with this block in the spec:
+```
+  otherNames:
+    - oid: 1.3.6.1.4.1.311.20.2.3 # UPN OID
+      utf8Value: upn@domain.local
+```
 
 #### New CA certificate Features
 
