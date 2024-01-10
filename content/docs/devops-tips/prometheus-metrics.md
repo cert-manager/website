@@ -60,7 +60,7 @@ spec:
       app.kubernetes.io/instance: cert-manager
       app.kubernetes.io/component: "controller"
   podMetricsEndpoints:
-    - port: http
+    - port: http-metrics
       honorLabels: true
 ```
 
@@ -130,7 +130,8 @@ spec:
       app.kubernetes.io/instance: cert-manager
       app.kubernetes.io/component: "controller"
   podMetricsEndpoints:
-    - port: http
+    - port: http-metrics
+      scheme: https
       honorLabels: true
       # TLS config trusting the CA and specifying the server name
       tlsConfig:
