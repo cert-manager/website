@@ -25,7 +25,7 @@ The KeyUsage and BasicConstraints extensions will now be encoded as critical in 
 The cert-manager Certificate resource now allows you to configure a subset of "Other Name" SANs,
 which are described in the [Subject Alternative Name section of RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.6) (on page 37).
 
-We specifically support any utf8 valued otherName type such as the [User Principal Name](https://docs.venafi.com/Docs/current/TopNav/Content/Certificates/r-UEP-support-SANs.php) or [sAMAccountName](https://learn.microsoft.com/en-us/windows/win32/ad/naming-properties).
+We specifically support any `otherName` type with a `UTF-8` value, such as the [User Principal Name](https://docs.venafi.com/Docs/current/TopNav/Content/Certificates/r-UEP-support-SANs.php) or [`sAMAccountName`](https://learn.microsoft.com/en-us/windows/win32/ad/naming-properties).
 These are useful when issuing unique certificates for authenticating with LDAP systems such as Microsoft Active Directory.
 For example you can create certificates with this block in the spec:
 ```
