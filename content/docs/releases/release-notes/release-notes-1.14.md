@@ -33,7 +33,7 @@ For example you can create certificates with this block in the spec:
     - oid: 1.3.6.1.4.1.311.20.2.3 # UPN OID
       utf8Value: upn@domain.local
 ```
-The feature is still in alpha stage and requires you to enable the "OtherName" feature flag in controller and webhook components, [details here](https://cert-manager.io/docs/installation/configuring-components/#feature-gates).
+The feature is still in alpha stage and requires you to [enable the `OtherName` feature flag in the controller and webhook components](../../installation/configuring-components/README.md#feature-gates).
 
 #### New CA certificate Features
 
