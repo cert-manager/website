@@ -17,6 +17,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈   | command-issuer              | [📄][config:command-issuer]         | [Keyfactor Command][ca:command-issuer]                                 | -                                                 | [✔️][release:command-issuer]         | ✔️              |
 | 🥈   | ejbca-issuer                | [📄][config:ejbca-issuer]           | [EJBCA][ca:ejbca-issuer]                                               | -                                                 | [✔️][release:ejbca-issuer]           | ✔️              |
 | 🥈   | google-cas-issuer           | [📄][config:google-cas-issuer]      | [Google Cloud Certificate<br/>Authority Service][ca:google-cas-issuer] | -                                                 | [✔️][release:google-cas-issuer]      | ✔️              |
+| 🥈   | gs-atlas-issuer             | [📄][config:gs-atlas-issuer]        | [GlobalSign CA][ca:gs-atlas-issuer]                                    | -                                                 | [✔️][release:gs-atlas-issuer]        | ✔️              |
 | 🥈   | horizon-issuer              | [📄][config:horizon-issuer]         | [EVERTRUST Horizon][ca:horizon-issuer]                                 | -                                                 | [✔️][release:horizon-issuer]         | ✔️              |
 | 🥈   | ncm-issuer                  | [📄][config:ncm-issuer]             | [Nokia Netguard Certificate Manager][ca:ncm-issuer]                    | -                                                 | [✔️][release:ncm-issuer]             | ✔️              |
 | 🥈   | selfsigned-issuer (in-tree) | [📄][config:selfsigned-issuer]      | Self-Signed issuer                                                     | -                                                 | [✔️][release:cert-manager]           | ✔️              |
@@ -49,6 +50,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:ncm-issuer]: https://github.com/nokia/ncm-issuer
 [config:tcs-issuer]: https://github.com/intel/trusted-certificate-issuer
 [config:google-cas-issuer]: https://github.com/jetstack/google-cas-issuer
+[config:gs-atlas-issuer]: https://github.com/globalsign/atlas-cert-manager
 [config:ejbca-issuer]: https://github.com/Keyfactor/ejbca-cert-manager-issuer
 [config:command-issuer]: https://github.com/Keyfactor/command-cert-manager-issuer
 [config:horizon-issuer]: https://github.com/evertrust/horizon-issuer
@@ -66,6 +68,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:command-issuer]: https://www.keyfactor.com/products/command/
 [ca:ejbca-issuer]: https://www.ejbca.org/
 [ca:google-cas-issuer]: https://cloud.google.com/certificate-authority-service/
+[ca:gs-atlas-issuer]: https://www.globalsign.com/en/atlas
 [ca:horizon-issuer]: https://evertrust.fr/horizon
 [ca:ncm-issuer]: https://www.nokia.com/networks/security-portfolio/netguard/certificate-manager
 [ca:step-issuer]: https://github.com/smallstep/certificates
@@ -88,6 +91,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:ncm-issuer]: https://github.com/nokia/ncm-issuer/releases
 [release:tcs-issuer]: https://github.com/intel/trusted-certificate-issuer/releases
 [release:google-cas-issuer]: https://github.com/jetstack/google-cas-issuer/releases
+[release:gs-atlas-issuer]: https://github.com/globalsign/atlas-cert-manager/releases
 [release:ejbca-issuer]: https://github.com/Keyfactor/ejbca-cert-manager-issuer/tags
 [release:command-issuer]: https://github.com/Keyfactor/command-cert-manager-issuer/releases
 [release:horizon-issuer]: https://github.com/evertrust/horizon-issuer/releases
