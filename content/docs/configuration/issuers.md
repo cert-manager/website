@@ -37,7 +37,7 @@ The following list contains all known cert-manager issuer integrations.
 [//]: # (Configuration docs)
 
 [config:venafi-enhanced-issuer]: https://docs.venafi.cloud/vaas/k8s-components/t-vei-install/
-[config:acme-issuer]: ./acme.md
+[config:acme-issuer]: ./acme/README.md
 
 [config:aws-privateca-issuer]: https://github.com/cert-manager/aws-privateca-issuer
 [config:selfsigned-issuer]: ./selfsigned.md
