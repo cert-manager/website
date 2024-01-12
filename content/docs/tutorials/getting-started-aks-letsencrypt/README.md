@@ -6,7 +6,7 @@ description: |
     using the DNS-01 protocol and Azure DNS with workload identity federation.
 ---
 
-*Last Verified: 10 January 2023*
+*Last Verified: 11 January 2024*
 
 In this tutorial you will learn how to deploy and configure cert-manager on Azure Kubernetes Service (AKS)
 and how to deploy an HTTPS web server and make it available on the Internet.
