@@ -85,6 +85,25 @@ root before the connection is started. If the client already has the root, there
 The same logic with not sending root certificates applies for servers trying to validate client certificates;
 the [same justification](https://datatracker.ietf.org/doc/html/rfc5246#section-7.4.6) is given in the TLS RFC.
 
+<a id="chain-cacrt"></a>
+### Why isn't my certificate's chain in my issued Secret's `ca.crt`?
+
+Users frequently ask us about changing `ca.crt` to include more certs or different certs. We tend to push back on these requests
+for the simple reason that we believe `ca.crt` to most often be a risk for any user.
+
+`ca.crt` is filled by cert-manager with a "best guess" of what the issuing CA was. Importantly, cert-manager can often only guess;
+if the issuer doesn't provide the full chain including the root certificate, there might be no way for cert-manager to know what the
+root of the chain is. In that case, cert-manager will make a best-effort attempt to use the issuer deepest in the chain.
+
+That "best effort" attempt is one of the reasons that `ca.crt` can be risky; it might not be correct, and it might change when the issuer
+changes even if nothing in cert-manager changes.
+
+The other issue with `ca.crt` is fundamental - it's updated when the certificate is updated. Some users can be tempted to use `ca.crt`
+for trust purposes, but rotating trusted certificates safely relies on being able to have both the old and new CA certificates trusted at the same time.
+
+By consuming the CA directly from your Secret, it becomes impossible to do this; `ca.crt` will only ever contain the best effort guess
+for the CA for the current certificate, and will never include an older or a new CA.
+
 ### How can I see all the historic events related to a certificate object?
 
 cert-manager publishes all events to the Kubernetes events mechanism, you can get the events for your specific resources using `kubectl describe <resource> <name>`.
