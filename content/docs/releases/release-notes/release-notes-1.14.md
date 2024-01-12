@@ -3,6 +3,63 @@ title: Release 1.14
 description: 'cert-manager release notes: cert-manager 1.14'
 ---
 
+## `v1.14.0-alpha.1`
+
+This is the second pre-release of cert-manager 1.14 which will be released on January 31 2024.
+
+### Community
+
+Thanks again to all open-source contributors with commits in this release, including:
+- [@phillebaba](https://github.com/phillebaba)
+- [@tberreis](https://github.com/tberreis)
+
+### Changes since `v1.14.0-alpha.0`
+
+#### Feature
+
+- Add TLS support to the metrics endpoint through either a certificate file or through dynamically issued certificates ([#6574](https://github.com/cert-manager/cert-manager/pull/6574), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+- Helm Chart: allow changing the default Deployment `revisionHistoryLimit` ([#6248](https://github.com/cert-manager/cert-manager/pull/6248), [@tberreis](https://github.com/tberreis))
+- Security: Limit the size of the response body read from HTTP requests by cert-manager. ([#6619](https://github.com/cert-manager/cert-manager/pull/6619), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+
+#### Bug or Regression
+
+- BUGFIX: Ensure `otherName` SAN changes in Certificate resources trigger re-issuance. ([#6620](https://github.com/cert-manager/cert-manager/pull/6620), [@SpectralHiss](https://github.com/SpectralHiss))
+- Bugfix: Publish the `startupapicheck` image to `quay.io` ([#6609](https://github.com/cert-manager/cert-manager/pull/6609), [@wallrj](https://github.com/wallrj))
+
+#### Other (Cleanup or Flake)
+
+- cert-manager is now built with Go `v1.21.6` ([#6628](https://github.com/cert-manager/cert-manager/pull/6628), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Update the Azure SDK and remove deprecated `autorest` dependency ([#5452](https://github.com/cert-manager/cert-manager/pull/5452), [@phillebaba](https://github.com/phillebaba))
+
+### Dependencies
+
+#### Added
+- `github.com/Azure/azure-sdk-for-go/sdk/azcore`: [`v1.9.1`](https://github.com/Azure/azure-sdk-for-go/sdk/azcore/tree/v1.9.1)
+- `github.com/Azure/azure-sdk-for-go/sdk/azidentity`: [`v1.4.0`](https://github.com/Azure/azure-sdk-for-go/sdk/azidentity/tree/v1.4.0)
+- `github.com/Azure/azure-sdk-for-go/sdk/internal`: [`v1.5.1`](https://github.com/Azure/azure-sdk-for-go/sdk/internal/tree/v1.5.1)
+- `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/dns/armdns`: [`v1.2.0`](https://github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/dns/armdns/tree/v1.2.0)
+- `github.com/AzureAD/microsoft-authentication-library-for-go`: [`v1.1.1`](https://github.com/AzureAD/microsoft-authentication-library-for-go/tree/v1.1.1)
+- `github.com/dnaeon/go-vcr`: [`v1.2.0`](https://github.com/dnaeon/go-vcr/tree/v1.2.0)
+- `github.com/golang-jwt/jwt/v5`: [`v5.0.0`](https://github.com/golang-jwt/jwt/v5/tree/v5.0.0)
+- `github.com/kylelemons/godebug`: [`v1.1.0`](https://github.com/kylelemons/godebug/tree/v1.1.0)
+- `github.com/montanaflynn/stats`: [`v0.7.0`](https://github.com/montanaflynn/stats/tree/v0.7.0)
+- `github.com/pkg/browser`: [`681adbf`](https://github.com/pkg/browser/tree/681adbf)
+
+#### Changed
+_Nothing has changed._
+
+#### Removed
+- `github.com/Azure/azure-sdk-for-go`: [`v68.0.0+incompatible`](https://github.com/Azure/azure-sdk-for-go/tree/v68.0.0)
+- `github.com/Azure/go-autorest/autorest/adal`: [`v0.9.23`](https://github.com/Azure/go-autorest/autorest/adal/tree/v0.9.23)
+- `github.com/Azure/go-autorest/autorest/date`: [`v0.3.0`](https://github.com/Azure/go-autorest/autorest/date/tree/v0.3.0)
+- `github.com/Azure/go-autorest/autorest/mocks`: [`v0.4.2`](https://github.com/Azure/go-autorest/autorest/mocks/tree/v0.4.2)
+- `github.com/Azure/go-autorest/autorest/to`: [`v0.4.0`](https://github.com/Azure/go-autorest/autorest/to/tree/v0.4.0)
+- `github.com/Azure/go-autorest/autorest/validation`: [`v0.3.1`](https://github.com/Azure/go-autorest/autorest/validation/tree/v0.3.1)
+- `github.com/Azure/go-autorest/autorest`: [`v0.11.29`](https://github.com/Azure/go-autorest/autorest/tree/v0.11.29)
+- `github.com/Azure/go-autorest/logger`: [`v0.2.1`](https://github.com/Azure/go-autorest/logger/tree/v0.2.1)
+- `github.com/Azure/go-autorest/tracing`: [`v0.6.0`](https://github.com/Azure/go-autorest/tracing/tree/v0.6.0)
+- `github.com/Azure/go-autorest`: [`v14.2.0+incompatible`](https://github.com/Azure/go-autorest/tree/v14.2.0)
+
 ## `v1.14.0-alpha.0`
 
 This is a pre-release of cert-manager 1.14 which will be released on January 31 2024.
