@@ -586,6 +586,10 @@
             {
               "title": "Managing public trust in kubernetes with trust-manager",
               "path": "/docs/tutorials/getting-started-with-trust-manager/README.md"
+            },
+            {
+              "title": "Setting default certificate values",
+              "path": "/docs/tutorials/certificate-defaults/README.md"
             }
           ]
         },
