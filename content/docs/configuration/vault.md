@@ -47,6 +47,207 @@ spec:
       ...
 ```
 
+### Accessing a Vault Server with mTLS enforced
+
+In certain use cases, the Vault Server could be configured to enforce clients to present a
+client certificates, those client certificates are just a transport layer enforcement, 
+it does not provide any authentication and authorization mechanism to the Vault APIs itself. 
+You can read more about the Vault server TCP listener [in the official documentation](https://developer.hashicorp.com/vault/docs/configuration/listener/tcp)
+
+Please follow the steps below to configure Vault with mTLS enforced:
+- Generate the bundle CA and the server TLS certificate:
+```shell
+step certificate create "Example Server Root CA" server_ca.crt server_ca.key \
+  --profile root-ca \
+  --not-after=87600h \
+  --no-password \
+   --insecure
+   
+
+step certificate create vault.vault vault.crt vault.key \
+  --profile leaf \
+  --not-after=8760h \
+  --ca ./server_ca.crt \
+  --ca-key server_ca.key \
+  --no-password \
+  --insecure
+```
+- Generate Vault client certificate and CA: 
+```shell
+step certificate create "Example Client Root CA" client_ca.crt client_ca.key \
+  --profile root-ca \
+  --not-after=87600h \
+  --no-password \
+   --insecure 
+
+step certificate create client.vault vault_client.crt vault_client.key \
+  --profile leaf \
+  --not-after=8760h \
+  --ca ./client_ca.crt \
+  --ca-key client_ca.key \
+  --no-password \
+  --insecure
+```
+- Prepare the Vault installation, assuming you would be installing Vault in the Kubernetes cluster using the [official Helm chart](https://github.com/hashicorp/vault-helm):
+  - Create the Vault namespace
+```shell
+kubectl create ns vault
+```
+  - Create a Kubernetes Secret in the same namespace where Vault will be installed and add the generated PKI files as following:
+```shell
+kubectl create secret generic vault-tls \
+  --namespace vault \
+  --from-file=server.key=vault.key \
+  --from-file=server.crt=vault.crt \
+  --from-file=client-ca.crt=client_ca.crt \
+  --from-file=client.crt=vault_client.crt \
+  --from-file=client.key=vault_client.key
+```
+  - Deploy Vault using the following values file:
+```yaml
+# vault-values.yaml
+global:
+   tlsDisable: false
+injector:
+  enabled: false
+server:
+  dataStorage:
+    enabled: false
+  standalone:
+    enabled: true
+    config: |
+      listener "tcp" {
+        address = "[::]:8200"
+        cluster_address = "[::]:8201"
+        tls_disable = false
+        tls_client_ca_file = "/vault/tls/client-ca.crt"
+        tls_cert_file = "/vault/tls/server.crt"
+        tls_key_file = "/vault/tls/server.key"
+        tls_require_and_verify_client_cert = true
+      }
+  extraArgs: "-dev-tls -dev-listen-address=[::]:8202"
+  extraEnvironmentVars:
+    VAULT_TLSCERT: /vault/tls/server.crt
+    VAULT_TLSKEY: /vault/tls/server.key
+    VAULT_CLIENT_CERT: /vault/tls/client.crt
+    VAULT_CLIENT_KEY: /vault/tls/client.key
+  volumes:
+    - name: vault-tls
+      secret:
+        defaultMode: 420
+        secretName: vault-tls
+  volumeMounts:
+    - mountPath: /vault/tls
+      name: vault-tls
+      readOnly: true
+```
+
+```shell
+helm upgrade vault hashicorp/vault --install --namespace vault --create-namespace --values vault-values.yaml
+```
+
+- Configure Vault server for Kubernetes auth
+```shell
+kubectl -n vault exec pods/vault-0  -- \
+        vault auth enable --tls-skip-verify kubernetes
+
+kubectl -n vault exec pods/vault-0  -- \
+        vault write --tls-skip-verify \
+        auth/kubernetes/role/vault-issuer \
+        bound_service_account_names=vault-issuer \
+        bound_service_account_namespaces=application-1 \
+        audience="vault://application-1/vault-issuer" \
+        policies=vault-issuer \
+        ttl=1m
+
+kubectl -n vault exec pods/vault-0 -- \
+        vault write --tls-skip-verify \
+        auth/kubernetes/config \
+        kubernetes_host=https://kubernetes.default
+```
+- Create application namespace
+```shell
+kubectl create ns application-1
+```
+- Create Service account
+```shell
+kubectl create serviceaccount -n application-1 vault-issuer
+```
+- Create Role and Binding
+```yaml
+# rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: vault-issuer
+  namespace: application-1
+rules:
+  - apiGroups: ['']
+    resources: ['serviceaccounts/token']
+    resourceNames: ['vault-issuer']
+    verbs: ['create']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: vault-issuer
+  namespace: application-1
+subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: vault-issuer
+```
+```shell
+kubectl apply -f rbac.yaml
+```
+- Create Vault client certificate secret
+```shell
+kubectl create secret generic vault-client-tls \
+  --namespace application-1 \
+  --from-file=client.crt=vault_client.crt \
+  --from-file=client.key=vault_client.key
+```
+- Create Issuer
+```shell
+export CA_BUNDLE=$(base64 -w 0 server_ca.crt)
+```
+```yaml
+# vault-issuer.yaml 
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: vault-issuer
+  namespace: application-1
+spec:
+  vault:
+    path: pki_int/sign/application-1
+    server: https://vault.vault:8200
+    caBundle: ${CA_BUNDLE}
+    clientCertSecretRef:
+      name: vault-client-tls
+      key: vault_client.crt
+    clientKeySecretRef:
+      name: vault-client-tls
+      key: vault_client.key
+    auth:
+      kubernetes:
+        role: vault-issuer
+        mountPath: /v1/auth/kubernetes
+        serviceAccountRef:
+          name: vault-issuer
+```
+```shell
+envsubst < vault-issuer.yaml | kubectl -f -
+```
+- Check Issuer status
+```shell
+kubectl describe issuer -n application-1
+```
+
 ## Authenticating
 
 In order to request signing of certificates by Vault, the issuer must be able to
