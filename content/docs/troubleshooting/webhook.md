@@ -597,41 +597,59 @@ receiving the HTTP response.
 > above error messages is a timeout that the API server decides when calling the
 > webhook. It is often set to 10 or 30 seconds.
 
+
+The first step to debug this issue is to make sure the `timeoutSeconds` field on
+the cert-manager mutating and validating webhook configurations are
+configured to 30 seconds (the maximum value). By default, it is set to 10
+seconds, meaning that `context deadline exceeded` will potentially hide the
+other timeout messages. To check the value of the `timeoutSeconds` field, run:
+
+```console
+$ kubectl get mutatingwebhookconfigurations,validatingwebhookconfigurations cert-manager-webhook \
+  -ojsonpath='{.items[*].webhooks[*].timeoutSeconds}'
+10 10
+```
+
+This means that both webhooks are configured with a context timeout of 10
+seconds. To configure them to 30 seconds, run:
+
+```bash
+kubectl patch mutatingwebhookconfigurations,validatingwebhookconfigurations cert-manager-webhook \
+  --type=json -p '[{"op": "replace", "path": "/webhooks/0/timeoutSeconds", "value": 30}]'
+```
+
 The following diagram shows what are the three errors that may be hidden behind
-the all-catching "context deadline exceeded" error message, represented by the
-outer box, that is usually thrown after 30 seconds:
+the all-catching `context deadline exceeded` error message, represented by the
+outer box, that is thrown after 30 seconds:
 
 <a id="diagram"></a>
 
 ```diagram
                                                    context deadline exceeded
-                                                                           |
-                                  30 seconds                               |
-                                   timeout                                 v
- +-------------------------------------------------------------------------+
- |                                                                         |
- |       i/o timeout                                                       |
- |            |        net/http: TLS handshake timeout                     |
- | 10 seconds |                     |                                      |
- |  timeout   v                     |                                      |
- |------------+      30 seconds     |           net/http: request canceled |
- |TCP         |       timeout       v           while awaiting headers     |
- |handshake   +---------------------+                         |            |
- |------------|      TLS            |                         |            |
- |            |      handshake      +------------+ 10 seconds |            |
- |            +---------------------|  sending   |  timeout   v            |
- |                                  |  request   +------------+            |
- |                                  +------------|receiving   |------+     |
- |                                               |resp. header| recv.|     |
- |                                               +------------+ resp.|     |
- |                                                            | body +-----+
- |                                                            +------|other|
- |                                                                   |logic|
- |                                                                   +-----+
- +-------------------------------------------------------------------------+
- <----------> <---------------------------------------------->
- connectivity                   webhook-side
- issue                          issue
+                                                                          |
+                                 30 seconds                               |
+                                  timeout                                 v
++-------------------------------------------------------------------------+
+|                                                                         |
+|       i/o timeout                                                       |
+|            |        net/http: TLS handshake timeout                     |
+| 10 seconds |                     |                                      |
+|  timeout   v                     |                                      |
+|------------+      30 seconds     |           net/http: request canceled |
+|TCP         |       timeout       v           while awaiting headers     |
+|handshake   +---------------------+                         |            |
+|------------|      TLS            |                         |            |
+|            |      handshake      +------------+ 10 seconds |            |
+|            +---------------------|  sending   |  timeout   v            |
+|                                  |  request   +------------+            |
+|                                  +------------|receiving   |------+     |
+|                                               |resp. header| recv.|     |
+|                                               +------------+ resp.|     |
+|                                                            | body +-----+
+|                                                            +------|other|
+|                                                                   |logic|
+|                                                                   +-----+
++-------------------------------------------------------------------------+
 ```
 
 In the rest of the section, we will be trying to trigger one of the three "more
