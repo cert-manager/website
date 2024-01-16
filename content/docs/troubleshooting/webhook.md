@@ -599,7 +599,7 @@ receiving the HTTP response.
 
 
 The first step to debug this issue is to make sure the `timeoutSeconds` field on
-the cert-manager mutating and validating webhook configurations we are
+the cert-manager mutating and validating webhook configurations are
 configured to 30 seconds (the maximum value). By default, it is set to 10
 seconds, meaning that `context deadline exceeded` will potentially hide the
 other timeout messages. To check the value of the `timeoutSeconds` field, run:
