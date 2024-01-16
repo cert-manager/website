@@ -610,7 +610,7 @@ $ kubectl get mutatingwebhookconfigurations,validatingwebhookconfigurations cert
 10 10
 ```
 
-THis means that both webhooks are configured with a context timeout of 10
+This means that both webhooks are configured with a context timeout of 10
 seconds. To configure them to 30 seconds, run:
 
 ```bash
