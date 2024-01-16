@@ -1,0 +1,45 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: mutate-certificates
+spec:
+  failurePolicy: Fail
+  rules:
+  # Set a sane default for the history field if not already present
+  - name: set-revisionHistoryLimit
+    match:
+      any:
+      - resources:
+          kinds:
+          - Certificate
+    mutate:
+      patchStrategicMerge:
+        spec:
+          # +(...) This is the clever syntax for if not already set
+          +(revisionHistoryLimit): 2
+  # Set rotation to always if not already set
+  - name: set-privateKey-rotationPolicy
+    match:
+      any:
+      - resources:
+          kinds:
+          - Certificate
+    mutate:
+      patchStrategicMerge:
+        spec:
+          privateKey:
+            +(rotationPolicy): Always
+  # Set private key details for algorithm and size
+  - name: set-privateKey-details
+    match:
+      any:
+      - resources:
+          kinds:
+          - Certificate
+    mutate:
+      patchStrategicMerge:
+        spec:
+          privateKey:
+            +(algorithm): ECDSA
+            +(size): 521
+            +(encoding): PKCS1
