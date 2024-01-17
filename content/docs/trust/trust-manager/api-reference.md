@@ -172,17 +172,17 @@ ConfigMap is a reference to a ConfigMap's `data` key, in the trust Namespace.
         <td><b>name</b></td>
         <td>string</td>
         <td>
-          Name is the name of the source object in the trust Namespace.<br/>
+          Name is the name of the source object in the trust Namespace. If not set, `selector` must be set.<br/>
         </td>
-        <td>true</td>
+        <td>false</td>
       </tr></tbody>
       </tr><tr>
         <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#labelselector-v1-meta">selector</a></b></td>
         <td>LabelSelector</td>
         <td>
-          Name is the name of the source object in the trust Namespace.<br/>
+          A LabelSelector object to reference, by labels, a list of source objects in the trust Namespace. If not set, `name` must be set.<br/>
         </td>
-        <td>true</td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -212,9 +212,17 @@ Secret is a reference to a Secrets's `data` key, in the trust Namespace.
         <td><b>name</b></td>
         <td>string</td>
         <td>
-          Name is the name of the source object in the trust Namespace.<br/>
+          Name is the name of the source object in the trust Namespace. If not set, `selector` must be set.<br/>
         </td>
-        <td>true</td>
+        <td>false</td>
+      </tr></tbody>
+      </tr><tr>
+        <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#labelselector-v1-meta">selector</a></b></td>
+        <td>LabelSelector</td>
+        <td>
+          A LabelSelector object to reference, by labels, a list of source objects in the trust Namespace. If not set, `name` must be set.<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
