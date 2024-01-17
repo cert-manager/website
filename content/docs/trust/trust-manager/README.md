@@ -109,7 +109,7 @@ spec:
 
 Support for `Secret` targets must be explicitly enabled in the trust-manager controller; see details below under "Enable Secret targets".
 
-Both `ConfigMap` and `Secret` also support specifying label selectors to select multiple resources at once, which is useful in dynamics
+Both `ConfigMap` and `Secret` also support specifying label selectors to select multiple resources at once, which is useful in dynamic
 environments where the name of the `ConfigMap` or `Secret` is known only at runtime. When adding a source, either of type `ConfigMap` or `Secret`, 
 the fields `name` and `selector` are mutually exclusive: one **must** be set, but not both.
 
