@@ -175,7 +175,6 @@ ConfigMap is a reference to a ConfigMap's `data` key, in the trust Namespace.
           Name is the name of the source object in the trust Namespace. If not set, `selector` must be set.<br/>
         </td>
         <td>false</td>
-      </tr></tbody>
       </tr><tr>
         <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#labelselector-v1-meta">selector</a></b></td>
         <td>LabelSelector</td>
@@ -215,7 +214,6 @@ Secret is a reference to a Secrets's `data` key, in the trust Namespace.
           Name is the name of the source object in the trust Namespace. If not set, `selector` must be set.<br/>
         </td>
         <td>false</td>
-      </tr></tbody>
       </tr><tr>
         <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#labelselector-v1-meta">selector</a></b></td>
         <td>LabelSelector</td>
