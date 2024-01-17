@@ -176,6 +176,14 @@ ConfigMap is a reference to a ConfigMap's `data` key, in the trust Namespace.
         </td>
         <td>true</td>
       </tr></tbody>
+      </tr><tr>
+        <td><b><a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#labelselector-v1-meta">selector</a></b></td>
+        <td>LabelSelector</td>
+        <td>
+          Name is the name of the source object in the trust Namespace.<br/>
+        </td>
+        <td>true</td>
+      </tr></tbody>
 </table>
 
 

@@ -54,10 +54,24 @@ spec:
       name: "my-db-tls"
       key: "ca.crt"
 
+  # Here is another Secret source, but this time using a label selector instead of a Secret's name. 
+  - secret:
+      selector:
+        matchLabels: 
+          fruit: apple
+      key: "ca.crt"
+
   # A ConfigMap in the "trust" namespace; see "Trust Namespace" below for further details
   - configMap:
       name: "my-org.net"
       key: "root-certs.pem"
+  
+  # Here is another ConfigMap source, but this time using a label selector instead of a ConfigMap's name. 
+  - configMap:
+      selector:
+        matchLabels: 
+          fruit: apple
+      key: "ca.crt"
 
   # A manually specified string
   - inLine: |
@@ -94,6 +108,11 @@ spec:
 `ConfigMap` is the default target type, but as of v0.7.0 trust-manager also supports `Secret` resources as targets.
 
 Support for `Secret` targets must be explicitly enabled in the trust-manager controller; see details below under "Enable Secret targets".
+
+Both `ConfigMap` and `Secret` also support specifying label selectors to select multiple resources at once, which is useful in dynamics
+environments where the name of the `ConfigMap` or `Secret` is known only at runtime. When adding a source, either of type `ConfigMap` or `Secret`, 
+the fields `name` and `selector` are mutually exclusive: one **must** be set, but not both.
+
 
 All sources and target options are documented in the trust-manager [API reference documentation](./api-reference.md).
 
