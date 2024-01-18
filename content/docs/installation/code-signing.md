@@ -18,21 +18,26 @@ key.
 
 For all cert-manager versions from `v1.8.0` and later, cert-manager container images are signed and verifiable using [`cosign`](https://docs.sigstore.dev/cosign/overview).
 
-The simplest way to verify signatures is to download the public key and then pass it to the cosign CLI directly:
-
 ```console
-curl -sSOL https://cert-manager.io/public-keys/cert-manager-pubkey-2021-09-20.pem
 IMAGE_TAG=v1.14.0-alpha.1  # change as needed
-cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-acmesolver:$IMAGE_TAG
-cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-cainjector:$IMAGE_TAG
-cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-ctl:$IMAGE_TAG
-cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-controller:$IMAGE_TAG
-cosign verify --signature-digest-algorithm sha512 --key cert-manager-pubkey-2021-09-20.pem quay.io/jetstack/cert-manager-webhook:$IMAGE_TAG
+KEY=https://cert-manager.io/public-keys/cert-manager-pubkey-2021-09-20.pem
+cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-acmesolver:$IMAGE_TAG
+cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-cainjector:$IMAGE_TAG
+cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-ctl:$IMAGE_TAG
+cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-controller:$IMAGE_TAG
+cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-webhook:$IMAGE_TAG
 ```
 
 For a more fully-featured signature verification process in Kubernetes, check out [`connaisseur`](https://sse-secure-systems.github.io/connaisseur/).
 
 - PEM-encoded public key: [`cert-manager-pubkey-2021-09-20.pem`](https://cert-manager.io/public-keys/cert-manager-pubkey-2021-09-20.pem)
+
+### Why `--insecure-ignore-tlog`?
+
+We'd rather not have an flag which says `insecure` in the verification command and it's our intention to fix that some time in the future. For now,
+ignoring the transparency log makes verification work.
+
+Note that the cert-manager key is stored in Google Cloud KMS, and is used by Google Cloud Build only when a cert-manager release is being signed.
 
 ## Helm Charts
 
