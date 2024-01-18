@@ -2,8 +2,8 @@
 title: controller CLI reference
 description: "cert-manager controller CLI documentation"
 ---
-```
 
+```
 cert-manager is a Kubernetes addon to automate the management and issuance of
 TLS certificates from various issuing sources.
 
@@ -14,7 +14,7 @@ Usage:
   controller [flags]
 
 Flags:
-      --acme-http01-solver-image string                     The docker image to use to solve ACME HTTP01 challenges. You most likely will not need to change this parameter unless you are testing a new feature or developing cert-manager. (default "quay.io/jetstack/cert-manager-acmesolver:canary")
+      --acme-http01-solver-image string                     The docker image to use to solve ACME HTTP01 challenges. You most likely will not need to change this parameter unless you are testing a new feature or developing cert-manager. (default "quay.io/jetstack/cert-manager-acmesolver:v1.13.3")
       --acme-http01-solver-nameservers strings              A list of comma separated dns server endpoints used for ACME HTTP01 check requests. This should be a list containing host and port, for example 8.8.8.8:53,8.8.4.4:53
       --acme-http01-solver-resource-limits-cpu string       Defines the resource limits CPU size when spawning new ACME HTTP01 challenge solver pods. (default "100m")
       --acme-http01-solver-resource-limits-memory string    Defines the resource limits Memory size when spawning new ACME HTTP01 challenge solver pods. (default "64Mi")
