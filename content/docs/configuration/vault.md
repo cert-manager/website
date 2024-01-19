@@ -213,7 +213,7 @@ This depends on several factors, for example:
 - Whether you're running on a public cloud distribution of Kubernetes with `OIDC` discovery support
 - If not, In Openshift for example whether the `apiserver` already exposes or can be configured to expose the `OIDC` discovery endpoint
 
-| Vault deployment | Cloud managed K8s (EKS,GKE,AKS) | Admin platform rights | Best method/guide                                                       |
+| Vault deployment | Cloud managed K8s (EKS,GKE,AKS) | Admin platform rights | Best method                                                             |
 | ---------------- | -------------------------- | ---------------------      | ------------                                                            |
 | External         | Yes                        | Yes                        | [JWT auth](#jwt-auth-for-cloud-kubernetes-clusters)                     |
 | External         | No                         | No                         | [Static token](#authentication-with-a-static-service-account-token)     |
