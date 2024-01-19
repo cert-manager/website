@@ -219,8 +219,7 @@ This depends on several factors, for example:
 | External         | No                         | No                         | [Static token](#authentication-with-a-static-service-account-token)     |
 | Internal         | Yes                        | No                         | [Kubernetes auth](#use-kubernetes-auth)                                 |
 | Internal         | Yes                        | Yes                        | [Kubernetes auth](#use-kubernetes-auth)                                 |
-| External         | No  (e.g. Openshift)       | Yes                        | [JWT pre-requisites + JWT auth](#jwt-auth-pre-requisites)               |
-
+| External         | No  (e.g. Openshift)       | Yes                        | [JWT pre-requisites + JWT auth](#jwt-auth-pre-requisites-e.g.-openshift)|
 
 ##### JWT auth for cloud Kubernetes clusters
 
@@ -299,7 +298,7 @@ spec:
           name: vault-issuer
 ```
 
-##### JWT auth pre-requisites.
+##### JWT auth pre-requisites (e.g Openshift).
 
 In the case of some Openshift installations for example, the cluster's `OIDC` provider may not be readily accessible to your external Vault instance.
 This depends on many factors such as what kind of installer and where it's deployed.
@@ -312,7 +311,7 @@ Depending on your installation configuration you may not need to do all the chan
 
 For the examples below we have used an OpenShift Code Ready Containers (CRC) environment to represent the OpenShift environment.
 
-###### 1) Openshift JWT Requirement: *Issuer* and *Discovery* URL should be reachable:
+###### 1) Openshift JWT Requirement: *OIDC Issuer* URL should be reachable:
 
 First run the following to check your current clusters settings.
 
