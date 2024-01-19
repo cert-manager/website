@@ -211,8 +211,8 @@ roleRef:
 Next, you can either use `JWT` or `kubernetes` auth method in Vault.
 This depends on several factors, for example:
 - Whether Vault is running outside the cluster or not
-- Whether you're running on a public cloud distribution of Kubernetes with OIDC discovery support
-- If not, In openshift for example whether the api server already exposes or can be configured to expose the OIDC discovery endpoint
+- Whether you're running on a public cloud distribution of Kubernetes with `OIDC` discovery support
+- If not, In Openshift for example whether the `apiserver` already exposes or can be configured to expose the `OIDC` discovery endpoint
 
 | Vault deployment | Cloud managed K8s (EKS,GKE,AKS) | Admin platform rights | Best method/guide                                                       |
 | ---------------- | -------------------------- | ---------------------      | ------------                                                            |
@@ -220,7 +220,7 @@ This depends on several factors, for example:
 | External         | No                         | No                         | [Static token](#authentication-with-a-static-service-account-token)     |
 | Internal         | Yes                        | No                         | [Kubernetes auth](#use-kubernetes-auth)                                 |
 | Internal         | Yes                        | Yes                        | [Kubernetes auth](#use-kubernetes-auth)                                 |
-| External         | No, Openshift              | Yes                        | [JWT pre-reqs + setup](#jwt-auth-pre-requisites)                        |
+| External         | No  (e.g. Openshift)       | Yes                        | [JWT pre-requisites + setup](#jwt-auth-pre-requisites)                  |
 
 
 ##### JWT auth for cloud Kubernetes clusters
@@ -305,7 +305,7 @@ spec:
 In the case of some Openshift installations for example, the cluster's `OIDC` provider may not be readily accessible to your external Vault instance.
 This depends on many factors such as what kind of installer and where it's deployed.
 
-You can manually configure service account issuer url to generate your service accounts from a publicly exposed cluster `OIDC` provider.
+You can manually configure service account issuer URL to generate your service accounts from a publicly exposed cluster `OIDC` provider.
 You will need a few RBAC and potentially `apiserver` configurations to be applied to the cluster in order to allow you to use the JWT method in Vault.
 
 > **Note:** If changes are required, it will likely need admin level permissions. 
@@ -355,7 +355,7 @@ Your output might be similar to this:
 
 If you see the above, especially the line: `"issuer": "https://kubernetes.default.svc"`, then your Issuer URI may only be accessible from within the OpenShift cluster and therefore may not work with JWT authentication for Vault. The result will depend on the configuration of your OpenShift environment.
 
-In order to set the issuer URI, which may be blank, please refer to the following Red Hat Documentation. Specifically see step b where the serviceAccountIssuer field is being set: https://docs.openshift.com/container-platform/4.13/authentication/bound-service-account-tokens.html
+In order to set the issuer URI, which may be blank, please refer to the following Red Hat Documentation. Specifically see step b where the `serviceAccountIssuer` field is being set: https://docs.openshift.com/container-platform/4.13/authentication/bound-service-account-tokens.html
 
 For example, you can use the following to set the issuer URI:
 
@@ -422,9 +422,9 @@ In this case you've hit another issue. An example might be:
 
 If you see this, then non-authenticated users are not able to call that API endpoint. You will need to allow unauthenticated users to access this endpoint.
 
-Note: The yaml provided is an example and you should review fully before implementing.
+Note: The YAML provided is an example and you should review fully before implementing.
 
-Here is an example ClusterRoleBinding that would allow anyone to access that API endpoint:
+Here is an example `ClusterRoleBinding` that would allow anyone to access that API endpoint:
 
 ```yaml
 ---
@@ -447,7 +447,7 @@ Once applied try the `jwks_uri` again and validate you receive a JSON response.
 
 ###### 3) Openshift JWT Requirement: *JWKS* URI presented in discovery endpoint should be reachable:
 
-Assuming you now get a response, you will want to ensure that the jwks_uri is also accessible from outside of the cluster. For example in CRC this might be configured to an internally routable DNS name only by default.
+Assuming you now get a response, you will want to ensure that the `jwks_uri` is also accessible from outside of the cluster. For example in CRC this might be configured to an internally routable DNS name only by default.
 
 From your previous output try curl to access the endpoint:
 
@@ -476,7 +476,7 @@ In case you still do not see a valid JWKS URI, you can try the following remedia
 
 > **Note:** Reconfiguring the `apiserver` as shown below should be carefully evaluated before use. This may not be a suitable solution for some production environment. 
 
-You may need to manually override the service-account-jwks-uri field within the kubeapiservers.operator.openshift.io configuration for the cluster:
+You may need to manually override the `service-account-jwks-uri` field within the `kubeapiservers.operator.openshift.io` configuration for the cluster:
 
 ```yaml
 spec:
@@ -490,7 +490,7 @@ For example adding this via the `unsupportedConfigOverrides` field in the spec i
 
 ###### Openshift JWT: Configure JWT auth in Openshift
 
-Once the 3 above pre-requisites are fulfilled, you can follow [the exact same steps as the JWT method](#jwt-auth-for-cloud-kubernetes-clusters) for the public clouds using the issuer url, which for example in our case is: `https://api.crc.testing:6443`
+Once the 3 above pre-requisites are fulfilled, you can follow [the exact same steps as the JWT method](#jwt-auth-for-cloud-kubernetes-clusters) for the public clouds using the issuer URL, which for example in our case is: `https://api.crc.testing:6443`
 
 ## Use Kubernetes auth
 
