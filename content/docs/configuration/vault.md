@@ -170,7 +170,6 @@ This is the recommended authentication method because it does not rely on the
 deprecated static service account tokens. The static service account tokens pose
 a threat due to their infinite lifetime. Static service account tokens have been
 disabled by default on Kubernetes 1.24.
- 
 
 The first step is to create a `ServiceAccount` resource:
 
