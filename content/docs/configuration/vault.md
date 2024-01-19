@@ -220,12 +220,12 @@ This depends on several factors, for example:
 | External         | No                         | No                         | [Static token](#authentication-with-a-static-service-account-token)     |
 | Internal         | Yes                        | No                         | [Kubernetes auth](#use-kubernetes-auth)                                 |
 | Internal         | Yes                        | Yes                        | [Kubernetes auth](#use-kubernetes-auth)                                 |
-| External         | No  (e.g. Openshift)       | Yes                        | [JWT pre-requisites + setup](#jwt-auth-pre-requisites)                  |
+| External         | No  (e.g. Openshift)       | Yes                        | [JWT pre-requisites + JWT auth](#jwt-auth-pre-requisites)               |
 
 
 ##### JWT auth for cloud Kubernetes clusters
 
->> **Note:** This setup guide is also valid for any cluster with OIDC bound service account issuer configured to allow external usage.
+> **Note:** This setup guide is also valid for any cluster with OIDC bound service account issuer configured to allow external usage.
 
 Given Vault is external to your Kubernetes cluster, you can't use Vault's Kubernetes auth as explained in [this issue](https://github.com/cert-manager/cert-manager/issues/6150).
 
@@ -495,7 +495,7 @@ Once the 3 above pre-requisites are fulfilled, you can follow [the exact same st
 ## Use Kubernetes auth
 
 You can only use `serviceAccountRef` with Vault's Kubernetes auth when Vault is
-installed in the same cluster as cert-manager.
+installed in the same cluster as cert-manager, otherwise you would use the [JWT Vault auth](#jwt-auth-for-cloud-kubernetes-clusters).
 
 To use the Kubernetes auth with `serviceAccountRef`, configure your issuer with
 the following:
