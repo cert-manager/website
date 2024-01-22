@@ -668,8 +668,8 @@ page if a step is missing or if it is outdated.
 19. Proceed to the post-release "testing and release" steps:
 
     1. **(initial beta only)** Create a PR on
-       [cert-manager/release](https://github.com/cert-manager/release) in order to
-       add the new release to our list of periodic ProwJobs. Use [this PR](https://github.com/cert-manager/testing/pull/774/) as an example.
+       [cert-manager/testing](https://github.com/cert-manager/testing) in order to
+       add the new release to our list of periodic ProwJobs. Use [this PR](https://github.com/cert-manager/testing/pull/907) as an example. You'll need to run the `make prowgen` command to generate the new config.
 
     2. **(initial beta only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
        open a PR to [cert-manager/testing](https://github.com/cert-manager/testing) adding the generated prow configs.
