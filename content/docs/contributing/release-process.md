@@ -115,12 +115,6 @@ First, ensure that you have all the tools required to perform a cert-manager rel
 A minor release is a backwards-compatible 'feature' release. It can contain new
 features and bug fixes.
 
-### Release schedule
-
-We aim to cut a new minor release once per month. The rough goals for each
-release are outlined as part of a GitHub milestone. We cut a release even if
-some of these goals are missed, in order to keep up release velocity.
-
 ### Process for releasing a version
 
 <div className="info">
