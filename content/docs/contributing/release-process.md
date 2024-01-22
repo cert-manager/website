@@ -67,7 +67,7 @@ following conditions:
 
 This guide applies for versions of cert-manager released using `make`, which should be every version from cert-manager 1.8 and later.
 
-**If you need to release a version of cert-manager 1.7 or earlier** see [older releases](#older-releases).
+If you need to release a version of cert-manager 1.7 or earlier see [older releases](#older-releases).
 
 First, ensure that you have all the tools required to perform a cert-manager release:
 
