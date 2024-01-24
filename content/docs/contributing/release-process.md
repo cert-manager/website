@@ -67,7 +67,7 @@ following conditions:
 
 This guide applies for versions of cert-manager released using `make`, which should be every version from cert-manager 1.8 and later.
 
-**If you need to release a version of cert-manager 1.7 or earlier** see [older releases](#older-releases).
+If you need to release a version of cert-manager 1.7 or earlier see [older releases](#older-releases).
 
 First, ensure that you have all the tools required to perform a cert-manager release:
 
@@ -114,12 +114,6 @@ First, ensure that you have all the tools required to perform a cert-manager rel
 
 A minor release is a backwards-compatible 'feature' release. It can contain new
 features and bug fixes.
-
-### Release schedule
-
-We aim to cut a new minor release once per month. The rough goals for each
-release are outlined as part of a GitHub milestone. We cut a release even if
-some of these goals are missed, in order to keep up release velocity.
 
 ### Process for releasing a version
 
@@ -674,39 +668,28 @@ page if a step is missing or if it is outdated.
 19. Proceed to the post-release "testing and release" steps:
 
     1. **(initial beta only)** Create a PR on
-       [cert-manager/release](https://github.com/cert-manager/release) in order to
-       add the new release to our list of periodic ProwJobs. Use [this PR](https://github.com/cert-manager/testing/pull/774/) as an example.
+       [cert-manager/testing](https://github.com/cert-manager/testing) in order to
+       add the new release to our list of periodic ProwJobs. Use [this PR](https://github.com/cert-manager/testing/pull/907) as an example. You'll need to run the `make prowgen` command to generate the new config.
 
-    2. **(initial beta only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
-       open a PR to [cert-manager/testing](https://github.com/cert-manager/testing) adding the generated prow configs.
-       Use [this PR](https://github.com/cert-manager/testing/pull/766) as an example.
+    2. **(final release only)** Create a PR on
+       [cert-manager/testing](https://github.com/cert-manager/testing),
+       removing any unsupported release versions from prow config.
 
-    3. **(final release only)** Create a PR on
-       [cert-manager/release](https://github.com/cert-manager/release),
-       removing the now unsupported release version (2 versions back) in this file:
-
-       ```plain
-       prowspecs/specs.go
-       ```
-
-       This will remove the periodic ProwJobs for this version as they're no longer needed.
-
-    4. **(final release only)** Run `cmrel generate-prow --branch='*' -o file` with the new version from the previous step and
-       open a PR to [jetstack/testing](https://github.com/cert-manager/testing) adding the generated prow configs.
-
-    5. **(final release only)** Open a PR to [`jetstack/testing`](https://github.com/cert-manager/testing)
-       and update the [milestone_applier](https://github.com/cert-manager/testing/blob/3110b68e082c3625bf0d26265be2d29e41da14b2/config/plugins.yaml#L69)
+    3. **(final release only)** In [`cert-manager/testing`](https://github.com/cert-manager/testing)
+       check [`milestone_applier`](https://github.com/cert-manager/testing/blob/3110b68e082c3625bf0d26265be2d29e41da14b2/config/plugins.yaml#L69)
        config so that newly raised PRs on master are applied to a new milestone
-       for the next release. E.g. if master currently points at the `v1.10` milestone, change it to point at `v1.11`.
+       for the next release.
+
+       Also check required status checks for the release branch and testgrid dashboard configuration.
 
        If the [milestone](https://github.com/cert-manager/cert-manager/milestones) for the next release doesn't exist,
        create it first. If you consider the milestone for the version you just released to be complete, close it.
 
-    6. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
+    4. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
       bumping the versions of our kubectl plugins. This is likely only worthwhile if
       cmctl / kubectl plugin functionality has changed significantly or after the first release of a new major version.
 
-    7. Create a new OLM package and publish to OperatorHub
+    5. Create a new OLM package and publish to OperatorHub
 
        cert-manager can be [installed](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) using Operator Lifecycle Manager (OLM)
        so we need to create OLM packages for each cert-manager version and publish them to both
