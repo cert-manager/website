@@ -4,7 +4,7 @@ description: |
   Learn how to use Kyverno ClusterPolicy to set default values for cert-manager Certificates cluster wide.
 ---
 
-*Last Verified: 05 January 2024*
+*Last Verified: 19 January 2024*
 
 # Objective
 
@@ -89,8 +89,8 @@ Once you have your cluster environment, install the required Kubernetes packages
 1. Set some environment variables for the helm chart versions:
 
     ```shell
-    export CERT_MANAGER_CHART_VERSION="v1.14.0-alpha.0" \
-        KYVERNO_CHART_VERSION="3.1.1" \
+    export CERT_MANAGER_CHART_VERSION="v1.14.0-alpha.1" \
+        KYVERNO_CHART_VERSION="3.1.4" \
         INGRESS_NGINX_CHART_VERSION="4.9.0"
     ```
 
