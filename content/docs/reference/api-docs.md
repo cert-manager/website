@@ -1465,7 +1465,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>if both this and ClientSecret are left unset MSI will be used</p>
+        <p>Auth: Azure Service Principal: The ClientID of the Azure Service Principal used to authenticate with Azure DNS. If set, ClientSecret and TenantID must also be set.</p>
       </td>
     </tr>
     <tr>
@@ -1478,7 +1478,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>if both this and ClientID are left unset MSI will be used</p>
+        <p>Auth: Azure Service Principal: A reference to a Secret containing the password associated with the Service Principal. If set, ClientID and TenantID must also be set.</p>
       </td>
     </tr>
     <tr>
@@ -1499,7 +1499,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>when specifying ClientID and ClientSecret then this field is also needed</p>
+        <p>Auth: Azure Service Principal: The TenantID of the Azure Service Principal used to authenticate with Azure DNS. If set, ClientID and ClientSecret must also be set.</p>
       </td>
     </tr>
     <tr>
@@ -1546,7 +1546,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>managed identity configuration, can not be used at the same time as clientID, clientSecretSecretRef or tenantID</p>
+        <p>Auth: Azure Workload Identity or Azure Managed Service Identity: Settings to enable Azure Workload Identity or Azure Managed Service Identity If set, ClientID, ClientSecret and TenantID must not be set.</p>
       </td>
     </tr>
   </tbody>
@@ -1951,7 +1951,9 @@ description: >-
 </table>
 <h3 id="acme.cert-manager.io/v1.AzureManagedIdentity">AzureManagedIdentity</h3>
 <p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>) </p>
-<div></div>
+<div>
+  <p>AzureManagedIdentity contains the configuration for Azure Workload Identity or Azure Managed Service Identity If the AZURE_FEDERATED_TOKEN_FILE environment variable is set, the Azure Workload Identity will be used. Otherwise, we fall-back to using Azure Managed Service Identity.</p>
+</div>
 <table>
   <thead>
     <tr>
@@ -1979,7 +1981,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>resource ID of the managed identity, can not be used at the same time as clientID</p>
+        <p>resource ID of the managed identity, can not be used at the same time as clientID Cannot be used for Azure Managed Service Identity</p>
       </td>
     </tr>
   </tbody>
@@ -2948,6 +2950,19 @@ description: >-
           </tr>
           <tr>
             <td>
+              <code>otherNames</code>
+              <br />
+              <em>
+                <a href="#cert-manager.io/v1.OtherName">[]OtherName</a>
+              </em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p> <code>otherNames</code> is an escape hatch for SAN that allows any type. We currently restrict the support to string like otherNames, cf RFC 5280 p 37 Any UTF8 String valued otherName can be passed with by setting the keys oid: x.x.x.x and UTF8Value: somevalue for <code>otherName</code>. Most commonly this would be UPN set with oid: 1.3.6.1.4.1.311.20.2.3 You should ensure that any OID passed is valid for the UTF8String type as we do not explicitly validate this. </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <code>emailAddresses</code>
               <br />
               <em>[]string</em>
@@ -3102,7 +3117,7 @@ description: >-
               <p> x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate. More Info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10">https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10</a> </p>
               <p>
                 This is an Alpha Feature and is only enabled with the
-                <code>--feature-gates=useCertificateRequestNameConstraints=true</code> option set on both the controller and webhook components.
+                <code>--feature-gates=NameConstraints=true</code> option set on both the controller and webhook components.
               </p>
             </td>
           </tr>
@@ -4321,6 +4336,19 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>otherNames</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.OtherName">[]OtherName</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> <code>otherNames</code> is an escape hatch for SAN that allows any type. We currently restrict the support to string like otherNames, cf RFC 5280 p 37 Any UTF8 String valued otherName can be passed with by setting the keys oid: x.x.x.x and UTF8Value: somevalue for <code>otherName</code>. Most commonly this would be UPN set with oid: 1.3.6.1.4.1.311.20.2.3 You should ensure that any OID passed is valid for the UTF8String type as we do not explicitly validate this. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>emailAddresses</code>
         <br />
         <em>[]string</em>
@@ -4475,7 +4503,7 @@ description: >-
         <p> x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate. More Info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10">https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10</a> </p>
         <p>
           This is an Alpha Feature and is only enabled with the
-          <code>--feature-gates=useCertificateRequestNameConstraints=true</code> option set on both the controller and webhook components.
+          <code>--feature-gates=NameConstraints=true</code> option set on both the controller and webhook components.
         </p>
       </td>
     </tr>
@@ -5171,6 +5199,39 @@ description: >-
     </tr>
   </tbody>
 </table>
+<h3 id="cert-manager.io/v1.OtherName">OtherName</h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>oid</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>OID is the object identifier for the otherName SAN. The object identifier must be expressed as a dotted string, for example, &ldquo;1.2.840.113556.1.4.221&rdquo;.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>utf8Value</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>utf8Value is the string value of the otherName SAN. The utf8Value accepts any valid UTF8 string to set as value for the otherName SAN.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <h3 id="cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateKeystores">CertificateKeystores</a>) </p>
 <div>
@@ -5207,6 +5268,60 @@ description: >-
       </td>
       <td>
         <p>PasswordSecretRef is a reference to a key in a Secret resource containing the password used to encrypt the PKCS12 keystore.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>profile</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.PKCS12Profile">PKCS12Profile</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> Profile specifies the key and certificate encryption algorithms and the HMAC algorithm used to create the PKCS12 keystore. Default value is <code>LegacyRC2</code> for backward compatibility. </p>
+        <p>
+          If provided, allowed values are:
+          <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (eg. because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.PKCS12Profile"> PKCS12Profile (<code>string</code> alias) </h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>&#34;LegacyDES&#34;</p>
+      </td>
+      <td>
+        <p> see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyDES">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyDES</a> </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;LegacyRC2&#34;</p>
+      </td>
+      <td>
+        <p> see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyRC2">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyRC2</a> </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;Modern2023&#34;</p>
+      </td>
+      <td>
+        <p> see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2023">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2023</a> </p>
       </td>
     </tr>
   </tbody>
@@ -5968,7 +6083,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>kubeConfig is the kubeconfig file used to connect to the Kubernetes apiserver. If not specified, the webhook will attempt to load the in-cluster-config.</p>
+        <p>kubeConfig is the kubeconfig file used to connect to the Kubernetes apiserver. If not specified, the controller will attempt to load the in-cluster-config.</p>
       </td>
     </tr>
     <tr>
@@ -6115,6 +6230,18 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>metricsTLSConfig</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>TLS config for the metrics endpoint</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>healthzListenAddress</code>
         <br />
         <em>string</em>
@@ -6201,6 +6328,96 @@ description: >-
       </td>
       <td>
         <p>acmeDNS01Config configures the behaviour of the ACME DNS01 challenge solver</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.DynamicServingConfig">DynamicServingConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>) </p>
+<div>
+  <p>DynamicServingConfig makes the controller generate a CA and persist it into Secret resources. This CA will be used by all instances of the controller for signing serving certificates.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>secretNamespace</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace of the Kubernetes Secret resource containing the TLS certificate used as a CA to sign dynamic serving certificates.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>secretName</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace of the Kubernetes Secret resource containing the TLS certificate used as a CA to sign dynamic serving certificates.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>dnsNames</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p>DNSNames that must be present on serving certificates signed by the CA.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>LeafDuration</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>LeafDuration is a customizable duration on serving certificates signed by the CA.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.FilesystemServingConfig">FilesystemServingConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>) </p>
+<div>
+  <p>FilesystemServingConfig enables using a certificate and private key found on the local filesystem. These files will be periodically polled in case they have changed, and dynamically reloaded.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>certFile</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Path to a file containing TLS certificate &amp; chain to serve with</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>keyFile</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Path to a file containing a TLS private key to serve with</p>
       </td>
     </tr>
   </tbody>
@@ -6371,6 +6588,65 @@ description: >-
       </td>
       <td>
         <p>Leader election healthz checks within this timeout period after the lease expires will still return healthy.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<div>
+  <p>TLSConfig configures how TLS certificates are sourced for serving. Only one of &lsquo;filesystem&rsquo; or &lsquo;dynamic&rsquo; may be specified.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>cipherSuites</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p> cipherSuites is the list of allowed cipher suites for the server. Values are from tls package constants (<a href="https://golang.org/pkg/crypto/tls/#pkg-constants">https://golang.org/pkg/crypto/tls/#pkg-constants</a>). If not specified, the default for the Go version will be used and may change over time. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>minTLSVersion</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p> minTLSVersion is the minimum TLS version supported. Values are from tls package constants (<a href="https://golang.org/pkg/crypto/tls/#pkg-constants">https://golang.org/pkg/crypto/tls/#pkg-constants</a>). If not specified, the default for the Go version will be used and may change over time. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>filesystem</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.FilesystemServingConfig">FilesystemServingConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>Filesystem enables using a certificate and private key found on the local filesystem. These files will be periodically polled in case they have changed, and dynamically reloaded.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>dynamic</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.DynamicServingConfig">DynamicServingConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>When Dynamic serving is enabled, the controller will generate a CA used to sign certificates and persist it into a Kubernetes Secret resource (for other replicas of the controller to consume). It will then generate a certificate in-memory for itself using this CA to serve with.</p>
       </td>
     </tr>
   </tbody>
@@ -6627,7 +6903,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>Path to a file containing a TLS private key to server with</p>
+        <p>Path to a file containing a TLS private key to serve with</p>
       </td>
     </tr>
   </tbody>
@@ -6801,5 +7077,5 @@ description: >-
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>47d720b</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>2c14e5f</code>. </em>
 </p>
