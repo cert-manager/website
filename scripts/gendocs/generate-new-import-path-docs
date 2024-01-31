@@ -73,6 +73,7 @@ genversionwithcli() {
   genclireference "$2" "cmd/ctl" "cmctl"
   genclireference "$2" "cmd/controller" "controller"
   genclireference "$2" "cmd/webhook" "webhook"
+  genclireference "$2" "cmd/startupapicheck" "startupapicheck"
 
   # if any of the above steps succeeded copy over the index file
   if [ "$2" != "docs" ] && [ -d "$REPO_ROOT/content/$2/cli" ]; then
@@ -113,13 +114,6 @@ gendocs() {
 genclireference() {
   if [ ! -f "$2/main.go" ]; then
     echo "+++ target $2 does not exist, skipping..."
-    return
-  fi
-
-  # hacky way to figure out if the target has the correct structure
-  # differs between older version but this catches the corner cases
-  if [[ ! -d "$2/app" ]] && [ ! -d "$2/cmd" ]; then
-    echo "+++ app directory for $2 does not exist, skipping..."
     return
   fi
 
