@@ -5,6 +5,10 @@ description: 'cert-manager release notes: cert-manager 1.14'
 
 ## `v1.14.0`
 
+cert-manager 1.14 brings a variety of features, security improvements and bug fixes, including:
+support for creating X.509 certificates with "Other Name" fields, and
+support for creating CA certificates with "Name Constraints" and "Authority Information Accessors" extensions.
+
 ### Breaking Changes
 
 The startupapicheck job uses a new OCI image called "startupapicheck", instead of the ctl image.
@@ -41,11 +45,17 @@ To know more details on name constraints check out RFC section https://datatrack
 
 An ongoing security audit of the cert-manager code revealed some weaknesses which we have addressed in this release,
 such as using more secure default settings in the HTTP servers that serve metrics, healthz and pprof endpoints.
+This will help mitigate denial-of-service attacks against those important services.
+
+All the cert-manager containers are now configured with read only root file system by default,
+to prevent unexpected changes to the file system of the OCI image.
+
+And it is now possible to configure the metrics server to use HTTPS rather than HTTP,
+so that clients can verify the identity of the metrics server.
 
 #### Other
 
 The liveness probe of the cert-manager controller Pod is now enabled by default.
-All the cert-manager containers are now configured with read only root file system by default.
 
 There is a new option `.spec.keystores.pkcs12.algorithms` to specify encryption and MAC algorithms for PKCS.
 
