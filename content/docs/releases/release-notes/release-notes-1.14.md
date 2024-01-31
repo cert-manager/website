@@ -67,7 +67,7 @@ Thanks again to all open-source contributors with commits in this release, inclu
 - [@allenmunC1](https://github.com/allenmunC1)
 - [@asapekia](https://github.com/asapekia)
 - [@jeremycampbell](https://github.com/jeremycampbell)
-- [@jkroepke](https://github.com/jkroepke))
+- [@jkroepke](https://github.com/jkroepke)
 - [@jsoref](https://github.com/jsoref)
 - [@lauraseidler](https://github.com/lauraseidler)
 - [@pevidex](https://github.com/pevidex)
