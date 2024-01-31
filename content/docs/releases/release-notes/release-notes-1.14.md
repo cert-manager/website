@@ -5,68 +5,7 @@ description: 'cert-manager release notes: cert-manager 1.14'
 
 ## `v1.14.0-alpha.1`
 
-This is the second pre-release of cert-manager 1.14 which will be released on January 31 2024.
-
-### Community
-
-Thanks again to all open-source contributors with commits in this release, including:
-- [@phillebaba](https://github.com/phillebaba)
-- [@tberreis](https://github.com/tberreis)
-
-### Changes since `v1.14.0-alpha.0`
-
-#### Feature
-
-- Add TLS support to the metrics endpoint through either a certificate file or through dynamically issued certificates ([#6574](https://github.com/cert-manager/cert-manager/pull/6574), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
-- Helm Chart: allow changing the default Deployment `revisionHistoryLimit` ([#6248](https://github.com/cert-manager/cert-manager/pull/6248), [@tberreis](https://github.com/tberreis))
-- Security: Limit the size of the response body read from HTTP requests by cert-manager. ([#6619](https://github.com/cert-manager/cert-manager/pull/6619), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
-
-#### Bug or Regression
-
-- BUGFIX: Ensure `otherName` SAN changes in Certificate resources trigger re-issuance. ([#6620](https://github.com/cert-manager/cert-manager/pull/6620), [@SpectralHiss](https://github.com/SpectralHiss))
-- Bugfix: Publish the `startupapicheck` image to `quay.io` ([#6609](https://github.com/cert-manager/cert-manager/pull/6609), [@wallrj](https://github.com/wallrj))
-
-#### Other (Cleanup or Flake)
-
-- cert-manager is now built with Go `v1.21.6` ([#6628](https://github.com/cert-manager/cert-manager/pull/6628), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- Update the Azure SDK and remove deprecated `autorest` dependency ([#5452](https://github.com/cert-manager/cert-manager/pull/5452), [@phillebaba](https://github.com/phillebaba))
-
-### Dependencies
-
-#### Added
-- `github.com/Azure/azure-sdk-for-go/sdk/azcore`: [`v1.9.1`](https://github.com/Azure/azure-sdk-for-go/sdk/azcore/tree/v1.9.1)
-- `github.com/Azure/azure-sdk-for-go/sdk/azidentity`: [`v1.4.0`](https://github.com/Azure/azure-sdk-for-go/sdk/azidentity/tree/v1.4.0)
-- `github.com/Azure/azure-sdk-for-go/sdk/internal`: [`v1.5.1`](https://github.com/Azure/azure-sdk-for-go/sdk/internal/tree/v1.5.1)
-- `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/dns/armdns`: [`v1.2.0`](https://github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/dns/armdns/tree/v1.2.0)
-- `github.com/AzureAD/microsoft-authentication-library-for-go`: [`v1.1.1`](https://github.com/AzureAD/microsoft-authentication-library-for-go/tree/v1.1.1)
-- `github.com/dnaeon/go-vcr`: [`v1.2.0`](https://github.com/dnaeon/go-vcr/tree/v1.2.0)
-- `github.com/golang-jwt/jwt/v5`: [`v5.0.0`](https://github.com/golang-jwt/jwt/v5/tree/v5.0.0)
-- `github.com/kylelemons/godebug`: [`v1.1.0`](https://github.com/kylelemons/godebug/tree/v1.1.0)
-- `github.com/montanaflynn/stats`: [`v0.7.0`](https://github.com/montanaflynn/stats/tree/v0.7.0)
-- `github.com/pkg/browser`: [`681adbf`](https://github.com/pkg/browser/tree/681adbf)
-
-#### Changed
-_Nothing has changed._
-
-#### Removed
-- `github.com/Azure/azure-sdk-for-go`: [`v68.0.0+incompatible`](https://github.com/Azure/azure-sdk-for-go/tree/v68.0.0)
-- `github.com/Azure/go-autorest/autorest/adal`: [`v0.9.23`](https://github.com/Azure/go-autorest/autorest/adal/tree/v0.9.23)
-- `github.com/Azure/go-autorest/autorest/date`: [`v0.3.0`](https://github.com/Azure/go-autorest/autorest/date/tree/v0.3.0)
-- `github.com/Azure/go-autorest/autorest/mocks`: [`v0.4.2`](https://github.com/Azure/go-autorest/autorest/mocks/tree/v0.4.2)
-- `github.com/Azure/go-autorest/autorest/to`: [`v0.4.0`](https://github.com/Azure/go-autorest/autorest/to/tree/v0.4.0)
-- `github.com/Azure/go-autorest/autorest/validation`: [`v0.3.1`](https://github.com/Azure/go-autorest/autorest/validation/tree/v0.3.1)
-- `github.com/Azure/go-autorest/autorest`: [`v0.11.29`](https://github.com/Azure/go-autorest/autorest/tree/v0.11.29)
-- `github.com/Azure/go-autorest/logger`: [`v0.2.1`](https://github.com/Azure/go-autorest/logger/tree/v0.2.1)
-- `github.com/Azure/go-autorest/tracing`: [`v0.6.0`](https://github.com/Azure/go-autorest/tracing/tree/v0.6.0)
-- `github.com/Azure/go-autorest`: [`v14.2.0+incompatible`](https://github.com/Azure/go-autorest/tree/v14.2.0)
-
-## `v1.14.0-alpha.0`
-
-This is a pre-release of cert-manager 1.14 which will be released on January 31 2024.
-
 ### Known Issues
-
-- [The startupapicheck image isn't yet published to `quay.io`, so the standard Helm install fails](https://github.com/cert-manager/cert-manager/issues/6597). You can work around this problem by using the Helm value: `--set startupapicheck.enabled=false`, to disable the startup API check.
 
 ### Breaking Changes
 
@@ -123,8 +62,10 @@ Thanks again to all open-source contributors with commits in this release, inclu
 - [@jsoref](https://github.com/jsoref)
 - [@lauraseidler](https://github.com/lauraseidler)
 - [@pevidex](https://github.com/pevidex)
+- [@phillebaba](https://github.com/phillebaba)
 - [@snorwin](https://github.com/snorwin)
 - [@tanujd11](https://github.com/tanujd11)
+- [@tberreis](https://github.com/tberreis)
 - [@vinny](https://github.com/vinny)
 
 Thanks also to the following cert-manager maintainers for their contributions during this release:
@@ -160,6 +101,9 @@ In addition, massive thanks to [Venafi](https://www.venafi.com/) for contributin
 - Updates the AWS SDK for Go to 1.48.7 to support Amazon EKS Pod Identity ([#6519](https://github.com/cert-manager/cert-manager/pull/6519), [@JoeNorth](https://github.com/JoeNorth))
 - Users can now use name constraints in CA certificates. To know more details on name constraints check out RFC section https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10 ([#6500](https://github.com/cert-manager/cert-manager/pull/6500), [@tanujd11](https://github.com/tanujd11))
 - ⚠️ potentially breaking ⚠️: The KeyUsage and BasicConstraints extensions will now be encoded as critical in the CertificateRequest's CSR blob. ([#6053](https://github.com/cert-manager/cert-manager/pull/6053), [@inteon](https://github.com/inteon))
+- Add TLS support to the metrics endpoint through either a certificate file or through dynamically issued certificates ([#6574](https://github.com/cert-manager/cert-manager/pull/6574), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+- Helm Chart: allow changing the default Deployment `revisionHistoryLimit` ([#6248](https://github.com/cert-manager/cert-manager/pull/6248), [@tberreis](https://github.com/tberreis))
+- Security: Limit the size of the response body read from HTTP requests by cert-manager. ([#6619](https://github.com/cert-manager/cert-manager/pull/6619), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
 
 #### Bug or Regression
 
@@ -178,6 +122,8 @@ In addition, massive thanks to [Venafi](https://www.venafi.com/) for contributin
 - The Venafi issuer now properly resets the certificate and should no longer get stuck with `WebSDK CertRequest Module Requested Certificate` or `This certificate cannot be processed while it is in an error state. Fix any errors, and then click Retry.`. ([#6398](https://github.com/cert-manager/cert-manager/pull/6398), [@maelvls](https://github.com/maelvls))
 - Update experimental install and uninstall commands to have flag parity with the rest of the CLI ([#6562](https://github.com/cert-manager/cert-manager/pull/6562), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
 - Webhook ConfigMap if now created only if `.Values.webhook.config` is set. ([#6360](https://github.com/cert-manager/cert-manager/pull/6360), [@ABWassim](https://github.com/ABWassim))
+- BUGFIX: Ensure `otherName` SAN changes in Certificate resources trigger re-issuance. ([#6620](https://github.com/cert-manager/cert-manager/pull/6620), [@SpectralHiss](https://github.com/SpectralHiss))
+- Bugfix: Publish the `startupapicheck` image to `quay.io` ([#6609](https://github.com/cert-manager/cert-manager/pull/6609), [@wallrj](https://github.com/wallrj))
 
 #### Other (Cleanup or Flake)
 
@@ -198,15 +144,24 @@ In addition, massive thanks to [Venafi](https://www.venafi.com/) for contributin
 - Upgrade Go from 1.20.7 to 1.20.8. ([#6369](https://github.com/cert-manager/cert-manager/pull/6369), [@inteon](https://github.com/inteon))
 - Upgrade `github.com/emicklei/go-restful/v3` to `v3.11.0` because `v3.10.2` is labeled as "DO NOT USE". ([#6366](https://github.com/cert-manager/cert-manager/pull/6366), [@inteon](https://github.com/inteon))
 - Use the new generic `sets.Set` type in place of the deprecated `sets.String`. ([#6586](https://github.com/cert-manager/cert-manager/pull/6586), [@wallrj](https://github.com/wallrj))
+- cert-manager is now built with Go `v1.21.6` ([#6628](https://github.com/cert-manager/cert-manager/pull/6628), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Update the Azure SDK and remove deprecated `autorest` dependency ([#5452](https://github.com/cert-manager/cert-manager/pull/5452), [@phillebaba](https://github.com/phillebaba))
 
 ### Dependencies
 
 #### Added
 - `cloud.google.com/go/cloudsqlconn`: `v1.4.3`
+- `github.com/Azure/azure-sdk-for-go/sdk/azcore`: [`v1.9.1`](https://github.com/Azure/azure-sdk-for-go/sdk/azcore/tree/v1.9.1)
+- `github.com/Azure/azure-sdk-for-go/sdk/azidentity`: [`v1.4.0`](https://github.com/Azure/azure-sdk-for-go/sdk/azidentity/tree/v1.4.0)
+- `github.com/Azure/azure-sdk-for-go/sdk/internal`: [`v1.5.1`](https://github.com/Azure/azure-sdk-for-go/sdk/internal/tree/v1.5.1)
+- `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/dns/armdns`: [`v1.2.0`](https://github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/dns/armdns/tree/v1.2.0)
+- `github.com/AzureAD/microsoft-authentication-library-for-go`: [`v1.1.1`](https://github.com/AzureAD/microsoft-authentication-library-for-go/tree/v1.1.1)
 - `github.com/Masterminds/goutils`: [`v1.1.1`](https://github.com/Masterminds/goutils/tree/v1.1.1)
 - `github.com/Masterminds/semver/v3`: [`v3.1.1`](https://github.com/Masterminds/semver/v3/tree/v3.1.1)
 - `github.com/Masterminds/sprig/v3`: [`v3.2.1`](https://github.com/Masterminds/sprig/v3/tree/v3.2.1)
 - `github.com/Venafi/vcert/v5`: [`v5.3.0`](https://github.com/Venafi/vcert/v5/tree/v5.3.0)
+- `github.com/dnaeon/go-vcr`: [`v1.2.0`](https://github.com/dnaeon/go-vcr/tree/v1.2.0)
+- `github.com/golang-jwt/jwt/v5`: [`v5.0.0`](https://github.com/golang-jwt/jwt/v5/tree/v5.0.0)
 - `github.com/hashicorp/go-secure-stdlib/plugincontainer`: [`v0.2.2`](https://github.com/hashicorp/go-secure-stdlib/plugincontainer/tree/v0.2.2)
 - `github.com/huandu/xstrings`: [`v1.3.2`](https://github.com/huandu/xstrings/tree/v1.3.2)
 - `github.com/jackc/chunkreader/v2`: [`v2.0.1`](https://github.com/jackc/chunkreader/v2/tree/v2.0.1)
@@ -217,7 +172,10 @@ In addition, massive thanks to [Venafi](https://www.venafi.com/) for contributin
 - `github.com/jackc/pgservicefile`: [`091c0ba`](https://github.com/jackc/pgservicefile/tree/091c0ba)
 - `github.com/jackc/pgtype`: [`v1.14.0`](https://github.com/jackc/pgtype/tree/v1.14.0)
 - `github.com/jackc/pgx/v4`: [`v4.18.1`](https://github.com/jackc/pgx/v4/tree/v4.18.1)
+- `github.com/kylelemons/godebug`: [`v1.1.0`](https://github.com/kylelemons/godebug/tree/v1.1.0)
 - `github.com/matttproud/golang_protobuf_extensions/v2`: [`v2.0.0`](https://github.com/matttproud/golang_protobuf_extensions/v2/tree/v2.0.0)
+- `github.com/montanaflynn/stats`: [`v0.7.0`](https://github.com/montanaflynn/stats/tree/v0.7.0)
+- `github.com/pkg/browser`: [`681adbf`](https://github.com/pkg/browser/tree/681adbf)
 - `github.com/shopspring/decimal`: [`v1.2.0`](https://github.com/shopspring/decimal/tree/v1.2.0)
 - `github.com/sosodev/duration`: [`v1.2.0`](https://github.com/sosodev/duration/tree/v1.2.0)
 - `github.com/xrash/smetrics`: [`039620a`](https://github.com/xrash/smetrics/tree/039620a)
@@ -461,6 +419,16 @@ In addition, massive thanks to [Venafi](https://www.venafi.com/) for contributin
 #### Removed
 - `cloud.google.com/go/storage`: `v1.10.0`
 - `dmitri.shuralyov.com/gpu/mtl`: `666a987`
+- `github.com/Azure/azure-sdk-for-go`: [`v68.0.0+incompatible`](https://github.com/Azure/azure-sdk-for-go/tree/v68.0.0)
+- `github.com/Azure/go-autorest/autorest/adal`: [`v0.9.23`](https://github.com/Azure/go-autorest/autorest/adal/tree/v0.9.23)
+- `github.com/Azure/go-autorest/autorest/date`: [`v0.3.0`](https://github.com/Azure/go-autorest/autorest/date/tree/v0.3.0)
+- `github.com/Azure/go-autorest/autorest/mocks`: [`v0.4.2`](https://github.com/Azure/go-autorest/autorest/mocks/tree/v0.4.2)
+- `github.com/Azure/go-autorest/autorest/to`: [`v0.4.0`](https://github.com/Azure/go-autorest/autorest/to/tree/v0.4.0)
+- `github.com/Azure/go-autorest/autorest/validation`: [`v0.3.1`](https://github.com/Azure/go-autorest/autorest/validation/tree/v0.3.1)
+- `github.com/Azure/go-autorest/autorest`: [`v0.11.29`](https://github.com/Azure/go-autorest/autorest/tree/v0.11.29)
+- `github.com/Azure/go-autorest/logger`: [`v0.2.1`](https://github.com/Azure/go-autorest/logger/tree/v0.2.1)
+- `github.com/Azure/go-autorest/tracing`: [`v0.6.0`](https://github.com/Azure/go-autorest/tracing/tree/v0.6.0)
+- `github.com/Azure/go-autorest`: [`v14.2.0+incompatible`](https://github.com/Azure/go-autorest/tree/v14.2.0)
 - `github.com/BurntSushi/xgb`: [`27f1227`](https://github.com/BurntSushi/xgb/tree/27f1227)
 - `github.com/OneOfOne/xxhash`: [`v1.2.2`](https://github.com/OneOfOne/xxhash/tree/v1.2.2)
 - `github.com/Venafi/vcert/v4`: [`69f417a`](https://github.com/Venafi/vcert/v4/tree/69f417a)
