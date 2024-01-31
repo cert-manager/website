@@ -89,7 +89,7 @@ Once you have your cluster environment, install the required Kubernetes packages
 1. Set some environment variables for the helm chart versions:
 
     ```shell
-    export CERT_MANAGER_CHART_VERSION="v1.14.0-alpha.1" \
+    export CERT_MANAGER_CHART_VERSION="v1.14.0" \
         KYVERNO_CHART_VERSION="3.1.4" \
         INGRESS_NGINX_CHART_VERSION="4.9.0"
     ```
@@ -144,7 +144,7 @@ This essentially means the value of one of these fields is either not required, 
 That somewhere else could be in the cert-manager code base, or indeed by the issuer that creates and returns the X.509 certificate.
 Let's explore how we can manipulate these values to be something custom and make the `Certificate` user's life easier.
 
-We will set up some `ClusterPolicy` resources and `Certificate` resources in this tutorial. 
+We will set up some `ClusterPolicy` resources and `Certificate` resources in this tutorial.
 We will make reference to a `ClusterIssuer` in the `Certificate` spec that doesn't exist, but for this tutorial the `ClusterIssuer` is not required as we will not actually be requesting certificates.
 That means anyone can follow this tutorial even without their own domain.
 
@@ -175,7 +175,7 @@ These rules will:
     kubectl apply -f cpol-mutate-certificates-0.yaml
     kubectl get cpol
     ```
-    
+
     When the `ClusterPolicy` is ready the output should look like this:
 
     ```log
@@ -230,7 +230,7 @@ These rules will:
       secretName: test-revision-cert
         ```
 
-    We have successfully defaulted the `privateKey` and `revisionHistoryLimit` fields! 
+    We have successfully defaulted the `privateKey` and `revisionHistoryLimit` fields!
 
 1. Let's override all of these defaulted fields, to validate that we can still set what we want as an end user. To test this, let's use the "test-revision-override" `Certificate`:
 
@@ -273,7 +273,7 @@ These rules will:
 > See the [Appendix](#cert-manager-version-requirement) section for details.
 
 Now we can set a Kyverno `ClusterPolicy` to apply default values to any of the `Certificate` fields.
-This includes the *required* fields. 
+This includes the *required* fields.
 In our example `ClusterPolicy` we will do two things:
 
 - Set the relevant `issuerRef` fields to default to use the "our-corp-issuer" `ClusterIssuer`.
@@ -397,7 +397,7 @@ In our example `ClusterPolicy` we will do two things:
     ```
 
     From this command you can see that none of the `Certificate` specification fields have been changed.
-    Only the metadata section has changed which tells us the policies have applied but not set any defaults because values were already provided. 
+    Only the metadata section has changed which tells us the policies have applied but not set any defaults because values were already provided.
     This shows that you retain the flexibility to override the cluster defaults when needed.
 
 ## 3 - Defaulting through Ingress Annotations
@@ -494,7 +494,7 @@ Let's see how we can still use `ClusterPolicy` to apply our defaults in this use
     Taking the last line as an example you can pull out:
 
     ```log
-    "kind"="Certificate" "name"="defaults-example-certificate-tls" "namespace"="default" "operation"="UPDATE" "policy"="mutate-certificates" "resource.gvk"={"Group":"cert-manager.io","Version":"v1","Kind":"Certificate"} "roles"=["kube-system:cert-manager:leaderelection"] "rules"=["set-revisionHistoryLimit","set-privateKey-rotationPolicy","set-privateKey-details"] 
+    "kind"="Certificate" "name"="defaults-example-certificate-tls" "namespace"="default" "operation"="UPDATE" "policy"="mutate-certificates" "resource.gvk"={"Group":"cert-manager.io","Version":"v1","Kind":"Certificate"} "roles"=["kube-system:cert-manager:leaderelection"] "rules"=["set-revisionHistoryLimit","set-privateKey-rotationPolicy","set-privateKey-details"]
     ```
 
     See the `policy` key indicates that our policy has been applied.
@@ -510,14 +510,14 @@ cert-manager.io/cluster-issuer: "our-corp-issuer"
 ```
 
 This annotation serves as both the trigger for cert-manager to act upon this `Ingress` and also as the configuration value for the `Certificate.spec.issuerRef` fields.
-This single line replaces the need for the user to create a `Certificate` resource entirely. 
+This single line replaces the need for the user to create a `Certificate` resource entirely.
 This results in a reduction of the total YAML required to secure the application behind this `Ingress`.
 
 # Summary
 
-This is a fairly simple example of how easy it can be to setup *defaults* for your cluster `Certificate` resources. 
-We've shown how a `ClusterPolicy` doesn't have to "enforce" settings, rather it can be used to set and extend the default options. 
-`Certificate` users can reduce their YAML, whilst maintaining the flexibility to override any value when needed. 
+This is a fairly simple example of how easy it can be to setup *defaults* for your cluster `Certificate` resources.
+We've shown how a `ClusterPolicy` doesn't have to "enforce" settings, rather it can be used to set and extend the default options.
+`Certificate` users can reduce their YAML, whilst maintaining the flexibility to override any value when needed.
 
 We have shown how a simple `ClusterPolicy` with only 5 rules can change the user experience creating `Certificate` resources from:
 
