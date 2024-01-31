@@ -37,20 +37,21 @@ Flags:
       --dns01-recursive-nameservers-only                    When true, cert-manager will only ever query the configured DNS resolvers to perform the ACME DNS01 self check. This is useful in DNS constrained environments, where access to authoritative nameservers is restricted. Enabling this option could cause the DNS01 self check to take longer due to caching performed by the recursive nameservers.
       --enable-certificate-owner-ref                        Whether to set the certificate resource as an owner of secret where the tls certificate is stored. When this flag is enabled, the secret will be automatically removed when the certificate resource is deleted.
       --enable-profiling                                    Enable profiling for controller.
-      --feature-gates mapStringBool                         A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
-                                                            AdditionalCertificateOutputFormats=true|false (ALPHA - default=false)
-                                                            AllAlpha=true|false (ALPHA - default=false)
-                                                            AllBeta=true|false (BETA - default=false)
-                                                            DisallowInsecureCSRUsageDefinition=true|false (BETA - default=true)
-                                                            ExperimentalCertificateSigningRequestControllers=true|false (ALPHA - default=false)
-                                                            ExperimentalGatewayAPISupport=true|false (ALPHA - default=false)
-                                                            LiteralCertificateSubject=true|false (ALPHA - default=false)
-                                                            SecretsFilteredCaching=true|false (BETA - default=true)
-                                                            ServerSideApply=true|false (ALPHA - default=false)
-                                                            StableCertificateRequestName=true|false (BETA - default=true)
-                                                            UseCertificateRequestBasicConstraints=true|false (ALPHA - default=false)
-                                                            UseCertificateRequestNameConstraints=true|false (ALPHA - default=false)
-                                                            ValidateCAA=true|false (ALPHA - default=false)
+      --feature-gates mapStringBool                          A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
+                                                             AdditionalCertificateOutputFormats=true|false (ALPHA - default=false)
+                                                             AllAlpha=true|false (ALPHA - default=false)
+                                                             AllBeta=true|false (BETA - default=false)
+                                                             DisallowInsecureCSRUsageDefinition=true|false (BETA - default=true)
+                                                             ExperimentalCertificateSigningRequestControllers=true|false (ALPHA - default=false)
+                                                             ExperimentalGatewayAPISupport=true|false (ALPHA - default=false)
+                                                             LiteralCertificateSubject=true|false (ALPHA - default=false)
+                                                             NameConstraints=true|false (ALPHA - default=false)
+                                                             OtherNames=true|false (ALPHA - default=false)
+                                                             SecretsFilteredCaching=true|false (BETA - default=true)
+                                                             ServerSideApply=true|false (ALPHA - default=false)
+                                                             StableCertificateRequestName=true|false (BETA - default=true)
+                                                             UseCertificateRequestBasicConstraints=true|false (ALPHA - default=false)
+                                                             ValidateCAA=true|false (ALPHA - default=false)
   -h, --help                                                help for controller
       --issuer-ambient-credentials                          Whether an issuer may make use of ambient credentials. 'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the Issuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata.
       --kube-api-burst int                                  the maximum burst queries-per-second of requests sent to the Kubernetes apiserver (default 50)

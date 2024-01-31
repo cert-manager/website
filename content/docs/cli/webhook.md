@@ -27,7 +27,8 @@ Flags:
                                                      AllBeta=true|false (BETA - default=false)
                                                      DisallowInsecureCSRUsageDefinition=true|false (BETA - default=true)
                                                      LiteralCertificateSubject=true|false (ALPHA - default=false)
-                                                     UseCertificateRequestNameConstraints=true|false (ALPHA - default=false)
+                                                     NameConstraints=true|false (ALPHA - default=false)
+                                                     OtherNames=true|false (ALPHA - default=false)
       --healthz-port int32                           port number to listen on for insecure healthz connections (default 6080)
   -h, --help                                         help for webhook
       --kubeconfig string                            optional path to the kubeconfig used to connect to the apiserver. If not specified, in-cluster-config will be used

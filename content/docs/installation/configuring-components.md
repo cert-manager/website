@@ -52,6 +52,7 @@ featureGates:
   ServerSideApply: true
   LiteralCertificateSubject: true
   UseCertificateRequestBasicConstraints: true
+  OtherNames: true
 ```
 
 > **Note:** This is included as an example only and not intended to be used as default settings.
@@ -76,6 +77,7 @@ healthzPort: 6080
 featureGates:
   AdditionalCertificateOutputFormats: true
   LiteralCertificateSubject: true
+  OtherNames: true
 ```
 
 > **Note:** This is included as an example only and not intended to be used as default settings.
