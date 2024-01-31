@@ -25,7 +25,7 @@ This repository is the only supported source of cert-manager charts. There are s
 Notably, the "Helm stable repository" version of cert-manager is deprecated and should not be used.
 
 ```bash
-helm repo add jetstack https://charts.jetstack.io
+helm repo add jetstack https://charts.jetstack.io --force-update
 ```
 
 #### 2. Update your local Helm chart repository cache:
