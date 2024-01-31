@@ -3,7 +3,7 @@ title: Release 1.14
 description: 'cert-manager release notes: cert-manager 1.14'
 ---
 
-## `v1.14.0-alpha.1`
+## `v1.14.0-beta.0`
 
 ### Known Issues
 
@@ -59,6 +59,7 @@ Thanks again to all open-source contributors with commits in this release, inclu
 - [@allenmunC1](https://github.com/allenmunC1)
 - [@asapekia](https://github.com/asapekia)
 - [@jeremycampbell](https://github.com/jeremycampbell)
+- [@jkroepke](https://github.com/jkroepke))
 - [@jsoref](https://github.com/jsoref)
 - [@lauraseidler](https://github.com/lauraseidler)
 - [@pevidex](https://github.com/pevidex)
@@ -104,6 +105,7 @@ In addition, massive thanks to [Venafi](https://www.venafi.com/) for contributin
 - Add TLS support to the metrics endpoint through either a certificate file or through dynamically issued certificates ([#6574](https://github.com/cert-manager/cert-manager/pull/6574), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
 - Helm Chart: allow changing the default Deployment `revisionHistoryLimit` ([#6248](https://github.com/cert-manager/cert-manager/pull/6248), [@tberreis](https://github.com/tberreis))
 - Security: Limit the size of the response body read from HTTP requests by cert-manager. ([#6619](https://github.com/cert-manager/cert-manager/pull/6619), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+- Support custom `spec.namespaceSelector` for webhooks ([#6638](https://github.com/cert-manager/cert-manager/pull/6638), [@jkroepke](https://github.com/jkroepke))
 
 #### Bug or Regression
 
@@ -146,6 +148,7 @@ In addition, massive thanks to [Venafi](https://www.venafi.com/) for contributin
 - Use the new generic `sets.Set` type in place of the deprecated `sets.String`. ([#6586](https://github.com/cert-manager/cert-manager/pull/6586), [@wallrj](https://github.com/wallrj))
 - cert-manager is now built with Go `v1.21.6` ([#6628](https://github.com/cert-manager/cert-manager/pull/6628), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Update the Azure SDK and remove deprecated `autorest` dependency ([#5452](https://github.com/cert-manager/cert-manager/pull/5452), [@phillebaba](https://github.com/phillebaba))
+- The cert-manager E2E tests can now be run on Kubernetes 1.29 ([#6641](https://github.com/cert-manager/cert-manager/pull/6641), [@wallrj](https://github.com/wallrj))
 
 ### Dependencies
 
