@@ -3,9 +3,7 @@ title: Release 1.14
 description: 'cert-manager release notes: cert-manager 1.14'
 ---
 
-## `v1.14.0-beta.0`
-
-### Known Issues
+## `v1.14.0`
 
 ### Breaking Changes
 
