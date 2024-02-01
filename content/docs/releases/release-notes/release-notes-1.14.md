@@ -35,8 +35,9 @@ The feature is still in alpha stage and requires you to [enable the `OtherNames`
 
 #### New CA certificate Features
 
-You can now specify the X.509 v3 Authority Information Accessors extension,
-with URLs for certificates issued by the CA issuer.
+You can now specify the [X.509 v3 Authority Information Accessors](https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1) extension,
+with URLs for certificates issued by the [CA Issuer](../../configuration/ca.md),
+using the new [`issuingCertificateURLs` field](../../reference/api-docs.md#cert-manager.io/v1.CAIssuer).
 
 Users can now use name constraints in CA certificates.
 To know more details on name constraints check out RFC section https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10
