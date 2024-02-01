@@ -50,7 +50,7 @@ This will help mitigate denial-of-service attacks against those important servic
 All the cert-manager containers are now configured with read only root file system by default,
 to prevent unexpected changes to the file system of the OCI image.
 
-And it is now possible to configure the metrics server to use HTTPS rather than HTTP,
+And it is now possible to [configure the metrics server to use HTTPS](../../devops-tips/prometheus-metrics.md#tls) rather than HTTP,
 so that clients can verify the identity of the metrics server.
 
 #### Other
