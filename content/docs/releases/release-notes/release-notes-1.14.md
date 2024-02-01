@@ -47,7 +47,7 @@ An ongoing security audit of the cert-manager code revealed some weaknesses whic
 such as using more secure default settings in the HTTP servers that serve metrics, healthz and pprof endpoints.
 This will help mitigate denial-of-service attacks against those important services.
 
-All the cert-manager containers are now configured with read only root file system by default,
+All the cert-manager containers are now configured with [read only root file system](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) by default,
 to prevent unexpected changes to the file system of the OCI image.
 
 And it is now possible to [configure the metrics server to use HTTPS](../../devops-tips/prometheus-metrics.md#tls) rather than HTTP,
