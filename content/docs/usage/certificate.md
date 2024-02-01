@@ -96,6 +96,15 @@ spec:
     # This is optional since cert-manager will default to this value however
     # if you are using an external issuer, change this to that issuer group.
     group: cert-manager.io
+  
+  # keystores allows additing additional output formats. This is an example reference only.
+  keystores:
+    pkcs12: 
+      create: true
+      passwordSecretRef: 
+        name: example-com-tls-keystore
+        key: password
+      profile: Modern2023
 ```
 
 The signed certificate will be stored in a `Secret` resource named
