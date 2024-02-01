@@ -3,7 +3,7 @@ title: Certificate resource
 description: 'cert-manager usage: Certificates'
 ---
 
-> **apiVersion:** cert-manager.io/v1  
+> **apiVersion:** cert-manager.io/v1
 > **kind:** Certificate
 
 <div style={{textAlign: "center"}}>
@@ -82,9 +82,9 @@ spec:
     - spiffe://cluster.local/ns/sandbox/sa/example
   ipAddresses:
     - 192.168.0.5
-  # Needs cert-manager 1.14+ and "OtherName" feature flag
+  # Needs cert-manager 1.14+ and "OtherNames" feature flag
   otherNames:
-    # Should only supply oid of ut8 valued types 
+    # Should only supply oid of ut8 valued types
     - oid: 1.3.6.1.4.1.311.20.2.3 # User Principal Name "OID"
       utf8Value: upn@example.local
   # Issuer references are always required.
@@ -312,7 +312,7 @@ spec:
       ipRanges: ["10.10.0.0/24"]
 ```
 
-Note that when used with cert-manager's built-in CA and SelfSigned Issuer, the SANs (DNS name, IP address, URI, and email address) are not checked with the certificate's own name constraints, and are not checked with any of name constraints contained in the chain of certificates the certificate belongs to. 
+Note that when used with cert-manager's built-in CA and SelfSigned Issuer, the SANs (DNS name, IP address, URI, and email address) are not checked with the certificate's own name constraints, and are not checked with any of name constraints contained in the chain of certificates the certificate belongs to.
 
 The certificate may get issued successfully, but be rejected by clients during TLS handshakes.
 
