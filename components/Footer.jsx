@@ -9,9 +9,9 @@ export default function Footer() {
       </div>
       <div className="bg-dark-2 pb-10 pt-5">
         <div className="container text-sm text-white">
-          <p>&copy; 2022 The cert-manager Authors.</p>
+          <p>&copy; 2024 The cert-manager Authors.</p>
           <p className="mb-6">
-            &copy; 2022 The Linux Foundation. All rights reserved.
+            &copy; 2024 The Linux Foundation. All rights reserved.
           </p>
           <p>
             The Linux Foundation has registered trademarks and uses trademarks.
