@@ -43,7 +43,7 @@ To know more details on name constraints check out RFC section https://datatrack
 
 #### Security
 
-An ongoing security audit of the cert-manager code revealed some weaknesses which we have addressed in this release,
+An [ongoing CNCF security audit of the cert-manager code](https://github.com/cert-manager/cert-manager/issues/6132) revealed some weaknesses which we have addressed in this release,
 such as using more secure default settings in the HTTP servers that serve metrics, healthz and pprof endpoints.
 This will help mitigate denial-of-service attacks against those important services.
 
