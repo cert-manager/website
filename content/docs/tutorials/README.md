@@ -25,6 +25,7 @@ for you to learn from. Take a look!
 - [Securing an Istio service mesh with cert-manager](./istio-csr/istio-csr.md): Tutorial for
   securing an Istio service mesh using a cert-manager issuer.
 - [Obtaining SSL certificates with the ZeroSSL](./zerossl/zerossl.md): Tutorial describing usage of the ZeroSSL as external ACME server.
+- [Configuring Google's Public Certificate Authority](./google-public-ca/README.md): Configure Google's new Public CA
 
 ### External Tutorials
 
