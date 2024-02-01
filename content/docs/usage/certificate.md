@@ -97,7 +97,7 @@ spec:
     # if you are using an external issuer, change this to that issuer group.
     group: cert-manager.io
   
-  # keystores allows additing additional output formats. This is an example reference only.
+  # keystores allows adding additional output formats. This is an example for reference only.
   keystores:
     pkcs12: 
       create: true
