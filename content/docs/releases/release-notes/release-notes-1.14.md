@@ -44,14 +44,14 @@ To know more details on name constraints check out RFC section https://datatrack
 
 #### Security
 
-An ongoing security audit of the cert-manager code revealed some weaknesses which we have addressed in this release,
+An [ongoing CNCF security audit of the cert-manager code](https://github.com/cert-manager/cert-manager/issues/6132) revealed some weaknesses which we have addressed in this release,
 such as using more secure default settings in the HTTP servers that serve metrics, healthz and pprof endpoints.
 This will help mitigate denial-of-service attacks against those important services.
 
-All the cert-manager containers are now configured with read only root file system by default,
+All the cert-manager containers are now configured with [read only root file system](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) by default,
 to prevent unexpected changes to the file system of the OCI image.
 
-And it is now possible to configure the metrics server to use HTTPS rather than HTTP,
+And it is now possible to [configure the metrics server to use HTTPS](../../devops-tips/prometheus-metrics.md#tls) rather than HTTP,
 so that clients can verify the identity of the metrics server.
 
 #### Other
