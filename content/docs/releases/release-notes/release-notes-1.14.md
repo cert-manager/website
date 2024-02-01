@@ -57,7 +57,8 @@ so that clients can verify the identity of the metrics server.
 
 The liveness probe of the cert-manager controller Pod is now enabled by default.
 
-There is a new option `.spec.keystores.pkcs12.algorithms` to specify encryption and MAC algorithms for PKCS.
+There is a new option `.spec.keystores.pkcs12.profile` to specify encryption and HMAC algorithms for PKCS keystores.
+See the [API reference](../../../docs/reference/api-docs.md#cert-manager.io/v1.PKCS12Profile) for configuration options.
 
 ### Community
 
