@@ -15,7 +15,7 @@ description: |
 > It will make it easier for us to extend `cmctl` with features for managing `trust-manager` and `approver-policy`.
 > And it will allow us to write more E2E tests for `cmctl` without further slowing down the test suite of cert-manager.
 >
-> After release 1.14, `cmctl` will no longer be released with `cert-manager` itself,
+> ⚠️ cert-manager 1.14 is the last release that will still include a `cert-manager-ctl` container image, go package and GitHub release binary.
 > and there will no further `quay.io/jetstack/ctl` OCI images.
 >
 > Visit the new [cmctl repository on GitHub to find out more](https://github.com/cert-manager/cmctl).
