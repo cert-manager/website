@@ -21,18 +21,6 @@ cert-manager `v1.14.1` fixes bugs found *during* the release of `v1.14.0`.
 - Fix bug in cmctl namespace detection which prevented it being used as a startupapicheck image in namespaces other than cert-manager. ([#6706](https://github.com/cert-manager/cert-manager/pull/6706), [@inteon](https://github.com/inteon))
 - Fix bug in cmctl which caused `cmctl experimental install` to panic. ([#6706](https://github.com/cert-manager/cert-manager/pull/6706), [@inteon](https://github.com/inteon))
 
-### Dependencies
-
-#### Added
-_Nothing has changed._
-
-#### Changed
-_Nothing has changed._
-
-#### Removed
-_Nothing has changed._
-
-
 ## `v1.14.0`
 
 cert-manager 1.14 brings a variety of features, security improvements and bug fixes, including:
