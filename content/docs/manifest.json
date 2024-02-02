@@ -20,6 +20,14 @@
               "path": "/docs/releases/README.md"
             },
             {
+              "title": "1.14",
+              "path": "/docs/releases/release-notes/release-notes-1.14.md"
+            },
+            {
+              "title": "Upgrade 1.13 to 1.14",
+              "path": "/docs/releases/upgrading/upgrading-1.13-1.14.md"
+            },
+            {
               "title": "1.13",
               "path": "/docs/releases/release-notes/release-notes-1.13.md"
             },
@@ -578,6 +586,10 @@
             {
               "title": "Managing public trust in kubernetes with trust-manager",
               "path": "/docs/tutorials/getting-started-with-trust-manager/README.md"
+            },
+            {
+              "title": "Setting default certificate values",
+              "path": "/docs/tutorials/certificate-defaults/README.md"
             }
           ]
         },

@@ -11,6 +11,9 @@ description: >-
     <a href="#acme.cert-manager.io%2fv1">acme.cert-manager.io/v1</a>
   </li>
   <li>
+    <a href="#cainjector.config.cert-manager.io%2fv1alpha1">cainjector.config.cert-manager.io/v1alpha1</a>
+  </li>
+  <li>
     <a href="#cert-manager.io%2fv1">cert-manager.io/v1</a>
   </li>
   <li>
@@ -753,7 +756,7 @@ description: >-
       <td>
         <code>parentRefs</code>
         <br />
-        <em>[]sigs.k8s.io/gateway-api/apis/v1beta1.ParentReference</em>
+        <em>[]sigs.k8s.io/gateway-api/apis/v1.ParentReference</em>
       </td>
       <td>
         <p>
@@ -1462,7 +1465,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>if both this and ClientSecret are left unset MSI will be used</p>
+        <p>Auth: Azure Service Principal: The ClientID of the Azure Service Principal used to authenticate with Azure DNS. If set, ClientSecret and TenantID must also be set.</p>
       </td>
     </tr>
     <tr>
@@ -1475,7 +1478,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>if both this and ClientID are left unset MSI will be used</p>
+        <p>Auth: Azure Service Principal: A reference to a Secret containing the password associated with the Service Principal. If set, ClientID and TenantID must also be set.</p>
       </td>
     </tr>
     <tr>
@@ -1496,7 +1499,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>when specifying ClientID and ClientSecret then this field is also needed</p>
+        <p>Auth: Azure Service Principal: The TenantID of the Azure Service Principal used to authenticate with Azure DNS. If set, ClientID and ClientSecret must also be set.</p>
       </td>
     </tr>
     <tr>
@@ -1543,7 +1546,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>managed identity configuration, can not be used at the same time as clientID, clientSecretSecretRef or tenantID</p>
+        <p>Auth: Azure Workload Identity or Azure Managed Service Identity: Settings to enable Azure Workload Identity or Azure Managed Service Identity If set, ClientID, ClientSecret and TenantID must not be set.</p>
       </td>
     </tr>
   </tbody>
@@ -1948,7 +1951,9 @@ description: >-
 </table>
 <h3 id="acme.cert-manager.io/v1.AzureManagedIdentity">AzureManagedIdentity</h3>
 <p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>) </p>
-<div></div>
+<div>
+  <p>AzureManagedIdentity contains the configuration for Azure Workload Identity or Azure Managed Service Identity If the AZURE_FEDERATED_TOKEN_FILE environment variable is set, the Azure Workload Identity will be used. Otherwise, we fall-back to using Azure Managed Service Identity.</p>
+</div>
 <table>
   <thead>
     <tr>
@@ -1976,7 +1981,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>resource ID of the managed identity, can not be used at the same time as clientID</p>
+        <p>resource ID of the managed identity, can not be used at the same time as clientID Cannot be used for Azure Managed Service Identity</p>
       </td>
     </tr>
   </tbody>
@@ -2501,6 +2506,264 @@ description: >-
   </tbody>
 </table>
 <hr />
+<h2 id="cainjector.config.cert-manager.io/v1alpha1">cainjector.config.cert-manager.io/v1alpha1</h2>
+<div>
+  <p>Package v1alpha1 is the v1alpha1 version of the cainjector config API.</p>
+</div>
+<p>Resource Types:</p>
+<ul></ul>
+<h3 id="cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</h3>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>kubeConfig</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>kubeConfig is the kubeconfig file used to connect to the Kubernetes apiserver. If not specified, the cainjector will attempt to load the in-cluster-config.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>namespace</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>If set, this limits the scope of cainjector to a single namespace. If set, cainjector will not update resources with certificates outside of the configured namespace.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>leaderElectionConfig</code>
+        <br />
+        <em>
+          <a href="#cainjector.config.cert-manager.io/v1alpha1.LeaderElectionConfig">LeaderElectionConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>LeaderElectionConfig configures the behaviour of the leader election</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>enableDataSourceConfig</code>
+        <br />
+        <em>
+          <a href="#cainjector.config.cert-manager.io/v1alpha1.EnableDataSourceConfig">EnableDataSourceConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>EnableDataSourceConfig determines whether cainjector&rsquo;s control loops will watch cert-manager resources as potential sources of CA data.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>enableInjectableConfig</code>
+        <br />
+        <em>
+          <a href="#cainjector.config.cert-manager.io/v1alpha1.EnableInjectableConfig">EnableInjectableConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>EnableInjectableConfig determines whether cainjector&rsquo;s control loops will watch cert-manager resources as potential targets for CA data injection.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>enablePprof</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>Enable profiling for cainjector.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>pprofAddress</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>The host and port that Go profiler should listen on, i.e localhost:6060. Ensure that profiler is not exposed on a public address. Profiler will be served at /debug/pprof.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>logging</code>
+        <br />
+        <em>k8s.io/component-base/logs/api/v1.LoggingConfiguration</em>
+      </td>
+      <td>
+        <p>
+          logging configures the logging behaviour of the cainjector.
+          <a href="https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration">https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>featureGates</code>
+        <br />
+        <em>map[string]bool</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>featureGates is a map of feature names to bools that enable or disable experimental features.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cainjector.config.cert-manager.io/v1alpha1.EnableDataSourceConfig">EnableDataSourceConfig</h3>
+<p> (<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>certificates</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>Certificates detemines whether cainjector&rsquo;s control loops will watch cert-manager Certificate resources as potential sources of CA data. If not set, defaults to true.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cainjector.config.cert-manager.io/v1alpha1.EnableInjectableConfig">EnableInjectableConfig</h3>
+<p> (<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>validatingWebhookConfigurations</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>ValidatingWebhookConfigurations determines whether cainjector will spin up a control loop to inject CA data to annotated ValidatingWebhookConfigurations If not set, defaults to true.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>mutatingWebhookConfigurations</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>MutatingWebhookConfigurations determines whether cainjector will spin up a control loop to inject CA data to annotated MutatingWebhookConfigurations If not set, defaults to true.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>customResourceDefinitions</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>CustomResourceDefinitions determines whether cainjector will spin up a control loop to inject CA data to annotated CustomResourceDefinitions If not set, defaults to true.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>apiServices</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>APIServices determines whether cainjector will spin up a control loop to inject CA data to annotated APIServices If not set, defaults to true.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cainjector.config.cert-manager.io/v1alpha1.LeaderElectionConfig">LeaderElectionConfig</h3>
+<p> (<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>enabled</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>If true, cert-manager will perform leader election between instances to ensure no more than one instance of cert-manager operates at a time</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>namespace</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace used to perform leader election. Only used if leader election is enabled</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>leaseDuration</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>renewDeadline</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>retryPeriod</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr />
 <h2 id="cert-manager.io/v1">cert-manager.io/v1</h2>
 <div>
   <p>Package v1 is the v1 version of the API.</p>
@@ -2687,6 +2950,19 @@ description: >-
           </tr>
           <tr>
             <td>
+              <code>otherNames</code>
+              <br />
+              <em>
+                <a href="#cert-manager.io/v1.OtherName">[]OtherName</a>
+              </em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p> <code>otherNames</code> is an escape hatch for SAN that allows any type. We currently restrict the support to string like otherNames, cf RFC 5280 p 37 Any UTF8 String valued otherName can be passed with by setting the keys oid: x.x.x.x and UTF8Value: somevalue for <code>otherName</code>. Most commonly this would be UPN set with oid: 1.3.6.1.4.1.311.20.2.3 You should ensure that any OID passed is valid for the UTF8String type as we do not explicitly validate this. </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <code>emailAddresses</code>
               <br />
               <em>[]string</em>
@@ -2825,6 +3101,23 @@ description: >-
               <p>
                 This is an Alpha Feature and is only enabled with the
                 <code>--feature-gates=AdditionalCertificateOutputFormats=true</code> option set on both the controller and webhook components.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>nameConstraints</code>
+              <br />
+              <em>
+                <a href="#cert-manager.io/v1.NameConstraints">NameConstraints</a>
+              </em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p> x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate. More Info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10">https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10</a> </p>
+              <p>
+                This is an Alpha Feature and is only enabled with the
+                <code>--feature-gates=NameConstraints=true</code> option set on both the controller and webhook components.
               </p>
             </td>
           </tr>
@@ -3256,6 +3549,17 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p> The OCSP server list is an X.509 v3 extension that defines a list of URLs of OCSP responders. The OCSP responders can be queried for the revocation status of an issued certificate. If not set, the certificate will be issued with no OCSP servers set. For example, an OCSP server URL could be &ldquo;<a href='http://ocsp.int-x3.letsencrypt.org"'>http://ocsp.int-x3.letsencrypt.org&rdquo;</a>. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>issuingCertificateURLs</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> IssuingCertificateURLs is a list of URLs which this issuer should embed into certificates it creates. See <a href="https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1">https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1</a> for more details. As an example, such a URL might be &ldquo;<a href='http://ca.domain.com/ca.crt"'>http://ca.domain.com/ca.crt&rdquo;</a>. </p>
       </td>
     </tr>
   </tbody>
@@ -4032,6 +4336,19 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>otherNames</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.OtherName">[]OtherName</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> <code>otherNames</code> is an escape hatch for SAN that allows any type. We currently restrict the support to string like otherNames, cf RFC 5280 p 37 Any UTF8 String valued otherName can be passed with by setting the keys oid: x.x.x.x and UTF8Value: somevalue for <code>otherName</code>. Most commonly this would be UPN set with oid: 1.3.6.1.4.1.311.20.2.3 You should ensure that any OID passed is valid for the UTF8String type as we do not explicitly validate this. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>emailAddresses</code>
         <br />
         <em>[]string</em>
@@ -4170,6 +4487,23 @@ description: >-
         <p>
           This is an Alpha Feature and is only enabled with the
           <code>--feature-gates=AdditionalCertificateOutputFormats=true</code> option set on both the controller and webhook components.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>nameConstraints</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.NameConstraints">NameConstraints</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate. More Info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10">https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10</a> </p>
+        <p>
+          This is an Alpha Feature and is only enabled with the
+          <code>--feature-gates=NameConstraints=true</code> option set on both the controller and webhook components.
         </p>
       </td>
     </tr>
@@ -4756,6 +5090,148 @@ description: >-
     </tr>
   </tbody>
 </table>
+<h3 id="cert-manager.io/v1.NameConstraintItem">NameConstraintItem</h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.NameConstraints">NameConstraints</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>dnsDomains</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>DNSDomains is a list of DNS domains that are permitted or excluded.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>ipRanges</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>IPRanges is a list of IP Ranges that are permitted or excluded. This should be a valid CIDR notation.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>emailAddresses</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>EmailAddresses is a list of Email Addresses that are permitted or excluded.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>uriDomains</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>URIDomains is a list of URI domains that are permitted or excluded.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.NameConstraints">NameConstraints</h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<div>
+  <p>NameConstraints is a type to represent x509 NameConstraints</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>critical</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>if true then the name constraints are marked critical.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>permitted</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.NameConstraintItem">NameConstraintItem</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Permitted contains the constraints in which the names must be located.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>excluded</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.NameConstraintItem">NameConstraintItem</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Excluded contains the constraints which must be disallowed. Any name matching a restriction in the excluded field is invalid regardless of information appearing in the permitted</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.OtherName">OtherName</h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>oid</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>OID is the object identifier for the otherName SAN. The object identifier must be expressed as a dotted string, for example, &ldquo;1.2.840.113556.1.4.221&rdquo;.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>utf8Value</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>utf8Value is the string value of the otherName SAN. The utf8Value accepts any valid UTF8 string to set as value for the otherName SAN.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <h3 id="cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateKeystores">CertificateKeystores</a>) </p>
 <div>
@@ -4792,6 +5268,60 @@ description: >-
       </td>
       <td>
         <p>PasswordSecretRef is a reference to a key in a Secret resource containing the password used to encrypt the PKCS12 keystore.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>profile</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.PKCS12Profile">PKCS12Profile</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> Profile specifies the key and certificate encryption algorithms and the HMAC algorithm used to create the PKCS12 keystore. Default value is <code>LegacyRC2</code> for backward compatibility. </p>
+        <p>
+          If provided, allowed values are:
+          <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (eg. because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.PKCS12Profile"> PKCS12Profile (<code>string</code> alias) </h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>&#34;LegacyDES&#34;</p>
+      </td>
+      <td>
+        <p> see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyDES">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyDES</a> </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;LegacyRC2&#34;</p>
+      </td>
+      <td>
+        <p> see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyRC2">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyRC2</a> </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;Modern2023&#34;</p>
+      </td>
+      <td>
+        <p> see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2023">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2023</a> </p>
       </td>
     </tr>
   </tbody>
@@ -5553,7 +6083,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>kubeConfig is the kubeconfig file used to connect to the Kubernetes apiserver. If not specified, the webhook will attempt to load the in-cluster-config.</p>
+        <p>kubeConfig is the kubeconfig file used to connect to the Kubernetes apiserver. If not specified, the controller will attempt to load the in-cluster-config.</p>
       </td>
     </tr>
     <tr>
@@ -5700,6 +6230,18 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>metricsTLSConfig</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>TLS config for the metrics endpoint</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>healthzListenAddress</code>
         <br />
         <em>string</em>
@@ -5749,7 +6291,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>featureGates is a map of feature names to bools that enable or disable experimental features. Default: nil</p>
+        <p>featureGates is a map of feature names to bools that enable or disable experimental features.</p>
       </td>
     </tr>
     <tr>
@@ -5786,6 +6328,96 @@ description: >-
       </td>
       <td>
         <p>acmeDNS01Config configures the behaviour of the ACME DNS01 challenge solver</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.DynamicServingConfig">DynamicServingConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>) </p>
+<div>
+  <p>DynamicServingConfig makes the controller generate a CA and persist it into Secret resources. This CA will be used by all instances of the controller for signing serving certificates.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>secretNamespace</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace of the Kubernetes Secret resource containing the TLS certificate used as a CA to sign dynamic serving certificates.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>secretName</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace of the Kubernetes Secret resource containing the TLS certificate used as a CA to sign dynamic serving certificates.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>dnsNames</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p>DNSNames that must be present on serving certificates signed by the CA.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>LeafDuration</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>LeafDuration is a customizable duration on serving certificates signed by the CA.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.FilesystemServingConfig">FilesystemServingConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>) </p>
+<div>
+  <p>FilesystemServingConfig enables using a certificate and private key found on the local filesystem. These files will be periodically polled in case they have changed, and dynamically reloaded.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>certFile</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Path to a file containing TLS certificate &amp; chain to serve with</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>keyFile</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Path to a file containing a TLS private key to serve with</p>
       </td>
     </tr>
   </tbody>
@@ -5956,6 +6588,65 @@ description: >-
       </td>
       <td>
         <p>Leader election healthz checks within this timeout period after the lease expires will still return healthy.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<div>
+  <p>TLSConfig configures how TLS certificates are sourced for serving. Only one of &lsquo;filesystem&rsquo; or &lsquo;dynamic&rsquo; may be specified.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>cipherSuites</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p> cipherSuites is the list of allowed cipher suites for the server. Values are from tls package constants (<a href="https://golang.org/pkg/crypto/tls/#pkg-constants">https://golang.org/pkg/crypto/tls/#pkg-constants</a>). If not specified, the default for the Go version will be used and may change over time. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>minTLSVersion</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p> minTLSVersion is the minimum TLS version supported. Values are from tls package constants (<a href="https://golang.org/pkg/crypto/tls/#pkg-constants">https://golang.org/pkg/crypto/tls/#pkg-constants</a>). If not specified, the default for the Go version will be used and may change over time. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>filesystem</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.FilesystemServingConfig">FilesystemServingConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>Filesystem enables using a certificate and private key found on the local filesystem. These files will be periodically polled in case they have changed, and dynamically reloaded.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>dynamic</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.DynamicServingConfig">DynamicServingConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>When Dynamic serving is enabled, the controller will generate a CA used to sign certificates and persist it into a Kubernetes Secret resource (for other replicas of the controller to consume). It will then generate a certificate in-memory for itself using this CA to serve with.</p>
       </td>
     </tr>
   </tbody>
@@ -6170,6 +6861,16 @@ description: >-
         <p>DNSNames that must be present on serving certificates signed by the CA.</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>LeafDuration</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>LeafDuration is a customizable duration on serving certificates signed by the CA.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="webhook.config.cert-manager.io/v1alpha1.FilesystemServingConfig">FilesystemServingConfig</h3>
@@ -6202,7 +6903,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>Path to a file containing a TLS private key to server with</p>
+        <p>Path to a file containing a TLS private key to serve with</p>
       </td>
     </tr>
   </tbody>
@@ -6369,12 +7070,12 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>featureGates is a map of feature names to bools that enable or disable experimental features. Default: nil</p>
+        <p>featureGates is a map of feature names to bools that enable or disable experimental features.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>d34bd7a</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>2c14e5f</code>. </em>
 </p>

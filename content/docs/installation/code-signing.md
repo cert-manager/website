@@ -19,11 +19,12 @@ key.
 For all cert-manager versions from `v1.8.0` and later, cert-manager container images are signed and verifiable using [`cosign`](https://docs.sigstore.dev/cosign/overview).
 
 ```console
-IMAGE_TAG=v1.13.3  # change as needed
+IMAGE_TAG=v1.14.1  # change as needed
 KEY=https://cert-manager.io/public-keys/cert-manager-pubkey-2021-09-20.pem
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-acmesolver:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-cainjector:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-ctl:$IMAGE_TAG
+cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-startupapicheck:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-controller:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-webhook:$IMAGE_TAG
 ```

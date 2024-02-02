@@ -3,7 +3,7 @@ title: Certificate resource
 description: 'cert-manager usage: Certificates'
 ---
 
-> **apiVersion:** cert-manager.io/v1  
+> **apiVersion:** cert-manager.io/v1
 > **kind:** Certificate
 
 <div style={{textAlign: "center"}}>
@@ -74,7 +74,7 @@ spec:
   usages:
     - server auth
     - client auth
-  # At least one of a DNS Name, URI, or IP address is required.
+  # At least one of a DNS Name, URI, IP address or otherName is required.
   dnsNames:
     - example.com
     - www.example.com
@@ -82,6 +82,11 @@ spec:
     - spiffe://cluster.local/ns/sandbox/sa/example
   ipAddresses:
     - 192.168.0.5
+  # Needs cert-manager 1.14+ and "OtherNames" feature flag
+  otherNames:
+    # Should only supply oid of ut8 valued types
+    - oid: 1.3.6.1.4.1.311.20.2.3 # User Principal Name "OID"
+      utf8Value: upn@example.local
   # Issuer references are always required.
   issuerRef:
     name: ca-issuer
@@ -91,6 +96,15 @@ spec:
     # This is optional since cert-manager will default to this value however
     # if you are using an external issuer, change this to that issuer group.
     group: cert-manager.io
+  
+  # keystores allows adding additional output formats. This is an example for reference only.
+  keystores:
+    pkcs12: 
+      create: true
+      passwordSecretRef: 
+        name: example-com-tls-keystore
+        key: password
+      profile: Modern2023
 ```
 
 The signed certificate will be stored in a `Secret` resource named
@@ -255,6 +269,52 @@ data:
   key.der: <DER binary format of private key>
   ...
 ```
+
+### Creating Certificate With Name Constraints
+
+Root or Intermediate CA certificates can have name constraints. Name constraints indicates a name space within which all subject names in subsequent certificates in a certification path MUST be located.
+Checkout https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10 for more details on this.
+
+<div className="warning">
+
+⛔️ This feature is only enabled by adding it to the
+`--feature-gates` flag on the cert-manager controller and webhook components:
+
+```bash
+--feature-gates=useCertificateRequestNameConstraints=true
+```
+
+</div>
+
+To create a CA Certificate with name constraints use the following configuration:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ca-cert-example
+spec:
+  secretName: example-ca-key-pair
+  isCA: true
+  issuerRef:
+    name: selfsigned
+    kind: ClusterIssuer
+  commonName: "example1.com"
+  dnsNames:
+  - example1.com
+  nameConstraints:
+    critical: true
+    permitted:
+      dnsDomains: ["example1.com", "example2.com"]
+      ipRanges: ["10.10.0.0/16"]
+      emailAddress: ["example@example.org"]
+    excluded:
+      ipRanges: ["10.10.0.0/24"]
+```
+
+Note that when used with cert-manager's built-in CA and SelfSigned Issuer, the SANs (DNS name, IP address, URI, and email address) are not checked with the certificate's own name constraints, and are not checked with any of name constraints contained in the chain of certificates the certificate belongs to.
+
+The certificate may get issued successfully, but be rejected by clients during TLS handshakes.
 
 ## Issuance triggers
 

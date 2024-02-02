@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: "our-corp-issuer"
+  name: defaults-example
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: app
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+    - hosts: 
+      - app.example.com
+      secretName: defaults-example-certificate-tls
