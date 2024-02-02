@@ -3,11 +3,11 @@ title: Release 1.14
 description: 'cert-manager release notes: cert-manager 1.14'
 ---
 
-## `v1.14.1`
-
 cert-manager 1.14 brings a variety of features, security improvements and bug fixes, including:
 support for creating X.509 certificates with "Other Name" fields, and
 support for creating CA certificates with "Name Constraints" and "Authority Information Accessors" extensions.
+
+## `v1.14.1`
 
 cert-manager `v1.14.1` fixes bugs found *during* the release of `v1.14.0`.
 
@@ -22,10 +22,6 @@ cert-manager `v1.14.1` fixes bugs found *during* the release of `v1.14.0`.
 - Fix bug in cmctl which caused `cmctl experimental install` to panic. ([#6706](https://github.com/cert-manager/cert-manager/pull/6706), [@inteon](https://github.com/inteon))
 
 ## `v1.14.0`
-
-cert-manager 1.14 brings a variety of features, security improvements and bug fixes, including:
-support for creating X.509 certificates with "Other Name" fields, and
-support for creating CA certificates with "Name Constraints" and "Authority Information Accessors" extensions.
 
 > ⚠️ This version has known issues. Please install `v1.14.1` instead.
 >
