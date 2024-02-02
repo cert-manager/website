@@ -16,7 +16,6 @@ description: |
 > And it will allow us to write more E2E tests for `cmctl` without further slowing down the test suite of cert-manager.
 >
 > ⚠️ cert-manager 1.14 is the last release that will still include a `cert-manager-ctl` container image, go package and GitHub release binary.
-> and there will no further `quay.io/jetstack/ctl` OCI images.
 >
 > Visit the new [cmctl repository on GitHub to find out more](https://github.com/cert-manager/cmctl).
 
