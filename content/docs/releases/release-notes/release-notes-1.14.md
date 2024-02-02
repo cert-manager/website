@@ -11,7 +11,7 @@ support for creating CA certificates with "Name Constraints" and "Authority Info
 
 cert-manager `v1.14.1` fixes bugs found *during* the release of `v1.14.0`.
 
-> 📢 When upgrading to cert-manager release 1.14, please skip v1.14.0 and install this patch version instead.
+> 📢 When upgrading to cert-manager release 1.14, please skip `v1.14.0` and install this patch version instead.
 
 ### Changes since `v1.14.0`
 
