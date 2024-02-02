@@ -6,6 +6,19 @@ description: |
 
 `cmctl` is a command line tool that can help you manage cert-manager and its resources inside your cluster.
 
+> 📢 The cert-manager CLI is moving to a new GitHub repository
+>
+> The cert-manager team have decided to move the `cmctl` code to a new GitHub repository.
+> This will allow us to release new features and bug fixes for `cmctl` independently of cert-manager.
+> It will simplify the Go package dependencies of cert-manager
+> so there should be fewer security patch releases of cert-manager.
+> It will make it easier for us to extend `cmctl` with features for managing `trust-manager` and `approver-policy`.
+> And it will allow us to write more E2E tests for `cmctl` without further slowing down the test suite of cert-manager.
+>
+> ⚠️ cert-manager 1.14 is the last release that will still include a `cert-manager-ctl` container image, go package and GitHub release binary.
+>
+> Visit the new [cmctl repository on GitHub to find out more](https://github.com/cert-manager/cmctl).
+
 ## Installation
 
 ### Homebrew

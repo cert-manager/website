@@ -7,6 +7,13 @@ cert-manager 1.14 brings a variety of [features](#feature), [security improvemen
 support for creating [X.509 certificates with "Other Name" fields](#new-x509-features), and
 support for creating [CA certificates with "Name Constraints" and "Authority Information Accessors" extensions](#new-ca-certificate-features).
 
+> 📢 The cert-manager CLI is moving to a new GitHub repository
+>
+> After this release, `cmctl` will no longer be released with `cert-manager` itself,
+> and there will no further `quay.io/jetstack/cert-manager-ctl` OCI images.
+>
+> Read [The cert-manager Command Line Tool (cmctl) page](../../reference/cmctl.md) to learn more.
+
 ## `v1.14.1`
 
 cert-manager `v1.14.1` fixes bugs found *during* the release of `v1.14.0`.
