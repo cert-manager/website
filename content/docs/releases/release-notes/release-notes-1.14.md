@@ -3,6 +3,10 @@ title: Release 1.14
 description: 'cert-manager release notes: cert-manager 1.14'
 ---
 
+## `v1.14.1`
+
+cert-manager `v1.14.1` is patch release to fix bugs found *during* the release of `v1.14.0`.
+
 ## `v1.14.0`
 
 cert-manager 1.14 brings a variety of features, security improvements and bug fixes, including:
