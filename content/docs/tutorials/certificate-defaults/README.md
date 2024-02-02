@@ -89,7 +89,7 @@ Once you have your cluster environment, install the required Kubernetes packages
 1. Set some environment variables for the helm chart versions:
 
     ```shell
-    export CERT_MANAGER_CHART_VERSION="v1.14.0" \
+    export CERT_MANAGER_CHART_VERSION="v1.14.1" \
         KYVERNO_CHART_VERSION="3.1.4" \
         INGRESS_NGINX_CHART_VERSION="4.9.0"
     ```

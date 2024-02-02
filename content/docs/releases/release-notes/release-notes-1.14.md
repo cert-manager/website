@@ -3,11 +3,54 @@ title: Release 1.14
 description: 'cert-manager release notes: cert-manager 1.14'
 ---
 
+cert-manager 1.14 brings a variety of [features](#feature), [security improvements](#security) and [bug fixes](#bug-or-regression-1), including:
+support for creating [X.509 certificates with "Other Name" fields](#new-x509-features), and
+support for creating [CA certificates with "Name Constraints" and "Authority Information Accessors" extensions](#new-ca-certificate-features).
+
+## `v1.14.1`
+
+cert-manager `v1.14.1` fixes bugs found *during* the release of `v1.14.0`.
+
+> 📢 When upgrading to cert-manager release 1.14, please skip `v1.14.0` and install this patch version instead.
+
+### Changes since `v1.14.0`
+
+#### Bug or Regression
+
+- Fix broken cainjector image value in Helm chart ([#6693](https://github.com/cert-manager/cert-manager/pull/6693), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix bug in cmctl namespace detection which prevented it being used as a startupapicheck image in namespaces other than cert-manager. ([#6706](https://github.com/cert-manager/cert-manager/pull/6706), [@inteon](https://github.com/inteon))
+- Fix bug in cmctl which caused `cmctl experimental install` to panic. ([#6706](https://github.com/cert-manager/cert-manager/pull/6706), [@inteon](https://github.com/inteon))
+
 ## `v1.14.0`
 
-cert-manager 1.14 brings a variety of features, security improvements and bug fixes, including:
-support for creating X.509 certificates with "Other Name" fields, and
-support for creating CA certificates with "Name Constraints" and "Authority Information Accessors" extensions.
+> ⚠️ This version has known issues. Please install `v1.14.1` instead.
+>
+> During the release of `v1.14.0`, the Helm chart was found to use the wrong OCI image for the `cainjector` Deployment,
+> which caused the Helm installation and the static manifest based installation to fail.
+> Upon discovery of this bug, the release of `v1.14.0` was paused before the Helm chart or GitHub release were published;
+> but the Git tag and the OCI images had already been published.
+>
+> The cert-manager team next fixed the Helm chart and two other bugs which are listed in the "Known Issues" section below,
+> and then released `v1.14.1`, which is the version that users are strongly advised to install when they upgrade to 1.14.
+>
+> In order to complete the stalled `v1.14.0` release,
+> the Helm chart and static YAML installation files were regenerated on a team member's laptop,
+> using exactly the same build scripts as are used in the automated release process,
+> and using the `v1.14.1` version of the code.
+> The working  `v1.14.0` Helm chart was published,
+> and the working versions of the static manifest files attached to the draft `v1.14.0` GitHub release,
+> and that was then published.
+>
+> For these reasons, users are strongly advised to skip this version and install the `v1.14.1` Helm chart instead.
+
+### Known Issues
+- During the release of `v1.14.0`, the Helm chart for this version was found to use the wrong OCI image for the `cainjector` Deployment,
+  which caused the Helm installation to fail.
+  In order to complete the release, the cert-manager team have manually updated the Helm chart for this version,
+  which contains all the Helm chart fixes which are in `v1.14.1`.
+  But users are strongly advised to skip this version and install the `v1.14.1` Helm chart instead.
+- A bug in cmctl namespace detection prevents it being used as a `startupapicheck` image in namespaces other than cert-manager.
+- A bug in cmctl causes `cmctl experimental install` to panic.
 
 ### Breaking Changes
 
