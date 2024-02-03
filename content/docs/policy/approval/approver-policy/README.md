@@ -271,6 +271,44 @@ spec:
   ...
 ```
 
+#### Validations
+
+Since approver-policy 0.11.0 it is now possible to define more advanced allowed
+request attribute validation rules using
+[Common Expression Language (CEL)](https://kubernetes.io/docs/reference/using-api/cel/).
+The main motivation for adding this feature was to enable allowed request
+attribute values as a function of the request namespace. But since CEL is a
+small programming language, validation rules can also complement or replace the
+basic wildcard support in allowed attribute value specification.
+
+The request attribute value is made available to the expression in the `self` variable.
+For multi-valued request attributes, the validation will be performed once per value.
+Similarly to the `self` variable, approver-policy provides the `cr` variable representing
+the request to validate. This variable is of object type, and at time of writing it has
+just two fields: `namespace` and `name`.
+
+In the following, we use approver-policy CEL validation rules to ensure
+[X.509 SVID certificates](https://github.com/spiffe/spiffe/blob/890b9266095d37bad189529367f31de9be2504b6/standards/X509-SVID.md)
+are issued with a [SPIFFE ID](https://github.com/spiffe/spiffe/blob/890b9266095d37bad189529367f31de9be2504b6/standards/SPIFFE-ID.md)
+(X.509 URI SAN) identifying the namespace (and service account).
+
+```yaml
+spec:
+  ...
+  allowed:
+    uris:
+      validations:
+      - rule: self.startsWith('spiffe://trust.domain/ns/' + cr.namespace + '/sa/')
+        message: only URIs representing the current namespace in the SPIFFE ID are allowed.
+  ...
+```
+
+For details on where CEL validations can be used, please refer to the approver-policy
+[API reference documentation](./api-reference.md).
+And for writing CEL expression the
+[CEL language definition](https://github.com/google/cel-spec/blob/master/doc/langdef.md)
+might be useful.
+
 ### Constraints
 
 Constraints is the block that is used to limit what attributes the request can
@@ -417,7 +455,8 @@ spec:
 
 ## Known Plugins from the Community
 
-- [CEL approver-policy plugin](https://github.com/erikgb/cel-approver-policy-plugin) (experimental)
+- ~~[CEL approver-policy plugin](https://github.com/erikgb/cel-approver-policy-plugin)~~
+  (archived; CEL support in approver-policy now)
 
 If you want to implement an external approver policy plugin take a look at the
 example implementation at
