@@ -47,7 +47,7 @@ gendocs() {
 	echo "+++ Generating reference docs..."
 
 	$CRDOC \
-    --resources "$tmpdir/deploy/charts/approver-policy/templates/crds/policy.cert-manager.io_certificaterequestpolicies.yaml" \
+    --resources "$tmpdir/deploy/charts/approver-policy/templates/crd-policy.cert-manager.io_certificaterequestpolicies.yaml" \
 		--template $REPO_ROOT/scripts/gendocs/templates-approver-policy/markdown.tmpl \
 		--output $outputdir
 }
@@ -57,4 +57,4 @@ git clone "https://github.com/cert-manager/approver-policy.git" "$tmpdir"
 
 checkout "main"
 
-gendocs "$REPO_ROOT/content/docs/projects/approver-policy/api-reference.md"
+gendocs "$REPO_ROOT/content/docs/policy/approval/approver-policy/api-reference.md"
