@@ -5439,7 +5439,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>Namespace of the Kubernetes Secret resource containing the TLS certificate used as a CA to sign dynamic serving certificates.</p>
+        <p>Kubernetes Secret resource containing the TLS certificate used as a CA to sign dynamic serving certificates.</p>
       </td>
     </tr>
     <tr>
