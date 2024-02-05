@@ -16,10 +16,11 @@ and other world events.
 <a id="supported-releases"></a>
 ## Currently supported releases
 
-|   Release    | Release Date |      End of Life       | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+| Release      | Release Date | End of Life            | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |--------------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
-|     [1.13][] | Sep 12, 2023 |    Release of 1.15     |            1.23 → 1.28             |           4.10 → 4.15             |
-| [1.12 LTS][] | May 19, 2023 |      May 19, 2025      |            1.22 → 1.28             |            4.9 → 4.15             |
+| [1.14][]     | Feb 3, 2024  | ~4 months post release | 1.24 → 1.29                        | 4.11 → 4.15                       |
+| [1.13][]     | Sep 12, 2023 | Release of 1.15        | 1.23 → 1.28                        | 4.10 → 4.15                       |
+| [1.12 LTS][] | May 19, 2023 | May 19, 2025           | 1.22 → 1.28                        | 4.9 → 4.15                        |
 
 cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It will continue to be supported for at least 2 years from release.
 
@@ -27,7 +28,6 @@ cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](htt
 
 | Release  | Release Date | End of Life            | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
-| [1.14][] | Jan 31, 2024 | ~4 months post release |             1.24 → 1.29            |           4.11 → 4.15             |
 | [1.15][] | TBD          | TBD                    | TBD                                | TBD                               |
 
 Dates in the future are uncertain and might change.
