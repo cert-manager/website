@@ -279,7 +279,7 @@ request attribute validation rules using
 The main motivation for adding this feature was to enable allowed request
 attribute values as a function of the request namespace. But since CEL is a
 small programming language, validation rules can also complement or replace the
-basic wildcard support in allowed attribute value specification.
+basic wildcard support in `allowed` attribute value specification.
 
 The request attribute value is made available to the expression in the `self` variable.
 For multi-valued request attributes, the validation will be performed once per value.
