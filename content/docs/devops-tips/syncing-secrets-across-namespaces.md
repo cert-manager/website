@@ -2,7 +2,7 @@
 title: Syncing Secrets Across Namespaces
 description: |
     Learn how to synchronize Kubernetes Secret resources across namespaces
-    using extensions such as: reflector, kubed and kubernetes-replicator.
+    using extensions such as: reflector and kubernetes-replicator.
 ---
 
 It may be required for multiple components across namespaces to consume the same
