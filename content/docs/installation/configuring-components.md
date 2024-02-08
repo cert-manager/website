@@ -53,6 +53,7 @@ featureGates:
   LiteralCertificateSubject: true
   UseCertificateRequestBasicConstraints: true
   OtherNames: true
+  NameConstraints: true
 ```
 
 > **Note:** This is included as an example only and not intended to be used as default settings.
@@ -78,13 +79,14 @@ featureGates:
   AdditionalCertificateOutputFormats: true
   LiteralCertificateSubject: true
   OtherNames: true
+  NameConstraints: true
 ```
 
 > **Note:** This is included as an example only and not intended to be used as default settings.
 
 ## Feature gates
 
-Feature gates can be used to enable or disable experimental features in cert-manager. 
+Feature gates can be used to enable or disable experimental features in cert-manager.
 
 There are 2 levels of feature gates (more details in [Kubernetes definition of feature stages](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/#feature-stages)):
 - **Alpha:** feature is not yet stable and might be removed or changed in the future. Alpha features are disabled by default and need to be explicitly enabled by the user (to test the feature).

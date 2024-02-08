@@ -96,12 +96,12 @@ spec:
     # This is optional since cert-manager will default to this value however
     # if you are using an external issuer, change this to that issuer group.
     group: cert-manager.io
-  
+
   # keystores allows adding additional output formats. This is an example for reference only.
   keystores:
-    pkcs12: 
+    pkcs12:
       create: true
-      passwordSecretRef: 
+      passwordSecretRef:
         name: example-com-tls-keystore
         key: password
       profile: Modern2023
@@ -281,7 +281,7 @@ Checkout https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10 for more
 `--feature-gates` flag on the cert-manager controller and webhook components:
 
 ```bash
---feature-gates=useCertificateRequestNameConstraints=true
+--feature-gates=NameConstraints=true
 ```
 
 </div>
