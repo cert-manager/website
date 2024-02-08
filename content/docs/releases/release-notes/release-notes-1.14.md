@@ -22,12 +22,12 @@ support for creating [CA certificates with "Name Constraints" and "Authority Inf
 
 #### Bug or Regression
 
-- BUGFIX: cert-manager CA and SelfSigned issuers incorrectly copied the critical flag from the CSR instead of re-calculating that field themselves. (https://github.com/cert-manager/cert-manager/pull/6727, https://github.com/jetstack-bot)
-- Helm: Fix a bug in the logic that differentiates between 0 and an empty value. (https://github.com/cert-manager/cert-manager/pull/6729, https://github.com/jetstack-bot)
+- BUGFIX: cert-manager CA and SelfSigned issuers incorrectly copied the critical flag from the CSR instead of re-calculating that field themselves. ([#6727](https://github.com/cert-manager/cert-manager/pull/6727), [@jetstack-bot](https://github.com/jetstack-bot))
+- Helm: Fix a bug in the logic that differentiates between 0 and an empty value. ([#6729](https://github.com/cert-manager/cert-manager/pull/6729), [@jetstack-bot](https://github.com/jetstack-bot))
 
 #### Other (Cleanup or Flake)
 
-- Bump Go to 1.21.7 (https://github.com/cert-manager/cert-manager/pull/6735, https://github.com/jetstack-bot)
+- Bump Go to 1.21.7 ([#6735](https://github.com/cert-manager/cert-manager/pull/6735), [@jetstack-bot](https://github.com/jetstack-bot))
 
 ## `v1.14.1`
 
