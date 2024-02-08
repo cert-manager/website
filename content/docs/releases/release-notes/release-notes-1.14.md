@@ -14,11 +14,24 @@ support for creating [CA certificates with "Name Constraints" and "Authority Inf
 >
 > Read [The cert-manager Command Line Tool (cmctl) page](../../reference/cmctl.md) to learn more.
 
+## `v1.14.2`
+
+> 📢 When upgrading to cert-manager release 1.14, please skip `v1.14.0` and `v1.14.1` and install this patch version instead.
+
+### Changes since `v1.14.1`
+
+#### Bug or Regression
+
+- BUGFIX: cert-manager CA and SelfSigned issuers incorrectly copied the critical flag from the CSR instead of re-calculating that field themselves. (https://github.com/cert-manager/cert-manager/pull/6727, https://github.com/jetstack-bot)
+- Helm: Fix a bug in the logic that differentiates between 0 and an empty value. (https://github.com/cert-manager/cert-manager/pull/6729, https://github.com/jetstack-bot)
+
+#### Other (Cleanup or Flake)
+
+- Bump Go to 1.21.7 (https://github.com/cert-manager/cert-manager/pull/6735, https://github.com/jetstack-bot)
+
 ## `v1.14.1`
 
 cert-manager `v1.14.1` fixes bugs found *during* the release of `v1.14.0`.
-
-> 📢 When upgrading to cert-manager release 1.14, please skip `v1.14.0` and install this patch version instead.
 
 ### Changes since `v1.14.0`
 
@@ -30,7 +43,7 @@ cert-manager `v1.14.1` fixes bugs found *during* the release of `v1.14.0`.
 
 ## `v1.14.0`
 
-> ⚠️ This version has known issues. Please install `v1.14.1` instead.
+> ⚠️ This version has known issues. Please install `v1.14.2` instead.
 >
 > During the release of `v1.14.0`, the Helm chart was found to use the wrong OCI image for the `cainjector` Deployment,
 > which caused the Helm installation and the static manifest based installation to fail.
