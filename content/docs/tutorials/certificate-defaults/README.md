@@ -564,7 +564,7 @@ Instructions for a manual fix can be found [in this comment on PR #6311](https:/
 
 ## Presets Feature Request
 
-For further background reading around setting "defaults" or "presets", you can refer to [issue 2239](ttps://github.com/cert-manager/cert-manager/issues/2239).
+For further background reading around setting "defaults" or "presets", you can refer to [issue 2239](https://github.com/cert-manager/cert-manager/issues/2239).
 This tutorial came out of an investigation of that issue.
 
 The cert-manager team reasoned that the requested solution could be achieved with the use of other, more generic open-source policy tools.
