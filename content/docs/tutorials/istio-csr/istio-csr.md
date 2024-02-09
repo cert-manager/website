@@ -110,14 +110,15 @@ We use the `istioctl` CLI to install Istio, configured using a custom IstioOpera
 The custom manifest does the following:
 
 - Disables the CA server in istiod,
-- Ensures that Istio workloads request certificates from istio-csr,
-- Ensures that the istiod certificates and keys are mounted from the Certificate created when installing istio-csr.
+- Ensures that Istio workloads request certificates from istio-csr
 
 First we download our demo manifest and then we apply it.
 
 ```console
 curl -sSL https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/istio-csr/example/istio-config-getting-started.yaml > istio-install-config.yaml
 ```
+
+> Note: for versions before Istio 1.16 you need to mount a few extra volumes by using an alternate Istio installation manifest as [shown here](https://github.com/cert-manager/website/blob/98579eb092b2f2c41049b7347c1e34bcf3c6396a/content/docs/tutorials/istio-csr/istio-csr.md#installing-istio-csr)
 
 You may wish to inspect and tweak `istio-install-config.yaml` if you know what you're doing,
 but this manifest should work for example purposes as-is.
