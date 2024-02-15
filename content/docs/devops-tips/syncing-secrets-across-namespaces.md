@@ -2,7 +2,7 @@
 title: Syncing Secrets Across Namespaces
 description: |
     Learn how to synchronize Kubernetes Secret resources across namespaces
-    using extensions such as: reflector, kubed and kubernetes-replicator.
+    using extensions such as: reflector and kubernetes-replicator.
 ---
 
 It may be required for multiple components across namespaces to consume the same
@@ -10,8 +10,6 @@ It may be required for multiple components across namespaces to consume the same
 do this is to use extensions such as:
   - [reflector](https://github.com/emberstack/kubernetes-reflector) with support
    for auto secret reflection
-  - [kubed](https://github.com/appscode/kubed) with its
-  [secret syncing feature](https://appscode.com/products/kubed/v0.11.0/guides/config-syncer/intra-cluster/)
   - [kubernetes-replicator](https://github.com/mittwald/kubernetes-replicator) secret replication
 
 ## Serving a wildcard to ingress resources in different namespaces (default SSL certificate)
@@ -67,38 +65,6 @@ spec:
       reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true" # Auto create reflection for matching namespaces
       reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "dev,staging,prod" # Control auto-reflection namespaces
 ```
-
-
-### Using `kubed`
- The example below shows syncing
-a certificate belonging to the `sandbox` Certificate from the `cert-manager`
-namespace, into the `sandbox` namespace.
-
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: sandbox
-  labels:
-    cert-manager-tls: sandbox # Define namespace label for kubed
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: sandbox
-  namespace: cert-manager
-spec:
-  secretName: sandbox-tls
-  commonName: sandbox
-  issuerRef:
-    name: sandbox-ca
-    kind: Issuer
-    group: cert-manager.io
-  secretTemplate:
-    annotations:
-      kubed.appscode.com/sync: "cert-manager-tls=sandbox" # Sync certificate to matching namespaces
-```
-
 
 ### Using `kubernetes-replicator`
 Replicator supports both push- and pull-based replication. Push-based
