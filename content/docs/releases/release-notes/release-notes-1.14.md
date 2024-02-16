@@ -23,9 +23,18 @@ support for creating [CA certificates with "Name Constraints" and "Authority Inf
 #### ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured
 
 On Thursday, Feb 8th, 2024, [Let's Encrypt stopped providing their cross-signed certificate chain by default](https://letsencrypt.org/2023/07/10/cross-sign-expiration), in requests made to their `/acme/certificate` API endpoint.
+Instead the short-chain is returned by default and the long-chain (cross-signed) certificate chain is now included among the ["alternate" chains](https://www.rfc-editor.org/rfc/rfc8555#section-7.4.2).
+The cert-manager ACME Issuer API has a `preferredChain` field since [`v1.0.0`](https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0), which is [documented](../../reference/api-docs.md#acme.cert-manager.io/v1.ACMEIssuer) as follows:
 
-**Some** users who set `Isser.spec.acme.preferredChain: ISRG Root X1` in order to get early access to the Let's Encrypt short-chain certificates, will now get long-chain (cross-signed) certificates when they renew.
-**Most** users will not be affected. Their new certificates will contain the short-chain (not cross-signed) which terminates at `ISRG Root X1`.
+> `PreferredChain` is the chain to use if the ACME server outputs multiple. `PreferredChain` is no guarantee that this one gets delivered by the ACME endpoint. For example, for Let’s Encrypt’s DST cross sign you would use: “DST Root CA X3” or “ISRG Root X1” for the newer Let’s Encrypt root CA. This value picks the first certificate bundle in the ACME alternative chains that has a certificate with this value as its issuer’s CN.
+
+The problem is that the `preferredChain` feature matches the issuer CN of **any** certificate in the chain.
+The result is that:
+**Some** users who set `Isser.spec.acme.preferredChain: ISRG Root X1` in order to get early access to the Let's Encrypt short-chain certificates, will get long-chain (cross-signed) certificates when they renew after February 8th, 2024.
+But **most** users will not be affected. Their new certificates will contain the short-chain (not cross-signed) which terminates at `ISRG Root X1`.
+
+The cert-manager maintainers are considering how to address this problem for the next release (1.15),
+without breaking users who have come to rely on the existing, documented behavior.
 
 > 🔖 Read [cert-manager PR 6755 (bugfix: wrong certificate chain is used if `preferredChain` is configured)](https://github.com/cert-manager/cert-manager/pull/6755) to learn about the bug and to see the proposed fix.
 >
@@ -33,17 +42,19 @@ On Thursday, Feb 8th, 2024, [Let's Encrypt stopped providing their cross-signed 
 
 ##### Workarounds
 
-* **You can remove the `spec.acme.preferredChainChain` field** from the Issuer or ClusterIssuer.
-  And then renew any certificates which use that issuer and which have been renewed since Feb 8th 2024.
-  The new certificate will have the shorter chain which terminates at the self-signed root certificate for `ISRG Root X1`.
+* **You can remove the `spec.acme.preferredChainChain: ISRG Root X1` field** from the `Issuer` or `ClusterIssuer`.
+  And then renew any certificates which use that issuer and which have been renewed since Feb 8th, 2024.
+  The new certificates will have a shorter chain which terminates at the self-signed root certificate for `ISRG Root X1`.
 
 * **You can do nothing**.
   The affected certificates will have a longer chain which terminates at `DST Root CA X3` and
-  contains the cross-signed intermediate certificate for `ISRG Root X1`, which expires on September 30 2024.
-  But that's OK because both those certificates are currently trusted by clients
-  and your 90 day leaf certificate is certain to be be renewed before that date,
-  and certain to be renewed **after** June 6 2024, on which day Let's Encrypt will
+  which contains the cross-signed intermediate certificate for `ISRG Root X1`, which expires on September 30th, 2024.
+  But that's OK as long as `DST Root CA X3` is trusted by your clients.
+  And your 90 day leaf certificate is certain to be be renewed before that date,
+  and certain to be renewed **after** June 6th, 2024, on which day Let's Encrypt will
   stop providing the longer cross-signed chain entirely.
+
+  > ⚠️ There may be [clients that are incompatible with `DST Root CA X3`](https://github.com/mono/mono/issues/21233).
 
 ### Changes since `v1.14.1`
 
