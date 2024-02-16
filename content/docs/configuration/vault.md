@@ -49,10 +49,11 @@ spec:
 
 ### Accessing a Vault Server with mTLS enforced
 
-In certain use cases, the Vault Server could be configured to enforce clients to present a
-client certificates, those client certificates are just a transport layer enforcement, 
+In certain use cases, the [Vault Server could be configured to enforce clients to present a
+client certificates](https://developer.hashicorp.com/vault/docs/configuration/listener/tcp#tls_require_and_verify_client_cert), those client certificates are just a transport layer enforcement, 
 it does not provide any authentication and authorization mechanism to the Vault APIs itself. 
-You can read more about the Vault server TCP listener [in the official documentation](https://developer.hashicorp.com/vault/docs/configuration/listener/tcp)
+
+> 📖 Read about [configuring the Vault server TCP listener](https://developer.hashicorp.com/vault/docs/configuration/listener/tcp).
 
 Please follow the steps below to configure Vault with mTLS enforced:
 - Generate the bundle CA and the server TLS certificate:
@@ -61,10 +62,10 @@ step certificate create "Example Server Root CA" server_ca.crt server_ca.key \
   --profile root-ca \
   --not-after=87600h \
   --no-password \
-   --insecure
+  --insecure
    
 
-step certificate create vault.vault vault.crt vault.key \
+step certificate create vault.vault server.crt server.key \
   --profile leaf \
   --not-after=8760h \
   --ca ./server_ca.crt \
@@ -78,9 +79,9 @@ step certificate create "Example Client Root CA" client_ca.crt client_ca.key \
   --profile root-ca \
   --not-after=87600h \
   --no-password \
-   --insecure 
+  --insecure 
 
-step certificate create client.vault vault_client.crt vault_client.key \
+step certificate create client.vault client.crt client.key \
   --profile leaf \
   --not-after=8760h \
   --ca ./client_ca.crt \
@@ -97,13 +98,15 @@ kubectl create ns vault
 ```shell
 kubectl create secret generic vault-tls \
   --namespace vault \
-  --from-file=server.key=vault.key \
-  --from-file=server.crt=vault.crt \
-  --from-file=client-ca.crt=client_ca.crt \
-  --from-file=client.crt=vault_client.crt \
-  --from-file=client.key=vault_client.key
+  --from-file=server.key \
+  --from-file=server.crt \
+  --from-file=client_ca.crt \
+  --from-file=client.crt \
+  --from-file=client.key
 ```
   - Deploy Vault using the following values file:
+  
+  > ⚠️ These settings are designed for quick local testing only. They are insecure and not suitable for production use. 
 ```yaml
 # vault-values.yaml
 global:
@@ -120,7 +123,7 @@ server:
         address = "[::]:8200"
         cluster_address = "[::]:8201"
         tls_disable = false
-        tls_client_ca_file = "/vault/tls/client-ca.crt"
+        tls_client_ca_file = "/vault/tls/client_ca.crt"
         tls_cert_file = "/vault/tls/server.crt"
         tls_key_file = "/vault/tls/server.key"
         tls_require_and_verify_client_cert = true
@@ -208,13 +211,11 @@ kubectl apply -f rbac.yaml
 ```shell
 kubectl create secret generic vault-client-tls \
   --namespace application-1 \
-  --from-file=client.crt=vault_client.crt \
-  --from-file=client.key=vault_client.key
+  --from-file=client.crt \
+  --from-file=client.key \
+  --from-file=server_ca.crt
 ```
 - Create Issuer
-```shell
-export CA_BUNDLE=$(base64 -w 0 server_ca.crt)
-```
 ```yaml
 # vault-issuer.yaml 
 apiVersion: cert-manager.io/v1
@@ -226,13 +227,15 @@ spec:
   vault:
     path: pki_int/sign/application-1
     server: https://vault.vault:8200
-    caBundle: ${CA_BUNDLE}
+    caBundleSecretRef:
+      key: server_ca.crt
+      name: vault-client-tls  
     clientCertSecretRef:
       name: vault-client-tls
-      key: vault_client.crt
+      key: client.crt
     clientKeySecretRef:
       name: vault-client-tls
-      key: vault_client.key
+      key: client.key
     auth:
       kubernetes:
         role: vault-issuer
@@ -241,7 +244,7 @@ spec:
           name: vault-issuer
 ```
 ```shell
-envsubst < vault-issuer.yaml | kubectl -f -
+kubectl apply -f vault-issuer.yaml
 ```
 - Check Issuer status
 ```shell
