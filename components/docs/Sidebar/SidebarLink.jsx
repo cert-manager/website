@@ -11,7 +11,7 @@ export default function SidebarLink({
   setParentOpen
 }) {
   const router = useRouter()
-  const active = router.asPath === href + '/'
+  const active = router.asPath.split('?')[0].split('#')[0] === href + '/'
   const linkClasses = classNames({
     'flex text-dark-2 hover:text-blue-2 text-base py-2 transition ease-in-out duration-150 no-underline': true,
     'font-medium opacity-60 w-full': active
