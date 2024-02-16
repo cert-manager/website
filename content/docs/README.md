@@ -1,14 +1,14 @@
 ---
 title: cert-manager
 description: |
-    cert-manager creates signed TLS / SSL certificates for workloads in your Kubernetes or OpenShift cluster
+    cert-manager creates TLS certificates for workloads in your Kubernetes or OpenShift cluster
     and renews the certificates before they expire.
 ---
 
-cert-manager creates signed TLS / SSL certificates for workloads in your Kubernetes or OpenShift cluster
+cert-manager creates TLS certificates for workloads in your Kubernetes or OpenShift cluster
 and renews the certificates before they expire.
-The private key and signed certificate are stored in Kubernetes secrets and used by applications or ingress controllers. The csi-driver addon instead lets applications mount these certificates in its container directly, ideal for short-lived certificates.
-and used by applications or ingress controllers.
+The private key and certificate are stored in Kubernetes secrets and used by applications or ingress controllers.
+The csi-driver addon instead lets applications mount these certificates in its container directly, ideal for short-lived certificates.
 
 cert-manager can obtain certificates from a variety of certificate authorities, including:
 [Let's Encrypt](configuration/acme/README.md), [HashiCorp Vault](configuration/vault.md),
