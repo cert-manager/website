@@ -27,7 +27,7 @@ On Thursday, Feb 8th, 2024, [Let's Encrypt stopped providing their cross-signed 
 **Some** users who set `Isser.spec.acme.preferredChain: ISRG Root X1` in order to get early access to the Let's Encrypt short-chain certificates, will now get long-chain (cross-signed) certificates when they renew.
 **Most** users will not be affected. Their new certificates will contain the short-chain (not cross-signed) which terminates at `ISRG Root X1`.
 
-> 🔖 Read [cert-manager PR 6755 (bugfix: wrong certificate chain is used if preferredChain is configured)](https://github.com/cert-manager/cert-manager/pull/6755) to learn about the bug and to see the proposed fix.
+> 🔖 Read [cert-manager PR 6755 (bugfix: wrong certificate chain is used if `preferredChain` is configured)](https://github.com/cert-manager/cert-manager/pull/6755) to learn about the bug and to see the proposed fix.
 >
 > 🔖 Read [Let’s Encrypt: chain of trust](https://letsencrypt.org/certificates/) to learn about the hierarchy of root and intermediate certificates.
 
