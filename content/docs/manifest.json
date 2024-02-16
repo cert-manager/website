@@ -784,6 +784,10 @@
                 {
                   "title": "webhook",
                   "path": "/docs/cli/webhook.md"
+                },
+                {
+                  "title": "startupapicheck",
+                  "path": "/docs/cli/startupapicheck.md"
                 }
               ]
             },
