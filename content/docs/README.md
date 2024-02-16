@@ -1,8 +1,7 @@
 ---
 title: cert-manager
 description: |
-    cert-manager creates TLS certificates for workloads in your Kubernetes or OpenShift cluster
-    and renews the certificates before they expire.
+    cert-manager creates TLS certificates for workloads in your Kubernetes or OpenShift cluster and renews the certificates before they expire.
 ---
 
 cert-manager creates TLS certificates for workloads in your Kubernetes or OpenShift cluster
@@ -16,7 +15,7 @@ With cert-manager's [Certificate resource](usage/certificate.md), the private ke
 which is mounted by an application Pod or used by an Ingress controller.
 With [csi-driver](usage/csi-driver.md), [csi-driver-spiffe](usage/csi-driver-spiffe.md), or [istio-csr](usage/istio-csr.md) ,
 the private key is generated on-demand, before the application starts up;
-the private key never leaves the node and it is not stored a Kubernetes Secret.
+the private key never leaves the node and it is not stored in a Kubernetes Secret.
 
 ![High level overview diagram explaining cert-manager architecture](/images/high-level-overview.svg)
 
