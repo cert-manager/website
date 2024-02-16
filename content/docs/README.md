@@ -7,13 +7,15 @@ description: |
 
 cert-manager creates TLS certificates for workloads in your Kubernetes or OpenShift cluster
 and renews the certificates before they expire.
-The private key and certificate are stored in Kubernetes secrets and used by applications or ingress controllers.
-The csi-driver addon instead lets applications mount these certificates in its container directly, ideal for short-lived certificates.
+The private key and certificate are stored in Kubernetes Secrets and used by applications or ingress controllers.
+
+With the [csi-driver](projects/csi-driver.md), [csi-driver-spiffe](projects/csi-driver-spiffe.md), or [istio-csr](projects/istio-csr.md) addons,
+the private key is generated on-demand, before the application starts up;
+the private key never leaves the node and it is not stored a Kubernetes Secret.
 
 cert-manager can obtain certificates from a variety of certificate authorities, including:
 [Let's Encrypt](configuration/acme/README.md), [HashiCorp Vault](configuration/vault.md),
 [Venafi](configuration/venafi.md) and [private PKI](configuration/ca.md).
-
 
 ![High level overview diagram explaining cert-manager architecture](/images/high-level-overview.svg)
 
