@@ -1,23 +1,21 @@
 ---
 title: cert-manager
-description: cert-manager documentation homepage
+description: |
+    cert-manager creates TLS certificates for workloads in your Kubernetes or OpenShift cluster and renews the certificates before they expire.
 ---
 
-cert-manager adds certificates and certificate issuers as resource types in
-Kubernetes clusters, and simplifies the process of obtaining, renewing and
-using those certificates.
+cert-manager creates TLS certificates for workloads in your Kubernetes or OpenShift cluster
+and renews the certificates before they expire.
 
-It can issue certificates from a variety of supported sources, including
-[Let's Encrypt](https://letsencrypt.org), [HashiCorp Vault](https://www.vaultproject.io),
-and [Venafi](https://www.venafi.com/) as well as private PKI.
+cert-manager can obtain certificates from a [variety of certificate authorities](configuration/issuers.md), including:
+[Let's Encrypt](configuration/acme/README.md), [HashiCorp Vault](configuration/vault.md),
+[Venafi](configuration/venafi.md) and [private PKI](configuration/ca.md).
 
-It will ensure certificates are valid and up to date, and attempt to
-renew certificates at a configured time before expiry.
-
-It is loosely based upon the work of
-[kube-lego](https://github.com/jetstack/kube-lego) and has borrowed some
-wisdom from other similar projects such as
-[kube-cert-manager](https://github.com/PalmStoneGames/kube-cert-manager).
+With cert-manager's [Certificate resource](usage/certificate.md), the private key and certificate are stored in a Kubernetes Secret
+which is mounted by an application Pod or used by an Ingress controller.
+With [csi-driver](usage/csi-driver.md), [csi-driver-spiffe](usage/csi-driver-spiffe.md), or [istio-csr](usage/istio-csr.md) ,
+the private key is generated on-demand, before the application starts up;
+the private key never leaves the node and it is not stored in a Kubernetes Secret.
 
 ![High level overview diagram explaining cert-manager architecture](/images/high-level-overview.svg)
 
