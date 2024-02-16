@@ -18,6 +18,33 @@ support for creating [CA certificates with "Name Constraints" and "Authority Inf
 
 > 📢 When upgrading to cert-manager release 1.14, please skip `v1.14.0` and `v1.14.1` and install this patch version instead.
 
+### Known Issues
+
+#### ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured
+
+On Thursday, Feb 8th, 2024, [Let's Encrypt stopped providing their cross-signed certificate chain by default](https://letsencrypt.org/2023/07/10/cross-sign-expiration), in requests made to their `/acme/certificate` API endpoint.
+
+**Some** users who set `Isser.spec.acme.preferredChain: ISRG Root X1` in order to get early access to the Let's Encrypt short-chain certificates, will now get long-chain (cross-signed) certificates when they renew.
+**Most** users will not be affected. Their new certificates will contain the short-chain (not cross-signed) which terminates at `ISRG Root X1`.
+
+> 🔖 Read [cert-manager PR 6755 (bugfix: wrong certificate chain is used if preferredChain is configured)](https://github.com/cert-manager/cert-manager/pull/6755) to learn about the bug and to see the proposed fix.
+>
+> 🔖 Read [Let’s Encrypt: chain of trust](https://letsencrypt.org/certificates/) to learn about the hierarchy of root and intermediate certificates.
+
+##### Workarounds
+
+* **You can remove the `spec.acme.preferredChainChain` field** from the Issuer or ClusterIssuer.
+  And then renew any certificates which use that issuer and which have been renewed since Feb 8th 2024.
+  The new certificate will have the shorter chain which terminates at the self-signed root certificate for `ISRG Root X1`.
+
+* **You can do nothing**.
+  The affected certificates will have a longer chain which terminates at `DST Root CA X3` and
+  contains the cross-signed intermediate certificate for `ISRG Root X1`, which expires on September 30 2024.
+  But that's OK because both those certificates are currently trusted by clients
+  and your 90 day leaf certificate is certain to be be renewed before that date,
+  and certain to be renewed **after** June 6 2024, on which day Let's Encrypt will
+  stop providing the longer cross-signed chain entirely.
+
 ### Changes since `v1.14.1`
 
 #### Bug or Regression
