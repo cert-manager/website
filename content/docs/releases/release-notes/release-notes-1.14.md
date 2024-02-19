@@ -20,7 +20,7 @@ support for creating [CA certificates with "Name Constraints" and "Authority Inf
 
 ### Known Issues
 
-#### ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured
+#### ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured - [#6755](https://github.com/cert-manager/cert-manager/pull/6755), [#6757](https://github.com/cert-manager/cert-manager/issues/6757)
 
 On Thursday, Feb 8th, 2024, [Let's Encrypt stopped providing their cross-signed certificate chain by default](https://letsencrypt.org/2023/07/10/cross-sign-expiration), in requests made to their `/acme/certificate` API endpoint.
 Instead the short-chain is returned by default and the long-chain (cross-signed) certificate chain is now included among the ["alternate" chains](https://www.rfc-editor.org/rfc/rfc8555#section-7.4.2).
