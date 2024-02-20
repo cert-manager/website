@@ -452,7 +452,16 @@
               "routes": [
                 {
                   "title": "istio-csr",
-                  "path": "/docs/usage/istio-csr.md"
+                  "routes": [
+                    {
+                      "title": "Installation",
+                      "path": "/docs/usage/istio-csr/installation.md"
+                    },
+                    {
+                      "title": "Usage",
+                      "path": "/docs/usage/istio-csr/README.md"
+                    }
+                  ]
                 }
               ]
             },
@@ -465,11 +474,29 @@
                 },
                 {
                   "title": "csi-driver",
-                  "path": "/docs/usage/csi-driver.md"
+                  "routes": [
+                    {
+                      "title": "Installation",
+                      "path": "/docs/usage/csi-driver/installation.md"
+                    },
+                    {
+                      "title": "Usage",
+                      "path": "/docs/usage/csi-driver/README.md"
+                    }
+                  ]
                 },
                 {
                   "title": "csi-driver-spiffe",
-                  "path": "/docs/usage/csi-driver-spiffe.md"
+                  "routes": [
+                    {
+                      "title": "Installation",
+                      "path": "/docs/usage/csi-driver-spiffe/installation.md"
+                    },
+                    {
+                      "title": "Usage",
+                      "path": "/docs/usage/csi-driver-spiffe/README.md"
+                    }
+                  ]
                 }
               ]
             }
@@ -486,7 +513,11 @@
               "title": "trust-manager",
               "routes": [
                 {
-                  "title": "Introduction",
+                  "title": "Installation",
+                  "path": "/docs/trust/trust-manager/installation.md"
+                },
+                {
+                  "title": "Usage",
                   "path": "/docs/trust/trust-manager/README.md"
                 },
                 {
@@ -519,7 +550,11 @@
                   "title": "approver-policy",
                   "routes": [
                     {
-                      "title": "Introduction",
+                      "title": "Installation",
+                      "path": "/docs/policy/approval/approver-policy/installation.md"
+                    },
+                    {
+                      "title": "Usage",
                       "path": "/docs/policy/approval/approver-policy/README.md"
                     },
                     {

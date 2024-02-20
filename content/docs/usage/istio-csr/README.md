@@ -20,9 +20,14 @@ Certificates facilitating mTLS — both inter
 and intra-cluster — will be signed, delivered and renewed using [cert-manager
 issuers](https://cert-manager.io/docs/concepts/issuer).
 
+## Installation
+
+See the [installation guide](./installation.md) for instructions on how to
+install istio-csr.
+
 ## Getting Started Guide For istio-csr
 
-We have [a guide](../tutorials/istio-csr/istio-csr.md) for setting up istio-csr in a fresh
+We have [a guide](../../tutorials/istio-csr/istio-csr.md) for setting up istio-csr in a fresh
 [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation) cluster.
 
 Following the guide is the best way to see istio-csr in action.
@@ -32,7 +37,7 @@ Istio and just want quick installation instructions, read on for more details.
 
 ## Lower-Level Details (For Experienced Istio Users)
 
-⚠️  The [getting started](../tutorials/istio-csr/istio-csr.md) guide is a better place if you just want to try istio-csr out!
+⚠️  The [getting started](../../tutorials/istio-csr/istio-csr.md) guide is a better place if you just want to try istio-csr out!
 
 Running istio-csr requires a few steps and preconditions in order:
 
@@ -65,7 +70,7 @@ the access controls for an Issuer; they're namespaced and so naturally a little 
 That said, if you view your entire Kubernetes cluster as being a trust domain itself, then a ClusterIssuer is the more natural
 fit. The best choice will depend on your specific situation.
 
-Our [getting started guide](../tutorials/istio-csr/istio-csr.md) uses an `Issuer`.
+Our [getting started guide](../../tutorials/istio-csr/istio-csr.md) uses an `Issuer`.
 
 ### Which Issuer Type?
 

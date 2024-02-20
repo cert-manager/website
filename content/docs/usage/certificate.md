@@ -3,7 +3,7 @@ title: Certificate resource
 description: 'cert-manager usage: Certificates'
 ---
 
-> **apiVersion:** cert-manager.io/v1
+> **apiVersion:** cert-manager.io/v1<br/>
 > **kind:** Certificate
 
 <div style={{textAlign: "center"}}>

@@ -1,13 +1,15 @@
 ---
-title: Securing the istio Service Mesh using cert-manager
-description: 'cert-manager tutorials: Securing the istio Service Mesh using cert-manager'
+title: Installing istio-csr
+description: 'cert-manager usage: Istio and istio-csr'
 ---
+
+## Installation steps
 
 This guide will run through installing and using istio-csr from scratch. We'll use [kind](https://kind.sigs.k8s.io/) to create a new cluster locally in Docker, but this guide should work on any cluster as long as the relevant Istio [Platform Setup](https://istio.io/latest/docs/setup/platform-setup/) has been performed.
 
 Note that if you're following the Platform Setup guide for OpenShift, do not run the `istioctl install` command listed in that guide; we'll run our own command later.
 
-## Initial Setup
+### 1. Initial Setup
 
 You'll need the following tools installed on your machine:
 
@@ -19,7 +21,7 @@ You'll need the following tools installed on your machine:
 
 In addition, Istio must not already be installed in your cluster. Installing istio-csr _after_ Istio is not supported.
 
-## Creating the Cluster and Installing cert-manager
+### 2. Creating the Cluster and Installing cert-manager
 
 Kind will automatically set up kubectl to point to the newly created cluster.
 
@@ -45,7 +47,7 @@ helm install cert-manager jetstack/cert-manager \
 kubectl create namespace istio-system
 ```
 
-## Create a cert-manager Issuer and Issuing Certificate
+### 3. Create a cert-manager Issuer and Issuing Certificate
 
 An Issuer tells cert-manager how to issue certificates; we'll create a self-signed root CA in our cluster because it's really simple to configure.
 
@@ -57,7 +59,7 @@ There are also some comments on the [example-issuer](https://github.com/cert-man
 kubectl apply -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/istio-csr/example/example-issuer.yaml
 ```
 
-## Export the Root CA to a Local File
+### 4. Export the Root CA to a Local File
 
 While it's possible to configure Istio such that it can automatically "discover" the root CA, this can be dangerous in
 some specific scenarios involving other security holes, enabling [signer hijacking attacks](https://github.com/cert-manager/istio-csr/issues/103#issuecomment-923882792).
@@ -75,7 +77,7 @@ openssl x509 -in ca.pem -noout -text
 kubectl create secret generic -n cert-manager istio-root-ca --from-file=ca.pem=ca.pem
 ```
 
-## Installing istio-csr
+### 5. Installing istio-csr
 
 istio-csr is best installed via Helm, and it should be simple and quick to install. There
 are a bunch of other configuration options for the helm chart, which you can check out [here](../../usage/istio-csr/README.md).
@@ -101,7 +103,7 @@ cert-manager-istio-csr-bbbbbbbbbb-00000    1/1     Running   0          63s
 cert-manager-webhook-aaaaaaaaa-33333       1/1     Running   0          9m46s
 ```
 
-## Installing Istio
+### 6. Installing Istio
 
 If you're not running on kind, you may need to do some additional [setup tasks](https://istio.io/latest/docs/setup/platform-setup/) before installing Istio.
 
@@ -110,15 +112,14 @@ We use the `istioctl` CLI to install Istio, configured using a custom IstioOpera
 The custom manifest does the following:
 
 - Disables the CA server in istiod,
-- Ensures that Istio workloads request certificates from istio-csr
+- Ensures that Istio workloads request certificates from istio-csr,
+- Ensures that the istiod certificates and keys are mounted from the Certificate created when installing istio-csr.
 
 First we download our demo manifest and then we apply it.
 
 ```console
 curl -sSL https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/istio-csr/example/istio-config-getting-started.yaml > istio-install-config.yaml
 ```
-
-> Note: for versions before Istio 1.16 you need to mount a few extra volumes by using an alternate Istio installation manifest as [shown here](https://github.com/cert-manager/website/blob/98579eb092b2f2c41049b7347c1e34bcf3c6396a/content/docs/tutorials/istio-csr/istio-csr.md#installing-istio-csr)
 
 You may wish to inspect and tweak `istio-install-config.yaml` if you know what you're doing,
 but this manifest should work for example purposes as-is.
@@ -275,3 +276,8 @@ Assuming your running inside kind, you can simply remove the cluster:
 
 ```shell
 kind delete cluster
+```
+
+## Usage
+
+> 📖 Read the [istio-csr docs](./README.md).
