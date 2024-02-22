@@ -611,10 +611,6 @@
               "path": "/docs/tutorials/venafi/venafi.md"
             },
             {
-              "title": "Securing the istio Service Mesh using cert-manager",
-              "path": "/docs/tutorials/istio-csr/istio-csr.md"
-            },
-            {
               "title": "Securing Ingresses with ZeroSSL",
               "path": "/docs/tutorials/zerossl/zerossl.md"
             },

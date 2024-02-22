@@ -225,3 +225,6 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Moved the external issuer section to the main issuers page
 /docs/configuration/external/ /docs/configuration/issuers/ 301!
+
+# Moved the istio-csr tutorial to its own installation page
+/docs/tutorials/istio-csr/istio-csr/ /docs/usage/istio-csr/installation/ 301!

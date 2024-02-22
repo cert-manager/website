@@ -53,10 +53,10 @@ An Issuer tells cert-manager how to issue certificates; we'll create a self-sign
 
 The approach of using a locally generated root certificate would work in a production deployment too, but there are also several [other issuers](https://cert-manager.io/docs/configuration/) in cert-manager which could be used. Note that the ACME issuer **will not work**, since it can't add the required fields to issued certificates.
 
-There are also some comments on the [example-issuer](https://github.com/cert-manager/website/blob/master/content/docs/tutorials/istio-csr/example/example-issuer.yaml) providing a little more detail. Note also that this guide only uses `Issuer`s and not `ClusterIssuer`s - using a `ClusterIssuer` isn't a drop-in replacement, and in any case we recommend that production deployments use Issuers for easier access controls and scoping.
+There are also some comments on the [example-issuer](https://github.com/cert-manager/website/blob/7f5b2be9dd67831574b9bde2407bed4a920b691c/content/docs/tutorials/istio-csr/example/example-issuer.yaml) providing a little more detail. Note also that this guide only uses `Issuer`s and not `ClusterIssuer`s - using a `ClusterIssuer` isn't a drop-in replacement, and in any case we recommend that production deployments use Issuers for easier access controls and scoping.
 
 ```console
-kubectl apply -f https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/istio-csr/example/example-issuer.yaml
+kubectl apply -f https://raw.githubusercontent.com/cert-manager/website/7f5b2be9dd67831574b9bde2407bed4a920b691c/content/docs/tutorials/istio-csr/example/example-issuer.yaml
 ```
 
 ### 4. Export the Root CA to a Local File
@@ -118,7 +118,7 @@ The custom manifest does the following:
 First we download our demo manifest and then we apply it.
 
 ```console
-curl -sSL https://raw.githubusercontent.com/cert-manager/website/master/content/docs/tutorials/istio-csr/example/istio-config-getting-started.yaml > istio-install-config.yaml
+curl -sSL https://raw.githubusercontent.com/cert-manager/website/7f5b2be9dd67831574b9bde2407bed4a920b691c/content/docs/tutorials/istio-csr/example/istio-config-getting-started.yaml > istio-install-config.yaml
 ```
 
 You may wish to inspect and tweak `istio-install-config.yaml` if you know what you're doing,
