@@ -25,6 +25,6 @@ There are several use cases and methods for requesting certificates through cert
   pods.
 - [Securing Istio Gateway](https://istio.io/docs/tasks/traffic-management/ingress/ingress-certmgr/):
   Secure your Istio Gateway in Kubernetes using cert-manager.
-- [Securing Istio Service Mesh](./istio-csr.md): Using the cert-manager
+- [Securing Istio Service Mesh](./istio-csr/README.md): Using the cert-manager
   [Istio](https://istio.io) integration, secure the mTLS PKI for each pod
   through cert-manager managed certificates.

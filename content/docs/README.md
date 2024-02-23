@@ -13,7 +13,7 @@ cert-manager can obtain certificates from a [variety of certificate authorities]
 
 With cert-manager's [Certificate resource](usage/certificate.md), the private key and certificate are stored in a Kubernetes Secret
 which is mounted by an application Pod or used by an Ingress controller.
-With [csi-driver](usage/csi-driver.md), [csi-driver-spiffe](usage/csi-driver-spiffe.md), or [istio-csr](usage/istio-csr.md) ,
+With [csi-driver](usage/csi-driver/README.md), [csi-driver-spiffe](usage/csi-driver-spiffe/README.md), or [istio-csr](usage/istio-csr/README.md) ,
 the private key is generated on-demand, before the application starts up;
 the private key never leaves the node and it is not stored in a Kubernetes Secret.
 

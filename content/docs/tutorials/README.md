@@ -22,8 +22,6 @@ for you to learn from. Take a look!
 - [Securing an EKS Cluster with Venafi](./venafi/venafi.md): Tutorial for
   creating an EKS cluster and securing an NGINX deployment with a Venafi issued
   certificate.
-- [Securing an Istio service mesh with cert-manager](./istio-csr/istio-csr.md): Tutorial for
-  securing an Istio service mesh using a cert-manager issuer.
 - [Obtaining SSL certificates with the ZeroSSL](./zerossl/zerossl.md): Tutorial describing usage of the ZeroSSL as external ACME server.
 - [Managing public trust in Kubernetes with trust-manager](./getting-started-with-trust-manager/README.md): Learn how to deploy and configure trust-manager to automatically distribute your approved Public CA configuration to your Kubernetes cluster.
 - [Learn how to set Certificate defaults automatically](./certificate-defaults/README.md): Learn how to use Kyverno `ClusterPolicy` to set default values for cert-manager `Certificates`.
