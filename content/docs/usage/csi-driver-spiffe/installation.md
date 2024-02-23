@@ -1,6 +1,6 @@
 ---
 title: Installing cert-manager csi-driver-spiffe
-description: 'Container Storage Interface (CSI) driver plugin for Kubernetes, providing SPIFFE SVIDs using cert-manager'
+description: 'Installation guide for cert-manager csi-driver-spiffe'
 ---
 
 ## Installation Steps

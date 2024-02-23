@@ -1,6 +1,6 @@
 ---
 title: Installing cert-manager csi-driver
-description: 'Mounting cert-manager certificates without secrets'
+description: 'Installation guide for cert-manager csi-driver'
 ---
 
 ## Installation Steps
@@ -55,4 +55,4 @@ items:
 
 ## Usage
 
-> 📖 Read the [csi-driver-spiffe docs](./README.md).
+> 📖 Read the [csi-driver docs](./README.md).

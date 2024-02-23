@@ -1,6 +1,6 @@
 ---
 title: Installing istio-csr
-description: 'cert-manager usage: Istio and istio-csr'
+description: "Installation guide for cert-manager's Istio integration: istio-csr"
 ---
 
 ## Installation steps

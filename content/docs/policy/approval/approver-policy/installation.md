@@ -1,6 +1,6 @@
 ---
 title: Installing approver-policy
-description: 'Policy plugin for cert-manager'
+description: 'Installation guide for the approver-policy policy plugin for cert-manager'
 ---
 
 ## Installation Steps

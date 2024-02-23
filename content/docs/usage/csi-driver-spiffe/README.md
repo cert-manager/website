@@ -84,7 +84,7 @@ that has been configured.
 ## Installation
 
 See the [installation guide](./installation.md) for instructions on how to
-install the csi-driver-spiffe.
+install csi-driver-spiffe.
 
 ## Usage
 

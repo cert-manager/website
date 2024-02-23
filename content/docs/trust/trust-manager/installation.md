@@ -1,6 +1,6 @@
 ---
 title: Installing trust-manager
-description: 'Distributing Trust Bundles in Kubernetes'
+description: 'Installation guide for trust-manager'
 ---
 
 ## Installation Steps
@@ -61,4 +61,4 @@ cluster that can modify your trust sources.
 
 ## Usage
 
-> 📖 Read the [csi-driver-spiffe docs](./README.md).
+> 📖 Read the [trust-manager docs](./README.md).
