@@ -61,7 +61,7 @@ without breaking users who have come to rely on the existing, documented behavio
 #### Bug or Regression
 
 - BUGFIX: Fixes issue with JSON-logging, where only a subset of the log messages were output as JSON. ([#6781](https://github.com/cert-manager/cert-manager/pull/6781), [@jetstack-bot](https://github.com/jetstack-bot))
-- BUGFIX: LiteralSubjects with a #= value can result in memory issues due to faulty BER parser (github.com/go-asn1-ber/asn1-ber). ([#6774](https://github.com/cert-manager/cert-manager/pull/6774), [@jetstack-bot](https://github.com/jetstack-bot))
+- BUGFIX: `LiteralSubjects` with a #= value can result in memory issues due to faulty BER parser (`github.com/go-asn1-ber/asn1-ber`). ([#6774](https://github.com/cert-manager/cert-manager/pull/6774), [@jetstack-bot](https://github.com/jetstack-bot))
 
 ## `v1.14.2`
 
