@@ -3,6 +3,24 @@ title: Release 1.12
 description: 'cert-manager release notes: cert-manager 1.12'
 ---
 
+## v1.12.8
+
+### Known Issues
+- ACME Issuer (Let's Encrypt): wrong certificate chain may be used if preferredChain is configured: see [1.14 release notes](./release-notes-1.14.md#known-issues) for more information.
+
+### Changes
+
+#### Bug or Regression
+
+- BUGFIX: LiteralSubjects with a #= value can result in memory issues due to faulty BER parser (github.com/go-asn1-ber/asn1-ber). ([#6773](https://github.com/cert-manager/cert-manager/pull/6773), [@jetstack-bot](https://github.com/jetstack-bot))
+
+#### Other (Cleanup or Flake)
+
+- Bump go to 1.20.14 ([#6733](https://github.com/cert-manager/cert-manager/pull/6733), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Cert-manager is now built with Go 1.20.13 ([#6629](https://github.com/cert-manager/cert-manager/pull/6629), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix CVE 2023 48795 by upgrading to golang.org/x/crypto@v0.17.0 ([#6678](https://github.com/cert-manager/cert-manager/pull/6678), [@wallrj](https://github.com/wallrj))
+- Fix GHSA-7ww5-4wqc-m92c by upgrading to `github.com/containerd/containerd@v1.7.12` ([#6689](https://github.com/cert-manager/cert-manager/pull/6689), [@wallrj](https://github.com/wallrj))
+
 ## v1.12.7
 
 This patch release contains fixes for the following security vulnerabilities in the cert-manager-controller:
@@ -105,12 +123,12 @@ v1.12.6 fixes some CVE alerts and a Venafi issuer bug
 
 #### Bug or Regression
 
-- Bump `golang.org/x/net v0.15.0 => v0.17.0` as part of addressing `CVE-2023-44487` / `CVE-2023-39325` (#6431, @SgtCoDFish)
-- The Venafi issuer now properly resets the certificate and should no longer get stuck with `WebSDK CertRequest Module Requested Certificate` or `This certificate cannot be processed while it is in an error state. Fix any errors, and then click Retry.`. (#6401, @jetstack-bot)
+- Bump `golang.org/x/net v0.15.0 => v0.17.0` as part of addressing `CVE-2023-44487` / `CVE-2023-39325` ([#6431](https://github.com/cert-manager/cert-manager/pull/6431), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- The Venafi issuer now properly resets the certificate and should no longer get stuck with `WebSDK CertRequest Module Requested Certificate` or `This certificate cannot be processed while it is in an error state. Fix any errors, and then click Retry.`. ([#6401](https://github.com/cert-manager/cert-manager/pull/6401), [@jetstack-bot](https://github.com/jetstack-bot))
 
 #### Other (Cleanup or Flake)
 
-- Bump go to 1.20.10 to address `CVE-2023-39325`. Also bumps base images. (#6412, @SgtCoDFish)
+- Bump go to 1.20.10 to address `CVE-2023-39325`. Also bumps base images. ([#6412](https://github.com/cert-manager/cert-manager/pull/6412), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## v1.12.5
 
@@ -120,12 +138,12 @@ v1.12.5 contains a backport for a name collision bug that was found in v1.13.0
 
 #### Bug or Regression
 
-- BUGFIX: fix CertificateRequest name collision bug in StableCertificateRequestName feature. (#6359, @jetstack-bot)
+- BUGFIX: fix CertificateRequest name collision bug in StableCertificateRequestName feature. ([#6359](https://github.com/cert-manager/cert-manager/pull/6359), [@jetstack-bot](https://github.com/jetstack-bot))
 
 #### Other (Cleanup or Flake)
 
-- Updated base images to the latest version. (#6372, @inteon)
-- Upgrade Go from 1.20.7 to 1.20.8. (#6371, @jetstack-bot)
+- Updated base images to the latest version. ([#6372](https://github.com/cert-manager/cert-manager/pull/6372), [@inteon](https://github.com/inteon))
+- Upgrade Go from 1.20.7 to 1.20.8. ([#6371](https://github.com/cert-manager/cert-manager/pull/6371), [@jetstack-bot](https://github.com/jetstack-bot))
 
 ## v1.12.4
 
@@ -150,7 +168,7 @@ v1.12.3 contains a bug fix for the cainjector which addresses a memory leak!
 
 ### Changes
 
-- BUGFIX\[cainjector\]: 1-character bug was causing invalid log messages and a memory leak (#6235, @jetstack-bot)
+- BUGFIX\[cainjector\]: 1-character bug was causing invalid log messages and a memory leak ([#6235](https://github.com/cert-manager/cert-manager/pull/6235), [@jetstack-bot](https://github.com/jetstack-bot))
 
 ## v1.12.2
 
@@ -163,7 +181,7 @@ upgrading to the latest patch version available for 1.12.
 
 ### Changes
 
-- BUGFIX: `cmctl check api --wait 0` exited without output; we now make sure we perform the API check at least once (#6116, @jetstack-bot)
+- BUGFIX: `cmctl check api --wait 0` exited without output; we now make sure we perform the API check at least once ([#6116](https://github.com/cert-manager/cert-manager/pull/6116), [@jetstack-bot](https://github.com/jetstack-bot))
 
 ## v1.12.1
 
