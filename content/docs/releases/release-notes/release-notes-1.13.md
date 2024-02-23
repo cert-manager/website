@@ -3,7 +3,26 @@ title: Release 1.13
 description: 'cert-manager release notes: cert-manager 1.13'
 ---
 
-## v1.13.3
+## `v1.13.4`
+
+### Known Issues
+- ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured: see [1.14 release notes](./release-notes-1.14.md#known-issues) for more information.
+
+### Changes
+
+#### Bug or Regression
+
+- BUGFIX: `LiteralSubjects` with a #= value can result in memory issues due to faulty BER parser (`github.com/go-asn1-ber/asn1-ber`). ([#6772](https://github.com/cert-manager/cert-manager/pull/6772), [@jetstack-bot](https://github.com/jetstack-bot))
+
+#### Other (Cleanup or Flake)
+
+- Bump go to 1.20.14 ([#6736](https://github.com/cert-manager/cert-manager/pull/6736), [@jetstack-bot](https://github.com/jetstack-bot))
+- Cert-manager is now built with Go 1.20.12 ([#6544](https://github.com/cert-manager/cert-manager/pull/6544), [@wallrj](https://github.com/wallrj))
+- Cert-manager is now built with Go 1.20.13 ([#6630](https://github.com/cert-manager/cert-manager/pull/6630), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix CVE 2023 48795 by upgrading to golang.org/x/crypto@v0.17.0 ([#6675](https://github.com/cert-manager/cert-manager/pull/6675), [@wallrj](https://github.com/wallrj))
+- Fix `GHSA-7ww5-4wqc-m92c` by upgrading to `github.com/containerd/containerd@v1.7.12` ([#6684](https://github.com/cert-manager/cert-manager/pull/6684), [@wallrj](https://github.com/wallrj))
+
+## `v1.13.3`
 
 This patch release contains fixes for the following security vulnerabilities in the cert-manager-controller:
 - [`GO-2023-2334`](https://pkg.go.dev/vuln/GO-2023-2334): Decryption of malicious PBES2 JWE objects can consume unbounded system resources.
@@ -67,7 +86,7 @@ _Nothing has changed._
 #### Removed
 _Nothing has changed._
 
-## v1.13.2
+## `v1.13.2`
 
 v1.13.2 fixes some CVE alerts and contains fixes for:
 1. a CertificateRequest runaway situation in case two Certificate resources point to the same Secret target resource
@@ -78,16 +97,16 @@ v1.13.2 fixes some CVE alerts and contains fixes for:
 
 #### Bug or Regression
 
-- Bump `golang.org/x/net v0.15.0 => v0.17.0` as part of addressing `CVE-2023-44487` / `CVE-2023-39325` (#6432, @SgtCoDFish)
-- BUGFIX[helm]: Fix issue where webhook feature gates were only set if controller feature gates are set. (#6381, @jetstack-bot)
-- Fix runaway bug caused by multiple Certificate resources that point to the same Secret resource. (#6425, @jetstack-bot)
-- The Venafi issuer now properly resets the certificate and should no longer get stuck with `WebSDK CertRequest Module Requested Certificate` or `This certificate cannot be processed while it is in an error state. Fix any errors, and then click Retry.`. (#6402, @jetstack-bot)
+- Bump `golang.org/x/net v0.15.0 => v0.17.0` as part of addressing `CVE-2023-44487` / `CVE-2023-39325` ([#6432](https://github.com/cert-manager/cert-manager/pull/6432), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- BUGFIX[helm]: Fix issue where webhook feature gates were only set if controller feature gates are set. ([#6381](https://github.com/cert-manager/cert-manager/pull/6381), [@jetstack-bot](https://github.com/jetstack-bot))
+- Fix runaway bug caused by multiple Certificate resources that point to the same Secret resource. ([#6425](https://github.com/cert-manager/cert-manager/pull/6425), [@jetstack-bot](https://github.com/jetstack-bot))
+- The Venafi issuer now properly resets the certificate and should no longer get stuck with `WebSDK CertRequest Module Requested Certificate` or `This certificate cannot be processed while it is in an error state. Fix any errors, and then click Retry.`. ([#6402](https://github.com/cert-manager/cert-manager/pull/6402), [@jetstack-bot](https://github.com/jetstack-bot))
 
 #### Other (Cleanup or Flake)
 
-- Bump go to 1.20.10 to address `CVE-2023-39325`. Also bumps base images. (#6411, @SgtCoDFish)
+- Bump go to 1.20.10 to address `CVE-2023-39325`. Also bumps base images. ([#6411](https://github.com/cert-manager/cert-manager/pull/6411), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
-## v1.13.1
+## `v1.13.1`
 
 v1.13.1 contains a bugfix for a name collision bug in the StableCertificateRequestName feature that was enabled by default in v1.13.0.
 
@@ -95,14 +114,14 @@ v1.13.1 contains a bugfix for a name collision bug in the StableCertificateReque
 
 #### Bug or Regression
 
-- BUGFIX: fix CertificateRequest name collision bug in StableCertificateRequestName feature. (#6358, @jetstack-bot)
+- BUGFIX: fix CertificateRequest name collision bug in StableCertificateRequestName feature. ([#6358](https://github.com/cert-manager/cert-manager/pull/6358), [@jetstack-bot](https://github.com/jetstack-bot))
 
 #### Other (Cleanup or Flake)
 
-- Upgrade `github.com/emicklei/go-restful/v3` to `v3.11.0` because `v3.10.2` is labeled as "DO NOT USE". (#6368, @inteon)
-- Upgrade Go from 1.20.7 to 1.20.8. (#6370, @jetstack-bot)
+- Upgrade `github.com/emicklei/go-restful/v3` to `v3.11.0` because `v3.10.2` is labeled as "DO NOT USE". ([#6368](https://github.com/cert-manager/cert-manager/pull/6368), [@inteon](https://github.com/inteon))
+- Upgrade Go from 1.20.7 to 1.20.8. ([#6370](https://github.com/cert-manager/cert-manager/pull/6370), [@jetstack-bot](https://github.com/jetstack-bot))
 
-## v1.13.0
+## `v1.13.0`
 
 cert-manager 1.13 brings support for DNS over HTTPS, support for loading options from a versioned
 config file for the cert-manager controller, and more. This release also includes the promotion of

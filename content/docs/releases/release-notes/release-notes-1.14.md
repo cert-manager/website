@@ -14,10 +14,6 @@ support for creating [CA certificates with "Name Constraints" and "Authority Inf
 >
 > Read [The cert-manager Command Line Tool (cmctl) page](../../reference/cmctl.md) to learn more.
 
-## `v1.14.2`
-
-> 📢 When upgrading to cert-manager release 1.14, please skip `v1.14.0` and `v1.14.1` and install this patch version instead.
-
 ### Known Issues
 
 #### ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured - [#6755](https://github.com/cert-manager/cert-manager/pull/6755), [#6757](https://github.com/cert-manager/cert-manager/issues/6757)
@@ -56,6 +52,19 @@ without breaking users who have come to rely on the existing, documented behavio
 
   > ⚠️ There may be [clients that are incompatible with `DST Root CA X3`](https://github.com/mono/mono/issues/21233).
 
+## `v1.14.3`
+
+> 📢 When upgrading to cert-manager release 1.14, please skip `v1.14.0`, `v1.14.1` and `v1.14.2` and install this patch version instead.
+
+### Changes since `v1.14.2`
+
+#### Bug or Regression
+
+- BUGFIX: Fixes issue with JSON-logging, where only a subset of the log messages were output as JSON. ([#6781](https://github.com/cert-manager/cert-manager/pull/6781), [@jetstack-bot](https://github.com/jetstack-bot))
+- BUGFIX: `LiteralSubjects` with a #= value can result in memory issues due to faulty BER parser (`github.com/go-asn1-ber/asn1-ber`). ([#6774](https://github.com/cert-manager/cert-manager/pull/6774), [@jetstack-bot](https://github.com/jetstack-bot))
+
+## `v1.14.2`
+
 ### Changes since `v1.14.1`
 
 #### Bug or Regression
@@ -81,7 +90,7 @@ cert-manager `v1.14.1` fixes bugs found *during* the release of `v1.14.0`.
 
 ## `v1.14.0`
 
-> ⚠️ This version has known issues. Please install `v1.14.2` instead.
+> ⚠️ This version has known issues.
 >
 > During the release of `v1.14.0`, the Helm chart was found to use the wrong OCI image for the `cainjector` Deployment,
 > which caused the Helm installation and the static manifest based installation to fail.
@@ -99,7 +108,7 @@ cert-manager `v1.14.1` fixes bugs found *during* the release of `v1.14.0`.
 > and the working versions of the static manifest files attached to the draft `v1.14.0` GitHub release,
 > and that was then published.
 >
-> For these reasons, users are strongly advised to skip this version and install the `v1.14.1` Helm chart instead.
+> For these reasons, users are strongly advised to skip this version and install the latest patch Helm chart instead.
 
 ### Known Issues
 - During the release of `v1.14.0`, the Helm chart for this version was found to use the wrong OCI image for the `cainjector` Deployment,
