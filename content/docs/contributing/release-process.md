@@ -602,8 +602,14 @@ page if a step is missing or if it is outdated.
     1. [Visit the pull request](https://github.com/jetstack/jetstack-charts/pulls)
     2. Review the changes
     3. Fix any failing checks
-    4. Merge the PR
-    5. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
+    4. Test the chart
+        1. Download the chart tarball from the pull-request
+        2. Start a new local Kind cluster `kind create cluster --name release`
+        3. Install the helm chart onto the kind cluster `helm install cert-manager ./cert-manager-v0.14.2.tgz --set installCRDs=true -n cert-manager`
+        4. Ensure install succeeds and all components are running
+        5. Tear down the kind cluster `kind delete cluster --name release`
+    5. Merge the PR
+    6. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
 15. **(final + patch releases)** Merge the 4 Website PRs:
 
