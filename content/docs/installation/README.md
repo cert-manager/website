@@ -12,7 +12,7 @@ Learn about the various ways you can install cert-manager and how to choose betw
 The default static configuration can be installed as follows:
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.3/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/[[VAR::cert_manager_latest_version]]/cert-manager.yaml
 ```
 
 📖 Read more about [installing cert-manager using kubectl apply and static manifests](./kubectl.md).
