@@ -46,7 +46,7 @@ installCRDs: true
 
 Install it using helm:
 ```
-helm upgrade  --install --namespace cert-manager  --version v1.8.2 cert-manager jetstack/cert-manager -f values.yaml 
+helm upgrade  --install --namespace cert-manager  --version [[VAR::cert_manager_latest_version]] cert-manager jetstack/cert-manager -f values.yaml 
 ```
 
 ## Configure your DNS records

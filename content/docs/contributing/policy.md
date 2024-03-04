@@ -108,7 +108,7 @@ version: 0.1.0
 appVersion: "0.1.0"
 dependencies:
   - name: cert-manager
-    version: v1.8.0
+    version: [[VAR::cert_manager_latest_version]]
     repository: https://charts.jetstack.io
     alias: cert-manager
     condition: cert-manager.enabled

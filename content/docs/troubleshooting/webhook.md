@@ -466,7 +466,7 @@ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.8.0 \
+  --version [[VAR::cert_manager_latest_version]] \
   --set webhook.securePort=10260
 ```
 

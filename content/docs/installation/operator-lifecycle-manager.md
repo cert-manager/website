@@ -75,7 +75,7 @@ spec:
   name: cert-manager
 ...
 status:
-  currentCSV: cert-manager.v1.7.1
+  currentCSV: cert-manager.[[VAR::cert_manager_latest_version]]
   state: AtLatestKnown
 ...
 ```
@@ -218,7 +218,7 @@ The following JSON patch will append `-v=6` to command line arguments of the cer
 (the first container of the first Deployment).
 
 ```bash
-kubectl patch csv cert-manager.v1.14.3 \
+kubectl patch csv cert-manager.[[VAR::cert_manager_latest_version]] \
   --type json \
   -p '[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "-v=6" }]'
 ```

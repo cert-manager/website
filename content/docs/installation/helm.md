@@ -47,7 +47,7 @@ section below for details on each method.
 > Recommended for production installations
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.3/cert-manager.crds.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/[[VAR::cert_manager_latest_version]]/cert-manager.crds.yaml
 ```
 
 ##### Option 2: install CRDs as part of the Helm release
@@ -70,7 +70,7 @@ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.14.3 \
+  --version [[VAR::cert_manager_latest_version]] \
   # --set installCRDs=true
 ```
 
@@ -83,7 +83,7 @@ helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.14.3 \
+  --version [[VAR::cert_manager_latest_version]] \
   # --set installCRDs=true
   --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
   --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
@@ -114,7 +114,7 @@ version: 0.1.0
 appVersion: "0.1.0"
 dependencies:
   - name: cert-manager
-    version: v1.14.3
+    version: [[VAR::cert_manager_latest_version]]
     repository: https://charts.jetstack.io
     alias: cert-manager
     condition: cert-manager.enabled
@@ -148,7 +148,7 @@ helm template \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version v1.14.3 \
+  --version [[VAR::cert_manager_latest_version]] \
   # --set prometheus.enabled=false \   # Example: disabling prometheus using a Helm parameter
   # --set installCRDs=true \           # Uncomment to also template CRDs
   > cert-manager.custom.yaml

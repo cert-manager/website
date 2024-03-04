@@ -295,7 +295,7 @@ So finally we are ready to start creating an SSL certificate for our website.
 The first thing you need to do is install cert-manager, and we'll install it the easy using `kubectl` as follows:
 
 ```
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.2/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/[[VAR::cert_manager_latest_version]]/cert-manager.yaml
 ```
 
 This will create three Deployments, and a bunch of Services and Pods in a new namespace called `cert-manager`.
