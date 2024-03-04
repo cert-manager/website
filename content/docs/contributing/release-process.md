@@ -261,18 +261,12 @@ page if a step is missing or if it is outdated.
       +genversionwithcli "release-1.12" "$LATEST_VERSION"
       ```
 
-   4. (**final + patch release of the latest minor version**) Bump all versions
-      present in installation instructions. To update these versions:
+   4. (**final + patch release of the latest minor version**) Bump the latest
+      cert-manager version variable in the `variables.json` file.
 
-      ```bash
-      sed -i.bak 's/1.12.[0-9]/1.12.4/g' content/docs/installation/{README.md,code-signing.md,helm.md,kubectl.md,operator-lifecycle-manager.md}
-      rm -f **/*.bak
-      ```
-
-      To check that all mentions of that version are gone, run:
-
-      ```bash
-      grep -R -n -F 'v1.11.[0-9]' content/docs/installation
+      ```diff
+      -"cert_manager_latest_version": "v1.14.2",
+      +"cert_manager_latest_version": "v1.14.3",      
       ```
 
    5. (**final release only**) Freeze the `docs/` folder by creating a copy ,
