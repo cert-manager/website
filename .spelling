@@ -649,6 +649,7 @@ v1.13.0.
 v1.13.1
 v1.13.2
 v1.13.3
+v1.13.4
 v1.13.
 v1.12.5
 v1.12.6
@@ -717,3 +718,10 @@ md#renew
 # correct spelling. The spelling "x509" and "X509" are incorrect.
 
 X.509
+
+# Announcements
+
+Logics
+OpenSSF
+OSS-Fuzz
+Korczynski
