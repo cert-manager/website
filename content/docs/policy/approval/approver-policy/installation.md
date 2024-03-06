@@ -34,7 +34,7 @@ helm upgrade cert-manager jetstack/cert-manager \
   --install \
   --create-namespace \
   --namespace cert-manager \
-  --version REPLACE-WITH-YOUR-CERT-MANAGER-VERSION \
+  --version [[VAR::cert_manager_latest_version]] \
   --set installCRDs=true \
   --set extraArgs={--controllers='*\,-certificaterequests-approver'} # ⚠ Disable cert-manager's built-in approver
 ```
