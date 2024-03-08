@@ -52,9 +52,26 @@ without breaking users who have come to rely on the existing, documented behavio
 
   > ⚠️ There may be [clients that are incompatible with `DST Root CA X3`](https://github.com/mono/mono/issues/21233).
 
-## `v1.14.3`
+## `v1.14.4`
 
-> 📢 When upgrading to cert-manager release 1.14, please skip `v1.14.0`, `v1.14.1` and `v1.14.2` and install this patch version instead.
+> 📢 When upgrading to cert-manager release 1.14, please skip `v1.14.0`, `v1.14.1`, `v1.14.2` and `v1.14.3` and install this patch version instead.
+
+### Changes since `v1.14.3`
+
+#### Bug or Regression
+
+- Allow `cert-manager.io/allow-direct-injection` in annotations ([#6809](https://github.com/cert-manager/cert-manager/pull/6809), [@jetstack-bot](https://github.com/jetstack-bot))
+- BUGFIX: JKS and PKCS12 stores now contain the full set of CAs specified by an issuer ([#6812](https://github.com/cert-manager/cert-manager/pull/6812), [@jetstack-bot](https://github.com/jetstack-bot))
+- BUGFIX: cainjector leader election flag/ config option defaults are missing ([#6819](https://github.com/cert-manager/cert-manager/pull/6819), [@jetstack-bot](https://github.com/jetstack-bot))
+
+#### Other (Cleanup or Flake)
+
+- Bump base images. ([#6842](https://github.com/cert-manager/cert-manager/pull/6842), [@inteon](https://github.com/inteon))
+- Upgrade Helm: fix `CVE-2024-26147` alert ([#6834](https://github.com/cert-manager/cert-manager/pull/6834), [@inteon](https://github.com/inteon))
+- Upgrade go to 1.21.8: fixes `CVE-2024-24783` ([#6825](https://github.com/cert-manager/cert-manager/pull/6825), [@jetstack-bot](https://github.com/jetstack-bot))
+- Upgrade `google.golang.org/protobuf`: fixing `GO-2024-2611` ([#6829](https://github.com/cert-manager/cert-manager/pull/6829), [@inteon](https://github.com/inteon))
+
+## `v1.14.3`
 
 ### Changes since `v1.14.2`
 
