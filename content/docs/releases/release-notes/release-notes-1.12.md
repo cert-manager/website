@@ -3,6 +3,25 @@ title: Release 1.12
 description: 'cert-manager release notes: cert-manager 1.12'
 ---
 
+## `v1.12.9`
+
+### Known Issues
+- ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured: see [1.14 release notes](./release-notes-1.14.md#known-issues) for more information.
+
+### Changes
+
+#### Bug or Regression
+
+- Allow `cert-manager.io/allow-direct-injection` in annotations ([#6811](https://github.com/cert-manager/cert-manager/pull/6811), [@jetstack-bot](https://github.com/jetstack-bot))
+- BUGFIX: JKS and PKCS12 stores now contain the full set of CAs specified by an issuer ([#6813](https://github.com/cert-manager/cert-manager/pull/6813), [@inteon](https://github.com/inteon))
+- BUGFIX: fix race condition due to registering and using global `runtime.Scheme` variables ([#6833](https://github.com/cert-manager/cert-manager/pull/6833), [@inteon](https://github.com/inteon))
+
+#### Other (Cleanup or Flake)
+
+- Bump base images to the latest version. ([#6843](https://github.com/cert-manager/cert-manager/pull/6843), [@jetstack-bot](https://github.com/jetstack-bot))
+- Upgrade go to 1.21.8: fixes `CVE-2024-24783` ([#6826](https://github.com/cert-manager/cert-manager/pull/6826), [@jetstack-bot](https://github.com/jetstack-bot))
+- Upgrade `google.golang.org/protobuf`: fixing `GO-2024-2611` ([#6830](https://github.com/cert-manager/cert-manager/pull/6830), [@inteon](https://github.com/inteon))
+
 ## `v1.12.8`
 
 ### Known Issues
