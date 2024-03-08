@@ -59,7 +59,12 @@ To install approver-policy:
 
 ```terminal
 helm repo add jetstack https://charts.jetstack.io --force-update
-helm upgrade -i -n cert-manager cert-manager-approver-policy jetstack/cert-manager-approver-policy --wait
+
+helm upgrade cert-manager-approver-policy jetstack/cert-manager-approver-policy \
+  --install \
+  --namespace cert-manager \
+  --version [[VAR::approver_policy_latest_version]] \
+  --wait
 ```
 
 If you are using approver-policy with [external
@@ -73,13 +78,44 @@ For example, if using approver-policy for the internal issuer types, along with
 set the following values when installing:
 
 ```terminal
-$ helm upgrade -i -n cert-manager cert-manager-approver-policy jetstack/cert-manager-approver-policy --wait \
+helm upgrade cert-manager-approver-policy jetstack/cert-manager-approver-policy \
+  --install \
+  --namespace cert-manager \
+  --version [[VAR::approver_policy_latest_version]] \
+  --wait \
   --set app.approveSignerNames="{\
 issuers.cert-manager.io/*,clusterissuers.cert-manager.io/*,\
 googlecasclusterissuers.cas-issuer.jetstack.io/*,googlecasissuers.cas-issuer.jetstack.io/*,\
 awspcaclusterissuers.awspca.cert-manager.io/*,awspcaissuers.awspca.cert-manager.io/*\
 }"
 ```
+
+## Uninstalling
+
+To uninstall approver-policy installed via Helm, run:
+
+```terminal
+$ helm uninstall cert-manager-approver-policy --namespace cert-manager
+These resources were kept due to the resource policy:
+[CustomResourceDefinition] certificaterequestpolicies.policy.cert-manager.io
+
+release "cert-manager-approver-policy" uninstalled
+```
+
+As shown in the output, the `CustomResourceDefinition` for `CertificateRequestPolicy`
+is not removed by the Helm uninstall command. This to prevent data loss, as removing
+the `CustomResourceDefinition` will also remove all `CertificateRequestPolicy` resources.
+
+> ☢️ This will remove all `CertificateRequestPolicy` resources from the cluster:
+> 
+> ```terminal
+> $ kubectl delete crd certificaterequestpolicies.policy.cert-manager.io
+> ```
+
+> ⚠️ approver-policy versions prior to `v0.13.0` do not keep the `CustomResourceDefinition` on uninstall
+> and will remove all `CertificateRequestPolicy` resources from the cluster. Make sure to back up your
+> `CertificateRequestPolicy` resources before uninstalling approver-policy if you are using a version
+> prior to `v0.13.0`. Or upgrade to `v0.13.0` before uninstalling.
 
 ## Usage
 
