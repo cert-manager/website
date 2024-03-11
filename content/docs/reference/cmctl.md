@@ -48,6 +48,12 @@ chmod +x cmctl
 sudo mv cmctl /usr/local/bin
 ```
 
+Alternatively, you can install `cmctl` using `go`:
+
+```bash
+go install github.com/cert-manager/cmctl/v2@latest
+```
+
 You can run `cmctl help` to test the CLI is set up properly:
 
 ```console
