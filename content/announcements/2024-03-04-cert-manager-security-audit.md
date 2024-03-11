@@ -17,7 +17,7 @@ A total of 8 issues were raised as part of the audit, of which 5 were low severi
 
 Dependencies of the cert-manager project were assessed using [OpenSSF Scorecard](https://github.com/ossf/scorecard). This is a process that scores repositories using several factors to build a picture of their maintenance status and suitability. Based on the results, three dependencies have been removed from cert-manager. The full findings and scoring for dependencies can be found on the [full report](TODO). 
 
-We've [opened an issue](TODO) for implementing a strategy for evaluating new dependencies as they arise.
+We've [opened an issue](https://github.com/cert-manager/cert-manager/issues/6820) for implementing a strategy for evaluating new dependencies as they arise.
 
 The cert-manager maintainer team would like to send a special thanks to the team at [Ada Logics](https://adalogics.com/) - in particular Adam Korczynski and David Korczynski - for completing this audit smoothly and professionally.
 
