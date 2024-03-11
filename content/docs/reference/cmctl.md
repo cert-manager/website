@@ -354,7 +354,10 @@ $ cmctl upgrade migrate-api-version --qps 5 --burst 10
 
 ## Legacy kubectl plugin
 
-While the kubectl plugin is supported, it is recommended to use `cmctl` as this enables a better experience via tab auto-completion.
+We call the kubectl plugin "legacy" because we used to recommend using the standalone binary
+`cmctl` rather than the kubectl plugin because kubectl plugins used to not support auto-completion.
+Since kubectl 1.26, kubectl plugins support auto-completion, which means you will have the same
+experience with the standalone `cmctl` binary and with the kubectl plugin.
 
 To install the plugin you need the `kubectl_cert-manager` file for the platform you're using,
 these can be found on our [cmctl GitHub releases page](https://github.com/cert-manager/cmctl/releases).
