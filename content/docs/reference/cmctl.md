@@ -34,18 +34,24 @@ This will also install shell completion.
 
 ### Manual Installation
 
-You need the `cmctl.tar.gz` file for the platform you're using, these can be
+You need the `cmctl` file for the platform you're using, these can be
 found on our
-[GitHub releases page](https://github.com/cert-manager/cert-manager/releases).
+[cmctl GitHub releases page](https://github.com/cert-manager/cmctl/releases).
 In order to use `cmctl` you need its binary to be accessible under
 the name `cmctl` in your `$PATH`.
 Run the following commands to set up the CLI. Replace OS and ARCH with your
 systems equivalents:
 
 ```console
-OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -fsSL -o cmctl.tar.gz https://github.com/cert-manager/cert-manager/releases/latest/download/cmctl-$OS-$ARCH.tar.gz
-tar xzf cmctl.tar.gz
+OS=$(go env GOOS); ARCH=$(go env GOARCH); curl -fsSL -o cmctl https://github.com/cert-manager/cmctl/releases/latest/download/cmctl_${OS}_${ARCH}
+chmod +x cmctl
 sudo mv cmctl /usr/local/bin
+```
+
+Alternatively, you can install `cmctl` using `go`:
+
+```bash
+go install github.com/cert-manager/cmctl/v2@latest
 ```
 
 You can run `cmctl help` to test the CLI is set up properly:
@@ -350,8 +356,8 @@ $ cmctl upgrade migrate-api-version --qps 5 --burst 10
 
 While the kubectl plugin is supported, it is recommended to use `cmctl` as this enables a better experience via tab auto-completion.
 
-To install the plugin you need the `kubectl-cert-manager.tar.gz` file for the platform you're using,
-these can be found on our [GitHub releases page](https://github.com/cert-manager/cert-manager/releases).
+To install the plugin you need the `kubectl_cert-manager` file for the platform you're using,
+these can be found on our [cmctl GitHub releases page](https://github.com/cert-manager/cmctl/releases).
 In order to use the kubectl plugin you need its binary to be accessible under the name `kubectl-cert_manager` in your `$PATH`.
 
 You can run `kubectl cert-manager help` to test that the plugin is set up properly.
