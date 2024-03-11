@@ -361,3 +361,16 @@ these can be found on our [cmctl GitHub releases page](https://github.com/cert-m
 In order to use the kubectl plugin you need its binary to be accessible under the name `kubectl-cert_manager` in your `$PATH`.
 
 You can run `kubectl cert-manager help` to test that the plugin is set up properly.
+
+### Auto-completion with the kubectl plugin
+
+Since kubectl 1.26, it is possible to enable auto-completion for plugins. Assuming that you installed
+`kubectl_cert-manager` in `/usr/local/bin`, you can set up auto-completion by running the following command:
+
+```bash
+cat >kubectl_complete-cert_manager <<'EOF'
+#!/usr/bin/env sh
+kubectl cert-manager __complete "$@"
+EOF
+sudo install kubectl_complete-cert_manager /usr/local/bin
+```
