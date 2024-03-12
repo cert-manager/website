@@ -4,6 +4,8 @@
 #
 # Read the rationale for these values in:
 # * https://cert-manager.io/docs/installation/best-practice/
+global:
+  priorityClassName: system-cluster-critical
 
 replicaCount: 2
 podDisruptionBudget:
