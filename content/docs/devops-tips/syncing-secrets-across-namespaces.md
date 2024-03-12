@@ -42,7 +42,7 @@ for annotating the generated secret with the extension specific annotation (See 
 ### Using `reflector`
  The example below shows syncing a certificate's secret from the `cert-manager` namespace to multiple namespaces (i.e. `dev`, `staging`, `prod`).
  Reflector will ensure that any namespace (existing or new) matching the allowed condition (with regex support) will get a copy of the certificate's secret and will keep it up to date.
- You can also sync other secrets (different name) using `reflector` (consult the extension's [README](https://github.com/emberstack/kubernetes-reflector/blob/main/README.md))
+ You can also sync other secrets (different name) using `reflector` (consult the extension's [README](https://github.com/emberstack/kubernetes-reflector/blob/main/README.md)).
 
 ```yaml
 ---
