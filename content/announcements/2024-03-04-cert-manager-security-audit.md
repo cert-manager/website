@@ -1,6 +1,6 @@
 ---
 slug: cert-manager-security-audit
-title: cert-manager completes it security audit!
+title: cert-manager completes CNCF-sponsored security audit!
 description: As part of our graduation processes cert-manager has completed a security audit of the project
 date: 03-04-2024
 ---
