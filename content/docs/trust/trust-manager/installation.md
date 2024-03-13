@@ -15,8 +15,17 @@ and as such trust-manager is also installed into the cert-manager namespace.
 
 ```bash
 helm repo add jetstack https://charts.jetstack.io --force-update
-helm upgrade -i -n cert-manager cert-manager jetstack/cert-manager --set installCRDs=true --wait --create-namespace
-helm upgrade -i -n cert-manager trust-manager jetstack/trust-manager --wait
+
+helm upgrade cert-manager jetstack/cert-manager \
+  --install \
+  --create-namespace \
+  --namespace cert-manager \
+  --set installCRDs=true
+
+helm upgrade trust-manager jetstack/trust-manager \
+  --install \
+  --namespace cert-manager \
+  --wait
 ```
 
 ## Installation Options
@@ -39,7 +48,12 @@ As of trust-manager v0.6.0 you can choose to automatically add an approver-polic
 will approve the trust-manager webhook certificate:
 
 ```bash
-helm upgrade -i -n cert-manager trust-manager jetstack/trust-manager --set app.webhook.tls.approverPolicy.enabled=true --set app.webhook.tls.approverPolicy.certManagerNamespace=cert-manager --wait
+helm upgrade trust-manager jetstack/trust-manager \
+  --install \
+  --namespace cert-manager \
+  --wait \
+  --set app.webhook.tls.approverPolicy.enabled=true \
+  --set app.webhook.tls.approverPolicy.certManagerNamespace=cert-manager
 ```
 
 Note that if you've installed cert-manager to a different namespace, you'll need to pass that namespace in `app.webhook.tls.approverPolicy.certManagerNamespace`!
