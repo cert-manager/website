@@ -332,8 +332,6 @@ cmctl x uninstall
 cmctl x uninstall --namespace my-cert-manager
 
 cmctl x uninstall --dry-run
-
-cmctl x uninstall --no-hooks
 ```
 
 ### Upgrade
