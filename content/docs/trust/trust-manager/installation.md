@@ -59,6 +59,33 @@ namespace to whichever is most appropriate for your environment.
 An ideal deployment would be a fresh namespace dedicated entirely to trust-manager, to minimize the number of actors in your
 cluster that can modify your trust sources.
 
+## Uninstalling
+
+To uninstall trust-manager installed via Helm, run:
+
+```terminal
+$ helm uninstall trust-manager -n cert-manager
+
+These resources were kept due to the resource policy:
+[CustomResourceDefinition] bundles.trust.cert-manager.io
+
+release "trust-manager" uninstalled
+```
+
+As shown in the output, the `CustomResourceDefinition` for `Bundle` is not removed by the Helm uninstall command.
+This is to prevent data loss, as removing the `CustomResourceDefinition` would also remove all `Bundle` resources.
+
+> ☢️ This will remove all `Bundle` resources from the cluster:
+>
+> ```terminal
+> kubectl delete crd bundles.trust.cert-manager.io
+> ```
+
+> ⚠️ trust-manager versions prior to `v0.9.0` do not keep the `CustomResourceDefinition` on uninstall
+> and will remove all `Bundle` resources from the cluster. Make sure to back up your `Bundle` resources
+> before uninstalling trust-manager if you are using a version prior to `v0.9.0`. Or upgrade to `v0.9.0`
+> before uninstalling.
+
 ## Usage
 
 > 📖 Read the [trust-manager docs](./README.md).
