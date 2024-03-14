@@ -168,7 +168,7 @@ Out-of-sync cert-manager in the AKS (Azure Kubernetes Service) cluster
 Cert-manager in the AKS cluster remains out-of-sync due to discrepancies between the `DESIRED MANIFEST` and `LIVE MANIFEST` files.
 
 ##### Potential Reasons
-Multiple factors could cause the OutOfSync issue; refer to [ArgoCD documentation](https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/#diffing-customization) for potential causes.
+Multiple factors could cause the `OutOfSync` issue; refer to [ArgoCD documentation](https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/#diffing-customization) for potential causes.
 
 ##### Example configuration differences
 The below configurations are observed to be present in the `LIVE MANIFEST` but not in the `DESIRED MANIFEST` file.
@@ -194,7 +194,7 @@ webhooks:
 ```
 
 ##### Root Cause Analysis
-The discrepancy stems from how AKS manages admission controllers to protect internal services in the kube-system namespace. More details can be found in [Frequently Asked Questions about Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/faq#can-admission-controller-webhooks-impact-kube-system-and-internal-aks-namespaces)
+The discrepancy stems from how AKS manages admission controllers to protect internal services in the `kube-system` namespace. More details can be found in [Frequently Asked Questions about Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/azure/aks/faq#can-admission-controller-webhooks-impact-kube-system-and-internal-aks-namespaces)
 
 ##### Suggested Fix
 It is also possible to ignore differences from fields owned by specific managers defined in `metadata.managedFields` in live resources. More details can be found in [(ArgoCD) Diffing Customization](https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/#application-level-configuration)
