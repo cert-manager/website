@@ -127,6 +127,7 @@ Ensure the following are in place before proceeding:
 1. Create an [ArgoCD Application](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#applications) manifest file with the provided configuration to set up cert-manager.
 
     ```yaml
+    # application.yaml
     apiVersion: argoproj.io/v1alpha1
     kind: Application
     metadata:
@@ -155,7 +156,7 @@ Ensure the following are in place before proceeding:
         syncOptions:
           - CreateNamespace=true
     ```
-2. Commit the manifest file and sync the changes in ArgoCD. If a GitOps repository is not set up, use `kubectl apply -f <above-file-path>` to apply the manifest [installation guide for kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
+2. Commit the manifest file and sync the changes in ArgoCD. If a GitOps repository is not set up, use `kubectl apply -f application.yaml` to apply the manifest [installation guide for kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
 3. ArgoCD will synchronize the `DESIRED MANIFEST` and deploy cert-manager on Kubernetes based on the provided configuration.
 
 
