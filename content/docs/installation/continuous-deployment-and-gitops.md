@@ -163,10 +163,10 @@ Ensure the following are in place before proceeding:
 ### Troubleshooting
 
 #### Scenario 1:
-Out-of-sync cert-manager in the AKS (Azure Kubernetes Service) cluster
+`OutOfSync` cert-manager in the AKS (Azure Kubernetes Service) cluster
 
 ##### Issue:
-cert-manager in the AKS cluster remains out-of-sync due to discrepancies between the `DESIRED MANIFEST` and `LIVE MANIFEST` files.
+cert-manager in the AKS cluster remains `OutOfSync` due to discrepancies between the `DESIRED MANIFEST` and `LIVE MANIFEST` files.
 
 ##### Potential Reasons
 Multiple factors could cause the `OutOfSync` issue; refer to [ArgoCD documentation](https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/#diffing-customization) for potential causes.
