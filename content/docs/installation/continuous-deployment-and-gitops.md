@@ -145,7 +145,7 @@ Ensure the following are in place before proceeding:
       source:
         chart: cert-manager
         repoURL: https://charts.jetstack.io
-        targetRevision: 1.10.1
+        targetRevision: [[VAR::cert_manager_latest_version]]
         helm:
           values: |
             installCRDs: true
@@ -231,7 +231,7 @@ spec:
   source:
     chart: cert-manager
     repoURL: https://charts.jetstack.io
-    targetRevision: 1.10.1
+    targetRevision: [[VAR::cert_manager_latest_version]]
     helm:
       values: |
         installCRDs: true
