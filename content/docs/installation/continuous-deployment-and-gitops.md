@@ -164,7 +164,7 @@ Ensure the following are in place before proceeding:
 #### Scenario 1:
 Out-of-sync cert-manager in the AKS (Azure Kubernetes Service) cluster
 
-##### Issue: 
+##### Issue:
 Cert-manager in the AKS cluster remains out-of-sync due to discrepancies between the `DESIRED MANIFEST` and `LIVE MANIFEST` files.
 
 ##### Potential Reasons
