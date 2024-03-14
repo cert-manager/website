@@ -124,7 +124,7 @@ Ensure the following are in place before proceeding:
 - Optional: A GitOps repository connected with ArgoCD: [setup guide](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/)
 
 ### Setting up cert-manager
-1. Create an ArgoCD Application manifest file with the provided configuration to set up cert-manager.
+1. Create an [ArgoCD Application](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#applications) manifest file with the provided configuration to set up cert-manager.
 
     ```yaml
     apiVersion: argoproj.io/v1alpha1
