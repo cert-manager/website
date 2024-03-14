@@ -2,7 +2,7 @@
 slug: cert-manager-security-audit
 title: cert-manager completes CNCF-sponsored security audit!
 description: As part of our graduation processes cert-manager has completed a security audit of the project
-date: 03-04-2024
+date: 03-15-2024
 ---
 
 In late 2023 the cert-manager project began a security audit, sponsored by the [CNCF](https://www.cncf.io/) and carried out by the team at [Ada Logics](https://adalogics.com/), as part of the ongoing effort for cert-manager to  [reach "graduated" status](https://github.com/cncf/toc/pull/1212) in the CNCF.
@@ -11,11 +11,11 @@ The goal of the engagement was to assess cert-manager's code quality, along with
 
 The team evaluated threats from contributors to cert-manager or any of its dependencies, from users on the clusters where cert-manager is deployed and from external users in cases where cert-manager could process input from untrusted internet users. 
 
-For a full breakdown of the threat model and actors, see the [full report](TODO).
+For a full breakdown of the threat model and actors, see the [full report](/docs/announcements/AdaLogics-2023-cert-manager-audit-report.pdf).
 
 A total of 8 issues were raised as part of the audit, of which 5 were low severity, 2 were moderate severity and 1 was informational. All issues have been resolved as of cert-manager v1.12.8, v1.13.4 and v1.14.3.
 
-Dependencies of the cert-manager project were assessed using [OpenSSF Scorecard](https://github.com/ossf/scorecard). This is a process that scores repositories using several factors to build a picture of their maintenance status and suitability. Based on the results, three dependencies have been removed from cert-manager. The full findings and scoring for dependencies can be found on the [full report](TODO). 
+Dependencies of the cert-manager project were assessed using [OpenSSF Scorecard](https://github.com/ossf/scorecard). This is a process that scores repositories using several factors to build a picture of their maintenance status and suitability. Based on the results, three dependencies have been removed from cert-manager. The full findings and scoring for dependencies can be found on the [full report](/docs/announcements/AdaLogics-2023-cert-manager-audit-report.pdf). 
 
 We've [opened an issue](https://github.com/cert-manager/cert-manager/issues/6820) for implementing a strategy for evaluating new dependencies as they arise.
 
