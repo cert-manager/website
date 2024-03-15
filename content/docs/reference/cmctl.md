@@ -317,7 +317,10 @@ cmctl x uninstall
 
 This command uninstalls any Helm-managed release of cert-manager.
 
-The CRDs will be deleted if you installed cert-manager with the option `--set CRDs=true`.
+Starting from cmctl `v2.0.0`, the uninstall command is safe and will not delete the CRDs
+by default, even if they were installed with the Helm chart (using the option `--set installCRDs=true`).
+
+> 🕐 Before `v2.0.0`, cmctl would remove the CRDs if they were installed with the Helm chart (similar to Helm's behavior).
 
 Most of the features supported by `helm uninstall` are also supported by this command.
 
@@ -329,8 +332,6 @@ cmctl x uninstall
 cmctl x uninstall --namespace my-cert-manager
 
 cmctl x uninstall --dry-run
-
-cmctl x uninstall --no-hooks
 ```
 
 ### Upgrade
