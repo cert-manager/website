@@ -329,32 +329,23 @@ cainjector:
 
 ### Priority Class Name
 
-The Kubernetes blog: [Protect Your Mission-Critical Pods From Eviction With `PriorityClass`](https://kubernetes.io/blog/2023/01/12/protect-mission-critical-pods-priorityclass/) says:
+The reason for setting a priority class is summarized as follows in the Kubernetes blog [Protect Your Mission-Critical Pods From Eviction With `PriorityClass`](https://kubernetes.io/blog/2023/01/12/protect-mission-critical-pods-priorityclass/):
 > Pod priority and preemption help to make sure that mission-critical pods are up in the event of a resource crunch by deciding order of scheduling and eviction.
 
-You should treat the cert-manager pods as mission-critical,
-because cert-manager provides an API to the applications running on your platform.
-Therefore, you need to protect the cert-manager Pods from [preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#preemption), if a Kubernetes node becomes starved of resources.
-Other lower priority Pods on that node should be preempted before the cert-manager Pods.
-You can achieve this by setting the `priorityClassName` of the cert-manager Pods to a high priority Priority Class.
-
-Consider an application on your platform with a Helm chart which includes a cert-manager Certificate resource.
-It has a Pod that mounts the desired TLS serving certificate into the application Pod.
-The cert-manager webhook service must be available before you deploy the Helm chart,
-because otherwise the Certificate resource in the Helm chart will not be accepted by the K8S API server.
-The cert-manager controller must be running,
-because only when it has reconciled the Certificate resource will the Secret be created,
-and only when the Secret has been created will the application Pod be able to start up.
-
-#### Which `priorityClassName` should I use?
+If cert-manager is mission-critical to your platform,
+then set a `priorityClassName` on the cert-manager Pods
+to protect them from [preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#preemption),
+in situations where a Kubernetes node becomes starved of resources.
+Without a `priorityClassName` the cert-manager Pods may be evicted to free up resources for other Pods,
+and this may cause disruption to any applications that rely on cert-manager.
 
 Most Kubernetes clusters will come with two builtin priority class names:
 `system-cluster-critical` and `system-node-critical`,
-which are used for Kubernetes core components, [which can also be used for critical add-ons](https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/).
+which are used for Kubernetes core components.
+These [can also be used for critical add-ons](https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/),
+such as cert-manager.
 
-We recommend that you use `priorityClassName: system-cluster-critical` for cert-manager,
-because it is a critical add-on.
-Here are the Helm chart values:
+We recommend using the following Helm chart values to set `priorityClassName: system-cluster-critical`, for all cert-manager Pods:
 
 ```yaml
 global:
@@ -362,36 +353,12 @@ global:
 ```
 
 On some clusters the [`ResourceQuota` admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#resourcequota) may be configured to [limit the use of certain priority classes to certain namespaces](https://kubernetes.io/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default).
-For example, on a GKE cluster, by default, you will only be allowed to use `priorityClassName: system-cluster-critical` for Pods in the `kube-system` namespace, because that namespace contains a `ResourceQuota` called `gcp-critical-pods`:
-
-```sh
-$ kubectl get resourcequota -n kube-system gcp-critical-pods -o yaml
-```
-
-```yaml
-apiVersion: v1
-kind: ResourceQuota
-metadata:
-  labels:
-    addonmanager.kubernetes.io/mode: Reconcile
-  name: gcp-critical-pods
-  namespace: kube-system
-spec:
-  hard:
-    pods: 1G
-  scopeSelector:
-    matchExpressions:
-    - operator: In
-      scopeName: PriorityClass
-      values:
-      - system-node-critical
-      - system-cluster-critical
-```
+For example, Google Kubernetes Engine (GKE) will only allow `priorityClassName: system-cluster-critical` for Pods in the `kube-system` namespace,
+by default.
 
 > 📖 Read [Kubernetes PR #93121](https://github.com/kubernetes/kubernetes/pull/93121) to see how and why this was implemented.
 
-To use `priorityClassName: system-cluster-critical` in the `cert-manager` namespace you will need to create a similar `ResourceQuota`.
-Here's an example:
+In such cases you will need to create a `ResourceQuota` in the `cert-manager` namespace:
 
 ```yaml
 # cert-manager-resourcequota.yaml
