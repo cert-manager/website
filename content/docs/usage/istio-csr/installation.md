@@ -28,20 +28,19 @@ Kind will automatically set up kubectl to point to the newly created cluster.
 We install cert-manager [using helm](https://cert-manager.io/docs/installation/helm/) here, but if you've got a preferred method you can install in any way.
 
 ```console
-kind create cluster --image=docker.io/kindest/node:v1.22.4
+kind create cluster
 
 # Helm setup
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
+helm repo add jetstack https://charts.jetstack.io --force-update
 
 # install cert-manager CRDs
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/[[VAR::cert_manager_latest_version]]/cert-manager.crds.yaml
 
 # install cert-manager; this might take a little time
 helm install cert-manager jetstack/cert-manager \
-	--namespace cert-manager \
-	--create-namespace \
-	--version [[VAR::cert_manager_latest_version]]
+  --namespace cert-manager \
+  --create-namespace \
+  --version [[VAR::cert_manager_latest_version]]
 
 # We need this namespace to exist since our cert will be placed there
 kubectl create namespace istio-system
@@ -83,16 +82,18 @@ istio-csr is best installed via Helm, and it should be simple and quick to insta
 are a bunch of other configuration options for the helm chart, which you can check out [here](../../usage/istio-csr/README.md).
 
 ```console
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
+helm repo add jetstack https://charts.jetstack.io --force-update
 
 # We set a few helm template values so we can point at our static root CA
-helm install -n cert-manager cert-manager-istio-csr jetstack/cert-manager-istio-csr \
-	--set "app.tls.rootCAFile=/var/run/secrets/istio-csr/ca.pem" \
-	--set "volumeMounts[0].name=root-ca" \
-	--set "volumeMounts[0].mountPath=/var/run/secrets/istio-csr" \
-	--set "volumes[0].name=root-ca" \
-	--set "volumes[0].secret.secretName=istio-root-ca"
+helm upgrade cert-manager-istio-csr jetstack/cert-manager-istio-csr \
+  --install \
+  --namespace cert-manager \
+  --wait \
+  --set "app.tls.rootCAFile=/var/run/secrets/istio-csr/ca.pem" \
+  --set "volumeMounts[0].name=root-ca" \
+  --set "volumeMounts[0].mountPath=/var/run/secrets/istio-csr" \
+  --set "volumes[0].name=root-ca" \
+  --set "volumes[0].secret.secretName=istio-root-ca"
 
 # Check to see that the istio-csr pod is running and ready
 kubectl get pods -n cert-manager
