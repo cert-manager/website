@@ -2,7 +2,7 @@
 slug: cert-manager-security-audit
 title: cert-manager completes CNCF-sponsored security audit!
 description: As part of our graduation processes cert-manager has completed a security audit of the project
-date: "2024-03-15T12:00:00Z"
+date: "2024-03-18T12:00:00Z"
 ---
 
 In late 2023 the cert-manager project began a security audit, sponsored by the [CNCF](https://www.cncf.io/) and carried out by the team at [Ada Logics](https://adalogics.com/), as part of the ongoing effort for cert-manager to  [reach "graduated" status](https://github.com/cncf/toc/pull/1212) in the CNCF.
