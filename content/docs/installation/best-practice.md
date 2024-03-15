@@ -327,6 +327,73 @@ cainjector:
 > You must increase the `replicaCount` of each Deployment to more than the `minAvailable` value,
 > otherwise the PodDisruptionBudget will prevent you from draining cert-manager Pods.
 
+### Priority Class Name
+
+The reason for setting a priority class is summarized as follows in the Kubernetes blog [Protect Your Mission-Critical Pods From Eviction With `PriorityClass`](https://kubernetes.io/blog/2023/01/12/protect-mission-critical-pods-priorityclass/):
+> Pod priority and preemption help to make sure that mission-critical pods are up in the event of a resource crunch by deciding order of scheduling and eviction.
+
+If cert-manager is mission-critical to your platform,
+then set a `priorityClassName` on the cert-manager Pods
+to protect them from [preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#preemption),
+in situations where a Kubernetes node becomes starved of resources.
+Without a `priorityClassName` the cert-manager Pods may be evicted to free up resources for other Pods,
+and this may cause disruption to any applications that rely on cert-manager.
+
+Most Kubernetes clusters will come with two builtin priority class names:
+`system-cluster-critical` and `system-node-critical`,
+which are used for Kubernetes core components.
+These [can also be used for critical add-ons](https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/),
+such as cert-manager.
+
+We recommend using the following Helm chart values to set `priorityClassName: system-cluster-critical`, for all cert-manager Pods:
+
+```yaml
+global:
+  priorityClassName: system-cluster-critical
+```
+
+On some clusters the [`ResourceQuota` admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#resourcequota) may be configured to [limit the use of certain priority classes to certain namespaces](https://kubernetes.io/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default).
+For example, Google Kubernetes Engine (GKE) will only allow `priorityClassName: system-cluster-critical` for Pods in the `kube-system` namespace,
+by default.
+
+> 📖 Read [Kubernetes PR #93121](https://github.com/kubernetes/kubernetes/pull/93121) to see how and why this was implemented.
+
+In such cases you will need to create a `ResourceQuota` in the `cert-manager` namespace:
+
+```yaml
+# cert-manager-resourcequota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cert-manager-critical-pods
+  namespace: cert-manager
+spec:
+  hard:
+    pods: 1G
+  scopeSelector:
+    matchExpressions:
+    - operator: In
+      scopeName: PriorityClass
+      values:
+      - system-node-critical
+      - system-cluster-critical
+```
+
+```sh
+kubectl apply -f cert-manager-resourcequota.yaml
+```
+
+> 📖 Read [Protect Your Mission-Critical Pods From Eviction With `PriorityClass`](https://kubernetes.io/blog/2023/01/12/protect-mission-critical-pods-priorityclass/), a Kubernetes blog post about how Pod priority and preemption help to make sure that mission-critical pods are up in the event of a resource crunch by deciding order of scheduling and eviction.
+>
+> 📖 Read [Guaranteed Scheduling For Critical Add-On Pods](https://kubernetes.io/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/) to learn why `system-cluster-critical` should be used for add-ons that are critical to a fully functional cluster.
+>
+> 📖 Read [Limit Priority Class consumption by default](https://kubernetes.io/docs/concepts/policy/resource-quotas/#limit-priority-class-consumption-by-default), to learn why platform administrators might restrict usage of certain high priority classes to a limited number of namespaces.
+>
+> 📖 Some examples of other critical add-ons that use the `system-cluster-critical` priority class name:
+> [NVIDIA GPU Operator](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/google-gke.html),
+> [OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper/pull/1282),
+> [Cilium](https://github.com/cilium/cilium/pull/13878).
+
 ## Scalability
 
 cert-manager has three long-running components: controller, cainjector, and webhook.
