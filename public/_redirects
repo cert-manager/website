@@ -228,3 +228,6 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Moved the istio-csr tutorial to its own installation page
 /docs/tutorials/istio-csr/istio-csr/ /docs/usage/istio-csr/installation/ 301!
+
+# Redirect page with incorrect date in URL
+/announcements/2024/21/18/cert-manager-security-audit/ /announcements/2024/03/18/cert-manager-security-audit/ 301!
