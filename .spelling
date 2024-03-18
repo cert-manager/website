@@ -650,12 +650,16 @@ v1.13.0.
 v1.13.1
 v1.13.2
 v1.13.3
+v1.13.4
 v1.13.
 v1.12.5
 v1.12.6
 v1.12.7
+v1.12.8
 v1.14.0
 v1.14.x
+v1.14.3
+v1.14.3.
 liveness
 apiservices
 arm64
@@ -718,3 +722,10 @@ md#renew
 # correct spelling. The spelling "x509" and "X509" are incorrect.
 
 X.509
+
+# Announcements
+
+Logics
+OpenSSF
+OSS-Fuzz
+Korczynski
