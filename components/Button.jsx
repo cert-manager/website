@@ -8,6 +8,7 @@ export default function Button({
   caption,
   href,
   className = '',
+  rel = null,
   target
 }) {
   const styles = classNames({
@@ -19,6 +20,7 @@ export default function Button({
     (<Link
       href={href}
       target={target || '_self'}
+      rel={rel}
       className={`font-montserrat font-bold uppercase text-sm leading-20px btn-primary rounded-5px ${styles} ${className}`}>
 
       <span className={"block " + iconWClass}>{icon && <Icon name={icon} />}</span>
