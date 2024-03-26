@@ -13,16 +13,12 @@ To install csi-driver, use helm:
 
 ```terminal
 helm repo add jetstack https://charts.jetstack.io --force-update
-helm upgrade -i -n cert-manager cert-manager-csi-driver jetstack/cert-manager-csi-driver --wait
+
+helm upgrade cert-manager-csi-driver jetstack/cert-manager-csi-driver \
+  --install \
+  --namespace cert-manager \
+  --wait
 ```
-
-Or apply the static manifests to your cluster:
-
-```terminal
-helm repo add jetstack https://charts.jetstack.io --force-update
-helm template jetstack/cert-manager-csi-driver | kubectl apply -n cert-manager -f -
-```
-
 
 You can verify the installation has completed correctly by checking the presence
 of the CSIDriver resource as well as a CSINode resource present for each node,
