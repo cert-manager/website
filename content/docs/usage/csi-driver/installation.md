@@ -5,7 +5,7 @@ description: 'Installation guide for cert-manager csi-driver'
 
 ## Installation Steps
 
-You must have a working installation of cert-manager present on your cluster and be running at least Kubernetes `v1.16`.
+You must have a working installation of cert-manager present on your cluster and be running at least Kubernetes `v1.19`.
 
 Instructions on how to install cert-manager can be found [on this website](../../installation/README.md).
 
