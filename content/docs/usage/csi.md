@@ -7,40 +7,43 @@ description: 'cert-manager usage: CSI driver'
 <object data="/images/request-certificate-overview/request-certificate-csi.svg"></object>
 </div>
 
-## Enabling mTLS of Pods using the cert-manager CSI Driver
+## Enabling mTLS of Pods using cert-manager csi-driver
 
-A [Container Storage Interface (CSI)
-driver](csi-driver/README.md) has been created to
-facilitate mTLS of Pods running inside your cluster through use of cert-manager.
+[csi-driver](./csi-driver/README.md) facilitates secretless provisioning of certificates
+for pods in a Kubernetes cluster.
+
 Using this driver will ensure that the private key and corresponding signed
 certificate will be unique to each Pod and will be stored on disk to the node
-that the Pod is scheduled to. The life cycle of the certificate key pair matches
-that of the Pod meaning that they will be created at Pod creation, and destroyed
-during termination. This driver also handles renewal on live certificates on the
-fly.
+that the Pod is scheduled to.
 
-A [CSI
-driver](https://github.com/container-storage-interface/spec/blob/master/spec.md)
-is a storage plugin that is deployed into your Kubernetes cluster that can
-honor volume requests specified on Pods, just like those enabled by default such as
-the `Secret`, `ConfigMap`, or `hostPath` volume drivers. In the case of the cert-manager
-CSI driver, it makes use of the ephemeral volume type, made beta as of
-[`v1.16`](https://kubernetes.io/docs/concepts/storage/volumes/#csi-ephemeral-volumes)
-and as such will only work from the Kubernetes version `v1.16`. An ephemeral
-volumes means that the volume is created and destroyed as the Pod is created and
-terminated, as well as specifying the volume attributes, without the need of a
-`PersistentVolume`. This gives the feature of not only having unique
-certificates and keys per Pod, where the private key never leaves the hosts
-node, but that the desired certificate for that Pod template can be defined in
-line with the deployment spec.
+The life cycle of the certificate key pair matches that of the Pod; the certificate is issued
+when the Pod is creation, and destroyed during termination.
 
-> **Warning**: Use of the CSI driver is mostly intended for supporting a PKI of
-> your cluster and facilitating mTLS, and as such, a private Certificate
-> Authority issuer should be used - CA, Vault, and perhaps Venafi, or other
-> external issuers. It is *not* recommended to use public Certificate
-> Authorities, for example Let's Encrypt, which hold strict rate limits on the
-> number of certificates that can be issued for a single domain. Like Pods,
-> these certificate key pairs are designed to be non-immutable and can be
+This driver also handles renewal of live certificates on the fly.
+
+## What's a CSI driver?
+
+A [Kubernetes CSI driver](https://kubernetes-csi.github.io/docs/introduction.html)
+is a storage plugin which is deployed into your Kubernetes cluster.
+
+It can honor volume requests in Pod specifications, just like those enabled by default such as
+the `Secret`, `ConfigMap`, or `hostPath` volume drivers.
+
+In the case of cert-manager's csi-driver an [ephemeral volume](https://kubernetes.io/docs/concepts/storage/volumes/#csi-ephemeral-volumes)
+is used, meaning that the volume is created and destroyed as the Pod is created and
+terminated.
+
+This means that not only are volumes created with unique certificates and keys per Pod,
+but also that the private key never leaves the host's node, and that the desired certificate for
+that Pod template can be defined in line with the spec or template for the pod.
+
+> **Warning**: Use of the CSI driver is mostly intended for supporting a PKI in
+> your cluster and facilitating TLS. As such, a private Certificate Authority
+> should generally be used for issuance.
+> It is *not* recommended to use public Certificate Authorities such as Let's Encrypt,
+> which maintain strict rate limits on the number of certificates that can be issued
+> for a single domain.
+> Like Pods, these certificate key pairs are designed to be thrown away and can be
 > created and destroyed at any time during normal operation.
 
 ## How Does it Work?
