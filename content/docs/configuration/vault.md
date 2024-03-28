@@ -296,6 +296,10 @@ spec:
           audiences: [https://kubernetes.default.svc.cluster.local]
 ```
 
+When using `audiences`, the JWT will still include the generated audience
+`vault://namespace/issuer-name` or `vault://cluster-issuer`. The generated
+audience is useful for restricting access to a Vault role to a certain issuer.
+
 When configuring the Kubernetes Vault auth method, omit the `token_reviewer_jwt`
 parameter so that Vault uses the token provided by cert-manager to authenticate
 with the Kubernetes API server when reviewing the token.
