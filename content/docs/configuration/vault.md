@@ -266,7 +266,7 @@ the same service account.
 #### Secretless Authentication with a Service Account (External Vault)
 
 If you are using a Vault instance external to your cluster, you will need to set
-the `audiences` to an andience accepted by your Kubernetes cluster. When using
+the `audiences` to an audience accepted by your Kubernetes cluster. When using
 an external Vault instance, the short-lived token created by cert-manager to
 authenticate to Vault will be used by Vault for authenticating to Kubernetes.
 First, find what your cluster's issuer is:
