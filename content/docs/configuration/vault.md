@@ -361,7 +361,9 @@ Kubernetes service account token can be provided in two ways:
 - [Secretless Authentication with a Service Account](#secretless-authentication-with-a-service-account) (recommended),
 - [Authentication with a Static Service Account Token](#static-service-account-token).
 
-#### Secretless Authentication with a Service Account
+<a name="static-service-account-token"></a>
+
+#### Secretless Authentication with a Service Account (In-Cluster Vault)
 
 ℹ️ This feature is available in cert-manager >= v1.12.0.
 
@@ -464,7 +466,47 @@ needs to talks to Vault.
 Although it is not recommended, you can also use the same Vault role for all of
 your Issuers and ClusterIssuers by omitting the `audience` field and re-using
 the same service account.
-<a name="static-service-account-token"></a>
+
+#### Secretless Authentication with a Service Account (External Vault)
+
+If you are using a Vault instance external to your cluster, you will need to set
+the `audiences` to an audience accepted by your Kubernetes cluster. When using
+an external Vault instance, the short-lived token created by cert-manager to
+authenticate to Vault will be used by Vault for authenticating to Kubernetes.
+First, find what your cluster's issuer is:
+
+```sh
+kubectl get --raw /.well-known/openid-configuration | jq .issuer -r
+```
+
+Then, set the `audiences` field to the issuer URL:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: vault-issuer
+  namespace: sandbox
+spec:
+  vault:
+    path: pki_int/sign/example-dot-com
+    server: https://vault.local
+    auth:
+      kubernetes:
+        role: my-app-1
+        mountPath: /v1/auth/kubernetes
+        serviceAccountRef:
+          name: vault-issuer
+          audiences: [https://kubernetes.default.svc.cluster.local]
+```
+
+When using `audiences`, the JWT will still include the generated audience
+`vault://namespace/issuer-name` or `vault://cluster-issuer`. The generated
+audience is useful for restricting access to a Vault role to a certain issuer.
+
+When configuring the Kubernetes Vault auth method, omit the `token_reviewer_jwt`
+parameter so that Vault uses the token provided by cert-manager to authenticate
+with the Kubernetes API server when reviewing the token.
 
 #### Authentication with a Static Service Account Token
 
