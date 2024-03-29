@@ -385,7 +385,7 @@ page if a step is missing or if it is outdated.
       > kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
       > the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-9. **(1.12 and above)** In this step, we make sure the Go module
+9. **(1.12, 1.13, and 1.14)** In this step, we make sure the Go module
    `github.com/cert-manager/cert-manager/cmd/ctl` can be imported by
    third-parties.
 
@@ -452,7 +452,6 @@ page if a step is missing or if it is outdated.
 
     [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
 
-
 10. In this section, we will be creating the description for the GitHub Release.
 
     > **Note:** This step is about creating the description that will be
@@ -472,7 +471,7 @@ page if a step is missing or if it is outdated.
 
        ```bash
        # Must be run from the cert-manager folder.
-       export GITHUB_TOKEN=*your-token*
+       export GITHUB_TOKEN=$(gh auth token)
        git fetch origin $BRANCH
        export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
        release-notes --debug --repo-path cert-manager \
@@ -508,16 +507,6 @@ page if a step is missing or if it is outdated.
           data that we forgot to hide. We try to make sure the sensitive data is
           properly redacted but sometimes we forget to update this.
           </p></div>
-
-       > **NOTE (1.10 and earlier):** If you're releasing an older version of
-       > cert-manager then the automatic build will failed because the GCB
-       > config for that build wasn't backported. In this case, you'll need to
-       > trigger the build manually using `cmrel`, which takes about 5 minutes:
-       >
-       > ```bash
-       > # Must be run from the "cert-manager/release" repo folder.
-       > cmrel makestage --ref=$RELEASE_VERSION
-       > ```
 
     3. Copy the build logs URL and send a second Slack message in reply to this
        first message with the Cloud Build job link. For example, the message
@@ -623,7 +612,7 @@ page if a step is missing or if it is outdated.
 
       [ff-release-next]: https://github.com/cert-manager/website/compare/master...release-next?quick_pull=1&title=%5BPost-Release%5D+Merge+release-next+into+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
 
-16. Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
+16. **(1.14 and below)** Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
 
     > ℹ️ The PR is [created automatically](https://github.com/search?q=repo%3AHomebrew%2Fhomebrew-core+cmctl&type=pullrequests&s=created&o=desc)
     > if you are publishing the `latest` version of cert-manager, in which case this step can be skipped.
