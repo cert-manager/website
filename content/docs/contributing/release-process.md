@@ -385,7 +385,10 @@ page if a step is missing or if it is outdated.
       > kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
       > the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-9. **(1.12, 1.13, and 1.14)** In this step, we make sure the Go module
+9. <details>
+   <summary>**ONLY for (1.12, 1.13, and 1.14)**</summary>
+
+   In this step, we make sure the Go module
    `github.com/cert-manager/cert-manager/cmd/ctl` can be imported by
    third-parties.
 
@@ -451,6 +454,8 @@ page if a step is missing or if it is outdated.
     [how-are-versions-of-a-sub-module-managed][]
 
     [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
+
+   </details>
 
 10. In this section, we will be creating the description for the GitHub Release.
 
@@ -612,26 +617,31 @@ page if a step is missing or if it is outdated.
 
       [ff-release-next]: https://github.com/cert-manager/website/compare/master...release-next?quick_pull=1&title=%5BPost-Release%5D+Merge+release-next+into+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
 
-16. **(1.14 and below)** Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
+16. <details>
+      <summary>**ONLY for (1.14 and below)**</summary>
+   
+      Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
 
-    > ℹ️ The PR is [created automatically](https://github.com/search?q=repo%3AHomebrew%2Fhomebrew-core+cmctl&type=pullrequests&s=created&o=desc)
-    > if you are publishing the `latest` version of cert-manager, in which case this step can be skipped.
-    > But not if you are publishing a patch for a previous version.
+      > ℹ️ The PR is [created automatically](https://github.com/search?q=repo%3AHomebrew%2Fhomebrew-core+cmctl&type=pullrequests&s=created&o=desc)
+      > if you are publishing the `latest` version of cert-manager, in which case this step can be skipped.
+      > But not if you are publishing a patch for a previous version.
 
-    Assuming you have `brew` installed, you can use the `brew bump-formula-pr`
-    command to do this. You'll need the new tag name and the commit hash of that
-    tag. See `brew bump-formula-pr --help` for up to date details, but the command
-    will be of the form:
+      Assuming you have `brew` installed, you can use the `brew bump-formula-pr`
+      command to do this. You'll need the new tag name and the commit hash of that
+      tag. See `brew bump-formula-pr --help` for up to date details, but the command
+      will be of the form:
 
-    ```bash
-    brew bump-formula-pr --dry-run --tag v0.10.0 --revision da3265115bfd8be5780801cc6105fa857ef71965 cmctl
-    ```
+      ```bash
+      brew bump-formula-pr --dry-run --tag v0.10.0 --revision da3265115bfd8be5780801cc6105fa857ef71965 cmctl
+      ```
 
-    Replacing the tag and revision with the new ones.
+      Replacing the tag and revision with the new ones.
 
-    This will take time for the Homebrew team to review. Once the pull reqeust
-    against https://github.com/homebrew/homebrew-core has been opened, continue
-    with further release steps.
+      This will take time for the Homebrew team to review. Once the pull reqeust
+      against https://github.com/homebrew/homebrew-core has been opened, continue
+      with further release steps.
+
+    </details>
 
 17. Post a Slack message as an answer to the first message. Toggle the check
    box "Also send to `#cert-manager-dev`" so that the message is well
