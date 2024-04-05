@@ -469,6 +469,8 @@ the same service account.
 
 #### Secretless Authentication with a Service Account (External Vault)
 
+ℹ️ This feature is available in cert-manager >= v1.15.0.
+
 If you are using a Vault instance external to your cluster, you will need to set
 the `audiences` to an audience accepted by your Kubernetes cluster. When using
 an external Vault instance, the short-lived token created by cert-manager to
