@@ -7,18 +7,21 @@ description: Supported releases, Kubernetes versions, OpenShift versions and upc
 Inspired by https://istio.io/latest/about/supported-releases/
 */}
 
-This page lists the status, timeline and policy for currently supported releases.
+This page lists the status, timeline and policy for currently supported releases of cert-manager.
 
-Each release is supported for a period of four months, and we aim to create a new
-release roughly every two months, accounting for holiday periods, major conferences
-and other world events.
+All cert-manager releases are supported at least until the release of a second subsequent version.
+That means there are always at least two supported versions of cert-manager at any given time,
+and possibly more if there's also a current Long Term Support version.
+
+We aim to do regular releases but release dates can vary when accounting for holidays,
+conferences (such as KubeCon), maintainer commitments and other world events.
 
 <a id="supported-releases"></a>
 ## Currently supported releases
 
 | Release      | Release Date | End of Life            | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |--------------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
-| [1.14][]     | Feb 3, 2024  | ~4 months post release | 1.24 → 1.29                        | 4.11 → 4.15                       |
+| [1.14][]     | Feb 3, 2024  | Release of 1.16        | 1.24 → 1.29                        | 4.11 → 4.15                       |
 | [1.13][]     | Sep 12, 2023 | Release of 1.15        | 1.23 → 1.28                        | 4.10 → 4.15                       |
 | [1.12 LTS][] | May 19, 2023 | May 19, 2025           | 1.22 → 1.28                        | 4.9 → 4.15                        |
 
@@ -26,11 +29,11 @@ cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](htt
 
 ## Upcoming releases
 
-| Release  | Release Date | End of Life            | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
-|----------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
-| [1.15][] | TBD          | TBD                    | TBD                                | TBD                               |
+| Release  | Release Date | End of Life      | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
+|----------|:------------:|:----------------:|:----------------------------------:|:---------------------------------:|
+| [1.15][] | TBD          | Release of 1.17  | TBD                                | TBD                               |
 
-Dates in the future are uncertain and might change.
+Dates in the future are not firm commitments and are subject to change.
 
 ## Old releases
 
