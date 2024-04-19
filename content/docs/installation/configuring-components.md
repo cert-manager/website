@@ -15,7 +15,7 @@ An overview of the available CLI flags for each component can be found on the fo
 - cert-manager acmesolver: [acmesolver CLI flags](../cli/acmesolver.md)
 - cert-manager cmctl: [cmctl CLI flags](../cli/cmctl.md)
 
-When using the Helm chart, the CLI flags can be specified in the `controller.extraArgs`, `webhook.extraArgs`, `cainjector.extraArgs` and `acmesolver.extraArgs` values.
+When using the Helm chart, the CLI flags can be specified in the `extraArgs`, `webhook.extraArgs`, `cainjector.extraArgs` and `acmesolver.extraArgs` values.
 
 ## Configuration file
 
