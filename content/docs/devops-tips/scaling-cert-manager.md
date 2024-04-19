@@ -99,3 +99,36 @@ Use a tool like Kyverno to override the `Certificate.spec.revisionHistoryLimit` 
 >
 > 🔗 Read [`cert-manager#3773`: Certificate revision history limit](https://github.com/cert-manager/cert-manager/pull/3773),
 > to learn why stale CertificateRequests resources are not automatically deleted.
+
+## Enable Server-Side Apply
+
+By default, cert-manager [uses Update requests](https://kubernetes.io/docs/reference/using-api/api-concepts/#update-mechanism-update)
+to create and modify resources like CertificateRequest and Secret,
+but on a busy cluster there will be frequent conflicts as the control loops in cert-manager each try to update the status of various resources.
+
+You will see errors, like this one, in the logs:
+
+> `I0419 14:11:51.325377       1 controller.go:162] "re-queuing item due to optimistic locking on resource" logger="cert-manager.certificates-trigger" key="team-864-p6ts6/app-7" error="Operation cannot be fulfilled on certificates.cert-manager.io \"app-7\": the object has been modified; please apply your changes to the latest version and try again"`
+
+This error is relatively harmless because the update attempt is retried,
+but it slows down the reconciliation because each error triggers an exponential back off mechanism,
+which causes increasing delays between retries.
+
+The solution is to turn on the [Server-Side Apply Feature](../installation/configuring-components.md#feature-gates),
+which causes cert-manager to use [HTTP PATCH using Server-Side Apply](https://kubernetes.io/docs/reference/using-api/api-concepts/#update-mechanism-server-side-apply) when ever it needs to modify an API resource.
+This avoids all conflicts because each cert-manager controller sets only the fields that it owns.
+
+You can enable the server-side apply feature gate with the following Helm chart values:
+
+```yaml
+# helm-values.yaml
+config:
+  apiVersion: controller.config.cert-manager.io/v1alpha1
+  kind: ControllerConfiguration
+  featureGates:
+    AllBeta: true
+    ServerSideApply: true
+```
+
+> 📖 Read [Using Server-Side Apply in a controller](https://kubernetes.io/docs/reference/using-api/server-side-apply/#using-server-side-apply-in-a-controller),
+> to learn about the advantages of server-side apply for software like cert-manager.
