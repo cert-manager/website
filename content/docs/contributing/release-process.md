@@ -15,10 +15,7 @@ following conditions:
 
 1. The relevant [testgrid dashboard](https://testgrid.k8s.io/cert-manager) should not be failing for the release you're trying to perform.
 2. The release process **takes about 40 minutes**. You must have time to complete all the steps.
-3. You currently need to be at Jetstack to get the required GitHub and GCP
-   permissions. (we'd like contributors outside Jetstack to be able to get
-   access; if that's of interest to you, please let us know).
-4. You need to have the GitHub `admin` permission on the cert-manager project.
+3. You need to have the GitHub `admin` permission on the cert-manager project.
    To check that you have the `admin` role, run:
 
     ```bash
@@ -32,25 +29,12 @@ following conditions:
     PR](https://github.com/jetstack/platform-board/pulls/new) with a link to
     here.
 
-5. You need to be added as an "Editor" to the GCP project
+4. You need to be added as an "Editor" to the GCP project
    [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release).
-   To check if you do have access, try opening [the Cloud Build
-   page](https://console.cloud.google.com/cloud-build?project=cert-manager-release).
-   To get the "Editor" permission on the GCP project, open a PR with your name
-   added to the maintainers list in
-   [`cert_manager_release.tf`](https://github.com/jetstack/terraform-jetstack/blob/master/cert_manager_release.tf)
-
-    ```diff
-    --- a/cert_manager_release.tf
-    +++ b/cert_manager_release.tf
-    @@ -17,6 +17,7 @@ locals {
-         var.personal_email["..."],
-         var.personal_email["..."],
-         var.personal_email["..."],
-    +    var.personal_email["mael-valais"],
-       ])
-     }
-    ```
+   To check if you do have access, try opening [the Cloud Build page](https://console.cloud.google.com/cloud-build?project=cert-manager-release).
+   To get the "Editor" permission on the GCP project, you need to be a maintainer. If you are, open a PR with your email address
+   added to the release manager list in
+   [`variables.tf`](https://github.com/cert-manager/infrastructure/blob/665d53cb01c871dc30232dfa84cde62effb0ab56/gcp/variables.tf#L3)
 
     You may use the following PR description:
 
@@ -266,7 +250,7 @@ page if a step is missing or if it is outdated.
 
       ```diff
       -"cert_manager_latest_version": "v1.14.2",
-      +"cert_manager_latest_version": "v1.14.3",      
+      +"cert_manager_latest_version": "v1.14.3",
       ```
 
    5. (**final release only**) Freeze the `docs/` folder by creating a copy ,
@@ -583,6 +567,9 @@ page if a step is missing or if it is outdated.
 
 14. Merge the pull request containing the Helm chart:
 
+    Important: This PR can currently only be merged by Venafi employees, but we're aiming to fix that soon. Changing this
+    will involve us coming up with a plan for migrating where our Helm charts are stored and ensuring we don't break anyone.
+
     The Helm charts for cert-manager are served using Cloudflare pages
     and the Helm chart files and metadata are stored in the [Jetstack charts repository](https://github.com/jetstack/jetstack-charts).
     The `cmrel publish --nomock` step (above) will have created a PR in this repository which you now have to review and merge, as follows:
@@ -619,7 +606,7 @@ page if a step is missing or if it is outdated.
 
 16. <details>
       <summary>**ONLY for (1.14 and below)**</summary>
-   
+
       Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
 
       > ℹ️ The PR is [created automatically](https://github.com/search?q=repo%3AHomebrew%2Fhomebrew-core+cmctl&type=pullrequests&s=created&o=desc)
