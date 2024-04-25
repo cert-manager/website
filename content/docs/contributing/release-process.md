@@ -391,7 +391,7 @@ page if a step is missing or if it is outdated.
      go get github.com/cert-manager/cert-manager@$RELEASE_VERSION
      cd ../..
 
-     find . -name go.mod -not -path ./_bin/\* -exec dirname '{}' \; | xargs -L1 -I@ sh -c 'cd @; go mod tidy'
+     make tidy
      git add "**/go.mod" "**/go.sum"
      git commit --signoff -m"Update cmd/ctl's go.mod to $RELEASE_VERSION"
      ```

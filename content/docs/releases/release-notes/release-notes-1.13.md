@@ -3,6 +3,22 @@ title: Release 1.13
 description: 'cert-manager release notes: cert-manager 1.13'
 ---
 
+## `v1.13.6`
+
+Special thanks to [@BobyMCbobs](https://github.com/BobyMCbobs) for reporting and testing the DigitalOcean issue!
+
+### Known Issues
+
+- ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured: see [1.14 release notes](./release-notes-1.14.md#known-issues) for more information.
+
+### Changes
+
+#### Bug or Regression
+
+- DigitalOcean: Ensure that only TXT records are considered for deletion when cleaning up after an ACME challenge ([#6892](https://github.com/cert-manager/cert-manager/pull/6892), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Bump `golang.org/x/net` to address [`CVE-2023-45288`](https://nvd.nist.gov/vuln/detail/CVE-2023-45288) ([#6932](https://github.com/cert-manager/cert-manager/pull/6932), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+
 ## `v1.13.5`
 
 ### Known Issues

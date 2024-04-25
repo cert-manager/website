@@ -52,6 +52,22 @@ without breaking users who have come to rely on the existing, documented behavio
 
   > ⚠️ There may be [clients that are incompatible with `DST Root CA X3`](https://github.com/mono/mono/issues/21233).
 
+## `v1.14.5`
+
+Special thanks to [@BobyMCbobs](https://github.com/BobyMCbobs) for reporting and testing the DigitalOcean issue!
+
+### Known Issues
+
+- ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured: see [1.14 release notes](./release-notes-1.14.md#known-issues) for more information.
+
+### Changes
+
+#### Bug or Regression
+
+- DigitalOcean: Ensure that only TXT records are considered for deletion when cleaning up after an ACME challenge ([#6893](https://github.com/cert-manager/cert-manager/pull/6893), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Bump `golang.org/x/net` to address [`CVE-2023-45288`](https://nvd.nist.gov/vuln/detail/CVE-2023-45288) ([#6931](https://github.com/cert-manager/cert-manager/pull/6931), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+
 ## `v1.14.4`
 
 > 📢 When upgrading to cert-manager release 1.14, please skip `v1.14.0`, `v1.14.1`, `v1.14.2` and `v1.14.3` and install this patch version instead.
