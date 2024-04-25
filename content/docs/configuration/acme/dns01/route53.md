@@ -167,7 +167,7 @@ spec:
         route53:
           region: us-east-1
           hostedZoneID: DIKER8JEXAMPLE # optional, see policy above
-
+        
     # this solver handles example.org challenges
     # and uses explicit credentials
     - selector:
