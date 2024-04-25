@@ -18,38 +18,29 @@ DNS01 challenge. To enable this, create a IAM policy with the following
 permissions:
 
 ```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
     {
-      "Version" : "2012-10-17",
-      "Statement" : [
-        {
-          "Sid" : "VisualEditor0",
-          "Effect" : "Allow",
-          "Action" : "route53:GetChange",
-          "Resource" : "arn:aws:route53:::change/*"
-        },
-        {
-          "Sid" : "VisualEditor1",
-          "Effect" : "Allow",
-          "Action" : [
-            "route53:ListHostedZones",
-            "route53:ListHostedZonesByName"
-          ],
-          "Resource" : "*"
-        },
-        {
-          "Sid" : "VisualEditor2",
-          "Effect" : "Allow",
-          "Action" : "route53:ListResourceRecordSets",
-          "Resource" : "arn:aws:route53:::hostedzone/*"
-        },
-        {
-          "Sid" : "VisualEditor3",
-          "Effect" : "Allow",
-          "Action" : "route53:ChangeResourceRecordSets",
-          "Resource" : "arn:aws:route53:::hostedzone/*"
-        }
-      ]
+      "Effect": "Allow",
+      "Action": "route53:GetChange",
+      "Resource": "arn:aws:route53:::change/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ChangeResourceRecordSets",
+        "route53:ListResourceRecordSets"
+      ],
+      "Resource": "arn:aws:route53:::hostedzone/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "route53:ListHostedZonesByName",
+      "Resource": "*"
     }
+  ]
+}
 ```
 
 > Note: The `route53:ListHostedZonesByName` statement can be removed if you
@@ -167,7 +158,7 @@ spec:
         route53:
           region: us-east-1
           hostedZoneID: DIKER8JEXAMPLE # optional, see policy above
-        
+
     # this solver handles example.org challenges
     # and uses explicit credentials
     - selector:
