@@ -32,36 +32,17 @@ function Support({ router }) {
             <h2 className="text-4xl uppercase">{page.intro.heading}</h2>
           </Dots>
           <p className="text-lg mb-6">{page.intro.description}</p>
-          <div className="bg-white px-9 py-8 rounded-5px relative overflow-hidden">
-            <div className="absolute top-0 right-0 h-full w-full">
-              <Image
-                src="/images/venafi-hero.png"
-                alt="Venafi TLS Protect for Kubernetes"
-                width={960}
-                height={384}
-                layout="fill"
-                className="object-cover"
-              />
-            </div>
-            <div className="relative z-100">
+          <div className="overflow-hidden">
+            <Link
+              href={page.intro.cta.href}
+              target="_blank">
               <Image
                 src={page.intro.cta.logo}
                 alt={page.intro.heading}
-                width={300}
-                height={75}
+                width={768}
+                height={250}
               />
-              <p className="text-black text-lg mb-5 sm:mr-60">
-                {page.intro.cta.description}
-              </p>
-              <Link
-                href={page.intro.cta.href}
-                target="_blank"
-                className="inline-block bg-blue-1 px-6 py-3 rounded-5px text-white text-sm no-underline">
-
-                {page.intro.cta.caption}
-
-              </Link>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
