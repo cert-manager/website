@@ -49,7 +49,7 @@ We'll ensure that anyone outside of the core maintainer team who has a talking p
 
 ### Community Meetings
 
-Our bi-weekly (i.e. every two weeks) community meetings happen [on Google Meet](https://meet.google.com/iga-jwvx-nye) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London) (for dates, check calendar invites or [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U)).
+Our bi-weekly (i.e. every two weeks) community meetings happen [on Zoom](https://zoom.us/j/96658445866) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London) (for dates, check calendar invites or [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U)).
 
 These meetings are an hour-long chat about cert-manager topics. It's a great way to get involved with contributing for the
 first time; to get answers to any questions you might have; or to propose a new feature which needs some explanation.
