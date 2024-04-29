@@ -188,19 +188,6 @@ documentation](../reference/api-docs.md#cert-manager.io/v1.KeyUsage).
 
 ### Additional Certificate Output Formats
 
-<div className="warning">
-
-⛔️ The additional certificate output formats feature is currently in an
-_experimental_ alpha state, and is subject to breaking changes or complete
-removal in future releases. This feature is only enabled by adding it to the
-`--feature-gates` flag on the cert-manager controller and webhook components:
-
-```bash
---feature-gates=AdditionalCertificateOutputFormats=true
-```
-
-</div>
-
 `additionalOutputFormats` is a field on the Certificate `spec` that allows
 specifying additional supplementary formats of issued certificates and their
 private key. There are currently two supported additional output formats:
