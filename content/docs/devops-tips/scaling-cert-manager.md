@@ -38,7 +38,7 @@ By default cert-manager [throttles the rate of requests to the Kubernetes API se
 Historically this was intended to prevent cert-manager from overwhelming the Kubernetes API server,
 but modern versions of Kubernetes implement [API Priority and Fairness](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/),
 which obviates the need for client side throttling.
-You can increase the threshold of the the client-side rate limiter using the following helm values:
+You can increase the threshold of the client-side rate limiter using the following helm values:
 
 ```yaml
 # helm-values.yaml
