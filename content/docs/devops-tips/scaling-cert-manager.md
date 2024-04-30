@@ -24,7 +24,7 @@ If large TLS keys are used (e.g. RSA 4096) the memory use will be higher than if
 The other Secrets in the cluster, such as those used for Helm chart configurations or for other workloads,
 will not significantly increase the memory consumption, because cert-manager will only cache the metadata of these Secrets.
 
-**When CertificateRequest resources are the dominant use-case**,
+**When `CertificateRequest` resources are the dominant use-case**,
 such as with csi-driver or with istio-csr,
 the memory consumption of the cert-manager controller will be much lower,
 because there will be fewer TLS Secrets and fewer resources to be cached.
@@ -76,10 +76,10 @@ might accidentally or maliciously cause a denial of service for other users on t
 
 ## Set `revisionHistoryLimit: 1` on all Certificate resources
 
-By default, cert-manager will keep all the CertificateRequest resources that **it** creates
+By default, cert-manager will keep all the `CertificateRequest` resources that **it** creates
 ([`revisionHistoryLimit`](../reference/api-docs.md#cert-manager.io/v1.CertificateSpec)):
 
-> The maximum number of CertificateRequest revisions that are maintained in
+> The maximum number of `CertificateRequest` revisions that are maintained in
 > the Certificate's history. Each revision represents a single
 > `CertificateRequest` created by this Certificate, either when it was
 > created, renewed, or Spec was changed. Revisions will be removed by oldest
@@ -97,13 +97,13 @@ Use a tool like Kyverno to override the `Certificate.spec.revisionHistoryLimit` 
 >
 > 📖 Learn [how to set `revisionHistoryLimit` when using Annotated Ingress resources](../usage/ingress.md#supported-annotations).
 >
-> 🔗 Read [`cert-manager#3773`: Certificate revision history limit](https://github.com/cert-manager/cert-manager/pull/3773),
-> to learn why stale CertificateRequests resources are not automatically deleted.
+> 🔗 Read [`cert-manager#3958`: Sane defaults for Certificate revision history limit](https://github.com/cert-manager/cert-manager/issues/3958);
+> a proposal to change the default `revisionHistoryLimit`, which will obviate this particular recommendation.
 
 ## Enable Server-Side Apply
 
 By default, cert-manager [uses Update requests](https://kubernetes.io/docs/reference/using-api/api-concepts/#update-mechanism-update)
-to create and modify resources like CertificateRequest and Secret,
+to create and modify resources like `CertificateRequest` and `Secret`,
 but on a busy cluster there will be frequent conflicts as the control loops in cert-manager each try to update the status of various resources.
 
 You will see errors, like this one, in the logs:
@@ -126,7 +126,6 @@ config:
   apiVersion: controller.config.cert-manager.io/v1alpha1
   kind: ControllerConfiguration
   featureGates:
-    AllBeta: true
     ServerSideApply: true
 ```
 
