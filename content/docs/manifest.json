@@ -646,6 +646,10 @@
             {
               "title": "Best Practice Installation Options",
               "path": "/docs/installation/best-practice.md"
+            },
+            {
+              "title": "Scaling cert-manager",
+              "path": "/docs/devops-tips/scaling-cert-manager.md"
             }
           ]
         },
