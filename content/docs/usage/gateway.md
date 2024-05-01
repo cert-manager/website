@@ -10,7 +10,7 @@ description: 'cert-manager usage: Kubernetes Gateways'
 <object data="/images/request-certificate-overview/request-certificate-gateway.svg"></object>
 </div>
 
-**FEATURE STATE**: cert-manager 1.5 [alpha]
+**FEATURE STATE**: cert-manager 1.15 [beta]
 
 <div className="info">
 
@@ -24,7 +24,7 @@ HTTP-01](../configuration/acme/http01/README.md).
 <div className="info">
 
 🚧   cert-manager 1.14+ is tested with v1 Kubernetes Gateway API. It should also work
-with v1beta1 because of resource conversion, but has not been tested with it.
+with v1beta1 and v1alpha2 because of resource conversion, but has not been tested with it.
 
 </div>
 
@@ -45,8 +45,8 @@ following diagram (source: https://gateway-api.sigs.k8s.io):
 
 <div className="info">
 
-📌  This feature requires the installation of the [Gateway API bundle](https://gateway-api.sigs.k8s.io/guides/#installing-a-gateway-controller) and passing a
-feature flag to the cert-manager controller.
+📌  This feature requires the installation of the [Gateway API bundle](https://gateway-api.sigs.k8s.io/guides/#installing-a-gateway-controller) and passing an
+additional flag to the cert-manager controller.
 
 To install v1.5.1 Gateway API bundle (Gateway CRDs and webhook), run the following command:
 
@@ -60,7 +60,7 @@ To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
 
   ```sh
   helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
-    --set "extraArgs={--feature-gates=ExperimentalGatewayAPISupport=true}"
+    --set "extraArgs={--enable-gateway-api}"
   ```
 
 - If you are using the raw cert-manager manifests, add the following flag to the
@@ -68,7 +68,7 @@ To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
 
   ```yaml
   args:
-    - --feature-gates=ExperimentalGatewayAPISupport=true
+    - --enable-gateway-api
   ```
 
 The Gateway API CRDs should either be installed before cert-manager starts or
