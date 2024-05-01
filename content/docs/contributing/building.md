@@ -29,6 +29,21 @@ You should install the following tools before you start developing cert-manager:
 - `docker` (or `podman`, see [Container Engines](#container-engines) below)
 - `Go` (optional; see [Go Versions](#go-versions) below)
 
+### Notes for macOS
+
+cert-manager supports being developed on macOS, but there are a couple of extra requirements to note:
+
+1. cert-manager's Makefile setup uses `bash`, and the system version of bash is prehistoric on macOS. We recommend installing bash from
+   [homebrew](https://formulae.brew.sh/formula/bash); if you don't, you might see very poor performance in Makefiles
+2. As mentioned above, GNU Coreutils are required and can be installed via [homebrew](https://formulae.brew.sh/formula/coreutils)
+3. `make` is also very old on macOS; we recommend installing a newer version from [homebrew](https://formulae.brew.sh/formula/make)
+
+In summary, we recommend the following for all developers using macOS:
+
+```console
+brew install make bash git jq coreutils
+```
+
 ## Getting Started
 
 The vast majority of commands which you're likely to need to use are documented via `make help`. That's probably the first place to start if you're
