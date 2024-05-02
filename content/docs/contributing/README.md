@@ -41,7 +41,7 @@ The format is a 5 minute social chat, followed by a quick round-robin status rep
 The status report is a stand-up where we talk about work done yesterday, work coming up and highlight any blockers.
 We'll try to keep to a **strict time limit** during these status reports of around 1 minute per person.
 
-Please don't be offended if someone steps in when you run out of time and moves the reports along to the next person - the idea
+Please don't be offended if someone steps in when you run out of time and moves the reports along to the next person – the idea
 is for everyone to be succinct so it's clear what's being worked on and who is blocked.
 
 We finish with talking points, which are open-ended discussions on any topic related to cert-manager or its sub-projects.
@@ -49,7 +49,7 @@ We'll ensure that anyone outside of the core maintainer team who has a talking p
 
 ### Community Meetings
 
-Our bi-weekly (i.e. every two weeks) community meetings happen [on Zoom](https://zoom.us/j/96658445866) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London) (for dates, check calendar invites or [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U)).
+Our bi-weekly (i.e. every two weeks) community meetings happen [on Zoom](https://zoom.us/j/96658445866) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London). You can look at the [CNCF calendar](https://tockify.com/cncf.public.events/monthly?search=cert-manager) to see when the next one will take place.
 
 These meetings are an hour-long chat about cert-manager topics. It's a great way to get involved with contributing for the
 first time; to get answers to any questions you might have; or to propose a new feature which needs some explanation.
@@ -57,7 +57,7 @@ first time; to get answers to any questions you might have; or to propose a new 
 If you want to discuss something, please add it to the [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U)
 before the meeting. The meeting chair will try to get to everything that was on the notes before the meeting started.
 
-We try to record these meetings and put them on YouTube so they can be checked later - if you don't want to appear on video please keep
+We try to record these meetings and put them on YouTube so they can be checked later – if you don't want to appear on video please keep
 your camera off!
 
 ## Slack
