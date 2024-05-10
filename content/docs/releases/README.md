@@ -13,8 +13,12 @@ All cert-manager releases are supported at least until the release of a second s
 That means there are always at least two supported versions of cert-manager at any given time,
 and possibly more if there's also a current Long Term Support version.
 
-We aim to do regular releases but release dates can vary when accounting for holidays,
+We aim to do regular releases roughly every 4 months but release dates can vary when accounting for holidays,
 conferences (such as KubeCon), maintainer commitments and other world events.
+
+You don't have to wait until the next minor release to start using new features; we also aim to
+create regular alpha releases which - while not as thoroughly tested or stable as other releases -
+should be stable enough to run.
 
 <a id="supported-releases"></a>
 ## Currently supported releases
