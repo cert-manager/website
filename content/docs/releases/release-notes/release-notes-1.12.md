@@ -3,13 +3,223 @@ title: Release 1.12
 description: 'cert-manager release notes: cert-manager 1.12'
 ---
 
+cert-manager 1.12 brings support for JSON logging, a lower memory footprint,
+support for ephemeral service account tokens with Vault, and the support of the
+`ingressClassName` field. We also improved on our ability to patch
+vulnerabilities.
+
+## Known Issues
+
+These known issues apply to all releases of cert-manager `v1.12`. Some patch releases may have other specific issues, which are called out in the notes for the respective release below.
+
+- ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured: see [1.14 release notes](./release-notes-1.14.md#known-issues) for more information.
+
+- If two Certificate resources are incorrectly configured to have the same target Secret resource, cert-manager will generate a MANY CertificateRequests, possibly causing high CPU usage and/ or high costs due to the large number of certificates issued (see https://github.com/cert-manager/cert-manager/pull/6406).
+   This problem was resolved in v1.13.2 and other later versions, but the fix cannot be easily backported to `v1.12.x`. We recommend using `v1.12.x` with caution (avoid misconfigured Certificate resources) or upgrading to a newer version.
+
+
+## Major Themes
+
+### Support for JSON logging
+
+JSON logs are now available in cert-manager! A massive thank you to
+[@malovme](https://github.com/malovme) for going the extra mile to get
+[#5828](https://github.com/cert-manager/cert-manager/pull/5828) merged!
+
+To enable JSON logs, add the flag `--logging-format=json` to the three
+deployments (`cert-manager`, `cert-manager-webhook`, and
+`cert-manager-cainjector`).
+
+For example, if you are using the Helm chart:
+
+```bash
+helm repo add --force-update jetstack https://charts.jetstack.io
+helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
+  --set extraArgs='{--logging-format=json}' \
+  --set webhook.extraArgs='{--logging-format=json}' \
+  --set cainjector.extraArgs='{--logging-format=json}'
+```
+
+### Lower memory footprint
+
+In 1.12 we continued the work started in 1.11 to reduce cert-manager component's
+memory consumption.
+
+#### Controller
+
+Caching of the full contents of all cluster `Secret`s can now be disabled by
+setting a `SecretsFilteredCaching` alpha feature gate to true. This will ensure
+that only `Secret` resources that are labelled with
+`controller.cert-manager.io/fao` label [^1] are cached in full. Cert-manager
+automatically adds this label to all `Certificate` `Secret`s.
+
+This change has been placed behind alpha feature gate as it could potentially
+slow down large scale issuance because issuer credentials `Secret`s will now be
+retrieved from kube-apiserver instead of local cache. To prevent the slow down,
+users can manually label issuer `Secret`s with a
+`controller.cert-manager.io/fao` label.
+See the
+[design](https://github.com/cert-manager/cert-manager/blob/master/design/20221205-memory-management.md)
+and [implementation](https://github.com/cert-manager/cert-manager/pull/5824) for
+additional details.
+We would like to gather some feedback on this change before
+it can graduate- please leave your comments on
+(`cert-manager#6074`)[https://github.com/cert-manager/cert-manager/issues/6074].
+
+Additionally, controller no longer watches and caches all `Pod` and `Service`
+resources.
+See [`cert-manager#5976`](https://github.com/cert-manager/cert-manager/pull/5976) for implementation.
+
+#### Cainjector
+
+[Cainjector's](../../concepts/ca-injector.md) control loops have been refactored, so by default it should
+consume up to half as much memory as before, see
+[`cert-manager#5746`](https://github.com/cert-manager/cert-manager/pull/5746).
+
+Additionally, a number of flags have been added to cainjector that can be used
+to scope down what resources it watches and caches.
+
+If cainjector is only used as part of cert-manager installation, it only needs
+to inject CA certs to cert-manager's `MutatingWebhookConfiguration` and
+`ValidatingWebhookConfiguration` from a `Secret` in cert-manager's installation
+namespace so all the other injectable/source types can be turned off and
+cainjector can be scoped to a single namespace, see the relevant flags below:
+
+```go
+// cainjector flags
+--namespace=<cert-manager-installation-namespace> \
+--enable-customresourcedefinitions-injectable=false \
+--enable-certificates-data-source=false \
+--enable-apiservices-injectable=false
+```
+
+See [`cert-manager#5766`](https://github.com/cert-manager/cert-manager/pull/5766) for more detail.
+
+A big thanks to everyone who put in time reporting and writing up issues
+describing performance problems in large scale installations.
+
+### Faster Response to CVEs By Reducing Transitive Dependencies
+
+In cert-manager 1.12, we have worked on reducing the impacts that unsupported
+dependencies have on our ability to patch CVEs.
+
+Each binary now has its own `go.mod` file. When a CVE is declared in an
+unsupported minor version of a dependency, and that the only solution is to bump
+the minor version of the dependency, we can now choose to make an exception and
+bump that minor version but limit the impact to a single binary.
+
+For example, in cert-manager 1.10, we chose not to fix a CVE reported in Helm
+because it was forcing us to bump the minor versions of `k8s.io/api` and many
+other dependencies.
+
+A side effect of the new `go.mod` layout is that it's now easier to import
+cert-manager in Go, in terms of transitive dependencies that might show up in
+your `go.mod` files or potential version conflicts between cert-manager and your
+other dependencies.
+
+The caveat here is that we still only recommend importing cert-manager in [very
+specific circumstances](../../contributing/importing.md), and the module changes
+mean that if you imported some paths (specifically under `cmd` or some paths
+under `test`) you might see broken imports when you try to upgrade.
+
+If you experience a break as part of this, we're sorry and we'd be interested to
+chat about it. The vast majority of projects using cert-manager should notice no
+impact, and there should be no runtime impact either.
+
+You can read more about this change in the design document
+[`20230302.gomod.md`](https://github.com/cert-manager/cert-manager/blob/master/design/20230302.gomod.md).
+
+### Support for ephemeral service account tokens in Vault
+
+cert-manager can now authenticate to Vault using ephemeral service account
+tokens (JWT). cert-manager already knew to authenticate to Vault using the
+[Vault Kubernetes Auth
+Method](https://developer.hashicorp.com/vault/docs/auth/kubernetes) but relied
+on insecure service account tokens stored in Secrets. You can now configure
+cert-manager in a secretless manner. With this new feature, cert-manager will
+create an ephemeral service account token on your behalf and use that to
+authenticate to Vault.
+
+> 📖 Read about [Secretless Authentication with a Service Account](../../configuration/vault.md#secretless-authentication-with-a-service-account).
+
+This change was implemented in the pull request
+[`cert-manager#5502`](https://github.com/cert-manager/cert-manager/pull/5502).
+
+### Support for `ingressClassName` in the HTTP-01 solver
+
+cert-manager now supports the `ingressClassName` field in the HTTP-01 solver. We
+recommend using `ingressClassName` instead of the field `class` in your Issuers
+and ClusterIssuers.
+
+> 📖 Read more about `ingressClassName` in the documentation page [HTTP01](../../configuration/acme/http01/#ingressclassname).
+
+### Liveness probe and healthz endpoint in the controller
+
+A healthz HTTP server has been added to the controller component.
+It serves a `/livez`  endpoint, which reports the health status of the leader election system.
+If the leader process has failed to renew its lease but has unexpectedly failed to exit,
+the `/livez` endpoint will return an error code and an error message.
+In conjunction with a new liveness probe in the controller Pod,
+this will cause the controller to be restarted by the kubelet.
+
+> 📖 Read more about this new feature in [Best Practice: Use Liveness Probes](../../installation/best-practice.md#use-liveness-probes).
+
+## Community
+
+We extend our gratitude to all the open-source contributors who have made
+commits in this release, including:
+
+- [@andrewsomething](https://github.com/andrewsomething)
+- [@avi-08](https://github.com/avi-08)
+- [@dsonck92](https://github.com/dsonck92)
+- [@e96wic](https://github.com/e96wic)
+- [@ExNG](https://github.com/ExNG)
+- [@erikgb](https://github.com/erikgb)
+- [@g-gaston](https://github.com/g-gaston)
+- [@james-callahan](https://github.com/james-callahan)
+- [@jkroepke](https://github.com/jkroepke)
+- [@lucacome](https://github.com/lucacome)
+- [@malovme](https://github.com/malovme)
+- [@maumontesilva](https://github.com/maumontesilva)
+- [@tobotg](https://github.com/tobotg)
+- [@TrilokGeer](https://github.com/TrilokGeer)
+- [@vidarno](https://github.com/vidarno)
+- [@vinzent](https://github.com/vinzent)
+- [@waterfoul](https://github.com/waterfoul)
+- [@yanggangtony](https://github.com/yanggangtony)
+- [@yulng](https://github.com/yulng)
+- [@BobyMCbobs](https://github.com/BobyMCbobs)
+
+Thanks also to the following cert-manager maintainers for their contributions during this release:
+
+- [@inteon](https://github.com/inteon)
+- [@wallrj](https://github.com/wallrj)
+- [@maelvls](https://github.com/maelvls)
+- [@SgtCoDFish](https://github.com/SgtCoDFish)
+- [@irbekrm](https://github.com/irbekrm)
+- [@jakexks](https://github.com/jakexks)
+- [@JoshVanL](https://github.com/JoshVanL)
+- [@munnerz](https://github.com/munnerz)
+
+Equally, thanks to everyone who provided feedback, helped users and raised issues
+on GitHub and Slack, joined our meetings and talked to us at KubeCon!
+
+And special thanks to [@erikgb](https://github.com/erikgb) for continuously great
+input and feedback and to [@lucacome](https://github.com/lucacome) for always
+ensuring that our Kubernetes dependencies are up to date!
+
+Thanks also to the CNCF, which provides resources and support, and to the AWS
+open source team for being good community members and for their maintenance of
+the Private CA Issuer.
+
+In addition, massive thanks to Jetstack (by Venafi) for contributing developer
+time and resources towards the continued maintenance of cert-manager projects. Venafi has sponsored
+cert-manager 1.12 as a long term support release, meaning it will be maintained for much longer
+than other releases to provide a stable platform for enterprises to build upon.
+
 ## `v1.12.10`
 
 Special thanks to [@BobyMCbobs](https://github.com/BobyMCbobs) for reporting and testing the DigitalOcean issue!
-
-### Known Issues
-
-- ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured: see [1.14 release notes](./release-notes-1.14.md#known-issues) for more information.
 
 ### Changes
 
@@ -19,10 +229,6 @@ Special thanks to [@BobyMCbobs](https://github.com/BobyMCbobs) for reporting and
 - Bump `golang.org/x/net` to address [`CVE-2023-45288`](https://nvd.nist.gov/vuln/detail/CVE-2023-45288) ([#6933](https://github.com/cert-manager/cert-manager/pull/6933), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## `v1.12.9`
-
-### Known Issues
-
-- ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured: see [1.14 release notes](./release-notes-1.14.md#known-issues) for more information.
 
 ### Changes
 
@@ -39,10 +245,6 @@ Special thanks to [@BobyMCbobs](https://github.com/BobyMCbobs) for reporting and
 - Upgrade `google.golang.org/protobuf`: fixing `GO-2024-2611` ([#6830](https://github.com/cert-manager/cert-manager/pull/6830), [@inteon](https://github.com/inteon))
 
 ## `v1.12.8`
-
-### Known Issues
-
-- ACME Issuer (Let's Encrypt): wrong certificate chain may be used if `preferredChain` is configured: see [1.14 release notes](./release-notes-1.14.md#known-issues) for more information.
 
 ### Changes
 
@@ -243,207 +445,6 @@ See https://github.com/cert-manager/cert-manager/pull/6232 for context.
 - Updates controller-runtime to `v0.15.0` ([#6098](https://github.com/cert-manager/cert-manager/pull/6098), [@lucacome](https://github.com/lucacome))
 
 ## `v1.12.0`
-
-cert-manager 1.12 brings support for JSON logging, a lower memory footprint, the
-support for ephemeral service account tokens with Vault, and the support of the
-`ingressClassName` field. We also improved on our ability to patch
-vulnerabilities.
-
-### Major Themes
-
-#### Support for JSON logging
-
-JSON logs are now available in cert-manager! A massive thank you to
-[@malovme](https://github.com/malovme) for going the extra mile to get
-[#5828](https://github.com/cert-manager/cert-manager/pull/5828) merged!
-
-To enable JSON logs, add the flag `--logging-format=json` to the three
-deployments (`cert-manager`, `cert-manager-webhook`, and
-`cert-manager-cainjector`).
-
-For example, if you are using the Helm chart:
-
-```bash
-helm repo add --force-update jetstack https://charts.jetstack.io
-helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
-  --set extraArgs='{--logging-format=json}' \
-  --set webhook.extraArgs='{--logging-format=json}' \
-  --set cainjector.extraArgs='{--logging-format=json}'
-```
-
-#### Lower memory footprint
-
-In 1.12 we continued the work started in 1.11 to reduce cert-manager component's
-memory consumption.
-
-##### Controller
-
-Caching of the full contents of all cluster `Secret`s can now be disabled by
-setting a `SecretsFilteredCaching` alpha feature gate to true. This will ensure
-that only `Secret` resources that are labelled with
-`controller.cert-manager.io/fao` label [^1] are cached in full. Cert-manager
-automatically adds this label to all `Certificate` `Secret`s.
-
-This change has been placed behind alpha feature gate as it could potentially
-slow down large scale issuance because issuer credentials `Secret`s will now be
-retrieved from kube-apiserver instead of local cache. To prevent the slow down,
-users can manually label issuer `Secret`s with a
-`controller.cert-manager.io/fao` label.
-See the
-[design](https://github.com/cert-manager/cert-manager/blob/master/design/20221205-memory-management.md)
-and [implementation](https://github.com/cert-manager/cert-manager/pull/5824) for
-additional details.
-We would like to gather some feedback on this change before
-it can graduate- please leave your comments on
-(`cert-manager#6074`)[https://github.com/cert-manager/cert-manager/issues/6074].
-
-Additionally, controller no longer watches and caches all `Pod` and `Service`
-resources.
-See [`cert-manager#5976`](https://github.com/cert-manager/cert-manager/pull/5976) for implementation.
-
-##### Cainjector
-
-[Cainjector's](../../concepts/ca-injector.md) control loops have been refactored, so by default it should
-consume up to half as much memory as before, see
-[`cert-manager#5746`](https://github.com/cert-manager/cert-manager/pull/5746).
-
-Additionally, a number of flags have been added to cainjector that can be used
-to scope down what resources it watches and caches.
-
-If cainjector is only used as part of cert-manager installation, it only needs
-to inject CA certs to cert-manager's `MutatingWebhookConfiguration` and
-`ValidatingWebhookConfiguration` from a `Secret` in cert-manager's installation
-namespace so all the other injectable/source types can be turned off and
-cainjector can be scoped to a single namespace, see the relevant flags below:
-
-```go
-// cainjector flags
---namespace=<cert-manager-installation-namespace> \
---enable-customresourcedefinitions-injectable=false \
---enable-certificates-data-source=false \
---enable-apiservices-injectable=false
-```
-
-See [`cert-manager#5766`](https://github.com/cert-manager/cert-manager/pull/5766) for more detail.
-
-A big thanks to everyone who put in time reporting and writing up issues
-describing performance problems in large scale installations.
-
-#### Faster Response to CVEs By Reducing Transitive Dependencies
-
-In cert-manager 1.12, we have worked on reducing the impacts that unsupported
-dependencies have on our ability to patch CVEs.
-
-Each binary now has its own `go.mod` file. When a CVE is declared in an
-unsupported minor version of a dependency, and that the only solution is to bump
-the minor version of the dependency, we can now choose to make an exception and
-bump that minor version but limit the impact to a single binary.
-
-For example, in cert-manager 1.10, we chose not to fix a CVE reported in Helm
-because it was forcing us to bump the minor versions of `k8s.io/api` and many
-other dependencies.
-
-A side effect of the new `go.mod` layout is that it's now easier to import
-cert-manager in Go, in terms of transitive dependencies that might show up in
-your `go.mod` files or potential version conflicts between cert-manager and your
-other dependencies.
-
-The caveat here is that we still only recommend importing cert-manager in [very
-specific circumstances](../../contributing/importing.md), and the module changes
-mean that if you imported some paths (specifically under `cmd` or some paths
-under `test`) you might see broken imports when you try to upgrade.
-
-If you experience a break as part of this, we're sorry and we'd be interested to
-chat about it. The vast majority of projects using cert-manager should notice no
-impact, and there should be no runtime impact either.
-
-You can read more about this change in the design document
-[`20230302.gomod.md`](https://github.com/cert-manager/cert-manager/blob/master/design/20230302.gomod.md).
-
-#### Support for ephemeral service account tokens in Vault
-
-cert-manager can now authenticate to Vault using ephemeral service account
-tokens (JWT). cert-manager already knew to authenticate to Vault using the
-[Vault Kubernetes Auth
-Method](https://developer.hashicorp.com/vault/docs/auth/kubernetes) but relied
-on insecure service account tokens stored in Secrets. You can now configure
-cert-manager in a secretless manner. With this new feature, cert-manager will
-create an ephemeral service account token on your behalf and use that to
-authenticate to Vault.
-
-> 📖 Read about [Secretless Authentication with a Service Account](../../configuration/vault.md#secretless-authentication-with-a-service-account).
-
-This change was implemented in the pull request
-[`cert-manager#5502`](https://github.com/cert-manager/cert-manager/pull/5502).
-
-#### Support for `ingressClassName` in the HTTP-01 solver
-
-cert-manager now supports the `ingressClassName` field in the HTTP-01 solver. We
-recommend using `ingressClassName` instead of the field `class` in your Issuers
-and ClusterIssuers.
-
-> 📖 Read more about `ingressClassName` in the documentation page [HTTP01](../../configuration/acme/http01/#ingressclassname).
-
-#### Liveness probe and healthz endpoint in the controller
-
-A healthz HTTP server has been added to the controller component.
-It serves a `/livez`  endpoint, which reports the health status of the leader election system.
-If the leader process has failed to renew its lease but has unexpectedly failed to exit,
-the `/livez` endpoint will return an error code and an error message.
-In conjunction with a new liveness probe in the controller Pod,
-this will cause the controller to be restarted by the kubelet.
-
-> 📖 Read more about this new feature in [Best Practice: Use Liveness Probes](../../installation/best-practice.md#use-liveness-probes).
-
-### Community
-
-We extend our gratitude to all the open-source contributors who have made
-commits in this release, including:
-
-- [@andrewsomething](https://github.com/andrewsomething)
-- [@avi-08](https://github.com/avi-08)
-- [@dsonck92](https://github.com/dsonck92)
-- [@e96wic](https://github.com/e96wic)
-- [@ExNG](https://github.com/ExNG)
-- [@erikgb](https://github.com/erikgb)
-- [@g-gaston](https://github.com/g-gaston)
-- [@james-callahan](https://github.com/james-callahan)
-- [@jkroepke](https://github.com/jkroepke)
-- [@lucacome](https://github.com/lucacome)
-- [@malovme](https://github.com/malovme)
-- [@maumontesilva](https://github.com/maumontesilva)
-- [@tobotg](https://github.com/tobotg)
-- [@TrilokGeer](https://github.com/TrilokGeer)
-- [@vidarno](https://github.com/vidarno)
-- [@vinzent](https://github.com/vinzent)
-- [@waterfoul](https://github.com/waterfoul)
-- [@yanggangtony](https://github.com/yanggangtony)
-- [@yulng](https://github.com/yulng)
-
-Thanks also to the following cert-manager maintainers for their contributions during this release:
-
-- [@inteon](https://github.com/inteon)
-- [@wallrj](https://github.com/wallrj)
-- [@maelvls](https://github.com/maelvls)
-- [@SgtCoDFish](https://github.com/SgtCoDFish)
-- [@irbekrm](https://github.com/irbekrm)
-- [@jakexks](https://github.com/jakexks)
-- [@JoshVanL](https://github.com/JoshVanL)
-- [@munnerz](https://github.com/munnerz)
-
-Equally thanks to everyone who provided feedback, helped users and raised issues
-on GitHub and Slack, joined our meetings and talked to us at KubeCon!
-
-Special thanks to [@erikgb](https://github.com/erikgb) for continuously great
-input and feedback and to [@lucacome](https://github.com/lucacome) for always
-ensuring that our Kubernetes dependencies are up to date!
-
-Thanks also to the CNCF, which provides resources and support, and to the AWS
-open source team for being good community members and for their maintenance of
-the Private CA Issuer.
-
-In addition, massive thanks to Jetstack (by Venafi) for contributing developer
-time and resources towards the continued maintenance of cert-manager projects.
 
 ### Changes
 
