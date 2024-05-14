@@ -182,6 +182,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-pdns`](https://github.com/zachomedia/cert-manager-webhook-pdns)
 - [`cert-manager-webhook-zilore`](https://gitlab.com/zilore/cert-manager-webhook-zilore)
 - [`stackit-cert-manager-webhook`](https://github.com/stackitcloud/stackit-cert-manager-webhook)
+- [`cert-manager-webhook-vercel`](https://github.com/rhythmbhiwani/cert-manager-webhook-vercel)
 
 You can find more information on how to configure webhook providers [here](./webhook.md).
 
