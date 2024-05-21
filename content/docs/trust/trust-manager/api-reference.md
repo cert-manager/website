@@ -243,7 +243,7 @@ Target is the target location in all namespaces to sync source data to.
         <td><b><a href="#bundlespectargetadditionalformats">additionalFormats</a></b></td>
         <td>object</td>
         <td>
-          AdditionalFormats specifies any additional formats to write to the target<br/>
+          AdditionalFormats specifies any additional formats to write to the target.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -274,7 +274,7 @@ Target is the target location in all namespaces to sync source data to.
 ### `Bundle.spec.target.additionalFormats`
 
 
-AdditionalFormats specifies any additional formats to write to the target
+AdditionalFormats specifies any additional formats to write to the target.
 
 <table>
     <thead>
@@ -549,7 +549,7 @@ Target is the current Target that the Bundle is attempting or has completed sync
         <td><b><a href="#bundlestatustargetadditionalformats">additionalFormats</a></b></td>
         <td>object</td>
         <td>
-          AdditionalFormats specifies any additional formats to write to the target<br/>
+          AdditionalFormats specifies any additional formats to write to the target.<br/>
         </td>
         <td>false</td>
       </tr><tr>
@@ -580,7 +580,7 @@ Target is the current Target that the Bundle is attempting or has completed sync
 ### `Bundle.status.target.additionalFormats`
 
 
-AdditionalFormats specifies any additional formats to write to the target
+AdditionalFormats specifies any additional formats to write to the target.
 
 <table>
     <thead>
