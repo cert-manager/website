@@ -317,7 +317,7 @@ to a working state.
 
 TLS can be complicated and there are many ways to misuse TLS certificates.
 
-Here are some potential gotchas here to be aware of before running trust-manager in production.
+Here are some potential gotchas to be aware of before running trust-manager in production.
 
 If you're planning on running trust-manager in production and you're using more than just the default CA package,
 we **strongly** advise you to read and understand this section. It could save you from causing an outage later.
