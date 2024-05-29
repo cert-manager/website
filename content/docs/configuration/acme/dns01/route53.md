@@ -188,11 +188,18 @@ Note that, as mentioned above, the pod is using `arn:aws:iam::XXXXXXXXXXX:role/c
 
 While [`kiam`](https://github.com/uswitch/kiam) / [`kube2iam`](https://github.com/jtblin/kube2iam) work directly with cert-manager, some special attention is needed for using the [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) feature available on EKS.
 
-### OIDC provider
+This feature uses Kubernetes `ServiceAccount` tokens to authenticate with AWS using the [API_AssumeRoleWithWebIdentity](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html). 
 
-First follow the AWS documentation [Enabling IAM roles for service accounts on your cluster](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) to ensure that the OIDC provider for the EKS cluster is enabled. The OIDC information is needed to create the trust relationship for the cert-manager role below.
+> **Note**: For using IRSA with cert-manager you must first enable the feature for your cluster. You can do this by
+> following the [official documentation(https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
 
-### IAM role trust policy
+Because `ServiceAccount` tokens are used to authenticate there are two modes of operation, you can either use cert-manager's own `ServiceAccount` to authenticate or you can reference your own `ServiceAccount` within your `Issuer`/`ClusterIssuer` config. Each option is described below.
+
+### Using the cert-manager ServiceAccount
+
+In this configuration an IAM role is mapped to the cert-manager `ServiceAccount` allowing it to authenticate with AWS. The IAM role you map to the `ServiceAccount` will need permissions on any and all Route53 zones cert-manager will be using.
+
+#### IAM role trust policy
 
 The cert-manager role needs the following trust relationship attached to the role in order to use the IRSA method. Replace the following:
 
@@ -224,7 +231,7 @@ The cert-manager role needs the following trust relationship attached to the rol
 
 **Note:** If you're following the Cross Account example above, this trust policy is attached to the cert-manager role in Account X with ARN `arn:aws:iam::XXXXXXXXXXX:role/cert-manager`. The permissions policy is the same as above.
 
-### Service annotation
+#### Service annotation
 
 Annotate the `ServiceAccount` created by cert-manager:
 
@@ -257,3 +264,121 @@ securityContext:
 ```
 
 **Note:** If you're following the Cross Account example above, modify the `ClusterIssuer` in the same way as above with the role from Account Y.
+
+### Referencing your own ServiceAccount within Issuer/ClusterIssuer config 
+
+In this configuration you can reference your own `ServiceAccounts` within your `Issuer`/`ClusterIssuer` and cert-manager will issue itself temporary credentials using these `ServiceAccounts`. Because each issuer can reference a different `ServiceAccount` you can lock down permissions much more, with each `ServiceAccount` mapped to an IAM role that only has permission on the zones it needs for that particular issuer.
+
+
+#### Creating a ServiceAccount
+
+In order to reference a `ServiceAccount` it must first exist. Unlike normal IRSA the `eks.amazonaws.com/role-arn` annotation is not required, however you may wish to set it as a reference.
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: <service-account-name>
+  annotation:
+    eks.amazonaws.com/role-arn: <iam-role-arn>
+```
+
+#### IAM role trust policy
+
+For every `ServiceAccount` you want to use for AWS authentication you must first set up a trust policy. Replace the following:
+
+- `<aws-account-id>` with the AWS account ID of the EKS cluster.
+- `<aws-region>` with the region where the EKS cluster is located.
+- `<eks-hash>` with the hash in the EKS API URL; this will be a random 32 character hex string (example: `45DABD88EEE3A227AF0FA468BE4EF0B5`)
+- `<namespace>` with the namespace of the `ServiceAccount` object.
+- `<service-account-name>` with the name of the `ServiceAccount` object.
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Principal": {
+        "Federated": "arn:aws:iam::<aws-account-id>:oidc-provider/oidc.eks.<aws-region>.amazonaws.com/id/<eks-hash>"
+      },
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.<aws-region>.amazonaws.com/id/<eks-hash>:sub": "system:serviceaccount:<namespace>:<service-account-name>"
+        }
+      }
+    }
+  ]
+}
+```
+
+**Note:** If you're following the Cross Account example above, this trust policy is attached to the cert-manager role in Account X with ARN `arn:aws:iam::XXXXXXXXXXX:role/cert-manager`. The permissions policy is the same as above.
+
+#### RBAC
+
+In order to allow cert-manager to issue a token using your `ServiceAccount` you must deploy some RBAC to the cluster. Replace the following:
+
+- `<service-account-name>` name of the `ServiceAccount` object.
+- `<service-account-namespace>` namespace of the `ServiceAccount` object.
+- `<cert-manager-service-account-name>` name of cert-managers `ServiceAccount` object, as created during cert-manager installation.
+- `<cert-manager-namespace>` namespace that cert-manager is deployed into.
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: <service-account-name>-tokenrequest
+  namespace: <service-account-namespace>
+rules:
+  - apiGroups: ['']
+    resources: ['serviceaccounts/token']
+    resourceNames: ['<service-account-name>']
+    verbs: ['create']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cert-manager-<service-account-name>-tokenrequest
+  namespace: <service-account-namespace>
+subjects:
+  - kind: ServiceAccount
+    name: <cert-manager-service-account-name>
+    namespace: <cert-manager-namespace>
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: <service-account-name>-tokenrequest
+```
+
+#### Issuer/ClusterIssuer config
+
+Once you have completed the above you should have:
+- An IAM role with permissions required to on the Route53 zone.
+- A Kubernetes `ServiceAccount`.
+- A trust policy to allow the Kubernetes `ServiceAccount` access to your IAM role.
+- RBAC to allow cert-manager to issue a token using the Kubernetes `ServiceAccount`.
+
+You should be ready at this point to configure an Issuer to use the new `ServiceAccount`. You can see example config for this below:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: example
+spec:
+  acme:
+    ...
+    solvers:
+    - selector:
+        dnsZones:
+          - "example.com"
+      dns01:
+        route53:
+          region: us-east-1
+          role: <iam-role-arn> # This must be set so cert-manager what role to attempt to authenticate with
+          auth:
+            kubernetes:
+              serviceAccountRef: 
+                name: <service-account-name> # The name of the service account created
+```
