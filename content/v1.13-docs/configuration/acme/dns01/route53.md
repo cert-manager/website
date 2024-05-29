@@ -134,7 +134,7 @@ And the following trust relationship (Add AWS `Service`s as needed):
 }
 ```
 
-## Creating an Issuer (or `ClusterIssuer`)
+## Creating an `Issuer` (or `ClusterIssuer`)
 
 Here is an example configuration for a `ClusterIssuer`:
 
