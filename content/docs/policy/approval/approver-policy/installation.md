@@ -63,7 +63,6 @@ helm repo add jetstack https://charts.jetstack.io --force-update
 helm upgrade cert-manager-approver-policy jetstack/cert-manager-approver-policy \
   --install \
   --namespace cert-manager \
-  --version [[VAR::approver_policy_latest_version]] \
   --wait
 ```
 
@@ -81,7 +80,6 @@ set the following values when installing:
 helm upgrade cert-manager-approver-policy jetstack/cert-manager-approver-policy \
   --install \
   --namespace cert-manager \
-  --version [[VAR::approver_policy_latest_version]] \
   --wait \
   --set app.approveSignerNames="{\
 issuers.cert-manager.io/*,clusterissuers.cert-manager.io/*,\
