@@ -59,6 +59,6 @@ gendocs() {
 echo "+++ Cloning trust-manager repository..."
 git clone "https://github.com/cert-manager/trust-manager.git" "$tmpdir"
 
-checkout "v0.7.0"
+checkout "v0.10.1"
 
 gendocs "$REPO_ROOT/content/docs/trust/trust-manager/api-reference.md"
