@@ -131,7 +131,13 @@ JKS has been supported since v0.5.0, and PKCS#12 since v0.7.0.
 
 Applications consuming JKS and PKCS#12 trust stores often require a password to be set for legacy reasons. These passwords are often security theater - either they use very weak encryption or the passwords are provided in plaintext next to the files they encrypt which defeats the purpose of having them.
 
-Trust bundles do not contain private keys, and so for most use cases there wouldn't be any security benefit to encrypting them. As such, passwords for trust stores are hard-coded to `changeit` for JKS and `""` (the empty string or "password-less") for PKCS#12. Future releases of trust-manager may make these passwords configurable.
+Trust bundles do not contain private keys, and so for most use cases there wouldn't be any security benefit to encrypting them. As such, passwords for trust stores are set by default to `changeit` for JKS and `""` (the empty string or "password-less") for PKCS#12. 
+
+Recent releases allow you to change that password by setting the bundle YAML file `spec.target.additionalFormats.jks.password` and `spec.target.additionalFormats.pkcs12.password`. 
+
+Older releases have the current default values hard-coded and they can not be changed. For more information read [why password are not helpful](../../faq/README.md#keystore-passwords).
+
+
 
 #### Namespace Selector
 
@@ -317,7 +323,7 @@ to a working state.
 
 TLS can be complicated and there are many ways to misuse TLS certificates.
 
-Here are some potential gotchas here to be aware of before running trust-manager in production.
+Here are some potential gotchas to be aware of before running trust-manager in production.
 
 If you're planning on running trust-manager in production and you're using more than just the default CA package,
 we **strongly** advise you to read and understand this section. It could save you from causing an outage later.
