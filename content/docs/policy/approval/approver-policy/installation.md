@@ -27,22 +27,15 @@ extraArgs:
  - "--controllers=*,-certificaterequests-approver" # ⚠ Disable cert-manager's built-in approver
 ```
 
-Here's a full example which will install cert-manager or reconfigure it if it is already installed:
+Here's a example which reconfigure an installed cert-manager to run without auto-approver:
 
 ```terminal
 helm upgrade cert-manager jetstack/cert-manager \
-  --install \
-  --create-namespace \
+  --reuse-values \
   --namespace cert-manager \
-  --version [[VAR::cert_manager_latest_version]] \
-  --set installCRDs=true \
   --set extraArgs={--controllers='*\,-certificaterequests-approver'} # ⚠ Disable cert-manager's built-in approver
 ```
 
-> ℹ️ The `--set installCRDs=true` setting is a convenient way to install the
-> cert-manager CRDS, but it is optional and has some drawbacks.
-> Read [Helm: Installing Custom Resource Definitions](https://deploy-preview-1216--cert-manager-website.netlify.app/docs/installation/helm/#3-install-customresourcedefinitions) to learn more.
->
 > ℹ️ Be sure to customize the cert-manager controller `extraArgs`,
 > which are at the top level of the values file.
 > *Do not* change the `webhook.extraArgs`, `startupAPICheck.extraArgs` or `cainjector.extraArgs` settings.

@@ -10,18 +10,24 @@ description: 'Installation guide for trust-manager'
 Helm is the easiest way to install trust-manager and comes with a publicly trusted certificate bundle package
 (for the`useDefaultCAs` source) derived from Debian containers.
 
-When installed via Helm, trust-manager has a dependency on cert-manager for provisioning an application certificate,
-and as such trust-manager is also installed into the cert-manager namespace.
-
 ```bash
 helm repo add jetstack https://charts.jetstack.io --force-update
+```
 
-helm upgrade cert-manager jetstack/cert-manager \
-  --install \
-  --create-namespace \
+When installed via Helm, trust-manager has a dependency on cert-manager for provisioning an application certificate,
+and as such cert-manager must also be installed into the cert-manager namespace.
+If you have not already installed cert-manager, you can install it using the following command:
+
+```bash
+# Run this command only if you haven't installed cert-manager already
+helm install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
+  --create-namespace \
+  --version [[VAR::cert_manager_latest_version]] \
   --set installCRDs=true
+```
 
+```bash
 helm upgrade trust-manager jetstack/trust-manager \
   --install \
   --namespace cert-manager \

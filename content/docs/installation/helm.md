@@ -28,13 +28,7 @@ Notably, the "Helm stable repository" version of cert-manager is deprecated and 
 helm repo add jetstack https://charts.jetstack.io --force-update
 ```
 
-#### 2. Update your local Helm chart repository cache:
-
-```bash
-helm repo update
-```
-
-#### 3. Install `CustomResourceDefinitions`
+#### 2. Install `CustomResourceDefinitions`
 
 cert-manager requires a number of CRD resources, which can  be installed manually using `kubectl`,
 or using the `installCRDs` option when installing the Helm chart. Both options
@@ -61,7 +55,7 @@ Uncomment the relevant line in the next steps to enable this.
 
 Note that if you're using a `helm` version based on Kubernetes `v1.18` or below (Helm `v3.2`), `installCRDs` will not work with cert-manager `v0.16`. See the [v0.16 upgrade notes](../releases/upgrading/upgrading-0.15-0.16.md#helm) for more details.
 
-#### 4. Install cert-manager
+#### 3. Install cert-manager
 
 To install the cert-manager Helm chart, use the [Helm install command](https://helm.sh/docs/helm/helm_install/) as described below.
 
