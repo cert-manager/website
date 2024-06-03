@@ -133,7 +133,7 @@ Applications consuming JKS and PKCS#12 trust stores often require a password to 
 
 Trust bundles do not contain private keys, and so for most use cases there wouldn't be any security benefit to encrypting them. As such, passwords for trust stores are set by default to `changeit` for JKS and `""` (the empty string or "password-less") for PKCS#12. 
 
-Recent releases allow you to change that password by setting the bundle yaml file `spec.target.additionalFormats.jks.password` and `spec.target.additionalFormats.pkcs12.password`. 
+Recent releases allow you to change that password by setting the bundle YAML file `spec.target.additionalFormats.jks.password` and `spec.target.additionalFormats.pkcs12.password`. 
 
 Older releases have the current default values hard-coded and they can not be changed. For more information read [why password are not helpful](../../faq/README.md#keystore-passwords).
 
