@@ -1271,7 +1271,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>PreferredChain is the chain to use if the ACME server outputs multiple. PreferredChain is no guarantee that this one gets delivered by the ACME endpoint. For example, for Let&rsquo;s Encrypt&rsquo;s DST crosssign you would use: &ldquo;DST Root CA X3&rdquo; or &ldquo;ISRG Root X1&rdquo; for the newer Let&rsquo;s Encrypt root CA. This value picks the first certificate bundle in the combined set of ACME default and alternative chains that has a root-most certificate with this value as its issuer&rsquo;s commonname.</p>
+        <p>PreferredChain is the chain to use if the ACME server outputs multiple. PreferredChain is no guarantee that this one gets delivered by the ACME endpoint. For example, for Let&rsquo;s Encrypt&rsquo;s DST crosssign you would use: &ldquo;DST Root CA X3&rdquo; or &ldquo;ISRG Root X1&rdquo; for the newer Let&rsquo;s Encrypt root CA. This value picks the first certificate bundle in the ACME alternative chains that has a certificate with this value as its issuer&rsquo;s CN</p>
       </td>
     </tr>
     <tr>
@@ -1353,7 +1353,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Enables requesting a Not After date on certificates that matches the duration of the certificate. This is not supported by all ACME servers like Let&rsquo;s Encrypt. If set to true when the ACME server does not support it, it will create an error on the Order. Defaults to false.</p>
+        <p>Enables requesting a Not After date on certificates that matches the duration of the certificate. This is not supported by all ACME servers like Let&rsquo;s Encrypt. If set to true when the ACME server does not support it it will create an error on the Order. Defaults to false.</p>
       </td>
     </tr>
   </tbody>
@@ -1747,19 +1747,6 @@ description: >-
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>
-        <code>auth</code>
-        <br />
-        <em>
-          <a href="#acme.cert-manager.io/v1.Route53Auth">Route53Auth</a>
-        </em>
-      </td>
-      <td>
-        <em>(Optional)</em>
-        <p>Auth configures how cert-manager authenticates.</p>
-      </td>
-    </tr>
     <tr>
       <td>
         <code>accessKeyID</code>
@@ -2436,96 +2423,6 @@ description: >-
     </tr>
   </tbody>
 </table>
-<h3 id="acme.cert-manager.io/v1.Route53Auth">Route53Auth</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRoute53">ACMEIssuerDNS01ProviderRoute53</a>) </p>
-<div>
-  <p>Route53Auth is configuration used to authenticate with a Route53.</p>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <code>kubernetes</code>
-        <br />
-        <em>
-          <a href="#acme.cert-manager.io/v1.Route53KubernetesAuth">Route53KubernetesAuth</a>
-        </em>
-      </td>
-      <td>
-        <p>Kubernetes authenticates with Route53 using AssumeRoleWithWebIdentity by passing a bound ServiceAccount token.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<h3 id="acme.cert-manager.io/v1.Route53KubernetesAuth">Route53KubernetesAuth</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Route53Auth">Route53Auth</a>) </p>
-<div>
-  <p>Route53KubernetesAuth is a configuration to authenticate against Route53 using a bound Kubernetes ServiceAccount token.</p>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <code>serviceAccountRef</code>
-        <br />
-        <em>
-          <a href="#acme.cert-manager.io/v1.ServiceAccountRef">ServiceAccountRef</a>
-        </em>
-      </td>
-      <td>
-        <p>A reference to a service account that will be used to request a bound token (also known as &ldquo;projected token&rdquo;). To use this field, you must configure an RBAC rule to let cert-manager request a token.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<h3 id="acme.cert-manager.io/v1.ServiceAccountRef">ServiceAccountRef</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Route53KubernetesAuth">Route53KubernetesAuth</a>) </p>
-<div>
-  <p>ServiceAccountRef is a service account used by cert-manager to request a token. The expiration of the token is also set by cert-manager to 10 minutes.</p>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <code>name</code>
-        <br />
-        <em>string</em>
-      </td>
-      <td>
-        <p>Name of the ServiceAccount used to request a token.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>audiences</code>
-        <br />
-        <em>[]string</em>
-      </td>
-      <td>
-        <em>(Optional)</em>
-        <p> TokenAudiences is an optional list of audiences to include in the token passed to AWS. The default token consisting of the issuer&rsquo;s namespace and name is always included. If unset the audience defaults to <code>sts.amazonaws.com</code>. </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
 <h3 id="acme.cert-manager.io/v1.State"> State (<code>string</code> alias) </h3>
 <p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEAuthorization">ACMEAuthorization</a>, <a href="#acme.cert-manager.io/v1.ChallengeStatus">ChallengeStatus</a>, <a href="#acme.cert-manager.io/v1.OrderStatus">OrderStatus</a>) </p>
 <div>
@@ -2649,7 +2546,9 @@ description: >-
       <td>
         <code>leaderElectionConfig</code>
         <br />
-        <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.LeaderElectionConfig</em>
+        <em>
+          <a href="#cainjector.config.cert-manager.io/v1alpha1.LeaderElectionConfig">LeaderElectionConfig</a>
+        </em>
       </td>
       <td>
         <p>LeaderElectionConfig configures the behaviour of the leader election</p>
@@ -2801,6 +2700,69 @@ description: >-
     </tr>
   </tbody>
 </table>
+<h3 id="cainjector.config.cert-manager.io/v1alpha1.LeaderElectionConfig">LeaderElectionConfig</h3>
+<p> (<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>enabled</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>If true, cert-manager will perform leader election between instances to ensure no more than one instance of cert-manager operates at a time</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>namespace</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace used to perform leader election. Only used if leader election is enabled</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>leaseDuration</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>renewDeadline</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>retryPeriod</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <hr />
 <h2 id="cert-manager.io/v1">cert-manager.io/v1</h2>
 <div>
@@ -2909,7 +2871,7 @@ description: >-
             <td>
               <em>(Optional)</em>
               <p> Requested X.509 certificate subject, represented using the LDAP &ldquo;String Representation of a Distinguished Name&rdquo; [1]. Important: the LDAP string format also specifies the order of the attributes in the subject, this is important when issuing certs for LDAP authentication. Example: <code>CN=foo,DC=corp,DC=example,DC=com</code> More info [1]: <a href="https://datatracker.ietf.org/doc/html/rfc4514">https://datatracker.ietf.org/doc/html/rfc4514</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/3203">https://github.com/cert-manager/cert-manager/issues/3203</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/4424">https://github.com/cert-manager/cert-manager/issues/4424</a> </p>
-              <p> Cannot be set if the <code>subject</code> or <code>commonName</code> field is set. </p>
+              <p> Cannot be set if the <code>subject</code> or <code>commonName</code> field is set. This is an Alpha Feature and is only enabled with the <code>--feature-gates=LiteralCertificateSubject=true</code> option set on both the controller and webhook components. </p>
             </td>
           </tr>
           <tr>
@@ -3137,8 +3099,8 @@ description: >-
               <em>(Optional)</em>
               <p>Defines extra output formats of the private key and signed certificate chain to be written to this Certificate&rsquo;s target Secret.</p>
               <p>
-                This is a Beta Feature enabled by default. It can be disabled with the
-                <code>--feature-gates=AdditionalCertificateOutputFormats=false</code> option set on both the controller and webhook components.
+                This is an Alpha Feature and is only enabled with the
+                <code>--feature-gates=AdditionalCertificateOutputFormats=true</code> option set on both the controller and webhook components.
               </p>
             </td>
           </tr>
@@ -4295,7 +4257,7 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p> Requested X.509 certificate subject, represented using the LDAP &ldquo;String Representation of a Distinguished Name&rdquo; [1]. Important: the LDAP string format also specifies the order of the attributes in the subject, this is important when issuing certs for LDAP authentication. Example: <code>CN=foo,DC=corp,DC=example,DC=com</code> More info [1]: <a href="https://datatracker.ietf.org/doc/html/rfc4514">https://datatracker.ietf.org/doc/html/rfc4514</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/3203">https://github.com/cert-manager/cert-manager/issues/3203</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/4424">https://github.com/cert-manager/cert-manager/issues/4424</a> </p>
-        <p> Cannot be set if the <code>subject</code> or <code>commonName</code> field is set. </p>
+        <p> Cannot be set if the <code>subject</code> or <code>commonName</code> field is set. This is an Alpha Feature and is only enabled with the <code>--feature-gates=LiteralCertificateSubject=true</code> option set on both the controller and webhook components. </p>
       </td>
     </tr>
     <tr>
@@ -4523,8 +4485,8 @@ description: >-
         <em>(Optional)</em>
         <p>Defines extra output formats of the private key and signed certificate chain to be written to this Certificate&rsquo;s target Secret.</p>
         <p>
-          This is a Beta Feature enabled by default. It can be disabled with the
-          <code>--feature-gates=AdditionalCertificateOutputFormats=false</code> option set on both the controller and webhook components.
+          This is an Alpha Feature and is only enabled with the
+          <code>--feature-gates=AdditionalCertificateOutputFormats=true</code> option set on both the controller and webhook components.
         </p>
       </td>
     </tr>
@@ -4966,17 +4928,6 @@ description: >-
       </td>
       <td>
         <p>PasswordSecretRef is a reference to a key in a Secret resource containing the password used to encrypt the JKS keystore.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>alias</code>
-        <br />
-        <em>string</em>
-      </td>
-      <td>
-        <em>(Optional)</em>
-        <p> Alias specifies the alias of the key in the keystore, required by the JKS format. If not provided, the default alias <code>certificate</code> will be used. </p>
       </td>
     </tr>
   </tbody>
@@ -5475,7 +5426,7 @@ description: >-
 <h3 id="cert-manager.io/v1.ServiceAccountRef">ServiceAccountRef</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>) </p>
 <div>
-  <p> ServiceAccountRef is a service account used by cert-manager to request a token. Default audience is generated by cert-manager and takes the form <code>vault://namespace-name/issuer-name</code> for an Issuer and <code>vault://issuer-name</code> for a ClusterIssuer. The expiration of the token is also set by cert-manager to 10 minutes. </p>
+  <p> ServiceAccountRef is a service account used by cert-manager to request a token. The audience cannot be configured. The audience is generated by cert-manager and takes the form <code>vault://namespace-name/issuer-name</code> for an Issuer and <code>vault://issuer-name</code> for a ClusterIssuer. The expiration of the token is also set by cert-manager to 10 minutes. </p>
 </div>
 <table>
   <thead>
@@ -5493,17 +5444,6 @@ description: >-
       </td>
       <td>
         <p>Name of the ServiceAccount used to request a token.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>audiences</code>
-        <br />
-        <em>[]string</em>
-      </td>
-      <td>
-        <em>(Optional)</em>
-        <p>TokenAudiences is an optional list of extra audiences to include in the token passed to Vault. The default token consisting of the issuer&rsquo;s namespace and name is always included.</p>
       </td>
     </tr>
   </tbody>
@@ -5687,32 +5627,6 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Reference to a Secret containing a bundle of PEM-encoded CAs to use when verifying the certificate chain presented by Vault when using HTTPS. Mutually exclusive with CABundle. If neither CABundle nor CABundleSecretRef are defined, the certificate bundle in the cert-manager controller container is used to validate the TLS connection. If no key for the Secret is specified, cert-manager will default to &lsquo;ca.crt&rsquo;.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>clientCertSecretRef</code>
-        <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
-      </td>
-      <td>
-        <em>(Optional)</em>
-        <p>Reference to a Secret containing a PEM-encoded Client Certificate to use when the Vault server requires mTLS.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>clientKeySecretRef</code>
-        <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
-      </td>
-      <td>
-        <em>(Optional)</em>
-        <p>Reference to a Secret containing a PEM-encoded Client Private Key to use when the Vault server requires mTLS.</p>
       </td>
     </tr>
   </tbody>
@@ -6061,7 +5975,7 @@ description: >-
       <td>
         <code>checkRetryPeriod</code>
         <br />
-        <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.Duration</em>
+        <em>time.Duration</em>
       </td>
       <td>
         <p>The duration the controller should wait between a propagation check. Despite the name, this flag is used to configure the wait period for both DNS01 and HTTP01 challenge propagation checks. For DNS01 challenges the propagation check verifies that a TXT record with the challenge token has been created. For HTTP01 challenges the propagation check verifies that the challenge token is served at the challenge URL. This should be a valid duration string, for example 180s or 1h</p>
@@ -6276,16 +6190,6 @@ description: >-
     </tr>
     <tr>
       <td>
-        <code>enableGatewayAPI</code>
-        <br />
-        <em>bool</em>
-      </td>
-      <td>
-        <p>Whether gateway API integration is enabled within cert-manager. The ExperimentalGatewayAPISupport feature gate must also be enabled (default as of 1.15).</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
         <code>copiedAnnotationPrefixes</code>
         <br />
         <em>[]string</em>
@@ -6328,7 +6232,9 @@ description: >-
       <td>
         <code>metricsTLSConfig</code>
         <br />
-        <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.TLSConfig</em>
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>
+        </em>
       </td>
       <td>
         <p>TLS config for the metrics endpoint</p>
@@ -6426,6 +6332,96 @@ description: >-
     </tr>
   </tbody>
 </table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.DynamicServingConfig">DynamicServingConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>) </p>
+<div>
+  <p>DynamicServingConfig makes the controller generate a CA and persist it into Secret resources. This CA will be used by all instances of the controller for signing serving certificates.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>secretNamespace</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace of the Kubernetes Secret resource containing the TLS certificate used as a CA to sign dynamic serving certificates.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>secretName</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace of the Kubernetes Secret resource containing the TLS certificate used as a CA to sign dynamic serving certificates.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>dnsNames</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p>DNSNames that must be present on serving certificates signed by the CA.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>LeafDuration</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>LeafDuration is a customizable duration on serving certificates signed by the CA.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.FilesystemServingConfig">FilesystemServingConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>) </p>
+<div>
+  <p>FilesystemServingConfig enables using a certificate and private key found on the local filesystem. These files will be periodically polled in case they have changed, and dynamically reloaded.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>certFile</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Path to a file containing TLS certificate &amp; chain to serve with</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>keyFile</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Path to a file containing a TLS private key to serve with</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <h3 id="controller.config.cert-manager.io/v1alpha1.IngressShimConfig">IngressShimConfig</h3>
 <p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
 <div></div>
@@ -6479,6 +6475,50 @@ description: >-
     </tr>
   </tbody>
 </table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.KubeConfig">KubeConfig</h3>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>path</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Path to a kubeconfig. Only required if out-of-cluster.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>currentContext</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>If true, use the current context from the kubeconfig file. If false, use the context specified by ControllerConfiguration.Context. Default: true</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>context</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>The kubeconfig context to use. Default: current-context from kubeconfig file</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <h3 id="controller.config.cert-manager.io/v1alpha1.LeaderElectionConfig">LeaderElectionConfig</h3>
 <p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
 <div></div>
@@ -6492,22 +6532,121 @@ description: >-
   <tbody>
     <tr>
       <td>
-        <code>LeaderElectionConfig</code>
+        <code>enabled</code>
         <br />
-        <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.LeaderElectionConfig</em>
+        <em>bool</em>
       </td>
       <td>
-        <p> (Members of <code>LeaderElectionConfig</code> are embedded into this type.) </p>
+        <p>If true, cert-manager will perform leader election between instances to ensure no more than one instance of cert-manager operates at a time</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>namespace</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace used to perform leader election. Only used if leader election is enabled</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>leaseDuration</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>renewDeadline</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>retryPeriod</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled.</p>
       </td>
     </tr>
     <tr>
       <td>
         <code>healthzTimeout</code>
         <br />
-        <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.Duration</em>
+        <em>time.Duration</em>
       </td>
       <td>
         <p>Leader election healthz checks within this timeout period after the lease expires will still return healthy.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<div>
+  <p>TLSConfig configures how TLS certificates are sourced for serving. Only one of &lsquo;filesystem&rsquo; or &lsquo;dynamic&rsquo; may be specified.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>cipherSuites</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p> cipherSuites is the list of allowed cipher suites for the server. Values are from tls package constants (<a href="https://golang.org/pkg/crypto/tls/#pkg-constants">https://golang.org/pkg/crypto/tls/#pkg-constants</a>). If not specified, the default for the Go version will be used and may change over time. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>minTLSVersion</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p> minTLSVersion is the minimum TLS version supported. Values are from tls package constants (<a href="https://golang.org/pkg/crypto/tls/#pkg-constants">https://golang.org/pkg/crypto/tls/#pkg-constants</a>). If not specified, the default for the Go version will be used and may change over time. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>filesystem</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.FilesystemServingConfig">FilesystemServingConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>Filesystem enables using a certificate and private key found on the local filesystem. These files will be periodically polled in case they have changed, and dynamically reloaded.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>dynamic</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.DynamicServingConfig">DynamicServingConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>When Dynamic serving is enabled, the controller will generate a CA used to sign certificates and persist it into a Kubernetes Secret resource (for other replicas of the controller to consume). It will then generate a certificate in-memory for itself using this CA to serve with.</p>
       </td>
     </tr>
   </tbody>
@@ -6679,6 +6818,155 @@ description: >-
 </div>
 <p>Resource Types:</p>
 <ul></ul>
+<h3 id="webhook.config.cert-manager.io/v1alpha1.DynamicServingConfig">DynamicServingConfig</h3>
+<p> (<em>Appears on:</em> <a href="#webhook.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>) </p>
+<div>
+  <p>DynamicServingConfig makes the webhook generate a CA and persist it into Secret resources. This CA will be used by all instances of the webhook for signing serving certificates.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>secretNamespace</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace of the Kubernetes Secret resource containing the TLS certificate used as a CA to sign dynamic serving certificates.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>secretName</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Namespace of the Kubernetes Secret resource containing the TLS certificate used as a CA to sign dynamic serving certificates.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>dnsNames</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p>DNSNames that must be present on serving certificates signed by the CA.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>LeafDuration</code>
+        <br />
+        <em>time.Duration</em>
+      </td>
+      <td>
+        <p>LeafDuration is a customizable duration on serving certificates signed by the CA.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="webhook.config.cert-manager.io/v1alpha1.FilesystemServingConfig">FilesystemServingConfig</h3>
+<p> (<em>Appears on:</em> <a href="#webhook.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>) </p>
+<div>
+  <p>FilesystemServingConfig enables using a certificate and private key found on the local filesystem. These files will be periodically polled in case they have changed, and dynamically reloaded.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>certFile</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Path to a file containing TLS certificate &amp; chain to serve with</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>keyFile</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Path to a file containing a TLS private key to serve with</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="webhook.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</h3>
+<p> (<em>Appears on:</em> <a href="#webhook.config.cert-manager.io/v1alpha1.WebhookConfiguration">WebhookConfiguration</a>) </p>
+<div>
+  <p>TLSConfig configures how TLS certificates are sourced for serving. Only one of &lsquo;filesystem&rsquo; or &lsquo;dynamic&rsquo; may be specified.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>cipherSuites</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p> cipherSuites is the list of allowed cipher suites for the server. Values are from tls package constants (<a href="https://golang.org/pkg/crypto/tls/#pkg-constants">https://golang.org/pkg/crypto/tls/#pkg-constants</a>). If not specified, the default for the Go version will be used and may change over time. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>minTLSVersion</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p> minTLSVersion is the minimum TLS version supported. Values are from tls package constants (<a href="https://golang.org/pkg/crypto/tls/#pkg-constants">https://golang.org/pkg/crypto/tls/#pkg-constants</a>). If not specified, the default for the Go version will be used and may change over time. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>filesystem</code>
+        <br />
+        <em>
+          <a href="#webhook.config.cert-manager.io/v1alpha1.FilesystemServingConfig">FilesystemServingConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>Filesystem enables using a certificate and private key found on the local filesystem. These files will be periodically polled in case they have changed, and dynamically reloaded.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>dynamic</code>
+        <br />
+        <em>
+          <a href="#webhook.config.cert-manager.io/v1alpha1.DynamicServingConfig">DynamicServingConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>When Dynamic serving is enabled, the webhook will generate a CA used to sign webhook certificates and persist it into a Kubernetes Secret resource (for other replicas of the webhook to consume). It will then generate a certificate in-memory for itself using this CA to serve with. The CAs certificate can then be copied into the appropriate Validating, Mutating and Conversion webhook configuration objects (typically by cainjector).</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <h3 id="webhook.config.cert-manager.io/v1alpha1.WebhookConfiguration">WebhookConfiguration</h3>
 <div></div>
 <table>
@@ -6713,7 +7001,9 @@ description: >-
       <td>
         <code>tlsConfig</code>
         <br />
-        <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.TLSConfig</em>
+        <em>
+          <a href="#webhook.config.cert-manager.io/v1alpha1.TLSConfig">TLSConfig</a>
+        </em>
       </td>
       <td>
         <p>tlsConfig is used to configure the secure listener&rsquo;s TLS settings.</p>
@@ -6787,5 +7077,5 @@ description: >-
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>3403251</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>2c14e5f</code>. </em>
 </p>
