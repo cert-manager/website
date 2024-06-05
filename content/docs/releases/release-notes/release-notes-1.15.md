@@ -17,7 +17,7 @@ description: 'cert-manager release notes: cert-manager 1.14'
 >
 > From this release, the Helm chart will no longer uninstall the CRDs when the 
 > chart is uninstalled. If you want the CRDs to be removed on uninstall use 
-> `crds.keep=true` when installing the Helm chart.
+> `crds.keep=false` when installing the Helm chart.
 
 cert-manager 1.15 promotes several features to beta, including GatewayAPI support (`ExperimentalGatewayAPISupport`), the ability to provide a subject in the Certificate that will be used literally in the CertificateSigningRequest (`LiteralCertificateSubject`) and the outputting of additional certificate formats (`AdditionalCertificateOutputFormats`).
 
