@@ -30,9 +30,11 @@ extraArgs:
 Here's a example which reconfigure an installed cert-manager to run without auto-approver:
 
 ```terminal
+existing_cert_manager_version=$(helm get metadata -n cert-manager cert-manager | grep '^VERSION' | awk '{ print $2 }')
 helm upgrade cert-manager jetstack/cert-manager \
   --reuse-values \
   --namespace cert-manager \
+  --version $existing_cert_manager_version \
   --set extraArgs={--controllers='*\,-certificaterequests-approver'} # ⚠ Disable cert-manager's built-in approver
 ```
 
