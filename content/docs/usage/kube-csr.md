@@ -47,7 +47,7 @@ $ helm install \
   --namespace cert-manager \
   --create-namespace \
   --set featureGates="ExperimentalCertificateSigningRequestControllers=true" \
-  # --set installCRDs=true
+  --set crds.enabled=true
 ```
 
 > Note: cert-manager supports signing CertificateSigningRequests

@@ -45,10 +45,11 @@ kubernetesAPIBurst: 50
 
 numberOfConcurrentWorkers: 200
 
+enableGatewayAPI: true
+
 featureGates:
   AdditionalCertificateOutputFormats: true
   ExperimentalCertificateSigningRequestControllers: true
-  ExperimentalGatewayAPISupport: true
   ServerSideApply: true
   LiteralCertificateSubject: true
   UseCertificateRequestBasicConstraints: true

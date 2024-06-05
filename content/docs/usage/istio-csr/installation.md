@@ -33,14 +33,13 @@ kind create cluster
 # Helm setup
 helm repo add jetstack https://charts.jetstack.io --force-update
 
-# install cert-manager CRDs
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/[[VAR::cert_manager_latest_version]]/cert-manager.crds.yaml
-
 # install cert-manager; this might take a little time
-helm install cert-manager jetstack/cert-manager \
+helm install \
+  cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
-  --version [[VAR::cert_manager_latest_version]]
+  --version [[VAR::cert_manager_latest_version]] \
+  --set crds.enabled=true
 
 # We need this namespace to exist since our cert will be placed there
 kubectl create namespace istio-system

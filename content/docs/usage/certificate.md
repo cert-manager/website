@@ -58,44 +58,10 @@ spec:
     labels:
       my-secret-label: foo
 
-  duration: 2160h # 90d
-  renewBefore: 360h # 15d
-  subject:
-    organizations:
-      - jetstack
-  # The use of the common name field has been deprecated since 2000 and is
-  # discouraged from being used.
-  commonName: example.com
-  isCA: false
   privateKey:
     algorithm: RSA
     encoding: PKCS1
     size: 2048
-  usages:
-    - server auth
-    - client auth
-  # At least one of a DNS Name, URI, IP address or otherName is required.
-  dnsNames:
-    - example.com
-    - www.example.com
-  uris:
-    - spiffe://cluster.local/ns/sandbox/sa/example
-  ipAddresses:
-    - 192.168.0.5
-  # Needs cert-manager 1.14+ and "OtherNames" feature flag
-  otherNames:
-    # Should only supply oid of ut8 valued types
-    - oid: 1.3.6.1.4.1.311.20.2.3 # User Principal Name "OID"
-      utf8Value: upn@example.local
-  # Issuer references are always required.
-  issuerRef:
-    name: ca-issuer
-    # We can reference ClusterIssuers by changing the kind here.
-    # The default value is Issuer (i.e. a locally namespaced Issuer)
-    kind: Issuer
-    # This is optional since cert-manager will default to this value however
-    # if you are using an external issuer, change this to that issuer group.
-    group: cert-manager.io
 
   # keystores allows adding additional output formats. This is an example for reference only.
   keystores:
@@ -105,6 +71,54 @@ spec:
         name: example-com-tls-keystore
         key: password
       profile: Modern2023
+
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+
+  isCA: false
+  usages:
+    - server auth
+    - client auth
+
+  subject:
+    organizations:
+      - jetstack
+  # The use of the common name field has been deprecated since 2000 and is
+  # discouraged from being used.
+  commonName: example.com
+
+  # The literalSubject field is exclusive with subject and commonName. It allows
+  # specifying the subject directly as a string. This is useful for when the order
+  # of the subject fields is important or when the subject contains special types
+  # which can be specified by their OID.
+  #
+  # literalSubject: "O=jetstack, CN=example.com, 2.5.4.42=John, 2.5.4.4=Doe"
+
+  # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
+  dnsNames:
+    - example.com
+    - www.example.com
+  uris:
+    - spiffe://cluster.local/ns/sandbox/sa/example
+  emailAddresses:
+    - john.doe@cert-manager.io
+  ipAddresses:
+    - 192.168.0.5
+  # Needs cert-manager 1.14+ and "OtherNames" feature flag
+  otherNames:
+    # Should only supply oid of ut8 valued types
+    - oid: 1.3.6.1.4.1.311.20.2.3 # User Principal Name "OID"
+      utf8Value: upn@example.local
+
+  # Issuer references are always required.
+  issuerRef:
+    name: ca-issuer
+    # We can reference ClusterIssuers by changing the kind here.
+    # The default value is Issuer (i.e. a locally namespaced Issuer)
+    kind: Issuer
+    # This is optional since cert-manager will default to this value however
+    # if you are using an external issuer, change this to that issuer group.
+    group: cert-manager.io
 ```
 
 The signed certificate will be stored in a `Secret` resource named
@@ -187,19 +201,6 @@ documentation](../reference/api-docs.md#cert-manager.io/v1.KeyUsage).
 
 
 ### Additional Certificate Output Formats
-
-<div className="warning">
-
-⛔️ The additional certificate output formats feature is currently in an
-_experimental_ alpha state, and is subject to breaking changes or complete
-removal in future releases. This feature is only enabled by adding it to the
-`--feature-gates` flag on the cert-manager controller and webhook components:
-
-```bash
---feature-gates=AdditionalCertificateOutputFormats=true
-```
-
-</div>
 
 `additionalOutputFormats` is a field on the Certificate `spec` that allows
 specifying additional supplementary formats of issued certificates and their
