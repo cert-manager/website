@@ -41,7 +41,8 @@ ingressShim:
   defaultIssuerName: "zerossl-production"
   defaultIssuerKind: "ClusterIssuer"
 
-installCRDs: true
+crds:
+  enabled: true
 ```
 
 Install it using helm:

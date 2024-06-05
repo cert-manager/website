@@ -100,7 +100,7 @@ Once you have your cluster environment, install the required Kubernetes packages
     helm upgrade --install cert-manager cert-manager \
       --namespace cert-manager \
       --version $CERT_MANAGER_CHART_VERSION \
-      --set installCRDs=true \
+      --set crds.enabled=true \
       --set startupapicheck.enabled=false \
       --create-namespace \
       --repo https://charts.jetstack.io/

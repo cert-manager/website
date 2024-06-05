@@ -57,11 +57,12 @@ flux create source helm cert-manager --url https://charts.jetstack.io
 ### Create a `HelmRelease` resource
 
 Put your Helm chart values in a `values.yaml` file.
-Use the `installCRDs` value, so that Flux can install and upgrade the CRD resources.
+Use the `crds.enabled` value, so that Flux can install and upgrade the CRD resources.
 
 ```yaml
 # values.yaml
-installCRDs: true
+crds:
+  enabled: true
 ```
 
 ```bash

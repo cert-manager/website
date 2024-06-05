@@ -158,7 +158,7 @@ helm install \
   --namespace cert-manager \
   --create-namespace \
   --version [[VAR::cert_manager_latest_version]] \
-  --set installCRDs=true
+  --set crds.enabled=true
 ```
 
 This will create three Deployments and some Services and Pods in a new namespace called `cert-manager`.

@@ -24,7 +24,7 @@ helm install cert-manager jetstack/cert-manager \
   --namespace cert-manager \
   --create-namespace \
   --version [[VAR::cert_manager_latest_version]] \
-  --set installCRDs=true
+  --set crds.enabled=true
 ```
 
 ```bash
