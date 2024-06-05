@@ -26,7 +26,7 @@ should be stable enough to run.
 | Release      | Release Date | End of Life            | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |--------------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
 | [1.15][]     | Feb 3, 2024  | Release of 1.17        | 1.24 → 1.30                        | 4.11 → 4.15                       |
-| [1.14][]     | Feb 3, 2024  | Release of 1.16        | 1.24 → 1.30                        | 4.11 → 4.15                       |
+| [1.14][]     | June 5, 2024 | Release of 1.16        | 1.24 → 1.30                        | 4.11 → 4.15                       |
 | [1.12 LTS][] | May 19, 2023 | May 19, 2025           | 1.22 → 1.30                        | 4.9 → 4.15                        |
 
 cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It will continue to be supported for at least 2 years from release.
