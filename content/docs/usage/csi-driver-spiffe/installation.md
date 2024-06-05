@@ -18,17 +18,15 @@ race with cert-manager and policy enforcement will become useless.
 Policy enforcement is absolutely critical for using csi-driver-spiffe safely. See
 the [security considerations](./README.md#security-considerations) section for more details.
 
-```bash
-helm repo add jetstack https://charts.jetstack.io --force-update
+Here's a example which reconfigure an installed cert-manager to run without auto-approver:
 
-# NOTE: This isn't the usual cert-manager install process;
-# we're disabling the cert-manager approver.
-# See explanation above!
-
-helm upgrade -i -n cert-manager cert-manager jetstack/cert-manager \
-  --set extraArgs={--controllers='*\,-certificaterequests-approver'} \
-  --set installCRDs=true \
-  --create-namespace
+```terminal
+existing_cert_manager_version=$(helm get metadata -n cert-manager cert-manager | grep '^VERSION' | awk '{ print $2 }')
+helm upgrade cert-manager jetstack/cert-manager \
+  --reuse-values \
+  --namespace cert-manager \
+  --version $existing_cert_manager_version \
+  --set extraArgs={--controllers='*\,-certificaterequests-approver'} # ⚠ Disable cert-manager's built-in approver
 ```
 
 ### 2. Configure an Issuer / ClusterIssuer
@@ -110,12 +108,17 @@ Note that the `issuer.name`, `issuer.kind` and `issuer.group` will need to be ch
 the issuer you're actually using!
 
 ```bash
-helm upgrade -i -n cert-manager cert-manager-csi-driver-spiffe jetstack/cert-manager-csi-driver-spiffe --wait \
- --set "app.logLevel=1" \
- --set "app.trustDomain=my.trust.domain" \
- --set "app.issuer.name=csi-driver-spiffe-ca" \
- --set "app.issuer.kind=ClusterIssuer" \
- --set "app.issuer.group=cert-manager.io"
+helm repo add jetstack https://charts.jetstack.io --force-update
+
+helm upgrade cert-manager-csi-driver-spiffe jetstack/cert-manager-csi-driver-spiffe \
+  --install \
+  --namespace cert-manager \
+  --wait \
+  --set "app.logLevel=1" \
+  --set "app.trustDomain=my.trust.domain" \
+  --set "app.issuer.name=csi-driver-spiffe-ca" \
+  --set "app.issuer.kind=ClusterIssuer" \
+  --set "app.issuer.group=cert-manager.io"
 ```
 
 ## Usage

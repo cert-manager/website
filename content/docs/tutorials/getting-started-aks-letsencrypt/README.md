@@ -152,14 +152,13 @@ Now you can install and configure cert-manager.
 Install cert-manager using `helm` as follows:
 
 ```bash
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-helm upgrade cert-manager jetstack/cert-manager \
-    --install \
-    --create-namespace \
-    --wait \
-    --namespace cert-manager \
-    --set installCRDs=true
+helm repo add jetstack https://charts.jetstack.io --force-update
+helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version [[VAR::cert_manager_latest_version]] \
+  --set installCRDs=true
 ```
 
 This will create three Deployments and some Services and Pods in a new namespace called `cert-manager`.
@@ -396,10 +395,12 @@ The labels can be configured using the Helm values file below:
 🔗 <a href="values.yaml">`values.yaml`</a>
 
 ```bash
+existing_cert_manager_version=$(helm get metadata -n cert-manager cert-manager | grep '^VERSION' | awk '{ print $2 }')
 helm upgrade cert-manager jetstack/cert-manager \
-    --namespace cert-manager \
-    --reuse-values \
-    --values values.yaml
+  --reuse-values \
+  --namespace cert-manager \
+  --version $existing_cert_manager_version \
+  --values values.yaml
 ```
 
 The newly rolled out cert-manager Pod will have some new environment variables set,
