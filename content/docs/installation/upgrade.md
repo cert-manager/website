@@ -38,8 +38,7 @@ install.
 Add the Jetstack Helm repository (if you haven't already) and update it.
 
 ```bash
-helm repo add jetstack https://charts.jetstack.io
-helm repo update jetstack
+helm repo add jetstack https://charts.jetstack.io --force-update
 ```
 
 The helm upgrade command will upgrade cert-manager to the specified or latest version of cert-manager, as listed on the
@@ -47,9 +46,18 @@ The helm upgrade command will upgrade cert-manager to the specified or latest ve
 
 > Note: You can find out your release name using `helm list | grep cert-manager`.
 
+### CRDs managed using helm
+
+If you have installed the CRDs together with the helm install command (using `--set crds.enabled=true`),
+Helm will upgrade the CRDs automatically when you upgrade the cert-manager Helm chart:
+
+```bash
+helm upgrade --reset-then-reuse-values --version <version> <release_name> jetstack/cert-manager
+```
+
 ### CRDs managed separately
 
-If you have installed the CRDs separately (instead of with the `--set installCRDs=true`
+If you have installed the CRDs separately (instead of with the `--set crds.enabled=true`
 option added to your Helm install command), you should upgrade your CRD resources first:
 
 ```bash
@@ -59,16 +67,7 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 And then upgrade the Helm chart:
 
 ```bash
-helm upgrade --version <version> <release_name> jetstack/cert-manager
-```
-
-### CRDs managed using helm
-
-If you have installed the CRDs together with the helm install command, you should
-include CRD resources when upgrading the Helm chart:
-
-```bash
-helm upgrade --set installCRDs=true --version <version> <release_name> jetstack/cert-manager
+helm upgrade --reset-then-reuse-values --version <version> <release_name> jetstack/cert-manager
 ```
 
 ## Upgrading using static manifests

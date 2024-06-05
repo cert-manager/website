@@ -580,7 +580,7 @@ page if a step is missing or if it is outdated.
     4. Test the chart
         1. Download the chart tarball from the pull-request
         2. Start a new local Kind cluster `kind create cluster --name release`
-        3. Install the helm chart onto the kind cluster `helm install cert-manager ./cert-manager-v0.14.2.tgz --set installCRDs=true -n cert-manager`
+        3. Install the helm chart onto the kind cluster `helm install cert-manager ./cert-manager-v0.15.0.tgz --set crds.enabled=true -n cert-manager`
         4. Ensure install succeeds and all components are running
         5. Tear down the kind cluster `kind delete cluster --name release`
     5. Merge the PR
