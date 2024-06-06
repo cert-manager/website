@@ -18,15 +18,17 @@ race with cert-manager and policy enforcement will become useless.
 Policy enforcement is absolutely critical for using csi-driver-spiffe safely. See
 the [security considerations](./README.md#security-considerations) section for more details.
 
-Here's a example which reconfigure an installed cert-manager to run without auto-approver:
+Here's a example which reconfigure an installed cert-manager (v1.15.0+) to run without auto-approver:
 
 ```terminal
+# ⚠️ This Helm option is only available in cert-manager v1.15.0 and later.
+
 existing_cert_manager_version=$(helm get metadata -n cert-manager cert-manager | grep '^VERSION' | awk '{ print $2 }')
 helm upgrade cert-manager jetstack/cert-manager \
   --reuse-values \
   --namespace cert-manager \
   --version $existing_cert_manager_version \
-  --set extraArgs={--controllers='*\,-certificaterequests-approver'} # ⚠ Disable cert-manager's built-in approver
+  --set disableAutoApproval=true
 ```
 
 ### 2. Configure an Issuer / ClusterIssuer
