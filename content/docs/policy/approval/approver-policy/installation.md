@@ -17,36 +17,31 @@ If you install cert-manager using `helm install` or `helm upgrade`,
 you can disable the default approver by [Customizing the Chart Before Installing](https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing) using the `--set` or `--values` command line flags:
 
 ```
+# ⚠️ This Helm option is only available in cert-manager v1.15.0 and later.
+
 # Example --set value
---set extraArgs={--controllers='*\,-certificaterequests-approver'} # ⚠ Disable cert-manager's built-in approver
+--set disableAutoApproval=true
 ```
 
 ```yaml
+# ⚠️ This Helm option is only available in cert-manager v1.15.0 and later.
+
 # Example --values file content
-extraArgs:
- - "--controllers=*,-certificaterequests-approver" # ⚠ Disable cert-manager's built-in approver
+disableAutoApproval: true
 ```
 
 Here's a example which reconfigure an installed cert-manager to run without auto-approver:
 
 ```terminal
+# ⚠️ This Helm option is only available in cert-manager v1.15.0 and later.
+
 existing_cert_manager_version=$(helm get metadata -n cert-manager cert-manager | grep '^VERSION' | awk '{ print $2 }')
 helm upgrade cert-manager jetstack/cert-manager \
   --reuse-values \
   --namespace cert-manager \
   --version $existing_cert_manager_version \
-  --set extraArgs={--controllers='*\,-certificaterequests-approver'} # ⚠ Disable cert-manager's built-in approver
+  --set disableAutoApproval=true
 ```
-
-> ℹ️ Be sure to customize the cert-manager controller `extraArgs`,
-> which are at the top level of the values file.
-> *Do not* change the `webhook.extraArgs`, `startupAPICheck.extraArgs` or `cainjector.extraArgs` settings.
->
-> ⚠️ If you are reconfiguring an already installed cert-manager,
-> check whether the original installation already customized the `extraArgs` value
-> by running `helm get values cert-manager --namespace cert-manager`.
-> If there are already `extraArgs` values, merge those with the extra `--controllers` value.
-> Otherwise your original `extraArgs` values will be overwritten.
 
 ### 2. Install approver-policy
 

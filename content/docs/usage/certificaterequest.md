@@ -162,47 +162,29 @@ automatically approve _all_ CertificateRequests that reference any internal
 issuer type in any namespace: `cert-manager.io/Issuer`,
 `cert-manager.io/ClusterIssuer`.
 
-To disable this controller, add the following argument to the
-cert-manager-controller: `--controllers=*,-certificaterequests-approver`. This
-can be achieved with helm by appending:
+**Disabling the internal auto approver:**
+
+To disable this controller, in the Helm chart set the `disableAutoApproval` value to `true`:
 
 ```bash
---set extraArgs={--controllers='*\,-certificaterequests-approver'}
+# ⚠️ This Helm option is only available in cert-manager v1.15.0 and later.
+--set disableAutoApproval=true
 ```
 
-Alternatively, in order for the internal approver controller to approve
-CertificateRequests that reference an external issuer, add the following RBAC to
-the cert-manager-controller Service Account. Please replace the given resource
-names with the relevant names:
+**Approving additional issuers using the internal auto approver:**
 
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: cert-manager-controller-approve:my-issuer-example-com # edit
-rules:
-- apiGroups:
-  - cert-manager.io
-  resources:
-  - signers
-  verbs:
-  - approve
-  resourceNames:
-  - issuers.my-issuer.example.com/* # edit
-  - clusterissuers.my-issuer.example.com/* # edit
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: cert-manager-controller-approve:my-issuer-example-com # edit
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cert-manager-controller-approve:my-issuer-example-com # edit
-subjects:
-- kind: ServiceAccount
-  name: cert-manager
-  namespace: cert-manager
+Alternatively, in order for the internal approver controller to approve
+CertificateRequests that reference an external issuer, in the Helm chart add the
+issuers to the `approveSignerNames` list, or set the `approveSignerNames` value
+to an empty list to approve all issuers (internal and external).
+
+```bash
+# ⚠️ This Helm option is only available in cert-manager v1.15.0 and later.
+--set approveSignerNames[0]="issuers.cert-manager.io/*" \
+--set approveSignerNames[1]="clusterissuers.cert-manager.io/*" \
+\
+--set approveSignerNames[2]="issuers.my-issuer.example.com/*" \
+--set approveSignerNames[3]="clusterissuers.my-issuer.example.com/*"
 ```
 
 #### RBAC Syntax
