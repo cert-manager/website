@@ -219,8 +219,6 @@ than other releases to provide a stable platform for enterprises to build upon.
 
 ## `v1.12.11`
 
-## Changes by Kind
-
 ### Other (Cleanup or Flake)
 
 - Updated Go to `1.21.11` bringing in security fixes for `archive/zip` and `net/netip`. ([#7077](https://github.com/cert-manager/cert-manager/pull/7077), [@ThatsMrTalbot](https://github.com/thatsmrtalbot))
