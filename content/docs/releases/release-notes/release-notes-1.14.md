@@ -52,6 +52,16 @@ without breaking users who have come to rely on the existing, documented behavio
 
   > ⚠️ There may be [clients that are incompatible with `DST Root CA X3`](https://github.com/mono/mono/issues/21233).
 
+## `v1.14.6`
+
+## Changes by Kind
+
+### Other (Cleanup or Flake)
+
+- Upgrade Go to 1.21.10, fixing `GO-2024-2824` (https://github.com/advisories/GHSA-2jwv-jmq4-4j3r). ([#7008](https://github.com/cert-manager/cert-manager/pull/7008), [@inteon](https://github.com/inteon))
+- Helm BUGFIX: the cainjector ConfigMap was not mounted in the cainjector deployment. ([#7053](https://github.com/cert-manager/cert-manager/pull/7053), [@cert-manager-bot](https://github.com/cert-manager-bot))
+- Updated Go to 1.21.11 bringing in security fixes for `archive/zip` and `net/netip`. ([#7076](https://github.com/cert-manager/cert-manager/pull/7076), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+
 ## `v1.14.5`
 
 Special thanks to [@BobyMCbobs](https://github.com/BobyMCbobs) for reporting and testing the DigitalOcean issue!
