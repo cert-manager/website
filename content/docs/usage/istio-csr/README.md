@@ -38,12 +38,12 @@ Running istio-csr requires a few steps and preconditions in order:
 3. An `Issuer` or `ClusterIssuer` which will be used to issue Istio certificates
 4. istio-csr installed (likely via helm)
 5. Istio [installed](https://istio.io/latest/docs/setup/install/istioctl/) with
-   some custom config required, e.g. using the example config from the [repository](https://github.com/cert-manager/istio-csr/tree/main/hack).
+   some custom config required, e.g. using the example config from the [repository](https://github.com/cert-manager/istio-csr/tree/main/make/config/istio).
 
 ### Why Custom Istio Install Manifests?
 
 If you take a look at the contents of [the example Istio install
-manifests](https://github.com/cert-manager/istio-csr/tree/main/hack)
+manifests](https://github.com/cert-manager/istio-csr/tree/main/make/config/istio)
 there are a few custom configuration options which are important.
 
 Required changes include setting `ENABLE_CA_SERVER` to `false` and setting the `caAddress` from which Istio will
