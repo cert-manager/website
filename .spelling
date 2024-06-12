@@ -705,6 +705,9 @@ structs
 klog
 relabelings
 kustomize
+TokenReview
+JWTs
+TTLs
 
 FlorianLiebhart
 cypres
