@@ -607,7 +607,9 @@ spec:
 > **Note**: If you are re-using the JWT token that is provided by cert-manager to authenticate to Vault, you
 > can omit the `token_reviewer_jwt` parameter when configuring the Kubernetes Vault auth method. But you must
 > additionally configure cert-manager to include the Kubernetes API server audience in the JWT token. This is
-> done by setting the `audiences` field in the `serviceAccountRef` field.
+> done by setting the `audiences` field in the `serviceAccountRef` field. This option is only available in
+> cert-manager >= v1.15.0.
+>
 > ```bash
 > KUBE_API_AUDIENCE="$(kubectl create token default | jq -R 'gsub("-";"+") | gsub("_";"/") | split(".") | .[1] | @base64d | fromjson | .aud[0]')"
 > ```
