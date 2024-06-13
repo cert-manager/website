@@ -370,7 +370,7 @@ Vault Authentication Method:
 #### Option 1. Vault Authentication Method: Use JWT/OIDC Auth
 
 The [JWT/OIDC auth method](https://developer.hashicorp.com/vault/docs/auth/jwt/oidc-providers/kubernetes) should be used instead of the [Kubernetes auth method](#option-2-vault-authentication-method-use-kubernetes-auth) when:
-- Your Kubernetes' cluster OIDC discovery endpoint is reachable from the Vault server.
+- Your Kubernetes' cluster OIDC discovery endpoint is reachable from the Vault server (this is likely not the case if you are running a self-hosted Kubernetes or OpenShift cluster).
 - Your Vault server is not running inside the Kubernetes cluster.
 
 > **Note:** By using the JWT auth instead of the Kubernetes auth, the revocation of tokens will no longer be checked:  
@@ -393,6 +393,20 @@ $ curl "$ISSUER/.well-known/openid-configuration"
   "issuer": "https://container.googleapis.com/v1/projects/project001/locations/europe-west1-b/clusters/cert-manager-cluster",
   "jwks_uri": "https://container.googleapis.com/v1/projects/project001/locations/europe-west1-b/clusters/cert-manager-cluster/jwks",
   ...
+}
+
+$ curl "<jwks_uri value>"
+{
+  "keys": [
+    {
+      "kty": "RSA",
+      "e": "AQAB",
+      "use": "sig",
+      "kid": "key-id",
+      "alg": "RS256",
+      "n": "..."
+    }
+  ]
 }
 ```
 
