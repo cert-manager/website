@@ -222,6 +222,7 @@ kuard
 k8s
 KubeCon
 Kubernetes
+Openshift
 Kyverno
 Learnk8s
 LuCI
@@ -704,6 +705,9 @@ structs
 klog
 relabelings
 kustomize
+TokenReview
+JWTs
+TTLs
 
 FlorianLiebhart
 cypres
