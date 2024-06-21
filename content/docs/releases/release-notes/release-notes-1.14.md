@@ -52,6 +52,17 @@ without breaking users who have come to rely on the existing, documented behavio
 
   > ⚠️ There may be [clients that are incompatible with `DST Root CA X3`](https://github.com/mono/mono/issues/21233).
 
+## `v1.14.7`
+
+### Bugfixes
+
+- BUGFIX: fix issue that caused Vault issuer to not retry signing when an error was encountered. ([#7114](https://github.com/cert-manager/cert-manager/pull/7114), [@cert-manager-bot](https://github.com/cert-manager-bot))
+
+### Other (Cleanup or Flake)
+
+- Upgrade `go-jose` library to fix `CVE-2024-28180` trivy alert. ([#7109](https://github.com/cert-manager/cert-manager/pull/7109), [@inteon](https://github.com/inteon))
+- Update `github.com/Azure/azure-sdk-for-go/sdk/azidentity` to address `CVE-2024-35255` ([#7099](https://github.com/cert-manager/cert-manager/pull/7099), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+
 ## `v1.14.6`
 
 ## Changes by Kind
