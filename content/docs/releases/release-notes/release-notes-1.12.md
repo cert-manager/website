@@ -217,6 +217,16 @@ time and resources towards the continued maintenance of cert-manager projects. V
 cert-manager 1.12 as a long term support release, meaning it will be maintained for much longer
 than other releases to provide a stable platform for enterprises to build upon.
 
+## `v1.12.12`
+
+### Bugfixes
+
+- BUGFIX: fix issue that caused Vault issuer to not retry signing when an error was encountered. ([#7113](https://github.com/cert-manager/cert-manager/pull/7113), [@cert-manager-bot](https://github.com/cert-manager-bot))
+
+### Other (Cleanup or Flake)
+
+- Update `github.com/Azure/azure-sdk-for-go/sdk/azidentity` to address `CVE-2024-35255` ([#7093](https://github.com/cert-manager/cert-manager/pull/7093), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+
 ## `v1.12.11`
 
 ### Other (Cleanup or Flake)
