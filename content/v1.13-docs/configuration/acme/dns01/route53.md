@@ -134,7 +134,7 @@ And the following trust relationship (Add AWS `Service`s as needed):
 }
 ```
 
-## Creating an Issuer (or `ClusterIssuer`)
+## Creating an `Issuer` (or `ClusterIssuer`)
 
 Here is an example configuration for a `ClusterIssuer`:
 
@@ -183,6 +183,8 @@ spec:
 ```
 
 Note that, as mentioned above, the pod is using `arn:aws:iam::XXXXXXXXXXX:role/cert-manager` as a credentials source in Account X, but the `ClusterIssuer` ultimately assumes the `arn:aws:iam::YYYYYYYYYYYY:role/dns-manager` role to actually make changes in Route53 zones located in Account Y.
+
+**Note:** If you are using IRSA, omit `route53.role`. See [#4053](https://github.com/cert-manager/cert-manager/issues/4053).
 
 ## EKS IAM Role for Service Accounts (IRSA)
 
