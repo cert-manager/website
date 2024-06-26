@@ -440,6 +440,17 @@ Certificate resources:
   configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
   Valid values are `Never` and `Always`. If unset a rotation policy `Never` will be used.
 
+Any other annotations are copied as is into generated `Certificate` object. Like custom `Venafi` configuration could be specified.
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: example
+  annotations:
+    # custom venafi configuration
+    venafi.cert-manager.io/custom-fields: `[ {"name": "field-name", "value": "field value"}]`
+```
+
 ## Inner workings diagram for developers
 
 <object data="/images/request-certificate-debug/gateway-shim-flow.svg"></object>
