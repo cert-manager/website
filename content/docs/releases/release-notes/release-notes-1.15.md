@@ -41,8 +41,8 @@ In addition, massive thanks to Venafi for contributing developer time and resour
 
 ### Other (Cleanup or Flake)
 
-- Update github.com/Azure/azure-sdk-for-go/sdk/azidentity to address CVE-2024-35255 ([#7092](https://github.com/cert-manager/cert-manager/pull/7092), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
-- Bump the go-retryablehttp dependency to fix CVE-2024-6104 ([#7130](https://github.com/cert-manager/cert-manager/pull/7130), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Update `github.com/Azure/azure-sdk-for-go/sdk/azidentity` to address `CVE-2024-35255` ([#7092](https://github.com/cert-manager/cert-manager/pull/7092), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+- Bump the `go-retryablehttp` dependency to fix `CVE-2024-6104` ([#7130](https://github.com/cert-manager/cert-manager/pull/7130), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## `v1.15.0`
 
