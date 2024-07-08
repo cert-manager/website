@@ -3,7 +3,7 @@
 // Zentered 2022, licensed under the Apache 2.0 license.
 
 import React from 'react'
-import Highlight, { defaultProps } from 'prism-react-renderer'
+import { Highlight } from 'prism-react-renderer'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useState } from 'react'
 
@@ -43,7 +43,6 @@ export default function CodeBlock({ children, theme = 'github' }) {
   return (
     <div className="relative">
       <Highlight
-        {...defaultProps}
         theme={theme}
         code={code}
         language={language}

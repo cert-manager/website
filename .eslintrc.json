@@ -13,8 +13,7 @@
     "eslint:recommended",
     "plugin:@next/next/recommended",
     "plugin:react/recommended",
-    "plugin:mdx/recommended",
-    "plugin:markdown/recommended"
+    "plugin:mdx/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
