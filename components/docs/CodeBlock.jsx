@@ -3,9 +3,13 @@
 // Zentered 2022, licensed under the Apache 2.0 license.
 
 import React from 'react'
-import { Highlight } from 'prism-react-renderer'
+import { Highlight, Prism } from 'prism-react-renderer'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useState } from 'react'
+
+// see https://github.com/FormidableLabs/prism-react-renderer?tab=readme-ov-file#custom-language-support
+(typeof global !== "undefined" ? global : window).Prism = Prism
+require('prismjs/components/prism-bash')
 
 const copyIcon = (
   <svg
@@ -52,11 +56,11 @@ export default function CodeBlock({ children, theme = 'github' }) {
             <CopyToClipboard text={code} onCopy={() => setCopied(doneIcon)}>
               <button className="docs-codeblock-btn">{copied}</button>
             </CopyToClipboard>
-            <pre className={`${className}`} style={{ ...style }}>
+            <pre className={className} style={style}>
               {tokens.map((line, i) => (
-                <div key={i} {...getLineProps({ line, key: i })}>
+                <div key={i} {...getLineProps({ line })}>
                   {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
+                    <span key={key} {...getTokenProps({ token })} />
                   ))}
                 </div>
               ))}

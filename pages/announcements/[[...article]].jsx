@@ -7,13 +7,13 @@ import { MDXRemote } from 'next-mdx-remote'
 import { NextSeo } from 'next-seo'
 import { withRouter } from 'next/router'
 import { Element } from 'react-scroll'
+import { themes } from 'prism-react-renderer'
 
 import CodeBlock from 'components/docs/CodeBlock.jsx'
 import InlineCode from 'components/docs/InlineCode.jsx'
 import Toc from 'components/docs/Toc'
 
 import getCurrentUrl from 'lib/currentUrl'
-import theme from 'lib/github.js'
 import { getArticles, pageProps } from 'lib/announcements'
 
 import { meta as page } from 'content/pages/article.mdx'
@@ -54,7 +54,7 @@ const AnnouncementPage = ({
             <div className="mx-auto md:mx-0 prose max-w-full main-docs-section">
               <h1>{title}</h1>
               <i>{date}</i>
-              <Announcement source={source} theme={theme} />
+              <Announcement source={source} theme={themes.github} />
             </div>
           </main>
           <div className="hidden xl:block col-span-2 border-l border-gray-2/50 pl-5">
