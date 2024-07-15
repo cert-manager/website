@@ -14,7 +14,7 @@ Any issues towards the documentation should also be filed there.
 
 We use [Prow](https://github.com/k8s-ci-robot/test-infra/tree/master/prow) on all our repositories.
 If you've ever looked at a Kubernetes repo, you will probably already have met Prow. Prow will be able to help you in GitHub using its commands.
-You can find then all [on the command help page](https://prow.build-infra.jetstack.net/command-help).
+You can find then all [on the command help page](https://prow.infra.cert-manager.io/command-help).
 Prow will also run all tests and assign certain labels on PRs.
 
 ## Bugs
@@ -159,7 +159,7 @@ Sometimes `/triage` is also added which helps us when following up Issues.
 ### Assignees meaning in PRs and issues
 
 Sometimes, you might see someone commenting with the
-[`/assign` prow command](https://prow.build-infra.jetstack.net/command-help#assign):
+[`/assign` prow command](https://prow.infra.cert-manager.io/command-help#assign):
 
 ```plain
 /assign @meyskens
