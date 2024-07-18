@@ -31,7 +31,7 @@ you'll need to make modifications to the deployment manifests.
 Once you've installed cert-manager, you can verify it is deployed correctly by
 checking the `cert-manager` namespace for running pods:
 
-```bash
+```console
 $ kubectl get pods --namespace cert-manager
 
 NAME                                       READY   STATUS    RESTARTS   AGE
@@ -55,7 +55,7 @@ First, make sure that [cmctl is installed](../reference/cmctl.md#installation).
 cmctl performs a dry-run certificate creation check against the Kubernetes cluster.
 If successful, the message `The cert-manager API is ready` is displayed.
 
-```bash
+```console
 $ cmctl check api
 The cert-manager API is ready
 ```
@@ -63,7 +63,7 @@ The cert-manager API is ready
 The command can also be used to wait for the check to be successful.
 Here is an output example of running the command at the same time that cert-manager is being installed:
 
-```bash
+```console
 $ cmctl check api --wait=2m
 Not ready: the cert-manager CRDs are not yet installed on the Kubernetes API server
 Not ready: the cert-manager CRDs are not yet installed on the Kubernetes API server
@@ -116,7 +116,8 @@ kubectl apply -f test-resources.yaml
 
 Check the status of the newly created certificate. You may need to wait a few
 seconds before cert-manager processes the certificate request.
-```bash
+
+```console
 $ kubectl describe certificate -n cert-manager-test
 
 ...
@@ -140,6 +141,7 @@ Events:
 ```
 
 Clean up the test resources.
+
 ```bash
 kubectl delete -f test-resources.yaml
 ```
