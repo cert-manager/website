@@ -3,7 +3,7 @@ title: Prometheus Metrics
 description: 'cert-manager usage: Prometheus metrics'
 ---
 
-To help with operations and insights into cert-manager activities, cert-manager exposes metrics in the [Prometheus](https://prometheus.io/) format from the controller component. These are available at the standard `/metrics` path of the controller component's configured HTTP port.
+To help with operations and insights into cert-manager activities, cert-manager exposes metrics in the [Prometheus](https://prometheus.io/) format from the controller and webhook components. These are available at the standard `/metrics` endpoint on port `9402` of each component Pod.
 
 ## Scraping Metrics
 
@@ -11,34 +11,18 @@ How metrics are scraped will depend how you're operating your Prometheus server(
 
 ### Helm
 
-If you're deploying cert-manager with helm, a `ServiceMonitor` resource can be configured. This configuration should enable metric scraping, and the configuration can be further tweaked as described in the [Helm configuration documentation](https://github.com/cert-manager/cert-manager/blob/master/deploy/charts/cert-manager/README.template.md#configuration).
+If you're deploying cert-manager with helm, a `PodMonitor` resource can be configured. This configuration should enable metric scraping, and the configuration can be further tweaked as described in the [Helm configuration documentation](https://github.com/cert-manager/cert-manager/blob/master/deploy/charts/cert-manager/README.template.md#configuration).
 
 ```yaml
 prometheus:
   enabled: true
-  servicemonitor:
+  podmonitor:
     enabled: true
 ```
 
 ### Regular Manifests
 
-If you're not using helm to deploy cert-manager and instead using the provided regular YAML manifests, this example `PodMonitor` and deployment patch should be all you need to start ingesting cert-manager metrics.
-
-1. [Apply the following patch](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/#use-a-strategic-merge-patch-to-update-a-deployment) to your cert-manager deployment
-
-```yaml
-spec:
-  template:
-    spec:
-      containers:
-        - name: cert-manager-controller
-          ports:
-            - containerPort: 9402
-              name: http
-              protocol: TCP
-```
-
-2. Create the following `PodMonitor`
+If you're not using helm to deploy cert-manager and instead using the provided regular YAML manifests, this example `PodMonitor` should be all you need to start ingesting cert-manager metrics.
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -50,18 +34,26 @@ metadata:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/component: "controller"
 spec:
   jobLabel: app.kubernetes.io/name
   selector:
-    matchLabels:
-      app: cert-manager
-      app.kubernetes.io/name: cert-manager
-      app.kubernetes.io/instance: cert-manager
-      app.kubernetes.io/component: "controller"
+    matchExpressions:
+      - key: app.kubernetes.io/name
+        operator: In
+        values:
+        - cert-manager
+        - webhook
+      - key: app.kubernetes.io/instance
+        operator: In
+        values:
+        - release-name
+      - key: app.kubernetes.io/component
+        operator: In
+        values:
+        - controller
+        - webhook
   podMetricsEndpoints:
     - port: http-metrics
-      honorLabels: true
 ```
 
 ### TLS
@@ -91,7 +83,7 @@ metricsTLSConfig:
 
 In this mode cert-manager will create a CA in a named secret, then use this CA to sign the metrics endpoint certificate. This mode will also take care of rotation, auto rotating the certificate as required.
 
-Dynamic certificates can be specified via the flags `--metrics-dynamic-serving-ca-secret-namespace`, `--metrics-dynamic-serving-ca-secret-name` and `--metrics-dynamic-serving-dns-names` or the corresponding config file parameters `metricsTLSConfig.dynamic.secretNamespace`, `metricsTLSConfig.dynamic.secretName` and `metricsTLSConfig.dynamic.dnsNames`. 
+Dynamic certificates can be specified via the flags `--metrics-dynamic-serving-ca-secret-namespace`, `--metrics-dynamic-serving-ca-secret-name` and `--metrics-dynamic-serving-dns-names` or the corresponding config file parameters `metricsTLSConfig.dynamic.secretNamespace`, `metricsTLSConfig.dynamic.secretName` and `metricsTLSConfig.dynamic.dnsNames`.
 
 An example config file would be:
 
