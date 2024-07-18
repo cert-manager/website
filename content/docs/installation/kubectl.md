@@ -81,7 +81,7 @@ Best way to fully verify the installation is to issue a test certificate. For th
 
 
 ```bash
-$ cat <<EOF > test-resources.yaml
+cat <<EOF > test-resources.yaml
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -111,7 +111,7 @@ EOF
 
 Create the test resources.
 ```bash
-$ kubectl apply -f test-resources.yaml
+kubectl apply -f test-resources.yaml
 ```
 
 Check the status of the newly created certificate. You may need to wait a few
@@ -141,7 +141,7 @@ Events:
 
 Clean up the test resources.
 ```bash
-$ kubectl delete -f test-resources.yaml
+kubectl delete -f test-resources.yaml
 ```
 
 If all the above steps have completed without error, you're good to go!
