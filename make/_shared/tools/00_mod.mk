@@ -42,7 +42,13 @@ for_each_kv = $(foreach item,$2,$(eval $(call $1,$(word 1,$(subst =, ,$(item))),
 # variables: https://stackoverflow.com/questions/54726457
 export PATH := $(CURDIR)/$(bin_dir)/tools:$(PATH)
 
-CTR=docker
+CTR ?= docker
+.PHONY: __require-ctr
+ifneq ($(shell command -v $(CTR) >/dev/null || echo notfound),)
+__require-ctr:
+	@:$(error "$(CTR) (or set CTR to a docker-compatible tool)")
+endif
+NEEDS_CTR = __require-ctr
 
 tools :=
 # https://github.com/helm/helm/releases
@@ -153,7 +159,7 @@ ADDITIONAL_TOOLS ?=
 tools += $(ADDITIONAL_TOOLS)
 
 # https://go.dev/dl/
-VENDORED_GO_VERSION := 1.22.4
+VENDORED_GO_VERSION := 1.22.5
 
 # Print the go version which can be used in GH actions
 .PHONY: print-go-version
@@ -241,8 +247,13 @@ detected_vendoring := $(findstring vendor-go,$(MAKECMDGOALS))$(shell [ -f $(bin_
 export VENDOR_GO ?= $(detected_vendoring)
 
 ifeq ($(VENDOR_GO),)
+.PHONY: __require-go
+ifneq ($(shell command -v go >/dev/null || echo notfound),)
+__require-go:
+	@:$(error "$(GO) (or run 'make vendor-go')")
+endif
 GO := go
-NEEDS_GO := #
+NEEDS_GO = __require-go
 else
 export GOROOT := $(CURDIR)/$(bin_dir)/tools/goroot
 export PATH := $(CURDIR)/$(bin_dir)/tools/goroot/bin:$(PATH)
@@ -363,10 +374,10 @@ $(call for_each_kv,go_dependency,$(go_dependencies))
 # File downloads #
 ##################
 
-go_linux_amd64_SHA256SUM=ba79d4526102575196273416239cca418a651e049c2b099f3159db85e7bade7d
-go_linux_arm64_SHA256SUM=a8e177c354d2e4a1b61020aca3562e27ea3e8f8247eca3170e3fa1e0c2f9e771
-go_darwin_amd64_SHA256SUM=c95967f50aa4ace34af0c236cbdb49a9a3e80ee2ad09d85775cb4462a5c19ed3
-go_darwin_arm64_SHA256SUM=242b78dc4c8f3d5435d28a0d2cec9b4c1aa999b601fb8aa59fb4e5a1364bf827
+go_linux_amd64_SHA256SUM=904b924d435eaea086515bc63235b192ea441bd8c9b198c507e85009e6e4c7f0
+go_linux_arm64_SHA256SUM=8d21325bfcf431be3660527c1a39d3d9ad71535fabdf5041c826e44e31642b5a
+go_darwin_amd64_SHA256SUM=95d9933cdcf45f211243c42c7705c37353cccd99f27eb4d8e2d1bf2f4165cb50
+go_darwin_arm64_SHA256SUM=4cd1bcb05be03cecb77bccd765785d5ff69d79adf4dd49790471d00c06b41133
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/go@$(VENDORED_GO_VERSION)_$(HOST_OS)_$(HOST_ARCH).tar.gz
 $(DOWNLOAD_DIR)/tools/go@$(VENDORED_GO_VERSION)_$(HOST_OS)_$(HOST_ARCH).tar.gz: | $(DOWNLOAD_DIR)/tools
@@ -604,10 +615,7 @@ $(DOWNLOAD_DIR)/tools/preflight@$(PREFLIGHT_VERSION)_linux_$(HOST_ARCH): | $(DOW
 missing=$(shell (command -v curl >/dev/null || echo curl) \
              && (command -v sha256sum >/dev/null || command -v shasum >/dev/null || echo sha256sum) \
              && (command -v git >/dev/null || echo git) \
-             && (command -v rsync >/dev/null || echo rsync) \
-             && ([ -n "$(findstring vendor-go,$(MAKECMDGOALS),)" ] \
-                || command -v $(GO) >/dev/null || echo "$(GO) (or run 'make vendor-go')") \
-             && (command -v $(CTR) >/dev/null || echo "$(CTR) (or set CTR to a docker-compatible tool)"))
+             && (command -v rsync >/dev/null || echo rsync))
 ifneq ($(missing),)
 $(error Missing required tools: $(missing))
 endif
@@ -616,34 +624,3 @@ endif
 ## Download and setup all tools
 ## @category [shared] Tools
 tools: $(tools_paths)
-
-self_file := $(dir $(lastword $(MAKEFILE_LIST)))/00_mod.mk
-
-# see https://stackoverflow.com/a/53408233
-sed_inplace := sed -i''
-ifeq ($(HOST_OS),darwin)
-	sed_inplace := sed -i ''
-endif
-
-# This target is used to learn the sha256sum of the tools. It is used only
-# in the makefile-modules repo, and should not be used in any other repo.
-.PHONY: tools-learn-sha
-tools-learn-sha: | $(bin_dir)
-	rm -rf ./$(bin_dir)/
-	mkdir -p ./$(bin_dir)/scratch/
-	$(eval export LEARN_FILE=$(CURDIR)/$(bin_dir)/scratch/learn_tools_file)
-	echo -n "" > "$(LEARN_FILE)"
-
-	HOST_OS=linux HOST_ARCH=amd64 $(MAKE) tools
-	HOST_OS=linux HOST_ARCH=arm64 $(MAKE) tools
-	HOST_OS=darwin HOST_ARCH=amd64 $(MAKE) tools
-	HOST_OS=darwin HOST_ARCH=arm64 $(MAKE) tools
-
-	HOST_OS=linux HOST_ARCH=amd64 $(MAKE) vendor-go
-	HOST_OS=linux HOST_ARCH=arm64 $(MAKE) vendor-go
-	HOST_OS=darwin HOST_ARCH=amd64 $(MAKE) vendor-go
-	HOST_OS=darwin HOST_ARCH=arm64 $(MAKE) vendor-go
-
-	while read p; do \
-		$(sed_inplace) "$$p" $(self_file); \
-	done <"$(LEARN_FILE)"
