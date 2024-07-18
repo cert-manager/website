@@ -14,7 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -eu -o pipefail
+set -o errexit
+set -o nounset
+set -o pipefail
 
 ## 1. Build set of extracted line items
 
@@ -69,10 +71,10 @@ done <<< "$raw_expansions"
 
 ## 3. Sort and print the extracted line items
 
-RULE_COLOR="$(tput setaf 6)"
-CATEGORY_COLOR="$(tput setaf 3)"
-CLEAR_STYLE="$(tput sgr0)"
-PURPLE=$(tput setaf 125)
+RULE_COLOR="$(TERM=xterm tput setaf 6)"
+CATEGORY_COLOR="$(TERM=xterm tput setaf 3)"
+CLEAR_STYLE="$(TERM=xterm tput sgr0)"
+PURPLE=$(TERM=xterm tput setaf 125)
 
 extracted_lines=$(echo -e "$extracted_lines" | LC_ALL=C sort -r)
 current_category=""

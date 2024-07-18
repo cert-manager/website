@@ -1,13 +1,6 @@
 approvers:
-- munnerz
-- JoshVanL
-- jakexks
-- irbekrm
-- maelvls
-- SgtCoDFish
-- wallrj
-- inteon
+- cm-maintainers
 reviewers:
+- cm-maintainers
 - hawksight
 - erikgb
-- thatsmrtalbot

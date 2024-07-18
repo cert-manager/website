@@ -10,6 +10,7 @@ import { MDXRemote } from 'next-mdx-remote'
 import { NextSeo } from 'next-seo'
 import { withRouter } from 'next/router'
 import { Element } from 'react-scroll'
+import { themes } from 'prism-react-renderer'
 
 import CodeBlock from 'components/docs/CodeBlock.jsx'
 import InlineCode from 'components/docs/InlineCode.jsx'
@@ -17,7 +18,6 @@ import Sidebar from 'components/docs/Sidebar'
 import Toc from 'components/docs/Toc'
 
 import getCurrentUrl from 'lib/currentUrl'
-import theme from 'lib/github.js'
 import { pageProps, staticPaths } from 'lib/serialize'
 
 import { meta as page } from 'content/pages/docs.mdx'
@@ -57,7 +57,7 @@ const DocumentationPage = ({
           <main className="col-span-8 lg:col-span-9 xl:col-span-7 docs">
             <div className="mx-auto md:mx-0 prose max-w-full main-docs-section">
               <h1>{title}</h1>
-              <Documentation source={source} theme={theme} />
+              <Documentation source={source} theme={themes.github} />
             </div>
           </main>
           <div className="hidden xl:block col-span-2 border-l border-gray-2/50 pl-5">
