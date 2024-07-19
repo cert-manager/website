@@ -116,8 +116,6 @@ config:
       secretName: "cert-manager-metrics-ca"
       dnsNames:
       - cert-manager-metrics
-      - cert-manager-metrics.cert-manager
-      - cert-manager-metrics.cert-manager.svc
 webhook:
   config:
     metricsTLSConfig:
@@ -126,9 +124,44 @@ webhook:
         secretName: "cert-manager-metrics-ca"
         dnsNames:
         - cert-manager-metrics
-        - cert-manager-metrics.cert-manager
-        - cert-manager-metrics.cert-manager.svc
 ```
+
+> ℹ️ This configuration will result in a single new Secret `cert-manager/cert-manager-metrics-ca` containing a CA.
+> The first `controller` or `webook` Pod will create the CA Secret and the others will then use it.
+>
+> All the controller and webhook Pods will generate their own unique metrics serving certificates
+> and sign them with the CA private key.
+>
+> The `PodMonitor` is configured to read the public certificate from the CA Secret
+> and Prometheus will use that CA when it connects to the metrics servers of each of the matching Pods.
+>
+> All the serving certificates share the same DNS name.
+> That same name must be added to the `PodMonitor`
+> and Prometheus will use that hostname when it connects to the metrics servers of each of the matching Pods.
+
+##### Troubleshooting
+
+Check the controller and webhook logs to see the CA certificate and serving certificates being created and updated:
+
+```sh
+kubectl  -n cert-manager logs -l app.kubernetes.io/instance=cert-manager --prefix
+```
+
+```console
+I0719 15:21:28.113411       1 dynamic_source.go:172] "Detected root CA rotation - regenerating serving certificates" logger="cert-manager"
+I0719 15:21:28.115018       1 dynamic_source.go:290] "Updated cert-manager TLS certificate" logger="cert-manager" DNSNames=["cert-manager-metrics"]
+```
+
+Check the connection to the metrics endpoint using `kubectl port-forward` and  `curl`:
+
+```sh
+kubectl port-forward -n cert-manager deployment/cert-manager-webhook 9402
+curl --insecure -v https://localhost:9402/metrics
+```
+
+Check the health of the cert-manager scrape targets on the Prometheus status page:
+
+![](/docs/devops-tips/prometheus-metrics/prometheus-status-targets.png)
 
 ## Monitoring Mixin
 
