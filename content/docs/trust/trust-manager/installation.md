@@ -5,7 +5,7 @@ description: 'Installation guide for trust-manager'
 
 ## Installation Steps
 
-### 1. Install trust-manager
+### 1. Update Helm Repository
 
 Helm is the easiest way to install trust-manager and comes with a publicly trusted certificate bundle package
 (for the`useDefaultCAs` source) derived from Debian containers.
@@ -14,9 +14,14 @@ Helm is the easiest way to install trust-manager and comes with a publicly trust
 helm repo add jetstack https://charts.jetstack.io --force-update
 ```
 
-When installed via Helm, trust-manager has a dependency on cert-manager for provisioning an application certificate,
-and as such cert-manager must also be installed into the cert-manager namespace.
-If you have not already installed cert-manager, you can install it using the following command:
+### 2. Install cert-manager (optional)
+
+When installed via Helm, trust-manager has a dependency on cert-manager for provisioning an application certificate
+unless you explicitly opt to use a Helm-generated certificate instead.
+
+In production, we recommend installing cert-manager first and having trust-manager depend on it.
+
+If you haven't already installed cert-manager, you can install it using the following command:
 
 ```bash
 # Run this command only if you haven't installed cert-manager already
@@ -27,12 +32,23 @@ helm install cert-manager jetstack/cert-manager \
   --set crds.enabled=true
 ```
 
+If you're running cert-manager without the default approver, see [approver-policy Integration](#approver-policy-integration)
+for details on how to avoid a stuck installation.
+
+If you don't want to rely on cert-manager, you can install using a Helm-generated cert; see [Installing trust-manager without cert-manager](./installation.md#install-without-cert-manager).
+
+### 3. Install trust-manager
+
+trust-manager is simple to install and is contained in a single Helm chart:
+
 ```bash
 helm upgrade trust-manager jetstack/trust-manager \
   --install \
   --namespace cert-manager \
   --wait
 ```
+
+Various options are available, and some are documented below.
 
 ## Installation Options
 
@@ -46,6 +62,8 @@ Please consult the
 for details and trade-offs.
 
 #### approver-policy Integration
+
+<a name="approver-policy-integration"></a>
 
 If you're running [approver-policy](../../policy/approval/approver-policy/README.md) then cert-manager's default approver will be disabled which will mean that
 trust-manager's webhook certificate will - by default - block when you install the Helm chart until it's manually approved.
@@ -78,6 +96,27 @@ namespace to whichever is most appropriate for your environment.
 
 An ideal deployment would be a fresh namespace dedicated entirely to trust-manager, to minimize the number of actors in your
 cluster that can modify your trust sources.
+
+#### Installing trust-manager without cert-manager
+
+<a name="install-without-cert-manager"></a>
+
+As an alternative to generating a webhook certificate using cert-manager, it's possible to opt to use Helm to generate the webhook certificate instead.
+
+This isn't recommended for production, since Helm-generated certificates might be complicated to monitor or to reason about. The certificate is also rotated
+every time trust-manager is upgraded, which necessitates pod restarts and may complicate the upgrade process.
+
+Installing without cert-manager can be great for smaller, more resource-constrained deployments such as experiments, demos or home labs.
+
+Using a Helm-generated cert requires a single flag:
+
+```bash
+helm upgrade trust-manager jetstack/trust-manager \
+  --install \
+  --namespace cert-manager \
+  --wait \
+  --set app.webhook.tls.helmCert.enabled=true
+```
 
 ## Uninstalling
 
