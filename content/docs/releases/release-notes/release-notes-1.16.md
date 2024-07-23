@@ -3,7 +3,16 @@ title: Release 1.16
 description: 'cert-manager release notes: cert-manager 1.16'
 ---
 
-cert-manager 1.16 ...TODO
+cert-manager 1.16 includes various improvements to the metrics in the cert-manager components.
+
+## Themes
+
+### Extended Metrics
+
+The webhook component now has a metrics server, so that platform teams can
+monitor its performance and gain more information about the underlying Go
+runtime in the event of a problem.
+Read the [Prometheus Metrics](../../devops-tips/prometheus-metrics.md) page to learn more.
 
 ## Community
 
