@@ -3,7 +3,7 @@ title: Prometheus Metrics
 description: 'cert-manager usage: Prometheus metrics'
 ---
 
-To help with operations and insights into cert-manager activities, cert-manager exposes metrics in the [Prometheus](https://prometheus.io/) format from the controller and webhook components. These are available at the standard `/metrics` endpoint on port `9402` of each component Pod.
+To help with operations and insights into cert-manager activities, cert-manager exposes metrics in the [Prometheus](https://prometheus.io/) format from the controller, webhook and cainjector components. These are available at the standard `/metrics` endpoint on port `9402` of each component Pod.
 
 ## Scraping Metrics
 
@@ -41,6 +41,7 @@ spec:
       - key: app.kubernetes.io/name
         operator: In
         values:
+        - cainjector
         - cert-manager
         - webhook
       - key: app.kubernetes.io/instance
@@ -50,6 +51,7 @@ spec:
       - key: app.kubernetes.io/component
         operator: In
         values:
+        - cainjector
         - controller
         - webhook
   podMetricsEndpoints:
@@ -80,6 +82,12 @@ config:
       certFile: "/path/to/cert.pem"
       keyFile: "/path/to/key.pem"
 webhook:
+  config:
+    metricsTLSConfig:
+      filesystem:
+        certFile: "/path/to/cert.pem"
+        keyFile: "/path/to/key.pem"
+cainjector:
   config:
     metricsTLSConfig:
       filesystem:
@@ -124,12 +132,20 @@ webhook:
         secretName: "cert-manager-metrics-ca"
         dnsNames:
         - cert-manager-metrics
+cainjector:
+  config:
+    metricsTLSConfig:
+      dynamic:
+        secretNamespace: "cert-manager"
+        secretName: "cert-manager-metrics-ca"
+        dnsNames:
+        - cert-manager-metrics
 ```
 
 > ℹ️ This configuration will result in a single new Secret `cert-manager/cert-manager-metrics-ca` containing a CA.
-> The first `controller` or `webook` Pod will create the CA Secret and the others will then use it.
+> The first `controller`, `webook`, or `cainjector` Pod will create the CA Secret and the others will then use it.
 >
-> All the controller and webhook Pods will generate their own unique metrics serving certificates
+> All the controller, webhook, and cainjector Pods will generate their own unique metrics serving certificates
 > and sign them with the CA private key.
 >
 > The `PodMonitor` is configured to read the public certificate from the CA Secret
@@ -141,7 +157,7 @@ webhook:
 
 ##### Troubleshooting
 
-Check the controller and webhook logs to see the CA certificate and serving certificates being created and updated:
+Check the controller, webhook and cainjector logs to see the CA certificate and serving certificates being created and updated:
 
 ```sh
 kubectl  -n cert-manager logs -l app.kubernetes.io/instance=cert-manager --prefix
