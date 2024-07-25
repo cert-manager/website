@@ -158,7 +158,6 @@ spec:
         route53:
           region: us-east-1
           hostedZoneID: DIKER8JEXAMPLE # optional, see policy above
-          role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager
 
     # this solver handles example.org challenges
     # and uses explicit credentials
