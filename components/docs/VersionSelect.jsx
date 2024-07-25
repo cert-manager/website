@@ -55,7 +55,7 @@ export default function VersionSelect({
           ))}
           <div className="block px-2">
             <SidebarLink
-              href="https://release-next--cert-manager-website.netlify.app/docs/"
+              href="https://release-next--cert-manager.netlify.app/docs/"
               caption="next release"
               setSidebarCollapsed={setSidebarCollapsed}
               setParentOpen={setParentOpen}
