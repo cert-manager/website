@@ -6,7 +6,7 @@ https://trust-manager.io/* https://cert-manager.io/:splat 301!
 https://trust-manager.dev/* https://cert-manager.io/:splat 301!
 
 # Redirect all next-docs on the main site to the release-next preview
-https://cert-manager.io/next-docs/* https://release-next--cert-manager-website.netlify.app/docs/:splat 301!
+https://cert-manager.io/next-docs/* https://release-next--cert-manager.netlify.app/docs/:splat 301!
 
 # Various older renamed pages
 /docs/configuration/externalloadbalancer/ /docs/configuration/acme/http01/externalloadbalancer/ 301!
