@@ -200,7 +200,7 @@ To update the [API documentation](https://cert-manager.io/docs/reference/api-doc
 ```
 
 This should be done before every cert-manager release (if the API or CLI flags have changed)
-and any time the API or CLI of the [satellite projects](https://cert-manager.io/docs/projects/) changes,
+and any time the API or CLI of the [satellite projects](https://cert-manager.io/docs/contributing/projects/) changes,
 and the changes should be committed.
 
 Since there are many old versions of cert-manager, none of which change regularly (or at all),
