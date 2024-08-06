@@ -6,7 +6,7 @@ description: 'cert-manager release notes: cert-manager 1.14'
 > 📢 The cert-manager CLI has moved to a new GitHub repository
 >
 > From this release, `cmctl` is no longer be released with `cert-manager` itself,
-> and there will no further `quay.io/jetstack/cert-manager-ctl` OCI images. 
+> and there will no further `quay.io/jetstack/cert-manager-ctl` OCI images.
 >
 > For the startupapicheck Job you should update references to point at
 > `quay.io/jetstack/cert-manager-startupapicheck`
@@ -15,8 +15,8 @@ description: 'cert-manager release notes: cert-manager 1.14'
 
 > 📢 Change in how the Helm chart manages CRDs
 >
-> From this release, the Helm chart will no longer uninstall the CRDs when the 
-> chart is uninstalled. If you want the CRDs to be removed on uninstall use 
+> From this release, the Helm chart will no longer uninstall the CRDs when the
+> chart is uninstalled. If you want the CRDs to be removed on uninstall use
 > `crds.keep=false` when installing the Helm chart.
 
 cert-manager 1.15 promotes several features to beta, including GatewayAPI support (`ExperimentalGatewayAPISupport`), the ability to provide a subject in the Certificate that will be used literally in the CertificateSigningRequest (`LiteralCertificateSubject`) and the outputting of additional certificate formats (`AdditionalCertificateOutputFormats`).
@@ -32,6 +32,18 @@ Equally thanks to everyone who provided feedback, helped users and raised issues
 Thanks also to the CNCF, which provides resources and support, and to the AWS open source team for being good community members and for their maintenance of the PrivateCA Issuer.
 
 In addition, massive thanks to Venafi for contributing developer time and resources towards the continued maintenance of cert-manager projects.
+
+
+## `v1.15.2`
+
+### Bug or Regression
+
+- BUGFIX `route53`: explicitly set the `aws-global` STS region which is now required by the `github.com/aws/aws-sdk-go-v2` library. ([#7189](https://github.com/cert-manager/cert-manager/pull/7189), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+- Bump `grpc-go` to fix `GHSA-xr7q-jx4m-x55m` ([#7167](https://github.com/cert-manager/cert-manager/pull/7167), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Fix Azure DNS causing panics whenever authentication error happens ([#7188](https://github.com/cert-manager/cert-manager/pull/7188), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+- Fix incorrect value and indentation of `endpointAdditionalProperties` in the `PodMonitor` template of the Helm chart ([#7191](https://github.com/cert-manager/cert-manager/pull/7191), [`@inteon`](https://github.com/inteon))
+- Fixes ACME HTTP01 challenge behavior when using Gateway API to prevent unbounded creation of `HTTPRoute` resources ([#7186](https://github.com/cert-manager/cert-manager/pull/7186), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+- Upgrade `golang` from `1.22.3` to `1.22.5` ([#7165](https://github.com/cert-manager/cert-manager/pull/7165), [`@github-actions`](https://github.com/github-actions))
 
 ## `v1.15.1`
 
