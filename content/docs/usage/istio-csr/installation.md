@@ -9,6 +9,20 @@ This guide will run through installing and using istio-csr from scratch. We'll u
 
 Note that if you're following the Platform Setup guide for OpenShift, do not run the `istioctl install` command listed in that guide; we'll run our own command later.
 
+### 0. Background
+
+istio-csr uses cert-manager to issue Istio certificates, and needs to be able to reference an issuer resource to do this.
+
+You can choose to configure an issuer when installing with the Helm chart and / or to configure a ConfigMap to watch which can then be used to configure an issuer at runtime.
+
+Configuring a ConfigMap for the issuer details is called "runtime configuration", and it's required if no issuer is specified in the Helm chart.
+
+If you configure an issuer in the chart, you'll be able to start issuing as soon as the istio-csr pods come online but you'll need to have already installed cert-manager and created the issuer.
+
+If you don't set an issuer in the chart, istio-csr will not become ready until an issuer is specified via runtime configuration, but you'll be able to install cert-manager and istio-csr concurrently.
+
+Note that the chart contains a default issuer name and so using runtime configuration requires an explicit opt-in. The guide below assumes you'll install istio-csr after an issuer is configured without runtime configuration; there are notes for runtime configuration at the bottom.
+
 ### 1. Initial Setup
 
 You'll need the following tools installed on your machine:
@@ -277,6 +291,97 @@ Assuming your running inside kind, you can simply remove the cluster:
 ```shell
 kind delete cluster
 ```
+
+## Installation with Runtime Configuration
+
+There are two options for installing with runtime configuration:
+
+1. Install after cert-manager, still providing an explicit `issuerRef` in the Helm chart
+2. Blank out the `issuerRef` in the Helm chart and use pure runtime configuration
+
+Both options will require a ConfigMap to be created to point at an issuer. This ConfigMap can be created
+before or after installation, and must be created in the same namespace as the istio-csr pods.
+
+### Creating the ConfigMap
+
+Three keys are required, specifying the issuer name, kind and group. Any method of creating a ConfigMap will work. For example:
+
+```bash
+kubectl create configmap -n cert-manager istio-issuer \
+  --from-literal=issuer-name=my-issuer-name \
+  --from-literal=issuer-kind=ClusterIssuer \
+  --from-literal=issuer-group=cert-manager.io
+```
+
+### Option 1: Installation after cert-manager
+
+If cert-manager is already installed, you can use the same `helm upgrade` command as above but also specifying the name of the runtime configuration ConfigMap:
+
+```bash
+helm upgrade cert-manager-istio-csr jetstack/cert-manager-istio-csr \
+  --install \
+  --namespace cert-manager \
+  --wait \
+  ...
+  --set "app.runtimeIssuanceConfigMap=istio-issuer"
+```
+
+In this scenario, the issuer defined in `app.certmanager.issuer` will be used at startup and to create the `istiod` certificate.
+
+When istio-csr detects the runtime ConfigMap, it'll use the issuer configured there. If the ConfigMap is updated, istio-csr will respect the update dynamically.
+
+If the runtime ConfigMap is deleted, istio-csr will revert to using the value from `app.certmanager.issuer`.
+
+### Option 2: Pure Runtime Configuration
+
+Pure runtime configuration is only practical with istio-csr `v0.11.0` or newer.
+
+Pure runtime configuration requires more values to be set:
+
+1. The `app.certmanager.issuer` values must be blanked out (as they're set to a default value in the chart)
+2. The `istiod` certificate must not be provisioned alongside the istio-csr resources. By passing `app.tls.istiodCertificateEnable=dynamic`, the istiod will be dynamically generated when runtime configuration is available.
+4. `app.runtimeIssuanceConfigMap` must be set.
+
+An example `values.yaml` file for pure runtime configuration is as follows:
+
+```yaml
+app:
+  runtimeIssuanceConfigMap: istio-issuer
+  certmanager:
+    issuer:
+      name: ""  # explicitly blanked out
+      kind: ""  # explicitly blanked out
+      group: "" # explicitly blanked out
+  tls:
+    rootCAFile: "/var/run/secrets/istio-csr/ca.pem"
+    istiodCertificateEnable: dynamic
+volumeMounts:
+- name: root-ca
+  mountPath: /var/run/secrets/istio-csr
+volumes:
+- name: root-ca
+  secret:
+    secretName: istio-root-ca
+```
+
+This file could then be used with the following command:
+
+```bash
+helm upgrade cert-manager-istio-csr jetstack/cert-manager-istio-csr \
+  --install \
+  --namespace cert-manager \
+  --wait \
+  --values values.yaml
+```
+
+#### Completing a Pure Runtime Installation
+
+While pure runtime configuration allows istio-csr to be installed at the same time as cert-manager, it's important to note that
+istio-csr pods will not become ready until an issuer is available. This means that Helm installations may hang until an issuer is
+configured since the istio-csr Deployment will not be ready.
+
+To complete a Helm installation of istio-csr with pure runtime installation, you must create the issuer and ConfigMap pointing to that
+issuer. Once detected, istio-csr will complete setup and issue any outstanding certificates.
 
 ## Usage
 

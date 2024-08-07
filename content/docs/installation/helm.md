@@ -118,12 +118,13 @@ This static manifest can be tuned by providing the flags to overwrite the defaul
 helm template \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
-  --create-namespace \
   --version [[VAR::cert_manager_latest_version]] \
   --set crds.enabled=true \
   # --set prometheus.enabled=false \   # Example: disabling prometheus using a Helm parameter
   > cert-manager.custom.yaml
 ```
+
+> ℹ️ The `helm template` command will not output a Namespace resource and ignores the `--create-namespace` flag. You must ensure the namespace you are deploying the generated YAML to exists.
 
 ## Uninstalling
 
