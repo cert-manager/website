@@ -72,8 +72,8 @@ The corresponding Helm command is:
 
 ```sh
 helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
-  --set apiVersion="controller.config.cert-manager.io/v1alpha1" \
-  --set config.kind=ControllerConfiguration" \
+  --set config.apiVersion="controller.config.cert-manager.io/v1alpha1" \
+  --set config.kind="ControllerConfiguration" \
   --set config.enableGatewayAPI=true
 ```
 
