@@ -217,6 +217,108 @@ time and resources towards the continued maintenance of cert-manager projects. V
 cert-manager 1.12 as a long term support release, meaning it will be maintained for much longer
 than other releases to provide a stable platform for enterprises to build upon.
 
+## `v1.12.13`
+
+This patch release fixes the following vulnerabilities:
+`CVE-2024-6104`,
+`CVE-2024-24791`,
+`CVE-2024-25620`,
+`CVE-2024-26147`, and
+`CVE-2024-41110`.
+
+> ℹ️ This version contains an unusually large number of Go dependency changes for a patch release.
+> The cert-manager maintainers are confident that it is stable
+> because it has passed the same extensive suite of tests as previous `1.12` releases.
+> But if you are importing cert-manager `1.12` as a Go module you will notice that the minimum Go version is `1.21`,
+> and the `k8s.io` modules are now updated to `0.29`.
+>
+> This reason for the large number of Go dependency changes is that the Helm SDK has been updated to fix security vulnerabilities in `cmctl`.
+> This required the `k8s.io` modules to be updated from `0.27` to `0.29` in all components.
+> Those newer minor versions of the Kubernetes modules pulled in new transitive dependencies,
+> and incremented the minimum Go version from `1.20` to `1.21`.
+
+### Bugfixes
+
+- Bump the `go-retryablehttp` dependency to fix `CVE-2024-6104` ([#7128](https://github.com/cert-manager/cert-manager/pull/7128), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Updated Helm dependency to resolve `CVE-2024-25620` and `CVE-2024-26147` and Docker dependency to resolve `CVE-2024-41110` ([#7214](https://github.com/cert-manager/cert-manager/pull/7214), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+- Updates Go to `1.21.13` to resolve `CVE-2024-24791` ([#7216](https://github.com/cert-manager/cert-manager/pull/7216), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+
+### Dependencies
+
+#### Added
+- `github.com/antlr/antlr4/runtime/Go/antlr/v4`: [`8188dc5`](https://github.com/antlr/antlr4/tree/runtime/Go/antlr/v4/8188dc5)
+- `github.com/google/gnostic-models`: [`v0.6.8`](https://github.com/google/gnostic-models/tree/v0.6.8)
+- `github.com/xhit/go-str2duration/v2`: [`v2.1.0`](https://github.com/xhit/go-str2duration/tree/v2.1.0)
+
+#### Changed
+- `github.com/BurntSushi/toml`: [`v1.2.1 → v0.3.1`](https://github.com/BurntSushi/toml/compare/v1.2.1...v0.3.1)
+- `github.com/alecthomas/kingpin/v2`: [`v2.3.1 → v2.3.2`](https://github.com/alecthomas/kingpin/compare/v2.3.1...v2.3.2)
+- `github.com/asaskevich/govalidator`: [`f61b66f → 21a406d`](https://github.com/asaskevich/govalidator/compare/f61b66f...21a406d)
+- `github.com/coreos/go-oidc`: [`v2.1.0+incompatible → v2.2.1+incompatible`](https://github.com/coreos/go-oidc/compare/v2.1.0...v2.2.1)
+- `github.com/coreos/go-semver`: [`v0.3.0 → v0.3.1`](https://github.com/coreos/go-semver/compare/v0.3.0...v0.3.1)
+- `github.com/coreos/go-systemd/v22`: [`v22.4.0 → v22.5.0`](https://github.com/coreos/go-systemd/compare/v22.4.0...v22.5.0)
+- `github.com/cpuguy83/go-md2man/v2`: [`v2.0.2 → v2.0.3`](https://github.com/cpuguy83/go-md2man/compare/v2.0.2...v2.0.3)
+- `github.com/davecgh/go-spew`: [`v1.1.1 → d8f796a`](https://github.com/davecgh/go-spew/compare/v1.1.1...d8f796a)
+- `github.com/dustin/go-humanize`: [`v1.0.0 → v1.0.1`](https://github.com/dustin/go-humanize/compare/v1.0.0...v1.0.1)
+- `github.com/emicklei/go-restful/v3`: [`v3.9.0 → v3.11.0`](https://github.com/emicklei/go-restful/compare/v3.9.0...v3.11.0)
+- `github.com/evanphx/json-patch`: [`v5.6.0+incompatible → v5.7.0+incompatible`](https://github.com/evanphx/json-patch/compare/v5.6.0...v5.7.0)
+- `github.com/fatih/color`: [`v1.15.0 → v1.16.0`](https://github.com/fatih/color/compare/v1.15.0...v1.16.0)
+- `github.com/frankban/quicktest`: [`v1.10.0 → v1.14.3`](https://github.com/frankban/quicktest/compare/v1.10.0...v1.14.3)
+- `github.com/fsnotify/fsnotify`: [`v1.6.0 → v1.7.0`](https://github.com/fsnotify/fsnotify/compare/v1.6.0...v1.7.0)
+- `github.com/go-openapi/jsonreference`: [`v0.20.1 → v0.20.2`](https://github.com/go-openapi/jsonreference/compare/v0.20.1...v0.20.2)
+- `github.com/golang-jwt/jwt/v4`: [`v4.4.2 → v4.5.0`](https://github.com/golang-jwt/jwt/compare/v4.4.2...v4.5.0)
+- `github.com/golang/protobuf`: [`v1.5.3 → v1.5.4`](https://github.com/golang/protobuf/compare/v1.5.3...v1.5.4)
+- `github.com/google/cel-go`: [`v0.12.6 → v0.17.7`](https://github.com/google/cel-go/compare/v0.12.6...v0.17.7)
+- `github.com/google/gnostic`: [`v0.6.9 → v0.5.7-v3refs`](https://github.com/google/gnostic/compare/v0.6.9...v0.5.7-v3refs)
+- `github.com/gorilla/websocket`: [`v1.4.2 → v1.5.0`](https://github.com/gorilla/websocket/compare/v1.4.2...v1.5.0)
+- `github.com/hashicorp/go-hclog`: [`v1.2.0 → v1.6.3`](https://github.com/hashicorp/go-hclog/compare/v1.2.0...v1.6.3)
+- `github.com/hashicorp/go-retryablehttp`: [`v0.7.2 → v0.7.7`](https://github.com/hashicorp/go-retryablehttp/compare/v0.7.2...v0.7.7)
+- `github.com/imdario/mergo`: [`v0.3.12 → v0.3.13`](https://github.com/imdario/mergo/compare/v0.3.12...v0.3.13)
+- `github.com/mattn/go-isatty`: [`v0.0.17 → v0.0.20`](https://github.com/mattn/go-isatty/compare/v0.0.17...v0.0.20)
+- `github.com/onsi/ginkgo/v2`: [`v2.9.5 → v2.13.0`](https://github.com/onsi/ginkgo/compare/v2.9.5...v2.13.0)
+- `github.com/onsi/gomega`: [`v1.27.7 → v1.29.0`](https://github.com/onsi/gomega/compare/v1.27.7...v1.29.0)
+- `github.com/prometheus/client_golang`: [`v1.15.1 → v1.16.0`](https://github.com/prometheus/client_golang/compare/v1.15.1...v1.16.0)
+- `github.com/prometheus/common`: [`v0.42.0 → v0.44.0`](https://github.com/prometheus/common/compare/v0.42.0...v0.44.0)
+- `github.com/prometheus/procfs`: [`v0.9.0 → v0.10.1`](https://github.com/prometheus/procfs/compare/v0.9.0...v0.10.1)
+- `github.com/sirupsen/logrus`: [`v1.9.0 → v1.9.3`](https://github.com/sirupsen/logrus/compare/v1.9.0...v1.9.3)
+- `github.com/spf13/cobra`: [`v1.7.0 → v1.8.0`](https://github.com/spf13/cobra/compare/v1.7.0...v1.8.0)
+- `go.etcd.io/bbolt`: `v1.3.6 → v1.3.8`
+- `go.etcd.io/etcd/api/v3`: `v3.5.7 → v3.5.10`
+- `go.etcd.io/etcd/client/pkg/v3`: `v3.5.7 → v3.5.10`
+- `go.etcd.io/etcd/client/v2`: `v2.305.7 → v2.305.10`
+- `go.etcd.io/etcd/client/v3`: `v3.5.7 → v3.5.10`
+- `go.etcd.io/etcd/pkg/v3`: `v3.5.7 → v3.5.10`
+- `go.etcd.io/etcd/raft/v3`: `v3.5.7 → v3.5.10`
+- `go.etcd.io/etcd/server/v3`: `v3.5.7 → v3.5.10`
+- `go.uber.org/atomic`: `v1.9.0 → v1.10.0`
+- `go.uber.org/multierr`: `v1.6.0 → v1.11.0`
+- `golang.org/x/exp`: `a1ab85d → a9213ee`
+- `gopkg.in/natefinch/lumberjack.v2`: `v2.0.0 → v2.2.1`
+- `k8s.io/api`: `v0.27.2 → v0.29.7`
+- `k8s.io/apiextensions-apiserver`: `v0.27.2 → v0.29.7`
+- `k8s.io/apimachinery`: `v0.27.2 → v0.29.7`
+- `k8s.io/apiserver`: `v0.27.2 → v0.29.7`
+- `k8s.io/client-go`: `v0.27.2 → v0.29.7`
+- `k8s.io/code-generator`: `v0.27.2 → v0.29.7`
+- `k8s.io/component-base`: `v0.27.2 → v0.29.7`
+- `k8s.io/gengo`: `c0856e2 → 9cce18d`
+- `k8s.io/klog/v2`: `v2.100.1 → v2.110.1`
+- `k8s.io/kms`: `v0.27.2 → v0.29.7`
+- `k8s.io/kube-aggregator`: `v0.27.2 → v0.29.7`
+- `k8s.io/kube-openapi`: `54b630e → 2dd684a`
+- `k8s.io/utils`: `9f67429 → 3b25d92`
+- `sigs.k8s.io/apiserver-network-proxy/konnectivity-client`: `v0.1.2 → v0.28.0`
+- `sigs.k8s.io/structured-merge-diff/v4`: `v4.2.3 → v4.4.1`
+
+#### Removed
+- `github.com/antlr/antlr4/runtime/Go/antlr`: [`v1.4.10`](https://github.com/antlr/antlr4/tree/runtime/Go/antlr/v1.4.10)
+- `github.com/buger/jsonparser`: [`v1.1.1`](https://github.com/buger/jsonparser/tree/v1.1.1)
+- `github.com/docopt/docopt-go`: [`ee0de3b`](https://github.com/docopt/docopt-go/tree/ee0de3b)
+- `github.com/flowstack/go-jsonschema`: [`v0.1.1`](https://github.com/flowstack/go-jsonschema/tree/v0.1.1)
+- `github.com/xhit/go-str2duration`: [`v1.2.0`](https://github.com/xhit/go-str2duration/tree/v1.2.0)
+- `go.opentelemetry.io/otel/exporters/otlp/internal/retry`: `v1.10.0`
+
+
 ## `v1.12.12`
 
 ### Bugfixes
