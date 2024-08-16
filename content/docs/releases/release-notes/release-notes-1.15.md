@@ -37,7 +37,7 @@ In addition, massive thanks to Venafi for contributing developer time and resour
 
 ### Bug or Regression
 
-- BUGFIX: the dynamic certificate source used by the webhook TLS server failed to detect a root CA approaching expiration, due to a calculation error. This will cause the webhook TLS server to fail renewing it's CA certificate. Please upgrade before the expiration of this CA certificate is reached. ([#7232](https://github.com/cert-manager/cert-manager/pull/7232), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+- BUGFIX: the dynamic certificate source used by the webhook TLS server failed to detect a root CA approaching expiration, due to a calculation error. This will cause the webhook TLS server to fail renewing its CA certificate. Please upgrade before the expiration of this CA certificate is reached. ([#7232](https://github.com/cert-manager/cert-manager/pull/7232), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
 
 ## `v1.15.2`
 
