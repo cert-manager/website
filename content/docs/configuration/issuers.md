@@ -15,7 +15,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈   | aws-privateca-issuer        | [📄][config:aws-privateca-issuer]   | [AWS Private Certificate Authority][ca:aws-privateca-issuer]           | -                                                 | [✔️][release:aws-privateca-issuer]   | ✔️              |
 | 🥈   | ca-issuer (in-tree)         | [📄][config:ca-issuer]              | CA issuer                                                              | -                                                 | [✔️][release:cert-manager]           | ✔️              |
 | 🥈   | command-issuer              | [📄][config:command-issuer]         | [Keyfactor Command][ca:command-issuer]                                 | -                                                 | [✔️][release:command-issuer]         | ✔️              |
-| 🥈   | cview-issuer                | [📄][config:cview-issuer]           | cview-issuer                                                           | -                                                 | [✔️][release:cview-issuer]           | ❌              |
+| 🥈   | cview-issuer                | [📄][config:cview-issuer]           | [cview-issuer][ca:cview-issuer]                                                          | -                                                 | [✔️][release:cview-issuer]           | ❌              |
 | 🥈   | ejbca-issuer                | [📄][config:ejbca-issuer]           | [EJBCA][ca:ejbca-issuer]                                               | -                                                 | [✔️][release:ejbca-issuer]           | ✔️              |
 | 🥈   | google-cas-issuer           | [📄][config:google-cas-issuer]      | [Google Cloud Certificate<br/>Authority Service][ca:google-cas-issuer] | -                                                 | [✔️][release:google-cas-issuer]      | ✔️              |
 | 🥈   | gs-atlas-issuer             | [📄][config:gs-atlas-issuer]        | [GlobalSign CA][ca:gs-atlas-issuer]                                    | -                                                 | [✔️][release:gs-atlas-issuer]        | ✔️              |
@@ -68,6 +68,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:adcs-issuer]: https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority
 [ca:aws-privateca-issuer]: https://aws.amazon.com/certificate-manager/private-certificate-authority/
 [ca:command-issuer]: https://www.keyfactor.com/products/command/
+[ca:cview-issuer]: https://www.secure-ly.com/c-view-professional-certificates-lifecycle-management/
 [ca:ejbca-issuer]: https://www.ejbca.org/
 [ca:google-cas-issuer]: https://cloud.google.com/certificate-authority-service/
 [ca:gs-atlas-issuer]: https://www.globalsign.com/en/atlas
