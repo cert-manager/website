@@ -34,3 +34,14 @@ description: Quick start guides for cert-manager
             title="Let's Encrypt" />
         Learn how to deploy cert-manager on **Azure Kubernetes Service (AKS)** and how to configure it to get certificates for an HTTPS web server, from **Let's Encrypt**.
 </a>
+
+<a style={{float: "left", marginBottom: "20px", padding: "10px", boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.1)", textDecoration: "none"}}
+    href="../tutorials/getting-started-aws-letsencrypt">
+        <img style={{margin: "0", clear: "right", float: "right", width: "64px"}}
+            alt="Amazon Elastic Kubernetes Services icon" src="/images/icons/amazon_elastic_kubernetes_service.svg"
+            title="Amazon Elastic Kubernetes Service (EKS)" />
+        <img style={{margin: "0", clear: "right", float: "right", width: "64px"}}
+            alt="Let&#039;s Encrypt icon 292Jacob, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" src="/images/icons/lets_encrypt.svg"
+            title="Let's Encrypt" />
+        Learn how to deploy cert-manager on **Amazon Elastic Kubernetes Service (EKS)** and how to configure it to get certificates for an HTTPS web server, from **Let's Encrypt**.
+</a>
