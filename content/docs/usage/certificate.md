@@ -83,8 +83,10 @@ spec:
   subject:
     organizations:
       - jetstack
-  # The use of the common name field has been deprecated since 2000 and is
-  # discouraged from being used.
+  # Avoid using commonName for DNS names in end-entity (leaf) certificates. Unless you have a specific
+  # need for it in your environment, use dnsNames exclusively to avoid issues with commonName.
+  # Usually, commonName is used to give human-readable names to CA certificates and can be avoided for
+  # other certificates.
   commonName: example.com
 
   # The literalSubject field is exclusive with subject and commonName. It allows
