@@ -82,7 +82,8 @@ spec:
 
   subject:
     organizations:
-      - jetstack
+      - cert-manager
+
   # Avoid using commonName for DNS names in end-entity (leaf) certificates. Unless you have a specific
   # need for it in your environment, use dnsNames exclusively to avoid issues with commonName.
   # Usually, commonName is used to give human-readable names to CA certificates and can be avoided for
