@@ -11,6 +11,8 @@ Note that if you're following the Platform Setup guide for OpenShift, do not run
 
 ### 0. Background
 
+#### Issuer Configuration
+
 istio-csr uses cert-manager to issue Istio certificates, and needs to be able to reference an issuer resource to do this.
 
 You can choose to configure an issuer when installing with the Helm chart and / or to configure a ConfigMap to watch which can then be used to configure an issuer at runtime.
@@ -22,6 +24,14 @@ If you configure an issuer in the chart, you'll be able to start issuing as soon
 If you don't set an issuer in the chart, istio-csr will not become ready until an issuer is specified via runtime configuration, but you'll be able to install cert-manager and istio-csr concurrently.
 
 Note that the chart contains a default issuer name and so using runtime configuration requires an explicit opt-in. The guide below assumes you'll install istio-csr after an issuer is configured without runtime configuration; there are notes for runtime configuration at the bottom.
+
+#### Istio Ambient
+
+As of `v0.12.0` istio-csr supports Istio Ambient mode, which allows for pods to be included in the Istio mesh without a side-car container.
+
+To enable Istio Ambient mode support, pass the `app.server.caTrustedNodeAccounts` Helm value, which is a comma-separated list of `namespace/service-accounts` values indicating which service accounts are permitted to use node authentication.
+
+An example would be `--set app.server.caTrustedNodeAccounts=istio-system/ztunnel`
 
 ### 1. Initial Setup
 
@@ -313,6 +323,17 @@ kubectl create configmap -n cert-manager istio-issuer \
   --from-literal=issuer-group=cert-manager.io
 ```
 
+The Helm chart includes the ability to create the runtime configuration ConfigMap at install time if desired, through the `app.runtimeConfiguration.issuer` values:
+
+```yaml
+app:
+  runtimeConfiguration:
+    issuer:
+      name: my-issuer-name
+      kind: Issuer
+      group: cert-manager.io
+```
+
 ### Option 1: Installation after cert-manager
 
 If cert-manager is already installed, you can use the same `helm upgrade` command as above but also specifying the name of the runtime configuration ConfigMap:
@@ -323,7 +344,7 @@ helm upgrade cert-manager-istio-csr jetstack/cert-manager-istio-csr \
   --namespace cert-manager \
   --wait \
   ...
-  --set "app.runtimeIssuanceConfigMap=istio-issuer"
+  --set "app.runtimeConfiguration.name=istio-issuer"
 ```
 
 In this scenario, the issuer defined in `app.certmanager.issuer` will be used at startup and to create the `istiod` certificate.
@@ -340,7 +361,7 @@ Pure runtime configuration requires more values to be set:
 
 1. The `app.certmanager.issuer` values must be blanked out (as they're set to a default value in the chart)
 2. The `istiod` certificate must not be provisioned alongside the istio-csr resources. By passing `app.tls.istiodCertificateEnable=dynamic`, the istiod will be dynamically generated when runtime configuration is available.
-4. `app.runtimeIssuanceConfigMap` must be set.
+3. `app.runtimeConfiguration.name` must be set.
 
 An example `values.yaml` file for pure runtime configuration is as follows:
 
@@ -349,9 +370,7 @@ app:
   runtimeIssuanceConfigMap: istio-issuer
   certmanager:
     issuer:
-      name: ""  # explicitly blanked out
-      kind: ""  # explicitly blanked out
-      group: "" # explicitly blanked out
+      enabled: false # Important: the default issuer is enabled by default
   tls:
     rootCAFile: "/var/run/secrets/istio-csr/ca.pem"
     istiodCertificateEnable: dynamic
@@ -376,12 +395,12 @@ helm upgrade cert-manager-istio-csr jetstack/cert-manager-istio-csr \
 
 #### Completing a Pure Runtime Installation
 
-While pure runtime configuration allows istio-csr to be installed at the same time as cert-manager, it's important to note that
-istio-csr pods will not become ready until an issuer is available. This means that Helm installations may hang until an issuer is
-configured since the istio-csr Deployment will not be ready.
+To make istio-csr easier to install alongside cert-manager, pure runtime configuration slightly modifies the behavior of
+istio-csr's health checks. This is because Helm will not complete an install until the health checks are passing.
 
-To complete a Helm installation of istio-csr with pure runtime installation, you must create the issuer and ConfigMap pointing to that
-issuer. Once detected, istio-csr will complete setup and issue any outstanding certificates.
+If and only if using pure runtime configuration, istio-csr's health checks will report as healthy until runtime configuration is available for the first time.
+
+After runtime configuration becomes available for the first time, the health checks will revert to their normal operation.
 
 ## Usage
 
