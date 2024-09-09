@@ -35,7 +35,7 @@ In addition, massive thanks to Venafi for contributing developer time and resour
 - Add a metrics server to the webhook ([#7182](https://github.com/cert-manager/cert-manager/pull/7182), [`@wallrj`](https://github.com/wallrj))
 - Add client certificate auth method for Vault issuer ([#4330](https://github.com/cert-manager/cert-manager/pull/4330), [`@joshmue`](https://github.com/joshmue))
 - Add process and go runtime metrics for controller ([#6966](https://github.com/cert-manager/cert-manager/pull/6966), [`@mindw`](https://github.com/mindw))
-- Add `renewBeforePercentage` alternative to `renewBefore` ([#6987](https://github.com/cert-manager/cert-manager/pull/6987), [`@cbroglie`](https://github.com/cbroglie))
+- Add `renewBeforePercentage` alternative to `renewBefore`. The new `renewBeforePercentage` field computes the effective `renewBefore` using the actual duration of the issued certificate, preventing any accidental renewal loops caused by issuers truncating the desired `duration`. ([#6987](https://github.com/cert-manager/cert-manager/pull/6987), [`@cbroglie`](https://github.com/cbroglie))
 - Default `config.apiVersion` and `config.kind` within the Helm chart ([#7126](https://github.com/cert-manager/cert-manager/pull/7126), [`@ThatsMrTalbot`](https://github.com/ThatsMrTalbot))
 - Helm: adds JSON schema validation for the Helm values. ([#7069](https://github.com/cert-manager/cert-manager/pull/7069), [`@inteon`](https://github.com/inteon))
 - If the `--controllers` flag only specifies disabled controllers, the default controllers are now enabled implicitly.
