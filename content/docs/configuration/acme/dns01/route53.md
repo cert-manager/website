@@ -8,8 +8,12 @@ Route53 to solve DNS01 ACME challenges. It's advised you read the [DNS01
 Challenge Provider](./README.md) page first for a more general understanding of
 how cert-manager handles DNS01 challenges.
 
-> Note: This guide assumes that your cluster is hosted on Amazon Web Services
+> ℹ️ This guide assumes that your cluster is hosted on Amazon Web Services
 > (AWS) and that you already have a hosted zone in Route53.
+>
+> 📖 Read
+> [Tutorial: Deploy cert-manager on Amazon Elastic Kubernetes (EKS) and use Let's Encrypt to sign a certificate for an HTTPS website](../../../tutorials/getting-started-aws-letsencrypt/README.md),
+> which contains end-to-end instructions for those who are new to cert-manager and AWS.
 
 ## Set up an IAM Role
 
@@ -188,7 +192,7 @@ Note that, as mentioned above, the pod is using `arn:aws:iam::XXXXXXXXXXX:role/c
 
 While [`kiam`](https://github.com/uswitch/kiam) / [`kube2iam`](https://github.com/jtblin/kube2iam) work directly with cert-manager, some special attention is needed for using the [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) feature available on EKS.
 
-This feature uses Kubernetes `ServiceAccount` tokens to authenticate with AWS using the [API_AssumeRoleWithWebIdentity](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html). 
+This feature uses Kubernetes `ServiceAccount` tokens to authenticate with AWS using the [API_AssumeRoleWithWebIdentity](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html).
 
 > **Note**: For using IRSA with cert-manager you must first enable the feature for your cluster. You can do this by
 > following the [official documentation(https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
@@ -265,7 +269,7 @@ securityContext:
 
 **Note:** If you're following the Cross Account example above, modify the `ClusterIssuer` in the same way as above with the role from Account Y.
 
-### Referencing your own ServiceAccount within Issuer/ClusterIssuer config 
+### Referencing your own ServiceAccount within Issuer/ClusterIssuer config
 
 In this configuration you can reference your own `ServiceAccounts` within your `Issuer`/`ClusterIssuer` and cert-manager will issue itself temporary credentials using these `ServiceAccounts`. Because each issuer can reference a different `ServiceAccount` you can lock down permissions much more, with each `ServiceAccount` mapped to an IAM role that only has permission on the zones it needs for that particular issuer.
 
@@ -379,6 +383,6 @@ spec:
           role: <iam-role-arn> # This must be set so cert-manager what role to attempt to authenticate with
           auth:
             kubernetes:
-              serviceAccountRef: 
+              serviceAccountRef:
                 name: <service-account-name> # The name of the service account created
 ```
