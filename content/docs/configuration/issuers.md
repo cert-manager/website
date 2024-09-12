@@ -15,6 +15,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈   | aws-privateca-issuer        | [📄][config:aws-privateca-issuer]   | [AWS Private Certificate Authority][ca:aws-privateca-issuer]           | -                                                 | [✔️][release:aws-privateca-issuer]   | ✔️              |
 | 🥈   | ca-issuer (in-tree)         | [📄][config:ca-issuer]              | CA issuer                                                              | -                                                 | [✔️][release:cert-manager]           | ✔️              |
 | 🥈   | command-issuer              | [📄][config:command-issuer]         | [Keyfactor Command][ca:command-issuer]                                 | -                                                 | [✔️][release:command-issuer]         | ✔️              |
+| 🥈   | cview-issuer                | [📄][config:cview-issuer]           | [Keyfactor Command][ca:cview-issuer]                                   | -                                                 | [✔️][release:cview-issuer]           | ❌              |
 | 🥈   | ejbca-issuer                | [📄][config:ejbca-issuer]           | [EJBCA][ca:ejbca-issuer]                                               | -                                                 | [✔️][release:ejbca-issuer]           | ✔️              |
 | 🥈   | google-cas-issuer           | [📄][config:google-cas-issuer]      | [Google Cloud Certificate<br/>Authority Service][ca:google-cas-issuer] | -                                                 | [✔️][release:google-cas-issuer]      | ✔️              |
 | 🥈   | gs-atlas-issuer             | [📄][config:gs-atlas-issuer]        | [GlobalSign CA][ca:gs-atlas-issuer]                                    | -                                                 | [✔️][release:gs-atlas-issuer]        | ✔️              |
@@ -59,6 +60,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer
 [config:adcs-issuer]: https://djkormo.github.io/adcs-issuer/
 [config:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer
+[config:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 
 [//]: # (CA docs)
 [ca:acme]: https://datatracker.ietf.org/doc/html/rfc8555
@@ -79,6 +81,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:freeipa-issuer]: https://www.freeipa.org
 [ca:kms-issuer]: https://aws.amazon.com/kms/
 [ca:origin-ca-issuer]: https://developers.cloudflare.com/ssl/origin-configuration/origin-ca
+[ca:cview-issuer]: https://www.secure-ly.com/c-view-professional-certificates-lifecycle-management/
 
 [//]: # (Release pages)
 
@@ -100,6 +103,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer/releases
 [release:adcs-issuer]: https://github.com/djkormo/adcs-issuer/releases
 [release:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer/+refs
+[release:cview-issuer]: https://github.com/secure-ly/cview-issuer-chart/releases
 
 - The issuers are sorted by their tier and then alphabetically.
 - "in-tree" issuers are issuers that are shipped with cert-manager itself.
