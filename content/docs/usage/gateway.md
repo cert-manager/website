@@ -187,7 +187,7 @@ spec:
         certificateRefs:
           - name: example-com-tls
             kind: Secret
-            group: core
+            group: ""
 
     # ❌  "mode: Passthrough" is not supported, the following listener is skipped.
     - name: example-3
@@ -199,7 +199,7 @@ spec:
         certificateRefs:
           - name: example-com-tls
             kind: Secret
-            group: core
+            group: ""
 
     # ❌  Cross-namespace secret references are not supported, the following listener is skipped.
     - name: example-4
@@ -214,7 +214,7 @@ spec:
         certificateRefs:
           - name: example-com-tls
             kind: Secret
-            group: core
+            group: ""
             namespace: other-namespace
 
     # ✅  The following listener is valid.
@@ -229,8 +229,8 @@ spec:
         mode: Terminate # ✅ Required. "Terminate" is the only supported mode.
         certificateRefs:
           - name: example-com-tls # ✅ Required.
-            kind: Secret  # ✅ Required. "Secret" is the only valid value.
-            group: core # ✅ Required. "core" is the only valid value.
+            kind: Secret  # ✅ Optional. "Secret" is the only valid value.
+            group: "" # ✅ Optional. "" is the only valid value.
 ```
 
 cert-manager has skipped over the first four listener blocks and has created a
@@ -275,8 +275,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: example-com-tls
-            kind: Secret
-            group: core
 
     # Listener 2: Same Secret name as Listener 1, with a different hostname.
     - name: example-2
@@ -287,8 +285,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: example-com-tls
-            kind: Secret
-            group: core
 
     # Listener 3: also same Secret name, except the hostname is also the same.
     - name: example-3
@@ -299,8 +295,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: example-com-tls
-            kind: Secret
-            group: core
 
    # Listener 4: different Secret name.
     - name: example-4
@@ -311,8 +305,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: site-org-tls
-            kind: Secret
-            group: core
 ```
 
 cert-manager will create two Certificates since two Secret names are used:
