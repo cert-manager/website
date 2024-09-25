@@ -54,22 +54,28 @@ To install v1.5.1 Gateway API bundle (Gateway CRDs and webhook), run the followi
 kubectl apply -f "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml"
 ```
 
-To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
+Since cert-manager 1.15, the Gateway API support is no longer gated behind a
+feature flag, but you still need to enable the Gateway API support.
 
-- If you are using Helm:
+To enable the Gateway API support, use the [file-based
+configuration](../installation/configuring-components.md#configuration-file) using the
+following `config` Helm value:
 
-  ```sh
-  helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
-    --set "extraArgs={--enable-gateway-api}"
-  ```
+```yaml
+config:
+  apiVersion: controller.config.cert-manager.io/v1alpha1
+  kind: ControllerConfiguration
+  enableGatewayAPI: true
+```
 
-- If you are using the raw cert-manager manifests, add the following flag to the
-  cert-manager controller Deployment:
+The corresponding Helm command is:
 
-  ```yaml
-  args:
-    - --enable-gateway-api
-  ```
+```sh
+helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
+  --set config.apiVersion="controller.config.cert-manager.io/v1alpha1" \
+  --set config.kind="ControllerConfiguration" \
+  --set config.enableGatewayAPI=true
+```
 
 The Gateway API CRDs should either be installed before cert-manager starts or
 the cert-manager Deployment should be restarted after installing the Gateway API
@@ -181,7 +187,7 @@ spec:
         certificateRefs:
           - name: example-com-tls
             kind: Secret
-            group: core
+            group: ""
 
     # ❌  "mode: Passthrough" is not supported, the following listener is skipped.
     - name: example-3
@@ -193,7 +199,7 @@ spec:
         certificateRefs:
           - name: example-com-tls
             kind: Secret
-            group: core
+            group: ""
 
     # ❌  Cross-namespace secret references are not supported, the following listener is skipped.
     - name: example-4
@@ -208,7 +214,7 @@ spec:
         certificateRefs:
           - name: example-com-tls
             kind: Secret
-            group: core
+            group: ""
             namespace: other-namespace
 
     # ✅  The following listener is valid.
@@ -223,8 +229,8 @@ spec:
         mode: Terminate # ✅ Required. "Terminate" is the only supported mode.
         certificateRefs:
           - name: example-com-tls # ✅ Required.
-            kind: Secret  # ✅ Required. "Secret" is the only valid value.
-            group: core # ✅ Required. "core" is the only valid value.
+            kind: Secret  # ✅ Optional. "Secret" is the only valid value.
+            group: "" # ✅ Optional. "" is the only valid value.
 ```
 
 cert-manager has skipped over the first four listener blocks and has created a
@@ -269,8 +275,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: example-com-tls
-            kind: Secret
-            group: core
 
     # Listener 2: Same Secret name as Listener 1, with a different hostname.
     - name: example-2
@@ -281,8 +285,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: example-com-tls
-            kind: Secret
-            group: core
 
     # Listener 3: also same Secret name, except the hostname is also the same.
     - name: example-3
@@ -293,8 +295,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: example-com-tls
-            kind: Secret
-            group: core
 
    # Listener 4: different Secret name.
     - name: example-4
@@ -305,8 +305,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: site-org-tls
-            kind: Secret
-            group: core
 ```
 
 cert-manager will create two Certificates since two Secret names are used:

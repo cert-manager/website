@@ -18,7 +18,7 @@
             {
               "title": "Supported Releases",
               "path": "/docs/releases/README.md"
-          },
+            },
             {
               "title": "1.16",
               "path": "/docs/releases/release-notes/release-notes-1.16.md"
@@ -605,6 +605,10 @@
             {
               "title": "AKS + LoadBalancer + Let's Encrypt",
               "path": "/docs/tutorials/getting-started-aks-letsencrypt/README.md"
+            },
+            {
+              "title": "AWS + LoadBalancer + Let's Encrypt",
+              "path": "/docs/tutorials/getting-started-aws-letsencrypt/README.md"
             },
             {
               "title": "Migrating from Kube-LEGO",

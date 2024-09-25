@@ -234,3 +234,6 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Redirect page with incorrect date in URL
 /announcements/2024/21/18/cert-manager-security-audit/ /announcements/2024/03/18/cert-manager-security-audit/ 301!
+
+# Redirect link used in KubeCon NA 2024 video QR code (we can update the redirect in the future)
+/link/kubecon-na-2024/ / 301!

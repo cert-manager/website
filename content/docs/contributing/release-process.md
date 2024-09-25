@@ -14,8 +14,9 @@ current releases and the timeline for future releases, take a look at the
 following conditions:
 
 1. The relevant [testgrid dashboard](https://testgrid.k8s.io/cert-manager) should not be failing for the release you're trying to perform.
-2. The release process **takes about 40 minutes**. You must have time to complete all the steps.
-3. You need to have the GitHub `admin` permission on the cert-manager project.
+2. The cert-manager [`govulncheck` GitHub Action](https://github.com/cert-manager/cert-manager/actions/workflows/govulncheck.yaml) must be passing on the branch you're trying to release. If necessary, run `make verify-govulncheck` locally.
+3. The release process **takes about 40 minutes**. You must have time to complete all the steps.
+4. You need to have the GitHub `admin` permission on the cert-manager project.
    To check that you have the `admin` role, run:
 
     ```bash
@@ -29,7 +30,7 @@ following conditions:
     PR](https://github.com/jetstack/platform-board/pulls/new) with a link to
     here.
 
-4. You need to be added as an "Editor" to the GCP project
+5. You need to be added as an "Editor" to the GCP project
    [cert-manager-release](https://console.cloud.google.com/?project=cert-manager-release).
    To check if you do have access, try opening [the Cloud Build page](https://console.cloud.google.com/cloud-build?project=cert-manager-release).
    To get the "Editor" permission on the GCP project, you need to be a maintainer. If you are, open a PR with your email address
@@ -49,9 +50,11 @@ following conditions:
     [2]: https://console.cloud.google.com/?project=cert-manager-release
     ```
 
-This guide applies for versions of cert-manager released using `make`, which should be every version from cert-manager 1.8 and later.
+This guide applies for versions of cert-manager released using `make`, which is every version from cert-manager 1.8 and newer.
 
 If you need to release a version of cert-manager 1.7 or earlier see [older releases](#older-releases).
+
+## Tool Setup
 
 First, ensure that you have all the tools required to perform a cert-manager release:
 
@@ -465,7 +468,7 @@ page if a step is missing or if it is outdated.
        export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
        release-notes --debug --repo-path cert-manager \
          --org cert-manager --repo cert-manager \
-         --required-author "jetstack-bot" \
+         --required-author "cert-manager-prow[bot]" \
          --markdown-links=false \
          --output github-release-description.md
        ```

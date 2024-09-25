@@ -1,0 +1,20 @@
+# certificate.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: www
+spec:
+  secretName: www-tls
+  revisionHistoryLimit: 1
+  privateKey:
+    rotationPolicy: Always
+  commonName: www.$DOMAIN_NAME
+  dnsNames:
+    - www.$DOMAIN_NAME
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+  issuerRef:
+    name: selfsigned
+    kind: ClusterIssuer
