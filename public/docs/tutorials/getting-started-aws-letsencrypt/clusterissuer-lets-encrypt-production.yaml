@@ -1,0 +1,20 @@
+# clusterissuer-lets-encrypt-production.yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-production
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: $EMAIL_ADDRESS
+    privateKeySecretRef:
+      name: letsencrypt-production
+    solvers:
+    - dns01:
+        route53:
+          region: ${AWS_DEFAULT_REGION}
+          role: arn:aws:iam::${AWS_ACCOUNT_ID}:role/cert-manager-acme-dns01-route53
+          auth:
+            kubernetes:
+              serviceAccountRef:
+                name: cert-manager-acme-dns01-route53

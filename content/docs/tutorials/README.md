@@ -12,6 +12,8 @@ for you to learn from. Take a look!
   Learn how to deploy cert-manager on Google Kubernetes Engine and how to configure it to get certificates for Ingress, from Let's Encrypt.
 - [AKS + LoadBalancer + Let's Encrypt](getting-started-aks-letsencrypt/README.md):
   Learn how to deploy cert-manager on Azure Kubernetes Service (AKS) and how to configure it to get certificates for an HTTPS web server, from Let's Encrypt.
+- [EKS + LoadBalancer + Let's Encrypt](getting-started-aws-letsencrypt/README.md):
+  Learn how to deploy cert-manager on Amazon Elastic Kubernetes Service (EKS) and how to configure it to get certificates for an HTTPS web server, from Let's Encrypt.
 - [Pomerium Ingress](./acme/pomerium-ingress.md): Tutorial on using the Pomerium Ingress Controller with cert-manager.
 - [Issuing an ACME Certificate using DNS Validation](./acme/dns-validation.md):
   Tutorial on how to resolve DNS ownership validation using DNS01 challenges.

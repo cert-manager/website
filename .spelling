@@ -353,6 +353,7 @@ enablement
 erikgb
 errored
 erroring
+ExternalDNS
 external-dns
 finalizer
 finalizers
@@ -728,6 +729,7 @@ certificates.k8s.io
 venafi-enhanced-issuer
 venafi-issuer
 adcs-issuer
+cview-issuer
 cfssl-issuer
 GlobalSign
 
