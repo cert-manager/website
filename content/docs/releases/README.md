@@ -25,9 +25,9 @@ should be stable enough to run.
 
 | Release      | Release Date | End of Life            | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |--------------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
-| [1.15][]     | Jun 05, 2024 | Release of 1.17        | 1.24 → 1.30                        | 4.11 → 4.15                       |
-| [1.14][]     | Feb 03, 2024 | Release of 1.16        | 1.24 → 1.30                        | 4.11 → 4.15                       |
-| [1.12 LTS][] | May 19, 2023 | May 19, 2025           | 1.22 → 1.30                        | 4.9 → 4.15                        |
+| [1.15][]     | Jun 05, 2024 | Release of 1.17        | 1.25 → 1.31                        | 4.12 → 4.16                       |
+| [1.14][]     | Feb 03, 2024 | Release of 1.16        | 1.24 → 1.31                        | 4.11 → 4.16                       |
+| [1.12 LTS][] | May 19, 2023 | May 19, 2025           | 1.22 → 1.31                        | 4.9 → 4.16                        |
 
 cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It will continue to be supported for at least 2 years from release.
 
@@ -35,58 +35,9 @@ cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](htt
 
 | Release  | Release Date | End of Life      | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
 |----------|:------------:|:----------------:|:----------------------------------:|:---------------------------------:|
-| [1.16][] | Oct 03, 2024 | Release of 1.18  |          1.25 → 1.30               |         4.12 → 4.15               |
+| [1.16][] | Oct 03, 2024 | Release of 1.18  |          1.27 → 1.31               |         4.14 → 4.16               |
 
 Dates in the future are not firm commitments and are subject to change.
-
-## Old releases
-
-| Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
-|----------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
-| [1.13][] | Sep 12, 2023 | Jun 05, 2024 |          1.21 → 1.27           |          4.8 → 4.14           |
-| [1.11][] | Jan 11, 2023 | Sep 12, 2023 |          1.21 → 1.27           |          4.8 → 4.14           |
-| [1.10][] | Oct 17, 2022 | May 19, 2023 |          1.20 → 1.26           |          4.7 → 4.13           |
-| [1.9][]  | Jul 22, 2022 | Jan 11, 2023 |          1.20 → 1.24           |          4.7 → 4.11           |
-| [1.8][]  | Apr 05, 2022 | Oct 17, 2022 |          1.19 → 1.24           |          4.6 → 4.11           |
-| [1.7][]  | Jan 26, 2021 | Jul 22, 2022 |          1.18 → 1.23           |          4.5 → 4.9            |
-| [1.6][]  | Oct 26, 2021 | Apr 05, 2022 |          1.17 → 1.22           |          4.4 → 4.9            |
-| [1.5][]  | Aug 11, 2021 | Jan 26, 2022 |          1.16 → 1.22           |          4.3 → 4.8            |
-| [1.4][]  | Jun 15, 2021 | Oct 26, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
-| [1.3][]  | Apr 08, 2021 | Aug 11, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
-| [1.2][]  | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
-| [1.1][]  | Nov 24, 2020 | Apr 08, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [1.0][]  | Sep 02, 2020 | Feb 10, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.16][] | Jul 23, 2020 | Nov 24, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.15][] | May 06, 2020 | Sep 02, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.14][] | Mar 11, 2020 | Jul 23, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.13][] | Jan 21, 2020 | May 06, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.12][] | Nov 27, 2019 | Mar 11, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
-
-[s]: #kubernetes-supported-versions
-[1.16]: https://github.com/cert-manager/cert-manager/milestone/38
-[1.15]: ./release-notes/release-notes-1.15.md
-[1.14]: ./release-notes/release-notes-1.14.md
-[1.13]: ./release-notes/release-notes-1.13.md
-[1.12 LTS]: ./release-notes/release-notes-1.12.md
-[1.11]: ./release-notes/release-notes-1.11.md
-[1.10]: ./release-notes/release-notes-1.10.md
-[1.9]: ./release-notes/release-notes-1.9.md
-[1.8]: ./release-notes/release-notes-1.8.md
-[1.7]: ./release-notes/release-notes-1.7.md
-[1.6]: ./release-notes/release-notes-1.6.md
-[1.5]: ./release-notes/release-notes-1.5.md
-[1.4]: ./release-notes/release-notes-1.4.md
-[1.3]: ./release-notes/release-notes-1.3.md
-[1.2]: ./release-notes/release-notes-1.2.md
-[1.1]: ./release-notes/release-notes-1.1.md
-[1.0]: ./release-notes/release-notes-1.0.md
-[0.16]: ./release-notes/release-notes-0.16.md
-[0.15]: ./release-notes/release-notes-0.15.md
-[0.14]: ./release-notes/release-notes-0.14.md
-[0.13]: ./release-notes/release-notes-0.13.md
-[0.12]: ./release-notes/release-notes-0.12.md
-[0.11]: ./release-notes/release-notes-0.11.md
 
 We list cert-manager releases on [GitHub](https://github.com/cert-manager/cert-manager/releases),
 and release notes on [cert-manager.io](https://cert-manager.io/docs/release-notes/).
@@ -230,16 +181,24 @@ depends on what the cert-manager maintainers think is reasonable to support and 
 
 In practice, this is largely determined based on what versions of [kind](https://github.com/kubernetes-sigs/kind)
 are available for testing, and which versions of Kubernetes are provided by major upstream cloud Kubernetes vendors
-including EKS, GKE, AKS and OpenShift.
+including <abbr title="Amazon Elastic Kubernetes Service">EKS</abbr>, <abbr title="Google Kubernetes Engine">GKE</abbr>, <abbr title="Azure Kubernetes Service">AKS</abbr> and OpenShift.
 
-|      Vendor       | Oldest Kubernetes Release\* |                                Other Kubernetes Releases                           |
-|:-----------------:|-----------------------------|------------------------------------------------------------------------------------|
-|    [EKS][eks]     | 1.25 (EOL May 2024)         | 1.26 (EOL Jun 2024), 1.27 (EOL Jul 2024), 1.28 (EOL Nov 2024), 1.29 (EOL Mar 2025) |
-|    [GKE][gke]     | 1.26 (EOL May 2024)         | 1.27 (EOL Aug 2024), 1.28 (EOL Sep 2024), 1.29 (EOL Jan 2025)                      |
-|    [AKS][aks]     | 1.26 (EOL Jun 2024)         | 1.27 (EOL Jul 2024), 1.28 (EOL Nov 2024), 1.29 (EOL - )                            |
-| [OpenShift 4][os] | 1.25 (4.12, EOL Jul 2024)   | 1.26 (4.13, EOL Nov 2024), 1.27 (4.14, EOL May 2025), 1.28 (4.15, EOL Aug 2025)    |
+We treat OpenShift <abbr title="Extended Update Support">EUS</abbr> as a different distribution since the support periods are so much longer.
+We're likely to drop support for older OpenShift EUS before that release reaches EOL to increase the speed at which we can adopt
+newer Kubernetes features.
 
-\*Oldest release relevant to the next cert-manager release, as of 2024-04-19
+The table below lists the major Kubernetes distributions we check. In brackets next to each release is the <abbr title="End-of-life">EOL</abbr>
+for that release. EOL dates often change throughout the lifecycle of a release.
+
+The "Oldest Kubernetes Release" is the oldest release we deemed relevant to the next cert-manager release, as of 2024-09-25
+
+|      Vendor           |  Oldest K8s Release   |                      Other Kubernetes Releases                       |
+|:---------------------:|:---------------------:|----------------------------------------------------------------------|
+|    [EKS][eks]         | 1.28 (Nov 2024)       | 1.29 (Mar 2025), 1.30 (Jul 2025)                                     |
+|    [GKE][gke]         | 1.28 (Feb 2025)       | 1.29 (Mar 2025), 1.30 (Sep 2025)                                     |
+|    [AKS][aks]         | 1.28 (Jan 2025)       | 1.29 (Mar 2025), 1.30 (Jul 2025), 1.31 (Nov 2025)                    |
+| [OpenShift 4][os]     | 1.26 (4.13, Nov 2024) | 1.27 (4.14, May 2025), 1.28 (4.15, Aug 2025), 1.29 (4.16, Dec 2025)  |
+| [OpenShift 4 EUS][os] | 1.25 (4.12, Jan 2025) | 1.27 (4.14, Oct 2025), 1.29 (4.16, Jun 2026)                         |
 
 [eks]: https://endoflife.date/amazon-eks
 [gke]: https://endoflife.date/google-kubernetes-engine
@@ -248,23 +207,21 @@ including EKS, GKE, AKS and OpenShift.
 
 ### OpenShift
 
-cert-manager supports versions of OpenShift 4 based on the version of Kubernetes
-that each version maps to.
+cert-manager supports OpenShift 4 based on the version of Kubernetes
+that each release maps to.
 
 For convenience, the following table shows these version mappings:
 
 | OpenShift versions | Kubernetes version |
-|--------------------|--------------------|
+|:------------------:|--------------------|
+| 4.16, 4.16 EUS     | 1.29               |
 | 4.15               | 1.28               |
-| 4.14               | 1.27               |
+| 4.14, 4.14 EUS     | 1.27               |
 | 4.13               | 1.26               |
-| 4.12               | 1.25               |
+| 4.12, 4.12 EUS     | 1.25               |
 | 4.11               | 1.24               |
 | 4.10, 4.10 EUS     | 1.23               |
 | 4.9                | 1.22               |
-| 4.8, 4.8 EUS       | 1.21               |
-| 4.7                | 1.20               |
-| 4.6, 4.6 EUS       | 1.19               |
 
 Note that some OpenShift versions listed above may be predicted, since an updated version of OpenShift may
 not yet be available for the latest Kubernetes releases.
@@ -308,3 +265,55 @@ v<major>.<minor>.<patch>
 where `<minor>` is increased for each release, and `<patch>` counts the
 number of patches for the current `<minor>` release. A patch is usually a
 small change relative to the `<minor>` release.
+
+## Old cert-manager releases
+
+These cert-manager releases have reached their <abbr title="end-of-life">EOL</abbr> date and
+are no longer supported.
+
+| Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
+|----------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
+| [1.13][] | Sep 12, 2023 | Jun 05, 2024 |          1.21 → 1.27           |          4.8 → 4.14           |
+| [1.11][] | Jan 11, 2023 | Sep 12, 2023 |          1.21 → 1.27           |          4.8 → 4.14           |
+| [1.10][] | Oct 17, 2022 | May 19, 2023 |          1.20 → 1.26           |          4.7 → 4.13           |
+| [1.9][]  | Jul 22, 2022 | Jan 11, 2023 |          1.20 → 1.24           |          4.7 → 4.11           |
+| [1.8][]  | Apr 05, 2022 | Oct 17, 2022 |          1.19 → 1.24           |          4.6 → 4.11           |
+| [1.7][]  | Jan 26, 2021 | Jul 22, 2022 |          1.18 → 1.23           |          4.5 → 4.9            |
+| [1.6][]  | Oct 26, 2021 | Apr 05, 2022 |          1.17 → 1.22           |          4.4 → 4.9            |
+| [1.5][]  | Aug 11, 2021 | Jan 26, 2022 |          1.16 → 1.22           |          4.3 → 4.8            |
+| [1.4][]  | Jun 15, 2021 | Oct 26, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
+| [1.3][]  | Apr 08, 2021 | Aug 11, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
+| [1.2][]  | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
+| [1.1][]  | Nov 24, 2020 | Apr 08, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [1.0][]  | Sep 02, 2020 | Feb 10, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.16][] | Jul 23, 2020 | Nov 24, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.15][] | May 06, 2020 | Sep 02, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.14][] | Mar 11, 2020 | Jul 23, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.13][] | Jan 21, 2020 | May 06, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.12][] | Nov 27, 2019 | Mar 11, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
+| [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
+
+[s]: #kubernetes-supported-versions
+[1.16]: https://github.com/cert-manager/cert-manager/milestone/38
+[1.15]: ./release-notes/release-notes-1.15.md
+[1.14]: ./release-notes/release-notes-1.14.md
+[1.13]: ./release-notes/release-notes-1.13.md
+[1.12 LTS]: ./release-notes/release-notes-1.12.md
+[1.11]: ./release-notes/release-notes-1.11.md
+[1.10]: ./release-notes/release-notes-1.10.md
+[1.9]: ./release-notes/release-notes-1.9.md
+[1.8]: ./release-notes/release-notes-1.8.md
+[1.7]: ./release-notes/release-notes-1.7.md
+[1.6]: ./release-notes/release-notes-1.6.md
+[1.5]: ./release-notes/release-notes-1.5.md
+[1.4]: ./release-notes/release-notes-1.4.md
+[1.3]: ./release-notes/release-notes-1.3.md
+[1.2]: ./release-notes/release-notes-1.2.md
+[1.1]: ./release-notes/release-notes-1.1.md
+[1.0]: ./release-notes/release-notes-1.0.md
+[0.16]: ./release-notes/release-notes-0.16.md
+[0.15]: ./release-notes/release-notes-0.15.md
+[0.14]: ./release-notes/release-notes-0.14.md
+[0.13]: ./release-notes/release-notes-0.13.md
+[0.12]: ./release-notes/release-notes-0.12.md
+[0.11]: ./release-notes/release-notes-0.11.md
