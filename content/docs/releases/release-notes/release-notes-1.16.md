@@ -5,6 +5,12 @@ description: 'cert-manager release notes: cert-manager 1.16'
 
 cert-manager 1.16 includes various improvements to the metrics in the cert-manager components.
 
+## Breaking changes
+
+1. Venafi Issuer may fail to renew Certificates if the duration conflicts with the CA minimum / maximum duration policy in Venafi.
+2. Venafi Issuer may fail to renew Certificates if the issuer has been configured for TPP with username-password authentication.
+3. Helm schema validation may reject your existing Helm values files if they contain typos or unrecognized fields.
+
 ## Themes
 
 ### Extended Metrics
@@ -13,6 +19,77 @@ The webhook and cainjector components now have metrics servers,
 so that platform teams can monitor the performance of all the cert-manager components
 and gain more information about the underlying Go runtime in the event of a problem.
 Read the [Prometheus Metrics](../../devops-tips/prometheus-metrics.md) page to learn more.
+
+### Venafi Issuer
+
+We've made some important improvements to the Venafi Issuer.
+
+If you use the Venafi Issuer with a TPP server with  username-password authentication,
+cert-manager 1.16 now uses OAuth authentication instead of the deprecated API Key authentication.
+This is a potentially breaking change, because you may need to reconfigure your TPP server to enable OAuth authentication,
+and you may need to reconfigure the cert-manager service accounts in TPP to work with OAuth.
+
+The desired `certificate.spec.duration` value will now be sent to the Venafi API server.
+The default value for `certificate.spec.duration` is 90 days, but you may have changed this in your Certificate resources.
+Your Venafi issuing template may be configured to ignore the requested `From` and `To` times,
+in which case nothing will change.
+Your Venafi issuing template may be configured with a maximum or a minimum duration,
+in which case your certificate requests may fail after you upgrade to cert-manager 1.16.
+Consider this carefully when upgrading to cert-manager 1.16.
+
+When connecting to Venafi TPP, cert-manager can now load the CA certificate from a Secret resource.
+This allows you to manage the CA with familiar tools such as trust-manager.
+
+Read the [Venafi Issuer](../../configuration/venafi.md#creating-a-venafi-trust-protection-platform-issuer) page to learn more.
+
+### ACME Issuer Route53 Solver
+
+The Route53 DNS01 solver code had become over-complicated due to its age and due
+to the variety of authentication methods that have been added over the years.
+When we upgraded to `AWS SDK for Go V2`in the last release, we did not have a
+good understanding of the new SDK and we were not able to test it thoroughly
+with all authentication methods. In this release we started putting that right.
+
+In this release we have tidied up the code and added more logging so that it is
+easier to debug problems in the field.
+We have improved the documentation of the Route53 API fields, particularly the region field,
+where we have tried to describe where and how cert-manager uses that value.
+
+We have relaxed the API validation so that the `region` field is now optional.
+cert-manager will now fall back to using the `AWS_REGION` environment variable of the controller Pod,
+regardless of which authentication mechanism is used.
+
+Users who use IAM Roles for Service accounts or Pod Identity need
+not specify the region, but if your Issuer or ClusterIssuer does include a region (for the sake of satisfying the old API validation),
+that issuer region will be ignored, if the `AWS_REGION` environment variable is set.
+
+Read the [ACME Issuer Route53](../../configuration/acme/dns01/route53.md) page to learn more.
+
+### Memory Optimizations
+
+We have continued our effort to reduce the memory footprint of cert-manager.
+
+The cainjector no longer caches Secret data; instead it only caches the metadata of Secret resources.
+This significantly reduces its memory usage.
+It also reduces the load on the Kubernetes API server, when cainjector starts up,
+because it no longer needs to send all the data of all the Secret resources over the network.
+
+We have added a new `ClientWatchList` feature flag to the controller, cainjector, and the webhook.
+This is actually a new beta feature in the Kubernetes client-go module,
+which enables a much more efficient mechanism for populating the client side caches.
+This reduces the load on the Kubernetes API server,
+because cert-manager components will no longer request complete unpaged lists of all API resources when they start up.
+And it reduces the peak memory use of the cert-manager components when they startup,
+because they no longer have to hold a duplicate unpaged list of resources in-memory
+while they add them to the client side cache.
+
+### Helm Schema Validation
+
+The Helm chart now includes a JSON schema which will validate the values that you supply when installing the chart.
+This will help you to get your Helm values right first time.
+It will alert you to typos and unrecognized fields in your existing Helm values files.
+And it will make it easier for the cert-manager maintainers to maintain the Helm chart,
+avoiding typos and mistakes in the default values file.
 
 ## Community
 
