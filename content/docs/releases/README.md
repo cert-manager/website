@@ -23,19 +23,19 @@ should be stable enough to run.
 <a id="supported-releases"></a>
 ## Currently supported releases
 
-| Release      | Release Date | End of Life            | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
-|--------------|:------------:|:----------------------:|:----------------------------------:|:---------------------------------:|
-| [1.15][]     | Jun 05, 2024 | Release of 1.17        | 1.25 → 1.31                        | 4.12 → 4.16                       |
-| [1.14][]     | Feb 03, 2024 | Release of 1.16        | 1.24 → 1.31                        | 4.11 → 4.16                       |
-| [1.12 LTS][] | May 19, 2023 | May 19, 2025           | 1.22 → 1.31                        | 4.9 → 4.16                        |
+| Release      | Release Date | End of Life            | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
+|:------------:|:------------:|:----------------------:|:----------------------------------------------:|:----------------------------------:|
+| [1.15][]     | Jun 05, 2024 | Release of 1.17        |       1.25 → 1.31   /   4.12 → 4.16            |  1.25 → 1.31                       |
+| [1.14][]     | Feb 03, 2024 | Release of 1.16        |       1.24 → 1.31   /   4.11 → 4.16            |  1.24 → 1.29                       |
+| [1.12 LTS][] | May 19, 2023 | May 19, 2025           |       1.22 → 1.31   /   4.9  → 4.16            |  1.22 → 1.29                       |
 
 cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It will continue to be supported for at least 2 years from release.
 
 ## Upcoming releases
 
-| Release  | Release Date | End of Life      | [Supported Kubernetes versions][s] | [Supported OpenShift versions][s] |
-|----------|:------------:|:----------------:|:----------------------------------:|:---------------------------------:|
-| [1.16][] | Oct 03, 2024 | Release of 1.18  |          1.27 → 1.31               |         4.14 → 4.16               |
+| Release  | Release Date | End of Life      | [Supported Kubernetes / OpenShift Versions][s] |
+|:--------:|:------------:|:----------------:|:----------------------------------------------:|
+| [1.16][] | Oct 03, 2024 | Release of 1.18  |          1.27 → 1.31 / 4.14 → 4.16             |
 
 Dates in the future are not firm commitments and are subject to change.
 
@@ -46,19 +46,41 @@ We also maintain detailed [upgrade instructions](https://cert-manager.io/docs/re
 
 ## Support policy
 
+<a id="supported-vs-tested"></a>
+### Supported vs Tested Versions of Kubernetes
+
+In general, we aim to run regular end-to-end tests of all Kubernetes versions which we list as supported.
+
+For various reasons, this isn't always possible; a big factor is which Kubernetes versions are supported
+by [Kind](https://github.com/kubernetes-sigs/kind), which is used in our end-to-end tests.
+
+If a Kubernetes version is listed as "tested", you can be sure that we run end-to-end tests of cert-manager
+on that version regularly and we'd fix any issues that we saw in those end-to-end tests.
+
+If a Kubernetes version is not listed as "tested" but is listed as "supported", we don't run tests regularly for that
+Kubernetes release, but we _will_ still respond to and fix any bug reports for that version.
+
+For example, cert-manager 1.12 LTS might list supported versions of Kubernetes as 1.22 → 1.31 but only test 1.22 → 1.29.
+That means that:
+
+- We will fix community-reported issues for cert-manager 1.12 on Kubernetes 1.30 or 1.31
+- We will not run automated tests for cert-manager 1.12 on Kubernetes 1.30 or 1.31
+- We will not generally test or fix issues for cert-manager 1.12 on Kubernetes 1.21 or earlier
+
 ### What we mean by support
 
 Our support window is four months for each release branch. In the below
-diagram, `release-1.2` is an example of a release branch. The support
-window corresponds to the two latest releases, given that we produce a new
-final release every two months. We offer two types of support:
+diagram, `release-1.2` is an example of a release branch.
+
+We offer two types of support:
 
 - [Technical support](#technical-support),
 - [Security and bug fixes](#bug-fixes-support).
 
 For example, imagining that the latest release is `v1.2.0`, you can expect
-support for both `v1.2.0` and `v1.1.0`. Only the last patch release of each
-branch is actually supported.
+support for both `v1.2.0` and `v1.1.0`.
+
+Only the last patch release of each branch is supported.
 
 ```diagram
    v1.0.0                                                          ^
@@ -187,7 +209,7 @@ We treat OpenShift <abbr title="Extended Update Support">EUS</abbr> as a differe
 We're likely to drop support for older OpenShift EUS before that release reaches EOL to increase the speed at which we can adopt
 newer Kubernetes features.
 
-The table below lists the major Kubernetes distributions we check. In brackets next to each release is the <abbr title="End-of-life">EOL</abbr>
+The table below lists the major Kubernetes distributions we check. In parentheses next to each release is the <abbr title="End-of-life">EOL</abbr>
 for that release. EOL dates often change throughout the lifecycle of a release.
 
 The "Oldest Kubernetes Release" is the oldest release we deemed relevant to the next cert-manager release, as of 2024-09-25
@@ -294,6 +316,7 @@ are no longer supported.
 | [0.11][] | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
 
 [s]: #kubernetes-supported-versions
+[test]: #supported-vs-tested
 [1.16]: https://github.com/cert-manager/cert-manager/milestone/38
 [1.15]: ./release-notes/release-notes-1.15.md
 [1.14]: ./release-notes/release-notes-1.14.md
