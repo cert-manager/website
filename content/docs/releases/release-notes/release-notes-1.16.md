@@ -70,7 +70,7 @@ or the `AWS_REGION` environment variable.
 
 > ℹ️ This change only affects the `AssumeRole` configuration, which is used for cross-account authentication,
 > and the `AssumeRoleWithWebIdentity` configuration, where the user supplies the name of a Kubernetes ServiceAccount.
-> If does not affect you if you have configured the cert-manager ServiceAccount for IRSA,
+> It does not affect you if you have configured the cert-manager ServiceAccount for [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html),
 > where the ServiceAccount token is mounted in to the cert-manager controller Pod.
 > Regional STS endpoints were already being used in that case.
 >
