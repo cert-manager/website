@@ -76,7 +76,7 @@ or the `AWS_REGION` environment variable.
 >
 > ℹ️ There are good reasons to use regional STS endpoints, summarized as follows on the [Amazon AWS blog](https://aws.amazon.com/blogs/security/how-to-use-regional-aws-sts-endpoints/):
 >
-> > Although the global (legacy) AWS STS endpoint https://sts.amazonaws.com is highly available, it’s hosted in a single AWS Region—US East (N. Virginia)—and like other endpoints, it doesn’t provide automatic fail-over to endpoints in other Regions.
+> > Although the global (legacy) AWS STS endpoint https://sts.amazonaws.com is highly available, it’s hosted in a single AWS Region — US East (N. Virginia) — and like other endpoints, it doesn’t provide automatic fail-over to endpoints in other Regions.
 >
 > 📖 Read [Manage AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 to learn about which regions support STS.
