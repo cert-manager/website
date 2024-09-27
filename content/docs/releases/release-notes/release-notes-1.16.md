@@ -42,7 +42,7 @@ This allows you to manage the CA with familiar tools such as trust-manager.
 
 Read the [Venafi Issuer](../../configuration/venafi.md#creating-a-venafi-trust-protection-platform-issuer) page to learn more.
 
-### ACME Issuer Route53 Solver
+### Route53 DNS01 Solver Cleanup
 
 The Route53 DNS01 solver code had become over-complicated due to its age and due
 to the variety of authentication methods that have been added over the years.
@@ -62,6 +62,27 @@ regardless of which authentication mechanism is used.
 Users who use IAM Roles for Service accounts or Pod Identity need
 not specify the region, but if your Issuer or ClusterIssuer does include a region (for the sake of satisfying the old API validation),
 that issuer region will be ignored, if the `AWS_REGION` environment variable is set.
+
+cert-manager will now use regional STS endpoints, when using `AssumeRole` or when
+using a dedicated (non-mounted) Kubernetes ServiceAccount.
+The regional endpoint will be computed based on the Issuer `region` field,
+or the `AWS_REGION` environment variable.
+
+> ℹ️ This change only affects the `AssumeRole` configuration, which is used for cross-account authentication,
+> and the `AssumeRoleWithWebIdentity` configuration, where the user supplies the name of a Kubernetes ServiceAccount.
+> It does not affect you if you have configured the cert-manager ServiceAccount for [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html),
+> where the ServiceAccount token is mounted in to the cert-manager controller Pod.
+> Regional STS endpoints were already being used in that case.
+>
+> ℹ️ There are good reasons to use regional STS endpoints, summarized as follows on the [Amazon AWS blog](https://aws.amazon.com/blogs/security/how-to-use-regional-aws-sts-endpoints/):
+>
+> > Although the global (legacy) AWS STS endpoint https://sts.amazonaws.com is highly available, it’s hosted in a single AWS Region — US East (N. Virginia) — and like other endpoints, it doesn’t provide automatic fail-over to endpoints in other Regions.
+>
+> 📖 Read [Manage AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+to learn about which regions support STS.
+>
+> 📖 Read [AWS STS Regional endpoints](https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html),
+to learn how to configure the use of regional STS endpoints using environment variables.
 
 Read the [ACME Issuer Route53](../../configuration/acme/dns01/route53.md) page to learn more.
 
