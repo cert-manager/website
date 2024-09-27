@@ -7,9 +7,12 @@ cert-manager 1.16 includes various improvements to the metrics in the cert-manag
 
 ## Breaking changes
 
-1. Venafi Issuer may fail to renew Certificates if the duration conflicts with the CA minimum / maximum duration policy in Venafi.
-2. Venafi Issuer may fail to renew Certificates if the issuer has been configured for TPP with username-password authentication.
-3. Helm schema validation may reject your existing Helm values files if they contain typos or unrecognized fields.
+1. Venafi Issuer may fail to renew certificates if the requested duration conflicts with the CA’s minimum or maximum policy settings in Venafi.
+   For more details, refer to the [Venafi Issuer](#venafi-issuer) section below.
+1. Venafi Issuer may fail to renew Certificates if the issuer has been configured for TPP with username-password authentication.
+   For more details, refer to the [Venafi Issuer](#venafi-issuer) section below.
+1. Helm schema validation may reject your existing Helm values files if they contain typos or unrecognized fields.
+   For more details, refer to the [Helm](#helm) section below.
 
 ## Themes
 
