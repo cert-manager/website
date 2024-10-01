@@ -151,6 +151,10 @@ and will resolve warnings in cert-manager-controller pods of the form:
 > `W0910 20:07:22.491920 1 warnings.go:70] metadata.finalizers: "finalizer.acme.cert-manager.io": prefer a domain-qualified finalizer name to avoid accidental conflicts with other finalizer writers`
 Read [cert-manager component configuration: Feature gates](../../installation/configuring-components.md#feature-gates) to learn more.
 
+cert-manager now uses client-go `v0.31.0`, which removes a lot of noisy errors from logs, of the form:
+> `reflector.go: unable to sync list result: internal error: cannot cast object DeletedFinalStateUnknown`
+Read [cert-manager issue 6753](https://github.com/cert-manager/cert-manager/issues/6753) to learn more.
+
 ## Community
 
 Thanks again to all open-source contributors with commits in this release, including: TODO
