@@ -55,6 +55,7 @@ featureGates:
   UseCertificateRequestBasicConstraints: true
   OtherNames: true
   NameConstraints: true
+  UseDomainQualifiedFinalizer: true
 ```
 
 > **Note:** This is included as an example only and not intended to be used as default settings.

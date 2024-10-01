@@ -139,6 +139,24 @@ And it reduces the peak memory use of the cert-manager components when they star
 because they no longer have to hold a duplicate unpaged list of resources in-memory
 while they add them to the client side cache.
 
+### Logging
+
+We have improved the signal-to-noise ratio in the logs.
+
+The controller has a new feature gate: `UseDomainQualifiedFinalizer`.
+This changes the finalizer added to ACME Challenge resources,
+from `finalizer.acme.cert-manager.io` to `acme.cert-manager.io/finalizer`.
+The new finalizer name is [compliant with Kubernetes standards](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#finalizers),
+and will resolve warnings in cert-manager-controller pods of the form:
+> `W0910 20:07:22.491920 1 warnings.go:70] metadata.finalizers: "finalizer.acme.cert-manager.io": prefer a domain-qualified finalizer name to avoid accidental conflicts with other finalizer writers`
+
+Read [cert-manager component configuration: Feature gates](../../installation/configuring-components.md#feature-gates) to learn more.
+
+cert-manager now uses client-go `v0.31.0`, which removes a lot of noisy errors from logs, of the form:
+> `reflector.go: unable to sync list result: internal error: cannot cast object DeletedFinalStateUnknown`
+
+Read [cert-manager issue 6753](https://github.com/cert-manager/cert-manager/issues/6753) to learn more.
+
 ## Community
 
 Thanks again to all open-source contributors with commits in this release, including: TODO
