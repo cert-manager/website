@@ -130,14 +130,47 @@ This significantly reduces its memory usage.
 It also reduces the load on the Kubernetes API server, when cainjector starts up,
 because it no longer needs to send all the data of all the Secret resources over the network.
 
-We have added a new `ClientWatchList` feature flag to the controller, cainjector, and the webhook.
-This is actually a new beta feature in the Kubernetes client-go module,
-which enables a much more efficient mechanism for populating the client side caches.
+cert-manager now uses client-go `v0.31.0` which [supports a new `WatchListClient` feature](https://relnotes.k8s.io/?markdown=WatchListClient).
+This enables cert-manager to make use of the [Streaming Lists feature of the Kubernetes API server](https://kubernetes.io/docs/reference/using-api/api-concepts/#streaming-lists).
 This reduces the load on the Kubernetes API server,
 because cert-manager components will no longer request complete unpaged lists of all API resources when they start up.
 And it reduces the peak memory use of the cert-manager components when they startup,
 because they no longer have to hold a duplicate unpaged list of resources in-memory
 while they add them to the client side cache.
+To use this feature, you first need to enable the `WatchList` feature in the Kubernetes API server,
+which is available since Kubernetes 1.27.
+Second, you need to enable the client-go `WatchListClient` feature in the cert-manager components.
+If you installed cert-manager using Helm, you can use the following Helm values:
+
+```
+# values.cert-manager.yaml
+extraEnv:
+  - name: KUBE_FEATURE_WatchListClient
+    value: "true"
+cainjector:
+  extraEnv:
+    - name: KUBE_FEATURE_WatchListClient
+      value: "true"
+webhook:
+  extraEnv:
+    - name: KUBE_FEATURE_WatchListClient
+      value: "true"
+```
+
+
+You will see log messages reporting the state of the client-go feature gates, when cert-manager starts up.
+And if you increase the logging verbosity, you will see `sendInitialEvents=true` and `resourceVersionMatch=NotOlderThan` among the requests.
+For example:
+
+```console
+Feature gate updated state [caller=features/envvar.go:169 enabled=true feature=WatchListClient]
+GET https://10.96.0.1:443/api/v1/secrets?allowWatchBookmarks=true&labelSelector=%21controller.cert-manager.io%2Ffao&resourceVersionMatch=NotOlderThan&sendInitialEvents=true&timeout=6m49s&timeoutSeconds=409&watch=true 200 OK in 2 milliseconds [caller=transport/round_trippers.go:553]
+```
+
+Read [Kubernetes API Concepts: Streaming Lists](https://kubernetes.io/docs/reference/using-api/api-concepts/#streaming-lists),
+to learn more.
+Read [Introducing Feature Gates to Client-Go: Enhancing Flexibility and Control](https://kubernetes.io/blog/2024/08/12/feature-gates-in-client-go),
+to learn about enabling and disabling client-go features.
 
 ### Logging
 
@@ -182,7 +215,6 @@ In addition, massive thanks to Venafi for contributing developer time and resour
 - Added `app.kubernetes.io/managed-by: cert-manager` label to the cert-manager-webhook-ca Secret ([#7154](https://github.com/cert-manager/cert-manager/pull/7154), [`@jrcichra`](https://github.com/jrcichra))
 - Allow the user to specify a Pod template when using GatewayAPI HTTP01 solver, this mirrors the behavior when using the Ingress HTTP01 solver. ([#7211](https://github.com/cert-manager/cert-manager/pull/7211), [`@ThatsMrTalbot`](https://github.com/ThatsMrTalbot))
 - Create token request RBAC for the cert-manager ServiceAccount by default ([#7213](https://github.com/cert-manager/cert-manager/pull/7213), [`@Jasper-Ben`](https://github.com/Jasper-Ben))
-- Feature: Add a new `ClientWatchList` feature flag to cert-manager controller, cainjector and webhook, which allows the components to use of the ALPHA `WatchList` / Streaming list feature of the Kubernetes API server. This reduces the load on  the Kubernetes API server when cert-manager starts up and reduces the peak memory usage in the cert-manager components. ([#7175](https://github.com/cert-manager/cert-manager/pull/7175), [`@wallrj`](https://github.com/wallrj))
 - Feature: Append cert-manager user-agent string to all AWS API requests, including IMDS and STS requests. ([#7295](https://github.com/cert-manager/cert-manager/pull/7295), [`@wallrj`](https://github.com/wallrj))
 - Feature: Log AWS SDK warnings and API requests at cert-manager debug level to help debug AWS Route53 problems in the field. ([#7292](https://github.com/cert-manager/cert-manager/pull/7292), [`@wallrj`](https://github.com/wallrj))
 - Feature: The Route53 DNS solver of the ACME Issuer will now use regional STS endpoints computed from the region that is supplied in the Issuer spec or in the `AWS_REGION` environment variable.
