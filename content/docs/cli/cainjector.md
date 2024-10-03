@@ -15,28 +15,37 @@ Usage:
   cainjector [flags]
 
 Flags:
-      --config string                                       Path to a file containing a CAInjectorConfiguration object used to configure the controller
-      --enable-apiservices-injectable                       Inject CA data to annotated APIServices. This functionality is not required if cainjector is only used as cert-manager's internal component and setting it to false might reduce memory consumption (default true)
-      --enable-certificates-data-source                     Enable configuring cert-manager.io Certificate resources as potential sources for CA data. Requires cert-manager.io Certificate CRD to be installed. This data source can be disabled to reduce memory consumption if you only use cainjector as part of cert-manager's installation (default true)
-      --enable-customresourcedefinitions-injectable         Inject CA data to annotated CustomResourceDefinitions. This functionality is not required if cainjecor is only used as cert-manager's internal component and setting it to false might slightly reduce memory consumption (default true)
-      --enable-mutatingwebhookconfigurations-injectable     Inject CA data to annotated MutatingWebhookConfigurations. This functionality is required for cainjector to work correctly as cert-manager's internal component (default true)
-      --enable-profiling                                    Enable profiling for controller.
-      --enable-validatingwebhookconfigurations-injectable   Inject CA data to annotated ValidatingWebhookConfigurations. This functionality is required for cainjector to correctly function as cert-manager's internal component (default true)
-      --feature-gates mapStringBool                         A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
-                                                            AllAlpha=true|false (ALPHA - default=false)
-                                                            AllBeta=true|false (BETA - default=false)
-                                                            ServerSideApply=true|false (ALPHA - default=false)
-  -h, --help                                                help for cainjector
-      --kubeconfig string                                   Paths to a kubeconfig. Only required if out-of-cluster.
-      --leader-elect                                        If true, cainjector will perform leader election between instances to ensure no more than one instance of cainjector operates at a time (default true)
-      --leader-election-lease-duration duration             The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled. (default 1m0s)
-      --leader-election-namespace string                    Namespace used to perform leader election. Only used if leader election is enabled (default "kube-system")
-      --leader-election-renew-deadline duration             The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled. (default 40s)
-      --leader-election-retry-period duration               The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled. (default 15s)
-      --log-flush-frequency duration                        Maximum number of seconds between log flushes (default 5s)
-      --logging-format string                               Sets the log format. Permitted formats: "json" (gated by LoggingBetaOptions), "text". (default "text")
-      --namespace string                                    If set, this limits the scope of cainjector to a single namespace. If set, cainjector will not update resources with certificates outside of the configured namespace.
-      --profiler-address string                             The host and port that Go profiler should listen on, i.e localhost:6060. Ensure that profiler is not exposed on a public address. Profiler will be served at /debug/pprof. (default "localhost:6060")
-  -v, --v Level                                             number for the log level verbosity
-      --vmodule pattern=N,...                               comma-separated list of pattern=N settings for file-filtered logging (only works for text log format)
+      --config string                                        Path to a file containing a CAInjectorConfiguration object used to configure the controller
+      --enable-apiservices-injectable                        Inject CA data to annotated APIServices. This functionality is not required if cainjector is only used as cert-manager's internal component and setting it to false might reduce memory consumption (default true)
+      --enable-certificates-data-source                      Enable configuring cert-manager.io Certificate resources as potential sources for CA data. Requires cert-manager.io Certificate CRD to be installed. This data source can be disabled to reduce memory consumption if you only use cainjector as part of cert-manager's installation (default true)
+      --enable-customresourcedefinitions-injectable          Inject CA data to annotated CustomResourceDefinitions. This functionality is not required if cainjecor is only used as cert-manager's internal component and setting it to false might slightly reduce memory consumption (default true)
+      --enable-mutatingwebhookconfigurations-injectable      Inject CA data to annotated MutatingWebhookConfigurations. This functionality is required for cainjector to work correctly as cert-manager's internal component (default true)
+      --enable-profiling                                     Enable profiling for controller.
+      --enable-validatingwebhookconfigurations-injectable    Inject CA data to annotated ValidatingWebhookConfigurations. This functionality is required for cainjector to correctly function as cert-manager's internal component (default true)
+      --feature-gates mapStringBool                          A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
+                                                             AllAlpha=true|false (ALPHA - default=false)
+                                                             AllBeta=true|false (BETA - default=false)
+                                                             ServerSideApply=true|false (ALPHA - default=false)
+  -h, --help                                                 help for cainjector
+      --kubeconfig string                                    Paths to a kubeconfig. Only required if out-of-cluster.
+      --leader-elect                                         If true, cainjector will perform leader election between instances to ensure no more than one instance of cainjector operates at a time (default true)
+      --leader-election-lease-duration duration              The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled. (default 1m0s)
+      --leader-election-namespace string                     Namespace used to perform leader election. Only used if leader election is enabled (default "kube-system")
+      --leader-election-renew-deadline duration              The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled. (default 40s)
+      --leader-election-retry-period duration                The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled. (default 15s)
+      --log-flush-frequency duration                         Maximum number of seconds between log flushes (default 5s)
+      --logging-format string                                Sets the log format. Permitted formats: "json" (gated by LoggingBetaOptions), "text". (default "text")
+      --metrics-dynamic-serving-ca-secret-name string        name of the secret used to store the CA that signs serving certificates
+      --metrics-dynamic-serving-ca-secret-namespace string   namespace of the secret used to store the CA that signs metrics serving certificates
+      --metrics-dynamic-serving-dns-names strings            DNS names that should be present on certificates generated by the metrics dynamic serving CA
+      --metrics-dynamic-serving-leaf-duration duration       leaf duration of metrics serving certificates (default 168h0m0s)
+      --metrics-listen-address string                        The host and port that the metrics endpoint should listen on. The value '0' disables the metrics server (default "0.0.0.0:9402")
+      --metrics-tls-cert-file string                         path to the file containing the TLS certificate to serve metrics with
+      --metrics-tls-cipher-suites strings                    Comma-separated list of cipher suites for the metrics server. If omitted, the default Go cipher suites will be used.  Possible values: TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_RSA_WITH_3DES_EDE_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_RC4_128_SHA
+      --metrics-tls-min-version string                       Minimum TLS version supported by the metrics server. If omitted, the default Go minimum version will be used. Possible values: VersionTLS10, VersionTLS11, VersionTLS12, VersionTLS13
+      --metrics-tls-private-key-file string                  path to the file containing the TLS private key to serve metrics with
+      --namespace string                                     If set, this limits the scope of cainjector to a single namespace. If set, cainjector will not update resources with certificates outside of the configured namespace.
+      --profiler-address string                              The host and port that Go profiler should listen on, i.e localhost:6060. Ensure that profiler is not exposed on a public address. Profiler will be served at /debug/pprof. (default "localhost:6060")
+  -v, --v Level                                              number for the log level verbosity
+      --vmodule pattern=N,...                                comma-separated list of pattern=N settings for file-filtered logging (only works for text log format)
 ```

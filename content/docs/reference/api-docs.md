@@ -765,6 +765,19 @@ description: >-
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>podTemplate</code>
+        <br />
+        <em>
+          <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodTemplate">ACMEChallengeSolverHTTP01IngressPodTemplate</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Optional pod template used to configure the ACME challenge solver pods used for HTTP01 challenges.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress">ACMEChallengeSolverHTTP01Ingress</h3>
@@ -906,7 +919,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Annotations that should be added to the create ACME HTTP01 solver pods.</p>
+        <p>Annotations that should be added to the created ACME HTTP01 solver pods.</p>
       </td>
     </tr>
     <tr>
@@ -918,6 +931,132 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Labels that should be added to the created ACME HTTP01 solver pods.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSecurityContext">ACMEChallengeSolverHTTP01IngressPodSecurityContext</h3>
+<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSpec">ACMEChallengeSolverHTTP01IngressPodSpec</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>seLinuxOptions</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#selinuxoptions-v1-core">Kubernetes core/v1.SELinuxOptions</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>The SELinux context to be applied to all containers. If unspecified, the container runtime will allocate a random SELinux context for each container. May also be set in SecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. Note that this field cannot be set when spec.os.name is windows.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>runAsUser</code>
+        <br />
+        <em>int64</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>The UID to run the entrypoint of the container process. Defaults to user specified in image metadata if unspecified. May also be set in SecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. Note that this field cannot be set when spec.os.name is windows.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>runAsGroup</code>
+        <br />
+        <em>int64</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>The GID to run the entrypoint of the container process. Uses runtime default if unset. May also be set in SecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence for that container. Note that this field cannot be set when spec.os.name is windows.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>runAsNonRoot</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Indicates that the container must run as a non-root user. If true, the Kubelet will validate the image at runtime to ensure that it does not run as UID 0 (root) and fail to start the container if it does. If unset or false, no such validation will be performed. May also be set in SecurityContext. If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>supplementalGroups</code>
+        <br />
+        <em>[]int64</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>A list of groups applied to the first process run in each container, in addition to the container&rsquo;s primary GID, the fsGroup (if specified), and group memberships defined in the container image for the uid of the container process. If unspecified, no additional groups are added to any container. Note that group memberships defined in the container image for the uid of the container process are still effective, even if they are not included in this list. Note that this field cannot be set when spec.os.name is windows.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>fsGroup</code>
+        <br />
+        <em>int64</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>A special supplemental group that applies to all containers in a pod. Some volume types allow the Kubelet to change the ownership of that volume to be owned by the pod:</p>
+        <ol>
+          <li>The owning GID will be the FSGroup</li>
+          <li>The setgid bit is set (new files created in the volume will be owned by FSGroup)</li>
+          <li>The permission bits are OR&rsquo;d with rw-rw&mdash;-</li>
+        </ol>
+        <p>If unset, the Kubelet will not modify the ownership and permissions of any volume. Note that this field cannot be set when spec.os.name is windows.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>sysctls</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#sysctl-v1-core">[]Kubernetes core/v1.Sysctl</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported sysctls (by the container runtime) might fail to launch. Note that this field cannot be set when spec.os.name is windows.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>fsGroupChangePolicy</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#podfsgroupchangepolicy-v1-core">Kubernetes core/v1.PodFSGroupChangePolicy</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>fsGroupChangePolicy defines behavior of changing ownership and permission of the volume before being exposed inside Pod. This field will only apply to volume types which support fsGroup based ownership(and permissions). It will have no effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid values are &ldquo;OnRootMismatch&rdquo; and &ldquo;Always&rdquo;. If not specified, &ldquo;Always&rdquo; is used. Note that this field cannot be set when spec.os.name is windows.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>seccompProfile</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#seccompprofile-v1-core">Kubernetes core/v1.SeccompProfile</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>The seccomp options to use by the containers in this pod. Note that this field cannot be set when spec.os.name is windows.</p>
       </td>
     </tr>
   </tbody>
@@ -1005,10 +1144,23 @@ description: >-
         <p>If specified, the pod&rsquo;s imagePullSecrets</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>securityContext</code>
+        <br />
+        <em>
+          <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSecurityContext">ACMEChallengeSolverHTTP01IngressPodSecurityContext</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>If specified, the pod&rsquo;s security context</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodTemplate">ACMEChallengeSolverHTTP01IngressPodTemplate</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress">ACMEChallengeSolverHTTP01Ingress</a>) </p>
+<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01GatewayHTTPRoute">ACMEChallengeSolverHTTP01GatewayHTTPRoute</a>, <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress">ACMEChallengeSolverHTTP01Ingress</a>) </p>
 <div></div>
 <table>
   <thead>
@@ -1115,6 +1267,19 @@ description: >-
             <td>
               <em>(Optional)</em>
               <p>If specified, the pod&rsquo;s imagePullSecrets</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>securityContext</code>
+              <br />
+              <em>
+                <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSecurityContext">ACMEChallengeSolverHTTP01IngressPodSecurityContext</a>
+              </em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p>If specified, the pod&rsquo;s security context</p>
             </td>
           </tr>
         </table>
@@ -1816,7 +1981,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>If set, the provider will manage only this zone in Route53 and will not do an lookup using the route53:ListHostedZonesByName api call.</p>
+        <p>If set, the provider will manage only this zone in Route53 and will not do a lookup using the route53:ListHostedZonesByName api call.</p>
       </td>
     </tr>
     <tr>
@@ -1826,7 +1991,12 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>Always set the region when using AccessKeyID and SecretAccessKey</p>
+        <em>(Optional)</em>
+        <p>Override the AWS region.</p>
+        <p> Route53 is a global service and does not have regional endpoints but the region specified here (or via environment variables) is used as a hint to help compute the correct AWS credential scope and partition when it connects to Route53. See: - <a href="https://docs.aws.amazon.com/general/latest/gr/r53.html">Amazon Route 53 endpoints and quotas</a>- <a href="https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html">Global services</a> </p>
+        <p>If you omit this region field, cert-manager will use the region from AWS_REGION and AWS_DEFAULT_REGION environment variables, if they are set in the cert-manager controller Pod.</p>
+        <p> The <code>region</code> field is not needed if you use <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html">IAM Roles for Service Accounts (IRSA)</a>. Instead an AWS_REGION environment variable is added to the cert-manager controller Pod by: <a href="https://github.com/aws/amazon-eks-pod-identity-webhook">Amazon EKS Pod Identity Webhook</a>. In this case this <code>region</code> field value is ignored. </p>
+        <p> The <code>region</code> field is not needed if you use <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html">EKS Pod Identities</a>. Instead an AWS_REGION environment variable is added to the cert-manager controller Pod by: <a href="https://github.com/aws/eks-pod-identity-agent">Amazon EKS Pod Identity Agent</a>, In this case this <code>region</code> field value is ignored. </p>
       </td>
     </tr>
   </tbody>
@@ -2563,7 +2733,7 @@ description: >-
         <p>&#34;invalid&#34;</p>
       </td>
       <td>
-        <p>Invalid signifies that an ACME resource is invalid for some reason. If an Order is marked &lsquo;invalid&rsquo;, one of its validations be have invalid for some reason. This is a final state.</p>
+        <p>Invalid signifies that an ACME resource is invalid for some reason. If an Order is marked &lsquo;invalid&rsquo;, one of its validations must be invalid for some reason. This is a final state.</p>
       </td>
     </tr>
     <tr>
@@ -2723,6 +2893,26 @@ description: >-
         <p>featureGates is a map of feature names to bools that enable or disable experimental features.</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>metricsListenAddress</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>The host and port that the metrics endpoint should listen on. The value &ldquo;0&rdquo; disables the metrics server. Defaults to &lsquo;0.0.0.0:9402&rsquo;.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>metricsTLSConfig</code>
+        <br />
+        <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.TLSConfig</em>
+      </td>
+      <td>
+        <p>metricsTLSConfig is used to configure the metrics server TLS settings.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="cainjector.config.cert-manager.io/v1alpha1.EnableDataSourceConfig">EnableDataSourceConfig</h3>
@@ -2743,7 +2933,7 @@ description: >-
         <em>bool</em>
       </td>
       <td>
-        <p>Certificates detemines whether cainjector&rsquo;s control loops will watch cert-manager Certificate resources as potential sources of CA data. If not set, defaults to true.</p>
+        <p>Certificates determines whether cainjector&rsquo;s control loops will watch cert-manager Certificate resources as potential sources of CA data. If not set, defaults to true.</p>
       </td>
     </tr>
   </tbody>
@@ -2950,7 +3140,23 @@ description: >-
               <em>(Optional)</em>
               <p> How long before the currently issued certificate&rsquo;s expiry cert-manager should renew the certificate. For example, if a certificate is valid for 60 minutes, and <code>renewBefore=10m</code>, cert-manager will begin to attempt to renew the certificate 50 minutes after it was issued (i.e. when there are 10 minutes remaining until the certificate is no longer valid). </p>
               <p>NOTE: The actual lifetime of the issued certificate is used to determine the renewal time. If an issuer returns a certificate with a different lifetime than the one requested, cert-manager will use the lifetime of the issued certificate.</p>
-              <p> If unset, this defaults to <sup>1</sup>&frasl;<sub>3</sub> of the issued certificate&rsquo;s lifetime. Minimum accepted value is 5 minutes. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>. </p>
+              <p> If unset, this defaults to <sup>1</sup>&frasl;<sub>3</sub> of the issued certificate&rsquo;s lifetime. Minimum accepted value is 5 minutes. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>. Cannot be set if the <code>renewBeforePercentage</code> field is set. </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>renewBeforePercentage</code>
+              <br />
+              <em>int32</em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p> <code>renewBeforePercentage</code> is like <code>renewBefore</code>, except it is a relative percentage rather than an absolute duration. For example, if a certificate is valid for 60 minutes, and <code>renewBeforePercentage=25</code>, cert-manager will begin to attempt to renew the certificate 45 minutes after it was issued (i.e. when there are 15 minutes (25%) remaining until the certificate is no longer valid). </p>
+              <p>NOTE: The actual lifetime of the issued certificate is used to determine the renewal time. If an issuer returns a certificate with a different lifetime than the one requested, cert-manager will use the lifetime of the issued certificate.</p>
+              <p>
+                Value must be an integer in the range (0,100). The minimum effective
+                <code>renewBefore</code> derived from the <code>renewBeforePercentage</code> and <code>duration</code> fields is 5 minutes. Cannot be set if the <code>renewBefore</code> field is set.
+              </p>
             </td>
           </tr>
           <tr>
@@ -3632,7 +3838,7 @@ description: >-
 <h3 id="cert-manager.io/v1.CertificateCondition">CertificateCondition</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateStatus">CertificateStatus</a>) </p>
 <div>
-  <p>CertificateCondition contains condition information for an Certificate.</p>
+  <p>CertificateCondition contains condition information for a Certificate.</p>
 </div>
 <table>
   <thead>
@@ -3717,7 +3923,7 @@ description: >-
 <h3 id="cert-manager.io/v1.CertificateConditionType"> CertificateConditionType (<code>string</code> alias) </h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateCondition">CertificateCondition</a>) </p>
 <div>
-  <p>CertificateConditionType represents an Certificate condition value.</p>
+  <p>CertificateConditionType represents a Certificate condition value.</p>
 </div>
 <table>
   <thead>
@@ -3857,7 +4063,7 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>RotationPolicy controls how private keys should be regenerated when a re-issuance is being processed.</p>
-        <p> If set to <code>Never</code>, a private key will only be generated if one does not already exist in the target <code>spec.secretName</code>. If one does exists but it does not have the correct algorithm or size, a warning will be raised to await user intervention. If set to <code>Always</code>, a private key matching the specified requirements will be generated whenever a re-issuance occurs. Default is <code>Never</code> for backward compatibility. </p>
+        <p> If set to <code>Never</code>, a private key will only be generated if one does not already exist in the target <code>spec.secretName</code>. If one does exist but it does not have the correct algorithm or size, a warning will be raised to await user intervention. If set to <code>Always</code>, a private key matching the specified requirements will be generated whenever a re-issuance occurs. Default is <code>Never</code> for backward compatibility. </p>
       </td>
     </tr>
     <tr>
@@ -3979,7 +4185,7 @@ description: >-
 <h3 id="cert-manager.io/v1.CertificateRequestConditionType"> CertificateRequestConditionType (<code>string</code> alias) </h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequestCondition">CertificateRequestCondition</a>) </p>
 <div>
-  <p>CertificateRequestConditionType represents an Certificate condition value.</p>
+  <p>CertificateRequestConditionType represents a Certificate condition value.</p>
 </div>
 <table>
   <thead>
@@ -4336,7 +4542,23 @@ description: >-
         <em>(Optional)</em>
         <p> How long before the currently issued certificate&rsquo;s expiry cert-manager should renew the certificate. For example, if a certificate is valid for 60 minutes, and <code>renewBefore=10m</code>, cert-manager will begin to attempt to renew the certificate 50 minutes after it was issued (i.e. when there are 10 minutes remaining until the certificate is no longer valid). </p>
         <p>NOTE: The actual lifetime of the issued certificate is used to determine the renewal time. If an issuer returns a certificate with a different lifetime than the one requested, cert-manager will use the lifetime of the issued certificate.</p>
-        <p> If unset, this defaults to <sup>1</sup>&frasl;<sub>3</sub> of the issued certificate&rsquo;s lifetime. Minimum accepted value is 5 minutes. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>. </p>
+        <p> If unset, this defaults to <sup>1</sup>&frasl;<sub>3</sub> of the issued certificate&rsquo;s lifetime. Minimum accepted value is 5 minutes. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>. Cannot be set if the <code>renewBeforePercentage</code> field is set. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>renewBeforePercentage</code>
+        <br />
+        <em>int32</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> <code>renewBeforePercentage</code> is like <code>renewBefore</code>, except it is a relative percentage rather than an absolute duration. For example, if a certificate is valid for 60 minutes, and <code>renewBeforePercentage=25</code>, cert-manager will begin to attempt to renew the certificate 45 minutes after it was issued (i.e. when there are 15 minutes (25%) remaining until the certificate is no longer valid). </p>
+        <p>NOTE: The actual lifetime of the issued certificate is used to determine the renewal time. If an issuer returns a certificate with a different lifetime than the one requested, cert-manager will use the lifetime of the issued certificate.</p>
+        <p>
+          Value must be an integer in the range (0,100). The minimum effective
+          <code>renewBefore</code> derived from the <code>renewBeforePercentage</code> and <code>duration</code> fields is 5 minutes. Cannot be set if the <code>renewBefore</code> field is set.
+        </p>
       </td>
     </tr>
     <tr>
@@ -4583,7 +4805,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>LastFailureTime is set only if the lastest issuance for this Certificate failed and contains the time of the failure. If an issuance has failed, the delay till the next issuance will be calculated using formula time.Hour * 2 ^ (failedIssuanceAttempts - 1). If the latest issuance has succeeded this field will be unset.</p>
+        <p>LastFailureTime is set only if the latest issuance for this Certificate failed and contains the time of the failure. If an issuance has failed, the delay till the next issuance will be calculated using formula time.Hour * 2 ^ (failedIssuanceAttempts - 1). If the latest issuance has succeeded this field will be unset.</p>
       </td>
     </tr>
     <tr>
@@ -5558,7 +5780,7 @@ description: >-
 <h3 id="cert-manager.io/v1.VaultAuth">VaultAuth</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultIssuer">VaultIssuer</a>) </p>
 <div>
-  <p> VaultAuth is configuration used to authenticate with a Vault server. The order of precedence is [<code>tokenSecretRef</code>, <code>appRole</code> or <code>kubernetes</code>]. </p>
+  <p> VaultAuth is configuration used to authenticate with a Vault server. The order of precedence is [<code>tokenSecretRef</code>, <code>appRole</code>, <code>clientCertificate</code> or <code>kubernetes</code>]. </p>
 </div>
 <table>
   <thead>
@@ -5596,6 +5818,19 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>clientCertificate</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.VaultClientCertificateAuth">VaultClientCertificateAuth</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>ClientCertificate authenticates with Vault by presenting a client certificate during the request&rsquo;s TLS handshake. Works only when using HTTPS protocol.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>kubernetes</code>
         <br />
         <em>
@@ -5605,6 +5840,54 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Kubernetes authenticates with Vault by passing the ServiceAccount token stored in the named Secret resource to the Vault server.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.VaultClientCertificateAuth">VaultClientCertificateAuth</h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>) </p>
+<div>
+  <p>VaultKubernetesAuth is used to authenticate against Vault using a client certificate stored in a Secret.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>mountPath</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> The Vault mountPath here is the mount path to use when authenticating with Vault. For example, setting a value to <code>/v1/auth/foo</code>, will use the path <code>/v1/auth/foo/login</code> to authenticate with Vault. If unspecified, the default value &ldquo;/v1/auth/cert&rdquo; will be used. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>secretName</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Reference to Kubernetes Secret of type &ldquo;kubernetes.io/tls&rdquo; (hence containing tls.crt and tls.key) used to authenticate to Vault using TLS client authentication.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>name</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Name of the certificate role to authenticate against. If not set, matching any certificate role, if available.</p>
       </td>
     </tr>
   </tbody>
@@ -5900,7 +6183,7 @@ description: >-
         </em>
       </td>
       <td>
-        <p>CredentialsRef is a reference to a Secret containing the username and password for the TPP server. The secret must contain two keys, &lsquo;username&rsquo; and &lsquo;password&rsquo;.</p>
+        <p>CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials. The secret must contain the key &lsquo;access-token&rsquo; for the Access Token Authentication, or two keys, &lsquo;username&rsquo; and &lsquo;password&rsquo; for the API Keys Authentication.</p>
       </td>
     </tr>
     <tr>
@@ -5912,6 +6195,19 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Base64-encoded bundle of PEM CAs which will be used to validate the certificate chain presented by the TPP server. Only used if using HTTPS; ignored for HTTP. If undefined, the certificate bundle in the cert-manager controller container is used to validate the chain.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>caBundleSecretRef</code>
+        <br />
+        <em>
+          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Reference to a Secret containing a base64-encoded bundle of PEM CAs which will be used to validate the certificate chain presented by the TPP server. Only used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle. If neither CABundle nor CABundleSecretRef is defined, the certificate bundle in the cert-manager controller container is used to validate the TLS connection.</p>
       </td>
     </tr>
   </tbody>
@@ -6209,7 +6505,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>If set, this limits the scope of cert-manager to a single namespace and ClusterIssuers are disabled. If not specified, all namespaces will be watched&rdquo;</p>
+        <p>If set, this limits the scope of cert-manager to a single namespace and ClusterIssuers are disabled. If not specified, all namespaces will be watched</p>
       </td>
     </tr>
     <tr>
@@ -6291,7 +6587,7 @@ description: >-
         <em>[]string</em>
       </td>
       <td>
-        <p>Specify which annotations should/shouldn&rsquo;t be copied from Certificate to CertificateRequest and Order, as well as from CertificateSigningRequest to Order, by passing a list of annotation key prefixes. A prefix starting with a dash(-) specifies an annotation that shouldn&rsquo;t be copied. Example: &lsquo;*,-kubectl.kuberenetes.io/&rsquo;- all annotations will be copied apart from the ones where the key is prefixed with &lsquo;kubectl.kubernetes.io/&rsquo;.</p>
+        <p>Specify which annotations should/shouldn&rsquo;t be copied from Certificate to CertificateRequest and Order, as well as from CertificateSigningRequest to Order, by passing a list of annotation key prefixes. A prefix starting with a dash(-) specifies an annotation that shouldn&rsquo;t be copied. Example: &lsquo;*,-kubectl.kubernetes.io/&rsquo;- all annotations will be copied apart from the ones where the key is prefixed with &lsquo;kubectl.kubernetes.io/&rsquo;.</p>
       </td>
     </tr>
     <tr>
@@ -6474,7 +6770,7 @@ description: >-
         <em>[]string</em>
       </td>
       <td>
-        <p>The annotation consumed by the ingress-shim controller to indicate a ingress is requesting a certificate</p>
+        <p>The annotation consumed by the ingress-shim controller to indicate an ingress is requesting a certificate</p>
       </td>
     </tr>
   </tbody>
@@ -6633,7 +6929,7 @@ description: >-
 <h3 id="meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</h3>
 <p>
   (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEExternalAccountBinding">ACMEExternalAccountBinding</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuer">ACMEIssuer</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAcmeDNS">ACMEIssuerDNS01ProviderAcmeDNS</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAkamai">ACMEIssuerDNS01ProviderAkamai</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderCloudDNS">ACMEIssuerDNS01ProviderCloudDNS</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderCloudflare">ACMEIssuerDNS01ProviderCloudflare</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderDigitalOcean">ACMEIssuerDNS01ProviderDigitalOcean</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRFC2136">ACMEIssuerDNS01ProviderRFC2136</a>,
-  <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRoute53">ACMEIssuerDNS01ProviderRoute53</a>, <a href="#cert-manager.io/v1.JKSKeystore">JKSKeystore</a>, <a href="#cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</a>, <a href="#cert-manager.io/v1.VaultAppRole">VaultAppRole</a>, <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>, <a href="#cert-manager.io/v1.VaultIssuer">VaultIssuer</a>, <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>, <a href="#cert-manager.io/v1.VenafiCloud">VenafiCloud</a>)
+  <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRoute53">ACMEIssuerDNS01ProviderRoute53</a>, <a href="#cert-manager.io/v1.JKSKeystore">JKSKeystore</a>, <a href="#cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</a>, <a href="#cert-manager.io/v1.VaultAppRole">VaultAppRole</a>, <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>, <a href="#cert-manager.io/v1.VaultIssuer">VaultIssuer</a>, <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>, <a href="#cert-manager.io/v1.VenafiCloud">VenafiCloud</a>, <a href="#cert-manager.io/v1.VenafiTPP">VenafiTPP</a>)
 </p>
 <div>
   <p> A reference to a specific &lsquo;key&rsquo; within a Secret resource. In some instances, <code>key</code> is a required field. </p>
@@ -6783,9 +7079,29 @@ description: >-
         <p>featureGates is a map of feature names to bools that enable or disable experimental features.</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>metricsListenAddress</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>The host and port that the metrics endpoint should listen on. The value &ldquo;0&rdquo; disables the metrics server. Defaults to &lsquo;0.0.0.0:9402&rsquo;.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>metricsTLSConfig</code>
+        <br />
+        <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.TLSConfig</em>
+      </td>
+      <td>
+        <p>metricsTLSConfig is used to configure the metrics server TLS settings.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>35e27b7</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>67c897d</code>. </em>
 </p>
