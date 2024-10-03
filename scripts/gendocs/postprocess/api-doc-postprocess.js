@@ -12,7 +12,7 @@ const { content, data } = matter(apiDocsFile)
 
 let result = content
 
-result = prettier.format(`<div>${result}</div>`, {
+result = await prettier.format(`<div>${result}</div>`, {
   parser: 'babel',
   htmlWhitespaceSensitivity: 'strict',
   proseWrap: 'never',
@@ -24,7 +24,7 @@ result = prettier.format(`<div>${result}</div>`, {
 result = result.split('\n').slice(1, -2).join('\n')
 result = result.replace(new RegExp(/{" "}/g), ' ')
 
-result = prettier.format(result, {
+result = await prettier.format(result, {
   parser: 'html',
   proseWrap: 'never',
   htmlWhitespaceSensitivity: 'strict',
