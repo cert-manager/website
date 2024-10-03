@@ -251,6 +251,9 @@ In addition, massive thanks to Venafi for contributing developer time and resour
 - Venafi TPP issuer can now be used with a username & password combination with OAuth. Fixes #4653.
   Breaking: cert-manager will no longer use the API Key authentication method which was deprecated in 20.2 and since removed in 24.1 of TPP. ([#7084](https://github.com/cert-manager/cert-manager/pull/7084), [`@hawksight`](https://github.com/hawksight))
 - You can now configure the pod security context of HTTP-01 solver pods. ([#5373](https://github.com/cert-manager/cert-manager/pull/5373), [`@aidy`](https://github.com/aidy))
+- Helm: New value `webhook.extraEnv`, allows you to set custom environment variables in the webhook Pod.
+  Helm: New value `cainjector.extraEnv`, allows you to set custom environment variables in the cainjector Pod.
+  Helm: New value `startupapicheck.extraEnv`, allows you to set custom environment variables in the startupapicheck Pod. ([#7319](https://github.com/cert-manager/cert-manager/pull/7319), [`@wallrj`](https://github.com/wallrj))
 
 ### Bug or Regression
 
@@ -279,3 +282,4 @@ In addition, massive thanks to Venafi for contributing developer time and resour
   (acme.)cert-manager.io/v1alpha3
   (acme.)cert-manager.io/v1beta1 ([#7278](https://github.com/cert-manager/cert-manager/pull/7278), [`@inteon`](https://github.com/inteon))
 - Upgrading to client-go `v0.31.0` removes a lot of noisy `reflector.go: unable to sync list result: internal error: cannot cast object DeletedFinalStateUnknown` errors from logs. ([#7237](https://github.com/cert-manager/cert-manager/pull/7237), [`@inteon`](https://github.com/inteon))
+- Bump Go to `v1.23.2` ([#7324](https://github.com/cert-manager/cert-manager/pull/7324), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
