@@ -25,17 +25,17 @@ should be stable enough to run.
 
 | Release      | Release Date | End of Life            | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:------------:|:------------:|:----------------------:|:----------------------------------------------:|:----------------------------------:|
+| [1.16][]     | Oct 03, 2024 | Release of 1.18        |       1.25 → 1.31   /   4.14 → 4.16            |  1.27 → 1.31                       |
 | [1.15][]     | Jun 05, 2024 | Release of 1.17        |       1.25 → 1.31   /   4.12 → 4.16            |  1.25 → 1.31                       |
-| [1.14][]     | Feb 03, 2024 | Release of 1.16        |       1.24 → 1.31   /   4.11 → 4.16            |  1.24 → 1.29                       |
 | [1.12 LTS][] | May 19, 2023 | May 19, 2025           |       1.22 → 1.31   /   4.9  → 4.16            |  1.22 → 1.29                       |
 
 cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It will continue to be supported for at least 2 years from release.
 
 ## Upcoming releases
 
-| Release  | Release Date | End of Life      | [Supported Kubernetes / OpenShift Versions][s] |
-|:--------:|:------------:|:----------------:|:----------------------------------------------:|
-| [1.16][] | Oct 03, 2024 | Release of 1.18  |          1.27 → 1.31 / 4.14 → 4.16             |
+| Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] |
+|:--------:|:------------:|:---------------:|:----------------------------------------------:|
+| [1.17][] | Feb 03, 2025 | Release of 1.19 | 1.27 → 1.31 / 4.14 → 4.16                      |
 
 Dates in the future are not firm commitments and are subject to change.
 
@@ -295,6 +295,7 @@ are no longer supported.
 
 | Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
 |----------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
+| [1.14][] | Feb 03, 2024 | Oct 03, 2024 |          1.24 → 1.31           |          4.11 → 4.16          |
 | [1.13][] | Sep 12, 2023 | Jun 05, 2024 |          1.21 → 1.27           |          4.8 → 4.14           |
 | [1.11][] | Jan 11, 2023 | Sep 12, 2023 |          1.21 → 1.27           |          4.8 → 4.14           |
 | [1.10][] | Oct 17, 2022 | May 19, 2023 |          1.20 → 1.26           |          4.7 → 4.13           |
@@ -317,7 +318,8 @@ are no longer supported.
 
 [s]: #kubernetes-supported-versions
 [test]: #supported-vs-tested
-[1.16]: https://github.com/cert-manager/cert-manager/milestone/38
+[1.17]: https://github.com/cert-manager/cert-manager/milestone/39
+[1.16]: ./release-notes/release-notes-1.16.md
 [1.15]: ./release-notes/release-notes-1.15.md
 [1.14]: ./release-notes/release-notes-1.14.md
 [1.13]: ./release-notes/release-notes-1.13.md

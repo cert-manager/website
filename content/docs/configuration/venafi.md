@@ -239,6 +239,11 @@ spec:
     tpp:
       url: https://tpp.venafi.example/vedsdk # Change this to the URL of your TPP instance
       caBundle: <base64 encoded string of caBundle PEM file, or empty to use system root CAs>
+      ## Use only caBundle above or the caBundleSecretRef below. Secret can be created from a ca.crt file by running below command
+      ## kubectl create secret generic custom-tpp-ca --from-file=/my/certs/ca.crt -n <cert-manager-namespace>
+      # caBundleSecretRef:
+      #  name: custom-tpp-ca
+      #  key: ca.crt
       credentialsRef:
         name: tpp-secret
 ```
