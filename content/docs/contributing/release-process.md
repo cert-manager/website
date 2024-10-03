@@ -261,13 +261,13 @@ page if a step is missing or if it is outdated.
      and updating the `manifest.json` file:
 
       ```bash
-      cp -r content/docs content/v1.12-docs
-      rm -rf content/v1.12-docs/{installation/supported-releases,installation/upgrading,release-notes}
-      sed -i.bak 's|docs|v1.12-docs|g' content/v1.12-docs/manifest.json
-      cat content/v1.12-docs/manifest.json \
-        | jq 'del(.. | select(.path? | select(.) | test(".*(installation/supported-releases.md|installation/upgrading|release-notes).*")))' \
-        | jq 'del(.. | select(.routes? == []))' >/tmp/manifest \
-           && mv /tmp/manifest content/v1.12-docs/manifest.json
+      export RELEASE=1.15
+      cp -r content/docs content/v${RELEASE}-docs
+      rm -rf content/v${RELEASE}-docs/{release-notes,contributing}
+      sed -i.bak "s|/docs/|/v${RELEASE}-docs/|g" content/v${RELEASE}-docs/manifest.json
+      jq < content/v${RELEASE}-docs/manifest.json >/tmp/manifest \
+        'del(.routes[0].routes[] | select(.title | test("Releases|Contributing")))'
+      mv /tmp/manifest content/v${RELEASE}-docs/manifest.json
       ```
 
    6. (**final + patch releases**) Update the [API docs](https://cert-manager.io/docs/reference/api-docs/) and [CLI docs](https://cert-manager.io/docs/cli//):
