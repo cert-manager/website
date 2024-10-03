@@ -21,7 +21,7 @@ Flags:
       --acme-http01-solver-resource-request-cpu string       Defines the resource request CPU size when spawning new ACME HTTP01 challenge solver pods. (default "10m")
       --acme-http01-solver-resource-request-memory string    Defines the resource request Memory size when spawning new ACME HTTP01 challenge solver pods. (default "64Mi")
       --acme-http01-solver-run-as-non-root                   Defines the ability to run the http01 solver as root for troubleshooting issues (default true)
-      --auto-certificate-annotations strings                 The annotation consumed by the ingress-shim controller to indicate a ingress is requesting a certificate (default [kubernetes.io/tls-acme])
+      --auto-certificate-annotations strings                 The annotation consumed by the ingress-shim controller to indicate an ingress is requesting a certificate (default [kubernetes.io/tls-acme])
       --cluster-issuer-ambient-credentials                   Whether a cluster-issuer may make use of ambient credentials for issuers. 'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the ClusterIssuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata. (default true)
       --cluster-resource-namespace string                    Namespace to store resources owned by cluster scoped resources such as ClusterIssuer in. This must be specified if ClusterIssuers are enabled. (default "kube-system")
       --concurrent-workers int                               The number of concurrent workers for each controller. (default 5)
@@ -51,6 +51,7 @@ Flags:
                                                              ServerSideApply=true|false (ALPHA - default=false)
                                                              StableCertificateRequestName=true|false (BETA - default=true)
                                                              UseCertificateRequestBasicConstraints=true|false (ALPHA - default=false)
+                                                             UseDomainQualifiedFinalizer=true|false (ALPHA - default=false)
                                                              ValidateCAA=true|false (ALPHA - default=false)
   -h, --help                                                 help for controller
       --issuer-ambient-credentials                           Whether an issuer may make use of ambient credentials. 'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the Issuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata.
