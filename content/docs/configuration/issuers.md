@@ -11,6 +11,7 @@ The following list contains all known cert-manager issuer integrations.
 |------|-----------------------------|-------------------------------------|------------------------------------------------------------------------|---------------------------------------------------|-------------------------------------|----------------|
 | 🥇   | acme-issuer (in-tree)       | [📄][config:acme-issuer]            | [ACME][ca:acme]                                                        | [latest][production:acme-issuer]                  | [✔️][release:cert-manager]           | ✔️              |
 | 🥇   | venafi-enhanced-issuer      | [📄][config:venafi-enhanced-issuer] | [Venafi TLS Protect][ca:venafi-enhanced-issuer]                        | [v1.12.1][production:venafi-enhanced-issuer]      | [✔️][release:venafi-enhanced-issuer] | ❌             |
+| 🥇   | origin-ca-issuer            | [📄][config:origin-ca-issuer]       | [Cloudflare Origin CA][ca:origin-ca-issuer]                            | [supported][production:origin-ca-issuer]          | [✔️][release:origin-ca-issuer]      | ✔️              |
 | 🥈   | adcs-issuer                 | [📄][config:adcs-issuer]            | [Microsoft Active Directory<br/>Certificate Service][ca:adcs-issuer]   | -                                                 | [✔️][release:adcs-issuer]            | ✔️              |
 | 🥈   | aws-privateca-issuer        | [📄][config:aws-privateca-issuer]   | [AWS Private Certificate Authority][ca:aws-privateca-issuer]           | -                                                 | [✔️][release:aws-privateca-issuer]   | ✔️              |
 | 🥈   | ca-issuer (in-tree)         | [📄][config:ca-issuer]              | CA issuer                                                              | -                                                 | [✔️][release:cert-manager]           | ✔️              |
@@ -23,18 +24,18 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈   | ncm-issuer                  | [📄][config:ncm-issuer]             | [Nokia Netguard Certificate Manager][ca:ncm-issuer]                    | -                                                 | [✔️][release:ncm-issuer]             | ✔️              |
 | 🥈   | selfsigned-issuer (in-tree) | [📄][config:selfsigned-issuer]      | Self-Signed issuer                                                     | -                                                 | [✔️][release:cert-manager]           | ✔️              |
 | 🥈   | step-issuer                 | [📄][config:step-issuer]            | [Certificate Authority server][ca:step-issuer]                         | -                                                 | [✔️][release:step-issuer]            | ✔️              |
-| 🥈   | tcs-issuer                  | [📄][config:tcs-issuer]             | [Intel's SGX technology][ca:tcs-issuer]                                | -                                                 | [✔️][release:tcs-issuer]             | ✔️              |
 | 🥈   | vault-issuer (in-tree)      | [📄][config:vault-issuer]           | [HashiCorp Vault][ca:vault-issuer]                                     | -                                                 | [✔️][release:cert-manager]           | ✔️              |
 | 🥈   | venafi-issuer (in-tree)     | [📄][config:venafi-issuer]          | [Venafi TLS Protect][ca:venafi-issuer]                                 | -                                                 | [✔️][release:cert-manager]           | ✔️              |
-| 🥉   | cfssl-issuer                | [📄][config:cfssl-issuer]           | [CFSSL][ca:cfssl-issuer]                                               | -                                                 | [❌][release:cfssl-issuer]          | ✔️              |
+| 🥈   | cfssl-issuer                | [📄][config:cfssl-issuer]           | [CFSSL][ca:cfssl-issuer]                                               | -                                                 | [✔️][release:cfssl-issuer]          | ✔️              |
+| 🥉   | tcs-issuer                  | [📄][config:tcs-issuer]             | [Intel's SGX technology][ca:tcs-issuer]                                | -                                                 | [❌][release:tcs-issuer]             | ✔️              |
 | 🥉   | freeipa-issuer              | [📄][config:freeipa-issuer]         | [FreeIPA][ca:freeipa-issuer]                                           | -                                                 | [❌][release:freeipa-issuer]        | ✔️              |
 | 🥉   | kms-issuer                  | [📄][config:kms-issuer]             | [AWS KMS][ca:kms-issuer]                                               | -                                                 | [❌][release:kms-issuer]            | ✔️              |
-| 🥉   | origin-ca-issuer            | [📄][config:origin-ca-issuer]       | [Cloudflare Origin CA][ca:origin-ca-issuer]                            | -                                                 | [❌][release:origin-ca-issuer]      | ✔️              |
 
 </div>
 
 [production:venafi-enhanced-issuer]: https://platform.jetstack.io/documentation/academy/issue-and-approve-certificates-with-venafi-control-plane
 [production:acme-issuer]: ../tutorials/getting-started-aks-letsencrypt/README.md
+[production:origin-ca-issuer]: https://github.com/cloudflare/origin-ca-issuer/blob/trunk/README.org
 
 [//]: # (Configuration docs)
 
@@ -137,8 +138,8 @@ An end-to-end tutorial must include:
 
 Other
 
-[^1]: checked on 12th of October 2023
-[^2]: checked on 12th of October 2023
+[^1]: checked on 3rd of October 2024
+[^2]: checked on 3rd of October 2024
 
 ## Building New External Issuers
 
