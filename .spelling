@@ -87,6 +87,7 @@ APIServices
 APIs
 AWS
 Akamai
+ANDed
 Anthos
 AppRole
 approvers
@@ -106,6 +107,7 @@ BundleSource
 BundleTarget
 BundleCondition
 NamespaceSelector
+CamelCase
 CAs
 CNAME
 CNAMEs
@@ -160,6 +162,7 @@ Dean-Coakley
 DigitalOcean
 OVHCloud
 Distroless
+DoesNotExist
 DuckDuckGo
 etcd
 EC2
@@ -234,6 +237,7 @@ NameCheap
 NGINX
 NLB
 NLBs
+NotIn
 Ocado
 OmairK
 OpenAPI
@@ -343,6 +347,7 @@ coderanger
 config
 containerd
 customizable
+defaultCAPackageVersion
 distroless
 e.g.
 e2e
@@ -426,8 +431,10 @@ multivalue
 macOS
 makefile
 manual-rotation-private-key
+matchExpressions
 mechanism
 metadata
+metadata.generation
 middleware
 migrate-api-version
 misconfiguration
@@ -444,6 +451,7 @@ namespaces
 ndegory
 oauth2
 OAuth
+observedGeneration
 onwards
 openshift-supported-versions
 plaintext
@@ -472,6 +480,7 @@ runtime
 runtimes
 signoff
 sigstore
+status.condition
 stdout
 subchart
 subcommand
@@ -501,6 +510,7 @@ unredacted
 unschedule
 untrusted
 upstream
+useDefaultCAs
 userinfo
 util
 vhosakot
