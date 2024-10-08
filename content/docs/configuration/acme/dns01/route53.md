@@ -51,6 +51,11 @@ permissions:
 > specify the (optional) `hostedZoneID`. You can further tighten the policy by
 > limiting the hosted zone that cert-manager has access to (e.g.
 > `arn:aws:route53:::hostedzone/DIKER8JEXAMPLE`).
+>
+> 📖 Read about [actions supported by Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/APIReference/API_Operations_Amazon_Route_53.html),
+> in the [Amazon Route 53 API Reference](https://docs.aws.amazon.com/Route53/latest/APIReference/Welcome.html).
+>
+> 📖 Learn how [`eksctl` can automatically create the cert-manager IAM policy](https://eksctl.io/usage/iam-policies/#cert-manager-policy), if you use EKS.
 
 ## Credentials
 
