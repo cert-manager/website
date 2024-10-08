@@ -47,7 +47,7 @@ permissions:
 }
 ```
 
-> Note: The `route53:ListHostedZonesByName` statement can be removed if you
+> ℹ️ The `route53:ListHostedZonesByName` statement can be removed if you
 > specify the (optional) `hostedZoneID`. You can further tighten the policy by
 > limiting the hosted zone that cert-manager has access to (e.g.
 > `arn:aws:route53:::hostedzone/DIKER8JEXAMPLE`).
