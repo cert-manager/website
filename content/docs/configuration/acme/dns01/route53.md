@@ -15,7 +15,7 @@ how cert-manager handles DNS01 challenges.
 > [Tutorial: Deploy cert-manager on Amazon Elastic Kubernetes (EKS) and use Let's Encrypt to sign a certificate for an HTTPS website](../../../tutorials/getting-started-aws-letsencrypt/README.md),
 > which contains end-to-end instructions for those who are new to cert-manager and AWS.
 
-## Set up an IAM Role
+## Set up an IAM Policy
 
 cert-manager needs to be able to add records to Route53 in order to solve the
 DNS01 challenge. To enable this, create a IAM policy with the following
