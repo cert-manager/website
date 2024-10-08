@@ -354,6 +354,36 @@ spec:
                 name: <service-account-name> # The name of the service account created
 ```
 
+#### Referencing a long-term access key within in an Issuer or ClusterIssuer
+
+In this mechanism, cert-manager will load the credentials from a Secret resource.
+If you use an `Issuer` resource, the Secret must be in the same namespace as the Issuer.
+If you use a `ClusterIssuer` resource, the Secret must be in the `cert-manager` namespace
+or what ever value is supplied to the `--cluster-resource-namespace` [option of the cert-manager component](../../../cli/controller.md).
+Here is an example configuration for a `ClusterIssuer`:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    ...
+    solvers:
+    - dns01:
+        route53:
+          region: eu-central-1
+          accessKeyIDSecretRef:
+            name: prod-route53-credentials-secret
+            key: access-key-id
+          secretAccessKeySecretRef:
+            name: prod-route53-credentials-secret
+            key: secret-access-key
+          # (optional) you can also assume a role with these credentials
+          role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager
+```
+
 ## Cross Account Access
 
 Example: Account Y manages Route53 DNS Zones. Now you want cert-manager running in Account X (or many other accounts) to be able to manage records in Route53 zones hosted in Account Y.
@@ -419,53 +449,3 @@ And the following trust relationship (Add AWS `Service`s as needed):
   ]
 }
 ```
-
-## Creating an Issuer (or `ClusterIssuer`)
-
-Here is an example configuration for a `ClusterIssuer`:
-
-```yaml
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt-prod
-spec:
-  acme:
-    ...
-    solvers:
-
-    # example: cross-account zone management for example.com
-    # this solver uses ambient credentials (i.e. inferred from the environment or EC2 Metadata Service)
-    # to assume a role in a different account
-    - selector:
-        dnsZones:
-          - "example.com"
-      dns01:
-        route53:
-          region: us-east-1
-          hostedZoneID: DIKER8JEXAMPLE # optional, see policy above
-          role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager
-
-    # this solver handles example.org challenges
-    # and uses explicit credentials
-    - selector:
-        dnsZones:
-          - "example.org"
-      dns01:
-        route53:
-          region: eu-central-1
-          # The AWS access key ID can be specified using the literal accessKeyID parameter
-          # or retrieved from a secret using the accessKeyIDSecretRef
-          # If using accessKeyID, omit the accessKeyIDSecretRef parameter and vice-versa
-          accessKeyID: AKIAIOSFODNN7EXAMPLE
-          accessKeyIDSecretRef:
-            name: prod-route53-credentials-secret
-            key: access-key-id
-          secretAccessKeySecretRef:
-            name: prod-route53-credentials-secret
-            key: secret-access-key
-          # you can also assume a role with these credentials
-          role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager
-```
-
-Note that, as mentioned above, the pod is using `arn:aws:iam::XXXXXXXXXXX:role/cert-manager` as a credentials source in Account X, but the `ClusterIssuer` ultimately assumes the `arn:aws:iam::YYYYYYYYYYYY:role/dns-manager` role to actually make changes in Route53 zones located in Account Y.
