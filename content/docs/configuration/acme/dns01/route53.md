@@ -59,23 +59,79 @@ permissions:
 
 ## Credentials
 
-You have two options for the set up - either create a user or a role and attach
-that policy from above.  Using a role is considered best practice because you do
-not have to store permanent credentials in a secret.
+cert-manager needs an [AWS access key](https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#access_key),
+to authenticate to the Route53 API.
+An access key is defined by AWS as follows:
+> **access key**:
+> The combination of an access key ID (for example, `AKIAIOSFODNN7EXAMPLE`) and a secret access key (for example, `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`). You use access keys to sign API requests that you make to AWS.
 
-cert-manager supports two ways of specifying credentials:
+You have two options:
+1. (Legacy) Use an [IAM User and a long-term access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+2. (Best Practice) Use an [IAM Role with temporary security credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-workloads-use-roles).
 
-- explicit by providing an `accessKeyID` or an `accessKeyIDSecretRef`, and a `secretAccessKeySecretRef`
-- or implicit (using [metadata
-  service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
-  or [environment variables or credentials
-  file](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials).
+Using an IAM Role with temporary security credentials is considered best practice because:
+1. You do not have to store the long-term access key (e.g. in a Secret)
+2. You don't have to manage [access key rotation](https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#keyrotate).
+
+cert-manager supports multiple ways to get the access key
+and these can be categorized as either "ambient" or "non-ambient":
+
+**Ambient credentials**
+are credentials which are made available in the cert-manager controller Pod by one of the following mechanisms:
+- [EKS IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
+  cert-manager uses a [Kubernetes ServiceAccount token which is mounted into the cert-manager controller Pod](https://docs.aws.amazon.com/eks/latest/userguide/pod-configuration.html).
+- [EKS Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
+  cert-manager gets credentials from an [EKS Auth API which runs on every Kubernetes node](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-how-it-works.html).
+- [EC2 Instance Metadata Service (IMDS)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-metadata-security-credentials.html).
+  cert-manager gets credentials from the `iam/security-credentials/<role-name>` endpoint of IMDS.
+- [Environment variables](https://docs.aws.amazon.com/sdkref/latest/guide/environment-variables.html)
+  (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`).
+  If those environment variables are present in the cert-manager controller Pod cert-manager will use them..
+- [Shared config and credentials files](https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html)
+  (`~/.aws/config` and `~/.aws/credentials`).
+  If those files are mounted into the cert-manager controller Pod, cert-manager will use them.
+
+The advantage of ambient credentials is that they are easier to set up, well
+documented, and AWS provides ways to automate the configuration.
+The disadvantage of ambient credentials is that they are globally available to
+all ClusterIssuer and all Issuer resources, which means that in a multi-tenant
+environment, any tenant who has permission to create Issuer or ClusterIssuer may
+use the ambient credentials and gain the permissions granted to that account.
+
+> 📖 Read [AWS SDKs and Tools standardized credential providers](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html)
+> to learn how cert-manager, which uses the AWS SDK for Go V2, supports all these ambient credential sources.
+
+**Non-ambient credentials**
+are credentials which are explicitly configured on the Issuer or ClusterIssuer resource.
+For example:
+- *Access key Secret reference*:
+  where cert-manager loads a long-term access key from a Kubernetes Secret resource.
+- *ServiceAccount reference*:
+  where cert-manager gets a ServiceAccount token (signed JWT) from the Kubernetes API server,
+  and uses the STS AssumeRoleWithWebIdentity endpoint to exchange it for temporary AWS credentials.
+
+The advantage of non-ambient credentials is that cert-manager can perform Route53 operations in a multi-tenant environment.
+Each tenant can be granted permission to create and update Issuer resources in their namespace and they can provide their own AWS credentials in their namespace.
+
+> ⚠️ By default, cert-manager will only use ambient credentials for
+> `ClusterIssuer` resources, not `Issuer` resources.
+>
+> This is to prevent unprivileged users, who have permission to create Issuer
+> resources, from issuing certificates using credentials that cert-manager
+> incidentally has access to.
+> ClusterIssuer resources are cluster scoped (not namespaced) and only platform
+> administrators should be granted permission to create them.
+>
+> ⚠️ It is possible (but not recommended) to enable this authentication mechanism
+> for `Issuer` resources, by setting the `--issuer-ambient-credentials` flag on
+> the cert-manager controller to true.
 
 cert-manager also supports specifying a `role` to enable cross-account access
-and/or limit the access of cert-manager. Integration with
+or to limit the access of cert-manager.
+
+Integration with
 [`kiam`](https://github.com/uswitch/kiam) and
 [`kube2iam`](https://github.com/jtblin/kube2iam) should work out of the box.
-
 
 ## Cross Account Access
 
