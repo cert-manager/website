@@ -46,8 +46,10 @@ gendocs() {
 
 	echo "+++ Generating trust-manager reference docs..."
 
+	(cd $tmpdir && make generate-crds)
+
 	$CRDOC \
-		--resources "$tmpdir/deploy/crds/trust.cert-manager.io_bundles.yaml" \
+		--resources "$tmpdir/_bin/scratch/crds/trust.cert-manager.io_bundles.yaml" \
 		--template $REPO_ROOT/scripts/gendocs/templates-trust-manager/markdown.tmpl \
 		--output $outputdir
 }
