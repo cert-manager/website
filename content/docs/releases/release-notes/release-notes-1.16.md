@@ -223,6 +223,8 @@ In addition, massive thanks to Venafi for contributing developer time and resour
 
 ## `v1.16.1`
 
+Changes since `v1.16.0`.
+
 ### Bug or Regression
 
 - BUGFIX: Helm schema validation: the new schema validation was too strict for the "global" section. Since the global section is shared across all charts and sub-charts, we must also allow unknown fields. ([#7348](https://github.com/cert-manager/cert-manager/pull/7348), [`@inteon`](https://github.com/inteon))
@@ -231,6 +233,8 @@ In addition, massive thanks to Venafi for contributing developer time and resour
 - BUGFIX: A change in `v1.16.0` caused cert-manager's ACME ClusterIssuer to look in the wrong namespace for resources required for the issuance (e.g. credential Secrets). This is now fixed in `v1.16.1`. ([#7342](https://github.com/cert-manager/cert-manager/pull/7342), [`@inteon`](https://github.com/inteon))
 
 ## `v1.16.0`
+
+Changes since `v1.15.0`.
 
 ### Feature
 
