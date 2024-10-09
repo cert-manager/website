@@ -11,9 +11,9 @@ how cert-manager handles DNS01 challenges.
 > ℹ️ This guide assumes that your cluster is hosted on Amazon Web Services
 > (AWS) and that you already have a hosted zone in Route53.
 >
-> 📖 Read
-> [Tutorial: Deploy cert-manager on Amazon Elastic Kubernetes (EKS) and use Let's Encrypt to sign a certificate for an HTTPS website](../../../tutorials/getting-started-aws-letsencrypt/README.md),
-> which contains end-to-end instructions for those who are new to cert-manager and AWS.
+> 📖 Read the [AWS + LoadBalancer + Let's Encrypt](../../../tutorials/getting-started-aws-letsencrypt/README.md)
+> tutorial, which contains end-to-end instructions for those who are new to
+> cert-manager and AWS.
 
 ## Set up an IAM Policy
 
@@ -90,8 +90,8 @@ Ambient credentials are credentials which are made available in the cert-manager
 - [**Shared config and credentials files**](https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html):<br/>
   where cert-manager loads credentials from files (`~/.aws/config` and `~/.aws/credentials`) which are mounted into the cert-manager controller Pod.
 
-The advantage of ambient credentials is that they are easier to set up, well
-documented, and AWS provides ways to automate the configuration.
+The advantage of ambient credentials is that they are easier to set up and
+extensively documented by Amazon AWS.
 The disadvantage of ambient credentials is that they are globally available to
 all ClusterIssuer and all Issuer resources, which means that in a multi-tenant
 environment, any tenant who has permission to create Issuer or ClusterIssuer may
@@ -150,10 +150,9 @@ It is a four step process:
      name: letsencrypt-prod
    spec:
      acme:
-       ...
        solvers:
        - dns01:
-           route53 {}:
+           route53: {}
    ```
 
 #### EKS IAM Role for Service Accounts (IRSA)
@@ -260,10 +259,9 @@ A mutating webhook will automatically setup a mounted service account volume in 
      name: letsencrypt-prod
    spec:
      acme:
-       ...
        solvers:
        - dns01:
-           route53 {}:
+           route53: {}
    ```
 
 ### Non-ambient Credentials
@@ -280,6 +278,9 @@ The advantage of non-ambient credentials is that cert-manager can perform Route5
 Each tenant can be granted permission to create and update Issuer resources in their namespace and they can provide their own AWS credentials in their namespace.
 
 #### Referencing your own ServiceAccount within in an Issuer or ClusterIssuer
+
+> 📖 Read the [AWS + LoadBalancer + Let's Encrypt tutorial](../../../tutorials/getting-started-aws-letsencrypt/README.md)
+> to learn how to deploy cert-manager on EKS and use this authentication mechanism.
 
 In this configuration you can reference your own `ServiceAccounts` in your `Issuer` or `ClusterIssuer`
 and cert-manager will get a ServiceAccount token from the Kubernetes API which it will send to STS in exchange for AWS temporary credentials.
