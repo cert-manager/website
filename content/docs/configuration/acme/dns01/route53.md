@@ -125,7 +125,7 @@ spec:
     ...
     solvers:
     - dns01:
-        route53 {}:
+        route53: {}
 ```
 
 > ℹ️ Regardless of which ambient mechanism you use, the `route53` section is left empty,
