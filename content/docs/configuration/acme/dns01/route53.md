@@ -8,8 +8,7 @@ Route53 to solve DNS01 ACME challenges. It's advised you read the [DNS01
 Challenge Provider](./README.md) page first for a more general understanding of
 how cert-manager handles DNS01 challenges.
 
-> ℹ️ This guide assumes that your cluster is hosted on Amazon Web Services
-> (AWS) and that you already have a hosted zone in Route53.
+> ℹ️ This guide assumes that you already have a hosted zone in Route53.
 >
 > 📖 Read the [AWS + LoadBalancer + Let's Encrypt](../../../tutorials/getting-started-aws-letsencrypt/README.md)
 > tutorial, which contains end-to-end instructions for those who are new to
@@ -66,12 +65,15 @@ An access key is defined by AWS as follows:
 > The combination of an access key ID (for example, `AKIAIOSFODNN7EXAMPLE`) and a secret access key (for example, `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`). You use access keys to sign API requests that you make to AWS.
 
 You have two options:
-1. (Legacy) Use an [IAM User and a long-term access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-2. (Best Practice) Use an [IAM Role with temporary security credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-workloads-use-roles).
+1. (Best Practice) Use an [IAM Role with temporary security credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-workloads-use-roles).
+2. Use an [IAM User with a long-term access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
 
 Using an IAM Role with temporary security credentials is considered best practice because:
 1. You do not have to store the long-term access key (e.g. in a Secret)
 2. You don't have to manage [access key rotation](https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#keyrotate).
+
+Using an [IAM User with long-term access key](#iam-user-with-long-term-access-key) is a reasonable choice if cert-manager
+is deployed outside AWS but the DNS zone is on Route53.
 
 cert-manager supports multiple ways to get the access key and these can be categorized as either "ambient" or "non-ambient".
 
@@ -198,7 +200,7 @@ A mutating webhook will automatically setup a mounted service account volume in 
 
    - `<aws-account-id>` with the AWS account ID of the EKS cluster.
    - `<aws-region>` with the region where the EKS cluster is located.
-   - `<eks-hash>` with the hash in the EKS API URL; this will be a random 32 character hex string (example: `45DABD88EEE3A227AF0FA468BE4EF0B5`)
+   - `<eks-hash>` with the hash in the EKS API URL; this will be a random 32 character hex string (example: `45DABD88EEE3A227AF0FA468BE4EF0B5`).
    - `<namespace>` with the namespace where cert-manager is running.
    - `<service-account-name>` with the name of the `ServiceAccount` object created by cert-manager.
 
@@ -277,16 +279,19 @@ For example:
 The advantage of non-ambient credentials is that cert-manager can perform Route53 operations in a multi-tenant environment.
 Each tenant can be granted permission to create and update Issuer resources in their namespace and they can provide their own AWS credentials in their namespace.
 
-#### Referencing your own ServiceAccount within in an Issuer or ClusterIssuer
+#### IAM Role with dedicated Kubernetes ServiceAccount
 
 > 📖 Read the [AWS + LoadBalancer + Let's Encrypt tutorial](../../../tutorials/getting-started-aws-letsencrypt/README.md)
 > to learn how to deploy cert-manager on EKS and use this authentication mechanism.
 
 In this configuration you can reference your own `ServiceAccounts` in your `Issuer` or `ClusterIssuer`
 and cert-manager will get a ServiceAccount token from the Kubernetes API which it will send to STS in exchange for AWS temporary credentials.
-The advantage of this method over IRSA or Pod Identity is that each Issuer can reference a different `ServiceAccount`,
-which means you can lock down the permissions,
-such that each `ServiceAccount` is mapped to an IAM role that only has permission to update the zones it needs for that particular
+
+The advantages of this mechanism are:
+1. Each Issuer can reference a different `ServiceAccount`, which means you can lock down the permissions, such that each `ServiceAccount` is mapped to an IAM role that only has permission to update the zones it needs (unlike Pod Identity or IRSA).
+2. This mechanism works even when cert-manager is deployed outside AWS.
+
+Here's how to set it up:
 
 1. **Create a ServiceAccount**
 
@@ -328,7 +333,7 @@ such that each `ServiceAccount` is mapped to an IAM role that only has permissio
 
    - `<aws-account-id>` with the AWS account ID of the EKS cluster.
    - `<aws-region>` with the region where the EKS cluster is located.
-   - `<eks-hash>` with the hash in the EKS API URL; this will be a random 32 character hex string (example: `45DABD88EEE3A227AF0FA468BE4EF0B5`)
+   - `<eks-hash>` with the hash in the EKS API URL; this will be a random 32 character hex string (example: `45DABD88EEE3A227AF0FA468BE4EF0B5`).
    - `<namespace>` with the namespace of the `ServiceAccount` object.
    - `<service-account-name>` with the name of the `ServiceAccount` object.
 
@@ -394,12 +399,16 @@ such that each `ServiceAccount` is mapped to an IAM role that only has permissio
                    name: <service-account-name> # The name of the service account created
    ```
 
-#### Referencing a long-term access key within in an Issuer or ClusterIssuer
+#### IAM User with long-term access key
 
 In this mechanism, cert-manager will load the credentials from a Secret resource.
 If you use an `Issuer` resource, the Secret must be in the same namespace as the Issuer.
 If you use a `ClusterIssuer` resource, the Secret must be in the `cert-manager` namespace
 or what ever value is supplied to the `--cluster-resource-namespace` [option of the cert-manager component](../../../cli/controller.md).
+
+The advantages of this mechanism are that it is simple and it works even when
+cert-manager is deployed outside AWS.
+
 Here is an example configuration for a `ClusterIssuer`:
 
 ```yaml

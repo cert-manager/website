@@ -379,7 +379,7 @@ You need to prove to Let's Encrypt that you own the domain name of the certifica
 This is known as the [DNS-01 challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
 
 cert-manager can create that DNS record for you in by using the AWS Route53 API but it needs to authenticate first,
-and currently the most secure method of authentication is to use a [dedicated Kubernetes ServiceAccount token](../../configuration/acme/dns01/route53.md#referencing-your-own-serviceaccount-within-in-an-issuer-or-clusterissuer).
+and currently the most secure method of authentication is to use an [IAM Role with dedicated Kubernetes ServiceAccount](../../configuration/acme/dns01/route53.md#iam-role-with-dedicated-kubernetes-serviceaccount).
 The advantages of this method are that cert-manager will use an ephemeral Kubernetes ServiceAccount Token to authenticate to AWS and the token need not be stored in a Kubernetes Secret.
 
 > 📖 Read about [other ways to configure the ACME issuer with AWS Route53 DNS](../../configuration/acme/dns01/route53.md).
