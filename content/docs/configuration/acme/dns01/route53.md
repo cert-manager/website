@@ -98,7 +98,7 @@ environment, any tenant who has permission to create Issuer or ClusterIssuer may
 use the ambient credentials and gain the permissions granted to that account.
 
 > 📖 Read [AWS SDKs and Tools standardized credential providers](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html)
-> to learn how cert-manager, which uses the AWS SDK for Go V2, supports all these ambient credential sources.
+> to learn how cert-manager supports all these ambient credential sources.
 >
 > ⚠️ By default, cert-manager will only use ambient credentials for
 > `ClusterIssuer` resources, not `Issuer` resources.
@@ -157,7 +157,7 @@ It is a four step process:
 
 #### EKS IAM Role for Service Accounts (IRSA)
 
-IAM Roles for Service Accounts (IRSA) is another way to use ambient credentials,
+[IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) is another way to use ambient credentials,
 if you deploy cert-manager on EKS.
 It is more complicated than Pod Identity and requires coordination between the Kubernetes cluster administrator and the AWS account manager.
 It involves annotating the `cert-manager` ServiceAccount in Kubernetes, and setting up an IAM role, a trust policy and a trust relationship in AWS.
