@@ -221,7 +221,16 @@ Thanks also to the CNCF, which provides resources and support, and to the AWS op
 
 In addition, massive thanks to Venafi for contributing developer time and resources towards the continued maintenance of cert-manager projects.
 
-## Changes since `v1.15.0`
+## `v1.16.1`
+
+### Bug or Regression
+
+- BUGFIX: Helm schema validation: the new schema validation was too strict for the "global" section. Since the global section is shared across all charts and sub-charts, we must also allow unknown fields. ([#7348](https://github.com/cert-manager/cert-manager/pull/7348), [`@inteon`](https://github.com/inteon))
+- BUGFIX: Helm will now accept percentages for the `podDisruptionBudget.minAvailable` and `podDisruptionBudget.maxAvailable` values. ([#7345](https://github.com/cert-manager/cert-manager/pull/7345), [`@inteon`](https://github.com/inteon))
+- Helm: allow `enabled` to be set as a value to toggle cert-manager as a dependency. ([#7356](https://github.com/cert-manager/cert-manager/pull/7356), [`@inteon`](https://github.com/inteon))
+- BUGFIX: A change in `v1.16.0` caused cert-manager's ACME ClusterIssuer to look in the wrong namespace for resources required for the issuance (e.g. credential Secrets). This is now fixed in `v1.16.1`. ([#7342](https://github.com/cert-manager/cert-manager/pull/7342), [`@inteon`](https://github.com/inteon))
+
+## `v1.16.0`
 
 ### Feature
 
