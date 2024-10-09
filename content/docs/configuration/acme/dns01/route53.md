@@ -488,3 +488,40 @@ And the following trust relationship (Add AWS `Service`s as needed):
   ]
 }
 ```
+
+## Region
+
+If you omit the `.spec.acme.solvers.dns01.route53.region` field, cert-manager
+will get the region from the `AWS_REGION` and `AWS_DEFAULT_REGION` environment
+variables if they are set in the cert-manager controller Pod.
+
+If you use [ambient credentials](#ambient-credentials), the `AWS_REGION` and
+`AWS_DEFAULT_REGION` environment variables have a higher priority, and the
+`.spec.acme.solvers.dns01.route53.region` field will only be used if the
+environment variables are not set.
+
+The `.spec.acme.solvers.dns01.route53.region` field is ignored if you use [EKS Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html),
+because an `AWS_REGION` environment variable is added to the cert-manager controller Pod by
+the [Amazon EKS Pod Identity Agent](https://github.com/aws/eks-pod-identity-agent).
+
+The `.spec.acme.solvers.dns01.route53.region` field is ignored if you use [IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html),
+because an `AWS_REGION` environment variable is added to the cert-manager controller Pod by
+the [Amazon EKS Pod Identity Webhook](https://github.com/aws/amazon-eks-pod-identity-webhook).
+
+> ℹ️ Route53 is a global service and does not have regional endpoints, but the region
+> is used as a hint to help compute the correct AWS credential scope and partition
+> when it connects to Route53.
+>
+> 📖 Read [Amazon Route 53 endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/r53.html) and
+> [Global services](https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html)
+> to learn more.
+
+> ℹ️ STS is a regional service and cert-manager will use regional STS endpoint URLs
+> computed from the `region` field or environment variables.
+> STS is used for [IRSA credentials](#eks-iam-role-for-service-accounts-irsa), [dedicated ServiceAccount credentials](#referencing-your-own-serviceaccount-within-in-an-issuer-or-clusterissuer), and [cross account access](#cross-account-access).
+>
+> 📖 Read [Manage AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+> to learn about which regions support STS.
+>
+> 📖 Read [AWS STS Regional endpoints](https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html),
+> to learn how to configure the use of regional STS endpoints using environment variables.
