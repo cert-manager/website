@@ -228,9 +228,22 @@ A mutating webhook will automatically setup a mounted service account volume in 
 
    > ℹ️ If you're following the Cross Account example, modify the `ClusterIssuer` with the role from Account Y.
 
-3. **(optional) Update file system permissions**
+4. **(optional) Update file system permissions**
 
-   You may also need to modify the cert-manager `Deployment` with the correct file system permissions, so the `ServiceAccount` token can be read.
+   > 📢 **Please help us improve this documentation**
+   >
+   > The reason for this optional step is that on EKS Fargate and on some
+   > older versions of EKS you may observe errors such as:
+   > - `unable to read file at /var/run/secrets/eks.amazonaws.com/serviceaccount/token`
+   > - `open /var/run/secrets/eks.amazonaws.com/serviceaccount/token: permission denied`
+   >
+   > In this case, you can change the user and group of the cert-manager process
+   > so that it is able to read the mounted ServiceAccount token.
+   >
+   > Read [`cert-manager/website#697`: IRSA Needs `runAsUser: 1001`](https://github.com/cert-manager/website/issues/697)
+   > and tell us whether this step is still necessary or obsolete.
+
+   You may also need to modify the cert-manager `Deployment` with a different user and group, so the `ServiceAccount` token can be read.
 
    ```yaml
    spec:
@@ -238,6 +251,7 @@ A mutating webhook will automatically setup a mounted service account volume in 
        spec:
          securityContext:
            fsGroup: 1001
+           runAsUser: 1001
    ```
 
    The cert-manager Helm chart provides a variable for modifying cert-manager's `Deployment` like so:
@@ -245,14 +259,15 @@ A mutating webhook will automatically setup a mounted service account volume in 
    ```yaml
    securityContext:
      fsGroup: 1001
+     runAsUser: 1001
    ```
 
-4. **Restart the cert-manager Deployment**
+5. **Restart the cert-manager Deployment**
 
     Restart the cert-manager Deployment, so that the webhook can inject the
     necessary `volume`, `volumemount`, and environment variables into the Pods.
 
-5. **Create a `ClusterIssuer` resource**
+6. **Create a `ClusterIssuer` resource**
 
    ```yaml
    apiVersion: cert-manager.io/v1
