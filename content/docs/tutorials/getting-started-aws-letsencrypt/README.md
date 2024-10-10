@@ -12,8 +12,8 @@ In this tutorial you will learn how to deploy and configure cert-manager on AWS 
 and how to deploy an HTTPS web server and make it available on the Internet.
 You will learn how to configure cert-manager to get a signed certificate from Let's Encrypt,
 which will allow clients to connect to your HTTPS website securely.
-You will configure cert-manager to use the [Let's Encrypt DNS-01 challenge protocol](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge) with AWS Route53 DNS,
-using IAM Roles for Service Accounts (IRSA) to authenticate to AWS.
+You will configure cert-manager to use the [Let's Encrypt DNS-01 challenge protocol](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge) with AWS Route53 DNS.
+You will authenticate to Route53 using a [dedicated Kubernetes ServiceAccount token](../../configuration/acme/dns01/route53.md#referencing-your-own-serviceaccount-within-in-an-issuer-or-clusterissuer).
 
 # Part 1
 
@@ -379,7 +379,7 @@ You need to prove to Let's Encrypt that you own the domain name of the certifica
 This is known as the [DNS-01 challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
 
 cert-manager can create that DNS record for you in by using the AWS Route53 API but it needs to authenticate first,
-and currently the most secure method of authentication is to use [IAM roles for service accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
+and currently the most secure method of authentication is to use an [IAM Role with dedicated Kubernetes ServiceAccount](../../configuration/acme/dns01/route53.md#iam-role-with-dedicated-kubernetes-serviceaccount).
 The advantages of this method are that cert-manager will use an ephemeral Kubernetes ServiceAccount Token to authenticate to AWS and the token need not be stored in a Kubernetes Secret.
 
 > 📖 Read about [other ways to configure the ACME issuer with AWS Route53 DNS](../../configuration/acme/dns01/route53.md).
@@ -425,7 +425,7 @@ aws iam create-policy \
 EOF
 ```
 
-> ℹ️ Read the [cert-manager ACME DNS01 Route53 configuration documentation](https://cert-manager.io/docs/configuration/acme/dns01/route53),
+> ℹ️ Read the [cert-manager ACME DNS01 Route53 configuration documentation](../../configuration/acme/dns01/route53.md),
 > for more details of this IAM policy.
 
 ## Create an IAM role and associate it with a Kubernetes service account
