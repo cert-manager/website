@@ -99,3 +99,20 @@ Each cert-manager component has its own set of feature gates. They can be enable
 - cert-manager controller: [controller feature gates](https://github.com/cert-manager/cert-manager/blob/master/internal/controller/feature/features.go)
 - cert-manager webhook: [webhook feature gates](https://github.com/cert-manager/cert-manager/blob/master/internal/webhook/feature/features.go)
 - cert-manager cainjector: [cainjector feature gates](https://github.com/cert-manager/cert-manager/blob/master/internal/cainjector/feature/features.go)
+
+## Configuring webhook endpoint certificate
+
+By default, the webhook certificate is managed by the dynamic certificate service. To use your own certificate, you can use the `tlsConfig` property. Below is an example of how to set it up:
+
+```yaml
+apiVersion: webhook.config.cert-manager.io/v1alpha1
+kind: WebhookConfiguration
+tlsConfig:
+  filesystem:
+    certFile: /etc/certs/tls.crt
+    keyFile: /etc/certs/tls.key
+```
+
+> **Notes:**
+> - Using this configuration will disable the default `--dynamic-serving-` flags.
+> - Remember to mount your certificate files into the webhook deployment using volumes and volumeMounts.
