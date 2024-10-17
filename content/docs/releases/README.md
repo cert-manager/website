@@ -33,9 +33,9 @@ cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](htt
 
 ## Upcoming releases
 
-| Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] |
-|:--------:|:------------:|:---------------:|:----------------------------------------------:|
-| [1.17][] | Feb 03, 2025 | Release of 1.19 | 1.27 → 1.31 / 4.14 → 4.16                      |
+| Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
+|:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
+| [1.17][] | Feb 03, 2025 | Release of 1.19 | 1.27 → 1.31 / 4.14 → 4.16                      | 1.28 → 1.31                        |
 
 Dates in the future are not firm commitments and are subject to change.
 
