@@ -66,6 +66,12 @@ spec:
           fruit: apple
       key: "ca.crt"
 
+  # And another Secret source, but this time instead of specifying a key from the Secret data,
+  # including all certificates from every key
+  - secret:
+      name: "my-regional-cas"
+      includeAllKeys: true
+
   # A ConfigMap in the "trust" namespace; see "Trust Namespace" below for further details
   - configMap:
       name: "my-org.net"
@@ -77,6 +83,12 @@ spec:
         matchLabels: 
           fruit: apple
       key: "ca.crt"
+      
+  # And another ConfigMap source, but this time instead of specifying a key from the ConfigMap data,
+  # including all certificates from every key
+  - secret:
+      name: "my-org-cas"
+      includeAllKeys: true
 
   # A manually specified string
   - inLine: |
@@ -114,10 +126,17 @@ All sources and target options are documented in the trust-manager [API referenc
 - `inLine` - a manually specified string containing at least one certificate
 - `useDefaultCAs` - usually, a bundle of publicly trusted certificates
 
+Both `ConfigMap` and `Secret`, support specifying a data key (`key`) that contains at least one certificate or use the
+`includeAllKeys` option to include all certificates from every key in the resource. The latter is useful in dynamic 
+environments where key names are only known at runtime. When defining a `ConfigMap` or `Secret` source, the `key` and 
+`includeAllKeys` fields are mutually exclusive: only one **must** be set, but not both.
+
 Both `ConfigMap` and `Secret` also support specifying label selectors to select multiple resources at once, which is useful in dynamic
 environments where the name of the `ConfigMap` or `Secret` is known only at runtime. When adding a source, either of type `ConfigMap` or `Secret`, 
 the fields `name` and `selector` are mutually exclusive: one **must** be set, but not both.
 
+These features can be combined to, for instance, select all ConfigMaps with a specific label and include every 
+certificate from each key within those ConfigMaps.
 
 #### Targets
 
