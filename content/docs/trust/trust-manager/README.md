@@ -103,6 +103,10 @@ spec:
         linkerd.io/inject: "enabled"
 ```
 
+All sources and target options are documented in the trust-manager [API reference documentation](./api-reference.md).
+
+#### Sources
+
 `Bundle` resources currently support several source types:
 
 - `configMap` - a `ConfigMap` resource in the trust-manager namespace
@@ -110,18 +114,16 @@ spec:
 - `inLine` - a manually specified string containing at least one certificate
 - `useDefaultCAs` - usually, a bundle of publicly trusted certificates
 
-`ConfigMap` is the default target type, but as of v0.7.0 trust-manager also supports `Secret` resources as targets.
-
-Support for `Secret` targets must be explicitly enabled in the trust-manager controller; see details below under "Enable Secret targets".
-
 Both `ConfigMap` and `Secret` also support specifying label selectors to select multiple resources at once, which is useful in dynamic
 environments where the name of the `ConfigMap` or `Secret` is known only at runtime. When adding a source, either of type `ConfigMap` or `Secret`, 
 the fields `name` and `selector` are mutually exclusive: one **must** be set, but not both.
 
 
-All sources and target options are documented in the trust-manager [API reference documentation](./api-reference.md).
-
 #### Targets
+
+`ConfigMap` is the default target type, but as of v0.7.0 trust-manager also supports `Secret` resources as targets.
+
+Support for `Secret` targets must be explicitly enabled in the trust-manager controller; see details below under "Enable Secret targets".
 
 All `Bundle` targets are written to `ConfigMap`s (and/or `Secret`s) whose name matches that of the
 `Bundle`, and every target has a PEM-formatted bundle included.
