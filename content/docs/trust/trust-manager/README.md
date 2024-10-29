@@ -135,8 +135,8 @@ Both `ConfigMap` and `Secret` also support specifying label selectors to select 
 environments where the name of the `ConfigMap` or `Secret` is known only at runtime. When adding a source, either of type `ConfigMap` or `Secret`, 
 the fields `name` and `selector` are mutually exclusive: one **must** be set, but not both.
 
-These features can be combined to, for instance, select all ConfigMaps with a specific label and include every 
-certificate from each key within those ConfigMaps.
+These features can be combined to, for instance, select all Secrets with a specific label and include every 
+certificate from each key within those Secrets.
 
 #### Targets
 
