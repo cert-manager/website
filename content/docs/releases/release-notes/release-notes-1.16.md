@@ -221,7 +221,31 @@ Thanks also to the CNCF, which provides resources and support, and to the AWS op
 
 In addition, massive thanks to Venafi for contributing developer time and resources towards the continued maintenance of cert-manager projects.
 
+## `v1.16.2`
+
+This patch release makes [several changes](https://github.com/cert-manager/cert-manager/pull/7401) to how PEM input is validated in
+cert-manager, adding maximum sizes appropriate to the type of PEM data which is being parsed.
+
+This is to prevent an unacceptable slow-down in parsing specially crafted PEM data. The issue was found by Google's OSS-Fuzz project.
+
+The issue is low severity; to exploit the PEM issue would require privileged access which would likely allow Denial-of-Service through other methods.
+
+Note also that since most PEM data parsed by cert-manager comes from `ConfigMap` or `Secret` resources which have
+a max size limit of approximately 1MB, it's difficult to force cert-manager to parse large amounts of PEM data.
+
+In addition, the version of Go used to build cert-manager 1.16 was updated along with the base images.
+
+### Bug Fixes
+
+- Set a maximum size for PEM inputs which cert-manager will accept to remove possibility of taking a long time to process an input ([#7401](https://github.com/cert-manager/cert-manager/pull/7401), @SgtCoDFish)
+
+#### Other (Cleanup or Flake)
+
+- Bump go to 1.23.3 and bump base images to latest available ([#7431](https://github.com/cert-manager/cert-manager/pull/7431), @SgtCoDFish)
+
 ## `v1.16.1`
+
+cert-manager `v1.16.1` contains some fixes to Helm value schema validation, as well as a fix to the ACME ClusterIssuer.
 
 Changes since `v1.16.0`.
 

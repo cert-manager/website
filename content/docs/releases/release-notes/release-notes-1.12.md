@@ -217,6 +217,26 @@ time and resources towards the continued maintenance of cert-manager projects. V
 cert-manager 1.12 as a long term support release, meaning it will be maintained for much longer
 than other releases to provide a stable platform for enterprises to build upon.
 
+## `v1.12.14`
+
+This patch release makes [several changes](https://github.com/cert-manager/cert-manager/pull/7403) to how PEM input is validated in
+cert-manager, adding maximum sizes appropriate to the type of PEM data which is being parsed.
+
+This is to prevent an unacceptable slow-down in parsing specially crafted PEM data. The issue was found by Google's OSS-Fuzz project.
+
+The issue is low severity; to exploit the PEM issue would require privileged access which would likely allow Denial-of-Service through other methods.
+
+Note also that since most PEM data parsed by cert-manager comes from `ConfigMap` or `Secret` resources which have
+a max size limit of approximately 1MB, it's difficult to force cert-manager to parse large amounts of PEM data.
+
+This patch release also fixes [an issue](https://github.com/golang-jwt/jwt/security/advisories/GHSA-29wx-vh33-7x7r) reported by Trivy,
+although that issue is low severity and is not expected to be relevant to cert-manager.
+
+## Bug Fixes
+
+- Set a maximum size for PEM inputs which cert-manager will accept to remove possibility of taking a long time to process an input ([#7403](https://github.com/cert-manager/cert-manager/pull/7403), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix `CVE-2024-5174` in `github.com/golang-jwt/jwt/v4` ([#7407](https://github.com/cert-manager/cert-manager/pull/7407), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
 ## `v1.12.13`
 
 This patch release fixes the following vulnerabilities:

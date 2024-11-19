@@ -33,6 +33,30 @@ Thanks also to the CNCF, which provides resources and support, and to the AWS op
 
 In addition, massive thanks to Venafi for contributing developer time and resources towards the continued maintenance of cert-manager projects.
 
+## `v1.15.4`
+
+This patch release makes [several changes](https://github.com/cert-manager/cert-manager/pull/7402) to how PEM input is validated in
+cert-manager, adding maximum sizes appropriate to the type of PEM data which is being parsed.
+
+This is to prevent an unacceptable slow-down in parsing specially crafted PEM data. The issue was found by Google's OSS-Fuzz project.
+
+The issue is low severity; to exploit the PEM issue would require privileged access which would likely allow Denial-of-Service through other methods.
+
+Note also that since most PEM data parsed by cert-manager comes from `ConfigMap` or `Secret` resources which have
+a max size limit of approximately 1MB, it's difficult to force cert-manager to parse large amounts of PEM data.
+
+In addition, the version of Go used to build cert-manager 1.15 was updated along with the base images, and a Route53 bug fix was backported.
+
+### Bug Fixes
+
+- Prevent aggressive Route53 retries caused by STS authentication failures by removing the Amazon Request ID from STS errors. ([#7261](https://github.com/cert-manager/cert-manager/pull/7261), [@cert-manager-bot](https://github.com/cert-manager-bot))
+- Set a maximum size for PEM inputs which cert-manager will accept to remove possibility of taking a long time to process an input ([#7402](https://github.com/cert-manager/cert-manager/pull/7402), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+### Other
+
+- Bump go to 1.22.9 ([#7424](https://github.com/cert-manager/cert-manager/pull/7424), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+
 ## `v1.15.3`
 
 ### Bug or Regression
