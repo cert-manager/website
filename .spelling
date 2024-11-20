@@ -748,6 +748,7 @@ adcs-issuer
 cview-issuer
 cfssl-issuer
 GlobalSign
+czertainly-issuer
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
