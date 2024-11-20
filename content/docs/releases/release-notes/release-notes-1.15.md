@@ -45,6 +45,8 @@ The issue is low severity; to exploit the PEM issue would require privileged acc
 Note also that since most PEM data parsed by cert-manager comes from `ConfigMap` or `Secret` resources which have
 a max size limit of approximately 1MB, it's difficult to force cert-manager to parse large amounts of PEM data.
 
+Further details are in the [security advisory](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-r4pg-vg54-wxx4).
+
 In addition, the version of Go used to build cert-manager 1.15 was updated along with the base images, and a Route53 bug fix was backported.
 
 ### Bug Fixes
