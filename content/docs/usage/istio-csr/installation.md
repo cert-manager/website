@@ -11,6 +11,18 @@ Note that if you're following the Platform Setup guide for OpenShift, do not run
 
 ### 0. Background
 
+#### Supported Istio Versions
+
+istio-csr is only tested against a subset of Istio versions, and older Istio versions are generally dropped from tests as they reach end-of-life upstream.
+
+That said, most Istio versions work well with most istio-csr versions, and istio-csr is regularly tested against supported Istio versions for compatibility,
+as well as always being tested against the latest Istio release (including Istio pre-releases).
+
+Also note that:
+
+- For Istio Ambient support, istio-csr `v0.12.0` or higher is required
+- For Istio version 1.24 and newer, istio-csr `v0.13.0` or higher is required
+
 #### Issuer Configuration
 
 istio-csr uses cert-manager to issue Istio certificates, and needs to be able to reference an issuer resource to do this.
@@ -165,7 +177,7 @@ istioctl install -f istio-install-config.yaml
 You will be prompted for input to confirm your choice of Istio profile:
 
 ```console
-This will install the Istio 1.14.1 demo profile with ["Istio core" "Istiod" "Ingress gateways" "Egress gateways"] components into the cluster. Proceed? (y/N)
+This will install the Istio 1.24.0 profile "demo" into the cluster. Proceed?
 ```
 
 Confirm your selection by entering `y` into the console to proceed with installation.
@@ -254,16 +266,6 @@ kubectl logs $(kubectl get pod -n $NAMESPACE -o jsonpath="{.items...metadata.nam
 ```
 
 You should see some early logs similar to this example:
-
-Istio v1.12 and earlier versions:
-
-```
-2022-01-13T16:51:58.495493Z	info	CA Endpoint cert-manager-istio-csr.cert-manager.svc:443, provider Citadel
-2022-01-13T16:51:58.495817Z	info	Using CA cert-manager-istio-csr.cert-manager.svc:443 cert with certs: var/run/secrets/istio/root-cert.pem
-2022-01-13T16:51:58.495941Z	info	citadelclient	Citadel client using custom root cert: cert-manager-istio-csr.cert-manager.svc:443
-```
-
-Istio v1.13+
 
 ```
 2022-01-13T16:51:58.495493Z	info	CA Endpoint cert-manager-istio-csr.cert-manager.svc:443, provider Citadel
