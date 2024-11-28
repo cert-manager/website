@@ -3,11 +3,15 @@ title: CA
 description: 'cert-manager configuration: CA Issuers'
 ---
 
-⚠️ CA issuers are generally either for trying cert-manager out or else for advanced users with
-a good idea of how to run a PKI. To be used safely in production, CA issuers introduce complex
+<div className="warning">
+⚠️ CA issuers are generally for cert-manager demos or for advanced users with experience
+and tooling for running a PKI. To be used safely in production, CA issuers introduce complex
 planning requirements around rotation, trust store distribution and disaster recovery.
 
 If you're not planning to run your own PKI, use a different issuer type.
+
+Otherwise, be sure to read the [Important Information](#important-information) below.
+</div>
 
 The CA issuer represents a Certificate Authority whose certificate and
 private key are stored inside the cluster as a Kubernetes `Secret`.
@@ -92,3 +96,26 @@ ca-issuer     True    Signing CA verified   2m
 
 Certificates are now ready to be requested by using the CA `Issuer` named
 `ca-issuer` within the `sandbox` namespace.
+
+## Important Information
+
+The CA issuer is lightweight and is intended for experienced cluster operators who understand
+PKI and the need for planning around certificate rotation.
+
+You should bear the following in mind:
+
+- There's no automatic rotation for the CA certificate in the `Secret` you configured
+   - If running a long-lived CA issuer, you need a plan for rotating the CA certificate
+   - You should have tracking in place to warn you when the CA cert is nearing expiry
+- CA issuers will issue leaf certificates which outlive the CA if asked to do so
+    - You'll need to track the expiry of _all_ certificates in the chain
+- Updating the secret used for the CA certificate won't trigger re-issuance of leaf certificates
+    - If your CA was near expiry and your leaf certs weren't, you might need to trigger re-issuance manually
+    - `cmctl renew` may be helpful for this (see the [docs](../reference/cmctl.md#renew) for `cmctl`)
+- CA issuers don't validate that the CA you configure is a "valid" CA
+    - At a minimum, CA certs should have the basic constraints extension present with `isCA` set to true
+    - Most likely, you'll also need to set `certificate sign` on the key usages
+    - For generating a cert with cert-manager, see the [bootstrapping example](./selfsigned.md#bootstrapping-ca-issuers)
+    - cert-manager will automatically add the correct key usages if `isCA` is set to true
+    - It will accept a server certificate with `isCA: false` for example
+    - Leaf certs "issued" by such a "CA" will fail to validate in most situations
