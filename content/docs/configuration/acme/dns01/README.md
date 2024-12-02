@@ -184,6 +184,7 @@ Links to these supported providers along with their documentation are below:
 - [`stackit-cert-manager-webhook`](https://github.com/stackitcloud/stackit-cert-manager-webhook)
 - [`cert-manager-webhook-vercel`](https://github.com/rhythmbhiwani/cert-manager-webhook-vercel)
 - [`cert-manager-webhook-opentelekomcloud`](https://github.com/akyriako/cert-manager-webhook-opentelekomcloud)
+- [`cert-manager-webhook-abion`](https://github.com/abiondevelopment/cert-manager-webhook-abion)
 
 You can find more information on how to configure webhook providers [here](./webhook.md).
 
