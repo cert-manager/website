@@ -108,15 +108,14 @@ You should bear the following in mind:
    - If running a long-lived CA issuer, you need a plan for rotating the CA certificate
    - You should have tracking in place to warn you when the CA cert is nearing expiry
 - CA issuers will issue leaf certificates which outlive the CA
-    - There is no check performed on the duration of the leaf relative to the duration of the CA
-    - You'll need to track the expiry of _all_ certificates in the chain
+   - There is no check performed on the duration of the leaf relative to the duration of the CA
+   - You'll need to track the expiry of _all_ certificates in the chain
 - Updating the secret used for the CA certificate won't trigger re-issuance of leaf certificates
-    - If your CA was near expiry and your leaf certs weren't, you might need to manually trigger re-issuance of the leaf certs
-    - `cmctl renew` may be helpful for this (see the [docs](../reference/cmctl.md#renew) for `cmctl`)
+   - If your CA was near expiry and your leaf certs weren't, you'll need to manually trigger re-issuance of the leaf certs
+   - `cmctl renew` may be helpful for this (see the [docs](../reference/cmctl.md#renew) for `cmctl`)
 - CA issuers don't validate that the CA you configure is a "valid" CA
-    - At a minimum, CA certs should have the basic constraints extension present with `isCA` set to true
-    - Most likely, you'll also need to set `certificate sign` on the key usages
-    - For generating a cert with cert-manager, see the [bootstrapping example](./selfsigned.md#bootstrapping-ca-issuers)
-    - cert-manager will automatically add the correct key usages if `isCA` is set to true
-    - It will accept a server certificate with `isCA: false` for example
-    - Leaf certs "issued" by such a "CA" will fail to validate in most situations
+   - At a minimum, CA certs should have the basic constraints extension present with `isCA` set to true
+   - The basic constraints extension with `isCA` set to true is required, but other requirements are not checked
+   - Most likely, you'll also need to set `certificate sign` on the key usages
+   - For generating a cert with cert-manager - which automatically sets the correct usages - see the [bootstrapping example](./selfsigned.md#bootstrapping-ca-issuers)
+   - Other constraints - such as name constraints or the CA "max path length" - are not validated at the time of issuance
