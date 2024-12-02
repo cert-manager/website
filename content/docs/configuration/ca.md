@@ -107,10 +107,11 @@ You should bear the following in mind:
 - There's no automatic rotation for the CA certificate in the `Secret` you configured
    - If running a long-lived CA issuer, you need a plan for rotating the CA certificate
    - You should have tracking in place to warn you when the CA cert is nearing expiry
-- CA issuers will issue leaf certificates which outlive the CA if asked to do so
+- CA issuers will issue leaf certificates which outlive the CA
+    - There is no check performed on the duration of the leaf relative to the duration of the CA
     - You'll need to track the expiry of _all_ certificates in the chain
 - Updating the secret used for the CA certificate won't trigger re-issuance of leaf certificates
-    - If your CA was near expiry and your leaf certs weren't, you might need to trigger re-issuance manually
+    - If your CA was near expiry and your leaf certs weren't, you might need to manually trigger re-issuance of the leaf certs
     - `cmctl renew` may be helpful for this (see the [docs](../reference/cmctl.md#renew) for `cmctl`)
 - CA issuers don't validate that the CA you configure is a "valid" CA
     - At a minimum, CA certs should have the basic constraints extension present with `isCA` set to true
