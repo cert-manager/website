@@ -30,10 +30,13 @@ you can disable the default approver by [Customizing the Chart Before Installing
 disableAutoApproval: true
 ```
 
-Here's a example which reconfigure an installed cert-manager to run without auto-approver:
+If you already have cert-manager installed, you can reconfigure it to disable the default approver
+as in the example below. Note that doing this in a running cluster with no other approval configured
+will stop all issuance (as no certificate requests will be approved)!
 
 ```terminal
-# ⚠️ This Helm option is only available in cert-manager v1.15.0 and later.
+# ⚠️ The disableAutoApproval Helm option is only available in cert-manager v1.15.0 and later.
+# ⚠️ DANGER: Only do this in a cluster if you're sure it's safe!
 
 existing_cert_manager_version=$(helm get metadata -n cert-manager cert-manager | grep '^VERSION' | awk '{ print $2 }')
 helm upgrade cert-manager jetstack/cert-manager \
