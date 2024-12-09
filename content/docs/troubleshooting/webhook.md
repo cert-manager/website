@@ -693,12 +693,23 @@ In another shell session, check that you can reach the webhook:
 
 ```sh
 curl -vsS --resolve cert-manager-webhook.cert-manager.svc:10250:127.0.0.1 \
+    -H "Content-Type: application/json" \
     --service-name cert-manager-webhook-ca \
     --cacert <(kubectl -n cert-manager get secret cert-manager-webhook-ca -ojsonpath='{.data.ca\.crt}' | base64 -d) \
     https://cert-manager-webhook.cert-manager.svc:10250/validate 2>&1 -d@- <<'EOF' | sed '/^* /d; /bytes data]$/d; s/> //; s/< //'
 {"kind":"AdmissionReview","apiVersion":"admission.k8s.io/v1","request":{"requestKind":{"group":"cert-manager.io","version":"v1","kind":"Certificate"},"requestResource":{"group":"cert-manager.io","version":"v1","resource":"certificates"},"name":"foo","namespace":"default","operation":"CREATE","object":{"apiVersion":"cert-manager.io/v1","kind":"Certificate","spec":{"dnsNames":["foo"],"issuerRef":{"group":"cert-manager.io","kind":"Issuer","name":"letsencrypt"},"secretName":"foo","usages":["digital signature"]}}}}
 EOF
 ```
+
+> ℹ️ if the `-H "Content-Type: application/json"` is omitted from the command above, you are likely
+> to see a response like:
+> 
+> ```json
+> {"response":{"uid":"","allowed":false,"status":{"metadata":{},"message":"contentType=application/x-www-form-urlencoded, expected application/json","code":400}}}
+> ```
+> 
+> This is because the the default content type for curl is `application/x-www-form-urlencoded` but
+> it is irrelevant to the troubleshooting effort.
 
 The happy output looks like this:
 
