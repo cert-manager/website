@@ -107,7 +107,7 @@ sample deployment and an associated service:
 ```yaml file=./example/service.yaml
 ```
 
-You can create download and reference these files locally, or you can
+You can download and reference these files locally, or you can
 reference them from the GitHub source repository for this documentation.
 To install the example service from the tutorial files straight from GitHub, do
 the following:
