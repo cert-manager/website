@@ -17,7 +17,7 @@ certificate will be unique to each Pod and will be stored on disk to the node
 that the Pod is scheduled to.
 
 The life cycle of the certificate key pair matches that of the Pod; the certificate is issued
-when the Pod is creation, and destroyed during termination.
+when the Pod is created, and destroyed during termination.
 
 This driver also handles renewal of live certificates on the fly.
 
@@ -70,8 +70,8 @@ node, containing that Pods information as well as the attributes detailed from
 the in-line volume attributes. From this, the driver will generate a private key
 as well as a certificate request based upon that key using information built
 from the volume attributes. The driver will create a `CertificateRequest`
-resource in the same namespace in the Pod that, if valid, cert-manager will
-return a signed certificate.
+resource in the same namespace as the Pod. If the request is valid, cert-manager
+will return a signed certificate.
 
 The resulting signed certificate and generated key will be written to that
 node's file system to be mounted to the Pods file system. Since the driver needs

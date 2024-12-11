@@ -31,7 +31,7 @@ install trust-manager.
 
 ## Usage
 
-trust-manager is intentionally simple, adding just one new Kubernetes `CustomResourceDefintion`: `Bundle`.
+trust-manager is intentionally simple, adding just one new Kubernetes `CustomResourceDefinition`: `Bundle`.
 
 A `Bundle` represents a set of X.509 certificates that should be distributed across a cluster.
 
