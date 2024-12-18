@@ -531,7 +531,7 @@ To instead only need to specify the configuration important to them, for example
 ```
 🔗 <a href="cert-test-minimal.yaml">`cert-test-minimal.yaml`</a>
 
-With this policy we achieved our objective and have enabled users to submit minimal `Certifiate` resources.
+With this policy we achieved our objective and have enabled users to submit minimal `Certificate` resources.
 This completes our fifth [use case](#use-cases), with only a single field contained within the specification, the `dnsNames` entry.
 Every other specified field was automatically defaulted using Kyverno with `ClusterPolicy` which would typically be setup by a platform administrator.
 

@@ -187,10 +187,11 @@ Besides the annotation, it is necessary that each ingress possess a unique `tls.
 The ingress-shim sub-component is deployed automatically as part of
 installation.
 
-If you would like to use the old
-[kube-lego](https://github.com/jetstack/kube-lego) `kubernetes.io/tls-acme:
-"true"` annotation for fully automated TLS, you will need to configure a default
-`Issuer` when deploying cert-manager. This can be done by adding the following
+The old [kube-lego](https://github.com/jetstack/kube-lego) `kubernetes.io/tls-acme: "true"`
+annotation is an alternate method to fully automated TLS.
+If this annotation is set, the other annotations are not needed,
+but in order to use it you will need to configure a default Issuer when deploying cert-manager.
+This can be done by adding the following
 `--set` when deploying using Helm:
 
 ```bash
@@ -212,7 +213,11 @@ In the above example, cert-manager will create `Certificate` resources that
 reference the `ClusterIssuer` `letsencrypt-prod` for all Ingresses that have a
 `kubernetes.io/tls-acme: "true"` annotation.
 
-Issuers configured via annotations have a preference over the default issuer. If a default issuer is configured via CLI flags and a `cert-manager.io/cluster-issuer` or `cert-manager.io/issuer` annotation also has been added to an Ingress, the created `Certificate` will refer to the issuer configured via annotation.
+Issuers configured via specific annotations have a preference over the default issuer. If a default issuer is configured via CLI flags and a `cert-manager.io/cluster-issuer` or `cert-manager.io/issuer` annotation also has been added to an Ingress, the created `Certificate` will refer to the issuer configured via annotation.
+
+When `kubernetes.io/tls-acme: "true"` hasn't been set, automatic certificate deployment may still occur based on the `cert-manager.io/issuer`, `cert-manager.io/issuer-kind`, and `cert-manager.io/issuer-group` annotations.
+
+If all annotations are absent, then manual deployment is necessary: create Certificate resources directly, and assign the resulting Secret to the Ingress.
 
 For more information on deploying cert-manager, read the [installation
 guide](../installation/README.md).

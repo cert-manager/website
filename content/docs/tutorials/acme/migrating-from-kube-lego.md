@@ -6,7 +6,7 @@ description: 'cert-manager tutorials: Migrating from kube-lego'
 [kube-lego](https://github.com/jetstack/kube-lego) is an older Jetstack project
 for obtaining TLS certificates from Let's Encrypt (or another ACME server).
 
-Since cert-managers release, kube-lego has been gradually deprecated in favor
+Since cert-manager's release, kube-lego has been gradually deprecated in favor
 of this project. There are a number of key differences between the two:
 
 | Feature                                   | kube-lego                        | cert-manager           |
