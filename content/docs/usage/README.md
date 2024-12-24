@@ -15,7 +15,7 @@ There are several use cases and methods for requesting certificates through cert
   in your cluster.
 - [Securing OpenFaaS functions](https://docs.openfaas.com/reference/ssl/kubernetes-with-cert-manager/):
   Secure your OpenFaaS services using cert-manager.
-- [Integration with Garden](https://docs.garden.io/guides/cert-manager-integration): Garden is a
+- [Integration with Garden](https://github.com/garden-io/garden/tree/main/examples/cert-manager-ext-dns): Garden is a
   developer tool for developing Kubernetes applications which has first class
   support for integrating cert-manager.
 - [Securing Knative](https://knative.dev/docs/serving/encryption/enabling-automatic-tls-certificate-provisioning/): Secure

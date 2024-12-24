@@ -218,7 +218,7 @@ startupapicheck:
 > which obviates the need to explicitly set the tolerations in the Helm chart.
 >
 > ℹ️ Alternatively, you could use [Kyverno](https://kyverno.io/docs/) to limit which tolerations Pods are allowed to use.
-> Read [Restrict control plane scheduling](https://kyverno.io/policies/other/res/restrict-controlplane-scheduling/restrict-controlplane-scheduling/) as a starting point.
+> Read [Restrict control plane scheduling](https://kyverno.io/policies/other/restrict-controlplane-scheduling/restrict-controlplane-scheduling/) as a starting point.
 
 ## High Availability
 
@@ -524,7 +524,7 @@ or if there is a bug in one of the other threads which causes the process to dea
 
 ## Restrict Auto-Mount of Service Account Tokens
 
-This recommendation is described in the [Kyverno Policy Catalogue](https://kyverno.io/policies/other/res/restrict-automount-sa-token/restrict-automount-sa-token/) as follows:
+This recommendation is described in the [Kyverno Policy Catalogue](https://kyverno.io/policies/other/restrict-automount-sa-token/restrict-automount-sa-token/) as follows:
 > Kubernetes automatically mounts ServiceAccount credentials in each Pod. The
 > ServiceAccount may be assigned roles allowing Pods to access API resources.
 > Blocking this ability is an extension of the least privilege best practice and
