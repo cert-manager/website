@@ -186,7 +186,20 @@ $ kubectl create secret generic \
 
 ### Username / Password Authentication
 
-> **Note**: when using username/password authentification, cert-manager will manage the generation of access token for you . It will also get a refresh token to be used to query a new access token once expired. Follow the procedure on the section below to create an application with the appropriate scope and ID.
+> **Note**: when using username/password authentification, cert-manager will manage the generation of access token for you . It will also get a refresh token to be used to query a new access token once expired.
+
+1. Create a new user with sufficient privileges to manage and revoke certificates in a particular policy folder (zone).
+
+   E.g. `k8s-xyz-automation`
+
+2. [Create a new application integration](https://docs.venafi.com/Docs/24.3/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creating.php)
+
+   Create an application integration with name and ID `cert-manager.io`.
+   Set the "Base Access Settings" to `certificate: manage,revoke`.
+
+   "Edit Access" to the new application integration, and allow it to be used by the user you created earlier.
+   
+4. Save the credentials to a Secret in the Kubernetes cluster
 
 ```bash
 $ kubectl create secret generic \
