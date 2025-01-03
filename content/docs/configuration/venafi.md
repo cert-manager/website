@@ -151,7 +151,7 @@ credentials.
 
 3. [Create a new application integration](https://docs.venafi.com/Docs/24.3/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creating.php)
 
-   Create an application integration with name and ID `cert-manager`.
+   Create an application integration with name and ID `cert-manager.io`.
    Set the "Base Access Settings" to `certificate: manage,revoke`.
 
    "Edit Access" to the new application integration, and allow it to be used by the user you created earlier.
@@ -163,7 +163,7 @@ credentials.
      --username k8s-xyz-automation \
      --password somepassword \
      -u https://tpp.example.com/vedsdk \
-     --client-id cert-manager \
+     --client-id cert-manager.io \
      --scope "certificate:manage,revoke"
    ```
 
@@ -186,19 +186,7 @@ $ kubectl create secret generic \
 
 ### Username / Password Authentication
 
-> ⚠️ When you supply a Venafi TPP username and password,
-> cert-manager uses an older authentication method which is called "API Keys",
-> which has been deprecated since Venafi TPP `19.2`.
->
-> Beginning in Venafi TPP `22.2`, "API Keys" are disabled by default.
-> You will need to contact Venafi customer support for a special license key which will allow you to re-enable the "API Keys" feature,
-> so that you can continue to use username and password authentication with cert-manager.
->
-> In Venafi TPP `22.3`, the "API Keys" feature will be permanently removed,
-> and you will need to use access-token authentication instead.
->
-> 📖 Read [Deprecated functionality from Venafi Platform](https://docs.venafi.com/22.3/deprecation-list-current)
-> and [Functionality Scheduled for Deprecation](https://support.venafi.com/hc/en-us/articles/115001662292) for more information.
+> **Note**: when using username/password authentification, cert-manager will manage the generation of access token for you . It will also get a refresh token to be used to query a new access token once expired. Follow the procedure on the section below to create an application with the appropriate scope and ID.
 
 ```bash
 $ kubectl create secret generic \
