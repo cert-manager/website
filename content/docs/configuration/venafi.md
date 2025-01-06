@@ -152,7 +152,7 @@ credentials.
 3. [Create a new application integration](https://docs.venafi.com/Docs/24.3/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creating.php)
 
    Create an application integration with name and ID `cert-manager.io`.
-   Set the "Base Access Settings" to `certificate: manage,revoke`.
+   Set the "Base Access Settings" to `certificate: manage`.
 
    "Edit Access" to the new application integration, and allow it to be used by the user you created earlier.
 
@@ -195,7 +195,7 @@ $ kubectl create secret generic \
 2. [Create a new application integration](https://docs.venafi.com/Docs/24.3/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creating.php)
 
    Create an application integration with name and ID `cert-manager.io`.
-   Set the "Base Access Settings" to `certificate: manage,revoke`.
+   Set the "Base Access Settings" to `certificate: manage`.
 
    "Edit Access" to the new application integration, and allow it to be used by the user you created earlier.
    
@@ -208,13 +208,15 @@ $ kubectl create secret generic \
        --from-literal=username='YOUR_TPP_USERNAME_HERE' \
        --from-literal=password='YOUR_TPP_PASSWORD_HERE'
 ```
-
-> Note: If you are configuring your issuer as a `ClusterIssuer` resource in
-> order to issue `Certificates` across your whole cluster, you must set the
-> `--namespace` parameter to `cert-manager`, which is the default `Cluster
-> Resource Namespace`. The `Cluster Resource Namespace` can be configured
-> through the `--cluster-resource-namespace` flag on the cert-manager controller
-> component.
+> Note: By default cert-manager uses `cert-manager.io` as client ID when authentificating to venafi. You can customize this by adding `client-id` key to the secret:
+>```bash
+>$ kubectl create secret generic \
+>       tpp-secret \
+>       --namespace=<NAMESPACE OF YOUR ISSUER RESOURCE> \
+>       --from-literal=username='YOUR_TPP_USERNAME_HERE' \
+>       --from-literal=password='YOUR_TPP_PASSWORD_HERE' \
+>       --from-literal=client-id='YOUR_TPP_CLIENT-ID_HERE'
+>```
 
 These credentials will be used by cert-manager to interact with your Venafi TPP
 instance. Username attribute must be adhere to the `<identity
@@ -224,6 +226,13 @@ Once the Secret containing credentials has been created, you can create your
 `Issuer` or `ClusterIssuer` resource. If you are creating a `ClusterIssuer`
 resource, you must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
+
+> Note: If you are configuring your issuer as a `ClusterIssuer` resource in
+> order to issue `Certificates` across your whole cluster, you must set the
+> `--namespace` parameter to `cert-manager`, which is the default `Cluster
+> Resource Namespace`. The `Cluster Resource Namespace` can be configured
+> through the `--cluster-resource-namespace` flag on the cert-manager controller
+> component.
 
 Save the below content after making your amendments to a file named
 `tpp-issuer.yaml`.
