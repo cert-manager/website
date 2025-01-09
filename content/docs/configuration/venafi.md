@@ -177,16 +177,16 @@ credentials.
 
 5. Save the access-token to a Secret in the Kubernetes cluster
 
-```bash
-$ kubectl create secret generic \
-       tpp-secret \
-       --namespace=<NAMESPACE OF YOUR ISSUER RESOURCE> \
-       --from-literal=access-token='YOUR_TPP_ACCESS_TOKEN'
-```
+    ```bash
+    $ kubectl create secret generic \
+          tpp-secret \
+          --namespace=<NAMESPACE OF YOUR ISSUER RESOURCE> \
+          --from-literal=access-token='YOUR_TPP_ACCESS_TOKEN'
+    ```
 
 ### Username / Password Authentication
 
-> **Note**: when using username/password authentification, cert-manager will manage the generation of access token for you . It will also get a refresh token to be used to query a new access token once expired.
+> **Note**: when using username/password authentification, cert-manager will manage the generation of access token for you . As of now we don't use refresh tokens to renew access token, Make sure that the venafi application is appropriately configured.
 
 1. Create a new user with sufficient privileges to manage and revoke certificates in a particular policy folder (zone).
 
@@ -199,15 +199,17 @@ $ kubectl create secret generic \
 
    "Edit Access" to the new application integration, and allow it to be used by the user you created earlier.
    
-4. Save the credentials to a Secret in the Kubernetes cluster
+3. Save the credentials to a Secret in the Kubernetes cluster
 
-```bash
-$ kubectl create secret generic \
-       tpp-secret \
-       --namespace=<NAMESPACE OF YOUR ISSUER RESOURCE> \
-       --from-literal=username='YOUR_TPP_USERNAME_HERE' \
-       --from-literal=password='YOUR_TPP_PASSWORD_HERE'
-```
+    ```bash
+    $ kubectl create secret generic \
+          tpp-secret \
+          --namespace=<NAMESPACE OF YOUR ISSUER RESOURCE> \
+          --from-literal=username='YOUR_TPP_USERNAME_HERE' \
+          --from-literal=password='YOUR_TPP_PASSWORD_HERE'
+    ```
+
+
 > Note: By default cert-manager uses `cert-manager.io` as client ID when authentificating to venafi. You can customize this by adding `client-id` key to the secret:
 >```bash
 >$ kubectl create secret generic \
