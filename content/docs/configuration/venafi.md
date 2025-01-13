@@ -188,7 +188,7 @@ credentials.
 
 > **Note**: when using username/password authentification, cert-manager will manage the generation of access token for you . As of now we don't use refresh tokens to renew access token, Make sure that the venafi application is appropriately configured.
 
-1. Create a new user with sufficient privileges to manage and revoke certificates in a particular policy folder (zone).
+1. Create a new user with sufficient privileges to manage certificates in a particular policy folder (zone).
 
    E.g. `k8s-xyz-automation`
 
