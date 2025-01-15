@@ -186,7 +186,7 @@ credentials.
 
 ### Username / Password Authentication
 
-> **Note**: when using username/password authentification, cert-manager will manage the generation of access token for you . As of now we don't use refresh tokens to renew access token, Make sure that the venafi application is appropriately configured.
+> **Note**: when using username/password authentication, cert-manager will manage the generation of access token for you . As of now we don't use refresh tokens to renew access token, Make sure that the Venafi application is appropriately configured.
 
 1. Create a new user with sufficient privileges to manage certificates in a particular policy folder (zone).
 
@@ -210,7 +210,7 @@ credentials.
     ```
 
 
-> Note: By default cert-manager uses `cert-manager.io` as client ID when authentificating to venafi. You can customize this by adding `client-id` key to the secret:
+> Note: By default cert-manager uses `cert-manager.io` as client ID when authenticating to Venafi. You can customize this by adding `client-id` key to the secret:
 >```bash
 >$ kubectl create secret generic \
 >       tpp-secret \
