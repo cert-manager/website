@@ -249,7 +249,7 @@ page if a step is missing or if it is outdated.
       ```
 
    4. (**final + patch release of the latest minor version**) Bump the latest
-      cert-manager version variable in the `variables.json` file.
+      cert-manager version variable in the `content/docs/variables.json` file.
 
       ```diff
       -"cert_manager_latest_version": "v1.14.2",

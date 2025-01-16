@@ -195,6 +195,7 @@ Read [cert-manager issue 6753](https://github.com/cert-manager/cert-manager/issu
 ## Community
 
 Thanks to all our open-source contributors with commits in this release, including:
+
 [`@Guitarkalle`](https://github.com/Guitarkalle),
 [`@Jasper-Ben`](https://github.com/Jasper-Ben),
 [`@aidy`](https://github.com/aidy),
@@ -210,6 +211,7 @@ Thanks to all our open-source contributors with commits in this release, includi
 [`@sankalp-at-gh`](https://github.com/sankalp-at-gh).
 
 Thanks also to the following cert-manager maintainers for their contributions during this release:
+
 [`@SgtCoDFish`](https://github.com/SgtCoDFish),
 [`@ThatsMrTalbot`](https://github.com/ThatsMrTalbot),
 [`@inteon`](https://github.com/inteon),
@@ -220,6 +222,24 @@ Equally thanks to everyone who provided feedback, helped users and raised issues
 Thanks also to the CNCF, which provides resources and support, and to the AWS open source team for being good community members and for their maintenance of the PrivateCA Issuer.
 
 In addition, massive thanks to Venafi for contributing developer time and resources towards the continued maintenance of cert-manager projects.
+
+## `v1.16.3`
+
+cert-manager `v1.16.3` is a patch release mainly focused around bumping dependencies to address reported CVEs: `CVE-2024-45337` and `CVE-2024-45338`.
+
+We don't believe that cert-manager is actually vulnerable; this release is instead intended to satisfy vulnerability scanners.
+
+It also includes a bug fix to the new `renewBeforePercentage` field. If you were using `renewBeforePercentage`, see [PR #7421](https://github.com/cert-manager/cert-manager/pull/7421) for more information.
+
+### Bug Fixes
+
+- Bump `golang.org/x/net` and `golang.org/x/crypto` to address `CVE-2024-45337` and `CVE-2024-45338` ([#7485](https://github.com/cert-manager/cert-manager/pull/7485), [@erikgb](https://github.com/erikgb))
+- Fix the behavior of `renewBeforePercentage` to comply with its spec ([#7441](https://github.com/cert-manager/cert-manager/pull/7441), [@cert-manager-bot](https://github.com/cert-manager-bot))
+
+### Other
+
+- Bump go to 1.23.4 ([#7489](https://github.com/cert-manager/cert-manager/pull/7489), [@erikgb](https://github.com/erikgb))
+- Bump base images to latest available ([#7508](https://github.com/cert-manager/cert-manager/pull/7508), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## `v1.16.2`
 
@@ -241,7 +261,7 @@ In addition, the version of Go used to build cert-manager 1.16 was updated along
 
 - Set a maximum size for PEM inputs which cert-manager will accept to remove possibility of taking a long time to process an input ([#7401](https://github.com/cert-manager/cert-manager/pull/7401), @SgtCoDFish)
 
-#### Other (Cleanup or Flake)
+### Other (Cleanup or Flake)
 
 - Bump go to 1.23.3 and bump base images to latest available ([#7431](https://github.com/cert-manager/cert-manager/pull/7431), @SgtCoDFish)
 
@@ -251,7 +271,7 @@ cert-manager `v1.16.1` contains some fixes to Helm value schema validation, as w
 
 Changes since `v1.16.0`.
 
-### Bug or Regression
+### Bug Fixes
 
 - BUGFIX: Helm schema validation: the new schema validation was too strict for the "global" section. Since the global section is shared across all charts and sub-charts, we must also allow unknown fields. ([#7348](https://github.com/cert-manager/cert-manager/pull/7348), [`@inteon`](https://github.com/inteon))
 - BUGFIX: Helm will now accept percentages for the `podDisruptionBudget.minAvailable` and `podDisruptionBudget.maxAvailable` values. ([#7345](https://github.com/cert-manager/cert-manager/pull/7345), [`@inteon`](https://github.com/inteon))
