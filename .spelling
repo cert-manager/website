@@ -113,6 +113,8 @@ BundleTarget
 BundleCondition
 NamespaceSelector
 CamelCase
+Cyberark
+CyberArk
 CAs
 CNAME
 CNAMEs
@@ -530,8 +532,13 @@ v1.12.1
 v1.12.2
 v1.12.3
 v1.12.4
+v1.12.
 v1.13
+v1.14
+v1.15
+v1.15.
 v1.16
+v1.16.
 v1.19
 v1.5
 v1.5.0
