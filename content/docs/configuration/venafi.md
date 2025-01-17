@@ -186,7 +186,7 @@ credentials.
 
 ### Username / Password Authentication
 
-> **Note**: when using username/password authentication, cert-manager will manage the generation of access token for you . As of now we don't use refresh tokens to renew access token, Make sure that the Venafi application is appropriately configured.
+> **Note**: when using username  / password authentication, cert-manager will manage the generation of access token for you . cert-manager does not use refresh tokens to renew access token. 
 
 1. Create a new user with sufficient privileges to manage certificates in a particular policy folder (zone).
 
@@ -221,7 +221,7 @@ credentials.
 >```
 
 These credentials will be used by cert-manager to interact with your Venafi TPP
-instance. Username attribute must be adhere to the `<identity
+instance. Username attribute must adhere to the `<identity
 provider>:<username>` format.  For example: `local:admin`.
 
 Once the Secret containing credentials has been created, you can create your
@@ -229,12 +229,12 @@ Once the Secret containing credentials has been created, you can create your
 resource, you must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
 
-> Note: If you are configuring your issuer as a `ClusterIssuer` resource in
-> order to issue `Certificates` across your whole cluster, you must set the
-> `--namespace` parameter to `cert-manager`, which is the default `Cluster
-> Resource Namespace`. The `Cluster Resource Namespace` can be configured
+> ℹ️  If you are using a `ClusterIssuer` resource, the Secret containing the credentials must be in the `Cluster
+> Resource Namespace`, which is `cert-manager` by default. The `Cluster Resource Namespace` can be configured
 > through the `--cluster-resource-namespace` flag on the cert-manager controller
 > component.
+> 
+> 📖 Read [Issuer Configuration](./README.md#cluster-resource-namespace) to learn more about the concept of a ClusterIssuer and the Cluster Resource Namespace
 
 Save the below content after making your amendments to a file named
 `tpp-issuer.yaml`.
