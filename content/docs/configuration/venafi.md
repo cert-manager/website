@@ -151,8 +151,8 @@ credentials.
 
 3. [Create a new application integration](https://docs.venafi.com/Docs/24.3/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creating.php)
 
-   Create an application integration with name and ID `cert-manager`.
-   Set the "Base Access Settings" to `certificate: manage,revoke`.
+   Create an application integration with name and ID `cert-manager.io`.
+   Set the "Base Access Settings" to `certificate: manage`.
 
    "Edit Access" to the new application integration, and allow it to be used by the user you created earlier.
 
@@ -163,7 +163,7 @@ credentials.
      --username k8s-xyz-automation \
      --password somepassword \
      -u https://tpp.example.com/vedsdk \
-     --client-id cert-manager \
+     --client-id cert-manager.io \
      --scope "certificate:manage,revoke"
    ```
 
@@ -177,52 +177,64 @@ credentials.
 
 5. Save the access-token to a Secret in the Kubernetes cluster
 
-```bash
-$ kubectl create secret generic \
-       tpp-secret \
-       --namespace=<NAMESPACE OF YOUR ISSUER RESOURCE> \
-       --from-literal=access-token='YOUR_TPP_ACCESS_TOKEN'
-```
+    ```bash
+    $ kubectl create secret generic \
+          tpp-secret \
+          --namespace=<NAMESPACE OF YOUR ISSUER RESOURCE> \
+          --from-literal=access-token='YOUR_TPP_ACCESS_TOKEN'
+    ```
 
 ### Username / Password Authentication
 
-> ⚠️ When you supply a Venafi TPP username and password,
-> cert-manager uses an older authentication method which is called "API Keys",
-> which has been deprecated since Venafi TPP `19.2`.
->
-> Beginning in Venafi TPP `22.2`, "API Keys" are disabled by default.
-> You will need to contact Venafi customer support for a special license key which will allow you to re-enable the "API Keys" feature,
-> so that you can continue to use username and password authentication with cert-manager.
->
-> In Venafi TPP `22.3`, the "API Keys" feature will be permanently removed,
-> and you will need to use access-token authentication instead.
->
-> 📖 Read [Deprecated functionality from Venafi Platform](https://docs.venafi.com/22.3/deprecation-list-current)
-> and [Functionality Scheduled for Deprecation](https://support.venafi.com/hc/en-us/articles/115001662292) for more information.
+> **Note**: when using username  / password authentication, cert-manager will manage the generation of access token for you . cert-manager does not use refresh tokens to renew access token. 
 
-```bash
-$ kubectl create secret generic \
-       tpp-secret \
-       --namespace=<NAMESPACE OF YOUR ISSUER RESOURCE> \
-       --from-literal=username='YOUR_TPP_USERNAME_HERE' \
-       --from-literal=password='YOUR_TPP_PASSWORD_HERE'
-```
+1. Create a new user with sufficient privileges to manage certificates in a particular policy folder (zone).
 
-> Note: If you are configuring your issuer as a `ClusterIssuer` resource in
-> order to issue `Certificates` across your whole cluster, you must set the
-> `--namespace` parameter to `cert-manager`, which is the default `Cluster
-> Resource Namespace`. The `Cluster Resource Namespace` can be configured
-> through the `--cluster-resource-namespace` flag on the cert-manager controller
-> component.
+   E.g. `k8s-xyz-automation`
+
+2. [Create a new application integration](https://docs.venafi.com/Docs/24.3/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creating.php)
+
+   Create an application integration with name and ID `cert-manager.io`.
+   Set the "Base Access Settings" to `certificate: manage`.
+
+   "Edit Access" to the new application integration, and allow it to be used by the user you created earlier.
+   
+3. Save the credentials to a Secret in the Kubernetes cluster
+
+    ```bash
+    $ kubectl create secret generic \
+          tpp-secret \
+          --namespace=<NAMESPACE OF YOUR ISSUER RESOURCE> \
+          --from-literal=username='YOUR_TPP_USERNAME_HERE' \
+          --from-literal=password='YOUR_TPP_PASSWORD_HERE'
+    ```
+
+
+> Note: By default cert-manager uses `cert-manager.io` as client ID when authenticating to Venafi. You can customize this by adding `client-id` key to the secret:
+>```bash
+>$ kubectl create secret generic \
+>       tpp-secret \
+>       --namespace=<NAMESPACE OF YOUR ISSUER RESOURCE> \
+>       --from-literal=username='YOUR_TPP_USERNAME_HERE' \
+>       --from-literal=password='YOUR_TPP_PASSWORD_HERE' \
+>       --from-literal=client-id='YOUR_TPP_CLIENT-ID_HERE'
+>```
 
 These credentials will be used by cert-manager to interact with your Venafi TPP
-instance. Username attribute must be adhere to the `<identity
+instance. Username attribute must adhere to the `<identity
 provider>:<username>` format.  For example: `local:admin`.
 
 Once the Secret containing credentials has been created, you can create your
 `Issuer` or `ClusterIssuer` resource. If you are creating a `ClusterIssuer`
 resource, you must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
+
+> ℹ️  If you are using a `ClusterIssuer` resource, the Secret containing the credentials must be in the `Cluster
+> Resource Namespace`, which is `cert-manager` by default. The `Cluster Resource Namespace` can be configured
+> through the `--cluster-resource-namespace` flag on the cert-manager controller
+> component.
+> 
+> 📖 Read [Issuer Configuration](./README.md#cluster-resource-namespace) to learn more about the concept of a ClusterIssuer and the Cluster Resource Namespace
 
 Save the below content after making your amendments to a file named
 `tpp-issuer.yaml`.
