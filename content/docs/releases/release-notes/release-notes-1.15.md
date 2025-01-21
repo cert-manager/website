@@ -33,6 +33,20 @@ Thanks also to the CNCF, which provides resources and support, and to the AWS op
 
 In addition, massive thanks to Venafi for contributing developer time and resources towards the continued maintenance of cert-manager projects.
 
+## `v1.15.5`
+
+cert-manager `v1.15.5` is a simple dependency bump update, addressing reported CVEs (`CVE-2024-45337` and `CVE-2024-45338`).
+
+We don't believe that cert-manager is actually vulnerable; this release is instead intended to satisfy vulnerability scanners.
+
+### Bug Fixes
+
+- Bump `golang.org/x/net` and `golang.org/x/crypto` to address `CVE-2024-45337` and `CVE-2024-45338` ([#7496](https://github.com/cert-manager/cert-manager/pull/7496), [@wallrj](https://github.com/wallrj))
+
+### Other
+
+- Bump to go 1.22.10 ([#7507](https://github.com/cert-manager/cert-manager/pull/7507), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
 ## `v1.15.4`
 
 This patch release makes [several changes](https://github.com/cert-manager/cert-manager/pull/7402) to how PEM input is validated in

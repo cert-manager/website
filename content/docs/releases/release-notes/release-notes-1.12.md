@@ -217,6 +217,16 @@ time and resources towards the continued maintenance of cert-manager projects. V
 cert-manager 1.12 as a long term support release, meaning it will be maintained for much longer
 than other releases to provide a stable platform for enterprises to build upon.
 
+## `v1.12.15`
+
+cert-manager `v1.12.15` contains simple dependency bumps to address reported CVEs (`CVE-2024-45337` and `CVE-2024-45338`).
+
+We don't believe that cert-manager is actually vulnerable; this release is instead intended to satisfy vulnerability scanners.
+
+### Bug Fixes
+
+- Bump `golang.org/x/net` and `golang.org/x/crypto` to address `CVE-2024-45337` and `CVE-2024-45338` ([#7497](https://github.com/cert-manager/cert-manager/pull/7497), [@wallrj](https://github.com/wallrj))
+
 ## `v1.12.14`
 
 This patch release makes [several changes](https://github.com/cert-manager/cert-manager/pull/7403) to how PEM input is validated in
@@ -234,7 +244,7 @@ Further details are in the [security advisory](https://github.com/cert-manager/c
 This patch release also fixes [an issue](https://github.com/golang-jwt/jwt/security/advisories/GHSA-29wx-vh33-7x7r) reported by Trivy,
 although that issue is low severity and is not expected to be relevant to cert-manager.
 
-## Bug Fixes
+### Bug Fixes
 
 - Set a maximum size for PEM inputs which cert-manager will accept to remove possibility of taking a long time to process an input ([#7403](https://github.com/cert-manager/cert-manager/pull/7403), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Fix `CVE-2024-5174` in `github.com/golang-jwt/jwt/v4` ([#7407](https://github.com/cert-manager/cert-manager/pull/7407), [@SgtCoDFish](https://github.com/SgtCoDFish))
@@ -259,7 +269,7 @@ This patch release fixes the following vulnerabilities:
 > Those newer minor versions of the Kubernetes modules pulled in new transitive dependencies,
 > and incremented the minimum Go version from `1.20` to `1.21`.
 
-### Bugfixes
+### Bug Fixes
 
 - Bump the `go-retryablehttp` dependency to fix `CVE-2024-6104` ([#7128](https://github.com/cert-manager/cert-manager/pull/7128), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Updated Helm dependency to resolve `CVE-2024-25620` and `CVE-2024-26147` and Docker dependency to resolve `CVE-2024-41110` ([#7214](https://github.com/cert-manager/cert-manager/pull/7214), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
@@ -343,7 +353,7 @@ This patch release fixes the following vulnerabilities:
 
 ## `v1.12.12`
 
-### Bugfixes
+### Bug Fixes
 
 - BUGFIX: fix issue that caused Vault issuer to not retry signing when an error was encountered. ([#7113](https://github.com/cert-manager/cert-manager/pull/7113), [@cert-manager-bot](https://github.com/cert-manager-bot))
 
