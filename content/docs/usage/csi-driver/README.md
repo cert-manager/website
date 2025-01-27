@@ -57,9 +57,11 @@ spec:
     - name: tls
       csi:
         driver: csi.cert-manager.io
+        readOnly: true
         volumeAttributes:
-              csi.cert-manager.io/issuer-name: ca-issuer
-              csi.cert-manager.io/dns-names: ${POD_NAME}.${POD_NAMESPACE}.svc.cluster.local
+          csi.cert-manager.io/issuer-name: ca-issuer
+          csi.cert-manager.io/issuer-kind: Issuer
+          csi.cert-manager.io/dns-names: ${POD_NAME}.${POD_NAMESPACE}.svc.cluster.local
 ```
 
 Once created, the CSI driver will generate a private key locally (for the pod), request a
