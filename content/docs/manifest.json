@@ -14,6 +14,7 @@
         },
         {
           "title": "Releases",
+          "x-only-docs": true,
           "routes": [
             {
               "title": "Supported Releases",
@@ -696,6 +697,7 @@
         },
         {
           "title": "Contributing",
+          "x-only-docs": true,
           "routes": [
             {
               "title": "Introduction",
