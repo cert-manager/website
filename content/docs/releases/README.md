@@ -3,10 +3,6 @@ title: Supported Releases
 description: Supported releases, Kubernetes versions, OpenShift versions and upcoming release timeline
 ---
 
-{/*
-Inspired by https://istio.io/latest/about/supported-releases/
-*/}
-
 This page lists the status, timeline and policy for currently supported releases of cert-manager.
 
 All cert-manager releases are supported at least until the release of a second subsequent version.
@@ -25,17 +21,18 @@ should be stable enough to run.
 
 | Release      | Release Date | End of Life            | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:------------:|:------------:|:----------------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.16][]     | Oct 03, 2024 | Release of 1.18        |       1.25 → 1.31   /   4.14 → 4.16            |  1.27 → 1.31                       |
-| [1.15][]     | Jun 05, 2024 | Release of 1.17        |       1.25 → 1.31   /   4.12 → 4.16            |  1.25 → 1.31                       |
-| [1.12 LTS][] | May 19, 2023 | May 19, 2025           |       1.22 → 1.31   /   4.9  → 4.16            |  1.22 → 1.29                       |
+| [1.16][]     | Oct 03, 2024 | Release of 1.18        |       1.25 → 1.32   /   4.14 → 4.16            |  1.27 → 1.31                       |
+| [1.15][]     | Jun 05, 2024 | Feb 03, 2025           |       1.25 → 1.32   /   4.12 → 4.16            |  1.25 → 1.31                       |
+| [1.12 LTS][] | May 19, 2023 | May 19, 2025           |       1.22 → 1.32   /   4.9  → 4.16            |  1.22 → 1.29                       |
 
-cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It will continue to be supported for at least 2 years from release.
+cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It will be supported for 2 years from release.
 
 ## Upcoming releases
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.17][] | Feb 03, 2025 | Release of 1.19 | 1.27 → 1.31 / 4.14 → 4.16                      | 1.28 → 1.31                        |
+| [1.17][] | Feb 03, 2025 | Release of 1.19 | 1.28 → 1.32 / 4.14 → 4.16                      | 1.29 → 1.32                        |
+| [1.18][] | Jun 04, 2025 | Release of 1.20 | 1.27 → 1.33 / 4.14 → 4.16                      | 1.29 → 1.33                        |
 
 Dates in the future are not firm commitments and are subject to change.
 
@@ -342,3 +339,7 @@ are no longer supported.
 [0.13]: ./release-notes/release-notes-0.13.md
 [0.12]: ./release-notes/release-notes-0.12.md
 [0.11]: ./release-notes/release-notes-0.11.md
+
+{/*
+This page is inspired by https://istio.io/latest/about/supported-releases/
+*/}
