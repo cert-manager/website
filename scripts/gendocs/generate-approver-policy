@@ -47,7 +47,7 @@ gendocs() {
 	echo "+++ Generating reference docs..."
 
 	$CRDOC \
-    --resources "$tmpdir/deploy/charts/approver-policy/templates/crd-policy.cert-manager.io_certificaterequestpolicies.yaml" \
+    --resources "$tmpdir/deploy/crds/policy.cert-manager.io_certificaterequestpolicies.yaml" \
 		--template $REPO_ROOT/scripts/gendocs/templates-approver-policy/markdown.tmpl \
 		--output $outputdir
 }
