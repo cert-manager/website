@@ -45,13 +45,13 @@ Flags:
                                                              ExperimentalCertificateSigningRequestControllers=true|false (ALPHA - default=false)
                                                              ExperimentalGatewayAPISupport=true|false (BETA - default=true)
                                                              LiteralCertificateSubject=true|false (BETA - default=true)
-                                                             NameConstraints=true|false (ALPHA - default=false)
+                                                             NameConstraints=true|false (BETA - default=true)
                                                              OtherNames=true|false (ALPHA - default=false)
                                                              SecretsFilteredCaching=true|false (BETA - default=true)
                                                              ServerSideApply=true|false (ALPHA - default=false)
                                                              StableCertificateRequestName=true|false (BETA - default=true)
                                                              UseCertificateRequestBasicConstraints=true|false (ALPHA - default=false)
-                                                             UseDomainQualifiedFinalizer=true|false (ALPHA - default=false)
+                                                             UseDomainQualifiedFinalizer=true|false (BETA - default=true)
                                                              ValidateCAA=true|false (ALPHA - default=false)
   -h, --help                                                 help for controller
       --issuer-ambient-credentials                           Whether an issuer may make use of ambient credentials. 'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the Issuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata.

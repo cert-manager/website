@@ -26,7 +26,7 @@ Flags:
                                                              AllAlpha=true|false (ALPHA - default=false)
                                                              AllBeta=true|false (BETA - default=false)
                                                              LiteralCertificateSubject=true|false (BETA - default=true)
-                                                             NameConstraints=true|false (ALPHA - default=false)
+                                                             NameConstraints=true|false (BETA - default=true)
                                                              OtherNames=true|false (ALPHA - default=false)
       --healthz-port int32                                   port number to listen on for insecure healthz connections (default 6080)
   -h, --help                                                 help for webhook
