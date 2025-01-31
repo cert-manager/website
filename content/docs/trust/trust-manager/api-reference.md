@@ -124,8 +124,8 @@ the BundleTarget in all Namespaces.
         <td><b><a href="#bundlespecsourcesindexconfigmap">configMap</a></b></td>
         <td>object</td>
         <td>
-          ConfigMap is a reference (by name) to a ConfigMap's `data` key, or to a
-list of ConfigMap's `data` key using label selector, in the trust Namespace.
+          ConfigMap is a reference (by name) to a ConfigMap's `data` key(s), or to a
+list of ConfigMap's `data` key(s) using label selector, in the trust Namespace.
 <br/>
         </td>
         <td>false</td>
@@ -141,8 +141,8 @@ list of ConfigMap's `data` key using label selector, in the trust Namespace.
         <td><b><a href="#bundlespecsourcesindexsecret">secret</a></b></td>
         <td>object</td>
         <td>
-          Secret is a reference (by name) to a Secret's `data` key, or to a
-list of Secret's `data` key using label selector, in the trust Namespace.
+          Secret is a reference (by name) to a Secret's `data` key(s), or to a
+list of Secret's `data` key(s) using label selector, in the trust Namespace.
 <br/>
         </td>
         <td>false</td>
@@ -168,8 +168,8 @@ defaultCAPackageVersion field of the Bundle's status field.
 ### `Bundle.spec.sources[index].configMap`
 
 
-ConfigMap is a reference (by name) to a ConfigMap's `data` key, or to a
-list of ConfigMap's `data` key using label selector, in the trust Namespace.
+ConfigMap is a reference (by name) to a ConfigMap's `data` key(s), or to a
+list of ConfigMap's `data` key(s) using label selector, in the trust Namespace.
 
 <table>
     <thead>
@@ -181,13 +181,22 @@ list of ConfigMap's `data` key using label selector, in the trust Namespace.
         </tr>
     </thead>
     <tbody><tr>
+        <td><b>includeAllKeys</b></td>
+        <td>boolean</td>
+        <td>
+          IncludeAllKeys is a flag to include all keys in the object's `data` field to be used. False by default.
+This field must not be true when `Key` is set.
+<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>key</b></td>
         <td>string</td>
         <td>
-          Key is the key of the entry in the object's `data` field to be used.
+          Key of the entry in the object's `data` field to be used.
 <br/>
         </td>
-        <td>true</td>
+        <td>false</td>
       </tr><tr>
         <td><b>name</b></td>
         <td>string</td>
@@ -297,8 +306,8 @@ merge patch.
 ### `Bundle.spec.sources[index].secret`
 
 
-Secret is a reference (by name) to a Secret's `data` key, or to a
-list of Secret's `data` key using label selector, in the trust Namespace.
+Secret is a reference (by name) to a Secret's `data` key(s), or to a
+list of Secret's `data` key(s) using label selector, in the trust Namespace.
 
 <table>
     <thead>
@@ -310,13 +319,22 @@ list of Secret's `data` key using label selector, in the trust Namespace.
         </tr>
     </thead>
     <tbody><tr>
+        <td><b>includeAllKeys</b></td>
+        <td>boolean</td>
+        <td>
+          IncludeAllKeys is a flag to include all keys in the object's `data` field to be used. False by default.
+This field must not be true when `Key` is set.
+<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>key</b></td>
         <td>string</td>
         <td>
-          Key is the key of the entry in the object's `data` field to be used.
+          Key of the entry in the object's `data` field to be used.
 <br/>
         </td>
-        <td>true</td>
+        <td>false</td>
       </tr><tr>
         <td><b>name</b></td>
         <td>string</td>
@@ -632,11 +650,67 @@ Namespaces which match the selector.
         </tr>
     </thead>
     <tbody><tr>
+        <td><b><a href="#bundlespectargetnamespaceselectormatchexpressionsindex">matchExpressions</a></b></td>
+        <td>[]object</td>
+        <td>
+          matchExpressions is a list of label selector requirements. The requirements are ANDed.
+<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
         <td><b>matchLabels</b></td>
         <td>map[string]string</td>
         <td>
-          MatchLabels matches on the set of labels that must be present on a
-Namespace for the Bundle target to be synced there.
+          matchLabels is a map of key-value pairs. A single key-value in the matchLabels
+map is equivalent to an element of matchExpressions, whose key field is "key", the
+operator is "In", and the values array contains only "value". The requirements are ANDed.
+<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.spec.target.namespaceSelector.matchExpressions[index]`
+
+
+A label selector requirement is a selector that contains values, a key, and an operator that
+relates the key and values.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>key</b></td>
+        <td>string</td>
+        <td>
+          key is the label key that the selector applies to.
+<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>operator</b></td>
+        <td>string</td>
+        <td>
+          operator represents a key's relationship to a set of values.
+Valid operators are In, NotIn, Exists and DoesNotExist.
+<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
+        <td><b>values</b></td>
+        <td>[]string</td>
+        <td>
+          values is an array of string values. If the operator is In or NotIn,
+the values array must be non-empty. If the operator is Exists or DoesNotExist,
+the values array must be empty. This array is replaced during a strategic
+merge patch.
 <br/>
         </td>
         <td>false</td>

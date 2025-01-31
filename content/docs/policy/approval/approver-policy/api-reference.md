@@ -167,7 +167,6 @@ referring to matching issuers.
 CertificateRequests will not be processed if the issuer does not match,
 regardless of whether the requestor is bound by RBAC.
 
-
 The following value will match _all_ issuers:
 ```
 issuerRef: {}
@@ -198,7 +197,6 @@ CertificateRequestPolicy will only evaluate CertificateRequests
 referring to matching issuers.
 CertificateRequests will not be processed if the issuer does not match,
 regardless of whether the requestor is bound by RBAC.
-
 
 The following value will match _all_ issuers:
 ```
@@ -285,7 +283,6 @@ selector.
           MatchNames is the set of namespace names that select on
 CertificateRequests that have been created in a matching namespace.
 Accepts wildcards "*".
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -385,7 +382,6 @@ CertificateRequest `spec.keyUsages` field.
 If set, `spec.keyUsages` in a CertificateRequest must be a subset of the
 specified values.
 If `[]` or unset, no `spec.keyUsages` are allowed.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -437,7 +433,6 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field must match the specified pattern.
 
-
 NOTE:`value: ""` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
 <br/>
@@ -472,7 +467,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -540,10 +534,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -576,7 +568,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -644,10 +635,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -680,7 +669,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -748,10 +736,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -784,7 +770,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -942,10 +927,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -978,7 +961,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1046,10 +1028,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -1082,7 +1062,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1151,10 +1130,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -1187,7 +1164,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1256,10 +1232,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -1292,7 +1266,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1360,10 +1333,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -1396,7 +1367,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1464,10 +1434,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -1500,7 +1468,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1570,7 +1537,6 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field must match the specified pattern.
 
-
 NOTE:`value: ""` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
 <br/>
@@ -1605,7 +1571,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1674,10 +1639,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -1710,7 +1673,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1778,10 +1740,8 @@ ALL validations for the request to be granted by this policy.
 Accepts wildcards "*".
 If set, the related field can only include items contained in the allowed values.
 
-
 NOTE:`values: []` paired with `required: true` establishes a policy that
 will never grant a `CertificateRequest`, but other policies may.
-TODO: add x-kubernetes-list-type: set in v1alpha2
 <br/>
         </td>
         <td>false</td>
@@ -1814,7 +1774,6 @@ The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
 `cr` (map) variable to the CEL expression containing `namespace` and
 `name` of the `CertificateRequest` resource.
-
 
 Example (rule for namespaced DNSNames):
 ```
