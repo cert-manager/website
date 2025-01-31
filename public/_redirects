@@ -8,6 +8,9 @@ https://trust-manager.dev/* https://cert-manager.io/:splat 301!
 # Redirect all next-docs on the main site to the release-next preview
 https://cert-manager.io/next-docs/* https://release-next--cert-manager.netlify.app/docs/:splat 301!
 
+# Redirect the 1.12 -> 1.13 update page to a page which captures all methods of upgrading 1.12
+/docs/releases/upgrading/upgrading-1.12-1.13 /docs/releases/upgrading/upgrading-1.12
+
 # Various older renamed pages
 /docs/configuration/externalloadbalancer/ /docs/configuration/acme/http01/externalloadbalancer/ 301!
 
