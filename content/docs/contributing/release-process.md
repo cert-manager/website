@@ -256,19 +256,15 @@ page if a step is missing or if it is outdated.
       +"cert_manager_latest_version": "v1.14.3",
       ```
 
-   5. (**final release only**) Freeze the `docs/` folder by creating a copy ,
-     removing the pages from that copy that don't make sense to be versioned,
-     and updating the `manifest.json` file:
+   5. (**final release only**) Freeze the `docs/` folder by running the following script:
 
       ```bash
-      export RELEASE=1.15
-      cp -r content/docs content/v${RELEASE}-docs
-      rm -rf content/v${RELEASE}-docs/{release-notes,contributing}
-      sed -i.bak "s|/docs/|/v${RELEASE}-docs/|g" content/v${RELEASE}-docs/manifest.json
-      jq < content/v${RELEASE}-docs/manifest.json >/tmp/manifest \
-        'del(.routes[0].routes[] | select(.title | test("Releases|Contributing")))'
-      mv /tmp/manifest content/v${RELEASE}-docs/manifest.json
+      # From the website repository, on the master branch.
+      ./scripts/freeze-docs 1.16
       ```
+
+      This copies the `docs/` folder to a versioned folder (e.g. `v1.15-docs`) and removes any
+      folders which should not be present in versioned docs.
 
    6. (**final + patch releases**) Update the [API docs](https://cert-manager.io/docs/reference/api-docs/) and [CLI docs](https://cert-manager.io/docs/cli//):
 
