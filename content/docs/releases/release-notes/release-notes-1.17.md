@@ -10,8 +10,6 @@ cert-manager v1.17 includes:
 - Feature flag promotions and a deprecation
 - Dependency bumps and other smaller improvements
 
-## Breaking Changes
-
 ## Major Themes
 
 ### RSA Certificate Compliance
