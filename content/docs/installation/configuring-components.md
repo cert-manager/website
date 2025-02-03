@@ -54,7 +54,6 @@ featureGates:
   LiteralCertificateSubject: true
   UseCertificateRequestBasicConstraints: true
   OtherNames: true
-  NameConstraints: true
   UseDomainQualifiedFinalizer: true
 ```
 
@@ -81,7 +80,6 @@ featureGates:
   AdditionalCertificateOutputFormats: true
   LiteralCertificateSubject: true
   OtherNames: true
-  NameConstraints: true
 ```
 
 > **Note:** This is included as an example only and not intended to be used as default settings.

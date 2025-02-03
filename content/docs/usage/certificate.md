@@ -279,17 +279,6 @@ data:
 Root or Intermediate CA certificates can have name constraints. Name constraints indicates a name space within which all subject names in subsequent certificates in a certification path MUST be located.
 Checkout https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10 for more details on this.
 
-<div className="warning">
-
-⛔️ This feature is only enabled by adding it to the
-`--feature-gates` flag on the cert-manager controller and webhook components:
-
-```bash
---feature-gates=NameConstraints=true
-```
-
-</div>
-
 To create a CA Certificate with name constraints use the following configuration:
 
 ```yaml

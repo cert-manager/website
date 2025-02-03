@@ -1,0 +1,500 @@
+{
+  "routes": [
+    {
+      "title": "cert-manager",
+      "routes": [
+        {
+          "title": "Introduction",
+          "path": "/v1.16-docs/README.md"
+        },
+        {
+          "title": "Getting Started",
+          "path": "/v1.16-docs/getting-started/README.md"
+        },
+        {
+          "title": "0. Installation",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.16-docs/installation/README.md"
+            },
+            {
+              "title": "a. kubectl apply",
+              "path": "/v1.16-docs/installation/kubectl.md"
+            },
+            {
+              "title": "b. Helm",
+              "path": "/v1.16-docs/installation/helm.md"
+            },
+            {
+              "title": "c. OperatorHub (OLM)",
+              "path": "/v1.16-docs/installation/operator-lifecycle-manager.md"
+            },
+            {
+              "title": "d. Continuous Deployment",
+              "path": "/v1.16-docs/installation/continuous-deployment-and-gitops.md"
+            },
+            {
+              "title": "Configuring Components",
+              "path": "/v1.16-docs/installation/configuring-components.md"
+            },
+            {
+              "title": "Upgrade",
+              "path": "/v1.16-docs/installation/upgrade.md"
+            },
+            {
+              "title": "Reinstall",
+              "path": "/v1.16-docs/installation/reinstall.md"
+            },
+            {
+              "title": "Uninstall",
+              "path": "/v1.16-docs/installation/uninstall.md"
+            },
+            {
+              "title": "Signature Verification",
+              "path": "/v1.16-docs/installation/code-signing.md"
+            }
+          ]
+        },
+        {
+          "title": "1. Configuring Issuers",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.16-docs/configuration/README.md"
+            },
+            {
+              "title": "Issuers",
+              "path": "/v1.16-docs/configuration/issuers.md"
+            },
+            {
+              "title": "In-tree Issuer Config",
+              "routes": [
+                {
+                  "title": "SelfSigned",
+                  "path": "/v1.16-docs/configuration/selfsigned.md"
+                },
+                {
+                  "title": "CA",
+                  "path": "/v1.16-docs/configuration/ca.md"
+                },
+                {
+                  "title": "Vault",
+                  "path": "/v1.16-docs/configuration/vault.md"
+                },
+                {
+                  "title": "Venafi",
+                  "path": "/v1.16-docs/configuration/venafi.md"
+                },
+                {
+                  "title": "ACME",
+                  "routes": [
+                    {
+                      "title": "Introduction",
+                      "path": "/v1.16-docs/configuration/acme/README.md"
+                    },
+                    {
+                      "title": "HTTP01",
+                      "routes": [
+                        {
+                          "title": "Introduction",
+                          "path": "/v1.16-docs/configuration/acme/http01/README.md"
+                        },
+                        {
+                          "title": "External Load Balancer",
+                          "path": "/v1.16-docs/configuration/acme/http01/externalloadbalancer.md"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "DNS01",
+                      "routes": [
+                        {
+                          "title": "Introduction",
+                          "path": "/v1.16-docs/configuration/acme/dns01/README.md"
+                        },
+                        {
+                          "title": "ACMEDNS",
+                          "path": "/v1.16-docs/configuration/acme/dns01/acme-dns.md"
+                        },
+                        {
+                          "title": "Akamai",
+                          "path": "/v1.16-docs/configuration/acme/dns01/akamai.md"
+                        },
+                        {
+                          "title": "AzureDNS",
+                          "path": "/v1.16-docs/configuration/acme/dns01/azuredns.md"
+                        },
+                        {
+                          "title": "Cloudflare",
+                          "path": "/v1.16-docs/configuration/acme/dns01/cloudflare.md"
+                        },
+                        {
+                          "title": "DigitalOcean",
+                          "path": "/v1.16-docs/configuration/acme/dns01/digitalocean.md"
+                        },
+                        {
+                          "title": "Google CloudDNS",
+                          "path": "/v1.16-docs/configuration/acme/dns01/google.md"
+                        },
+                        {
+                          "title": "RFC-2136",
+                          "path": "/v1.16-docs/configuration/acme/dns01/rfc2136.md"
+                        },
+                        {
+                          "title": "Route53",
+                          "path": "/v1.16-docs/configuration/acme/dns01/route53.md"
+                        },
+                        {
+                          "title": "Webhook",
+                          "path": "/v1.16-docs/configuration/acme/dns01/webhook.md"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "2. Requesting Certificates",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.16-docs/usage/README.md"
+            },
+            {
+              "title": "Certificate",
+              "path": "/v1.16-docs/usage/certificate.md"
+            },
+            {
+              "title": "CertificateRequest",
+              "path": "/v1.16-docs/usage/certificaterequest.md"
+            },
+            {
+              "title": "Ingress",
+              "path": "/v1.16-docs/usage/ingress.md"
+            },
+            {
+              "title": "Gateway",
+              "path": "/v1.16-docs/usage/gateway.md"
+            },
+            {
+              "title": "CertificateSigningRequests",
+              "path": "/v1.16-docs/usage/kube-csr.md"
+            },
+            {
+              "title": "Service Mesh",
+              "routes": [
+                {
+                  "title": "istio-csr",
+                  "routes": [
+                    {
+                      "title": "Installation",
+                      "path": "/v1.16-docs/usage/istio-csr/installation.md"
+                    },
+                    {
+                      "title": "Usage",
+                      "path": "/v1.16-docs/usage/istio-csr/README.md"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "CSI Driver",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/v1.16-docs/usage/csi.md"
+                },
+                {
+                  "title": "csi-driver",
+                  "routes": [
+                    {
+                      "title": "Installation",
+                      "path": "/v1.16-docs/usage/csi-driver/installation.md"
+                    },
+                    {
+                      "title": "Usage",
+                      "path": "/v1.16-docs/usage/csi-driver/README.md"
+                    }
+                  ]
+                },
+                {
+                  "title": "csi-driver-spiffe",
+                  "routes": [
+                    {
+                      "title": "Installation",
+                      "path": "/v1.16-docs/usage/csi-driver-spiffe/installation.md"
+                    },
+                    {
+                      "title": "Usage",
+                      "path": "/v1.16-docs/usage/csi-driver-spiffe/README.md"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "3. Distributing Trust",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.16-docs/trust/README.md"
+            },
+            {
+              "title": "trust-manager",
+              "routes": [
+                {
+                  "title": "Installation",
+                  "path": "/v1.16-docs/trust/trust-manager/installation.md"
+                },
+                {
+                  "title": "Usage",
+                  "path": "/v1.16-docs/trust/trust-manager/README.md"
+                },
+                {
+                  "title": "API Reference",
+                  "path": "/v1.16-docs/trust/trust-manager/api-reference.md"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "4. Defining Policy",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.16-docs/policy/README.md"
+            },
+            {
+              "title": "Defaulting",
+              "path": "/v1.16-docs/policy/defaulting.md"
+            },
+            {
+              "title": "Approval",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/v1.16-docs/policy/approval/README.md"
+                },
+                {
+                  "title": "approver-policy",
+                  "routes": [
+                    {
+                      "title": "Installation",
+                      "path": "/v1.16-docs/policy/approval/approver-policy/installation.md"
+                    },
+                    {
+                      "title": "Usage",
+                      "path": "/v1.16-docs/policy/approval/approver-policy/README.md"
+                    },
+                    {
+                      "title": "API Reference",
+                      "path": "/v1.16-docs/policy/approval/approver-policy/api-reference.md"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Issuing",
+              "path": "/v1.16-docs/policy/issuing.md"
+            }
+          ]
+        },
+        {
+          "title": "Tutorials",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.16-docs/tutorials/README.md"
+            },
+            {
+              "title": "Securing NGINX-ingress",
+              "path": "/v1.16-docs/tutorials/acme/nginx-ingress.md"
+            },
+            {
+              "title": "GKE + Ingress + Let's Encrypt",
+              "path": "/v1.16-docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md"
+            },
+            {
+              "title": "AKS + LoadBalancer + Let's Encrypt",
+              "path": "/v1.16-docs/tutorials/getting-started-aks-letsencrypt/README.md"
+            },
+            {
+              "title": "AWS + LoadBalancer + Let's Encrypt",
+              "path": "/v1.16-docs/tutorials/getting-started-aws-letsencrypt/README.md"
+            },
+            {
+              "title": "Migrating from Kube-LEGO",
+              "path": "/v1.16-docs/tutorials/acme/migrating-from-kube-lego.md"
+            },
+            {
+              "title": "DNS Validation",
+              "path": "/v1.16-docs/tutorials/acme/dns-validation.md"
+            },
+            {
+              "title": "HTTP Validation",
+              "path": "/v1.16-docs/tutorials/acme/http-validation.md"
+            },
+            {
+              "title": "Pomerium Ingress",
+              "path": "/v1.16-docs/tutorials/acme/pomerium-ingress.md"
+            },
+            {
+              "title": "EKS + Ingress + Venafi",
+              "path": "/v1.16-docs/tutorials/venafi/venafi.md"
+            },
+            {
+              "title": "Securing Ingresses with ZeroSSL",
+              "path": "/v1.16-docs/tutorials/zerossl/zerossl.md"
+            },
+            {
+              "title": "Managing public trust in kubernetes with trust-manager",
+              "path": "/v1.16-docs/tutorials/getting-started-with-trust-manager/README.md"
+            },
+            {
+              "title": "Setting default certificate values",
+              "path": "/v1.16-docs/tutorials/certificate-defaults/README.md"
+            }
+          ]
+        },
+        {
+          "title": "DevOps Tips",
+          "routes": [
+            {
+              "title": "Installing on a Cloud Provider",
+              "path": "/v1.16-docs/installation/compatibility.md"
+            },
+            {
+              "title": "Prometheus Metrics",
+              "path": "/v1.16-docs/devops-tips/prometheus-metrics.md"
+            },
+            {
+              "title": "Backup and Restore Resources",
+              "path": "/v1.16-docs/devops-tips/backup.md"
+            },
+            {
+              "title": "Syncing Secrets Across Namespaces",
+              "path": "/v1.16-docs/devops-tips/syncing-secrets-across-namespaces.md"
+            },
+            {
+              "title": "Best Practice Installation Options",
+              "path": "/v1.16-docs/installation/best-practice.md"
+            },
+            {
+              "title": "Scaling cert-manager",
+              "path": "/v1.16-docs/devops-tips/scaling-cert-manager.md"
+            }
+          ]
+        },
+        {
+          "title": "Troubleshooting & FAQ",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.16-docs/troubleshooting/README.md"
+            },
+            {
+              "title": "Frequently Asked Questions",
+              "path": "/v1.16-docs/faq/README.md"
+            },
+            {
+              "title": "Troubleshooting ACME / Let's Encrypt Certificates",
+              "path": "/v1.16-docs/troubleshooting/acme.md"
+            },
+            {
+              "title": "Troubleshooting webhook",
+              "path": "/v1.16-docs/troubleshooting/webhook.md"
+            }
+          ]
+        },
+        {
+          "title": "Reference",
+          "routes": [
+            {
+              "title": "Introduction",
+              "path": "/v1.16-docs/reference/README.md"
+            },
+            {
+              "title": "Command Line Tool (cmctl)",
+              "path": "/v1.16-docs/reference/cmctl.md"
+            },
+            {
+              "title": "TLS Terminology",
+              "path": "/v1.16-docs/reference/tls-terminology.md"
+            },
+            {
+              "title": "Components / Docker Images",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/v1.16-docs/cli/README.md"
+                },
+                {
+                  "title": "acmesolver",
+                  "path": "/v1.16-docs/cli/acmesolver.md"
+                },
+                {
+                  "title": "cainjector",
+                  "path": "/v1.16-docs/cli/cainjector.md"
+                },
+                {
+                  "title": "cmctl",
+                  "path": "/v1.16-docs/cli/cmctl.md"
+                },
+                {
+                  "title": "controller",
+                  "path": "/v1.16-docs/cli/controller.md"
+                },
+                {
+                  "title": "webhook",
+                  "path": "/v1.16-docs/cli/webhook.md"
+                },
+                {
+                  "title": "startupapicheck",
+                  "path": "/v1.16-docs/cli/startupapicheck.md"
+                }
+              ]
+            },
+            {
+              "title": "API Reference",
+              "path": "/v1.16-docs/reference/api-docs.md"
+            },
+            {
+              "title": "Concepts",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/v1.16-docs/concepts/README.md"
+                },
+                {
+                  "title": "Issuer",
+                  "path": "/v1.16-docs/concepts/issuer.md"
+                },
+                {
+                  "title": "ACME Orders and Challenges",
+                  "path": "/v1.16-docs/concepts/acme-orders-challenges.md"
+                },
+                {
+                  "title": "Webhook",
+                  "path": "/v1.16-docs/concepts/webhook.md"
+                },
+                {
+                  "title": "CA Injector",
+                  "path": "/v1.16-docs/concepts/ca-injector.md"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

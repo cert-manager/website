@@ -21,16 +21,16 @@
               "path": "/docs/releases/README.md"
             },
             {
+              "title": "1.17",
+              "path": "/docs/releases/release-notes/release-notes-1.17.md"
+            },
+            {
+              "title": "Upgrade 1.16 to 1.17",
+              "path": "/docs/releases/upgrading/upgrading-1.16-1.17.md"
+            },
+            {
               "title": "1.16",
               "path": "/docs/releases/release-notes/release-notes-1.16.md"
-            },
-            {
-              "title": "Upgrade 1.15 to 1.16",
-              "path": "/docs/releases/upgrading/upgrading-1.15-1.16.md"
-            },
-            {
-              "title": "1.15",
-              "path": "/docs/releases/release-notes/release-notes-1.15.md"
             },
             {
               "title": "Upgrading from 1.12",
@@ -50,6 +50,14 @@
                 {
                   "title": "Migrating Deprecated API Resources",
                   "path": "/docs/releases/upgrading/remove-deprecated-apis.md"
+                },
+                {
+                  "title": "Upgrade 1.15 to 1.16",
+                  "path": "/docs/releases/upgrading/upgrading-1.15-1.16.md"
+                },
+                {
+                  "title": "1.15",
+                  "path": "/docs/releases/release-notes/release-notes-1.15.md"
                 },
                 {
                   "title": "Upgrade 1.14 to 1.15",
