@@ -10,7 +10,7 @@ cert-manager v1.17 includes:
 - Feature flag promotions and a deprecation
 - Dependency bumps and other smaller improvements
 
-## Breaking changes
+## Breaking Changes
 
 ## Major Themes
 
@@ -20,18 +20,18 @@ The United States Department of Defense published [a memo](https://dl.dod.cyber.
 
 In effect, the memo requires that software be able to support larger RSA keys (3072-bit and 4096-bit) and hashing algorithms (SHA-384 at a minimum).
 
-cert-manager supported large RSA keys long before the memo was published, but a quirk in implementation meant that cert-manager always used SHA256 when signing with RSA.
+cert-manager supported large RSA keys long before the memo was published, but a quirk in implementation meant that cert-manager always used SHA-256 when signing with RSA.
 
 In v1.17.0, cert-manager will choose a hash algorithm based on the RSA key length: 3072-bit keys will use SHA-384, and 4096-bit keys will use SHA-512. This matches similar behavior already present for ECDSA signatures.
 
-Our expectation is that this change will have minimal impact beyond a slight increase to security and better compliance; we're not aware of Kubernetes based environments which support RSA 2048 / SHA-256 but fail with RSA 4096 / SHA-512. However, if you're using larger RSA keys you should be aware of the change.
+Our expectation is that this change will have minimal impact beyond a slight increase in security and better compliance; we're not aware of Kubernetes-based environments which support RSA 2048 and SHA-256 but fail with RSA 4096 and SHA-512. However, if you're using larger RSA keys, you should be aware of the change.
 
 ### Easier Keystore Passwords for PKCS#12 and JKS
 
 Specifying passwords on PKCS#12 and JKS keystores is supported in cert-manager
 for compatibility reasons with software which expects or requires passwords to be set; however, these passwords are [not relevant to security](../../faq/README.md##why-are-passwords-on-jks-or-pkcs12-files-not-helpful) and never have been in cert-manager.
 
-The initial implementation of the `keystores` feature required these "passwords" to be stored in a Kubernetes secret, which would then be read by cert-manager when creating the keystore after a certificate was issued. This is cumbersome, and especially so when many passwords are set to default values such as `changeit` or `password`.
+The initial implementation of the `keystores` feature required these "passwords" to be stored in a Kubernetes secret, which would then be read by cert-manager when creating the keystore after a certificate was issued. This is cumbersome, especially when many passwords are set to default values such as `changeit` or `password`.
 
 In cert-manager v1.17, it's now possible to set a keystore password using a literal string value inside the `Certificate` resource itself, making this process much easier with no change to security.
 
@@ -114,13 +114,13 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 
 ### Feature
 
-- Potentially BREAKING: The CA and SelfSigned issuers now use SHA512 when signing with RSA keys 4096 bits and above, and SHA384 when signing with RSA keys 3072 bits and above. If you were previously using a larger RSA key as a CA, be sure to check that your systems support the new hash algorithms. ([#7368](https://github.com/cert-manager/cert-manager/pull/7368), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Potentially BREAKING: The CA and SelfSigned issuers now use SHA-512 when signing with RSA keys 4096 bits and above, and SHA-384 when signing with RSA keys 3072 bits and above. If you were previously using a larger RSA key as a CA, be sure to check that your systems support the new hash algorithms. ([#7368](https://github.com/cert-manager/cert-manager/pull/7368), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Add `CAInjectorMerging` feature gate to the ca-injector, enabling this will change the behavior of the ca-injector to merge in new CA certificates instead of outright replacing the existing one. ([#7469](https://github.com/cert-manager/cert-manager/pull/7469), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
 - Added image pull secrets to deployments when service accounts aren't created ([#7411](https://github.com/cert-manager/cert-manager/pull/7411), [@TheHenrick](https://github.com/TheHenrick))
 - Added the ability to customize client ID when using username/password authentication for Venafi client ([#7484](https://github.com/cert-manager/cert-manager/pull/7484), [@ilyesAj](https://github.com/ilyesAj))
-- Helm: New value `webhook.extraEnv`, allows you to set custom environment variables in the webhook Pod.
-  Helm: New value `cainjector.extraEnv`, allows you to set custom environment variables in the cainjector Pod.
-  Helm: New value `startupapicheck.extraEnv`, allows you to set custom environment variables in the startupapicheck Pod. ([#7317](https://github.com/cert-manager/cert-manager/pull/7317), [@wallrj](https://github.com/wallrj))
+- Helm: New value `webhook.extraEnv` allows you to set custom environment variables in the webhook Pod.
+  Helm: New value `cainjector.extraEnv` allows you to set custom environment variables in the cainjector Pod.
+  Helm: New value `startupapicheck.extraEnv` allows you to set custom environment variables in the startupapicheck Pod. ([#7317](https://github.com/cert-manager/cert-manager/pull/7317), [@wallrj](https://github.com/wallrj))
 - Increase the amount of PEM data `pki.DecodeX509CertificateSetBytes` is able to parse, to enable reading larger TLS trust bundles ([#7464](https://github.com/cert-manager/cert-manager/pull/7464), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Adds a new configuration option - `tenantID` - for the AzureDNS provider when using managed identities with service principals. This enhancement allows users to specify the tenant ID when using managed identities, offering better flexibility in multi-tenant environments. ([#7376](https://github.com/cert-manager/cert-manager/pull/7376), [@jochenrichter](https://github.com/jochenrichter))
 - Promote the `UseDomainQualifiedFinalizer` feature to Beta. ([#7488](https://github.com/cert-manager/cert-manager/pull/7488), [@jsoref](https://github.com/jsoref))
