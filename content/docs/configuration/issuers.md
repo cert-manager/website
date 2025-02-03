@@ -31,6 +31,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥉   | tcs-issuer                  | [📄][config:tcs-issuer]             | [Intel's SGX technology][ca:tcs-issuer]                                | -                                                 | [❌][release:tcs-issuer]              | ✔️             |
 | 🥉   | freeipa-issuer              | [📄][config:freeipa-issuer]         | [FreeIPA][ca:freeipa-issuer]                                           | -                                                 | [❌][release:freeipa-issuer]          | ✔️             |
 | 🥉   | kms-issuer                  | [📄][config:kms-issuer]             | [AWS KMS][ca:kms-issuer]                                               | -                                                 | [❌][release:kms-issuer]              | ✔️             |
+| 🥉   | keyvault-issuer (3rd party) | [📄][config:keyvault-issuer]        | [Azure Keyvault Key][ca:keyvault-issuer] (Unoffical issuer controller) | -                                                 | [❌][release:keyvault-issuer]         | ✔️             |
 
 </div>
 
@@ -63,6 +64,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer
 [config:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 [config:czertainly-issuer]: https://docs.czertainly.com/docs/certificate-key/integration-guides/cert-manager-issuer/create-czertainly-issuer
+[config:keyvault-issuer]: https://github.com/gonicus/azure-keyvault-issuer
 
 [//]: # (CA docs)
 
@@ -86,6 +88,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:origin-ca-issuer]: https://developers.cloudflare.com/ssl/origin-configuration/origin-ca
 [ca:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 [ca:czertainly-issuer]: https://www.czertainly.com
+[ca:keyvault-issuer]: https://learn.microsoft.com/en-us/azure/key-vault/keys/about-keys
 
 [//]: # (Release pages)
 
@@ -107,6 +110,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer/+refs
 [release:cview-issuer]: https://github.com/secure-ly/cview-issuer-chart/releases
 [release:czertainly-issuer]: https://github.com/CZERTAINLY/CZERTAINLY-Cert-Manager-Issuer/releases
+[release:keyvault-issuer]: https://github.com/gonicus/azure-keyvault-issuer/releases
 
 - The issuers are sorted by their tier and then alphabetically.
 - "in-tree" issuers are issuers that are shipped with cert-manager itself.
