@@ -387,7 +387,7 @@ Here's how to set it up:
 
    - `<service-account-name>` name of the `ServiceAccount` object.
    - `<service-account-namespace>` namespace of the `ServiceAccount` object.
-   - `<cert-manager-service-account-name>` name of cert-managers `ServiceAccount` object, as created during cert-manager installation.
+   - `<cert-manager-service-account-name>` name of cert-manager's `ServiceAccount` object, as created during cert-manager installation.
    - `<cert-manager-namespace>` namespace that cert-manager is deployed into.
 
 4. **Create an Issuer or ClusterIssuer**

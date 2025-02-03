@@ -235,6 +235,7 @@ metadata:
     # This tells Google Cloud to create an External Load Balancer to realize this Ingress
     kubernetes.io/ingress.class: gce
     # This enables HTTP connections from Internet clients
+    # Since "true" is the default, does not need to be set.
     kubernetes.io/ingress.allow-http: "true"
     # This tells Google Cloud to associate the External Load Balancer with the static IP which we created earlier
     kubernetes.io/ingress.global-static-ip-name: web-ip
@@ -277,7 +278,7 @@ At this point we have a Google load balancer which is forwarding HTTP traffic to
 > configured and for Internet clients to be routed to your web server.
 > Refer to the [Troubleshooting](#troubleshooting) section if it takes longer.
 >
-> 🔰 Read about how to [Use a static IP addresses for HTTP(S) load balancers via Ingress annotation](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb#static_ip_addresses_for_https_load_balancers).
+> 🔰 Read about how to [Use static IP addresses for HTTP(S) load balancers via Ingress annotation](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress-xlb#static_ip_addresses_for_https_load_balancers).
 >
 > 🔰 Read a [Summary of external Ingress annotations for GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress#summary_of_external_ingress_annotations).
 >

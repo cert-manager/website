@@ -188,7 +188,7 @@ trusted `ca-certificates.crt` is present.
     lrwxrwxrwx    1 root     root            26 Apr 14 15:12 ca-certificates.crt -> ..data/ca-certificates.crt
     ```
 
-    Note that normally this container image the output would look something 
+    Note that normally the output would look something
     like the following, when there is no volume overriding this directory:
 
     ```
@@ -242,7 +242,7 @@ having to pass the additional `--cacert` flag:
 
 Based on the example above, Kubernetes is able to mount over the top of the
 default CA certificate bundle. You can use this with applications assuming you
-know where the default locations they retrieve CA certificates from.
+know the default locations from where they retrieve CA certificates.
 
 For example with `Go` your application is configurable with either
 `SSL_CERT_FILE` or `SSL_CERT_DIR` to point to the default CA certificate

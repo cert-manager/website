@@ -152,7 +152,7 @@ meet the following requirements:
 
 |           Field                |                         Requirement                         |
 |--------------------------------|-------------------------------------------------------------|
-| `tls.hostname`                 | Must not be empty.                                          |
+| `hostname`                     | Must not be empty.                                          |
 | `tls.mode`                     | Must be set to `Terminate`. `Passthrough` is not supported. |
 | `tls.certificateRef.name`      | Cannot be left empty.                                       |
 | `tls.certificateRef.kind`      | If specified, must be set to `Secret`.                      |

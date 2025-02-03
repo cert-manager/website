@@ -256,7 +256,7 @@ By default the cert-manager webhook Deployment has 1 replica, but in production 
 If the cert-manager webhook is unavailable, all API operations on cert-manager custom resources will fail,
 and this will disrupt any software that creates, updates or deletes cert-manager custom resources (including cert-manager itself),
 and it may cause other disruptions to your cluster.
-So it is *especially* important to keep at multiple replicas of the cert-manager webhook running at all times.
+So it is *especially* important to keep multiple replicas of the cert-manager webhook running at all times.
 
 > ℹ️ By contrast, if there is only a single replica of the cert-manager controller, there is less risk of disruption.
 > For example, if the Node hosting the single cert-manager controller manager Pod is drained,
