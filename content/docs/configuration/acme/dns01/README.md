@@ -164,6 +164,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-civo`](https://github.com/okteto/cert-manager-webhook-civo)
 - [`cert-manager-webhook-dnspod`](https://github.com/qqshfox/cert-manager-webhook-dnspod)
 - [`cert-manager-webhook-dnsimple`](https://github.com/neoskop/cert-manager-webhook-dnsimple)
+- [`cert-manager-webhook-exoscale`](https://github.com/glasskube/cert-manager-webhook-exoscale)
 - [`cert-manager-webhook-gandi`](https://github.com/bwolf/cert-manager-webhook-gandi)
 - [`cert-manager-webhook-infomaniak`](https://github.com/Infomaniak/cert-manager-webhook-infomaniak)
 - [`cert-manager-webhook-inwx`](https://gitlab.com/smueller18/cert-manager-webhook-inwx)
