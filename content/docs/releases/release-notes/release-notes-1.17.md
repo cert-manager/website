@@ -27,7 +27,7 @@ Our expectation is that this change will have minimal impact beyond a slight inc
 ### Easier Keystore Passwords for PKCS#12 and JKS
 
 Specifying passwords on PKCS#12 and JKS keystores is supported in cert-manager
-for compatibility reasons with software which expects or requires passwords to be set; however, these passwords are [not relevant to security](../../faq/README.md##why-are-passwords-on-jks-or-pkcs12-files-not-helpful) and never have been in cert-manager.
+for compatibility reasons with software which expects or requires passwords to be set; however, these passwords are [not relevant to security](../../faq/README.md#why-are-passwords-on-jks-or-pkcs12-files-not-helpful) and never have been in cert-manager.
 
 The initial implementation of the `keystores` feature required these "passwords" to be stored in a Kubernetes secret, which would then be read by cert-manager when creating the keystore after a certificate was issued. This is cumbersome, especially when many passwords are set to default values such as `changeit` or `password`.
 
