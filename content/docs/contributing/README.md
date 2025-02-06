@@ -60,7 +60,7 @@ before the meeting. The meeting chair will try to get to everything that was on 
 We try to record these meetings and put them on YouTube so they can be checked later – if you don't want to appear on video please keep
 your camera off!
 
-[comment]: <> (Changing this heading will break the reference link at https://cert-manager.io/docs/contributing/#slack, so avoid modifying it.)
+{/* Changing this heading will break the reference link at https://cert-manager.io/docs/contributing/#slack, so avoid modifying it. */}
 ## Slack
 
 Join our Slack channels to connect with the cert-manager community.
