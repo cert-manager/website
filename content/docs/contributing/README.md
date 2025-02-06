@@ -60,9 +60,15 @@ before the meeting. The meeting chair will try to get to everything that was on 
 We try to record these meetings and put them on YouTube so they can be checked later – if you don't want to appear on video please keep
 your camera off!
 
-## Slack
+## Slack Community
 
-We have two cert-manager channels on [Kubernetes Slack](https://slack.k8s.io) which we use to chat:
+Join our Slack channels to connect with the cert-manager community.
 
-* [`cert-manager`](https://kubernetes.slack.com/messages/cert-manager): for all users of cert-manager; use this one for any usage related questions
-* [`cert-manager-dev`](https://kubernetes.slack.com/messages/cert-manager-dev): for collaboration between cert-manager contributors and maintainers; please only use this for code related questions
+### Step 1: Join the Kubernetes Slack
+You need to join the [Kubernetes Slack Workspace](https://slack.k8s.io). Click the link to request an invitation if you are not already a member.
+
+### Step 2: Join the cert-manager Channels
+Once you have access to Kubernetes Slack, you can search for and join the following channels:
+
+- [`#cert-manager`](https://kubernetes.slack.com/messages/cert-manager): A channel for all users of cert-manager; use this for any usage-related questions.
+- [`#cert-manager-dev`](https://kubernetes.slack.com/messages/cert-manager-dev): Dedicated to collaboration between cert-manager contributors and maintainers. Please use this channel for code-related questions only.
