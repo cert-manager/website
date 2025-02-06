@@ -68,7 +68,7 @@ Join our Slack channels to connect with the cert-manager community.
 ### Step 1: Join Kubernetes Slack
 You need to join the [Kubernetes Slack Workspace](https://slack.k8s.io). Click the link to request an invitation if you are not already a member.
 
-### Step 2: Join the cert-manager Channels
+### Step 2: Join cert-manager Channels
 Once you have access to Kubernetes Slack, you can search for and join the following channels:
 
 - [`#cert-manager`](https://kubernetes.slack.com/messages/cert-manager): A channel for all users of cert-manager; use this for any usage-related questions.
