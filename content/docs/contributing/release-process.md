@@ -683,6 +683,58 @@ page if a step is missing or if it is outdated.
        Follow [the cert-manager OLM release process](https://github.com/cert-manager/cert-manager-olm#release-process) and, once published,
        [verify that the cert-manager OLM installation instructions](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) still work.
 
+## Patch Releases
+
+
+1. Create a GitHub issue called `Release cert-manager v$RELEASE_VERSION`.
+
+Add the following checklist to the issue:
+
+```markdown
+- [ ] Bump Go patch version in release branch (if necessary).
+- [ ] Verify that [test grid](https://testgrid.k8s.io/cert-manager) is green.
+- [ ] Create website PR with release notes and updated installation versions.
+       Add `/hold until release is published`.
+
+> ⏸️ **Wait for approval before continuing**.
+> So that team can check release notes for any missing patches which we may have forgotten to backport.
+
+- [ ] Send Slack message `Releasing 1.2.0-alpha.2 🧵`.
+- [ ] Push `vX.Y.Z` tag.
+- [ ] Check that the build completed in the [GCB Build History](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
+- [ ] Send Slack message `cmrel makestage build logs: ...`.
+
+> ⏸️ **Wait for build to succeed**.
+
+- [ ] Create `[Release $RELEASE_VERSION] Update cmd/cmctl's go.mod to $RELEASE_VERSION` PR.
+
+> ⏸️ **Wait for PR to be merged**.
+
+- [ ] Push `cmd/ctl/$RELEASE_VERSION` tag.
+- [ ] Dry run `cmrel publish --release-name "$RELEASE_VERSION"`.
+- [ ] Send Slack message `Follow the cmrel publish dry-run build: ...`.
+- [ ] Run `cmrel publish --nomock --release-name "$RELEASE_VERSION"`.
+- [ ] Send Slack message `Follow the cmrel publish build: ...`.
+
+> ⏸️ Test installation of the Helm chart using the preview URL.
+
+- [ ] Publish the GitHub release.
+- [ ] Merge the pull request containing the Helm chart.
+- [ ] Merge the Website PRs.
+- [ ] Send Slack message `https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0 🎉`.
+- [ ] Send an email to [cert-manager-dev@googlegroups.com](https://groups.google.com/g/cert-manager-dev).
+- [ ] Send a tweet on the cert-manager Twitter account.
+- [ ] Send a toot from the cert-manager Mastodon account.
+
+> ⏸️ Post release tasks
+
+- [ ] Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for cmctl.
+- [ ] Open a PR against the Krew index.
+- [ ] Create a new OLM package and publish to OperatorHub
+```
+
+2. Work through the checklist, ticking each item as you complete the process
+
 ## Older Releases
 
 The above guide only applies for versions of cert-manager from v1.8 and newer.
