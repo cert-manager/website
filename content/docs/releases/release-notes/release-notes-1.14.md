@@ -184,7 +184,7 @@ The KeyUsage and BasicConstraints extensions will now be encoded as critical in 
 
 #### New X.509 Features
 
-The cert-manager [Certificate resource](../../usage/certificate.md##creating-certificate-resources) now allows you to [configure a subset of "Other Name" SANs](../../reference/api-docs.md#cert-manager.io/v1.OtherName),
+The cert-manager [Certificate resource](../../usage/certificate.md#creating-certificate-resources) now allows you to [configure a subset of "Other Name" SANs](../../reference/api-docs.md#cert-manager.io/v1.OtherName),
 which are described in the [Subject Alternative Name section of RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.6) (on page 37).
 
 We specifically support any `otherName` type with a `UTF-8` value, such as the [User Principal Name](https://docs.venafi.com/Docs/current/TopNav/Content/Certificates/r-UEP-support-SANs.php) or [`sAMAccountName`](https://learn.microsoft.com/en-us/windows/win32/ad/naming-properties).
