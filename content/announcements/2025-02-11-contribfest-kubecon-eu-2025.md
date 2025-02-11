@@ -2,10 +2,12 @@
 slug: contribfest-kubecon-eu-2025
 title: Join Us for ContribFest at KubeCon EU 2025 in London!
 description: The cert-manager maintainers are hosting a ContribFest event on 2nd April, 2025, and you are invited!
-date: "2024-12-10T09:00:00Z"
+date: "2025-02-11T09:00:00Z"
 ---
 
-Are you heading to KubeCon EU 2025 in London this April? If so, we have some exciting news: the cert-manager maintainers are hosting a ContribFest event on 2nd April, 2025, and you are invited!
+
+
+Are you heading to KubeCon EU 2025 in London this April? If so, we have some exciting news: the cert-manager maintainers are hosting a [ContribFest event on Wednesday April 2, 2025 14:30 - 15:45 BST](https://kccnceu2025.sched.com/event/1tcxb/contribfest-dive-into-cert-manager-and-start-contributing) taking place on Level 3 in the ICC Capital Suite 1, and you are invited!
 
 As a newly graduated CNCF project, there's never been a better time to get involved with cert-manager and make an impact in the Kubernetes ecosystem.
 
@@ -42,11 +44,10 @@ To make the most of the event, here are a few tips:
 
 ## Join Us!
 
-If you're in London, you can join us for ContribFest on Wednesday, April 2nd, **(details TBD)**.
-
+If you're in London, you can join us for ContribFest on Wednesday April 2, 2025 14:30. It will take place at Level 3, ICC Capital Suite 1.
 
 We’re looking forward to seeing you at KubeCon EU 2025 in London! Together, we’ll make cert-manager even better while fostering a stronger open-source community.
 
 **See you at ContribFest!**
 
-Stay connected by following us on [Twitter](https://twitter.com/cert_manager), joining the channels `#cert-manager` and `#cert-manager-dev` on the [Kubernetes Slack](https://slack.k8s.io/), and exploring our [Contributor Guide](https://cert-manager.io/docs/contributing/).
+Stay connected by following us on [BlueSky](https://bsky.app/profile/cert-manager.bsky.social), [Mastodon](https://infosec.exchange/@CertManager), [Twitter](https://twitter.com/certmanager), joining us [on Slack](https://cert-manager.io/docs/contributing/#slack), and exploring our [Contributor Guide](https://cert-manager.io/docs/contributing/).
