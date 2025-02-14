@@ -21,17 +21,7 @@ At this year's cert-manager ContribFest, maintainers including CyberArk's Maël 
 
 ## Good First Issues
 
-- **[#6637](https://github.com/cert-manager/cert-manager/issues/6637)**: Enable a lint to help avoid accidental shadowing of package imports.
-- **[#6695](https://github.com/cert-manager/cert-manager/issues/6695)**: Update the Helm chart’s READMEs to mention usage in K3d clusters.
-- **[#6622](https://github.com/cert-manager/cert-manager/issues/6622)**: Improve logging clarity in ACME challenge solver.
-- **[#6732](https://github.com/cert-manager/cert-manager/issues/6732)**: Add a missing comment or doc string for a function in the E2E tests.
-- **[#5925](https://github.com/cert-manager/cert-manager/issues/5925)**: Use `readOnlyRootFilesystem: true` for all containers.
-- **[#5514](https://github.com/cert-manager/cert-manager/issues/5514)**: Venafi Issuer to read `caBundle` from ConfigMap or Secret.
-- **[#2943](https://github.com/cert-manager/cert-manager/issues/2943)**: Allow configuration of the keystore file name.
-- **[#1686](https://github.com/cert-manager/cert-manager/issues/1686)**: Support for Microsoft Active Directory Certificate Services.
-- **[#2744](https://github.com/cert-manager/cert-manager/issues/2744)**: Documenting resolution for DigitalOcean and HTTP01 "connection timed out" error.
-- **[#2888](https://github.com/cert-manager/cert-manager/issues/2888)**: Allow configuration of `MaxConcurrentChallenges`.
-- **[#1520](https://github.com/cert-manager/cert-manager/issues/1520)**: Ingress-shim: Skip updating Certificate resource if one already exists.
+TBD
 
 ## How to Prepare
 
