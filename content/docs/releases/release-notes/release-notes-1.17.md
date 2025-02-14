@@ -108,6 +108,16 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@ianarsenault](https://github.com/ianarsenault)
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
+## `v1.17.1`
+
+This patch release is primarily intended to address a [breaking change](https://github.com/cert-manager/cert-manager/issues/7540) in Cloudflare's API which impacted ACME DNS-01 challenges using Cloudflare.
+
+### Bug or Regression
+
+- Fix issuing of certificates via DNS01 challenges on Cloudflare after a breaking change to the Cloudflare API ([#7565](https://github.com/cert-manager/cert-manager/pull/7565), [@LukeCarrier](https://github.com/LukeCarrier))
+- Bump go to 1.23.6 to address [`CVE-2025-22866`](https://github.com/advisories/GHSA-3whm-j4xm-rv8x) reported by Trivy ([#7563](https://github.com/cert-manager/cert-manager/pull/7563), [@SgtCoDFish](https://github.com/sgtcodfish))
+
+
 ## `v1.17.0`
 
 ### Feature

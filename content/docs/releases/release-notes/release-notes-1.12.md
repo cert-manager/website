@@ -42,8 +42,7 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
 
 ### Lower memory footprint
 
-In 1.12 we continued the work started in 1.11 to reduce cert-manager component's
-memory consumption.
+In 1.12 we continued the work started in 1.11 to reduce cert-manager's memory consumption.
 
 #### Controller
 
@@ -216,6 +215,28 @@ In addition, massive thanks to Jetstack (by Venafi) for contributing developer
 time and resources towards the continued maintenance of cert-manager projects. Venafi has sponsored
 cert-manager 1.12 as a long term support release, meaning it will be maintained for much longer
 than other releases to provide a stable platform for enterprises to build upon.
+
+## `v1.12.16`
+
+This patch release is primarily intended to address a [breaking change](https://github.com/cert-manager/cert-manager/issues/7540) in Cloudflare's API which impacted ACME DNS-01 challenges using Cloudflare.
+
+It also bumps Go from `1.21.x` to `1.23.x` to address a range of reported CVEs. This in turn requires bumping the `controller-gen` tool which changes the format of descriptions in generated CRD YAML. The following CVEs are fixed:
+
+- `CVE-2024-34156`
+- `CVE-2024-34155`
+- `CVE-2024-34158`
+- `CVE-2024-45336`
+- `CVE-2024-45341`
+- `CVE-2025-22866`
+
+We don't expect that bumping Go will produce many noticeable changes, but there are some `GODEBUG` changes that could be applicable - specifically `x509negativeserial` may be of interest to users dealing with legacy certificates.
+
+There's more information [on `go.dev`](https://go.dev/doc/godebug#go-123) which may help if you suspect any changes in this version bump may have caused issues in your environment.
+
+### Bug Fixes
+
+- Bump go to 1.23.6 which also requires bumping controller-gen to address a panic in that tool. That change in turn changes the formatting (but not the content) of CRD YAML for release-1.12 ([#7570](https://github.com/cert-manager/cert-manager/pull/7570), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix issuing of certificates via DNS01 challenges on Cloudflare after a breaking change to the Cloudflare API ([#7568](https://github.com/cert-manager/cert-manager/pull/7568), [@SgtCoDFish](https://github.com/SgtCoDFish) + [@LukeCarrier](https://github.com/LukeCarrier))
 
 ## `v1.12.15`
 

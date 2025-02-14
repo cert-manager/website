@@ -223,6 +223,16 @@ Thanks also to the CNCF, which provides resources and support, and to the AWS op
 
 In addition, massive thanks to Venafi for contributing developer time and resources towards the continued maintenance of cert-manager projects.
 
+## `v1.16.4`
+
+This patch release is primarily intended to address a [breaking change](https://github.com/cert-manager/cert-manager/issues/7540) in Cloudflare's API which impacted ACME DNS-01 challenges using Cloudflare.
+
+### Bug or Regression
+
+- Fix issuing of certificates via DNS01 challenges on Cloudflare after a breaking change to the Cloudflare API ([#7566](https://github.com/cert-manager/cert-manager/pull/7566), [@LukeCarrier](https://github.com/LukeCarrier))
+- Bump go to 1.23.6 to address [`CVE-2025-22866`](https://github.com/advisories/GHSA-3whm-j4xm-rv8x) reported by Trivy ([#7562](https://github.com/cert-manager/cert-manager/pull/7562), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Update go to 1.23.5 ([#7533](https://github.com/cert-manager/cert-manager/pull/7533), [@tareksha](https://github.com/tareksha))
+
 ## `v1.16.3`
 
 cert-manager `v1.16.3` is a patch release mainly focused around bumping dependencies to address reported CVEs: `CVE-2024-45337` and `CVE-2024-45338`.
