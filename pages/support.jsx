@@ -43,6 +43,7 @@ function Support({ router }) {
         </div>
       </div>
     </div>
+    <img referrerPolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=34e46cb4-8956-48fc-a9a2-a8d634b8968c" />
   </>;
 }
 
