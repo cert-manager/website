@@ -23,4 +23,4 @@ This website provides the full technical documentation for the project, and can 
 used as a reference; if you feel that there's anything missing, please let us know
 or [raise a PR](https://github.com/cert-manager/website/pulls) to add it.
 
-<img referrerPolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=e661e870-758f-4c78-ac4a-0bad64a05471" />
+<img referrerPolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=8139d670-4d96-4721-a830-a9379240ab5b" />
