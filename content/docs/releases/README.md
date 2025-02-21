@@ -317,7 +317,7 @@ are no longer supported.
 [s]: #kubernetes-supported-versions
 [test]: #supported-vs-tested
 [1.18]: https://github.com/cert-manager/cert-manager/milestone/40
-[1.17]: ./release-notes/release-notes-1.16.md
+[1.17]: ./release-notes/release-notes-1.17.md
 [1.16]: ./release-notes/release-notes-1.16.md
 [1.15]: ./release-notes/release-notes-1.15.md
 [1.14]: ./release-notes/release-notes-1.14.md
