@@ -15,6 +15,6 @@ During the fuzzing audit, no issues were found. OSS-Fuzz continues to run cert-m
 
 With the completion of cert-manager's fuzzing audit, we have a state-of-the-art fuzzing suite that covers even more of our threat model. All of our security contacts are notified when OSS-Fuzz finds crashes from running the fuzzers continuously, and OSS-Fuzz sends an email to our security mailing list, too.
 
-You can read the report from the audit [here](https://github.com/cert-manager/website/blob/master/public/docs/announcements/AdaLogics-2025-cert-manager-fuzzing-audit-report.pdf).
+You can read the report from the audit [here](/docs/announcements/AdaLogics-2025-cert-manager-fuzzing-audit-report.pdf).
 
 A huge thanks to Ada Logics for their superb work and of course to the CNCF for sponsoring!
