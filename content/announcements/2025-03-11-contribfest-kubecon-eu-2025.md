@@ -2,7 +2,7 @@
 slug: contribfest-kubecon-eu-2025
 title: Join Us for ContribFest at KubeCon EU 2025 in London!
 description: The cert-manager maintainers are hosting a ContribFest event on 2nd April, 2025, and you are invited!
-date: "2025-03-10T12:00:00Z"
+date: "2025-03-11T12:00:00Z"
 ---
 
 
