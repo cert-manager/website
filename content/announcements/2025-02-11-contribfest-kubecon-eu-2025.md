@@ -21,7 +21,7 @@ At this year's cert-manager ContribFest, maintainers including CyberArk's Maël 
 
 ## Good First Issues
 
-TBD
+An updated list of open good first issues will be available in [this google sheet](https://docs.google.com/spreadsheets/d/1zThfUB22HHdHAiRvS3ctbj4Da7j30imnUleURjxTYE0/edit?usp=sharing).
 
 ## How to Prepare
 
