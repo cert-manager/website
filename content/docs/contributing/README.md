@@ -76,14 +76,14 @@ Once you have access to Kubernetes Slack, you can search for and join the follow
 
 ## Issues & Pull Requests
 
-Across our GitHub organisation we make use of [prow](https://docs.prow.k8s.io/docs/overview/) for automation.
+Across our GitHub organization we make use of [prow](https://docs.prow.k8s.io/docs/overview/) for automation.
 This means that we don't label issues or pull requests manually.
 We make use of prow's functionality to label issues with metadata and signal pull requests are ready to test.
 
 If you are new to the Kubernetes ecosystem then this may not be familiar to you.
 To learn more, here is a full list of commands: https://prow.k8s.io/command-help.
 
-> Please note that not all commands may work within the cert-manager organisation.
+> Please note that not all commands may work within the cert-manager organization.
 
 Some commands are reserved for maintainer or contributors only. 
 Prow may indicate to you in a follow up comment if a command was unable to be applied.
