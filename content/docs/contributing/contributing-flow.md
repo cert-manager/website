@@ -13,7 +13,8 @@ Any issues towards the documentation should also be filed there.
 ## GitHub bot
 
 We use [Prow](https://github.com/k8s-ci-robot/test-infra/tree/master/prow) on all our repositories.
-If you've ever looked at a Kubernetes repo, you will probably already have met Prow. Prow will be able to help you in GitHub using its commands.
+If you've ever looked at a Kubernetes repo, you will probably already have met Prow. 
+Prow will be able to help you in GitHub using its commands.
 You can find then all [on the command help page](https://prow.infra.cert-manager.io/command-help).
 Prow will also run all tests and assign certain labels on PRs.
 
@@ -148,13 +149,32 @@ We brief our users/contributors about this in our bi-weekly community meeting, f
 
 ### Labels
 
-We make a heavy use of GitHub labels for PRs and Issues. The ones on PRs are mostly managed by Prow and code reviewers.
-In issues we always aim to add 3 types: area, priority and kind. These are set using Prow using `/area`, `/kind` and `/priority`.
+We utilize GitHub labels for PRs and Issues. The ones on PRs are mostly managed by Prow and code reviewers.
+In issues we always aim to add 3 types: area, priority and kind. 
+These are set using Prow using `/area`, `/kind` and `/priority`.
 Sometimes `/triage` is also added which helps us when following up Issues.
 
 * Area indicates the code area which is/will need changing
 * Kind indicates if it is a `bug` or a `feature` but also can be `documentation` or `cleanup` (general maintenance)
 * Priority is the priority it has for the cert-manager team, PRs are still very welcome for those!
+
+#### Good First Issues
+
+Some Issues will be labeled with `good first issue`. 
+This indicates we believe anyone should be able to have a go at this issue.
+This label is also manage via Prow. It can be assigned and unassigned as follows:
+
+1. To label an issue as a "good first issue" a comment can be added to the issue as follows:
+
+        ```text
+        /good-first-issue
+        ```
+
+2. To remove this label, comment with:
+
+        ```text
+        /remove-good-first-issue
+        ```
 
 ### Assignees meaning in PRs and issues
 

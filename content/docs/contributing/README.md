@@ -73,3 +73,7 @@ Once you have access to Kubernetes Slack, you can search for and join the follow
 
 - [`#cert-manager`](https://kubernetes.slack.com/messages/cert-manager): A channel for all users of cert-manager; use this for any usage-related questions.
 - [`#cert-manager-dev`](https://kubernetes.slack.com/messages/cert-manager-dev): Dedicated to collaboration between cert-manager contributors and maintainers. Please use this channel for code-related questions only.
+
+## Issues and Pull Requests
+
+If you are looking for help understanding our issue and pull request usage, then please review the [contributing flow](./contributing-flow.md) page.
