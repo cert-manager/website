@@ -319,12 +319,12 @@ spec:
         - 'a.example.com'
         - 'b.example.com'
     - dns01:
-      cloudDNS:
-        project: my-project-id
-        hostedZoneName: 'test-example.com'
-        serviceAccountSecretRef:
-          key: sa
-          name: gcp-sa-secret
+        cloudDNS:
+          project: my-project-id
+          hostedZoneName: 'test-example.com'
+          serviceAccountSecretRef:
+            key: sa
+            name: gcp-sa-secret
       selector:
         dnsZones:
         - 'test.example.com' # This should be the DNS name of the zone
