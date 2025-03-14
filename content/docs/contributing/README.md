@@ -74,35 +74,6 @@ Once you have access to Kubernetes Slack, you can search for and join the follow
 - [`#cert-manager`](https://kubernetes.slack.com/messages/cert-manager): A channel for all users of cert-manager; use this for any usage-related questions.
 - [`#cert-manager-dev`](https://kubernetes.slack.com/messages/cert-manager-dev): Dedicated to collaboration between cert-manager contributors and maintainers. Please use this channel for code-related questions only.
 
-## Issues & Pull Requests
+## Issues and Pull Requests
 
-Across our GitHub organization we make use of [prow](https://docs.prow.k8s.io/docs/overview/) for automation.
-This means that we don't label issues or pull requests manually.
-We make use of prow's functionality to label issues with metadata and signal pull requests are ready to test.
-
-If you are new to the Kubernetes ecosystem then this may not be familiar to you.
-To learn more, here is a full list of commands: https://prow.k8s.io/command-help.
-
-> Please note that not all commands may work within the cert-manager organization.
-
-Some commands are reserved for maintainer or contributors only. 
-Prow may indicate to you in a follow up comment if a command was unable to be applied.
-
-### Labeling Issues
-
-Here are a couple of example commands we often use to label an issue:
-
-1. To label an issue as a "good first issue" a comment can be added to the issue as follows:
-
-        ```text
-        /good-first-issue
-        ```
-
-1. To remove a label such as the one above:
-
-        ```text
-        /remove-good-first-issue
-        ```
-
-Further common example may be added at a later date.
-If you are confused, please reach out to the maintainers and community on [slack](#slack).
+If you are looking for help understanding our issue and pull request usage, then please review the [contributing flow](./contributing-flow.md) page.
