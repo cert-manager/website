@@ -47,7 +47,7 @@ spec:
       - key: app.kubernetes.io/instance
         operator: In
         values:
-        - release-name
+        - cert-manager
       - key: app.kubernetes.io/component
         operator: In
         values:
