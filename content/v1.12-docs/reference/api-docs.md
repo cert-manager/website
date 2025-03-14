@@ -991,7 +991,7 @@ description: >-
         <code>imagePullSecrets</code>
         <br />
         <em>
-          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#localobjectreference-v1-core">[]Kubernetes core/v1.LocalObjectReference</a>
+          <a href="https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/local-object-reference/">[]Kubernetes core/v1.LocalObjectReference</a>
         </em>
       </td>
       <td>
@@ -1103,7 +1103,7 @@ description: >-
               <code>imagePullSecrets</code>
               <br />
               <em>
-                <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#localobjectreference-v1-core">[]Kubernetes core/v1.LocalObjectReference</a>
+                <a href="https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/local-object-reference/">[]Kubernetes core/v1.LocalObjectReference</a>
               </em>
             </td>
             <td>
