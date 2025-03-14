@@ -177,6 +177,18 @@ trigger Certificate resources to be automatically created:
   configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
   Valid values are `Never` and `Always`. If unset a rotation policy `Never` will be used.
 
+Any other annotations are copied as is into generated `Certificate` object. Like custom `Venafi` configuration could be specified.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # custom venafi configuration
+    venafi.cert-manager.io/custom-fields: `[ {"name": "field-name", "value": "field value"}]`
+  name: myIngress
+  namespace: myIngress
+```
+
 ## Generate multiple certificates with multiple ingresses
 
 If you need to generate certificates from multiple ingresses make sure it has the issuer annotation.
