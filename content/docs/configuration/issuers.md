@@ -28,6 +28,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈   | vault-issuer (in-tree)      | [📄][config:vault-issuer]           | [HashiCorp Vault][ca:vault-issuer]                                     | -                                                 | [✔️][release:cert-manager]           | ✔️             |
 | 🥈   | venafi-issuer (in-tree)     | [📄][config:venafi-issuer]          | [Venafi TLS Protect][ca:venafi-issuer]                                 | -                                                 | [✔️][release:cert-manager]           | ✔️             |
 | 🥈   | cfssl-issuer                | [📄][config:cfssl-issuer]           | [CFSSL][ca:cfssl-issuer]                                               | -                                                 | [✔️][release:cfssl-issuer]           | ✔️             |
+| 🥈   | cfmtls-issuer               | [📄][config:cfmtls-issuer]          | [CFMTLS][ca:cfmtls-issuer]                                             | -                                                 | [✔️][release:cfmtls-issuer]          | ✔️             |
 | 🥉   | tcs-issuer                  | [📄][config:tcs-issuer]             | [Intel's SGX technology][ca:tcs-issuer]                                | -                                                 | [❌][release:tcs-issuer]              | ✔️             |
 | 🥉   | freeipa-issuer              | [📄][config:freeipa-issuer]         | [FreeIPA][ca:freeipa-issuer]                                           | -                                                 | [❌][release:freeipa-issuer]          | ✔️             |
 | 🥉   | kms-issuer                  | [📄][config:kms-issuer]             | [AWS KMS][ca:kms-issuer]                                               | -                                                 | [❌][release:kms-issuer]              | ✔️             |
@@ -61,6 +62,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer
 [config:adcs-issuer]: https://djkormo.github.io/adcs-issuer/
 [config:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer
+[config:cfmtls-issuer]: https://github.com/k8stooling/cfmtls-issuer
 [config:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 [config:czertainly-issuer]: https://docs.czertainly.com/docs/certificate-key/integration-guides/cert-manager-issuer/create-czertainly-issuer
 
@@ -81,6 +83,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:vault-issuer]: https://www.vaultproject.io/
 [ca:venafi-issuer]: https://venafi.com/tls-protect/
 [ca:cfssl-issuer]: https://github.com/cloudflare/cfssl
+[ca:cfmtls-issuer]: https://developers.cloudflare.com/ssl/client-certificates/create-a-client-certificate/
 [ca:freeipa-issuer]: https://www.freeipa.org
 [ca:kms-issuer]: https://aws.amazon.com/kms/
 [ca:origin-ca-issuer]: https://developers.cloudflare.com/ssl/origin-configuration/origin-ca
@@ -105,6 +108,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer/releases
 [release:adcs-issuer]: https://github.com/djkormo/adcs-issuer/releases
 [release:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer/+refs
+[release:cfmtls-issuer]: https://github.com/k8stooling/cfmtls-issuer/releases/
 [release:cview-issuer]: https://github.com/secure-ly/cview-issuer-chart/releases
 [release:czertainly-issuer]: https://github.com/CZERTAINLY/CZERTAINLY-Cert-Manager-Issuer/releases
 
