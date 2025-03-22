@@ -10,38 +10,34 @@ Below are all the details of the events we have in London so you can bookmark th
 
 ## 1) cert-manager Project Pavilion Booth 
 
-Our Project Pavilion Booth is here all week long!
-Come and get your London-edition printed certificate!
-We'd love to meet you whether you're a user, contributor, super-fan - or if you're just getting started!
+Our Project Pavilion Booth is here all week long so come and get your London-edition printed certificate!
+We'd love to meet you whether you're a user, contributor, super-fan or if you're just getting started!
 
-**When:** All week!
-**Who:** Anyone at all!
-**Bring:** Yourself!
-**Details:** Project Pavilion
+- **When:** All week!
+- **Who:** Anyone at all!
+- **Bring:** Yourself!
+- **Details:** Project Pavilion.
 
-## 2) [cert-manager Contribfest](https://sched.co/1tcxb)
+## 2) cert-manager Contribfest
 
-**When:** April 2 14:30 - 15:45 BST
-**Who:** All are welcome to start their journey contributing to cert-manager projects.
-**Bring:** All you need is your laptop and your GitHub account!
-**Details**: See our [previous announcement](./2025-03-11-contribfest-kubecon-eu-2025.md) for full details!
+- **When:** April 2 14:30 - 15:45 BST
+- **Who:** All are welcome to start their journey contributing to cert-manager projects.
+- **Bring:** All you need is your laptop and your GitHub account!
+- **Details**: See our [previous announcement](./2025-03-11-contribfest-kubecon-eu-2025.md) for full details! Official schedule [link](https://sched.co/1tcxb)).
 
-## 3) [Talk by Tim and Eric](https://sched.co/1td0e) 
+## 3) Talk by Tim and Eric
 
-**When:** April 3 17:30 - 18:00 BST
-**Who:** Everyone! This will be particularly useful for platform engineers looking to enhance certificate lifecycle management.
-**Bring:** Yourself - maybe a coffee!
-**Details**: Official schedule [link](https://sched.co/1td0e)
+- **When:** April 3 17:30 - 18:00 BST
+- **Who:** Everyone! This will be particularly useful for platform engineers looking to enhance certificate lifecycle management.
+- **Bring:** Yourself - maybe a coffee!
+- **Details**: Official schedule [link](https://sched.co/1td0e).
 
 ## Socials
 
-Keep an eye out for our social posts coming soon! 
-Please feel free to share them with your colleagues.
+Keep an eye out for our social posts coming soon and please share them with your colleagues!
 
 - [BlueSky](https://bsky.app/profile/cert-manager.bsky.social),
 - [Mastodon](https://infosec.exchange/@CertManager)
 - [Twitter](https://twitter.com/certmanager)
-
-Please feel free to share them with your colleagues and spread the word.
 
 You can also join us [on Slack](https://cert-manager.io/docs/contributing/#slack), and explore our [Contributor Guide](https://cert-manager.io/docs/contributing/).
