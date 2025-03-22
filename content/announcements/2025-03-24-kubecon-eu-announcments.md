@@ -23,7 +23,7 @@ We'd love to meet you whether you're a user, contributor, super-fan or if you're
 - **When:** April 2 14:30 - 15:45 BST
 - **Who:** All are welcome to start their journey contributing to cert-manager projects.
 - **Bring:** All you need is your laptop and your GitHub account!
-- **Details**: See our [previous announcement](./2025-03-11-contribfest-kubecon-eu-2025.md) for full details! Official schedule [link](https://sched.co/1tcxb)).
+- **Details**: See our [previous announcement](./2025-03-11-contribfest-kubecon-eu-2025.md) for full details! Official schedule [link](https://sched.co/1tcxb).
 
 ## 3) Talk by Tim and Eric
 
@@ -36,7 +36,7 @@ We'd love to meet you whether you're a user, contributor, super-fan or if you're
 
 Keep an eye out for our social posts coming soon and please share them with your colleagues!
 
-- [BlueSky](https://bsky.app/profile/cert-manager.bsky.social),
+- [BlueSky](https://bsky.app/profile/cert-manager.bsky.social)
 - [Mastodon](https://infosec.exchange/@CertManager)
 - [Twitter](https://twitter.com/certmanager)
 
