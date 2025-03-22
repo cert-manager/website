@@ -31,7 +31,7 @@ We'd love to meet you whether you're a user, contributor, super-fan - or if you'
 **When:** April 3 17:30 - 18:00 BST
 **Who:** Everyone! This will be particularly useful for platform engineers looking to enhance certificate lifecycle management.
 **Bring:** Yourself - maybe a coffee!
-**Details**: Official Sched.io [link](https://sched.co/1td0e)
+**Details**: Official schedule [link](https://sched.co/1td0e)
 
 ## Socials
 
