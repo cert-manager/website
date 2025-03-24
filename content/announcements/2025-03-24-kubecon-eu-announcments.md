@@ -6,7 +6,8 @@ date: "2025-03-24T12:00:00Z"
 ---
 
 KubeCon EU 2025 is right around the corner and if you're lucky enough to be attending in London, we would love to see you!
-Below are all the details of the events we have in London so you can bookmark them all.
+
+Below are all the details of the events we'll be at so you can bookmark them all and join in the fun!
 
 ## 1) cert-manager Project Pavilion Booth 
 
