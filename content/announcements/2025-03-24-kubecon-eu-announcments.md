@@ -25,7 +25,7 @@ We'd love to meet you whether you're a user, contributor, super-fan or if you're
 - **Bring:** All you need is your laptop and your GitHub account!
 - **Details**: See our [previous announcement](./2025-03-11-contribfest-kubecon-eu-2025.md) for full details! Official schedule [link](https://sched.co/1tcxb).
 
-## 3) Talk by Tim and Eric
+## 3) Talk by Tim and Erik
 
 - **When:** April 3 17:30 - 18:00 BST
 - **Who:** Everyone! This will be particularly useful for platform engineers looking to enhance certificate lifecycle management.
