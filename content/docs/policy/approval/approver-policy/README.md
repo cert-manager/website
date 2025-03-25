@@ -342,9 +342,9 @@ spec:
       matchNames:
       - "default"
       - "app-team-*"
-    matchLabels:
-      foo: bar
-      team: dev
+      matchLabels:
+        foo: bar
+        team: dev
 ```
 
 ```yaml
