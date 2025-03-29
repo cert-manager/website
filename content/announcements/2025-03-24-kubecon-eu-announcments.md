@@ -24,7 +24,7 @@ We'd love to meet you whether you're a user, contributor, super-fan or if you're
 - **When:** April 2 14:30 - 15:45 BST
 - **Who:** All are welcome to start their journey contributing to cert-manager projects.
 - **Bring:** All you need is your laptop and your GitHub account!
-- **Details**: See our [previous announcement](./2025-03-11-contribfest-kubecon-eu-2025.md) for full details! Official schedule [link](https://sched.co/1tcxb).
+- **Details**: See our [previous announcement](/announcements/2025/03/11/contribfest-kubecon-eu-2025/) for full details! Official schedule [link](https://sched.co/1tcxb).
 
 ## 3) Talk by Tim and Erik
 
