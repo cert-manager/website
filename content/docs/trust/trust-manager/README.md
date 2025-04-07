@@ -85,7 +85,7 @@ spec:
       key: "ca.crt"
 
   # One more ConfigMap source, this time including all certificates from every key
-  - secret:
+  - configMap:
       name: "my-org-cas"
       includeAllKeys: true
 
