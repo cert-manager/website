@@ -1,7 +1,7 @@
 ---
-slug: cert-manager-kubecon-eu-2025-wrapup
-title: Come see cert-managers at KubeCon EU 2025 in London!
-description: Here's all the details you need for cert-manager related events at KubecCon EU 2025.
+slug: cert-manager-kubecon-eu-2025-wrap-up
+title: Thank you KubeCon London
+description: A quick summary of cert-manager at KubeCon EU 2025!
 date: "2025-04-17T18:00:00Z"
 ---
 
@@ -42,11 +42,12 @@ It was a really busy week full of events and everyone has their own takeaways or
 Here are the best moments from the cert-manager team:
 
 - Peter: "I loved being able to participate in and work with 3 very different projects at 3 contribfest events. I'd like to do more of these next time!"
-- Mael: .. <TBC> ...
-- Richard: .. <TBC> ...
-- Ash: .. <TBC> ...
-- Erik: .. <TBC> ...
-- Tim: .. <TBC> ...
+- Mael: "some text"
+- Richard: "some text"
+- Ash: "People coming up to the booth saying they were using trust-manager now, a step forward from wanting to use it previously."
+- Erik: "some text"
+- Tim: "some text"
+- Adam: ""
 
 ## Socials
 
