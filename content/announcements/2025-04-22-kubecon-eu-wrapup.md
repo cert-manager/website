@@ -23,7 +23,7 @@ This talk may inspire your own PKI management enhancements.
 
 ### Contribfest
 
-- **Attendees:** We had approximately 30 people join the cert-manager contribfest.
+- **Attendees:** We had approximately 30 people join the cert-manager Contribfest.
 - **PRs:** 
   - We had at least 6 PRs to various projects that afternoon 2nd April 2025. 
   - We have had a great deal more contributions since such as [trust-manager #577](https://github.com/cert-manager/trust-manager/pull/577), [cert-manager #7678](https://github.com/cert-manager/cert-manager/pull/7678) and [cert-manager #7666](https://github.com/cert-manager/cert-manager/pull/7666).
@@ -41,8 +41,8 @@ A big thank you to Ash for leading that part.
 It was a really busy week full of events and everyone has their own takeaways or best bits.
 Here are the best moments from the cert-manager team:
 
-- Peter: "I loved being able to participate in and work with 3 very different projects at 3 contribfest events. I'd like to do more of these next time!"
-- Mael: "some text"
+- Peter: "I loved being able to participate in and work with 3 very different projects at 3 Contribfest events. I'd like to do more of these next time!"
+- Maël: "some text"
 - Richard: "some text"
 - Ash: "People coming up to the booth saying they were using trust-manager now, a step forward from wanting to use it previously."
 - Erik: "some text"
