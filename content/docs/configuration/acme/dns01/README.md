@@ -168,6 +168,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-gandi`](https://github.com/bwolf/cert-manager-webhook-gandi)
 - [`cert-manager-webhook-infomaniak`](https://github.com/Infomaniak/cert-manager-webhook-infomaniak)
 - [`cert-manager-webhook-inwx`](https://gitlab.com/smueller18/cert-manager-webhook-inwx)
+- [`cert-manager-webhook-ionos-cloud`](https://github.com/ionos-cloud/cert-manager-webhook-ionos-cloud)
 - [`cert-manager-webhook-linode`](https://github.com/slicen/cert-manager-webhook-linode)
 - [`cert-manager-webhook-oci`](https://gitlab.com/dn13/cert-manager-webhook-oci) (Oracle Cloud Infrastructure)
 - [`cert-manager-webhook-scaleway`](https://github.com/scaleway/cert-manager-webhook-scaleway)
