@@ -45,7 +45,7 @@ Here are the best moments from the cert-manager team:
 - Maël: "some text"
 - Richard: "some text"
 - Ash: "People coming up to the booth saying they were using trust-manager now, a step forward from wanting to use it previously."
-- Erik: "some text"
+- Erik: "It was great to meet and spend time with the cert-manager team and other friends from the community IRL!"
 - Tim: "some text"
 - Adam: ""
 
