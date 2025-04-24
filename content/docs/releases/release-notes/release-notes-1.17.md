@@ -108,6 +108,22 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@ianarsenault](https://github.com/ianarsenault)
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
+## `v1.17.2`
+
+This patch release addresses several vulnerabilities reported by the Trivy
+security scanner. It is built with the latest version of Go 1.23 and includes
+various dependency updates. Changes since `v1.17.1`:
+
+### Bug or Regression
+
+- Bump Go to `v1.23.8` to fix `CVE-2025-22871` ([#7701](https://github.com/cert-manager/cert-manager/pull/7701), [`@wallrj`](https://github.com/wallrj))
+- Bump `go-jose` dependency to address `CVE-2025-27144` ([#7603](https://github.com/cert-manager/cert-manager/pull/7603), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Bump `golang.org/x/net` to address `CVE-2025-22870` reported by Trivy ([#7622](https://github.com/cert-manager/cert-manager/pull/7622), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Bump `golang.org/x/net` to fix `CVE-2025-22872` ([#7703](https://github.com/cert-manager/cert-manager/pull/7703), [`@wallrj`](https://github.com/wallrj))
+- Bump `golang.org/x/oauth2` to patch `CVE-2025-22868` ([#7692](https://github.com/cert-manager/cert-manager/pull/7692), [`@lentzi90`](https://github.com/lentzi90))
+- Bump `golang.org/x/crypto` to patch `GHSA-hcg3-q754-cr77` ([#7692](https://github.com/cert-manager/cert-manager/pull/7692), [`@lentzi90`](https://github.com/lentzi90))
+- Bump `github.com/golang-jwt/jwt` to patch `GHSA-mh63-6h87-95cp` ([#7692](https://github.com/cert-manager/cert-manager/pull/7692), [`@lentzi90`](https://github.com/lentzi90))
+
 ## `v1.17.1`
 
 This patch release is primarily intended to address a [breaking change](https://github.com/cert-manager/cert-manager/issues/7540) in Cloudflare's API which impacted ACME DNS-01 challenges using Cloudflare.
