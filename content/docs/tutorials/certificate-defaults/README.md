@@ -159,6 +159,7 @@ These rules will:
 
 - Set a default value of: `revisionHistoryLimit: 2`.
 - Set a [default value of `Always` under `spec.privateKey.rotationPolicy`](../../usage/certificate.md#the-rotationpolicy-setting).
+  > ℹ️ This is not necessary if you use cert-manager `>=v1.18.0`, because the default value was changed from `Never` to `Always`.
 - Set defaults for all `spec.privateKey` fields.
 
 > ℹ️ Note how these rules tackle the first two of our [uses cases](#use-cases).
