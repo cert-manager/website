@@ -195,6 +195,7 @@ Read [cert-manager issue 6753](https://github.com/cert-manager/cert-manager/issu
 ## Community
 
 Thanks to all our open-source contributors with commits in this release, including:
+
 [`@Guitarkalle`](https://github.com/Guitarkalle),
 [`@Jasper-Ben`](https://github.com/Jasper-Ben),
 [`@aidy`](https://github.com/aidy),
@@ -210,6 +211,7 @@ Thanks to all our open-source contributors with commits in this release, includi
 [`@sankalp-at-gh`](https://github.com/sankalp-at-gh).
 
 Thanks also to the following cert-manager maintainers for their contributions during this release:
+
 [`@SgtCoDFish`](https://github.com/SgtCoDFish),
 [`@ThatsMrTalbot`](https://github.com/ThatsMrTalbot),
 [`@inteon`](https://github.com/inteon),
@@ -221,7 +223,86 @@ Thanks also to the CNCF, which provides resources and support, and to the AWS op
 
 In addition, massive thanks to Venafi for contributing developer time and resources towards the continued maintenance of cert-manager projects.
 
-## Changes since `v1.15.0`
+## `v1.16.5`
+
+This patch release addresses several vulnerabilities reported by the Trivy security scanner. It is built with the latest version of Go 1.23 and includes various dependency updates. Changes since `v1.16.4`:
+
+### Bug or Regression
+
+- Bump Go to `v1.23.8` to fix `CVE-2025-22871` ([#7706](https://github.com/cert-manager/cert-manager/pull/7706), [`@wallrj`](https://github.com/wallrj))
+- Bump `github.com/golang-jwt/jwt/v5` to `v5.2.2` to fix `CVE-2025-30204` ([#7708](https://github.com/cert-manager/cert-manager/pull/7708), [`@wallrj`](https://github.com/wallrj))
+- Bump `golang.org/x/net` to fix `CVE-2025-22872` ([#7707](https://github.com/cert-manager/cert-manager/pull/7707), [`@wallrj`](https://github.com/wallrj))
+- Bump `go-jose` dependency to address `CVE-2025-27144` ([#7602](https://github.com/cert-manager/cert-manager/pull/7602), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Bump `golang.org/x/net` to address `CVE-2025-22870` reported by Trivy ([#7623](https://github.com/cert-manager/cert-manager/pull/7623), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+
+## `v1.16.4`
+
+This patch release is primarily intended to address a [breaking change](https://github.com/cert-manager/cert-manager/issues/7540) in Cloudflare's API which impacted ACME DNS-01 challenges using Cloudflare.
+
+### Bug or Regression
+
+- Fix issuing of certificates via DNS01 challenges on Cloudflare after a breaking change to the Cloudflare API ([#7566](https://github.com/cert-manager/cert-manager/pull/7566), [@LukeCarrier](https://github.com/LukeCarrier))
+- Bump go to 1.23.6 to address [`CVE-2025-22866`](https://github.com/advisories/GHSA-3whm-j4xm-rv8x) reported by Trivy ([#7562](https://github.com/cert-manager/cert-manager/pull/7562), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Update go to 1.23.5 ([#7533](https://github.com/cert-manager/cert-manager/pull/7533), [@tareksha](https://github.com/tareksha))
+
+## `v1.16.3`
+
+cert-manager `v1.16.3` is a patch release mainly focused around bumping dependencies to address reported CVEs: `CVE-2024-45337` and `CVE-2024-45338`.
+
+We don't believe that cert-manager is actually vulnerable; this release is instead intended to satisfy vulnerability scanners.
+
+It also includes a bug fix to the new `renewBeforePercentage` field. If you were using `renewBeforePercentage`, see [PR #7421](https://github.com/cert-manager/cert-manager/pull/7421) for more information.
+
+### Bug Fixes
+
+- Bump `golang.org/x/net` and `golang.org/x/crypto` to address `CVE-2024-45337` and `CVE-2024-45338` ([#7485](https://github.com/cert-manager/cert-manager/pull/7485), [@erikgb](https://github.com/erikgb))
+- Fix the behavior of `renewBeforePercentage` to comply with its spec ([#7441](https://github.com/cert-manager/cert-manager/pull/7441), [@cert-manager-bot](https://github.com/cert-manager-bot))
+
+### Other
+
+- Bump go to 1.23.4 ([#7489](https://github.com/cert-manager/cert-manager/pull/7489), [@erikgb](https://github.com/erikgb))
+- Bump base images to latest available ([#7508](https://github.com/cert-manager/cert-manager/pull/7508), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+## `v1.16.2`
+
+This patch release makes [several changes](https://github.com/cert-manager/cert-manager/pull/7401) to how PEM input is validated in
+cert-manager, adding maximum sizes appropriate to the type of PEM data which is being parsed.
+
+This is to prevent an unacceptable slow-down in parsing specially crafted PEM data. The issue was found by Google's OSS-Fuzz project.
+
+The issue is low severity; to exploit the PEM issue would require privileged access which would likely allow Denial-of-Service through other methods.
+
+Note also that since most PEM data parsed by cert-manager comes from `ConfigMap` or `Secret` resources which have
+a max size limit of approximately 1MB, it's difficult to force cert-manager to parse large amounts of PEM data.
+
+Further details are in the [security advisory](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-r4pg-vg54-wxx4).
+
+In addition, the version of Go used to build cert-manager 1.16 was updated along with the base images.
+
+### Bug Fixes
+
+- Set a maximum size for PEM inputs which cert-manager will accept to remove possibility of taking a long time to process an input ([#7401](https://github.com/cert-manager/cert-manager/pull/7401), @SgtCoDFish)
+
+### Other (Cleanup or Flake)
+
+- Bump go to 1.23.3 and bump base images to latest available ([#7431](https://github.com/cert-manager/cert-manager/pull/7431), @SgtCoDFish)
+
+## `v1.16.1`
+
+cert-manager `v1.16.1` contains some fixes to Helm value schema validation, as well as a fix to the ACME ClusterIssuer.
+
+Changes since `v1.16.0`.
+
+### Bug Fixes
+
+- BUGFIX: Helm schema validation: the new schema validation was too strict for the "global" section. Since the global section is shared across all charts and sub-charts, we must also allow unknown fields. ([#7348](https://github.com/cert-manager/cert-manager/pull/7348), [`@inteon`](https://github.com/inteon))
+- BUGFIX: Helm will now accept percentages for the `podDisruptionBudget.minAvailable` and `podDisruptionBudget.maxAvailable` values. ([#7345](https://github.com/cert-manager/cert-manager/pull/7345), [`@inteon`](https://github.com/inteon))
+- Helm: allow `enabled` to be set as a value to toggle cert-manager as a dependency. ([#7356](https://github.com/cert-manager/cert-manager/pull/7356), [`@inteon`](https://github.com/inteon))
+- BUGFIX: A change in `v1.16.0` caused cert-manager's ACME ClusterIssuer to look in the wrong namespace for resources required for the issuance (e.g. credential Secrets). This is now fixed in `v1.16.1`. ([#7342](https://github.com/cert-manager/cert-manager/pull/7342), [`@inteon`](https://github.com/inteon))
+
+## `v1.16.0`
+
+Changes since `v1.15.0`.
 
 ### Feature
 

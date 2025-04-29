@@ -42,8 +42,7 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
 
 ### Lower memory footprint
 
-In 1.12 we continued the work started in 1.11 to reduce cert-manager component's
-memory consumption.
+In 1.12 we continued the work started in 1.11 to reduce cert-manager's memory consumption.
 
 #### Controller
 
@@ -217,6 +216,73 @@ time and resources towards the continued maintenance of cert-manager projects. V
 cert-manager 1.12 as a long term support release, meaning it will be maintained for much longer
 than other releases to provide a stable platform for enterprises to build upon.
 
+## `v1.12.17`
+
+This patch release addresses several vulnerabilities reported by the Trivy security scanner. It is built with the latest version of Go 1.23 and includes various dependency updates. Changes since `v1.12.16`:
+
+### Bug or Regression
+
+- Bump Go to `v1.23.8` to fix `CVE-2025-22871` ([#7709](https://github.com/cert-manager/cert-manager/pull/7709), [`@wallrj`](https://github.com/wallrj))
+- Bump `golang.org/x/net` to `v0.38.0` to fix `CVE-2025-22872` ([#7709](https://github.com/cert-manager/cert-manager/pull/7709), [`@wallrj`](https://github.com/wallrj))
+- Bump `github.com/golang-jwt/jwt/v4` to `v4.5.2` to fix `CVE-2025-30204` ([#7709](https://github.com/cert-manager/cert-manager/pull/7709), [`@wallrj`](https://github.com/wallrj))
+- Bump `go-jose` to address `CVE-2025-27144` ([#7597](https://github.com/cert-manager/cert-manager/pull/7597), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Bump `golang.org/x/net` to address `CVE-2025-22870` reported by Trivy ([#7624](https://github.com/cert-manager/cert-manager/pull/7624), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Bump `golang.org/x/net` to address `CVE-2025-22870` reported by Trivy ([#7623](https://github.com/cert-manager/cert-manager/pull/7623), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+
+## `v1.12.16`
+
+This patch release is primarily intended to address a [breaking change](https://github.com/cert-manager/cert-manager/issues/7540) in Cloudflare's API which impacted ACME DNS-01 challenges using Cloudflare.
+
+It also bumps Go from `1.21.x` to `1.23.x` to address a range of reported CVEs. This in turn requires bumping the `controller-gen` tool which changes the format of descriptions in generated CRD YAML. The following CVEs are fixed:
+
+- `CVE-2024-34156`
+- `CVE-2024-34155`
+- `CVE-2024-34158`
+- `CVE-2024-45336`
+- `CVE-2024-45341`
+- `CVE-2025-22866`
+
+We don't expect that bumping Go will produce many noticeable changes, but there are some `GODEBUG` changes that could be applicable - specifically `x509negativeserial` may be of interest to users dealing with legacy certificates.
+
+There's more information [on `go.dev`](https://go.dev/doc/godebug#go-123) which may help if you suspect any changes in this version bump may have caused issues in your environment.
+
+### Bug Fixes
+
+- Bump go to 1.23.6 which also requires bumping controller-gen to address a panic in that tool. That change in turn changes the formatting (but not the content) of CRD YAML for release-1.12 ([#7570](https://github.com/cert-manager/cert-manager/pull/7570), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix issuing of certificates via DNS01 challenges on Cloudflare after a breaking change to the Cloudflare API ([#7568](https://github.com/cert-manager/cert-manager/pull/7568), [@SgtCoDFish](https://github.com/SgtCoDFish) + [@LukeCarrier](https://github.com/LukeCarrier))
+
+## `v1.12.15`
+
+cert-manager `v1.12.15` contains simple dependency bumps to address reported CVEs (`CVE-2024-45337` and `CVE-2024-45338`).
+
+We don't believe that cert-manager is actually vulnerable; this release is instead intended to satisfy vulnerability scanners.
+
+### Bug Fixes
+
+- Bump `golang.org/x/net` and `golang.org/x/crypto` to address `CVE-2024-45337` and `CVE-2024-45338` ([#7497](https://github.com/cert-manager/cert-manager/pull/7497), [@wallrj](https://github.com/wallrj))
+
+## `v1.12.14`
+
+This patch release makes [several changes](https://github.com/cert-manager/cert-manager/pull/7403) to how PEM input is validated in
+cert-manager, adding maximum sizes appropriate to the type of PEM data which is being parsed.
+
+This is to prevent an unacceptable slow-down in parsing specially crafted PEM data. The issue was found by Google's OSS-Fuzz project.
+
+The issue is low severity; to exploit the PEM issue would require privileged access which would likely allow Denial-of-Service through other methods.
+
+Note also that since most PEM data parsed by cert-manager comes from `ConfigMap` or `Secret` resources which have
+a max size limit of approximately 1MB, it's difficult to force cert-manager to parse large amounts of PEM data.
+
+Further details are in the [security advisory](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-r4pg-vg54-wxx4).
+
+This patch release also fixes [an issue](https://github.com/golang-jwt/jwt/security/advisories/GHSA-29wx-vh33-7x7r) reported by Trivy,
+although that issue is low severity and is not expected to be relevant to cert-manager.
+
+### Bug Fixes
+
+- Set a maximum size for PEM inputs which cert-manager will accept to remove possibility of taking a long time to process an input ([#7403](https://github.com/cert-manager/cert-manager/pull/7403), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Fix `CVE-2024-5174` in `github.com/golang-jwt/jwt/v4` ([#7407](https://github.com/cert-manager/cert-manager/pull/7407), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
 ## `v1.12.13`
 
 This patch release fixes the following vulnerabilities:
@@ -237,7 +303,7 @@ This patch release fixes the following vulnerabilities:
 > Those newer minor versions of the Kubernetes modules pulled in new transitive dependencies,
 > and incremented the minimum Go version from `1.20` to `1.21`.
 
-### Bugfixes
+### Bug Fixes
 
 - Bump the `go-retryablehttp` dependency to fix `CVE-2024-6104` ([#7128](https://github.com/cert-manager/cert-manager/pull/7128), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Updated Helm dependency to resolve `CVE-2024-25620` and `CVE-2024-26147` and Docker dependency to resolve `CVE-2024-41110` ([#7214](https://github.com/cert-manager/cert-manager/pull/7214), [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
@@ -321,7 +387,7 @@ This patch release fixes the following vulnerabilities:
 
 ## `v1.12.12`
 
-### Bugfixes
+### Bug Fixes
 
 - BUGFIX: fix issue that caused Vault issuer to not retry signing when an error was encountered. ([#7113](https://github.com/cert-manager/cert-manager/pull/7113), [@cert-manager-bot](https://github.com/cert-manager-bot))
 

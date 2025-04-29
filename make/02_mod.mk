@@ -43,10 +43,10 @@ $(bin_dir)/scratch/node@$(NODE_VERSION)_%: | $(bin_dir)/scratch
 	tar xzf $@.tar.gz --strip-components=1 -C $@
 	rm -f $@.tar.gz
 
-$(bin_dir)/downloaded/tools/node@$(NODE_VERSION)_%: | $(bin_dir)/scratch/node@$(NODE_VERSION)_% $(bin_dir)/downloaded/tools
+$(DOWNLOAD_DIR)/tools/node@$(NODE_VERSION)_%: | $(bin_dir)/scratch/node@$(NODE_VERSION)_% $(DOWNLOAD_DIR)/tools
 	$(LN) $(CURDIR)/$(bin_dir)/scratch/node@$(NODE_VERSION)_$*/bin/node $@
 
-$(bin_dir)/downloaded/tools/npm@$(NPM_VERSION)_%: | $(bin_dir)/scratch/node@$(NPM_VERSION)_% $(bin_dir)/downloaded/tools
+$(DOWNLOAD_DIR)/tools/npm@$(NPM_VERSION)_%: | $(bin_dir)/scratch/node@$(NPM_VERSION)_% $(DOWNLOAD_DIR)/tools
 	$(LN) $(CURDIR)/$(bin_dir)/scratch/node@$(NODE_VERSION)_$*/bin/npm $@
 
 # Export the node bin dir so npm can work

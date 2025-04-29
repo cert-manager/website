@@ -16,14 +16,11 @@ for code generation.
 Verifying and updating CRDs and generated code can be done entirely through make. There are two steps; one will update CRDs and one will update generated code:
 
 ```bash
-# Check that CRDs and codegen are up to date
-make verify-crds verify-codegen
-
 # Update CRDs based on code
-make update-crds
+make generate-crds
 
 # Update generated code based on CRD defintions in code
-make update-codegen
+make generate-codegen
 ```
 
 ## Versions

@@ -117,14 +117,10 @@ spec:
     secretName: root-secret
 ```
 
-Alternatively, if you are looking to use `ClusterIssuer` for signing `Certificates` anywhere in your cluster with the `SelfSigned` `Certificate` CA, use the YAML below (slight modification to the last step):
+Alternatively, if you are looking to use `ClusterIssuer` for signing `Certificates` anywhere in your cluster with the `SelfSigned` `Certificate` CA, use the YAML below (slight modification):
 
 ```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: sandbox
----
+# `sandbox` namespace is no longer needed.
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
@@ -136,6 +132,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: my-selfsigned-ca
+  # Create CA root secret in `cert-manager` namespace instead of `sandbox` namespace.
   namespace: cert-manager
 spec:
   isCA: true
@@ -155,6 +152,7 @@ metadata:
   name: my-ca-issuer
 spec:
   ca:
+    # `ClusterIssuer` resource is not namespaced, so `secretName` is assumed to reference secret in `cert-manager` namespace.
     secretName: root-secret
 ```
 The "selfsigned-issuer" `ClusterIssuer` is used to issue the Root CA Certificate. Then, "my-ca-issuer" `ClusterIssuer` is used to issue but also sign certificates using the newly created Root CA `Certificate`, which is what you will use for future certificates cluster-wide.

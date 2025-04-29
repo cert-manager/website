@@ -3,10 +3,6 @@ title: Supported Releases
 description: Supported releases, Kubernetes versions, OpenShift versions and upcoming release timeline
 ---
 
-{/*
-Inspired by https://istio.io/latest/about/supported-releases/
-*/}
-
 This page lists the status, timeline and policy for currently supported releases of cert-manager.
 
 All cert-manager releases are supported at least until the release of a second subsequent version.
@@ -25,17 +21,17 @@ should be stable enough to run.
 
 | Release      | Release Date | End of Life            | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:------------:|:------------:|:----------------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.16][]     | Oct 03, 2024 | Release of 1.18        |       1.25 → 1.31   /   4.14 → 4.16            |  1.27 → 1.31                       |
-| [1.15][]     | Jun 05, 2024 | Release of 1.17        |       1.25 → 1.31   /   4.12 → 4.16            |  1.25 → 1.31                       |
-| [1.12 LTS][] | May 19, 2023 | May 19, 2025           |       1.22 → 1.31   /   4.9  → 4.16            |  1.22 → 1.29                       |
+| [1.17][]     | Feb 03, 2025 | Release of 1.19        |       1.29 → 1.32   /   4.16 → 4.17            |  1.29 → 1.32                       |
+| [1.16][]     | Oct 03, 2024 | Release of 1.18        |       1.25 → 1.32   /   4.14 → 4.17            |  1.27 → 1.31                       |
+| [1.12 LTS][] | May 19, 2023 | May 19, 2025           |       1.22 → 1.32   /   4.9  → 4.16            |  1.22 → 1.29                       |
 
-cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It will continue to be supported for at least 2 years from release.
+cert-manager 1.12 is a Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It will be supported for 2 years from release.
 
 ## Upcoming releases
 
-| Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] |
-|:--------:|:------------:|:---------------:|:----------------------------------------------:|
-| [1.17][] | Feb 03, 2025 | Release of 1.19 | 1.27 → 1.31 / 4.14 → 4.16                      |
+| Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
+|:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
+| [1.18][] | Jun 04, 2025 | Release of 1.20 | 1.29 → 1.33 / 4.16 → 4.17                      | 1.30 → 1.33                        |
 
 Dates in the future are not firm commitments and are subject to change.
 
@@ -216,11 +212,11 @@ The "Oldest Kubernetes Release" is the oldest release we deemed relevant to the 
 
 |      Vendor           |  Oldest K8s Release   |                      Other Kubernetes Releases                       |
 |:---------------------:|:---------------------:|----------------------------------------------------------------------|
-|    [EKS][eks]         | 1.28 (Nov 2024)       | 1.29 (Mar 2025), 1.30 (Jul 2025)                                     |
-|    [GKE][gke]         | 1.28 (Feb 2025)       | 1.29 (Mar 2025), 1.30 (Sep 2025)                                     |
-|    [AKS][aks]         | 1.28 (Jan 2025)       | 1.29 (Mar 2025), 1.30 (Jul 2025), 1.31 (Nov 2025)                    |
-| [OpenShift 4][os]     | 1.26 (4.13, Nov 2024) | 1.27 (4.14, May 2025), 1.28 (4.15, Aug 2025), 1.29 (4.16, Dec 2025)  |
-| [OpenShift 4 EUS][os] | 1.25 (4.12, Jan 2025) | 1.27 (4.14, Oct 2025), 1.29 (4.16, Jun 2026)                         |
+|    [EKS][eks]         | 1.30 (Jul 2025)       | 1.31 (Nov 2025), 1.32 (TBD)                                          |
+|    [GKE][gke]         | 1.30 (Jul 2025)       | 1.31 (Sep 2025)                                                      |
+|    [AKS][aks]         | 1.30 (Jul 2025)       | 1.31 (Nov 2025), 1.32 (Mar 2026)                                     |
+| [OpenShift 4][os]     | 1.28 (4.15, Aug 2025) | 1.29 (4.16, Dec 2025), 1.30 (4.17, Apr 2026)                         |
+| [OpenShift 4 EUS][os] | 1.27 (4.14, Oct 2025) | 1.29 (4.16, Jun 2026)                                                |
 
 [eks]: https://endoflife.date/amazon-eks
 [gke]: https://endoflife.date/google-kubernetes-engine
@@ -236,6 +232,7 @@ For convenience, the following table shows these version mappings:
 
 | OpenShift versions | Kubernetes version |
 |:------------------:|--------------------|
+| 4.17               | 1.30               |
 | 4.16, 4.16 EUS     | 1.29               |
 | 4.15               | 1.28               |
 | 4.14, 4.14 EUS     | 1.27               |
@@ -295,6 +292,7 @@ are no longer supported.
 
 | Release  | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
 |----------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
+| [1.15][] | Jun 05, 2024 | Feb 03, 2025 |          1.25 → 1.32           |          4.12 → 4.16          |
 | [1.14][] | Feb 03, 2024 | Oct 03, 2024 |          1.24 → 1.31           |          4.11 → 4.16          |
 | [1.13][] | Sep 12, 2023 | Jun 05, 2024 |          1.21 → 1.27           |          4.8 → 4.14           |
 | [1.11][] | Jan 11, 2023 | Sep 12, 2023 |          1.21 → 1.27           |          4.8 → 4.14           |
@@ -318,7 +316,8 @@ are no longer supported.
 
 [s]: #kubernetes-supported-versions
 [test]: #supported-vs-tested
-[1.17]: https://github.com/cert-manager/cert-manager/milestone/39
+[1.18]: https://github.com/cert-manager/cert-manager/milestone/40
+[1.17]: ./release-notes/release-notes-1.17.md
 [1.16]: ./release-notes/release-notes-1.16.md
 [1.15]: ./release-notes/release-notes-1.15.md
 [1.14]: ./release-notes/release-notes-1.14.md
@@ -342,3 +341,7 @@ are no longer supported.
 [0.13]: ./release-notes/release-notes-0.13.md
 [0.12]: ./release-notes/release-notes-0.12.md
 [0.11]: ./release-notes/release-notes-0.11.md
+
+{/*
+This page is inspired by https://istio.io/latest/about/supported-releases/
+*/}

@@ -218,7 +218,7 @@ startupapicheck:
 > which obviates the need to explicitly set the tolerations in the Helm chart.
 >
 > ℹ️ Alternatively, you could use [Kyverno](https://kyverno.io/docs/) to limit which tolerations Pods are allowed to use.
-> Read [Restrict control plane scheduling](https://kyverno.io/policies/other/res/restrict-controlplane-scheduling/restrict-controlplane-scheduling/) as a starting point.
+> Read [Restrict control plane scheduling](https://kyverno.io/policies/other/restrict-controlplane-scheduling/restrict-controlplane-scheduling/) as a starting point.
 
 ## High Availability
 
@@ -256,7 +256,7 @@ By default the cert-manager webhook Deployment has 1 replica, but in production 
 If the cert-manager webhook is unavailable, all API operations on cert-manager custom resources will fail,
 and this will disrupt any software that creates, updates or deletes cert-manager custom resources (including cert-manager itself),
 and it may cause other disruptions to your cluster.
-So it is *especially* important to keep at multiple replicas of the cert-manager webhook running at all times.
+So it is *especially* important to keep multiple replicas of the cert-manager webhook running at all times.
 
 > ℹ️ By contrast, if there is only a single replica of the cert-manager controller, there is less risk of disruption.
 > For example, if the Node hosting the single cert-manager controller manager Pod is drained,
@@ -524,7 +524,7 @@ or if there is a bug in one of the other threads which causes the process to dea
 
 ## Restrict Auto-Mount of Service Account Tokens
 
-This recommendation is described in the [Kyverno Policy Catalogue](https://kyverno.io/policies/other/res/restrict-automount-sa-token/restrict-automount-sa-token/) as follows:
+This recommendation is described in the [Kyverno Policy Catalogue](https://kyverno.io/policies/other/restrict-automount-sa-token/restrict-automount-sa-token/) as follows:
 > Kubernetes automatically mounts ServiceAccount credentials in each Pod. The
 > ServiceAccount may be assigned roles allowing Pods to access API resources.
 > Blocking this ability is an extension of the least privilege best practice and

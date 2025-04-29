@@ -172,6 +172,8 @@ page if a step is missing or if it is outdated.
    example, see
    [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1.md).
 
+   This can be prepared ahead of time.
+
 4. **(final + patch releases)** Prepare the Website "Release Notes" PR.
 
      **⚠️ This step can be done ahead of time.**
@@ -182,7 +184,9 @@ page if a step is missing or if it is outdated.
    Go to the section "Generate `github-release-description.md`" using the
       instructions further below (<kbd>Ctrl+F</kbd> and look for
       `github-release-description.md`).
+
    2. Remove the "Dependencies" section.
+
    3. For each bullet point in the Markdown file, read the changelog entry and
       check that it follows the [release-note guidelines](../contributing/contributing-flow.md#release-note-guidelines).
       If you find a changelog entry that doesn't follow the guidelines, then:
@@ -193,8 +197,10 @@ page if a step is missing or if it is outdated.
 
       and copy the same change into `release-notes.md` (or re-generate the
       file).
+
    4. Add the section "Major themes" and "Community" by taking example on the
      previous release note pages.
+
    5. Replace the GitHub issue numbers and GitHub handles (e.g., `#1234` or
        `@maelvls`) with actual links using the following command:
 
@@ -224,8 +230,6 @@ page if a step is missing or if it is outdated.
         +    },
         ```
 
-   8. Add a line to the file `content/docs/release-notes/README.md`.
-
 5. **(final + patch release)** Prepare the Website "Bump Versions" PR.
 
    **⚠️ This step can be done ahead of time.**
@@ -249,26 +253,22 @@ page if a step is missing or if it is outdated.
       ```
 
    4. (**final + patch release of the latest minor version**) Bump the latest
-      cert-manager version variable in the `variables.json` file.
+      cert-manager version variable in the `content/docs/variables.json` file.
 
       ```diff
       -"cert_manager_latest_version": "v1.14.2",
       +"cert_manager_latest_version": "v1.14.3",
       ```
 
-   5. (**final release only**) Freeze the `docs/` folder by creating a copy ,
-     removing the pages from that copy that don't make sense to be versioned,
-     and updating the `manifest.json` file:
+   5. (**final release only**) Freeze the `docs/` folder by running the following script:
 
       ```bash
-      cp -r content/docs content/v1.12-docs
-      rm -rf content/v1.12-docs/{installation/supported-releases,installation/upgrading,release-notes}
-      sed -i.bak 's|docs|v1.12-docs|g' content/v1.12-docs/manifest.json
-      cat content/v1.12-docs/manifest.json \
-        | jq 'del(.. | select(.path? | select(.) | test(".*(installation/supported-releases.md|installation/upgrading|release-notes).*")))' \
-        | jq 'del(.. | select(.routes? == []))' >/tmp/manifest \
-           && mv /tmp/manifest content/v1.12-docs/manifest.json
+      # From the website repository, on the master branch.
+      ./scripts/freeze-docs 1.16
       ```
+
+      This copies the `docs/` folder to a versioned folder (e.g. `v1.15-docs`) and removes any
+      folders which should not be present in versioned docs.
 
    6. (**final + patch releases**) Update the [API docs](https://cert-manager.io/docs/reference/api-docs/) and [CLI docs](https://cert-manager.io/docs/cli//):
 
@@ -607,33 +607,7 @@ page if a step is missing or if it is outdated.
 
       [ff-release-next]: https://github.com/cert-manager/website/compare/master...release-next?quick_pull=1&title=%5BPost-Release%5D+Merge+release-next+into+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
 
-16. <details>
-      <summary>**ONLY for (1.14 and below)**</summary>
-
-      Open a PR for a [Homebrew](https://github.com/Homebrew/homebrew-core/pulls) formula update for `cmctl`.
-
-      > ℹ️ The PR is [created automatically](https://github.com/search?q=repo%3AHomebrew%2Fhomebrew-core+cmctl&type=pullrequests&s=created&o=desc)
-      > if you are publishing the `latest` version of cert-manager, in which case this step can be skipped.
-      > But not if you are publishing a patch for a previous version.
-
-      Assuming you have `brew` installed, you can use the `brew bump-formula-pr`
-      command to do this. You'll need the new tag name and the commit hash of that
-      tag. See `brew bump-formula-pr --help` for up to date details, but the command
-      will be of the form:
-
-      ```bash
-      brew bump-formula-pr --dry-run --tag v0.10.0 --revision da3265115bfd8be5780801cc6105fa857ef71965 cmctl
-      ```
-
-      Replacing the tag and revision with the new ones.
-
-      This will take time for the Homebrew team to review. Once the pull reqeust
-      against https://github.com/homebrew/homebrew-core has been opened, continue
-      with further release steps.
-
-    </details>
-
-17. Post a Slack message as an answer to the first message. Toggle the check
+16. Post a Slack message as an answer to the first message. Toggle the check
    box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -641,20 +615,23 @@ page if a step is missing or if it is outdated.
     https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-18. **(final release only)** Show the release to the world:
+17. **(final release only)** Show the release to the world:
 
     1. Send an email to
        [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
        with the `release` label
        ([examples](https://groups.google.com/g/cert-manager-dev?label=release)).
 
-    2. Send a tweet on the cert-manager Twitter account! Login details are in Jetstack's 1password (for now).
-       ([Example tweet](https://twitter.com/CertManager/status/1612886311957831680)). Make sure [@JetstackHQ](https://twitter.com/JetstackHQ) retweets it!
+    2. Send a tweet on the cert-manager Twitter account! Login details are in the cert-manager 1password.
+       ([Example tweet](https://twitter.com/CertManager/status/1612886311957831680)).
 
-    3. Send a toot from the cert-manager Mastodon account! Login details are in Jetstack's 1password (for now).
+    3. Send a toot from the cert-manager Mastodon account! Login details are in the cert-manager 1password.
        ([Example toot](https://infosec.exchange/@CertManager/109666434738850493))
 
-19. Proceed to the post-release "testing and release" steps:
+    4. Create a post on the cert-manager BlueSky account! Login details are in the cert-manager 1password.
+       ([Example post](https://bsky.app/profile/cert-manager.bsky.social/post/3lhdtn7c2222u))
+
+18. Proceed to the post-release "testing and release" steps:
 
     1. **(initial beta only)** Create a PR on
        [cert-manager/testing](https://github.com/cert-manager/testing) in order to
@@ -674,24 +651,20 @@ page if a step is missing or if it is outdated.
        If the [milestone](https://github.com/cert-manager/cert-manager/milestones) for the next release doesn't exist,
        create it first. If you consider the milestone for the version you just released to be complete, close it.
 
-    4. Open a PR against the Krew index such as [this one](https://github.com/kubernetes-sigs/krew-index/pull/1724),
-      bumping the versions of our kubectl plugins. This is likely only worthwhile if
-      cmctl / kubectl plugin functionality has changed significantly or after the first release of a new major version.
-
-    5. Create a new OLM package and publish to OperatorHub
-
-       cert-manager can be [installed](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) using Operator Lifecycle Manager (OLM)
-       so we need to create OLM packages for each cert-manager version and publish them to both
-       [`operatorhub.io`](https://operatorhub.io/operator/cert-manager) and the equivalent package index for RedHat OpenShift.
-
-       Follow [the cert-manager OLM release process](https://github.com/cert-manager/cert-manager-olm#release-process) and, once published,
-       [verify that the cert-manager OLM installation instructions](https://cert-manager.io/docs/installation/operator-lifecycle-manager/) still work.
-
 ## Older Releases
 
 The above guide only applies for versions of cert-manager from v1.8 and newer.
 
 Older versions were built using Bazel and this difference in build process is reflected in the release process.
+
+### Krew and Homebrew
+
+Since cmctl used to be part of the cert-manager repo, we'd publish cmctl releases alongside cert-manager. Now that cmctl lives in [its own repo](https://github.com/cert-manager/cmctl) that doesn't
+make sense any more, and so any references in this release process or in older versions to publishing to Krew and Homebrew have been removed.
+
+### OLM (OpenShift Operator Lifecycle Manager)
+
+We previously made efforts to publish OLM releases of cert-manager on a best-effort basis. We agreed in early 2025 to discontinue this, since the burden was too much and usually fell unfairly on one maintainer.
 
 ### cert-manager 1.6 and 1.7
 

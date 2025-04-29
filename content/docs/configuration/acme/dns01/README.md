@@ -164,9 +164,11 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-civo`](https://github.com/okteto/cert-manager-webhook-civo)
 - [`cert-manager-webhook-dnspod`](https://github.com/qqshfox/cert-manager-webhook-dnspod)
 - [`cert-manager-webhook-dnsimple`](https://github.com/neoskop/cert-manager-webhook-dnsimple)
+- [`cert-manager-webhook-exoscale`](https://github.com/glasskube/cert-manager-webhook-exoscale)
 - [`cert-manager-webhook-gandi`](https://github.com/bwolf/cert-manager-webhook-gandi)
 - [`cert-manager-webhook-infomaniak`](https://github.com/Infomaniak/cert-manager-webhook-infomaniak)
 - [`cert-manager-webhook-inwx`](https://gitlab.com/smueller18/cert-manager-webhook-inwx)
+- [`cert-manager-webhook-ionos-cloud`](https://github.com/ionos-cloud/cert-manager-webhook-ionos-cloud)
 - [`cert-manager-webhook-linode`](https://github.com/slicen/cert-manager-webhook-linode)
 - [`cert-manager-webhook-oci`](https://gitlab.com/dn13/cert-manager-webhook-oci) (Oracle Cloud Infrastructure)
 - [`cert-manager-webhook-scaleway`](https://github.com/scaleway/cert-manager-webhook-scaleway)
@@ -183,6 +185,8 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-zilore`](https://gitlab.com/zilore/cert-manager-webhook-zilore)
 - [`stackit-cert-manager-webhook`](https://github.com/stackitcloud/stackit-cert-manager-webhook)
 - [`cert-manager-webhook-vercel`](https://github.com/rhythmbhiwani/cert-manager-webhook-vercel)
+- [`cert-manager-webhook-opentelekomcloud`](https://github.com/akyriako/cert-manager-webhook-opentelekomcloud)
+- [`cert-manager-webhook-abion`](https://github.com/abiondevelopment/cert-manager-webhook-abion)
 
 You can find more information on how to configure webhook providers [here](./webhook.md).
 

@@ -1,0 +1,3 @@
+This is a marker file indicating that this folder should not be copied when freezing docs and should only be visible in `content/docs`.
+
+See `scripts/freeze-docs` for more details.

@@ -61,7 +61,7 @@ Events:
 
 ## 2. Troubleshooting Orders
 
-When we run a describe on the `CertificateRequest` resource we see that an `Order` that has
+When we run a describe on the `CertificateRequest` resource we see that an `Order` has
 been created:
 
 ```bash
@@ -207,7 +207,7 @@ If your challenge self-check fails with a 404 not found error. Make sure to chec
 * use `kubectl describe ingress` to check the status of the HTTP01 solver ingress. (unless you use `acme.cert-manager.io/http01-edit-in-place`, then check the same ingress as your domain)
 
 ### DNS01 troubleshooting
-If you see no error events about your DNS provider you can check the following
+If you see no error events about your DNS provider you can check the following.
 Check if you can see the `_acme_challenge.domain` TXT DNS record from the public internet, or in your DNS provider's interface.
 cert-manager will check if a DNS record has been propagated by querying the cluster's DNS solver. If you are able to see it from the public internet but not from inside the cluster you might want to change [the DNS server for self-check](../configuration/acme/dns01/README.md#setting-nameservers-for-dns01-self-check) as some cloud providers overwrite DNS internally.
 

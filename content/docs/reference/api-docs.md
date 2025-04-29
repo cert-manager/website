@@ -1136,7 +1136,7 @@ description: >-
         <code>imagePullSecrets</code>
         <br />
         <em>
-          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#localobjectreference-v1-core">[]Kubernetes core/v1.LocalObjectReference</a>
+          <a href="https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/local-object-reference/">[]Kubernetes core/v1.LocalObjectReference</a>
         </em>
       </td>
       <td>
@@ -1261,7 +1261,7 @@ description: >-
               <code>imagePullSecrets</code>
               <br />
               <em>
-                <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#localobjectreference-v1-core">[]Kubernetes core/v1.LocalObjectReference</a>
+                <a href="https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/local-object-reference/">[]Kubernetes core/v1.LocalObjectReference</a>
               </em>
             </td>
             <td>
@@ -2165,6 +2165,17 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>resource ID of the managed identity, can not be used at the same time as clientID Cannot be used for Azure Managed Service Identity</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>tenantID</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>tenant ID of the managed identity, can not be used at the same time as resourceID</p>
       </td>
     </tr>
   </tbody>
@@ -5152,10 +5163,7 @@ description: >-
 <h3 id="cert-manager.io/v1.JKSKeystore">JKSKeystore</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateKeystores">CertificateKeystores</a>) </p>
 <div>
-  <p>
-    JKS configures options for storing a JKS keystore in the <code>spec.secretName</code>
-    Secret resource.
-  </p>
+  <p>JKS configures options for storing a JKS keystore in the target secret. Either PasswordSecretRef or Password must be provided.</p>
 </div>
 <table>
   <thead>
@@ -5173,21 +5181,9 @@ description: >-
       </td>
       <td>
         <p>
-          Create enables JKS keystore creation for the Certificate. If true, a file named <code>keystore.jks</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>. The keystore file will be updated immediately. If the issuer provided a CA certificate, a file named <code>truststore.jks</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>
+          Create enables JKS keystore creation for the Certificate. If true, a file named <code>keystore.jks</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> or <code>password</code>. The keystore file will be updated immediately. If the issuer provided a CA certificate, a file named <code>truststore.jks</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>
           containing the issuing Certificate Authority
         </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>passwordSecretRef</code>
-        <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
-      </td>
-      <td>
-        <p>PasswordSecretRef is a reference to a key in a Secret resource containing the password used to encrypt the JKS keystore.</p>
       </td>
     </tr>
     <tr>
@@ -5199,6 +5195,30 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p> Alias specifies the alias of the key in the keystore, required by the JKS format. If not provided, the default alias <code>certificate</code> will be used. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>passwordSecretRef</code>
+        <br />
+        <em>
+          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>PasswordSecretRef is a reference to a non-empty key in a Secret resource containing the password used to encrypt the JKS keystore. Mutually exclusive with password. One of password or passwordSecretRef must provide a password with a non-zero length.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>password</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Password provides a literal password used to encrypt the JKS keystore. Mutually exclusive with passwordSecretRef. One of password or passwordSecretRef must provide a password with a non-zero length.</p>
       </td>
     </tr>
   </tbody>
@@ -5526,19 +5546,7 @@ description: >-
         <em>bool</em>
       </td>
       <td>
-        <p> Create enables PKCS12 keystore creation for the Certificate. If true, a file named <code>keystore.p12</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>. The keystore file will be updated immediately. If the issuer provided a CA certificate, a file named <code>truststore.p12</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>passwordSecretRef</code>
-        <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
-      </td>
-      <td>
-        <p>PasswordSecretRef is a reference to a key in a Secret resource containing the password used to encrypt the PKCS12 keystore.</p>
+        <p> Create enables PKCS12 keystore creation for the Certificate. If true, a file named <code>keystore.p12</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> or in <code>password</code>. The keystore file will be updated immediately. If the issuer provided a CA certificate, a file named <code>truststore.p12</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority </p>
       </td>
     </tr>
     <tr>
@@ -5556,6 +5564,30 @@ description: >-
           If provided, allowed values are:
           <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (eg. because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret.
         </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>passwordSecretRef</code>
+        <br />
+        <em>
+          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>PasswordSecretRef is a reference to a non-empty key in a Secret resource containing the password used to encrypt the PKCS#12 keystore. Mutually exclusive with password. One of password or passwordSecretRef must provide a password with a non-zero length.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>password</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Password provides a literal password used to encrypt the PKCS#12 keystore. Mutually exclusive with passwordSecretRef. One of password or passwordSecretRef must provide a password with a non-zero length.</p>
       </td>
     </tr>
   </tbody>
@@ -7103,5 +7135,5 @@ description: >-
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>67c897d</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>4562b9a</code>. </em>
 </p>

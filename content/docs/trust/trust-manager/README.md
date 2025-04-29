@@ -10,28 +10,28 @@ certificates during a TLS handshake but can be used in other situations, too.
 
 ## Overview
 
-trust-manager is a small Kubernetes operator which aims to help reduce the overhead of managing
-TLS trust bundles in your clusters.
+trust-manager is a small Kubernetes operator which reduces the overhead of managing
+TLS trust bundles in your clusters, providing a much quicker way to update trust stores
+when they need to change.
 
-It adds the `Bundle` custom Kubernetes resource (CRD) which can read input from various sources
+It adds the `Bundle` custom Kubernetes resource (CRD) which can read input from various CA sources
 and combine the resultant certificates into a bundle ready to be used by your applications.
 
 trust-manager ensures that it's both quick and easy to keep your trusted certificates up-to-date
 and enables cluster administrators to easily automate providing a secure bundle without having
 to worry about rebuilding containers to update trust stores.
 
-It's designed to complement cert-manager and works well when consuming CA certificates from a
-cert-manager `Issuer` or `ClusterIssuer` but can be used entirely independently of cert-manager
-if needed.
+It's designed to complement cert-manager and works well when consuming CA certificates used by a
+cert-manager `Issuer` or `ClusterIssuer` - but trust-manager can be used entirely independently of
+cert-manager, too.
 
 ## Installation
 
-See the [installation guide](./installation.md) for instructions on how to
-install trust-manager.
+See the [installation guide](./installation.md) for instructions on how to install trust-manager.
 
 ## Usage
 
-trust-manager is intentionally simple, adding just one new Kubernetes `CustomResourceDefintion`: `Bundle`.
+trust-manager is intentionally simple, adding just one new Kubernetes `CustomResourceDefinition`: `Bundle`.
 
 A `Bundle` represents a set of X.509 certificates that should be distributed across a cluster.
 
@@ -52,6 +52,7 @@ spec:
   # Include a bundle of publicly trusted certificates which can be
   # used to validate most TLS certificates on the internet, such as
   # those issued by Let's Encrypt, Google, Amazon and others.
+  # NB: Unless you pin the package providing these CAs, the default can change!
   - useDefaultCAs: true
 
   # A Secret in the "trust" namespace; see "Trust Namespace" below for further details
@@ -59,15 +60,14 @@ spec:
       name: "my-db-tls"
       key: "ca.crt"
 
-  # Here is another Secret source, but this time using a label selector instead of a Secret's name. 
+  # Another Secret source, but this time using a label selector instead of a named Secret
   - secret:
       selector:
-        matchLabels: 
+        matchLabels:
           fruit: apple
       key: "ca.crt"
 
-  # And another Secret source, but this time instead of specifying a key from the Secret data,
-  # including all certificates from every key
+  # One more Secret source, this time including all certificates from every key
   - secret:
       name: "my-regional-cas"
       includeAllKeys: true
@@ -76,21 +76,20 @@ spec:
   - configMap:
       name: "my-org.net"
       key: "root-certs.pem"
-  
-  # Here is another ConfigMap source, but this time using a label selector instead of a ConfigMap's name. 
+
+  # Another ConfigMap source, but this time using a label selector instead of a named ConfigMap
   - configMap:
       selector:
-        matchLabels: 
+        matchLabels:
           fruit: apple
       key: "ca.crt"
-      
-  # And another ConfigMap source, but this time instead of specifying a key from the ConfigMap data,
-  # including all certificates from every key
-  - secret:
+
+  # One more ConfigMap source, this time including all certificates from every key
+  - configMap:
       name: "my-org-cas"
       includeAllKeys: true
 
-  # A manually specified string
+  # A manually specified PEM-encoded cert, included directly into the Bundle
   - inLine: |
       -----BEGIN CERTIFICATE-----
       MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
@@ -105,6 +104,11 @@ spec:
     # here named "bundle.jks" and "bundle.p12".
     configMap:
       key: "root-certs.pem"
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "1"
+        labels:
+          app.kubernetes.io/component: "trust-bundle"
     additionalFormats:
       jks:
         key: "bundle.jks"
@@ -127,15 +131,15 @@ All sources and target options are documented in the trust-manager [API referenc
 - `useDefaultCAs` - usually, a bundle of publicly trusted certificates
 
 Both `ConfigMap` and `Secret`, support specifying a data key (`key`) that contains at least one certificate or use the
-`includeAllKeys` option to include all certificates from every key in the resource. The latter is useful in dynamic 
-environments where key names are only known at runtime. When defining a `ConfigMap` or `Secret` source, the `key` and 
+`includeAllKeys` option to include all certificates from every key in the resource. The latter is useful in dynamic
+environments where key names are only known at runtime. When defining a `ConfigMap` or `Secret` source, the `key` and
 `includeAllKeys` fields are mutually exclusive: only one **must** be set, but not both.
 
 Both `ConfigMap` and `Secret` also support specifying label selectors to select multiple resources at once, which is useful in dynamic
-environments where the name of the `ConfigMap` or `Secret` is known only at runtime. When adding a source, either of type `ConfigMap` or `Secret`, 
+environments where the name of the `ConfigMap` or `Secret` is known only at runtime. When adding a source, either of type `ConfigMap` or `Secret`,
 the fields `name` and `selector` are mutually exclusive: one **must** be set, but not both.
 
-These features can be combined to, for instance, select all Secrets with a specific label and include every 
+These features can be combined to, for instance, select all Secrets with a specific label and include every
 certificate from each key within those Secrets.
 
 #### Targets
@@ -147,18 +151,16 @@ Support for `Secret` targets must be explicitly enabled in the trust-manager con
 All `Bundle` targets are written to `ConfigMap`s (and/or `Secret`s) whose name matches that of the
 `Bundle`, and every target has a PEM-formatted bundle included.
 
+The annotations and labels for the target `ConfigMap`s (and/or `Secret`s) can be specified using `spec.target.configMap.metadata.annotations` and `spec.target.configMap.metadata.labels` (swapping `secret` for `configMap` where appropriate).
+
 Users can also optionally choose to write JKS/PKCS#12 formatted binary trust store(s) to targets.
 JKS has been supported since v0.5.0, and PKCS#12 since v0.7.0.
 
 Applications consuming JKS and PKCS#12 trust stores often require a password to be set for legacy reasons. These passwords are often security theater - either they use very weak encryption or the passwords are provided in plaintext next to the files they encrypt which defeats the purpose of having them.
 
-Trust bundles do not contain private keys, and so for most use cases there wouldn't be any security benefit to encrypting them. As such, passwords for trust stores are set by default to `changeit` for JKS and `""` (the empty string or "password-less") for PKCS#12. 
+Passwords for trust stores are set by default to `changeit` for JKS and `""` (the empty string or "password-less") for PKCS#12. These "passwords" are not used for security; for more information read [why keystore password are not helpful](../../faq/README.md#keystore-passwords).
 
-Recent releases allow you to change that password by setting the bundle YAML file `spec.target.additionalFormats.jks.password` and `spec.target.additionalFormats.pkcs12.password`. 
-
-Older releases have the current default values hard-coded and they can not be changed. For more information read [why password are not helpful](../../faq/README.md#keystore-passwords).
-
-
+It's possible to change the passwords on these bundles by setting the `spec.target.additionalFormats.jks.password` and `spec.target.additionalFormats.pkcs12.password` fields in your Bundle spec.
 
 #### Namespace Selector
 
@@ -177,22 +179,41 @@ to the trust-manager namespace by default.
 
 ## Quick Start Example
 
-Let's get started with an example of creating our own `Bundle`!
+Let's get started with an example of creating our first `Bundle`, using [KinD](https://kind.sigs.k8s.io/) to run Kubernetes in a container!
 
-First we'll create a demo cluster:
+First we'll create a cluster and a namespace:
 
 ```bash
-git clone https://github.com/cert-manager/trust-manager trust-manager
-cd trust-manager
-make demo
+kind create cluster
+# wait for cluster to be started...
 ```
 
-Once we have a running cluster, we can create a `Bundle` using the default CAs which were configured
-when trust-manager started up. Since we've installed trust-manager using Helm, our default CA package
+Next, we need to install trust-manager. You can follow the [installation guide](./installation.md) to do that,
+or use the commands below:
+
+```bash
+helm repo add jetstack https://charts.jetstack.io --force-update
+
+helm install cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version [[VAR::cert_manager_latest_version]] \
+  --set crds.enabled=true
+
+helm upgrade trust-manager jetstack/trust-manager \
+  --install \
+  --namespace cert-manager \
+  --wait
+```
+
+Once trust-manager is running we can create a `Bundle` using the default CAs which were configured
+when trust-manager started up.
+
+Since we've installed trust-manager using Helm, our default CA package
 contains publicly trusted certificates derived from a Debian container.
 
 ```bash
-kubectl --kubeconfig ./bin/kubeconfig.yaml apply -f - <<EOF
+kubectl apply -f - <<EOF
 apiVersion: trust.cert-manager.io/v1alpha1
 kind: Bundle
 metadata:
@@ -208,18 +229,25 @@ EOF
 
 That was easy! Now let's check that everything synced OK and that our `ConfigMap` has been written:
 
+```console
+$ kubectl get bundle example-bundle
+NAME             CONFIGMAP TARGET   SECRET TARGET   SYNCED   REASON   AGE
+example-bundle   trust-bundle.pem                   True     Synced   ..s
+```
+
+We can take a look at the contents of our trust bundle too, which will be a lot of PEM blocks:
+
 ```bash
-kubectl --kubeconfig ./bin/kubeconfig.yaml get bundle example-bundle | less
-kubectl --kubeconfig ./bin/kubeconfig.yaml get configmap example-bundle -o "jsonpath={.data['trust-bundle\.pem']}" | less
+kubectl get configmap example-bundle -o "jsonpath={.data['trust-bundle\.pem']}" | less
 ```
 
 Great - we've got a trust bundle. We could use that for our containers right away but let's go a little further and
-create a dummy "organization CA" which we'll want to include in our `Bundle`.
+create a private certificate authority which we'll want to include in our `Bundle`.
 
-We'll generate our dummy organization certificate with cert-manager:
+Naturally, we'll generate our CA certificate with cert-manager:
 
 ```bash
-kubectl --kubeconfig ./bin/kubeconfig.yaml apply -f - <<EOF
+kubectl apply -f - <<EOF
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
@@ -249,7 +277,7 @@ EOF
 Now let's check that `Secret` that cert-manager created for us:
 
 ```bash
-kubectl --kubeconfig ./bin/kubeconfig.yaml get -n cert-manager secret trust-manager-example-ca-secret -o"jsonpath={.data['tls\.crt']}"   | base64 -d
+kubectl get -n cert-manager secret trust-manager-example-ca-secret -o"jsonpath={.data['tls\.crt']}" | base64 -d
 # tls.crt will contain a PEM certificate, starting with -----BEGIN CERTIFICATE-----
 ```
 
@@ -258,7 +286,10 @@ kubectl --kubeconfig ./bin/kubeconfig.yaml get -n cert-manager secret trust-mana
 Finally, we'll update our `Bundle` to include our new private CA:
 
 ```bash
-kubectl --kubeconfig ./bin/kubeconfig.yaml apply -f - <<EOF
+# WARNING: This IS NOT SAFE to do in production because it can cause issues when we want
+# to rotate the CA certificate.
+# In production, you should copy trusted roots to a separate ConfigMap or Secret
+kubectl apply -f - <<EOF
 apiVersion: trust.cert-manager.io/v1alpha1
 kind: Bundle
 metadata:
@@ -280,7 +311,7 @@ And we're done! The `example-bundle` `ConfigMap` should already be updated.
 If you inspect the `ConfigMap` again, the last certificate you'll see in the list
 should be our new dummy CA.
 
-## Securely Maintaining A trust-manager Installation
+## Securely Maintaining a trust-manager Installation
 
 If you choose the `useDefaultCAs` source on any of your `Bundle` resources, it's important that you keep your
 default CA package image up to date. Failing to do so would be the equivalent of failing to run `apt-get upgrade ca-certificates`
@@ -290,15 +321,29 @@ trust-manager has been designed in such a way that any version of any default CA
 version of trust-manager which supports default CAs (`v0.4.0` and later). There should be no risk to the stability
 of trust-manager from upgrading.
 
-If you're using an official cert-manager-provided Debian CA package (which is the default), you should check which version you have
-and compare against the [latest package version](https://quay.io/repository/jetstack/cert-manager-package-debian?tab=tags&tag=latest).
+If you're using an official cert-manager-provided Debian trust package (which is the default), you should check which version you have from time to time to ensure it's kept up to date.
 
-The version can be configured with the `.defaultPackageImage.tag` value on the Helm chart, and the version
+When new versions of trust-manager are released, the default trust package may change.
+
+The currently supported trust packages are:
+
+<a id="trust-package-versions"></a>
+
+| Image Name                                     | Default for trust-manager? | Based On        | Link             |
+|:----------------------------------------------:|:--------------------------:|:---------------:|:----------------:|
+| `quay.io/jetstack/trust-pkg-debian-bookworm`   | &gt;= `v0.16`              | Debian Bookworm | [Link][bookworm] |
+| `quay.io/jetstack/cert-manager-package-debian` | &lt;= `v0.15`              | Debian Bullseye | [Link][bullseye] |
+
+[bookworm]: https://quay.io/repository/jetstack/trust-pkg-debian-bookworm?tab=tags&tag=latest
+[bullseye]: https://quay.io/repository/jetstack/cert-manager-package-debian?tab=tags&tag=latest
+
+The version can be configured with `.defaultPackageImage.repository` and `.defaultPackageImage.tag` via Helm chart values, and the version
 is also written to the `status` field on any synced Bundle resource which uses the default CA package.
 
-## Upgrading A Default CA Package Using Helm
+## Upgrading a Default CA Package Using Helm
 
-Say we want to do an in-place upgrade of our default CA package to tagged version `XYZ` - without upgrading trust-manager.
+Say we want to do an in-place upgrade of our default CA package from the "old" trust package (`cert-manager-package-debian`) to
+a newer package (`trust-pkg-debian-bookworm`).
 
 We'll assume the Helm release is called "trust-manager" and that we've installed into the `cert-manager` namespace.
 
@@ -311,17 +356,20 @@ First, we'll dump our current Helm values, so we don't lose them:
 helm get values -n cert-manager trust-manager -oyaml > values.yaml
 ```
 
-Next, if `defaultPackageImage.tag` is already set in `values.yaml`, update it. Otherwise, add it.
-You can find the available tags [on `quay.io`](https://quay.io/repository/jetstack/cert-manager-package-debian?tab=tags&tag=latest).
+This file might be empty (or contain `null`) if you didn't set any values at install time.
+
+If `defaultPackageImage.repository` or `defaultPackageImage.tag` is already set in `values.yaml`, you can update them in place.
+
+Otherwise, add them. We list image names and links to get tags [above](#trust-package-versions).
 
 ```yaml
 # values.yaml
 ...
+# NB: The tag below might not be the latest; you should check!
 defaultPackageImage:
-  tag: XYZ
+  repository: quay.io/jetstack/trust-pkg-debian-bookworm
+  tag: "20230311.0" # quotes are important
 ```
-
-These versions of the default package image tags are derived directly from the version of the `ca-certificates` package in Debian.
 
 Finally, apply back the changes, being sure to manually specify the version of trust-manager which is installed, to avoid
 also updating the trust-manager controller at the same as the default CA package:

@@ -47,7 +47,7 @@ spec:
       - key: app.kubernetes.io/instance
         operator: In
         values:
-        - release-name
+        - cert-manager
       - key: app.kubernetes.io/component
         operator: In
         values:
@@ -181,4 +181,4 @@ Check the health of the cert-manager scrape targets on the Prometheus status pag
 
 ## Monitoring Mixin
 
-Monitoring mixins are a way to bundle common alerts, rules, and dashboards for an application in a configurable and extensible way, using the Jsonnet data templating language. A cert-manager monitoring mixin can be found here https://gitlab.com/uneeq-oss/cert-manager-mixin. Documentation on usage can be found with the `cert-manager-mixin` project.
+Monitoring mixins are a way to bundle common alerts, rules, and dashboards for an application in a configurable and extensible way, using the Jsonnet data templating language. A cert-manager monitoring mixin can be found here https://github.com/imusmanmalik/cert-manager-mixin. Documentation on usage can be found with the `cert-manager-mixin` project.

@@ -1,4 +1,15 @@
+fuzzer
+fuzzers
+Fuzzer
+Fuzzers
 phillebaba
+aidy
+bashlion
+7ing
+fadecore
+schedin
+ssyno
+ianarsenault
 tberreis
 allenmunC1
 jeremycampbell
@@ -7,13 +18,29 @@ JoeNorth
 tanujd11
 asapekia
 pevidex
+TheHenrick
+ilyesAj
+Peac36
+jochenrichter
+adam-sroka
+rquinio1A
+puerco
+fcrespofastly
 vinny
 lauraseidler
 ABWassim
 ThatsMrTalbot
 Pionerd
+tareksha
+LukeCarrier
+SHA-256
+SHA-384
+SHA-512
+3072-bit
+4096-bit
 andrey-dubnik
 bwaldrep
+sdarwin
 eplightning
 findnature
 gplessis
@@ -73,6 +100,9 @@ jwenz723
 seuf
 thirdeyenick
 MattiasGees
+Gamanji
+impactful
+Linkerd
 (sub)domains
 7opf
 ACLs
@@ -86,7 +116,10 @@ APIService
 APIServices
 APIs
 AWS
+SDK
+SDKs
 Akamai
+ANDed
 Anthos
 AppRole
 approvers
@@ -96,9 +129,12 @@ ArtifactHUB
 ArtifactHub
 AzureDNS
 BasicConstraints
+Bullseye
+Bookworm
 BKPR
 Bazel
 Bitnami
+BlueSky
 BobyMCbobs
 Bugfixes
 bugfix
@@ -106,6 +142,9 @@ BundleSource
 BundleTarget
 BundleCondition
 NamespaceSelector
+CamelCase
+Cyberark
+CyberArk
 CAs
 CNAME
 CNAMEs
@@ -160,6 +199,7 @@ Dean-Coakley
 DigitalOcean
 OVHCloud
 Distroless
+DoesNotExist
 DuckDuckGo
 etcd
 EC2
@@ -234,6 +274,7 @@ NameCheap
 NGINX
 NLB
 NLBs
+NotIn
 Ocado
 OmairK
 OpenAPI
@@ -343,6 +384,7 @@ coderanger
 config
 containerd
 customizable
+defaultCAPackageVersion
 distroless
 e.g.
 e2e
@@ -426,8 +468,10 @@ multivalue
 macOS
 makefile
 manual-rotation-private-key
+matchExpressions
 mechanism
 metadata
+metadata.generation
 middleware
 migrate-api-version
 misconfiguration
@@ -444,6 +488,7 @@ namespaces
 ndegory
 oauth2
 OAuth
+observedGeneration
 onwards
 openshift-supported-versions
 plaintext
@@ -472,6 +517,7 @@ runtime
 runtimes
 signoff
 sigstore
+status.condition
 stdout
 subchart
 subcommand
@@ -501,6 +547,7 @@ unredacted
 unschedule
 untrusted
 upstream
+useDefaultCAs
 userinfo
 util
 vhosakot
@@ -515,8 +562,22 @@ v1.12.1
 v1.12.2
 v1.12.3
 v1.12.4
+v1.12.
 v1.13
+v1.14
+v1.15
+v1.15.
 v1.16
+v1.16.
+v1.16.0
+v1.16.1
+v1.17
+v1.17.
+v1.17.0
+v1.18.
+v1.18
+v1.18.0
+v1.18.0.
 v1.19
 v1.5
 v1.5.0
@@ -580,6 +641,7 @@ yann-soubeyrand
 yk
 mfmbarros
 maelvls
+Maël
 bitscuit
 zsh
 PodDisruptionBudget
@@ -732,7 +794,9 @@ venafi-issuer
 adcs-issuer
 cview-issuer
 cfssl-issuer
+cfmtls-issuer
 GlobalSign
+czertainly-issuer
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
@@ -758,3 +822,14 @@ Logics
 OpenSSF
 OSS-Fuzz
 Korczynski
+
+CyberArk
+ContribFest
+Contribfest
+Zenior's
+Godding
+Boye
+READMEs
+K3d
+CyberArk
+90-minute
