@@ -516,6 +516,8 @@ AdditionalFormats specifies any additional formats to write to the target
           JKS requests a JKS-formatted binary trust bundle to be written to the target.
 The bundle has "changeit" as the default password.
 For more information refer to this link https://cert-manager.io/docs/faq/#keystore-passwords
+Deprecated: Writing JKS is subject for removal. Please migrate to PKCS12.
+PKCS#12 trust stores created by trust-manager are compatible with Java.
 <br/>
         </td>
         <td>false</td>
@@ -524,7 +526,9 @@ For more information refer to this link https://cert-manager.io/docs/faq/#keysto
         <td>object</td>
         <td>
           PKCS12 requests a PKCS12-formatted binary trust bundle to be written to the target.
+
 The bundle is by default created without a password.
+For more information refer to this link https://cert-manager.io/docs/faq/#keystore-passwords
 <br/>
         </td>
         <td>false</td>
@@ -538,6 +542,8 @@ The bundle is by default created without a password.
 JKS requests a JKS-formatted binary trust bundle to be written to the target.
 The bundle has "changeit" as the default password.
 For more information refer to this link https://cert-manager.io/docs/faq/#keystore-passwords
+Deprecated: Writing JKS is subject for removal. Please migrate to PKCS12.
+PKCS#12 trust stores created by trust-manager are compatible with Java.
 
 <table>
     <thead>
@@ -574,7 +580,9 @@ For more information refer to this link https://cert-manager.io/docs/faq/#keysto
 
 
 PKCS12 requests a PKCS12-formatted binary trust bundle to be written to the target.
+
 The bundle is by default created without a password.
+For more information refer to this link https://cert-manager.io/docs/faq/#keystore-passwords
 
 <table>
     <thead>
@@ -601,6 +609,24 @@ The bundle is by default created without a password.
 <br/>
           <br/>
             <i>Default</i>: <br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>profile</b></td>
+        <td>enum</td>
+        <td>
+          Profile specifies the certificate encryption algorithms and the HMAC algorithm
+used to create the PKCS12 trust store.
+
+If provided, allowed values are:
+`LegacyRC2`: Deprecated. Not supported by default in OpenSSL 3 or Java 20.
+`LegacyDES`: Less secure algorithm. Use this option for maximal compatibility.
+`Modern2023`: Secure algorithm. Use this option in case you have to always use secure algorithms (e.g. because of company policy).
+
+Default value is `LegacyRC2` for backward compatibility.
+<br/>
+          <br/>
+            <i>Enum</i>: LegacyRC2, LegacyDES, Modern2023<br/>
         </td>
         <td>false</td>
       </tr></tbody>
@@ -630,6 +656,48 @@ data will be synced to.
 <br/>
         </td>
         <td>true</td>
+      </tr><tr>
+        <td><b><a href="#bundlespectargetconfigmapmetadata">metadata</a></b></td>
+        <td>object</td>
+        <td>
+          Metadata is an optional set of labels and annotations to be copied to the target.
+<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.spec.target.configMap.metadata`
+
+
+Metadata is an optional set of labels and annotations to be copied to the target.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>annotations</b></td>
+        <td>map[string]string</td>
+        <td>
+          Annotations is a key value map to be copied to the target.
+<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>labels</b></td>
+        <td>map[string]string</td>
+        <td>
+          Labels is a key value map to be copied to the target.
+<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -742,6 +810,48 @@ By default, trust-manager has no permissions for writing to secrets and can only
 <br/>
         </td>
         <td>true</td>
+      </tr><tr>
+        <td><b><a href="#bundlespectargetsecretmetadata">metadata</a></b></td>
+        <td>object</td>
+        <td>
+          Metadata is an optional set of labels and annotations to be copied to the target.
+<br/>
+        </td>
+        <td>false</td>
+      </tr></tbody>
+</table>
+
+
+### `Bundle.spec.target.secret.metadata`
+
+
+Metadata is an optional set of labels and annotations to be copied to the target.
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Required</th>
+        </tr>
+    </thead>
+    <tbody><tr>
+        <td><b>annotations</b></td>
+        <td>map[string]string</td>
+        <td>
+          Annotations is a key value map to be copied to the target.
+<br/>
+        </td>
+        <td>false</td>
+      </tr><tr>
+        <td><b>labels</b></td>
+        <td>map[string]string</td>
+        <td>
+          Labels is a key value map to be copied to the target.
+<br/>
+        </td>
+        <td>false</td>
       </tr></tbody>
 </table>
 
@@ -787,7 +897,7 @@ and will be the same for the same version of a bundle with identical certificate
 ### `Bundle.status.conditions[index]`
 
 
-BundleCondition contains condition information for a Bundle.
+Condition contains details for one aspect of the current state of this API Resource.
 
 <table>
     <thead>
@@ -802,19 +912,29 @@ BundleCondition contains condition information for a Bundle.
         <td><b>lastTransitionTime</b></td>
         <td>string</td>
         <td>
-          LastTransitionTime is the timestamp corresponding to the last status
-change of this condition.
+          lastTransitionTime is the last time the condition transitioned from one status to another.
+This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
 <br/>
           <br/>
             <i>Format</i>: date-time<br/>
         </td>
         <td>true</td>
       </tr><tr>
+        <td><b>message</b></td>
+        <td>string</td>
+        <td>
+          message is a human readable message indicating details about the transition.
+This may be an empty string.
+<br/>
+        </td>
+        <td>true</td>
+      </tr><tr>
         <td><b>reason</b></td>
         <td>string</td>
         <td>
-          Reason is a brief machine-readable explanation for the condition's last
-transition.
+          reason contains a programmatic identifier indicating the reason for the condition's last transition.
+Producers of specific condition types may define expected values and meanings for this field,
+and whether the values are considered a guaranteed API.
 The value should be a CamelCase string.
 This field may not be empty.
 <br/>
@@ -824,7 +944,7 @@ This field may not be empty.
         <td><b>status</b></td>
         <td>enum</td>
         <td>
-          Status of the condition, one of True, False, Unknown.
+          status of the condition, one of True, False, Unknown.
 <br/>
           <br/>
             <i>Enum</i>: True, False, Unknown<br/>
@@ -834,28 +954,17 @@ This field may not be empty.
         <td><b>type</b></td>
         <td>string</td>
         <td>
-          Type of the condition, known values are (`Synced`).
+          type of condition in CamelCase or in foo.example.com/CamelCase.
 <br/>
         </td>
         <td>true</td>
       </tr><tr>
-        <td><b>message</b></td>
-        <td>string</td>
-        <td>
-          Message is a human-readable description of the details of the last
-transition, complementing reason.
-<br/>
-        </td>
-        <td>false</td>
-      </tr><tr>
         <td><b>observedGeneration</b></td>
         <td>integer</td>
         <td>
-          If set, this represents the .metadata.generation that the condition was
-set based upon.
-For instance, if .metadata.generation is currently 12, but the
-.status.condition[x].observedGeneration is 9, the condition is out of date
-with respect to the current state of the Bundle.
+          observedGeneration represents the .metadata.generation that the condition was set based upon.
+For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+with respect to the current state of the instance.
 <br/>
           <br/>
             <i>Format</i>: int64<br/>

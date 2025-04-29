@@ -104,6 +104,11 @@ spec:
     # here named "bundle.jks" and "bundle.p12".
     configMap:
       key: "root-certs.pem"
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "1"
+        labels:
+          app.kubernetes.io/component: "trust-bundle"
     additionalFormats:
       jks:
         key: "bundle.jks"
@@ -145,6 +150,8 @@ Support for `Secret` targets must be explicitly enabled in the trust-manager con
 
 All `Bundle` targets are written to `ConfigMap`s (and/or `Secret`s) whose name matches that of the
 `Bundle`, and every target has a PEM-formatted bundle included.
+
+The annotations and labels for the target `ConfigMap`s (and/or `Secret`s) can be specified using `spec.target.configMap.metadata.annotations` and `spec.target.configMap.metadata.labels` (swapping `secret` for `configMap` where appropriate).
 
 Users can also optionally choose to write JKS/PKCS#12 formatted binary trust store(s) to targets.
 JKS has been supported since v0.5.0, and PKCS#12 since v0.7.0.
