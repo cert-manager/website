@@ -31,7 +31,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥉   | tcs-issuer                  | [📄][config:tcs-issuer]             | [Intel's SGX technology][ca:tcs-issuer]                                | -                                                 | [❌][release:tcs-issuer]              | ✔️             |
 | 🥉   | freeipa-issuer              | [📄][config:freeipa-issuer]         | [FreeIPA][ca:freeipa-issuer]                                           | -                                                 | [❌][release:freeipa-issuer]          | ✔️             |
 | 🥉   | kms-issuer                  | [📄][config:kms-issuer]             | [AWS KMS][ca:kms-issuer]                                               | -                                                 | [❌][release:kms-issuer]              | ✔️             |
-| 🥉   | keyvault-issuer (3rd party) | [📄][config:keyvault-issuer]        | [Azure Keyvault Key][ca:keyvault-issuer] (Unoffical issuer controller) | -                                                 | [❌][release:keyvault-issuer]         | ✔️             |
+| 🥉   | keyvault-issuer | [📄][config:keyvault-issuer]        | [Azure Key Vault][ca:keyvault-issuer] | -                                                 | [❌][release:keyvault-issuer]         | ✔️             |
 
 </div>
 
