@@ -9,7 +9,11 @@ cert-manager v1.18 includes:
 
 ## Major Themes
 
-### TODO
+### Copy annotations from Ingress or Gateway to the Certificate
+
+We've added a new configuration option to the cert-manager controller: `--extra-certificate-annotations`, which allows you to specify annotation keys to be copied from an Ingress or Gateway resource to the resulting Certificate object.
+Read [Annotated Ingress resource: Copy annotations to the Certificate](../../usage/ingress.md#copy-annotations-to-the-certificate ), and
+[Annotated Gateway resource: Copy annotations to the Certificate](../../usage/gateway.md#copy-annotations-to-the-certificate), to learn more.
 
 ## Community
 
