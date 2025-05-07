@@ -112,7 +112,7 @@ You should bear the following in mind:
    - You'll need to track the expiry of _all_ certificates in the chain
 - Updating the secret used for the CA certificate won't trigger re-issuance of leaf certificates
    - If your CA was near expiry and your leaf certs weren't, you'll need to manually trigger re-issuance of the leaf certs
-   - `cmctl renew` may be helpful for this (see the [docs](../reference/cmctl.md#renew) for `cmctl`)
+   - `cmctl renew` may be helpful for this (see the [`cmctl` docs](../reference/cmctl.md#renew))
 - CA issuers don't validate that the CA you configure is a "valid" CA
    - At a minimum, CA certs should have the basic constraints extension present with `isCA` set to true
    - The basic constraints extension with `isCA` set to true is required, but other requirements are not checked
