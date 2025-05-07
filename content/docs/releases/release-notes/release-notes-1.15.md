@@ -112,7 +112,7 @@ In addition, the version of Go used to build cert-manager 1.15 was updated along
 - Venafi Issuer now sends a cert-manager HTTP User-Agent header in all Venafi Rest API requests.
   For example: `cert-manager-certificaterequests-issuer-venafi/v1.15.0+(linux/amd64)+cert-manager/ef068a59008f6ed919b98a7177921ddc9e297200`. ([#6865](https://github.com/cert-manager/cert-manager/pull/6865), [@wallrj](https://github.com/wallrj))
 - Add hint to validation error message to help users of external issuers more easily fix the issue if they specify a Kind but forget the Group ([#6913](https://github.com/cert-manager/cert-manager/pull/6913), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- Add support for numeric OID types in LiteralSubject. Eg. "1.2.3.4=String Value" ([#6775](https://github.com/cert-manager/cert-manager/pull/6775), [@inteon](https://github.com/inteon))
+- Add support for numeric OID types in LiteralSubject. E.g., "1.2.3.4=String Value" ([#6775](https://github.com/cert-manager/cert-manager/pull/6775), [@inteon](https://github.com/inteon))
 - Promote the `LiteralCertificateSubject` feature to Beta. ([#7030](https://github.com/cert-manager/cert-manager/pull/7030), [@inteon](https://github.com/inteon))
 - Promoted the `AdditionalCertificateOutputFormats` feature gate to Beta (enabled by default). ([#6970](https://github.com/cert-manager/cert-manager/pull/6970), [@erikgb](https://github.com/erikgb))
 - The Helm chart now allows you to supply `extraObjects`; a list of YAML manifests which will helm will install and uninstall with the cert-manager manifests. ([#6424](https://github.com/cert-manager/cert-manager/pull/6424), [@gplessis](https://github.com/gplessis))
