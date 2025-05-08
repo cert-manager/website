@@ -27,7 +27,8 @@ If you have an Azure AKS cluster you can use the following command:
 
 ```bash
 az aks update \
-    --name ${CLUSTER} \
+    --name "${CLUSTER}" \
+    --resource-group "${CLUSTER_RG}" \
     --enable-oidc-issuer \
     --enable-workload-identity # ℹ️ This option is currently only available when using the aks-preview extension.
 ```
@@ -92,17 +93,18 @@ Choose a managed identity name and create the Managed Identity:
 
 ```bash
 export IDENTITY_NAME=cert-manager
-az identity create --name "${IDENTITY_NAME}"
+export CLUSTER_RESOURCES_RG=$(az aks show --name "${CLUSTER}" --resource-group "${CLUSTER_RG}" --query "nodeResourceGroup" -o tsv)
+az identity create --name "${IDENTITY_NAME}" --resource-group "${CLUSTER_RESOURCES_RG}"
 ```
 
 Grant it permission to modify the DNS zone records:
 
 ```bash
-export IDENTITY_CLIENT_ID=$(az identity show --name "${IDENTITY_NAME}" --query 'clientId' -o tsv)
+export IDENTITY_CLIENT_ID=$(az identity show --name "${IDENTITY_NAME}" --resource-group "${CLUSTER_RESOURCES_RG}" --query 'clientId' -o tsv)
 az role assignment create \
     --role "DNS Zone Contributor" \
-    --assignee IDENTITY_CLIENT_ID \
-    --scope $(az network dns zone show --name $DOMAIN_NAME -o tsv --query id)
+    --assignee "${IDENTITY_CLIENT_ID}" \
+    --scope $(az network dns zone show --name "${AZURE_ZONE_NAME}" --resource-group "${AZURE_RESOURCE_GROUP}" -o tsv --query id)
 ```
 
 > 📖 Read [What are managed identities for Azure resources?](https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview)
@@ -121,10 +123,11 @@ and it will be able to impersonate the managed identity that you created in the 
 ```bash
 export SERVICE_ACCOUNT_NAME=cert-manager # ℹ️ This is the default Kubernetes ServiceAccount used by the cert-manager controller.
 export SERVICE_ACCOUNT_NAMESPACE=cert-manager # ℹ️ This is the default namespace for cert-manager.
-export SERVICE_ACCOUNT_ISSUER=$(az aks show --resource-group $AZURE_DEFAULTS_GROUP --name $CLUSTER --query "oidcIssuerProfile.issuerUrl" -o tsv)
+export SERVICE_ACCOUNT_ISSUER=$(az aks show --resource-group "${CLUSTER_RG}" --name "${CLUSTER}" --query "oidcIssuerProfile.issuerUrl" -o tsv)
 az identity federated-credential create \
   --name "cert-manager" \
   --identity-name "${IDENTITY_NAME}" \
+  --resource-group "${CLUSTER_RESOURCES_RG}" \
   --issuer "${SERVICE_ACCOUNT_ISSUER}" \
   --subject "system:serviceaccount:${SERVICE_ACCOUNT_NAMESPACE}:${SERVICE_ACCOUNT_NAME}"
 ```
@@ -174,6 +177,9 @@ export AZURE_RESOURCE_GROUP=<azure-resource-group>
 # The Azure billing account name and ID for the DNS zone.
 export AZURE_SUBSCRIPTION=<azure-billing-account-name>
 export AZURE_SUBSCRIPTION_ID=$(az account show --name $AZURE_SUBSCRIPTION --query 'id' -o tsv)
+# The Azure Kubernetes Services info
+export CLUSTER=<cert-manager-aks>
+export CLUSTER_RG=<cert-manager-rg>
 ```
 
 #### ⚠️ Using 'Ambient Credentials' with ClusterIssuer and Issuer resources
