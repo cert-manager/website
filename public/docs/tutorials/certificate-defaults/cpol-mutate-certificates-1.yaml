@@ -18,6 +18,7 @@ spec:
           # +(...) This is the clever syntax for if not already set
           +(revisionHistoryLimit): 2
   # Set rotation to always if not already set
+  # ℹ️ This is not necessary if you use cert-manager `>=v1.18.0`, because the default value was changed from `Never` to `Always`.
   - name: set-privateKey-rotationPolicy
     match:
       any:

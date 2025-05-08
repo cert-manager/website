@@ -175,7 +175,7 @@ trigger Certificate resources to be automatically created:
 
 - `cert-manager.io/private-key-rotation-policy`: (optional) this annotation allows you to
   configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
-  Valid values are `Never` and `Always`. If unset a rotation policy `Never` will be used.
+  Valid values are `Never` and `Always`. If unset a rotation policy `Always` will be used.
 
 ## Copying annotations to the Certificate
 

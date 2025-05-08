@@ -377,8 +377,15 @@ Adding the following annotation on an ingress will automatically set "issue-temp
 <a id="rotation-private-key"></a>
 ## Issuance behavior: Rotation of the private key
 
-By default, the private key won't be rotated automatically. Using the setting
-`rotationPolicy: Always`, the private key Secret associated with a Certificate
+> ⚠️ In cert-manager v1.18.0, the default `rotationPolicy` was changed.
+>
+> In cert-manager `>= v1.18.0` the default is `rotationPolicy: Always`;
+> the private key **is** rotated automatically.
+>
+> In cert-manager `< v1.18.0` the default is `rotationPolicy: Never`;
+> the private key **is not** rotated automatically.
+
+With the setting `rotationPolicy: Always`, the private key Secret associated with a Certificate
 object can be configured to be rotated as soon as an the Certificate is reissued (see
 [Issuance triggers](#issuance-triggers)).
 
