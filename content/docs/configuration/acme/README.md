@@ -60,13 +60,13 @@ spec:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       # Secret resource that will be used to store the account's private key.
-      # This is your identity with your ACME provider. Any secret name
-      # may be chosen. It will be populated with data automatically,
-      # so generally nothing further needs to be done with
-      # the secret. If you lose this identity/secret, you will be able to
-      # generate a new one and generate certificates for any/all domains
-      # managed using your previous account, but you will be unable to revoke
-      # any certificates generated using that previous account.
+      # This is your identity with your ACME provider. Any secret name may be
+      # chosen. It will be populated with data automatically, so generally
+      # nothing further needs to be done with the secret. If you lose this
+      # identity/secret, you will be able to generate a new one and generate
+      # certificates for any/all domains managed using your previous account,
+      # but you will be unable to revoke any certificates generated using that
+      # previous account.
       name: example-issuer-account-key
     # Add a single challenge solver, HTTP01 using nginx
     solvers:

@@ -5283,7 +5283,7 @@ description: >-
         <p> Profile specifies the key and certificate encryption algorithms and the HMAC algorithm used to create the PKCS12 keystore. Default value is <code>LegacyRC2</code> for backward compatibility. </p>
         <p>
           If provided, allowed values are:
-          <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (eg. because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret.
+          <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (e.g., because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret.
         </p>
       </td>
     </tr>
