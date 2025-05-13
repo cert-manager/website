@@ -40,6 +40,22 @@ and release notes on [cert-manager.io](https://cert-manager.io/docs/release-note
 
 We also maintain detailed [upgrade instructions](https://cert-manager.io/docs/releases/upgrading/).
 
+## Long Term Support Releases
+
+The cert-manager maintainers do not provide long term support (LTS) releases.
+
+Once a version reaches end of life, there are no updates provided for that version and no further releases made.
+
+Some vendors provide long term support releases commercially; the following LTS releases are available:
+
+| Release      | Vendor       | End of Life    |
+|:------------:|:------------:|:--------------:|
+| 1.17 LTS     | [CyberArk][] | Feb 03 2027    |
+
+[CyberArk]: https://docs.venafi.cloud/vaas/k8s-components/c-cm-releases/#cert-manager-long-term-support-lts-releases
+
+(To add a release to this list, raise a PR and reach out on Slack)
+
 ## Support policy
 
 <a id="supported-vs-tested"></a>
