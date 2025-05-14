@@ -95,7 +95,7 @@ Changes since `v1.17.0`:
 - Added ingress-shim option:
   - --extra-certificate-annotations which sets list of annotation keys to be copied from Ingress-like to resulting Certificate object ([`#7083`](https://github.com/cert-manager/cert-manager/pull/7083), [`@k0da`](https://github.com/k0da))
 - Added the `iss` short name for the cert-manager `Issuer` resource
-  Added the `ciss` short name for the cert-manager `ClusterIssuer` resource ([`#7373`](https://github.com/cert-manager/cert-manager/pull/7373), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Added the `ciss` short name for the cert-manager `ClusterIssuer` resource ([`#7373`](https://github.com/cert-manager/cert-manager/pull/7373), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
 - Adds the `global.rbac.disableHTTPChallengesRole` helm value to disable HTTP-01 ACME challenges. This allows cert-manager to drop its permission to create pods, improving security when HTTP-01 challenges are not required. ([`#7666`](https://github.com/cert-manager/cert-manager/pull/7666), [`@ali-hamza-noor`](https://github.com/ali-hamza-noor))
 - Allow customizing signature algorithm ([`#7591`](https://github.com/cert-manager/cert-manager/pull/7591), [`@tareksha`](https://github.com/tareksha))
 - Cache the full DNS response and handle TTL expiration in `FindZoneByFqdn` ([`#7596`](https://github.com/cert-manager/cert-manager/pull/7596), [`@ThatsIvan`](https://github.com/ThatsIvan))
