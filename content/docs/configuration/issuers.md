@@ -134,7 +134,6 @@ of tiers at any time.
 
 ### 🥇 Tier (Production-ready)
 
-- 🥈 Tier criteria.
 - The issuer has an end-to-end tutorial on how to set it up with cert-manager for use in production.
 At the time of checking[^1], the used cert-manager version has to be still supported (see [Supported Releases](../releases/README.md)).
 An end-to-end tutorial must include:
