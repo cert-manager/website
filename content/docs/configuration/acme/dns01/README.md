@@ -84,10 +84,18 @@ By default, cert-manager will not follow CNAME records pointing to subdomains.
 
 If granting cert-manager access to the root DNS zone is not desired, then the
 `_acme-challenge.example.com` subdomain can instead be delegated to some other,
-less privileged domain (`less-privileged.example.org`). This could be achieved in the following way. Say, one has two zones:
+less privileged domain.
+
+### Nonmatching Subdomains
+
+Delegation could be achieved in the following way. Say, one has two zones:
 
 * `example.com`
 * `less-privileged.example.org`
+
+Notice how the above two zones have different Top Level Domains (i.e. `.com` vs `.org`).
+This means cert-manager will be querying for expected `TXT` records against authoritative nameservers
+for `example.org` instead of authoritative nameservers for `example.com`.
 
 1. Create a CNAME record pointing to this less privileged domain:
 ```
@@ -124,6 +132,68 @@ spec:
             ...
 ```
 
+### Matching Subdomains and Multiple DNS Providers
+
+Be aware of hurdles that exist when the two zones share the same subdomain, for example:
+
+* `example.com`
+* `less-privileged.example.com`
+
+This is different than the previous example where we used `.org` for our delegated zone.
+
+When different providers manage each of the above domains you must take additional steps.
+
+The following illustrates how to delegate when Google CloudDNS manages the domain
+`less-privileged.example.com` and a separate DNS provider manages the domain `example.com`.
+
+1. Create a CNAME record pointing to this less privileged domain:
+Create this record in the DNS Provider that manages the `example.com.` domain.
+```
+_acme-challenge.example.com	IN	CNAME	_acme-challenge.less-privileged.example.com.
+```
+
+2. Create NS records pointing to Google CloudDNS for this less privileged domain:
+This is required in order for the DNS provider managing `example.com` to be able to
+delegate answers for `less-privileged.example.com` to Google CloudDNS. Otherwise
+DNS queries by cert-manager for TXT records will receive an `NXDOMAIN` response
+and fail.
+
+Create this record in the DNS Provider that manages the `example.com.` domain.
+```
+less-privileged.example.com.		3600	IN	NS	ns-cloud-a1.googledomains.com.
+less-privileged.example.com.		3600	IN	NS	ns-cloud-a2.googledomains.com.
+less-privileged.example.com.		3600	IN	NS	ns-cloud-a3.googledomains.com.
+less-privileged.example.com.		3600	IN	NS	ns-cloud-a4.googledomains.com.
+```
+
+3. Grant cert-manager rights to update less privileged `less-privileged.example.com` zone
+
+4. Provide configuration/credentials for updating this less privileged zone
+and add an additional field into the relevant `dns01` solver. Note that `selector`
+field is now pointing to the delegated zone `less-privileged.example.com`.
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  ...
+spec:
+  acme:
+    ...
+    solvers:
+    - selector:
+        dnsZones:
+        - 'less-privileged.example.com'
+      dns01:
+        # Valid values are None and Follow
+        cnameStrategy: Follow
+        cloudDNS:
+          # The ID of the GCP project
+          project: $PROJECT_ID
+            ...
+```
+
+### Multiple Subdomains Requiring Separate Certificates
 If you have a multitude of (sub)domains requiring separate certificates,
 it is possible to share an aliased less-privileged domain. To achieve it one should
 create a CNAME record for each (sub)domain like this:
