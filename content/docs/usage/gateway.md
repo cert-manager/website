@@ -345,20 +345,20 @@ spec:
 
 ## Supported Annotations
 
-If you are migrating to Gateway resources from Ingress resources, be aware that
+If you are migrating to `Gateway` resources from `Ingress` resources, be aware that
 there are some differences between [the annotations for Ingress resources](./ingress.md#supported-annotations)
-versus the annotations for Gateway resources.
+versus the annotations for `Gateway` resources.
 
-The Gateway resource supports the following annotations for generating
-Certificate resources:
+The `Gateway` resource supports the following annotations for generating
+`Certificate` resources:
 
 - `cert-manager.io/issuer`: the name of the Issuer that should issue the
-  certificate required for this Gateway. The Issuer _must_ be in the same
-  namespace as the Gateway resource.
+  certificate required for this `Gateway`. The Issuer _must_ be in the same
+  namespace as the `Gateway` resource.
 
-- `cert-manager.io/cluster-issuer`: the name of a cert-manager.io ClusterIssuer
-  to acquire the certificate required for this Gateway. It does not matter in
-  which namespace your Gateway resides, as `ClusterIssuers` are non-namespaced
+- `cert-manager.io/cluster-issuer`: the name of a `cert-manager.io` `ClusterIssuer`
+  to acquire the certificate required for this `Gateway`. It does not matter in
+  which namespace your `Gateway` resides, as `ClusterIssuers` are non-namespaced
   resources.
 
 - `cert-manager.io/issuer-kind`: the kind of the external issuer resource, for
