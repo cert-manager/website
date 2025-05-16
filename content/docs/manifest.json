@@ -524,6 +524,10 @@
                   ]
                 }
               ]
+            },
+            {
+              "title": "Annotations",
+              "path": "/docs/configuration/annotations.md"
             }
           ]
         },

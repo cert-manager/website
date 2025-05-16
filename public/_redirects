@@ -240,3 +240,42 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Redirect link used in KubeCon NA 2024 video QR code (we can update the redirect in the future)
 /link/kubecon-na-2024/ / 301!
+
+# Document cert-manager.io annotations
+/allow-direct-injection /docs/configuration/annotations#cert-managerioallow-direct-injection 301
+/alt-names /docs/configuration/annotations#cert-managerioalt-names 301
+/certificate-name /docs/configuration/annotations#cert-manageriocertificate-name 301
+/certificate-revision /docs/configuration/annotations#cert-manageriocertificate-revision
+/certificate-revision /docs/configuration/annotations#cert-manageriocertificate-revision 301
+/cluster-issuer /docs/configuration/annotations#cert-manageriocluster-issuer 301!
+/common-name /docs/configuration/annotations#cert-manageriocommon-name 301!
+/duration /docs/configuration/annotations#cert-managerioduration 301!
+/email-sans /docs/configuration/annotations#cert-managerioemail-sans 301!
+/inject-apiserver-ca /docs/configuration/annotations#cert-managerioinject-apiserver-ca 301
+/inject-ca-from /docs/configuration/annotations#cert-managerioinject-ca-from 301
+/inject-ca-from-secret /docs/configuration/annotations#cert-managerioinject-ca-from-secret 301
+/ip-sans /docs/configuration/annotations#cert-managerioip-sans 301
+/issue-temporary-certificate /docs/configuration/annotations#issue-temporary-certificate 301!
+/issuer /docs/configuration/annotations#cert-managerioissuer 301!
+/issuer-group /docs/configuration/annotations#cert-managerioissuer-group 301!
+/issuer-kind /docs/configuration/annotations#cert-managerioissuer-kind 301!
+/next-private-key /docs/configuration/annotations#cert-managerionext-private-key 301
+/private-key-algorithm /docs/configuration/annotations#cert-managerioprivate-key-algorithm 301!
+/private-key-encoding /docs/configuration/annotations#cert-managerioprivate-key-encoding 301!
+/private-key-rotation-policy /docs/configuration/annotations#cert-managerioprivate-key-rotation-policy 301!
+/private-key-secret-name /docs/configuration/annotations#cert-managerioprivate-key-secret-name 301
+/private-key-size /docs/configuration/annotations#cert-managerioprivate-key-size 301!
+/renew-before /docs/configuration/annotations#cert-manageriorenew-before 301!
+/revision-history-limit /docs/configuration/annotations#cert-manageriorevision-history-limit 301!
+/secret-template /docs/configuration/annotations#cert-manageriosecret-template #301
+/secret-template /docs/configuration/annotations#cert-manageriosecret-template 301
+/subject-countries /docs/configuration/annotations#cert-manageriosubject-countries 301!
+/subject-localities /docs/configuration/annotations#cert-manageriosubject-localities 301!
+/subject-organizationalunits /docs/configuration/annotations#cert-manageriosubject-organizationalunits 301!
+/subject-organizations /docs/configuration/annotations#cert-manageriosubject-organizations 301!
+/subject-postalcodes /docs/configuration/annotations#cert-manageriosubject-postalcodes 301!
+/subject-provinces /docs/configuration/annotations#cert-manageriosubject-provinces 301!
+/subject-serialnumber /docs/configuration/annotations#cert-manageriosubject-serialnumber 301!
+/subject-streetaddresses /docs/configuration/annotations#cert-manageriosubject-streetaddresses 301!
+/uri-sans /docs/configuration/annotations#cert-manageriouri-sans 301
+/usages /docs/configuration/annotations#cert-manageriousages 301!
