@@ -56,8 +56,8 @@ spec:
 You can specify the following annotations on Ingress resources in order to
 trigger Certificate resources to be automatically created:
 
-- `cert-manager.io/issuer`:  the name of the issuer that should issue the certificate
-  required for this Ingress.
+- `cert-manager.io/issuer`: the name of the Issuer that should issue the
+  certificate required for this Ingress.
 
   > ⚠️ This annotation does _not_ assume a namespace scoped issuer. It will
   default to cert-manager.io Issuer, however in case of external issuer types,
@@ -67,8 +67,8 @@ trigger Certificate resources to be automatically created:
   the same namespace as the Ingress resource.
 
 - `cert-manager.io/cluster-issuer`: the name of a cert-manager.io ClusterIssuer
-  to acquire the certificate required for this Ingress. It does not matter which
-  namespace your Ingress resides, as ClusterIssuers are non-namespaced
+  to acquire the certificate required for this Ingress. It does not matter in
+  which namespace your Ingress resides, as `ClusterIssuers` are non-namespaced
   resources.
 
   > ⚠️ This annotation is a shortcut to refer to to

@@ -352,13 +352,14 @@ versus the annotations for Gateway resources.
 The Gateway resource supports the following annotations for generating
 Certificate resources:
 
-- `cert-manager.io/issuer`: the name of an Issuer to acquire the certificate
-  required for this Gateway. The Issuer _must_ be in the same namespace as the
-  Gateway resource.
+- `cert-manager.io/issuer`: the name of the Issuer that should issue the
+  certificate required for this Gateway. The Issuer _must_ be in the same
+  namespace as the Gateway resource.
 
-- `cert-manager.io/cluster-issuer`: the name of a ClusterIssuer to acquire the
-  Certificate required for this Gateway. It does not matter which namespace your
-  Gateway resides, as `ClusterIssuers` are non-namespaced resources.
+- `cert-manager.io/cluster-issuer`: the name of a cert-manager.io ClusterIssuer
+  to acquire the certificate required for this Gateway. It does not matter in
+  which namespace your Gateway resides, as `ClusterIssuers` are non-namespaced
+  resources.
 
 - `cert-manager.io/issuer-kind`: the kind of the external issuer resource, for
   example `AWSPCAIssuer`. This is only necessary for out-of-tree issuers.
