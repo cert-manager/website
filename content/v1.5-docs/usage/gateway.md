@@ -357,7 +357,7 @@ Certificate resources:
 - `cert-manager.io/common-name`: (optional) this annotation allows you to
   configure `spec.commonName` for the Certificate to be generated.
 
-- ` cert-manager.io/duration`: (optional) this annotation allows you to
+- `cert-manager.io/duration`: (optional) this annotation allows you to
   configure `spec.duration` field for the Certificate to be generated.
 
 - `cert-manager.io/renew-before`: (optional) this annotation allows you to
