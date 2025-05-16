@@ -236,7 +236,7 @@ This can be done by adding the following
 ```
 
 Or by adding the following arguments to the cert-manager deployment
-`podTemplate` container arguments.
+`podTemplate` container arguments:
 
 ```
   - --default-issuer-name=letsencrypt-prod
