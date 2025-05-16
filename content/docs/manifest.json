@@ -870,6 +870,11 @@
             },
 
             {
+              "title": "Annotations",
+              "path": "/docs/reference/annotations.md"
+            },
+
+            {
               "title": "Concepts",
               "routes": [
                 {
