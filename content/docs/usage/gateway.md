@@ -361,7 +361,7 @@ Certificate resources:
   Gateway resides, as `ClusterIssuers` are non-namespaced resources.
 
 - `cert-manager.io/issuer-kind`: the kind of the external issuer resource, for
-  example `AWSPCACIssuer`. This is only necessary for out-of-tree issuers.
+  example `AWSPCAIssuer`. This is only necessary for out-of-tree issuers.
 
 - `cert-manager.io/issuer-group`: the API group of the external issuer
   controller, for example `awspca.cert-manager.io`. This is only necessary for
