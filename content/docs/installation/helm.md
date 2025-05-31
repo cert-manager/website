@@ -93,7 +93,7 @@ dependencies:
 
 You can then override the namespace in 2 ways:
 
-1. In `Values.yaml` file
+1. In `values.yaml` file
 ```yaml
 cert-manager: #defined by either the name or alias of your dependency in Chart.yaml
   namespace: security
