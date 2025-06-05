@@ -9,6 +9,10 @@ Before upgrading cert-manager from 1.17 to 1.18, please read the following impor
 
    > 📖 Read [Release 1.18 notes](../release-notes/release-notes-1.18.md) for more information..
 
+1. We have changed the default value of `Certificate.Spec.RevisionHistoryLimit` from `nil` to `1`.
+
+   > 📖 Read [Release 1.18 notes](../release-notes/release-notes-1.18.md) for more information..
+
 ## Next Steps
 
 From here on, you can follow the [regular upgrade process](../../installation/upgrade.md).
