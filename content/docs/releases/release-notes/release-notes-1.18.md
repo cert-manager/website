@@ -3,11 +3,25 @@ title: Release 1.18
 description: 'cert-manager release notes: cert-manager 1.18'
 ---
 
-cert-manager v1.18 includes:
-
-- TODO
+cert-manager is the easiest way to automatically manage certificates in Kubernetes and OpenShift clusters.
 
 ## Major Themes
+
+### ACME Certificate Profile Selection
+
+cert-manager now supports the selection of ACME certificate profiles, allowing
+users to request different categories of certificates from their ACME
+Certificate Authority.
+This enhancement leverages the latest [ACME protocol extension for certificate profiles (IETF draft)][rfc] and is supported by Let's Encrypt and other providers.
+For example, Let's Encrypt offers the [`tlsserver`][tlsserver] profile for
+standard server certificates and the [`shortlived`][shortlived] profile for
+short-lived six-day certificates.
+These new options provide users with greater flexibility and improved security
+for their certificate management needs.
+
+[rfc]: https://datatracker.ietf.org/doc/draft-ietf-acme-profile/
+[tlsserver]: https://letsencrypt.org/2025/01/09/acme-profiles/
+[shortlived]: https://letsencrypt.org/2025/02/20/first-short-lived-cert-issued/
 
 ### The default value of `Certificate.Spec.PrivateKey.RotationPolicy` is now `Always`
 
