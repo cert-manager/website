@@ -64,6 +64,14 @@ config:
 >
 > 📖 Read [Issuance behavior: Rotation of the private key](../../usage/certificate.md#issuance-behavior-rotation-of-the-private-key) to learn more about private key rotation in cert-manager.
 
+
+### The default value of `Certificate.Spec.RevisionHistoryLimit` is now `1`
+
+The default value for the `Certificate` resource's `revisionHistoryLimit` field is now set to 1.
+This ensures that old `CertificateRequest` revisions are automatically garbage collected, improving resource management and reducing clutter in clusters.
+Previously, if not specified, no limit was applied, potentially leading to an accumulation of stale `CertificateRequest` resources.
+With this update, users no longer need to manually configure the revision history limit to benefit from automated cleanup.
+
 ### Copy annotations from Ingress or Gateway to the Certificate
 
 We've added a new configuration option to the cert-manager controller: `--extra-certificate-annotations`, which allows you to specify annotation keys to be copied from an Ingress or Gateway resource to the resulting Certificate object.
