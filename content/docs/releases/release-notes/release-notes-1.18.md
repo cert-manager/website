@@ -98,12 +98,12 @@ Changes since `v1.17.0`:
 - Adds the `global.rbac.disableHTTPChallengesRole` helm value to disable HTTP-01 ACME challenges. This allows cert-manager to drop its permission to create pods, improving security when HTTP-01 challenges are not required. ([`#7666`](https://github.com/cert-manager/cert-manager/pull/7666), [`@ali-hamza-noor`](https://github.com/ali-hamza-noor))
 - Allow customizing signature algorithm ([`#7591`](https://github.com/cert-manager/cert-manager/pull/7591), [`@tareksha`](https://github.com/tareksha))
 - Cache the full DNS response and handle TTL expiration in `FindZoneByFqdn` ([`#7596`](https://github.com/cert-manager/cert-manager/pull/7596), [`@ThatsIvan`](https://github.com/ThatsIvan))
-- Cert-manager now uses a local fork of the golang.org/x/crypto/acme package ([`#7752`](https://github.com/cert-manager/cert-manager/pull/7752), [`@wallrj`](https://github.com/wallrj))
+- Cert-manager now uses a local fork of the `golang.org/x/crypto/acme` package ([`#7752`](https://github.com/cert-manager/cert-manager/pull/7752), [`@wallrj`](https://github.com/wallrj))
 - Feature: Add support for [`ACME profiles extension`](https://datatracker.ietf.org/doc/draft-aaron-acme-profiles/). ([`#7777`](https://github.com/cert-manager/cert-manager/pull/7777), [`@wallrj`](https://github.com/wallrj))
 - Promote the `UseDomainQualifiedFinalizer` feature to GA. ([`#7735`](https://github.com/cert-manager/cert-manager/pull/7735), [`@jsoref`](https://github.com/jsoref))
-- Switched service/servicemon definitions to use port names instead of numbers. ([`#7727`](https://github.com/cert-manager/cert-manager/pull/7727), [`@jcpunk`](https://github.com/jcpunk))
+- Switched `service/servicemon` definitions to use port names instead of numbers. ([`#7727`](https://github.com/cert-manager/cert-manager/pull/7727), [`@jcpunk`](https://github.com/jcpunk))
 - The default value of `Certificate.Spec.PrivateKey.RotationPolicy` changed from `Never` to `Always`. ([`#7723`](https://github.com/cert-manager/cert-manager/pull/7723), [`@wallrj`](https://github.com/wallrj))
-- ⚠️ might be breaking: Set the default revisionHistoryLimit to 1 for the CertificateRequest revisions ([`#7758`](https://github.com/cert-manager/cert-manager/pull/7758), [`@ali-hamza-noor`](https://github.com/ali-hamza-noor))
+- ⚠️ might be breaking: Set the default `revisionHistoryLimit` to 1 for the CertificateRequest revisions ([`#7758`](https://github.com/cert-manager/cert-manager/pull/7758), [`@ali-hamza-noor`](https://github.com/ali-hamza-noor))
 
 ### Documentation
 
@@ -115,7 +115,7 @@ Changes since `v1.17.0`:
 - Bump `golang.org/x/oauth2` to patch `CVE-2025-22868`.
 - Bump `golang.org/x/crypto` to patch `GHSA-hcg3-q754-cr77`.
 - Bump `github.com/golang-jwt/jwt` to patch `GHSA-mh63-6h87-95cp`. ([`#7638`](https://github.com/cert-manager/cert-manager/pull/7638), [`@NicholasBlaskey`](https://github.com/NicholasBlaskey))
-- Change of the Kubernetes Ingress pathType from `ImplementationSpecific` to `Exact` for a reliable handling of ingress controllers and enhanced security. ([`#7767`](https://github.com/cert-manager/cert-manager/pull/7767), [`@sspreitzer`](https://github.com/sspreitzer))
+- Change of the Kubernetes Ingress `pathType` from `ImplementationSpecific` to `Exact` for a reliable handling of ingress controllers and enhanced security. ([`#7767`](https://github.com/cert-manager/cert-manager/pull/7767), [`@sspreitzer`](https://github.com/sspreitzer))
 - Fix AWS Route53 error detection for not-found errors during deletion of DNS records. ([`#7690`](https://github.com/cert-manager/cert-manager/pull/7690), [`@wallrj`](https://github.com/wallrj))
 - Fix behavior when running with `--namespace=<namespace>`: limit the scope of cert-manager to a single namespace and disable cluster-scoped controllers. ([`#7678`](https://github.com/cert-manager/cert-manager/pull/7678), [`@tsaarni`](https://github.com/tsaarni))
 - Fix handling of certificates with IP addresses in the `commonName` field; IP addresses are no longer added to the DNS `subjectAlternativeName` list and are instead added to the `ipAddresses` field as expected. ([`#7081`](https://github.com/cert-manager/cert-manager/pull/7081), [`@johnjcool`](https://github.com/johnjcool))
@@ -128,8 +128,8 @@ Changes since `v1.17.0`:
 
 ### Other (Cleanup or Flake)
 
-- ACME E2E Tests: Upgraded Pebble to v2.7.0 and modified the ACME tests to match latest Pebble behaviour. ([`#7771`](https://github.com/cert-manager/cert-manager/pull/7771), [`@wallrj`](https://github.com/wallrj))
+- ACME E2E Tests: Upgraded Pebble to `v2.7.0` and modified the ACME tests to match latest Pebble behavior. ([`#7771`](https://github.com/cert-manager/cert-manager/pull/7771), [`@wallrj`](https://github.com/wallrj))
 - Patch the `third_party/forked/acme` package with support for the ACME profiles extension. ([`#7776`](https://github.com/cert-manager/cert-manager/pull/7776), [`@wallrj`](https://github.com/wallrj))
 - Promote the `AdditionalCertificateOutputFormats` feature to GA, making additional formats always enabled. ([`#7744`](https://github.com/cert-manager/cert-manager/pull/7744), [`@erikgb`](https://github.com/erikgb))
 - Remove deprecated feature gate `ValidateCAA`. Setting this feature gate is now a no-op which does nothing but print a warning log line ([`#7553`](https://github.com/cert-manager/cert-manager/pull/7553), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
-- Use slices.Contains to simplify code ([`#7753`](https://github.com/cert-manager/cert-manager/pull/7753), [`@cuinix`](https://github.com/cuinix))
+- Use `slices.Contains` to simplify code ([`#7753`](https://github.com/cert-manager/cert-manager/pull/7753), [`@cuinix`](https://github.com/cuinix))
