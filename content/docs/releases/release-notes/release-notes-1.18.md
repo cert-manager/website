@@ -84,7 +84,23 @@ As always, we'd like to thank all of the community members who helped in this re
 
 A special thanks to:
 
-- TODO
+- [`@terinjokes`](https://github.com/terinjokes)
+- [`@solidDoWant`](https://github.com/solidDoWant)
+- [`@k0da`](https://github.com/k0da)
+- [`@ali-hamza-noor`](https://github.com/ali-hamza-noor)
+- [`@tareksha`](https://github.com/tareksha)
+- [`@ThatsIvan`](https://github.com/ThatsIvan)
+- [`@jsoref`](https://github.com/jsoref)
+- [`@jcpunk`](https://github.com/jcpunk)
+- [`@teslaedison`](https://github.com/teslaedison)
+- [`@NicholasBlaskey`](https://github.com/NicholasBlaskey)
+- [`@sspreitzer`](https://github.com/sspreitzer)
+- [`@tsaarni`](https://github.com/tsaarni)
+- [`@johnjcool`](https://github.com/johnjcool)
+- [`@LukeCarrier`](https://github.com/LukeCarrier)
+- [`@tobiasbp`](https://github.com/tobiasbp)
+- [`@vehagn`](https://github.com/vehagn)
+- [`@cuinix`](https://github.com/cuinix)
 
 for their contributions, comments and support!
 
