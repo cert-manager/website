@@ -20,7 +20,7 @@ These new options provide users with greater flexibility and improved security
 for their certificate management needs.
 
 [rfc]: https://datatracker.ietf.org/doc/draft-aaron-acme-profiles/
-[tlsserver]: https://letsencrypt.org/2025/01/09/acme-profiles/
+[tlsserver]: https://letsencrypt.org/docs/profiles/#tlsserver
 [shortlived]: https://letsencrypt.org/2025/02/20/first-short-lived-cert-issued/
 
 ### The default value of `Certificate.Spec.PrivateKey.RotationPolicy` is now `Always`
