@@ -3,7 +3,7 @@ title: Deploy cert-manager on Google Kubernetes Engine (GKE) and create SSL cert
 description: Learn how to deploy cert-manager on Google Kubernetes (GKE) Engine and then configure it to sign SSL certificates using Let's Encrypt
 ---
 
-*Last Verified: 15 July 2022*
+*Last Verified: 6 June 2025*
 
 In this tutorial you will learn how to deploy and configure cert-manager on Google Kubernetes Engine (GKE).
 You will learn how to configure cert-manager to get a signed SSL certificate from Let's Encrypt,
@@ -84,22 +84,27 @@ or (2) export the variable in your shell session. This applies to all environmen
 We will go with option (2), so we need to export the environment variables before continuing using the information that was printed by `gcloud init`:
 
 ```bash
-export PROJECT=your-project  # Your Google Cloud project ID.
-export REGION=europe-west1   # Your Google Cloud region.
+export CLOUDSDK_CORE_PROJECT=your-project   # Your Google Cloud project ID.
+export CLOUDSDK_COMPUTE_ZONE=europe-west2-b # Your Google Cloud zone
 ```
+
+> 📖 Learn more about [Setting configuration properties in the gcloud CLI](https://cloud.google.com/sdk/docs/configurations#setting_configuration_properties).
 
 ## 1. Create a Kubernetes Cluster
 
 To get started, let's create a Kubernetes cluster in Google Cloud. You will need to pick a name for your cluster. Here, we will go with "test-cluster-1". Let us save it in an environment variable:
 
 ```bash
-export CLUSTER=test-cluster-1
+export CLOUDSDK_CONTAINER_CLUSTER=test-cluster-1
 ```
 
 Now, create the cluster using the following command:
 
 ```bash
-gcloud container clusters create $CLUSTER --preemptible --num-nodes=1
+gcloud container clusters create $CLOUDSDK_CONTAINER_CLUSTER \
+    --preemptible \
+    --machine-type e2-small \
+    --num-nodes=1
 ```
 
 Set up the [Google Kubernetes Engine auth plugin for kubectl](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke):
@@ -119,9 +124,9 @@ kubectl get nodes -o wide
 > ⏲ It will take 4-5 minutes to create the cluster.
 >
 > 💵 To minimize your cloud bill, this command creates a 1-node cluster using a
-> [preemptible virtual
-> machine](https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms)
-> which is cheaper than a normal virtual machine.
+> [preemptible virtual machine](https://cloud.google.com/kubernetes-engine/docs/how-to/preemptible-vms)
+> which is cheaper than a normal virtual machine,
+> and it uses a [cost effective E2 shared-core machine type](https://cloud.google.com/compute/docs/general-purpose-machines#e2-shared-core).
 
 ## 2. Deploy a sample web server
 
@@ -180,7 +185,7 @@ gcloud compute addresses describe web-ip --format='value(address)' --global
 Then, copy the output and save it into an environment variable:
 
 ```bash
-export IP_ADDRESS=198.51.100.1  # Replace with your IP address
+export IP_ADDRESS=192.0.2.100  # Replace with your IP address
 ```
 
 ## 4. Create a domain name for your website
@@ -554,7 +559,7 @@ After completing the tutorial you can clean up by deleting the cluster and the d
 
 ```bash
 # Delete the cluster and all the Google Cloud resources related to the Ingress that it contains
-gcloud container clusters delete $CLUSTER
+gcloud container clusters delete $CLOUDSDK_CONTAINER_CLUSTER
 
 # Delete the domain name
 gcloud dns record-sets delete $DOMAIN_NAME --zone $ZONE --type A
