@@ -122,6 +122,12 @@ $ kubectl get order <order-name> -ojsonpath='{.status.authorizations[x].url}'
 If the Order is not completing successfully, you can debug the challenges
 for the Order by running `kubectl describe` on the `Challenge` resource which is described in the following steps.
 
+### Common errors
+
+* `Issuer: strict decoding error: unknown field "spec.acme.profile"`: The `ClusterIsssuer.spec.acme.profile` and `Issuer.spec.acme.profile` fields were added in cert-manager `>=v1.18.0`. You are probably trying to use the field with an older version of cert-manager.
+* `Failed to create Order: acme: certificate authority does not advertise a profile with name <profile-name>`: The ACME server supports [ACME Certificate Profiles](../configuration/acme/README.md#acme-certificate-profiles), but it does not have a profile matching the `profile` value in the `Issuer` or `ClusterIssuer`.
+* `Failed to create Order: acme: certificate authority does not support profiles`: The ACME server does not support [ACME Certificate Profiles](../configuration/acme/README.md#acme-certificate-profiles).
+
 ## 3. Troubleshooting Challenges
 
 In order to determine why an ACME Order is not being finished, we can debug
