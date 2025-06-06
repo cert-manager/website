@@ -59,7 +59,7 @@ spec:
     email: user@example.com
     # If the ACME server supports profiles, you can specify the profile name here.
     # See #acme-certificate-profiles below.
-    profile: tlserver
+    profile: tlsserver
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       # Secret resource that will be used to store the account's private key.
