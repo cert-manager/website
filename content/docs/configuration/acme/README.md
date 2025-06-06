@@ -57,6 +57,9 @@ spec:
     # Let's Encrypt will use this to contact you about expiring
     # certificates, and issues related to your account.
     email: user@example.com
+    # If the ACME server supports profiles, you can specify the profile name here.
+    # See #acme-certificate-profiles below.
+    profile: tlserver
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       # Secret resource that will be used to store the account's private key.
@@ -79,6 +82,41 @@ Solvers come in the form of [`dns01`](./dns01/README.md) and
 [`http01`](./http01/README.md) stanzas. For more information on how to configure
 these solver types, visit their respective documentation -
 [DNS01](./dns01/README.md), [HTTP01](./http01/README.md).
+
+### ACME Certificate Profiles
+
+> ℹ️ This feature is available in cert-manager `>= v1.18.0`.
+
+An ACME Server *may* offer a selection of different certificate profiles to ACME Clients.
+
+Use the optional `profile` field in the `Issuer` or `ClusterIssuer` to select a profile for your ACME orders.
+
+For example, Let's Encrypt offers the following [profiles](https://letsencrypt.org/docs/profiles/):
+
+- [`classic`][classic]: is the default profile selected for all orders which do not request a specific profile
+- [`tlsserver`][tlsserver]: for standard server certificates.
+- [`shortlived`][shortlived]: for short-lived six-day certificates.
+
+> ⚠️ The `shortlived` profile is currently locked behind an allow list.
+
+[classic]: https://letsencrypt.org/docs/profiles/#classic
+[tlsserver]: https://letsencrypt.org/docs/profiles/#tlsserver
+[shortlived]: https://letsencrypt.org/docs/profiles/#shortlived
+
+Other ACME servers may offer different profiles, so check your ACME server's documentation to see what profiles are available.
+
+If you do not specify a profile, the ACME server will use its default profile,
+which in the case of Let's Encrypt, is the `classic` profile.
+
+> ⚠️ If you specify a profile and connect to an ACME server that does not yet support the [ACME Profiles Extension][rfc],
+> cert-manager will report an error on the CertificateRequest resource.
+>
+> ℹ️ If you specify a profile which the ACME server does not recognize,
+> cert-manager will report an error on the CertificateRequest resource.
+>
+> 📖 Read [ACME protocol extension for certificate profiles (IETF draft)][rfc] to learn more..
+
+[rfc]: https://datatracker.ietf.org/doc/draft-aaron-acme-profiles/
 
 ### External Account Bindings
 
