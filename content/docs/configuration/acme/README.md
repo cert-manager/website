@@ -91,19 +91,17 @@ An ACME Server *may* offer a selection of different certificate profiles to ACME
 
 Use the optional `profile` field in the `Issuer` or `ClusterIssuer` to select a profile for your ACME orders.
 
-For example, Let's Encrypt offers the following [profiles](https://letsencrypt.org/docs/profiles/):
+Let's Encrypt already offers [a selection of profiles](https://letsencrypt.org/docs/profiles/).
+Other ACME servers may not yet support profiles or they might offer different profiles, so check your ACME server's documentation to see what profiles are available.
 
-- [`classic`][classic]: is the default profile selected for all orders which do not request a specific profile
-- [`tlsserver`][tlsserver]: for standard server certificates.
-- [`shortlived`][shortlived]: for short-lived six-day certificates.
+You can find out if your ACME server supports profiles by downloading the directory object.
+For example:
 
-> ⚠️ The `shortlived` profile is currently locked behind an allow list.
+```bash
+curl -fsSL https://acme-staging-v02.api.letsencrypt.org/directory
+```
 
-[classic]: https://letsencrypt.org/docs/profiles/#classic
-[tlsserver]: https://letsencrypt.org/docs/profiles/#tlsserver
-[shortlived]: https://letsencrypt.org/docs/profiles/#shortlived
-
-Other ACME servers may offer different profiles, so check your ACME server's documentation to see what profiles are available.
+If profiles are supported you will see "profiles" among the fields of the JSON object.
 
 If you do not specify a profile, the ACME server will use its default profile,
 which in the case of Let's Encrypt, is the `classic` profile.
