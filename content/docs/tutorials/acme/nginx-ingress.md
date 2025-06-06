@@ -297,6 +297,7 @@ Metadata:
 Spec:
   Acme:
     Email:  email@example.com
+    Profile: tlsserver
     Private Key Secret Ref:
       Key:
       Name:  letsencrypt-staging
