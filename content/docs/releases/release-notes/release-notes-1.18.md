@@ -67,12 +67,14 @@ config:
 
 ### The default value of `Certificate.Spec.RevisionHistoryLimit` is now `1`
 
-> ⚠️ Breaking change
+> ⚠️ Potentially breaking change
 
 The default value for the `Certificate` resource's `revisionHistoryLimit` field is now set to 1.
 This ensures that old `CertificateRequest` revisions are automatically garbage collected, improving resource management and reducing clutter in clusters.
 Previously, if not specified, no limit was applied, potentially leading to an accumulation of stale `CertificateRequest` resources.
 With this update, users no longer need to manually configure the revision history limit to benefit from automated cleanup.
+
+When you upgrade to cert-manager 1.18, all stale `CertificateRequest` resources will be garbage collected, unless you explicitly set the `revisionHistoryLimit` value on your `Certificate` resources.
 
 ### Copy annotations from Ingress or Gateway to the Certificate
 

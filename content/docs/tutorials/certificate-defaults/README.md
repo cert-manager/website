@@ -25,6 +25,8 @@ By setting custom defaults across our cluster, we enable platform teams to tackl
 
     Use a `ClusterPolicy` to set a custom default value for the `Certificate.Spec.RevisionHistoryLimit` field.
 
+    > ℹ️ Not needed with cert-manager `>= v1.18.0`, because the default value was changed to `1`.
+
 - **To help your users choose secure default key settings for their `Certificate` resources.**
 
     Use a `ClusterPolicy` to set custom default values for the `Certificate.Spec.PrivateKey` fields.
@@ -158,6 +160,7 @@ None of the three fields here are required fields, but they might need to be set
 These rules will:
 
 - Set a default value of: `revisionHistoryLimit: 2`.
+  > ℹ️ This is not necessary if you use cert-manager `>= v1.18.0`, because the default value was changed to `1`.
 - Set a [default value of `Always` under `spec.privateKey.rotationPolicy`](../../usage/certificate.md#the-rotationpolicy-setting).
   > ℹ️ This is not necessary if you use cert-manager `>=v1.18.0`, because the default value was changed from `Never` to `Always`.
 - Set defaults for all `spec.privateKey` fields.
