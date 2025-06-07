@@ -341,6 +341,7 @@ spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     email: <email-address> # ❗ Replace this with your email address
+    profile: tlsserver
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
@@ -495,6 +496,7 @@ spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: <email-address> # ❗ Replace this with your email address
+    profile: tlsserver
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:

@@ -7,7 +7,7 @@ cert-manager is the easiest way to automatically manage certificates in Kubernet
 
 ## Major Themes
 
-### ACME Certificate Profile Selection
+### ACME Certificate Profiles
 
 cert-manager now supports the selection of ACME certificate profiles, allowing
 users to request different categories of certificates from their ACME
@@ -22,6 +22,8 @@ for their certificate management needs.
 [rfc]: https://datatracker.ietf.org/doc/draft-aaron-acme-profiles/
 [tlsserver]: https://letsencrypt.org/docs/profiles/#tlsserver
 [shortlived]: https://letsencrypt.org/docs/profiles/#shortlived
+
+> 📖 Learn more by visiting the [ACME Issuer documentation](../../configuration/acme/README.md#acme-certificate-profiles).
 
 ### The default value of `Certificate.Spec.PrivateKey.RotationPolicy` is now `Always`
 
