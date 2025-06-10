@@ -129,7 +129,7 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 
 ## `v1.18.0`
 
-Changes since `v1.17.0`:
+Changes since `v1.17.2`:
 
 ### Feature
 
