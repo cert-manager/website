@@ -21,15 +21,15 @@ should be stable enough to run.
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.18][] | Jun 10, 2025 | Release of 1.20 | 1.29 → 1.33   /   4.16 → 4.18                  | 1.30 → 1.33                        |
-| [1.17][] | Feb 03, 2025 | Release of 1.19 | 1.29 → 1.32   /   4.16 → 4.18                  | 1.29 → 1.32                        |
+| [1.18][] | Jun 10, 2025 | Release of 1.20 | 1.29 → 1.33   /   4.16 → 4.18                  | 1.29 → 1.33                        |
+| [1.17][] | Feb 03, 2025 | Release of 1.19 | 1.29 → 1.33   /   4.16 → 4.18                  | 1.29 → 1.32                        |
 
 
 ## Upcoming releases
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.19][] | Oct 7, 2025  | Release of 1.21 | 1.30 → 1.33 / 4.16 → 4.18                      | 1.30 → 1.33                        |
+| [1.19][] | Oct 7, 2025  | Release of 1.21 | 1.29 → 1.33 / 4.16 → 4.18                      | 1.30 → 1.33                        |
 
 Dates in the future are not firm commitments and are subject to change.
 
