@@ -154,7 +154,8 @@ LATEST_VERSION="docs" # to also upgrade a specific version, use v1.13-docs, v1.1
 #genversionwithcli "release-1.14" "v1.14-docs"
 #genversionwithcli "release-1.15" "v1.15-docs"
 #genversionwithcli "release-1.16" "v1.16-docs"
-genversionwithcli "release-1.17" "$LATEST_VERSION"
+#genversionwithcli "release-1.17" "v1.17-docs"
+genversionwithcli "release-1.18" "$LATEST_VERSION"
 
 # Rather than generate the same docs again for /docs, copy from the latest version
 
