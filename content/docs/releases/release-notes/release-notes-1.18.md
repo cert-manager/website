@@ -5,6 +5,12 @@ description: 'cert-manager release notes: cert-manager 1.18'
 
 cert-manager is the easiest way to automatically manage certificates in Kubernetes and OpenShift clusters.
 
+cert-manager 1.18 introduces several new features and breaking changes.
+Highlights include support for ACME certificate profiles,
+a new default for `Certificate.Spec.PrivateKey.RotationPolicy` now set to `Always` (breaking change), and
+the default `Certificate.Spec.RevisionHistoryLimit` now set to `1` (potentially breaking).
+Be sure to review all new features and changes below, and read the full release notes carefully before upgrading.
+
 ## Major Themes
 
 ### ACME Certificate Profiles
