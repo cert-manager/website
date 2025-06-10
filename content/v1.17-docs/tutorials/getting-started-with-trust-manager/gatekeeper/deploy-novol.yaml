@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-assign
+  name: test-assign
+  namespace: team-a
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: test-assign
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: test-assign
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - sleep 1d
+        image: quay.io/zenlab/curl:latest
+        name: curl
+        resources: {}
+        volumeMounts: []
+      volumes: []
