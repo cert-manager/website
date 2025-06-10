@@ -1,0 +1,39 @@
+authenticate:
+  existingTLSSecret: pomerium-tls
+  idp:
+    provider: "google"
+    clientID: YOUR_CLIENT_ID
+    clientSecret: YOUR_SECRET
+    serviceAccount: YOUR_SERVICE_ACCOUNT
+  ingress:
+    annotations:
+      cert-manager.io/issuer: letsencrypt-staging
+    tls:
+      secretName: authenticate.localhost.pomerium.io-tls 
+
+proxy:
+  existingTLSSecret: pomerium-tls
+
+databroker:
+  existingTLSSecret: pomerium-tls
+  storage:
+    clientTLS:
+      existingSecretName: pomerium-redis-tls
+      existingCASecretKey: ca.crt
+
+authorize:
+  existingTLSSecret: pomerium-tls
+
+redis:
+  enabled: true
+  generateTLS: false
+  tls:
+    certificateSecret: pomerium-redis-tls
+
+ingressController:
+  enabled: true
+
+config:
+  rootDomain: localhost.pomerium.io #Change this to your reserved domain space.
+  existingCASecret: pomerium-tls
+  generateTLS: false # On by default, disabled when cert-manager or another solution is in place.
