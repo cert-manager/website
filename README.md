@@ -90,7 +90,7 @@ For example, the [manifest for the docs section](https://github.com/cert-manager
 contains the expected path for every file.
 
 If you're adding a top-level page which should only appear in the `docs/` section (such as the existing "contributing" section)
-then add `"x-only-docs": true` underneath the title in `manifest.json`. This will cause that section to be removed when a new versioned docs section.
+then add `"x-only-docs": true` underneath the title in `manifest.json`. This will cause that section to be removed when a new versioned docs section is added.
 
 Likewise, if a folder shouldn't be copied from `docs/` to a versioned section, add a file called `.x-only-docs` to that folder, and it will be removed from any newly created versioned documentation.
 
