@@ -19,16 +19,17 @@ should be stable enough to run.
 <a id="supported-releases"></a>
 ## Currently supported releases
 
-| Release      | Release Date | End of Life            | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
-|:------------:|:------------:|:----------------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.17][]     | Feb 03, 2025 | Release of 1.19        |       1.29 → 1.32   /   4.16 → 4.17            |  1.29 → 1.32                       |
-| [1.16][]     | Oct 03, 2024 | Release of 1.18        |       1.25 → 1.32   /   4.14 → 4.17            |  1.27 → 1.31                       |
+| Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
+|:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
+| [1.18][] | Jun 10, 2025 | Release of 1.20 | 1.29 → 1.33   /   4.16 → 4.18                  | 1.29 → 1.33                        |
+| [1.17][] | Feb 03, 2025 | Release of 1.19 | 1.29 → 1.33   /   4.16 → 4.18                  | 1.29 → 1.32                        |
+
 
 ## Upcoming releases
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.18][] | Jun 10, 2025 | Release of 1.20 | 1.29 → 1.33 / 4.16 → 4.17                      | 1.30 → 1.33                        |
+| [1.19][] | Oct 7, 2025  | Release of 1.21 | 1.29 → 1.33 / 4.16 → 4.18                      | 1.30 → 1.33                        |
 
 Dates in the future are not firm commitments and are subject to change.
 
@@ -222,15 +223,15 @@ newer Kubernetes features.
 The table below lists the major Kubernetes distributions we check. In parentheses next to each release is the <abbr title="End-of-life">EOL</abbr>
 for that release. EOL dates often change throughout the lifecycle of a release.
 
-The "Oldest Kubernetes Release" is the oldest release we deemed relevant to the next cert-manager release, as of 2024-09-25
+The "Oldest Kubernetes Release" is the oldest release we deemed relevant to the next cert-manager release, as of 2025-06-10
 
-|      Vendor           |  Oldest K8s Release   |                      Other Kubernetes Releases                       |
-|:---------------------:|:---------------------:|----------------------------------------------------------------------|
-|    [EKS][eks]         | 1.30 (Jul 2025)       | 1.31 (Nov 2025), 1.32 (TBD)                                          |
-|    [GKE][gke]         | 1.30 (Jul 2025)       | 1.31 (Sep 2025)                                                      |
-|    [AKS][aks]         | 1.30 (Jul 2025)       | 1.31 (Nov 2025), 1.32 (Mar 2026)                                     |
-| [OpenShift 4][os]     | 1.28 (4.15, Aug 2025) | 1.29 (4.16, Dec 2025), 1.30 (4.17, Apr 2026)                         |
-| [OpenShift 4 EUS][os] | 1.27 (4.14, Oct 2025) | 1.29 (4.16, Jun 2026)                                                |
+| Vendor                | Oldest K8s Release    | Other Kubernetes Releases                                           |
+|:---------------------:|:---------------------:|---------------------------------------------------------------------|
+| [EKS][eks]            | 1.30 (Jul 2025)       | 1.31 (Nov 2025), 1.32 (Mar 2026), 1.33 (Jul 2026)                   |
+| [GKE][gke]            | 1.30 (Jul 2025)       | 1.31 (Jan 2026), 1.32 (Apr 2026)                                    |
+| [AKS][aks]            | 1.30 (Jul 2025)       | 1.31 (Nov 2025), 1.32 (Mar 2026), 1.33 (May 2026)                   |
+| [OpenShift 4][os]     | 1.28 (4.15, Aug 2025) | 1.29 (4.16, Dec 2025), 1.30 (4.17, Apr 2026), 1.31 (4.18, Aug 2026) |
+| [OpenShift 4 EUS][os] | 1.27 (4.14, Oct 2025) | 1.29 (4.16, Jun 2026), 1.31 (4.18, Feb 2027)                        |
 
 [eks]: https://endoflife.date/amazon-eks
 [gke]: https://endoflife.date/google-kubernetes-engine
@@ -246,6 +247,7 @@ For convenience, the following table shows these version mappings:
 
 | OpenShift versions | Kubernetes version |
 |:------------------:|--------------------|
+| 4.18, 4.18 EUS     | 1.31               |
 | 4.17               | 1.30               |
 | 4.16, 4.16 EUS     | 1.29               |
 | 4.15               | 1.28               |
@@ -304,37 +306,39 @@ small change relative to the `<minor>` release.
 These cert-manager releases have reached their <abbr title="end-of-life">EOL</abbr> date and
 are no longer supported.
 
-| Release      | Release Date |     EOL      | Compatible Kubernetes versions | Compatible OpenShift versions |
+| Release      | Release Date | EOL          | Compatible Kubernetes versions | Compatible OpenShift versions |
 |--------------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
-| [1.15][]     | Jun 05, 2024 | Feb 03, 2025 |          1.25 → 1.32           |          4.12 → 4.16          |
-| [1.14][]     | Feb 03, 2024 | Oct 03, 2024 |          1.24 → 1.31           |          4.11 → 4.16          |
-| [1.13][]     | Sep 12, 2023 | Jun 05, 2024 |          1.21 → 1.27           |          4.8 → 4.14           |
-| [1.12 LTS][] | May 19, 2023 | May 19, 2025 |          1.22 → 1.32           |          4.9 → 4.16           |
-| [1.11][]     | Jan 11, 2023 | Sep 12, 2023 |          1.21 → 1.27           |          4.8 → 4.14           |
-| [1.10][]     | Oct 17, 2022 | May 19, 2023 |          1.20 → 1.26           |          4.7 → 4.13           |
-| [1.9][]      | Jul 22, 2022 | Jan 11, 2023 |          1.20 → 1.24           |          4.7 → 4.11           |
-| [1.8][]      | Apr 05, 2022 | Oct 17, 2022 |          1.19 → 1.24           |          4.6 → 4.11           |
-| [1.7][]      | Jan 26, 2021 | Jul 22, 2022 |          1.18 → 1.23           |          4.5 → 4.9            |
-| [1.6][]      | Oct 26, 2021 | Apr 05, 2022 |          1.17 → 1.22           |          4.4 → 4.9            |
-| [1.5][]      | Aug 11, 2021 | Jan 26, 2022 |          1.16 → 1.22           |          4.3 → 4.8            |
-| [1.4][]      | Jun 15, 2021 | Oct 26, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
-| [1.3][]      | Apr 08, 2021 | Aug 11, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
-| [1.2][]      | Feb 10, 2021 | Jun 15, 2021 |          1.16 → 1.21           |          4.3 → 4.7            |
-| [1.1][]      | Nov 24, 2020 | Apr 08, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [1.0][]      | Sep 02, 2020 | Feb 10, 2021 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.16][]     | Jul 23, 2020 | Nov 24, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.15][]     | May 06, 2020 | Sep 02, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.14][]     | Mar 11, 2020 | Jul 23, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.13][]     | Jan 21, 2020 | May 06, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.12][]     | Nov 27, 2019 | Mar 11, 2020 |          1.11 → 1.21           |          3.11 → 4.7           |
-| [0.11][]     | Oct 10, 2019 | Jan 21, 2020 |           1.9 → 1.21           |          3.09 → 4.7           |
+| [1.16][]     | Oct 03, 2024 | Jun 10, 2025 | 1.25 → 1.32                    | 4.14 → 4.17                   |
+| [1.15][]     | Jun 05, 2024 | Feb 03, 2025 | 1.25 → 1.32                    | 4.12 → 4.16                   |
+| [1.14][]     | Feb 03, 2024 | Oct 03, 2024 | 1.24 → 1.31                    | 4.11 → 4.16                   |
+| [1.13][]     | Sep 12, 2023 | Jun 05, 2024 | 1.21 → 1.27                    | 4.8 → 4.14                    |
+| [1.12 LTS][] | May 19, 2023 | May 19, 2025 | 1.22 → 1.32                    | 4.9 → 4.16                    |
+| [1.11][]     | Jan 11, 2023 | Sep 12, 2023 | 1.21 → 1.27                    | 4.8 → 4.14                    |
+| [1.10][]     | Oct 17, 2022 | May 19, 2023 | 1.20 → 1.26                    | 4.7 → 4.13                    |
+| [1.9][]      | Jul 22, 2022 | Jan 11, 2023 | 1.20 → 1.24                    | 4.7 → 4.11                    |
+| [1.8][]      | Apr 05, 2022 | Oct 17, 2022 | 1.19 → 1.24                    | 4.6 → 4.11                    |
+| [1.7][]      | Jan 26, 2021 | Jul 22, 2022 | 1.18 → 1.23                    | 4.5 → 4.9                     |
+| [1.6][]      | Oct 26, 2021 | Apr 05, 2022 | 1.17 → 1.22                    | 4.4 → 4.9                     |
+| [1.5][]      | Aug 11, 2021 | Jan 26, 2022 | 1.16 → 1.22                    | 4.3 → 4.8                     |
+| [1.4][]      | Jun 15, 2021 | Oct 26, 2021 | 1.16 → 1.21                    | 4.3 → 4.7                     |
+| [1.3][]      | Apr 08, 2021 | Aug 11, 2021 | 1.16 → 1.21                    | 4.3 → 4.7                     |
+| [1.2][]      | Feb 10, 2021 | Jun 15, 2021 | 1.16 → 1.21                    | 4.3 → 4.7                     |
+| [1.1][]      | Nov 24, 2020 | Apr 08, 2021 | 1.11 → 1.21                    | 3.11 → 4.7                    |
+| [1.0][]      | Sep 02, 2020 | Feb 10, 2021 | 1.11 → 1.21                    | 3.11 → 4.7                    |
+| [0.16][]     | Jul 23, 2020 | Nov 24, 2020 | 1.11 → 1.21                    | 3.11 → 4.7                    |
+| [0.15][]     | May 06, 2020 | Sep 02, 2020 | 1.11 → 1.21                    | 3.11 → 4.7                    |
+| [0.14][]     | Mar 11, 2020 | Jul 23, 2020 | 1.11 → 1.21                    | 3.11 → 4.7                    |
+| [0.13][]     | Jan 21, 2020 | May 06, 2020 | 1.11 → 1.21                    | 3.11 → 4.7                    |
+| [0.12][]     | Nov 27, 2019 | Mar 11, 2020 | 1.11 → 1.21                    | 3.11 → 4.7                    |
+| [0.11][]     | Oct 10, 2019 | Jan 21, 2020 | 1.9 → 1.21                     | 3.09 → 4.7                    |
 
 
 NB: cert-manager 1.12 was a public Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It was supported for 2 years from release.
 
 [s]: #kubernetes-supported-versions
 [test]: #supported-vs-tested
-[1.18]: https://github.com/cert-manager/cert-manager/milestone/40
+[1.19]: https://github.com/cert-manager/cert-manager/milestone/41
+[1.18]: ./release-notes/release-notes-1.18.md
 [1.17]: ./release-notes/release-notes-1.17.md
 [1.16]: ./release-notes/release-notes-1.16.md
 [1.15]: ./release-notes/release-notes-1.15.md
