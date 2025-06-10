@@ -177,4 +177,6 @@ Changes since `v1.17.0`:
 - Promote the `AdditionalCertificateOutputFormats` feature to GA, making additional formats always enabled. ([`#7744`](https://github.com/cert-manager/cert-manager/pull/7744), [`@erikgb`](https://github.com/erikgb))
 - Remove deprecated feature gate `ValidateCAA`. Setting this feature gate is now a no-op which does nothing but print a warning log line ([`#7553`](https://github.com/cert-manager/cert-manager/pull/7553), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
 - Upgrade `golang.org/x/net` fixing `CVE-2025-22870`. ([`#7619`](https://github.com/cert-manager/cert-manager/pull/7619), [`@depandabot[bot]`](https://github.com/apps/dependabot))
+- Update kind images to include the Kubernetes 1.33 node image ([`#7787`](https://github.com/cert-manager/cert-manager/pull/7787), [`@wallrj`](https://github.com/wallrj))
+- Upgrade Go to `v1.24.4` ([`#7785`](https://github.com/cert-manager/cert-manager/pull/7785), [`@wallrj`](https://github.com/wallrj))
 - Use `slices.Contains` to simplify code ([`#7753`](https://github.com/cert-manager/cert-manager/pull/7753), [`@cuinix`](https://github.com/cuinix))
