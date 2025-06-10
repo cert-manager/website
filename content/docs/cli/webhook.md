@@ -22,12 +22,19 @@ Flags:
       --dynamic-serving-leaf-duration duration               leaf duration of serving certificates (default 168h0m0s)
       --enable-profiling                                     Enable profiling for webhook.
       --feature-gates mapStringBool                          A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
-                                                             AdditionalCertificateOutputFormats=true|false (BETA - default=true)
                                                              AllAlpha=true|false (ALPHA - default=false)
                                                              AllBeta=true|false (BETA - default=false)
+                                                             DefaultPrivateKeyRotationPolicyAlways=true|false (BETA - default=true)
+                                                             ExperimentalCertificateSigningRequestControllers=true|false (ALPHA - default=false)
+                                                             ExperimentalGatewayAPISupport=true|false (BETA - default=true)
                                                              LiteralCertificateSubject=true|false (BETA - default=true)
                                                              NameConstraints=true|false (BETA - default=true)
                                                              OtherNames=true|false (ALPHA - default=false)
+                                                             SecretsFilteredCaching=true|false (BETA - default=true)
+                                                             ServerSideApply=true|false (ALPHA - default=false)
+                                                             StableCertificateRequestName=true|false (BETA - default=true)
+                                                             UseCertificateRequestBasicConstraints=true|false (ALPHA - default=false)
+                                                             ValidateCAA=true|false (ALPHA - default=false)
       --healthz-port int32                                   port number to listen on for insecure healthz connections (default 6080)
   -h, --help                                                 help for webhook
       --kubeconfig string                                    optional path to the kubeconfig used to connect to the apiserver. If not specified, in-cluster-config will be used

@@ -436,7 +436,41 @@ Certificate resources:
 
 - `cert-manager.io/private-key-rotation-policy`: (optional) this annotation allows you to
   configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
-  Valid values are `Never` and `Always`. If unset a rotation policy `Never` will be used.
+  Valid values are `Never` and `Always`. If unset a rotation policy `Always` will be used.
+
+## Copy annotations to the Certificate
+
+> ℹ️ This feature was added in cert-manager `v1.18.0`.
+
+It is possible to copy any specific custom annotation into the generated `Certificate` objects.
+For example, to copy the annotation: `venafi.cert-manager.io/custom-fields` from the Gateway to the Certificate,
+you must first redeploy the cert-manager controller with the following extra argument:
+
+```
+--extra-certificate-annotations=venafi.cert-manager.io/custom-fields
+```
+
+Or if you use Helm, supply the following values:
+
+```yaml
+# values.yaml
+config:
+  ingressShimConfig:
+    extraCertificateAnnotations:
+    - venafi.cert-manager.io/custom-fields
+```
+
+Then you can add the annotation to the Gateway resource:
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: example
+  annotations:
+    # custom venafi configuration
+    venafi.cert-manager.io/custom-fields: `[ {"name": "field-name", "value": "field value"}]`
+```
 
 ## Inner workings diagram for developers
 

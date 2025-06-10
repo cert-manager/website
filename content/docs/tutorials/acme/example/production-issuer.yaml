@@ -8,6 +8,8 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     # Email address used for ACME registration
     email: user@example.com
+    # The ACME certificate profile
+    profile: tlsserver
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
       name: letsencrypt-prod

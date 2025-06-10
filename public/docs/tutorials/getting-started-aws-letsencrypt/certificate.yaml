@@ -5,7 +5,6 @@ metadata:
   name: www
 spec:
   secretName: www-tls
-  revisionHistoryLimit: 1
   privateKey:
     rotationPolicy: Always
   commonName: www.$DOMAIN_NAME

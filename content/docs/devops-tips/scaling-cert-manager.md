@@ -76,6 +76,8 @@ might accidentally or maliciously cause a denial of service for other users on t
 
 ## Set `revisionHistoryLimit: 1` on all Certificate resources
 
+> ℹ️ Not needed with cert-manager `>= v1.18.0`, because the default value was changed to `1`.
+
 By default, cert-manager will keep all the `CertificateRequest` resources that **it** creates
 ([`revisionHistoryLimit`](../reference/api-docs.md#cert-manager.io/v1.CertificateSpec)):
 

@@ -123,7 +123,7 @@ description: >-
               <em>string</em>
             </td>
             <td>
-              <p> dnsName is the identifier that this challenge is for, e.g. example.com. If the requested DNSName is a &lsquo;wildcard&rsquo;, this field MUST be set to the non-wildcard domain, e.g. for <code>*.example.com</code>, it must be <code>example.com</code>. </p>
+              <p> dnsName is the identifier that this challenge is for, e.g., example.com. If the requested DNSName is a &lsquo;wildcard&rsquo;, this field MUST be set to the non-wildcard domain, e.g., for <code>*.example.com</code>, it must be <code>example.com</code>. </p>
             </td>
           </tr>
           <tr>
@@ -340,6 +340,17 @@ description: >-
               <p>Duration is the duration for the not after date for the requested certificate. this is set on order creation as pe the ACME spec.</p>
             </td>
           </tr>
+          <tr>
+            <td>
+              <code>profile</code>
+              <br />
+              <em>string</em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p>Profile allows requesting a certificate profile from the ACME server. Supported profiles are listed by the server&rsquo;s ACME directory URL.</p>
+            </td>
+          </tr>
         </table>
       </td>
     </tr>
@@ -470,7 +481,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>Type is the type of challenge being offered, e.g. &lsquo;http-01&rsquo;, &lsquo;dns-01&rsquo;, &lsquo;tls-sni-01&rsquo;, etc. This is the raw value retrieved from the ACME server. Only &lsquo;http-01&rsquo; and &lsquo;dns-01&rsquo; are supported by cert-manager, other values will be ignored.</p>
+        <p>Type is the type of challenge being offered, e.g., &lsquo;http-01&rsquo;, &lsquo;dns-01&rsquo;, &lsquo;tls-sni-01&rsquo;, etc. This is the raw value retrieved from the ACME server. Only &lsquo;http-01&rsquo; and &lsquo;dns-01&rsquo; are supported by cert-manager, other values will be ignored.</p>
       </td>
     </tr>
   </tbody>
@@ -511,7 +522,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Configures cert-manager to attempt to complete authorizations by performing the HTTP01 challenge flow. It is not possible to obtain certificates for wildcard domain names (e.g. <code>*.example.com</code>) using the HTTP01 challenge mechanism. </p>
+        <p> Configures cert-manager to attempt to complete authorizations by performing the HTTP01 challenge flow. It is not possible to obtain certificates for wildcard domain names (e.g., <code>*.example.com</code>) using the HTTP01 challenge mechanism. </p>
       </td>
     </tr>
     <tr>
@@ -1136,7 +1147,7 @@ description: >-
         <code>imagePullSecrets</code>
         <br />
         <em>
-          <a href="https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/local-object-reference/">[]Kubernetes core/v1.LocalObjectReference</a>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#localobjectreference-v1-core">[]Kubernetes core/v1.LocalObjectReference</a>
         </em>
       </td>
       <td>
@@ -1261,7 +1272,7 @@ description: >-
               <code>imagePullSecrets</code>
               <br />
               <em>
-                <a href="https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/local-object-reference/">[]Kubernetes core/v1.LocalObjectReference</a>
+                <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#localobjectreference-v1-core">[]Kubernetes core/v1.LocalObjectReference</a>
               </em>
             </td>
             <td>
@@ -1436,7 +1447,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>PreferredChain is the chain to use if the ACME server outputs multiple. PreferredChain is no guarantee that this one gets delivered by the ACME endpoint. For example, for Let&rsquo;s Encrypt&rsquo;s DST crosssign you would use: &ldquo;DST Root CA X3&rdquo; or &ldquo;ISRG Root X1&rdquo; for the newer Let&rsquo;s Encrypt root CA. This value picks the first certificate bundle in the combined set of ACME default and alternative chains that has a root-most certificate with this value as its issuer&rsquo;s commonname.</p>
+        <p>PreferredChain is the chain to use if the ACME server outputs multiple. PreferredChain is no guarantee that this one gets delivered by the ACME endpoint. For example, for Let&rsquo;s Encrypt&rsquo;s DST cross-sign you would use: &ldquo;DST Root CA X3&rdquo; or &ldquo;ISRG Root X1&rdquo; for the newer Let&rsquo;s Encrypt root CA. This value picks the first certificate bundle in the combined set of ACME default and alternative chains that has a root-most certificate with this value as its issuer&rsquo;s commonname.</p>
       </td>
     </tr>
     <tr>
@@ -1519,6 +1530,17 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Enables requesting a Not After date on certificates that matches the duration of the certificate. This is not supported by all ACME servers like Let&rsquo;s Encrypt. If set to true when the ACME server does not support it, it will create an error on the Order. Defaults to false.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>profile</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Profile allows requesting a certificate profile from the ACME server. Supported profiles are listed by the server&rsquo;s ACME directory URL.</p>
       </td>
     </tr>
   </tbody>
@@ -2031,7 +2053,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>The name of the solver to use, as defined in the webhook provider implementation. This will typically be the name of the provider, e.g. &lsquo;cloudflare&rsquo;.</p>
+        <p>The name of the solver to use, as defined in the webhook provider implementation. This will typically be the name of the provider, e.g., &lsquo;cloudflare&rsquo;.</p>
       </td>
     </tr>
     <tr>
@@ -2044,7 +2066,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Additional configuration that should be passed to the webhook apiserver when challenges are processed. This can contain arbitrary JSON data. Secret values should not be specified in this stanza. If secret values are needed (e.g. credentials for a DNS service), you should use a SecretKeySelector to reference a Secret resource. For details on the schema of this field, consult the webhook provider implementation&rsquo;s documentation.</p>
+        <p>Additional configuration that should be passed to the webhook apiserver when challenges are processed. This can contain arbitrary JSON data. Secret values should not be specified in this stanza. If secret values are needed (e.g., credentials for a DNS service), you should use a SecretKeySelector to reference a Secret resource. For details on the schema of this field, consult the webhook provider implementation&rsquo;s documentation.</p>
       </td>
     </tr>
   </tbody>
@@ -2153,7 +2175,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>client ID of the managed identity, can not be used at the same time as resourceID</p>
+        <p>client ID of the managed identity, cannot be used at the same time as resourceID</p>
       </td>
     </tr>
     <tr>
@@ -2164,7 +2186,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>resource ID of the managed identity, can not be used at the same time as clientID Cannot be used for Azure Managed Service Identity</p>
+        <p>resource ID of the managed identity, cannot be used at the same time as clientID Cannot be used for Azure Managed Service Identity</p>
       </td>
     </tr>
     <tr>
@@ -2175,7 +2197,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>tenant ID of the managed identity, can not be used at the same time as resourceID</p>
+        <p>tenant ID of the managed identity, cannot be used at the same time as resourceID</p>
       </td>
     </tr>
   </tbody>
@@ -2271,7 +2293,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p> dnsName is the identifier that this challenge is for, e.g. example.com. If the requested DNSName is a &lsquo;wildcard&rsquo;, this field MUST be set to the non-wildcard domain, e.g. for <code>*.example.com</code>, it must be <code>example.com</code>. </p>
+        <p> dnsName is the identifier that this challenge is for, e.g., example.com. If the requested DNSName is a &lsquo;wildcard&rsquo;, this field MUST be set to the non-wildcard domain, e.g., for <code>*.example.com</code>, it must be <code>example.com</code>. </p>
       </td>
     </tr>
     <tr>
@@ -2517,6 +2539,17 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Duration is the duration for the not after date for the requested certificate. this is set on order creation as pe the ACME spec.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>profile</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Profile allows requesting a certificate profile from the ACME server. Supported profiles are listed by the server&rsquo;s ACME directory URL.</p>
       </td>
     </tr>
   </tbody>
@@ -3317,6 +3350,19 @@ description: >-
           </tr>
           <tr>
             <td>
+              <code>signatureAlgorithm</code>
+              <br />
+              <em>
+                <a href="#cert-manager.io/v1.SignatureAlgorithm">SignatureAlgorithm</a>
+              </em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p>Signature algorithm to use. Allowed values for RSA keys: SHA256WithRSA, SHA384WithRSA, SHA512WithRSA. Allowed values for ECDSA keys: ECDSAWithSHA256, ECDSAWithSHA384, ECDSAWithSHA512. Allowed values for Ed25519 keys: PureEd25519.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <code>encodeUsagesInRequest</code>
               <br />
               <em>bool</em>
@@ -3339,7 +3385,7 @@ description: >-
                 The maximum number of CertificateRequest revisions that are maintained in the Certificate&rsquo;s history. Each revision represents a single <code>CertificateRequest</code>
                 created by this Certificate, either when it was created, renewed, or Spec was changed. Revisions will be removed by oldest first if the number of revisions exceeds this number.
               </p>
-              <p> If set, revisionHistoryLimit must be a value of <code>1</code> or greater. If unset (<code>nil</code>), revisions will not be garbage collected. Default value is <code>nil</code>. </p>
+              <p> If set, revisionHistoryLimit must be a value of <code>1</code> or greater. Default value is <code>1</code>. </p>
             </td>
           </tr>
           <tr>
@@ -3353,10 +3399,6 @@ description: >-
             <td>
               <em>(Optional)</em>
               <p>Defines extra output formats of the private key and signed certificate chain to be written to this Certificate&rsquo;s target Secret.</p>
-              <p>
-                This is a Beta Feature enabled by default. It can be disabled with the
-                <code>--feature-gates=AdditionalCertificateOutputFormats=false</code> option set on both the controller and webhook components.
-              </p>
             </td>
           </tr>
           <tr>
@@ -4074,7 +4116,7 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>RotationPolicy controls how private keys should be regenerated when a re-issuance is being processed.</p>
-        <p> If set to <code>Never</code>, a private key will only be generated if one does not already exist in the target <code>spec.secretName</code>. If one does exist but it does not have the correct algorithm or size, a warning will be raised to await user intervention. If set to <code>Always</code>, a private key matching the specified requirements will be generated whenever a re-issuance occurs. Default is <code>Never</code> for backward compatibility. </p>
+        <p> If set to <code>Never</code>, a private key will only be generated if one does not already exist in the target <code>spec.secretName</code>. If one does exist but it does not have the correct algorithm or size, a warning will be raised to await user intervention. If set to <code>Always</code>, a private key matching the specified requirements will be generated whenever a re-issuance occurs. Default is <code>Always</code>. The default was changed from <code>Never</code> to <code>Always</code> in cert-manager &gt;=v1.18.0. The new default can be disabled by setting the <code>--feature-gates=DefaultPrivateKeyRotationPolicyAlways=false</code> option on the controller component. </p>
       </td>
     </tr>
     <tr>
@@ -4719,6 +4761,19 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>signatureAlgorithm</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.SignatureAlgorithm">SignatureAlgorithm</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Signature algorithm to use. Allowed values for RSA keys: SHA256WithRSA, SHA384WithRSA, SHA512WithRSA. Allowed values for ECDSA keys: ECDSAWithSHA256, ECDSAWithSHA384, ECDSAWithSHA512. Allowed values for Ed25519 keys: PureEd25519.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>encodeUsagesInRequest</code>
         <br />
         <em>bool</em>
@@ -4741,7 +4796,7 @@ description: >-
           The maximum number of CertificateRequest revisions that are maintained in the Certificate&rsquo;s history. Each revision represents a single <code>CertificateRequest</code>
           created by this Certificate, either when it was created, renewed, or Spec was changed. Revisions will be removed by oldest first if the number of revisions exceeds this number.
         </p>
-        <p> If set, revisionHistoryLimit must be a value of <code>1</code> or greater. If unset (<code>nil</code>), revisions will not be garbage collected. Default value is <code>nil</code>. </p>
+        <p> If set, revisionHistoryLimit must be a value of <code>1</code> or greater. Default value is <code>1</code>. </p>
       </td>
     </tr>
     <tr>
@@ -4755,10 +4810,6 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Defines extra output formats of the private key and signed certificate chain to be written to this Certificate&rsquo;s target Secret.</p>
-        <p>
-          This is a Beta Feature enabled by default. It can be disabled with the
-          <code>--feature-gates=AdditionalCertificateOutputFormats=false</code> option set on both the controller and webhook components.
-        </p>
       </td>
     </tr>
     <tr>
@@ -5562,7 +5613,7 @@ description: >-
         <p> Profile specifies the key and certificate encryption algorithms and the HMAC algorithm used to create the PKCS12 keystore. Default value is <code>LegacyRC2</code> for backward compatibility. </p>
         <p>
           If provided, allowed values are:
-          <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (eg. because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret.
+          <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (e.g., because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret.
         </p>
       </td>
     </tr>
@@ -5759,6 +5810,61 @@ description: >-
         <em>(Optional)</em>
         <p>TokenAudiences is an optional list of extra audiences to include in the token passed to Vault. The default token consisting of the issuer&rsquo;s namespace and name is always included.</p>
       </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.SignatureAlgorithm"> SignatureAlgorithm (<code>string</code> alias) </h3>
+<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>&#34;ECDSAWithSHA256&#34;</p>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;ECDSAWithSHA384&#34;</p>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;ECDSAWithSHA512&#34;</p>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;PureEd25519&#34;</p>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;SHA256WithRSA&#34;</p>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;SHA384WithRSA&#34;</p>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;SHA512WithRSA&#34;</p>
+      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -5961,6 +6067,17 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>serverName</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>ServerName is used to verify the hostname on the returned certificates by the Vault server.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>path</code>
         <br />
         <em>string</em>
@@ -6115,7 +6232,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> URL is the base URL for Venafi Cloud. Defaults to &ldquo;<a href='https://api.venafi.cloud/v1"'>https://api.venafi.cloud/v1&rdquo;</a>. </p>
+        <p> URL is the base URL for Venafi Cloud. Defaults to &ldquo;<a href='https://api.venafi.cloud/"'>https://api.venafi.cloud/&rdquo;</a>. </p>
       </td>
     </tr>
     <tr>
@@ -6805,6 +6922,16 @@ description: >-
         <p>The annotation consumed by the ingress-shim controller to indicate an ingress is requesting a certificate</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>extraCertificateAnnotations</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p>ExtraCertificateAnnotations is a list of annotations which should be copied from and ingress-like object to a Certificate.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="controller.config.cert-manager.io/v1alpha1.LeaderElectionConfig">LeaderElectionConfig</h3>
@@ -6889,7 +7016,7 @@ description: >-
 <h3 id="meta.cert-manager.io/v1.LocalObjectReference">LocalObjectReference</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VenafiTPP">VenafiTPP</a>, <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>) </p>
 <div>
-  <p>A reference to an object in the same namespace as the referent. If the referent is a cluster-scoped resource (e.g. a ClusterIssuer), the reference instead refers to the resource with the given name in the configured &lsquo;cluster resource namespace&rsquo;, which is set as a flag on the controller component (and defaults to the namespace that cert-manager runs in).</p>
+  <p>A reference to an object in the same namespace as the referent. If the referent is a cluster-scoped resource (e.g., a ClusterIssuer), the reference instead refers to the resource with the given name in the configured &lsquo;cluster resource namespace&rsquo;, which is set as a flag on the controller component (and defaults to the namespace that cert-manager runs in).</p>
 </div>
 <table>
   <thead>
@@ -7135,5 +7262,5 @@ description: >-
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>4562b9a</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>3ab737e</code>. </em>
 </p>

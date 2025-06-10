@@ -175,7 +175,42 @@ trigger Certificate resources to be automatically created:
 
 - `cert-manager.io/private-key-rotation-policy`: (optional) this annotation allows you to
   configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
-  Valid values are `Never` and `Always`. If unset a rotation policy `Never` will be used.
+  Valid values are `Never` and `Always`. If unset a rotation policy `Always` will be used.
+
+## Copying annotations to the Certificate
+
+> ℹ️ This feature was added in cert-manager `v1.18.0`.
+
+It is possible to copy any specific custom annotation into the generated `Certificate` objects.
+For example, to copy the annotation: `venafi.cert-manager.io/custom-fields` from the Ingress to the Certificate,
+you must first redeploy the cert-manager controller with the following extra argument:
+
+```
+--extra-certificate-annotations=venafi.cert-manager.io/custom-fields
+```
+
+Or if you use Helm, supply the following values:
+
+```yaml
+# values.yaml
+config:
+  ingressShimConfig:
+    extraCertificateAnnotations:
+    - venafi.cert-manager.io/custom-fields
+```
+
+Then you can add the annotation to the Ingress resource:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # custom venafi configuration
+    venafi.cert-manager.io/custom-fields: `[ {"name": "field-name", "value": "field value"}]`
+  name: myIngress
+  namespace: myIngress
+```
 
 ## Generate multiple certificates with multiple ingresses
 

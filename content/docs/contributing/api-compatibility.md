@@ -11,7 +11,8 @@ after an upgrade or downgrade of cert-manager.
 In some cases, we may need to require users to take actions before upgrading or may need to diverge from the API compatibility promise but we'll treat this as an absolute
 last resort. In general the main criteria by which we'd determine whether a change is acceptable would be user value.
 
-For example in the event of a truly critical bug, a fix that breaks the API compatibility promise by changing the default behavior of an API field _might_ be acceptable. As of yet, though, there has never been a need for such a change.
+Here are the breaking changes we have made to the `v1` API:
+* [cert-manger 1.18](../releases/release-notes/release-notes-1.18.md): The default value of `Certificate.Spec.PrivateKey.RotationPolicy` changed from `Never` to `Always`.
 
 ## Alpha / Beta API Versions
 
