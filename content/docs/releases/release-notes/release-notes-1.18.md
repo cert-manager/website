@@ -11,6 +11,25 @@ a new default for `Certificate.Spec.PrivateKey.RotationPolicy` now set to `Alway
 the default `Certificate.Spec.RevisionHistoryLimit` now set to `1` (potentially breaking).
 Be sure to review all new features and changes below, and read the full release notes carefully before upgrading.
 
+## Known Issues
+
+### ACME HTTP01 challenge paths are rejected by the ingress-nginx validating webhook
+
+> 🐛 See [cert-manager/issues/7791](https://github.com/cert-manager/cert-manager/issues/7791).
+
+In cert-manager `v1.18.0`, we changed the default `PathType` from `ImplementationSpecific` to `Exact`, in the Ingress routes that are created by the ACME HTTP01 challenge controller.
+This was to support Ingress controllers such as Cilium, which treat `ImplementationSpecific` paths as regular expressions.
+
+But the change is incompatible with certain versions and configurations of the `ingress-nginx` Ingress controller.
+Versions of [`ingress-nginx >=1.8.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.8.0.md) support a [`strict-validate-path-type` configuration option](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#strict-validate-path-type) which, when enabled, disallows `.` (dot) in the path value. This is a [bug](https://github.com/kubernetes/ingress-nginx/issues/11176) which makes it impossible to use various legitimate URL paths, including the  `http://<YOUR_DOMAIN>/.well-known/acme-challenge/<TOKEN>` URLs used for [ACME HTTP01](https://letsencrypt.org/docs/challenge-types/#http-01-challenge).
+To make matters worse, the buggy validation is [enabled by default](https://github.com/kubernetes/ingress-nginx/pull/11819) in [`ingress-nginx >= 1.12.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.12.0.md).
+
+We are working on a fix. The next cert-manager patch release `v1.18.1` (release date is yet to be decided) will gate the `PathType: Exact` change behind a feature gate, which will be enabled by default. This will allow you to reinstate the old `PathType: ImplementationSpecific` behavior, by disabling the feature gate.
+
+Meanwhile, you have two options:
+1. Do not upgrade cert-manager. Continue to use cert-manager 1.17.
+2. Disable the `strict-validate-path-type` option in your ingress-nginx controller.
+
 ## Major Themes
 
 ### ACME Certificate Profiles
