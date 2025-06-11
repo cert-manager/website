@@ -291,3 +291,7 @@ https://experimental.cert-manager.io/private-key-secret-name /docs/configuration
 
 https://venafi.cert-manager.io/custom-fields /docs/configuration/annotations#venaficert-managerio/custom-fields 301!
 https://venafi.cert-manager.io/pickup-id /docs/configuration/annotations#venaficert-managerio/pickup-id 301!
+
+# note that the kubernetes.io entries will not have real CNAMEs and are merely for consistency, but if someone does talk to this netifly instance, it should work.
+https://kubernetes.io/ingress.class /docs/configuration/annotations#kubernetesio/ingressclass 301!
+https://kubernetes.io/tls-acme /docs/configuration/annotations#kubernetesio/tls-acme 301!
