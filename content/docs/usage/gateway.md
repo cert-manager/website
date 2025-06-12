@@ -345,23 +345,24 @@ spec:
 
 ## Supported Annotations
 
-If you are migrating to Gateway resources from Ingress resources, be aware that
+If you are migrating to `Gateway` resources from `Ingress` resources, be aware that
 there are some differences between [the annotations for Ingress resources](./ingress.md#supported-annotations)
-versus the annotations for Gateway resources.
+versus the annotations for `Gateway` resources.
 
-The Gateway resource supports the following annotations for generating
-Certificate resources:
+The `Gateway` resource supports the following annotations for generating
+`Certificate` resources:
 
-- `cert-manager.io/issuer`: the name of an Issuer to acquire the certificate
-  required for this Gateway. The Issuer _must_ be in the same namespace as the
-  Gateway resource.
+- `cert-manager.io/issuer`: the name of the Issuer that should issue the
+  certificate required for this `Gateway`. The Issuer _must_ be in the same
+  namespace as the `Gateway` resource.
 
-- `cert-manager.io/cluster-issuer`: the name of a ClusterIssuer to acquire the
-  Certificate required for this Gateway. It does not matter which namespace your
-  Gateway resides, as `ClusterIssuers` are non-namespaced resources.
+- `cert-manager.io/cluster-issuer`: the name of a `cert-manager.io` `ClusterIssuer`
+  to acquire the certificate required for this `Gateway`. It does not matter in
+  which namespace your `Gateway` resides, as `ClusterIssuers` are non-namespaced
+  resources.
 
 - `cert-manager.io/issuer-kind`: the kind of the external issuer resource, for
-  example `AWSPCACIssuer`. This is only necessary for out-of-tree issuers.
+  example `AWSPCAIssuer`. This is only necessary for out-of-tree issuers.
 
 - `cert-manager.io/issuer-group`: the API group of the external issuer
   controller, for example `awspca.cert-manager.io`. This is only necessary for
@@ -406,7 +407,7 @@ Certificate resources:
   configure `spec.subject.serialNumber` field for the Certificate to be generated.
   Supports comma-separated values e.g. "10978342379280287615,1111144445555522228888"
 
-- ` cert-manager.io/duration`: (optional) this annotation allows you to
+- `cert-manager.io/duration`: (optional) this annotation allows you to
   configure `spec.duration` field for the Certificate to be generated.
 
 - `cert-manager.io/renew-before`: (optional) this annotation allows you to
