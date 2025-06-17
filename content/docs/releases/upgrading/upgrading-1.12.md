@@ -10,9 +10,9 @@ To support users upgrading from v1.12 to a more modern version, this guide inclu
 
 1. An initial section which must be read and followed before any kind of upgrade.
 
-1. Details on how to upgrade to a more modern version - cert-manager v1.16. This allows users to skip the usual cert-manager advice of "upgrading through the versions" and go directly from `v1.12.x` to `v1.16.y`. Further upgrades beyond cert-manager v1.16 should use the usual "upgrade through the versions" advice.
+2. Details on how to upgrade to a more modern version - cert-manager v1.17. This allows users to skip the usual cert-manager advice of "upgrading through the versions" and go directly from `v1.12.x` to `v1.17.y`. Further upgrades beyond cert-manager v1.17 should use the usual "upgrade through the versions" advice.
 
-2. Details on a more traditional upgrade path, to upgrade from v1.12 to v1.13. Since v1.13 is already at end-of-life, users should not stay on cert-manager v1.13 and should proceed to continue upgrading until they reach a supported version.
+3. Details on a more traditional upgrade path, to upgrade from v1.12 to v1.13. Since v1.13 is already at end-of-life, users should not stay on cert-manager v1.13 and should proceed to continue upgrading until they reach a supported version.
 
 ## Before any upgrades
 
@@ -22,15 +22,15 @@ To support users upgrading from v1.12 to a more modern version, this guide inclu
 
 ### Other Upgrade Information
 
-Whether upgrading to v1.13 or to v1.16, you can follow the [regular upgrade process](../../installation/upgrade.md) once you've checked the notes in the relevant section below.
+Whether upgrading to v1.13 or to v1.17, you can follow the [regular upgrade process](../../installation/upgrade.md) once you've checked the notes in the relevant section below.
 
-## Upgrading from v1.12 to v1.16
+## Upgrading from v1.12 to v1.17
 
-You should read all of the below information and check your environment. Most upgrades from v1.12 to v1.16 are simple but in some scenarios you may need to make some changes.
+You should read all of the below information and check your environment. Most upgrades from v1.12 to v1.17 are simple but in some scenarios you may need to make some changes.
 
-You should upgrade directly to the latest available v1.16 patch release since earlier versions of v1.16 had bugs.
+You should upgrade directly to the latest available v1.17 patch release.
 
-1. If you run in an environment which tightly restricts which images can be pulled or if you've made manual changes to the `ctl` image in your deployment, be aware that the `ctl` image has changed a `startupapicheck` image. Ensure that the new image can be pulled in your environment. There is no `ctl` image for cert-manager v1.16 or newer.
+1. If you run in an environment which tightly restricts which images can be pulled or if you've made manual changes to the `ctl` image in your deployment, be aware that the `ctl` image has changed a `startupapicheck` image. Ensure that the new image can be pulled in your environment. The `ctl` image is no longer available.
 
 2. cert-manager v1.16 adds Helm schema validation, which will reject invalid Helm values. Be prepared to fix any invalid Helm values during the upgrade. For more information, check the [Helm](../release-notes/release-notes-1.16.md#helm) section of the v1.16 release notes.
 
@@ -41,6 +41,8 @@ You should upgrade directly to the latest available v1.16 patch release since ea
 5. Upgrades to the in-tree Venafi issuer mean that some certificate renewals may fail if Venafi configuration values are incorrect. If you use the Venafi issuer, check the [Venafi Issuer](../release-notes/release-notes-1.16.md#venafi-issuer) section of the v1.16 release notes.
 
 6. In cert-manager v1.13, webhook validation of CertificateRequest resources became stricter: all `KeyUsages` and `ExtendedKeyUsages` must be defined directly in the CertificateRequest resource and the encoded CSR can never contain more usages than defined in the Kubernetes resource. See [`#6182`](https://github.com/cert-manager/cert-manager/pull/6182) for more information. Most users are unaffected by this change.
+
+7. cert-manager v1.17 changed the signature algorithms used for RSA certificates such that 3072-bit RSA keys use SHA-384 and 4096-bit RSA keys use SHA-512. Previous versions of cert-manager used SHA-256 for all RSA signatures.
 
 ## Upgrading from v1.12 to v1.13
 
