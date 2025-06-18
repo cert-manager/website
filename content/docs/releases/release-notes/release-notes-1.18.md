@@ -11,26 +11,56 @@ a new default for `Certificate.Spec.PrivateKey.RotationPolicy` now set to `Alway
 the default `Certificate.Spec.RevisionHistoryLimit` now set to `1` (potentially breaking).
 Be sure to review all new features and changes below, and read the full release notes carefully before upgrading.
 
-## Known Issues
+## Major Themes
 
-### ACME HTTP01 challenge paths are rejected by the ingress-nginx validating webhook
+### ACME HTTP01 challenge paths now use `PathType` `Exact` in Ingress routes
 
-> 🐛 See [cert-manager/issues/7791](https://github.com/cert-manager/cert-manager/issues/7791).
+> ⚠️ Breaking change
 
-In cert-manager `v1.18.0`, we changed the default `PathType` from `ImplementationSpecific` to `Exact`, in the Ingress routes that are created by the ACME HTTP01 challenge controller.
-This was to support Ingress controllers such as Cilium, which treat `ImplementationSpecific` paths as regular expressions.
+We have changed the `PathType` for ACME HTTP01 Ingress-based challenges to `Exact`.
+This security feature ensures that the challenge path (which is an exact path)
+is not misinterpreted as a regular expression or some other Ingress-specific
+(`ImplementationSpecific`) parsing.
+This allows HTTP01 challenges to be solved when using standards compliant
+Ingress controllers such as Cilium.
 
-But the change is incompatible with certain versions and configurations of the `ingress-nginx` Ingress controller.
+This change is incompatible with certain versions and configurations of the `ingress-nginx` Ingress controller.
 Versions of [`ingress-nginx >=1.8.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.8.0.md) support a [`strict-validate-path-type` configuration option](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#strict-validate-path-type) which, when enabled, disallows `.` (dot) in the path value. This is a [bug](https://github.com/kubernetes/ingress-nginx/issues/11176) which makes it impossible to use various legitimate URL paths, including the  `http://<YOUR_DOMAIN>/.well-known/acme-challenge/<TOKEN>` URLs used for [ACME HTTP01](https://letsencrypt.org/docs/challenge-types/#http-01-challenge).
 To make matters worse, the buggy validation is [enabled by default](https://github.com/kubernetes/ingress-nginx/pull/11819) in [`ingress-nginx >= 1.12.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.12.0.md).
+You will see errors like this in the cert-manager controller logs:
 
-We are working on a fix. The next cert-manager patch release `v1.18.1` (release date is yet to be decided) will gate the `PathType: Exact` change behind a feature gate, which will be enabled by default. This will allow you to reinstate the old `PathType: ImplementationSpecific` behavior, by disabling the feature gate.
+> Error presenting challenge: admission webhook `validate.nginx.ingress.kubernetes.io` denied the request: ingress contains invalid paths: path `/.well-known/acme-challenge/oTw4h9_WsobTRn5COTSyaiAx3aWn0M7_aYisoz1gXQw` cannot be used with `pathType` Exact
 
-Meanwhile, you have two options:
-1. Do not upgrade cert-manager. Continue to use cert-manager 1.17.
-2. Disable the `strict-validate-path-type` option in your ingress-nginx controller.
+If you use `ingress-nginx`, choose **one** of the following two options:
 
-## Major Themes
+#### Option 1. Disable the `ACMEHTTP01IngressPathTypeExact` feature in cert-manager
+
+To disable the `ACMEHTTP01IngressPathTypeExact` feature,
+to reinstate the old `PathType: ImplementationSpecific` behavior,
+use the following Helm values when installing cert-manager:
+
+```yaml
+# values.yaml
+config:
+  featureGates:
+    # Disable the use of Exact PathType in Ingress resources, to work around a bug in ingress-nginx
+    # https://github.com/kubernetes/ingress-nginx/issues/11176
+    ACMEHTTP01IngressPathTypeExact: false
+```
+
+#### Option 2. Disable the `strict-validate-path-type` option in ingress-nginx
+
+To disable the buggy strict path validation,
+use the following Helm values when installing `ingress-nginx`:
+
+```yaml
+# values.yaml
+controller:
+  config:
+    # Disable strict path validation, to work around a bug in ingress-nginx
+    # https://github.com/kubernetes/ingress-nginx/issues/11176
+    strict-validate-path-type: false
+```
 
 ### ACME Certificate Profiles
 
@@ -151,6 +181,33 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@ianarsenault](https://github.com/ianarsenault)
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
+
+## `v1.18.1`
+
+We have added a new feature gate `ACMEHTTP01IngressPathTypeExact`, to allow
+`ingress-nginx` users to turn off the new default Ingress `PathType: Exact`
+behavior, in ACME HTTP01 Ingress challenge solvers.
+
+We have increased the ACME challenge authorization timeout to two minutes, which we hope will fix a timeout error (`error waiting for authorization`), which has been reported by multiple users, since the release of cert-manager `v1.16.0`.
+This change should fix the following issues: [`#7337`][#7337], [`#7444`][#7444], and [`#7685`][#7685].
+
+[#7337]: https://github.com/cert-manager/cert-manager/issues/7337
+[#7444]: https://github.com/cert-manager/cert-manager/issues/7444
+[#7685]: https://github.com/cert-manager/cert-manager/issues/7685
+
+Changes since `v1.18.0`:
+
+### Feature
+
+- Added a new feature gate `ACMEHTTP01IngressPathTypeExact`, to allow `ingress-nginx` users to turn off the new default Ingress `PathType: Exact` behavior, in ACME HTTP01 Ingress challenge solvers. ([`#7810`](https://github.com/cert-manager/cert-manager/pull/7810), [`@sspreitzer`](https://github.com/sspreitzer))
+
+### Bug or Regression
+
+- ACME: Increased challenge authorization timeout to 2 minutes to fix `error waiting for authorization`. ([`#7801`](https://github.com/cert-manager/cert-manager/pull/7801), [`@hjoshi123`](https://github.com/hjoshi123))
+
+### Other (Cleanup or Flake)
+
+- Use the latest version of ingress-nginx in E2E tests to ensure compatibility ([`#7807`](https://github.com/cert-manager/cert-manager/pull/7807), [`@wallrj`](https://github.com/wallrj))
 
 ## `v1.18.0`
 
