@@ -12,6 +12,18 @@ cert-manager v1.17 includes:
 
 ## Major Themes
 
+### OperatorHub Packages Discontinued
+
+We no longer publish OperatorHub packages for cert-manager.
+Why? Because the cert-manager maintainers no longer have the time or resources to maintain and test those packages.
+cert-manager `v1.16.5` is the last release on OperatorHub.
+
+> ℹ️ [cert-manager `v1.16.5` for RedHat OpenShift OperatorHub](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators/cert-manager/1.16.5).
+>
+> ℹ️ [cert-manager `v1.16.5` for `operatorhub.io`](https://github.com/k8s-operatorhub/community-operators/tree/main/operators/cert-manager/1.16.5).
+>
+> ℹ️ [Archived `cert-manager-olm` repository](https://github.com/cert-manager/cert-manager-olm).
+
 ### RSA Certificate Compliance
 
 The United States Department of Defense published a [memo: Department of Defense Transition to Stronger Public Key Infrastructure Algorithms](https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/pdf/unclass-memo_dodcryptoalgorithms.pdf) in 2022 which introduced some requirements on the kinds of cryptography they require to be supported in software they use.

@@ -40,9 +40,7 @@ and which is therefore available on
 [Community Operators Repository]: https://github.com/operator-framework/community-operators
 
 Please uninstall the existing cert-manager package and re-install
-by following the [OLM Installation Documentation][].
-
-[OLM Installation Documentation]: ../../installation/operator-lifecycle-manager.md
+by following the OLM Installation Documentation.
 
 ### Upgrading cert-manager CRDs and stored versions of cert-manager custom resources
 

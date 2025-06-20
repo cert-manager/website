@@ -13,6 +13,18 @@ Be sure to review all new features and changes below, and read the full release 
 
 ## Major Themes
 
+### OperatorHub Packages Discontinued
+
+We no longer publish OperatorHub packages for cert-manager.
+Why? Because the cert-manager maintainers no longer have the time or resources to maintain and test those packages.
+cert-manager `v1.16.5` is the last release on OperatorHub.
+
+> ℹ️ [cert-manager `v1.16.5` for RedHat OpenShift OperatorHub](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators/cert-manager/1.16.5).
+>
+> ℹ️ [cert-manager `v1.16.5` for `operatorhub.io`](https://github.com/k8s-operatorhub/community-operators/tree/main/operators/cert-manager/1.16.5).
+>
+> ℹ️ [Archived `cert-manager-olm` repository](https://github.com/cert-manager/cert-manager-olm).
+
 ### ACME HTTP01 challenge paths now use `PathType` `Exact` in Ingress routes
 
 > ⚠️ Breaking change
