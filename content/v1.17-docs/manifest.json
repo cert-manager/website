@@ -27,10 +27,6 @@
               "path": "/v1.17-docs/installation/helm.md"
             },
             {
-              "title": "c. OperatorHub (OLM)",
-              "path": "/v1.17-docs/installation/operator-lifecycle-manager.md"
-            },
-            {
               "title": "d. Continuous Deployment",
               "path": "/v1.17-docs/installation/continuous-deployment-and-gitops.md"
             },

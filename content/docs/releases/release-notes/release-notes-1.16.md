@@ -16,6 +16,18 @@ ACME issuer and Venafi Issuer.
 1. Venafi Issuer may fail to renew Certificates if the issuer has been configured for TPP with username-password authentication.
    For more details, refer to the [Venafi Issuer](#venafi-issuer) section below.
 
+### OperatorHub Packages Discontinued
+
+We no longer publish OperatorHub packages for cert-manager.
+Why? Because the cert-manager maintainers no longer have the time or resources to maintain and test those packages.
+cert-manager `v1.16.5` is the last release on OperatorHub.
+
+> ℹ️ [cert-manager `v1.16.5` for RedHat OpenShift OperatorHub](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators/cert-manager/1.16.5).
+>
+> ℹ️ [cert-manager `v1.16.5` for `operatorhub.io`](https://github.com/k8s-operatorhub/community-operators/tree/main/operators/cert-manager/1.16.5).
+>
+> ℹ️ [Archived `cert-manager-olm` repository](https://github.com/cert-manager/cert-manager-olm).
+
 ## Themes
 
 ### Helm

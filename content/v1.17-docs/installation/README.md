@@ -25,9 +25,6 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 
 📖 **helm**: You can [use helm to install cert-manager](./helm.md) and this also allows you to customize the installation if necessary.
 
-📖 **OperatorHub**: If you have an OpenShift cluster, consider [installing cert-manager via OperatorHub](./operator-lifecycle-manager.md),
-which you can do from the OpenShift web console.
-
 🚧 **cmctl**: Try the [experimental `cmctl x install` command](../reference/cmctl.md#install) to quickly install cert-manager.
 
 ## Continuous deployment
