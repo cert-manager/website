@@ -608,6 +608,10 @@
               "path": "/docs/tutorials/README.md"
             },
             {
+              "title": "Securing Cilium Gateway API",
+              "path": "/docs/tutorials/acme/cilium-gateway-api.md"
+            },
+            {
               "title": "Securing NGINX-ingress",
               "path": "/docs/tutorials/acme/nginx-ingress.md"
             },
