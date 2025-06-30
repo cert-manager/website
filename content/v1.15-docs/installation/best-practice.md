@@ -13,7 +13,7 @@ the [BSI Kubernetes Security Recommendations](https://www.bsi.bund.de/SharedDocs
 
 And you will learn about best practices for deploying cert-manager in production;
 such as those enforced by tools like [Datree and its built in rules](https://hub.datree.io/built-in-rules),
-and those documented by the likes of [Learnk8s in their "Kubernetes production best practices" checklist](https://learnk8s.io/production-best-practices/).
+and those documented by the likes of [LearnKube in their "Kubernetes production best practices" checklist](https://learnkube.com/production-best-practices/).
 
 ## Overview
 
