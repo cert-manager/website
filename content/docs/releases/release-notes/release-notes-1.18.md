@@ -194,6 +194,21 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
 
+## `v1.18.2`
+
+We fixed a bug in the CSR's name constraints construction (only applies if you have enabled the `NameConstraints` feature gate).
+We dropped the new `global.rbac.disableHTTPChallengesRole` Helm option due to a bug we found, this feature will be released in `v1.19` instead.
+
+Changes since `v1.18.1`:
+
+### Bug or Regression
+
+- BUGFIX: permitted URI domains were incorrectly used to set the excluded URI domains in the CSR's name constraints ([`#7833`][#7833])
+- Reverted adding the `global.rbac.disableHTTPChallengesRole` Helm option. ([`#7837`][#7837])
+
+[#7833]: https://github.com/cert-manager/cert-manager/issues/7833
+[#7837]: https://github.com/cert-manager/cert-manager/issues/7837
+
 ## `v1.18.1`
 
 We have added a new feature gate `ACMEHTTP01IngressPathTypeExact`, to allow
