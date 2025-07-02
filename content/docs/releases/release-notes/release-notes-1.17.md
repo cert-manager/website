@@ -120,6 +120,18 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@ianarsenault](https://github.com/ianarsenault)
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
+## `v1.17.4`
+
+We fixed a bug in the CSR's name constraints construction (only applies if you have enabled the `NameConstraints` feature gate).
+
+Changes since `v1.17.3`:
+
+### Bug or Regression
+
+- BUGFIX: permitted URI domains were incorrectly used to set the excluded URI domains in the CSR's name constraints ([`#7832`][#7832])
+
+[#7832]: https://github.com/cert-manager/cert-manager/issues/7832
+
 ## `v1.17.3`
 
 This patch release addresses several vulnerabilities reported by the Trivy
