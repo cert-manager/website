@@ -97,6 +97,14 @@ First, ensure that you have all the tools required to perform a cert-manager rel
    with no scope ticked. It is used only by the `release-notes` CLI to
    avoid API rate limiting since it will go through all the PRs one by one.
 
+8. Ensure that you have `gsutil` installed; it's part of the Google Cloud SDK.
+
+9. Ensure you have `cosign` installed. See [the cosign installation instructions](https://docs.sigstore.dev/cosign/system_config/installation/).
+
+10. Ensure you have permissions to push to the OCI Helm chart registry, `quay.io/jetstack/charts`. You may need to run commands from [Helm's documentation](https://helm.sh/docs/topics/registries/#commands-for-working-with-registries).
+    Specifically, you will need to have run `helm registry login -u=USERNAME -p=PASSWORD quay.io` to authenticate with the registry.
+    Credentials can be obtained from the `quay.io` web UI if you're already a member of the `jetstack` organization on Quay.
+
 ## Minor releases
 
 A minor release is a backwards-compatible 'feature' release. It can contain new
@@ -589,7 +597,26 @@ page if a step is missing or if it is outdated.
     5. Merge the PR
     6. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-15. **(final + patch releases)** Merge the 4 Website PRs:
+15. Upload the Helm chart to the OCI registry:
+
+    1. Run the following command to upload the Helm chart to the OCI registry, and sign it with cosign:
+
+       ```bash
+       # Must be run from the "cert-manager/release" repo folder.
+       ./hack/push_and_sign_chart.sh
+       ```
+
+       This command will also check the cosign signature it creates.
+
+    2. Check that the Helm chart is available in the OCI registry by running:
+
+       ```bash
+       crane manifest quay.io/jetstack/charts/cert-manager:$RELEASE_VERSION
+       ```
+
+       Look for config, content and provenance layers in the output.
+
+16. **(final + patch releases)** Merge the 4 Website PRs:
 
     1. Merge the PRs "Release Notes", "Upgrade Notes", and "Freeze And Bump
        Versions" that you have created previously.
@@ -607,7 +634,7 @@ page if a step is missing or if it is outdated.
 
       [ff-release-next]: https://github.com/cert-manager/website/compare/master...release-next?quick_pull=1&title=%5BPost-Release%5D+Merge+release-next+into+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
 
-16. Post a Slack message as an answer to the first message. Toggle the check
+17. Post a Slack message as an answer to the first message. Toggle the check
    box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -615,7 +642,7 @@ page if a step is missing or if it is outdated.
     https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-17. **(final release only)** Show the release to the world:
+18. **(final release only)** Show the release to the world:
 
     1. Send an email to
        [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
@@ -631,7 +658,7 @@ page if a step is missing or if it is outdated.
     4. Create a post on the cert-manager BlueSky account! Login details are in the cert-manager 1password.
        ([Example post](https://bsky.app/profile/cert-manager.bsky.social/post/3lhdtn7c2222u))
 
-18. Proceed to the post-release "testing and release" steps:
+19. Proceed to the post-release "testing and release" steps:
 
     1. **(initial beta only)** Create a PR on
        [cert-manager/testing](https://github.com/cert-manager/testing) in order to
