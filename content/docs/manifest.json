@@ -744,6 +744,10 @@
               "path": "/docs/contributing/e2e.md"
             },
             {
+              "title": "OSS-Fuzz Tests",
+              "path": "/docs/contributing/oss-fuzz.md"
+            },
+            {
               "title": "Implementing External Issuers",
               "path": "/docs/contributing/external-issuers.md"
             },
