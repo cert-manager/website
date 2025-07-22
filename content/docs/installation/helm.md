@@ -16,23 +16,60 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 - Install a [supported version of Kubernetes or OpenShift](../releases/README.md).
 - Read [Compatibility with Kubernetes Platform Providers](./compatibility.md) if you are using Kubernetes on a cloud platform.
 
-### Installing cert-manager
+### Installing cert-manager with Helm
 
-#### 1. Add the Helm repository
+cert-manager is available as an OCI Helm chart and from a Helm repository. We recommend using the OCI Helm chart for any recent version of cert-manager.
 
-This repository is the only supported source of cert-manager charts. There are some other mirrors and copies across the internet, but those are entirely unofficial and could present a security risk.
+Very old versions of cert-manager (earlier than v1.12) are only officially available from the legacy Helm repository. The rest of this document assumes the use of the OCI registry.
 
-Notably, the "Helm stable repository" version of cert-manager is deprecated and should not be used.
+#### Installing from the OCI Registry
+
+For simplicity, the cert-manager Helm charts are published to the same OCI registry as the cert-manager container images, at `quay.io/jetstack`.
+
+The latest cert-manager chart is available at the following location:
+
+```bash
+oci://quay.io/jetstack/charts/cert-manager:[[VAR::cert_manager_latest_version]]
+```
+
+You can install cert-manager using the [Helm install command](https://helm.sh/docs/helm/helm_install/) directly, with no other setup required:
+
+```bash
+helm install \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager \
+  --version [[VAR::cert_manager_latest_version]] \
+  --namespace cert-manager \
+  --create-namespace \
+  --set crds.enabled=true
+```
+
+It's a good idea to verify the signature on the chart too, which requires the GPG keyring to be downloaded from this website first.
+
+```bash
+curl -LO https://cert-manager.io/public-keys/cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg
+
+helm install \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager \
+  --version [[VAR::cert_manager_latest_version]] \
+  --namespace cert-manager \
+  --create-namespace \
+  --verify \
+  --keyring ./cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg \
+  --set crds.enabled=true
+```
+
+#### Installing from the Legacy Helm Repository
+
+The Helm charts for cert-manager have historically been published to the Jetstack repository at `https://charts.jetstack.io`.
+
+This repository is still available and there are no current plans for it to change but it is recommended to use OCI Helm charts for the latest versions of cert-manager.
+
+To use the legacy repository instead of the OCI registry, you need to add the Jetstack Helm repository to your local Helm client
+and use a slightly different [Helm install command](https://helm.sh/docs/helm/helm_install/). Examples of both are provided below.
 
 ```bash
 helm repo add jetstack https://charts.jetstack.io --force-update
-```
 
-#### 2. Install cert-manager
-
-To install the cert-manager Helm chart, use the [Helm install command](https://helm.sh/docs/helm/helm_install/) as described below.
-
-```bash
 helm install \
   cert-manager jetstack/cert-manager \
   --namespace cert-manager \
@@ -41,7 +78,7 @@ helm install \
   --set crds.enabled=true
 ```
 
-#### 3. (optional) Verify installation
+#### (Optional) Verify installation
 
 Once you have deployed cert-manager, you can [verify](./kubectl.md#verify) the installation.
 
@@ -53,10 +90,9 @@ The example below shows how to tune the cert-manager installation by overwriting
 
 ```bash
 helm install \
-  cert-manager jetstack/cert-manager \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager:[[VAR::cert_manager_latest_version]] \
   --namespace cert-manager \
   --create-namespace \
-  --version [[VAR::cert_manager_latest_version]] \
   --set crds.enabled=true \
   --set prometheus.enabled=false \  # Example: disabling prometheus using a Helm parameter
   --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
@@ -116,9 +152,8 @@ This static manifest can be tuned by providing the flags to overwrite the defaul
 
 ```bash
 helm template \
-  cert-manager jetstack/cert-manager \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager:[[VAR::cert_manager_latest_version]] \
   --namespace cert-manager \
-  --version [[VAR::cert_manager_latest_version]] \
   --set crds.enabled=true \
   # --set prometheus.enabled=false \   # Example: disabling prometheus using a Helm parameter
   > cert-manager.custom.yaml
