@@ -448,6 +448,7 @@ kube-ingress-aws-controller
 kube-lego
 kube-apiserver
 kube-proxy
+kube-system
 tcpdump
 kubebuilder
 kubectl
