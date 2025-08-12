@@ -280,8 +280,8 @@ https://cert-manager.io/subject-streetaddresses /docs/reference/annotations#cert
 https://cert-manager.io/uri-sans /docs/reference/annotations#cert-manageriouri-sans 301!
 https://cert-manager.io/usages /docs/reference/annotations#cert-manageriousages 301!
 
-# There should be cnames to cert-manager.io (as well as configuration in netlify) for each of these
-# to enable these to work in the same manner.
+# There are cnames to cert-manager.io in https://github.com/cert-manager/infrastructure/blob/2d77f6b97249f4d41cd5547ad90f0e2f4ffd6c58/gcp/general_dns_cert-manager.tf
+# (as well as configuration in netlify) for each of these to enable these to work.
 https://acme.cert-manager.io/http01-edit-in-place /docs/configuration/annotations#acmecert-managerio/http01-edit-in-place 301!
 https://acme.cert-manager.io/http01-ingress-class /docs/configuration/annotations#acmecert-managerio/http01-ingress-class 301!
 
