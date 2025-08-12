@@ -282,15 +282,15 @@ https://cert-manager.io/usages /docs/reference/annotations#cert-manageriousages 
 
 # There are cnames to cert-manager.io in https://github.com/cert-manager/infrastructure/blob/2d77f6b97249f4d41cd5547ad90f0e2f4ffd6c58/gcp/general_dns_cert-manager.tf
 # (as well as configuration in netlify) for each of these to enable these to work.
-https://acme.cert-manager.io/http01-edit-in-place /docs/reference/annotations#acmecert-managerio/http01-edit-in-place 301!
-https://acme.cert-manager.io/http01-ingress-class /docs/reference/annotations#acmecert-managerio/http01-ingress-class 301!
+https://acme.cert-manager.io/http01-edit-in-place https://cert-manager.io/docs/reference/annotations#acmecert-managerio/http01-edit-in-place 301!
+https://acme.cert-manager.io/http01-ingress-class https://cert-manager.io/docs/reference/annotations#acmecert-managerio/http01-ingress-class 301!
 
-https://experimental.cert-manager.io/request-duration /docs/reference/annotations#experimentalcert-managerio/request-duration 301!
-https://experimental.cert-manager.io/request-is-ca /docs/reference/annotations#experimentalcert-managerio/request-is-ca 301!
-https://experimental.cert-manager.io/private-key-secret-name /docs/reference/annotations#experimentalcert-managerio/private-key-secret-name 301!
+https://experimental.cert-manager.io/request-duration https://cert-manager.io/docs/reference/annotations#experimentalcert-managerio/request-duration 301!
+https://experimental.cert-manager.io/request-is-ca https://cert-manager.io/docs/reference/annotations#experimentalcert-managerio/request-is-ca 301!
+https://experimental.cert-manager.io/private-key-secret-name https://cert-manager.io/docs/reference/annotations#experimentalcert-managerio/private-key-secret-name 301!
 
-https://venafi.cert-manager.io/custom-fields /docs/reference/annotations#venaficert-managerio/custom-fields 301!
-https://venafi.cert-manager.io/pickup-id /docs/reference/annotations#venaficert-managerio/pickup-id 301!
+https://venafi.cert-manager.io/custom-fields https://cert-manager.io/docs/reference/annotations#venaficert-managerio/custom-fields 301!
+https://venafi.cert-manager.io/pickup-id https://cert-manager.io/docs/reference/annotations#venaficert-managerio/pickup-id 301!
 
 # Note that kubernetes.io entries will not have real CNAMEs and are merely listed for consistency
 # https://kubernetes.io/ingress.class /docs/reference/annotations#kubernetesio/ingressclass 301!
