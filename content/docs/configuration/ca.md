@@ -73,17 +73,6 @@ spec:
     secretName: ca-key-pair
 ```
 
-Optionally, you can specify [CRL](https://en.wikipedia.org/wiki/Certificate_revocation_list) Distribution Points; an array of strings each of which identifies the location of the CRL from which the revocation of this certificate can be checked.
-
-```yaml
-...
-spec:
-  ca:
-    secretName: ca-key-pair
-    crlDistributionPoints:
-    - "http://example.com"
-```
-
 Once deployed, you can then check that the issuer has been successfully
 configured by checking the ready status of the certificate. Replace `issuers`
 here with `clusterissuers` if that is what has been deployed.
@@ -96,6 +85,26 @@ ca-issuer     True    Signing CA verified   2m
 
 Certificates are now ready to be requested by using the CA `Issuer` named
 `ca-issuer` within the `sandbox` namespace.
+
+### Revocation Sources
+
+Optionally, you can specify [CRL](https://en.wikipedia.org/wiki/Certificate_revocation_list) Distribution Points or [OCSP servers](https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol)
+for the CA issuer, to enable clients to check the revocation status of certificates issued by this CA.
+
+These are arrays of strings which give the location from which either a CRL or an OCSP response can be retrieved, respectively. The CA issuer will then include these in the issued certificates.
+
+```yaml
+...
+spec:
+  ca:
+    secretName: ca-key-pair
+    crlDistributionPoints:
+    - "http://example.com/my.crl"
+    ocspServers:
+    - "http://ocsp.example.com"
+```
+
+Note that cert-manager has no support for generating or maintaining CRLs or OCSP responses; these sources must be provided by the operator of the CA issuer.
 
 ## Important Information
 
