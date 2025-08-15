@@ -74,10 +74,10 @@ Here is an overview of the network requirements:
    The target host and port of the Vault endpoints
    are configured in Issuer or ClusterIssuer resources.
 
-1. **TCP: cert-manager (controller) -> Venafi TLS Protect (authentication and resource API endpoints)**:
-   The cert-manager controller may establish HTTPS connections to one or more Venafi API endpoints,
-   if you are using the [Venafi Issuer](../configuration/venafi.md).
-   The target host and port of the Venafi API endpoints
+1. **TCP: cert-manager (controller) -> CyberArk Certificate Manager (authentication and resource API endpoints)**:
+   The cert-manager controller may establish HTTPS connections to one or more CyberArk Certificate Manager API endpoints,
+   if you are using the [CyberArk Issuer](../configuration/venafi.md).
+   The target host and port of the CyberArk Certificate Manager endpoints
    are configured in Issuer or ClusterIssuer resources.
 
 1. **TCP: cert-manager (controller) -> DNS API endpoints (for ACME DNS01)**:

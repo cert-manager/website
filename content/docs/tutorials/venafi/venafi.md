@@ -1,11 +1,11 @@
 ---
-title: Securing Ingresses with Venafi
-description: 'cert-manager tutorials: Securing Ingress using Venafi Issuers'
+title: Securing Ingresses with CyberArk Certificate Manager
+description: 'cert-manager tutorials: Securing Ingress using CyberArk Issuers'
 ---
 
 This guide walks you through how to secure a Kubernetes
 [`Ingress`](https://kubernetes.io/docs/concepts/services-networking/ingress/)
-resource using the Venafi Issuer type.
+resource using the CyberArk Issuer (formerly known as Venafi).
 
 Whilst stepping through, you will learn how to:
 
@@ -13,11 +13,11 @@ Whilst stepping through, you will learn how to:
 - Install cert-manager into the EKS cluster
 - Deploy [`nginx-ingress`](https://github.com/kubernetes/ingress-nginx) to
   expose applications running in the cluster
-- Configure a Venafi Cloud issuer
+- Configure a CyberArk Certificate Manager issuer
 - Configure cert-manager to secure your application traffic
 
-While this guide focuses on EKS as a Kubernetes provisioner and Venafi
-as a Certificate issuer, the steps here should be generally re-usable for other
+While this guide focuses on EKS as a Kubernetes provisioner and CyberArk
+as a certificate issuer, the steps here should be generally re-usable for other
 Issuer types.
 
 ## Prerequisites
@@ -25,7 +25,7 @@ Issuer types.
 - An AWS account
 - `kubectl` installed
 - Access to a publicly registered DNS zone
-- A Venafi Cloud account and API credentials
+- A CyberArk Certificate Manager account and API credentials
 
 ## Create an EKS cluster
 
@@ -239,69 +239,71 @@ service/hello-kubernetes   ClusterIP   10.100.164.58   <none>        80/TCP    7
 Note that we have not yet exposed this application to be accessible over the
 internet. We will expose the demo application to the internet in later steps.
 
-## Creating a Venafi Issuer resource
+## Creating a CyberArk Issuer
 
-cert-manager supports both Venafi TPP and Venafi Cloud.
+cert-manager supports both CyberArk Certificate Manager SaaS and self-hosted.
 
 Please only follow one of the below sections according to where you want to
 retrieve your Certificates from.
 
-### Venafi TPP
+### CyberArk Certificate Manager Self-Hosted
 
-Assuming you already have a Venafi TPP server set up properly, you can create
-a Venafi Issuer resource that can be used to issue certificates.
+Assuming you already have a self-hosted instance of CyberArk Certificate Manager
+set up properly, you can create a CyberArk issuer that can be used to issue  
+certificates.
 
-To do this, you need to make sure you have your TPP *username* and *password*.
+To do this, you need to make sure you have your *username* and *password* for 
+your CyberArk Certificate Manager Self-Hosted instance.
 
-In order for cert-manager to be able to authenticate with your Venafi TPP
-server and set up an Issuer resource, you'll need to create a Kubernetes
+In order for cert-manager to be able to authenticate with your CyberArk Certificate Manager
+instance and set up an Issuer resource, you'll need to create a Kubernetes
 Secret containing your username and password:
 
 ```bash
 $ kubectl create secret generic \
-       venafi-tpp-secret \
+       tpp-secret \
        --namespace=demo \
        --from-literal=username='YOUR_TPP_USERNAME_HERE' \
        --from-literal=password='YOUR_TPP_PASSWORD_HERE'
 ```
 
-We must then create a Venafi Issuer resource, which represents a certificate
+We must then create an Issuer resource, which represents a certificate
 authority within Kubernetes.
 
-Save the following YAML into a file named `venafi-issuer.yaml`:
+Save the following YAML into a file named `corp-issuer.yaml`:
 
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: venafi-issuer
+  name: corp-issuer
   namespace: demo
 spec:
   venafi:
-    zone: "Default" # Set this to the Venafi policy zone you want to use
+    zone: \VED\Policy\devops\cert-manager # Set this to the policy folder (zone) you want to use
     tpp:
-      url: https://venafi-tpp.example.com/vedsdk # Change this to the URL of your TPP instance
+      url: https://tpp.example.com/vedsdk # Change this to the URL of your CyberArk Certificate Manager instance
       caBundle: <base64 encoded string of caBundle PEM file, or empty to use system root CAs>
       credentialsRef:
-        name: venafi-tpp-secret
+        name: tpp-secret
 ```
 
 Then run:
 
 ```bash
-$ kubectl apply -n demo -f venafi-issuer.yaml
+$ kubectl apply -n demo -f corp-issuer.yaml
 ```
 
 When you run the following command, you should see that the Status stanza of
 the output shows that the Issuer is Ready (i.e. has successfully validated
-itself with the Venafi TPP server).
+itself with the CyberArk Certificate Manager instance).
 
 ```bash
-$ kubectl describe issuer -n demo venafi-issuer
+$ kubectl describe issuer -n demo corp-issuer
 
  Status:
    Conditions:
-     Last Transition Time:  2019-07-17T15:46:00Z
+     Last Transition Time:  2025-08-08T15:46:00Z
      Message:               Venafi issuer started
      Reason:                Venafi issuer started
      Status:                True
@@ -312,61 +314,61 @@ $ kubectl describe issuer -n demo venafi-issuer
    Normal  Ready   14s   cert-manager  Verified issuer with Venafi server
 ```
 
-### Venafi Cloud
+### CyberArk Certificate Manager SaaS
 
-You can sign up for a Venafi Cloud account by visiting the [enrollment
-page](https://www.venafi.com/cloud).
+You can sign up for a CyberArk Certificate Manager SaaS account by visiting the [enrollment
+page](https://www.cyberark.com/try-buy/certificate-manager-saas-trial/).
 
 Once registered, you should fetch your API key by clicking your name in the top
 right of the control panel interface.
 
-In order for cert-manager to be able to authenticate with your Venafi Cloud
+In order for cert-manager to be able to authenticate with your CyberArk Certificate Manager
 account and set up an Issuer resource, you'll need to create a Kubernetes
 Secret containing your API key:
 
 ```bash
 $ kubectl create secret generic \
-    venafi-cloud-secret \
+    api-key-secret \
     --namespace=demo \
     --from-literal=apikey=<API_KEY>
 ```
 
-We must then create a Venafi Issuer resource, which represents a certificate
+We must then create an Issuer resource, which represents a certificate
 authority within Kubernetes.
 
-Save the following YAML into a file named `venafi-issuer.yaml`:
+Save the following YAML into a file named `corp-issuer.yaml`:
 
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: venafi-issuer
+  name: corp-issuer
   namespace: demo
 spec:
   venafi:
-    zone: "Default" # Set this to the Venafi policy zone you want to use
+    zone: "My Application\My CIT" # Set this to <Application Name>\<Issuing Template Alias>
     cloud:
       apiTokenSecretRef:
-        name: venafi-cloud-secret
+        name: api-key-secret
         key: apikey
 ```
 
 Then run:
 
 ```bash
-$ kubectl apply -n demo -f venafi-issuer.yaml
+$ kubectl apply -n demo -f corp-issuer.yaml
 ```
 
 When you run the following command, you should see that the Status stanza of
 the output shows that the Issuer is Ready (i.e. has successfully validated
-itself with the Venafi Cloud service).
+itself with the CyberArk Certificate Manager SaaS).
 
 ```bash
-$ kubectl describe issuer -n demo venafi-issuer
+$ kubectl describe issuer -n demo corp-issuer
 ...
 Status:
   Conditions:
-    Last Transition Time:  2019-07-17T15:46:00Z
+    Last Transition Time:  2025-08-08T15:46:00Z
     Message:               Venafi issuer started
     Reason:                Venafi issuer started
     Status:                True
@@ -401,7 +403,7 @@ spec:
   - example.com
   commonName: example.com
   issuerRef:
-    name: venafi-issuer
+    name: corp-issuer
 ```
 
 Save this YAML into a file named `example-com-tls.yaml` and run:
@@ -410,12 +412,14 @@ Save this YAML into a file named `example-com-tls.yaml` and run:
 $ kubectl apply -n demo -f example-com-tls.yaml
 ```
 
-As long as you've ensured that the zone of your Venafi Cloud account (in our
-example, we use the "Default" zone) has been configured with a CA or contains a
-custom certificate, cert-manager can now take steps to populate the
-`example-com-tls` Secret with a certificate. It does this by identifying itself
-with Venafi Cloud using the API key, then requesting a certificate to match the
-specifications of the Certificate resource that we've created.
+As long as you've ensured that the zone of your CyberArk Certificate Manager
+account (in our example, we use the "Default" zone) has been configured with a
+CA or contains a custom certificate, cert-manager can now take steps to
+populate the `example-com-tls` Secret with a certificate. It does this by
+identifying itself with CyberArk Certificate Manager using the API key, then
+requesting a certificate to match the specifications of the Certificate
+resource that we've created.
+
 
 You can run `kubectl describe` to check the progress of your Certificate:
 
@@ -424,12 +428,12 @@ $ kubectl describe certificate -n demo example-com-tls
 ...
 Status:
   Conditions:
-    Last Transition Time:  2019-07-17T17:43:01Z
+    Last Transition Time:  2025-08-08T17:43:01Z
     Message:               Certificate is up to date and has not expired
     Reason:                Ready
     Status:                True
     Type:                  Ready
-  Not After:               2019-10-15T12:00:00Z
+  Not After:               2026-08-08T12:00:00Z
 Events:
   Type    Reason       Age   From          Message
   ----    ------       ----  ----          -------
@@ -462,9 +466,9 @@ Certificate:
     Signature Algorithm: sha256WithRSAEncryption
         Issuer: C=US, O=DigiCert Inc, CN=DigiCert Test SHA2 Intermediate CA-1
         Validity
-            Not Before: Jul 17 00:00:00 2019 GMT
-            Not After : Oct 15 12:00:00 2019 GMT
-        Subject: C=US, ST=California, L=Palo Alto, O=Venafi Cloud, OU=SerialNumber, CN=example.com
+            Not Before: Aug 08 00:00:00 2025 GMT
+            Not After : Aug 08 12:00:00 2026 GMT
+        Subject: C=US, ST=California, L=Palo Alto, CN=example.com
         Subject Public Key Info:
             Public Key Algorithm: rsaEncryption
                 Public-Key: (2048 bit)
@@ -582,4 +586,4 @@ Once this has been created, you should be able to visit your application at the
 configured URL, here `example.com`!
 
 Navigate to the address in your web browser and you should see the certificate
-obtained via Venafi being used to secure application traffic.
+obtained via CyberArk Certificate Manager being used to secure application traffic.
