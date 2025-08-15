@@ -578,7 +578,7 @@ page if a step is missing or if it is outdated.
 
 14. Merge the pull request containing the Helm chart:
 
-    Important: This PR can currently only be merged by Venafi employees, but we're aiming to fix that soon. Changing this
+    Important: This PR can currently only be merged by CyberArk employees, but we're aiming to fix that soon. Changing this
     will involve us coming up with a plan for migrating where our Helm charts are stored and ensuring we don't break anyone.
 
     The Helm charts for cert-manager are served using Cloudflare pages

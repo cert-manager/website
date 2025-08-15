@@ -9,7 +9,7 @@ and renews the certificates before they expire.
 
 cert-manager can obtain certificates from a [variety of certificate authorities](configuration/issuers.md), including:
 [Let's Encrypt](configuration/acme/README.md), [HashiCorp Vault](configuration/vault.md),
-[Venafi](configuration/venafi.md) and [private PKI](configuration/ca.md).
+[CyberArk Certificate Manager](configuration/venafi.md) and [private PKI](configuration/ca.md).
 
 With cert-manager's [Certificate resource](usage/certificate.md), the private key and certificate are stored in a Kubernetes Secret
 which is mounted by an application Pod or used by an Ingress controller.

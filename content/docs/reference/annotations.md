@@ -326,9 +326,9 @@ container.
 - [Ingress](../usage/ingress.md)
 - [Gateway](../usage/gateway.md)
 
-pass JSON encoded custom fields to the Venafi issuer.
+pass JSON encoded custom fields to the CyberArk issuer.
 
 ## venafi.cert-manager.io/pickup-id
 - [CertificateRequest](../usage/certificaterequest.md)
 
-records the Venafi Pickup ID of a certificate signing request.
+records the Pickup ID of a certificate signing request in CyberArk Certificate Manager.
