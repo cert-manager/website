@@ -125,6 +125,13 @@ https://docs.cert-manager.io/en/latest/getting-started/index.html https://cert-m
 https://docs.cert-manager.io/en/latest/tutorials/acme/index.html https://cert-manager.io/docs/tutorials/
 https://docs.cert-manager.io/en/latest/ https://cert-manager.io/docs/
 
+# This specific URL is linked to by IBM docs (https://www.ibm.com/docs/en/cloud-private/3.2.x?topic=manager-using-acme-issue-certificates)
+# so we redirect it to the new cert-manager.io docs page specifically
+https://docs.cert-manager.io/en/latest/tutorials/acme/http-validation.html https://cert-manager.io/docs/tutorials/acme/http-validation/
+# We don't know for sure if this dns-validation tutorial ever existed in the old docs site, but redirect it anyway just in case
+# since we know the equiavalent did exist for HTTP validation.
+https://docs.cert-manager.io/en/latest/tutorials/acme/dns-validation.html https://cert-manager.io/docs/tutorials/acme/dns-validation/
+
 # Issuer-specific redirects; these were mined from a wayback machine crawl of the old site:
 # https://web.archive.org/web/20190802192846/http://docs.cert-manager.io/en/latest/tasks/issuers/index.html
 https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/http01/* https://cert-manager.io/docs/configuration/acme/http01/
