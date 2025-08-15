@@ -408,7 +408,7 @@ makes sure deployments get restarted whenever a mounted Secret changes.
 
 Re-use of private keys
 
-Some issuers, like the built-in [Venafi
+Some issuers, like the built-in [CyberArk
 issuer](../configuration/venafi.md), may disallow re-using private keys.
 If this is the case, you must explicitly configure the `rotationPolicy:
 Always` setting for each of your Certificate objects accordingly.

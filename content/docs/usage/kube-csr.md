@@ -127,7 +127,7 @@ Requester annotations:
 - `experimental.cert-manager.io/request-duration`: **Set by the requester**. Accepts
     a [Go time duration](https://golang.org/pkg/time/#ParseDuration) string
     specifying the requested certificate duration. Defaults to 90 days. Some
-    signers such as Venafi or ACME typically _do not_ allow requesting a
+    signers such as CyberArk or ACME typically _do not_ allow requesting a
     duration.
 
 - `experimental.cert-manager.io/request-is-ca`: **Set by the requester**. If set to
@@ -140,10 +140,9 @@ Requester annotations:
     request.
 
 - `venafi.experimental.cert-manager.io/custom-fields`: **Set by the
-    requester**. Optional for only the Venafi signer. Used for adding custom
-    fields to the Venafi request. This will only work with Venafi TPP `v19.3`
-    and higher. The value is a JSON array with objects containing the name and
-    value keys, for example:
+    requester**. Optional for only the CyberArk signer. Used for adding custom
+    fields to the CyberArk request. The value is a JSON array with objects containing
+    the name and value keys, for example:
     ```
     venafi.experimental.cert-manager.io/custom-fields: |-
       [
@@ -155,8 +154,8 @@ Requester annotations:
 Signer annotations:
 
 - `venafi.experimental.cert-manager.io/pickup-id`: **Set by the signer**. Only
-    used for the Venafi signer. Used to record the Venafi Pickup ID of a
-    certificate signing request that has been submitted to the Venafi API for
+    used for the CyberArk signer. Used to record the Pickup ID of a
+    certificate signing request that has been submitted to the CyberArk API for
     collection during issuance.
 
 ## Usage

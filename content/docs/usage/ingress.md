@@ -206,7 +206,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    # custom venafi configuration
+    # custom configuration
     venafi.cert-manager.io/custom-fields: `[ {"name": "field-name", "value": "field value"}]`
   name: myIngress
   namespace: myIngress

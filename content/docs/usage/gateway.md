@@ -469,7 +469,7 @@ kind: Gateway
 metadata:
   name: example
   annotations:
-    # custom venafi configuration
+    # custom configuration
     venafi.cert-manager.io/custom-fields: `[ {"name": "field-name", "value": "field value"}]`
 ```
 

@@ -333,7 +333,7 @@ are no longer supported.
 | [0.11][]     | Oct 10, 2019 | Jan 21, 2020 | 1.9 → 1.21                     | 3.09 → 4.7                    |
 
 
-NB: cert-manager 1.12 was a public Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It was supported for 2 years from release.
+NB: cert-manager 1.12 was a public Long Term Support (LTS) release sponsored by [CyberArk](https://www.cyberark.com/services-support/long-term-support-for-cert-manager/). It was supported for 2 years from release.
 
 [s]: #kubernetes-supported-versions
 [test]: #supported-vs-tested
