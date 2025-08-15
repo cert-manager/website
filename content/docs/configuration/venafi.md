@@ -5,14 +5,14 @@ description: 'cert-manager configuration: CyberArk Issuers'
 
 ## Introduction
 
-The CyberArk `Issuer` (formerly known as Venafi) allows you to obtain  
-certificates from  
-[CyberArk Certificate Manager](https://www.cyberark.com/products/certificate-manager/)  
+The CyberArk `Issuer` (formerly known as Venafi) allows you to obtain
+certificates from
+[CyberArk Certificate Manager](https://www.cyberark.com/products/certificate-manager/)
 SaaS or self-hosted.
 
 You can have multiple different CyberArk `Issuer` types installed within the same
-cluster, including mixtures of issuers configured to enroll from the CyberArk  
-Certificate Manager SaaS and self-hosted. This allows you to be flexible in the  
+cluster, including mixtures of issuers configured to enroll from the CyberArk
+Certificate Manager SaaS and self-hosted. This allows you to be flexible in the
 deployment method that you prefer to use.
 
 Automated certificate renewal and management are provided for `Certificates`
@@ -33,7 +33,7 @@ resources, read the [Namespaces](../concepts/issuer.md#namespaces) section.
 
 If you haven't already done so, create your CyberArk Certificate Manager SaaS
 account on this [page](https://www.cyberark.com/try-buy/certificate-manager-saas-trial/)
-and copy the API key from your user preferences. Then, you may want to create a  
+and copy the API key from your user preferences. Then, you may want to create a
 custom CA Account and Issuing Template, or choose to use the defaults created
 automatically for testing ("Built-in CA" and "Default", respectively). Lastly,
 create an Application to establish ownership of all certificates requested by
@@ -114,8 +114,8 @@ Certificate Manager.
 The setup is similar to the CyberArk Certificate Manager SaaS configuration
 above, however some of the connection parameters are slightly different.
 
-> **Note**: You *must* allow "User Provided CSRs" as part of your policy in  
-> CyberArk Certificate Manager Self-Hosted, as this is the only type supported  
+> **Note**: You *must* allow "User Provided CSRs" as part of your policy in
+> CyberArk Certificate Manager Self-Hosted, as this is the only type supported
 > by cert-manager at this time.
 >
 > More specifically, the valid configurations of the "CSR handling" are:
@@ -189,7 +189,7 @@ credentials.
 
 ### Username / Password Authentication
 
-> **Note**: when using username  / password authentication, cert-manager will manage the generation of access token for you. cert-manager does not use refresh tokens to renew access token. 
+> **Note**: when using username  / password authentication, cert-manager will manage the generation of access token for you. cert-manager does not use refresh tokens to renew access token.
 
 1. Create a new user with sufficient privileges to manage certificates in a particular policy folder (zone).
 
@@ -201,7 +201,7 @@ credentials.
    Set the "Base Access Settings" to `certificate: manage`.
 
    "Edit Access" to the new application integration, and allow it to be used by the user you created earlier.
-   
+
 3. Save the credentials to a Secret in the Kubernetes cluster
 
     ```bash

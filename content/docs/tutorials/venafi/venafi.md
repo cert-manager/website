@@ -248,9 +248,7 @@ retrieve your Certificates from.
 
 ### CyberArk Certificate Manager Self-Hosted
 
-Assuming you already have a self-hosted instance of CyberArk Certificate Manager
-set up properly, you can create a CyberArk issuer that can be used to issue  
-certificates.
+Assuming you already have a self-hosted instance of CyberArk Certificate Manager set up properly, you can create a CyberArk issuer that can be used to issue certificates.
 
 To do this, you need to make sure you have your *username* and *password* for 
 your CyberArk Certificate Manager Self-Hosted instance.
