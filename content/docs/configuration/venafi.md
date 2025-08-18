@@ -5,10 +5,10 @@ description: 'cert-manager configuration: CyberArk Issuers'
 
 ## Introduction
 
-The CyberArk `Issuer` (formerly known as Venafi) allows you to obtain
-certificates from
-[CyberArk Certificate Manager](https://www.cyberark.com/products/certificate-manager/)
-SaaS or self-hosted.
+The CyberArk `Issuer` obtains certificates from
+[CyberArk Certificate Manager](https://www.cyberark.com/products/certificate-manager/) SaaS or self-hosted.
+
+The `Issuer` was formerly known as the Venafi `Issuer`, and for backwards compatibility reasons is configured using older product names - "Venafi Cloud" corresponds to CyberArk Certificate Manager SaaS and "Venafi TPP" corresponds to CyberArk Certificate Manager Self-Hosted.
 
 You can have multiple different CyberArk `Issuer` types installed within the same
 cluster, including mixtures of issuers configured to enroll from the CyberArk
