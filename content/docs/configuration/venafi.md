@@ -1,25 +1,27 @@
 ---
-title: Venafi
-description: 'cert-manager configuration: Venafi Issuers'
+title: CyberArk Certificate Manager
+description: 'cert-manager configuration: CyberArk Issuers'
 ---
 
 ## Introduction
 
-The Venafi `Issuer` types allows you to obtain certificates from [Venafi
-as a Service (VaaS)](https://vaas.venafi.com/jetstack) and [Venafi Trust Protection
-Platform (TPP)](https://www.venafi.com/platform/tls-protect) instances.
+The CyberArk `Issuer` obtains certificates from
+[CyberArk Certificate Manager](https://www.cyberark.com/products/certificate-manager/) SaaS or self-hosted.
 
-You can have multiple different Venafi `Issuer` types installed within the same
-cluster, including mixtures of Venafi as a Service and TPP issuer types. This allows
-you to be flexible with the types of Venafi account you use.
+The `Issuer` was formerly known as the Venafi `Issuer`, and for backwards compatibility reasons is configured using older product names - "Venafi Cloud" corresponds to CyberArk Certificate Manager SaaS and "Venafi TPP" corresponds to CyberArk Certificate Manager Self-Hosted.
+
+You can have multiple different CyberArk `Issuer` types installed within the same
+cluster, including mixtures of issuers configured to enroll from the CyberArk
+Certificate Manager SaaS and self-hosted. This allows you to be flexible in the
+deployment method that you prefer to use.
 
 Automated certificate renewal and management are provided for `Certificates`
-using the Venafi `Issuer`.
+using the CyberArk `Issuer`.
 
-A single Venafi `Issuer` represents a single Venafi 'zone' so you must create one
+A single CyberArk `Issuer` represents a single CyberArk 'zone' so you must create one
 `Issuer` resource for each zone you want to use.  A zone is a single entity that
 combines the policy that governs certificate issuance with information about how
-certificates are organized in Venafi to identify the business application and
+certificates are organized in CyberArk to identify the business application and
 establish ownership.
 
 You can configure your `Issuer` resource to either issue certificates only
@@ -27,27 +29,27 @@ within a single namespace, or cluster-wide (using a `ClusterIssuer` resource).
 For more information on the distinction between `Issuer` and `ClusterIssuer`
 resources, read the [Namespaces](../concepts/issuer.md#namespaces) section.
 
-## Creating a Venafi as a Service Issuer
+## Creating an Issuer for CyberArk Certificate Manager SaaS
 
-If you haven't already done so, create your Venafi as a Service account on this
-[page](https://vaas.venafi.com/jetstack) and copy the API key from your user
-preferences.  Then you may want to create a custom CA Account and Issuing Template
-or choose instead to use defaults that are automatically created for testing
-("Built-in CA" and "Default", respectively).  Lastly you'll need to create an
-Application for establishing ownership of all the certificates requested by your
-cert-manager Issuer, and assign to it the Issuing Template.
+If you haven't already done so, create your CyberArk Certificate Manager SaaS
+account on this [page](https://www.cyberark.com/try-buy/certificate-manager-saas-trial/)
+and copy the API key from your user preferences. Then, you may want to create a
+custom CA Account and Issuing Template, or choose to use the defaults created
+automatically for testing ("Built-in CA" and "Default", respectively). Lastly,
+create an Application to establish ownership of all certificates requested by
+your cert-manager Issuer, and assign the Issuing Template to it.
 
 > Make a note of the Application name and API alias of the Issuing Template because
 > together they comprise the 'zone' you will need for your `Issuer` configuration.
 
-In order to set up a Venafi as a Service `Issuer`, you must first create a Kubernetes
-`Secret` resource containing your Venafi as a Service API credentials:
+In order to set up a CyberArk `Issuer`, you must first create a Kubernetes
+`Secret` resource containing your API key:
 
 ```bash
 $ kubectl create secret generic \
-       vaas-secret \
+       api-key-secret \
        --namespace='NAMESPACE OF YOUR ISSUER RESOURCE' \
-       --from-literal=apikey='YOUR_VAAS_API_KEY_HERE'
+       --from-literal=apikey='YOUR_API_KEY_HERE'
 ```
 
 > **Note**: If you are configuring your issuer as a `ClusterIssuer` resource in
@@ -57,63 +59,64 @@ $ kubectl create secret generic \
 > through the `--cluster-resource-namespace` flag on the cert-manager controller
 > component.
 
-This API key will be used by cert-manager to interact with Venafi as a Service
-on your behalf.
+This API key will be used by cert-manager to interact with CyberArk Certificate
+Manager SaaS on your behalf.
 
 Once the API key `Secret` has been created, you can create your `Issuer` or
 `ClusterIssuer` resource. If you are creating a `ClusterIssuer` resource, you
 must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
 
-Save the below content after making your amendments to a file named
-`vaas-issuer.yaml`.
+Save the below content after making your amendments to a file named `issuer.yaml`.
 
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: vaas-issuer
+  name: corp-issuer
   namespace: <NAMESPACE YOU WANT TO ISSUE CERTIFICATES IN>
 spec:
   venafi:
-    zone: "My Application\My CIT" # Set this to <Application Name>\<Issuing Template Alias>
+    zone: 'My Application\My CIT' # Set this to <Application Name>\<Issuing Template Alias>
     cloud:
       apiTokenSecretRef:
-        name: vaas-secret
+        name: api-key-secret
         key: apikey
 ```
 
 You can then create the Issuer using `kubectl create`.
 
 ```bash
-$ kubectl create -f vaas-issuer.yaml
+$ kubectl create -f issuer.yaml
 ```
 
 Verify the `Issuer` has been initialized correctly using `kubectl describe`.
 
 ```bash
-$ kubectl get issuer vaas-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE' -o wide
+$ kubectl get issuer corp-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE' -o wide
 NAME           READY   STATUS                 AGE
-vaas-issuer    True    Venafi issuer started  2m
+corp-issuer    True    Venafi issuer started  2m
 ```
 
-You are now ready to issue certificates using the newly provisioned Venafi
-`Issuer` and Venafi as a Service.
+You are now ready to issue certificates using the newly provisioned CyberArk
+`Issuer` and CyberArk Certificate Manager SaaS.
 
 Read the [Requesting Certificates](../usage/certificate.md) document for
 more information on how to create Certificate resources.
 
 
-## Creating a Venafi Trust Protection Platform Issuer
+## Creating an Issuer for CyberArk Certificate Manager Self-Hosted
 
-The Venafi Trust Protection Platform integration allows you to obtain certificates
-from a properly configured Venafi TPP instance.
+The CyberArk `Issuer` (formerly known as Venafi) allows you to obtain
+certificates from a properly configured self-hosted instance of CyberArk
+Certificate Manager.
 
-The setup is similar to the Venafi as a Service configuration above, however some
-of the connection parameters are slightly different.
+The setup is similar to the CyberArk Certificate Manager SaaS configuration
+above, however some of the connection parameters are slightly different.
 
-> **Note**: You *must* allow "User Provided CSRs" as part of your TPP policy, as
-> this is the only type supported by cert-manager at this time.
+> **Note**: You *must* allow "User Provided CSRs" as part of your policy in
+> CyberArk Certificate Manager Self-Hosted, as this is the only type supported
+> by cert-manager at this time.
 >
 > More specifically, the valid configurations of the "CSR handling" are:
 >
@@ -133,23 +136,23 @@ of the connection parameters are slightly different.
 > 400 PKCS#10 data will not be processed. Policy "\VED\Policy\foo" is locked to a Server Generated CSR.
 > ```
 
-In order to set up a Venafi Trust Protection Platform `Issuer`, you must first
-create a Kubernetes `Secret` resource containing your Venafi TPP API
+In order to set up a CyberArk `Issuer`, you must first create a Kubernetes
+`Secret` resource containing your CyberArk Certificate Manager Self-Hosted API
 credentials.
 
 ### Access Token Authentication
 
-1. [Set up token authentication](https://docs.venafi.com/Docs/24.3/TopNav/Content/SDK/AuthSDK/t-SDKa-Setup-OAuth.php).
+1. [Set up token authentication](https://docs.venafi.com/Docs/current/TopNav/Content/SDK/AuthSDK/t-SDKa-Setup-OAuth.php).
 
    NOTE: Do not select "Refresh Token Enabled" and set a *long* "Token Validity
-   (days)". The Refresh Token feature is not supported by cert-manager's Venafi
+   (days)". The Refresh Token feature is not supported by cert-manager's CyberArk
    `Issuer`.
 
 2. Create a new user with sufficient privileges to manage and revoke certificates in a particular policy folder (zone).
 
    E.g. `k8s-xyz-automation`
 
-3. [Create a new application integration](https://docs.venafi.com/Docs/24.3/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creating.php)
+3. [Create a new application integration](https://docs.venafi.com/Docs/current/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creating.php)
 
    Create an application integration with name and ID `cert-manager.io`.
    Set the "Base Access Settings" to `certificate: manage`.
@@ -170,9 +173,9 @@ credentials.
    This will print an access-token to `stdout`. E.g.
 
    ```
-   vCert: 2020/10/07 16:34:27 Getting credentials
+   vCert: 2025/08/08 16:34:27 Getting credentials
    access_token:  I69n.............y1VjNJT3o9U0Wko19g==
-   access_token_expires:  2021-01-05T15:34:30Z
+   access_token_expires:  2026-08-08T15:34:30Z
    ```
 
 5. Save the access-token to a Secret in the Kubernetes cluster
@@ -186,19 +189,19 @@ credentials.
 
 ### Username / Password Authentication
 
-> **Note**: when using username  / password authentication, cert-manager will manage the generation of access token for you . cert-manager does not use refresh tokens to renew access token. 
+> **Note**: when using username  / password authentication, cert-manager will manage the generation of access token for you. cert-manager does not use refresh tokens to renew access token.
 
 1. Create a new user with sufficient privileges to manage certificates in a particular policy folder (zone).
 
    E.g. `k8s-xyz-automation`
 
-2. [Create a new application integration](https://docs.venafi.com/Docs/24.3/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creating.php)
+2. [Create a new application integration](https://docs.venafi.com/Docs/current/TopNav/Content/API-ApplicationIntegration/t-APIAppIntegrations-creating.php)
 
    Create an application integration with name and ID `cert-manager.io`.
    Set the "Base Access Settings" to `certificate: manage`.
 
    "Edit Access" to the new application integration, and allow it to be used by the user you created earlier.
-   
+
 3. Save the credentials to a Secret in the Kubernetes cluster
 
     ```bash
@@ -210,7 +213,7 @@ credentials.
     ```
 
 
-> Note: By default cert-manager uses `cert-manager.io` as client ID when authenticating to Venafi. You can customize this by adding `client-id` key to the secret:
+> Note: By default cert-manager uses `cert-manager.io` as client ID when authenticating to CyberArk. You can customize this by adding `client-id` key to the secret:
 >```bash
 >$ kubectl create secret generic \
 >       tpp-secret \
@@ -220,7 +223,7 @@ credentials.
 >       --from-literal=client-id='YOUR_TPP_CLIENT-ID_HERE'
 >```
 
-These credentials will be used by cert-manager to interact with your Venafi TPP
+These credentials will be used by cert-manager to interact with your CyberArk
 instance. Username attribute must adhere to the `<identity
 provider>:<username>` format.  For example: `local:admin`.
 
@@ -237,19 +240,19 @@ resource, you must change the `kind` field to `ClusterIssuer` and remove the
 > 📖 Read [Issuer Configuration](./README.md#cluster-resource-namespace) to learn more about the concept of a ClusterIssuer and the Cluster Resource Namespace
 
 Save the below content after making your amendments to a file named
-`tpp-issuer.yaml`.
+`corp-issuer.yaml`.
 
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: tpp-issuer
+  name: corp-issuer
   namespace: <NAMESPACE YOU WANT TO ISSUE CERTIFICATES IN>
 spec:
   venafi:
-    zone: \VED\Policy\devops\cert-manager # Set this to the Venafi policy folder you want to use
+    zone: \VED\Policy\devops\cert-manager # Set this to the policy folder you want to use
     tpp:
-      url: https://tpp.venafi.example/vedsdk # Change this to the URL of your TPP instance
+      url: https://tpp.venafi.example/vedsdk # Change this to the URL of your CyberArk Certificate Manager Self-Hosted instance
       caBundle: <base64 encoded string of caBundle PEM file, or empty to use system root CAs>
       ## Use only caBundle above or the caBundleSecretRef below. Secret can be created from a ca.crt file by running below command
       ## kubectl create secret generic custom-tpp-ca --from-file=/my/certs/ca.crt -n <cert-manager-namespace>
@@ -263,17 +266,17 @@ spec:
 You can then create the `Issuer` using `kubectl create -f`.
 
 ```bash
-$ kubectl create -f tpp-issuer.yaml
+$ kubectl create -f corp-issuer.yaml
 ```
 
 Verify the `Issuer` has been initialized correctly using `kubectl describe`.
 
 ```bash
-$ kubectl describe issuer tpp-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
+$ kubectl describe issuer corp-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
 ```
 
-You are now ready to issue certificates using the newly provisioned Venafi
-`Issuer` and Trust Protection Platform.
+You are now ready to issue certificates using the newly provisioned CyberArk
+`Issuer` and CyberArk Certificate Manager Self-Hosted.
 
 Read the [Requesting Certificates](../usage/certificate.md) document for
 more information on how to create Certificate resources.
@@ -282,7 +285,9 @@ more information on how to create Certificate resources.
 
 ### Custom Fields
 
-Starting `v0.14` you can pass custom fields to Venafi (TPP version `v19.2` and higher) using the `venafi.cert-manager.io/custom-fields` annotation on Certificate resources.
+Starting `v0.14`, you can pass custom fields to CyberArk Certificate Manager
+Self-Hosted using the `venafi.cert-manager.io/custom-fields` annotation on
+Certificate resources.
 The value is a JSON encoded array of custom field objects having a `name` and `value` key.
 For example:
 

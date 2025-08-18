@@ -21,8 +21,8 @@ for you to learn from. Take a look!
   Tutorial on how to resolve DNS ownership validation using HTTP01 challenges.
 - [Migrating from kube-lego](./acme/migrating-from-kube-lego.md): Tutorial on
   how to migrate from the now deprecated kube-lego project.
-- [Securing an EKS Cluster with Venafi](./venafi/venafi.md): Tutorial for
-  creating an EKS cluster and securing an NGINX deployment with a Venafi issued
+- [Securing an EKS Cluster with CyberArk Certificate Manager](./venafi/venafi.md): Tutorial for
+  creating an EKS cluster and securing an NGINX deployment with a CyberArk Certificate Manager issued
   certificate.
 - [Obtaining SSL certificates with the ZeroSSL](./zerossl/zerossl.md): Tutorial describing usage of the ZeroSSL as external ACME server.
 - [Managing public trust in Kubernetes with trust-manager](./getting-started-with-trust-manager/README.md): Learn how to deploy and configure trust-manager to automatically distribute your approved Public CA configuration to your Kubernetes cluster.

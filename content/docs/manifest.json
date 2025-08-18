@@ -375,7 +375,7 @@
                   "path": "/docs/configuration/vault.md"
                 },
                 {
-                  "title": "Venafi",
+                  "title": "CyberArk",
                   "path": "/docs/configuration/venafi.md"
                 },
                 {
@@ -640,7 +640,7 @@
               "path": "/docs/tutorials/acme/pomerium-ingress.md"
             },
             {
-              "title": "EKS + Ingress + Venafi",
+              "title": "EKS + Ingress + CyberArk",
               "path": "/docs/tutorials/venafi/venafi.md"
             },
             {

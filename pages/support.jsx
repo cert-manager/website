@@ -30,16 +30,15 @@ function Support({ router }) {
             <div className="relative">
               <h2>
                 <Image
-                  src={'/images/venafi-cybr-logo.png'}
-                  alt="Venafi, A Cyberark Company"
-                  width={145}
-                  height={47}
+                  src={'/images/cyberark-logo-dark.svg'}
+                  alt="CyberArk"
+                  width={300}
                 />
               </h2>
             </div>
           </div>
-          <p className="text-lg mb-8">Venafi, a <a target="_blank" href="https://www.cyberark.com">CyberArk</a> Company, is the principal maintainer of the cert-manager project and works directly with the CNCF. Commercial support and FIPS builds for cert-manager are available as part of Venafi&apos;s Long Term Support (LTS) offering, including access to expertise to help organisations scale effectively and securely with cert-manager.</p>
-          <div className="overflow-hidden"><a target="_blank" className="font-montserrat font-bold uppercase text-sm leading-20px btn-primary rounded-5px inline-flex items-center gap-3 px-8 py-4 " href="https://venafi.com/lts-for-cert-manager/"><span>Find Out More</span></a></div>
+          <p className="text-lg mb-8"><a target="_blank" href="https://www.cyberark.com">CyberArk</a> is the principal maintainer of the cert-manager project and works directly with the CNCF. Commercial support and FIPS builds for cert-manager are available as part of CyberArk&apos;s Long Term Support (LTS) offering, including access to expertise to help organisations scale effectively and securely with cert-manager.</p>
+          <div className="overflow-hidden"><a target="_blank" className="font-montserrat font-bold uppercase text-sm leading-20px btn-primary rounded-5px inline-flex items-center gap-3 px-8 py-4 " href="https://www.cyberark.com/services-support/long-term-support-for-cert-manager/"><span>Find Out More</span></a></div>
         </div>
       </div>
     </div>
