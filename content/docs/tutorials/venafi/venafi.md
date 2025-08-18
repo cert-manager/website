@@ -344,7 +344,7 @@ metadata:
   namespace: demo
 spec:
   venafi:
-    zone: "My Application\My CIT" # Set this to <Application Name>\<Issuing Template Alias>
+    zone: 'My Application\My CIT' # Set this to <Application Name>\<Issuing Template Alias>
     cloud:
       apiTokenSecretRef:
         name: api-key-secret
