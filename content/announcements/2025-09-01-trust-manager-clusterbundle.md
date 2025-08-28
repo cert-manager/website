@@ -8,12 +8,12 @@ date: "2025-09-01T12:00:00Z"
 ## TL;DR
 
 - trust-manager will move it's current functionality from the `Bundle` resource to a new `ClusterBundle` resource.
-- This should be a no-op assuming regular upgrades
+- You will need to replace `Bundle` YAML with `ClusterBundle` YAML which will have a similar but different specification.
 - In the future `Bundle` may return as a namespace scoped CRD.
 
 ## Current state
 
-trust-manager is currently using a `Bundle` resource as the mechanism for cluster users to distribute Certificate Authority (CA) certificates within their clusters.
+trust-manager is currently using a `Bundle` resource as the mechanism for cluster administrators to distribute Certificate Authority (CA) certificates within their clusters.
 This CRD is scoped at the cluster level and takes in `sources` from a central cluster namespace and then distributes to `targets` in other namespaces.
 
 ```sh
@@ -36,8 +36,10 @@ This may be confusing to new trust-manager users or at least feels a little inco
 
 Simply put, trust-manager is moving to using a `ClusterBundles` by default.
 This more accurately reflects the scope of the current `Bundles` resource.
+Similarly this more closely ties with the Kubernetes native `ClusterTrustBundle` resource which also as as cluster level resource.
+More details on this can be [found here](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#cluster-trust-bundles).
 
-This will mean:
+For trust-manager users this means:
 
 1) Deprecating and ultimately removing `Bundle` and the API `trust.cert-manager.io/v1alpha1`.
 1) Creating `ClusterBundles` with the API `trust-manager.io/v1alpha2` as the new default.
@@ -69,7 +71,9 @@ In the API change there are two key elements to consider:
 
 The changing of the group `trust.cert-manager.io` to `trust-manager.io` is a shortening of the overall URL but also reflects the general move towards trust-manager being a completely independent project to cert-manager.
 While both projects are maintained by the same set of awesome maintainers, we fundamentally believe that one project should be able to exist without the other, reducing the overall tooling you might need in your cluster.
-We are not at that state of independence but look out for a future post exploring that topic.
+A key part of making the projects independent is removing the need for webhooks and therefore certificates to secure that webhook communication.
+Kubernetes advances in [Server Side Apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/) (SSA) and [Common Expression Language](https://kubernetes.io/docs/reference/using-api/cel/)e (CEL) make it much easier to perform resource validation with the Kubernetes components, without having to hand that off to a webhook service to do the resource validation.
+That's a different goal and we are not at that state of independence right now but look out for a future post exploring that topic.
 
 The API version change has meaning worth considering too. It is still an `alpha` level resource!
 This means that the resource specification could still change in a backwards incompatible way if there was a need.
@@ -80,20 +84,24 @@ That plays a big part in our mindset to try and make changes in a way that impac
 
 ## Impact to you
 
-The migration of resources from old to new will actually be handled automatically for you by a conversion webhook at the appropriate trust-manager release, which is TBD.
+The migration of resources from old to new will be assisted by a new conversion controller.
 
-That leaves only two real changes for you to make:
+> ⚠️ Please note that this is not a webhook conversion as webhooks cannot work between different API groups.
 
-1) Upgrading trust-manager as we release new versions, but we know you already do this!
-1) Updating your GitOps deployments to replace the `Bundle` resources with the new `ClusterBundle` specifications.
+This leaves two actions for administrators:
 
-These aren't things you can do just now, we will let you know when you should perform these things.
+1) Upgrade trust-manager as we release new versions, but we know you already do this!
+1) Update your deployment manifests to replace the `Bundle` resources with the new `ClusterBundle` specification.
+
+> ⚠️ We will provide detailed instructions as we release the new resource.
 
 ### Timelines
 
 We are not yet in a position to give you specific dates of changes, but we can more generically give you an overview in terms of releases.
 
-TBD.
+1. Release N - New CRD for `ClusterBundle` is released.
+1. Release N+1 - Existing `Bundle` resource is deprecated.
+1. Release N+2 - `Bundle` resource is removed.
 
 ## Getting Involved
 
