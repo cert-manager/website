@@ -51,16 +51,182 @@ Checkout [API Changes](#api-changes) for more details on what this means.
 Currently we have `Bundles` that have this specification:
 
 ```yaml
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: example-cas # The bundle name will also be used for the target
+spec:
+  sources:
+  # 1) Public CAs enabled
+  - useDefaultCAs: true
+  # 2) A Secret in the "trust" namespace
+  - secret:
+      name: "my-db-tls"
+      key: "ca.crt"
+  # 3) Another Secret source, but this time using a label selector instead of a named Secret
+  - secret:
+      selector:
+        matchLabels:
+          fruit: apple
+      key: "ca.crt"
+  # 4) One more Secret source, this time including all certificates from every key
+  - secret:
+      name: "my-regional-cas"
+      includeAllKeys: true
+  # 5) A ConfigMap in the "trust" namespace
+  - configMap:
+      name: "my-org.net"
+      key: "root-certs.pem"
+  # 6) Another ConfigMap source, but this time using a label selector instead of a named ConfigMap
+  - configMap:
+      selector:
+        matchLabels:
+          fruit: apple
+      key: "ca.crt"
+  # 7) One more ConfigMap source, this time including all certificates from every key
+  - configMap:
+      name: "my-org-cas"
+      includeAllKeys: true
+  # 8) A manually specified PEM-encoded cert, included directly into the Bundle
+  - inLine: |
+      -----BEGIN CERTIFICATE-----
+      MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      ....
+      0V3NCaQrXoh+3xrXgX/vMdijYLUSo/YPEWmo
+      -----END CERTIFICATE-----
+  target:
+    configMap:
+      key: "root-certs.pem"
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "1"
+        labels:
+          app.kubernetes.io/component: "trust-bundle"
+    additionalFormats:
+      jks:
+        key: "bundle.jks"
+      pkcs12:
+        key: "bundle.p12"
+    namespaceSelector:
+      matchLabels:
+        linkerd.io/inject: "enabled"
 
 ```
 
 The future will be `ClusterBundles` with this specification:
 
 ```yaml
-
+apiVersion: trust-manager.io/v1alpha2
+kind: ClusterBundle
+metadata:
+  name: example-cas
+spec:
+  # 8) A manually specified PEM-encoded cert, included directly into the Bundle
+  inLineCAs: |
+    -----BEGIN CERTIFICATE-----
+    MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+    ....
+    0V3NCaQrXoh+3xrXgX/vMdijYLUSo/YPEWmo
+    -----END CERTIFICATE-----
+  # 1) Public CAs enabled
+  includeDefaultCAs: true
+  sources:
+  # 2) A Secret in the "trust" namespace
+  - key: "ca.crt"
+    kind: Secret
+    name: "my-db-tls"
+  # 3) Another Secret source, but this time using a label selector instead of a named Secret
+  - key: "ca.crt"
+    kind: Secret
+    selector:
+      matchLabels:
+        fruit: apple
+  # 4) One more Secret source, this time including all certificates from every key
+  - key: "*"
+    kind: Secret
+    name: "my-regional-cas"
+  # 5) A ConfigMap in the "trust" namespace
+  - key: "root-certs.pem"
+    kind: ConfigMap
+    name: "my-org.net"
+  # 6) Another ConfigMap source, but this time using a label selector instead of a named ConfigMap
+  - key: "root-certs.pem"
+    kind: ConfigMap
+    selector:
+      matchLabels:
+        fruit: apple
+  # 7) One more ConfigMap source, this time including all certificates from every key
+  - key: "*"
+    kind: ConfigMap
+    name: "my-org-cas"
+  # Specify details of the target resource
+  target:
+    configMap:
+      data:
+        - key: "root-certs.pem"
+        - key: "bundle.p12"
+          format: PKCS12
+          password: "changeit" # remove field for no password
+          profile: Modern2023
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "1"
+        labels:
+          app.kubernetes.io/component: "trust-bundle"
+    # Example: Secret as target (only if trust-manager has permissions enabled)
+    secret:
+      data:
+        - key: "bundle.pem"
+        - key: "bundle.p12"
+          format: PKCS12
+          password: "changeit" # remove field for no password
+          profile: Modern2023
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "1"
+        labels:
+          app.kubernetes.io/component: "trust-bundle"
+    # Control which namespaces using a label select or expressions match. Default is empty, so all namespaces.
+    namespaceSelector:
+      matchLabels: {}
+      matchExpressions: []
 ```
 
-But why?...<TDB> ...
+> ⚠️ Please note that the specification is subject to change before release!
+
+### Minimal Example
+
+For simpler setups such as just public CAs the change should be fairly minimal. So if you currently had:
+
+```yaml
+apiVersion: trust.cert-manager.io/v1alpha1
+kind: Bundle
+metadata:
+  name: public-ca-certs
+spec:
+  sources:
+  - useDefaultCAs: true
+  target:
+    configMap:
+      key: ca-certificates.crt
+```
+
+It would now look like:
+
+```yaml
+apiVersion: trust-manager.io/v1alpha2
+kind: ClusterBundle
+metadata:
+  name: public-ca-certs
+spec:
+  includeDefaultCAs: true
+  target:
+    configMap:
+      data:
+      - key: ca-certificates.crt
+    namespaceSelector:
+      matchLabels: {}
+```
 
 ### API Changes
 
