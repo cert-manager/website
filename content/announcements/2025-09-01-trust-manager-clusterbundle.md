@@ -5,13 +5,15 @@ description: A look at how trust-manager is moving to ClusterBundle and the impa
 date: "2025-09-01T12:00:00Z"
 ---
 
+We would like to share details about a major upcoming change to [trust-manager](github.com/cert-manager/trust-manager).
+
 ## TL;DR
 
 - trust-manager will move it's current functionality from the `Bundle` resource to a new `ClusterBundle` resource.
 - You will need to replace `Bundle` YAML with `ClusterBundle` YAML which will have a similar but different specification.
 - In the future `Bundle` may return as a namespace scoped CRD.
 
-## Current state
+## Current State
 
 trust-manager is currently using a `Bundle` resource as the mechanism for cluster administrators to distribute Certificate Authority (CA) certificates within their clusters.
 This CRD is scoped at the cluster level and takes in `sources` from a central cluster namespace and then distributes to `targets` in other namespaces.
@@ -32,7 +34,7 @@ issuers                             iss                     cert-manager.io/v1  
 trust-manager does not currently follow that pattern of cluster level CRDs being prefixed by `Cluster`.
 This may be confusing to new trust-manager users or at least feels a little inconsistent.
 
-## What's changing
+## What's Changing
 
 Simply put, trust-manager is moving to using a `ClusterBundles` by default.
 This more accurately reflects the scope of the current `Bundles` resource.
@@ -248,7 +250,7 @@ Just look at the effort the maintainers have gone to with this change alone, for
 We all understand the frustration of things changing especially when we work with so many CRDs from many different projects.
 That plays a big part in our mindset to try and make changes in a way that impact users as minimally as possible.
 
-## Impact to you
+## Impact To You
 
 The migration of resources from old to new will be assisted by a new conversion controller.
 
@@ -261,7 +263,7 @@ This leaves two actions for administrators:
 
 > ⚠️ We will provide detailed instructions as we release the new resource.
 
-### Timelines
+### Timeline
 
 We are not yet in a position to give you specific dates of changes, but we can more generically give you an overview in terms of releases.
 
@@ -269,10 +271,29 @@ We are not yet in a position to give you specific dates of changes, but we can m
 1. Release N+1 - Existing `Bundle` resource is deprecated.
 1. Release N+2 - `Bundle` resource is removed.
 
+Each stage of the timeline
+
+#### Future State
+
+Take this with a pinch of salt, but the current vision for trust-manager after `ClusterBundle` might include:
+
+- The return of a new `trust-manager.io/v1alpha2/bundle` resource which is namespace scoped
+
 ## Getting Involved
 
 cert-manager maintained projects really are open to all as CNCF projects.
 We welcome all feedback and contributions on the proposed `ClusterBundles` and to our projects more generally.
+
+### Help Needed
+
+If you have the time, there is still a lot of work to get us to the future state where `ClusterBundle` is the default.
+Things needed include but are not limited to:
+
+- Website documentation updates
+- Migration guidance
+- Reviewing Pull Requests (PRs) of the incremental changes
+- Helping to communicate the changes as they occur
+- Code contributions
 
 ### Credits
 
@@ -284,3 +305,9 @@ We would like to thank two maintainers in particular for their substantial contr
 ### How to jump in
 
 See our [website docs](../docs/contributing/README.md), or come join us on [slack](../docs/contributing/README.md#slack)!
+
+### References
+
+To find out more about this change and others, here's some starting points:
+
+- [Design document for ClusterBundle name change](https://github.com/cert-manager/trust-manager/blob/main/design/20241124-rename-bunde-to-clusterbundle.md)
