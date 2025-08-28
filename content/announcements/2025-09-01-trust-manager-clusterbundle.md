@@ -310,4 +310,4 @@ See our [website docs](../docs/contributing/README.md), or come join us on [slac
 
 To find out more about this change and others, here's some starting points:
 
-- [Design document for ClusterBundle name change](https://github.com/cert-manager/trust-manager/blob/main/design/20241124-rename-bunde-to-clusterbundle.md)
+- [Design document for `ClusterBundle` name change](https://github.com/cert-manager/trust-manager/blob/main/design/20241124-rename-bunde-to-clusterbundle.md)
