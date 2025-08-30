@@ -74,6 +74,14 @@ controller:
     strict-validate-path-type: false
 ```
 
+#### Option 3. Upgrade `ingress-nginx`
+
+This issue is resolved in `ingress-nginx` versions `v1.13.2` and `v1.12.6`, both released on August 29, 2025.
+
+If you are running ingress-nginx `v1.13.2+` or `v1.12.6+`, you do not need to apply the workarounds described above.  
+
+See the [fix commit](https://github.com/kubernetes/ingress-nginx/commit/618aae18515213bcf3fb820e6f8c234703d844b2)  
+
 ### ACME Certificate Profiles
 
 cert-manager now supports the selection of ACME certificate profiles, allowing
