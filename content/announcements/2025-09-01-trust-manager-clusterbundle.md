@@ -44,8 +44,8 @@ More details on this can be [found here](https://kubernetes.io/docs/reference/ac
 
 For trust-manager users this means:
 
-1) Deprecating and ultimately removing `Bundle` and the API `trust.cert-manager.io/v1alpha1`.
-1) Creating `ClusterBundle` in the API `trust-manager.io/v1alpha2` as the new default.
+1) Deprecating and ultimately removing `Bundle` resource and the API group `trust.cert-manager.io/v1alpha1`.
+1) Creating `ClusterBundle` in the API group `trust-manager.io/v1alpha2` as the new default.
 
 Checkout [API Changes](#api-changes) for more details on what this means.
 
@@ -132,7 +132,7 @@ That plays a big part in our mindset to try and make changes in a way that impac
 
 The migration of resources from old to new will be assisted by a new conversion controller.
 
-> ⚠️ Please note that this is not a webhook conversion as webhooks cannot work between different API groups.
+> ⚠️ Please note that this is not a webhook conversion, as a conversion webhook can only convert between different versions of the same API group.
 
 This leaves two actions for administrators:
 
