@@ -174,7 +174,7 @@ Things needed include, but are not limited to:
 
 ### How to jump in
 
-See our [website docs](./../docs/contributing/), or come join us on [slack](./../docs/contributing/#slack)!
+See our [website docs](https://cert-manager.io/docs/contributing/), or come join us on [slack](https://cert-manager.io/docs/contributing/#slack)!
 
 ### References
 
