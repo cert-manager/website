@@ -1,11 +1,11 @@
 ---
 slug: trust-manager-clusterbundle-future
-title: trust-manager is moving the ClusterBundle
+title: trust-manager is moving to ClusterBundle
 description: A look at how trust-manager is moving to ClusterBundle and the impact for you
 date: "2025-09-05T12:00:00Z"
 ---
 
-We would like to share details about a major upcoming change to [trust-manager](github.com/cert-manager/trust-manager).
+We would like to share details about a major upcoming change to [trust-manager](https://github.com/cert-manager/trust-manager).
 
 ## TL;DR
 
@@ -154,6 +154,7 @@ We are not yet in a position to give you specific dates of changes, but we can m
 Take this with a pinch of salt, but the current vision for trust-manager after `ClusterBundle` might include:
 
 - The return of a new `trust-manager.io/v1alpha2 Bundle` resource, which is namespace scoped.
+- Adding more resource types as targets for a `ClusterBundle`.
 
 ## Getting Involved
 
@@ -173,7 +174,7 @@ Things needed include, but are not limited to:
 
 ### How to jump in
 
-See our [website docs](../docs/contributing/README.md), or come join us on [slack](../docs/contributing/README.md#slack)!
+See our [website docs](./../docs/contributing/README.md), or come join us on [slack](./../docs/contributing/README.md#slack)!
 
 ### References
 
