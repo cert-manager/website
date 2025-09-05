@@ -174,7 +174,7 @@ Things needed include, but are not limited to:
 
 ### How to jump in
 
-See our [website docs](./../docs/contributing/README.md), or come join us on [slack](./../docs/contributing/README.md#slack)!
+See our [website docs](./../docs/contributing/), or come join us on [slack](./../docs/contributing/#slack)!
 
 ### References
 
