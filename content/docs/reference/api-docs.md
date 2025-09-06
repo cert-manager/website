@@ -1447,7 +1447,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>PreferredChain is the chain to use if the ACME server outputs multiple. PreferredChain is no guarantee that this one gets delivered by the ACME endpoint. For example, for Let&rsquo;s Encrypt&rsquo;s DST cross-sign you would use: &ldquo;DST Root CA X3&rdquo; or &ldquo;ISRG Root X1&rdquo; for the newer Let&rsquo;s Encrypt root CA. This value picks the first certificate bundle in the combined set of ACME default and alternative chains that has a root-most certificate with this value as its issuer&rsquo;s commonname.</p>
+        <p>PreferredChain is the chain to use if the ACME server outputs multiple. PreferredChain is no guarantee that this one gets delivered by the ACME endpoint. For example, for Let&rsquo;s Encrypt&rsquo;s shortest ECDSA chain you would use: &ldquo;ISRG Root X2&rdquo; or &ldquo;ISRG Root X1&rdquo; for the (old default) Let&rsquo;s Encrypt root CA. This value picks the first certificate bundle in the combined set of ACME default and alternative chains that has a root-most certificate with this value as its issuer&rsquo;s commonname.</p>
       </td>
     </tr>
     <tr>
