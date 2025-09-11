@@ -67,7 +67,6 @@
     "prism-react-renderer": "2.4.1",
     "prismjs": "^1.30.0",
     "react": "19.1.1",
-    "react-copy-to-clipboard": "5.1.0",
     "react-dom": "19.1.1",
     "react-scroll": "1.9.3",
     "rehype-autolink-headings": "7.1.0",
