@@ -72,8 +72,8 @@
       @apply inline-block align-text-bottom;
     }
 
-    code:before,
-    code:after {
+    code::before,
+    code::after {
       display: none;
     }
 
@@ -88,8 +88,9 @@
 
     blockquote {
       @apply font-normal border-blue-1 m-0 not-italic;
-      p:before,
-      p:after {
+
+      p::before,
+      p::after {
         display: none;
       }
     }
@@ -121,11 +122,12 @@
   z-index: 100;
   max-height: 400px;
   overflow-y: scroll;
+
   @apply shadow-lg;
 }
 
 html.no-js aside ul li ul {
-  border-left: 1px solid rgba(204, 204, 204, 0.4);
+  border-left: 1px solid rgb(204 204 204 / 40%);
   height: auto;
   overflow-y: visible;
   padding-left: 1rem;
