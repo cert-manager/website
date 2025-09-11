@@ -3,12 +3,4 @@
   extends: [
     'github>cert-manager/renovate-config:default.json5',
   ],
-  packageRules: [
-    {
-      groupName: 'Misc NPM packages',
-      matchManagers: [
-        'npm',
-      ],
-    },
-  ],
 }
