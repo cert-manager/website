@@ -1,20 +1,13 @@
 import { defineConfig, globalIgnores } from "eslint/config";
-import react from "eslint-plugin-react";
-import globals from "globals";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
+import react from "eslint-plugin-react";
+import nextPlugin from "@next/eslint-plugin-next";
+import * as mdx from "eslint-plugin-mdx";
+import globals from "globals";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
-});
-
-export default defineConfig([globalIgnores([
+export default defineConfig([
+  // Global ignores (equivalent to an .eslintignore)
+  globalIgnores([
     "out",
     "node_modules",
     ".github/actions/sync/node_modules",
@@ -22,43 +15,51 @@ export default defineConfig([globalIgnores([
     "**/out",
     "**/build",
     "**/.next",
-]), {
-    extends: compat.extends(
-        "eslint:recommended",
-        "plugin:@next/next/recommended",
-        "plugin:react/recommended",
-        "plugin:mdx/recommended",
-    ),
+  ]),
 
+  // Base JS rules (eslint:recommended)
+  js.configs.recommended,
+
+  // React + Next.js (applies to your JS/TS/JSX/TSX)
+  {
     plugins: {
-        react,
+      react,
+      "@next/next": nextPlugin,
     },
-
     languageOptions: {
-        globals: {
-            ...globals.browser,
-            ...globals.node,
-        },
-
-        ecmaVersion: 13,
-        sourceType: "module",
-
-        parserOptions: {
-            ecmaFeatures: {
-                jsx: true,
-            },
-        },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+      ecmaVersion: 13, // ES2022
+      sourceType: "module",
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
     },
-
     settings: {
-        react: {
-            version: "detect",
-        },
+      react: { version: "detect" },
     },
-
     rules: {
-        "react/react-in-jsx-scope": "off",
-        "react/prop-types": "off",
-        "react/jsx-no-target-blank": "off",
+      ...react.configs.recommended.rules,
+      ...nextPlugin.configs.recommended.rules,
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "react/jsx-no-target-blank": "off",
     },
-}]);
+  },
+
+  // MDX support (files + embedded code blocks)
+  // See: https://github.com/mdx-js/eslint-mdx#flat-config
+  {
+    ...mdx.flat,
+  },
+  {
+    ...mdx.flatCodeBlocks,
+    // Optionally override code-block rules here:
+    rules: {
+      ...mdx.flatCodeBlocks.rules,
+      // e.g. "no-var": "error", "prefer-const": "error",
+    },
+  },
+]);
