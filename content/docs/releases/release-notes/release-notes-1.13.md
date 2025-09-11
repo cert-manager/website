@@ -54,7 +54,7 @@ Special thanks to [@BobyMCbobs](https://github.com/BobyMCbobs) for reporting and
 - Bump go to 1.20.14 ([#6736](https://github.com/cert-manager/cert-manager/pull/6736), [@jetstack-bot](https://github.com/jetstack-bot))
 - Cert-manager is now built with Go 1.20.12 ([#6544](https://github.com/cert-manager/cert-manager/pull/6544), [@wallrj](https://github.com/wallrj))
 - Cert-manager is now built with Go 1.20.13 ([#6630](https://github.com/cert-manager/cert-manager/pull/6630), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- Fix CVE 2023 48795 by upgrading to golang.org/x/crypto@v0.17.0 ([#6675](https://github.com/cert-manager/cert-manager/pull/6675), [@wallrj](https://github.com/wallrj))
+- Fix CVE 2023 48795 by upgrading to `golang.org/x/crypto@v0.17.0` ([#6675](https://github.com/cert-manager/cert-manager/pull/6675), [@wallrj](https://github.com/wallrj))
 - Fix `GHSA-7ww5-4wqc-m92c` by upgrading to `github.com/containerd/containerd@v1.7.12` ([#6684](https://github.com/cert-manager/cert-manager/pull/6684), [@wallrj](https://github.com/wallrj))
 
 ## `v1.13.3`
