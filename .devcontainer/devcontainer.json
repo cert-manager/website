@@ -1,0 +1,18 @@
+{
+  "name": "cert-manager Website Dev",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+
+  "postCreateCommand": "npm ci && npm install -g netlify-cli",
+
+  "forwardPorts": [3000],
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "yzhang.markdown-all-in-one"
+      ]
+    }
+  }
+}
