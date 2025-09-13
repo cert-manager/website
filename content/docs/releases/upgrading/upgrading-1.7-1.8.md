@@ -11,7 +11,7 @@ Before upgrading to 1.8.0, you will need to check that all the Certificate YAML 
 
 ```sh
 kubectl get cert -A -ojson | jq -r \
-  '.items[] | select(.spec.privateKey.rotationPolicy | strings | . != "Always" and . != "Never") | "\(.metadata.name) in namespace \(.metadata.namespace) has rotationPolicy=\(.spec.privateKey.rotationPolicy)"'
+  '.items[] | select(.spec.privateKey) | select(.spec.privateKey.rotationPolicy | . != "Always" and . != "Never") | "\(.metadata.name) in namespace \(.metadata.namespace) has rotationPolicy=\(.spec.privateKey.rotationPolicy)"'
 ```
 
 This command will show you, the name and namespace of each Certificate resource that needs to be updated in Git. For example:
