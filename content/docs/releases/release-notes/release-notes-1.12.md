@@ -571,7 +571,7 @@ v1.12.5 contains a backport for a name collision bug that was found in v1.13.0
 ## `v1.12.4`
 
 v1.12.4 contains an important security fix that
-addresses [CVE-2023-29409](https://cve.report/CVE-2023-29409).
+addresses [CVE-2023-29409](https://cve.report/CVE-2023-29409).
 
 ### Changes
 

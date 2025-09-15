@@ -29,7 +29,7 @@
     "ruleSpaces": false,
     "ruleRepetition": 70,
     "emphasis": "*",
-    "listItemIndent": "1",
+    "listItemIndent": "one",
     "incrementListMarker": false,
     "spacedTable": false
   }

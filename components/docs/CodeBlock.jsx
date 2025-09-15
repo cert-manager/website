@@ -4,8 +4,9 @@
 
 import React from 'react'
 import { Highlight, Prism } from 'prism-react-renderer'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useState } from 'react'
+import PropTypes from 'prop-types';
+import copy from 'copy-to-clipboard';
 
 // see https://github.com/FormidableLabs/prism-react-renderer?tab=readme-ov-file#custom-language-support
 (typeof global !== "undefined" ? global : window).Prism = Prism
@@ -37,6 +38,64 @@ const doneIcon = (
     />
   </svg>
 )
+
+// based on https://github.com/nkbt/react-copy-to-clipboard/blob/5b9a3dea0b7d368cb5dc0e83e5168faf23e497f9/src/Component.js
+// see MIT LICENSE (https://github.com/nkbt/react-copy-to-clipboard/blob/5b9a3dea0b7d368cb5dc0e83e5168faf23e497f9/LICENSE)
+class CopyToClipboard extends React.PureComponent {
+  static propTypes = {
+    text: PropTypes.string.isRequired,
+    children: PropTypes.element.isRequired,
+    onCopy: PropTypes.func,
+    options: PropTypes.shape({
+      debug: PropTypes.bool,
+      message: PropTypes.string,
+      format: PropTypes.string
+    })
+  };
+
+
+  static defaultProps = {
+    onCopy: undefined,
+    options: undefined
+  };
+
+
+  onClick = event => {
+    const {
+      text,
+      onCopy,
+      children,
+      options
+    } = this.props;
+
+    const elem = React.Children.only(children);
+
+    const result = copy(text, options);
+
+    if (onCopy) {
+      onCopy(text, result);
+    }
+
+    // Bypass onClick if it was present
+    if (elem && elem.props && typeof elem.props.onClick === 'function') {
+      elem.props.onClick(event);
+    }
+  };
+
+
+  render() {
+    const {
+      text: _text,
+      onCopy: _onCopy,
+      options: _options,
+      children,
+      ...props
+    } = this.props;
+    const elem = React.Children.only(children);
+
+    return React.cloneElement(elem, {...props, onClick: this.onClick});
+  }
+}
 
 export default function CodeBlock({ children, theme = 'github' }) {
   const className = children.props.className || ''
