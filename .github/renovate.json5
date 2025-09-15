@@ -9,6 +9,10 @@
       matchManagers: [
         'npm',
       ],
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+      ],
     },
   ],
 }
