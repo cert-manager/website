@@ -22,6 +22,7 @@
     "start": "next start",
     "check": "concurrently --group --timings npm:check:* # Run all the npm check:* scripts in parallel",
     "check:eslint": "eslint .",
+    "check:stylelint": "stylelint **/*.scss",
     "check:links": "find content/docs -type f -name '*.md' | xargs markdown-link-check --quiet --config markdown-link-check.json 2>&1 | awk -v RS=FILE: '/ERROR/{f=1; print RS $0} END{exit f}' # Split into records based on the word FILE and print only records containing word ERROR",
     "check:spelling": "FORCE_COLOR=1 mdspell --report --en-us --ignore-numbers --ignore-acronyms 'content/**/*.md' 'content/**/*.html' '_layouts/*.html' '_includes/*.html' '*.html' '!**/api-docs.md' '!content/*docs/policy/approval/approver-policy/api-reference.md' '!content/*docs/trust/trust-manager/api-reference.md' # Force color output in mdspell. # See https://github.com/lukeapage/node-markdown-spellcheck/issues/36#issuecomment-482649408 ",
     "check:markdown": "remark --rc-path .remarkrc --frail --quiet content/"
@@ -78,14 +79,12 @@
     "unist-util-visit": "5.0.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.35.0",
     "@next/eslint-plugin-next": "15.5.3",
     "concurrently": "9.2.1",
     "eslint": "9.35.0",
     "eslint-config-next": "15.5.3",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-markdown": "5.1.0",
     "eslint-plugin-mdx": "3.6.2",
     "eslint-plugin-react": "7.37.5",
     "format-api-docs": "file:scripts/gendocs/postprocess",
