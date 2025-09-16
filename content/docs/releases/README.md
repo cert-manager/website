@@ -29,7 +29,7 @@ should be stable enough to run.
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.19][] | Oct 7, 2025  | Release of 1.21 | 1.29 → 1.33 / 4.16 → 4.18                      | 1.30 → 1.33                        |
+| [1.19][] | Oct 7, 2025  | Release of 1.21 | 1.31 → 1.34 / 4.18 → 4.19                      | 1.31 → 1.34                        |
 
 Dates in the future are not firm commitments and are subject to change.
 
