@@ -337,7 +337,8 @@ NB: cert-manager 1.12 was a public Long Term Support (LTS) release sponsored by 
 
 [s]: #kubernetes-supported-versions
 [test]: #supported-vs-tested
-[1.19]: https://github.com/cert-manager/cert-manager/milestone/41
+[1.20]: https://github.com/cert-manager/cert-manager/milestone/42
+[1.19]: ./release-notes/release-notes-1.19.md
 [1.18]: ./release-notes/release-notes-1.18.md
 [1.17]: ./release-notes/release-notes-1.17.md
 [1.16]: ./release-notes/release-notes-1.16.md
