@@ -408,7 +408,7 @@ Certificate resources:
   configure `spec.subject.serialNumber` field for the Certificate to be generated.
   Supports comma-separated values e.g. "10978342379280287615,1111144445555522228888"
 
-- ` cert-manager.io/duration`: (optional) this annotation allows you to
+- `cert-manager.io/duration`: (optional) this annotation allows you to
   configure `spec.duration` field for the Certificate to be generated.
 
 - `cert-manager.io/renew-before`: (optional) this annotation allows you to

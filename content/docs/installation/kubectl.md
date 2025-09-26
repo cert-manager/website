@@ -195,6 +195,19 @@ Delete the installation manifests using a link to your currently running version
 kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/vX.Y.Z/cert-manager.yaml
 ```
 
+### Deleting orphaned leases
+
+Note: cert-manager uses Kubernetes [`Lease`](https://kubernetes.io/docs/concepts/architecture/leases/) 
+objects for leader election, which is enabled by default.
+These leases are typically created in the kube-system namespace, but the namespace can be configured.
+They are not automatically removed when uninstalling cert-manager. You can safely delete them manually:
+
+```bash
+kubectl delete lease -n <namespace> cert-manager-cainjector-leader-election cert-manager-controller
+```
+
+Replace `<namespace>` with the namespace where leader election leases were created (default is kube-system).
+
 ### Namespace Stuck in Terminating State
 
 If the namespace has been marked for deletion without deleting the cert-manager

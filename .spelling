@@ -264,7 +264,7 @@ KubeCon
 Kubernetes
 Openshift
 Kyverno
-Learnk8s
+LearnKube
 LuCI
 Maartje
 MacOS
@@ -310,6 +310,7 @@ API_AssumeRoleWithWebIdentity
 AssumeRoleWithWebIdentity
 Runtime
 roadmap
+SaaS
 SGX
 SOA
 SecretTemplate
@@ -448,6 +449,7 @@ kube-ingress-aws-controller
 kube-lego
 kube-apiserver
 kube-proxy
+kube-system
 tcpdump
 kubebuilder
 kubectl
@@ -799,6 +801,7 @@ cfssl-issuer
 cfmtls-issuer
 GlobalSign
 czertainly-issuer
+zerossl-issuer
 
 # TEMPORARY
 # these are temporarily ignored because the spellchecker
@@ -835,3 +838,29 @@ READMEs
 K3d
 CyberArk
 90-minute
+
+# Annotations
+acme.cert
+cluster.local
+controller.cert
+example.com
+example.org
+experimental.cert
+http01-edit-in-place
+http01-ingress-class
+ingress.class
+ip-sans
+kubernetes.io
+manager.io
+ns
+sa
+spiffe
+subject-organizationalunits
+subject-postalcodes
+subject-serialnumber
+subject-streetaddresses
+tls-acme
+uri-sans
+venafi.cert
+x509
+CRLs

@@ -295,29 +295,7 @@ supported backends.
 cert-manager also has a kubectl plugin which can be used to help you to manage cert-manager resources in the cluster.
 Installation instructions for this can be found in the [kubectl plugin](../usage/kubectl-plugin.md) documentation.
 
-## Alternative installation methods
-
-### kubeprod
-
-[Bitnami Kubernetes Production
-Runtime](https://github.com/bitnami/kube-prod-runtime) (`BKPR`, `kubeprod`) is a
-curated collection of the services you would need to deploy on top of your
-Kubernetes cluster to enable logging, monitoring, certificate management,
-automatic discovery of Kubernetes resources via public DNS servers and other
-common infrastructure needs.
-
-It depends on `cert-manager` for certificate management, and it is [regularly
-tested](https://github.com/bitnami/kube-prod-runtime/blob/master/Jenkinsfile) so
-the components are known to work together for GKE and AKS clusters (EKS to be
-added soon). For its ingress stack it creates a DNS entry in the configured DNS
-zone and requests a TLS certificate from the Let's Encrypt staging server.
-
-BKPR can be deployed using the `kubeprod install` command, which will deploy
-`cert-manager` as part of it. Details available in the [BKPR installation
-guide](https://github.com/bitnami/kube-prod-runtime/blob/master/docs/install.md).
-
-
-### Debugging installation issues
+## Debugging installation issues
 
 If you have any issues with your installation, please refer to the
 [FAQ](../faq/README.md).

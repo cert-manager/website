@@ -441,7 +441,7 @@ Special thanks to [@BobyMCbobs](https://github.com/BobyMCbobs) for reporting and
 
 - Bump go to 1.20.14 ([#6733](https://github.com/cert-manager/cert-manager/pull/6733), [@SgtCoDFish](https://github.com/SgtCoDFish))
 - Cert-manager is now built with Go 1.20.13 ([#6629](https://github.com/cert-manager/cert-manager/pull/6629), [@SgtCoDFish](https://github.com/SgtCoDFish))
-- Fix CVE 2023 48795 by upgrading to golang.org/x/crypto@v0.17.0 ([#6678](https://github.com/cert-manager/cert-manager/pull/6678), [@wallrj](https://github.com/wallrj))
+- Fix CVE 2023 48795 by upgrading to `golang.org/x/crypto@v0.17.0` ([#6678](https://github.com/cert-manager/cert-manager/pull/6678), [@wallrj](https://github.com/wallrj))
 - Fix `GHSA-7ww5-4wqc-m92c` by upgrading to `github.com/containerd/containerd@v1.7.12` ([#6689](https://github.com/cert-manager/cert-manager/pull/6689), [@wallrj](https://github.com/wallrj))
 
 ## `v1.12.7`
@@ -571,7 +571,7 @@ v1.12.5 contains a backport for a name collision bug that was found in v1.13.0
 ## `v1.12.4`
 
 v1.12.4 contains an important security fix that
-addresses [CVE-2023-29409](https://cve.report/CVE-2023-29409).
+addresses [CVE-2023-29409](https://cve.report/CVE-2023-29409).
 
 ### Changes
 

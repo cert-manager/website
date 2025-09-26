@@ -368,7 +368,7 @@ This field has the same meaning as the
 
 ## Setting Nameservers for HTTP-01 solver propagation checks
 
-cert-manager will perform reachability tests before attempting a HTT01
+cert-manager will perform reachability tests before attempting a HTTP-01
 challenge.  By default cert-manager will use the recursive nameservers taken
 from `/etc/resolv.conf` to query the challenge URL.
 

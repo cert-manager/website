@@ -125,6 +125,13 @@ https://docs.cert-manager.io/en/latest/getting-started/index.html https://cert-m
 https://docs.cert-manager.io/en/latest/tutorials/acme/index.html https://cert-manager.io/docs/tutorials/
 https://docs.cert-manager.io/en/latest/ https://cert-manager.io/docs/
 
+# This specific URL is linked to by IBM docs (https://www.ibm.com/docs/en/cloud-private/3.2.x?topic=manager-using-acme-issue-certificates)
+# so we redirect it to the new cert-manager.io docs page specifically
+https://docs.cert-manager.io/en/latest/tutorials/acme/http-validation.html https://cert-manager.io/docs/tutorials/acme/http-validation/
+# We don't know for sure if this dns-validation tutorial ever existed in the old docs site, but redirect it anyway just in case
+# since we know the equiavalent did exist for HTTP validation.
+https://docs.cert-manager.io/en/latest/tutorials/acme/dns-validation.html https://cert-manager.io/docs/tutorials/acme/dns-validation/
+
 # Issuer-specific redirects; these were mined from a wayback machine crawl of the old site:
 # https://web.archive.org/web/20190802192846/http://docs.cert-manager.io/en/latest/tasks/issuers/index.html
 https://docs.cert-manager.io/en/latest/tasks/issuers/setup-acme/http01/* https://cert-manager.io/docs/configuration/acme/http01/
@@ -240,3 +247,58 @@ https://docs.cert-manager.io/* https://cert-manager.io/docs/:splat 302!
 
 # Redirect link used in KubeCon NA 2024 video QR code (we can update the redirect in the future)
 /link/kubecon-na-2024/ / 301!
+
+# Document cert-manager.io annotations
+# for an annotation `cert-manager.io/allow-direct-injection` we map to
+# /docs/reference/annotations#cert-managerioallow-direct-injection
+# which is an entry documenting `cert-manager.io/allow-direct-injection`
+https://cert-manager.io/allow-direct-injection https://cert-manager.io/docs/reference/annotations#cert-managerioallow-direct-injection 301!
+https://cert-manager.io/alt-names https://cert-manager.io/docs/reference/annotations#cert-managerioalt-names 301!
+https://cert-manager.io/certificate-name https://cert-manager.io/docs/reference/annotations#cert-manageriocertificate-name 301!
+https://cert-manager.io/certificate-revision https://cert-manager.io/docs/reference/annotations#cert-manageriocertificate-revision 301!
+https://cert-manager.io/cluster-issuer https://cert-manager.io/docs/reference/annotations#cert-manageriocluster-issuer 301!
+https://cert-manager.io/common-name https://cert-manager.io/docs/reference/annotations#cert-manageriocommon-name 301!
+https://cert-manager.io/duration https://cert-manager.io/docs/reference/annotations#cert-managerioduration 301!
+https://cert-manager.io/email-sans https://cert-manager.io/docs/reference/annotations#cert-managerioemail-sans 301!
+https://cert-manager.io/inject-apiserver-ca https://cert-manager.io/docs/reference/annotations#cert-managerioinject-apiserver-ca 301!
+https://cert-manager.io/inject-ca-from https://cert-manager.io/docs/reference/annotations#cert-managerioinject-ca-from 301!
+https://cert-manager.io/inject-ca-from-secret https://cert-manager.io/docs/reference/annotations#cert-managerioinject-ca-from-secret 301!
+https://cert-manager.io/ip-sans https://cert-manager.io/docs/reference/annotations#cert-managerioip-sans 301!
+https://cert-manager.io/issue-temporary-certificate https://cert-manager.io/docs/reference/annotations/#cert-managerioissue-temporary-certificate 301!
+https://cert-manager.io/issuer https://cert-manager.io/docs/reference/annotations#cert-managerioissuer 301!
+https://cert-manager.io/issuer-group https://cert-manager.io/docs/reference/annotations#cert-managerioissuer-group 301!
+https://cert-manager.io/issuer-kind https://cert-manager.io/docs/reference/annotations#cert-managerioissuer-kind 301!
+https://cert-manager.io/private-key-algorithm https://cert-manager.io/docs/reference/annotations#cert-managerioprivate-key-algorithm 301!
+https://cert-manager.io/private-key-encoding https://cert-manager.io/docs/reference/annotations#cert-managerioprivate-key-encoding 301!
+https://cert-manager.io/private-key-rotation-policy https://cert-manager.io/docs/reference/annotations#cert-managerioprivate-key-rotation-policy 301!
+https://cert-manager.io/private-key-secret-name https://cert-manager.io/docs/reference/annotations#cert-managerioprivate-key-secret-name 301!
+https://cert-manager.io/private-key-size https://cert-manager.io/docs/reference/annotations#cert-managerioprivate-key-size 301!
+https://cert-manager.io/renew-before https://cert-manager.io/docs/reference/annotations#cert-manageriorenew-before 301!
+https://cert-manager.io/revision-history-limit https://cert-manager.io/docs/reference/annotations#cert-manageriorevision-history-limit 301!
+https://cert-manager.io/secret-template https://cert-manager.io/docs/reference/annotations#cert-manageriosecret-template 301!
+https://cert-manager.io/subject-countries https://cert-manager.io/docs/reference/annotations#cert-manageriosubject-countries 301!
+https://cert-manager.io/subject-localities https://cert-manager.io/docs/reference/annotations#cert-manageriosubject-localities 301!
+https://cert-manager.io/subject-organizationalunits https://cert-manager.io/docs/reference/annotations#cert-manageriosubject-organizationalunits 301!
+https://cert-manager.io/subject-organizations https://cert-manager.io/docs/reference/annotations#cert-manageriosubject-organizations 301!
+https://cert-manager.io/subject-postalcodes https://cert-manager.io/docs/reference/annotations#cert-manageriosubject-postalcodes 301!
+https://cert-manager.io/subject-provinces https://cert-manager.io/docs/reference/annotations#cert-manageriosubject-provinces 301!
+https://cert-manager.io/subject-serialnumber https://cert-manager.io/docs/reference/annotations#cert-manageriosubject-serialnumber 301!
+https://cert-manager.io/subject-streetaddresses https://cert-manager.io/docs/reference/annotations#cert-manageriosubject-streetaddresses 301!
+https://cert-manager.io/uri-sans https://cert-manager.io/docs/reference/annotations#cert-manageriouri-sans 301!
+https://cert-manager.io/usages https://cert-manager.io/docs/reference/annotations#cert-manageriousages 301!
+
+# There are cnames to cert-manager.io in https://github.com/cert-manager/infrastructure/blob/2d77f6b97249f4d41cd5547ad90f0e2f4ffd6c58/gcp/general_dns_cert-manager.tf
+# (as well as configuration in netlify) for each of these to enable these to work.
+https://acme.cert-manager.io/http01-edit-in-place https://cert-manager.io/docs/reference/annotations#acmecert-manageriohttp01-edit-in-place 301!
+https://acme.cert-manager.io/http01-ingress-class https://cert-manager.io/docs/reference/annotations#acmecert-manageriohttp01-ingress-class 301!
+
+https://experimental.cert-manager.io/request-duration https://cert-manager.io/docs/reference/annotations#experimentalcert-manageriorequest-duration 301!
+https://experimental.cert-manager.io/request-is-ca https://cert-manager.io/docs/reference/annotations#experimentalcert-manageriorequest-is-ca 301!
+https://experimental.cert-manager.io/private-key-secret-name https://cert-manager.io/docs/reference/annotations#experimentalcert-managerioprivate-key-secret-name 301!
+
+https://venafi.cert-manager.io/custom-fields https://cert-manager.io/docs/reference/annotations#venaficert-manageriocustom-fields 301!
+https://venafi.cert-manager.io/pickup-id https://cert-manager.io/docs/reference/annotations#venaficert-manageriopickup-id 301!
+
+# Note that kubernetes.io entries will not have real CNAMEs and are merely listed for consistency
+# https://kubernetes.io/ingress.class https://cert-manager.io/docs/reference/annotations#kubernetesio/ingressclass 301!
+# https://kubernetes.io/tls-acme https://cert-manager.io/docs/reference/annotations#kubernetesio/tls-acme 301!

@@ -53,26 +53,26 @@ spec:
 
 ## Supported Annotations
 
-You can specify the following annotations on Ingress resources in order to
-trigger Certificate resources to be automatically created:
+You can specify the following annotations on `Ingress` resources in order to
+trigger `Certificate` resources to be automatically created:
 
-- `cert-manager.io/issuer`:  the name of the issuer that should issue the certificate
-  required for this Ingress.
+- `cert-manager.io/issuer`: the name of the Issuer that should issue the
+  certificate required for this `Ingress`.
 
   > ⚠️ This annotation does _not_ assume a namespace scoped issuer. It will
-  default to cert-manager.io Issuer, however in case of external issuer types,
+  default to `cert-manager.io` `Issuer`, however in case of external issuer types,
   this should be used for both namespaced and cluster scoped issuer types.
 
   > ⚠️ If a namespace scoped issuer is used then the issuer *must* be in
-  the same namespace as the Ingress resource.
+  the same namespace as the `Ingress` resource.
 
-- `cert-manager.io/cluster-issuer`: the name of a cert-manager.io ClusterIssuer
-  to acquire the certificate required for this Ingress. It does not matter which
-  namespace your Ingress resides, as ClusterIssuers are non-namespaced
+- `cert-manager.io/cluster-issuer`: the name of a `cert-manager.io` `ClusterIssuer`
+  to acquire the certificate required for this `Ingress`. It does not matter in
+  which namespace your `Ingress` resides, as `ClusterIssuers` are non-namespaced
   resources.
 
   > ⚠️ This annotation is a shortcut to refer to to
-  cert-manager.io ClusterIssuer without having to specify group and kind. It is
+  `cert-manager.io` `ClusterIssuer` without having to specify group and kind. It is
   _not_ intended to be used to specify an external cluster-scoped issuer- please
   use `cert-manager.io/issuer` annotation for those.
 
@@ -103,7 +103,7 @@ trigger Certificate resources to be automatically created:
   `"cert-manager.io/issue-temporary-certificate": "true"` onto created
   certificates which will cause a [temporary
   certificate](../usage/certificate.md#temporary-certificates-whilst-issuing) to be set
-  on the resulting Secret until the final signed certificate has been returned.
+  on the resulting `Secret` until the final signed certificate has been returned.
   This is useful for keeping compatibility with the `ingress-gce` component.
 
 - `cert-manager.io/common-name`: (optional) this annotation allows you to
@@ -145,7 +145,7 @@ trigger Certificate resources to be automatically created:
   configure `spec.subject.serialNumber` field for the Certificate to be generated.
   Supports comma-separated values e.g. "10978342379280287615,1111144445555522228888"
 
-- ` cert-manager.io/duration`: (optional) this annotation allows you to
+- `cert-manager.io/duration`: (optional) this annotation allows you to
   configure `spec.duration` field for the Certificate to be generated.
 
 - `cert-manager.io/renew-before`: (optional) this annotation allows you to
@@ -206,7 +206,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    # custom venafi configuration
+    # custom configuration
     venafi.cert-manager.io/custom-fields: `[ {"name": "field-name", "value": "field value"}]`
   name: myIngress
   namespace: myIngress
@@ -236,7 +236,7 @@ This can be done by adding the following
 ```
 
 Or by adding the following arguments to the cert-manager deployment
-`podTemplate` container arguments.
+`podTemplate` container arguments:
 
 ```
   - --default-issuer-name=letsencrypt-prod
@@ -248,11 +248,11 @@ In the above example, cert-manager will create `Certificate` resources that
 reference the `ClusterIssuer` `letsencrypt-prod` for all Ingresses that have a
 `kubernetes.io/tls-acme: "true"` annotation.
 
-Issuers configured via specific annotations have a preference over the default issuer. If a default issuer is configured via CLI flags and a `cert-manager.io/cluster-issuer` or `cert-manager.io/issuer` annotation also has been added to an Ingress, the created `Certificate` will refer to the issuer configured via annotation.
+Issuers configured via specific annotations have a preference over the default issuer. If a default issuer is configured via CLI flags and a `cert-manager.io/cluster-issuer` or `cert-manager.io/issuer` annotation also has been added to an `Ingress`, the created `Certificate` will refer to the issuer configured via annotation.
 
 When `kubernetes.io/tls-acme: "true"` hasn't been set, automatic certificate deployment may still occur based on the `cert-manager.io/issuer`, `cert-manager.io/issuer-kind`, and `cert-manager.io/issuer-group` annotations.
 
-If all annotations are absent, then manual deployment is necessary: create Certificate resources directly, and assign the resulting Secret to the Ingress.
+If all annotations are absent, then manual deployment is necessary: create Certificate resources directly, and assign the resulting `Secret` to the `Ingress`.
 
 For more information on deploying cert-manager, read the [installation
 guide](../installation/README.md).

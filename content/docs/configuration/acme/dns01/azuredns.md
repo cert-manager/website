@@ -6,7 +6,7 @@ description: 'cert-manager configuration: ACME DNS-01 challenges using AzureDNS'
 cert-manager can create and then delete DNS-01 records in Azure DNS but it needs to authenticate to Azure first.
 There are four authentication methods available:
 
-- [Managed Identity Using AAD Workload Identity](#managed-identity-using-aad-pod-identity) (recommended)
+- [Managed Identity Using AAD Workload Identity](#managed-identity-using-aad-workload-identity) (recommended)
 - [Managed Identity Using AAD Pod Identities](#managed-identity-using-aad-pod-identities) (deprecated)
 - [Managed Identity Using AKS Kubelet Identity](#managed-identity-using-aks-kubelet-identity)
 - [Service Principal](#service-principal)

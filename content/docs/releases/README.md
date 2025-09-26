@@ -29,7 +29,7 @@ should be stable enough to run.
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.19][] | Oct 7, 2025  | Release of 1.21 | 1.29 → 1.33 / 4.16 → 4.18                      | 1.30 → 1.33                        |
+| [1.19][] | Oct 7, 2025  | Release of 1.21 | 1.31 → 1.34 / 4.18 → 4.19                      | 1.31 → 1.34                        |
 
 Dates in the future are not firm commitments and are subject to change.
 
@@ -333,7 +333,7 @@ are no longer supported.
 | [0.11][]     | Oct 10, 2019 | Jan 21, 2020 | 1.9 → 1.21                     | 3.09 → 4.7                    |
 
 
-NB: cert-manager 1.12 was a public Long Term Support (LTS) release sponsored by [Venafi](https://www.venafi.com/). It was supported for 2 years from release.
+NB: cert-manager 1.12 was a public Long Term Support (LTS) release sponsored by [CyberArk](https://www.cyberark.com/services-support/long-term-support-for-cert-manager/). It was supported for 2 years from release.
 
 [s]: #kubernetes-supported-versions
 [test]: #supported-vs-tested

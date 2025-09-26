@@ -12,6 +12,18 @@ cert-manager v1.17 includes:
 
 ## Major Themes
 
+### OperatorHub Packages Discontinued
+
+We no longer publish OperatorHub packages for cert-manager.
+Why? Because the cert-manager maintainers no longer have the time or resources to maintain and test those packages.
+cert-manager `v1.16.5` is the last release on OperatorHub.
+
+> ℹ️ [cert-manager `v1.16.5` for RedHat OpenShift OperatorHub](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators/cert-manager/1.16.5).
+>
+> ℹ️ [cert-manager `v1.16.5` for `operatorhub.io`](https://github.com/k8s-operatorhub/community-operators/tree/main/operators/cert-manager/1.16.5).
+>
+> ℹ️ [Archived `cert-manager-olm` repository](https://github.com/cert-manager/cert-manager-olm).
+
 ### RSA Certificate Compliance
 
 The United States Department of Defense published a [memo: Department of Defense Transition to Stronger Public Key Infrastructure Algorithms](https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/pdf/unclass-memo_dodcryptoalgorithms.pdf) in 2022 which introduced some requirements on the kinds of cryptography they require to be supported in software they use.
@@ -107,6 +119,41 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@ssyno](https://github.com/ssyno)
 - [@ianarsenault](https://github.com/ianarsenault)
 - [@TrilokGeer](https://github.com/TrilokGeer)
+
+## `v1.17.4`
+
+We fixed a bug in the CSR's name constraints construction (only applies if you have enabled the `NameConstraints` feature gate).
+
+Changes since `v1.17.3`:
+
+### Bug or Regression
+
+- BUGFIX: permitted URI domains were incorrectly used to set the excluded URI domains in the CSR's name constraints ([`#7832`][#7832])
+
+[#7832]: https://github.com/cert-manager/cert-manager/issues/7832
+
+## `v1.17.3`
+
+This patch release addresses several vulnerabilities reported by the Trivy
+security scanner. It is built with the latest version of Go 1.23.
+
+We have increased the ACME challenge authorization timeout to two minutes, which we hope will fix a timeout error (`error waiting for authorization`), which has been reported by multiple users, since the release of cert-manager `v1.16.0`.
+This change should fix the following issues: [`#7337`][#7337], [`#7444`][#7444], and [`#7685`][#7685].
+
+[#7337]: https://github.com/cert-manager/cert-manager/issues/7337
+[#7444]: https://github.com/cert-manager/cert-manager/issues/7444
+[#7685]: https://github.com/cert-manager/cert-manager/issues/7685
+
+Changes since `v1.17.2`:
+
+### Bug or Regression
+
+- Bump Go to `1.23.10` to fix `GO-2025-3749`, `GO-2025-3750`, and `GO-2025-3751` ([`#7799`](https://github.com/cert-manager/cert-manager/pull/7799), [`@wallrj`](https://github.com/wallrj))
+- ACME: Increased challenge authorization timeout to 2 minutes to fix error `waiting for authorization` ([`#7798`](https://github.com/cert-manager/cert-manager/pull/7798), [`@hjoshi123`](https://github.com/hjoshi123))
+
+### Other (Cleanup or Flake)
+
+- Use the latest version of ingress-nginx in E2E tests to ensure compatibility ([`#7808`](https://github.com/cert-manager/cert-manager/pull/7808), [`@wallrj`](https://github.com/wallrj))
 
 ## `v1.17.2`
 

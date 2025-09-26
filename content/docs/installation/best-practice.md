@@ -13,7 +13,7 @@ the [BSI Kubernetes Security Recommendations](https://www.bsi.bund.de/SharedDocs
 
 And you will learn about best practices for deploying cert-manager in production;
 such as those enforced by tools like [Datree and its built in rules](https://hub.datree.io/built-in-rules),
-and those documented by the likes of [Learnk8s in their "Kubernetes production best practices" checklist](https://learnk8s.io/production-best-practices/).
+and those documented by the likes of [LearnKube in their "Kubernetes production best practices" checklist](https://learnkube.com/production-best-practices/).
 
 ## Overview
 
@@ -74,10 +74,10 @@ Here is an overview of the network requirements:
    The target host and port of the Vault endpoints
    are configured in Issuer or ClusterIssuer resources.
 
-1. **TCP: cert-manager (controller) -> Venafi TLS Protect (authentication and resource API endpoints)**:
-   The cert-manager controller may establish HTTPS connections to one or more Venafi API endpoints,
-   if you are using the [Venafi Issuer](../configuration/venafi.md).
-   The target host and port of the Venafi API endpoints
+1. **TCP: cert-manager (controller) -> CyberArk Certificate Manager (authentication and resource API endpoints)**:
+   The cert-manager controller may establish HTTPS connections to one or more CyberArk Certificate Manager API endpoints,
+   if you are using the [CyberArk Issuer](../configuration/venafi.md).
+   The target host and port of the CyberArk Certificate Manager endpoints
    are configured in Issuer or ClusterIssuer resources.
 
 1. **TCP: cert-manager (controller) -> DNS API endpoints (for ACME DNS01)**:

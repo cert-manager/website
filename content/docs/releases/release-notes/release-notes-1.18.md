@@ -13,6 +13,75 @@ Be sure to review all new features and changes below, and read the full release 
 
 ## Major Themes
 
+### OperatorHub Packages Discontinued
+
+We no longer publish OperatorHub packages for cert-manager.
+Why? Because the cert-manager maintainers no longer have the time or resources to maintain and test those packages.
+cert-manager `v1.16.5` is the last release on OperatorHub.
+
+> ℹ️ [cert-manager `v1.16.5` for RedHat OpenShift OperatorHub](https://github.com/redhat-openshift-ecosystem/community-operators-prod/tree/main/operators/cert-manager/1.16.5).
+>
+> ℹ️ [cert-manager `v1.16.5` for `operatorhub.io`](https://github.com/k8s-operatorhub/community-operators/tree/main/operators/cert-manager/1.16.5).
+>
+> ℹ️ [Archived `cert-manager-olm` repository](https://github.com/cert-manager/cert-manager-olm).
+
+### ACME HTTP01 challenge paths now use `PathType` `Exact` in Ingress routes
+
+> ⚠️ Breaking change
+
+We have changed the `PathType` for ACME HTTP01 Ingress-based challenges to `Exact`.
+This security feature ensures that the challenge path (which is an exact path)
+is not misinterpreted as a regular expression or some other Ingress-specific
+(`ImplementationSpecific`) parsing.
+This allows HTTP01 challenges to be solved when using standards compliant
+Ingress controllers such as Cilium.
+
+This change is incompatible with certain versions and configurations of the `ingress-nginx` Ingress controller.
+Versions of [`ingress-nginx >=1.8.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.8.0.md) support a [`strict-validate-path-type` configuration option](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#strict-validate-path-type) which, when enabled, disallows `.` (dot) in the path value. This is a [bug](https://github.com/kubernetes/ingress-nginx/issues/11176) which makes it impossible to use various legitimate URL paths, including the  `http://<YOUR_DOMAIN>/.well-known/acme-challenge/<TOKEN>` URLs used for [ACME HTTP01](https://letsencrypt.org/docs/challenge-types/#http-01-challenge).
+To make matters worse, the buggy validation is [enabled by default](https://github.com/kubernetes/ingress-nginx/pull/11819) in [`ingress-nginx >= 1.12.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.12.0.md).
+You will see errors like this in the cert-manager controller logs:
+
+> Error presenting challenge: admission webhook `validate.nginx.ingress.kubernetes.io` denied the request: ingress contains invalid paths: path `/.well-known/acme-challenge/oTw4h9_WsobTRn5COTSyaiAx3aWn0M7_aYisoz1gXQw` cannot be used with `pathType` Exact
+
+If you use `ingress-nginx`, choose **one** of the following two options:
+
+#### Option 1. Disable the `ACMEHTTP01IngressPathTypeExact` feature in cert-manager
+
+To disable the `ACMEHTTP01IngressPathTypeExact` feature,
+to reinstate the old `PathType: ImplementationSpecific` behavior,
+use the following Helm values when installing cert-manager:
+
+```yaml
+# values.yaml
+config:
+  featureGates:
+    # Disable the use of Exact PathType in Ingress resources, to work around a bug in ingress-nginx
+    # https://github.com/kubernetes/ingress-nginx/issues/11176
+    ACMEHTTP01IngressPathTypeExact: false
+```
+
+#### Option 2. Disable the `strict-validate-path-type` option in ingress-nginx
+
+To disable the buggy strict path validation,
+use the following Helm values when installing `ingress-nginx`:
+
+```yaml
+# values.yaml
+controller:
+  config:
+    # Disable strict path validation, to work around a bug in ingress-nginx
+    # https://github.com/kubernetes/ingress-nginx/issues/11176
+    strict-validate-path-type: false
+```
+
+#### Option 3. Upgrade `ingress-nginx`
+
+This issue is resolved in `ingress-nginx` versions `v1.13.2` and `v1.12.6`, both released on August 29, 2025.
+
+If you are running ingress-nginx `v1.13.2+` or `v1.12.6+`, you do not need to apply the workarounds described above.  
+
+See the [fix commit](https://github.com/kubernetes/ingress-nginx/commit/618aae18515213bcf3fb820e6f8c234703d844b2)  
+
 ### ACME Certificate Profiles
 
 cert-manager now supports the selection of ACME certificate profiles, allowing
@@ -132,6 +201,48 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@ianarsenault](https://github.com/ianarsenault)
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
+
+## `v1.18.2`
+
+We fixed a bug in the CSR's name constraints construction (only applies if you have enabled the `NameConstraints` feature gate).
+We dropped the new `global.rbac.disableHTTPChallengesRole` Helm option due to a bug we found, this feature will be released in `v1.19` instead.
+
+Changes since `v1.18.1`:
+
+### Bug or Regression
+
+- BUGFIX: permitted URI domains were incorrectly used to set the excluded URI domains in the CSR's name constraints ([`#7833`][#7833])
+- Reverted adding the `global.rbac.disableHTTPChallengesRole` Helm option. ([`#7837`][#7837])
+
+[#7833]: https://github.com/cert-manager/cert-manager/issues/7833
+[#7837]: https://github.com/cert-manager/cert-manager/issues/7837
+
+## `v1.18.1`
+
+We have added a new feature gate `ACMEHTTP01IngressPathTypeExact`, to allow
+`ingress-nginx` users to turn off the new default Ingress `PathType: Exact`
+behavior, in ACME HTTP01 Ingress challenge solvers.
+
+We have increased the ACME challenge authorization timeout to two minutes, which we hope will fix a timeout error (`error waiting for authorization`), which has been reported by multiple users, since the release of cert-manager `v1.16.0`.
+This change should fix the following issues: [`#7337`][#7337], [`#7444`][#7444], and [`#7685`][#7685].
+
+[#7337]: https://github.com/cert-manager/cert-manager/issues/7337
+[#7444]: https://github.com/cert-manager/cert-manager/issues/7444
+[#7685]: https://github.com/cert-manager/cert-manager/issues/7685
+
+Changes since `v1.18.0`:
+
+### Feature
+
+- Added a new feature gate `ACMEHTTP01IngressPathTypeExact`, to allow `ingress-nginx` users to turn off the new default Ingress `PathType: Exact` behavior, in ACME HTTP01 Ingress challenge solvers. ([`#7810`](https://github.com/cert-manager/cert-manager/pull/7810), [`@sspreitzer`](https://github.com/sspreitzer))
+
+### Bug or Regression
+
+- ACME: Increased challenge authorization timeout to 2 minutes to fix `error waiting for authorization`. ([`#7801`](https://github.com/cert-manager/cert-manager/pull/7801), [`@hjoshi123`](https://github.com/hjoshi123))
+
+### Other (Cleanup or Flake)
+
+- Use the latest version of ingress-nginx in E2E tests to ensure compatibility ([`#7807`](https://github.com/cert-manager/cert-manager/pull/7807), [`@wallrj`](https://github.com/wallrj))
 
 ## `v1.18.0`
 

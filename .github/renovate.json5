@@ -1,0 +1,18 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'github>cert-manager/renovate-config:default.json5',
+  ],
+  packageRules: [
+    {
+      groupName: 'Misc NPM packages',
+      matchManagers: [
+        'npm',
+      ],
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+      ],
+    },
+  ],
+}

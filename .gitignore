@@ -50,6 +50,7 @@ public/feed.*
 
 # IntelliJ
 .idea
+*.iml
 
 # Our release-process.md tells us to run 'sed' commands that create .bak files.
 *.bak

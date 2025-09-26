@@ -323,10 +323,6 @@
               "path": "/docs/installation/helm.md"
             },
             {
-              "title": "c. OperatorHub (OLM)",
-              "path": "/docs/installation/operator-lifecycle-manager.md"
-            },
-            {
               "title": "d. Continuous Deployment",
               "path": "/docs/installation/continuous-deployment-and-gitops.md"
             },
@@ -379,7 +375,7 @@
                   "path": "/docs/configuration/vault.md"
                 },
                 {
-                  "title": "Venafi",
+                  "title": "CyberArk",
                   "path": "/docs/configuration/venafi.md"
                 },
                 {
@@ -644,7 +640,7 @@
               "path": "/docs/tutorials/acme/pomerium-ingress.md"
             },
             {
-              "title": "EKS + Ingress + Venafi",
+              "title": "EKS + Ingress + CyberArk",
               "path": "/docs/tutorials/venafi/venafi.md"
             },
             {
@@ -746,6 +742,10 @@
             {
               "title": "Running End-to-End Tests",
               "path": "/docs/contributing/e2e.md"
+            },
+            {
+              "title": "OSS-Fuzz Tests",
+              "path": "/docs/contributing/oss-fuzz.md"
             },
             {
               "title": "Implementing External Issuers",
@@ -867,6 +867,11 @@
             {
               "title": "API Reference",
               "path": "/docs/reference/api-docs.md"
+            },
+
+            {
+              "title": "Annotations",
+              "path": "/docs/reference/annotations.md"
             },
 
             {

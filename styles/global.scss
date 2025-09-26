@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'Hind';
+  font-family: Hind;
   src: url('/fonts/Hind-Regular.woff2') format('woff2'),
     url('/fonts/Hind-Regular.woff') format('woff');
   font-weight: normal;
@@ -8,7 +8,7 @@
 }
 
 @font-face {
-  font-family: 'Hind';
+  font-family: Hind;
   src: url('/fonts/Hind-Medium.woff2') format('woff2'),
     url('/fonts/Hind-medium.woff') format('woff');
   font-weight: 500;
@@ -17,7 +17,7 @@
 }
 
 @font-face {
-  font-family: 'Hind';
+  font-family: Hind;
   src: url('/fonts/Hind-SemiBold.woff2') format('woff2'),
     url('/fonts/Hind-SemiBold.woff') format('woff');
   font-weight: 600;
@@ -26,7 +26,7 @@
 }
 
 @font-face {
-  font-family: 'Hind';
+  font-family: Hind;
   src: url('/fonts/Hind-Bold.woff2') format('woff2'),
     url('/fonts/Hind-Bold.woff') format('woff');
   font-weight: 700;
@@ -35,15 +35,16 @@
 }
 
 @font-face {
-  font-family: 'Montserrat';
+  font-family: Montserrat;
   src: url('/fonts/Montserrat-SemiBold.woff2') format('woff2'),
     url('/fonts/Montserrat-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'Montserrat';
+  font-family: Montserrat;
   src: url('/fonts/Montserrat-Bold.woff2') format('woff2'),
     url('/fonts/Montserrat-Bold.woff') format('woff');
   font-weight: 700;
@@ -91,6 +92,7 @@ select {
   background: white;
   z-index: 1000;
   max-height: 400px;
+
   @apply shadow-lg;
 }
 
@@ -113,10 +115,7 @@ select {
 .btn-primary::before {
   position: absolute;
   content: '';
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   background-image: linear-gradient(141.3deg, #326ce5 14.53%, #326ce5 129.58%);
   z-index: -1;
   transition: opacity 0.5s linear;
@@ -152,20 +151,32 @@ a.hidden-link {
   margin-bottom: 5px;
 }
 
-div.rotate th:nth-child(5),th:nth-child(6),th:nth-child(7),th:nth-child(8) {
-  writing-mode: vertical-rl;
-  padding-top: 1.3em;
-  padding-bottom: 0;
-  line-height: 1.2em;
-  text-align: left;
-  vertical-align: middle;
-}
+div.rotate {
+  table, th, td {
+    border: 0;
+    border-collapse: collapse;
+  }
 
-div.rotate th:nth-child(1),th:nth-child(3),td:nth-child(1),td:nth-child(3),td:nth-child(5),td:nth-child(6),td:nth-child(7),td:nth-child(8) {
-  text-align: center;
-}
+  th:nth-child(5),
+  th:nth-child(6),
+  th:nth-child(7),
+  th:nth-child(8) {
+    writing-mode: vertical-rl;
+    padding-top: 1.3em;
+    padding-bottom: 0;
+    line-height: 1.2em;
+    text-align: left;
+    vertical-align: middle;
+  }
 
-div.rotate table, th, td {
-  border: 0px;
-  border-collapse: collapse;
+  th:nth-child(1),
+  th:nth-child(3),
+  td:nth-child(1),
+  td:nth-child(3),
+  td:nth-child(5),
+  td:nth-child(6),
+  td:nth-child(7),
+  td:nth-child(8) {
+    text-align: center;
+  }
 }
