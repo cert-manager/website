@@ -457,7 +457,7 @@ page if a step is missing or if it is outdated.
 
 12. In this section, we will be creating the description for the GitHub Release.
 
-    Copy the content of the release-notes-X.Y.md document into the GitHub release description.
+    Copy the content of the `release-notes-X.Y.md` document into the GitHub release description.
 
 13. Merge the pull request containing the Helm chart:
 
