@@ -58,19 +58,13 @@ If you need to release a version of cert-manager 1.7 or earlier see [older relea
 
 First, ensure that you have all the tools required to perform a cert-manager release:
 
-1. Install the [`release-notes`](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md) CLI:
-
-   ```bash
-   go install k8s.io/release/cmd/release-notes@v0.13.0
-   ```
-
-2. Install our [`cmrel`](https://github.com/cert-manager/release) CLI:
+1. Install our [`cmrel`](https://github.com/cert-manager/release) CLI:
 
    ```bash
    go install github.com/cert-manager/release/cmd/cmrel@latest
    ```
 
-3. Clone the `cert-manager/release` repo:
+2. Clone the `cert-manager/release` repo:
 
    ```bash
    # Don't clone it from inside the cert-manager repo folder.
@@ -78,30 +72,30 @@ First, ensure that you have all the tools required to perform a cert-manager rel
    cd release
    ```
 
-4. Install the [`gcloud`](https://cloud.google.com/sdk/) CLI.
-5. [Login](https://cloud.google.com/sdk/docs/authorizing#running_gcloud_auth_login)
+3. Install the [`gcloud`](https://cloud.google.com/sdk/) CLI.
+4. [Login](https://cloud.google.com/sdk/docs/authorizing#running_gcloud_auth_login)
    to `gcloud`:
 
    ```bash
    gcloud auth application-default login
    ```
 
-6. Make sure `gcloud` points to the cert-manager-release project:
+5. Make sure `gcloud` points to the cert-manager-release project:
 
    ```bash
    gcloud config set project cert-manager-release
    export CLOUDSDK_CORE_PROJECT=cert-manager-release # this is used by cmrel
    ```
 
-7. Get a GitHub access token [here](https://github.com/settings/tokens)
+6. Get a GitHub access token [here](https://github.com/settings/tokens)
    with no scope ticked. It is used only by the `release-notes` CLI to
    avoid API rate limiting since it will go through all the PRs one by one.
 
-8. Ensure that you have `gsutil` installed; it's part of the Google Cloud SDK.
+7. Ensure that you have `gsutil` installed; it's part of the Google Cloud SDK.
 
-9. Ensure you have `cosign` installed. See [the cosign installation instructions](https://docs.sigstore.dev/cosign/system_config/installation/).
+8. Ensure you have `cosign` installed. See [the cosign installation instructions](https://docs.sigstore.dev/cosign/system_config/installation/).
 
-10. Ensure you have permissions to push to the OCI Helm chart registry, `quay.io/jetstack/charts`. You may need to run commands from [Helm's documentation](https://helm.sh/docs/topics/registries/#commands-for-working-with-registries).
+9. Ensure you have permissions to push to the OCI Helm chart registry, `quay.io/jetstack/charts`. You may need to run commands from [Helm's documentation](https://helm.sh/docs/topics/registries/#commands-for-working-with-registries).
     Specifically, you will need to have run `helm registry login -u=USERNAME -p=PASSWORD quay.io` to authenticate with the registry.
     Credentials can be obtained from the `quay.io` web UI if you're already a member of the `jetstack` organization on Quay.
 
@@ -134,43 +128,12 @@ page if a step is missing or if it is outdated.
 
    [^1]: One or more "patch pre-releases" may be created to allow voluntary community testing of a bug fix or security fix before the fix is made generally available. The suffix `-beta` must be used for patch pre-releases.
 
-2. Set the 4 environment variables by copying the following snippet in your
-   shell table:
+2. Set the `RELEASE_VERSION` environment variable by pasting the following snippet into your
+   shell:
 
      ```bash
      export RELEASE_VERSION="v1.3.0-alpha.0"
-     export START_TAG="v1.2.0"
-     export END_REV="release-1.3"
-     export BRANCH="release-1.3"
      ```
-
-    > **Note:** To help you fill in the correct values, use the following
-    > examples:
-    >
-    > | Variable          | Example 1        | Example 2        | Example 2        | Example 3     | Example 4     |
-    > | ----------------- | ---------------- | ---------------- | ---------------- | ------------- | ------------- |
-    > |                   | initial alpha    | subsequent alpha | beta release     | final release | patch release |
-    > | `RELEASE_VERSION` | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.3.0-beta.0`  | `v1.3.0`      | `v1.3.1`      |
-    > | `START_TAG`       | `v1.2.0`         | `v1.3.0-alpha.0` | `v1.3.0-alpha.1` | `v1.2.0`\*    | `v1.3.0`      |
-    > | `END_REV`         | `master`         | `master`         | `release-1.3`    | `release-1.3` | `release-1.3` |
-    > | `BRANCH`          | `master`         | `master`         | `release-1.3`    | `release-1.3` | `release-1.3` |
-    >
-    > \*Do not use a patch here (e.g., no `v1.2.3`). It must be `v1.2.0`:
-    > you must use the latest tag that belongs to the release branch you are
-    > releasing on; in the above example, the release branch is
-    > `release-1.3`, and the latest tag on that branch is `v1.2.0`.
-
-    > **Note:** The 4 variables are described in [the README of the
-   `release-notes`
-   tool](https://github.com/kubernetes/release/blob/master/cmd/release-notes/README.md#options).
-   For your convenience, the following table summarizes what you need to know:
-    >
-    > | Variable          | Description                             |
-    > | ----------------- | --------------------------------------- |
-    > | `RELEASE_VERSION` | The git tag                             |
-    > | `START_TAG`\*     | The git tag of the "previous"\* release |
-    > | `END_REV`         | Name of your release branch (inclusive) |
-    > | `BRANCH`          | Name of your release branch             |
 
 3. **(final release only)** Prepare the Website "Upgrade Notes" PR.
 
@@ -182,110 +145,7 @@ page if a step is missing or if it is outdated.
 
    This can be prepared ahead of time.
 
-4. **(final + patch releases)** Prepare the Website "Release Notes" PR.
-
-     **⚠️ This step can be done ahead of time.**
-
-     The steps below need to happen using `master` (**final release**) or
-     `release-1.x` (**patch release**). The PR will be merged after the release.
-
-   Go to the section "Generate `github-release-description.md`" using the
-      instructions further below (<kbd>Ctrl+F</kbd> and look for
-      `github-release-description.md`).
-
-   2. Remove the "Dependencies" section.
-
-   3. For each bullet point in the Markdown file, read the changelog entry and
-      check that it follows the [release-note guidelines](../contributing/contributing-flow.md#release-note-guidelines).
-      If you find a changelog entry that doesn't follow the guidelines, then:
-      - Go to that PR and edit the PR description to change the contents of the
-        `release-note` block.
-      - Go back to the release notes page, and copy the same change into
-        `release-notes.md` (or re-generate the file).
-
-      and copy the same change into `release-notes.md` (or re-generate the
-      file).
-
-   4. Add the section "Major themes" and "Community" by taking example on the
-     previous release note pages.
-
-   5. Replace the GitHub issue numbers and GitHub handles (e.g., `#1234` or
-       `@maelvls`) with actual links using the following command:
-
-       ```bash
-       sed -E \
-         -e 's$#([0-9]+)$[#\1](https://github.com/cert-manager/cert-manager/pull/\1)$g' \
-         -e 's$@(\w+)$[@\1](https://github.com/\1)$g' \
-         github-release-description.md >release-notes.md
-       ```
-
-   6. Move `release-notes.md` to the website repo:
-
-      ```bash
-      # From the cert-manager repo.
-      mv release-notes.md ../website/content/docs/release-notes-1.X.md
-      ```
-
-   7. Add an entry to `content/docs/manifest.json`:
-
-        ```diff
-         {
-           "title": "Release Notes",
-           "routes": [
-        +    {
-        +      "title": "v1.12",
-        +      "path": "/docs/release-notes/release-notes-1.12.md"
-        +    },
-        ```
-
-5. **(final + patch release)** Prepare the Website "Bump Versions" PR.
-
-   **⚠️ This step can be done ahead of time.**
-
-   In that PR:
-
-   1. (**final release**) Update the section "Supported releases" in the
-     [supported-releases](../releases/README.md) page.
-   2. (**final release**) Update the section "How we determine supported
-     Kubernetes versions" on the
-     [supported-releases](../releases/README.md) page.
-   3. (**final release**) Bump the version that appears in
-     `scripts/gendocs/generate-new-import-path-docs`. For example:
-
-      ```diff
-      -LATEST_VERSION="v1.11-docs"
-      +LATEST_VERSION="v1.12-docs"
-
-      -genversionwithcli "release-1.11" "$LATEST_VERSION"
-      +genversionwithcli "release-1.12" "$LATEST_VERSION"
-      ```
-
-   4. (**final + patch release of the latest minor version**) Bump the latest
-      cert-manager version variable in the `content/docs/variables.json` file.
-
-      ```diff
-      -"cert_manager_latest_version": "v1.14.2",
-      +"cert_manager_latest_version": "v1.14.3",
-      ```
-
-   5. (**final release only**) Freeze the `docs/` folder by running the following script:
-
-      ```bash
-      # From the website repository, on the master branch.
-      ./scripts/freeze-docs 1.16
-      ```
-
-      This copies the `docs/` folder to a versioned folder (e.g. `v1.15-docs`) and removes any
-      folders which should not be present in versioned docs.
-
-   6. (**final + patch releases**) Update the [API docs](https://cert-manager.io/docs/reference/api-docs/) and [CLI docs](https://cert-manager.io/docs/cli//):
-
-      ```bash
-      # From the website repository, on the master branch.
-      ./scripts/gendocs/generate
-      ```
-
-6. Check that the `origin` remote is correct. To do that, run the following
+4. Check that the `origin` remote is correct. To do that, run the following
    command and make sure it returns the upstream
    `https://github.com/cert-manager/cert-manager.git`:
 
@@ -301,7 +161,7 @@ page if a step is missing or if it is outdated.
     origin  https://github.com/cert-manager/cert-manager (push)
     ```
 
-7. Place yourself on the correct branch:
+5. Place yourself on the correct branch:
 
    - **(initial alpha and subsequent alpha)**: place yourself on the `master`
      branch:
@@ -361,7 +221,7 @@ page if a step is missing or if it is outdated.
    >  This is only a temporary change to allow you to update the branch.
    >  [Prow will re-apply the branch protection within 24 hours](https://docs.prow.k8s.io/docs/components/optional/branchprotector/#updating).
 
-8. Create the required tags for the new release locally and push it upstream (starting the cert-manager build):
+6. Create the required tags for the new release locally and push it upstream (starting the cert-manager build):
 
      ```bash
      echo $RELEASE_VERSION
@@ -380,7 +240,7 @@ page if a step is missing or if it is outdated.
       > kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
       > the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-9. <details>
+7. <details>
    <summary>**ONLY for (1.12, 1.13, and 1.14)**</summary>
 
    In this step, we make sure the Go module
@@ -452,45 +312,7 @@ page if a step is missing or if it is outdated.
 
    </details>
 
-10. In this section, we will be creating the description for the GitHub Release.
-
-    > **Note:** This step is about creating the description that will be
-    > copy-pasted into the GitHub release page. The creation of the "Release
-    > Note" page on the website is done in a previous step.
-
-    1. Check that all the 4 environment variables are ready:
-
-        ```bash
-        echo $RELEASE_VERSION
-        echo $START_TAG
-        echo $END_REV
-        echo $BRANCH
-        ```
-
-    2. Generate `github-release-description.md` with the following command:
-
-       ```bash
-       # Must be run from the cert-manager folder.
-       export GITHUB_TOKEN=$(gh auth token)
-       git fetch origin $BRANCH
-       export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
-       release-notes --debug --repo-path cert-manager \
-         --org cert-manager --repo cert-manager \
-         --required-author "cert-manager-prow[bot]" \
-         --markdown-links=false \
-         --output github-release-description.md
-       ```
-
-        <div className="pageinfo pageinfo-info"><p>
-        The GitHub token **does not need any scope**. The token is required
-        only to avoid rate-limits imposed on anonymous API users.
-        </p></div>
-
-    3. Add a one-sentence summary at the top.
-
-    4. **(final release only)** Write the "Community" section, following the example of past releases such as [v1.12.0](https://github.com/cert-manager/cert-manager/releases/tag/v1.12.0). If there are any users who didn't make code contributions but helped in other ways (testing, PR discussion, etc), be sure to thank them here!
-
-11. Check that the build that was automatically triggered when you pushed the
+8. Check that the build that was automatically triggered when you pushed the
     tag is complete and send Slack messages about the release:
 
     1. Send a first Slack message to `#cert-manager-dev`:
@@ -516,7 +338,7 @@ page if a step is missing or if it is outdated.
         <code>cmrel makestage</code> build logs: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
         </p></div>
 
-12. Run `cmrel publish`:
+9. Run `cmrel publish`:
 
     1. Do a `cmrel publish` dry-run to ensure that all the staged resources are
        valid. Run the following command:
@@ -561,22 +383,83 @@ page if a step is missing or if it is outdated.
         Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
         </p></div>
 
-13. Publish the GitHub release:
+10. Prepare the Website "Release Notes" PR.
 
-    1. Visit the draft GitHub release and paste in the release notes that you
-       generated earlier. You will need to manually edit the content to match
-       the style of earlier releases. In particular, remember to remove
-       package-related changes.
+   1. Bump the latest
+      cert-manager version variable in the `content/docs/variables.json` file.
 
-    2. **(initial alpha, subsequent alpha and beta only)** Tick the box "This is
-       a pre-release".
+      ```diff
+      -"cert_manager_latest_version": "v1.14.2",
+      +"cert_manager_latest_version": "v1.14.3",
+      ```
 
-    3. **(final release and patch release)** Tick the box "Set as the latest
-       release".
+   2. Run `make generate-release-notes`.
 
-    4. Click "Publish" to make the GitHub release live.
+   3. For each bullet point in the Markdown file, read the changelog entry and
+      check that it follows the [release-note guidelines](../contributing/contributing-flow.md#release-note-guidelines).
+      If you find a changelog entry that doesn't follow the guidelines, then:
+      - Go to that PR and edit the PR description to change the contents of the
+        `release-note` block.
+      - Re-run the release-notes tool
+   4. Add the section "Major themes" and "Community" by taking example on the
+     previous release note pages.
 
-14. Merge the pull request containing the Helm chart:
+   5. **(first pre-release only)** Add an entry to `content/docs/manifest.json`:
+
+        ```diff
+         {
+           "title": "Release Notes",
+           "routes": [
+        +    {
+        +      "title": "v1.12",
+        +      "path": "/docs/release-notes/release-notes-1.12.md"
+        +    },
+        ```
+
+11. **(final + patch release)** Prepare the Website "Bump Versions" PR.
+
+   **⚠️ This step can be done ahead of time.**
+
+   In that PR:
+
+   1. (**final release**) Update the section "Supported releases" in the
+     [supported-releases](../releases/README.md) page.
+   2. (**final release**) Update the section "How we determine supported
+     Kubernetes versions" on the
+     [supported-releases](../releases/README.md) page.
+   3. (**final release**) Bump the version that appears in
+     `scripts/gendocs/generate-new-import-path-docs`. For example:
+
+      ```diff
+      -LATEST_VERSION="v1.11-docs"
+      +LATEST_VERSION="v1.12-docs"
+
+      -genversionwithcli "release-1.11" "$LATEST_VERSION"
+      +genversionwithcli "release-1.12" "$LATEST_VERSION"
+      ```
+
+   4. (**final release only**) Freeze the `docs/` folder by running the following script:
+
+      ```bash
+      # From the website repository, on the master branch.
+      ./scripts/freeze-docs 1.16
+      ```
+
+      This copies the `docs/` folder to a versioned folder (e.g. `v1.15-docs`) and removes any
+      folders which should not be present in versioned docs.
+
+   5. (**final + patch releases**) Update the [API docs](https://cert-manager.io/docs/reference/api-docs/) and [CLI docs](https://cert-manager.io/docs/cli//):
+
+      ```bash
+      # From the website repository, on the master branch.
+      ./scripts/gendocs/generate
+      ```
+
+12. In this section, we will be creating the description for the GitHub Release.
+
+    Copy the content of the release-notes-X.Y.md document into the GitHub release description.
+
+13. Merge the pull request containing the Helm chart:
 
     Important: This PR can currently only be merged by CyberArk employees, but we're aiming to fix that soon. Changing this
     will involve us coming up with a plan for migrating where our Helm charts are stored and ensuring we don't break anyone.
@@ -597,7 +480,7 @@ page if a step is missing or if it is outdated.
     5. Merge the PR
     6. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-15. Upload the Helm chart to the OCI registry:
+14. Upload the Helm chart to the OCI registry:
 
     1. Run the following command to upload the Helm chart to the OCI registry, and sign it with cosign:
 
@@ -615,6 +498,21 @@ page if a step is missing or if it is outdated.
        ```
 
        Look for config, content and provenance layers in the output.
+
+15. Publish the GitHub release:
+
+    1. Visit the draft GitHub release and paste in the release notes that you
+       generated earlier. You will need to manually edit the content to match
+       the style of earlier releases. In particular, remember to remove
+       package-related changes.
+
+    2. **(initial alpha, subsequent alpha and beta only)** Tick the box "This is
+       a pre-release".
+
+    3. **(final release and patch release)** Tick the box "Set as the latest
+       release".
+
+    4. Click "Publish" to make the GitHub release live.
 
 16. **(final + patch releases)** Merge the 4 Website PRs:
 
