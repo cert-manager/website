@@ -40,6 +40,7 @@ Flags:
       --enable-profiling                                     Enable profiling for controller.
       --extra-certificate-annotations strings                Extra annotation to be added by the ingress-shim controller to certificate object
       --feature-gates mapStringBool                          A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
+                                                             ACMEHTTP01IngressPathTypeExact=true|false (BETA - default=true)
                                                              AllAlpha=true|false (ALPHA - default=false)
                                                              AllBeta=true|false (BETA - default=false)
                                                              DefaultPrivateKeyRotationPolicyAlways=true|false (BETA - default=true)

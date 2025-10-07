@@ -22,6 +22,7 @@ Flags:
       --dynamic-serving-leaf-duration duration               leaf duration of serving certificates (default 168h0m0s)
       --enable-profiling                                     Enable profiling for webhook.
       --feature-gates mapStringBool                          A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
+                                                             ACMEHTTP01IngressPathTypeExact=true|false (BETA - default=true)
                                                              AllAlpha=true|false (ALPHA - default=false)
                                                              AllBeta=true|false (BETA - default=false)
                                                              DefaultPrivateKeyRotationPolicyAlways=true|false (BETA - default=true)

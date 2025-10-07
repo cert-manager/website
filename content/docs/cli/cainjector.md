@@ -25,7 +25,7 @@ Flags:
       --feature-gates mapStringBool                          A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
                                                              AllAlpha=true|false (ALPHA - default=false)
                                                              AllBeta=true|false (BETA - default=false)
-                                                             CAInjectorMerging=true|false (ALPHA - default=false)
+                                                             CAInjectorMerging=true|false (BETA - default=true)
                                                              ServerSideApply=true|false (ALPHA - default=false)
   -h, --help                                                 help for cainjector
       --kubeconfig string                                    Paths to a kubeconfig. Only required if out-of-cluster.
