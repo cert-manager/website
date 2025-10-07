@@ -128,22 +128,18 @@ page if a step is missing or if it is outdated.
 
    [^1]: One or more "patch pre-releases" may be created to allow voluntary community testing of a bug fix or security fix before the fix is made generally available. The suffix `-beta` must be used for patch pre-releases.
 
-2. Set the `RELEASE_VERSION` environment variable by pasting the following snippet into your
+2. Send a first Slack message to `#cert-manager-dev`:
+
+    <div className="pageinfo pageinfo-primary"><p>
+    Releasing <code>[[VAR::cert_manager_latest_version]]</code> 🧵
+    </p></div>
+
+3. Set the vesions as environment variables editing and then pasting the following snippet into your
    shell:
 
      ```bash
-     export RELEASE_VERSION="v1.3.0-alpha.0"
+     export RELEASE_VERSION="[[VAR::cert_manager_latest_version]]"
      ```
-
-3. **(final release only)** Prepare the Website "Upgrade Notes" PR.
-
-   Make sure that a PR with the new upgrade
-   document is ready to be merged on
-   [cert-manager/website](https://github.com/cert-manager/website). See for
-   example, see
-   [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1.md).
-
-   This can be prepared ahead of time.
 
 4. Check that the `origin` remote is correct. To do that, run the following
    command and make sure it returns the upstream
@@ -315,13 +311,7 @@ page if a step is missing or if it is outdated.
 8. Check that the build that was automatically triggered when you pushed the
     tag is complete and send Slack messages about the release:
 
-    1. Send a first Slack message to `#cert-manager-dev`:
-
-        <div className="pageinfo pageinfo-primary"><p>
-        Releasing <code>1.2.0-alpha.2</code> 🧵
-        </p></div>
-
-    2. Check that the build completed in the
+    1. Check that the build completed in the
        [GCB Build History](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
           <div className="pageinfo pageinfo-info"><p>
@@ -330,7 +320,7 @@ page if a step is missing or if it is outdated.
           properly redacted but sometimes we forget to update this.
           </p></div>
 
-    3. Copy the build logs URL and send a second Slack message in reply to this
+    2. Copy the build logs URL and send a second Slack message in reply to this
        first message with the Cloud Build job link. For example, the message
        might look like:
 
@@ -416,7 +406,17 @@ page if a step is missing or if it is outdated.
         +    },
         ```
 
-11. **(final + patch release)** Prepare the Website "Bump Versions" PR.
+11. **(final release only)** Prepare the Website "Upgrade Notes" PR.
+
+   Make sure that a PR with the new upgrade
+   document is ready to be merged on
+   [cert-manager/website](https://github.com/cert-manager/website). See for
+   example, see
+   [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1.md).
+
+   This can be prepared ahead of time.
+
+12. **(final + patch release)** Prepare the Website "Bump Versions" PR.
 
    **⚠️ This step can be done ahead of time.**
 
@@ -455,11 +455,11 @@ page if a step is missing or if it is outdated.
       ./scripts/gendocs/generate
       ```
 
-12. In this section, we will be creating the description for the GitHub Release.
+13. In this section, we will be creating the description for the GitHub Release.
 
     Copy the content of the `release-notes-X.Y.md` document into the GitHub release description.
 
-13. Merge the pull request containing the Helm chart:
+14. Merge the pull request containing the Helm chart:
 
     Important: This PR can currently only be merged by CyberArk employees, but we're aiming to fix that soon. Changing this
     will involve us coming up with a plan for migrating where our Helm charts are stored and ensuring we don't break anyone.
@@ -480,7 +480,7 @@ page if a step is missing or if it is outdated.
     5. Merge the PR
     6. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-14. Upload the Helm chart to the OCI registry:
+15. Upload the Helm chart to the OCI registry:
 
     1. Run the following command to upload the Helm chart to the OCI registry, and sign it with cosign:
 
@@ -499,7 +499,7 @@ page if a step is missing or if it is outdated.
 
        Look for config, content and provenance layers in the output.
 
-15. Publish the GitHub release:
+16. Publish the GitHub release:
 
     1. Visit the draft GitHub release and paste in the release notes that you
        generated earlier. You will need to manually edit the content to match
@@ -514,7 +514,7 @@ page if a step is missing or if it is outdated.
 
     4. Click "Publish" to make the GitHub release live.
 
-16. **(final + patch releases)** Merge the 4 Website PRs:
+17. **(final + patch releases)** Merge the 4 Website PRs:
 
     1. Merge the PRs "Release Notes", "Upgrade Notes", and "Freeze And Bump
        Versions" that you have created previously.
@@ -532,7 +532,7 @@ page if a step is missing or if it is outdated.
 
       [ff-release-next]: https://github.com/cert-manager/website/compare/master...release-next?quick_pull=1&title=%5BPost-Release%5D+Merge+release-next+into+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
 
-17. Post a Slack message as an answer to the first message. Toggle the check
+18. Post a Slack message as an answer to the first message. Toggle the check
    box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -540,7 +540,7 @@ page if a step is missing or if it is outdated.
     https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0 🎉
     </p></div>
 
-18. **(final release only)** Show the release to the world:
+19. **(final release only)** Show the release to the world:
 
     1. Send an email to
        [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
@@ -556,7 +556,7 @@ page if a step is missing or if it is outdated.
     4. Create a post on the cert-manager BlueSky account! Login details are in the cert-manager 1password.
        ([Example post](https://bsky.app/profile/cert-manager.bsky.social/post/3lhdtn7c2222u))
 
-19. Proceed to the post-release "testing and release" steps:
+20. Proceed to the post-release "testing and release" steps:
 
     1. **(initial beta only)** Create a PR on
        [cert-manager/testing](https://github.com/cert-manager/testing) in order to
