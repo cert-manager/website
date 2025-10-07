@@ -20,9 +20,6 @@ description: >-
     <a href="#controller.config.cert-manager.io%2fv1alpha1">controller.config.cert-manager.io/v1alpha1</a>
   </li>
   <li>
-    <a href="#meta.cert-manager.io%2fv1">meta.cert-manager.io/v1</a>
-  </li>
-  <li>
     <a href="#webhook.config.cert-manager.io%2fv1alpha1">webhook.config.cert-manager.io/v1alpha1</a>
   </li>
 </ul>
@@ -190,9 +187,7 @@ description: >-
             <td>
               <code>issuerRef</code>
               <br />
-              <em>
-                <a href="#meta.cert-manager.io/v1.ObjectReference">ObjectReference</a>
-              </em>
+              <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.IssuerReference</em>
             </td>
             <td>
               <p>References a properly configured ACME-type Issuer which should be used to create this Challenge. If the Issuer does not exist, processing will be retried. If the Issuer is not an &lsquo;ACME&rsquo; Issuer, an error will be returned and the Challenge will be marked as failed.</p>
@@ -286,9 +281,7 @@ description: >-
             <td>
               <code>issuerRef</code>
               <br />
-              <em>
-                <a href="#meta.cert-manager.io/v1.ObjectReference">ObjectReference</a>
-              </em>
+              <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.IssuerReference</em>
             </td>
             <td>
               <p>IssuerRef references a properly configured ACME-type Issuer which should be used to create this Order. If the Issuer does not exist, processing will be retried. If the Issuer is not an &lsquo;ACME&rsquo; Issuer, an error will be returned and the Order will be marked as failed.</p>
@@ -770,6 +763,7 @@ description: >-
         <em>[]sigs.k8s.io/gateway-api/apis/v1.ParentReference</em>
       </td>
       <td>
+        <em>(Optional)</em>
         <p>
           When solving an HTTP-01 challenge, cert-manager creates an HTTPRoute. cert-manager needs to know which parentRefs should be used when creating the HTTPRoute. Usually, the parentRef references a Gateway. See:
           <a href="https://gateway-api.sigs.k8s.io/api-types/httproute/#attaching-to-gateways">https://gateway-api.sigs.k8s.io/api-types/httproute/#attaching-to-gateways</a>
@@ -942,6 +936,47 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Labels that should be added to the created ACME HTTP01 solver pods.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodResources">ACMEChallengeSolverHTTP01IngressPodResources</h3>
+<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSpec">ACMEChallengeSolverHTTP01IngressPodSpec</a>) </p>
+<div>
+  <p>ACMEChallengeSolverHTTP01IngressPodResources defines resource requirements for ACME HTTP01 solver pods. To keep API surface essential, this trims down the &lsquo;corev1.ResourceRequirements&rsquo; type to only include the Requests and Limits fields.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>limits</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#resourcelist-v1-core">Kubernetes core/v1.ResourceList</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> Limits describes the maximum amount of compute resources allowed. More info: <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</a> </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>requests</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#resourcelist-v1-core">Kubernetes core/v1.ResourceList</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to the global values configured via controller flags. Requests cannot exceed Limits. More info: <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</a> </p>
       </td>
     </tr>
   </tbody>
@@ -1168,6 +1203,19 @@ description: >-
         <p>If specified, the pod&rsquo;s security context</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>resources</code>
+        <br />
+        <em>
+          <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodResources">ACMEChallengeSolverHTTP01IngressPodResources</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>If specified, the pod&rsquo;s resource requirements. These values override the global resource configuration flags. Note that when only specifying resource limits, ensure they are greater than or equal to the corresponding global resource requests configured via controller flags (&ndash;acme-http01-solver-resource-request-cpu, &ndash;acme-http01-solver-resource-request-memory). Kubernetes will reject pod creation if limits are lower than requests, causing challenge failures.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodTemplate">ACMEChallengeSolverHTTP01IngressPodTemplate</h3>
@@ -1293,6 +1341,19 @@ description: >-
               <p>If specified, the pod&rsquo;s security context</p>
             </td>
           </tr>
+          <tr>
+            <td>
+              <code>resources</code>
+              <br />
+              <em>
+                <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodResources">ACMEChallengeSolverHTTP01IngressPodResources</a>
+              </em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p>If specified, the pod&rsquo;s resource requirements. These values override the global resource configuration flags. Note that when only specifying resource limits, ensure they are greater than or equal to the corresponding global resource requests configured via controller flags (&ndash;acme-http01-solver-resource-request-cpu, &ndash;acme-http01-solver-resource-request-memory). Kubernetes will reject pod creation if limits are lower than requests, causing challenge failures.</p>
+            </td>
+          </tr>
         </table>
       </td>
     </tr>
@@ -1382,9 +1443,7 @@ description: >-
       <td>
         <code>keySecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <p> keySecretRef is a Secret Key Selector referencing a data item in a Kubernetes Secret which holds the symmetric MAC key of the External Account Binding. The <code>key</code> is the index string that is paired with the key data in the Secret and should not be confused with the key data itself, or indeed with the External Account Binding keyID above. The secret key stored in the Secret <strong>must</strong> be un-padded, base64 URL encoded data. </p>
@@ -1447,7 +1506,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>PreferredChain is the chain to use if the ACME server outputs multiple. PreferredChain is no guarantee that this one gets delivered by the ACME endpoint. For example, for Let&rsquo;s Encrypt&rsquo;s shortest ECDSA chain you would use: &ldquo;ISRG Root X2&rdquo; or &ldquo;ISRG Root X1&rdquo; for the (old default) Let&rsquo;s Encrypt root CA. This value picks the first certificate bundle in the combined set of ACME default and alternative chains that has a root-most certificate with this value as its issuer&rsquo;s commonname.</p>
+        <p>PreferredChain is the chain to use if the ACME server outputs multiple. PreferredChain is no guarantee that this one gets delivered by the ACME endpoint. For example, for Let&rsquo;s Encrypt&rsquo;s DST cross-sign you would use: &ldquo;DST Root CA X3&rdquo; or &ldquo;ISRG Root X1&rdquo; for the newer Let&rsquo;s Encrypt root CA. This value picks the first certificate bundle in the combined set of ACME default and alternative chains that has a root-most certificate with this value as its issuer&rsquo;s commonname.</p>
       </td>
     </tr>
     <tr>
@@ -1489,9 +1548,7 @@ description: >-
       <td>
         <code>privateKeySecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <p> PrivateKey is the name of a Kubernetes Secret resource that will be used to store the automatically generated ACME account private key. Optionally, a <code>key</code> may be specified to select a specific entry within the named Secret resource. If <code>key</code> is not specified, a default of <code>tls.key</code> will be used. </p>
@@ -1570,9 +1627,7 @@ description: >-
       <td>
         <code>accountSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td></td>
     </tr>
@@ -1603,9 +1658,7 @@ description: >-
       <td>
         <code>clientTokenSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td></td>
     </tr>
@@ -1613,9 +1666,7 @@ description: >-
       <td>
         <code>clientSecretSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td></td>
     </tr>
@@ -1623,9 +1674,7 @@ description: >-
       <td>
         <code>accessTokenSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td></td>
     </tr>
@@ -1659,9 +1708,7 @@ description: >-
       <td>
         <code>clientSecretSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -1755,9 +1802,7 @@ description: >-
       <td>
         <code>serviceAccountSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -1812,9 +1857,7 @@ description: >-
       <td>
         <code>apiKeySecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -1825,9 +1868,7 @@ description: >-
       <td>
         <code>apiTokenSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -1853,9 +1894,7 @@ description: >-
       <td>
         <code>tokenSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td></td>
     </tr>
@@ -1888,9 +1927,7 @@ description: >-
       <td>
         <code>tsigSecretSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -1917,6 +1954,19 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p> The TSIG Algorithm configured in the DNS supporting RFC2136. Used only when <code>tsigSecretSecretRef</code> and <code>tsigKeyName</code> are defined. Supported values are (case-insensitive): <code>HMACMD5</code> (default), <code>HMACSHA1</code>, <code>HMACSHA256</code> or <code>HMACSHA512</code>. </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>protocol</code>
+        <br />
+        <em>
+          <a href="#acme.cert-manager.io/v1.RFC2136UpdateProtocol">RFC2136UpdateProtocol</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p> Protocol to use for dynamic DNS update queries. Valid values are (case-sensitive) <code>TCP</code> and <code>UDP</code>; <code>UDP</code> (default). </p>
       </td>
     </tr>
   </tbody>
@@ -1962,9 +2012,7 @@ description: >-
       <td>
         <code>accessKeyIDSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -1975,9 +2023,7 @@ description: >-
       <td>
         <code>secretAccessKeySecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -2360,9 +2406,7 @@ description: >-
       <td>
         <code>issuerRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.ObjectReference">ObjectReference</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.IssuerReference</em>
       </td>
       <td>
         <p>References a properly configured ACME-type Issuer which should be used to create this Challenge. If the Issuer does not exist, processing will be retried. If the Issuer is not an &lsquo;ACME&rsquo; Issuer, an error will be returned and the Challenge will be marked as failed.</p>
@@ -2487,9 +2531,7 @@ description: >-
       <td>
         <code>issuerRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.ObjectReference">ObjectReference</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.IssuerReference</em>
       </td>
       <td>
         <p>IssuerRef references a properly configured ACME-type Issuer which should be used to create this Order. If the Issuer does not exist, processing will be retried. If the Issuer is not an &lsquo;ACME&rsquo; Issuer, an error will be returned and the Order will be marked as failed.</p>
@@ -2646,6 +2688,35 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>FailureTime stores the time that this order failed. This is used to influence garbage collection and back-off.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="acme.cert-manager.io/v1.RFC2136UpdateProtocol"> RFC2136UpdateProtocol (<code>string</code> alias) </h3>
+<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRFC2136">ACMEIssuerDNS01ProviderRFC2136</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>&#34;TCP&#34;</p>
+      </td>
+      <td>
+        <p>RFC2136UpdateProtocolTCP utilizes TCP to update queries.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;UDP&#34;</p>
+      </td>
+      <td>
+        <p>RFC2136UpdateProtocolUDP utilizes UDP to update queries.</p>
       </td>
     </tr>
   </tbody>
@@ -3300,9 +3371,7 @@ description: >-
             <td>
               <code>issuerRef</code>
               <br />
-              <em>
-                <a href="#meta.cert-manager.io/v1.ObjectReference">ObjectReference</a>
-              </em>
+              <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.IssuerReference</em>
             </td>
             <td>
               <p>Reference to the issuer responsible for issuing the certificate. If the issuer is namespace-scoped, it must be in the same namespace as the Certificate. If the issuer is cluster-scoped, it can be used from any namespace.</p>
@@ -3519,9 +3588,7 @@ description: >-
             <td>
               <code>issuerRef</code>
               <br />
-              <em>
-                <a href="#meta.cert-manager.io/v1.ObjectReference">ObjectReference</a>
-              </em>
+              <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.IssuerReference</em>
             </td>
             <td>
               <p>Reference to the issuer responsible for issuing the certificate. If the issuer is namespace-scoped, it must be in the same namespace as the Certificate. If the issuer is cluster-scoped, it can be used from any namespace.</p>
@@ -3917,9 +3984,7 @@ description: >-
       <td>
         <code>status</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.ConditionStatus">ConditionStatus</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.ConditionStatus</em>
       </td>
       <td>
         <p> Status of the condition, one of (<code>True</code>, <code>False</code>, <code>Unknown</code>). </p>
@@ -4190,9 +4255,7 @@ description: >-
       <td>
         <code>status</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.ConditionStatus">ConditionStatus</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.ConditionStatus</em>
       </td>
       <td>
         <p> Status of the condition, one of (<code>True</code>, <code>False</code>, <code>Unknown</code>). </p>
@@ -4319,9 +4382,7 @@ description: >-
       <td>
         <code>issuerRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.ObjectReference">ObjectReference</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.IssuerReference</em>
       </td>
       <td>
         <p>Reference to the issuer responsible for issuing the certificate. If the issuer is namespace-scoped, it must be in the same namespace as the Certificate. If the issuer is cluster-scoped, it can be used from any namespace.</p>
@@ -4711,9 +4772,7 @@ description: >-
       <td>
         <code>issuerRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.ObjectReference">ObjectReference</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.IssuerReference</em>
       </td>
       <td>
         <p>Reference to the issuer responsible for issuing the certificate. If the issuer is namespace-scoped, it must be in the same namespace as the Certificate. If the issuer is cluster-scoped, it can be used from any namespace.</p>
@@ -4984,9 +5043,7 @@ description: >-
       <td>
         <code>status</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.ConditionStatus">ConditionStatus</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.ConditionStatus</em>
       </td>
       <td>
         <p> Status of the condition, one of (<code>True</code>, <code>False</code>, <code>Unknown</code>). </p>
@@ -5252,9 +5309,7 @@ description: >-
       <td>
         <code>passwordSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -5621,9 +5676,7 @@ description: >-
       <td>
         <code>passwordSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -5905,9 +5958,7 @@ description: >-
       <td>
         <code>secretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <p> Reference to a key in a Secret that contains the App Role secret used to authenticate with Vault. The <code>key</code> field must be specified and denotes which entry within the Secret resource is used as the app role secret. </p>
@@ -5932,9 +5983,7 @@ description: >-
       <td>
         <code>tokenSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -6112,9 +6161,7 @@ description: >-
       <td>
         <code>caBundleSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -6125,9 +6172,7 @@ description: >-
       <td>
         <code>clientCertSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -6138,9 +6183,7 @@ description: >-
       <td>
         <code>clientKeySecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -6177,9 +6220,7 @@ description: >-
       <td>
         <code>secretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -6239,9 +6280,7 @@ description: >-
       <td>
         <code>apiTokenSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <p>APITokenSecretRef is a secret key selector for the Venafi Cloud API token.</p>
@@ -6327,9 +6366,7 @@ description: >-
       <td>
         <code>credentialsRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.LocalObjectReference">LocalObjectReference</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.LocalObjectReference</em>
       </td>
       <td>
         <p>CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials. The secret must contain the key &lsquo;access-token&rsquo; for the Access Token Authentication, or two keys, &lsquo;username&rsquo; and &lsquo;password&rsquo; for the API Keys Authentication.</p>
@@ -6350,9 +6387,7 @@ description: >-
       <td>
         <code>caBundleSecretRef</code>
         <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>
-        </em>
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
         <em>(Optional)</em>
@@ -6968,166 +7003,6 @@ description: >-
   </tbody>
 </table>
 <hr />
-<h2 id="meta.cert-manager.io/v1">meta.cert-manager.io/v1</h2>
-<div>
-  <p>Package v1 contains meta types for cert-manager APIs</p>
-</div>
-<p>Resource Types:</p>
-<ul></ul>
-<h3 id="meta.cert-manager.io/v1.ConditionStatus"> ConditionStatus (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateCondition">CertificateCondition</a>, <a href="#cert-manager.io/v1.CertificateRequestCondition">CertificateRequestCondition</a>, <a href="#cert-manager.io/v1.IssuerCondition">IssuerCondition</a>) </p>
-<div>
-  <p>ConditionStatus represents a condition&rsquo;s status.</p>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <p>&#34;False&#34;</p>
-      </td>
-      <td>
-        <p>ConditionFalse represents the fact that a given condition is false</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p>&#34;True&#34;</p>
-      </td>
-      <td>
-        <p>ConditionTrue represents the fact that a given condition is true</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p>&#34;Unknown&#34;</p>
-      </td>
-      <td>
-        <p>ConditionUnknown represents the fact that a given condition is unknown</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<h3 id="meta.cert-manager.io/v1.LocalObjectReference">LocalObjectReference</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VenafiTPP">VenafiTPP</a>, <a href="#meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</a>) </p>
-<div>
-  <p>A reference to an object in the same namespace as the referent. If the referent is a cluster-scoped resource (e.g., a ClusterIssuer), the reference instead refers to the resource with the given name in the configured &lsquo;cluster resource namespace&rsquo;, which is set as a flag on the controller component (and defaults to the namespace that cert-manager runs in).</p>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <code>name</code>
-        <br />
-        <em>string</em>
-      </td>
-      <td>
-        <p> Name of the resource being referred to. More info: <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names">https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names</a> </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<h3 id="meta.cert-manager.io/v1.ObjectReference">ObjectReference</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ChallengeSpec">ChallengeSpec</a>, <a href="#acme.cert-manager.io/v1.OrderSpec">OrderSpec</a>, <a href="#cert-manager.io/v1.CertificateRequestSpec">CertificateRequestSpec</a>, <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
-<div>
-  <p>ObjectReference is a reference to an object with a given name, kind and group.</p>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <code>name</code>
-        <br />
-        <em>string</em>
-      </td>
-      <td>
-        <p>Name of the resource being referred to.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>kind</code>
-        <br />
-        <em>string</em>
-      </td>
-      <td>
-        <em>(Optional)</em>
-        <p>Kind of the resource being referred to.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>group</code>
-        <br />
-        <em>string</em>
-      </td>
-      <td>
-        <em>(Optional)</em>
-        <p>Group of the resource being referred to.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<h3 id="meta.cert-manager.io/v1.SecretKeySelector">SecretKeySelector</h3>
-<p>
-  (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEExternalAccountBinding">ACMEExternalAccountBinding</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuer">ACMEIssuer</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAcmeDNS">ACMEIssuerDNS01ProviderAcmeDNS</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAkamai">ACMEIssuerDNS01ProviderAkamai</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderCloudDNS">ACMEIssuerDNS01ProviderCloudDNS</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderCloudflare">ACMEIssuerDNS01ProviderCloudflare</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderDigitalOcean">ACMEIssuerDNS01ProviderDigitalOcean</a>, <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRFC2136">ACMEIssuerDNS01ProviderRFC2136</a>,
-  <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRoute53">ACMEIssuerDNS01ProviderRoute53</a>, <a href="#cert-manager.io/v1.JKSKeystore">JKSKeystore</a>, <a href="#cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</a>, <a href="#cert-manager.io/v1.VaultAppRole">VaultAppRole</a>, <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>, <a href="#cert-manager.io/v1.VaultIssuer">VaultIssuer</a>, <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>, <a href="#cert-manager.io/v1.VenafiCloud">VenafiCloud</a>, <a href="#cert-manager.io/v1.VenafiTPP">VenafiTPP</a>)
-</p>
-<div>
-  <p> A reference to a specific &lsquo;key&rsquo; within a Secret resource. In some instances, <code>key</code> is a required field. </p>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <code>LocalObjectReference</code>
-        <br />
-        <em>
-          <a href="#meta.cert-manager.io/v1.LocalObjectReference">LocalObjectReference</a>
-        </em>
-      </td>
-      <td>
-        <p> (Members of <code>LocalObjectReference</code> are embedded into this type.) </p>
-        <p>The name of the Secret resource being referred to.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>key</code>
-        <br />
-        <em>string</em>
-      </td>
-      <td>
-        <em>(Optional)</em>
-        <p> The key of the entry in the Secret resource&rsquo;s <code>data</code> field to be used. Some instances of this field may be defaulted, in others it may be required. </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<hr />
 <h2 id="webhook.config.cert-manager.io/v1alpha1">webhook.config.cert-manager.io/v1alpha1</h2>
 <div>
   <p>Package v1alpha1 is the v1alpha1 version of the webhook config API.</p>
@@ -7262,5 +7137,5 @@ description: >-
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>3ab737e</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>12a3ef9</code>. </em>
 </p>
