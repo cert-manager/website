@@ -125,9 +125,10 @@ By default, type `NodePort` will be used when you don't set HTTP01 or when you s
 You may wish to change or add to the labels and annotations of solver pods.
 These can be configured under the `metadata` field under `podTemplate`.
 
-Similarly, you can set the `nodeSelector`, tolerations and affinity of solver
-pods by configuring under the `spec` field of the `podTemplate`. No other
-spec fields can be edited.
+Similarly, you can set the `nodeSelector`, `tolerations`, `affinity`,
+`priorityClassName`, `serviceAccountName`, `securityContext`, `imagePullSecrets`
+and `resources` of solver pods by configuring under the `spec` field of
+the `podTemplate`. No other spec fields can be edited.
 
 An example of how you could configure the template is as so:
 
@@ -152,12 +153,25 @@ spec:
             spec:
               nodeSelector:
                 bar: baz
+              resources:
+                requests:
+                  cpu: 20m
+                  memory: 32Mi
+                limits:
+                  cpu: 150m
+                  memory: 64Mi
 ```
 
 The added labels and annotations will merge on top of the cert-manager defaults,
 overriding entries with the same key.
 
-No other fields of the `podTemplate` exist.
+The resources configuration **overrides** the global defaults (configured via controller flags
+`--acme-http01-solver-resource-*`) for the specific Issuer, enabling granular resource management
+in multi-tenant or restricted policy scenarios.
+
+> Note that when only specifying resource limits, ensure they are greater than or equal to the
+> corresponding global resource requests configured via controller flags. Kubernetes will reject
+> pod creation if limits are lower than requests, causing challenge failures.
 
 ### `ingressTemplate`
 
