@@ -167,7 +167,7 @@ overriding entries with the same key.
 
 The resources configuration **overrides** the global defaults (configured via controller flags
 `--acme-http01-solver-resource-*`) for the specific Issuer, enabling granular resource management
-in multi-tenant or restricted policies scenarios.
+in multi-tenant or restricted policy scenarios.
 
 > Note that when only specifying resource limits, ensure they are greater than or equal to the
 > corresponding global resource requests configured via controller flags. Kubernetes will reject
