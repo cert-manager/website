@@ -23,6 +23,7 @@ export default function VersionSelect({
       return compareVersions(labelFromVersion(first), labelFromVersion(second))
     })
     .reverse()
+    .slice(0, 2) // Only show the last two releases in the dropdown list
 
   return (
     <div className="bg-gray-1 rounded-md border-2 border-gray-2/50">
