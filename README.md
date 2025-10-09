@@ -141,6 +141,23 @@ npm ci
 
 This command is similar to `npm install` but it ensures that you will have a clean install of all the dependencies.
 
+### Devcontainer (optional)
+
+The repository includes a ready-to-use **devcontainer** for VS Code Dev Containers or GitHub Codespaces.
+This provides a fully configured development environment with all required tools and dependencies,
+so you can start working on the website without installing anything on your local machine.
+
+**Usage:**
+
+1. Open the repository in VS Code.
+2. When prompted, select **"Reopen in Container"** (or run **Dev Containers: Reopen in Container** from the command palette).
+3. Once the container is built, use the integrated terminal to run:
+
+```bash
+./scripts/server     # start the local development server
+./scripts/verify     # run lint, link-check, spell-check, etc.
+```
+
 ### Development Server
 
 The best development environment uses the Netlify CLI to serve the site locally. The Netlify CLI server
