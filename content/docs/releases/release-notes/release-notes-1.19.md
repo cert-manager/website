@@ -18,7 +18,7 @@ Be sure to review all new features and changes below, and read the full release 
 
 ### ACME and Certificate Management
 - There is a new feature gate `ACMEHTTP01IngressPathTypeExact`, to allow `ingress-nginx` users to turn off the new default Ingress `PathType: Exact` setting. This is useful if you are using an old version of `ingress-nginx` which does not properly support `PathType: Exact`.
-- The Issuer and ClusterIssuer custom resources have new fields which allow you to configure resource requests and resource limits for ACME HTTP-01 solver pods. This allows teams to override the global `--acme-http01-solver-resource-*` flag values which are set by the platform administrator.
+- The Issuer and ClusterIssuer custom resources have new fields which allow you to configure resource requests and resource limits for ACME HTTP-01 solver pods. This allows teams to override the global `--acme-http01-solver-resource-*` flag values which are set by the platform administrator. Read [HTTP01 `podTemplate` Options](../../configuration/acme/http01/README.md#podtemplate) to learn more.
 - The ACME challenge authorization timeout has been increased to two minutes to reduce `error waiting for authorization` failures.
 - There is now stricter solver validation to reject configurations that specify multiple ingress selection options (e.g. `class`, `ingressClassName`, `name`).
 - There are DNS and API improvements. A new `protocol` field was added for the `rfc2136` DNS01 provider.
