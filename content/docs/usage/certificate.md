@@ -401,7 +401,7 @@ If your application only loads the private key and signed certificate once
 at start up, the new certificate won't immediately be served by your
 application, and you will want to either manually restart your pod with
 `kubectl rollout restart`, or automate the action by running
-[wave](https://github.com/wave-k8s/wave). Wave is a Secret controller that
+[reloader](https://docs.stakater.com/reloader/). Reloader is a Secret controller that
 makes sure deployments get restarted whenever a mounted Secret changes.
 
 <div className="alert">
