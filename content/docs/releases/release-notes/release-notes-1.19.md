@@ -9,6 +9,11 @@ This release focuses on expanding platform compatibility, improving deployment f
 
 Be sure to review all new features and changes below, and read the full release notes carefully before upgrading.
 
+## Important Upgrade Notes
+
+When upgrading to cert-manager `1.19`, use the latest patch version: `[[VAR::cert_manager_latest_version]]`.
+There is a bug in `v1.19.0` which may cause certificates to be re-issued unnecessarily. We fixed this in `v1.19.1`.
+
 ## Major Themes
 
 ###  Deployment and Platform Compatibility
@@ -67,6 +72,21 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+{/* BEGIN changelog v1.19.1 */}
+## `v1.19.1`
+
+We reverted the CRD-based API defaults for `Certificate.Spec.IssuerRef` and `CertificateRequest.Spec.IssuerRef` after they were found to cause unexpected certificate renewals after upgrading to 1.19.0. We will try re-introducing these API defaults in cert-manager `1.20`.
+We fixed a bug that caused certificates to be re-issued unexpectedly if the `issuerRef` kind or group was changed to one of the "runtime" default values.
+We upgraded Go to `1.25.3` to address the following security vulnerabilities: `CVE-2025-61724`, `CVE-2025-58187`, `CVE-2025-47912`, `CVE-2025-58183`, `CVE-2025-61723`, `CVE-2025-58186`, `CVE-2025-58185`, `CVE-2025-58188`, and `CVE-2025-61725`.
+
+Changes since `v1.19.0`:
+
+### Bug or Regression
+
+- BUGFIX: in case kind or group in the `issuerRef` of a Certificate was omitted, upgrading to `1.19.x` incorrectly caused the certificate to be renewed ([`#8175`](https://github.com/cert-manager/cert-manager/pull/8175), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+- Bump Go to 1.25.3 to fix a backwards incompatible change to the validation of DNS names in X.509 SAN fields which prevented the use of DNS names with a trailing dot ([`#8177`](https://github.com/cert-manager/cert-manager/pull/8177), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Revert API defaults for issuer reference kind and group introduced in `1.19.0` ([`#8178`](https://github.com/cert-manager/cert-manager/pull/8178), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+{/* END changelog v1.19.1 */}
 {/* BEGIN changelog v1.19.0 */}
 ## `v1.19.0`
 
