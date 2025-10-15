@@ -164,24 +164,26 @@ Read [Annotated Ingress resource: Copy annotations to the Certificate](../../usa
 As always, we'd like to thank all of the community members who helped in this release cycle, including all below who merged a PR and anyone that helped by commenting on issues, testing, or getting involved in cert-manager meetings. We're lucky to have you involved.
 
 A special thanks to:
-
-- [`@terinjokes`](https://github.com/terinjokes)
-- [`@solidDoWant`](https://github.com/solidDoWant)
-- [`@k0da`](https://github.com/k0da)
-- [`@ali-hamza-noor`](https://github.com/ali-hamza-noor)
-- [`@tareksha`](https://github.com/tareksha)
-- [`@ThatsIvan`](https://github.com/ThatsIvan)
-- [`@jsoref`](https://github.com/jsoref)
-- [`@jcpunk`](https://github.com/jcpunk)
-- [`@teslaedison`](https://github.com/teslaedison)
-- [`@NicholasBlaskey`](https://github.com/NicholasBlaskey)
-- [`@sspreitzer`](https://github.com/sspreitzer)
-- [`@tsaarni`](https://github.com/tsaarni)
-- [`@johnjcool`](https://github.com/johnjcool)
+{/* BEGIN contributors */}
 - [`@LukeCarrier`](https://github.com/LukeCarrier)
-- [`@tobiasbp`](https://github.com/tobiasbp)
-- [`@vehagn`](https://github.com/vehagn)
+- [`@NicholasBlaskey`](https://github.com/NicholasBlaskey)
+- [`@ThatsIvan`](https://github.com/ThatsIvan)
+- [`@ali-hamza-noor`](https://github.com/ali-hamza-noor)
 - [`@cuinix`](https://github.com/cuinix)
+- [`@hjoshi123`](https://github.com/hjoshi123)
+- [`@jcpunk`](https://github.com/jcpunk)
+- [`@johnjcool`](https://github.com/johnjcool)
+- [`@jsoref`](https://github.com/jsoref)
+- [`@k0da`](https://github.com/k0da)
+- [`@solidDoWant`](https://github.com/solidDoWant)
+- [`@sspreitzer`](https://github.com/sspreitzer)
+- [`@tareksha`](https://github.com/tareksha)
+- [`@terinjokes`](https://github.com/terinjokes)
+- [`@teslaedison`](https://github.com/teslaedison)
+- [`@tobiasbp`](https://github.com/tobiasbp)
+- [`@tsaarni`](https://github.com/tsaarni)
+- [`@vehagn`](https://github.com/vehagn)
+{/* END contributors */}
 
 for their contributions, comments and support!
 
@@ -202,6 +204,7 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
 
+{/* BEGIN changelog v1.18.2 */}
 ## `v1.18.2`
 
 We fixed a bug in the CSR's name constraints construction (only applies if you have enabled the `NameConstraints` feature gate).
@@ -217,6 +220,8 @@ Changes since `v1.18.1`:
 [#7833]: https://github.com/cert-manager/cert-manager/issues/7833
 [#7837]: https://github.com/cert-manager/cert-manager/issues/7837
 
+{/* END changelog v1.18.2 */}
+{/* BEGIN changelog v1.18.1 */}
 ## `v1.18.1`
 
 We have added a new feature gate `ACMEHTTP01IngressPathTypeExact`, to allow
@@ -244,6 +249,8 @@ Changes since `v1.18.0`:
 
 - Use the latest version of ingress-nginx in E2E tests to ensure compatibility ([`#7807`](https://github.com/cert-manager/cert-manager/pull/7807), [`@wallrj`](https://github.com/wallrj))
 
+{/* END changelog v1.18.1 */}
+{/* BEGIN changelog v1.18.0 */}
 ## `v1.18.0`
 
 Changes since `v1.17.2`:
@@ -297,3 +304,4 @@ Changes since `v1.17.2`:
 - Update kind images to include the Kubernetes 1.33 node image ([`#7787`](https://github.com/cert-manager/cert-manager/pull/7787), [`@wallrj`](https://github.com/wallrj))
 - Upgrade Go to `v1.24.4` ([`#7785`](https://github.com/cert-manager/cert-manager/pull/7785), [`@wallrj`](https://github.com/wallrj))
 - Use `slices.Contains` to simplify code ([`#7753`](https://github.com/cert-manager/cert-manager/pull/7753), [`@cuinix`](https://github.com/cuinix))
+{/* END changelog v1.18.0 */}
