@@ -49,7 +49,7 @@ We'll ensure that anyone outside of the core maintainer team who has a talking p
 
 ### Community Meetings
 
-Our bi-weekly (i.e. every two weeks) community meetings happen [on Zoom](https://zoom.us/j/96658445866) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London). You can look at the [CNCF calendar](https://tockify.com/cncf.public.events/monthly?search=cert-manager) to see when the next one will take place.
+Our bi-weekly (i.e. every two weeks) community meetings happen [on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London). You can look at the [CNCF calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) to see when the next one will take place and to register to the recurring meetings.
 
 These meetings are an hour-long chat about cert-manager topics. It's a great way to get involved with contributing for the
 first time; to get answers to any questions you might have; or to propose a new feature which needs some explanation.
@@ -57,7 +57,7 @@ first time; to get answers to any questions you might have; or to propose a new 
 If you want to discuss something, please add it to the [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U)
 before the meeting. The meeting chair will try to get to everything that was on the notes before the meeting started.
 
-We try to record these meetings and put them on YouTube so they can be checked later – if you don't want to appear on video please keep
+We record these meetings and put them on YouTube so they can be checked later – if you don't want to appear on video please keep
 your camera off!
 
 {/* Changing this heading will break the reference link at https://cert-manager.io/docs/contributing/#slack, so avoid modifying it. */}
