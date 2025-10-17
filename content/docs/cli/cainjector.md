@@ -47,6 +47,6 @@ Flags:
       --metrics-tls-private-key-file string                  path to the file containing the TLS private key to serve metrics with
       --namespace string                                     If set, this limits the scope of cainjector to a single namespace. If set, cainjector will not update resources with certificates outside of the configured namespace.
       --profiler-address string                              The host and port that Go profiler should listen on, i.e localhost:6060. Ensure that profiler is not exposed on a public address. Profiler will be served at /debug/pprof. (default "localhost:6060")
-  -v, --v Level                                              number for the log level verbosity
+  -v, --v Level                                              number for the log level verbosity, 0 for Error, 1 for Warn, 2 for Info, 3 for Extended Info, 4 for Debug, 5 for Trace, default is 2
       --vmodule pattern=N,...                                comma-separated list of pattern=N settings for file-filtered logging (only works for text log format)
 ```
