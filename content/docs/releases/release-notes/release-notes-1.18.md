@@ -43,7 +43,7 @@ You will see errors like this in the cert-manager controller logs:
 
 > Error presenting challenge: admission webhook `validate.nginx.ingress.kubernetes.io` denied the request: ingress contains invalid paths: path `/.well-known/acme-challenge/oTw4h9_WsobTRn5COTSyaiAx3aWn0M7_aYisoz1gXQw` cannot be used with `pathType` Exact
 
-If you use `ingress-nginx`, choose **one** of the following two options:
+If you use `ingress-nginx`, choose **one** of the following three options:
 
 #### Option 1. Disable the `ACMEHTTP01IngressPathTypeExact` feature in cert-manager
 
