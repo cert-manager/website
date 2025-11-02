@@ -104,8 +104,7 @@ Here is an overview of the network requirements:
 1. **TCP: ACME (Let's Encrypt) -> cert-manager (acmesolver)**:
    If you use an ACME Issuer configured for HTTP01,
    cert-manager will deploy an `acmesolver` Pod, a Service and an Ingress (or Gateway API) resource
-   in the namespace of the Issuer
-   or in the cert-manager namespace if it is a ClusterIssuer.
+   in the namespace of the Challenge resource.
    The ACME implementation will establish an HTTP connection to this Pod via your chosen ingress load balancer,
    so your network policy must allow this.
 
