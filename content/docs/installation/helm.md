@@ -20,6 +20,8 @@ non-namespaced resources in your cluster and care must be taken to ensure that i
 
 cert-manager is available as an OCI Helm chart and from a Helm repository. We recommend using the OCI Helm chart for any recent version of cert-manager.
 
+**The OCI Helm charts are the source of truth and are published immediately upon release.** The legacy HTTP Helm repository at `https://charts.jetstack.io` is updated a few hours after the OCI charts are published.
+
 Very old versions of cert-manager (earlier than v1.12) are only officially available from the legacy Helm repository. The rest of this document assumes the use of the OCI registry.
 
 #### Installing from the OCI Registry
@@ -62,7 +64,7 @@ helm install \
 
 The Helm charts for cert-manager have historically been published to the Jetstack repository at `https://charts.jetstack.io`.
 
-This repository is still available and there are no current plans for it to change but it is recommended to use OCI Helm charts for the latest versions of cert-manager.
+This repository is still available and there are no current plans for it to change but it is recommended to use OCI Helm charts for the latest versions of cert-manager. **Note that the legacy HTTP Helm repository is updated a few hours after the OCI Helm charts are published**, so you may experience a delay before new releases are available via this method.
 
 To use the legacy repository instead of the OCI registry, you need to add the Jetstack Helm repository to your local Helm client
 and use a slightly different [Helm install command](https://helm.sh/docs/helm/helm_install/). Examples of both are provided below.
