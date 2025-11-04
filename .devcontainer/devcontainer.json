@@ -1,6 +1,6 @@
 {
   "name": "cert-manager Website Dev",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
 
   "postCreateCommand": "npm ci && npm install -g netlify-cli",
 
