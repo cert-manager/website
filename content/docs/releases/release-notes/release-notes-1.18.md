@@ -43,7 +43,7 @@ You will see errors like this in the cert-manager controller logs:
 
 > Error presenting challenge: admission webhook `validate.nginx.ingress.kubernetes.io` denied the request: ingress contains invalid paths: path `/.well-known/acme-challenge/oTw4h9_WsobTRn5COTSyaiAx3aWn0M7_aYisoz1gXQw` cannot be used with `pathType` Exact
 
-If you use `ingress-nginx`, choose **one** of the following two options:
+If you use `ingress-nginx`, choose **one** of the following three options:
 
 #### Option 1. Disable the `ACMEHTTP01IngressPathTypeExact` feature in cert-manager
 
@@ -201,6 +201,27 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@ianarsenault](https://github.com/ianarsenault)
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
+
+## `v1.18.3`
+
+We fixed a bug which caused certificates to be re-issued unexpectedly, if the
+`issuerRef` kind or group was changed to one of the "runtime" default values.
+We increased the size limit when parsing PEM certificate chains to handle leaf
+certificates with large numbers of DNS named or other identities.
+We upgraded Go to `1.24.9` to fix various non-critical security vulnerabilities.
+
+Changes since `v1.18.2`:
+
+### Bug or Regression
+
+- BUGFIX: in case kind or group in the `issuerRef` of a Certificate was omitted, upgrading to `1.19.x` incorrectly caused the certificate to be renewed ([`#8174`](https://github.com/cert-manager/cert-manager/pull/8174), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+- Bump Go to `1.24.9`. Fixes the following vulnerabilities: `CVE-2025-61724`, `CVE-2025-58187`, `CVE-2025-47912`, `CVE-2025-58183`, `CVE-2025-61723`, `CVE-2025-58186`, `CVE-2025-58185`, `CVE-2025-58188`, `CVE-2025-61725` ([`#8176`](https://github.com/cert-manager/cert-manager/pull/8176), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Increase maximum sizes of PEM certificates and chains which can be parsed in cert-manager, to handle leaf certificates with large numbers of DNS names or other identities ([`#7966`](https://github.com/cert-manager/cert-manager/pull/7966), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+
+### Other (Cleanup or Flake)
+
+- Improve error messages when certificates, CRLs or private keys fail admission due to malformed or missing PEM data ([`#7964`](https://github.com/cert-manager/cert-manager/pull/7964), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+- Upgrades Go to `v1.24.6` ([`#7974`](https://github.com/cert-manager/cert-manager/pull/7974), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
 
 ## `v1.18.2`
 

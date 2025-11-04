@@ -37,26 +37,6 @@
               "path": "/docs/releases/upgrading/upgrading-1.17-1.18.md"
             },
             {
-              "title": "1.17",
-              "path": "/docs/releases/release-notes/release-notes-1.17.md"
-            },
-            {
-              "title": "Upgrade 1.16 to 1.17",
-              "path": "/docs/releases/upgrading/upgrading-1.16-1.17.md"
-            },
-            {
-              "title": "1.16",
-              "path": "/docs/releases/release-notes/release-notes-1.16.md"
-            },
-            {
-              "title": "Upgrading from 1.12",
-              "path": "/docs/releases/upgrading/upgrading-1.12.md"
-            },
-            {
-              "title": "1.12",
-              "path": "/docs/releases/release-notes/release-notes-1.12.md"
-            },
-            {
               "title": "Older releases",
               "routes": [
                 {
@@ -66,6 +46,18 @@
                 {
                   "title": "Migrating Deprecated API Resources",
                   "path": "/docs/releases/upgrading/remove-deprecated-apis.md"
+                },
+                {
+                  "title": "1.17",
+                  "path": "/docs/releases/release-notes/release-notes-1.17.md"
+                },
+                {
+                  "title": "Upgrade 1.16 to 1.17",
+                  "path": "/docs/releases/upgrading/upgrading-1.16-1.17.md"
+                },
+                {
+                  "title": "1.16",
+                  "path": "/docs/releases/release-notes/release-notes-1.16.md"
                 },
                 {
                   "title": "Upgrade 1.15 to 1.16",
@@ -91,6 +83,15 @@
                   "title": "1.13",
                   "path": "/docs/releases/release-notes/release-notes-1.13.md"
                 },
+                {
+                  "title": "Upgrading from 1.12",
+                  "path": "/docs/releases/upgrading/upgrading-1.12.md"
+                },
+                {
+                  "title": "1.12",
+                  "path": "/docs/releases/release-notes/release-notes-1.12.md"
+                },
+
                 {
                   "title": "Upgrade 1.11 to 1.12",
                   "path": "/docs/releases/upgrading/upgrading-1.11-1.12.md"
