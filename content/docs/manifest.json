@@ -21,8 +21,16 @@
               "path": "/docs/releases/README.md"
             },
             {
-              "title": "1.19",
-              "path": "/docs/releases/release-notes/release-notes-1.19.md"
+              "title": "1.20",
+              "path": "/docs/releases/release-notes/release-notes-1.20.md"
+            },
+            {
+                "title": "Upgrade 1.19 to 1.20",
+                "path": "/docs/releases/upgrading/upgrading-1.19-1.20.md"
+            },
+            {
+                "title": "1.19",
+                "path": "/docs/releases/release-notes/release-notes-1.19.md"
             },
             {
                 "title": "Upgrade 1.18 to 1.19",
