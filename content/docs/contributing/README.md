@@ -21,7 +21,7 @@ you should receive calendar invites by mail shortly after joining. The complexit
 might be sent multiple times depending on your email and calendar providers and you might get some invites for past
 or future meetings which have been rescheduled or edited. Sorry about that!
 
-We have 2 regular repeating meetings: our quick daily check-in and an hour-long community meeting every two weeks.
+We have 2 regular repeating meetings: our quick daily check-in and the cert-manager weekly community meeting.
 
 If you're having any issues joining our meetings, ensure that you're part of the [`cert-manager-dev`](https://groups.google.com/forum/#!forum/cert-manager-dev) Google group, and always feel free to ask in [Slack](./#slack) for help!
 
@@ -49,7 +49,7 @@ We'll ensure that anyone outside of the core maintainer team who has a talking p
 
 ### Community Meetings
 
-Our bi-weekly (i.e. every two weeks) community meetings happen [on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London). You can look at the [CNCF calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) to see when the next one will take place and to register to the recurring meetings.
+The cert-manager weekly community meeting happens [on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London). You can look at the [CNCF calendar](https://tockify.com/cncf.public.events/monthly?search=cert-manager) to see when the next one will take place.
 
 These meetings are an hour-long chat about cert-manager topics. It's a great way to get involved with contributing for the
 first time; to get answers to any questions you might have; or to propose a new feature which needs some explanation.
