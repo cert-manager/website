@@ -463,7 +463,7 @@ listening on. Using Helm, we can use the parameter `webhook.securePort`:
 
 ```sh
 helm install \
-  cert-manager jetstack/cert-manager \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
   --create-namespace \
   --version [[VAR::cert_manager_latest_version]] \
@@ -1080,7 +1080,8 @@ resources in the `kube-system` namespace, and cert-manager uses the well-known
 can tell Helm to use a different namespace for the leader election:
 
 ```sh
-helm install cert-manager jetstack/cert-manager --version 1.8.0 \
+helm install cert-manager oci://quay.io/jetstack/charts/cert-manager \
+  --version [[VAR::cert_manager_latest_version]] \
   --namespace cert-manager --create-namespace \
   --set global.leaderElection.namespace=cert-manager
 ```

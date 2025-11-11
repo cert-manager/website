@@ -24,7 +24,7 @@ Here's a example which reconfigure an installed cert-manager (v1.15.0+) to run w
 # ⚠️ This Helm option is only available in cert-manager v1.15.0 and later.
 
 existing_cert_manager_version=$(helm get metadata -n cert-manager cert-manager | grep '^VERSION' | awk '{ print $2 }')
-helm upgrade cert-manager jetstack/cert-manager \
+helm upgrade cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --reuse-values \
   --namespace cert-manager \
   --version $existing_cert_manager_version \
@@ -89,7 +89,7 @@ kubectl create configmap -n cert-manager spiffe-issuer \
 ```
 
 ```bash
-helm upgrade -i -n cert-manager cert-manager-csi-driver-spiffe jetstack/cert-manager-csi-driver-spiffe --wait \
+helm upgrade -i -n cert-manager cert-manager-csi-driver-spiffe oci://quay.io/jetstack/charts/cert-manager-csi-driver-spiffe --wait \
  --set "app.logLevel=1" \
  --set "app.trustDomain=my.trust.domain" \
  --set "app.issuer.name=" \
@@ -110,9 +110,7 @@ Note that the `issuer.name`, `issuer.kind` and `issuer.group` will need to be ch
 the issuer you're actually using!
 
 ```bash
-helm repo add jetstack https://charts.jetstack.io --force-update
-
-helm upgrade cert-manager-csi-driver-spiffe jetstack/cert-manager-csi-driver-spiffe \
+helm upgrade cert-manager-csi-driver-spiffe oci://quay.io/jetstack/charts/cert-manager-csi-driver-spiffe \
   --install \
   --namespace cert-manager \
   --wait \

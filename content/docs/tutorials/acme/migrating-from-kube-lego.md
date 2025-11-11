@@ -195,7 +195,7 @@ upgrade` in order to add a few additional flags. Assuming you've named your
 
 ```bash
 $ helm upgrade cert-manager \
-     jetstack/cert-manager \
+     oci://quay.io/jetstack/charts/cert-manager \
      --namespace cert-manager \
      --set ingressShim.defaultIssuerName=letsencrypt-staging \
      --set ingressShim.defaultIssuerKind=ClusterIssuer

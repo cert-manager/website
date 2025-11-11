@@ -152,9 +152,8 @@ Now you can install and configure cert-manager.
 Install cert-manager using `helm` as follows:
 
 ```bash
-helm repo add jetstack https://charts.jetstack.io --force-update
 helm install \
-  cert-manager jetstack/cert-manager \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
   --create-namespace \
   --version [[VAR::cert_manager_latest_version]] \
@@ -396,7 +395,7 @@ The labels can be configured using the Helm values file below:
 
 ```bash
 existing_cert_manager_version=$(helm get metadata -n cert-manager cert-manager | grep '^VERSION' | awk '{ print $2 }')
-helm upgrade cert-manager jetstack/cert-manager \
+helm upgrade cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --reuse-values \
   --namespace cert-manager \
   --version $existing_cert_manager_version \

@@ -39,7 +39,7 @@ will stop all issuance (as no certificate requests will be approved)!
 # ⚠️ DANGER: Only do this in a cluster if you're sure it's safe!
 
 existing_cert_manager_version=$(helm get metadata -n cert-manager cert-manager | grep '^VERSION' | awk '{ print $2 }')
-helm upgrade cert-manager jetstack/cert-manager \
+helm upgrade cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --reuse-values \
   --namespace cert-manager \
   --version $existing_cert_manager_version \
@@ -51,9 +51,7 @@ helm upgrade cert-manager jetstack/cert-manager \
 To install approver-policy:
 
 ```terminal
-helm repo add jetstack https://charts.jetstack.io --force-update
-
-helm upgrade cert-manager-approver-policy jetstack/cert-manager-approver-policy \
+helm upgrade cert-manager-approver-policy oci://quay.io/jetstack/charts/cert-manager-approver-policy \
   --install \
   --namespace cert-manager \
   --wait
@@ -70,7 +68,7 @@ For example, if using approver-policy for the internal issuer types, along with
 set the following values when installing:
 
 ```terminal
-helm upgrade cert-manager-approver-policy jetstack/cert-manager-approver-policy \
+helm upgrade cert-manager-approver-policy oci://quay.io/jetstack/charts/cert-manager-approver-policy \
   --install \
   --namespace cert-manager \
   --wait \

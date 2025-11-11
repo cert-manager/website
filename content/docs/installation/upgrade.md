@@ -35,12 +35,6 @@ with the name of your Helm release for cert-manager (usually this is
 `cert-manager`) and replacing `<version>` with the version number you want to
 install.
 
-Add the Jetstack Helm repository (if you haven't already) and update it.
-
-```bash
-helm repo add jetstack https://charts.jetstack.io --force-update
-```
-
 The helm upgrade command will upgrade cert-manager to the specified or latest version of cert-manager, as listed on the
 [cert-manager Helm chart documentation page](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
@@ -52,7 +46,7 @@ If you have installed the CRDs together with the helm install command (using `--
 Helm will upgrade the CRDs automatically when you upgrade the cert-manager Helm chart:
 
 ```bash
-helm upgrade --reset-then-reuse-values --version <version> <release_name> jetstack/cert-manager
+helm upgrade --reset-then-reuse-values --version <version> <release_name> oci://quay.io/jetstack/charts/cert-manager
 ```
 
 ### CRDs managed separately
@@ -62,6 +56,28 @@ option added to your Helm install command), you should upgrade your CRD resource
 
 ```bash
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/<version>/cert-manager.crds.yaml
+```
+
+And then upgrade the Helm chart:
+
+```bash
+helm upgrade --reset-then-reuse-values --version <version> <release_name> oci://quay.io/jetstack/charts/cert-manager
+```
+
+### Upgrading from the Legacy Helm Repository
+
+The Helm charts for cert-manager have historically been published to the Jetstack repository at `https://charts.jetstack.io`.
+
+This repository is still available and there are no current plans for it to change, but it is recommended to use OCI Helm charts for the latest versions of cert-manager.
+**Note that the legacy HTTP Helm repository is updated a few hours after the OCI Helm charts are published**, so you may experience a delay before new releases are available via this method.
+
+To use the legacy repository instead of the OCI registry, you need to add the Jetstack Helm repository to your local Helm client
+and use a slightly different [Helm upgrade command](https://helm.sh/docs/helm/helm_upgrade/).
+
+Add the Jetstack Helm repository (if you haven't already) and update it.
+
+```bash
+helm repo add jetstack https://charts.jetstack.io --force-update
 ```
 
 And then upgrade the Helm chart:
