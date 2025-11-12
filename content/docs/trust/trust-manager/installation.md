@@ -10,10 +10,6 @@ description: 'Installation guide for trust-manager'
 Helm is the easiest way to install trust-manager and comes with a publicly trusted certificate bundle package
 (for the`useDefaultCAs` source) derived from Debian containers.
 
-```bash
-helm repo add jetstack https://charts.jetstack.io --force-update
-```
-
 ### 2. Install cert-manager (optional)
 
 When installed via Helm, trust-manager has a dependency on cert-manager for provisioning an application certificate
@@ -25,7 +21,7 @@ If you haven't already installed cert-manager, you can install it using the foll
 
 ```bash
 # Run this command only if you haven't installed cert-manager already
-helm install cert-manager jetstack/cert-manager \
+helm install cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
   --create-namespace \
   --version [[VAR::cert_manager_latest_version]] \
@@ -42,7 +38,7 @@ If you don't want to rely on cert-manager, you can install using a Helm-generate
 trust-manager is simple to install and is contained in a single Helm chart:
 
 ```bash
-helm upgrade trust-manager jetstack/trust-manager \
+helm upgrade trust-manager oci://quay.io/jetstack/charts/trust-manager \
   --install \
   --namespace cert-manager \
   --wait
@@ -72,7 +68,7 @@ As of trust-manager v0.6.0 you can choose to automatically add an approver-polic
 will approve the trust-manager webhook certificate:
 
 ```bash
-helm upgrade trust-manager jetstack/trust-manager \
+helm upgrade trust-manager oci://quay.io/jetstack/charts/trust-manager \
   --install \
   --namespace cert-manager \
   --wait \
@@ -111,7 +107,7 @@ Installing without cert-manager can be great for smaller, more resource-constrai
 Using a Helm-generated cert requires a single flag:
 
 ```bash
-helm upgrade trust-manager jetstack/trust-manager \
+helm upgrade trust-manager oci://quay.io/jetstack/charts/trust-manager \
   --install \
   --namespace cert-manager \
   --wait \

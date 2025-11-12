@@ -43,7 +43,7 @@ Which can be added using Helm:
 
 ```bash
 $ helm install \
-  cert-manager jetstack/cert-manager \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
   --create-namespace \
   --set featureGates="ExperimentalCertificateSigningRequestControllers=true" \

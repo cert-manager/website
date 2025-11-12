@@ -67,11 +67,9 @@ We install cert-manager [using helm](https://cert-manager.io/docs/installation/h
 kind create cluster
 
 # Helm setup
-helm repo add jetstack https://charts.jetstack.io --force-update
-
 # install cert-manager; this might take a little time
 helm install \
-  cert-manager jetstack/cert-manager \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
   --create-namespace \
   --version [[VAR::cert_manager_latest_version]] \
@@ -117,10 +115,8 @@ istio-csr is best installed via Helm, and it should be simple and quick to insta
 are a bunch of other configuration options for the helm chart, which you can check out [here](../../usage/istio-csr/README.md).
 
 ```console
-helm repo add jetstack https://charts.jetstack.io --force-update
-
 # We set a few helm template values so we can point at our static root CA
-helm upgrade cert-manager-istio-csr jetstack/cert-manager-istio-csr \
+helm upgrade cert-manager-istio-csr oci://quay.io/jetstack/charts/cert-manager-istio-csr \
   --install \
   --namespace cert-manager \
   --wait \
@@ -341,7 +337,7 @@ app:
 If cert-manager is already installed, you can use the same `helm upgrade` command as above but also specifying the name of the runtime configuration ConfigMap:
 
 ```bash
-helm upgrade cert-manager-istio-csr jetstack/cert-manager-istio-csr \
+helm upgrade cert-manager-istio-csr oci://quay.io/jetstack/charts/cert-manager-istio-csr \
   --install \
   --namespace cert-manager \
   --wait \
@@ -388,7 +384,7 @@ volumes:
 This file could then be used with the following command:
 
 ```bash
-helm upgrade cert-manager-istio-csr jetstack/cert-manager-istio-csr \
+helm upgrade cert-manager-istio-csr oci://quay.io/jetstack/charts/cert-manager-istio-csr \
   --install \
   --namespace cert-manager \
   --wait \

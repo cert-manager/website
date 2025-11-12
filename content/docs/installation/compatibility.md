@@ -78,7 +78,7 @@ Not ready: the cert-manager webhook CA bundle is not injected yet
 
 ```console
 helm install \
-  cert-manager jetstack/cert-manager \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
   --create-namespace \
   --version ${CERT_MANAGER_VERSION} --set global.leaderElection.namespace=cert-manager

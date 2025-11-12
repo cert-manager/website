@@ -233,7 +233,7 @@ To enable the feature in cert-manager, turn on the `GatewayAPI` feature gate:
 - If you are using Helm:
 
   ```sh
-  helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
+  helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager --namespace cert-manager \
     --set "extraArgs={--enable-gateway-api}"
   ```
 

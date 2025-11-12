@@ -47,7 +47,7 @@ crds:
 
 Install it using helm:
 ```
-helm upgrade  --install --namespace cert-manager  --version [[VAR::cert_manager_latest_version]] cert-manager jetstack/cert-manager -f values.yaml 
+helm upgrade  --install --namespace cert-manager  --version [[VAR::cert_manager_latest_version]] cert-manager oci://quay.io/jetstack/charts/cert-manager -f values.yaml 
 ```
 
 ## Configure your DNS records
