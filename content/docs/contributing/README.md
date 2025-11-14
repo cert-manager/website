@@ -34,7 +34,7 @@ doesn't have DST or which changes on a different schedule like North America or 
 
 ### Daily Check-In
 
-Our daily check-in meetings [happen on Google Meet](https://meet.google.com/eum-fyvt-xpa) at [10:30 London time](http://www.thetimezoneconverter.com/?t=10:30&tz=Europe/London) every weekday.
+Our daily check-in meetings [happen on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/97683894330?password=1cb64ed5-3014-48b6-ae72-3d0738ac2263) at [10:30 London time](http://www.thetimezoneconverter.com/?t=10:30&tz=Europe/London) every weekday. You can look at the [calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) to see when the next one will take place.
 
 The format is a 5 minute social chat, followed by a quick round-robin status report and ending with any longer form talking points.
 
@@ -49,7 +49,7 @@ We'll ensure that anyone outside of the core maintainer team who has a talking p
 
 ### Community Meetings
 
-The cert-manager weekly community meeting happens [on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London). You can look at the [CNCF calendar](https://tockify.com/cncf.public.events/monthly?search=cert-manager) to see when the next one will take place.
+The cert-manager weekly community meeting happens [on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London). You can look at the [calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) to see when the next one will take place.
 
 These meetings are an hour-long chat about cert-manager topics. It's a great way to get involved with contributing for the
 first time; to get answers to any questions you might have; or to propose a new feature which needs some explanation.
