@@ -34,7 +34,9 @@ doesn't have DST or which changes on a different schedule like North America or 
 
 ### Daily Check-In
 
-Our daily check-in meetings [happen on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/97683894330?password=1cb64ed5-3014-48b6-ae72-3d0738ac2263) at [10:30 London time](http://www.thetimezoneconverter.com/?t=10:30&tz=Europe/London) every weekday. You can look at the [calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) to see when the next one will take place.
+Our daily check-in meetings [happen on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/97683894330?password=1cb64ed5-3014-48b6-ae72-3d0738ac2263) at [10:30 London time](http://www.thetimezoneconverter.com/?t=10:30&tz=Europe/London) every weekday except Thursday.
+
+You can look at the [calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) to see when the next one will take place.
 
 The format is a 5 minute social chat, followed by a quick round-robin status report and ending with any longer form talking points.
 
@@ -45,11 +47,13 @@ Please don't be offended if someone steps in when you run out of time and moves 
 is for everyone to be succinct so it's clear what's being worked on and who is blocked.
 
 We finish with talking points, which are open-ended discussions on any topic related to cert-manager or its sub-projects.
-We'll ensure that anyone outside of the core maintainer team who has a talking point goes first.
+We'll look to ensure that anyone outside of the core maintainer team who has a talking point goes first.
 
 ### Community Meetings
 
-The cert-manager weekly community meeting happens [on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London). You can look at the [calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) to see when the next one will take place.
+The cert-manager weekly community meeting happens [on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London) on Thursdays.
+
+You can look at the [calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) to see when the next one will take place.
 
 These meetings are an hour-long chat about cert-manager topics. It's a great way to get involved with contributing for the
 first time; to get answers to any questions you might have; or to propose a new feature which needs some explanation.
@@ -66,9 +70,11 @@ your camera off!
 Join our Slack channels to connect with the cert-manager community.
 
 ### Step 1: Join Kubernetes Slack
+
 You need to join the [Kubernetes Slack Workspace](https://slack.k8s.io). Click the link to request an invitation if you are not already a member.
 
 ### Step 2: Join cert-manager Channels
+
 Once you have access to Kubernetes Slack, you can search for and join the following channels:
 
 - [`#cert-manager`](https://kubernetes.slack.com/messages/cert-manager): A channel for all users of cert-manager; use this for any usage-related questions.
