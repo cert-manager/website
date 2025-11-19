@@ -3,7 +3,7 @@ title: Annotated Ingress resource
 description: 'cert-manager usage: Kubernetes Ingress'
 ---
 
-> **apiVersion:** networking.k8s.io/v1  
+> **apiVersion:** networking.k8s.io/v1
 > **kind:** Ingress
 
 <div style={{textAlign: "center"}}>
@@ -89,11 +89,19 @@ trigger `Certificate` resources to be automatically created:
   container.
 
 - `acme.cert-manager.io/http01-ingress-class`: this annotation allows you to
-  configure the ingress class that will be used to solve challenges for this
-  ingress. Customizing this is useful when you are trying to secure internal
+  configure the `kubernetes.io/ingress.class` that will be used to solve challenges
+  for this ingress. Customizing this is useful when you are trying to secure internal
   services, and need to solve challenges using a different ingress class to that
   of the ingress. If not specified and the `acme-http01-edit-in-place` annotation
-  is not set, this defaults to the ingress class defined in the Issuer resource.
+  is not set, this defaults to the `http01.ingress.class` defined in the Issuer resource.
+
+- `acme.cert-manager.io/http01-ingress-ingressclassname`: this annotation allows you to
+  configure the `spec.ingressClassName` that will be used to solve challenges
+  for this ingress. Customizing this is useful when you are trying to secure internal
+  services, and need to solve challenges using a different ingress class to that
+  of the ingress. If not specified and the `acme-http01-edit-in-place` annotation
+  is not set, this defaults to the `http01.ingress.ingressClassName` defined in the
+  Issuer resource.
 
 - `acme.cert-manager.io/http01-edit-in-place: "true"`: this controls whether the
   ingress is modified 'in-place', or a new one is created specifically for the
