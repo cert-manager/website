@@ -291,6 +291,7 @@ https://cert-manager.io/usages https://cert-manager.io/docs/reference/annotation
 # (as well as configuration in netlify) for each of these to enable these to work.
 https://acme.cert-manager.io/http01-edit-in-place https://cert-manager.io/docs/reference/annotations#acmecert-manageriohttp01-edit-in-place 301!
 https://acme.cert-manager.io/http01-ingress-class https://cert-manager.io/docs/reference/annotations#acmecert-manageriohttp01-ingress-class 301!
+https://acme.cert-manager.io/http01-ingress-ingressclassname https://cert-manager.io/docs/reference/annotations#acmecert-manageriohttp01-ingress-ingressclassname 301!
 
 https://experimental.cert-manager.io/request-duration https://cert-manager.io/docs/reference/annotations#experimentalcert-manageriorequest-duration 301!
 https://experimental.cert-manager.io/request-is-ca https://cert-manager.io/docs/reference/annotations#experimentalcert-manageriorequest-is-ca 301!
