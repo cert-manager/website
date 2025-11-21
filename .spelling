@@ -854,6 +854,7 @@ example.org
 experimental.cert
 http01-edit-in-place
 http01-ingress-class
+http01-ingress-ingressclassname
 ingress.class
 ip-sans
 kubernetes.io

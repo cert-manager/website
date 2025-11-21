@@ -27,12 +27,20 @@ This is useful for keeping compatibility with the `ingress-gce` component.
 ## acme.cert-manager.io/http01-ingress-class
 - [Ingress](../usage/ingress.md)
 
-this annotation allows you to configure the ingress class that will be used to
-solve challenges for this ingress. Customizing this is useful when you are
-trying to secure internal services, and need to solve challenges using a
-different ingress class to that of the ingress. If not specified and the
-`acme-http01-edit-in-place` annotation is not set, this defaults to the ingress
-class defined in the Issuer resource.
+Allows the `kubernetes.io/ingress.class` annotation to be configured.
+Customizing this is useful when you are trying
+to secure internal services, and need to solve challenges using a different ingress class
+to that of the ingress. If not specified and the `acme-http01-edit-in-place` annotation is
+not set, this defaults to the `http01.ingress.class` defined in the Issuer resource.
+
+## acme.cert-manager.io/http01-ingress-ingressclassname
+- [Ingress](../usage/ingress.md)
+
+Allows the Ingress's `spec.ingressClassName` to be configured.
+Customizing this is useful when you are trying
+to secure internal services, and need to solve challenges using a different ingress class
+to that of the ingress. If not specified and the `acme-http01-edit-in-place` annotation is
+not set, this defaults to the `http01.ingress.ingressClassName` defined in the Issuer resource.
 
 ## cert-manager.io/allow-direct-injection
 - `Secret`
