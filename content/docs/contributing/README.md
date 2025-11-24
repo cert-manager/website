@@ -34,9 +34,7 @@ doesn't have DST or which changes on a different schedule like North America or 
 
 ### Daily Check-In
 
-Our daily check-in meetings [happen on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/97683894330?password=1cb64ed5-3014-48b6-ae72-3d0738ac2263) at [10:30 London time](http://www.thetimezoneconverter.com/?t=10:30&tz=Europe/London) every weekday except Thursday.
-
-You can look at the [calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) to see when the next one will take place.
+Our daily check-in meetings [happen on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/97683894330?password=1cb64ed5-3014-48b6-ae72-3d0738ac2263) at [10:30 London time](http://www.thetimezoneconverter.com/?t=10:30&tz=Europe/London). The exact days for which the standup is happening can be seen on the [calendar page](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) and may change.
 
 The format is a 5 minute social chat, followed by a quick round-robin status report and ending with any longer form talking points.
 
