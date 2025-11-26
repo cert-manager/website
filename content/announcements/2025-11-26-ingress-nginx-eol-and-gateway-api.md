@@ -35,7 +35,19 @@ TLS change becomes a ticket, as shown in the following diagram:
 
 ![without-listenerset-fs8](https://hackmd.io/_uploads/ByqzAL7bZl.png)
 
-This is a regression compared to today's Ingress workflows.
+This represents a change in the self-service experience compared to today's
+Ingress workflows. While this may seem like a step backward for developer
+velocity, the Gateway API design intentionally addresses a security concern with
+the Ingress API: nothing prevents one team from accidentally or maliciously
+capturing traffic intended for another team by creating an Ingress with the same
+hostname but different TLS configuration. This often happens in larger clusters
+with many teams, where conflicting Ingress objects can silently intercept
+traffic meant for other services. By centralizing TLS configuration at the
+Gateway level, Gateway API provides stronger security boundaries, at the cost of
+reduced self-service in simple multi-tenant setups. For more details on the
+design rationale, you can read the page [Key differences between Ingress API and
+Gateway
+API](https://gateway-api.sigs.k8s.io/guides/migrating-from-ingress/#key-differences-between-ingress-api-and-gateway-api).
 
 ## Why cert-manager can't fix this on its own (yet)
 
@@ -88,13 +100,15 @@ Gateway, without either risky wildcards or dangerous RBAC.
 ## ListenerSet: the missing building block
 
 Gateway API intends to introduce the ListenerSet resource (currently only as the
-experimental `XListenerSet` kind) to solve this exact issue. ListenerSet allows:
+experimental `XListenerSet` kind) to address the self-service challenge while
+maintaining security boundaries. ListenerSet allows:
 
 - the platform team to own one shared Gateway and its infrastructure,
 - application teams to create their own listeners and TLS settings in
   `XListenerSet` objects.
 
-This restores the separation of concerns:
+This restores the separation of concerns while preserving the security
+improvements of Gateway API's design:
 
 | Resource | Concern | Owner |
 |--|--|--|
