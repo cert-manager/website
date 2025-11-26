@@ -18,7 +18,7 @@ date: '2025-11-26T12:00:00Z'
   when migrating to Gateway API.
 - The missing piece is Gateway API's experimental `XListenerSet` resource, which
   restores per-team TLS configuration on a shared Gateway.
-- cert-manager will add experimental `XListenerSet` support in v1.20, targeted
+- cert-manager will add experimental `XListenerSet` support in1.20, targeted
   for 10 February 2026, with alpha builds in January 2026.
 
 ## Why migrating from multi-tenant Ingress is tricky
@@ -112,11 +112,11 @@ maintaining security boundaries. ListenerSet allows:
 This restores the separation of concerns while preserving the security
 improvements of Gateway API's design:
 
-| Resource    | Concern                                   | Owner         |
-| ----------- | ----------------------------------------- | ------------- |
-| Gateway     | infra boundary + policy                   | Platform Team |
-| ListenerSet | per-team hostname + TLS + certificateRefs | Developer     |
-| HTTPRoute   | routing                                   | Developer     |
+| Resource    | Concern                                     | Owner         |
+| ----------- | ------------------------------------------- | ------------- |
+| Gateway     | infra boundary + policy                     | Platform Team |
+| ListenerSet | per-team hostname + TLS + `certificateRefs` | Developer     |
+| HTTPRoute   | routing                                     | Developer     |
 
 Functionally, for Ingress users, XListenerSet + HTTPRoute becomes the closest
 thing to functionally similar to the Ingress experience, while remaining
@@ -128,7 +128,7 @@ Gateway-native, as shown in the following diagram:
 
 ### What we will ship
 
-cert-manager v1.20 will include, behind a feature gate, support for the
+cert-manager 1.20 will include, behind a feature gate, support for the
 `cert-manager.io/issuer` and `cert-manager.io/cluster-issuer` annotations on
 `XListenerSet` resources, with XListenerSet annotations overriding Gateway
 annotations, and Gateway annotations acting as the "default issuer".
@@ -137,7 +137,7 @@ annotations, and Gateway annotations acting as the "default issuer".
 
 - **January 2026:** Alpha builds with `XListenerSet` support. We will need your
   help to test it out!
-- **10 February 2026:** cert-manager v1.20 with `XListenerSet` support included
+- **10 February 2026:** cert-manager 1.20 with `XListenerSet` support included
   as an experimental feature behind:
   ```bash
   --enable-gateway-api \
@@ -152,15 +152,15 @@ type and a migration path from `XListenerSet` to `ListenerSet`.
 As stated elsewhere, ingress-nginx (Ingress support) and InGate will reach EOL
 in March 2026.
 
-Given the timeline, cert-manager v1.20 releases one month before that
+Given the timeline, cert-manager 1.20 releases one month before that
 EOL, ListenerSet is still experimental, we want to set expectations clearly:
 
 - Today, there is no safe, first-class way to preserve multi-tenant TLS
   self-service using Gateway API.
-- In v1.20, there will be an experimental path via `XListenerSet` for evaluation
-  and early adoption.
-- In v1.21 or v1.22, once ListenerSet has landed into the stable channel, we
-  will implement stable support in cert-manager.
+- In cert-manager 1.20, there will be an experimental path via `XListenerSet`
+  for evaluation and early adoption.
+- In cert-manager 1.21 or 1.22, once ListenerSet has landed into the stable
+  channel, we will implement stable support in cert-manager.
 
 ## Conclusion
 

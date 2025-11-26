@@ -227,10 +227,12 @@ GSoC
 Gloo
 GoDaddy
 GoLand
+hostnames
 HAProxy
 HTTP-01
 HTTP01
 HTTPRoute
+HTTPRoutes
 HashiCorp
 Helmfile
 IAM
@@ -266,6 +268,7 @@ Openshift
 Kyverno
 LearnKube
 LuCI
+ListenerSet
 Maartje
 MacOS
 Makefile
@@ -346,6 +349,7 @@ versioned
 WebhookConfiguration
 ControllerConfiguration
 WIP
+XListenerSet
 YAML
 YAMLs
 accessors
