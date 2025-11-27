@@ -149,11 +149,7 @@ annotations, and Gateway annotations acting as the "default issuer".
 - **January 2026:** Alpha builds with XListenerSet support. We will need your
   help to test it out!
 - **10 February 2026:** cert-manager 1.20 is expected to include XListenerSet
-  support as an experimental feature behind:
-  ```bash
-  --enable-gateway-api \
-  --feature-gates XGatewayAPI=true
-  ```
+  support as an experimental feature gated behind a feature flag.
 
 As Gateway API graduates ListenerSet to stable, we'll add support for the stable
 type and a migration path from XListenerSet to ListenerSet.
