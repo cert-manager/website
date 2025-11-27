@@ -179,6 +179,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-loopia`](https://github.com/Identitry/cert-manager-webhook-loopia)
 - [`cert-manager-webhook-netcup`](https://github.com/aellwein/cert-manager-webhook-netcup)
 - [`cert-manager-webhook-oci`](https://gitlab.com/dn13/cert-manager-webhook-oci) (Oracle Cloud Infrastructure)
+- [`cert-manager-webhook-ovh`](https://github.com/aureq/cert-manager-webhook-ovh)
 - [`cert-manager-webhook-opentelekomcloud`](https://github.com/akyriako/cert-manager-webhook-opentelekomcloud)
 - [`cert-manager-webhook-pdns`](https://github.com/zachomedia/cert-manager-webhook-pdns)
 - [`cert-manager-webhook-regery`](https://github.com/darioackermann/cert-manager-webhook-regery)
