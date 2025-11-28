@@ -4,22 +4,25 @@ title:
   "Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming"
 description:
   A look at the current state of cert-manager's support for the Gateway API with
-  regards to ingress-nginx and InGate end-of-life.
+  regard to ingress-nginx and InGate end-of-life.
 date: '2025-11-26T12:00:00Z'
 ---
 
-cert-manager users who migrate from Ingress to Gateway API will realize that
-they do not have the same TLS self-service experience due to Gateway being owned by
-Cluster Operators. The community brought up this concern in various forums.
+Since [the announcement][] that ingress-nginx and InGate will reach end of life
+in March 2026, we have seen more questions about the migration path from Ingress
+to Gateway API. Today, cert-manager cannot offer the same TLS self-service
+experience because of design differences between the two APIs.
+
+Whereas Ingress was a single resource, Gateway API breaks the resource down into
+cluster-operator-owned Gateway resources and team-owned HTTPRoute resources,
+with certificates configured on cluster-operator-owned Gateways.
 
 The missing piece is Gateway API's experimental XListenerSet resource, which
 aims to restore per-team TLS configuration on a shared Gateway. cert-manager
-will add experimental XListenerSet support in 1.20, targeted for 10 February
+plans to add experimental XListenerSet support in 1.20, targeted for 10 February
 2026, with alpha builds in January 2026.
 
-And since ingress-nginx and InGate will reach EOL in March 2026, we want to
-clarify to cert-manager users what's possible today and what will only be
-possible once cert-manager supports XListenerSet.
+[the announcement]: https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/
 
 ## Why migrating from multi-tenant Ingress is tricky
 
@@ -55,12 +58,11 @@ API](https://gateway-api.sigs.k8s.io/guides/migrating-from-ingress/#key-differen
 ## Why cert-manager can't fix this on its own (yet)
 
 cert-manager's current Gateway API integration only supports TLS configuration
-defined on the Gateway itself: cert-manager watches Gateway resources. If the
-`cert-manager.io/issuer` or `cert-manager.io/cluster-issuer` annotation is
-present on one of the Gateway resources, and given that there is a listener
-that uses the HTTPS protocol and that the field `tls.certificateRefs` isn't
-empty, cert-manager will create a Certificate, and will create a Secret with the
-name set in `certificateRefs`.
+defined on the Gateway itself: cert-manager watches Gateway resources. If a
+Gateway has the `cert-manager.io/issuer` or `cert-manager.io/cluster-issuer`
+annotation, includes an HTTPS listener, and `tls.certificateRefs` is set,
+cert-manager will create a Certificate and a Secret with the name set in
+`certificateRefs`.
 
 Here is what the Gateway must look like for cert-manager to pick it up:
 
@@ -94,11 +96,11 @@ which listener on the Gateway should be used for each HTTPRoute.
 This model works only when:
 
 - Each team owns its own Gateway (increasing cost/infra), or
-- The implementation makes Gateways "cheap" logical objects.
+- The implementation makes Gateways effectively "cheap" logical objects.
 
 It does not work for the common "one-shared-Gateway + many-teams" model. There
-is no safe way today to let each team self-manage TLS, on a shared
-Gateway, without either risky wildcards or dangerous RBAC.
+is no safe way today to let each team self-manage TLS on a shared Gateway
+without either risky wildcards or dangerous RBAC.
 
 ## ListenerSet: the missing building block
 
@@ -130,8 +132,8 @@ configurations:
 | HTTPRoute   | routing                                     | Developer     |
 
 Functionally, for Ingress users, ListenerSet + HTTPRoute becomes the closest
-thing to functionally similar to the Ingress experience, while remaining
-Gateway-native, as shown in the following diagram:
+Gateway-native equivalent to the Ingress experience, as shown in the following
+diagram:
 
 ![As in the previous diagram, with Ingress, App Developers can configure TLS on their own. After, with Gateway and ListenerSet, App Developers can keep the same workflow for configuring TLS without needing to involve the Cluster Operator.](/images/announcements/2025-11-26-ingress-nginx-eol-and-gateway-api/migrating-using-listenerset.svg)
 
@@ -139,10 +141,10 @@ Gateway-native, as shown in the following diagram:
 
 ### What we will ship
 
-cert-manager 1.20 will include, behind a feature gate, support for the
+cert-manager 1.20 will include feature-gated support for the
 `cert-manager.io/issuer` and `cert-manager.io/cluster-issuer` annotations on
-XListenerSet resources, with XListenerSet annotations overriding Gateway
-annotations, and Gateway annotations acting as the "default issuer".
+XListenerSet resources. XListenerSet annotations override Gateway annotations,
+which act as the default issuer.
 
 ### Timeline
 
@@ -156,9 +158,9 @@ type and a migration path from XListenerSet to ListenerSet.
 
 ## Ingress-nginx & InGate EOL: what this means for users
 
-Given that we plan to release cert-manager 1.20 in February 2026, which is one
-month before the end of life of the ingress-nginx and InGate projects, and given
-that XListenerSet is still experimental, we want to set expectations clearly:
+cert-manager 1.20 is planned for February 2026, one month before ingress-nginx
+and InGate reach end of life. Because XListenerSet is still experimental, we
+want to set expectations clearly:
 
 - Today, there is no safe, first-class way to preserve multi-tenant TLS
   self-service using Gateway API.
@@ -170,17 +172,17 @@ that XListenerSet is still experimental, we want to set expectations clearly:
 
 ## Conclusion
 
-Our goal is to make the transition to Gateway API as easy as possible to our
+Our goal is to make the transition to Gateway API as easy as possible for our
 users. We have [already
 started](https://github.com/cert-manager/cert-manager/issues/7822) transitioning
 all of our tutorials to using Gateway API instead of the Ingress API. We hope
-that XListenerSet is the right solution for people relying on multi-tenant
-ingress controllers wanting to migrate to Gateway API.
+that XListenerSet gives teams on multi-tenant ingress controllers a clear path
+to Gateway API.
 
-For our existing ingress-nginx Ingress users, we recommend migrating to another
-Ingress controller such as Traefik instead of immediately jumping to Gateway
-API. And once cert-manager supports the stable ListenerSet resource, you will be
-able to plan your migration toward Gateway API.
+For existing ingress-nginx users, we recommend migrating to another Ingress
+controller such as Traefik instead of immediately jumping to Gateway API. Once
+cert-manager supports the stable ListenerSet resource, you will be able to plan
+your migration toward Gateway API.
 
 We will share more updates as alpha builds become available on the
 [#cert-manager](https://kubernetes.slack.com/messages/cert-manager) channel on
