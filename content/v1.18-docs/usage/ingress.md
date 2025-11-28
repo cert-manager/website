@@ -6,8 +6,8 @@ description: 'cert-manager usage: Kubernetes Ingress'
 > **apiVersion:** networking.k8s.io/v1  
 > **kind:** Ingress
 
-<div style={{textAlign: "center"}}>
-<object data="/images/request-certificate-overview/request-certificate-ingress.svg"></object>
+<div class="text-center">
+<object class="inline" data="/images/request-certificate-overview/request-certificate-ingress.svg"></object>
 </div>
 
 A common use-case for cert-manager is requesting TLS signed certificates to
@@ -263,6 +263,6 @@ If you do not see a `Certificate` resource being created after applying the ingr
 
 ## Inner workings diagram for developers
 
-<object data="/images/request-certificate-debug/ingress-shim-flow.svg"></object>
+<object class="inline" data="/images/request-certificate-debug/ingress-shim-flow.svg"></object>
 
 [1] https://cert-manager.io/docs/usage/certificate

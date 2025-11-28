@@ -6,8 +6,8 @@ description: 'cert-manager usage: Kubernetes Gateways'
 > **apiVersion:** gateway.networking.k8s.io/v1  
 > **kind:** Gateway
 
-<div style={{textAlign: "center"}}>
-<object data="/images/request-certificate-overview/request-certificate-gateway.svg"></object>
+<div class="text-center">
+<object class="inline" data="/images/request-certificate-overview/request-certificate-gateway.svg"></object>
 </div>
 
 **FEATURE STATE**: cert-manager 1.15 [beta]
@@ -440,6 +440,6 @@ Certificate resources:
 
 ## Inner workings diagram for developers
 
-<object data="/images/request-certificate-debug/gateway-shim-flow.svg"></object>
+<object class="inline" data="/images/request-certificate-debug/gateway-shim-flow.svg"></object>
 
 [1] https://cert-manager.io/docs/usage/certificate

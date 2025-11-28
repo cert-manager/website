@@ -6,8 +6,8 @@ description: 'cert-manager usage: Kubernetes CertificateSigningRequest resources
 > **apiVersion:** certificates.k8s.io/v1  
 > **kind:** CertificateSigningRequest
 
-<div style={{textAlign: "center"}}>
-<object data="/images/request-certificate-overview/request-certificate-csr.svg"></object>
+<div class="text-center">
+<object class="inline" data="/images/request-certificate-overview/request-certificate-csr.svg"></object>
 </div>
 
 Kubernetes has an in-built
@@ -173,4 +173,4 @@ $ kubectl certificate approve <name>
 
 ## Inner workings diagram for developers
 
-<object data="/images/request-certificate-debug/certificate-signing-request-flow.svg"></object>
+<object class="inline" data="/images/request-certificate-debug/certificate-signing-request-flow.svg"></object>
