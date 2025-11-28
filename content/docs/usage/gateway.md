@@ -38,6 +38,12 @@ the Ingress API.
 
 [gwapi]: https://gateway-api.sigs.k8s.io
 
+<div className="info">
+
+⚠️   cert-manager does not yet support the new ListenerSet resource. If you want to maintain the self-service TLS configuration experience that developers are accustomed to with the Ingress resource, you will need to configure RBAC to allow application developers to edit Gateway resources. You can learn more about upcoming cert-manager improvements that will enable self-service TLS without giving away control over Gateway resources in [Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming](/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api/).
+
+</div>
+
 The Gateway resource holds the TLS configuration, as illustrated in the
 following diagram (source: https://gateway-api.sigs.k8s.io):
 
