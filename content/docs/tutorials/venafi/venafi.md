@@ -3,6 +3,8 @@ title: Securing Ingresses with CyberArk Certificate Manager
 description: 'cert-manager tutorials: Securing Ingress using CyberArk Issuers'
 ---
 
+> **Upcoming change:** ingress-nginx is scheduled for end of life in March 2026. See [Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming](/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api) for migration guidance and Gateway API plans.
+
 This guide walks you through how to secure a Kubernetes
 [`Ingress`](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 resource using the CyberArk Issuer (formerly known as Venafi).
