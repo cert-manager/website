@@ -1,4 +1,4 @@
-export default function Icon({ name }) {
+export default function Icon({ name, inline = false }) {
   const iconNames = ['github', 'slack', 'twitter', 'mastodon', 'downloads', 'magnifying_glass', 'chevronDown']
   if (!iconNames.includes(name)) {
     throw new Error(`Icon name must be one of "${iconNames}"`)
@@ -6,31 +6,32 @@ export default function Icon({ name }) {
 
   switch (name) {
     case 'github':
-      return <GithubIcon />
+      return <GithubIcon inline={inline} />
     case 'slack':
-      return <SlackIcon />
+      return <SlackIcon inline={inline} />
     case 'twitter':
-      return <TwitterIcon />
+      return <TwitterIcon inline={inline} />
     case 'mastodon':
-      return <MastodonIcon />
+      return <MastodonIcon inline={inline} />
     case 'downloads':
-      return <DownloadsIcon />
+      return <DownloadsIcon inline={inline} />
     case 'magnifying_glass':
-      return <MagnifyingGlassIcon />
+      return <MagnifyingGlassIcon inline={inline} />
     case 'chevronDown':
-      return <ChevronDown />
+      return <ChevronDown inline={inline} />
     default:
       throw new Error(`Icon for ${name} is not being handled`)
   }
 }
 
-function GithubIcon() {
+function GithubIcon({ inline = false }) {
   return (
     <svg
       width="100%"
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={inline ? "inline" : ""}
     >
       <path
         d="M16 1C7.7175 1 1 7.88604 1 16.3792C1 23.1743 5.2975 28.9389 11.2587 30.9728C12.0075 31.115 12.25 30.6383 12.25 30.2333V27.3702C8.0775 28.3007 7.20875 25.5555 7.20875 25.5555C6.52625 23.7779 5.5425 23.305 5.5425 23.305C4.18125 22.3502 5.64625 22.3707 5.64625 22.3707C7.1525 22.4783 7.945 23.956 7.945 23.956C9.2825 26.3065 11.4538 25.6272 12.31 25.2338C12.4438 24.2405 12.8325 23.5613 13.2625 23.1781C9.93125 22.7872 6.42875 21.4684 6.42875 15.5769C6.42875 13.8967 7.015 12.5254 7.97375 11.4489C7.81875 11.0606 7.305 9.49573 8.12 7.37853C8.12 7.37853 9.38 6.96585 12.2462 8.95489C13.4425 8.61399 14.725 8.44354 16 8.43713C17.275 8.44354 18.5587 8.61399 19.7575 8.95489C22.6212 6.96585 23.8787 7.37853 23.8787 7.37853C24.695 9.49701 24.1812 11.0618 24.0262 11.4489C24.9887 12.5254 25.57 13.898 25.57 15.5769C25.57 21.4838 22.0612 22.7846 18.7213 23.1653C19.2588 23.642 19.75 24.5776 19.75 26.013V30.2333C19.75 30.6421 19.99 31.1227 20.7512 30.9715C26.7075 28.935 31 23.1717 31 16.3792C31 7.88604 24.2837 1 16 1Z"
@@ -40,13 +41,14 @@ function GithubIcon() {
   )
 }
 
-function SlackIcon() {
+function SlackIcon({ inline = false }) {
   return (
     <svg
       width="100%"
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={inline ? "inline" : ""}
     >
       <path
         d="M7.30293 19.9576C7.30293 21.6921 5.886 23.1091 4.15147 23.1091C2.41694 23.1091 1 21.6921 1 19.9576C1 18.2231 2.41694 16.8062 4.15147 16.8062H7.30293V19.9576Z"
@@ -84,13 +86,14 @@ function SlackIcon() {
   )
 }
 
-function DownloadsIcon() {
+function DownloadsIcon({ inline = false }) {
   return (
     <svg
       width="100%"
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={inline ? "inline" : ""}
     >
       <path
         d="M18 3.0339C18 1.91061 17.1046 1 16 1C14.8954 1 14 1.91061 14 3.0339V16.4287L9.91421 12.2737C9.13316 11.4794 7.86684 11.4794 7.08579 12.2737C6.30474 13.068 6.30474 14.3558 7.08579 15.15L14.5858 22.7772C14.7775 22.9722 14.9985 23.1193 15.2344 23.2186C15.4702 23.318 15.7288 23.3729 16 23.3729C16.5118 23.3729 17.0237 23.1743 17.4142 22.7772L24.9142 15.15C25.6953 14.3558 25.6953 13.068 24.9142 12.2737C24.1332 11.4794 22.8668 11.4794 22.0858 12.2737L18 16.4287V3.0339Z"
@@ -104,7 +107,7 @@ function DownloadsIcon() {
   )
 }
 
-function ChevronDown() {
+function ChevronDown({ inline = false }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -112,6 +115,7 @@ function ChevronDown() {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
+      className={inline ? "inline" : ""}
     >
       <path
         strokeLinecap="round"
@@ -123,39 +127,42 @@ function ChevronDown() {
   )
 }
 
-function TwitterIcon() {
+function TwitterIcon({ inline = false }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="100%"
       fill="currentColor"
       viewBox="0 0 30 30"
+      className={inline ? "inline" : ""}
     >
       <path d="M26.37,26l-8.795-12.822l0.015,0.012L25.52,4h-2.65l-6.46,7.48L11.28,4H4.33l8.211,11.971L12.54,15.97L3.88,26h2.65 l7.182-8.322L19.42,26H26.37z M10.23,6l12.34,18h-2.1L8.12,6H10.23z" />
     </svg>
   )
 }
 
-function MastodonIcon() {
+function MastodonIcon({ inline = false }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="100%"
       fill="currentColor"
       viewBox="0 0 16 16"
+      className={inline ? "inline" : ""}
     >
       <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"/>
     </svg>
   )
 }
 
-function MagnifyingGlassIcon() {
+function MagnifyingGlassIcon({ inline = false }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="100%"
       fill="currentColor"
       viewBox="0 0 16 16"
+      className={inline ? "inline" : ""}
     >
       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
     </svg>

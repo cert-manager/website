@@ -3,9 +3,9 @@ import FooterSepartor from './snippets/FooterSeparator'
 
 export default function Footer() {
   return (
-    <footer className="-mt-117px">
-      <div className="relative w-screen h-117px overflow-x-hidden">
-        <FooterSepartor className="absolute top-0 -left-696px" />
+    <footer className="mt-[-117px]">
+      <div className="relative w-screen h-[117px] overflow-x-hidden">
+        <FooterSepartor className="absolute top-0 left-[-696px]" />
       </div>
       <div className="bg-dark-2 pb-10 pt-5">
         <div className="container text-sm text-white">

@@ -36,7 +36,7 @@ export default function Header() {
           target="_blank"
           icon="twitter"
           iconWClass="w-4"
-          className="px-3 py-1 text-11px mx-4 "
+          className="px-3! py-1! text-[11px]! mx-4!"
         />
         and
         <Button
@@ -48,7 +48,7 @@ export default function Header() {
           icon="mastodon"
           iconWClass="w-4"
            rel="me"
-          className="px-3 py-1 text-11px mx-4 "
+          className="px-3! py-1! text-[11px]! mx-4!"
         />
       </div>
     </div>
@@ -57,7 +57,7 @@ export default function Header() {
 
 function MobileNavigation({ active, className = '' }) {
   const [open, setOpen] = useState(false)
-  const classNames = open ? 'top-65px' : '-top-1000px'
+  const classNames = open ? 'top-[65px]' : '-top-[1000px]'
   const ref = useRef(null)
   useOutsideAlerter(ref, setOpen)
 
@@ -65,7 +65,7 @@ function MobileNavigation({ active, className = '' }) {
     <div className={className}>
       <button
         onClick={() => setOpen(!open)}
-        className={`${open ? 'text-pink' : 'text-blue-1'}`}
+        className={`cursor-pointer ${open ? 'text-pink' : 'text-blue-1'}`}
       >
         <BarsIcon />
       </button>
@@ -88,7 +88,7 @@ function MobileNavigation({ active, className = '' }) {
             </ul>
           </div>
           <div>
-            <ul className="flex flex-col justify-between items-end max-w-200px h-full">
+            <ul className="flex flex-col justify-between items-end max-w-[200px] h-full">
               <li className="max-w-full">
                 <DocSearch
                   appId={process.env.NEXT_PUBLIC_DOCS_SEARCH_APP_ID}
@@ -100,7 +100,7 @@ function MobileNavigation({ active, className = '' }) {
                 <Link
                   href={site.navigation.cta.href}
                   onClick={() => closeMenu(setOpen)}
-                  className="block btn-primary text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px">
+                  className="block btn-primary text-white font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-[5px]">
 
                   {site.navigation.cta.text}
 
@@ -131,7 +131,7 @@ function DesktopNavigation({ active, className = '' }) {
         <li>
           <Link
             href={site.navigation.cta.href}
-            className="block btn-primary font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-5px">
+            className="block btn-primary font-montserrat font-bold text-sm uppercase py-2 px-5 rounded-[5px]">
 
             {site.navigation.cta.text}
 
@@ -191,7 +191,7 @@ function NavItem({ active, item, setOpen = null }) {
 
         {item.text}
         {isActive && (
-          <span className="block absolute top-6 left-0 w-33px h-3px bg-blue-1"></span>
+          <span className="block absolute top-6 left-0 w-[33px] h-[3px] bg-blue-1"></span>
         )}
 
       </Link>

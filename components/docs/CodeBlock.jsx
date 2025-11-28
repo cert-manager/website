@@ -113,7 +113,7 @@ export default function CodeBlock({ children, theme = 'github' }) {
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <>
             <CopyToClipboard text={code} onCopy={() => setCopied(doneIcon)}>
-              <button className="docs-codeblock-btn">{copied}</button>
+              <button className="cursor-pointer docs-codeblock-btn">{copied}</button>
             </CopyToClipboard>
             <pre className={className} style={style}>
               {tokens.map((line, i) => (
