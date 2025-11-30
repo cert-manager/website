@@ -39,7 +39,7 @@ developers can create HTTPRoutes, but they cannot safely modify the shared
 Gateway owned by the platform team. So they lose TLS self-service, and every TLS
 change becomes a ticket, as shown in the following diagram:
 
-![Before, with Ingress, App Developers configured TLS on their own. After, with Gateway, App Developers need to ask the Cluster Operator for the TLS configuration to be added to the Gateway.](/images/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api/migrating-without-listenerset.svg)
+![Before, with Ingress, App Developers configured TLS on their own. After, with Gateway, App Developers need to ask the Cluster Operator for the TLS configuration to be added to the Gateway.](/images/announcements/2025-11-26-ingress-nginx-eol-and-gateway-api/migrating-without-listenerset.svg)
 
 This represents a change in the self-service experience compared to today's
 Ingress workflows.
@@ -154,7 +154,7 @@ Functionally, for Ingress users, ListenerSet + HTTPRoute becomes the closest
 Gateway-native equivalent to the Ingress experience, as shown in the following
 diagram:
 
-![As in the previous diagram, with Ingress, App Developers can configure TLS on their own. After, with Gateway and ListenerSet, App Developers can keep the same workflow for configuring TLS without needing to involve the Cluster Operator.](/images/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api/migrating-using-listenerset.svg)
+![As in the previous diagram, with Ingress, App Developers can configure TLS on their own. After, with Gateway and ListenerSet, App Developers can keep the same workflow for configuring TLS without needing to involve the Cluster Operator.](/images/announcements/2025-11-26-ingress-nginx-eol-and-gateway-api/migrating-using-listenerset.svg)
 
 ## cert-manager roadmap: XListenerSet support in Feb 2026
 
