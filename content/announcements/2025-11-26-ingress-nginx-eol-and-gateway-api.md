@@ -8,10 +8,10 @@ description:
 date: '2025-11-26T12:00:00Z'
 ---
 
-Since [the announcement][] that ingress-nginx and InGate will reach end of life
-in March 2026, we have seen more questions about the migration path from Ingress
-to Gateway API. Today, cert-manager cannot offer the same TLS self-service
-experience because of design differences between the two APIs.
+We have seen questions about migrating from Ingress to Gateway API since [the
+announcement][] that ingress-nginx and InGate will reach end of life in March
+2026. Today, cert-manager cannot offer the same TLS self-service experience
+because of design differences between the two APIs.
 
 Whereas Ingress was a single resource, Gateway API breaks the resource down into
 cluster-operator-owned Gateway resources and team-owned HTTPRoute resources,
