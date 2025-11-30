@@ -4,7 +4,7 @@ title:
   "Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming"
 description:
   A look at the current state of cert-manager's support for the Gateway API with
-  regard to ingress-nginx and InGate end-of-life.
+  regard to ingress-nginx and InGate end of life.
 date: '2025-11-26T12:00:00Z'
 ---
 
@@ -19,7 +19,7 @@ with certificates configured on cluster-operator-owned Gateways.
 
 The missing piece is Gateway API's experimental XListenerSet resource, which
 aims to restore per-team TLS configuration on a shared Gateway. cert-manager
-plans to add experimental XListenerSet support in 1.20, targeted for 10 February
+plans to add experimental XListenerSet support in 1.20, targeted for February 10,
 2026, with alpha builds in January 2026.
 
 [the announcement]: https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/
@@ -42,18 +42,37 @@ change becomes a ticket, as shown in the following diagram:
 ![Before, with Ingress, App Developers configured TLS on their own. After, with Gateway, App Developers need to ask the Cluster Operator for the TLS configuration to be added to the Gateway.](/images/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api/migrating-without-listenerset.svg)
 
 This represents a change in the self-service experience compared to today's
-Ingress workflows. While this may seem like a step backward for developer
-velocity, the Gateway API design intentionally addresses a security concern with
-the Ingress API: nothing prevents one team from accidentally or maliciously
-capturing traffic intended for another team by creating an Ingress with the same
-hostname but different TLS configuration. This often happens in larger clusters
-with many teams, where conflicting Ingress objects can silently intercept
-traffic meant for other services. By centralizing TLS configuration at the
-Gateway level, Gateway API provides stronger security boundaries, at the cost of
-reduced self-service in simple multi-tenant setups. For more details on the
-design rationale, you can read the page: [Key differences between Ingress API
-and Gateway
-API](https://gateway-api.sigs.k8s.io/guides/migrating-from-ingress/#key-differences-between-ingress-api-and-gateway-api).
+Ingress workflows.
+
+## Why Gateway API was designed this way
+
+While this may seem like a step backward for developer velocity, the Gateway API
+design intentionally addresses two major concerns with the Ingress API:
+
+**Traffic hijacking protection:** with the Ingress API, one team can
+accidentally or maliciously capture traffic intended for another team by
+creating an Ingress with the same hostname but different TLS configuration. This
+often happens in larger clusters with many teams, where conflicting Ingress
+objects can silently intercept traffic meant for other services.
+
+**Certificate cost concerns:** As [Nick Young
+explained](https://www.reddit.com/r/kubernetes/comments/1p613rp/comment/nqnlmh4/),
+when Gateway API was first designed, certificates were expensive assets bought
+from VeriSign or similar providers, costing thousands of dollars each. You
+absolutely didn't want app developers touching or owning those certificates.
+
+These two concerns led to centralizing TLS configuration at the Gateway level
+under cluster admin control. This centralization still makes sense for
+restricting the use of wildcard certificates. However, Let's Encrypt and
+cert-manager helped break the certificate monopoly, making it acceptable for app
+developers to "own" their certificates by requesting automated issuance.
+
+ListenerSet emerged as the community's solution to restore developer
+self-service while letting infrastructure admins choose whether to grant that
+capability based on their security posture. For more details on the design
+rationale, you can read the [Key differences between Ingress API and
+Gateway
+API](https://gateway-api.sigs.k8s.io/guides/migrating-from-ingress/#key-differences-between-ingress-api-and-gateway-api) page.
 
 ## Why cert-manager can't fix this on its own (yet)
 
@@ -89,7 +108,7 @@ spec:
           - name: gateway-tls
 ```
 
-For context, cert-manager doesn't look at the hostnames on HTTPRoutes as these
+For context, cert-manager doesn't look at the hostnames on HTTPRoutes, as these
 hostnames aren't meant for TLS; they are used by Gateway API controllers to know
 which listener on the Gateway should be used for each HTTPRoute.
 
@@ -150,7 +169,7 @@ which act as the default issuer.
 
 - **January 2026:** Alpha builds with XListenerSet support. We will need your
   help to test it out!
-- **10 February 2026:** cert-manager 1.20 is expected to include XListenerSet
+- **February 10, 2026:** cert-manager 1.20 is expected to include XListenerSet
   support as an experimental feature gated behind a feature flag.
 
 As Gateway API graduates ListenerSet to stable, we'll add support for the stable
