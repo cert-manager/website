@@ -3,6 +3,8 @@ title: Securing NGINX-ingress
 description: 'cert-manager tutorials: Using ingress-nginx to solve an ACME HTTP-01 challenge'
 ---
 
+> **Upcoming change:** ingress-nginx is scheduled for end of life in March 2026. See [Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming](/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api) for migration guidance and Gateway API plans.
+
 This tutorial will detail how to install and secure ingress to your cluster
 using NGINX.
 
