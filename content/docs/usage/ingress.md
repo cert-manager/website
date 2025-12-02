@@ -3,6 +3,8 @@ title: Annotated Ingress resource
 description: 'cert-manager usage: Kubernetes Ingress'
 ---
 
+> **Upcoming change:** ingress-nginx is scheduled for end of life in March 2026. See [Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming](/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api) for migration guidance and Gateway API plans.
+
 > **apiVersion:** networking.k8s.io/v1  
 > **kind:** Ingress
 
