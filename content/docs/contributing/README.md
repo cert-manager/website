@@ -13,17 +13,20 @@ some details on how to build, test and run cert-manager for development purposes
 
 ## Meetings
 
-All cert-manager meetings are open for everyone to join; if you have a question or a suggestion or just want to chat,
-please feel free to come along and get involved!
+All cert-manager meetings are open to everyone; whether you have a question, a
+suggestion, or just want to chat, you're welcome to join. Register using the
+links below to receive an invitation:
 
-To get invites you can subscribe to [our mailing list](https://groups.google.com/forum/#!forum/cert-manager-dev) and
-you should receive calendar invites by mail shortly after joining. The complexities of calendars mean that some invites
-might be sent multiple times depending on your email and calendar providers and you might get some invites for past
-or future meetings which have been rescheduled or edited. Sorry about that!
+|          Meeting Name          |                           Description                            |                   When                    | Link to register |
+|--------------------------------|------------------------------------------------------------------|-------------------------------------------|------------------|
+| Daily Check-In (EMEA and APAC) | A quick daily stand-up to sync on work and blockers              | About 3 times a week at 10:30 London time | [Register here][standup] |
+| Weekly Community (US and EMEA) | A weekly meeting for the community to discuss progress and plans | Thursdays at 17:00 London time            | [Register here][weekly] |
 
-We have 2 regular repeating meetings: our quick daily check-in and the cert-manager weekly community meeting.
+See all upcoming meetings in your local time on the [calendar page][calendar].
 
-If you're having any issues joining our meetings, ensure that you're part of the [`cert-manager-dev`](https://groups.google.com/forum/#!forum/cert-manager-dev) Google group, and always feel free to ask in [Slack](./#slack) for help!
+[standup]: https://zoom-lfx.platform.linuxfoundation.org/meeting/97683894330?password=1cb64ed5-3014-48b6-ae72-3d0738ac2263
+[weekly]: https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3
+[calendar]: https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager
 
 <div className="info">
 🔰 All of our meetings happen on London (UK) time; you can add London to the world clocks on your phone to avoid confusion!
