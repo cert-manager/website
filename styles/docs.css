@@ -91,17 +91,21 @@
         display: none;
       }
     }
+    
+    .admonition {
+      display: block;
 
-    .info {
-      @apply p-4 bg-gray-1 border-4 border-gray-2 my-5;
-    }
+      &.info {
+        @apply p-4 bg-gray-1 border-4 border-gray-2 my-5;
+      }
+      
+      &.warning {
+        @apply pl-4 border-l-4 border-blue-1 my-5;
+      }
 
-    .warning {
-      @apply pl-4 border-l-4 border-blue-1 my-5;
-    }
-
-    .alert {
-      @apply pl-4 border-l-4 border-red my-5;
+      &.danger {
+        @apply pl-4 border-l-4 border-red my-5;
+      }
     }
   }
 

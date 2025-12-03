@@ -21,7 +21,8 @@ export function Documentation({ source, theme }) {
       )
     },
     pre: (props) => <CodeBlock {...props} theme={theme} />,
-    code: (props) => <InlineCode {...props} theme={theme} />
+    code: (props) => <InlineCode {...props} theme={theme} />,
+    admonition: ({ title, type, ...props }) => <div className={"admonition " + type} title={title} {...props} theme={theme} />
   }
 
   return <MDXRemote {...source} components={components} theme={theme} />
