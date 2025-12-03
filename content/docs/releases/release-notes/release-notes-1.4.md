@@ -55,7 +55,7 @@ We have deprecated the following cert-manager APIs:
 
 These APIs will be removed in cert-manager 1.6.
 
-<div className="warning">
+:::warning
 
 ⛔️  If you are upgrading cert-manager on a cluster which has previously had
 cert-manager < `v1.0.0`, you will need to ensure that all cert-manager custom
@@ -66,7 +66,7 @@ This is explained in more detail in the [Upgrading existing cert-manager
 resources](../upgrading/remove-deprecated-apis.md#upgrading-existing-cert-manager-resources)
 page.
 
-</div>
+:::
 
 This change was made in the cert-manager PR [#4021][].
 
@@ -89,12 +89,12 @@ spec:
     runAsNonRoot: true
 ```
 
-<div className="warning">
+:::warning
 
 ⛔️  If you are using custom containers that run as root with the Helm chart, you
 will need to set this back to `false`.
 
-</div>
+:::
 
 Implemented in the cert-manager PR [#4036][].
 
@@ -112,12 +112,12 @@ CA, since cert-manager may not be aware of it.
 
 Fixed in the cert-manager PRs [#3982][], [#3983][], and [#3985][].
 
-<div className="warning">
+:::warning
 
 ⛔️  You may need to adjust systems that consume the `ca.crt` from Secrets
 managed by cert-manager with the CA issuer.
 
-</div>
+:::
 
 [#3982]: https://github.com/cert-manager/cert-manager/pull/3982 "All issuers + Vault issuer"
 [#3983]: https://github.com/cert-manager/cert-manager/pull/3983 "Venafi issuer"
@@ -136,13 +136,13 @@ This change was necessary to fix a bug where users of the Vault issuer would see
 a clash between the default renewal duration of 30 days and the duration of
 certificates issued by the Vault PKI.
 
-<div className="warning">
+:::warning
 
 ⛔️  If you were relying on the default renewal happening 30 days before expiry,
 we would advise setting `renewBefore` to 30 days (`720h`) to keep the old
 behavior.
 
-</div>
+:::
 
 Fixed in the cert-manager PR [#4092][].
 

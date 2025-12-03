@@ -338,7 +338,7 @@ A certificate object is reissued under the following circumstances:
   ```
   Note that the above command requires [cmctl](../reference/cmctl.md#renew).
 
-<div className="warning">
+:::warning
 
 **❌** Deleting the Secret resource associated with a Certificate resource is
 **not a recommended solution** for manually rotating the private key. The
@@ -350,7 +350,7 @@ of the Certificate resource with the following command (requires
 cmctl renew cert-1
 ```
 
-</div>
+:::
 
 <a id="temporary-certificates-whilst-issuing"></a>
 ## Issuance behavior: Temporary Certificates while Issuing
@@ -404,7 +404,7 @@ application, and you will want to either manually restart your pod with
 [Reloader](https://docs.stakater.com/reloader/). Reloader is a Secret controller that
 makes sure deployments get restarted whenever a mounted Secret changes.
 
-<div className="alert">
+:::danger
 
 Re-use of private keys
 
@@ -413,7 +413,7 @@ issuer](../configuration/venafi.md), may disallow re-using private keys.
 If this is the case, you must explicitly configure the `rotationPolicy:
 Always` setting for each of your Certificate objects accordingly.
 
-</div>
+:::
 
 In the following example, the certificate has been set with
 `rotationPolicy: Always`:
@@ -448,7 +448,7 @@ above). Note that if the private key secret already exists when creating the
 certificate object, the existing private key will not be used, since the
 rotation mechanism also includes the initial issuance.
 
-<div className="info">
+:::info
 
 👉 We recommend that you configure `rotationPolicy: Always` on your Certificate
 resources. Rotating both the certificate and the private key simultaneously
@@ -458,7 +458,7 @@ the private key rotation can be done in case of emergency. More generally, it is
 a good practice to be rotating the keys as often as possible, reducing the risk
 associated with compromised keys.
 
-</div>
+:::
 
 ## Cleaning up Secrets when Certificates are deleted
 

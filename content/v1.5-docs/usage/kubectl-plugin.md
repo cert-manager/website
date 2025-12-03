@@ -184,7 +184,7 @@ $ kubectl cert-manager x create csr -f my-cert.yaml my-req
 ```
 
 
-<div className="warning">
+:::warning
 
 cert-manager **will not** automatically approve
 CertificateSigningRequests. If you are not running a custom approver in your
@@ -194,7 +194,7 @@ cluster, you will likely need to manually approve the CertificateSigningRequest:
 $ kubectl certificate approve <name>
 ```
 
-</div>
+:::
 
 This command can also wait for the CertificateSigningRequest to be signed using
 the flag `-w, --fetch-certificate`. Once signed it will write the resulting
