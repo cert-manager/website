@@ -1,7 +1,7 @@
 const MenuButton = ({ isOpen, onClick }) => (
   <button
     onClick={onClick}
-    className="md:hidden px-2 py-3 font-bold text-gray-600 flex"
+    className="md:hidden px-2 py-3 font-bold text-gray-600 flex cursor-pointer"
   >
     <span className="text-gray-400 font-normal block transform mr-1 w-6">
       {isOpen ? (

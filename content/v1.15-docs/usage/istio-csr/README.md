@@ -3,8 +3,8 @@ title: Securing Istio Service Mesh
 description: 'cert-manager usage: Istio and istio-csr'
 ---
 
-<div style={{textAlign: "center"}}>
-<object data="/images/request-certificate-overview/request-certificate-mesh.svg"></object>
+<div class="text-center">
+<object class="inline" data="/images/request-certificate-overview/request-certificate-mesh.svg"></object>
 </div>
 
 cert-manager can be integrated with [Istio](https://istio.io) using the project

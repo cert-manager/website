@@ -86,10 +86,10 @@ function AnnouncementIndex({articles}) {
           <div className="mx-auto md:mx-0 prose max-w-full main-docs-section">
               <h1>Announcements</h1>
               {articles.map((article) => (
-                <a key={article.path} href={article.path} className="block my-2 !no-underline p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{article.title}</h5>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">{article.description}</p>
-                    <p className="font-thin text-gray-700 dark:text-gray-400 italic">{article.date}</p>
+                <a key={article.path} href={article.path} className="block my-2 no-underline! p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">{article.title}</h5>
+                    <p className="font-normal text-gray-700">{article.description}</p>
+                    <p className="font-thin text-gray-700 italic">{article.date}</p>
                 </a>
               ))}
           </div>

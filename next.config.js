@@ -1,6 +1,3 @@
-const WindiCSSWebpackPlugin = require('windicss-webpack-plugin')
-const path = require('path')
-
 module.exports = {
   output: 'export',
 
@@ -24,13 +21,6 @@ module.exports = {
   // More documentation can be found here:
   // https://nextjs.org/docs/upgrading#next-export-no-longer-exports-pages-as-indexhtml
   trailingSlash: true,
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')]
-  },
-  webpack: (config) => {
-    config.plugins.push(new WindiCSSWebpackPlugin())
-    return config
-  },
   eslint: {
     ignoreDuringBuilds: true
   },

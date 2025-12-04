@@ -23,7 +23,7 @@ export default function Dropdown({
     <div className="pt-2 pb-2">
       <button
         tabIndex={parentOpen ? 0 : -1}
-        className="relative text-blue-800 text-base font-medium w-full text-left flex items-center justify-between"
+        className="relative text-base font-medium w-full text-left flex items-center justify-between cursor-pointer"
         onClick={() => setOpen(!open)}
       >
         <span className="block">{routes.title}</span>

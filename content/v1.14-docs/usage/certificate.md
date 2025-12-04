@@ -6,8 +6,8 @@ description: 'cert-manager usage: Certificates'
 > **apiVersion:** cert-manager.io/v1<br/>
 > **kind:** Certificate
 
-<div style={{textAlign: "center"}}>
-<object data="/images/request-certificate-overview/request-certificate-cert.svg"></object>
+<div class="text-center">
+<object class="inline" data="/images/request-certificate-overview/request-certificate-cert.svg"></object>
 </div>
 
 In cert-manager, the `Certificate` resource represents a human readable definition
@@ -470,6 +470,6 @@ If you would prefer the `Secret` to be deleted automatically when the `Certifica
 
 ## Inner workings diagram for developers
 
-<object data="/images/request-certificate-debug/certificate-flow.svg"></object>
+<object class="inline" data="/images/request-certificate-debug/certificate-flow.svg"></object>
 
 [1] https://cert-manager.io/docs/usage/certificaterequest

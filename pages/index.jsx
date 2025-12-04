@@ -25,13 +25,13 @@ function Home({ router }) {
         description: page.description
       }}
     />
-    <div className="bg-gray-1 relative overflow-x-hidden pb-117px">
+    <div className="bg-gray-1 relative overflow-x-hidden pb-[117px]">
       <Hero
         heading={page.hero.heading}
         description={page.hero.description}
         image={page.hero.image}
       />
-      <div className="hidden lg:block absolute top-600px right-0 z-0">
+      <div className="hidden lg:block absolute top-[600px] right-0 z-0">
         <CirclesBackground />
       </div>
       <div className="relative z-100">
@@ -48,7 +48,7 @@ function Home({ router }) {
             />
           </div>
           <Card className="mb-10 pt-7 pb-8 px-8 text-center md:flex md:gap-10 md:items-center md:text-left md:py-6 lg:px-12">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <Image
                 src={page.certManager.image.src}
                 alt={page.certManager.image.alt}
