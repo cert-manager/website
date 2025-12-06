@@ -14,9 +14,11 @@ The following cert-manager APIs were deprecated in cert-manager `v1.4`:
 
 These APIs are no longer served in cert-manager 1.6 and are fully removed in cert-manager 1.7. If you have a cert-manager installation that is using or has previously used these deprecated APIs you might need to upgrade your cert-manager custom resources and CRDs. This should be done before upgrading to cert-manager 1.6 or later.
 
-<div className="alert">
+:::danger
+
 An earlier version of this document listed a number of kubectl commands to run to migrate resources. These steps have now been encoded in [`cmctl upgrade migrate-api-version` command](../../reference/cmctl.md#migrate-api-version). If you have already run the kubectl commands, your resources should have been migrated and there should be no need to also run the `cmctl` command. However, if you are not sure, you can still run the `cmctl` command as well- it will be a no-op if no actions are needed.
-</div>
+
+:::
 
 # Upgrading existing cert-manager resources
 

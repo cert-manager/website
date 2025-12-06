@@ -180,7 +180,7 @@ application, and you will want to either manually restart your pod with
 [wave](https://github.com/wave-k8s/wave). Wave is a Secret controller that
 makes sure deployments get restarted whenever a mounted Secret changes.
 
-<div className="alert">
+:::danger
 
 Re-use of private keys
 
@@ -189,7 +189,7 @@ issuer](../configuration/venafi.md), may disallow re-using private keys.
 If this is the case, you must explicitly configure the `rotationPolicy:
 Always` setting for each of your Certificate objects accordingly.
 
-</div>
+:::
 
 In the following example, the certificate has been set with
 `rotationPolicy: Always`:
@@ -221,7 +221,7 @@ certificate object is reissued under the following circumstances:
   Note that the above command requires the [kubectl
   cert-manager](./kubectl-plugin.md#renew) plugin.
 
-<div className="warning">
+:::warning
 
 **❌** Deleting the Secret resource associated with a Certificate resource is
 **not a recommended solution** for manually rotating the private key. The
@@ -233,7 +233,7 @@ cert-manager`](./kubectl-plugin.md#renew) plugin):
 kubectl cert-manager renew cert-1
 ```
 
-</div>
+:::
 
 ### The `rotationPolicy` setting
 
@@ -256,7 +256,7 @@ above). Note that if the private key secret already exists when creating the
 certificate object, the existing private key will not be used, since the
 rotation mechanism also includes the initial issuance.
 
-<div className="info">
+:::info
 
 👉 We recommend that you configure `rotationPolicy: Always` on your Certificate
 resources. Rotating both the certificate and the private key simultaneously
@@ -266,7 +266,7 @@ the private key rotation can be done in case of emergency. More generally, it is
 a good practice to be rotating the keys as often as possible, reducing the risk
 associated with compromised keys.
 
-</div>
+:::
 
 ## Cleaning up Secrets when Certificates are deleted
 

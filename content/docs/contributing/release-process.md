@@ -112,10 +112,12 @@ features and bug fixes.
 
 ### Process for releasing a version
 
-<div className="info">
+:::info
+
 🔰 Please click on the **Edit this page** button on the top-right corner of this
 page if a step is missing or if it is outdated.
-</div>
+
+:::
 
 1. Remind yourself of our release terminology by looking at the following table.
    This will allow you to know which steps to skip by looking the header of the
@@ -469,22 +471,24 @@ page if a step is missing or if it is outdated.
 
     2. Generate `github-release-description.md` with the following command:
 
-       ```bash
-       # Must be run from the cert-manager folder.
-       export GITHUB_TOKEN=$(gh auth token)
-       git fetch origin $BRANCH
-       export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
-       release-notes --debug --repo-path cert-manager \
+        ```bash
+        # Must be run from the cert-manager folder.
+        export GITHUB_TOKEN=$(gh auth token)
+        git fetch origin $BRANCH
+        export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
+        release-notes --debug --repo-path cert-manager \
          --org cert-manager --repo cert-manager \
          --required-author "cert-manager-prow[bot]" \
          --markdown-links=false \
          --output github-release-description.md
-       ```
+        ```
 
-        <div className="pageinfo pageinfo-info"><p>
+        :::info
+
         The GitHub token **does not need any scope**. The token is required
         only to avoid rate-limits imposed on anonymous API users.
-        </p></div>
+
+        :::
 
     3. Add a one-sentence summary at the top.
 
@@ -495,26 +499,32 @@ page if a step is missing or if it is outdated.
 
     1. Send a first Slack message to `#cert-manager-dev`:
 
-        <div className="pageinfo pageinfo-primary"><p>
-        Releasing <code>1.2.0-alpha.2</code> 🧵
-        </p></div>
+        :::info
+
+        Releasing `1.2.0-alpha.2` 🧵
+
+        :::
 
     2. Check that the build completed in the
        [GCB Build History](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
 
-          <div className="pageinfo pageinfo-info"><p>
-          🔰 Please have a quick look at the build log as it might contain some unredacted
-          data that we forgot to hide. We try to make sure the sensitive data is
-          properly redacted but sometimes we forget to update this.
-          </p></div>
+        :::info
+
+        🔰 Please have a quick look at the build log as it might contain some unredacted
+        data that we forgot to hide. We try to make sure the sensitive data is
+        properly redacted but sometimes we forget to update this.
+  
+        :::
 
     3. Copy the build logs URL and send a second Slack message in reply to this
        first message with the Cloud Build job link. For example, the message
        might look like:
 
-        <div className="pageinfo pageinfo-info"><p>
-        <code>cmrel makestage</code> build logs: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
-        </p></div>
+        :::info
+
+        `cmrel makestage` build logs: https://console.cloud.google.com/cloud-build/builds/7641734d-fc3c-42e7-9e4c-85bfc4d1d547?project=1021342095237
+
+        :::
 
 12. Run `cmrel publish`:
 
@@ -531,9 +541,11 @@ page if a step is missing or if it is outdated.
 
     2. While the build is running, send a third Slack message in reply to the first message:
 
-        <div className="pageinfo pageinfo-primary"><p>
+        :::info
+
         Follow the `cmrel publish` dry-run build: https://console.cloud.google.com/cloud-build/builds16f6f875-0a23-4fff-b24d-3de0af207463?project=1021342095237
-        </p></div>
+
+        :::
 
     3. Now publish the release artifacts for real. The following command will publish the artifacts to GitHub, `Quay.io` and to our
        [helm chart repository](https://charts.jetstack.io):
@@ -543,23 +555,27 @@ page if a step is missing or if it is outdated.
         cmrel publish --nomock --release-name "$RELEASE_VERSION"
         ```
 
-       <div className="info">
-          ⏰ Upon completion there will be:
-          <ol>
-             <li>
-                <a href="https://github.com/cert-manager/cert-manager/releases">A draft release of cert-manager on GitHub</a>
-             </li>
-             <li>
-                <a href="https://github.com/jetstack/jetstack-charts/pulls">A pull request containing the new Helm chart</a>
-             </li>
-          </ol>
-       </div>
+        :::info
+
+        ⏰ Upon completion there will be:
+        <ol>
+         <li>
+            <a href="https://github.com/cert-manager/cert-manager/releases">A draft release of cert-manager on GitHub</a>
+         </li>
+         <li>
+            <a href="https://github.com/jetstack/jetstack-charts/pulls">A pull request containing the new Helm chart</a>
+         </li>
+        </ol>
+
+        :::
 
     4. While the build is running, send a fourth Slack message in reply to the first message:
 
-        <div className="pageinfo pageinfo-primary"><p>
-        Follow the <code>cmrel publish</code> build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
-        </p></div>
+        :::info
+
+        Follow the `cmrel publish` build: https://console.cloud.google.com/cloud-build/builds/b6fef12b-2e81-4486-9f1f-d00592351789?project=1021342095237
+
+        :::
 
 13. Publish the GitHub release:
 
@@ -638,9 +654,11 @@ page if a step is missing or if it is outdated.
    box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
-    <div className="pageinfo pageinfo-primary"><p>
+    :::info
+
     https://github.com/cert-manager/cert-manager/releases/tag/v1.0.0 🎉
-    </p></div>
+
+    :::
 
 18. **(final release only)** Show the release to the world:
 

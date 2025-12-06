@@ -60,7 +60,7 @@ which contains the following explanation:
 > assumption that the remote end must already possess it in order to
 > validate it in any case.
 
-<div className="alert">
+:::danger
 
 When configuring a client to connect to a TLS server with a serving certificate that is signed by a private CA,
 you will need to provide the client with the CA certificate in order for it to verify the server.
@@ -83,7 +83,7 @@ the client will fail to connect to the compromised server.
 The same concept also applies when configuring a server for mutually-authenticated TLS;
 don't give the server access to Secret containing the client certificate and private key.
 
-</div>
+:::
 
 The `dnsNames` field specifies a list of [`Subject Alternative
 Names`](https://en.wikipedia.org/wiki/Subject_Alternative_Name) to be associated
