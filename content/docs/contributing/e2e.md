@@ -13,12 +13,14 @@ Unless you've made huge changes to the cert-manager codebase --- or to the end-t
 tests themselves --- you probably don't _need_ to run the tests locally. If you do want to
 run the tests, though, this document explains how.
 
-<div className="alert">
+:::danger
+
 The status of each commit on the master branch is reported on
 [`testgrid.k8s.io`](https://testgrid.k8s.io/jetstack-cert-manager-master). Join the
 [`cert-manager-dev-alerts`](https://groups.google.com/g/cert-manager-dev-alerts)
 Google group to receive email notifications when tests fail.
-</div>
+
+:::
 
 ## Requirements
 

@@ -28,12 +28,14 @@ See all upcoming meetings in your local time on the [calendar page][calendar].
 [weekly]: https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3
 [calendar]: https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager
 
-<div className="info">
+:::info
+
 🔰 All of our meetings happen on London (UK) time; you can add London to the world clocks on your phone to avoid confusion!
 
 When daylight savings time changes in London might be different to when it changes for you if you live in a place that either
 doesn't have DST or which changes on a different schedule like North America or Australia!
-</div>
+
+:::
 
 ### Daily Check-In
 

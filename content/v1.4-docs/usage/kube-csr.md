@@ -19,7 +19,7 @@ but they still wish for certificates to be signed through cert-manager.
 This feature is currently in an _experimental_ state, and its behavior is
 subject to change in further releases.
 
-<div className="warning">
+:::warning
 
 ⛔️ This feature is only enabled by adding it to the `--feature-gates` flag on
 the cert-manager controller:
@@ -47,8 +47,7 @@ $ helm install \
 > the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#request-signing-process)
 > for the request process of CertificateSigningRequests.
 
-
-</div>
+:::
 
 
 ## Signer Name

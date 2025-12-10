@@ -10,7 +10,7 @@ Following their deprecation in version 1.4, the cert-manager API versions `v1alp
 This means if your deployment manifests contain any of these API versions, you will not be able to deploy them after upgrading.
 Our new `cmctl` utility or old `kubectl cert-manager` plugin can [convert](../../reference/cmctl.md#convert) old manifests to `v1` for you.
 
-<div className="warning">
+:::warning
 
 ⛔️  If you are upgrading cert-manager on a cluster which has previously had
 cert-manager < `v1.0.0`, you will need to ensure that all cert-manager custom
@@ -20,7 +20,7 @@ reference the deprecated APIs **before you upgrade to `v1.6`**.
 This is explained in more detail in the [Upgrading existing cert-manager resources](./remove-deprecated-apis.md#upgrading-existing-cert-manager-resources)
 page.
 
-</div>
+:::
 
 If you are currently using HTTP-01 challenges or the Ingress shim annotations, please read the [Ingress class compatibility](./ingress-class-compatibility.md)
 notes to see if your Ingress controller has any known issues with the migration to Ingress v1.
