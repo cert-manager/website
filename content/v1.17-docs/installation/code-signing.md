@@ -42,11 +42,13 @@ Note that the cert-manager key is stored in Google Cloud KMS, and is used by Goo
 
 ## Helm Charts
 
-<div className="alert">
+:::danger
+
 Helm requires the use of PGP for verification; the key format is different.
 
 Trying to use "plain" PEM encoded public keys during verification will fail.
-</div>
+
+:::
 
 For all cert-manager versions from `v1.6.0` and later, Helm charts are signed and verifiable through the Helm CLI.
 

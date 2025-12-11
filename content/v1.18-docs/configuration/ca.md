@@ -3,7 +3,7 @@ title: CA
 description: 'cert-manager configuration: CA Issuers'
 ---
 
-<div className="warning">
+:::warning
 ⚠️ CA issuers are generally for cert-manager demos or for advanced users with experience
 and tooling for running a PKI. To be used safely in production, CA issuers introduce complex
 planning requirements around rotation, trust store distribution and disaster recovery.
@@ -11,7 +11,8 @@ planning requirements around rotation, trust store distribution and disaster rec
 If you're not planning to run your own PKI, use a different issuer type.
 
 Otherwise, be sure to read the [Important Information](#important-information) below.
-</div>
+
+:::
 
 The CA issuer represents a Certificate Authority whose certificate and
 private key are stored inside the cluster as a Kubernetes `Secret`.
