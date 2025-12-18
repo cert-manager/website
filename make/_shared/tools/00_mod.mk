@@ -66,7 +66,7 @@ NEEDS_CTR = __require-ctr
 tools :=
 # https://github.com/helm/helm/releases
 # renovate: datasource=github-releases packageName=helm/helm
-tools += helm=v4.0.2
+tools += helm=v4.0.4
 # https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
 # renovate: datasource=github-releases packageName=kubernetes/kubernetes
 tools += kubectl=v1.34.3
@@ -84,19 +84,19 @@ tools += azwi=v1.5.1
 tools += kyverno=v1.16.1
 # https://github.com/mikefarah/yq/releases
 # renovate: datasource=github-releases packageName=mikefarah/yq
-tools += yq=v4.49.2
+tools += yq=v4.50.1
 # https://github.com/ko-build/ko/releases
 # renovate: datasource=github-releases packageName=ko-build/ko
-tools += ko=0.18.0
+tools += ko=0.18.1
 # https://github.com/protocolbuffers/protobuf/releases
 # renovate: datasource=github-releases packageName=protocolbuffers/protobuf
 tools += protoc=v33.2
 # https://github.com/aquasecurity/trivy/releases
 # renovate: datasource=github-releases packageName=aquasecurity/trivy
-tools += trivy=v0.68.1
+tools += trivy=v0.68.2
 # https://github.com/vmware-tanzu/carvel-ytt/releases
 # renovate: datasource=github-releases packageName=vmware-tanzu/carvel-ytt
-tools += ytt=v0.52.1
+tools += ytt=v0.52.2
 # https://github.com/rclone/rclone/releases
 # renovate: datasource=github-releases packageName=rclone/rclone
 tools += rclone=v1.72.1
@@ -128,7 +128,7 @@ tools += gojq=v0.12.18
 tools += crane=v0.20.7
 # https://pkg.go.dev/google.golang.org/protobuf/cmd/protoc-gen-go?tab=versions
 # renovate: datasource=go packageName=google.golang.org/protobuf
-tools += protoc-gen-go=v1.36.10
+tools += protoc-gen-go=v1.36.11
 # https://pkg.go.dev/github.com/sigstore/cosign/v2/cmd/cosign?tab=versions
 # renovate: datasource=go packageName=github.com/sigstore/cosign/v2
 tools += cosign=v2.6.1
@@ -479,10 +479,10 @@ $(DOWNLOAD_DIR)/tools/go@$(VENDORED_GO_VERSION)_$(HOST_OS)_$(HOST_ARCH).tar.gz: 
 		$(CURL) https://go.dev/dl/go$(VENDORED_GO_VERSION).$(HOST_OS)-$(HOST_ARCH).tar.gz -o $(outfile); \
 		$(checkhash_script) $(outfile) $(go_$(HOST_OS)_$(HOST_ARCH)_SHA256SUM)
 
-helm_linux_amd64_SHA256SUM=980756a9b2fd501a1d6ddd1b21741678875df005c91bb05bb41093988bb83bb7
-helm_linux_arm64_SHA256SUM=3de681b463fb783f49f5ab72d700c057124ef73fa74062624b8fe95deafded4b
-helm_darwin_amd64_SHA256SUM=1dd2ce37855f5380abc86d56ab38387d4f1b8b05be296760addfe32d7c56a393
-helm_darwin_arm64_SHA256SUM=fed6a23bba5db8a21e40175f44c159e057b26a6361f4280e24c820d0841e150b
+helm_linux_amd64_SHA256SUM=29454bc351f4433e66c00f5d37841627cbbcc02e4c70a6d796529d355237671c
+helm_linux_arm64_SHA256SUM=16b88acc6503d646b7537a298e7389bef469c5cc9ebadf727547abe9f6a35903
+helm_darwin_amd64_SHA256SUM=73bcfd6ab000fdc95acf9fe1c59e8e47179426a653e45ae485889869d4a00523
+helm_darwin_arm64_SHA256SUM=a7ea99937a9679b3935fa0a2b70e577aa1ea84e5856e7c0821ca6ffa064ea976
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/helm@$(HELM_VERSION)_$(HOST_OS)_$(HOST_ARCH)
 $(DOWNLOAD_DIR)/tools/helm@$(HELM_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR)/tools
@@ -582,10 +582,10 @@ $(DOWNLOAD_DIR)/tools/kyverno@$(KYVERNO_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DO
 		chmod +x $(outfile); \
 		rm -f $(outfile).tar.gz
 
-yq_linux_amd64_SHA256SUM=be2c0ddcf426b6a231648610ec5d1666ae50e9f6473e82f6486f9f4cb6e3e2f7
-yq_linux_arm64_SHA256SUM=783aa3c3beedcf2bf4aaf6262eca38b92a16d3ea31e2218ca80ba8ec7226b248
-yq_darwin_amd64_SHA256SUM=c14cd4ae68d42074e58463f5ebdbc3c49ec27c6de6a23b4af58a483bc3f15aa0
-yq_darwin_arm64_SHA256SUM=b0b70ede2b392ba02091b8137b42db819a7968cf232d595dd7394ac5668b4a0b
+yq_linux_amd64_SHA256SUM=c7a1278e6bbc4924f41b56db838086c39d13ee25dcb22089e7fbf16ac901f0d4
+yq_linux_arm64_SHA256SUM=cf0a663d8e4e00bb61507c5237b95b45a6aaa1fbedac77f4dc8abdadd5e2b745
+yq_darwin_amd64_SHA256SUM=6c24724c203f8ef0afaa4584d8b7baa150fec7f6d8a493efa49b80f620174119
+yq_darwin_arm64_SHA256SUM=589cd3e27b2a0ae62fc4513c7d18db56203aaf88bf7c480f0cb3d4f4d0ac5514
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/yq@$(YQ_VERSION)_$(HOST_OS)_$(HOST_ARCH)
 $(DOWNLOAD_DIR)/tools/yq@$(YQ_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR)/tools
@@ -594,10 +594,10 @@ $(DOWNLOAD_DIR)/tools/yq@$(YQ_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR
 		$(checkhash_script) $(outfile) $(yq_$(HOST_OS)_$(HOST_ARCH)_SHA256SUM); \
 		chmod +x $(outfile)
 
-ko_linux_amd64_SHA256SUM=ce8c8776b243357e0a822c279b06c34302460221e834765dee5f4e9e2c0b7b38
-ko_linux_arm64_SHA256SUM=cf9abbdcc4fb7cf85f5e5ba029eba257ee98ef9410bcef94fae17056ec32bab5
-ko_darwin_amd64_SHA256SUM=066013c67e6e4b7c5f7c1a6b3c93ba66989e47de435558ff7edb875608028668
-ko_darwin_arm64_SHA256SUM=2efa5796986e38994a3a233641b98404fa071a76456e3c99b3c00df0436d5833
+ko_linux_amd64_SHA256SUM=048ab11818089a43b7b74bc554494a79a3fd0d9822c061142e5cd3cf8b30cb27
+ko_linux_arm64_SHA256SUM=9a26698876892128952fa3d038a4e99bea961d0d225865c60474b79e3db12e99
+ko_darwin_amd64_SHA256SUM=0e0dd8fddbefebb8572ece4dca8f07a7472de862fedd7e9845fd9d651e0d5dbe
+ko_darwin_arm64_SHA256SUM=752a639e0fbc013a35a43974b5ed87e7008bc2aee4952dfd2cc19f0013205492
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/ko@$(KO_VERSION)_$(HOST_OS)_$(HOST_ARCH)
 $(DOWNLOAD_DIR)/tools/ko@$(KO_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR)/tools
@@ -630,10 +630,10 @@ $(DOWNLOAD_DIR)/tools/protoc@$(PROTOC_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWN
 		chmod +x $(outfile); \
 		rm -f $(outfile).zip
 
-trivy_linux_amd64_SHA256SUM=63e37242088e418651931f891963c19554faa19f0591fe6b40b606152051df2f
-trivy_linux_arm64_SHA256SUM=b29ea550f573afbcae3c86fb2b5e0ebba76b7cb0965e3787c4e8cb884d2c1d57
-trivy_darwin_amd64_SHA256SUM=d5b5bd3b3c3626d223c3981cc40f4709f00a6327a681b588d2fc64a3aa9d02c5
-trivy_darwin_arm64_SHA256SUM=4dd3d2e74e1b6f6f7fd5fbf55489727698f586d6a6a0cff3421031a05b80bcac
+trivy_linux_amd64_SHA256SUM=3d933bbc3685f95ec15280f620583d05d97ee3affb66944d14481d5d6d567064
+trivy_linux_arm64_SHA256SUM=33c87995fd0c3d1559086c3e18fd3148051296dfd0ca2a67583eb64f89998c91
+trivy_darwin_amd64_SHA256SUM=c0790530cd717b6bdd02ed437be0710f5c7043078fafaf6841be7c865bf251ce
+trivy_darwin_arm64_SHA256SUM=dfbe15ffe47426dad9fd3e0d52aeacf3dbbb25ca5dbc66049f5920834435988d
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/trivy@$(TRIVY_VERSION)_$(HOST_OS)_$(HOST_ARCH)
 $(DOWNLOAD_DIR)/tools/trivy@$(TRIVY_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR)/tools
@@ -648,10 +648,10 @@ $(DOWNLOAD_DIR)/tools/trivy@$(TRIVY_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLO
 		chmod +x $(outfile); \
 		rm $(outfile).tar.gz
 
-ytt_linux_amd64_SHA256SUM=490f138ae5b6864071d3c20a5a231e378cee7487cd4aeffc79dbf66718e65408
-ytt_linux_arm64_SHA256SUM=7d86bd3299e43d1455201fc213d698bae7482cd88f3e05de2f935e6eab842db9
-ytt_darwin_amd64_SHA256SUM=1975e52b3b97bd9be72f4efb714562da6a80cf181f036ae1f86eec215e208498
-ytt_darwin_arm64_SHA256SUM=a205f49267a44cd495e4c8b245754d8a216931a28ef29c78ae161c370a9b6117
+ytt_linux_amd64_SHA256SUM=76d5355a5135c59a1791f420f3094579f775cbf2a987328f920a05e1338f1e1f
+ytt_linux_arm64_SHA256SUM=3abce3c1233e328e1cc11161b85d5c162fae04425ac1bbf4d29e6ba54781ff91
+ytt_darwin_amd64_SHA256SUM=cde68e057a9a0a175eb7366bc8ab5f358f7ffb7ed736cfac8b37ef98444da918
+ytt_darwin_arm64_SHA256SUM=02e1db4bce02f72a48312efca36fd1feb0d356ce21029e42916a88b17577b877
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/ytt@$(YTT_VERSION)_$(HOST_OS)_$(HOST_ARCH)
 $(DOWNLOAD_DIR)/tools/ytt@$(YTT_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR)/tools
