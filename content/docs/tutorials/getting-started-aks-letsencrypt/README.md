@@ -119,8 +119,7 @@ Now, create the cluster using the following command:
 az aks create \
     --name ${CLUSTER} \
     --node-count 1 \
-    --node-vm-size "Standard_B2s" \
-    --load-balancer-sku basic
+    --node-vm-size "Standard_B2s"
 ```
 
 Update your `kubectl` config file with the credentials for your new cluster:
@@ -138,7 +137,7 @@ kubectl get nodes -o wide
 > ⏲ It will take 4-5 minutes to create the cluster.
 >
 > 💵 To minimize your cloud bill, this command creates a 1-node cluster using a
-> low cost virtual machine and load balancer.
+> low cost virtual machine.
 >
 > ⚠️ This cluster is only suitable for learning purposes it is not suitable for production use.
 >
