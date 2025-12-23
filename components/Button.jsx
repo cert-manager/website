@@ -11,19 +11,23 @@ export default function Button({
   rel = null,
   target
 }) {
-  const styles = classNames({
-    'inline-block px-10 py-4': !icon,
-    'inline-flex items-center gap-3 px-4 py-10px': icon
-  })
+  const styles = classNames(
+    'font-montserrat font-bold uppercase text-sm leading-[20px] btn-primary rounded-[5px]',
+    {
+      'inline-block px-10 py-4': !icon,
+      'inline-flex items-center gap-3 px-4 py-[10px]': icon,
+    },
+    className,
+  )
 
   return (
     (<Link
       href={href}
       target={target || '_self'}
       rel={rel}
-      className={`font-montserrat font-bold uppercase text-sm leading-20px btn-primary rounded-5px ${styles} ${className}`}>
+      className={styles}>
 
-      <span className={"block " + iconWClass}>{icon && <Icon name={icon} />}</span>
+      <span className={"block " + iconWClass}>{icon && <Icon name={icon} inline={true} />}</span>
       <span>{caption}</span>
 
     </Link>)

@@ -99,13 +99,12 @@ Once you have your cluster environment, install the required Kubernetes packages
 1. Install cert-manager
 
     ```shell
-    helm upgrade --install cert-manager cert-manager \
+    helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager \
       --namespace cert-manager \
       --version $CERT_MANAGER_CHART_VERSION \
       --set crds.enabled=true \
       --set startupapicheck.enabled=false \
-      --create-namespace \
-      --repo https://charts.jetstack.io/
+      --create-namespace
     ```
 
 1. Install Kyverno

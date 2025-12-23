@@ -12,9 +12,7 @@ Instructions on how to install cert-manager can be found [on this website](../..
 To install csi-driver, use helm:
 
 ```terminal
-helm repo add jetstack https://charts.jetstack.io --force-update
-
-helm upgrade cert-manager-csi-driver jetstack/cert-manager-csi-driver \
+helm upgrade cert-manager-csi-driver oci://quay.io/jetstack/charts/cert-manager-csi-driver \
   --install \
   --namespace cert-manager \
   --wait

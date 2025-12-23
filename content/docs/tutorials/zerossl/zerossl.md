@@ -3,6 +3,8 @@ title: "Securing Ingresses with ZeroSSL"
 linkTitle: "Securing Ingresses with ZeroSSL"
 ---
 
+> **Upcoming change:** ingress-nginx is scheduled for end of life in March 2026. See [Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming](/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api) for migration guidance and Gateway API plans.
+
 # The ZeroSSL
 
 This guide walks you through how to secure a Kubernetes [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) resource using the ZeroSSL Issuer type.
@@ -47,7 +49,7 @@ crds:
 
 Install it using helm:
 ```
-helm upgrade  --install --namespace cert-manager  --version [[VAR::cert_manager_latest_version]] cert-manager jetstack/cert-manager -f values.yaml 
+helm upgrade  --install --namespace cert-manager  --version [[VAR::cert_manager_latest_version]] cert-manager oci://quay.io/jetstack/charts/cert-manager -f values.yaml 
 ```
 
 ## Configure your DNS records

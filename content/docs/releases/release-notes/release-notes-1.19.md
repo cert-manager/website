@@ -72,6 +72,22 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+{/* BEGIN changelog v1.19.2 */}
+## `v1.19.2`
+
+Changes since `v1.19.1`:
+
+### Bug or Regression
+
+- Address false positive vulnerabilities `CVE-2025-47914` and `CVE-2025-58181` which were reported by Trivy. ([`#8283`](https://github.com/cert-manager/cert-manager/pull/8283), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Update Go to `v1.25.5` to fix `CVE-2025-61727` and `CVE-2025-61729` ([`#8294`](https://github.com/cert-manager/cert-manager/pull/8294), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Update `global.nodeSelector` to helm chart to perform a `merge` and allow for a single `nodeSelector` to be set across all services. ([`#8233`](https://github.com/cert-manager/cert-manager/pull/8233), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+
+### Other (Cleanup or Flake)
+
+- Update cert-manager's ACME client, forked from `golang/x/crypto` ([`#8270`](https://github.com/cert-manager/cert-manager/pull/8270), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Updated Debian 12 distroless base images ([`#8326`](https://github.com/cert-manager/cert-manager/pull/8326), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+{/* END changelog v1.19.2 */}
 {/* BEGIN changelog v1.19.1 */}
 ## `v1.19.1`
 

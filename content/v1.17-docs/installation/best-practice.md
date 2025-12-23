@@ -111,9 +111,9 @@ Here is an overview of the network requirements:
 
    > ℹ️ The acmesolver Pod **does not** require access to the Kubernetes API server.
 
-1. **TCP: Metrics Server -> cert-manager (controller)**:
-   The cert-manager controller has a metrics server which listens for HTTP connections on TCP port 9402.
-   Create a network policy which allows access to this service from your chosen metrics collector.
+1. **TCP: Metrics Collector -> cert-manager (controller, webhook, cainjector)**:
+   The cert-manager controller, webhook, and cainjector have metrics servers which listen for HTTP connections on TCP port 9402.
+   Create a network policy which allows access to these services from your chosen metrics collector.
 
 ## Isolate cert-manager on dedicated node pools
 

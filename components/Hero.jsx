@@ -2,17 +2,17 @@ export default function Hero({ heading, description = '', className = '' }) {
   return (
     <div className={className}>
       <div className="relative hero-gradient overflow-hidden">
-        <div className="relative z-100 container pt-10 pb-52 text-white lg:pt-24 lg:pb-320px">
+        <div className="relative z-100 container pt-10 pb-52 text-white lg:pt-24 lg:pb-[320px]">
           <h1 className="text-3xl mb-5 max-w-2xl lg:text-5xl">{heading}</h1>
           {description && (
             <p className="font-semibold text-xl">{description}</p>
           )}
         </div>
 
-        <div className="absolute -bottom-2 -right-803px z-50">
+        <div className="absolute -bottom-2 right-[-803px] z-50">
           <Waves />
         </div>
-        <div className="absolute -bottom-10 -right-400px">
+        <div className="absolute -bottom-10 right-[-400px]">
           <Circles />
         </div>
         <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">

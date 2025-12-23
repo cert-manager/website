@@ -18,10 +18,10 @@ export default function Sidebar({ router, routes, versions }) {
   })
 
   return (
-    <div className="flex-none ">
+    <div className="flex-none">
       <div className="sticky top-4">
         <button
-          className="md:hidden mb-4 px-2 border-b border-gray-2 relative text-blue-800 text-base font-medium w-full text-left flex items-center justify-between"
+          className="md:hidden mb-4 px-2 border-b border-gray-2 relative text-base font-medium w-full text-left flex items-center justify-between cursor-pointer"
           onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
         >
           <span className="block">Docs Menu</span>

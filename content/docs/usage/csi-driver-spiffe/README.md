@@ -214,7 +214,7 @@ The following example mounts the CA certificate used by the Trust Domain
 ClusterIssuer.
 
 ```terminal
-helm upgrade -i -n cert-manager cert-manager-csi-driver-spiffe jetstack/cert-manager-csi-driver-spiffe --wait \
+helm upgrade -i -n cert-manager cert-manager-csi-driver-spiffe oci://quay.io/jetstack/charts/cert-manager-csi-driver-spiffe --wait \
   --set "app.logLevel=1" \
   --set "app.trustDomain=my.trust.domain" \
   \

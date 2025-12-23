@@ -6,27 +6,27 @@ description: 'cert-manager usage: Kubernetes Gateways'
 > **apiVersion:** gateway.networking.k8s.io/v1  
 > **kind:** Gateway
 
-<div style={{textAlign: "center"}}>
-<object data="/images/request-certificate-overview/request-certificate-gateway.svg"></object>
+<div class="text-center">
+<object class="inline" data="/images/request-certificate-overview/request-certificate-gateway.svg"></object>
 </div>
 
 **FEATURE STATE**: cert-manager 1.15 [beta]
 
-<div className="info">
+:::info
 
 📌  This page focuses on automatically creating Certificate resources by
 annotating Kubernetes Gateway resource. If you are looking for using an ACME Issuer along
 with HTTP-01 challenges using the Kubernetes Gateway API, see [ACME
 HTTP-01](../configuration/acme/http01/README.md).
 
-</div>
+:::
 
-<div className="info">
+:::info
 
 🚧   cert-manager 1.14+ is tested with v1 Kubernetes Gateway API. It should also work
 with v1beta1 and v1alpha2 because of resource conversion, but has not been tested with it.
 
-</div>
+:::
 
 cert-manager can generate TLS certificates for Gateway resources. This is
 configured by adding annotations to a Gateway and is similar to the process for
@@ -38,12 +38,18 @@ the Ingress API.
 
 [gwapi]: https://gateway-api.sigs.k8s.io
 
+:::info
+
+⚠️   cert-manager does not yet support the new ListenerSet resource. If you want to maintain the self-service TLS configuration experience that developers are accustomed to with the Ingress resource, you will need to configure RBAC to allow application developers to edit Gateway resources. You can learn more about upcoming cert-manager improvements that will enable self-service TLS without giving away control over Gateway resources in [Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming](/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api/).
+
+:::
+
 The Gateway resource holds the TLS configuration, as illustrated in the
 following diagram (source: https://gateway-api.sigs.k8s.io):
 
 ![Gateway vs. HTTPRoute](/images/gateway-roles.png)
 
-<div className="info">
+:::info
 
 📌  This feature requires the installation of the [Gateway API bundle](https://gateway-api.sigs.k8s.io/guides/#installing-a-gateway-controller) and passing an
 additional flag to the cert-manager controller.
@@ -71,7 +77,7 @@ config:
 The corresponding Helm command is:
 
 ```sh
-helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager \
+helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager --namespace cert-manager \
   --set config.apiVersion="controller.config.cert-manager.io/v1alpha1" \
   --set config.kind="ControllerConfiguration" \
   --set config.enableGatewayAPI=true
@@ -87,7 +93,7 @@ following command:
 kubectl rollout restart deployment cert-manager -n cert-manager
 ```
 
-</div>
+:::
 
 The annotations `cert-manager.io/issuer` or `cert-manager.io/cluster-issuer`
 tell cert-manager  to create a Certificate for a Gateway. For example, the
@@ -136,11 +142,11 @@ spec:
   secretName: example-com-tls
 ```
 
-<div className="info">
+:::info
 
 🚧   this mechanism can only be used to create Secrets in the same namespace as the `Gateway`, see [`cert-manager#5610`](https://github.com/cert-manager/cert-manager/issues/5610)
 
-</div>
+:::
 
 ## Use cases
 
@@ -475,6 +481,6 @@ metadata:
 
 ## Inner workings diagram for developers
 
-<object data="/images/request-certificate-debug/gateway-shim-flow.svg"></object>
+<object class="inline" data="/images/request-certificate-debug/gateway-shim-flow.svg"></object>
 
 [1] https://cert-manager.io/docs/usage/certificate
