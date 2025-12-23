@@ -3,14 +3,14 @@ title: HTTP01
 description: 'cert-manager configuration: ACME HTTP-01 challenges'
 ---
 
-<div className="info">
+:::info
 
 📌  This page focuses on solving ACME HTTP-01 challenges. If you are looking for
 how to automatically create Certificate resources by annotating Ingress or
 Gateway resources, see [Securing Ingress Resources](../../../usage/ingress.md) and
 [Securing Gateway Resources](../../../usage/gateway.md).
 
-</div>
+:::
 
 cert-manager uses your existing Ingress or Gateway configuration in order to
 solve HTTP01 challenges.
@@ -178,7 +178,7 @@ improvements over the Ingress API.
 
 [gwapi]: https://gateway-api.sigs.k8s.io
 
-<div className="info">
+:::info
 
 📌  This feature requires the installation of the [Gateway API bundle](https://gateway-api.sigs.k8s.io/guides/#installing-a-gateway-controller) and passing a
 feature flag to the cert-manager controller.
@@ -216,14 +216,15 @@ following command:
 kubectl rollout restart deployment cert-manager -n cert-manager
 ```
 
-</div>
+:::
 
 
-<div className="info">
+:::info
 
 🚧   cert-manager 1.8+ is tested with v1alpha2 Kubernetes Gateway API. It should also work
 with v1beta1 because of resource conversion, but has not been tested with it.
-</div>
+
+:::
 
 The Gateway API HTTPRoute HTTP-01 solver creates a temporary HTTPRoute using the
 given labels. These labels must match a Gateway that contains a listener on port

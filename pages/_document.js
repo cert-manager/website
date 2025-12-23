@@ -49,7 +49,6 @@ class MyDocument extends Document {
               }}
               />
           </>
-          <img referrerPolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=629c2750-768c-491d-be17-38a92ddaa0ff" />
         </body>
       </Html>
     )

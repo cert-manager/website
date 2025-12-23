@@ -3,8 +3,8 @@ title: CSI Driver
 description: 'cert-manager usage: CSI driver'
 ---
 
-<div style={{textAlign: "center"}}>
-<object data="/images/request-certificate-overview/request-certificate-csi.svg"></object>
+<div class="text-center">
+<object class="inline" data="/images/request-certificate-overview/request-certificate-csi.svg"></object>
 </div>
 
 ## Enabling mTLS of Pods using cert-manager csi-driver

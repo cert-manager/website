@@ -6,9 +6,9 @@ import SEO from '../next-seo.config'
 import { DefaultSeo } from 'next-seo'
 import { pageview } from 'lib/ga'
 
-import 'windi.css'
-import 'styles/global.scss'
-import 'styles/docs.scss'
+import 'styles/main.css'
+import 'styles/global.css'
+import 'styles/docs.css'
 
 function CertManager({ Component, pageProps }) {
   const router = useRouter()

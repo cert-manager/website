@@ -21,14 +21,14 @@ should be stable enough to run.
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.19][] | Oct 07, 2025 | Release of 1.21 | 1.31 → 1.34 / 4.18 → 4.19                      | 1.31 → 1.34                        |
-| [1.18][] | Jun 10, 2025 | Release of 1.20 | 1.29 → 1.33   /   4.16 → 4.18                  | 1.29 → 1.33                        |
+| [1.19][] | Oct 07, 2025 | Release of 1.21 | 1.31 → 1.34 / 4.18 → 4.20                      | 1.31 → 1.34                        |
+| [1.18][] | Jun 10, 2025 | Release of 1.20 | 1.29 → 1.33 / 4.16 → 4.20                      | 1.29 → 1.33                        |
 
 ## Upcoming releases
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.20][] | Feb 10, 2026 | Release of 1.21 | 1.31 → 1.34 / 4.18 → 4.19                      | 1.31 → 1.34                        |
+| [1.20][] | Feb 10, 2026 | Release of 1.21 | 1.31 → 1.34 / 4.18 → 4.20                      | 1.31 → 1.34                        |
 
 Dates in the future are not firm commitments and are subject to change.
 
@@ -222,15 +222,15 @@ newer Kubernetes features.
 The table below lists the major Kubernetes distributions we check. In parentheses next to each release is the <abbr title="End-of-life">EOL</abbr>
 for that release. EOL dates often change throughout the lifecycle of a release.
 
-The "Oldest Kubernetes Release" is the oldest release we deemed relevant to the next cert-manager release, as of 2025-06-10
+The "Oldest Kubernetes Release" is the oldest release we deemed relevant to the next cert-manager release, as of 2025-11-07
 
-| Vendor                | Oldest K8s Release    | Other Kubernetes Releases                                           |
-|:---------------------:|:---------------------:|---------------------------------------------------------------------|
-| [EKS][eks]            | 1.30 (Jul 2025)       | 1.31 (Nov 2025), 1.32 (Mar 2026), 1.33 (Jul 2026)                   |
-| [GKE][gke]            | 1.30 (Jul 2025)       | 1.31 (Jan 2026), 1.32 (Apr 2026)                                    |
-| [AKS][aks]            | 1.30 (Jul 2025)       | 1.31 (Nov 2025), 1.32 (Mar 2026), 1.33 (May 2026)                   |
-| [OpenShift 4][os]     | 1.28 (4.15, Aug 2025) | 1.29 (4.16, Dec 2025), 1.30 (4.17, Apr 2026), 1.31 (4.18, Aug 2026) |
-| [OpenShift 4 EUS][os] | 1.27 (4.14, Oct 2025) | 1.29 (4.16, Jun 2026), 1.31 (4.18, Feb 2027)                        |
+| Vendor                | Oldest K8s Release  | Other Kubernetes Releases                                     |
+|:---------------------:|:-------------------:|---------------------------------------------------------------|
+| [EKS][eks]            | 1.32 (Mar 2026)     | 1.33 (Jul 2026), 1.34 (Dec 2026)                              |
+| [GKE][gke]            | 1.32 (Apr 2026)     | 1.33 (Aug 2026), 1.34 (Oct 2026)                              |
+| [AKS][aks]            | 1.32 (Mar 2026)     | 1.33 (Jun 2026), 1.34 (Nov 2026)                              |
+| [OpenShift 4][os]     | 1.30 (4.17, Apr 26) | 1.31 (4.18, Aug 26), 1.32 (4.19, Dec 26), 1.33 (4.20, Apr 27) |
+| [OpenShift 4 EUS][os] | 1.29 (4.16, Jun 26) | 1.31 (4.18, Feb 27), 1.33 (4.20, Oct 28)                      |
 
 [eks]: https://endoflife.date/amazon-eks
 [gke]: https://endoflife.date/google-kubernetes-engine
@@ -246,16 +246,11 @@ For convenience, the following table shows these version mappings:
 
 | OpenShift versions | Kubernetes version |
 |:------------------:|--------------------|
+| 4.20, 4.20 EUS     | 1.33               |
+| 4.19               | 1.32               |
 | 4.18, 4.18 EUS     | 1.31               |
 | 4.17               | 1.30               |
 | 4.16, 4.16 EUS     | 1.29               |
-| 4.15               | 1.28               |
-| 4.14, 4.14 EUS     | 1.27               |
-| 4.13               | 1.26               |
-| 4.12, 4.12 EUS     | 1.25               |
-| 4.11               | 1.24               |
-| 4.10, 4.10 EUS     | 1.23               |
-| 4.9                | 1.22               |
 
 Note that some OpenShift versions listed above may be predicted, since an updated version of OpenShift may
 not yet be available for the latest Kubernetes releases.
@@ -307,7 +302,7 @@ are no longer supported.
 
 | Release      | Release Date | EOL          | Compatible Kubernetes versions | Compatible OpenShift versions |
 |--------------|:------------:|:------------:|:------------------------------:|:-----------------------------:|
-| [1.17][]     | Feb 03, 2025 | Oct 07, 2025 | 1.29 → 1.33                    | 1.29 → 1.32                   |
+| [1.17][]     | Feb 03, 2025 | Oct 07, 2025 | 1.29 → 1.33                    | 4.16 → 4.20                   |
 | [1.16][]     | Oct 03, 2024 | Jun 10, 2025 | 1.25 → 1.32                    | 4.14 → 4.17                   |
 | [1.15][]     | Jun 05, 2024 | Feb 03, 2025 | 1.25 → 1.32                    | 4.12 → 4.16                   |
 | [1.14][]     | Feb 03, 2024 | Oct 03, 2024 | 1.24 → 1.31                    | 4.11 → 4.16                   |

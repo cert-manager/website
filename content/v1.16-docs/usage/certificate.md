@@ -6,8 +6,8 @@ description: 'cert-manager usage: Certificates'
 > **apiVersion:** cert-manager.io/v1<br/>
 > **kind:** Certificate
 
-<div style={{textAlign: "center"}}>
-<object data="/images/request-certificate-overview/request-certificate-cert.svg"></object>
+<div class="text-center">
+<object class="inline" data="/images/request-certificate-overview/request-certificate-cert.svg"></object>
 </div>
 
 In cert-manager, the `Certificate` resource represents a human readable definition
@@ -279,7 +279,7 @@ data:
 Root or Intermediate CA certificates can have name constraints. Name constraints indicates a name space within which all subject names in subsequent certificates in a certification path MUST be located.
 Checkout https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10 for more details on this.
 
-<div className="warning">
+:::warning
 
 ⛔️ This feature is only enabled by adding it to the
 `--feature-gates` flag on the cert-manager controller and webhook components:
@@ -288,7 +288,7 @@ Checkout https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10 for more
 --feature-gates=NameConstraints=true
 ```
 
-</div>
+:::
 
 To create a CA Certificate with name constraints use the following configuration:
 
@@ -349,7 +349,7 @@ A certificate object is reissued under the following circumstances:
   ```
   Note that the above command requires [cmctl](../reference/cmctl.md#renew).
 
-<div className="warning">
+:::warning
 
 **❌** Deleting the Secret resource associated with a Certificate resource is
 **not a recommended solution** for manually rotating the private key. The
@@ -361,7 +361,7 @@ of the Certificate resource with the following command (requires
 cmctl renew cert-1
 ```
 
-</div>
+:::
 
 <a id="temporary-certificates-whilst-issuing"></a>
 ## Issuance behavior: Temporary Certificates while Issuing
@@ -408,7 +408,7 @@ application, and you will want to either manually restart your pod with
 [wave](https://github.com/wave-k8s/wave). Wave is a Secret controller that
 makes sure deployments get restarted whenever a mounted Secret changes.
 
-<div className="alert">
+:::danger
 
 Re-use of private keys
 
@@ -417,7 +417,7 @@ issuer](../configuration/venafi.md), may disallow re-using private keys.
 If this is the case, you must explicitly configure the `rotationPolicy:
 Always` setting for each of your Certificate objects accordingly.
 
-</div>
+:::
 
 In the following example, the certificate has been set with
 `rotationPolicy: Always`:
@@ -452,7 +452,7 @@ above). Note that if the private key secret already exists when creating the
 certificate object, the existing private key will not be used, since the
 rotation mechanism also includes the initial issuance.
 
-<div className="info">
+:::info
 
 👉 We recommend that you configure `rotationPolicy: Always` on your Certificate
 resources. Rotating both the certificate and the private key simultaneously
@@ -462,7 +462,7 @@ the private key rotation can be done in case of emergency. More generally, it is
 a good practice to be rotating the keys as often as possible, reducing the risk
 associated with compromised keys.
 
-</div>
+:::
 
 ## Cleaning up Secrets when Certificates are deleted
 
@@ -474,6 +474,6 @@ If you would prefer the `Secret` to be deleted automatically when the `Certifica
 
 ## Inner workings diagram for developers
 
-<object data="/images/request-certificate-debug/certificate-flow.svg"></object>
+<object class="inline" data="/images/request-certificate-debug/certificate-flow.svg"></object>
 
 [1] https://cert-manager.io/docs/usage/certificaterequest

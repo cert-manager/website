@@ -6,8 +6,8 @@ description: 'cert-manager core concepts: CertificateRequests'
 > **apiVersion:** cert-manager.io/v1  
 > **kind:** CertificateRequest
 
-<div style={{textAlign: "center"}}>
-<object data="/images/request-certificate-overview/request-certificate-cr.svg"></object>
+<div class="text-center">
+<object class="inline" data="/images/request-certificate-overview/request-certificate-cr.svg"></object>
 </div>
 
 The `CertificateRequest` is a namespaced resource in cert-manager that is used
@@ -251,4 +251,4 @@ and `bar`:
 
 ## Inner workings diagram for developers
 
-<object data="/images/request-certificate-debug/certificate-request-flow.svg"></object>
+<object class="inline" data="/images/request-certificate-debug/certificate-request-flow.svg"></object>

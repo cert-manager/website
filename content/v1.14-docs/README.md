@@ -22,5 +22,3 @@ the private key never leaves the node and it is not stored in a Kubernetes Secre
 This website provides the full technical documentation for the project, and can be
 used as a reference; if you feel that there's anything missing, please let us know
 or [raise a PR](https://github.com/cert-manager/website/pulls) to add it.
-
-<img referrerPolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=3d7ab28a-5e59-4640-87ac-afa184b8c9dc" />

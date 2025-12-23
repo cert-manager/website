@@ -162,8 +162,7 @@ Now you can install and configure cert-manager.
 Install cert-manager using `helm` as follows:
 
 ```bash
-helm install cert-manager cert-manager \
-  --repo https://charts.jetstack.io \
+helm install cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
   --create-namespace \
   --set crds.enabled=true

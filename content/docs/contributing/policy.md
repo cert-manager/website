@@ -36,7 +36,7 @@ Do reach out if you need help with the design.
 
 Part of the process of discussing a design document may also include a video call with you included! That helps us to plan how a feature should
 be implemented and approached. It'll be pretty informal and casual; we just want to make sure we're all on the same page. This call might be part
-of a biweekly meeting.
+of the cert-manager weekly community meeting.
 
 #### Making Progress with Larger Features
 
@@ -46,14 +46,14 @@ questions, but they should certainly be able to point you in the right direction
 
 To get in touch to discuss a feature, please reach out on the [cert-manager-dev slack channel](./README.md#slack), or join a [cert-manager public meeting](./README.md#meetings) to talk about your proposal.
 
-If you have an open PR with a design document (or have some questions about how to proceed with a design), you should absolutely feel free to add the PR with your design or a link to the relevant GitHub issue to the [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U/edit) for our next biweekly meeting
+If you have an open PR with a design document (or have some questions about how to proceed with a design), you should absolutely feel free to add the PR with your design or a link to the relevant GitHub issue to the [meeting notes](https://docs.google.com/document/d/1Tc5t6ylY9dhXAan1OjOoldeaoys1Yh4Ir710ATfBa5U/edit) for the cert-manager weekly community meeting
 and join in so we're sure to discuss it and so you can contribute to the discussion!
 
 #### Large Feature Lifecycle
 
 1. Informally ask about the feature in slack or a public meeting
 2. Create a PR with a lightweight design document using the [design template](https://github.com/cert-manager/cert-manager/tree/master/design/template.md), for discussion
-3. Design doc PR gets reviewed - possibly includes meeting or discussion in a biweekly meeting
+3. Design doc PR gets reviewed - possibly includes meeting or discussion in the cert-manager weekly community meeting
 4. Implement your feature, helped and reviewed by a named cert-manager maintainer
 
 ## Feature Requests We'll Likely Reject
@@ -63,7 +63,7 @@ In some cases, people will request features which we've previously rejected or w
 It's nothing personal; sometimes we have to make tough choices and especially when it comes to security and maintainability we have to reject certain
 proposals. If your feature request is listed below, there's a high chance we'll have to reject it.
 
-That said, if you think we've made a mistake and that we should reconsider, we're open to chatting - consider joining our [biweekly meetings](./README.md#meetings) to discuss it with us!
+That said, if you think we've made a mistake and that we should reconsider, we're open to chatting - consider joining the cert-manager weekly community meeting to discuss it with us!
 
 ### Vendoring Kubernetes related APIs outside of the `k8s.io/` namespace
 
@@ -109,7 +109,7 @@ appVersion: "0.1.0"
 dependencies:
   - name: cert-manager
     version: [[VAR::cert_manager_latest_version]]
-    repository: https://charts.jetstack.io
+    repository: oci://quay.io/jetstack/charts
     alias: cert-manager
     condition: cert-manager.enabled
 ```

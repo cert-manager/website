@@ -145,7 +145,7 @@ When a milestone is set on an Issue it is generally an indication of when we pla
 Prow will apply milestones on merged PRs, this will tell you in which version that PR will land.
 
 The milestone page will also have an indicated due date when we will release. This might have some delay.
-We brief our users/contributors about this in our bi-weekly community meeting, for an up to date status report we recommend joining these.
+We brief our users/contributors about this in the cert-manager weekly community meeting, for an up to date status report we recommend joining these.
 
 ### Labels
 

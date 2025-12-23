@@ -1,7 +1,13 @@
-.docs {
-  @apply text-lg;
-  @apply font-normal;
+@reference './main.css';
 
+@layer base {
+  .docs {
+    @apply text-lg;
+    @apply font-normal;
+  }
+}
+
+.docs {
   .docs-codeblock-done-icon {
     @apply h-6 w-6 text-blue-1;
   }
@@ -12,10 +18,6 @@
 
   .docs-codeblock-btn {
     @apply text-blue-1 absolute top-3 right-3;
-  }
-
-  .docs-tabs-mobile-select {
-    @apply block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md;
   }
 
   .prose {
@@ -33,13 +35,8 @@
       @apply text-blue-1;
     }
 
-    p a,
-    .break-words * {
+    p a {
       overflow-wrap: break-word;
-    }
-
-    .invisible {
-      @apply invisible;
     }
 
     h1,
@@ -94,17 +91,21 @@
         display: none;
       }
     }
+    
+    .admonition {
+      display: block;
 
-    .info {
-      @apply p-4 bg-gray-1 border-4 border-gray-2 my-5;
-    }
+      &.info {
+        @apply p-4 bg-gray-1 border-4 border-gray-2 my-5;
+      }
+      
+      &.warning {
+        @apply pl-4 border-l-4 border-blue-1 my-5;
+      }
 
-    .warning {
-      @apply pl-4 border-l-4 border-blue-1 my-5;
-    }
-
-    .alert {
-      @apply pl-4 border-l-4 border-red my-5;
+      &.danger {
+        @apply pl-4 border-l-4 border-red my-5;
+      }
     }
   }
 

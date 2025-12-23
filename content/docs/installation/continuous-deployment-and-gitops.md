@@ -51,7 +51,7 @@ flux check
 ### Create a `HelmRepository` resource
 
 ```bash
-flux create source helm cert-manager --url https://charts.jetstack.io
+flux create source helm cert-manager --url oci://quay.io/jetstack/charts
 ```
 
 ### Create a `HelmRelease` resource

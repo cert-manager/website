@@ -202,6 +202,22 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
 
+## `v1.18.4`
+
+We updated Go to fix some vulnerabilities in the Go standard library.
+
+Changes since `v1.18.3`:
+
+### Bug or Regression
+
+- Address false positive vulnerabilities `CVE-2025-47914` and `CVE-2025-58181` which were reported by Trivy. ([`#8282`](https://github.com/cert-manager/cert-manager/pull/8282), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Update Go to `v1.24.11` to fix `CVE-2025-61727` and `CVE-2025-61729` ([`#8295`](https://github.com/cert-manager/cert-manager/pull/8295), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+
+### Other (Cleanup or Flake)
+
+- Update cert-manager's ACME client, forked from `golang/x/crypto` ([`#8271`](https://github.com/cert-manager/cert-manager/pull/8271), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Updated Debian 12 distroless base images ([`#8328`](https://github.com/cert-manager/cert-manager/pull/8328), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+
 ## `v1.18.3`
 
 We fixed a bug which caused certificates to be re-issued unexpectedly, if the

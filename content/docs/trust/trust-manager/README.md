@@ -192,15 +192,13 @@ Next, we need to install trust-manager. You can follow the [installation guide](
 or use the commands below:
 
 ```bash
-helm repo add jetstack https://charts.jetstack.io --force-update
-
-helm install cert-manager jetstack/cert-manager \
+helm install cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
   --create-namespace \
   --version [[VAR::cert_manager_latest_version]] \
   --set crds.enabled=true
 
-helm upgrade trust-manager jetstack/trust-manager \
+helm upgrade trust-manager oci://quay.io/jetstack/charts/trust-manager \
   --install \
   --namespace cert-manager \
   --wait
@@ -382,7 +380,7 @@ TRUST_MANAGER_VER=$(helm list --filter "^trust-manager$" -n cert-manager -ojson 
 echo $TRUST_MANAGER_VER
 
 # Run the upgrade
-helm upgrade -f values.yaml -n cert-manager trust-manager jetstack/trust-manager --version $TRUST_MANAGER_VER
+helm upgrade -f values.yaml -n cert-manager trust-manager oci://quay.io/jetstack/charts/trust-manager --version $TRUST_MANAGER_VER
 ```
 
 If an incorrect tag is used, your deployment will fail and you'll likely need to use `helm rollback` to get back

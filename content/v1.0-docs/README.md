@@ -22,5 +22,3 @@ wisdom from other similar projects such as
 
 This is the full technical documentation for the project, and should be
 used as a source of references when seeking help with the project.
-
-<img referrerPolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=c8fe7fac-8d4f-475e-a75d-ef755d9c9ad6" />
