@@ -304,3 +304,36 @@ metadata:
       ]
 ...
 ```
+Starting `v1.20`, you can use `venafi.cert-manager.io/custom-fields` annotation on `Issuer` or `ClusterIssuer` objects.
+This configuration would be applied to all Certificate requests created from `Issuer`.
+
+It is possible to override or append custom configuration to a specific `Certificate`, in example.
+given following `Issuer`
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: corp-issuer
+  annotations:
+    [
+       {"name": "Environemnt", "value": "Dev"},
+    ]
+```
+and `Certificate`
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-com-certificate
+  annotations:
+    venafi.cert-manager.io/custom-fields: |-
+      [
+        {"name": "Team", "value": "amber"},
+      ]
+...
+```
+Final configuration will be:
+```json
+{"name": "Environemnt", "value": "Dev"},
+{"name": "Team", "value": "amber"}
+```
