@@ -232,7 +232,7 @@ Since cert-manager 1.15, the Gateway API support is no longer gated behind a
 feature flag, but you still need to enable the Gateway API support.
 
 To enable the Gateway API support, use the [file-based
-configuration](../../installation/configuring-components.md#configuration-file) using the
+configuration](../../../installation/configuring-components.md#configuration-file) using the
 following `config` Helm value:
 
 ```yaml
