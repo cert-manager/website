@@ -12,6 +12,14 @@ Be sure to review all new features and changes below, and read the full release 
 
 ## Major Themes
 
+### Network Policy
+
+The cert-manager Helm chart now allows you to create `NetworkPolicy` resources
+for all the cert-manager Deployments.
+This makes it easier to follow [best practices when deploying cert-manager in production](../../installation/best-practice.md#network-requirements-and-network-policy).
+
+### TODO ADD REMAINING THEMES
+
 TODO
 
 ## Community
