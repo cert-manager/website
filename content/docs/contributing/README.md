@@ -54,7 +54,7 @@ We'll look to ensure that anyone outside of the core maintainer team who has a t
 
 ### Community Meetings
 
-The cert-manager weekly community meeting happens [on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3) at [17:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London) on Thursdays.
+The cert-manager weekly community meeting happens [on Zoom](https://zoom-lfx.platform.linuxfoundation.org/meeting/98788760104?password=4c61abc4-3fc1-44eb-a02b-c4ce7b0c26c3) at [17\:00 London time](http://www.thetimezoneconverter.com/?t=17:00&tz=Europe/London) on Thursdays.
 
 You can look at the [calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cert-manager?view=list) to see when the next one will take place.
 
