@@ -28,7 +28,7 @@ should be stable enough to run.
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.20][] | Feb 10, 2026 | Release of 1.21 | 1.31 → 1.34 / 4.18 → 4.20                      | 1.31 → 1.34                        |
+| [1.20][] | Feb 10, 2026 | Release of 1.22 | 1.32 → 1.35 / 4.19 → 4.21                      | 1.32 → 1.35                        |
 
 Dates in the future are not firm commitments and are subject to change.
 
