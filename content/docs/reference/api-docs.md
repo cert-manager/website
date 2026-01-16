@@ -1485,7 +1485,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Email is the email address to be associated with the ACME account. This field is optional, but it is strongly recommended to be set. It will be used to contact you in case of issues with your account or certificates, including expiry notification emails. This field may be updated after the account is initially registered.</p>
+        <p>Email is the email address to be associated with the ACME account. This field is optional, but it is strongly recommended to be set. Depending on the ACME server, it may be used to contact you in case of issues with your account or certificates, including expiry notification emails. This field may be updated after the account is initially registered.</p>
       </td>
     </tr>
     <tr>
