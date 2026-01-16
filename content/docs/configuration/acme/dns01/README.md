@@ -182,6 +182,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-ovh`](https://github.com/aureq/cert-manager-webhook-ovh)
 - [`cert-manager-webhook-opentelekomcloud`](https://github.com/akyriako/cert-manager-webhook-opentelekomcloud)
 - [`cert-manager-webhook-pdns`](https://github.com/zachomedia/cert-manager-webhook-pdns)
+- [`cert-manager-webhook-rackspace`](https://github.com/rackerlabs/cert-manager-webhook-rackspace)
 - [`cert-manager-webhook-regery`](https://github.com/darioackermann/cert-manager-webhook-regery)
 - [`cert-manager-webhook-scaleway`](https://github.com/scaleway/cert-manager-webhook-scaleway)
 - [`cert-manager-webhook-selectel`](https://github.com/selectel/cert-manager-webhook-selectel)
