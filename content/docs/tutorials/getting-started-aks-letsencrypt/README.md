@@ -334,7 +334,7 @@ Now you will learn how to configure cert-manager to use Let's Encrypt and Azure 
 You need to prove to Let's Encrypt that you own the domain name of the certificate and one way to do this is to create a special DNS record in that domain.
 This is known as the [DNS-01 challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
 
-cert-manager can create that DNS record for you in by using the Azure DNS API but it needs to authenticate to Azure first,
+cert-manager can create that DNS record for you by using the Azure DNS API but it needs to authenticate to Azure first,
 and currently the most secure method of authentication is to use [workload identity federation](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview).
 The advantages of this method are that cert-manager will use an ephemeral Kubernetes ServiceAccount Token to authenticate to Azure and the token need not be stored in a Kubernetes Secret.
 
