@@ -119,8 +119,7 @@ Now, create the cluster using the following command:
 az aks create \
     --name ${CLUSTER} \
     --node-count 1 \
-    --node-vm-size "Standard_B2s" \
-    --load-balancer-sku basic
+    --node-vm-size "Standard_B2s"
 ```
 
 Update your `kubectl` config file with the credentials for your new cluster:
@@ -138,7 +137,7 @@ kubectl get nodes -o wide
 > ⏲ It will take 4-5 minutes to create the cluster.
 >
 > 💵 To minimize your cloud bill, this command creates a 1-node cluster using a
-> low cost virtual machine and load balancer.
+> low cost virtual machine.
 >
 > ⚠️ This cluster is only suitable for learning purposes it is not suitable for production use.
 >
@@ -335,7 +334,7 @@ Now you will learn how to configure cert-manager to use Let's Encrypt and Azure 
 You need to prove to Let's Encrypt that you own the domain name of the certificate and one way to do this is to create a special DNS record in that domain.
 This is known as the [DNS-01 challenge type](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge).
 
-cert-manager can create that DNS record for you in by using the Azure DNS API  but it needs to authenticate to Azure first,
+cert-manager can create that DNS record for you by using the Azure DNS API but it needs to authenticate to Azure first,
 and currently the most secure method of authentication is to use [workload identity federation](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview).
 The advantages of this method are that cert-manager will use an ephemeral Kubernetes ServiceAccount Token to authenticate to Azure and the token need not be stored in a Kubernetes Secret.
 
@@ -343,31 +342,6 @@ The advantages of this method are that cert-manager will use an ephemeral Kubern
 > Older versions of cert-manager support other authentication mechanisms which are not covered in this tutorial.
 >
 > 📖 Read about [other ways to configure the ACME issuer with Azure DNS](../../configuration/acme/dns01/azuredns.md).
-
-## Install the Azure workload identity features
-
-The workload identity features in Azure AKS are relatively new (at time of writing) and they require some non-default features to be enabled.
-
-Install the [Azure CLI AKS Preview Extension](https://github.com/Azure/azure-cli-extensions/tree/main/src/aks-preview),
-which you will need to configure some advanced workload identity federation features on your AKS cluster.
-
-```bash
-az extension add --name aks-preview
-```
-
-Register the `EnableWorkloadIdentityPreview` feature flag which is required for the AKS cluster in this demo.
-
-```bash
-az feature register --namespace "Microsoft.ContainerService" --name "EnableWorkloadIdentityPreview"
-
-# It takes a few minutes for the status to show Registered. Verify the registration status by using the az feature list command:
-az feature list -o table --query "[?contains(name, 'Microsoft.ContainerService/EnableWorkloadIdentityPreview')].{Name:name,State:properties.state}"
-
-# When ready, refresh the registration of the Microsoft.ContainerService resource provider by using the az provider register command:
-az provider register --namespace Microsoft.ContainerService
-```
-
-> 📖 Read more about [Registering the `EnableWorkloadIdentityPreview` feature flag](https://learn.microsoft.com/en-us/azure/aks/workload-identity-deploy-cluster).
 
 ## Reconfigure the cluster
 
@@ -377,7 +351,7 @@ Next enable the workload identity federation features on the cluster that you cr
 az aks update \
     --name ${CLUSTER} \
     --enable-oidc-issuer \
-    --enable-workload-identity # ℹ️ This option is currently only available when using the aks-preview extension.
+    --enable-workload-identity
 ```
 
 > 📖 Read [Deploy and configure workload identity on an Azure Kubernetes Service (AKS) cluster](https://learn.microsoft.com/en-us/azure/aks/workload-identity-deploy-cluster) for more information about the `--enable-workload-identity` feature.
