@@ -54,7 +54,7 @@ following diagram (source: https://gateway-api.sigs.k8s.io):
 📌  This feature requires the installation of the [Gateway API bundle](https://gateway-api.sigs.k8s.io/guides/getting-started/#installing-gateway-api) and passing an
 additional flag to the cert-manager controller.
 
-To install v1.4.1 Gateway API bundle (Gateway CRDs and webhook), run the following command:
+To install v1.4.1 Gateway API bundle (CRDs associated with a version of Gateway API), run the following command:
 
 ```sh
 kubectl apply --server-side -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/standard-install.yaml
