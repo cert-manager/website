@@ -13,6 +13,10 @@
       "pattern": "^https?://"
     },
     {
+      "description": "Ignore mailto links which may fail in CI environments",
+      "pattern": "^mailto:"
+    },
+    {
       "description": "Ignore links to yaml manifests which are served from public/, which markdown-link-check is unable to verify",
       "pattern": "^[^:/]+.yaml"
     }
