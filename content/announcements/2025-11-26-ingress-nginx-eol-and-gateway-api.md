@@ -19,7 +19,7 @@ with certificates configured on cluster-operator-owned Gateways.
 
 The missing piece is Gateway API's experimental XListenerSet resource, which
 aims to restore per-team TLS configuration on a shared Gateway. cert-manager
-plans to add experimental XListenerSet support in 1.20, targeted for 10 February
+plans to add experimental XListenerSet support in 1.20, targeted for 24 February
 2026, with alpha builds in January 2026.
 
 [the announcement]: https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/
@@ -150,7 +150,7 @@ which act as the default issuer.
 
 - **January 2026:** Alpha builds with XListenerSet support. We will need your
   help to test it out!
-- **10 February 2026:** cert-manager 1.20 is expected to include XListenerSet
+- **24 February 2026:** cert-manager 1.20 is expected to include XListenerSet
   support as an experimental feature gated behind a feature flag.
 
 As Gateway API graduates ListenerSet to stable, we'll add support for the stable
