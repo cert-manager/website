@@ -253,7 +253,7 @@ spec:
     kind: Issuer
     group: cert-manager.io
   dnsNames:
-    - foo.example.com
+    - bar.example.com
   secretName: example-com-tls
 ```
 
