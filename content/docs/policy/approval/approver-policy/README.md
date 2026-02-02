@@ -214,7 +214,7 @@ The request attribute value is made available to the expression in the `self` va
 For multi-valued request attributes, the validation will be performed once per value.
 Similarly to the `self` variable, approver-policy provides the `cr` variable representing
 the request to validate. This variable is of object type, and at time of writing it has
-just two fields: `namespace` and `name`.
+four fields: `username`, `groups`, `namespace` and `name`.
 
 In the following, we use approver-policy CEL validation rules to ensure
 [X.509 SVID certificates](https://github.com/spiffe/spiffe/blob/890b9266095d37bad189529367f31de9be2504b6/standards/X509-SVID.md)
