@@ -78,9 +78,9 @@ controller:
 
 This issue is resolved in `ingress-nginx` versions `v1.13.2` and `v1.12.6`, both released on August 29, 2025.
 
-If you are running ingress-nginx `v1.13.2+` or `v1.12.6+`, you do not need to apply the workarounds described above.  
+If you are running ingress-nginx `v1.13.2+` or `v1.12.6+`, you do not need to apply the workarounds described above.
 
-See the [fix commit](https://github.com/kubernetes/ingress-nginx/commit/618aae18515213bcf3fb820e6f8c234703d844b2)  
+See the [fix commit](https://github.com/kubernetes/ingress-nginx/commit/618aae18515213bcf3fb820e6f8c234703d844b2)
 
 ### ACME Certificate Profiles
 
@@ -201,6 +201,24 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@ianarsenault](https://github.com/ianarsenault)
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
+
+## `v1.18.5`
+
+This release contains three bug fixes, including a fix for the moderate severity DoS issue in [`GHSA-gx3x-vq4p-mhhv`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-gx3x-vq4p-mhhv).
+
+All users should upgrade to the latest release. Thanks to Oleh Konko for reporting the issue!
+
+### Changes by Kind
+
+#### Bug or Regression
+
+- Fixed an infinite re-issuance loop that could occur when an issuer returns a certificate with a public key that doesn't match the CSR. The issuing controller now validates the certificate before storing it and fails with backoff on mismatch. ([#8414](https://github.com/cert-manager/cert-manager/pull/8414), [@cert-manager-bot](https://github.com/cert-manager-bot))
+- Fixed an issue where HTTP-01 challenges failed when the Host header contains an IPv6 address. This means that users can now issue IP address certificates for IPv6 address subjects. ([#8437](https://github.com/cert-manager/cert-manager/pull/8437), [@cert-manager-bot](https://github.com/cert-manager-bot))
+- Security (MODERATE): Fix a potential panic in the cert-manager controller when a DNS response in an unexpected order was cached. If an attacker was able to modify DNS responses (or if they controlled the DNS server) it was possible to cause denial of service for the cert-manager controller. ([#8467](https://github.com/cert-manager/cert-manager/pull/8467), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+#### Other (Cleanup or Flake)
+
+- Bump go to 1.24.12 ([#8460](https://github.com/cert-manager/cert-manager/pull/8460), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## `v1.18.4`
 

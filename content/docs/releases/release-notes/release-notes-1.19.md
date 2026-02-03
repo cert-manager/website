@@ -72,6 +72,24 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+## `v1.19.3`
+
+This release contains three bug fixes, including a fix for the moderate severity DoS issue in [`GHSA-gx3x-vq4p-mhhv`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-gx3x-vq4p-mhhv).
+
+All users should upgrade to the latest release. Thanks to Oleh Konko for reporting the issue!
+
+### Changes by Kind
+
+#### Bug or Regression
+
+- Fixed an infinite re-issuance loop that could occur when an issuer returns a certificate with a public key that doesn't match the CSR. The issuing controller now validates the certificate before storing it and fails with backoff on mismatch. ([#8415](https://github.com/cert-manager/cert-manager/pull/8415), [@cert-manager-bot](https://github.com/cert-manager-bot))
+- Fixed an issue where HTTP-01 challenges failed when the Host header contains an IPv6 address. This means that users can now issue IP address certificates for IPv6 address subjects. ([#8436](https://github.com/cert-manager/cert-manager/pull/8436), [@cert-manager-bot](https://github.com/cert-manager-bot))
+- Security (MODERATE): Fix a potential panic in the cert-manager controller when a DNS response in an unexpected order was cached. If an attacker was able to modify DNS responses (or if they controlled the DNS server) it was possible to cause denial of service for the cert-manager controller. ([#8468](https://github.com/cert-manager/cert-manager/pull/8468), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
+#### Other (Cleanup or Flake)
+
+- Bump go to 1.25.6 ([#8459](https://github.com/cert-manager/cert-manager/pull/8459), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
 {/* BEGIN changelog v1.19.2 */}
 ## `v1.19.2`
 
