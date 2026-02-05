@@ -16,7 +16,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "postbuild": "npm run generate:sitemap",
     "generate:sitemap": "next-sitemap",
     "start": "next start",
@@ -63,7 +63,7 @@
     "compare-versions": "6.1.1",
     "copy-to-clipboard": "^3.3.3",
     "gray-matter": "4.0.3",
-    "next": "^15.5.9",
+    "next": "^16.0.0",
     "next-mdx-remote": "5.0.0",
     "next-seo": "6.8.0",
     "prism-react-renderer": "2.4.1",
