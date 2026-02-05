@@ -16,7 +16,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "postbuild": "npm run generate:sitemap",
     "generate:sitemap": "next-sitemap",
     "start": "next start",
