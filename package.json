@@ -56,7 +56,7 @@
     "child_process": false
   },
   "dependencies": {
-    "@docsearch/react": "4.5.3",
+    "@docsearch/react": "4.5.4",
     "@headlessui/react": "2.2.9",
     "@next/mdx": "16.1.6",
     "classnames": "2.5.1",
