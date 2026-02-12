@@ -10,30 +10,30 @@ targets:
     - folder_name: boilerplate
       repo_url: https://github.com/cert-manager/makefile-modules.git
       repo_ref: main
-      repo_hash: 1ad5133cf523ccd378b22e8d24a0ae0e03f98358
+      repo_hash: fb840168823fe3945b6df2cf10c47223e1b8ad6a
       repo_path: modules/boilerplate
     - folder_name: generate-verify
       repo_url: https://github.com/cert-manager/makefile-modules.git
       repo_ref: main
-      repo_hash: 1ad5133cf523ccd378b22e8d24a0ae0e03f98358
+      repo_hash: fb840168823fe3945b6df2cf10c47223e1b8ad6a
       repo_path: modules/generate-verify
     - folder_name: help
       repo_url: https://github.com/cert-manager/makefile-modules.git
       repo_ref: main
-      repo_hash: 1ad5133cf523ccd378b22e8d24a0ae0e03f98358
+      repo_hash: fb840168823fe3945b6df2cf10c47223e1b8ad6a
       repo_path: modules/help
     - folder_name: klone
       repo_url: https://github.com/cert-manager/makefile-modules.git
       repo_ref: main
-      repo_hash: 1ad5133cf523ccd378b22e8d24a0ae0e03f98358
+      repo_hash: fb840168823fe3945b6df2cf10c47223e1b8ad6a
       repo_path: modules/klone
     - folder_name: repository-base
       repo_url: https://github.com/cert-manager/makefile-modules.git
       repo_ref: main
-      repo_hash: 1ad5133cf523ccd378b22e8d24a0ae0e03f98358
+      repo_hash: fb840168823fe3945b6df2cf10c47223e1b8ad6a
       repo_path: modules/repository-base
     - folder_name: tools
       repo_url: https://github.com/cert-manager/makefile-modules.git
       repo_ref: main
-      repo_hash: 1ad5133cf523ccd378b22e8d24a0ae0e03f98358
+      repo_hash: fb840168823fe3945b6df2cf10c47223e1b8ad6a
       repo_path: modules/tools
