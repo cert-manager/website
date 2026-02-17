@@ -30,7 +30,7 @@ with v1beta1 and v1alpha2 because of resource conversion, but has not been teste
 
 cert-manager can generate TLS certificates for Gateway resources. This is
 configured by adding annotations to a Gateway and is similar to the process for
-[Securing Ingress Resources](../usage/ingress.md).
+[Securing Ingress Resources](./ingress.md).
 
 The Gateway resource is part of the [Gateway API][gwapi], a set of CRDs that you
 install on your Kubernetes cluster and which provide various improvements over
@@ -40,7 +40,10 @@ the Ingress API.
 
 :::info
 
-⚠️   cert-manager does not yet support the new ListenerSet resource. If you want to maintain the self-service TLS configuration experience that developers are accustomed to with the Ingress resource, you will need to configure RBAC to allow application developers to edit Gateway resources. You can learn more about upcoming cert-manager improvements that will enable self-service TLS without giving away control over Gateway resources in [Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming](/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api/).
+⚠️  **ListenerSet support** is now available in cert-manager v1.20.0-beta.0+.
+This enables self-service TLS configuration for application developers without
+requiring edit access to Gateway resources. See the [ListenerSet
+section](#listenerset) below for details.
 
 :::
 
@@ -351,12 +354,13 @@ spec:
 
 ## Supported Annotations
 
-If you are migrating to `Gateway` resources from `Ingress` resources, be aware that
-there are some differences between [the annotations for Ingress resources](./ingress.md#supported-annotations)
-versus the annotations for `Gateway` resources.
+If you are migrating to `Gateway` and `ListenerSet` resources from `Ingress`
+resources, be aware that there are some differences between [the annotations for
+Ingress resources](./ingress.md#supported-annotations) versus the annotations
+for `Gateway` and `ListenerSet` resources.
 
-The `Gateway` resource supports the following annotations for generating
-`Certificate` resources:
+The `Gateway` and `ListenerSet` resources support the following annotations for
+generating `Certificate` resources:
 
 - `cert-manager.io/issuer`: the name of the Issuer that should issue the
   certificate required for this `Gateway`. The Issuer _must_ be in the same
@@ -478,6 +482,247 @@ metadata:
     # custom configuration
     venafi.cert-manager.io/custom-fields: `[ {"name": "field-name", "value": "field value"}]`
 ```
+
+## ListenerSet
+
+**FEATURE STATE**: cert-manager 1.20 [alpha]
+
+### What is ListenerSet?
+
+ListenerSet is a Gateway API resource introduced in
+[GEP-1713](https://gateway-api.sigs.k8s.io/geps/gep-1713/) that solves a key
+limitation when migrating from Ingress to Gateway API: the loss of self-service
+TLS configuration for application developers.
+
+With Ingress resources, developers could independently configure both routing
+and TLS certificates using cert-manager annotations. When migrating to Gateway
+API, TLS configuration moves to the Gateway resource, which is typically
+controlled by cluster operators. This forces developers to ask for changes to
+resources they do not own, losing the autonomy they had with Ingress.
+
+ListenerSet restores self-service by allowing developers to create a ListenerSet
+resource alongside their HTTPRoute. The same annotations as for Gateway can be
+used on the ListenerSet to trigger the creation of a Certificate resource.
+
+### Enabling ListenerSet Support
+
+ListenerSet support requires Gateway API v1.5+ (standard channel). The
+instructions for installing the CRDs can be found in the Gateway API
+documentation: [Installing Gateway API][install-gapi].
+
+[install-gapi]: https://gateway-api.sigs.k8s.io/guides/getting-started/#installing-gateway-api
+
+To start using ListenerSet, you will have to enable the feature in cert-manager.
+We recommend you use the [file-based
+configuration](../installation/configuring-components.md#configuration-file). In
+your `values.yaml`, add the following:
+
+```yaml
+# values.yaml
+config:
+  apiVersion: controller.config.cert-manager.io/v1alpha1
+  kind: ControllerConfiguration
+  enableGatewayAPI: true
+  enableGatewayAPIListenerSet: true
+  featureGates:
+    ListenerSets: true
+```
+
+The `enableGatewayAPI` setting tells cert-manager to reconcile the Gateway
+resources, and `enableGatewayAPIListenerSet` tells cert-manager to also
+reconcile ListenerSet resources.
+
+The corresponding Helm command is:
+
+```sh
+helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager \
+  --namespace cert-manager \
+  --set config.apiVersion="controller.config.cert-manager.io/v1alpha1" \
+  --set config.kind="ControllerConfiguration" \
+  --set config.enableGatewayAPI=true \
+  --set config.enableGatewayAPIListenerSet=true \
+  --set config.featureGates.ListenerSets=true
+```
+
+After installation, restart cert-manager to ensure it picks up the new CRDs:
+
+```sh
+kubectl rollout restart deployment cert-manager -n cert-manager
+```
+
+### Example: Self-Service TLS with ListenerSet and HTTP-01
+
+Here's a complete example showing how application developers can manage their
+own TLS configuration. Let's start with the shared ClusterIssuer and Gateway
+created by the cluster operator:
+
+```yaml
+kind: ClusterIssuer
+apiVersion: cert-manager.io/v1
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: platformteam@example.com
+    privateKeySecretRef:
+      name: letsencrypt-acc-key
+    solvers:
+      - http01:
+          gatewayHTTPRoute: {}
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: eg
+  namespace: envoy-gateway-system
+spec:
+  gatewayClassName: eg
+  listeners:
+    - name: http
+      hostname: dummy
+      protocol: HTTP
+      port: 80
+  allowedListeners:
+    namespaces:
+      from: All
+```
+
+The `dummy` listener is required because the `listeners` cannot be left empty.
+See the [issue 4425](https://github.com/kubernetes-sigs/gateway-api/issues/4425)
+in the Gateway API project to learn more.
+
+In their namespace, the developer creates a Service, ListenerSet, and HTTPRoute
+for their application:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - image: gcr.io/k8s-staging-gateway-api/echo-basic:v20231214-v1.0.0-140-gf544a46e
+          imagePullPolicy: IfNotPresent
+          name: backend
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: dev
+spec:
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: backend
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: backend
+  namespace: dev
+spec:
+  parentRefs:
+    - kind: ListenerSet
+      name: backend
+      namespace: dev
+  hostnames:
+    - echo.example.com
+  rules:
+    - backendRefs:
+        - kind: Service
+          name: backend
+          port: 3000
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+kind: ListenerSet
+apiVersion: gateway.networking.k8s.io/v1
+metadata:
+  name: backend
+  namespace: dev
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  parentRef:
+    name: eg
+    namespace: envoy-gateway-system
+  listeners:
+    - name: https
+      hostname: echo.example.com
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: backend-tls
+    - name: http
+      hostname: echo.example.com
+      port: 80
+      protocol: HTTP
+```
+
+cert-manager will automatically create a Certificate resource based on the
+ListenerSet:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  annotations:
+    acme.cert-manager.io/http01-parentrefkind: ListenerSet
+    acme.cert-manager.io/http01-parentrefname: backend
+  name: backend-tls
+  namespace: dev
+spec:
+  dnsNames:
+  - echo.example.com
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  secretName: backend-tls
+  usages:
+  - digital signature
+  - key encipherment
+```
+
+### Supported Annotations on ListenerSet
+
+When both Gateway and ListenerSet have cert-manager annotations, ListenerSet
+annotations take precedence over the Gateway annotations for the listeners
+defined in that ListenerSet.
+
+ListenerSet resources support the same cert-manager annotations as Gateway
+resources. See the [Supported Annotations](#supported-annotations) section
+above.
 
 ## Inner workings diagram for developers
 
