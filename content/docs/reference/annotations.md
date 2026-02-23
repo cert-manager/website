@@ -34,6 +34,7 @@ to that of the ingress. If not specified and the `acme-http01-edit-in-place` ann
 not set, this defaults to the `http01.ingress.class` defined in the Issuer resource.
 
 ## acme.cert-manager.io/http01-ingress-ingressclassname
+
 - [Ingress](../usage/ingress.md)
 
 Allows the Ingress's `spec.ingressClassName` to be configured.
@@ -41,6 +42,28 @@ Customizing this is useful when you are trying
 to secure internal services, and need to solve challenges using a different ingress class
 to that of the ingress. If not specified and the `acme-http01-edit-in-place` annotation is
 not set, this defaults to the `http01.ingress.ingressClassName` defined in the Issuer resource.
+
+## acme.cert-manager.io/http01-parentrefkind
+
+- [Certificate](../usage/certificate.md)
+
+This annotation is automatically added by cert-manager to Certificate resources
+when they are created from a [Gateway](../usage/gateway.md) or
+[ListenerSet](../usage/gateway.md#listenerset) resource. It stores the kind of
+the parent resource (either `Gateway` or `ListenerSet`) that triggered the
+creation of the Certificate. This is used internally by the ACME HTTP-01 solver
+to know where to attach the temporary HTTPRoute for the challenge.
+
+## acme.cert-manager.io/http01-parentrefname
+
+- [Certificate](../usage/certificate.md)
+
+This annotation is automatically added by cert-manager to Certificate resources
+when they are created from a [Gateway](../usage/gateway.md) or
+[ListenerSet](../usage/gateway.md#listenerset) resource. It stores the name of
+the parent resource that triggered the creation of the Certificate. This is used
+internally by the ACME HTTP-01 solver to know where to attach the temporary
+HTTPRoute for the challenge.
 
 ## cert-manager.io/allow-direct-injection
 - `Secret`

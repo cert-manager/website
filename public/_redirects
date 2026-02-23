@@ -268,12 +268,14 @@ https://cert-manager.io/issue-temporary-certificate https://cert-manager.io/docs
 https://cert-manager.io/issuer https://cert-manager.io/docs/reference/annotations#cert-managerioissuer 301!
 https://cert-manager.io/issuer-group https://cert-manager.io/docs/reference/annotations#cert-managerioissuer-group 301!
 https://cert-manager.io/issuer-kind https://cert-manager.io/docs/reference/annotations#cert-managerioissuer-kind 301!
+https://cert-manager.io/issuer-name https://cert-manager.io/docs/reference/annotations#cert-managerioissuer-name 301!
 https://cert-manager.io/private-key-algorithm https://cert-manager.io/docs/reference/annotations#cert-managerioprivate-key-algorithm 301!
 https://cert-manager.io/private-key-encoding https://cert-manager.io/docs/reference/annotations#cert-managerioprivate-key-encoding 301!
 https://cert-manager.io/private-key-rotation-policy https://cert-manager.io/docs/reference/annotations#cert-managerioprivate-key-rotation-policy 301!
 https://cert-manager.io/private-key-secret-name https://cert-manager.io/docs/reference/annotations#cert-managerioprivate-key-secret-name 301!
 https://cert-manager.io/private-key-size https://cert-manager.io/docs/reference/annotations#cert-managerioprivate-key-size 301!
 https://cert-manager.io/renew-before https://cert-manager.io/docs/reference/annotations#cert-manageriorenew-before 301!
+https://cert-manager.io/renew-before-percentage https://cert-manager.io/docs/reference/annotations#cert-manageriorenew-before-percentage 301!
 https://cert-manager.io/revision-history-limit https://cert-manager.io/docs/reference/annotations#cert-manageriorevision-history-limit 301!
 https://cert-manager.io/secret-template https://cert-manager.io/docs/reference/annotations#cert-manageriosecret-template 301!
 https://cert-manager.io/subject-countries https://cert-manager.io/docs/reference/annotations#cert-manageriosubject-countries 301!
@@ -292,6 +294,8 @@ https://cert-manager.io/usages https://cert-manager.io/docs/reference/annotation
 https://acme.cert-manager.io/http01-edit-in-place https://cert-manager.io/docs/reference/annotations#acmecert-manageriohttp01-edit-in-place 301!
 https://acme.cert-manager.io/http01-ingress-class https://cert-manager.io/docs/reference/annotations#acmecert-manageriohttp01-ingress-class 301!
 https://acme.cert-manager.io/http01-ingress-ingressclassname https://cert-manager.io/docs/reference/annotations#acmecert-manageriohttp01-ingress-ingressclassname 301!
+https://acme.cert-manager.io/http01-parentrefkind https://cert-manager.io/docs/reference/annotations#acmecert-manageriohttp01-parentrefkind 301!
+https://acme.cert-manager.io/http01-parentrefname https://cert-manager.io/docs/reference/annotations#acmecert-manageriohttp01-parentrefname 301!
 
 https://experimental.cert-manager.io/request-duration https://cert-manager.io/docs/reference/annotations#experimentalcert-manageriorequest-duration 301!
 https://experimental.cert-manager.io/request-is-ca https://cert-manager.io/docs/reference/annotations#experimentalcert-manageriorequest-is-ca 301!
