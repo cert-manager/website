@@ -863,6 +863,8 @@ experimental.cert
 http01-edit-in-place
 http01-ingress-class
 http01-ingress-ingressclassname
+http01-parentrefkind
+http01-parentrefname
 ingress.class
 ip-sans
 kubernetes.io
