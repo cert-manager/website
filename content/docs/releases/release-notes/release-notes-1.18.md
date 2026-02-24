@@ -201,6 +201,17 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [@ianarsenault](https://github.com/ianarsenault)
 - [@TrilokGeer](https://github.com/TrilokGeer)
 
+## `v1.18.6`
+
+A simple bug-fix release to address [`CVE-2025-68121`](https://github.com/advisories/GHSA-h355-32pf-p2xm). All users should upgrade.
+
+Note that no efforts were made to patch [`CVE-2026-24051`](https://github.com/advisories/GHSA-9h8m-3fm2-qjrq) - this vulnerability only affects macOS and as such does not affect cert-manager running in Kubernetes clusters.
+
+### Changes by Kind
+
+#### Bug or Regression
+
+- Bump Go to address `CVE-2025-68121` ([#8525](https://github.com/cert-manager/cert-manager/pull/8525), [@SgtCoDFish](https://github.com/SgtCoDFish))
 
 ## `v1.18.5`
 
