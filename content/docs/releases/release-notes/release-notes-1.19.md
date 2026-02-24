@@ -72,6 +72,17 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+## `v1.19.4`
+
+This is a simple patch release to fix some reported vulnerabilities - notably [`CVE-2026-24051`](https://github.com/advisories/GHSA-9h8m-3fm2-qjrq) and [`CVE-2025-68121`](https://github.com/advisories/GHSA-h355-32pf-p2xm). All users should upgrade.
+
+### Changes by Kind
+
+#### Bug or Regression
+
+- Bump go to address `CVE-2025-68121` ([#8526](https://github.com/cert-manager/cert-manager/pull/8526), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Bump `otel` SDK to address `GO-2026-4394` ([#8531](https://github.com/cert-manager/cert-manager/pull/8531), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
 ## `v1.19.3`
 
 This release contains three bug fixes, including a fix for the moderate severity DoS issue in [`GHSA-gx3x-vq4p-mhhv`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-gx3x-vq4p-mhhv).

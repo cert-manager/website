@@ -1485,7 +1485,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Email is the email address to be associated with the ACME account. This field is optional, but it is strongly recommended to be set. Depending on the ACME server, it may be used to contact you in case of issues with your account or certificates, including expiry notification emails. This field may be updated after the account is initially registered.</p>
+        <p>Email is the email address to be associated with the ACME account. This field is optional, but it is strongly recommended to be set. It will be used to contact you in case of issues with your account or certificates, including expiry notification emails. This field may be updated after the account is initially registered.</p>
       </td>
     </tr>
     <tr>
@@ -1920,7 +1920,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>The IP address or hostname of an authoritative DNS server supporting RFC2136 in the form host:port. If the host is an IPv6 address it must be enclosed in square brackets (e.g [2001:db8::1]); port is optional. This field is required.</p>
+        <p>The IP address or hostname of an authoritative DNS server supporting RFC2136 in the form host:port. If the host is an IPv6 address it must be enclosed in square brackets (e.g [2001:db8::1]) ; port is optional. This field is required.</p>
       </td>
     </tr>
     <tr>
@@ -7137,5 +7137,5 @@ description: >-
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>12a3ef9</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>83820a0</code>. </em>
 </p>
