@@ -147,7 +147,7 @@ spec:
 
 :::info
 
-🚧   this mechanism can only be used to create Secrets in the same namespace as the `Gateway`, see [`cert-manager#5610`](https://github.com/cert-manager/cert-manager/issues/5610)
+🚧   this mechanism can only be used to create Secrets in the same namespace as the Gateway, see [`cert-manager#5610`](https://github.com/cert-manager/cert-manager/issues/5610)
 
 :::
 
@@ -166,7 +166,7 @@ meet the following requirements:
 | `tls.certificateRef.name`      | Cannot be left empty.                                       |
 | `tls.certificateRef.kind`      | If specified, must be set to `Secret`.                      |
 | `tls.certificateRef.group`     | If specified, must be set to `core`.                        |
-| `tls.certificateRef.namespace` | If specified, must be the same as the `Gateway`.            |
+| `tls.certificateRef.namespace` | If specified, must be the same as the Gateway.            |
 
 In the following example, the first four listener blocks will not be used to
 generate Certificate resources:
@@ -354,21 +354,21 @@ spec:
 
 ## Supported Annotations
 
-If you are migrating to `Gateway` and `ListenerSet` resources from `Ingress`
+If you are migrating to Gateway and ListenerSet resources from Ingress
 resources, be aware that there are some differences between [the annotations for
 Ingress resources](./ingress.md#supported-annotations) versus the annotations
-for `Gateway` and `ListenerSet` resources.
+for Gateway and ListenerSet resources.
 
-The `Gateway` and `ListenerSet` resources support the following annotations for
-generating `Certificate` resources:
+The Gateway and ListenerSet resources support the following annotations for
+generating Certificate resources:
 
 - `cert-manager.io/issuer`: the name of the Issuer that should issue the
-  certificate required for this `Gateway`. The Issuer _must_ be in the same
-  namespace as the `Gateway` resource.
+  certificate required for this Gateway. The Issuer _must_ be in the same
+  namespace as the Gateway resource.
 
-- `cert-manager.io/cluster-issuer`: the name of a `cert-manager.io` `ClusterIssuer`
-  to acquire the certificate required for this `Gateway`. It does not matter in
-  which namespace your `Gateway` resides, as `ClusterIssuers` are non-namespaced
+- `cert-manager.io/cluster-issuer`: the name of a cert-manager.io ClusterIssuer
+  to acquire the certificate required for this Gateway. It does not matter in
+  which namespace your Gateway resides, as ClusterIssuers are non-namespaced
   resources.
 
 - `cert-manager.io/issuer-kind`: the kind of the external issuer resource, for
@@ -453,7 +453,7 @@ generating `Certificate` resources:
 
 > ℹ️ This feature was added in cert-manager `v1.18.0`.
 
-It is possible to copy any specific custom annotation into the generated `Certificate` objects.
+It is possible to copy any specific custom annotation into the generated Certificate objects.
 For example, to copy the annotation: `venafi.cert-manager.io/custom-fields` from the Gateway to the Certificate,
 you must first redeploy the cert-manager controller with the following extra argument:
 
