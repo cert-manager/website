@@ -191,44 +191,11 @@ page if a step is missing or if it is outdated.
      The steps below need to happen using `master` (**final release**) or
      `release-1.x` (**patch release**). The PR will be merged after the release.
 
-   Go to the section "Generate `github-release-description.md`" using the
-      instructions further below (<kbd>Ctrl+F</kbd> and look for
-      `github-release-description.md`).
+   1. (**final release**) Create a new file `content/docs/release-notes/release-notes-1.xx.md`.
 
-   2. Remove the "Dependencies" section.
+     **Note:** For patch releases, you can skip this step and reuse the same release notes page.
 
-   3. For each bullet point in the Markdown file, read the changelog entry and
-      check that it follows the [release-note guidelines](../contributing/contributing-flow.md#release-note-guidelines).
-      If you find a changelog entry that doesn't follow the guidelines, then:
-      - Go to that PR and edit the PR description to change the contents of the
-        `release-note` block.
-      - Go back to the release notes page, and copy the same change into
-        `release-notes.md` (or re-generate the file).
-
-      and copy the same change into `release-notes.md` (or re-generate the
-      file).
-
-   4. Add the section "Major themes" and "Community" by taking example on the
-     previous release note pages.
-
-   5. Replace the GitHub issue numbers and GitHub handles (e.g., `#1234` or
-       `@maelvls`) with actual links using the following command:
-
-       ```bash
-       sed -E \
-         -e 's$#([0-9]+)$[#\1](https://github.com/cert-manager/cert-manager/pull/\1)$g' \
-         -e 's$@(\w+)$[@\1](https://github.com/\1)$g' \
-         github-release-description.md >release-notes.md
-       ```
-
-   6. Move `release-notes.md` to the website repo:
-
-      ```bash
-      # From the cert-manager repo.
-      mv release-notes.md ../website/content/docs/release-notes-1.X.md
-      ```
-
-   7. Add an entry to `content/docs/manifest.json`:
+   2. (**final release**) Add an entry to `content/docs/manifest.json` for the new release note file:
 
         ```diff
          {
@@ -239,6 +206,11 @@ page if a step is missing or if it is outdated.
         +      "path": "/docs/release-notes/release-notes-1.12.md"
         +    },
         ```
+
+   3. Add or update the "Major themes" and "Community" sections, taking inspiration from
+     previous release note pages. For final releases this will take some time; for
+     patch releases this should be a minor task and usually will not need to be done.
+
 
 5. **(final + patch release)** Prepare the Website "Bump Versions" PR.
 
@@ -454,7 +426,7 @@ page if a step is missing or if it is outdated.
 
    </details>
 
-10. In this section, we will be creating the description for the GitHub Release.
+10. In this section, we create the description for the GitHub Release and some release notes for the website.
 
     > **Note:** This step is about creating the description that will be
     > copy-pasted into the GitHub release page. The creation of the "Release
@@ -469,7 +441,7 @@ page if a step is missing or if it is outdated.
         echo $BRANCH
         ```
 
-    2. Generate `github-release-description.md` with the following command:
+    2. Generate `github-release-description.md` and `website-release-notes.md` with the following commands:
 
         ```bash
         # Must be run from the cert-manager folder.
@@ -480,7 +452,14 @@ page if a step is missing or if it is outdated.
          --org cert-manager --repo cert-manager \
          --required-author "cert-manager-prow[bot]" \
          --markdown-links=false \
+         --dependencies=false \
          --output github-release-description.md
+        release-notes --debug --repo-path cert-manager \
+         --org cert-manager --repo cert-manager \
+         --required-author "cert-manager-prow[bot]" \
+         --markdown-links=true \
+         --dependencies=false \
+         --output website-release-notes.md
         ```
 
         :::info
@@ -490,9 +469,9 @@ page if a step is missing or if it is outdated.
 
         :::
 
-    3. Add a one-sentence summary at the top.
+    3. Prepare a short summary of the contents of the release which will be used for both the GitHub Release and the website release notes.
 
-    4. **(final release only)** Write the "Community" section, following the example of past releases such as [v1.12.0](https://github.com/cert-manager/cert-manager/releases/tag/v1.12.0). If there are any users who didn't make code contributions but helped in other ways (testing, PR discussion, etc), be sure to thank them here!
+    4. Update the relevant release notes file on the website repo to include the contents of `website-release-notes.md`.
 
 11. Check that the build that was automatically triggered when you pushed the
     tag is complete and send Slack messages about the release:
@@ -513,7 +492,7 @@ page if a step is missing or if it is outdated.
         🔰 Please have a quick look at the build log as it might contain some unredacted
         data that we forgot to hide. We try to make sure the sensitive data is
         properly redacted but sometimes we forget to update this.
-  
+
         :::
 
     3. Copy the build logs URL and send a second Slack message in reply to this
@@ -579,10 +558,9 @@ page if a step is missing or if it is outdated.
 
 13. Publish the GitHub release:
 
-    1. Visit the draft GitHub release and paste in the release notes that you
+    1. Visit the draft GitHub release and paste `github-release-description.md` that you
        generated earlier. You will need to manually edit the content to match
-       the style of earlier releases. In particular, remember to remove
-       package-related changes.
+       the style of earlier releases and to explain what's in the release.
 
     2. **(initial alpha, subsequent alpha and beta only)** Tick the box "This is
        a pre-release".
@@ -622,7 +600,7 @@ page if a step is missing or if it is outdated.
        ./hack/push_and_sign_chart.sh
        ```
 
-       This command will also check the cosign signature it creates.
+       This command will also check the cosign signature it creates. In addition, it creates a non-V-prefixed tag to enable easier `helm upgrade` commands.
 
     2. Check that the Helm chart is available in the OCI registry by running:
 
