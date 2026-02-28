@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <div className="bg-white">
       <div className="relative container py-3 flex justify-between items-center">
-        <Link href="/">
+        <Link href="/" aria-label="Homepage">
 
           <CertManagerLogo />
 
