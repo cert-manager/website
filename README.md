@@ -197,7 +197,7 @@ This will automatically run a number of checks against your local environment, i
 
 * Lint checks on the nextjs code using [next lint](https://nextjs.org/docs/basic-features/eslint).
 * Link checks on all pages using [markdown-link-check](https://github.com/tcort/markdown-link-check).
-* Spelling in all pages using [mdspell](https://github.com/lukeapage/node-markdown-spellcheck).
+ * Spelling in all pages using [cspell](https://cspell.org/).
 * Formatting of the markdown in all pages using [remark](https://github.com/remarkjs/remark).
 
 > ℹ️ All these checks are also run automatically for pull requests.
