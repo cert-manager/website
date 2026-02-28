@@ -8,7 +8,8 @@
     "yarn.lock",
     "**/api-docs.md",
     "content/*docs/policy/approval/approver-policy/api-reference.md",
-    "content/*docs/trust/trust-manager/api-reference.md"
+    "content/*docs/trust/trust-manager/api-reference.md",
+    "content/v1.9-docs/**"
   ],
   "dictionaryDefinitions": [
     {
@@ -19,5 +20,36 @@
   ],
   "dictionaries": [
     "project-words"
-  ]
+  ],
+  "words": [
+    "letsencrypt",
+    "eksctl",
+    "oyaml",
+    "frontmatter",
+    "presubmits",
+    "gendocs",
+    "apikey",
+    "OCSP",
+    "keyid",
+    "paulbouwer",
+    "noout",
+    "ddcs",
+    "citadelclient",
+    "credencials",
+    "showcerts",
+    "eabsecret",
+    "tflxs",
+    "dvpj",
+    "tpvht",
+    "xpkp",
+    "mananager",
+    "overwriten",
+    "GOARCH",
+    "AWSPCAC",
+    "myingress",
+    "Bloggs"
+  ],
+  "ignoreCase": true,
+  "allowCompoundWords": true,
+  "flagWords": []
 }
