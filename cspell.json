@@ -1,0 +1,35 @@
+{
+  "version": "0.2",
+  "language": "en-us",
+  "ignorePaths": [
+    "node_modules/**",
+    ".git/**",
+    "package-lock.json",
+    "yarn.lock",
+    "**/api-docs.md",
+    "content/*docs/policy/approval/approver-policy/api-reference.md",
+    "content/*docs/trust/trust-manager/api-reference.md",
+    "content/v*-docs/**"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": ".spelling",
+      "description": "Custom words for the project"
+    }
+  ],
+  "dictionaries": [
+    "project-words"
+  ],
+  "words": [
+    "letsencrypt",
+    "eksctl",
+    "frontmatter",
+    "presubmits",
+    "gendocs",
+    "Bloggs"
+  ],
+  "ignoreCase": true,
+  "allowCompoundWords": true,
+  "flagWords": []
+}
