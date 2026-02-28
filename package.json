@@ -23,7 +23,7 @@
     "check": "concurrently --group --timings npm:check:* # Run all the npm check:* scripts in parallel",
     "check:eslint": "eslint .",
     "check:stylelint": "stylelint **/*.css",
-    "check:links": "find content/docs -type f -name '*.md' | xargs markdown-link-check --quiet --config markdown-link-check.json 2>&1 | awk -v RS=FILE: '/ERROR/{f=1; print RS $0} END{exit f}' # Split into records based on the word FILE and print only records containing word ERROR",
+    "check:links": "find content/docs -type f -name '*.md' | xargs markdown-link-check --quiet --config markdown-link-check.json 2>&1 | awk -v RS=FILE: '/ERROR/{f=1; print RS $0} END{exit f}'",
     "check:spelling": "cspell --no-progress --show-suggestions --cache -- './*.md' './content/**/*.md' './content/**/*.html' './_layouts/*.html' './_includes/*.html'",
     "check:markdown": "remark --rc-path .remarkrc --frail --quiet content/"
   },
