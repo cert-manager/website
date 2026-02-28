@@ -5,16 +5,14 @@
     {{ if eq .Kind "Alias" }}(<code>{{.Underlying}}</code> alias){{ end -}}
 </h3>
 {{ with (typeReferences .) }}
-    <p>
-        (<em>Appears on:</em>
+    <p>(<em>Appears on:</em>
         {{- $prev := "" -}}
         {{- range . -}}
             {{- if $prev -}}, {{ end -}}
             {{- $prev = . -}}
             <a href="{{ linkForType . }}">{{ typeDisplayName . }}</a>
         {{- end -}}
-        )
-    </p>
+    )</p>
 {{ end }}
 
 <div>
