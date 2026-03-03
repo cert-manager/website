@@ -29,7 +29,7 @@ If you have an Azure AKS cluster you can use the following command:
 az aks update \
     --name ${CLUSTER} \
     --enable-oidc-issuer \
-    --enable-workload-identity # ℹ️ This option is currently only available when using the aks-preview extension.
+    --enable-workload-identity
 ```
 
 > ℹ️ You can [install the Azure workload identity extension on other managed and self-managed clusters](https://azure.github.io/azure-workload-identity/docs/installation.html) if you are not using Azure AKS.
@@ -38,18 +38,15 @@ az aks update \
 >
 ### Reconfigure cert-manager
 
-Label the cert-manager controller Pod and ServiceAccount for the attention of the Azure Workload Identity webhook,
+Label the cert-manager controller Pod for the attention of the Azure Workload Identity webhook,
 which will result in the cert-manager controller Pod having an extra volume containing a Kubernetes ServiceAccount token which it will use to authenticate with Azure.
 
-If you installed cert-manager using Helm, the labels can be configured using Helm values:
+If you installed cert-manager using Helm, the label can be configured using Helm values:
 
 ```yaml
 # values.yaml
 podLabels:
   azure.workload.identity/use: "true"
-serviceAccount:
-  labels:
-    azure.workload.identity/use: "true"
 ```
 
 If successful, the cert-manager Pod will have some new environment variables set,
@@ -92,16 +89,17 @@ Choose a managed identity name and create the Managed Identity:
 
 ```bash
 export IDENTITY_NAME=cert-manager
-az identity create --name "${IDENTITY_NAME}"
+export IDENTITY_RESOURCE_GROUP=<your-resource-group> # ❗ Replace with your Azure resource group
+az identity create --name "${IDENTITY_NAME}" --resource-group "${IDENTITY_RESOURCE_GROUP}"
 ```
 
 Grant it permission to modify the DNS zone records:
 
 ```bash
-export IDENTITY_CLIENT_ID=$(az identity show --name "${IDENTITY_NAME}" --query 'clientId' -o tsv)
+export IDENTITY_CLIENT_ID=$(az identity show --name "${IDENTITY_NAME}" --resource-group "${IDENTITY_RESOURCE_GROUP}" --query 'clientId' -o tsv)
 az role assignment create \
     --role "DNS Zone Contributor" \
-    --assignee IDENTITY_CLIENT_ID \
+    --assignee $IDENTITY_CLIENT_ID \
     --scope $(az network dns zone show --name $DOMAIN_NAME -o tsv --query id)
 ```
 
@@ -125,6 +123,7 @@ export SERVICE_ACCOUNT_ISSUER=$(az aks show --resource-group $AZURE_DEFAULTS_GRO
 az identity federated-credential create \
   --name "cert-manager" \
   --identity-name "${IDENTITY_NAME}" \
+  --resource-group "${IDENTITY_RESOURCE_GROUP}" \
   --issuer "${SERVICE_ACCOUNT_ISSUER}" \
   --subject "system:serviceaccount:${SERVICE_ACCOUNT_NAMESPACE}:${SERVICE_ACCOUNT_NAME}"
 ```
@@ -159,8 +158,13 @@ spec:
           subscriptionID: $AZURE_SUBSCRIPTION_ID
           environment: AzurePublicCloud
           managedIdentity:
+            # client ID of the managed identity; overrides AZURE_CLIENT_ID from the environment
             clientID: $IDENTITY_CLIENT_ID
+            # # optional: tenant ID of the managed identity; overrides AZURE_TENANT_ID from the environment.
+            # tenantID: $IDENTITY_TENANT_ID
 ```
+
+> ℹ️ `managedIdentity.clientID` and `managedIdentity.tenantID` override the values that the Azure Workload Identity webhook injects via environment variables (`AZURE_CLIENT_ID` and `AZURE_TENANT_ID`).
 
 The following variables need to be filled in.
 
@@ -186,7 +190,7 @@ ClusterIssuer resources are cluster scoped (not namespaced) and only platform ad
 If you are using this authentication mechanism and ambient credentials are not enabled, you will see this error:
 
 ```bash
-error instantiating azuredns challenge solver: ClientID is not set but neither --cluster-issuer-ambient-credentials nor --issuer-ambient-credentials are set.
+error instantiating azuredns challenge solver: ClientID was omitted without providing one of `--cluster-issuer-ambient-credentials` or `--issuer-ambient-credentials`. These are necessary to enable Azure Managed Identities
 ```
 
 > ⚠️ It is possible (but not recommended) to enable this authentication mechanism for `Issuer` resources, by setting the `--issuer-ambient-credentials` flag on the cert-manager controller to true.
@@ -322,11 +326,10 @@ spec:
 This authentication mechanism is what cert-manager considers 'ambient credentials'. Use of ambient credentials is disabled by default for cert-manager `Issuer`s. This to ensure unprivileged users who have permission to create issuers cannot issue certificates using any credentials cert-manager incidentally has access to. To enable this authentication mechanism for `Issuer`s, you will need to set `--issuer-ambient-credentials` flag on cert-manager controller to true. (There is a corresponding `--cluster-issuer-ambient-credentials` flag which is set to `true` by default).
 
 If you are using this authentication mechanism and ambient credentials are not enabled, you will see this error:
-```bash
-error instantiating azuredns challenge solver: ClientID is not set but neither --cluster-issuer-ambient-credentials nor --issuer-ambient-credentials are set.
-```
 
-These are necessary to enable Azure Managed Identities.
+```bash
+error instantiating azuredns challenge solver: ClientID was omitted without providing one of `--cluster-issuer-ambient-credentials` or `--issuer-ambient-credentials`. These are necessary to enable Azure Managed Identities
+```
 
 ## Managed Identity Using AKS Kubelet Identity
 
@@ -420,19 +423,18 @@ To create the service principal you can use the following script (requires
 `azure-cli` and `jq`):
 
 ```bash
-# Choose a name for the service principal that contacts azure DNS to present
-# the challenge.
-$ AZURE_CERT_MANAGER_NEW_SP_NAME=NEW_SERVICE_PRINCIPAL_NAME
+# Choose a name for the service principal that contacts azure DNS to present the challenge.
+AZURE_CERT_MANAGER_NEW_SP_NAME=NEW_SERVICE_PRINCIPAL_NAME
 # This is the name of the resource group that you have your dns zone in.
-$ AZURE_DNS_ZONE_RESOURCE_GROUP=AZURE_DNS_ZONE_RESOURCE_GROUP
+AZURE_DNS_ZONE_RESOURCE_GROUP=AZURE_DNS_ZONE_RESOURCE_GROUP
 # The DNS zone name. It should be something like domain.com or sub.domain.com.
-$ AZURE_DNS_ZONE=AZURE_DNS_ZONE
+AZURE_DNS_ZONE=AZURE_DNS_ZONE
 
-$ DNS_SP=$(az ad sp create-for-rbac --name $AZURE_CERT_MANAGER_NEW_SP_NAME --output json)
-$ AZURE_CERT_MANAGER_SP_APP_ID=$(echo $DNS_SP | jq -r '.appId')
-$ AZURE_CERT_MANAGER_SP_PASSWORD=$(echo $DNS_SP | jq -r '.password')
-$ AZURE_TENANT_ID=$(echo $DNS_SP | jq -r '.tenant')
-$ AZURE_SUBSCRIPTION_ID=$(az account show --output json | jq -r '.id')
+DNS_SP=$(az ad sp create-for-rbac --name $AZURE_CERT_MANAGER_NEW_SP_NAME --output json)
+AZURE_CERT_MANAGER_SP_APP_ID=$(echo $DNS_SP | jq -r '.appId')
+AZURE_CERT_MANAGER_SP_PASSWORD=$(echo $DNS_SP | jq -r '.password')
+AZURE_TENANT_ID=$(echo $DNS_SP | jq -r '.tenant')
+AZURE_SUBSCRIPTION_ID=$(az account show --output json | jq -r '.id')
 ```
 
 For security purposes, it is appropriate to utilize RBAC to ensure that you
@@ -444,37 +446,37 @@ so that it can read/write the \_acme\_challenge TXT records to the zone.
 Lower the Permissions of the service principal.
 
 ```bash
-$ az role assignment delete --assignee $AZURE_CERT_MANAGER_SP_APP_ID --role Contributor
+az role assignment delete --assignee $AZURE_CERT_MANAGER_SP_APP_ID --role Contributor
 ```
 
 Give Access to DNS Zone.
 
 ```bash
-$ DNS_ID=$(az network dns zone show --name $AZURE_DNS_ZONE --resource-group $AZURE_DNS_ZONE_RESOURCE_GROUP --query "id" --output tsv)
-$ az role assignment create --assignee $AZURE_CERT_MANAGER_SP_APP_ID --role "DNS Zone Contributor" --scope $DNS_ID
+DNS_ID=$(az network dns zone show --name $AZURE_DNS_ZONE --resource-group $AZURE_DNS_ZONE_RESOURCE_GROUP --query "id" --output tsv)
+az role assignment create --assignee $AZURE_CERT_MANAGER_SP_APP_ID --role "DNS Zone Contributor" --scope $DNS_ID
 ```
 
 Check Permissions. As the result of the following command, we would like to see just one object in the permissions array with "DNS Zone Contributor" role.
 
 ```bash
-$ az role assignment list --all --assignee $AZURE_CERT_MANAGER_SP_APP_ID
+az role assignment list --all --assignee $AZURE_CERT_MANAGER_SP_APP_ID
 ```
 
 A secret containing service principal password should be created on Kubernetes to facilitate presenting the challenge to Azure DNS. You can create the secret with the following command:
 
 ```bash
-$ kubectl create secret generic azuredns-config --from-literal=client-secret=$AZURE_CERT_MANAGER_SP_PASSWORD
+kubectl create secret generic azuredns-config --from-literal=client-secret=$AZURE_CERT_MANAGER_SP_PASSWORD
 ```
 
 Get the variables for configuring the issuer.
 
 ```bash
-$ echo "AZURE_CERT_MANAGER_SP_APP_ID: $AZURE_CERT_MANAGER_SP_APP_ID"
-$ echo "AZURE_CERT_MANAGER_SP_PASSWORD: $AZURE_CERT_MANAGER_SP_PASSWORD"
-$ echo "AZURE_SUBSCRIPTION_ID: $AZURE_SUBSCRIPTION_ID"
-$ echo "AZURE_TENANT_ID: $AZURE_TENANT_ID"
-$ echo "AZURE_DNS_ZONE: $AZURE_DNS_ZONE"
-$ echo "AZURE_DNS_ZONE_RESOURCE_GROUP: $AZURE_DNS_ZONE_RESOURCE_GROUP"
+echo "AZURE_CERT_MANAGER_SP_APP_ID: $AZURE_CERT_MANAGER_SP_APP_ID"
+echo "AZURE_CERT_MANAGER_SP_PASSWORD: $AZURE_CERT_MANAGER_SP_PASSWORD"
+echo "AZURE_SUBSCRIPTION_ID: $AZURE_SUBSCRIPTION_ID"
+echo "AZURE_TENANT_ID: $AZURE_TENANT_ID"
+echo "AZURE_DNS_ZONE: $AZURE_DNS_ZONE"
+echo "AZURE_DNS_ZONE_RESOURCE_GROUP: $AZURE_DNS_ZONE_RESOURCE_GROUP"
 ```
 
 To configure the issuer, substitute the capital cased variables with the values

@@ -6,7 +6,7 @@ description: |
     using the DNS-01 protocol and Azure DNS with workload identity federation.
 ---
 
-*Last Verified: 11 January 2024*
+*Last Verified: 28 February 2026*
 
 In this tutorial you will learn how to deploy and configure cert-manager on Azure Kubernetes Service (AKS)
 and how to deploy an HTTPS web server and make it available on the Internet.
@@ -358,10 +358,10 @@ az aks update \
 
 ## Reconfigure cert-manager
 
-We will label the cert-manager controller Pod and ServiceAccount for the attention of the Azure Workload Identity webhook,
+We will label the cert-manager controller Pod for the attention of the Azure Workload Identity webhook,
 which will result in the cert-manager controller Pod having an extra volume containing a Kubernetes ServiceAccount token which it will use to authenticate with Azure.
 
-The labels can be configured using the Helm values file below:
+The label can be configured using the Helm values file below:
 
 ```yaml file=../../../../public/docs/tutorials/getting-started-aks-letsencrypt/values.yaml
 ```

@@ -1,6 +1,3 @@
 # values.yaml
 podLabels:
   azure.workload.identity/use: "true"
-serviceAccount:
-  labels:
-    azure.workload.identity/use: "true"
