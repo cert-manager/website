@@ -350,83 +350,7 @@ page if a step is missing or if it is outdated.
       > will have to open a PR to merge master into the release branch), and
       > wait for the PR checks to become green.
 
-      > **Note 2:** For recent versions of cert-manager, the tag being pushed will trigger a Google Cloud Build job to start,
-      > kicking off a build using the steps in `gcb/build_cert_manager.yaml`. Users with access to
-      > the cert-manager-release project on GCP should be able to view logs in [GCB build history](https://console.cloud.google.com/cloud-build/builds?project=cert-manager-release).
-
-9. <details>
-   <summary>**ONLY for (1.12, 1.13, and 1.14)**</summary>
-
-   In this step, we make sure the Go module
-   `github.com/cert-manager/cert-manager/cmd/ctl` can be imported by
-   third-parties.
-
-    First, create a temporary branch.
-
-     ```bash
-     # Must be run from the cert-manager repo folder.
-     git checkout -b "update-cmd/ctl/$RELEASE_VERSION"
-     ```
-
-    Second, update the `cmd/ctl`'s `go.mod` with the tag we just created:
-
-     ```bash
-     # Must be run from the cert-manager repo folder.
-     cd cmd/ctl
-     go get github.com/cert-manager/cert-manager@$RELEASE_VERSION
-     cd ../..
-
-     make tidy
-     git add "**/go.mod" "**/go.sum"
-     git commit --signoff -m"Update cmd/ctl's go.mod to $RELEASE_VERSION"
-     ```
-
-    Then, push the branch to your fork of cert-manager. For example:
-
-     ```bash
-     # Must be run from the cert-manager repo folder.
-     gh repo fork --remote-name fork
-     git push -u fork "update-cmd/ctl/$RELEASE_VERSION"
-     ```
-
-   Then, open a PR to merge that change and go back to the release branch with
-   the following commands:
-
-     ```bash
-     gh pr create \
-       --title "[Release $RELEASE_VERSION] Update cmd/cmctl's go.mod to $RELEASE_VERSION" \
-       --body-file - --base $BRANCH <<EOF
-     This PR cmd/cmctl's go.mod to $RELEASE_VERSION as part of the release process.
-
-     **To the reviewer:** the version changes in \`go.mod\` must be reviewed.
-
-     \`\`\`release-note
-     NONE
-     \`\`\`
-     EOF
-     ```
-
-   Wait for the PR to be merged.
-
-   Finally, create a tag for the `cmd/ctl` module:
-
-    ```bash
-     # Must be run from the cert-manager repo folder.
-     git fetch origin $BRANCH
-     git checkout $BRANCH
-     git pull --ff-only origin $BRANCH
-     git tag -m"cmd/ctl/$RELEASE_VERSION" "cmd/ctl/$RELEASE_VERSION" origin/$BRANCH
-     git push origin "cmd/ctl/$RELEASE_VERSION"
-     ```
-
-    > **Note:** the reason we need to do this is explained on Stack Overflow:
-    [how-are-versions-of-a-sub-module-managed][]
-
-    [how-are-versions-of-a-sub-module-managed]: https://stackoverflow.com/questions/60601011/how-are-versions-of-a-sub-module-managed/60601402#60601402
-
-   </details>
-
-10. In this section, we create the description for the GitHub Release and some release notes for the website.
+9. In this section, we create the description for the GitHub Release and some release notes for the website.
 
     > **Note:** This step is about creating the description that will be
     > copy-pasted into the GitHub release page. The creation of the "Release
@@ -473,7 +397,7 @@ page if a step is missing or if it is outdated.
 
     4. Update the relevant release notes file on the website repo to include the contents of `website-release-notes.md`.
 
-11. Check that the build that was automatically triggered when you pushed the
+10. Check that the build that was automatically triggered when you pushed the
     tag is complete and send Slack messages about the release:
 
     1. Send a first Slack message to `#cert-manager-dev`:
@@ -505,7 +429,7 @@ page if a step is missing or if it is outdated.
 
         :::
 
-12. Run `cmrel publish`:
+11. Run `cmrel publish`:
 
     1. Do a `cmrel publish` dry-run to ensure that all the staged resources are
        valid. Run the following command:
@@ -556,7 +480,7 @@ page if a step is missing or if it is outdated.
 
         :::
 
-13. Publish the GitHub release:
+12. Publish the GitHub release:
 
     1. Visit the draft GitHub release and paste `github-release-description.md` that you
        generated earlier. You will need to manually edit the content to match
@@ -570,7 +494,7 @@ page if a step is missing or if it is outdated.
 
     4. Click "Publish" to make the GitHub release live.
 
-14. Merge the pull request containing the Helm chart:
+13. Merge the pull request containing the Helm chart:
 
     Important: This PR can currently only be merged by CyberArk employees, but we're aiming to fix that soon. Changing this
     will involve us coming up with a plan for migrating where our Helm charts are stored and ensuring we don't break anyone.
@@ -591,7 +515,7 @@ page if a step is missing or if it is outdated.
     5. Merge the PR
     6. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-15. Upload the Helm chart to the OCI registry:
+14. Upload the Helm chart to the OCI registry:
 
     1. Run the following command to upload the Helm chart to the OCI registry, and sign it with cosign:
 
@@ -610,7 +534,7 @@ page if a step is missing or if it is outdated.
 
        Look for config, content and provenance layers in the output.
 
-16. **(final + patch releases)** Merge the 4 Website PRs:
+15. **(final + patch releases)** Merge the 4 Website PRs:
 
     1. Merge the PRs "Release Notes", "Upgrade Notes", and "Freeze And Bump
        Versions" that you have created previously.
@@ -628,7 +552,7 @@ page if a step is missing or if it is outdated.
 
       [ff-release-next]: https://github.com/cert-manager/website/compare/master...release-next?quick_pull=1&title=%5BPost-Release%5D+Merge+release-next+into+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
 
-17. Post a Slack message as an answer to the first message. Toggle the check
+16. Post a Slack message as an answer to the first message. Toggle the check
    box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -638,7 +562,7 @@ page if a step is missing or if it is outdated.
 
     :::
 
-18. **(final release only)** Show the release to the world:
+17. **(final release only)** Show the release to the world:
 
     1. Send an email to
        [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
@@ -654,7 +578,7 @@ page if a step is missing or if it is outdated.
     4. Create a post on the cert-manager BlueSky account! Login details are in the cert-manager 1password.
        ([Example post](https://bsky.app/profile/cert-manager.bsky.social/post/3lhdtn7c2222u))
 
-19. Proceed to the post-release "testing and release" steps:
+18. Proceed to the post-release "testing and release" steps:
 
     1. **(initial beta only)** Create a PR on
        [cert-manager/testing](https://github.com/cert-manager/testing) in order to
