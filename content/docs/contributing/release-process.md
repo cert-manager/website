@@ -302,6 +302,20 @@ page if a step is missing or if it is outdated.
       permission, you will have to open a PR to merge master into the release
       branch), and wait for the PR checks to become green.
 
+   - **(initial beta only)** Create a PR on the release branch you just created
+     to edit the file `make/_shared/klone/01_mod.mk`:
+
+     ```diff
+     -shared_generate_targets += generate-klone
+     +# MANUAL CHANGE!
+     +# generate-klone is removed so we can manually update versions
+     +# and diverge from upstream klone
+     +# shared_generate_targets += generate-klone
+     ```
+
+     This is required to prevent future Go version bumps on the release branch
+     from being reverted by `make generate`.
+
    - **(subsequent beta, patch release and final release)**: place yourself on
       the release branch:
 
