@@ -2,6 +2,7 @@ import Link from 'next/link'
 import FooterSepartor from './snippets/FooterSeparator'
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear()
   return (
     <footer className="mt-[-117px]">
       <div className="relative w-screen h-[117px] overflow-x-hidden">
@@ -9,9 +10,9 @@ export default function Footer() {
       </div>
       <div className="bg-dark-2 pb-10 pt-5">
         <div className="container text-sm text-white">
-          <p>&copy; 2025 The cert-manager Authors.</p>
+          <p>&copy; {currentYear} The cert-manager Authors.</p>
           <p className="mb-6">
-            &copy; 2025 The Linux Foundation. All rights reserved.
+            &copy; {currentYear} The Linux Foundation. All rights reserved.
           </p>
           <p>
             The Linux Foundation has registered trademarks and uses trademarks.
