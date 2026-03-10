@@ -92,7 +92,7 @@ subjects:
 
 ## Behavior
 
-CertificateRequestPolicy are split into 4 parts; `allowed`, `contraints`,
+CertificateRequestPolicy are split into 4 parts; `allowed`, `constraints`,
 `selector`, and `plugins`.
 
 ### Allowed
