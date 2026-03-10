@@ -21,14 +21,14 @@ should be stable enough to run.
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.19][] | Oct 07, 2025 | Release of 1.21 | 1.31 → 1.34 / 4.18 → 4.20                      | 1.31 → 1.34                        |
+| [1.19][] | Oct 07, 2025 | Release of 1.21 | 1.31 → 1.35 / 4.18 → 4.20                      | 1.31 → 1.35                        |
 | [1.18][] | Jun 10, 2025 | Release of 1.20 | 1.29 → 1.33 / 4.16 → 4.20                      | 1.29 → 1.33                        |
 
 ## Upcoming releases
 
 | Release  | Release Date | End of Life     | [Supported Kubernetes / OpenShift Versions][s] | [Tested Kubernetes Versions][test] |
 |:--------:|:------------:|:---------------:|:----------------------------------------------:|:----------------------------------:|
-| [1.20][] | Feb 10, 2026 | Release of 1.22 | 1.32 → 1.35 / 4.19 → 4.21                      | 1.32 → 1.35                        |
+| [1.20][] | Feb 24, 2026 | Release of 1.22 | 1.32 → 1.35 / 4.19 → 4.21                      | 1.32 → 1.35                        |
 
 Dates in the future are not firm commitments and are subject to change.
 
@@ -332,7 +332,7 @@ NB: cert-manager 1.12 was a public Long Term Support (LTS) release sponsored by 
 
 [s]: #kubernetes-supported-versions
 [test]: #supported-vs-tested
-[1.20]: ./release-notes/release-notes-1.20.md
+[1.20]: https://github.com/cert-manager/cert-manager/milestone/42
 [1.19]: ./release-notes/release-notes-1.19.md
 [1.18]: ./release-notes/release-notes-1.18.md
 [1.17]: ./release-notes/release-notes-1.17.md
