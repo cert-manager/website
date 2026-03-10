@@ -38,6 +38,63 @@ volumeMounts:
   name: serviceaccount-token
   readOnly: true
 
+# Enable the default network policy for cert-manager controller
+networkPolicy:
+  enabled: true
+  egress:
+
+  # Required: Kubernetes API requests.
+  # Use port 6443 on OpenShift clusters.
+  - ports:
+    - port: 443
+      protocol: TCP
+
+  # Required: DNS look ups.
+  - ports:
+    - port: 53
+      protocol: TCP
+    - port: 53
+      protocol: UDP
+
+  # Some example egress rules designed to allow cert-manager E2E tests to run
+  # with Network policies enabled. In production you should edit or remove these
+  # to match your requirements.
+
+  # Example: Allow access to the HTTP01 solver pod for ACME HTTP01 self-checks
+  # Only needed if your cluster users use the ACME issuer with HTTP01
+  - ports:
+    - port: 80
+      protocol: TCP
+
+  # Example: In-cluster DNS (Bind) server used by the ACME issuer with DNS01
+  - ports:
+    - port: 8053
+      protocol: UDP
+    - port: 8053
+      protocol: TCP
+    to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: bind
+
+  # Example: In-cluster ACME server used by the ACME issuer
+  - ports:
+    - port: 14000
+      protocol: TCP
+    to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: pebble
+
+  # Example: In-cluster Vault servers used by the Vault issuer
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: e2e-vault
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: e2e-vault-mtls
+
 webhook:
   replicaCount: 3
   podDisruptionBudget:
@@ -69,6 +126,10 @@ webhook:
   - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
     name: serviceaccount-token
     readOnly: true
+
+  # Enable the default network policy for cert-manager webhook
+  networkPolicy:
+    enabled: true
 
 cainjector:
   extraArgs:
@@ -104,6 +165,10 @@ cainjector:
   - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
     name: serviceaccount-token
     readOnly: true
+
+  # Enable the default network policy for cert-manager cainjector
+  networkPolicy:
+    enabled: true
 
 startupapicheck:
   automountServiceAccountToken: false
