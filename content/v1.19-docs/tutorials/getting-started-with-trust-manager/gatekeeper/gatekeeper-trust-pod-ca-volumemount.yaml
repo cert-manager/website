@@ -1,0 +1,24 @@
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign
+metadata:
+  name: demo-trust-ca-volumemount
+spec:
+  applyTo:
+  - groups: [""]
+    kinds: ["Pod"]
+    versions: ["v1"]
+  match:
+    scope: Namespaced
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["Pod"]
+    namespaces: ["team-a"]
+    excludedNamespaces: ["kube-system", "public", "kyverno", "gatekeeper-system"]
+  # All containers in a pod mounting to volumeMount named "ca-certificates"
+  location: "spec.containers[name:*].volumeMounts[name:ca-certificates]"
+  parameters:
+    assign:
+      value:
+        mountPath: /etc/ssl/certs/
+        name: ca-certificates
+        readOnly: true

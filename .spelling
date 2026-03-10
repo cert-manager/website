@@ -637,6 +637,7 @@ v1.12.1.
 v1.12.2.
 v1.12.3.
 v1.15.0.
+beta.0
 v1alpha1
 v1alpha2
 v1alpha3
@@ -765,6 +766,7 @@ v1.14.0
 v1.14.x
 v1.14.3
 v1.14.3.
+v1.20.0
 liveness
 apiservices
 arm64
@@ -872,6 +874,9 @@ subject-organizationalunits
 subject-postalcodes
 subject-serialnumber
 subject-streetaddresses
+http01-ingress-ingressclassname
+http01-parentrefkind
+http01-parentrefname
 tls-acme
 uri-sans
 venafi.cert
