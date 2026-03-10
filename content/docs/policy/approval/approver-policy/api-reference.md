@@ -465,8 +465,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -566,8 +566,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -667,8 +667,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -768,8 +768,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -959,8 +959,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1060,8 +1060,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1162,8 +1162,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1264,8 +1264,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1365,8 +1365,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1466,8 +1466,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1569,8 +1569,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1671,8 +1671,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```
@@ -1772,8 +1772,8 @@ ref: https://github.com/google/cel-spec
 The Rule is scoped to the location of the validations in the schema.
 The `self` variable in the CEL expression is bound to the scoped value.
 To enable more advanced validation rules, approver-policy provides the
-`cr` (map) variable to the CEL expression containing `namespace` and
-`name` of the `CertificateRequest` resource.
+`cr` (map) variable to the CEL expression containing `username`, `groups`,
+`namespace` and `name` of the `CertificateRequest` resource.
 
 Example (rule for namespaced DNSNames):
 ```

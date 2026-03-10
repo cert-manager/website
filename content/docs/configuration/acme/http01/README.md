@@ -69,9 +69,6 @@ controllers support `ingressClassName`, with the notable exception of
 ingress-gce (as per the page [Configure Ingress for external load
 balancing](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress)).
 
-> You can override the `ingressClassName` on a per-Ingress basis using the
-[`acme.cert-manager.io/http01-ingress-ingressclassname`](https://cert-manager.io/docs/reference/annotations/#acmecert-manageriohttp01-ingress-ingressclassname) annotation.
-
 ### `class`
 
 If the `class` field is specified, a new Ingress resource with a randomly
@@ -81,9 +78,6 @@ value set to the value of the `class` field.
 
 This field is only recommended with ingress-gce. ingress-gce [doesn't support the
 `ingressClassName` field](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress).
-
-> You can override the `class` on a per-Ingress basis using the
-[`acme.cert-manager.io/http01-ingress-class`](https://cert-manager.io/docs/reference/annotations/#acmecert-manageriohttp01-ingress-class) annotation.
 
 ### `name`
 
@@ -225,13 +219,13 @@ improvements over the Ingress API.
 
 :::info
 
-📌  This feature requires the installation of the [Gateway API bundle](https://gateway-api.sigs.k8s.io/guides/#installing-a-gateway-controller) and passing an
+📌  This feature requires the installation of the [Gateway API bundle](https://gateway-api.sigs.k8s.io/guides/getting-started/#installing-gateway-api) and passing an
 additional flag to the cert-manager controller.
 
-To install v1.5.1 Gateway API bundle (Gateway CRDs and webhook), run the following command:
+To install v1.4.1 Gateway API bundle (CRDs associated with a version of Gateway API), run the following command:
 
 ```sh
-kubectl apply -f "https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml"
+kubectl apply --server-side -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/standard-install.yaml
 ```
 
 Since cert-manager 1.15, the Gateway API support is no longer gated behind a
