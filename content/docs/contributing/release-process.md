@@ -50,6 +50,9 @@ following conditions:
     [2]: https://console.cloud.google.com/?project=cert-manager-release
     ```
 
+6. You need to be a developer on the (private) project https://github.com/jetstack/jetstack-secure. For now, only Palo Alto employees are able to do that. This is required for publishing the regular Helm chart.
+7. You need to have "write" access to the https://quay.io/jetstack organization. only Palo Alto employees are able to do that. This is required for publishing the OCI Helm chart.
+
 This guide applies for versions of cert-manager released using `make`, which is every version from cert-manager 1.8 and newer.
 
 If you need to release a version of cert-manager 1.7 or earlier see [older releases](#older-releases).
@@ -174,90 +177,135 @@ page if a step is missing or if it is outdated.
     > | `END_REV`         | Name of your release branch (inclusive) |
     > | `BRANCH`          | Name of your release branch             |
 
-3. **(final release only)** Prepare the Website "Upgrade Notes" PR.
 
-   Make sure that a PR with the new upgrade
-   document is ready to be merged on
-   [cert-manager/website](https://github.com/cert-manager/website). See for
-   example, see
-   [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1.md).
-
-   This can be prepared ahead of time.
-
-4. **(final + patch releases)** Prepare the Website "Release Notes" PR.
-
-     **⚠️ This step can be done ahead of time.**
-
-     The steps below need to happen using `master` (**final release**) or
-     `release-1.x` (**patch release**). The PR will be merged after the release.
-
-   1. (**final release**) Create a new file `content/docs/release-notes/release-notes-1.xx.md`.
-
-     **Note:** For patch releases, you can skip this step and reuse the same release notes page.
-
-   2. (**final release**) Add an entry to `content/docs/manifest.json` for the new release note file:
-
-        ```diff
-         {
-           "title": "Release Notes",
-           "routes": [
-        +    {
-        +      "title": "v1.12",
-        +      "path": "/docs/release-notes/release-notes-1.12.md"
-        +    },
-        ```
-
-   3. Add or update the "Major themes" and "Community" sections, taking inspiration from
-     previous release note pages. For final releases this will take some time; for
-     patch releases this should be a minor task and usually will not need to be done.
-
-
-5. **(final + patch release)** Prepare the Website "Bump Versions" PR.
+5. (**final release**) Prepare the "Docs Freeze" PR
 
    **⚠️ This step can be done ahead of time.**
 
-   In that PR:
+   Imagining that you are about to release v1.20.0, run the following from the master branch:
+   ```
+   ./scripts/freeze-docs 1.19
+   ```
 
-   1. (**final release**) Update the section "Supported releases" in the
-     [supported-releases](../releases/README.md) page.
-   2. (**final release**) Update the section "How we determine supported
-     Kubernetes versions" on the
-     [supported-releases](../releases/README.md) page.
-   3. (**final release**) Bump the version that appears in
-     `scripts/gendocs/generate-new-import-path-docs`. For example:
+   Then, create a PR "Freeze 1.19" on `master`.
 
-      ```diff
-      -LATEST_VERSION="v1.11-docs"
-      +LATEST_VERSION="v1.12-docs"
+4. (**final + patch releases**) Prepare the "Release Notes" PR.
 
-      -genversionwithcli "release-1.11" "$LATEST_VERSION"
-      +genversionwithcli "release-1.12" "$LATEST_VERSION"
-      ```
+     **⚠️ This step can be done ahead of time.**
 
-   4. (**final + patch release of the latest minor version**) Bump the latest
-      cert-manager version variable in the `content/docs/variables.json` file.
+    Create a PR on the website titled "Release And Upgrade Notes".
 
-      ```diff
-      -"cert_manager_latest_version": "v1.14.2",
-      +"cert_manager_latest_version": "v1.14.3",
-      ```
+    - If you are doing a **final release**, then this PR's base must be the `release-next` branch.
+    - If you are doing a **patch release**, then this PR's base must be `master`.
 
-   5. (**final release only**) Freeze the `docs/` folder by running the following script:
+    To craft this PR, you will need to do the following:
+
+    1. Generate `github-release-description.md` and `website-release-notes.md` with the following commands:
+
+        ```bash
+        # Must be run from the cert-manager folder.
+        export GITHUB_TOKEN=$(gh auth token)
+        git fetch origin $BRANCH
+        export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
+        release-notes --debug --repo-path cert-manager \
+         --org cert-manager --repo cert-manager \
+         --required-author "cert-manager-prow[bot]" \
+         --markdown-links=false \
+         --dependencies=false \
+         --output github-release-description.md
+        release-notes --debug --repo-path cert-manager \
+         --org cert-manager --repo cert-manager \
+         --required-author "cert-manager-prow[bot]" \
+         --markdown-links=true \
+         --dependencies=false \
+         --output website-release-notes.md
+        ```
+
+        :::info
+
+        The GitHub token **does not need any scope**. The token is required
+        only to avoid rate-limits imposed on anonymous API users.
+
+        :::
+
+    2. Prepare a short summary of the contents of the release which will be used
+       for both the GitHub Release and the website release notes.
+
+    3. Update the relevant release notes file on the website repo to include the
+       contents of `website-release-notes.md`.
+
+    4. (**final release**) Move the generated `website-release-notes.md` to
+       `content/docs/release-notes/release-notes-1.20.md`. Make sure to edit it
+       to match the format of our past release notes.
+
+    5. (**patch release**) Add the contents of the generated
+       `website-release-notes.md` to a new section of the existing release,
+       e.g., in `content/docs/release-notes/release-notes-1.20.md`.
+
+    6. (**final release**) Create a new file:
+
+       ```text
+       content/docs/releases/upgrading/upgrading-1.19-1.20.md
+       ```
+
+       See for
+       example: [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1.md).
+
+    7. (**final release**) Add an entry to `content/docs/manifest.json` for the new release note file:
+
+        ```yaml
+        {
+          "routes": [
+            # ...
+            {
+              "title": "Upgrade 1.19 to 1.20",
+              "path": "/docs/releases/upgrading/upgrading-1.19-1.20.md"
+            },
+            {
+              "title": "1.20",
+              "path": "/docs/releases/release-notes/release-notes-1.20.md"
+            }
+          ]
+        }
+        ```
+
+5. (**final + patch releases**) Prepare the "Version Bumps" PR:
+
+   **⚠️ This step can be done ahead of time.**
+
+   Create a PR on the website titled something like "Bump versions".
+
+   - If you are doing a **final release**, then this PR's base must be the `release-next` branch.
+   - If you are doing a **patch release**, then this PR's base must be `master`.
+
+   In this PR:
+
+   1. Update the CRD and CLI docs with the following instructions:
+
+       Imagining that you are about to release v1.20.0, edit `scripts/gendocs/generate-new-import-path-docs` to change `CM_BRANCH` and `DOCS_FOLDER` to:
+
+       ```bash
+       CM_BRANCH="release-1.20"
+       DOCS_FOLDER="docs"
+       ```
+
+       Then, run:
 
       ```bash
-      # From the website repository, on the master branch.
-      ./scripts/freeze-docs 1.16
-      ```
-
-      This copies the `docs/` folder to a versioned folder (e.g. `v1.15-docs`) and removes any
-      folders which should not be present in versioned docs.
-
-   6. (**final + patch releases**) Update the [API docs](https://cert-manager.io/docs/reference/api-docs/) and [CLI docs](https://cert-manager.io/docs/cli//):
-
-      ```bash
-      # From the website repository, on the master branch.
       ./scripts/gendocs/generate
       ```
+
+   2. (**final + patch release of the latest minor version**) Bump the latest
+      cert-manager version variable in the `content/docs/variables.json` file.
+      For example, if you are releasing v1.20.0:
+
+      ```json
+      {"cert_manager_latest_version": "v1.20.0"}
+      ```
+
+   3. (**final release**) Edit `content/docs/releases/README.md` and:
+      - update the section "Supported releases",
+      - update the section "How we determine supported Kubernetes versions".
 
 6. Check that the `origin` remote is correct. To do that, run the following
    command and make sure it returns the upstream
@@ -365,54 +413,7 @@ page if a step is missing or if it is outdated.
       > will have to open a PR to merge master into the release branch), and
       > wait for the PR checks to become green.
 
-9. In this section, we create the description for the GitHub Release and some release notes for the website.
-
-    > **Note:** This step is about creating the description that will be
-    > copy-pasted into the GitHub release page. The creation of the "Release
-    > Note" page on the website is done in a previous step.
-
-    1. Check that all the 4 environment variables are ready:
-
-        ```bash
-        echo $RELEASE_VERSION
-        echo $START_TAG
-        echo $END_REV
-        echo $BRANCH
-        ```
-
-    2. Generate `github-release-description.md` and `website-release-notes.md` with the following commands:
-
-        ```bash
-        # Must be run from the cert-manager folder.
-        export GITHUB_TOKEN=$(gh auth token)
-        git fetch origin $BRANCH
-        export START_SHA="$(git rev-list --reverse --ancestry-path $(git merge-base $START_TAG $BRANCH)..$BRANCH | head -1)"
-        release-notes --debug --repo-path cert-manager \
-         --org cert-manager --repo cert-manager \
-         --required-author "cert-manager-prow[bot]" \
-         --markdown-links=false \
-         --dependencies=false \
-         --output github-release-description.md
-        release-notes --debug --repo-path cert-manager \
-         --org cert-manager --repo cert-manager \
-         --required-author "cert-manager-prow[bot]" \
-         --markdown-links=true \
-         --dependencies=false \
-         --output website-release-notes.md
-        ```
-
-        :::info
-
-        The GitHub token **does not need any scope**. The token is required
-        only to avoid rate-limits imposed on anonymous API users.
-
-        :::
-
-    3. Prepare a short summary of the contents of the release which will be used for both the GitHub Release and the website release notes.
-
-    4. Update the relevant release notes file on the website repo to include the contents of `website-release-notes.md`.
-
-10. Send a Slack message to `#cert-manager-dev` to announce that you are starting the release:
+9. Send a Slack message to `#cert-manager-dev` to announce that you are starting the release:
 
         :::info
 
@@ -420,7 +421,7 @@ page if a step is missing or if it is outdated.
 
         :::
 
-11. Go through the `cmrel` publish process:
+10. Go through the `cmrel` publish process:
 
     1. Check that the build that was automatically triggered when you pushed the
        tag is complete in the
@@ -460,7 +461,7 @@ page if a step is missing or if it is outdated.
 
        :::
 
-12. Publish the GitHub release:
+11. Publish the GitHub release:
 
     1. Visit the draft GitHub release and paste `github-release-description.md` that you
        generated earlier. You will need to manually edit the content to match
@@ -474,7 +475,7 @@ page if a step is missing or if it is outdated.
 
     4. Click "Publish" to make the GitHub release live.
 
-13. Merge the pull request containing the Helm chart:
+12. Merge the pull request containing the Helm chart:
 
     Important: This PR can currently only be merged by CyberArk employees, but we're aiming to fix that soon. Changing this
     will involve us coming up with a plan for migrating where our Helm charts are stored and ensuring we don't break anyone.
@@ -495,7 +496,7 @@ page if a step is missing or if it is outdated.
     5. Merge the PR
     6. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-14. Upload the Helm chart to the OCI registry:
+13. Upload the Helm chart to the OCI registry:
 
     1. Run the following command to upload the Helm chart to the OCI registry, and sign it with cosign:
 
@@ -514,10 +515,11 @@ page if a step is missing or if it is outdated.
 
        Look for config, content and provenance layers in the output.
 
-15. **(final + patch releases)** Merge the 4 Website PRs:
+14. (**final releases**) Merge the "Docs Freeze" PR.
 
-    1. Merge the PRs "Release Notes", "Upgrade Notes", and "Freeze And Bump
-       Versions" that you have created previously.
+15. (**final + patch releases**)
+
+    1. Merge the "Release Notes" PR and "Bump Versions" PR.
     2. Create the PR "Merge release-next into master" by [clicking
        here][ff-release-next].
 
@@ -578,11 +580,7 @@ page if a step is missing or if it is outdated.
        If the [milestone](https://github.com/cert-manager/cert-manager/milestones) for the next release doesn't exist,
        create it first. If you consider the milestone for the version you just released to be complete, close it.
 
-## Older Releases
-
-The above guide only applies for versions of cert-manager from v1.8 and newer.
-
-Older versions were built using Bazel and this difference in build process is reflected in the release process.
+## Other Release Processes
 
 ### Krew and Homebrew
 
@@ -592,33 +590,3 @@ make sense any more, and so any references in this release process or in older v
 ### OLM (OpenShift Operator Lifecycle Manager)
 
 We previously made efforts to publish OLM releases of cert-manager on a best-effort basis. We agreed in early 2025 to discontinue this, since the burden was too much and usually fell unfairly on one maintainer.
-
-### cert-manager 1.6 and 1.7
-
-Follow [this older version][older-release-process] of the release process on GitHub, rather than the guide on this website.
-
-The most notable difference is you'll call `cmrel stage` rather than `cmrel makestage`. You should be fine to use the latest
-version of `cmrel` to do the release.
-
-### cert-manager 1.5 and earlier
-
-If you're releasing version 1.5 or earlier you must also be sure to install a different version of `cmrel`.
-
-In the step where you install `cmrel`, you'll want to run the following instead:
-
-```bash
-go install github.com/cert-manager/release/cmd/cmrel@cert-manager-pre-1.6
-```
-
-This will ensure that the version of `cmrel` you're using is compatible with the version of cert-manager you're releasing.
-
-In addition, when you check out the `cert-manager/release` repository you should be sure to check out the `cert-manager-pre-1.6` tag in that repo:
-
-```bash
-git checkout cert-manager-pre-1.6
-```
-
-Other than the different `cert-manager/release` tag and `cmrel` version, you can follow the [same older release documentation][older-release-process] as
-is used for 1.6 and 1.7 - just remember to change the version of `cmrel` you install!
-
-[older-release-process]: https://github.com/cert-manager/website/blob/6fa0db74de0ae17d7be638a08155d1b4e036aaa9/content/en/docs/contributing/release-process.md?plain=1
