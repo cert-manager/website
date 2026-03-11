@@ -29,9 +29,10 @@ set -o pipefail
 RELEASE=${1:-}
 
 if [[ -z "${RELEASE}" ]]; then
-    echo "usage: $0 <release-version>"
-    echo "e.g. $0 1.16"
-    exit 1
+	echo "usage: $0 <release-version>"
+	echo "For examplem, if you are releasing cert-manager v1.20.0:"
+	echo "  $0 1.19 "
+	exit 1
 fi
 
 cp -r content/docs content/v${RELEASE}-docs
@@ -45,8 +46,8 @@ TMP_FILE=$(mktemp)
 trap "rm -rf ${TMP_FILE}" EXIT
 
 # Replace paths containing /docs/ with a versioned path
-sed "s|/docs/|/v${RELEASE}-docs/|g" content/v${RELEASE}-docs/manifest.json > $TMP_FILE
+sed "s|/docs/|/v${RELEASE}-docs/|g" content/v${RELEASE}-docs/manifest.json >$TMP_FILE
 
 # Remove any parts of the manifest which have "x-only-docs": true
-jq <$TMP_FILE > content/v${RELEASE}-docs/manifest.json \
-    'del(.routes[0].routes[] | select(."x-only-docs" == true))'
+jq <$TMP_FILE >content/v${RELEASE}-docs/manifest.json \
+	'del(.routes[0].routes[] | select(."x-only-docs" == true))'
