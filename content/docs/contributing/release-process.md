@@ -1,4 +1,9 @@
 ---
+title: My fork of release-process.md
+
+---
+
+---
 title: Release Process
 description: 'cert-manager contributing: Release process'
 ---
@@ -174,90 +179,100 @@ page if a step is missing or if it is outdated.
     > | `END_REV`         | Name of your release branch (inclusive) |
     > | `BRANCH`          | Name of your release branch             |
 
-3. **(final release only)** Prepare the Website "Upgrade Notes" PR.
 
-   Make sure that a PR with the new upgrade
-   document is ready to be merged on
-   [cert-manager/website](https://github.com/cert-manager/website). See for
-   example, see
-   [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1.md).
-
-   This can be prepared ahead of time.
-
-4. **(final + patch releases)** Prepare the Website "Release Notes" PR.
-
-     **⚠️ This step can be done ahead of time.**
-
-     The steps below need to happen using `master` (**final release**) or
-     `release-1.x` (**patch release**). The PR will be merged after the release.
-
-   1. (**final release**) Create a new file `content/docs/release-notes/release-notes-1.xx.md`.
-
-     **Note:** For patch releases, you can skip this step and reuse the same release notes page.
-
-   2. (**final release**) Add an entry to `content/docs/manifest.json` for the new release note file:
-
-        ```diff
-         {
-           "title": "Release Notes",
-           "routes": [
-        +    {
-        +      "title": "v1.12",
-        +      "path": "/docs/release-notes/release-notes-1.12.md"
-        +    },
-        ```
-
-   3. Add or update the "Major themes" and "Community" sections, taking inspiration from
-     previous release note pages. For final releases this will take some time; for
-     patch releases this should be a minor task and usually will not need to be done.
-
-
-5. **(final + patch release)** Prepare the Website "Bump Versions" PR.
+5. (**final release**) Prepare the "Docs Freeze" PR
 
    **⚠️ This step can be done ahead of time.**
 
-   In that PR:
+   Imagining that you are about to release v1.20.0, run the following from the master branch:
+   ```
+   ./scripts/freeze-docs 1.19
+   ```
 
-   1. (**final release**) Update the section "Supported releases" in the
-     [supported-releases](../releases/README.md) page.
-   2. (**final release**) Update the section "How we determine supported
-     Kubernetes versions" on the
-     [supported-releases](../releases/README.md) page.
-   3. (**final release**) Bump the version that appears in
-     `scripts/gendocs/generate-new-import-path-docs`. For example:
+   Then, create a PR "Freeze 1.19" on `master`.
 
-      ```diff
-      -LATEST_VERSION="v1.11-docs"
-      +LATEST_VERSION="v1.12-docs"
+4. (**final + patch releases**) Prepare the "Release Notes" PR.
 
-      -genversionwithcli "release-1.11" "$LATEST_VERSION"
-      +genversionwithcli "release-1.12" "$LATEST_VERSION"
+     **⚠️ This step can be done ahead of time.**
+
+    Create a PR on the website titled "Release And Upgrade Notes".
+    
+    - If you are doing a **final release**, then this PR's base must be the `release-next` branch.
+   - If you are doing a **patch release**, then this PR's base must be `master`.
+
+    The PR will contain the following:
+
+   1. Run the `release-notes` command (see instructions further down below in this page).
+
+   1. (**final release**) Move the generated `website-release-notes.md` to `content/docs/release-notes/release-notes-1.20.md`. Make sure to edit it to match the format of our past release notes.
+
+   2. (**patch release**) Add the contents of the generated `website-release-notes.md` to a new section of the existing release, e.g., in `content/docs/release-notes/release-notes-1.20.md`.
+
+   2. (**final release**) Create a new file:
       ```
-
-   4. (**final + patch release of the latest minor version**) Bump the latest
-      cert-manager version variable in the `content/docs/variables.json` file.
-
-      ```diff
-      -"cert_manager_latest_version": "v1.14.2",
-      +"cert_manager_latest_version": "v1.14.3",
+      content/docs/releases/upgrading/upgrading-1.19-1.20.md
       ```
+   
+      See for
+      example: [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1.md).
 
-   5. (**final release only**) Freeze the `docs/` folder by running the following script:
+   2. (**final release**) Add an entry to `content/docs/manifest.json` for the new release note file:
+
+        ```yaml
+        {
+          "routes": [
+            # ...
+            {
+              "title": "Upgrade 1.19 to 1.20",
+              "path": "/docs/releases/upgrading/upgrading-1.19-1.20.md"
+            },
+            {
+              "title": "1.20",
+              "path": "/docs/releases/release-notes/release-notes-1.20.md"
+            }
+          ]
+        }
+        ```
+
+5. (final + patch releases) Prepare the "Version Bumps" PR
+
+   **⚠️ This step can be done ahead of time.**
+   
+   Create a PR on the website titled something like "Bump versions".
+   
+   - If you are doing a **final release**, then this PR's base must be the `release-next` branch.
+   - If you are doing a **patch release**, then this PR's base must be `master`.
+   
+   In this PR:
+
+   1. Update the CRD and CLI docs with the following instructions:
+   
+       Imagining that you are about to release v1.20.0, edit `scripts/gendocs/generate-new-import-path-docs` to change the line that starts with `genversionwithcli` to this:
+
+       ```
+       CM_BRANCH="release-1.20"
+       DOCS_FOLDER="docs"
+       ```
+
+       Then, run:
 
       ```bash
-      # From the website repository, on the master branch.
-      ./scripts/freeze-docs 1.16
-      ```
-
-      This copies the `docs/` folder to a versioned folder (e.g. `v1.15-docs`) and removes any
-      folders which should not be present in versioned docs.
-
-   6. (**final + patch releases**) Update the [API docs](https://cert-manager.io/docs/reference/api-docs/) and [CLI docs](https://cert-manager.io/docs/cli//):
-
-      ```bash
-      # From the website repository, on the master branch.
       ./scripts/gendocs/generate
       ```
+      
+   2. (**final + patch release of the latest minor version**) Bump the latest
+      cert-manager version variable in the `content/docs/variables.json` file.
+      For example, if you are releasing v1.20.0:
+
+      ```json
+      {"cert_manager_latest_version": "v1.20.0"}
+      ```
+
+   3. Update the section "Supported releases" in the
+      [supported-releases](../releases/README.md) page.
+   4. Update the section "How we determine supported
+      Kubernetes versions" on the
+      [supported-releases](../releases/README.md) page.
 
 6. Check that the `origin` remote is correct. To do that, run the following
    command and make sure it returns the upstream
@@ -514,10 +529,11 @@ page if a step is missing or if it is outdated.
 
        Look for config, content and provenance layers in the output.
 
-15. **(final + patch releases)** Merge the 4 Website PRs:
+15. (**final releases**) Merge the "Docs Freeze" PR.
 
-    1. Merge the PRs "Release Notes", "Upgrade Notes", and "Freeze And Bump
-       Versions" that you have created previously.
+15. (**final + patch releases**) 
+
+    1. Merge the "Release Notes" PR and "Bump Versions" PR.
     2. Create the PR "Merge release-next into master" by [clicking
        here][ff-release-next].
 
