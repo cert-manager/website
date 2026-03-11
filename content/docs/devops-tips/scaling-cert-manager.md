@@ -43,8 +43,6 @@ You can increase the threshold of the client-side rate limiter using the followi
 ```yaml
 # helm-values.yaml
 config:
-  apiVersion: controller.config.cert-manager.io/v1alpha1
-  kind: ControllerConfiguration
   kubernetesAPIQPS: 10000
   kubernetesAPIBurst: 10000
 ```
@@ -125,8 +123,6 @@ You can enable the server-side apply feature gate with the following Helm chart 
 ```yaml
 # helm-values.yaml
 config:
-  apiVersion: controller.config.cert-manager.io/v1alpha1
-  kind: ControllerConfiguration
   featureGates:
     ServerSideApply: true
 ```
