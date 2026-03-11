@@ -72,8 +72,6 @@ following `config` Helm value:
 
 ```yaml
 config:
-  apiVersion: controller.config.cert-manager.io/v1alpha1
-  kind: ControllerConfiguration
   enableGatewayAPI: true
 ```
 
@@ -81,8 +79,6 @@ The corresponding Helm command is:
 
 ```sh
 helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager --namespace cert-manager \
-  --set config.apiVersion="controller.config.cert-manager.io/v1alpha1" \
-  --set config.kind="ControllerConfiguration" \
   --set config.enableGatewayAPI=true
 ```
 
@@ -520,8 +516,6 @@ your `values.yaml`, add the following:
 ```yaml
 # values.yaml
 config:
-  apiVersion: controller.config.cert-manager.io/v1alpha1
-  kind: ControllerConfiguration
   enableGatewayAPI: true
   enableGatewayAPIListenerSet: true
   featureGates:
@@ -537,8 +531,6 @@ The corresponding Helm command is:
 ```sh
 helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
-  --set config.apiVersion="controller.config.cert-manager.io/v1alpha1" \
-  --set config.kind="ControllerConfiguration" \
   --set config.enableGatewayAPI=true \
   --set config.enableGatewayAPIListenerSet=true \
   --set config.featureGates.ListenerSets=true
