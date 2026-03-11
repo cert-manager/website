@@ -263,7 +263,7 @@ page if a step is missing or if it is outdated.
       {"cert_manager_latest_version": "v1.20.0"}
       ```
 
-   3. Edit `content/docs/releases/README.md` and:
+   3. (**final release**) Edit `content/docs/releases/README.md` and:
       - update the section "Supported releases",
       - update the section "How we determine supported Kubernetes versions".
 
