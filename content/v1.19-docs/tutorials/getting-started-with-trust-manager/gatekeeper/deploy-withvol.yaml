@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-assign-noop
+  name: test-assign-noop
+  namespace: team-a
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: test-assign-noop
+  template:
+    metadata:
+      labels:
+        app: test-assign-noop
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - sleep 1d
+        image: quay.io/zenlab/curl:latest
+        name: curl
+        volumeMounts:
+          - mountPath: /etc/ssl/certs/
+            name: ca-certificates
+            readOnly: true
+      volumes:
+        - name: ca-certificates
+          configMap:
+            name: example
+            defaultMode: 0644
+            optional: false
+            items:
+            - key: ca-certificates.crt
+              path: ca-certificates.crt
