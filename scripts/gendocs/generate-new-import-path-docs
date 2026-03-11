@@ -136,30 +136,17 @@ $output
 EOF
 }
 
-# The branches named here exist in the `cert-manager/cert-manager` repo.
+# For final releases such as v1.20.0, DOCS_FOLDER should be `docs` (or a
+# versioned docs folder name such as `v1.20-docs`), and CM_BRANCH should be
+# the release branch, e.g. `release-1.20`.
+CM_BRANCH="release-1.20"
+DOCS_FOLDER="docs"
 
-# Note that we cannot generate docs for any version before 1.8 using this script!
-# In 1.8 we changed the import path, and gen-crd-api-reference-docs doesn't seem module-aware
-# This script is _only_ for generating docs for versions of cert-manager with the
-# github.com/cert-manager/cert-manager import path!
-
-LATEST_VERSION="docs" # to also upgrade a specific version, use v1.13-docs, v1.12-docs, etc.
-
-#genversionwithcli "release-1.8" "v1.8-docs"
-#genversionwithcli "release-1.9" "v1.9-docs"
-#genversionwithcli "release-1.10" "v1.10-docs"
-#genversionwithcli "release-1.11" "v1.11-docs"
-#genversionwithcli "release-1.12" "v1.12-docs"
-#genversionwithcli "release-1.13" "v1.13-docs"
-#genversionwithcli "release-1.14" "v1.14-docs"
-#genversionwithcli "release-1.15" "v1.15-docs"
-#genversionwithcli "release-1.16" "v1.16-docs"
-#genversionwithcli "release-1.17" "v1.17-docs"
-genversionwithcli "release-1.19" "$LATEST_VERSION"
+genversionwithcli "$CM_BRANCH" "$DOCS_FOLDER"
 
 # Rather than generate the same docs again for /docs, copy from the latest version
 
-cp -r "${REPO_ROOT}/content/${LATEST_VERSION}/cli" "${REPO_ROOT}/content/docs/"
-cp "${REPO_ROOT}/content/${LATEST_VERSION}/reference/api-docs.md" "${REPO_ROOT}/content/docs/reference/"
+cp -r "${REPO_ROOT}/content/${DOCS_FOLDER}/cli" "${REPO_ROOT}/content/docs/"
+cp "${REPO_ROOT}/content/${DOCS_FOLDER}/reference/api-docs.md" "${REPO_ROOT}/content/docs/reference/"
 
 echo "Generated reference documentation for cert-manager versions with the github.com/cert-manager/cert-manager import path"
