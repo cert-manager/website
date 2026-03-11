@@ -242,9 +242,9 @@ page if a step is missing or if it is outdated.
 
    1. Update the CRD and CLI docs with the following instructions:
 
-       Imagining that you are about to release v1.20.0, edit `scripts/gendocs/generate-new-import-path-docs` to change the line that starts with `genversionwithcli` to this:
+       Imagining that you are about to release v1.20.0, edit `scripts/gendocs/generate-new-import-path-docs` to change `CM_BRANCH` and `DOCS_FOLDER` to:
 
-       ```
+       ```bash
        CM_BRANCH="release-1.20"
        DOCS_FOLDER="docs"
        ```
