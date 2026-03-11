@@ -1,9 +1,4 @@
 ---
-title: My fork of release-process.md
-
----
-
----
 title: Release Process
 description: 'cert-manager contributing: Release process'
 ---
@@ -196,7 +191,7 @@ page if a step is missing or if it is outdated.
      **⚠️ This step can be done ahead of time.**
 
     Create a PR on the website titled "Release And Upgrade Notes".
-    
+
     - If you are doing a **final release**, then this PR's base must be the `release-next` branch.
    - If you are doing a **patch release**, then this PR's base must be `master`.
 
@@ -212,7 +207,7 @@ page if a step is missing or if it is outdated.
       ```
       content/docs/releases/upgrading/upgrading-1.19-1.20.md
       ```
-   
+
       See for
       example: [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1.md).
 
@@ -234,19 +229,19 @@ page if a step is missing or if it is outdated.
         }
         ```
 
-5. (final + patch releases) Prepare the "Version Bumps" PR
+5. (**final + patch releases**) Prepare the "Version Bumps" PR:
 
    **⚠️ This step can be done ahead of time.**
-   
+
    Create a PR on the website titled something like "Bump versions".
-   
+
    - If you are doing a **final release**, then this PR's base must be the `release-next` branch.
    - If you are doing a **patch release**, then this PR's base must be `master`.
-   
+
    In this PR:
 
    1. Update the CRD and CLI docs with the following instructions:
-   
+
        Imagining that you are about to release v1.20.0, edit `scripts/gendocs/generate-new-import-path-docs` to change the line that starts with `genversionwithcli` to this:
 
        ```
@@ -259,7 +254,7 @@ page if a step is missing or if it is outdated.
       ```bash
       ./scripts/gendocs/generate
       ```
-      
+
    2. (**final + patch release of the latest minor version**) Bump the latest
       cert-manager version variable in the `content/docs/variables.json` file.
       For example, if you are releasing v1.20.0:
@@ -268,11 +263,9 @@ page if a step is missing or if it is outdated.
       {"cert_manager_latest_version": "v1.20.0"}
       ```
 
-   3. Update the section "Supported releases" in the
-      [supported-releases](../releases/README.md) page.
-   4. Update the section "How we determine supported
-      Kubernetes versions" on the
-      [supported-releases](../releases/README.md) page.
+   3. Edit `content/docs/releases/README.md` and:
+      - update the section "Supported releases",
+      - update the section "How we determine supported Kubernetes versions".
 
 6. Check that the `origin` remote is correct. To do that, run the following
    command and make sure it returns the upstream
@@ -380,7 +373,7 @@ page if a step is missing or if it is outdated.
       > will have to open a PR to merge master into the release branch), and
       > wait for the PR checks to become green.
 
-9. In this section, we create the description for the GitHub Release and some release notes for the website.
+9.  In this section, we create the description for the GitHub Release and some release notes for the website.
 
     > **Note:** This step is about creating the description that will be
     > copy-pasted into the GitHub release page. The creation of the "Release
@@ -427,7 +420,7 @@ page if a step is missing or if it is outdated.
 
     4. Update the relevant release notes file on the website repo to include the contents of `website-release-notes.md`.
 
-10. Send a Slack message to `#cert-manager-dev` to announce that you are starting the release:
+11. Send a Slack message to `#cert-manager-dev` to announce that you are starting the release:
 
         :::info
 
@@ -435,7 +428,7 @@ page if a step is missing or if it is outdated.
 
         :::
 
-11. Go through the `cmrel` publish process:
+12. Go through the `cmrel` publish process:
 
     1. Check that the build that was automatically triggered when you pushed the
        tag is complete in the
@@ -475,7 +468,7 @@ page if a step is missing or if it is outdated.
 
        :::
 
-12. Publish the GitHub release:
+13. Publish the GitHub release:
 
     1. Visit the draft GitHub release and paste `github-release-description.md` that you
        generated earlier. You will need to manually edit the content to match
@@ -489,7 +482,7 @@ page if a step is missing or if it is outdated.
 
     4. Click "Publish" to make the GitHub release live.
 
-13. Merge the pull request containing the Helm chart:
+14. Merge the pull request containing the Helm chart:
 
     Important: This PR can currently only be merged by CyberArk employees, but we're aiming to fix that soon. Changing this
     will involve us coming up with a plan for migrating where our Helm charts are stored and ensuring we don't break anyone.
@@ -510,7 +503,7 @@ page if a step is missing or if it is outdated.
     5. Merge the PR
     6. Check that the [cert-manager Helm chart is visible on ArtifactHUB](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
 
-14. Upload the Helm chart to the OCI registry:
+15. Upload the Helm chart to the OCI registry:
 
     1. Run the following command to upload the Helm chart to the OCI registry, and sign it with cosign:
 
@@ -529,9 +522,9 @@ page if a step is missing or if it is outdated.
 
        Look for config, content and provenance layers in the output.
 
-15. (**final releases**) Merge the "Docs Freeze" PR.
+16. (**final releases**) Merge the "Docs Freeze" PR.
 
-15. (**final + patch releases**) 
+17. (**final + patch releases**)
 
     1. Merge the "Release Notes" PR and "Bump Versions" PR.
     2. Create the PR "Merge release-next into master" by [clicking
@@ -548,7 +541,7 @@ page if a step is missing or if it is outdated.
 
       [ff-release-next]: https://github.com/cert-manager/website/compare/master...release-next?quick_pull=1&title=%5BPost-Release%5D+Merge+release-next+into+master&body=%3C%21--%0A%0AThe+command+%22%2Foverride+dco%22+is+necessary+because+some+the+merge+commits%0Ahave+been+written+by+the+bot+and+do+not+have+a+DCO+signoff.%0A%0A--%3E%0A%0A%2Foverride+dco
 
-16. Post a Slack message as a reply to the first message. Toggle the check
+18. Post a Slack message as a reply to the first message. Toggle the check
    box "Also send to `#cert-manager-dev`" so that the message is well
    visible. Also cross-post the message on `#cert-manager`.
 
@@ -558,7 +551,7 @@ page if a step is missing or if it is outdated.
 
     :::
 
-17. **(final release only)** Show the release to the world:
+19. **(final release only)** Show the release to the world:
 
     1. Send an email to
        [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
@@ -574,7 +567,7 @@ page if a step is missing or if it is outdated.
     4. Create a post on the cert-manager BlueSky account! Login details are in the cert-manager 1password.
        ([Example post](https://bsky.app/profile/cert-manager.bsky.social/post/3lhdtn7c2222u))
 
-18. Proceed to the post-release "testing and release" steps:
+20. Proceed to the post-release "testing and release" steps:
 
     1. **(initial beta only)** Create a PR on
        [cert-manager/testing](https://github.com/cert-manager/testing) in order to
