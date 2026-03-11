@@ -1783,6 +1783,22 @@ description: >-
         <p>Auth: Azure Workload Identity or Azure Managed Service Identity: Settings to enable Azure Workload Identity or Azure Managed Service Identity If set, ClientID, ClientSecret and TenantID must not be set.</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>zoneType</code>
+        <br />
+        <em>
+          <a href="#acme.cert-manager.io/v1.AzureZoneType">AzureZoneType</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>ZoneType determines which type of Azure DNS zone to use.</p>
+        <p>Valid values are: - AzurePublicZone (default): Use a public Azure DNS zone. - AzurePrivateZone: Use an Azure Private DNS zone.</p>
+        <p>If not specified, AzurePublicZone is used.</p>
+        <p>Support for Azure Private DNS zones is currently experimental and may change in future releases.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderCloudDNS">ACMEIssuerDNS01ProviderCloudDNS</h3>
@@ -2005,7 +2021,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The AccessKeyID is used for authentication. Cannot be set when SecretAccessKeyID is set. If neither the Access Key nor Key ID are set, we fall-back to using env vars, shared credentials file or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
+        <p> The AccessKeyID is used for authentication. Cannot be set when SecretAccessKeyID is set. If neither the Access Key nor Key ID are set, we fall back to using env vars, shared credentials file, or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
       </td>
     </tr>
     <tr>
@@ -2016,7 +2032,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The SecretAccessKey is used for authentication. If set, pull the AWS access key ID from a key within a Kubernetes Secret. Cannot be set when AccessKeyID is set. If neither the Access Key nor Key ID are set, we fall-back to using env vars, shared credentials file or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
+        <p> The SecretAccessKey is used for authentication. If set, pull the AWS access key ID from a key within a Kubernetes Secret. Cannot be set when AccessKeyID is set. If neither the Access Key nor Key ID are set, we fall back to using env vars, shared credentials file, or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
       </td>
     </tr>
     <tr>
@@ -2027,7 +2043,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The SecretAccessKey is used for authentication. If neither the Access Key nor Key ID are set, we fall-back to using env vars, shared credentials file or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
+        <p> The SecretAccessKey is used for authentication. If neither the Access Key nor Key ID are set, we fall back to using env vars, shared credentials file, or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
       </td>
     </tr>
     <tr>
@@ -2203,7 +2219,7 @@ description: >-
 <h3 id="acme.cert-manager.io/v1.AzureManagedIdentity">AzureManagedIdentity</h3>
 <p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>) </p>
 <div>
-  <p>AzureManagedIdentity contains the configuration for Azure Workload Identity or Azure Managed Service Identity If the AZURE_FEDERATED_TOKEN_FILE environment variable is set, the Azure Workload Identity will be used. Otherwise, we fall-back to using Azure Managed Service Identity.</p>
+  <p>AzureManagedIdentity contains the configuration for Azure Workload Identity or Azure Managed Service Identity If the AZURE_FEDERATED_TOKEN_FILE environment variable is set, the Azure Workload Identity will be used. Otherwise, we fall back to using Azure Managed Service Identity.</p>
 </div>
 <table>
   <thead>
@@ -2245,6 +2261,31 @@ description: >-
         <em>(Optional)</em>
         <p>tenant ID of the managed identity, cannot be used at the same time as resourceID</p>
       </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="acme.cert-manager.io/v1.AzureZoneType"> AzureZoneType (<code>string</code> alias) </h3>
+<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>&#34;AzurePrivateZone&#34;</p>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;AzurePublicZone&#34;</p>
+      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -4181,7 +4222,7 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>RotationPolicy controls how private keys should be regenerated when a re-issuance is being processed.</p>
-        <p> If set to <code>Never</code>, a private key will only be generated if one does not already exist in the target <code>spec.secretName</code>. If one does exist but it does not have the correct algorithm or size, a warning will be raised to await user intervention. If set to <code>Always</code>, a private key matching the specified requirements will be generated whenever a re-issuance occurs. Default is <code>Always</code>. The default was changed from <code>Never</code> to <code>Always</code> in cert-manager &gt;=v1.18.0. The new default can be disabled by setting the <code>--feature-gates=DefaultPrivateKeyRotationPolicyAlways=false</code> option on the controller component. </p>
+        <p> If set to <code>Never</code>, a private key will only be generated if one does not already exist in the target <code>spec.secretName</code>. If one does exist but it does not have the correct algorithm or size, a warning will be raised to await user intervention. If set to <code>Always</code>, a private key matching the specified requirements will be generated whenever a re-issuance occurs. Default is <code>Always</code>. The default was changed from <code>Never</code> to <code>Always</code> in cert-manager &gt;=v1.18.0. </p>
       </td>
     </tr>
     <tr>
@@ -5195,7 +5236,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Venafi configures this issuer to sign certificates using a Venafi TPP or Venafi Cloud policy zone.</p>
+        <p>Venafi configures this issuer to sign certificates using a CyberArk Certificate Manager Self-Hosted or SaaS policy zone.</p>
       </td>
     </tr>
   </tbody>
@@ -5786,7 +5827,7 @@ description: >-
         <p>&#34;PKCS1&#34;</p>
       </td>
       <td>
-        <p> PKCS1 private key encoding. PKCS1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its <code>BEGIN RSA PRIVATE KEY</code> or <code>BEGIN EC PRIVATE KEY</code> header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS8. </p>
+        <p> PKCS1 private key encoding. For RSA keys: produces PEM block with <code>BEGIN RSA PRIVATE KEY</code> header and private key in PKCS#1 format. For EC keys: produces PEM block with <code>BEGIN EC PRIVATE KEY</code> header and private key in SEC 1 format. For Ed25519 keys: option will be ignored and PKCS8 encoding will be used instead. </p>
       </td>
     </tr>
     <tr>
@@ -5833,7 +5874,7 @@ description: >-
 <h3 id="cert-manager.io/v1.ServiceAccountRef">ServiceAccountRef</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>) </p>
 <div>
-  <p> ServiceAccountRef is a service account used by cert-manager to request a token. Default audience is generated by cert-manager and takes the form <code>vault://namespace-name/issuer-name</code> for an Issuer and <code>vault://issuer-name</code> for a ClusterIssuer. The expiration of the token is also set by cert-manager to 10 minutes. </p>
+  <p> ServiceAccountRef is a service account used by cert-manager to request a token. By default two audiences are included: the address of the Vault server as specified on the issuer, and a generated audience taking the form of <code>vault://namespace-name/issuer-name</code> for an Issuer and <code>vault://issuer-name</code> for a ClusterIssuer. The expiration of the token is also set by cert-manager to 10 minutes. </p>
 </div>
 <table>
   <thead>
@@ -5861,7 +5902,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>TokenAudiences is an optional list of extra audiences to include in the token passed to Vault. The default token consisting of the issuer&rsquo;s namespace and name is always included.</p>
+        <p>TokenAudiences is an optional list of extra audiences to include in the token passed to Vault. The default audiences are always included in the token.</p>
       </td>
     </tr>
   </tbody>
@@ -6034,7 +6075,7 @@ description: >-
 <h3 id="cert-manager.io/v1.VaultClientCertificateAuth">VaultClientCertificateAuth</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>) </p>
 <div>
-  <p>VaultKubernetesAuth is used to authenticate against Vault using a client certificate stored in a Secret.</p>
+  <p>VaultClientCertificateAuth is used to authenticate against Vault using a client certificate stored in a Secret.</p>
 </div>
 <table>
   <thead>
@@ -6255,7 +6296,7 @@ description: >-
 <h3 id="cert-manager.io/v1.VenafiCloud">VenafiCloud</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VenafiIssuer">VenafiIssuer</a>) </p>
 <div>
-  <p>VenafiCloud defines connection configuration details for Venafi Cloud</p>
+  <p>VenafiCloud defines connection configuration details for CyberArk Certificate Manager SaaS</p>
 </div>
 <table>
   <thead>
@@ -6273,7 +6314,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> URL is the base URL for Venafi Cloud. Defaults to &ldquo;<a href='https://api.venafi.cloud/"'>https://api.venafi.cloud/&rdquo;</a>. </p>
+        <p> URL is the base URL for CyberArk Certificate Manager SaaS. Defaults to &ldquo;<a href='https://api.venafi.cloud/"'>https://api.venafi.cloud/&rdquo;</a>. </p>
       </td>
     </tr>
     <tr>
@@ -6283,7 +6324,7 @@ description: >-
         <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
-        <p>APITokenSecretRef is a secret key selector for the Venafi Cloud API token.</p>
+        <p>APITokenSecretRef is a secret key selector for the CyberArk Certificate Manager SaaS API token.</p>
       </td>
     </tr>
   </tbody>
@@ -6291,7 +6332,7 @@ description: >-
 <h3 id="cert-manager.io/v1.VenafiIssuer">VenafiIssuer</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>) </p>
 <div>
-  <p>Configures an issuer to sign certificates using a Venafi TPP or Cloud policy zone.</p>
+  <p>Configures an issuer to sign certificates using a CyberArk Certificate Manager Self-Hosted or SaaS policy zone.</p>
 </div>
 <table>
   <thead>
@@ -6308,7 +6349,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>Zone is the Venafi Policy Zone to use for this issuer. All requests made to the Venafi platform will be restricted by the named zone policy. This field is required.</p>
+        <p>Zone is the Certificate Manager Policy Zone to use for this issuer. All requests made to the Certificate Manager platform will be restricted by the named zone policy. This field is required.</p>
       </td>
     </tr>
     <tr>
@@ -6321,7 +6362,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>TPP specifies Trust Protection Platform configuration settings. Only one of TPP or Cloud may be specified.</p>
+        <p>TPP specifies CyberArk Certificate Manager Self-Hosted configuration settings. Only one of CyberArk Certificate Manager may be specified.</p>
       </td>
     </tr>
     <tr>
@@ -6334,7 +6375,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Cloud specifies the Venafi cloud configuration settings. Only one of TPP or Cloud may be specified.</p>
+        <p>Cloud specifies the CyberArk Certificate Manager SaaS configuration settings. Only one of CyberArk Certificate Manager may be specified.</p>
       </td>
     </tr>
   </tbody>
@@ -6342,7 +6383,7 @@ description: >-
 <h3 id="cert-manager.io/v1.VenafiTPP">VenafiTPP</h3>
 <p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VenafiIssuer">VenafiIssuer</a>) </p>
 <div>
-  <p>VenafiTPP defines connection configuration details for a Venafi TPP instance</p>
+  <p>VenafiTPP defines connection configuration details for a CyberArk Certificate Manager Self-Hosted instance</p>
 </div>
 <table>
   <thead>
@@ -6359,7 +6400,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p> URL is the base URL for the vedsdk endpoint of the Venafi TPP instance, for example: &ldquo;<a href='https://tpp.example.com/vedsdk"'>https://tpp.example.com/vedsdk&rdquo;</a>. </p>
+        <p> URL is the base URL for the vedsdk endpoint of the CyberArk Certificate Manager Self-Hosted instance, for example: &ldquo;<a href='https://tpp.example.com/vedsdk"'>https://tpp.example.com/vedsdk&rdquo;</a>. </p>
       </td>
     </tr>
     <tr>
@@ -6369,7 +6410,7 @@ description: >-
         <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.LocalObjectReference</em>
       </td>
       <td>
-        <p>CredentialsRef is a reference to a Secret containing the Venafi TPP API credentials. The secret must contain the key &lsquo;access-token&rsquo; for the Access Token Authentication, or two keys, &lsquo;username&rsquo; and &lsquo;password&rsquo; for the API Keys Authentication.</p>
+        <p>CredentialsRef is a reference to a Secret containing the CyberArk Certificate Manager Self-Hosted API credentials. The secret must contain the key &lsquo;access-token&rsquo; for the Access Token Authentication, or two keys, &lsquo;username&rsquo; and &lsquo;password&rsquo; for the API Keys Authentication.</p>
       </td>
     </tr>
     <tr>
@@ -6380,7 +6421,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Base64-encoded bundle of PEM CAs which will be used to validate the certificate chain presented by the TPP server. Only used if using HTTPS; ignored for HTTP. If undefined, the certificate bundle in the cert-manager controller container is used to validate the chain.</p>
+        <p>Base64-encoded bundle of PEM CAs which will be used to validate the certificate chain presented by the CyberArk Certificate Manager Self-Hosted server. Only used if using HTTPS; ignored for HTTP. If undefined, the certificate bundle in the cert-manager controller container is used to validate the chain.</p>
       </td>
     </tr>
     <tr>
@@ -6391,7 +6432,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Reference to a Secret containing a base64-encoded bundle of PEM CAs which will be used to validate the certificate chain presented by the TPP server. Only used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle. If neither CABundle nor CABundleSecretRef is defined, the certificate bundle in the cert-manager controller container is used to validate the TLS connection.</p>
+        <p>Reference to a Secret containing a base64-encoded bundle of PEM CAs which will be used to validate the certificate chain presented by the CyberArk Certificate Manager Self-Hosted server. Only used if using HTTPS; ignored for HTTP. Mutually exclusive with CABundle. If neither CABundle nor CABundleSecretRef is defined, the certificate bundle in the cert-manager controller container is used to validate the TLS connection.</p>
       </td>
     </tr>
   </tbody>
@@ -6659,7 +6700,8 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p> apiServerHost is used to override the API server connection address. Deprecated: use <code>kubeConfig</code> instead. </p>
+        <p>apiServerHost is used to override the API server connection address.</p>
+        <p> Deprecated: use <code>kubeConfig</code> instead. </p>
       </td>
     </tr>
     <tr>
@@ -6762,6 +6804,16 @@ description: >-
       </td>
       <td>
         <p>Whether gateway API integration is enabled within cert-manager. The ExperimentalGatewayAPISupport feature gate must also be enabled (default as of 1.15).</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>enableGatewayAPIListenerSet</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>Specifies whether the ListenerSet controller should be enabled with-in cert-manager. This along with ListenerSet feature gate enabled allows the user to consume ListenerSet for self-service TLS.</p>
       </td>
     </tr>
     <tr>
@@ -6870,7 +6922,7 @@ description: >-
     </tr>
     <tr>
       <td>
-        <code>ingressShimConfig</code>
+        <code>ingressShimConfig,omitzero</code>
         <br />
         <em>
           <a href="#controller.config.cert-manager.io/v1alpha1.IngressShimConfig">IngressShimConfig</a>
@@ -6882,7 +6934,7 @@ description: >-
     </tr>
     <tr>
       <td>
-        <code>acmeHTTP01Config</code>
+        <code>acmeHTTP01Config,omitzero</code>
         <br />
         <em>
           <a href="#controller.config.cert-manager.io/v1alpha1.ACMEHTTP01Config">ACMEHTTP01Config</a>
@@ -6894,7 +6946,7 @@ description: >-
     </tr>
     <tr>
       <td>
-        <code>acmeDNS01Config</code>
+        <code>acmeDNS01Config,omitzero</code>
         <br />
         <em>
           <a href="#controller.config.cert-manager.io/v1alpha1.ACMEDNS01Config">ACMEDNS01Config</a>
@@ -6902,6 +6954,28 @@ description: >-
       </td>
       <td>
         <p>acmeDNS01Config configures the behaviour of the ACME DNS01 challenge solver</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>pemSizeLimitsConfig,omitzero</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.PEMSizeLimitsConfig">PEMSizeLimitsConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>pemSizeLimitsConfig configures the maximum sizes for PEM-encoded data</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>certificateRequestMinimumBackoffDuration</code>
+        <br />
+        <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.Duration</em>
+      </td>
+      <td>
+        <p>CertificateRequestMinimumBackoffDuration configures the initial backoff duration when a certificate request fails. This duration is exponentially increased (up to a maximum of 32 hours) based on the number of consecutive failures.</p>
       </td>
     </tr>
   </tbody>
@@ -7002,6 +7076,59 @@ description: >-
     </tr>
   </tbody>
 </table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.PEMSizeLimitsConfig">PEMSizeLimitsConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>maxCertificateSize</code>
+        <br />
+        <em>int32</em>
+      </td>
+      <td>
+        <p>Maximum size for a single PEM-encoded certificate (in bytes). Defaults to 36500 bytes.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>maxPrivateKeySize</code>
+        <br />
+        <em>int32</em>
+      </td>
+      <td>
+        <p>Maximum size for a single PEM-encoded private key (in bytes). Defaults to 13000 bytes.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>maxChainLength</code>
+        <br />
+        <em>int32</em>
+      </td>
+      <td>
+        <p>Maximum size for a PEM-encoded certificate chain (in bytes). Defaults to 95000 bytes.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>maxBundleSize</code>
+        <br />
+        <em>int32</em>
+      </td>
+      <td>
+        <p>Maximum size for PEM-encoded certificate bundles (in bytes). Defaults to 330000 bytes.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <hr />
 <h2 id="webhook.config.cert-manager.io/v1alpha1">webhook.config.cert-manager.io/v1alpha1</h2>
 <div>
@@ -7066,7 +7193,8 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p> apiServerHost is used to override the API server connection address. Deprecated: use <code>kubeConfig</code> instead. </p>
+        <p>apiServerHost is used to override the API server connection address.</p>
+        <p> Deprecated: use <code>kubeConfig</code> instead. </p>
       </td>
     </tr>
     <tr>
@@ -7133,9 +7261,39 @@ description: >-
         <p>metricsTLSConfig is used to configure the metrics server TLS settings.</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>enableClientVerification</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>EnableClientVerification turns on client verification of requests made to the webhook server</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>clientCAPath</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>ClientCAPath is the CA certificate name which server used to verify remote(client)&rsquo;s certificate. Defaults to &ldquo;&rdquo;, which means server does not verify client&rsquo;s certificate.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>clientCertificateSubjects</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p>ClientCertificateSubjects is a list of acceptable subject names for client certificates used by the apiserver to contact webhooks. Each entry will be matched against the certificate&rsquo;s CommonName and DNS SubjectAltNames. Multiple values allow zero-downtime rotations.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <hr />
 <p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>83820a0</code>. </em>
+  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>0d2f215</code>. </em>
 </p>
