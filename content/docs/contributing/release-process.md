@@ -50,6 +50,9 @@ following conditions:
     [2]: https://console.cloud.google.com/?project=cert-manager-release
     ```
 
+6. You need to be a developer on the (private) project https://github.com/jetstack/jetstack-secure. For now, only Palo Alto employees are able to do that. This is required for publishing the regular Helm chart.
+7. You need to have "write" access to the https://quay.io/jetstack organization. only Palo Alto employees are able to do that. This is required for publishing the OCI Helm chart.
+
 This guide applies for versions of cert-manager released using `make`, which is every version from cert-manager 1.8 and newer.
 
 If you need to release a version of cert-manager 1.7 or earlier see [older releases](#older-releases).
@@ -587,11 +590,7 @@ page if a step is missing or if it is outdated.
        If the [milestone](https://github.com/cert-manager/cert-manager/milestones) for the next release doesn't exist,
        create it first. If you consider the milestone for the version you just released to be complete, close it.
 
-## Older Releases
-
-The above guide only applies for versions of cert-manager from v1.8 and newer.
-
-Older versions were built using Bazel and this difference in build process is reflected in the release process.
+## Other Release Processes
 
 ### Krew and Homebrew
 
@@ -602,32 +601,3 @@ make sense any more, and so any references in this release process or in older v
 
 We previously made efforts to publish OLM releases of cert-manager on a best-effort basis. We agreed in early 2025 to discontinue this, since the burden was too much and usually fell unfairly on one maintainer.
 
-### cert-manager 1.6 and 1.7
-
-Follow [this older version][older-release-process] of the release process on GitHub, rather than the guide on this website.
-
-The most notable difference is you'll call `cmrel stage` rather than `cmrel makestage`. You should be fine to use the latest
-version of `cmrel` to do the release.
-
-### cert-manager 1.5 and earlier
-
-If you're releasing version 1.5 or earlier you must also be sure to install a different version of `cmrel`.
-
-In the step where you install `cmrel`, you'll want to run the following instead:
-
-```bash
-go install github.com/cert-manager/release/cmd/cmrel@cert-manager-pre-1.6
-```
-
-This will ensure that the version of `cmrel` you're using is compatible with the version of cert-manager you're releasing.
-
-In addition, when you check out the `cert-manager/release` repository you should be sure to check out the `cert-manager-pre-1.6` tag in that repo:
-
-```bash
-git checkout cert-manager-pre-1.6
-```
-
-Other than the different `cert-manager/release` tag and `cmrel` version, you can follow the [same older release documentation][older-release-process] as
-is used for 1.6 and 1.7 - just remember to change the version of `cmrel` you install!
-
-[older-release-process]: https://github.com/cert-manager/website/blob/6fa0db74de0ae17d7be638a08155d1b4e036aaa9/content/en/docs/contributing/release-process.md?plain=1
