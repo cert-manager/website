@@ -19,7 +19,7 @@ Verifying and updating CRDs and generated code can be done entirely through make
 # Update CRDs based on code
 make generate-crds
 
-# Update generated code based on CRD defintions in code
+# Update generated code based on CRD definitions in code
 make generate-codegen
 ```
 

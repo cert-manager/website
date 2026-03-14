@@ -1,0 +1,29 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "languageSettings": [
+    {
+      "languageId": "*",
+      "locale": "en-US"
+    }
+  ],
+  "ignorePaths": [
+    "content/v*-docs/**",
+    "**/api-docs.md",
+    "content/*docs/policy/approval/approver-policy/api-reference.md",
+    "content/*docs/trust/trust-manager/api-reference.md",
+    "node_modules/**"
+  ],
+  "ignoreRegExpList": [
+    "/\\b[A-Z]{2,}\\b/g",
+    "/\\b\\d+(\\.\\d+)*\\b/g"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": ".spelling",
+      "addWords": true
+    }
+  ],
+  "dictionaries": ["project-words"]
+}

@@ -193,7 +193,7 @@ webhook:
 
 Implemented in cert-manager PRs [#3876][], [#3932][].
 
-[#3932]: https://github.com/cert-manager/cert-manager/pull/3932 "Adds support for accessing coversion webhook from outside cluster network"
+[#3932]: https://github.com/cert-manager/cert-manager/pull/3932 "Adds support for accessing conversion webhook from outside cluster network"
 [#3876]: https://github.com/cert-manager/cert-manager/pull/3876 "Adds support for accessing mutating and validating webhooks from outside cluster network"
 
 ### Helm chart: Service labels
@@ -309,7 +309,7 @@ EdgeGrid` Go package.
 
 [#3794]: https://github.com/cert-manager/cert-manager/pull/3794 "Less alarming message on optimistic locking errors"
 
-- The `util.UsageContentCommittment` (which contained a spelling mistake) was
+- The `util.UsageContentCommitment` (which contained a spelling mistake) was
   deprecated in favor of `util.UsageContentCommitment`. The only people impacted
   by this deprecation are the the people importing the Go package
   `github.com/jetstack/cert-manager/pkg/api/util`.
