@@ -1,6 +1,6 @@
 ---
 title: DNS Validation
-description: 'cert-manager turorials: Issuing an ACME certificate using DNS validation'
+description: 'cert-manager tutorials: Issuing an ACME certificate using DNS validation'
 ---
 
 ## Issuing an ACME certificate using DNS validation
