@@ -69,6 +69,9 @@ controllers support `ingressClassName`, with the notable exception of
 ingress-gce (as per the page [Configure Ingress for external load
 balancing](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress)).
 
+> You can override the `ingressClassName` on a per-Ingress basis using the
+[`acme.cert-manager.io/http01-ingress-ingressclassname`](https://cert-manager.io/docs/reference/annotations/#acmecert-manageriohttp01-ingress-ingressclassname) annotation.
+
 ### `class`
 
 If the `class` field is specified, a new Ingress resource with a randomly
@@ -78,6 +81,9 @@ value set to the value of the `class` field.
 
 This field is only recommended with ingress-gce. ingress-gce [doesn't support the
 `ingressClassName` field](https://cloud.google.com/kubernetes-engine/docs/how-to/load-balance-ingress).
+
+> You can override the `class` on a per-Ingress basis using the
+[`acme.cert-manager.io/http01-ingress-class`](https://cert-manager.io/docs/reference/annotations/#acmecert-manageriohttp01-ingress-class) annotation.
 
 ### `name`
 
@@ -237,8 +243,6 @@ following `config` Helm value:
 
 ```yaml
 config:
-  apiVersion: controller.config.cert-manager.io/v1alpha1
-  kind: ControllerConfiguration
   enableGatewayAPI: true
 ```
 
@@ -246,8 +250,6 @@ The corresponding Helm command is:
 
 ```sh
 helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager --namespace cert-manager \
-  --set config.apiVersion="controller.config.cert-manager.io/v1alpha1" \
-  --set config.kind="ControllerConfiguration" \
   --set config.enableGatewayAPI=true
 ```
 

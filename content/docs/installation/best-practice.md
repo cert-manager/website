@@ -47,6 +47,44 @@ Or you may prefer to use the custom resources provided by your CNI software.
 > 📖 Learn about the [Kubernetes builtin NetworkPolicy API](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 > and see [some example policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/#default-policies).
 
+The cert-manager Helm chart allows you to create a `NetworkPolicy` resource for
+each `Deployment`.
+
+By default, it allows inbound traffic to all the listening ports of each component.
+And by default, it allows outbound traffic to:
+- TCP port 443: For connections to the Kubernetes API server and other
+  in-cluster and external HTTPS API servers.
+- TCP port 6443: For connections to the Kubernetes API server on OpenShift.
+- TCP and UDP port 53: To resolve DNS names using the in-cluster DNS and
+  external DNS servers when using DNS01.
+- TCP port 80: So that the controller can perform ACME HTTP01 self-checks before
+  accepting the ACME server challenge.
+
+These are over-permissive defaults to provide a good installation experience.
+
+You should customize the `ingress` and `egress` rules to restrict the inbound
+and outbound traffic to allow only those connections which are necessary for
+your cert-manager configuration.
+
+Example Helm values:
+
+```yaml
+# helm-values.yaml
+networkPolicy:
+  enabled: true
+
+webhook:
+  networkPolicy:
+    enabled: true
+
+cainjector:
+  networkPolicy:
+    enabled: true
+```
+
+There are examples of extended egress rules in the example Helm chart values
+file at the end of this document.
+
 ### Network Requirements
 
 Here is an overview of the network requirements:
