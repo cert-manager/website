@@ -322,6 +322,95 @@ It is also required that `spec.duration` > `spec.renewBefore`.
 
 Once an X.509 certificate has been issued, cert-manager will calculate the renewal time for the `Certificate`. By default this will be 2/3 through the X.509 certificate's duration. If `spec.renewBefore` or `spec.renewBeforePercentage` has been set, it will be the effective `spec.renewBefore` amount of time before expiry. cert-manager will set `Certificate`'s `status.RenewalTime` to the time when the renewal will be attempted.
 
+### Renewal policies and renewal windows
+
+In addition to `spec.renewBefore` and `spec.renewBeforePercentage`, cert-manager supports
+configuring *when* renewal is allowed to happen by using `spec.renewal`.
+
+This is useful when you want certificate renewals to happen only during approved maintenance
+periods, business hours, or other time windows.
+
+#### Overview
+
+The `spec.renewal` field supports two policies:
+
+- `RenewBefore`: cert-manager renews the certificate according to the normal renewal time
+  calculation, while also respecting any configured renewal windows.
+- `Disabled`: disables automatic renewal for the `Certificate`.
+
+A renewal window is defined by:
+
+- `cron`: a `cron` expression describing when a window starts. This uses a standard 5 field `cron` expression as shown below:
+    ```markdown
+    * * * * *
+    | | | | |
+    | | | | day of week (0-6)
+    | | | month (1-12)
+    | | day of month (1-31)
+    | hour (0-23)
+    minute (0-59)
+    ```
+   For example:
+   - `0 0 * * *` - everyday at `00:00`.
+   - `0 2 * * 1-5` - at `02:00` only on weekdays.
+- `windowDuration`: how long that window stays open.
+- `timezone`: an optional IANA timezone such as `America/Denver`. If omitted, UTC is used.
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-com
+  namespace: sandbox
+spec:
+  secretName: example-com-tls
+  dnsNames:
+    - example.com
+  issuerRef:
+    name: ca-issuer
+    kind: Issuer
+
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+
+  renewal:
+    policy: RenewBefore
+    windows:
+      - cron: "0 2 * * 1-5"
+        timezone: America/Denver
+        windowDuration: 2h
+```
+
+In the above example, cert-manager calculates the certificate's normal renewal time using
+renewBefore. Renewal is then attempted in the next matching renewal window.
+
+#### How renewal windows work
+
+cert-manager first calculates the certificate's renewal time in the usual way:
+
+- by default, at 2/3 of the issued certificate's lifetime
+- or using `spec.renewBefore`
+- or using `spec.renewBeforePercentage`
+
+If `spec.renewal.windows` is configured, cert-manager will only renew the certificate during
+one of the matching windows. Each window starts at the time matched by `cron` and remains open
+for `windowDuration`.
+
+If multiple windows are configured, renewal may happen in any matching window that occurs after
+the calculated renewal time and before the certificate expires.
+
+#### Disabling automatic renewal
+
+To disable automatic renewal for a certificate, set `spec.renewal.policy` to `Disabled`.
+
+> Note: Renewal windows do not replace `renewBefore` or `renewBeforePercentage`;
+> they further restrict when renewal is allowed to happen.
+> Care should be taken to ensure that there is at least one valid renewal window between the
+> calculated renewal time and the certificate's expiry. If no valid window exists, cert-manager
+> cannot calculate a renewal time and the Certificate status will report an error. However, the renewal
+> will still happen at the calculated `desiredRenewalTime` using the `spec.renewBefore`/ `spec.renewBeforePercentage` fields.
+> This behavior is intentional and is done to avoid certificates from expiring due to window misconfiguration.
+
 <a id="non-renewal-reissuance"></a>
 <a id="actions-triggering-private-key-rotation"></a>
 ### Reissuance triggered by user actions
