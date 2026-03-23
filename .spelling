@@ -152,6 +152,7 @@ CNAME
 CNAMEs
 CNI
 CNIs
+CloudNativeCon
 CRD
 CRDs
 CSI
@@ -198,6 +199,7 @@ DaemonSet
 DataDog
 Datree
 Dean-Coakley
+Dependabot
 DigitalOcean
 OVHCloud
 Distroless
@@ -229,6 +231,7 @@ GSoC
 Gloo
 GoDaddy
 GoLand
+GraphQL
 GEP-1713
 hostnames
 HAProxy
@@ -335,6 +338,7 @@ steerers
 stevehipwell
 TLDs
 TODO
+TODOs
 TPP
 TSIG
 TSIGs
@@ -522,6 +526,8 @@ reflector
 remediate
 renewBefore
 repo
+repos
+reactionGroups
 retryable
 retweets
 routable
@@ -540,6 +546,7 @@ subfolders
 submodule
 submodules
 subresource
+suppressions
 symlink
 tamalsaha
 tcs-issuer
@@ -548,6 +555,7 @@ templated
 templating
 tmpfs
 thiscantbeserious
+thumbsUp
 tolerations
 tomasfreund
 treydock
@@ -853,6 +861,19 @@ Korczynski
 CyberArk
 ContribFest
 Contribfest
+Codespaces
+Codespace
+codespace
+async
+bsky
+certmanager
+gh
+GitLens
+linters
+Node.js
+npm
+VirtualBox
+VMware
 Zenior's
 Godding
 Boye
@@ -893,3 +914,4 @@ uri-sans
 venafi.cert
 x509
 CRLs
+bsky.social
