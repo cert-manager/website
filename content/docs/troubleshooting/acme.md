@@ -58,6 +58,7 @@ Events:
 * `Failed to update ACME account:400 urn:ietf:params:acme:error:invalidEmail`: the email you specified in the Issuer configuration isn't valid.
 * `Error initializing issuer: Failed to register ACME account: secrets "acme-key" already exists`: there might be a leftover account from a previous issuer that is no longer valid, you should remove the secret so it can be recreated.
 * `Error accepting challenge: 400 urn:ietf:params:acme:error:malformed: Unable to update challenge :: authorization must be pending`: this suggests that the authorization was not in 'pending' state at a time when cert-manager sent a request to the ACME server to accept the challenge. This may be because the domain validation has already failed and the authorization has been marked as 'invalid'. Check the authorization URL on the status of the `Order` or `Challenge` to see the status of the authorization and any additional information.
+* `ACME server URL host and ACME private key registration host differ` This error means that host resolved by the node differs from the host in your private key. Please check your `/etc/resolv.conf` if the correct host is resolved.
 
 ## 2. Troubleshooting Orders
 
