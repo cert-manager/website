@@ -829,6 +829,31 @@
             {
               "title": "Importing cert-manager in Go",
               "path": "/docs/contributing/importing.md"
+            },
+            {
+              "title": "ContribFest KubeCon EU 2026",
+              "routes": [
+                {
+                  "title": "Introduction",
+                  "path": "/docs/contributing/contribfest-kubecon-eu-2026/README.md"
+                },
+                {
+                  "title": "Good First Issues Shortlist",
+                  "path": "/docs/contributing/contribfest-kubecon-eu-2026/shortlist.md"
+                },
+                {
+                  "title": "Setup Guide",
+                  "path": "/docs/contributing/contribfest-kubecon-eu-2026/setup.md"
+                },
+                {
+                  "title": "Session Agenda",
+                  "path": "/docs/contributing/contribfest-kubecon-eu-2026/agenda.md"
+                },
+                {
+                  "title": "Methods",
+                  "path": "/docs/contributing/contribfest-kubecon-eu-2026/methods.md"
+                }
+              ]
             }
           ]
         },
