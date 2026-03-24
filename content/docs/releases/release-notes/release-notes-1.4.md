@@ -309,7 +309,7 @@ EdgeGrid` Go package.
 
 [#3794]: https://github.com/cert-manager/cert-manager/pull/3794 "Less alarming message on optimistic locking errors"
 
-- The `util.UsageContentCommitment` (which contained a spelling mistake) was
+- The `util.UsageContentCommittment` (which contained a spelling mistake) was
   deprecated in favor of `util.UsageContentCommitment`. The only people impacted
   by this deprecation are the the people importing the Go package
   `github.com/jetstack/cert-manager/pkg/api/util`.
