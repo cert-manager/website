@@ -103,7 +103,7 @@ spec:
     privateKeySecretRef:
       name: zerossl-prod
 
-    # for each cert-manager new EAB credencials are required
+    # for each cert-manager new EAB credentials are required
     externalAccountBinding:
       keyID: YOUR_ZEROSSL_EAB_KEY_ID
       keySecretRef:

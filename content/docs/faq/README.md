@@ -124,7 +124,7 @@ network connection errors and with a longer exponentially increasing delay after
 You can observe that latest issuance has terminally failed if the `Certificate`
 has `Issuing` condition set to false and has `status.lastFailureTime` set. In
 this case the issuance will be retried after an exponentially increasing delay
-(1 to 32 hours) by creating a new `CertficateRequest`. You can trigger an
+(1 to 32 hours) by creating a new `CertificateRequest`. You can trigger an
 immediate renewal using the [`cmctl renew`
 command](../reference/cmctl.md#renew). Terminal failures occur if the issuer
 sets the `CertificateRequest` to failed (for example if CA rejected the request

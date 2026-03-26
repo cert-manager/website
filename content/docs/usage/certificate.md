@@ -50,7 +50,7 @@ spec:
   # copied to the Secret named example-com-tls. These labels and annotations will
   # be re-reconciled if the Certificate's secretTemplate changes. secretTemplate
   # is also enforced, so relevant label and annotation changes on the Secret by a
-  # third party will be overwriten by cert-manager to match the secretTemplate.
+  # third party will be overwritten by cert-manager to match the secretTemplate.
   secretTemplate:
     annotations:
       my-secret-annotation-1: "foo"
