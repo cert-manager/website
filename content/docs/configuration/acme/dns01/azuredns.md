@@ -267,7 +267,7 @@ apiVersion: "aadpodidentity.k8s.io/v1"
 kind: AzureIdentity
 metadata:
   annotations:
-    # recommended to use namespaced identites https://azure.github.io/aad-pod-identity/docs/configure/match_pods_in_namespace/
+    # recommended to use namespaced identities https://azure.github.io/aad-pod-identity/docs/configure/match_pods_in_namespace/
     aadpodidentity.k8s.io/Behavior: namespaced
   name: certman-identity
   namespace: cert-manager # change to your preferred namespace

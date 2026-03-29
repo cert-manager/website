@@ -321,7 +321,7 @@ metadata:
   annotations:
     venafi.cert-manager.io/custom-fields: |-
       [
-        {"name": "Environemnt", "value": "Dev"},
+        {"name": "Environment", "value": "Dev"},
       ]
 ```
 
@@ -343,6 +343,6 @@ metadata:
 Final configuration will be:
 
 ```json
-{"name": "Environemnt", "value": "Dev"},
+{"name": "Environment", "value": "Dev"},
 {"name": "Team", "value": "amber"}
 ```

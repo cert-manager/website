@@ -33,7 +33,7 @@ const AnnouncementPage = ({
   if (isIndex) {
     return <AnnouncementIndex articles={articles} />
   }
-  
+
   if (!source) return null
   return (
     <>

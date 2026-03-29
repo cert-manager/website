@@ -1,6 +1,6 @@
 ---
 title: Running End-to-End Tests
-description: 'cert-manager contribuing guide: End-to-end (E2E) tests'
+description: 'cert-manager contributing guide: End-to-end (E2E) tests'
 ---
 
 cert-manager has an extensive end-to-end (e2e) test suite that verifies functionality against a
