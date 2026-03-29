@@ -95,7 +95,6 @@
     "eslint-config-next": "16.2.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-mdx": "3.7.0",
-    "eslint-plugin-react": "7.37.5",
     "format-api-docs": "file:scripts/gendocs/postprocess",
     "globals": "17.4.0",
     "markdown-link-check": "3.14.2",

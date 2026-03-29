@@ -1,6 +1,5 @@
 import { defineConfig, globalIgnores } from "eslint/config";
 import js from "@eslint/js";
-import react from "eslint-plugin-react";
 import nextPlugin from "@next/eslint-plugin-next";
 import * as mdx from "eslint-plugin-mdx";
 import globals from "globals";
@@ -20,10 +19,9 @@ export default defineConfig([
   // Base JS rules (eslint:recommended)
   js.configs.recommended,
 
-  // React + Next.js (applies to your JS/TS/JSX/TSX)
+  // Next.js (applies to your JS/TS/JSX/TSX)
   {
     plugins: {
-      react,
       "@next/next": nextPlugin,
     },
     languageOptions: {
@@ -37,15 +35,8 @@ export default defineConfig([
         ecmaFeatures: { jsx: true },
       },
     },
-    settings: {
-      react: { version: "detect" },
-    },
     rules: {
-      ...react.configs.recommended.rules,
       ...nextPlugin.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-      "react/jsx-no-target-blank": "off",
     },
   },
 
