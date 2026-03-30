@@ -103,7 +103,7 @@ Order:
   Authorizations:
     URL: https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/97777571, Identifier: example.com, Initial State: pending, Wildcard: false
 Challenges:
-- Name: acme-certificate-qp5dm-1319513028-1825664779, Type: DNS-01, Token: J-lOZ39yNDQLZTtP_ZyrYojDqjutMAJOxCL1AkOEZWw, Key: U_W3gGV2KWgIUonlO2me3rvvEOTrfTb-L5s0V1TJMCw, State: pending, Reason: error getting clouddns service account: secret "clouddns-accoun" not found, Processing: true, Presented: false
+- Name: acme-certificate-qp5dm-1319513028-1825664779, Type: DNS-01, Token: J-lOZ39yNDQLZTtP_ZyrYojDqjutMAJOxCL1AkOEZWw, Key: U_W3gGV2KWgIUonlO2me3rvvEOTrfTb-L5s0V1TJMCw, State: pending, Reason: error getting clouddns service account: secret "clouddns-account" not found, Processing: true, Presented: false
 
 ```
 

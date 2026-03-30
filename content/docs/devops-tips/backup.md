@@ -193,7 +193,7 @@ velero restore create \
  In `v1.3.0` , as part of our work towards [policy
  implementation](https://github.com/cert-manager/cert-manager/pull/3727) we
  introduced identity fields for `CertificateRequest` resources where, at a time
- of creation, `cert-mananager`'s webhook updates `CertificateRequest`'s spec
+ of creation, `cert-manager`'s webhook updates `CertificateRequest`'s spec
  with immutable identity fields, representing the identity of the creator of
  the `CertificateRequest`.
  This introduces some extra complexity for backing up

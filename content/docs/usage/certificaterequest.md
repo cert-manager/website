@@ -199,7 +199,7 @@ apiGroups: ["cert-manager.io"]
 resources: ["signers"]
 verbs: ["approve"]
 resourceNames:
- # namesapced signers
+ # namespaced signers
  - "<signer-resource-name>.<signer-group>/<signer-namespace>.<signer-name>"
  # cluster scoped signers
  - "<signer-resource-name>.<signer-group>/<signer-name>"

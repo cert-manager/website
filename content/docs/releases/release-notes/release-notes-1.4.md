@@ -193,7 +193,7 @@ webhook:
 
 Implemented in cert-manager PRs [#3876][], [#3932][].
 
-[#3932]: https://github.com/cert-manager/cert-manager/pull/3932 "Adds support for accessing coversion webhook from outside cluster network"
+[#3932]: https://github.com/cert-manager/cert-manager/pull/3932 "Adds support for accessing conversion webhook from outside cluster network"
 [#3876]: https://github.com/cert-manager/cert-manager/pull/3876 "Adds support for accessing mutating and validating webhooks from outside cluster network"
 
 ### Helm chart: Service labels

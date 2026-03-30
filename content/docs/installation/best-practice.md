@@ -22,6 +22,9 @@ are designed for backwards compatibility rather than for best practice or maximu
 You may find that the default resources do not comply with the security policy on your Kubernetes cluster
 and in that case you can modify the installation configuration using Helm chart values to override the defaults.
 
+This guide presents many practical ways to improve and harden cert-manager. An additional hardening guide and threat model
+was created by ControlPlane, and can be read [here](https://cert-manager.io/docs/announcements/controlplane-2026-cert-manager-hardening-guide.pdf).
+
 ## Network Requirements and Network Policy
 
 The network requirements of each cert-manager Pod are summarized below.
@@ -588,5 +591,6 @@ Download the following Helm chart values file and supply it to `helm install`, `
 
 ## Other
 
-This list of recommendations is a work-in-progress.
+This list of recommendations is a living document!
+
 If you have other best practice recommendations please [contribute to this page](../contributing/contributing-flow.md).

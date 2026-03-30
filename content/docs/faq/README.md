@@ -15,6 +15,15 @@ These terms are defined in the [TLS Terminology page](../reference/tls-terminolo
 
 These terms are defined in the [TLS Terminology page](../reference/tls-terminology.md).
 
+## Security
+
+### Are there any public security documents I can review for cert-manager?
+
+The wider community has contributed a couple of high-quality security documents:
+
+- [Hardening Guide and Threat Model](https://cert-manager.io/docs/announcements/controlplane-2026-cert-manager-hardening-guide.pdf) by ControlPlane, March 2026
+- [Graduation Security Audit](https://cert-manager.io/docs/announcements/AdaLogics-2023-cert-manager-audit-report.pdf) by AdaLogics, March, 2024
+
 ## Certificates
 
 ### Can I trigger a renewal from cert-manager at will?
@@ -124,7 +133,7 @@ network connection errors and with a longer exponentially increasing delay after
 You can observe that latest issuance has terminally failed if the `Certificate`
 has `Issuing` condition set to false and has `status.lastFailureTime` set. In
 this case the issuance will be retried after an exponentially increasing delay
-(1 to 32 hours) by creating a new `CertficateRequest`. You can trigger an
+(1 to 32 hours) by creating a new `CertificateRequest`. You can trigger an
 immediate renewal using the [`cmctl renew`
 command](../reference/cmctl.md#renew). Terminal failures occur if the issuer
 sets the `CertificateRequest` to failed (for example if CA rejected the request
