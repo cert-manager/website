@@ -56,7 +56,7 @@
     "child_process": false
   },
   "dependencies": {
-    "@docsearch/react": "4.6.1",
+    "@docsearch/react": "4.6.2",
     "@headlessui/react": "2.2.9",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
