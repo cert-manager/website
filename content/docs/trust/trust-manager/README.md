@@ -463,6 +463,20 @@ That means that if any services were still using a certificate issued by the old
 Rotation requires that both root certificates are trusted simultaneously for a period, or else that all issued certificates
 are rotated either before or at the same time as the old root.
 
+A simple way to manage that rollover is to copy the currently trusted root into a separate source that trust-manager reads from,
+then update that source on your own schedule instead of pointing the `Bundle` directly at the cert-manager `Secret`.
+
+A typical rotation workflow looks like this:
+
+1. Copy the current root certificate from the cert-manager-managed `Secret` into a dedicated `ConfigMap` or `Secret`.
+2. Point your `Bundle` at that dedicated source.
+3. When you introduce a new root, update the dedicated source so it temporarily contains both the old and new roots.
+4. Rotate workloads and leaf certificates until nothing depends on the old root anymore.
+5. Remove the old root from the dedicated source.
+
+That extra copy step gives you control over when trust changes propagate to workloads, which is usually safer than having
+trust-manager react immediately to every issuer rotation.
+
 ## Known Issues
 
 ### `kubectl describe`
