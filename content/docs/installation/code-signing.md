@@ -25,7 +25,6 @@ The cert-manager project publishes the following container images on Quay:
 - `quay.io/jetstack/cert-manager-cainjector`
 - `quay.io/jetstack/cert-manager-acmesolver`
 - `quay.io/jetstack/cert-manager-startupapicheck`
-- `quay.io/jetstack/cert-manager-ctl` for cert-manager `v1.14` and earlier; from cert-manager `v1.15` onward, `cmctl` is released from the separate [`cert-manager/cmctl`](https://github.com/cert-manager/cmctl) repository instead.
 
 You can browse the available tags for each image directly on Quay:
 
@@ -34,14 +33,12 @@ You can browse the available tags for each image directly on Quay:
 - [`cert-manager-cainjector` tags](https://quay.io/repository/jetstack/cert-manager-cainjector?tab=tags)
 - [`cert-manager-acmesolver` tags](https://quay.io/repository/jetstack/cert-manager-acmesolver?tab=tags)
 - [`cert-manager-startupapicheck` tags](https://quay.io/repository/jetstack/cert-manager-startupapicheck?tab=tags)
-- [`cert-manager-ctl` tags](https://quay.io/repository/jetstack/cert-manager-ctl?tab=tags)
 
 ```console
 IMAGE_TAG=[[VAR::cert_manager_latest_version]]  # change as needed
 KEY=https://cert-manager.io/public-keys/cert-manager-pubkey-2021-09-20.pem
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-acmesolver:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-cainjector:$IMAGE_TAG
-cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-ctl:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-startupapicheck:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-controller:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-webhook:$IMAGE_TAG
