@@ -20,11 +20,12 @@ export default defineConfig([
   // Base JS rules (eslint:recommended)
   js.configs.recommended,
 
-  // React (@eslint-react) + Next.js (applies to your JS/TS/JSX/TSX)
+  // React (@eslint-react) recommended rules (includes plugin, settings, and rules)
+  reactPlugin.configs.recommended,
+
+  // Next.js rules and JSX language options
   {
-    ...reactPlugin.configs.recommended,
     plugins: {
-      ...reactPlugin.configs.recommended.plugins,
       "@next/next": nextPlugin,
     },
     languageOptions: {
@@ -39,7 +40,6 @@ export default defineConfig([
       },
     },
     rules: {
-      ...reactPlugin.configs.recommended.rules,
       ...nextPlugin.configs.recommended.rules,
     },
   },
