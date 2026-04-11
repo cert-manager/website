@@ -3,24 +3,40 @@ title: Release 1.20
 description: 'cert-manager release notes: cert-manager 1.20'
 ---
 
-cert-manager is the easiest way to automatically manage certificates in
-Kubernetes and OpenShift clusters.
+## v1.20.1
+
+v1.20.1 fixes a missing RBAC rule for the issuer finalizer which caused a
+regression for OpenShift users, bumps gRPC to address a reported vulnerability
+that doesn't directly affect cert-manager but was flagged by security scanners,
+and fixes a duplicate `parentRef` bug when both issuer config and annotations
+are present when using the ACME Issuer with Gateway API.
+
+### Changelog since v1.20.0
+
+#### Bug or Regression
+
+- Add missing issuer finalizer RBAC to the order controller to support owner references ([#8655](https://github.com/cert-manager/cert-manager/pull/8655))
+- Fixed duplicate `parentRef` bug when both issuer config and annotations are present. ([#8658](https://github.com/cert-manager/cert-manager/pull/8658))
+- Bump google.golang.org/grpc to fix vulnerability reported by scanners ([#8657](https://github.com/cert-manager/cert-manager/pull/8657), [`@erikgb`](https://github.com/erikgb))
+
+## v1.20.0
 
 This release focuses on adding support for the new ListenerSet resource, as well
 as features like Azure Private Zones in the DNS01 issuer and support for the
 NetworkPolicy resource.
 
-Be sure to review all new features and changes below, and read the full release notes carefully before upgrading.
+Be sure to review all new features and changes below, and read the full release
+notes carefully before upgrading.
 
-## Major Themes
+### Major Themes
 
-### Network Policy
+#### Network Policy
 
 The cert-manager Helm chart now allows you to create NetworkPolicy resources
 for all the cert-manager Deployments.
 This makes it easier to follow [best practices when deploying cert-manager in production](../../installation/best-practice.md#network-requirements-and-network-policy).
 
-### ListenerSet and `parentRef` override
+#### ListenerSet and `parentRef` override
 
 cert-manager 1.20 now supports ListenerSet as part of its integration with
 Gateway API. It was already possible to get cert-manager to create a Certificate
@@ -36,7 +52,7 @@ Another improvement we have made is the possibility to leave the `parentRefs`
 field empty on the Issuer and ClusterIssuer; it will be automatically guessed by
 cert-manager.
 
-## Azure DNS Private Zones for DNS-01
+#### Azure DNS Private Zones for DNS-01
 
 cert-manager 1.20 adds support for Azure DNS Private Zones in the DNS01 issuer.
 This means that you can now use cert-manager to issue certificates for domains
@@ -58,7 +74,7 @@ spec:
 
 More details are available in the PR: https://github.com/cert-manager/cert-manager/pull/8494.
 
-## Community
+### Community
 
 As always, we'd like to thank all of the community members who helped in this release cycle, including all below who merged a PR and anyone that helped by commenting on issues, testing, or getting involved in cert-manager meetings. We're lucky to have you involved.
 
@@ -111,11 +127,10 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 {/* END steerers */}
 
 {/* BEGIN changelog v1.20.0 */}
-## `v1.20.0`
 
-Changes since `v1.19.0`:
+### Changelog since v1.19.0
 
-### Feature
+#### Feature
 
 - Add a set of flags to permit setting NetworkPolicy across all deployed containers.
   Remove redundant global IP ranges from example policies. ([#8370](https://github.com/cert-manager/cert-manager/pull/8370), [`@jcpunk`](https://github.com/jcpunk))
@@ -134,11 +149,11 @@ Changes since `v1.19.0`:
 - Added experimental XListenerSet feature gate ( [#8394](https://github.com/cert-manager/cert-manager/pull/8394), [`@hjoshi123`](https://github.com/hjoshi123))
 - Promoting `xlistenerset` feature gate to `listenerset` ([#8501](https://github.com/cert-manager/cert-manager/pull/8501), [`@hjoshi123`](https://github.com/hjoshi123))
 
-### Documentation
+#### Documentation
 
 - Add GWAPI documentation to `NOTES.TXT` in helm chart ([#8353](https://github.com/cert-manager/cert-manager/pull/8353), [`@jaxels10`](https://github.com/jaxels10))
 
-### Bug or Regression
+#### Bug or Regression
 
 - Adds logs for cases when acme server returns us a fatal error in the order controller ([#8199](https://github.com/cert-manager/cert-manager/pull/8199), [`@Peac36`](https://github.com/Peac36))
 - BUGFIX: in case kind or group in the `issuerRef` of a Certificate was omitted, upgrading to v1.19.x incorrectly caused the certificate to be renewed ([#8160](https://github.com/cert-manager/cert-manager/pull/8160), [`@inteon`](https://github.com/inteon))
@@ -154,7 +169,7 @@ Changes since `v1.19.0`:
 - Update Go to `v1.25.5` to fix `CVE-2025-61727` and `CVE-2025-61729` ([#8290](https://github.com/cert-manager/cert-manager/pull/8290), [`@octo-sts[bot]`](https://github.com/apps/octo-sts))
 - When Prometheus monitoring is enabled, the metrics label is now set to the intended value of `cert-manager`. Previously, it was set depending on various factors (namespace cert-manager is installed in and/or Helm release name). ([#8162](https://github.com/cert-manager/cert-manager/pull/8162), [`@LiquidPL`](https://github.com/LiquidPL))
 
-### Other (Cleanup or Flake)
+#### Other (Cleanup or Flake)
 
 - Promoted the `OtherNames` feature to Beta and enabled it by default ([#8288](https://github.com/cert-manager/cert-manager/pull/8288), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
 - Rebranding of the Venafi Issuer to CyberArk ([#8215](https://github.com/cert-manager/cert-manager/pull/8215), [`@iossifbenbassat123`](https://github.com/iossifbenbassat123))
