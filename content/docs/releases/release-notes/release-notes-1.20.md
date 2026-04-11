@@ -3,6 +3,23 @@ title: Release 1.20
 description: 'cert-manager release notes: cert-manager 1.20'
 ---
 
+## v1.20.2
+
+v1.20.2 fixes invalid YAML generated in the Helm chart when both `webhook.config`
+and `webhook.volumes` are defined, and bumps Go to 1.26.2 along with dependencies
+to address reported vulnerabilities.
+
+### Changelog since v1.20.1
+
+#### Bug or Regression
+
+- Helm: Fix invalid YAML generated when both `webhook.config` and `webhook.volumes` are defined. ([#8665](https://github.com/cert-manager/cert-manager/pull/8665), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+
+#### Other (Cleanup or Flake)
+
+- Bump go dependencies with reported vulnerabilities ([#8704](https://github.com/cert-manager/cert-manager/pull/8704), [`@erikgb`](https://github.com/erikgb))
+- Bump go to 1.26.2 ([#8703](https://github.com/cert-manager/cert-manager/pull/8703), [`@erikgb`](https://github.com/erikgb))
+
 ## v1.20.1
 
 v1.20.1 fixes a missing RBAC rule for the issuer finalizer which caused a
