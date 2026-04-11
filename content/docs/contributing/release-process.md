@@ -55,7 +55,7 @@ following conditions:
 
 This guide applies for versions of cert-manager released using `make`, which is every version from cert-manager 1.8 and newer.
 
-If you need to release a version of cert-manager 1.7 or earlier see [older releases](#older-releases).
+If you need to release a version of cert-manager 1.7 or earlier see [Other Release Processes](#other-release-processes).
 
 ## Tool Setup
 
@@ -178,7 +178,7 @@ page if a step is missing or if it is outdated.
     > | `BRANCH`          | Name of your release branch             |
 
 
-5. (**final release**) Prepare the "Docs Freeze" PR
+3. (**final release**) Prepare the "Docs Freeze" PR
 
    **⚠️ This step can be done ahead of time.**
 
@@ -253,10 +253,10 @@ page if a step is missing or if it is outdated.
 
     7. (**final release**) Add an entry to `content/docs/manifest.json` for the new release note file:
 
-        ```yaml
+        ```jsonc
         {
           "routes": [
-            # ...
+            // ...
             {
               "title": "Upgrade 1.19 to 1.20",
               "path": "/docs/releases/upgrading/upgrading-1.19-1.20.md"
@@ -477,7 +477,7 @@ page if a step is missing or if it is outdated.
 
 12. Merge the pull request containing the Helm chart:
 
-    Important: This PR can currently only be merged by CyberArk employees, but we're aiming to fix that soon. Changing this
+    Important: This PR can currently only be merged by Palo Alto employees, but we're aiming to fix that soon. Changing this
     will involve us coming up with a plan for migrating where our Helm charts are stored and ensuring we don't break anyone.
 
     The Helm charts for cert-manager are served using Cloudflare pages
@@ -517,7 +517,7 @@ page if a step is missing or if it is outdated.
 
 14. (**final releases**) Merge the "Docs Freeze" PR.
 
-15. (**final + patch releases**)
+15. (**final + patch releases**) Merge website PRs.
 
     1. Merge the "Release Notes" PR and "Bump Versions" PR.
     2. Create the PR "Merge release-next into master" by [clicking
