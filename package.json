@@ -96,7 +96,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-mdx": "3.7.0",
     "format-api-docs": "file:scripts/gendocs/postprocess",
-    "globals": "17.4.0",
+    "globals": "17.5.0",
     "markdown-link-check": "3.14.2",
     "next-sitemap": "4.2.3",
     "postcss": "8.5.9",
@@ -107,7 +107,7 @@
     "remark-preset-lint-consistent": "6.0.1",
     "remark-preset-lint-recommended": "7.0.1",
     "remark-toc": "9.0.0",
-    "stylelint": "17.6.0",
+    "stylelint": "17.7.0",
     "stylelint-config-standard": "40.0.0",
     "tailwindcss": "4.2.2"
   }
