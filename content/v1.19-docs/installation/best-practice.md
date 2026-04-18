@@ -114,6 +114,204 @@ Here is an overview of the network requirements:
    The cert-manager controller, webhook, and cainjector have metrics servers which listen for HTTP connections on TCP port 9402.
    Create a network policy which allows access to these services from your chosen metrics collector.
 
+### Example NetworkPolicy Manifests
+
+The following example `NetworkPolicy` manifests implement the network
+requirements described above. They are designed for clusters that enforce a
+default-deny posture.
+
+> **Warning**: These examples are a starting point. You will likely need to
+> adjust selectors, namespaces, and ports to match your cluster's CNI plugin,
+> ingress controller, and DNS configuration.
+
+#### Default deny all traffic in the cert-manager namespace
+
+Start by denying all ingress and egress traffic in the `cert-manager` namespace.
+Then selectively open the connections that cert-manager requires.
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: cert-manager
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+```
+
+#### Allow DNS lookups
+
+All cert-manager components need to resolve DNS names. Allow egress to your
+cluster DNS service (typically `kube-dns` in the `kube-system` namespace):
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+  namespace: cert-manager
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
+    to:
+    - namespaceSelector: {}
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+```
+
+#### Allow egress to the Kubernetes API server and ACME endpoints
+
+The controller, webhook, cainjector, and startupapicheck all connect to the
+Kubernetes API server over HTTPS (port 443 or 6443 on OpenShift). The
+controller also connects to external ACME servers (for example Let's Encrypt)
+and may perform HTTP01 self-checks on port 80:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-https-and-http
+  namespace: cert-manager
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - ports:
+    - port: 443
+      protocol: TCP
+    - port: 80
+      protocol: TCP
+    to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+```
+
+> If your Kubernetes API server listens on port 6443 (for example on OpenShift),
+> add that port to the list above.
+
+#### Allow ingress to the webhook from the API server
+
+The Kubernetes API server must be able to reach the cert-manager webhook. On
+managed platforms (EKS, GKE, AKS) the API server IP may not be predictable, so
+a broad ingress rule is often necessary. See the
+[webhook troubleshooting guide](../troubleshooting/webhook.md) for more details:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-webhook-ingress
+  namespace: cert-manager
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: webhook
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/component: webhook
+  policyTypes:
+  - Ingress
+  ingress:
+  - ports:
+    - port: 443
+      protocol: TCP
+```
+
+> On some managed Kubernetes platforms the API server traffic originates from a
+> connectivity agent (for example `konnectivity-agent` on AKS). Restrict the
+> `from` selector if you can identify those source Pods.
+
+#### Allow ingress to the webhook from startupapicheck
+
+If `startupapicheck` is enabled, it connects to the webhook during startup:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-webhook-from-startupapicheck
+  namespace: cert-manager
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: webhook
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/component: webhook
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: startupapicheck
+    ports:
+    - port: 443
+      protocol: TCP
+```
+
+#### Allow ingress to the metrics port
+
+If you run a metrics collector such as Prometheus, allow it to scrape port 9402
+on the controller, webhook, and cainjector:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-metrics-ingress
+  namespace: cert-manager
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  ingress:
+  - ports:
+    - port: 9402
+      protocol: TCP
+```
+
+> Restrict the `from` selector to your monitoring namespace and pod labels for
+> tighter control.
+
+#### Allow ingress to the HTTP01 solver pod
+
+When using ACME HTTP01 challenges, cert-manager creates temporary `acmesolver`
+Pods. Your ingress controller must be able to reach these Pods on port 8089.
+Apply this policy in every namespace where HTTP01 challenges may run:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-acmesolver-ingress
+  namespace: cert-manager  # or the namespace of your Certificate
+spec:
+  podSelector:
+    matchLabels:
+      acme.cert-manager.io/http01-solver: "true"
+  policyTypes:
+  - Ingress
+  ingress:
+  - ports:
+    - port: 8089
+      protocol: TCP
+```
+
+> See [cert-manager/cert-manager#2334](https://github.com/cert-manager/cert-manager/issues/2334) for
+> community-contributed examples and discussion of NetworkPolicy configurations
+> with different CNI plugins.
+
 ## Isolate cert-manager on dedicated node pools
 
 cert-manager is a cluster scoped operator and you should treat it as part of your platform's control plane.
