@@ -17,6 +17,8 @@ description: |
 >
 > ⚠️ cert-manager 1.14 is the last release that will still include a `cert-manager-ctl` container image, go package and GitHub release binary.
 >
+> The legacy container image is published at [`quay.io/jetstack/cert-manager-ctl`](https://quay.io/repository/jetstack/cert-manager-ctl?tab=tags), where you can browse the available tags.
+>
 > Visit the new [cmctl repository on GitHub to find out more](https://github.com/cert-manager/cmctl).
 
 ## Installation
