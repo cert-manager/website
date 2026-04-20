@@ -92,7 +92,7 @@
     "@tailwindcss/typography": "0.5.19",
     "concurrently": "9.2.1",
     "cspell": "10.0.0",
-    "eslint": "10.2.0",
+    "eslint": "10.2.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-mdx": "3.7.0",
     "format-api-docs": "file:scripts/gendocs/postprocess",
