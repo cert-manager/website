@@ -30,6 +30,10 @@ endif
 export DOWNLOAD_DIR ?= $(default_shared_dir)/downloaded
 export GOVENDOR_DIR ?= $(default_shared_dir)/go_vendor
 
+# https://go.dev/dl/
+# renovate: datasource=golang-version packageName=go
+VENDORED_GO_VERSION := 1.26.2
+
 $(bin_dir)/tools $(DOWNLOAD_DIR)/tools:
 	@mkdir -p $@
 
@@ -72,7 +76,7 @@ tools += helm=v4.1.4
 tools += helm-unittest=v1.0.3
 # https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
 # renovate: datasource=github-releases packageName=kubernetes/kubernetes
-tools += kubectl=v1.35.3
+tools += kubectl=v1.35.4
 # https://github.com/kubernetes-sigs/kind/releases
 # renovate: datasource=github-releases packageName=kubernetes-sigs/kind
 tools += kind=v0.31.0
@@ -87,7 +91,7 @@ tools += azwi=v1.5.1
 tools += kyverno=v1.17.1
 # https://github.com/mikefarah/yq/releases
 # renovate: datasource=github-releases packageName=mikefarah/yq
-tools += yq=v4.52.5
+tools += yq=v4.53.2
 # https://github.com/ko-build/ko/releases
 # renovate: datasource=github-releases packageName=ko-build/ko
 tools += ko=0.18.1
@@ -96,7 +100,7 @@ tools += ko=0.18.1
 tools += protoc=v34.1
 # https://github.com/aquasecurity/trivy/releases
 # renovate: datasource=github-releases packageName=aquasecurity/trivy
-tools += trivy=v0.69.3
+tools += trivy=v0.70.0
 # https://github.com/vmware-tanzu/carvel-ytt/releases
 # renovate: datasource=github-releases packageName=vmware-tanzu/carvel-ytt
 tools += ytt=v0.53.2
@@ -105,7 +109,7 @@ tools += ytt=v0.53.2
 tools += rclone=v1.73.4
 # https://github.com/istio/istio/releases
 # renovate: datasource=github-releases packageName=istio/istio
-tools += istioctl=1.29.1
+tools += istioctl=1.29.2
 
 ### go packages
 # https://pkg.go.dev/sigs.k8s.io/controller-tools/cmd/controller-gen?tab=versions
@@ -156,7 +160,7 @@ tools += ginkgo=$(detected_ginkgo_version)
 tools += klone=v0.2.0
 # https://pkg.go.dev/github.com/goreleaser/goreleaser/v2?tab=versions
 # renovate: datasource=go packageName=github.com/goreleaser/goreleaser/v2
-tools += goreleaser=v2.15.2
+tools += goreleaser=v2.15.3
 # https://pkg.go.dev/github.com/anchore/syft/cmd/syft?tab=versions
 # renovate: datasource=go packageName=github.com/anchore/syft
 tools += syft=v1.42.4
@@ -177,16 +181,16 @@ tools += cmrel=v1.12.15-0.20241121151736-e3cbe5171488
 tools += golangci-lint=v2.11.4
 # https://pkg.go.dev/golang.org/x/vuln?tab=versions
 # renovate: datasource=go packageName=golang.org/x/vuln
-tools += govulncheck=v1.1.4
+tools += govulncheck=v1.2.0
 # https://github.com/operator-framework/operator-sdk/releases
 # renovate: datasource=github-releases packageName=operator-framework/operator-sdk
 tools += operator-sdk=v1.42.2
 # https://pkg.go.dev/github.com/cli/cli/v2?tab=versions
 # renovate: datasource=go packageName=github.com/cli/cli/v2
-tools += gh=v2.89.0
+tools += gh=v2.90.0
 # https://github.com/redhat-openshift-ecosystem/openshift-preflight/releases
 # renovate: datasource=github-releases packageName=redhat-openshift-ecosystem/openshift-preflight
-tools += preflight=1.17.0
+tools += preflight=1.17.1
 # https://github.com/daixiang0/gci/releases
 # renovate: datasource=github-releases packageName=daixiang0/gci
 tools += gci=v0.14.0
@@ -200,7 +204,7 @@ tools += kubeconform=v0.7.0
 # FIXME(erikgb): cert-manager needs the ability to override the version set here
 # https://pkg.go.dev/k8s.io/code-generator/cmd?tab=versions
 # renovate: datasource=go packageName=k8s.io/code-generator
-K8S_CODEGEN_VERSION ?= v0.35.3
+K8S_CODEGEN_VERSION ?= v0.35.4
 tools += client-gen=$(K8S_CODEGEN_VERSION)
 tools += deepcopy-gen=$(K8S_CODEGEN_VERSION)
 tools += informer-gen=$(K8S_CODEGEN_VERSION)
@@ -210,7 +214,7 @@ tools += defaulter-gen=$(K8S_CODEGEN_VERSION)
 tools += conversion-gen=$(K8S_CODEGEN_VERSION)
 # https://github.com/kubernetes/kube-openapi
 # renovate: datasource=go packageName=k8s.io/kube-openapi
-tools += openapi-gen=v0.0.0-20260330154417-16be699c7b31
+tools += openapi-gen=v0.0.0-20260414162039-ec9c827d403f
 
 # https://raw.githubusercontent.com/kubernetes-sigs/controller-tools/master/envtest-releases.yaml
 # FIXME: Find a way to configure Renovate to suggest upgrades
@@ -221,10 +225,6 @@ tools += kube-apiserver=$(KUBEBUILDER_ASSETS_VERSION)
 # Additional tools can be defined to reuse the tooling in this file
 ADDITIONAL_TOOLS ?=
 tools += $(ADDITIONAL_TOOLS)
-
-# https://go.dev/dl/
-# renovate: datasource=golang-version packageName=go
-VENDORED_GO_VERSION := 1.26.2
 
 # Print the go version which can be used in GH actions
 .PHONY: print-go-version
@@ -516,10 +516,10 @@ $(DOWNLOAD_DIR)/tools/helm-unittest@$(HELM-UNITTEST_VERSION)_$(HOST_OS)_$(HOST_A
 		chmod +x $(outfile); \
 		rm -f $(outfile).tgz
 
-kubectl_linux_amd64_SHA256SUM=fd31c7d7129260e608f6faf92d5984c3267ad0b5ead3bced2fe125686e286ad6
-kubectl_linux_arm64_SHA256SUM=6f0cd088a82dde5d5807122056069e2fac4ed447cc518efc055547ae46525f14
-kubectl_darwin_amd64_SHA256SUM=2f339b1eae2e1792ec08da281b37afbeee94f70bed6b7398e7efd81ba08f8d37
-kubectl_darwin_arm64_SHA256SUM=280651239d84bab214ba83403666bf6976a5fa0dbdb41404f26eb6f276d34963
+kubectl_linux_amd64_SHA256SUM=b529430df69a688fd61b64ad2299edb5fd71cb58be2a4779dba624c7d3510efd
+kubectl_linux_arm64_SHA256SUM=6a5a4cc4e396d7626a7a693a3044b51c75520f81db30fe6816c2554e53be336f
+kubectl_darwin_amd64_SHA256SUM=dddb01bddb96f78e48e33105ccfa2feedff585a8b2e3b812f5d0f64c7403710a
+kubectl_darwin_arm64_SHA256SUM=ec644a2473b64b486987f695dfb1867963ce6d42d267b86e944585a546f92b5d
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/kubectl@$(KUBECTL_VERSION)_$(HOST_OS)_$(HOST_ARCH)
 $(DOWNLOAD_DIR)/tools/kubectl@$(KUBECTL_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR)/tools
@@ -605,10 +605,10 @@ $(DOWNLOAD_DIR)/tools/kyverno@$(KYVERNO_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DO
 		chmod +x $(outfile); \
 		rm -f $(outfile).tar.gz
 
-yq_linux_amd64_SHA256SUM=75d893a0d5940d1019cb7cdc60001d9e876623852c31cfc6267047bc31149fa9
-yq_linux_arm64_SHA256SUM=90fa510c50ee8ca75544dbfffed10c88ed59b36834df35916520cddc623d9aaa
-yq_darwin_amd64_SHA256SUM=6e399d1eb466860c3202d231727197fdce055888c5c7bec6964156983dd1559d
-yq_darwin_arm64_SHA256SUM=45a12e64d4bd8a31c72ee1b889e81f1b1110e801baad3d6f030c111db0068de0
+yq_linux_amd64_SHA256SUM=d56bf5c6819e8e696340c312bd70f849dc1678a7cda9c2ad63eebd906371d56b
+yq_linux_arm64_SHA256SUM=03061b2a50c7a498de2bbb92d7cb078ce433011f085a4994117c2726be4106ea
+yq_darwin_amd64_SHA256SUM=616b0a0f6a5b79d746f05a169c2b9bb40dee00c605ef165b9a1c1681bba738ac
+yq_darwin_arm64_SHA256SUM=541ba2287560df70f561955e2d7f7e1cd00cf2a15a884f6b5c87a4bfa887bc07
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/yq@$(YQ_VERSION)_$(HOST_OS)_$(HOST_ARCH)
 $(DOWNLOAD_DIR)/tools/yq@$(YQ_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR)/tools
@@ -653,10 +653,10 @@ $(DOWNLOAD_DIR)/tools/protoc@$(PROTOC_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWN
 		chmod +x $(outfile); \
 		rm -f $(outfile).zip
 
-trivy_linux_amd64_SHA256SUM=1816b632dfe529869c740c0913e36bd1629cb7688bd5634f4a858c1d57c88b75
-trivy_linux_arm64_SHA256SUM=7e3924a974e912e57b4a99f65ece7931f8079584dae12eb7845024f97087bdfd
-trivy_darwin_amd64_SHA256SUM=fec4a9f7569b624dd9d044fca019e5da69e032700edbb1d7318972c448ec2f4e
-trivy_darwin_arm64_SHA256SUM=a2f2179afd4f8bb265ca3c7aefb56a666bc4a9a411663bc0f22c3549fbc643a5
+trivy_linux_amd64_SHA256SUM=8b4376d5d6befe5c24d503f10ff136d9e0c49f9127a4279fd110b727929a5aa9
+trivy_linux_arm64_SHA256SUM=2f6bb988b553a1bbac6bdd1ce890f5e412439564e17522b88a4541b4f364fc8d
+trivy_darwin_amd64_SHA256SUM=52d531452b19e7593da29366007d02a810e1e0080d02f9cf6a1afb46c35aaa93
+trivy_darwin_arm64_SHA256SUM=68e543c51dcc96e1c344053a4fde9660cf602c25565d9f09dc17dd41e13b838a
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/trivy@$(TRIVY_VERSION)_$(HOST_OS)_$(HOST_ARCH)
 $(DOWNLOAD_DIR)/tools/trivy@$(TRIVY_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR)/tools
@@ -700,10 +700,10 @@ $(DOWNLOAD_DIR)/tools/rclone@$(RCLONE_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWN
 		chmod +x $(outfile); \
 		rm -f $(outfile).zip
 
-istioctl_linux_amd64_SHA256SUM=5a4e0b85899b0cf237546af5ec0c63b0e22afd2ccc5cde2ea0ec4cf413bdde9c
-istioctl_linux_arm64_SHA256SUM=2de0879e4fd2a247f6687aabca6fdd9bccde73bbe24ff622048d4fde1c651ae5
-istioctl_darwin_amd64_SHA256SUM=b3aa92adc8550e0fe03a1a82a95b4472498f4cef74ca49d3ecabd421fb0fe9b4
-istioctl_darwin_arm64_SHA256SUM=35aef694599b98cc5d07afcfa931e3dbad77cd0cc4ac56307cb3ad870ff3cb68
+istioctl_linux_amd64_SHA256SUM=904bbf1b917dd0135aa55b99cbfa34edd0a188fdeeeef09bb995d8e8e3165112
+istioctl_linux_arm64_SHA256SUM=c4130d32359446fa5e4820c0543d06e2e424883c6890f0f8c59f3ac69dd4b44e
+istioctl_darwin_amd64_SHA256SUM=0bd51e88f8a2568892523752e12ce720793e4b9a9b25bdd4555d5932048e2bf1
+istioctl_darwin_arm64_SHA256SUM=dffa0ff011774cf65fbae5d53f84d54bd12b541a35cff68be60db1c6674f03b4
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/istioctl@$(ISTIOCTL_VERSION)_$(HOST_OS)_$(HOST_ARCH)
 $(DOWNLOAD_DIR)/tools/istioctl@$(ISTIOCTL_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR)/tools
@@ -717,10 +717,10 @@ $(DOWNLOAD_DIR)/tools/istioctl@$(ISTIOCTL_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(
 		chmod +x $(outfile); \
 		rm $(outfile).tar.gz
 
-preflight_linux_amd64_SHA256SUM=777657fbb460b5cc72594738c3cec5d667d33d61e9051b5b15659ba0e8a370c7
-preflight_linux_arm64_SHA256SUM=7e4eea20e50432254b2c2e97eb641c78d0b2d95ddc9e3e4d2aaaccf11393f7ed
-preflight_darwin_amd64_SHA256SUM=b3b98b7713a8920b1457de80003694b3ce1850c0202f4e729a11083c74e657e0
-preflight_darwin_arm64_SHA256SUM=1e22d2c923c6a0d33f758bad489980ac6a1f78a6458615deb7665b996040ca4b
+preflight_linux_amd64_SHA256SUM=15f58d0de7212ac948706515f824d0d2f42b94c11fa85cdb1bc08ad8993226ca
+preflight_linux_arm64_SHA256SUM=a05103b894ce9fd63f47bd56518b8f0b52850ef11e7ef8c21146ac1273d799ad
+preflight_darwin_amd64_SHA256SUM=f707d9ec7f564ba35dc4a7a73f20562c1f7d11035c93d56b6ae9679649de98e3
+preflight_darwin_arm64_SHA256SUM=6b9c2d3aa2b45303272ca29b7ae231d099d6a1f64142c918e01cb229aeee96a6
 
 .PRECIOUS: $(DOWNLOAD_DIR)/tools/preflight@$(PREFLIGHT_VERSION)_$(HOST_OS)_$(HOST_ARCH)
 $(DOWNLOAD_DIR)/tools/preflight@$(PREFLIGHT_VERSION)_$(HOST_OS)_$(HOST_ARCH): | $(DOWNLOAD_DIR)/tools
