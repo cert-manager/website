@@ -45,7 +45,8 @@ kubernetesAPIBurst: 50
 
 numberOfConcurrentWorkers: 200
 
-enableGatewayAPI: true
+gatewayAPI:
+  enabled: true
 
 featureGates:
   AdditionalCertificateOutputFormats: true

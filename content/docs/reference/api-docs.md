@@ -6804,6 +6804,7 @@ description: >-
       </td>
       <td>
         <p>Whether gateway API integration is enabled within cert-manager. The ExperimentalGatewayAPISupport feature gate must also be enabled (default as of 1.15).</p>
+<p>Deprecated: use GatewayAPIConfig.Enabled instead.</p>
       </td>
     </tr>
     <tr>
@@ -6814,6 +6815,19 @@ description: >-
       </td>
       <td>
         <p>Specifies whether the ListenerSet controller should be enabled with-in cert-manager. This along with ListenerSet feature gate enabled allows the user to consume ListenerSet for self-service TLS.</p>
+<p>Deprecated: use GatewayAPIConfig.EnableListenerSet instead.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>gatewayAPI</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.GatewayAPIConfig">GatewayAPIConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>gatewayAPI configures Gateway API integration options for cert-manager.</p>
       </td>
     </tr>
     <tr>
@@ -6976,6 +6990,49 @@ description: >-
       </td>
       <td>
         <p>CertificateRequestMinimumBackoffDuration configures the initial backoff duration when a certificate request fails. This duration is exponentially increased (up to a maximum of 32 hours) based on the number of consecutive failures.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="controller.config.cert-manager.io/v1alpha1.GatewayAPIConfig">GatewayAPIConfig</h3>
+<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>enabled</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>Enabled specifies whether Gateway API integration is enabled within cert-manager. The ExperimentalGatewayAPISupport feature gate must also be enabled (default as of 1.15).</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>enableListenerSet</code>
+        <br />
+        <em>bool</em>
+      </td>
+      <td>
+        <p>EnableListenerSet specifies whether the ListenerSet controller should be enabled within cert-manager. This along with the ListenerSet feature gate enabled allows the user to consume ListenerSet for self-service TLS.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>extraProtocols</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p>ExtraProtocols is a list of additional Gateway Listener protocol types that the Gateway API shim should treat as TLS-capable. By default, only HTTPS and TLS protocol types are processed.</p>
       </td>
     </tr>
   </tbody>
