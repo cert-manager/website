@@ -72,14 +72,15 @@ following `config` Helm value:
 
 ```yaml
 config:
-  enableGatewayAPI: true
+  gatewayAPI:
+    enabled: true
 ```
 
 The corresponding Helm command is:
 
 ```sh
 helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager --namespace cert-manager \
-  --set config.enableGatewayAPI=true
+  --set config.gatewayAPI.enabled=true
 ```
 
 The Gateway API CRDs should either be installed before cert-manager starts or
@@ -516,14 +517,15 @@ your `values.yaml`, add the following:
 ```yaml
 # values.yaml
 config:
-  enableGatewayAPI: true
-  enableGatewayAPIListenerSet: true
+  gatewayAPI:
+    enabled: true
+    enableListenerSet: true
   featureGates:
     ListenerSets: true
 ```
 
-The `enableGatewayAPI` setting tells cert-manager to reconcile the Gateway
-resources, and `enableGatewayAPIListenerSet` tells cert-manager to also
+The `gatewayAPI.enabled` setting tells cert-manager to reconcile the Gateway
+resources, and `gatewayAPI.enableListenerSet` tells cert-manager to also
 reconcile ListenerSet resources.
 
 The corresponding Helm command is:
@@ -531,8 +533,8 @@ The corresponding Helm command is:
 ```sh
 helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager \
   --namespace cert-manager \
-  --set config.enableGatewayAPI=true \
-  --set config.enableGatewayAPIListenerSet=true \
+  --set config.gatewayAPI.enabled=true \
+  --set config.gatewayAPI.enableListenerSet=true \
   --set config.featureGates.ListenerSets=true
 ```
 

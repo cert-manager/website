@@ -243,14 +243,15 @@ following `config` Helm value:
 
 ```yaml
 config:
-  enableGatewayAPI: true
+  gatewayAPI:
+    enabled: true
 ```
 
 The corresponding Helm command is:
 
 ```sh
 helm upgrade --install cert-manager oci://quay.io/jetstack/charts/cert-manager --namespace cert-manager \
-  --set config.enableGatewayAPI=true
+  --set config.gatewayAPI.enabled=true
 ```
 
 The Gateway API CRDs should either be installed before cert-manager starts or
