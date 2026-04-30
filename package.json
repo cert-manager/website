@@ -56,7 +56,7 @@
     "child_process": false
   },
   "dependencies": {
-    "@docsearch/react": "4.6.2",
+    "@docsearch/react": "4.6.3",
     "@headlessui/react": "2.2.10",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
@@ -99,7 +99,7 @@
     "globals": "17.5.0",
     "markdown-link-check": "3.14.2",
     "next-sitemap": "4.2.3",
-    "postcss": "8.5.10",
+    "postcss": "8.5.12",
     "prettier": "3.8.3",
     "remark-cli": "12.0.1",
     "remark-code-import": "1.2.0",
@@ -107,7 +107,7 @@
     "remark-preset-lint-consistent": "6.0.1",
     "remark-preset-lint-recommended": "7.0.1",
     "remark-toc": "9.0.0",
-    "stylelint": "17.9.0",
+    "stylelint": "17.9.1",
     "stylelint-config-standard": "40.0.0",
     "tailwindcss": "4.2.4"
   }
