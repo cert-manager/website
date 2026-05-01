@@ -572,6 +572,7 @@ spec:
   gatewayClassName: eg
   listeners:
     - name: http
+      hostname: dummy
       protocol: HTTP
       port: 80
   allowedListeners:
@@ -579,7 +580,9 @@ spec:
       from: All
 ```
 
-The Gateway's HTTP listener serves ACME HTTP-01 challenges for all tenant ListenerSets.
+The `dummy` listener is required because the `listeners` cannot be left empty.
+See the [issue 4425](https://github.com/kubernetes-sigs/gateway-api/issues/4425)
+in the Gateway API project to learn more.
 
 In their namespace, the developer creates a Service, ListenerSet, and HTTPRoute
 for their application:
@@ -660,7 +663,6 @@ metadata:
   namespace: dev
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    acme.cert-manager.io/http01-parentreffallback: "true"
 spec:
   parentRef:
     name: eg
@@ -674,9 +676,11 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: backend-tls
+    - name: http
+      hostname: echo.example.com
+      port: 80
+      protocol: HTTP
 ```
-
-The `acme.cert-manager.io/http01-parentreffallback: "true"` annotation tells cert-manager to use the ListenerSet's parent Gateway (rather than the ListenerSet itself) as the `parentRef` on the solver HTTPRoute. This allows the ListenerSet to be HTTPS-only while ACME HTTP-01 challenges are served by the shared Gateway HTTP listener.
 
 cert-manager will automatically create a Certificate resource based on the
 ListenerSet:
@@ -686,9 +690,8 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   annotations:
-    acme.cert-manager.io/http01-parentrefkind: Gateway
-    acme.cert-manager.io/http01-parentrefname: eg
-    acme.cert-manager.io/http01-parentrefnamespace: envoy-gateway-system
+    acme.cert-manager.io/http01-parentrefkind: ListenerSet
+    acme.cert-manager.io/http01-parentrefname: backend
   name: backend-tls
   namespace: dev
 spec:
@@ -715,7 +718,76 @@ above.
 
 In addition, ListenerSet supports the following annotation:
 
-- `acme.cert-manager.io/http01-parentreffallback`: when set to `"true"`, cert-manager uses the ListenerSet's `spec.parentRef` (the parent Gateway) as the `parentRef` on solver HTTPRoutes instead of the ListenerSet itself. Use this when the ListenerSet has no HTTP listener and relies on the shared Gateway HTTP listener for ACME HTTP-01 challenges.
+- `acme.cert-manager.io/http01-parentreffallback`: when set to `"true"`, cert-manager uses the ListenerSet's `spec.parentRef` (the parent Gateway) as the `parentRef` on the HTTPRoute it creates to serve ACME HTTP-01 challenges, instead of the ListenerSet itself.
+
+### Alternative: HTTPS-only ListenerSet with shared Gateway HTTP listener
+
+In the [Self-Service TLS with ListenerSet and HTTP-01](#example-self-service-tls-with-listenerset-and-http-01) example, the ListenerSet includes its own HTTP listener for ACME HTTP-01 challenges.
+
+As an alternative, you can omit the HTTP listener from the ListenerSet and rely on a single HTTP listener on the parent Gateway. In this case, remove the `dummy` hostname from the Gateway's HTTP listener so it can serve real traffic, and add the `acme.cert-manager.io/http01-parentreffallback: "true"` annotation to the ListenerSet:
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: eg
+  namespace: envoy-gateway-system
+spec:
+  gatewayClassName: eg
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+  allowedListeners:
+    namespaces:
+      from: All
+---
+kind: ListenerSet
+apiVersion: gateway.networking.k8s.io/v1
+metadata:
+  name: backend
+  namespace: dev
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    acme.cert-manager.io/http01-parentreffallback: "true"
+spec:
+  parentRef:
+    name: eg
+    namespace: envoy-gateway-system
+  listeners:
+    - name: https
+      hostname: echo.example.com
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: backend-tls
+```
+
+With this annotation, cert-manager uses the parent Gateway (rather than the ListenerSet itself) as the `parentRef` on the HTTPRoute it creates to serve ACME HTTP-01 challenges. The Gateway's HTTP listener serves ACME HTTP-01 challenges for all tenant ListenerSets. The resulting Certificate will reference the Gateway:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  annotations:
+    acme.cert-manager.io/http01-parentrefkind: Gateway
+    acme.cert-manager.io/http01-parentrefname: eg
+    acme.cert-manager.io/http01-parentrefnamespace: envoy-gateway-system
+  name: backend-tls
+  namespace: dev
+spec:
+  dnsNames:
+  - echo.example.com
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  secretName: backend-tls
+  usages:
+  - digital signature
+  - key encipherment
+```
 
 ## Inner workings diagram for developers
 
