@@ -722,7 +722,7 @@ In addition, ListenerSet supports the following annotation:
 
 - `acme.cert-manager.io/http01-parentreffallback`: when set to `"true"`, cert-manager uses the ListenerSet's `spec.parentRef` (the parent Gateway) as the `parentRef` on the HTTPRoute it creates to serve ACME HTTP-01 challenges, instead of the ListenerSet itself.
 
-### Alternative: HTTPS-only ListenerSet with shared Gateway HTTP listener
+### HTTPS-only ListenerSet with shared Gateway HTTP listener
 
 In the [Self-Service TLS with ListenerSet and HTTP-01](#example-self-service-tls-with-listenerset-and-http-01) example, the ListenerSet includes its own HTTP listener for ACME HTTP-01 challenges.
 
