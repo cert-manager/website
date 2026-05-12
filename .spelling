@@ -1532,5 +1532,3 @@ keyrings
 nolint
 requestgen
 yourname
-parentrefnamespace
-parentreffallback
