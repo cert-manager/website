@@ -92,9 +92,28 @@ is a backlog of challenges to complete.
 Instead of attempting to process all challenges at once, challenges are
 'scheduled' by cert-manager.
 
-This scheduler applies a cap on the maximum number of simultaneous challenges
-as well as disallows two challenges for the same DNS name and solver type
-(`HTTP01` or `DNS01`) to be completed at once.
+This scheduler is a coarse back-pressure mechanism. It applies a cap on the
+maximum number of simultaneous challenges, and it also disallows two
+challenges for the same DNS name and challenge type (`HTTP01` or `DNS01`) from
+being completed at once.
 
-The maximum number of challenges that can be processed at a time is 60 as of
-[`ddff78`](https://github.com/cert-manager/cert-manager/blob/ddff78f011558e64186d61f7c693edced1496afa/pkg/controller/acmechallenges/scheduler/scheduler.go#L31-L33).
+This behavior is intentionally conservative. The scheduler reasons about the
+externally visible ACME validation target rather than cert-manager's internal
+solver configuration. For example, HTTP01 validation is still against the same
+hostname even if different ingress classes or gateway routes are configured,
+and DNS01 validation is still against the same `_acme-challenge` name even if
+different DNS provider backends are configured.
+
+A single cert-manager instance performs self-checks from one network and DNS
+viewpoint only. As a result, differing solver backends do not reliably imply
+independent ACME-visible validation paths, so the scheduler keeps the key
+coarse by design.
+
+The scheduler does not attempt to model CA-specific rate limits, tenant
+fairness, or ownership policy for DNS names. Deployments that need stronger
+multi-tenant isolation or tighter control over which workloads may request
+certificates for which names should rely on [policy controls](../policy/README.md),
+admission, approval, or separate cert-manager deployments rather than on
+scheduler heuristics alone.
+
+The default maximum number of challenges that can be processed at a time is 60.
