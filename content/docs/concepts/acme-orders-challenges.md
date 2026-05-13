@@ -89,12 +89,37 @@ is a backlog of challenges to complete.
 
 ### Challenge Scheduling
 
-Instead of attempting to process all challenges at once, challenges are
-'scheduled' by cert-manager.
+Instead of attempting to process all challenges at once, cert-manager
+schedules them.
 
-This scheduler applies a cap on the maximum number of simultaneous challenges
-as well as disallows two challenges for the same DNS name and solver type
-(`HTTP01` or `DNS01`) to be completed at once.
+The scheduler does two things:
 
-The maximum number of challenges that can be processed at a time is 60 as of
-[`ddff78`](https://github.com/cert-manager/cert-manager/blob/ddff78f011558e64186d61f7c693edced1496afa/pkg/controller/acmechallenges/scheduler/scheduler.go#L31-L33).
+- it limits how many challenges can be processed at the same time; and
+- it avoids processing two challenges at once when they would validate the
+  same target.
+
+For conflict detection, cert-manager uses the ACME validation target that is
+actually checked externally:
+
+- `HTTP01` challenges conflict if they validate the same hostname;
+- `DNS01` challenges conflict if they validate the same `_acme-challenge` DNS
+  name.
+
+Different internal solver settings do not make those challenges independent.
+For example, different ingress classes or gateway routes for `HTTP01`, or
+different DNS provider backends for `DNS01`, can still end up validating the
+same hostname or DNS record.
+
+The scheduler does not attempt to model CA-specific rate limits, tenant
+fairness, or ownership policy for DNS names. Deployments that need stronger
+multi-tenant isolation or tighter control over which workloads may request
+certificates for which names should rely on [policy controls](../policy/README.md),
+admission, approval, or separate cert-manager deployments rather than on
+scheduler heuristics alone.
+
+By default, cert-manager processes up to 60 challenges at a time.
+You can change this with the controller
+[`--max-concurrent-challenges`](../cli/controller.md) flag.
+If you install cert-manager with Helm, set `maxConcurrentChallenges`.
+If you use a controller configuration file, set `maxConcurrentChallenges` in
+[`ControllerConfiguration`](../reference/api-docs.md#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration).
