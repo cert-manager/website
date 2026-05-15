@@ -81,6 +81,60 @@ Solvers come in the form of [`dns01`](./dns01/README.md) and
 these solver types, visit their respective documentation -
 [DNS01](./dns01/README.md), [HTTP01](./http01/README.md).
 
+### Optional delayed acceptance when self-check cannot succeed
+
+> ⚠️ Prototype documentation for a proposed feature.
+>
+> This section is intended to explain and review a possible API shape before the
+> feature is merged.
+
+A proposed solver option, `acceptChallengeAfter`, would allow cert-manager to
+continue attempting the self-check as it does today, but to proceed after a
+configured delay if the self-check still cannot succeed from cert-manager's own
+network or DNS viewpoint.
+
+This is aimed at environments such as:
+
+- NAT loopback limitations, where cert-manager cannot reach the public address that the
+  ACME server can reach;
+- split-horizon DNS, where cert-manager resolves a different address than the
+  ACME server does; or
+- public/private ingress topologies where cert-manager only sees the internal
+  path but the ACME server validates against the external path.
+
+The intended behavior is:
+
+- cert-manager presents the challenge as usual;
+- cert-manager still runs the self-check;
+- if the self-check succeeds, cert-manager proceeds immediately; and
+- if the self-check does not succeed, cert-manager proceeds once the configured
+  delay since presentation has elapsed.
+
+For example:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    email: user@example.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: example-issuer-account-key
+    solvers:
+    - http01:
+        ingress:
+          ingressClassName: nginx-public
+      acceptChallengeAfter: 30s
+```
+
+This should be understood as an advanced escape hatch rather than a general
+replacement for the self-check. It keeps the current default behavior for most
+users, but provides a clear per-solver option for cases where cert-manager
+cannot directly observe the same validation path as the ACME server.
+
 ### ACME Certificate Profiles
 
 > ℹ️ This feature is available in cert-manager `>= v1.18.0`.

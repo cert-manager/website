@@ -194,6 +194,14 @@ $ kubectl get challenge <challenge-name> -ojsonpath='{.spec.authorizationURL}'
 
 ### HTTP01 troubleshooting
 First of all check if you can see the challenge URL from the public internet, if this does not work check your Ingress and firewall configuration as well as the service and pod cert-manager created to solve the ACME challenge.
+
+If the ACME server can reach the challenge URL from the public internet but
+cert-manager's self-check cannot, you may be in one of the environments
+mentioned on the [ACME configuration](../configuration/acme/README.md) page:
+NAT loopback limitations, split-horizon DNS, or a public/private ingress split. A
+proposed feature under discussion would allow a per-solver delay before
+challenge acceptance so that cert-manager can still proceed after waiting for a
+configured amount of time.
 If this does work check if your cluster can see it too. It is important to test this from inside a Pod. If you get a connection error it is suggested to check the cluster's network configuration.
 If you receive a `tls: handshake failure`, try setting the annotation `cert-manager.io/issue-temporary-certificate: "true"` on the Ingress or Certificate resource. This will issue a temporary self signed certificate for the ingress controller to use before the actual certificate is issued.
 If you still are having issues, there may be an issue with your ingress controller handling multiple resources for the same hostname, in this case, the annotation `acme.cert-manager.io/http01-edit-in-place: "true"` is likely required.
