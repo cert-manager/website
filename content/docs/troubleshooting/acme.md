@@ -11,8 +11,13 @@ Learn how to diagnose problems if cert-manager fails to renew ACME / Let's Encry
 When requesting ACME certificates, cert-manager will create `Order` and
 `Challenges` to complete the request. As such, there are more resources to
 investigate and debug if there is a problem during the process. You can read
-more about these resources in the [concepts
-pages](../concepts/acme-orders-challenges.md).
+more about these resources, including challenge self-checks and scheduling
+behavior, in the [ACME Orders and Challenges](../concepts/acme-orders-challenges.md)
+page.
+
+If you are operating cert-manager in a shared environment and need tighter
+control over which workloads may request certificates for which names, see the
+[policy documentation](../policy/README.md).
 
 Before you start here you should probably take a look at our [general troubleshooting guide](./README.md)
 

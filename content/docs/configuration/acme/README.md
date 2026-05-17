@@ -38,6 +38,14 @@ DNS lookup and can validate that the client owns the domain for the requested
 certificate. With the correct permissions, cert-manager will automatically
 present this TXT record for your given DNS provider.
 
+For more detail on challenge lifecycle, self-checks, and the intentionally
+conservative challenge scheduling and back-pressure behavior, see [ACME Orders
+and Challenges](../../concepts/acme-orders-challenges.md). In shared deployments,
+if you need tighter control over which workloads may request certificates for
+which names, see the [policy documentation](../../policy/README.md). If you are
+debugging a failed issuance flow, see [Troubleshooting Problems with ACME /
+Let's Encrypt Certificates](../../troubleshooting/acme.md).
+
 ## Configuration
 
 ### Creating a Basic ACME Issuer
