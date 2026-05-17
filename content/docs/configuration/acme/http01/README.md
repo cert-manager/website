@@ -15,6 +15,25 @@ Gateway resources, see [Securing Ingress Resources](../../../usage/ingress.md) a
 cert-manager uses your existing Ingress or Gateway configuration in order to
 solve HTTP01 challenges.
 
+## Network Policy Considerations
+
+If your cluster enforces default-deny `NetworkPolicy` rules, make sure that the
+temporary resources created for HTTP01 challenges can still receive traffic.
+
+In particular:
+
+- allow your chosen Ingress controller or Gateway implementation to reach the
+  temporary `acmesolver` Pod and Service created by cert-manager for the
+  challenge response
+- allow the Kubernetes API server to reach the [cert-manager webhook](../../../concepts/webhook.md),
+  because creating and updating ACME resources still goes through admission
+  webhooks
+
+For an overview of the required traffic flows, including the solver path and
+webhook access, read [Network Requirements and Network Policy](../../../installation/best-practice.md#network-requirements-and-network-policy).
+If you are debugging webhook connectivity in a managed environment, also read
+the [webhook troubleshooting guide](../../../troubleshooting/webhook.md).
+
 
 ## Configuring the HTTP01 Ingress solver
 
