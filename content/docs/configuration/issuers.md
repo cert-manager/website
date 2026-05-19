@@ -9,31 +9,32 @@ The following list contains all known cert-manager issuer integrations.
 
 | Tier | Controller                  | Docs                                | Issuer                                                                 | cert-manager<br/>version used<br/>in tutorial[^1] | Released within<br/>12 months[^2]    | Is Open Source |
 |------|-----------------------------|-------------------------------------|------------------------------------------------------------------------|---------------------------------------------------|--------------------------------------|----------------|
-| 🥇   | acme-issuer (in-tree)       | [📄][config:acme-issuer]            | [ACME][ca:acme]                                                        | [latest][production:acme-issuer]                  | [✔️][release:cert-manager]           | ✔️             |
-| 🥇   | venafi-enhanced-issuer      | [📄][config:venafi-enhanced-issuer] | [CyberArk Certificate Manager][ca:venafi-enhanced-issuer]                        | [v1.12.1][production:venafi-enhanced-issuer]      | [✔️][release:venafi-enhanced-issuer] | ❌              |
-| 🥇   | origin-ca-issuer            | [📄][config:origin-ca-issuer]       | [Cloudflare Origin CA][ca:origin-ca-issuer]                            | [supported][production:origin-ca-issuer]          | [✔️][release:origin-ca-issuer]       | ✔️             |
-| 🥈   | adcs-issuer                 | [📄][config:adcs-issuer]            | [Microsoft Active Directory<br/>Certificate Service][ca:adcs-issuer]   | -                                                 | [✔️][release:adcs-issuer]            | ✔️             |
-| 🥈   | aws-privateca-issuer        | [📄][config:aws-privateca-issuer]   | [AWS Private Certificate Authority][ca:aws-privateca-issuer]           | -                                                 | [✔️][release:aws-privateca-issuer]   | ✔️             |
-| 🥈   | ca-issuer (in-tree)         | [📄][config:ca-issuer]              | CA issuer                                                              | -                                                 | [✔️][release:cert-manager]           | ✔️             |
-| 🥈   | czertainly-issuer           | [📄][config:czertainly-issuer]      | [CZERTAINLY][ca:czertainly-issuer]                                     | [supported][production:czertainly-issuer]         | [✔️][release:czertainly-issuer]      | ✔️             |
-| 🥈   | command-issuer              | [📄][config:command-issuer]         | [Keyfactor Command][ca:command-issuer]                                 | -                                                 | [✔️][release:command-issuer]         | ✔️             |
-| 🥈   | cview-issuer                | [📄][config:cview-issuer]           | [CView-issuer][ca:cview-issuer]                                        | -                                                 | [✔️][release:cview-issuer]           | ❌              |
-| 🥈   | ejbca-issuer                | [📄][config:ejbca-issuer]           | [EJBCA][ca:ejbca-issuer]                                               | -                                                 | [✔️][release:ejbca-issuer]           | ✔️             |
-| 🥈   | google-cas-issuer           | [📄][config:google-cas-issuer]      | [Google Cloud Certificate<br/>Authority Service][ca:google-cas-issuer] | -                                                 | [✔️][release:google-cas-issuer]      | ✔️             |
-| 🥈   | gs-atlas-issuer             | [📄][config:gs-atlas-issuer]        | [GlobalSign CA][ca:gs-atlas-issuer]                                    | -                                                 | [✔️][release:gs-atlas-issuer]        | ✔️             |
-| 🥈   | horizon-issuer              | [📄][config:horizon-issuer]         | [EVERTRUST Horizon][ca:horizon-issuer]                                 | -                                                 | [✔️][release:horizon-issuer]         | ✔️             |
-| 🥈   | ncm-issuer                  | [📄][config:ncm-issuer]             | [Nokia Netguard Certificate Manager][ca:ncm-issuer]                    | -                                                 | [✔️][release:ncm-issuer]             | ✔️             |
-| 🥈   | selfsigned-issuer (in-tree) | [📄][config:selfsigned-issuer]      | Self-Signed issuer                                                     | -                                                 | [✔️][release:cert-manager]           | ✔️             |
-| 🥈   | step-issuer                 | [📄][config:step-issuer]            | [Certificate Authority server][ca:step-issuer]                         | -                                                 | [✔️][release:step-issuer]            | ✔️             |
-| 🥈   | vault-issuer (in-tree)      | [📄][config:vault-issuer]           | [HashiCorp Vault][ca:vault-issuer]                                     | -                                                 | [✔️][release:cert-manager]           | ✔️             |
-| 🥈   | venafi-issuer (in-tree)     | [📄][config:venafi-issuer]          | [Venafi TLS Protect][ca:venafi-issuer]                                 | -                                                 | [✔️][release:cert-manager]           | ✔️             |
-| 🥈   | cfssl-issuer                | [📄][config:cfssl-issuer]           | [CFSSL][ca:cfssl-issuer]                                               | -                                                 | [✔️][release:cfssl-issuer]           | ✔️             |
-| 🥈   | cfmtls-issuer               | [📄][config:cfmtls-issuer]          | [CFMTLS][ca:cfmtls-issuer]                                             | -                                                 | [✔️][release:cfmtls-issuer]          | ✔️             |
-| 🥈   | zerossl-issuer              | [📄][config:zerossl-issuer]         | [ZeroSSL][ca:zerossl-issuer]                                           | -                                                 | [✔️][release:zerossl-issuer]         | ✔️             |
-| 🥉   | tcs-issuer                  | [📄][config:tcs-issuer]             | [Intel's SGX technology][ca:tcs-issuer]                                | -                                                 | [❌][release:tcs-issuer]              | ✔️             |
-| 🥉   | freeipa-issuer              | [📄][config:freeipa-issuer]         | [FreeIPA][ca:freeipa-issuer]                                           | -                                                 | [❌][release:freeipa-issuer]          | ✔️             |
-| 🥉   | kms-issuer                  | [📄][config:kms-issuer]             | [AWS KMS][ca:kms-issuer]                                               | -                                                 | [❌][release:kms-issuer]              | ✔️             |
-| 🥉   | keyvault-issuer | [📄][config:keyvault-issuer]        | [Azure Key Vault][ca:keyvault-issuer] | -                                                 | [❌][release:keyvault-issuer]         | ✔️             |
+| ≡ƒÑç   | acme-issuer (in-tree)       | [≡ƒôä][config:acme-issuer]            | [ACME][ca:acme]                                                        | [latest][production:acme-issuer]                  | [Γ£ö∩╕Å][release:cert-manager]           | Γ£ö∩╕Å             |
+| ≡ƒÑç   | venafi-enhanced-issuer      | [≡ƒôä][config:venafi-enhanced-issuer] | [CyberArk Certificate Manager][ca:venafi-enhanced-issuer]                        | [v1.12.1][production:venafi-enhanced-issuer]      | [Γ£ö∩╕Å][release:venafi-enhanced-issuer] | Γ¥î              |
+| ≡ƒÑç   | origin-ca-issuer            | [≡ƒôä][config:origin-ca-issuer]       | [Cloudflare Origin CA][ca:origin-ca-issuer]                            | [supported][production:origin-ca-issuer]          | [Γ£ö∩╕Å][release:origin-ca-issuer]       | Γ£ö∩╕Å             |
+| ≡ƒÑê   | adcs-issuer                 | [≡ƒôä][config:adcs-issuer]            | [Microsoft Active Directory<br/>Certificate Service][ca:adcs-issuer]   | -                                                 | [Γ£ö∩╕Å][release:adcs-issuer]            | Γ£ö∩╕Å             |
+| ≡ƒÑê   | adcs-issuer (lcwsre)        | [≡ƒôä][config:adcs-issuer-lcwsre]            | [Microsoft Active Directory<br/>Certificate Service][ca:adcs-issuer]   | -                                                 | [Γ£ö∩╕Å][release:adcs-issuer-lcwsre]            | Γ£ö∩╕Å             |
+| ≡ƒÑê   | aws-privateca-issuer        | [≡ƒôä][config:aws-privateca-issuer]   | [AWS Private Certificate Authority][ca:aws-privateca-issuer]           | -                                                 | [Γ£ö∩╕Å][release:aws-privateca-issuer]   | Γ£ö∩╕Å             |
+| ≡ƒÑê   | ca-issuer (in-tree)         | [≡ƒôä][config:ca-issuer]              | CA issuer                                                              | -                                                 | [Γ£ö∩╕Å][release:cert-manager]           | Γ£ö∩╕Å             |
+| ≡ƒÑê   | czertainly-issuer           | [≡ƒôä][config:czertainly-issuer]      | [CZERTAINLY][ca:czertainly-issuer]                                     | [supported][production:czertainly-issuer]         | [Γ£ö∩╕Å][release:czertainly-issuer]      | Γ£ö∩╕Å             |
+| ≡ƒÑê   | command-issuer              | [≡ƒôä][config:command-issuer]         | [Keyfactor Command][ca:command-issuer]                                 | -                                                 | [Γ£ö∩╕Å][release:command-issuer]         | Γ£ö∩╕Å             |
+| ≡ƒÑê   | cview-issuer                | [≡ƒôä][config:cview-issuer]           | [CView-issuer][ca:cview-issuer]                                        | -                                                 | [Γ£ö∩╕Å][release:cview-issuer]           | Γ¥î              |
+| ≡ƒÑê   | ejbca-issuer                | [≡ƒôä][config:ejbca-issuer]           | [EJBCA][ca:ejbca-issuer]                                               | -                                                 | [Γ£ö∩╕Å][release:ejbca-issuer]           | Γ£ö∩╕Å             |
+| ≡ƒÑê   | google-cas-issuer           | [≡ƒôä][config:google-cas-issuer]      | [Google Cloud Certificate<br/>Authority Service][ca:google-cas-issuer] | -                                                 | [Γ£ö∩╕Å][release:google-cas-issuer]      | Γ£ö∩╕Å             |
+| ≡ƒÑê   | gs-atlas-issuer             | [≡ƒôä][config:gs-atlas-issuer]        | [GlobalSign CA][ca:gs-atlas-issuer]                                    | -                                                 | [Γ£ö∩╕Å][release:gs-atlas-issuer]        | Γ£ö∩╕Å             |
+| ≡ƒÑê   | horizon-issuer              | [≡ƒôä][config:horizon-issuer]         | [EVERTRUST Horizon][ca:horizon-issuer]                                 | -                                                 | [Γ£ö∩╕Å][release:horizon-issuer]         | Γ£ö∩╕Å             |
+| ≡ƒÑê   | ncm-issuer                  | [≡ƒôä][config:ncm-issuer]             | [Nokia Netguard Certificate Manager][ca:ncm-issuer]                    | -                                                 | [Γ£ö∩╕Å][release:ncm-issuer]             | Γ£ö∩╕Å             |
+| ≡ƒÑê   | selfsigned-issuer (in-tree) | [≡ƒôä][config:selfsigned-issuer]      | Self-Signed issuer                                                     | -                                                 | [Γ£ö∩╕Å][release:cert-manager]           | Γ£ö∩╕Å             |
+| ≡ƒÑê   | step-issuer                 | [≡ƒôä][config:step-issuer]            | [Certificate Authority server][ca:step-issuer]                         | -                                                 | [Γ£ö∩╕Å][release:step-issuer]            | Γ£ö∩╕Å             |
+| ≡ƒÑê   | vault-issuer (in-tree)      | [≡ƒôä][config:vault-issuer]           | [HashiCorp Vault][ca:vault-issuer]                                     | -                                                 | [Γ£ö∩╕Å][release:cert-manager]           | Γ£ö∩╕Å             |
+| ≡ƒÑê   | venafi-issuer (in-tree)     | [≡ƒôä][config:venafi-issuer]          | [Venafi TLS Protect][ca:venafi-issuer]                                 | -                                                 | [Γ£ö∩╕Å][release:cert-manager]           | Γ£ö∩╕Å             |
+| ≡ƒÑê   | cfssl-issuer                | [≡ƒôä][config:cfssl-issuer]           | [CFSSL][ca:cfssl-issuer]                                               | -                                                 | [Γ£ö∩╕Å][release:cfssl-issuer]           | Γ£ö∩╕Å             |
+| ≡ƒÑê   | cfmtls-issuer               | [≡ƒôä][config:cfmtls-issuer]          | [CFMTLS][ca:cfmtls-issuer]                                             | -                                                 | [Γ£ö∩╕Å][release:cfmtls-issuer]          | Γ£ö∩╕Å             |
+| ≡ƒÑê   | zerossl-issuer              | [≡ƒôä][config:zerossl-issuer]         | [ZeroSSL][ca:zerossl-issuer]                                           | -                                                 | [Γ£ö∩╕Å][release:zerossl-issuer]         | Γ£ö∩╕Å             |
+| ≡ƒÑë   | tcs-issuer                  | [≡ƒôä][config:tcs-issuer]             | [Intel's SGX technology][ca:tcs-issuer]                                | -                                                 | [Γ¥î][release:tcs-issuer]              | Γ£ö∩╕Å             |
+| ≡ƒÑë   | freeipa-issuer              | [≡ƒôä][config:freeipa-issuer]         | [FreeIPA][ca:freeipa-issuer]                                           | -                                                 | [Γ¥î][release:freeipa-issuer]          | Γ£ö∩╕Å             |
+| ≡ƒÑë   | kms-issuer                  | [≡ƒôä][config:kms-issuer]             | [AWS KMS][ca:kms-issuer]                                               | -                                                 | [Γ¥î][release:kms-issuer]              | Γ£ö∩╕Å             |
+| ≡ƒÑë   | keyvault-issuer | [≡ƒôä][config:keyvault-issuer]        | [Azure Key Vault][ca:keyvault-issuer] | -                                                 | [Γ¥î][release:keyvault-issuer]         | Γ£ö∩╕Å             |
 
 </div>
 
@@ -63,6 +64,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:kms-issuer]: https://github.com/Skyscanner/kms-issuer
 [config:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer
 [config:adcs-issuer]: https://djkormo.github.io/adcs-issuer/
+[config:adcs-issuer-lcwsre]: https://github.com/lcwsre/adcs-issuer
 [config:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer
 [config:cfmtls-issuer]: https://github.com/k8stooling/cfmtls-issuer
 [config:zerossl-issuer]: https://github.com/topfreegames/zerossl-issuer
@@ -113,6 +115,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:kms-issuer]: https://github.com/Skyscanner/kms-issuer/releases
 [release:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer/releases
 [release:adcs-issuer]: https://github.com/djkormo/adcs-issuer/releases
+[release:adcs-issuer-lcwsre]: https://github.com/lcwsre/adcs-issuer/releases
 [release:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer/+refs
 [release:cfmtls-issuer]: https://github.com/k8stooling/cfmtls-issuer/releases/
 [release:zerossl-issuer]: https://github.com/topfreegames/zerossl-issuer/releases
@@ -131,12 +134,12 @@ If you've created an issuer which you'd like to share,
 
 The cert-manager project has a tier system for issuers. This is to help users
 understand the maturity of the issuer.
-The tiers are 🥇, 🥈 and 🥉.
+The tiers are ≡ƒÑç, ≡ƒÑê and ≡ƒÑë.
 
 NOTE: The cert-manager maintainers can decide to change the criteria and number
 of tiers at any time.
 
-### 🥇 Tier (Production-ready)
+### ≡ƒÑç Tier (Production-ready)
 
 - The issuer has an end-to-end tutorial on how to set it up with cert-manager for use in production.
 At the time of checking[^1], the used cert-manager version has to be still supported (see [Supported Releases](../releases/README.md)).
@@ -146,11 +149,11 @@ An end-to-end tutorial must include:
   3. an explanation on how to configure the issuer's Custom Resources
   4. an explanation on how to issue a certificate using the issuer (using a Certificate resource)
 
-### 🥈 Tier (Maintained)
+### ≡ƒÑê Tier (Maintained)
 
 - The issuer has had a release in the last 12 months (at the time of checking all issuers[^2]).
 
-### 🥉 Tier (Unmaintained)
+### ≡ƒÑë Tier (Unmaintained)
 
 Other
 
