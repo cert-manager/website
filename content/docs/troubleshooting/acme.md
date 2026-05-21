@@ -199,7 +199,7 @@ If the ACME server can reach the challenge URL from the public internet but
 cert-manager's self-check cannot, you may be in one of the environments
 mentioned on the [ACME configuration](../configuration/acme/README.md) page:
 NAT loopback limitations, split-horizon DNS, or a public/private ingress split.
-A proposed feature under discussion would allow a per-solver delay before
+The `acceptChallengeAfter` solver option allows a per-solver delay before
 challenge acceptance so that cert-manager can still proceed after waiting for a
 configured amount of time.
 

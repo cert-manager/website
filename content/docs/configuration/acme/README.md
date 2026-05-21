@@ -83,15 +83,10 @@ these solver types, visit their respective documentation -
 
 ### Optional delayed acceptance when self-check cannot succeed
 
-> ⚠️ Draft documentation for a proposed feature.
->
-> This section is intended to explain and review a possible API shape before the
-> feature is merged.
-
-A proposed solver option, `acceptChallengeAfter`, would allow cert-manager to
-continue attempting the self-check as it does today, but to proceed after a
-configured delay if the self-check still cannot succeed from cert-manager's own
-network or DNS viewpoint.
+The `acceptChallengeAfter` solver option allows cert-manager to continue
+attempting the self-check as it does today, but to proceed after a configured
+delay if the self-check still cannot succeed from cert-manager's own network or
+DNS viewpoint.
 
 The same field would be available on either an `http01` or `dns01` solver
 entry.
@@ -105,7 +100,7 @@ This is aimed at environments such as:
 - public/private ingress topologies where cert-manager only sees the internal
   path but the ACME server validates against the external path.
 
-The intended behavior is:
+The behavior is:
 
 - cert-manager presents the challenge as usual;
 - cert-manager still runs the self-check;
