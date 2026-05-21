@@ -9,16 +9,17 @@ cert-manager v1.21 includes:
 
 ## Major Themes
 
-### Delayed ACME challenge acceptance
+### Skip the self-check with `waitInsteadOfSelfCheck`
 
-cert-manager 1.21 adds the `acceptChallengeAfter` solver option for ACME
-HTTP01 and DNS01 challenges. This allows cert-manager to continue attempting
-its self-check as usual, but to proceed after a configured delay in
-environments where cert-manager cannot reliably observe the same validation
-path as the ACME server.
+cert-manager 1.21 adds the `waitInsteadOfSelfCheck` solver option for ACME
+HTTP01 and DNS01 challenges. When set, cert-manager skips its own self-check
+and instead waits the configured duration after presentation before asking the
+ACME server to validate. This is an escape hatch for environments where
+cert-manager cannot reliably observe the same validation path as the ACME
+server, such as split-horizon DNS or NAT loopback (or hairpinning).
 
-See [Optional delayed acceptance when self-check cannot
-succeed](../../configuration/acme/README.md#optional-delayed-acceptance-when-self-check-cannot-succeed)
+See [Skip the self-check with
+`waitInsteadOfSelfCheck`](../../configuration/acme/README.md#skip-the-self-check-with-waitinsteadofselfcheck)
 for configuration details.
 
 ## Community
@@ -51,7 +52,7 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 
 ### Feature
 
-- Add the `acceptChallengeAfter` solver option for ACME HTTP01 and DNS01 challenges, allowing cert-manager to proceed after a configured delay when self-checks cannot succeed from cert-manager's own network or DNS viewpoint. See the [ACME issuer documentation](../../configuration/acme/README.md#optional-delayed-acceptance-when-self-check-cannot-succeed) for configuration details.
+- Add the `waitInsteadOfSelfCheck` solver option for ACME HTTP01 and DNS01 challenges, allowing cert-manager to skip its own self-check and ask the ACME server to validate after a configured wait. See the [ACME issuer documentation](../../configuration/acme/README.md#skip-the-self-check-with-waitinsteadofselfcheck) for configuration details.
 
 ### Documentation
 

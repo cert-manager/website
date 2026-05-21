@@ -81,17 +81,15 @@ Solvers come in the form of [`dns01`](./dns01/README.md) and
 these solver types, visit their respective documentation -
 [DNS01](./dns01/README.md), [HTTP01](./http01/README.md).
 
-### Optional delayed acceptance when self-check cannot succeed
+### Skip the self-check with `waitInsteadOfSelfCheck`
 
 > ℹ️ This feature is available in cert-manager `>= v1.21.0`.
 
-The `acceptChallengeAfter` solver option allows cert-manager to continue
-attempting the self-check as it does today, but to proceed after a configured
-delay if the self-check still cannot succeed from cert-manager's own network or
-DNS viewpoint.
+The `waitInsteadOfSelfCheck` solver option skips cert-manager's own self-check
+and instead waits a configured duration after presentation before asking the
+ACME server to validate the challenge.
 
-The same field would be available on either an `http01` or `dns01` solver
-entry.
+You can set this field on either an `http01` or `dns01` solver entry.
 
 This is aimed at environments such as:
 
@@ -102,13 +100,13 @@ This is aimed at environments such as:
 - public/private ingress topologies where cert-manager only sees the internal
   path but the ACME server validates against the external path.
 
-The behavior is:
+The behavior when `waitInsteadOfSelfCheck` is set is:
 
 - cert-manager presents the challenge as usual;
-- cert-manager still runs the self-check;
-- if the self-check succeeds, cert-manager proceeds immediately; and
-- if the self-check does not succeed, cert-manager proceeds once the configured
-  delay since presentation has elapsed.
+- cert-manager records the time of first presentation in `status.presentedAt`;
+- cert-manager skips its own self-check; and
+- once the configured duration has elapsed since `status.presentedAt`,
+  cert-manager asks the ACME server to validate the challenge.
 
 For example:
 
@@ -127,13 +125,11 @@ spec:
     - http01:
         ingress:
           ingressClassName: nginx-public
-      acceptChallengeAfter: 30s
+      waitInsteadOfSelfCheck: 30s
 ```
 
-This should be understood as an advanced escape hatch rather than a general
-replacement for the self-check. It keeps the current default behavior for most
-users, but provides a clear per-solver option for cases where cert-manager
-cannot directly observe the same validation path as the ACME server.
+This is an advanced escape hatch for cases where cert-manager cannot directly
+observe the same validation path as the ACME server.
 
 Choose the delay conservatively. If it is too short, the ACME server may still
 start validation before your solver resources are reachable. If it is too long,
