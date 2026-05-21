@@ -9,7 +9,17 @@ cert-manager v1.21 includes:
 
 ## Major Themes
 
-### TODO
+### Delayed ACME challenge acceptance
+
+cert-manager 1.21 adds the `acceptChallengeAfter` solver option for ACME
+HTTP01 and DNS01 challenges. This allows cert-manager to continue attempting
+its self-check as usual, but to proceed after a configured delay in
+environments where cert-manager cannot reliably observe the same validation
+path as the ACME server.
+
+See [Optional delayed acceptance when self-check cannot
+succeed](../../configuration/acme/README.md#optional-delayed-acceptance-when-self-check-cannot-succeed)
+for configuration details.
 
 ## Community
 
@@ -41,7 +51,7 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 
 ### Feature
 
-TODO
+- Add the `acceptChallengeAfter` solver option for ACME HTTP01 and DNS01 challenges, allowing cert-manager to proceed after a configured delay when self-checks cannot succeed from cert-manager's own network or DNS viewpoint. See the [ACME issuer documentation](../../configuration/acme/README.md#optional-delayed-acceptance-when-self-check-cannot-succeed) for configuration details.
 
 ### Documentation
 

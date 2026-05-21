@@ -83,6 +83,8 @@ these solver types, visit their respective documentation -
 
 ### Optional delayed acceptance when self-check cannot succeed
 
+> ℹ️ This feature is available in cert-manager `>= v1.21.0`.
+
 The `acceptChallengeAfter` solver option allows cert-manager to continue
 attempting the self-check as it does today, but to proceed after a configured
 delay if the self-check still cannot succeed from cert-manager's own network or
