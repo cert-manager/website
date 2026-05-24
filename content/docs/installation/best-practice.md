@@ -151,6 +151,10 @@ Here is an overview of the network requirements:
 
    > ℹ️ The acmesolver Pod **does not** require access to the Kubernetes API server.
 
+   If you run default-deny `NetworkPolicy` resources (for example with Calico), see
+   [How do I configure NetworkPolicies for ACME HTTP-01 challenges with default-deny policies?](../faq/#how-do-i-configure-networkpolicies-for-acme-http-01-challenges-with-default-deny-policies)
+   for example policies and webhook requirements.
+
 1. **TCP: Metrics Collector -> cert-manager (controller, webhook, cainjector)**:
    The cert-manager controller, webhook, and cainjector have metrics servers which listen for HTTP connections on TCP port 9402.
    Create a network policy which allows access to these services from your chosen metrics collector.

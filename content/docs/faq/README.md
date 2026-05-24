@@ -216,6 +216,101 @@ Without a very detailed threat model and putting serious time into your system's
 
 See "simple answer" above for usage guidelines for these "passwords".
 
+## Network policies
+
+### How do I configure NetworkPolicies for ACME HTTP-01 challenges with default-deny policies?
+
+If your cluster uses a default-deny network policy model (for example with [Calico](https://docs.tigera.io/calico/latest/network-policy/get-started/kubernetes-default-deny)),
+you need extra rules beyond the cert-manager component policies so that HTTP-01 challenges can complete.
+
+Start with the [network requirements and Helm chart `NetworkPolicy` options](../installation/best-practice.md#network-requirements-and-network-policy)
+in the installation best-practice guide. That page explains which ports each cert-manager component uses and how to enable chart-managed policies.
+
+HTTP-01 challenges add **temporary** resources in the namespace of the `Challenge` resource:
+
+- An `acmesolver` Pod labelled `acme.cert-manager.io/http01-solver: "true"`
+- A Service that exposes TCP port **8089** (the `acmesolver` listen port)
+- An Ingress or Gateway API `HTTPRoute` that routes public HTTP traffic on port **80** to the solver Service
+
+The cert-manager controller performs an HTTP-01 **self-check** by resolving the challenge domain and connecting on port 80 (following redirects),
+the same path the ACME server uses. Your policies must allow that path through your ingress controller, not only pod-to-pod traffic inside the cluster.
+
+> ℹ️ The `acme.cert-manager.io/http01-solver` label is applied to **Pods** (and related solver resources), not to Namespaces.
+> Use `podSelector` rules as shown below rather than expecting a namespace label.
+
+#### Allow ingress to HTTP-01 solver Pods
+
+In each namespace where you issue certificates with an ACME HTTP-01 solver, allow your ingress controller to reach solver Pods on port 8089.
+Adjust the `namespaceSelector` labels to match how your ingress controller is installed.
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-http01-solver-from-ingress
+  namespace: my-app # namespace of the Certificate / Challenge
+spec:
+  podSelector:
+    matchLabels:
+      acme.cert-manager.io/http01-solver: "true"
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx # example: nginx ingress
+      ports:
+        - protocol: TCP
+          port: 8089
+```
+
+If you use a different ingress implementation, allow traffic from that controller's namespace and from any load balancer or node network path your platform requires.
+
+#### Allow cert-manager controller egress for self-checks
+
+The cert-manager controller must reach the challenge URL on HTTP (port 80) and may follow redirects to HTTPS (port 443).
+When you customize Helm chart egress rules, ensure these ports remain allowed if you use the ACME HTTP-01 issuer.
+See the example egress rules in the [best-practice Helm values file](../installation/best-practice.md#network-requirements-and-network-policy).
+
+#### Allow the Kubernetes API server to reach the webhook
+
+With default-deny policies, certificate creation can fail if the API server cannot reach the cert-manager webhook on TCP port 443.
+On managed clusters (including Amazon EKS), the API server often runs outside the cluster network, so `podSelector` rules alone are not enough.
+
+Read the [webhook troubleshooting guide](../troubleshooting/webhook.md) for platform-specific guidance, including EKS security groups and the `hostNetwork` workaround for custom CNIs.
+
+Example policy allowing `startupapicheck` to reach the webhook inside the cert-manager namespace:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-startupapicheck-to-webhook
+  namespace: cert-manager
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: webhook
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: webhook
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: startupapicheck
+      ports:
+        - protocol: TCP
+          port: 443
+```
+
+#### Related documentation
+
+- [Installation best-practice: network requirements](../installation/best-practice.md#network-requirements-and-network-policy)
+- [Webhook troubleshooting](../troubleshooting/webhook.md)
+
 ## Miscellaneous
 
 ### Kubernetes has a builtin `CertificateSigningRequest` API. Why not use that?
