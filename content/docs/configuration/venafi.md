@@ -367,6 +367,25 @@ more information on how to create Certificate resources.
 | `tokenEndpoint` | No | `https://auth.apps.paloaltonetworks.com/oauth2/access_token` | OAuth 2.0 token endpoint URL used to obtain access tokens. |
 | `url` | No | `https://api.strata.paloaltonetworks.com/ngts` | Base URL for the NGTS API endpoint. |
 
+## Issuer conditions
+
+### AuthFailed
+
+When a Venafi endpoint rejects the supplied credentials (for example, with an HTTP 401 or 403 response), the `Issuer` or `ClusterIssuer` Ready condition transitions to `False` with `reason: AuthFailed`:
+
+```bash
+$ kubectl describe issuer corp-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
+...
+Status:
+  Conditions:
+    Message: OAuth token request failed: ...
+    Reason:  AuthFailed
+    Status:  False
+    Type:    Ready
+```
+
+`AuthFailed` indicates that the credentials themselves are invalid. This is distinct from the generic `ErrorSetup` reason, which covers transient network or infrastructure problems. If you see `AuthFailed`, check the credentials in the referenced `Secret` — the API key for CyberArk Certificate Manager SaaS, the access token or username/password for CyberArk Certificate Manager Self-Hosted, or the `client-id` and `client-secret` for NGTS — and ensure they are correct and have not expired.
+
 ## Issuer specific annotations
 
 ### Custom Fields
