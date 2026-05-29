@@ -6,7 +6,7 @@ description: 'cert-manager configuration: CyberArk Issuers'
 ## Introduction
 
 The CyberArk `Issuer` obtains certificates from
-[CyberArk Certificate Manager](https://www.cyberark.com/products/certificate-manager/) SaaS or self-hosted,
+[CyberArk Certificate Manager](https://www.cyberark.com/products/certificate-manager/) SaaS or Self-Hosted,
 or from [Palo Alto Networks Next Generation Trust Services (NGTS)](https://www.paloaltonetworks.com/sase).
 
 The `Issuer` was formerly known as the Venafi `Issuer`, and for backwards compatibility reasons is configured using older product names - "Venafi Cloud" corresponds to CyberArk Certificate Manager SaaS and "Venafi TPP" corresponds to CyberArk Certificate Manager Self-Hosted.
