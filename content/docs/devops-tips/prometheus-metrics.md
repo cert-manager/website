@@ -181,7 +181,7 @@ Check the health of the cert-manager scrape targets on the Prometheus status pag
 
 ## Venafi metrics
 
-cert-manager exposes the following Prometheus metrics for Venafi OAuth token requests. These are emitted by the controller whenever a Venafi `Issuer` or `ClusterIssuer` authenticates against a TPP, Cloud, or NGTS endpoint.
+cert-manager exposes the following Prometheus metrics for Venafi OAuth token requests. These are emitted by the controller whenever a Venafi `Issuer` or `ClusterIssuer` authenticates against a TPP, Cloud, or Next-Gen Trust Security (NGTS) endpoint.
 
 | Metric | Type | Labels | Description |
 |--------|------|--------|-------------|

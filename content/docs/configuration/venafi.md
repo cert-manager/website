@@ -384,7 +384,7 @@ Status:
     Type:    Ready
 ```
 
-`AuthFailed` indicates that the credentials themselves are invalid. This is distinct from the generic `ErrorSetup` reason, which covers transient network or infrastructure problems. If you see `AuthFailed`, check the credentials in the referenced `Secret` — the API key for CyberArk Certificate Manager SaaS, the access token or username/password for CyberArk Certificate Manager Self-Hosted, or the `client-id` and `client-secret` for NGTS — and ensure they are correct and have not expired.
+`AuthFailed` indicates that the credentials themselves are invalid. This is distinct from the generic `ErrorSetup` reason, which covers transient network or infrastructure problems. If you see `AuthFailed`, check the credentials in the referenced `Secret` — the API key for CyberArk Certificate Manager SaaS, the access token or username/password for CyberArk Certificate Manager Self-Hosted, or the `client-id` and `client-secret` for Next-Gen Trust Security (NGTS) — and ensure they are correct and have not expired.
 
 ## Issuer specific annotations
 
