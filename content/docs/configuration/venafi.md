@@ -317,6 +317,8 @@ or `ClusterIssuer` resource. If you are creating a `ClusterIssuer` resource,
 you must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
 
+The `zone` is the name of the Certificate Issuing Template (CIT) in NGTS that will be used to issue certificates. Unlike CyberArk Certificate Manager SaaS, NGTS does not use an Application prefix — the zone is just the CIT name.
+
 Save the below content after making your amendments to a file named
 `issuer.yaml`.
 
@@ -328,7 +330,7 @@ metadata:
   namespace: <NAMESPACE YOU WANT TO ISSUE CERTIFICATES IN>
 spec:
   venafi:
-    zone: 'My Application\My CIT' # Set this to your NGTS zone
+    zone: 'My CIT' # Set this to the name of your NGTS Certificate Issuing Template
     ngts:
       tsgID: '1234567890' # Your Tenant Service Group ID
       credentialsRef:
@@ -360,7 +362,7 @@ more information on how to create Certificate resources.
 
 | Field | Required | Default | Description |
 |-------|----------|---------|-------------|
-| `tsgID` | Yes | — | Tenant Service Group ID, used to scope the OAuth 2.0 access token. The `tsg_id:` prefix is added automatically. |
+| `tsgID` | Yes | — | Tenant Service Group ID, used to scope the OAuth 2.0 access token. |
 | `credentialsRef.name` | Yes | — | Name of the Kubernetes `Secret` containing `client-id` and `client-secret`. |
 | `tokenEndpoint` | No | `https://auth.apps.paloaltonetworks.com/oauth2/access_token` | OAuth 2.0 token endpoint URL used to obtain access tokens. |
 | `url` | No | `https://api.strata.paloaltonetworks.com/ngts` | Base URL for the NGTS API endpoint. |
