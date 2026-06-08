@@ -179,17 +179,6 @@ Check the health of the cert-manager scrape targets on the Prometheus status pag
 
 ![](/docs/devops-tips/prometheus-metrics/prometheus-status-targets.png)
 
-## Venafi metrics
-
-cert-manager exposes the following Prometheus metrics for Venafi OAuth token requests. These are emitted by the controller whenever a Venafi `Issuer` or `ClusterIssuer` authenticates against a TPP, Cloud, or Next-Gen Trust Security (NGTS) endpoint.
-
-| Metric | Type | Labels | Description |
-|--------|------|--------|-------------|
-| `certmanager_venafi_oauth_token_requests_total` | Counter | `status` (`success` \| `failure`) | Total number of Venafi OAuth token requests made by cert-manager. |
-| `certmanager_venafi_oauth_token_request_duration_seconds` | Histogram | — | Duration of Venafi OAuth token requests. Buckets cover typical token-exchange latencies from 10ms to 30s. |
-
-These metrics can be used to alert on elevated token request failure rates or unexpected latency increases in the authentication flow.
-
 ## Monitoring Mixin
 
 Monitoring mixins are a way to bundle common alerts, rules, and dashboards for an application in a configurable and extensible way, using the Jsonnet data templating language. A cert-manager monitoring mixin can be found here https://github.com/imusmanmalik/cert-manager-mixin. Documentation on usage can be found with the `cert-manager-mixin` project.
