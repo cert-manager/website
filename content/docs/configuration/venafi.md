@@ -6,15 +6,13 @@ description: 'cert-manager configuration: CyberArk Issuers'
 ## Introduction
 
 The CyberArk `Issuer` obtains certificates from
-[CyberArk Certificate Manager](https://www.cyberark.com/products/certificate-manager/) SaaS or Self-Hosted,
-or from [Palo Alto Networks Next Generation Trust Services (NGTS)](https://www.paloaltonetworks.com/sase).
+[CyberArk Certificate Manager](https://www.cyberark.com/products/certificate-manager/) SaaS or self-hosted.
 
 The `Issuer` was formerly known as the Venafi `Issuer`, and for backwards compatibility reasons is configured using older product names - "Venafi Cloud" corresponds to CyberArk Certificate Manager SaaS and "Venafi TPP" corresponds to CyberArk Certificate Manager Self-Hosted.
 
-You can have multiple different `Issuer` types installed within the same
-cluster, including mixtures of issuers configured to enroll from CyberArk
-Certificate Manager SaaS, CyberArk Certificate Manager Self-Hosted, and Palo
-Alto Networks NGTS. This allows you to be flexible in the
+You can have multiple different CyberArk `Issuer` types installed within the same
+cluster, including mixtures of issuers configured to enroll from the CyberArk
+Certificate Manager SaaS and self-hosted. This allows you to be flexible in the
 deployment method that you prefer to use.
 
 Automated certificate renewal and management are provided for `Certificates`
@@ -282,90 +280,6 @@ You are now ready to issue certificates using the newly provisioned CyberArk
 
 Read the [Requesting Certificates](../usage/certificate.md) document for
 more information on how to create Certificate resources.
-
-## Creating an Issuer for Palo Alto Networks Next Generation Trust Services
-
-The CyberArk `Issuer` supports [Palo Alto Networks Next Generation Trust
-Services (NGTS)](https://www.paloaltonetworks.com/sase), a cloud-native
-certificate management platform. Authentication uses OAuth 2.0 Client
-Credentials, so no API key or username/password is required.
-
-In order to set up an NGTS `Issuer`, you must first create a Kubernetes
-`Secret` resource containing your OAuth 2.0 client credentials. The secret
-must have the keys `client-id` and `client-secret`:
-
-```bash
-$ kubectl create secret generic \
-       ngts-credentials \
-       --namespace='NAMESPACE OF YOUR ISSUER RESOURCE' \
-       --from-literal=client-id='YOUR_CLIENT_ID' \
-       --from-literal=client-secret='YOUR_CLIENT_SECRET'
-```
-
-> **Note**: If you are configuring your issuer as a `ClusterIssuer` resource in
-> order to serve `Certificates` across your whole cluster, you must set the
-> `--namespace` parameter to `cert-manager`, which is the default `Cluster
-> Resource Namespace`. The `Cluster Resource Namespace` can be configured
-> through the `--cluster-resource-namespace` flag on the cert-manager controller
-> component.
-
-This secret will be used by cert-manager to obtain OAuth 2.0 access tokens
-from the NGTS token endpoint on your behalf.
-
-Once the credentials `Secret` has been created, you can create your `Issuer`
-or `ClusterIssuer` resource. If you are creating a `ClusterIssuer` resource,
-you must change the `kind` field to `ClusterIssuer` and remove the
-`metadata.namespace` field.
-
-The `zone` is the name of the Certificate Issuing Template (CIT) in NGTS that will be used to issue certificates. Unlike CyberArk Certificate Manager SaaS, NGTS does not use an Application prefix — the zone is just the CIT name.
-
-Save the below content after making your amendments to a file named
-`issuer.yaml`.
-
-```yaml
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: corp-issuer
-  namespace: <NAMESPACE YOU WANT TO ISSUE CERTIFICATES IN>
-spec:
-  venafi:
-    zone: 'My CIT' # Set this to the name of your NGTS Certificate Issuing Template
-    ngts:
-      tsgID: '1234567890' # Your Tenant Service Group ID
-      credentialsRef:
-        name: ngts-credentials
-      # tokenEndpoint and url are optional; uncomment to override the defaults
-      # tokenEndpoint: https://auth.apps.paloaltonetworks.com/oauth2/access_token
-      # url: https://api.strata.paloaltonetworks.com/ngts
-```
-
-You can then create the `Issuer` using `kubectl create -f`.
-
-```bash
-$ kubectl create -f issuer.yaml
-```
-
-Verify the `Issuer` has been initialized correctly using `kubectl describe`.
-
-```bash
-$ kubectl describe issuer corp-issuer --namespace='NAMESPACE OF YOUR ISSUER RESOURCE'
-```
-
-You are now ready to issue certificates using the newly provisioned CyberArk
-`Issuer` and Palo Alto Networks NGTS.
-
-Read the [Requesting Certificates](../usage/certificate.md) document for
-more information on how to create Certificate resources.
-
-### NGTS field reference
-
-| Field | Required | Default | Description |
-|-------|----------|---------|-------------|
-| `tsgID` | Yes | — | Tenant Service Group ID, used to scope the OAuth 2.0 access token. |
-| `credentialsRef.name` | Yes | — | Name of the Kubernetes `Secret` containing `client-id` and `client-secret`. |
-| `tokenEndpoint` | No | `https://auth.apps.paloaltonetworks.com/oauth2/access_token` | OAuth 2.0 token endpoint URL used to obtain access tokens. |
-| `url` | No | `https://api.strata.paloaltonetworks.com/ngts` | Base URL for the NGTS API endpoint. |
 
 ## Issuer specific annotations
 
