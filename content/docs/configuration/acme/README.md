@@ -135,6 +135,13 @@ Choose the delay conservatively. If it is too short, the ACME server may still
 start validation before your solver resources are reachable. If it is too long,
 certificate issuance will wait longer than necessary.
 
+A value of `0` is permitted: cert-manager skips the self-check and asks the ACME
+server to validate immediately after presentation. In this case cert-manager
+relies on the ACME server's own validation retries
+([RFC 8555 section 8.2](https://www.rfc-editor.org/rfc/rfc8555#section-8.2)) to
+succeed once the challenge has propagated. Negative durations are rejected by the
+validating webhook.
+
 ### ACME Certificate Profiles
 
 > ℹ️ This feature is available in cert-manager `>= v1.18.0`.
