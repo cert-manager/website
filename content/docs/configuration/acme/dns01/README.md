@@ -162,6 +162,7 @@ Links to these supported providers along with their documentation are below:
 - [`AliDNS-Webhook`](https://github.com/pragkent/alidns-webhook)
 - [`bizflycloud-certmanager-dns-webhook`](https://github.com/bizflycloud/bizflycloud-certmanager-dns-webhook)
 - [`cert-manager-alidns-webhook`](https://github.com/DEVmachine-fr/cert-manager-alidns-webhook)
+- [`cert-manager-alidns-webhook`](https://github.com/crazygit/cert-manager-alidns-webhook)(Suport ACK RRSA)
 - [`cert-manager-webhook-abion`](https://github.com/abiondevelopment/cert-manager-webhook-abion)
 - [`cert-manager-webhook-arvan`](https://github.com/kiandigital/cert-manager-webhook-arvan)
 - [`cert-manager-webhook-civo`](https://github.com/okteto/cert-manager-webhook-civo)
