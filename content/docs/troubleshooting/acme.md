@@ -192,6 +192,8 @@ You can also see some additional information about the state of the [ACME author
 $ kubectl get challenge <challenge-name> -ojsonpath='{.spec.authorizationURL}'
 ```
 
+In case your Challenge is in the State "errored", once you resolved the underlying issue, you can safely delete it. cert-manager will then request a new Challenge and retry.
+
 ### HTTP01 troubleshooting
 First of all check if you can see the challenge URL from the public internet, if this does not work check your Ingress and firewall configuration as well as the service and pod cert-manager created to solve the ACME challenge.
 If this does work check if your cluster can see it too. It is important to test this from inside a Pod. If you get a connection error it is suggested to check the cluster's network configuration.
