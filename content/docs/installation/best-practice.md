@@ -3,17 +3,27 @@ title: Best Practice
 description: |
     Learn about best practices for deploying cert-manager in production,
     and how to configure cert-manager to comply with popular security standards
-    such as those produced by the CIS, NSA, and BSI.
+    such as those produced by the CIS, NSA, BSI, and ENISA.
 ---
 
-In this section you will learn how to configure cert-manager to comply with popular security standards such as
-the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/),
-the [NSA Kubernetes Hardening Guide](https://media.defense.gov/2022/Aug/29/2003066362/-1/-1/0/CTR_KUBERNETES_HARDENING_GUIDANCE_1.2_20220829.PDF), or
-the [BSI Kubernetes Security Recommendations](https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Grundschutz/International/bsi_it_gs_comp_2022.pdf?__blob=publicationFile&v=2#page=475).
+In this section you will learn how to configure cert-manager to comply with popular security standards
+and hardening guidelines for Kubernetes. The recommendations in this guide are informed by the
+following standards:
 
-And you will learn about best practices for deploying cert-manager in production;
-such as those enforced by tools like [Datree and its built in rules](https://hub.datree.io/built-in-rules),
-and those documented by the likes of [LearnKube in their "Kubernetes production best practices" checklist](https://learnkube.com/production-best-practices/).
+- [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/), published by the
+  Center for Internet Security, covering secure configuration of Kubernetes components including TLS,
+  RBAC, and network policies.
+- [NSA/CISA Kubernetes Hardening Guide](https://media.defense.gov/2022/Aug/29/2003066362/-1/-1/0/CTR_KUBERNETES_HARDENING_GUIDANCE_1.2_20220829.PDF)
+  (v1.2, August 2022), joint guidance from the United States National Security Agency and CISA on hardening
+  Kubernetes clusters against supply chain, threat actor, and insider risks.
+- [BSI IT-Grundschutz Compendium](https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Grundschutz/International/bsi_it_gs_comp_2022.pdf?__blob=publicationFile&v=2),
+  Germany's Federal Office for Information Security (BSI) baseline protection framework, including
+  module APP.4.4 for Kubernetes.
+- [ENISA NIS2 Technical Implementation Guidance](https://www.enisa.europa.eu/publications/nis2-technical-implementation-guidance),
+  published by the EU Agency for Cybersecurity, providing practical guidance and standard mappings for
+  implementing the cybersecurity risk-management measures required by
+  [Commission Implementing Regulation (EU) 2024/2690](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2690)
+  under the [NIS2 Directive (EU 2022/2555)](https://eur-lex.europa.eu/eli/dir/2022/2555).
 
 ## Overview
 
