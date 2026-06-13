@@ -119,7 +119,7 @@ Only the last patch release of each branch is supported.
 
 Technical assistance is offered on a best-effort basis for supported
 releases only. You can request support from the community on [Kubernetes
-Slack](https://slack.k8s.io/) (in the `#cert-manager` channel), using
+Slack](https://slack.k8s.io/) (in the [`#cert-manager`](https://kubernetes.slack.com/messages/cert-manager) or [`#cert-manager-dev`](https://kubernetes.slack.com/messages/cert-manager-dev) channels), using
 [GitHub Discussions][discussions] or using the [cert-manager-dev][group]
 Google group.
 
