@@ -12,6 +12,9 @@ This section also includes the following guides:
   Learn more about how the ACME issuer works and how to diagnose problems with it.
 * [Troubleshooting Problems with the Webhook](./webhook.md):
   Learn how to diagnose problems with the cert-manager webhook.
+* [Troubleshooting Certificate Re-issuance Loops](./certificate-reissuing-loop.md):
+  Diagnose and fix infinite re-issuance loops caused by Secret conflicts with
+  external operators.
 
 ## Overview
 

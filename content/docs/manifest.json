@@ -725,6 +725,10 @@
             {
               "title": "Troubleshooting webhook",
               "path": "/docs/troubleshooting/webhook.md"
+            },
+            {
+              "title": "Troubleshooting Certificate Re-issuance Loops",
+              "path": "/docs/troubleshooting/certificate-reissuing-loop.md"
             }
           ]
         },
