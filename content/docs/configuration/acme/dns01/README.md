@@ -164,6 +164,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-alidns-webhook`](https://github.com/DEVmachine-fr/cert-manager-alidns-webhook)
 - [`cert-manager-webhook-abion`](https://github.com/abiondevelopment/cert-manager-webhook-abion)
 - [`cert-manager-webhook-arvan`](https://github.com/kiandigital/cert-manager-webhook-arvan)
+- [`cert-manager-webhook-bunny`](https://github.com/aardbol/cert-manager-webhook-bunny)
 - [`cert-manager-webhook-civo`](https://github.com/okteto/cert-manager-webhook-civo)
 - [`cert-manager-webhook-dnspod`](https://github.com/qqshfox/cert-manager-webhook-dnspod)
 - [`cert-manager-webhook-dnsimple`](https://github.com/neoskop/cert-manager-webhook-dnsimple)
