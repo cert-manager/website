@@ -60,7 +60,7 @@ spec:
           # API Tokens are recommended: they are scoped to specific zones and
           # permissions and are easily revocable. Create the secret first, e.g.:
           # kubectl create secret generic cloudflare-api-token-secret \
-          #   --from-literal=api-token=<API Token>
+          #   --from-literal=api-token="$CLOUDFLARE_API_TOKEN"
           apiTokenSecretRef:
             name: cloudflare-api-token-secret
             key: api-token
