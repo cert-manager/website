@@ -5,9 +5,10 @@ description: 'cert-manager configuration: CyberArk Issuers'
 
 ## Introduction
 
-The CyberArk `Issuer` obtains certificates from
-[CyberArk Certificate Manager](https://www.cyberark.com/products/certificate-manager/) SaaS or Self-Hosted,
-or from [Palo Alto Networks Next Generation Trust Services (NGTS)](https://www.paloaltonetworks.com/sase).
+The CyberArk `Issuer` obtains certificates from [CyberArk Certificate
+Manager](https://www.cyberark.com/products/certificate-manager/) SaaS or
+Self-Hosted, or from [Palo Alto Networks Next-Generation Trust Security
+(NGTS)][ngts].
 
 The `Issuer` was formerly known as the Venafi `Issuer`, and for backwards compatibility reasons is configured using older product names - "Venafi Cloud" corresponds to CyberArk Certificate Manager SaaS and "Venafi TPP" corresponds to CyberArk Certificate Manager Self-Hosted.
 
@@ -283,12 +284,14 @@ You are now ready to issue certificates using the newly provisioned CyberArk
 Read the [Requesting Certificates](../usage/certificate.md) document for
 more information on how to create Certificate resources.
 
-## Creating an Issuer for Palo Alto Networks Next Generation Trust Services
+## Creating an Issuer for Palo Alto Networks Next-Generation Trust Security
 
-The CyberArk `Issuer` supports [Palo Alto Networks Next Generation Trust
-Services (NGTS)](https://www.paloaltonetworks.com/sase), a cloud-native
-certificate management platform. Authentication uses OAuth 2.0 Client
-Credentials, so no API key or username/password is required.
+The CyberArk `Issuer` supports [Palo Alto Networks Next-Generation Trust
+Security (NGTS)][ngts], a cloud-native certificate management platform.
+Authentication uses OAuth 2.0 Client Credentials, so no API key or
+username/password is required.
+
+[ngts]: https://www.paloaltonetworks.com/network-security/next-gen-trust-security
 
 In order to set up an NGTS `Issuer`, you must first create a Kubernetes
 `Secret` resource containing your OAuth 2.0 client credentials. The secret
@@ -317,7 +320,7 @@ or `ClusterIssuer` resource. If you are creating a `ClusterIssuer` resource,
 you must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
 
-The `zone` is the name of the Certificate Issuing Template (CIT) in NGTS that will be used to issue certificates. Unlike CyberArk Certificate Manager SaaS, NGTS does not use an Application prefix — the zone is just the CIT name.
+The `zone` is the name of the Certificate Issuing Template (CIT) in NGTS that will be used to issue certificates. Unlike CyberArk Certificate Manager SaaS which requires both an Application name and CIT alias in the format `Application\CIT`, NGTS only requires the CIT name.
 
 Save the below content after making your amendments to a file named
 `issuer.yaml`.
