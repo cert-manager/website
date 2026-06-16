@@ -90,6 +90,8 @@ fao
 4molybdenum2
 jetstack-bot
 codegen
+controlplane
+exfiltration
 yongk802
 yanggangtony
 andreadecorte
@@ -540,6 +542,7 @@ runtime
 runtimes
 signoff
 sigstore
+solidserver
 status.condition
 stdout
 subchart
@@ -610,6 +613,7 @@ v1.19.1
 v1.2
 v1.20.0
 v1.19.2
+v1.19.5
 v1.20.0
 v1.19.x
 v1.20.0
@@ -660,6 +664,9 @@ v1.12.1.
 v1.12.2.
 v1.12.3.
 v1.15.0.
+v1.20.0
+v1.20.1
+v1.20.2
 v1alpha1
 v1alpha2
 v1alpha3

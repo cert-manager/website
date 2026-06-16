@@ -15,6 +15,15 @@ These terms are defined in the [TLS Terminology page](../reference/tls-terminolo
 
 These terms are defined in the [TLS Terminology page](../reference/tls-terminology.md).
 
+## Security
+
+### Are there any public security documents I can review for cert-manager?
+
+The wider community has contributed a couple of high-quality security documents:
+
+- [Hardening Guide and Threat Model](https://cert-manager.io/docs/announcements/controlplane-2026-cert-manager-hardening-guide.pdf) by ControlPlane, March 2026
+- [Graduation Security Audit](https://cert-manager.io/docs/announcements/AdaLogics-2023-cert-manager-audit-report.pdf) by AdaLogics, March, 2024
+
 ## Certificates
 
 ### Can I trigger a renewal from cert-manager at will?

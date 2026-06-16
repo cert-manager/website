@@ -168,7 +168,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-dnspod`](https://github.com/qqshfox/cert-manager-webhook-dnspod)
 - [`cert-manager-webhook-dnsimple`](https://github.com/neoskop/cert-manager-webhook-dnsimple)
 - [`cert-manager-webhook-exoscale`](https://github.com/glasskube/cert-manager-webhook-exoscale)
-- [`cert-manager-webhook-gandi`](https://github.com/bwolf/cert-manager-webhook-gandi)
+- [`cert-manager-webhook-gandi`](https://github.com/SINTEF/cert-manager-webhook-gandi)
 - [`cert-manager-webhook-glesys`](https://github.com/sthlmio/cert-manager-webhook-glesys)
 - [`cert-manager-webhook-hetzner`](https://github.com/vadimkim/cert-manager-webhook-hetzner)
 - [`cert-manager-webhook-ibmcis`](https://github.com/jb-dk/cert-manager-webhook-ibmcis)
