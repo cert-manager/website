@@ -60,8 +60,9 @@ networkPolicy:
   # with Network policies enabled. In production you should edit or remove these
   # to match your requirements.
 
-  # Example: Allow access to the HTTP01 solver pod for ACME HTTP01 self-checks
-  # Only needed if your cluster users use the ACME issuer with HTTP01
+  # Example: Allow the controller to reach the challenge URL for ACME HTTP01 self-checks.
+  # The controller performs the self-check via the ingress (port 80), not directly to the solver pod.
+  # Only needed if your cluster users use the ACME issuer with HTTP01.
   - ports:
     - port: 80
       protocol: TCP

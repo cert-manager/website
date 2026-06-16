@@ -155,6 +155,50 @@ Here is an overview of the network requirements:
    The cert-manager controller, webhook, and cainjector have metrics servers which listen for HTTP connections on TCP port 9402.
    Create a network policy which allows access to these services from your chosen metrics collector.
 
+### NetworkPolicy Examples for HTTP01 Challenges
+
+If you use an ACME Issuer configured for HTTP01,
+cert-manager dynamically creates solver pods in the namespace of the Challenge resource.
+These pods are labelled with `acme.cert-manager.io/http01-solver: "true"` and listen on TCP port 8089.
+
+The traffic flow for HTTP01 validation is:
+
+1. **ACME server (e.g. Let's Encrypt) → Your ingress/load balancer → Ingress controller → solver pod** (port 8089)
+2. **cert-manager controller → ingress/load balancer** (port 80) for the self-check — this follows the same path as the ACME server.
+
+The cert-manager controller does **not** connect directly to the solver pod.
+The controller's self-check ([`testReachability`](https://github.com/cert-manager/cert-manager/blob/main/pkg/issuer/acme/http/http.go#L215))
+sends an HTTP GET to the challenge URL on port 80 through your ingress,
+the same path the ACME server will use.
+The default egress rules in the Helm chart and the example rules below already permit port 80 outbound traffic for this purpose.
+
+The NetworkPolicy you need is an **ingress rule** in the solver pod's namespace
+that allows traffic from your **ingress controller** to the solver pods on TCP port 8089:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-acmesolver-from-ingress-controller
+spec:
+  podSelector:
+    matchLabels:
+      acme.cert-manager.io/http01-solver: "true"
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: ingress-nginx  # adjust for your ingress controller
+    ports:
+    - port: 8089
+      protocol: TCP
+```
+
+> ℹ️ Replace `ingress-nginx` with the namespace of your ingress controller
+> (e.g., `istio-system` for Istio, `projectcontour` for Contour, `traefik` for Traefik, etc.).
+> The `namespaceSelector` above uses `kubernetes.io/metadata.name`, which is automatically added by Kubernetes 1.21+.
+> If you are on an older cluster, ensure the ingress controller's namespace has a matching label.
+
 ## Isolate cert-manager on dedicated node pools
 
 cert-manager is a cluster scoped operator and you should treat it as part of your platform's control plane.
