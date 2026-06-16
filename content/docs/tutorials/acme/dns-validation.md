@@ -57,12 +57,13 @@ spec:
         - example.org
       dns01:
         cloudflare:
-          email: my-cloudflare-acc@example.com
-          # !! Remember to create a k8s secret before
-          # kubectl create secret generic cloudflare-api-key-secret
-          apiKeySecretRef:
-            name: cloudflare-api-key-secret
-            key: api-key
+          # API Tokens are recommended: they are scoped to specific zones and
+          # permissions and are easily revocable. Create the secret first, e.g.:
+          # kubectl create secret generic cloudflare-api-token-secret \
+          #   --from-literal=api-token="$CLOUDFLARE_API_TOKEN"
+          apiTokenSecretRef:
+            name: cloudflare-api-token-secret
+            key: api-token
 ```
 
 
