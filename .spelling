@@ -537,6 +537,7 @@ runtime
 runtimes
 signoff
 sigstore
+solidserver
 status.condition
 stdout
 subchart

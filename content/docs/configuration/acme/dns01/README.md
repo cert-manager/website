@@ -187,6 +187,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-scaleway`](https://github.com/scaleway/cert-manager-webhook-scaleway)
 - [`cert-manager-webhook-selectel`](https://github.com/selectel/cert-manager-webhook-selectel)
 - [`cert-manager-webhook-softlayer`](https://github.com/cgroschupp/cert-manager-webhook-softlayer)
+- [`cert-manager-webhook-solidserver`](https://github.com/niklas-letz/cert-manager-webhook-solidserver)
 - [`cert-manager-webhook-vercel`](https://github.com/rhythmbhiwani/cert-manager-webhook-vercel)
 - [`cert-manager-webhook-yandex-cloud`](https://github.com/malinink/cert-manager-webhook-yandex-cloud)
 - [`cert-manager-webhook-zilore`](https://gitlab.com/zilore/cert-manager-webhook-zilore)
