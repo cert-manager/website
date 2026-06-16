@@ -11,8 +11,8 @@
     }
   ],
   "engines": {
-    "npm": ">=10.0.0",
-    "node": ">=20.19.0"
+    "npm": "11.x",
+    "node": "24.x"
   },
   "scripts": {
     "dev": "next dev",
@@ -56,11 +56,11 @@
     "child_process": false
   },
   "dependencies": {
-    "@docsearch/react": "4.6.2",
-    "@headlessui/react": "2.2.9",
+    "@docsearch/react": "4.6.3",
+    "@headlessui/react": "2.2.10",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
-    "@next/mdx": "16.2.1",
+    "@next/mdx": "16.2.9",
     "classnames": "2.5.1",
     "compare-versions": "6.1.1",
     "copy-to-clipboard": "^3.3.3",
@@ -71,8 +71,8 @@
     "next-seo": "6.8.0",
     "prism-react-renderer": "2.4.1",
     "prismjs": "^1.30.0",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
     "react-scroll": "1.9.3",
     "rehype-autolink-headings": "7.1.0",
     "rehype-external-links": "3.0.0",
@@ -83,33 +83,32 @@
     "unist-util-visit": "5.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.4",
-    "@next/eslint-plugin-next": "16.2.1",
+    "@eslint-react/eslint-plugin": "5.8.19",
+    "@eslint/js": "10.0.1",
+    "@next/eslint-plugin-next": "16.2.9",
     "@tailwindcss/aspect-ratio": "0.4.2",
     "@tailwindcss/forms": "0.5.11",
-    "@tailwindcss/postcss": "4.2.2",
-    "@tailwindcss/typography": "0.5.19",
-    "concurrently": "9.2.1",
-    "cspell": "9.7.0",
-    "eslint": "9.39.4",
-    "eslint-config-next": "16.2.1",
+    "@tailwindcss/postcss": "4.3.1",
+    "@tailwindcss/typography": "0.5.20",
+    "concurrently": "10.0.3",
+    "cspell": "10.0.1",
+    "eslint": "10.5.0",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-mdx": "3.7.0",
-    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-mdx": "3.8.1",
     "format-api-docs": "file:scripts/gendocs/postprocess",
-    "globals": "17.4.0",
+    "globals": "17.6.0",
     "markdown-link-check": "3.14.2",
     "next-sitemap": "4.2.3",
-    "postcss": "8.5.8",
-    "prettier": "3.8.1",
+    "postcss": "8.5.15",
+    "prettier": "3.8.4",
     "remark-cli": "12.0.1",
     "remark-code-import": "1.2.0",
     "remark-lint": "10.0.1",
     "remark-preset-lint-consistent": "6.0.1",
     "remark-preset-lint-recommended": "7.0.1",
     "remark-toc": "9.0.0",
-    "stylelint": "17.6.0",
+    "stylelint": "17.13.0",
     "stylelint-config-standard": "40.0.0",
-    "tailwindcss": "4.2.2"
+    "tailwindcss": "4.3.1"
   }
 }

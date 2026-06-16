@@ -72,6 +72,18 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+## `v1.19.5`
+
+This is a simple patch release to fix some reported vulnerabilities. All users are recommended to upgrade.
+
+## Changes by Kind
+
+### Other (Cleanup or Flake)
+
+- Bump go dependencies with reported vulnerabilities ([#8706](https://github.com/cert-manager/cert-manager/pull/8706), [@erikgb](https://github.com/erikgb))
+- Bump go to 1.25.8 to address several reported vulnerabilities ([#8628](https://github.com/cert-manager/cert-manager/pull/8628), [@SgtCoDFish](https://github.com/SgtCoDFish))
+- Bump go to 1.25.9 ([#8705](https://github.com/cert-manager/cert-manager/pull/8705), [@erikgb](https://github.com/erikgb))
+
 ## `v1.19.4`
 
 This is a simple patch release to fix some reported vulnerabilities - notably [`CVE-2026-24051`](https://github.com/advisories/GHSA-9h8m-3fm2-qjrq) and [`CVE-2025-68121`](https://github.com/advisories/GHSA-h355-32pf-p2xm). All users should upgrade.
