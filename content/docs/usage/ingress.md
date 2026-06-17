@@ -191,7 +191,7 @@ trigger `Certificate` resources to be automatically created:
   set the `spec.secretTemplate` field of the generated Certificate.
   The value is a JSON representation of `secretTemplate` and must not contain any unknown fields.
   `secretTemplate` accepts `annotations` and `labels` maps, which are copied onto the `Secret` that stores the certificate.
-  For example: `cert-manager.io/secret-template: '{"labels": {"my-label": "value"}, "annotations": {"kubed.appscode.com/sync": "true"}}'`.
+  For example: `cert-manager.io/secret-template: '{"labels": {"team": "platform"}, "annotations": {"example.com/owner": "platform"}}'`.
 
 ## Copying annotations to the Certificate
 
