@@ -23,7 +23,7 @@ following standards:
   published by the EU Agency for Cybersecurity, providing practical guidance and standard mappings for
   implementing the cybersecurity risk-management measures required by
   [Commission Implementing Regulation (EU) 2024/2690](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2690)
-  under the [NIS2 Directive (EU 2022/2555)](https://eur-lex.europa.eu/eli/dir/2022/2555).
+  under the [NIS2 Directive (EU 2022/2555)](https://eur-lex.europa.eu/eli/dir/2022/2555). This document covers organisational cryptographic policy rather than Kubernetes-specific hardening.
 
 ## Overview
 
