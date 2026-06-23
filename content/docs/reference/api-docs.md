@@ -120,7 +120,7 @@ description: >-
               <em>string</em>
             </td>
             <td>
-              <p> dnsName is the identifier that this challenge is for, e.g., example.com. If the requested DNSName is a &lsquo;wildcard&rsquo;, this field MUST be set to the non-wildcard domain, e.g., for <code>*.example.com</code>, it must be <code>example.com</code>. </p>
+              <p>dnsName is the identifier that this challenge is for, e.g., example.com. If the requested DNSName is a &lsquo;wildcard&rsquo;, this field MUST be set to the non-wildcard domain, e.g., for <code>*.example.com</code>, it must be <code>example.com</code>.</p>
             </td>
           </tr>
           <tr>
@@ -163,12 +163,10 @@ description: >-
               <em>string</em>
             </td>
             <td>
-              <p>
-                The ACME challenge key for this challenge For HTTP01 challenges, this is the value that must be responded with to complete the HTTP01 challenge in the format:
+              <p>The ACME challenge key for this challenge For HTTP01 challenges, this is the value that must be responded with to complete the HTTP01 challenge in the format:
                 <code>&lt;private key JWK thumbprint&gt;.&lt;key from acme server for challenge&gt;</code>. For DNS01 challenges, this is the base64 encoded SHA256 sum of the
                 <code>&lt;private key JWK thumbprint&gt;.&lt;key from acme server for challenge&gt;</code>
-                text that must be set as the TXT record content.
-              </p>
+                text that must be set as the TXT record content.</p>
             </td>
           </tr>
           <tr>
@@ -295,7 +293,7 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> CommonName is the common name as specified on the DER encoded CSR. If specified, this value must also be present in <code>dnsNames</code> or <code>ipAddresses</code>. This field must match the corresponding field on the DER encoded CSR. </p>
+              <p>CommonName is the common name as specified on the DER encoded CSR. If specified, this value must also be present in <code>dnsNames</code> or <code>ipAddresses</code>. This field must match the corresponding field on the DER encoded CSR.</p>
             </td>
           </tr>
           <tr>
@@ -362,7 +360,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEAuthorization">ACMEAuthorization</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.OrderStatus">OrderStatus</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.OrderStatus">OrderStatus</a>)</p>
 <div>
   <p>ACMEAuthorization contains data returned from the ACME server on an authorization that must be completed in order validate a DNS name on an ACME Order resource.</p>
 </div>
@@ -403,7 +401,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Wildcard will be true if this authorization is for a wildcard DNS name. If this is true, the identifier will be the <em>non-wildcard</em> version of the DNS name. For example, if &lsquo;*.example.com&rsquo; is the DNS name being validated, this field will be &lsquo;true&rsquo; and the &lsquo;identifier&rsquo; field will be &lsquo;example.com&rsquo;. </p>
+        <p>Wildcard will be true if this authorization is for a wildcard DNS name. If this is true, the identifier will be the <em>non-wildcard</em> version of the DNS name. For example, if &lsquo;*.example.com&rsquo; is the DNS name being validated, this field will be &lsquo;true&rsquo; and the &lsquo;identifier&rsquo; field will be &lsquo;example.com&rsquo;.</p>
       </td>
     </tr>
     <tr>
@@ -435,7 +433,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallenge">ACMEChallenge</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEAuthorization">ACMEAuthorization</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEAuthorization">ACMEAuthorization</a>)</p>
 <div>
   <p>Challenge specifies a challenge offered by the ACME server for an Order. An appropriate Challenge resource can be created to perform the ACME challenge process.</p>
 </div>
@@ -480,7 +478,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolver">ACMEChallengeSolver</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuer">ACMEIssuer</a>, <a href="#acme.cert-manager.io/v1.ChallengeSpec">ChallengeSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuer">ACMEIssuer</a>, <a href="#acme.cert-manager.io/v1.ChallengeSpec">ChallengeSpec</a>)</p>
 <div>
   <p>An ACMEChallengeSolver describes how to solve ACME challenges for the issuer it is part of. A selector may be provided to use different solving strategies for different DNS names. Only one of HTTP01 or DNS01 must be provided.</p>
 </div>
@@ -515,7 +513,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Configures cert-manager to attempt to complete authorizations by performing the HTTP01 challenge flow. It is not possible to obtain certificates for wildcard domain names (e.g., <code>*.example.com</code>) using the HTTP01 challenge mechanism. </p>
+        <p>Configures cert-manager to attempt to complete authorizations by performing the HTTP01 challenge flow. It is not possible to obtain certificates for wildcard domain names (e.g., <code>*.example.com</code>) using the HTTP01 challenge mechanism.</p>
       </td>
     </tr>
     <tr>
@@ -534,7 +532,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolver">ACMEChallengeSolver</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolver">ACMEChallengeSolver</a>)</p>
 <div>
   <p>Used to configure a DNS01 challenge provider to be used when solving DNS01 challenges. Only one DNS provider may be configured per solver.</p>
 </div>
@@ -647,7 +645,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Use the &lsquo;ACME DNS&rsquo; (<a href="https://github.com/joohoi/acme-dns">https://github.com/joohoi/acme-dns</a>) API to manage DNS01 challenge records. </p>
+        <p>Use the &lsquo;ACME DNS&rsquo; (<a href="https://github.com/joohoi/acme-dns">https://github.com/joohoi/acme-dns</a>) API to manage DNS01 challenge records.</p>
       </td>
     </tr>
     <tr>
@@ -660,7 +658,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Use RFC2136 (&ldquo;Dynamic Updates in the Domain Name System&rdquo;) (<a href="https://datatracker.ietf.org/doc/rfc2136/">https://datatracker.ietf.org/doc/rfc2136/</a>) to manage DNS01 challenge records. </p>
+        <p>Use RFC2136 (&ldquo;Dynamic Updates in the Domain Name System&rdquo;) (<a href="https://datatracker.ietf.org/doc/rfc2136/">https://datatracker.ietf.org/doc/rfc2136/</a>) to manage DNS01 challenge records.</p>
       </td>
     </tr>
     <tr>
@@ -679,7 +677,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01">ACMEChallengeSolverHTTP01</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolver">ACMEChallengeSolver</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolver">ACMEChallengeSolver</a>)</p>
 <div>
   <p>ACMEChallengeSolverHTTP01 contains configuration detailing how to solve HTTP01 challenges within a Kubernetes cluster. Typically this is accomplished through creating &lsquo;routes&rsquo; of some description that configure ingress controllers to direct traffic to &lsquo;solver pods&rsquo;, which are responsible for responding to the ACME server&rsquo;s HTTP requests. Only one of Ingress / Gateway can be specified.</p>
 </div>
@@ -714,13 +712,13 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The Gateway API is a sig-network community API that models service networking in Kubernetes (<a href="https://gateway-api.sigs.k8s.io/">https://gateway-api.sigs.k8s.io/</a>). The Gateway solver will create HTTPRoutes with the specified labels in the same namespace as the challenge. This solver is experimental, and fields / behaviour may change in the future. </p>
+        <p>The Gateway API is a sig-network community API that models service networking in Kubernetes (<a href="https://gateway-api.sigs.k8s.io/">https://gateway-api.sigs.k8s.io/</a>). The Gateway solver will create HTTPRoutes with the specified labels in the same namespace as the challenge. This solver is experimental, and fields / behaviour may change in the future.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01GatewayHTTPRoute">ACMEChallengeSolverHTTP01GatewayHTTPRoute</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01">ACMEChallengeSolverHTTP01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01">ACMEChallengeSolverHTTP01</a>)</p>
 <div>
   <p>The ACMEChallengeSolverHTTP01GatewayHTTPRoute solver will create HTTPRoute objects for a Gateway class routing to an ACME challenge solver pod.</p>
 </div>
@@ -764,10 +762,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>
-          When solving an HTTP-01 challenge, cert-manager creates an HTTPRoute. cert-manager needs to know which parentRefs should be used when creating the HTTPRoute. Usually, the parentRef references a Gateway. See:
-          <a href="https://gateway-api.sigs.k8s.io/api-types/httproute/#attaching-to-gateways">https://gateway-api.sigs.k8s.io/api-types/httproute/#attaching-to-gateways</a>
-        </p>
+        <p>When solving an HTTP-01 challenge, cert-manager creates an HTTPRoute. cert-manager needs to know which parentRefs should be used when creating the HTTPRoute. Usually, the parentRef references a Gateway. See:
+          <a href="https://gateway-api.sigs.k8s.io/api-types/httproute/#attaching-to-gateways">https://gateway-api.sigs.k8s.io/api-types/httproute/#attaching-to-gateways</a></p>
       </td>
     </tr>
     <tr>
@@ -786,7 +782,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress">ACMEChallengeSolverHTTP01Ingress</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01">ACMEChallengeSolverHTTP01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01">ACMEChallengeSolverHTTP01</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -817,7 +813,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> This field configures the field <code>ingressClassName</code> on the created Ingress resources used to solve ACME challenges that use this challenge solver. This is the recommended way of configuring the ingress class. Only one of <code>class</code>, <code>name</code> or <code>ingressClassName</code> may be specified. </p>
+        <p>This field configures the field <code>ingressClassName</code> on the created Ingress resources used to solve ACME challenges that use this challenge solver. This is the recommended way of configuring the ingress class. Only one of <code>class</code>, <code>name</code> or <code>ingressClassName</code> may be specified.</p>
       </td>
     </tr>
     <tr>
@@ -828,7 +824,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> This field configures the annotation <code>kubernetes.io/ingress.class</code> when creating Ingress resources to solve ACME challenges that use this challenge solver. Only one of <code>class</code>, <code>name</code> or <code>ingressClassName</code> may be specified. </p>
+        <p>This field configures the annotation <code>kubernetes.io/ingress.class</code> when creating Ingress resources to solve ACME challenges that use this challenge solver. Only one of <code>class</code>, <code>name</code> or <code>ingressClassName</code> may be specified.</p>
       </td>
     </tr>
     <tr>
@@ -839,7 +835,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The name of the ingress resource that should have ACME challenge solving routes inserted into it in order to solve HTTP01 challenges. This is typically used in conjunction with ingress controllers like ingress-gce, which maintains a 1:1 mapping between external IPs and ingress resources. Only one of <code>class</code>, <code>name</code> or <code>ingressClassName</code> may be specified. </p>
+        <p>The name of the ingress resource that should have ACME challenge solving routes inserted into it in order to solve HTTP01 challenges. This is typically used in conjunction with ingress controllers like ingress-gce, which maintains a 1:1 mapping between external IPs and ingress resources. Only one of <code>class</code>, <code>name</code> or <code>ingressClassName</code> may be specified.</p>
       </td>
     </tr>
     <tr>
@@ -871,7 +867,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressObjectMeta">ACMEChallengeSolverHTTP01IngressObjectMeta</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressTemplate">ACMEChallengeSolverHTTP01IngressTemplate</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressTemplate">ACMEChallengeSolverHTTP01IngressTemplate</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -906,7 +902,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodObjectMeta">ACMEChallengeSolverHTTP01IngressPodObjectMeta</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodTemplate">ACMEChallengeSolverHTTP01IngressPodTemplate</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodTemplate">ACMEChallengeSolverHTTP01IngressPodTemplate</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -941,7 +937,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodResources">ACMEChallengeSolverHTTP01IngressPodResources</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSpec">ACMEChallengeSolverHTTP01IngressPodSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSpec">ACMEChallengeSolverHTTP01IngressPodSpec</a>)</p>
 <div>
   <p>ACMEChallengeSolverHTTP01IngressPodResources defines resource requirements for ACME HTTP01 solver pods. To keep API surface essential, this trims down the &lsquo;corev1.ResourceRequirements&rsquo; type to only include the Requests and Limits fields.</p>
 </div>
@@ -963,7 +959,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Limits describes the maximum amount of compute resources allowed. More info: <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</a> </p>
+        <p>Limits describes the maximum amount of compute resources allowed. More info: <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</a></p>
       </td>
     </tr>
     <tr>
@@ -976,13 +972,13 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to the global values configured via controller flags. Requests cannot exceed Limits. More info: <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</a> </p>
+        <p>Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to the global values configured via controller flags. Requests cannot exceed Limits. More info: <a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/</a></p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSecurityContext">ACMEChallengeSolverHTTP01IngressPodSecurityContext</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSpec">ACMEChallengeSolverHTTP01IngressPodSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSpec">ACMEChallengeSolverHTTP01IngressPodSpec</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -1108,7 +1104,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodSpec">ACMEChallengeSolverHTTP01IngressPodSpec</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodTemplate">ACMEChallengeSolverHTTP01IngressPodTemplate</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodTemplate">ACMEChallengeSolverHTTP01IngressPodTemplate</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -1126,7 +1122,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node&rsquo;s labels for the pod to be scheduled on that node. More info: <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/">https://kubernetes.io/docs/concepts/configuration/assign-pod-node/</a> </p>
+        <p>NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node&rsquo;s labels for the pod to be scheduled on that node. More info: <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/">https://kubernetes.io/docs/concepts/configuration/assign-pod-node/</a></p>
       </td>
     </tr>
     <tr>
@@ -1219,7 +1215,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressPodTemplate">ACMEChallengeSolverHTTP01IngressPodTemplate</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01GatewayHTTPRoute">ACMEChallengeSolverHTTP01GatewayHTTPRoute</a>, <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress">ACMEChallengeSolverHTTP01Ingress</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01GatewayHTTPRoute">ACMEChallengeSolverHTTP01GatewayHTTPRoute</a>, <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress">ACMEChallengeSolverHTTP01Ingress</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -1264,7 +1260,7 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node&rsquo;s labels for the pod to be scheduled on that node. More info: <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/">https://kubernetes.io/docs/concepts/configuration/assign-pod-node/</a> </p>
+              <p>NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node&rsquo;s labels for the pod to be scheduled on that node. More info: <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/">https://kubernetes.io/docs/concepts/configuration/assign-pod-node/</a></p>
             </td>
           </tr>
           <tr>
@@ -1360,7 +1356,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01IngressTemplate">ACMEChallengeSolverHTTP01IngressTemplate</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress">ACMEChallengeSolverHTTP01Ingress</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverHTTP01Ingress">ACMEChallengeSolverHTTP01Ingress</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -1386,7 +1382,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEChallengeType"> ACMEChallengeType (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ChallengeSpec">ChallengeSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ChallengeSpec">ChallengeSpec</a>)</p>
 <div>
   <p>The type of ACME challenge. Only HTTP-01 and DNS-01 are supported.</p>
 </div>
@@ -1403,7 +1399,7 @@ description: >-
         <p>&#34;DNS-01&#34;</p>
       </td>
       <td>
-        <p> ACMEChallengeTypeDNS01 denotes a Challenge is of type dns-01 More info: <a href="https://letsencrypt.org/docs/challenge-types/#dns-01-challenge">https://letsencrypt.org/docs/challenge-types/#dns-01-challenge</a> </p>
+        <p>ACMEChallengeTypeDNS01 denotes a Challenge is of type dns-01 More info: <a href="https://letsencrypt.org/docs/challenge-types/#dns-01-challenge">https://letsencrypt.org/docs/challenge-types/#dns-01-challenge</a></p>
       </td>
     </tr>
     <tr>
@@ -1411,13 +1407,13 @@ description: >-
         <p>&#34;HTTP-01&#34;</p>
       </td>
       <td>
-        <p> ACMEChallengeTypeHTTP01 denotes a Challenge is of type http-01 More info: <a href="https://letsencrypt.org/docs/challenge-types/#http-01-challenge">https://letsencrypt.org/docs/challenge-types/#http-01-challenge</a> </p>
+        <p>ACMEChallengeTypeHTTP01 denotes a Challenge is of type http-01 More info: <a href="https://letsencrypt.org/docs/challenge-types/#http-01-challenge">https://letsencrypt.org/docs/challenge-types/#http-01-challenge</a></p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEExternalAccountBinding">ACMEExternalAccountBinding</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuer">ACMEIssuer</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuer">ACMEIssuer</a>)</p>
 <div>
   <p>ACMEExternalAccountBinding is a reference to a CA external account of the ACME server.</p>
 </div>
@@ -1446,7 +1442,7 @@ description: >-
         <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
-        <p> keySecretRef is a Secret Key Selector referencing a data item in a Kubernetes Secret which holds the symmetric MAC key of the External Account Binding. The <code>key</code> is the index string that is paired with the key data in the Secret and should not be confused with the key data itself, or indeed with the External Account Binding keyID above. The secret key stored in the Secret <strong>must</strong> be un-padded, base64 URL encoded data. </p>
+        <p>keySecretRef is a Secret Key Selector referencing a data item in a Kubernetes Secret which holds the symmetric MAC key of the External Account Binding. The <code>key</code> is the index string that is paired with the key data in the Secret and should not be confused with the key data itself, or indeed with the External Account Binding keyID above. The secret key stored in the Secret <strong>must</strong> be un-padded, base64 URL encoded data.</p>
       </td>
     </tr>
     <tr>
@@ -1465,7 +1461,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuer">ACMEIssuer</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>)</p>
 <div>
   <p>ACMEIssuer contains the specification for an ACME issuer. This uses the RFC8555 specification to obtain certificates by completing &lsquo;challenges&rsquo; to prove ownership of domain identifiers. Earlier draft versions of the ACME specification are not supported.</p>
 </div>
@@ -1495,7 +1491,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p> Server is the URL used to access the ACME server&rsquo;s &lsquo;directory&rsquo; endpoint. For example, for Let&rsquo;s Encrypt&rsquo;s staging endpoint, you would use: &ldquo;<a href='https://acme-staging-v02.api.letsencrypt.org/directory"'>https://acme-staging-v02.api.letsencrypt.org/directory&rdquo;</a>. Only ACME v2 endpoints (i.e. RFC 8555) are supported. </p>
+        <p>Server is the URL used to access the ACME server&rsquo;s &lsquo;directory&rsquo; endpoint. For example, for Let&rsquo;s Encrypt&rsquo;s staging endpoint, you would use: &ldquo;<a href='https://acme-staging-v02.api.letsencrypt.org/directory"'>https://acme-staging-v02.api.letsencrypt.org/directory&rdquo;</a>. Only ACME v2 endpoints (i.e. RFC 8555) are supported.</p>
       </td>
     </tr>
     <tr>
@@ -1551,7 +1547,7 @@ description: >-
         <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
-        <p> PrivateKey is the name of a Kubernetes Secret resource that will be used to store the automatically generated ACME account private key. Optionally, a <code>key</code> may be specified to select a specific entry within the named Secret resource. If <code>key</code> is not specified, a default of <code>tls.key</code> will be used. </p>
+        <p>PrivateKey is the name of a Kubernetes Secret resource that will be used to store the automatically generated ACME account private key. Optionally, a <code>key</code> may be specified to select a specific entry within the named Secret resource. If <code>key</code> is not specified, a default of <code>tls.key</code> will be used.</p>
       </td>
     </tr>
     <tr>
@@ -1564,7 +1560,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Solvers is a list of challenge solvers that will be used to solve ACME challenges for the matching domains. Solver configurations must be provided in order to obtain certificates from an ACME server. For more information, see: <a href="https://cert-manager.io/docs/configuration/acme/">https://cert-manager.io/docs/configuration/acme/</a> </p>
+        <p>Solvers is a list of challenge solvers that will be used to solve ACME challenges for the matching domains. Solver configurations must be provided in order to obtain certificates from an ACME server. For more information, see: <a href="https://cert-manager.io/docs/configuration/acme/">https://cert-manager.io/docs/configuration/acme/</a></p>
       </td>
     </tr>
     <tr>
@@ -1575,7 +1571,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Enables or disables generating a new ACME account key. If true, the Issuer resource will <em>not</em> request a new account but will expect the account key to be supplied via an existing secret. If false, the cert-manager system will generate a new ACME account key for the Issuer. Defaults to false. </p>
+        <p>Enables or disables generating a new ACME account key. If true, the Issuer resource will <em>not</em> request a new account but will expect the account key to be supplied via an existing secret. If false, the cert-manager system will generate a new ACME account key for the Issuer. Defaults to false.</p>
       </td>
     </tr>
     <tr>
@@ -1603,7 +1599,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAcmeDNS">ACMEIssuerDNS01ProviderAcmeDNS</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>)</p>
 <div>
   <p>ACMEIssuerDNS01ProviderAcmeDNS is a structure containing the configuration for ACME-DNS servers</p>
 </div>
@@ -1634,7 +1630,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAkamai">ACMEIssuerDNS01ProviderAkamai</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>)</p>
 <div>
   <p>ACMEIssuerDNS01ProviderAkamai is a structure containing the DNS configuration for Akamai DNS—Zone Record Management API</p>
 </div>
@@ -1681,7 +1677,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>)</p>
 <div>
   <p>ACMEIssuerDNS01ProviderAzureDNS is a structure containing the configuration for Azure DNS</p>
 </div>
@@ -1802,7 +1798,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderCloudDNS">ACMEIssuerDNS01ProviderCloudDNS</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>)</p>
 <div>
   <p>ACMEIssuerDNS01ProviderCloudDNS is a structure containing the DNS configuration for Google Cloud DNS</p>
 </div>
@@ -1846,9 +1842,9 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderCloudflare">ACMEIssuerDNS01ProviderCloudflare</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>)</p>
 <div>
-  <p> ACMEIssuerDNS01ProviderCloudflare is a structure containing the DNS configuration for Cloudflare. One of <code>apiKeySecretRef</code> or <code>apiTokenSecretRef</code> must be provided. </p>
+  <p>ACMEIssuerDNS01ProviderCloudflare is a structure containing the DNS configuration for Cloudflare. One of <code>apiKeySecretRef</code> or <code>apiTokenSecretRef</code> must be provided.</p>
 </div>
 <table>
   <thead>
@@ -1894,7 +1890,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderDigitalOcean">ACMEIssuerDNS01ProviderDigitalOcean</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>)</p>
 <div>
   <p>ACMEIssuerDNS01ProviderDigitalOcean is a structure containing the DNS configuration for DigitalOcean Domains</p>
 </div>
@@ -1917,7 +1913,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRFC2136">ACMEIssuerDNS01ProviderRFC2136</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>)</p>
 <div>
   <p>ACMEIssuerDNS01ProviderRFC2136 is a structure containing the configuration for RFC2136 DNS</p>
 </div>
@@ -1947,7 +1943,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The name of the secret containing the TSIG value. If <code>tsigKeyName</code> is defined, this field is required. </p>
+        <p>The name of the secret containing the TSIG value. If <code>tsigKeyName</code> is defined, this field is required.</p>
       </td>
     </tr>
     <tr>
@@ -1958,7 +1954,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The TSIG Key name configured in the DNS. If <code>tsigSecretSecretRef</code> is defined, this field is required. </p>
+        <p>The TSIG Key name configured in the DNS. If <code>tsigSecretSecretRef</code> is defined, this field is required.</p>
       </td>
     </tr>
     <tr>
@@ -1969,7 +1965,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The TSIG Algorithm configured in the DNS supporting RFC2136. Used only when <code>tsigSecretSecretRef</code> and <code>tsigKeyName</code> are defined. Supported values are (case-insensitive): <code>HMACMD5</code> (default), <code>HMACSHA1</code>, <code>HMACSHA256</code> or <code>HMACSHA512</code>. </p>
+        <p>The TSIG Algorithm configured in the DNS supporting RFC2136. Used only when <code>tsigSecretSecretRef</code> and <code>tsigKeyName</code> are defined. Supported values are (case-insensitive): <code>HMACMD5</code> (default), <code>HMACSHA1</code>, <code>HMACSHA256</code> or <code>HMACSHA512</code>.</p>
       </td>
     </tr>
     <tr>
@@ -1982,13 +1978,13 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Protocol to use for dynamic DNS update queries. Valid values are (case-sensitive) <code>TCP</code> and <code>UDP</code>; <code>UDP</code> (default). </p>
+        <p>Protocol to use for dynamic DNS update queries. Valid values are (case-sensitive) <code>TCP</code> and <code>UDP</code>; <code>UDP</code> (default).</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRoute53">ACMEIssuerDNS01ProviderRoute53</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>)</p>
 <div>
   <p>ACMEIssuerDNS01ProviderRoute53 is a structure containing the Route 53 configuration for AWS</p>
 </div>
@@ -2021,7 +2017,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The AccessKeyID is used for authentication. Cannot be set when SecretAccessKeyID is set. If neither the Access Key nor Key ID are set, we fall back to using env vars, shared credentials file, or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
+        <p>The AccessKeyID is used for authentication. Cannot be set when SecretAccessKeyID is set. If neither the Access Key nor Key ID are set, we fall back to using env vars, shared credentials file, or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a></p>
       </td>
     </tr>
     <tr>
@@ -2032,7 +2028,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The SecretAccessKey is used for authentication. If set, pull the AWS access key ID from a key within a Kubernetes Secret. Cannot be set when AccessKeyID is set. If neither the Access Key nor Key ID are set, we fall back to using env vars, shared credentials file, or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
+        <p>The SecretAccessKey is used for authentication. If set, pull the AWS access key ID from a key within a Kubernetes Secret. Cannot be set when AccessKeyID is set. If neither the Access Key nor Key ID are set, we fall back to using env vars, shared credentials file, or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a></p>
       </td>
     </tr>
     <tr>
@@ -2043,7 +2039,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The SecretAccessKey is used for authentication. If neither the Access Key nor Key ID are set, we fall back to using env vars, shared credentials file, or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a> </p>
+        <p>The SecretAccessKey is used for authentication. If neither the Access Key nor Key ID are set, we fall back to using env vars, shared credentials file, or AWS Instance metadata, see: <a href="https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials">https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials</a></p>
       </td>
     </tr>
     <tr>
@@ -2077,16 +2073,16 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Override the AWS region.</p>
-        <p> Route53 is a global service and does not have regional endpoints but the region specified here (or via environment variables) is used as a hint to help compute the correct AWS credential scope and partition when it connects to Route53. See: - <a href="https://docs.aws.amazon.com/general/latest/gr/r53.html">Amazon Route 53 endpoints and quotas</a>- <a href="https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html">Global services</a> </p>
+        <p>Route53 is a global service and does not have regional endpoints but the region specified here (or via environment variables) is used as a hint to help compute the correct AWS credential scope and partition when it connects to Route53. See: - <a href="https://docs.aws.amazon.com/general/latest/gr/r53.html">Amazon Route 53 endpoints and quotas</a>- <a href="https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html">Global services</a></p>
         <p>If you omit this region field, cert-manager will use the region from AWS_REGION and AWS_DEFAULT_REGION environment variables, if they are set in the cert-manager controller Pod.</p>
-        <p> The <code>region</code> field is not needed if you use <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html">IAM Roles for Service Accounts (IRSA)</a>. Instead an AWS_REGION environment variable is added to the cert-manager controller Pod by: <a href="https://github.com/aws/amazon-eks-pod-identity-webhook">Amazon EKS Pod Identity Webhook</a>. In this case this <code>region</code> field value is ignored. </p>
-        <p> The <code>region</code> field is not needed if you use <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html">EKS Pod Identities</a>. Instead an AWS_REGION environment variable is added to the cert-manager controller Pod by: <a href="https://github.com/aws/eks-pod-identity-agent">Amazon EKS Pod Identity Agent</a>, In this case this <code>region</code> field value is ignored. </p>
+        <p>The <code>region</code> field is not needed if you use <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html">IAM Roles for Service Accounts (IRSA)</a>. Instead an AWS_REGION environment variable is added to the cert-manager controller Pod by: <a href="https://github.com/aws/amazon-eks-pod-identity-webhook">Amazon EKS Pod Identity Webhook</a>. In this case this <code>region</code> field value is ignored.</p>
+        <p>The <code>region</code> field is not needed if you use <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html">EKS Pod Identities</a>. Instead an AWS_REGION environment variable is added to the cert-manager controller Pod by: <a href="https://github.com/aws/eks-pod-identity-agent">Amazon EKS Pod Identity Agent</a>, In this case this <code>region</code> field value is ignored.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderWebhook">ACMEIssuerDNS01ProviderWebhook</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>)</p>
 <div>
   <p>ACMEIssuerDNS01ProviderWebhook specifies configuration for a webhook DNS01 provider, including where to POST ChallengePayload resources.</p>
 </div>
@@ -2134,7 +2130,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ACMEIssuerStatus">ACMEIssuerStatus</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerStatus">IssuerStatus</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerStatus">IssuerStatus</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -2180,7 +2176,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.AzureDNSEnvironment"> AzureDNSEnvironment (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -2217,7 +2213,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.AzureManagedIdentity">AzureManagedIdentity</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>)</p>
 <div>
   <p>AzureManagedIdentity contains the configuration for Azure Workload Identity or Azure Managed Service Identity If the AZURE_FEDERATED_TOKEN_FILE environment variable is set, the Azure Workload Identity will be used. Otherwise, we fall back to using Azure Managed Service Identity.</p>
 </div>
@@ -2265,7 +2261,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.AzureZoneType"> AzureZoneType (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderAzureDNS">ACMEIssuerDNS01ProviderAzureDNS</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -2290,12 +2286,12 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.CNAMEStrategy"> CNAMEStrategy (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolverDNS01">ACMEChallengeSolverDNS01</a>)</p>
 <div>
   <p>CNAMEStrategy configures how the DNS01 provider should handle CNAME records when found in DNS zones. By default, the None strategy will be applied (i.e. do not follow CNAMEs).</p>
 </div>
 <h3 id="acme.cert-manager.io/v1.CertificateDNSNameSelector">CertificateDNSNameSelector</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolver">ACMEChallengeSolver</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEChallengeSolver">ACMEChallengeSolver</a>)</p>
 <div>
   <p>CertificateDNSNameSelector selects certificates using a label selector, and can optionally select individual DNS names within those certificates. If both MatchLabels and DNSNames are empty, this selector will match all certificates and DNS names within them.</p>
 </div>
@@ -2343,7 +2339,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ChallengeSpec">ChallengeSpec</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Challenge">Challenge</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Challenge">Challenge</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -2380,7 +2376,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p> dnsName is the identifier that this challenge is for, e.g., example.com. If the requested DNSName is a &lsquo;wildcard&rsquo;, this field MUST be set to the non-wildcard domain, e.g., for <code>*.example.com</code>, it must be <code>example.com</code>. </p>
+        <p>dnsName is the identifier that this challenge is for, e.g., example.com. If the requested DNSName is a &lsquo;wildcard&rsquo;, this field MUST be set to the non-wildcard domain, e.g., for <code>*.example.com</code>, it must be <code>example.com</code>.</p>
       </td>
     </tr>
     <tr>
@@ -2423,12 +2419,10 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p>
-          The ACME challenge key for this challenge For HTTP01 challenges, this is the value that must be responded with to complete the HTTP01 challenge in the format:
+        <p>The ACME challenge key for this challenge For HTTP01 challenges, this is the value that must be responded with to complete the HTTP01 challenge in the format:
           <code>&lt;private key JWK thumbprint&gt;.&lt;key from acme server for challenge&gt;</code>. For DNS01 challenges, this is the base64 encoded SHA256 sum of the
           <code>&lt;private key JWK thumbprint&gt;.&lt;key from acme server for challenge&gt;</code>
-          text that must be set as the TXT record content.
-        </p>
+          text that must be set as the TXT record content.</p>
       </td>
     </tr>
     <tr>
@@ -2456,7 +2450,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ChallengeStatus">ChallengeStatus</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Challenge">Challenge</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Challenge">Challenge</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -2485,7 +2479,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> presented will be set to true if the challenge values for this challenge are currently &lsquo;presented&rsquo;. This <em>does not</em> imply the self check is passing. Only that the values have been &lsquo;submitted&rsquo; for the appropriate challenge mechanism (i.e. the DNS01 TXT record has been presented, or the HTTP01 configuration has been configured). </p>
+        <p>presented will be set to true if the challenge values for this challenge are currently &lsquo;presented&rsquo;. This <em>does not</em> imply the self check is passing. Only that the values have been &lsquo;submitted&rsquo; for the appropriate challenge mechanism (i.e. the DNS01 TXT record has been presented, or the HTTP01 configuration has been configured).</p>
       </td>
     </tr>
     <tr>
@@ -2515,7 +2509,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.HMACKeyAlgorithm"> HMACKeyAlgorithm (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEExternalAccountBinding">ACMEExternalAccountBinding</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEExternalAccountBinding">ACMEExternalAccountBinding</a>)</p>
 <div>
   <p>HMACKeyAlgorithm is the name of a key algorithm used for HMAC encryption</p>
 </div>
@@ -2548,7 +2542,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.OrderSpec">OrderSpec</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Order">Order</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Order">Order</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -2586,7 +2580,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> CommonName is the common name as specified on the DER encoded CSR. If specified, this value must also be present in <code>dnsNames</code> or <code>ipAddresses</code>. This field must match the corresponding field on the DER encoded CSR. </p>
+        <p>CommonName is the common name as specified on the DER encoded CSR. If specified, this value must also be present in <code>dnsNames</code> or <code>ipAddresses</code>. This field must match the corresponding field on the DER encoded CSR.</p>
       </td>
     </tr>
     <tr>
@@ -2638,7 +2632,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.OrderStatus">OrderStatus</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Order">Order</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Order">Order</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -2734,7 +2728,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.RFC2136UpdateProtocol"> RFC2136UpdateProtocol (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRFC2136">ACMEIssuerDNS01ProviderRFC2136</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRFC2136">ACMEIssuerDNS01ProviderRFC2136</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -2763,7 +2757,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.Route53Auth">Route53Auth</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRoute53">ACMEIssuerDNS01ProviderRoute53</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEIssuerDNS01ProviderRoute53">ACMEIssuerDNS01ProviderRoute53</a>)</p>
 <div>
   <p>Route53Auth is configuration used to authenticate with a Route53.</p>
 </div>
@@ -2790,7 +2784,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.Route53KubernetesAuth">Route53KubernetesAuth</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Route53Auth">Route53Auth</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Route53Auth">Route53Auth</a>)</p>
 <div>
   <p>Route53KubernetesAuth is a configuration to authenticate against Route53 using a bound Kubernetes ServiceAccount token.</p>
 </div>
@@ -2817,7 +2811,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.ServiceAccountRef">ServiceAccountRef</h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Route53KubernetesAuth">Route53KubernetesAuth</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.Route53KubernetesAuth">Route53KubernetesAuth</a>)</p>
 <div>
   <p>ServiceAccountRef is a service account used by cert-manager to request a token. The expiration of the token is also set by cert-manager to 10 minutes.</p>
 </div>
@@ -2847,18 +2841,16 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> TokenAudiences is an optional list of audiences to include in the token passed to AWS. The default token consisting of the issuer&rsquo;s namespace and name is always included. If unset the audience defaults to <code>sts.amazonaws.com</code>. </p>
+        <p>TokenAudiences is an optional list of audiences to include in the token passed to AWS. The default token consisting of the issuer&rsquo;s namespace and name is always included. If unset the audience defaults to <code>sts.amazonaws.com</code>.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="acme.cert-manager.io/v1.State"> State (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEAuthorization">ACMEAuthorization</a>, <a href="#acme.cert-manager.io/v1.ChallengeStatus">ChallengeStatus</a>, <a href="#acme.cert-manager.io/v1.OrderStatus">OrderStatus</a>) </p>
+<p>(<em>Appears on:</em> <a href="#acme.cert-manager.io/v1.ACMEAuthorization">ACMEAuthorization</a>, <a href="#acme.cert-manager.io/v1.ChallengeStatus">ChallengeStatus</a>, <a href="#acme.cert-manager.io/v1.OrderStatus">OrderStatus</a>)</p>
 <div>
-  <p>
-    State represents the state of an ACME resource, such as an Order. The possible options here map to the corresponding values in the ACME specification. Full details of these values can be found here: <a href="https://tools.ietf.org/html/draft-ietf-acme-acme-15#section-7.1.6">https://tools.ietf.org/html/draft-ietf-acme-acme-15#section-7.1.6</a>
-    Clients utilising this type must also gracefully handle unknown values, as the contents of this enumeration may be added to over time.
-  </p>
+  <p>State represents the state of an ACME resource, such as an Order. The possible options here map to the corresponding values in the ACME specification. Full details of these values can be found here: <a href="https://tools.ietf.org/html/draft-ietf-acme-acme-15#section-7.1.6">https://tools.ietf.org/html/draft-ietf-acme-acme-15#section-7.1.6</a>
+    Clients utilising this type must also gracefully handle unknown values, as the contents of this enumeration may be added to over time.</p>
 </div>
 <table>
   <thead>
@@ -3032,10 +3024,8 @@ description: >-
         <em>k8s.io/component-base/logs/api/v1.LoggingConfiguration</em>
       </td>
       <td>
-        <p>
-          logging configures the logging behaviour of the cainjector.
-          <a href="https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration">https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration</a>
-        </p>
+        <p>logging configures the logging behaviour of the cainjector.
+          <a href="https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration">https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration</a></p>
       </td>
     </tr>
     <tr>
@@ -3072,7 +3062,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cainjector.config.cert-manager.io/v1alpha1.EnableDataSourceConfig">EnableDataSourceConfig</h3>
-<p> (<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -3095,7 +3085,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cainjector.config.cert-manager.io/v1alpha1.EnableInjectableConfig">EnableInjectableConfig</h3>
-<p> (<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cainjector.config.cert-manager.io/v1alpha1.CAInjectorConfiguration">CAInjectorConfiguration</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -3169,8 +3159,8 @@ description: >-
 </ul>
 <h3 id="cert-manager.io/v1.Certificate">Certificate</h3>
 <div>
-  <p> A Certificate resource should be created to ensure an up to date and signed X.509 certificate is stored in the Kubernetes Secret resource named in <code>spec.secretName</code>. </p>
-  <p> The stored certificate will be renewed before it expires (as configured by <code>spec.renewBefore</code>). </p>
+  <p>A Certificate resource should be created to ensure an up to date and signed X.509 certificate is stored in the Kubernetes Secret resource named in <code>spec.secretName</code>.</p>
+  <p>The stored certificate will be renewed before it expires (as configured by <code>spec.renewBefore</code>).</p>
 </div>
 <table>
   <thead>
@@ -3210,7 +3200,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Standard object&rsquo;s metadata. More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</a> </p>
+        <p>Standard object&rsquo;s metadata. More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</a></p>
         Refer to the Kubernetes API documentation for the fields of the
         <code>metadata</code> field.
       </td>
@@ -3225,10 +3215,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>
-          Specification of the desired state of the Certificate resource.
-          <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a>
-        </p>
+        <p>Specification of the desired state of the Certificate resource.
+          <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
         <br />
         <br />
         <table>
@@ -3242,8 +3230,8 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> Requested set of X509 certificate subject attributes. More info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6">https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6</a> </p>
-              <p> The common name attribute is specified separately in the <code>commonName</code> field. Cannot be set if the <code>literalSubject</code> field is set. </p>
+              <p>Requested set of X509 certificate subject attributes. More info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6">https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6</a></p>
+              <p>The common name attribute is specified separately in the <code>commonName</code> field. Cannot be set if the <code>literalSubject</code> field is set.</p>
             </td>
           </tr>
           <tr>
@@ -3254,8 +3242,8 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> Requested X.509 certificate subject, represented using the LDAP &ldquo;String Representation of a Distinguished Name&rdquo; [1]. Important: the LDAP string format also specifies the order of the attributes in the subject, this is important when issuing certs for LDAP authentication. Example: <code>CN=foo,DC=corp,DC=example,DC=com</code> More info [1]: <a href="https://datatracker.ietf.org/doc/html/rfc4514">https://datatracker.ietf.org/doc/html/rfc4514</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/3203">https://github.com/cert-manager/cert-manager/issues/3203</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/4424">https://github.com/cert-manager/cert-manager/issues/4424</a> </p>
-              <p> Cannot be set if the <code>subject</code> or <code>commonName</code> field is set. </p>
+              <p>Requested X.509 certificate subject, represented using the LDAP &ldquo;String Representation of a Distinguished Name&rdquo; [1]. Important: the LDAP string format also specifies the order of the attributes in the subject, this is important when issuing certs for LDAP authentication. Example: <code>CN=foo,DC=corp,DC=example,DC=com</code> More info [1]: <a href="https://datatracker.ietf.org/doc/html/rfc4514">https://datatracker.ietf.org/doc/html/rfc4514</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/3203">https://github.com/cert-manager/cert-manager/issues/3203</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/4424">https://github.com/cert-manager/cert-manager/issues/4424</a></p>
+              <p>Cannot be set if the <code>subject</code> or <code>commonName</code> field is set.</p>
             </td>
           </tr>
           <tr>
@@ -3266,8 +3254,8 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> Requested common name X509 certificate subject attribute. More info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6">https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6</a> NOTE: TLS clients will ignore this value when any subject alternative name is set (see <a href="https://tools.ietf.org/html/rfc6125#section-6.4.4">https://tools.ietf.org/html/rfc6125#section-6.4.4</a>). </p>
-              <p> Should have a length of 64 characters or fewer to avoid generating invalid CSRs. Cannot be set if the <code>literalSubject</code> field is set. </p>
+              <p>Requested common name X509 certificate subject attribute. More info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6">https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6</a> NOTE: TLS clients will ignore this value when any subject alternative name is set (see <a href="https://tools.ietf.org/html/rfc6125#section-6.4.4">https://tools.ietf.org/html/rfc6125#section-6.4.4</a>).</p>
+              <p>Should have a length of 64 characters or fewer to avoid generating invalid CSRs. Cannot be set if the <code>literalSubject</code> field is set.</p>
             </td>
           </tr>
           <tr>
@@ -3281,7 +3269,7 @@ description: >-
             <td>
               <em>(Optional)</em>
               <p>Requested &lsquo;duration&rsquo; (i.e. lifetime) of the Certificate. Note that the issuer may choose to ignore the requested duration, just like any other requested attribute.</p>
-              <p> If unset, this defaults to 90 days. Minimum accepted duration is 1 hour. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>. </p>
+              <p>If unset, this defaults to 90 days. Minimum accepted duration is 1 hour. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>.</p>
             </td>
           </tr>
           <tr>
@@ -3294,9 +3282,9 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> How long before the currently issued certificate&rsquo;s expiry cert-manager should renew the certificate. For example, if a certificate is valid for 60 minutes, and <code>renewBefore=10m</code>, cert-manager will begin to attempt to renew the certificate 50 minutes after it was issued (i.e. when there are 10 minutes remaining until the certificate is no longer valid). </p>
+              <p>How long before the currently issued certificate&rsquo;s expiry cert-manager should renew the certificate. For example, if a certificate is valid for 60 minutes, and <code>renewBefore=10m</code>, cert-manager will begin to attempt to renew the certificate 50 minutes after it was issued (i.e. when there are 10 minutes remaining until the certificate is no longer valid).</p>
               <p>NOTE: The actual lifetime of the issued certificate is used to determine the renewal time. If an issuer returns a certificate with a different lifetime than the one requested, cert-manager will use the lifetime of the issued certificate.</p>
-              <p> If unset, this defaults to <sup>1</sup>&frasl;<sub>3</sub> of the issued certificate&rsquo;s lifetime. Minimum accepted value is 5 minutes. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>. Cannot be set if the <code>renewBeforePercentage</code> field is set. </p>
+              <p>If unset, this defaults to <sup>1</sup>&frasl;<sub>3</sub> of the issued certificate&rsquo;s lifetime. Minimum accepted value is 5 minutes. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>. Cannot be set if the <code>renewBeforePercentage</code> field is set.</p>
             </td>
           </tr>
           <tr>
@@ -3307,12 +3295,10 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> <code>renewBeforePercentage</code> is like <code>renewBefore</code>, except it is a relative percentage rather than an absolute duration. For example, if a certificate is valid for 60 minutes, and <code>renewBeforePercentage=25</code>, cert-manager will begin to attempt to renew the certificate 45 minutes after it was issued (i.e. when there are 15 minutes (25%) remaining until the certificate is no longer valid). </p>
+              <p><code>renewBeforePercentage</code> is like <code>renewBefore</code>, except it is a relative percentage rather than an absolute duration. For example, if a certificate is valid for 60 minutes, and <code>renewBeforePercentage=25</code>, cert-manager will begin to attempt to renew the certificate 45 minutes after it was issued (i.e. when there are 15 minutes (25%) remaining until the certificate is no longer valid).</p>
               <p>NOTE: The actual lifetime of the issued certificate is used to determine the renewal time. If an issuer returns a certificate with a different lifetime than the one requested, cert-manager will use the lifetime of the issued certificate.</p>
-              <p>
-                Value must be an integer in the range (0,100). The minimum effective
-                <code>renewBefore</code> derived from the <code>renewBeforePercentage</code> and <code>duration</code> fields is 5 minutes. Cannot be set if the <code>renewBefore</code> field is set.
-              </p>
+              <p>Value must be an integer in the range (0,100). The minimum effective
+                <code>renewBefore</code> derived from the <code>renewBeforePercentage</code> and <code>duration</code> fields is 5 minutes. Cannot be set if the <code>renewBefore</code> field is set.</p>
             </td>
           </tr>
           <tr>
@@ -3358,7 +3344,7 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> <code>otherNames</code> is an escape hatch for SAN that allows any type. We currently restrict the support to string like otherNames, cf RFC 5280 p 37 Any UTF8 String valued otherName can be passed with by setting the keys oid: x.x.x.x and UTF8Value: somevalue for <code>otherName</code>. Most commonly this would be UPN set with oid: 1.3.6.1.4.1.311.20.2.3 You should ensure that any OID passed is valid for the UTF8String type as we do not explicitly validate this. </p>
+              <p><code>otherNames</code> is an escape hatch for SAN that allows any type. We currently restrict the support to string like otherNames, cf RFC 5280 p 37 Any UTF8 String valued otherName can be passed with by setting the keys oid: x.x.x.x and UTF8Value: somevalue for <code>otherName</code>. Most commonly this would be UPN set with oid: 1.3.6.1.4.1.311.20.2.3 You should ensure that any OID passed is valid for the UTF8String type as we do not explicitly validate this.</p>
             </td>
           </tr>
           <tr>
@@ -3416,7 +3402,7 @@ description: >-
             </td>
             <td>
               <p>Reference to the issuer responsible for issuing the certificate. If the issuer is namespace-scoped, it must be in the same namespace as the Certificate. If the issuer is cluster-scoped, it can be used from any namespace.</p>
-              <p> The <code>name</code> field of the reference must always be specified. </p>
+              <p>The <code>name</code> field of the reference must always be specified.</p>
             </td>
           </tr>
           <tr>
@@ -3427,8 +3413,8 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> Requested basic constraints isCA value. The isCA value is used to set the <code>isCA</code> field on the created CertificateRequest resources. Note that the issuer may choose to ignore the requested isCA value, just like any other requested attribute. </p>
-              <p> If true, this will automatically add the <code>cert sign</code> usage to the list of requested <code>usages</code>. </p>
+              <p>Requested basic constraints isCA value. The isCA value is used to set the <code>isCA</code> field on the created CertificateRequest resources. Note that the issuer may choose to ignore the requested isCA value, just like any other requested attribute.</p>
+              <p>If true, this will automatically add the <code>cert sign</code> usage to the list of requested <code>usages</code>.</p>
             </td>
           </tr>
           <tr>
@@ -3441,8 +3427,8 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> Requested key usages and extended key usages. These usages are used to set the <code>usages</code> field on the created CertificateRequest resources. If <code>encodeUsagesInRequest</code> is unset or set to <code>true</code>, the usages will additionally be encoded in the <code>request</code> field which contains the CSR blob. </p>
-              <p> If unset, defaults to <code>digital signature</code> and <code>key encipherment</code>. </p>
+              <p>Requested key usages and extended key usages. These usages are used to set the <code>usages</code> field on the created CertificateRequest resources. If <code>encodeUsagesInRequest</code> is unset or set to <code>true</code>, the usages will additionally be encoded in the <code>request</code> field which contains the CSR blob.</p>
+              <p>If unset, defaults to <code>digital signature</code> and <code>key encipherment</code>.</p>
             </td>
           </tr>
           <tr>
@@ -3491,11 +3477,9 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p>
-                The maximum number of CertificateRequest revisions that are maintained in the Certificate&rsquo;s history. Each revision represents a single <code>CertificateRequest</code>
-                created by this Certificate, either when it was created, renewed, or Spec was changed. Revisions will be removed by oldest first if the number of revisions exceeds this number.
-              </p>
-              <p> If set, revisionHistoryLimit must be a value of <code>1</code> or greater. Default value is <code>1</code>. </p>
+              <p>The maximum number of CertificateRequest revisions that are maintained in the Certificate&rsquo;s history. Each revision represents a single <code>CertificateRequest</code>
+                created by this Certificate, either when it was created, renewed, or Spec was changed. Revisions will be removed by oldest first if the number of revisions exceeds this number.</p>
+              <p>If set, revisionHistoryLimit must be a value of <code>1</code> or greater. Default value is <code>1</code>.</p>
             </td>
           </tr>
           <tr>
@@ -3521,11 +3505,9 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p> x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate. More Info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10">https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10</a> </p>
-              <p>
-                This is an Alpha Feature and is only enabled with the
-                <code>--feature-gates=NameConstraints=true</code> option set on both the controller and webhook components.
-              </p>
+              <p>x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate. More Info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10">https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10</a></p>
+              <p>This is an Alpha Feature and is only enabled with the
+                <code>--feature-gates=NameConstraints=true</code> option set on both the controller and webhook components.</p>
             </td>
           </tr>
         </table>
@@ -3541,7 +3523,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Status of the Certificate. This is set and managed automatically. Read-only. More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a> </p>
+        <p>Status of the Certificate. This is set and managed automatically. Read-only. More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
       </td>
     </tr>
   </tbody>
@@ -3549,7 +3531,7 @@ description: >-
 <h3 id="cert-manager.io/v1.CertificateRequest">CertificateRequest</h3>
 <div>
   <p>A CertificateRequest is used to request a signed certificate from one of the configured issuers.</p>
-  <p> All fields within the CertificateRequest&rsquo;s <code>spec</code> are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its <code>Ready</code> status condition and its <code>status.failureTime</code> field. </p>
+  <p>All fields within the CertificateRequest&rsquo;s <code>spec</code> are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its <code>Ready</code> status condition and its <code>status.failureTime</code> field.</p>
   <p>A CertificateRequest is a one-shot resource, meaning it represents a single point in time request for a certificate and cannot be re-used.</p>
 </div>
 <table>
@@ -3590,7 +3572,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Standard object&rsquo;s metadata. More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</a> </p>
+        <p>Standard object&rsquo;s metadata. More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</a></p>
         Refer to the Kubernetes API documentation for the fields of the
         <code>metadata</code> field.
       </td>
@@ -3605,10 +3587,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>
-          Specification of the desired state of the CertificateRequest resource.
-          <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a>
-        </p>
+        <p>Specification of the desired state of the CertificateRequest resource.
+          <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
         <br />
         <br />
         <table>
@@ -3633,7 +3613,7 @@ description: >-
             </td>
             <td>
               <p>Reference to the issuer responsible for issuing the certificate. If the issuer is namespace-scoped, it must be in the same namespace as the Certificate. If the issuer is cluster-scoped, it can be used from any namespace.</p>
-              <p> The <code>name</code> field of the reference must always be specified. </p>
+              <p>The <code>name</code> field of the reference must always be specified.</p>
             </td>
           </tr>
           <tr>
@@ -3644,7 +3624,7 @@ description: >-
             </td>
             <td>
               <p>The PEM-encoded X.509 certificate signing request to be submitted to the issuer for signing.</p>
-              <p> If the CSR has a BasicConstraints extension, its isCA attribute must match the <code>isCA</code> value of this CertificateRequest. If the CSR has a KeyUsage extension, its key usages must match the key usages in the <code>usages</code> field of this CertificateRequest. If the CSR has a ExtKeyUsage extension, its extended key usages must match the extended key usages in the <code>usages</code> field of this CertificateRequest. </p>
+              <p>If the CSR has a BasicConstraints extension, its isCA attribute must match the <code>isCA</code> value of this CertificateRequest. If the CSR has a KeyUsage extension, its key usages must match the key usages in the <code>usages</code> field of this CertificateRequest. If the CSR has a ExtKeyUsage extension, its extended key usages must match the extended key usages in the <code>usages</code> field of this CertificateRequest.</p>
             </td>
           </tr>
           <tr>
@@ -3656,8 +3636,8 @@ description: >-
             <td>
               <em>(Optional)</em>
               <p>Requested basic constraints isCA value. Note that the issuer may choose to ignore the requested isCA value, just like any other requested attribute.</p>
-              <p> NOTE: If the CSR in the <code>Request</code> field has a BasicConstraints extension, it must have the same isCA value as specified here. </p>
-              <p> If true, this will automatically add the <code>cert sign</code> usage to the list of requested <code>usages</code>. </p>
+              <p>NOTE: If the CSR in the <code>Request</code> field has a BasicConstraints extension, it must have the same isCA value as specified here.</p>
+              <p>If true, this will automatically add the <code>cert sign</code> usage to the list of requested <code>usages</code>.</p>
             </td>
           </tr>
           <tr>
@@ -3671,8 +3651,8 @@ description: >-
             <td>
               <em>(Optional)</em>
               <p>Requested key usages and extended key usages.</p>
-              <p> NOTE: If the CSR in the <code>Request</code> field has uses the KeyUsage or ExtKeyUsage extension, these extensions must have the same values as specified here without any additional values. </p>
-              <p> If unset, defaults to <code>digital signature</code> and <code>key encipherment</code>. </p>
+              <p>NOTE: If the CSR in the <code>Request</code> field has uses the KeyUsage or ExtKeyUsage extension, these extensions must have the same values as specified here without any additional values.</p>
+              <p>If unset, defaults to <code>digital signature</code> and <code>key encipherment</code>.</p>
             </td>
           </tr>
           <tr>
@@ -3732,14 +3712,14 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Status of the CertificateRequest. This is set and managed automatically. Read-only. More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a> </p>
+        <p>Status of the CertificateRequest. This is set and managed automatically. Read-only. More info: <a href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</a></p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.ClusterIssuer">ClusterIssuer</h3>
 <div>
-  <p> A ClusterIssuer represents a certificate issuing authority which can be referenced as part of <code>issuerRef</code> fields. It is similar to an Issuer, however it is cluster-scoped and therefore can be referenced by resources that exist in <em>any</em> namespace, not just the same namespace as the referent. </p>
+  <p>A ClusterIssuer represents a certificate issuing authority which can be referenced as part of <code>issuerRef</code> fields. It is similar to an Issuer, however it is cluster-scoped and therefore can be referenced by resources that exist in <em>any</em> namespace, not just the same namespace as the referent.</p>
 </div>
 <table>
   <thead>
@@ -3804,7 +3784,7 @@ description: >-
               </em>
             </td>
             <td>
-              <p> (Members of <code>IssuerConfig</code> are embedded into this type.) </p>
+              <p>(Members of <code>IssuerConfig</code> are embedded into this type.)</p>
             </td>
           </tr>
         </table>
@@ -3827,7 +3807,7 @@ description: >-
 </table>
 <h3 id="cert-manager.io/v1.Issuer">Issuer</h3>
 <div>
-  <p> An Issuer represents a certificate issuing authority which can be referenced as part of <code>issuerRef</code> fields. It is scoped to a single namespace and can therefore only be referenced by resources within the same namespace. </p>
+  <p>An Issuer represents a certificate issuing authority which can be referenced as part of <code>issuerRef</code> fields. It is scoped to a single namespace and can therefore only be referenced by resources within the same namespace.</p>
 </div>
 <table>
   <thead>
@@ -3892,7 +3872,7 @@ description: >-
               </em>
             </td>
             <td>
-              <p> (Members of <code>IssuerConfig</code> are embedded into this type.) </p>
+              <p>(Members of <code>IssuerConfig</code> are embedded into this type.)</p>
             </td>
           </tr>
         </table>
@@ -3914,7 +3894,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CAIssuer">CAIssuer</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -3953,7 +3933,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The OCSP server list is an X.509 v3 extension that defines a list of URLs of OCSP responders. The OCSP responders can be queried for the revocation status of an issued certificate. If not set, the certificate will be issued with no OCSP servers set. For example, an OCSP server URL could be &ldquo;<a href='http://ocsp.int-x3.letsencrypt.org"'>http://ocsp.int-x3.letsencrypt.org&rdquo;</a>. </p>
+        <p>The OCSP server list is an X.509 v3 extension that defines a list of URLs of OCSP responders. The OCSP responders can be queried for the revocation status of an issued certificate. If not set, the certificate will be issued with no OCSP servers set. For example, an OCSP server URL could be &ldquo;<a href='http://ocsp.int-x3.letsencrypt.org"'>http://ocsp.int-x3.letsencrypt.org&rdquo;</a>.</p>
       </td>
     </tr>
     <tr>
@@ -3964,13 +3944,13 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> IssuingCertificateURLs is a list of URLs which this issuer should embed into certificates it creates. See <a href="https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1">https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1</a> for more details. As an example, such a URL might be &ldquo;<a href='http://ca.domain.com/ca.crt"'>http://ca.domain.com/ca.crt&rdquo;</a>. </p>
+        <p>IssuingCertificateURLs is a list of URLs which this issuer should embed into certificates it creates. See <a href="https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1">https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1</a> for more details. As an example, such a URL might be &ldquo;<a href='http://ca.domain.com/ca.crt"'>http://ca.domain.com/ca.crt&rdquo;</a>.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateAdditionalOutputFormat">CertificateAdditionalOutputFormat</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>)</p>
 <div>
   <p>CertificateAdditionalOutputFormat defines an additional output format of a Certificate resource. These contain supplementary data formats of the signed certificate chain and paired private key.</p>
 </div>
@@ -3997,7 +3977,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateCondition">CertificateCondition</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateStatus">CertificateStatus</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateStatus">CertificateStatus</a>)</p>
 <div>
   <p>CertificateCondition contains condition information for a Certificate.</p>
 </div>
@@ -4018,7 +3998,7 @@ description: >-
         </em>
       </td>
       <td>
-        <p> Type of the condition, known values are (<code>Ready</code>, <code>Issuing</code>). </p>
+        <p>Type of the condition, known values are (<code>Ready</code>, <code>Issuing</code>).</p>
       </td>
     </tr>
     <tr>
@@ -4028,7 +4008,7 @@ description: >-
         <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.ConditionStatus</em>
       </td>
       <td>
-        <p> Status of the condition, one of (<code>True</code>, <code>False</code>, <code>Unknown</code>). </p>
+        <p>Status of the condition, one of (<code>True</code>, <code>False</code>, <code>Unknown</code>).</p>
       </td>
     </tr>
     <tr>
@@ -4080,7 +4060,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateConditionType"> CertificateConditionType (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateCondition">CertificateCondition</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateCondition">CertificateCondition</a>)</p>
 <div>
   <p>CertificateConditionType represents a Certificate condition value.</p>
 </div>
@@ -4097,10 +4077,8 @@ description: >-
         <p>&#34;Issuing&#34;</p>
       </td>
       <td>
-        <p>
-          A condition added to Certificate resources when an issuance is required. This condition will be automatically added and set to true if: * No keypair data exists in the target Secret * The data stored in the Secret cannot be decoded * The private key and certificate do not have matching public keys * If a CertificateRequest for the current revision exists and the certificate data stored in the Secret does not match the
-          <code>status.certificate</code> on the CertificateRequest. * If no CertificateRequest resource exists for the current revision, the options on the Certificate resource are compared against the X.509 data in the Secret, similar to what&rsquo;s done in earlier versions. If there is a mismatch, an issuance is triggered. This condition may also be added by external API consumers to trigger a re-issuance manually for any other reason.
-        </p>
+        <p>A condition added to Certificate resources when an issuance is required. This condition will be automatically added and set to true if: * No keypair data exists in the target Secret * The data stored in the Secret cannot be decoded * The private key and certificate do not have matching public keys * If a CertificateRequest for the current revision exists and the certificate data stored in the Secret does not match the
+          <code>status.certificate</code> on the CertificateRequest. * If no CertificateRequest resource exists for the current revision, the options on the Certificate resource are compared against the X.509 data in the Secret, similar to what&rsquo;s done in earlier versions. If there is a mismatch, an issuance is triggered. This condition may also be added by external API consumers to trigger a re-issuance manually for any other reason.</p>
         <p>It will be removed by the &lsquo;issuing&rsquo; controller upon completing issuance.</p>
       </td>
     </tr>
@@ -4115,7 +4093,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateKeystores">CertificateKeystores</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>)</p>
 <div>
   <p>CertificateKeystores configures additional keystore output formats to be created in the Certificate&rsquo;s output Secret.</p>
 </div>
@@ -4137,10 +4115,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>
-          JKS configures options for storing a JKS keystore in the
-          <code>spec.secretName</code> Secret resource.
-        </p>
+        <p>JKS configures options for storing a JKS keystore in the
+          <code>spec.secretName</code> Secret resource.</p>
       </td>
     </tr>
     <tr>
@@ -4153,21 +4129,17 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>
-          PKCS12 configures options for storing a PKCS12 keystore in the
-          <code>spec.secretName</code> Secret resource.
-        </p>
+        <p>PKCS12 configures options for storing a PKCS12 keystore in the
+          <code>spec.secretName</code> Secret resource.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateOutputFormatType"> CertificateOutputFormatType (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateAdditionalOutputFormat">CertificateAdditionalOutputFormat</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateAdditionalOutputFormat">CertificateAdditionalOutputFormat</a>)</p>
 <div>
-  <p>
-    CertificateOutputFormatType specifies which additional output formats should be written to the Certificate&rsquo;s target Secret. Allowed values are <code>DER</code> or <code>CombinedPEM</code>. When Type is set to <code>DER</code> an additional entry <code>key.der</code> will be written to the Secret, containing the binary format of the private key. When Type is set to <code>CombinedPEM</code> an additional entry <code>tls-combined.pem</code>
-    will be written to the Secret, containing the PEM formatted private key and signed certificate chain (tls.key + tls.crt concatenated).
-  </p>
+  <p>CertificateOutputFormatType specifies which additional output formats should be written to the Certificate&rsquo;s target Secret. Allowed values are <code>DER</code> or <code>CombinedPEM</code>. When Type is set to <code>DER</code> an additional entry <code>key.der</code> will be written to the Secret, containing the binary format of the private key. When Type is set to <code>CombinedPEM</code> an additional entry <code>tls-combined.pem</code>
+    will be written to the Secret, containing the PEM formatted private key and signed certificate chain (tls.key + tls.crt concatenated).</p>
 </div>
 <table>
   <thead>
@@ -4182,10 +4154,8 @@ description: >-
         <p>&#34;CombinedPEM&#34;</p>
       </td>
       <td>
-        <p>
-          CertificateOutputFormatCombinedPEM writes the Certificate&rsquo;s signed certificate chain and private key, in PEM format, to the
-          <code>tls-combined.pem</code> target Secret Data key. The value at this key will include the private key PEM document, followed by at least one new line character, followed by the chain of signed certificate PEM documents (<code>&lt;private key&gt; + \n + &lt;signed certificate chain&gt;</code>).
-        </p>
+        <p>CertificateOutputFormatCombinedPEM writes the Certificate&rsquo;s signed certificate chain and private key, in PEM format, to the
+          <code>tls-combined.pem</code> target Secret Data key. The value at this key will include the private key PEM document, followed by at least one new line character, followed by the chain of signed certificate PEM documents (<code>&lt;private key&gt; + \n + &lt;signed certificate chain&gt;</code>).</p>
       </td>
     </tr>
     <tr>
@@ -4193,13 +4163,13 @@ description: >-
         <p>&#34;DER&#34;</p>
       </td>
       <td>
-        <p> CertificateOutputFormatDER writes the Certificate&rsquo;s private key in DER binary format to the <code>key.der</code> target Secret Data key. </p>
+        <p>CertificateOutputFormatDER writes the Certificate&rsquo;s private key in DER binary format to the <code>key.der</code> target Secret Data key.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificatePrivateKey">CertificatePrivateKey</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>)</p>
 <div>
   <p>CertificatePrivateKey contains configuration options for private keys used by the Certificate controller. These include the key algorithm and size, the used encoding and the rotation policy.</p>
 </div>
@@ -4222,7 +4192,7 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>RotationPolicy controls how private keys should be regenerated when a re-issuance is being processed.</p>
-        <p> If set to <code>Never</code>, a private key will only be generated if one does not already exist in the target <code>spec.secretName</code>. If one does exist but it does not have the correct algorithm or size, a warning will be raised to await user intervention. If set to <code>Always</code>, a private key matching the specified requirements will be generated whenever a re-issuance occurs. Default is <code>Always</code>. The default was changed from <code>Never</code> to <code>Always</code> in cert-manager &gt;=v1.18.0. </p>
+        <p>If set to <code>Never</code>, a private key will only be generated if one does not already exist in the target <code>spec.secretName</code>. If one does exist but it does not have the correct algorithm or size, a warning will be raised to await user intervention. If set to <code>Always</code>, a private key matching the specified requirements will be generated whenever a re-issuance occurs. Default is <code>Always</code>. The default was changed from <code>Never</code> to <code>Always</code> in cert-manager &gt;=v1.18.0.</p>
       </td>
     </tr>
     <tr>
@@ -4236,7 +4206,7 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>The private key cryptography standards (PKCS) encoding for this certificate&rsquo;s private key to be encoded in.</p>
-        <p> If provided, allowed values are <code>PKCS1</code> and <code>PKCS8</code> standing for PKCS#1 and PKCS#8, respectively. Defaults to <code>PKCS1</code> if not specified. </p>
+        <p>If provided, allowed values are <code>PKCS1</code> and <code>PKCS8</code> standing for PKCS#1 and PKCS#8, respectively. Defaults to <code>PKCS1</code> if not specified.</p>
       </td>
     </tr>
     <tr>
@@ -4250,7 +4220,7 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Algorithm is the private key algorithm of the corresponding private key for this certificate.</p>
-        <p> If provided, allowed values are either <code>RSA</code>, <code>ECDSA</code> or <code>Ed25519</code>. If <code>algorithm</code> is specified and <code>size</code> is not provided, key size of 2048 will be used for <code>RSA</code> key algorithm and key size of 256 will be used for <code>ECDSA</code> key algorithm. key size is ignored when using the <code>Ed25519</code> key algorithm. </p>
+        <p>If provided, allowed values are either <code>RSA</code>, <code>ECDSA</code> or <code>Ed25519</code>. If <code>algorithm</code> is specified and <code>size</code> is not provided, key size of 2048 will be used for <code>RSA</code> key algorithm and key size of 256 will be used for <code>ECDSA</code> key algorithm. key size is ignored when using the <code>Ed25519</code> key algorithm.</p>
       </td>
     </tr>
     <tr>
@@ -4262,13 +4232,13 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Size is the key bit size of the corresponding private key for this certificate.</p>
-        <p> If <code>algorithm</code> is set to <code>RSA</code>, valid values are <code>2048</code>, <code>4096</code> or <code>8192</code>, and will default to <code>2048</code> if not specified. If <code>algorithm</code> is set to <code>ECDSA</code>, valid values are <code>256</code>, <code>384</code> or <code>521</code>, and will default to <code>256</code> if not specified. If <code>algorithm</code> is set to <code>Ed25519</code>, Size is ignored. No other values are allowed. </p>
+        <p>If <code>algorithm</code> is set to <code>RSA</code>, valid values are <code>2048</code>, <code>4096</code> or <code>8192</code>, and will default to <code>2048</code> if not specified. If <code>algorithm</code> is set to <code>ECDSA</code>, valid values are <code>256</code>, <code>384</code> or <code>521</code>, and will default to <code>256</code> if not specified. If <code>algorithm</code> is set to <code>Ed25519</code>, Size is ignored. No other values are allowed.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateRequestCondition">CertificateRequestCondition</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequestStatus">CertificateRequestStatus</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequestStatus">CertificateRequestStatus</a>)</p>
 <div>
   <p>CertificateRequestCondition contains condition information for a CertificateRequest.</p>
 </div>
@@ -4289,7 +4259,7 @@ description: >-
         </em>
       </td>
       <td>
-        <p> Type of the condition, known values are (<code>Ready</code>, <code>InvalidRequest</code>,<code>Approved</code>, <code>Denied</code>). </p>
+        <p>Type of the condition, known values are (<code>Ready</code>, <code>InvalidRequest</code>,<code>Approved</code>, <code>Denied</code>).</p>
       </td>
     </tr>
     <tr>
@@ -4299,7 +4269,7 @@ description: >-
         <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.ConditionStatus</em>
       </td>
       <td>
-        <p> Status of the condition, one of (<code>True</code>, <code>False</code>, <code>Unknown</code>). </p>
+        <p>Status of the condition, one of (<code>True</code>, <code>False</code>, <code>Unknown</code>).</p>
       </td>
     </tr>
     <tr>
@@ -4340,7 +4310,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateRequestConditionType"> CertificateRequestConditionType (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequestCondition">CertificateRequestCondition</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequestCondition">CertificateRequestCondition</a>)</p>
 <div>
   <p>CertificateRequestConditionType represents a Certificate condition value.</p>
 </div>
@@ -4357,10 +4327,8 @@ description: >-
         <p>&#34;Approved&#34;</p>
       </td>
       <td>
-        <p>
-          CertificateRequestConditionApproved indicates that a certificate request is approved and ready for signing. Condition must never have a status of
-          <code>False</code>, and cannot be modified once set. Cannot be set alongside <code>Denied</code>.
-        </p>
+        <p>CertificateRequestConditionApproved indicates that a certificate request is approved and ready for signing. Condition must never have a status of
+          <code>False</code>, and cannot be modified once set. Cannot be set alongside <code>Denied</code>.</p>
       </td>
     </tr>
     <tr>
@@ -4368,10 +4336,8 @@ description: >-
         <p>&#34;Denied&#34;</p>
       </td>
       <td>
-        <p>
-          CertificateRequestConditionDenied indicates that a certificate request is denied, and must never be signed. Condition must never have a status of
-          <code>False</code>, and cannot be modified once set. Cannot be set alongside <code>Approved</code>.
-        </p>
+        <p>CertificateRequestConditionDenied indicates that a certificate request is denied, and must never be signed. Condition must never have a status of
+          <code>False</code>, and cannot be modified once set. Cannot be set alongside <code>Approved</code>.</p>
       </td>
     </tr>
     <tr>
@@ -4379,7 +4345,7 @@ description: >-
         <p>&#34;InvalidRequest&#34;</p>
       </td>
       <td>
-        <p> CertificateRequestConditionInvalidRequest indicates that a certificate signer has refused to sign the request due to at least one of the input parameters being invalid. Additional information about why the request was rejected can be found in the <code>reason</code> and <code>message</code> fields. </p>
+        <p>CertificateRequestConditionInvalidRequest indicates that a certificate signer has refused to sign the request due to at least one of the input parameters being invalid. Additional information about why the request was rejected can be found in the <code>reason</code> and <code>message</code> fields.</p>
       </td>
     </tr>
     <tr>
@@ -4393,7 +4359,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateRequestSpec">CertificateRequestSpec</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequest">CertificateRequest</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequest">CertificateRequest</a>)</p>
 <div>
   <p>CertificateRequestSpec defines the desired state of CertificateRequest</p>
   <p>NOTE: It is important to note that the issuer can choose to ignore or change any of the requested attributes. How the issuer maps a certificate request to a signed certificate is the full responsibility of the issuer itself. For example, as an edge case, an issuer that inverts the isCA value is free to do so.</p>
@@ -4427,7 +4393,7 @@ description: >-
       </td>
       <td>
         <p>Reference to the issuer responsible for issuing the certificate. If the issuer is namespace-scoped, it must be in the same namespace as the Certificate. If the issuer is cluster-scoped, it can be used from any namespace.</p>
-        <p> The <code>name</code> field of the reference must always be specified. </p>
+        <p>The <code>name</code> field of the reference must always be specified.</p>
       </td>
     </tr>
     <tr>
@@ -4438,7 +4404,7 @@ description: >-
       </td>
       <td>
         <p>The PEM-encoded X.509 certificate signing request to be submitted to the issuer for signing.</p>
-        <p> If the CSR has a BasicConstraints extension, its isCA attribute must match the <code>isCA</code> value of this CertificateRequest. If the CSR has a KeyUsage extension, its key usages must match the key usages in the <code>usages</code> field of this CertificateRequest. If the CSR has a ExtKeyUsage extension, its extended key usages must match the extended key usages in the <code>usages</code> field of this CertificateRequest. </p>
+        <p>If the CSR has a BasicConstraints extension, its isCA attribute must match the <code>isCA</code> value of this CertificateRequest. If the CSR has a KeyUsage extension, its key usages must match the key usages in the <code>usages</code> field of this CertificateRequest. If the CSR has a ExtKeyUsage extension, its extended key usages must match the extended key usages in the <code>usages</code> field of this CertificateRequest.</p>
       </td>
     </tr>
     <tr>
@@ -4450,8 +4416,8 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Requested basic constraints isCA value. Note that the issuer may choose to ignore the requested isCA value, just like any other requested attribute.</p>
-        <p> NOTE: If the CSR in the <code>Request</code> field has a BasicConstraints extension, it must have the same isCA value as specified here. </p>
-        <p> If true, this will automatically add the <code>cert sign</code> usage to the list of requested <code>usages</code>. </p>
+        <p>NOTE: If the CSR in the <code>Request</code> field has a BasicConstraints extension, it must have the same isCA value as specified here.</p>
+        <p>If true, this will automatically add the <code>cert sign</code> usage to the list of requested <code>usages</code>.</p>
       </td>
     </tr>
     <tr>
@@ -4465,8 +4431,8 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Requested key usages and extended key usages.</p>
-        <p> NOTE: If the CSR in the <code>Request</code> field has uses the KeyUsage or ExtKeyUsage extension, these extensions must have the same values as specified here without any additional values. </p>
-        <p> If unset, defaults to <code>digital signature</code> and <code>key encipherment</code>. </p>
+        <p>NOTE: If the CSR in the <code>Request</code> field has uses the KeyUsage or ExtKeyUsage extension, these extensions must have the same values as specified here without any additional values.</p>
+        <p>If unset, defaults to <code>digital signature</code> and <code>key encipherment</code>.</p>
       </td>
     </tr>
     <tr>
@@ -4516,7 +4482,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateRequestStatus">CertificateRequestStatus</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequest">CertificateRequest</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequest">CertificateRequest</a>)</p>
 <div>
   <p>CertificateRequestStatus defines the observed state of CertificateRequest and resulting signed certificate.</p>
 </div>
@@ -4538,7 +4504,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> List of status conditions to indicate the status of a CertificateRequest. Known condition types are <code>Ready</code>, <code>InvalidRequest</code>, <code>Approved</code> and <code>Denied</code>. </p>
+        <p>List of status conditions to indicate the status of a CertificateRequest. Known condition types are <code>Ready</code>, <code>InvalidRequest</code>, <code>Approved</code> and <code>Denied</code>.</p>
       </td>
     </tr>
     <tr>
@@ -4549,10 +4515,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>
-          The PEM encoded X.509 certificate resulting from the certificate signing request. If not set, the CertificateRequest has either not been completed or has failed. More information on failure can be found by checking the
-          <code>conditions</code> field.
-        </p>
+        <p>The PEM encoded X.509 certificate resulting from the certificate signing request. If not set, the CertificateRequest has either not been completed or has failed. More information on failure can be found by checking the
+          <code>conditions</code> field.</p>
       </td>
     </tr>
     <tr>
@@ -4582,9 +4546,9 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateSecretTemplate">CertificateSecretTemplate</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>)</p>
 <div>
-  <p> CertificateSecretTemplate defines the default labels and annotations to be copied to the Kubernetes Secret resource named in <code>CertificateSpec.secretName</code>. </p>
+  <p>CertificateSecretTemplate defines the default labels and annotations to be copied to the Kubernetes Secret resource named in <code>CertificateSpec.secretName</code>.</p>
 </div>
 <table>
   <thead>
@@ -4619,7 +4583,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateSpec">CertificateSpec</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.Certificate">Certificate</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.Certificate">Certificate</a>)</p>
 <div>
   <p>CertificateSpec defines the desired state of Certificate.</p>
   <p>NOTE: The specification contains a lot of &ldquo;requested&rdquo; certificate attributes, it is important to note that the issuer can choose to ignore or change any of these requested attributes. How the issuer maps a certificate request to a signed certificate is the full responsibility of the issuer itself. For example, as an edge case, an issuer that inverts the isCA value is free to do so.</p>
@@ -4643,8 +4607,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Requested set of X509 certificate subject attributes. More info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6">https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6</a> </p>
-        <p> The common name attribute is specified separately in the <code>commonName</code> field. Cannot be set if the <code>literalSubject</code> field is set. </p>
+        <p>Requested set of X509 certificate subject attributes. More info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6">https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6</a></p>
+        <p>The common name attribute is specified separately in the <code>commonName</code> field. Cannot be set if the <code>literalSubject</code> field is set.</p>
       </td>
     </tr>
     <tr>
@@ -4655,8 +4619,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Requested X.509 certificate subject, represented using the LDAP &ldquo;String Representation of a Distinguished Name&rdquo; [1]. Important: the LDAP string format also specifies the order of the attributes in the subject, this is important when issuing certs for LDAP authentication. Example: <code>CN=foo,DC=corp,DC=example,DC=com</code> More info [1]: <a href="https://datatracker.ietf.org/doc/html/rfc4514">https://datatracker.ietf.org/doc/html/rfc4514</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/3203">https://github.com/cert-manager/cert-manager/issues/3203</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/4424">https://github.com/cert-manager/cert-manager/issues/4424</a> </p>
-        <p> Cannot be set if the <code>subject</code> or <code>commonName</code> field is set. </p>
+        <p>Requested X.509 certificate subject, represented using the LDAP &ldquo;String Representation of a Distinguished Name&rdquo; [1]. Important: the LDAP string format also specifies the order of the attributes in the subject, this is important when issuing certs for LDAP authentication. Example: <code>CN=foo,DC=corp,DC=example,DC=com</code> More info [1]: <a href="https://datatracker.ietf.org/doc/html/rfc4514">https://datatracker.ietf.org/doc/html/rfc4514</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/3203">https://github.com/cert-manager/cert-manager/issues/3203</a> More info: <a href="https://github.com/cert-manager/cert-manager/issues/4424">https://github.com/cert-manager/cert-manager/issues/4424</a></p>
+        <p>Cannot be set if the <code>subject</code> or <code>commonName</code> field is set.</p>
       </td>
     </tr>
     <tr>
@@ -4667,8 +4631,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Requested common name X509 certificate subject attribute. More info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6">https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6</a> NOTE: TLS clients will ignore this value when any subject alternative name is set (see <a href="https://tools.ietf.org/html/rfc6125#section-6.4.4">https://tools.ietf.org/html/rfc6125#section-6.4.4</a>). </p>
-        <p> Should have a length of 64 characters or fewer to avoid generating invalid CSRs. Cannot be set if the <code>literalSubject</code> field is set. </p>
+        <p>Requested common name X509 certificate subject attribute. More info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6">https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.6</a> NOTE: TLS clients will ignore this value when any subject alternative name is set (see <a href="https://tools.ietf.org/html/rfc6125#section-6.4.4">https://tools.ietf.org/html/rfc6125#section-6.4.4</a>).</p>
+        <p>Should have a length of 64 characters or fewer to avoid generating invalid CSRs. Cannot be set if the <code>literalSubject</code> field is set.</p>
       </td>
     </tr>
     <tr>
@@ -4682,7 +4646,7 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Requested &lsquo;duration&rsquo; (i.e. lifetime) of the Certificate. Note that the issuer may choose to ignore the requested duration, just like any other requested attribute.</p>
-        <p> If unset, this defaults to 90 days. Minimum accepted duration is 1 hour. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>. </p>
+        <p>If unset, this defaults to 90 days. Minimum accepted duration is 1 hour. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>.</p>
       </td>
     </tr>
     <tr>
@@ -4695,9 +4659,9 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> How long before the currently issued certificate&rsquo;s expiry cert-manager should renew the certificate. For example, if a certificate is valid for 60 minutes, and <code>renewBefore=10m</code>, cert-manager will begin to attempt to renew the certificate 50 minutes after it was issued (i.e. when there are 10 minutes remaining until the certificate is no longer valid). </p>
+        <p>How long before the currently issued certificate&rsquo;s expiry cert-manager should renew the certificate. For example, if a certificate is valid for 60 minutes, and <code>renewBefore=10m</code>, cert-manager will begin to attempt to renew the certificate 50 minutes after it was issued (i.e. when there are 10 minutes remaining until the certificate is no longer valid).</p>
         <p>NOTE: The actual lifetime of the issued certificate is used to determine the renewal time. If an issuer returns a certificate with a different lifetime than the one requested, cert-manager will use the lifetime of the issued certificate.</p>
-        <p> If unset, this defaults to <sup>1</sup>&frasl;<sub>3</sub> of the issued certificate&rsquo;s lifetime. Minimum accepted value is 5 minutes. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>. Cannot be set if the <code>renewBeforePercentage</code> field is set. </p>
+        <p>If unset, this defaults to <sup>1</sup>&frasl;<sub>3</sub> of the issued certificate&rsquo;s lifetime. Minimum accepted value is 5 minutes. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>. Cannot be set if the <code>renewBeforePercentage</code> field is set.</p>
       </td>
     </tr>
     <tr>
@@ -4708,12 +4672,10 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> <code>renewBeforePercentage</code> is like <code>renewBefore</code>, except it is a relative percentage rather than an absolute duration. For example, if a certificate is valid for 60 minutes, and <code>renewBeforePercentage=25</code>, cert-manager will begin to attempt to renew the certificate 45 minutes after it was issued (i.e. when there are 15 minutes (25%) remaining until the certificate is no longer valid). </p>
+        <p><code>renewBeforePercentage</code> is like <code>renewBefore</code>, except it is a relative percentage rather than an absolute duration. For example, if a certificate is valid for 60 minutes, and <code>renewBeforePercentage=25</code>, cert-manager will begin to attempt to renew the certificate 45 minutes after it was issued (i.e. when there are 15 minutes (25%) remaining until the certificate is no longer valid).</p>
         <p>NOTE: The actual lifetime of the issued certificate is used to determine the renewal time. If an issuer returns a certificate with a different lifetime than the one requested, cert-manager will use the lifetime of the issued certificate.</p>
-        <p>
-          Value must be an integer in the range (0,100). The minimum effective
-          <code>renewBefore</code> derived from the <code>renewBeforePercentage</code> and <code>duration</code> fields is 5 minutes. Cannot be set if the <code>renewBefore</code> field is set.
-        </p>
+        <p>Value must be an integer in the range (0,100). The minimum effective
+          <code>renewBefore</code> derived from the <code>renewBeforePercentage</code> and <code>duration</code> fields is 5 minutes. Cannot be set if the <code>renewBefore</code> field is set.</p>
       </td>
     </tr>
     <tr>
@@ -4759,7 +4721,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> <code>otherNames</code> is an escape hatch for SAN that allows any type. We currently restrict the support to string like otherNames, cf RFC 5280 p 37 Any UTF8 String valued otherName can be passed with by setting the keys oid: x.x.x.x and UTF8Value: somevalue for <code>otherName</code>. Most commonly this would be UPN set with oid: 1.3.6.1.4.1.311.20.2.3 You should ensure that any OID passed is valid for the UTF8String type as we do not explicitly validate this. </p>
+        <p><code>otherNames</code> is an escape hatch for SAN that allows any type. We currently restrict the support to string like otherNames, cf RFC 5280 p 37 Any UTF8 String valued otherName can be passed with by setting the keys oid: x.x.x.x and UTF8Value: somevalue for <code>otherName</code>. Most commonly this would be UPN set with oid: 1.3.6.1.4.1.311.20.2.3 You should ensure that any OID passed is valid for the UTF8String type as we do not explicitly validate this.</p>
       </td>
     </tr>
     <tr>
@@ -4817,7 +4779,7 @@ description: >-
       </td>
       <td>
         <p>Reference to the issuer responsible for issuing the certificate. If the issuer is namespace-scoped, it must be in the same namespace as the Certificate. If the issuer is cluster-scoped, it can be used from any namespace.</p>
-        <p> The <code>name</code> field of the reference must always be specified. </p>
+        <p>The <code>name</code> field of the reference must always be specified.</p>
       </td>
     </tr>
     <tr>
@@ -4828,8 +4790,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Requested basic constraints isCA value. The isCA value is used to set the <code>isCA</code> field on the created CertificateRequest resources. Note that the issuer may choose to ignore the requested isCA value, just like any other requested attribute. </p>
-        <p> If true, this will automatically add the <code>cert sign</code> usage to the list of requested <code>usages</code>. </p>
+        <p>Requested basic constraints isCA value. The isCA value is used to set the <code>isCA</code> field on the created CertificateRequest resources. Note that the issuer may choose to ignore the requested isCA value, just like any other requested attribute.</p>
+        <p>If true, this will automatically add the <code>cert sign</code> usage to the list of requested <code>usages</code>.</p>
       </td>
     </tr>
     <tr>
@@ -4842,8 +4804,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Requested key usages and extended key usages. These usages are used to set the <code>usages</code> field on the created CertificateRequest resources. If <code>encodeUsagesInRequest</code> is unset or set to <code>true</code>, the usages will additionally be encoded in the <code>request</code> field which contains the CSR blob. </p>
-        <p> If unset, defaults to <code>digital signature</code> and <code>key encipherment</code>. </p>
+        <p>Requested key usages and extended key usages. These usages are used to set the <code>usages</code> field on the created CertificateRequest resources. If <code>encodeUsagesInRequest</code> is unset or set to <code>true</code>, the usages will additionally be encoded in the <code>request</code> field which contains the CSR blob.</p>
+        <p>If unset, defaults to <code>digital signature</code> and <code>key encipherment</code>.</p>
       </td>
     </tr>
     <tr>
@@ -4892,11 +4854,9 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>
-          The maximum number of CertificateRequest revisions that are maintained in the Certificate&rsquo;s history. Each revision represents a single <code>CertificateRequest</code>
-          created by this Certificate, either when it was created, renewed, or Spec was changed. Revisions will be removed by oldest first if the number of revisions exceeds this number.
-        </p>
-        <p> If set, revisionHistoryLimit must be a value of <code>1</code> or greater. Default value is <code>1</code>. </p>
+        <p>The maximum number of CertificateRequest revisions that are maintained in the Certificate&rsquo;s history. Each revision represents a single <code>CertificateRequest</code>
+          created by this Certificate, either when it was created, renewed, or Spec was changed. Revisions will be removed by oldest first if the number of revisions exceeds this number.</p>
+        <p>If set, revisionHistoryLimit must be a value of <code>1</code> or greater. Default value is <code>1</code>.</p>
       </td>
     </tr>
     <tr>
@@ -4922,17 +4882,15 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate. More Info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10">https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10</a> </p>
-        <p>
-          This is an Alpha Feature and is only enabled with the
-          <code>--feature-gates=NameConstraints=true</code> option set on both the controller and webhook components.
-        </p>
+        <p>x.509 certificate NameConstraint extension which MUST NOT be used in a non-CA certificate. More Info: <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10">https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10</a></p>
+        <p>This is an Alpha Feature and is only enabled with the
+          <code>--feature-gates=NameConstraints=true</code> option set on both the controller and webhook components.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.CertificateStatus">CertificateStatus</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.Certificate">Certificate</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.Certificate">Certificate</a>)</p>
 <div>
   <p>CertificateStatus defines the observed state of Certificate</p>
 </div>
@@ -4954,7 +4912,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> List of status conditions to indicate the status of certificates. Known condition types are <code>Ready</code> and <code>Issuing</code>. </p>
+        <p>List of status conditions to indicate the status of certificates. Known condition types are <code>Ready</code> and <code>Issuing</code>.</p>
       </td>
     </tr>
     <tr>
@@ -4980,7 +4938,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The time after which the certificate stored in the secret named by this resource in <code>spec.secretName</code> is valid. </p>
+        <p>The time after which the certificate stored in the secret named by this resource in <code>spec.secretName</code> is valid.</p>
       </td>
     </tr>
     <tr>
@@ -4993,7 +4951,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The expiration time of the certificate stored in the secret named by this resource in <code>spec.secretName</code>. </p>
+        <p>The expiration time of the certificate stored in the secret named by this resource in <code>spec.secretName</code>.</p>
       </td>
     </tr>
     <tr>
@@ -5018,10 +4976,8 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>The current &lsquo;revision&rsquo; of the certificate as issued.</p>
-        <p>
-          When a CertificateRequest resource is created, it will have the
-          <code>cert-manager.io/certificate-revision</code> set to one greater than the current value of this field.
-        </p>
+        <p>When a CertificateRequest resource is created, it will have the
+          <code>cert-manager.io/certificate-revision</code> set to one greater than the current value of this field.</p>
         <p>Upon issuance, this field will be set to the value of the annotation on the CertificateRequest resource used to issue the certificate.</p>
         <p>Persisting the value on the CertificateRequest resource allows the certificates controller to know whether a request is part of an old issuance or if it is part of the ongoing revision&rsquo;s issuance by checking if the revision value in the annotation is greater than this field.</p>
       </td>
@@ -5034,10 +4990,8 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>
-          The name of the Secret resource containing the private key to be used for the next certificate iteration. The keymanager controller will automatically set this field if the
-          <code>Issuing</code> condition is set to <code>True</code>. It will automatically unset this field when the Issuing condition is not set or False.
-        </p>
+        <p>The name of the Secret resource containing the private key to be used for the next certificate iteration. The keymanager controller will automatically set this field if the
+          <code>Issuing</code> condition is set to <code>True</code>. It will automatically unset this field when the Issuing condition is not set or False.</p>
       </td>
     </tr>
     <tr>
@@ -5056,7 +5010,7 @@ description: >-
 <h3 id="cert-manager.io/v1.GenericIssuer">GenericIssuer</h3>
 <div></div>
 <h3 id="cert-manager.io/v1.IssuerCondition">IssuerCondition</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerStatus">IssuerStatus</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerStatus">IssuerStatus</a>)</p>
 <div>
   <p>IssuerCondition contains condition information for an Issuer.</p>
 </div>
@@ -5077,7 +5031,7 @@ description: >-
         </em>
       </td>
       <td>
-        <p> Type of the condition, known values are (<code>Ready</code>). </p>
+        <p>Type of the condition, known values are (<code>Ready</code>).</p>
       </td>
     </tr>
     <tr>
@@ -5087,7 +5041,7 @@ description: >-
         <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.ConditionStatus</em>
       </td>
       <td>
-        <p> Status of the condition, one of (<code>True</code>, <code>False</code>, <code>Unknown</code>). </p>
+        <p>Status of the condition, one of (<code>True</code>, <code>False</code>, <code>Unknown</code>).</p>
       </td>
     </tr>
     <tr>
@@ -5139,7 +5093,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.IssuerConditionType"> IssuerConditionType (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerCondition">IssuerCondition</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerCondition">IssuerCondition</a>)</p>
 <div>
   <p>IssuerConditionType represents an Issuer condition value.</p>
 </div>
@@ -5156,13 +5110,13 @@ description: >-
         <p>&#34;Ready&#34;</p>
       </td>
       <td>
-        <p> IssuerConditionReady represents the fact that a given Issuer condition is in ready state and able to issue certificates. If the <code>status</code> of this condition is <code>False</code>, CertificateRequest controllers should prevent attempts to sign certificates. </p>
+        <p>IssuerConditionReady represents the fact that a given Issuer condition is in ready state and able to issue certificates. If the <code>status</code> of this condition is <code>False</code>, CertificateRequest controllers should prevent attempts to sign certificates.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.IssuerConfig">IssuerConfig</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerSpec">IssuerSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerSpec">IssuerSpec</a>)</p>
 <div>
   <p>The configuration for the issuer. Only one of these can be set.</p>
 </div>
@@ -5242,7 +5196,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.IssuerSpec">IssuerSpec</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.ClusterIssuer">ClusterIssuer</a>, <a href="#cert-manager.io/v1.Issuer">Issuer</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.ClusterIssuer">ClusterIssuer</a>, <a href="#cert-manager.io/v1.Issuer">Issuer</a>)</p>
 <div>
   <p>IssuerSpec is the specification of an Issuer. This includes any configuration required for the issuer.</p>
 </div>
@@ -5263,13 +5217,13 @@ description: >-
         </em>
       </td>
       <td>
-        <p> (Members of <code>IssuerConfig</code> are embedded into this type.) </p>
+        <p>(Members of <code>IssuerConfig</code> are embedded into this type.)</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.IssuerStatus">IssuerStatus</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.ClusterIssuer">ClusterIssuer</a>, <a href="#cert-manager.io/v1.Issuer">Issuer</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.ClusterIssuer">ClusterIssuer</a>, <a href="#cert-manager.io/v1.Issuer">Issuer</a>)</p>
 <div>
   <p>IssuerStatus contains status information about an Issuer</p>
 </div>
@@ -5291,7 +5245,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> List of status conditions to indicate the status of a CertificateRequest. Known condition types are <code>Ready</code>. </p>
+        <p>List of status conditions to indicate the status of a CertificateRequest. Known condition types are <code>Ready</code>.</p>
       </td>
     </tr>
     <tr>
@@ -5310,7 +5264,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.JKSKeystore">JKSKeystore</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateKeystores">CertificateKeystores</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateKeystores">CertificateKeystores</a>)</p>
 <div>
   <p>JKS configures options for storing a JKS keystore in the target secret. Either PasswordSecretRef or Password must be provided.</p>
 </div>
@@ -5329,10 +5283,8 @@ description: >-
         <em>bool</em>
       </td>
       <td>
-        <p>
-          Create enables JKS keystore creation for the Certificate. If true, a file named <code>keystore.jks</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> or <code>password</code>. The keystore file will be updated immediately. If the issuer provided a CA certificate, a file named <code>truststore.jks</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>
-          containing the issuing Certificate Authority
-        </p>
+        <p>Create enables JKS keystore creation for the Certificate. If true, a file named <code>keystore.jks</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> or <code>password</code>. The keystore file will be updated immediately. If the issuer provided a CA certificate, a file named <code>truststore.jks</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code>
+          containing the issuing Certificate Authority</p>
       </td>
     </tr>
     <tr>
@@ -5343,7 +5295,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Alias specifies the alias of the key in the keystore, required by the JKS format. If not provided, the default alias <code>certificate</code> will be used. </p>
+        <p>Alias specifies the alias of the key in the keystore, required by the JKS format. If not provided, the default alias <code>certificate</code> will be used.</p>
       </td>
     </tr>
     <tr>
@@ -5371,13 +5323,11 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.KeyUsage"> KeyUsage (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequestSpec">CertificateRequestSpec</a>, <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRequestSpec">CertificateRequestSpec</a>, <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>)</p>
 <div>
-  <p>
-    KeyUsage specifies valid usage contexts for keys. See:
+  <p>KeyUsage specifies valid usage contexts for keys. See:
     <a href="https://tools.ietf.org/html/rfc5280#section-4.2.1.3">https://tools.ietf.org/html/rfc5280#section-4.2.1.3</a>
-    <a href="https://tools.ietf.org/html/rfc5280#section-4.2.1.12">https://tools.ietf.org/html/rfc5280#section-4.2.1.12</a>
-  </p>
+    <a href="https://tools.ietf.org/html/rfc5280#section-4.2.1.12">https://tools.ietf.org/html/rfc5280#section-4.2.1.12</a></p>
   <p>Valid KeyUsage values are as follows: &ldquo;signing&rdquo;, &ldquo;digital signature&rdquo;, &ldquo;content commitment&rdquo;, &ldquo;key encipherment&rdquo;, &ldquo;key agreement&rdquo;, &ldquo;data encipherment&rdquo;, &ldquo;cert sign&rdquo;, &ldquo;crl sign&rdquo;, &ldquo;encipher only&rdquo;, &ldquo;decipher only&rdquo;, &ldquo;any&rdquo;, &ldquo;server auth&rdquo;, &ldquo;client auth&rdquo;, &ldquo;code signing&rdquo;, &ldquo;email protection&rdquo;, &ldquo;s/mime&rdquo;, &ldquo;ipsec end system&rdquo;, &ldquo;ipsec tunnel&rdquo;, &ldquo;ipsec user&rdquo;, &ldquo;timestamping&rdquo;, &ldquo;ocsp signing&rdquo;, &ldquo;microsoft sgc&rdquo;, &ldquo;netscape sgc&rdquo;</p>
 </div>
 <table>
@@ -5529,7 +5479,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.NameConstraintItem">NameConstraintItem</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.NameConstraints">NameConstraints</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.NameConstraints">NameConstraints</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -5586,7 +5536,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.NameConstraints">NameConstraints</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>)</p>
 <div>
   <p>NameConstraints is a type to represent x509 NameConstraints</p>
 </div>
@@ -5638,7 +5588,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.OtherName">OtherName</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -5671,12 +5621,10 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateKeystores">CertificateKeystores</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateKeystores">CertificateKeystores</a>)</p>
 <div>
-  <p>
-    PKCS12 configures options for storing a PKCS12 keystore in the
-    <code>spec.secretName</code> Secret resource.
-  </p>
+  <p>PKCS12 configures options for storing a PKCS12 keystore in the
+    <code>spec.secretName</code> Secret resource.</p>
 </div>
 <table>
   <thead>
@@ -5693,7 +5641,7 @@ description: >-
         <em>bool</em>
       </td>
       <td>
-        <p> Create enables PKCS12 keystore creation for the Certificate. If true, a file named <code>keystore.p12</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> or in <code>password</code>. The keystore file will be updated immediately. If the issuer provided a CA certificate, a file named <code>truststore.p12</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority </p>
+        <p>Create enables PKCS12 keystore creation for the Certificate. If true, a file named <code>keystore.p12</code> will be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> or in <code>password</code>. The keystore file will be updated immediately. If the issuer provided a CA certificate, a file named <code>truststore.p12</code> will also be created in the target Secret resource, encrypted using the password stored in <code>passwordSecretRef</code> containing the issuing Certificate Authority</p>
       </td>
     </tr>
     <tr>
@@ -5706,11 +5654,9 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Profile specifies the key and certificate encryption algorithms and the HMAC algorithm used to create the PKCS12 keystore. Default value is <code>LegacyRC2</code> for backward compatibility. </p>
-        <p>
-          If provided, allowed values are:
-          <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (e.g., because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret.
-        </p>
+        <p>Profile specifies the key and certificate encryption algorithms and the HMAC algorithm used to create the PKCS12 keystore. Default value is <code>LegacyRC2</code> for backward compatibility.</p>
+        <p>If provided, allowed values are:
+          <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (e.g., because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret.</p>
       </td>
     </tr>
     <tr>
@@ -5738,7 +5684,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.PKCS12Profile"> PKCS12Profile (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.PKCS12Keystore">PKCS12Keystore</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -5753,7 +5699,7 @@ description: >-
         <p>&#34;LegacyDES&#34;</p>
       </td>
       <td>
-        <p> see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyDES">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyDES</a> </p>
+        <p>see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyDES">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyDES</a></p>
       </td>
     </tr>
     <tr>
@@ -5761,7 +5707,7 @@ description: >-
         <p>&#34;LegacyRC2&#34;</p>
       </td>
       <td>
-        <p> see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyRC2">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyRC2</a> </p>
+        <p>see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyRC2">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#LegacyRC2</a></p>
       </td>
     </tr>
     <tr>
@@ -5769,13 +5715,13 @@ description: >-
         <p>&#34;Modern2023&#34;</p>
       </td>
       <td>
-        <p> see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2023">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2023</a> </p>
+        <p>see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2023">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2023</a></p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.PrivateKeyAlgorithm"> PrivateKeyAlgorithm (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificatePrivateKey">CertificatePrivateKey</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificatePrivateKey">CertificatePrivateKey</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -5812,7 +5758,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.PrivateKeyEncoding"> PrivateKeyEncoding (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificatePrivateKey">CertificatePrivateKey</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificatePrivateKey">CertificatePrivateKey</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -5827,7 +5773,7 @@ description: >-
         <p>&#34;PKCS1&#34;</p>
       </td>
       <td>
-        <p> PKCS1 private key encoding. For RSA keys: produces PEM block with <code>BEGIN RSA PRIVATE KEY</code> header and private key in PKCS#1 format. For EC keys: produces PEM block with <code>BEGIN EC PRIVATE KEY</code> header and private key in SEC 1 format. For Ed25519 keys: option will be ignored and PKCS8 encoding will be used instead. </p>
+        <p>PKCS1 private key encoding. For RSA keys: produces PEM block with <code>BEGIN RSA PRIVATE KEY</code> header and private key in PKCS#1 format. For EC keys: produces PEM block with <code>BEGIN EC PRIVATE KEY</code> header and private key in SEC 1 format. For Ed25519 keys: option will be ignored and PKCS8 encoding will be used instead.</p>
       </td>
     </tr>
     <tr>
@@ -5835,18 +5781,18 @@ description: >-
         <p>&#34;PKCS8&#34;</p>
       </td>
       <td>
-        <p> PKCS8 private key encoding. PKCS8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its <code>BEGIN PRIVATE KEY</code> header. </p>
+        <p>PKCS8 private key encoding. PKCS8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its <code>BEGIN PRIVATE KEY</code> header.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.PrivateKeyRotationPolicy"> PrivateKeyRotationPolicy (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificatePrivateKey">CertificatePrivateKey</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificatePrivateKey">CertificatePrivateKey</a>)</p>
 <div>
   <p>Denotes how private keys should be generated or sourced when a Certificate is being issued.</p>
 </div>
 <h3 id="cert-manager.io/v1.SelfSignedIssuer">SelfSignedIssuer</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>)</p>
 <div>
   <p>Configures an issuer to &lsquo;self sign&rsquo; certificates using the private key used to create the CertificateRequest object.</p>
 </div>
@@ -5872,9 +5818,9 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.ServiceAccountRef">ServiceAccountRef</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>)</p>
 <div>
-  <p> ServiceAccountRef is a service account used by cert-manager to request a token. By default two audiences are included: the address of the Vault server as specified on the issuer, and a generated audience taking the form of <code>vault://namespace-name/issuer-name</code> for an Issuer and <code>vault://issuer-name</code> for a ClusterIssuer. The expiration of the token is also set by cert-manager to 10 minutes. </p>
+  <p>ServiceAccountRef is a service account used by cert-manager to request a token. By default two audiences are included: the address of the Vault server as specified on the issuer, and a generated audience taking the form of <code>vault://namespace-name/issuer-name</code> for an Issuer and <code>vault://issuer-name</code> for a ClusterIssuer. The expiration of the token is also set by cert-manager to 10 minutes.</p>
 </div>
 <table>
   <thead>
@@ -5908,7 +5854,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.SignatureAlgorithm"> SignatureAlgorithm (<code>string</code> alias) </h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -5963,7 +5909,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.VaultAppRole">VaultAppRole</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>)</p>
 <div>
   <p>VaultAppRole authenticates with Vault using the App Role auth mechanism, with the role and secret stored in a Kubernetes Secret resource.</p>
 </div>
@@ -6002,15 +5948,15 @@ description: >-
         <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector</em>
       </td>
       <td>
-        <p> Reference to a key in a Secret that contains the App Role secret used to authenticate with Vault. The <code>key</code> field must be specified and denotes which entry within the Secret resource is used as the app role secret. </p>
+        <p>Reference to a key in a Secret that contains the App Role secret used to authenticate with Vault. The <code>key</code> field must be specified and denotes which entry within the Secret resource is used as the app role secret.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.VaultAuth">VaultAuth</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultIssuer">VaultIssuer</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultIssuer">VaultIssuer</a>)</p>
 <div>
-  <p> VaultAuth is configuration used to authenticate with a Vault server. The order of precedence is [<code>tokenSecretRef</code>, <code>appRole</code>, <code>clientCertificate</code> or <code>kubernetes</code>]. </p>
+  <p>VaultAuth is configuration used to authenticate with a Vault server. The order of precedence is [<code>tokenSecretRef</code>, <code>appRole</code>, <code>clientCertificate</code> or <code>kubernetes</code>].</p>
 </div>
 <table>
   <thead>
@@ -6073,7 +6019,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.VaultClientCertificateAuth">VaultClientCertificateAuth</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>)</p>
 <div>
   <p>VaultClientCertificateAuth is used to authenticate against Vault using a client certificate stored in a Secret.</p>
 </div>
@@ -6093,7 +6039,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The Vault mountPath here is the mount path to use when authenticating with Vault. For example, setting a value to <code>/v1/auth/foo</code>, will use the path <code>/v1/auth/foo/login</code> to authenticate with Vault. If unspecified, the default value &ldquo;/v1/auth/cert&rdquo; will be used. </p>
+        <p>The Vault mountPath here is the mount path to use when authenticating with Vault. For example, setting a value to <code>/v1/auth/foo</code>, will use the path <code>/v1/auth/foo/login</code> to authenticate with Vault. If unspecified, the default value &ldquo;/v1/auth/cert&rdquo; will be used.</p>
       </td>
     </tr>
     <tr>
@@ -6121,7 +6067,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.VaultIssuer">VaultIssuer</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>)</p>
 <div>
   <p>Configures an issuer to sign certificates using a HashiCorp Vault PKI backend.</p>
 </div>
@@ -6152,7 +6098,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p> Server is the connection address for the Vault server, e.g: &ldquo;<a href='https://vault.example.com:8200"'>https://vault.example.com:8200&rdquo;</a>. </p>
+        <p>Server is the connection address for the Vault server, e.g: &ldquo;<a href='https://vault.example.com:8200"'>https://vault.example.com:8200&rdquo;</a>.</p>
       </td>
     </tr>
     <tr>
@@ -6173,7 +6119,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p> Path is the mount path of the Vault PKI backend&rsquo;s <code>sign</code> endpoint, e.g: &ldquo;my_pki_mount/sign/my-role-name&rdquo;. </p>
+        <p>Path is the mount path of the Vault PKI backend&rsquo;s <code>sign</code> endpoint, e.g: &ldquo;my_pki_mount/sign/my-role-name&rdquo;.</p>
       </td>
     </tr>
     <tr>
@@ -6184,7 +6130,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> Name of the vault namespace. Namespaces is a set of features within Vault Enterprise that allows Vault environments to support Secure Multi-tenancy. e.g: &ldquo;ns1&rdquo; More about namespaces can be found here <a href="https://www.vaultproject.io/docs/enterprise/namespaces">https://www.vaultproject.io/docs/enterprise/namespaces</a> </p>
+        <p>Name of the vault namespace. Namespaces is a set of features within Vault Enterprise that allows Vault environments to support Secure Multi-tenancy. e.g: &ldquo;ns1&rdquo; More about namespaces can be found here <a href="https://www.vaultproject.io/docs/enterprise/namespaces">https://www.vaultproject.io/docs/enterprise/namespaces</a></p>
       </td>
     </tr>
     <tr>
@@ -6234,7 +6180,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>)</p>
 <div>
   <p>Authenticate against Vault using a Kubernetes ServiceAccount token stored in a Secret.</p>
 </div>
@@ -6254,7 +6200,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> The Vault mountPath here is the mount path to use when authenticating with Vault. For example, setting a value to <code>/v1/auth/foo</code>, will use the path <code>/v1/auth/foo/login</code> to authenticate with Vault. If unspecified, the default value &ldquo;/v1/auth/kubernetes&rdquo; will be used. </p>
+        <p>The Vault mountPath here is the mount path to use when authenticating with Vault. For example, setting a value to <code>/v1/auth/foo</code>, will use the path <code>/v1/auth/foo/login</code> to authenticate with Vault. If unspecified, the default value &ldquo;/v1/auth/kubernetes&rdquo; will be used.</p>
       </td>
     </tr>
     <tr>
@@ -6294,7 +6240,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.VenafiCloud">VenafiCloud</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VenafiIssuer">VenafiIssuer</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VenafiIssuer">VenafiIssuer</a>)</p>
 <div>
   <p>VenafiCloud defines connection configuration details for CyberArk Certificate Manager SaaS</p>
 </div>
@@ -6314,7 +6260,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p> URL is the base URL for CyberArk Certificate Manager SaaS. Defaults to &ldquo;<a href='https://api.venafi.cloud/"'>https://api.venafi.cloud/&rdquo;</a>. </p>
+        <p>URL is the base URL for CyberArk Certificate Manager SaaS. Defaults to &ldquo;<a href='https://api.venafi.cloud/"'>https://api.venafi.cloud/&rdquo;</a>.</p>
       </td>
     </tr>
     <tr>
@@ -6330,7 +6276,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.VenafiIssuer">VenafiIssuer</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>)</p>
 <div>
   <p>Configures an issuer to sign certificates using a CyberArk Certificate Manager Self-Hosted or SaaS policy zone.</p>
 </div>
@@ -6381,7 +6327,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.VenafiTPP">VenafiTPP</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.VenafiIssuer">VenafiIssuer</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VenafiIssuer">VenafiIssuer</a>)</p>
 <div>
   <p>VenafiTPP defines connection configuration details for a CyberArk Certificate Manager Self-Hosted instance</p>
 </div>
@@ -6400,7 +6346,7 @@ description: >-
         <em>string</em>
       </td>
       <td>
-        <p> URL is the base URL for the vedsdk endpoint of the CyberArk Certificate Manager Self-Hosted instance, for example: &ldquo;<a href='https://tpp.example.com/vedsdk"'>https://tpp.example.com/vedsdk&rdquo;</a>. </p>
+        <p>URL is the base URL for the vedsdk endpoint of the CyberArk Certificate Manager Self-Hosted instance, for example: &ldquo;<a href='https://tpp.example.com/vedsdk"'>https://tpp.example.com/vedsdk&rdquo;</a>.</p>
       </td>
     </tr>
     <tr>
@@ -6438,7 +6384,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.X509Subject">X509Subject</h3>
-<p> (<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>) </p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>)</p>
 <div>
   <p>X509Subject Full X509 name specification</p>
 </div>
@@ -6548,7 +6494,7 @@ description: >-
 <p>Resource Types:</p>
 <ul></ul>
 <h3 id="controller.config.cert-manager.io/v1alpha1.ACMEDNS01Config">ACMEDNS01Config</h3>
-<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<p>(<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -6565,7 +6511,7 @@ description: >-
         <em>[]string</em>
       </td>
       <td>
-        <p> Each nameserver can be either the IP address and port of a standard recursive DNS server, or the endpoint to an RFC 8484 DNS over HTTPS endpoint. For example, the following values are valid: - &ldquo;8.8.8.8:53&rdquo; (Standard DNS) - &ldquo;<a href='https://1.1.1.1/dns-query"'>https://1.1.1.1/dns-query&rdquo;</a> (DNS over HTTPS) </p>
+        <p>Each nameserver can be either the IP address and port of a standard recursive DNS server, or the endpoint to an RFC 8484 DNS over HTTPS endpoint. For example, the following values are valid: - &ldquo;8.8.8.8:53&rdquo; (Standard DNS) - &ldquo;<a href='https://1.1.1.1/dns-query"'>https://1.1.1.1/dns-query&rdquo;</a> (DNS over HTTPS)</p>
       </td>
     </tr>
     <tr>
@@ -6591,7 +6537,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="controller.config.cert-manager.io/v1alpha1.ACMEHTTP01Config">ACMEHTTP01Config</h3>
-<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<p>(<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -6701,7 +6647,7 @@ description: >-
       </td>
       <td>
         <p>apiServerHost is used to override the API server connection address.</p>
-        <p> Deprecated: use <code>kubeConfig</code> instead. </p>
+        <p>Deprecated: use <code>kubeConfig</code> instead.</p>
       </td>
     </tr>
     <tr>
@@ -6711,7 +6657,7 @@ description: >-
         <em>float32</em>
       </td>
       <td>
-        <p> Indicates the maximum queries-per-second requests to the Kubernetes apiserver TODO: floats are not recommended. Maybe we should use resource.Quantity? <a href="https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/">https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/</a> </p>
+        <p>Indicates the maximum queries-per-second requests to the Kubernetes apiserver TODO: floats are not recommended. Maybe we should use resource.Quantity? <a href="https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/">https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/</a></p>
       </td>
     </tr>
     <tr>
@@ -6763,7 +6709,7 @@ description: >-
         <em>[]string</em>
       </td>
       <td>
-        <p> A list of controllers to enable. [&rsquo;<em>&rsquo;] enables all controllers, [&lsquo;foo&rsquo;] enables only the foo controller [&rsquo;</em>&rsquo;, &lsquo;-foo&rsquo;] disables the controller named foo. </p>
+        <p>A list of controllers to enable. [&rsquo;<em>&rsquo;] enables all controllers, [&lsquo;foo&rsquo;] enables only the foo controller [&rsquo;</em>&rsquo;, &lsquo;-foo&rsquo;] disables the controller named foo.</p>
       </td>
     </tr>
     <tr>
@@ -6917,10 +6863,8 @@ description: >-
         <em>k8s.io/component-base/logs/api/v1.LoggingConfiguration</em>
       </td>
       <td>
-        <p>
-          logging configures the logging behaviour of the controller.
-          <a href="https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration">https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration</a>
-        </p>
+        <p>logging configures the logging behaviour of the controller.
+          <a href="https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration">https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration</a></p>
       </td>
     </tr>
     <tr>
@@ -7038,7 +6982,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="controller.config.cert-manager.io/v1alpha1.IngressShimConfig">IngressShimConfig</h3>
-<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<p>(<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -7101,7 +7045,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="controller.config.cert-manager.io/v1alpha1.LeaderElectionConfig">LeaderElectionConfig</h3>
-<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<p>(<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -7118,7 +7062,7 @@ description: >-
         <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.LeaderElectionConfig</em>
       </td>
       <td>
-        <p> (Members of <code>LeaderElectionConfig</code> are embedded into this type.) </p>
+        <p>(Members of <code>LeaderElectionConfig</code> are embedded into this type.)</p>
       </td>
     </tr>
     <tr>
@@ -7134,7 +7078,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="controller.config.cert-manager.io/v1alpha1.PEMSizeLimitsConfig">PEMSizeLimitsConfig</h3>
-<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<p>(<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -7251,7 +7195,7 @@ description: >-
       </td>
       <td>
         <p>apiServerHost is used to override the API server connection address.</p>
-        <p> Deprecated: use <code>kubeConfig</code> instead. </p>
+        <p>Deprecated: use <code>kubeConfig</code> instead.</p>
       </td>
     </tr>
     <tr>
@@ -7281,10 +7225,8 @@ description: >-
         <em>k8s.io/component-base/logs/api/v1.LoggingConfiguration</em>
       </td>
       <td>
-        <p>
-          logging configures the logging behaviour of the webhook.
-          <a href="https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration">https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration</a>
-        </p>
+        <p>logging configures the logging behaviour of the webhook.
+          <a href="https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration">https://pkg.go.dev/k8s.io/component-base@v0.27.3/logs/api/v1#LoggingConfiguration</a></p>
       </td>
     </tr>
     <tr>
@@ -7351,6 +7293,4 @@ description: >-
   </tbody>
 </table>
 <hr />
-<p>
-  <em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>0d2f215</code>. </em>
-</p>
+<p><em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>0bca8fd</code>. </em></p>

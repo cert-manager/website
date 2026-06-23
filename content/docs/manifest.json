@@ -690,6 +690,10 @@
               "path": "/docs/installation/compatibility.md"
             },
             {
+              "title": "Threat Model",
+              "path": "/docs/devops-tips/threat-modelling.md"
+            },
+            {
               "title": "Prometheus Metrics",
               "path": "/docs/devops-tips/prometheus-metrics.md"
             },
