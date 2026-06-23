@@ -33,4 +33,9 @@ result = await prettier.format(result, {
   printWidth: 1000
 })
 
+// The babel→HTML prettier pipeline inserts whitespace inside <p> tags
+// (babel reformats "<p>(" to "<p>\n  (" which the HTML pass collapses to
+// "<p> ("). Strip these cosmetic spaces since <p> is a block element.
+result = result.replace(/<p>\s+/g, '<p>').replace(/\s+<\/p>/g, '</p>')
+
 writeFileSync(1, matter.stringify(result, data))
