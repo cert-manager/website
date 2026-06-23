@@ -5,11 +5,40 @@ description: 'cert-manager release notes: cert-manager 1.21'
 
 cert-manager v1.21 includes:
 
-- TODO
+- Removal of the default `tokenrequest` RBAC from the Helm chart (breaking change)
 
 ## Major Themes
 
-### TODO
+### Default `tokenrequest` RBAC removed from Helm chart
+
+> ⚠️ Breaking change
+
+The Helm chart no longer creates a default `Role` and `RoleBinding` granting
+the cert-manager controller permission to create tokens for its own
+ServiceAccount (`serviceaccounts/token: create`).
+
+This RBAC was added in v1.16
+([cert-manager/cert-manager#7213](https://github.com/cert-manager/cert-manager/pull/7213))
+to support a "Using the cert-manager ServiceAccount" section in the Route53
+documentation. That docs section was subsequently removed
+([cert-manager/website#1555](https://github.com/cert-manager/website/pull/1555))
+when the Route53 page was restructured, and no documented workflow — Route53
+IRSA ambient, Vault Kubernetes auth, or any other issuer — requires the
+controller to mint tokens for its own ServiceAccount.
+
+If you use `serviceAccountRef.name` pointing at the controller ServiceAccount,
+you must now either:
+
+- create your own `Role` and `RoleBinding` granting
+  `serviceaccounts/token: create` on that ServiceAccount, or
+- migrate to a dedicated ServiceAccount with its own RBAC (recommended — see
+  the [Vault](../../configuration/vault.md) or
+  [Route53](../../configuration/acme/dns01/route53.md) documentation).
+
+Credit to **@everping** and **@kodareef5** for independently identifying (via
+privately reported security advisories) that this default RBAC widened the trust
+boundary beyond what cert-manager's published
+[threat model](../../devops-tips/threat-modelling.md) documents.
 
 ## Community
 
@@ -53,4 +82,12 @@ TODO
 
 ### Other (Cleanup or Flake)
 
-TODO
+- Removed the default `tokenrequest` Role and RoleBinding from the Helm chart
+  that granted the controller ServiceAccount permission to mint tokens for
+  itself. No documented workflow requires this RBAC. Users who relied on the
+  undocumented pattern of pointing `serviceAccountRef.name` at the controller
+  ServiceAccount must create their own Role and RoleBinding, or migrate to a
+  dedicated ServiceAccount. See the
+  [upgrading notes](../upgrading/upgrading-1.20-1.21.md) for details.
+  ([cert-manager/cert-manager#8931](https://github.com/cert-manager/cert-manager/pull/8931),
+  [@wallrj-cyberark](https://github.com/wallrj-cyberark))
