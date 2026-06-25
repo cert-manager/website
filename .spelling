@@ -65,6 +65,9 @@ lvyanru8200
 vedauth
 CVE-2022-41717
 CVE-2023-29409
+CVE-2026-27145
+CVE-2026-42504
+CVE-2026-42507
 seccomp
 RedHat
 RoleBinding
@@ -608,6 +611,7 @@ v1.19.1
 v1.20.0
 v1.19.2
 v1.19.5
+v1.19.6
 v1.20.0
 v1.19.x
 v1.20.0
@@ -673,6 +677,7 @@ vendoring
 vendored
 versioning
 wallrj
+wallrj-cyberark
 webhook
 webhooks
 whitelist
