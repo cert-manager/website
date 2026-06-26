@@ -89,6 +89,69 @@ Solvers come in the form of [`dns01`](./dns01/README.md) and
 these solver types, visit their respective documentation -
 [DNS01](./dns01/README.md), [HTTP01](./http01/README.md).
 
+### Skip the self-check with `waitInsteadOfSelfCheck`
+
+> ℹ️ This feature is available in cert-manager `>= v1.21.0`.
+
+The `waitInsteadOfSelfCheck` solver option skips cert-manager's own
+[self-check](../../concepts/acme-orders-challenges.md#challenge-lifecycle)
+and instead waits a configured duration after presentation before asking the
+ACME server to validate the challenge.
+
+You can set this field on either an `http01` or `dns01` solver entry.
+
+This is aimed at environments such as:
+
+- NAT loopback limitations, where cert-manager cannot reach the public address that the
+  ACME server can reach;
+- split-horizon DNS, where cert-manager resolves a different address than the
+  ACME server does; or
+- public/private ingress topologies where cert-manager only sees the internal
+  path but the ACME server validates against the external path.
+
+The behavior when `waitInsteadOfSelfCheck` is set is:
+
+- cert-manager presents the challenge as usual;
+- cert-manager records the time of first presentation in `status.presentedAt`;
+- cert-manager skips its own self-check; and
+- once the configured duration has elapsed since `status.presentedAt`,
+  cert-manager asks the ACME server to validate the challenge.
+
+For example:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    email: user@example.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: example-issuer-account-key
+    solvers:
+    - http01:
+        ingress:
+          ingressClassName: nginx-public
+      # or use dns01: instead of http01: for split-horizon DNS scenarios
+      waitInsteadOfSelfCheck: 30s
+```
+
+This is an advanced escape hatch for cases where cert-manager cannot directly
+observe the same validation path as the ACME server.
+
+Choose the delay conservatively. If it is too short, the ACME server may still
+start validation before your solver resources are reachable. If it is too long,
+certificate issuance will wait longer than necessary.
+
+A value of `0` is permitted: cert-manager skips the self-check and asks the ACME
+server to validate immediately after presentation. In this case cert-manager
+relies on the ACME server's own validation retries
+([RFC 8555 section 8.2](https://www.rfc-editor.org/rfc/rfc8555#section-8.2)) to
+succeed once the challenge has propagated. Negative durations are rejected by the
+validating webhook.
+
 ### ACME Certificate Profiles
 
 > ℹ️ This feature is available in cert-manager `>= v1.18.0`.
