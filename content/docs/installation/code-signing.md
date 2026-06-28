@@ -18,12 +18,27 @@ key.
 
 For all cert-manager versions from `v1.8.0` and later, cert-manager container images are signed and verifiable using [`cosign`](https://docs.sigstore.dev/cosign/overview).
 
+The cert-manager project publishes the following container images on Quay:
+
+- `quay.io/jetstack/cert-manager-controller`
+- `quay.io/jetstack/cert-manager-webhook`
+- `quay.io/jetstack/cert-manager-cainjector`
+- `quay.io/jetstack/cert-manager-acmesolver`
+- `quay.io/jetstack/cert-manager-startupapicheck`
+
+You can browse the available tags for each image directly on Quay:
+
+- [`cert-manager-controller` tags](https://quay.io/repository/jetstack/cert-manager-controller?tab=tags)
+- [`cert-manager-webhook` tags](https://quay.io/repository/jetstack/cert-manager-webhook?tab=tags)
+- [`cert-manager-cainjector` tags](https://quay.io/repository/jetstack/cert-manager-cainjector?tab=tags)
+- [`cert-manager-acmesolver` tags](https://quay.io/repository/jetstack/cert-manager-acmesolver?tab=tags)
+- [`cert-manager-startupapicheck` tags](https://quay.io/repository/jetstack/cert-manager-startupapicheck?tab=tags)
+
 ```console
 IMAGE_TAG=[[VAR::cert_manager_latest_version]]  # change as needed
 KEY=https://cert-manager.io/public-keys/cert-manager-pubkey-2021-09-20.pem
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-acmesolver:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-cainjector:$IMAGE_TAG
-cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-ctl:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-startupapicheck:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-controller:$IMAGE_TAG
 cosign verify --signature-digest-algorithm sha512 --insecure-ignore-tlog --key $KEY quay.io/jetstack/cert-manager-webhook:$IMAGE_TAG
