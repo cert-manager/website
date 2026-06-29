@@ -42,6 +42,11 @@ Then the webhook can be configured with either
 1. paths to a TLS certificate and key signed by the webhook CA, or
 2. a reference to the CA Secret for dynamic generation of the certificate and key on webhook startup
 
+When using dynamic generation, the webhook automatically renews its serving
+certificate before it expires. Since cert-manager 1.21, this renewal is
+resilient to system suspend (S3/S4) and VM live migration — events that can
+cause the renewal timer to miss its deadline.
+
 ## Known Problems and Solutions
 
 ### Webhook connection problems on GKE private cluster

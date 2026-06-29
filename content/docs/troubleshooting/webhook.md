@@ -530,12 +530,19 @@ Internal error occurred: failed calling webhook "webhook.cert-manager.io":
     x509: certificate has expired or is not yet valid
 ```
 
-> This error message was reported once in Slack
-([1](https://kubernetes.slack.com/archives/C4NV3DWUC/p1618579222346800)).
+One known cause is system suspend (S3/S4) or VM live migration. The webhook
+generates and automatically renews its own self-signed serving certificate, but
+prior to cert-manager 1.21 the renewal timer relied on Go's monotonic clock
+(`CLOCK_MONOTONIC`), which stops advancing during system suspend. When the system
+resumes, the timer has not reached its deadline, so the certificate is never
+renewed — even though wall-clock time has advanced past its expiry.
 
-Please answer to the above Slack message since we are still unsure as to what
-may cause this issue; to get access to the Kubernetes Slack, visit
-[https://slack.k8s.io/](https://slack.k8s.io/).
+If you are running cert-manager 1.20 or earlier and encounter this error after
+resuming from suspend or after a VM migration, upgrading to cert-manager 1.21
+resolves the issue
+([#8464](https://github.com/cert-manager/cert-manager/pull/8464)). As a
+workaround, restarting the webhook pod forces it to regenerate its serving
+certificate.
 
 ## Error: `net/http: request canceled while waiting for connection`
 
