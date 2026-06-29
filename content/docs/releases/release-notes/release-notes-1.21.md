@@ -6,6 +6,7 @@ description: 'cert-manager release notes: cert-manager 1.21'
 cert-manager v1.21 includes:
 
 - Removal of the default `tokenrequest` RBAC from the Helm chart (breaking change)
+- Removal of Challenge and Order write permissions from the `cert-manager-edit` aggregate ClusterRole (breaking change)
 
 ## Major Themes
 
@@ -39,6 +40,31 @@ Credit to **@everping** and **@kodareef5** for independently identifying (via
 privately reported security advisories) that this default RBAC widened the trust
 boundary beyond what cert-manager's published
 [threat model](../../devops-tips/threat-modelling.md) documents.
+
+### Restrict Challenge and Order RBAC in `cert-manager-edit` ClusterRole
+
+> ⚠️ Potentially breaking change
+
+The `cert-manager-edit` aggregate ClusterRole no longer grants `create` for
+`challenges.acme.cert-manager.io` or `create`, `patch`, `update` for
+`orders.acme.cert-manager.io`. This fixes a security issue
+([`GHSA-8rvj-mm4h-c258`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-8rvj-mm4h-c258))
+where these permissions allowed namespace users to bypass Issuer solver
+selectors and abuse ClusterIssuer credentials.
+
+These resources are internal to cert-manager's ACME workflow and are not
+intended to be created or modified directly by users. Challenge `patch` and
+`update` are retained because the Challenge spec is immutable after creation
+and users may need these verbs to remove stuck finalizers
+(cert-manager/cert-manager#3851, cert-manager/cert-manager#3870).
+
+This change was already shipped in patch releases v1.20.3 and v1.19.6, so if
+you are already running one of those versions this will not be a breaking
+change.
+
+If you have tooling or workflows that create Challenge or Order resources
+directly (outside of the normal Certificate → CertificateRequest → Order →
+Challenge flow), you will need to grant those permissions explicitly.
 
 ### Skip the self-check with `waitInsteadOfSelfCheck`
 
