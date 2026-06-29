@@ -41,6 +41,25 @@ Before upgrading cert-manager from 1.20 to 1.21, please read the following impor
    > 📖 Read [Release 1.21 notes](../release-notes/release-notes-1.21.md) for
    > more information.
 
+3. The Helm values `prometheus.servicemonitor.targetPort`,
+   `prometheus.servicemonitor.path`, and `prometheus.podmonitor.path` have been
+   removed. The metrics path (`/metrics`) and target port name (`http-metrics`)
+   are now hardcoded.
+
+   The controller Service metrics port has also been renamed from
+   `tcp-prometheus-servicemonitor` to `http-metrics`.
+
+   Because the Helm values schema uses `additionalProperties: false`, you must
+   remove these keys from your values overrides before upgrading, or `helm
+   upgrade` will fail with a schema validation error.
+
+   If you have custom Prometheus scrape configurations that reference the old
+   Service port name `tcp-prometheus-servicemonitor`, update them to use
+   `http-metrics`.
+
+   > 📖 Read [Release 1.21 notes](../release-notes/release-notes-1.21.md) for
+   > more information.
+
 ## Next Steps
 
 From here on, you can follow the [regular upgrade process](../../installation/upgrade.md).

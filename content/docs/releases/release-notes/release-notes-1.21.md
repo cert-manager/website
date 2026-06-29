@@ -7,6 +7,7 @@ cert-manager v1.21 includes:
 
 - Removal of the default `tokenrequest` RBAC from the Helm chart (breaking change)
 - Removal of Challenge and Order write permissions from the `cert-manager-edit` aggregate ClusterRole (breaking change)
+- Removal of configurable metrics path and port name Helm values (breaking change)
 
 ## Major Themes
 
@@ -65,6 +66,28 @@ change.
 If you have tooling or workflows that create Challenge or Order resources
 directly (outside of the normal Certificate → CertificateRequest → Order →
 Challenge flow), you will need to grant those permissions explicitly.
+
+### Metrics port name and path Helm values removed
+
+> ⚠️ Breaking change
+
+The Helm values `prometheus.servicemonitor.targetPort`,
+`prometheus.servicemonitor.path`, and `prometheus.podmonitor.path` have been
+removed. The metrics path is always `/metrics` and the ServiceMonitor
+`targetPort` is always the port named `http-metrics` — these were the defaults
+and there was no supported reason to override them.
+
+The controller Service metrics port has also been renamed from
+`tcp-prometheus-servicemonitor` to `http-metrics`, aligning it with the webhook
+and cainjector services.
+
+Because the Helm values schema uses `additionalProperties: false`, users who
+still have any of the removed keys in their values overrides will see a schema
+validation error on upgrade. Remove these keys from your values file before
+upgrading.
+
+([cert-manager/cert-manager#8952](https://github.com/cert-manager/cert-manager/pull/8952),
+[@erikgb](https://github.com/erikgb))
 
 ### Skip the self-check with `waitInsteadOfSelfCheck`
 
@@ -143,6 +166,15 @@ TODO
 
 ### Other (Cleanup or Flake)
 
+- Removed Helm values `prometheus.servicemonitor.targetPort`,
+  `prometheus.servicemonitor.path`, and `prometheus.podmonitor.path`. The
+  metrics path (`/metrics`) and target port name (`http-metrics`) are now
+  hardcoded. The controller Service metrics port is renamed from
+  `tcp-prometheus-servicemonitor` to `http-metrics`. Users must remove these
+  keys from their values overrides before upgrading. See the
+  [upgrading notes](../upgrading/upgrading-1.20-1.21.md) for details.
+  ([cert-manager/cert-manager#8952](https://github.com/cert-manager/cert-manager/pull/8952),
+  [@erikgb](https://github.com/erikgb))
 - Removed the default `tokenrequest` Role and RoleBinding from the Helm chart
   that granted the controller ServiceAccount permission to mint tokens for
   itself. No documented workflow requires this RBAC. Users who relied on the
