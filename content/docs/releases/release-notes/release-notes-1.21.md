@@ -53,6 +53,25 @@ See [Skip the self-check with
 `waitInsteadOfSelfCheck`](../../configuration/acme/README.md#skip-the-self-check-with-waitinsteadofselfcheck)
 for configuration details.
 
+### Webhook Serving Certificate Renewal After System Suspend
+
+The cert-manager webhook generates and automatically renews its own self-signed
+serving certificate. Prior to 1.21, the renewal timer relied solely on Go's
+monotonic clock (`CLOCK_MONOTONIC`). During system suspend (S3/S4) or VM live
+migration, `CLOCK_MONOTONIC` stops advancing while wall-clock time
+(`CLOCK_REALTIME`) continues. When the system resumes, the renewal timer has not
+yet reached its deadline, so the webhook's serving certificate is never renewed
+— even though it has already expired. This causes `x509: certificate has expired
+or is not yet valid` errors for all admission and conversion webhook calls.
+
+cert-manager 1.21 adds a periodic ticker that polls wall-clock time against the
+renewal deadline, detecting missed renewals regardless of whether
+`CLOCK_MONOTONIC` advanced. The webhook now recovers within one minute of system
+resume.
+
+More details are available in the PR:
+https://github.com/cert-manager/cert-manager/pull/8464.
+
 ## Community
 
 As always, we'd like to thank all of the community members who helped in this release cycle, including all below who merged a PR and anyone that helped by commenting on issues, testing, or getting involved in cert-manager meetings. We're lucky to have you involved.
@@ -91,7 +110,10 @@ TODO
 
 ### Bug or Regression
 
-TODO
+- Fix webhook serving certificate not being renewed after system suspend or VM
+  live migration.
+  ([#8464](https://github.com/cert-manager/cert-manager/pull/8464),
+  [@Peac36](https://github.com/Peac36))
 
 ### Other (Cleanup or Flake)
 
