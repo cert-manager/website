@@ -72,6 +72,33 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+## `v1.19.6`
+
+This patch release fixes a security issue ([`GHSA-8rvj-mm4h-c258`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-8rvj-mm4h-c258), HIGH) where the default `cert-manager-edit` aggregate ClusterRole granted namespace users permission to create ACME `Challenge` and `Order` resources directly. A user who could create a `Challenge` referencing a `ClusterIssuer` could supply attacker-controlled solver configuration while cert-manager loaded credentials from the `ClusterIssuer`'s namespace, bypassing Issuer solver selectors (`dnsZones`, `dnsNames`, `matchLabels`). With the acme-dns provider specifically, this could disclose DNS credentials to an attacker-controlled endpoint.
+
+This release also includes Go version bumps to address reported CVEs. All users should upgrade.
+
+### Restrict Challenge and Order RBAC in `cert-manager-edit` ClusterRole
+
+> ⚠️ Potentially breaking change
+
+The `cert-manager-edit` aggregate ClusterRole no longer grants `create` for `challenges.acme.cert-manager.io` or `create`, `patch`, `update` for `orders.acme.cert-manager.io`. These resources are internal to cert-manager's ACME workflow and are not intended to be created or modified directly by users.
+
+Challenge `patch` and `update` are retained because the Challenge spec is immutable after creation and users may need these verbs to remove stuck finalizers (cert-manager/cert-manager#3851, cert-manager/cert-manager#3870).
+
+If you have tooling or workflows that create Challenge or Order resources directly (outside of the normal Certificate → CertificateRequest → Order → Challenge flow), you will need to grant those permissions explicitly.
+
+### Changes by Kind
+
+#### Bug or Regression
+
+- Security (HIGH): Remove Challenge `create` and Order `create`, `patch`, `update` verbs from the `cert-manager-edit` aggregate ClusterRole ([`GHSA-8rvj-mm4h-c258`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-8rvj-mm4h-c258)). ([#8941](https://github.com/cert-manager/cert-manager/pull/8941), [@wallrj-cyberark](https://github.com/wallrj-cyberark))
+
+#### Other (Cleanup or Flake)
+
+- Update Go to `v1.25.11` to fix CVE-2026-27145, CVE-2026-42504, and CVE-2026-42507 ([#8925](https://github.com/cert-manager/cert-manager/pull/8925), [@wallrj-cyberark](https://github.com/wallrj-cyberark))
+- Upgrade Go to 1.25.10 to fix reported vulnerabilities, along with other dependency bumps ([#8788](https://github.com/cert-manager/cert-manager/pull/8788), [@SgtCoDFish](https://github.com/SgtCoDFish))
+
 ## `v1.19.5`
 
 This is a simple patch release to fix some reported vulnerabilities. All users are recommended to upgrade.

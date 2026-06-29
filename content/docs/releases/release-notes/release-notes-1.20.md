@@ -3,6 +3,36 @@ title: Release 1.20
 description: 'cert-manager release notes: cert-manager 1.20'
 ---
 
+## v1.20.3
+
+This patch release fixes a security issue ([`GHSA-8rvj-mm4h-c258`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-8rvj-mm4h-c258), HIGH) where the default `cert-manager-edit` aggregate ClusterRole granted namespace users permission to create ACME `Challenge` and `Order` resources directly. A user who could create a `Challenge` referencing a `ClusterIssuer` could supply attacker-controlled solver configuration while cert-manager loaded credentials from the `ClusterIssuer`'s namespace, bypassing Issuer solver selectors (`dnsZones`, `dnsNames`, `matchLabels`). With the acme-dns provider specifically, this could disclose DNS credentials to an attacker-controlled endpoint.
+
+This release also removes the issuer owner reference from Challenges which was blocking Challenge garbage collection, and updates Go to fix reported CVEs.
+
+All users should upgrade.
+
+### Restrict Challenge and Order RBAC in `cert-manager-edit` ClusterRole
+
+> ⚠️ Potentially breaking change
+
+The `cert-manager-edit` aggregate ClusterRole no longer grants `create` for `challenges.acme.cert-manager.io` or `create`, `patch`, `update` for `orders.acme.cert-manager.io`. These resources are internal to cert-manager's ACME workflow and are not intended to be created or modified directly by users.
+
+Challenge `patch` and `update` are retained because the Challenge spec is immutable after creation and users may need these verbs to remove stuck finalizers (cert-manager/cert-manager#3851, cert-manager/cert-manager#3870).
+
+If you have tooling or workflows that create Challenge or Order resources directly (outside of the normal Certificate → CertificateRequest → Order → Challenge flow), you will need to grant those permissions explicitly.
+
+### Changelog since v1.20.2
+
+#### Bug or Regression
+
+- Security (HIGH): Remove Challenge `create` and Order `create`, `patch`, `update` verbs from the `cert-manager-edit` aggregate ClusterRole ([`GHSA-8rvj-mm4h-c258`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-8rvj-mm4h-c258)). ([#8940](https://github.com/cert-manager/cert-manager/pull/8940), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Remove issuer owner reference from challenges blocking challenge garbage collection ([#8759](https://github.com/cert-manager/cert-manager/pull/8759), [`@cert-manager-bot`](https://github.com/cert-manager-bot))
+
+#### Other (Cleanup or Flake)
+
+- Bump go to 1.26.3, other deps to fix several govulncheck issues ([#8789](https://github.com/cert-manager/cert-manager/pull/8789), [`@SgtCoDFish`](https://github.com/SgtCoDFish))
+- Update Go to `v1.26.4` to fix CVE-2026-27145, CVE-2026-42504, and CVE-2026-42507 ([#8926](https://github.com/cert-manager/cert-manager/pull/8926), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+
 ## v1.20.2
 
 v1.20.2 fixes invalid YAML generated in the Helm chart when both `webhook.config`
