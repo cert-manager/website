@@ -426,6 +426,7 @@ goroutine
 gosec
 hardcodes
 hardcoded
+hairpinning
 healthz
 honour
 hostname
