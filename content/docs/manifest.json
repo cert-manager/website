@@ -625,7 +625,7 @@
               "path": "/docs/tutorials/README.md"
             },
             {
-              "title": "Securing NGINX-ingress",
+              "title": "Securing ingress-nginx",
               "path": "/docs/tutorials/acme/nginx-ingress.md"
             },
             {
