@@ -133,7 +133,12 @@ network connection errors and with a longer exponentially increasing delay after
 You can observe that latest issuance has terminally failed if the `Certificate`
 has `Issuing` condition set to false and has `status.lastFailureTime` set. In
 this case the issuance will be retried after an exponentially increasing delay
-(1 to 32 hours) by creating a new `CertificateRequest`. You can trigger an
+(1 to 32 hours by default; both limits are configurable via the
+`--certificate-request-minimum-backoff-duration` and
+`--certificate-request-maximum-backoff-duration` controller flags, or the
+equivalent `certificateRequestMinimumBackoffDuration` and
+`certificateRequestMaximumBackoffDuration` Helm values) by creating a new
+`CertificateRequest`. You can trigger an
 immediate renewal using the [`cmctl renew`
 command](../reference/cmctl.md#renew). Terminal failures occur if the issuer
 sets the `CertificateRequest` to failed (for example if CA rejected the request
