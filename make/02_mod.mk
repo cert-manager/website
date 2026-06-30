@@ -39,6 +39,23 @@ dev: vendor
 ## @category Development
 check: vendor
 
+CERT_MANAGER_VERSION ?= $(shell jq -r '.cert_manager_latest_version' < content/docs/variables.json)
+
+.PHONY: generate-release-notes
+## Generate release notes for the version specified in CERT_MANAGER_VERSION.
+## CERT_MANAGER_VERSION defaults to the latest version as defined in
+## content/docs/variables.json.
+## The tool auto-detects the end revision: it tries the release tag first,
+## then the release branch (release-X.Y), then falls back to master.
+## Override with --end-rev if needed: go run ./scripts/release-notes --end-rev ...
+##
+## @category Development
+generate-release-notes:
+	cd ./scripts/release-notes \
+	&& go run . \
+		--release-notes-dir ../../content/docs/releases/release-notes \
+		--release-version $(CERT_MANAGER_VERSION)
+
 ##########
 # NodeJS #
 ##########
