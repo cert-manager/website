@@ -11,7 +11,7 @@ Be sure to review all new features and changes below, and read the full release 
 
 ## Important Upgrade Notes
 
-When upgrading to cert-manager `1.19`, use the latest patch version: `[[VAR::cert_manager_latest_version]]`.
+When upgrading to cert-manager `1.19`, use the latest patch version of cert-manager `1.19`.
 There is a bug in `v1.19.0` which may cause certificates to be re-issued unnecessarily. We fixed this in `v1.19.1`.
 
 ## Major Themes

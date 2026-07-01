@@ -43,7 +43,7 @@ avoiding typos and mistakes in the default values file.
 > ```bash
 > helm template cert-manager \
 >   --repo https://charts.jetstack.io \
->   --version [[VAR::cert_manager_latest_version]] \
+>   --version v1.16.x \
 >   --values values.cert-manager.yaml
 > ```
 > Here's an example of an error that would be caught by the schema validation:

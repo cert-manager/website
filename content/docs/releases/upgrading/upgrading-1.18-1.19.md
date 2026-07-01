@@ -5,9 +5,9 @@ description: 'cert-manager installation: Upgrading v1.18 to v1.19'
 
 Before upgrading cert-manager from 1.18 to 1.19, please read the following important notes about breaking changes:
 
-## Use the latest patch version: `[[VAR::cert_manager_latest_version]]`
+## Use the latest patch version
 
-When upgrading to cert-manager `1.19`, use the latest patch version: `[[VAR::cert_manager_latest_version]]`.
+When upgrading to cert-manager `1.19`, use the latest patch version of cert-manager `1.19`.
 Do not install `v1.19.0`, because it has a bug which may cause certificates to be re-issued unnecessarily.
 We fixed the bug in `v1.19.1`.
 
