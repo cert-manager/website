@@ -3,6 +3,10 @@ title: Release 1.21
 description: 'cert-manager release notes: cert-manager 1.21'
 ---
 
+:::warning
+These are **draft release notes**. cert-manager v1.21 is currently a pre-release and is **not recommended for use in production**. The final release notes will be published when v1.21.0 is released.
+:::
+
 cert-manager v1.21 includes:
 
 **New features:**
