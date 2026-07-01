@@ -25,9 +25,9 @@ Flags:
       --feature-gates mapStringBool                          A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
                                                              AllAlpha=true|false (ALPHA - default=false)
                                                              AllBeta=true|false (BETA - default=false)
-                                                             CAInjectorMerging=true|false (BETA - default=true)
                                                              ServerSideApply=true|false (ALPHA - default=false)
   -h, --help                                                 help for cainjector
+      --ignore-namespaces strings                            Comma-separated list of namespaces to ignore secrets from. Should not be used with --namespace.
       --kubeconfig string                                    Paths to a kubeconfig. Only required if out-of-cluster.
       --leader-elect                                         If true, cainjector will perform leader election between instances to ensure no more than one instance of cainjector operates at a time (default true)
       --leader-election-lease-duration duration              The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled. (default 1m0s)

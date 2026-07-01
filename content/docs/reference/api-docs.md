@@ -328,7 +328,7 @@ description: >-
             </td>
             <td>
               <em>(Optional)</em>
-              <p>Duration is the duration for the not after date for the requested certificate. this is set on order creation as pe the ACME spec.</p>
+              <p>Duration is the duration for the not after date for the requested certificate. This is set on order creation as per the ACME spec.</p>
             </td>
           </tr>
           <tr>
@@ -340,6 +340,17 @@ description: >-
             <td>
               <em>(Optional)</em>
               <p>Profile allows requesting a certificate profile from the ACME server. Supported profiles are listed by the server&rsquo;s ACME directory URL.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>replaces</code>
+              <br />
+              <em>string</em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p>Replaces is the ARI CertID (RFC 9773 §4.1) of the certificate that this Order is intended to replace. When set, cert-manager will include the &ldquo;replaces&rdquo; field on the newOrder request to the ACME server if and only if the server advertises ARI support in its directory. The CertID has the form &ldquo;base64url(AKI).base64url(serial)&rdquo; and is derived locally from the currently issued leaf certificate.</p>
             </td>
           </tr>
         </table>
@@ -527,6 +538,21 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Configures cert-manager to attempt to complete authorizations by performing the DNS01 challenge flow.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>waitInsteadOfSelfCheck</code>
+        <br />
+        <em>
+          <a href="https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">Kubernetes meta/v1.Duration</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>WaitInsteadOfSelfCheck, if set, skips cert-manager&rsquo;s self-check and instead waits this long after presentation before asking the ACME server to validate the challenge.</p>
+        <p>This is an advanced escape hatch for environments where cert-manager&rsquo;s self-check cannot succeed from its own network or DNS viewpoint even though the ACME server can still validate successfully, for example due to split-horizon DNS or NAT hairpinning.</p>
+        <p>A value of 0 skips the self-check and asks the ACME server to validate immediately after presentation, relying on the ACME server&rsquo;s own validation retries (RFC 8555 section 8.2) to succeed once the challenge has propagated. A negative duration is rejected. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>, for example <code>30s</code> or <code>2m</code>.</p>
       </td>
     </tr>
   </tbody>
@@ -2479,7 +2505,20 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>presented will be set to true if the challenge values for this challenge are currently &lsquo;presented&rsquo;. This <em>does not</em> imply the self check is passing. Only that the values have been &lsquo;submitted&rsquo; for the appropriate challenge mechanism (i.e. the DNS01 TXT record has been presented, or the HTTP01 configuration has been configured).</p>
+        <p>Presented is true once cert-manager has configured the solver resources needed to expose this challenge&rsquo;s validation material. For example, the DNS01 TXT record has been created, or the HTTP01 solver has been configured to serve the challenge token. This does not imply the self check is passing, that the ACME server has validated the challenge, or that cert-manager has already accepted the challenge with the ACME server.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>presentedAt</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#time-v1-meta">Kubernetes meta/v1.Time</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>PresentedAt records when cert-manager first configured the solver resources for this challenge. This is used by the optional delay-based readiness logic.</p>
       </td>
     </tr>
     <tr>
@@ -2615,7 +2654,7 @@ description: >-
       </td>
       <td>
         <em>(Optional)</em>
-        <p>Duration is the duration for the not after date for the requested certificate. this is set on order creation as pe the ACME spec.</p>
+        <p>Duration is the duration for the not after date for the requested certificate. This is set on order creation as per the ACME spec.</p>
       </td>
     </tr>
     <tr>
@@ -2627,6 +2666,17 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Profile allows requesting a certificate profile from the ACME server. Supported profiles are listed by the server&rsquo;s ACME directory URL.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>replaces</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>Replaces is the ARI CertID (RFC 9773 §4.1) of the certificate that this Order is intended to replace. When set, cert-manager will include the &ldquo;replaces&rdquo; field on the newOrder request to the ACME server if and only if the server advertises ARI support in its directory. The CertID has the form &ldquo;base64url(AKI).base64url(serial)&rdquo; and is derived locally from the currently issued leaf certificate.</p>
       </td>
     </tr>
   </tbody>
@@ -2965,6 +3015,16 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>ignoreNamespaces</code>
+        <br />
+        <em>[]string</em>
+      </td>
+      <td>
+        <p>Comma-separated list of namespaces to ignore secrets from. Should not be used with &ndash;namespace.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>leaderElectionConfig</code>
         <br />
         <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.LeaderElectionConfig</em>
@@ -3299,6 +3359,19 @@ description: >-
               <p>NOTE: The actual lifetime of the issued certificate is used to determine the renewal time. If an issuer returns a certificate with a different lifetime than the one requested, cert-manager will use the lifetime of the issued certificate.</p>
               <p>Value must be an integer in the range (0,100). The minimum effective
                 <code>renewBefore</code> derived from the <code>renewBeforePercentage</code> and <code>duration</code> fields is 5 minutes. Cannot be set if the <code>renewBefore</code> field is set.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>renewal</code>
+              <br />
+              <em>
+                <a href="#cert-manager.io/v1.CertificateRenewal">CertificateRenewal</a>
+              </em>
+            </td>
+            <td>
+              <em>(Optional)</em>
+              <p><code>renewal</code> allows configuration of how your certificate is renewed. If the policy mentioned is <code>RenewBefore</code> then the controller respects <code>renewBefore</code> and <code>renewBeforePercentage</code>.</p>
             </td>
           </tr>
           <tr>
@@ -3893,6 +3966,43 @@ description: >-
     </tr>
   </tbody>
 </table>
+<h3 id="cert-manager.io/v1.ACMERenewalWindow">ACMERenewalWindow</h3>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateACMEARIStatus">CertificateACMEARIStatus</a>)</p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>start</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#time-v1-meta">Kubernetes meta/v1.Time</a>
+        </em>
+      </td>
+      <td>
+        <p>Start is the start of the suggested renewal window.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>end</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#time-v1-meta">Kubernetes meta/v1.Time</a>
+        </em>
+      </td>
+      <td>
+        <p>End is the end of the suggested renewal window.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <h3 id="cert-manager.io/v1.CAIssuer">CAIssuer</h3>
 <p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.IssuerConfig">IssuerConfig</a>)</p>
 <div></div>
@@ -3945,6 +4055,106 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>IssuingCertificateURLs is a list of URLs which this issuer should embed into certificates it creates. See <a href="https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1">https://www.rfc-editor.org/rfc/rfc5280#section-4.2.2.1</a> for more details. As an example, such a URL might be &ldquo;<a href='http://ca.domain.com/ca.crt"'>http://ca.domain.com/ca.crt&rdquo;</a>.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.CertificateACMEARIStatus">CertificateACMEARIStatus</h3>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateACMEStatus">CertificateACMEStatus</a>)</p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>suggestedWindow</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.ACMERenewalWindow">ACMERenewalWindow</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>SuggestedWindow is the suggested renewal window as returned by the ACME server in accordance with RFC 9773.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>explanationURL</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>ExplanationURL is a human-readable URL that may explain why the suggested window has its current value.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>lastChecked</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#time-v1-meta">Kubernetes meta/v1.Time</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>LastChecked is the time at which the ACME server was last checked for renewal information.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>nextCheck</code>
+        <br />
+        <em>
+          <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#time-v1-meta">Kubernetes meta/v1.Time</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>NextCheck is the time at which the ACME server will next be checked for renewal information.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>lastError</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>LastError is the last error encountered when checking the ACME server for renewal information, if any.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.CertificateACMEStatus">CertificateACMEStatus</h3>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateStatus">CertificateStatus</a>)</p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>ari</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.CertificateACMEARIStatus">CertificateACMEARIStatus</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>ARI stores the ACME Renewal Information that is fetched from the ACME server in accordance with RFC 9773. This is only populated if the ARI feature gate is enabled.</p>
       </td>
     </tr>
   </tbody>
@@ -4233,6 +4443,119 @@ description: >-
         <em>(Optional)</em>
         <p>Size is the key bit size of the corresponding private key for this certificate.</p>
         <p>If <code>algorithm</code> is set to <code>RSA</code>, valid values are <code>2048</code>, <code>4096</code> or <code>8192</code>, and will default to <code>2048</code> if not specified. If <code>algorithm</code> is set to <code>ECDSA</code>, valid values are <code>256</code>, <code>384</code> or <code>521</code>, and will default to <code>256</code> if not specified. If <code>algorithm</code> is set to <code>Ed25519</code>, Size is ignored. No other values are allowed.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.CertificateRenewal">CertificateRenewal</h3>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateSpec">CertificateSpec</a>)</p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>policy</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.CertificateRenewalPolicy">CertificateRenewalPolicy</a>
+        </em>
+      </td>
+      <td>
+        <p><code>policy</code> must be one of <code>Disabled</code>, <code>RenewBefore</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>windows</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.CertificateRenewalWindows">[]CertificateRenewalWindows</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p><code>windows</code> mentions the behavior of when the renewal must happen.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.CertificateRenewalPolicy"> CertificateRenewalPolicy (<code>string</code> alias) </h3>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRenewal">CertificateRenewal</a>)</p>
+<div></div>
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>&#34;Disabled&#34;</p>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;RenewBefore&#34;</p>
+      </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.CertificateRenewalWindows">CertificateRenewalWindows</h3>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.CertificateRenewal">CertificateRenewal</a>)</p>
+<div>
+  <p>CertificateRenewalWindows is the definition for renewal windows</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>timezone</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p><code>timezone</code> is IANA compliant timezone. For example America/Denver. If this field is not set, timezone is treated as UTC.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>windowDuration</code>
+        <br />
+        <em>
+          <a href="https://godoc.org/k8s.io/apimachinery/pkg/apis/meta/v1#Duration">Kubernetes meta/v1.Duration</a>
+        </em>
+      </td>
+      <td>
+        <p><code>windowDuration</code> is how long the cron definition is active for. Value must be in units accepted by Go time.ParseDuration <a href="https://golang.org/pkg/time/#ParseDuration">https://golang.org/pkg/time/#ParseDuration</a>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>cron</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p><code>cron</code> is a cron compliant string to allow when the renewal should be allowed. Format is as shown below:</p>
+        <hr />
+        <p>| | | | | | | | | day of the week (0–6) (Sunday to Saturday; | | | month (1–12) 7 is also Sunday on some systems) | | day of the month (1–31) | hour (0–23) minute (0–59)</p>
       </td>
     </tr>
   </tbody>
@@ -4680,6 +5003,19 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>renewal</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.CertificateRenewal">CertificateRenewal</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p><code>renewal</code> allows configuration of how your certificate is renewed. If the policy mentioned is <code>RenewBefore</code> then the controller respects <code>renewBefore</code> and <code>renewBeforePercentage</code>.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>dnsNames</code>
         <br />
         <em>[]string</em>
@@ -5003,6 +5339,19 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>The number of continuous failed issuance attempts up till now. This field gets removed (if set) on a successful issuance and gets set to 1 if unset and an issuance has failed. If an issuance has failed, the delay till the next issuance will be calculated using formula time.Hour * 2 ^ (failedIssuanceAttempts - 1).</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>acme</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.CertificateACMEStatus">CertificateACMEStatus</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>ACME stores information that is fetched from the ACME CA server.</p>
       </td>
     </tr>
   </tbody>
@@ -5656,7 +6005,7 @@ description: >-
         <em>(Optional)</em>
         <p>Profile specifies the key and certificate encryption algorithms and the HMAC algorithm used to create the PKCS12 keystore. Default value is <code>LegacyRC2</code> for backward compatibility.</p>
         <p>If provided, allowed values are:
-          <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (e.g., because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret.</p>
+          <code>LegacyRC2</code>: Deprecated. Not supported by default in OpenSSL 3 or Java 20. <code>LegacyDES</code>: Less secure algorithm. Use this option for maximal compatibility. <code>Modern2023</code>: Secure algorithm. Use this option in case you have to always use secure algorithms (e.g., because of company policy). Please note that the security of the algorithm is not that important in reality, because the unencrypted certificate and private key are also stored in the Secret. <code>Modern2026</code>: Encodes PKCS#12 files using algorithms that are considered modern as of 2026. Private keys and certificates are encrypted using PBES2 with PBKDF2-HMAC-SHA-256 and AES-256-CBC. The MAC algorithm is PBMAC1 with PBKDF2-HMAC-SHA-256 and HMAC-SHA256. Files produced with this profile can be read by OpenSSL 3.4.0 and higher, Java 26 and higher, or with Java using compatible versions of Bouncy Castle. Meets FIPS 140-3 requirements.</p>
       </td>
     </tr>
     <tr>
@@ -5716,6 +6065,14 @@ description: >-
       </td>
       <td>
         <p>see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2023">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2023</a></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>&#34;Modern2026&#34;</p>
+      </td>
+      <td>
+        <p>see: <a href="https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2026">https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#Modern2026</a></p>
       </td>
     </tr>
   </tbody>
@@ -5818,7 +6175,7 @@ description: >-
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.ServiceAccountRef">ServiceAccountRef</h3>
-<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>)</p>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAWSAuth">VaultAWSAuth</a>, <a href="#cert-manager.io/v1.VaultKubernetesAuth">VaultKubernetesAuth</a>)</p>
 <div>
   <p>ServiceAccountRef is a service account used by cert-manager to request a token. By default two audiences are included: the address of the Vault server as specified on the issuer, and a generated audience taking the form of <code>vault://namespace-name/issuer-name</code> for an Issuer and <code>vault://issuer-name</code> for a ClusterIssuer. The expiration of the token is also set by cert-manager to 10 minutes.</p>
 </div>
@@ -5908,6 +6265,88 @@ description: >-
     </tr>
   </tbody>
 </table>
+<h3 id="cert-manager.io/v1.VaultAWSAuth">VaultAWSAuth</h3>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>)</p>
+<div>
+  <p>VaultAWSAuth authenticates with Vault using AWS IAM authentication. See <a href="https://www.vaultproject.io/docs/auth/aws">https://www.vaultproject.io/docs/auth/aws</a> for more details.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>mountPath</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>The Vault mountPath here is the mount path to use when authenticating with Vault. For example, setting a value to <code>/v1/auth/foo</code>, will use the path <code>/v1/auth/foo/login</code> to authenticate with Vault. If unspecified, the default value &ldquo;/v1/auth/aws&rdquo; will be used.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>role</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>A required field containing the Vault Role to assume when authenticating.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>region</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>The AWS region to use for authentication. If not specified, the region will be determined from AWS_REGION or AWS_DEFAULT_REGION environment variables, falling back to &ldquo;us-east-1&rdquo; if not set.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>serviceAccountRef</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.ServiceAccountRef">ServiceAccountRef</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>A reference to a service account that will be used to request a web identity token for IRSA (IAM Roles for Service Accounts) authentication.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>iamRoleArn</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>The ARN of the AWS IAM role to assume using the Kubernetes service account token. Required when using IRSA (serviceAccountRef is set). This role must have a trust policy that allows the OIDC provider to assume it.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>vaultHeaderValue</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>The Vault header value to include in the STS signing request. This is used to prevent replay attacks.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <h3 id="cert-manager.io/v1.VaultAppRole">VaultAppRole</h3>
 <p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultAuth">VaultAuth</a>)</p>
 <div>
@@ -5956,7 +6395,7 @@ description: >-
 <h3 id="cert-manager.io/v1.VaultAuth">VaultAuth</h3>
 <p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VaultIssuer">VaultIssuer</a>)</p>
 <div>
-  <p>VaultAuth is configuration used to authenticate with a Vault server. The order of precedence is [<code>tokenSecretRef</code>, <code>appRole</code>, <code>clientCertificate</code> or <code>kubernetes</code>].</p>
+  <p>VaultAuth is configuration used to authenticate with a Vault server. The order of precedence is [<code>tokenSecretRef</code>, <code>appRole</code>, <code>clientCertificate</code>, <code>kubernetes</code>, <code>aws</code>].</p>
 </div>
 <table>
   <thead>
@@ -6014,6 +6453,19 @@ description: >-
       <td>
         <em>(Optional)</em>
         <p>Kubernetes authenticates with Vault by passing the ServiceAccount token stored in the named Secret resource to the Vault server.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>aws</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.VaultAWSAuth">VaultAWSAuth</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>AWS authenticates with Vault using AWS IAM authentication. This allows authentication using IAM roles for service accounts (IRSA), EKS Pod Identity (PIA), or ambient credentials (EC2 instance profiles, ECS task role).</p>
       </td>
     </tr>
   </tbody>
@@ -6324,6 +6776,76 @@ description: >-
         <p>Cloud specifies the CyberArk Certificate Manager SaaS configuration settings. Only one of CyberArk Certificate Manager may be specified.</p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <code>ngts</code>
+        <br />
+        <em>
+          <a href="#cert-manager.io/v1.VenafiNGTS">VenafiNGTS</a>
+        </em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>NGTS specifies Palo Alto Networks Next Generation Trust Services (NGTS) configuration using OAuth 2.0 Client Credentials. Only one of tpp, cloud, or ngts may be specified.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 id="cert-manager.io/v1.VenafiNGTS">VenafiNGTS</h3>
+<p>(<em>Appears on:</em> <a href="#cert-manager.io/v1.VenafiIssuer">VenafiIssuer</a>)</p>
+<div>
+  <p>VenafiNGTS defines connection configuration for the Palo Alto Networks Next Generation Trust Services (NGTS) platform using OAuth 2.0 Client Credentials.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>url</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>URL is the base URL for the NGTS API endpoint. Defaults to &ldquo;<a href='https://api.strata.paloaltonetworks.com/ngts"'>https://api.strata.paloaltonetworks.com/ngts&rdquo;</a> if not set.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>tokenEndpoint</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <em>(Optional)</em>
+        <p>TokenEndpoint is the OAuth 2.0 token endpoint URL used to obtain access tokens, for example &ldquo;<a href='https://auth.apps.paloaltonetworks.com/oauth2/access_token"'>https://auth.apps.paloaltonetworks.com/oauth2/access_token&rdquo;</a>. Defaults to &ldquo;<a href='https://auth.apps.paloaltonetworks.com/oauth2/access_token"'>https://auth.apps.paloaltonetworks.com/oauth2/access_token&rdquo;</a> if not set.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>tsgID</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>TSGID is the Tenant Service Group ID used to scope the OAuth 2.0 access token, for example &ldquo;1234567890&rdquo;. The tsg_id: prefix is added automatically. This field is required.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>credentialsRef</code>
+        <br />
+        <em>github.com/cert-manager/cert-manager/pkg/apis/meta/v1.LocalObjectReference</em>
+      </td>
+      <td>
+        <p>CredentialsRef is a reference to a Kubernetes Secret containing the OAuth 2.0 Client ID and Client Secret. The secret must contain the keys &lsquo;client-id&rsquo; and &lsquo;client-secret&rsquo;.</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 <h3 id="cert-manager.io/v1.VenafiTPP">VenafiTPP</h3>
@@ -6609,12 +7131,32 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>solverRuntimeClassName</code>
+        <br />
+        <em>string</em>
+      </td>
+      <td>
+        <p>Defines the runtime class used when spawning new ACME HTTP01 challenge solver pods.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>solverNameservers</code>
         <br />
         <em>[]string</em>
       </td>
       <td>
         <p>A list of comma separated dns server endpoints used for ACME HTTP01 check requests. This should be a list containing host and port, for example [&ldquo;8.8.8.8:53&rdquo;,&ldquo;8.8.4.4:53&rdquo;] Allows specifying a list of custom nameservers to perform HTTP01 checks on.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>solverExtraLabels</code>
+        <br />
+        <em>map[string]string</em>
+      </td>
+      <td>
+        <p>Extra labels applied to all dynamically-created ACME HTTP01 solver resources (pods, services, ingresses, or Gateway API HTTPRoutes). Applied in addition to the standard ACME challenge identification labels. The following ACME identity label keys are reserved and will be silently ignored: acme.cert-manager.io/http-domain, acme.cert-manager.io/http-token, acme.cert-manager.io/http01-solver.</p>
       </td>
     </tr>
   </tbody>
@@ -6750,7 +7292,7 @@ description: >-
       </td>
       <td>
         <p>Whether gateway API integration is enabled within cert-manager. The ExperimentalGatewayAPISupport feature gate must also be enabled (default as of 1.15).</p>
-<p>Deprecated: use GatewayAPIConfig.Enabled instead.</p>
+        <p>Deprecated: use GatewayAPIConfig.Enabled instead.</p>
       </td>
     </tr>
     <tr>
@@ -6761,19 +7303,7 @@ description: >-
       </td>
       <td>
         <p>Specifies whether the ListenerSet controller should be enabled with-in cert-manager. This along with ListenerSet feature gate enabled allows the user to consume ListenerSet for self-service TLS.</p>
-<p>Deprecated: use GatewayAPIConfig.EnableListenerSet instead.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <code>gatewayAPI</code>
-        <br />
-        <em>
-          <a href="#controller.config.cert-manager.io/v1alpha1.GatewayAPIConfig">GatewayAPIConfig</a>
-        </em>
-      </td>
-      <td>
-        <p>gatewayAPI configures Gateway API integration options for cert-manager.</p>
+        <p>Deprecated: use GatewayAPIConfig.EnableListenerSet instead.</p>
       </td>
     </tr>
     <tr>
@@ -6928,18 +7458,40 @@ description: >-
     </tr>
     <tr>
       <td>
+        <code>gatewayAPI,omitzero</code>
+        <br />
+        <em>
+          <a href="#controller.config.cert-manager.io/v1alpha1.GatewayAPIConfig">GatewayAPIConfig</a>
+        </em>
+      </td>
+      <td>
+        <p>gatewayAPI configures the behaviour of the Gateway API integration</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <code>certificateRequestMinimumBackoffDuration</code>
         <br />
         <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.Duration</em>
       </td>
       <td>
-        <p>CertificateRequestMinimumBackoffDuration configures the initial backoff duration when a certificate request fails. This duration is exponentially increased (up to a maximum of 32 hours) based on the number of consecutive failures.</p>
+        <p>certificateRequestMinimumBackoffDuration configures the minimum backoff duration when a certificate request fails (default 1h). The backoff delay starts at this value and is exponentially increased with each consecutive failure, up to the configured maximum backoff duration.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>certificateRequestMaximumBackoffDuration</code>
+        <br />
+        <em>github.com/cert-manager/cert-manager/pkg/apis/config/shared/v1alpha1.Duration</em>
+      </td>
+      <td>
+        <p>certificateRequestMaximumBackoffDuration configures the maximum backoff duration when a certificate request fails. The backoff delay starts at the minimum backoff duration and is exponentially increased with each consecutive failure, but will never exceed this maximum (default 32h).</p>
       </td>
     </tr>
   </tbody>
 </table>
 <h3 id="controller.config.cert-manager.io/v1alpha1.GatewayAPIConfig">GatewayAPIConfig</h3>
-<p> (<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>) </p>
+<p>(<em>Appears on:</em> <a href="#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration">ControllerConfiguration</a>)</p>
 <div></div>
 <table>
   <thead>
@@ -6976,7 +7528,7 @@ description: >-
         <em>[]string</em>
       </td>
       <td>
-        <p>ExtraProtocols is a list of additional Gateway Listener protocol types that the Gateway API shim should treat as TLS-capable. By default, only HTTPS and TLS protocol types are processed.</p>
+        <p>ExtraProtocols is a list of additional Gateway Listener protocol types that the Gateway API shim should treat as TLS-capable. By default, only HTTPS and TLS protocol types are processed. Each entry must exactly match the protocol string as it appears on the Gateway Listener, e.g. &ldquo;DTLS&rdquo;.</p>
       </td>
     </tr>
   </tbody>
@@ -7293,4 +7845,4 @@ description: >-
   </tbody>
 </table>
 <hr />
-<p><em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>0bca8fd</code>. </em></p>
+<p><em> Generated with <code>gen-crd-api-reference-docs</code> on git commit <code>ae67234</code>. </em></p>

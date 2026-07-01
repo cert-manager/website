@@ -14,6 +14,7 @@ Usage:
   controller [flags]
 
 Flags:
+      --acme-http01-solver-extra-labels mapStringString         A set of key=value pairs for additional labels to apply to dynamically-created ACME HTTP01 solver resources (pods, services, ingresses, or Gateway API HTTPRoutes). The following ACME identity label keys are reserved and will be silently ignored: acme.cert-manager.io/http-domain, acme.cert-manager.io/http-token, acme.cert-manager.io/http01-solver. These labels can be overridden by per-Issuer podTemplate/ingressTemplate/GatewayHTTPRoute.Labels.
       --acme-http01-solver-image string                         The docker image to use to solve ACME HTTP01 challenges. You most likely will not need to change this parameter unless you are testing a new feature or developing cert-manager. (default "quay.io/jetstack/cert-manager-acmesolver:canary")
       --acme-http01-solver-nameservers strings                  A list of comma separated dns server endpoints used for ACME HTTP01 check requests. This should be a list containing host and port, for example 8.8.8.8:53,8.8.4.4:53
       --acme-http01-solver-resource-limits-cpu string           Defines the resource limits CPU size when spawning new ACME HTTP01 challenge solver pods. (default "100m")
@@ -21,8 +22,10 @@ Flags:
       --acme-http01-solver-resource-request-cpu string          Defines the resource request CPU size when spawning new ACME HTTP01 challenge solver pods. (default "10m")
       --acme-http01-solver-resource-request-memory string       Defines the resource request Memory size when spawning new ACME HTTP01 challenge solver pods. (default "64Mi")
       --acme-http01-solver-run-as-non-root                      Defines the ability to run the http01 solver as root for troubleshooting issues (default true)
+      --acme-http01-solver-runtime-class-name string            RuntimeClassName to apply to ACME HTTP01 solver pods
       --auto-certificate-annotations strings                    The annotation consumed by the ingress-shim controller to indicate an ingress is requesting a certificate (default [kubernetes.io/tls-acme])
-      --certificate-request-minimum-backoff-duration duration   Duration of the initial certificate request backoff when a certificate request fails. The backoff duration is exponentially increased based on consecutive failures, up to a maximum of 32 hours. (default 1h0m0s)
+      --certificate-request-maximum-backoff-duration duration   Maximum duration to back off when a certificate request fails. The backoff delay starts at the minimum backoff duration and is exponentially increased with each consecutive failure, but will never exceed this maximum (default 32h). (default 32h0m0s)
+      --certificate-request-minimum-backoff-duration duration   Minimum duration to back off when a certificate request fails (default 1h). The backoff delay starts at this value and is exponentially increased with each consecutive failure, up to the configured maximum backoff duration. (default 1h0m0s)
       --cluster-issuer-ambient-credentials                      Whether a cluster-issuer may make use of ambient credentials for issuers. 'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the ClusterIssuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata. (default true)
       --cluster-resource-namespace string                       Namespace to store resources owned by cluster scoped resources such as ClusterIssuer in. This must be specified if ClusterIssuers are enabled. (default "kube-system")
       --concurrent-workers int                                  The number of concurrent workers for each controller. (default 5)
@@ -43,6 +46,7 @@ Flags:
       --extra-certificate-annotations strings                   Extra annotation to be added by the ingress-shim controller to certificate object
       --feature-gates mapStringBool                             A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
                                                                 ACMEHTTP01IngressPathTypeExact=true|false (BETA - default=true)
+                                                                ACMEUseARI=true|false (ALPHA - default=false)
                                                                 AllAlpha=true|false (ALPHA - default=false)
                                                                 AllBeta=true|false (BETA - default=false)
                                                                 ExperimentalCertificateSigningRequestControllers=true|false (ALPHA - default=false)
@@ -56,6 +60,7 @@ Flags:
                                                                 StableCertificateRequestName=true|false (BETA - default=true)
                                                                 UseCertificateRequestBasicConstraints=true|false (ALPHA - default=false)
                                                                 ValidateCAA=true|false (ALPHA - default=false)
+      --gateway-api-extra-protocols strings                     A comma-separated list of additional Gateway Listener protocol types that the Gateway API shim should treat as TLS-capable. By default, only HTTPS and TLS protocol types are processed. Each entry must exactly match the protocol string as it appears on the Gateway Listener, e.g. 'DTLS'.
   -h, --help                                                    help for controller
       --issuer-ambient-credentials                              Whether an issuer may make use of ambient credentials. 'Ambient Credentials' are credentials drawn from the environment, metadata services, or local files which are not explicitly configured in the Issuer API object. When this flag is enabled, the following sources for credentials are also used: AWS - All sources the Go SDK defaults to, notably including any EC2 IAM roles available via instance metadata.
       --kube-api-burst int                                      the maximum burst queries-per-second of requests sent to the Kubernetes apiserver (default 50)
