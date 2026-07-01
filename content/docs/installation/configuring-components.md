@@ -25,7 +25,7 @@ configuration file can be specified in the `config` and `webhook.config` values.
 
 ### Controller configuration file
 
-The webhook configuration API documentation can be found on the [ControllerConfiguration](../reference/api-docs.md#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration) page.
+The controller configuration API documentation can be found on the [ControllerConfiguration](../reference/api-docs.md#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration) page.
 
 This is an example configuration file for the controller component:
 
