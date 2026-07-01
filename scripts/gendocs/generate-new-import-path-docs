@@ -139,7 +139,7 @@ EOF
 # For final releases such as v1.20.0, DOCS_FOLDER should be `docs` (or a
 # versioned docs folder name such as `v1.20-docs`), and CM_BRANCH should be
 # the release branch, e.g. `release-1.20`.
-CM_BRANCH="release-1.20"
+CM_BRANCH="release-1.21"
 DOCS_FOLDER="docs"
 
 genversionwithcli "$CM_BRANCH" "$DOCS_FOLDER"
