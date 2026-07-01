@@ -3,7 +3,7 @@ title: Deploy cert-manager on Google Kubernetes Engine (GKE) and create SSL cert
 description: Learn how to deploy cert-manager on Google Kubernetes (GKE) Engine and then configure it to sign SSL certificates using Let's Encrypt
 ---
 
-*Last Verified: 6 June 2025*
+*Last Verified: 14 April 2026*
 
 In this tutorial you will learn how to deploy and configure cert-manager on Google Kubernetes Engine (GKE).
 You will learn how to configure cert-manager to get a signed SSL certificate from Let's Encrypt,
@@ -38,7 +38,7 @@ Visit the [Get started with Google Cloud](https://cloud.google.com/docs/get-star
 
 **💻 Domain Name**
 
-You will need a domain name and the ability to create DNS records in that domain. We will be getting a $12 domain name from Google Domains. Google Domains is one of the many possible "domain name registrars". NameCheap and GoDaddy are two other well-known registrars.
+You will need a domain name and the ability to create DNS records in that domain. NameCheap and GoDaddy are two well-known registrars that may be used to register your domain name.
 
 > 💵 If you prefer not purchasing a domain name, it is also possible to adapt this tutorial to use the IP address to serve your website and for the SSL certificate.
 
