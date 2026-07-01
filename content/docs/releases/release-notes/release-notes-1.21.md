@@ -89,6 +89,39 @@ upgrading.
 ([cert-manager/cert-manager#8952](https://github.com/cert-manager/cert-manager/pull/8952),
 [@erikgb](https://github.com/erikgb))
 
+### Configurable CertificateRequest retry backoff duration
+
+cert-manager 1.21 adds the `--certificate-request-maximum-backoff-duration`
+controller flag (default: 32 hours), making the exponential backoff cap
+configurable alongside the existing `--certificate-request-minimum-backoff-duration`
+flag.
+
+When a CertificateRequest fails, cert-manager backs off exponentially — by
+default from 1 hour up to 32 hours. In environments with scheduled CA
+maintenance windows, the backoff can grow so large that cert-manager does not
+retry until hours after the CA comes back online. With this flag, cluster
+operators can lower the ceiling to match their CA's maintenance schedule. For
+example, `--certificate-request-maximum-backoff-duration=1h` ensures that
+cert-manager retries at most every hour regardless of how many consecutive
+failures have occurred.
+
+The default of 32 hours preserves the behavior of previous releases. The flag
+may also be set via the
+[`certificateRequestMaximumBackoffDuration`](../../reference/api-docs.md#controller.config.cert-manager.io/v1alpha1.ControllerConfiguration)
+field in the controller `ControllerConfiguration` API, or via the Helm chart:
+
+```yaml
+config:
+  certificateRequestMaximumBackoffDuration: 1h
+```
+
+See the [controller CLI reference](../../cli/controller.md) for the full list of
+flags, and [What happens if issuance fails? Will it be retried?](../../faq/README.md#what-happens-if-issuance-fails-will-it-be-retried)
+for background on how cert-manager retries failed issuances.
+
+([cert-manager/cert-manager#8893](https://github.com/cert-manager/cert-manager/pull/8893),
+[@lunarwhite](https://github.com/lunarwhite))
+
 ### Skip the self-check with `waitInsteadOfSelfCheck`
 
 cert-manager 1.21 adds the `waitInsteadOfSelfCheck` solver option for ACME
