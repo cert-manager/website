@@ -243,7 +243,7 @@ Several improvements to the Gateway API integration land in 1.21:
   ([#8727](https://github.com/cert-manager/cert-manager/pull/8727),
   [@hjoshi123](https://github.com/hjoshi123))
 
-- **Additional listener protocols**: the Gateway API integration now recognises
+- **Additional listener protocols**: the Gateway API integration now recognizes
   configurable listener protocols beyond the default set, making cert-manager
   compatible with custom protocol extensions.
   ([#8683](https://github.com/cert-manager/cert-manager/pull/8683),
@@ -251,7 +251,7 @@ Several improvements to the Gateway API integration land in 1.21:
 
 - **`enableGatewayAPI` configuration restructure**: the `enableGatewayAPI` and
   `enableGatewayAPIListenerSet` fields on `ControllerConfiguration` are
-  deprecated in favour of a `gatewayAPI.enabled` / `gatewayAPI.enableListenerSet`
+  deprecated in favor of a `gatewayAPI.enabled` / `gatewayAPI.enableListenerSet`
   sub-struct. The old fields continue to work.
   ([#8732](https://github.com/cert-manager/cert-manager/pull/8732),
   [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
@@ -309,7 +309,7 @@ resources from influencing ACME validation in unexpected ways.
 
 Additionally, ACME challenges no longer permanently fail on transient network
 errors (TLS handshake timeouts, DNS resolution failures, context cancellation)
-during nonce fetches or authorisation waits. The workqueue retries with
+during nonce fetches or authorization waits. The workqueue retries with
 exponential backoff instead.
 
 ([cert-manager/cert-manager#8948](https://github.com/cert-manager/cert-manager/pull/8948),
