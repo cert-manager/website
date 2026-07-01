@@ -5,9 +5,25 @@ description: 'cert-manager release notes: cert-manager 1.21'
 
 cert-manager v1.21 includes:
 
-- Removal of the default `tokenrequest` RBAC from the Helm chart (breaking change)
-- Removal of Challenge and Order write permissions from the `cert-manager-edit` aggregate ClusterRole (breaking change)
-- Removal of configurable metrics path and port name Helm values (breaking change)
+**New features:**
+- ACME Renewal Information (ARI / RFC 9773) support via the `ACMEUseARI` feature gate
+- AWS IAM authentication (IRSA, EKS Pod Identity, ambient EC2/ECS) for the Vault issuer
+- Modern2026 PKCS#12 encoding profile (FIPS 140-3 compatible)
+- Certificate renewal policies
+- `waitInsteadOfSelfCheck` solver option — skip cert-manager's self-check for split-horizon DNS or NAT hairpin environments
+- `--certificate-request-maximum-backoff-duration` flag — cap the exponential retry backoff for failed CertificateRequests
+- Webhook serving certificate renewal fixed after system suspend or VM live migration
+- Venafi OAuth token observability and `AuthFailed` Issuer condition; PANW NGTS support added
+- Gateway API: HTTP01 ListenerSet parentRef fallback annotation; additional listener protocols; `CAInjectorMerging` promoted to GA
+- cainjector `--ignore-namespaces` flag
+- `runtimeClassName` support for cert-manager components and ACME HTTP01 solver pods
+- `startupapicheck.ttlSecondsAfterFinished` Helm value for automatic Job cleanup
+- `--acme-http01-solver-extra-labels` flag to propagate `global.commonLabels` to solver resources
+
+**Breaking changes:**
+- Removal of the default `tokenrequest` RBAC from the Helm chart
+- Removal of Challenge and Order write permissions from the `cert-manager-edit` aggregate ClusterRole
+- Removal of configurable metrics path and port name Helm values
 
 ## Major Themes
 
@@ -153,6 +169,183 @@ resume.
 
 More details are available in the PR:
 https://github.com/cert-manager/cert-manager/pull/8464.
+
+### ACME Renewal Information (ARI) support
+
+cert-manager 1.21 adds experimental support for RFC 9773 ACME Renewal
+Information (ARI), behind the `ACMEUseARI` feature gate. When enabled, and when
+the ACME server advertises a `renewalInfo` endpoint, cert-manager queries the
+server for its recommended renewal window before deciding whether to re-issue a
+certificate. This allows ACME servers — including Let's Encrypt — to proactively
+prompt renewal of certificates affected by mass revocations or CA key rollovers,
+without requiring operators to intervene.
+
+([cert-manager/cert-manager#8798](https://github.com/cert-manager/cert-manager/pull/8798),
+[@hjoshi123](https://github.com/hjoshi123))
+
+### AWS IAM authentication for the Vault issuer
+
+The Vault issuer now supports AWS IAM-based authentication in three modes:
+
+- **IRSA (IAM Roles for Service Accounts)**: the cert-manager controller pod
+  assumes an AWS IAM role via Kubernetes projected service account tokens.
+- **EKS Pod Identity**: authentication via the EKS Pod Identity agent sidecar.
+- **Ambient credentials**: uses the EC2/ECS instance metadata service when
+  running on AWS without an explicitly configured role.
+
+All three modes avoid the need to store long-lived AWS credentials as Kubernetes
+Secrets.
+
+([cert-manager/cert-manager#8422](https://github.com/cert-manager/cert-manager/pull/8422),
+[@bitloi](https://github.com/bitloi))
+
+### Modern2026 PKCS#12 encoding profile
+
+cert-manager 1.21 adds the `Modern2026` profile for PKCS#12 output, based on
+the `go-pkcs12` library's Modern2026 encoder. This profile uses FIPS 140-3
+approved algorithms (AES-256 + SHA-256 KDFs) instead of the legacy 3DES/RC2
+defaults. It is suitable for environments with FIPS or compliance requirements
+that prohibit older cipher suites.
+
+([cert-manager/cert-manager#8841](https://github.com/cert-manager/cert-manager/pull/8841),
+[@seanorama](https://github.com/seanorama))
+
+### Certificate renewal policies
+
+cert-manager 1.21 adds `renewalPolicies` to the Certificate API, allowing
+operators to fine-tune when cert-manager triggers a renewal. This complements the
+existing `renewBefore` and `renewBeforePercentage` fields, providing more
+expressive control over renewal scheduling.
+
+([cert-manager/cert-manager#8258](https://github.com/cert-manager/cert-manager/pull/8258),
+[@hjoshi123](https://github.com/hjoshi123))
+
+### Gateway API improvements
+
+Several improvements to the Gateway API integration land in 1.21:
+
+- **HTTP01 ListenerSet parentRef fallback**: the new
+  `acme.cert-manager.io/http01-parentreffallback: "true"` annotation causes
+  cert-manager to use the parent Gateway as the solver HTTPRoute parentRef
+  instead of the ListenerSet. This enables TLS-only ListenerSets (which cannot
+  receive HTTP challenges) to rely on a shared Gateway HTTP listener for ACME
+  validation.
+  ([#8749](https://github.com/cert-manager/cert-manager/pull/8749),
+  [@apkatsikas](https://github.com/apkatsikas))
+
+- **`cert-manager.io/ignore-tls-listeners` annotation**: allows Gateway TLS
+  listeners to be excluded from certificate management, useful when some
+  listeners are managed by a different controller.
+  ([#8727](https://github.com/cert-manager/cert-manager/pull/8727),
+  [@hjoshi123](https://github.com/hjoshi123))
+
+- **Additional listener protocols**: the Gateway API integration now recognises
+  configurable listener protocols beyond the default set, making cert-manager
+  compatible with custom protocol extensions.
+  ([#8683](https://github.com/cert-manager/cert-manager/pull/8683),
+  [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+
+- **`enableGatewayAPI` configuration restructure**: the `enableGatewayAPI` and
+  `enableGatewayAPIListenerSet` fields on `ControllerConfiguration` are
+  deprecated in favour of a `gatewayAPI.enabled` / `gatewayAPI.enableListenerSet`
+  sub-struct. The old fields continue to work.
+  ([#8732](https://github.com/cert-manager/cert-manager/pull/8732),
+  [@ThatsMrTalbot](https://github.com/ThatsMrTalbot))
+
+### cainjector improvements
+
+- **`CAInjectorMerging` promoted to GA**: the `CAInjectorMerging` feature gate is
+  now unconditionally enabled and will be removed in a future release. This
+  changes how cainjector merges CA data into webhook and API service objects.
+  ([#8583](https://github.com/cert-manager/cert-manager/pull/8583))
+
+- **Server-side apply unconditional**: cainjector now always uses server-side
+  apply (SSA) to patch CA bundles, and the `ServerSideApply` feature gate is
+  deprecated. SSA removes the last-applied-configuration annotation bloat and
+  makes conflict detection more reliable.
+  ([#8692](https://github.com/cert-manager/cert-manager/pull/8692),
+  [@erikgb](https://github.com/erikgb))
+
+- **`--ignore-namespaces` flag**: the new cainjector flag accepts a
+  comma-separated list of namespace names that cainjector will skip when
+  watching Secrets for injection. This reduces the number of watch events in
+  clusters with a large number of namespaces or where some namespaces contain
+  large secrets that cainjector does not need.
+  ([#8614](https://github.com/cert-manager/cert-manager/pull/8614),
+  [@figaw](https://github.com/figaw))
+
+### Venafi integration updates
+
+cert-manager 1.21 adds two improvements to the Venafi/CyberArk integration:
+
+- **OAuth token observability**: a new `AuthFailed` reason on the Issuer
+  `Ready` condition distinguishes authentication failures (bad or expired
+  credentials) from transient infrastructure errors, making it easier to
+  diagnose Venafi connectivity problems.
+  ([#8808](https://github.com/cert-manager/cert-manager/pull/8808),
+  [@FelixPhipps](https://github.com/FelixPhipps))
+
+- **PANW NGTS support**: the Venafi issuer now supports PANW Next-Generation
+  Trust Services as a backend, in addition to Venafi TPP and Venafi Control
+  Plane.
+  ([#8779](https://github.com/cert-manager/cert-manager/pull/8779),
+  [@FelixPhipps](https://github.com/FelixPhipps))
+
+### ACME security hardening
+
+The ACME Challenge and Order controllers now enforce stricter resource
+ownership rules (GHSA-8rvj-mm4h-c258):
+
+- Challenges without a valid Order owner reference are rejected.
+- Order specs are now immutable after creation.
+- Pre-placed Challenges with a mismatched spec are detected and refused.
+
+This prevents a malicious actor with write access to Order or Challenge
+resources from influencing ACME validation in unexpected ways.
+
+Additionally, ACME challenges no longer permanently fail on transient network
+errors (TLS handshake timeouts, DNS resolution failures, context cancellation)
+during nonce fetches or authorisation waits. The workqueue retries with
+exponential backoff instead.
+
+([cert-manager/cert-manager#8948](https://github.com/cert-manager/cert-manager/pull/8948),
+[#8760](https://github.com/cert-manager/cert-manager/pull/8760))
+
+### Notable bug fixes
+
+- **Integer overflow in `renewBeforePercentage`**: Certificates with durations
+  longer than approximately 3 years were incorrectly rejected by validation or
+  assigned incorrect renewal times due to a 32-bit integer overflow in the
+  percentage arithmetic. Fixed in
+  [#8947](https://github.com/cert-manager/cert-manager/pull/8947)
+  ([@ThatsMrTalbot](https://github.com/ThatsMrTalbot)).
+
+- **Infinite re-issuance loop**: cert-manager no longer enters an infinite
+  re-issuance loop when an issuer returns an already-expired certificate.
+  Fixed in
+  [#8610](https://github.com/cert-manager/cert-manager/pull/8610)
+  ([@onurmicoogullari](https://github.com/onurmicoogullari)).
+
+- **DNS issuer secrets validated before ready**: the DNS issuer now validates
+  that the referenced Secret exists and is well-formed before marking the issuer
+  Ready, preventing silent misconfiguration.
+  Fixed in
+  [#8255](https://github.com/cert-manager/cert-manager/pull/8255)
+  ([@Peac36](https://github.com/Peac36)).
+
+- **Vault path traversal validation**: the Vault issuer webhook now rejects
+  `..` path segments in `spec.vault.path` and auth mount path fields,
+  preventing `path.Join` from silently resolving relative segments before
+  constructing the Vault API URL.
+  Fixed in
+  [#8930](https://github.com/cert-manager/cert-manager/pull/8930).
+
+- **DNS-over-HTTPS response body unbounded read**: the DNS-over-HTTPS client
+  now caps response body reads at 128 KB, preventing a potential OOM from a
+  malicious or misconfigured DoH resolver.
+  Fixed in
+  [#8803](https://github.com/cert-manager/cert-manager/pull/8803)
+  ([@SebTardif](https://github.com/SebTardif)).
 
 ## Community
 
