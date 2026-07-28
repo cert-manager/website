@@ -433,13 +433,13 @@ spec:
         windowDuration: 2h
 ```
 
-**Coordinating rotation with a paired system.** Some certificates are consumed by more than one
+**Coordinating rotation with a paired system:** Some certificates are consumed by more than one
 independently-managed system that must pick up a new certificate together — for example, an
 mTLS certificate shared with an external partner, or a certificate whose private key is mirrored
 into a hardware security module (HSM) by a separate process. Renewing on an unpredictable
 schedule risks one side rotating before the other is ready. Restricting renewal to a known
 window (agreed with the partner team, or aligned with the HSM sync job's own schedule) means
-downstream automation can reliably run immediately afterwards:
+downstream automation can reliably run immediately afterwards.
 
 ```yaml
 spec:
@@ -453,11 +453,11 @@ spec:
         windowDuration: 4h
 ```
 
-**Avoiding renewal during a traffic freeze.** A retailer running a change freeze during a
+**Avoiding renewal during a traffic freeze:** A retailer running a change freeze during a
 high-traffic sales event (for example, Black Friday week) wants to guarantee that no certificate
 rotation happens during that period, even if the calculated `renewBefore` time falls inside it.
 Configuring windows that only open outside the freeze period defers renewal until the next
-matching window after the freeze ends, provided one still exists before the certificate expires:
+matching window after the freeze ends, provided one still exists before the certificate expires.
 
 ```yaml
 spec:
@@ -471,12 +471,12 @@ spec:
         windowDuration: 3h
 ```
 
-**Manually-managed root and intermediate CAs.** A root or long-lived intermediate CA certificate
+**Manually-managed root and intermediate CAs:** A root or long-lived intermediate CA certificate
 is sometimes deliberately excluded from automated rotation because reissuing it requires an
 offline key ceremony, updating distributed trust bundles across many clusters, or other manual
 coordination that cert-manager cannot perform on its own. Setting `policy: Disabled` documents
 that intent directly on the resource and prevents cert-manager from ever attempting an
-unattended rotation of it:
+unattended rotation of it.
 
 ```yaml
 spec:
