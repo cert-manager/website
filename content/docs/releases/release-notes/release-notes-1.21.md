@@ -92,6 +92,7 @@ A special thanks to:
 - [`@onurmicoogullari`](https://github.com/onurmicoogullari)
 - [`@putongyong`](https://github.com/putongyong)
 - [`@seanorama`](https://github.com/seanorama)
+- [`@sklirg`](https://github.com/sklirg)
 - [`@texasich`](https://github.com/texasich)
 {/* END contributors */}
 
@@ -120,6 +121,36 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+{/* BEGIN changelog v1.21.1 */}
+## `v1.21.1`
+
+This patch release fixes a controller panic for Certificates with
+`spec.renewal.policy: Disabled`, a regression in 1.21.0 which caused log spam
+and dropped Secret informer events, Issuers and ClusterIssuers getting stuck at
+`Ready=False` (`InvalidSolver`) when a referenced ACME DNS-01 solver Secret is
+created after the Issuer, and the commented Gateway API example in the Helm
+chart values. It also updates several dependencies to fix reported security
+vulnerabilities.
+
+All users should upgrade.
+
+Changes since `v1.21.0`:
+
+### Bug or Regression
+
+- Avoid controller panic if a Certificate sets spec.renewal.policy=Disabled ([`#9038`](https://github.com/cert-manager/cert-manager/pull/9038), [`@sklirg`](https://github.com/sklirg))
+- Fix Issuer/ClusterIssuer stuck at Ready=False/InvalidSolver after a missing ACME DNS-01 solver Secret is created ([`#9083`](https://github.com/cert-manager/cert-manager/pull/9083), [`@SebTardif`](https://github.com/SebTardif))
+- Fix log spam and dropped Secret informer events for non-cert-manager Secrets, caused by a generics regression introduced in 1.21.0. ([`#9037`](https://github.com/cert-manager/cert-manager/pull/9037), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Fixed the commented Gateway API config example in the Helm chart values to use `gatewayAPI.enabled` instead of the invalid `gatewayAPI.enable`. ([`#9012`](https://github.com/cert-manager/cert-manager/pull/9012), [`@mateenali66`](https://github.com/mateenali66))
+
+### Other (Cleanup or Flake)
+
+- Bump `golang.org/x/text` to v0.40.0 to fix a reported security vulnerability ([`#9039`](https://github.com/cert-manager/cert-manager/pull/9039), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Bump `google.golang.org/grpc` to v1.82.1 to fix a reported security vulnerability ([`#9063`](https://github.com/cert-manager/cert-manager/pull/9063))
+- Bump `github.com/google/cel-go` to v0.29.0 to fix a reported security vulnerability ([`#9072`](https://github.com/cert-manager/cert-manager/pull/9072))
+- Bump `go.opentelemetry.io/otel` to v1.44.0 to fix a reported security vulnerability ([`#9073`](https://github.com/cert-manager/cert-manager/pull/9073))
+- Update distroless base images ([`#9000`](https://github.com/cert-manager/cert-manager/pull/9000), [`#9025`](https://github.com/cert-manager/cert-manager/pull/9025))
+{/* END changelog v1.21.1 */}
 {/* BEGIN changelog v1.21.0 */}
 ## `v1.21.0`
 
