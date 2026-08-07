@@ -15,6 +15,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈   | adcs-issuer                 | [📄][config:adcs-issuer]            | [Microsoft Active Directory<br/>Certificate Service][ca:adcs-issuer]   | -                                                 | [✔️][release:adcs-issuer]            | ✔️             |
 | 🥈   | aws-privateca-issuer        | [📄][config:aws-privateca-issuer]   | [AWS Private Certificate Authority][ca:aws-privateca-issuer]           | -                                                 | [✔️][release:aws-privateca-issuer]   | ✔️             |
 | 🥈   | ca-issuer (in-tree)         | [📄][config:ca-issuer]              | CA issuer                                                              | -                                                 | [✔️][release:cert-manager]           | ✔️             |
+| 🥈   | certforge-issuer            | [📄][config:certforge-issuer]       | [CertForge][ca:certforge-issuer]                                       | -                                                 | [✔️][release:certforge-issuer]       | ✔️             |
 | 🥈   | czertainly-issuer           | [📄][config:czertainly-issuer]      | [CZERTAINLY][ca:czertainly-issuer]                                     | [supported][production:czertainly-issuer]         | [✔️][release:czertainly-issuer]      | ✔️             |
 | 🥈   | command-issuer              | [📄][config:command-issuer]         | [Keyfactor Command][ca:command-issuer]                                 | -                                                 | [✔️][release:command-issuer]         | ✔️             |
 | 🥈   | cview-issuer                | [📄][config:cview-issuer]           | [CView-issuer][ca:cview-issuer]                                        | -                                                 | [✔️][release:cview-issuer]           | ❌              |
@@ -69,7 +70,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 [config:czertainly-issuer]: https://docs.czertainly.com/docs/certificate-key/integration-guides/cert-manager-issuer/create-czertainly-issuer
 [config:keyvault-issuer]: https://github.com/gonicus/azure-keyvault-issuer
-
+[config:certforge-issuer]: https://github.com/CertForge-LLC/certforge-issuer#readme
 [//]: # (CA docs)
 
 [ca:acme]: https://datatracker.ietf.org/doc/html/rfc8555
@@ -95,7 +96,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 [ca:czertainly-issuer]: https://www.czertainly.com
 [ca:keyvault-issuer]: https://learn.microsoft.com/en-us/azure/key-vault/keys/about-keys
-
+[ca:certforge-issuer]: https://certgovernance.app
 [//]: # (Release pages)
 
 [release:venafi-enhanced-issuer]: https://docs.venafi.cloud/vaas/k8s-components/c-vei-releases/
@@ -119,6 +120,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:cview-issuer]: https://github.com/secure-ly/cview-issuer-chart/releases
 [release:czertainly-issuer]: https://github.com/CZERTAINLY/CZERTAINLY-Cert-Manager-Issuer/releases
 [release:keyvault-issuer]: https://github.com/gonicus/azure-keyvault-issuer/releases
+[release:certforge-issuer]: https://github.com/CertForge-LLC/certforge-issuer/releases
 
 - The issuers are sorted by their tier and then alphabetically.
 - "in-tree" issuers are issuers that are shipped with cert-manager itself.
