@@ -155,6 +155,69 @@ Here is an overview of the network requirements:
    The cert-manager controller, webhook, and cainjector have metrics servers which listen for HTTP connections on TCP port 9402.
    Create a network policy which allows access to these services from your chosen metrics collector.
 
+### NetworkPolicy Examples for HTTP01 Challenges
+
+If you use an ACME Issuer configured for HTTP01,
+cert-manager dynamically creates solver pods in the namespace of the Challenge resource.
+These pods are labelled with `acme.cert-manager.io/http01-solver: "true"` and listen on TCP port 8080.
+
+If you have Kubernetes NetworkPolicies enabled, you must configure two things:
+
+1. **Allow egress from the cert-manager controller to the solver pods**
+2. **Allow ingress to the solver pods from the cert-manager controller**
+
+Add the following egress rule to the cert-manager controller's NetworkPolicy
+(if you are using the Helm chart, add this to the `networkPolicy.egress` list):
+
+```yaml
+# Egress from cert-manager controller to HTTP01 solver pods
+- to:
+  - podSelector:
+      matchLabels:
+        acme.cert-manager.io/http01-solver: "true"
+  ports:
+  - port: 8080
+    protocol: TCP
+```
+
+The cert-manager controller also needs access to the Kubernetes API server
+to create, watch, and delete the solver pods and related resources.
+Ensure your controller egress rules include port 6443 (or port 443) for the API server:
+
+```yaml
+- ports:
+  - port: 6443
+    protocol: TCP
+  - port: 443
+    protocol: TCP
+```
+
+You must also create a `NetworkPolicy` in the solver's namespace
+to allow ingress traffic from cert-manager:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-cert-manager-acmesolver
+  namespace: <solver-namespace>
+spec:
+  podSelector:
+    matchLabels:
+      acme.cert-manager.io/http01-solver: "true"
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: cert-manager
+    ports:
+    - port: 8080
+      protocol: TCP
+```
+
+> ℹ️ The `namespaceSelector` above uses `kubernetes.io/metadata.name`, which is automatically added by Kubernetes 1.21+.
+> If you are on an older cluster, ensure the `cert-manager` namespace has a matching label.
+
 ## Isolate cert-manager on dedicated node pools
 
 cert-manager is a cluster scoped operator and you should treat it as part of your platform's control plane.
