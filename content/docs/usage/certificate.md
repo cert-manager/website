@@ -411,6 +411,58 @@ To disable automatic renewal for a certificate, set `spec.renewal.policy` to `Di
 > will still happen at the calculated `desiredRenewalTime` using the `spec.renewBefore`/ `spec.renewBeforePercentage` fields.
 > This behavior is intentional and is done to avoid certificates from expiring due to window misconfiguration.
 
+#### Realistic scenarios
+
+**Renewing outside business hours:** Renewing a certificate is not always a zero-downtime
+event. Some applications cannot reload a certificate without a restart, and tools such as
+[Stakater Reloader](https://github.com/stakater/Reloader) or the
+[Strimzi](https://strimzi.io/) Kafka operator react to a renewed certificate Secret by
+restarting or rolling the workload that uses it — so whenever renewal happens, so does the
+disruption. This was the original motivation for renewal windows
+([#6754](https://github.com/cert-manager/cert-manager/issues/6754)), which describes a
+renewal at `3:15pm` on a Friday rolling a production Kafka cluster at peak load. The example
+in the overview above addresses exactly this: renewal — and the restart it triggers — can
+only begin at `02:00` on a weekday, when traffic is at its lowest.
+
+**Renewing during staffed hours:** The opposite preference is just as valid: renew while
+engineers are at their desks, so that a failed renewal or a bad rollout is noticed and fixed
+during the working day rather than paging someone at night. This mirrors the preferred
+maintenance windows offered by managed services such as Amazon RDS and Google Kubernetes
+Engine:
+
+```yaml
+spec:
+  renewal:
+    policy: RenewBefore
+    windows:
+      - cron: "0 9 * * 1-4" # 09:00, Monday to Thursday
+        timezone: Europe/London
+        windowDuration: 7h
+```
+
+> Note: schedule windows to recur comfortably more often than the effective `renewBefore`
+> period, so that at least one window always opens between the calculated renewal time and
+> expiry. Daily or weekly windows work well with the default 30 days of renewal slack; a
+> monthly window leaves no margin. Renewal windows express a preference, not a guarantee:
+> as described above, if no valid window exists before expiry, cert-manager renews at the
+> calculated renewal time anyway rather than let the certificate expire.
+
+**Manually-managed root and intermediate CAs:** A root or long-lived intermediate CA certificate
+is sometimes deliberately excluded from automated rotation because reissuing it requires an
+offline key ceremony, updating distributed trust bundles across many clusters, or other manual
+coordination that cert-manager cannot perform on its own. Setting `policy: Disabled` documents
+that intent directly on the resource and prevents cert-manager from renewing it automatically.
+(Reissuance can still be triggered by the user actions described below, such as editing the
+certificate spec or deleting the Secret.)
+
+```yaml
+spec:
+  isCA: true
+  duration: 87600h # 10y
+  renewal:
+    policy: Disabled
+```
+
 <a id="non-renewal-reissuance"></a>
 <a id="actions-triggering-private-key-rotation"></a>
 ### Reissuance triggered by user actions
