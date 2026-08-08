@@ -322,7 +322,6 @@ It is also required that `spec.duration` > `spec.renewBefore`.
 
 Once an X.509 certificate has been issued, cert-manager will calculate the renewal time for the `Certificate`. By default this will be 2/3 through the X.509 certificate's duration. If `spec.renewBefore` or `spec.renewBeforePercentage` has been set, it will be the effective `spec.renewBefore` amount of time before expiry. cert-manager will set `Certificate`'s `status.RenewalTime` to the time when the renewal will be attempted.
 
-<a id="renewal-policies-and-windows"></a>
 ### Renewal policies and renewal windows
 
 In addition to `spec.renewBefore` and `spec.renewBeforePercentage`, cert-manager supports
@@ -414,69 +413,47 @@ To disable automatic renewal for a certificate, set `spec.renewal.policy` to `Di
 
 #### Realistic scenarios
 
-**Regulated change-control windows.** Organizations subject to formal change management (for
-example, financial services or healthcare) often require that any production change, including
-certificate rotation, only happens inside a pre-approved maintenance window, so that on-call
-staff are available if something goes wrong and so the change is auditable against a change
-ticket. A weekly Sunday-morning window keeps renewal off the calculated `renewBefore` time and
-onto a predictable, approved schedule instead:
+**Renewing outside business hours:** Renewing a certificate is not always a zero-downtime
+event. Some applications cannot reload a certificate without a restart, and tools such as
+[Stakater Reloader](https://github.com/stakater/Reloader) or the
+[Strimzi](https://strimzi.io/) Kafka operator react to a renewed certificate Secret by
+restarting or rolling the workload that uses it — so whenever renewal happens, so does the
+disruption. This was the original motivation for renewal windows
+([#6754](https://github.com/cert-manager/cert-manager/issues/6754)), which describes a
+renewal at 3:15pm on a Friday rolling a production Kafka cluster at peak load. The example
+in the overview above addresses exactly this: renewal — and the restart it triggers — can
+only begin at 02:00 on a weekday, when traffic is at its lowest.
+
+**Renewing during staffed hours:** The opposite preference is just as valid: renew while
+engineers are at their desks, so that a failed renewal or a bad rollout is noticed and fixed
+during the working day rather than paging someone at night. This mirrors the preferred
+maintenance windows offered by managed services such as Amazon RDS and Google Kubernetes
+Engine:
 
 ```yaml
 spec:
-  duration: 2160h # 90d
-  renewBefore: 360h # 15d
   renewal:
     policy: RenewBefore
     windows:
-      - cron: "0 3 * * 0" # every Sunday at 03:00
-        timezone: America/New_York
-        windowDuration: 2h
+      - cron: "0 9 * * 1-4" # 09:00, Monday to Thursday
+        timezone: Europe/London
+        windowDuration: 7h
 ```
 
-**Coordinating rotation with a paired system:** Some certificates are consumed by more than one
-independently-managed system that must pick up a new certificate together — for example, an
-mTLS certificate shared with an external partner, or a certificate whose private key is mirrored
-into a hardware security module (HSM) by a separate process. Renewing on an unpredictable
-schedule risks one side rotating before the other is ready. Restricting renewal to a known
-window (agreed with the partner team, or aligned with the HSM sync job's own schedule) means
-downstream automation can reliably run immediately afterwards.
-
-```yaml
-spec:
-  duration: 8760h # 365d
-  renewBefore: 720h # 30d
-  renewal:
-    policy: RenewBefore
-    windows:
-      - cron: "0 1 1 * *" # 01:00 on the first of each month
-        timezone: UTC
-        windowDuration: 4h
-```
-
-**Avoiding renewal during a traffic freeze:** A retailer running a change freeze during a
-high-traffic sales event (for example, Black Friday week) wants to guarantee that no certificate
-rotation happens during that period, even if the calculated `renewBefore` time falls inside it.
-Configuring windows that only open outside the freeze period defers renewal until the next
-matching window after the freeze ends, provided one still exists before the certificate expires.
-
-```yaml
-spec:
-  duration: 2160h # 90d
-  renewBefore: 720h # 30d
-  renewal:
-    policy: RenewBefore
-    windows:
-      - cron: "0 4 * * 2" # Tuesdays at 04:00, well outside the freeze
-        timezone: America/Chicago
-        windowDuration: 3h
-```
+> Note: schedule windows to recur comfortably more often than the effective `renewBefore`
+> period, so that at least one window always opens between the calculated renewal time and
+> expiry. Daily or weekly windows work well with the default 30 days of renewal slack; a
+> monthly window leaves no margin. Renewal windows express a preference, not a guarantee:
+> as described above, if no valid window exists before expiry, cert-manager renews at the
+> calculated renewal time anyway rather than let the certificate expire.
 
 **Manually-managed root and intermediate CAs:** A root or long-lived intermediate CA certificate
 is sometimes deliberately excluded from automated rotation because reissuing it requires an
 offline key ceremony, updating distributed trust bundles across many clusters, or other manual
 coordination that cert-manager cannot perform on its own. Setting `policy: Disabled` documents
-that intent directly on the resource and prevents cert-manager from ever attempting an
-unattended rotation of it.
+that intent directly on the resource and prevents cert-manager from renewing it automatically.
+(Reissuance can still be triggered by the user actions described below, such as editing the
+certificate spec or deleting the Secret.)
 
 ```yaml
 spec:
