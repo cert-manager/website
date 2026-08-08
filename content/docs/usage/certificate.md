@@ -420,9 +420,9 @@ event. Some applications cannot reload a certificate without a restart, and tool
 restarting or rolling the workload that uses it — so whenever renewal happens, so does the
 disruption. This was the original motivation for renewal windows
 ([#6754](https://github.com/cert-manager/cert-manager/issues/6754)), which describes a
-renewal at 3:15pm on a Friday rolling a production Kafka cluster at peak load. The example
+renewal at `3:15pm` on a Friday rolling a production Kafka cluster at peak load. The example
 in the overview above addresses exactly this: renewal — and the restart it triggers — can
-only begin at 02:00 on a weekday, when traffic is at its lowest.
+only begin at `02:00` on a weekday, when traffic is at its lowest.
 
 **Renewing during staffed hours:** The opposite preference is just as valid: renew while
 engineers are at their desks, so that a failed renewal or a bad rollout is noticed and fixed
