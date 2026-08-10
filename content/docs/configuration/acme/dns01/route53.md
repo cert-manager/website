@@ -236,14 +236,14 @@ A mutating webhook will automatically setup a mounted service account volume in 
    > ℹ️ Older versions of this guide included an extra step here:
    > setting `runAsUser: 1001` and `fsGroup: 1001` in the `securityContext` of the cert-manager `Deployment`,
    > so that the cert-manager process could read the mounted ServiceAccount token.
-   > This is no longer necessary.
-   > Since Kubernetes 1.19, the
+   > On Kubernetes >= 1.19 this should not be necessary, because the
    > [projected ServiceAccount token file is world-readable](https://github.com/kubernetes/enhancements/tree/master/keps/sig-auth/1205-bound-service-account-tokens#file-permission)
    > when the Pod does not set `runAsUser`, and cert-manager runs as a non-root user by default.
-   > If you see errors such as
-   > `open /var/run/secrets/eks.amazonaws.com/serviceaccount/token: permission denied`
-   > on an old EKS version or on EKS Fargate,
-   > read [`cert-manager/website#697`: IRSA Needs `runAsUser: 1001`](https://github.com/cert-manager/website/issues/697).
+   > But if you see errors such as
+   > `open /var/run/secrets/eks.amazonaws.com/serviceaccount/token: permission denied`,
+   > which have been reported on older EKS versions and on EKS Fargate,
+   > apply that `securityContext` as a workaround and read
+   > [`cert-manager/website#697`: IRSA Needs `runAsUser: 1001`](https://github.com/cert-manager/website/issues/697) for the background.
 
 4. **Restart the cert-manager Deployment**
 
