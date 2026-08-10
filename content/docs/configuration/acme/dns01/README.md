@@ -138,6 +138,18 @@ _acme-challenge.bar.example.com	IN	CNAME	_acme-challenge.less-privileged.example
 With this configuration cert-manager will follow CNAME records recursively in order to determine
 which DNS zone to update during DNS01 challenges.
 
+> ⚠️ With `cnameStrategy: Follow`, cert-manager follows *any* CNAME record
+> found at `_acme-challenge.<domain>`, including one synthesized by a wildcard
+> record. For example, a record like `*.example.com IN CNAME
+> lb.example.org` also answers CNAME queries for
+> `_acme-challenge.example.com`, so cert-manager will try to create the
+> challenge TXT record at `lb.example.org` — typically failing with an
+> error such as Route 53's `RRSet with DNS name lb.example.org. is not
+> permitted in zone example.com.`. To avoid this, create an explicit record
+> at `_acme-challenge.<domain>` (an exact-match name prevents wildcard
+> synthesis), or use the default `cnameStrategy: None` if you are not
+> delegating challenges to another zone.
+
 
 ## Supported DNS01 providers
 
