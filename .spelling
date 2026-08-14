@@ -134,6 +134,7 @@ ArgoCD
 Arsh
 ArtifactHUB
 ArtifactHub
+APP.4.4
 AzureDNS
 BasicConstraints
 Bullseye
@@ -194,6 +195,7 @@ CryptoKey
 csi-driver
 csi-driver-spiffe
 Ctrl
+cybersecurity
 DCO
 DHCP
 DNS01
@@ -219,6 +221,7 @@ EKS
 ELB
 Ed25519
 Encrypter
+ENISA
 Fargate
 FastDNS
 FreeIPA
@@ -232,6 +235,7 @@ GKE
 GitOps
 github-actions
 gRPC
+Grundschutz
 GSoC
 Gloo
 GoDaddy
@@ -286,6 +290,7 @@ Makefile
 Makefiles
 NameCheap
 NGINX
+NIS2
 NLB
 NLBs
 NotIn
@@ -1559,6 +1564,7 @@ onurmicoogullari
 putongyong
 samplewebhook
 seanorama
+sklirg
 Tardif
 texasich
 workqueue

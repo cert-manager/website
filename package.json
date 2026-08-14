@@ -11,7 +11,7 @@
     }
   ],
   "engines": {
-    "npm": "11.x",
+    "npm": "12.x",
     "node": "24.x"
   },
   "scripts": {
@@ -96,7 +96,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-mdx": "3.8.1",
     "format-api-docs": "file:scripts/gendocs/postprocess",
-    "globals": "17.7.0",
+    "globals": "17.8.0",
     "markdown-link-check": "3.14.2",
     "next-sitemap": "4.2.3",
     "postcss": "8.5.23",
