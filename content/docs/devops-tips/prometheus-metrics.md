@@ -5,6 +5,10 @@ description: 'cert-manager usage: Prometheus metrics'
 
 To help with operations and insights into cert-manager activities, cert-manager exposes metrics in the [Prometheus](https://prometheus.io/) format from the controller, webhook and cainjector components. These are available at the standard `/metrics` endpoint on port `9402` of each component Pod.
 
+Application-specific cert-manager metrics (Certificates, Issuers, ACME, Venafi, and controller sync) are exported by the **controller**. The webhook and cainjector expose the same `/metrics` endpoint (including Go runtime and process metrics) so they can be scraped with the same `PodMonitor`.
+
+> ⚠️ **Metric cardinality and first use:** Prometheus client libraries typically create labeled time series only when a metric is first observed. Immediately after startup you may see an empty or sparse `/metrics` response until controllers have reconciled resources or made outbound requests. Scraping works; there may simply be no application series yet. Issuing a test Certificate (or waiting for existing resources to reconcile) usually populates the Certificate/Issuer gauges. See [cert-manager#3446](https://github.com/cert-manager/cert-manager/issues/3446#issuecomment-739762015).
+
 ## Scraping Metrics
 
 How metrics are scraped will depend how you're operating your Prometheus server(s). These examples presume the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) is being used to run Prometheus, and configure Pod or Service Monitor CRDs.
@@ -179,16 +183,73 @@ Check the health of the cert-manager scrape targets on the Prometheus status pag
 
 ![](/docs/devops-tips/prometheus-metrics/prometheus-status-targets.png)
 
-## Venafi metrics
+## Available metrics
 
-cert-manager exposes the following Prometheus metrics for Venafi OAuth token requests. These are emitted by the controller whenever a Venafi `Issuer` or `ClusterIssuer` authenticates against a TPP, Cloud, or Next-Gen Trust Security (NGTS) endpoint.
+The tables below list the Prometheus metrics exported by the cert-manager controller. Metric names use the `certmanager_` namespace (some ACME/Venafi HTTP client metrics also include an `http_` subsystem).
+
+The source of truth for these metrics is [`pkg/metrics`](https://github.com/cert-manager/cert-manager/tree/master/pkg/metrics) and [`internal/collectors`](https://github.com/cert-manager/cert-manager/tree/master/internal/collectors) in the cert-manager repository. If you add or change a metric in code, update this page in the same change set (or follow up immediately).
+
+In addition to the application metrics below, each component registers the Prometheus Go collector and process collector (`go_*` and `process_*` series).
+
+### Certificate metrics
+
+These gauges are derived from `Certificate` resources known to the controller. Ready-status metrics emit one series per condition value (`True`, `False`, `Unknown`), with value `1` for the current condition and `0` otherwise.
 
 | Metric | Type | Labels | Description |
 |--------|------|--------|-------------|
+| `certmanager_certificate_ready_status` | Gauge | `name`, `namespace`, `condition`, `issuer_name`, `issuer_kind`, `issuer_group` | Ready condition of the Certificate (`True` / `False` / `Unknown`). |
+| `certmanager_certificate_expiration_timestamp_seconds` | Gauge | `name`, `namespace`, `issuer_name`, `issuer_kind`, `issuer_group` | Unix timestamp when the Certificate expires (`status.notAfter`). Kept for compatibility; prefer `certmanager_certificate_not_after_timestamp_seconds`. |
+| `certmanager_certificate_not_after_timestamp_seconds` | Gauge | `name`, `namespace`, `issuer_name`, `issuer_kind`, `issuer_group` | Unix timestamp after which the Certificate is invalid (`status.notAfter`). |
+| `certmanager_certificate_not_before_timestamp_seconds` | Gauge | `name`, `namespace`, `issuer_name`, `issuer_kind`, `issuer_group` | Unix timestamp before which the Certificate is invalid (`status.notBefore`). |
+| `certmanager_certificate_renewal_timestamp_seconds` | Gauge | `name`, `namespace`, `issuer_name`, `issuer_kind`, `issuer_group` | Unix timestamp after which cert-manager should renew the Certificate (`status.renewalTime`). |
+
+### ACME Challenge metrics
+
+| Metric | Type | Labels | Description |
+|--------|------|--------|-------------|
+| `certmanager_certificate_challenge_status` | Gauge | `status`, `domain`, `reason`, `processing`, `name`, `namespace`, `type` | Current ACME Challenge state. One series is emitted per known status value; the active status has value `1`. `type` is the challenge type (for example `HTTP-01` or `DNS-01`). |
+
+### Issuer metrics
+
+| Metric | Type | Labels | Description |
+|--------|------|--------|-------------|
+| `certmanager_issuer_ready_status` | Gauge | `name`, `namespace`, `condition` | Ready condition of a namespaced `Issuer` (`True` / `False` / `Unknown`). |
+| `certmanager_clusterissuer_ready_status` | Gauge | `name`, `condition` | Ready condition of a `ClusterIssuer` (`True` / `False` / `Unknown`). |
+
+### ACME client metrics
+
+Emitted for outbound HTTP requests made by cert-manager's ACME client.
+
+| Metric | Type | Labels | Description |
+|--------|------|--------|-------------|
+| `certmanager_http_acme_client_request_count` | Counter | `scheme`, `host`, `action`, `method`, `status` | Total number of outbound ACME HTTP requests. |
+| `certmanager_http_acme_client_request_duration_seconds` | Summary | `scheme`, `host`, `action`, `method`, `status` | Latency of outbound ACME HTTP requests in seconds (summary quantiles). |
+
+### Venafi metrics
+
+Venafi client latency and OAuth token request metrics. OAuth token metrics are emitted whenever a Venafi `Issuer` or `ClusterIssuer` authenticates against a TPP, Cloud, or Next-Gen Trust Security (NGTS) endpoint.
+
+| Metric | Type | Labels | Description |
+|--------|------|--------|-------------|
+| `certmanager_http_venafi_client_request_duration_seconds` | Summary | `api_call` | **Alpha.** Latency of Venafi API calls in seconds, labeled by logical API call type (for example `request_certificate`). |
 | `certmanager_venafi_oauth_token_requests_total` | Counter | `status` (`success` \| `failure`) | Total number of Venafi OAuth token requests made by cert-manager. |
 | `certmanager_venafi_oauth_token_request_duration_seconds` | Histogram | — | Duration of Venafi OAuth token requests. Buckets cover typical token-exchange latencies from 10ms to 30s. |
 
-These metrics can be used to alert on elevated token request failure rates or unexpected latency increases in the authentication flow.
+These OAuth metrics can be used to alert on elevated token request failure rates or unexpected latency increases in the authentication flow.
+
+### Controller sync metrics
+
+| Metric | Type | Labels | Description |
+|--------|------|--------|-------------|
+| `certmanager_controller_sync_call_count` | Counter | `controller` | Number of `sync()` calls made by a controller. |
+| `certmanager_controller_sync_error_count` | Counter | `controller` | Number of errors encountered during controller `sync()`. Use with `controller_sync_call_count` to derive error rates. |
+
+### Clock metrics
+
+| Metric | Type | Labels | Description |
+|--------|------|--------|-------------|
+| `certmanager_clock_time_seconds_gauge` | Gauge | — | Current clock time as Unix seconds. Prefer this over the deprecated counter below. |
+| `certmanager_clock_time_seconds` | Counter | — | **Deprecated.** Same clock reading as a counter type; use `certmanager_clock_time_seconds_gauge` instead. |
 
 ## Monitoring Mixin
 
