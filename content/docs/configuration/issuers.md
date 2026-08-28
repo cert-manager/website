@@ -18,6 +18,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈   | czertainly-issuer           | [📄][config:czertainly-issuer]      | [CZERTAINLY][ca:czertainly-issuer]                                     | [supported][production:czertainly-issuer]         | [✔️][release:czertainly-issuer]      | ✔️             |
 | 🥈   | command-issuer              | [📄][config:command-issuer]         | [Keyfactor Command][ca:command-issuer]                                 | -                                                 | [✔️][release:command-issuer]         | ✔️             |
 | 🥈   | cview-issuer                | [📄][config:cview-issuer]           | [CView-issuer][ca:cview-issuer]                                        | -                                                 | [✔️][release:cview-issuer]           | ❌              |
+| 🥈   | digi-issuer                 | [📄][config:digi-issuer]            | [DigiCert][ca:digi-issuer]                                             | -                                                 | [✔️][release:digi-issuer]            | ✔️             |
 | 🥈   | ejbca-issuer                | [📄][config:ejbca-issuer]           | [EJBCA][ca:ejbca-issuer]                                               | -                                                 | [✔️][release:ejbca-issuer]           | ✔️             |
 | 🥈   | google-cas-issuer           | [📄][config:google-cas-issuer]      | [Google Cloud Certificate<br/>Authority Service][ca:google-cas-issuer] | -                                                 | [✔️][release:google-cas-issuer]      | ✔️             |
 | 🥈   | gs-atlas-issuer             | [📄][config:gs-atlas-issuer]        | [GlobalSign CA][ca:gs-atlas-issuer]                                    | -                                                 | [✔️][release:gs-atlas-issuer]        | ✔️             |
@@ -69,6 +70,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 [config:czertainly-issuer]: https://docs.czertainly.com/docs/certificate-key/integration-guides/cert-manager-issuer/create-czertainly-issuer
 [config:keyvault-issuer]: https://github.com/gonicus/azure-keyvault-issuer
+[config:digi-issuer]: https://github.com/digicert/digi-issuer
 
 [//]: # (CA docs)
 
@@ -95,6 +97,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 [ca:czertainly-issuer]: https://www.czertainly.com
 [ca:keyvault-issuer]: https://learn.microsoft.com/en-us/azure/key-vault/keys/about-keys
+[ca:digi-issuer]: https://www.digicert.com/
 
 [//]: # (Release pages)
 
@@ -119,6 +122,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:cview-issuer]: https://github.com/secure-ly/cview-issuer-chart/releases
 [release:czertainly-issuer]: https://github.com/CZERTAINLY/CZERTAINLY-Cert-Manager-Issuer/releases
 [release:keyvault-issuer]: https://github.com/gonicus/azure-keyvault-issuer/releases
+[release:digi-issuer]: https://github.com/digicert/digi-issuer/releases
 
 - The issuers are sorted by their tier and then alphabetically.
 - "in-tree" issuers are issuers that are shipped with cert-manager itself.
