@@ -10,7 +10,6 @@ export default function Feature({ feature }) {
           alt={feature.description}
           width={77}
           height={74}
-          layout="fixed"
         />
       </div>
 
