@@ -43,9 +43,10 @@ function Home({ router }) {
               src="/images/cert-manager-diagram.svg"
               alt="Cert Manager"
               width={756}
-              height={518}
+              height={529}
               sizes="100vw"
               style={{ width: '100%', height: 'auto' }}
+              priority
             />
           </div>
           <Card className="mb-10 pt-7 pb-8 px-8 text-center md:flex md:gap-10 md:items-center md:text-left md:py-6 lg:px-12">
@@ -54,7 +55,7 @@ function Home({ router }) {
                 src={page.certManager.image.src}
                 alt={page.certManager.image.alt}
                 width={141}
-                height={136}
+                height={141}
               />
             </div>
             <p className="font-semibold text-lg mt-8 md:mt-0">
