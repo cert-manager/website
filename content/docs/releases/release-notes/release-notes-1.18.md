@@ -84,14 +84,11 @@ See the [fix commit](https://github.com/kubernetes/ingress-nginx/commit/618aae18
 
 #### OpenShift's built-in Ingress-to-Route conversion
 
-This change is also incompatible with the OpenShift built-in router.
+This change is also incompatible with the OpenShift built-in router (this is unrelated to the ingress-nginx-specific options above).
 
 OpenShift's `route-controller-manager` converts `Ingress` resources into `Route` resources for the built-in HAProxy router, but it [skips any rule which uses `pathType: Exact`](https://github.com/openshift/route-controller-manager/blob/59697cf7af4517dd44e28179a57f7f35b6ea0e22/pkg/route/ingress/ingress.go#L460-L464), because the `Route` API has no equivalent exact path matching mode.
 The HTTP01 solver `Ingress` is therefore never converted into a `Route`, so the challenge URL is not served and the challenge fails with a 503 response.
-Support for the `Exact` path type has to be added to OpenShift's Ingress-to-Route conversion; until then, use the feature gate.
-
-If you use the OpenShift built-in router, disable the `ACMEHTTP01IngressPathTypeExact` feature,
-to reinstate the old `PathType: ImplementationSpecific` behavior:
+Support for the `Exact` path type has to be added to OpenShift's Ingress-to-Route conversion; until then, disable the `ACMEHTTP01IngressPathTypeExact` feature gate to reinstate the old `PathType: ImplementationSpecific` behavior:
 
 ```yaml
 # values.yaml
