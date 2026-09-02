@@ -233,46 +233,24 @@ A mutating webhook will automatically setup a mounted service account volume in 
 
    > ℹ️ If you're following the Cross Account example, modify the `ClusterIssuer` with the role from Account Y.
 
-4. **(optional) Update file system permissions**
+   > ℹ️ Older versions of this guide included an extra step here:
+   > setting `runAsUser: 1001` and `fsGroup: 1001` in the `securityContext` of the cert-manager `Deployment`,
+   > so that the cert-manager process could read the mounted ServiceAccount token.
+   > On Kubernetes >= 1.19 this should not be necessary, because the
+   > [projected ServiceAccount token file is world-readable](https://github.com/kubernetes/enhancements/tree/master/keps/sig-auth/1205-bound-service-account-tokens#file-permission)
+   > when the Pod does not set `runAsUser`, and cert-manager runs as a non-root user by default.
+   > But if you see errors such as
+   > `open /var/run/secrets/eks.amazonaws.com/serviceaccount/token: permission denied`,
+   > which have been reported on older EKS versions and on EKS Fargate,
+   > apply that `securityContext` as a workaround and read
+   > [`cert-manager/website#697`: IRSA Needs `runAsUser: 1001`](https://github.com/cert-manager/website/issues/697) for the background.
 
-   > 📢 **Please help us improve this documentation**
-   >
-   > The reason for this optional step is that on EKS Fargate and on some
-   > older versions of EKS you may observe errors such as:
-   > - `unable to read file at /var/run/secrets/eks.amazonaws.com/serviceaccount/token`
-   > - `open /var/run/secrets/eks.amazonaws.com/serviceaccount/token: permission denied`
-   >
-   > In this case, you can change the user and group of the cert-manager process
-   > so that it is able to read the mounted ServiceAccount token.
-   >
-   > Read [`cert-manager/website#697`: IRSA Needs `runAsUser: 1001`](https://github.com/cert-manager/website/issues/697)
-   > and tell us whether this step is still necessary or obsolete.
-
-   You may also need to modify the cert-manager `Deployment` with a different user and group, so the `ServiceAccount` token can be read.
-
-   ```yaml
-   spec:
-     template:
-       spec:
-         securityContext:
-           fsGroup: 1001
-           runAsUser: 1001
-   ```
-
-   The cert-manager Helm chart provides a variable for modifying cert-manager's `Deployment` like so:
-
-   ```yaml
-   securityContext:
-     fsGroup: 1001
-     runAsUser: 1001
-   ```
-
-5. **Restart the cert-manager Deployment**
+4. **Restart the cert-manager Deployment**
 
     Restart the cert-manager Deployment, so that the webhook can inject the
     necessary `volume`, `volumemount`, and environment variables into the Pods.
 
-6. **Create a `ClusterIssuer` resource**
+5. **Create a `ClusterIssuer` resource**
 
    ```yaml
    apiVersion: cert-manager.io/v1
