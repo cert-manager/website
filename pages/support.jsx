@@ -32,7 +32,7 @@ function Support({ router }) {
                 <Image
                   src={'/images/paloalto-logo-dark.svg'}
                   alt="Palo Alto Networks"
-                  height="100%"
+                  height={56}
                   width={300}
                 />
               </h2>

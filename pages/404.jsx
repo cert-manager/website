@@ -8,8 +8,8 @@ function PageNotFound() {
         <div className="col-span-4 lg:col-span-3 xl:col-span-3 md:border-r border-gray-2/50 pr-5">
           <Image
             src={'/images/cert-manager-404-illustration.svg'}
-            height={360}
-            width={625}
+            height={362}
+            width={626}
             alt="404 - Not found"
           />
         </div>

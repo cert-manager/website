@@ -9,8 +9,7 @@ export default function Feature({ feature }) {
           src={feature.imageSrc}
           alt={feature.description}
           width={77}
-          height={74}
-          layout="fixed"
+          height={75}
         />
       </div>
 
