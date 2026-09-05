@@ -93,7 +93,10 @@ A special thanks to:
 - [`@putongyong`](https://github.com/putongyong)
 - [`@seanorama`](https://github.com/seanorama)
 - [`@sklirg`](https://github.com/sklirg)
+- [`@speer`](https://github.com/speer)
 - [`@texasich`](https://github.com/texasich)
+- [`@thc1006`](https://github.com/thc1006)
+- [`@wieghx`](https://github.com/wieghx)
 {/* END contributors */}
 
 for their contributions, comments and support!
@@ -121,6 +124,45 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+{/* BEGIN changelog v1.21.2 */}
+## `v1.21.2`
+
+This patch release fixes a panic in the certificates-issuing controller, a
+validating webhook panic when AdmissionReview requests omit optional fields,
+ACME Renewal Information (ARI) checks reading the wrong issuer's certificate
+from the Secret, renewal times for February 29 cron schedules, and duplicated
+dnsNames when Gateway listeners share a Secret. The ACME and Vault issuers no
+longer copy untrusted HTTP response bodies into status conditions and Events,
+and the Vault issuer no longer uses the controller's ambient AWS credentials
+for AWS IAM auth on namespaced Issuers unless explicitly enabled. It also
+updates Go and several dependencies to fix reported security vulnerabilities.
+
+All users should upgrade.
+
+Changes since `v1.21.1`:
+
+### Bug or Regression
+
+- ACME Issuer response bodies are no longer reflected into Issuer status conditions or Kubernetes Events. Only ACME problem documents are surfaced (bounded in length); other responses are reported by HTTP status code alone, with the full error available in the controller logs. ([`#9239`](https://github.com/cert-manager/cert-manager/pull/9239), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- Cap ACME server response bodies at 16 MiB to guard against unbounded-body denial-of-service. ([`#9222`](https://github.com/cert-manager/cert-manager/pull/9222), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- De-duplicate dnsNames when multiple Gateway/ListenerSet listeners share a Secret ([`#9234`](https://github.com/cert-manager/cert-manager/pull/9234), [`@speer`](https://github.com/speer))
+- Fix certificate renewal windows using February 29 cron schedules across non-leap century years. ([`#9240`](https://github.com/cert-manager/cert-manager/pull/9240), [`@wieghx`](https://github.com/wieghx))
+- Fix validating webhook panics when AdmissionReview requests omit optional fields, by routing identity, approval, and resource validation on the always-present Resource/SubResource fields and denying (rather than silently allowing) requests with an unset or mismatched resource. As a side effect, validation is now also enforced for equivalent-converted requests on non-v1 API versions, which previously could skip validation. ([`#9235`](https://github.com/cert-manager/cert-manager/pull/9235), [`@lunarwhite`](https://github.com/lunarwhite))
+- Fixed a bug where `replaces` field was being populated for the wrong issuer on issuer changes ([`#9236`](https://github.com/cert-manager/cert-manager/pull/9236), [`@hjoshi123`](https://github.com/hjoshi123))
+- Fixed a panic in the certificates-issuing controller when a CertificateRequest has a failure time set but no Ready condition. ([`#9238`](https://github.com/cert-manager/cert-manager/pull/9238), [`@thc1006`](https://github.com/thc1006))
+- Fixed an issue where the body of a non-Vault HTTP response from `spec.vault.server` could be copied into the Vault Issuer's Ready condition and its Kubernetes Events. Such responses now report only the HTTP status code, and Vault's own error messages are truncated before being persisted. ([`#9262`](https://github.com/cert-manager/cert-manager/pull/9262), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- The ACME HTTP-01 self-check no longer reflects the fetched response body in `Challenge.status.reason`, preventing disclosure of internal response contents reachable via redirects. The response is still available in the controller's debug logs. ([`#9232`](https://github.com/cert-manager/cert-manager/pull/9232), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- The `vault` issuer no longer authenticates to Vault using the cert-manager controller's ambient AWS credentials
+    for AWS IAM auth on a namespaced `Issuer`, unless ambient credentials are explicitly enabled via
+    `--issuer-ambient-credentials`. `ClusterIssuer` and explicit `serviceAccountRef` (IRSA) configurations are
+    unaffected. ([`#9231`](https://github.com/cert-manager/cert-manager/pull/9231), [`@FelixPhipps`](https://github.com/FelixPhipps))
+
+### Other (Cleanup or Flake)
+
+- Upgrade Go to 1.26.6, which includes security fixes to the go command, and the crypto/tls, encoding/asn1, encoding/xml, html/template, net, net/http, and net/url packages. ([`#9151`](https://github.com/cert-manager/cert-manager/pull/9151), [`@wallrj`](https://github.com/wallrj))
+- Bump `google.golang.org/grpc` to v1.83.1 to fix a reported security vulnerability ([`#9255`](https://github.com/cert-manager/cert-manager/pull/9255))
+- Bump `golang.org/x/crypto` to v0.56.0 to fix reported security vulnerabilities ([`#9265`](https://github.com/cert-manager/cert-manager/pull/9265))
+{/* END changelog v1.21.2 */}
 {/* BEGIN changelog v1.21.1 */}
 ## `v1.21.1`
 
