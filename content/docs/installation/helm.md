@@ -100,6 +100,31 @@ helm install \
   --set webhook.timeoutSeconds=4   # Example: changing the webhook timeout using a Helm parameter
 ```
 
+### Installing into a different namespace
+
+By default the documentation installs cert-manager into the `cert-manager` namespace. To install into a different namespace, change the `--namespace` value:
+
+```bash
+helm install \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager:[[VAR::cert_manager_latest_version]] \
+  --namespace my-cert-manager \
+  --create-namespace \
+  --set crds.enabled=true
+```
+
+> ℹ️ cert-manager remains **cluster-scoped** regardless of its install namespace: it manages `Certificate`, `Issuer` and related resources across all namespaces and still requires its cluster-wide RBAC and CRDs. The install namespace only controls where the controller, webhook and cainjector Deployments (and their leader-election Lease) live.
+
+By default the controller and cainjector acquire their leader-election Lease in the `kube-system` namespace (`global.leaderElection.namespace`). If the cert-manager ServiceAccount must not access `kube-system` — for example on a restricted or multi-tenant cluster — move the Lease into the install namespace:
+
+```bash
+helm install \
+  cert-manager oci://quay.io/jetstack/charts/cert-manager:[[VAR::cert_manager_latest_version]] \
+  --namespace my-cert-manager \
+  --create-namespace \
+  --set crds.enabled=true \
+  --set global.leaderElection.namespace=my-cert-manager
+```
+
 ### Installing cert-manager as subchart
 
 If you have configured cert-manager as a subchart all the components of cert-manager will be installed into the namespace of the helm release you are installing.
