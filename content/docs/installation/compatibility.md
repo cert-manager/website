@@ -114,3 +114,34 @@ the webhook listens. See the warning at the top of this page for more details.
 Because Fargate forces you to use its networking, you cannot manually set the networking
 type and options such as `webhook.hostNetwork` on the helm chart will cause your
 cert-manager deployment to fail in surprising ways.
+
+## OpenShift
+
+### HTTP01 challenges fail with a 503 when using the built-in router
+
+Since cert-manager 1.18, the HTTP01 solver `Ingress` uses `pathType: Exact`
+for the challenge path (feature gate `ACMEHTTP01IngressPathTypeExact`, on by
+default). OpenShift's `route-controller-manager` converts `Ingress` resources
+into `Route` resources for the built-in HAProxy router, but it
+[skips any rule which uses `pathType: Exact`](https://github.com/openshift/route-controller-manager/blob/59697cf7af4517dd44e28179a57f7f35b6ea0e22/pkg/route/ingress/ingress.go#L460-L464),
+because the `Route` API has no equivalent exact path matching mode.
+The solver `Ingress` is therefore never converted into a `Route`, the challenge
+URL is not served, and the challenge fails with a 503 response.
+
+Support for the `Exact` path type has to be added to OpenShift's
+Ingress-to-Route conversion. Until then, disable the feature gate to reinstate
+the old `PathType: ImplementationSpecific` behavior:
+
+```yaml
+# values.yaml
+config:
+  featureGates:
+    # Disable the use of Exact PathType in Ingress resources, because OpenShift's
+    # Ingress-to-Route conversion does not support it
+    ACMEHTTP01IngressPathTypeExact: false
+```
+
+You are not affected if you install cert-manager using the cert-manager
+Operator for Red Hat OpenShift, which has
+[disabled this feature gate by default](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/security_and_compliance/cert-manager-operator-for-red-hat-openshift#cert-manager-operator-1-18-0-known-issues_cert-manager-operator-release-notes)
+since its 1.18.0 release.
