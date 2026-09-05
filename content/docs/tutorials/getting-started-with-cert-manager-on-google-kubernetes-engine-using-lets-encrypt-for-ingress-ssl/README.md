@@ -38,7 +38,7 @@ Visit the [Get started with Google Cloud](https://cloud.google.com/docs/get-star
 
 **💻 Domain Name**
 
-You will need a domain name and the ability to create DNS records in that domain. NameCheap and GoDaddy are two well-known registrars that may be used to register your domain name.
+You will need a domain name and the ability to create DNS records in that domain. You can register a domain name with any domain name registrar.
 
 > 💵 If you prefer not purchasing a domain name, it is also possible to adapt this tutorial to use the IP address to serve your website and for the SSL certificate.
 
@@ -190,16 +190,16 @@ export IP_ADDRESS=192.0.2.100  # Replace with your IP address
 
 ## 4. Create a domain name for your website
 
-You will need a domain name for your website, this allows Let's Encrypt to check your domain before it signs your SSL certificate,
+You will need a domain name for your website and Let's Encrypt checks your domain before it signs your SSL certificate,
 so the domain name needs to be reachable from the Internet.
 
 Once you have purchased your desired domain name, save it in an environment variable:
 
 ```bash
-export DOMAIN_NAME=mydomain.net
+export DOMAIN_NAME=example.net  # Replace with your domain name
 ```
 
-Next, you will need to create a new `A` record pointing at the IP address that we created above. Head back to your domain registrar and create a add a new record of type `A` that points to the IP address from the previous step.
+Next, you will need to create a new `A` record pointing at the IP address that we created above. Go to your domain registrar's DNS settings and add a new record of type `A` that points to the IP address from the previous step. Leave the host name empty (some registrars use `@` for this) because we are configuring the top-level domain name.
 
 > 🔰 Learn more about [What is a DNS A record? from the Cloudflare DNS tutorial](https://www.cloudflare.com/learning/dns/dns-records/dns-a-record/).
 
@@ -547,18 +547,17 @@ and forward HTTPS requests to a web server running in your Kubernetes cluster.
 
 ## Clean up
 
-After completing the tutorial you can clean up by deleting the cluster and the domain name and the static IP as follows:
+After completing the tutorial you can clean up by deleting the cluster and the static IP as follows:
 
 ```bash
 # Delete the cluster and all the Google Cloud resources related to the Ingress that it contains
 gcloud container clusters delete $CLOUDSDK_CONTAINER_CLUSTER
 
-# Delete the domain name
-gcloud dns record-sets delete $DOMAIN_NAME --zone $ZONE --type A
-
 # Delete the static IP address
 gcloud compute addresses delete web-ip --global
 ```
+
+Finally, delete the `A` record for your domain name at your domain registrar.
 
 ## Troubleshooting
 
