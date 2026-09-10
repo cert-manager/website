@@ -67,23 +67,12 @@ The Helm values `prometheus.servicemonitor.targetPort`, `prometheus.servicemonit
 - **Vault path traversal**: the Vault issuer webhook now rejects `..` path segments, preventing `path.Join` from silently resolving relative segments. ([#8930](https://github.com/cert-manager/cert-manager/pull/8930))
 - **DNS issuer secrets validated before ready**: prevents silent misconfiguration. ([#8255](https://github.com/cert-manager/cert-manager/pull/8255))
 
-Fixed in `v1.21.1`:
-
-- **Controller panic with `renewal.policy: Disabled`**: the controller no longer panics for Certificates that disable automatic renewal. ([#9038](https://github.com/cert-manager/cert-manager/pull/9038))
-- **Secret informer regression**: a generics bug in 1.21.0 caused log spam and dropped events for Secrets not owned by cert-manager. ([#9037](https://github.com/cert-manager/cert-manager/pull/9037))
-- **Issuers stuck at `InvalidSolver`**: Issuers and ClusterIssuers now become Ready when a referenced ACME DNS-01 solver Secret is created after the Issuer. ([#9083](https://github.com/cert-manager/cert-manager/pull/9083))
-
-Fixed in `v1.21.2`:
-
-- **Webhook panic on incomplete AdmissionReview requests**: the validating webhook no longer panics when optional fields are unset, and denies requests with an unset or mismatched resource instead of allowing them. ([#9086](https://github.com/cert-manager/cert-manager/pull/9086))
-- **Issuing controller panic**: a CertificateRequest with a failure time but no Ready condition no longer crashes the controller. ([#9118](https://github.com/cert-manager/cert-manager/pull/9118))
-- **ARI checks used the wrong issuer's certificate**: the `replaces` field is now populated from the correct issuer after an issuer change. ([#9124](https://github.com/cert-manager/cert-manager/pull/9124))
-- **February 29 renewal schedules**: cron-based renewal windows on leap days now find the next renewal time across non-leap century years. ([#9170](https://github.com/cert-manager/cert-manager/pull/9170))
-- **Duplicated dnsNames for shared Gateway Secrets**: dnsNames are de-duplicated when several Gateway or ListenerSet listeners reference one Secret. ([#8978](https://github.com/cert-manager/cert-manager/pull/8978))
-- **Untrusted response bodies kept out of status**: the ACME issuer, the HTTP-01 self-check and the Vault issuer no longer copy HTTP response bodies into conditions or Events, and ACME responses are capped at 16 MiB. ([#9202](https://github.com/cert-manager/cert-manager/pull/9202), [#9035](https://github.com/cert-manager/cert-manager/pull/9035), [#9206](https://github.com/cert-manager/cert-manager/pull/9206), [#9010](https://github.com/cert-manager/cert-manager/pull/9010))
-- **Ambient AWS credentials for namespaced Vault Issuers**: AWS IAM auth on a namespaced Issuer now requires `--issuer-ambient-credentials`, matching the other ambient credential paths. ([#8977](https://github.com/cert-manager/cert-manager/pull/8977))
-- **Dropped rescheduled polls**: a scheduler race could cancel a newer timer for the same key, leaving a Certificate unprocessed until the next event. ([#9270](https://github.com/cert-manager/cert-manager/pull/9270))
-- **ingress-shim applyset label**: the shim no longer strips the applyset label from cached Ingress and Gateway objects. ([#9303](https://github.com/cert-manager/cert-manager/pull/9303))
+- **Validating webhook panic**: the webhook no longer panics when an AdmissionReview request omits optional fields, and denies requests with an unset or mismatched resource instead of allowing them. (v1.21.2, [#9086](https://github.com/cert-manager/cert-manager/pull/9086))
+- **Issuing controller panic**: a CertificateRequest with a failure time but no Ready condition no longer crashes the controller. (v1.21.2, [#9118](https://github.com/cert-manager/cert-manager/pull/9118))
+- **Issuers stuck at `InvalidSolver`**: Issuers and ClusterIssuers now become Ready when a referenced ACME DNS-01 solver Secret is created after the Issuer. (v1.21.1, [#9042](https://github.com/cert-manager/cert-manager/pull/9042))
+- **Untrusted response bodies kept out of status**: the ACME issuer, the HTTP-01 self-check and the Vault issuer no longer copy HTTP response bodies into conditions or Events, and ACME responses are capped at 16 MiB. (v1.21.2, [#9202](https://github.com/cert-manager/cert-manager/pull/9202), [#9035](https://github.com/cert-manager/cert-manager/pull/9035), [#9206](https://github.com/cert-manager/cert-manager/pull/9206), [#9010](https://github.com/cert-manager/cert-manager/pull/9010))
+- **Dropped rescheduled polls**: a scheduler race could cancel a newer timer for the same key, leaving a Certificate unprocessed until the next resync. (v1.21.2, [#9270](https://github.com/cert-manager/cert-manager/pull/9270))
+- **Duplicated dnsNames for shared Gateway Secrets**: dnsNames are de-duplicated when several Gateway or ListenerSet listeners reference one Secret, which made ACME finalize fail. (v1.21.2, [#8978](https://github.com/cert-manager/cert-manager/pull/8978))
 
 ## Community
 
