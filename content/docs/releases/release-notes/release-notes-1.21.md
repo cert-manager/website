@@ -127,19 +127,12 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 {/* BEGIN changelog v1.21.2 */}
 ## `v1.21.2`
 
-This patch release fixes a panic in the certificates-issuing controller, a
-validating webhook panic when AdmissionReview requests omit optional fields,
-ACME Renewal Information (ARI) checks reading the wrong issuer's certificate
-from the Secret, renewal times for February 29 cron schedules, and duplicated
-dnsNames when Gateway listeners share a Secret. It also fixes a scheduler race
-that could drop a rescheduled poll, a data race in the HTTP-01 self-check,
-HTTP-01 solver cleanup failing when a resource was already deleted, and
-ingress-shim removing the applyset label from cached Ingress and Gateway
-objects. The ACME and Vault issuers no
-longer copy untrusted HTTP response bodies into status conditions and Events,
-and the Vault issuer no longer uses the controller's ambient AWS credentials
-for AWS IAM auth on namespaced Issuers unless explicitly enabled. It also
-updates Go and several dependencies to fix reported security vulnerabilities.
+This patch release fixes controller and webhook panics, data races, ACME
+renewal and HTTP-01 solver bugs, and a Gateway API dnsNames bug. It stops the
+ACME and Vault issuers copying untrusted HTTP response bodies into status
+conditions and Events, and tightens ambient AWS credential use for namespaced
+Vault Issuers. It also updates Go and several dependencies to fix reported
+security vulnerabilities.
 
 All users should upgrade.
 
