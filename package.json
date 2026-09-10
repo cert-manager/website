@@ -82,7 +82,7 @@
     "unist-util-visit": "5.1.0"
   },
   "devDependencies": {
-    "@eslint-react/eslint-plugin": "5.18.7",
+    "@eslint-react/eslint-plugin": "5.19.0",
     "@eslint/js": "10.0.1",
     "@next/eslint-plugin-next": "16.3.4",
     "@tailwindcss/aspect-ratio": "0.4.2",
@@ -90,8 +90,8 @@
     "@tailwindcss/postcss": "4.3.3",
     "@tailwindcss/typography": "0.5.20",
     "concurrently": "10.0.5",
-    "cspell": "10.2.1",
-    "eslint": "10.9.1",
+    "cspell": "10.2.2",
+    "eslint": "10.10.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-mdx": "3.8.1",
     "format-api-docs": "file:scripts/gendocs/postprocess",
@@ -106,7 +106,7 @@
     "remark-preset-lint-consistent": "6.0.1",
     "remark-preset-lint-recommended": "7.0.1",
     "remark-toc": "9.0.0",
-    "stylelint": "17.14.1",
+    "stylelint": "17.15.0",
     "stylelint-config-standard": "40.0.0",
     "tailwindcss": "4.3.3"
   }
