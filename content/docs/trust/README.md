@@ -108,8 +108,10 @@ It is tempting to have a second controller, a mutating webhook or a Job add
 `ca.crt` to the Secret that cert-manager manages. Do not do this. cert-manager
 reconciles that Secret and reads it back to decide whether to reissue. For example,
 if `keystores` are enabled, cert-manager treats the presence of `ca.crt` as proof that
-the issuer provided a CA and expects a matching truststore, which it cannot create
-for an ACME issuer, so it reissues on every reconcile.
+the issuer provided a CA and expects a matching trust store. cert-manager builds
+trust stores from the CA returned by the issuer, not from the Secret, and an ACME
+issuer returns none. The trust store is never written, so the check fails and
+cert-manager reissues on every reconcile.
 
 If the application accepts only a single Secret with all three keys and offers no
 separate CA option, ask the project to add one, and link to this page. In the
