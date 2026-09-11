@@ -288,8 +288,12 @@ kubectl rollout restart deployment cert-manager -n cert-manager
 
 :::info
 
-🚧   cert-manager 1.14+ is tested with v1 Kubernetes Gateway API. It should also work
-with v1beta1 and v1alpha2 because of resource conversion, but has not been tested with it.
+🚧   cert-manager watches Gateway resources through the `gateway.networking.k8s.io/v1` API, so the
+Gateway API **v1** CRDs have to be installed. cert-manager refuses to start with Gateway API support
+enabled if the cluster only serves `v1beta1` or `v1alpha2`.
+
+Your own Gateway manifests may still be written as `v1beta1` or `v1alpha2`, since the API server converts
+between versions.
 
 :::
 
