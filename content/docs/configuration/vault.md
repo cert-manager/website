@@ -47,6 +47,36 @@ spec:
       ...
 ```
 
+### Trusting the Vault server's CA
+
+When connecting to Vault over HTTPS, cert-manager validates the certificate chain that Vault
+presents. There are two mutually exclusive ways to supply the CA bundle, and both are ignored for
+plain HTTP connections:
+
+- `caBundle`: a base64-encoded bundle of PEM CAs, inlined in the issuer as in the example above.
+- `caBundleSecretRef`: a reference to a `Secret` holding a bundle of PEM-encoded CAs. If you do not
+  set `key`, cert-manager reads `ca.crt` from that `Secret`.
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: vault-issuer
+  namespace: sandbox
+spec:
+  vault:
+    path: pki_int/sign/example-dot-com
+    server: https://vault.local
+    caBundleSecretRef:
+      name: vault-ca
+      key: ca.crt
+    auth:
+      ...
+```
+
+If neither field is set, cert-manager validates the connection against the CA certificates bundled
+in its own controller container.
+
 ### Accessing a Vault Server with mTLS enforced
 
 In certain use cases, the [Vault Server could be configured to enforce clients to present a
