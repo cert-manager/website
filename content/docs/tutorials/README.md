@@ -6,6 +6,14 @@ description: 'cert-manager tutorials: Overview'
 Step-by-step tutorials are a great way to get started with cert-manager, and we provide a few
 for you to learn from. Take a look!
 
+### Gateway API Tutorials
+
+- [Securing Cilium Gateway API](./acme/cilium-gateway-api.md): A tutorial for deploying Kubernetes Gateway API in combination with Cilium and securing ingress traffic with certificates from `Let's Encrypt` with the Automatic Certificate Management Environment (ACME) mechanism.
+
+### Ingress Tutorials
+
+Kubernetes Ingress is in a feature freeze state in favor of the Kubernetes Gateway API. See the [Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) and [Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) documentation.
+
 - [Securing Ingresses with NGINX-Ingress and cert-manager](./acme/nginx-ingress.md): Tutorial for deploying NGINX into your
   cluster and securing incoming connections with a certificate from Let's Encrypt.
 - [GKE + Ingress + Let's Encrypt](./getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/README.md):
