@@ -37,6 +37,10 @@ namespaces, you should consider creating a `ClusterIssuer` resource. This is
 almost identical to the `Issuer` resource, however is non-namespaced so it
 can be used to issue `Certificates` across all namespaces.
 
+Note that when cert-manager is installed using Helm, the CRDs for the ClusterIssuer
+resource type are not included by default. They can be included by adding the flag
+`--set installCRDs=true` during installation.
+
 ## Supported Issuers
 
 cert-manager supports a number of 'in-tree', as well as 'out-of-tree' `Issuer`
