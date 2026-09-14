@@ -13,6 +13,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥇   | venafi-enhanced-issuer      | [📄][config:venafi-enhanced-issuer] | [CyberArk Certificate Manager][ca:venafi-enhanced-issuer]                        | [v1.12.1][production:venafi-enhanced-issuer]      | [✔️][release:venafi-enhanced-issuer] | ❌              |
 | 🥇   | origin-ca-issuer            | [📄][config:origin-ca-issuer]       | [Cloudflare Origin CA][ca:origin-ca-issuer]                            | [supported][production:origin-ca-issuer]          | [✔️][release:origin-ca-issuer]       | ✔️             |
 | 🥈   | adcs-issuer                 | [📄][config:adcs-issuer]            | [Microsoft Active Directory<br/>Certificate Service][ca:adcs-issuer]   | -                                                 | [✔️][release:adcs-issuer]            | ✔️             |
+| 🥈   | akeyless-issuer             | [📄][config:akeyless-issuer]        | [Akeyless PKI][ca:akeyless-issuer]                                     | -                                                 | [✔️][release:akeyless-issuer]        | ✔️             |
 | 🥈   | aws-privateca-issuer        | [📄][config:aws-privateca-issuer]   | [AWS Private Certificate Authority][ca:aws-privateca-issuer]           | -                                                 | [✔️][release:aws-privateca-issuer]   | ✔️             |
 | 🥈   | ca-issuer (in-tree)         | [📄][config:ca-issuer]              | CA issuer                                                              | -                                                 | [✔️][release:cert-manager]           | ✔️             |
 | 🥈   | czertainly-issuer           | [📄][config:czertainly-issuer]      | [CZERTAINLY][ca:czertainly-issuer]                                     | [supported][production:czertainly-issuer]         | [✔️][release:czertainly-issuer]      | ✔️             |
@@ -64,6 +65,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:kms-issuer]: https://github.com/Skyscanner/kms-issuer
 [config:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer
 [config:adcs-issuer]: https://djkormo.github.io/adcs-issuer/
+[config:akeyless-issuer]: https://github.com/akeyless-community/akeyless-cert-manager-issuer
 [config:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer
 [config:cfmtls-issuer]: https://github.com/k8stooling/cfmtls-issuer
 [config:zerossl-issuer]: https://github.com/topfreegames/zerossl-issuer
@@ -77,6 +79,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:acme]: https://datatracker.ietf.org/doc/html/rfc8555
 [ca:venafi-enhanced-issuer]: https://www.cyberark.com/products/certificate-manager/
 [ca:adcs-issuer]: https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority
+[ca:akeyless-issuer]: https://docs.akeyless.io/docs/certificate-issuance
 [ca:aws-privateca-issuer]: https://aws.amazon.com/certificate-manager/private-certificate-authority/
 [ca:command-issuer]: https://www.keyfactor.com/products/command/
 [ca:ejbca-issuer]: https://www.ejbca.org/
@@ -116,6 +119,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:kms-issuer]: https://github.com/Skyscanner/kms-issuer/releases
 [release:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer/releases
 [release:adcs-issuer]: https://github.com/djkormo/adcs-issuer/releases
+[release:akeyless-issuer]: https://github.com/akeyless-community/akeyless-cert-manager-issuer/releases
 [release:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer/+refs
 [release:cfmtls-issuer]: https://github.com/k8stooling/cfmtls-issuer/releases/
 [release:zerossl-issuer]: https://github.com/topfreegames/zerossl-issuer/releases
