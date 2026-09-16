@@ -3,6 +3,50 @@ title: Release 1.20
 description: 'cert-manager release notes: cert-manager 1.20'
 ---
 
+## v1.20.4
+
+This patch release updates Go and several dependencies to fix reported security
+vulnerabilities, and fixes a bug where ingress-shim removed the applyset label
+from cached Ingress and Gateway objects.
+
+All users should upgrade.
+
+### Security scanners still report three `golang.org/x/crypto` findings
+
+Scanning the v1.20.4 images with trivy reports three findings. None of them
+affects cert-manager and we do not plan to fix them in the 1.20 line:
+
+- [CVE-2026-56855](https://nvd.nist.gov/vuln/detail/CVE-2026-56855) and
+  [CVE-2026-78662](https://nvd.nist.gov/vuln/detail/CVE-2026-78662) are
+  deadlocks in the `golang.org/x/crypto/ssh` connection multiplexer, triggered
+  by a malicious SSH peer after a connection is established. cert-manager never
+  opens an SSH connection. Only the controller links the `ssh` package, through
+  `vcert`, which uses it to format a public key. The fix, `golang.org/x/crypto`
+  v0.56.0, requires Go language version 1.26, which we will not adopt in a
+  patch release. `govulncheck` confirms the vulnerable functions are not called.
+- GO-2026-5932 marks `golang.org/x/crypto/openpgp` as unmaintained. cert-manager
+  does not import that package and there is no fixed version.
+
+cert-manager 1.21 already uses `golang.org/x/crypto` v0.56.0, so upgrade to 1.21
+if you need a clean scan.
+
+### Changelog since v1.20.3
+
+#### Bug or Regression
+
+- ingress-shim no longer removes the applyset label from cached Ingress and Gateway objects ([#9315](https://github.com/cert-manager/cert-manager/pull/9315), [`@KR-Ravindra`](https://github.com/KR-Ravindra))
+
+#### Other (Cleanup or Flake)
+
+- Update Go to 1.26.5 and then 1.26.6, which include security fixes to the go command, and the crypto/tls, encoding/asn1, encoding/xml, html/template, net, net/http, and net/url packages ([#8995](https://github.com/cert-manager/cert-manager/pull/8995), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark); [#9152](https://github.com/cert-manager/cert-manager/pull/9152), [`@wallrj`](https://github.com/wallrj))
+- Bump `golang.org/x/net` to v0.58.0, `golang.org/x/text` to v0.41.0 and `golang.org/x/crypto` to v0.55.0 to fix [CVE-2026-46600](https://nvd.nist.gov/vuln/detail/CVE-2026-46600), [CVE-2026-56852](https://nvd.nist.gov/vuln/detail/CVE-2026-56852) and [CVE-2026-56854](https://nvd.nist.gov/vuln/detail/CVE-2026-56854) ([#9040](https://github.com/cert-manager/cert-manager/pull/9040), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Bump `google.golang.org/grpc` to v1.83.2 to fix [CVE-2026-84304](https://github.com/grpc/grpc-go/security/advisories/GHSA-vp52-pcj8-j9qc), [CVE-2026-84445](https://github.com/grpc/grpc-go/security/advisories/GHSA-2v4p-qf9q-27wj), [CVE-2026-84303](https://nvd.nist.gov/vuln/detail/CVE-2026-84303) and [one further advisory](https://github.com/advisories/GHSA-hrxh-6v49-42gf) ([#9062](https://github.com/cert-manager/cert-manager/pull/9062), [#9257](https://github.com/cert-manager/cert-manager/pull/9257), [#9316](https://github.com/cert-manager/cert-manager/pull/9316))
+- Bump `github.com/google/cel-go` to v0.30.0 to fix [a reported vulnerability](https://github.com/advisories/GHSA-gcjh-h69q-9w9g) ([#9070](https://github.com/cert-manager/cert-manager/pull/9070), [#9186](https://github.com/cert-manager/cert-manager/pull/9186))
+- Bump `software.sslmate.com/src/go-pkcs12` to v0.7.2 to fix [a reported vulnerability](https://github.com/advisories/GHSA-mpwr-8vm7-h73f) ([#8988](https://github.com/cert-manager/cert-manager/pull/8988))
+- Bump `golang.org/x/mod`, `go.opentelemetry.io/otel` and `go.etcd.io/etcd/client/pkg/v3` to versions flagged by security scanners ([#9143](https://github.com/cert-manager/cert-manager/pull/9143), [#9071](https://github.com/cert-manager/cert-manager/pull/9071), [#9185](https://github.com/cert-manager/cert-manager/pull/9185))
+- Update the distroless base images ([#8991](https://github.com/cert-manager/cert-manager/pull/8991), [#9024](https://github.com/cert-manager/cert-manager/pull/9024), [#9055](https://github.com/cert-manager/cert-manager/pull/9055), [#9325](https://github.com/cert-manager/cert-manager/pull/9325))
+- The release staging process now signs `metadata.json` with cosign so the publish step can verify its authenticity ([#9090](https://github.com/cert-manager/cert-manager/pull/9090), [`@FelixPhipps`](https://github.com/FelixPhipps))
+
 ## v1.20.3
 
 This patch release fixes a security issue ([`GHSA-8rvj-mm4h-c258`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-8rvj-mm4h-c258), HIGH) where the default `cert-manager-edit` aggregate ClusterRole granted namespace users permission to create ACME `Challenge` and `Order` resources directly. A user who could create a `Challenge` referencing a `ClusterIssuer` could supply attacker-controlled solver configuration while cert-manager loaded credentials from the `ClusterIssuer`'s namespace, bypassing Issuer solver selectors (`dnsZones`, `dnsNames`, `matchLabels`). With the acme-dns provider specifically, this could disclose DNS credentials to an attacker-controlled endpoint.
