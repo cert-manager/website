@@ -82,6 +82,12 @@ If you are running ingress-nginx `v1.13.2+` or `v1.12.6+`, you do not need to ap
 
 See the [fix commit](https://github.com/kubernetes/ingress-nginx/commit/618aae18515213bcf3fb820e6f8c234703d844b2)
 
+#### OpenShift's built-in Ingress-to-Route conversion
+
+This change is also incompatible with OpenShift's built-in router, which is unrelated to the ingress-nginx options above.
+OpenShift's Ingress-to-Route conversion skips rules which use `pathType: Exact`, so the HTTP01 challenge fails with a 503 response.
+See [OpenShift](../../installation/compatibility.md#openshift) on the compatibility page for details and the feature gate to disable.
+
 ### ACME Certificate Profiles
 
 cert-manager now supports the selection of ACME certificate profiles, allowing

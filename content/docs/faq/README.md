@@ -113,6 +113,10 @@ for trust purposes, but rotating trusted certificates safely relies on being abl
 By consuming the CA directly from your Secret, it becomes impossible to do this; `ca.crt` will only ever contain the best effort guess
 for the CA for the current certificate, and will never include an older or a new CA.
 
+If your application expects `ca.crt` next to `tls.crt` and `tls.key`, see
+[My application expects `ca.crt` in the same Secret as the certificate](../trust/README.md#ca-crt-in-same-secret)
+for what to do instead.
+
 ### How can I see all the historic events related to a certificate object?
 
 cert-manager publishes all events to the Kubernetes events mechanism, you can get the events for your specific resources using `kubectl describe <resource> <name>`.

@@ -67,6 +67,13 @@ The Helm values `prometheus.servicemonitor.targetPort`, `prometheus.servicemonit
 - **Vault path traversal**: the Vault issuer webhook now rejects `..` path segments, preventing `path.Join` from silently resolving relative segments. ([#8930](https://github.com/cert-manager/cert-manager/pull/8930))
 - **DNS issuer secrets validated before ready**: prevents silent misconfiguration. ([#8255](https://github.com/cert-manager/cert-manager/pull/8255))
 
+- **Validating webhook panic**: the webhook no longer panics when an AdmissionReview request omits optional fields, and denies requests with an unset or mismatched resource instead of allowing them. (v1.21.2, [#9086](https://github.com/cert-manager/cert-manager/pull/9086))
+- **Issuing controller panic**: a CertificateRequest with a failure time but no Ready condition no longer crashes the controller. (v1.21.2, [#9118](https://github.com/cert-manager/cert-manager/pull/9118))
+- **Issuers stuck at `InvalidSolver`**: Issuers and ClusterIssuers now become Ready when a referenced ACME DNS-01 solver Secret is created after the Issuer. (v1.21.1, [#9042](https://github.com/cert-manager/cert-manager/pull/9042))
+- **Untrusted response bodies kept out of status**: the ACME issuer, the HTTP-01 self-check and the Vault issuer no longer copy HTTP response bodies into conditions or Events, and ACME responses are capped at 16 MiB. (v1.21.2, [#9202](https://github.com/cert-manager/cert-manager/pull/9202), [#9035](https://github.com/cert-manager/cert-manager/pull/9035), [#9206](https://github.com/cert-manager/cert-manager/pull/9206), [#9010](https://github.com/cert-manager/cert-manager/pull/9010))
+- **Dropped rescheduled polls**: a scheduler race could cancel a newer timer for the same key, leaving a Certificate unprocessed until the next resync. (v1.21.2, [#9270](https://github.com/cert-manager/cert-manager/pull/9270))
+- **Duplicated dnsNames for shared Gateway Secrets**: dnsNames are de-duplicated when several Gateway or ListenerSet listeners reference one Secret, which made ACME finalize fail. (v1.21.2, [#8978](https://github.com/cert-manager/cert-manager/pull/8978))
+
 ## Community
 
 As always, we'd like to thank all of the community members who helped in this release cycle, including all below who merged a PR and anyone that helped by commenting on issues, testing, or getting involved in cert-manager meetings. We're lucky to have you involved.
@@ -93,7 +100,10 @@ A special thanks to:
 - [`@putongyong`](https://github.com/putongyong)
 - [`@seanorama`](https://github.com/seanorama)
 - [`@sklirg`](https://github.com/sklirg)
+- [`@speer`](https://github.com/speer)
 - [`@texasich`](https://github.com/texasich)
+- [`@thc1006`](https://github.com/thc1006)
+- [`@wieghx`](https://github.com/wieghx)
 {/* END contributors */}
 
 for their contributions, comments and support!
@@ -121,6 +131,47 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+{/* BEGIN changelog v1.21.2 */}
+## `v1.21.2`
+
+This patch release fixes controller and webhook panics, data races, ACME
+renewal and HTTP-01 solver bugs, and a Gateway API dnsNames bug. It stops the
+ACME and Vault issuers copying untrusted HTTP response bodies into status
+conditions and Events, and tightens ambient AWS credential use for namespaced
+Vault Issuers. It also updates Go and several dependencies to fix reported
+security vulnerabilities.
+
+All users should upgrade.
+
+Changes since `v1.21.1`:
+
+### Bug or Regression
+
+- ACME Issuer response bodies are no longer reflected into Issuer status conditions or Kubernetes Events. Only ACME problem documents are surfaced (bounded in length); other responses are reported by HTTP status code alone, with the full error available in the controller logs. ([`#9239`](https://github.com/cert-manager/cert-manager/pull/9239), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- Cap ACME server response bodies at 16 MiB to guard against unbounded-body denial-of-service. ([`#9222`](https://github.com/cert-manager/cert-manager/pull/9222), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- De-duplicate dnsNames when multiple Gateway/ListenerSet listeners share a Secret ([`#9234`](https://github.com/cert-manager/cert-manager/pull/9234), [`@speer`](https://github.com/speer))
+- Fix certificate renewal windows using February 29 cron schedules across non-leap century years. ([`#9240`](https://github.com/cert-manager/cert-manager/pull/9240), [`@wieghx`](https://github.com/wieghx))
+- Fix validating webhook panics when AdmissionReview requests omit optional fields, by routing identity, approval, and resource validation on the always-present Resource/SubResource fields and denying (rather than silently allowing) requests with an unset or mismatched resource. As a side effect, validation is now also enforced for equivalent-converted requests on non-v1 API versions, which previously could skip validation. ([`#9235`](https://github.com/cert-manager/cert-manager/pull/9235), [`@lunarwhite`](https://github.com/lunarwhite))
+- Fixed HTTP-01 solver cleanup so that a solver ingress, pod or service that has already been deleted no longer fails the cleanup with a NotFound error. ([`#9278`](https://github.com/cert-manager/cert-manager/pull/9278), [`@arpitjain099`](https://github.com/arpitjain099))
+- Fixed a bug where `replaces` field was being populated for the wrong issuer on issuer changes ([`#9236`](https://github.com/cert-manager/cert-manager/pull/9236), [`@hjoshi123`](https://github.com/hjoshi123))
+- Fixed a data race in the ACME HTTP-01 self-check that could occur when custom DNS servers were configured. ([`#9313`](https://github.com/cert-manager/cert-manager/pull/9313), [`@shashankvarma499`](https://github.com/shashankvarma499))
+- Fixed a panic in the certificates-issuing controller when a CertificateRequest has a failure time set but no Ready condition. ([`#9238`](https://github.com/cert-manager/cert-manager/pull/9238), [`@thc1006`](https://github.com/thc1006))
+- Fixed a race in pkg/scheduler where the cleanup of a fired timer could cancel a newer timer scheduled for the same object, silently dropping a rescheduled poll. ([`#9312`](https://github.com/cert-manager/cert-manager/pull/9312), [`@shashankvarma499`](https://github.com/shashankvarma499))
+- Fixed an issue where the body of a non-Vault HTTP response from `spec.vault.server` could be copied into the Vault Issuer's Ready condition and its Kubernetes Events. Such responses now report only the HTTP status code, and Vault's own error messages are truncated before being persisted. ([`#9262`](https://github.com/cert-manager/cert-manager/pull/9262), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- Ingress-shim no longer removes the applyset label from cached Ingress and Gateway objects ([`#9314`](https://github.com/cert-manager/cert-manager/pull/9314), [`@KR-Ravindra`](https://github.com/KR-Ravindra))
+- The ACME HTTP-01 self-check no longer reflects the fetched response body in `Challenge.status.reason`, preventing disclosure of internal response contents reachable via redirects. The response is still available in the controller's debug logs. ([`#9232`](https://github.com/cert-manager/cert-manager/pull/9232), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- The `vault` issuer no longer authenticates to Vault using the cert-manager controller's ambient AWS credentials
+    for AWS IAM auth on a namespaced `Issuer`, unless ambient credentials are explicitly enabled via
+    `--issuer-ambient-credentials`. `ClusterIssuer` and explicit `serviceAccountRef` (IRSA) configurations are
+    unaffected. ([`#9231`](https://github.com/cert-manager/cert-manager/pull/9231), [`@FelixPhipps`](https://github.com/FelixPhipps))
+
+### Other (Cleanup or Flake)
+
+- Upgrade Go to 1.26.6, which includes security fixes to the go command, and the crypto/tls, encoding/asn1, encoding/xml, html/template, net, net/http, and net/url packages. ([`#9151`](https://github.com/cert-manager/cert-manager/pull/9151), [`@wallrj`](https://github.com/wallrj))
+- Upgrade Go to 1.26.8. ([`#9323`](https://github.com/cert-manager/cert-manager/pull/9323), [`@wallrj`](https://github.com/wallrj))
+- Bump `google.golang.org/grpc` to v1.83.2 to fix reported security vulnerabilities ([`#9255`](https://github.com/cert-manager/cert-manager/pull/9255), [`#9317`](https://github.com/cert-manager/cert-manager/pull/9317))
+- Bump `golang.org/x/crypto` to v0.56.0 to fix reported security vulnerabilities ([`#9265`](https://github.com/cert-manager/cert-manager/pull/9265))
+{/* END changelog v1.21.2 */}
 {/* BEGIN changelog v1.21.1 */}
 ## `v1.21.1`
 
