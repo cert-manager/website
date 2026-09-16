@@ -11,7 +11,7 @@ from cached Ingress and Gateway objects.
 
 All users should upgrade.
 
-### Security scanners still report two `golang.org/x/crypto` findings
+### Security scanners still report three `golang.org/x/crypto` findings
 
 Scanning the v1.20.4 images with trivy reports three findings. None of them
 affects cert-manager and we do not plan to fix them in the 1.20 line:
