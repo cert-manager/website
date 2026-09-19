@@ -66,6 +66,18 @@ networkPolicy:
     - port: 80
       protocol: TCP
 
+  # Example: Egress to HTTP01 solver pods (dynamic, created by cert-manager)
+  # Only needed if your cluster users use the ACME issuer with HTTP01
+  # The solver pods are labelled with acme.cert-manager.io/http01-solver: "true"
+  # and listen on port 8080.
+  - to:
+    - podSelector:
+        matchLabels:
+          acme.cert-manager.io/http01-solver: "true"
+    ports:
+    - port: 8080
+      protocol: TCP
+
   # Example: In-cluster DNS (Bind) server used by the ACME issuer with DNS01
   - ports:
     - port: 8053
