@@ -82,7 +82,7 @@
     "unist-util-visit": "5.1.0"
   },
   "devDependencies": {
-    "@eslint-react/eslint-plugin": "5.20.0",
+    "@eslint-react/eslint-plugin": "5.20.5",
     "@eslint/js": "10.0.1",
     "@next/eslint-plugin-next": "16.3.5",
     "@tailwindcss/aspect-ratio": "0.4.2",
