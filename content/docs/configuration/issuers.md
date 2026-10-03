@@ -24,6 +24,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈   | gs-atlas-issuer             | [📄][config:gs-atlas-issuer]        | [GlobalSign CA][ca:gs-atlas-issuer]                                    | -                                                 | [✔️][release:gs-atlas-issuer]        | ✔️             |
 | 🥈   | horizon-issuer              | [📄][config:horizon-issuer]         | [EVERTRUST Horizon][ca:horizon-issuer]                                 | -                                                 | [✔️][release:horizon-issuer]         | ✔️             |
 | 🥈   | ncm-issuer                  | [📄][config:ncm-issuer]             | [Nokia Netguard Certificate Manager][ca:ncm-issuer]                    | -                                                 | [✔️][release:ncm-issuer]             | ✔️             |
+| 🥈   | scep-issuer | [📄][config:scep-issuer]        | SCEP Issuers | -                                                 | [✔️][release:scep-issuer]      | ✔️             |
 | 🥈   | selfsigned-issuer (in-tree) | [📄][config:selfsigned-issuer]      | Self-Signed issuer                                                     | -                                                 | [✔️][release:cert-manager]           | ✔️             |
 | 🥈   | step-issuer                 | [📄][config:step-issuer]            | [Certificate Authority server][ca:step-issuer]                         | -                                                 | [✔️][release:step-issuer]            | ✔️             |
 | 🥈   | vault-issuer (in-tree)      | [📄][config:vault-issuer]           | [HashiCorp Vault][ca:vault-issuer]                                     | -                                                 | [✔️][release:cert-manager]           | ✔️             |
@@ -71,6 +72,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:czertainly-issuer]: https://docs.czertainly.com/docs/certificate-key/integration-guides/cert-manager-issuer/create-czertainly-issuer
 [config:keyvault-issuer]: https://github.com/gonicus/azure-keyvault-issuer
 [config:digi-issuer]: https://github.com/digicert/digi-issuer
+[config:scep-issuer]: https://github.com/HadesShade/cert-manager-scep-issuer
 
 [//]: # (CA docs)
 
@@ -123,6 +125,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:czertainly-issuer]: https://github.com/CZERTAINLY/CZERTAINLY-Cert-Manager-Issuer/releases
 [release:keyvault-issuer]: https://github.com/gonicus/azure-keyvault-issuer/releases
 [release:digi-issuer]: https://github.com/digicert/digi-issuer/releases
+[release:scep-issuer]: https://github.com/HadesShade/cert-manager-scep-issuer/releases
 
 - The issuers are sorted by their tier and then alphabetically.
 - "in-tree" issuers are issuers that are shipped with cert-manager itself.
