@@ -73,7 +73,7 @@ trigger `Certificate` resources to be automatically created:
   which namespace your `Ingress` resides, as `ClusterIssuers` are non-namespaced
   resources.
 
-  > ⚠️ This annotation is a shortcut to refer to to
+  > ⚠️ This annotation is a shortcut to refer to
   `cert-manager.io` `ClusterIssuer` without having to specify group and kind. It is
   _not_ intended to be used to specify an external cluster-scoped issuer- please
   use `cert-manager.io/issuer` annotation for those.
