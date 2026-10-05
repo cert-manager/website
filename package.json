@@ -82,7 +82,7 @@
     "unist-util-visit": "5.1.0"
   },
   "devDependencies": {
-    "@eslint-react/eslint-plugin": "5.23.3",
+    "@eslint-react/eslint-plugin": "5.23.4",
     "@eslint/js": "10.0.1",
     "@next/eslint-plugin-next": "16.3.8",
     "@tailwindcss/aspect-ratio": "0.4.2",
@@ -106,7 +106,7 @@
     "remark-preset-lint-consistent": "6.0.1",
     "remark-preset-lint-recommended": "7.0.1",
     "remark-toc": "9.0.0",
-    "stylelint": "17.15.0",
+    "stylelint": "17.16.0",
     "stylelint-config-standard": "40.0.0",
     "tailwindcss": "4.3.3"
   }
