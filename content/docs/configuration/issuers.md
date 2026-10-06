@@ -79,7 +79,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:acme]: https://datatracker.ietf.org/doc/html/rfc8555
 [ca:venafi-enhanced-issuer]: https://www.cyberark.com/products/certificate-manager/
 [ca:adcs-issuer]: https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority
-[ca:akeyless-issuer]: https://docs.akeyless.io/docs/certificate-issuance
+[ca:akeyless-issuer]: https://docs.akeyless.io/docs/ssh-and-pkitls-certificates
 [ca:aws-privateca-issuer]: https://aws.amazon.com/certificate-manager/private-certificate-authority/
 [ca:command-issuer]: https://www.keyfactor.com/products/command/
 [ca:ejbca-issuer]: https://www.ejbca.org/
