@@ -126,6 +126,7 @@ AWS
 SDK
 SDKs
 Akamai
+Akeyless
 ANDed
 Anthos
 AppRole
@@ -849,6 +850,7 @@ certificates.k8s.io
 venafi-enhanced-issuer
 venafi-issuer
 adcs-issuer
+akeyless-issuer
 cview-issuer
 cfssl-issuer
 cfmtls-issuer
