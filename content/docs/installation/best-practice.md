@@ -484,7 +484,7 @@ cainjector:
   - --enable-certificates-data-source=false
 ```
 
-> ⚠️️ This optimization is only appropriate if `cainjector` is being used exclusively for the the cert-manager webhook.
+> ⚠️️ This optimization is only appropriate if `cainjector` is being used exclusively for the cert-manager webhook.
 > It is not appropriate if `cainjector` is also being used to manage the TLS certificates for webhooks of other software.
 > For example, some Kubebuilder derived projects may depend on `cainjector`
 > to [inject TLS certificates for their webhooks](https://book.kubebuilder.io/cronjob-tutorial/running-webhook.html#cert-manager).
