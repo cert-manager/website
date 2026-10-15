@@ -56,6 +56,7 @@ featureGates:
   UseCertificateRequestBasicConstraints: true
   OtherNames: true
   UseDomainQualifiedFinalizer: true
+  MLDSAPrivateKeys: true
 ```
 
 > **Note:** This is included as an example only and not intended to be used as default settings.
@@ -81,6 +82,7 @@ featureGates:
   AdditionalCertificateOutputFormats: true
   LiteralCertificateSubject: true
   OtherNames: true
+  MLDSAPrivateKeys: true
 ```
 
 > **Note:** This is included as an example only and not intended to be used as default settings.
@@ -98,3 +100,7 @@ Each cert-manager component has its own set of feature gates. They can be enable
 - cert-manager controller: [controller feature gates](https://github.com/cert-manager/cert-manager/blob/master/internal/controller/feature/features.go)
 - cert-manager webhook: [webhook feature gates](https://github.com/cert-manager/cert-manager/blob/master/internal/webhook/feature/features.go)
 - cert-manager cainjector: [cainjector feature gates](https://github.com/cert-manager/cert-manager/blob/master/internal/cainjector/feature/features.go)
+
+Some features need the same feature gate on more than one component. For example,
+[ML-DSA private keys](../usage/post-quantum.md#enabling-ml-dsa) need the `MLDSAPrivateKeys`
+feature gate on both the controller and the webhook.

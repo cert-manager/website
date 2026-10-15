@@ -502,6 +502,10 @@
               "path": "/docs/usage/kube-csr.md"
             },
             {
+              "title": "Post-quantum certificates",
+              "path": "/docs/usage/post-quantum.md"
+            },
+            {
               "title": "Service Mesh",
               "routes": [
                 {
