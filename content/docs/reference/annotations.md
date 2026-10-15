@@ -176,8 +176,12 @@ cause the `cainjector` to inject a **CA Certificate** from a secret.
 
 this annotation allows you to configure `spec.privateKey.algorithm` field to set
 the algorithm for private key generation for a Certificate.
-Valid values are `RSA`, `ECDSA` and `Ed25519`.
+Valid values are `RSA`, `ECDSA`, `Ed25519` and `MLDSA`.
 If unset an algorithm `RSA` will be used.
+`MLDSA` is an alpha feature and requires the `MLDSAPrivateKeys` feature gate; see
+[Post-quantum certificates (ML-DSA)](../usage/post-quantum.md).
+If the `cert-manager.io/usages` annotation is unset, an `MLDSA` Certificate gets
+the `digital signature` usage only.
 
 ## cert-manager.io/private-key-encoding
 - [Ingress](../usage/ingress.md)
@@ -213,6 +217,8 @@ will default to `2048` if not specified.
 If algorithm is set to `ECDSA`, valid values are `256`, `384` or `521`, and
 will default to `256` if not specified.
 If algorithm is set to `Ed25519`, size is ignored.
+If algorithm is set to `MLDSA`, valid values are `44`, `65` or `87`, and
+will default to `44` if not specified.
 
 ## cert-manager.io/renew-before
 - [Ingress](../usage/ingress.md)
@@ -323,6 +329,10 @@ Supports comma-separated values e.g. "spiffe://cluster.local/ns/sandbox/sa/examp
 this annotation allows you to configure `spec.usages` field for the Certificate
 to be generated. Pass a string with comma-separated values i.e.
 "key agreement,digital signature, server auth".
+With `cert-manager.io/private-key-algorithm: MLDSA`, the usages `key encipherment`,
+`data encipherment`, `key agreement`, `encipher only` and `decipher only` aren't
+allowed. If any of them is set, cert-manager doesn't create or update the
+Certificate, and logs an error.
 
 ## experimental.cert-manager.io/request-duration
 - [CertificateRequest](../usage/certificaterequest.md)

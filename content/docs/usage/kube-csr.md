@@ -60,6 +60,17 @@ $ helm install \
 
 :::
 
+#### ML-DSA (post-quantum) requests
+
+The SelfSigned and CA signers can sign CertificateSigningRequests with an
+ML-DSA public key if the alpha `MLDSAPrivateKeys` feature gate is enabled on the
+cert-manager controller. However, the Kubernetes API server rejects
+ML-DSA CertificateSigningRequests unless it's built with Go 1.27 or later, which
+Kubernetes v1.37 and earlier aren't. The signers also refuse to sign an ML-DSA
+request whose `spec.usages` includes a usage that ML-DSA keys can't have, such as
+`key encipherment`. See
+[Post-quantum certificates (ML-DSA)](./post-quantum.md#kubernetes-certificatesigningrequests).
+
 
 ## Signer Name
 

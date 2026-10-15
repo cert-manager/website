@@ -199,6 +199,11 @@ requested usages of `digital signature`, `key encipherment`, and `server auth`.
 cert-manager will not attempt to request a new certificate if the current
 certificate does not match the current key usage set.
 
+For [ML-DSA (post-quantum) private keys](./post-quantum.md), the default is
+`digital signature` only (plus `cert sign` for CA certificates), and the usages
+`key encipherment`, `data encipherment`, `key agreement`, `encipher only` and
+`decipher only` aren't allowed.
+
 An exhaustive list of supported key usages can be found in the [API reference
 documentation](../reference/api-docs.md#cert-manager.io/v1.KeyUsage).
 
