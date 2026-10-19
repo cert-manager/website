@@ -117,12 +117,18 @@ follows. Each point applies to the component on which the gate is off:
   delete existing ML-DSA Certificates.
 - The controller doesn't renew or re-issue existing ML-DSA Certificates. Instead,
   it records a Warning event with reason `MLDSAPrivateKeysDisabled` on the
-  Certificate. The SelfSigned and CA issuers and the Kubernetes CSR signers
-  refuse to sign anything that involves an ML-DSA key. This includes classical
-  Certificates issued by a CA issuer whose CA key is ML-DSA: their renewals fail,
-  and the CertificateRequest gets a Warning event with reason
-  `MLDSAPrivateKeysDisabled` and the message
-  `Refusing to sign a certificate involving an ML-DSA key: the MLDSAPrivateKeys feature gate is disabled`.
+  Certificate.
+- A CA Issuer or ClusterIssuer whose CA key is ML-DSA stops being Ready, with
+  reason `MLDSAPrivateKeysDisabled` and the message
+  `Signing CA has an ML-DSA key, which requires the MLDSAPrivateKeys feature gate to be enabled`.
+  Renewals of the classical Certificates it issued, and Kubernetes
+  CertificateSigningRequests sent to it, wait until you turn the gate back on,
+  or move them to another issuer.
+- The SelfSigned and CA issuers and the Kubernetes CSR signers refuse to sign
+  anything that involves an ML-DSA key. A CertificateRequest stays pending, with
+  an event with reason `MLDSAPrivateKeysDisabled`, and is signed once you turn the
+  gate back on. A Kubernetes CertificateSigningRequest with an ML-DSA key is
+  marked as failed.
 - Existing Secrets are **not** deleted, so workloads keep using them until the
   certificates expire.
 
