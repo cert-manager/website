@@ -327,21 +327,54 @@ The currently supported trust packages are:
 
 <a id="trust-package-versions"></a>
 
-| Image Name                                     | Default for trust-manager? | Based On        | Link             |
-|:----------------------------------------------:|:--------------------------:|:---------------:|:----------------:|
-| `quay.io/jetstack/trust-pkg-debian-bookworm`   | &gt;= `v0.16`              | Debian Bookworm | [Link][bookworm] |
-| `quay.io/jetstack/cert-manager-package-debian` | &lt;= `v0.15`              | Debian Bullseye | [Link][bullseye] |
+| Image Name                                     | Default for trust-manager?       | Based On        | Link             |
+|:----------------------------------------------:|:--------------------------------:|:---------------:|:----------------:|
+| `quay.io/jetstack/trust-pkg-debian-trixie`     | &gt;= `v0.23`                    | Debian Trixie   | [Link][trixie] |
+| `quay.io/jetstack/trust-pkg-debian-bookworm`   | &gt;= `v0.16` &amp; &lt; `v0.23` | Debian Bookworm | [Link][bookworm] |
 
+[trixie]: https://quay.io/repository/jetstack/trust-pkg-debian-trixie?tab=tags&tag=latest
 [bookworm]: https://quay.io/repository/jetstack/trust-pkg-debian-bookworm?tab=tags&tag=latest
-[bullseye]: https://quay.io/repository/jetstack/cert-manager-package-debian?tab=tags&tag=latest
 
 The version can be configured with `.defaultPackageImage.repository` and `.defaultPackageImage.tag` via Helm chart values, and the version
 is also written to the `status` field on any synced Bundle resource which uses the default CA package.
 
+### Deprecated Trust Packages
+
+We previously supported `quay.io/jetstack/cert-manager-package-debian` [based on Debian Bullseye][bullseye], but this package
+was deprecated as the upstream Debian distribution reached end-of-life.
+
+Any users running that package should upgrade to Bookworm or Trixie immediately.
+
+[bullseye]: https://quay.io/repository/jetstack/cert-manager-package-debian?tab=tags&tag=latest
+
+### eMudhra Compromise
+
+The [eMudhra issue](https://emudhra.we-have-a-problem.com/) led to an emergency distrust of a CA certificate which had signed
+intermediate certs whose private keys were trivially recoverable.
+
+trust-manager is designed to help with this kind of issue by providing a single place to update trusted CA certs across a cluster.
+Clusters running trust-manager are in a better place to deal with the eMudhra issue than clusters which leave individual containers
+to make trust decisions.
+
+The fixed default trust packages are:
+
+- Trixie (recommended): `quay.io/jetstack/trust-pkg-debian-trixie:20250419-deb13u1.0` (or newer)
+- Bookworm: `quay.io/jetstack/trust-pkg-debian-bookworm:20250419-deb12u2.0` (or newer)
+
+> ℹ️ Don't be caught out by the tags appearing to contain dates from 2025 - this is a side effect of how Debian version their
+> `ca-certificates` package which we reflect directly in our tags.
+
+Bullseye-based packages are deprecated and will not be patched since the upstream distribution is end-of-life.
+
+To protect any pods using a trust-manager bundle you must ensure you're running a patched version of the default CA package.
+
+To protect any pods _not_ using a trust-manager bundle, we recommend pointing them instead at a patched trust-manager bundle.
+Protecting other trust bundles is outside of the scope of the cert-manager project.
+
 ## Upgrading a Default CA Package Using Helm
 
-Say we want to do an in-place upgrade of our default CA package from the "old" trust package (`cert-manager-package-debian`) to
-a newer package (`trust-pkg-debian-bookworm`).
+Say we want to do an in-place upgrade of our default CA package from an older trust package (say the deprecated
+`cert-manager-package-debian`) to the current package (`trust-pkg-debian-trixie`).
 
 We'll assume the Helm release is called "trust-manager" and that we've installed into the `cert-manager` namespace.
 
@@ -365,9 +398,12 @@ Otherwise, add them. We list image names and links to get tags [above](#trust-pa
 ...
 # NB: The tag below might not be the latest; you should check!
 defaultPackageImage:
-  repository: quay.io/jetstack/trust-pkg-debian-bookworm
-  tag: "20230311.0" # quotes are important
+  repository: quay.io/jetstack/trust-pkg-debian-trixie
+  tag: "20250419-deb13u1.0" # quotes are important
 ```
+
+> ⚠️ Be sure to pick a tag which is at least as new as the patched packages listed under
+> [eMudhra Compromise](#emudhra-compromise); older tags still trust the compromised CA.
 
 Finally, apply back the changes, being sure to manually specify the version of trust-manager which is installed, to avoid
 also updating the trust-manager controller at the same as the default CA package:
