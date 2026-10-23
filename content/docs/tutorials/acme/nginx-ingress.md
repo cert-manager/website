@@ -1,12 +1,12 @@
 ---
-title: Securing NGINX-ingress
+title: Securing ingress-nginx
 description: 'cert-manager tutorials: Using ingress-nginx to solve an ACME HTTP-01 challenge'
 ---
 
 > **Upcoming change:** ingress-nginx is scheduled for end of life in March 2026. See [Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming](/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api) for migration guidance and Gateway API plans.
 
 This tutorial will detail how to install and secure ingress to your cluster
-using NGINX.
+using ingress-nginx.
 
 ## Step 1 - Install Helm
 
@@ -24,7 +24,7 @@ For example, on MacOS:
 brew install kubernetes-helm
 ```
 
-## Step 2 - Deploy the NGINX Ingress Controller
+## Step 2 - Deploy the ingress-nginx Controller
 
 A [`kubernetes ingress controller`](https://kubernetes.io/docs/concepts/services-networking/ingress) is
 designed to be the access point for HTTP and HTTPS traffic to the software
