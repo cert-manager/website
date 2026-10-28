@@ -3,6 +3,51 @@ title: Release 1.20
 description: 'cert-manager release notes: cert-manager 1.20'
 ---
 
+## v1.20.5
+
+This patch release removes trust in the compromised eMudhra CA (see
+[eMudhra Compromise](../../trust/trust-manager/README.md#emudhra-compromise)).
+The base images move to Debian 13, which no longer includes the
+"emSign ECC Root CA - G3" root certificate. Go 1.26.10 also makes `crypto/x509`
+reject certificate chains that pass through the compromised intermediates
+([CVE-2026-111943](https://pkg.go.dev/vuln/GO-2026-6809)).
+
+It also updates Go and several dependencies to fix reported security
+vulnerabilities, including five in HTTP/2 that `govulncheck` reported as
+reachable in v1.20.4.
+
+All users should upgrade.
+
+### Building cert-manager 1.20 from source now needs Go 1.26
+
+The HTTP/2 fixes are in `golang.org/x/net` v0.60.0 and later, which need Go
+language version 1.26. So the `go` directive in cert-manager's `go.mod` files is now
+1.26. This only affects you if you build cert-manager 1.20 from source or import
+it as a Go module.
+
+This change does not affect the released binaries. They were already built
+with Go 1.26, and they keep the same Go runtime (`GODEBUG`) defaults as v1.20.4.
+
+### Security scanner findings
+
+v1.20.5 fixes the two `golang.org/x/crypto/ssh` findings listed for v1.20.4,
+by updating `golang.org/x/crypto` to v0.57.0.
+
+Scanners still report GO-2026-5932, which marks `golang.org/x/crypto/openpgp`
+as unmaintained. cert-manager does not import that package and there is no
+fixed version.
+
+### Changelog since v1.20.4
+
+#### Other (Cleanup or Flake)
+
+- Update the base images to Debian 13, which no longer trusts the "emSign ECC Root CA - G3" and "AAA Certificate Services" roots after the eMudhra intermediate CA compromise ([#9511](https://github.com/cert-manager/cert-manager/pull/9511), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark); [#9523](https://github.com/cert-manager/cert-manager/pull/9523))
+- Update Go to 1.26.10, fixing CVEs in the crypto/tls, crypto/x509, net/http, net/textproto, mime/multipart and html/template packages ([#9503](https://github.com/cert-manager/cert-manager/pull/9503), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Bump `golang.org/x/net` to v0.60.0 to fix [CVE-2026-78669](https://nvd.nist.gov/vuln/detail/CVE-2026-78669), [CVE-2026-78659](https://nvd.nist.gov/vuln/detail/CVE-2026-78659), [CVE-2026-78660](https://nvd.nist.gov/vuln/detail/CVE-2026-78660), [CVE-2026-78663](https://nvd.nist.gov/vuln/detail/CVE-2026-78663) and [CVE-2026-97032](https://nvd.nist.gov/vuln/detail/CVE-2026-97032) in HTTP/2, and `golang.org/x/crypto` to v0.57.0 to fix [CVE-2026-56855](https://nvd.nist.gov/vuln/detail/CVE-2026-56855) and [CVE-2026-78662](https://nvd.nist.gov/vuln/detail/CVE-2026-78662). This raises the `go` directive to 1.26 ([#9524](https://github.com/cert-manager/cert-manager/pull/9524), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Bump `go.opentelemetry.io/otel/exporters/otlp/otlptrace` and `otlptracegrpc` to v1.45.0 to fix a reported security vulnerability ([#9371](https://github.com/cert-manager/cert-manager/pull/9371), [#9372](https://github.com/cert-manager/cert-manager/pull/9372))
+- Bump `golang.org/x/net` to v0.62.0 to fix [CVE-2026-78661](https://pkg.go.dev/vuln/GO-2026-6860) and [CVE-2026-97045](https://pkg.go.dev/vuln/GO-2026-6866) in the `html` package ([#9530](https://github.com/cert-manager/cert-manager/pull/9530))
+- Bump `github.com/go-jose/go-jose/v4` to v4.1.6 to fix [CVE-2026-116587](https://github.com/go-jose/go-jose/security/advisories/GHSA-mgcc-cww5-fp2q), a denial of service when parsing JWKs that contain RSA keys ([#9527](https://github.com/cert-manager/cert-manager/pull/9527))
+
 ## v1.20.4
 
 This patch release updates Go and several dependencies to fix reported security
