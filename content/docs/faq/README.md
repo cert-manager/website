@@ -32,7 +32,7 @@ This is a feature in cert-manager starting in `v0.16` using the `cmctl` CLI. Mor
 
 ### When do certs get re-issued?
 
-To determine if a certificate needs to be re-issued, cert-manager looks at the the spec of `Certificate` resource and latest `CertificateRequest`s as well as the data in `Secret` containing the X.509 certificate.
+To determine if a certificate needs to be re-issued, cert-manager looks at the spec of `Certificate` resource and latest `CertificateRequest`s as well as the data in `Secret` containing the X.509 certificate.
 
 The issuance process will always get triggered if the:
 

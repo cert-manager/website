@@ -137,7 +137,7 @@ found), in this instance it indicates that traffic is being correctly routed to
 the `ingress-nginx` service.
 
 > Note: Although the AWS Application Load Balancer (ALB) is a modern load
-> balancer offered by AWS that can can be provisioned from within EKS, at the
+> balancer offered by AWS that can be provisioned from within EKS, at the
 > time of writing, the
 > [`alb-ingress-controller`](https://github.com/kubernetes-sigs/aws-alb-ingress-controller>)
 > is only capable of serving sites using certificates stored in AWS Certificate

@@ -526,7 +526,7 @@ the [Amazon EKS Pod Identity Webhook](https://github.com/aws/amazon-eks-pod-iden
 
 > ℹ️ STS is a regional service and cert-manager will use regional STS endpoint URLs
 > computed from the `region` field or environment variables.
-> STS is used for [IRSA credentials](#eks-iam-role-for-service-accounts-irsa), [dedicated ServiceAccount credentials](#referencing-your-own-serviceaccount-within-in-an-issuer-or-clusterissuer), and [cross account access](#cross-account-access).
+> STS is used for [IRSA credentials](#eks-iam-role-for-service-accounts-irsa), [dedicated ServiceAccount credentials](#iam-role-with-dedicated-kubernetes-serviceaccount), and [cross account access](#cross-account-access).
 >
 > 📖 Read [Manage AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 > to learn about which regions support STS.
