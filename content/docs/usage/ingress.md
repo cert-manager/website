@@ -187,6 +187,12 @@ trigger `Certificate` resources to be automatically created:
   configure `spec.privateKey.rotationPolicy` field to set the rotation policy of the private key for a Certificate.
   Valid values are `Never` and `Always`. If unset a rotation policy `Always` will be used.
 
+- `cert-manager.io/secret-template`: (optional) this annotation allows you to
+  set the `spec.secretTemplate` field of the generated Certificate.
+  The value is a JSON representation of `secretTemplate` and must not contain any unknown fields.
+  `secretTemplate` accepts `annotations` and `labels` maps, which are copied onto the `Secret` that stores the certificate.
+  For example: `cert-manager.io/secret-template: '{"labels": {"team": "platform"}, "annotations": {"example.com/owner": "platform"}}'`.
+
 ## Copying annotations to the Certificate
 
 > ℹ️ This feature was added in cert-manager `v1.18.0`.
