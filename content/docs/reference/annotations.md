@@ -178,8 +178,9 @@ this annotation allows you to configure `spec.privateKey.algorithm` field to set
 the algorithm for private key generation for a Certificate.
 Valid values are `RSA`, `ECDSA`, `Ed25519` and `MLDSA`.
 If unset an algorithm `RSA` will be used.
-`MLDSA` is an alpha feature and requires the `MLDSAPrivateKeys` feature gate; see
-[Post-quantum certificates (ML-DSA)](../usage/post-quantum.md).
+`MLDSA` is an alpha feature and requires the `MLDSAPrivateKeys` feature gate on
+both the controller and the webhook; see
+[Post-quantum certificates (ML-DSA)](../usage/post-quantum.md#enabling-ml-dsa).
 If the `cert-manager.io/usages` annotation is unset, an `MLDSA` Certificate gets
 the `digital signature` usage only.
 
@@ -332,7 +333,8 @@ to be generated. Pass a string with comma-separated values i.e.
 With `cert-manager.io/private-key-algorithm: MLDSA`, the usages `key encipherment`,
 `data encipherment`, `key agreement`, `encipher only` and `decipher only` aren't
 allowed. If any of them is set, cert-manager doesn't create or update the
-Certificate, and logs an error.
+Certificate, and records a `BadConfig` Warning event on the Ingress, Gateway or
+ListenerSet.
 
 ## experimental.cert-manager.io/request-duration
 - [CertificateRequest](../usage/certificaterequest.md)

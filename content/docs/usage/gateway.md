@@ -431,9 +431,9 @@ generating Certificate resources:
 - `cert-manager.io/private-key-algorithm`: (optional) this annotation allows you to
   configure `spec.privateKey.algorithm` field to set the algorithm for private key generation for a Certificate.
   Valid values are `RSA`, `ECDSA`, `Ed25519` and `MLDSA`. If unset an algorithm `RSA` will be used.
-  `MLDSA` is an alpha feature that requires the `MLDSAPrivateKeys` feature gate. If the `cert-manager.io/usages`
+  `MLDSA` is an alpha feature that requires the `MLDSAPrivateKeys` feature gate on both the controller and the webhook
+  (see [Enabling ML-DSA](./post-quantum.md#enabling-ml-dsa)). If the `cert-manager.io/usages`
   annotation is unset, an `MLDSA` Certificate gets the `digital signature` usage only.
-  See [Post-quantum certificates (ML-DSA)](./post-quantum.md).
 
 - `cert-manager.io/private-key-encoding`: (optional) this annotation allows you to
   configure `spec.privateKey.encoding` field to set the encoding for private key generation for a Certificate.

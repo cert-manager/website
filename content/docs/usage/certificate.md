@@ -195,7 +195,7 @@ defaults, or otherwise completely ignore the request.
 The `CA` and `SelfSigned` `Issuer` will always return certificates matching the usages you have requested.
 
 Unless any number of usages has been set, cert-manager will set the default
-requested usages of `digital signature`, `key encipherment`, and `server auth`.
+requested usages of `digital signature` and `key encipherment`.
 cert-manager will not attempt to request a new certificate if the current
 certificate does not match the current key usage set.
 

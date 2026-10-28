@@ -15,9 +15,9 @@ plan.
 
 ⚠️ ML-DSA support is an **alpha** feature, added in cert-manager v1.22.0. It's
 disabled by default and you must enable the `MLDSAPrivateKeys` feature gate to use
-it (see [Enabling ML-DSA](#enabling-ml-dsa)). We aim for it to be enabled by
-default (beta) in v1.23 and generally available in v1.24, but these are targets,
-not commitments.
+it (see [Enabling ML-DSA](#enabling-ml-dsa)). Follow
+[cert-manager/cert-manager#8929](https://github.com/cert-manager/cert-manager/issues/8929)
+for the graduation plan.
 
 **Many TLS consumers can't load ML-DSA certificates yet**, including ingress-nginx
 and the releases of popular Gateway API implementations that we tested. Before you
@@ -48,8 +48,8 @@ spec:
   of signature, so cert-manager derives the signature algorithm from the key's
   parameter set. The webhook rejects a Certificate that sets it.
 - **`encoding`** is ignored: ML-DSA private keys are always written to `tls.key`
-  as an unencrypted PKCS#8 `PRIVATE KEY` PEM block that contains only the 32-byte
-  seed (128 bytes of PEM).
+  as a PKCS#8 `PRIVATE KEY` PEM block that contains only the 32-byte seed (128
+  bytes of PEM). As with every key algorithm, `tls.key` isn't encrypted.
 - **Key usages:** [RFC 9881](https://www.rfc-editor.org/rfc/rfc9881.html#section-5)
   forbids `key encipherment`, `data encipherment`, `key agreement`,
   `encipher only` and `decipher only` for ML-DSA keys, and the webhook rejects
@@ -217,9 +217,10 @@ annotations accept `MLDSA` and `44`, `65` or `87` on
 [Ingress](./ingress.md) and [Gateway](./gateway.md) resources. With
 `MLDSA`, cert-manager sets the Certificate's usages to `digital signature` unless
 you set the `cert-manager.io/usages` annotation. If that annotation includes a
-usage that ML-DSA doesn't allow, or if the feature gate is disabled, cert-manager
-doesn't create or update the Certificate and logs the error. It doesn't record an
-event on the Ingress or Gateway.
+usage that ML-DSA doesn't allow, or if the `MLDSAPrivateKeys` feature gate is
+disabled on the controller, cert-manager doesn't create or update the Certificate.
+It records a `BadConfig` Warning event on the Ingress, Gateway or ListenerSet,
+which you can see with `kubectl describe`.
 
 Remember that the ingress controller or Gateway implementation must be able to
 load the ML-DSA Secret. Of the versions we tested, ingress-nginx, Envoy Gateway,
@@ -258,17 +259,19 @@ does. A key with only the expanded form can't be converted, and cert-manager
 rejects it with `x509: semi-expanded ML-DSA private keys without seed are not supported`.
 Generate a new seed-only key instead.
 
-`kubectl create secret tls` can't create the Secret, because it checks the key with
-a Go version that doesn't support ML-DSA (`error: tls: failed to parse private key`).
-Create it as a generic Secret with the `kubernetes.io/tls` type instead:
+kubectl v1.37 and earlier can't create the Secret with `kubectl create secret tls`,
+because they're built with a Go version that doesn't support ML-DSA
+(`error: tls: failed to parse private key`). With these versions, create it as a
+generic Secret with the `kubernetes.io/tls` type instead:
 
 ```bash
 kubectl create secret generic my-mldsa-ca -n sandbox --type=kubernetes.io/tls \
   --from-file=tls.crt=ca.crt --from-file=tls.key=ca.key
 ```
 
-The Kubernetes API server may print `Warning: tls: failed to parse private key`
-for this Secret, for the same reason. It still stores the Secret.
+A Kubernetes API server built with a Go version older than 1.27, such as
+Kubernetes v1.37, may print `Warning: tls: failed to parse private key` for this
+Secret, for the same reason. It still stores the Secret.
 
 ### Kubernetes CertificateSigningRequests
 
@@ -278,6 +281,12 @@ or later. Kubernetes v1.37 and earlier are built with older Go versions, so they
 reject ML-DSA CertificateSigningRequests with
 `x509: cannot verify signature: algorithm unimplemented`. Certificates and
 CertificateRequests don't depend on the Kubernetes version.
+
+The cert-manager signers for CertificateSigningRequests are themselves behind the
+`ExperimentalCertificateSigningRequestControllers` feature gate (see
+[Kubernetes CertificateSigningRequests](./kube-csr.md)), so enable it on the
+controller as well as `MLDSAPrivateKeys`. The webhook isn't involved, so it doesn't
+need either gate for CertificateSigningRequests.
 
 CertificateSigningRequests don't go through the cert-manager webhook, so the
 SelfSigned and CA signers check the usages themselves: they refuse to sign an
