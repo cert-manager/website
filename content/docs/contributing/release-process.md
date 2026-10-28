@@ -544,7 +544,22 @@ page if a step is missing or if it is outdated.
 
     :::
 
-17. **(final release only)** Show the release to the world:
+17. Tell the contributors that their changes are available. Run
+    [`hack/ping-release-prs.sh`](https://github.com/cert-manager/release/blob/master/hack/ping-release-prs.sh)
+    from the `cert-manager/release` repository with the PR numbers from the
+    release notes. It posts a comment on each PR, and on each issue the PR
+    closes, asking the author or reporter to install the release and verify
+    the change. It follows cherry-pick PRs back to the original PR, and it
+    skips anything it has already commented on, so it is safe to re-run.
+
+    ```bash
+    # Check what will be posted first.
+    ./hack/ping-release-prs.sh --release "$RELEASE_VERSION" --dry-run 1234 1235 1236
+    # Then post the comments.
+    ./hack/ping-release-prs.sh --release "$RELEASE_VERSION" 1234 1235 1236
+    ```
+
+18. **(final release only)** Show the release to the world:
 
     1. Send an email to
        [`cert-manager-dev@googlegroups.com`](https://groups.google.com/g/cert-manager-dev)
@@ -560,7 +575,7 @@ page if a step is missing or if it is outdated.
     4. Create a post on the cert-manager BlueSky account! Login details are in the cert-manager 1password.
        ([Example post](https://bsky.app/profile/cert-manager.bsky.social/post/3lhdtn7c2222u))
 
-18. Proceed to the post-release "testing and release" steps:
+19. Proceed to the post-release "testing and release" steps:
 
     1. **(initial beta only)** Create a PR on
        [cert-manager/testing](https://github.com/cert-manager/testing) in order to
