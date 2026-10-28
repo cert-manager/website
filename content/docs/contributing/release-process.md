@@ -249,7 +249,7 @@ page if a step is missing or if it is outdated.
        ```
 
        See for
-       example: [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1.md).
+       example: [upgrading-1.0-1.1](https://cert-manager.io/docs/releases/upgrading/upgrading-1.0-1.1/).
 
     7. (**final release**) Add an entry to `content/docs/manifest.json` for the new release note file:
 
