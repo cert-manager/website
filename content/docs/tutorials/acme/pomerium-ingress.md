@@ -18,7 +18,7 @@ This tutorial covers installing the [Pomerium Ingress Controller](https://pomeri
 1. Install Pomerium to your cluster:
 
     ```sh
-    kubectl apply -f https://raw.githubusercontent.com/pomerium/ingress-controller/main/deployment.yaml
+    kubectl apply -k "github.com/pomerium/ingress-controller/config/default?ref=0-33-0"
     ```
 
     Define a Secret with your IdP configuration. See Pomerium's [Identity Providers](https://www.pomerium.com/docs/identity-providers) pages for more information specific to your IdP:
