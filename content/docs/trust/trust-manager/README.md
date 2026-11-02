@@ -366,6 +366,10 @@ The fixed default trust packages are:
 
 Bullseye-based packages are deprecated and will not be patched since the upstream distribution is end-of-life.
 
+The trust-manager v0.26.0 Helm chart installs a fixed package by default: `trust-pkg-debian-trixie:20250419-deb13u1.1`.
+The v0.25.0 chart and earlier charts install an affected package by default. If you can't upgrade to v0.26.0 yet, set
+`defaultPackageImage.tag` to one of the fixed tags above, as described in [Upgrading a Default CA Package Using Helm](#upgrading-a-default-ca-package-using-helm).
+
 To protect any pods using a trust-manager bundle you must ensure you're running a patched version of the default CA package.
 
 To protect any pods _not_ using a trust-manager bundle, we recommend pointing them instead at a patched trust-manager bundle.
