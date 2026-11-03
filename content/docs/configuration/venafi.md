@@ -336,6 +336,7 @@ spec:
     zone: 'My CIT' # Set this to the name of your NGTS Certificate Issuing Template
     ngts:
       tsgID: '1234567890' # Your Tenant Service Group ID
+      # workspaceID: '1001' # Optional; see "Issuing from an NGTS workspace" below
       credentialsRef:
         name: ngts-credentials
       # tokenEndpoint and url are optional; uncomment to override the defaults
@@ -361,11 +362,37 @@ You are now ready to issue certificates using the newly provisioned CyberArk
 Read the [Requesting Certificates](../usage/certificate.md) document for
 more information on how to create Certificate resources.
 
+### Issuing from an NGTS workspace
+
+An NGTS tenant can be divided into [workspaces][ngts-workspaces]. If your
+Certificate Issuing Template belongs to a workspace, set `workspaceID` to the
+ID of that workspace. cert-manager then sends it as the `workspace_id` query
+parameter on every NGTS API request. The `workspaceID` field was added in
+cert-manager v1.22.0.
+
+[ngts-workspaces]: https://docs.paloaltonetworks.com/next-gen-trust-security/next-gen-trust-security/about-vaas/c-about-workspaces
+
+```yaml
+    ngts:
+      tsgID: '1234567890' # Still the tenant's 10-digit TSG ID
+      workspaceID: '1001'
+```
+
+Keep `tsgID` set to your tenant's 10-digit TSG ID. Do not replace it with the
+workspace ID. The OAuth 2.0 access token is scoped to the TSG, not the
+workspace. If `tsgID` is shorter than 10 digits, for example because a
+workspace ID was put there by mistake, the `Issuer` does not become Ready, and
+its status says that the scope is not in the format `tsg_id:<TSG_ID>`.
+
+If you leave `workspaceID` unset, cert-manager sends no workspace, as in
+earlier releases.
+
 ### NGTS field reference
 
 | Field | Required | Default | Description |
 |-------|----------|---------|-------------|
-| `tsgID` | Yes | — | Tenant Service Group ID, used to scope the OAuth 2.0 access token. |
+| `tsgID` | Yes | — | Tenant Service Group ID, used to scope the OAuth 2.0 access token. It must be the 10-digit TSG ID, not a workspace ID. |
+| `workspaceID` | No | — | ID of the NGTS workspace to send requests to. If unset, no workspace is sent. Added in cert-manager v1.22.0. |
 | `credentialsRef.name` | Yes | — | Name of the Kubernetes `Secret` containing `client-id` and `client-secret`. |
 | `tokenEndpoint` | No | `https://auth.apps.paloaltonetworks.com/oauth2/access_token` | OAuth 2.0 token endpoint URL used to obtain access tokens. |
 | `url` | No | `https://api.strata.paloaltonetworks.com/ngts` | Base URL for the NGTS API endpoint. |
