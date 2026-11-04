@@ -179,6 +179,20 @@ Check the health of the cert-manager scrape targets on the Prometheus status pag
 
 ![](/docs/devops-tips/prometheus-metrics/prometheus-status-targets.png)
 
+## Build info metric
+
+The controller, webhook and cainjector each expose `certmanager_build_info`, a gauge with a constant value of `1` whose labels identify the running binary:
+
+| Label | Description |
+|-------|-------------|
+| `version` | The cert-manager version. |
+| `revision` | The git commit cert-manager was built from. |
+| `goversion` | The Go version cert-manager was built with. |
+| `goos`, `goarch` | The operating system and architecture of the build. |
+| `branch`, `tags` | The git branch and Go build tags, when they are known. |
+
+For example, `count by (version) (certmanager_build_info)` shows which versions are running across clusters, and an alert can compare `version` against the supported releases.
+
 ## Venafi metrics
 
 cert-manager exposes the following Prometheus metrics for Venafi OAuth token requests. These are emitted by the controller whenever a Venafi `Issuer` or `ClusterIssuer` authenticates against a TPP, Cloud, or Next-Gen Trust Security (NGTS) endpoint.
