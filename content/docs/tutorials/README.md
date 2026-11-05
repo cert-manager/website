@@ -25,6 +25,7 @@ for you to learn from. Take a look!
   creating an EKS cluster and securing an NGINX deployment with a CyberArk Certificate Manager issued
   certificate.
 - [Obtaining SSL certificates with the ZeroSSL](./zerossl/zerossl.md): Tutorial describing usage of the ZeroSSL as external ACME server.
+- [Issuing public certificates from AWS Certificate Manager using ACME](./aws-acm-acme/README.md): Tutorial on using an ACM ACME endpoint, with External Account Binding and pre-approved domains, as an external ACME server.
 - [Managing public trust in Kubernetes with trust-manager](./getting-started-with-trust-manager/README.md): Learn how to deploy and configure trust-manager to automatically distribute your approved Public CA configuration to your Kubernetes cluster.
 - [Learn how to set Certificate defaults automatically](./certificate-defaults/README.md): Learn how to use Kyverno `ClusterPolicy` to set default values for cert-manager `Certificates`.
 
