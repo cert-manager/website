@@ -13,6 +13,16 @@
 	NEXT_PUBLIC_DOCS_SEARCH_INDEX_NAME = "cert-manager"
 	NEXT_PUBLIC_DOMAIN_URL = "https://cert-manager.io"
 
+# Security (CWE-829): deploy previews for pull requests from public forks run
+# untrusted code automatically, before any review. Do NOT add secrets to this
+# block or to [build.environment] — they would be handed to fork builds. Secrets
+# belong in [context.production.environment] or a production-scoped Netlify UI
+# variable, which the sensitive-variable policy keeps from untrusted deploys:
+# https://docs.netlify.com/build/environment-variables/get-started/#sensitive-variable-policy
+# This block is intentionally empty: deploy previews inherit the public values
+# from [build.environment]; it exists only to make the "no secrets" rule visible.
+[context.deploy-preview.environment]
+
 # Prevent search engines from indexing preview sites for branch deploys. See
 # - https://docs.netlify.com/routing/headers/#custom-headers-for-different-branch-or-deploy-contexts
 # - https://developers.google.com/search/docs/crawling-indexing/block-indexing
