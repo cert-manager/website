@@ -551,6 +551,7 @@ runtimes
 signoff
 sigstore
 solidserver
+certforge
 status.condition
 stdout
 subchart
