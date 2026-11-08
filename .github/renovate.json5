@@ -13,7 +13,10 @@
       ],
     },
     {
-      extends: ['group:stylelint'],
+      extends: ['packages:stylelint'],
+      groupName: 'stylelint packages',
+      groupSlug: 'stylelint',
+      separateMajorMinor: false,
     },
   ],
 }
