@@ -6,13 +6,14 @@
   packageRules: [
     {
       groupName: 'Misc NPM packages',
-      matchManagers: [
-        'npm',
-      ],
+      matchManagers: ['npm'],
       matchUpdateTypes: [
         'minor',
         'patch',
       ],
+    },
+    {
+      extends: ['group:stylelint'],
     },
   ],
 }
