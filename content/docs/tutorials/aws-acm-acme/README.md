@@ -80,7 +80,8 @@ aws acm describe-acme-endpoint \
     --query 'EndpointUrl' --output text
 ```
 
-The URL has the form `https://acm-acme-enroll.<region>.api.aws/<endpoint-id>/directory`.
+The URL has the form `https://acm-acme-enroll.<region>.api.aws/<uuid>/directory`.
+The UUID in the URL is not the endpoint ID from the ARN, so copy the URL exactly as returned.
 You will use it as the `server` field of the cert-manager Issuer.
 
 ## Step 2: Pre-approve your domain
@@ -187,8 +188,8 @@ metadata:
   name: acm-acme
 spec:
   acme:
-    # The EndpointUrl from Step 1
-    server: https://acm-acme-enroll.<region>.api.aws/<endpoint-id>/directory
+    # The EndpointUrl from Step 1, copied exactly
+    server: https://acm-acme-enroll.<region>.api.aws/<uuid>/directory
     # Required when the endpoint was created with --contact REQUIRED
     email: platform-team@example.com
     privateKeySecretRef:
