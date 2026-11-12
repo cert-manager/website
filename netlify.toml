@@ -3,7 +3,7 @@
 	command = "./scripts/build-release"
 
 [build.environment]
-	NODE_VERSION = "24"
+	NODE_VERSION = "26"
 	NETLIFY_NEXT_PLUGIN_SKIP = "true"
 	NEXT_PUBLIC_DOMAIN_URL = "https://cert-manager.io"
 
