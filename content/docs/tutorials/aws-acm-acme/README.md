@@ -15,9 +15,7 @@ to workloads that run outside the AWS managed services,
 such as Kubernetes clusters, on-premises servers, and hybrid environments.
 cert-manager talks to it like any other ACME server.
 
-> ⚠️ This tutorial has not yet been verified against a live ACM ACME endpoint.
-> The steps are derived from the AWS documentation and from the cert-manager source code.
-> If you try it, please [report your results](https://github.com/cert-manager/website/issues).
+*Last Verified: 12 November 2026*
 
 ## How ACM ACME differs from Let's Encrypt
 
@@ -77,7 +75,7 @@ Then retrieve the ACME directory URL of the endpoint:
 ```bash
 aws acm describe-acme-endpoint \
     --acme-endpoint-arn arn:aws:acm:${AWS_REGION}:${AWS_ACCOUNT_ID}:acme-endpoint/${ACME_ENDPOINT_ID} \
-    --query 'EndpointUrl' --output text
+    --query 'AcmeEndpoint.EndpointUrl' --output text
 ```
 
 The URL has the form `https://acm-acme-enroll.<region>.api.aws/<uuid>/directory`.
@@ -113,7 +111,7 @@ but is usually much faster when ACM manages the Route 53 record.
 ```bash
 aws acm describe-acme-domain-validation \
     --acme-domain-validation-arn ${ACME_DOMAIN_VALIDATION_ARN} \
-    --query 'Status' --output text
+    --query 'AcmeDomainValidation.Status' --output text
 ```
 
 > ⚠️ The CNAME record must stay in place for as long as you want to issue certificates.
@@ -170,8 +168,7 @@ Create one EAB per cluster, so that you can revoke a single cluster's access wit
 ## Step 4: Store the MAC key in a Secret
 
 cert-manager expects the MAC key in a Secret, encoded as a base64 URL string.
-See [External Account Bindings](../../configuration/acme/README.md#external-account-bindings)
-for details of the expected encoding.
+The `MacKey` that ACM returns is already in this encoding, so store it as it is.
 
 ```bash
 kubectl create secret generic acm-acme-eab \
@@ -235,6 +232,11 @@ spec:
     # defaults to RSA 2048 if privateKey is omitted.
     algorithm: ECDSA
     size: 256
+  # ACM rejects the key encipherment usage for ECDSA keys, but cert-manager
+  # requests it by default. Set the usages explicitly to leave it out.
+  usages:
+    - digital signature
+    - server auth
 ```
 
 ```bash
@@ -246,10 +248,14 @@ Because the domain is pre-approved, the Order goes straight from `pending` to `r
 and cert-manager finalizes it without creating any Challenge resources.
 Issuance can take up to two minutes.
 
-You can confirm that ACM issued the certificate by listing certificates with the `ACME` origin:
+You can confirm that ACM issued the certificate by listing certificates with the `ACME` origin.
+By default `list-certificates` only shows RSA certificates,
+so use `--includes` to show the other key types too:
 
 ```bash
-aws acm list-certificates --certificate-key-pair-origins ACME
+aws acm list-certificates \
+    --certificate-key-pair-origins ACME \
+    --includes keyTypes=EC_prime256v1,EC_secp384r1,RSA_2048
 ```
 
 ## Troubleshooting
@@ -259,6 +265,9 @@ These problems are specific to ACM ACME endpoints:
 
 - **The Order fails with `urn:ietf:params:acme:error:dns`.**
   The validation CNAME record has been removed or changed. Recreate it.
+- **The Order fails with `badCSR` and `Disallowed Key Usage: keyEncipherment`.**
+  The Certificate uses an ECDSA key with cert-manager's default usages.
+  Set `usages` to `digital signature` and `server auth`, as shown in Step 6.
 - **The Order fails with `urn:ietf:params:acme:error:unauthorized` or a similar rejection.**
   The requested domain is not covered by a `VALID` domain validation on this endpoint,
   or the certificate key algorithm is not in `AllowedKeyAlgorithms`.
