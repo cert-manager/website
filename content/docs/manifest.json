@@ -673,6 +673,10 @@
               "path": "/docs/tutorials/zerossl/zerossl.md"
             },
             {
+              "title": "AWS ACM ACME",
+              "path": "/docs/tutorials/aws-acm-acme/README.md"
+            },
+            {
               "title": "Managing public trust in kubernetes with trust-manager",
               "path": "/docs/tutorials/getting-started-with-trust-manager/README.md"
             },
