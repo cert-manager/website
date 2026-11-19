@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import CertManagerLogo from './snippets/CertManagerLogo'
 import { meta as site } from '../content/pages/site.mdx'
-import Button from './Button'
 
 import { DocSearch } from '@docsearch/react'
 import '@docsearch/css'
@@ -26,31 +25,14 @@ export default function Header() {
           <MobileNavigation active={currentPath} className="lg:hidden" />
         </div>
       </div>
-      <div className="text-center p-4 bg-blue-1 text-white">
-        NEW: Get project updates on
-        <Button
-          href={
-            'https://twitter.com/CertManager/'
-          }
-          caption="Twitter"
-          target="_blank"
-          icon="twitter"
-          iconWClass="w-4"
-          className="px-3! py-1! text-[11px]! mx-4!"
-        />
-        and
-        <Button
-          href={
-            'https://infosec.exchange/@CertManager'
-          }
-          caption="Mastodon"
-          target="_blank"
-          icon="mastodon"
-          iconWClass="w-4"
-           rel="me"
-          className="px-3! py-1! text-[11px]! mx-4!"
-        />
-      </div>
+      {/* Leave the blue header. This originally had the Mastadon and Twitter links
+
+          If you want to add an announcement then just follow the example:
+          <div className="text-center p-4 bg-blue-1 text-white">
+            Your announcement text
+          </div>
+      */}
+      <div className="p-4 bg-blue-1" />
     </div>
   );
 }
