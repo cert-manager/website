@@ -131,6 +131,39 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+{/* BEGIN changelog v1.21.3 */}
+## `v1.21.3`
+
+This patch release removes trust in the compromised eMudhra CA (see
+[eMudhra Compromise](../../trust/trust-manager/README.md#emudhra-compromise)).
+The updated base images no longer include the "emSign ECC Root CA - G3" root
+certificate. Go 1.26.10 also makes `crypto/x509` reject certificate chains
+that pass through the compromised intermediates
+([CVE-2026-111943](https://pkg.go.dev/vuln/GO-2026-6809)).
+
+It also fixes an ACME ARI renewal loop, stops the controller copying a private
+key from a Secret that the Certificate does not own, and quotes the proxy
+values in the Helm chart. It updates Go and several dependencies to fix
+reported security vulnerabilities.
+
+All users should upgrade.
+
+Changes since `v1.21.2`:
+
+### Bug or Regression
+
+- Added `status.acme.ari.certID` to track issuance of new certs and re-fetch ARI from CA. This fixes a renewal loop where a stale ARI window from the previous certificate triggered repeated re-issuance until the CA rate limit was hit. ([`#9292`](https://github.com/cert-manager/cert-manager/pull/9292), [`@hjoshi123`](https://github.com/hjoshi123))
+- Helm chart: quote the `http_proxy`, `https_proxy` and `no_proxy` values when rendering the controller Deployment env vars, so values like `*.example.com` no longer break the manifest. ([`#9407`](https://github.com/cert-manager/cert-manager/pull/9407), [`@pujitha24`](https://github.com/pujitha24))
+- The `requestmanager` and `issuing` controllers now only consume the Secret named by `status.nextPrivateKeySecretName` when it carries the `cert-manager.io/next-private-key` label and is owned by the Certificate, matching the invariant the `keymanager` controller already enforces. Previously a principal able to write the `certificates/status` subresource, but not to read Secrets, could name any Secret in the namespace and have its private key copied into `spec.secretName`. The `keymanager` controller no longer creates the next private key Secret under the name in `status.nextPrivateKeySecretName`. It always uses a generated name, records a `NotOwned` Warning event when the field names a Secret it does not own, and repoints the field at the Secret it owns rather than deleting that Secret when the two disagree. The Secret named by `spec.secretName` is never treated as a next private key Secret, even if `spec.secretTemplate` labels it as one. ([`#9368`](https://github.com/cert-manager/cert-manager/pull/9368), [`@wallrj`](https://github.com/wallrj))
+
+### Other (Cleanup or Flake)
+
+- Upgrade Go to 1.26.9, fixing CVEs in the crypto/tls, net/http, net/textproto and html/template packages. ([`#9444`](https://github.com/cert-manager/cert-manager/pull/9444), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Upgrade Go to 1.26.10, fixing a CVE in the crypto/x509 package. ([`#9501`](https://github.com/cert-manager/cert-manager/pull/9501), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Bump `golang.org/x/net` to v0.60.0 to fix reported security vulnerabilities ([`#9451`](https://github.com/cert-manager/cert-manager/pull/9451))
+- Bump `go.opentelemetry.io/otel/exporters/otlp/otlptrace` and `otlptracegrpc` to v1.45.0 to fix a reported security vulnerability ([`#9374`](https://github.com/cert-manager/cert-manager/pull/9374), [`#9375`](https://github.com/cert-manager/cert-manager/pull/9375))
+- Update distroless base images, removing the compromised "emSign ECC Root CA - G3" root certificate ([`#9351`](https://github.com/cert-manager/cert-manager/pull/9351), [`#9414`](https://github.com/cert-manager/cert-manager/pull/9414), [`#9493`](https://github.com/cert-manager/cert-manager/pull/9493), [`#9495`](https://github.com/cert-manager/cert-manager/pull/9495))
+{/* END changelog v1.21.3 */}
 {/* BEGIN changelog v1.21.2 */}
 ## `v1.21.2`
 
