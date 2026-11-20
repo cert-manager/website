@@ -16,6 +16,7 @@ The following list contains all known cert-manager issuer integrations.
 | 🥈   | akeyless-issuer             | [📄][config:akeyless-issuer]        | [Akeyless PKI][ca:akeyless-issuer]                                     | -                                                 | [✔️][release:akeyless-issuer]        | ✔️             |
 | 🥈   | aws-privateca-issuer        | [📄][config:aws-privateca-issuer]   | [AWS Private Certificate Authority][ca:aws-privateca-issuer]           | -                                                 | [✔️][release:aws-privateca-issuer]   | ✔️             |
 | 🥈   | ca-issuer (in-tree)         | [📄][config:ca-issuer]              | CA issuer                                                              | -                                                 | [✔️][release:cert-manager]           | ✔️             |
+| 🥈   | cmp-issuer                  | [📄][config:cmp-issuer]             | [Certificate Management Protocol (CMP)][ca:cmp-issuer]                 | -                                                 | [✔️][release:cmp-issuer]             | ✔️             |
 | 🥈   | czertainly-issuer           | [📄][config:czertainly-issuer]      | [CZERTAINLY][ca:czertainly-issuer]                                     | [supported][production:czertainly-issuer]         | [✔️][release:czertainly-issuer]      | ✔️             |
 | 🥈   | command-issuer              | [📄][config:command-issuer]         | [Keyfactor Command][ca:command-issuer]                                 | -                                                 | [✔️][release:command-issuer]         | ✔️             |
 | 🥈   | cview-issuer                | [📄][config:cview-issuer]           | [CView-issuer][ca:cview-issuer]                                        | -                                                 | [✔️][release:cview-issuer]           | ❌              |
@@ -68,6 +69,7 @@ The following list contains all known cert-manager issuer integrations.
 [config:akeyless-issuer]: https://github.com/akeyless-community/akeyless-cert-manager-issuer
 [config:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer
 [config:cfmtls-issuer]: https://github.com/k8stooling/cfmtls-issuer
+[config:cmp-issuer]: https://misiektoja.github.io/cmp-issuer/
 [config:zerossl-issuer]: https://github.com/topfreegames/zerossl-issuer
 [config:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 [config:czertainly-issuer]: https://docs.czertainly.com/docs/certificate-key/integration-guides/cert-manager-issuer/create-czertainly-issuer
@@ -93,6 +95,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:venafi-issuer]: https://www.cyberark.com/products/certificate-manager/
 [ca:cfssl-issuer]: https://github.com/cloudflare/cfssl
 [ca:cfmtls-issuer]: https://developers.cloudflare.com/ssl/client-certificates/create-a-client-certificate/
+[ca:cmp-issuer]: https://www.rfc-editor.org/rfc/rfc9810.html
 [ca:zerossl-issuer]: https://zerossl.com/
 [ca:freeipa-issuer]: https://www.freeipa.org
 [ca:kms-issuer]: https://aws.amazon.com/kms/
@@ -122,6 +125,7 @@ The following list contains all known cert-manager issuer integrations.
 [release:akeyless-issuer]: https://github.com/akeyless-community/akeyless-cert-manager-issuer/releases
 [release:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer/+refs
 [release:cfmtls-issuer]: https://github.com/k8stooling/cfmtls-issuer/releases/
+[release:cmp-issuer]: https://github.com/misiektoja/cmp-issuer/releases
 [release:zerossl-issuer]: https://github.com/topfreegames/zerossl-issuer/releases
 [release:cview-issuer]: https://github.com/secure-ly/cview-issuer-chart/releases
 [release:czertainly-issuer]: https://github.com/CZERTAINLY/CZERTAINLY-Cert-Manager-Issuer/releases
