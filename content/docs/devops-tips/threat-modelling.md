@@ -63,6 +63,45 @@ This section seeks to explain specific risks which motivate the above advice:
     - Solver configuration can be used to send values from `Secret` resources to attacker-controlled servers
     - Lower risk, as there's little conceptual reason to share permissions to create `Challenge` resources directly
 
+### Availability and Denial of Service
+
+The risks above are mostly about confidentiality and integrity: attackers reading `Secret` resources
+they should not, or forging identities. Availability is worth considering separately, because the
+controls are not quite the same.
+
+cert-manager is a single shared component. The controller and cainjector use leader election, so only
+one replica is active and they cannot be scaled horizontally. One overloaded controller therefore
+delays certificate issuance and renewal for every tenant in the cluster, which makes resource
+exhaustion a cross-tenant concern rather than a local one.
+
+Two broad classes are worth considering:
+
+- Attacker-controlled workload: a principal who can create many `Certificate` resources, or
+  certificates with deliberately expensive parameters, can consume controller CPU and memory
+    - This is a direct consequence of the RBAC advice above, and the mitigation is the same, with
+      approval policy as an additional control
+    - See [Restrict the use of large RSA keys](./scaling-cert-manager.md#restrict-the-use-of-large-rsa-keys)
+
+- Attacker-controlled responses: cert-manager makes requests to servers named in `Issuer` and
+  `ClusterIssuer` resources, such as ACME directories, Vault and DNS providers, and the responses are
+  untrusted input even when the request itself was legitimate
+    - A hostile or compromised server can return an oversized or malformed response in an attempt to
+      exhaust controller memory or crash the process
+    - cert-manager bounds the size of the responses it buffers, and gaps in that coverage are
+      treated as security advisories; see [`GHSA-r4pg-vg54-wxx4`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-r4pg-vg54-wxx4)
+      (oversized PEM) and [`GHSA-gx3x-vq4p-mhhv`](https://github.com/cert-manager/cert-manager/security/advisories/GHSA-gx3x-vq4p-mhhv)
+      (malformed DNS response) for previous examples
+    - Choosing the server to talk to is once again the ability to create an `Issuer`, so the primary
+      control is the same tightly-scoped RBAC recommended above
+
+Whichever the source, the last line of defense is the Kubernetes one: set memory and CPU requests and
+limits on the cert-manager Pods. The Helm chart does not set them, so by default the Pods run with the
+`BestEffort` quality of service class and memory growth in the controller becomes node-level pressure
+which can affect unrelated workloads.
+
+> 📖 Read [Scalability](../installation/best-practice.md#scalability) to learn how to size these
+> requests and limits.
+
 ### Permissions, RBAC and Security Background
 
 cert-manager has cluster-wide permission to create, read and update Kubernetes `Secret` resources by design.
