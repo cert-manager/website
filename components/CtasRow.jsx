@@ -12,6 +12,7 @@ export default function CtasRow({ ctas, title = '', className = '' }) {
             href={cta.href}
             caption={cta.caption}
             target={cta.target}
+            rel={cta.rel}
           />
         ))}
       </div>
