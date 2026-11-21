@@ -186,12 +186,13 @@ The controller, webhook and cainjector each expose `certmanager_build_info`, a g
 | Label | Description |
 |-------|-------------|
 | `version` | The cert-manager version. |
-| `revision` | The git commit cert-manager was built from. |
+| `revision` | The git commit cert-manager was built from. Local builds without a commit set fall back to the commit Go embeds, with a `-modified` suffix if the tree had uncommitted changes. |
 | `goversion` | The Go version cert-manager was built with. |
 | `goos`, `goarch` | The operating system and architecture of the build. |
-| `branch`, `tags` | The git branch and Go build tags, when they are known. |
+| `tags` | The Go build tags, when they are known. |
+| `branch` | Always empty: cert-manager does not record the git branch at build time. |
 
-For example, `count by (version) (certmanager_build_info)` shows which versions are running across clusters, and an alert can compare `version` against the supported releases.
+For example, `count by (version) (certmanager_build_info)` lists the running versions, with the number of cert-manager Pods reporting each one, and an alert can compare `version` against the supported releases.
 
 ## Venafi metrics
 
