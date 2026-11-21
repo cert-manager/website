@@ -18,7 +18,7 @@ The following bugs were found during the release of `v1.14.0` and have been fixe
 - A bug in cmctl namespace detection prevents it being used as a startupapicheck image in namespaces other than cert-manager.
 - A bug in cmctl causes `cmctl experimental install` to panic.
 
-Read the  [`v1.14.2` release notes](../release-notes/release-notes-1.14.md#v1.14.2) and [`v1.14.1` release notes](../release-notes/release-notes-1.14.md#v1.14.1) for more information.
+Read the  [`v1.14.2` release notes](../release-notes/release-notes-1.14.md#v1142) and [`v1.14.1` release notes](../release-notes/release-notes-1.14.md#v1141) for more information.
 
 ## New startupapicheck image
 

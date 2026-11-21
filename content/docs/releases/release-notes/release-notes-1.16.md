@@ -89,7 +89,7 @@ Consider this carefully when upgrading to cert-manager 1.16.
 When connecting to Venafi TPP, cert-manager can now load the CA certificate from a Secret resource.
 This allows you to manage the CA with familiar tools such as trust-manager.
 
-Read the [Venafi Issuer](../../configuration/venafi.md#creating-a-venafi-trust-protection-platform-issuer) page to learn more.
+Read the [Venafi Issuer](../../configuration/venafi.md#creating-an-issuer-for-cyberark-certificate-manager-self-hosted) page to learn more.
 
 ### Route53 DNS01 Solver Cleanup
 

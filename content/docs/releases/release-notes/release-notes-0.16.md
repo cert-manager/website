@@ -40,7 +40,7 @@ private key and X.509 certificate in `my-cr.key` and `my-cr.crt` respectively.
 $ kubectl cert-manager create certificaterequest my-cr --from-certificate-file my-certificate.yaml --fetch-certificate --timeout 20m
 ```
 
-More information can be found on our [kubectl plugin page](../../reference/cmctl.md#legacy-kubectl-plugin).
+More information can be found on our [kubectl plugin page](../../reference/cmctl.md#kubectl-plugin).
 
 ## `v1beta1` API
 
@@ -88,4 +88,4 @@ The `kubectl cert-manager convert` command will be able to convert your manifest
 $ kubectl cert-manager convert --output-version cert-manager.io/v1beta1 cert.yaml
 ```
 
-More information can be found on our [kubectl plugin page](../../reference/cmctl.md#legacy-kubectl-plugin).
+More information can be found on our [kubectl plugin page](../../reference/cmctl.md#kubectl-plugin).
