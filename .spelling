@@ -1569,3 +1569,5 @@ keypair
 pkey
 genpkey
 provparam
+goarch
+goversion
