@@ -5,6 +5,28 @@ description: 'cert-manager usage: Prometheus metrics'
 
 To help with operations and insights into cert-manager activities, cert-manager exposes metrics in the [Prometheus](https://prometheus.io/) format from the controller, webhook and cainjector components. These are available at the standard `/metrics` endpoint on port `9402` of each component Pod.
 
+> **Note:** Some series are registered lazily. They only appear on `/metrics` after the related controller path has run at least once (for example the first Certificate reconcile). An empty scrape for a given metric name does not always mean scraping is misconfigured.
+
+When adding a new metric in [`cert-manager/pkg/metrics`](https://github.com/cert-manager/cert-manager/tree/master/pkg/metrics), update this page in the same change.
+
+## Available metrics
+
+All names below are prefixed with `certmanager_`. Go-collector process metrics (for example `go_goroutines`) are also exposed on the same endpoint.
+
+| Metric | Type | Labels | Description |
+|--------|------|--------|-------------|
+| `clock_time_seconds` | Counter | — | Deprecated. Use `clock_time_seconds_gauge`. Clock time in seconds since 1970-01-01 UTC. |
+| `clock_time_seconds_gauge` | Gauge | — | Clock time in seconds since 1970-01-01 UTC. |
+| `acme_client_request_count` | Counter | ACME HTTP request labels | Total outbound ACME HTTP requests. |
+| `acme_client_request_duration_seconds` | Summary | ACME HTTP request labels | Latency of outbound ACME HTTP requests. |
+| `venafi_client_request_duration_seconds` | Summary | — | ALPHA. HTTP request latencies for the Venafi / Certificate Manager client. |
+| `venafi_oauth_token_requests_total` | Counter | `status` (`success` \| `failure`) | Total Venafi OAuth token requests. |
+| `venafi_oauth_token_request_duration_seconds` | Histogram | — | Duration of Venafi OAuth token requests. |
+| `controller_sync_call_count` | Counter | `controller` | Number of `sync()` calls made by a controller. |
+| `controller_sync_error_count` | Counter | `controller` | Number of errors during controller `sync()`. Use with `controller_sync_call_count` for error rates. |
+
+Certificate, Challenge, Issuer, and ClusterIssuer collectors also export per-resource series (readiness, expiry, and related gauges). Those series are created when the corresponding objects exist and have been reconciled.
+
 ## Scraping Metrics
 
 How metrics are scraped will depend how you're operating your Prometheus server(s). These examples presume the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) is being used to run Prometheus, and configure Pod or Service Monitor CRDs.
