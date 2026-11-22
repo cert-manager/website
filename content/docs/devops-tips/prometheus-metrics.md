@@ -186,13 +186,16 @@ The controller, webhook and cainjector each expose `certmanager_build_info`, a g
 | Label | Description |
 |-------|-------------|
 | `version` | The cert-manager version. |
-| `revision` | The git commit cert-manager was built from. Local builds without a commit set fall back to the commit Go embeds, with a `-modified` suffix if the tree had uncommitted changes. |
+| `revision` | The git commit cert-manager was built from. Local builds without a commit set fall back to the commit Go embeds, with a `-modified` suffix if the tree had uncommitted changes, or to `unknown` if Go embedded no commit. |
 | `goversion` | The Go version cert-manager was built with. |
 | `goos`, `goarch` | The operating system and architecture of the build. |
-| `tags` | The Go build tags, when they are known. |
+| `tags` | The Go build tags. cert-manager releases are built without build tags, so this is `unknown`. |
 | `branch` | Always empty: cert-manager does not record the git branch at build time. |
 
-For example, `count by (version) (certmanager_build_info)` lists the running versions, with the number of cert-manager Pods reporting each one, and an alert can compare `version` against the supported releases.
+For example, `count by (version) (certmanager_build_info)` lists the running versions, with the number of cert-manager Pods reporting each one, and an alert can use it to catch unsupported or mixed versions. For example:
+
+- `certmanager_build_info{version!~"v1\\.(21|22)\\..*"}` returns the Pods that run an unsupported minor version. The regular expression has to be updated at each release.
+- `count(count by (version) (certmanager_build_info)) > 1` fires when Pods report more than one version, for example after a stalled upgrade.
 
 ## Venafi metrics
 
