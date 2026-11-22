@@ -179,6 +179,26 @@ Check the health of the cert-manager scrape targets on the Prometheus status pag
 
 ![](/docs/devops-tips/prometheus-metrics/prometheus-status-targets.png)
 
+## Build info metric
+
+This metric is available in cert-manager >= v1.22.0.
+
+The controller, webhook and cainjector each expose `certmanager_build_info`, a gauge with a constant value of `1` whose labels identify the running binary:
+
+| Label | Description |
+|-------|-------------|
+| `version` | The cert-manager version. |
+| `revision` | The git commit cert-manager was built from. Local builds without a commit set fall back to the commit Go embeds, with a `-modified` suffix if the tree had uncommitted changes, or to `unknown` if Go embedded no commit. |
+| `goversion` | The Go version cert-manager was built with. |
+| `goos`, `goarch` | The operating system and architecture of the build. |
+| `tags` | The Go build tags. cert-manager releases are built without build tags, so this is `unknown`. |
+| `branch` | Always empty: cert-manager does not record the git branch at build time. |
+
+For example, `count by (version) (certmanager_build_info)` lists the running versions, with the number of cert-manager Pods reporting each one, and an alert can use it to catch unsupported or mixed versions. For example:
+
+- `certmanager_build_info{version!~"v1\\.(21|22)\\..*"}` returns the Pods that run an unsupported minor version. The regular expression has to be updated at each release.
+- `count(count by (version) (certmanager_build_info)) > 1` fires when Pods report more than one version, for example after a stalled upgrade.
+
 ## Venafi metrics
 
 cert-manager exposes the following Prometheus metrics for Venafi OAuth token requests. These are emitted by the controller whenever a Venafi `Issuer` or `ClusterIssuer` authenticates against a TPP, Cloud, or Next-Gen Trust Security (NGTS) endpoint.
