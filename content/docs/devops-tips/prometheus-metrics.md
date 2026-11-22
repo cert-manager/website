@@ -181,6 +181,8 @@ Check the health of the cert-manager scrape targets on the Prometheus status pag
 
 ## Build info metric
 
+This metric is available in cert-manager >= v1.22.0.
+
 The controller, webhook and cainjector each expose `certmanager_build_info`, a gauge with a constant value of `1` whose labels identify the running binary:
 
 | Label | Description |
