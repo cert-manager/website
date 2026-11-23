@@ -36,7 +36,7 @@ The Helm values `prometheus.servicemonitor.targetPort`, `prometheus.servicemonit
 - **ACME Renewal Information (ARI)**: experimental support for [RFC 9773](https://www.rfc-editor.org/rfc/rfc9773) behind the `ACMEUseARI` feature gate. When enabled, cert-manager queries the ACME server's `renewalInfo` endpoint for the recommended renewal window, allowing servers like Let's Encrypt to proactively prompt renewal during mass revocations or CA key rollovers. ([#8798](https://github.com/cert-manager/cert-manager/pull/8798))
 - **`waitInsteadOfSelfCheck` solver option**: skip cert-manager's own self-check and instead wait a configured duration before asking the ACME server to validate. An escape hatch for split-horizon DNS and NAT hairpin environments. See [configuration details](../../configuration/acme/README.md#skip-the-self-check-with-waitinsteadofselfcheck). ([#8858](https://github.com/cert-manager/cert-manager/pull/8858))
 - **AWS IAM authentication for Vault**: the Vault issuer now supports IRSA, EKS Pod Identity, and ambient EC2/ECS credentials, removing the need for long-lived AWS Secrets. ([#8422](https://github.com/cert-manager/cert-manager/pull/8422))
-- **Certificate renewal policies**: a new `renewalPolicies` field on the Certificate API provides more expressive control over renewal scheduling, complementing `renewBefore` and `renewBeforePercentage`. ([#8258](https://github.com/cert-manager/cert-manager/pull/8258))
+- **Certificate renewal policies**: a new `renewal` field on the Certificate API provides more expressive control over renewal scheduling, complementing `renewBefore` and `renewBeforePercentage` — including scheduling renewal into approved maintenance windows and disabling automatic renewal entirely. See [renewal policies and renewal windows](../../usage/certificate.md#renewal-policies-and-renewal-windows). ([#8258](https://github.com/cert-manager/cert-manager/pull/8258))
 - **Configurable CertificateRequest retry backoff**: the new `--certificate-request-maximum-backoff-duration` flag (default: 32 hours) caps the exponential backoff for failed CertificateRequests, useful for environments with scheduled CA maintenance windows. ([#8893](https://github.com/cert-manager/cert-manager/pull/8893))
 - **Modern2026 PKCS#12 profile**: a new FIPS 140-3 compatible encoding profile using AES-256 + SHA-256 KDFs instead of legacy 3DES/RC2. ([#8841](https://github.com/cert-manager/cert-manager/pull/8841))
 - **Webhook certificate renewal after system suspend**: the webhook now detects missed certificate renewals after system suspend (S3/S4) or VM live migration by polling wall-clock time, recovering within one minute of resume. ([#8464](https://github.com/cert-manager/cert-manager/pull/8464))
@@ -67,6 +67,13 @@ The Helm values `prometheus.servicemonitor.targetPort`, `prometheus.servicemonit
 - **Vault path traversal**: the Vault issuer webhook now rejects `..` path segments, preventing `path.Join` from silently resolving relative segments. ([#8930](https://github.com/cert-manager/cert-manager/pull/8930))
 - **DNS issuer secrets validated before ready**: prevents silent misconfiguration. ([#8255](https://github.com/cert-manager/cert-manager/pull/8255))
 
+- **Validating webhook panic**: the webhook no longer panics when an AdmissionReview request omits optional fields, and denies requests with an unset or mismatched resource instead of allowing them. (v1.21.2, [#9086](https://github.com/cert-manager/cert-manager/pull/9086))
+- **Issuing controller panic**: a CertificateRequest with a failure time but no Ready condition no longer crashes the controller. (v1.21.2, [#9118](https://github.com/cert-manager/cert-manager/pull/9118))
+- **Issuers stuck at `InvalidSolver`**: Issuers and ClusterIssuers now become Ready when a referenced ACME DNS-01 solver Secret is created after the Issuer. (v1.21.1, [#9042](https://github.com/cert-manager/cert-manager/pull/9042))
+- **Untrusted response bodies kept out of status**: the ACME issuer, the HTTP-01 self-check and the Vault issuer no longer copy HTTP response bodies into conditions or Events, and ACME responses are capped at 16 MiB. (v1.21.2, [#9202](https://github.com/cert-manager/cert-manager/pull/9202), [#9035](https://github.com/cert-manager/cert-manager/pull/9035), [#9206](https://github.com/cert-manager/cert-manager/pull/9206), [#9010](https://github.com/cert-manager/cert-manager/pull/9010))
+- **Dropped rescheduled polls**: a scheduler race could cancel a newer timer for the same key, leaving a Certificate unprocessed until the next resync. (v1.21.2, [#9270](https://github.com/cert-manager/cert-manager/pull/9270))
+- **Duplicated dnsNames for shared Gateway Secrets**: dnsNames are de-duplicated when several Gateway or ListenerSet listeners reference one Secret, which made ACME finalize fail. (v1.21.2, [#8978](https://github.com/cert-manager/cert-manager/pull/8978))
+
 ## Community
 
 As always, we'd like to thank all of the community members who helped in this release cycle, including all below who merged a PR and anyone that helped by commenting on issues, testing, or getting involved in cert-manager meetings. We're lucky to have you involved.
@@ -92,7 +99,11 @@ A special thanks to:
 - [`@onurmicoogullari`](https://github.com/onurmicoogullari)
 - [`@putongyong`](https://github.com/putongyong)
 - [`@seanorama`](https://github.com/seanorama)
+- [`@sklirg`](https://github.com/sklirg)
+- [`@speer`](https://github.com/speer)
 - [`@texasich`](https://github.com/texasich)
+- [`@thc1006`](https://github.com/thc1006)
+- [`@wieghx`](https://github.com/wieghx)
 {/* END contributors */}
 
 for their contributions, comments and support!
@@ -120,6 +131,110 @@ And finally, thanks to the cert-manager steering committee for their feedback in
 - [`@ssyno`](https://github.com/ssyno)
 {/* END steerers */}
 
+{/* BEGIN changelog v1.21.3 */}
+## `v1.21.3`
+
+This patch release removes trust in the compromised eMudhra CA (see
+[eMudhra Compromise](../../trust/trust-manager/README.md#emudhra-compromise)).
+The updated base images no longer include the "emSign ECC Root CA - G3" root
+certificate. Go 1.26.10 also makes `crypto/x509` reject certificate chains
+that pass through the compromised intermediates
+([CVE-2026-111943](https://pkg.go.dev/vuln/GO-2026-6809)).
+
+It also fixes an ACME ARI renewal loop, stops the controller copying a private
+key from a Secret that the Certificate does not own, and quotes the proxy
+values in the Helm chart. It updates Go and several dependencies to fix
+reported security vulnerabilities.
+
+All users should upgrade.
+
+Changes since `v1.21.2`:
+
+### Bug or Regression
+
+- Added `status.acme.ari.certID` to track issuance of new certs and re-fetch ARI from CA. This fixes a renewal loop where a stale ARI window from the previous certificate triggered repeated re-issuance until the CA rate limit was hit. ([`#9292`](https://github.com/cert-manager/cert-manager/pull/9292), [`@hjoshi123`](https://github.com/hjoshi123))
+- Helm chart: quote the `http_proxy`, `https_proxy` and `no_proxy` values when rendering the controller Deployment env vars, so values like `*.example.com` no longer break the manifest. ([`#9407`](https://github.com/cert-manager/cert-manager/pull/9407), [`@pujitha24`](https://github.com/pujitha24))
+- The `requestmanager` and `issuing` controllers now only consume the Secret named by `status.nextPrivateKeySecretName` when it carries the `cert-manager.io/next-private-key` label and is owned by the Certificate, matching the invariant the `keymanager` controller already enforces. Previously a principal able to write the `certificates/status` subresource, but not to read Secrets, could name any Secret in the namespace and have its private key copied into `spec.secretName`. The `keymanager` controller no longer creates the next private key Secret under the name in `status.nextPrivateKeySecretName`. It always uses a generated name, records a `NotOwned` Warning event when the field names a Secret it does not own, and repoints the field at the Secret it owns rather than deleting that Secret when the two disagree. The Secret named by `spec.secretName` is never treated as a next private key Secret, even if `spec.secretTemplate` labels it as one. ([`#9368`](https://github.com/cert-manager/cert-manager/pull/9368), [`@wallrj`](https://github.com/wallrj))
+
+### Other (Cleanup or Flake)
+
+- Upgrade Go to 1.26.9, fixing CVEs in the crypto/tls, net/http, net/textproto and html/template packages. ([`#9444`](https://github.com/cert-manager/cert-manager/pull/9444), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Upgrade Go to 1.26.10, fixing a CVE in the crypto/x509 package. ([`#9501`](https://github.com/cert-manager/cert-manager/pull/9501), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Bump `golang.org/x/net` to v0.60.0 to fix reported security vulnerabilities ([`#9451`](https://github.com/cert-manager/cert-manager/pull/9451))
+- Bump `go.opentelemetry.io/otel/exporters/otlp/otlptrace` and `otlptracegrpc` to v1.45.0 to fix a reported security vulnerability ([`#9374`](https://github.com/cert-manager/cert-manager/pull/9374), [`#9375`](https://github.com/cert-manager/cert-manager/pull/9375))
+- Update distroless base images, removing the compromised "emSign ECC Root CA - G3" root certificate ([`#9351`](https://github.com/cert-manager/cert-manager/pull/9351), [`#9414`](https://github.com/cert-manager/cert-manager/pull/9414), [`#9493`](https://github.com/cert-manager/cert-manager/pull/9493), [`#9495`](https://github.com/cert-manager/cert-manager/pull/9495))
+{/* END changelog v1.21.3 */}
+{/* BEGIN changelog v1.21.2 */}
+## `v1.21.2`
+
+This patch release fixes controller and webhook panics, data races, ACME
+renewal and HTTP-01 solver bugs, and a Gateway API dnsNames bug. It stops the
+ACME and Vault issuers copying untrusted HTTP response bodies into status
+conditions and Events, and tightens ambient AWS credential use for namespaced
+Vault Issuers. It also updates Go and several dependencies to fix reported
+security vulnerabilities.
+
+All users should upgrade.
+
+Changes since `v1.21.1`:
+
+### Bug or Regression
+
+- ACME Issuer response bodies are no longer reflected into Issuer status conditions or Kubernetes Events. Only ACME problem documents are surfaced (bounded in length); other responses are reported by HTTP status code alone, with the full error available in the controller logs. ([`#9239`](https://github.com/cert-manager/cert-manager/pull/9239), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- Cap ACME server response bodies at 16 MiB to guard against unbounded-body denial-of-service. ([`#9222`](https://github.com/cert-manager/cert-manager/pull/9222), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- De-duplicate dnsNames when multiple Gateway/ListenerSet listeners share a Secret ([`#9234`](https://github.com/cert-manager/cert-manager/pull/9234), [`@speer`](https://github.com/speer))
+- Fix certificate renewal windows using February 29 cron schedules across non-leap century years. ([`#9240`](https://github.com/cert-manager/cert-manager/pull/9240), [`@wieghx`](https://github.com/wieghx))
+- Fix validating webhook panics when AdmissionReview requests omit optional fields, by routing identity, approval, and resource validation on the always-present Resource/SubResource fields and denying (rather than silently allowing) requests with an unset or mismatched resource. As a side effect, validation is now also enforced for equivalent-converted requests on non-v1 API versions, which previously could skip validation. ([`#9235`](https://github.com/cert-manager/cert-manager/pull/9235), [`@lunarwhite`](https://github.com/lunarwhite))
+- Fixed HTTP-01 solver cleanup so that a solver ingress, pod or service that has already been deleted no longer fails the cleanup with a NotFound error. ([`#9278`](https://github.com/cert-manager/cert-manager/pull/9278), [`@arpitjain099`](https://github.com/arpitjain099))
+- Fixed a bug where `replaces` field was being populated for the wrong issuer on issuer changes ([`#9236`](https://github.com/cert-manager/cert-manager/pull/9236), [`@hjoshi123`](https://github.com/hjoshi123))
+- Fixed a data race in the ACME HTTP-01 self-check that could occur when custom DNS servers were configured. ([`#9313`](https://github.com/cert-manager/cert-manager/pull/9313), [`@shashankvarma499`](https://github.com/shashankvarma499))
+- Fixed a panic in the certificates-issuing controller when a CertificateRequest has a failure time set but no Ready condition. ([`#9238`](https://github.com/cert-manager/cert-manager/pull/9238), [`@thc1006`](https://github.com/thc1006))
+- Fixed a race in pkg/scheduler where the cleanup of a fired timer could cancel a newer timer scheduled for the same object, silently dropping a rescheduled poll. ([`#9312`](https://github.com/cert-manager/cert-manager/pull/9312), [`@shashankvarma499`](https://github.com/shashankvarma499))
+- Fixed an issue where the body of a non-Vault HTTP response from `spec.vault.server` could be copied into the Vault Issuer's Ready condition and its Kubernetes Events. Such responses now report only the HTTP status code, and Vault's own error messages are truncated before being persisted. ([`#9262`](https://github.com/cert-manager/cert-manager/pull/9262), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- Ingress-shim no longer removes the applyset label from cached Ingress and Gateway objects ([`#9314`](https://github.com/cert-manager/cert-manager/pull/9314), [`@KR-Ravindra`](https://github.com/KR-Ravindra))
+- The ACME HTTP-01 self-check no longer reflects the fetched response body in `Challenge.status.reason`, preventing disclosure of internal response contents reachable via redirects. The response is still available in the controller's debug logs. ([`#9232`](https://github.com/cert-manager/cert-manager/pull/9232), [`@FelixPhipps`](https://github.com/FelixPhipps))
+- The `vault` issuer no longer authenticates to Vault using the cert-manager controller's ambient AWS credentials
+    for AWS IAM auth on a namespaced `Issuer`, unless ambient credentials are explicitly enabled via
+    `--issuer-ambient-credentials`. `ClusterIssuer` and explicit `serviceAccountRef` (IRSA) configurations are
+    unaffected. ([`#9231`](https://github.com/cert-manager/cert-manager/pull/9231), [`@FelixPhipps`](https://github.com/FelixPhipps))
+
+### Other (Cleanup or Flake)
+
+- Upgrade Go to 1.26.6, which includes security fixes to the go command, and the crypto/tls, encoding/asn1, encoding/xml, html/template, net, net/http, and net/url packages. ([`#9151`](https://github.com/cert-manager/cert-manager/pull/9151), [`@wallrj`](https://github.com/wallrj))
+- Upgrade Go to 1.26.8. ([`#9323`](https://github.com/cert-manager/cert-manager/pull/9323), [`@wallrj`](https://github.com/wallrj))
+- Bump `google.golang.org/grpc` to v1.83.2 to fix reported security vulnerabilities ([`#9255`](https://github.com/cert-manager/cert-manager/pull/9255), [`#9317`](https://github.com/cert-manager/cert-manager/pull/9317))
+- Bump `golang.org/x/crypto` to v0.56.0 to fix reported security vulnerabilities ([`#9265`](https://github.com/cert-manager/cert-manager/pull/9265))
+{/* END changelog v1.21.2 */}
+{/* BEGIN changelog v1.21.1 */}
+## `v1.21.1`
+
+This patch release fixes a controller panic for Certificates with
+`spec.renewal.policy: Disabled`, a regression in 1.21.0 which caused log spam
+and dropped Secret informer events, Issuers and ClusterIssuers getting stuck at
+`Ready=False` (`InvalidSolver`) when a referenced ACME DNS-01 solver Secret is
+created after the Issuer, and the commented Gateway API example in the Helm
+chart values. It also updates several dependencies to fix reported security
+vulnerabilities.
+
+All users should upgrade.
+
+Changes since `v1.21.0`:
+
+### Bug or Regression
+
+- Avoid controller panic if a Certificate sets spec.renewal.policy=Disabled ([`#9038`](https://github.com/cert-manager/cert-manager/pull/9038), [`@sklirg`](https://github.com/sklirg))
+- Fix Issuer/ClusterIssuer stuck at Ready=False/InvalidSolver after a missing ACME DNS-01 solver Secret is created ([`#9083`](https://github.com/cert-manager/cert-manager/pull/9083), [`@SebTardif`](https://github.com/SebTardif))
+- Fix log spam and dropped Secret informer events for non-cert-manager Secrets, caused by a generics regression introduced in 1.21.0. ([`#9037`](https://github.com/cert-manager/cert-manager/pull/9037), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Fixed the commented Gateway API config example in the Helm chart values to use `gatewayAPI.enabled` instead of the invalid `gatewayAPI.enable`. ([`#9012`](https://github.com/cert-manager/cert-manager/pull/9012), [`@mateenali66`](https://github.com/mateenali66))
+
+### Other (Cleanup or Flake)
+
+- Bump `golang.org/x/text` to v0.40.0 to fix a reported security vulnerability ([`#9039`](https://github.com/cert-manager/cert-manager/pull/9039), [`@wallrj-cyberark`](https://github.com/wallrj-cyberark))
+- Bump `google.golang.org/grpc` to v1.82.1 to fix a reported security vulnerability ([`#9063`](https://github.com/cert-manager/cert-manager/pull/9063))
+- Bump `github.com/google/cel-go` to v0.29.0 to fix a reported security vulnerability ([`#9072`](https://github.com/cert-manager/cert-manager/pull/9072))
+- Bump `go.opentelemetry.io/otel` to v1.44.0 to fix a reported security vulnerability ([`#9073`](https://github.com/cert-manager/cert-manager/pull/9073))
+- Update distroless base images ([`#9000`](https://github.com/cert-manager/cert-manager/pull/9000), [`#9025`](https://github.com/cert-manager/cert-manager/pull/9025))
+{/* END changelog v1.21.1 */}
 {/* BEGIN changelog v1.21.0 */}
 ## `v1.21.0`
 

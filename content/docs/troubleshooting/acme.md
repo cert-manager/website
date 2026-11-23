@@ -229,6 +229,13 @@ If your challenge self-check fails with a 404 not found error. Make sure to chec
 * the ACME solver pod is up and running
 * use `kubectl describe ingress` to check the status of the HTTP01 solver ingress. (unless you use `acme.cert-manager.io/http01-edit-in-place`, then check the same ingress as your domain)
 
+#### Got 503 status code
+If your challenge self-check fails with a 503 error on OpenShift and you use the
+built-in router, the solver `Ingress` is probably not being converted into a
+`Route` because it uses `pathType: Exact`. See
+[OpenShift](../installation/compatibility.md#openshift) on the compatibility page
+for the explanation and the feature gate to disable.
+
 ### DNS01 troubleshooting
 If you see no error events about your DNS provider you can check the following.
 Check if you can see the `_acme_challenge.domain` TXT DNS record from the public internet, or in your DNS provider's interface.

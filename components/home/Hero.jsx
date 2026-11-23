@@ -19,9 +19,11 @@ export default function Hero({ heading, description = '', image = '' }) {
               <Image
                 src={image}
                 alt={heading}
-                width={862}
-                height={421}
-                layout="responsive"
+                width={855}
+                height={422}
+                sizes="100vw"
+                style={{ width: '100%', height: 'auto' }}
+                priority
               />
             </div>
           )}

@@ -3,7 +3,11 @@ title: Annotated Ingress resource
 description: 'cert-manager usage: Kubernetes Ingress'
 ---
 
-> **Upcoming change:** ingress-nginx is scheduled for end of life in March 2026. See [Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming](/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api) for migration guidance and Gateway API plans.
+> **Note:** The ingress-nginx controller was retired in March 2026 and no
+> longer receives bug fixes or security patches. This page still applies to
+> other Ingress controllers. If you use ingress-nginx, see
+> [Ingress-nginx End-of-Life: What cert-manager Supports Today and What's Coming](/announcements/2025/11/26/ingress-nginx-eol-and-gateway-api)
+> for migration options, including the [Gateway API](./gateway.md).
 >
 > **apiVersion:** networking.k8s.io/v1
 > **kind:** Ingress
@@ -73,7 +77,7 @@ trigger `Certificate` resources to be automatically created:
   which namespace your `Ingress` resides, as `ClusterIssuers` are non-namespaced
   resources.
 
-  > ⚠️ This annotation is a shortcut to refer to to
+  > ⚠️ This annotation is a shortcut to refer to
   `cert-manager.io` `ClusterIssuer` without having to specify group and kind. It is
   _not_ intended to be used to specify an external cluster-scoped issuer- please
   use `cert-manager.io/issuer` annotation for those.

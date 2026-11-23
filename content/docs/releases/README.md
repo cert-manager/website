@@ -48,9 +48,9 @@ Some vendors provide long term support releases commercially; the following LTS 
 
 | Release      | Vendor       | End of Life    |
 |:------------:|:------------:|:--------------:|
-| 1.17 LTS     | [CyberArk][] | Feb 03 2027    |
+| 1.17 LTS     | [Palo Alto Networks][] | Feb 03 2027    |
 
-[CyberArk]: https://docs.venafi.cloud/vaas/k8s-components/c-cm-releases/#cert-manager-long-term-support-lts-releases
+[Palo Alto Networks]: https://docs.venafi.cloud/vaas/k8s-components/c-cm-releases/#cert-manager-long-term-support-lts-releases
 
 (To add a release to this list, raise a PR and reach out on Slack)
 

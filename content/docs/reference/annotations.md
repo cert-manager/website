@@ -160,15 +160,30 @@ This is useful for keeping compatibility with the `ingress-gce` component.
 
 ## cert-manager.io/inject-apiserver-ca
 
-cause the `cainjector` to inject the **CA certificate** for the Kubernetes apiserver into the resource.
+- CustomResourceDefinitions
+- MutatingWebhooksConfigurations
+- ValidatingWebhooksConfigurations
+- APIServices
+
+cause the `cainjector` to [inject the **CA certificate** for the Kubernetes apiserver into the resource](../concepts/ca-injector.md#injecting-the-kubernetes-api-server-ca).
 
 ## cert-manager.io/inject-ca-from
 
-cause the `cainjector` to inject a certificate with **CA certificate**. ??
+- CustomResourceDefinitions
+- MutatingWebhooksConfigurations
+- ValidatingWebhooksConfigurations
+- APIServices
+
+cause the `cainjector` to [inject the **CA certificate**](../concepts/ca-injector.md#injecting-ca-data-from-a-certificate-resource).
 
 ## cert-manager.io/inject-ca-from-secret
 
-cause the `cainjector` to inject a **CA Certificate** from a secret.
+- CustomResourceDefinitions
+- MutatingWebhooksConfigurations
+- ValidatingWebhooksConfigurations
+- APIServices
+
+cause the `cainjector` to [inject a **CA Certificate** from a secret](../concepts/ca-injector.md#injecting-ca-data-from-a-secret-resource).
 
 ## cert-manager.io/private-key-algorithm
 - [Ingress](../usage/ingress.md)

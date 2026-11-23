@@ -40,11 +40,13 @@ function Home({ router }) {
           <CtasRow className="my-8 lg:my-12" ctas={page.topCta.ctas} />
           <div className="mb-16 lg:mt-20 max-w-3xl mx-auto">
             <Image
-              src="images/cert-manager-diagram.svg"
+              src="/images/cert-manager-diagram.svg"
               alt="Cert Manager"
               width={756}
-              height={518}
-              layout="responsive"
+              height={529}
+              sizes="100vw"
+              style={{ width: '100%', height: 'auto' }}
+              priority
             />
           </div>
           <Card className="mb-10 pt-7 pb-8 px-8 text-center md:flex md:gap-10 md:items-center md:text-left md:py-6 lg:px-12">
@@ -53,8 +55,7 @@ function Home({ router }) {
                 src={page.certManager.image.src}
                 alt={page.certManager.image.alt}
                 width={141}
-                height={136}
-                layout="fixed"
+                height={141}
               />
             </div>
             <p className="font-semibold text-lg mt-8 md:mt-0">
@@ -71,7 +72,6 @@ function Home({ router }) {
                 alt="cloud native computing foundation logo"
                 width={283}
                 height={81}
-                layout="fixed"
               />
             </div>
             <div className="pt-9 text-lg md:pt-0 md:pl-14">

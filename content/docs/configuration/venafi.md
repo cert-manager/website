@@ -293,6 +293,66 @@ username/password is required.
 
 [ngts]: https://www.paloaltonetworks.com/network-security/next-gen-trust-security
 
+### Prerequisites
+
+Access to NGTS is managed by Strata Cloud Manager rather than by NGTS itself.
+Users and machine identities belong to a Tenant Service Group (TSG) and are
+granted permissions there, so the credentials for your `Issuer` are created in
+Strata Cloud Manager, not in the NGTS console. See [Access Management for New
+and Migrating Users][ngts-access] for a full description of this model.
+
+[ngts-access]: https://docs.paloaltonetworks.com/next-gen-trust-security/next-gen-trust-security/about-vaas/gs-Cloud-Discovery/c-user-account-management-overview
+[strata-service-account]: https://docs.paloaltonetworks.com/common-services/identity-and-access-access-management/manage-identity-and-access/add-service-accounts
+[vcert-ngts]: https://github.com/Venafi/vcert/blob/master/README-CLI-NGTS.md#prerequisites
+
+1. **Create a Strata service account.**
+
+   cert-manager reaches NGTS through the Strata API gateway, so it requires a
+   [Strata service account][strata-service-account]. NGTS also offers
+   "built-in accounts", but those authenticate directly against the NGTS data
+   plane and are reserved for product-delivered integrations, so they cannot
+   be used with the CyberArk `Issuer`.
+
+   Creating the service account gives you the **Client ID** and **Client
+   Secret** used below. The client secret is displayed only once, so record it
+   before leaving the page.
+
+2. **Note the Tenant Service Group ID.**
+
+   The service account's display name has the form
+   `<name>@<tsg-id>.iam.panserviceaccount`, where `<tsg-id>` is the ten-digit
+   ID of the Tenant Service Group that owns the account. cert-manager sends
+   the `tsgID` field of the `Issuer` as the OAuth 2.0 scope `tsg_id:<tsg-id>`
+   when requesting an access token.
+
+   `tsgID` need not be the TSG in the display name. It may be any TSG which
+   the service account is authorized for, including a child TSG, so set it to
+   the TSG which owns the Certificate Issuing Template that you intend to
+   issue from. Note that NGTS is activated in a parent TSG and is not shared
+   with child TSGs automatically, and that a child TSG must be in the same
+   data region as its parent.
+
+3. **Grant the NGTS permissions that cert-manager requires.**
+
+   Assign the service account a role which grants the following NGTS
+   permissions:
+
+   - `ngts.certificate_issuing_template.get`
+   - `ngts.certificate_request.create`
+   - `ngts.certificate_request.get`
+   - `ngts.certificate_content.get`
+   - `ngts.certificate.get`
+   - `ngts.edge_encryption_key.get`
+
+   This is the union of the permissions which [VCert][vcert-ngts] documents
+   for its `enroll` and `pickup` commands, which are the only NGTS operations
+   that the `Issuer` performs. A read-only role such as *View Only Admin* is
+   not sufficient, because requesting a certificate is a write.
+
+   > ⚠️ If you grant *Superuser* rather than a narrower role, constrain it to
+   > the Next-Gen Trust Security application. An unconstrained *Superuser*
+   > role grants Superuser rights across the whole Strata platform.
+
 In order to set up an NGTS `Issuer`, you must first create a Kubernetes
 `Secret` resource containing your OAuth 2.0 client credentials. The secret
 must have the keys `client-id` and `client-secret`:
@@ -320,7 +380,7 @@ or `ClusterIssuer` resource. If you are creating a `ClusterIssuer` resource,
 you must change the `kind` field to `ClusterIssuer` and remove the
 `metadata.namespace` field.
 
-The `zone` is the name of the Certificate Issuing Template (CIT) in NGTS that will be used to issue certificates. Unlike CyberArk Certificate Manager SaaS which requires both an Application name and CIT alias in the format `Application\CIT`, NGTS only requires the CIT name.
+The `zone` is the name of the Certificate Issuing Template (CIT) in NGTS that will be used to issue certificates. Unlike CyberArk Certificate Manager SaaS which requires both an Application name and CIT alias in the format `Application\CIT`, NGTS only requires the CIT name. NGTS has no equivalent of the CyberArk Certificate Manager SaaS *Application*; certificates are instead owned by the Tenant Service Group in which they are requested.
 
 Save the below content after making your amendments to a file named
 `issuer.yaml`.
