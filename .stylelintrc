@@ -3,6 +3,7 @@
   "rules": {
     "selector-class-pattern": null,
     "import-notation": null,
-    "at-rule-no-unknown": null
+    "at-rule-no-unknown": null,
+    "at-rule-prelude-no-invalid": [true, { "ignoreAtRules": ["apply"] }]
   }
 }

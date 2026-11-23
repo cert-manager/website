@@ -13,11 +13,13 @@ The following list contains all known cert-manager issuer integrations.
 | 🥇   | venafi-enhanced-issuer      | [📄][config:venafi-enhanced-issuer] | [CyberArk Certificate Manager][ca:venafi-enhanced-issuer]                        | [v1.12.1][production:venafi-enhanced-issuer]      | [✔️][release:venafi-enhanced-issuer] | ❌              |
 | 🥇   | origin-ca-issuer            | [📄][config:origin-ca-issuer]       | [Cloudflare Origin CA][ca:origin-ca-issuer]                            | [supported][production:origin-ca-issuer]          | [✔️][release:origin-ca-issuer]       | ✔️             |
 | 🥈   | adcs-issuer                 | [📄][config:adcs-issuer]            | [Microsoft Active Directory<br/>Certificate Service][ca:adcs-issuer]   | -                                                 | [✔️][release:adcs-issuer]            | ✔️             |
+| 🥈   | akeyless-issuer             | [📄][config:akeyless-issuer]        | [Akeyless PKI][ca:akeyless-issuer]                                     | -                                                 | [✔️][release:akeyless-issuer]        | ✔️             |
 | 🥈   | aws-privateca-issuer        | [📄][config:aws-privateca-issuer]   | [AWS Private Certificate Authority][ca:aws-privateca-issuer]           | -                                                 | [✔️][release:aws-privateca-issuer]   | ✔️             |
 | 🥈   | ca-issuer (in-tree)         | [📄][config:ca-issuer]              | CA issuer                                                              | -                                                 | [✔️][release:cert-manager]           | ✔️             |
 | 🥈   | czertainly-issuer           | [📄][config:czertainly-issuer]      | [CZERTAINLY][ca:czertainly-issuer]                                     | [supported][production:czertainly-issuer]         | [✔️][release:czertainly-issuer]      | ✔️             |
 | 🥈   | command-issuer              | [📄][config:command-issuer]         | [Keyfactor Command][ca:command-issuer]                                 | -                                                 | [✔️][release:command-issuer]         | ✔️             |
 | 🥈   | cview-issuer                | [📄][config:cview-issuer]           | [CView-issuer][ca:cview-issuer]                                        | -                                                 | [✔️][release:cview-issuer]           | ❌              |
+| 🥈   | digi-issuer                 | [📄][config:digi-issuer]            | [DigiCert][ca:digi-issuer]                                             | -                                                 | [✔️][release:digi-issuer]            | ✔️             |
 | 🥈   | ejbca-issuer                | [📄][config:ejbca-issuer]           | [EJBCA][ca:ejbca-issuer]                                               | -                                                 | [✔️][release:ejbca-issuer]           | ✔️             |
 | 🥈   | google-cas-issuer           | [📄][config:google-cas-issuer]      | [Google Cloud Certificate<br/>Authority Service][ca:google-cas-issuer] | -                                                 | [✔️][release:google-cas-issuer]      | ✔️             |
 | 🥈   | gs-atlas-issuer             | [📄][config:gs-atlas-issuer]        | [GlobalSign CA][ca:gs-atlas-issuer]                                    | -                                                 | [✔️][release:gs-atlas-issuer]        | ✔️             |
@@ -63,18 +65,21 @@ The following list contains all known cert-manager issuer integrations.
 [config:kms-issuer]: https://github.com/Skyscanner/kms-issuer
 [config:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer
 [config:adcs-issuer]: https://djkormo.github.io/adcs-issuer/
+[config:akeyless-issuer]: https://github.com/akeyless-community/akeyless-cert-manager-issuer
 [config:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer
 [config:cfmtls-issuer]: https://github.com/k8stooling/cfmtls-issuer
 [config:zerossl-issuer]: https://github.com/topfreegames/zerossl-issuer
 [config:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 [config:czertainly-issuer]: https://docs.czertainly.com/docs/certificate-key/integration-guides/cert-manager-issuer/create-czertainly-issuer
 [config:keyvault-issuer]: https://github.com/gonicus/azure-keyvault-issuer
+[config:digi-issuer]: https://github.com/digicert/digi-issuer
 
 [//]: # (CA docs)
 
 [ca:acme]: https://datatracker.ietf.org/doc/html/rfc8555
 [ca:venafi-enhanced-issuer]: https://www.cyberark.com/products/certificate-manager/
 [ca:adcs-issuer]: https://docs.microsoft.com/en-us/windows-server/networking/core-network-guide/cncg/server-certs/install-the-certification-authority
+[ca:akeyless-issuer]: https://docs.akeyless.io/docs/ssh-and-pkitls-certificates
 [ca:aws-privateca-issuer]: https://aws.amazon.com/certificate-manager/private-certificate-authority/
 [ca:command-issuer]: https://www.keyfactor.com/products/command/
 [ca:ejbca-issuer]: https://www.ejbca.org/
@@ -95,6 +100,7 @@ The following list contains all known cert-manager issuer integrations.
 [ca:cview-issuer]: https://secure-ly.github.io/cview-issuer-chart
 [ca:czertainly-issuer]: https://www.czertainly.com
 [ca:keyvault-issuer]: https://learn.microsoft.com/en-us/azure/key-vault/keys/about-keys
+[ca:digi-issuer]: https://www.digicert.com/
 
 [//]: # (Release pages)
 
@@ -113,12 +119,14 @@ The following list contains all known cert-manager issuer integrations.
 [release:kms-issuer]: https://github.com/Skyscanner/kms-issuer/releases
 [release:freeipa-issuer]: https://github.com/guilhem/freeipa-issuer/releases
 [release:adcs-issuer]: https://github.com/djkormo/adcs-issuer/releases
+[release:akeyless-issuer]: https://github.com/akeyless-community/akeyless-cert-manager-issuer/releases
 [release:cfssl-issuer]: https://gerrit.wikimedia.org/r/plugins/gitiles/operations/software/cfssl-issuer/+refs
 [release:cfmtls-issuer]: https://github.com/k8stooling/cfmtls-issuer/releases/
 [release:zerossl-issuer]: https://github.com/topfreegames/zerossl-issuer/releases
 [release:cview-issuer]: https://github.com/secure-ly/cview-issuer-chart/releases
 [release:czertainly-issuer]: https://github.com/CZERTAINLY/CZERTAINLY-Cert-Manager-Issuer/releases
 [release:keyvault-issuer]: https://github.com/gonicus/azure-keyvault-issuer/releases
+[release:digi-issuer]: https://github.com/digicert/digi-issuer/releases
 
 - The issuers are sorted by their tier and then alphabetically.
 - "in-tree" issuers are issuers that are shipped with cert-manager itself.

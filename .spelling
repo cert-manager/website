@@ -126,6 +126,7 @@ AWS
 SDK
 SDKs
 Akamai
+Akeyless
 ANDed
 Anthos
 AppRole
@@ -134,6 +135,7 @@ ArgoCD
 Arsh
 ArtifactHUB
 ArtifactHub
+APP.4.4
 AzureDNS
 BasicConstraints
 Bullseye
@@ -194,6 +196,7 @@ CryptoKey
 csi-driver
 csi-driver-spiffe
 Ctrl
+cybersecurity
 DCO
 DHCP
 DNS01
@@ -205,6 +208,8 @@ DataDog
 Datree
 Dean-Coakley
 Dependabot
+digi
+DigiCert
 DigitalOcean
 OVHCloud
 Distroless
@@ -219,6 +224,7 @@ EKS
 ELB
 Ed25519
 Encrypter
+ENISA
 Fargate
 FastDNS
 FreeIPA
@@ -232,6 +238,7 @@ GKE
 GitOps
 github-actions
 gRPC
+Grundschutz
 GSoC
 Gloo
 GoDaddy
@@ -286,6 +293,7 @@ Makefile
 Makefiles
 NameCheap
 NGINX
+NIS2
 NLB
 NLBs
 NotIn
@@ -842,6 +850,7 @@ certificates.k8s.io
 venafi-enhanced-issuer
 venafi-issuer
 adcs-issuer
+akeyless-issuer
 cview-issuer
 cfssl-issuer
 cfmtls-issuer
@@ -1559,6 +1568,7 @@ onurmicoogullari
 putongyong
 samplewebhook
 seanorama
+sklirg
 Tardif
 texasich
 workqueue
@@ -1571,3 +1581,21 @@ genpkey
 provparam
 goarch
 goversion
+panserviceaccount
+wieghx
+applyset
+arpitjain
+shashankvarma
+Ravindra
+multiplexer
+openpgp
+eMudhra
+trixie
+Trixie
+pujitha
+requestmanager
+repoints
+textproto
+secp
+prevalidation
+Prevalidation

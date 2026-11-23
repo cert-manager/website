@@ -32,7 +32,7 @@ This is a feature in cert-manager starting in `v0.16` using the `cmctl` CLI. Mor
 
 ### When do certs get re-issued?
 
-To determine if a certificate needs to be re-issued, cert-manager looks at the the spec of `Certificate` resource and latest `CertificateRequest`s as well as the data in `Secret` containing the X.509 certificate.
+To determine if a certificate needs to be re-issued, cert-manager looks at the spec of `Certificate` resource and latest `CertificateRequest`s as well as the data in `Secret` containing the X.509 certificate.
 
 The issuance process will always get triggered if the:
 
@@ -112,6 +112,10 @@ for trust purposes, but rotating trusted certificates safely relies on being abl
 
 By consuming the CA directly from your Secret, it becomes impossible to do this; `ca.crt` will only ever contain the best effort guess
 for the CA for the current certificate, and will never include an older or a new CA.
+
+If your application expects `ca.crt` next to `tls.crt` and `tls.key`, see
+[My application expects `ca.crt` in the same Secret as the certificate](../trust/README.md#ca-crt-in-same-secret)
+for what to do instead.
 
 ### How can I see all the historic events related to a certificate object?
 

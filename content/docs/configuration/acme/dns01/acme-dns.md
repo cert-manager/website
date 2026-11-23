@@ -71,7 +71,7 @@ Information about setting up and configuring ACMEDNS is available on the
 2. Save this JSON to a file with the key as your domain. You can specify
    multiple domains with the same credentials if you like. In our example,
    the returned credentials can be used to verify ownership of
-   `example.com` and and `example.org`.
+   `example.com` and `example.org`.
 
     ```json
     {
