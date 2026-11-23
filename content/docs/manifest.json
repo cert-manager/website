@@ -21,6 +21,14 @@
               "path": "/docs/releases/README.md"
             },
             {
+              "title": "1.22",
+              "path": "/docs/releases/release-notes/release-notes-1.22.md"
+            },
+            {
+              "title": "Upgrade 1.21 to 1.22",
+              "path": "/docs/releases/upgrading/upgrading-1.21-1.22.md"
+            },
+            {
               "title": "1.21",
               "path": "/docs/releases/release-notes/release-notes-1.21.md"
             },
