@@ -199,6 +199,25 @@ For example, `count by (version) (certmanager_build_info)` lists the running ver
 - `certmanager_build_info{version!~"v1\\.(21|22)\\..*"}` returns the Pods that run an unsupported minor version. The regular expression has to be updated at each release.
 - `count(count by (version) (certmanager_build_info)) > 1` fires when Pods report more than one version, for example after a stalled upgrade.
 
+## Dynamic serving certificate metrics
+
+These metrics are available in cert-manager >= v1.22.0.
+
+The controller, webhook and cainjector expose the following metrics for the serving certificates that they generate dynamically: the webhook serving certificate and, if [dynamic certificates](#dynamic-certificates) are enabled for the metrics endpoint, the metrics serving certificate.
+
+| Metric | Type | Labels | Description |
+|--------|------|--------|-------------|
+| `certmanager_dynamic_serving_ca_expiration_timestamp_seconds` | Gauge | `secret_namespace`, `secret_name` | The time after which the CA certificate used to sign the serving certificates expires, expressed in Unix Epoch Time. |
+| `certmanager_dynamic_serving_certificate_expiration_timestamp_seconds` | Gauge | `secret_namespace`, `secret_name`, `server` | The time after which the most recently signed serving certificate expires, expressed in Unix Epoch Time. |
+| `certmanager_dynamic_serving_certificate_signings_total` | Counter | `secret_namespace`, `secret_name`, `server`, `status` (`success` \| `failure`) | Total number of attempts to sign a serving certificate. Attempts made before the CA is available are not counted. |
+
+The `secret_namespace` and `secret_name` labels identify the Secret storing the CA. The `server` label identifies the server using the certificate: `webhook` for the webhook server or `metrics` for the metrics server.
+
+These metrics can be used to alert on a serving certificate that is about to expire or is failing to be renewed. For example:
+
+- `certmanager_dynamic_serving_certificate_expiration_timestamp_seconds - time() < 86400` returns the serving certificates that expire in less than a day. By default a serving certificate is valid for 7 days and is renewed when a third of that time remains.
+- `increase(certmanager_dynamic_serving_certificate_signings_total{status="failure"}[1h]) > 0` fires when signing a serving certificate has failed in the last hour.
+
 ## Venafi metrics
 
 cert-manager exposes the following Prometheus metrics for Venafi OAuth token requests. These are emitted by the controller whenever a Venafi `Issuer` or `ClusterIssuer` authenticates against a TPP, Cloud, or Next-Gen Trust Security (NGTS) endpoint.
