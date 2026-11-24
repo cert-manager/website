@@ -641,6 +641,44 @@ spec:
 > `vault://namespace/issuer-name` or `vault://cluster-issuer`. The generated
 > audience is useful for restricting access to a Vault role to a certain issuer.
 
+### Authenticating with TLS Client Certificate
+**FEATURE STATE**: This feature is available since cert-manager 1.12.
+
+Another way to authenticate against Vault is by presenting a client certificate
+while performing the TLS handshake.
+For information on how to configure this feature in Vault, see
+[their documentation](https://developer.hashicorp.com/vault/docs/auth/cert).
+
+Note that the client certificate configured here will only be presented when
+doing the authentication/login call to get a Vault token. Other, following
+requests will not present it. They will be authenticated using said Vault token.
+
+Configuring a client certificate works by creating a Kubernetes `Secret` of type
+[`kubernetes.io/tls`](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets)
+(hence containing `tls.crt` and `tls.key`) and referencing it by setting
+`secretName`.
+
+You can also set `name` to match only a specific "certificate role", and `mountPath`
+to override the default mount path of the authentication method, which is `/v1/auth/cert`.
+
+Example:
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: vault-issuer
+  namespace: sandbox
+spec:
+  vault:
+    path: pki_int/sign/example-dot-com
+    server: https://vault.local
+    caBundle: <base64 encoded caBundle PEM file>
+    auth:
+      clientCertificate:
+        secretName: kubernetes-io-tls-secret
+```
+
 ## Verifying the issuer Deployment
 
 Once the Vault issuer has been deployed, it will be marked as ready if the
