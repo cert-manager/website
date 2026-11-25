@@ -170,7 +170,12 @@ additional Kubernetes and provider specific notes regarding their usage.
 ## Webhook
 
 cert-manager also supports out of tree DNS providers using an external webhook.
-Links to these supported providers along with their documentation are below:
+Links to these providers along with their documentation are below:
+
+> ⚠️ These webhooks are community projects. The cert-manager maintainers do
+> not test, review or endorse them. Check that a webhook is maintained and
+> that you trust its author before you install it. A webhook runs in your
+> cluster and can read the DNS provider credentials that you give it.
 
 - [`AliDNS-Webhook`](https://github.com/pragkent/alidns-webhook)
 - [`bizflycloud-certmanager-dns-webhook`](https://github.com/bizflycloud/bizflycloud-certmanager-dns-webhook)
