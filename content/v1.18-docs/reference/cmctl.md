@@ -85,7 +85,7 @@ Flags:
 Use "cmctl [command] --help" for more information about a command.
 ```
 
->  There is also a [legacy kubectl plugin](#legacy-kubectl-plugin), but it is no longer recommended
+>  There is also a [legacy kubectl plugin](#kubectl-plugin), but it is no longer recommended
 > because the standalone `cmctl` binary provides better [auto-completion](#completion).
 
 ## Commands
@@ -288,7 +288,7 @@ cmctl x install
 ```
 
 This command makes sure that the required `CustomResourceDefinitions` are installed together with the cert-manager, cainjector and webhook components.
-Under the hood, a procedure similar to the [Helm install procedure](../installation/helm.md#steps) is used.
+Under the hood, a procedure similar to the [Helm install procedure](../installation/helm.md#installing-with-helm) is used.
 
 You can also use `cmctl x install` to customize the installation of cert-manager.
 
