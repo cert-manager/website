@@ -192,6 +192,7 @@ Links to these supported providers along with their documentation are below:
 - [`cert-manager-webhook-ionos-cloud`](https://github.com/ionos-cloud/cert-manager-webhook-ionos-cloud)
 - [`cert-manager-webhook-linode`](https://github.com/linode/cert-manager-webhook-linode)
 - [`cert-manager-webhook-loopia`](https://github.com/Identitry/cert-manager-webhook-loopia)
+- [`cert-manager-webhook-nameocean`](https://github.com/NameOcean/cert-manager-webhook-nameocean)
 - [`cert-manager-webhook-netcup`](https://github.com/aellwein/cert-manager-webhook-netcup)
 - [`cert-manager-webhook-oci`](https://gitlab.com/dn13/cert-manager-webhook-oci) (Oracle Cloud Infrastructure)
 - [`cert-manager-webhook-ovh`](https://github.com/aureq/cert-manager-webhook-ovh)
