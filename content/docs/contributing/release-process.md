@@ -70,15 +70,20 @@ First, ensure that you have all the tools required to perform a cert-manager rel
 2. Install our [`cmrel`](https://github.com/cert-manager/release) CLI:
 
    ```bash
-   go install github.com/cert-manager/release/cmd/cmrel@latest
+   go install github.com/cert-manager/release/cmd/cmrel@master
    ```
 
-3. Clone the `cert-manager/release` repo:
+   Always install it this way, immediately before a release, so that you have the latest commit.
+   The binary carries its own Cloud Build config, and the privileged publish job installs the exact
+   commit of `cmrel` that you ran. Do not build `cmrel` from a local checkout: any uncommitted or
+   untracked file makes the build "dirty" and the publish job will refuse to run it.
+
+3. Clone the `cert-manager/release` repo. `cmrel` does not need it; the Helm chart step later on
+   runs a script from it:
 
    ```bash
    # Don't clone it from inside the cert-manager repo folder.
    git clone https://github.com/cert-manager/release
-   cd release
    ```
 
 4. Install the [`gcloud`](https://cloud.google.com/sdk/) CLI.
@@ -430,7 +435,6 @@ page if a step is missing or if it is outdated.
     2. Run the following command:
 
        ```bash
-       # Must be run from the "cert-manager/release" repo folder.
        cmrel publish --release-name "$RELEASE_VERSION"
        ```
 
@@ -443,7 +447,6 @@ page if a step is missing or if it is outdated.
        repository](https://charts.jetstack.io):
 
        ```bash
-       # Must be run from the "cert-manager/release" repo folder.
        cmrel publish --nomock --release-name "$RELEASE_VERSION"
        ```
 
