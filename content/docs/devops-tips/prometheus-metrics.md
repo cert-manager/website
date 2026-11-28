@@ -179,6 +179,42 @@ Check the health of the cert-manager scrape targets on the Prometheus status pag
 
 ![](/docs/devops-tips/prometheus-metrics/prometheus-status-targets.png)
 
+## Controller Metrics
+
+| Metric | Type | Description |
+|---|---|---|
+| `certmanager_certificate_expiration_timestamp_seconds` | Gauge | UNIX timestamp of the certificate's expiration time |
+| `certmanager_certificate_ready_status` | Gauge | Ready status of the certificate (`1` = ready, `0` = not ready) |
+| `certmanager_certificate_renewal_timestamp_seconds` | Gauge | UNIX timestamp when cert-manager will start renewing the certificate |
+| `certmanager_http_acme_client_request_count` | Counter | Number of requests made by the ACME client |
+| `certmanager_http_acme_client_request_duration_seconds` | Histogram | Latency of ACME client requests |
+| `certmanager_controller_sync_call_count` | Counter | Number of sync calls per controller |
+
+## Webhook Metrics
+
+| Metric | Type | Description |
+|---|---|---|
+| `certmanager_webhook_validation_request_count` | Counter | Number of validation webhook requests received |
+| `certmanager_webhook_mutation_request_count` | Counter | Number of mutation webhook requests received |
+
+## Standard Go and Process Metrics
+
+All cert-manager components also expose the standard Go runtime and process
+metrics provided by the [Prometheus Go client](https://github.com/prometheus/client_golang):
+
+- `go_goroutines`
+- `go_memstats_*`
+- `process_cpu_seconds_total`
+- `process_resident_memory_bytes`
+
+## Alerting
+
+The cert-manager project maintains a set of example Prometheus alerting rules
+in the [cert-manager repository](https://github.com/cert-manager/cert-manager/blob/main/deploy/charts/cert-manager/templates/prometheusrule.yaml).
+
+These include alerts for certificates nearing expiry and certificates in a
+not-ready state.
+
 ## Venafi metrics
 
 cert-manager exposes the following Prometheus metrics for Venafi OAuth token requests. These are emitted by the controller whenever a Venafi `Issuer` or `ClusterIssuer` authenticates against a TPP, Cloud, or Next-Gen Trust Security (NGTS) endpoint.
@@ -193,3 +229,8 @@ These metrics can be used to alert on elevated token request failure rates or un
 ## Monitoring Mixin
 
 Monitoring mixins are a way to bundle common alerts, rules, and dashboards for an application in a configurable and extensible way, using the Jsonnet data templating language. A cert-manager monitoring mixin can be found here https://github.com/imusmanmalik/cert-manager-mixin. Documentation on usage can be found with the `cert-manager-mixin` project.
+
+## Further Reading
+
+- [Prometheus Operator documentation](https://prometheus-operator.dev/docs/operator/api/)
+- [cert-manager Helm chart values](https://artifacthub.io/packages/helm/cert-manager/cert-manager)
